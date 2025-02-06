@@ -3721,7 +3721,10 @@ $(document).on("click", "#close_createEvent", function () {
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
-
+        var schedule = $("#schedule").is(":checked");
+        if (schedule) {
+            eventData.events_schedule = "1";
+        }
         console.log(eventData);
 
         $.ajax({
@@ -8595,6 +8598,10 @@ $(document).on("click", "#close_editEvent", function (e) {
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
+        eventData.events_schedule = "1";
+    }
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();

@@ -336,7 +336,7 @@ $(document).on('click','.re_send_failed_invites', function(e) {
         let app_user = $(this).attr('data-app_user');
         userIds.push({ id: userId, prefer_by: preferBy,app_user:app_user});
     });
-    $('#home_loader').css('display','block');    
+    $('#home_loader').css('display','flex');    
 
     $.ajax({
         url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php

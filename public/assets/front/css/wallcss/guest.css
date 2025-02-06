@@ -298,7 +298,7 @@
 }
 
 
-.loader {
+/* .loader {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -307,7 +307,7 @@
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 4px),#000 0);
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
- }
+ } */
 
 @keyframes spinner-ub {
 100% {

@@ -2590,7 +2590,7 @@
     padding: 0px !important;
 }
 
-.loader {
+/* .loader {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -2605,8 +2605,8 @@
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
     display: none;
-}
-.loader_up {
+} */
+/* .loader_up {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -2637,7 +2637,7 @@
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
     display: none;
-}
+} */
 
 .host-name-pink {
     color: var(--pink) !important;

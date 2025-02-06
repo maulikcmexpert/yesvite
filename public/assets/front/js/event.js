@@ -26,7 +26,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
         toastr.error("Please Enter CANCEL");
         return;
     }
-    $('#home_loader').css('display','block');
+    $('#home_loader').css('display','flex');
     console.log(event);
     $.ajax({
         url: `${base_url}event/cancel_event`,
@@ -569,7 +569,7 @@ $(document).on('input', '#type_cancel', function () {
 //         toastr.error("Please Enter CANCEL");
 //         return;
 //     }
-//     $('#home_loader').css('display','block');
+//     $('#home_loader').css('display','flex');
 //     console.log(event);
 //     $.ajax({
 //         url: `${base_url}event/cancel_event`,
@@ -819,7 +819,7 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     console.log(activityTypes); 
     console.log(selectedEvents); 
 
-    $('#home_loader').css('display','block');
+    $('#home_loader').css('display','flex');
 
   $.ajax({
         url: `${base_url}notification_filter`,
@@ -896,7 +896,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     });
     // $('.notification-selected-events-wrp').html('');
 
-    $('#home_loader').css('display','block');
+    $('#home_loader').css('display','flex');
 
  $.ajax({
         url: `${base_url}notification_all`,
@@ -1085,7 +1085,7 @@ $(document).on('click','.main-notification-div-list',function(){
 $(document).on('input','#search_filter_event',function(){
 
     var search_event=$(this).val();
-    $('#home_loader').css('display','block');
+    $('#home_loader').css('display','flex');
 
                     $.ajax({
                         url: `${base_url}filter_search_event`,
@@ -1110,7 +1110,7 @@ $(document).on('click','event-notification-icon',function(e){
 // $(document).on('click','.notification-toggle-menu',function(){
 
 //     var search_event=$(this).val();
-//     $('#home_loader').css('display','block');
+//     $('#home_loader').css('display','flex');
 //     $.ajax({
 //         url: `${base_url}filter_search_event`,
 //         type: 'GET',        
