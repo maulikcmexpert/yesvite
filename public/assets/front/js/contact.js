@@ -716,11 +716,13 @@ $(document).on("keyup", ".search_phone", function () {
 });
 $('label[for="email"]').removeClass("floatingfocus");
 
-$('#upload_csv_contact').on('submit', function (e) {
+$(document).on('click','.click-to-upload-btn', function (e) {
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
         toastr.error('Please upload a CSV file first');
         return;
+    }else{
+        $('#upload_csv_contact').submit();
     }
 });

@@ -719,7 +719,7 @@
                             Download CSV
                             </a>
 
-                    <button type="submit" class="cmn-btn click-to-upload-btn">Click to Upload</button>
+                    <button type="button" class="cmn-btn click-to-upload-btn">Click to Upload</button>
                 </div>
 
                                     
