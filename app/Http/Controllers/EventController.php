@@ -4005,7 +4005,8 @@ class EventController extends BaseController
                 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
                 'isupadte' => false,
-                'is_registry' => $gift
+                'is_registry' => $gift,
+                'event_id' => encrypt($eventId)
             ]);
         } else {
             return response()->json([
