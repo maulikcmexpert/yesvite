@@ -2183,7 +2183,7 @@
     transform: translate3d(0, 0, 0);
 }
 
-.progress-bar-fill{
+.home-latest-draf-card .progress-bar__wrapper.yellow .progress-bar-fill{
     background-image: linear-gradient(#fccd1e, #fccd1e);
     width: 50%;
     min-width: 50%;
