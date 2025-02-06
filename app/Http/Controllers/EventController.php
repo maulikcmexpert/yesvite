@@ -517,7 +517,7 @@ class EventController extends BaseController
                     session()->put('category_item', $categories_item);
                     Session::save();
                     $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
-                    dd($eventDetail['podluck_category_list']);
+                    // dd($eventDetail);
                 }
             }
         } else {
