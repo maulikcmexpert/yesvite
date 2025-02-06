@@ -724,8 +724,8 @@
                 </div>  
                 <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
-                    <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a>
-                    <button type="submit" class="cmn-btn click-to-upload-btn"><input type="file"> Click to Upload</button>
+                    <!-- <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a> -->
+                    <button type="submit" class="cmn-btn click-to-upload-btn">Click to Upload</button>
                 </div>
 
                                     
