@@ -2565,7 +2565,7 @@ function bindData(current_event_id) {
     //     });
     //     //console.log(imageSources);
     //     if(imageSources.length > 0){
-    //         $('#loader').css('display', 'block');
+    //         $('#home_loader').css('display','flex');
     //         $.ajax({
     //             url: base_url + "event/save_slider_img",
     //             method: "POST",
@@ -2590,7 +2590,7 @@ function bindData(current_event_id) {
     //     var delete_id = $(this).parent().find('.slider_img').data("delete");
     //     var src = $(this).parent().find('.slider_img').attr("src");
     //     if (src != "") {
-    //         $('#loader').css('display', 'block');
+    //         $('#home_loader').css('display','flex');
     //         var $this = $(this);
     //         var check_slider_img = eventData.slider_images;
     //         var matchFound = false;
