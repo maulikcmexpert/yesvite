@@ -6,26 +6,24 @@
                 <li class="wall-main-story-item ">
                     <button>
                         <div class="wall-story-item-img">
-                            @if ($users->profile  != '')
-                            <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                            alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                            onclick="showStories( {{ $event }},{{ $users->id }})">
-                        @else
-                            @php
-                                $name = $users->firstname;
-                                // $parts = explode(" ", $name);
-                                $firstInitial = isset($users->firstname[0])
-                                    ? strtoupper($users->firstname[0])
-                                    : '';
-                                $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
-                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                            @endphp
-                            <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                onclick="showStories( {{ $event }},{{ $users->id }})">
-                                {{ $initials }}
-                            </h5>
-                        @endif
+                            @if ($users->profile != '')
+                                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                    alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                    onclick="showStories( {{ $event }},{{ $users->id }})">
+                            @else
+                                @php
+                                    $name = $users->firstname;
+                                    // $parts = explode(" ", $name);
+                                    $firstInitial = isset($users->firstname[0]) ? strtoupper($users->firstname[0]) : '';
+                                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                @endphp
+                                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                                    onclick="showStories( {{ $event }},{{ $users->id }})">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
                             {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
                                 onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
@@ -49,33 +47,34 @@
                     <li class="wall-main-story-item story-unseen">
                         <button>
                             <div class="wall-story-item-img">
-                                @if ($Allstory['profile']  != '')
-
-                                  <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "    class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                  onclick="AllUserStory( {{ $event }},'{{ $Allstory['id'] }}')" />
-                                {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                                @if ($Allstory['profile'] != '')
+                                    <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "
+                                        class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
+                                        onclick="AllUserStory( {{ $event }},'{{ $Allstory['id'] }}')" />
+                                    {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
                                 onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
-                            @else
-                                @php
-                                  $name = $Allstory['username'] ?? ''; // Ensure username is set
+                                @else
+                                    @php
+                                        $name = $Allstory['username'] ?? ''; // Ensure username is set
 
-// Split the username into words (assuming first and last names)
-$parts = explode(' ', trim($name));
+                                        // Split the username into words (assuming first and last names)
+                                        $parts = explode(' ', trim($name));
 
-// Get first and second initials
-$firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
-$secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
+                                        // Get first and second initials
+                                        $firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
+                                        $secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
 
-$initials = $firstInitial . $secondInitial;
+                                        $initials = $firstInitial . $secondInitial;
 
-                                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                                @endphp
-                                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                    onclick="showStories( {{ $event }},{{ $users->id }})">
-                                    {{ $initials }}
-                                </h5>
-                            @endif
+                                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                    @endphp
+                                    <h5 class="{{ $fontColor }}" class="profile-pic"
+                                        id="profile-pic-{{ $users->id }}"
+                                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                                        {{ $initials }}
+                                    </h5>
+                                @endif
 
 
                             </div>
@@ -113,26 +112,24 @@ $initials = $firstInitial . $secondInitial;
     <div class="modal-content">
         <div class="story-seen-profile-wrp">
             <div class="story-seen-profile-img">
-                @if ($users->profile  != '')
-                <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                onclick="showStories( {{ $event }},{{ $users->id }})">
-            @else
-                @php
-                    $name = $users->firstname;
-                    // $parts = explode(" ", $name);
-                    $firstInitial = isset($users->firstname[0])
-                        ? strtoupper($users->firstname[0])
-                        : '';
-                    $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
-                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
-                    $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                @endphp
-                <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                    onclick="showStories( {{ $event }},{{ $users->id }})">
-                    {{ $initials }}
-                </h5>
-            @endif
+                @if ($users->profile != '')
+                    <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
+                        alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                @else
+                    @php
+                        $name = $users->firstname;
+                        // $parts = explode(" ", $name);
+                        $firstInitial = isset($users->firstname[0]) ? strtoupper($users->firstname[0]) : '';
+                        $secondInitial = isset($users->lastname[0]) ? strtoupper($users->lastname[0]) : '';
+                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                    @endphp
+                    <h5 class="{{ $fontColor }}" class="profile-pic" id="profile-pic-{{ $users->id }}"
+                        onclick="showStories( {{ $event }},{{ $users->id }})">
+                        {{ $initials }}
+                    </h5>
+                @endif
             </div>
             <div class="story-seen-profile-content">
                 <h3>you</h3>
@@ -157,9 +154,6 @@ $initials = $firstInitial . $secondInitial;
 
 </div>
 
-{{-- @endforeach --}}
-
-{{-- {{dd($storiesList)}} --}}
 @foreach ($storiesList as $Allstory)
     {{-- {{dd($Allstory)}} --}}
     @if ($Allstory['id'] !== $users->id)
