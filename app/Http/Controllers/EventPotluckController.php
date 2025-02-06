@@ -155,7 +155,7 @@ class EventPotluckController extends Controller
                             } else if ($userQuantity >  $itemValue->quantity) {
                                 $totalOver += $userQuantity -  $itemValue->quantity;
                             }
-                            dD($userQuantity,$totalMissing,$itemValue->quantity, $totalOver);
+                            
                             $totalItem = $totalItem + 1;
                             $remainingQnt = $remainingQnt + $itemValue->quantity;
                           
