@@ -632,15 +632,13 @@
                                                                             <div class="input-group time ">
                                                                                 <input
                                                                                     class="form-control timepicker activity_start_time"
-                                                                                    id="activity-start-time"
+                                                                                   
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
                                                                                     required="" 
                                                                                     value="02:15 PM" />
 
-                                                                                    <input class="form-control timepicker activity_start_time" 
-                                                                                    name="activity-start-time[]" placeholder="HH:MM AM/PM" 
-                                                                                    required="" readonly="" value="2:00 PM">
+                                                                                    
                                                                                     <span
                                                                                     class="input-group-append input-group-addon">
 
