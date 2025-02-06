@@ -877,27 +877,9 @@
 
     @push('scripts')
     <script>
-        document.querySelectorAll('.collection-menu').forEach((button) => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-        });
-
-        $(document).ready(function() {
-            const $cookiesBox = $('.cookies-track');
-
-            if (!localStorage.getItem('cookiesBoxDismissed')) {
-                setTimeout(() => {
-                    $cookiesBox.addClass('active');
-                }, 500);
-            }
-
-            $('.close-btn').on('click', function() {
-                $cookiesBox.removeClass('active');
-                localStorage.setItem('cookiesBoxDismissed', 'true');
-            });
-        });
+        
             $(document).ready(function() {
+                $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
                 // Handle the "All Categories" checkbox click
                 $('#Allcat').on('change', function() {
                     if ($(this).is(':checked')) {
