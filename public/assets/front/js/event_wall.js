@@ -1338,49 +1338,6 @@ $(document).on('mousedown', '#likeButton', function () {
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-
-$(document).on('click', '#likeButton', function () {
-    clearTimeout(longPressTimer); // Clear the long press timer
-
-    // If it's a long press, don't process the click event
-    if (isLongPresss) return;
-
-    // Handle single tap like/unlike
-    const button = $(this);
-    const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
-
-    // Toggle like button appearance
-    if (isLiked) {
-        button.removeClass('liked');
-        button.find('i').removeClass('fa-solid').addClass('fa-regular');
-    } else {
-        button.addClass('liked');
-        button.find('i').removeClass('fa-regular').addClass('fa-solid');
-    }
-
-    // AJAX call to update the like state
-    const eventId = button.data('event-id');
-    const eventPostId = button.data('event-post-id');
-    // $.ajax({
-    //     url: base_url + "event_photo/userPostLikeDislike",
-    //     method: "POST",
-    //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-    //     contentType: "application/json",
-    //     data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
-    //     success: function (response) {
-    //         if (response.status === 1) {
-    //             $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
-    //         } else {
-    //             alert(response.message);
-    //         }
-    //     },
-    //     error: function (xhr) {
-    //         console.error(xhr.responseText);
-    //         alert('An error occurred. Please try again.');
-    //     }
-    // });
-});
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
 //         $('#emojiDropdown').hide(); // Hide emoji picker when clicked outside
