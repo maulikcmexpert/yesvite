@@ -479,9 +479,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                 let statusClass;
                 if(userData?.userStatus?.toLowerCase() === "online"){
                     i = i+1;
-                    let statusClass = "active-dot";
+                    statusClass = "active-dot";
                 } else{
-                     let statusClass =  "inactive-dot";
+                     statusClass =  "inactive-dot";
                 } 
 
                 // Find the span inside the user element and update its class
