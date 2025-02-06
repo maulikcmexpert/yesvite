@@ -2187,11 +2187,13 @@
     background-image: linear-gradient(#fccd1e, #fccd1e);
     width: 50%;
     min-width: 50%;
-    height: 100%;
+    height: 8px;
     position: absolute;
-    top: 50%;
+    top: 33%;
     transform: translateY(-50%);
     right: -5px;
+    border-radius: 5px;
+    left: 0;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {
