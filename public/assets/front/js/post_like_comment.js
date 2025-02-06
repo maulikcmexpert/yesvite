@@ -61,22 +61,13 @@ $(document).ready(function () {
                     );
 
                     let reactionImage = "";
-                    if (reaction === "\u{1F604}") {
+                    if (response.is_reaction == "1") {
                         reactionImage =
-                            '<img src="' +
-                            base_url +
-                            'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
-                    } else if (reaction === "\u{1F60D}") {
-                        reactionImage =
-                            '<img src="' +
-                            base_url +
-                            'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
-                    } else if (reaction === "\u{2764}") {
-                        reactionImage =
-                            '<img src="' +
-                            base_url +
-                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                        '<img src="' +
+                        base_url +
+                        'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
                     }
+
 
                     // Update the reaction image in post
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
