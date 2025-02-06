@@ -572,6 +572,8 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                      statusClass =  "inactive-dot";
                 } 
                 if(userId==userId){
+                    i = i+1;
+
                     statusClass = "active-dot";
                 }
                 // Find the span inside the user element and update its class
