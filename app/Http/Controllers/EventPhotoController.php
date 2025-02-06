@@ -1121,14 +1121,14 @@ class EventPhotoController extends Controller
         }
         $event_post_comment->save();
 
-        // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
-        //     'comment_id' => $event_post_comment->id
-        // ];
-        // sendNotification('reply_on_comment_post', $notificationParam);
-
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request['event_id'],
+            'post_id' => $request['event_post_id'],
+            'comment_id' => $event_post_comment->id
+        ];
+        sendNotification('reply_on_comment_post', $notificationParam);
+        $currunt_comment = EventPostComment::where('id', $event_post_comment->id)->first();
         // $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
         //     $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
         // }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
@@ -1212,7 +1212,7 @@ class EventPhotoController extends Controller
         //     }
         // }
 
-        return response()->json(['success' => true, 'total_comments' => 0, 'data' => $event_post_comment, 'message' => "Post comment replied by you"]);
+        return response()->json(['success' => true, 'total_comments' => 0, 'data' => $currunt_comment, 'message' => "Post comment replied by you"]);
     }
 
     public function postControl(Request $request)
