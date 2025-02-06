@@ -817,7 +817,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
@@ -863,7 +863,7 @@ $(document).ready(function () {
                 console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
+                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
 
@@ -922,7 +922,7 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
+            addToGuestPhoneList(id, isSelected,"0",first_name,last_name,email,profile); // App user = 1 for email (app user)
 
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
 
@@ -1187,30 +1187,30 @@ $(document).on('click','.remove_new_phone_added_user',function(){
         e.preventDefault();
         console.log("Guest list before submit:", guestList);
         console.log("Sending guest list:", guestList);
-        // $.ajax({
-        //     url: base_url + "event_wall/send-invitation", // Your Laravel route
-        //     method: "POST",
-        //     headers: {
-        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //     },
-        //     data: {
-        //         event_id: $("#event_id").val(), // Event ID from a hidden input
-        //         guest_list: guestList,
-        //     },
-        //     success: function (response) {
-        //         if (response.status === 1) {
-        //             window.location.reload();
-        //             toastr.success('Invited successfully');
-        //             // alert(response.message); // Show success message
-        //             guestList = []; // Clear guest list after successful submission
-        //         } else {
-        //             // alert(response.message); // Show error message
-        //         }
-        //     },
-        //     error: function (xhr) {
-        //         alert("Something went wrong. Please try again."); // Handle AJAX errors
-        //     },
-        // });
+        $.ajax({
+            url: base_url + "event_wall/send-invitation", // Your Laravel route
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                event_id: $("#event_id").val(), // Event ID from a hidden input
+                guest_list: guestList,
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    window.location.reload();
+                    toastr.success('Invited successfully');
+                    // alert(response.message); // Show success message
+                    guestList = []; // Clear guest list after successful submission
+                } else {
+                    // alert(response.message); // Show error message
+                }
+            },
+            error: function (xhr) {
+                alert("Something went wrong. Please try again."); // Handle AJAX errors
+            },
+        });
 });
 $(document).on("keyup", ".search_contact", function () {
     console.log($(this).val())
