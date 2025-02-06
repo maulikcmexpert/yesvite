@@ -62,7 +62,7 @@ class ChatController extends Controller
     }
     public function index($id = null)
     {
-        // dd($id);
+        dd($id);
          
 
         $userId = auth()->id();
