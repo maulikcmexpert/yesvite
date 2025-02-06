@@ -117,7 +117,7 @@ $(document).ready(function () {
         console.log(eventid, description, self_bring_item, quantity);
 
         $.ajax({
-            url: base_url + "event_potluck/add-potluck-category-item/", // Update with your URL
+            url: base_url + "event_potluck/add-potluck-category-item", // Update with your URL
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -516,7 +516,7 @@ $(document).on('click', '.deleteBtn', function () {
     const eventid = $('#event_id').val();
 
     $.ajax({
-        url: base_url + "event_potluck/deleteUserPotluckItem/", // Update with your URL
+        url: base_url + "event_potluck/deleteUserPotluckItem", // Update with your URL
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
