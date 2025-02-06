@@ -390,27 +390,27 @@ $(document).ready(function () {
                 `;
                     var replyList;
                     if (parentCommentId) {
-                        const li = `<li class="reply-on-comment" data-comment-id="${data.id}">
-                        ${newCommentHTML}
-                     
-                        </li>`;
+                        const li = document.createElement("li");
+                        li.className = "reply-on-comment";
+                        li.setAttribute("data-comment-id", data.id);
+                        li.innerHTML = newCommentHTML; // Convert HTML string to actual HTML
 
-                        const comments =
+                        // Find all existing comments
+                        let comments =
                             document.getElementsByClassName("reply-on-comment");
-
+                        console.log(comments);
                         // Convert HTMLCollection to an array and find the target comment
                         const comment = Array.from(comments).find(
                             (el) => el.dataset.commentId === parentCommentId
                         );
-                        console.log(comments);
+
                         if (comment) {
-                            console.log(comment);
+                            console.log("Found comment:", comment);
+
                             // Find the previous sibling (the comment before this one)
                             let previousComment =
                                 comment.previousElementSibling;
-                            const tempDiv = document.createElement("div");
-                            tempDiv.innerHTML = newCommentHTML.trim(); // Convert to an element
-                            const newCommentElement = tempDiv.firstChild;
+
                             // Loop until we find the nearest previous <ul> with class "primary-comment-replies"
                             while (previousComment) {
                                 let parentUl = previousComment.closest(
@@ -418,7 +418,18 @@ $(document).ready(function () {
                                 );
                                 if (parentUl) {
                                     console.log("Found the ul:", parentUl);
-                                    parentUl.prepend(li);
+                                    parentUl.prepend(li); // Append the new comment properly
+
+                                    // 🔥 Update the comments list to include the newly added <li>
+                                    comments =
+                                        document.getElementsByClassName(
+                                            "reply-on-comment"
+                                        );
+
+                                    console.log(
+                                        "Updated comments list:",
+                                        comments
+                                    );
                                     break;
                                 }
                                 previousComment =
