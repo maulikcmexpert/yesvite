@@ -488,7 +488,10 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
 
         // Call the function to update statuses
         updateUserStatuses();
-
+        $('.see-all-guest-right-btn').on("click",function(){
+            console.log("updateUser Status")
+            updateUserStatuses();
+        })
         })();
     }
 </script>
