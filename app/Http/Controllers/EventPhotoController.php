@@ -41,7 +41,7 @@ class EventPhotoController extends Controller
         $firstname = $user->firstname;
         $lastname = $user->lastname;
         $photos = $user->profile;
-        dd(1);
+        // dd(1);
         $js = ['event_photo'];
         // $rawData = $request->getContent();
         // $request = json_decode($rawData, true);
