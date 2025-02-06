@@ -789,7 +789,9 @@ ul.listing li span {
     margin-bottom: 10px !important;
 }
 
-
+.contact-details .user-contacts .group-card .view_members p{
+    text-align:left;
+}
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
