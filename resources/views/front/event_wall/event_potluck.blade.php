@@ -277,7 +277,7 @@
                                                                 }
                                                             @endphp -->
                                                             {{-- new code --}}
-                                                            @if ($category['remainingQnt'] > 0)
+                                                            @if ($category['totalMissing'] > 0)
                                                             <span
                                                                 class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                 style="color: rgb(192, 52, 52);">
@@ -290,7 +290,7 @@
                                                             </span>
                                                             <h6 class="me-2 missing-category-h6-{{ $key }}"
                                                             style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['remainingQnt'] }}</span>
+                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
                                                             Missing</h6>
 
                                                           
@@ -325,7 +325,7 @@
                                                         style="color: rgb(52, 192, 92);"><span
                                                             id="missing-category-{{ $key }}">0</span> Missing</h6>
 
-                                                            @if ($category['remainingQnt'] < 0)
+                                                            @if ($category['totalMissing'] < 0)
                                                           
                                                             <span
                                                                 class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
@@ -339,7 +339,7 @@
                                                             </span>
                                                             <h6 class="me-2 extra-category-h6-{{ $key }}"
                                                                 style="color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}">{{ abs($category['remainingQnt']) }}</span>
+                                                                    id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
                                                                 Item Over</h6>
 
                                                         @else
