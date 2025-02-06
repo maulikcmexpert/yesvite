@@ -402,20 +402,20 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
     if (currentPage !== "messages") {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
+            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+            const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
+            // Fetch Firebase configuration
+            const response = await fetch("/firebase_js.json");
+            const firebaseConfig = await response.json();
+
+            // Initialize Firebase app
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
             if (userId !== null) {
                 try {
                     // Dynamically import Firebase modules
-                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-                    const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
-
-                    // Fetch Firebase configuration
-                    const response = await fetch("/firebase_js.json");
-                    const firebaseConfig = await response.json();
-
-                    // Initialize Firebase app
-                    const app = initializeApp(firebaseConfig);
-                    const database = getDatabase(app);
+                    
 
                     // Reference to the user's overview data in Firebase
                     const overviewRef = ref(database, `overview/${userId}`);
@@ -455,7 +455,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                 }
             }
 
-            async function getUser(userId) {
+        async function getUser(userId) {
             const userRef = ref(database, "users/" + userId);
             try {
                 const snapshot = await get(userRef);
