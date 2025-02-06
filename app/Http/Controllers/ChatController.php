@@ -62,7 +62,7 @@ class ChatController extends Controller
     }
     public function index($id = null,$is_host=null)
     {
-        dd(encrypt($id),$is_host);
+        dd(decrypt($id),$is_host);
         $hosts_name="";
         if($id!=null){
             $hosts_id=decrypt($id);
