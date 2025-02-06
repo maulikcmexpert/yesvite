@@ -472,7 +472,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
 
             for (const userElement of users) {
                 const userId = userElement.getAttribute("data-userid");
-
+                console.log({userId})
                 if (!userId) continue; // Skip if no userId
 
                 let userData = await getUser(userId);
@@ -488,7 +488,13 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
 
         // Call the function to update statuses
         updateUserStatuses();
-
+        $('.see-all-guest-right-btn').on("click",function(){
+            console.log("updateUser Status")
+            setTimeout(function(){
+                updateUserStatuses();
+            },2000)
+            updateUserStatuses();
+        })
         })();
     }
 </script>
