@@ -4,9 +4,11 @@ let guestPhoneList = [];
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
+
     $(".show-comment-reply-btn").on("click", function () {
-        let currunt = $(this).html();
-        if (currunt == "Show reply") {
+        let currunt = $(this).html().toLowerCase().trim();
+
+        if (currunt == "show reply") {
             $(this).html("Hide reply");
         } else {
             $(this).html("Show reply");
