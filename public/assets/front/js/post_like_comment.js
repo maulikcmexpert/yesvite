@@ -65,6 +65,20 @@ $(document).ready(function () {
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
+                    let reactionImage = "";
+                    if (reaction === "\\u{1F604}") {
+                        reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
+                    } else if (reaction === "\\u{1F60D}") {
+                        reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
+                    } else if (reaction === "\\u{2764}") {
+                        reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                    } else {
+                        reactionImage = "";
+                    }
+
+                    // Update the reaction display
+                    $(`#reactionImage_${eventPostId}`).html(reactionImage);
+
                 } else {
                     // alert(response.message);
                 }
@@ -396,7 +410,7 @@ $(document).ready(function () {
         }
         const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
         const parentId =$(this).data("comment-id");
-       
+
 
         if (!parentId) {
             console.error("Parent Comment ID is missing!");
@@ -749,8 +763,8 @@ $(document).ready(function () {
             // setTimeout(() => {
                 // $('#home_loader').css('display', 'block');
             // }, 500);
-            
-            
+
+
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
 
@@ -840,7 +854,7 @@ $(document).ready(function () {
 
         });
 
-       
+
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
@@ -879,7 +893,7 @@ $(document).ready(function () {
             .not(this)
             .prop("checked", false);
             addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
-         
+
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
 
         }else{
@@ -892,7 +906,7 @@ $(document).ready(function () {
 
     function storeAddNewGuest(id,status,prefer_by,event_id,contact){
         $('#home_loader').css('display', 'block');
-    
+
     setTimeout(function(){
         $.ajax({
             url: base_url+"store_add_new_guest",
@@ -910,12 +924,12 @@ $(document).ready(function () {
                 $('.selected-contacts-list').html(response.view);
             }
 
-            $('#home_loader').css('display', 'none');   
+            $('#home_loader').css('display', 'none');
 
             },
             error: function (error) {
               toastr.error('Something went wrong. Please try again!');
-              $('#home_loader').css('display', 'none');   
+              $('#home_loader').css('display', 'none');
 
             },
           });
@@ -925,7 +939,7 @@ $(document).ready(function () {
 
     // Declare guestList outside so it's globally accessible
 function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
-    
+
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
         var is_duplicate=0;
@@ -1200,7 +1214,7 @@ $(document).on("keyup", ".search_contact", function () {
 
         }
     });
-   
+
 });
 
 // $(document).on('click','.see-all-guest-right-btn',function(){
