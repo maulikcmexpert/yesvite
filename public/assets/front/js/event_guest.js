@@ -330,7 +330,7 @@ $(document).on('click','.re_send_failed_invites', function(e) {
     var event_id = $('#event_id').val();
 
     let userIds = [];
-    $('.failed_check_resend_email').each(function() {
+    $('.failed_check_resend_email:checked').each(function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
         let app_user = $(this).attr('data-app_user');
