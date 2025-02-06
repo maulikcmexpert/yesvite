@@ -1361,7 +1361,7 @@ class EventWallController extends Controller
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        if ($creatEventPost->id  && $request->hasFile('files')) {
+        if ($creatEventPost->id  && $request->file('files')) {
             $postimages = $request->file('files');
 
             $video = 0;
@@ -1993,7 +1993,7 @@ class EventWallController extends Controller
 
 
             // User has already reacted
-            if ($checkReaction->unicode != "00002764") {
+            if ($checkReaction->unicode != $unicode) {
 
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;
