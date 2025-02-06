@@ -762,6 +762,7 @@ class EventPhotoController extends Controller
             echo $videoCount;
             echo "===================";
             echo $imageCount;
+            die;
             return redirect()->back()->with('success', 'Event post uploded successfully!');
         }
 
