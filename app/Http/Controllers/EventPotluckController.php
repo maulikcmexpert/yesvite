@@ -62,7 +62,7 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
-            dd($potluckDetail);
+            
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
@@ -84,6 +84,7 @@ class EventPotluckController extends Controller
                     $itempotluckCategory['spoken_items'] = $totalSpoken;
                     $potluckItemsSummury[] = $itempotluckCategory;
                 }
+                dd($potluckItemsSummury);
                 //    {{     dd($eventpotluckData);}}
                 $potluckDetail['item_summary'] = $potluckItemsSummury;
                 foreach ($eventpotluckData as $value) {
