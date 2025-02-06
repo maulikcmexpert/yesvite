@@ -217,7 +217,7 @@ class HomeController extends BaseController
                         $eventDetail['kids'] = $checkRsvpDone->kids;
                         $eventDetail['adults'] = $checkRsvpDone->adults;
                     }
-                    $images = EventImage::where('event_id', $value->id)->first();
+                    $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                     $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                     $eventDetail['event_date'] = $value->start_date;
                     $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
@@ -340,20 +340,20 @@ class HomeController extends BaseController
 
             $color = ['blue', 'green', 'yellow', 'orange'];
             $events_calender = [];
-            
+
             $groupedEvents = [];
             foreach ($eventcalenderdata as $event) {
                 $groupedEvents[$event->start_date][] = $event;
             }
             foreach ($groupedEvents as $date => $eventsOnDate) {
-                $colorIndex = 0; 
+                $colorIndex = 0;
                 usort($eventsOnDate, function ($a, $b) {
-                    return strcmp($a->event_name, $b->event_name); 
+                    return strcmp($a->event_name, $b->event_name);
                 });
-            
+
                 foreach ($eventsOnDate as $event) {
                     $colorClass = $color[$colorIndex % count($color)];
-                    $colorIndex++; 
+                    $colorIndex++;
                     $events_calender[] = [
                         'date' => $event->start_date,
                         'title' => $event->event_name,
@@ -361,7 +361,7 @@ class HomeController extends BaseController
                     ];
                 }
             }
-            
+
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
             $title = 'Home';
@@ -418,31 +418,31 @@ class HomeController extends BaseController
     //     return $timeAgo;
     // }
 
-     function setupcomingpostTime($updatedAt)
-{
-    $now = Carbon::now(); // Current time
-    $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
+    function setupcomingpostTime($updatedAt)
+    {
+        $now = Carbon::now(); // Current time
+        $updatedTime = Carbon::parse($updatedAt); // Parse the updated_at value
 
-    $diffInDays = $updatedTime->diffInDays($now);
+        $diffInDays = $updatedTime->diffInDays($now);
 
-    if ($diffInDays > 0) {
-        return $diffInDays . 'd'; // Return in 'Xd' format
+        if ($diffInDays > 0) {
+            return $diffInDays . 'd'; // Return in 'Xd' format
+        }
+
+        $diffInHours = $updatedTime->diffInHours($now);
+
+        if ($diffInHours > 0) {
+            return $diffInHours . 'h'; // Return in 'Xh' format
+        }
+
+        $diffInMinutes = $updatedTime->diffInMinutes($now);
+
+        if ($diffInMinutes > 0) {
+            return $diffInMinutes . 'm'; // Return in 'Xm' format
+        }
+
+        return 'just now'; // For moments less than a minute
     }
-
-    $diffInHours = $updatedTime->diffInHours($now);
-
-    if ($diffInHours > 0) {
-        return $diffInHours . 'h'; // Return in 'Xh' format
-    }
-
-    $diffInMinutes = $updatedTime->diffInMinutes($now);
-
-    if ($diffInMinutes > 0) {
-        return $diffInMinutes . 'm'; // Return in 'Xm' format
-    }
-
-    return 'just now'; // For moments less than a minute
-}
 
     function upcomingEventsCount($userId)
     {
@@ -521,13 +521,13 @@ class HomeController extends BaseController
     public function notificationAll(Request $request)
     {
 
-        $user  = Auth::guard( 'web')->user()->id;
-        if(isset($request->reset)&&$request->reset==1){
+        $user  = Auth::guard('web')->user()->id;
+        if (isset($request->reset) && $request->reset == 1) {
             Session::forget('notification_event_ids');
         }
 
         $notfication_data = getNotificationList();
-        $eventList= getAllEventList($user);
-        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(),"event_list"=>view('front.notification.search_filter_event', compact('eventList'))->render()]);
+        $eventList = getAllEventList($user);
+        return response()->json(['view' => view('front.notification.filter_notification', compact('notfication_data'))->render(), "event_list" => view('front.notification.search_filter_event', compact('eventList'))->render()]);
     }
 }
