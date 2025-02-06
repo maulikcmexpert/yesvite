@@ -42,90 +42,190 @@ class EventPotluckController extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
+            // New Code 
             $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
                 $query->with(['users', 'user_potluck_items' => function ($subquery) {
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
 
-            $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+            // if (!empty($eventpotluckData)) {
+                
+            //     // dd($eventDetail);
+            // }
 
 
-            $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
 
-            $checkEventOwner = Event::FindOrFail($event);
-            $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
-            $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
-            $potluckDetail['potluck_items'] = $totalItems;
-            $potluckDetail['spoken_for'] = $spoken_for;
-            $potluckDetail['left'] = $totalItems - $spoken_for;
-            $potluckDetail['item'] = $totalItems;
-            $potluckDetail['available'] = $totalItems;
+
+
+
+
+
+
+
+
+            // End Code
+
+
+
+
+
+            // $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+            //     $query->with(['users', 'user_potluck_items' => function ($subquery) {
+            //         $subquery->with('users')->sum('quantity');
+            //     }]);
+            // }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
+
+            // $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+
+
+            // $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
+
+            // $checkEventOwner = Event::FindOrFail($event);
+            // $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
+            // $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+            // $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
+            // $potluckDetail['potluck_items'] = $totalItems;
+            // $potluckDetail['spoken_for'] = $spoken_for;
+            // $potluckDetail['left'] = $totalItems - $spoken_for;
+            // $potluckDetail['item'] = $totalItems;
+            // $potluckDetail['available'] = $totalItems;
 
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
-                //   dd($eventpotluckData);
-                foreach ($eventpotluckData as $value) {
-                    $itempotluckCategory['id'] = $value->id;
-                    $itempotluckCategory['category'] = $value->category;
-                    $itempotluckCategory['total_items'] =  $value->event_potluck_category_item_count;
+              
+                $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
+                $categories = session()->get('category', []);
+                $totalCategoryItem = 0;
+                foreach ($eventpotluckData as  $key => $value) {
 
-                    $i = 0;
-                    $totalSpoken = 0;
-                    foreach ($value->event_potluck_category_item as  $checkItem) {
-                        $mainQty = $checkItem->quantity;
-                        $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
-                        if ($mainQty <= $spokenFor) {
-                            $totalSpoken += 1;
-                        }
-                    }
-                    $itempotluckCategory['spoken_items'] = $totalSpoken;
-                    $potluckItemsSummury[] = $itempotluckCategory;
-                }
-                //    {{     dd($eventpotluckData);}}
-                $potluckDetail['item_summary'] = $potluckItemsSummury;
-                foreach ($eventpotluckData as $value) {
                     $potluckCategory['id'] = $value->id;
                     $potluckCategory['category'] = $value->category;
                     $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
                     $potluckCategory['quantity'] = $value->quantity;
                     $potluckCategory['items'] = [];
+                    $categoryQuantity = 0;
+                    $remainingQnt = 0;
+                    $totalItem = 0;
+
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
-                        foreach ($value->event_potluck_category_item as $itemValue) {
-                            // dd($itemValue);
+
+                        $itemData = [];
+                        foreach ($value->event_potluck_category_item as $itemkey => $itemValue) {
+                         
+                            $itmquantity = 0;
+                            $innnerUserItem = 0;
                             $potluckItem['id'] =  $itemValue->id;
                             $potluckItem['description'] =  $itemValue->description;
-                            $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                            $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
                             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
                             $potluckItem['quantity'] =  $itemValue->quantity;
+                            $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
                             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
                             $potluckItem['spoken_quantity'] =  $spoken_for;
-                            $missing_quantity = $itemValue->quantity - $spoken_for;
-                            $over_quantity = $spoken_for > $itemValue->quantity ? $spoken_for - $itemValue->quantity : 0;
-                            $potluckItem['missing_quantity'] = $missing_quantity > 0 ? $missing_quantity : 0;
-                            $potluckItem['over_quantity'] = $over_quantity > 0 ? $over_quantity : 0;
                             $potluckItem['item_carry_users'] = [];
-
-                            foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                            foreach ($itemValue->user_potluck_items as $userKey => $itemcarryUser) {
                                 $userPotluckItem['id'] = $itemcarryUser->id;
                                 $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
-                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
+                                $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
+                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
                                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
                                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
                                 $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
                                 $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                $itmquantity = $itmquantity +  $itemcarryUser->quantity;
+                                $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
+                                if ($itemcarryUser->user_id != $id) {
+                                    $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
+                                }
                             }
+                            $totalItem = $totalItem + 1;
+                            $remainingQnt = $remainingQnt + $itemValue->quantity;
+                            $potluckItem['itmquantity'] =  $itmquantity;
+                            $potluckItem['innerUserQnt'] =  $innnerUserItem;
+
                             $potluckCategory['items'][] = $potluckItem;
+                            $totalCategoryItem++;
                         }
                     }
-                    // dd($potluckCategory)
-                    $potluckCategoryData[] = $potluckCategory;
-                }
 
-                $potluckDetail['podluck_category_list'] = $potluckCategoryData;
+                    $remainingQnt =  $remainingQnt - $categoryQuantity;
+                    $potluckCategory['remainingQnt'] = $remainingQnt;
+                    $potluckCategory['categoryQuantity'] = $categoryQuantity;
+                    $potluckCategory['totalItem'] = $totalItem;
+                    $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
+                    $eventDetail['podluck_category_list'][] = $potluckCategory;
+                }
+                $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
+
+                dd($$eventDetail);
+                
+
+
+
+
+
+                //   dd($eventpotluckData);
+                // foreach ($eventpotluckData as $value) {
+                //     $itempotluckCategory['id'] = $value->id;
+                //     $itempotluckCategory['category'] = $value->category;
+                //     $itempotluckCategory['total_items'] =  $value->event_potluck_category_item_count;
+
+                //     $i = 0;
+                //     $totalSpoken = 0;
+                //     foreach ($value->event_potluck_category_item as  $checkItem) {
+                //         $mainQty = $checkItem->quantity;
+                //         $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
+                //         if ($mainQty <= $spokenFor) {
+                //             $totalSpoken += 1;
+                //         }
+                //     }
+                //     $itempotluckCategory['spoken_items'] = $totalSpoken;
+                //     $potluckItemsSummury[] = $itempotluckCategory;
+                // }
+                // //    {{     dd($eventpotluckData);}}
+                // $potluckDetail['item_summary'] = $potluckItemsSummury;
+                // foreach ($eventpotluckData as $value) {
+                //     $potluckCategory['id'] = $value->id;
+                //     $potluckCategory['category'] = $value->category;
+                //     $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
+                //     $potluckCategory['quantity'] = $value->quantity;
+                //     $potluckCategory['items'] = [];
+                //     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+                //         foreach ($value->event_potluck_category_item as $itemValue) {
+                //             // dd($itemValue);
+                //             $potluckItem['id'] =  $itemValue->id;
+                //             $potluckItem['description'] =  $itemValue->description;
+                //             $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                //             $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
+                //             $potluckItem['quantity'] =  $itemValue->quantity;
+                //             $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
+                //             $potluckItem['spoken_quantity'] =  $spoken_for;
+                //             $missing_quantity = $itemValue->quantity - $spoken_for;
+                //             $over_quantity = $spoken_for > $itemValue->quantity ? $spoken_for - $itemValue->quantity : 0;
+                //             $potluckItem['missing_quantity'] = $missing_quantity > 0 ? $missing_quantity : 0;
+                //             $potluckItem['over_quantity'] = $over_quantity > 0 ? $over_quantity : 0;
+                //             $potluckItem['item_carry_users'] = [];
+
+                //             foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                //                 $userPotluckItem['id'] = $itemcarryUser->id;
+                //                 $userPotluckItem['user_id'] = $itemcarryUser->user_id;
+                //                 $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                //                 $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
+                //                 $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
+                //                 $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
+                //                 $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
+                //                 $potluckItem['item_carry_users'][] = $userPotluckItem;
+                //             }
+                //             $potluckCategory['items'][] = $potluckItem;
+                //         }
+                //     }
+                //     // dd($potluckCategory)
+                //     $potluckCategoryData[] = $potluckCategory;
+                // }
+
+                // $potluckDetail['podluck_category_list'] = $potluckCategoryData;
 
 
 
