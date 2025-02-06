@@ -454,6 +454,41 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                     console.error("Error fetching Firebase data:", error);
                 }
             }
+
+            async function getUser(userId) {
+            const userRef = ref(database, "users/" + userId);
+            try {
+                const snapshot = await get(userRef);
+                return snapshot.val();
+            } catch (error) {
+                console.error("Error retrieving user data:", error);
+                return null;
+            }
+        }
+
+        async function updateUserStatuses() {
+            console.log("updating status")
+            const users = document.querySelectorAll(".guest-users");
+
+            for (const userElement of users) {
+                const userId = userElement.getAttribute("data-userid");
+
+                if (!userId) continue; // Skip if no userId
+
+                let userData = await getUser(userId);
+                let statusClass = (userData?.userStatus?.toLowerCase() === "online") ? "active-dot" : "inactive-dot";
+
+                // Find the span inside the user element and update its class
+                let statusSpan = userElement.querySelector("span");
+                if (statusSpan) {
+                    statusSpan.className = statusClass; // Replace class
+                }
+            }
+        }
+
+        // Call the function to update statuses
+        updateUserStatuses();
+
         })();
     }
 </script>
