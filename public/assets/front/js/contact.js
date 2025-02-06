@@ -716,12 +716,16 @@ $(document).on("keyup", ".search_phone", function () {
 });
 $('label[for="email"]').removeClass("floatingfocus");
 
-$('#uploadForm').on('submit', function (e) {
+$(document).on('click','.click-to-upload-btn', function (e) {
+    $('#home_loader').css('display','flex');
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
-        e.preventDefault();
-
+        $('#home_loader').css('display','none');
         toastr.error('Please upload a CSV file first');
+        return;
+    }else{
+        $('#home_loader').css('display','none');
+        $('#upload_csv_contact').submit();
     }
 });

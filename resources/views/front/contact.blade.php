@@ -644,7 +644,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+            <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="modal-body guest-tab">
                     <div class="uploadcsv-wrp">
@@ -719,7 +719,7 @@
                             Download CSV
                             </a>
 
-                    <button type="submit" class="cmn-btn click-to-upload-btn">Click to Upload</button>
+                    <button type="button" class="cmn-btn click-to-upload-btn">Click to Upload</button>
                 </div>
 
                                     
