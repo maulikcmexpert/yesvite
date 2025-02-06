@@ -115,6 +115,7 @@ $(".notification-btn").on("click", function () {
     });
 });
 $(document).on("click touchstart ", ".mobile-calender-btn", function () {
+    alert();
     $(".mobile-menu-wrp").removeClass("active");
     $(".line").removeClass("active");
     var text = this.innerText;
