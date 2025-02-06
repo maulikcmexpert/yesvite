@@ -142,7 +142,7 @@ $(document).ready(function () {
                    const categoryList = $('div[data-category-id="' + categoryId + '"] .accordion');
                     categoryList.append(response.data);
 
-
+                    // window.location.reload();
                     // Reset the form values
                     $('#categoryName').val('');
                     $('#text1').val('');

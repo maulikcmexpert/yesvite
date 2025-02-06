@@ -1368,7 +1368,7 @@ async function bindData(current_event_id) {
 
             $("#fontSizeInput").val("20");
             $("#fontSizeRange").val("20");
-            $("#letterSpacingInput").val("0");
+            $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);
             $("#letterSpacingRange").val("0");
             $("#lineHeightInput").val("1.16");
             $("#lineHeightRange").val("1.16");
@@ -1383,11 +1383,11 @@ async function bindData(current_event_id) {
         }
         addToUndoStack(canvas);
         let fontSize = $("#fontSizeInput").val();
-        let letterSize = $("#letterSpacingInput").val();
+        const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
         let lineHeight = $("#lineHeightInput").val();
         activeObject.set({
             fontSize: fontSize,
-            charSpacing: letterSize,
+            charSpacing: charSpacing,
             lineHeight: lineHeight,
         });
 
@@ -1439,8 +1439,10 @@ async function bindData(current_event_id) {
         let targetFontFamily = target.fontFamily;
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
 
-        const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
-        const percentageValue = (charSpacing / 500) * 100; // Normalize to percentage
+        // const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
+        const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
+
+        const percentageValue = (charSpacing / 500) * 100;
 
         // Update the input box with the percentage value
         $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);

@@ -1093,14 +1093,14 @@ class EventListController extends Controller
                 $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventDetail['message_to_guests'] = $value->message_to_guests;
                 $eventDetail['event_wall'] = (isset($value->event_settings->event_wall)&&$value->event_settings->event_wall!="")?$value->event_settings->event_wall:"";;
-                $eventDetail["guest_list_visible_to_guests"] = $value->event_settings->guest_list_visible_to_guests;
-                $eventDetail['event_potluck'] = $value->event_settings->podluck;
+                $eventDetail["guest_list_visible_to_guests"] = (isset($value->event_settings->guest_list_visible_to_guests)&&$value->event_settings->guest_list_visible_to_guests!="")?$value->event_settings->guest_list_visible_to_guests:"";
+                $eventDetail['event_potluck'] =(isset($value->event_settings->podluck)&& $value->event_settings->podluck!="")? $value->event_settings->podluck:"";
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
-                $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
+                $eventDetail['adult_only_party'] =(isset($value->event_settings->adult_only_party)&&$value->event_settings->adult_only_party!="")?$value->event_settings->adult_only_party:"";
                 $eventDetail['host_name'] = $value->hosted_by;
                 $eventDetail['host_firstname'] = $value->user->firstname;
                 $eventDetail['host_lastname'] = $value->user->lastname;
-                $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
+                $eventDetail['allow_limit'] =(isset($value->event_settings->allow_limit)&& $value->event_settings->allow_limit)? $value->event_settings->allow_limit:"";
                 $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                 $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                 $eventDetail['post_time'] =  $this->setupcomingpostTime($value->updated_at);

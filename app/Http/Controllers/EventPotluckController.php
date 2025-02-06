@@ -36,7 +36,6 @@ class EventPotluckController extends Controller
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
-
         $event = decrypt($id);
         $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
         if ($event == null) {
@@ -48,8 +47,12 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
+           
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+            
+            
             $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
+            
             $checkEventOwner = Event::FindOrFail($event);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
             $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
@@ -59,6 +62,7 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
+            
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
@@ -80,6 +84,7 @@ class EventPotluckController extends Controller
                     $itempotluckCategory['spoken_items'] = $totalSpoken;
                     $potluckItemsSummury[] = $itempotluckCategory;
                 }
+                dd($potluckItemsSummury);
                 //    {{     dd($eventpotluckData);}}
                 $potluckDetail['item_summary'] = $potluckItemsSummury;
                 foreach ($eventpotluckData as $value) {
@@ -121,6 +126,8 @@ class EventPotluckController extends Controller
                 }
 
                 $potluckDetail['podluck_category_list'] = $potluckCategoryData;
+
+                
 
                 $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
                     $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
@@ -545,7 +552,6 @@ class EventPotluckController extends Controller
 
     public function editUserPotluckItem(Request $request)
     {
-        
         $user  = Auth::guard('web')->user();
 
         $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
