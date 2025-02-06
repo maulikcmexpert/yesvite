@@ -1247,14 +1247,22 @@ $(document).on('click','.select_all_post',function(){
 $(document).on('click','.wall_filter_reset',function(){
      $('.select_all_post').prop('checked',true);
      $('.wall_post').prop('checked',true);
+     $('.view_wall_filter').attr('data-apply','0');
+
  });
  $(document).on('click','.view_wall_filter',function(){
-    $('.select_all_post').prop('checked',true);
-    $('.wall_post').prop('checked',true);
+    var applied=$(this).attr('data-apply');
+    console.log(applied);
+    if(applied=='0'){
+        $('.select_all_post').prop('checked',true);
+        $('.wall_post').prop('checked',true);
+    }
+  
 });
 
  $(document).on('click','.wall_apply_filter',function(){
     $('#home_loader').css('loader','block');
+    $('.view_wall_filter').attr('data-apply','1');
     let selectedPostTypes = [];
     let event_id=$(this).data('event_id');
     $(".wall_post:checked").each(function() {

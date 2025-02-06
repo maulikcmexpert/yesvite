@@ -36,6 +36,7 @@ class EventPotluckController extends Controller
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
+
         $event = decrypt($id);
         $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
         if ($event == null) {
@@ -271,12 +272,11 @@ class EventPotluckController extends Controller
                     if (!empty($eventData) || empty($eventData)) {
                         $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                         $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
-                        // $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
-                        // ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
+                        $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
+                        ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
 
-                        //     ->get();
+                            ->get();
 
-                            $guestData=getInvitedUsersListNew($eventDetail->id);
 
 
                         $eventData[] = "Number of guests : " . $numberOfGuest;
@@ -545,6 +545,7 @@ class EventPotluckController extends Controller
 
     public function editUserPotluckItem(Request $request)
     {
+        
         $user  = Auth::guard('web')->user();
 
         $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();

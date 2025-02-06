@@ -579,22 +579,22 @@ $(document).on("click", ".edit_design_tem", function (e) {
     var id = $(this).data("id");
     imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
-    if (
-        eventData.textData != null &&
-        eventData.temp_id != null &&
-        eventData.temp_id == id
-    ) {
-        dbJson = json;
-        eventData.slider_images = [];
-        eventData.desgin_selected = "";
-        console.log({ dbJson });
-    } else {
-        console.log(json);
-        dbJson = json;
-        temp_id = id;
-        eventData.slider_images = [];
-        eventData.desgin_selected = "";
-    }
+    // if (
+    //     eventData.textData != null &&
+    //     eventData.temp_id != null &&
+    //     eventData.temp_id == id
+    // ) {
+    //     dbJson = json;
+    //     eventData.slider_images = [];
+    //     eventData.desgin_selected = "";
+    //     console.log({ dbJson });
+    // } else {
+    console.log(json);
+    dbJson = json;
+    temp_id = id;
+    eventData.slider_images = [];
+    eventData.desgin_selected = "";
+    // }
     // //console.log(dbJson);
     // //console.log(image);
     var current_event_id = $(this).data("event_id");
