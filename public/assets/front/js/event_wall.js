@@ -1253,8 +1253,11 @@ $(document).on('click','.wall_filter_reset',function(){
  $(document).on('click','.view_wall_filter',function(){
     var applied=$(this).attr('data-apply');
     console.log(applied);
-    $('.select_all_post').prop('checked',true);
-    $('.wall_post').prop('checked',true);
+    if(applied=='0'){
+        $('.select_all_post').prop('checked',true);
+        $('.wall_post').prop('checked',true);
+    }
+  
 });
 
  $(document).on('click','.wall_apply_filter',function(){
