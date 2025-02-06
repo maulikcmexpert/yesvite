@@ -407,7 +407,7 @@
                                                                     class="posts-card-like-btn {{ $liked }} set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
-                                                                    data-event-post-id="{{ $post['id'] }} "
+                                                                    data-event-post-id="{{ $post['id'] }}"
                                                                     data-user-id="{{ $login_user_id }}">
                                                                     @if ($post['self_reaction'] == '\u{2764}')
                                                                         <i class="fa-solid fa-heart"
@@ -1453,11 +1453,13 @@
 
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
+                                <input type="hidden" class="textcontent" name="postContent"
+                                value="">
 
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control postContent" rows="3" name="postContent" placeholder="What's on your mind?"
+                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
                                    ></textarea>
                             </div>
                         </form>
@@ -1762,8 +1764,7 @@
                                 <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab-{{ $post['id'] }}"
                                     role="tablist">
                                     <!-- All Reactions Tab -->
-                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}"
-                                        data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
+                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}" data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
                                         type="button" role="tab" aria-controls="nav-all-reaction"
                                         aria-selected="true">
                                         All {{ count($post['reactionList']) }}
@@ -1801,8 +1802,8 @@
                             <!-- ===Tab-content=== -->
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
-                                    aria-labelledby="nav-all-reaction-tab">
+                                <div class="tab-pane fade active show nav-all-reaction-tab-{{ $post['id'] }}" id="nav-all-reaction" role="tabpanel"
+                                    aria-labelledby="nav-all-reaction-tab-{{ $post['id'] }}">
                                     <ul>
                                         @php
                                             // Define reaction icons mapping

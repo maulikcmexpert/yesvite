@@ -1222,6 +1222,7 @@ main {
   line-height: 26.4px;
   color: var(--primary-black);
   margin-bottom: 0px;
+  width: max-content;
 }
 
 .posts-card-head-left-content p{
