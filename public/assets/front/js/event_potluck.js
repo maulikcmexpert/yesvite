@@ -328,6 +328,7 @@ $(document).on('click', '.minus', function () {
         // If there are missing items, show the danger icon
         $('#danger_' + category_id).removeClass('d-none');
         $('.missing-quantity').addClass('active');
+        $('#success_' + category_id).addClass('d-none');
         categoryList.find('.missing-quantity').css('color', 'red');
     }
     const overQuantity = spokenQuantity - totalQuantity;
