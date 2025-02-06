@@ -184,7 +184,7 @@ if ($hostView) {
                                                 @endif
                                             @endif
                                             </div>
-                                            @if ($eventInfo['guest_view']['is_host'] == 1)
+                                            @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
                                             
                                                         @if($guest['is_sync']=="1")
                                                         <button type="button" ><i
@@ -241,11 +241,11 @@ if ($hostView) {
             <div class="guests-listing-buttons">
                 <!-- <a href="javascript:void(0);" class="cmn-btn see-all-btn">See All</a> -->
                 <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn" data-eventId="{{$eventId}}">See All</a>
-                @if ($eventInfo['guest_view']['is_host'] == 1)
+                @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
                     <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add Guest</button>
                     <!-- data-bs-toggle="modal"
                     data-bs-target="#addguest" -->
-                    @endif
+                @endif
             </div>
         </div>
     </div>
