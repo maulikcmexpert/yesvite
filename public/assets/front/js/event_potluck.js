@@ -331,7 +331,7 @@ $(document).on('click', '.minus', function () {
         categoryList.find('.missing-quantity').css('color', 'red');
     }
     const overQuantity = spokenQuantity - totalQuantity;
-    const overQuantityElement = categoryList.find('.over-quantity');
+    const overQuantityElement = categoryList.find('.over-quantity-'+category_id);
 
 
     // Update the over quantity text
@@ -343,7 +343,7 @@ $(document).on('click', '.minus', function () {
         $('#success_' + category_id).removeClass('d-none'); // Show the success (green SVG) element
     } else {
         overQuantityElement.addClass('d-none'); // Hide the over-quantity element
-        $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
+        // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
     }
     // updateQuantityStatusOnLoad();
 });
