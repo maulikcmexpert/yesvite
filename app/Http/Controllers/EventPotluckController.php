@@ -272,11 +272,12 @@ class EventPotluckController extends Controller
                     if (!empty($eventData) || empty($eventData)) {
                         $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                         $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
-                        $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
-                        ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
+                        // $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
+                        // ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
 
-                            ->get();
+                        //     ->get();
 
+                            $guestData=getInvitedUsersListNew($eventDetail->id);
 
 
                         $eventData[] = "Number of guests : " . $numberOfGuest;

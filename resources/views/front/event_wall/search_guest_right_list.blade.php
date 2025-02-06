@@ -43,6 +43,7 @@ if($see_all==0){
                                             <input type="hidden" id="sync" value="{{  $guest['is_sync']}}">
                                         </div>
                                     </div>
+                                    @if($guest['is_sync']=="0")
                                     <div class="guests-listing-right" data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}">
                                         <div class="guest_rsvp_icon" data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}">
                                         @if($guest['is_sync']=="0")
@@ -101,6 +102,7 @@ if($see_all==0){
                                         
                                         @endif
                                     </div>
+                                    @endif
                             </div>
                             @if($guest['is_sync']=="0")
                                     @if ($guest['rsvp_status'] == '1')
