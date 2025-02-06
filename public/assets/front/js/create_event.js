@@ -898,39 +898,73 @@ function datepicker() {
                 const picker = $(this).data("DateTimePicker");
                 const currentActivity = $(this).closest(".activity-main-wrp");
 
-                const startTime = $(this)
-                    .closest("div")
-                    .find("#ac-start-time")
-                    .val();
+                let startTime = $(this).val(); // Get the current input value
 
-                // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
-                let startMoment = startTime
-                    ? moment(startTime, "LT")
-                    : moment().hours(12).minutes(0).seconds(0);
+                if (!startTime) {
+                    // If there's no existing value, perform the previous logic
+                    const previousActivity =
+                        currentActivity.prev(".activity-main-wrp");
 
-                console.log(startMoment, 22);
-                const previousActivity =
-                    currentActivity.prev(".activity-main-wrp");
-
-                if (previousActivity.length > 0) {
-                    const previousEndTime = previousActivity
-                        .find(".activity_end_time")
-                        .val();
-                    if (previousEndTime) {
-                        // If previous end time exists, use it as the new start time
-                        // startMoment = moment(previousEndTime, "LT");
-                        startMoment = moment(previousEndTime, "LT").add(
-                            1,
-                            "hours"
-                        );
-                        picker.date(startMoment);
+                    if (previousActivity.length > 0) {
+                        const previousEndTime = previousActivity
+                            .find(".activity_end_time")
+                            .val();
+                        if (previousEndTime) {
+                            startTime = moment(previousEndTime, "LT")
+                                .add(1, "hours")
+                                .format("LT");
+                        }
+                    } else {
+                        startTime = moment()
+                            .hours(12)
+                            .minutes(0)
+                            .seconds(0)
+                            .add(1, "hours")
+                            .format("LT");
                     }
-                } else {
-                    picker.date(startMoment.clone().add(1, "hours"));
+
+                    $(this).val(startTime); // Set the calculated start time
                 }
 
-                // Set the picker date to the adjusted start time (if any)
+                picker.date(moment(startTime, "LT")); // Set picker date to the final start time
             })
+            // .on("dp.show", function () {
+            //     const picker = $(this).data("DateTimePicker");
+            //     const currentActivity = $(this).closest(".activity-main-wrp");
+
+            //     const startTime = $(this)
+            //         .closest("div")
+            //         .find("#ac-start-time")
+            //         .val();
+
+            //     // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
+            //     let startMoment = startTime
+            //         ? moment(startTime, "LT")
+            //         : moment().hours(12).minutes(0).seconds(0);
+
+            //     console.log(startMoment, 22);
+            //     const previousActivity =
+            //         currentActivity.prev(".activity-main-wrp");
+
+            //     if (previousActivity.length > 0) {
+            //         const previousEndTime = previousActivity
+            //             .find(".activity_end_time")
+            //             .val();
+            //         if (previousEndTime) {
+            //             // If previous end time exists, use it as the new start time
+            //             // startMoment = moment(previousEndTime, "LT");
+            //             startMoment = moment(previousEndTime, "LT").add(
+            //                 1,
+            //                 "hours"
+            //             );
+            //             picker.date(startMoment);
+            //         }
+            //     } else {
+            //         picker.date(startMoment.clone().add(1, "hours"));
+            //     }
+
+            //     // Set the picker date to the adjusted start time (if any)
+            // })
             .on("dp.close", function () {
                 const picker = $(this).data("DateTimePicker");
                 const startTime = $(this)
