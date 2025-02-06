@@ -22,17 +22,18 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#likeButton", function () {
-        clearTimeout(longPressTimer);
+        clearTimeout(longPressTimer); // Clear the long press timer
+
+        // If it's a long press, don't process the click event
         if (isLongPresss) return;
 
+        // Handle single tap like/unlike
         const button = $(this);
         const isLiked = button.hasClass("liked");
-        const eventId = button.data("event-id");
-        const eventPostId = button.data("event-post-id");
-        const userId = button.data("user-id"); // Assuming each button has a user ID
-        let reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle between 💔 or ❤️
+        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
 
-        // Toggle UI button appearance
+
+        // Toggle like button appearance
         if (isLiked) {
             button.removeClass("liked");
             button.find("i").removeClass("fa-solid").addClass("fa-regular");
@@ -41,6 +42,12 @@ $(document).ready(function () {
             button.find("i").removeClass("fa-regular").addClass("fa-solid");
         }
 
+
+
+
+        // AJAX call to update the like state
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
         $.ajax({
             url: base_url + "event_wall/userPostLikeDislike",
             method: "POST",
@@ -55,10 +62,9 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
-                    console.log(response);
-
-                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
-
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
                     let reactionImage = "";
                     if (reaction === "\u{1F604}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
@@ -66,13 +72,15 @@ $(document).ready(function () {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
                     } else if (reaction === "\u{2764}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                    } else {
+                        reactionImage = "";
                     }
 
-                    // Update the reaction image in post
+                    // Update the reaction display
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
-
-                    // **Update Reaction Modal**
                     updateReactionModal(eventPostId, response.post_reaction);
+                } else {
+                    // alert(response.message);
                 }
             },
             error: function (xhr) {
@@ -81,7 +89,10 @@ $(document).ready(function () {
             },
         });
     });
+
     function updateReactionModal(postId, postReactions) {
+        console.log(postReactions);
+
         let reactionListHtml = "";
         let reactionIcons = {
             "\\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
@@ -92,7 +103,10 @@ $(document).ready(function () {
         };
 
         postReactions.forEach(reaction => {
-            let profileImage = reaction.profile ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
+            console.log({reaction});
+
+            let profileImage = reaction.profile
+                ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
                 : `<h5 class="fontcolor${reaction.username.charAt(0).toUpperCase()}">${reaction.username.charAt(0).toUpperCase()}</h5>`;
 
             reactionListHtml += `
@@ -108,12 +122,12 @@ $(document).ready(function () {
                             </div>
                         </div>
                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/default-icon.png'}" alt="${reaction.reaction}">
+                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/heart-emoji.png'}" alt="${reaction.reaction}">
                         </div>
                     </div>
                 </li>`;
         });
-
+        console.log(reactionListHtml)
         $(`#nav-all-reaction-${postId} ul`).html(reactionListHtml);
     }
 
@@ -227,7 +241,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal = $(".post_comment").val();
+        var commentVal =  $(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -334,25 +348,24 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
+                        <button class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
                 `;
-                var replyList;
+
                 if (parentCommentId) {
                     // Append as a reply to the parent comment
                     const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
                     if (parentComment.length > 0) {
-                        replyList= parentComment.find("ul.primary-comment-replies");
+                        let replyList = parentComment.find("ul.primary-comment-replies");
                         if (replyList.length === 0) {
                             replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                         }
 
                         // Check if the reply is already appended
                         if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.prepend(newCommentHTML);
-                            // replyList.append(newCommentHTML);
+                            replyList.append(newCommentHTML);
                         }
                     }
                 } else {
@@ -361,8 +374,7 @@ $(document).ready(function () {
 
                     // Check if the comment is already appended
                     if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.prepend(newCommentHTML);
-                        // commentList.append(newCommentHTML);
+                        commentList.append(newCommentHTML);
                     }
                 }
 
@@ -817,7 +829,7 @@ $(document).ready(function () {
                 }else{
                     is_duplicate=0;
                 }
-                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
             }else{
                 guestList = guestList.filter(guest => guest.id !== id);
@@ -863,7 +875,7 @@ $(document).ready(function () {
                 console.log(is_duplicate);
                 $('.add_yesvite_guest_'+id).remove();
                 $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
+                addToGuestList(id, isSelected, 1,first_name,last_name,email,profile); // App user = 1 for email (app user)
                 storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
 
 
@@ -922,7 +934,7 @@ $(document).ready(function () {
             .filter(`[data-id="${id}"]`)
             .not(this)
             .prop("checked", false);
-            addToGuestPhoneList(id, isSelected,"0",first_name,last_name,email,profile); // App user = 1 for email (app user)
+            addToGuestPhoneList(id, isSelected,'0',first_name,last_name,email,profile); // App user = 1 for email (app user)
 
             storeAddNewGuest(id,1,isSelected,event_id,'phone');
 
@@ -1218,9 +1230,7 @@ $(document).on("keyup", ".search_contact", function () {
     const name=$(this).val();
     const event_id = $('#event_id').val();
 
-    var see_all=$(this).attr('data-see_all');
-    console.log(see_all);
-
+    var see_all=$(this).data('see_all');
     $('#home_loader').css('display','block');
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
@@ -1276,10 +1286,13 @@ $(document).on("keyup", ".search_contact", function () {
 //     });
 // });
 $(document).on('keyup','.post_comment',function(){
-//     $(".parent_comment_id").val('');
-// })
+    $(".parent_comment_id").val('');
+
+
+
+
     var commentVal=$(".parent_comment_id").val();
     if(commentVal==""){
         $(".parent_comment_id").val('');
     }
-})
+});

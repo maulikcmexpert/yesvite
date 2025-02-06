@@ -412,11 +412,14 @@ $("#create-poll-btn").click(function () {
 
 $(".upload-img-delete").click(function () {
     $(".create-post-upload-img-wrp").addClass("d-none");
+    $("#pollForm")[0].reset(); // Correct way to reset a form
+    $("#photoForm")[0].reset();
 });
 
 $(".upload-poll-delete").click(function () {
     $(".create-post-poll-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
+
     $('.create_post_btn').prop('disabled', false);
 });
 

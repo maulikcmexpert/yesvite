@@ -981,7 +981,7 @@ $(document).ready(function () {
         var pollForm = $('#pollForm');
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
-        var postContent = document.getElementById('postContent').value.trim();
+        var postContent = $('.postContent').val().trim();
 
         // Fallback to empty string if #postContent does not exist
         console.log('Poll Form:', pollForm.length > 0 ? 'Exists' : 'Does not exist');
@@ -990,18 +990,15 @@ $(document).ready(function () {
         console.log('Post Content:', postContent);
         // If a poll form exists and is visible, submit it
         if (pollForm.is(':visible') && pollForm.length > 0 &&  pollForm !== '') {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the poll.');
-            //     return;
-            // }
-            // Set the value of the hidden input in the poll form
+
+            console.log('Post Content:', postContent);
             document.getElementById('pollContent').value = postContent;
             $this.prop('disabled', true)
-            pollForm.submit();
+           pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
         else if (photoForm.is(':visible') && photoForm.length > 0 ) {
-            // Check if there's a valid photo (adjust this to your actual field for photo upload)
+            console.log('Post Content:', postContent);
             var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
             if (photoInput && photoInput.files.length === 0) {
                 toastr.error('Please upload a photo for the photo post.');
@@ -1015,10 +1012,11 @@ $(document).ready(function () {
 
             // Submit the form
             $this.prop('disabled', true)
-            photoForm.submit();
+           photoForm.submit();
         }
         // If neither form exists, check for a plain text post
         else if (textForm.length > 0 && postContent !== '') {
+            console.log('Post Content:', postContent);
             if (postContent === '') {
                 toastr.error('Please enter some content for the photo post.');
                 return;
@@ -1026,7 +1024,7 @@ $(document).ready(function () {
 
             document.getElementById('photoPostType').value = 0;
             $this.prop('disabled', true)
-            textForm.submit();
+           textForm.submit();
         }
         // If no valid content is provided, show an alert
         else {
