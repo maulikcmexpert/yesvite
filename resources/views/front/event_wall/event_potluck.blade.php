@@ -1,5 +1,5 @@
 {{-- {{dd($potluckDetail)}} --}}
-{{dd($potluckDetail)}}
+
 <main class="new-main-content">
 
     <div class="container">
@@ -290,7 +290,7 @@
                                                             </span>
                                                             <h6 class="me-2 missing-category-h6-{{ $key }}"
                                                             style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['remainingQnt'] }}</span>
+                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
                                                             Missing</h6>
 
                                                           
@@ -339,7 +339,7 @@
                                                             </span>
                                                             <h6 class="me-2 extra-category-h6-{{ $key }}"
                                                                 style="color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}">{{ abs($category['remainingQnt']) }}</span>
+                                                                    id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
                                                                 Item Over</h6>
 
                                                         @else

@@ -668,7 +668,7 @@
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                <ul>
+                                                                                <ul class="primary-comment-replies">
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
