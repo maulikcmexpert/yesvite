@@ -1386,41 +1386,28 @@ $(document).on('click', function (e) {
         $('#emojiDropdown').hide(); // Hide emoji picker when clicked outside
     }
 });
-$(document).on('click', function (e) {
-    if (!$(e.target).closest('.photo-card-head-right').length) {
-        $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
-    }
-});
-function getEmojiUnicode(emoji) {
-    switch (emoji) {
-        case '❤️':
-            return '\u{2764}';  // Heart
-        case '😍':
-            return '\u{1F60D}';  // Smiling face with heart-eyes
-        case '👍':
-            return '\u{1F44D}';  // Thumbs up
-        case '😂':
-            return '\u{1F602}';  // Face with tears of joy
-        case '😢':
-            return '\u{1F622}';  // Crying face
-        default:
-            return emoji;  // Return as is if not found
-    }
-}
+// $(document).on('click', function (e) {
+//     if (!$(e.target).closest('.photo-card-head-right').length) {
+//         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+//     }
+// });
+// function getEmojiUnicode(emoji) {
+//     switch (emoji) {
+//         case '❤️':
+//             return '\u{2764}';  // Heart
+//         case '😍':
+//             return '\u{1F60D}';  // Smiling face with heart-eyes
+//         case '👍':
+//             return '\u{1F44D}';  // Thumbs up
+//         case '😂':
+//             return '\u{1F602}';  // Face with tears of joy
+//         case '😢':
+//             return '\u{1F622}';  // Crying face
+//         default:
+//             return emoji;  // Return as is if not found
+//     }
+// }
 
-const longPressDelay = 3000; // 3 seconds for long press
-let pressTimer;
-let isLongPress = false;
-
-// Function to handle the long press action
-function handleLongPress(element) {
-    console.log("Long press detected");
-    // $('#detail-photo-modal').hide();
-    // Show the button and check the checkbox
-    const photoCard = element.closest('.photo-card-photos-wrp');
-    photoCard.find('.selected-photo-btn').show();
-    photoCard.find('.form-check-input').prop('checked', true);
-
-    // Check if any checkboxes are selected and toggle the visibility of the bulk select wrapper
-    toggleBulkSelectWrapper();
-}
+// const longPressDelay = 3000; // 3 seconds for long press
+// let pressTimer;
+// let isLongPress = false;
