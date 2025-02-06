@@ -1450,7 +1450,7 @@
 
                                             {{-- end code --}}
                                         @else
-                                        @if($category['totalMissing'] == 0)
+                                        @if($data['totalMissing'] == 0)
                                             <span
                                                 class="me-2 missing-category-h6-{{ $index }} missing-category-svg-{{ $index }}"
                                                 style="color: rgb(52, 192, 92);">
