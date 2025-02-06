@@ -176,9 +176,9 @@
                                             </button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
-                                        @foreach ($potluckDetail['podluck_category_list'] as $key => $category)
+                                        @foreach ($potluckDetail['podluck_category_list'] as $category)
                                         
-                                        <div class="category-main-dishesh list-slide-{{$key}}">
+                                        <div class="category-main-dishesh">
 
 
                                                 @php
@@ -555,7 +555,7 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -575,7 +575,6 @@
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
-                                                                                                data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>

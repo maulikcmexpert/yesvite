@@ -289,7 +289,7 @@ $(document).on('click', '.delete_failed_contact', function () {
     let event_id = $('#event_id').val();
 
     $.ajax({
-        url: base_url + "event_wall/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
+        url: base_url + "event_guest/removeGuestFromInvite",  // Ensure this route is defined in web.php/api.php
         type: "POST",
         data: JSON.stringify({ user_id: userId, event_id: event_id }),
         contentType: "application/json",
@@ -298,7 +298,8 @@ $(document).on('click', '.delete_failed_contact', function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
         },
         success: function (response) {
-            if (response.status === 1) {
+            console.log(response);
+            if (response.success ==true) {
                 toastr.success(response.message);
                 // // Find the guest container by guestId and remove it from the DOM
                 $('<div id="pageOverlay"></div>').css({
@@ -311,6 +312,7 @@ $(document).on('click', '.delete_failed_contact', function () {
                     zIndex: 9999
                 }).appendTo('body');
                 window.location.reload();
+
                 $('.invite-contact-wrp[data-user-id="' + userId + '"]').remove();
             } else {
                 toastr.error(response.message);
@@ -324,12 +326,11 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 });
 
-
+let userIds = [];
 $(document).on('click','.re_send_failed_invites', function(e) {
     e.preventDefault();
     var event_id = $('#event_id').val();
 
-    let userIds = [];
     $('.failed_check_resend_email:checked').each(function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
@@ -352,7 +353,6 @@ $(document).on('click','.re_send_failed_invites', function(e) {
                 $('#home_loader').css('display','none');    
 
                 toastr.success(response.message);
-                window.location.reload();
                 $('<div id="pageOverlay"></div>').css({
                     position: 'fixed',
                     top: 0,
@@ -362,6 +362,9 @@ $(document).on('click','.re_send_failed_invites', function(e) {
                     background: 'rgba(255, 255, 255, 0)', // Transparent background
                     zIndex: 9999
                 }).appendTo('body');
+
+                window.location.reload();
+
                 // // Find the guest container by guestId and remove it from the DOM
             } else {
                 toastr.error(response.message);
@@ -385,6 +388,14 @@ $(document).on('change','.failed_check_resend_email', function() {
         $('.re_send_failed_invites').removeClass('success-btn');
         $('.re_send_failed_invites').prop('disabled', true);
     }
+
+    if ($('.failed_check_resend_email:checked').length === $('.failed_check_resend_email').length) {
+        $('.success_list_tip').removeClass('d-none'); 
+        $('.failed_list_tip').addClass('d-none'); 
+    } else {
+        $('.success_list_tip').addClass('d-none'); 
+        $('.failed_list_tip').removeClass('d-none');   
+      }
     console.log(userIds);
 
 
