@@ -1446,7 +1446,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
+                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                             <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
@@ -1461,10 +1461,8 @@
                             <div class="create-post-textcontent">
                                 <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
                                    ></textarea>
-                            </div>
-                        </form>
-                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
-                        enctype="multipart/form-data">
+                            </div>                       
+                       
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
