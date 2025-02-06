@@ -1003,7 +1003,7 @@ class EventWallController extends Controller
                                         $commentChildInReply['comment'] = $childInReplyVal->comment_text;
                                         $commentChildInReply['user_id'] = $childInReplyVal->user_id;
 
-                                        $commentChildInReply['username'] = $childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname;
+                                        $commentChildInReply['username'] =   (!empty($childInReplyVal->user )) ?($childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname) : "";
 
                                         $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                         $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";
