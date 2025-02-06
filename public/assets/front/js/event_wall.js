@@ -1262,7 +1262,7 @@ $(document).on('click','.wall_filter_reset',function(){
 });
 
  $(document).on('click','.wall_apply_filter',function(){
-    $('#home_loader').css('loader','block');
+$('#home_loader').css('display','flex');
     $('.view_wall_filter').attr('data-apply','1');
     let selectedPostTypes = [];
     let event_id=$(this).data('event_id');
@@ -1288,7 +1288,7 @@ $(document).on('click','.wall_filter_reset',function(){
             console.log(response.view);
             $('.wall-post-content').html();
             $('.wall-post-content').html(response.view);
-            $('#home_loader').css('loader','block');
+        $('#home_loader').css('display','flex');
 
             $('#main-center-modal-filter').modal('hide');
 
