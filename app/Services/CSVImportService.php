@@ -21,7 +21,7 @@ class CSVImportService
         $parent_userid = $user->id;
 
         $updatedContacts=[];
-        $newContact=[];
+        $newContacts=[];
         // dd($file);
         while (($row = fgetcsv($file)) !== false) {
 
