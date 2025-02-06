@@ -1020,10 +1020,8 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
-            document.getElementsByClassName("textcontent").value =
-                $("#postContent").val();
-            document.getElementById("photoPostType").value = 0;
-            $("#photoForm").submit(); // Submit the form
+
+            $("#textform").submit(); // Submit the form
         }
     });
 
