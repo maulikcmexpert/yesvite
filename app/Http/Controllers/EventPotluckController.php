@@ -70,26 +70,26 @@ class EventPotluckController extends Controller
 
 
 
-            // $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
-            //     $query->with(['users', 'user_potluck_items' => function ($subquery) {
-            //         $subquery->with('users')->sum('quantity');
-            //     }]);
-            // }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
+            $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+                $query->with(['users', 'user_potluck_items' => function ($subquery) {
+                    $subquery->with('users')->sum('quantity');
+                }]);
+            }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
 
-            // $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+            $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
 
 
-            // $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
+            $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
 
-            // $checkEventOwner = Event::FindOrFail($event);
-            // $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-            // $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
-            // $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
-            // $potluckDetail['potluck_items'] = $totalItems;
-            // $potluckDetail['spoken_for'] = $spoken_for;
-            // $potluckDetail['left'] = $totalItems - $spoken_for;
-            // $potluckDetail['item'] = $totalItems;
-            // $potluckDetail['available'] = $totalItems;
+            $checkEventOwner = Event::FindOrFail($event);
+            $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
+            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+            $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
+            $potluckDetail['potluck_items'] = $totalItems;
+            $potluckDetail['spoken_for'] = $spoken_for;
+            $potluckDetail['left'] = $totalItems - $spoken_for;
+            $potluckDetail['item'] = $totalItems;
+            $potluckDetail['available'] = $totalItems;
 
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
