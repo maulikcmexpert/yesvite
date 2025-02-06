@@ -531,10 +531,24 @@
                         <div class="create-post-upload-img-head">
                             <h4>PHOTOS</h4>
                             <div>
+                                <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
+                                enctype="multipart/form-data">
+
+                                @csrf
                                 <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                         class="fa-solid fa-plus"></i> Add Photos/video
-                                    <input type="file" id="fileInput2" class="fileInputtype"
-                                        accept="image/*"></button>
+                                        <input type="file" id="fileInput" class="fileInputtype"
+                                        accept="image/*,video/*" name="files[]" multiple></button>
+                                        <input type="hidden" name="event_id" id="event_id"
+                                        value="{{ $event }}">
+                                    <input type="hidden" name="content" id="photoContent">
+                                    <input type="hidden" class="hiddenVisibility" name="post_privacys"
+                                    value="1">
+                                <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
+                                    value="1">
+                                </form>
+
                                 <span class="upload-img-delete">
                                     <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
