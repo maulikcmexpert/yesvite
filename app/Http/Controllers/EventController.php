@@ -3771,11 +3771,13 @@ class EventController extends BaseController
             }
 
             if (!empty($request->slider_images)) {
+                // Extract only filenames if slider_images contains an array of objects
+                $newSliderImages = array_map(fn($image) => is_array($image) ? $image['fileName'] : $image, $request->slider_images);
 
+                // Get current slider image names from the database
                 $oldSliderImages = EventImage::where('event_id', $eventId)->where('type', 1)->pluck('image')->toArray();
-                $newSliderImages = $request->slider_images; // Array of filenames
 
-
+                // Determine images to delete (present in DB but not in new request)
                 $imagesToDelete = array_diff($oldSliderImages, $newSliderImages);
                 EventImage::where('event_id', $eventId)
                     ->where('type', 1)
