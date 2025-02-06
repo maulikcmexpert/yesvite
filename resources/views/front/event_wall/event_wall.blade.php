@@ -383,7 +383,7 @@
                                                             <div
                                                                 class="posts-card-like-comment-right emoji_display_like">
                                                                 @php
-                                                                    if ($post['self_reaction'] == "\u{1F90D}") {
+                                                                    if ($post['self_reaction'] == "\u{2764}") {
                                                                         $liked = 'liked';
                                                                     } else {
                                                                         $liked = '';
