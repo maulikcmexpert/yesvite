@@ -552,14 +552,14 @@
                                                                     class="parent_comment_id"
                                                                     value="">
                                                                     
-                                                                    <input type="hidden"
-                                                                    class="data_comment_id"
-                                                                    value="{{ $comment['id'] }}">
+                                                                   
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
                                                                             data-comment-id="{{ $comment['id'] }}">
-                                                                         
+                                                                            <input type="hidden"
+                                                                            class="data_comment_id"
+                                                                            value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
