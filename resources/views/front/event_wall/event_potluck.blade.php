@@ -565,7 +565,7 @@
                                                                                 <span
                                                                                     class="accordion-button plus_icon_user collapsed"
                                                                                     data-category-id="{{ $category['id'] }}"
-                                                                                    data-categoryKey="{{ $key }}"
+                                                                                   
                                                                                     data-item-id="{{ $item['id'] }}"
                                                                                     data-max="{{ $item['quantity'] }}"
                                                                                     data-event-id="{{ $event }}"
@@ -649,6 +649,7 @@
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
                                                                                                 class="minus m-0"data-category-id="{{ $category['id'] }}"
+                                                                                                 data-categoryKey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -667,7 +668,7 @@
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
-                                                                                                data-category-id="{{ $category['id'] }}"
+                                                                                                data-category-id="{{ $category['id'] }}" data-categoryKey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
