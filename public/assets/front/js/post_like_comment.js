@@ -334,7 +334,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     const data = response.data;
-
+                    console.log(data);
                     // Generate profile image or initials
                     const profileImage = data.profile
                         ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
@@ -357,9 +357,7 @@ $(document).ready(function () {
                     }
 
                     const newCommentHTML = `
-                <li class="commented-user-wrp" data-comment-id="${
-                    data.comment_id
-                }">
+                <li class="commented-user-wrp" data-comment-id="${data.id}">
                     <div class="commented-user-head">
                         <div class="commented-user-profile">
                             <div class="commented-user-profile-img">
@@ -396,6 +394,8 @@ $(document).ready(function () {
                         const parentComment = $(
                             `li[data-comment-id="${parentCommentId}"]`
                         );
+                        console.log(`li[data-comment-id="${parentCommentId}"]`);
+                        console.log(parentComment);
                         if (parentComment.length > 0) {
                             replyList = parentComment.find(
                                 "ul.primary-comment-replies"
@@ -506,10 +506,11 @@ $(document).ready(function () {
             return;
         }
         const parentName = $(this)
-            .closest(".commented-user-wrp")
+            .closest(".commented-user-head")
             .find("h3")
             .text()
             .trim();
+        console.log({ parentName });
         const parentId = $(this).data("comment-id");
 
         if (!parentId) {
