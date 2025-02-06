@@ -559,11 +559,11 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
             const users = document.querySelectorAll(".guest-users");
             let i = 0
             for (const userElement of users) {
-                const userId = userElement.getAttribute("data-userid");
+                const userid = userElement.getAttribute("data-userid");
                // console.log({userId})
-                if (!userId) continue; // Skip if no userId
+                if (!userid) continue; // Skip if no userId
 
-                let userData = await getUser(userId);
+                let userData = await getUser(userid);
                 let statusClass;
                 if(userData?.userStatus?.toLowerCase() === "online"){
                     i = i+1;
@@ -571,7 +571,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                 } else{
                      statusClass =  "inactive-dot";
                 } 
-                if(userId==userId){
+                if(userId==userid){
+                    i = i+1;
+
                     statusClass = "active-dot";
                 }
                 // Find the span inside the user element and update its class
