@@ -498,6 +498,8 @@ $(document).ready(function () {
 
     $(document).on("click", ".commented-user-reply-btn", function () {
         // Find the closest comment element
+
+        $(".post_comment").val("");
         const parentWrapper = $(this)
             .closest(".posts-card-show-all-comments-wrp")
             .prev(".posts-card-main-comment");
@@ -513,7 +515,8 @@ $(document).ready(function () {
             .children()
             .find(".commented-user-profile-content")
             .find("h3")
-            .text();
+            .text()
+            .trim();
         console.log({ parentName });
         const parentId = $(this).data("comment-id");
 
