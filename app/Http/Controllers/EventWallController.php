@@ -2624,7 +2624,6 @@ class EventWallController extends Controller
             $is_failed="1";
         }
 
-        dd($is_failed);
         // try {
         if (!empty($request['guest_list'])) {
 
@@ -2707,8 +2706,9 @@ class EventWallController extends Controller
                 ];
                 sendNotificationGuest('invite', $notificationParam);
             }
-
-            debit_coins($user->id, $request['event_id'], count($ids));
+            if($is_failed=="0"){
+                debit_coins($user->id, $request['event_id'], count($ids));
+            }
         }
 
 
