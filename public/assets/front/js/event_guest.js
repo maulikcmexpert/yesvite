@@ -329,11 +329,16 @@ $(document).on('click','.re_send_failed_invites', function() {
     
     let userIds = [];
     $('.failed_check_resend_email').each(function() {
-        let userId = $(this).data('id');
-        let preferBy = $(this).data('prefer');
-        userIds.push({ userId: userId, preferBy: preferBy });
+        let userId = $(this).attr('data-id');
+        let preferBy = $(this).attr('data-prefer');
+        let app_user = $(this).attr('data-app_user');
+        let event_id = $('#event_id').val();
+        ;
+        userIds.push({ id: userId, prefer_by: preferBy,event_id:event_id,app_user:app_user});
     });
+
     console.log(userIds);
+    
 
     // $.ajax({
     //     url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
