@@ -47,8 +47,10 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-            dd($eventpotluckData);
+           
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+            dd($totalItems);
+            
             $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
             $checkEventOwner = Event::FindOrFail($event);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
