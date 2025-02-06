@@ -33,7 +33,7 @@ class EventPotluckController extends Controller
 {
     public function index(String $id)
     {
-        echo 1;die;
+        
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
@@ -57,7 +57,7 @@ class EventPotluckController extends Controller
 
 
 
-
+            echo 2;die;
 
 
 
