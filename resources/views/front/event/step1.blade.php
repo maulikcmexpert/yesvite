@@ -632,12 +632,19 @@
                                                                             <div class="input-group time ">
                                                                                 <input
                                                                                     class="form-control timepicker activity_start_time"
-                                                                                    id="activity-start-time"
+                                                                                   
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
-                                                                                    required="" readonly
-                                                                                    value="{{ $data['start_time'] }}" /><span
-                                                                                    class="input-group-append input-group-addon"><span
+                                                                                    required="" 
+                                                                                    value="{{$data['start_time']}}" />
+
+                                                                                    
+                                                                                    <span
+                                                                                    class="input-group-append input-group-addon">
+
+                                                                                   
+                                                                                    
+                                                                                    <span
                                                                                         class="input-group-text">
                                                                                         <svg width="21"
                                                                                             height="20"

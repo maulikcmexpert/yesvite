@@ -526,23 +526,12 @@
                             </div>
                         </div>
                     </div>
-                    <form action="{{ route('event_photo.eventPost') }}" id="textform" method="POST"
-                        enctype="multipart/form-data">
-                        <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
-                        <input type="hidden" class="hiddenAllowComments" name="commenting_on_off" value="">
-
-                        <input type="hidden" name="post_type" id="textPostType" value="0">
-                        @csrf
-                        <div class="create-post-textcontent">
-                            <textarea class="form-control" rows="3" placeholder="What's on your mind?" id="postContent"></textarea>
-                        </div>
-                    </form>
-                    <div class="create-post-upload-img-wrp d-none">
+                    <div class="create-post-upload-img-wrp ">
                         <div class="create-post-upload-img-head">
                             <h4>PHOTOS</h4>
                             <div>
-                                <button type="button" class="uploadButton create-post-head-upload-btn d-none"><i
+                                <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                         class="fa-solid fa-plus"></i> Add Photos/video
                                     <input type="file" id="fileInput2" class="fileInputtype"
                                         accept="image/*"></button>
@@ -1297,10 +1286,7 @@
                     <!-- ===Tab-content=== -->
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="cmn-btn reset-btn">Reset</button>
-                <button type="button" class="cmn-btn">Apply</button>
-            </div>
+
         </div>
     </div>
 </div>

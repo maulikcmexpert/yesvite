@@ -16,12 +16,12 @@ $(document).ready(function () {
 
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
-        var postContent = document.getElementById('postContent').value.trim();
+     //   var postContent = document.getElementById('postContent').value.trim();
         // Fallback to empty string if #postContent does not exist
 
         console.log('Photo Form:', photoForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Post Content:', postContent);
+       // console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
+        //console.log('Post Content:', postContent);
 
         // If a photo form exists and is visible, submit it
         if (photoForm.is(':visible') && photoForm.length > 0) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
             //     return;
             // }
             // Set the value of the hidden input in the photo form
-            document.getElementById('photoContent').value = postContent;
+          //  document.getElementById('photoContent').value = postContent;
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
@@ -558,7 +558,7 @@ $(document).on('click', '.open_photo_model', function () {
                     <div class="swiper-slide">
                         <div class="posts-card-show-post-img">
                             <video controls>
-                                <source src="${media}" type="video/mp4">
+                                <source src="${media}" type="video/mp4" muted>
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -569,7 +569,7 @@ $(document).on('click', '.open_photo_model', function () {
                 mediaElement = `
                     <div class="swiper-slide">
                         <div class="posts-card-show-post-img">
-                            <img src="${media}" alt="Media" />
+                            <img src="${media}" alt="Media"  />
                         </div>
                     </div>
                 `;
