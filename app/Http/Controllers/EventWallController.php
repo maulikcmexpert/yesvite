@@ -2618,8 +2618,12 @@ class EventWallController extends Controller
 
     public function sendInvitation(Request $request)
     {
-        dd($request->is_failed);
         $user  = Auth::guard('web')->user();
+        $is_failed="0";
+        if(isset($request->is_failed)&&$request->is_failed!=""){
+            $is_failed="1";
+        }
+
         // try {
         if (!empty($request['guest_list'])) {
 
@@ -2686,7 +2690,7 @@ class EventWallController extends Controller
                     'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
-
+                dd(vars: $notificationParam);
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
             }
@@ -2700,10 +2704,13 @@ class EventWallController extends Controller
                     'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
+                dd(vars: $notificationParam);
+
                 sendNotificationGuest('invite', $notificationParam);
             }
-
-            debit_coins($user->id, $request['event_id'], count($ids));
+            if($is_failed=="0"){
+                debit_coins($user->id, $request['event_id'], count($ids));
+            }
         }
 
 
