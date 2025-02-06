@@ -1864,7 +1864,7 @@ function loadMoreData(page, search_name) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -1896,7 +1896,7 @@ function loadMoreData(page, search_name) {
 //             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
 //         },
 //         beforeSend: function () {
-//             $("#loader").show();
+//             $('#loader').css('display','flex');
 //         },
 //     })
 //         .done(function (data) {
@@ -4811,7 +4811,7 @@ async function saveDesignData(direct = false) {
     });
     canvas.renderAll();
 
-    $("#loader").show();
+    $('#loader').css('display','flex');
     $(".store_desgin_temp, .btn-close").prop("disabled", true);
 
     try {
@@ -6239,7 +6239,7 @@ $(document).on("click", ".save_event_co_host", function () {
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
     // console.log(data);
-    // $("#loader").show();
+    // $('#loader').css('display','flex');
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
     $("#eventImage").attr(
@@ -6381,7 +6381,7 @@ $(document).on("click", "#final_create_event", function (e) {
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
     console.log(data);
-    $("#loader").show();
+    $('#loader').css('display','flex');
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -6449,7 +6449,7 @@ $(document).on("click", ".store_desgin_temp", function () {
 
     setTimeout(() => {
         var downloadImage = document.getElementById("download_image");
-        $("#loader").show();
+        $('#loader').css('display','flex');
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
@@ -6693,7 +6693,7 @@ function loadSearchUser(search_name) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7135,7 +7135,7 @@ $(document).on("keyup", "#group_search_ajax", function () {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7170,7 +7170,7 @@ function groupToggleSearch(search_name = null) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7409,7 +7409,7 @@ function get_co_host_list(
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7645,7 +7645,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7851,7 +7851,7 @@ $(document).on("click", ".thank_you_card_toggle", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7884,7 +7884,7 @@ $(document).on("click", ".add_gift_registry", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         beforeSend: function () {
-            $("#loader").show();
+            $('#loader').css('display','flex');
         },
     })
         .done(function (data) {
@@ -7978,7 +7978,7 @@ var offsetcontact = 0;
 var busycontact = false;
 
 $(document).on("click", "#phone-tab", function () {
-    $("#loader").show();
+    $('#loader').css('display','flex');
     var search_name = $("#search_contacts").val();
     offsetcontact = 0;
     displayPhoneContacts("all", 10, offsetcontact, search_name, false);
@@ -8114,7 +8114,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
 // });
 
 $(document).on("click", ".edit_event_details", function () {
-    $("#loader").show();
+    $('#loader').css('display','flex');
     // $(this).prop("disabled", true);
     // $('.btn-close').prop("disabled", true);
     if (final_step == 1) {
