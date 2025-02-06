@@ -176,9 +176,9 @@
                                             </button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
-                                        @foreach ($potluckDetail['podluck_category_list'] as $key $category)
+                                        @foreach ($potluckDetail['podluck_category_list'] as $category)
                                         
-                                        <div class="category-main-dishesh list-slide-{{$key}}">
+                                        <div class="category-main-dishesh">
 
 
                                                 @php
