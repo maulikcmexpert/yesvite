@@ -50,7 +50,7 @@
                                 @if ($Allstory['profile'] != '')
                                     <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "
                                         class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                        onclick="AllUserStory( {{ $event }},{{ $Allstory['id'] }})" />
+                                        onclick="AllUserStory( {{ $event }},{{  $users->id  }})" />
                                     {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
                                 onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
