@@ -114,7 +114,62 @@ $(".notification-btn").on("click", function () {
         },
     });
 });
+$(document).on("click", ".mobile-calender-btn", function () {
+    $(".mobile-menu-wrp").removeClass("active");
+    $(".line").removeClass("active");
+    // var text = this.innerText;
+    var text = this.textContent.trim(); // Use textContent.trim()
+    var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.8359 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.41406 7.57422H17.5807" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.5762 11.4167H13.5836" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.5762 13.9167H13.5836" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.498 11.4167H10.5055" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.498 13.9167H10.5055" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7.41209 11.4167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>`;
+    var listSvg = `<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                          <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                          <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>`;
 
+    var $textSpan = $(this).find(".responsive-text");
+    var $iconSpan = $(this).find(".responsive-icon");
+    console.log($(this).html());
+    if (text == "Calendar") {
+        $textSpan.text("List View");
+        $iconSpan.html(listSvg);
+        $(".responsive-calendar").css("display", "flex");
+        $(".responsive-calender-month-text").css("display", "inline-block");
+    }
+
+    if (text == "List View") {
+        $textSpan.text("Calendar");
+        $iconSpan.html(calendarSvg);
+        $(".responsive-calendar").css("display", "none");
+        $(".responsive-calender-month-text").css("display", "none");
+    }
+});
+
+$(document).on("click", ".profile-calender-view", function () {
+    var $textSpan = $(".mobile-calender-btn").find(".responsive-text");
+    var $iconSpan = $(".mobile-calender-btn").find(".responsive-icon");
+    var listSvg = `<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+</svg>`;
+
+    $textSpan.text("List View");
+    $iconSpan.html(listSvg);
+
+    $(".responsive-calendar").css("display", "flex");
+    $(".responsive-calender-month-text").css("display", "inline-block");
+});
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
@@ -887,61 +942,7 @@ $(function () {
     sticky_relocate();
 });
 
-$(document).on("click", ".mobile-calender-btn", function () {
-    $(".mobile-menu-wrp").removeClass("active");
-    $(".line").removeClass("active");
-    var text = this.innerText;
-    var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.8359 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M3.41406 7.57422H17.5807" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.5762 11.4167H13.5836" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13.5762 13.9167H13.5836" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.498 11.4167H10.5055" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.498 13.9167H10.5055" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7.41209 11.4167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>`;
-    var listSvg = `<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                          <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                          <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>`;
 
-    var $textSpan = $(this).find(".responsive-text");
-    var $iconSpan = $(this).find(".responsive-icon");
-    console.log($(this).html());
-    if (text == "Calendar") {
-        $textSpan.text("List View");
-        $iconSpan.html(listSvg);
-        $(".responsive-calendar").css("display", "flex");
-        $(".responsive-calender-month-text").css("display", "inline-block");
-    }
-
-    if (text == "List View") {
-        $textSpan.text("Calendar");
-        $iconSpan.html(calendarSvg);
-        $(".responsive-calendar").css("display", "none");
-        $(".responsive-calender-month-text").css("display", "none");
-    }
-});
-
-$(document).on("click", ".profile-calender-view", function () {
-    var $textSpan = $(".mobile-calender-btn").find(".responsive-text");
-    var $iconSpan = $(".mobile-calender-btn").find(".responsive-icon");
-    var listSvg = `<svg class="" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-</svg>`;
-
-    $textSpan.text("List View");
-    $iconSpan.html(listSvg);
-
-    $(".responsive-calendar").css("display", "flex");
-    $(".responsive-calender-month-text").css("display", "inline-block");
-});
 
 // $(document).on('click','.event_event_cancel_option',function(){
 //   $('.event_event_cancel_option').removeClass('active_option'); // Optional: Remove active class from all others

@@ -155,6 +155,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
+                    ->whereNull('sync_id')
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
@@ -198,7 +199,8 @@ class EventController extends BaseController
                 $invitedContactUsers = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
-                    ->whereNull('user_id')
+                    // ->whereNull('user_id')
+                    ->whereNotNull('sync_id')
                     ->get();
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
@@ -297,27 +299,7 @@ class EventController extends BaseController
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
 
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
-                // if (!empty($invitedUser)) {
-                //     foreach ($invitedUser as $guestVal) {
-                //          if ($guestVal->is_co_host == '1') {
-
-                //             if ($guestVal->user->is_user_phone_contact == '1') {
-                //                 $guestCoHostDetail['first_name'] = (!empty($guestVal->user->firstname) && $guestVal->user->firstname != NULL) ? $guestVal->user->firstname : "";
-                //                 $guestCoHostDetail['last_name'] = (!empty($guestVal->user->lastname) && $guestVal->user->lastname != NULL) ? $guestVal->user->lastname : "";
-                //                 $guestCoHostDetail['email'] = (!empty($guestVal->user->email) && $guestVal->user->email != NULL) ? $guestVal->user->email : "";
-                //                 $guestCoHostDetail['country_code'] = (!empty($guestVal->user->country_code) && $guestVal->user->country_code != NULL) ? strval($guestVal->user->country_code) : "";
-                //                 $guestCoHostDetail['phone_number'] = (!empty($guestVal->user->phone_number) && $guestVal->user->phone_number != NULL) ? $guestVal->user->phone_number : "";
-                //                 $guestCoHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['guest_co_host_list'][] = $guestCoHostDetail;
-                //             } elseif ($guestVal->user->is_user_phone_contact == '0') {
-                //                 $coHostDetail['user_id'] = (!empty($guestVal->user_id) && $guestVal->user_id != NULL) ? $guestVal->user_id : "";
-                //                 $coHostDetail['prefer_by'] = (!empty($guestVal->prefer_by) && $guestVal->prefer_by != NULL) ? $guestVal->prefer_by : "";
-                //                 $eventDetail['co_host_list'][] = $coHostDetail;
-                //             }
-                //         }
-                //     }
-                //     }
-                // $eventDetail['events_schedule_list'] = [];
+                
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
 
@@ -4003,7 +3985,8 @@ class EventController extends BaseController
                 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
                 'isupadte' => false,
-                'is_registry' => $gift
+                'is_registry' => $gift,
+                'event_id' => encrypt($eventId)
             ]);
         } else {
             return response()->json([

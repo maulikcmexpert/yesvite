@@ -1454,6 +1454,7 @@ main {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .posts-card-like-comment-right button{

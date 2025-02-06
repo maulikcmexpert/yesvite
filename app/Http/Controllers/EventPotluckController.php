@@ -33,6 +33,7 @@ class EventPotluckController extends Controller
 {
     public function index(String $id)
     {
+        
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
@@ -42,12 +43,40 @@ class EventPotluckController extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
+            // New Code 
             $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
                 $query->with(['users', 'user_potluck_items' => function ($subquery) {
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
 
+            // if (!empty($eventpotluckData)) {
+                
+            //     // dd($eventDetail);
+            // }
+
+
+
+          
+
+
+
+
+
+
+
+            // End Code
+
+
+
+
+
+            $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+                $query->with(['users', 'user_potluck_items' => function ($subquery) {
+                    $subquery->with('users')->sum('quantity');
+                }]);
+            }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
+           
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
 
 
@@ -62,10 +91,78 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
+        
 
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
+               
+                $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
+                $categories = session()->get('category', []);
+                $totalCategoryItem = 0;
+                foreach ($eventpotluckData as  $key => $value) {
+                 
+                    $potluckCategory['id'] = $value->id;
+                    $potluckCategory['category'] = $value->category;
+                    $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
+                    $potluckCategory['quantity'] = $value->quantity;
+                    $potluckCategory['items'] = [];
+                    $categoryQuantity = 0;
+                    $remainingQnt = 0;
+                    $totalItem = 0; 
+                   
+                   
+                    if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+
+                        $itemData = [];
+                        foreach ($value->event_potluck_category_item as $itemkey => $itemValue) {
+                         
+                            $itmquantity = 0;
+                            $innnerUserItem = 0;
+                            $potluckItem['id'] =  $itemValue->id;
+                            $potluckItem['description'] =  $itemValue->description;
+                            $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
+                            $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
+                            $potluckItem['quantity'] =  $itemValue->quantity;
+                            $potluckItem['self_bring_item'] =  $itemValue->self_bring_item;
+                            $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
+                            $potluckItem['spoken_quantity'] =  $spoken_for;
+                            $potluckItem['item_carry_users'] = [];
+                            foreach ($itemValue->user_potluck_items as $userKey => $itemcarryUser) {
+                                $userPotluckItem['id'] = $itemcarryUser->id;
+                                $userPotluckItem['user_id'] = $itemcarryUser->user_id;
+                                $userPotluckItem['is_host'] = ($itemcarryUser->user_id == $id) ? 1 : 0;
+                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('public/storage/profile/' . $itemcarryUser->users->profile);
+                                $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
+                                $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
+                                $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
+                                $potluckItem['item_carry_users'][] = $userPotluckItem;
+                                $itmquantity = $itmquantity +  $itemcarryUser->quantity;
+                                $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
+                                if ($itemcarryUser->user_id != $user->id) {
+                                    $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
+                                }
+                            }
+                            $totalItem = $totalItem + 1;
+                            $remainingQnt = $remainingQnt + $itemValue->quantity;
+                          
+                            $potluckItem['itmquantity'] =  $itmquantity;
+                            $potluckItem['innerUserQnt'] =  $innnerUserItem;
+
+                            $potluckCategory['items'][] = $potluckItem;
+                            $totalCategoryItem++;
+                        }
+                    }
+                    //$data['remainingQnt1']= $remainingQnt;
+                    // dd($remainingQnt);
+                    $remainingQnt =  $remainingQnt - $categoryQuantity;
+                    $potluckCategory['remainingQnt'] = $remainingQnt;
+                    $potluckCategory['categoryQuantity'] = $categoryQuantity;
+                    $potluckCategory['totalItem'] = $totalItem;
+                    $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
+                    $potluckDetail['podluck_category_list_new'][] = $potluckCategory;
+                }
+                $potluckDetail['totalCategoryItem'] =  $totalCategoryItem;
                 //   dd($eventpotluckData);
                 foreach ($eventpotluckData as $value) {
                     $itempotluckCategory['id'] = $value->id;

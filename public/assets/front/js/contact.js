@@ -156,6 +156,7 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
+                    $("#yesviteUser").html('');
                     $("#home_loader").hide();
                     return;
                 }
@@ -250,6 +251,7 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 if (data.status == "0") {
                     $(".no-phone-data").css("display","block");
+                    $("#yesvitePhones").html('');
                     $("#home_loader").hide();
                     // busy2 = true; 
                     busy2 = false;

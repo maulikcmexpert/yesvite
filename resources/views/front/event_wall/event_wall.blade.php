@@ -443,6 +443,7 @@
                                                                         <i class="fa-regular fa-heart"
                                                                             id="show_Emoji"></i>
                                                                     @endif
+                                                                    </button>
 
                                                                     <div class="photos-likes-options-wrp emoji-picker"
                                                                         id="emojiDropdown" style="display: none;">
@@ -466,7 +467,6 @@
                                                                             alt="Clap Emoji" class="emoji"
                                                                             data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                     </div>
-                                                                </button>
 
                                                                 @if ($post['commenting_on_off'] == '1')
                                                                     <button
@@ -548,16 +548,18 @@
                                                             <div class="posts-card-show-all-comments-inner">
                                                                 <ul class="top-level-comments">
 
+                                                                    <input type="hidden"
+                                                                    class="parent_comment_id"
+                                                                    value="">
+                                                                    
+                                                                   
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
                                                                             data-comment-id="{{ $comment['id'] }}">
                                                                             <input type="hidden"
-                                                                                class="parent_comment_id"
-                                                                                value="">
-                                                                                <input type="hidden"
-                                                                                class="data_comment_id"
-                                                                                value="{{ $comment['id'] }}">
+                                                                            class="data_comment_id"
+                                                                            value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
@@ -1446,7 +1448,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
+                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                             <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
@@ -1462,7 +1464,7 @@
                                 <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
                                    ></textarea>
                             </div>
-                        </form>
+
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -1470,7 +1472,7 @@
                                     <button type="button" class="uploadButton create-post-head-upload-btn d-none"><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
                                         <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
-                                            accept="image/*"></button>
+                                            accept="image/* video/*" multiple></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -1494,9 +1496,8 @@
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">
-                                <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
+
+
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
@@ -1538,10 +1539,10 @@
 
                                         </div>
                                     </div>
-                                </form>
+
                             </div>
                         </div>
-
+                        </form>
                         <div class="create-post-poll-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>POLL</h4>
@@ -1710,7 +1711,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="post_privacy"
-                                        id="flexRadioDefault4" value=" 4">
+                                        id="flexRadioDefault4" value="4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         RSVP’d - No Reply
                                     </label>

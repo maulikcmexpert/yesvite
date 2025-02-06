@@ -137,7 +137,7 @@ $(document).ready(function () {
                     $("#categoryModal").modal("hide");
 
                     console.log(response.data);
-
+                    window.location.href = "";
                     // Append the new accordion item into the correct container
                     const categoryList = $(
                         'div[data-category-id="' + categoryId + '"] .accordion'
@@ -232,7 +232,7 @@ $(document).on("click", ".plus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-    updateTOP(categoryKey);
+
     const item_id = $(this).data("item-id");
 
     // Increment the quantity
@@ -293,6 +293,7 @@ $(document).on("click", ".plus", function () {
         overQuantityElement.addClass("d-none"); // Hide the over-quantity element
         // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
     }
+    updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
 
@@ -302,7 +303,7 @@ $(document).on("click", ".minus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-    updateTOP(categoryKey);
+
     const item_id = $(this).data("item-id");
 
     // Decrement the quantity, but not below 0
@@ -358,6 +359,7 @@ $(document).on("click", ".minus", function () {
         overQuantityElement.addClass("d-none"); // Hide the over-quantity element
         // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
     }
+    updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
 $(document).on("click", ".saveItemBtn", function () {
@@ -588,10 +590,14 @@ function updateTOP(categoryIndex) {
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
-        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val();
+        console.log({ inputQty });
+        let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
+        console.log({ innerUserQnt });
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
+        console.log({ inputQty });
+
         if (inputQty < requiredQty) {
             totalMissing += requiredQty - inputQty;
         } else if (inputQty > requiredQty) {
