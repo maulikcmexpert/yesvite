@@ -351,7 +351,7 @@ header{
     width: 14px;
     height: 14px;
     border: 2px solid var(--white);
-    background-color: #0CAF60;
+    background-color: red;
     position: absolute;
     bottom: -2px;
     right: 0;
