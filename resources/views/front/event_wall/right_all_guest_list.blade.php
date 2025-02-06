@@ -23,7 +23,7 @@ $invite=$all_invited_user['all_invited_users'];
                                                     {{ $initials }}
                                                 </h5>
                                             @endif
-                                            <span class="active-dot"></span>
+                                            <span class="inactive-dot"></span>
                                         </div>
                                         <div class="posts-card-head-left-content contact_search"
                                             data-search = "{{ $guest['first_name'] }} {{ $guest['last_name'] }}">
