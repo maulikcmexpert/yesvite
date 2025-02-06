@@ -66,11 +66,11 @@ $(document).ready(function () {
                         `${response.count} Likes`
                     );
                     let reactionImage = "";
-                    if (reaction === "\\u{1F604}") {
+                    if (reaction === "\u{1F604}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
-                    } else if (reaction === "\\u{1F60D}") {
+                    } else if (reaction === "\u{1F60D}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
-                    } else if (reaction === "\\u{2764}") {
+                    } else if (reaction === "\u{2764}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
                     } else {
                         reactionImage = "";
