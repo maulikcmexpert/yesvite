@@ -4078,6 +4078,7 @@ function savePage1Data(close = null, direct = false) {
         eventData.state = state;
         eventData.zipcode = zipcode;
         eventData.city = city;
+        eventData.schedule = schedule;
         eventData.message_to_guests = message_to_guests;
         eventData.events_schedule = events_schedule;
         eventData.longitude = longitude;
@@ -8666,6 +8667,9 @@ async function step2Open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
     }
     console.log(design);
 
