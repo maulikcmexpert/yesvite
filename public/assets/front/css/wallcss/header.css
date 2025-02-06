@@ -347,6 +347,17 @@ header{
     border-radius: 50%;
 }
 
+.inactive-dot{
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--white);
+    background-color: red;
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    border-radius: 50%;
+}
+
 .notification-drodown-body-inner-content{
     width: 100%;
 }
