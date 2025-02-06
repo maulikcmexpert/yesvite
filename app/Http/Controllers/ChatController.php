@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\contact_sync;
 use App\Models\User;
 use App\Models\UserReportChat;
 use Carbon\Carbon;
@@ -62,12 +63,23 @@ class ChatController extends Controller
     }
     public function index($id = null,$is_host=null)
     {
+        $hosts_id="";
         $hosts_name="";
-        if($id!=null){
-            $hosts_id=decrypt($id);
-            $hosts_data=User::where('id',$hosts_id)->first();
-            $hosts_name=$hosts_data->firstname . ' ' . $hosts_data->lastname;
+        $host_profile="";
+        if ($id !== null) {
+            $hosts_id = decrypt($id);
+            $hosts_data = User::where('id', $hosts_id)->first();
+            if (!$hosts_data) {
+                $hosts_data = contact_sync::where('id', $hosts_id)->first();
+            }
+        
+            if ($hosts_data) {
+                $hosts_name = trim(($hosts_data->firstName ?? $hosts_data->firstname) . ' ' . ($hosts_data->lastName ?? $hosts_data->lastname));
+                $photo_field = isset($hosts_data->photo) && !empty($hosts_data->photo) ? $hosts_data->photo : $hosts_data->profile;
+                $hosts_profile = !empty($photo_field) ? url('/public/storage/profile/' . $photo_field) : "";
+            }
         }
+
         $userId = auth()->id();
         $userData = User::findOrFail($userId);
 
@@ -173,7 +185,10 @@ class ChatController extends Controller
             'css1',
             'messages',
             'userId',
-            'userName'
+            'userName',
+            'hosts_id',
+            'hosts_name',
+            'hosts_profile'
         ));
     }
 

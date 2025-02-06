@@ -115,10 +115,13 @@ class EventPotluckController extends Controller
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                         $itemData = [];
+                        $totalMissing = 0;
+                        $totalOver = 0;
                         foreach ($value->event_potluck_category_item as $itemkey => $itemValue) {
                          
                             $itmquantity = 0;
                             $innnerUserItem = 0;
+                            $userQuantity=0;
                             $potluckItem['id'] =  $itemValue->id;
                             $potluckItem['description'] =  $itemValue->description;
                             $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -141,8 +144,18 @@ class EventPotluckController extends Controller
                                 $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 if ($itemcarryUser->user_id != $user->id) {
                                     $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
+                                }else{
+                                    $userQuantity = $userQuantity + $itemcarryUser->quantity;
                                 }
+
                             }
+                            $userQuantity =  $userQuantity + $innnerUserItem;
+                            if ($userQuantity <  $itemValue->quantity) {
+                                $totalMissing +=  $itemValue->quantity - $userQuantity;
+                            } else if ($userQuantity >  $itemValue->quantity) {
+                                $totalOver += $userQuantity -  $itemValue->quantity;
+                            }
+                            
                             $totalItem = $totalItem + 1;
                             $remainingQnt = $remainingQnt + $itemValue->quantity;
                           
@@ -155,7 +168,10 @@ class EventPotluckController extends Controller
                     }
                     //$data['remainingQnt1']= $remainingQnt;
                     // dd($remainingQnt);
+                    
                     $remainingQnt =  $remainingQnt - $categoryQuantity;
+                    $potluckCategory['totalItem'] = $totalItem;
+                    $potluckCategory['totalOver'] = $totalOver;
                     $potluckCategory['remainingQnt'] = $remainingQnt;
                     $potluckCategory['categoryQuantity'] = $categoryQuantity;
                     $potluckCategory['totalItem'] = $totalItem;
