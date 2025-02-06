@@ -649,6 +649,7 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
+        $title = $eventCreator->event_name . ' wall';
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
             ->withCount([
