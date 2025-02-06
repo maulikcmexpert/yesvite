@@ -41,7 +41,7 @@
                 </li>
 
             </div>
-{{-- {{dd($storiesList )}} --}}
+
             @foreach ($storiesList as $Allstory)
                 <div class="swiper-slide">
                     <li class="wall-main-story-item story-unseen">
@@ -50,7 +50,7 @@
                                 @if ($Allstory['profile'] != '')
                                     <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "
                                         class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                        onclick="AllUserStory( {{ $event }},{{ $Allstory['user_id'] }})" />
+                                        onclick="AllUserStory( {{ $event }},{{ $Allstory['id'] }})" />
                                     {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
                                 alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
                                 onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
@@ -71,7 +71,7 @@
                                     @endphp
                                     <h5 class="{{ $fontColor }}" class="profile-pic"
                                         id="profile-pic-{{ $Allstory['id'] }}"
-                                        onclick="AllUserStory( {{ $event }},{{ $Allstory['user_id'] }})">
+                                        onclick="AllUserStory( {{ $event }},{{ $users->id }})">
                                         {{ $initials }}
                                     </h5>
                                 @endif
