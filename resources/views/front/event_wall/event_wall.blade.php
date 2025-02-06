@@ -1852,7 +1852,7 @@
                                                     <!-- Reaction Emoji Section -->
                                                     <div
                                                         class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/heart-emoji.png') }}"
                                                             alt="{{ $reaction }}" loading="lazy">
                                                     </div>
                                                 </div>
