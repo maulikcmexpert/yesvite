@@ -91,12 +91,12 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
-            dd(1);
+        
 
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
-              
+                dd(1);
                 $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
                 $categories = session()->get('category', []);
                 $totalCategoryItem = 0;
