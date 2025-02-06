@@ -2171,16 +2171,6 @@
     width: 50%;
     min-width: 50%;
     height: 100%;
-    -webkit-background-clip: padding-box;
-    -webkit-text-fill-color: #fccd1e !important;
-    /* border: 2px solid red; */
-
-    /* WebKit Fixes */
-    -webkit-background-clip: border-box;
-    -webkit-text-fill-color: inherit;
-
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow .progress-bar-fill{
@@ -2189,11 +2179,23 @@
     min-width: 50%;
     height: 8px;
     position: absolute;
-    top: 33%;
+    top: 31%;
     transform: translateY(-50%);
     right: -5px;
-    border-radius: 5px;
+    border-radius: 50px;
     left: 0;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.green .progress-bar-fill{
+    background-image: linear-gradient(#23aa26, #23aa26);
+    width: 75%;
+    height: 8px;
+    position: absolute;
+    top: 31%;
+    transform: translateY(-50%);
+    right: -5px;
+    left: 0;
+    border-radius: 50px;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {
@@ -2201,9 +2203,33 @@
     width: 99%;
 }
 
+.home-latest-draf-card .progress-bar__wrapper.blue .progress-bar-fill{
+    background-image: linear-gradient(#3bbee8, #3bbee8);
+    width: 99%;
+    height: 8px;
+    position: absolute;
+    top: 31%;
+    transform: translateY(-50%);
+    right: -5px;
+    border-radius: 50px;
+    left: 0;
+}
+
 .home-latest-draf-card .progress-bar__wrapper.red #progress-bar::after {
     background: #e03137;
     width: 25%;
+}
+
+.home-latest-draf-card .progress-bar__wrapper.red .progress-bar-fill{
+    background-image: linear-gradient(#e03137, #e03137);
+    width: 25%;
+    height: 8px;
+    position: absolute;
+    top: 31%;
+    transform: translateY(-50%);
+    right: -5px;
+    border-radius: 50px;
+    left: 0;
 }
 
 .home-latest-draf-card .progress-bar__wrapper h4 {
