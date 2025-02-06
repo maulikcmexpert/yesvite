@@ -1361,7 +1361,7 @@ class EventWallController extends Controller
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        if ($creatEventPost->id  && $request->hasFile('files')) {
+        if ($creatEventPost->id  && $request->file('files')) {
             $postimages = $request->file('files');
 
             $video = 0;
