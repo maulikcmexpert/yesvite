@@ -408,7 +408,7 @@
                                                             @foreach ($category['items'] as $item)
                                                             <input type="hidden"
                                                                             class="category-item-quantity"
-                                                                            value="{{ $items['quantity'] }}">
+                                                                            value="{{ $item['quantity'] }}">
 
                                                                 <div class="accordion-item active">
                                                                     <input type="hidden" id="category_item_id"
