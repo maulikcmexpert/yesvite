@@ -301,6 +301,7 @@ $(document).on('click', '.delete_failed_contact', function () {
             console.log(response);
             if (response.success ==true) {
                 toastr.success(response.message);
+                $('#failed').modal('hide');
                 // // Find the guest container by guestId and remove it from the DOM
                 $('<div id="pageOverlay"></div>').css({
                     position: 'fixed',
