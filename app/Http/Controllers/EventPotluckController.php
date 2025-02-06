@@ -107,7 +107,8 @@ class EventPotluckController extends Controller
                     $potluckCategory['items'] = [];
                     $categoryQuantity = 0;
                     $remainingQnt = 0;
-                    $totalItem = 0;
+                    $totalItem = 0; 
+                    dd($remainingQnt);
 
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
