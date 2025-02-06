@@ -2274,6 +2274,7 @@
 </script>
 @push('scripts')
 <script>
+    alert(base_url)
     function initMapDirection() {
         var eventLocation = { lat: 23.0981684 , lng: 74.1643497};
 
@@ -2287,7 +2288,7 @@
             map: map,
             title: "Jhalod",
             icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png", // Custom marker icon
+                url: base_url+"pin.svg", // Custom marker icon
                 scaledSize: new google.maps.Size(40, 40) // Adjust size
             }
         });
