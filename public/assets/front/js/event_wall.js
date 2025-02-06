@@ -1386,11 +1386,11 @@ $(document).on('click', function (e) {
         $('#emojiDropdown').hide(); // Hide emoji picker when clicked outside
     }
 });
-$(document).on('click', function (e) {
-    if (!$(e.target).closest('.photo-card-head-right').length) {
-        $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
-    }
-});
+// $(document).on('click', function (e) {
+//     if (!$(e.target).closest('.photo-card-head-right').length) {
+//         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+//     }
+// });
 // function getEmojiUnicode(emoji) {
 //     switch (emoji) {
 //         case '❤️':
