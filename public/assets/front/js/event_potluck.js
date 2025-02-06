@@ -231,6 +231,8 @@ $(document).on("click", ".plus", function () {
     const input = container.find(".itemQty");
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
+    const categoryKey = $(this).data("categoryKey");
+    updateTOP(categoryKey);
     const item_id = $(this).data("item-id");
 
     // Increment the quantity
@@ -299,6 +301,8 @@ $(document).on("click", ".minus", function () {
     const input = container.find(".itemQty");
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
+    const categoryKey = $(this).data("categoryKey");
+    updateTOP(categoryKey);
     const item_id = $(this).data("item-id");
 
     // Decrement the quantity, but not below 0

@@ -565,6 +565,7 @@
                                                                                 <span
                                                                                     class="accordion-button plus_icon_user collapsed"
                                                                                     data-category-id="{{ $category['id'] }}"
+                                                                                    data-categoryKey="{{ $key }}"
                                                                                     data-item-id="{{ $item['id'] }}"
                                                                                     data-max="{{ $item['quantity'] }}"
                                                                                     data-event-id="{{ $event }}"
