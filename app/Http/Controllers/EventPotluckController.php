@@ -155,11 +155,11 @@ class EventPotluckController extends Controller
                     $potluckCategory['categoryQuantity'] = $categoryQuantity;
                     $potluckCategory['totalItem'] = $totalItem;
                     $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
-                    $eventDetail['podluck_category_list'][] = $potluckCategory;
+                    $potluckCategoryData['podluck_category_list'][] = $potluckCategory;
                 }
-                $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
+                $potluckCategoryData['totalCategoryItem'] =  $totalCategoryItem;
 
-                dd($$eventDetail);
+                dd($potluckCategoryData);
                 
 
 
