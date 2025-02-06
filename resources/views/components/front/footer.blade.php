@@ -490,6 +490,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         updateUserStatuses();
         $('.see-all-guest-right-btn').on("click",function(){
             console.log("updateUser Status")
+            setTimeout(function(){
+                updateUserStatuses();
+            },2000)
             updateUserStatuses();
         })
         })();
