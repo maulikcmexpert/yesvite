@@ -1,4 +1,4 @@
-{{dd($storiesList)}}
+{{-- {{dd($storiesList)}} --}}
 <div class="wall-main-story-wrp">
     <div class="swiper story-slide-slider">
         <div class="swiper-wrapper">
