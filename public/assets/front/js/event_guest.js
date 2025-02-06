@@ -326,15 +326,14 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 
 $(document).on('click','.re_send_failed_invites', function() {
-    
+    var event_id = $('#event_id').val();
+
     let userIds = [];
     $('.failed_check_resend_email').each(function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
         let app_user = $(this).attr('data-app_user');
-        let event_id = $('#event_id').val();
-        ;
-        userIds.push({ id: userId, prefer_by: preferBy,event_id:event_id,app_user:app_user});
+        userIds.push({ id: userId, prefer_by: preferBy,app_user:app_user});
     });
 
     console.log(userIds);
@@ -343,7 +342,7 @@ $(document).on('click','.re_send_failed_invites', function() {
     $.ajax({
         url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
         type: "POST",
-        data: JSON.stringify({ guest_list: userIds}),
+        data: JSON.stringify({ guest_list: userIds,event_id:event_id}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum

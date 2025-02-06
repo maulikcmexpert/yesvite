@@ -2647,29 +2647,29 @@ class EventWallController extends Controller
                             }
                         }
                         EventInvitedUser::create([
-                            'event_id' => $value['event_id'],
+                            'event_id' => $request['event_id'],
                             'prefer_by' => $value['prefer_by'],
                             'sync_id' => $value['id'],
                             'user_id' => $newUserId
                         ]);
                     } else {
-                        $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $value['event_id'], 'sync_id' => $id])->first();
+                        $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $request['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
                     $newInviteGuest[] = ['id' => $id];
                 } else {
 
-                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $value['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
+                    $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $request['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
                         EventInvitedUser::create([
-                            'event_id' => $value['event_id'],
+                            'event_id' => $request['event_id'],
                             'prefer_by' => $value['prefer_by'],
                             'user_id' => $value['id']
                         ]);
                     } else {
-                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $value['event_id'], 'user_id' => $id])->first();
+                        $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $request['event_id'], 'user_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
                         $updateUser->save();
                     }
@@ -2687,7 +2687,7 @@ class EventWallController extends Controller
                 // dd($filteredIds);
                 $notificationParam = [
                     'sender_id' => $user->id,
-                    'event_id' => $value['event_id'],
+                    'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
@@ -2700,10 +2700,9 @@ class EventWallController extends Controller
                 );
                 $notificationParam = [
                     'sender_id' => $user->id,
-                    'event_id' => $value['event_id'],
+                    'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
-
                 sendNotificationGuest('invite', $notificationParam);
             }
             if($is_failed=="0"){
