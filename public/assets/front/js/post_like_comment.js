@@ -82,16 +82,25 @@ $(document).ready(function () {
     });
     function updateReactionModal(postId, postReactions) {
         let reactionListHtml = "";
+        let reactionTabsHtml = "";
         let reactionIcons = {
-            "\\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
-            "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png",  // 👍
-            "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-            "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-            "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png",  // 👏
+            "\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
+            "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png",  // 👍
+            "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+            "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+            "\u{1F44F}": base_url + "assets/front/img/clap-icon.png",  // 👏
         };
 
+        // Count reactions
+        let reactionCounts = {};
         postReactions.forEach(reaction => {
-            let profileImage = reaction.profile ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
+            reactionCounts[reaction.reaction] = (reactionCounts[reaction.reaction] || 0) + 1;
+        });
+
+        // Generate reaction list
+        postReactions.forEach(reaction => {
+            let profileImage = reaction.profile
+                ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
                 : `<h5 class="fontcolor${reaction.username.charAt(0).toUpperCase()}">${reaction.username.charAt(0).toUpperCase()}</h5>`;
 
             reactionListHtml += `
@@ -107,14 +116,39 @@ $(document).ready(function () {
                             </div>
                         </div>
                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/default-icon.png'}" alt="${reaction.reaction}">
+                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/heart-emoji.png'}" alt="${reaction.reaction}">
                         </div>
                     </div>
                 </li>`;
         });
 
-        $(`#nav-all-reaction-${postId} ul`).html(reactionListHtml);
+        let ul = document.getElementsByClassName(`nav-all-reaction-tab-${postId}`)[0].querySelector('ul');
+
+
+        $(ul).html(reactionListHtml);
+
+
+        reactionTabsHtml += `
+            <button class="nav-link active" id="nav-all-reaction-tab-${postId}"
+                data-bs-toggle="tab" data-bs-target="#nav-all-reaction-${postId}"
+                type="button" role="tab" aria-controls="nav-all-reaction" aria-selected="true">
+                All ${postReactions.length}
+            </button>`;
+
+        Object.keys(reactionCounts).forEach(reaction => {
+            reactionTabsHtml += `
+                <button class="nav-link" id="nav-${reaction}-reaction-tab-${postId}"
+                    data-bs-toggle="tab" data-bs-target="#nav-${reaction}-reaction-${postId}"
+                    type="button" role="tab" aria-controls="nav-${reaction}-reaction" aria-selected="false">
+                    <img src="${reactionIcons[reaction] || base_url + 'assets/front/img/heart-emoji.png'}" alt="${reaction}">
+                    ${reactionCounts[reaction]}
+                </button>`;
+        });
+
+        // Update reaction tabs
+        $(`#nav-tab-${postId}`).html(reactionTabsHtml);
     }
+
 
     $(document).on("click", "#CommentlikeButton", function () {
 
