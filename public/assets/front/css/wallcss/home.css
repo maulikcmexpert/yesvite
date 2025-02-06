@@ -1388,7 +1388,7 @@ main {
 .posts-card-like-comment-left{
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0px;
 }
 
 .posts-card-like-comment-left ul{
@@ -1424,6 +1424,7 @@ main {
   margin-bottom: 0px;
   color: var(--lightgreay);
   margin-left: 5px;
+  min-width: 70px;
 }
 
 .posts-card-like-comment-left h6{
