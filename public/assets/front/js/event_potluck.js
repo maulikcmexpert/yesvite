@@ -137,7 +137,7 @@ $(document).ready(function () {
                     $("#categoryModal").modal("hide");
 
                     console.log(response.data);
-                    window.reload();
+                    window.location.href = "";
                     // Append the new accordion item into the correct container
                     const categoryList = $(
                         'div[data-category-id="' + categoryId + '"] .accordion'
