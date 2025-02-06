@@ -4,7 +4,14 @@ let guestPhoneList = [];
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
-
+    $(".show-comment-reply-btn").on("click", function () {
+        let currunt = $(this).html();
+        if (currunt == "Show reply") {
+            $(this).html("Hide reply");
+        } else {
+            $(this).html("Show reply");
+        }
+    });
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -410,7 +417,9 @@ $(document).ready(function () {
                             // Find the previous sibling (the comment before this one)
                             let previousComment =
                                 comment.previousElementSibling;
-
+                            if (!previousComment) {
+                                $(comment).parent().prepend(li);
+                            }
                             // Loop until we find the nearest previous <ul> with class "primary-comment-replies"
                             while (previousComment) {
                                 let parentUl = previousComment.closest(
@@ -434,6 +443,27 @@ $(document).ready(function () {
                                 }
                                 previousComment =
                                     previousComment.previousElementSibling;
+                            }
+                        } else {
+                            let comments =
+                                document.getElementsByClassName(
+                                    "commented-user-wrp"
+                                );
+                            let comment = Array.from(comments).find(
+                                (el) => el.dataset.commentId === parentCommentId
+                            );
+                            if (comment) {
+                                console.log(comment);
+                                const parentUl = $(comment).find(
+                                    ".primary-comment-replies"
+                                );
+                                if (parentUl.length) {
+                                    console.log(
+                                        "Found primary-comment-replies under commented-user-wrp, prepending the new comment."
+                                    );
+                                    parentUl.prepend($(li)); // Insert new comment as the first <li> under the current comment's <ul>
+                                    return;
+                                }
                             }
                         }
                         // Append as a reply to the parent comment
