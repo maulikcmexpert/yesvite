@@ -271,15 +271,15 @@
                                             Download Demo CSV
                                         </a>
                                     </div> --}}
-                                    @if(empty($yesvite_phone))
-                                    <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+                                    <!-- @if(empty($yesvite_phone)) -->
+                                    <!-- <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="csv_file" class="pt-2">
                                         <button class="cmn-btn" type="submit">Import CSV</button>
                                     </form>
-                                    @else
+                                    @else -->
                                     @include('front.ajax_phones', ['yesvite_phone' => $yesvite_phone])
-                                    @endif
+                                    <!-- @endif -->
                                 </div>
                             </div>
 
