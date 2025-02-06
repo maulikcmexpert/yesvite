@@ -148,6 +148,7 @@ class EventWallController extends Controller
         $selectedFilters = "";
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
+        $title = $eventCreator->event_name . ' wall';
         $eventPostList = EventPost::with(['user', 'post_image', 'event_post_poll.eventPollOptions'])
             ->withCount([
                 'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
@@ -2619,9 +2620,9 @@ class EventWallController extends Controller
     public function sendInvitation(Request $request)
     {
         $user  = Auth::guard('web')->user();
-        $is_failed="0";
-        if(isset($request->is_failed)&&$request->is_failed!=""){
-            $is_failed="1";
+        $is_failed = "0";
+        if (isset($request->is_failed) && $request->is_failed != "") {
+            $is_failed = "1";
         }
 
         // try {
@@ -2705,7 +2706,7 @@ class EventWallController extends Controller
                 ];
                 sendNotificationGuest('invite', $notificationParam);
             }
-            if($is_failed=="0"){
+            if ($is_failed == "0") {
                 debit_coins($user->id, $request['event_id'], count($ids));
             }
         }
