@@ -28,7 +28,7 @@
     <div class="main-right-guests-wrp common-div-wrp">
         <div class="main-right-guests-head">
             <h3>Guests</h3>
-            <p>{{$total_invite}} Active</p>
+            <p>{{$total_invite}} Total</p>
         </div>
         @php
             // Safely fetch the value of 'event_detail[2]' or set it to null if it doesn't exist
