@@ -528,7 +528,7 @@ $longitude = !empty($eventDetails['longitude'])
                                                 @endphp
 
                                                 <iframe
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74843221347!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1738165607121!5m2!1sen!2sus"
+                                                    src="https://www.google.sk/maps?f=q&amp;output=embed&amp;source=s_q&amp;hl=sk&amp;geocode=&amp;q=https:%2F%2Fwww.google.sk%2Fmaps%2Fms%3Fauthuser%3D0%26vps%3D5%26hl%3Dsk%26ie%3DUTF8%26oe%3DUTF8%26msa%3D0%26output%3Dkml%26msid%3D205427380680792264646.0004fe643d107ef29299a&amp;aq=&amp;sll=48.669026,19.699024&amp;sspn=4.418559,10.821533&amp;ie=UTF8&amp;ll={{ $longitude }},{{ $latitude }}&amp;spn=0.199154,0.399727&amp;t=m&amp;z=3"
                                                     width="600" height="450" style="border:0;" allowfullscreen=""
                                                     loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                                                 </iframe>
