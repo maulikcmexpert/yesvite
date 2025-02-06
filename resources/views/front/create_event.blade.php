@@ -1495,7 +1495,7 @@
                                                 </span>
                                                 <h6 class="me-2 extra-category-h6-{{ $index }}"
                                                     style="color:#34C05C"><span
-                                                        id="extra-category-{{ $index }}">{{ abs($data['remainingQnt']) }}</span>
+                                                        id="extra-category-{{ $index }}">{{ abs($data['totalOver']) }}</span>
                                                     Item Over</h6>
 
                                                 {{-- end code --}}
