@@ -883,6 +883,10 @@ function getClosest15MinuteTime() {
 // }
 function datepicker() {
     $(".timepicker.activity_start_time").each(function (index) {
+        let startTime = inputField.val(); // Get the existing input value
+        if (startTime != "") {
+            inputField.val(startTime);
+        }
         const endPicker = $(this)
             .datetimepicker({
                 format: "LT",
