@@ -57,7 +57,7 @@ class EventPotluckController extends Controller
 
 
 
-            echo 2;die;
+          
 
 
 
@@ -76,7 +76,7 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-
+            dd($eventpotluckData);
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
 
 
