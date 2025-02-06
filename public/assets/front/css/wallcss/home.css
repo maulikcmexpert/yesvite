@@ -1076,6 +1076,7 @@ main {
   right: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  z-index: 2;
 }
 
 .uploded-delete-icon svg{

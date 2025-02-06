@@ -549,12 +549,12 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         }
 
         async function updateUserStatuses() {
-            console.log("updating status")
+           // console.log("updating status")
             const users = document.querySelectorAll(".guest-users");
             let i = 0
             for (const userElement of users) {
                 const userId = userElement.getAttribute("data-userid");
-                console.log({userId})
+               // console.log({userId})
                 if (!userId) continue; // Skip if no userId
 
                 let userData = await getUser(userId);
@@ -579,11 +579,11 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         // Call the function to update statuses
         updateUserStatuses();
         $('.see-all-guest-right-btn').on("click",function(){
-            console.log("updateUser Status")
+            //console.log("updateUser Status")
             setTimeout(function(){
                 updateUserStatuses();
-            },2000)
-            updateUserStatuses();
+            },2500)
+          
         })
         })();
     }
