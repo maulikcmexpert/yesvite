@@ -303,7 +303,7 @@ $(document).on("click", ".minus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-    updateTOP(categoryKey);
+
     const item_id = $(this).data("item-id");
 
     // Decrement the quantity, but not below 0
@@ -359,6 +359,7 @@ $(document).on("click", ".minus", function () {
         overQuantityElement.addClass("d-none"); // Hide the over-quantity element
         // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
     }
+    updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
 $(document).on("click", ".saveItemBtn", function () {
@@ -586,7 +587,7 @@ function updateTOP(categoryIndex) {
         let requiredQty = requiredQtyInput
             ? parseInt(requiredQtyInput.value)
             : 0;
-        conso;
+
         // Get the current user input quantity
         let inputQtyInput = categoryItem.querySelector(".input-qty");
         let inputQty = inputQtyInput ? parseInt(inputQtyInput.value) : 0;
