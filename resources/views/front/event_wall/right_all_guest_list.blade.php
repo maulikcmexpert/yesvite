@@ -14,7 +14,7 @@ $invite=$all_invited_user['all_invited_users'];
 <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
                                     <div class="posts-card-head-left guests-listing-left">
-                                        <div class="posts-card-head-left-img guest-users"  data-userId="{{$guest['id']}}">
+                                        <div class="posts-card-head-left-img guest-users"  data-userId="{{$guest['userId']}}">
                                             @if (!empty($guest['profile']))
                                                 <img src="{{ $guest['profile'] }}"
                                                     alt="">
