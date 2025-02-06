@@ -1469,6 +1469,7 @@ class EventController extends BaseController
 
     public function storeCategoryitemSession(Request $request)
     {
+        dd($request);
         $user = Auth::guard('web')->user();
         $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
