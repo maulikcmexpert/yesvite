@@ -55,8 +55,10 @@
                         <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}">
                             <ul class="home-upcoming-events-card-left-detail">
                                 @if($upcomingEvent['is_event_owner']==1)
-                                <li><span>Hosting</span> {{$upcomingEvent['event_plan_name']}}</li>
-                            @else
+                                    <li><span>Hosting</span> {{$upcomingEvent['event_plan_name']}}</li>
+                                @elseif($upcomingEvent['is_co_host'] == "1")
+                                <li><span>Co-Hosting</span> {{$upcomingEvent['event_plan_name']}}</li>
+                                @else
                                     @if($upcomingEvent['rsvp_status'] == '1')
                                         <li><span>Guest : </span> : RSVP - Yes</li>
                                     @elseif($upcomingEvent['rsvp_status'] == '2')
@@ -64,7 +66,7 @@
                                     @else
                                         <li><span>Guest : </span> : RSVP - Pending</li>
                                     @endif
-                            @endif
+                                @endif
                             <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
                             </ul>
                         </a>
