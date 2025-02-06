@@ -761,7 +761,10 @@ class EventPhotoController extends Controller
                 $eventPostImage->thumbnail = $thumbName;
                 $eventPostImage->save();
             }
-
+            echo $videoCount;
+            echo "===================";
+            echo $imageCount;
+            die;
             return redirect()->back()->with('success', 'Event post uploded successfully!');
         }
 
