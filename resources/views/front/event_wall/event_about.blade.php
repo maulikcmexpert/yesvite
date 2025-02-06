@@ -2275,7 +2275,7 @@
 @push('scripts')
 <script>
     function initMapDirection() {
-        var eventLocation = { lat: 23.0981684; , lng: 74.1643497};
+        var eventLocation = { lat: 23.0981684 , lng: 74.1643497};
 
         var map = new google.maps.Map(document.getElementById("directionmap"), {
             zoom: 14,
