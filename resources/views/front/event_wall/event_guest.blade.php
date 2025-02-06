@@ -1744,7 +1744,7 @@
                                     <!-- <input class="form-check-input failed-checkout" type="checkbox" value=""
                                     id="coming"> -->
                                     @else
-                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                    <input class="form-check-input failed-checkout failed_check_resend_email" type="checkbox" value=""
                                         id="coming">
                                         @endif
                                 </div>
