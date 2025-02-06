@@ -1757,7 +1757,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary re_send_failed_invites failed-btn"
-                        data-bs-dismiss="modal" disabled>Re-send</button>
+                         disabled>Re-send</button>
                     <!-- <button type="button" class="btn btn-secondary success-btn re_send_failed_invites"
                         >Re-send</button> -->
                 </div>
