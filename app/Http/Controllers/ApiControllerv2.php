@@ -421,7 +421,9 @@ class ApiControllerv2 extends Controller
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
 
-            $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
+            $invitedEventsList = Event::with(['event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            }, 'user', 'event_settings', 'event_schedule'])
 
                 ->whereIn('id', $invitedEvents)
                 ->where('start_date', '>=', date('Y-m-d'))
@@ -517,7 +519,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['adults'] = $checkRsvpDone->adults;
                     }
 
-                    $images = EventImage::where('event_id', $value->id)->first();
+                    $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
 
 
 
@@ -697,7 +699,9 @@ class ApiControllerv2 extends Controller
                 })->where('user_id', $user->id)->get()->pluck('event_id');
 
                 $invitedEventsList = Event::query();
-                $invitedEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                $invitedEventsList->with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])
                     ->whereIn('id', $invitedEvents);
                 if ($event_date != "" || $end_event_date != "") {
                     $invitedEventsList->when($event_date, function ($query) use ($event_date, $end_event_date) {
@@ -779,7 +783,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['kids'] = $checkRsvpDone->kids;
                             $eventDetail['adults'] = $checkRsvpDone->adults;
                         }
-                        $images = EventImage::where('event_id', $value->id)->first();
+                        $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                         $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                         $eventDetail['event_date'] = $value->start_date;
 
@@ -926,7 +930,9 @@ class ApiControllerv2 extends Controller
 
                 $totalCounts += EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $input) {
                     $query->where('is_draft_save', '0');
-                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                    $query->with(['event_image' => function ($query) {
+                        $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                    }, 'event_settings', 'user', 'event_schedule'])
                         ->when($input['past_event'] == '1', function ($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
                         })
@@ -953,7 +959,9 @@ class ApiControllerv2 extends Controller
                 // Make sure to handle the retrieved $userInvitedEventList accordingly
                 $userInvitedEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $input) {
                     $query->where('is_draft_save', '0');
-                    $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                    $query->with(['event_image' => function ($query) {
+                        $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                    }, 'event_settings', 'user', 'event_schedule'])
                         // ->where('start_date', '>=', date('Y-m-d'))
                         ->when($input['past_event'] == '1', function ($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
@@ -1007,7 +1015,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                         $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit) && $value->event->event_settings->allow_limit != "") ? $value->event->event_settings->allow_limit : "";
-                        $images = EventImage::where('event_id', $value->event->id)->first();
+                        $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = "";
 
@@ -1167,7 +1175,9 @@ class ApiControllerv2 extends Controller
 
 
 
-                $totalCounts += Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
+                $totalCounts += Event::with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
                     ->when($input['past_event'] == '1', function ($query) {
                         $query->where('end_date', '<', date('Y-m-d'));
                     })
@@ -1188,7 +1198,9 @@ class ApiControllerv2 extends Controller
 
 
 
-                $hostingEvents =  Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
+                $hostingEvents =  Event::with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
                     ->when($input['past_event'] == '1', function ($query) {
                         $query->where('end_date', '<', date('Y-m-d'));
                     })
@@ -1255,7 +1267,7 @@ class ApiControllerv2 extends Controller
                         }
 
 
-                        $images = EventImage::where('event_id', $value->id)->first();
+                        $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
@@ -1403,7 +1415,9 @@ class ApiControllerv2 extends Controller
             if ($input['past_event'] == '1' && $input['hosting'] == '0' && $input['invited_to'] == '0' && $input['need_rsvp_to'] == '0') {
 
                 $usercreatedAllPastEventList = Event::query();
-                $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
+                $usercreatedAllPastEventList->with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
                 if ($event_date != "" || $end_event_date != "") {
                     $usercreatedAllPastEventList->when($event_date, function ($query, $event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
@@ -1435,7 +1449,9 @@ class ApiControllerv2 extends Controller
                 })->where('user_id', $user->id)->get()->pluck('event_id');
 
                 $invitedPastEventsList = Event::query();
-                $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+                $invitedPastEventsList->with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
                 if ($event_date != "" || $end_event_date != "") {
                     $invitedPastEventsList->when($event_date, function ($query, $event_date, $end_event_date) {
                         return $query->whereBetween('start_date', [$event_date, $end_event_date]);
@@ -1517,7 +1533,7 @@ class ApiControllerv2 extends Controller
                             $eventDetail['adults'] = $checkRsvpDone->adults;
                         }
 
-                        $images = EventImage::where('event_id', $value->id)->first();
+                        $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
@@ -1690,7 +1706,9 @@ class ApiControllerv2 extends Controller
                             $que->where('start_date', '>=', date('Y-m-d'));
                         })
                         // ->where('start_date', '>=', date('Y-m-d'))
-                        ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                        ->with(['event_image' => function ($query) {
+                            $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                        }, 'event_settings', 'user', 'event_schedule'])
                         ->orderBy('id', 'DESC');
 
                     $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
@@ -1722,7 +1740,9 @@ class ApiControllerv2 extends Controller
                         })
                         // ->where('start_date', '>=', date('Y-m-d'))
 
-                        ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                        ->with(['event_image' => function ($query) {
+                            $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                        }, 'event_settings', 'user', 'event_schedule'])
                         ->orderBy('id', 'DESC');
 
                     $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
@@ -1784,7 +1804,7 @@ class ApiControllerv2 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                         $eventDetail['allow_limit'] = $value->event->event_settings->allow_limit;
-                        $images = EventImage::where('event_id', $value->event->id)->first();
+                        $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = "";
 
@@ -4405,7 +4425,7 @@ class ApiControllerv2 extends Controller
                 $eventDetail['proplan_variant'] = ($getEventData->proplan_variant != NULL) ? $getEventData->proplan_variant : 0;
                 $eventDetail['is_template_image'] = ($getEventData->is_template_image != NULL) ? $getEventData->is_template_image : 0;
                 $eventDetail['event_images'] = [];
-                $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+                $getEventImages = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->get();
                 if (!empty($getEventImages)) {
                     foreach ($getEventImages as $imgVal) {
                         $eventImageData['id'] = $imgVal->id;
@@ -5847,7 +5867,7 @@ class ApiControllerv2 extends Controller
             DB::beginTransaction();
             if (isset($request->image) && !empty($request->image)) {
                 $images = $request->image;
-                $eventOldImages = EventImage::where('event_id', $request->event_id)->get();
+                $eventOldImages = EventImage::where('event_id', $request->event_id)->orderBy('type', 'ASC')->get();
                 if (!empty($eventOldImages)) {
                     foreach ($eventOldImages as $oldImages) {
                         if (file_exists(public_path('storage/event_images/') . $oldImages->image)) {
@@ -5858,20 +5878,20 @@ class ApiControllerv2 extends Controller
                     }
                 }
                 $a = 0;
-                foreach ($images as $key=> $value) {
+                foreach ($images as $key => $value) {
                     $image = $value;
                     $imageName = time() . $a . '_' . str_replace(' ', '_', $image->getClientOriginalName());
                     $a++;
                     $image->move(public_path('storage/event_images'), $imageName);
-                    $i=1;
-                    if($key == 0){
-                        $i=0;
+                    $i = 1;
+                    if ($key == 0) {
+                        $i = 0;
                     }
 
                     EventImage::create([
                         'event_id' => $request->event_id,
                         'image' => $imageName,
-                        'type'=> $i
+                        'type' => $i
                     ]);
                 }
             }
@@ -6025,7 +6045,7 @@ class ApiControllerv2 extends Controller
                         UserReportToPost::where('event_id', $input['event_id'])->delete();
                     }
 
-                    $event_images = EventImage::where('event_id', $input['event_id'])->get();
+                    $event_images = EventImage::where('event_id', $input['event_id'])->orderBy('type', 'ASC')->get();
                     if (isset($event_images) && !empty($event_images)) {
                         foreach ($event_images as $eventImage) {
                             if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
@@ -6869,7 +6889,9 @@ class ApiControllerv2 extends Controller
         $userNeedRsvpEventList = EventInvitedUser::whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'))
 
-                ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                ->with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+                }, 'event_settings', 'user', 'event_schedule'])
                 ->orderBy('id', 'DESC');
         })->whereHas('user', function ($query) {
             $query->where('app_user', '1');
@@ -6880,7 +6902,7 @@ class ApiControllerv2 extends Controller
         if (count($userNeedRsvpEventList) != 0) {
             foreach ($userNeedRsvpEventList as $value) {
                 $eventData['id'] = $value->event_id;
-                $images = EventImage::where('event_id', $value->event_id)->first();
+                $images = EventImage::where('event_id', $value->event_id)->orderBy('type', 'ASC')->first();
 
                 $eventData['event_images'] = "";
 
@@ -7144,7 +7166,9 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
+            $eventDetail = Event::with(['user', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            }, 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $input['event_id'])->first();
 
@@ -7451,7 +7475,9 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
+            $eventDetail = Event::with(['user', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            }, 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
 
                 $query->where('is_co_host', '1')->with('user');
             }])->withCount(['event_invited_user' => function ($query) {
@@ -8312,7 +8338,7 @@ class ApiControllerv2 extends Controller
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     // dd($isCoHost);
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-                 
+
                     $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
 
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
@@ -10741,7 +10767,9 @@ class ApiControllerv2 extends Controller
         }
 
         try {
-            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $input['event_id'])->first();
+            $eventDetail = Event::with(['user', 'event_settings', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            }, 'event_schedule' => function ($query) {}])->where('id', $input['event_id'])->first();
 
             $eventattending = EventInvitedUser::
                 // whereHas('user', function ($query) {
@@ -12575,7 +12603,9 @@ class ApiControllerv2 extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-        $getEventData = Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])
+        $getEventData = Event::with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+        }, 'event_settings', 'user', 'event_schedule'])
             ->where('id', $input['event_id'])
             ->where('is_draft_save', '0')->first();
 
@@ -12601,7 +12631,7 @@ class ApiControllerv2 extends Controller
         }
 
 
-        $images = EventImage::where('event_id', $getEventData->id)->first();
+        $images = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->first();
 
         $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
 
@@ -13546,7 +13576,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['adults'] = $checkRsvpDone->adults;
                 }
 
-                $images = EventImage::where('event_id', $value->id)->first();
+                $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
 
 
 

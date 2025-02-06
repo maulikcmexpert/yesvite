@@ -130,7 +130,7 @@ class EventPotluckController extends Controller
 
 
                 $eventDetail = Event::with(['user', 'event_image' => function ($query) {
-                    $query->orderBy('type', 'ASC'); // Order event images by type
+                    $query->orderBy('type', 'ASC');
                 }, 'event_schedule', 'event_settings' => function ($query) {
                     $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
                 },  'event_invited_user' => function ($query) {
