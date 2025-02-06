@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\{
     Event,
     EventPost,
@@ -36,19 +37,21 @@ class EventDetailsController extends Controller
 
     protected $perPage;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->perPage = 5;
     }
 
-    public function index(String $id){
-       
+    public function index(String $id)
+    {
+
         $user  = Auth::guard('web')->user();
-        $event_id=$id;
+        $event_id = $id;
         if ($event_id == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
-             //event_wall_data
+            //event_wall_data
             $page = (isset($input['page'])) ? $input['page'] : "1";
             $this->eventViewUser($user->id, $event_id);
             $currentDateTime = Carbon::now();
@@ -102,13 +105,13 @@ class EventDetailsController extends Controller
             //         ->where('user_id', '!=', $user->id)
             //         ->paginate($this->perPage, ['*'], 'page', $page);
             // } else {
-                $total_page_of_stories = ceil($totalStories / $this->perPage);
-                $eventStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
-                    $query->where('created_at', '>', now()->subHours(24));
-                }])
-                    ->where('created_at', '>', now()->subHours(24))
-                    ->where('event_id', $event_id)
-                    ->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', "1");
+            $total_page_of_stories = ceil($totalStories / $this->perPage);
+            $eventStoriesList = EventUserStory::with(['user', 'user_event_story' => function ($query) use ($currentDateTime) {
+                $query->where('created_at', '>', now()->subHours(24));
+            }])
+                ->where('created_at', '>', now()->subHours(24))
+                ->where('event_id', $event_id)
+                ->where('user_id', '!=', $user->id)->paginate($this->perPage, ['*'], 'page', "1");
             // }
             $storiesList = [];
             if (count($eventStoriesList) != 0) {
@@ -486,7 +489,6 @@ class EventDetailsController extends Controller
                             }
                         }
                         $postList[] = $postsNormalDetail;
-                    
                     }
                 }
             }
@@ -497,7 +499,7 @@ class EventDetailsController extends Controller
             $filename = 'event_wall_response.txt';
             $commentnumber = json_encode(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
             Storage::append($filename, $commentnumber);
-            
+
             // return compact('rsvp_status','total_page_of_stories','total_page_of_eventPosts','wallData');
 
             //event_wall_data//
@@ -505,9 +507,17 @@ class EventDetailsController extends Controller
 
 
             //event_about_data
-            $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
-                $query->where('is_co_host', '1')->with('user');
-            }])->where('id', $event_id)->first();
+            $eventDetail = Event::with([
+                'user',
+                'event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC');
+                },
+                'event_schedule',
+                'event_settings',
+                'event_invited_user' => function ($query) {
+                    $query->where('is_co_host', '1')->with('user');
+                }
+            ])->where('id', $event_id)->first();
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -551,7 +561,7 @@ class EventDetailsController extends Controller
             $eventDetails['days_till_event'] = $till_days;
             $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
             $eventDetails['message_to_guests'] = $eventDetail->message_to_guests;
-          
+
             $coHosts = [];
             foreach ($eventDetail->event_invited_user as $hostValues) {
                 $coHostDetail['id'] = $hostValues->user_id;
@@ -570,7 +580,7 @@ class EventDetailsController extends Controller
             $eventDetails['city'] = $eventDetail->city;
             $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
             $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
-            
+
             $eventsScheduleList = [];
             foreach ($eventDetail->event_schedule as $key => $value) {
                 $event_name =  $value->activity_title;
@@ -620,7 +630,7 @@ class EventDetailsController extends Controller
                 if ($eventDetail->event_settings->events_schedule == '1') {
                     $eventData[] = "Event has Schedule";
                 }
-                if ($eventDetail->start_date!=$eventDetail->end_date) {
+                if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
                 if (empty($eventData)) {
@@ -687,7 +697,7 @@ class EventDetailsController extends Controller
             $today_invite_view_percent = 0;
             if ($totalEnvitedUser != 0) {
                 $today_invite_view_percent =   EventInvitedUser::whereHas('user', function ($query) {
-                   $query->where('app_user', '1');
+                    $query->where('app_user', '1');
                 })->where(['event_id' => $eventDetail->id, 'read' => '1', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
             }
 
@@ -700,7 +710,9 @@ class EventDetailsController extends Controller
             //event_about_data//
 
             //event_guest_data
-            $eventDetail = Event::with(['user', 'event_settings', 'event_image', 'event_schedule' => function ($query) {}])->where('id', $event_id)->first();
+            $eventDetail = Event::with(['user', 'event_settings', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC'); // Order event images by type
+            }, 'event_schedule' => function ($query) {}])->where('id', $event_id)->first();
             $eventattending = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
@@ -817,11 +829,11 @@ class EventDetailsController extends Controller
             //  event about view //
             $getEventData = Event::with('event_schedule')->where('id', $event_id)->first();
             $eventGuest['remaining_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? ($getEventData->subscription_invite_count - (count($eventGuest['invited_user_id']) + count($eventGuest['invited_guests']))) : 0;
-           
+
             $totalEnvitedUser = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where(['event_id' => $eventDetail->id])->count();
-           
+
             $todayrsvprate = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])
@@ -856,185 +868,185 @@ class EventDetailsController extends Controller
             //event_guest_data//
 
             //event_photo_data
-                 // $selectedFilters = $request->input('filters');
-                 $getPhotoList = EventPost::query();
-                 $getPhotoList->with(['user', 'event_post_reaction', 'post_image'])->withCount(['event_post_reaction', 'post_image', 'event_post_comment' => function ($query) {
-                     $query->where('parent_comment_id', NULL);
-                 }])->where(['event_id' => $event_id, 'post_type' => '1']);
-                 $eventCreator = Event::where('id', $event_id)->first();
-                 // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
-                 //     $getPhotoList->where(function ($query) use ($selectedFilters, $eventCreator) {
-                 //         foreach ($selectedFilters as $filter) {
-                 //             switch ($filter) {
-                 //                 case 'time_posted':
-                 //                     $query->orderBy('id', 'desc');
-                 //                     break;
-                 //                 case 'guest':
-                 //                     $query->orWhere('user_id', '!=', $eventCreator->user_id);
-     
-                 //                     break;
-                 //                 case 'photos':
-                 //                     $query->orWhereHas('post_image', function ($subQuery) {
-                 //                         $subQuery->where('type', 'image');
-                 //                     });
-                 //                     break;
-                 //                 case 'videos':
-                 //                     $query->orWhereHas('post_image', function ($subQuery) {
-                 //                         $subQuery->where('type', 'video');
-                 //                     });
-                 //                     break;
-                 //                     // Add more cases for other filters if needed
-                 //             }
-                 //         }
-                 //     });
-                 // }
-                 $getPhotoList->orderBy('id', 'desc');
-                 $results = $getPhotoList->get();
-                 $postPhotoList = [];
-                 foreach ($results as $value) {
-                     $ischeckEventOwner = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
-                     $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event_id, 'event_post_id' => $value->id])->first();
-                     if ($postControl != null) {
-     
-                         if ($postControl->post_control == 'hide_post') {
-                             continue;
-                         }
-                     }
-                     $postPhotoDetail['user_id'] = $value->user->id;
-                     $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
-                     $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
-                     $postPhotoDetail['firstname'] = $value->user->firstname;
-                     $postPhotoDetail['lastname'] = $value->user->lastname;
-                     $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
-                     $selfReaction = EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->first();
-                     $postPhotoDetail['is_reaction'] = ($selfReaction != NULL) ? '1' : '0';
-                     $postPhotoDetail['self_reaction'] = ($selfReaction != NULL) ? $selfReaction->reaction : "";
-                     $postPhotoDetail['event_id'] = $value->event_id;
-                     $postPhotoDetail['id'] = $value->id;
-                     $postPhotoDetail['post_message'] = (!empty($value->post_message) || $value->post_message != NULL) ? $value->post_message : "";
-                     $postPhotoDetail['post_time'] = $this->setpostTime($value->updated_at);
-                     $postPhotoDetail['is_in_photo_moudle'] = $value->is_in_photo_moudle;
-                     $photoVideoData = "";
-                     if (!empty($value->post_image)) {
-                         $photData = $value->post_image;
-                         foreach ($photData as $val) {
-                             $photoVideoDetail['id'] = $val->id;
-                             $photoVideoDetail['event_post_id'] = $val->event_post_id;
-                             $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
-                             $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('storage/thumbnails/' . $val->thumbnail) : "";
-                             $photoVideoDetail['type'] = $val->type;
-                             $photoVideoData = $photoVideoDetail;
-                         }
-                     }
-     
-                     $postPhotoDetail['mediaData'] = $photoVideoData;
-                     $postPhotoDetail['total_media'] = ($value->post_image_count - 1 != 0 && $value->post_image_count - 1 != -1)  ? "+" . $value->post_image_count - 1 : "";
-                     $getPhotoReaction = getReaction($value->id);
-                     $reactionList = [];
-                     foreach ($getPhotoReaction as $values) {
-                         $reactionList[] = $values->reaction;
-                     }
-                     $postPhotoDetail['reactionList'] = $reactionList;
-                     $postPhotoDetail['total_likes'] = $value->event_post_reaction_count;
-                     $postPhotoDetail['total_comments'] = $value->event_post_comment_count;
-                     $postPhotoList[] = $postPhotoDetail;
-                 }
-                 if (empty($postPhotoList)) {
-                    $postPhotoList=[];
-                 }
-                //  if (!empty($postPhotoList)) {
-                //     //  return compact('postPhotoList');
-                //      // return response()->json(['status' => 1, 'data' => $postPhotoList, 'message' => "Photo List"]);
-                //  } else {
-                //      $postPhotoList="";
-                //     //  return compact('postPhotoList');
-                //      // return response()->json(['status' => 0, 'data' => $postPhotoList, 'message' => "Photo not found"]);
-                //  }
+            // $selectedFilters = $request->input('filters');
+            $getPhotoList = EventPost::query();
+            $getPhotoList->with(['user', 'event_post_reaction', 'post_image'])->withCount(['event_post_reaction', 'post_image', 'event_post_comment' => function ($query) {
+                $query->where('parent_comment_id', NULL);
+            }])->where(['event_id' => $event_id, 'post_type' => '1']);
+            $eventCreator = Event::where('id', $event_id)->first();
+            // if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
+            //     $getPhotoList->where(function ($query) use ($selectedFilters, $eventCreator) {
+            //         foreach ($selectedFilters as $filter) {
+            //             switch ($filter) {
+            //                 case 'time_posted':
+            //                     $query->orderBy('id', 'desc');
+            //                     break;
+            //                 case 'guest':
+            //                     $query->orWhere('user_id', '!=', $eventCreator->user_id);
 
-                 //event_photo_data//
+            //                     break;
+            //                 case 'photos':
+            //                     $query->orWhereHas('post_image', function ($subQuery) {
+            //                         $subQuery->where('type', 'image');
+            //                     });
+            //                     break;
+            //                 case 'videos':
+            //                     $query->orWhereHas('post_image', function ($subQuery) {
+            //                         $subQuery->where('type', 'video');
+            //                     });
+            //                     break;
+            //                     // Add more cases for other filters if needed
+            //             }
+            //         }
+            //     });
+            // }
+            $getPhotoList->orderBy('id', 'desc');
+            $results = $getPhotoList->get();
+            $postPhotoList = [];
+            foreach ($results as $value) {
+                $ischeckEventOwner = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
+                $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event_id, 'event_post_id' => $value->id])->first();
+                if ($postControl != null) {
 
-                 //event_potluck_data
-                 $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
-                    $query->with(['users', 'user_potluck_items' => function ($subquery) {
-                        $subquery->with('users')->sum('quantity');
-                    }]);
-                }])->withCount('event_potluck_category_item')->where('event_id', $event_id)->get();
-                $totalItems = EventPotluckCategoryItem::where('event_id', $event_id)->sum('quantity');
-                $spoken_for = UserPotluckItem::where('event_id', $event_id)->sum('quantity');
-                $checkEventOwner = Event::FindOrFail($event_id);
-                $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
-                $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
-                $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
-                $potluckDetail['potluck_items'] = $totalItems;
-                $potluckDetail['spoken_for'] = $spoken_for;
-                $potluckDetail['left'] = $totalItems - $spoken_for;
-                $potluckDetail['item'] = $totalItems;
-                $potluckDetail['available'] = $totalItems;
-                if (!empty($eventpotluckData)) {
-                    $potluckCategoryData = [];
-                    $potluckItemsSummury = [];
-                    //   dd($eventpotluckData);
-                    foreach ($eventpotluckData as $value) {
-                        $itempotluckCategory['id'] = $value->id;
-                        $itempotluckCategory['category'] = $value->category;
-                        $itempotluckCategory['total_items'] =  $value->event_potluck_category_item_count;
-    
-                        $i = 0;
-                        $totalSpoken = 0;
-                        foreach ($value->event_potluck_category_item as  $checkItem) {
-                            $mainQty = $checkItem->quantity;
-                            $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
-                            if ($mainQty <= $spokenFor) {
-                                $totalSpoken += 1;
-                            }
-                        }
-                        $itempotluckCategory['spoken_items'] = $totalSpoken;
-                        $potluckItemsSummury[] = $itempotluckCategory;
+                    if ($postControl->post_control == 'hide_post') {
+                        continue;
                     }
-                    $potluckDetail['item_summary'] = $potluckItemsSummury;
-                    foreach ($eventpotluckData as $value) {
-                        $potluckCategory['id'] = $value->id;
-                        $potluckCategory['category'] = $value->category;
-                        $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
-                        $potluckCategory['quantity'] = $value->quantity;
-                        $potluckCategory['items'] = [];
-                        if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
-                            foreach ($value->event_potluck_category_item as $itemValue) {
-                                $potluckItem['id'] =  $itemValue->id;
-                                $potluckItem['description'] =  $itemValue->description;
-                                $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
-                                $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
-                                $potluckItem['quantity'] =  $itemValue->quantity;
-                                $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
-                                $potluckItem['spoken_quantity'] =  $spoken_for;
-                                $potluckItem['item_carry_users'] = [];
-                                    foreach ($itemValue->user_potluck_items as $itemcarryUser) {
-                                    $userPotluckItem['id'] = $itemcarryUser->id;
-                                    $userPotluckItem['user_id'] = $itemcarryUser->user_id;
-                                    $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
-                                    $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
-                                    $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
-                                    $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
-                                    $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
-                                    $potluckItem['item_carry_users'][] = $userPotluckItem;
-                                }
-                                $potluckCategory['items'][] = $potluckItem;
-                            }
-                        }
-                        $potluckCategoryData[] = $potluckCategory;
-                    }
-    
-                    $potluckDetail['podluck_category_list'] = $potluckCategoryData;
-    
-                    // return compact('potluckDetail');
-                    // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
-                } else {
-                    $potluckDetail="";
-                    // return response()->json(['status' => 0, 'message' => "No data in potluck"]);
                 }
-                //event_potluck_data//
+                $postPhotoDetail['user_id'] = $value->user->id;
+                $postPhotoDetail['is_own_post'] = ($value->user->id == $user->id) ? "1" : "0";
+                $postPhotoDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
+                $postPhotoDetail['firstname'] = $value->user->firstname;
+                $postPhotoDetail['lastname'] = $value->user->lastname;
+                $postPhotoDetail['profile'] = (!empty($value->user->profile) || $value->user->profile != NULL) ? asset('storage/profile/' . $value->user->profile) : "";
+                $selfReaction = EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->first();
+                $postPhotoDetail['is_reaction'] = ($selfReaction != NULL) ? '1' : '0';
+                $postPhotoDetail['self_reaction'] = ($selfReaction != NULL) ? $selfReaction->reaction : "";
+                $postPhotoDetail['event_id'] = $value->event_id;
+                $postPhotoDetail['id'] = $value->id;
+                $postPhotoDetail['post_message'] = (!empty($value->post_message) || $value->post_message != NULL) ? $value->post_message : "";
+                $postPhotoDetail['post_time'] = $this->setpostTime($value->updated_at);
+                $postPhotoDetail['is_in_photo_moudle'] = $value->is_in_photo_moudle;
+                $photoVideoData = "";
+                if (!empty($value->post_image)) {
+                    $photData = $value->post_image;
+                    foreach ($photData as $val) {
+                        $photoVideoDetail['id'] = $val->id;
+                        $photoVideoDetail['event_post_id'] = $val->event_post_id;
+                        $photoVideoDetail['post_media'] = (!empty($val->post_image) || $val->post_media != NULL) ? asset('storage/post_image/' . $val->post_image) : "";
+                        $photoVideoDetail['thumbnail'] = (!empty($val->thumbnail) || $val->thumbnail != NULL) ? asset('storage/thumbnails/' . $val->thumbnail) : "";
+                        $photoVideoDetail['type'] = $val->type;
+                        $photoVideoData = $photoVideoDetail;
+                    }
+                }
 
-                return compact('wallData','postPhotoList','eventInfo','eventGuest','potluckDetail');
+                $postPhotoDetail['mediaData'] = $photoVideoData;
+                $postPhotoDetail['total_media'] = ($value->post_image_count - 1 != 0 && $value->post_image_count - 1 != -1)  ? "+" . $value->post_image_count - 1 : "";
+                $getPhotoReaction = getReaction($value->id);
+                $reactionList = [];
+                foreach ($getPhotoReaction as $values) {
+                    $reactionList[] = $values->reaction;
+                }
+                $postPhotoDetail['reactionList'] = $reactionList;
+                $postPhotoDetail['total_likes'] = $value->event_post_reaction_count;
+                $postPhotoDetail['total_comments'] = $value->event_post_comment_count;
+                $postPhotoList[] = $postPhotoDetail;
+            }
+            if (empty($postPhotoList)) {
+                $postPhotoList = [];
+            }
+            //  if (!empty($postPhotoList)) {
+            //     //  return compact('postPhotoList');
+            //      // return response()->json(['status' => 1, 'data' => $postPhotoList, 'message' => "Photo List"]);
+            //  } else {
+            //      $postPhotoList="";
+            //     //  return compact('postPhotoList');
+            //      // return response()->json(['status' => 0, 'data' => $postPhotoList, 'message' => "Photo not found"]);
+            //  }
+
+            //event_photo_data//
+
+            //event_potluck_data
+            $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
+                $query->with(['users', 'user_potluck_items' => function ($subquery) {
+                    $subquery->with('users')->sum('quantity');
+                }]);
+            }])->withCount('event_potluck_category_item')->where('event_id', $event_id)->get();
+            $totalItems = EventPotluckCategoryItem::where('event_id', $event_id)->sum('quantity');
+            $spoken_for = UserPotluckItem::where('event_id', $event_id)->sum('quantity');
+            $checkEventOwner = Event::FindOrFail($event_id);
+            $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
+            $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
+            $potluckDetail['is_past'] = ($checkEventOwner['end_date'] < date('Y-m-d')) ? true : false;
+            $potluckDetail['potluck_items'] = $totalItems;
+            $potluckDetail['spoken_for'] = $spoken_for;
+            $potluckDetail['left'] = $totalItems - $spoken_for;
+            $potluckDetail['item'] = $totalItems;
+            $potluckDetail['available'] = $totalItems;
+            if (!empty($eventpotluckData)) {
+                $potluckCategoryData = [];
+                $potluckItemsSummury = [];
+                //   dd($eventpotluckData);
+                foreach ($eventpotluckData as $value) {
+                    $itempotluckCategory['id'] = $value->id;
+                    $itempotluckCategory['category'] = $value->category;
+                    $itempotluckCategory['total_items'] =  $value->event_potluck_category_item_count;
+
+                    $i = 0;
+                    $totalSpoken = 0;
+                    foreach ($value->event_potluck_category_item as  $checkItem) {
+                        $mainQty = $checkItem->quantity;
+                        $spokenFor = UserPotluckItem::where('event_potluck_item_id', $checkItem->id)->sum('quantity');
+                        if ($mainQty <= $spokenFor) {
+                            $totalSpoken += 1;
+                        }
+                    }
+                    $itempotluckCategory['spoken_items'] = $totalSpoken;
+                    $potluckItemsSummury[] = $itempotluckCategory;
+                }
+                $potluckDetail['item_summary'] = $potluckItemsSummury;
+                foreach ($eventpotluckData as $value) {
+                    $potluckCategory['id'] = $value->id;
+                    $potluckCategory['category'] = $value->category;
+                    $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
+                    $potluckCategory['quantity'] = $value->quantity;
+                    $potluckCategory['items'] = [];
+                    if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
+                        foreach ($value->event_potluck_category_item as $itemValue) {
+                            $potluckItem['id'] =  $itemValue->id;
+                            $potluckItem['description'] =  $itemValue->description;
+                            $potluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                            $potluckItem['requested_by'] =  $itemValue->users->firstname . ' ' . $itemValue->users->lastname;
+                            $potluckItem['quantity'] =  $itemValue->quantity;
+                            $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
+                            $potluckItem['spoken_quantity'] =  $spoken_for;
+                            $potluckItem['item_carry_users'] = [];
+                            foreach ($itemValue->user_potluck_items as $itemcarryUser) {
+                                $userPotluckItem['id'] = $itemcarryUser->id;
+                                $userPotluckItem['user_id'] = $itemcarryUser->user_id;
+                                $userPotluckItem['is_host'] = ($checkEventOwner->user_id == $itemValue->user_id) ? 1 : 0;
+                                $userPotluckItem['profile'] =  empty($itemcarryUser->users->profile) ?  "" : asset('storage/profile/' . $itemcarryUser->users->profile);
+                                $userPotluckItem['first_name'] = $itemcarryUser->users->firstname;
+                                $userPotluckItem['quantity'] = (!empty($itemcarryUser->quantity) || $itemcarryUser->quantity != NULL) ? $itemcarryUser->quantity : "0";
+                                $userPotluckItem['last_name'] = $itemcarryUser->users->lastname;
+                                $potluckItem['item_carry_users'][] = $userPotluckItem;
+                            }
+                            $potluckCategory['items'][] = $potluckItem;
+                        }
+                    }
+                    $potluckCategoryData[] = $potluckCategory;
+                }
+
+                $potluckDetail['podluck_category_list'] = $potluckCategoryData;
+
+                // return compact('potluckDetail');
+                // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
+            } else {
+                $potluckDetail = "";
+                // return response()->json(['status' => 0, 'message' => "No data in potluck"]);
+            }
+            //event_potluck_data//
+
+            return compact('wallData', 'postPhotoList', 'eventInfo', 'eventGuest', 'potluckDetail');
             // return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data", 'subscription_plan_name' => $eventCreator->subscription_plan_name]);
         } catch (QueryException $e) {
             DB::rollBack();
@@ -1063,7 +1075,7 @@ class EventDetailsController extends Controller
 
     function setpostTime($dateTime)
     {
-        $commentDateTime = $dateTime; 
+        $commentDateTime = $dateTime;
         $commentTime = Carbon::parse($commentDateTime);
         $timeAgo = $commentTime->diffForHumans();
         return $timeAgo;
