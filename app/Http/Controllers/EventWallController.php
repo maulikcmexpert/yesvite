@@ -1343,7 +1343,6 @@ class EventWallController extends Controller
     {
 
         $user  = Auth::guard('web')->user();
-        $input = $request->all();
 
         $creatEventPost = new EventPost;
         $creatEventPost->event_id = $request->event_id;

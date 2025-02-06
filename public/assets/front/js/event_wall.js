@@ -981,7 +981,7 @@ $(document).ready(function () {
         var pollForm = $('#pollForm');
         var photoForm = $('#photoForm');
         var textForm = $('#textform');
-        var postContent = $('.postContent').val().trim();
+        var postContent = $('.post_message').val().trim();
 
         // Fallback to empty string if #postContent does not exist
         console.log('Poll Form:', pollForm.length > 0 ? 'Exists' : 'Does not exist');
@@ -1021,7 +1021,7 @@ $(document).ready(function () {
                 toastr.error('Please enter some content for the photo post.');
                 return;
             }
-
+            document.getElementById('textcontent').value = postContent;
             document.getElementById('photoPostType').value = 0;
             $this.prop('disabled', true)
            textForm.submit();

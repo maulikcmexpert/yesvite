@@ -19,7 +19,7 @@
                   "
                             aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Events</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('event.event_lists')}}">Events</a></li>
                                 <li class="breadcrumb-item">
                                     <a
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
@@ -1558,7 +1558,7 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="failed-box">
+                    <div class="failed-box failed_list_tip">
                         <span class="d-flex align-items-center">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -1571,7 +1571,7 @@
                             method. You
                             need to fix all errors before you can re-send.</h5>
                     </div>
-                    <!-- <div class="success-box">
+                    <div class="success-box success_list_tip d-none">
                         <span class="d-flex align-items-center">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -1584,7 +1584,7 @@
                             </svg>
                         </span>
                         <h5>All clear, invites ready to be re-sent!</h5>
-                    </div> -->
+                    </div>
                     @foreach ($eventDetails['failed_invites'] as $key => $invite)
                     <div class="invite-contact-wrp" data-user-id="{{ $invite['id']}}">
                         <div class="invite-contact">
