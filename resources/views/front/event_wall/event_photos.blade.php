@@ -526,7 +526,8 @@
                             </div>
                         </div>
                     </div>
-
+                    <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
+                    enctype="multipart/form-data">
                     <div class="create-post-upload-img-wrp ">
                         <div class="create-post-upload-img-head">
                             <h4>PHOTOS</h4>
@@ -558,8 +559,7 @@
                             </div>
                         </div>
                         <div class="create-post-upload-img-main">
-                            <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
-                                enctype="multipart/form-data">
+                            
 
                                 @csrf
                                 <div class="create-post-upload-img-inner">
@@ -602,10 +602,10 @@
 
                                     </div>
                                 </div>
-                            </form>
+                            
+                            </div>
                         </div>
-                    </div>
-
+                    </form>
                     {{-- <div class="create-post-poll-wrp d-none">
                         <div class="create-post-upload-img-head">
                             <h4>POLL</h4>
