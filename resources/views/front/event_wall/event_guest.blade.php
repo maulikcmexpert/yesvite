@@ -1779,7 +1779,7 @@
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary failed-btn"
                         data-bs-dismiss="modal">Re-send</button> -->
-                    <button type="button" class="btn btn-secondary success-btn edit-failed-guest-btn"
+                    <button type="button" class="btn btn-secondary success-btn"
                         >Re-send</button>
                 </div>
             </div>
@@ -1955,7 +1955,7 @@
 
                 </div>
                 <div class="modal-footer rsvp-button-wrp">
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-secondary edit-failed-guest-btn">Update</button>
                 </div>
             </form>
             </div>
