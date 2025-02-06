@@ -343,7 +343,7 @@ $(document).on('click','.re_send_failed_invites', function() {
     $.ajax({
         url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
         type: "POST",
-        data: JSON.stringify({ guest_list: userIds,is_failed:'1'}),
+        data: JSON.stringify({ guest_list: userIds}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
