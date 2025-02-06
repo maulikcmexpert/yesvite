@@ -869,7 +869,7 @@
     }
 
     #sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
-        max-height: calc(100vh - 600px);
+        max-height: calc(100vh - 500px);
     }
 
     #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user {
