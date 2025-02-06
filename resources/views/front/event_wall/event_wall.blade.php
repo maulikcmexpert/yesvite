@@ -1352,7 +1352,7 @@
                                                     <path d="M8.39102 12.4854L2.16602 18.7104" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <path d="M18.8324 2.04346L12.6074 8.26846" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                                                <h4>Guest list made private by host</h4>
+                                                <h4>Wall made private by host</h4>
                                             </div>
                                         </div>
                                     </div>

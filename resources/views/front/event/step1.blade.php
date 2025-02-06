@@ -632,12 +632,19 @@
                                                                             <div class="input-group time ">
                                                                                 <input
                                                                                     class="form-control timepicker activity_start_time"
-                                                                                    id="activity-start-time"
+                                                                                   
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
-                                                                                    required="" readonly
-                                                                                    value="{{ $data['start_time'] }}" /><span
-                                                                                    class="input-group-append input-group-addon"><span
+                                                                                    required="" 
+                                                                                    value="{{$data['start_time']}}" />
+
+                                                                                    
+                                                                                    <span
+                                                                                    class="input-group-append input-group-addon">
+
+                                                                                   
+                                                                                    
+                                                                                    <span
                                                                                         class="input-group-text">
                                                                                         <svg width="21"
                                                                                             height="20"
@@ -724,7 +731,7 @@
                                 </div>
                             </div>
 
-                         
+                            @if ($eventDetail['rsvp_end_time_set'] == '1')     
                             <div class="ac-end-time" style="display: block;">
                                 <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
                                 <h4 class="mt-3 ">Event Ends</h4>
@@ -758,6 +765,8 @@
 
                                 </div>
                             </div>
+                            @endif
+                         
 
                             <div class="activity-schedule-inner-btn">
                                 <button class="cmn-btn" id="save_activity_schedule">
