@@ -1020,7 +1020,8 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
-            $("#photoForm").submit(); // Submit the form
+
+            $("#textform").submit(); // Submit the form
         }
     });
 
@@ -1036,24 +1037,11 @@ $(document).ready(function () {
         // Check if the poll form exists and is valid
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
-        var textForm = $("#textform");
+
         var postContent = $(".post_message").val().trim();
 
         // Fallback to empty string if #postContent does not exist
-        console.log(
-            "Poll Form:",
-            pollForm.length > 0 ? "Exists" : "Does not exist"
-        );
-        console.log(
-            "Photo Form:",
-            photoForm.length > 0 ? "Exists" : "Does not exist"
-        );
-        console.log(
-            "Text Form:",
-            textForm.length > 0 ? "Exists" : "Does not exist"
-        );
-        console.log("Post Content:", postContent);
-        // If a poll form exists and is visible, submit it
+
         if (pollForm.is(":visible") && pollForm.length > 0 && pollForm !== "") {
             console.log("Post Content:", postContent);
             document.getElementById("pollContent").value = postContent;
@@ -1062,33 +1050,37 @@ $(document).ready(function () {
         }
         // If a photo form exists and is visible, submit it
         else if (photoForm.is(":visible") && photoForm.length > 0) {
-            console.log("Post Content:", postContent);
-            var photoInput = document.getElementById("fileInput"); // Assuming there's a file input for photo
-            if (photoInput && photoInput.files.length === 0) {
-                toastr.error("Please upload a photo for the photo post.");
+            var photoInput = document.getElementById("fileInput");
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent === ""
+            ) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
                 return;
             }
 
-            // Set the value of the hidden input in the photo form
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent !== ""
+            ) {
+                document.getElementsByClassName("textcontent").value =
+                    postContent;
+                document.getElementById("photoPostType").value = 0;
+                $this.prop("disabled", true);
+            }
+
             document.getElementById("photoContent").value = postContent;
             document.getElementById("photoPostType").value = 1;
 
-            // Submit the form
             $this.prop("disabled", true);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
-        else if (textForm.length > 0 && postContent !== "") {
-            console.log("Post Content:", postContent);
-            if (postContent === "") {
-                toastr.error("Please enter some content for the photo post.");
-                return;
-            }
-            document.getElementById("textcontent").value = postContent;
-            document.getElementById("photoPostType").value = 0;
-            $this.prop("disabled", true);
-            textForm.submit();
-        }
+
         // If no valid content is provided, show an alert
         else {
             toastr.error("Please fill all required fields before submitting.");

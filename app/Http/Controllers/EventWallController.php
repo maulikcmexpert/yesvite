@@ -1341,7 +1341,7 @@ class EventWallController extends Controller
 
     public function createPost(Request $request)
     {
-
+        // dd($request->all());
         $user  = Auth::guard('web')->user();
 
         $creatEventPost = new EventPost;
