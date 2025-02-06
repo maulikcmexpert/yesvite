@@ -5139,6 +5139,10 @@ function toggleSidebar(id = null) {
     if (id == "sidebar_add_co_host") {
         document.body.classList.add("no-scroll"); // Disable background scrolling
     }
+
+    if (id == "sidebar_groups") {
+        document.body.classList.add("no-scroll"); // Disable background scrolling
+    }
     const allSidebars = document.querySelectorAll(".sidebar");
     const allOverlays = document.querySelectorAll(".overlay");
     // $(".floatingfocus").removeClass("floatingfocus");
