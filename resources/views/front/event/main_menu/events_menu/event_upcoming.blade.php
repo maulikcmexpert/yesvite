@@ -1,3 +1,4 @@
+{{dd($eventList);}}
 <div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
     <div class="all-events-searchbar-wrp">
       <form>
