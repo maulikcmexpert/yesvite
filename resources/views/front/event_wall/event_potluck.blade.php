@@ -493,11 +493,11 @@
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $item)
-                                                            <input type="hidden"
-                                                                            class="category-item-quantity"
-                                                                            value="{{ $item['quantity'] }}">
-
-                                                                <div class="accordion-item active">
+                                                            
+                                                            <div class="accordion-item active">
+                                                                    <input type="hidden"
+                                                                                    class="category-item-quantity"
+                                                                                    value="{{ $item['quantity'] }}">
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">

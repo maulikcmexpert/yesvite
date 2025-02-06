@@ -55,33 +55,33 @@ function previewStoryImage(event, userId) {
     selectedFiles = files; // Store files for uploading later
     const previewContainer = document.getElementById(`preview-${userId}`);
     const uploadButton = document.getElementById(`upload-button-${userId}`);
-    previewContainer.innerHTML = ''; // Clear previous preview
+    previewContainer.innerHTML = ""; // Clear previous preview
 
     if (files.length > 0) {
-        Array.from(files).forEach(file => {
+        Array.from(files).forEach((file) => {
             const fileUrl = URL.createObjectURL(file);
             let mediaElement;
 
-            if (file.type.startsWith('image/')) {
-                mediaElement = document.createElement('img');
-            } else if (file.type.startsWith('video/')) {
-                mediaElement = document.createElement('video');
+            if (file.type.startsWith("image/")) {
+                mediaElement = document.createElement("img");
+            } else if (file.type.startsWith("video/")) {
+                mediaElement = document.createElement("video");
                 mediaElement.controls = true; // Add video controls for videos
             }
 
             if (mediaElement) {
                 mediaElement.src = fileUrl;
-                mediaElement.classList.add('story-preview'); // Add a class for styling if needed
+                mediaElement.classList.add("story-preview"); // Add a class for styling if needed
                 previewContainer.appendChild(mediaElement);
             }
         });
 
         // Show the Upload button after preview
-        uploadButton.style.display = 'flex';
+        uploadButton.style.display = "flex";
         const previewModal = document.getElementById(`previewModel-${userId}`); // Modal itself
         if (previewModal && previewContainer) {
-            previewModal.style.display = 'flex'; // Show the modal
-            previewContainer.style.display = 'flex'; // Ensure story display is visible
+            previewModal.style.display = "flex"; // Show the modal
+            previewContainer.style.display = "flex"; // Ensure story display is visible
         }
     } else {
         console.log("No file selected.");
@@ -92,8 +92,8 @@ function closePreviewModal(userId) {
     const previewContainer = document.getElementById(`preview-${userId}`);
     const previewModal = document.getElementById(`previewModel-${userId}`); // Correct ID
     if (previewModal && previewContainer) {
-        previewModal.style.display = 'none'; // Close the modal
-        previewContainer.style.display = 'none'; // Hide the preview container
+        previewModal.style.display = "none"; // Close the modal
+        previewContainer.style.display = "none"; // Hide the preview container
     }
 }
 
@@ -105,16 +105,16 @@ function uploadStoryImage(eventId, userId) {
     }
 
     const formData = new FormData();
-    Array.from(selectedFiles).forEach(file => {
-        formData.append('story[]', file);
+    Array.from(selectedFiles).forEach((file) => {
+        formData.append("story[]", file);
     });
 
-    formData.append('eventId', eventId);
-    formData.append('_token', $('meta[name="csrf-token"]').attr("content"));
+    formData.append("eventId", eventId);
+    formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
 
     $.ajax({
         url: base_url + "event_wall/createStory",
-        type: 'POST',
+        type: "POST",
         data: formData,
         contentType: false,
         processData: false,
@@ -123,9 +123,15 @@ function uploadStoryImage(eventId, userId) {
             if (data.status === 1) {
                 console.log("Upload successful, adding pink border.");
 
-                const profilePic = document.getElementById(`profile-pic-${userId}`);
-                const profileContainer = document.getElementById(`profile-container-${userId}`);
-                const listItem = profilePic ? profilePic.closest('.wall-main-story-item') : null;
+                const profilePic = document.getElementById(
+                    `profile-pic-${userId}`
+                );
+                const profileContainer = document.getElementById(
+                    `profile-container-${userId}`
+                );
+                const listItem = profilePic
+                    ? profilePic.closest(".wall-main-story-item")
+                    : null;
                 console.log(listItem);
                 index = 0;
                 // if (profilePic) {
@@ -136,20 +142,20 @@ function uploadStoryImage(eventId, userId) {
                 // }
 
                 if (profileContainer) {
-                    profileContainer.style.display = 'block';
+                    profileContainer.style.display = "block";
                 }
 
                 if (listItem) {
                     console.log(1);
 
-                    listItem.classList.add('new-story'); // Add the 'new-story' class to the story item
+                    listItem.classList.add("new-story"); // Add the 'new-story' class to the story item
                 } else {
                     console.error("List item not found.");
                 }
 
                 closePreviewModal(userId);
                 // showStories(eventId, userId, true);
-                fetchStories(eventId, userId, true, 'image')
+                fetchStories(eventId, userId, true, "image");
                 // Set the border color to gray after viewing the story
                 setTimeout(() => {
                     // if (profilePic) {
@@ -157,7 +163,7 @@ function uploadStoryImage(eventId, userId) {
                     //     profilePic.classList.remove('pink-border'); // Remove the pink border class
                     // }
                     if (listItem) {
-                        listItem.classList.remove('new-story'); // Optionally, remove the 'new-story' class
+                        listItem.classList.remove("new-story"); // Optionally, remove the 'new-story' class
                     }
                 }, 5000); // Adjust the timeout duration as needed
             }
@@ -165,7 +171,7 @@ function uploadStoryImage(eventId, userId) {
         error: function (error) {
             console.error("Error uploading story:", error);
             alert("Image uploading failed.");
-        }
+        },
     });
 
     // Reset file input and preview
@@ -175,8 +181,6 @@ function uploadStoryImage(eventId, userId) {
     selectedFiles = null; // Reset selected files
 }
 
-
-
 // Step 3: SHOW STORY
 function showStories(eventId, userId, isNewUpload = false) {
     index = 0;
@@ -184,10 +188,16 @@ function showStories(eventId, userId, isNewUpload = false) {
     const storyModal = document.getElementById(`storyModal-${userId}`);
     // console.log("showStories index"  + index );
     // Wait until the page is fully loaded
-    if (document.readyState !== 'complete') {
-        console.log('Page is still loading. Waiting to open the story modal.');
-        window.addEventListener('load', () => {
-            openStoryModal(storyDisplay, storyModal, eventId, userId, isNewUpload);
+    if (document.readyState !== "complete") {
+        console.log("Page is still loading. Waiting to open the story modal.");
+        window.addEventListener("load", () => {
+            openStoryModal(
+                storyDisplay,
+                storyModal,
+                eventId,
+                userId,
+                isNewUpload
+            );
         });
     } else {
         openStoryModal(storyDisplay, storyModal, eventId, userId, isNewUpload);
@@ -199,49 +209,56 @@ function AllUserStory(eventId, storyId, isNewUpload = false) {
     const storyDisplay = document.getElementById(`story-display-${storyId}`);
     const storyModal = document.getElementById(`storyModal-${storyId}`);
     if (storyDisplay && storyModal) {
-        storyModal.style.display = 'flex';
-        storyDisplay.style.display = 'flex';
+        storyModal.style.display = "flex";
+        storyDisplay.style.display = "flex";
     }
-    const storyType = 'other';
+    const storyType = "other";
 
     // Ensure that the storyId passed corresponds to the correct user's ID
     fetchStories(eventId, storyId, isNewUpload, storyType);
 
     // Add the gray border class to the profile picture after viewing
-    const profilePic = document.querySelector(`.story-profile-pic[onclick="AllUserStory(${eventId}, '${storyId}')"]`);
+    const profilePic = document.querySelector(
+        `.story-profile-pic[onclick="AllUserStory(${eventId}, '${storyId}')"]`
+    );
 
     if (profilePic) {
         // Add the gray border class to the profile picture
-        profilePic.classList.add('viewed-story');
-        profilePic.classList.remove('story-unseen');
+        profilePic.classList.add("viewed-story");
+        profilePic.classList.remove("story-unseen");
     }
 }
 
-
 async function fetchStories(eventId, userId, isNewUpload, storyType) {
     try {
-        const response = await fetch(`${base_url}event_wall/fetch-user-stories/${eventId}?storyType=${storyType}`);
+        const response = await fetch(
+            `${base_url}event_wall/fetch-user-stories/${eventId}?storyType=${storyType}`
+        );
         const data = await response.json();
         console.log(isNewUpload);
 
         if (data.status !== 1) {
-            throw new Error('Failed to fetch stories: ' + data.message);
+            throw new Error("Failed to fetch stories: " + data.message);
         }
         console.log(userId);
 
         let storyDisplay = document.getElementById(`story-display-${userId}`);
         if (!storyDisplay) {
-            console.error(`Element with ID 'story-display-${userId}' not found.`);
+            console.error(
+                `Element with ID 'story-display-${userId}' not found.`
+            );
             // return;
         }
         console.log(storyDisplay); // Log the storyDisplay element
-        console.log(storyDisplay.querySelector('.story-content')); // Log the
-        const storyContent = storyDisplay.querySelector('.story-content');
-        const progressBarContainer = storyDisplay.querySelector('.progress-bar-container');
+        console.log(storyDisplay.querySelector(".story-content")); // Log the
+        const storyContent = storyDisplay.querySelector(".story-content");
+        const progressBarContainer = storyDisplay.querySelector(
+            ".progress-bar-container"
+        );
 
         // Clear previous content
-        storyContent.innerHTML = '';
-        progressBarContainer.innerHTML = '';
+        storyContent.innerHTML = "";
+        progressBarContainer.innerHTML = "";
         index = 0;
         const storyElements = [];
         const storyDurations = [];
@@ -249,27 +266,30 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         // Process 'owner_stories'
         if (Array.isArray(data.data.owner_stories)) {
-            data.data.owner_stories.forEach(story => {
+            data.data.owner_stories.forEach((story) => {
                 if (story.user_id === userId) {
-                    story.story.forEach(storyData => {
-                        const mediaElement = document.createElement(storyData.type === 'video' ? 'video' : 'img');
+                    story.story.forEach((storyData) => {
+                        const mediaElement = document.createElement(
+                            storyData.type === "video" ? "video" : "img"
+                        );
                         mediaElement.src = storyData.storyurl;
-                        mediaElement.classList.add('story-preview');
+                        mediaElement.classList.add("story-preview");
 
-                        if (storyData.type === 'video') {
+                        if (storyData.type === "video") {
                             mediaElement.controls = false;
                             mediaElement.autoplay = false;
                             mediaElement.muted = true;
                         }
 
-                        const storyItemContainer = document.createElement('div');
-                        storyItemContainer.classList.add('story-item');
+                        const storyItemContainer =
+                            document.createElement("div");
+                        storyItemContainer.classList.add("story-item");
                         storyItemContainer.dataset.storyId = storyData.id;
 
                         // Add post time
                         if (storyData.post_time) {
-                            const postTimeElement = document.createElement('p');
-                            postTimeElement.classList.add('post-time');
+                            const postTimeElement = document.createElement("p");
+                            postTimeElement.classList.add("post-time");
                             postTimeElement.textContent = storyData.post_time;
                             storyItemContainer.appendChild(postTimeElement);
                             storyPostTimes.push(storyData.post_time); // Store post time
@@ -277,8 +297,13 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
                         storyItemContainer.appendChild(mediaElement);
                         storyContent.appendChild(storyItemContainer);
-                        storyElements.push({ element: mediaElement, type: storyData.type });
-                        storyDurations.push(storyData.type === 'video' ? 0 : 5000);
+                        storyElements.push({
+                            element: mediaElement,
+                            type: storyData.type,
+                        });
+                        storyDurations.push(
+                            storyData.type === "video" ? 0 : 5000
+                        );
                     });
                 }
             });
@@ -286,21 +311,28 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         // Process 'other_stories'
         if (Array.isArray(data.data.other_stories)) {
-            data.data.other_stories.forEach(story => {
+            data.data.other_stories.forEach((story) => {
                 if (story.user_id !== userId) {
-                    story.story.forEach(storyData => {
-                        const mediaElement = document.createElement(storyData.type === 'video' ? 'video' : 'img');
+                    story.story.forEach((storyData) => {
+                        const mediaElement = document.createElement(
+                            storyData.type === "video" ? "video" : "img"
+                        );
                         mediaElement.src = storyData.storyurl;
-                        mediaElement.classList.add('story-preview');
+                        mediaElement.classList.add("story-preview");
 
-                        if (storyData.type === 'video') {
+                        if (storyData.type === "video") {
                             mediaElement.controls = false;
                             mediaElement.autoplay = false;
                             mediaElement.muted = true;
                         }
 
-                        storyElements.push({ element: mediaElement, type: storyData.type });
-                        storyDurations.push(storyData.type === 'video' ? 0 : 5000);
+                        storyElements.push({
+                            element: mediaElement,
+                            type: storyData.type,
+                        });
+                        storyDurations.push(
+                            storyData.type === "video" ? 0 : 5000
+                        );
                         storyPostTimes.push(storyData.post_time); // Store post time
                     });
                 }
@@ -308,27 +340,43 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
         }
 
         if (!storyElements.length) {
-            console.warn('No stories available for the specified user.');
+            console.warn("No stories available for the specified user.");
             const storyModal = document.getElementById(`storyModal-${userId}`);
-            const storyDisplay = document.getElementById(`story-display-${userId}`);
-            storyModal.style.display = 'none'; // Open the modal
-            storyDisplay.style.display = 'none';
-
+            const storyDisplay = document.getElementById(
+                `story-display-${userId}`
+            );
+            storyModal.style.display = "none"; // Open the modal
+            storyDisplay.style.display = "none";
         }
 
         // Pass data to the story display function
-        displayStoriesWithProgressBars(storyElements, storyContent, progressBarContainer, userId, storyDurations, isNewUpload, storyPostTimes);
-
+        displayStoriesWithProgressBars(
+            storyElements,
+            storyContent,
+            progressBarContainer,
+            userId,
+            storyDurations,
+            isNewUpload,
+            storyPostTimes
+        );
     } catch (error) {
-        console.error('Error fetching stories:', error);
+        console.error("Error fetching stories:", error);
     }
 }
 
-function displayStoriesWithProgressBars(storyElements, storyContent, progressBarContainer, userId, storyDurations, isNewUpload = false, storyPostTimes) {
+function displayStoriesWithProgressBars(
+    storyElements,
+    storyContent,
+    progressBarContainer,
+    userId,
+    storyDurations,
+    isNewUpload = false,
+    storyPostTimes
+) {
     console.log(storyElements);
     console.log(isNewUpload);
     if (!storyElements || storyElements.length === 0) {
-        console.error('No stories available to display.');
+        console.error("No stories available to display.");
         return;
     }
 
@@ -341,14 +389,14 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
     function resetProgressBars() {
         console.log("reset index" + index);
 
-        progressBarContainer.innerHTML = '';
+        progressBarContainer.innerHTML = "";
         //$('.progress-bar-container').html('');
         storyElements.forEach(() => {
-            const progressBar = document.createElement('div');
-            progressBar.classList.add('progress-bar');
-            const progress = document.createElement('div');
-            progress.classList.add('progress');
-            progress.style.width = '0%';
+            const progressBar = document.createElement("div");
+            progressBar.classList.add("progress-bar");
+            const progress = document.createElement("div");
+            progress.classList.add("progress");
+            progress.style.width = "0%";
             progressBar.appendChild(progress);
             progressBarContainer.appendChild(progressBar);
         });
@@ -356,7 +404,6 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
     }
 
     function resetCurrentStory() {
-
         if (currentTimeout) {
             clearTimeout(currentTimeout);
             currentTimeout = null;
@@ -383,42 +430,42 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
             console.log(storyElements);
 
             resetProgressBars();
-            progressBarContainer.innerHTML = '';
-            storyContent.innerHTML = '';
+            progressBarContainer.innerHTML = "";
+            storyContent.innerHTML = "";
             const storyModal = document.getElementById(`storyModal-${userId}`);
-            const displayModel = document.getElementById(`story-display-${userId}`);
+            const displayModel = document.getElementById(
+                `story-display-${userId}`
+            );
             //   console.log('TEST');
 
             if (storyModal && displayModel) {
                 console.log(storyModal);
                 console.log(displayModel);
 
-                storyModal.style.display = 'none';
-                displayModel.style.display = 'none';
-                $('.progress-bar-container').html('');
+                storyModal.style.display = "none";
+                displayModel.style.display = "none";
+                $(".progress-bar-container").html("");
                 storyContent = {};
-
-
             }
             index = 0;
             return;
         }
         // console.log(storyContent.innerHTML);
         console.log(storyElements.length);
-        storyContent.innerHTML = ''; // Clear the content for the new story
+        storyContent.innerHTML = ""; // Clear the content for the new story
 
         // Add post time display
-        const postTimeElement = document.createElement('p');
-        postTimeElement.classList.add('post-time');
+        const postTimeElement = document.createElement("p");
+        postTimeElement.classList.add("post-time");
         postTimeElement.textContent = storyPostTimes[currentIndex];
         storyContent.appendChild(postTimeElement);
 
         Array.from(progressBarContainer.children).forEach((bar, idx) => {
             const progress = bar.firstChild;
             if (idx < currentIndex) {
-                progress.style.width = '100%';
+                progress.style.width = "100%";
             } else {
-                progress.style.width = '0%';
+                progress.style.width = "0%";
             }
         });
 
@@ -427,7 +474,7 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
         // console.log('progess'+ currentIndex);
         const progress = progressBarContainer.children[currentIndex].firstChild;
 
-        if (type === 'image') {
+        if (type === "image") {
             let progressWidth = 0;
             const displayDuration = storyDurations[currentIndex];
             const increment = 100 / (displayDuration / 10);
@@ -436,7 +483,7 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
                 if (progressWidth < 100) {
                     // alert(1);
                     progressWidth += increment;
-                    progress.style.width = progressWidth + '%';
+                    progress.style.width = progressWidth + "%";
                     currentTimeout = setTimeout(updateImageProgress, 10);
                 } else {
                     index++;
@@ -446,65 +493,57 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
             }
 
             updateImageProgress();
-        }
-        else if (type === 'video') {
-            resetCurrentStory();  // Ensure previous video is reset
+        } else if (type === "video") {
+            resetCurrentStory(); // Ensure previous video is reset
             currentVideoElement = element;
             storyContent.appendChild(element);
             element.play();
 
             element.ontimeupdate = function () {
                 if (element.duration > 0) {
-                    const progressPercentage = (element.currentTime / element.duration) * 100;
-                    progress.style.width = progressPercentage + '%';
+                    const progressPercentage =
+                        (element.currentTime / element.duration) * 100;
+                    progress.style.width = progressPercentage + "%";
                 }
             };
 
             element.onended = function () {
-                index++;  // Increment before calling showStory()
+                index++; // Increment before calling showStory()
                 showStory(index);
                 console.log("window index" + index);
             };
         }
-
-
     }
 
     var counter = 0;
-    storyContent.addEventListener('click', (event) => {
+    storyContent.addEventListener("click", (event) => {
         counter++;
 
-
         const contentWidth = storyContent.offsetWidth;
-        const clickPosition = event.clientX - storyContent.getBoundingClientRect().left;
+        const clickPosition =
+            event.clientX - storyContent.getBoundingClientRect().left;
         // console.log({counter});
 
         if (clickPosition < contentWidth / 2 && index > 0) {
             index--; // Go back to the previous story
-
         } else if (clickPosition >= contentWidth / 2) {
             index++; // Advance to the next story
             // console.log("click index"  + index );
-
         }
-        storyContent.innerHTML = '';
+        storyContent.innerHTML = "";
         console.log(storyContent);
         showStory(index);
     });
 
-
     function initializeStories() {
-
         resetProgressBars();
         showStory(index);
         index = 0;
-
     }
-    $(document).on('click', '.modal-close', function () {
-        var id = $(this).data('id');
+    $(document).on("click", ".modal-close", function () {
+        var id = $(this).data("id");
         // alert(id);
         closeModal(id);
-
     });
     function closeModal(userId) {
         resetCurrentStory(); // Clear
@@ -512,19 +551,20 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
 
         const modal = document.getElementById(`storyModal-${userId}`);
         const storyDisplay = document.getElementById(`story-display-${userId}`);
-        const progressBarContainer = document.querySelector('.progress-bar-container');
+        const progressBarContainer = document.querySelector(
+            ".progress-bar-container"
+        );
         storyContent = {};
-        modal.style.display = 'none';
-        storyDisplay.style.display = 'none';
-        $('.progress-bar-container').html('');
+        modal.style.display = "none";
+        storyDisplay.style.display = "none";
+        $(".progress-bar-container").html("");
         index = 0;
-
     }
     // Reset previous state when reopening the modal
     const storyModal = document.getElementById(`storyModal-${userId}`);
     console.log("model index" + index);
     if (storyModal) {
-        storyModal.addEventListener('show', () => {
+        storyModal.addEventListener("show", () => {
             resetProgressBars(); // Reset progress bars
 
             showStory(index); // Start from the last viewed story or first
@@ -534,45 +574,44 @@ function displayStoriesWithProgressBars(storyElements, storyContent, progressBar
     initializeStories();
 }
 
-
-
-
-
 // Function to open the poll modal
 function openPollModal() {
-    document.getElementById('pollModal').style.display = 'block';
+    document.getElementById("pollModal").style.display = "block";
 }
-function openStoryModal(storyDisplay, storyModal, eventId, userId, isNewUpload) {
-
+function openStoryModal(
+    storyDisplay,
+    storyModal,
+    eventId,
+    userId,
+    isNewUpload
+) {
     if (storyDisplay && storyModal) {
-        storyModal.style.display = 'flex';
-        storyDisplay.style.display = 'flex';
+        storyModal.style.display = "flex";
+        storyDisplay.style.display = "flex";
     }
 
-    const storyType = 'owner';
+    const storyType = "owner";
 
     // Ensure that the userId passed is correct
     fetchStories(eventId, userId, isNewUpload, storyType);
 }
 // Function to close the poll modal
 function closePollModal() {
-    document.getElementById('pollModal').style.display = 'none';
-
+    document.getElementById("pollModal").style.display = "none";
 }
 
 // Close the modal when clicking outside of it
 window.onclick = function (event) {
-    const modal = document.getElementById('pollModal');
+    const modal = document.getElementById("pollModal");
     if (event.target === modal) {
-        modal.style.display = 'none';
+        modal.style.display = "none";
     }
-}
+};
 // const displayPollData = (pollData) => {
 //     // let html = ``;
 
 //     // pollData.forEach((poll) => {
 //     //     console.log('Poll Data:', poll);  // Debugging line
-
 
 //     //     const pollEndDate = new Date(poll.poll_end_date);
 //     //     const currentDate = new Date();
@@ -636,8 +675,6 @@ window.onclick = function (event) {
 //     });
 // };
 
-
-
 // const fetchPollData = (eventId, eventPostId) => {
 //     const url = base_url + "wall/get_poll";
 
@@ -668,30 +705,26 @@ window.onclick = function (event) {
 
 // fetchPollData(1547, 1);  // Example eventId and eventPostId
 
-
-
-
-$('.option-button').on('click', function () {
-
-    const pollId = $(this).data('poll-id');  // Gets poll ID (e.g., 456)
-    const optionId = $(this).data('option-id');  // Gets option ID (e.g., 123)
+$(".option-button").on("click", function () {
+    const pollId = $(this).data("poll-id"); // Gets poll ID (e.g., 456)
+    const optionId = $(this).data("option-id"); // Gets option ID (e.g., 123)
 
     // Call the vote function
     voteOnPoll(pollId, optionId);
 });
 
-
-
 const voteOnPoll = (pollId, optionId) => {
     const url = base_url + "event_wall/votePoll";
-    const eventPostId = document.getElementById('event_post_id').value;
-    const eventId = document.getElementById('event_id').value;
+    const eventPostId = document.getElementById("event_post_id").value;
+    const eventId = document.getElementById("event_id").value;
 
     $.ajax({
         url: url,
-        method: 'POST',
+        method: "POST",
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
         },
         // contentType: 'application/json',
         // data: JSON.stringify({
@@ -702,21 +735,21 @@ const voteOnPoll = (pollId, optionId) => {
             poll_id: pollId,
             option_id: optionId,
             eventId: eventId,
-            eventPostId: eventPostId
+            eventPostId: eventPostId,
         },
         success: function (data) {
-            console.log('AJAX Response:', data);
+            console.log("AJAX Response:", data);
             if (data.success) {
                 // Update the poll UI with the new data received
                 updatePollUI(data, pollId);
                 //  alert('Vote submitted/updated successfully!');
             } else {
-                alert(data.message || 'Failed to submit vote.');
+                alert(data.message || "Failed to submit vote.");
             }
         },
         error: function (xhr, status, error) {
-            console.error('AJAX Error:', xhr.responseText || error);
-        }
+            console.error("AJAX Error:", xhr.responseText || error);
+        },
     });
 };
 
@@ -758,110 +791,129 @@ const voteOnPoll = (pollId, optionId) => {
 // }
 
 function updatePollUI(data, pollId) {
-    const eventPostId = document.getElementById('event_post_id').value;
-    const eventId = document.getElementById('event_id').value;
+    const eventPostId = document.getElementById("event_post_id").value;
+    const eventId = document.getElementById("event_id").value;
 
-    console.log('Event ID:', eventId);
-    console.log('Event Post ID:', eventPostId);
+    console.log("Event ID:", eventId);
+    console.log("Event Post ID:", eventPostId);
 
     $.ajax({
         url: base_url + "event_wall/get_poll",
-        method: 'POST',
+        method: "POST",
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
         },
         data: {
             eventId: eventId,
-            eventPostId: eventPostId
+            eventPostId: eventPostId,
         },
         success: function (data) {
-            console.log('AJAX Response:', data);
+            console.log("AJAX Response:", data);
             if (Array.isArray(data) && data.length > 0) {
-                const pollContainer = document.querySelector('.post-card-poll-wrp');
+                const pollContainer = document.querySelector(
+                    ".post-card-poll-wrp"
+                );
                 if (!pollContainer) {
-                    console.error('Poll container not found.');
+                    console.error("Poll container not found.");
                     return;
                 }
 
                 // Find the specific poll data by pollId
-                const pollInfo = data.find(poll => poll.poll_id === pollId);
+                const pollInfo = data.find((poll) => poll.poll_id === pollId);
                 if (pollInfo) {
                     // Check if the poll has expired
                     if (pollInfo.is_expired) {
                         // Display the expiration message
-                        const errorMessage = document.getElementById(`errorMessage-${pollId}`);
+                        const errorMessage = document.getElementById(
+                            `errorMessage-${pollId}`
+                        );
                         if (errorMessage) {
-                            errorMessage.textContent = 'This poll has expired. No votes here.';
-                            errorMessage.style.display = 'block'; // Show the error message
+                            errorMessage.textContent =
+                                "This poll has expired. No votes here.";
+                            errorMessage.style.display = "block"; // Show the error message
                         }
 
                         // Disable all buttons in the poll
-                        pollContainer.querySelectorAll('.poll-click-wrp .option-button').forEach(button => {
-                            button.disabled = true;
-                            button.style.cursor = 'not-allowed';
-                        });
+                        pollContainer
+                            .querySelectorAll(".poll-click-wrp .option-button")
+                            .forEach((button) => {
+                                button.disabled = true;
+                                button.style.cursor = "not-allowed";
+                            });
                         return; // Exit early since poll is expired
                     }
 
                     // Update total votes and remaining time
-                    pollContainer.querySelector('h5').innerHTML = `${pollInfo.total_poll_vote} Votes <span>${pollInfo.poll_duration_left} left</span>`;
+                    pollContainer.querySelector(
+                        "h5"
+                    ).innerHTML = `${pollInfo.total_poll_vote} Votes <span>${pollInfo.poll_duration_left} left</span>`;
 
                     // Ensure poll options are an array
                     if (Array.isArray(pollInfo.poll_options)) {
-                        pollInfo.poll_options.forEach(option => {
+                        pollInfo.poll_options.forEach((option) => {
                             console.log(`Checking for option ID: ${option.id}`);
-                            const optionElement = document.querySelector(`.poll-click-wrp[data-option-id="${option.id}"]`);
+                            const optionElement = document.querySelector(
+                                `.poll-click-wrp[data-option-id="${option.id}"]`
+                            );
                             if (optionElement) {
-                                optionElement.querySelector('.option-button').innerHTML = `${option.option} <span>${option.total_vote_percentage}</span>`;
-                                optionElement.querySelector('.poll-click-progress').style.width = option.total_vote_percentage;
+                                optionElement.querySelector(
+                                    ".option-button"
+                                ).innerHTML = `${option.option} <span>${option.total_vote_percentage}</span>`;
+                                optionElement.querySelector(
+                                    ".poll-click-progress"
+                                ).style.width = option.total_vote_percentage;
                             } else {
-                                console.warn(`Option element for ID ${option.id} not found. Check the structure of the HTML or the timing of this code.`);
+                                console.warn(
+                                    `Option element for ID ${option.id} not found. Check the structure of the HTML or the timing of this code.`
+                                );
                             }
                         });
                     } else {
-                        console.error('poll_options is not defined or is not an array');
+                        console.error(
+                            "poll_options is not defined or is not an array"
+                        );
                     }
                 } else {
-                    console.warn('Poll data for the specified poll ID not found.');
+                    console.warn(
+                        "Poll data for the specified poll ID not found."
+                    );
                 }
             } else {
-                console.error('poll_data is not defined or is empty');
+                console.error("poll_data is not defined or is empty");
             }
         },
         error: function (xhr, status, error) {
-            console.error('AJAX Error:', xhr.responseText || error);
-        }
+            console.error("AJAX Error:", xhr.responseText || error);
+        },
     });
 }
-
-
-
-
-
 
 $(document).ready(function () {
     let optionCounter = 2;
     // Add new option
-    $('#addOptionBtn').on('click', function () {
+    $("#addOptionBtn").on("click", function () {
         optionCounter++;
-        const newOptionHtml = $('#AddHtml').html();
+        const newOptionHtml = $("#AddHtml").html();
         const $newOption = $(newOptionHtml);
-        $newOption.find('.option-number').text(optionCounter);
-        $('#options-container').append($newOption);
+        $newOption.find(".option-number").text(optionCounter);
+        $("#options-container").append($newOption);
     });
     // Remove an option
-    $(document).on('click', '.remove', function () {
-        $(this).closest('.form-group').remove();
+    $(document).on("click", ".remove", function () {
+        $(this).closest(".form-group").remove();
         optionCounter = 0;
-        $('#options-container .form-group').each(function () {
+        $("#options-container .form-group").each(function () {
             optionCounter++;
-            $(this).find('label').text('Option ' + optionCounter + ':');
+            $(this)
+                .find("label")
+                .text("Option " + optionCounter + ":");
         });
     });
 });
 
 // Function to close the modal
-
 
 $(document).ready(function () {
     // Function to update character count
@@ -888,13 +940,15 @@ $(document).ready(function () {
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
-        $('#pollForm input[required], #pollForm select[required]').each(function () {
-            if ($.trim($(this).val()) === '') {
-                isValid = false;
-                return false; // Break loop
+        $("#pollForm input[required], #pollForm select[required]").each(
+            function () {
+                if ($.trim($(this).val()) === "") {
+                    isValid = false;
+                    return false; // Break loop
+                }
             }
-        });
-        $('.create_post_btn').prop('disabled', !isValid);
+        );
+        $(".create_post_btn").prop("disabled", !isValid);
     }
 
     // Apply the maxlength limit and validate form on input load
@@ -907,13 +961,13 @@ $(document).ready(function () {
     // validateForm();
 
     // Update character count on input change
-    $('#pollForm').on('input', 'input.form-control', function () {
+    $("#pollForm").on("input", "input.form-control", function () {
         updateCharCount(this); // Update char count
         validateForm(); // Revalidate the form
     });
 
     // Update form validation on select change
-    $('#pollForm').on('change', 'select', function () {
+    $("#pollForm").on("change", "select", function () {
         validateForm();
     });
 
@@ -949,7 +1003,6 @@ $(document).ready(function () {
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
             renumberOptions(); // Call function to renumber options after deletion
-
         });
 
         validateForm();
@@ -958,18 +1011,24 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .option-poll").each(function (index) {
-            $(this).find(".option-number").text(index + 3);
+            $(this)
+                .find(".option-number")
+                .text(index + 3);
         });
     }
     $("#postContent").keypress(function (event) {
-        if (event.which === 13 && !event.shiftKey) { // Enter key without Shift
+        if (event.which === 13 && !event.shiftKey) {
+            // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
-            $("#textform").submit(); // Submit the form
+            document.getElementById("textcontent").value =
+                $("#postContent").val();
+            document.getElementById("photoPostType").value = 0;
+            $("#photoForm").submit(); // Submit the form
         }
     });
 
     // Submit form on button click
-    $(document).on('click', '.create_post_btn', function () {
+    $(document).on("click", ".create_post_btn", function () {
         var $this = $(this); // Cache the button
 
         // Prevent multiple clicks
@@ -978,61 +1037,56 @@ $(document).ready(function () {
         //     return;
         // }
         // Check if the poll form exists and is valid
-        var pollForm = $('#pollForm');
-        var photoForm = $('#photoForm');
-        var textForm = $('#textform');
-        var postContent = $('.post_message').val().trim();
+        var pollForm = $("#pollForm");
+        var photoForm = $("#photoForm");
+
+        var postContent = $(".post_message").val().trim();
 
         // Fallback to empty string if #postContent does not exist
-        console.log('Poll Form:', pollForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Photo Form:', photoForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
-        console.log('Post Content:', postContent);
-        // If a poll form exists and is visible, submit it
-        if (pollForm.is(':visible') && pollForm.length > 0 &&  pollForm !== '') {
 
-            console.log('Post Content:', postContent);
-            document.getElementById('pollContent').value = postContent;
-            $this.prop('disabled', true)
-           pollForm.submit();
+        if (pollForm.is(":visible") && pollForm.length > 0 && pollForm !== "") {
+            console.log("Post Content:", postContent);
+            document.getElementById("pollContent").value = postContent;
+            $this.prop("disabled", true);
+            pollForm.submit();
         }
         // If a photo form exists and is visible, submit it
-        else if (photoForm.is(':visible') && photoForm.length > 0 ) {
-            console.log('Post Content:', postContent);
-            var photoInput = document.getElementById('fileInput'); // Assuming there's a file input for photo
-            if (photoInput && photoInput.files.length === 0) {
-                toastr.error('Please upload a photo for the photo post.');
-                return
-            }
-
-
-            // Set the value of the hidden input in the photo form
-            document.getElementById('photoContent').value = postContent;
-            document.getElementById('photoPostType').value = 1;
-
-            // Submit the form
-            $this.prop('disabled', true)
-           photoForm.submit();
-        }
-        // If neither form exists, check for a plain text post
-        else if (textForm.length > 0 && postContent !== '') {
-            console.log('Post Content:', postContent);
-            if (postContent === '') {
-                toastr.error('Please enter some content for the photo post.');
+        else if (photoForm.is(":visible") && photoForm.length > 0) {
+            var photoInput = document.getElementById("fileInput");
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent === ""
+            ) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
                 return;
             }
-            document.getElementById('textcontent').value = postContent;
-            document.getElementById('photoPostType').value = 0;
-            $this.prop('disabled', true)
-           textForm.submit();
+
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent !== ""
+            ) {
+                document.getElementById("textcontent").value = postContent;
+                document.getElementById("photoPostType").value = 0;
+                $this.prop("disabled", true);
+            }
+
+            document.getElementById("photoContent").value = postContent;
+            document.getElementById("photoPostType").value = 1;
+
+            $this.prop("disabled", true);
+            photoForm.submit();
         }
+        // If neither form exists, check for a plain text post
+
         // If no valid content is provided, show an alert
         else {
-            toastr.error('Please fill all required fields before submitting.');
+            toastr.error("Please fill all required fields before submitting.");
         }
     });
-
-
 });
 
 // Wait for the entire page to load
@@ -1050,89 +1104,85 @@ $(document).ready(function () {
     };
 
     // Load saved settings or set defaults
-    let savedVisibility = localStorage.getItem('post_privacys') || '1'; // Default: Everyone
-    let savedAllowComments = localStorage.getItem('commenting_on_off') === '1'; // Convert to boolean
+    let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
+    let savedAllowComments = localStorage.getItem("commenting_on_off") === "1"; // Convert to boolean
 
     // Ensure the default value is set if no saved value exists for comments
     if (savedAllowComments !== true) {
-        savedAllowComments = '1'; // Default to true
-        localStorage.setItem('commenting_on_off', savedAllowComments);
+        savedAllowComments = "1"; // Default to true
+        localStorage.setItem("commenting_on_off", savedAllowComments);
     }
 
     // Apply settings to the form
-    const visibilityRadio = $('input[name="post_privacy"][value="' + savedVisibility + '"]');
+    const visibilityRadio = $(
+        'input[name="post_privacy"][value="' + savedVisibility + '"]'
+    );
     if (visibilityRadio.length > 0) {
-        visibilityRadio.prop('checked', true);
+        visibilityRadio.prop("checked", true);
     } else {
         // Fallback to default visibility if saved value is invalid
-        savedVisibility = '1';
-        $('input[name="post_privacy"][value="1"]').prop('checked', true);
+        savedVisibility = "1";
+        $('input[name="post_privacy"][value="1"]').prop("checked", true);
     }
 
-    $('#allowComments').prop('checked', savedAllowComments);
+    $("#allowComments").prop("checked", savedAllowComments);
 
     // Update the hidden input fields dynamically
-    $('.hiddenVisibility').val(savedVisibility);
-    $('.hiddenAllowComments').val(savedAllowComments ? '1' : '0');
+    $(".hiddenVisibility").val(savedVisibility);
+    $(".hiddenAllowComments").val(savedAllowComments ? "1" : "0");
 
     // Update the display area to show the current saved visibility and commenting status
     const visibilityName = visibilityOptions[savedVisibility];
-    $('#savedSettingsDisplay').html(`
+    $("#savedSettingsDisplay").html(`
         <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-        <p>${savedAllowComments === '1' ? "" : ""}</p>
+        <p>${savedAllowComments === "1" ? "" : ""}</p>
     `);
 
     // Save Button Click Handler
-    $('#saveSettings').on('click', function () {
+    $("#saveSettings").on("click", function () {
         // Fetch selected visibility
-        const visibility = $('input[name="post_privacy"]:checked').val() || '1'; // Default to Everyone if null
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
         // Fetch commenting status
-        const allowComments = $('#allowComments').is(':checked') ? '1' : '0';
+        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
         // Save settings to localStorage
-        localStorage.setItem('post_privacys', visibility);
-        localStorage.setItem('commenting_on_off', allowComments);
+        localStorage.setItem("post_privacys", visibility);
+        localStorage.setItem("commenting_on_off", allowComments);
 
         // Update the hidden input fields dynamically for all forms
-        $('.hiddenVisibility').val(visibility);
-        $('.hiddenAllowComments').val(allowComments);
+        $(".hiddenVisibility").val(visibility);
+        $(".hiddenAllowComments").val(allowComments);
 
         // Update display area
         const visibilityName = visibilityOptions[visibility];
-        $('#savedSettingsDisplay').html(`
+        $("#savedSettingsDisplay").html(`
             <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-            <p>${allowComments === '1' ? "" : ""}</p>
+            <p>${allowComments === "1" ? "" : ""}</p>
         `);
 
-        console.log('Saved Settings:', { visibility, allowComments });
+        console.log("Saved Settings:", { visibility, allowComments });
     });
 
     // Dynamically set the hidden values in the forms
-    $('form').on('submit', function () {
+    $("form").on("submit", function () {
         // Fetch the visibility and commenting status to update the form's hidden inputs before submission
-        const visibility = $('input[name="post_privacy"]:checked').val() || '1'; // Default to Everyone if null
-        const allowComments = $('#allowComments').is(':checked') ? '1' : '0';
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
+        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
         // Dynamically update hidden inputs in the respective forms
-        $('#hiddenVisibility').val(visibility);
-        $('#hiddenAllowComments').val(allowComments);
+        $("#hiddenVisibility").val(visibility);
+        $("#hiddenAllowComments").val(allowComments);
     });
 });
 
-
-
-
-
-
-
 $(".posts-card-like-btn").on("click", function () {
-    const icon = this.querySelector('i');
-    icon.classList.toggle('fa-regular');
-    icon.classList.toggle('fa-solid');
+    const icon = this.querySelector("i");
+    icon.classList.toggle("fa-regular");
+    icon.classList.toggle("fa-solid");
 });
 
 $(".show-btn-comment").click(function () {
-    let event_p_id = $(this).attr('event_p_id')
+    let event_p_id = $(this).attr("event_p_id");
     $(".show_" + event_p_id).toggleClass("d-none");
 });
 
@@ -1140,84 +1190,79 @@ $(".show-comment-reply-btn").click(function () {
     $(".reply-on-comment").toggleClass("d-none");
 });
 
-
 $(document).ready(function () {
     // Handle Hide/Mute/Report Button Click
-    $('.postControlButton').on('click', function () {
-        var muteIcon = $(this).find('#muteIcon');
-    var unmuteIcon = $(this).find('#unmuteIcon');
+    $(".postControlButton").on("click", function () {
+        var muteIcon = $(this).find("#muteIcon");
+        var unmuteIcon = $(this).find("#unmuteIcon");
 
-    // Toggle visibility of icons:
-    // If muteIcon is visible, hide it and show unmuteIcon
-    // If unmuteIcon is visible, hide it and show muteIcon
+        // Toggle visibility of icons:
+        // If muteIcon is visible, hide it and show unmuteIcon
+        // If unmuteIcon is visible, hide it and show muteIcon
 
         // Retrieve necessary data attributes
         var $button = $(this);
-        var eventId = $(this).data('event-id');
-        var postId = $(this).data('event-post-id');
-        var postControl = $(this).data('post-control'); // hide_post, unhide_post, mute, unmute, report
-
+        var eventId = $(this).data("event-id");
+        var postId = $(this).data("event-post-id");
+        var postControl = $(this).data("post-control"); // hide_post, unhide_post, mute, unmute, report
 
         // AJAX request
         $.ajax({
             url: base_url + "event_wall/postControl", // Adjust the endpoint URL as needed
-            type: 'POST',
+            type: "POST",
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
                 event_id: eventId,
                 event_post_id: postId,
                 post_control: postControl,
-
             },
             success: function (response) {
                 if (response.status === 1) {
-                    console.log(response.type)
-                    if (response.type == 'hide_post') {
+                    console.log(response.type);
+                    if (response.type == "hide_post") {
                         // Find and hide the post using the postId
                         $('.hidden_post[data-post-id="' + postId + '"]').hide();
-                        $('.hidden_post_poll[data-post-id="' + postId + '"]').hide();
-                    }else if (response.type == "mute") {
+                        $(
+                            '.hidden_post_poll[data-post-id="' + postId + '"]'
+                        ).hide();
+                    } else if (response.type == "mute") {
                         // Set button for unmuting
-                        $button.data('post-control', 'unmute');
+                        $button.data("post-control", "unmute");
                         // $button.text("Unmute");
 
                         // Toggle icon visibility
-                        $button.find('#muteIcon').hide();  // Hide mute icon
-                        $button.find('#unmuteIcon').show(); // Show unmute icon
-                        $button.find('.unmuteClass').show();
-                        $button.find('.muteClass').hide();
+                        $button.find("#muteIcon").hide(); // Hide mute icon
+                        $button.find("#unmuteIcon").show(); // Show unmute icon
+                        $button.find(".unmuteClass").show();
+                        $button.find(".muteClass").hide();
                     } else if (response.type === "unmute") {
                         // Set button for muting
-                        $button.data('post-control', 'mute');
+                        $button.data("post-control", "mute");
                         // $button.text("Mute");
 
                         // Toggle icon visibility
-                        $button.find('#muteIcon').show();  // Show mute icon
-                        $button.find('.muteClass').show();  // Show mute icon
-                        $button.find('#unmuteIcon').hide(); // Hide unmute icon
-                        $button.find('.unmuteClass').hide(); // Hide unmute icon
+                        $button.find("#muteIcon").show(); // Show mute icon
+                        $button.find(".muteClass").show(); // Show mute icon
+                        $button.find("#unmuteIcon").hide(); // Hide unmute icon
+                        $button.find(".unmuteClass").hide(); // Hide unmute icon
                     }
-
-
 
                     toastr.success(response.message);
                 } else {
-                    alert('Something went wrong. Please try again.');
+                    alert("Something went wrong. Please try again.");
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Error:', error);
-                alert('Failed to perform the action. Please try again later.');
-            }
+                console.error("Error:", error);
+                alert("Failed to perform the action. Please try again later.");
+            },
         });
     });
-
-
 });
 $(".modal").on("hidden.bs.modal", function () {
-    $("#postContent").val('');
+    $("#postContent").val("");
     $("#pollForm")[0].reset(); // Reset poll form
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
@@ -1231,44 +1276,38 @@ $(".modal").on("shown.bs.modal", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
 });
 
-
-
-
-
-$(document).on('click','.select_all_post',function(){
-   if($(this).is(':checked')){
-    $('.wall_post').prop('checked',true);
-   }else{
-    $('.wall_post').prop('checked',false);
-   }
-});
-
-$(document).on('click','.wall_filter_reset',function(){
-     $('.select_all_post').prop('checked',true);
-     $('.wall_post').prop('checked',true);
-     $('.view_wall_filter').attr('data-apply','0');
-
- });
- $(document).on('click','.view_wall_filter',function(){
-    var applied=$(this).attr('data-apply');
-    console.log(applied);
-    if(applied=='0'){
-        $('.select_all_post').prop('checked',true);
-        $('.wall_post').prop('checked',true);
+$(document).on("click", ".select_all_post", function () {
+    if ($(this).is(":checked")) {
+        $(".wall_post").prop("checked", true);
+    } else {
+        $(".wall_post").prop("checked", false);
     }
-
 });
 
- $(document).on('click','.wall_apply_filter',function(){
-$('#home_loader').css('display','flex');
-    $('.view_wall_filter').attr('data-apply','1');
+$(document).on("click", ".wall_filter_reset", function () {
+    $(".select_all_post").prop("checked", true);
+    $(".wall_post").prop("checked", true);
+    $(".view_wall_filter").attr("data-apply", "0");
+});
+$(document).on("click", ".view_wall_filter", function () {
+    var applied = $(this).attr("data-apply");
+    console.log(applied);
+    if (applied == "0") {
+        $(".select_all_post").prop("checked", true);
+        $(".wall_post").prop("checked", true);
+    }
+});
+
+$(document).on("click", ".wall_apply_filter", function () {
+    $("#home_loader").css("display", "flex");
+    $(".view_wall_filter").attr("data-apply", "1");
     let selectedPostTypes = [];
-    let event_id=$(this).data('event_id');
-    $(".wall_post:checked").each(function() {
+    let event_id = $(this).data("event_id");
+    $(".wall_post:checked").each(function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
 
-    $(".select_all_post:checked").each(function() {
+    $(".select_all_post:checked").each(function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
 
@@ -1276,26 +1315,27 @@ $('#home_loader').css('display','flex');
     $.ajax({
         url: base_url + "event_wall/wallFilters",
         type: "POST",
-        data: JSON.stringify({ event_id: event_id, filters: selectedPostTypes }),
+        data: JSON.stringify({
+            event_id: event_id,
+            filters: selectedPostTypes,
+        }),
         contentType: "application/json",
         headers: {
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             console.log(response.view);
-            $('.wall-post-content').html();
-            $('.wall-post-content').html(response.view);
-        $('#home_loader').css('display','flex');
+            $(".wall-post-content").html();
+            $(".wall-post-content").html(response.view);
+            $("#home_loader").css("display", "flex");
 
-            $('#main-center-modal-filter').modal('hide');
-
+            $("#main-center-modal-filter").modal("hide");
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
-            $('#home_loader').css('loader','none');
-
-        }
+            $("#home_loader").css("loader", "none");
+        },
     });
 });
