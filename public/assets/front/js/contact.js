@@ -717,12 +717,15 @@ $(document).on("keyup", ".search_phone", function () {
 $('label[for="email"]').removeClass("floatingfocus");
 
 $(document).on('click','.click-to-upload-btn', function (e) {
+    $('#home_loader').css('display','flex');
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
+        $('#home_loader').css('display','none');
         toastr.error('Please upload a CSV file first');
         return;
     }else{
-        $('#upload_csv_contact').submit();
+        $('#home_loader').css('display','none');
+        // $('#upload_csv_contact').submit();
     }
 });
