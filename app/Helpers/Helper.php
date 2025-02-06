@@ -67,28 +67,33 @@ function generate_thumbnail($fileName)
         $videoPath = public_path('storage/post_image/') . $fileName;
 
         $ffmpeg = FFMpeg::create([
-            'ffmpeg.binaries' => '/usr/local/bin/ffmpeg',  // Change this path if necessary
-            'ffprobe.binaries' => '/usr/local/bin/ffprob', // Change this path if necessary
+            'ffmpeg.binaries' => "/usr/bin/ffmpeg",  // Change this path if necessary
+            'ffprobe.binaries' => "/usr/bin/ffprobe", // Change this path if necessary
         ]);
 
         $video = $ffmpeg->open($videoPath);
 
         // Loop through and generate thumbnails at different timestamps
-        for ($i = 0; $i < 5; $i++) {
-            $imgName = uniqid('thumb_', true) . '.jpg';
-            $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
+        // for ($i = 0; $i < 5; $i++) {
+        $imgName = uniqid('thumb_', true) . '.jpg';
+        $thumbnailPath = public_path('storage/thumbnails/') . $imgName;
+        $videoDurationInSeconds = getVideoDuration($videoPath);  // You need a method to get the total duration of the video
+        $randomSecond = rand(0, $videoDurationInSeconds);
+        $video->frame(TimeCode::fromSeconds($randomSecond))
+            ->save($thumbnailPath);
 
-            $video->frame(TimeCode::fromSeconds(7 * ($i + 1)))
-                ->save($thumbnailPath);
+        // If the file is generated successfully, return it
+        if (file_exists($thumbnailPath)) {
 
-            // If the file is generated successfully, return it
-            if (file_exists($thumbnailPath)) {
-                return $imgName;
-            }
+            return $imgName;
         }
+        // }
+
 
         return null; // Return null if no thumbnail is generated
     } catch (\Exception $e) {
+
+
         return null;
     }
 }

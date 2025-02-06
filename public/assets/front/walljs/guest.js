@@ -159,6 +159,29 @@ $(document).on('click','.add_guest_phone_seeall',function(){
     });
 });
 
+$(document).on('click','.edit-failed-guest-btn',function(){
+if($('.all_inforamtion_conform').is(':checked')){
+    $('#editguest').modal('hide');
+}else{
+    toastr.error('Please tick on all information is correct');
+}
+})
+
+$(document).ready(function () {
+    $(".image-zoom-icon").click(function () {
+        var imgSrc = $(this).data("img");
+
+        $.magnificPopup.open({
+            items: {
+                src: imgSrc,
+                type: "image"
+            },
+            gallery: {
+                enabled: false
+            }
+        });
+    });
+});
 //   $(document).ready(function () {
 //     $(".expand-icon").on("click", function () {
 //         const textbox = $("#violation-textbox");

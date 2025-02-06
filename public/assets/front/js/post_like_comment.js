@@ -199,7 +199,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal =  $(".post_comment").val();
+        var commentVal = $(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -306,24 +306,25 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
                 `;
-
+                var replyList;
                 if (parentCommentId) {
                     // Append as a reply to the parent comment
                     const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
                     if (parentComment.length > 0) {
-                        let replyList = parentComment.find("ul.primary-comment-replies");
+                        replyList= parentComment.find("ul.primary-comment-replies");
                         if (replyList.length === 0) {
                             replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
                         }
 
                         // Check if the reply is already appended
                         if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.append(newCommentHTML);
+                            replyList.prepend(newCommentHTML);
+                            // replyList.append(newCommentHTML);
                         }
                     }
                 } else {
@@ -332,7 +333,8 @@ $(document).ready(function () {
 
                     // Check if the comment is already appended
                     if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.append(newCommentHTML);
+                        commentList.prepend(newCommentHTML);
+                        // commentList.append(newCommentHTML);
                     }
                 }
 
@@ -1188,7 +1190,9 @@ $(document).on("keyup", ".search_contact", function () {
     const name=$(this).val();
     const event_id = $('#event_id').val();
 
-    var see_all=$(this).data('see_all');
+    var see_all=$(this).attr('data-see_all');
+    console.log(see_all);
+
     $('#home_loader').css('display','block');
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
@@ -1244,5 +1248,10 @@ $(document).on("keyup", ".search_contact", function () {
 //     });
 // });
 $(document).on('keyup','.post_comment',function(){
-    $(".parent_comment_id").val('');
+//     $(".parent_comment_id").val('');
+// })
+    var commentVal=$(".parent_comment_id").val();
+    if(commentVal==""){
+        $(".parent_comment_id").val('');
+    }
 })

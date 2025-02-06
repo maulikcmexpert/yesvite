@@ -1,3 +1,6 @@
+@php
+use Carbon\Carbon;
+@endphp
 <div class="calendar-wrp">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -113,7 +116,10 @@
         <path d="M5.52987 11.3833H5.53585" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
-      Total Events for 2024
+      @php
+        $currentYear = Carbon::now()->year;
+      @endphp
+      Total Events for {{$currentYear}}
     </h5>
      <h3 class="text-center">{{$profileData['total_events_of_year']}}</h3>
   </div>

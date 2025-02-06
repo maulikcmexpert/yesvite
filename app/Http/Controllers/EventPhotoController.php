@@ -131,10 +131,10 @@ class EventPhotoController extends Controller
                         'comment' => $values->comment_text,
                         'media' => (!empty($values->media)) ? asset('storage/comment_media/' . $values->media) : "",
                         'user_id' => $values->user_id,
-                        'username' => $values->user->firstname . ' ' . $values->user->lastname,
+                        'username' => @$values->user->firstname . ' ' . @$values->user->lastname,
                         'profile' => (!empty($values->user->profile)) ? asset('storage/profile/' . $values->user->profile) : "",
                         'comment_total_likes' => $values->post_comment_reaction_count,
-                        'location' => $values->user->city . ($values->user->state ? ', ' . $values->user->state : ''),
+                        'location' => @$values->user->city . (@$values->user->state ? ', ' . @$values->user->state : ''),
                         'is_like' => 0, // Adjust based on the user's like status
                         'created_at' => $values->created_at,
                         'total_replies' => $values->replies_count,
@@ -696,7 +696,8 @@ class EventPhotoController extends Controller
 
     public function createEventPost(Request $request)
     {
-        // dd($request);
+        // dd($request->file('files'));
+        // dd($request->hasFile('files'));
         $user = Auth::guard('web')->user()->id;
 
         // Create new event post
@@ -709,14 +710,14 @@ class EventPhotoController extends Controller
         $createEventPost->commenting_on_off =  $request->commenting_on_off;; // Comments allowed
         $createEventPost->is_in_photo_moudle = "1"; // Whether the post contains photos
         $createEventPost->save();
-
+        // dd($request->hasFile('files'));
         // Check if files were uploaded
-        if ($createEventPost->id && $request->hasFile('files')) {
+        if ($createEventPost->id && $request->file('files')) {
             $postFiles = $request->file('files'); // Get the uploaded files
             $imageUrls = [];
             $videoCount = 0;
             $imageCount = 0;
-
+            // dd($postFiles);
             foreach ($postFiles as $key => $postFile) {
                 $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
 
@@ -734,7 +735,7 @@ class EventPhotoController extends Controller
 
                     $duration = getVideoDuration($filePath); // Assuming this is a helper function
                     $thumbName = generate_thumbnail($fileName);
-                    $postFile->move(public_path('storage/post_image/'), $fileName);
+                    // $postFile->move(public_path('storage/post_image/'), $fileName);
                 }
 
                 //     // Process image
@@ -1097,7 +1098,7 @@ class EventPhotoController extends Controller
 
         $parentCommentId =  $request['parent_comment_id'];
         $mainParentId = (new EventPostComment())->getMainParentId($parentCommentId);
-
+        
         $event_post_comment = new EventPostComment;
         $event_post_comment->event_id = $request['event_id'];
         $event_post_comment->event_post_id = $request['event_post_id'];
@@ -1114,11 +1115,10 @@ class EventPhotoController extends Controller
         }
         $event_post_comment->save();
 
-
         // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
+            //     'sender_id' => $user->id,
+            //     'event_id' => $request['event_id'],
+            //     'post_id' => $request['event_post_id'],
         //     'comment_id' => $event_post_comment->id
         // ];
         // sendNotification('reply_on_comment_post', $notificationParam);
@@ -1126,7 +1126,8 @@ class EventPhotoController extends Controller
         $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
             $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');
         }])->withcount('post_comment_reaction', 'replies')->where(['id' => $mainParentId, 'event_post_id' => $request['event_post_id']])->orderBy('id', 'DESC')->first();
-
+        
+        
         $commentInfo['id'] = $replyList->id;
         $commentInfo['event_post_id'] = $replyList->event_post_id;
         $commentInfo['comment'] = $replyList->comment_text;
@@ -1140,6 +1141,7 @@ class EventPhotoController extends Controller
         $commentInfo['total_replies'] = $replyList->replies_count;
         $commentInfo['posttime'] = setpostTime($replyList->created_at);
         $commentInfo['comment_replies'] = [];
+      
 
         if (!empty($replyList->replies)) {
             foreach ($replyList->replies as $replyVal) {
