@@ -314,7 +314,7 @@
                                                                                 : '';
                                                                         // dd($login_user_id);
                                                                     @endphp
-                                                                    @if($guest['is_sync']=="0")
+                                                                    @if($guest['is_sync']=="1")
                                                                    
                                                                     @else
                                                                     <button
