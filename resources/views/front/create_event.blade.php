@@ -1450,7 +1450,7 @@
 
                                             {{-- end code --}}
                                         @else
-                                        @if($category['totalMissing'] == 0)
+                                        @if($data['totalMissing'] == 0)
                                             <span
                                                 class="me-2 missing-category-h6-{{ $index }} missing-category-svg-{{ $index }}"
                                                 style="color: rgb(52, 192, 92);">
@@ -1495,7 +1495,7 @@
                                                 </span>
                                                 <h6 class="me-2 extra-category-h6-{{ $index }}"
                                                     style="color:#34C05C"><span
-                                                        id="extra-category-{{ $index }}">{{ abs($data['remainingQnt']) }}</span>
+                                                        id="extra-category-{{ $index }}">{{ abs($data['totalOver']) }}</span>
                                                     Item Over</h6>
 
                                                 {{-- end code --}}

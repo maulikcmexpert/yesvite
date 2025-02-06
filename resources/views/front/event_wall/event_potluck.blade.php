@@ -1,4 +1,3 @@
-{{-- {{dd($potluckDetail)}} --}}
 
 <main class="new-main-content">
 
@@ -526,8 +525,7 @@
                                                                                     $icons = 'd-none';
                                                                                     $missing = '';
                                                                                     if (
-                                                                                        $item['spoken_quantity'] ==
-                                                                                        $item['quantity']
+                                                                                        (intval($item['itmquantity']) + intval($item['innerUserQnt'])) >= $item['quantity'] 
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';
