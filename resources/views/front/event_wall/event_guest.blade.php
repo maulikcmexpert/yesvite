@@ -1779,8 +1779,8 @@
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary failed-btn"
                         data-bs-dismiss="modal">Re-send</button> -->
-                    <button type="button" class="btn btn-secondary success-btn"
-                        data-bs-dismiss="modal">Re-send</button>
+                    <button type="button" class="btn btn-secondary success-btn edit-failed-guest-btn"
+                        >Re-send</button>
                 </div>
             </div>
         </div>
@@ -1944,7 +1944,7 @@
                                 <div class="toggle-button-cover toggle-custom">
                                     <div class="buttons-cover">
                                         <div class="button r" id="button-1">
-                                            <input type="checkbox" class="checkbox" checked="">
+                                            <input type="checkbox" class="checkbox all_inforamtion_conform" checked="">
                                             <div class="knobs"></div>
                                             <div class="layer"></div>
                                         </div>
