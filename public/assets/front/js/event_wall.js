@@ -1020,6 +1020,9 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
+            document.getElementById("textcontent").value =
+                $("#postContent").val();
+            document.getElementById("photoPostType").value = 0;
             $("#photoForm").submit(); // Submit the form
         }
     });
@@ -1036,7 +1039,7 @@ $(document).ready(function () {
         // Check if the poll form exists and is valid
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
-        var textForm = $("#textform");
+
         var postContent = $(".post_message").val().trim();
 
         // Fallback to empty string if #postContent does not exist
