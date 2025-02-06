@@ -361,7 +361,7 @@ $(document).on('click', '.saveItemBtn', function () {
     // const quantity = $('#newQuantity').val();
     //    alert(quantity);
     $.ajax({
-        url: base_url + "event_potluck/editUserPotluckItem/", // Update with your URL
+        url: base_url + "event_potluck/editUserPotluckItem", // Update with your URL
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
