@@ -154,8 +154,7 @@ class EventPotluckController extends Controller
                         }
                     }
                     //$data['remainingQnt1']= $remainingQnt;
-                    dd($remainingQnt);
-                    dd($remainingQnt,$categoryQuantity);
+                    // dd($remainingQnt);
                     $remainingQnt =  $remainingQnt - $categoryQuantity;
                     $potluckCategory['remainingQnt'] = $remainingQnt;
                     $potluckCategory['categoryQuantity'] = $categoryQuantity;
@@ -164,13 +163,6 @@ class EventPotluckController extends Controller
                     $potluckDetail['podluck_category_list_new'][] = $potluckCategory;
                 }
                 $potluckDetail['totalCategoryItem'] =  $totalCategoryItem;
-                
-                
-
-
-
-
-
                 //   dd($eventpotluckData);
                 foreach ($eventpotluckData as $value) {
                     $itempotluckCategory['id'] = $value->id;
