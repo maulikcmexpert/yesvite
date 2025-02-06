@@ -1,4 +1,4 @@
-{{-- {{dd($eventInfo)}} --}}
+ {{dd($eventInfo)}}
 @php
 
     $guestArray = $eventInfo['guest_view']['event_detail']['guests']['all_invited_users'] ?? null;
