@@ -1,4 +1,4 @@
-{{-- {{dd($users)}} --}}
+{{dd($storiesList)}}
 <div class="wall-main-story-wrp">
     <div class="swiper story-slide-slider">
         <div class="swiper-wrapper">
@@ -155,7 +155,7 @@
 </div>
 
 @foreach ($storiesList as $Allstory)
-    {{dd($Allstory)}}
+    {{-- {{dd($Allstory)}} --}}
     @if ($Allstory['id'] !== $users->id)
         <!-- Ensure we only show modals for different stories -->
         <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
