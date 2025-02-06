@@ -63,11 +63,10 @@ $(document).ready(function () {
                     let reactionImage = "";
                     if (response.is_reaction == "1") {
                         reactionImage =
-                        '<img src="' +
-                        base_url +
-                        'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
                     }
-
 
                     // Update the reaction image in post
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
@@ -271,7 +270,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal = $(".post_comment").val();
+        var commentVal = $(this).prev(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -296,6 +295,7 @@ $(document).ready(function () {
         const commentText = commentInput.val().trim();
         // const parentCommentId = $(".parent_comment_id").val() || '';
         const parent_comment_id = $(".parent_comment_id").val();
+        console.log({ parent_comment_id });
         var parentCommentId =
             commentVal !== "" &&
             parent_comment_id !== "undefined" &&
