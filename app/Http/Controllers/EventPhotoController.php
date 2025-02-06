@@ -761,10 +761,7 @@ class EventPhotoController extends Controller
                 $eventPostImage->thumbnail = $thumbName;
                 $eventPostImage->save();
             }
-            echo $videoCount;
-            echo "===================";
-            echo $imageCount;
-            die;
+
             return redirect()->back()->with('success', 'Event post uploded successfully!');
         }
 
@@ -918,6 +915,7 @@ class EventPhotoController extends Controller
             $isReaction = 1;
         } else {
             // User has already reacted
+
             if ($checkReaction->unicode != $unicode) {
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;

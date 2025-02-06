@@ -721,11 +721,20 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
-        $('#home_loader').css('display','none');
+        $('#home_loader').css('display', 'none');
         toastr.error('Please upload a CSV file first');
         return;
-    }else{
+    }
+
+    var fileName = fileInput.files[0].name;
+    var fileExtension = fileName.split('.').pop().toLowerCase();
+
+    if (fileExtension !== 'csv') {
+        $('#home_loader').css('display', 'none');
+        toastr.error('Only CSV files are allowed.');
+        return;
+    }
         $('#home_loader').css('display','none');
         $('#upload_csv_contact').submit();
-    }
+    // }
 });

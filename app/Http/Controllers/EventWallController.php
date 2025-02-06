@@ -1361,7 +1361,7 @@ class EventWallController extends Controller
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        if ($creatEventPost->id  && $request->hasFile('files')) {
+        if ($creatEventPost->id  && $request->file('files')) {
             $postimages = $request->file('files');
 
             $video = 0;
@@ -1990,8 +1990,11 @@ class EventWallController extends Controller
             $message = "Post liked by you";
             $isReaction = 1;
         } else {
+
+
             // User has already reacted
             if ($checkReaction->unicode != $unicode) {
+
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;
                 $checkReaction->unicode = $unicode;
@@ -1999,6 +2002,7 @@ class EventWallController extends Controller
                 $message = "Post liked by you";
                 $isReaction = 1;
             } else {
+
                 // Same reaction, dislike the post
                 $checkReaction->delete();
                 $removeNotification = Notification::where([
@@ -2015,6 +2019,7 @@ class EventWallController extends Controller
                 $isReaction = 0;
             }
         }
+
 
         // Get total count of reactions
         $counts = EventPostReaction::where([
