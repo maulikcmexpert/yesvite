@@ -71,7 +71,7 @@
                                     @endphp
                                     <h5 class="{{ $fontColor }}" class="profile-pic"
                                         id="profile-pic-{{ $Allstory['id'] }}"
-                                        onclick="showStories( {{ $event }},{{ $Allstory['id'] }})">
+                                        onclick="AllUserStory( {{ $event }},{{ $Allstory['id'] }})">
                                         {{ $initials }}
                                     </h5>
                                 @endif
