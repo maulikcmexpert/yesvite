@@ -22,18 +22,17 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#likeButton", function () {
-        clearTimeout(longPressTimer); // Clear the long press timer
-
-        // If it's a long press, don't process the click event
+        clearTimeout(longPressTimer);
         if (isLongPresss) return;
 
-        // Handle single tap like/unlike
         const button = $(this);
         const isLiked = button.hasClass("liked");
-        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+        const userId = button.data("user-id"); // Assuming each button has a user ID
+        let reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle between 💔 or ❤️
 
-
-        // Toggle like button appearance
+        // Toggle UI button appearance
         if (isLiked) {
             button.removeClass("liked");
             button.find("i").removeClass("fa-solid").addClass("fa-regular");
@@ -42,12 +41,6 @@ $(document).ready(function () {
             button.find("i").removeClass("fa-regular").addClass("fa-solid");
         }
 
-
-
-
-        // AJAX call to update the like state
-        const eventId = button.data("event-id");
-        const eventPostId = button.data("event-post-id");
         $.ajax({
             url: base_url + "event_wall/userPostLikeDislike",
             method: "POST",
@@ -62,9 +55,8 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
-                    $(`#likeCount_${eventPostId}`).text(
-                        `${response.count} Likes`
-                    );
+                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+
                     let reactionImage = "";
                     if (reaction === "\u{1F604}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
@@ -72,15 +64,59 @@ $(document).ready(function () {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
                     } else if (reaction === "\u{2764}") {
                         reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
-                    } else {
-                        reactionImage = "";
                     }
 
-                    // Update the reaction display
+                    // Update the reaction image in post
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
 
-                } else {
-                    // alert(response.message);
+                    // **Update Reaction Modal**
+                    let modalId = `#reaction-modal-${eventPostId}`;
+                    let allReactionTab = $(`${modalId} #nav-all-reaction`);
+                    let userReactionItem = $(`${modalId} .reaction-user-${userId}`);
+
+                    // Check if user already reacted
+                    if (userReactionItem.length) {
+                        userReactionItem.find(".reaction-profile-reaction-img img").attr("src", reactionImage);
+                    } else {
+                        // Append new user reaction
+                        allReactionTab.find("ul").append(`
+                            <li class="reaction-info-wrp reaction-user-${userId}">
+                                <div class="commented-user-head">
+                                    <div class="commented-user-profile">
+                                        <div class="commented-user-profile-img">
+                                            <img src="${userProfile}" alt="User Profile">
+                                        </div>
+                                        <div class="commented-user-profile-content">
+                                            <h3>${userName}</h3>
+                                            <p>${userLocation}</p>
+                                        </div>
+                                    </div>
+                                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                        ${reactionImage}
+                                    </div>
+                                </div>
+                            </li>
+                        `);
+                    }
+
+                    // Update the count inside the reaction tabs
+                    let tabButton = $(`${modalId} #nav-${reaction}-reaction-tab-${eventPostId}`);
+                    if (tabButton.length) {
+                        let count = parseInt(tabButton.text().trim()) + 1;
+                        tabButton.html(`${reactionImage} ${count}`);
+                    } else {
+                        // Append a new tab if not exists
+                        $(`${modalId} .reaction-nav-tabs`).append(`
+                            <button class="nav-link" id="nav-${reaction}-reaction-tab-${eventPostId}"
+                                data-bs-toggle="tab"
+                                data-bs-target="#nav-${reaction}-reaction-${eventPostId}"
+                                type="button" role="tab"
+                                aria-controls="nav-${reaction}-reaction"
+                                aria-selected="false">
+                                ${reactionImage} 1
+                            </button>
+                        `);
+                    }
                 }
             },
             error: function (xhr) {
@@ -89,6 +125,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $(document).on("click", "#CommentlikeButton", function () {
 
 
