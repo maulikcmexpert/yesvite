@@ -136,7 +136,7 @@ class EventPotluckController extends Controller
                                 $potluckItem['item_carry_users'][] = $userPotluckItem;
                                 $itmquantity = $itmquantity +  $itemcarryUser->quantity;
                                 $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
-                                if ($itemcarryUser->user_id != $id) {
+                                if ($itemcarryUser->user_id != $user->id) {
                                     $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
                                 }
                             }
@@ -149,7 +149,7 @@ class EventPotluckController extends Controller
                             $totalCategoryItem++;
                         }
                     }
-
+                    dd($remainingQnt,$categoryQuantity)
                     $remainingQnt =  $remainingQnt - $categoryQuantity;
                     $potluckCategory['remainingQnt'] = $remainingQnt;
                     $potluckCategory['categoryQuantity'] = $categoryQuantity;
