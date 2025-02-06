@@ -730,7 +730,7 @@ class EventPotluckController extends Controller
                     'user_id' => $user->id,
                     'event_potluck_category_id' => $categoryId,
                     'event_potluck_item_id' => $itemId,
-                    'quantity' => $quantity
+                    'quantity' => 0
                 ]);
                 $checkIsExist = $newUserItem;
             } else {
