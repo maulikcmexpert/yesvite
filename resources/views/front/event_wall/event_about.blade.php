@@ -498,7 +498,7 @@
                                                 “{{ $eventDetails['message_to_guests'] }}”
                                             </p>
                                         </div>
-                                        @dd($eventDetails)
+                                        
                                         @if (!empty($eventDetails['event_location_name']) || !empty($eventDetails['address_1']))
                                             <div class="location-wrp cmn-card">
                                                 <h4 class="title">Location</h4>
@@ -515,14 +515,14 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null  && $eventDetails['logitude']!=0 )
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['longitude']!=''  && $eventDetails['longitude']!=null  && $eventDetails['longitude']!=0 )
                                                 @php
                                                    $latitude = !empty($eventDetails['latitude'])
     ? $eventDetails['latitude']
     : '39.8283'; // Default latitude for the USA
 
 $longitude = !empty($eventDetails['longitude'])
-    ? $eventDetails['logitude']
+    ? $eventDetails['longitude']
     : '-98.5795'; // Default longitude for the USA
 
                                                 @endphp
