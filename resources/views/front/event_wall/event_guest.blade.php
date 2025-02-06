@@ -1702,7 +1702,7 @@
                                         @endif
                                 </div>
                                 @endif
-                                <div class="d-flex align-items-center mt-1">
+                                <div class="d-flex align-items-center justify-content-between mt-1">
                                     @if(!empty($invite['email'] ))
                                     <div class="invite-mail-data faild-content">
                                         <div class="d-flex align-items-center">
