@@ -667,7 +667,7 @@
                         <input type="file" name="csv_file" id="csv_file">
                       
                     </div>
-                    <div class="uploadedcvs-file-wrp">
+                    <!-- <div class="uploadedcvs-file-wrp">
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
                             <div class="uploadedcvs-file-card-icon">
@@ -720,12 +720,19 @@
                             <progress id="progress-bar" value="75" max="100"></progress>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>  
                 <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
-                    <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a>
-                    <button type="submit" class="cmn-btn click-to-upload-btn"><input type="file"> Click to Upload</button>
+                    <!-- <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a> -->
+                    <a href="{{ asset('assets/front/csv/demo.xlsx') }}" 
+                            download="demo.xlsx" 
+                            type="button" 
+                            class="cmn-btn download-csv-btn download">
+                            Download CSV
+                            </a>
+
+                    <button type="submit" class="cmn-btn click-to-upload-btn">Click to Upload</button>
                 </div>
 
                                     
@@ -736,38 +743,4 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('download-csv-btn').addEventListener('click', function() {
-        var link = document.createElement('a');
-        link.href = "{{ asset('assets/front/csv/demo.xlsx') }}";
-        link.download = "demo.xlsx"; // Specify the file name
-        link.click();
-    });
-
-    document.getElementById("csvInput").addEventListener("change", function(event) {
-    const file = event.target.files[0]; // Get uploaded file
-
-    if (file) {
-        const fileName = document.getElementById("fileName");
-        const fileSize = document.getElementById("fileSize");
-        const progressBar = document.getElementById("progressBar");
-        const uploadedFileContainer = document.getElementById("uploadedFileContainer");
-        console.log({fileName,fileSize,progressBar,uploadedFileContainer});
-        
-        fileName.innerText = file.name;
-        fileSize.innerText = `0 KB of ${Math.round(file.size / 1024)} KB`;
-        uploadedFileContainer.style.display = "block"; 
-
-        let progress = 0;
-        const fakeUpload = setInterval(() => {
-            progress += 10;
-            progressBar.style.width = `${progress}%`;
-            fileSize.innerText = `${Math.round((file.size * progress) / 100 / 1024)} KB of ${Math.round(file.size / 1024)} KB`;
-
-            if (progress >= 100) {
-                clearInterval(fakeUpload); // Stop the fake upload
-            }
-        }, 500);
-    }
-});
-</script>
+ 

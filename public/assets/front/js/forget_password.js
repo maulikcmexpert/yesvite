@@ -207,7 +207,7 @@ document.getElementById("otpverify").addEventListener("click", function (event) 
 
 $(document).on("click", "#resend_otp", function () {
     var email = $("#useremail").val();
-    $('#loader').css('display','block');
+    $('#loader').css('display','flex');
     $.ajax({
         url: base_url + "otp_verify",
         type: "POST",

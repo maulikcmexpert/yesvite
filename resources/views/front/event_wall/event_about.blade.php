@@ -498,10 +498,11 @@
                                                 “{{ $eventDetails['message_to_guests'] }}”
                                             </p>
                                         </div>
+                                        
                                         @if (!empty($eventDetails['event_location_name']) || !empty($eventDetails['address_1']))
                                             <div class="location-wrp cmn-card">
                                                 <h4 class="title">Location</h4>
-                                                <h5>{{ $eventDetails['event_location_name'] ?: 'Tom’s House' }}</h5>
+                                                <h5>{{ $eventDetails['event_location_name'] ?: '' }}</h5>
                                                 <p>{{ $eventDetails['address_1'] }} {{ $eventDetails['city'] }}
                                                     {{ $eventDetails['state'] }} {{ $eventDetails['zip_code'] }}</p>
                                                 <div id="map">
@@ -514,23 +515,27 @@
                                                         alt="marker" class="marker">
                                                 </div>
 
-                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['logitude']!=''  && $eventDetails['logitude']!=null  && $eventDetails['logitude']!=0 )
+                                                @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['longitude']!=''  && $eventDetails['longitude']!=null  && $eventDetails['longitude']!=0 )
                                                 @php
                                                    $latitude = !empty($eventDetails['latitude'])
-    ? $eventDetails['latitude']
-    : '39.8283'; // Default latitude for the USA
+                                                        ? $eventDetails['latitude']
+                                                        : '39.8283';
 
-$longitude = !empty($eventDetails['longitude'])
-    ? $eventDetails['logitude']
-    : '-98.5795'; // Default longitude for the USA
+                                                    $longitude = !empty($eventDetails['longitude'])
+                                                        ? $eventDetails['longitude']
+                                                        : '-98.5795'; 
 
                                                 @endphp
 
-                                                <iframe
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74843221347!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat%2C%20India!5e0!3m2!1sen!2sus!4v1738165607121!5m2!1sen!2sus"
-                                                    width="600" height="450" style="border:0;" allowfullscreen=""
-                                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                                </iframe>
+                                                    <iframe 
+                                                    width="600" 
+                                                    height="450" 
+                                                    style="border:0;" 
+                                                    loading="lazy" 
+                                                    allowfullscreen 
+                                                    referrerpolicy="no-referrer-when-downgrade" 
+                                                    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDPyeIABhKFMSFXrrcR1IE8jBUXJt-2bG4&center=<?php echo $latitude; ?>,<?php echo $longitude; ?>&zoom=14">
+                                                    </iframe>
                                                 <a href="https://www.google.com/maps/dir/?api=1&destination={{ $latitude }},{{ $longitude }}"
                                                     target="_blank" class="direction-btn">
                                                     Directions

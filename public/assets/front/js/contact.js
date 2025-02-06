@@ -146,7 +146,7 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#home_loader").show();
+                $('#home_loader').css('display','flex');
             },
             success: function (data) {
                 if (data.status == "0" && scroll==1) {
@@ -187,7 +187,7 @@ $(document).on("keyup", ".search_phone", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             beforeSend: function () {
-                $("#home_loader").show();
+                $('#home_loader').css('display','flex');
             },
             success: function (data) {
                 console.log(data);
@@ -237,7 +237,7 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $("#home_loader").show();
+                $('#home_loader').css('display','flex');
             },
             success: function (data) {
                 console.log(data);
