@@ -5,6 +5,9 @@ use Carbon\Carbon;
     <img src="{{asset('assets/front/loader.gif')}}" />
 </div> -->
 <input id="asset_path" type="hidden" value="{{asset('assets/emojis/')}}" />
+<input id="host_id" type="hidden" value="{{$hosts_id}}" />
+<input id="host_image" type="hidden" value="{{$host_profile}}" />
+<input id="host_name" type="hidden" value="{{$hosts_name}}" />
 <div class="message-area">
     <div class="container">
         <div class="row">
