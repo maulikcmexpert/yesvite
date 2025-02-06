@@ -299,7 +299,7 @@ $(document).on('click', '.delete_failed_contact', function () {
         },
         success: function (response) {
             console.log(response);
-            if (response.success === 1) {
+            if (response.success ==true) {
                 toastr.success(response.message);
                 window.location.reload();
                 // // Find the guest container by guestId and remove it from the DOM
@@ -325,12 +325,11 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 });
 
-
+let userIds = [];
 $(document).on('click','.re_send_failed_invites', function(e) {
     e.preventDefault();
     var event_id = $('#event_id').val();
 
-    let userIds = [];
     $('.failed_check_resend_email:checked').each(function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
