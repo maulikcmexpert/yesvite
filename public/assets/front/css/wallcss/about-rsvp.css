@@ -643,6 +643,43 @@
     margin-bottom: 8px;
 }
 
+
+
+
+#rsvp_by_notification .modal-header{
+    margin-bottom: 0;
+}
+
+#rsvp_by_notification .guest-rsvp-attend input[type=radio]:checked ~ label{
+    border: 1px solid var(--green) !important;
+}
+
+#rsvp_by_notification .guest-rsvp-attend input[type=radio]:checked ~ label:after{
+    background-color: var(--green) !important;
+    border-color: var(--green) !important;
+}
+
+#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label{
+    border: 1px solid var(--pink) !important;
+}
+
+#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label svg path{
+    stroke: #E03137;
+}
+
+#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label::after{
+    background-color: var(--pink) !important;
+    border-color: var(--pink) !important;
+}
+
+
+#rsvp_by_notification .rsvp-guest h5{
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Bold);
+    color: var(--secondary-black);
+    margin-bottom: 8px;
+}
+
 .rsvp-guest .rsvp-guest-count{
     display: flex;
     align-items: center;

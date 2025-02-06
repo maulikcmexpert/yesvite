@@ -526,7 +526,13 @@ display:none;}
 #aboutsuccess .guest-rsvp-attend input[type=radio]:checked ~ label svg path{
     stroke: var(--green);
 }
+#rsvp_by_notification .guest-rsvp-attend svg path{
+    stroke: var(--light-color);
+}
 
+#rsvp_by_notification .guest-rsvp-attend input[type=radio]:checked ~ label svg path{
+    stroke: var(--green);
+}
 .guest-rsvp-attend h6{
     font-size: 16px;
     font-family: var(--SFProDisplay-Medium);
