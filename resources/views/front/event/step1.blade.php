@@ -636,7 +636,7 @@
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
                                                                                     required="" 
-                                                                                    value="02:15 PM" />
+                                                                                    value="{{$data['start_time']}}" />
 
                                                                                     
                                                                                     <span
