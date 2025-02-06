@@ -184,7 +184,7 @@ if ($hostView) {
                                                 @endif
                                             @endif
                                             </div>
-                                            @if ($eventInfo['guest_view']['is_host'] == 1)
+                                            @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
                                             
                                                         @if($guest['is_sync']=="1")
                                                         <button type="button" ><i

@@ -137,7 +137,7 @@
                                     </ul>
                                     @endif
                                 </div>
-                                @if($upcomingEvent['is_event_owner']==1)
+                                @if($upcomingEvent['is_event_owner']==1 ||$upcomingEvent['is_co_host']=="1")
                                 <div class="dropdown upcoming-card-dropdown">
                                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>

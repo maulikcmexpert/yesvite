@@ -594,6 +594,17 @@
                                                                         </button>
                                                                     </h2>
 
+                                                                    @if(empty($item['item_carry_users']))
+                                                                    <div id="lumpia-collapseOne"
+                                                                                class="accordion-collapse collapse show"
+                                                                                aria-labelledby="lumpia"
+                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                <div class="accordion-body"
+                                                                                    id="user-container-{{ $item['id'] }}">
+                                                                                </div>
+                                                                            </div>
+                                                                    @endif
+
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         @if ($login_user_id === $users['user_id'])
                                                                             <div id="sprite-collapseOne-{{ $item['id'] }}"
@@ -761,7 +772,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-
                                                                             <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"

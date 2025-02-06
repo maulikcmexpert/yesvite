@@ -309,9 +309,9 @@
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
                                                                         $isDisabled =
-                                                                            $eventDetails['host_id'] != $login_user_id
-                                                                                ? 'd-none'
-                                                                                : '';
+                                                                           ($eventDetails['is_host']==1 || $eventDetails['is_co_host']=="1")
+                                                                                ? ''
+                                                                                : 'd-none';
                                                                         // dd($login_user_id);
                                                                     @endphp
                                                                     @if($guest['is_sync']=="1")
