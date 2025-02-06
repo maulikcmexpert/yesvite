@@ -1381,3 +1381,8 @@ $(document).on('click', '#likeButton', function () {
     //     }
     // });
 });
+$(document).on('click', function (e) {
+    if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
+        $('#emojiDropdown').hide(); // Hide emoji picker when clicked outside
+    }
+});
