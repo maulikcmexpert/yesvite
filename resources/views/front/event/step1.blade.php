@@ -636,6 +636,7 @@
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
                                                                                     required="" 
+                                                                                    id="activity-start-time"
                                                                                     value="{{$data['start_time']}}" />
 
                                                                                     

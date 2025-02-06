@@ -15,7 +15,7 @@
           $i=0;
           $colorClass = $series[$colorIndex % count($series)];
           $colorIndex++;
-          $eventRoute = ($events['event_wall'] == "0")
+          $eventRoute = ($events['event_wall'] == "0" &&($events['is_event_owner'] == 1 || $events['is_co_host'] == "1"))
                 ? route('event.event_about', encrypt($events['id']))
                 : route('event.event_wall', encrypt($events['id']));
           @endphp
