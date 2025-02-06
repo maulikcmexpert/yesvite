@@ -2164,8 +2164,13 @@
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow #progress-bar::after {
-    background-color: #fccd1e;
+    background-color: #fccd1e !important;
     width: 50%;
+    -webkit-background-clip: padding-box;
+    -webkit-text-fill-color: #fccd1e !important;
+
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {

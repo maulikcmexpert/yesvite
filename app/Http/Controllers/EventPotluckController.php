@@ -121,6 +121,7 @@ class EventPotluckController extends Controller
                             $potluckCategory['items'][] = $potluckItem;
                         }
                     }
+                    // dd()
                     $potluckCategoryData[] = $potluckCategory;
                 }
 
