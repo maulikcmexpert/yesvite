@@ -1702,7 +1702,9 @@
                                         @endif
                                 </div>
                                 @endif
-                                <div class="d-flex align-items-center mt-1">
+                                @if(!empty($invite['email'] ))
+
+                                <div class="d-flex align-items-center justify-content-between mt-1">
                                     @if(!empty($invite['email'] ))
                                     <div class="invite-mail-data faild-content">
                                         <div class="d-flex align-items-center">
@@ -1739,13 +1741,14 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                    id="coming">
-                                    @else
                                     <!-- <input class="form-check-input failed-checkout" type="checkbox" value=""
-                                        id="coming"> -->
+                                    id="coming"> -->
+                                    @else
+                                    <input class="form-check-input failed-checkout" type="checkbox" value=""
+                                        id="coming">
                                         @endif
                                 </div>
+                                @endif
                             </div>
                         </div>
 
