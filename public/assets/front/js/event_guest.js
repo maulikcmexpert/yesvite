@@ -325,19 +325,18 @@ $(document).on('click', '.delete_failed_contact', function () {
 });
 
 
-$(document).on('click','.re_send_failed_invites', function() {
+$(document).on('click','.re_send_failed_invites', function(e) {
+    e.preventDefault();
     var event_id = $('#event_id').val();
 
     let userIds = [];
-    $('.failed_check_resend_email').each(function() {
+    $('.failed_check_resend_email:checked').each(function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
         let app_user = $(this).attr('data-app_user');
         userIds.push({ id: userId, prefer_by: preferBy,app_user:app_user});
     });
-
-    console.log(userIds);
-    
+    $('#home_loader').css('display','block');    
 
     $.ajax({
         url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
@@ -350,6 +349,8 @@ $(document).on('click','.re_send_failed_invites', function() {
         },
         success: function (response) {
             if (response.status === 1) {
+                $('#home_loader').css('display','none');    
+
                 toastr.success(response.message);
                 window.location.reload();
                 $('<div id="pageOverlay"></div>').css({
