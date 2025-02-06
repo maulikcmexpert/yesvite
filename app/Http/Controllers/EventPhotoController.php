@@ -918,6 +918,10 @@ class EventPhotoController extends Controller
             $isReaction = 1;
         } else {
             // User has already reacted
+            echo $checkReaction->unicode;
+            echo "=============";
+            echo $unicode;
+            die;
             if ($checkReaction->unicode != $unicode) {
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;
