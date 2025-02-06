@@ -270,6 +270,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
+        console.log("clicked");
         var commentVal = $(this).prev(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
@@ -317,7 +318,7 @@ $(document).ready(function () {
         const url = parentCommentId
             ? base_url + "event_photo/userPostCommentReply"
             : base_url + "event_photo/userPostComment";
-
+        console.log(url);
         // AJAX request
         $.ajax({
             url: url,
@@ -506,10 +507,13 @@ $(document).ready(function () {
             return;
         }
         const parentName = $(this)
-            .closest(".commented-user-head")
+            .parent()
+            .prev()
+            .prev()
+            .children()
+            .find(".commented-user-profile-content")
             .find("h3")
-            .text()
-            .trim();
+            .text();
         console.log({ parentName });
         const parentId = $(this).data("comment-id");
 
