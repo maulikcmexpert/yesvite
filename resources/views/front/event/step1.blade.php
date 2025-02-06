@@ -635,7 +635,7 @@
                                                                                     id="activity-start-time"
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
-                                                                                    required="" readonly
+                                                                                    required="" 
                                                                                     value="01:15 PM" /><span
                                                                                     class="input-group-append input-group-addon"><span
                                                                                         class="input-group-text">
