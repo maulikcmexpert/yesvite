@@ -154,9 +154,9 @@ class EventPotluckController extends Controller
                         }
                     }
                     $data['remainingQnt1']=$remainingQnt;
-                    dd($categoryQuantity)
+                    
                     $remainingQnt =  $remainingQnt - $categoryQuantity;
-
+                    dd($remainingQnt);
                     $potluckCategory['remainingQnt'] = $remainingQnt;
                     $potluckCategory['categoryQuantity'] = $categoryQuantity;
                     $potluckCategory['totalItem'] = $totalItem;
