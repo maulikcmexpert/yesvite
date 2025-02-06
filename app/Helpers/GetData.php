@@ -316,6 +316,9 @@ function getNotificationList($filter = [])
         // $result = $notificationData->get();
         $result = $notificationData->get();
         $notificationInfo = [];
+        if(!empty($result)){
+
+        
         foreach ($result as $values) {
             if ($values->user_id == $user->id) {
                 $notificationDetail['event_name'] = ($values->event->event_name != null && $values->event->event_name != "") ? $values->event->event_name : "";
@@ -513,6 +516,7 @@ function getNotificationList($filter = [])
                 }
             }
         }
+    }
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
         // dd($notificationInfo);
         return $final_data;
