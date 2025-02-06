@@ -355,7 +355,9 @@ class EventWallController extends Controller
 
         $eventDetail = Event::with([
             'user',
-            'event_image',
+            'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC'); // Order event images by type
+            },
             'event_schedule',
             'event_settings' => function ($query) {
                 $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
@@ -972,9 +974,9 @@ class EventWallController extends Controller
                                 $commentChildReply['comment'] = $childReplyVal->comment_text;
                                 $commentChildReply['user_id'] = $childReplyVal->user_id;
 
-                                $commentChildReply['username'] = (!empty($childReplyVal->user )) ?($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname) : "";
+                                $commentChildReply['username'] = (!empty($childReplyVal->user)) ? ($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname) : "";
 
-                                $commentChildReply['profile'] = (!empty($childReplyVal->user)&&$childReplyVal->user->profile!='') ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
+                                $commentChildReply['profile'] = (!empty($childReplyVal->user) && $childReplyVal->user->profile != '') ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
                                 $commentChildReply['location'] = (!empty($childReplyVal->user)) ? $childReplyVal->user->city : "";
 
                                 $commentChildReply['comment_total_likes'] = ($childReplyVal->post_comment_reaction_count != "") ? $childReplyVal->post_comment_reaction_count : "0";
@@ -1003,7 +1005,7 @@ class EventWallController extends Controller
                                         $commentChildInReply['comment'] = $childInReplyVal->comment_text;
                                         $commentChildInReply['user_id'] = $childInReplyVal->user_id;
 
-                                        $commentChildInReply['username'] =   (!empty($childInReplyVal->user )) ?($childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname) : "";
+                                        $commentChildInReply['username'] =   (!empty($childInReplyVal->user)) ? ($childInReplyVal->user->firstname . ' ' . $childInReplyVal->user->lastname) : "";
 
                                         $commentChildInReply['profile'] = (!empty($childInReplyVal->user->profile)) ? asset('storage/profile/' . $childInReplyVal->user->profile) : "";
                                         $commentChildInReply['location'] = (!empty($childInReplyVal->user->city)) ? $childInReplyVal->user->city : "";

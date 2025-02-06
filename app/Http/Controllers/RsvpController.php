@@ -151,18 +151,20 @@ class RsvpController extends BaseController
         // dd($event_invited_user_id);
         // $user_id = decrypt($event_invited_user_id);
 
-        if($event_invited_user_id==""){
-            $user_id=Event::where('id',$event_id)->first()->user_id;
-        }else{
-            $user_id= EventInvitedUser::where('id',$event_invited_user_id)->first()->user_id;
+        if ($event_invited_user_id == "") {
+            $user_id = Event::where('id', $event_id)->first()->user_id;
+        } else {
+            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->user_id;
         }
         // dd($user_id);
-        $sync_id="";
-        if($user_id==null || $user_id==""){
-            $sync_id= EventInvitedUser::where('id',$event_invited_user_id)->first()->sync_id;
+        $sync_id = "";
+        if ($user_id == null || $user_id == "") {
+            $sync_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->sync_id;
         }
         try {
-            $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
+            $eventDetail = Event::with(['user', 'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');
+            }, 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event_id)->first();
 
@@ -421,9 +423,9 @@ class RsvpController extends BaseController
             $getInvitedusers = getInvitedUsersList($event_id);
 
             $sync_contact_user_id = "";
-            $user_email="";
+            $user_email = "";
             // dd($user_id);
-            if($user_id!=null){
+            if ($user_id != null) {
                 $user_email = User::where('id', $user_id)->first();
             }
             if ($user_email == "") {
@@ -452,8 +454,8 @@ class RsvpController extends BaseController
             // if ($rsvp_status != "" || !empty($rsvp_status)) {
             //     $rsvp = "1";
             // }
-            if($event_invited_user_id!=""){
-                $rsvp_status = EventInvitedUser::where(['id' => $event_invited_user_id,'user_id'=>$user_id])->first()->rsvp_status;
+            if ($event_invited_user_id != "") {
+                $rsvp_status = EventInvitedUser::where(['id' => $event_invited_user_id, 'user_id' => $user_id])->first()->rsvp_status;
             }
 
             $messages = [];
@@ -634,23 +636,23 @@ class RsvpController extends BaseController
             // if ($sync_id != "" || $sync_id != null) {
             //     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {})->where(['user_id' => $userId, 'sync_id' => $sync_id, 'is_co_host' => '0', 'event_id' => $eventId])->first();
             // } else {
-                // dd(1);
-                // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                //     // $query->where('app_user', '1');
-                // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+            // dd(1);
+            // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+            //     // $query->where('app_user', '1');
+            // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
 
-                if($sync_id!=""&&$userId==null){
-                    contact_sync::where('id',$sync_id)->update(['email'=>$email]);
+            if ($sync_id != "" && $userId == null) {
+                contact_sync::where('id', $sync_id)->update(['email' => $email]);
 
-                    $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
-                        // $query->where('app_user', '1');
-                    })->where(['id' => $event_invited_user_id])->first(); 
-                }else{
-                    $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
-                        // $query->where('app_user', '1');
-                    })->where(['id' => $event_invited_user_id])->first();
-                }
+                $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
+                    // $query->where('app_user', '1');
+                })->where(['id' => $event_invited_user_id])->first();
+            } else {
+                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                    // $query->where('app_user', '1');
+                })->where(['id' => $event_invited_user_id])->first();
+            }
             // }
 
             // dd($rsvpSent);
@@ -695,13 +697,13 @@ class RsvpController extends BaseController
                     EventPost::where('event_id', $eventId)
                         // ->where('user_id', $userId)
                         ->where(function ($query) use ($sync_id, $userId) {
-                            if (!empty($sync_id)&&$userId==null) {
+                            if (!empty($sync_id) && $userId == null) {
                                 $query->where('sync_id', $sync_id);
                             } else {
                                 $query->where('user_id', $userId);
                             }
                         })
-                    
+
                         ->where('post_type', '4')->delete();
                     $postMessage = [];
                     $postMessage = [
@@ -811,7 +813,7 @@ class RsvpController extends BaseController
                 }
 
                 $notificationParam = [
-                    'sync_id'=>$sync_id,
+                    'sync_id' => $sync_id,
                     'sender_id' => $userId,
                     'event_id' => $eventId,
                     'rsvp_status' => $request->rsvp_status,
@@ -826,7 +828,7 @@ class RsvpController extends BaseController
                 DB::commit();
 
                 // dd($notificationParam);
-                sendNotification('sent_rsvp', $notificationParam);   
+                sendNotification('sent_rsvp', $notificationParam);
 
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');

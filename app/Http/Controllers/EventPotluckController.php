@@ -37,7 +37,7 @@ class EventPotluckController extends Controller
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
-        $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
+        $js = ['event_potluck', 'guest_rsvp', 'post_like_comment', 'guest'];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -47,12 +47,12 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-           
+
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
-            
-            
+
+
             $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
-            
+
             $checkEventOwner = Event::FindOrFail($event);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
             $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
@@ -62,7 +62,7 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
-            
+
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
@@ -127,10 +127,12 @@ class EventPotluckController extends Controller
 
                 $potluckDetail['podluck_category_list'] = $potluckCategoryData;
 
-                
 
-                $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
-                    $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
+
+                $eventDetail = Event::with(['user', 'event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC'); // Order event images by type
+                }, 'event_schedule', 'event_settings' => function ($query) {
+                    $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
                 },  'event_invited_user' => function ($query) {
                     $query->where('is_co_host', '0')->with('user');
                 }])->where('id', $event)->first();
@@ -149,7 +151,7 @@ class EventPotluckController extends Controller
                 $eventDetails['hosted_by'] = $eventDetail->hosted_by;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
                 $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-                $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings-> guest_list_visible_to_guests ?? "";
+                $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
                 $rsvp_status = "";
                 $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                     // $query->where('app_user', '1');
@@ -164,7 +166,6 @@ class EventPotluckController extends Controller
                     } else if ($checkUserrsvp->rsvp_status == '0') {
                         $rsvp_status = '0'; // rsvp you'r not going
                     }
-
                 }
                 $eventDetails['rsvp_status'] = $rsvp_status;
                 $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
@@ -198,7 +199,7 @@ class EventPotluckController extends Controller
                     }
                 }
                 $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
-                $eventDetails['total_event_comments']=$event_comments;
+                $eventDetails['total_event_comments'] = $event_comments;
                 $eventDetail['is_past'] = ($eventDetail->end_date < date('Y-m-d')) ? true : false;
                 $eventDetails['days_till_event'] = $till_days;
                 $eventDetails['event_created_timestamp'] = Carbon::parse($eventDate)->timestamp;
@@ -280,7 +281,7 @@ class EventPotluckController extends Controller
                         $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                         $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                         $guestData = EventInvitedUser::with('user') // Eager load the related 'user' model
-                        ->where(['event_id'=>$eventDetail->id,'is_co_host'=>"0"])
+                            ->where(['event_id' => $eventDetail->id, 'is_co_host' => "0"])
 
                             ->get();
 
@@ -393,9 +394,9 @@ class EventPotluckController extends Controller
                 $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
                 $eventInfo['host_view'] = $eventAboutHost;
-       $current_page = "potluck";
+                $current_page = "potluck";
                 $login_user_id  = $user->id;
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo','potluckDetail', 'current_page')); // return compact('eventInfo');
+                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'potluckDetail', 'current_page')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {

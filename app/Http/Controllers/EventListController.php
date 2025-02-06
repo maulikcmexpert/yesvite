@@ -47,7 +47,9 @@ class EventListController extends Controller
         $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where('user_id', $user->id)->get()->pluck('event_id');
-        $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
+        $invitedEventsList = Event::with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC'); // Order event images by type
+        }, 'user', 'event_settings', 'event_schedule'])
             ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
             ->where('is_draft_save', '0');
         // ->orderBy('start_date', 'ASC')
@@ -275,7 +277,9 @@ class EventListController extends Controller
 
         //PastEvents
         $usercreatedAllPastEventList = Event::query();
-        $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
+        $usercreatedAllPastEventList->with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC'); // Order event images by type
+        }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
         $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
         $usercreatedAllPastEventList->where('is_draft_save', '0');
 
@@ -284,7 +288,9 @@ class EventListController extends Controller
         })->where('user_id', $user->id)->get()->pluck('event_id');
 
         $invitedPastEventsList = Event::query();
-        $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+        $invitedPastEventsList->with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC'); // Order event images by type
+        }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
         $invitedPastEventsList->where('is_draft_save', '0');
 
@@ -635,7 +641,9 @@ class EventListController extends Controller
 
         $user  = Auth::guard('web')->user();
         $usercreatedAllPastEventList = Event::query();
-        $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
+        $usercreatedAllPastEventList->with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC'); // Order event images by type
+        }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
         $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
         $usercreatedAllPastEventList->where('is_draft_save', '0');
 
@@ -645,7 +653,9 @@ class EventListController extends Controller
         })->where('user_id', $user->id)->get()->pluck('event_id');
 
         $invitedPastEventsList = Event::query();
-        $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
+        $invitedPastEventsList->with(['event_image' => function ($query) {
+            $query->orderBy('type', 'ASC'); // Order event images by type
+        }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
         $invitedPastEventsList->where('is_draft_save', '0');
 
