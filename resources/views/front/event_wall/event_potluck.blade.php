@@ -594,6 +594,77 @@
                                                                         </button>
                                                                     </h2>
 
+                                                                    @if(!isset($item['item_carry_users']) && cont($item['item_carry_users']) <=0 )
+                                                                    <div id="lumpia-collapseOne"
+                                                                                class="accordion-collapse collapse show"
+                                                                                aria-labelledby="lumpia"
+                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                <div class="accordion-body"
+                                                                                    id="user-container-{{ $item['id'] }}">
+                                                                                    <div
+                                                                                        class="accordion-body-content">
+                                                                                        @if ($users['profile'] != '')
+                                                                                            <img class="slide-user-img"
+                                                                                                src="{{ $users['profile'] }}"
+                                                                                                alt="pofile">
+                                                                                        @else
+                                                                                            @php
+                                                                                                $name =
+                                                                                                    $users[
+                                                                                                        'first_name'
+                                                                                                    ];
+                                                                                                // $parts = explode(" ", $name);
+                                                                                                $firstInitial = isset(
+                                                                                                    $users[
+                                                                                                        'first_name'
+                                                                                                    ][0],
+                                                                                                )
+                                                                                                    ? strtoupper(
+                                                                                                        $users[
+                                                                                                            'first_name'
+                                                                                                        ][0][0],
+                                                                                                    )
+                                                                                                    : '';
+                                                                                                $secondInitial = isset(
+                                                                                                    $users[
+                                                                                                        'last_name'
+                                                                                                    ][0],
+                                                                                                )
+                                                                                                    ? strtoupper(
+                                                                                                        $users[
+                                                                                                            'last_name'
+                                                                                                        ][0][0],
+                                                                                                    )
+                                                                                                    : '';
+                                                                                                $initials =
+                                                                                                    strtoupper(
+                                                                                                        $firstInitial,
+                                                                                                    ) .
+                                                                                                    strtoupper(
+                                                                                                        $secondInitial,
+                                                                                                    );
+                                                                                                $fontColor =
+                                                                                                    'fontcolor' .
+                                                                                                    strtoupper(
+                                                                                                        $firstInitial,
+                                                                                                    );
+                                                                                            @endphp
+                                                                                            <h5
+                                                                                                class="{{ $fontColor }}">
+                                                                                                {{ $initials }}
+                                                                                            </h5>
+                                                                                        @endif
+                                                                                        <h5 class="slide-sub">
+                                                                                            {{ $users['first_name'] }}
+                                                                                            {{ $users['last_name'] }}
+                                                                                        </h5>
+                                                                                        <span
+                                                                                            class="ms-auto slide-round">{{ $item['spoken_quantity'] }}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                    @endif
+
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         @if ($login_user_id === $users['user_id'])
                                                                             <div id="sprite-collapseOne-{{ $item['id'] }}"
@@ -761,7 +832,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-
                                                                             <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
