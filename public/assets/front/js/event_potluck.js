@@ -412,7 +412,7 @@ $(document).on('click', '.plus_icon_user', function () {
 
     // Perform an AJAX call to fetch user details based on itemId and categoryId
     $.ajax({
-        url: base_url + 'event_potluck/fetch-user/',  // Your endpoint to fetch the user data
+        url: base_url + 'event_potluck/fetch-user',  // Your endpoint to fetch the user data
         type: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
