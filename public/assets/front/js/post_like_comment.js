@@ -5,7 +5,6 @@ $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
 
-
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
