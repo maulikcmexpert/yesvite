@@ -594,7 +594,7 @@
                                                                         </button>
                                                                     </h2>
 
-                                                                    @if(!isset($item['item_carry_users']) && cont($item['item_carry_users']) <=0 )
+                                                                    @if(empty($item['item_carry_users']))
                                                                     <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
