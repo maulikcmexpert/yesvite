@@ -903,8 +903,6 @@ function datepicker() {
                     .find("#ac-start-time")
                     .val();
 
-                console.log(startMoment, 22);
-
                 // const startMoment = startTime ? moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
                 let startMoment = startTime
                     ? moment(startTime, "LT")
@@ -1864,7 +1862,7 @@ function loadMoreData(page, search_name) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -1936,7 +1934,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         e.preventDefault();
         return;
     }
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
 
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
@@ -2154,7 +2152,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             $("#buycreditsmodal").modal("show");
             return;
         }
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         $.ajax({
             url: base_url + "event/store_user_id",
             method: "POST",
@@ -2227,7 +2225,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             error: function (xhr, status, error) {},
         });
     } else {
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
 
         $.ajax({
             url: base_url + "event/delete_user_id",
@@ -3641,7 +3639,7 @@ $(document).on("click", "#edit_saveThankyoucard", function () {
 });
 
 $(document).on("click", "#next_setting", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     savePage3Data();
     checkbox_count();
     $("#loader").css("display", "none");
@@ -3696,7 +3694,7 @@ $(document).on("click", "#close_createEvent", function () {
     // }
 
     // $('#loader').css('display','block');
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
 
     if (event_date != "") {
         // if (event_name != "" && event_date != "") {
@@ -4565,7 +4563,7 @@ function clearError(input = null) {
 }
 
 $(document).on("click", ".cancel-btn-createEvent", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     var url = $(this).data("url");
     // console.log(url);
     window.location.href = url;
@@ -4811,7 +4809,7 @@ async function saveDesignData(direct = false) {
     });
     canvas.renderAll();
 
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     $(".store_desgin_temp, .btn-close").prop("disabled", true);
 
     try {
@@ -5038,7 +5036,7 @@ function downloadPhotoAndUpload() {
 }
 
 $(document).on("click", "#delete_invited_user", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     var id = $(this).data("id");
     var userId = $(this).data("userid");
     var total_guest = $(".users-data.invited_user").length;
@@ -5078,7 +5076,7 @@ $(document).on("click", "#delete_invited_user", function () {
 });
 
 $(document).on("click", "#delete_invited_user_tel", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
 
     var id = $(this).data("id");
     var is_contact = $(this).data("contact");
@@ -6381,7 +6379,7 @@ $(document).on("click", "#final_create_event", function (e) {
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
     console.log(data);
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -6449,7 +6447,7 @@ $(document).on("click", ".store_desgin_temp", function () {
 
     setTimeout(() => {
         var downloadImage = document.getElementById("download_image");
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
         dbJson = getTextDataFromCanvas();
@@ -6558,7 +6556,7 @@ $("#groupUsers").scroll(function () {
         busyyesvite = true;
         offsetyesvite = limityesvite + offsetyesvite;
         if (NogroupData == false) {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         }
         setTimeout(function () {
             if (NogroupData == false) {
@@ -6678,7 +6676,7 @@ $(document).on("keyup", ".search_user_ajax", function () {
     offsetyesvite = 0;
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         displayRecords(limityesvite, offsetyesvite, "all", search_name);
         // $('#loader').css('display','none');
     }, 750);
@@ -6693,7 +6691,7 @@ function loadSearchUser(search_name) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -6733,7 +6731,7 @@ $("#new_group_name").on("keydown", function (e) {
 });
 
 $(document).on("click", ".invite_group_member", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     var userId = $(this).val();
     var selectedValues = [];
     var unselectedValues = [];
@@ -6861,7 +6859,7 @@ $(document).on("click", ".invite_group_member", function () {
 
 $(document).on("click", ".view_members", function () {
     var group_id = $(this).data("id");
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
 
     $.ajax({
         url: base_url + "event/list_group_memeber",
@@ -7135,7 +7133,7 @@ $(document).on("keyup", "#group_search_ajax", function () {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7170,7 +7168,7 @@ function groupToggleSearch(search_name = null) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7409,7 +7407,7 @@ function get_co_host_list(
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7645,7 +7643,7 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7810,7 +7808,7 @@ $("#select_contact_event_cohost").on("scroll", function () {
 });
 $(document).on("keyup", ".co_host_search", function () {
     search_name = $(this).val();
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     // $(".list_all_invited_user").empty();
     setTimeout(function () {
         $(".list_all_invited_user").html("");
@@ -7822,7 +7820,7 @@ $(document).on("keyup", ".co_host_search", function () {
 
 $(document).on("keyup", ".phone_co_host_search", function () {
     search_name = $(this).val();
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     // $(".list_all_invited_user").empty();
     setTimeout(function () {
         $(".list_all_contact_user").html("");
@@ -7851,7 +7849,7 @@ $(document).on("click", ".thank_you_card_toggle", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7884,7 +7882,7 @@ $(document).on("click", ".add_gift_registry", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         beforeSend: function () {
-            $('#loader').css('display','flex');
+            $("#loader").css("display", "flex");
         },
     })
         .done(function (data) {
@@ -7978,7 +7976,7 @@ var offsetcontact = 0;
 var busycontact = false;
 
 $(document).on("click", "#phone-tab", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     var search_name = $("#search_contacts").val();
     offsetcontact = 0;
     displayPhoneContacts("all", 10, offsetcontact, search_name, false);
@@ -7993,7 +7991,7 @@ $(document).on("keyup", "#search_contacts", function () {
     limitcontact = 10;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         displayPhoneContacts(
             "all",
             limitcontact,
@@ -8114,7 +8112,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
 // });
 
 $(document).on("click", ".edit_event_details", function () {
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     // $(this).prop("disabled", true);
     // $('.btn-close').prop("disabled", true);
     if (final_step == 1) {
@@ -8316,7 +8314,7 @@ $(document).on("click", ".save-slider-image", function () {
     });
     //console.log(imageSources);
     if (imageSources.length > 0) {
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
@@ -8344,7 +8342,7 @@ $(document).on("click", ".delete_silder", function (e) {
     var delete_id = $(this).parent().find(".slider_img").data("delete");
     var src = $(this).parent().find(".slider_img").attr("src");
     if (src != "") {
-        $('#loader').css('display','flex');
+        $("#loader").css("display", "flex");
         var $this = $(this);
         var check_slider_img = eventData.slider_images;
         var matchFound = false;
@@ -8428,7 +8426,7 @@ function updateEventData() {
     eventData.isdraft = "0";
 
     var data = eventData;
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     $.ajax({
         url: base_url + "event/editStore",
         type: "POST",
@@ -8594,7 +8592,7 @@ $(document).on("click", "#close_editEvent", function (e) {
         return;
     }
     // }
-    $('#loader').css('display','flex');
+    $("#loader").css("display", "flex");
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
