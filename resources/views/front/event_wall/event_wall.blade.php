@@ -250,6 +250,11 @@
 
                                                         {{-- {{  dd($post['post_image'])}} --}}
                                                         @if ($post['post_type'] == '1')
+                                                        <div class="posts-card-inner-wrp">
+                                                            <h3 class="posts-card-inner-questions">
+                                                                {{ $post['post_message'] }}
+                                                            </h3>
+                                                        </div>
                                                             <div class="posts-card-show-post-wrp">
                                                                 <div class="swiper posts-card-post">
                                                                     <div class="swiper-wrapper">
