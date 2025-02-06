@@ -1993,7 +1993,7 @@ class EventWallController extends Controller
 
 
             // User has already reacted
-            if ($checkReaction->unicode != "00002764") {
+            if ($checkReaction->unicode != $unicode) {
 
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;

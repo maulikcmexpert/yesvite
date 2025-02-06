@@ -1,5 +1,5 @@
 let guestList = [];
-let guestPhoneList =[];
+let guestPhoneList = [];
 
 $(document).ready(function () {
     let longPressTimer;
@@ -29,7 +29,7 @@ $(document).ready(function () {
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
         const userId = button.data("user-id"); // Assuming each button has a user ID
-        let reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle between 💔 or ❤️
+        let reaction = "\u{2764}"; // Toggle between 💔 or ❤️
 
         // Toggle UI button appearance
         if (isLiked) {
@@ -56,15 +56,26 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     console.log(response);
 
-                    $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
 
                     let reactionImage = "";
                     if (reaction === "\u{1F604}") {
-                        reactionImage = '<img src="' + base_url + 'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
+                        reactionImage =
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/smily-emoji.png" alt="Smiley Emoji">';
                     } else if (reaction === "\u{1F60D}") {
-                        reactionImage = '<img src="' + base_url + 'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
+                        reactionImage =
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/eye-heart-emoji.png" alt="Eye Heart Emoji">';
                     } else if (reaction === "\u{2764}") {
-                        reactionImage = '<img src="' + base_url + 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                        reactionImage =
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
                     }
 
                     // Update the reaction image in post
@@ -84,24 +95,31 @@ $(document).ready(function () {
         let reactionListHtml = "";
         let reactionTabsHtml = "";
         let reactionIcons = {
-            "\u{2764}": base_url + "assets/front/img/heart-emoji.png",  // ❤️
-            "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png",  // 👍
+            "\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+            "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
             "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
             "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-            "\u{1F44F}": base_url + "assets/front/img/clap-icon.png",  // 👏
+            "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
         };
 
         // Count reactions
         let reactionCounts = {};
-        postReactions.forEach(reaction => {
-            reactionCounts[reaction.reaction] = (reactionCounts[reaction.reaction] || 0) + 1;
+        postReactions.forEach((reaction) => {
+            reactionCounts[reaction.reaction] =
+                (reactionCounts[reaction.reaction] || 0) + 1;
         });
 
         // Generate reaction list
-        postReactions.forEach(reaction => {
+        postReactions.forEach((reaction) => {
             let profileImage = reaction.profile
-                ? `<img src="${base_url + reaction.profile}" alt="${reaction.username}">`
-                : `<h5 class="fontcolor${reaction.username.charAt(0).toUpperCase()}">${reaction.username.charAt(0).toUpperCase()}</h5>`;
+                ? `<img src="${base_url + reaction.profile}" alt="${
+                      reaction.username
+                  }">`
+                : `<h5 class="fontcolor${reaction.username
+                      .charAt(0)
+                      .toUpperCase()}">${reaction.username
+                      .charAt(0)
+                      .toUpperCase()}</h5>`;
 
             reactionListHtml += `
                 <li class="reaction-info-wrp">
@@ -116,17 +134,20 @@ $(document).ready(function () {
                             </div>
                         </div>
                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                            <img src="${reactionIcons[reaction.reaction] || base_url + 'assets/front/img/heart-emoji.png'}" alt="${reaction.reaction}">
+                            <img src="${
+                                reactionIcons[reaction.reaction] ||
+                                base_url + "assets/front/img/heart-emoji.png"
+                            }" alt="${reaction.reaction}">
                         </div>
                     </div>
                 </li>`;
         });
 
-        let ul = document.getElementsByClassName(`nav-all-reaction-tab-${postId}`)[0].querySelector('ul');
-
+        let ul = document
+            .getElementsByClassName(`nav-all-reaction-tab-${postId}`)[0]
+            .querySelector("ul");
 
         $(ul).html(reactionListHtml);
-
 
         reactionTabsHtml += `
             <button class="nav-link active" id="nav-all-reaction-tab-${postId}"
@@ -135,12 +156,15 @@ $(document).ready(function () {
                 All ${postReactions.length}
             </button>`;
 
-        Object.keys(reactionCounts).forEach(reaction => {
+        Object.keys(reactionCounts).forEach((reaction) => {
             reactionTabsHtml += `
                 <button class="nav-link" id="nav-${reaction}-reaction-tab-${postId}"
                     data-bs-toggle="tab" data-bs-target="#nav-${reaction}-reaction-${postId}"
                     type="button" role="tab" aria-controls="nav-${reaction}-reaction" aria-selected="false">
-                    <img src="${reactionIcons[reaction] || base_url + 'assets/front/img/heart-emoji.png'}" alt="${reaction}">
+                    <img src="${
+                        reactionIcons[reaction] ||
+                        base_url + "assets/front/img/heart-emoji.png"
+                    }" alt="${reaction}">
                     ${reactionCounts[reaction]}
                 </button>`;
         });
@@ -149,10 +173,7 @@ $(document).ready(function () {
         $(`#nav-tab-${postId}`).html(reactionTabsHtml);
     }
 
-
     $(document).on("click", "#CommentlikeButton", function () {
-
-
         const button = $(this);
         const isLiked = button.hasClass("liked");
         const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
@@ -194,7 +215,9 @@ $(document).ready(function () {
                     console.log(response);
 
                     // Update like count for both main comment and nested reply
-                    $(`#commentTotalLike_${eventPostCommentId}`).text(`${response.count} Likes`);
+                    $(`#commentTotalLike_${eventPostCommentId}`).text(
+                        `${response.count} Likes`
+                    );
 
                     // Update the reaction display
                     replyLikeIcon.text(`${response.self_reaction}`);
@@ -210,11 +233,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#emojiDropdown .emoji", function () {
-
         const selectedEmoji = $(this).data("emoji");
-        const button = $(this)
-            .closest(".set_emoji_like")
-            .find("#likeButton");
+        const button = $(this).closest(".set_emoji_like").find("#likeButton");
         const emojiDisplay = button.find("#show_Emoji");
 
         // Replace heart icon with selected emoji
@@ -284,11 +304,16 @@ $(document).ready(function () {
 
         const commentText = commentInput.val().trim();
         // const parentCommentId = $(".parent_comment_id").val() || '';
-        const parent_comment_id = $(".parent_comment_id").val()
-        var parentCommentId = (commentVal !== "" && (parent_comment_id !== "undefined" && parent_comment_id !== undefined)) ? parent_comment_id : '';
+        const parent_comment_id = $(".parent_comment_id").val();
+        var parentCommentId =
+            commentVal !== "" &&
+            parent_comment_id !== "undefined" &&
+            parent_comment_id !== undefined
+                ? parent_comment_id
+                : "";
         console.log("Parent Comment ID:", parentCommentId);
-        if(commentVal==""){
-            parentCommentId=""
+        if (commentVal == "") {
+            parentCommentId = "";
         }
         if (commentText === "") {
             alert("Please enter a comment");
@@ -321,8 +346,8 @@ $(document).ready(function () {
 
                     // Generate profile image or initials
                     const profileImage = data.profile
-                    ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
-                    : generateProfileImage(data.username);
+                        ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
+                        : generateProfileImage(data.username);
 
                     function generateProfileImage(username) {
                         if (!username) return ""; // Return an empty string if the username is undefined
@@ -367,39 +392,55 @@ $(document).ready(function () {
                             <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${
+                            data.id
+                        }" class="commented-user-reply-btn">Reply</button>
                     </div>
                     <ul class="primary-comment-replies"></ul>
                 </li>
                 `;
-                var replyList;
-                if (parentCommentId) {
-                    // Append as a reply to the parent comment
-                    const parentComment = $(`li[data-comment-id="${parentCommentId}"]`);
-                    if (parentComment.length > 0) {
-                        replyList= parentComment.find("ul.primary-comment-replies");
-                        if (replyList.length === 0) {
-                            replyList = $('<ul class="primary-comment-replies"></ul>').appendTo(parentComment);
-                        }
+                    var replyList;
+                    if (parentCommentId) {
+                        // Append as a reply to the parent comment
+                        const parentComment = $(
+                            `li[data-comment-id="${parentCommentId}"]`
+                        );
+                        if (parentComment.length > 0) {
+                            replyList = parentComment.find(
+                                "ul.primary-comment-replies"
+                            );
+                            if (replyList.length === 0) {
+                                replyList = $(
+                                    '<ul class="primary-comment-replies"></ul>'
+                                ).appendTo(parentComment);
+                            }
 
-                        // Check if the reply is already appended
-                        if (replyList.find(`li[data-comment-id="${data.comment_id}"]`).length === 0) {
-                            replyList.prepend(newCommentHTML);
-                            // replyList.append(newCommentHTML);
+                            // Check if the reply is already appended
+                            if (
+                                replyList.find(
+                                    `li[data-comment-id="${data.comment_id}"]`
+                                ).length === 0
+                            ) {
+                                replyList.prepend(newCommentHTML);
+                                // replyList.append(newCommentHTML);
+                            }
+                        }
+                    } else {
+                        // Append as a new top-level comment
+                        const commentList = $(
+                            `.posts-card-show-all-comments-wrp.show_${eventPostId}`
+                        ).find(".top-level-comments");
+
+                        // Check if the comment is already appended
+                        if (
+                            commentList.find(
+                                `li[data-comment-id="${data.comment_id}"]`
+                            )
+                        ) {
+                            commentList.prepend(newCommentHTML);
+                            // commentList.append(newCommentHTML);
                         }
                     }
-                } else {
-                    // Append as a new top-level comment
-                    const commentList = $(`.posts-card-show-all-comments-wrp.show_${eventPostId}`).find(".top-level-comments");
-
-                    // Check if the comment is already appended
-                    if (commentList.find(`li[data-comment-id="${data.comment_id}"]`)) {
-                        commentList.prepend(newCommentHTML);
-                        // commentList.append(newCommentHTML);
-                    }
-                }
-
-
 
                     // Handle replies if any are provided in the response
                     if (
@@ -444,14 +485,14 @@ $(document).ready(function () {
                         });
                     }
 
-
                     const commentCountElement = $(`#comment_${eventPostId}`);
-                const currentCount = parseInt(commentCountElement.text()) || 0;
-                commentCountElement.text(`${currentCount + 1} Comments`);
+                    const currentCount =
+                        parseInt(commentCountElement.text()) || 0;
+                    commentCountElement.text(`${currentCount + 1} Comments`);
 
-                // Clear input field
-                commentInput.val("");
-                $(".parent_comment_id").val(""); // Reset parent comment ID
+                    // Clear input field
+                    commentInput.val("");
+                    $(".parent_comment_id").val(""); // Reset parent comment ID
                 }
                 // commentInput.val("");
                 // $("#parent_comment_id").val(""); // Reset parent comment ID
@@ -465,15 +506,20 @@ $(document).ready(function () {
 
     $(document).on("click", ".commented-user-reply-btn", function () {
         // Find the closest comment element
-        const parentWrapper = $(this).closest(".posts-card-show-all-comments-wrp").prev(".posts-card-main-comment");
+        const parentWrapper = $(this)
+            .closest(".posts-card-show-all-comments-wrp")
+            .prev(".posts-card-main-comment");
 
         if (!parentWrapper.length) {
             console.error("Parent wrapper not found!");
             return;
         }
-        const parentName = $(this).closest(".commented-user-wrp").find("h3").text().trim();
-        const parentId =$(this).data("comment-id");
-
+        const parentName = $(this)
+            .closest(".commented-user-wrp")
+            .find("h3")
+            .text()
+            .trim();
+        const parentId = $(this).data("comment-id");
 
         if (!parentId) {
             console.error("Parent Comment ID is missing!");
@@ -497,7 +543,6 @@ $(document).ready(function () {
         // Insert the '@username' into the comment box and focus
         commentBox.val(`@${parentName} `).focus();
     });
-
 
     // Handle reply button click (when replying to a comment)
 });
@@ -553,20 +598,19 @@ let selectedPhoneContacts = [];
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
-    const event_id = $('#event_id').val();
+    const event_id = $("#event_id").val();
 
     $("#allcontact").on("click", function () {
+        $("#home_loader").css("display", "flex");
 
-        $('#home_loader').css('display','flex');
-
-        guestList=[];
-        $('.guest_yesvite').remove();
-        $('.phone_yesvite').remove();
-        $('.see_invite_nav_yesvite').addClass('active');
-        $('.see_invite_nav_phone').removeClass('active');
-        $('.phoneContact-checkbox:not(:disabled)').prop('checked', false);
-        $('.contact-checkbox:not(:disabled)').prop('checked', false);
-        $('.phone-checkbox:not(:disabled)').prop('checked', false);
+        guestList = [];
+        $(".guest_yesvite").remove();
+        $(".phone_yesvite").remove();
+        $(".see_invite_nav_yesvite").addClass("active");
+        $(".see_invite_nav_phone").removeClass("active");
+        $(".phoneContact-checkbox:not(:disabled)").prop("checked", false);
+        $(".contact-checkbox:not(:disabled)").prop("checked", false);
+        $(".phone-checkbox:not(:disabled)").prop("checked", false);
 
         localStorage.removeItem("selectedContacts");
         localStorage.removeItem("selectedPhoneContacts");
@@ -580,7 +624,7 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                event_id: event_id // Pass event_id in request data
+                event_id: event_id, // Pass event_id in request data
             },
             dataType: "json",
             success: function (response) {
@@ -588,9 +632,9 @@ $(document).ready(function () {
                 const container = $(".GuestTabContent");
                 container.html(contacts);
                 allContactsSuccess = true;
-                $('#addguest').modal('show');
+                $("#addguest").modal("show");
                 const invitedUsers = response.invited_users;
-                $('#home_loader').css('display', 'none');
+                $("#home_loader").css("display", "none");
 
                 // selectedContacts = response.selected_yesvite_user;
                 // selectedPhoneContacts = response.selected_phone_user;
@@ -598,15 +642,13 @@ $(document).ready(function () {
             },
             error: function () {
                 toastr.error("No Contacts Found");
-                $('#home_loader').css('display', 'none');
+                $("#home_loader").css("display", "none");
 
                 // alert("Failed to load contacts.");
             },
         });
     });
-
 });
-
 
 // Load selected contacts from local storage on page load
 $(document).ready(function () {
@@ -635,7 +677,7 @@ function loadSavedPhoneContacts() {
         handleCheckboxState(contact, ".phoneContact-checkbox");
     });
 }
-console.log({selectedContacts,selectedPhoneContacts})
+console.log({ selectedContacts, selectedPhoneContacts });
 
 // Handle checkbox states
 function handleCheckboxState(contact, checkboxSelector) {
@@ -821,115 +863,123 @@ function generateProfileImage(firstname, lastname) {
 // Event listener for contact checkboxes
 $(document).ready(function () {
     // Event listener for contact checkboxes
-        $(document).on("change", ".contact-checkbox", function () {
-            // console.log($('#home_loader').length);
-            // setTimeout(() => {
-                // $('#home_loader').css('display','flex');
-            // }, 500);
+    $(document).on("change", ".contact-checkbox", function () {
+        // console.log($('#home_loader').length);
+        // setTimeout(() => {
+        // $('#home_loader').css('display','flex');
+        // }, 500);
 
+        const id = $(this).data("id");
+        const isSelected = $(this).attr("data-prefer"); // Use attr() instead of data()
 
-            const id = $(this).data("id");
-            const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
+        const first_name = $(this).data("name");
+        const last_name = $(this).data("last");
+        const email = $(this).data("email");
+        const profile = $(this).data("profile");
+        const event_id = $("#event_id").val();
 
-            const first_name = $(this).data("name");
-            const last_name = $(this).data("last");
-            const email = $(this).data("email");
-            const profile = $(this).data("profile");
-            const event_id = $('#event_id').val();
-
-            console.log(
-                `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
-            );
-            if( $(this).is(":checked")){
-                $('.add_yesvite_guest_'+id).remove();
-                $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
-                const exists = guestList.some((contact) => contact.id === id);
-                var is_duplicate=0;
-                if (exists) {
-                    is_duplicate=1;
-                }else{
-                    is_duplicate=0;
-                }
-                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
-            }else{
-                guestList = guestList.filter(guest => guest.id !== id);
-                const exists = guestList.some((contact) => contact.id === id);
-                var is_duplicate=0;
-                if (exists) {
-                    is_duplicate=1;
-                }else{
-                    is_duplicate=0;
-                }
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
-
-                $('.add_yesvite_guest_'+id).remove();
-
-                console.log(guestList);
+        console.log(
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
+        );
+        if ($(this).is(":checked")) {
+            $(".add_yesvite_guest_" + id).remove();
+            $(".phone-checkbox[data-id='" + id + "']").prop("checked", false);
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate = 0;
+            if (exists) {
+                is_duplicate = 1;
+            } else {
+                is_duplicate = 0;
             }
-
-        });
-
-        $(document).on("change", ".phone-checkbox", function () {
-            // $('#home_loader').css('display','flex');
-
-            const id = $(this).data("id");
-            const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
-
-            const first_name = $(this).data("name");
-            const last_name = $(this).data("last");
-            const email = $(this).data("email");
-            const profile = $(this).data("profile");
-            const event_id = $('#event_id').val();
-
-            console.log(
-                `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
-            );
-            if( $(this).is(":checked")){
-                const exists = guestList.some((contact) => contact.id === id);
-                var is_duplicate=0;
-                if (exists) {
-                    is_duplicate=1;
-                }else{
-                    is_duplicate=0;
-                }
-                console.log(is_duplicate);
-                $('.add_yesvite_guest_'+id).remove();
-                $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
-                addToGuestList(id, isSelected, "1",first_name,last_name,email,profile); // App user = 1 for email (app user)
-                storeAddNewGuest(id,1,isSelected,event_id,'yesvite');
-
-
-            }else{
-                guestList = guestList.filter(guest => guest.id !== id);
-                const exists = guestList.some((contact) => contact.id === id);
-                var is_duplicate=0;
-                if (exists) {
-                    is_duplicate=1;
-                }else{
-                    is_duplicate=0;
-                }
-                $('.add_yesvite_guest_'+id).remove();
-                storeAddNewGuest(id,0,isSelected,event_id,'yesvite');
-
-                console.log(guestList);
+            addToGuestList(
+                id,
+                isSelected,
+                "1",
+                first_name,
+                last_name,
+                email,
+                profile
+            ); // App user = 1 for email (app user)
+            storeAddNewGuest(id, 1, isSelected, event_id, "yesvite");
+        } else {
+            guestList = guestList.filter((guest) => guest.id !== id);
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate = 0;
+            if (exists) {
+                is_duplicate = 1;
+            } else {
+                is_duplicate = 0;
             }
+            storeAddNewGuest(id, 0, isSelected, event_id, "yesvite");
 
-        });
+            $(".add_yesvite_guest_" + id).remove();
 
+            console.log(guestList);
+        }
+    });
 
+    $(document).on("change", ".phone-checkbox", function () {
+        // $('#home_loader').css('display','flex');
+
+        const id = $(this).data("id");
+        const isSelected = $(this).attr("data-prefer"); // Use attr() instead of data()
+
+        const first_name = $(this).data("name");
+        const last_name = $(this).data("last");
+        const email = $(this).data("email");
+        const profile = $(this).data("profile");
+        const event_id = $("#event_id").val();
+
+        console.log(
+            `Checkbox changed for ID: ${id}, email selected: ${isSelected}, phone selected: ${isSelected}`
+        );
+        if ($(this).is(":checked")) {
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate = 0;
+            if (exists) {
+                is_duplicate = 1;
+            } else {
+                is_duplicate = 0;
+            }
+            console.log(is_duplicate);
+            $(".add_yesvite_guest_" + id).remove();
+            $(".contact-checkbox[data-id='" + id + "']").prop("checked", false);
+            addToGuestList(
+                id,
+                isSelected,
+                "1",
+                first_name,
+                last_name,
+                email,
+                profile
+            ); // App user = 1 for email (app user)
+            storeAddNewGuest(id, 1, isSelected, event_id, "yesvite");
+        } else {
+            guestList = guestList.filter((guest) => guest.id !== id);
+            const exists = guestList.some((contact) => contact.id === id);
+            var is_duplicate = 0;
+            if (exists) {
+                is_duplicate = 1;
+            } else {
+                is_duplicate = 0;
+            }
+            $(".add_yesvite_guest_" + id).remove();
+            storeAddNewGuest(id, 0, isSelected, event_id, "yesvite");
+
+            console.log(guestList);
+        }
+    });
 
     // Event listener for phone contact checkboxes
     $(document).on("change", ".phoneContact-checkbox", function () {
-
         const id = $(this).data("id");
         // const isSelected =$(this).data('prefer');
-            const isSelected = $(this).attr('data-type'); // Use attr() instead of data()
-            const first_name = $(this).data("name");
-            const last_name = $(this).data("last");
-            const email = $(this).data("email");
-            const profile = "";
-            const event_id = $('#event_id').val();
+        const isSelected = $(this).attr("data-type"); // Use attr() instead of data()
+        const first_name = $(this).data("name");
+        const last_name = $(this).data("last");
+        const email = $(this).data("email");
+        const profile = "";
+        const event_id = $("#event_id").val();
 
         // Add to the guest list if either email or phone is selected
 
@@ -939,75 +989,90 @@ $(document).ready(function () {
         // Add to the guest list, prefer email if selected, else prefer phone
         // addToGuestList(id, isEmailSelected ? "email" : "phone", 0);
 
-
-        if( $(this).is(":checked")){
+        if ($(this).is(":checked")) {
             const exists = guestList.some((contact) => contact.id === id);
-            var is_duplicate=0;
+            var is_duplicate = 0;
             if (exists) {
-                is_duplicate=1;
-            }else{
-                is_duplicate=0;
+                is_duplicate = 1;
+            } else {
+                is_duplicate = 0;
             }
             console.log(is_duplicate);
 
-            $('.add_yesvite_guest_'+id).remove();
+            $(".add_yesvite_guest_" + id).remove();
             $(".phoneContact-checkbox")
-            .filter(`[data-id="${id}"]`)
-            .not(this)
-            .prop("checked", false);
-            addToGuestPhoneList(id, isSelected,"0",first_name,last_name,email,profile); // App user = 1 for email (app user)
+                .filter(`[data-id="${id}"]`)
+                .not(this)
+                .prop("checked", false);
+            addToGuestPhoneList(
+                id,
+                isSelected,
+                "0",
+                first_name,
+                last_name,
+                email,
+                profile
+            ); // App user = 1 for email (app user)
 
-            storeAddNewGuest(id,1,isSelected,event_id,'phone');
-
-        }else{
-            guestList = guestList.filter(guest => guest.id !== id);
-            $('.add_phone_guest_'+id).remove();
-            storeAddNewGuest(id,0,isSelected,event_id,'phone');
+            storeAddNewGuest(id, 1, isSelected, event_id, "phone");
+        } else {
+            guestList = guestList.filter((guest) => guest.id !== id);
+            $(".add_phone_guest_" + id).remove();
+            storeAddNewGuest(id, 0, isSelected, event_id, "phone");
             console.log(guestList);
-        }// App user = 0 for phone (non-app user)
+        } // App user = 0 for phone (non-app user)
     });
 
-    function storeAddNewGuest(id,status,prefer_by,event_id,contact){
-        $('#home_loader').css('display','flex');
+    function storeAddNewGuest(id, status, prefer_by, event_id, contact) {
+        $("#home_loader").css("display", "flex");
 
-    setTimeout(function(){
-        $.ajax({
-            url: base_url+"store_add_new_guest",
-            type: 'GET',
-            data: {user_id:id,status:status,prefer_by:prefer_by,event_id:event_id,contact:contact},
-            success: function (response) {
-             console.log(response);
-             if(response.is_phone=="1"&&response.view!=""){
-                $('.selected-phone-list').remove('.guest-user-phone');
-                $('.selected-phone-list').html(response.view);
+        setTimeout(function () {
+            $.ajax({
+                url: base_url + "store_add_new_guest",
+                type: "GET",
+                data: {
+                    user_id: id,
+                    status: status,
+                    prefer_by: prefer_by,
+                    event_id: event_id,
+                    contact: contact,
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response.is_phone == "1" && response.view != "") {
+                        $(".selected-phone-list").remove(".guest-user-phone");
+                        $(".selected-phone-list").html(response.view);
+                    }
+                    if (response.view != "" && response.is_phone == "0") {
+                        $(".selected-contacts-list").remove(".guest-users");
+                        $(".selected-contacts-list").html(response.view);
+                    }
 
-            }
-             if(response.view!=""&&response.is_phone=="0"){
-                $('.selected-contacts-list').remove('.guest-users');
-                $('.selected-contacts-list').html(response.view);
-            }
-
-            $('#home_loader').css('display', 'none');
-
-            },
-            error: function (error) {
-              toastr.error('Something went wrong. Please try again!');
-              $('#home_loader').css('display', 'none');
-
-            },
-          });
+                    $("#home_loader").css("display", "none");
+                },
+                error: function (error) {
+                    toastr.error("Something went wrong. Please try again!");
+                    $("#home_loader").css("display", "none");
+                },
+            });
         }, 500);
     }
 
-
     // Declare guestList outside so it's globally accessible
-function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile) {
-
+    function addToGuestList(
+        id,
+        preferBy,
+        appUser,
+        first_name,
+        last_name,
+        email,
+        profile
+    ) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
-        var is_duplicate=0;
+        var is_duplicate = 0;
         if (!exists) {
-            is_duplicate=0;
+            is_duplicate = 0;
             guestList.push({
                 id: id,
                 prefer_by: preferBy,
@@ -1020,19 +1085,19 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             });
         } else {
             console.log("Contact already in guest list:", { id });
-            is_duplicate=1;
+            is_duplicate = 1;
         }
 
-        var  profileImage="";
-        if(profile!=""){
-            profileImage = `<img src="${profile}" alt="Profile Image">` ;
-        }else{
-            profileImage =generateProfileImage(first_name, last_name);
+        var profileImage = "";
+        if (profile != "") {
+            profileImage = `<img src="${profile}" alt="Profile Image">`;
+        } else {
+            profileImage = generateProfileImage(first_name, last_name);
         }
-        var upper_view=$('.selected-contacts-list .guest-users').length;
+        var upper_view = $(".selected-contacts-list .guest-users").length;
 
-        if(upper_view<4){
-            const $modalBody = $('.selected-contacts-list');
+        if (upper_view < 4) {
+            const $modalBody = $(".selected-contacts-list");
             const contactHtml = `
                 <div class="guest-users guest_yesvite add_yesvite_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
@@ -1052,18 +1117,22 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
             `;
             // $modalBody.find(".add_guest_seeall").first().before(contactHtml);
             if ($modalBody.find(".add_guest_seeall").length) {
-                $modalBody.find(".add_guest_seeall").first().before(contactHtml);
+                $modalBody
+                    .find(".add_guest_seeall")
+                    .first()
+                    .before(contactHtml);
             } else {
                 $modalBody.append(contactHtml);
             }
 
             // $modalBody.append(contactHtml);
-        }else{
-            const $modalBody = $('.selected-contacts-list');
-            var upper_see=$('.selected-contacts-list .add_guest_seeall').length;
+        } else {
+            const $modalBody = $(".selected-contacts-list");
+            var upper_see = $(
+                ".selected-contacts-list .add_guest_seeall"
+            ).length;
             // alert(upper_see);
-            if(upper_see==0&&is_duplicate==0){
-
+            if (upper_see == 0 && is_duplicate == 0) {
                 const totalHtml = `
                 <a class="guest-user d-block yesvite add_guest_seeall">
                     <div class="guest-user-img guest-total">
@@ -1072,34 +1141,38 @@ function addToGuestList(id, preferBy, appUser,first_name,last_name,email,profile
                  </div>
                  <h6>See all</h6>
                 </a>`;
-                  $modalBody.append(totalHtml);
+                $modalBody.append(totalHtml);
             }
-            if(upper_see>0){
-                if(is_duplicate==0){
-                    var initial= parseInt($('#total-selected-email').attr('data-count'));
-                    var new_value= initial+1 ;
-                    $('#total-selected-email').attr('data-count',new_value);
-                    $('#total-selected-email').text('+'+new_value);
+            if (upper_see > 0) {
+                if (is_duplicate == 0) {
+                    var initial = parseInt(
+                        $("#total-selected-email").attr("data-count")
+                    );
+                    var new_value = initial + 1;
+                    $("#total-selected-email").attr("data-count", new_value);
+                    $("#total-selected-email").text("+" + new_value);
                 }
-
             }
-
-             }
-
-
-
+        }
 
         console.log("Updated guest list:", guestList);
     }
 
-
-function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,profile) {
+    function addToGuestPhoneList(
+        id,
+        preferBy,
+        appUser,
+        first_name,
+        last_name,
+        email,
+        profile
+    ) {
         console.log("Adding to guest list:", { id, preferBy, appUser });
         const exists = guestList.some((contact) => contact.id === id);
-        var is_duplicate_phone=0;
+        var is_duplicate_phone = 0;
 
         if (!exists) {
-            is_duplicate_phone=0;
+            is_duplicate_phone = 0;
             guestList.push({
                 id: id,
                 prefer_by: preferBy,
@@ -1112,20 +1185,22 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             });
         } else {
             console.log("Contact already in guest list:", { id });
-            is_duplicate_phone=1;
+            is_duplicate_phone = 1;
         }
 
         console.log(is_duplicate_phone);
-        var  profileImage="";
+        var profileImage = "";
         // if(profile!=""){
         //     profileImage = `<img src="${profile}" alt="Profile Image">` ;
         // }else{
-            profileImage =generateProfileImage(first_name, last_name);
+        profileImage = generateProfileImage(first_name, last_name);
         // }
-        var upper_phone_view=$('.selected-phone-list .guest-user-phone').length;
+        var upper_phone_view = $(
+            ".selected-phone-list .guest-user-phone"
+        ).length;
 
-        if(upper_phone_view<4){
-            const $modalBody = $('.selected-phone-list');
+        if (upper_phone_view < 4) {
+            const $modalBody = $(".selected-phone-list");
             const contactHtml = `
                 <div class="guest-user-phone guest_yesvite add_phone_guest_${id}" data-id="${id}">
                     <div class="guest-user-img">
@@ -1146,15 +1221,19 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
             // $modalBody.append(contactHtml);
 
             if ($modalBody.find(".add_guest_phone_seeall").length) {
-                $modalBody.find(".add_guest_phone_seeall").first().before(contactHtml);
+                $modalBody
+                    .find(".add_guest_phone_seeall")
+                    .first()
+                    .before(contactHtml);
             } else {
                 $modalBody.append(contactHtml);
             }
-
-        }else{
-            const $modalBody = $('.selected-phone-list');
-            var upper_see_phone=$('.selected-phone-list .add_guest_phone_seeall').length;
-            if(upper_see_phone==0 && is_duplicate_phone==0){
+        } else {
+            const $modalBody = $(".selected-phone-list");
+            var upper_see_phone = $(
+                ".selected-phone-list .add_guest_phone_seeall"
+            ).length;
+            if (upper_see_phone == 0 && is_duplicate_phone == 0) {
                 const totalHtml = `
                 <a  class="guest-user d-block yesvite add_guest_phone_seeall">
                     <div class="guest-user-img guest-total">
@@ -1164,122 +1243,116 @@ function addToGuestPhoneList(id, preferBy, appUser,first_name,last_name,email,pr
                  <h6>See all</h6>
                 </a>`;
 
-
-                  $modalBody.append(totalHtml);
-
+                $modalBody.append(totalHtml);
             }
-            if(upper_see_phone>0){
-                console.log(upper_see_phone,is_duplicate_phone);
+            if (upper_see_phone > 0) {
+                console.log(upper_see_phone, is_duplicate_phone);
 
-                if(is_duplicate_phone==0){
-                    var initial= parseInt($('#total-selected-phone').attr('data-count'));
-                    var new_value= initial+1 ;
-                 //    alert(initial);
-                    $('#total-selected-phone').attr('data-count',new_value);
-                    $('#total-selected-phone').text('+'+new_value);
+                if (is_duplicate_phone == 0) {
+                    var initial = parseInt(
+                        $("#total-selected-phone").attr("data-count")
+                    );
+                    var new_value = initial + 1;
+                    //    alert(initial);
+                    $("#total-selected-phone").attr("data-count", new_value);
+                    $("#total-selected-phone").text("+" + new_value);
                 }
-
             }
-
-             }
-
+        }
     }
 
-$(document).on('click','.remove_new_added_user',function(){
+    $(document).on("click", ".remove_new_added_user", function () {
+        var user_id = $(this).attr("data-id");
+        const event_id = $("#event_id").val();
 
-    var user_id=$(this).attr('data-id');
-    const event_id = $('#event_id').val();
+        $(".add_yesvite_guest_" + user_id).remove();
+        storeAddNewGuest(user_id, 0, "", event_id, "yesvite");
+        $(".contact-checkbox[data-id='" + user_id + "']").prop(
+            "checked",
+            false
+        );
+        $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+        guestList = guestList.filter((guest) => guest.id !== parseInt(user_id));
+    });
 
-    $('.add_yesvite_guest_'+user_id).remove();
-    storeAddNewGuest(user_id,0,'',event_id,'yesvite');
-    $(".contact-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
-
-
-
+    $(document).on("click", ".remove_new_phone_added_user", function () {
+        var user_id = $(this).attr("data-id");
+        const event_id = $("#event_id").val();
+        storeAddNewGuest(user_id, 0, "", event_id, "phone");
+        $(".add_phone_guest_" + user_id).remove();
+        $(".phoneContact-checkbox[data-id='" + user_id + "']").prop(
+            "checked",
+            false
+        );
+        // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
+        guestList = guestList.filter((guest) => guest.id !== parseInt(user_id));
+    });
 });
 
-$(document).on('click','.remove_new_phone_added_user',function(){
-
-    var user_id=$(this).attr('data-id');
-    const event_id = $('#event_id').val();
-    storeAddNewGuest(user_id,0,'',event_id,'phone');
-    $('.add_phone_guest_'+user_id).remove();
-    $(".phoneContact-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    // $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
-    guestList = guestList.filter(guest => guest.id !== parseInt(user_id));
-
-
-
-});
-
-});
-
- $(document).on("click", ".add_guest", function (e) {
-        e.preventDefault();
-        console.log("Guest list before submit:", guestList);
-        console.log("Sending guest list:", guestList);
-        $.ajax({
-            url: base_url + "event_wall/send-invitation", // Your Laravel route
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: {
-                event_id: $("#event_id").val(), // Event ID from a hidden input
-                guest_list: guestList,
-            },
-            success: function (response) {
-                if (response.status === 1) {
-                    window.location.reload();
-                    toastr.success('Invited successfully');
-                    // alert(response.message); // Show success message
-                    guestList = []; // Clear guest list after successful submission
-                } else {
-                    // alert(response.message); // Show error message
-                }
-            },
-            error: function (xhr) {
-                alert("Something went wrong. Please try again."); // Handle AJAX errors
-            },
-        });
+$(document).on("click", ".add_guest", function (e) {
+    e.preventDefault();
+    console.log("Guest list before submit:", guestList);
+    console.log("Sending guest list:", guestList);
+    $.ajax({
+        url: base_url + "event_wall/send-invitation", // Your Laravel route
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            event_id: $("#event_id").val(), // Event ID from a hidden input
+            guest_list: guestList,
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                window.location.reload();
+                toastr.success("Invited successfully");
+                // alert(response.message); // Show success message
+                guestList = []; // Clear guest list after successful submission
+            } else {
+                // alert(response.message); // Show error message
+            }
+        },
+        error: function (xhr) {
+            alert("Something went wrong. Please try again."); // Handle AJAX errors
+        },
+    });
 });
 $(document).on("keyup", ".search_contact", function () {
-    console.log($(this).val())
+    console.log($(this).val());
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
-    const name=$(this).val();
-    const event_id = $('#event_id').val();
+    const name = $(this).val();
+    const event_id = $("#event_id").val();
 
-    var see_all=$(this).attr('data-see_all');
+    var see_all = $(this).attr("data-see_all");
     console.log(see_all);
 
-    $('#home_loader').css('display','flex');
+    $("#home_loader").css("display", "flex");
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
-        data: JSON.stringify({ search: name,event_id:event_id,see_all:see_all}),
+        data: JSON.stringify({
+            search: name,
+            event_id: event_id,
+            see_all: see_all,
+        }),
         contentType: "application/json",
         headers: {
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             console.log(response);
-            $('#guestList').html('');
-            $('#guestList').html(response.view);
-            $('#home_loader').css('display','none');
-
-
+            $("#guestList").html("");
+            $("#guestList").html(response.view);
+            $("#home_loader").css("display", "none");
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
-            $('#home_loader').css('loader','none');
-
-        }
+            $("#home_loader").css("loader", "none");
+        },
     });
-
 });
 
 // $(document).on('click','.see-all-guest-right-btn',function(){
@@ -1308,11 +1381,11 @@ $(document).on("keyup", ".search_contact", function () {
 //         },
 //     });
 // });
-$(document).on('keyup','.post_comment',function(){
-//     $(".parent_comment_id").val('');
-// })
-    var commentVal=$(".parent_comment_id").val();
-    if(commentVal==""){
-        $(".parent_comment_id").val('');
+$(document).on("keyup", ".post_comment", function () {
+    //     $(".parent_comment_id").val('');
+    // })
+    var commentVal = $(".parent_comment_id").val();
+    if (commentVal == "") {
+        $(".parent_comment_id").val("");
     }
-})
+});
