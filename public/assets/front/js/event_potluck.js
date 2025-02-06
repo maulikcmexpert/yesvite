@@ -388,7 +388,6 @@ $(document).on("click", ".saveItemBtn", function () {
             quantity: item_quantity,
         },
         success: function (response) {
-            window.location.href = "";
             if (response.success) {
                 //   alert('Quantity saved successfully');
             }
