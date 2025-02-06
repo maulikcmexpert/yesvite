@@ -1,8 +1,8 @@
- {{dd($eventInfo)}}
 @php
 
     $guestArray = $eventInfo['guest_view']['event_detail']['guests']['all_invited_users'] ?? null;
     $eventId = $eventInfo['guest_view']['event_detail']['id']?? null;
+    $total_invite=$eventInfo['host_view']['total_invite']??0;
     $totalAdults = 0;
     $totalKids = 0;
     // dd( $guestArray);
@@ -27,7 +27,7 @@
     <div class="main-right-guests-wrp common-div-wrp">
         <div class="main-right-guests-head">
             <h3>Guests</h3>
-            <p>20 Active</p>
+            <p>{{$total_invite}} Active</p>
         </div>
         @php
             // Safely fetch the value of 'event_detail[2]' or set it to null if it doesn't exist

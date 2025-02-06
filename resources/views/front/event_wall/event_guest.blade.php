@@ -1,4 +1,3 @@
-{{dd($eventInfo)}}
 
 <main class="new-main-content">
 
