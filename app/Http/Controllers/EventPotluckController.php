@@ -96,12 +96,12 @@ class EventPotluckController extends Controller
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
-                dd(1);
+               
                 $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
                 $categories = session()->get('category', []);
                 $totalCategoryItem = 0;
                 foreach ($eventpotluckData as  $key => $value) {
-
+                 
                     $potluckCategory['id'] = $value->id;
                     $potluckCategory['category'] = $value->category;
                     $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
@@ -111,7 +111,7 @@ class EventPotluckController extends Controller
                     $remainingQnt = 0;
                     $totalItem = 0; 
                    
-
+                    dd($remainingQnt);
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                         $itemData = [];
