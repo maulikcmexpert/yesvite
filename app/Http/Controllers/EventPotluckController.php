@@ -36,6 +36,7 @@ class EventPotluckController extends Controller
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
+        dd($id);
         $event = decrypt($id);
         $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
         if ($event == null) {
