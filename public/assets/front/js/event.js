@@ -1022,13 +1022,13 @@ $('#notification_rsvp_btn').on('click', function (e) {
     if(selectedValue=="1"){
         if(adults=="0" && kids=="0"){
             toastr.error('Please select atleast one kid or adult');
-            $('#aboutsuccess').on('hide.bs.modal', function (e) {
+            $('#rsvp_by_notification').on('hide.bs.modal', function (e) {
                 e.preventDefault();
             });
             return;
         } else {
             // If valid input is provided, allow closing of the modal
-            $('#aboutsuccess').off('hide.bs.modal');
+            $('#rsvp_by_notification').off('hide.bs.modal');
         
         }
     }else{
@@ -1037,7 +1037,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
        $('.rsvp_minus_notify').prop('disabled',true);
        $('.rsvp_plus_notify').prop('disabled',true);
     }
-    $('#aboutsuccess').modal('hide');
+    $('#rsvp_by_notification').modal('hide');
 
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
