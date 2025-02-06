@@ -472,7 +472,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
 
             for (const userElement of users) {
                 const userId = userElement.getAttribute("data-userid");
-
+                console.log({userId})
                 if (!userId) continue; // Skip if no userId
 
                 let userData = await getUser(userId);
