@@ -712,8 +712,8 @@
                 <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
                     <!-- <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a> -->
-                    <a href="{{ asset('assets/front/csv/demo.xlsx') }}" 
-                            download="demo.xlsx" 
+                    <a href="{{ asset('assets/front/csv/demo.csv') }}" 
+                            download="demo.csv" 
                             type="button" 
                             class="cmn-btn download-csv-btn download">
                             Download CSV
