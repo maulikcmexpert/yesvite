@@ -1234,21 +1234,7 @@ $(".modal").on("shown.bs.modal", function () {
 
 
 
-$(document).ready(function () {
-    $(".image-zoom-icon").click(function () {
-        var imgSrc = $(this).data("img");
 
-        $.magnificPopup.open({
-            items: {
-                src: imgSrc,
-                type: "image"
-            },
-            gallery: {
-                enabled: false
-            }
-        });
-    });
-});
 
 $(document).on('click','.select_all_post',function(){
    if($(this).is(':checked')){
