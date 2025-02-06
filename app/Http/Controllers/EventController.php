@@ -198,7 +198,8 @@ class EventController extends BaseController
                 $invitedContactUsers = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
-                    ->whereNull('user_id')
+                    // ->whereNull('user_id')
+                    ->whereNotNull('sync_id')
                     ->get();
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
