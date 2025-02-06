@@ -1,4 +1,4 @@
-{{dd($postPhotoList)}}
+{{-- {{dd($postPhotoList)}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -350,11 +350,16 @@
                                                             data-image="{{ json_encode($postMedia ) }}">
 
 
-                                                            @if (!empty($photo['mediaData']) && isset($photo['mediaData'][0]['type']) && $photo['mediaData'][0]['type'] === 'image')
-                                                            <img src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" alt="Post Image">
+                                                            @if (!empty($photo['mediaData']) && isset($photo['mediaData'][0]['type']))
+                                                            @if ($photo['mediaData'][0]['type'] === 'image')
+                                                                <img src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" alt="Post Image">
+                                                            @elseif ($photo['mediaData'][0]['type'] === 'video')
+                                                                <video src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" controls></video>
+                                                            @endif
                                                         @else
-                                                            <p>No image available</p>
+                                                            <p>No photos/videos</p>
                                                         @endif
+
 
                                                         </div>
                                                         @if ($photo['total_media'] != '')

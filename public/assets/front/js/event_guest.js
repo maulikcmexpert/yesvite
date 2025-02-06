@@ -332,9 +332,8 @@ $(document).on('click','.re_send_failed_invites', function() {
         let userId = $(this).attr('data-id');
         let preferBy = $(this).attr('data-prefer');
         let app_user = $(this).attr('data-app_user');
-        let event_id = $('#event_id').val();
-        ;
-        userIds.push({ id: userId, prefer_by: preferBy,event_id:event_id,app_user:app_user});
+        var event_id = $('#event_id').val();
+        userIds.push({ id: userId, prefer_by: preferBy,app_user:app_user});
     });
 
     console.log(userIds);
@@ -343,7 +342,7 @@ $(document).on('click','.re_send_failed_invites', function() {
     $.ajax({
         url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
         type: "POST",
-        data: JSON.stringify({ guest_list: userIds}),
+        data: JSON.stringify({ guest_list: userIds,event_id:event_id}),
         contentType: "application/json",
         headers: {
             'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
@@ -352,6 +351,16 @@ $(document).on('click','.re_send_failed_invites', function() {
         success: function (response) {
             if (response.status === 1) {
                 toastr.success(response.message);
+                window.location.reload();
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
                 // // Find the guest container by guestId and remove it from the DOM
             } else {
                 toastr.error(response.message);
