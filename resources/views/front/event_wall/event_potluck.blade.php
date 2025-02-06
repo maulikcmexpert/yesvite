@@ -259,7 +259,7 @@
                                                                         fill="#23AA26" />
                                                                 </svg>
                                                             </span>
-                                                            <h6 class="me-3 over-quantity {{($over_quantity_count >0)?"":"d-none" }}"
+                                                            <h6 class="me-3 over-quantity-{{ $category['id'] }} {{($over_quantity_count >0)?"":"d-none" }}"
                                                                 style="color:green;">
                                                                 {{ $over_quantity_count }}
                                                                 Item Over</h6>
