@@ -2272,10 +2272,22 @@
     setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call to set the countdown immediately
 </script>
+@if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['longitude']!=''  && $eventDetails['longitude']!=null  && $eventDetails['longitude']!=0 )
+@php
+   $latitude = !empty($eventDetails['latitude'])
+        ? $eventDetails['latitude']
+        : '39.8283';
+
+    $longitude = !empty($eventDetails['longitude'])
+        ? $eventDetails['longitude']
+        : '-98.5795'; 
+
+@endphp
 @push('scripts')
 <script>
+  
     function initMapDirection() {
-        var eventLocation = { lat: 23.0981684; , lng: 74.1643497};
+        var eventLocation = { lat: {{$latitude}} , lng: {{$longitude}}};
 
         var map = new google.maps.Map(document.getElementById("directionmap"), {
             zoom: 14,
@@ -2285,9 +2297,9 @@
         var marker = new google.maps.Marker({
             position: eventLocation,
             map: map,
-            title: "Jhalod",
+            title: "{{ $eventDetails['address_1'] }} ",
             icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png", // Custom marker icon
+                url: base_url+"pin.svg", // Custom marker icon
                 scaledSize: new google.maps.Size(40, 40) // Adjust size
             }
         });
@@ -2297,3 +2309,5 @@
     window.onload = initMapDirection;
 </script>
 @endpush
+
+@endif
