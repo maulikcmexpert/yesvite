@@ -33,6 +33,7 @@ class EventPotluckController extends Controller
 {
     public function index(String $id)
     {
+        
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
@@ -56,7 +57,7 @@ class EventPotluckController extends Controller
 
 
 
-
+          
 
 
 
@@ -75,7 +76,7 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-
+           
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
 
 
@@ -90,17 +91,17 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
-            dd(1);
+        
 
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
-              
+               
                 $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
                 $categories = session()->get('category', []);
                 $totalCategoryItem = 0;
                 foreach ($eventpotluckData as  $key => $value) {
-
+                 
                     $potluckCategory['id'] = $value->id;
                     $potluckCategory['category'] = $value->category;
                     $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
@@ -110,7 +111,7 @@ class EventPotluckController extends Controller
                     $remainingQnt = 0;
                     $totalItem = 0; 
                    
-
+                   
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                         $itemData = [];
@@ -143,8 +144,8 @@ class EventPotluckController extends Controller
                                 }
                             }
                             $totalItem = $totalItem + 1;
-                           
                             $remainingQnt = $remainingQnt + $itemValue->quantity;
+                            dd($remainingQnt);
                             $potluckItem['itmquantity'] =  $itmquantity;
                             $potluckItem['innerUserQnt'] =  $innnerUserItem;
 
