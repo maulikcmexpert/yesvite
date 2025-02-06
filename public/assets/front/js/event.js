@@ -1,7 +1,8 @@
 var date_upcoming=false;
 var date_past=false;
 var date_draft=false;
-
+$('.rsvp_minus_notify').prop('disabled',false);
+$('.rsvp_plus_notify').prop('disabled',false);
 function getActiveTabPage() {
     let activeTab = $(".event_nav.active");
     let activePage = activeTab.data("page");
@@ -998,8 +999,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
 //     });
 });
 
-    $('.rsvp_minus_notify').prop('disabled',false);
-    $('.rsvp_plus_notify').prop('disabled',false);
+   
 
 $(document).on('click','.rsvp-no-checkbox',function(){
     $('.rsvp_minus_notify').prop('disabled',true);
