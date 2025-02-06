@@ -1787,7 +1787,7 @@
                                             data-bs-target="#nav-{{ $reaction }}-reaction-{{ $post['id'] }}"
                                             type="button" role="tab"
                                             aria-controls="nav-{{ $reaction }}-reaction" aria-selected="false">
-                                            <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                            <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/heart-emoji.png') }}"
                                                 alt="{{ $reaction }}" loading="lazy">
                                             {{ $count }}
                                         </button>
