@@ -298,7 +298,8 @@ $(document).on('click', '.delete_failed_contact', function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
         },
         success: function (response) {
-            if (response.status === 1) {
+            console.log(response);
+            if (response.success === 1) {
                 toastr.success(response.message);
                 window.location.reload();
                 // // Find the guest container by guestId and remove it from the DOM
