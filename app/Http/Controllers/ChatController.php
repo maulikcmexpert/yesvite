@@ -62,8 +62,10 @@ class ChatController extends Controller
     }
     public function index($id = null)
     {
-        dd($id);
-         
+        if($id!=null){
+            $hosts_id=decrypt($id);
+            dd($hosts_id);
+        }
 
         $userId = auth()->id();
         $userData = User::findOrFail($userId);
