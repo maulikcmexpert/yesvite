@@ -329,34 +329,39 @@ $(document).on('click','.re_send_failed_invites', function() {
     
     let userIds = [];
     $('.failed_check_resend_email').each(function() {
-        let userId = $(this).data('id');
-        let preferBy = $(this).data('prefer');
-        userIds.push({ userId: userId, preferBy: preferBy });
+        let userId = $(this).attr('data-id');
+        let preferBy = $(this).attr('data-prefer');
+        let app_user = $(this).attr('data-app_user');
+        let event_id = $('#event_id').val();
+        ;
+        userIds.push({ id: userId, prefer_by: preferBy,event_id:event_id,app_user:app_user});
     });
-    console.log(userIds);
 
-    // $.ajax({
-    //     url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
-    //     type: "POST",
-    //     data: JSON.stringify({ guest_list: userIds}),
-    //     contentType: "application/json",
-    //     headers: {
-    //         'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
-    //     },
-    //     success: function (response) {
-    //         if (response.status === 1) {
-    //             toastr.success(response.message);
-    //             // // Find the guest container by guestId and remove it from the DOM
-    //         } else {
-    //             toastr.error(response.message);
-    //         }
-    //     },
-    //     error: function (xhr, status, error) {
-    //         toastr.error("Something went wrong!");
-    //         console.error(xhr.responseText);
-    //     }
-    // });
+    console.log(userIds);
+    
+
+    $.ajax({
+        url: base_url + "event_wall/send-invitation",  // Ensure this route is defined in web.php/api.php
+        type: "POST",
+        data: JSON.stringify({ guest_list: userIds,is_failed:'1'}),
+        contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // If using Laravel Passport or Sanctum
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // If CSRF token is needed
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                toastr.success(response.message);
+                // // Find the guest container by guestId and remove it from the DOM
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        }
+    });
 });
 
 $(document).on('change','.failed_check_resend_email', function() {
