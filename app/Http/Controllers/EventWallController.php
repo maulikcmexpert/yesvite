@@ -972,10 +972,10 @@ class EventWallController extends Controller
                                 $commentChildReply['comment'] = $childReplyVal->comment_text;
                                 $commentChildReply['user_id'] = $childReplyVal->user_id;
 
-                                $commentChildReply['username'] = (!empty($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname)) ?($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname) : "";
+                                $commentChildReply['username'] = (!empty($childReplyVal->user )) ?($childReplyVal->user->firstname . ' ' . $childReplyVal->user->lastname) : "";
 
-                                $commentChildReply['profile'] = (!empty($childReplyVal->user->profile)) ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
-                                $commentChildReply['location'] = (!empty($childReplyVal->user->city)) ? $childReplyVal->user->city : "";
+                                $commentChildReply['profile'] = (!empty($childReplyVal->user)&&$childReplyVal->user->profile!='') ? asset('storage/profile/' . $childReplyVal->user->profile) : "";
+                                $commentChildReply['location'] = (!empty($childReplyVal->user)) ? $childReplyVal->user->city : "";
 
                                 $commentChildReply['comment_total_likes'] = ($childReplyVal->post_comment_reaction_count != "") ? $childReplyVal->post_comment_reaction_count : "0";
 
