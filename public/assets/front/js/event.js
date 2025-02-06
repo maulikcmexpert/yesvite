@@ -26,7 +26,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
         toastr.error("Please Enter CANCEL");
         return;
     }
-    $('#home_loader').css('display','flex');
+    $('#loader').css('display','flex');
     console.log(event);
     $.ajax({
         url: `${base_url}event/cancel_event`,
@@ -44,7 +44,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
                 }
                 // $('#cancelevent').modal('hide');
                 window.location.reload();
-                $('#home_loader').css('display','none');
+                $('#loader').css('display','none');
 
 
             }
@@ -55,7 +55,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
             // $('.loader').css('display','none');    
         },
         complete: function () {
-         $('#home_loader').css('display','none');    
+         $('#loader').css('display','none');    
         }
 
     });
@@ -235,7 +235,7 @@ $(document).on('input','#search_upcoming_event',function(){
     clearTimeout(search_user_ajax_timer);
 
     search_user_ajax_timer = setTimeout(function () {
-        $('.loader_up').css('display','block');    
+        $('#loader').css('display','flex');    
     $.ajax({
         url: `${base_url}search_upcoming_event`,
         type: 'GET',
@@ -279,7 +279,7 @@ $(document).on('input','#search_draft_event',function(){
 
     clearTimeout(search_user_ajax_timer);
     search_user_ajax_timer = setTimeout(function () {
-        $('.loader_up').css('display','block');    
+        $('#loader').css('display','flex');    
     $.ajax({
         url: `${base_url}search_draft_event`,
         type: 'GET',
@@ -325,7 +325,7 @@ $(document).on('input','#search_past_event',function(e){
     
     
     search_user_ajax_timer = setTimeout(function () {
-        $('.loader_up').css('display','block');    
+        $('#loader').css('display','flex');    
     $.ajax({
         url: `${base_url}search_past_event`,
         type: 'GET',
@@ -569,7 +569,7 @@ $(document).on('input', '#type_cancel', function () {
 //         toastr.error("Please Enter CANCEL");
 //         return;
 //     }
-//     $('#home_loader').css('display','flex');
+//     $('#loader').css('display','flex');
 //     console.log(event);
 //     $.ajax({
 //         url: `${base_url}event/cancel_event`,
@@ -585,7 +585,7 @@ $(document).on('input', '#type_cancel', function () {
 //                 toastr.success("Event Cancelled successfully");
 //                 // $('#cancelevent').modal('hide');
 //                 window.location.reload();
-//                 $('#home_loader').css('display','none');
+//                 $('#loader').css('display','none');
 
 
 //             }
@@ -596,7 +596,7 @@ $(document).on('input', '#type_cancel', function () {
 //             // $('.loader').css('display','none');    
 //         },
 //         complete: function () {
-//          $('#home_loader').css('display','none');    
+//          $('#loader').css('display','none');    
 //         }
 
 //     });
@@ -673,7 +673,7 @@ $(document).on('click',".day",function () {
 
     }
     search_user_ajax_timer = setTimeout(function () {
-        $('.loader_up').css('display','block');    
+        $('#loader').css('display','flex');    
         console.log(ajax_base_url)
         console.log(scrollStatus);
         console.log(tabbtn);
@@ -819,7 +819,7 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
     console.log(activityTypes); 
     console.log(selectedEvents); 
 
-    $('#home_loader').css('display','flex');
+    $('#loader').css('display','flex');
 
   $.ajax({
         url: `${base_url}notification_filter`,
@@ -830,12 +830,12 @@ $(document).on('click', '.notification_filter_apply_btn', function () {
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
-            $('#home_loader').css('display','none');
+            $('#loader').css('display','none');
 
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
-            $('#home_loader').css('display','none');
+            $('#loader').css('display','none');
 
            }
 
@@ -896,7 +896,7 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
     });
     // $('.notification-selected-events-wrp').html('');
 
-    $('#home_loader').css('display','flex');
+    $('#loader').css('display','flex');
 
  $.ajax({
         url: `${base_url}notification_all`,
@@ -908,13 +908,13 @@ $(document).on('click', '.all-event-notification-filter-reset', function () {
             $(".notification_div").html('');
             $(".notification_div").append(response.view);
             $("#all-notification-filter-modal").modal('hide');
-            $('#home_loader').css('display','none');
+            $('#loader').css('display','none');
             $('#search_filter_event').val("");
         
            }else{
             $(".notification_div").html('');
             $("#all-notification-filter-modal").modal('hide');
-            $('#home_loader').css('display','none');
+            $('#loader').css('display','none');
 
            }
            
@@ -1085,7 +1085,7 @@ $(document).on('click','.main-notification-div-list',function(){
 $(document).on('input','#search_filter_event',function(){
 
     var search_event=$(this).val();
-    $('#home_loader').css('display','flex');
+    $('#loader').css('display','flex');
 
                     $.ajax({
                         url: `${base_url}filter_search_event`,
@@ -1094,7 +1094,7 @@ $(document).on('input','#search_filter_event',function(){
                         success: function (response) { 
                             $('.event-search-filter').html();  
                             $('.event-search-filter').html(response.view);   
-                            $('#home_loader').css('display','none');
+                            $('#loader').css('display','none');
                       
                         },
                         error: function (error) {
@@ -1110,7 +1110,7 @@ $(document).on('click','event-notification-icon',function(e){
 // $(document).on('click','.notification-toggle-menu',function(){
 
 //     var search_event=$(this).val();
-//     $('#home_loader').css('display','flex');
+//     $('#loader').css('display','flex');
 //     $.ajax({
 //         url: `${base_url}filter_search_event`,
 //         type: 'GET',        
@@ -1118,7 +1118,7 @@ $(document).on('click','event-notification-icon',function(e){
 //         success: function (response) { 
 //             $('.event-search-filter').html('');  
 //             $('.event-search-filter').html(response.view);   
-//             $('#home_loader').css('display','none');
+//             $('#loader').css('display','none');
 //         },
 //         error: function (error) {
 //           toastr.error('Something went wrong. Please try again!');
