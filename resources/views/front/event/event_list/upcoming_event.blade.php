@@ -6,6 +6,7 @@
           $colorIndex = 0;
 
 @endphp
+
 @foreach ( $eventList as $upcomingEvent)
 @php
                 $current_month = $upcomingEvent['event_month'];
