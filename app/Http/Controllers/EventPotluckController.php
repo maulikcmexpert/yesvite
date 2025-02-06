@@ -754,6 +754,7 @@ class EventPotluckController extends Controller
                 'first_name' => $getUserItemData->users->firstname,
                 'quantity' => $getUserItemData->quantity ?? '0',
                 'last_name' => $getUserItemData->users->lastname,
+                'event' => $request->event_id,
                 'category_id' => $categoryId,
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
