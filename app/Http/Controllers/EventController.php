@@ -276,7 +276,7 @@ class EventController extends BaseController
                 $eventDetail['design_image'] = ($getEventData->design_image != NULL) ? asset('storage/canvas/' . $getEventData->design_image) : null;
                 $eventDetail['static_information'] = ($getEventData->static_information != NULL) ? $getEventData->static_information : null;
                 $eventDetail['event_images'] = [];
-                $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+                $getEventImages = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->get();
                 if (!empty($getEventImages)) {
                     foreach ($getEventImages as $imgVal) {
                         $eventImageData['id'] = $imgVal->id;
@@ -590,7 +590,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        // dd($potluck);
+        // dd($request);
         // dd($request);
 
         Session::forget('desgin');
@@ -1469,6 +1469,7 @@ class EventController extends BaseController
 
     public function storeCategoryitemSession(Request $request)
     {
+
         $user = Auth::guard('web')->user();
         $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
@@ -1511,7 +1512,7 @@ class EventController extends BaseController
             if ($selfBringQuantity != "") {
                 $item['item_carry_users'][] = [
                     'user_id' => $user->id,
-                    'quantity' => $itemQuantity,
+                    'quantity' => $selfBringQuantity,
                 ];
             }
             $categories[$category_index]['item'][] = $item;
@@ -1561,7 +1562,7 @@ class EventController extends BaseController
             if ($selfBringQuantity != "") {
                 $categoryData['item'][0]['item_carry_users'][] = [
                     'user_id' => $user->id,
-                    'quantity' => $itemQuantity,
+                    'quantity' => $selfBringQuantity,
                 ];
             }
             $categories[$category_index] = $categoryData;
@@ -2575,7 +2576,7 @@ class EventController extends BaseController
             $eventDetail['subscription_plan_name'] = ($getEventData->subscription_plan_name != NULL) ? $getEventData->subscription_plan_name : "";
             $eventDetail['subscription_invite_count'] = ($getEventData->subscription_invite_count != NULL) ? $getEventData->subscription_invite_count : 0;
             $eventDetail['event_images'] = [];
-            $getEventImages = EventImage::where('event_id', $getEventData->id)->get();
+            $getEventImages = EventImage::where('event_id', $getEventData->id)->orderBy('type', 'ASC')->get();
             if (!empty($getEventImages)) {
                 foreach ($getEventImages as $imgVal) {
                     $eventImageData['id'] = $imgVal->id;
@@ -3252,6 +3253,7 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
+
 
         Session::forget('desgin');
         Session::forget('shape_image');

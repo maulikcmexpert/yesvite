@@ -76,8 +76,14 @@
 </head>
 
 <body>
-    <div id="loader" style="display: none;">
+    <!-- <div id="loader" style="display: none;">
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
+    </div> -->
+    <div class="loader" id="loader" style="display: none;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
     @include($page)
    

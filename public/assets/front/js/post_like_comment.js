@@ -5,7 +5,6 @@ $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
 
-
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -524,7 +523,7 @@ $(document).ready(function () {
 
     $("#allcontact").on("click", function () {
 
-        $('#home_loader').css('display', 'block');
+        $('#home_loader').css('display','flex');
 
         guestList=[];
         $('.guest_yesvite').remove();
@@ -791,7 +790,7 @@ $(document).ready(function () {
         $(document).on("change", ".contact-checkbox", function () {
             // console.log($('#home_loader').length);
             // setTimeout(() => {
-                // $('#home_loader').css('display', 'block');
+                // $('#home_loader').css('display','flex');
             // }, 500);
 
 
@@ -838,7 +837,7 @@ $(document).ready(function () {
         });
 
         $(document).on("change", ".phone-checkbox", function () {
-            // $('#home_loader').css('display', 'block');
+            // $('#home_loader').css('display','flex');
 
             const id = $(this).data("id");
             const isSelected = $(this).attr('data-prefer'); // Use attr() instead of data()
@@ -935,7 +934,7 @@ $(document).ready(function () {
     });
 
     function storeAddNewGuest(id,status,prefer_by,event_id,contact){
-        $('#home_loader').css('display', 'block');
+        $('#home_loader').css('display','flex');
 
     setTimeout(function(){
         $.ajax({
@@ -1221,7 +1220,7 @@ $(document).on("keyup", ".search_contact", function () {
     var see_all=$(this).attr('data-see_all');
     console.log(see_all);
 
-    $('#home_loader').css('display','block');
+    $('#home_loader').css('display','flex');
     $.ajax({
         url: base_url + "event_guest/right_bar_guest_list",
         type: "POST",
