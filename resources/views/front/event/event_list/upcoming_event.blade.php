@@ -1,4 +1,4 @@
-@php
+    @php
           $month="";
           $current_month = "";
           $month_change = $get_current_month;
@@ -11,19 +11,23 @@
                 $current_month = $upcomingEvent['event_month'];
                 $colorClass = $series[$colorIndex % count($series)];
                 $colorIndex++;
+
+                $eventRoute = ($upcomingEvent['event_wall'] == "0")
+                ? route('event.event_about', encrypt($upcomingEvent['id']))
+                : route('event.event_wall', encrypt($upcomingEvent['id']));
 @endphp
 <div class="all-events-month-wise-support upcoming_event_{{$upcomingEvent['id']}}" data-month="{{$upcomingEvent['event_month']}}">
     <div class="home-center-upcoming-events-card all-event-{{ $colorClass }} mb-3">
         <div class="home-upcoming-events-card-left">
-            <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-left-profile">
+            <a href="{{ $eventRoute  }}" class="home-upcoming-events-card-left-profile">
                 <div class="home-upcoming-events-card-left-profile-img">
                     {{-- <img src="{{$upcomingEvent['host_profile']}}" class="lazy" alt=""> --}}
                     @if($upcomingEvent['host_profile'] != "")
                         <img src="{{$upcomingEvent['host_profile']}}" class="lazy" alt="">
                     @else
-                    @php 
+                    @php
                         $name = $upcomingEvent['host_name'];
-                        $parts = explode(" ", $name); 
+                        $parts = explode(" ", $name);
                         $firstInitial = isset($upcomingEvent['host_firstname'][0]) ? strtoupper($upcomingEvent['host_firstname'][0][0]) : '';
                         $secondInitial = isset($upcomingEvent['host_lastname'][1]) ? strtoupper($upcomingEvent['host_lastname'][1][0]) : '';
                         $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
@@ -52,7 +56,7 @@
                     @endif
                 <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
                 </ul>
-            </a>   
+            </a>
             <div class="home-upcoming-events-card-left-foot">
                 <div class="home-upcoming-events-card-rsvp-data">
                     <h6 class="card-rsvp-done"><i class="fa-regular fa-circle-check"></i> {{$upcomingEvent['total_accept_event_user']}}</h6>
