@@ -363,26 +363,15 @@
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">
 
                                                                     <!-- Smiley Emoji -->
-                                                                    @if ($post['self_reaction'] == '\u{1F604}')
-                                                                        <li>
-                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                                alt="Smiley Emoji">
-                                                                        </li>
-
-                                                                        <!-- Eye Heart Emoji -->
-                                                                    @elseif ($post['self_reaction'] == '\u{1F60D}')
-                                                                        <li>
-                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                                alt="Eye Heart Emoji">
-                                                                        </li>
-
-                                                                        <!-- Heart Emoji -->
-                                                                    @elseif ($post['self_reaction'] == '\u{2764}')
-                                                                        <li>
-                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                                alt="Heart Emoji">
-                                                                        </li>
-                                                                    @endif
+                                                                    <li id="reactionImage_{{ $post['id'] }}">
+                                                                        @if ($post['self_reaction'] == '\u{1F604}')
+                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="Smiley Emoji">
+                                                                        @elseif ($post['self_reaction'] == '\u{1F60D}')
+                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt="Eye Heart Emoji">
+                                                                        @elseif ($post['self_reaction'] == '\u{2764}')
+                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji">
+                                                                        @endif
+                                                                    </li>
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
