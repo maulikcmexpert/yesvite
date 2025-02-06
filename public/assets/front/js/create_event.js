@@ -3393,7 +3393,7 @@ function convertTo12Hour(time) {
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
-    var end_time = $("#ac-end-time").val() || '';
+    var end_time = $("#ac-end-time").val() || "";
 
     let activityendtime;
     // checkEndTimes();
@@ -3513,6 +3513,7 @@ $(document).on("click", "#save_activity_schedule", function () {
         if (lastScheduleEndtime > lastendtime) {
             isStartTime = 1;
             toastr.error("Please enter proper time");
+            $("#end-time").val("");
             return;
         }
     }
@@ -3720,7 +3721,10 @@ $(document).on("click", "#close_createEvent", function () {
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
-
+        var schedule = $("#schedule").is(":checked");
+        if (schedule) {
+            eventData.events_schedule = "1";
+        }
         console.log(eventData);
 
         $.ajax({
@@ -4077,6 +4081,7 @@ function savePage1Data(close = null, direct = false) {
         eventData.state = state;
         eventData.zipcode = zipcode;
         eventData.city = city;
+        eventData.schedule = schedule;
         eventData.message_to_guests = message_to_guests;
         eventData.events_schedule = events_schedule;
         eventData.longitude = longitude;
@@ -8420,10 +8425,6 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
-    if(isStartTime == 0){
-        toastr.error("Please enter proper time");
-        return
-    }
     eventData.isdraft = "0";
 
     var data = eventData;
@@ -8597,6 +8598,10 @@ $(document).on("click", "#close_editEvent", function (e) {
     eventData.step = final_step;
     eventData.isdraft = "1";
     savePage4Data();
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
+        eventData.events_schedule = "1";
+    }
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
@@ -8669,6 +8674,9 @@ async function step2Open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
     }
     console.log(design);
 
