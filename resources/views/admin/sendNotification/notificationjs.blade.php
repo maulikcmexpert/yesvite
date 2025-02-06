@@ -8,7 +8,7 @@
                 message: $('#message').val(),
             };
             if ($('#title').val() != "" && $('#message').val() != "") {
-                $('#loader').css('display', 'block');
+                $('#loader').css('display','flex');
             }
             console.log(formData);
             $.ajax({

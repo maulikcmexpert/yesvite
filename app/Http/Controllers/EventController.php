@@ -1469,6 +1469,7 @@ class EventController extends BaseController
 
     public function storeCategoryitemSession(Request $request)
     {
+       
         $user = Auth::guard('web')->user();
         $id = $user->id;
         $name = $user->firstname . ' ' . $user->lastname;
@@ -1511,7 +1512,7 @@ class EventController extends BaseController
             if ($selfBringQuantity != "") {
                 $item['item_carry_users'][] = [
                     'user_id' => $user->id,
-                    'quantity' => $itemQuantity,
+                    'quantity' => $selfBringQuantity,
                 ];
             }
             $categories[$category_index]['item'][] = $item;
@@ -1561,7 +1562,7 @@ class EventController extends BaseController
             if ($selfBringQuantity != "") {
                 $categoryData['item'][0]['item_carry_users'][] = [
                     'user_id' => $user->id,
-                    'quantity' => $itemQuantity,
+                    'quantity' => $selfBringQuantity,
                 ];
             }
             $categories[$category_index] = $categoryData;
