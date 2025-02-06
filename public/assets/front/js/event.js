@@ -602,14 +602,13 @@ $(document).on('input', '#type_cancel', function () {
     
 // })
 
-// $(document).on('click','.all-event-filter-reset',function(){
-//     // alert();
-   
+$(document).on('click','.all-event-filter-reset',function(){
+    $(".hosting_chk").prop('checked', true);
+    $(".invited_to_chk").prop('checked', true);
+    $('.need_to_rsvp_chk').prop('checked', false);
 
-//     $(".hosting_chk").prop('checked', false);
-//     $(".invited_to_chk").prop('checked', false);
-//     $('.need_to_rsvp_chk').prop('checked', false);
-// });
+    $('#all-event-filter-modal').modal('hide');
+});
 
 $(document).on("click",".event_nav",function () {
     var page= $(this).data('page');
