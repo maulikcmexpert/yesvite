@@ -40,7 +40,7 @@ class EventListController extends Controller
                 $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
-                // ->orderBy('start_date', 'ASC')  
+                // ->orderBy('start_date', 'ASC')
                 // ->get();
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
@@ -55,7 +55,7 @@ class EventListController extends Controller
             $allEvent = $allEvents
                         ->orderBy('start_date', 'asc')
                         ->offset(0)
-                        ->limit($this->per_page) 
+                        ->limit($this->per_page)
                         ->get();
 
                 // $totalCounts += count($allEvent);
@@ -210,7 +210,7 @@ class EventListController extends Controller
                             }
                             $eventDetail['event_detail'] = $eventData;
                         }
-                        
+
 
                         $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                         $comments =  EventPostComment::where('user_id', $value->user->id)->count();
@@ -265,7 +265,7 @@ class EventListController extends Controller
                             'hosting' => $totalHosting,
                             'need_to_rsvp' => $total_need_rsvp_event_count,
                             'past_event'=>$totalPastEventCount,
-                        ];     
+                        ];
                     }
                 }
                 //upcoming_event
@@ -297,7 +297,7 @@ class EventListController extends Controller
                     $allPastEvents = $allPastEventsQuery
                         ->orderBy('start_date', 'asc')
                         ->offset(0)
-                        ->limit(10) 
+                        ->limit(10)
                         ->get();
                     // $allPastEvents =  collect($allPastEvent)->sortBy('start_date');
 
@@ -420,10 +420,10 @@ class EventListController extends Controller
                         //PastEvents
 
 
-                      
-                        
+
+
                     }
-                   
+
                 }
                 //draftEvent
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')
@@ -445,9 +445,9 @@ class EventListController extends Controller
                         $eventDraftDetail['event_plan_name'] = $value->subscription_plan_name;
 
                         if($value->user_id==$user->id){
-                            $eventDraftDetail['is_host'] = "hosting"; 
+                            $eventDraftDetail['is_host'] = "hosting";
                         }else{
-                            $eventDraftDetail['is_host'] = ""; 
+                            $eventDraftDetail['is_host'] = "";
                         }
 
                         $draftEventArray[] = $eventDraftDetail;
@@ -483,7 +483,7 @@ class EventListController extends Controller
                             $profileData = [
                                 'total_events' => $totalEvent,
                                 'total_events_of_year' => $totalEventOfYear,
-                                'total_events_of_current_month' => $totalEventOfCurrentMonth,   
+                                'total_events_of_current_month' => $totalEventOfCurrentMonth,
                                 'total_upcoming_events' => $upcomingEventCount,
                                 'invitedTo_count' => $invitedToCount,
                                 'invitedTo_count_upcoming' => $totalInvitedUpcoming,
@@ -502,12 +502,12 @@ class EventListController extends Controller
                                 'past_event'=>$totalPastEventCount,
                                 'total_upcoming'=>$upcomingEventCount,
                                 'total_draft'=>$totalDraftEvent
-                            ];  
+                            ];
 
                 $event_calender_start=User::select('created_at')->where('id',$user->id)->get();
                 // dd($event_calender_start);
                 $currentYear = Carbon::now()->year;
-                $currentMonth = Carbon::now()->month;  
+                $currentMonth = Carbon::now()->month;
                 $profileYear = Carbon::parse($event_calender_start[0]->created_at)->format('Y');
                 $profileMonth =  Carbon::parse($event_calender_start[0]->created_at)->format('m');
                 $diffYear = $currentYear - $profileYear;
@@ -523,7 +523,7 @@ class EventListController extends Controller
                 } else {
                     $diffmonth = ($currentMonth - $profileMonth);
                 }
-    
+
                 $startMonth=Carbon::parse($event_calender_start[0]->created_at)->format('Y-m');
                 $startMonthCalender=Carbon::parse($event_calender_start[0]->created_at)->format('F Y');
 
@@ -531,26 +531,26 @@ class EventListController extends Controller
                 $eventcalender = Event::where(['is_draft_save' => '0', 'user_id' => $user->id]);
                 $invitedEvents = EventInvitedUser::where('user_id', $user->id)->get()->pluck('event_id');
                 $invitedEventsList = Event::whereIn('id', $invitedEvents)->where('is_draft_save', '0');
-    
+
 
                 $eventcalenderdata = $eventcalender->union($invitedEventsList)->get();
 
                 $color = ['blue', 'green', 'yellow', 'orange'];
                 $events_calender = [];
-                
+
                 $groupedEvents = [];
                 foreach ($eventcalenderdata as $event) {
                     $groupedEvents[$event->start_date][] = $event;
                 }
                 foreach ($groupedEvents as $date => $eventsOnDate) {
-                    $colorIndex = 0; 
+                    $colorIndex = 0;
                     usort($eventsOnDate, function ($a, $b) {
-                        return strcmp($a->event_name, $b->event_name); 
+                        return strcmp($a->event_name, $b->event_name);
                     });
-                
+
                     foreach ($eventsOnDate as $event) {
                         $colorClass = $color[$colorIndex % count($color)];
-                        $colorIndex++; 
+                        $colorIndex++;
                         $events_calender[] = [
                             'date' => $event->start_date,
                             'title' => $event->event_name,
@@ -562,14 +562,14 @@ class EventListController extends Controller
                 // $events_calender = [];
                 // $color=['blue','orange','green','yellow'];
                 // $colorIndex = 0;
-              
+
                 // foreach ($eventcalenderdata as $event) {
                 //     $colorClass = $color[$colorIndex % count($color)];
                 //     $colorIndex++;
                 //     $events_calender[] = [
-                //         'date' => $event->start_date, 
-                //         'title' => $event->event_name,    
-                //         'color' => $colorClass    
+                //         'date' => $event->start_date,
+                //         'title' => $event->event_name,
+                //         'color' => $colorClass
                 //     ];
                 // }
 
@@ -581,20 +581,20 @@ class EventListController extends Controller
                 $title = 'Events';
                 $page = 'front.events';
                 return view('layout', compact('title','page','js','filter','eventList','eventPasttList','startMonthCalender','eventDraftdata','profileData','startMonth','numMonths','diffmonth','events_calender_json'));
-    }   
+    }
 
     public function evenGoneTime($enddate)
     {
-        $eventEndDate = $enddate; 
+        $eventEndDate = $enddate;
         $currentDate = Carbon::today();
         $endDateTime = Carbon::parse($eventEndDate);
-        $hoursElapsed = $endDateTime->diffInHours($currentDate, false); 
+        $hoursElapsed = $endDateTime->diffInHours($currentDate, false);
         return $hoursElapsed;
     }
 
     // function setpostTime($dateTime)
     // {
-    //     $commentDateTime = $dateTime; 
+    //     $commentDateTime = $dateTime;
     //     $commentTime = Carbon::parse($commentDateTime);
     //     $timeAgo = $commentTime->diffForHumans();
     //     return $timeAgo;
@@ -604,25 +604,25 @@ class EventListController extends Controller
     {
         $now = Carbon::now(); // Current time
         $updatedTime =Carbon::parse($updatedAt); // Parse the updated_at value
-    
+
         $diffInDays = $updatedTime->diffInDays($now);
-    
+
         if ($diffInDays > 0) {
             return $diffInDays . 'd'; // Return in 'Xd' format
         }
-    
+
         $diffInHours = $updatedTime->diffInHours($now);
-    
+
         if ($diffInHours > 0) {
             return $diffInHours . 'h'; // Return in 'Xh' format
         }
-    
+
         $diffInMinutes = $updatedTime->diffInMinutes($now);
-    
+
         if ($diffInMinutes > 0) {
             return $diffInMinutes . 'm'; // Return in 'Xm' format
         }
-    
+
         return 'just now'; // For moments less than a minute
     }
     public function fetchPastEvents(Request $request) {
@@ -647,7 +647,7 @@ class EventListController extends Controller
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
         $invitedPastEventsList->where('is_draft_save', '0');
 
-    
+
                               $allPastEventsQuery = $usercreatedAllPastEventList->union($invitedPastEventsList);
 
                               // Apply offset and limit
@@ -656,10 +656,10 @@ class EventListController extends Controller
                                   ->offset($offset)
                                   ->limit($limit)
                                   ->get();
-                          
+
                               // Check if there is more data
                               $hasMore = $allPastEventsQuery->count() > $offset + $limit;
-        
+
         // Count total events without pagination for total count
         $totalCounts=0;
         $totalCounts += count($allPastEvents);
@@ -778,10 +778,10 @@ class EventListController extends Controller
                 $eventPasttList[] = $eventPastDetail;
             }
         }
-        
+
                 return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),'has_more' => $hasMore,'offset'=>$offset,'limit'=>$limit],);
 
-                
+
     }
 
     public function fetchDraftEvents(Request $request){
@@ -806,12 +806,12 @@ class EventListController extends Controller
                                 $eventDraftDetail['step'] = ($value->step != NULL) ? $value->step : 0;
                                 $eventDraftDetail['event_plan_name'] = $value->subscription_plan_name;
                                 $eventDraftDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
-                                $eventDraftDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); 
+                                $eventDraftDetail['event_month'] = Carbon::parse($value->start_date)->format('M');
 
                                 if($value->user_id==$user->id){
-                                    $eventDraftDetail['is_host'] = "hosting"; 
+                                    $eventDraftDetail['is_host'] = "hosting";
                                 }else{
-                                    $eventDraftDetail['is_host'] = ""; 
+                                    $eventDraftDetail['is_host'] = "";
                                 }
 
                                 $draftEventArray[] = $eventDraftDetail;
@@ -826,21 +826,21 @@ class EventListController extends Controller
 
 
     }
-           
+
     public function fetchUpcomingEvents(Request $request){
         $limit = $request->input('limit'); // Default limit
         $offset = $request->input('offset');
         $get_current_month= $request->input('current_month');
 
         $user  = Auth::guard('web')->user();
-                
+
         // $pages = ($page != "") ? $page : 1;
 
         //upcoming_event
         $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
         ->where('user_id', $user->id)
         ->where('is_draft_save', '0');
-        // ->orderBy('start_date', 'ASC')  
+        // ->orderBy('start_date', 'ASC')
         // ->get();
     $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
     $query->where('app_user', '1');
@@ -854,7 +854,7 @@ class EventListController extends Controller
     $allEvent = $allEvents
                 ->orderBy('start_date', 'asc')
                 ->offset($offset)
-                ->limit($limit) 
+                ->limit($limit)
                 ->get();
         // $totalCounts += count($allEvent);
         // // Calculate offset based on current page and perPage
@@ -1032,10 +1032,10 @@ class EventListController extends Controller
     public function SearchUpcomingEvent(Request $request){
         $get_current_month= $request->input('current_month');
         $user  = Auth::guard('web')->user();
-        $eventName = $request->input('searchValue'); 
+        $eventName = $request->input('searchValue');
         $search_date=$request->input('search_date');
-       
-  
+
+
 
         if($search_date!=""){
                 $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date',$search_date)->where('start_date','>=',date('Y-m-d'))
@@ -1048,7 +1048,7 @@ class EventListController extends Controller
                 $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
                     ->whereIn('id', $invitedEvents)->where('start_date', $search_date)->where('start_date','>=',date('Y-m-d'))
                     ->where('is_draft_save', '0')
-                    ->where('event_name', 'LIKE', '%' . $eventName . '%'); 
+                    ->where('event_name', 'LIKE', '%' . $eventName . '%');
         }else{
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
@@ -1062,7 +1062,7 @@ class EventListController extends Controller
                     ->where('is_draft_save', '0')
                     ->where('event_name', 'LIKE', '%' . $eventName . '%');
         }
-    
+
         $allEvents = $usercreatedList->union($invitedEventsList);
 
     $allEvent = $allEvents
@@ -1236,14 +1236,14 @@ class EventListController extends Controller
 
 
     }
-    
+
     public function SearchDraftEvent(Request $request){
         $is_draft_page="";
         $is_draft_page= $request->input('is_draft_page');
         $search_date= $request->input('search_date');
         $get_current_month= $request->input('current_month');
         $user  = Auth::guard('web')->user();
-        $eventName = $request->input('searchValue'); 
+        $eventName = $request->input('searchValue');
         if($search_date!=""){
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->where('start_date',$search_date)->orderBy('id', 'DESC')
             ->get();
@@ -1269,9 +1269,9 @@ class EventListController extends Controller
                 $eventDraftDetail['event_plan_name'] = $value->subscription_plan_name;
 
                 if($value->user_id==$user->id){
-                    $eventDraftDetail['is_host'] = "hosting"; 
+                    $eventDraftDetail['is_host'] = "hosting";
                 }else{
-                    $eventDraftDetail['is_host'] = ""; 
+                    $eventDraftDetail['is_host'] = "";
                 }
 
                 $draftEventArray[] = $eventDraftDetail;
@@ -1292,14 +1292,14 @@ class EventListController extends Controller
     }
 
     public function SearchPastEvent(Request $request){
-        $eventName = $request->input('searchValue'); 
+        $eventName = $request->input('searchValue');
 
         $get_current_month= $request->input('current_month');
 
         $serach_date= $request->input('search_date');
 
         $user  = Auth::guard('web')->user();
-    
+
 
         if($serach_date!=""){
             $usercreatedAllPastEventList = Event::query();
@@ -1307,12 +1307,12 @@ class EventListController extends Controller
             $usercreatedAllPastEventList->where('start_date',$serach_date);
             $usercreatedAllPastEventList->where('start_date', '<', date('Y-m-d'));
             $usercreatedAllPastEventList->where('is_draft_save', '0');
-    
-    
+
+
             $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
-    
+
             $invitedPastEventsList = Event::query();
             $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
             $invitedPastEventsList->where('start_date',$serach_date);
@@ -1325,26 +1325,26 @@ class EventListController extends Controller
             $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
             $usercreatedAllPastEventList->where('is_draft_save', '0')
             ->where('event_name', 'LIKE', '%' . $eventName . '%');
-    
-    
+
+
             $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
-    
+
             $invitedPastEventsList = Event::query();
             $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
             $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
             $invitedPastEventsList->where('is_draft_save', '0')
-            ->where('event_name', 'LIKE', '%' . $eventName . '%');  
+            ->where('event_name', 'LIKE', '%' . $eventName . '%');
         }
-    
+
          $allPastEventsQuery = $usercreatedAllPastEventList->union($invitedPastEventsList);
 
                               // Apply offset and limit
          $allPastEvents = $allPastEventsQuery
                         ->orderBy('start_date', 'asc')
                         ->get();
-                          
+
         $totalCounts=0;
         $totalCounts += count($allPastEvents);
         $eventPasttList=[];
@@ -1470,7 +1470,7 @@ class EventListController extends Controller
                 $last_month = $eventPasttList[0]['event_month'];
             }
         }
-        
+
                 return response()->json(['view' => view( 'front.event.event_list.past_event', compact('eventPasttList','get_current_month'))->render(),'last_month' => $last_month,'page'=>'past'],);
 
     }
@@ -1646,7 +1646,7 @@ class EventListController extends Controller
                 $last_month = $eventList[0]['event_month'];
             }
         }
-     
+
         }
 
         if($invited_to==1){
@@ -1802,19 +1802,19 @@ class EventListController extends Controller
                     $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
 
                     $eventList[] = $eventDetail;
-                  
+
                 }
                 if(!empty($eventList)){
                     $last_month=$eventList[0]['event_month'];
                 }
-           
+
             }
         }
 
         if ($need_rsvp_to== 1) {
             $userNeedRsvpEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year,$page) {
-               
-               
+
+
                 if($page=="upcoming"){
                     $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'))
                     ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
@@ -1823,8 +1823,8 @@ class EventListController extends Controller
                     $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'))
                     ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                     ->orderBy('start_date', 'ASC');                }
-                
-           
+
+
                 $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
                     return $query->whereBetween('start_date', [$event_date, $end_event_date]);
                 });
@@ -1972,12 +1972,12 @@ class EventListController extends Controller
 
                     $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
                     $eventList[] = $eventDetail;
-                 
+
                 }
                 if(!empty($eventList)){
                     $last_month=$eventList[0]['event_month'];
                 }
-                
+
             }
         }
 
@@ -1987,7 +1987,7 @@ class EventListController extends Controller
                 $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
-                // ->orderBy('start_date', 'ASC')  
+                // ->orderBy('start_date', 'ASC')
                 // ->get();
                 $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -2003,7 +2003,7 @@ class EventListController extends Controller
                 $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('end_date', '<', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
-                // ->orderBy('start_date', 'ASC')  
+                // ->orderBy('start_date', 'ASC')
                 // ->get();
                 $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -2015,12 +2015,12 @@ class EventListController extends Controller
                     // ->get();
                 $allEvents = $usercreatedList->union($invitedEventsList);
             }
-        
+
 
             $allEvent = $allEvents
                         ->orderBy('start_date', 'asc')
                         ->offset(0)
-                        ->limit(10) 
+                        ->limit(10)
                         ->get();
 
                     if (count($allEvent) != 0) {
@@ -2055,7 +2055,7 @@ class EventListController extends Controller
                             $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit)&&$value->event_settings->allow_limit!="")?$value->event_settings->allow_limit:"";
                             $eventDetail['kids'] = 0;
                             $eventDetail['adults'] = 0;
-            
+
                             $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
                             if ($checkRsvpDone != null) {
                                 $eventDetail['kids'] = $checkRsvpDone->kids;
@@ -2075,7 +2075,7 @@ class EventListController extends Controller
                             $eventDetail['start_time'] =  $value->rsvp_start_time;
                             $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
                             $rsvp_status = "";
-            
+
                             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                                 $query->where('app_user', '1');
                             })->where(['user_id' => $user->id, 'event_id' => $value->id])->first();
@@ -2089,7 +2089,7 @@ class EventListController extends Controller
                                     $rsvp_status = '0'; // rsvp button//
                                 }
                             }
-            
+
                             $eventDetail['rsvp_status'] = $rsvp_status;
                             $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
                                 $query->where('app_user', '1');
@@ -2133,7 +2133,7 @@ class EventListController extends Controller
                             $totalEvent =  Event::where('user_id', $value->user->id)->count();
                             $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
                             $comments =  EventPostComment::where('user_id', $value->user->id)->count();
-            
+
                             $eventDetail['user_profile'] = [
                                 'id' => $value->user->id,
                                 'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
@@ -2149,14 +2149,14 @@ class EventListController extends Controller
                                 'comments' => $comments,
                             ];
                             $eventDetail['event_plan_name'] = $value->subscription_plan_name;
-            
+
                             $eventList[] = $eventDetail;
-                            
+
                         }
                         if(!empty($eventList)){
                             $last_month = $eventList[0]['event_month'];
                         }
-                      
+
                     }
         }
 
@@ -2166,7 +2166,7 @@ class EventListController extends Controller
             $collection = collect($eventList);
             $uniqueCollection = $collection->unique('id');
             $eventList = $uniqueCollection->values()->all();
-           
+
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
@@ -2180,7 +2180,7 @@ class EventListController extends Controller
             $collection = collect($eventList);
             $uniqueCollection = $collection->unique('id');
             $eventPasttList = $uniqueCollection->values()->all();
-           
+
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
@@ -2202,9 +2202,9 @@ class EventListController extends Controller
         // if (!$date) {
         //     return response()->json(['error' => 'Invalid date format. Expected "F Y".'], 400);
         // }
-    
+
         // $month = $month;  // 12
-        // $year = $year; 
+        // $year = $year;
 
         // dd($month,$year);
         $month_data= TotalMonthData($user->id,$month,$year);
@@ -2213,10 +2213,10 @@ class EventListController extends Controller
         return response()->json(['month_data'=>$month_data]);
 
     }
-      
+
     public function EventFilterData(Request $request){
         $user  = Auth::guard('web')->user();
-        
+
         $page= $request->input('page');
 
         $totalInvited = EventInvitedUser::whereHas('event', function ($query) use($page) {
@@ -2231,7 +2231,7 @@ class EventListController extends Controller
         //     $query->where('is_draft_save', '0')
         //     ->when($input['past_event'] == '1', function($que) {
         //         $que->where('end_date', '<', date('Y-m-d'));
-        //     })    
+        //     })
         //     ->when($input['past_event'] == '0', function($que) {
         //         $que->where('start_date', '>=', date('Y-m-d'));
         //     });
@@ -2255,7 +2255,7 @@ class EventListController extends Controller
             'invited_to' => $totalInvited,
             'hosting' => $totalHosting,
             'need_to_rsvp' => $total_need_rsvp_event_count,
-        ];     
+        ];
         return response()->json($filter);
     }
 
@@ -2263,24 +2263,24 @@ class EventListController extends Controller
     {
         $user = Auth::guard('web')->user();
         $eventdata = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->get();
-    
+
         $events = [];
         $color=['blue','orange','green','yellow'];
         $colorIndex = 0;
-      
+
         foreach ($eventdata as $event) {
             $colorClass = $color[$colorIndex % count($color)];
             $colorIndex++;
             $events[] = [
-                'date' => $event->start_date, 
-                'name' => $event->event_name,    
-                'color' => $colorClass    
+                'date' => $event->start_date,
+                'name' => $event->event_name,
+                'color' => $colorClass
             ];
         }
-    
+
         return response()->json($events);
     }
-    
+
     public function UpdateNotificationRead(Request $request){
 
         $user_id= $request->input('user_id');
@@ -2291,17 +2291,17 @@ class EventListController extends Controller
             $notifcation->read = "1";
             $notifcation->save();
         }
-        
+
 
 
         $notifcationcount = Notification::where("user_id",$user_id)->where("read","0")->count();
 
         // dd($notifcationcount);
 
-        
+
 
         return response()->json(['status'=>1,'count'=>$notifcationcount]);
-        
+
 
     }
 
@@ -2501,7 +2501,7 @@ class EventListController extends Controller
 
                 foreach($notificationInfo as $notify_data){
                     if ($values->event_id === $notify_data['event_id']) {
-                        $final_data[$values->event->event_name][] = $notify_data; 
+                        $final_data[$values->event->event_name][] = $notify_data;
                     }
                 }
             }
@@ -2517,7 +2517,7 @@ class EventListController extends Controller
         $user = Auth::guard('web')->user();
         $notify=Notification::where(['event_id' => $eventId, 'user_id' => $user->id])->update(['read' => '1']);
 
- 
+
     }
 
     public function store_rsvp(Request $request)
@@ -2538,7 +2538,7 @@ $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 // dd($rsvpSentAttempt,$rsvp_status);
 if ($rsvpSent != null) {
     $rsvp_attempt = "";
-    if ($rsvpSentAttempt == NULL) { 
+    if ($rsvpSentAttempt == NULL) {
         $rsvp_attempt =  'first';
     } else if ($rsvpSentAttempt == '0' && $rsvp_status == '1') {
         $rsvp_attempt =  'no_to_yes';
@@ -2556,7 +2556,7 @@ if ($rsvpSent != null) {
     $rsvpSent->event_id = $request->rsvp_event_id;
 
     $rsvpSent->user_id = $request->rsvp_user_id;
-  
+
     $rsvpSent->rsvp_status = $request->rsvp_status;
 
     $rsvpSent->adults = $adults;
@@ -2577,11 +2577,11 @@ if ($rsvpSent != null) {
         EventPost::where('event_id', $eventId)
             // ->where('user_id', $userId)
             ->where(function ($query) use ($userId) {
-            
+
                     $query->where('user_id', $userId);
-              
+
             })
-        
+
             ->where('post_type', '4')->delete();
         $postMessage = [];
         $postMessage = [
@@ -2614,7 +2614,7 @@ if ($rsvpSent != null) {
     ];
 
 
-        sendNotification('sent_rsvp', $notificationParam);   
+        sendNotification('sent_rsvp', $notificationParam);
 
 
     if ($request->rsvp_status == "1") {
@@ -2624,8 +2624,8 @@ if ($rsvpSent != null) {
         return response()->json(['status' => 0, 'text' => 'You are not going to this event']);
         // return redirect()->to($url)->with('msg', 'You are going to this event');
     }
-    
-  
+
+
 }
 
 } catch (QueryException $e) {
@@ -2651,11 +2651,11 @@ if ($rsvpSent != null) {
         $eventData = EventInvitedUser::where(['user_id' => $user_id])->get();
 
         $eventList = [];
-        
+
         foreach ($eventData as $val) {
-    
+
         $eventDatas =   Event::select('id', 'event_name')->where('id', $val->event_id)->where('event_name', 'like', "%$eventName%")->get();
-          
+
             foreach ($eventDatas as $vals) {
                 $eventDetail['id'] = $vals->id;
                 $eventDetail['event_name'] = $vals->event_name;
@@ -2686,7 +2686,7 @@ if ($rsvpSent != null) {
 
             $userData = array_values(array_filter($userData, fn($user) => $user['user_id'] != $user_id));
             session(['add_guest_user_id' => $userData]);
-        
+
 
             // Check if user already exists in session
 
@@ -2714,10 +2714,10 @@ if ($rsvpSent != null) {
             $yesvite_users_data = [];
             $yesvite_phone_data = [];
             $is_phone=$request->is_phone;
-      
+
         if(!empty($new_added_user)){
             $processed_user_ids = []; // Keep track of processed user IDs
-    
+
             foreach ($new_added_user as $sesionuser) {
                 $user_id = $sesionuser['user_id'];
                 $prefer_by = $sesionuser['prefer_by'];
@@ -2734,7 +2734,7 @@ if ($rsvpSent != null) {
                         'recent'=>1,
                     ];
                     $processed_user_ids[] = $user_id; // Mark this ID as processed
-                } 
+                }
             }
             foreach ($new_added_user as $sesionuser) {
                 $user_id = $sesionuser['user_id'];
@@ -2746,7 +2746,7 @@ if ($rsvpSent != null) {
                                 continue;
                     }else{
                     $contact_sync = contact_sync::where('id', $sesionuser['user_id'])->whereNull('userId')->first();
-            
+
                     if ($contact_sync) {
                         $yesvite_phone_data[] = [
                             'id' => $contact_sync->id,
@@ -2769,12 +2769,12 @@ if ($rsvpSent != null) {
             return response()->json(['view' => view( 'front.event_wall.guest_phone_list_upper_bar', compact('yesvite_all_invite','yesvite_users_data','yesvite_phone_data'))->render(),'is_phone'=>"1"]);
         }
         }
-    
+
         session(['add_guest_user_id' => $userData]);
-    
+
         return session()->get('add_guest_user_id');
     }
 
-    
+
 }
 
