@@ -590,7 +590,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        dd($request);
+        // dd($request);
         // dd($request);
 
         Session::forget('desgin');
