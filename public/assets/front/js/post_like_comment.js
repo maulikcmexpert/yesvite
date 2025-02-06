@@ -357,9 +357,7 @@ $(document).ready(function () {
                     }
 
                     const newCommentHTML = `
-                <li class="commented-user-wrp" data-comment-id="${
-                    data.comment_id
-                }">
+                <li class="commented-user-wrp" data-comment-id="${data.id}">
                     <div class="commented-user-head">
                         <div class="commented-user-profile">
                             <div class="commented-user-profile-img">
