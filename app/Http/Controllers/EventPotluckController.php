@@ -47,9 +47,12 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-            dd($eventpotluckData);
+           
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
+            
+            
             $spoken_for = UserPotluckItem::where('event_id', $event)->sum('quantity');
+            
             $checkEventOwner = Event::FindOrFail($event);
             $potluckDetail['total_potluck_categories'] = count($eventpotluckData);
             $potluckDetail['is_event_owner'] = ($checkEventOwner->user_id == $user->id) ? 1 : 0;
@@ -59,6 +62,7 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
+            dd($potluckDetail);
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
