@@ -834,8 +834,9 @@ class EventGuestController extends Controller
             $getGuest->delete();
             return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
         }else{
-            $getGuest = EventInvitedUser::where(['event_id' => $request['event_id'], 'sync_id' => $request['user_id']])->first();
-            $getGuest->delete();
+            $getphoneGuest = EventInvitedUser::where(['event_id' => $request['event_id'], 'sync_id' => $request['user_id']])->first();
+            dd($getphoneGuest);
+            $getphoneGuest->delete();
 
         }
     }
