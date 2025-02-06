@@ -221,10 +221,10 @@
                                                                 $missing = '';
                                                                 if ($total_missing_quantity == 0) {
                                                                     $display_icon = '';
-                                                                    $missing = 'color:red';
-                                                                    $hide_button = 'd-none'; // Hides the button
+                                                                    $missing = 'color:green;';
+                                                                    // $hide_button = 'd-none'; // Hides the button
                                                                 }else{
-                                                                    $missing = 'color:green';
+                                                                    $missing = 'color:red';
                                                                 }
                                                             @endphp
                                                             <span id ="success_{{ $category['id'] }}"
@@ -259,7 +259,7 @@
                                                                         fill="#23AA26" />
                                                                 </svg>
                                                             </span>
-                                                            <h6 class="me-3 over-quantity d-none"
+                                                            <h6 class="me-3 over-quantity {{($over_quantity_count >0)?"":"d-none" }}"
                                                                 style="color:green;">
                                                                 {{ $over_quantity_count }}
                                                                 Item Over</h6>
