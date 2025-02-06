@@ -7,13 +7,11 @@ $(document).ready(function () {
 
     $(".show-comment-reply-btn").on("click", function () {
         let currunt = $(this).html().toLowerCase().trim();
-        console.log(currunt);
+
         if (currunt == "show reply") {
             $(this).html("Hide reply");
-            console.log("hide");
         } else {
             $(this).html("Show reply");
-            console.log("show");
         }
     });
     $(document).on("mousedown", "#likeButton", function () {
