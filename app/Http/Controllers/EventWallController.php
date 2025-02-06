@@ -2690,7 +2690,6 @@ class EventWallController extends Controller
                     'event_id' => $request['event_id'],
                     'newUser' => $filteredIds
                 ];
-                dd(vars: $notificationParam);
                 // dispatch(new SendNotificationJob(array('invite', $notificationParam)));
                 sendNotification('invite', $notificationParam);
             }
