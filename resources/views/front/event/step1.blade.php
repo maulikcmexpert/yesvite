@@ -636,8 +636,17 @@
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
                                                                                     required="" 
-                                                                                    value="01:15 PM" /><span
-                                                                                    class="input-group-append input-group-addon"><span
+                                                                                    value="02:15 PM" />
+
+                                                                                    <input class="form-control timepicker activity_start_time" 
+                                                                                    name="activity-start-time[]" placeholder="HH:MM AM/PM" 
+                                                                                    required="" readonly="" value="2:00 PM">
+                                                                                    <span
+                                                                                    class="input-group-append input-group-addon">
+
+                                                                                   
+                                                                                    
+                                                                                    <span
                                                                                         class="input-group-text">
                                                                                         <svg width="21"
                                                                                             height="20"
