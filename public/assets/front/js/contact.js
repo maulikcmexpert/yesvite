@@ -720,8 +720,7 @@ $('#uploadForm').on('submit', function (e) {
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
-        e.preventDefault();
-
         toastr.error('Please upload a CSV file first');
+        return;
     }
 });
