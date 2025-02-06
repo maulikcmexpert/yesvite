@@ -36,7 +36,6 @@ class EventPotluckController extends Controller
         $title = 'event potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
-
         $event = decrypt($id);
         $js = ['event_potluck','guest_rsvp','post_like_comment','guest'];
         if ($event == null) {
@@ -121,6 +120,8 @@ class EventPotluckController extends Controller
                 }
 
                 $potluckDetail['podluck_category_list'] = $potluckCategoryData;
+
+                dd($potluckDetail);
 
                 $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
                     $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','event_wall','guest_list_visible_to_guests');
@@ -545,7 +546,6 @@ class EventPotluckController extends Controller
 
     public function editUserPotluckItem(Request $request)
     {
-        
         $user  = Auth::guard('web')->user();
 
         $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();

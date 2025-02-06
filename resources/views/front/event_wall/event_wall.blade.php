@@ -1787,7 +1787,7 @@
                                             data-bs-target="#nav-{{ $reaction }}-reaction-{{ $post['id'] }}"
                                             type="button" role="tab"
                                             aria-controls="nav-{{ $reaction }}-reaction" aria-selected="false">
-                                            <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                            <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/heart-emoji.png') }}"
                                                 alt="{{ $reaction }}" loading="lazy">
                                             {{ $count }}
                                         </button>
@@ -1852,7 +1852,7 @@
                                                     <!-- Reaction Emoji Section -->
                                                     <div
                                                         class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/default-icon.png') }}"
+                                                        <img src="{{ $reactionIcons[$reaction] ?? asset('assets/front/img/heart-emoji.png') }}"
                                                             alt="{{ $reaction }}" loading="lazy">
                                                     </div>
                                                 </div>
@@ -2336,10 +2336,10 @@
                             <!-- ===Tab-content=== -->
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    {{-- <div class="modal-footer">
                         <button type="button" class="cmn-btn reset-btn">Reset</button>
                         <button type="button" class="cmn-btn">Apply</button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
