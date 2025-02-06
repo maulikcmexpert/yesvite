@@ -173,7 +173,7 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
     Route::post('contacts/save_edit_phone', [ContactController::class, 'save_editPhoneContact'])->name('.saveeditphonecontact');
-    Route::get('messages/{id?}',  [ChatController::class, 'index'])->name('message.list');
+    Route::get('messages/{id?}/{is_host?}',  [ChatController::class, 'index'])->name('message.list');
     Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
     Route::post('getUserByName',  [ChatController::class, 'get_user_by_name'])->name('message.getUserByName');
     Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');

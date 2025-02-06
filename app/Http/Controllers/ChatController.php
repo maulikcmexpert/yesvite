@@ -60,15 +60,15 @@ class ChatController extends Controller
         }
         return true;
     }
-    public function index($id = null)
+    public function index($id = null,$is_host=null)
     {
+        dd(encrypt($id),$is_host);
         $hosts_name="";
         if($id!=null){
             $hosts_id=decrypt($id);
             $hosts_data=User::where('id',$hosts_id)->first();
             $hosts_name=$hosts_data->firstname . ' ' . $hosts_data->lastname;
         }
-        dd($hosts_name);
         $userId = auth()->id();
         $userData = User::findOrFail($userId);
 
