@@ -1391,23 +1391,23 @@ $(document).on('click', function (e) {
         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
     }
 });
-function getEmojiUnicode(emoji) {
-    switch (emoji) {
-        case '❤️':
-            return '\u{2764}';  // Heart
-        case '😍':
-            return '\u{1F60D}';  // Smiling face with heart-eyes
-        case '👍':
-            return '\u{1F44D}';  // Thumbs up
-        case '😂':
-            return '\u{1F602}';  // Face with tears of joy
-        case '😢':
-            return '\u{1F622}';  // Crying face
-        default:
-            return emoji;  // Return as is if not found
-    }
-}
+// function getEmojiUnicode(emoji) {
+//     switch (emoji) {
+//         case '❤️':
+//             return '\u{2764}';  // Heart
+//         case '😍':
+//             return '\u{1F60D}';  // Smiling face with heart-eyes
+//         case '👍':
+//             return '\u{1F44D}';  // Thumbs up
+//         case '😂':
+//             return '\u{1F602}';  // Face with tears of joy
+//         case '😢':
+//             return '\u{1F622}';  // Crying face
+//         default:
+//             return emoji;  // Return as is if not found
+//     }
+// }
 
-const longPressDelay = 3000; // 3 seconds for long press
-let pressTimer;
-let isLongPress = false;
+// const longPressDelay = 3000; // 3 seconds for long press
+// let pressTimer;
+// let isLongPress = false;
