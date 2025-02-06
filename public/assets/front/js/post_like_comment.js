@@ -4,7 +4,14 @@ let guestPhoneList = [];
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
-
+    $(".show-comment-reply-btn").on("click", function () {
+        let currunt = $(this).html();
+        if (currunt == "Show reply") {
+            $(this).html("Hide reply");
+        } else {
+            $(this).html("Show reply");
+        }
+    });
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
