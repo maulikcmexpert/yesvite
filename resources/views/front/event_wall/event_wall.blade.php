@@ -1463,6 +1463,8 @@
                                    ></textarea>
                             </div>
                         </form>
+                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
+                        enctype="multipart/form-data">
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -1494,9 +1496,8 @@
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">
-                                <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
+                               
+                                    
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
@@ -1538,10 +1539,10 @@
 
                                         </div>
                                     </div>
-                                </form>
+                                
                             </div>
                         </div>
-
+                        </form>
                         <div class="create-post-poll-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>POLL</h4>
