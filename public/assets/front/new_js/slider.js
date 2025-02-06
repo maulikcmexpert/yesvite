@@ -95,7 +95,7 @@ var swiper = new Swiper(".posts-card-post", {
     },
     on: {
         init: () => updateDots(),
-        slideChange: () => updateDots(),
+        // slideChange: () => updateDots(),
     },
 });
 
@@ -103,7 +103,7 @@ var swiper = new Swiper(".posts-card-post", {
 
 function updateDots() {
     const total = swiper.slides.length;
-    alert(total);
+
     const current = swiper.realIndex + 1;
     const $dotsContainer = $(".custom-dots-container");
 
