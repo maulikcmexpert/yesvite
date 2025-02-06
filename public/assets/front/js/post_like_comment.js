@@ -63,11 +63,10 @@ $(document).ready(function () {
                     let reactionImage = "";
                     if (response.is_reaction == "1") {
                         reactionImage =
-                        '<img src="' +
-                        base_url +
-                        'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
                     }
-
 
                     // Update the reaction image in post
                     $(`#reactionImage_${eventPostId}`).html(reactionImage);
@@ -271,7 +270,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal = $(".post_comment").val();
+        var commentVal = $(this).prev(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -296,6 +295,7 @@ $(document).ready(function () {
         const commentText = commentInput.val().trim();
         // const parentCommentId = $(".parent_comment_id").val() || '';
         const parent_comment_id = $(".parent_comment_id").val();
+        console.log({ parent_comment_id });
         var parentCommentId =
             commentVal !== "" &&
             parent_comment_id !== "undefined" &&
@@ -334,7 +334,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     const data = response.data;
-
+                    console.log(data);
                     // Generate profile image or initials
                     const profileImage = data.profile
                         ? `<img src="${data.profile}" alt="Profile Image" class="profile-img">`
@@ -357,9 +357,7 @@ $(document).ready(function () {
                     }
 
                     const newCommentHTML = `
-                <li class="commented-user-wrp" data-comment-id="${
-                    data.comment_id
-                }">
+                <li class="commented-user-wrp" data-comment-id="${data.id}">
                     <div class="commented-user-head">
                         <div class="commented-user-profile">
                             <div class="commented-user-profile-img">
@@ -396,6 +394,8 @@ $(document).ready(function () {
                         const parentComment = $(
                             `li[data-comment-id="${parentCommentId}"]`
                         );
+                        console.log(`li[data-comment-id="${parentCommentId}"]`);
+                        console.log(parentComment);
                         if (parentComment.length > 0) {
                             replyList = parentComment.find(
                                 "ul.primary-comment-replies"
@@ -506,10 +506,11 @@ $(document).ready(function () {
             return;
         }
         const parentName = $(this)
-            .closest(".commented-user-wrp")
+            .closest(".commented-user-head")
             .find("h3")
             .text()
             .trim();
+        console.log({ parentName });
         const parentId = $(this).data("comment-id");
 
         if (!parentId) {

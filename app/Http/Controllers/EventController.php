@@ -155,6 +155,7 @@ class EventController extends BaseController
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
+                    ->whereNull('sync_id')
                     ->get();
                 if ($invitedYesviteUsers) {
                     foreach ($invitedYesviteUsers as $user) {
@@ -198,7 +199,8 @@ class EventController extends BaseController
                 $invitedContactUsers = EventInvitedUser::with('user')
                     ->where('event_id', $request->id)
                     ->where('is_co_host', '0')
-                    ->whereNull('user_id')
+                    // ->whereNull('user_id')
+                    ->whereNotNull('sync_id')
                     ->get();
                 if ($invitedContactUsers) {
                     foreach ($invitedContactUsers as $user) {
@@ -4003,7 +4005,8 @@ class EventController extends BaseController
                 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
                 'isupadte' => false,
-                'is_registry' => $gift
+                'is_registry' => $gift,
+                'event_id' => encrypt($eventId)
             ]);
         } else {
             return response()->json([
