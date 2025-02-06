@@ -30,7 +30,7 @@ $(document).ready(function () {
             //     return;
             // }
             // Set the value of the hidden input in the photo form
-            document.getElementById('photoContent').value = postContent;
+          //  document.getElementById('photoContent').value = postContent;
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
