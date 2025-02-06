@@ -1670,7 +1670,7 @@
 }
 
 .home-upcoming-events-card-right img{
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .home-upcoming-events-card-left-profile{

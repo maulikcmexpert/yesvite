@@ -326,6 +326,9 @@ $(document).on('click', '.delete_failed_contact', function () {
 
 
 $(document).on('click','.re_send_failed_invites', function() {
+    // if ($(this).prop('disabled')) {
+    //     return;  
+    // }
     let userIds = [];
     $('.invite-contact-wrp').each(function() {
         let userId = $(this).data('user-id');  
@@ -357,3 +360,18 @@ $(document).on('click','.re_send_failed_invites', function() {
     // });
 });
 
+$(document).on('change','.failed_check_resend_email', function() {
+    
+    if($(this).is(':checked')){
+        $('.re_send_failed_invites').removeClass('failed-btn');
+        $('.re_send_failed_invites').addClass('success-btn');
+        $('.re_send_failed_invites').prop('disabled',false);
+    }else{
+        $('.re_send_failed_invites').addClass('failed-btn');
+        $('.re_send_failed_invites').removeClass('success-btn');
+        $('.re_send_failed_invites').prop('disabled',true);
+    }
+    console.log(userIds);
+
+
+});
