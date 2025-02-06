@@ -402,20 +402,20 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
     if (currentPage !== "messages") {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
+            const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+            const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
+            // Fetch Firebase configuration
+            const response = await fetch("/firebase_js.json");
+            const firebaseConfig = await response.json();
+
+            // Initialize Firebase app
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
             if (userId !== null) {
                 try {
                     // Dynamically import Firebase modules
-                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-                    const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
-
-                    // Fetch Firebase configuration
-                    const response = await fetch("/firebase_js.json");
-                    const firebaseConfig = await response.json();
-
-                    // Initialize Firebase app
-                    const app = initializeApp(firebaseConfig);
-                    const database = getDatabase(app);
+                    
 
                     // Reference to the user's overview data in Firebase
                     const overviewRef = ref(database, `overview/${userId}`);
@@ -454,6 +454,41 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                     console.error("Error fetching Firebase data:", error);
                 }
             }
+
+        async function getUser(userId) {
+            const userRef = ref(database, "users/" + userId);
+            try {
+                const snapshot = await get(userRef);
+                return snapshot.val();
+            } catch (error) {
+                console.error("Error retrieving user data:", error);
+                return null;
+            }
+        }
+
+        async function updateUserStatuses() {
+            console.log("updating status")
+            const users = document.querySelectorAll(".guest-users");
+
+            for (const userElement of users) {
+                const userId = userElement.getAttribute("data-userid");
+
+                if (!userId) continue; // Skip if no userId
+
+                let userData = await getUser(userId);
+                let statusClass = (userData?.userStatus?.toLowerCase() === "online") ? "active-dot" : "inactive-dot";
+
+                // Find the span inside the user element and update its class
+                let statusSpan = userElement.querySelector("span");
+                if (statusSpan) {
+                    statusSpan.className = statusClass; // Replace class
+                }
+            }
+        }
+
+        // Call the function to update statuses
+        updateUserStatuses();
+
         })();
     }
 </script>
