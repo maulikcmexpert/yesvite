@@ -48,8 +48,8 @@
 
             $colorClass = $series[$colorIndex % count($series)];
             $colorIndex++;
-            $eventRoute = ($upcomingEvent['event_wall'] == "0" || ($upcomingEvent['is_host'] == "1" && $upcomingEvent['is_co_host'] == "1"))
-    ? route('event.event_about', encrypt($upcomingEvent['id']))
+            $eventRoute = ($upcomingEvent['event_wall'] == "0" || ($upcomingEvent['is_event_owner'] == 1 && $upcomingEvent['is_co_host'] == "1"))
+            ? route('event.event_about', encrypt($upcomingEvent['id']))
     : route('event.event_wall', encrypt($upcomingEvent['id']));
 
             @endphp
