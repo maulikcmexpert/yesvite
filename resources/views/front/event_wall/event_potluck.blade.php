@@ -177,7 +177,7 @@
                                             </button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
-                                        @foreach ($potluckDetail['podluck_category_list'] as $key => $category)
+                                        @foreach ($potluckDetail['podluck_category_list_new'] as $key => $category)
                                         
                                         <div class="category-main-dishesh list-slide-{{$key}}">
 
@@ -212,7 +212,7 @@
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
                                                         <span
-                                                            class="me-1 list-sub-head">{{ $total_item_quantity }}</span>
+                                                            class="me-1 list-sub-head">{{ $category['categoryQuantity'] }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
                                                         </div>
@@ -277,7 +277,7 @@
                                                                 }
                                                             @endphp -->
                                                             {{-- new code --}}
-                                                    @if ($total_missing_quantity > 0)
+                                                            @if ($category['remainingQnt'] > 0)
                                                             <span
                                                                 class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                 style="color: rgb(192, 52, 52);">
@@ -290,7 +290,7 @@
                                                             </span>
                                                             <h6 class="me-2 missing-category-h6-{{ $key }}"
                                                             style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $total_missing_quantity }}</span>
+                                                                id="missing-category-{{ $key }}">{{ $category['remainingQnt'] }}</span>
                                                             Missing</h6>
 
                                                           
@@ -325,7 +325,7 @@
                                                         style="color: rgb(52, 192, 92);"><span
                                                             id="missing-category-{{ $key }}">0</span> Missing</h6>
 
-                                                        @if ($total_missing_quantity < 0)
+                                                            @if ($category['remainingQnt'] < 0)
                                                           
                                                             <span
                                                                 class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
@@ -339,7 +339,7 @@
                                                             </span>
                                                             <h6 class="me-2 extra-category-h6-{{ $key }}"
                                                                 style="color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}">{{ abs($total_missing_quantity) }}</span>
+                                                                    id="extra-category-{{ $key }}">{{ abs($category['remainingQnt']) }}</span>
                                                                 Item Over</h6>
 
                                                         @else

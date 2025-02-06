@@ -634,6 +634,10 @@
     height: 500px !important;
 }
 
+.photos-likes-options-wrp{
+    z-index: 1 !important;
+}
+
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
     .modal-close {
