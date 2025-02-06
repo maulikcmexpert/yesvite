@@ -630,12 +630,18 @@
 .wall-creat-photo-poll-head  form{
     width: 100%;
 }
+#directionmap{
+    height: 500px !important;
+}
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
     .modal-close {
         top: 15px;
         right: 15px;
+    }
+    #directionmap{
+        height: 300px !important;
     }
 }
 
@@ -669,6 +675,9 @@
     }
     .off-by-host-wrp {
         padding: 15px 15px;
+    }
+    #directionmap{
+        height: 250px !important;
     }
 }
 @media only screen and (max-width: 424px) {
