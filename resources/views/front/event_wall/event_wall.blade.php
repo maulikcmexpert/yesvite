@@ -548,16 +548,18 @@
                                                             <div class="posts-card-show-all-comments-inner">
                                                                 <ul class="top-level-comments">
 
+                                                                    <input type="hidden"
+                                                                    class="parent_comment_id"
+                                                                    value="">
+                                                                    
+                                                                   
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
                                                                             data-comment-id="{{ $comment['id'] }}">
                                                                             <input type="hidden"
-                                                                                class="parent_comment_id"
-                                                                                value="">
-                                                                                <input type="hidden"
-                                                                                class="data_comment_id"
-                                                                                value="{{ $comment['id'] }}">
+                                                                            class="data_comment_id"
+                                                                            value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
@@ -1461,8 +1463,8 @@
                             <div class="create-post-textcontent">
                                 <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
                                    ></textarea>
-                            </div>                       
-                       
+                            </div>
+
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -1494,8 +1496,8 @@
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">
-                               
-                                    
+
+
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
@@ -1537,7 +1539,7 @@
 
                                         </div>
                                     </div>
-                                
+
                             </div>
                         </div>
                         </form>
@@ -1709,7 +1711,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="post_privacy"
-                                        id="flexRadioDefault4" value=" 4">
+                                        id="flexRadioDefault4" value="4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         RSVP’d - No Reply
                                     </label>
