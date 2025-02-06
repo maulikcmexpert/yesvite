@@ -550,13 +550,32 @@ $(document).on('click', '.open_photo_model', function () {
     swiperWrapper.empty();
     if (rawData && rawData.length > 0) {
         rawData.forEach((media) => {
-            swiperWrapper.append(`
-                <div class="swiper-slide">
-                    <div class="posts-card-show-post-img">
-                        <img src="${media}" alt="" />
+            let mediaElement = '';
+
+            if (media.match(/\.(mp4|webm|ogg)$/i)) {
+                // If it's a video, use <video> tag
+                mediaElement = `
+                    <div class="swiper-slide">
+                        <div class="posts-card-show-post-img">
+                            <video controls>
+                                <source src="${media}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     </div>
-                </div>
-            `);
+                `;
+            } else {
+                // Otherwise, treat it as an image
+                mediaElement = `
+                    <div class="swiper-slide">
+                        <div class="posts-card-show-post-img">
+                            <img src="${media}" alt="Media" />
+                        </div>
+                    </div>
+                `;
+            }
+
+            swiperWrapper.append(mediaElement);
         });
     }
     swiper.destroy(true, true);

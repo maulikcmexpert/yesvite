@@ -2055,7 +2055,7 @@ class EventController extends BaseController
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
-            EventImage::where('event_id', $eventID)->where('type', 0)->delete();
+            // EventImage::where('event_id', $eventID)->where('type', 0)->delete();
         }
         $newImageName = '';
         $fileName = '';
@@ -2264,25 +2264,25 @@ class EventController extends BaseController
         )
             ->where(function ($query) use ($emails, $selectedId) {
                 $query->whereIn('email', $emails)
-                      ->orWhereIn('id', $selectedId);
+                    ->orWhereIn('id', $selectedId);
             })
             ->where('app_user', '1')
             ->where('id', '!=', $id)
             ->when(!empty($request->search_user), function ($query) use ($search_user) {
                 $query->where(function ($q) use ($search_user) {
                     $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                      ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
                 });
             })
             ->groupBy('id')
             ->orderBy('firstname')
             ->when(!empty($request->limit) && $type != 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
-                      ->offset($request->offset);
+                    ->offset($request->offset);
             })
             ->when(!empty($request->limit) && $type == 'group', function ($query) use ($request) {
                 $query->limit($request->limit)
-                      ->offset($request->offset);
+                    ->offset($request->offset);
             })
             ->get();
 
@@ -2328,27 +2328,27 @@ class EventController extends BaseController
         }
 
 
-       // DB::enableQueryLog();
+        // DB::enableQueryLog();
         $getAllContacts = contact_sync::where(function ($query) use ($id, $selectedContactId) {
             $query->where('contact_id', $id)  // contact_id = 118
-                  ->orWhereIn('id', $selectedContactId);  // OR id IN (33435)
+                ->orWhereIn('id', $selectedContactId);  // OR id IN (33435)
         })
-        ->when(!empty($request->search_user), function ($query) use ($search_user) {
-            // Apply the LIKE condition on firstName and lastName
-            $query->where(function ($q) use ($search_user) {
-                $q->where('firstName', 'LIKE', '%' . $search_user . '%')
-                  ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
-            });
-        })
-        ->when(!empty($request->limit), function ($query) use ($request) {
-            // Apply limit and offset for pagination
-            $query->limit($request->limit)
-                  ->offset($request->offset);
-        })
-        ->orderBy('firstName')  // Sorting by firstName
-        ->get();
+            ->when(!empty($request->search_user), function ($query) use ($search_user) {
+                // Apply the LIKE condition on firstName and lastName
+                $query->where(function ($q) use ($search_user) {
+                    $q->where('firstName', 'LIKE', '%' . $search_user . '%')
+                        ->orWhere('lastName', 'LIKE', '%' . $search_user . '%');
+                });
+            })
+            ->when(!empty($request->limit), function ($query) use ($request) {
+                // Apply limit and offset for pagination
+                $query->limit($request->limit)
+                    ->offset($request->offset);
+            })
+            ->orderBy('firstName')  // Sorting by firstName
+            ->get();
 
-       //     dd(DB::getQueryLog());
+        //     dd(DB::getQueryLog());
         // dd($getAllContacts);
 
         $yesvite_user = [];
@@ -3754,9 +3754,11 @@ class EventController extends BaseController
                 $image = EventImage::where('event_id', $eventId)->where('type', 0)->first();
                 if ($image) {
                     $image->delete();
-                    $oldDesignImagePath = public_path('storage/event_images/') . $image->image;
-                    if (file_exists($oldDesignImagePath)) {
-                        @unlink($oldDesignImagePath);
+                    if ($request->desgin_selected != $image->image) {
+                        $oldDesignImagePath = public_path('storage/event_images/') . $image->image;
+                        if (file_exists($oldDesignImagePath)) {
+                            @unlink($oldDesignImagePath);
+                        }
                     }
                 }
 
@@ -3768,22 +3770,24 @@ class EventController extends BaseController
                 ]);
             }
 
-            if (isset($request->slider_images) && !empty($request->slider_images)) {
-                // Unlink old slider images
-                $oldSliderImages = EventImage::where('event_id', $eventId)->where('type', 1)->get();
-                foreach ($oldSliderImages as $image) {
-                    $oldSliderImagePath = public_path('storage/event_images/') . $image->image;
-                    if (file_exists($oldSliderImagePath)) {
-                        @unlink($oldSliderImagePath);
-                    }
-                    $image->delete();
-                }
+            if (!empty($request->slider_images)) {
 
-                // Save the new slider images
-                foreach ($request->slider_images as $sliderImage) {
+                $oldSliderImages = EventImage::where('event_id', $eventId)->where('type', 1)->pluck('image')->toArray();
+                $newSliderImages = $request->slider_images; // Array of filenames
+
+
+                $imagesToDelete = array_diff($oldSliderImages, $newSliderImages);
+                EventImage::where('event_id', $eventId)
+                    ->where('type', 1)
+                    ->whereIn('image', $imagesToDelete)
+                    ->delete();
+
+                // Determine images to insert (present in request but not in DB)
+                $imagesToInsert = array_diff($newSliderImages, $oldSliderImages);
+                foreach ($imagesToInsert as $sliderImage) {
                     EventImage::create([
                         'event_id' => $eventId,
-                        'image' => $sliderImage['fileName'],
+                        'image' => $sliderImage,
                         'type' => 1
                     ]);
                 }
