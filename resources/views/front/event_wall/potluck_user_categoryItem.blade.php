@@ -97,7 +97,7 @@
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category_id }}"
-                                                                                                data-categorykey="{{ $key }}"
+                                                                                                data-categorykey="{{ 0 }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
