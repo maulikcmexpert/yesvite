@@ -82,30 +82,38 @@ var swiper = new Swiper(".latest-draf-slider", {
         },
     },
 });
+// Initialize all Swiper instances for each `.posts-card-post`
+const swipers = [];
 
-var swiper = new Swiper(".posts-card-post", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    pagination: {
-        el: ".custom-pagination",
-        type: "custom",
-        renderCustom: (swiper, current, total) => {
-            return `<span>${current} of ${total}</span>`;
+document.querySelectorAll(".posts-card-post").forEach((el, index) => {
+    const swiperInstance = new Swiper(el, {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+            el: el.querySelector(".custom-pagination"),
+            type: "custom",
+            renderCustom: (swiper, current, total) => {
+                return `<span>${current} of ${total}</span>`;
+            },
         },
-    },
-    on: {
-        init: () => updateDots(),
-        // slideChange: () => updateDots(),
-    },
+        on: {
+            init: function () {
+                updateDots(this, el);
+            },
+            slideChange: function () {
+                updateDots(this, el);
+            },
+        },
+    });
+
+    swipers.push(swiperInstance);
 });
 
 // Function to update dots for each Swiper instance
-
-function updateDots() {
-    const total = swiper.slides.length;
-
-    const current = swiper.realIndex + 1;
-    const $dotsContainer = $(".custom-dots-container");
+function updateDots(swiperInstance, swiperContainer) {
+    const total = swiperInstance.slides.length;
+    const current = swiperInstance.realIndex + 1;
+    const $dotsContainer = $(swiperContainer).find(".custom-dots-container");
 
     let dotsHTML = "";
     for (let i = 1; i <= total; i++) {
@@ -113,16 +121,17 @@ function updateDots() {
             i === current ? "active" : ""
         }" data-slide="${i}"></span>`;
     }
+
     console.log({ dotsHTML });
     $dotsContainer.html(dotsHTML);
 
     $dotsContainer.find(".dot").on("click", function () {
         const slideIndex = parseInt($(this).data("slide"), 10);
-        swiper.slideTo(slideIndex - 1);
+        swiperInstance.slideTo(slideIndex - 1);
     });
 }
 
-updateDots();
+// updateDots();
 
 $(".rsvp-slide").owlCarousel({
     loop: true,
