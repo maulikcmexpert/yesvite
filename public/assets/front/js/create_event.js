@@ -8420,7 +8420,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
-    if(isStartTime == 0){
+    if(isStartTime == 1){
         toastr.error("Please enter proper time");
         return
     }
