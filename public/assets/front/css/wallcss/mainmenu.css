@@ -1,24 +1,24 @@
-.main-menu-wrp{
+.main-menu-wrp {
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.main-menu-wrp h3{
+.main-menu-wrp h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 24px;
     line-height: 36px;
     color: #050505;
     text-transform: capitalize;
 }
-.main-menu-wrp ul{
+.main-menu-wrp ul {
     padding: 15px 10px !important;
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
 
-.main-menu-wrp ul li a{
+.main-menu-wrp ul li a {
     font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
     line-height: normal;
@@ -34,27 +34,26 @@
     margin-bottom: 10px;
 }
 
-
-.main-menu-wrp ul li:last-child a{
+.main-menu-wrp ul li:last-child a {
     margin-bottom: 0px;
 }
 
-.main-menu-wrp ul li a span{
+.main-menu-wrp ul li a span {
     display: block;
     width: 100%;
     max-width: 20px;
     height: 20px;
 }
 
-.main-menu-wrp ul li a:hover{
-    background-color: #F8F9FD;
+.main-menu-wrp ul li a:hover {
+    background-color: #f8f9fd;
 }
 
-.main-menu-wrp ul li a.active{
-    background-color: #F8F9FD;
+.main-menu-wrp ul li a.active {
+    background-color: #f8f9fd;
 }
 
-.home-center-content-head h1{
+.home-center-content-head h1 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 36px;
     line-height: normal;
@@ -62,13 +61,13 @@
     margin-bottom: 0px;
 }
 
-.home-center-content-head{
+.home-center-content-head {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.home-center-profile-img{
+.home-center-profile-img {
     width: 100%;
     max-width: 55px;
     height: 55px;
@@ -76,15 +75,15 @@
     border-radius: 50%;
 }
 
-.home-center-profile-img img{
+.home-center-profile-img img {
     border-radius: 50%;
 }
-.home-center-profile-img .active-dotg{
+.home-center-profile-img .active-dotg {
     bottom: 0px;
     right: 1px;
 }
 
-.home-center-profile-content h3{
+.home-center-profile-content h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 18px;
     line-height: normal;
@@ -95,27 +94,26 @@
     gap: 8px;
 }
 
-.home-center-profile-content h3 span{
+.home-center-profile-content h3 span {
     font-family: var(--SFProDisplay-Bold);
     font-size: 13px;
     line-height: normal;
-    color: #E73080;
+    color: #e73080;
     text-transform: uppercase;
-    background-color: #FFEAF3;
+    background-color: #ffeaf3;
     padding: 5px 10px;
     border-radius: 100px;
 }
 
-.home-center-profile-content p{
+.home-center-profile-content p {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
-    color: #23AA26;
+    color: #23aa26;
     margin-bottom: 0px;
-
 }
 
-.home-center-profile-head{
+.home-center-profile-head {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -123,14 +121,14 @@
     border-bottom: 1px solid var(--border);
 }
 
-.home-center-profile-wrp{
+.home-center-profile-wrp {
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.home-center-profile-info-inner h3{
+.home-center-profile-info-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 25px;
     line-height: normal;
@@ -139,7 +137,7 @@
     text-align: center;
 }
 
-.home-center-profile-info-inner h5{
+.home-center-profile-info-inner h5 {
     font-family: var(--SFProDisplay-Regular);
     font-size: 16px;
     line-height: normal;
@@ -148,7 +146,7 @@
     text-align: center;
 }
 
-.home-center-profile-info{
+.home-center-profile-info {
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -157,11 +155,11 @@
     border-bottom: 1px solid var(--border);
 }
 
-.home-center-profile-info-inner{
+.home-center-profile-info-inner {
     flex-basis: 30%;
 }
 
-.home-center-profile-status-inner h5{
+.home-center-profile-status-inner h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 18px;
     line-height: normal;
@@ -173,8 +171,8 @@
     margin-bottom: 15px;
 }
 
-.home-center-profile-status-inner h5 span{
-    display:flex;
+.home-center-profile-status-inner h5 span {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -182,7 +180,7 @@
     height: 20px;
 }
 
-.home-center-profile-status-inner h3{
+.home-center-profile-status-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 32px;
     line-height: normal;
@@ -191,7 +189,7 @@
     margin-bottom: 0px;
 }
 
-.home-center-profile-status{
+.home-center-profile-status {
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -199,16 +197,15 @@
     padding: 20px 15px;
 }
 
-.home-center-profile-status-inner{
+.home-center-profile-status-inner {
     flex-basis: 50%;
 }
 
-
-.home-center-upcoming-events-wrp{
+.home-center-upcoming-events-wrp {
     margin-top: 20px;
 }
 
-.home-center-upcoming-events-title{
+.home-center-upcoming-events-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -216,7 +213,7 @@
     margin-bottom: 20px;
 }
 
-.home-center-upcoming-events-title h3{
+.home-center-upcoming-events-title h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 20px;
     line-height: normal;
@@ -225,7 +222,7 @@
     text-transform: capitalize;
 }
 
-.home-center-upcoming-events-title a{
+.home-center-upcoming-events-title a {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
@@ -234,9 +231,9 @@
     text-transform: capitalize;
 }
 
-.home-center-upcoming-events-card{
-    border: 1px solid rgba(0,0,0,10%);
-    box-shadow: 0px 20px 40px -20px rgba(15,15,15,10%);
+.home-center-upcoming-events-card {
+    border: 1px solid rgba(0, 0, 0, 10%);
+    box-shadow: 0px 20px 40px -20px rgba(15, 15, 15, 10%);
     padding: 16px 20px;
     border-radius: 16px;
     display: flex;
@@ -246,31 +243,31 @@
     position: relative;
 }
 
-.home-upcoming-events-card-left{
+.home-upcoming-events-card-left {
     flex-basis: 72%;
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     flex-basis: 30%;
 }
 
-.home-upcoming-events-card-left-profile{
+.home-upcoming-events-card-left-profile {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-profile-img{
+.home-upcoming-events-card-left-profile-img {
     width: 100%;
     max-width: 50px;
     height: 50px;
     border-radius: 50%;
 }
-.home-upcoming-events-card-left-profile-img img{
+.home-upcoming-events-card-left-profile-img img {
     border-radius: 50%;
 }
 
-.home-upcoming-events-card-left-profile-content h3{
+.home-upcoming-events-card-left-profile-content h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 20px;
     line-height: normal;
@@ -278,37 +275,36 @@
     margin-bottom: 6px;
 }
 
-.home-upcoming-events-card-left-profile-content p{
+.home-upcoming-events-card-left-profile-content p {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
-    color: #2C8EE9;
+    color: #2c8ee9;
     margin-bottom: 0px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-profile-content p span{
+.home-upcoming-events-card-left-profile-content p span {
     color: var(--light-color);
     display: flex;
     align-items: center;
-    gap:8px;
+    gap: 8px;
 }
 
-.home-upcoming-events-card-left-profile-content p span i{
+.home-upcoming-events-card-left-profile-content p span i {
     font-size: 8px !important;
     line-height: 8px !important;
     margin-top: 2px;
 }
 
-
-.home-upcoming-events-card-left-detail{
+.home-upcoming-events-card-left-detail {
     padding: 30px 20px !important;
     border-bottom: 1px solid var(--border);
 }
 
-.home-upcoming-events-card-left-detail li{
+.home-upcoming-events-card-left-detail li {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
@@ -317,30 +313,30 @@
     margin-bottom: 10px;
 }
 
-.home-upcoming-events-card-left-detail li:last-child{
+.home-upcoming-events-card-left-detail li:last-child {
     margin-bottom: 0px;
 }
 
-.home-upcoming-events-card-left-detail li span{
+.home-upcoming-events-card-left-detail li span {
     font-family: var(--SFProDisplay-Bold);
     display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
-.home-upcoming-events-card-left-detail li span i{
+.home-upcoming-events-card-left-detail li span i {
     font-size: 6px !important;
     line-height: 6px !important;
     margin-top: 2px;
 }
 
-.home-upcoming-events-card-rsvp-data{
+.home-upcoming-events-card-rsvp-data {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-rsvp-data h6{
+.home-upcoming-events-card-rsvp-data h6 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: normal;
@@ -348,15 +344,15 @@
     margin-bottom: 0px;
 }
 
-.card-rsvp-done i{
-    color: #23AA26;
+.card-rsvp-done i {
+    color: #23aa26;
     margin-right: 2px;
 }
-.card-rsvp-pending i{
+.card-rsvp-pending i {
     color: var(--light-color);
     margin-right: 2px;
 }
-.card-rsvp-cancel i{
+.card-rsvp-cancel i {
     color: var(--pink);
     margin-right: 2px;
 }
@@ -386,7 +382,7 @@
     right: -8px;
 }
 
-.upcoming-events-card-notification-info{
+.upcoming-events-card-notification-info {
     background-color: var(--white);
     border-radius: 16px;
     box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.1);
@@ -397,7 +393,7 @@
     right: 0 !important;
 }
 
-.upcoming-events-card-notification-info button{
+.upcoming-events-card-notification-info button {
     font-family: var(--SFProDisplay-Medium);
     font-size: 15px;
     line-height: 22.4px;
@@ -409,13 +405,13 @@
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-foot{
+.home-upcoming-events-card-left-foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     width: 100%;
     max-width: 145px;
     height: 205px;
@@ -423,18 +419,18 @@
     box-shadow: 0px 10.85px 17.35px -10.85px rgba(0, 0, 0, 50%);
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     border-radius: 10px;
 }
 
-.calendar-wrp{
+.calendar-wrp {
     border: 1px solid var(--border);
     border-radius: 24px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.calendar-wrp .accordion-button{
+.calendar-wrp .accordion-button {
     font-family: var(--SFProDisplay-Bold);
     font-size: 22px;
     line-height: normal;
@@ -443,19 +439,19 @@
     padding: 16px 10px;
 }
 
-.calendar-wrp .accordion-body{
+.calendar-wrp .accordion-body {
     padding: 0px 0px;
     padding-bottom: 0px;
 }
 
-.calender-month-event-stats-title{
+.calender-month-event-stats-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 }
 
-.calender-month-event-stats-title h3{
+.calender-month-event-stats-title h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: normal;
@@ -468,29 +464,29 @@
     text-transform: capitalize;
 }
 
-.calender-month-event-stats-title h3 span{
+.calender-month-event-stats-title h3 span {
     display: inline-block;
     width: 100%;
     max-width: 20px;
     height: 20px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.calender-month-event-stats-title i{
+.calender-month-event-stats-title i {
     color: var(--light-color);
     font-size: 15px;
 }
 
-.calender-month-event-stats-inner{
+.calender-month-event-stats-inner {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 15px 10px;
     margin-top: 20px;
 }
 
-.calender-month-event-stats-inner h5{
+.calender-month-event-stats-inner h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;
     line-height: normal;
@@ -504,17 +500,17 @@
     margin-bottom: 10px;
 }
 
-.calender-month-event-stats-inner h5 span{
+.calender-month-event-stats-inner h5 span {
     display: inline-block;
     width: 100%;
     max-width: 18px;
     height: 18px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.calender-month-event-stats-inner h3{
+.calender-month-event-stats-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 32px;
     line-height: normal;
@@ -523,37 +519,37 @@
     margin-bottom: 0px;
 }
 
-.calender-month-event-stats-inner-wrp{
+.calender-month-event-stats-inner-wrp {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 }
 
-.calender-month-event-stats-inner-wrp .calender-month-event-stats-inner{
+.calender-month-event-stats-inner-wrp .calender-month-event-stats-inner {
     width: 100%;
     flex-basis: 50%;
 }
 
-.home-latest-draf-wrp{
+.home-latest-draf-wrp {
     margin-top: 20px;
 }
 
-.home-latest-draf-card{
+.home-latest-draf-card {
     border: 1px solid var(--border);
     border-radius: 16px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
     margin-bottom: 15px;
     display: block;
 }
 
-.upcoming-card-dropdown .dropdown-toggle{
+.upcoming-card-dropdown .dropdown-toggle {
     background-color: transparent;
     border: none;
 }
 
-.upcoming-card-dropdown .dropdown-toggle i{
+.upcoming-card-dropdown .dropdown-toggle i {
     color: var(--secondary-black);
 }
 
@@ -570,7 +566,7 @@
     margin-bottom: 15px;
 }
 
-.upcoming-card-dropdown .dropdown-menu li:last-child{
+.upcoming-card-dropdown .dropdown-menu li:last-child {
     margin-bottom: 0px;
 }
 
@@ -592,24 +588,24 @@
     height: 20px;
 }
 
-.home-latest-draf-card-head-img{
+.home-latest-draf-card-head-img {
     width: 100%;
     max-width: 50px;
     height: 50px;
     border: 1px solid var(--border);
     border-radius: 50%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.home-latest-draf-card-head-img svg{
+.home-latest-draf-card-head-img svg {
     width: 100%;
     max-width: 24px;
     height: 24px;
 }
 
-.home-latest-draf-card-head-content h3{
+.home-latest-draf-card-head-content h3 {
     font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
     line-height: 22.4px;
@@ -617,7 +613,7 @@
     margin-bottom: 5px;
 }
 
-.home-latest-draf-card-head-content p{
+.home-latest-draf-card-head-content p {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     font-weight: 400;
@@ -626,13 +622,11 @@
     margin-bottom: 0px;
 }
 
-.home-latest-draf-card-head{
+.home-latest-draf-card-head {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
-
 
 .home-latest-draf-card .progress-bar__wrapper {
     position: relative;
@@ -647,7 +641,7 @@
     width: 100%;
     height: 8px;
     border-radius: 50px;
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     transition: width 300ms ease;
 }
 
@@ -664,7 +658,7 @@
     font-size: 13px;
     line-height: 20px;
     margin-bottom: 0;
-    color: #FF2A51;
+    color: #ff2a51;
     text-transform: uppercase;
 }
 .home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting {
@@ -672,15 +666,15 @@
     font-size: 11px;
     line-height: normal;
     margin-bottom: 0;
-    color: #23AA26;
+    color: #23aa26;
     text-transform: capitalize;
-    background-color: #F0FFE8;
+    background-color: #f0ffe8;
     padding: 4px 8px;
     border-radius: 100px;
     position: relative;
 }
 
-.home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting::before{
+.home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting::before {
     content: "";
     position: absolute;
     width: 1px;
@@ -691,13 +685,12 @@
     right: -5px;
 }
 
-.home-latest-draf-card .progress-bar__wrapper p{
+.home-latest-draf-card .progress-bar__wrapper p {
     margin-bottom: 0px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 
 .home-latest-draf-card .progress-bar__value {
     font-family: var(--SFProDisplay-Semibold) !important;
@@ -710,85 +703,83 @@
     width: 100%;
     height: 8px;
     border-radius: 50px;
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     transition: width 300ms ease;
 }
 
 .home-latest-draf-card progress[value]::-webkit-progress-value {
     width: 0;
     border-radius: 50px;
-    background-color: #E03137;
+    background-color: #e03137;
     transition: width 300ms ease;
 }
 
-.home-center-content-head-calender-icon{
+.home-center-content-head-calender-icon {
     display: none;
     width: 100%;
     max-width: 25px;
     height: 25px;
 }
-.home-center-content-head span{
+.home-center-content-head span {
     cursor: pointer;
 }
 
-.mobile-latest-draf{
+.mobile-latest-draf {
     display: none;
 }
 
-
-
 /* ===events-page=== */
-.all-events-center-tabs .nav-tabs .nav-link span{
+.all-events-center-tabs .nav-tabs .nav-link span {
     padding: 8px;
     border-radius: 10px;
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;
     line-height: 21px;
     color: var(--white);
-    display:inline-flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     min-width: 30px;
     height: 30px;
 }
 
-.all-events-center-tabs .nav-tabs .nav-link{
+.all-events-center-tabs .nav-tabs .nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-#nav-upcoming-tab span{
-    background-color: #3BBEE8;
+#nav-upcoming-tab span {
+    background-color: #3bbee8;
 }
-#nav-drafts-tab span{
-    background-color: #23AA26;
+#nav-drafts-tab span {
+    background-color: #23aa26;
 }
-#nav-past-tab span{
-    background-color: #ECB015;
+#nav-past-tab span {
+    background-color: #ecb015;
 }
-.all-events-month-wise-wrp{
+.all-events-month-wise-wrp {
     margin-top: 20px;
     position: relative;
 }
 
-.all-events-month-wise-inner{
+.all-events-month-wise-inner {
     padding-left: 50px;
     max-height: 800px;
     overflow: hidden;
     overflow-y: scroll;
 }
 
-.all-events-month-wise-wrp::-webkit-scrollbar{
+.all-events-month-wise-wrp::-webkit-scrollbar {
     display: none;
 }
 
-.all-events-month-wise-support{
+.all-events-month-wise-support {
     position: relative;
 }
 
-.all-events-month-show-wrp .all-events-month-show{
+.all-events-month-show-wrp .all-events-month-show {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 13px;
     line-height: normal;
@@ -797,7 +788,7 @@
     padding: 10px;
     background-color: var(--pink);
     border-radius: 50%;
-    display:inline-flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 40px;
@@ -806,7 +797,7 @@
     top: 0; */
 }
 
-.all-events-month-show-wrp{
+.all-events-month-show-wrp {
     width: 40px;
     height: 100%;
     position: absolute;
@@ -814,20 +805,20 @@
     left: 5px;
 }
 
-.all-events-month-show.stick{
+.all-events-month-show.stick {
     position: fixed !important;
     top: 5px !important;
 }
-.all-events-month-show.sticknew{
+.all-events-month-show.sticknew {
     position: sticky;
     top: 0;
 }
-.all-events-month-show.extra-stick{
+.all-events-month-show.extra-stick {
     position: sticky;
     top: 0;
 }
 
-.all-events-date-show{
+.all-events-date-show {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: 27.2px;
@@ -838,16 +829,19 @@
     left: -36px;
 }
 
-.all-event-blue, .all-event-pink, .all-event-yellow, .all-event-darkblue{
+.all-event-blue,
+.all-event-pink,
+.all-event-yellow,
+.all-event-darkblue {
     position: relative;
     /* overflow: hidden; */
 }
-.all-event-blue::before{
+.all-event-blue::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #3BBEE8;
+    background: #3bbee8;
     left: 0;
     top: 0;
     border-radius: 16px;
@@ -855,7 +849,7 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-pink::before{
+.all-event-pink::before {
     content: "";
     position: absolute;
     width: 8px;
@@ -868,12 +862,12 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-yellow::before{
+.all-event-yellow::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #EEA929;
+    background: #eea929;
     left: 0;
     top: 0;
     border-radius: 16px;
@@ -881,19 +875,19 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-darkblue::before{
+.all-event-darkblue::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #2C8EE9;
+    background: #2c8ee9;
     left: 0;
     top: 0;
     border-radius: 16px;
     z-index: -1;
     border-radius: 300px 0px 0px 300px;
 }
-.search-icon{
+.search-icon {
     width: 100%;
     max-width: 20px;
     height: 20px;
@@ -901,31 +895,31 @@
     top: 50%;
     transform: translateY(-50%);
     right: 20px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: -1;
 }
 
-.all-events-searchbar-wrp{
+.all-events-searchbar-wrp {
     margin-top: 20px;
 }
 
-.all-events-searchbar-wrp input{
+.all-events-searchbar-wrp input {
     padding-right: 40px;
     background-color: transparent;
     width: 100%;
 }
 
-.all-events-searchbar-wrp form{
+.all-events-searchbar-wrp form {
     width: 100%;
 }
 
-.all-events-searchbar-wrp input:focus{
+.all-events-searchbar-wrp input:focus {
     background-color: transparent;
 }
 
-.mobile-search-filter-icon{
+.mobile-search-filter-icon {
     background-color: transparent;
     border: none;
     width: 100%;
@@ -933,64 +927,62 @@
     height: 24px;
 }
 
-.all-events-searchbar-wrp{
+.all-events-searchbar-wrp {
     display: flex;
     align-items: center;
     gap: 15px;
     width: 100%;
 }
 
-.mobile-search-filter-icon{
+.mobile-search-filter-icon {
     display: none;
 }
 
-.all-events-month-wise-support .home-center-upcoming-events-card{
+.all-events-month-wise-support .home-center-upcoming-events-card {
     padding: 10px 16px;
 }
-.all-events-filtermodal .modal-content{
+.all-events-filtermodal .modal-content {
     width: 100%;
     max-width: 370px;
     height: auto;
     overflow: hidden;
 }
 
-.all-events-filtermodal .modal-header{
+.all-events-filtermodal .modal-header {
     padding-bottom: 20px;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid #f1f5f9;
     margin-bottom: 20px;
 }
 
-.all-events-filter-wrp{
+.all-events-filter-wrp {
     min-height: 200px;
     padding-bottom: 20px;
 }
 
-.all-events-filter-wrp .form-check-label{
+.all-events-filter-wrp .form-check-label {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     line-height: 23.8px;
     color: var(--secondary-black);
 }
-.all-events-filter-wrp .form-check-input{
+.all-events-filter-wrp .form-check-input {
     width: 100%;
     max-width: 20px;
     height: 20px;
     border-radius: 5px;
 }
-.all-events-filter-wrp .form-check-input:focus{
+.all-events-filter-wrp .form-check-input:focus {
     box-shadow: none !important;
     border: 1px solid var(--border) !important;
 }
 
-.all-events-filter-wrp .form-check-input:checked[type=checkbox]{
-    background-color: #2DA9FC !important;
-    border: 1px solid #2DA9FC !important;
+.all-events-filter-wrp .form-check-input:checked[type="checkbox"] {
+    background-color: #2da9fc !important;
+    border: 1px solid #2da9fc !important;
     padding: 0px !important;
 }
 
-
-
-.all-events-filter-wrp .form-check{
+.all-events-filter-wrp .form-check {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -999,37 +991,36 @@
     margin-bottom: 20px;
 }
 
-.all-events-filtermodal .modal-footer{
+.all-events-filtermodal .modal-footer {
     display: flex;
     align-items: center;
     gap: 15px;
     flex-wrap: nowrap;
 }
 
-.all-events-filtermodal .modal-footer .cmn-btn{
+.all-events-filtermodal .modal-footer .cmn-btn {
     font-size: 15px;
     text-transform: capitalize;
 }
 
-.all-events-filtermodal .modal-footer .reset-btn{
+.all-events-filtermodal .modal-footer .reset-btn {
     border: 1px solid var(--border);
     background-color: transparent;
     color: var(--secondary-black);
 }
 
-.unfinish-draft-wrp{
+.unfinish-draft-wrp {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.calender-month-event-stats-wrp{
+.calender-month-event-stats-wrp {
     margin-top: 30px;
 }
 
-.modal-header .btn-close{
+.modal-header .btn-close {
     font-size: 12px;
 }
-
 
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
@@ -1059,7 +1050,7 @@
 }
 
 @media only screen and (max-width: 1199px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -1091,16 +1082,16 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
-    .home-center-content-head-calender-icon{
+    .home-center-content-head-calender-icon {
         display: block !important;
     }
 }
 
 @media only screen and (max-width: 991px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -1133,7 +1124,7 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
     .home-center-upcoming-events-title h3 {
@@ -1148,7 +1139,7 @@
 }
 
 @media only screen and (max-width: 767px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -1181,7 +1172,7 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
     .home-center-upcoming-events-title h3 {
@@ -1193,7 +1184,6 @@
         border-radius: 10px;
         margin-bottom: 10px;
     }
-
 }
 
 @media only screen and (max-width: 575px) {
@@ -1225,7 +1215,7 @@
     .home-upcoming-events-card-left-profile-content p {
         font-size: 13px;
     }
-    .upcoming-card-dropdown{
+    .upcoming-card-dropdown {
         display: none;
     }
     .home-upcoming-events-card-rsvp-data h6 {
@@ -1235,18 +1225,20 @@
         max-width: 145px;
         height: 160px;
     }
-    .home-center-upcoming-events-card{
+    .home-center-upcoming-events-card {
         align-items: end;
     }
 
-    .events-center-main .home-center-content-head{
+    .events-center-main .home-center-content-head {
         justify-content: center;
     }
 
-    .home-center-content-head span{
+    .home-center-content-head span {
         display: none;
     }
-    #nav-upcoming-tab span, #nav-drafts-tab span, #nav-past-tab span{
+    #nav-upcoming-tab span,
+    #nav-drafts-tab span,
+    #nav-past-tab span {
         background-color: transparent;
         color: var(--lightgreay);
         padding: 0px;
@@ -1254,18 +1246,18 @@
         min-width: auto;
     }
 
-    .event-center-tabs-main .nav-tabs .nav-link.active span{
+    .event-center-tabs-main .nav-tabs .nav-link.active span {
         color: var(--secondary-black) !important;
     }
 
     .all-events-center-tabs .nav-tabs .nav-link {
         gap: 3px;
     }
-    .mobile-search-filter-icon{
+    .mobile-search-filter-icon {
         display: block;
     }
 
-    .home-center-content-head h1{
+    .home-center-content-head h1 {
         color: var(--secondary-black);
     }
     .all-events-month-show-wrp .all-events-month-show {
@@ -1277,7 +1269,7 @@
         left: 12px;
     }
 
-    .all-events-month-show-wrp{
+    .all-events-month-show-wrp {
         width: 30px;
         left: 0px;
     }
@@ -1290,9 +1282,7 @@
         padding-left: 35px;
     }
 
-
-
-    .all-events-filtermodal .modal-content{
+    .all-events-filtermodal .modal-content {
         position: fixed;
         top: auto !important;
         bottom: 0;
@@ -1302,16 +1292,16 @@
         border-radius: 16px 16px 0px 0px;
     }
 
-    .all-events-filtermodal .modal-dialog{
+    .all-events-filtermodal .modal-dialog {
         margin: 0px;
     }
 
-    .all-events-filtermodal.fade{
+    .all-events-filtermodal.fade {
         display: none;
     }
 
     .all-events-filtermodal.modal.fade .modal-dialog {
-        transition: transform .3s ease-out;
+        transition: transform 0.3s ease-out;
         transform: translate(0, 0px);
     }
 }
@@ -1324,7 +1314,7 @@
         padding: 10px 0px;
         border-bottom: 1px solid var(--border);
     }
-    .home-center-profile-content h3{
+    .home-center-profile-content h3 {
         font-size: 16px;
     }
     .home-center-profile-img {
@@ -1399,27 +1389,27 @@
         font-size: 12px;
     }
 }
-.main-menu-wrp{
+.main-menu-wrp {
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.main-menu-wrp h3{
+.main-menu-wrp h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 24px;
     line-height: 36px;
     color: #050505;
     text-transform: capitalize;
 }
-.main-menu-wrp ul{
+.main-menu-wrp ul {
     padding: 15px 10px !important;
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
 
-.main-menu-wrp ul li a{
+.main-menu-wrp ul li a {
     font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
     line-height: normal;
@@ -1435,27 +1425,26 @@
     margin-bottom: 10px;
 }
 
-
-.main-menu-wrp ul li:last-child a{
+.main-menu-wrp ul li:last-child a {
     margin-bottom: 0px;
 }
 
-.main-menu-wrp ul li a span{
+.main-menu-wrp ul li a span {
     display: block;
     width: 100%;
     max-width: 20px;
     height: 20px;
 }
 
-.main-menu-wrp ul li a:hover{
-    background-color: #F8F9FD;
+.main-menu-wrp ul li a:hover {
+    background-color: #f8f9fd;
 }
 
-.main-menu-wrp ul li a.active{
-    background-color: #F8F9FD;
+.main-menu-wrp ul li a.active {
+    background-color: #f8f9fd;
 }
 
-.home-center-content-head h1{
+.home-center-content-head h1 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 36px;
     line-height: normal;
@@ -1463,13 +1452,13 @@
     margin-bottom: 0px;
 }
 
-.home-center-content-head{
+.home-center-content-head {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.home-center-profile-img{
+.home-center-profile-img {
     width: 100%;
     max-width: 55px;
     height: 55px;
@@ -1477,7 +1466,7 @@
     border-radius: 50%;
 }
 
-.home-center-profile-img h5{
+.home-center-profile-img h5 {
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -1491,15 +1480,15 @@
     color: var(--white);
 }
 
-.home-center-profile-img img{
+.home-center-profile-img img {
     border-radius: 50%;
 }
-.home-center-profile-img .active-dotg{
+.home-center-profile-img .active-dotg {
     bottom: 0px;
     right: 1px;
 }
 
-.home-center-profile-content h3{
+.home-center-profile-content h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 18px;
     line-height: normal;
@@ -1510,27 +1499,26 @@
     gap: 8px;
 }
 
-.home-center-profile-content h3 span{
+.home-center-profile-content h3 span {
     font-family: var(--SFProDisplay-Bold);
     font-size: 13px;
     line-height: normal;
-    color: #E73080;
+    color: #e73080;
     text-transform: uppercase;
-    background-color: #FFEAF3;
+    background-color: #ffeaf3;
     padding: 5px 10px;
     border-radius: 100px;
 }
 
-.home-center-profile-content p{
+.home-center-profile-content p {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
-    color: #23AA26;
+    color: #23aa26;
     margin-bottom: 0px;
-
 }
 
-.home-center-profile-head{
+.home-center-profile-head {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1538,14 +1526,14 @@
     border-bottom: 1px solid var(--border);
 }
 
-.home-center-profile-wrp{
+.home-center-profile-wrp {
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.home-center-profile-info-inner h3{
+.home-center-profile-info-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 25px;
     line-height: normal;
@@ -1554,7 +1542,7 @@
     text-align: center;
 }
 
-.home-center-profile-info-inner h5{
+.home-center-profile-info-inner h5 {
     font-family: var(--SFProDisplay-Regular);
     font-size: 16px;
     line-height: normal;
@@ -1563,7 +1551,7 @@
     text-align: center;
 }
 
-.home-center-profile-info{
+.home-center-profile-info {
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -1572,11 +1560,11 @@
     border-bottom: 1px solid var(--border);
 }
 
-.home-center-profile-info-inner{
+.home-center-profile-info-inner {
     flex-basis: 30%;
 }
 
-.home-center-profile-status-inner h5{
+.home-center-profile-status-inner h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 18px;
     line-height: normal;
@@ -1588,8 +1576,8 @@
     margin-bottom: 15px;
 }
 
-.home-center-profile-status-inner h5 span{
-    display:flex;
+.home-center-profile-status-inner h5 span {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -1597,7 +1585,7 @@
     height: 20px;
 }
 
-.home-center-profile-status-inner h3{
+.home-center-profile-status-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 32px;
     line-height: normal;
@@ -1606,7 +1594,7 @@
     margin-bottom: 0px;
 }
 
-.home-center-profile-status{
+.home-center-profile-status {
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -1614,16 +1602,15 @@
     padding: 20px 15px;
 }
 
-.home-center-profile-status-inner{
+.home-center-profile-status-inner {
     flex-basis: 50%;
 }
 
-
-.home-center-upcoming-events-wrp{
+.home-center-upcoming-events-wrp {
     margin-top: 20px;
 }
 
-.home-center-upcoming-events-title{
+.home-center-upcoming-events-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1631,7 +1618,7 @@
     margin-bottom: 20px;
 }
 
-.home-center-upcoming-events-title h3{
+.home-center-upcoming-events-title h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 20px;
     line-height: normal;
@@ -1640,7 +1627,7 @@
     text-transform: capitalize;
 }
 
-.home-center-upcoming-events-title a{
+.home-center-upcoming-events-title a {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
@@ -1649,9 +1636,9 @@
     text-transform: capitalize;
 }
 
-.home-center-upcoming-events-card{
-    border: 1px solid rgba(0,0,0,10%);
-    box-shadow: 0px 20px 40px -20px rgba(15,15,15,10%);
+.home-center-upcoming-events-card {
+    border: 1px solid rgba(0, 0, 0, 10%);
+    box-shadow: 0px 20px 40px -20px rgba(15, 15, 15, 10%);
     padding: 16px 20px;
     border-radius: 16px;
     display: flex;
@@ -1661,32 +1648,32 @@
     position: relative;
 }
 
-.home-upcoming-events-card-left{
+.home-upcoming-events-card-left {
     flex-basis: 72%;
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     flex-basis: 30%;
 }
 
-.home-upcoming-events-card-right img{
+.home-upcoming-events-card-right img {
     object-fit: contain;
 }
 
-.home-upcoming-events-card-left-profile{
+.home-upcoming-events-card-left-profile {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-profile-img{
+.home-upcoming-events-card-left-profile-img {
     width: 100%;
     max-width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.home-upcoming-events-card-left-profile-img h5{
+.home-upcoming-events-card-left-profile-img h5 {
     font-family: var(--SFProDisplay-Semibold);
     border-radius: 50%;
     width: 100%;
@@ -1697,11 +1684,11 @@
     color: #fff;
     font-size: 18px;
 }
-.home-upcoming-events-card-left-profile-img img{
+.home-upcoming-events-card-left-profile-img img {
     border-radius: 50%;
 }
 
-.home-upcoming-events-card-left-profile-content h3{
+.home-upcoming-events-card-left-profile-content h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 20px;
     line-height: normal;
@@ -1713,37 +1700,36 @@
     max-width: 325px;
 }
 
-.home-upcoming-events-card-left-profile-content p{
+.home-upcoming-events-card-left-profile-content p {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
-    color: #2C8EE9;
+    color: #2c8ee9;
     margin-bottom: 0px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-profile-content p span{
+.home-upcoming-events-card-left-profile-content p span {
     color: var(--light-color);
     display: flex;
     align-items: center;
-    gap:8px;
+    gap: 8px;
 }
 
-.home-upcoming-events-card-left-profile-content p span i{
+.home-upcoming-events-card-left-profile-content p span i {
     font-size: 8px !important;
     line-height: 8px !important;
     margin-top: 2px;
 }
 
-
-.home-upcoming-events-card-left-detail{
+.home-upcoming-events-card-left-detail {
     padding: 30px 20px !important;
     border-bottom: 1px solid var(--border);
 }
 
-.home-upcoming-events-card-left-detail li{
+.home-upcoming-events-card-left-detail li {
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
     line-height: normal;
@@ -1752,30 +1738,30 @@
     margin-bottom: 10px;
 }
 
-.home-upcoming-events-card-left-detail li:last-child{
+.home-upcoming-events-card-left-detail li:last-child {
     margin-bottom: 0px;
 }
 
-.home-upcoming-events-card-left-detail li span{
+.home-upcoming-events-card-left-detail li span {
     font-family: var(--SFProDisplay-Bold);
     display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
-.home-upcoming-events-card-left-detail li span i{
+.home-upcoming-events-card-left-detail li span i {
     font-size: 6px !important;
     line-height: 6px !important;
     margin-top: 2px;
 }
 
-.home-upcoming-events-card-rsvp-data{
+.home-upcoming-events-card-rsvp-data {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
-.home-upcoming-events-card-rsvp-data h6{
+.home-upcoming-events-card-rsvp-data h6 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: normal;
@@ -1783,15 +1769,15 @@
     margin-bottom: 0px;
 }
 
-.card-rsvp-done i{
-    color: #23AA26;
+.card-rsvp-done i {
+    color: #23aa26;
     margin-right: 2px;
 }
-.card-rsvp-pending i{
+.card-rsvp-pending i {
     color: var(--light-color);
     margin-right: 2px;
 }
-.card-rsvp-cancel i{
+.card-rsvp-cancel i {
     color: var(--pink);
     margin-right: 2px;
 }
@@ -1822,7 +1808,7 @@
     min-width: 20px;
 }
 
-.upcoming-events-card-notification-info{
+.upcoming-events-card-notification-info {
     background-color: var(--white);
     border-radius: 16px;
     box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.1);
@@ -1833,7 +1819,7 @@
     right: 0 !important;
 }
 
-.upcoming-events-card-notification-info button{
+.upcoming-events-card-notification-info button {
     font-family: var(--SFProDisplay-Medium);
     font-size: 15px;
     line-height: 22.4px;
@@ -1845,13 +1831,13 @@
     gap: 10px;
 }
 
-.home-upcoming-events-card-left-foot{
+.home-upcoming-events-card-left-foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     width: 100%;
     max-width: 145px;
     height: 205px;
@@ -1859,22 +1845,22 @@
     box-shadow: 0px 10.85px 17.35px -10.85px rgba(0, 0, 0, 50%);
 }
 
-.home-upcoming-events-card-right{
+.home-upcoming-events-card-right {
     border-radius: 10px;
 }
 
-.home-upcoming-events-card-right img{
+.home-upcoming-events-card-right img {
     border-radius: 10px;
 }
 
-.calendar-wrp{
+.calendar-wrp {
     border: 1px solid var(--border);
     border-radius: 24px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
 }
 
-.calendar-wrp .accordion-button{
+.calendar-wrp .accordion-button {
     font-family: var(--SFProDisplay-Bold);
     font-size: 22px;
     line-height: normal;
@@ -1883,19 +1869,19 @@
     padding: 16px 10px;
 }
 
-.calendar-wrp .accordion-body{
+.calendar-wrp .accordion-body {
     padding: 0px 0px;
     padding-bottom: 0px;
 }
 
-.calender-month-event-stats-title{
+.calender-month-event-stats-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 }
 
-.calender-month-event-stats-title h3{
+.calender-month-event-stats-title h3 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: normal;
@@ -1908,29 +1894,29 @@
     text-transform: capitalize;
 }
 
-.calender-month-event-stats-title h3 span{
+.calender-month-event-stats-title h3 span {
     display: inline-block;
     width: 100%;
     max-width: 20px;
     height: 20px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.calender-month-event-stats-title i{
+.calender-month-event-stats-title i {
     color: var(--light-color);
     font-size: 15px;
 }
 
-.calender-month-event-stats-inner{
+.calender-month-event-stats-inner {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 15px 10px;
     margin-top: 20px;
 }
 
-.calender-month-event-stats-inner h5{
+.calender-month-event-stats-inner h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;
     line-height: normal;
@@ -1944,17 +1930,17 @@
     margin-bottom: 10px;
 }
 
-.calender-month-event-stats-inner h5 span{
+.calender-month-event-stats-inner h5 span {
     display: inline-block;
     width: 100%;
     max-width: 18px;
     height: 18px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.calender-month-event-stats-inner h3{
+.calender-month-event-stats-inner h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 32px;
     line-height: normal;
@@ -1963,32 +1949,32 @@
     margin-bottom: 0px;
 }
 
-.calender-month-event-stats-inner-wrp{
+.calender-month-event-stats-inner-wrp {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 }
 
-.calender-month-event-stats-inner-wrp .calender-month-event-stats-inner{
+.calender-month-event-stats-inner-wrp .calender-month-event-stats-inner {
     width: 100%;
     flex-basis: 50%;
 }
 
-.home-latest-draf-wrp{
+.home-latest-draf-wrp {
     margin-top: 20px;
 }
 
-.home-latest-draf-card{
+.home-latest-draf-card {
     border: 1px solid var(--border);
     border-radius: 16px;
-    box-shadow: 0px 64px 64px -48px rgba(15,15,15,8%);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 8%);
     padding: 10px;
     margin-bottom: 15px;
     display: block;
 }
 
-.upcoming-card-dropdown .dropdown-toggle{
+.upcoming-card-dropdown .dropdown-toggle {
     background-color: transparent;
     border: none;
 }
@@ -2006,7 +1992,7 @@
     margin-bottom: 15px;
 }
 
-.upcoming-card-dropdown .dropdown-menu li:last-child{
+.upcoming-card-dropdown .dropdown-menu li:last-child {
     margin-bottom: 0px;
 }
 
@@ -2022,13 +2008,13 @@
     --bs-dropdown-link-active-bg: transparent !important;
 }
 
-.upcoming-card-dropdown .dropdown-menu .dropdown-item.active{
+.upcoming-card-dropdown .dropdown-menu .dropdown-item.active {
     background-color: transparent !important;
     background: transparent !important;
     color: var(--pink);
 }
 
-.upcoming-card-dropdown .dropdown-menu .dropdown-item.active svg path{
+.upcoming-card-dropdown .dropdown-menu .dropdown-item.active svg path {
     stroke: var(--pink);
 }
 
@@ -2039,24 +2025,24 @@
     height: 20px;
 }
 
-.home-latest-draf-card-head-img{
+.home-latest-draf-card-head-img {
     width: 100%;
     max-width: 50px;
     height: 50px;
     border: 1px solid var(--border);
     border-radius: 50%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.home-latest-draf-card-head-img svg{
+.home-latest-draf-card-head-img svg {
     width: 100%;
     max-width: 24px;
     height: 24px;
 }
 
-.home-latest-draf-card-head-content h3{
+.home-latest-draf-card-head-content h3 {
     font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
     line-height: 22.4px;
@@ -2064,7 +2050,7 @@
     margin-bottom: 5px;
 }
 
-.home-latest-draf-card-head-content p{
+.home-latest-draf-card-head-content p {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     font-weight: 400;
@@ -2073,13 +2059,11 @@
     margin-bottom: 0px;
 }
 
-.home-latest-draf-card-head{
+.home-latest-draf-card-head {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
-
 
 .home-latest-draf-card .progress-bar__wrapper {
     position: relative;
@@ -2097,53 +2081,65 @@
     width: 100%;
     height: 8px;
     border-radius: 50px;
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     transition: width 300ms ease;
     overflow: hidden; /* Prevents visual glitches */
     position: relative;
 }
 
 .home-latest-draf-card progress[value]::-webkit-progress-bar {
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     border-radius: 50px;
     position: relative;
 }
 
 .home-latest-draf-card progress[value]::-webkit-progress-value {
-    background: #E03137 !important;
+    background: #e03137 !important;
     border-radius: 50px;
     transition: width 300ms ease;
     position: relative;
 }
 
 .home-latest-draf-card progress[value]::-moz-progress-bar {
-    background: #E03137 !important;
+    background: #e03137 !important;
     border-radius: 50px;
-    position:relative;
+    position: relative;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-webkit-progress-value {
-    background: #23AA26 !important;
+.home-latest-draf-card
+    .progress-bar__wrapper.green
+    progress[value]::-webkit-progress-value {
+    background: #23aa26 !important;
 }
-.home-latest-draf-card .progress-bar__wrapper.green progress[value]::-moz-progress-bar {
-    background: #23AA26 !important;
-}
-
-.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-webkit-progress-value {
-    background: #FCCD1E !important;
-}
-.home-latest-draf-card .progress-bar__wrapper.yellow progress[value]::-moz-progress-bar {
-    background: #FCCD1E !important;
+.home-latest-draf-card
+    .progress-bar__wrapper.green
+    progress[value]::-moz-progress-bar {
+    background: #23aa26 !important;
 }
 
-.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-webkit-progress-value {
-    background: #3BBEE8 !important;
+.home-latest-draf-card
+    .progress-bar__wrapper.yellow
+    progress[value]::-webkit-progress-value {
+    background: #fccd1e !important;
 }
-.home-latest-draf-card .progress-bar__wrapper.blue progress[value]::-moz-progress-bar {
-    background: #3BBEE8 !important;
+.home-latest-draf-card
+    .progress-bar__wrapper.yellow
+    progress[value]::-moz-progress-bar {
+    background: #fccd1e !important;
 }
 
-#progress-bar{
+.home-latest-draf-card
+    .progress-bar__wrapper.blue
+    progress[value]::-webkit-progress-value {
+    background: #3bbee8 !important;
+}
+.home-latest-draf-card
+    .progress-bar__wrapper.blue
+    progress[value]::-moz-progress-bar {
+    background: #3bbee8 !important;
+}
+
+#progress-bar {
     position: relative;
 }
 
@@ -2152,7 +2148,7 @@
     display: block;
     height: 8px;
     width: 0%;
-    background-color: #E03137;
+    background-color: #e03137;
     border-radius: 50px;
     transition: width 300ms ease;
     position: absolute;
@@ -2163,22 +2159,24 @@
 
 /* Variants for the progress bar */
 .home-latest-draf-card .progress-bar__wrapper.green #progress-bar::after {
-    background: #23AA26;
+    background: #23aa26;
     width: 75%;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow #progress-bar::after {
-    background: #FCCD1E;
+    background-color: #fccd1e !important;
     width: 50%;
+    -webkit-background-clip: padding-box;
+    -webkit-text-fill-color: #fccd1e !important;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {
-    background: #3BBEE8;
+    background: #3bbee8;
     width: 99%;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.red #progress-bar::after {
-    background: #E03137;
+    background: #e03137;
     width: 25%;
 }
 
@@ -2195,7 +2193,7 @@
     font-size: 13px;
     line-height: 20px;
     margin-bottom: 0;
-    color: #FF2A51;
+    color: #ff2a51;
     text-transform: uppercase;
 }
 
@@ -2204,9 +2202,9 @@
     font-size: 11px;
     line-height: normal;
     margin-bottom: 0;
-    color: #23AA26;
+    color: #23aa26;
     text-transform: capitalize;
-    background-color: #F0FFE8;
+    background-color: #f0ffe8;
     padding: 4px 8px;
     border-radius: 100px;
     position: relative;
@@ -2237,74 +2235,72 @@
     width: auto;
 }
 
-.home-center-content-head-calender-icon{
+.home-center-content-head-calender-icon {
     display: none;
     width: 100%;
     max-width: 25px;
     height: 25px;
 }
-.home-center-content-head span{
+.home-center-content-head span {
     cursor: pointer;
 }
 
-.mobile-latest-draf{
+.mobile-latest-draf {
     display: none;
 }
 
-
-
 /* ===events-page=== */
-.all-events-center-tabs .nav-tabs .nav-link span{
+.all-events-center-tabs .nav-tabs .nav-link span {
     padding: 8px;
     border-radius: 10px;
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;
     line-height: 21px;
     color: var(--white);
-    display:inline-flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     min-width: 30px;
     height: 30px;
 }
 
-.all-events-center-tabs .nav-tabs .nav-link{
+.all-events-center-tabs .nav-tabs .nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-#nav-upcoming-tab span{
-    background-color: #3BBEE8;
+#nav-upcoming-tab span {
+    background-color: #3bbee8;
 }
-#nav-drafts-tab span{
-    background-color: #23AA26;
+#nav-drafts-tab span {
+    background-color: #23aa26;
 }
-#nav-past-tab span{
-    background-color: #ECB015;
+#nav-past-tab span {
+    background-color: #ecb015;
 }
-.all-events-month-wise-wrp{
+.all-events-month-wise-wrp {
     margin-top: 20px;
     position: relative;
 }
 
-.all-events-month-wise-inner{
+.all-events-month-wise-inner {
     padding-left: 50px;
     max-height: 800px;
     overflow: hidden;
     overflow-y: scroll;
 }
 
-.all-events-month-wise-wrp::-webkit-scrollbar{
+.all-events-month-wise-wrp::-webkit-scrollbar {
     display: none;
 }
 
-.all-events-month-wise-support{
+.all-events-month-wise-support {
     position: relative;
 }
 
-.all-events-month-show-wrp .all-events-month-show{
+.all-events-month-show-wrp .all-events-month-show {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 13px;
     line-height: normal;
@@ -2313,7 +2309,7 @@
     padding: 10px;
     background-color: var(--pink);
     border-radius: 50%;
-    display:inline-flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 40px;
@@ -2322,7 +2318,7 @@
     top: 0; */
 }
 
-.all-events-month-show-wrp{
+.all-events-month-show-wrp {
     width: 40px;
     height: 100%;
     position: absolute;
@@ -2330,20 +2326,20 @@
     left: 5px;
 }
 
-.all-events-month-show.stick{
+.all-events-month-show.stick {
     position: fixed !important;
     top: 5px !important;
 }
-.all-events-month-show.sticknew{
+.all-events-month-show.sticknew {
     position: sticky;
     top: 0;
 }
-.all-events-month-show.extra-stick{
+.all-events-month-show.extra-stick {
     position: sticky;
     top: 0;
 }
 
-.all-events-date-show{
+.all-events-date-show {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
     line-height: 27.2px;
@@ -2354,16 +2350,19 @@
     left: -36px;
 }
 
-.all-event-blue, .all-event-pink, .all-event-yellow, .all-event-darkblue{
+.all-event-blue,
+.all-event-pink,
+.all-event-yellow,
+.all-event-darkblue {
     position: relative;
     /* overflow: hidden; */
 }
-.all-event-blue::before{
+.all-event-blue::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #3BBEE8;
+    background: #3bbee8;
     left: 0;
     top: 0;
     border-radius: 16px;
@@ -2371,7 +2370,7 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-pink::before{
+.all-event-pink::before {
     content: "";
     position: absolute;
     width: 8px;
@@ -2384,12 +2383,12 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-yellow::before{
+.all-event-yellow::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #EEA929;
+    background: #eea929;
     left: 0;
     top: 0;
     border-radius: 16px;
@@ -2397,19 +2396,19 @@
     border-radius: 300px 0px 0px 300px;
 }
 
-.all-event-darkblue::before{
+.all-event-darkblue::before {
     content: "";
     position: absolute;
     width: 8px;
     height: 100%;
-    background: #2C8EE9;
+    background: #2c8ee9;
     left: 0;
     top: 0;
     border-radius: 16px;
     z-index: -1;
     border-radius: 300px 0px 0px 300px;
 }
-.search-icon{
+.search-icon {
     width: 100% !important;
     max-width: 20px !important;
     height: 20px !important;
@@ -2417,7 +2416,7 @@
     top: 50% !important;
     transform: translateY(-50%) !important;
     right: 20px !important;
-    display:flex !important;
+    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     z-index: -1 !important;
@@ -2425,29 +2424,29 @@
     padding: 0px !important;
 }
 
-.all-events-searchbar-wrp{
+.all-events-searchbar-wrp {
     margin-top: 20px;
 }
 
-.all-events-searchbar-wrp input{
+.all-events-searchbar-wrp input {
     padding-right: 40px;
     background-color: transparent;
     width: 100%;
 }
 
-.all-events-searchbar-wrp input::placeholder{
+.all-events-searchbar-wrp input::placeholder {
     text-transform: none !important;
 }
 
-.all-events-searchbar-wrp form{
+.all-events-searchbar-wrp form {
     width: 100%;
 }
 
-.all-events-searchbar-wrp input:focus{
+.all-events-searchbar-wrp input:focus {
     background-color: transparent;
 }
 
-.mobile-search-filter-icon{
+.mobile-search-filter-icon {
     background-color: transparent;
     border: none;
     width: 100%;
@@ -2455,63 +2454,63 @@
     height: 24px;
 }
 
-.all-events-searchbar-wrp{
+.all-events-searchbar-wrp {
     display: flex;
     align-items: center;
     gap: 15px;
     width: 100%;
 }
 
-.mobile-search-filter-icon{
+.mobile-search-filter-icon {
     display: none;
 }
 
-.all-events-month-wise-support .home-center-upcoming-events-card{
+.all-events-month-wise-support .home-center-upcoming-events-card {
     padding: 10px 16px;
 }
-.all-events-filtermodal .modal-content{
+.all-events-filtermodal .modal-content {
     width: 100%;
     max-width: 370px;
     height: auto;
     overflow: hidden;
 }
 
-.all-events-filtermodal .modal-header{
+.all-events-filtermodal .modal-header {
     padding-bottom: 20px;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid #f1f5f9;
     margin-bottom: 20px;
 }
 
-.all-events-filter-wrp{
+.all-events-filter-wrp {
     min-height: 200px;
     padding-bottom: 20px;
 }
 
-.all-events-filter-wrp .form-check-label{
+.all-events-filter-wrp .form-check-label {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     line-height: 23.8px;
     color: var(--secondary-black);
     margin-bottom: 0 !important;
 }
-.all-events-filter-wrp .form-check-input{
+.all-events-filter-wrp .form-check-input {
     width: 100% !important;
     max-width: 20px !important;
     height: 20px !important;
     border-radius: 5px;
     margin-right: 0 !important;
 }
-.all-events-filter-wrp .form-check-input:focus{
+.all-events-filter-wrp .form-check-input:focus {
     box-shadow: none;
     border: 1px solid var(--border);
 }
 
-.all-events-filter-wrp .form-check-input:checked[type=checkbox]{
-    background-color: #2DA9FC;
-    border: 1px solid #2DA9FC;
+.all-events-filter-wrp .form-check-input:checked[type="checkbox"] {
+    background-color: #2da9fc;
+    border: 1px solid #2da9fc;
 }
 
-.all-events-filter-wrp .form-check{
+.all-events-filter-wrp .form-check {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2520,34 +2519,34 @@
     margin-bottom: 20px;
 }
 
-.all-events-filtermodal .modal-footer{
+.all-events-filtermodal .modal-footer {
     display: flex;
     align-items: center;
     gap: 15px;
     flex-wrap: nowrap;
 }
 
-.all-events-filtermodal .modal-footer .cmn-btn{
+.all-events-filtermodal .modal-footer .cmn-btn {
     font-size: 15px;
     text-transform: capitalize;
 }
 
-.all-events-filtermodal .modal-footer .reset-btn{
+.all-events-filtermodal .modal-footer .reset-btn {
     border: 1px solid var(--border);
     background-color: transparent;
     color: var(--secondary-black);
 }
 
-.unfinish-draft-wrp{
+.unfinish-draft-wrp {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.calender-month-event-stats-wrp{
+.calender-month-event-stats-wrp {
     margin-top: 30px;
 }
 
-.all-events-inner-month-show{
+.all-events-inner-month-show {
     font-family: var(--SFProDisplay-Bold);
     font-size: 16px;
     line-height: 27.2px;
@@ -2558,7 +2557,7 @@
     text-transform: uppercase;
 }
 
-.event-center-tabs-main .nav-tabs{
+.event-center-tabs-main .nav-tabs {
     background-color: transparent !important;
     border-bottom: 1px solid var(--border) !important;
     border-radius: 0px !important;
@@ -2569,8 +2568,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side, #B2B2B2 94%, #0000) top / 4px 4px no-repeat, conic-gradient(#0000 30%, #B2B2B2);
-    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+    background: radial-gradient(farthest-side, #b2b2b2 94%, #0000) top / 4px 4px
+            no-repeat,
+        conic-gradient(#0000 30%, #b2b2b2);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 4px),
+        #000 0
+    );
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
     display: none;
@@ -2579,8 +2584,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side, #B2B2B2 94%, #0000) top / 4px 4px no-repeat, conic-gradient(#0000 30%, #B2B2B2);
-    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+    background: radial-gradient(farthest-side, #b2b2b2 94%, #0000) top / 4px 4px
+            no-repeat,
+        conic-gradient(#0000 30%, #b2b2b2);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 4px),
+        #000 0
+    );
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
     display: none;
@@ -2589,16 +2600,28 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side, #B2B2B2 94%, #0000) top / 4px 4px no-repeat, conic-gradient(#0000 30%, #B2B2B2);
-    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+    background: radial-gradient(farthest-side, #b2b2b2 94%, #0000) top / 4px 4px
+            no-repeat,
+        conic-gradient(#0000 30%, #b2b2b2);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 4px),
+        #000 0
+    );
     animation: spinner-ub 0.9s infinite linear;
     margin: 10px auto 0;
     display: none;
 }
 
-.host-name-pink{color: var(--pink) !important;}
-.host-name-blue{color: #2C8EE9 !important;}
-.host-name-yellow{color: #EEA929 !important;}
+.host-name-pink {
+    color: var(--pink) !important;
+}
+.host-name-blue {
+    color: #2c8ee9 !important;
+}
+.host-name-yellow {
+    color: #eea929 !important;
+}
 
 .cancel-event .modal-body {
     padding: 24px 24px 12px !important;
@@ -2645,7 +2668,7 @@
     font-family: var(--SFProDisplay-Regular);
 }
 .cancel-event .cancel-event-text h6 {
-    color: #EB1212;
+    color: #eb1212;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium);
     margin-bottom: 20px !important;
@@ -2683,24 +2706,24 @@
     border-radius: 100%;
 }
 
-.disable-class .home-upcoming-events-card-rsvp-data h6 i{
- color: var(--light-color) !important;
+.disable-class .home-upcoming-events-card-rsvp-data h6 i {
+    color: var(--light-color) !important;
 }
 
-.disable-class .upcoming-events-card-notification-wrp > button svg path{
+.disable-class .upcoming-events-card-notification-wrp > button svg path {
     stroke: var(--light-color) !important;
 }
 
-.disable-class .upcoming-events-card-notification-wrp > button .g-badge{
+.disable-class .upcoming-events-card-notification-wrp > button .g-badge {
     background-color: var(--light-color) !important;
 }
 
-.upcoming-events-card-notification-wrp > button svg{
+.upcoming-events-card-notification-wrp > button svg {
     width: 100%;
     height: 100%;
 }
 
-.mobile-calender-btn{
+.mobile-calender-btn {
     background-color: var(--primary-black);
     font-family: var(--SFProDisplay-Semibold);
     font-size: 16px;
@@ -2721,25 +2744,25 @@
     pointer-events: auto;
 }
 
-.mobile-calender-btn span{
+.mobile-calender-btn span {
     display: inline-block;
 }
 
-.mobile-calender-btn span svg{
+.mobile-calender-btn span svg {
     width: 100%;
     max-width: 20px;
     height: 20px;
 }
 
-.mobile-calender-btn span svg path{
+.mobile-calender-btn span svg path {
     stroke: var(--white);
 }
 
-.responsive-calendar .month{
+.responsive-calendar .month {
     opacity: 1;
     margin-bottom: 20px;
 }
-.responsive-calendar .day{
+.responsive-calendar .day {
     font-family: var(--SFProDisplay-Bold);
     font-size: 14px;
     line-height: 23.8px;
@@ -2754,7 +2777,7 @@
     /* background: #4A4A4A; */
     position: relative;
     z-index: 100;
-    border: 1px solid #F8F9FD;
+    border: 1px solid #f8f9fd;
     height: 68px;
     display: inline-flex;
     align-items: center;
@@ -2763,11 +2786,11 @@
     flex-direction: column;
 }
 
-.responsive-calendar .day.active{
-    border: 1px solid #E03137;
+.responsive-calendar .day.active {
+    border: 1px solid #e03137;
 }
 
-.responsive-calendar .month h3{
+.responsive-calendar .month h3 {
     font-family: var(--SFProDisplay-Medium);
     font-size: 18px;
     line-height: 21px;
@@ -2777,27 +2800,26 @@
     width: 50%;
 }
 
-.responsive-calendar .month h3:nth-child(2){
+.responsive-calendar .month h3:nth-child(2) {
     font-family: var(--SFProDisplay-Medium);
     color: var(--light-color);
     margin-left: auto;
     text-align: right;
 }
 
-.responsive-calendar{
+.responsive-calendar {
     display: none;
-
 }
 
-.responsive-calendar .day-events{
+.responsive-calendar .day-events {
     height: 8px;
 }
 
-.responsive-calender-month-wrp{
+.responsive-calender-month-wrp {
     display: none;
 }
 
-.responsive-calender-month-text{
+.responsive-calender-month-text {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 18px;
     line-height: 21px;
@@ -2820,32 +2842,39 @@
     line-height: 5px;
     border-radius: 50%;
     margin-left: 1px;
+}
 
-  }
-
-  .responsive-calendar .day .day-events span:first-child{
+.responsive-calendar .day .day-events span:first-child {
     margin-left: 0px;
-  }
+}
 
-  .responsive-calendar .blue { background: #3BBEE8; }
-  .responsive-calendar .orange { background: #E7346D; }
-  .responsive-calendar .green { background: #23AA26; }
-  .responsive-calendar .yellow { background: #ECB015; }
+.responsive-calendar .blue {
+    background: #3bbee8;
+}
+.responsive-calendar .orange {
+    background: #e7346d;
+}
+.responsive-calendar .green {
+    background: #23aa26;
+}
+.responsive-calendar .yellow {
+    background: #ecb015;
+}
 
-  .mobile-calender-btn{
+.mobile-calender-btn {
     display: none;
-  }
+}
 
-  #calendar .month h3{
+#calendar .month h3 {
     font-family: var(--SFProDisplay-Bold);
     font-size: 18px;
     line-height: 27px;
     color: var(--secondary-black);
     margin-bottom: 15px;
     text-align: center;
-  }
+}
 
-  .calendar-nav .prev{
+.calendar-nav .prev {
     /* content: "\f104";
     font-family: "FONTAWESOME"; */
     position: absolute;
@@ -2857,10 +2886,9 @@
     font-size: 15px;
     background-color: transparent;
     border: none;
-  }
+}
 
-
-  .calendar-nav .next {
+.calendar-nav .next {
     /* content: "\f105";
     font-family: "FONTAWESOME"; */
     position: absolute;
@@ -2874,23 +2902,23 @@
     border: none;
 }
 
-.responsive-calendar .weekdays .day{
+.responsive-calendar .weekdays .day {
     border: none !important;
     height: auto !important;
     min-height: auto !important;
 }
 
-.responsive-calendar .weekdays{
+.responsive-calendar .weekdays {
     width: 100%;
     text-align: center;
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);
 }
 
-.calendar-wrp .accordion-header{
+.calendar-wrp .accordion-header {
     position: relative;
 }
 
-.calendar-wrp .accordion-header span{
+.calendar-wrp .accordion-header span {
     border: 1px solid var(--border);
     padding: 10px 15px;
     border-radius: 10px;
@@ -2904,20 +2932,22 @@
     right: 40px;
 }
 
-.rsvp_minus_notify:disabled, .rsvp_plus_notify:disabled{
+.rsvp_minus_notify:disabled,
+.rsvp_plus_notify:disabled {
     background-color: gray !important;
 }
 
-#all-notification-filter-modal #event_filter .form-check label{
+#all-notification-filter-modal #event_filter .form-check label {
     padding-right: 30px;
     word-break: break-all;
 }
 
-.notification-selected-events-wrp, .notification-selected-events-wrp span{
+.notification-selected-events-wrp,
+.notification-selected-events-wrp span {
     word-break: break-all;
 }
 
-.notification-selected-events-wrp span{
+.notification-selected-events-wrp span {
     margin-bottom: 5px;
     margin-right: 5px;
 }
@@ -2947,7 +2977,7 @@
         font-size: 22px;
         line-height: 32px;
     }
-    #calendar .day{
+    #calendar .day {
         width: 34px !important;
     }
     .home-upcoming-events-card-left-profile-content h3 {
@@ -2956,7 +2986,7 @@
 }
 
 @media only screen and (max-width: 1199px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -2988,14 +3018,14 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
-    .home-center-content-head-calender-icon{
+    .home-center-content-head-calender-icon {
         display: block !important;
     }
 
-    .responsive-calendar{
+    .responsive-calendar {
         display: block;
         position: fixed;
         top: 0;
@@ -3010,24 +3040,23 @@
         padding: 50px;
         gap: 20px;
         overflow: hidden;
-
     }
 
-    .responsive-calender-months{
+    .responsive-calender-months {
         overflow: hidden;
         overflow-y: scroll;
         max-height: calc(100% - 2%);
     }
 
-    .responsive-calendar .month{
+    .responsive-calendar .month {
         max-width: 500px;
         margin: 0px auto;
         margin-bottom: 20px;
     }
-    .responsive-calendar .day{
+    .responsive-calendar .day {
         width: 70px;
     }
-    .responsive-calender-month-wrp{
+    .responsive-calender-month-wrp {
         display: block;
         position: fixed;
         top: 146px;
@@ -3036,9 +3065,8 @@
         width: 100%;
         max-width: 500px;
         padding: 0px !important;
-
     }
-    .responsive-calender-title-wrp{
+    .responsive-calender-title-wrp {
         display: block;
         position: fixed;
         top: 10px;
@@ -3047,7 +3075,7 @@
         max-width: 100%;
         text-align: center;
     }
-    .calendar-heading{
+    .calendar-heading {
         font-family: var(--SFProDisplay-Bold) !important;
         font-size: 26px !important;
         line-height: normal !important;
@@ -3057,18 +3085,16 @@
         text-align: center;
     }
 
-    .mobile-calender-btn{
+    .mobile-calender-btn {
         display: flex;
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 340px;
     }
-
-
 }
 
 @media only screen and (max-width: 991px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -3101,7 +3127,7 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
     .home-center-upcoming-events-title h3 {
@@ -3116,11 +3142,10 @@
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 170px;
     }
-
 }
 
 @media only screen and (max-width: 767px) {
-    .home-main-right{
+    .home-main-right {
         display: none;
     }
     .home-center-content-head h1 {
@@ -3153,7 +3178,7 @@
         padding-bottom: 0px;
     }
 
-    .mobile-latest-draf{
+    .mobile-latest-draf {
         display: block;
     }
     .home-center-upcoming-events-title h3 {
@@ -3168,7 +3193,7 @@
     .responsive-calendar .day {
         width: 68px;
     }
-    .home-center-profile-img h5{
+    .home-center-profile-img h5 {
         font-size: 17px;
         line-height: normal;
         color: var(--white);
@@ -3176,7 +3201,6 @@
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 230px;
     }
-
 }
 
 @media only screen and (max-width: 575px) {
@@ -3218,18 +3242,20 @@
         max-width: 145px;
         height: 160px;
     }
-    .home-center-upcoming-events-card{
+    .home-center-upcoming-events-card {
         align-items: end;
     }
 
-    .events-center-main .home-center-content-head{
+    .events-center-main .home-center-content-head {
         justify-content: center;
     }
 
-    .home-center-content-head span{
+    .home-center-content-head span {
         display: none !important;
     }
-    #nav-upcoming-tab span, #nav-drafts-tab span, #nav-past-tab span{
+    #nav-upcoming-tab span,
+    #nav-drafts-tab span,
+    #nav-past-tab span {
         background-color: transparent;
         color: var(--lightgreay);
         padding: 0px;
@@ -3237,18 +3263,18 @@
         min-width: auto;
     }
 
-    .event-center-tabs-main .nav-tabs .nav-link.active span{
+    .event-center-tabs-main .nav-tabs .nav-link.active span {
         color: var(--secondary-black) !important;
     }
 
     .all-events-center-tabs .nav-tabs .nav-link {
         gap: 3px;
     }
-    .mobile-search-filter-icon{
+    .mobile-search-filter-icon {
         display: block;
     }
 
-    .home-center-content-head h1{
+    .home-center-content-head h1 {
         color: var(--secondary-black);
     }
     .all-events-month-show-wrp .all-events-month-show {
@@ -3260,29 +3286,27 @@
         left: 12px;
     }
 
-    .all-events-month-show-wrp{
+    .all-events-month-show-wrp {
         width: 30px;
         left: 0px;
     }
 
-    .all-events-date-show{
+    .all-events-date-show {
         font-size: 14px;
         left: -29px;
     }
 
-    .all-events-inner-month-show{
+    .all-events-inner-month-show {
         font-size: 12px;
         left: -32px;
         top: 8px;
     }
 
-
-
     .all-events-month-wise-inner {
         padding-left: 35px;
     }
 
-    .all-events-filtermodal .modal-content{
+    .all-events-filtermodal .modal-content {
         position: fixed;
         top: auto !important;
         bottom: 0;
@@ -3292,37 +3316,37 @@
         border-radius: 16px 16px 0px 0px;
     }
 
-    .all-events-filtermodal .modal-dialog{
+    .all-events-filtermodal .modal-dialog {
         margin: 0px;
     }
 
-    .all-events-filtermodal.fade{
+    .all-events-filtermodal.fade {
         display: none;
     }
 
     .all-events-filtermodal.modal.fade .modal-dialog {
-        transition: transform .3s ease-out;
+        transition: transform 0.3s ease-out;
         transform: translate(0, 0px);
     }
 
-    .modal-content{
+    .modal-content {
         margin: 0px;
     }
 
-    .responsive-calendar .month{
+    .responsive-calendar .month {
         max-width: 400px;
     }
     .responsive-calender-month-wrp {
         max-width: 400px;
         top: 135px;
     }
-    .responsive-calendar{
+    .responsive-calendar {
         padding: 40px 10px;
     }
     .responsive-calendar .day {
         width: 56px;
     }
-    .calendar-heading{
+    .calendar-heading {
         font-family: var(--SFProDisplay-Bold) !important;
         font-size: 22px !important;
         line-height: normal !important;
@@ -3344,7 +3368,6 @@
     .home-upcoming-events-card-right img {
         object-fit: contain;
     }
-
 }
 
 @media only screen and (max-width: 424px) {
@@ -3355,7 +3378,7 @@
         padding: 10px 0px;
         border-bottom: 1px solid var(--border);
     }
-    .home-center-profile-content h3{
+    .home-center-profile-content h3 {
         font-size: 16px;
     }
     .home-center-profile-img {
@@ -3363,7 +3386,6 @@
         max-width: 40px;
         height: 40px;
     }
-
 
     .home-center-profile-content p {
         font-size: 12px;
@@ -3434,10 +3456,10 @@
     .responsive-calendar .month h3 {
         font-size: 16px;
     }
-    .responsive-calender-month-wrp{
+    .responsive-calender-month-wrp {
         max-width: 316px;
     }
-    .responsive-calendar .day{
+    .responsive-calendar .day {
         font-size: 12px;
         width: 42px;
     }
