@@ -250,11 +250,7 @@
 
                                                         {{-- {{  dd($post['post_image'])}} --}}
                                                         @if ($post['post_type'] == '1')
-                                                        <div class="posts-card-inner-wrp">
-                                                            <h3 class="posts-card-inner-questions">
-                                                                {{ $post['post_message'] }}
-                                                            </h3>
-                                                        </div>
+
                                                             <div class="posts-card-show-post-wrp">
                                                                 <div class="swiper posts-card-post">
                                                                     <div class="swiper-wrapper">
@@ -1461,8 +1457,8 @@
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control" rows="3" name="postContent" placeholder="What's on your mind?"
-                                    id="postContent"></textarea>
+                                <textarea class="form-control postContent" rows="3" name="postContent" placeholder="What's on your mind?"
+                                   ></textarea>
                             </div>
                         </form>
                         <div class="create-post-upload-img-wrp d-none">
@@ -1471,7 +1467,7 @@
                                 <div>
                                     <button type="button" class="uploadButton create-post-head-upload-btn d-none"><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput2" class="fileInputtype"
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
                                             accept="image/*"></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1507,7 +1503,7 @@
                                         <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
-                                        <input type="" name="postContent" id="photoContent">
+                                        <input type="hidden" name="postContent" id="photoContent" val="">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

@@ -30,7 +30,9 @@ class SendPhotoShareReminder extends Command
      */
     public function handle()
     {
-        $endedEvents =  Event::with(['user', 'event_image'])->where('end_date', '<', now())->get();
+        $endedEvents =  Event::with(['user', 'event_image' => function ($query) {
+            $query->orderBy('type', 'ASC');
+        }])->where('end_date', '<', now())->get();
 
         foreach ($endedEvents as $event) {
 

@@ -1,4 +1,8 @@
 function initMap() {
+    let mapele = document.getElementById("map");
+    if (mapele == undefined) {
+        return;
+    }
     // Initialize the map
     var map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -33.8688, lng: 151.2195 },

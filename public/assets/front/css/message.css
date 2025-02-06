@@ -304,8 +304,8 @@ ul.chat-list > div:last-child li {
     height: 50px;
     width: 50px;
     position: absolute;
-    margin-left: 50%;
-    margin-top: 20%;
+    /* margin-left: 50%;
+    margin-top: 20%; */
     z-index: 99999;
     background: white;
 }

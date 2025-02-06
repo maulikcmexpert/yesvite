@@ -1,9 +1,9 @@
 @php
 use Carbon\Carbon;
 @endphp
-<div class="loader">
+<!-- <div class="loader">
     <img src="{{asset('assets/front/loader.gif')}}" />
-</div>
+</div> -->
 <input id="asset_path" type="hidden" value="{{asset('assets/emojis/')}}" />
 <div class="message-area">
     <div class="container">

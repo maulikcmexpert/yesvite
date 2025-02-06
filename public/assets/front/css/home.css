@@ -507,6 +507,13 @@
     margin-top: 16px;
 }
 
+.collection-wrapper .search-wrapper input[type="search"]{
+    height: 48px !important;
+    padding-left: 20px;
+    width: 100% !important;
+    outline: 0;
+}
+
 .collection-wrapper .search-wrapper span{
     width: 40px;
     height: 40px;
@@ -516,6 +523,9 @@
     align-items: center;
     justify-content: center;
     right: 4px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .collection-wrapper .search-wrapper span svg path{
