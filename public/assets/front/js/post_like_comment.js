@@ -270,7 +270,7 @@ $(document).ready(function () {
     // Handle comment submission
     // Handle comment submission
     $(document).on("click", ".comment-send-icon", function () {
-        var commentVal = $(".post_comment").val();
+        var commentVal = $(this).prev(".post_comment").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
