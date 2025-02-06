@@ -2144,9 +2144,9 @@
 }
 
 .home-latest-draf-card #progress-bar::after {
-    content: "";
+    content: " ";
     display: block;
-    height: 8px;
+    height: 100%;
     width: 0%;
     background-color: #e03137;
     border-radius: 50px;
@@ -2164,7 +2164,8 @@
 }
 
 .home-latest-draf-card .progress-bar__wrapper.yellow #progress-bar::after {
-    background-color: #fccd1e !important;
+    /* background-color: #fccd1e !important; */
+    background-image: linear-gradient(#fccd1e, #fccd1e);
     width: 50%;
     -webkit-background-clip: padding-box;
     -webkit-text-fill-color: #fccd1e !important;
@@ -2214,7 +2215,7 @@
 }
 
 .home-latest-draf-card .progress-bar__wrapper .prograsbar-hosting::before {
-    content: "";
+    content: " ";
     position: absolute;
     width: 1px;
     height: 15px;
