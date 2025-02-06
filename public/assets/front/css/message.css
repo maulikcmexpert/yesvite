@@ -1852,6 +1852,9 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     padding-bottom: 20px !important;
 }
 
+.unmute-self-icn path{
+    stroke:#94A3B8;
+}
 
 
 /* ======= responsive ======== */
