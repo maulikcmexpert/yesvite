@@ -55,6 +55,8 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    console.log(response);
+
                     $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
 
                     let reactionImage = "";
