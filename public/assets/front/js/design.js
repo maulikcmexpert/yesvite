@@ -1368,7 +1368,7 @@ async function bindData(current_event_id) {
 
             $("#fontSizeInput").val("20");
             $("#fontSizeRange").val("20");
-            $("#letterSpacingInput").val("0");
+            $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);
             $("#letterSpacingRange").val("0");
             $("#lineHeightInput").val("1.16");
             $("#lineHeightRange").val("1.16");
@@ -1383,7 +1383,7 @@ async function bindData(current_event_id) {
         }
         addToUndoStack(canvas);
         let fontSize = $("#fontSizeInput").val();
-        let letterSize = $("#letterSpacingInput").val();
+        let letterSize = parseFloat($("#letterSpacingInput").val());
         let lineHeight = $("#lineHeightInput").val();
         activeObject.set({
             fontSize: fontSize,
