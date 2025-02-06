@@ -352,6 +352,16 @@ $(document).on('click','.re_send_failed_invites', function() {
         success: function (response) {
             if (response.status === 1) {
                 toastr.success(response.message);
+                window.location.reload();
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
                 // // Find the guest container by guestId and remove it from the DOM
             } else {
                 toastr.error(response.message);
