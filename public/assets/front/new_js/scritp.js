@@ -117,7 +117,8 @@ $(".notification-btn").on("click", function () {
 $(document).on("click", ".mobile-calender-btn", function () {
     $(".mobile-menu-wrp").removeClass("active");
     $(".line").removeClass("active");
-    var text = this.innerText;
+    // var text = this.innerText;
+    var text = this.textContent.trim(); // Use textContent.trim()
     var calendarSvg = `<svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.16406 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M13.8359 1.66602V4.16602" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
