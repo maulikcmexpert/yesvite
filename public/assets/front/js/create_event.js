@@ -13,7 +13,7 @@ var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
-
+var isStartTime = 0;
 eventData.Alreadyguest = Alreadyguest;
 var swiper;
 var isPhonecontact = 0;
@@ -3393,7 +3393,7 @@ function convertTo12Hour(time) {
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
-    var end_time = $("#ac-end-time").val();
+    var end_time = $("#ac-end-time").val() || '';
 
     let activityendtime;
     // checkEndTimes();
@@ -3511,12 +3511,14 @@ $(document).on("click", "#save_activity_schedule", function () {
         console.log(lastScheduleEndtime);
 
         if (lastScheduleEndtime > lastendtime) {
+            isStartTime = 1;
             toastr.error("Please enter proper time");
             return;
         }
     }
 
     if (isValid == 0) {
+        isStartTime = 0;
         if (total_activities >= 1) {
             // if (total_activities == 1) {
             //     $(".step_1_activity").text(total_activities + " Activity");
@@ -8418,6 +8420,10 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
+    if(isStartTime == 0){
+        toastr.error("Please enter proper time");
+        return
+    }
     eventData.isdraft = "0";
 
     var data = eventData;
