@@ -3393,7 +3393,7 @@ function convertTo12Hour(time) {
 
 $(document).on("click", "#save_activity_schedule", function () {
     var start_time = $("#ac-start-time").val();
-    var end_time = $("#ac-end-time").val() || '';
+    var end_time = $("#ac-end-time").val() || "";
 
     let activityendtime;
     // checkEndTimes();
@@ -3513,6 +3513,7 @@ $(document).on("click", "#save_activity_schedule", function () {
         if (lastScheduleEndtime > lastendtime) {
             isStartTime = 1;
             toastr.error("Please enter proper time");
+            $("#end-time").val("");
             return;
         }
     }
@@ -4077,6 +4078,7 @@ function savePage1Data(close = null, direct = false) {
         eventData.state = state;
         eventData.zipcode = zipcode;
         eventData.city = city;
+        eventData.schedule = schedule;
         eventData.message_to_guests = message_to_guests;
         eventData.events_schedule = events_schedule;
         eventData.longitude = longitude;
@@ -8420,10 +8422,6 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
-    if(isStartTime == 0){
-        toastr.error("Please enter proper time");
-        return
-    }
     eventData.isdraft = "0";
 
     var data = eventData;
@@ -8669,6 +8667,9 @@ async function step2Open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
     }
     console.log(design);
 

@@ -7,15 +7,11 @@
                     <img src="{{ $eventDetails['user_profile'] }}" alt="" />
                 @else
                     @php
-                        $name = $eventDetails['hosted_by'];
-                        // $parts = explode(" ", $name);
-                        $firstInitial = isset($eventDetails['hosted_by'][0])
-                            ? strtoupper($eventDetails['hosted_by'][0])
-                            : '';
-                        $secondInitial = isset($eventDetails['hosted_by'][5])
-                            ? strtoupper($eventDetails['hosted_by'][5])
-                            : '';
-                        $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                        $nameParts = explode(' ', $eventDetails['hosted_by']);
+
+                        $firstInitial = isset($nameParts[0][0]) ? strtoupper($nameParts[0][0]) : '';
+                        $secondInitial = isset($nameParts[1][0]) ? strtoupper($nameParts[1][0]) : '';
+                        $initials = $firstInitial . $secondInitial;
                         $fontColor = 'fontcolor' . strtoupper($firstInitial);
                     @endphp
                     <h5 class="{{ $fontColor }}">
@@ -47,11 +43,11 @@
                             <div class="hosted-by-template-slider-img">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
-                            <button class="image-zoom-icon" data-img="{{ $image }}"><img src="{{ asset('assets/front/img/image-zoom-icon.png')}}" alt=""></button>
+                            <button class="image-zoom-icon" data-img="{{ $image }}"><img
+                                    src="{{ asset('assets/front/img/image-zoom-icon.png') }}" alt=""></button>
                         </div>
                     @endforeach
                 @else
-
                     <div class="swiper-slide">
                         <div class="hosted-by-template-slider-img">
                             <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="No Event Image" />
@@ -62,7 +58,7 @@
 
 
             <div class="custom-pagination"></div>
-            <!-- <button class="image-zoom-icon"><img src="{{ asset('assets/front/img/image-zoom-icon.png')}}" alt=""></button> -->
+            <!-- <button class="image-zoom-icon"><img src="{{ asset('assets/front/img/image-zoom-icon.png') }}" alt=""></button> -->
         </div>
     </div>
 
@@ -73,9 +69,9 @@
                 <h3>Details</h3>
                 <ul>
                     @if (!empty($eventDetails['rsvp_by']))
-                    <li>RSVP By:
-                        {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
-                    </li>
+                        <li>RSVP By:
+                            {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                        </li>
                     @endif
                     @if ($eventDetails['podluck'] == 1)
                         <li>Potluck Event</li>
@@ -84,20 +80,20 @@
                         <li>Adults Only</li>
                     @endif
                     @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] != $eventDetails['end_date'])
-                    <li>Multiple Day Event</li>
-                @endif
+                        <li>Multiple Day Event</li>
+                    @endif
 
                     @if (!empty($eventDetails['co_hosts']))
                         <li>Co-Host</li>
                     @endif
                     @if (!empty($eventDetails['gift_registry']))
-                    <li>Gift Registry</li>
-                @endif
-                @if (!empty($eventDetails['event_schedule']))
-                    <li>Event has schedule</li>
-                @endif
-                @if (!empty($eventDetails['allow_limit'] ))
-                    <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
+                        <li>Gift Registry</li>
+                    @endif
+                    @if (!empty($eventDetails['event_schedule']))
+                        <li>Event has schedule</li>
+                    @endif
+                    @if (!empty($eventDetails['allow_limit']))
+                        <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                     @endif
                 </ul>
             </div>
@@ -119,22 +115,21 @@
                                 stroke-linejoin="round" />
                             <path d="M13.0801 13.9167H13.0875" stroke="#64748B" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
-                            <path d="M9.99803 11.4167H10.0055" stroke="#64748B" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M9.99803 13.9167H10.0055" stroke="#64748B" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.91209 11.4167H6.91957" stroke="#64748B" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M6.91209 13.9167H6.91957" stroke="#64748B" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9.99803 11.4167H10.0055" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M9.99803 13.9167H10.0055" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M6.91209 11.4167H6.91957" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M6.91209 13.9167H6.91957" stroke="#64748B" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </div>
                     <div class="hosted-by-date-time-content">
                         <h6>Date</h6>
                         <h3>
                             {{ \Carbon\Carbon::parse($eventDetails['event_date'])->format('F d, Y') }}
-                            @if (!empty($eventDetails['end_date']) &&
-                                 ($eventDetails['event_date'] !== $eventDetails['end_date']))
+                            @if (!empty($eventDetails['end_date']) && $eventDetails['event_date'] !== $eventDetails['end_date'])
                                 to {{ \Carbon\Carbon::parse($eventDetails['end_date'])->format('F d, Y') }}
                             @endif
                         </h3>
@@ -147,20 +142,18 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.8346 9.99996C18.8346 14.6 15.1013 18.3333 10.5013 18.3333C5.9013 18.3333 2.16797 14.6 2.16797 9.99996C2.16797 5.39996 5.9013 1.66663 10.5013 1.66663C15.1013 1.66663 18.8346 5.39996 18.8346 9.99996Z"
-                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M13.5914 12.65L11.0081 11.1083C10.5581 10.8416 10.1914 10.2 10.1914 9.67497V6.2583"
-                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
                     <div class="hosted-by-date-time-content">
                         <h6>Time</h6>
                         <h3>{{ $eventDetails['event_time'] }}
-                            @if (!empty($eventDetails['end_time'] ))
-                            to
-                            {{ $eventDetails['end_time'] }}
-                        @endif
+                            @if (!empty($eventDetails['end_time']))
+                                to
+                                {{ $eventDetails['end_time'] }}
+                            @endif
                         </h3>
                     </div>
                 </div>
@@ -183,7 +176,7 @@
                             </svg>
                             Comments
                         </h5>
-                        <h3 >{{ $eventDetails['total_event_comments'] }}</h3>
+                        <h3>{{ $eventDetails['total_event_comments'] }}</h3>
                     </div>
                     <div class="hosted-by-event-stats-inner">
                         <h5>

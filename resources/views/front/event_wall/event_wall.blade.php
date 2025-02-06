@@ -250,6 +250,11 @@
 
                                                         {{-- {{  dd($post['post_image'])}} --}}
                                                         @if ($post['post_type'] == '1')
+                                                        <div class="posts-card-inner-wrp">
+                                                            <h3 class="posts-card-inner-questions">
+                                                                {{ $post['post_message'] }}
+                                                            </h3>
+                                                        </div>
                                                             <div class="posts-card-show-post-wrp">
                                                                 <div class="swiper posts-card-post">
                                                                     <div class="swiper-wrapper">
@@ -1502,7 +1507,7 @@
                                         <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
-                                        <input type="hidden" name="postContent" id="photoContent">
+                                        <input type="" name="postContent" id="photoContent">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

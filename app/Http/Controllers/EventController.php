@@ -590,7 +590,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        // dd($potluck);
+        dd($request);
         // dd($request);
 
         Session::forget('desgin');
@@ -3252,7 +3252,8 @@ class EventController extends BaseController
     {
 
         // dd($request->slider_images);
-
+        
+        
         Session::forget('desgin');
         Session::forget('shape_image');
         Session::forget('custom_image');

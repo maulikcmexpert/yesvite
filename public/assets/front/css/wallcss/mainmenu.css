@@ -2144,7 +2144,8 @@
 }
 
 .home-latest-draf-card #progress-bar::after {
-    content: " ";
+    content: attr(data-value) " ";
+    white-space: pre;
     display: block;
     height: 100%;
     width: 0%;
@@ -2165,11 +2166,14 @@
 
 .home-latest-draf-card .progress-bar__wrapper.yellow #progress-bar::after {
     /* background-color: #fccd1e !important; */
+    /* content: attr(data-value) " "; */
     background-image: linear-gradient(#fccd1e, #fccd1e);
     width: 50%;
+    min-width: 50%;
+    height: 100%;
     -webkit-background-clip: padding-box;
     -webkit-text-fill-color: #fccd1e !important;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 
     /* WebKit Fixes */
     -webkit-background-clip: border-box;
@@ -2177,6 +2181,17 @@
 
     will-change: transform;
     transform: translate3d(0, 0, 0);
+}
+
+.progress-bar-fill{
+    background-image: linear-gradient(#fccd1e, #fccd1e);
+    width: 50%;
+    min-width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5px;
 }
 
 .home-latest-draf-card .progress-bar__wrapper.blue #progress-bar::after {
