@@ -558,7 +558,7 @@ $(document).on('click', '.open_photo_model', function () {
                     <div class="swiper-slide">
                         <div class="posts-card-show-post-img">
                             <video controls>
-                                <source src="${media}" type="video/mp4">
+                                <source src="${media}" type="video/mp4" muted>
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -569,7 +569,7 @@ $(document).on('click', '.open_photo_model', function () {
                 mediaElement = `
                     <div class="swiper-slide">
                         <div class="posts-card-show-post-img">
-                            <img src="${media}" alt="Media" />
+                            <img src="${media}" alt="Media"  />
                         </div>
                     </div>
                 `;
