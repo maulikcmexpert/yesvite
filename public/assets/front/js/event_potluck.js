@@ -251,7 +251,7 @@ $(document).on("click", ".plus", function () {
     // // Optional: Update associated UI elements
 
     $("#newQuantity_" + item_id).val(currentValue + 1);
-
+    let totalitemQnt = parseInt(currentValue) + parseInt(innerUserQnt) + 1;
     const maxQuantity = input.data("max");
     if (maxQuantity) {
         const devideCount = container
@@ -273,7 +273,8 @@ $(document).on("click", ".plus", function () {
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
-    if (missingQuantity <= 0 || missingQuantity === 0) {
+    // if (missingQuantity <= 0 || missingQuantity === 0) {
+    if(totalitemQnt >= maxQuantity){
         // If there are no missing items (or excess items), show the success icon
         $("#success_" + category_id).removeClass("d-none");
         $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
@@ -336,6 +337,7 @@ $(document).on("click", ".minus", function () {
             .find(".devide-count");
         devideCount.text(`${parseInt(newValue) + parseInt(innerUserQnt)}/${maxQuantity}`);
     }
+    let totalitemQnt = parseInt(newValue) + parseInt(innerUserQnt);
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
     let spokenQuantity = 0;
@@ -348,7 +350,8 @@ $(document).on("click", ".minus", function () {
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
-    if (missingQuantity === 0 || missingQuantity <= 0) {
+    if(totalitemQnt >= maxQuantity){
+    // if (missingQuantity === 0 || missingQuantity <= 0) {
         // If there are no missing items (or excess items), show the success icon
         $("#success_" + category_id).removeClass("d-none");
         $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
