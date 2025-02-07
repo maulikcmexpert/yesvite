@@ -877,7 +877,6 @@
 
     @push('scripts')
     <script>
-        
             $(document).ready(function() {
                 $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
                 $('#Allcat').on('change', function() {
@@ -922,26 +921,25 @@
                     $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
                     $('.image-item').hide();
                 });
+
                 document.querySelectorAll('.collection-menu').forEach((button) => {
                     button.addEventListener('click', (event) => {
                         event.stopPropagation();
                     });
                 });
      
-        // $(document).ready(function () {
-            const $cookiesBox = $('.cookies-track');
+                const $cookiesBox = $('.cookies-track');
 
-            if (!localStorage.getItem('cookiesBoxDismissed')) {
-                setTimeout(() => {
-                    $cookiesBox.addClass('active');
-                }, 500);
-            }
+                if (!localStorage.getItem('cookiesBoxDismissed')) {
+                    setTimeout(() => {
+                        $cookiesBox.addClass('active');
+                    }, 500);
+                }
 
-            $('.close-btn').on('click', function () {
-                $cookiesBox.removeClass('active');
-                localStorage.setItem('cookiesBoxDismissed', 'true');
-            });
-        // });
+                $('.close-btn').on('click', function () {
+                    $cookiesBox.removeClass('active');
+                    localStorage.setItem('cookiesBoxDismissed', 'true');
+                });
             });
     </script>
 @endpush
