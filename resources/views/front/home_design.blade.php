@@ -39,7 +39,7 @@
                                             id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample">
-                                        @foreach ($categories as $category)
+                                        <!-- @foreach ($categories as $category)
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                     <button class="accordion-button" type="button"
@@ -74,7 +74,43 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endforeach -->
+                                        @foreach ($categories as $textData)
+    @foreach ($textData->categories as $category)
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                <button class="accordion-button" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                    aria-controls="collapse{{ $category->id }}">
+                    {{ $category->category_name }}
+                </button>
+            </h2>
+            <div id="collapse{{ $category->id }}"
+                class="accordion-collapse collapse"
+                aria-labelledby="heading{{ $category->id }}"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        @foreach ($textData->subcategories as $subcategory)
+                            <li>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
+                                        {{ $subcategory->subcategory_name }}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox"
+                                        id="subcategory{{ $subcategory->id }}"
+                                        data-category-id="{{ $category->id }}"
+                                        data-subcategory-id="{{ $subcategory->id }}">
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endforeach
 
                                     </div>
                                 </div>
