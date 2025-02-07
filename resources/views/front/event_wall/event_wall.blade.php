@@ -1505,13 +1505,8 @@
                         <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
-                            <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
-                            <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
-                                value="">
-                            <input type="hidden" class="textcontent" name="postContent" value="">
 
-                            <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
                                 <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"></textarea>
@@ -1557,7 +1552,7 @@
                                             value="{{ $event }}">
                                         <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                             value="1">
-                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
                                         <input type="hidden" name="postContent" id="photoContent" val="">
