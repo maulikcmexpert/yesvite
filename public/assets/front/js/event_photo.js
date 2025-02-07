@@ -353,67 +353,115 @@ $(document).on("click", ".comment-send-icon", function () {
                 }
 
                 if (data.comment_replies && data.comment_replies.length > 0) {
-                    data.comment_replies.forEach(function (reply) {
+                    comment.comment_replies.forEach(function (reply) {
+                        let displayName =
+                            reply.profile ||
+                            generatePlaceholderName(reply.username);
                         const replyHTML = `
-                            <li class="reply-on-comment" data-comment-id="${
-                                reply.id
-                            }">
-                                <div class="commented-user-head">
-                                    <div class="commented-user-profile">
-                                        <div class="commented-user-profile-img">
-                                              ${profileImage}
-                                        </div>
-                                        <div class="commented-user-profile-content">
-                                            <h3>${reply.username}</h3>
-                                            <p>${reply.location || ""}</p>
-                                        </div>
-                                    </div>
-                                    <div class="posts-card-like-comment-right">
-                                        <p>${reply.posttime || "Just now"}</p>
-                                        <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                    </div>
-                                </div>
-                                <div class="commented-user-content">
-                                    <p>${reply.comment || "No content"}</p>
-                                </div>
-                                <div class="commented-user-reply-wrp">
-                                    <div class="position-relative d-flex align-items-center gap-2">
-                                        <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                        <p>${reply.comment_total_likes || 0}</p>
-                                    </div>
-                                    <button class="commented-user-reply-btn">Reply</button>
-                                </div>
-                            </li>
-                        `;
+               
+                    <div class="commented-user-head">
+                        <div class="commented-user-profile">
+                            <div class="commented-user-profile-img">
+                               ${displayName}
+                            </div>
+                            <div class="commented-user-profile-content">
+                                <h3>${reply.username}</h3>
+                                <p>${reply.location || ""}</p>
+                            </div>
+                        </div>
+                        <div class="posts-card-like-comment-right">
+                            <p>${reply.posttime || "Just now"}</p>
+                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="commented-user-content">
+                        <p>${reply.comment || "No content"}</p>
+                    </div>
+                    <div class="commented-user-reply-wrp">
+                        <div class="position-relative d-flex align-items-center gap-2">
+                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            <p>${reply.comment_total_likes || 0}</p>
+                        </div>
+                        <button class="commented-user-reply-btn">Reply</button>
+                    </div>
+                `;
 
-                        // Append the reply inside the current comment's reply list
-                        if (commentId) {
-                            const parentComment = $(
-                                `li[data-comment-id="${commentId}"]`
-                            );
-                            let replyList = parentComment.find(
-                                "ul.primary-comment-replies"
-                            );
-                            if (replyList.length === 0) {
-                                replyList = $(
-                                    '<ul class="primary-comment-replies"></ul>'
-                                ).appendTo(parentComment);
+                        const li = document.createElement("li");
+                        li.className = "reply-on-comment";
+                        li.setAttribute("data-comment-id", reply.id);
+                        li.innerHTML = replyHTML; // Convert HTML string to actual HTML
+
+                        // Find all existing comments
+                        let comments =
+                            document.getElementsByClassName("reply-on-comment");
+                        console.log(comments);
+                        // Convert HTMLCollection to an array and find the target comment
+                        const comment = Array.from(comments).find(
+                            (el) => el.dataset.commentId === parentCommentId
+                        );
+
+                        if (comment) {
+                            console.log("Found comment:", comment);
+
+                            // Find the previous sibling (the comment before this one)
+                            let previousComment =
+                                comment.previousElementSibling;
+                            if (!previousComment) {
+                                $(comment).parent().prepend(li);
                             }
-                            replyList.append(replyHTML);
+                            // Loop until we find the nearest previous <ul> with class "primary-comment-replies"
+                            while (previousComment) {
+                                let parentUl = previousComment.closest(
+                                    ".primary-comment-replies"
+                                );
+                                if (parentUl) {
+                                    console.log("Found the ul:", parentUl);
+                                    parentUl.prepend(li); // Append the new comment properly
+
+                                    // 🔥 Update the comments list to include the newly added <li>
+                                    comments =
+                                        document.getElementsByClassName(
+                                            "reply-on-comment"
+                                        );
+
+                                    console.log(
+                                        "Updated comments list:",
+                                        comments
+                                    );
+                                    break;
+                                }
+                                previousComment =
+                                    previousComment.previousElementSibling;
+                            }
+                        } else {
+                            let comments =
+                                document.getElementsByClassName(
+                                    "commented-user-wrp"
+                                );
+                            let comment = Array.from(comments).find((el) => {
+                                console.log(el.dataset.commentId);
+                                console.log(parentCommentId);
+                                //  el.dataset.commentId ===
+                                // parentCommentId
+                                if (el.dataset.commentId == parentCommentId) {
+                                    return el;
+                                }
+                            });
+                            if (comment) {
+                                console.log(comment);
+                                const parentUl = $(comment).find(
+                                    ".primary-comment-replies"
+                                );
+                                console.log(parentUl);
+                                if (parentUl.length) {
+                                    console.log(
+                                        "Found primary-comment-replies under commented-user-wrp, prepending the new comment."
+                                    );
+                                    parentUl.prepend($(li)); // Insert new comment as the first <li> under the current comment's <ul>
+                                    return;
+                                }
+                            }
                         }
-
-                        const commentCountElement = $(
-                            `#comment_${eventPostId}`
-                        );
-                        const currentCount =
-                            parseInt(commentCountElement.text()) || 0;
-                        commentCountElement.text(
-                            `${currentCount + 1} Comments`
-                        );
-
-                        // Clear input field
-                        commentInput.val("");
-                        $("#parent_comment_id").val(""); // Reset parent comment
                     });
                 }
             }
@@ -430,22 +478,51 @@ $(document).on("click", ".posts-card-like-btn", function () {
     icon.classList.toggle("fa-regular");
     icon.classList.toggle("fa-solid");
 });
-
 $(document).on("click", ".commented-user-reply-btn", function () {
-    // Get the parent's name and comment ID for reply
+    // Find the closest comment element
+
+    $(".post_comment").val("");
+    const parentWrapper = $(this)
+        .closest(".posts-card-show-all-comments-wrp")
+        .prev(".posts-card-main-comment");
+
+    if (!parentWrapper.length) {
+        console.error("Parent wrapper not found!");
+        return;
+    }
     const parentName = $(this)
-        .closest(".commented-user-wrp")
+        .parent()
+        .prev()
+        .prev()
+        .children()
+        .find(".commented-user-profile-content")
         .find("h3")
         .text()
         .trim();
-    const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
+    console.log({ parentName });
+    const parentId = $(this).data("comment-id");
 
-    // Insert the parent's name as @ParentName into the input box
-    const commentBox = $("#post_comment");
+    if (!parentId) {
+        console.error("Parent Comment ID is missing!");
+        return;
+    }
+
+    // Set the parent comment ID value in the hidden field for later use in the AJAX request
+    $(".parent_comment_id").val(parentId); // Store parent comment ID in a hidden field
+
+    // Set the active class on the currently selected comment
+    $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
+    $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
+
+    // Focus the comment box and insert the '@username'
+    const commentBox = parentWrapper.find(".post_comment");
+    if (!commentBox.length) {
+        console.error("Comment input field not found!");
+        return;
+    }
+
+    // Insert the '@username' into the comment box and focus
     commentBox.val(`@${parentName} `).focus();
-
-    // Set the parent comment ID in a hidden input field
-    $("#parent_comment_id").val(parentId);
 });
 
 // $(document).on('click', '.posts-card-like-btn', function () {
@@ -842,19 +919,19 @@ $(document).on("click", ".open_photo_model", function () {
                                     </div>
                                     <button class="commented-user-reply-btn">Reply</button>
                                 </div>
-
+ <ul class="primary-comment-replies"></ul>
                             </li>
-                              <ul class="primary-comment-replies"></ul>
+                             
                         `);
 
                         if (
                             comment.comment_replies &&
                             comment.comment_replies.length > 0
                         ) {
-                            let displayName =
-                                reply.profile ||
-                                generatePlaceholderName(reply.username);
                             comment.comment_replies.forEach(function (reply) {
+                                let displayName =
+                                    reply.profile ||
+                                    generatePlaceholderName(reply.username);
                                 const replyHTML = `
                        
                             <div class="commented-user-head">
@@ -943,15 +1020,25 @@ $(document).on("click", ".open_photo_model", function () {
                                             "commented-user-wrp"
                                         );
                                     let comment = Array.from(comments).find(
-                                        (el) =>
-                                            el.dataset.commentId ===
-                                            parentCommentId
+                                        (el) => {
+                                            console.log(el.dataset.commentId);
+                                            console.log(parentCommentId);
+                                            //  el.dataset.commentId ===
+                                            // parentCommentId
+                                            if (
+                                                el.dataset.commentId ==
+                                                parentCommentId
+                                            ) {
+                                                return el;
+                                            }
+                                        }
                                     );
                                     if (comment) {
                                         console.log(comment);
                                         const parentUl = $(comment).find(
                                             ".primary-comment-replies"
                                         );
+                                        console.log(parentUl);
                                         if (parentUl.length) {
                                             console.log(
                                                 "Found primary-comment-replies under commented-user-wrp, prepending the new comment."

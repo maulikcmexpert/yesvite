@@ -39,7 +39,7 @@
                                             id="Allcat">
                                     </div>
                                     <div class="accordion" id="accordionExample">
-                                        @foreach ($categories as $category)
+                                        <!-- @foreach ($categories as $category)
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                     <button class="accordion-button" type="button"
@@ -74,7 +74,43 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endforeach -->
+                                        @foreach ($categories as $textData)
+    @foreach ($textData->categories as $category)
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                <button class="accordion-button" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                    aria-controls="collapse{{ $category->id }}">
+                    {{ $category->category_name }}
+                </button>
+            </h2>
+            <div id="collapse{{ $category->id }}"
+                class="accordion-collapse collapse"
+                aria-labelledby="heading{{ $category->id }}"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        @foreach ($textData->subcategories as $subcategory)
+                            <li>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
+                                        {{ $subcategory->subcategory_name }}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox"
+                                        id="subcategory{{ $subcategory->id }}"
+                                        data-category-id="{{ $category->id }}"
+                                        data-subcategory-id="{{ $subcategory->id }}">
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endforeach
 
                                     </div>
                                 </div>
@@ -650,7 +686,24 @@
             </div>
             {{-- {{ dd($categories);}} --}}
             <div class="row ">
-                @foreach ($categories as $category)
+            @foreach ($categories as $textData)
+                @foreach ($textData->categories as $category)
+                    @foreach ($textData->subcategories as $subcategory)
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                            data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
+                            <a href="#" class="collection-card card-blue">
+                                <div class="card-img">
+                                    <img src="{{ asset('storage/canvas/' . $textData->filled_image) }}" alt="shower-card">
+                                </div>
+                                <h4>{{ $category->category_name }}</h4>
+                            </a>
+                        </div>
+                    @endforeach
+                @endforeach
+            @endforeach
+
+                <!-- @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
                         @foreach ($subcategory->textdatas as $image)
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
@@ -666,7 +719,7 @@
                             </div>
                         @endforeach
                     @endforeach
-                @endforeach
+                @endforeach -->
                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
@@ -877,25 +930,18 @@
 
     @push('scripts')
     <script>
-        
             $(document).ready(function() {
                 $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                // Handle the "All Categories" checkbox click
                 $('#Allcat').on('change', function() {
                     if ($(this).is(':checked')) {
-                        // Check all individual category checkboxes
                         $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                        // Show all images
                         $('.image-item').show();
                     } else {
-                        // Uncheck all individual category checkboxes
                         $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-                        // Hide all images
                         $('.image-item').hide();
                     }
                 });
 
-                // Handle individual category checkboxes
                 $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
                     // If all individual checkboxes are checked, check "All Categories"
                     const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
@@ -923,21 +969,30 @@
                     }
                 });
                 $('#resetCategories').on('click', function(e) {
-                     e.preventDefault(); // Prevent default anchor be havior
-
-                    // Uncheck all checkboxes
+                     e.preventDefault(); 
                     $('#Allcat').prop('checked', false);
                     $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-
-                    // Hide all images
                     $('.image-item').hide();
                 });
 
-                $(document).on('click','.collection-menu',function (e) {
-                    e.stopPropagation();
-                    console.log(1);
-                    
-                })
+                document.querySelectorAll('.collection-menu').forEach((button) => {
+                    button.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
+                });
+     
+                const $cookiesBox = $('.cookies-track');
+
+                if (!localStorage.getItem('cookiesBoxDismissed')) {
+                    setTimeout(() => {
+                        $cookiesBox.addClass('active');
+                    }, 500);
+                }
+
+                $('.close-btn').on('click', function () {
+                    $cookiesBox.removeClass('active');
+                    localStorage.setItem('cookiesBoxDismissed', 'true');
+                });
             });
     </script>
 @endpush
