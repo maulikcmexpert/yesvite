@@ -858,6 +858,7 @@
     border: 1px solid var(--borderColor);
     border-radius: 16px;
     padding: 16px 10px 16px 10px;
+    margin-bottom: 20px;
 }
 .item-on img {
     width: 24px;
