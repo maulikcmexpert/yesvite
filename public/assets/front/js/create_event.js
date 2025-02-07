@@ -1568,7 +1568,7 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    var total_all_activity=$('.event_all_activity_list').length;
+    var total_all_activity = $(".event_all_activity_list").length;
     $(".step_1_activity").text(total_all_activity + " Activities");
     // $(".step_1_activity").text(i + " Activity");
 
@@ -2799,7 +2799,8 @@ $(document).on("blur", "#ac-start-time", function () {
 
     $(".new_activity").html("");
     $("#end-time").val("");
-    $(".activity_total_count").text('('+0+')');
+    $(".activity_total_count").text("(" + 0 + ")");
+    $(".step_1_activity").text("0 Activity");
     $("#ac-end-time").val("");
 });
 
@@ -3520,7 +3521,7 @@ $(document).on("click", "#save_activity_schedule", function () {
 
     if (isValid == 0) {
         isStartTime = 0;
-            var total_activity_count=$('.event_all_activity_list').length;
+        var total_activity_count = $(".event_all_activity_list").length;
         if (total_activity_count >= 1) {
             // if (total_activities == 1) {
             //     $(".step_1_activity").text(total_activities + " Activity");
@@ -6381,7 +6382,7 @@ $(document).on("click", ".final_checkout", function () {
     // });
 });
 
-$(document).on("click", "#final_create_event", function (e) {
+$(document).on("click", ".final_create_event", function (e) {
     eventData.is_update_event = "0";
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;

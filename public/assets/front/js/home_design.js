@@ -65,15 +65,11 @@ $(document).ready(function() {
     });
 
     $(document).on('input','#search_design_category',function(){
-
         var search_value=$(this).val();
         $('#home_loader').css('display','flex');
         $.ajax({
             url: base_url + "search_features", 
             method: 'GET',
-            // headers: {
-            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
-            // },
             data: { search: search_value}, 
             success: function (response) {
                 console.log("Remove successful: ", response);
@@ -86,12 +82,12 @@ $(document).ready(function() {
                     
                 } else {
                     $('.list_all_design_catgeory').html('No Design Found');
-
+                    $('.total_design_count').text(response.count +' Items')
                     $('#home_loader').css('display','none');
                 }
             },
             error: function (error) {
-            
+               toastr.error('Some thing went wrong');
             }
         });
     });
