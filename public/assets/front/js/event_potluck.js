@@ -634,7 +634,7 @@ function updateTOP(categoryIndex) {
         }
     }
 
-    $('category-count-'+ categoryIndex).text(totalcount)
+    $('.category-count-'+ categoryIndex).text(totalcount)
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
