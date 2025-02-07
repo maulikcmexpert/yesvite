@@ -294,17 +294,21 @@
                                                         @endif
 
                                                         @if ($post['post_type'] == '2')
-                                                            <!-- <div class="posts-card-inner-wrp">
+                                                        @if($post['post_message']=="")
+                                                            <div class="posts-card-inner-wrp">
                                                                 <h3 class="posts-card-inner-questions">
                                                                     {{ $post['poll_question'] }}
                                                                 </h3>
-                                                            </div> -->
+                                                            </div>
+                                                        @endif    
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
                                                             <!-- <div class="posts-card-inner-wrp"> -->
+                                                            @if($post['post_message']!="")
                                                                     <h3 class="posts-card-inner-questions">
                                                                         {{ $post['poll_question'] }}</h3>
+                                                             @endif           
                                                                 <!-- </div> -->
                                                                 <div class="post-card-poll-inner">
                                                                     <h5>{{ $post['total_poll_vote'] }} Votes
