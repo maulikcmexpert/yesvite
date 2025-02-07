@@ -127,7 +127,7 @@ class HomeFrontController extends BaseController
             )
         );
 
-        $count = $categories->count();
+        $count = $totalTextDataCount;
 
 
         return view('layout', compact(
