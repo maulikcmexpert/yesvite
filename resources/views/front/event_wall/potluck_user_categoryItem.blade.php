@@ -45,7 +45,8 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category_id }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category_id }}" data-categorykey="{{ $key }}" 
+                                                                                                data-itemkey="{{ $itemkey }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -65,6 +66,7 @@
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category_id }}"
+                                                                                                data-itemkey="{{ itemkey }}"
                                                                                                 data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
