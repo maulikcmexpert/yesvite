@@ -719,7 +719,10 @@ class EventPotluckController extends Controller
             'event_potluck_item_id' => $itemId
         ])->first();
 
-     
+        if ($item) {
+            $isUser = true; // If quantity is greater than zero
+        }
+        
         // Check if there's enough quantity available
         if ($checkCarryQty < $checkQty && $isUser==false ) {
             // Check if the user has already added this item
