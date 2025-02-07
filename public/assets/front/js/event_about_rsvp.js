@@ -239,7 +239,7 @@ $(".modal").on("hidden.bs.modal", function () {
     var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
 
 
-    if (rsvpStatus !== "1") {
+    if (rsvpStatus !== 1) {
         clearModalValues();
     }
 });
@@ -247,7 +247,7 @@ $(".modal").on("hidden.bs.modal", function () {
 $(document).on("click", ".btn-close", function () {
     var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
 
-    if (rsvpStatus !== "1") {
+    if (rsvpStatus !== 1) {
         clearModalValues();
     }
 });
