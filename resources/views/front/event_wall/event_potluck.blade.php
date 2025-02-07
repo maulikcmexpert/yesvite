@@ -651,11 +651,15 @@
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
+                                                                    <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                    class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
+                                                                    aria-labelledby="sprite-{{ $item['id'] }}"
+                                                                    data-bs-parent="#accordionFlushExample">
                                                                         @if ($login_user_id === $users['user_id'])
-                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                            {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
 
@@ -815,17 +819,17 @@
                                                                                     </div>
 
                                                                                 </div>
-                                                                            </div>
+                                                                            {{-- </div> --}}
                                                                         @else
                                                                             {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
 
-                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse "
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body"
                                                                                     id="user-container-{{ $item['id'] }}">
                                                                                     <div
@@ -889,8 +893,9 @@
                                                                                             class="ms-auto slide-round">{{ $item['spoken_quantity'] }}</span>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            {{-- </div> --}}
                                                                         @endif
+                                                                        </div>
                                                                     @endforeach
                                                                 </div>
                                                             @endforeach
