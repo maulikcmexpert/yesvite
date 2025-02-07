@@ -876,6 +876,15 @@
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.item-on h5.add-item-under-text{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color:#fff;
+}
+
 .item-on h5 {
     display: flex;
     font-size: 12px;
