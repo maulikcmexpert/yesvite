@@ -876,7 +876,7 @@ class EventPhotoController extends Controller
                     'comment_replies' => []
 
                 ];
-                foreach ($commentVal->replies as $reply) {
+                foreach ($values->replies as $reply) {
                     $mainParentId = (new EventPostComment())->getMainParentId($reply->parent_comment_id);
 
                     $replyCommentInfo['id'] = $reply->id;
