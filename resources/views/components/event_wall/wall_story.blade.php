@@ -1,4 +1,4 @@
-{{dd($storiesList)}}
+{{-- {{dd($storiesList)}} --}}
 <div class="wall-main-story-wrp">
     <div class="swiper story-slide-slider">
         <div class="swiper-wrapper">
@@ -48,9 +48,9 @@
                         <button>
                             <div class="wall-story-item-img">
                                 @if (!empty($Allstory['profile']))
-                                    <img id="story-profile-pic-{{ $Allstory['id'] }}" src="{{ $Allstory['profile'] }}"
-                                        class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})" />
+                                    <img id="story-profile-pic-{{ $Allstory['user_id'] }}" src="{{ $Allstory['profile'] }}"
+                                        class="story-profile-pic-{{ $Allstory['user_id'] }}" alt=""
+                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})" />
                                 @else
                                     @php
                                         $name = $Allstory['username'] ?? ''; // Ensure username is set
@@ -66,8 +66,8 @@
 
                                         $fontColor = 'fontcolor' . strtoupper($firstInitial);
                                     @endphp
-                                    <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['id'] }}"
-                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
+                                    <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['user_id'] }}"
+                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})">
                                         {{ $initials }}
                                     </h5>
                                 @endif
