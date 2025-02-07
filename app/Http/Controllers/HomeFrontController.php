@@ -141,7 +141,7 @@ class HomeFrontController extends BaseController
         $query = $request->input('search');
 
         $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
-            ->with(['subcategories.textdatas']) // Load subcategories and their textdata
+            ->with(['subcategory.textdatas']) // Load subcategories and their textdata
             ->orderBy('id', 'desc')
             ->get();
 
