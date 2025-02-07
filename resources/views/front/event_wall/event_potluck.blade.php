@@ -301,6 +301,7 @@
                                                             Missing</h6>
 
                                                             @if($category['totalOver'] > 0)
+                                                            {{dd(1)}}
                                                             <span
                                                             class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
                                                             style="">
