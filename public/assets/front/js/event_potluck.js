@@ -690,8 +690,6 @@ var buttonPlus  = $(".qty-btn-plu");
 var buttonMinus = $(".qty-btn-min");
 
 var incrementPlus = buttonPlus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
@@ -699,8 +697,6 @@ $n.val(Number($n.val())+1 );
 });
 
 var incrementMinus = buttonMinus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
