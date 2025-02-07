@@ -384,7 +384,7 @@ $(document).ready(function () {
                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                     </button>
                                     <p id="commentTotalLike_${data.id}">
-                                  1
+                                  0
                                     </p>
                                 </div>
                                 <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>

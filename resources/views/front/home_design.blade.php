@@ -41,7 +41,6 @@
                                     <div class="accordion" id="accordionExample">
                                
                                                         @foreach ($categories as $textData)
-                                                            <!-- @foreach ($textData->categories as $category) -->
                                                                 <div class="accordion-item">
                                                                     <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
                                                                         <button class="accordion-button" type="button"
@@ -57,7 +56,6 @@
                                                                         data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <ul>
-                                                                                <!-- @foreach ($textData->subcategories as $subcategory) -->
                                                                                     <li>
                                                                                         <div class="d-flex align-items-center justify-content-between">
                                                                                             <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
@@ -69,12 +67,10 @@
                                                                                                 data-subcategory-id="{{ $textData->subcategories->id }}">
                                                                                         </div>
                                                                                     </li>
-                                                                                <!-- @endforeach -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            <!-- @endforeach -->
                                                         @endforeach
 
                                     </div>
@@ -652,8 +648,7 @@
             {{-- {{ dd($categories);}} --}}
             <div class="row ">
             @foreach ($categories as $textData)
-                <!-- @foreach ($textData->categories as $category)
-                    @foreach ($textData->subcategories as $subcategory) -->
+            
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                             data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
@@ -664,27 +659,10 @@
                                 <h4>{{ $textData->categories->category_name }}</h4>
                             </a>
                         </div>
-                    <!-- @endforeach
-                @endforeach -->
+            
             @endforeach
 
-                <!-- @foreach ($categories as $category)
-                    @foreach ($category->subcategory as $subcategory)
-                        @foreach ($subcategory->textdatas as $image)
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
-                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
-                                <a href="#" class="collection-card card-blue">
-                                    <div class="card-img">
-                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                            alt="shower-card">
-                                    </div>
-                                    <h4>{{ $category->category_name }}</h4>
-                                </a>
-                            </div>
-                        @endforeach
-                    @endforeach
-                @endforeach -->
+              
                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">

@@ -54,7 +54,9 @@
 
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['podluck'] == 1) ||  // Host and Potluck enabled
-            ($eventDetails['is_host'] == 0 && $eventDetails['rsvp_status'] == '1' ) // Not host but RSVP confirmed
+            ($eventDetails['is_host'] == 0 && $eventDetails['rsvp_status'] == '1' ) ||
+            ($eventDetails['is_co_host'] == 1 && $eventDetails['podluck'] == 1) ||
+            ($eventDetails['is_co_host'] == 0 && $eventDetails['rsvp_status'] =='1')  // Not host but RSVP confirmed
         )
         <!-- Potluck Tab -->
         <a href="{{ route('event.event_potluck', ['id' => encrypt($event)]) }}"
