@@ -598,7 +598,7 @@
                                                                         </button>
                                                                     </h2>
                                                                     <input type="hidden"
-                                                                    class="innerUserQnt-{{ $index }}-{{ $key }}"
+                                                                    class="innerUserQnt-{{ $key }}-{{ $index }}"
                                                                     value="{{ $item['innerUserQnt'] }}">
                                                                     @if(empty($item['item_carry_users']))
                                                                     <div id="lumpia-collapseOne"
