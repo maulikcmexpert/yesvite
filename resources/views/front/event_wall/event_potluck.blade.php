@@ -909,7 +909,7 @@
 
                     @csrf
                     <div class="input-form">
-                        <input class="form-control" type="text"id="category" name="category"
+                        <input class="form-control" oninput="clearError(this)" type="text"id="category" name="category"
                             placeholder="ie, Appetizers, Salads, Main Dishes">
                         <span class="sub-con"><span id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
