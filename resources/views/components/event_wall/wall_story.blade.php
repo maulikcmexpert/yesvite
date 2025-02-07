@@ -198,8 +198,3 @@
         </div>
     @endif
 @endforeach
-@if ($users->profile != '')
-    <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}" alt="user-img"
-        class="profile-pic" id="profile-pic-{{ $users->id }}"
-        onclick="showStories( {{ $event }},{{ $users->id }})">
-@else
