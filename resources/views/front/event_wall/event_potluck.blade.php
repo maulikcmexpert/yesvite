@@ -1078,7 +1078,7 @@
             <div class="modal-body">
                 <div class="delete-modal">
                     <div class="delete-icon">
-                        <img src="./assets/img/deleteicon.svg" alt="delete">
+                        <img src="{{asset('assets/front/image/info-circle.png')}}" alt="delete">
                     </div>
                     <h4>Delete Potluck Category</h4>
                     <h4>Deleting this category will delete all items under this category.</h4>
