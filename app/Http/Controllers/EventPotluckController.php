@@ -677,15 +677,15 @@ class EventPotluckController extends Controller
 
         // if ($input['quantity'] <= $checkQty) {
         $checkIsExist = UserPotluckItem::where([
-            'id' => $checkCarryQty['id']
+            'id' => $checkCarryQty['id'],'user_id'=>$user->id,
         ])->first();
         if ($checkIsExist != null) {
             $checkIsExist->quantity = $request['quantity'];
             $checkIsExist->save();
         }
 
-        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id']])->first();
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id']])->sum('quantity');
+        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id'],'user_id'=>$user->id,])->first();
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id'],'user_id'=>$user->id,])->sum('quantity');
 
         $getCarryUser =  [
             "id" => $getUserItemData->id,
@@ -796,7 +796,7 @@ class EventPotluckController extends Controller
         $user  = Auth::guard('web')->user();
         $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'user_id'=>$user->id,'event_potluck_item_id' => $request['category_item_id']])->first();
         $checkIsExist = UserPotluckItem::where([
-            'id' =>  $checkCarryQty['id']
+            'id' =>  $checkCarryQty['id'], 'user_id'=>$user->id
         ])->first();
 
         $event_potluck_item_id = $checkIsExist->event_potluck_item_id;
@@ -806,7 +806,7 @@ class EventPotluckController extends Controller
         }
 
 
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id])->sum('quantity');
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id , 'user_id'=>$user->id,'event_potluck_category_id' => $request['category_id'],])->sum('quantity');
         return response()->json([
             'success' => true,
             'spoken_for' => $spoken_for,
