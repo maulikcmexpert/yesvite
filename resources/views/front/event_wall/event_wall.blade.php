@@ -409,12 +409,27 @@
                                                             <div class="posts-card-like-comment-left">
                                                                 <ul type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">
-                                                                    @php $i=0; @endphp
+                                                                    @php $i=0; $j = 0; @endphp
                                                                     @foreach ($post['reactionList'] as $reaction)
                                                                     
 
                                                                     <!-- Smiley Emoji -->
-                                                                        <li >
+                                                                    
+                                                                    
+                                                                    @if ($j==0 && ($post['self_reaction'] == '\u{1F604}' || 
+                                                                        $post['self_reaction'] == '\u{1F60D}' ||
+                                                                        $post['self_reaction'] == '\u{2764}' ||
+                                                                        $post['self_reaction'] == '\u{1F44D}' ||
+                                                                        $post['self_reaction'] == '\u{1F44F}'))
+                                                                        <li id="reactionImage_{{ $post['id'] }}">
+                                                                            @php $j++; @endphp
+                                                                    @else
+                                                                    <li>
+                                                                    @endif
+                                                                  
+                                                                    
+                                                                        
+                                                                           
                                                                             @if ($reaction == '\u{1F604}')
                                                                                 <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
                                                                                     alt="Smiley Emoji">
