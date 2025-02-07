@@ -267,9 +267,9 @@ $(document).on("click", ".plus", function () {
     categoryList.find(".itemQty").each(function () {
         spokenQuantity += parseInt($(this).val(), 10) || 0;
     });
-    let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
-    const totalcategoryQnt = parseInt(categoryCount) + currentValue + 1;
-    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+    // let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
+    // const totalcategoryQnt = parseInt(categoryCount) + currentValue + 1;
+    // $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
@@ -287,26 +287,26 @@ $(document).on("click", ".plus", function () {
         $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
-    // const overQuantity = spokenQuantity - totalQuantity; // Only show if this is greater than 0
+    const overQuantity = spokenQuantity - totalQuantity; // Only show if this is greater than 0
 
-    // // Get the over-quantity element
-    // const overQuantityElement = categoryList.find(
-    //     ".over-quantity-" + category_id
-    // );
+    // Get the over-quantity element
+    const overQuantityElement = categoryList.find(
+        ".over-quantity-" + category_id
+    );
 
-    // // Update the over quantity text
-    // const successIcon = categoryList.find("#success" + category_id);
-    // // Update the over quantity text
-    // overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
+    // Update the over quantity text
+    const successIcon = categoryList.find("#success" + category_id);
+    // Update the over quantity text
+    overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
 
-    // // Show or hide the over quantity based on the calculation
-    // if (overQuantity > 0) {
-    //     overQuantityElement.removeClass("d-none"); // Show the over-quantity element
-    //     $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
-    // } else {
-    //     overQuantityElement.addClass("d-none"); // Hide the over-quantity element
-    //     // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
-    // }
+    // Show or hide the over quantity based on the calculation
+    if (overQuantity > 0) {
+        overQuantityElement.removeClass("d-none"); // Show the over-quantity element
+        $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
+    } else {
+        overQuantityElement.addClass("d-none"); // Hide the over-quantity element
+        // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
+    }
     updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
@@ -326,9 +326,9 @@ $(document).on("click", ".minus", function () {
     $("#newQuantity_" + item_id).val(newValue);
 
     
-    let categoryCount= $(".category-count-"+categoryKey).text();
-   const totalcategoryQnt = parseInt(categoryCount) - 1
-    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+//     let categoryCount= $(".category-count-"+categoryKey).text();
+//    const totalcategoryQnt = parseInt(categoryCount) - 1
+//     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
 
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
@@ -365,22 +365,22 @@ $(document).on("click", ".minus", function () {
         $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
-    // const overQuantity = spokenQuantity - totalQuantity;
-    // const overQuantityElement = categoryList.find(
-    //     ".over-quantity-" + category_id
-    // );
+    const overQuantity = spokenQuantity - totalQuantity;
+    const overQuantityElement = categoryList.find(
+        ".over-quantity-" + category_id
+    );
 
-    // // Update the over quantity text
-    // overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
+    // Update the over quantity text
+    overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
 
-    // // Show or hide the over quantity based on the calculation
-    // if (overQuantity > 0) {
-    //     overQuantityElement.removeClass("d-none"); // Show the over-quantity element
-    //     $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
-    // } else {
-    //     overQuantityElement.addClass("d-none"); // Hide the over-quantity element
-    //     // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
-    // }
+    // Show or hide the over quantity based on the calculation
+    if (overQuantity > 0) {
+        overQuantityElement.removeClass("d-none"); // Show the over-quantity element
+        $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
+    } else {
+        overQuantityElement.addClass("d-none"); // Hide the over-quantity element
+        // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
+    }
     updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
@@ -601,6 +601,7 @@ function updateTOP(categoryIndex) {
 
     let totalMissing = 0;
     let totalOver = 0;
+    let totalcount = 0;
 
     for (let i = 0; i < totalItems; i++) {
         let categoryItem = accordions[i];
@@ -619,9 +620,11 @@ function updateTOP(categoryIndex) {
         console.log({ inputQty });
         let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
         console.log({ innerUserQnt });
+        
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
+        totalcount += inputQty 
         console.log({ inputQty });
 
         if (inputQty < requiredQty) {
@@ -630,6 +633,8 @@ function updateTOP(categoryIndex) {
             totalOver += inputQty - requiredQty;
         }
     }
+
+    $('.category-count-'+ categoryIndex).text(totalcount)
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
