@@ -409,7 +409,10 @@
                                                             <div class="posts-card-like-comment-left">
                                                                 <ul type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">
-                                                                    @foreach ($postList['reactionList'] as $reaction)
+                                                                    @php $i=0; @endphp
+                                                                    @foreach ($post['reactionList'] as $reaction)
+                                                                    
+
                                                                     <!-- Smiley Emoji -->
                                                                         <li >
                                                                             @if ($reaction == '\u{1F604}')
@@ -435,8 +438,9 @@
                                                                                     class="emoji" data-emoji="👏"
                                                                                     data-unicode="\\u{1F44F}">
                                                                                 @endif
-                                                                                
+
                                                                         </li>
+                                                                        @php $i++; if($i==3){break;} @endphp
                                                                     @endforeach
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
