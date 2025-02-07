@@ -48,12 +48,10 @@
                         <button>
                             <div class="wall-story-item-img">
                                 @if (!empty($Allstory['profile']))
-                                <img id="story-profile-pic-{{ $Allstory['id'] }}"
-                                    src="{{ $Allstory['profile'] }}"
-                                    class="story-profile-pic-{{ $Allstory['id'] }}"
-                                    alt=""
-                                    onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})" />
-                            @else
+                                    <img id="story-profile-pic-{{ $Allstory['id'] }}" src="{{ $Allstory['profile'] }}"
+                                        class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
+                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})" />
+                                @else
                                     @php
                                         $name = $Allstory['username'] ?? ''; // Ensure username is set
 
@@ -69,9 +67,9 @@
                                         $fontColor = 'fontcolor' . strtoupper($firstInitial);
                                     @endphp
                                     <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['id'] }}"
-                            onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
-                            {{ $initials }}
-                        </h5>
+                                        onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
+                                        {{ $initials }}
+                                    </h5>
                                 @endif
 
 
@@ -153,14 +151,30 @@
 </div>
 
 @foreach ($storiesList as $Allstory)
-    {{-- {{dd($Allstory)}} --}}
+    {{dd($Allstory)}}
     @if ($Allstory['id'] !== $users->id)
         <!-- Ensure we only show modals for different stories -->
         <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
             <div class="modal-content">
                 <div class="story-seen-profile-wrp">
                     <div class="story-seen-profile-img">
-                        <img src="{{ $Allstory['profile'] }}">
+                        @if ($Allstory['profile'] != '')
+                            <img src="{{ $Allstory['profile'] }}">
+                        @else
+                            @php
+                                $parts = explode(' ', trim($Allstory['username']));
+
+                                // Get first and second initials
+                                $firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
+                                $secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
+
+                                $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+                                $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                            @endphp
+                            <h5 class="{{ $fontColor }}" class="profile-pic">
+                                {{ $initials }}
+                            </h5>
+                        @endif
                     </div>
                     <div class="story-seen-profile-content">
                         <h3>{{ $Allstory['username'] }}</h3>
@@ -184,3 +198,8 @@
         </div>
     @endif
 @endforeach
+@if ($users->profile != '')
+    <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}" alt="user-img"
+        class="profile-pic" id="profile-pic-{{ $users->id }}"
+        onclick="showStories( {{ $event }},{{ $users->id }})">
+@else
