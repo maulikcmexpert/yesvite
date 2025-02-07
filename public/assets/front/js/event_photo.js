@@ -890,7 +890,8 @@ $(document).on("click", ".download_img_single", function () {
 $(document).on("click", ".open_photo_model", function () {
     clearTimeout(pressTimer); // Clear the timer
     console.log("Mouse up or leave detected");
-
+    const commentInput = $("#post_comment");
+    commentInput.val("");
     if (!isLongPress) {
         // If it wasn't a long press, open the modal (short press behavior)
         console.log("Short press detected");
