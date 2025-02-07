@@ -353,32 +353,17 @@
                                                         @endif
 
                                                         @if ($post['post_type'] == '2')
-                                                         @if($post['post_message']=="")
                                                             <div class="posts-card-inner-wrp">
                                                                 <h3 class="posts-card-inner-questions">
                                                                     {{ $post['poll_question'] }}</h3>
                                                             </div>
-                                                           @endif 
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
-                                                                    @if($post['post_message']!="")
-                                                                            <h3 class="posts-card-inner-questions">
-                                                                                {{ $post['poll_question'] }}</h3>
-                                                                    @endif  
                                                                 <div class="post-card-poll-inner">
-                                                                <div class="d-flex align-items-center justify-content-between w-100 mb-1">
-                                                                <h5>
-                                                                    {{ $post['total_poll_vote'] }} Votes
-                                                                    <span>{{ $post['poll_duration'] }} left</span>
-                                                                </h5>
-                                                                    <svg style="width: 18px;height:18px" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M16.5 16.5H1.5C1.1925 16.5 0.9375 16.245 0.9375 15.9375C0.9375 15.63 1.1925 15.375 1.5 15.375H16.5C16.8075 15.375 17.0625 15.63 17.0625 15.9375C17.0625 16.245 16.8075 16.5 16.5 16.5Z" fill="#94A3B8"></path>
-                                                                        <path d="M7.3125 3V16.5H10.6875V3C10.6875 2.175 10.35 1.5 9.3375 1.5H8.6625C7.65 1.5 7.3125 2.175 7.3125 3Z" fill="#94A3B8"></path>
-                                                                        <path d="M2.25 7.5V16.5H5.25V7.5C5.25 6.675 4.95 6 4.05 6H3.45C2.55 6 2.25 6.675 2.25 7.5Z" fill="#94A3B8"></path>
-                                                                        <path d="M12.75 11.25V16.5H15.75V11.25C15.75 10.425 15.45 9.75 14.55 9.75H13.95C13.05 9.75 12.75 10.425 12.75 11.25Z" fill="#94A3B8"></path>
-                                                                    </svg>
-                                                                    </div>
+                                                                    <h5>{{ $post['total_poll_vote'] }} Votes
+                                                                        <span>{{ $post['poll_duration'] }} left</span>
+                                                                    </h5>
                                                                     @foreach ($post['poll_option'] as $index => $option)
                                                                         <div class="poll-click-wrp poll-progress-one"
                                                                             data-poll-id ="{{ $post['poll_id'] }}"
@@ -1520,8 +1505,13 @@
                         <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
+                            <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
+                            <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
+                                value="">
+                            <input type="hidden" class="textcontent" name="postContent" value="">
 
+                            <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
                                 <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"></textarea>
@@ -1567,7 +1557,7 @@
                                             value="{{ $event }}">
                                         <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                             value="1">
-                                        <input type="hidden" name="post_type" id="photoPostType" value="">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
                                         <input type="hidden" name="postContent" id="photoContent" val="">
