@@ -890,9 +890,9 @@ $(document).on("click", ".open_photo_model", function () {
                                     </div>
                                     <button class="commented-user-reply-btn">Reply</button>
                                 </div>
-
+ <ul class="primary-comment-replies"></ul>
                             </li>
-                              <ul class="primary-comment-replies"></ul>
+                             
                         `);
 
                         if (
