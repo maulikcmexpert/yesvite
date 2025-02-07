@@ -590,8 +590,12 @@ border-radius: 20px;
 padding: 10px 20px;
 }
 
-.step_2 .search-wrapper .content{ 
+.step_2 .collection-wrapper .content{ 
    max-width: 95%;
+}
+
+.step_2 .collection-card h4{
+    font-size: 20px;
 }
 
 .collection-wrapper .filter-main-wrp .filters-drp .dropdown::after{
