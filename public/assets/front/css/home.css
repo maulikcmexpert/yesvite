@@ -1031,9 +1031,9 @@
         align-items: flex-start;
     }
 
-    .collection-wrapper .filter-main-wrp h5.total-items {
+    /* .collection-wrapper .filter-main-wrp h5.total-items {
         margin-left: 0 !important;
-    }
+    } */
 
     .collection-wrapper .filter-dropdowns {
         margin-top: 10px;
