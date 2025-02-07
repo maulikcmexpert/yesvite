@@ -302,7 +302,7 @@ $(document).ready(function () {
                                 console.log({ reaction });
                                 console.log(reactionIcons[reaction]);
                                 //let reaction = "\u{2764}";
-                                reactionImageHtml = `<img src="${reactionIcons["\u{2764}"]}" alt="Reaction Emoji">`;
+                                reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                             }
                         }
                         button.removeClass("liked"); // Remove liked class
