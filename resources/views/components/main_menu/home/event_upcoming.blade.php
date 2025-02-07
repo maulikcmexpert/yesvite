@@ -15,7 +15,7 @@
           $i=0;
           $colorClass = $series[$colorIndex % count($series)];
           $colorIndex++;
-          $eventRoute = ($events['event_wall'] == "0")
+          $eventRoute = ($events['event_wall'] == "0" &&($events['is_event_owner'] == 1 || $events['is_co_host'] == "1"))
                 ? route('event.event_about', encrypt($events['id']))
                 : route('event.event_wall', encrypt($events['id']));
           @endphp
@@ -48,7 +48,10 @@
                   <ul class="home-upcoming-events-card-left-detail">
                       @if($events['is_event_owner']==1)
                           <li><span>Hosting</span></li>
-                      @else
+                      @elseif($events['is_co_host']=="1")
+                      <li><span>Co-Hosting</span></li>
+                      @endif
+                      @if($events['is_event_owner']!=1)
                               @if($events['rsvp_status'] == '1')
                                   <li><span>Guest : </span> RSVP - Yes</li>
                               @elseif($events['rsvp_status'] == '2')

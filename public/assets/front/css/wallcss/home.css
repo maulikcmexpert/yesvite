@@ -1222,6 +1222,7 @@ main {
   line-height: 26.4px;
   color: var(--primary-black);
   margin-bottom: 0px;
+  width: max-content;
 }
 
 .posts-card-head-left-content p{
@@ -1424,6 +1425,7 @@ main {
   margin-bottom: 0px;
   color: var(--lightgreay);
   margin-left: 5px;
+  min-width: 43px;
 }
 
 .posts-card-like-comment-left h6{
@@ -1452,6 +1454,7 @@ main {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .posts-card-like-comment-right button{
@@ -1602,6 +1605,7 @@ main {
   line-height: 22px;
   color: var(--secondary-black);
   margin: 10px 0px;
+  word-break: break-all;
 }
 
 .commented-user-reply-wrp .posts-card-like-btn{

@@ -265,21 +265,8 @@
                                     </div>
                                 </div>
                                 <div class="user-contacts" id="yesvitePhones">
+                                @include('front.ajax_phones', ['yesvite_phone' => $yesvite_phone])
 
-                                    {{-- <div class="mb-3 mt-2">
-                                        <a href="{{ asset('assets/front/csv/demo.xlsx') }}" class="cmn-btn" download>
-                                            Download Demo CSV
-                                        </a>
-                                    </div> --}}
-                                    @if(empty($yesvite_phone))
-                                    <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="csv_file" class="pt-2">
-                                        <button class="cmn-btn" type="submit">Import CSV</button>
-                                    </form>
-                                    @else
-                                    @include('front.ajax_phones', ['yesvite_phone' => $yesvite_phone])
-                                    @endif
                                 </div>
                             </div>
 
@@ -657,7 +644,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+            <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
             @csrf
                 <div class="modal-body guest-tab">
                     <div class="uploadcsv-wrp">
@@ -725,14 +712,14 @@
                 <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
                     <!-- <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a> -->
-                    <a href="{{ asset('assets/front/csv/demo.xlsx') }}" 
-                            download="demo.xlsx" 
+                    <a href="{{ asset('assets/front/csv/demo.csv') }}" 
+                            download="demo.csv" 
                             type="button" 
                             class="cmn-btn download-csv-btn download">
                             Download CSV
                             </a>
 
-                    <button type="submit" class="cmn-btn click-to-upload-btn">Click to Upload</button>
+                    <button type="button" class="cmn-btn click-to-upload-btn">Click to Upload</button>
                 </div>
 
                                     

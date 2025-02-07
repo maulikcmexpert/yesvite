@@ -111,10 +111,8 @@ class EventListController extends Controller
                 } else {
                     $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                 $eventDetail['user_id'] = $value->user->id;
                 $eventDetail['self_id'] = $user->id;
                 $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
@@ -324,10 +322,8 @@ class EventListController extends Controller
                 } else {
                     $eventPastDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventPastDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventPastDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventPastDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
@@ -688,10 +684,13 @@ class EventListController extends Controller
                 } else {
                     $eventPastDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventPastDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventPastDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                // $eventPastDetail['is_co_host'] = "0";
+                // if ($isCoHost != null) {
+                //     $eventPastDetail['is_co_host'] = $isCoHost->is_co_host;
+                // }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventPastDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
+                
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
@@ -888,10 +887,12 @@ class EventListController extends Controller
                 } else {
                     $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                // $eventDetail['is_co_host'] = "0";
+                // if ($isCoHost != null) {
+                //     $eventDetail['is_co_host'] = $isCoHost->is_co_host;
+                // }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                 $eventDetail['self_id'] = $user->id;
 
                 $eventDetail['user_id'] = $value->user->id;
@@ -1095,10 +1096,12 @@ class EventListController extends Controller
                 } else {
                     $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                // $eventDetail['is_co_host'] = "0";
+                // if ($isCoHost != null) {
+                //     $eventDetail['is_co_host'] = $isCoHost->is_co_host;
+                // }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                 $eventDetail['user_id'] = $value->user->id;
                 $eventDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventDetail['message_to_guests'] = $value->message_to_guests;
@@ -1371,10 +1374,8 @@ class EventListController extends Controller
                 } else {
                     $eventPastDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                 }
-                $eventPastDetail['is_co_host'] = "0";
-                if ($isCoHost != null) {
-                    $eventPastDetail['is_co_host'] = $isCoHost->is_co_host;
-                }
+                $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                $eventPastDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
@@ -1528,9 +1529,8 @@ class EventListController extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
-                    if ($isCoHost != null) {
-                        $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                    }
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
@@ -1688,7 +1688,8 @@ class EventListController extends Controller
                     $eventDetail['user_id'] = $value->event->user->id;
                     $eventDetail['event_name'] = $value->event->event_name;
                     $eventDetail['is_event_owner'] = ($value->event->user->id == $user->id) ? 1 : 0;
-                    $eventDetail['is_co_host'] = $value->is_co_host;
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                     $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                     $eventDetail['message_to_guests'] = $value->event->message_to_guests;
                     $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
@@ -1854,9 +1855,8 @@ class EventListController extends Controller
                     $eventDetail['event_name'] = $value->event->event_name;
                     $eventDetail['is_event_owner'] = ($value->event->user->id == $user->id) ? 1 : 0;
                     $isCoHost =     EventInvitedUser::where(['event_id' =>  $value->event->id, 'user_id' => $user->id])->first();
-                    if ($isCoHost != null) {
-                        $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                    }
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
@@ -2035,9 +2035,8 @@ class EventListController extends Controller
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
-                    if ($isCoHost != null) {
-                        $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                    }
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;

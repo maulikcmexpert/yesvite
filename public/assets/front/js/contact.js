@@ -156,6 +156,7 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
+                    $("#yesviteUser").html('');
                     $("#home_loader").hide();
                     return;
                 }
@@ -250,6 +251,7 @@ $(document).on("keyup", ".search_phone", function () {
                 }
                 if (data.status == "0") {
                     $(".no-phone-data").css("display","block");
+                    $("#yesvitePhones").html('');
                     $("#home_loader").hide();
                     // busy2 = true; 
                     busy2 = false;
@@ -715,3 +717,26 @@ $(document).on("keyup", ".search_phone", function () {
     });
 });
 $('label[for="email"]').removeClass("floatingfocus");
+
+$(document).on('click','.click-to-upload-btn', function (e) {
+    $('#home_loader').css('display','flex');
+    var fileInput = $('#csv_file')[0];
+
+    if (fileInput.files.length === 0) {
+        $('#home_loader').css('display', 'none');
+        toastr.error('Please upload a CSV file first');
+        return;
+    }
+
+    var fileName = fileInput.files[0].name;
+    var fileExtension = fileName.split('.').pop().toLowerCase();
+
+    if (fileExtension !== 'csv') {
+        $('#home_loader').css('display', 'none');
+        toastr.error('Only CSV files are allowed.');
+        return;
+    }
+        $('#home_loader').css('display','none');
+        $('#upload_csv_contact').submit();
+    // }
+});

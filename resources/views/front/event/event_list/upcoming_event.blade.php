@@ -6,7 +6,7 @@
           $colorIndex = 0;
 
 @endphp
-
+{{dd($eventList);}}
 @foreach ( $eventList as $upcomingEvent)
 @php
                 $current_month = $upcomingEvent['event_month'];
@@ -47,7 +47,10 @@
                 <ul class="home-upcoming-events-card-left-detail">
                     @if($upcomingEvent['is_event_owner']==1)
                             <li><span>Hosting</span></li>
-                    @else
+                    @elseif($upcomingEvent['is_co_host']=="1")
+                            <li><span>Co-Hosting</span></li>
+                      @endif        
+                      @if($upcomingEvent['is_event_owner']!=1)
                             @if($upcomingEvent['rsvp_status'] == '1')
                                 <li><span>Guest : </span> RSVP - Yes</li>
                             @elseif($upcomingEvent['rsvp_status'] == '2')
@@ -102,7 +105,7 @@
                             </ul>
                         @endif
                     </div>
-                    @if($upcomingEvent['is_event_owner']==1)
+                    @if($upcomingEvent['is_event_owner']==1 || $upcomingEvent['is_co_host']=="1")
                      <div class="dropdown upcoming-card-dropdown">
                             <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>

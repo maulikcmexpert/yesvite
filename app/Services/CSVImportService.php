@@ -34,7 +34,7 @@ class CSVImportService
             // ->first();
 
             if ($data['email'] != "") {
-                $existingContact = contact_sync::where('email', $data['email'])->first();
+                $existingContact = contact_sync::where(['email'=>$data['email'],'contact_id'=>$user->id])->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
@@ -71,7 +71,7 @@ class CSVImportService
             }
 
             if ($data['phone'] != "" && strlen($data['phone']) > 5) {
-                $existingContact = contact_sync::where('phoneWithCode', $data['phone'])->first();
+                $existingContact = contact_sync::where(['phoneWithCode'=> $data['phone'],'contact_id'=>$user->id])->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,

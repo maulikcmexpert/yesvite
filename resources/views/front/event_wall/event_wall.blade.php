@@ -250,11 +250,7 @@
 
                                                         {{-- {{  dd($post['post_image'])}} --}}
                                                         @if ($post['post_type'] == '1')
-                                                        <div class="posts-card-inner-wrp">
-                                                            <h3 class="posts-card-inner-questions">
-                                                                {{ $post['post_message'] }}
-                                                            </h3>
-                                                        </div>
+
                                                             <div class="posts-card-show-post-wrp">
                                                                 <div class="swiper posts-card-post">
                                                                     <div class="swiper-wrapper">
@@ -411,7 +407,7 @@
                                                                     class="posts-card-like-btn {{ $liked }} set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
-                                                                    data-event-post-id="{{ $post['id'] }} "
+                                                                    data-event-post-id="{{ $post['id'] }}"
                                                                     data-user-id="{{ $login_user_id }}">
                                                                     @if ($post['self_reaction'] == '\u{2764}')
                                                                         <i class="fa-solid fa-heart"
@@ -447,6 +443,7 @@
                                                                         <i class="fa-regular fa-heart"
                                                                             id="show_Emoji"></i>
                                                                     @endif
+                                                                    </button>
 
                                                                     <div class="photos-likes-options-wrp emoji-picker"
                                                                         id="emojiDropdown" style="display: none;">
@@ -470,7 +467,6 @@
                                                                             alt="Clap Emoji" class="emoji"
                                                                             data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                     </div>
-                                                                </button>
 
                                                                 @if ($post['commenting_on_off'] == '1')
                                                                     <button
@@ -552,16 +548,18 @@
                                                             <div class="posts-card-show-all-comments-inner">
                                                                 <ul class="top-level-comments">
 
+                                                                    <input type="hidden"
+                                                                    class="parent_comment_id"
+                                                                    value="">
+
+
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
                                                                             data-comment-id="{{ $comment['id'] }}">
                                                                             <input type="hidden"
-                                                                                class="parent_comment_id"
-                                                                                value="">
-                                                                                <input type="hidden"
-                                                                                class="data_comment_id"
-                                                                                value="{{ $comment['id'] }}">
+                                                                            class="data_comment_id"
+                                                                            value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
@@ -626,12 +624,13 @@
                                                                                             $liked = '';
                                                                                         }
                                                                                     @endphp
+                                                                                    <input type="hidden" id="login_user_id" value="{{$login_user_id}}">
                                                                                     <p>{{ $comment['posttime'] }}</p>
                                                                                     <button
                                                                                         class="posts-card-like-btn {{ $liked }}"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -652,7 +651,7 @@
                                                                                     <button class="posts-card-like-btn"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -662,15 +661,15 @@
                                                                                                 id="show_Emoji"></i>
                                                                                         @endif
                                                                                     </button>
-                                                                                    {{-- <p id="commentTotalLike_{{ $reply['id'] }}">
-                                                                        {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
-                                                                    </p> --}}
+                                                                                    <p id="commentTotalLike_{{$comment['id'] }}">
+                                                                        {{ isset($comment['comment_total_likes']) ? $comment['comment_total_likes'] : 0 }}
+                                                                    </p>
                                                                                 </div>
                                                                                 <button data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                <ul>
+                                                                                <ul class="primary-comment-replies">
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -738,7 +737,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                                         @if ($reply['is_like'] == 1)
                                                                                                             <i class="fa-solid fa-heart"
@@ -763,7 +762,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
 
                                                                                                         @if ($reply['is_like'] == 1)
@@ -787,10 +786,14 @@
                                                                                     @endforeach
 
                                                                                     <!-- Button to show more replies if any -->
-                                                                                    <button
+                                                                                    {{-- <button
                                                                                         class="show-comment-reply-btn">Show
                                                                                         {{ $comment['total_replies'] }}
-                                                                                        reply</button>
+                                                                                        reply
+                                                                                    </button> --}}
+
+                                                                                    <button class="show-comment-reply-btn">Show reply
+                                                                                </button>
                                                                                 </ul>
                                                                             @endif
 
@@ -1450,29 +1453,31 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('event_wall.eventPost') }}" id="textform" method="POST"
+                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                             <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
 
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
+                                <input type="hidden" class="textcontent" name="postContent"
+                                value="">
 
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control" rows="3" name="postContent" placeholder="What's on your mind?"
-                                    id="postContent"></textarea>
+                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
+                                   ></textarea>
                             </div>
-                        </form>
+
                         <div class="create-post-upload-img-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
                                 <div>
                                     <button type="button" class="uploadButton create-post-head-upload-btn d-none"><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput2" class="fileInputtype"
-                                            accept="image/*"></button>
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
+                                            accept="image/* video/*" multiple></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -1496,9 +1501,8 @@
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">
-                                <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
+
+
                                     <div class="create-post-upload-img-inner">
                                         <input type="hidden" name="event_id" id="event_id"
                                             value="{{ $event }}">
@@ -1507,7 +1511,7 @@
                                         <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
-                                        <input type="" name="postContent" id="photoContent">
+                                        <input type="hidden" name="postContent" id="photoContent" val="">
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1540,10 +1544,10 @@
 
                                         </div>
                                     </div>
-                                </form>
+
                             </div>
                         </div>
-
+                        </form>
                         <div class="create-post-poll-wrp d-none">
                             <div class="create-post-upload-img-head">
                                 <h4>POLL</h4>
@@ -1712,7 +1716,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="post_privacy"
-                                        id="flexRadioDefault4" value=" 4">
+                                        id="flexRadioDefault4" value="4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         RSVP’d - No Reply
                                     </label>
@@ -1766,8 +1770,7 @@
                                 <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab-{{ $post['id'] }}"
                                     role="tablist">
                                     <!-- All Reactions Tab -->
-                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}"
-                                        data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
+                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}" data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
                                         type="button" role="tab" aria-controls="nav-all-reaction"
                                         aria-selected="true">
                                         All {{ count($post['reactionList']) }}
@@ -1805,8 +1808,8 @@
                             <!-- ===Tab-content=== -->
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
-                                    aria-labelledby="nav-all-reaction-tab">
+                                <div class="tab-pane fade active show nav-all-reaction-tab-{{ $post['id'] }}" id="nav-all-reaction" role="tabpanel"
+                                    aria-labelledby="nav-all-reaction-tab-{{ $post['id'] }}">
                                     <ul>
                                         @php
                                             // Define reaction icons mapping

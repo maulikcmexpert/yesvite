@@ -4,6 +4,19 @@
             <div class="content">
                 <h2>Find the Perfect <br> Design in Our Collection</h2>
                 <p>Customizable Designs to Reflect Your Unique Event</p>
+                <div class="position-relative search-wrapper">
+                    <input type="search" placeholder="Search design categories" class="">
+                    <span class="">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                            <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                </div>
             </div>
             {{-- {{$getDesignData}} --}}
             <div class="filter-main-wrp">
@@ -864,27 +877,9 @@
 
     @push('scripts')
     <script>
-        document.querySelectorAll('.collection-menu').forEach((button) => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-        });
-
-        $(document).ready(function() {
-            const $cookiesBox = $('.cookies-track');
-
-            if (!localStorage.getItem('cookiesBoxDismissed')) {
-                setTimeout(() => {
-                    $cookiesBox.addClass('active');
-                }, 500);
-            }
-
-            $('.close-btn').on('click', function() {
-                $cookiesBox.removeClass('active');
-                localStorage.setItem('cookiesBoxDismissed', 'true');
-            });
-        });
+        
             $(document).ready(function() {
+                $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
                 // Handle the "All Categories" checkbox click
                 $('#Allcat').on('change', function() {
                     if ($(this).is(':checked')) {

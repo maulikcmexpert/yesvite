@@ -1037,11 +1037,20 @@ class EventWallController extends Controller
         }
         //}
 
-        $eventDetail = Event::with(['user', 'event_image', 'event_schedule', 'event_settings' => function ($query) {
-            $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
-        }, 'event_invited_user' => function ($query) {
-            $query->where('is_co_host', '1')->with('user');
-        }])->where('id', $event)->first();
+        $eventDetail = Event::with([
+            'user',
+            'event_image' => function ($query) {
+                $query->orderBy('type', 'ASC');  // Ordering event images by 'type' in ascending order
+            },
+            'event_schedule',
+            'event_settings' => function ($query) {
+                $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
+            },
+            'event_invited_user' => function ($query) {
+                $query->where('is_co_host', '1')->with('user');
+            }
+        ])->where('id', $event)->first();
+
         $guestView = [];
         $eventDetails['id'] = $eventDetail->id;
         $eventDetails['event_images'] = [];
@@ -1332,9 +1341,8 @@ class EventWallController extends Controller
 
     public function createPost(Request $request)
     {
-
+        // dd($request->all());
         $user  = Auth::guard('web')->user();
-        $input = $request->all();
 
         $creatEventPost = new EventPost;
         $creatEventPost->event_id = $request->event_id;
@@ -1353,7 +1361,7 @@ class EventWallController extends Controller
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        if ($creatEventPost->id  && $request->hasFile('files')) {
+        if ($creatEventPost->id  && $request->file('files')) {
             $postimages = $request->file('files');
 
             $video = 0;
@@ -1982,8 +1990,11 @@ class EventWallController extends Controller
             $message = "Post liked by you";
             $isReaction = 1;
         } else {
+
+
             // User has already reacted
             if ($checkReaction->unicode != $unicode) {
+
                 // Reaction is different from current, update it
                 $checkReaction->reaction = $reaction_unicode;
                 $checkReaction->unicode = $unicode;
@@ -1991,6 +2002,7 @@ class EventWallController extends Controller
                 $message = "Post liked by you";
                 $isReaction = 1;
             } else {
+
                 // Same reaction, dislike the post
                 $checkReaction->delete();
                 $removeNotification = Notification::where([
@@ -2007,6 +2019,7 @@ class EventWallController extends Controller
                 $isReaction = 0;
             }
         }
+
 
         // Get total count of reactions
         $counts = EventPostReaction::where([
@@ -2101,7 +2114,7 @@ class EventWallController extends Controller
 
 
             $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-            return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
+            return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => "", "count" => $totalCount]);
         }
     }
     public function userPostComment(Request $request)

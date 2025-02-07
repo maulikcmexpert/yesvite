@@ -1,4 +1,4 @@
-
+{{-- {{dd($potluckDetail)}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -176,9 +176,9 @@
                                             </button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
-                                        @foreach ($potluckDetail['podluck_category_list_new'] as $key => $category)
+                                        @foreach ($potluckDetail['podluck_category_list'] as $category)
                                         
-                                        <div class="category-main-dishesh list-slide-{{$key}}">
+                                        <div class="category-main-dishesh">
 
 
                                                 @php
@@ -211,7 +211,7 @@
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
                                                         <span
-                                                            class="me-1 list-sub-head">{{ $category['categoryQuantity'] }}</span>
+                                                            class="me-1 list-sub-head">{{ $total_item_quantity }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
                                                         </div>
@@ -232,7 +232,7 @@
                                                                     $missing = 'color:red';
                                                                 }
                                                             @endphp
-                                                            <!-- <span id ="success_{{ $category['id'] }}"
+                                                            <span id ="success_{{ $category['id'] }}"
                                                                 class="me-2 d-flex align-items-center justify-content-center {{ $display_icon }}">
                                                                 <svg width="20" height="20" viewBox="0 0 18 18"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,8 +240,8 @@
                                                                         d="M8.99935 0.666016C4.40768 0.666016 0.666016 4.40768 0.666016 8.99935C0.666016 13.591 4.40768 17.3327 8.99935 17.3327C13.591 17.3327 17.3327 13.591 17.3327 8.99935C17.3327 4.40768 13.591 0.666016 8.99935 0.666016ZM12.9827 7.08268L8.25768 11.8077C8.14102 11.9243 7.98268 11.991 7.81602 11.991C7.64935 11.991 7.49102 11.9243 7.37435 11.8077L5.01602 9.44935C4.77435 9.20768 4.77435 8.80768 5.01602 8.56602C5.25768 8.32435 5.65768 8.32435 5.89935 8.56602L7.81602 10.4827L12.0993 6.19935C12.341 5.95768 12.741 5.95768 12.9827 6.19935C13.2244 6.44102 13.2244 6.83268 12.9827 7.08268Z"
                                                                         fill="#23AA26" />
                                                                 </svg>
-                                                            </span> -->
-                                                            <!-- <span id ="danger_{{ $category['id'] }}"
+                                                            </span>
+                                                            <span id ="danger_{{ $category['id'] }}"
                                                                 class="me-2 d-flex align-items-center justify-content-center  {{ $display_icon == 'd-none' ? '' : 'd-none' }}">
                                                                 <svg width="20" height="20"
                                                                     viewBox="0 0 14 14" fill="none"
@@ -250,8 +250,8 @@
                                                                         d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
                                                                         fill="#F73C71" />
                                                                 </svg>
-                                                            </span> -->
-                                                            <!-- <h6 class="me-3 missing-quantity "
+                                                            </span>
+                                                            <h6 class="me-3 missing-quantity "
                                                                 style="{{ $missing }}">
                                                                 {{ $total_missing_quantity }} Missing</h6>
                                                             <span id ="success_{{ $category['id'] }}"
@@ -263,8 +263,8 @@
                                                                         d="M8.99935 0.666016C4.40768 0.666016 0.666016 4.40768 0.666016 8.99935C0.666016 13.591 4.40768 17.3327 8.99935 17.3327C13.591 17.3327 17.3327 13.591 17.3327 8.99935C17.3327 4.40768 13.591 0.666016 8.99935 0.666016ZM12.9827 7.08268L8.25768 11.8077C8.14102 11.9243 7.98268 11.991 7.81602 11.991C7.64935 11.991 7.49102 11.9243 7.37435 11.8077L5.01602 9.44935C4.77435 9.20768 4.77435 8.80768 5.01602 8.56602C5.25768 8.32435 5.65768 8.32435 5.89935 8.56602L7.81602 10.4827L12.0993 6.19935C12.341 5.95768 12.741 5.95768 12.9827 6.19935C13.2244 6.44102 13.2244 6.83268 12.9827 7.08268Z"
                                                                         fill="#23AA26" />
                                                                 </svg>
-                                                            </span> -->
-                                                            <!-- <h6 class="me-3 over-quantity-{{ $category['id'] }} {{($over_quantity_count >0)?"":"d-none" }}"
+                                                            </span>
+                                                            <h6 class="me-3 over-quantity-{{ $category['id'] }} {{($over_quantity_count >0)?"":"d-none" }}"
                                                                 style="color:green;">
                                                                 {{ $over_quantity_count }}
                                                                 Item Over</h6>
@@ -274,111 +274,7 @@
                                                                         $item['spoken_quantity'] ==
                                                                         $category['quantity'];
                                                                 }
-                                                            @endphp -->
-                                                            {{-- new code --}}
-                                                            @if ($category['remainingQnt'] > 0)
-                                                            <span
-                                                                class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                style="color: rgb(192, 52, 52);">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
-                                                                        fill="#F73C71"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                            style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
-                                                            Missing</h6>
-
-                                                          
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="display:none">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="display:none;color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}"></span>
-                                                                Item Over</h6>
-
-                                                        
-                                                    @else
-                                                        @if($category['totalMissing'] == 0)
-                                                        <span
-                                                            class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                            style="color: rgb(52, 192, 92);">
-                                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                    fill="#23AA26"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                        style="color: rgb(52, 192, 92);"><span
-                                                            id="missing-category-{{ $key }}">0</span> Missing</h6>
-                                                        @else
-                                                        <span
-                                                                class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                style="color: rgb(192, 52, 52);">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
-                                                                        fill="#F73C71"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                            style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
-                                                            Missing</h6>
-                                                        @endif
-
-                                                            @if ($category['remainingQnt'] < 0)
-                                                          
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
-                                                                Item Over</h6>
-
-                                                        @else
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="display:none">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="display:none;color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}"></span>
-                                                                Item Over</h6>
-
-                                                            {{-- end code --}}
-                                                        @endif
-                                                    @endif
-                                                        {{-- end code --}}
-
+                                                            @endphp
                                                             <button type="button" class="me-3 "
                                                                 data-bs-toggle="modal" data-bs-target="#maindishes" style="background-color: transparent; box-shadow: none;"
                                                                 data-category-id="{{ $category['id'] }}"
@@ -510,11 +406,7 @@
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $item)
-                                                            
-                                                            <div class="accordion-item active">
-                                                                    <input type="hidden"
-                                                                                    class="category-item-quantity"
-                                                                                    value="{{ $item['quantity'] }}">
+                                                                <div class="accordion-item active">
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
@@ -525,7 +417,8 @@
                                                                                     $icons = 'd-none';
                                                                                     $missing = '';
                                                                                     if (
-                                                                                        (intval($item['itmquantity']) + intval($item['innerUserQnt'])) >= $item['quantity'] 
+                                                                                        $item['spoken_quantity'] ==
+                                                                                        $item['quantity']
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';
@@ -580,7 +473,6 @@
                                                                                 <span
                                                                                     class="accordion-button plus_icon_user collapsed"
                                                                                     data-category-id="{{ $category['id'] }}"
-                                                                                    data-categorykey="{{ $key }}"
                                                                                     data-item-id="{{ $item['id'] }}"
                                                                                     data-max="{{ $item['quantity'] }}"
                                                                                     data-event-id="{{ $event }}"
@@ -594,17 +486,6 @@
                                                                             </div>
                                                                         </button>
                                                                     </h2>
-
-                                                                    @if(empty($item['item_carry_users']))
-                                                                    <div id="lumpia-collapseOne"
-                                                                                class="accordion-collapse collapse show"
-                                                                                aria-labelledby="lumpia"
-                                                                                data-bs-parent="#accordionFlushExample">
-                                                                                <div class="accordion-body"
-                                                                                    id="user-container-{{ $item['id'] }}">
-                                                                                </div>
-                                                                            </div>
-                                                                    @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         @if ($login_user_id === $users['user_id'])
@@ -674,7 +555,7 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -694,7 +575,6 @@
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
-                                                                                                data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
@@ -773,6 +653,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
+
                                                                             <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
