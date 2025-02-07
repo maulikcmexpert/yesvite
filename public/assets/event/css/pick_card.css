@@ -287,6 +287,19 @@
     background-color: #fff !important;
 }
 
+.step_2 .collection-wrapper{
+    padding: 0px !important;
+}
+
+.step_2 .list_all_design_catgeory {
+    max-height: calc(100vh - 25vh);
+    overflow-y: scroll;
+}
+
+.step_2{
+    overflow:hidden;
+}
+
 
 @media only screen and (max-width: 1399px) {
     .design-card {

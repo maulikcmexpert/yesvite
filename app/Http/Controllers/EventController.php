@@ -112,8 +112,8 @@ class EventController extends BaseController
 
         return response()->json([
             'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
-            'count' => $categories->count(), // Count of categories
-            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+
+            'count' => $totalTextDataCount // Total count of textdatas
         ]);
     }
 
@@ -623,6 +623,18 @@ class EventController extends BaseController
             ])
             ->get();
 
+
+
+
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategory->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+
+        $imagecount = $categories->count();
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')
         //     ->get();
@@ -646,6 +658,7 @@ class EventController extends BaseController
             'event_type',
             'yesvite_user',
             'groups',
+            'imagecount',
             // 'textData',
             'categories',
             'eventDetail'
