@@ -673,7 +673,7 @@
                                                                             </div>
                                                                             <ul class="primary-comment-replies">
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                
+
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -799,7 +799,7 @@
 
                                                                                     <button class="show-comment-reply-btn">Hide reply</button>
                                                                                 @endif
-                                                                                
+
                                                                             @endif
                                                                         </ul>
 
