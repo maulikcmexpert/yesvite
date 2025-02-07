@@ -267,9 +267,9 @@ $(document).on("click", ".plus", function () {
     categoryList.find(".itemQty").each(function () {
         spokenQuantity += parseInt($(this).val(), 10) || 0;
     });
-    let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
-    const totalcategoryQnt = parseInt(categoryCount) + currentValue + 1;
-    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+    // let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
+    // const totalcategoryQnt = parseInt(categoryCount) + currentValue + 1;
+    // $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
@@ -326,9 +326,9 @@ $(document).on("click", ".minus", function () {
     $("#newQuantity_" + item_id).val(newValue);
 
     
-    let categoryCount= $(".category-count-"+categoryKey).text();
-   const totalcategoryQnt = parseInt(categoryCount) - 1
-    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+//     let categoryCount= $(".category-count-"+categoryKey).text();
+//    const totalcategoryQnt = parseInt(categoryCount) - 1
+//     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
 
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
@@ -634,7 +634,7 @@ function updateTOP(categoryIndex) {
         }
     }
 
-    $('category-count-'+ categoryIndex).text(totalcount)
+    $('.category-count-'+ categoryIndex).text(totalcount)
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
