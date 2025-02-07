@@ -629,10 +629,10 @@ $(document).on("click", ".edit_design_tem", function (e) {
             isDraft,
             id: id,
         },
-        success: function (response) {
+        success: async function (response) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-            bindData(current_event_id);
+            await bindData(current_event_id);
             $("#loader").css("display", "none");
         },
         error: function (xhr, status, error) {
