@@ -96,18 +96,27 @@ class EventController extends BaseController
     }
     public function searchDesign(Request $request)
     {
-
         $query = $request->input('search');
-        $categories = TextData::with(['categories', 'subcategories'])
-            ->whereHas('categories', function ($q) use ($query) {
-                $q->where('category_name', 'LIKE', "%$query%");
-            })
+
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->with(['subcategory.textdatas']) // Load subcategories and their textdatas
             ->orderBy('id', 'desc')
             ->get();
 
-        $count = count($categories);
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategory->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
+
+        return response()->json([
+            'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
+            'count' => $categories->count(), // Count of categories
+            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+        ]);
     }
+
 
 
     public function index(Request $request)
@@ -1211,7 +1220,7 @@ class EventController extends BaseController
         }
 
         $registry = [];
-        if($request->isCopy !=null){
+        if ($request->isCopy != null) {
             if (isset($request->gift_registry_data) && count($request->gift_registry_data) > 0) {
                 foreach ($request->gift_registry_data as $key => $imgVal) {
                     $gr = EventGiftRegistry::where('id', $imgVal['gr_id'])->first();
@@ -1222,7 +1231,7 @@ class EventController extends BaseController
                     }
                 }
             }
-        }else{
+        } else {
             $registry = $request->gift_registry_data;
         }
 
