@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use DB;
+
 class EventWallController extends Controller
 {
     protected $perPage;
@@ -652,7 +653,8 @@ class EventWallController extends Controller
         $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
-        DB:enableQueryLog()
+        DB:
+        enableQueryLog();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
             ->withCount([
