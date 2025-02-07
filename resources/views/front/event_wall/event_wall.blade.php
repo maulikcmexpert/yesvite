@@ -347,7 +347,7 @@
                                                                 </div>
                                                             @else
                                                                 <div class="no-reply">
-                                                                    <h5>NO REPLY {{$post['rsvp_status']}}</h5>
+                                                                    <h5>NO REPLY</h5>
                                                                 </div>
                                                             @endif
                                                         @endif
