@@ -68,30 +68,23 @@
                                                 <div class="swiper mySwiper">
                                                     <div class="swiper-wrapper">
                                                         <!-- Slides -->
+                                                        @if ($eventDetails['event_images'])
+                                                        @foreach ($eventDetails['event_images'] as $image)
+                                                            <div class="swiper-slide">
+                                                                <div class="hosted-by-template-slider-img">
+                                                                    <img src="{{ $image }}" alt="Event Image" />
+                                                                </div>
+                                                                <button class="image-zoom-icon" data-img="{{ $image }}"><img
+                                                                        src="{{ asset('assets/front/img/image-zoom-icon.png') }}" alt=""></button>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
                                                         <div class="swiper-slide">
                                                             <div class="hosted-by-template-slider-img">
-                                                                <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                    alt="" />
+                                                                <img src="{{ asset('assets/front/img/host-by-template-img.png') }}" alt="No Event Image" />
                                                             </div>
                                                         </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="hosted-by-template-slider-img">
-                                                                <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                    alt="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="hosted-by-template-slider-img">
-                                                                <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                    alt="" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <div class="hosted-by-template-slider-img">
-                                                                <img src="{{ asset('assets/front/img/host-by-template-img.png') }}"
-                                                                    alt="" />
-                                                            </div>
-                                                        </div>
+                                                    @endif
                                                     </div>
 
                                                     <!-- Custom Pagination -->
@@ -418,7 +411,7 @@
                                                                 </svg>
                                                             </a>
                                                         @endif
-                                                    @endif    
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -461,7 +454,7 @@
                                                         <span>Host</span>
                                                         @if($eventDetails['host_id']!=$login_user_id)
                                                             <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
-                                                        @endif    
+                                                        @endif
                                                     </div>
                                                 @endif
                                                 @if (!empty($eventDetails['co_hosts']))
@@ -503,7 +496,7 @@
                                                 “{{ $eventDetails['message_to_guests'] }}”
                                             </p>
                                         </div>
-                                        
+
                                         @if (!empty($eventDetails['event_location_name']) || !empty($eventDetails['address_1']))
                                             <div class="location-wrp cmn-card">
                                                 <h4 class="title">Location</h4>
@@ -528,7 +521,7 @@
 
                                                     $longitude = !empty($eventDetails['longitude'])
                                                         ? $eventDetails['longitude']
-                                                        : '-98.5795'; 
+                                                        : '-98.5795';
 
                                                 @endphp
 
@@ -2285,12 +2278,12 @@
 
     $longitude = !empty($eventDetails['longitude'])
         ? $eventDetails['longitude']
-        : '-98.5795'; 
+        : '-98.5795';
 
 @endphp
 @push('scripts')
 <script>
-  
+
     function initMapDirection() {
         var eventLocation = { lat: {{$latitude}} , lng: {{$longitude}}};
 
