@@ -329,7 +329,7 @@ $(document).ready(function () {
                     );
 
                     // ✅ Update Reaction Modal
-                    updateReactionModal(eventPostId, response.post_reaction);
+                    //updateReactionModal(eventPostId, response.post_reaction);
                 }
             },
             error: function (xhr) {

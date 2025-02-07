@@ -773,7 +773,8 @@ class EventPotluckController extends Controller
                 'category_id' => $categoryId,
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
-                "key" => $request->categorykey
+                "key" => $request->categorykey,
+                "itemkey"=> $request->itemkey
             ])->render();
                 
             // Return the response
