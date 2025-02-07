@@ -791,9 +791,10 @@
                                                                                         {{ $comment['total_replies'] }}
                                                                                         reply
                                                                                     </button> --}}
-
-                                                                                    <button class="show-comment-reply-btn">Show reply
-                                                                                </button>
+                                                                                    @if($comment['total_replies'] > 0)                                                                                       
+                                                                                    
+                                                                                    <button class="show-comment-reply-btn">Hide reply </button>
+                                                                                @endif
                                                                                 </ul>
                                                                             @endif
 
