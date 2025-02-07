@@ -742,6 +742,7 @@ class EventWallController extends Controller
         }
 
         if ($eventPostList != "") {
+            dd($eventPostList);
             foreach ($eventPostList as  $value) {
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
