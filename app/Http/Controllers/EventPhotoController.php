@@ -850,14 +850,15 @@ class EventPhotoController extends Controller
                 }
                 $postPhotoDetail['mediaData'] = $photoVideoData;
             }
-            $letestComment = EventPostComment::with('user')->withCount('post_comment_reaction', 'replies')
-                ->where(['event_post_id' => $value->id, 'parent_comment_id' => NULL])->get();
+            // $letestComment = EventPostComment::with('user')->withCount('post_comment_reaction', 'replies')
+            //     ->where(['event_post_id' => $value->id, 'parent_comment_id' => NULL])->get();
             //  ->orderBy('id', 'DESC');
             // ->limit(1)
             // ->first();
             // dd($letestComment);
+            $postComment = getComments($value->id);
             $postPhotoDetailcomment = [];
-            foreach ($letestComment as $values) {
+            foreach ($postComment as $values) {
                 // Setting up the latest comment data
                 $postCommentList = [
                     'id' => $values->id,
