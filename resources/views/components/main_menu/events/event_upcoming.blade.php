@@ -147,7 +147,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                        <a class="dropdown-item" href="{{ route('event', $upcomingEvent['id']) }}">
+                                        <a class="dropdown-item" href="{{ route('event', encrypt($upcomingEvent['id'])) }}">
                                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.0475 4.66603L4.20585 11.9077C3.94752 12.1827 3.69752 12.7244 3.64752 13.0994L3.33918 15.7994C3.23085 16.7744 3.93085 17.441 4.89752 17.2744L7.58085 16.816C7.95585 16.7494 8.48085 16.4744 8.73918 16.191L15.5809 8.94937C16.7642 7.69937 17.2975 6.27437 15.4558 4.5327C13.6225 2.8077 12.2308 3.41603 11.0475 4.66603Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M9.90625 5.87451C10.2646 8.17451 12.1312 9.93284 14.4479 10.1662" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -158,7 +158,7 @@
                                         @if($upcomingEvent['is_event_owner']==1)
 
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('event', ['id' => $upcomingEvent['id'], 'iscopy' => 1]) }}">
+                                            <a class="dropdown-item" href="{{ route('event', ['id' => encrypt($upcomingEvent['id']), 'iscopy' => 1]) }}">
 
                                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M13.3307 10.7493V14.2494C13.3307 17.166 12.1641 18.3327 9.2474 18.3327H5.7474C2.83073 18.3327 1.66406 17.166 1.66406 14.2494V10.7493C1.66406 7.83268 2.83073 6.66602 5.7474 6.66602H9.2474C12.1641 6.66602 13.3307 7.83268 13.3307 10.7493Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
