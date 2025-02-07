@@ -579,6 +579,7 @@ $(document).on('click', '.open_photo_model', function () {
         });
     }
     swiper.destroy(true, true);
+console.log(rawData.length);
 
     if (rawData.length > 1) {
         swiper.destroy(true, true);
