@@ -655,7 +655,7 @@ $(document).on("click", ".comment-send-icon", function () {
                 </li>`;
                     // Append as a new top-level comment
                     const commentList = $(
-                        `.posts-card-show-all-comments-wrp.show_${eventPostId}`
+                        `.posts-card-show-all-comments-wrp`
                     ).find(".top-level-comments");
 
                     // Check if the comment is already appended
