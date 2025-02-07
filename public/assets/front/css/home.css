@@ -588,12 +588,17 @@ background-color: #fff !important;
 border: 1px solid var(--borderColor);
 border-radius: 20px;
 padding: 10px 20px;
-height: auto;
+/* height: auto; */
 }
 
 
 .step_2 .collection-wrapper .content{ 
    max-width: 95%;
+}
+
+.step_2 .list_all_design_catgeory{
+    max-height: 660px;
+    overflow-y: scroll;
 }
    
 
