@@ -997,7 +997,7 @@ $(document).on("click", ".open_photo_model", function () {
         data: { id: postId, event_id: eventId },
         success: function (response) {
             const dataArray = response.data; // This is an array
-            console.log(dataArray);
+            console.log(response);
 
             if (Array.isArray(dataArray) && dataArray.length > 0) {
                 const data = dataArray[0]; // Access the first object in the array
