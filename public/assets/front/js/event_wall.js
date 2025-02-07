@@ -1346,9 +1346,9 @@ $(document).on("click", ".wall_apply_filter", function () {
             $("#main-center-modal-filter").modal("hide");
         },
         error: function (xhr, status, error) {
+            $("#home_loader").css("loader", "none");
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
-            $("#home_loader").css("loader", "none");
         },
     });
 });
