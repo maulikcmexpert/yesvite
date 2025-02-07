@@ -111,7 +111,7 @@ $('#scrollStatus').scroll(function () {
 
         // console.log(current_month);
     
-        $('.loader').css('display','block');    
+        $('.loader').css('display','flex');    
         $.ajax({
             url: `${base_url}fetch_upcoming_event`,
             type: 'GET',
@@ -157,7 +157,7 @@ $('#scrollStatus2').scroll(function () {
         $('.latest_month_draft').each(function () { 
             current_month2=$(this).val();
         });
-        $('.loader').css('display','block');    
+        $('.loader').css('display','flex');    
         $.ajax({
             url: `${base_url}fetch_draft_event`,
             type: 'GET',
@@ -197,7 +197,7 @@ $('#scrollStatus3').scroll(function () {
         $('.latest_month_past').each(function () { 
             current_month3=$(this).val();
         });
-        $('.loader').css('display','block');    
+        $('.loader').css('display','flex');    
 
         $.ajax({
             url: `${base_url}fetch_past_event`,
@@ -450,7 +450,7 @@ $(document).on('input','#search_draft_event_page',function () {
     
     
     search_user_ajax_timer = setTimeout(function () {
-        $('.loader').css('display','block');    
+        $('.loader').css('display','flex');    
     $.ajax({
         url: `${base_url}search_draft_event`,
         type: 'GET',
@@ -772,7 +772,7 @@ $(document).on('click','.notification-filter-events',function () {
         // $('.latest_month_draft').each(function () { 
         //     current_month2=$(this).val();
         // });
-        // $('.loader').css('display','block');    
+        // $('.loader').css('display','flex');    
         $.ajax({
             url: `${base_url}fetch_notification`,
             type: 'GET',
