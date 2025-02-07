@@ -321,6 +321,9 @@ $(document).on("click", ".minus", function () {
     const item_id = $(this).data("item-id");
     const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     // Decrement the quantity, but not below 0
+    if(currentValue <= 0){
+        return
+    }
     const newValue = Math.max(0, currentValue - 1);
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
