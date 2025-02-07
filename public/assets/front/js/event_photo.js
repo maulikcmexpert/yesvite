@@ -1031,7 +1031,7 @@ $(document).on("click", ".open_photo_model", function () {
                     $("#host_display").text(host);
                 }
                 if (data.is_co_host == "1") {
-                    const co_host = `${data.is_host}`;
+                    const co_host = `${data.is_co_host}`;
                     $("#host_display").text(co_host);
                 }
 
