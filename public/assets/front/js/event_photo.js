@@ -44,11 +44,11 @@ $(document).ready(function () {
         }
     });
 
-    $(".posts-card-like-btn").on("click", function () {
-        const icon = this.querySelector("i");
-        icon.classList.toggle("fa-regular");
-        icon.classList.toggle("fa-solid");
-    });
+    // $(".posts-card-like-btn").on("click", function () {
+    //     const icon = this.querySelector("i");
+    //     icon.classList.toggle("fa-regular");
+    //     icon.classList.toggle("fa-solid");
+    // });
 
     $(".show-comments-btn").click(function () {
         $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
@@ -90,7 +90,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#likeButton", function () {
-        clearTimeout(longPressTimer); // Clear the long press timer
+        return;
+        //clearTimeout(longPressTimer); // Clear the long press timer
 
         // If it's a long press, don't process the click event
         if (isLongPresss) return;
@@ -128,7 +129,8 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
-                    );$(".modal").on("hidden.bs.modal", function () {
+                    );
+                    $(".modal").on("hidden.bs.modal", function () {
                         $("#postContent").val("");
                         $("#pollForm")[0].reset(); // Reset poll form
                         $("#photoForm")[0].reset(); // Reset photo form
@@ -140,7 +142,9 @@ $(document).ready(function () {
 
                     $(".modal").on("shown.bs.modal", function () {
                         // Remove `d-none` class to show the div
-                        $(".create-post-upload-img-inner").removeClass("d-none");
+                        $(".create-post-upload-img-inner").removeClass(
+                            "d-none"
+                        );
                     });
                 } else {
                     alert(response.message);
@@ -344,9 +348,7 @@ $(document).on("click", ".comment-send-icon_old", function () {
                             </div>
                             <div class="posts-card-like-comment-right">
                                 <p>${data.posttime}</p>
-                                 <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                        data.id
-                    }" data-user-id="${login_user_id}">
+                                 <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id}" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
                             </div>
@@ -361,9 +363,7 @@ $(document).on("click", ".comment-send-icon_old", function () {
                                   0
                                     </p>
                             </div>
-                            <button class="commented-user-reply-btn" data-comment-id="${
-                                    data.id
-                                }">Reply</button>
+                            <button class="commented-user-reply-btn" data-comment-id="${data.id}">Reply</button>
                         </div>
                         <ul class="primary-comment-replies"></ul>
                     </li>
@@ -557,11 +557,11 @@ $(document).on("click", ".comment-send-icon", function () {
                     const fontColor = `fontcolor${firstInitial}`;
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
-                $(".posts-card-like-btn").on("click", function () {
-                    const icon = this.querySelector("i");
-                    icon.classList.toggle("fa-regular");
-                    icon.classList.toggle("fa-solid");
-                });
+                // $(".posts-card-like-btn").on("click", function () {
+                //     const icon = this.querySelector("i");
+                //     icon.classList.toggle("fa-regular");
+                //     icon.classList.toggle("fa-solid");
+                // });
                 const newCommentHTML = `
                                 <div class="commented-user-head">
                                 <div class="commented-user-profile">
@@ -739,8 +739,9 @@ $(document).on("click", ".comment-send-icon", function () {
                 commentInput.val("");
                 $("#parent_comment_id").val(""); // Reset parent comment ID
 
-                let comments = document.getElementsByClassName("commented-user-wrp")
-                $("#comments").html(comments.length +' comments')
+                let comments =
+                    document.getElementsByClassName("commented-user-wrp");
+                $("#comments").html(comments.length + " comments");
             }
         },
         error: function (xhr) {
@@ -750,11 +751,11 @@ $(document).on("click", ".comment-send-icon", function () {
     });
 });
 
-$(document).on("click", ".posts-card-like-btn", function () {
-    const icon = this.querySelector("i");
-    icon.classList.toggle("fa-regular");
-    icon.classList.toggle("fa-solid");
-});
+// $(document).on("click", ".posts-card-like-btn", function () {
+//     const icon = this.querySelector("i");
+//     icon.classList.toggle("fa-regular");
+//     icon.classList.toggle("fa-solid");
+// });
 $(document).on("click", ".commented-user-reply-btn", function () {
     // Find the closest comment element
 
@@ -1155,8 +1156,8 @@ $(document).on("click", ".open_photo_model", function () {
                     data.latest_comment.forEach((comment) => {
                         let parentCommentId = comment.id;
                         let displayName = comment.profile
-                        ? `<img src="${comment.profile}" alt="User Profile" class="profile-image">`
-                        : generatePlaceholderName(comment.username);
+                            ? `<img src="${comment.profile}" alt="User Profile" class="profile-image">`
+                            : generatePlaceholderName(comment.username);
 
                         commentsWrapper.append(`
                             <li class="commented-user-wrp" data-comment-id="${
@@ -1186,13 +1187,15 @@ $(document).on("click", ".open_photo_model", function () {
                                 <div class="commented-user-reply-wrp">
                                     <div class="position-relative d-flex align-items-center gap-2">
                                          <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                                            comment.id
-                    }" data-user-id="${login_user_id}">
+                            comment.id
+                        }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
-                                        <p id="commentTotalLike_${comment.id}">${
-                                            comment.comment_total_likes || 0
-                                        }</p>
+                                        <p id="commentTotalLike_${
+                                            comment.id
+                                        }">${
+                            comment.comment_total_likes || 0
+                        }</p>
                                     </div>
                                     <button class="commented-user-reply-btn" data-comment-id="${
                                         comment.id
@@ -1208,9 +1211,9 @@ $(document).on("click", ".open_photo_model", function () {
                             comment.comment_replies.length > 0
                         ) {
                             comment.comment_replies.forEach(function (reply) {
-                                let displayName =reply.profile
-                                ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
-                                : generatePlaceholderName(reply.username);
+                                let displayName = reply.profile
+                                    ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
+                                    : generatePlaceholderName(reply.username);
                                 const replyHTML = `
 
                             <div class="commented-user-head">
@@ -1445,7 +1448,8 @@ $(document).on("click", ".open_photo_model", function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                 <h3>${firstname} ${lastname}</h3>
-                                                <p> ${location}</p>
+                                                <p> ${location ? `<p>${location}</p>` : ''}
+</p>
                                             </div>
                                         </div>
                                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
@@ -1515,6 +1519,7 @@ $(document).on("mousedown", "#likeButtonModel", function () {
 });
 $(document).on("click", "#likeButtonModel", function () {
     // alert();
+    // return;
     clearTimeout(longPressTimers); // Clear the long press timer
 
     // If it's a long press, don't process the click event
@@ -1523,7 +1528,7 @@ $(document).on("click", "#likeButtonModel", function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass("liked");
-    const reaction =  "\u{2764}"; // Toggle reaction: 💔 or ❤️
+    const reaction = "\u{2764}"; // Toggle reaction: 💔 or ❤️
     const likeButton = $(this);
     // Toggle like button appearance
     const icon = $(this).find("i");
@@ -1686,7 +1691,6 @@ $(document).ready(function () {
     });
 });
 $(".modal").on("hidden.bs.modal", function () {
-
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
 
@@ -1747,13 +1751,9 @@ $(document).on("click", "#CommentlikeButton", function () {
                 );
                 if (response.self_reaction == "\u{2764}") {
                     // Update all like buttons with the same comment ID
-                    allLikeIcons
-                        .removeClass("fa-regular")
-                        .addClass("fa-solid");
+                    allLikeIcons.removeClass("fa-regular").addClass("fa-solid");
                 } else {
-                    allLikeIcons
-                        .removeClass("fa-solid")
-                        .addClass("fa-regular");
+                    allLikeIcons.removeClass("fa-solid").addClass("fa-regular");
                 }
             }
         },

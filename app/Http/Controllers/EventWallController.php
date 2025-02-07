@@ -40,7 +40,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-
+use DB;
 class EventWallController extends Controller
 {
     protected $perPage;
@@ -652,6 +652,7 @@ class EventWallController extends Controller
         $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
+        DB:enableQueryLog()
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
             ->withCount([
@@ -706,6 +707,7 @@ class EventWallController extends Controller
 
         // Execute the query and get the results
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
+        dd(DB::getQueryLog());
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
@@ -742,6 +744,7 @@ class EventWallController extends Controller
         }
 
         if ($eventPostList != "") {
+            //dd($eventPostList);
             foreach ($eventPostList as  $value) {
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
