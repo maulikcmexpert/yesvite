@@ -47,26 +47,28 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     console.log(response);
 
-                    let reactionImage = "";
                     if (response.status === 1) {
                         console.log(response);
 
                         let reactionImage = "";
                         if (response.is_reaction == "1") {
+                            console.log("here for update like image");
                             reactionImage =
                                 '<img src="' +
                                 base_url +
                                 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
-
+                            $(`#reactionImage_${eventPostId}`).html(
+                                reactionImage
+                            );
                             $(`#likeCount_${eventPostId}`).html(
-                                `${String.fromCodePoint(
-                                    parseInt("\\u{2764}")
-                                )} ${response.count} Likes`
+                                `${response.count} Likes`
                             );
                         } else {
                             if (response.count >= 1) {
-                                console.log(response.reactionList[0]);
+                                console.log("here for update unicode");
 
+                                console.log(response.reactionList[0]);
+                                $(`#reactionImage_${eventPostId}`).html("");
                                 // ✅ Properly render the emoji without escaping it
                                 $(`#likeCount_${eventPostId}`).html(
                                     `${String.fromCodePoint(
@@ -78,6 +80,8 @@ $(document).ready(function () {
                                     )} Likes`
                                 );
                             } else {
+                                console.log("here for update 0");
+
                                 $(`#likeCount_${eventPostId}`).text(
                                     `${response.count} Likes`
                                 );
@@ -276,12 +280,54 @@ $(document).ready(function () {
                 reaction: selectedEmoji,
             }),
             success: function (response) {
+                // if (response.status === 1) {
+                //     $(`#likeCount_${eventPostId}`).text(
+                //         `${selectedEmoji}${response.count} Likes`
+                //     );
+                // } else {
+                //     alert(response.message);
+                // }
+
                 if (response.status === 1) {
-                    $(`#likeCount_${eventPostId}`).text(
-                        `${selectedEmoji}${response.count} Likes`
-                    );
-                } else {
-                    alert(response.message);
+                    console.log(response);
+
+                    let reactionImage = "";
+                    if (response.is_reaction == "1") {
+                        console.log("here for update like image");
+                        reactionImage =
+                            '<img src="' +
+                            base_url +
+                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                        $(`#reactionImage_${eventPostId}`).html(reactionImage);
+                        $(`#likeCount_${eventPostId}`).html(
+                            `${response.count} Likes`
+                        );
+                    } else {
+                        if (response.count >= 1) {
+                            console.log("here for update unicode");
+
+                            console.log(response.reactionList[0]);
+                            $(`#reactionImage_${eventPostId}`).html("");
+                            // ✅ Properly render the emoji without escaping it
+                            $(`#likeCount_${eventPostId}`).html(
+                                `${String.fromCodePoint(
+                                    parseInt(
+                                        response.reactionList[0].codePointAt(0)
+                                    )
+                                )} Likes`
+                            );
+                        } else {
+                            console.log("here for update 0");
+
+                            $(`#likeCount_${eventPostId}`).text(
+                                `${response.count} Likes`
+                            );
+                        }
+
+                        button.html(
+                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                        );
+                    }
                 }
             },
             error: function (xhr) {

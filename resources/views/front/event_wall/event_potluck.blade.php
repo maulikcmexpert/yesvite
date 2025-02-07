@@ -122,89 +122,48 @@
                                         </div>
                                     @endif
                                     @if ($eventDetails['hosted_by'])
-                                        <div class="massage-host cmn-card">
-                                            <h5 class="title">Message From Host</h5>
-                                            <div class="massge-data">
-                                                <div class="host-img">
-                                                    @if ($eventDetails['user_profile'] != '')
-                                                    <img src="{{ $eventDetails['user_profile'] }}" alt="host-img" loading="lazy">
-                                                    @else
-                                                        @php
+                                    <div class="host-users-detail cmn-card">
+                                            <h4 class="title">Your hosts</h4>
+                                            <div class="host-user-con-box">
+                                                @if ($eventDetails['hosted_by'])
+                                                    <div class="host-user-con">
+                                                        <div class="img-wrp">
+                                                            @if ($eventDetails['user_profile'] != '')
+                                                                <img src="{{ $eventDetails['user_profile'] }}"
+                                                                    alt="host-img">
+                                                            @else
+                                                                @php
 
-                                                            // $parts = explode(" ", $name);
-                                                            $nameParts = explode(' ', $eventDetails['hosted_by'] );
+                                                                    // $parts = explode(" ", $name);
+                                                                    $nameParts = explode(
+                                                                        ' ',
+                                                                        $eventDetails['hosted_by'],
+                                                                    );
+                                                                    $firstInitial = isset($nameParts[0][0])
+                                                                        ? strtoupper($nameParts[0][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($nameParts[1][0])
+                                                                        ? strtoupper($nameParts[1][0])
+                                                                        : '';
+                                                                    $initials = $firstInitial . $secondInitial;
 
-                                                            $firstInitial = isset($nameParts[0][0])
-                                                                ? strtoupper($nameParts[0][0])
-                                                                : '';
-                                                            $secondInitial = isset($nameParts[1][0])
-                                                                ? strtoupper($nameParts[1][0])
-                                                                : '';
-                                                            $initials = $firstInitial . $secondInitial;
+                                                                    // Generate a font color class based on the first initial
+                                                                    $fontColor = 'fontcolor' . $firstInitial;
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
 
-                                                            // Generate a font color class based on the first initial
-                                                            $fontColor = 'fontcolor' . $firstInitial;
-                                                        @endphp
-                                                        <h5 class="{{ $fontColor }}">
-                                                            {{ $initials }}
-                                                        </h5>
-                                                    @endif
-
-                                                </div>
-                                                <h5>{{ $eventDetails['hosted_by'] }}</h5>
-                                                <h6>Host</h6>
-                                                <!-- <a href="#">Message</a> -->
+                                                        </div>
+                                                        <h5>{{ $eventDetails['hosted_by'] }}</h5>
+                                                        <span>Host</span>
                                                         @if($eventDetails['host_id']!=$login_user_id)
                                                             <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
                                                         @endif
-
-                                                        
-                                                <p style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
-                                                    “{{ $eventDetails['message_to_guests'] }}”
-                                                </p>
-                                            </div>
-                                            @if (!empty($eventDetails['co_hosts']))
-                                            @foreach ($eventDetails['co_hosts'] as $co_host)
-                                                <div class="massge-data">
-                                                    <div class="host-img">
-                                                        @if ($co_host['profile'] != '')
-                                                        <img src="{{ $co_host['profile'] }}" alt="host-img" loading="lazy">
-                                                        @else
-                                                            @php
-
-                                                                // $parts = explode(" ", $name);
-                                                                $nameParts = explode(' ', $co_host['name'] );
-
-                                                                $firstInitial = isset($nameParts[0][0])
-                                                                    ? strtoupper($nameParts[0][0])
-                                                                    : '';
-                                                                $secondInitial = isset($nameParts[1][0])
-                                                                    ? strtoupper($nameParts[1][0])
-                                                                    : '';
-                                                                $initials = $firstInitial . $secondInitial;
-
-                                                                // Generate a font color class based on the first initial
-                                                                $fontColor = 'fontcolor' . $firstInitial;
-                                                            @endphp
-                                                            <h5 class="{{ $fontColor }}">
-                                                                {{ $initials }}
-                                                            </h5>
-                                                        @endif
-
                                                     </div>
-                                                    <h5>{{ $co_host['name'] }}</h5>
-                                                    <h6>Host</h6>
-                                                    <!-- <a href="#">Message</a> -->
-                                                            @if($co_host['id']!=$login_user_id)
-                                                                <a href="{{route('message.list',   ['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
-                                                            @endif
-
-                                                            
-                                                  
-                                                </div>
-                                            @endforeach
-                                           @endif 
-                                                <!-- @if (!empty($eventDetails['co_hosts']))
+                                                @endif
+                                                @if (!empty($eventDetails['co_hosts']))
                                                     @foreach ($eventDetails['co_hosts'] as $co_host)
                                                         <div class="host-user-con">
                                                             <div class="img-wrp">
@@ -234,8 +193,14 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
-                                                @endif -->
+                                                @endif
 
+                                            </div>
+
+                                            <p
+                                                style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
+                                                “{{ $eventDetails['message_to_guests'] }}”
+                                            </p>
                                         </div>
                                     @endif
 
