@@ -623,6 +623,18 @@ class EventController extends BaseController
             ])
             ->get();
 
+
+
+
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategory->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+
+        $imagecount = $categories->count();
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')
         //     ->get();
@@ -646,6 +658,7 @@ class EventController extends BaseController
             'event_type',
             'yesvite_user',
             'groups',
+            'imagecount',
             // 'textData',
             'categories',
             'eventDetail'
