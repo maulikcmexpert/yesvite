@@ -1196,6 +1196,10 @@ padding: 10px 20px;
         max-width: 100%;
         width: 48%;
     }
+
+    .step_2 .collection-wrapper .filter-main-wrp .filters-drp .dropdown{
+        width: 180px;
+    }
 }
 
 
