@@ -26,6 +26,7 @@ $(document).ready(function () {
         "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
         "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
@@ -295,12 +296,20 @@ $(document).ready(function () {
                             "Like removed, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
-                            const firstReaction = response.reactionList[0];
+                            let firstReaction = response.reactionList[0];
+                            if (firstReaction.startsWith("\\u{")) {
+                                firstReaction = String.fromCodePoint(
+                                    parseInt(
+                                        firstReaction.replace(/\\u{|}/g, ""),
+                                        16
+                                    )
+                                );
+                            }
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
                             } else {
-                                console.log({ reaction });
-                                console.log(reactionIcons[reaction]);
+                                console.log({ firstReaction });
+                                console.log(reactionIcons[firstReaction]);
                                 //let reaction = "\u{2764}";
                                 reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                             }
