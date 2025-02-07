@@ -513,6 +513,15 @@
     padding-top: 40px !important;
 }
 
+#detail-photo-modal .posts-card-head-left-content h3{
+    display: inline-block;
+}
+
+#detail-photo-modal .posts-card-head-left-content span{
+    display: inline;
+}
+
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 991px) {
