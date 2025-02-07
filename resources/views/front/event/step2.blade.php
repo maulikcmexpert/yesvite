@@ -254,7 +254,7 @@
         var search_value=$(this).val();
         $('#home_loader').css('display','flex');
         $.ajax({
-            url: base_url + "search_features", 
+            url: base_url + "search_design", 
             method: 'GET',
             data: { search: search_value}, 
             success: function (response) {
