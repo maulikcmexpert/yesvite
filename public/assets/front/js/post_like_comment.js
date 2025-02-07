@@ -214,10 +214,12 @@ $(document).ready(function () {
                     $(`#commentTotalLike_${eventPostCommentId}`).text(
                         `${response.count} Likes`
                     );
-
-                    // Update the reaction display
+                    if (response.self_reaction == "\u{2764}") {
+                         // Update the reaction display
                     const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
                     replyLikeIcon.text(`${response.self_reaction}`);
+                    }
+
                 }
             },
             error: function (xhr) {
