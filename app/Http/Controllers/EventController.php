@@ -323,11 +323,12 @@ class EventController extends BaseController
                             $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
                             $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
                             $eventscheduleData["type"] = $eventsScheduleVal->type;
+                            $eventDetail['events_schedule_list']['totalActivity']=$totalActivity;
                             $totalActivity ++;
                             $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
                         }
                     }
-                    $eventDetail['events_schedule_list']['totalActivity']= $totalActivity;
+                    $eventDetail['events_schedule_list']->totalActivity= $totalActivity;
                     if ($getEventData->event_schedule->last()->type == '3') {
 
                         $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
