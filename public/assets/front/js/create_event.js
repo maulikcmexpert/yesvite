@@ -171,7 +171,7 @@ $(".invite-count").text(inviteTotalCount);
 $("#event_guest_count").text(inviteTotalCount + " Guests");
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
-$("#activity-start-time").val("");
+// $("#activity-start-time").val("");
 $("#activity-end-time").val("");
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
