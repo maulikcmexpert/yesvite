@@ -1,97 +1,208 @@
-{{-- <div class="step_2" style="display: none;"> --}}
-<div class="step_2">
 
-    <div class="main-content-right">
-        <div class="new_event_detail_form choose-design-form">
-            <form action="">
-                <h3>Choose Design</h3>
-
-
-
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <div class="choose-design-search-setting">
-                            <div class="position-relative w-100">
-                                <input type="search" class="searchCategory" placeholder="Search name"
-                                    class="form-control">
-                                <span class="choose-design-seachicon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round"></path>
-                                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
+<section class="collection-wrapper">
+    <div class="container">
+        <div class="content">
+            <h2>Find the Perfect <br> Design in Our Collection</h2>
+            <p>Customizable Designs to Reflect Your Unique Event</p>
+            <div class="position-relative search-wrapper">
+                <input type="search" id="search_design_category" placeholder="Search design categories" class="">
+                <span class="">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+        </div>
+       
+        <div class="filter-main-wrp">
+            <div class="filters-drp">
+                <h5>Filter By</h5>
+                <div class="filter-dropdowns">
+                    <div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            Categories
+                        </button>
+                        <div class="dropdown-menu collection-menu">
+                            <div class="filter-head">
+                                <h5>Categories</h5>
+                                <a href="#" class="reset-btn" id="resetCategories">Reset</a>
                             </div>
-                            <svg class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.3335 5.4165H13.3335" stroke="#F73C71" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M4.99984 5.4165H1.6665" stroke="#F73C71" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M8.33317 8.33333C9.944 8.33333 11.2498 7.0275 11.2498 5.41667C11.2498 3.80584 9.944 2.5 8.33317 2.5C6.72234 2.5 5.4165 3.80584 5.4165 5.41667C5.4165 7.0275 6.72234 8.33333 8.33317 8.33333Z"
-                                    stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M18.3333 14.5835H15" stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M6.6665 14.5835H1.6665" stroke="#F73C71" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M11.6667 17.4998C13.2775 17.4998 14.5833 16.194 14.5833 14.5832C14.5833 12.9723 13.2775 11.6665 11.6667 11.6665C10.0558 11.6665 8.75 12.9723 8.75 14.5832C8.75 16.194 10.0558 17.4998 11.6667 17.4998Z"
-                                    stroke="#F73C71" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="designCategory">
-                        <label for="" class="custome-designcategory">
-                            Upload own design/card
-                            <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
-                        </label>
-                        @if (isset($design_category))
-                            @foreach ($design_category as $category)
-                                @foreach ($category->subcategory as $subcategory)
-                                    @if (isset($subcategory->textdatas) && $subcategory->textdatas->isNotEmpty())
-                                        <div class="col-12 subcategory-section" id="subcategory_{{ $subcategory->id }}">
-                                            <div class="choose-design-cards-wrp">
-                                                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                                                    <ol class="breadcrumb">
-                                                        <li class="breadcrumb-item"><a
-                                                                href="#">{{ $category->category_name }}</a></li>
-                                                        <li class="breadcrumb-item active" aria-current="page">
-                                                            {{ $subcategory->subcategory_name }}</li>
-                                                    </ol>
-                                                    <h6>{{ isset($subcategory->textdatas) ? count($subcategory->textdatas) : 0 }}
-                                                        Designs</h6>
-                                                </nav>
-                                                <div class="choose-design-cards">
-                                                    @foreach ($subcategory->textdatas as $temp)
-                                                        <div class="edit_design_tem design-card" data-bs-toggle="modal"
-                                                            type="button" data-template="template_1"
-                                                            data-image="{{ asset('storage/canvas/' . $temp->image) }}"
-                                                            data-shape_image="{{ $temp->shape_image != '' ? asset('storage/canvas/' . $temp->shape_image) : '' }}"
-                                                            data-json="{{ json_encode($temp->static_information) }}"
-                                                            data-id="{{ $temp->id }}">
-                                                            <img src="{{ asset('storage/canvas/' . $temp->filled_image) }}"
-                                                                alt="">
-                                                        </div>
-                                                    @endforeach
+                            <div class="filter-categories">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label" for="Allcat">All Categories</label>
+                                    <input class="form-check-input" type="checkbox" name="Guest RSVP’s"
+                                        id="Allcat">
+                                </div>
+                                <div class="accordion" id="accordionExample">
+                           
+                                @foreach ($categories as $textData)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
+                                                <button class="accordion-button" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{ $textData->categories->id }}" aria-expanded="true"
+                                                    aria-controls="collapse{{ $textData->categories->id }}">
+                                                    {{ $textData->categories->category_name }}
+                                                </button>
+                                            </h2>
+                                            <div id="collapse{{ $textData->categories->id }}"
+                                                class="accordion-collapse collapse"
+                                                aria-labelledby="heading{{ $textData->categories->id }}"
+                                                data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <ul>
+                                                            <li>
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
+                                                                        {{ $textData->subcategories->subcategory_name }}
+                                                                    </label>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="subcategory{{ $textData->subcategories->id }}"
+                                                                        data-category-id="{{ $textData->categories->id }}"
+                                                                        data-subcategory-id="{{ $textData->subcategories->id }}">
+                                                                </div>
+                                                            </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
                                 @endforeach
-                            @endforeach
-                        @endif
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                
                 </div>
-            </form>
+            </div>
+            <h5 class="total-items ms-auto total_design_count">{{count($categories)}} Items</h5>
+        </div>
+        {{-- {{ dd($categories);}} --}}
+        <div class="row list_all_design_catgeory">
+            @foreach ($categories as $textData)
+        
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                        data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
+                        <a href="javascript:;" class="collection-card card-blue">
+                            <div class="card-img edit_design_tem design-card" data-image="{{ asset('storage/canvas/' . $textData->image) }}"
+                                data-shape_image="{{ $textData->shape_image != '' ? asset('storage/canvas/' . $textData->shape_image) : '' }}"
+                                data-json="{{ json_encode($textData->static_information) }}"
+                                data-id="{{ $textData->id }}">
+                                <img src="{{ asset('storage/canvas/' . $textData->filled_image) }}" alt="shower-card">
+                            </div>
+                            <h4>{{ $textData->categories->category_name }}</h4>
+                        </a>
+                    </div>
+        
+            @endforeach
+
+          
+      
         </div>
     </div>
+</section>
 
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+    // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+    $('input[type="checkbox"]').prop('checked', true);
 
-</div>
+    $('#Allcat').on('change', function() {
+        if ($(this).is(':checked')) {
+            $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+            $('.image-item').show();
+        } else {
+            $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
+            $('.image-item').hide();
+        }
+    });
+
+    $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
+        // If all individual checkboxes are checked, check "All Categories"
+        const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
+        const checkedCheckboxes = $('input[type="checkbox"]:not(#Allcat):checked').length;
+
+        if (checkedCheckboxes === totalCheckboxes) {
+            $('#Allcat').prop('checked', true);
+        } else {
+            $('#Allcat').prop('checked', false);
+        }
+
+        // Filter images based on checked categories
+        if (checkedCheckboxes > 0) {
+            $('.image-item').hide(); // Hide all images first
+            $('input[type="checkbox"]:not(#Allcat):checked').each(function() {
+                const categoryId = $(this).data('category-id');
+                const subcategoryId = $(this).data('subcategory-id');
+
+                // Show images matching the selected categories and subcategories
+                $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                    .show();
+            });
+        } else {
+            $('.image-item').hide(); // Hide all images if no checkboxes are checked
+        }
+    });
+    $('#resetCategories').on('click', function(e) {
+         e.preventDefault(); 
+        $('#Allcat').prop('checked', false);
+        $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
+        $('.image-item').hide();
+    });
+
+    document.querySelectorAll('.collection-menu').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    });
+
+    const $cookiesBox = $('.cookies-track');
+
+    if (!localStorage.getItem('cookiesBoxDismissed')) {
+        setTimeout(() => {
+            $cookiesBox.addClass('active');
+        }, 500);
+    }
+
+    $('.close-btn').on('click', function () {
+        $cookiesBox.removeClass('active');
+        localStorage.setItem('cookiesBoxDismissed', 'true');
+    });
+
+    $(document).on('input','#search_design_category',function(){
+        var search_value=$(this).val();
+        $('#home_loader').css('display','flex');
+        $.ajax({
+            url: base_url + "search_features", 
+            method: 'GET',
+            data: { search: search_value}, 
+            success: function (response) {
+                console.log("Remove successful: ", response);
+    
+                if (response.view) {
+                 $('.list_all_design_catgeory').html('');
+                 $('.list_all_design_catgeory').html(response.view);
+                 $('#home_loader').css('display','none');
+                 $('.total_design_count').text(response.count +' Items')
+                    
+                } else {
+                    $('.list_all_design_catgeory').html('No Design Found');
+                    $('.total_design_count').text(response.count +' Items')
+                    $('#home_loader').css('display','none');
+                }
+            },
+            error: function (error) {
+               toastr.error('Some thing went wrong');
+            }
+        });
+    });
+});
+    </script>
+@endpush

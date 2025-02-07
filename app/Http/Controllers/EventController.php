@@ -72,6 +72,44 @@ use Illuminate\Support\Facades\File;
 
 class EventController extends BaseController
 {
+
+
+    public function homeDesign()
+    {
+
+        $title = 'Yesvite-Home';
+        $page = 'front.home_design';
+        $js = ['home_design'];
+        $images = TextData::all();
+        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
+        $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        $getDesignData = EventDesignCategory::all();
+        $getsubcatData = EventDesignSubCategory::all();
+        return view('layout', compact(
+            'title',
+            'page',
+            'images',
+            'getDesignData',
+            'categories',
+            'js'
+        ));
+    }
+    public function searchDesign(Request $request)
+    {
+
+        $query = $request->input('search');
+        $categories = TextData::with(['categories', 'subcategories'])
+            ->whereHas('categories', function ($q) use ($query) {
+                $q->where('category_name', 'LIKE', "%$query%");
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $count = count($categories);
+        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
+    }
+
+
     public function index(Request $request)
     {
 
@@ -299,7 +337,7 @@ class EventController extends BaseController
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
 
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
-                
+
                 $eventDetail['events_schedule_list'] = null;
                 if ($getEventData->event_schedule->isNotEmpty()) {
 
@@ -313,7 +351,7 @@ class EventController extends BaseController
                     }
 
                     $eventDetail['events_schedule_list']->data = [];
-                    $totalActivity=0;
+                    $totalActivity = 0;
                     $eventDetail['totalActivityByDate'] = [];
                     foreach ($getEventData->event_schedule as $eventsScheduleVal) {
                         if ($eventsScheduleVal->type == '2') {
@@ -325,7 +363,7 @@ class EventController extends BaseController
                             $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
                             $eventscheduleData["type"] = $eventsScheduleVal->type;
                             // $eventDetail['totalActivity']=$totalActivity;
-                            $totalActivity ++;
+                            $totalActivity++;
                             if (!empty($eventsScheduleVal->event_date)) {
                                 // If this event_date does not exist in the array, initialize it with a count of 0.
                                 if (!isset($eventDetail['totalActivityByDate'][$eventsScheduleVal->event_date])) {
@@ -453,7 +491,7 @@ class EventController extends BaseController
                                 ];
                                 $itmquantity = 0;
                                 $innnerUserItem = 0;
-                                $userQuantity=0;
+                                $userQuantity = 0;
                                 $categories[$key]['item'][$itemkey] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
@@ -491,10 +529,9 @@ class EventController extends BaseController
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                     if ($itemcarryUser->user_id != $id) {
                                         $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
-                                    }else{
+                                    } else {
                                         $userQuantity = $userQuantity + $itemcarryUser->quantity;
                                     }
-                                    
                                 }
                                 $userQuantity =  $userQuantity + $innnerUserItem;
                                 if ($userQuantity <  $itemValue->quantity) {
@@ -558,11 +595,13 @@ class EventController extends BaseController
             ->get();
         $textData = [];
         $design_category = [];
-        $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-            $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
-                $que->select('*');
-            }]);
-        }])->orderBy('id', 'DESC')->get();
+        // $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
+        //     $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
+        //         $que->select('*');
+        //     }]);
+        // }])->orderBy('id', 'DESC')->get();
+
+        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
 
         $textData = TextData::select('*')
             ->orderBy('id', 'desc')
@@ -588,7 +627,7 @@ class EventController extends BaseController
             'yesvite_user',
             'groups',
             'textData',
-            'design_category',
+            'categories',
             'eventDetail'
         ));
     }
