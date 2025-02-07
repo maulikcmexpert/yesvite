@@ -2102,9 +2102,19 @@ async function bindData(current_event_id) {
 
     function cloneTextbox() {
         let originalTextbox = canvas.getActiveObject();
+
+        if (!originalTextbox || originalTextbox.type !== "textbox") {
+            toastr.error("Please select a textbox to clone.");
+            return;
+        }
+
+        // Get canvas center
+        let canvasCenter = canvas.getCenter();
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
-            left: originalTextbox.left + 30, // Offset position
-            top: originalTextbox.top + 30, // Offset position
+            // left: originalTextbox.left + 30, // Offset position
+            // top: originalTextbox.top + 30, // Offset position
+            left: canvasCenter.left, // Center horizontally
+            top: canvasCenter.top,
             fontSize: originalTextbox.fontSize,
             fill: originalTextbox.fill,
             width: originalTextbox.width + 10,
@@ -2128,9 +2138,8 @@ async function bindData(current_event_id) {
             backgroundColor: "rgba(0, 0, 0, 0)",
         });
 
+        // canvas.add(clonedTextbox);
         canvas.add(clonedTextbox);
-
-        // Add icons to the cloned textbox
 
         canvas.renderAll();
         setControlVisibilityForAll();
