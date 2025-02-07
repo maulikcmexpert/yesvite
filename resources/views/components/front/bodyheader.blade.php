@@ -1682,7 +1682,7 @@ $notification_list=getNotificationList();
                                 </li>
 
                                      @if(Request::segment(1) !== 'rsvp')
-                                          {{-- <li class="nav-item d-flex align-items-center gap-3">
+                                         <li class="nav-item d-flex align-items-center gap-3">
                                             <a class="nav-link signIn-btn" href="{{route('auth.login')}}">Sign In</a>
                                             <a class="nav-link signIn-btn" href="{{route('auth.register')}}">
                                                 <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1692,7 +1692,7 @@ $notification_list=getNotificationList();
                                                     </svg></span>
                                                 Sign Up
                                             </a>
-                                        </li> --}}
+                                        </li>
                                      @endif
 
                                  </ul>
