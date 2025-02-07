@@ -958,7 +958,7 @@
                 </div>
             </div>
 
-            <div class="item-on" id="self_bring_quantity_toggle" style="">
+            <div class="item-on" id="self_bring_quantity_toggle" style="display: none;">
                 {{-- <img src="{{asset('assets/event/image/user-img.svg')}}" alt=""> --}}
                 @php
                     $user = Auth::guard('web')->user();
