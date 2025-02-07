@@ -138,18 +138,21 @@ class HomeFrontController extends BaseController
     }
     public function searchDesign(Request $request)
     {
-
         $query = $request->input('search');
-        $categories = TextData::whereHas('subcategories.categories', function ($q) use ($query) {
-            $q->where('category_name', 'LIKE', "%$query%");
-        })
-            ->with(['subcategories.categories'])
+
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->with(['subcategories.textdatas']) // Load subcategories and their textdata
             ->orderBy('id', 'desc')
             ->get();
 
-        $count = count($categories);
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
+        $count = $categories->count();
+
+        return response()->json([
+            'view' => view('front.search_home_design', compact('categories'))->render(),
+            'count' => $count
+        ]);
     }
+
 
     public function homePricing()
     {
