@@ -31,8 +31,7 @@
 </div> -->
 
 
-<div
-                                                                                        class="accordion-body-content limits-count">
+<div class="accordion-body-content limits-count">
                                                                                         @if ($profile != '')
                                                                                             <img src="{{ $profile }}"
                                                                                                 alt="profile">
