@@ -38,6 +38,7 @@ class EventPotluckController extends Controller
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
+        $selectedFilters=[];
         $js = ['event_potluck', 'guest_rsvp', 'post_like_comment', 'guest'];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -92,7 +93,7 @@ class EventPotluckController extends Controller
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
         
-
+            $potluckDetail['podluck_category_list_new']=[];
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
@@ -514,7 +515,7 @@ class EventPotluckController extends Controller
                 $eventInfo['host_view'] = $eventAboutHost;
                 $current_page = "potluck";
                 $login_user_id  = $user->id;
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'potluckDetail', 'current_page')); // return compact('eventInfo');
+                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo','selectedFilters','potluckDetail', 'current_page')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {

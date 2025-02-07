@@ -30,6 +30,7 @@ use App\Http\Controllers\{
     PaymentController,
     UrlController
 };
+use App\Http\Controllers\admin\EventController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -181,6 +182,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('updateUserinFB',  [ChatController::class, 'updateUserinFB'])->name('message.updateUserinFB');
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 
+    Route::get('search_design', [ControllersEventController::class, 'searchDesign'])->name('search_design');
 
     Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
     // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
@@ -411,6 +413,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('desgin_slider');
         Session::forget('notification_event_ids');
         Session::forget('add_guest_user_id');
+        Session::forget('filterSession');
         Session::flush(); // removes all session data
 
         return redirect('login');

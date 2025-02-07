@@ -38,8 +38,44 @@
                                         id="Allcat">
                                 </div>
                                 <div class="accordion" id="accordionExample">
-                           
-                                @foreach ($categories as $textData)
+                                    @foreach ($categories as $category)
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                            <button class="accordion-button" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                                                aria-controls="collapse{{ $category->id }}">
+                                                {{ $category->category_name }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ $category->id }}"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="heading{{ $category->id }}"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <ul>
+                                                @foreach ($category->subcategory as $subcategory)
+
+                                                        <li>
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
+                                                                    {{ $subcategory->subcategory_name }}
+                                                                </label>
+                                                                <input class="form-check-input" name="design_subcategory" type="checkbox"
+                                                                    id="subcategory{{ $subcategory->id }}"
+                                                                    data-category-id="{{ $category->id }}"
+                                                                    data-subcategory-id="{{ $subcategory->id }}">
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endforeach
+
+                                {{-- @foreach ($categories as $textData)
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
                                                 <button class="accordion-button" type="button"
@@ -70,7 +106,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                @endforeach
+                                @endforeach --}}
 
                                 </div>
                             </div>
@@ -79,11 +115,11 @@
                 
                 </div>
             </div>
-            <h5 class="total-items ms-auto total_design_count">{{count($categories)}} Items</h5>
+            <h5 class="total-items ms-auto total_design_count">{{$imagecount}} Items</h5>
         </div>
         {{-- {{ dd($categories);}} --}}
         <div class="row list_all_design_catgeory">
-            @foreach ($categories as $textData)
+            {{-- @foreach ($categories as $textData)
         
                     <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                         data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
@@ -99,8 +135,29 @@
                         </a>
                     </div>
         
+            @endforeach --}}
+            @foreach ($categories as $category)
+            @foreach ($category->subcategory as $subcategory)
+                @foreach ($subcategory->textdatas as $image)
+                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
+                        data-category-id="{{ $category->id }}" 
+                        data-subcategory-id="{{ $subcategory->id }}" 
+                       >
+                        <a href="javascript:;" class="collection-card card-blue">
+                            <div class="card-img edit_design_tem design-card"  
+                            data-image="{{ asset('storage/canvas/' . $image->image) }}"
+                                data-shape_image="{{ $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '' }}"
+                                data-json="{{ json_encode($image->static_information) }}"
+                                data-id="{{ $image->id }}">
+                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                    alt="shower-card">
+                            </div>
+                            <h4>{{ $category->category_name }}</h4>
+                        </a>
+                    </div>
+                @endforeach
             @endforeach
-
+        @endforeach
           
       
         </div>
@@ -197,12 +254,11 @@
         var search_value=$(this).val();
         $('#home_loader').css('display','flex');
         $.ajax({
-            url: base_url + "search_features", 
+            url: base_url + "search_design", 
             method: 'GET',
             data: { search: search_value}, 
             success: function (response) {
-                console.log("Remove successful: ", response);
-    
+               
                 if (response.view) {
                  $('.list_all_design_catgeory').html('');
                  $('.list_all_design_catgeory').html(response.view);

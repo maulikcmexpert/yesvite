@@ -1,4 +1,3 @@
-{{dd($selectedFilters);}}
 <div class="event-center-title">
     <h2>{{$eventDetails['event_name']}}</h2>
     <button class="view_wall_filter {{(Request::segment(1) != 'event_wall')? 'd-none':''}} " data-apply="0" type="button" data-bs-toggle="modal" data-bs-target="#main-center-modal-filter">

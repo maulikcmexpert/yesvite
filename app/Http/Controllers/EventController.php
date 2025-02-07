@@ -96,18 +96,27 @@ class EventController extends BaseController
     }
     public function searchDesign(Request $request)
     {
-
         $query = $request->input('search');
-        $categories = TextData::with(['categories', 'subcategories'])
-            ->whereHas('categories', function ($q) use ($query) {
-                $q->where('category_name', 'LIKE', "%$query%");
-            })
+
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->with(['subcategory.textdatas']) // Load subcategories and their textdatas
             ->orderBy('id', 'desc')
             ->get();
 
-        $count = count($categories);
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategory->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
+
+        return response()->json([
+            'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
+            'count' => $categories->count(), // Count of categories
+            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+        ]);
     }
+
 
 
     public function index(Request $request)
@@ -176,10 +185,10 @@ class EventController extends BaseController
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
         $eventDetail['alreadyCount'] = 0;
-         
+
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
-            $eventID= decrypt($request->id);
+            $eventID = decrypt($request->id);
             $getEventData = Event::with('event_schedule')->where('id', $eventID)->first();
 
 
@@ -603,11 +612,32 @@ class EventController extends BaseController
         //     }]);
         // }])->orderBy('id', 'DESC')->get();
 
-        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
-
-        $textData = TextData::select('*')
-            ->orderBy('id', 'desc')
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                        ->with('textdatas'); // Load the textdatas relationship
+                }
+            ])
             ->get();
+
+
+
+
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategory->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+
+        $imagecount = $categories->count();
+        // $textData = TextData::select('*')
+        //     ->orderBy('id', 'desc')
+        //     ->get();
 
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
@@ -628,7 +658,8 @@ class EventController extends BaseController
             'event_type',
             'yesvite_user',
             'groups',
-            'textData',
+            'imagecount',
+            // 'textData',
             'categories',
             'eventDetail'
         ));
@@ -1201,8 +1232,21 @@ class EventController extends BaseController
             return 1;
         }
 
-
-        $registry = $request->gift_registry_data;
+        $registry = [];
+        if ($request->isCopy != null) {
+            if (isset($request->gift_registry_data) && count($request->gift_registry_data) > 0) {
+                foreach ($request->gift_registry_data as $key => $imgVal) {
+                    $gr = EventGiftRegistry::where('id', $imgVal['gr_id'])->first();
+                    if ($gr) {  // Check if $gr is not null
+                        $registry[] = [
+                            'registry_link' => $gr->registry_link
+                        ];
+                    }
+                }
+            }
+        } else {
+            $registry = $request->gift_registry_data;
+        }
 
         // dd($registry);
         if (!empty($registry)) {
@@ -3301,7 +3345,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-        
+
         // dd($request->slider_images);
 
 
