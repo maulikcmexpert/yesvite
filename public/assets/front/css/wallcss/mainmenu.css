@@ -1216,7 +1216,7 @@
         font-size: 13px;
     }
     .upcoming-card-dropdown {
-        display: none;
+        /* display: none; */
     }
     .home-upcoming-events-card-rsvp-data h6 {
         font-size: 15px;

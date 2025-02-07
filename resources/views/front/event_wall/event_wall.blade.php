@@ -416,7 +416,7 @@
                                                                 @endif
                                                             </div>
                                                             <div
-                                                                class="posts-card-like-comment-right emoji_display_like">
+                                                                class="posts-card-like-comment-right photo-card-head-right set_emoji_like emoji_display_like">
                                                                 @php
                                                                     if ($post['self_reaction'] == '\u{2764}') {
                                                                         $liked = 'liked';
