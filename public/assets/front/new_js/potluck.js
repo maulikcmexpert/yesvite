@@ -12,8 +12,8 @@ $n.val(Number($n.val())+1 );
 });
 
 var incrementMinus = buttonMinus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
+  // e.preventDefault();
+  // e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");

@@ -673,7 +673,7 @@ $(document).on('click','#selfBringItem',function(){
     }
 
 })
-alert()
+
 $(document).on('click', '.plusclick', function() {
     alert()
     var main_quantity = parseInt($("#sub_quantity").val(), 10);
