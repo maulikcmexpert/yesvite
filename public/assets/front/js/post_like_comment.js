@@ -53,8 +53,12 @@ $(document).ready(function () {
                             '<img src="' +
                             base_url +
                             'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+
+                        const tempDiv = document.createElement("div");
+                        tempDiv.innerHTML = reactionImage.trim(); // Convert to an element
+                        const newCommentElement = tempDiv.firstChild;
                         $(`#likeCount_${eventPostId}`).text(
-                            `${reaction}${response.count} Likes`
+                            `${newCommentElement}${response.count} Likes`
                         );
                     } else {
                         if (response.count >= 1) {
