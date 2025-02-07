@@ -63,3 +63,20 @@ $getSocialLink = getSocialLink();
           </div>
     </div>
 </section>
+<script>
+  $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            @if (session('success'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('success') }}");
+            @endif
+        });
+</script>
