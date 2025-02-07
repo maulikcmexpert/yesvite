@@ -205,7 +205,7 @@
 
 .host-user-con-box{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 27px;
     flex-wrap: wrap;
