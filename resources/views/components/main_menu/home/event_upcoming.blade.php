@@ -50,8 +50,8 @@
                           <li><span>Hosting</span></li>
                       @elseif($events['is_co_host']=="1")
                       <li><span>Co-Hosting</span></li>
-
-                      @else
+                      @endif
+                      @if($events['is_event_owner']!=1)
                               @if($events['rsvp_status'] == '1')
                                   <li><span>Guest : </span> RSVP - Yes</li>
                               @elseif($events['rsvp_status'] == '2')
