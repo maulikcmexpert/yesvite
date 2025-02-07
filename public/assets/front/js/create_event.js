@@ -2800,6 +2800,7 @@ $(document).on("blur", "#ac-start-time", function () {
     $(".new_activity").html("");
     $("#end-time").val("");
     $(".activity_total_count").text('('+0+')');
+    $(".step_1_activity").text('0 Activity')
     $("#ac-end-time").val("");
 });
 
