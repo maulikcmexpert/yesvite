@@ -221,15 +221,15 @@
                                                                     </ul>
                                                                 </div>
                                                                 <h5>
-                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '1' )
+                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '0' )
                                                                         <span class="positive-ans">
                                                                             <i
                                                                                 class="fa-solid fa-circle-check"></i>Yes</span>
-                                                                    @elseif($post['rsvp_status'] == '0'  && $post['is_co_host'] == '1')
+                                                                    @elseif($post['rsvp_status'] == '0'  && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans not-ans"><i
                                                                                 class="fa-solid fa-circle-question"></i>No
                                                                             Answer</span>
-                                                                    @elseif($post['rsvp_status'] == '2'  && $post['is_co_host'] == '1')
+                                                                    @elseif($post['rsvp_status'] == '2'  && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans nagative-ans">
                                                                             <i class="fa-solid fa-circle-xmark"></i>Not
                                                                             Coming
