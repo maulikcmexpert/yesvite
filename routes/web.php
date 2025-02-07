@@ -411,6 +411,7 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('desgin_slider');
         Session::forget('notification_event_ids');
         Session::forget('add_guest_user_id');
+        Session::forget('filterSession');
         Session::flush(); // removes all session data
 
         return redirect('login');
