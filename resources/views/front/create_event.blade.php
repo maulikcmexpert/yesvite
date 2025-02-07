@@ -444,7 +444,7 @@
                     </svg>
                 </a> -->
             </div>
-            <div class="sidebar-invite-top-text">
+            <div class="sidebar-invite-top-text d-none">
                 <div>
                     <h3>Pro</h3>
                     <button class="">
