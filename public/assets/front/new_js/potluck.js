@@ -3,8 +3,8 @@ var buttonPlus  = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 
 var incrementPlus = buttonPlus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
+  // e.preventDefault();
+  // e.stopPropagation();
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
