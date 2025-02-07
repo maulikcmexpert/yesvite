@@ -1,6 +1,6 @@
 <div class="step_2">
 <section class="collection-wrapper">
-    <div class="container">
+    <div class="">
         <div class="content">
             
             <div class="position-relative search-wrapper">
