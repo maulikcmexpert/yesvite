@@ -111,14 +111,13 @@ $(document).ready(function () {
         // Generate reaction list
         postReactions.forEach((reaction) => {
             let profileImage = reaction.profile
-                ? `<img src="${base_url + reaction.profile}" alt="${
-                      reaction.username
-                  }">`
+                ? `<img src="${base_url + reaction.profile}" alt="${reaction.username
+                }">`
                 : `<h5 class="fontcolor${reaction.username
-                      .charAt(0)
-                      .toUpperCase()}">${reaction.username
-                      .charAt(0)
-                      .toUpperCase()}</h5>`;
+                    .charAt(0)
+                    .toUpperCase()}">${reaction.username
+                        .charAt(0)
+                        .toUpperCase()}</h5>`;
 
             reactionListHtml += `
                 <li class="reaction-info-wrp">
@@ -133,10 +132,9 @@ $(document).ready(function () {
                             </div>
                         </div>
                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                            <img src="${
-                                reactionIcons[reaction.reaction] ||
-                                base_url + "assets/front/img/heart-emoji.png"
-                            }" alt="${reaction.reaction}">
+                            <img src="${reactionIcons[reaction.reaction] ||
+                base_url + "assets/front/img/heart-emoji.png"
+                }" alt="${reaction.reaction}">
                         </div>
                     </div>
                 </li>`;
@@ -160,10 +158,9 @@ $(document).ready(function () {
                 <button class="nav-link" id="nav-${reaction}-reaction-tab-${postId}"
                     data-bs-toggle="tab" data-bs-target="#nav-${reaction}-reaction-${postId}"
                     type="button" role="tab" aria-controls="nav-${reaction}-reaction" aria-selected="false">
-                    <img src="${
-                        reactionIcons[reaction] ||
-                        base_url + "assets/front/img/heart-emoji.png"
-                    }" alt="${reaction}">
+                    <img src="${reactionIcons[reaction] ||
+                base_url + "assets/front/img/heart-emoji.png"
+                }" alt="${reaction}">
                     ${reactionCounts[reaction]}
                 </button>`;
         });
@@ -281,6 +278,7 @@ $(document).ready(function () {
     $(document).on("click", ".comment-send-icon", function () {
         console.log("clicked");
         var commentVal = $(this).prev(".post_comment").val();
+        var login_user_id = $('#login_user_id').val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
         const comment_on_of = $("#comment_on_of").val();
@@ -308,8 +306,8 @@ $(document).ready(function () {
         console.log({ parent_comment_id });
         var parentCommentId =
             commentVal !== "" &&
-            parent_comment_id !== "undefined" &&
-            parent_comment_id !== undefined
+                parent_comment_id !== "undefined" &&
+                parent_comment_id !== undefined
                 ? parent_comment_id
                 : "";
         console.log("Parent Comment ID:", parentCommentId);
@@ -365,7 +363,11 @@ $(document).ready(function () {
                         const fontColor = `fontcolor${firstInitial}`;
                         return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                     }
-
+                    $(".posts-card-like-btn").on("click", function () {
+                        const icon = this.querySelector("i");
+                        icon.classList.toggle("fa-regular");
+                        icon.classList.toggle("fa-solid");
+                    });
                     const newCommentHTML = `
 
                     <div class="commented-user-head">
@@ -388,11 +390,15 @@ $(document).ready(function () {
                     </div>
                     <div class="commented-user-reply-wrp">
                         <div class="position-relative d-flex align-items-center gap-2">
-                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            <button class="posts-card-like-btn"   id="CommentlikeButton"
+                                data-event-id="${eventId}"
+                            data-event-post-comment-id="${data.id
+                        } "
+                        data-user-id="${ login_user_id}}">
+><i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
-                        <button data-comment-id="${
-                            data.id
+                        <button data-comment-id="${data.id
                         }" class="commented-user-reply-btn">Reply</button>
                     </div>
 
@@ -523,15 +529,13 @@ $(document).ready(function () {
                     ) {
                         data.comment_replies.forEach(function (reply) {
                             const replyHTML = `
-                        <li class="reply-on-comment" data-comment-id="${
-                            reply.id
-                        }">
+                        <li class="reply-on-comment" data-comment-id="${reply.id
+                                }">
                             <div class="commented-user-head">
                                 <div class="commented-user-profile">
                                     <div class="commented-user-profile-img">
-                                        <img src="${
-                                            reply.profile || "default-image.png"
-                                        }" alt="">
+                                        <img src="${reply.profile || "default-image.png"
+                                }" alt="">
                                     </div>
                                     <div class="commented-user-profile-content">
                                         <h3>${reply.username}</h3>
@@ -577,11 +581,7 @@ $(document).ready(function () {
             },
         });
 
-        $(".posts-card-like-btn").on("click", function () {
-            const icon = this.querySelector("i");
-            icon.classList.toggle("fa-regular");
-            icon.classList.toggle("fa-solid");
-        });
+
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {

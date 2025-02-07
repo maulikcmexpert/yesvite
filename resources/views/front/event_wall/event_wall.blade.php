@@ -551,8 +551,8 @@
                                                                     <input type="hidden"
                                                                     class="parent_comment_id"
                                                                     value="">
-                                                                    
-                                                                   
+
+
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
@@ -624,6 +624,7 @@
                                                                                             $liked = '';
                                                                                         }
                                                                                     @endphp
+                                                                                    <input type="hidden" id="login_user_id" value="{{$login_user_id}}">
                                                                                     <p>{{ $comment['posttime'] }}</p>
                                                                                     <button
                                                                                         class="posts-card-like-btn {{ $liked }}"
