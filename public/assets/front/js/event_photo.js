@@ -582,6 +582,8 @@ $(document).on('click', '.open_photo_model', function () {
 console.log(rawData.length);
 
     if (rawData.length > 1) {
+        swiperWrapper.removeClass('hideswipe')
+
         swiper.destroy(true, true);
         document.getElementsByClassName('swiper-button-next')[0].style.display = 'flex';
         document.getElementsByClassName('swiper-button-prev')[0].style.display = 'flex';
@@ -594,6 +596,7 @@ console.log(rawData.length);
             },
         });
     }else{
+        swiperWrapper.addClass('hideswipe')
         swiper.destroy(true, true);
         document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
         document.getElementsByClassName('swiper-button-prev')[0].style.display = 'none';
