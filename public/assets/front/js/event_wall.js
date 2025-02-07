@@ -1328,7 +1328,7 @@ $(document).on("click", ".wall_apply_filter", function () {
             console.log(response.view);
             $(".wall-post-content").html();
             $(".wall-post-content").html(response.view);
-            $("#home_loader").css("display", "flex");
+            $("#home_loader").css("display", "none");
 
             $("#main-center-modal-filter").modal("hide");
         },
