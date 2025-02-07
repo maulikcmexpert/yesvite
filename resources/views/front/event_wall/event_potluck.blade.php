@@ -163,7 +163,50 @@
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
-                                                @if (!empty($eventDetails['co_hosts']))
+                                            @if (!empty($eventDetails['co_hosts']))
+                                            @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                <div class="massge-data">
+                                                    <div class="host-img">
+                                                        @if ($co_host['profile'] != '')
+                                                        <img src="{{ $co_host['profile'] }}" alt="host-img" loading="lazy">
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(' ', $co_host['name'] );
+
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($nameParts[1][0])
+                                                                    ? strtoupper($nameParts[1][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
+                                                    </div>
+                                                    <h5>{{ $co_host['name'] }}</h5>
+                                                    <h6>Host</h6>
+                                                    <!-- <a href="#">Message</a> -->
+                                                            @if($co_host['host_id']!=$login_user_id)
+                                                                <a href="{{route('message.list',   ['id' => encrypt($co_host['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                            @endif
+
+                                                            
+                                                    <p style="{{ empty($co_host['message_to_guests']) ? 'display: none;' : '' }}">
+                                                        “{{ $co_host['message_to_guests'] }}”
+                                                    </p>
+                                                </div>
+                                            @endforeach
+                                           @endif 
+                                                <!-- @if (!empty($eventDetails['co_hosts']))
                                                     @foreach ($eventDetails['co_hosts'] as $co_host)
                                                         <div class="host-user-con">
                                                             <div class="img-wrp">
@@ -193,7 +236,7 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
-                                                @endif
+                                                @endif -->
 
                                         </div>
                                     @endif
@@ -248,7 +291,7 @@
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
                                                         <span
-                                                            class="me-1 list-sub-head">{{ $category['categoryQuantity'] }}</span>
+                                                            class="me-1 category-count-{{$key}} list-sub-head">{{ $category['categoryQuantity'] }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
                                                         </div>
@@ -722,7 +765,7 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"  data-itemkey="{{ $indexkey }}" data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -736,13 +779,14 @@
                                                                                                 class="input-qty itemQty"
                                                                                                 data-max="{{ $item['quantity'] }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
-                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}" />
+                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}" readonly />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
                                                                                                 data-categorykey="{{ $key }}"
+                                                                                                data-itemkey="{{ $indexkey }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>

@@ -610,6 +610,7 @@ $(document).on("keyup", ".search_phone", function () {
         // $("#save_edit_contact").submit();
 
         // var formActionURL = $("#edit_contact_form").attr("action");
+        if ($("#edit_contact_form").valid()) {  
         var formData = $("#edit_contact_form").serialize();
         var formtype=$(this).data('is_phone_contact');
         var formActionURL="";
@@ -658,6 +659,8 @@ $(document).on("keyup", ".search_phone", function () {
                 }
             },
         });
+
+    }
     });
 
     $("#save_edit_phone_contact").click(function () {

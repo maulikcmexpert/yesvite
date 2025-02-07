@@ -241,7 +241,8 @@ $(document).on("click", ".plus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-
+    const itemkey = $(this).data("itemkey");
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     const item_id = $(this).data("item-id");
 
     // Increment the quantity
@@ -256,7 +257,7 @@ $(document).on("click", ".plus", function () {
         const devideCount = container
             .closest(".accordion-item")
             .find("#quantity-display");
-        devideCount.text(`${currentValue + 1}/${maxQuantity}`);
+        devideCount.text(`${(parseInt(currentValue) + parseInt(innerUserQnt)) + 1}/${maxQuantity}`);
     }
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
@@ -266,7 +267,8 @@ $(document).on("click", ".plus", function () {
     categoryList.find(".itemQty").each(function () {
         spokenQuantity += parseInt($(this).val(), 10) || 0;
     });
-
+    let categoryCount= $(".category-count-"+categoryKey).text();
+    $(".category-count-"+categoryKey).text(parseInt(categoryCount) + currentValue + 1).trigger("change");
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
@@ -312,20 +314,23 @@ $(document).on("click", ".minus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-
+    const itemkey = $(this).data("itemkey");
     const item_id = $(this).data("item-id");
-
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     // Decrement the quantity, but not below 0
     const newValue = Math.max(0, currentValue - 1);
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
+
+    let categoryCount= $(".category-count-"+categoryKey).text();
+    $(".category-count-"+categoryKey).text(parseInt(categoryCount) - 1).trigger("change");
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
     if (maxQuantity) {
         const devideCount = container
             .closest(".accordion-item")
             .find(".devide-count");
-        devideCount.text(`${newValue}/${maxQuantity}`);
+        devideCount.text(`${parseInt(newValue) + parseInt(innerUserQnt)}/${maxQuantity}`);
     }
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute

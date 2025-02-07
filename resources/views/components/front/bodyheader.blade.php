@@ -1672,7 +1672,7 @@ $notification_list=getNotificationList();
                                          <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
-                                         <a class="nav-link" href="{{ route('about')}}">About</a>
+                                         <a class="nav-link" href="{{ route('about')}}">About Us</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == 'features')? 'active':'' }}">
                                       <a class="nav-link" href="{{ route('features')}}">Features</a>
