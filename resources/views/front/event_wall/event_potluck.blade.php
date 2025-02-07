@@ -584,7 +584,7 @@
                                                                                     }
                                                                                 @endphp
                                                                                 <span
-                                                                                    id ="success_{{ $item['id'] }}"
+                                                                                    id ="success_{{ $indexkey }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 18 18"
@@ -596,7 +596,7 @@
                                                                                     </svg>
                                                                                 </span>
 
-                                                                                <span id ="danger_{{ $item['id'] }}"
+                                                                                <span id ="danger_{{ $indexkey }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons == 'd-none' ? '' : 'd-none' }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 14 14"

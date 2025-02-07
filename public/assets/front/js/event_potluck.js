@@ -353,15 +353,15 @@ $(document).on("click", ".minus", function () {
     if(totalitemQnt >= maxQuantity){
     // if (missingQuantity === 0 || missingQuantity <= 0) {
         // If there are no missing items (or excess items), show the success icon
-        $("#success_" + category_id).removeClass("d-none");
-        $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
+        $("#success_" + itemkey).removeClass("d-none");
+        $("#danger_" + itemkey).addClass("d-none"); // Hide the danger icon
         // Change the color of the missing quantity text to green
         categoryList.find(".missing-quantity").css("color", "green");
     } else {
         // If there are missing items, show the danger icon
-        $("#danger_" + category_id).removeClass("d-none");
+        $("#danger_" + itemkey).removeClass("d-none");
         $(".missing-quantity").addClass("active");
-        $("#success_" + category_id).addClass("d-none");
+        $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
     const overQuantity = spokenQuantity - totalQuantity;
