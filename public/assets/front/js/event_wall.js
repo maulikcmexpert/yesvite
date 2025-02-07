@@ -315,8 +315,8 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
-                console.log( 'story_id',story.user_id);
-                console.log('user_id',userId);
+                console.log("story_id", story.user_id);
+                console.log("user_id", userId);
                 if (story.user_id !== userId) {
                     console.log(story.story);
 
@@ -333,9 +333,9 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
                             mediaElement.muted = true;
                         }
                         const storyItemContainer =
-                        document.createElement("div");
-                    storyItemContainer.classList.add("story-item");
-                    storyItemContainer.dataset.storyId = allStory.id;
+                            document.createElement("div");
+                        storyItemContainer.classList.add("story-item");
+                        storyItemContainer.dataset.storyId = allStory.id;
                         storyElements.push({
                             element: mediaElement,
                             type: allStory.type,
@@ -1165,8 +1165,6 @@ $(document).ready(function () {
     });
 });
 
-
-
 $(".posts-card-like-btn").on("click", function () {
     const icon = this.querySelector("i");
     icon.classList.toggle("fa-regular");
@@ -1179,7 +1177,7 @@ $(".show-btn-comment").click(function () {
 });
 
 $(".show-comment-reply-btn").click(function () {
-    $(".reply-on-comment").toggleClass("d-none");
+    $(this).prev().find(".reply-on-comment").toggleClass("d-none");
 });
 
 $(document).ready(function () {
@@ -1332,31 +1330,30 @@ $(document).on("click", ".wall_apply_filter", function () {
     });
 });
 
-
 let longPressTimer;
 let isLongPresss = false;
 
-$(document).on('mousedown', '#likeButton', function () {
+$(document).on("mousedown", "#likeButton", function () {
     isLongPresss = false; // Reset the flag
     const button = $(this);
 
     // Start the long press timer
     longPressTimer = setTimeout(() => {
         isLongPresss = true; // Mark as long press
-        const emojiDropdown = button.closest('.photo-card-head-right').find('#emojiDropdown');
+        const emojiDropdown = button
+            .closest(".photo-card-head-right")
+            .find("#emojiDropdown");
         emojiDropdown.show(); // Show the emoji picker
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-$(document).on('click', function (e) {
-    if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
-        $('#emojiDropdown').hide();
-        $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+$(document).on("click", function (e) {
+    if (!$(e.target).closest("#likeButton, #emojiDropdown").length) {
+        $("#emojiDropdown").hide();
+        $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
         // Hide emoji picker when clicked outside
     }
 });
-
-
 
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {
