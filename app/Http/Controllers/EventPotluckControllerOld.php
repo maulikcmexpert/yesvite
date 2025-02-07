@@ -599,9 +599,19 @@ class EventPotluckController extends Controller
             'event_potluck_category_id' => $categoryId,
             'event_potluck_item_id' => $itemId
         ])->sum('quantity'));
+        $isUser = false;
+        $item = UserPotluckItem::where([
+            'event_potluck_category_id' => $categoryId,
+            'user_id' => $user->id,
+            'event_potluck_item_id' => $itemId
+        ])->first();
 
+        if ($item && intval($item->quantity) > 0) {
+            $isUser = true; // If quantity is greater than zero
+        }
+// dd($isUser,$item);
         // Check if there's enough quantity available
-        if ($checkCarryQty < $checkQty) {
+        if ($checkCarryQty < $checkQty && $isUser==false ) {
             // Check if the user has already added this item
             $checkIsExist = UserPotluckItem::where([
                 'event_id' => $request->event_id,
@@ -617,7 +627,7 @@ class EventPotluckController extends Controller
                     'user_id' => $user->id,
                     'event_potluck_category_id' => $categoryId,
                     'event_potluck_item_id' => $itemId,
-                    'quantity' => $quantity
+                    'quantity' => 0
                 ]);
                 $checkIsExist = $newUserItem;
             } else {

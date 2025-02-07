@@ -1001,9 +1001,11 @@
             <div class="qantity-total">
                 <h6>Total Quantity Desired (You & Guests)</h6>
                 <div class="qty-container ms-auto">
-                    <button class="qty-btn-minus itemTotalQnt" type="button"><i class="fa fa-minus"></i></button>
+                   
+                    <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
+                  
                     <input type="number" id="sub_quantity" name="sub_quantity" value="0" class="input-qty" />
-                    <button class="qty-btn-plus itemTotalQnt" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>

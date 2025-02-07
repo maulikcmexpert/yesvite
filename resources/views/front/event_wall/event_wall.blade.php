@@ -1,5 +1,3 @@
-
-
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -221,22 +219,25 @@
                                                                     </ul>
                                                                 </div>
                                                                 <h5>
-                                                                    @if ($post['rsvp_status'] == '1')
+                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans">
                                                                             <i
                                                                                 class="fa-solid fa-circle-check"></i>Yes</span>
-                                                                    @elseif($post['rsvp_status'] == '0')
+                                                                    @elseif($post['rsvp_status'] == '0' && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans not-ans"><i
                                                                                 class="fa-solid fa-circle-question"></i>No
                                                                             Answer</span>
-                                                                    @elseif($post['rsvp_status'] == '2')
+                                                                    @elseif($post['rsvp_status'] == '2' && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans nagative-ans">
                                                                             <i class="fa-solid fa-circle-xmark"></i>Not
                                                                             Coming
                                                                         </span>
                                                                     @endif
 
-                                                                    {{ $post['posttime'] }}
+                                                                    {{ \Carbon\Carbon::parse($post['posttime'])->shortAbsoluteDiffForHumans() }}
+
+
+
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -250,32 +251,34 @@
 
                                                         {{-- {{  dd($post['post_image'])}} --}}
                                                         @if ($post['post_type'] == '1')
-
                                                             <div class="posts-card-show-post-wrp">
                                                                 <div class="swiper posts-card-post">
                                                                     <div class="swiper-wrapper">
                                                                         <!-- Slides -->
                                                                         @if (!empty($post['post_image']))
                                                                             @foreach ($post['post_image'] as $image)
-                                                                            @if ($image['type']=='video')
-                                                                            <div class="swiper-slide">
-                                                                                <div
-                                                                                    class="posts-card-show-post-img">
-                                                                                    <video src="{{ $image['media_url'] }}"
-                                                                                        alt=""
-                                                                                        loading="lazy" controls="true" muted />
-                                                                                </div>
-                                                                            </div>
-                                                                            @else
-                                                                                <div class="swiper-slide">
-                                                                                    <div
-                                                                                        class="posts-card-show-post-img">
-                                                                                        <img src="{{ $image['media_url'] }}"
-                                                                                            alt=""
-                                                                                            loading="lazy" />
+                                                                                @if ($image['type'] == 'video')
+                                                                                    <div class="swiper-slide">
+                                                                                        <div
+                                                                                            class="posts-card-show-post-img">
+                                                                                            <video
+                                                                                                src="{{ $image['media_url'] }}"
+                                                                                                alt=""
+                                                                                                loading="lazy"
+                                                                                                controls="true"
+                                                                                                muted />
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
-                                                                            @endif
+                                                                                @else
+                                                                                    <div class="swiper-slide">
+                                                                                        <div
+                                                                                            class="posts-card-show-post-img">
+                                                                                            <img src="{{ $image['media_url'] }}"
+                                                                                                alt=""
+                                                                                                loading="lazy" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
                                                                                 {{-- <div class="swiper-slide">
                                                                 <div class="posts-card-show-post-img">
                                                                     <video width="320" height="240">
@@ -313,11 +316,25 @@
                                                                 <div class="sucess-yes">
                                                                     <h5 class="green">YES</h5>
                                                                     <div class="sucesss-cat ms-auto">
-                                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
-                                                                            <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
-                                                                            <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
-                                                                            <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
+                                                                        <svg width="15" height="15"
+                                                                            viewBox="0 0 15 15" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z"
+                                                                                fill="black" fill-opacity="0.2">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z"
+                                                                                fill="black" fill-opacity="0.2">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z"
+                                                                                fill="black" fill-opacity="0.2">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z"
+                                                                                fill="black" fill-opacity="0.2">
+                                                                            </path>
                                                                         </svg>
                                                                         <h5>{{ $post['adults'] }} Adults</h5>
                                                                         <h5>{{ $post['kids'] }} Kids</h5>
@@ -379,11 +396,14 @@
                                                                     <!-- Smiley Emoji -->
                                                                     <li id="reactionImage_{{ $post['id'] }}">
                                                                         @if ($post['self_reaction'] == '\u{1F604}')
-                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt="Smiley Emoji">
+                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                                alt="Smiley Emoji">
                                                                         @elseif ($post['self_reaction'] == '\u{1F60D}')
-                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt="Eye Heart Emoji">
+                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                                alt="Eye Heart Emoji">
                                                                         @elseif ($post['self_reaction'] == '\u{2764}')
-                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji">
+                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                                alt="Heart Emoji">
                                                                         @endif
                                                                     </li>
                                                                     <p id="likeCount_{{ $post['id'] }}">
@@ -403,8 +423,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
-                                                                <button
-                                                                    class="posts-card-like-btn {{ $liked }} set_emoji_like"
+                                                                <button class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
                                                                     data-event-post-id="{{ $post['id'] }}"
@@ -443,30 +462,27 @@
                                                                         <i class="fa-regular fa-heart"
                                                                             id="show_Emoji"></i>
                                                                     @endif
-                                                                    </button>
+                                                                </button>
 
-                                                                    <div class="photos-likes-options-wrp emoji-picker"
-                                                                        id="emojiDropdown" style="display: none;">
-                                                                        <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                            alt="Heart Emoji"
-                                                                            class="emoji model_emoji" data-emoji="❤️"
-                                                                            data-unicode="\\u{2764}">
-                                                                        <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                            alt="Thumb Emoji"
-                                                                            class="emoji  model_emoji" data-emoji="👍"
-                                                                            data-unicode="\\u{1F44D}">
-                                                                        <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                            alt="Smiley Emoji"
-                                                                            class="emoji model_emoji" data-emoji="😊"
-                                                                            data-unicode="\\u{1F604}">
-                                                                        <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                            alt="Eye Heart Emoji"
-                                                                            class="emoji model_emoji" data-emoji="😍"
-                                                                            data-unicode="\\u{1F60D}">
-                                                                        <img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                            alt="Clap Emoji" class="emoji"
-                                                                            data-emoji="👏" data-unicode="\\u{1F44F}">
-                                                                    </div>
+                                                                <div class="photos-likes-options-wrp emoji-picker"
+                                                                    id="emojiDropdown" style="display: none;">
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji" class="emoji model_emoji"
+                                                                        data-emoji="❤️" data-unicode="\\u{2764}">
+                                                                    <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                        alt="Thumb Emoji" class="emoji  model_emoji"
+                                                                        data-emoji="👍" data-unicode="\\u{1F44D}">
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji" class="emoji model_emoji"
+                                                                        data-emoji="😊" data-unicode="\\u{1F604}">
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji"
+                                                                        class="emoji model_emoji" data-emoji="😍"
+                                                                        data-unicode="\\u{1F60D}">
+                                                                    <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                        alt="Clap Emoji" class="emoji"
+                                                                        data-emoji="👏" data-unicode="\\u{1F44F}">
+                                                                </div>
 
                                                                 @if ($post['commenting_on_off'] == '1')
                                                                     <button
@@ -548,9 +564,8 @@
                                                             <div class="posts-card-show-all-comments-inner">
                                                                 <ul class="top-level-comments">
 
-                                                                    <input type="hidden"
-                                                                    class="parent_comment_id"
-                                                                    value="">
+                                                                    <input type="hidden" class="parent_comment_id"
+                                                                        value="">
 
 
 
@@ -558,8 +573,8 @@
                                                                         <li class="commented-user-wrp"
                                                                             data-comment-id="{{ $comment['id'] }}">
                                                                             <input type="hidden"
-                                                                            class="data_comment_id"
-                                                                            value="{{ $comment['id'] }}">
+                                                                                class="data_comment_id"
+                                                                                value="{{ $comment['id'] }}">
                                                                             <div class="commented-user-head">
                                                                                 <div class="commented-user-profile">
                                                                                     <div
@@ -624,7 +639,9 @@
                                                                                             $liked = '';
                                                                                         }
                                                                                     @endphp
-                                                                                    <input type="hidden" id="login_user_id" value="{{$login_user_id}}">
+                                                                                    <input type="hidden"
+                                                                                        id="login_user_id"
+                                                                                        value="{{ $login_user_id }}">
                                                                                     <p>{{ $comment['posttime'] }}</p>
                                                                                     <button
                                                                                         class="posts-card-like-btn {{ $liked }}"
@@ -661,15 +678,17 @@
                                                                                                 id="show_Emoji"></i>
                                                                                         @endif
                                                                                     </button>
-                                                                                    <p id="commentTotalLike_{{$comment['id'] }}">
-                                                                        {{ isset($comment['comment_total_likes']) ? $comment['comment_total_likes'] : 0 }}
-                                                                    </p>
+                                                                                    <p
+                                                                                        id="commentTotalLike_{{ $comment['id'] }}">
+                                                                                        {{ isset($comment['comment_total_likes']) ? $comment['comment_total_likes'] : 0 }}
+                                                                                    </p>
                                                                                 </div>
-                                                                                <button data-comment-id="{{ $comment['id'] }}"
+                                                                                <button
+                                                                                    data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
-                                                                            @if ($comment['total_replies'] > 0)
-                                                                                <ul class="primary-comment-replies">
+                                                                            <ul class="primary-comment-replies">
+                                                                                @if ($comment['total_replies'] > 0)
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -780,7 +799,8 @@
 
                                                                                                 </div>
                                                                                                 <button
-                                                                                                    class="commented-user-reply-btn" data-comment-id="{{ $reply['id'] }}">Reply</button>
+                                                                                                    class="commented-user-reply-btn"
+                                                                                                    data-comment-id="{{ $reply['id'] }}">Reply</button>
                                                                                             </div>
                                                                                         </li>
                                                                                     @endforeach
@@ -791,12 +811,13 @@
                                                                                         {{ $comment['total_replies'] }}
                                                                                         reply
                                                                                     </button> --}}
-                                                                                    @if($comment['total_replies'] > 0)                                                                                       
-                                                                                    
-                                                                                    <button class="show-comment-reply-btn">Hide reply</button>
+                                                                                    @if ($comment['total_replies'] > 0)
+                                                                                        <button
+                                                                                            class="show-comment-reply-btn">Hide
+                                                                                            reply</button>
+                                                                                    @endif
                                                                                 @endif
-                                                                                </ul>
-                                                                            @endif
+                                                                            </ul>
 
 
                                                                         </li>
@@ -1345,21 +1366,47 @@
                                     <div class="off-by-host-wrp">
                                         <div class="off-by-host-inner">
                                             <div class="off-by-host-inner-left">
-                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
-                                                    <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
-                                                    <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
-                                                    <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
+                                                <svg width="15" height="15" viewBox="0 0 15 15"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z"
+                                                        fill="black" fill-opacity="0.2"></path>
+                                                    <path
+                                                        d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z"
+                                                        fill="black" fill-opacity="0.2"></path>
+                                                    <path
+                                                        d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z"
+                                                        fill="black" fill-opacity="0.2"></path>
+                                                    <path
+                                                        d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z"
+                                                        fill="black" fill-opacity="0.2"></path>
                                                 </svg>
                                             </div>
                                             <div class="off-by-host-inner-right">
-                                                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12.6092 8.26855L8.39258 12.4852C7.85091 11.9436 7.51758 11.2019 7.51758 10.3769C7.51758 8.72689 8.85091 7.39355 10.5009 7.39355C11.3259 7.39355 12.0676 7.72689 12.6092 8.26855Z" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M15.3499 5.18535C13.8915 4.08535 12.2249 3.48535 10.4999 3.48535C7.5582 3.48535 4.81654 5.21868 2.9082 8.21868C2.1582 9.39368 2.1582 11.3687 2.9082 12.5437C3.56654 13.577 4.3332 14.4687 5.16654 15.1854" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M7.51758 16.652C8.46758 17.052 9.47591 17.2687 10.5009 17.2687C13.4426 17.2687 16.1842 15.5354 18.0926 12.5354C18.8426 11.3604 18.8426 9.38535 18.0926 8.21035C17.8176 7.77702 17.5176 7.36868 17.2092 6.98535" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M13.4242 10.9604C13.2076 12.1354 12.2492 13.0938 11.0742 13.3104" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M8.39102 12.4854L2.16602 18.7104" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M18.8324 2.04346L12.6074 8.26846" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <svg width="21" height="21" viewBox="0 0 21 21"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M12.6092 8.26855L8.39258 12.4852C7.85091 11.9436 7.51758 11.2019 7.51758 10.3769C7.51758 8.72689 8.85091 7.39355 10.5009 7.39355C11.3259 7.39355 12.0676 7.72689 12.6092 8.26855Z"
+                                                        stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M15.3499 5.18535C13.8915 4.08535 12.2249 3.48535 10.4999 3.48535C7.5582 3.48535 4.81654 5.21868 2.9082 8.21868C2.1582 9.39368 2.1582 11.3687 2.9082 12.5437C3.56654 13.577 4.3332 14.4687 5.16654 15.1854"
+                                                        stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M7.51758 16.652C8.46758 17.052 9.47591 17.2687 10.5009 17.2687C13.4426 17.2687 16.1842 15.5354 18.0926 12.5354C18.8426 11.3604 18.8426 9.38535 18.0926 8.21035C17.8176 7.77702 17.5176 7.36868 17.2092 6.98535"
+                                                        stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path
+                                                        d="M13.4242 10.9604C13.2076 12.1354 12.2492 13.0938 11.0742 13.3104"
+                                                        stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M8.39102 12.4854L2.16602 18.7104" stroke="#64748B"
+                                                        stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                    <path d="M18.8324 2.04346L12.6074 8.26846" stroke="#64748B"
+                                                        stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
                                                 </svg>
                                                 <h4>Wall made private by host</h4>
                                             </div>
@@ -1461,47 +1508,47 @@
 
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
-                                <input type="hidden" class="textcontent" name="postContent"
-                                value="">
+                            <input type="hidden" class="textcontent" name="postContent" value="">
 
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"
-                                   ></textarea>
+                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"></textarea>
                             </div>
 
-                        <div class="create-post-upload-img-wrp d-none">
-                            <div class="create-post-upload-img-head">
-                                <h4>PHOTOS</h4>
-                                <div>
-                                    <button type="button" class="uploadButton create-post-head-upload-btn d-none"><i
-                                            class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
-                                            accept="image/* video/*" multiple></button>
-                                    <span class="upload-img-delete">
-                                        <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
-                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M8.854 5.17706L9.08317 3.81248C9.24984 2.8229 9.37484 2.08331 11.1353 2.08331H13.8644C15.6248 2.08331 15.7603 2.86456 15.9165 3.8229L16.1457 5.17706"
-                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M19.6356 9.52081L18.9585 20.0104C18.8439 21.6458 18.7502 22.9166 15.8439 22.9166H9.15641C6.25016 22.9166 6.15641 21.6458 6.04183 20.0104L5.36475 9.52081"
-                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M10.7603 17.1875H14.229" stroke="#0F172A" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M9.896 13.0208H15.1043" stroke="#0F172A" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
+                            <div class="create-post-upload-img-wrp d-none">
+                                <div class="create-post-upload-img-head">
+                                    <h4>PHOTOS</h4>
+                                    <div>
+                                        <button type="button"
+                                            class="uploadButton create-post-head-upload-btn d-none"><i
+                                                class="fa-solid fa-plus"></i> Add Photos/video
+                                            <input type="file" id="fileInput2" name="files[]"
+                                                class="fileInputtype" accept="image/* video/*" multiple></button>
+                                        <span class="upload-img-delete">
+                                            <svg viewBox="0 0 25 25" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
+                                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M8.854 5.17706L9.08317 3.81248C9.24984 2.8229 9.37484 2.08331 11.1353 2.08331H13.8644C15.6248 2.08331 15.7603 2.86456 15.9165 3.8229L16.1457 5.17706"
+                                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M19.6356 9.52081L18.9585 20.0104C18.8439 21.6458 18.7502 22.9166 15.8439 22.9166H9.15641C6.25016 22.9166 6.15641 21.6458 6.04183 20.0104L5.36475 9.52081"
+                                                    stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M10.7603 17.1875H14.229" stroke="#0F172A" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M9.896 13.0208H15.1043" stroke="#0F172A" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="create-post-upload-img-main">
+                                <div class="create-post-upload-img-main">
 
 
                                     <div class="create-post-upload-img-inner">
@@ -1546,8 +1593,8 @@
                                         </div>
                                     </div>
 
+                                </div>
                             </div>
-                        </div>
                         </form>
                         <div class="create-post-poll-wrp d-none">
                             <div class="create-post-upload-img-head">
@@ -1771,7 +1818,8 @@
                                 <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab-{{ $post['id'] }}"
                                     role="tablist">
                                     <!-- All Reactions Tab -->
-                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}" data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
+                                    <button class="nav-link active" id="nav-all-reaction-tab-{{ $post['id'] }}"
+                                        data-bs-toggle="tab" data-bs-target="#nav-all-reaction-{{ $post['id'] }}"
                                         type="button" role="tab" aria-controls="nav-all-reaction"
                                         aria-selected="true">
                                         All {{ count($post['reactionList']) }}
@@ -1809,7 +1857,8 @@
                             <!-- ===Tab-content=== -->
                             <div class="tab-content" id="myTabContent">
 
-                                <div class="tab-pane fade active show nav-all-reaction-tab-{{ $post['id'] }}" id="nav-all-reaction" role="tabpanel"
+                                <div class="tab-pane fade active show nav-all-reaction-tab-{{ $post['id'] }}"
+                                    id="nav-all-reaction" role="tabpanel"
                                     aria-labelledby="nav-all-reaction-tab-{{ $post['id'] }}">
                                     <ul>
                                         @php
@@ -2945,3 +2994,20 @@
 
 
 </main>
+
+<script>
+    use Carbon\ Carbon;
+
+    public
+    function getShortTimeAttribute() {
+        $time = Carbon::parse($this - > posttime);
+
+        return str_replace(
+            [' second', ' seconds', ' minute', ' minutes', ' hour', ' hours', ' day', ' days', ' week', ' weeks',
+                ' month', ' months', ' year', ' years'
+            ],
+            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w', 'mo', 'mo', 'y', 'y'],
+            $time - > diffForHumans()
+        );
+    }
+</script>
