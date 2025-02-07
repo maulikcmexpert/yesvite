@@ -421,6 +421,19 @@
                                                                         @elseif ($post['self_reaction'] == '\u{2764}')
                                                                             <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                                                                 alt="Heart Emoji">
+
+                                                                        @elseif($post['self_reaction'] == '\u{1F44D}')
+                                                                        <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                                loading="lazy" alt="Thumb Emoji"
+                                                                                class="emoji" data-emoji="👍"
+                                                                                data-unicode="\\u{1F44D}">
+
+                                                                    @elseif($post['self_reaction'] == '\u{1F44F}')
+                                                                        <img
+                                                                            src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                            loading="lazy" alt="Clap Emoji"
+                                                                            class="emoji" data-emoji="👏"
+                                                                            data-unicode="\\u{1F44F}">
                                                                         @endif
                                                                     </li>
                                                                     <p id="likeCount_{{ $post['id'] }}">
