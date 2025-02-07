@@ -909,9 +909,9 @@
 
                     @csrf
                     <div class="input-form">
-                        <input class="form-control" type="text"id="category" name="category"
+                        <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"id="category" name="category"
                             placeholder="ie, Appetizers, Salads, Main Dishes">
-                        <span class="sub-con"><span id="charCount">0</span>/30</span>
+                        <span id="category-sub-con" class="sub-con"><span id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ $event }}">
@@ -949,9 +949,9 @@
                     <!-- Example event_id -->
                     <input type="hidden" id="hiddenCategoryId" name="event_potluck_category_id" value="">
                     <div class="input-form">
-                        <input class="form-control" type="text" id="text1" name="description"
+                        <input class="form-control" oninput="clearError(this)" maxlength="30" type="text" id="text1" name="description"
                             placeholder="ie, Appetizers, Salads, Main Dishes">
-                        <span class="sub-con">0/30</span>
+                        <span id="text-sub-con" class="sub-con">0/30</span>
                     </div>
             </form>
             <div class="bring-item">
@@ -1043,9 +1043,9 @@
                     @csrf
                     {{-- @method('PUT') --}}
                     <div class="input-form">
-                        <input class="form-control" type="text" id="categorys" name="category"
+                        <input class="form-control" type="text" oninput="clearError(this)" maxlength="30" id="categorys" name="category"
                             placeholder="ie, Appetizers, Salads, Main Dishes" val="">
-                        <span class="sub-con"><span id="charCount">0</span>/30</span>
+                        <span id="categorys-sub-con" class="sub-con"><span id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ $event }}">
