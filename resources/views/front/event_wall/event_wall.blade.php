@@ -792,7 +792,7 @@
                                                                                         reply
                                                                                     </button> --}}
 
-                                                                                    <button class="show-comment-reply-btn">Show reply
+                                                                                    <button class="show-comment-reply-btn">Hide reply
                                                                                 </button>
                                                                                 </ul>
                                                                             @endif
