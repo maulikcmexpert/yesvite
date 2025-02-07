@@ -53,6 +53,9 @@
                                     $photos_show = 'show';
                                 }
                             @endphp
+                            <input type="hidden"
+                            id="login_user_id"
+                            value="{{ $login_user_id }}">
                             <div class="tab-pane fade {{ $photos_show }} {{ $photos_active }}" id="nav-photos"
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
