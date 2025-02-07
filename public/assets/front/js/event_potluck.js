@@ -633,3 +633,21 @@ function updateTOP(categoryIndex) {
 
     return { totalMissing, totalOver };
 }
+$(document).on("click", ".self_bring_quantity", function () {
+    var type = $(this).data("type");
+    var self_quantity = parseInt($("#self_bring_qty").val());
+
+    var main_quantity = parseInt($("#sub_quantity").val());
+
+    if (type == "plus") {
+        if (main_quantity > self_quantity) {
+            self_quantity++;
+            $("#self_bring_qty").val(self_quantity);
+        }
+    } else {
+        if (self_quantity > 0) {
+            self_quantity--;
+            $("#self_bring_qty").val(self_quantity);
+        }
+    }
+});
