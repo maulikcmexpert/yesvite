@@ -1960,7 +1960,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
             $("#buycreditsmodal").modal("show");
             return;
         } else if (max_guest - total_guest == 0) {
-            "#loader".css("display", "none");
+            $("#loader").css("display", "none");
             $(this).prop("checked", false);
             $("#buycreditsmodal").modal("show");
             return;
@@ -2162,7 +2162,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             $("#buycreditsmodal").modal("show");
             return;
         } else if (max_guest - total_guest == 0) {
-            "#loader".css("display", "none");
+            $("#loader").css("display", "none");
             $(this).prop("checked", false);
             $("#buycreditsmodal").modal("show");
             return;
