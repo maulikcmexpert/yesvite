@@ -331,7 +331,10 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
                             mediaElement.autoplay = false;
                             mediaElement.muted = true;
                         }
-
+                        const storyItemContainer =
+                        document.createElement("div");
+                    storyItemContainer.classList.add("story-item");
+                    storyItemContainer.dataset.storyId = storyData.id;
                         storyElements.push({
                             element: mediaElement,
                             type: storyData.type,
