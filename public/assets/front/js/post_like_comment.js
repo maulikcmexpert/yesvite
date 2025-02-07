@@ -57,16 +57,16 @@ $(document).ready(function () {
                                 '<img src="' +
                                 base_url +
                                 'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
-
+                            $(`#reactionImage_${eventPostId}`).html(
+                                reactionImage
+                            );
                             $(`#likeCount_${eventPostId}`).html(
-                                `${String.fromCodePoint(
-                                    parseInt("\\u{2764}")
-                                )} ${response.count} Likes`
+                                `${response.count} Likes`
                             );
                         } else {
                             if (response.count >= 1) {
                                 console.log(response.reactionList[0]);
-
+                                $(`#reactionImage_${eventPostId}`).html("");
                                 // ✅ Properly render the emoji without escaping it
                                 $(`#likeCount_${eventPostId}`).html(
                                     `${String.fromCodePoint(
