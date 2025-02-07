@@ -73,13 +73,13 @@ $getSocialLink = getSocialLink();
                     "progressBar": true,
                     "positionClass": "toast-top-right",
                 };
-            @if (session('msg'))
+            @if (session('success'))
                 toastr.options = {
                     "closeButton": true,
                     "progressBar": true,
                     "positionClass": "toast-top-right",
                 };
-                toastr.success("{{ session('msg') }}");
+                toastr.success("{{ session('success') }}");
             @endif
         });
 </script>
