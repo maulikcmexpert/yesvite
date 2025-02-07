@@ -40,33 +40,37 @@
                                     </div>
                                     <div class="accordion" id="accordionExample">
                                
-                                                        @foreach ($categories as $textData)
+                                    @foreach ($categories as $category)
+
                                                                 <div class="accordion-item">
-                                                                    <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
+                                                                    <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                                         <button class="accordion-button" type="button"
                                                                             data-bs-toggle="collapse"
-                                                                            data-bs-target="#collapse{{ $textData->categories->id }}" aria-expanded="true"
-                                                                            aria-controls="collapse{{ $textData->categories->id }}">
-                                                                            {{ $textData->categories->category_name }}
+                                                                            data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                                                                            aria-controls="collapse{{ $category->id }}">
+                                                                            {{ $category->category_name }}
                                                                         </button>
                                                                     </h2>
-                                                                    <div id="collapse{{ $textData->categories->id }}"
+                                                                    <div id="collapse{{ $category->id }}"
                                                                         class="accordion-collapse collapse"
-                                                                        aria-labelledby="heading{{ $textData->categories->id }}"
+                                                                        aria-labelledby="heading{{ $category->id }}"
                                                                         data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <ul>
+                                                                            @foreach ($category->subcategory as $subcategory)
+
                                                                                     <li>
                                                                                         <div class="d-flex align-items-center justify-content-between">
-                                                                                            <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
-                                                                                                {{ $textData->subcategories->subcategory_name }}
+                                                                                            <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
+                                                                                                {{ $subcategory->subcategory_name }}
                                                                                             </label>
                                                                                             <input class="form-check-input" name="design_subcategory" type="checkbox"
-                                                                                                id="subcategory{{ $textData->subcategories->id }}"
-                                                                                                data-category-id="{{ $textData->categories->id }}"
-                                                                                                data-subcategory-id="{{ $textData->subcategories->id }}">
+                                                                                                id="subcategory{{ $subcategory->id }}"
+                                                                                                data-category-id="{{ $category->id }}"
+                                                                                                data-subcategory-id="{{ $subcategory->id }}">
                                                                                         </div>
                                                                                     </li>
+                                                                                @endforeach
                                                                             </ul>
                                                                         </div>
                                                                     </div>
@@ -647,7 +651,24 @@
             </div>
             {{-- {{ dd($categories);}} --}}
             <div class="row list_all_design_catgeory">
-            @foreach ($categories as $textData)
+                 @foreach ($categories as $category)
+                    @foreach ($category->subcategory as $subcategory)
+                        @foreach ($subcategory->textdatas as $image)
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
+                                <a href="#" class="collection-card card-blue">
+                                    <div class="card-img">
+                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                            alt="shower-card">
+                                    </div>
+                                    <h4>{{ $category->category_name }}</h4>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endforeach
+                @endforeach
+            <!-- @foreach ($categories as $textData)
             
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
@@ -660,7 +681,7 @@
                             </a>
                         </div>
             
-            @endforeach
+            @endforeach -->
 
               
                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
