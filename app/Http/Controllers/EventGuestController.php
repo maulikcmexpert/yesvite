@@ -34,7 +34,7 @@ class EventGuestController extends Controller
 {
     public function index(string $id)
     {
-        $title = 'event guest';
+        $title = 'Event Guest';
         $page = 'front.event_wall.event_guest';
         $user  = Auth::guard('web')->user();
         $js = ['event_guest', 'post_like_comment', 'guest_rsvp'];
