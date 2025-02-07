@@ -1036,13 +1036,13 @@ $(document).on("click", ".open_photo_model", function () {
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
                 // Host Label Condition
-                if (data.is_host == "Host") {
+                if (data.is_host == "1") {
                     const host = `${data.is_host}`;
-                    $("#host_display").text(host);
+                    $("#host_display").text("host");
                 }
                 if (data.is_co_host == "1") {
                     const co_host = `${data.is_co_host}`;
-                    $("#host_display").text(co_host);
+                    $("#host_display").text("co_host");
                 }
 
                 $(".likeModel")
