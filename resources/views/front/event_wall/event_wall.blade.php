@@ -221,15 +221,15 @@
                                                                     </ul>
                                                                 </div>
                                                                 <h5>
-                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '1' )
+                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '0' )
                                                                         <span class="positive-ans">
                                                                             <i
                                                                                 class="fa-solid fa-circle-check"></i>Yes</span>
-                                                                    @elseif($post['rsvp_status'] == '0'  && $post['is_co_host'] == '1')
+                                                                    @elseif($post['rsvp_status'] == '0'  && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans not-ans"><i
                                                                                 class="fa-solid fa-circle-question"></i>No
                                                                             Answer</span>
-                                                                    @elseif($post['rsvp_status'] == '2'  && $post['is_co_host'] == '1')
+                                                                    @elseif($post['rsvp_status'] == '2'  && $post['is_co_host'] == '0')
                                                                         <span class="positive-ans nagative-ans">
                                                                             <i class="fa-solid fa-circle-xmark"></i>Not
                                                                             Coming
@@ -407,7 +407,7 @@
                                                                     }
                                                                 @endphp
                                                                 <button
-                                                                    class="posts-card-like-btn {{ $liked }} set_emoji_like"
+                                                                    class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
                                                                     data-event-post-id="{{ $post['id'] }}"
@@ -671,8 +671,9 @@
                                                                                 <button data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
+                                                                            <ul class="primary-comment-replies">
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                <ul class="primary-comment-replies">
+
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -798,8 +799,9 @@
 
                                                                                     <button class="show-comment-reply-btn">Hide reply</button>
                                                                                 @endif
-                                                                                </ul>
+
                                                                             @endif
+                                                                        </ul>
 
 
                                                                         </li>
