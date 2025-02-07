@@ -3300,7 +3300,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-
+        
         // dd($request->slider_images);
 
 
