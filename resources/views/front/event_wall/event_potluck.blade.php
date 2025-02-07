@@ -599,9 +599,13 @@
                                                                     </h2>
 
                                                                     @if(empty($item['item_carry_users']))
-                                                                    <div id="lumpia-collapseOne"
+                                                                    {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
+                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                class="accordion-collapse collapse"
+                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample">
                                                                                 <div class="accordion-body"
                                                                                     id="user-container-{{ $item['id'] }}">
@@ -776,9 +780,14 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <div id="lumpia-collapseOne"
+                                                                            {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
+
+                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                class="accordion-collapse collapse "
+                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample">
                                                                                 <div class="accordion-body"
                                                                                     id="user-container-{{ $item['id'] }}">
