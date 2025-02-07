@@ -2562,7 +2562,8 @@ class EventWallController extends Controller
                             'id' => $userVal->id,
                             'firstname' => $userVal->firstname,
                             'lastname' => $userVal->lastname,
-                            'prefer_by' => $userVal->prefer_by,
+                            // 'prefer_by' => $userVal->prefer_by,
+                            'prefer_by' => $user->prefer_by,
                             'invited_by' => $userVal->prefer_by == 'email' ? $userVal->email : $userVal->phone_number,
                             'profile' => $userVal->profile ?? '',
                         ];

@@ -611,13 +611,13 @@ class EventPotluckController extends Controller
         if ($request['self_bring_item'] == '1' || $request['self_bring_item'] == '0') {
             // Use the 'self_quantity' if provided, otherwise use the 'quantity'
             $selfQuantity = $request->has('self_quantity') ? $request['self_quantity'] : $request['quantity'];
-
+            $self_bring_quantity=$request->self_bring_quantity;
             UserPotluckItem::create([
                 'event_id' => $request['event_id'],
                 'user_id' => $user->id,
                 'event_potluck_category_id' => $request['category_id'],
                 'event_potluck_item_id' => $eventPotluckItem->id,
-                'quantity' => $selfQuantity,
+                'quantity' => $self_bring_quantity
             ]);
         }
         // $spoken_for = UserPotluckItem::where('event_potluck_item_id', $itemValue->id)->sum('quantity');
