@@ -277,7 +277,7 @@ let fileType = null; // Global variable to hold the message ID to reply to
 let WaitNewConversation = null; // Global variable to hold the message ID to reply to
 let myProfile;
 const loader = $(".loader");
-loader.css('display','flex');
+loader.css("display", "flex");
 // Function to get messages between two users
 var firstTime = true;
 var isToMove = true;
@@ -901,7 +901,7 @@ async function updateChatfromGroup(conversationId) {
 
 // Initialize event listeners
 $(document).on("click", ".msg-list", async function () {
-    loader.css('display','flex');
+    loader.css("display", "flex");
     $(".empty-massage").css("display", "none");
     removeSelectedMsg();
     closeMedia();
@@ -1503,7 +1503,7 @@ $(".send-message").on("keypress", async function (e) {
         await update(userRef, { userTypingStatus: "Typing..." });
     }
     if (e.which === 13) {
-        loader.css('display','flex');
+        loader.css("display", "flex");
         startButton.style.display = "inline-block";
         $("#isGroup").val(isGroup);
         const message = $(this).val();
@@ -2790,7 +2790,7 @@ $("#new_message").on("keypress", async function (e) {
         setTimeout(() => {
             isSending = false;
         }, 2000);
-        loader.css('display','flex');
+        loader.css("display", "flex");
         if (tagCount > 1) {
             const currentUserId = senderUser;
             const groupName = $("#group-name").html(); // Assuming you have an input for group name
@@ -4795,3 +4795,10 @@ $(document).on(
         $("#to_be_reported_user_id").val(userId);
     }
 );
+
+let host_id = $("#host_id").val();
+if (host_id != undefined && host_id != "") {
+    let host_image = $("#host_image").val();
+    let host_name = $("#host_name").val();
+    await sendMessageHost(host_id, host_name, host_image, "host");
+}
