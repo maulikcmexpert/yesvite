@@ -1314,7 +1314,6 @@ $(document).on("click", ".view_wall_filter", function () {
 });
 
 $(document).on("click", ".wall_apply_filter", function () {
-    $("#home_loader").css("display", "flex");
     $(".view_wall_filter").attr("data-apply", "1");
     let selectedPostTypes = [];
     let event_id = $(this).data("event_id");
