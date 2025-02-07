@@ -769,11 +769,11 @@
                             @endif
                          
 
-                            <div class="activity-schedule-inner-btn">
+                            {{-- <div class="activity-schedule-inner-btn">
                                 <button class="cmn-btn" id="save_activity_schedule">
                                     Save
                                 </button>
-                            </div>
+                            </div> --}}
                             {{-- </form> --}}
                         </div>
                     </div>
