@@ -857,27 +857,48 @@ class EventPhotoController extends Controller
             // ->first();
             // dd($letestComment);
             $postComment = getComments($value->id);
-            $postPhotoDetailcomment = [];
-            foreach ($postComment as $values) {
-                // Setting up the latest comment data
-                $postCommentList = [
-                    'id' => $values->id,
-                    'event_post_id' => $values->event_post_id,
-                    'comment' => $values->comment_text,
-                    'media' => (!empty($values->media)) ? asset('storage/comment_media/' . $values->media) : "",
-                    'user_id' => $values->user_id,
-                    'username' => $values->user->firstname . ' ' . $values->user->lastname,
-                    'profile' => (!empty($values->user->profile)) ? asset('storage/profile/' . $values->user->profile) : "",
-                    'comment_total_likes' => $values->post_comment_reaction_count,
-                    'location' => $values->user->city . ($values->user->state ? ', ' . $values->user->state : ''),
-                    'is_like' => 0, // Adjust based on the user's like status
-                    'created_at' => $values->created_at,
-                    'total_replies' => $values->replies_count,
-                    'posttime' => setpostTime($values->created_at),
-                    'comment_replies' => []
+            foreach ($postComment as $commentVal) {
+                $commentInfo['id'] = $commentVal->id;
 
-                ];
-                foreach ($values->replies as $reply) {
+                $commentInfo['event_post_id'] = $commentVal->event_post_id;
+
+                $commentInfo['comment'] = $commentVal->comment_text;
+
+                $commentInfo['user_id'] = $commentVal->user_id;
+
+                // $commentInfo['username'] = $commentVal->user->firstname . ' ' . $commentVal->user->lastname;
+                $firstName = $commentVal->user->firstname ?? '';
+                $lastName = $commentVal->user->lastname ?? '';
+
+                // Concatenate only if at least one value exists
+                $commentInfo['username'] = trim($firstName . ' ' . $lastName) ?: null;
+
+                $commentInfo['profile'] = (!empty($commentVal->user->profile)) ? asset('storage/profile/' . $commentVal->user->profile) : "";
+                // $postsNormalDetail['location'] = $value->user->city != "" ? trim($value->user->city) .($value->user->state != "" ? ', ' . $value->user->state : ''): "";
+                // $commentInfo['location'] = ($commentVal->user->city != NULL) ? $commentVal->user->city : "";
+                // $commentInfo['location'] = $commentVal->user->city != "" ? trim($commentVal->user->city) . ($commentVal->user->state != "" ? ', ' . $commentVal->user->state : '') : "";
+                $commentInfo['location'] = null; // Default value
+
+                if (!empty($commentVal->user)) {
+                    $city = trim($commentVal->user->city ?? '');
+                    $state = trim($commentVal->user->state ?? '');
+
+                    $commentInfo['location'] = ($city || $state) ? ($city . ($state ? ', ' . $state : '')) : null;
+                }
+
+
+                $commentInfo['comment_total_likes'] = $commentVal->post_comment_reaction_count;
+
+                $commentInfo['is_like'] = checkUserIsLike($commentVal->id, $user->id);
+
+                $commentInfo['total_replies'] = $commentVal->replies_count;
+
+                $commentInfo['created_at'] = $commentVal->created_at;
+                $commentInfo['posttime'] = setpostTime($commentVal->created_at);
+
+                $commentInfo['comment_replies'] = [];
+
+                foreach ($commentVal->replies as $reply) {
                     $mainParentId = (new EventPostComment())->getMainParentId($reply->parent_comment_id);
 
                     $replyCommentInfo['id'] = $reply->id;
@@ -918,9 +939,9 @@ class EventPhotoController extends Controller
                     $commentInfo['comment_replies'][] = $replyCommentInfo;
 
 
-                    ///$replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])->orderBy('id', 'DESC')->get();
+                    $replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])->orderBy('id', 'DESC')->get();
 
-                    foreach ($reply->replies as $childReplyVal) {
+                    foreach ($replyComment as $childReplyVal) {
 
                         if ($childReplyVal->parent_comment_id != $childReplyVal->main_parent_comment_id) {
 
@@ -985,9 +1006,11 @@ class EventPhotoController extends Controller
                         }
                     }
                 }
-                $postPhotoDetailcomment[] = $postCommentList;
+
+
+                $postCommentList[] = $commentInfo;
             }
-            $postPhotoDetail['latest_comment'] = $postPhotoDetailcomment;
+            $postPhotoDetail['latest_comment'] = $postCommentList;
             $postPhotoList[] = $postPhotoDetail;
         }
 
