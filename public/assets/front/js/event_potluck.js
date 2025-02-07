@@ -674,7 +674,7 @@ $(document).on('click','#selfBringItem',function(){
 
 })
 
-$(document).on('click', '.plusclick', function() {
+$(document).on('click', '.itemTotalQnts', function() {
     alert()
     var main_quantity = parseInt($("#sub_quantity").val(), 10);
     var self_quantity = parseInt($("#self_bring_qty").val(), 10);
@@ -685,4 +685,27 @@ $(document).on('click', '.plusclick', function() {
     } else {
         console.log("Invalid input values.");
     }
+});
+var buttonPlus  = $(".qty-btn-plu");
+var buttonMinus = $(".qty-btn-min");
+
+var incrementPlus = buttonPlus.click(function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+var $n = $(this)
+.parent(".qty-container")
+.find(".input-qty");
+$n.val(Number($n.val())+1 );
+});
+
+var incrementMinus = buttonMinus.click(function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+var $n = $(this)
+.parent(".qty-container")
+.find(".input-qty");
+var amount = Number($n.val());
+if (amount > 0) {
+  $n.val(amount-1);
+}
 });
