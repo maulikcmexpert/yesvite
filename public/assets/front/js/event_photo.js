@@ -600,6 +600,8 @@ console.log(rawData.length);
         swiper = new Swiper(".photo-detail-slider", {
             slidesPerView: 1,
             spaceBetween: 30,
+            allowTouchMove: false, // 🔹 Disable swipe when only one image
+            loop: false,            // 🔹 Ensure looping is disabled
         });
     }
     //let parentId = null;  // Default to null, assuming no parent
