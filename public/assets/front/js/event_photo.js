@@ -603,7 +603,7 @@ console.log(rawData.length);
         swiper = new Swiper(".photo-detail-slider", {
             slidesPerView: 1,
             spaceBetween: 30,
-            allowTouchMove: !isMediaPostClicked,
+
             loop: false,            // 🔹 Ensure looping is disabled
         });
     }
