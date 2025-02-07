@@ -1568,8 +1568,8 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    var total_all_activity=$('.event_all_activity_list').length();
-    $(".step_1_activity").text(total_activities + " Activity");
+    var total_all_activity=$('.event_all_activity_list').length;
+    $(".step_1_activity").text(total_all_activity + " Activity");
     // $(".step_1_activity").text(i + " Activity");
 
     // console.log(total_activities);
