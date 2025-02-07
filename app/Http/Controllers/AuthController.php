@@ -222,7 +222,7 @@ class AuthController extends Controller
             });
 
 
-            return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;
+            return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
         } catch (QueryException $e) {
             DB::Rollback();
 
