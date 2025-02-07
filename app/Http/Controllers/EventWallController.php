@@ -548,6 +548,8 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
+        $selectedFilters=session('filterSession');
+
 
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -651,7 +653,6 @@ class EventWallController extends Controller
         }
         ///postlist
         $postList = [];
-        $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
         // DB::enableQueryLog();
@@ -1326,6 +1327,8 @@ class EventWallController extends Controller
         })->where(['user_id' => $user->id, 'event_id' => $event])->first();
         $current_page = "wall";
         $login_user_id  = $user->id;
+        Session::forget('filterSession');
+
         // return $wallData;
         return view('layout', compact(
             'title',
