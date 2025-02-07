@@ -424,6 +424,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
+                                                                @dd($post['self_reaction'])
                                                                 <button class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
