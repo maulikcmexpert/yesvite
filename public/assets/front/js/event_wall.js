@@ -1325,8 +1325,8 @@ $(document).on("click", ".wall_apply_filter", function () {
     $(".select_all_post:checked").each(function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
-    if(selectedPostTypes==""){
-        toastr.error('Please select filter');
+    if (selectedPostTypes.length === 0) {
+        toastr.error('Please select atleast one filter');
         return;
     }
     console.log(selectedPostTypes);
