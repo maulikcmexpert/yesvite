@@ -389,7 +389,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <div class="posts-card-like-commnet-wrp">
+                                                        <div class="posts-card-like-commnet-wrp photo-card-head-right">
                                                             <div class="posts-card-like-comment-left">
                                                                 <ul type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">

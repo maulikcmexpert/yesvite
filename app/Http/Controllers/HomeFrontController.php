@@ -128,7 +128,8 @@ class HomeFrontController extends BaseController
         ->orderBy('id', 'desc')
         ->get();
 
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render()]);
+        $count=count($categories);
+        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(),'count'=>$count]);
 
     }
 

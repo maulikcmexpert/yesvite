@@ -319,7 +319,7 @@ $(document).ready(function () {
             ? base_url + "event_photo/userPostCommentReply"
             : base_url + "event_photo/userPostComment";
         console.log(url);
-        // AJAX request
+        $(this).prev(".post_comment").val("");
         $.ajax({
             url: url,
             type: "POST",

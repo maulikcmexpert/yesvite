@@ -643,7 +643,7 @@
                         </div> -->
                     </div>
                 </div>
-                <h5 class="total-items ms-auto">55 Items</h5>
+                <h5 class="total-items ms-auto total_design_count">{{count($categories)}} Items</h5>
             </div>
             {{-- {{ dd($categories);}} --}}
             <div class="row list_all_design_catgeory">
