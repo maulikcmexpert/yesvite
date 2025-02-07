@@ -323,7 +323,7 @@ $(document).on("click", ".minus", function () {
     $("#newQuantity_" + item_id).val(newValue);
 
     let categoryCount= $(".category-count-"+categoryKey).text();
-    $(".category-count-"+categoryKey).text(parseInt(categoryCount) - newValue).trigger("change");
+    $(".category-count-"+categoryKey).text(parseInt(categoryCount) - 1).trigger("change");
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
     if (maxQuantity) {
