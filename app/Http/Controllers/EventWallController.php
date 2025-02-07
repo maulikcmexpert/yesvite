@@ -548,7 +548,8 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-        $selectedFilters = session('filterSession');
+        $selectedFilters=[];
+        $selectedFilters = session('filterSession') || [];
         // dd($selectedFilters);
 
         if ($event == null) {
