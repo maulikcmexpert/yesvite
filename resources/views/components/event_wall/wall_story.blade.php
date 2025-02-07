@@ -1,4 +1,4 @@
-{{dd($storiesList)}}
+{{-- {{dd($storiesList)}} --}}
 <div class="wall-main-story-wrp">
     <div class="swiper story-slide-slider">
         <div class="swiper-wrapper">
@@ -47,14 +47,13 @@
                     <li class="wall-main-story-item story-unseen">
                         <button>
                             <div class="wall-story-item-img">
-                                @if ($Allstory['profile'] != '')
-                                    <img id="story-profile-pic-{{ $Allstory['id'] }} "src="{{ $Allstory['profile'] ? $Allstory['profile'] : asset('images/default-profile.png') }} "
-                                        class="story-profile-pic-{{ $Allstory['id'] }}" alt=""
-                                        onclick="AllUserStory( {{ $event }},{{$users->id}})" />
-                                    {{-- <img src="{{ $users->profile ? $users->profile : asset('images/default-profile.png') }}"
-                                alt="user-img" class="profile-pic" id="profile-pic-{{ $users->id }}"
-                                onclick="showStories( {{ $event }},{{ $users->id }})"> --}}
-                                @else
+                                @if (!empty($Allstory['profile']))
+                                <img id="story-profile-pic-{{ $Allstory['id'] }}"
+                                    src="{{ $Allstory['profile'] }}"
+                                    class="story-profile-pic-{{ $Allstory['id'] }}"
+                                    alt=""
+                                    onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})" />
+                            @else
                                     @php
                                         $name = $Allstory['username'] ?? ''; // Ensure username is set
 
@@ -69,11 +68,10 @@
 
                                         $fontColor = 'fontcolor' . strtoupper($firstInitial);
                                     @endphp
-                                    <h5 class="{{ $fontColor }}" class="profile-pic"
-                                        id="profile-pic-{{ $Allstory['id'] }}"
-                                        onclick="AllUserStory( {{ $event }},{{ $users->id }})">
-                                        {{ $initials }}
-                                    </h5>
+                                    <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['id'] }}"
+                                    onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})">
+                                    {{ $initials }}
+                                </h5>
                                 @endif
 
 
