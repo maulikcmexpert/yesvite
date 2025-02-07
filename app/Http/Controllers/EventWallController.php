@@ -2114,7 +2114,7 @@ class EventWallController extends Controller
 
 
             $totalCount = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id']])->count();
-            return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
+            return response()->json(['status' => 1, 'message' => "Post comment disliked by you", "self_reaction" => "", "count" => $totalCount]);
         }
     }
     public function userPostComment(Request $request)

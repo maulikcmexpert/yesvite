@@ -83,8 +83,9 @@
                                 @if($upcomingEvent['is_event_owner']==1)
                                 <li><span>Hosting</span></li>
                                 @elseif($upcomingEvent['is_co_host'] == "1")
-                                <li><span>Co-Hosting</span> {{$upcomingEvent['event_plan_name']}}</li>
-                            @else
+                                <li><span>Co-Hosting</span></li>
+                                @endif
+                                @if($upcomingEvent['is_event_owner']!=1)
                                     @if($upcomingEvent['rsvp_status'] == '1')
                                         <li><span>Guest : </span> RSVP - Yes</li>
                                     @elseif($upcomingEvent['rsvp_status'] == '2')
@@ -92,7 +93,7 @@
                                     @else
                                         <li><span>Guest : </span> RSVP - Pending</li>
                                     @endif
-                            @endif
+                                @endif    
                             <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
                             </ul>
                         </a>
@@ -154,6 +155,8 @@
                                             Edit Event
                                         </a>
                                         </li>
+                                        @if($upcomingEvent['is_event_owner']==1)
+
                                         <li>
                                             <a class="dropdown-item" href="{{ route('event', ['id' => $upcomingEvent['id'], 'iscopy' => 1]) }}">
 
@@ -174,6 +177,7 @@
                                             Cancel Event
                                         </button>
                                         </li>
+                                        @endif
                                     </ul>
                                     </div>
                                 @endif

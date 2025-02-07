@@ -174,16 +174,20 @@ class HomeController extends BaseController
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
+                    
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
+        
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                     } else {
                         $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                     }
-                    $eventDetail['is_co_host'] = "0";
-                    if ($isCoHost != null) {
-                        $eventDetail['is_co_host'] = $isCoHost->is_co_host;
-                    }
+                    // $eventDetail['is_co_host'] = "0";
+                    // if ($isCoHost != null) {
+                    //     $eventDetail['is_co_host'] = $isCoHost->is_co_host;
+                    // }
                     $eventDetail['message_to_guests'] = $value->message_to_guests;
                     $eventDetail['event_wall'] = isset($value->event_settings->event_wall) ? $value->event_settings->event_wall : "";
                     $eventDetail['guest_list_visible_to_guests'] = isset($value->event_settings->guest_list_visible_to_guests) ? $value->event_settings->guest_list_visible_to_guests : "";
