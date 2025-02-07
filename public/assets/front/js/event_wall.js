@@ -317,7 +317,7 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
             data.data.other_stories.forEach((story) => {
                 console.log("story_id", story.user_id);
                 console.log("user_id", userId);
-                if (story.user_id !== userId) {
+                if (story.user_id == userId) {
                     console.log(story.story);
 
                     story.story.forEach((allStory) => {
@@ -562,7 +562,7 @@ function displayStoriesWithProgressBars(
         const modal = document.getElementById(`storyModal-${userId}`);
         const storyDisplay = document.getElementById(`story-display-${userId}`);
         console.log(`Stories for User ${userId}:`, storyElements);
-console.log(`Story Content Element for User ${userId}:`, storyContent);
+        console.log(`Story Content Element for User ${userId}:`, storyContent);
 
         const progressBarContainer = document.querySelector(
             ".progress-bar-container"
