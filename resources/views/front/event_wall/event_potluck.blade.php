@@ -510,7 +510,9 @@
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $index => $item)
-                                                            
+                                                            <input type="hidden"
+                                                                    class="innerUserQnt-{{ $index }}-{{ $key }}"
+                                                                    value="{{ $item['innerUserQnt'] }}">
                                                             <div class="accordion-item active">
                                                                     <input type="hidden"
                                                                                     class="category-item-quantity"
@@ -597,9 +599,7 @@
                                                                             </div>
                                                                         </button>
                                                                     </h2>
-                                                                    <input type="hidden"
-                                                                    class="innerUserQnt-{{ $key }}-{{ $index }}"
-                                                                    value="{{ $item['innerUserQnt'] }}">
+                                                                    
                                                                     @if(empty($item['item_carry_users']))
                                                                     <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
