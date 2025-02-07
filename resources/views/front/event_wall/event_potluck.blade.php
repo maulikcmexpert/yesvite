@@ -1,4 +1,4 @@
-{{dD($potluckDetail['podluck_category_list_new'])}}
+
 <main class="new-main-content">
 
     <div class="container">
@@ -897,7 +897,7 @@
                                                                                             {{ $users['last_name'] }}
                                                                                         </h5>
                                                                                         <span
-                                                                                            class="ms-auto slide-round">{{ $users['spoken_quantity'] }}</span>
+                                                                                            class="ms-auto slide-round">{{ $users['quantity'] }}</span>
                                                                                     </div>
                                                                                 </div>
                                                                             {{-- </div> --}}
