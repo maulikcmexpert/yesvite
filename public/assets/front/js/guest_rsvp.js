@@ -219,6 +219,16 @@ $(document).on('click', '.remove-Rsvp-btn', function () {
 
                 // Hide the modal if it's open
                 $('#editrsvp3').modal('hide');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
+                window.location.reload();
             } else {
                 alert('Failed to remove guest. Please try again.');
             }

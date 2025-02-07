@@ -155,6 +155,8 @@
                                             Edit Event
                                         </a>
                                         </li>
+                                        @if($upcomingEvent['is_event_owner']==1)
+
                                         <li>
                                             <a class="dropdown-item" href="{{ route('event', ['id' => $upcomingEvent['id'], 'iscopy' => 1]) }}">
 
@@ -175,6 +177,7 @@
                                             Cancel Event
                                         </button>
                                         </li>
+                                        @endif
                                     </ul>
                                     </div>
                                 @endif
