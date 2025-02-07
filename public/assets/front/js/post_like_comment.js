@@ -48,31 +48,45 @@ $(document).ready(function () {
                     console.log(response);
 
                     let reactionImage = "";
-                    if (response.is_reaction == "1") {
-                        reactionImage =
-                            '<img src="' +
-                            base_url +
-                            'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                    if (response.status === 1) {
+                        console.log(response);
 
-                        const tempDiv = document.createElement("div");
-                        tempDiv.innerHTML = reactionImage.trim(); // Convert to an element
-                        const newCommentElement = tempDiv.firstChild;
-                        $(`#likeCount_${eventPostId}`).text(
-                            `${newCommentElement}${response.count} Likes`
-                        );
-                    } else {
-                        if (response.count >= 1) {
-                            $(`#likeCount_${eventPostId}`).text(
-                                `${response.reactionList[0]}${response.count} Likes`
+                        let reactionImage = "";
+                        if (response.is_reaction == "1") {
+                            reactionImage =
+                                '<img src="' +
+                                base_url +
+                                'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+
+                            $(`#likeCount_${eventPostId}`).html(
+                                `${String.fromCodePoint(
+                                    parseInt("\\u{2764}")
+                                )} ${response.count} Likes`
                             );
                         } else {
-                            $(`#likeCount_${eventPostId}`).text(
-                                `${response.count} Likes`
+                            if (response.count >= 1) {
+                                console.log(response.reactionList[0]);
+
+                                // ✅ Properly render the emoji without escaping it
+                                $(`#likeCount_${eventPostId}`).html(
+                                    `${String.fromCodePoint(
+                                        parseInt(
+                                            response.reactionList[0].codePointAt(
+                                                0
+                                            )
+                                        )
+                                    )} Likes`
+                                );
+                            } else {
+                                $(`#likeCount_${eventPostId}`).text(
+                                    `${response.count} Likes`
+                                );
+                            }
+
+                            button.html(
+                                '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
                             );
                         }
-                        button.html(
-                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
-                        );
                     }
 
                     // Update the reaction image in post
