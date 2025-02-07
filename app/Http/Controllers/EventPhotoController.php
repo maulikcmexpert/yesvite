@@ -805,9 +805,23 @@ class EventPhotoController extends Controller
         }
 
         $postPhotoList = [];
-
+        $ischeckEventOwner = Event::where(['id' => $eventId])->first()->user_id;
+        $checkeventCohost=  EventInvitedUser::where(['event_id' =>$eventId, 'is_co_host' => '1'])->first()->user_id;
         foreach ($results as $value) {
-            $ischeckEventOwner = Event::where(['id' => $eventId, 'user_id' => $user->id])->exists();
+
+            $is_host="0";
+            $is_co_host="0";
+            if($ischeckEventOwner!=""){
+                if($ischeckEventOwner== $value->user->id){
+                    $is_host="1";
+                }
+            }
+
+            if($checkeventCohost!=""){
+                if($checkeventCohost== $value->user->id){
+                    $is_co_host="1";
+                }
+            }
             $postControl = PostControl::where([
                 'user_id' => $user->id,
                 'event_id' => $eventId,
@@ -822,11 +836,12 @@ class EventPhotoController extends Controller
             $postPhotoDetail = [
                 'user_id' => $value->user->id,
                 'is_own_post' => ($value->user->id == $user->id) ? "1" : "0",
-                'is_host' => $ischeckEventOwner ? 'Host' : 'not_host',
+                'is_host' => $is_host,
                 'firstname' => $value->user->firstname,
                 'lastname' => $value->user->lastname,
                 'location' => $value->user->city . ', ' . $value->user->state,
-                'is_co_host'=>(isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0",
+                // 'is_co_host'=>(isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0",
+                'is_co_host'=>$is_co_host,
                 'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
                 'is_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->exists() ? '1' : '0',
                 'self_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->value('reaction') ?? "",
@@ -1018,7 +1033,7 @@ class EventPhotoController extends Controller
             $postPhotoDetail['latest_comment'] = $postCommentList;
             $postPhotoList[] = $postPhotoDetail;
         }
-
+// dd($postPhotoList);
         return response()->json([
             'status' => 'success',
             'data' => $postPhotoList
