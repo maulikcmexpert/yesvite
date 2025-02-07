@@ -292,12 +292,12 @@
 }
 
 .step_2 .list_all_design_catgeory {
-    max-height: calc(100vh - 25vh);
-    overflow-y: scroll;
+    max-height: calc(100vh - 25vh) !important;
+    overflow-y: scroll !important;
 }
 
 .step_2{
-    overflow:hidden;
+    overflow:hidden !important;
 }
 
 
