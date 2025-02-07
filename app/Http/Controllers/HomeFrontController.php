@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\TextData;
 use App\Models\EventDesignCategory;
 use App\Models\EventDesignSubCategory;
+
 class HomeFrontController extends BaseController
 {
     public function index()
@@ -98,14 +99,15 @@ class HomeFrontController extends BaseController
         return view('front.homefront', compact('images'));
     }
 
-    public function homeDesign(){
+    public function homeDesign()
+    {
         $serverKey  = ServerKey::first();
 
-        $title = 'Yesvite-Home';
+        $title = 'Yesvite-Features';
         $page = 'front.home_design';
-        $js =['home_design'];
+        $js = ['home_design'];
         $images = TextData::all();
-        $categories = TextData::with('categories','subcategories')->orderBy('id', 'desc')->get();;
+        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
         $getDesignData =  EventDesignCategory::with('subcategory')->get();
         $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
@@ -118,25 +120,26 @@ class HomeFrontController extends BaseController
             'js'
         ));
     }
-    public function searchDesign(Request $request){
-        
+    public function searchDesign(Request $request)
+    {
+
         $query = $request->input('search');
         $categories = TextData::with(['categories', 'subcategories'])
-        ->whereHas('categories', function ($q) use ($query) {
-            $q->where('category_name', 'LIKE', "%$query%");
-        })
-        ->orderBy('id', 'desc')
-        ->get();
+            ->whereHas('categories', function ($q) use ($query) {
+                $q->where('category_name', 'LIKE', "%$query%");
+            })
+            ->orderBy('id', 'desc')
+            ->get();
 
-        $count=count($categories);
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(),'count'=>$count]);
-
+        $count = count($categories);
+        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
     }
 
-    public function homePricing(){
+    public function homePricing()
+    {
         $serverKey  = ServerKey::first();
 
-        $title = 'Yesvite-Home';
+        $title = 'Yesvite-Pricing';
         $page = 'front.home_pricing';
 
         $images = TextData::all();
@@ -152,5 +155,4 @@ class HomeFrontController extends BaseController
             'categories'
         ));
     }
-
 }
