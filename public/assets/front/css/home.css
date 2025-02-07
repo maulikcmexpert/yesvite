@@ -933,7 +933,7 @@
     }
 
     .collection-wrapper .filter-main-wrp {
-        flex-direction: column;
+        flex-wrap: wrap;
     }
 
     .collection-wrapper .filter-main-wrp .filters-drp {
