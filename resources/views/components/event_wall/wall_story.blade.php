@@ -190,7 +190,7 @@
                     <div class="progress-bar-container"></div>
                     <div class="story-content"></div>
                 </div>
-                <button class="modal-close" data-id="{{ $Allstory['user_id  '] }}">
+                <button class="modal-close" data-id="{{ $Allstory['user_id'] }}">
                     <i class="fas fa-times"></i> <!-- FontAwesome X Icon -->
                 </button>
             </div>
