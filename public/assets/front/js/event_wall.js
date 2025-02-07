@@ -1031,10 +1031,13 @@ $(document).ready(function () {
     }
     $("#postContent").keypress(function (event) {
         if (event.which === 13 && !event.shiftKey) {
-            // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
 
-            $("#textform").submit(); // Submit the form
+            if ($("#textform").length) { // Check if #textform exists
+                $("#textform").submit(); // Submit the form if it exists
+            } else {
+                console.log("Form not found!"); // Debugging purpose
+            }
         }
     });
 
