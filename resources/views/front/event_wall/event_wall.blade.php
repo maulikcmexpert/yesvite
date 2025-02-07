@@ -416,11 +416,11 @@
                                                                     <!-- Smiley Emoji -->
                                                                     
                                                                     
-                                                                    @if ($j==0 && $post['self_reaction'] == '\u{1F604}' || 
+                                                                    @if ($j==0 && ($post['self_reaction'] == '\u{1F604}' || 
                                                                         $post['self_reaction'] == '\u{1F60D}' ||
                                                                         $post['self_reaction'] == '\u{2764}' ||
                                                                         $post['self_reaction'] == '\u{1F44D}' ||
-                                                                        $post['self_reaction'] == '\u{1F44F}')
+                                                                        $post['self_reaction'] == '\u{1F44F}'))
                                                                         <li id="reactionImage_{{ $post['id'] }}">
                                                                             @php $j++; @endphp
                                                                     @else
