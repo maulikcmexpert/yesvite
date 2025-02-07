@@ -311,6 +311,7 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         // Process 'other_stories'
         console.log(data.data.other_stories);
+        console.log(storyElements);
 
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
