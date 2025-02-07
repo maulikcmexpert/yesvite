@@ -111,7 +111,7 @@ class EventController extends BaseController
         });
 
         return response()->json([
-            'view' => view('front.search_home_design', compact('categories'))->render(),
+            'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
             'count' => $categories->count(), // Count of categories
             'total_textdatas' => $totalTextDataCount // Total count of textdatas
         ]);
@@ -1220,7 +1220,7 @@ class EventController extends BaseController
         }
 
         $registry = [];
-        if($request->isCopy !=null){
+        if ($request->isCopy != null) {
             if (isset($request->gift_registry_data) && count($request->gift_registry_data) > 0) {
                 foreach ($request->gift_registry_data as $key => $imgVal) {
                     $gr = EventGiftRegistry::where('id', $imgVal['gr_id'])->first();
@@ -1231,7 +1231,7 @@ class EventController extends BaseController
                     }
                 }
             }
-        }else{
+        } else {
             $registry = $request->gift_registry_data;
         }
 
