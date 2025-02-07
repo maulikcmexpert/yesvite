@@ -549,7 +549,7 @@ class EventWallController extends Controller
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
         $selectedFilters=session('filterSession');
-        dd($selectedFilters);
+        // dd($selectedFilters);
 
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -714,6 +714,7 @@ class EventWallController extends Controller
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
+                    dd($filter);
                     switch ($filter) {
                         case 'host_update':
                             $query->orWhere('user_id', $eventCreator->user_id);
