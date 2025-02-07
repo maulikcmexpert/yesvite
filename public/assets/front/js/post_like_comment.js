@@ -60,7 +60,7 @@ $(document).ready(function () {
                     }
 
                     // Update the reaction image in post
-                    //$(`#reactionImage_${eventPostId}`).html(reactionImage);
+                    $(`#reactionImage_${eventPostId}`).html("");
 
                     // **Update Reaction Modal**
                     updateReactionModal(eventPostId, response.post_reaction);
