@@ -245,6 +245,23 @@
     text-transform: uppercase;
 }
 
+.success-no{
+    border: 1px solid #e03137;
+    background-color: #FFE9E9;
+    padding: 6px 13px;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.success-no h5{
+    color: #e03137;
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 14px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
 
 .guest-user-list .sucesss-cat svg{
    width: 16px;
