@@ -1338,46 +1338,38 @@ $(document).on('mousedown', '#likeButton', function () {
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-
-$(document).on('click', '#likeButton', function () {
-    clearTimeout(longPressTimer); // Clear the long press timer
-
-    // If it's a long press, don't process the click event
-    if (isLongPresss) return;
-
-    // Handle single tap like/unlike
-    const button = $(this);
-    const isLiked = button.hasClass('liked');
-    const reaction = isLiked ? '\u{2764}' : '\u{1F90D}'; // Toggle reaction: 💔 or ❤️
-
-    // Toggle like button appearance
-    if (isLiked) {
-        button.removeClass('liked');
-        button.find('i').removeClass('fa-solid').addClass('fa-regular');
-    } else {
-        button.addClass('liked');
-        button.find('i').removeClass('fa-regular').addClass('fa-solid');
+$(document).on('click', function (e) {
+    if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
+        $('#emojiDropdown').hide(); 
+        $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+        // Hide emoji picker when clicked outside
     }
-
-    // AJAX call to update the like state
-    const eventId = button.data('event-id');
-    const eventPostId = button.data('event-post-id');
-    // $.ajax({
-    //     url: base_url + "event_photo/userPostLikeDislike",
-    //     method: "POST",
-    //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-    //     contentType: "application/json",
-    //     data: JSON.stringify({ event_id: eventId, event_post_id: eventPostId, reaction: reaction }),
-    //     success: function (response) {
-    //         if (response.status === 1) {
-    //             $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
-    //         } else {
-    //             alert(response.message);
-    //         }
-    //     },
-    //     error: function (xhr) {
-    //         console.error(xhr.responseText);
-    //         alert('An error occurred. Please try again.');
-    //     }
-    // });
 });
+
+
+
+// $(document).on('click', function (e) {
+//     if (!$(e.target).closest('.photo-card-head-right').length) {
+//         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+//     }
+// });
+// function getEmojiUnicode(emoji) {
+//     switch (emoji) {
+//         case '❤️':
+//             return '\u{2764}';  // Heart
+//         case '😍':
+//             return '\u{1F60D}';  // Smiling face with heart-eyes
+//         case '👍':
+//             return '\u{1F44D}';  // Thumbs up
+//         case '😂':
+//             return '\u{1F602}';  // Face with tears of joy
+//         case '😢':
+//             return '\u{1F622}';  // Crying face
+//         default:
+//             return emoji;  // Return as is if not found
+//     }
+// }
+
+// const longPressDelay = 3000; // 3 seconds for long press
+// let pressTimer;
+// let isLongPress = false;

@@ -449,8 +449,9 @@ $(document).on("click", ".plus_icon_user", function () {
             // const input = container.find('.itemQty');
             //             const devideCount = container.closest('.accordion-item').find('#quantity-display');
             // devideCount.text(`${response.spoken_for}/${ item_quantity}`);
-
-            userContainer.append(response.data);
+            if (response.status == "success") {
+                userContainer.append(response.data);
+            }
         },
         error: function (xhr, status, error) {
             console.log("Error: " + error);

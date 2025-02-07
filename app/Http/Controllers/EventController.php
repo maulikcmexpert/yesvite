@@ -424,7 +424,8 @@ class EventController extends BaseController
                         $categoryQuantity = 0;
                         $remainingQnt = 0;
                         $totalItem = 0;
-
+                        $totalMissing = 0;
+                        $totalOver = 0;
                         if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                             $itemData = [];
@@ -438,6 +439,7 @@ class EventController extends BaseController
                                 ];
                                 $itmquantity = 0;
                                 $innnerUserItem = 0;
+                                $userQuantity=0;
                                 $categories[$key]['item'][$itemkey] = $itemData;
                                 // Add item to session
                                 $categories_item[$value->category][] = $itemData;
@@ -475,7 +477,16 @@ class EventController extends BaseController
                                     $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                     if ($itemcarryUser->user_id != $id) {
                                         $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
+                                    }else{
+                                        $userQuantity = $userQuantity + $itemcarryUser->quantity;
                                     }
+                                    
+                                }
+                                $userQuantity =  $userQuantity + $innnerUserItem;
+                                if ($userQuantity <  $itemValue->quantity) {
+                                    $totalMissing +=  $itemValue->quantity - $userQuantity;
+                                } else if ($userQuantity >  $itemValue->quantity) {
+                                    $totalOver += $userQuantity -  $itemValue->quantity;
                                 }
                                 $totalItem = $totalItem + 1;
                                 $remainingQnt = $remainingQnt + $itemValue->quantity;
@@ -486,7 +497,8 @@ class EventController extends BaseController
                                 $totalCategoryItem++;
                             }
                         }
-
+                        $potluckCategory['totalMissing'] = $totalMissing;
+                        $potluckCategory['totalOver'] = $totalOver;
                         $remainingQnt =  $remainingQnt - $categoryQuantity;
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
@@ -499,7 +511,7 @@ class EventController extends BaseController
                     session()->put('category_item', $categories_item);
                     Session::save();
                     $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
-                    // dd($eventDetail);
+                    // dd($eventDetail['podluck_category_list']);
                 }
             }
         } else {

@@ -668,7 +668,7 @@
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                <ul>
+                                                                                <ul class="primary-comment-replies">
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -785,10 +785,14 @@
                                                                                     @endforeach
 
                                                                                     <!-- Button to show more replies if any -->
-                                                                                    <button
+                                                                                    {{-- <button
                                                                                         class="show-comment-reply-btn">Show
                                                                                         {{ $comment['total_replies'] }}
-                                                                                        reply</button>
+                                                                                        reply
+                                                                                    </button> --}}
+
+                                                                                    <button class="show-comment-reply-btn">Show reply
+                                                                                </button>
                                                                                 </ul>
                                                                             @endif
 

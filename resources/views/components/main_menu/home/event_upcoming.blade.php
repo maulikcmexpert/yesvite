@@ -48,6 +48,9 @@
                   <ul class="home-upcoming-events-card-left-detail">
                       @if($events['is_event_owner']==1)
                           <li><span>Hosting</span></li>
+                      @elseif($events['is_co_host']=="1")
+                      <li><span>Co-Hosting</span></li>
+
                       @else
                               @if($events['rsvp_status'] == '1')
                                   <li><span>Guest : </span> RSVP - Yes</li>
