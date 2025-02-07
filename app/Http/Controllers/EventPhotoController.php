@@ -200,6 +200,8 @@ class EventPhotoController extends Controller
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['event_date'] = $eventDetail->start_date;
+            $eventDetails['end_date'] = $eventDetail->end_date;
+            $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 

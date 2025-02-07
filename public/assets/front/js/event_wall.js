@@ -1031,10 +1031,19 @@ $(document).ready(function () {
     }
     $("#postContent").keypress(function (event) {
         if (event.which === 13 && !event.shiftKey) {
-            // Enter key without Shift
             event.preventDefault(); // Prevents new line in textarea
 
-            $("#textform").submit(); // Submit the form
+            let postContent = $("#postContent").val().trim(); // Get content and remove spaces
+
+            if (postContent.length > 0) { // Check if content exists
+                if ($("#textform").length) { // Check if form exists
+                    $("#textform").submit(); // Submit the form
+                } else {
+                    console.log("Form not found!"); // Debugging purpose
+                }
+            } else {
+                console.log("Post content is empty! Form not submitted.");
+            }
         }
     });
 

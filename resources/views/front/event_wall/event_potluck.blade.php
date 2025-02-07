@@ -831,7 +831,7 @@
                                                                                                     );
                                                                                             @endphp
                                                                                             <h5
-                                                                                                class="{{ $fontColor }}">
+                                                                                                class="fontColor {{ $fontColor }}">
                                                                                                 {{ $initials }}
                                                                                             </h5>
                                                                                         @endif
