@@ -212,6 +212,7 @@ console.log(adults,kids);
         }
     })
 });
+
 $(".modal").on("hidden.bs.modal", function () {
 
     $("#option6").prop('checked',false);
@@ -234,3 +235,28 @@ $(document).on('click','.btn-close').click(function () {
 
 
 });
+$(".modal").on("hidden.bs.modal", function () {
+    var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+
+
+    if (rsvpStatus !== "1") {
+        clearModalValues();
+    }
+});
+
+$(document).on("click", ".btn-close", function () {
+    var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+
+    if (rsvpStatus !== "1") {
+        clearModalValues();
+    }
+});
+
+// Function to clear modal values
+function clearModalValues() {
+    $("#option6").prop("checked", false);
+    $("#option5").prop("checked", false);
+    $("#message_to_host").val(""); // Clear input field
+    $("#rsvp_status_adults").val(0);
+    $("#rsvp_status_kids").val(0);
+}
