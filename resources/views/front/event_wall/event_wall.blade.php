@@ -409,20 +409,51 @@
                                                             <div class="posts-card-like-comment-left">
                                                                 <ul type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">
+                                                                    @php $i=0; $j = 0; @endphp
+                                                                    @foreach ($post['reactionList'] as $reaction)
+                                                                    
 
                                                                     <!-- Smiley Emoji -->
+                                                                    
+                                                                    
+                                                                    @if ($j==0 && ($post['self_reaction'] == $reaction))
+                                                                        <li id="reactionImage_{{ $post['id'] }}">
+                                                                            
+                                                                        @php $j++; @endphp
+                                                                    @else
+                                                                    <li>
+                                                                    @endif
+                                                                            @if ($reaction == '\u{1F604}')
+                                                                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                                    alt="Smiley Emoji">
+                                                                            @elseif ($reaction == '\u{1F60D}')
+                                                                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                                    alt="Eye Heart Emoji">
+                                                                            @elseif ($reaction == '\u{2764}')
+                                                                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                                    alt="Heart Emoji">
+
+                                                                            @elseif($reaction == '\u{1F44D}')
+                                                                            <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                                    loading="lazy" alt="Thumb Emoji"
+                                                                                    class="emoji" data-emoji="👍"
+                                                                                    data-unicode="\\u{1F44D}">
+
+                                                                            @elseif($reaction == '\u{1F44F}')
+                                                                                <img
+                                                                                    src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                                    loading="lazy" alt="Clap Emoji"
+                                                                                    class="emoji" data-emoji="👏"
+                                                                                    data-unicode="\\u{1F44F}">
+                                                                                @endif
+
+                                                                        </li>
+                                                                        @php $i++; if($i==3){break;} @endphp
+                                                                    @endforeach
+                                                                    @if($j==0)
                                                                     <li id="reactionImage_{{ $post['id'] }}">
-                                                                        @if ($post['self_reaction'] == '\u{1F604}')
-                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                                alt="Smiley Emoji">
-                                                                        @elseif ($post['self_reaction'] == '\u{1F60D}')
-                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                                alt="Eye Heart Emoji">
-                                                                        @elseif ($post['self_reaction'] == '\u{2764}')
-                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                                alt="Heart Emoji">
-                                                                        @endif
                                                                     </li>
+                                                                    @endif
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
@@ -440,6 +471,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
+                                                               
                                                                 <button class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
