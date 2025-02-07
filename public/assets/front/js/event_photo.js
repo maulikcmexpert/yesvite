@@ -583,7 +583,8 @@ console.log(rawData.length);
 
     if (rawData.length > 1) {
         swiper.destroy(true, true);
-
+        document.getElementsByClassName('swiper-button-next')[0].style.display = 'flex';
+        document.getElementsByClassName('swiper-button-prev')[0].style.display = 'flex';
         swiper = new Swiper(".photo-detail-slider", {
             slidesPerView: 1,
             spaceBetween: 30,
@@ -591,6 +592,14 @@ console.log(rawData.length);
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
+        });
+    }else{
+        swiper.destroy(true, true);
+        document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
+        document.getElementsByClassName('swiper-button-prev')[0].style.display = 'none';
+        swiper = new Swiper(".photo-detail-slider", {
+            slidesPerView: 1,
+            spaceBetween: 30,
         });
     }
     //let parentId = null;  // Default to null, assuming no parent
