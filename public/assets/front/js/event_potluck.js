@@ -276,36 +276,37 @@ $(document).on("click", ".plus", function () {
     // if (missingQuantity <= 0 || missingQuantity === 0) {
     if(totalitemQnt >= maxQuantity){
         // If there are no missing items (or excess items), show the success icon
-        $("#success_" + category_id).removeClass("d-none");
-        $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
+        $("#success_" + itemkey).removeClass("d-none");
+        $("#danger_" + itemkey).addClass("d-none"); // Hide the danger icon
         // Change the color of the missing quantity text to green
         categoryList.find(".missing-quantity").css("color", "green");
     } else {
         // If there are missing items, show the danger icon
-        $("#danger_" + category_id).removeClass("d-none");
+        $("#danger_" + itemkey).removeClass("d-none");
         $(".missing-quantity").addClass("active");
+        $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
-    const overQuantity = spokenQuantity - totalQuantity; // Only show if this is greater than 0
+    // const overQuantity = spokenQuantity - totalQuantity; // Only show if this is greater than 0
 
-    // Get the over-quantity element
-    const overQuantityElement = categoryList.find(
-        ".over-quantity-" + category_id
-    );
+    // // Get the over-quantity element
+    // const overQuantityElement = categoryList.find(
+    //     ".over-quantity-" + category_id
+    // );
 
-    // Update the over quantity text
-    const successIcon = categoryList.find("#success" + category_id);
-    // Update the over quantity text
-    overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
+    // // Update the over quantity text
+    // const successIcon = categoryList.find("#success" + category_id);
+    // // Update the over quantity text
+    // overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
 
-    // Show or hide the over quantity based on the calculation
-    if (overQuantity > 0) {
-        overQuantityElement.removeClass("d-none"); // Show the over-quantity element
-        $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
-    } else {
-        overQuantityElement.addClass("d-none"); // Hide the over-quantity element
-        // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
-    }
+    // // Show or hide the over quantity based on the calculation
+    // if (overQuantity > 0) {
+    //     overQuantityElement.removeClass("d-none"); // Show the over-quantity element
+    //     $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
+    // } else {
+    //     overQuantityElement.addClass("d-none"); // Hide the over-quantity element
+    //     // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
+    // }
     updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
@@ -364,22 +365,22 @@ $(document).on("click", ".minus", function () {
         $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
-    const overQuantity = spokenQuantity - totalQuantity;
-    const overQuantityElement = categoryList.find(
-        ".over-quantity-" + category_id
-    );
+    // const overQuantity = spokenQuantity - totalQuantity;
+    // const overQuantityElement = categoryList.find(
+    //     ".over-quantity-" + category_id
+    // );
 
-    // Update the over quantity text
-    overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
+    // // Update the over quantity text
+    // overQuantityElement.text(`${Math.max(0, overQuantity)} Item Over`);
 
-    // Show or hide the over quantity based on the calculation
-    if (overQuantity > 0) {
-        overQuantityElement.removeClass("d-none"); // Show the over-quantity element
-        $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
-    } else {
-        overQuantityElement.addClass("d-none"); // Hide the over-quantity element
-        // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
-    }
+    // // Show or hide the over quantity based on the calculation
+    // if (overQuantity > 0) {
+    //     overQuantityElement.removeClass("d-none"); // Show the over-quantity element
+    //     $("#success_" + category_id).removeClass("d-none"); // Show the success (green SVG) element
+    // } else {
+    //     overQuantityElement.addClass("d-none"); // Hide the over-quantity element
+    //     // $('#success_' + category_id).addClass('d-none');  // Hide the success (green SVG) element
+    // }
     updateTOP(categoryKey);
     // updateQuantityStatusOnLoad();
 });
