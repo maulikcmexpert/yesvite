@@ -883,6 +883,9 @@
     border-radius: 50%;
     margin-right: 10px;
     color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-on h5 {
