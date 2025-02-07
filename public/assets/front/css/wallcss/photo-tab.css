@@ -599,10 +599,10 @@
     }
 
     .phototab-add-new-photos-wrp{
-        position: fixed;
+        /* position: fixed;
         bottom: 80px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%); */
         max-width: calc(100% - 20px);
     }
     .photos-tab-active .event-center-title {
