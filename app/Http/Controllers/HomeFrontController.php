@@ -106,15 +106,15 @@ class HomeFrontController extends BaseController
         $title = 'Yesvite-Features';
         $page = 'front.home_design';
         $js = ['home_design'];
-        $images = TextData::all();
+        // $images = TextData::all();
         // $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
         $categories = EventDesignCategory::with(['subcategory' => function ($query) {
             $query->with('textdatas');
         }])->get();
-        dd($categories);
-        $getDesignData =  EventDesignCategory::with('subcategory')->get();
-        $getDesignData = EventDesignCategory::all();
-        $getsubcatData = EventDesignSubCategory::all();
+        // dd($categories);
+        // $getDesignData =  EventDesignCategory::with('subcategory')->get();
+        // $getDesignData = EventDesignCategory::all();
+        // $getsubcatData = EventDesignSubCategory::all();
         // $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
         // $getDesignData =  EventDesignCategory::with('subcategory')->get();
         // $getDesignData = EventDesignCategory::all();
@@ -122,8 +122,8 @@ class HomeFrontController extends BaseController
         return view('layout', compact(
             'title',
             'page',
-            'images',
-            'getDesignData',
+            // 'images',
+            // 'getDesignData',
             'categories',
             'js'
         ));
