@@ -805,20 +805,22 @@ class EventPhotoController extends Controller
         }
 
         $postPhotoList = [];
-
+        $ischeckEventOwner = Event::where(['id' => $eventId])->first()->user_id;
+        $checkeventCohost=  EventInvitedUser::where(['event_id' =>$eventId, 'is_co_host' => '1'])->first()->user_id;
         foreach ($results as $value) {
-            $ischeckEventOwner = Event::where(['id' => $eventId])->first()->user_id;
-            $checkeventCohost=  EventInvitedUser::where(['event_id' =>$eventId, 'is_co_host' => '1'])->first()->user_id;
+
             $is_host="0";
             $is_co_host="0";
             if($ischeckEventOwner!=""){
-                if($ischeckEventOwner== $value->user->id){}
-                $is_host="1";
+                if($ischeckEventOwner== $value->user->id){
+                    $is_host="1";
+                }
             }
 
             if($checkeventCohost!=""){
-                if($checkeventCohost== $value->user->id){}
-                $is_co_host="1";
+                if($checkeventCohost== $value->user->id){
+                    $is_co_host="1";
+                }
             }
             $postControl = PostControl::where([
                 'user_id' => $user->id,
