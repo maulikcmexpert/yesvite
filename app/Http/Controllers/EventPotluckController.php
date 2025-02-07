@@ -34,7 +34,7 @@ class EventPotluckController extends Controller
     public function index(String $id)
     {
         
-        $title = 'event potluck';
+        $title = 'Event Potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
@@ -773,7 +773,8 @@ class EventPotluckController extends Controller
                 'category_id' => $categoryId,
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
-                "key" => $request->categorykey
+                "key" => $request->categorykey,
+                "itemkey"=> $request->itemkey
             ])->render();
                 
             // Return the response

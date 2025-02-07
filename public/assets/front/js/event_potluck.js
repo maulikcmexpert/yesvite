@@ -447,6 +447,7 @@ $(document).on("click", ".plus_icon_user", function () {
     const itemId = $(this).data("item-id");
     const eventId = $(this).data("event-id");
     const categorykey = $(this).data("categorykey");
+    const itemkey = $(this).data("itemkey");
     const quantity = $(this).data("max");
     const userProfile = $(this).data("user-profile");
     const loginUserId = $(this).data("login-user-id");
@@ -465,7 +466,8 @@ $(document).on("click", ".plus_icon_user", function () {
             login_user_id: loginUserId,
             quantity: quantity,
             event_id: eventId,
-            categorykey:categorykey
+            categorykey:categorykey,
+            itemkey:itemkey
         },
         success: function (response) {
             // On successful response, append the user data to the container

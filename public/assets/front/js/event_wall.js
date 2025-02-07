@@ -1,3 +1,5 @@
+const { error } = require("toastr");
+
 let selectedFiles = null; // To store selected files
 
 // // Step 1: Preview the selected media
@@ -1323,7 +1325,10 @@ $(document).on("click", ".wall_apply_filter", function () {
     $(".select_all_post:checked").each(function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
-
+    if (selectedPostTypes.length === 0) {
+        toastr.error('Please select atleast one filter');
+        return;
+    }
     console.log(selectedPostTypes);
     $.ajax({
         url: base_url + "event_wall/wallFilters",
@@ -1338,17 +1343,18 @@ $(document).on("click", ".wall_apply_filter", function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response.view);
-            $(".wall-post-content").html();
-            $(".wall-post-content").html(response.view);
-            $("#home_loader").css("display", "none");
+            // console.log(response.view);
+            window.location.reload();
+            // $(".wall-post-content").html();
+            // $(".wall-post-content").html(response.view);
+            // $("#home_loader").css("display", "none");
 
-            $("#main-center-modal-filter").modal("hide");
+            // $("#main-center-modal-filter").modal("hide");
         },
         error: function (xhr, status, error) {
+            $("#home_loader").css("loader", "none");
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
-            $("#home_loader").css("loader", "none");
         },
     });
 });

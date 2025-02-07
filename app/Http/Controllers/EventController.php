@@ -2881,6 +2881,7 @@ class EventController extends BaseController
 
     public function get_co_host_list(Request $request)
     {
+        // dd($request);
         $cohostId = $request->cohostId;
         $isCohost = $request->isCohost;
         $isCopy = $request->isCopy;
@@ -3620,7 +3621,7 @@ class EventController extends BaseController
 
             if (isset($request->co_host) && $request->co_host != '' && isset($request->co_host_prefer_by)) {
                 // if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
-                if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1")) {
+                if ($request->isdraft == "1" || (isset($request->isDraftEdit) && $request->isDraftEdit == "1") || (isset($request->isCheckOldcoHost) && $request->isCheckOldcoHost == "0")) {
                     $is_cohost = '1';
                     $invited_user = $request->co_host;
                     $prefer_by = $request->co_host_prefer_by;

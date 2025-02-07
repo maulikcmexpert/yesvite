@@ -102,3 +102,5 @@ $(document).ready(function() {
         });
     });
 });
+
+$('#Allcat').prop('checked', true);
