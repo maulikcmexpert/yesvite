@@ -65,15 +65,11 @@ $(document).ready(function() {
     });
 
     $(document).on('input','#search_design_category',function(){
-
         var search_value=$(this).val();
         $('#home_loader').css('display','flex');
         $.ajax({
             url: base_url + "search_features", 
             method: 'GET',
-            // headers: {
-            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
-            // },
             data: { search: search_value}, 
             success: function (response) {
                 console.log("Remove successful: ", response);
@@ -91,7 +87,7 @@ $(document).ready(function() {
                 }
             },
             error: function (error) {
-            
+               toastr.error('Some thing went wrong');
             }
         });
     });

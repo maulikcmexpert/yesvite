@@ -1568,7 +1568,7 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    var total_all_activity=$('.event_all_activity_list').length;
+    var total_all_activity = $(".event_all_activity_list").length;
     $(".step_1_activity").text(total_all_activity + " Activities");
     // $(".step_1_activity").text(i + " Activity");
 
@@ -2799,8 +2799,8 @@ $(document).on("blur", "#ac-start-time", function () {
 
     $(".new_activity").html("");
     $("#end-time").val("");
-    $(".activity_total_count").text('('+0+')');
-    $(".step_1_activity").text('0 Activity')
+    $(".activity_total_count").text("(" + 0 + ")");
+    $(".step_1_activity").text("0 Activity");
     $("#ac-end-time").val("");
 });
 
@@ -3521,7 +3521,7 @@ $(document).on("click", "#save_activity_schedule", function () {
 
     if (isValid == 0) {
         isStartTime = 0;
-            var total_activity_count=$('.event_all_activity_list').length;
+        var total_activity_count = $(".event_all_activity_list").length;
         if (total_activity_count >= 1) {
             // if (total_activities == 1) {
             //     $(".step_1_activity").text(total_activities + " Activity");
@@ -3679,6 +3679,7 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", function () {
+    $("#loader").css("display", "flex");
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -3698,7 +3699,6 @@ $(document).on("click", "#close_createEvent", function () {
     // }
 
     // $('#loader').css('display','block');
-    $("#loader").css("display", "flex");
 
     if (event_date != "") {
         // if (event_name != "" && event_date != "") {
@@ -3738,15 +3738,13 @@ $(document).on("click", "#close_createEvent", function () {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "home";
                     toastr.success("Event Saved as Draft");
-                    setTimeout(function () {
-                        $("#loader").css("display", "none");
-                    }, 4000);
+                    window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
+                toastr.error("Error in Saved as Draft");
                 console.log("AJAX error: " + error);
             },
         });
@@ -6382,7 +6380,7 @@ $(document).on("click", ".final_checkout", function () {
     // });
 });
 
-$(document).on("click", "#final_create_event", function (e) {
+$(document).on("click", ".final_create_event", function (e) {
     eventData.is_update_event = "0";
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
@@ -8406,7 +8404,12 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
-    updateEventData();
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
@@ -8414,7 +8417,9 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
-    if (save1 == 8) {
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
 });
@@ -8424,7 +8429,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
-
+    savePage4Data();
     if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
