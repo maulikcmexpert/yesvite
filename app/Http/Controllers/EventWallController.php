@@ -348,7 +348,7 @@ class EventWallController extends Controller
                 // Store comment information
                 $postCommentList[] = $commentInfo;
             }
-
+dd($postCommentList);
             $postsNormalDetail['post_comment'] = $postCommentList;
             $postList[] = $postsNormalDetail;
         }
