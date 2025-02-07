@@ -345,6 +345,7 @@ class EventController extends BaseController
                     }
                 }
                 $eventDetail['totalActivity'] = $totalActivity;
+                dd($eventDetail);die;
                 $eventDetail['greeting_card_list'] = [];
                 Session::get('greetingCardData', []);
                 if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {
