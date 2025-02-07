@@ -654,7 +654,7 @@ $(document).on("click", ".self_bring_quantity", function () {
 
 $(document).on('click','#selfBringItem',function(){
 
-    var checkbox = $('input[name="self_bring_item"]:checked');
+    var checkbox = $('input[name="self_bring_item"]:checked').val();
     if(checkbox){
       $("#self_bring_quantity_toggle").show();
     }else{

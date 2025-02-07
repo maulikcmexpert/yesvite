@@ -980,7 +980,7 @@
                     <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty" readonly/>
                     <button class=" self_bring_quantity" data-type="plus" type="button"><i class="fa fa-plus"></i></button>
                 </div>
-                <div class="d-flex">
+                {{-- <div class="d-flex">
                     <a href="#" class="me-3">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -996,7 +996,7 @@
                             <path d="M6.33331 8.33398H9.66665" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
             <div class="qantity-total">
                 <h6>Total Quantity Desired (You & Guests)</h6>
