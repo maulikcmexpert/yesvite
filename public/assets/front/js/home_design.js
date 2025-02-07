@@ -65,6 +65,7 @@ $(document).ready(function() {
     $(document).on('input','#search_design_category',function(){
 
         var search_value=$(this).val();
+        $('#home_loader').css('display','flex');
         $.ajax({
             url: base_url + "search_features", 
             method: 'GET',
@@ -78,6 +79,7 @@ $(document).ready(function() {
                 if (response.view) {
                  $('.list_all_design_catgeory').html('');
                  $('.list_all_design_catgeory').html(response.view);
+                 $('#home_loader').css('display','none');
                     
                 } else {
                 }

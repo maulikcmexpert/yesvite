@@ -515,7 +515,7 @@
                                 $endDate = new DateTime($eventDetail['end_date']);
                                 $formattedDate = $endDate->format('Ymd');
                                 $i++;
-                                $j++;
+                                
                             @endphp
                             <h3>{{ $date->format('l - F j, Y') }}</h3>
                         </div>
@@ -559,7 +559,8 @@
                                                 data-bs-target="#collapse{{ Carbon::parse($currentDate)->format('Ymd') }}">
                                                 <div>
                                                     Activities <span
-                                                        class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span>
+                                                        class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]]  }})</span>
+                                                        {{-- class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span> --}}
                                                 </div>
                                                 <i class="fa-solid fa-angle-down"></i>
                                             </button>
@@ -755,6 +756,7 @@
                     </div>
                     @php
                         $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
+                        $j++;
                     @endphp
                 @endwhile
 
