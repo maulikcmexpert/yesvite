@@ -791,6 +791,7 @@ class EventPhotoController extends Controller
             ])
             ->where(['event_id' => $eventId, 'post_type' => '1', 'id' => $photoId])
             ->orderBy('id', 'desc');
+            $isCoHost =  EventInvitedUser::where(['event_id' =>$eventId, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
 
         $results = $getPhotoList->get();
 
@@ -823,7 +824,7 @@ class EventPhotoController extends Controller
                 'firstname' => $value->user->firstname,
                 'lastname' => $value->user->lastname,
                 'location' => $value->user->city . ', ' . $value->user->state,
-
+                'is_co_host'=>(isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0",
                 'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
                 'is_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->exists() ? '1' : '0',
                 'self_reaction' => EventPostReaction::where(['user_id' => $user->id, 'event_post_id' => $value->id])->value('reaction') ?? "",
