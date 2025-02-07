@@ -1042,8 +1042,8 @@
     }
 
     .collection-wrapper .filter-main-wrp {
-        flex-direction: column;
-        align-items: flex-start;
+        /* flex-direction: column;
+        align-items: flex-start; */
         margin-bottom: 15px;
     }
     .cookies-track p {
