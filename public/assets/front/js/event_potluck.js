@@ -240,10 +240,11 @@ $(document).on("click", ".plus", function () {
     const input = container.find(".itemQty");
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
-    const categoryKey = $(this).data("categorykey");
-
+    let categoryKey = $(this).data("categorykey");
+    let itemkey = $(this).data("itemkey");
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     const item_id = $(this).data("item-id");
-
+    currentValue = parent(currentValue)+ parseInt(innerUserQnt);
     // Increment the quantity
     input.val(currentValue + 1).trigger("change");
 
@@ -312,11 +313,12 @@ $(document).on("click", ".minus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-
+    const itemkey = $(this).data("itemkey");
     const item_id = $(this).data("item-id");
-
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     // Decrement the quantity, but not below 0
-    const newValue = Math.max(0, currentValue - 1);
+    let newValue = Math.max(0, currentValue - 1);
+    newValue = parent(newValue)+ parseInt(innerUserQnt);
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
     // Optional: Update associated UI elements
