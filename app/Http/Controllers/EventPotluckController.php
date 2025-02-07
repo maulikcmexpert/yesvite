@@ -262,6 +262,7 @@ class EventPotluckController extends Controller
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $eventDetails['hosted_by'] = $eventDetail->hosted_by;
+                $eventDetails['host_id'] = $eventDetail->user_id;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
                 $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
                 $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
@@ -286,6 +287,9 @@ class EventPotluckController extends Controller
                 $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
                 $eventDetails['event_date'] = $eventDetail->start_date;
                 $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+                $eventDetails['end_date'] = $eventDetail->end_date;
+                $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
+
                 // if ($eventDetail->event_schedule->isNotEmpty()) {
 
                 //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;

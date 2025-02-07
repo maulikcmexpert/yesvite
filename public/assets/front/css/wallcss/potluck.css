@@ -693,7 +693,7 @@
 
 .toggle-custom .layer {
   width: 100%;
-  background-color: #ca8585;
+  background-color: var(--light-color);
   transition: 0.3s ease all;
   z-index: 1;
 }
@@ -705,7 +705,7 @@
     right: 22px;
     width: 20px;
     height: 20px;
-    color: red;
+    color: var(--light-color);
     font-size: 10px;
     font-weight: bold;
     text-align: center;
