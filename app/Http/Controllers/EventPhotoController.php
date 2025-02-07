@@ -329,7 +329,6 @@ class EventPhotoController extends Controller
                 ])
                 ->where([
                     'event_id' => $event,
-                    'post_type!'=>'0',
                     'post_type'=>'1'
                     // 'is_in_photo_moudle' => '1'
                 ])
@@ -684,6 +683,7 @@ class EventPhotoController extends Controller
             return view('layout', compact('page', 'js', 'postList', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
+            dd($e);
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
