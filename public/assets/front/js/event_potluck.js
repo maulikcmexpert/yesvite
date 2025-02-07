@@ -268,8 +268,8 @@ $(document).on("click", ".plus", function () {
         spokenQuantity += parseInt($(this).val(), 10) || 0;
     });
     let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
-    
-    $(".category-count-"+categoryKey).text(parseInt(categoryCount) + currentValue + 1 +innerUserQnt).trigger("change");
+    const totalcategoryQnt =parseInt(categoryCount) + currentValue + 1 +innerUserQnt;
+    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
@@ -325,7 +325,9 @@ $(document).on("click", ".minus", function () {
 
     
     let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
-    $(".category-count-"+categoryKey).text(parseInt(categoryCount) - 1 + innerUserQnt).trigger("change");
+   const totalcategoryQnt = parseInt(categoryCount) - 1 + innerUserQnt
+    $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
     if (maxQuantity) {
