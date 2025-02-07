@@ -2881,6 +2881,7 @@ class EventController extends BaseController
 
     public function get_co_host_list(Request $request)
     {
+        // dd($request);
         $cohostId = $request->cohostId;
         $isCohost = $request->isCohost;
         $isCopy = $request->isCopy;
