@@ -6,6 +6,7 @@ $(document).ready(function () {
     let isLongPresss = false;
 
     $(document).on("mousedown", "#likeButton", function () {
+        return;
         isLongPresss = false; // Reset the flag
         const button = $(this);
 
@@ -20,13 +21,14 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
     let reactionIcons = {
-        "\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
     $(document).on("click", "#likeButton", function () {
+        return;
         clearTimeout(longPressTimer);
         if (isLongPresss) return;
 
@@ -415,9 +417,9 @@ $(document).ready(function () {
                         return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                     }
                     $(".posts-card-like-btn").on("click", function () {
-                        const icon = this.querySelector("i");
-                        icon.classList.toggle("fa-regular");
-                        icon.classList.toggle("fa-solid");
+                        // const icon = this.querySelector("i");
+                        // icon.classList.toggle("fa-regular");
+                        // icon.classList.toggle("fa-solid");
                     });
                     const newCommentHTML = `
                                 <div class="commented-user-head">
@@ -638,12 +640,12 @@ $(document).ready(function () {
         });
         $(document).on("click", ".posts-card-like-btn", function () {
             console.log("Like button clicked!");
-            $(this).find("i").toggleClass("fa-regular fa-solid");
+            // $(this).find("i").toggleClass("fa-regular fa-solid");
         });
     });
     $(document).on("click", ".posts-card-like-btn", function () {
         console.log("Like button clicked!");
-        $(this).find("i").toggleClass("fa-regular fa-solid");
+        // $(this).find("i").toggleClass("fa-regular fa-solid");
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
