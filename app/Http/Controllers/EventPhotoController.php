@@ -329,6 +329,8 @@ class EventPhotoController extends Controller
                 ])
                 ->where([
                     'event_id' => $event,
+                    'post_type!'=>'0',
+                    'post_type'=>'1'
                     // 'is_in_photo_moudle' => '1'
                 ])
                 ->whereDoesntHave('post_control', function ($query) use ($user) {
