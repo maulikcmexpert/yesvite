@@ -436,10 +436,10 @@
 }
 
 .post-potluck-category .list-slide .accordion-body h5.slide-sub {
-    font-size: 13px;
-    line-height: 20px;
-    color: var(--secondary-black);
-    font-family: var(--SFProDisplay-Regular);
+    font-size: 13px !important;
+    line-height: 20px !important;
+    color: var(--secondary-black)!important;
+    font-family: var(--SFProDisplay-Regular) !important;
 }
 
 .post-potluck-category .list-slide .accordion-body span.slide-round {
