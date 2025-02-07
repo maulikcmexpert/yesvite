@@ -1033,7 +1033,7 @@ class EventWallController extends Controller
                 $postsNormalDetail['post_comment'] = $postCommentList;
                 $postList[] = $postsNormalDetail;
             }
-            dd($postList);
+            // dd($postList);
         }
         //}
 
