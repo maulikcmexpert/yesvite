@@ -923,7 +923,7 @@
                     }
                 });
                 $('#resetCategories').on('click', function(e) {
-                    e.preventDefault(); // Prevent default anchor behavior
+                     e.preventDefault(); // Prevent default anchor be havior
 
                     // Uncheck all checkboxes
                     $('#Allcat').prop('checked', false);
@@ -932,6 +932,12 @@
                     // Hide all images
                     $('.image-item').hide();
                 });
+
+                $(document).on('click','.collection-menu',function (e) {
+                    e.stopPropagation();
+                    console.log(1);
+                    
+                })
             });
     </script>
 @endpush
