@@ -1033,7 +1033,7 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             event.preventDefault(); // Prevents new line in textarea
 
-            if ($("#textform").length) { // Check if #textform exists
+            if ($("#textform").length > 0) { // Check if #textform exists
                 $("#textform").submit(); // Submit the form if it exists
             } else {
                 console.log("Form not found!"); // Debugging purpose
