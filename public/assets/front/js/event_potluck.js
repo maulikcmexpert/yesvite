@@ -324,7 +324,7 @@ $(document).on("click", ".minus", function () {
     $("#newQuantity_" + item_id).val(newValue);
 
     
-    let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
+    let categoryCount= $(".category-count-"+categoryKey).text();
    const totalcategoryQnt = parseInt(categoryCount) - 1
     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
 
