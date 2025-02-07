@@ -153,9 +153,11 @@
                                                 </div>
                                                 <h5>{{ $eventDetails['hosted_by'] }}</h5>
                                                 <h6>Host</h6>
-                                                <a href="#">Message</a>
-                                                <p
-                                                    style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
+                                                <!-- <a href="#">Message</a> -->
+                                                        @if($eventDetails['host_id']!=$login_user_id)
+                                                            <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                        @endif
+                                                <p style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
