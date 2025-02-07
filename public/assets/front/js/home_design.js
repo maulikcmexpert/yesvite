@@ -64,35 +64,39 @@ $(document).ready(function() {
         localStorage.setItem('cookiesBoxDismissed', 'true');
     });
 
-    $(document).on('input','#search_design_category',function(){
-
-        var search_value=$(this).val();
-        $('#home_loader').css('display','flex');
-        $.ajax({
-            url: base_url + "search_features", 
-            method: 'GET',
-            // headers: {
-            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
-            // },
-            data: { search: search_value}, 
-            success: function (response) {
-                console.log("Remove successful: ", response);
+    let typingTimer; 
+    const doneTypingInterval = 500; 
+    $(document).on('input', '#search_design_category', function () {
+        clearTimeout(typingTimer);
+        let search_value = $(this).val();
     
-                if (response.view) {
-                 $('.list_all_design_catgeory').html('');
-                 $('.list_all_design_catgeory').html(response.view);
-                 $('#home_loader').css('display','none');
-                 $('.total_design_count').text(response.count +' Items')
-                    
-                } else {
-                    $('.list_all_design_catgeory').html('No Design Found');
-                    $('.total_design_count').text(response.count +' Items')
-                    $('#home_loader').css('display','none');
-                }
-            },
-            error: function (error) {
-            
-            }
-        });
+        if (search_value.length > 1) { 
+            typingTimer = setTimeout(function () {
+                $('#home_loader').css('display', 'flex');
+    
+                $.ajax({
+                    url: base_url + "search_features",
+                    method: 'GET',
+                    data: { search: search_value },
+                    success: function (response) {
+                        console.log("Search successful: ", response);
+    
+                        if (response.view) {
+                            $('.list_all_design_catgeory').html(response.view);
+                            $('.total_design_count').text(response.count + ' Items');
+                        } else {
+                            $('.list_all_design_catgeory').html('No Design Found');
+                            $('.total_design_count').text(response.count + ' Items');
+                        }
+    
+                        $('#home_loader').css('display', 'none');
+                    },
+                    error: function () {
+                        toastr.error('Something went wrong');
+                    }
+                });
+            }, doneTypingInterval);
+        }
     });
+    
 });
