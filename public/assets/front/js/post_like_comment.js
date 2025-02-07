@@ -382,7 +382,11 @@ $(document).ready(function () {
                         </div>
                         <div class="posts-card-like-comment-right">
                             <p>${data.posttime}</p>
-                            <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                            <button class="posts-card-like-btn" id="CommentlikeButton"
+                                data-event-id="${eventId}"
+                            data-event-post-comment-id="${data.id
+                        } "
+                        data-user-id="${login_user_id}"><i class="fa-regular fa-heart"></i></button>
                         </div>
                     </div>
                     <div class="commented-user-content">
@@ -390,12 +394,8 @@ $(document).ready(function () {
                     </div>
                     <div class="commented-user-reply-wrp">
                         <div class="position-relative d-flex align-items-center gap-2">
-                            <button class="posts-card-like-btn"   id="CommentlikeButton"
-                                data-event-id="${eventId}"
-                            data-event-post-comment-id="${data.id
-                        } "
-                        data-user-id="${ login_user_id}}">
-><i class="fa-regular fa-heart"></i></button>
+                            <button class="posts-card-like-btn"  >
+<i class="fa-regular fa-heart"></i></button>
                             <p>0</p>
                         </div>
                         <button data-comment-id="${data.id
