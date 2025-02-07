@@ -1176,6 +1176,14 @@
     }
 }
 
+@media only screen and (max-width:767px){
+    .checkout-data .setting-img{
+        height:600px;
+    }
+}
+
+
+
 @media only screen and (max-width: 575px) {
     .sidebar.setting-side-wrp {
         top: auto;
@@ -1226,6 +1234,10 @@
 
     .sidebar_add_co_host {
         height: 90vh;
+    }
+
+    .checkout-data .setting-img{
+        height:500px;
     }
 
 }
