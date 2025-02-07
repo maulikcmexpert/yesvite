@@ -214,7 +214,7 @@
                 $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
                     .show();
                     var visibleItems = $('.all_designs:visible').length;
-            $('.total_design_count').text(visibleItems + ' Items');
+                    $('.total_design_count').text(visibleItems + ' Items');
             });
         } else {
             $('.image-item').hide(); // Hide all images if no checkboxes are checked

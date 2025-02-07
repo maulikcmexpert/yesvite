@@ -112,8 +112,8 @@ class EventController extends BaseController
 
         return response()->json([
             'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
-            'count' => $categories->count(), // Count of categories
-            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+
+            'count' => $totalTextDataCount // Total count of textdatas
         ]);
     }
 
@@ -565,7 +565,7 @@ class EventController extends BaseController
                         $potluckCategory['remainingQnt'] = $remainingQnt;
                         $potluckCategory['categoryQuantity'] = $categoryQuantity;
                         $potluckCategory['totalItem'] = $totalItem;
-                        $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
+                        // $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
                     // Update session after the loop    
@@ -634,7 +634,7 @@ class EventController extends BaseController
             )
         );
 
-        $imagecount = $categories->count();
+        $imagecount = $totalTextDataCount;
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')
         //     ->get();
