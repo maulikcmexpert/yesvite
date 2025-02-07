@@ -530,7 +530,7 @@
                                         <div class="form-group">
                                             <label>Start Time</label>
                                             <div class="input-group time ">
-                                                <input class="form-control timepicker" placeholder="HH:MM AM/PM"
+                                                <input class="form-control start_timepicker" placeholder="HH:MM AM/PM"
                                                     id="ac-start-time" name="ac-start-time" oninput="clearError()"
                                                     value="{{ $schedule_start_time->format('g:i A') }}"
                                                     required="" readonly />
@@ -559,7 +559,7 @@
                                                 data-bs-target="#collapse{{ Carbon::parse($currentDate)->format('Ymd') }}">
                                                 <div>
                                                     Activities <span
-                                                        class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]]  }})</span>
+                                                        class="activity_total_count total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]]  }})</span>
                                                         {{-- class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span> --}}
                                                 </div>
                                                 <i class="fa-solid fa-angle-down"></i>
