@@ -515,6 +515,8 @@
 
 #detail-photo-modal .posts-card-head-left-content h3{
     display: inline-block;
+    word-break: break-all;
+    max-width: 300px;
 }
 
 #detail-photo-modal .posts-card-head-left-content span{
@@ -557,6 +559,9 @@
         background-color: var(--white);
         box-shadow: 0px 24px 24px -12px rgba(0, 0, 0, 0.02);
         color: var(--secondary-black);
+    }
+    #detail-photo-modal .posts-card-head-left-content h3{
+        max-width: 200px;
     }
 }
 
@@ -602,6 +607,9 @@
         overflow: hidden;
         overflow-y: scroll;
     }
+    #detail-photo-modal .posts-card-head-left-content h3{
+        max-width: 150px;
+    }
 }
 
 @media only screen and (max-width: 424px) {
@@ -618,5 +626,8 @@
     }
     .phototab-add-new-photos-img {
         gap: 10px;
+    }
+    #detail-photo-modal .posts-card-head-left-content h3{
+        max-width: 100px;
     }
 }

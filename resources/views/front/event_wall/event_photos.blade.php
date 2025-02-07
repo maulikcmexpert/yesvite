@@ -766,9 +766,11 @@
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <h3 id="post_name">Chance Curtis
+                                    <div class="d-flex align-items-start gap-1">
+                                        <h3 id="post_name">Chance Curtis
                                         </h3>
                                         <span id="host_display" class="host">Host</span>
+                                    </div>
                                     <p id="location">New York, NY</p>
                                 </div>
                             </div>

@@ -459,7 +459,9 @@
                                                         </div>
                                                         <h5>{{ $eventDetails['hosted_by'] }}</h5>
                                                         <span>Host</span>
-                                                        <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                        @if($eventDetails['host_id']!=$login_user_id)
+                                                            <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                        @endif    
                                                     </div>
                                                 @endif
                                                 @if (!empty($eventDetails['co_hosts']))
@@ -487,7 +489,9 @@
                                                             </div>
                                                             <h5>{{ $co_host['name'] }}</h5>
                                                             <span>Co-host</span>
-                                                            <a href="{{route('message.list',['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
+                                                            @if($co_host['id']!=$login_user_id)
+                                                                <a href="{{route('message.list',['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
+                                                            @endif
                                                         </div>
                                                     @endforeach
                                                 @endif
