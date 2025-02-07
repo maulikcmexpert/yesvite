@@ -609,6 +609,7 @@ class EventPotluckController extends Controller
         if ($item && intval($item->quantity) > 0) {
             $isUser = true; // If quantity is greater than zero
         }
+
         // Check if there's enough quantity available
         if ($checkCarryQty < $checkQty && $isUser==false ) {
             // Check if the user has already added this item
@@ -626,7 +627,7 @@ class EventPotluckController extends Controller
                     'user_id' => $user->id,
                     'event_potluck_category_id' => $categoryId,
                     'event_potluck_item_id' => $itemId,
-                    'quantity' => $quantity
+                    'quantity' => 0
                 ]);
                 $checkIsExist = $newUserItem;
             } else {
