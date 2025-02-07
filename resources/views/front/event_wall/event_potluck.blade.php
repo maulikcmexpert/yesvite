@@ -519,9 +519,7 @@
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
 
-                                                                    <input type="hidden"
-                                                                        class="innerUserQnt-{{ $index }}-{{ $key }}"
-                                                                        value="{{ $item['innerUserQnt'] }}">
+                                                                   
                                                                     <div class="ms-auto">
                                                                     <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
                                                                         <button class="accordion-btn accordion-button">
@@ -599,7 +597,9 @@
                                                                             </div>
                                                                         </button>
                                                                     </h2>
-
+                                                                    <input type="hidden"
+                                                                    class="innerUserQnt-{{ $index }}-{{ $key }}"
+                                                                    value="{{ $item['innerUserQnt'] }}">
                                                                     @if(empty($item['item_carry_users']))
                                                                     <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
