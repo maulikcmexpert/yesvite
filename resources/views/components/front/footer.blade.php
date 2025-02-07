@@ -491,7 +491,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
             const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-            const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+            const { getDatabase, ref, get, onValue,update,onDisconnect   } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
             // Fetch Firebase configuration
             const response = await fetch("/firebase_js.json");
@@ -502,11 +502,38 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
             const database = getDatabase(app);
             if (userId !== null) {
                 try {
+                  
                     // Dynamically import Firebase modules
                     
 
                     // Reference to the user's overview data in Firebase
                     const overviewRef = ref(database, `overview/${userId}`);
+
+                    const isOnlineForDatabase = {
+                        userStatus: "Online",
+                        userLastSeen: Date.now(),
+                    };
+
+                    // Object representing the user's status when offline
+                    const isOfflineForDatabase = {
+                        userStatus: "Offline",
+                        userLastSeen: Date.now(),
+                    };
+
+                    // Set up the connection status listener
+                    const connectedRef = ref(database, ".info/connected");
+                    onValue(connectedRef, async (snapshot) => {
+                        if (snapshot.val() === true) {
+                            // User is connected
+                            await update(overviewRef, isOnlineForDatabase);
+
+                            // Set up the onDisconnect function to set status to offline
+                            await onDisconnect(overviewRef).update(isOfflineForDatabase);
+                        } else {
+                            // User is disconnected (note: this could be triggered before onDisconnect)
+                            await update(overviewRef, isOfflineForDatabase);
+                        }
+                    });
 
                     // Function to calculate unread count
                     function updateUnreadCountG(snapshot) {
@@ -542,7 +569,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                     console.error("Error fetching Firebase data:", error);
                 }
             }
-
+            
         async function getUser(userId) {
             const userRef = ref(database, "users/" + userId);
             try {

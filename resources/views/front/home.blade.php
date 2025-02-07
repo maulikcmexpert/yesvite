@@ -63,6 +63,9 @@ $getSocialLink = getSocialLink();
           </div>
     </div>
 </section>
+@push('scripts')
+  
+
 <script>
   $(document).ready(function () {
     toastr.options = {
@@ -80,3 +83,4 @@ $getSocialLink = getSocialLink();
             @endif
         });
 </script>
+@endpush
