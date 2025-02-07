@@ -673,7 +673,7 @@ class EventPotluckController extends Controller
     {
         $user  = Auth::guard('web')->user();
 
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'],'user_id'=>$user->id, 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
 
         // if ($input['quantity'] <= $checkQty) {
         $checkIsExist = UserPotluckItem::where([
@@ -794,7 +794,7 @@ class EventPotluckController extends Controller
     public function deleteUserPotluckItem(Request $request)
     {
         $user  = Auth::guard('web')->user();
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'user_id'=>$user->id,'event_potluck_item_id' => $request['category_item_id']])->first();
         $checkIsExist = UserPotluckItem::where([
             'id' =>  $checkCarryQty['id']
         ])->first();
