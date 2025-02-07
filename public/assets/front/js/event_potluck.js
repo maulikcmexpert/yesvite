@@ -111,6 +111,10 @@ $(document).ready(function () {
         const categoryName = $("#categoryName").val();
         const eventid = $("#event_id").val();
         const description = $("#text1").val();
+        if(description==""){
+            toastr.error('please enter category item name')
+            return 
+        }
         const self_bring_item =
             $('input[name="self_bring_item"]:checked').length > 0 ? 1 : 0;
         const quantity = $('input[name="sub_quantity"]').val();
