@@ -333,6 +333,7 @@ class EventPotluckController extends Controller
                     $coHosts[] = $coHostDetail;
                 }
                 $eventDetails['co_hosts'] = $coHosts;
+                $eventDetails['co_hosts'] = $coHosts;
                 $eventDetails['event_location_name'] = $eventDetail->event_location_name;
                 $eventDetails['address_1'] = $eventDetail->address_1;
                 $eventDetails['address_2'] = $eventDetail->address_2;
