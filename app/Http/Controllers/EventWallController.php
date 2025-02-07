@@ -2612,7 +2612,6 @@ class EventWallController extends Controller
         }
         $selected_yesvite_user = Session::get('userwall_ids');
         $selected_phone_user = Session::get('contactwall_ids');
-        dd($selected_yesvite_user);
         // Render the yesvite contacts view
         $yesviteContactHtml = view('front.event_wall.guest_yesviteContact', [
             'yesviteUsers' => $yesviteUsers,

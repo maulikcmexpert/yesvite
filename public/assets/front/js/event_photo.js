@@ -580,15 +580,18 @@ $(document).on('click', '.open_photo_model', function () {
     }
     swiper.destroy(true, true);
 
-    // Reinitialize Swiper
-    swiper = new Swiper(".photo-detail-slider", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
+    if (rawData.length > 1) {
+        swiper.destroy(true, true);
+
+        swiper = new Swiper(".photo-detail-slider", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    }
     //let parentId = null;  // Default to null, assuming no parent
 
     // if ($('.commented-user-wrp').length > 0) {
