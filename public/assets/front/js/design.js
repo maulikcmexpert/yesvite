@@ -2113,7 +2113,7 @@ async function bindData(current_event_id) {
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
             // left: originalTextbox.left + 30, // Offset position
             // top: originalTextbox.top + 30, // Offset position
-            left: canvasCenter.left, // Center horizontally
+            left: canvasCenter.left - 20, // Center horizontally
             top: canvasCenter.top,
             fontSize: originalTextbox.fontSize,
             fill: originalTextbox.fill,
