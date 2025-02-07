@@ -186,11 +186,11 @@
                         </div>
                     </div>
                 </div>
-                <div id="story-display-{{ $Allstory['id'] }}" class="story-display">
+                <div id="story-display-{{ $users->id  }}" class="story-display">
                     <div class="progress-bar-container"></div>
                     <div class="story-content"></div>
                 </div>
-                <button class="modal-close" data-id="{{ $Allstory['id'] }}">
+                <button class="modal-close" data-id="{{  $users->id }}">
                     <i class="fas fa-times"></i> <!-- FontAwesome X Icon -->
                 </button>
             </div>
