@@ -26,7 +26,7 @@ $(document).ready(function () {
         "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "😄": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
