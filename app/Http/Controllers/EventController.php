@@ -112,8 +112,8 @@ class EventController extends BaseController
 
         return response()->json([
             'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
-            'count' => $categories->count(), // Count of categories
-            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+
+            'count' => $totalTextDataCount // Total count of textdatas
         ]);
     }
 
