@@ -21,9 +21,11 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
     let reactionIcons = {
+        "\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
@@ -294,6 +296,11 @@ $(document).ready(function () {
                             const firstReaction = response.reactionList[0];
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            } else {
+                                console.log({ reaction });
+                                console.log(reactionIcons[reaction]);
+                                //let reaction = "\u{2764}";
+                                reactionImageHtml = `<img src="${reactionIcons["\u{2764}"]}" alt="Reaction Emoji">`;
                             }
                         }
                         button.removeClass("liked"); // Remove liked class
