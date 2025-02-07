@@ -82,7 +82,7 @@ $(document).ready(function() {
                  $('.list_all_design_catgeory').html('');
                  $('.list_all_design_catgeory').html(response.view);
                  $('#home_loader').css('display','none');
-                 $('.total_design_count').val(response.count +'Items')
+                 $('.total_design_count').text(response.count +'Items')
                     
                 } else {
                 }
