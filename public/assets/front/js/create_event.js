@@ -1950,10 +1950,17 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     if (isChecked == true || isChecked == "true") {
         // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
+        var total_guest = $(".users-data.invited_user").length;
         var max_guest = $("#coins").val();
+
         console.log({ max_guest });
         if (max_guest <= 0) {
             $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        } else if (max_guest - total_guest == 0) {
+            "#loader".css("display", "none");
             $(this).prop("checked", false);
             $("#buycreditsmodal").modal("show");
             return;
@@ -2147,9 +2154,15 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
         var max_guest = $("#coins").val();
+        var total_guest = $(".users-data.invited_user").length;
         console.log({ max_guest });
         if (max_guest <= 0) {
             $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        } else if (max_guest - total_guest == 0) {
+            "#loader".css("display", "none");
             $(this).prop("checked", false);
             $("#buycreditsmodal").modal("show");
             return;
