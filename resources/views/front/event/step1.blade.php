@@ -493,6 +493,14 @@
         <div class="supportive-div activity_bar">
             @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
                 @php
+                $totalActivityByDate  = $eventDetail['totalActivityByDate'];
+                   
+                    $localdate=[];
+                    foreach ($totalActivityByDate as $key => $value) {
+                        $localdate[] = $key;
+                    }
+                        $j=0;
+                
                     $currentDate = $eventDetail['events_schedule_list']->event_start_date;
                     $i = 0;
                 @endphp
@@ -500,12 +508,14 @@
                     <div class="activity-schedule-wrp">
                         <div class="activity-schedule-head">
                             @php
-                                $date = Carbon::parse($eventDetail['events_schedule_list']->event_start_date);
+                                $date = Carbon::parse($localdate[$j]);
+                                // $date = Carbon::parse($eventDetail['events_schedule_list']->event_start_date);
                                 $schedule_start_time = Carbon::parse($eventDetail['events_schedule_list']->start_time);
                                 $schedule_end_time = Carbon::parse($eventDetail['rsvp_end_time']);
                                 $endDate = new DateTime($eventDetail['end_date']);
                                 $formattedDate = $endDate->format('Ymd');
                                 $i++;
+                                
                             @endphp
                             <h3>{{ $date->format('l - F j, Y') }}</h3>
                         </div>
@@ -520,7 +530,7 @@
                                         <div class="form-group">
                                             <label>Start Time</label>
                                             <div class="input-group time ">
-                                                <input class="form-control timepicker" placeholder="HH:MM AM/PM"
+                                                <input class="form-control start_timepicker" placeholder="HH:MM AM/PM"
                                                     id="ac-start-time" name="ac-start-time" oninput="clearError()"
                                                     value="{{ $schedule_start_time->format('g:i A') }}"
                                                     required="" readonly />
@@ -549,7 +559,8 @@
                                                 data-bs-target="#collapse{{ Carbon::parse($currentDate)->format('Ymd') }}">
                                                 <div>
                                                     Activities <span
-                                                        class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span>
+                                                        class="activity_total_count total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]]  }})</span>
+                                                        {{-- class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span> --}}
                                                 </div>
                                                 <i class="fa-solid fa-angle-down"></i>
                                             </button>
@@ -745,6 +756,7 @@
                     </div>
                     @php
                         $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
+                        $j++;
                     @endphp
                 @endwhile
 

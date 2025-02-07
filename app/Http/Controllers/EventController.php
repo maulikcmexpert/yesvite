@@ -313,6 +313,8 @@ class EventController extends BaseController
                     }
 
                     $eventDetail['events_schedule_list']->data = [];
+                    $totalActivity=0;
+                    $eventDetail['totalActivityByDate'] = [];
                     foreach ($getEventData->event_schedule as $eventsScheduleVal) {
                         if ($eventsScheduleVal->type == '2') {
 
@@ -322,16 +324,28 @@ class EventController extends BaseController
                             $eventscheduleData["end_time"] = ($eventsScheduleVal->end_time !== null) ? $eventsScheduleVal->end_time : "";
                             $eventscheduleData['event_date'] = ($eventsScheduleVal->event_date != null) ? $eventsScheduleVal->event_date : "";
                             $eventscheduleData["type"] = $eventsScheduleVal->type;
+                            // $eventDetail['totalActivity']=$totalActivity;
+                            $totalActivity ++;
+                            if (!empty($eventsScheduleVal->event_date)) {
+                                // If this event_date does not exist in the array, initialize it with a count of 0.
+                                if (!isset($eventDetail['totalActivityByDate'][$eventsScheduleVal->event_date])) {
+                                    $eventDetail['totalActivityByDate'][$eventsScheduleVal->event_date] = 0;
+                                }
+                                // Increment the count for the specific event date.
+                                $eventDetail['totalActivityByDate'][$eventsScheduleVal->event_date]++;
+                            }
                             $eventDetail['events_schedule_list']->data[] = $eventscheduleData;
                         }
                     }
+                    $eventDetail['events_schedule_list']->totalActivity= $totalActivity;
                     if ($getEventData->event_schedule->last()->type == '3') {
 
                         $eventDetail['events_schedule_list']->end_time =  ($getEventData->event_schedule->last()->end_time !== null) ? $getEventData->event_schedule->last()->end_time : "";
                         $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
                     }
                 }
-                // dd($eventDetail['events_schedule_list']);die;
+                $eventDetail['totalActivity'] = $totalActivity;
+                // dd($eventDetail);die;
                 $eventDetail['greeting_card_list'] = [];
                 Session::get('greetingCardData', []);
                 if (!empty($getEventData->greeting_card_id) && $getEventData->greeting_card_id != NULL) {

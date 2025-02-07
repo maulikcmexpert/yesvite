@@ -5,7 +5,7 @@
                 <h2>Find the Perfect <br> Design in Our Collection</h2>
                 <p>Customizable Designs to Reflect Your Unique Event</p>
                 <div class="position-relative search-wrapper">
-                    <input type="search" placeholder="Search design categories" class="">
+                    <input type="search" id="search_design_category" placeholder="Search design categories" class="">
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -41,47 +41,43 @@
                                     <div class="accordion" id="accordionExample">
                                
                                                         @foreach ($categories as $textData)
-                                                            @foreach ($textData->categories as $category)
                                                                 <div class="accordion-item">
-                                                                    <h2 class="accordion-header" id="heading{{ $category['id'] }}">
+                                                                    <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
                                                                         <button class="accordion-button" type="button"
                                                                             data-bs-toggle="collapse"
-                                                                            data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
-                                                                            aria-controls="collapse{{ $category->id }}">
-                                                                            {{ $category->category_name }}
+                                                                            data-bs-target="#collapse{{ $textData->categories->id }}" aria-expanded="true"
+                                                                            aria-controls="collapse{{ $textData->categories->id }}">
+                                                                            {{ $textData->categories->category_name }}
                                                                         </button>
                                                                     </h2>
-                                                                    <div id="collapse{{ $category->id }}"
+                                                                    <div id="collapse{{ $textData->categories->id }}"
                                                                         class="accordion-collapse collapse"
-                                                                        aria-labelledby="heading{{ $category->id }}"
+                                                                        aria-labelledby="heading{{ $textData->categories->id }}"
                                                                         data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <ul>
-                                                                                @foreach ($textData->subcategories as $subcategory)
                                                                                     <li>
                                                                                         <div class="d-flex align-items-center justify-content-between">
-                                                                                            <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
-                                                                                                {{ $subcategory->subcategory_name }}
+                                                                                            <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
+                                                                                                {{ $textData->subcategories->subcategory_name }}
                                                                                             </label>
                                                                                             <input class="form-check-input" type="checkbox"
-                                                                                                id="subcategory{{ $subcategory->id }}"
-                                                                                                data-category-id="{{ $category->id }}"
-                                                                                                data-subcategory-id="{{ $subcategory->id }}">
+                                                                                                id="subcategory{{ $textData->subcategories->id }}"
+                                                                                                data-category-id="{{ $textData->categories->id }}"
+                                                                                                data-subcategory-id="{{ $textData->subcategories->id }}">
                                                                                         </div>
                                                                                     </li>
-                                                                                @endforeach
                                                                             </ul>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
                                                         @endforeach
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                                 Features
                             </button>
@@ -644,47 +640,29 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <h5 class="total-items ms-auto">55 Items</h5>
+                <h5 class="total-items ms-auto total_design_count">{{count($categories)}} Items</h5>
             </div>
             {{-- {{ dd($categories);}} --}}
-            <div class="row ">
+            <div class="row list_all_design_catgeory">
             @foreach ($categories as $textData)
-                @foreach ($textData->categories as $category)
-                    @foreach ($textData->subcategories as $subcategory)
+            
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
+                            data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
                             <a href="#" class="collection-card card-blue">
                                 <div class="card-img">
                                     <img src="{{ asset('storage/canvas/' . $textData->filled_image) }}" alt="shower-card">
                                 </div>
-                                <h4>{{ $category->category_name }}</h4>
+                                <h4>{{ $textData->categories->category_name }}</h4>
                             </a>
                         </div>
-                    @endforeach
-                @endforeach
+            
             @endforeach
 
-                <!-- @foreach ($categories as $category)
-                    @foreach ($category->subcategory as $subcategory)
-                        @foreach ($subcategory->textdatas as $image)
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
-                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
-                                <a href="#" class="collection-card card-blue">
-                                    <div class="card-img">
-                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                            alt="shower-card">
-                                    </div>
-                                    <h4>{{ $category->category_name }}</h4>
-                                </a>
-                            </div>
-                        @endforeach
-                    @endforeach
-                @endforeach -->
+              
                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                     <a href="#" class="collection-card card-green">
@@ -892,72 +870,3 @@
             </div> -->
         </div>
     </section>
-
-    @push('scripts')
-    <script>
-            $(document).ready(function() {
-                $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                $('#Allcat').on('change', function() {
-                    if ($(this).is(':checked')) {
-                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                        $('.image-item').show();
-                    } else {
-                        $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-                        $('.image-item').hide();
-                    }
-                });
-
-                $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
-                    // If all individual checkboxes are checked, check "All Categories"
-                    const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
-                    const checkedCheckboxes = $('input[type="checkbox"]:not(#Allcat):checked').length;
-
-                    if (checkedCheckboxes === totalCheckboxes) {
-                        $('#Allcat').prop('checked', true);
-                    } else {
-                        $('#Allcat').prop('checked', false);
-                    }
-
-                    // Filter images based on checked categories
-                    if (checkedCheckboxes > 0) {
-                        $('.image-item').hide(); // Hide all images first
-                        $('input[type="checkbox"]:not(#Allcat):checked').each(function() {
-                            const categoryId = $(this).data('category-id');
-                            const subcategoryId = $(this).data('subcategory-id');
-
-                            // Show images matching the selected categories and subcategories
-                            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                                .show();
-                        });
-                    } else {
-                        $('.image-item').hide(); // Hide all images if no checkboxes are checked
-                    }
-                });
-                $('#resetCategories').on('click', function(e) {
-                     e.preventDefault(); 
-                    $('#Allcat').prop('checked', false);
-                    $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-                    $('.image-item').hide();
-                });
-
-                document.querySelectorAll('.collection-menu').forEach((button) => {
-                    button.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                    });
-                });
-     
-                const $cookiesBox = $('.cookies-track');
-
-                if (!localStorage.getItem('cookiesBoxDismissed')) {
-                    setTimeout(() => {
-                        $cookiesBox.addClass('active');
-                    }, 500);
-                }
-
-                $('.close-btn').on('click', function () {
-                    $cookiesBox.removeClass('active');
-                    localStorage.setItem('cookiesBoxDismissed', 'true');
-                });
-            });
-    </script>
-@endpush

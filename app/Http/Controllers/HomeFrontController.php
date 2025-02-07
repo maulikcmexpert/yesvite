@@ -103,7 +103,7 @@ class HomeFrontController extends BaseController
 
         $title = 'Yesvite-Home';
         $page = 'front.home_design';
-
+        $js =['home_design'];
         $images = TextData::all();
         $categories = TextData::with('categories','subcategories')->orderBy('id', 'desc')->get();;
         $getDesignData =  EventDesignCategory::with('subcategory')->get();
@@ -114,8 +114,23 @@ class HomeFrontController extends BaseController
             'page',
             'images',
             'getDesignData',
-            'categories'
+            'categories',
+            'js'
         ));
+    }
+    public function searchDesign(Request $request){
+        
+        $query = $request->input('search');
+        $categories = TextData::with(['categories', 'subcategories'])
+        ->whereHas('categories', function ($q) use ($query) {
+            $q->where('category_name', 'LIKE', "%$query%");
+        })
+        ->orderBy('id', 'desc')
+        ->get();
+
+        $count=count($categories);
+        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(),'count'=>$count]);
+
     }
 
     public function homePricing(){
