@@ -159,7 +159,7 @@ class HomeFrontController extends BaseController
 
         return response()->json([
             'view' => view('front.search_home_design', compact('categories'))->render(),
-            'count' => $categories->count(), // Count of categories
+            'count' => $totalTextDataCount, // Count of categories
             'total_textdatas' => $totalTextDataCount // Total count of textdatas
         ]);
     }
