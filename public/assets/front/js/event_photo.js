@@ -1508,6 +1508,14 @@ $(document).on("click", "#likeButtonModel", function () {
     const reaction =  "\u{2764}"; // Toggle reaction: 💔 or ❤️
     const likeButton = $(this);
     // Toggle like button appearance
+    const icon = $(this).find("i");
+
+    // Toggle the reaction locally
+    if (icon.hasClass("fa-regular")) {
+        icon.removeClass("fa-regular").addClass("fa-solid"); // Mark as liked
+    } else {
+        icon.removeClass("fa-solid").addClass("fa-regular"); // Mark as not liked
+    }
 
     // AJAX call to update the like state
     const eventId = button.data("event-id");
