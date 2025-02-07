@@ -24,7 +24,7 @@ if (chartData) {
                             show: true,
                             label: "Invites Sent",
                             color: "#0f172a",
-                            fontSize: "18px",
+                            fontSize: "15px",
                             width: 200,
                             height: 200,
                             fontFamily: "SFProDisplay-Regular",
