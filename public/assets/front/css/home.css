@@ -942,6 +942,14 @@
     .collection-wrapper .filter-main-wrp h5.total-items {
         font-size: 16px;
     }
+
+    .step_2 .collection-wrapper .filter-main-wrp {
+        margin-bottom: 15px;
+    }
+
+    .step_2 .list_all_design_catgeory {
+        max-height: 530px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
@@ -1038,6 +1046,15 @@
 
     .cookies-track {
         padding: 25px 25px 15px;
+    }
+
+    .step_2 .list_all_design_catgeory {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
+
+    .step_2 {
+        padding: 10px 13px;
     }
 }
 
@@ -1188,6 +1205,18 @@
 
     .step_2 .collection-wrapper .filter-main-wrp .filters-drp .dropdown {
         width: 180px;
+    }
+
+    .step_2 .collection-card .card-img {
+        height: 155px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    .step_2 .collection-card h4 {
+        font-size: 15px;
+        line-height: 17px;
     }
 }
 
