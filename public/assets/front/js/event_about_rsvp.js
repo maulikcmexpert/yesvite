@@ -214,8 +214,8 @@ console.log(adults,kids);
 });
 $(".modal").on("hidden.bs.modal", function () {
 
-    $("#option5").val(''); // Reset poll form
-    $("#option6").val(); // Reset photo form
+    $("#option6").prop('checked',false);
+    $("#option5").prop('checked',false);
     $("#message_to_host").val(); // Clear image preview
     $("#rsvp_status_adults").val(0);
     $("#rsvp_status_kids").val(0);
@@ -225,8 +225,8 @@ $(".modal").on("hidden.bs.modal", function () {
 });
 $(document).on('click','.btn-close').click(function () {
 
-    $("#option5").val(''); // Reset poll form
-    $("#option6").val(); // Reset photo form
+    $("#option6").prop('checked',false);
+    $("#option5").prop('checked',false);
     $("#message_to_host").val(); // Clear image preview
     $("#rsvp_status_adults").val(0);
     $("#rsvp_status_kids").val(0);
