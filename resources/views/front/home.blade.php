@@ -1,4 +1,4 @@
-{{-- {{dd($eventList)}} --}}
+{{dd($eventList)}} 
 @php
 $getSocialLink = getSocialLink();
 @endphp
