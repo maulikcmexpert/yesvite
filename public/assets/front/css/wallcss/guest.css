@@ -1456,6 +1456,9 @@ foreignObject{
         font-size: 14px;
         padding-right: 7px;
     }
+    .attendence-data h5 span{
+        font-size: 14px;
+    }
 
     .attendence-data h5:last-child{
         padding-left: 7px;
