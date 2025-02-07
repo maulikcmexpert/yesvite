@@ -1,7 +1,8 @@
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
 let isCheckOldcoHost = ($("#cohostId").val()) ? 1 : 0;
-alert(isCheckOldcoHost);
+// alert(isCheckOldcoHost);
+eventData.isCheckOldcoHost=isCheckOldcoHost;
 var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
