@@ -588,7 +588,7 @@
 }
 
 .step_2 .list_all_design_catgeory {
-    max-height: 660px;
+    max-height: 530px;
     overflow-y: scroll;
 }
 
@@ -889,7 +889,9 @@
     .step_2 .collection-card h4 {
         font-size: 18px;
     }
+}
 
+@media only screen and (max-width: 1299px) {
     .step_2 .collection-card .card-img {
         height: 215px;
         min-width: 100%;
@@ -1031,17 +1033,17 @@
         align-items: flex-start;
     }
 
-    .collection-wrapper .filter-main-wrp h5.total-items {
+    /* .collection-wrapper .filter-main-wrp h5.total-items {
         margin-left: 0 !important;
-    }
+    } */
 
     .collection-wrapper .filter-dropdowns {
         margin-top: 10px;
     }
 
     .collection-wrapper .filter-main-wrp {
-        flex-direction: column;
-        align-items: flex-start;
+        /* flex-direction: column;
+        align-items: flex-start; */
         margin-bottom: 15px;
     }
     .cookies-track p {

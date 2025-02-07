@@ -157,12 +157,15 @@
                                                         @if($eventDetails['host_id']!=$login_user_id)
                                                             <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
                                                         @endif
+
+                                                        
                                                 <p style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
                                         </div>
                                     @endif
+
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
