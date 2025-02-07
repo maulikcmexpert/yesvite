@@ -302,10 +302,10 @@
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
-                                                            <div class="posts-card-inner-wrp">
+                                                            <!-- <div class="posts-card-inner-wrp"> -->
                                                                     <h3 class="posts-card-inner-questions">
                                                                         {{ $post['poll_question'] }}</h3>
-                                                                </div>
+                                                                <!-- </div> -->
                                                                 <div class="post-card-poll-inner">
                                                                     <h5>{{ $post['total_poll_vote'] }} Votes
                                                                         <span>{{ $post['poll_duration'] }} left</span>
