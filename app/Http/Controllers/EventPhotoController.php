@@ -918,9 +918,9 @@ class EventPhotoController extends Controller
                     $commentInfo['comment_replies'][] = $replyCommentInfo;
 
 
-                    $replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])->orderBy('id', 'DESC')->get();
+                    ///$replyComment =  EventPostComment::with(['user'])->withcount('post_comment_reaction', 'replies')->where(['main_parent_comment_id' => $mainParentId, 'event_post_id' => $reply->event_post_id, 'parent_comment_id' => $reply->id])->orderBy('id', 'DESC')->get();
 
-                    foreach ($replyComment as $childReplyVal) {
+                    foreach ($reply->replies as $childReplyVal) {
 
                         if ($childReplyVal->parent_comment_id != $childReplyVal->main_parent_comment_id) {
 
