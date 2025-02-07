@@ -367,7 +367,7 @@ $(document).ready(function () {
                     }
 
                     const newCommentHTML = `
-                
+
                     <div class="commented-user-head">
                         <div class="commented-user-profile">
                             <div class="commented-user-profile-img">
@@ -395,7 +395,7 @@ $(document).ready(function () {
                             data.id
                         }" class="commented-user-reply-btn">Reply</button>
                     </div>
-                    
+
                 `;
                     var replyList;
                     if (parentCommentId) {
@@ -1435,7 +1435,11 @@ $(document).on("keyup", ".search_contact", function () {
         },
     });
 });
-
+$(".posts-card-like-btn").on("click", function () {
+    const icon = this.querySelector("i");
+    icon.classList.toggle("fa-regular");
+    icon.classList.toggle("fa-solid");
+});
 // $(document).on('click','.see-all-guest-right-btn',function(){
 //     $.ajax({
 //         url: base_url + "event_wall/fetch_all_invited_user", // Your Laravel route
