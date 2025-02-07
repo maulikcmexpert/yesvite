@@ -159,7 +159,7 @@
                 <div class="story-seen-profile-wrp">
                     <div class="story-seen-profile-img">
                         @if ($Allstory['profile'] != '')
-                            <img src="{{ $Allstory['profile'] }}">
+                            <img src="{{ $Allstory['profile'] }}"   onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
                         @else
                             @php
                                 $parts = explode(' ', trim($Allstory['username']));
@@ -171,7 +171,7 @@
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <h5 class="{{ $fontColor }}" class="profile-pic">
+                            <h5 class="{{ $fontColor }}" class="profile-pic"   onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
                                 {{ $initials }}
                             </h5>
                         @endif
@@ -180,7 +180,7 @@
                         <h3>{{ $Allstory['username'] }}</h3>
                         <div class="story-seen-profile-content">
                             @foreach ($Allstory['story'] as $story)
-                                <div class="story-item" data-story-id="{{ $story['id'] }}">
+                                <div class="story-item" data-story-id="{{ $story['id'] }}" >
                                 </div>
                             @endforeach
                         </div>
