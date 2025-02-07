@@ -59,6 +59,7 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
+        $selectedFilters=session('filterSession');
 
         if (!$event) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -146,7 +147,7 @@ class EventWallController extends Controller
             ];
         }
         $postList = [];
-        $selectedFilters = "";
+        // $selectedFilters = "";
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
@@ -474,7 +475,7 @@ class EventWallController extends Controller
             'guest_view' => $eventDetails,
             'host_view' => $eventAboutHost
         ];
-
+        Session::forget('filterSession');
         return view('layout', compact(
             'title',
             'page',
@@ -2908,6 +2909,10 @@ class EventWallController extends Controller
         $event =  $request->event_id;
         $postList = [];
         $selectedFilters = $request->input('filters');
+
+        Session::put('filterSession',$selectedFilters);
+        Session::save();
+        return;
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
