@@ -61,7 +61,7 @@
                                                                                             <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
                                                                                                 {{ $textData->subcategories->subcategory_name }}
                                                                                             </label>
-                                                                                            <input class="form-check-input" type="checkbox"
+                                                                                            <input class="form-check-input" name="design_subcategory" type="checkbox"
                                                                                                 id="subcategory{{ $textData->subcategories->id }}"
                                                                                                 data-category-id="{{ $textData->categories->id }}"
                                                                                                 data-subcategory-id="{{ $textData->subcategories->id }}">
@@ -649,7 +649,7 @@
             <div class="row list_all_design_catgeory">
             @foreach ($categories as $textData)
             
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                             data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
                             <a href="#" class="collection-card card-blue">

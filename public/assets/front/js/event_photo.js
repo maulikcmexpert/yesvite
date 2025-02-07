@@ -729,6 +729,9 @@ $(document).on("click", ".comment-send-icon", function () {
                 // Clear input field
                 commentInput.val("");
                 $("#parent_comment_id").val(""); // Reset parent comment ID
+
+                let comments = document.getElementsByClassName("commented-user-wrp")
+                $("#comments").html(comments.length +' comments')
             }
         },
         error: function (xhr) {
@@ -1089,27 +1092,27 @@ $(document).on("click", ".open_photo_model", function () {
                         const smileUnicode = "\\u{1F60D}"; //
                         const clapUnicode = "\\u{1F44F}"; //
 
-                        $(this).removeClass("selected").show();
+                        $(this).removeClass("photo_emoji").show();
 
                         // Hide and select the correct emoji based on the reaction_store
                         if (
                             reaction_store === heartUnicode &&
                             emojiSrc.includes("heart-emoji.png")
                         ) {
-                            console.log("Heart emoji selected");
-                            $(this).addClass("selected");
+                            console.log("Heart emoji photo_emoji");
+                            $(this).addClass("photo_emoji");
                         } else if (
                             reaction_store === smileUnicode &&
                             emojiSrc.includes("smily-emoji.png")
                         ) {
-                            console.log("Smile emoji selected");
-                            $(this).addClass("selected");
+                            console.log("Smile emoji photo_emoji");
+                            $(this).addClass("photo_emoji");
                         } else if (
                             reaction_store === clapUnicode &&
                             emojiSrc.includes("clap-icon.png")
                         ) {
-                            console.log("Clap emoji selected");
-                            $(this).addClass("selected");
+                            console.log("Clap emoji photo_emoji");
+                            $(this).addClass("photo_emoji");
                         } else {
                             $(this).hide(); // Hide non-matching emojis
                             console.log("No matching emoji found");
@@ -1665,15 +1668,13 @@ $(document).ready(function () {
     });
 });
 $(".modal").on("hidden.bs.modal", function () {
-    $("#postContent").val("");
-    $("#pollForm")[0].reset(); // Reset poll form
+
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
 
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
-
 $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
     $(".create-post-upload-img-inner").removeClass("d-none");
