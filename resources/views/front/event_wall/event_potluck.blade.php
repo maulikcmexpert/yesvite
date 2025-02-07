@@ -509,7 +509,7 @@
                                                     {{-- {{ dd($category['items'])}} --}}
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
-                                                            @foreach ($category['items'] as $item)
+                                                            @foreach ($category['items'] as $index => $item)
                                                             
                                                             <div class="accordion-item active">
                                                                     <input type="hidden"
@@ -519,7 +519,10 @@
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
 
-                                                                    
+                                                                    <input type="hidden"
+                                                                        class="innerUserQnt-{{ $index }}-{{ $key }}"
+                                                                        value="{{ $item['innerUserQnt'] }}">
+                                                                    <div class="ms-auto">
                                                                     <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
                                                                         <button class="accordion-btn accordion-button">
                                                                             <div class="d-flex align-items-center">
