@@ -576,6 +576,12 @@ $(document).ready(function () {
                 alert("An error occurred. Please try again.");
             },
         });
+
+        $(".posts-card-like-btn").on("click", function () {
+            const icon = this.querySelector("i");
+            icon.classList.toggle("fa-regular");
+            icon.classList.toggle("fa-solid");
+        });
     });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
@@ -1435,11 +1441,7 @@ $(document).on("keyup", ".search_contact", function () {
         },
     });
 });
-$(".posts-card-like-btn").on("click", function () {
-    const icon = this.querySelector("i");
-    icon.classList.toggle("fa-regular");
-    icon.classList.toggle("fa-solid");
-});
+
 // $(document).on('click','.see-all-guest-right-btn',function(){
 //     $.ajax({
 //         url: base_url + "event_wall/fetch_all_invited_user", // Your Laravel route
