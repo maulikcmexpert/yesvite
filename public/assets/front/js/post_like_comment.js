@@ -48,7 +48,7 @@ $(document).ready(function () {
                     console.log(response);
 
                     $(`#likeCount_${eventPostId}`).text(
-                        `${response.count} Likes`
+                        `${reaction}${response.count} Likes`
                     );
 
                     let reactionImage = "";
@@ -60,7 +60,7 @@ $(document).ready(function () {
                     }
 
                     // Update the reaction image in post
-                    $(`#reactionImage_${eventPostId}`).html(reactionImage);
+                    $(`#reactionImage_${eventPostId}`).html("");
 
                     // **Update Reaction Modal**
                     updateReactionModal(eventPostId, response.post_reaction);
