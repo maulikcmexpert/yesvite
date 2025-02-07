@@ -157,12 +157,47 @@
                                                         @if($eventDetails['host_id']!=$login_user_id)
                                                             <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
                                                         @endif
+
+                                                        
                                                 <p style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
+                                                @if (!empty($eventDetails['co_hosts']))
+                                                    @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                        <div class="host-user-con">
+                                                            <div class="img-wrp">
+                                                                @if (!empty($co_host['profile']))
+                                                                    <img src="{{ $co_host['profile'] }}"
+                                                                        alt="cohost-img">
+                                                                @else
+                                                                    @php
+                                                                        $nameParts = explode(' ', $co_host['name']);
+                                                                        $firstInitial = isset($nameParts[0][0])
+                                                                            ? strtoupper($nameParts[0][0])
+                                                                            : '';
+                                                                        $secondInitial = isset($nameParts[1][0])
+                                                                            ? strtoupper($nameParts[1][0])
+                                                                            : '';
+                                                                        $initials = $firstInitial . $secondInitial;
+                                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                                    @endphp
+                                                                    <h5 class="{{ $fontColor }}">{{ $initials }}
+                                                                    </h5>
+                                                                @endif
+                                                            </div>
+                                                            <h5>{{ $co_host['name'] }}</h5>
+                                                            <span>Co-host</span>
+                                                            @if($co_host['id']!=$login_user_id)
+                                                                <a href="{{route('message.list',['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+
                                         </div>
                                     @endif
+
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
@@ -616,11 +651,15 @@
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
+                                                                    <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                    class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
+                                                                    aria-labelledby="sprite-{{ $item['id'] }}"
+                                                                    data-bs-parent="#accordionFlushExample">
                                                                         @if ($login_user_id === $users['user_id'])
-                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                            {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
 
@@ -780,17 +819,17 @@
                                                                                     </div>
 
                                                                                 </div>
-                                                                            </div>
+                                                                            {{-- </div> --}}
                                                                         @else
                                                                             {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
 
-                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse "
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body"
                                                                                     id="user-container-{{ $item['id'] }}">
                                                                                     <div
@@ -854,8 +893,9 @@
                                                                                             class="ms-auto slide-round">{{ $item['spoken_quantity'] }}</span>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            {{-- </div> --}}
                                                                         @endif
+                                                                        </div>
                                                                     @endforeach
                                                                 </div>
                                                             @endforeach

@@ -588,12 +588,16 @@
 }
 
 .step_2 .list_all_design_catgeory {
-    max-height: 660px;
+    max-height: 530px;
     overflow-y: scroll;
 }
 
 .step_2 .collection-card h4 {
     font-size: 20px;
+}
+
+.step_2 .collection-card .card-img {
+    height: 220px;
 }
 
 .collection-wrapper .filter-main-wrp .filters-drp .dropdown::after {
@@ -889,7 +893,9 @@
     .step_2 .collection-card h4 {
         font-size: 18px;
     }
+}
 
+@media only screen and (max-width: 1299px) {
     .step_2 .collection-card .card-img {
         height: 215px;
         min-width: 100%;
@@ -1040,8 +1046,8 @@
     }
 
     .collection-wrapper .filter-main-wrp {
-        flex-direction: column;
-        align-items: flex-start;
+        /* flex-direction: column;
+        align-items: flex-start; */
         margin-bottom: 15px;
     }
     .cookies-track p {
