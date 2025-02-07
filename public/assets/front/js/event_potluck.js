@@ -240,13 +240,13 @@ $(document).on("click", ".plus", function () {
     const input = container.find(".itemQty");
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
-    let categoryKey = $(this).data("categorykey");
-    let itemkey = $(this).data("itemkey");
+    const categoryKey = $(this).data("categorykey");
+    const itemkey = $(this).data("itemkey");
     const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     const item_id = $(this).data("item-id");
+
     // Increment the quantity
     input.val(currentValue + 1).trigger("change");
-    currentValue = parseInt(currentValue)+ parseInt(innerUserQnt);
 
     // // Optional: Update associated UI elements
 
@@ -257,7 +257,7 @@ $(document).on("click", ".plus", function () {
         const devideCount = container
             .closest(".accordion-item")
             .find("#quantity-display");
-        devideCount.text(`${currentValue + 1}/${maxQuantity}`);
+        devideCount.text(`${(parseInt(currentValue) + parseInt(innerUserQnt)) + 1}/${maxQuantity}`);
     }
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
@@ -317,9 +317,8 @@ $(document).on("click", ".minus", function () {
     const item_id = $(this).data("item-id");
     const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     // Decrement the quantity, but not below 0
-    let newValue = Math.max(0, currentValue - 1);
+    const newValue = Math.max(0, currentValue - 1);
     input.val(newValue).trigger("change");
-    newValue = parent(newValue)+ parseInt(innerUserQnt);
     $("#newQuantity_" + item_id).val(newValue);
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
@@ -327,7 +326,7 @@ $(document).on("click", ".minus", function () {
         const devideCount = container
             .closest(".accordion-item")
             .find(".devide-count");
-        devideCount.text(`${newValue}/${maxQuantity}`);
+        devideCount.text(`${parseInt(newValue) + parseInt(innerUserQnt)}/${maxQuantity}`);
     }
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
