@@ -1303,6 +1303,35 @@ $(document).on("click", ".wall_filter_reset", function () {
     $(".select_all_post").prop("checked", true);
     $(".wall_post").prop("checked", true);
     $(".view_wall_filter").attr("data-apply", "0");
+
+    $.ajax({
+        url: base_url + "event_wall/wallFilters",
+        type: "POST",
+        data: JSON.stringify({
+            event_id: event_id,
+            filters: selectedPostTypes,
+            is_delete:"1"
+        }),
+        contentType: "application/json",
+        headers: {
+            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            // console.log(response.view);
+            window.location.reload();
+            // $(".wall-post-content").html();
+            // $(".wall-post-content").html(response.view);
+            // $("#home_loader").css("display", "none");
+
+            // $("#main-center-modal-filter").modal("hide");
+        },
+        error: function (xhr, status, error) {
+            $("#home_loader").css("loader", "none");
+            toastr.error("Something went wrong!");
+            console.error(xhr.responseText);
+        },
+    });
 });
 $(document).on("click", ".view_wall_filter", function () {
     var applied = $('#is_filter_applied').val();
@@ -1335,6 +1364,7 @@ $(document).on("click", ".wall_apply_filter", function () {
         data: JSON.stringify({
             event_id: event_id,
             filters: selectedPostTypes,
+            is_delete:"0"
         }),
         contentType: "application/json",
         headers: {

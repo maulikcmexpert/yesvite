@@ -2921,6 +2921,10 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = $request->input('filters');
 
+        if($request->is_delete=="1"){
+            Session::forget('filterSession');
+            return;
+        }
         Session::put('filterSession', $selectedFilters);
         Session::save();
         return;
