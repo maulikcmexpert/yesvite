@@ -42,45 +42,49 @@
 
             </div>
 
-            @foreach ($storiesList as $Allstory)
+
                 <div class="swiper-slide">
-                    <li class="wall-main-story-item story-unseen">
-                        <button>
-                            <div class="wall-story-item-img">
-                                @if (!empty($Allstory['profile']))
-                                <img id="story-profile-pic-{{ $Allstory['id'] }}"
-                                    src="{{ $Allstory['profile'] }}"
-                                    class="story-profile-pic-{{ $Allstory['id'] }}"
-                                    alt=""
-                                    onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})" />
-                            @else
-                                    @php
-                                        $name = $Allstory['username'] ?? ''; // Ensure username is set
-
-                                        // Split the username into words (assuming first and last names)
-                                        $parts = explode(' ', trim($name));
-
-                                        // Get first and second initials
-                                        $firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
-                                        $secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
-
-                                        $initials = $firstInitial . $secondInitial;
-
-                                        $fontColor = 'fontcolor' . strtoupper($firstInitial);
-                                    @endphp
-                                    <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['id'] }}"
-                                    onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})">
-                                    {{ $initials }}
-                                </h5>
-                                @endif
-
-
+                    <div class="wall-main-story-wrp">
+                        <div class="swiper story-slide-slider">
+                            <div class="swiper-wrapper">
+                                @foreach ($storiesList as $Allstory)
+                                    <div class="swiper-slide">
+                                        <li class="wall-main-story-item story-unseen">
+                                            <button>
+                                                <div class="wall-story-item-img">
+                                                    @if (!empty($Allstory['profile']))
+                                                        <img id="story-profile-pic-{{ $Allstory['id'] }}"
+                                                            src="{{ $Allstory['profile'] }}"
+                                                            class="story-profile-pic-{{ $Allstory['id'] }}"
+                                                            alt=""
+                                                            onclick="AllUserStory(event, {{ $Allstory['user_id'] }})" />
+                                                    @else
+                                                        @php
+                                                            $name = $Allstory['username'] ?? ''; // Ensure username is set
+                                                            $parts = explode(' ', trim($name));
+                                                            $firstInitial = isset($parts[0][0]) ? strtoupper($parts[0][0]) : '';
+                                                            $secondInitial = isset($parts[1][0]) ? strtoupper($parts[1][0]) : '';
+                                                            $initials = $firstInitial . $secondInitial;
+                                                            $fontColor = 'fontcolor' . strtoupper($firstInitial);
+                                                        @endphp
+                                                        <h5 class="{{ $fontColor }}" id="profile-pic-{{ $Allstory['id'] }}"
+                                                            onclick="AllUserStory(event, {{ $Allstory['user_id'] }})">
+                                                            {{ $initials }}
+                                                        </h5>
+                                                    @endif
+                                                </div>
+                                                <h4>{{ $Allstory['username'] }}</h4>
+                                            </button>
+                                        </li>
+                                    </div>
+                                @endforeach
                             </div>
-                            <h4>{{ $Allstory['username'] }}</h4>
-                        </button>
-                    </li>
+                        </div>
+                    </div>
+
+
                 </div>
-            @endforeach
+
 
         </div>
     </div>
@@ -153,34 +157,30 @@
 </div>
 
 @foreach ($storiesList as $Allstory)
-    {{-- {{dd($Allstory)}} --}}
-    @if ($Allstory['id'] !== $users->id)
-        <!-- Ensure we only show modals for different stories -->
-        <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
-            <div class="modal-content">
-                <div class="story-seen-profile-wrp">
-                    <div class="story-seen-profile-img">
-                        <img src="{{ $Allstory['profile'] }}">
-                    </div>
+    <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
+        <div class="modal-content">
+            <div class="story-seen-profile-wrp">
+                <div class="story-seen-profile-img">
+                    <img src="{{ $Allstory['profile'] }}">
+                </div>
+                <div class="story-seen-profile-content">
+                    <h3>{{ $Allstory['username'] }}</h3>
                     <div class="story-seen-profile-content">
-                        <h3>{{ $Allstory['username'] }}</h3>
-                        <div class="story-seen-profile-content">
-                            @foreach ($Allstory['story'] as $story)
-                                <div class="story-item" data-story-id="{{ $story['id'] }}">
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach ($Allstory['story'] as $story)
+                            <div class="story-item" data-story-id="{{ $story['id'] }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-                <div id="story-display-{{ $Allstory['id'] }}" class="story-display">
-                    <div class="progress-bar-container"></div>
-                    <div class="story-content"></div>
-                </div>
-                <button class="modal-close" data-id="{{ $Allstory['id'] }}">
-                    <i class="fas fa-times"></i> <!-- FontAwesome X Icon -->
-                </button>
             </div>
-
+            <div id="story-display-{{ $Allstory['id'] }}" class="story-display">
+                <div class="progress-bar-container"></div>
+                <div class="story-content"></div>
+            </div>
+            <button class="modal-close" data-id="{{ $Allstory['id'] }}">
+                <i class="fas fa-times"></i> <!-- FontAwesome X Icon -->
+            </button>
         </div>
-    @endif
+    </div>
 @endforeach
+
