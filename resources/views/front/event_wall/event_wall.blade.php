@@ -341,14 +341,11 @@
                                                                         <h5>{{ $post['kids'] }} Kids</h5>
                                                                     </div>
                                                                 </div>
-                                                            @elseif($post['rsvp_status'] == '0')
-                                                                <div class="success-no">
-                                                                    <h5>NO</h5>
-                                                                </div>
+
                                                             @else
-                                                                <div class="no-reply">
-                                                                    <h5>NO REPLY</h5>
-                                                                </div>
+                                                            <div class="success-no">
+                                                                <h5>NO</h5>
+                                                            </div>
                                                             @endif
                                                         @endif
 
@@ -411,14 +408,14 @@
                                                                     data-bs-target="#reaction-modal-{{ $post['id'] }}">
                                                                     @php $i=0; $j = 0; @endphp
                                                                     @foreach ($post['reactionList'] as $reaction)
-                                                                    
+
 
                                                                     <!-- Smiley Emoji -->
-                                                                    
-                                                                    
+
+
                                                                     @if ($j==0 && ($post['self_reaction'] == $reaction))
                                                                         <li id="reactionImage_{{ $post['id'] }}">
-                                                                            
+
                                                                         @php $j++; @endphp
                                                                     @else
                                                                     <li>
@@ -471,7 +468,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
-                                                               
+
                                                                 <button class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
