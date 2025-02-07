@@ -530,7 +530,7 @@
                                         <div class="form-group">
                                             <label>Start Time</label>
                                             <div class="input-group time ">
-                                                <input class="form-control timepicker" placeholder="HH:MM AM/PM"
+                                                <input class="form-control start_timepicker" placeholder="HH:MM AM/PM"
                                                     id="ac-start-time" name="ac-start-time" oninput="clearError()"
                                                     value="{{ $schedule_start_time->format('g:i A') }}"
                                                     required="" readonly />
