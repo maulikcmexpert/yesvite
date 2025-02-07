@@ -1,6 +1,6 @@
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
-let isCheckOldcoHost = ($("#cohostId").val()) ? 1 : 0;
+let isCheckOldcoHost = ($("#cohostId").val()) ? "1" : "0";
 // alert(isCheckOldcoHost);
 eventData.isCheckOldcoHost=isCheckOldcoHost;
 var total_activities = $("#TotalSedulare").val();
