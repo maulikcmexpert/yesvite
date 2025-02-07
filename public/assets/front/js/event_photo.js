@@ -917,7 +917,9 @@ $(document).on("click", ".open_photo_model", function () {
                                             comment.comment_total_likes || 0
                                         }</p>
                                     </div>
-                                    <button class="commented-user-reply-btn">Reply</button>
+                                    <button class="commented-user-reply-btn" data-comment-id="${
+                                        comment.id
+                                    }">Reply</button>
                                 </div>
  <ul class="primary-comment-replies"></ul>
                             </li>
@@ -957,7 +959,9 @@ $(document).on("click", ".open_photo_model", function () {
                                     <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                                     <p>${reply.comment_total_likes || 0}</p>
                                 </div>
-                                <button class="commented-user-reply-btn">Reply</button>
+                                <button class="commented-user-reply-btn" data-comment-id="${
+                                    reply.id
+                                }">Reply</button>
                             </div>
                         `;
 
