@@ -1091,6 +1091,7 @@ $(document).ready(function () {
                 photoInput.files.length === 0 &&
                 postContent !== ""
             ) {
+                alert(4545);
                 document.getElementsByClassName("textcontent").value =
                     postContent;
                 document.getElementById("photoPostType").value = 0;
