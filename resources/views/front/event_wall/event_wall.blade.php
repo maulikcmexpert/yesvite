@@ -345,7 +345,7 @@
                                                                 <div class="success-no">
                                                                     <h5>NO</h5>
                                                                 </div>
-                                                            @elseif($post['rsvp_status'] == null)
+                                                            @else
                                                                 <div class="no-reply">
                                                                     <h5>NO REPLY</h5>
                                                                 </div>
