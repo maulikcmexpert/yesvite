@@ -86,7 +86,7 @@ $(document).ready(function() {
                     
                 } else {
                     $('.list_all_design_catgeory').html('No Design Found');
-
+                    $('.total_design_count').text(response.count +' Items')
                     $('#home_loader').css('display','none');
                 }
             },
