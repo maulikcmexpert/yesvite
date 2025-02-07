@@ -258,7 +258,7 @@ $(document).ready(function () {
         // AJAX call to update emoji reaction
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
-        let reaction = "\u{2764}"; // Default ❤️ (Heart) reaction
+        let reaction = selectedEmoji; // Default ❤️ (Heart) reaction
         $.ajax({
             url: base_url + "event_photo/userPostLikeDislike",
             method: "POST",
