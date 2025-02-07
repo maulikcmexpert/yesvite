@@ -551,8 +551,8 @@
                                                                     <input type="hidden"
                                                                     class="parent_comment_id"
                                                                     value="">
-                                                                    
-                                                                   
+
+
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
@@ -624,6 +624,7 @@
                                                                                             $liked = '';
                                                                                         }
                                                                                     @endphp
+                                                                                    <input type="hidden" id="login_user_id" value="{{$login_user_id}}">
                                                                                     <p>{{ $comment['posttime'] }}</p>
                                                                                     <button
                                                                                         class="posts-card-like-btn {{ $liked }}"
@@ -660,9 +661,9 @@
                                                                                                 id="show_Emoji"></i>
                                                                                         @endif
                                                                                     </button>
-                                                                                    {{-- <p id="commentTotalLike_{{ $reply['id'] }}">
+                                                                                    <p id="commentTotalLike_{{ $reply['id'] }}">
                                                                         {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
-                                                                    </p> --}}
+                                                                    </p>
                                                                                 </div>
                                                                                 <button data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
