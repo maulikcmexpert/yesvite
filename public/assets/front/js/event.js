@@ -100,7 +100,7 @@ $('#scrollStatus').scroll(function () {
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-    if (scrollTop + elementHeight >= scrollHeight) {
+    if (scrollTop + elementHeight >= scrollHeight-2) {
         busy1 = true;
         offset1 += limit;
         var current_month1="";
@@ -149,7 +149,7 @@ $('#scrollStatus2').scroll(function () {
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-    if (scrollTop + elementHeight >= scrollHeight) {
+    if (scrollTop + elementHeight >= scrollHeight-2) {
         busy2 = true;
         offset2 += limit;
         var current_month2="";
@@ -190,7 +190,7 @@ $('#scrollStatus3').scroll(function () {
     var scrollTop = $(this).scrollTop(); 
     var scrollHeight = $(this)[0].scrollHeight; 
     var elementHeight = $(this).height();
-    if (scrollTop + elementHeight >= scrollHeight) {
+    if (scrollTop + elementHeight >= scrollHeight-2) {
         busy3 = true;
         offset3 += limit;
         var current_month3="";
