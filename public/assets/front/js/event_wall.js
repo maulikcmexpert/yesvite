@@ -311,33 +311,39 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         // Process 'other_stories'
         console.log(data.data.other_stories);
+        console.log(storyElements);
 
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
-                console.log(story.user_id);
-                console.log(userId);
+                console.log( 'story_id',story.user_id);
+                console.log('user_id',userId);
                 if (story.user_id !== userId) {
-                    story.story.forEach((storyData) => {
+                    console.log(story.story);
+
+                    story.story.forEach((allStory) => {
                         const mediaElement = document.createElement(
-                            storyData.type === "video" ? "video" : "img"
+                            allStory.type === "video" ? "video" : "img"
                         );
-                        mediaElement.src = storyData.storyurl;
+                        mediaElement.src = allStory.storyurl;
                         mediaElement.classList.add("story-preview");
 
-                        if (storyData.type === "video") {
+                        if (allStory.type === "video") {
                             mediaElement.controls = false;
                             mediaElement.autoplay = false;
                             mediaElement.muted = true;
                         }
-
+                        const storyItemContainer =
+                        document.createElement("div");
+                    storyItemContainer.classList.add("story-item");
+                    storyItemContainer.dataset.storyId = allStory.id;
                         storyElements.push({
                             element: mediaElement,
-                            type: storyData.type,
+                            type: allStory.type,
                         });
                         storyDurations.push(
-                            storyData.type === "video" ? 0 : 5000
+                            allStory.type === "video" ? 0 : 5000
                         );
-                        storyPostTimes.push(storyData.post_time); // Store post time
+                        storyPostTimes.push(allStory.post_time); // Store post time
                     });
                 }
             });

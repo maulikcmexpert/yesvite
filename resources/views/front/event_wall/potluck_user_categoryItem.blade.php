@@ -87,9 +87,9 @@
                                                                                             <input type="number"
                                                                                                 id="newQuantity_{{ $item_id }}"
                                                                                                 name="qty"
-                                                                                                value="{{ $key }}"
+                                                                                                value="{{ 0 }}"
                                                                                                 class="input-qty itemQty"
-                                                                                                data-max="{{ $key }}"
+                                                                                                data-max="{{ $quantity }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 data-spoken-quantity="{{ $key }}" />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
