@@ -897,7 +897,7 @@
                                                                                             {{ $users['last_name'] }}
                                                                                         </h5>
                                                                                         <span
-                                                                                            class="ms-auto slide-round">{{ $item['spoken_quantity'] }}</span>
+                                                                                            class="ms-auto slide-round">{{ $users['quantity'] }}</span>
                                                                                     </div>
                                                                                 </div>
                                                                             {{-- </div> --}}
