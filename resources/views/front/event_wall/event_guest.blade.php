@@ -164,7 +164,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if(!empty($eventDetails['failed_invites'])&&($eventDetails['is_host']==1||$eventDetails['is_co_host']=="0"))
+                                            @if(!empty($eventDetails['failed_invites'])&&($eventDetails['is_host']==1||$eventDetails['is_co_host']=="1"))
                                              <div class="col-lg-12">
                                                 <div class="failed-invite">
                                                     <a type="button" class="faild-data" data-bs-toggle="modal"

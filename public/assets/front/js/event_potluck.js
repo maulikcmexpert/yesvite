@@ -555,7 +555,7 @@ $(document).on("click", ".deleteBtn", function () {
                 devideCount.text(`${response.spoken_for}/${item_quantity}`);
 
                 // Optionally, show a success message
-                alert(response.message);
+                // alert(response.message);
 
                 // Redirect back (if required)
                 window.location.href =
