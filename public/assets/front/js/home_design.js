@@ -61,4 +61,30 @@ $(document).ready(function() {
         $cookiesBox.removeClass('active');
         localStorage.setItem('cookiesBoxDismissed', 'true');
     });
+
+    $(document).on('input','#search_design_category',function(){
+
+        var search_value=$(this).val();
+        $.ajax({
+            url: base_url + "search_features", 
+            method: 'GET',
+            // headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+            // },
+            data: { search: search_value}, 
+            success: function (response) {
+                console.log("Remove successful: ", response);
+    
+                if (response.view) {
+                 $('.list_all_design_catgeory').html('');
+                 $('.list_all_design_catgeory').html(response.view);
+                    
+                } else {
+                }
+            },
+            error: function (error) {
+            
+            }
+        });
+    });
 });
