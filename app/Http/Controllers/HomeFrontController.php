@@ -106,42 +106,65 @@ class HomeFrontController extends BaseController
         $title = 'Yesvite-Features';
         $page = 'front.home_design';
         $js = ['home_design'];
-        $images = TextData::all();
-        // $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
-        $categories = EventDesignCategory::with(['subcategory' => function($query) {
-            $query->with('textdatas');
-        }])->get();
-        
-        $getDesignData =  EventDesignCategory::with('subcategory')->get();
-        $getDesignData = EventDesignCategory::all();
-        $getsubcatData = EventDesignSubCategory::all();
-        // $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
-        // $getDesignData =  EventDesignCategory::with('subcategory')->get();
-        // $getDesignData = EventDesignCategory::all();
-        // $getsubcatData = EventDesignSubCategory::all();
+
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                        ->with('textdatas'); // Load the textdatas relationship
+                }
+            ])
+            ->get();
+
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategory->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+
+        $count = $categories->count();
+
+
         return view('layout', compact(
             'title',
             'page',
-            'images',
-            'getDesignData',
+            'count',
+            // 'images',
+            // 'getDesignData',
             'categories',
             'js'
         ));
     }
+
     public function searchDesign(Request $request)
     {
-
         $query = $request->input('search');
-        $categories = TextData::with(['categories', 'subcategories'])
-            ->whereHas('categories', function ($q) use ($query) {
-                $q->where('category_name', 'LIKE', "%$query%");
-            })
+
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->with(['subcategory.textdatas']) // Load subcategories and their textdatas
             ->orderBy('id', 'desc')
             ->get();
 
-        $count = count($categories);
-        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategory->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
+
+        return response()->json([
+            'view' => view('front.search_home_design', compact('categories'))->render(),
+            'count' => $categories->count(), // Count of categories
+            'total_textdatas' => $totalTextDataCount // Total count of textdatas
+        ]);
     }
+
+
 
     public function homePricing()
     {
