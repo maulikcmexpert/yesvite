@@ -561,6 +561,9 @@ function displayStoriesWithProgressBars(
 
         const modal = document.getElementById(`storyModal-${userId}`);
         const storyDisplay = document.getElementById(`story-display-${userId}`);
+        console.log(`Stories for User ${userId}:`, storyElements);
+console.log(`Story Content Element for User ${userId}:`, storyContent);
+
         const progressBarContainer = document.querySelector(
             ".progress-bar-container"
         );
