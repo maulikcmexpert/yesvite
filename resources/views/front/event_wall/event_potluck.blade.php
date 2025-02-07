@@ -509,8 +509,10 @@
                                                     {{-- {{ dd($category['items'])}} --}}
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
-                                                            @foreach ($category['items'] as $item)
-                                                            
+                                                            @foreach ($category['items'] as $key => $item)
+                                                            <input type="hidden"
+                                                                    class="innerUserQnt-{{ $index }}-{{ $key }}"
+                                                                    value="{{ $item['innerUserQnt'] }}">
                                                             <div class="accordion-item active">
                                                                     <input type="hidden"
                                                                                     class="category-item-quantity"
