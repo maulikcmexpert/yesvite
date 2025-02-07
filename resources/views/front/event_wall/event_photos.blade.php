@@ -778,7 +778,7 @@
                                         aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <button class="dropdown-item active hide-post-btn" id="hidePostButton">
+                                            <button class="dropdown-item hide-post-btn" id="hidePostButton">
                                                 <svg id="icon" class="hide-post-svg-icon" viewBox="0 0 20 20"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
