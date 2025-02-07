@@ -59,7 +59,7 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-        $selectedFilters=session('filterSession');
+        $selectedFilters = session('filterSession');
         dd($selectedFilters);
         if (!$event) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -548,7 +548,7 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-        $selectedFilters=session('filterSession');
+        $selectedFilters = session('filterSession');
         // dd($selectedFilters);
 
         if ($event == null) {
@@ -714,7 +714,7 @@ class EventWallController extends Controller
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
-                    dd($filter);
+
                     switch ($filter) {
                         case 'host_update':
                             $query->orWhere('user_id', $eventCreator->user_id);
@@ -2914,7 +2914,7 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = $request->input('filters');
 
-        Session::put('filterSession',$selectedFilters);
+        Session::put('filterSession', $selectedFilters);
         Session::save();
         return;
         $eventCreator = Event::where('id', $event)->first();
@@ -3022,7 +3022,7 @@ class EventWallController extends Controller
         // if (count($results) != 0) {
         if ($eventPostList != "") {
             foreach ($eventPostList as  $value) {
-                if(!$value->user){
+                if (!$value->user) {
                     continue;
                 }
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
