@@ -310,6 +310,8 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
         }
 
         // Process 'other_stories'
+        console.log(data.data.other_stories);
+
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
                 if (story.user_id !== userId) {
@@ -1340,7 +1342,7 @@ $(document).on('mousedown', '#likeButton', function () {
 });
 $(document).on('click', function (e) {
     if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
-        $('#emojiDropdown').hide(); 
+        $('#emojiDropdown').hide();
         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
         // Hide emoji picker when clicked outside
     }
