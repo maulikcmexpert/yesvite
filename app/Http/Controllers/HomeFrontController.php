@@ -106,8 +106,7 @@ class HomeFrontController extends BaseController
         $title = 'Yesvite-Features';
         $page = 'front.home_design';
         $js = ['home_design'];
-        // $images = TextData::all();
-        // $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
+
         $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
             $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
         })
@@ -118,24 +117,24 @@ class HomeFrontController extends BaseController
                 }
             ])->get();
 
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategories->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
+        $count = $categories->count();
 
-        // dd($categories);
-        // $getDesignData =  EventDesignCategory::with('subcategory')->get();
-        // $getDesignData = EventDesignCategory::all();
-        // $getsubcatData = EventDesignSubCategory::all();
-        // $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
-        // $getDesignData =  EventDesignCategory::with('subcategory')->get();
-        // $getDesignData = EventDesignCategory::all();
-        // $getsubcatData = EventDesignSubCategory::all();
         return view('layout', compact(
             'title',
             'page',
+            'count',
             // 'images',
             // 'getDesignData',
             'categories',
             'js'
         ));
     }
+
     public function searchDesign(Request $request)
     {
         $query = $request->input('search');
