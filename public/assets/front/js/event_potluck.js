@@ -651,3 +651,16 @@ $(document).on("click", ".self_bring_quantity", function () {
         }
     }
 });
+
+$(document).on('click','#selfBringItem',function(){
+
+    var checkbox = $('input[name="self_bring_item"]:checked');
+    if(checkbox){
+      $("#self_bring_quantity_toggle").show();
+    }else{
+        
+        $("#self_bring_quantity_toggle").hide();
+
+    }
+
+})

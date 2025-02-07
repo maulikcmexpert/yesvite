@@ -950,7 +950,7 @@
                 <div class="toggle-button-cover toggle-custom">
                     <div class="buttons-cover">
                         <div class="button r" id="button-1">
-                            <input type="checkbox" class="checkbox" name="self_bring_item" value="1"/>
+                            <input type="checkbox" id="selfBringItem" class="checkbox" name="self_bring_item" value="1"/>
                             <div class="knobs"></div>
                             <div class="layer"></div>
                         </div>
@@ -958,7 +958,7 @@
                 </div>
             </div>
 
-            <div class="item-on" id="self_bring_quantity_toggle" style="">
+            <div class="item-on" id="self_bring_quantity_toggle" style="display:none">
                 {{-- <img src="{{asset('assets/event/image/user-img.svg')}}" alt=""> --}}
                 @php
                     $user = Auth::guard('web')->user();
