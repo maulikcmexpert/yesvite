@@ -779,7 +779,7 @@
                                                                                                 class="input-qty itemQty"
                                                                                                 data-max="{{ $item['quantity'] }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
-                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}" />
+                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}" readonly />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
