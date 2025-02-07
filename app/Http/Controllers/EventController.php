@@ -176,10 +176,10 @@ class EventController extends BaseController
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
         $eventDetail['alreadyCount'] = 0;
-         
+
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
-            $eventID= decrypt($request->id);
+            $eventID = decrypt($request->id);
             $getEventData = Event::with('event_schedule')->where('id', $eventID)->first();
 
 
@@ -603,11 +603,20 @@ class EventController extends BaseController
         //     }]);
         // }])->orderBy('id', 'DESC')->get();
 
-        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
-
-        $textData = TextData::select('*')
-            ->orderBy('id', 'desc')
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                        ->with('textdatas'); // Load the textdatas relationship
+                }
+            ])
             ->get();
+
+        // $textData = TextData::select('*')
+        //     ->orderBy('id', 'desc')
+        //     ->get();
 
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
@@ -628,7 +637,7 @@ class EventController extends BaseController
             'event_type',
             'yesvite_user',
             'groups',
-            'textData',
+            // 'textData',
             'categories',
             'eventDetail'
         ));
@@ -3301,7 +3310,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-        
+
         // dd($request->slider_images);
 
 

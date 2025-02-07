@@ -38,6 +38,7 @@ class EventAboutController extends Controller
         $user  = Auth::guard('web')->user();
         $js = ['event_about_rsvp', 'guest_rsvp', 'post_like_comment', 'guest'];
         $current_page = "about";
+        $selectedFilters=[];
         $login_user_id  = $user->id;
         $event = decrypt($id);
         if ($event == null) {
@@ -339,7 +340,7 @@ class EventAboutController extends Controller
 
             // //
 
-            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'eventDetails', 'current_page', 'eventInfo'));
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent','selectedFilters', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {

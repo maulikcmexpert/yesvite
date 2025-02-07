@@ -548,9 +548,13 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-        $selectedFilters = session('filterSession');
-        // dd($selectedFilters);
-
+        $selectedFilters=[];
+        // $selectedFilters = (session('filterSession')=="")?[]:$selectedFilters ;
+        $selectedFilters = empty(session('filterSession')) ? [] : session('filterSession');
+        $is_filter_applied="0";
+        if(!empty(session('filterSession'))){
+            $is_filter_applied="1";
+        }
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -746,6 +750,7 @@ class EventWallController extends Controller
                 }
             });
         }
+        Session::forget('filterSession');
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
         if ($eventPostList != "") {
             //dd($eventPostList);
@@ -1347,7 +1352,8 @@ class EventWallController extends Controller
             'rsvpSent',
             'login_user_id',
             'js',
-            'selectedFilters'
+            'selectedFilters',
+            'is_filter_applied'
 
         ));
     }
@@ -2915,6 +2921,10 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = $request->input('filters');
 
+        if($request->is_delete=="1"){
+            Session::forget('filterSession');
+            return;
+        }
         Session::put('filterSession', $selectedFilters);
         Session::save();
         return;
