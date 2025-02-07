@@ -4649,7 +4649,8 @@ async function sendMessageHost(contactId, contactName, receiverProfile, type) {
     var ele = $(
         document.getElementsByClassName(`conversation-${conversationId}`)
     );
-
+    $(".msg-list").removeClass("active");
+    $(ele).addClass("active");
     $(ele).find(".user-detail").children().find(".host-type").text(type);
     $(ele)
         .find(".user-detail")
