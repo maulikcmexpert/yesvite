@@ -140,13 +140,15 @@ class HomeFrontController extends BaseController
     {
 
         $query = $request->input('search');
-        $categories = TextData::with(['categories', 'subcategories'])
-            ->whereHas('categories', function ($q) use ($query) {
-                $q->where('category_name', 'LIKE', "%$query%");
-            })
-            ->orderBy('id', 'desc')
-            ->get();
-
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                        ->with('textdatas'); // Load the textdatas relationship
+                }
+            ])->get();
         $count = count($categories);
         return response()->json(['view' => view('front.search_home_design', compact('categories'))->render(), 'count' => $count]);
     }
