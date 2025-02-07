@@ -457,7 +457,7 @@
                                                         @endif
                                                     </div>
                                                 @endif
-                                                <!-- @if (!empty($eventDetails['co_hosts']))
+                                                @if (!empty($eventDetails['co_hosts']))
                                                     @foreach ($eventDetails['co_hosts'] as $co_host)
                                                         <div class="host-user-con">
                                                             <div class="img-wrp">
@@ -487,7 +487,7 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
-                                                @endif -->
+                                                @endif
 
                                             </div>
 
