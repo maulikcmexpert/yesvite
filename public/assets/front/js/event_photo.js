@@ -1054,7 +1054,7 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log("Self Reaction:", data.self_reaction); // Debugging
                 console.log(typeof data.self_reaction); // Output: string
 
-                var reaction_store = data.self_reaction.trim(); // Ensure no leading/trailing whitespace
+                var reaction_store = data.self_reaction.trim();
                 console.log("Trimmed Reaction Store:", reaction_store); // Log trimmed reaction value
                 console.log(
                     "Reaction Unicode Code:",
@@ -1065,19 +1065,19 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reaction_store);
 
                 // Check and toggle the heart icon based on the reaction
-                // const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
+                const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
                 // console.log(likeButton);
 
-                // var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
-                // console.log(unicodeString); // Will log the Unicode code as a hex string
+                var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
+                console.log(unicodeString); // Will log the Unicode code as a hex string
 
-                // if (reaction_store == unicodeString) {
-                //     console.log("User has liked the post.");
-                //     likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
-                // } else {
-                //     console.log("User has not liked the post.");
-                //     likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
-                // }
+                if (reaction_store == unicodeString) {
+                    console.log("User has liked the post.");
+                    likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
+                } else {
+                    console.log("User has not liked the post.");
+                    likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
+                }
 
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");

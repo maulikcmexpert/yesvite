@@ -892,6 +892,9 @@
 
     .step_2 .collection-card .card-img {
         height: 215px;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
     }
 }
 
