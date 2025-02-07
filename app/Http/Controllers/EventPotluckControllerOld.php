@@ -609,7 +609,7 @@ class EventPotluckController extends Controller
         if ($item && intval($item->quantity) > 0) {
             $isUser = true; // If quantity is greater than zero
         }
-
+dd($isUser,$item);
         // Check if there's enough quantity available
         if ($checkCarryQty < $checkQty && $isUser==false ) {
             // Check if the user has already added this item
