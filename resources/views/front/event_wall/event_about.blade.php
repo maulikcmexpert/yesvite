@@ -417,7 +417,7 @@
                                         </div>
                                         {{-- {{      dd($eventDetails)}} --}}
                                         <div class="host-users-detail cmn-card">
-                                            <h4 class="title">Your hosts</h4>
+                                            <h4 class="title">Message From Host</h4>
                                             <div class="host-user-con-box">
                                                 @if ($eventDetails['hosted_by'])
                                                     <div class="host-user-con">
