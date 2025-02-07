@@ -750,6 +750,7 @@ class EventWallController extends Controller
                 }
             });
         }
+        Session::forget('filterSession');
         $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
         if ($eventPostList != "") {
             //dd($eventPostList);
@@ -1351,7 +1352,8 @@ class EventWallController extends Controller
             'rsvpSent',
             'login_user_id',
             'js',
-            'selectedFilters'
+            'selectedFilters',
+            'is_filter_applied'
 
         ));
     }
