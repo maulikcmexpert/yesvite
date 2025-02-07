@@ -596,6 +596,10 @@
     font-size: 20px;
 }
 
+.step_2 .collection-card .card-img {
+    height: 220px;
+}
+
 .collection-wrapper .filter-main-wrp .filters-drp .dropdown::after {
     content: "\f078";
     font-family: "fontAwesome";
