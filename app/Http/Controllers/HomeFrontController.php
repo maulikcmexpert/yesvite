@@ -141,17 +141,24 @@ class HomeFrontController extends BaseController
         $query = $request->input('search');
 
         $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
-            ->with(['subcategory.textdatas']) // Load subcategories and their textdata
+            ->with(['subcategories.textdatas']) // Load subcategories and their textdatas
             ->orderBy('id', 'desc')
             ->get();
 
-        $count = $categories->count();
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategories->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
 
         return response()->json([
             'view' => view('front.search_home_design', compact('categories'))->render(),
-            'count' => $count
+            'count' => $categories->count(), // Count of categories
+            'total_textdatas' => $totalTextDataCount // Total count of textdatas
         ]);
     }
+
 
 
     public function homePricing()
