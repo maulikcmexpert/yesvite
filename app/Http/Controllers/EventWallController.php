@@ -551,8 +551,10 @@ class EventWallController extends Controller
         $selectedFilters=[];
         // $selectedFilters = (session('filterSession')=="")?[]:$selectedFilters ;
         $selectedFilters = empty(session('filterSession')) ? [] : session('filterSession');
-
-
+        $is_filter_applied="0";
+        if(!empty(session('filterSession'))){
+            $is_filter_applied="1";
+        }
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }

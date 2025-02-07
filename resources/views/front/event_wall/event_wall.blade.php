@@ -30,6 +30,7 @@
                             </ol>
                         </nav>
                     </div>
+                    <input type="hidden" id="is_filter_applied" value="{{$is_filter_applied}}"/>
                     <!-- ===event-breadcrumb-wrp-end=== -->
                     <x-event_wall.wall_title :eventDetails="$eventDetails" :selectedFilters="$selectedFilters" />
                     <!-- ===event-center-title-start=== -->
