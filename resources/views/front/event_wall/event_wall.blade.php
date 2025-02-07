@@ -236,7 +236,8 @@
                                                                         </span>
                                                                     @endif
 
-                                                                    {{ $post['posttime'] }}
+                                                                    {{ \Carbon\Carbon::parse($post['posttime'])->diffForHumans() }}
+
                                                                 </h5>
                                                             </div>
                                                         </div>
