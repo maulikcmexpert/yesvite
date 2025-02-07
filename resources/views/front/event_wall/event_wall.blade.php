@@ -341,14 +341,11 @@
                                                                         <h5>{{ $post['kids'] }} Kids</h5>
                                                                     </div>
                                                                 </div>
-                                                            @elseif($post['rsvp_status'] == '0')
-                                                                <div class="success-no">
-                                                                    <h5>NO</h5>
-                                                                </div>
+
                                                             @else
-                                                                <div class="no-reply">
-                                                                    <h5>NO REPLY</h5>
-                                                                </div>
+                                                            <div class="success-no">
+                                                                <h5>NO</h5>
+                                                            </div>
                                                             @endif
                                                         @endif
 
