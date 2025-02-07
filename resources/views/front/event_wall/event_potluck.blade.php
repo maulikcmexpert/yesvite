@@ -253,7 +253,7 @@
                                                     data-category-id="{{ $category['id'] }}"
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
-                                                        <span
+                                                        <span data-categorycount="{{ $category['categoryQuantity'] }}"
                                                             class="me-1 category-count-{{$key}} list-sub-head">{{ $category['categoryQuantity'] }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
@@ -353,6 +353,7 @@
 
                                                         
                                                     @else
+                                                   
                                                         @if($category['totalMissing'] == 0)
                                                         <span
                                                             class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
@@ -368,6 +369,7 @@
                                                         style="color: rgb(52, 192, 92);"><span
                                                             id="missing-category-{{ $key }}">0</span> Missing</h6>
                                                         @else
+                                                       
                                                         <span
                                                                 class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                 style="color: rgb(192, 52, 52);">
@@ -382,6 +384,23 @@
                                                             style="color: rgb(192, 52, 52);"><span
                                                                 id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
                                                             Missing</h6>
+                                                            @if ($category['totalOver'] >0)
+                                                            <span
+                                                            class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
+                                                            style="">
+                                                            <svg width="14" height="14" viewBox="0 0 14 14"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                    fill="#23AA26"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <h6 class="me-2 extra-category-h6-{{ $key }}"
+                                                            style="color:#34C05C"><span
+                                                                id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
+                                                            Item Over</h6>
+                                                            @endif
+
                                                         @endif
 
                                                             @if ($category['remainingQnt'] < 0)

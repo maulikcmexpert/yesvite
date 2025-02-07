@@ -1091,14 +1091,16 @@ $(document).ready(function () {
                 photoInput.files.length === 0 &&
                 postContent !== ""
             ) {
-                document.getElementsByClassName("textcontent").value =
-                    postContent;
+
                 document.getElementById("photoPostType").value = 0;
                 $this.prop("disabled", true);
+            }else{
+
+
+                document.getElementById("photoPostType").value = 1;
             }
 
-            document.getElementById("photoContent").value = postContent;
-            document.getElementById("photoPostType").value = 1;
+
 
             $this.prop("disabled", true);
             photoForm.submit();
