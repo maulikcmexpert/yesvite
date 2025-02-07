@@ -1569,9 +1569,10 @@ $(document).on("click", ".delete_activity", function () {
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
     var total_all_activity=$('.event_all_activity_list').length();
-    $(".step_1_activity").text(i + " Activity");
+    $(".step_1_activity").text(total_activities + " Activity");
+    // $(".step_1_activity").text(i + " Activity");
 
-    console.log(total_activities);
+    // console.log(total_activities);
 });
 var numItems = 0;
 
