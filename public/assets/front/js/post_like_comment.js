@@ -177,6 +177,8 @@ $(document).ready(function () {
         // Extract necessary data
         const eventId = button.data("event-id");
         const eventPostCommentId = button.data("event-post-comment-id");
+        const allLikeButtons = $(`button[data-event-post-comment-id='${eventPostCommentId}']`);
+        const allLikeIcons = allLikeButtons.find("i");
 
         // Select both like icons (main comment and nested reply)
         const mainLikeIcon = button.find("i");
@@ -215,9 +217,10 @@ $(document).ready(function () {
                         `${response.count} Likes`
                     );
                     if (response.self_reaction == "\u{2764}") {
-                         // Update the reaction display
-                    const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
-                    replyLikeIcon.text(`${response.self_reaction}`);
+                        // Update all like buttons with the same comment ID
+                        allLikeIcons.removeClass("fa-regular").addClass("fa-solid");
+                    } else {
+                        allLikeIcons.removeClass("fa-solid").addClass("fa-regular");
                     }
 
                 }
