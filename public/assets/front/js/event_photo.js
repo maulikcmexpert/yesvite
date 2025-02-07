@@ -529,16 +529,7 @@ console.log(imgSrc);
         alert('Image source not found.');
     }
 });
-let isMediaPostClicked = false;
 
-// Detect click on #media_post
-document.getElementById("media_post").addEventListener("click", function(e) {
-    if(!isMediaPostClicked){
-        e.stopPropagation()
-        e.preventDefault()
-        return false; // Stop execution
-    }
-});
 
 $(document).on('click', '.open_photo_model', function () {
     clearTimeout(pressTimer); // Clear the timer
@@ -591,7 +582,6 @@ $(document).on('click', '.open_photo_model', function () {
 console.log(rawData.length);
 
     if (rawData.length > 1) {
-        isMediaPostClicked = true
         swiper.destroy(true, true);
         document.getElementsByClassName('swiper-button-next')[0].style.display = 'flex';
         document.getElementsByClassName('swiper-button-prev')[0].style.display = 'flex';
@@ -604,8 +594,6 @@ console.log(rawData.length);
             },
         });
     }else{
-        isMediaPostClicked = false
-
         swiper.destroy(true, true);
         document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
         document.getElementsByClassName('swiper-button-prev')[0].style.display = 'none';
