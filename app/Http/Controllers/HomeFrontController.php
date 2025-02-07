@@ -107,7 +107,11 @@ class HomeFrontController extends BaseController
         $page = 'front.home_design';
         $js = ['home_design'];
         $images = TextData::all();
-        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
+        // $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();
+        $categories = TextData::with(['categories.subcategories'])
+        ->orderBy('id', 'desc')
+        ->get()
+        ->groupBy('category_id');
         $getDesignData =  EventDesignCategory::with('subcategory')->get();
         $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
