@@ -122,21 +122,22 @@ class UserDataTable extends DataTable
                 return '<a class="" href="' . $pwd_url . '" title="View"><i class="fa fa-key"></i></a>';;
             })
 
-            ->addColumn('package_name', function ($row) {
-                if ($row->user_subscriptions->isNotEmpty()) {
-                    // Iterate through the subscriptions and handle each 'type'
-                    return $row->user_subscriptions->map(function ($subscription) {
-                        if ($subscription->type == 'product') {
-                            return 'Free Year';
-                        } elseif ($subscription->type == 'subscribe') {
-                            return 'Pro Year';
-                        } else {
-                            return 'Unknown Type'; // Handle other types if necessary
-                        }
-                    })->implode(', '); // Join the results if there are multiple subscriptions
-                } else {
-                    return 'Expired';
-                }
+            ->addColumn('credit_balance', function ($row) {
+                return $row->coins;
+                // if ($row->user_subscriptions->isNotEmpty()) {
+                //     // Iterate through the subscriptions and handle each 'type'
+                //     return $row->user_subscriptions->map(function ($subscription) {
+                //         if ($subscription->type == 'product') {
+                //             return 'Free Year';
+                //         } elseif ($subscription->type == 'subscribe') {
+                //             return 'Pro Year';
+                //         } else {
+                //             return 'Unknown Type'; // Handle other types if necessary
+                //         }
+                //     })->implode(', '); // Join the results if there are multiple subscriptions
+                // } else {
+                //     return 'Expired';
+                // }
             })
 
 
@@ -181,7 +182,7 @@ class UserDataTable extends DataTable
                 ';
             })
 
-            ->rawColumns(['profile', 'app_user', 'setpassword', 'action','transaction', 'status', 'package_name']);
+            ->rawColumns(['profile', 'app_user', 'setpassword', 'action','transaction', 'status', 'credit_balance']);
     }
 
     /**
@@ -275,7 +276,7 @@ class UserDataTable extends DataTable
             Column::make('email')->orderable(true),
             Column::make('app_user')->title('User Type')->orderable(false),
             Column::make('setpassword')->title('Set Password')->orderable(false),
-            Column::make('package_name')->title('Plan')->orderable(false),
+            Column::make('credit_balance')->title('credit_balance')->orderable(false),
             Column::make('action')->orderable(false),
             Column::make('transaction')->title('Transaction')->orderable(false),
             Column::make('status')->orderable(false)
