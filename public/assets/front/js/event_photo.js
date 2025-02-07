@@ -890,7 +890,8 @@ $(document).on("click", ".download_img_single", function () {
 $(document).on("click", ".open_photo_model", function () {
     clearTimeout(pressTimer); // Clear the timer
     console.log("Mouse up or leave detected");
-
+    const commentInput = $("#post_comment");
+    commentInput.val("");
     if (!isLongPress) {
         // If it wasn't a long press, open the modal (short press behavior)
         console.log("Short press detected");
@@ -1064,19 +1065,19 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reaction_store);
 
                 // Check and toggle the heart icon based on the reaction
-                const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
-                console.log(likeButton);
+                // const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
+                // console.log(likeButton);
 
-                var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
-                console.log(unicodeString); // Will log the Unicode code as a hex string
+                // var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
+                // console.log(unicodeString); // Will log the Unicode code as a hex string
 
-                if (reaction_store == unicodeString) {
-                    console.log("User has liked the post.");
-                    likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
-                } else {
-                    console.log("User has not liked the post.");
-                    likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
-                }
+                // if (reaction_store == unicodeString) {
+                //     console.log("User has liked the post.");
+                //     likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
+                // } else {
+                //     console.log("User has not liked the post.");
+                //     likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
+                // }
 
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
@@ -1088,9 +1089,9 @@ $(document).on("click", ".open_photo_model", function () {
                         console.log("Emoji Src:", emojiSrc);
 
                         // Define emojis with exact matching Unicode and image source
-                        const heartUnicode = "\\u{2764}"; //
-                        const smileUnicode = "\\u{1F60D}"; //
-                        const clapUnicode = "\\u{1F44F}"; //
+                        const heartUnicode = "\u{2764}"; //
+                        const smileUnicode = "\u{1F60D}"; //
+                        const clapUnicode = "\u{1F44F}"; //
 
                         $(this).removeClass("photo_emoji").show();
 
@@ -1505,7 +1506,7 @@ $(document).on("click", "#likeButtonModel", function () {
     // Handle single tap like/unlike
     const button = $(this);
     const isLiked = button.hasClass("liked");
-    const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
+    const reaction =  "\u{2764}"; // Toggle reaction: 💔 or ❤️
     const likeButton = $(this);
     // Toggle like button appearance
     const icon = $(this).find("i");

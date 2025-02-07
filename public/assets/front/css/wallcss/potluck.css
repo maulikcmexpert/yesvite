@@ -814,9 +814,9 @@
 }
 
 #deletemodal .delete-icon img{
-    width: 100%;
-    height: 100%;
-    margin: 0 auto 16px;
+    width: auto;
+    height: auto;
+    /* margin: 0 auto 16px; */
 }
 
 #deletemodal h4{

@@ -177,7 +177,8 @@
                                                             <div class="photo-card-head-left-content">
                                                                 <h3>{{ $photo['firstname'] }} {{ $photo['lastname'] }}
                                                                 </h3>
-                                                                <p>{{ $photo['post_time'] }}</p>
+
+                                                                <p> {{ \Carbon\Carbon::parse($photo['post_time'] )->shortAbsoluteDiffForHumans() }}</p>
                                                             </div>
                                                         </div>
                                                         <div class="photo-card-head-right set_emoji_like">
@@ -948,7 +949,7 @@
 
                                 <div class="posts-card-show-all-comments-inner">
                                     <ul class="top-level-comments">
-                                      
+
                                     </ul>
                                 </div>
                             </div>
@@ -1217,3 +1218,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    use Carbon\ Carbon;
+
+    public
+    function getShortTimeAttribute() {
+        $time = Carbon::parse($this - > posttime);
+
+        return str_replace(
+            [' second', ' seconds', ' minute', ' minutes', ' hour', ' hours', ' day', ' days', ' week', ' weeks',
+                ' month', ' months', ' year', ' years'
+            ],
+            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w', 'mo', 'mo', 'y', 'y'],
+            $time - > diffForHumans()
+        );
+    }
+</script>
