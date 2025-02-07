@@ -1033,10 +1033,16 @@ $(document).ready(function () {
         if (event.which === 13 && !event.shiftKey) {
             event.preventDefault(); // Prevents new line in textarea
 
-            if ($("#textform").length > 0) { // Check if #textform exists
-                $("#textform").submit(); // Submit the form if it exists
+            let postContent = $("#postContent").val().trim(); // Get content and remove spaces
+
+            if (postContent.length > 0) { // Check if content exists
+                if ($("#textform").length) { // Check if form exists
+                    $("#textform").submit(); // Submit the form
+                } else {
+                    console.log("Form not found!"); // Debugging purpose
+                }
             } else {
-                console.log("Form not found!"); // Debugging purpose
+                console.log("Post content is empty! Form not submitted.");
             }
         }
     });
