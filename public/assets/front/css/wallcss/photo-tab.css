@@ -513,13 +513,15 @@
     padding-top: 40px !important;
 }
 
-.detail-photo-modal .posts-card-head-left-content h3{
+#detail-photo-modal .posts-card-head-left-content h3{
     display: inline-block;
+    word-break: break-all;
 }
 
-.detail-photo-modal .posts-card-head-left-content span{
+#detail-photo-modal .posts-card-head-left-content span{
     display: inline;
 }
+
 
 /* ===Responsive=== */
 

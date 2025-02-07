@@ -766,9 +766,11 @@
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <h3 id="post_name">Chance Curtis
+                                    <div class="d-flex align-items-start justify-content-between gap-2">
+                                        <h3 id="post_name">Chance Curtis
                                         </h3>
                                         <span id="host_display" class="host">Host</span>
+                                    </div>
                                     <p id="location">New York, NY</p>
                                 </div>
                             </div>
@@ -778,7 +780,7 @@
                                         aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <button class="dropdown-item active hide-post-btn" id="hidePostButton">
+                                            <button class="dropdown-item hide-post-btn" id="hidePostButton">
                                                 <svg id="icon" class="hide-post-svg-icon" viewBox="0 0 20 20"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path

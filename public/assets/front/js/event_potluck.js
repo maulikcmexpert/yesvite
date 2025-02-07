@@ -111,9 +111,17 @@ $(document).ready(function () {
         const categoryName = $("#categoryName").val();
         const eventid = $("#event_id").val();
         const description = $("#text1").val();
+        if(description==""){
+            toastr.error('please enter category item name')
+            return 
+        }
         const self_bring_item =
             $('input[name="self_bring_item"]:checked').length > 0 ? 1 : 0;
-        const quantity = $('input[name="sub_quantity"]').val();
+        let quantity = $('input[name="sub_quantity"]').val();
+        let self_bring_quantity=0;
+        if(self_bring_item){
+            self_bring_quantity = $("#self_bring_qty").val();
+        }
         console.log(eventid, description, self_bring_item, quantity);
 
         $.ajax({
@@ -128,6 +136,7 @@ $(document).ready(function () {
                 event_id: eventid,
                 description: description,
                 self_bring_item: self_bring_item,
+                self_bring_quantity:self_bring_quantity,
                 quantity: quantity,
             },
             success: function (response) {
