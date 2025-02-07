@@ -674,10 +674,14 @@ $(document).on('click','#selfBringItem',function(){
 
 })
 
-$(document).on('click','.itemTotalQnt',function(){
-    var main_quantity = parseInt($("#sub_quantity").val());
-    var self_quantity = parseInt($("#self_bring_qty").val());
-    if(main_quantity < self_quantity){
-        $("#self_bring_qty").val(parseInt(main_quantity))
+$(document).on('click', '.itemTotalQnt', function() {
+    var main_quantity = parseInt($("#sub_quantity").val(), 10);
+    var self_quantity = parseInt($("#self_bring_qty").val(), 10);
+    if (!isNaN(main_quantity) && !isNaN(self_quantity)) {
+        if (main_quantity < self_quantity) {
+            $("#self_bring_qty").val(main_quantity);
+        }
+    } else {
+        console.log("Invalid input values.");
     }
-})
+});
