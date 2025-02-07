@@ -109,12 +109,12 @@ $(document).ready(function () {
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
-        if(categoryName==""){
+        const eventid = $("#event_id").val();
+        const description = $("#text1").val();
+        if(description==""){
             toastr.error('please enter category item name')
             return 
         }
-        const eventid = $("#event_id").val();
-        const description = $("#text1").val();
         const self_bring_item =
             $('input[name="self_bring_item"]:checked').length > 0 ? 1 : 0;
         const quantity = $('input[name="sub_quantity"]').val();
