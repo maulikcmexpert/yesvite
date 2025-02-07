@@ -674,10 +674,33 @@ $(document).on('click','#selfBringItem',function(){
 
 })
 
-$(document).on('click','.itemTotalQnt"',function(){
-    var main_quantity = parseInt($("#sub_quantity").val());
-    var self_quantity = parseInt($("#self_bring_qty").val());
-    if(main_quantity < self_quantity){
-        $("#self_bring_qty").val(parseInt(main_quantity))
+$(document).on('click', '.itemTotalQnts', function() {
+    var main_quantity = parseInt($("#sub_quantity").val(), 10);
+    var self_quantity = parseInt($("#self_bring_qty").val(), 10);
+    if (!isNaN(main_quantity) && !isNaN(self_quantity)) {
+        if (main_quantity < self_quantity) {
+            $("#self_bring_qty").val(main_quantity);
+        }
+    } else {
+        console.log("Invalid input values.");
     }
-})
+});
+var buttonPlus  = $(".qty-btn-plu");
+var buttonMinus = $(".qty-btn-min");
+
+var incrementPlus = buttonPlus.click(function(e) {
+var $n = $(this)
+.parent(".qty-container")
+.find(".input-qty");
+$n.val(Number($n.val())+1 );
+});
+
+var incrementMinus = buttonMinus.click(function(e) {
+var $n = $(this)
+.parent(".qty-container")
+.find(".input-qty");
+var amount = Number($n.val());
+if (amount > 0) {
+  $n.val(amount-1);
+}
+});

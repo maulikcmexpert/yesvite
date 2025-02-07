@@ -522,7 +522,14 @@
 #detail-photo-modal .posts-card-head-left-content span{
     display: inline;
 }
+.hideswipe {
 
+    background: rgba(0, 0, 0, 0.2); /* Transparent black overlay */
+
+    transform: translate(-50%, -50%); /* Perfect centering */
+    z-index: 9999; /* Keep it on top of everything */
+    pointer-events: none;
+}
 
 /* ===Responsive=== */
 

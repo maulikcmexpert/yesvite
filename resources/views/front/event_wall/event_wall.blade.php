@@ -221,22 +221,25 @@
                                                                     </ul>
                                                                 </div>
                                                                 <h5>
-                                                                    @if ($post['rsvp_status'] == '1')
+                                                                    @if ($post['rsvp_status'] == '1' && $post['is_co_host'] == '1' )
                                                                         <span class="positive-ans">
                                                                             <i
                                                                                 class="fa-solid fa-circle-check"></i>Yes</span>
-                                                                    @elseif($post['rsvp_status'] == '0')
+                                                                    @elseif($post['rsvp_status'] == '0'  && $post['is_co_host'] == '1')
                                                                         <span class="positive-ans not-ans"><i
                                                                                 class="fa-solid fa-circle-question"></i>No
                                                                             Answer</span>
-                                                                    @elseif($post['rsvp_status'] == '2')
+                                                                    @elseif($post['rsvp_status'] == '2'  && $post['is_co_host'] == '1')
                                                                         <span class="positive-ans nagative-ans">
                                                                             <i class="fa-solid fa-circle-xmark"></i>Not
                                                                             Coming
                                                                         </span>
                                                                     @endif
 
-                                                                    {{ $post['posttime'] }}
+                                                                    {{ \Carbon\Carbon::parse($post['posttime'])->shortAbsoluteDiffForHumans() }}
+
+
+
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -791,8 +794,8 @@
                                                                                         {{ $comment['total_replies'] }}
                                                                                         reply
                                                                                     </button> --}}
-                                                                                    @if($comment['total_replies'] > 0)                                                                                       
-                                                                                    
+                                                                                    @if($comment['total_replies'] > 0)
+
                                                                                     <button class="show-comment-reply-btn">Hide reply</button>
                                                                                 @endif
                                                                                 </ul>

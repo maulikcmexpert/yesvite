@@ -2799,7 +2799,7 @@ $(document).on("blur", "#ac-start-time", function () {
 
     $(".new_activity").html("");
     $("#end-time").val("");
-    $(".activity_total_count").text(0);
+    $(".activity_total_count").text('('+0+')');
     $("#ac-end-time").val("");
 });
 
@@ -3520,11 +3520,12 @@ $(document).on("click", "#save_activity_schedule", function () {
 
     if (isValid == 0) {
         isStartTime = 0;
-        if (total_activities >= 1) {
+            var total_activity_count=$('.event_all_activity_list').length;
+        if (total_activity_count >= 1) {
             // if (total_activities == 1) {
             //     $(".step_1_activity").text(total_activities + " Activity");
             // } else {
-            $(".step_1_activity").text(total_activities + " Activities");
+            $(".step_1_activity").text(total_activity_count + " Activities");
             // }
         } else {
             $(".step_1_activity").html(
