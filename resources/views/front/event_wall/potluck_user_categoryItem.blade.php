@@ -77,27 +77,27 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category_id }}" data-categorykey="{{ 0 }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category_id }}" data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
                                                                                             {{-- <input type="hidden"
 
-                                                                                                value="{{ 0 }}" /> --}}
+                                                                                                value="{{ $key }}" /> --}}
                                                                                             <input type="number"
                                                                                                 id="newQuantity_{{ $item_id }}"
                                                                                                 name="qty"
-                                                                                                value="{{ 0 }}"
+                                                                                                value="{{ $key }}"
                                                                                                 class="input-qty itemQty"
-                                                                                                data-max="{{ 0 }}"
+                                                                                                data-max="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
-                                                                                                data-spoken-quantity="{{ 0 }}" />
+                                                                                                data-spoken-quantity="{{ $key }}" />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category_id }}"
-                                                                                                data-categorykey="{{ 0 }}"
+                                                                                                data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
