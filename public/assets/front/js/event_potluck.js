@@ -674,7 +674,7 @@ $(document).on('click','#selfBringItem',function(){
 
 })
 
-$(document).on('click','.itemTotalQnt"',function(){
+$(document).on('click','.itemTotalQnt',function(){
     var main_quantity = parseInt($("#sub_quantity").val());
     var self_quantity = parseInt($("#self_bring_qty").val());
     if(main_quantity < self_quantity){
