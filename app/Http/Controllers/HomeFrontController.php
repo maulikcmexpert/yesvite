@@ -119,7 +119,7 @@ class HomeFrontController extends BaseController
         ));
     }
     public function searchDesign(Request $request){
-        dd($request);
+        
         $query = $request->input('search');
         $categories = TextData::with(['categories', 'subcategories'])
         ->whereHas('categories', function ($q) use ($query) {
@@ -127,6 +127,9 @@ class HomeFrontController extends BaseController
         })
         ->orderBy('id', 'desc')
         ->get();
+
+        return response()->json(['view' => view('front.search_home_design', compact('categories'))->render()]);
+
     }
 
     public function homePricing(){

@@ -646,7 +646,7 @@
                 <h5 class="total-items ms-auto">55 Items</h5>
             </div>
             {{-- {{ dd($categories);}} --}}
-            <div class="row ">
+            <div class="row list_all_design_catgeory">
             @foreach ($categories as $textData)
             
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
