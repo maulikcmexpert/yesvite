@@ -163,6 +163,38 @@
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
+                                                @if (!empty($eventDetails['co_hosts']))
+                                                    @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                        <div class="host-user-con">
+                                                            <div class="img-wrp">
+                                                                @if (!empty($co_host['profile']))
+                                                                    <img src="{{ $co_host['profile'] }}"
+                                                                        alt="cohost-img">
+                                                                @else
+                                                                    @php
+                                                                        $nameParts = explode(' ', $co_host['name']);
+                                                                        $firstInitial = isset($nameParts[0][0])
+                                                                            ? strtoupper($nameParts[0][0])
+                                                                            : '';
+                                                                        $secondInitial = isset($nameParts[1][0])
+                                                                            ? strtoupper($nameParts[1][0])
+                                                                            : '';
+                                                                        $initials = $firstInitial . $secondInitial;
+                                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                                    @endphp
+                                                                    <h5 class="{{ $fontColor }}">{{ $initials }}
+                                                                    </h5>
+                                                                @endif
+                                                            </div>
+                                                            <h5>{{ $co_host['name'] }}</h5>
+                                                            <span>Co-host</span>
+                                                            @if($co_host['id']!=$login_user_id)
+                                                                <a href="{{route('message.list',['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+
                                         </div>
                                     @endif
 
@@ -690,7 +722,7 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"  data-itemkey="{{ $indexkey }}" data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -711,6 +743,7 @@
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
                                                                                                 data-categorykey="{{ $key }}"
+                                                                                                data-itemkey="{{ $indexkey }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
