@@ -630,7 +630,7 @@
                                                                                         class="posts-card-like-btn {{ $liked }}"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -651,7 +651,7 @@
                                                                                     <button class="posts-card-like-btn"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -737,7 +737,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                                         @if ($reply['is_like'] == 1)
                                                                                                             <i class="fa-solid fa-heart"
@@ -762,7 +762,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
 
                                                                                                         @if ($reply['is_like'] == 1)
