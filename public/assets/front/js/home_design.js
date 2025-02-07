@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+    // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+    $('input[type="checkbox"]').prop('checked', true);
+
     $('#Allcat').on('change', function() {
         if ($(this).is(':checked')) {
             $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
