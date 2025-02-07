@@ -353,6 +353,7 @@
 
                                                         
                                                     @else
+                                                    {{dd(1)}}
                                                         @if($category['totalMissing'] == 0)
                                                         <span
                                                             class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
