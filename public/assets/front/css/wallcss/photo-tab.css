@@ -531,6 +531,15 @@
     pointer-events: none;
 }
 
+#show_Emoji{
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 991px) {
