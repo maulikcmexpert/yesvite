@@ -195,8 +195,8 @@
                                                     <h5>{{ $co_host['name'] }}</h5>
                                                     <h6>Host</h6>
                                                     <!-- <a href="#">Message</a> -->
-                                                            @if($co_host['host_id']!=$login_user_id)
-                                                                <a href="{{route('message.list',   ['id' => encrypt($co_host['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                            @if($co_host['id']!=$login_user_id)
+                                                                <a href="{{route('message.list',   ['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn">Message</a>
                                                             @endif
 
                                                             
