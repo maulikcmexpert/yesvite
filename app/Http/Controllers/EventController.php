@@ -344,6 +344,7 @@ class EventController extends BaseController
                         $eventDetail['events_schedule_list']->event_end_date = ($getEventData->event_schedule->last()->event_date != null) ? $getEventData->event_schedule->last()->event_date : "";
                     }
                 }
+                dd($eventDetail['events_schedule_list']);
                 $eventDetail['totalActivity'] = $totalActivity;
                 $eventDetail['greeting_card_list'] = [];
                 Session::get('greetingCardData', []);
