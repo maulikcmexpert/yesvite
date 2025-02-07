@@ -60,7 +60,7 @@ class EventWallController extends Controller
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
         $selectedFilters=session('filterSession');
-
+        dd($selectedFilters);
         if (!$event) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
