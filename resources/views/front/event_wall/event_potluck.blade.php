@@ -248,7 +248,7 @@
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
                                                         <span
-                                                            class="me-1 list-sub-head">{{ $category['categoryQuantity'] }}</span>
+                                                            class="me-1 category-count-{{$key}} list-sub-head">{{ $category['categoryQuantity'] }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
                                                         </div>

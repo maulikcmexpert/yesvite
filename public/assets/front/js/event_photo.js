@@ -1154,9 +1154,10 @@ $(document).on("click", ".open_photo_model", function () {
                 if (data.latest_comment && Array.isArray(data.latest_comment)) {
                     data.latest_comment.forEach((comment) => {
                         let parentCommentId = comment.id;
-                        let displayName =
-                            comment.profile ||
-                            generatePlaceholderName(comment.username);
+                        let displayName = comment.profile
+                        ? `<img src="${comment.profile}" alt="User Profile" class="profile-image">`
+                        : generatePlaceholderName(comment.username);
+
                         commentsWrapper.append(`
                             <li class="commented-user-wrp" data-comment-id="${
                                 comment.id
@@ -1207,9 +1208,9 @@ $(document).on("click", ".open_photo_model", function () {
                             comment.comment_replies.length > 0
                         ) {
                             comment.comment_replies.forEach(function (reply) {
-                                let displayName =
-                                    reply.profile ||
-                                    generatePlaceholderName(reply.username);
+                                let displayName =reply.profile
+                                ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
+                                : generatePlaceholderName(reply.username);
                                 const replyHTML = `
 
                             <div class="commented-user-head">
