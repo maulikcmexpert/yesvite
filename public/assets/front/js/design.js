@@ -567,6 +567,7 @@ $(document).on("click", ".close-btn", function () {
 $(document).on("click", ".edit_design_tem", function (e) {
     $("#close_createEvent").css("display", "none");
     e.preventDefault();
+    $("#loader").css("display", "flex");
     var eventID = $("#eventID").val();
     var isDraft = $("#isDraft").val();
 
@@ -628,12 +629,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
             isDraft,
             id: id,
         },
-        success: function (response) {
+        success: async function (response) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-            bindData(current_event_id);
+            await bindData(current_event_id);
+            $("#loader").css("display", "none");
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) {
+            $("#loader").css("display", "none");
+        },
     });
 });
 fontloadedEnsure = false;
