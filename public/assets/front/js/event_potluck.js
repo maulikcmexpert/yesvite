@@ -675,7 +675,6 @@ $(document).on('click','#selfBringItem',function(){
 })
 
 $(document).on('click', '.itemTotalQnts', function() {
-    alert()
     var main_quantity = parseInt($("#sub_quantity").val(), 10);
     var self_quantity = parseInt($("#self_bring_qty").val(), 10);
     if (!isNaN(main_quantity) && !isNaN(self_quantity)) {
