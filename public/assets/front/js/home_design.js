@@ -6,9 +6,13 @@ $(document).ready(function() {
         if ($(this).is(':checked')) {
             $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
             $('.image-item').show();
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
         } else {
             $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
             $('.image-item').hide();
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
         }
     });
 
@@ -33,13 +37,13 @@ $(document).ready(function() {
                 // Show images matching the selected categories and subcategories
                 $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
                     .show();
-                var items=$('.all_designs').length;
-                $('.total_design_count').text(items+' Items');
+                    var visibleItems = $('.all_designs:visible').length;
+                    $('.total_design_count').text(visibleItems + ' Items');
             });
         } else {
             $('.image-item').hide(); // Hide all images if no checkboxes are checked
-            var items=$('.all_designs').length;
-            $('.total_design_count').text(items+' Items');
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
         }
     });
     $('#resetCategories').on('click', function(e) {
@@ -47,8 +51,8 @@ $(document).ready(function() {
         $('#Allcat').prop('checked', false);
         $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
         $('.image-item').hide();
-        var items=$('.all_designs').length;
-        $('.total_design_count').text(items+' Items');
+        var visibleItems = $('.all_designs:visible').length;
+        $('.total_design_count').text(visibleItems + ' Items');
     });
 
     document.querySelectorAll('.collection-menu').forEach((button) => {
