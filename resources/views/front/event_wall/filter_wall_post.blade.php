@@ -1,4 +1,4 @@
-{{dd($postList);}}
+
 @foreach ($postList as $post)
                                                 <div class="event-posts-main-wrp common-div-wrp hidden_post"
                                                     data-post-id="{{ $post['id'] }}">
@@ -294,11 +294,11 @@
                                                         @endif
 
                                                         @if ($post['post_type'] == '2')
-                                                            <div class="posts-card-inner-wrp">
+                                                            <!-- <div class="posts-card-inner-wrp">
                                                                 <h3 class="posts-card-inner-questions">
                                                                     {{ $post['poll_question'] }}
                                                                 </h3>
-                                                            </div>
+                                                            </div> -->
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
