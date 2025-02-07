@@ -107,11 +107,11 @@ class HomeFrontController extends BaseController
         $page = 'front.home_design';
         $js = ['home_design'];
 
-        $categories = EventDesignCategory::whereHas('subcategories', function ($query) {
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
             $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
         })
             ->with([
-                'subcategories' => function ($query) {
+                'subcategory' => function ($query) {
                     $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
                         ->with('textdatas'); // Load the textdatas relationship
                 }
@@ -121,7 +121,7 @@ class HomeFrontController extends BaseController
         // Calculate total count of textdatas across all subcategories
         $totalTextDataCount = $categories->sum(
             fn($category) =>
-            $category->subcategories->sum(
+            $category->subcategory->sum(
                 fn($subcategory) =>
                 $subcategory->textdatas->count()
             )
@@ -146,13 +146,13 @@ class HomeFrontController extends BaseController
         $query = $request->input('search');
 
         $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
-            ->with(['subcategories.textdatas']) // Load subcategories and their textdatas
+            ->with(['subcategory.textdatas']) // Load subcategories and their textdatas
             ->orderBy('id', 'desc')
             ->get();
 
         // Calculate total count of textdatas across all subcategories
         $totalTextDataCount = $categories->sum(function ($category) {
-            return $category->subcategories->sum(function ($subcategory) {
+            return $category->subcategory->sum(function ($subcategory) {
                 return $subcategory->textdatas->count();
             });
         });
