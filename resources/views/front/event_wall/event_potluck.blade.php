@@ -1,4 +1,4 @@
-
+{{dD($potluckDetail['podluck_category_list_new'])}}
 <main class="new-main-content">
 
     <div class="container">
