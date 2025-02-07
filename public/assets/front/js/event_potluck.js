@@ -109,6 +109,10 @@ $(document).ready(function () {
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
+        if(categoryName==""){
+            toastr.error('please enter category item name')
+            return 
+        }
         const eventid = $("#event_id").val();
         const description = $("#text1").val();
         const self_bring_item =
