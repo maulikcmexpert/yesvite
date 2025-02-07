@@ -47,16 +47,28 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     console.log(response);
 
-                    $(`#likeCount_${eventPostId}`).text(
-                        `${reaction}${response.count} Likes`
-                    );
-
                     let reactionImage = "";
                     if (response.is_reaction == "1") {
                         reactionImage =
                             '<img src="' +
                             base_url +
                             'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
+                        $(`#likeCount_${eventPostId}`).text(
+                            `${reaction}${response.count} Likes`
+                        );
+                    } else {
+                        if (response.count >= 1) {
+                            $(`#likeCount_${eventPostId}`).text(
+                                `${response.reactionList[0]}${response.count} Likes`
+                            );
+                        } else {
+                            $(`#likeCount_${eventPostId}`).text(
+                                `${response.count} Likes`
+                            );
+                        }
+                        button.html(
+                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                        );
                     }
 
                     // Update the reaction image in post
