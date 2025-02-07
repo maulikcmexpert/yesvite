@@ -359,14 +359,14 @@
                                                                         {{ $post['poll_question'] }}
                                                                     </h3>
                                                                 </div>
-                                                            @endif    
+                                                            @endif
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
                                                             @if($post['post_message']!="")
                                                                     <h3 class="posts-card-inner-questions">
                                                                         {{ $post['poll_question'] }}</h3>
-                                                             @endif      
+                                                             @endif
                                                                 <div class="post-card-poll-inner">
                                                                 <div class="d-flex align-items-center justify-content-between w-100 mb-1">
                                                                 <h5>
@@ -1576,7 +1576,7 @@
                                         <input type="hidden" name="post_type" id="photoPostType" value="1">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
-                                        <input type="hidden" name="postContent" id="photoContent" val="">
+
                                         <span>
                                             <svg viewBox="0 0 24 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
