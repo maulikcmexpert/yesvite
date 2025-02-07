@@ -59,7 +59,8 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-
+        $selectedFilters = session('filterSession');
+        dd($selectedFilters);
         if (!$event) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -146,7 +147,7 @@ class EventWallController extends Controller
             ];
         }
         $postList = [];
-        $selectedFilters = "";
+        // $selectedFilters = "";
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
@@ -474,7 +475,7 @@ class EventWallController extends Controller
             'guest_view' => $eventDetails,
             'host_view' => $eventAboutHost
         ];
-
+        Session::forget('filterSession');
         return view('layout', compact(
             'title',
             'page',
@@ -547,6 +548,8 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
+        $selectedFilters = session('filterSession');
+        // dd($selectedFilters);
 
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -650,7 +653,6 @@ class EventWallController extends Controller
         }
         ///postlist
         $postList = [];
-        $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
         // DB::enableQueryLog();
@@ -707,11 +709,12 @@ class EventWallController extends Controller
         }
 
         // Execute the query and get the results
-        $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
+
         // dd(DB::getQueryLog());
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
                 foreach ($selectedFilters as $filter) {
+
                     switch ($filter) {
                         case 'host_update':
                             $query->orWhere('user_id', $eventCreator->user_id);
@@ -743,7 +746,7 @@ class EventWallController extends Controller
                 }
             });
         }
-
+        $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
         if ($eventPostList != "") {
             //dd($eventPostList);
             foreach ($eventPostList as  $value) {
@@ -1325,6 +1328,8 @@ class EventWallController extends Controller
         })->where(['user_id' => $user->id, 'event_id' => $event])->first();
         $current_page = "wall";
         $login_user_id  = $user->id;
+        Session::forget('filterSession');
+
         // return $wallData;
         return view('layout', compact(
             'title',
@@ -2908,6 +2913,10 @@ class EventWallController extends Controller
         $event =  $request->event_id;
         $postList = [];
         $selectedFilters = $request->input('filters');
+
+        Session::put('filterSession', $selectedFilters);
+        Session::save();
+        return;
         $eventCreator = Event::where('id', $event)->first();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
@@ -3013,6 +3022,9 @@ class EventWallController extends Controller
         // if (count($results) != 0) {
         if ($eventPostList != "") {
             foreach ($eventPostList as  $value) {
+                if (!$value->user) {
+                    continue;
+                }
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
                 $postControl = PostControl::where(['user_id' => $user->id, 'event_id' => $event, 'event_post_id' => $value->id])->first();

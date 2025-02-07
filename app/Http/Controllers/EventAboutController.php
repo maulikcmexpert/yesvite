@@ -33,7 +33,7 @@ class EventAboutController extends Controller
     public function index(String $id)
     {
 
-        $title = 'event about';
+        $title = 'Event About';
         $page = 'front.event_wall.event_about';
         $user  = Auth::guard('web')->user();
         $js = ['event_about_rsvp', 'guest_rsvp', 'post_like_comment', 'guest'];

@@ -1338,17 +1338,18 @@ $(document).on("click", ".wall_apply_filter", function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response.view);
-            $(".wall-post-content").html();
-            $(".wall-post-content").html(response.view);
-            $("#home_loader").css("display", "none");
+            // console.log(response.view);
+            window.location.reload();
+            // $(".wall-post-content").html();
+            // $(".wall-post-content").html(response.view);
+            // $("#home_loader").css("display", "none");
 
-            $("#main-center-modal-filter").modal("hide");
+            // $("#main-center-modal-filter").modal("hide");
         },
         error: function (xhr, status, error) {
+            $("#home_loader").css("loader", "none");
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
-            $("#home_loader").css("loader", "none");
         },
     });
 });
