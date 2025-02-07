@@ -152,14 +152,14 @@
 
 @foreach ($storiesList as $Allstory)
 
-    @if ($Allstory['id'] !== $users->id)
+    @if ($Allstory['user_id'] !== $users->id)
         <!-- Ensure we only show modals for different stories -->
-        <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
+        <div id="storyModal-{{ $Allstory['user_id'] }}" class="modal story_seen_modal" style="display: none;">
             <div class="modal-content">
                 <div class="story-seen-profile-wrp">
                     <div class="story-seen-profile-img">
                         @if ($Allstory['profile'] != '')
-                            <img src="{{ $Allstory['profile'] }}"   onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
+                            <img src="{{ $Allstory['profile'] }}"   onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})">
                         @else
                             @php
                                 $parts = explode(' ', trim($Allstory['username']));
@@ -171,7 +171,7 @@
                                 $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                 $fontColor = 'fontcolor' . strtoupper($firstInitial);
                             @endphp
-                            <h5 class="{{ $fontColor }}" class="profile-pic"   onclick="AllUserStory({{ $event }}, {{ $Allstory['id'] }})">
+                            <h5 class="{{ $fontColor }}" class="profile-pic"   onclick="AllUserStory({{ $event }}, {{ $Allstory['user_id'] }})">
                                 {{ $initials }}
                             </h5>
                         @endif
@@ -186,11 +186,11 @@
                         </div>
                     </div>
                 </div>
-                <div id="story-display-{{ $Allstory['id'] }}" class="story-display">
+                <div id="story-display-{{ $Allstory['user_id'] }}" class="story-display">
                     <div class="progress-bar-container"></div>
                     <div class="story-content"></div>
                 </div>
-                <button class="modal-close" data-id="{{ $Allstory['id'] }}">
+                <button class="modal-close" data-id="{{ $Allstory['user_id'] }}">
                     <i class="fas fa-times"></i> <!-- FontAwesome X Icon -->
                 </button>
             </div>
