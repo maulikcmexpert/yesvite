@@ -891,7 +891,7 @@
     }
 }
 
-@media only screen and (max-width: 1399px) {
+@media only screen and (max-width: 1299px) {
     .step_2 .collection-card .card-img {
         height: 215px;
         min-width: 100%;
