@@ -947,10 +947,9 @@
                             <div class="posts-card-show-all-comments-wrp d-none">
 
                                 <div class="posts-card-show-all-comments-inner">
-                                    <ul>
+                                    <ul class="top-level-comments">
                                         <li class="commented-user-wrp" data-comment-id="" data-replay-comment-id="">
-                                            <input type="hidden" id="parent_comment_id" value="">
-                                            <input type="hidden" id="reply_comment_id" value="">
+                                           
                                             <div class="commented-user-head">
                                                 <div class="commented-user-profile">
                                                     <div class="commented-user-profile-img">
