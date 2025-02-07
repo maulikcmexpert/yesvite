@@ -119,6 +119,7 @@ class HomeFrontController extends BaseController
         ));
     }
     public function searchDesign(Request $request){
+        dd($request);
         $query = $request->input('search');
         $categories = TextData::with(['categories', 'subcategories'])
         ->whereHas('categories', function ($q) use ($query) {

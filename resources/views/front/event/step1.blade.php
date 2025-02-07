@@ -796,7 +796,7 @@
                     }
                 @endphp
                 @php
-
+                    $totalActivityByDate  = $eventDetail['totalActivityByDate'];
                     $currentDate =
                         isset($eventDetail['start_date']) && $eventDetail['start_date'] != ''
                             ? $eventDetail['start_date']
@@ -805,15 +805,23 @@
                 @endphp
                 @if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '')
 
-
+                    @php
+                    $localdate=[];
+                    foreach ($totalActivityByDate as $key => $value) {
+                        $localdate[] = $key;
+                    }
+                        $j=0;
+                    @endphp
                     @while (strtotime($currentDate) <= strtotime($eventDetail['end_date']))
                         <div class="activity-schedule-wrp">
                             <div class="activity-schedule-head">
                                 @php
-                                    $date = Carbon::parse($currentDate);
+                                    $date = Carbon::parse($localdate[$j]);
+                                    // $date = Carbon::parse($currentDate);
                                     $schedule_start_time = Carbon::parse($eventDetail['rsvp_start_time']);
                                   
                                     $i++;
+                                    $j++;
                                 @endphp
                                 <h3>{{ $date->format('l - F j, Y') }}</h3>
                             </div>

@@ -61,4 +61,38 @@ $(document).ready(function() {
         $cookiesBox.removeClass('active');
         localStorage.setItem('cookiesBoxDismissed', 'true');
     });
+
+    $(document).on('input','#search_design_category',function(){
+
+        var search_value=$(this).val();
+        $.ajax({
+            url: base_url + "search_features", 
+            method: 'GET',
+            // headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+            // },
+            data: { search: search_value}, 
+            success: function (response) {
+                console.log("Remove successful: ", response);
+    
+                if (response.success) {
+                 
+                    $('<div id="pageOverlay"></div>').css({
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(255, 255, 255, 0)', 
+                        zIndex: 9999
+                    }).appendTo('body');
+                    window.location.reload();
+                } else {
+                }
+            },
+            error: function (error) {
+            
+            }
+        });
+    });
 });
