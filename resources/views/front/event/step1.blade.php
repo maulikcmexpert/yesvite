@@ -752,7 +752,7 @@
                             <div class="ac-end-time" style="display: block;">
                                 <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
                                 <h4 class="mt-3 ">Event Ends</h4>
-                                <div class="col-12 ac-end-time" style="display: block;">
+                                <div class="col-12 ac-end-time new_event_detail_form" style="display: block;">
                                     <div class="form-group">
                                         <label>End Time</label>
                                         <div class="input-group time ">

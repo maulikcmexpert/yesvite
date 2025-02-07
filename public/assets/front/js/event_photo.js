@@ -925,8 +925,8 @@ $(document).on("click", ".open_photo_model", function () {
                         `);
 
                         if (
-                            data.comment_replies &&
-                            data.comment_replies.length > 0
+                            comment.comment_replies &&
+                            comment.comment_replies.length > 0
                         ) {
                             comment.comment_replies.forEach(function (reply) {
                                 let displayName =
