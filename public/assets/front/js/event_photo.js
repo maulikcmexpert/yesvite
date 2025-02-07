@@ -896,8 +896,8 @@ $(document).on("click", ".open_photo_model", function () {
                         `);
 
                         if (
-                            comment.comment_replies &&
-                            comment.comment_replies.length > 0
+                            data.comment_replies &&
+                            data.comment_replies.length > 0
                         ) {
                             comment.comment_replies.forEach(function (reply) {
                                 let displayName =
@@ -991,15 +991,25 @@ $(document).on("click", ".open_photo_model", function () {
                                             "commented-user-wrp"
                                         );
                                     let comment = Array.from(comments).find(
-                                        (el) =>
-                                            el.dataset.commentId ===
-                                            parentCommentId
+                                        (el) => {
+                                            console.log(el.dataset.commentId);
+                                            console.log(parentCommentId);
+                                            //  el.dataset.commentId ===
+                                            // parentCommentId
+                                            if (
+                                                el.dataset.commentId ==
+                                                parentCommentId
+                                            ) {
+                                                return el;
+                                            }
+                                        }
                                     );
                                     if (comment) {
                                         console.log(comment);
                                         const parentUl = $(comment).find(
                                             ".primary-comment-replies"
                                         );
+                                        console.log(parentUl);
                                         if (parentUl.length) {
                                             console.log(
                                                 "Found primary-comment-replies under commented-user-wrp, prepending the new comment."
