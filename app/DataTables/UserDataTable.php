@@ -276,7 +276,7 @@ class UserDataTable extends DataTable
             Column::make('email')->orderable(true),
             Column::make('app_user')->title('User Type')->orderable(false),
             Column::make('setpassword')->title('Set Password')->orderable(false),
-            Column::make('credit_balance')->title('credit_balance')->orderable(false),
+            Column::make('credit_balance')->title('Credit Balance')->orderable(false),
             Column::make('action')->orderable(false),
             Column::make('transaction')->title('Transaction')->orderable(false),
             Column::make('status')->orderable(false)
