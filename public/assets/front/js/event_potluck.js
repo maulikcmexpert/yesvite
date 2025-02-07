@@ -704,3 +704,30 @@ if (amount > 0) {
   $n.val(amount-1);
 }
 });
+
+function clearError(input = null) {
+    if (input == null) {
+        return;
+    }
+
+   
+
+    const id = input.id;
+
+    switch (id) {
+        case "category":
+            var groupname = input.value;
+            if (groupname === "") {
+                $(".sub-con").text("0/30");
+            } else {
+                cateLength = groupname.length;
+                // $("#item_name_error").text("");
+                $(".sub-con").text(cateLength + "/30");
+            }
+            break;
+
+        // Add cases for other fields as needed
+    }
+
+    
+}
