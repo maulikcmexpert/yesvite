@@ -613,6 +613,7 @@
         max-height: calc(100% - 1%);
         overflow: hidden;
         overflow-y: scroll;
+        padding-bottom: 30px !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         max-width: 150px;
