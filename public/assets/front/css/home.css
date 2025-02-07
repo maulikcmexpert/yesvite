@@ -1195,6 +1195,14 @@
     .cookies-track p {
         font-size: 14px;
     }
+
+    .collection-wrapper .filter-main-wrp .filters-drp {
+        width: 100%;
+    }
+
+    .collection-wrapper .filter-dropdowns {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 435px) {
@@ -1203,9 +1211,9 @@
         width: 48%;
     }
 
-    .step_2 .collection-wrapper .filter-main-wrp .filters-drp .dropdown {
+    /* .step_2 .collection-wrapper .filter-main-wrp .filters-drp .dropdown {
         width: 180px;
-    }
+    } */
 
     .step_2 .collection-card .card-img {
         height: 155px;
