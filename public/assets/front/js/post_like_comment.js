@@ -395,11 +395,7 @@ $(document).ready(function () {
                     </div>
                     <div class="commented-user-reply-wrp">
                         <div class="position-relative d-flex align-items-center gap-2">
-                            <button class="posts-card-like-btn" id="CommentlikeButton"
-                                data-event-id="${eventId}"
-                            data-event-post-comment-id="${data.id
-                        } "
-                        data-user-id="${login_user_id}">
+                            <button class="posts-card-like-btn"  >
 <i class="fa-regular fa-heart"></i></button>
                             <p id="commentTotalLike_${data.comment}>0</p>
                         </div>
