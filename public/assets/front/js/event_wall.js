@@ -1338,7 +1338,7 @@ $(document).on("click", ".wall_apply_filter", function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response.view);
+            // console.log(response.view);
             $(".wall-post-content").html();
             $(".wall-post-content").html(response.view);
             $("#home_loader").css("display", "none");
