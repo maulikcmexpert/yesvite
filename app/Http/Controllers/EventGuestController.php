@@ -798,6 +798,43 @@ class EventGuestController extends Controller
 
             // Save the updated data
             $guest->save();
+            $sync_id = $guest->sync_id;
+            $userId = $guest->user_id;
+
+            EventPost::where('event_id', $guest->event_id)
+                // ->where('user_id', $userId)
+                ->where(function ($query) use ($sync_id, $userId) {
+                    if (!empty($sync_id) && $userId == null) {
+                        $query->where('sync_id', $sync_id);
+                    } else {
+                        $query->where('user_id', $userId);
+                    }
+                })
+
+                ->where('post_type', '4')->delete();
+            $postMessage = [];
+            $postMessage = [
+                'status' => ($request->rsvp_status == '0') ? '2' : '1',
+                'adults' =>  $validated['adults'],
+                'kids' => $validated['kids'],
+            ];
+            $creatEventPost = new EventPost();
+            $creatEventPost->event_id = $guest->event_id;
+
+            if ($request->input('user_id') != "") {
+                $creatEventPost->user_id =  $userId;
+            } else {
+                $creatEventPost->sync_id =  $sync_id;
+            }
+            $creatEventPost->post_message = json_encode($postMessage);
+            $creatEventPost->post_privacy = "1";
+            $creatEventPost->post_type = "4";
+            $creatEventPost->commenting_on_off = "0";
+            $creatEventPost->is_in_photo_moudle = "0";
+            $creatEventPost->save();
+
+
+
             return response()->json([
                 'success' => true,
                 'message' => 'RSVP updated successfully',
@@ -835,13 +872,11 @@ class EventGuestController extends Controller
 
             $getGuest->delete();
             return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
-        }else{
+        } else {
             $getphoneGuest = EventInvitedUser::where(['event_id' => $request['event_id'], 'sync_id' => $request['user_id']])->first();
             // dd($getphoneGuest);
             $getphoneGuest->delete();
             return response()->json(['success' => true, 'message' => "Guest removed successfully"]);
-
-
         }
     }
 
