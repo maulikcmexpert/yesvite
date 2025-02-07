@@ -29,7 +29,7 @@ $(document).ready(function () {
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
         const userId = button.data("user-id"); // Assuming each button has a user ID
-        let reaction = "\u{2764}"; // Toggle between 💔 or ❤️
+        let reaction = "\u{2764}"; // Default ❤️ (Heart) reaction
 
         $.ajax({
             url: base_url + "event_wall/userPostLikeDislike",
@@ -47,56 +47,40 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     console.log(response);
 
-                    if (response.status === 1) {
-                        console.log(response);
-
-                        let reactionImage = "";
-                        if (response.is_reaction == "1") {
-                            console.log("here for update like image");
-                            reactionImage =
-                                '<img src="' +
-                                base_url +
-                                'assets/front/img/heart-emoji.png" alt="Heart Emoji">';
-                            $(`#reactionImage_${eventPostId}`).html(
-                                reactionImage
-                            );
-                            $(`#likeCount_${eventPostId}`).html(
-                                `${response.count} Likes`
-                            );
-                        } else {
-                            if (response.count >= 1) {
-                                console.log("here for update unicode");
-
-                                console.log(response.reactionList[0]);
-                                $(`#reactionImage_${eventPostId}`).html("");
-                                // ✅ Properly render the emoji without escaping it
-                                $(`#likeCount_${eventPostId}`).html(
-                                    `${String.fromCodePoint(
-                                        parseInt(
-                                            response.reactionList[0].codePointAt(
-                                                0
-                                            )
-                                        )
-                                    )} Likes`
-                                );
-                            } else {
-                                console.log("here for update 0");
-
-                                $(`#likeCount_${eventPostId}`).text(
-                                    `${response.count} Likes`
-                                );
-                            }
-
-                            button.html(
-                                '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
-                            );
+                    let reactionImageHtml = "";
+                    if (response.is_reaction == "1") {
+                        // ✅ User has liked the post, update the reaction image
+                        console.log("Like given, updating reaction image...");
+                        if (reactionIcons[reaction]) {
+                            reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
+                        button.addClass("liked"); // Add liked class
+                    } else {
+                        // ✅ User has removed like, set the first reaction from response
+                        console.log(
+                            "Like removed, updating first available reaction..."
+                        );
+                        if (response.reactionList.length > 0) {
+                            const firstReaction = response.reactionList[0];
+                            if (reactionIcons[firstReaction]) {
+                                reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            }
+                        }
+                        button.removeClass("liked"); // Remove liked class
+                        button.html(
+                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                        ); // Reset button to default
                     }
 
-                    // Update the reaction image in post
-                    $(`#reactionImage_${eventPostId}`).html("");
+                    // ✅ Update the reaction image container
+                    $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
-                    // **Update Reaction Modal**
+                    // ✅ Update like count
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
+
+                    // ✅ Update Reaction Modal
                     updateReactionModal(eventPostId, response.post_reaction);
                 }
             },
@@ -106,6 +90,7 @@ $(document).ready(function () {
             },
         });
     });
+
     function updateReactionModal(postId, postReactions) {
         let reactionListHtml = "";
         let reactionTabsHtml = "";
