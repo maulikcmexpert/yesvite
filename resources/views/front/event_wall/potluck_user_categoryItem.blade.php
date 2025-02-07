@@ -66,7 +66,7 @@
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category_id }}"
-                                                                                                data-itemkey="{{ itemkey }}"
+                                                                                                data-itemkey="{{ $itemkey }}"
                                                                                                 data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 type="button"><i
