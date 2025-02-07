@@ -520,7 +520,7 @@
                                                                         value="{{ $item['id'] }}">
 
                                                                     <input type="hidden"
-                                                                        class="innerUserQnt-{{ $itemkey }}-{{ $key }}"
+                                                                        class="innerUserQnt-{{ $itemKey }}-{{ $key }}"
                                                                         value="{{ $item['innerUserQnt'] }}">
                                                                     <div class="ms-auto">
                                                                     <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
