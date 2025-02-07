@@ -1305,7 +1305,7 @@ $(document).on("click", ".wall_filter_reset", function () {
     $(".view_wall_filter").attr("data-apply", "0");
 });
 $(document).on("click", ".view_wall_filter", function () {
-    var applied = $(this).attr("data-apply");
+    var applied = $('#is_filter_applied').val();
     console.log(applied);
     if (applied == "0") {
         $(".select_all_post").prop("checked", true);
