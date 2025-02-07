@@ -342,6 +342,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 10px;
 }
 
 .post-potluck-category .list-slide .accordion-body .accordion-body-content h4{
