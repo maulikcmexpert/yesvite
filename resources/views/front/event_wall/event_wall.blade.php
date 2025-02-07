@@ -551,8 +551,8 @@
                                                                     <input type="hidden"
                                                                     class="parent_comment_id"
                                                                     value="">
-                                                                    
-                                                                   
+
+
 
                                                                     @foreach ($post['post_comment'] as $key => $comment)
                                                                         <li class="commented-user-wrp"
@@ -624,12 +624,13 @@
                                                                                             $liked = '';
                                                                                         }
                                                                                     @endphp
+                                                                                    <input type="hidden" id="login_user_id" value="{{$login_user_id}}">
                                                                                     <p>{{ $comment['posttime'] }}</p>
                                                                                     <button
                                                                                         class="posts-card-like-btn {{ $liked }}"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -650,7 +651,7 @@
                                                                                     <button class="posts-card-like-btn"
                                                                                         id="CommentlikeButton"
                                                                                         data-event-id="{{ $event }}"
-                                                                                        data-event-post-comment-id="{{ $comment['id'] }} "
+                                                                                        data-event-post-comment-id="{{ $comment['id'] }}"
                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                         @if ($comment['is_like'] == 1)
                                                                                             <i class="fa-solid fa-heart"
@@ -660,15 +661,15 @@
                                                                                                 id="show_Emoji"></i>
                                                                                         @endif
                                                                                     </button>
-                                                                                    {{-- <p id="commentTotalLike_{{ $reply['id'] }}">
-                                                                        {{ isset($reply['comment_total_likes']) ? $reply['comment_total_likes'] : 0 }}
-                                                                    </p> --}}
+                                                                                    <p id="commentTotalLike_{{$comment['id'] }}">
+                                                                        {{ isset($comment['comment_total_likes']) ? $comment['comment_total_likes'] : 0 }}
+                                                                    </p>
                                                                                 </div>
                                                                                 <button data-comment-id="{{ $comment['id'] }}"
                                                                                     class="commented-user-reply-btn">Reply</button>
                                                                             </div>
                                                                             @if ($comment['total_replies'] > 0)
-                                                                                <ul>
+                                                                                <ul class="primary-comment-replies">
                                                                                     @foreach ($comment['comment_replies'] as $reply)
                                                                                         <li class="reply-on-comment"
                                                                                             data-comment-id="{{ $reply['id'] }}">
@@ -736,7 +737,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
                                                                                                         @if ($reply['is_like'] == 1)
                                                                                                             <i class="fa-solid fa-heart"
@@ -761,7 +762,7 @@
                                                                                                         class="posts-card-like-btn"
                                                                                                         id="CommentlikeButton"
                                                                                                         data-event-id="{{ $event }}"
-                                                                                                        data-event-post-comment-id="{{ $reply['id'] }} "
+                                                                                                        data-event-post-comment-id="{{ $reply['id'] }}"
                                                                                                         data-user-id="{{ $login_user_id }}">
 
                                                                                                         @if ($reply['is_like'] == 1)
@@ -785,10 +786,14 @@
                                                                                     @endforeach
 
                                                                                     <!-- Button to show more replies if any -->
-                                                                                    <button
+                                                                                    {{-- <button
                                                                                         class="show-comment-reply-btn">Show
                                                                                         {{ $comment['total_replies'] }}
-                                                                                        reply</button>
+                                                                                        reply
+                                                                                    </button> --}}
+
+                                                                                    <button class="show-comment-reply-btn">Show reply
+                                                                                </button>
                                                                                 </ul>
                                                                             @endif
 

@@ -218,13 +218,18 @@ $(document).on('click', '.remove_guest_page', function () {
             console.log("Remove successful: ", response);
 
             if (response.success) {
-                // // Find the guest container by guestId and remove it from the DOM
                 $('.guest-user-box[data-guest-id="' + guestId + '"]').remove();
-
                 toastr.success('Guest Removed Successfully');
-
-                // Hide the modal if it's open
                 $('#editrsvp').modal('hide');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
                 window.location.reload();
             } else {
                 alert('Failed to remove guest. Please try again.');

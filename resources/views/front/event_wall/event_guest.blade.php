@@ -309,9 +309,9 @@
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
                                                                         $isDisabled =
-                                                                            $eventDetails['host_id'] != $login_user_id
-                                                                                ? 'd-none'
-                                                                                : '';
+                                                                           ($eventDetails['is_host']==1 || $eventDetails['is_co_host']=="1")
+                                                                                ? ''
+                                                                                : 'd-none';
                                                                         // dd($login_user_id);
                                                                     @endphp
                                                                     @if($guest['is_sync']=="1")
@@ -345,7 +345,7 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </button>
-                                                                    <a href="#" class="msg-btn">
+                                                                    <a href="{{route('message.list',encrypt($guest['id']))}}" class="msg-btn">
                                                                         <svg width="24" height="24"
                                                                             viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
