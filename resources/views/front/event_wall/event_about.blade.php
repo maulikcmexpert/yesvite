@@ -2198,7 +2198,7 @@
                             <div class="rsvp-msgbox">
                                 <h5>Message</h5>
                                 <div class="input-form">
-                                    <textarea name="message_to_host" id="message_to_host" class="form-control inputText" id="Fname" name="Fname"> {{ $rsvpSent['message_to_host'] ?? '' }}</textarea>
+                                    <textarea name="message_to_host" id="message_to_host" class="form-control inputText" id="Fname" name="Fname"> </textarea>
                                     <label for="Fname" class="form-label input-field floating-label">Message with
                                         your
                                         RSVP</label>
