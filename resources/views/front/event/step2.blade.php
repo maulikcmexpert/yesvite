@@ -1,4 +1,4 @@
-
+<div class="step_2">
 <section class="collection-wrapper">
     <div class="container">
         <div class="content">
@@ -107,7 +107,7 @@
         </div>
     </div>
 </section>
-
+</div>
 @push('scripts')
     <script>
         $(document).ready(function() {
