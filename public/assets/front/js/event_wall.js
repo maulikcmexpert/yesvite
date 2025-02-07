@@ -314,8 +314,8 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
 
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
-                console.log(story.user_id);
-                console.log(userId);
+                console.log( 'story_id',story.user_id);
+                console.log('user_id',userId);
                 if (story.user_id !== userId) {
                     story.story.forEach((storyData) => {
                         const mediaElement = document.createElement(
