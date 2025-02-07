@@ -1571,6 +1571,7 @@ $notification_list=getNotificationList();
               </svg></span> Drafts</a>
             </li>
             <li><a href="{{route('profile')}}">Profile</a>
+              <li><a href="{{route('logout')}}">Logout</a>
             </li>
             <div class="mobile-menu-inner-btns">
                 <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan"><i class="fa-solid fa-plus"></i> New Event</a>
