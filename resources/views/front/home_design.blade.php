@@ -42,40 +42,40 @@
                                     <div class="accordion" id="accordionExample">
                                
                                                         @foreach ($categories as $textData)
-                                                            @foreach ($textData->categories as $category)
+                                                            <!-- @foreach ($textData->categories as $category) -->
                                                                 <div class="accordion-item">
-                                                                    <h2 class="accordion-header" id="heading{{ $category['id'] }}">
+                                                                    <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
                                                                         <button class="accordion-button" type="button"
                                                                             data-bs-toggle="collapse"
-                                                                            data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
-                                                                            aria-controls="collapse{{ $category->id }}">
-                                                                            {{ $category->category_name }}
+                                                                            data-bs-target="#collapse{{ $textData->categories->id }}" aria-expanded="true"
+                                                                            aria-controls="collapse{{ $textData->categories->id }}">
+                                                                            {{ $category->categories->category_name }}
                                                                         </button>
                                                                     </h2>
-                                                                    <div id="collapse{{ $category->id }}"
+                                                                    <div id="collapse{{ $textData->categories->id }}"
                                                                         class="accordion-collapse collapse"
-                                                                        aria-labelledby="heading{{ $category->id }}"
+                                                                        aria-labelledby="heading{{ $textData->categories->id }}"
                                                                         data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <ul>
-                                                                                @foreach ($textData->subcategories as $subcategory)
+                                                                                <!-- @foreach ($textData->subcategories as $subcategory) -->
                                                                                     <li>
                                                                                         <div class="d-flex align-items-center justify-content-between">
-                                                                                            <label class="form-check-label" for="subcategory{{ $subcategory->id }}">
-                                                                                                {{ $subcategory->subcategory_name }}
+                                                                                            <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
+                                                                                                {{ $textData->subcategories->subcategory_name }}
                                                                                             </label>
                                                                                             <input class="form-check-input" type="checkbox"
-                                                                                                id="subcategory{{ $subcategory->id }}"
-                                                                                                data-category-id="{{ $category->id }}"
-                                                                                                data-subcategory-id="{{ $subcategory->id }}">
+                                                                                                id="subcategory{{ $textData->subcategories->id }}"
+                                                                                                data-category-id="{{ $textData->categories->id }}"
+                                                                                                data-subcategory-id="{{ $textData->subcategories->id }}">
                                                                                         </div>
                                                                                     </li>
-                                                                                @endforeach
+                                                                                <!-- @endforeach -->
                                                                             </ul>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endforeach
+                                                            <!-- @endforeach -->
                                                         @endforeach
 
                                     </div>
