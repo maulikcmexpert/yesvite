@@ -8404,7 +8404,12 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
-    updateEventData();
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
@@ -8412,7 +8417,9 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
-    if (save1 == 8) {
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
 });
@@ -8422,7 +8429,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
-
+    savePage4Data();
     if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
