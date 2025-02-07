@@ -704,3 +704,52 @@ if (amount > 0) {
   $n.val(amount-1);
 }
 });
+
+function clearError(input = null) {
+    if (input == null) {
+        return;
+    }
+
+   
+
+    const id = input.id;
+
+    switch (id) {
+        case "category":
+            var groupname = input.value;
+            if (groupname === "") {
+                $("#category-sub-con").text("0/30");
+            } else {
+                cateLength = groupname.length;
+                // $("#item_name_error").text("");
+                $("#category-sub-con").text(cateLength + "/30");
+            }
+            break;
+
+            case "text1":
+                var groupname = input.value;
+                if (groupname === "") {
+                    $("#text-sub-con").text("0/30");
+                } else {
+                    cateLength = groupname.length;
+                    // $("#item_name_error").text("");
+                    $("#text-sub-con").text(cateLength + "/30");
+                }
+                break;
+
+                case "categorys":
+                    var groupname = input.value;
+                    if (groupname === "") {
+                        $("#categorys-sub-con").text("0/30");
+                    } else {
+                        cateLength = groupname.length;
+                        // $("#item_name_error").text("");
+                        $("#categorys-sub-con").text(cateLength + "/30");
+                    }
+                    break;
+
+        // Add cases for other fields as needed
+    }
+
+    
+}
