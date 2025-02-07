@@ -550,8 +550,7 @@ class EventWallController extends Controller
         $page = 'front.event_wall.event_wall';
         $selectedFilters=[];
         // $selectedFilters = (session('filterSession')=="")?[]:$selectedFilters ;
-        $selectedFilters = empty(session('filterSession')) ? [] : $selectedFilters;
-        dd(session('filterSession'));
+        $selectedFilters = empty(session('filterSession')) ? [] : session('filterSession');
 
 
         if ($event == null) {
