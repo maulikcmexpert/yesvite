@@ -407,7 +407,7 @@
                                                                     }
                                                                 @endphp
                                                                 <button
-                                                                    class="posts-card-like-btn {{ $liked }} set_emoji_like"
+                                                                    class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
                                                                     data-event-post-id="{{ $post['id'] }}"
