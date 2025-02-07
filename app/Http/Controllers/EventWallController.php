@@ -709,7 +709,7 @@ class EventWallController extends Controller
         }
 
         // Execute the query and get the results
-        $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
+
         // dd(DB::getQueryLog());
         if (!empty($selectedFilters) && !in_array('all', $selectedFilters)) {
             $eventPostList->where(function ($query) use ($selectedFilters, $eventCreator) {
@@ -746,7 +746,7 @@ class EventWallController extends Controller
                 }
             });
         }
-
+        $eventPostList = $eventPostList->orderBy('id', 'DESC')->get();
         if ($eventPostList != "") {
             //dd($eventPostList);
             foreach ($eventPostList as  $value) {
