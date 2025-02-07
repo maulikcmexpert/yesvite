@@ -863,7 +863,7 @@
 .item-on img {
     width: 24px;
     height: 24px;
-    border-radius: 100%;
+    border-radius: 50%;
     margin-right: 10px;
 }
 .item-on h5 {
