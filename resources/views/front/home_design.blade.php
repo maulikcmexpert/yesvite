@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                                 Features
                             </button>
@@ -640,7 +640,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <h5 class="total-items ms-auto">55 Items</h5>
