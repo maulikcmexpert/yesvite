@@ -213,42 +213,48 @@ console.log(adults,kids);
     })
 });
 
+// $(".modal").on("hidden.bs.modal", function () {
+
+//     $("#option6").prop('checked',false);
+//     $("#option5").prop('checked',false);
+//     $("#message_to_host").val(); // Clear image preview
+//     $("#rsvp_status_adults").val(0);
+//     $("#rsvp_status_kids").val(0);
+
+
+
+// });
+// $(document).on('click','.btn-close').click(function () {
+
+//     $("#option6").prop('checked',false);
+//     $("#option5").prop('checked',false);
+//     $("#message_to_host").val(); // Clear image preview
+//     $("#rsvp_status_adults").val(0);
+//     $("#rsvp_status_kids").val(0);
+
+
+
+// });
 $(".modal").on("hidden.bs.modal", function () {
-
-    $("#option6").prop('checked',false);
-    $("#option5").prop('checked',false);
-    $("#message_to_host").val(); // Clear image preview
-    $("#rsvp_status_adults").val(0);
-    $("#rsvp_status_kids").val(0);
+       var rsvpStatus = $('#statusRsvp').val();
 
 
-
-});
-$(document).on('click','.btn-close').click(function () {
-
-    $("#option6").prop('checked',false);
-    $("#option5").prop('checked',false);
-    $("#message_to_host").val(); // Clear image preview
-    $("#rsvp_status_adults").val(0);
-    $("#rsvp_status_kids").val(0);
-
-
-
-});
-$(".modal").on("hidden.bs.modal", function () {
-    var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
-
-
-    if (rsvpStatus !== 1) {
+    if (rsvpStatus == '1') {
         clearModalValues();
+
+    }else{
+        clearModalALLValues();
     }
 });
 
 $(document).on("click", ".btn-close", function () {
-    var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
+       var rsvpStatus = $('#statusRsvp').val();
 
-    if (rsvpStatus !== 1) {
+    if (rsvpStatus == '1') {
         clearModalValues();
+
+    }else{
+        clearModalALLValues();
     }
 });
 
@@ -257,6 +263,14 @@ function clearModalValues() {
     $("#option6").prop("checked", false);
     $("#option5").prop("checked", false);
     $("#message_to_host").val(""); // Clear input field
+
+}
+function clearModalALLValues() {
+
+    $("#option6").prop('checked',false);
+    $("#option5").prop('checked',false);
+    $("#message_to_host").val(); // Clear image preview
     $("#rsvp_status_adults").val(0);
     $("#rsvp_status_kids").val(0);
+
 }
