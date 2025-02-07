@@ -162,6 +162,7 @@
     position: absolute;
     bottom: 10px;
     left: 15px;
+    width: 50%;
 }
 
 .photo-card-photos-wrp ul li{
