@@ -104,3 +104,22 @@
         </div>
     </div>
 </section>
+@push('scripts')
+<script>
+  $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            @if (session('msg'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('msg') }}");
+            @endif
+        });
+</script>
+@endpush

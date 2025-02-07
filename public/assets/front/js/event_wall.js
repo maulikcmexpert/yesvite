@@ -1180,7 +1180,14 @@ $(".show-btn-comment").click(function () {
 });
 
 $(".show-comment-reply-btn").click(function () {
-    $(this).prev().find(".reply-on-comment").toggleClass("d-none");
+    $(this).parent().find(".reply-on-comment").toggleClass("d-none");
+    let currunt = $(this).html().toLowerCase().trim();
+    console.log(currunt);
+    if (currunt == "show reply") {
+        $(this).html("Hide reply");
+    } else {
+        $(this).html("Show reply");
+    }
 });
 
 $(document).ready(function () {
