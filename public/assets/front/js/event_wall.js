@@ -1091,13 +1091,15 @@ $(document).ready(function () {
                 photoInput.files.length === 0 &&
                 postContent !== ""
             ) {
-                // alert(4545);
+                alert(4545);
                 document.getElementsByClassName("textcontent").value =
                     postContent;
                 document.getElementById("photoPostType").value = 0;
-                // alert(document.getElementById("photoPostType").value);
+                alert(document.getElementById("photoPostType").value);
                 $this.prop("disabled", true);
             }else{
+                alert(45);
+
                 document.getElementById("photoContent").value = postContent;
                 document.getElementById("photoPostType").value = 1;
             }
