@@ -583,6 +583,10 @@ $(document).ready(function () {
 
 
     });
+    $(document).on("click", ".posts-card-like-btn", function () {
+        console.log("Like button clicked!");
+        $(this).find("i").toggleClass("fa-regular fa-solid");
+    });
 
     $(document).on("click", ".commented-user-reply-btn", function () {
         // Find the closest comment element
