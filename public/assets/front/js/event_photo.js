@@ -1065,7 +1065,7 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reaction_store);
 
                 // Check and toggle the heart icon based on the reaction
-                // const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
+                const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
                 // console.log(likeButton);
 
                 var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
