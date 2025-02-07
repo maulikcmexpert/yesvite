@@ -551,7 +551,7 @@ class EventWallController extends Controller
         $selectedFilters=[];
         // $selectedFilters = (session('filterSession')=="")?[]:$selectedFilters ;
         $selectedFilters = empty(session('filterSession')) ? [] : $selectedFilters;
-        dd($selectedFilters);
+        dd(session('filterSession'));
 
 
         if ($event == null) {
