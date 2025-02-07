@@ -108,12 +108,16 @@ class HomeFrontController extends BaseController
         $js = ['home_design'];
         // $images = TextData::all();
         // $categories = EventDesignCategory::with(['subcategory.textdatas'])->get();
-        $categories = EventDesignCategory::with([
-            'subcategory' => function ($query) {
-                $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
-                    ->with('textdatas');
-            }
-        ])->get();
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                        ->with('textdatas'); // Load the textdatas relationship
+                }
+            ])->get();
+
 
         // dd($categories);
         // $getDesignData =  EventDesignCategory::with('subcategory')->get();
