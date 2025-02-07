@@ -733,22 +733,7 @@
                             </div>
 
                             
-                            
-
-                            <div class="activity-schedule-inner-btn">
-                                <button class="cmn-btn" id="save_activity_schedule">
-                                    Save
-                                </button>
-                            </div>
-                            {{-- </form> --}}
-                        </div>
-                    </div>
-                    @php
-                        $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
-                    @endphp
-                @endwhile
-
-                @if ($eventDetail['rsvp_end_time_set'] == '1')     
+                            @if ($eventDetail['rsvp_end_time_set'] == '1')     
                             <div class="ac-end-time" style="display: block;">
                                 <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
                                 <h4 class="mt-3 ">Event Ends</h4>
@@ -783,6 +768,19 @@
                                 </div>
                             </div>
                             @endif
+
+                            <div class="activity-schedule-inner-btn">
+                                <button class="cmn-btn" id="save_activity_schedule">
+                                    Save
+                                </button>
+                            </div>
+                            {{-- </form> --}}
+                        </div>
+                    </div>
+                    @php
+                        $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
+                    @endphp
+                @endwhile
             @else
                 @php
                     $start_date = '';
