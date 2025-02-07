@@ -412,7 +412,7 @@ class HomeController extends BaseController
         $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
         $importService->import($filePath);
 
-        return  redirect('contact')->with('msg', 'Contact imported successfully.');
+        return  redirect('home')->with('msg', 'Contact imported successfully.');
     }
 
 
