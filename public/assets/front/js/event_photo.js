@@ -1448,7 +1448,7 @@ $(document).on("click", ".open_photo_model", function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                 <h3>${firstname} ${lastname}</h3>
-
+                                                <p> ${location ? `<p>${location}</p>` : ''}
 
                                             </div>
                                         </div>
