@@ -1,4 +1,4 @@
-{{dd($eventDetails)}}
+{{dd($potluckDetail)}}
 <main class="new-main-content">
 
     <div class="container">
