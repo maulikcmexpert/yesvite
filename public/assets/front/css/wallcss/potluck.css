@@ -335,6 +335,16 @@
     font-size: 12px !important;
 }
 
+.post-potluck-category .list-slide .accordion-body h5.fontColor{
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
 .post-potluck-category .list-slide .accordion-body .accordion-body-content h4{
     font-size: 12px;
     line-height: 20px;
@@ -436,10 +446,10 @@
 }
 
 .post-potluck-category .list-slide .accordion-body h5.slide-sub {
-    font-size: 13px;
-    line-height: 20px;
-    color: var(--secondary-black);
-    font-family: var(--SFProDisplay-Regular);
+    font-size: 13px !important;
+    line-height: 20px !important;
+    color: var(--secondary-black)!important;
+    font-family: var(--SFProDisplay-Regular) !important;
 }
 
 .post-potluck-category .list-slide .accordion-body span.slide-round {
@@ -866,6 +876,18 @@
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.item-on h5.add-item-under-text{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .item-on h5 {
     display: flex;
     font-size: 12px;
