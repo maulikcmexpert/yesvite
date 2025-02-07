@@ -729,6 +729,9 @@ $(document).on("click", ".comment-send-icon", function () {
                 // Clear input field
                 commentInput.val("");
                 $("#parent_comment_id").val(""); // Reset parent comment ID
+
+                let comments = document.getElementsByClassName("commented-user-wrp")
+                $("#comments").html(comments.length +' comments')
             }
         },
         error: function (xhr) {
