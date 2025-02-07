@@ -163,7 +163,50 @@
                                                     “{{ $eventDetails['message_to_guests'] }}”
                                                 </p>
                                             </div>
-                                                @if (!empty($eventDetails['co_hosts']))
+                                            @if (!empty($eventDetails['co_hosts']))
+                                            @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                <div class="massge-data">
+                                                    <div class="host-img">
+                                                        @if ($co_host['profile'] != '')
+                                                        <img src="{{ $co_host['profile'] }}" alt="host-img" loading="lazy">
+                                                        @else
+                                                            @php
+
+                                                                // $parts = explode(" ", $name);
+                                                                $nameParts = explode(' ', $co_host['name'] );
+
+                                                                $firstInitial = isset($nameParts[0][0])
+                                                                    ? strtoupper($nameParts[0][0])
+                                                                    : '';
+                                                                $secondInitial = isset($nameParts[1][0])
+                                                                    ? strtoupper($nameParts[1][0])
+                                                                    : '';
+                                                                $initials = $firstInitial . $secondInitial;
+
+                                                                // Generate a font color class based on the first initial
+                                                                $fontColor = 'fontcolor' . $firstInitial;
+                                                            @endphp
+                                                            <h5 class="{{ $fontColor }}">
+                                                                {{ $initials }}
+                                                            </h5>
+                                                        @endif
+
+                                                    </div>
+                                                    <h5>{{ $co_host['name'] }}</h5>
+                                                    <h6>Host</h6>
+                                                    <!-- <a href="#">Message</a> -->
+                                                            @if($co_host['host_id']!=$login_user_id)
+                                                                <a href="{{route('message.list',   ['id' => encrypt($co_host['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                            @endif
+
+                                                            
+                                                    <p style="{{ empty($co_host['message_to_guests']) ? 'display: none;' : '' }}">
+                                                        “{{ $co_host['message_to_guests'] }}”
+                                                    </p>
+                                                </div>
+                                            @endforeach
+                                           @endif 
+                                                <!-- @if (!empty($eventDetails['co_hosts']))
                                                     @foreach ($eventDetails['co_hosts'] as $co_host)
                                                         <div class="host-user-con">
                                                             <div class="img-wrp">
@@ -193,7 +236,7 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
-                                                @endif
+                                                @endif -->
 
                                         </div>
                                     @endif
