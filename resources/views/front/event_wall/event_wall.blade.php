@@ -236,7 +236,9 @@
                                                                         </span>
                                                                     @endif
 
-                                                                    {{ \Carbon\Carbon::parse($post['posttime'])->diffForHumans() }}
+                                                                    {{ \Carbon\Carbon::parse($post['posttime'])->shortAbsoluteDiffForHumans() }}
+
+
 
                                                                 </h5>
                                                             </div>
@@ -2946,3 +2948,19 @@
 
 
 </main>
+
+<script>
+    use Carbon\Carbon;
+
+public function getShortTimeAttribute() {
+    $time = Carbon::parse($this->posttime);
+
+    return str_replace(
+        [' second', ' seconds', ' minute', ' minutes', ' hour', ' hours', ' day', ' days', ' week', ' weeks', ' month', ' months', ' year', ' years'],
+        ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w', 'mo', 'mo', 'y', 'y'],
+        $time->diffForHumans()
+    );
+}
+</script>
+
+
