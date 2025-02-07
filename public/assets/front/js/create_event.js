@@ -2799,7 +2799,7 @@ $(document).on("blur", "#ac-start-time", function () {
 
     $(".new_activity").html("");
     $("#end-time").val("");
-    $(".activity_total_count").text(0);
+    $(".activity_total_count").text('('+0+')');
     $("#ac-end-time").val("");
 });
 
