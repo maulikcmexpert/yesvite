@@ -82,7 +82,7 @@ $(document).ready(function () {
         console.log(categoryId, eventId);
         // Send the delete request to the server
         $.ajax({
-            url: base_url + "event_potluck/delete-category/", // URL for the delete route
+            url: base_url + "event_potluck/delete-category", // URL for the delete route
             method: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
