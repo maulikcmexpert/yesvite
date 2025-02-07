@@ -258,8 +258,7 @@
             method: 'GET',
             data: { search: search_value}, 
             success: function (response) {
-                console.log("Remove successful: ", response);
-    
+               
                 if (response.view) {
                  $('.list_all_design_catgeory').html('');
                  $('.list_all_design_catgeory').html(response.view);
