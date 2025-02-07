@@ -516,6 +516,7 @@
 #detail-photo-modal .posts-card-head-left-content h3{
     display: inline-block;
     word-break: break-all;
+    max-width: 300px;
 }
 
 #detail-photo-modal .posts-card-head-left-content span{
