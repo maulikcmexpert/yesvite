@@ -555,7 +555,7 @@ $(document).on("click", ".deleteBtn", function () {
                 devideCount.text(`${response.spoken_for}/${item_quantity}`);
 
                 // Optionally, show a success message
-                alert(response.message);
+                // alert(response.message);
 
                 // Redirect back (if required)
                 window.location.href =
@@ -633,3 +633,34 @@ function updateTOP(categoryIndex) {
 
     return { totalMissing, totalOver };
 }
+$(document).on("click", ".self_bring_quantity", function () {
+    var type = $(this).data("type");
+    var self_quantity = parseInt($("#self_bring_qty").val());
+
+    var main_quantity = parseInt($("#sub_quantity").val());
+
+    if (type == "plus") {
+        if (main_quantity > self_quantity) {
+            self_quantity++;
+            $("#self_bring_qty").val(self_quantity);
+        }
+    } else {
+        if (self_quantity > 0) {
+            self_quantity--;
+            $("#self_bring_qty").val(self_quantity);
+        }
+    }
+});
+
+$(document).on('click','#selfBringItem',function(){
+
+    var checkbox = $('input[name="self_bring_item"]:checked').val();
+    if(checkbox){
+      $("#self_bring_quantity_toggle").show();
+    }else{
+        
+        $("#self_bring_quantity_toggle").hide();
+
+    }
+
+})

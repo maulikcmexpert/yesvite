@@ -1749,7 +1749,7 @@
                                                                             data-categoryitem="{{ $itemkey }}"
                                                                             data-categoryindex="{{ $index }}"
                                                                             data-innerUserQnt="{{ $items['innerUserQnt'] }}"
-                                                                            data-userqnt="{{ $values['quantity'] }}",
+                                                                            data-userqnt="{{ 0 }}",
                                                                             data-extraquantity="0"
                                                                             data-itemquantity="{{ $items['quantity'] }}">
                                                                             <svg width="16" height="16"

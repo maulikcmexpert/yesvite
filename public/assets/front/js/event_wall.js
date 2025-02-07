@@ -310,30 +310,40 @@ async function fetchStories(eventId, userId, isNewUpload, storyType) {
         }
 
         // Process 'other_stories'
+        console.log(data.data.other_stories);
+        console.log(storyElements);
+
         if (Array.isArray(data.data.other_stories)) {
             data.data.other_stories.forEach((story) => {
-                if (story.user_id !== userId) {
-                    story.story.forEach((storyData) => {
+                console.log("story_id", story.user_id);
+                console.log("user_id", userId);
+                if (story.user_id == userId) {
+                    console.log(story.story);
+
+                    story.story.forEach((allStory) => {
                         const mediaElement = document.createElement(
-                            storyData.type === "video" ? "video" : "img"
+                            allStory.type === "video" ? "video" : "img"
                         );
-                        mediaElement.src = storyData.storyurl;
+                        mediaElement.src = allStory.storyurl;
                         mediaElement.classList.add("story-preview");
 
-                        if (storyData.type === "video") {
+                        if (allStory.type === "video") {
                             mediaElement.controls = false;
                             mediaElement.autoplay = false;
                             mediaElement.muted = true;
                         }
-
+                        const storyItemContainer =
+                            document.createElement("div");
+                        storyItemContainer.classList.add("story-item");
+                        storyItemContainer.dataset.storyId = allStory.id;
                         storyElements.push({
                             element: mediaElement,
-                            type: storyData.type,
+                            type: allStory.type,
                         });
                         storyDurations.push(
-                            storyData.type === "video" ? 0 : 5000
+                            allStory.type === "video" ? 0 : 5000
                         );
-                        storyPostTimes.push(storyData.post_time); // Store post time
+                        storyPostTimes.push(allStory.post_time); // Store post time
                     });
                 }
             });
@@ -551,6 +561,9 @@ function displayStoriesWithProgressBars(
 
         const modal = document.getElementById(`storyModal-${userId}`);
         const storyDisplay = document.getElementById(`story-display-${userId}`);
+        console.log(`Stories for User ${userId}:`, storyElements);
+        console.log(`Story Content Element for User ${userId}:`, storyContent);
+
         const progressBarContainer = document.querySelector(
             ".progress-bar-container"
         );
@@ -1155,8 +1168,6 @@ $(document).ready(function () {
     });
 });
 
-
-
 $(".posts-card-like-btn").on("click", function () {
     const icon = this.querySelector("i");
     icon.classList.toggle("fa-regular");
@@ -1169,7 +1180,14 @@ $(".show-btn-comment").click(function () {
 });
 
 $(".show-comment-reply-btn").click(function () {
-    $(".reply-on-comment").toggleClass("d-none");
+    $(this).parent().find(".reply-on-comment").toggleClass("d-none");
+    let currunt = $(this).html().toLowerCase().trim();
+    console.log(currunt);
+    if (currunt == "show reply") {
+        $(this).html("Hide reply");
+    } else {
+        $(this).html("Show reply");
+    }
 });
 
 $(document).ready(function () {
@@ -1322,31 +1340,30 @@ $(document).on("click", ".wall_apply_filter", function () {
     });
 });
 
-
 let longPressTimer;
 let isLongPresss = false;
 
-$(document).on('mousedown', '#likeButton', function () {
+$(document).on("mousedown", "#likeButton", function () {
     isLongPresss = false; // Reset the flag
     const button = $(this);
 
     // Start the long press timer
     longPressTimer = setTimeout(() => {
         isLongPresss = true; // Mark as long press
-        const emojiDropdown = button.closest('.photo-card-head-right').find('#emojiDropdown');
+        const emojiDropdown = button
+            .closest(".photo-card-head-right")
+            .find("#emojiDropdown");
         emojiDropdown.show(); // Show the emoji picker
         //button.find('i').text(''); // Clear the heart icon
     }, 500); // 500ms for long press
 });
-$(document).on('click', function (e) {
-    if (!$(e.target).closest('#likeButton, #emojiDropdown').length) {
-        $('#emojiDropdown').hide(); 
-        $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
+$(document).on("click", function (e) {
+    if (!$(e.target).closest("#likeButton, #emojiDropdown").length) {
+        $("#emojiDropdown").hide();
+        $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
         // Hide emoji picker when clicked outside
     }
 });
-
-
 
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {

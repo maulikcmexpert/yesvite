@@ -374,50 +374,51 @@
                                                             $eventDetails['host_id'] == $login_user_id ? 'd-none' : ''; // Using 'd-none' to hide the link
                                                     @endphp
                                                     {{-- {{ dd($rsvpSent)}} --}}
-
-                                                    @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == null)
-                                                        <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
-                                                            data-bs-toggle="modal" data-bs-target="#aboutsuccess">
-                                                            RSVP
-                                                            <svg width="16" height="16" viewBox="0 0 16 16"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
-                                                                    stroke="white" stroke-width="1.5"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0')&&($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
-                                                        <a href="#"
-                                                            class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
-                                                            data-bs-target="#aboutsuccess">Not Attending
-                                                            <svg width="16" height="16" viewBox="0 0 16 16"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
-                                                                    stroke="white" stroke-width="1.5"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1')&&($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
-                                                        <a href="#"
-                                                            class="rsvp-btn attending-btn btn {{ $isDisabled }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#aboutsuccess">Attending
-                                                            <svg width="16" height="16" viewBox="0 0 16 16"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
-                                                                    stroke="white" stroke-width="1.5"
-                                                                    stroke-miterlimit="10" stroke-linecap="round"
-                                                                    stroke-linejoin="round" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
+                                                    @if($eventDetails['is_host']==0 && $eventDetails['is_co_host']=="0")
+                                                        @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == null)
+                                                            <a href="#" class="rsvp-btn btn {{ $isDisabled }}"
+                                                                data-bs-toggle="modal" data-bs-target="#aboutsuccess">
+                                                                RSVP
+                                                                <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                        stroke="white" stroke-width="1.5"
+                                                                        stroke-miterlimit="10" stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                        @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0'))
+                                                            <a href="#"
+                                                                class="rsvp-btn noattending-btn btn {{ $isDisabled }}"data-bs-toggle="modal"
+                                                                data-bs-target="#aboutsuccess">Not Attending
+                                                                <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                        stroke="white" stroke-width="1.5"
+                                                                        stroke-miterlimit="10" stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                        @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1'))
+                                                            <a href="#"
+                                                                class="rsvp-btn attending-btn btn {{ $isDisabled }}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#aboutsuccess">Attending
+                                                                <svg width="16" height="16" viewBox="0 0 16 16"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M13.2807 5.96484L8.93404 10.3115C8.4207 10.8248 7.5807 10.8248 7.06737 10.3115L2.7207 5.96484"
+                                                                        stroke="white" stroke-width="1.5"
+                                                                        stroke-miterlimit="10" stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                    @endif    
                                                 </div>
                                             </div>
                                         </div>

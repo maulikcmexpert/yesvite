@@ -171,7 +171,7 @@ $(".invite-count").text(inviteTotalCount);
 $("#event_guest_count").text(inviteTotalCount + " Guests");
 var isSetSession = 0;
 eventData.allow_limit_count = $("#allow_limit_count").val();
-$("#activity-start-time").val("");
+// $("#activity-start-time").val("");
 $("#activity-end-time").val("");
 $(document).ready(function () {
     function getTimeZoneAbbreviation() {
@@ -1568,9 +1568,11 @@ $(document).on("click", ".delete_activity", function () {
     total_activities--;
     i--;
     $(".total_activity-" + total_activity).text("(" + i + ")");
-    $(".step_1_activity").text(i + " Activity");
+    var total_all_activity=$('.event_all_activity_list').length;
+    $(".step_1_activity").text(total_all_activity + " Activities");
+    // $(".step_1_activity").text(i + " Activity");
 
-    console.log(total_activities);
+    // console.log(total_activities);
 });
 var numItems = 0;
 

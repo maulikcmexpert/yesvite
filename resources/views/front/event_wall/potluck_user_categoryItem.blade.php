@@ -31,8 +31,7 @@
 </div> -->
 
 
-<div
-                                                                                        class="accordion-body-content limits-count">
+<div class="accordion-body-content limits-count">
                                                                                         @if ($profile != '')
                                                                                             <img src="{{ $profile }}"
                                                                                                 alt="profile">
@@ -87,9 +86,9 @@
                                                                                             <input type="number"
                                                                                                 id="newQuantity_{{ $item_id }}"
                                                                                                 name="qty"
-                                                                                                value="{{ $key }}"
+                                                                                                value="{{ 0 }}"
                                                                                                 class="input-qty itemQty"
-                                                                                                data-max="{{ $key }}"
+                                                                                                data-max="{{ $quantity }}"
                                                                                                 data-item-id="{{ $item_id }}"
                                                                                                 data-spoken-quantity="{{ $key }}" />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
