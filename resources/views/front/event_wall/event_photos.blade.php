@@ -766,7 +766,7 @@
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <div class="d-flex align-items-start gap-2">
+                                    <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">Chance Curtis
                                         </h3>
                                         <span id="host_display" class="host">Host</span>
