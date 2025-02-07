@@ -94,7 +94,6 @@
                                         <li><span>Guest : </span> RSVP - Pending</li>
                                     @endif
                                 @endif    
-                            <!-- @endif -->
                             <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
                             </ul>
                         </a>
