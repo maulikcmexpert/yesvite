@@ -22,9 +22,9 @@
         <div class="filter-main-wrp">
             <div class="filters-drp">
                 <h5>Filter By</h5>
-                <div class="filter-dropdowns">
+                <div class="filter-dropdowns create-event-filter">
                     <div class="dropdown">
-                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <button type="button" class="btn dropdown-toggle " data-bs-toggle="dropdown">
                             Categories
                         </button>
                         <div class="dropdown-menu collection-menu">

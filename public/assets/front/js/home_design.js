@@ -33,9 +33,13 @@ $(document).ready(function() {
                 // Show images matching the selected categories and subcategories
                 $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
                     .show();
+                var items=$('.all_designs').length;
+                $('.total_design_count').text(items+' Items');
             });
         } else {
             $('.image-item').hide(); // Hide all images if no checkboxes are checked
+            var items=$('.all_designs').length;
+            $('.total_design_count').text(items+' Items');
         }
     });
     $('#resetCategories').on('click', function(e) {
@@ -43,6 +47,8 @@ $(document).ready(function() {
         $('#Allcat').prop('checked', false);
         $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
         $('.image-item').hide();
+        var items=$('.all_designs').length;
+        $('.total_design_count').text(items+' Items');
     });
 
     document.querySelectorAll('.collection-menu').forEach((button) => {

@@ -580,6 +580,12 @@
    position: relative;
 }
 
+/* .collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.create-event-filter{
+    border: 1px solid;
+} */
+.step_2{
+background-color: transparent !important;
+}
 .collection-wrapper .filter-main-wrp .filters-drp .dropdown::after{
     content: '\f078';
     font-family: 'fontAwesome';
