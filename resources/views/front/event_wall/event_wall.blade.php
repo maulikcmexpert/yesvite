@@ -450,7 +450,7 @@
                                                                         </li>
                                                                         @php $i++; if($i==3){break;} @endphp
                                                                     @endforeach
-                                                                    @if ($j==0)
+                                                                    @if($j==0)
                                                                     <li id="reactionImage_{{ $post['id'] }}">
                                                                     </li>
                                                                     @endphp
