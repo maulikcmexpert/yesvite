@@ -107,22 +107,28 @@ class HomeFrontController extends BaseController
         $page = 'front.home_design';
         $js = ['home_design'];
 
-        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+        $categories = EventDesignCategory::whereHas('subcategories', function ($query) {
             $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
         })
             ->with([
-                'subcategory' => function ($query) {
+                'subcategories' => function ($query) {
                     $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
                         ->with('textdatas'); // Load the textdatas relationship
                 }
-            ])->get();
+            ])
+            ->get();
 
-        $totalTextDataCount = $categories->sum(function ($category) {
-            return $category->subcategories->sum(function ($subcategory) {
-                return $subcategory->textdatas->count();
-            });
-        });
+        // Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategories->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+
         $count = $categories->count();
+
 
         return view('layout', compact(
             'title',
