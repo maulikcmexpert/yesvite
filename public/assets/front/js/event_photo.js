@@ -1672,3 +1672,7 @@ $(".modal").on("hidden.bs.modal", function () {
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
+$(".modal").on("shown.bs.modal", function () {
+    // Remove `d-none` class to show the div
+    $(".create-post-upload-img-inner").removeClass("d-none");
+});
