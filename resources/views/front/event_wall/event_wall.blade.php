@@ -1509,7 +1509,7 @@
 
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
-                            <input type="hidden" class="textcontent" name="postContent" value="">
+
 
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
