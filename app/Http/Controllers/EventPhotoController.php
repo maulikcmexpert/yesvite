@@ -776,7 +776,7 @@ class EventPhotoController extends Controller
         $user = Auth::guard('web')->user();
         $photoId = $request->id;
         $eventId = $request->event_id;
-
+        $postCommentList = [];
         // Fetch photo details from the database
         $getPhotoList = EventPost::query();
         $getPhotoList->with(['user', 'event_post_reaction', 'post_image'])
