@@ -654,7 +654,7 @@
                  @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
                         @foreach ($subcategory->textdatas as $image)
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                                 data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                                 data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
                                 <a href="#" class="collection-card card-blue">
