@@ -397,7 +397,7 @@ $(document).ready(function () {
                         <div class="position-relative d-flex align-items-center gap-2">
                             <button class="posts-card-like-btn"  >
 <i class="fa-regular fa-heart"></i></button>
-                            <p>0</p>
+                            <p id="commentTotalLike_${data.comment}>0</p>
                         </div>
                         <button data-comment-id="${data.id
                         }" class="commented-user-reply-btn">Reply</button>
