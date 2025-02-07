@@ -87,7 +87,7 @@
                                                                                             <input type="number"
                                                                                                 id="newQuantity_{{ $item_id }}"
                                                                                                 name="qty"
-                                                                                                value="{{ $key }}"
+                                                                                                value="{{ 0 }}"
                                                                                                 class="input-qty itemQty"
                                                                                                 data-max="{{ $key }}"
                                                                                                 data-item-id="{{ $item_id }}"
