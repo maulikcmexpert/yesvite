@@ -491,7 +491,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         (async function () {
             const userId = {{ json_encode($UserId ?? null) }}; // Ensure proper Laravel to JS conversion
             const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-            const { getDatabase, ref, get, onValue } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
+            const { getDatabase, ref, get, onValue,update } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js");
 
             // Fetch Firebase configuration
             const response = await fetch("/firebase_js.json");
