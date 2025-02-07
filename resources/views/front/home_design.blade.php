@@ -1,4 +1,5 @@
 
+{{dd($categories);}}
 <section class="collection-wrapper">
         <div class="container">
             <div class="content">
