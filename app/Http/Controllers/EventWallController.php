@@ -653,8 +653,7 @@ class EventWallController extends Controller
         $selectedFilters = "";
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
-        DB:
-        enableQueryLog();
+        DB::enableQueryLog();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
             ->withCount([
