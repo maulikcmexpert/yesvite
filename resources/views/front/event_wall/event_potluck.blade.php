@@ -200,9 +200,7 @@
                                                             @endif
 
                                                             
-                                                    <p style="{{ empty($co_host['message_to_guests']) ? 'display: none;' : '' }}">
-                                                        “{{ $co_host['message_to_guests'] }}”
-                                                    </p>
+                                                  
                                                 </div>
                                             @endforeach
                                            @endif 
