@@ -2,6 +2,8 @@
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
+
+
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['event_wall'] == "0") ||
             ($eventDetails['is_co_host'] == "1" && $eventDetails['event_wall'] == " 0")

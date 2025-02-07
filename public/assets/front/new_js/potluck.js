@@ -18,12 +18,7 @@ var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
 var amount = Number($n.val());
-
 if (amount > 0) {
-  var self_quantity = parseInt($("#self_bring_qty").val(), 10);
-      if (amount < self_quantity) {
-          $("#self_bring_qty").val(amount);
-      }
   $n.val(amount-1);
 }
 });

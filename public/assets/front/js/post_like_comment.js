@@ -31,14 +31,6 @@ $(document).ready(function () {
         const userId = button.data("user-id"); // Assuming each button has a user ID
         let reaction = "\u{2764}"; // Toggle between 💔 or ❤️
 
-        // Toggle UI button appearance
-        if (isLiked) {
-            button.removeClass("liked");
-            button.find("i").removeClass("fa-solid").addClass("fa-regular");
-        } else {
-            button.addClass("liked");
-            button.find("i").removeClass("fa-regular").addClass("fa-solid");
-        }
 
         $.ajax({
             url: base_url + "event_wall/userPostLikeDislike",
