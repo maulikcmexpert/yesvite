@@ -214,7 +214,7 @@ $(document).ready(function () {
 
                     // Update like count for both main comment and nested reply
                     $(`#commentTotalLike_${eventPostCommentId}`).text(
-                        `${response.count} Likes`
+                        `${response.count}`
                     );
                     if (response.self_reaction == "\u{2764}") {
                         // Update all like buttons with the same comment ID
@@ -399,12 +399,11 @@ $(document).ready(function () {
                         <div class="position-relative d-flex align-items-center gap-2">
                             <button class="posts-card-like-btn" id="CommentlikeButton"
                                 data-event-id="${eventId}"
-                            data-event-post-comment-id="${data.id}"  data-user-id="${login_user_id}">
+                            data-event-post-comment-id="${data.id}" data-user-id="${login_user_id}">
                              <i class="fa-regular fa-heart"></i></button>
                             <p id="commentTotalLike_${data.id}>1</p>
                         </div>
-                        <button data-comment-id="${data.id
-                        }" class="commented-user-reply-btn">Reply</button>
+                        <button data-comment-id="${data.id}" class="commented-user-reply-btn">Reply</button>
                     </div>
 
                 `;
