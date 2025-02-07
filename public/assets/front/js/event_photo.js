@@ -1039,7 +1039,7 @@ $(document).on("click", ".open_photo_model", function () {
                 // Host Label Condition
                 if (data.is_host == "1") {
                     const host = `${data.is_host}`;
-                    $("#host_display").text("host");
+                    $("#host_display").text("Host");
                 }
                 if (data.is_co_host == "1") {
                     const co_host = `${data.is_co_host}`;
