@@ -6,7 +6,7 @@
           $colorIndex = 0;
 
 @endphp
-
+{{dd($eventList);}}
 @foreach ( $eventList as $upcomingEvent)
 @php
                 $current_month = $upcomingEvent['event_month'];
@@ -48,7 +48,7 @@
                     @if($upcomingEvent['is_event_owner']==1)
                             <li><span>Hosting</span></li>
                     @elseif($upcomingEvent['is_co_host']=="1")
-                      <li><span>Co-Hosting</span></li>
+                            <li><span>Co-Hosting</span></li>
                       @endif        
                       @if($upcomingEvent['is_event_owner']!=1)
                             @if($upcomingEvent['rsvp_status'] == '1')
