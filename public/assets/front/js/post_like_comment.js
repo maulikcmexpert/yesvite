@@ -172,7 +172,7 @@ $(document).ready(function () {
     $(document).on("click", "#CommentlikeButton", function () {
         const button = $(this);
         const isLiked = button.hasClass("liked");
-        const reaction = isLiked ? "\u{1F90D}" : "\u{2764}"; // Toggle reaction: 💔 or ❤️
+        let reaction = "\u{2764}"; // Toggle between 💔 or ❤️// Toggle reaction: 💔 or ❤️
 
         // Extract necessary data
         const eventId = button.data("event-id");
@@ -180,7 +180,7 @@ $(document).ready(function () {
 
         // Select both like icons (main comment and nested reply)
         const mainLikeIcon = button.find("i");
-        const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
+
 
         // Toggle like button appearance for both elements
         // if (isLiked) {
@@ -216,6 +216,7 @@ $(document).ready(function () {
                     );
 
                     // Update the reaction display
+                    const replyLikeIcon = $(`#comment_like_${eventPostCommentId}`);
                     replyLikeIcon.text(`${response.self_reaction}`);
                 } else {
                     // alert(response.message);
