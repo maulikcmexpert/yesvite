@@ -43,7 +43,7 @@
                                                         @foreach ($categories as $textData)
                                                             @foreach ($textData->categories as $category)
                                                                 <div class="accordion-item">
-                                                                    <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                                                    <h2 class="accordion-header" id="heading{{ $category['id'] }}">
                                                                         <button class="accordion-button" type="button"
                                                                             data-bs-toggle="collapse"
                                                                             data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
