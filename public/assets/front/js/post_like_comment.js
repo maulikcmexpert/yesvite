@@ -579,7 +579,10 @@ $(document).ready(function () {
                 alert("An error occurred. Please try again.");
             },
         });
-
+        $(document).on("click", ".posts-card-like-btn", function () {
+            console.log("Like button clicked!");
+            $(this).find("i").toggleClass("fa-regular fa-solid");
+        });
 
     });
     $(document).on("click", ".posts-card-like-btn", function () {
@@ -636,7 +639,10 @@ $(document).ready(function () {
 
     // Handle reply button click (when replying to a comment)
 });
-
+$(document).on("click", ".posts-card-like-btn", function () {
+    console.log("Like button clicked!");
+    $(this).find("i").toggleClass("fa-regular fa-solid");
+});
 $(document).on("keyup", ".search-yesvite", function () {
     var searchQuery = $(this).val().toLowerCase(); // Get the search input value and convert it to lowercase
 
