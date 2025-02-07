@@ -699,6 +699,7 @@ class EventPotluckController extends Controller
     public function fetchUserDetails(Request $request)
     {
         $categoryId = $request->category_id;
+        $categorykey = $request->categorykey;
         $itemId = $request->item_id;
         $userProfile = $request->user_profile;
         $loginUserId = $request->login_user_id;
@@ -758,6 +759,7 @@ class EventPotluckController extends Controller
                 'category_id' => $categoryId,
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
+                'key' => $categorykey,
             ])->render();
                 
             // Return the response
