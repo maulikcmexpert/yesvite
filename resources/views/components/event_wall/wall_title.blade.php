@@ -71,49 +71,51 @@
                   <form action="">
                       <div class="form-check">
                           <input class="form-check-input select_all_post" data-post_type="all" type="checkbox" value=""
-                              id="flexCheckDefault1" checked>
+                              id="flexCheckDefault1" {{ in_array('all', $selectedFilters) ? 'checked' : '' }}>
                           <label class="form-check-label" for="flexCheckDefault1">
                               All
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="host_update" type="checkbox" value=""
-                              id="flexCheckDefault2" checked>
+                              id="flexCheckDefault2" {{ in_array('host_update', $selectedFilters) ? 'checked' : '' }}
+                              >
                           <label class="form-check-label" for="flexCheckDefault2">
                               Host Updates/Posts
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="video_uploads" type="checkbox" value=""
-                              id="flexCheckDefault3" checked>
+                              id="flexCheckDefault3" {{ in_array('video_uploads', $selectedFilters) ? 'checked' : '' }}
+                              >
                           <label class="form-check-label" for="flexCheckDefault3">
                               Video Uploads
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="photo_uploads" type="checkbox" value=""
-                              id="flexCheckDefault4" checked>
+                              id="flexCheckDefault4" {{ in_array('photo_uploads', $selectedFilters) ? 'checked' : '' }}>
                           <label class="form-check-label" for="flexCheckDefault4">
                               Photo Uploads
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="polls" type="checkbox" value=""
-                              id="flexCheckDefault4" checked>
+                              id="flexCheckDefault4"  {{ in_array('polls', $selectedFilters) ? 'checked' : '' }}>
                           <label class="form-check-label" for="flexCheckDefault4">
                               Polls
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="comments" type="checkbox" value=""
-                              id="flexCheckDefault4" checked>
+                              id="flexCheckDefault4" {{ in_array('comments', $selectedFilters) ? 'checked' : '' }}>
                           <label class="form-check-label" for="flexCheckDefault4">
                               Comments
                           </label>
                       </div>
                       <div class="form-check">
                           <input class="form-check-input wall_post" data-post_type="rsvp" type="checkbox" value=""
-                              id="flexCheckDefault4" checked>
+                              id="flexCheckDefault4" {{ in_array('rsvp', $selectedFilters) ? 'checked' : '' }}>
                           <label class="form-check-label" for="flexCheckDefault4">
                               RSVP ‘s
                           </label>

@@ -1346,7 +1346,8 @@ class EventWallController extends Controller
             'eventDetails',
             'rsvpSent',
             'login_user_id',
-            'js'
+            'js',
+            'selectedFilters'
 
         ));
     }

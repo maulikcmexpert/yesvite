@@ -31,7 +31,7 @@
                         </nav>
                     </div>
                     <!-- ===event-breadcrumb-wrp-end=== -->
-                    <x-event_wall.wall_title :eventDetails="$eventDetails" />
+                    <x-event_wall.wall_title :eventDetails="$eventDetails" :selectedFilters="$selectedFilters" />
                     <!-- ===event-center-title-start=== -->
 
                     <!-- ===event-center-title-end=== -->

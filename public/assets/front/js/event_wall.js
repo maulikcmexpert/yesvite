@@ -1,3 +1,5 @@
+const { error } = require("toastr");
+
 let selectedFiles = null; // To store selected files
 
 // // Step 1: Preview the selected media
@@ -1323,7 +1325,10 @@ $(document).on("click", ".wall_apply_filter", function () {
     $(".select_all_post:checked").each(function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
-
+    if(selectedPostTypes==""){
+        toastr.error('Please select filter');
+        return;
+    }
     console.log(selectedPostTypes);
     $.ajax({
         url: base_url + "event_wall/wallFilters",
