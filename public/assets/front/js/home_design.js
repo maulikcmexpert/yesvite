@@ -75,18 +75,10 @@ $(document).ready(function() {
             success: function (response) {
                 console.log("Remove successful: ", response);
     
-                if (response.success) {
-                 
-                    $('<div id="pageOverlay"></div>').css({
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        background: 'rgba(255, 255, 255, 0)', 
-                        zIndex: 9999
-                    }).appendTo('body');
-                    window.location.reload();
+                if (response.view) {
+                 $('.list_all_design_catgeory').html('');
+                 $('.list_all_design_catgeory').html(response.view);
+                    
                 } else {
                 }
             },
