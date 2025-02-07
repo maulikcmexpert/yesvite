@@ -793,7 +793,7 @@
                                                                                     </button> --}}
                                                                                     @if($comment['total_replies'] > 0)                                                                                       
                                                                                     
-                                                                                    <button class="show-comment-reply-btn">Hide reply </button>
+                                                                                    <button class="show-comment-reply-btn">Hide reply</button>
                                                                                 @endif
                                                                                 </ul>
                                                                             @endif
