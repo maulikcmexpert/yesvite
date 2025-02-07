@@ -608,7 +608,7 @@ $(document).on('click','.all-event-filter-reset',function(){
     $(".invited_to_chk").prop('checked', true);
     $('.need_to_rsvp_chk').prop('checked', false);
 
-    $('#all-event-filter-modal').modal('hide');
+    // $('#all-event-filter-modal').modal('hide');
 });
 
 $(document).on("click",".event_nav",function () {
