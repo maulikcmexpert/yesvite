@@ -880,22 +880,16 @@
         
             $(document).ready(function() {
                 $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                // Handle the "All Categories" checkbox click
                 $('#Allcat').on('change', function() {
                     if ($(this).is(':checked')) {
-                        // Check all individual category checkboxes
                         $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
-                        // Show all images
                         $('.image-item').show();
                     } else {
-                        // Uncheck all individual category checkboxes
                         $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-                        // Hide all images
                         $('.image-item').hide();
                     }
                 });
 
-                // Handle individual category checkboxes
                 $(document).on('change', 'input[type="checkbox"]:not(#Allcat)', function() {
                     // If all individual checkboxes are checked, check "All Categories"
                     const totalCheckboxes = $('input[type="checkbox"]:not(#Allcat)').length;
@@ -923,21 +917,31 @@
                     }
                 });
                 $('#resetCategories').on('click', function(e) {
-                     e.preventDefault(); // Prevent default anchor be havior
-
-                    // Uncheck all checkboxes
+                     e.preventDefault(); 
                     $('#Allcat').prop('checked', false);
                     $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
-
-                    // Hide all images
                     $('.image-item').hide();
                 });
+                document.querySelectorAll('.collection-menu').forEach((button) => {
+                    button.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
+                });
+     
+        // $(document).ready(function () {
+            const $cookiesBox = $('.cookies-track');
 
-                $(document).on('click','.collection-menu',function (e) {
-                    e.stopPropagation();
-                    console.log(1);
-                    
-                })
+            if (!localStorage.getItem('cookiesBoxDismissed')) {
+                setTimeout(() => {
+                    $cookiesBox.addClass('active');
+                }, 500);
+            }
+
+            $('.close-btn').on('click', function () {
+                $cookiesBox.removeClass('active');
+                localStorage.setItem('cookiesBoxDismissed', 'true');
+            });
+        // });
             });
     </script>
 @endpush
