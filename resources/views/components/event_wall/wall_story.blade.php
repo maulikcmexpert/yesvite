@@ -151,7 +151,7 @@
 </div>
 
 @foreach ($storiesList as $Allstory)
-    {{dd($Allstory)}}
+
     @if ($Allstory['id'] !== $users->id)
         <!-- Ensure we only show modals for different stories -->
         <div id="storyModal-{{ $Allstory['id'] }}" class="modal story_seen_modal" style="display: none;">
