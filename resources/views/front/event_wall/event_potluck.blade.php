@@ -722,7 +722,7 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"  data-itemkey="{{ $indexkey }}" data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -743,6 +743,7 @@
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
                                                                                                 data-categorykey="{{ $key }}"
+                                                                                                data-itemkey="{{ $indexkey }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
