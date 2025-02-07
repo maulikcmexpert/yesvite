@@ -478,22 +478,51 @@ $(document).on("click", ".posts-card-like-btn", function () {
     icon.classList.toggle("fa-regular");
     icon.classList.toggle("fa-solid");
 });
-
 $(document).on("click", ".commented-user-reply-btn", function () {
-    // Get the parent's name and comment ID for reply
+    // Find the closest comment element
+
+    $(".post_comment").val("");
+    const parentWrapper = $(this)
+        .closest(".posts-card-show-all-comments-wrp")
+        .prev(".posts-card-main-comment");
+
+    if (!parentWrapper.length) {
+        console.error("Parent wrapper not found!");
+        return;
+    }
     const parentName = $(this)
-        .closest(".commented-user-wrp")
+        .parent()
+        .prev()
+        .prev()
+        .children()
+        .find(".commented-user-profile-content")
         .find("h3")
         .text()
         .trim();
-    const parentId = $(this).closest(".commented-user-wrp").data("comment-id");
+    console.log({ parentName });
+    const parentId = $(this).data("comment-id");
 
-    // Insert the parent's name as @ParentName into the input box
-    const commentBox = $("#post_comment");
+    if (!parentId) {
+        console.error("Parent Comment ID is missing!");
+        return;
+    }
+
+    // Set the parent comment ID value in the hidden field for later use in the AJAX request
+    $(".parent_comment_id").val(parentId); // Store parent comment ID in a hidden field
+
+    // Set the active class on the currently selected comment
+    $(".commented-user-wrp").removeClass("active"); // Remove 'active' from all comments
+    $(this).closest(".commented-user-wrp").addClass("active"); // Add 'active' to the current comment
+
+    // Focus the comment box and insert the '@username'
+    const commentBox = parentWrapper.find(".post_comment");
+    if (!commentBox.length) {
+        console.error("Comment input field not found!");
+        return;
+    }
+
+    // Insert the '@username' into the comment box and focus
     commentBox.val(`@${parentName} `).focus();
-
-    // Set the parent comment ID in a hidden input field
-    $("#parent_comment_id").val(parentId);
 });
 
 // $(document).on('click', '.posts-card-like-btn', function () {
