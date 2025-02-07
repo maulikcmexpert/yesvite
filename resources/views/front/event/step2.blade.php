@@ -1,9 +1,8 @@
 <div class="step_2">
 <section class="collection-wrapper">
-    <div class="container">
+    <div class="">
         <div class="content">
-            <h2>Find the Perfect <br> Design in Our Collection</h2>
-            <p>Customizable Designs to Reflect Your Unique Event</p>
+            
             <div class="position-relative search-wrapper">
                 <input type="search" id="search_design_category" placeholder="Search design categories" class="">
                 <span class="">
@@ -86,7 +85,7 @@
         <div class="row list_all_design_catgeory">
             @foreach ($categories as $textData)
         
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item"
                         data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                         data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
                         <a href="javascript:;" class="collection-card card-blue">
