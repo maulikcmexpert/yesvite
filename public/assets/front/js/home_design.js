@@ -6,9 +6,13 @@ $(document).ready(function() {
         if ($(this).is(':checked')) {
             $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
             $('.image-item').show();
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
         } else {
             $('input[type="checkbox"]:not(#Allcat)').prop('checked', false);
             $('.image-item').hide();
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
         }
     });
 
