@@ -3679,6 +3679,7 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", function () {
+    $("#loader").css("display", "flex");
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -3698,7 +3699,6 @@ $(document).on("click", "#close_createEvent", function () {
     // }
 
     // $('#loader').css('display','block');
-    $("#loader").css("display", "flex");
 
     if (event_date != "") {
         // if (event_name != "" && event_date != "") {
@@ -3738,15 +3738,13 @@ $(document).on("click", "#close_createEvent", function () {
             data: eventData,
             success: function (response) {
                 if (response == 1) {
-                    window.location.href = "home";
                     toastr.success("Event Saved as Draft");
-                    setTimeout(function () {
-                        $("#loader").css("display", "none");
-                    }, 4000);
+                    window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
+                toastr.error("Error in Saved as Draft");
                 console.log("AJAX error: " + error);
             },
         });
@@ -8406,7 +8404,12 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
-    updateEventData();
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
@@ -8414,7 +8417,9 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
-    if (save1 == 8) {
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
 });
@@ -8424,7 +8429,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
-
+    savePage4Data();
     if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
