@@ -5,7 +5,7 @@
                 <h2>Find the Perfect <br> Design in Our Collection</h2>
                 <p>Customizable Designs to Reflect Your Unique Event</p>
                 <div class="position-relative search-wrapper">
-                    <input type="search" placeholder="Search design categories" class="">
+                    <input type="search" id="search_design_category" placeholder="Search design categories" class="">
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
