@@ -657,7 +657,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $potluck = session('category');
-        dd($request);
+        // dd($request);
         // dd($request);
 
         Session::forget('desgin');
@@ -1219,8 +1219,21 @@ class EventController extends BaseController
             return 1;
         }
 
-
-        $registry = $request->gift_registry_data;
+        $registry = [];
+        if($request->isCopy !=null){
+            if (isset($request->gift_registry_data) && count($request->gift_registry_data) > 0) {
+                foreach ($request->gift_registry_data as $key => $imgVal) {
+                    $gr = EventGiftRegistry::where('id', $imgVal['gr_id'])->first();
+                    if ($gr) {  // Check if $gr is not null
+                        $registry[] = [
+                            'registry_link' => $gr->registry_link
+                        ];
+                    }
+                }
+            }
+        }else{
+            $registry = $request->gift_registry_data;
+        }
 
         // dd($registry);
         if (!empty($registry)) {
