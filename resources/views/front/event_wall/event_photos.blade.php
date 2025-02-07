@@ -53,6 +53,9 @@
                                     $photos_show = 'show';
                                 }
                             @endphp
+                            <input type="hidden"
+                            id="login_user_id"
+                            value="{{ $login_user_id }}">
                             <div class="tab-pane fade {{ $photos_show }} {{ $photos_active }}" id="nav-photos"
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
@@ -770,7 +773,7 @@
                                     <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">Chance Curtis
                                         </h3>
-                                        <span id="host_display" class="host">Host</span>
+                                        <span id="host_display" class="host"></span>
                                     </div>
                                     <p id="location">New York, NY</p>
                                 </div>

@@ -228,7 +228,7 @@
     text-transform: uppercase;
 }
 
-.guest-user-list .sucess-no{
+.sucess-no{
     border: 1px solid #e03137;
     background-color: #FFE9E9;
     padding: 6px 13px;
@@ -237,7 +237,7 @@
     border-radius: 100px;
 }
 
-.guest-user-list .sucess-no h5{
+.sucess-no h5{
     color: #e03137;
     font-family: var(--SFProDisplay-Semibold);
     font-size: 14px;

@@ -1,11 +1,10 @@
-
 <main class="new-main-content">
 
     <div class="container">
         <div class="row">
             <div class="col-xl-3 col-lg-4">
                 <!-- =============mainleft-====================== -->
-                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"  />
+                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
             <div class="col-xl-6 col-lg-8">
                 <div class="main-content-center">
@@ -19,7 +18,7 @@
                   "
                             aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists')}}">Events</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists') }}">Events</a></li>
                                 <li class="breadcrumb-item">
                                     <a
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
@@ -122,53 +121,98 @@
                                         </div>
                                     @endif
                                     @if ($eventDetails['hosted_by'])
-                                        <div class="massage-host cmn-card">
-                                            <h5 class="title">Message From Host</h5>
-                                            <div class="massge-data">
-                                                <div class="host-img">
-                                                    @if ($eventDetails['user_profile'] != '')
-                                                    <img src="{{ $eventDetails['user_profile'] }}" alt="host-img" loading="lazy">
-                                                    @else
-                                                        @php
+                                        <div class="host-users-detail cmn-card">
+                                            <h4 class="title">Your hosts</h4>
+                                            <div class="host-user-con-box">
+                                                @if ($eventDetails['hosted_by'])
+                                                    <div class="host-user-con">
+                                                        <div class="img-wrp">
+                                                            @if ($eventDetails['user_profile'] != '')
+                                                                <img src="{{ $eventDetails['user_profile'] }}"
+                                                                    alt="host-img">
+                                                            @else
+                                                                @php
 
-                                                            // $parts = explode(" ", $name);
-                                                            $nameParts = explode(' ', $eventDetails['hosted_by'] );
+                                                                    // $parts = explode(" ", $name);
+                                                                    $nameParts = explode(
+                                                                        ' ',
+                                                                        $eventDetails['hosted_by'],
+                                                                    );
+                                                                    $firstInitial = isset($nameParts[0][0])
+                                                                        ? strtoupper($nameParts[0][0])
+                                                                        : '';
+                                                                    $secondInitial = isset($nameParts[1][0])
+                                                                        ? strtoupper($nameParts[1][0])
+                                                                        : '';
+                                                                    $initials = $firstInitial . $secondInitial;
 
-                                                            $firstInitial = isset($nameParts[0][0])
-                                                                ? strtoupper($nameParts[0][0])
-                                                                : '';
-                                                            $secondInitial = isset($nameParts[1][0])
-                                                                ? strtoupper($nameParts[1][0])
-                                                                : '';
-                                                            $initials = $firstInitial . $secondInitial;
+                                                                    // Generate a font color class based on the first initial
+                                                                    $fontColor = 'fontcolor' . $firstInitial;
+                                                                @endphp
+                                                                <h5 class="{{ $fontColor }}">
+                                                                    {{ $initials }}
+                                                                </h5>
+                                                            @endif
 
-                                                            // Generate a font color class based on the first initial
-                                                            $fontColor = 'fontcolor' . $firstInitial;
-                                                        @endphp
-                                                        <h5 class="{{ $fontColor }}">
-                                                            {{ $initials }}
-                                                        </h5>
-                                                    @endif
-
-                                                </div>
-                                                <h5>{{ $eventDetails['hosted_by'] }}</h5>
-                                                <h6>Host</h6>
-                                                <!-- <a href="#">Message</a> -->
-                                                        @if($eventDetails['host_id']!=$login_user_id)
-                                                            <a href="{{route('message.list',   ['id' => encrypt($eventDetails['host_id']), 'is_host' => "1"])}}" class="msg-btn">Message</a>
+                                                        </div>
+                                                        <h5>{{ $eventDetails['hosted_by'] }}</h5>
+                                                        <span>Host</span>
+                                                        @if ($eventDetails['host_id'] != $login_user_id)
+                                                            <a href="{{ route('message.list', ['id' => encrypt($eventDetails['host_id']), 'is_host' => '1']) }}"
+                                                                class="msg-btn">Message</a>
                                                         @endif
-                                                <p style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
-                                                    “{{ $eventDetails['message_to_guests'] }}”
-                                                </p>
+                                                    </div>
+                                                @endif
+                                                @if (!empty($eventDetails['co_hosts']))
+                                                    @foreach ($eventDetails['co_hosts'] as $co_host)
+                                                        <div class="host-user-con">
+                                                            <div class="img-wrp">
+                                                                @if (!empty($co_host['profile']))
+                                                                    <img src="{{ $co_host['profile'] }}"
+                                                                        alt="cohost-img">
+                                                                @else
+                                                                    @php
+                                                                        $nameParts = explode(' ', $co_host['name']);
+                                                                        $firstInitial = isset($nameParts[0][0])
+                                                                            ? strtoupper($nameParts[0][0])
+                                                                            : '';
+                                                                        $secondInitial = isset($nameParts[1][0])
+                                                                            ? strtoupper($nameParts[1][0])
+                                                                            : '';
+                                                                        $initials = $firstInitial . $secondInitial;
+                                                                        $fontColor = 'fontcolor' . $firstInitial;
+                                                                    @endphp
+                                                                    <h5 class="{{ $fontColor }}">
+                                                                        {{ $initials }}
+                                                                    </h5>
+                                                                @endif
+                                                            </div>
+                                                            <h5>{{ $co_host['name'] }}</h5>
+                                                            <span>Co-host</span>
+                                                            @if ($co_host['id'] != $login_user_id)
+                                                                <a href="{{ route('message.list', ['id' => encrypt($co_host['id']), 'is_host' => '0']) }}"
+                                                                    class="msg-btn">Message</a>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+
                                             </div>
+
+                                            <p
+                                                style="{{ empty($eventDetails['message_to_guests']) ? 'display: none;' : '' }}">
+                                                “{{ $eventDetails['message_to_guests'] }}”
+                                            </p>
                                         </div>
                                     @endif
+
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
                                             <h5 class="title">Potluck Categories</h5>
                                             <button type="button" class="ms-auto border-0" data-bs-toggle="modal"
-                                                data-bs-target="#editmodal" style="background-color: transparent; box-shadow: none;">
+                                                data-bs-target="#editmodal"
+                                                style="background-color: transparent; box-shadow: none;">
                                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -179,8 +223,7 @@
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
                                         @foreach ($potluckDetail['podluck_category_list_new'] as $key => $category)
-                                        
-                                        <div class="category-main-dishesh list-slide-{{$key}}">
+                                            <div class="category-main-dishesh list-slide-{{ $key }}">
 
 
                                                 @php
@@ -202,18 +245,15 @@
                                                             $total_item_quantity == $total_missing_quantity
                                                                 ? 'disabled'
                                                                 : '';
-                                                            } 
-                                                            $noneVal =
-                                                                $total_item_quantity > 0
-                                                                    ? 'd-none'
-                                                                    : '';@endphp
-                                                      
+                                                    }
+                                                $noneVal = $total_item_quantity > 0 ? 'd-none' : ''; @endphp
+
                                                 <div class="category-list" id="sublist"
                                                     data-category-id="{{ $category['id'] }}"
                                                     data-total-quantity="{{ $total_item_quantity }}">
                                                     <div class="list-header">
-                                                        <span
-                                                            class="me-1 list-sub-head">{{ $category['categoryQuantity'] }}</span>
+                                                        <span data-categorycount="{{ $category['categoryQuantity'] }}"
+                                                            class="me-1 category-count-{{ $key }} list-sub-head">{{ $category['categoryQuantity'] }}</span>
                                                         <div>
                                                             <h5>{{ $category['category'] }}</h5>
                                                         </div>
@@ -230,7 +270,7 @@
                                                                     $display_icon = '';
                                                                     $missing = 'color:green;';
                                                                     // $hide_button = 'd-none'; // Hides the button
-                                                                }else{
+                                                                } else {
                                                                     $missing = 'color:red';
                                                                 }
                                                             @endphp
@@ -266,7 +306,7 @@
                                                                         fill="#23AA26" />
                                                                 </svg>
                                                             </span> -->
-                                                            <!-- <h6 class="me-3 over-quantity-{{ $category['id'] }} {{($over_quantity_count >0)?"":"d-none" }}"
+                                                            <!-- <h6 class="me-3 over-quantity-{{ $category['id'] }} {{ $over_quantity_count > 0 ? '' : 'd-none' }}"
                                                                 style="color:green;">
                                                                 {{ $over_quantity_count }}
                                                                 Item Over</h6>
@@ -278,111 +318,112 @@
                                                                 }
                                                             @endphp -->
                                                             {{-- new code --}}
-                                                            @if ($category['remainingQnt'] > 0)
-                                                            <span
-                                                                class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                style="color: rgb(192, 52, 52);">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
-                                                                        fill="#F73C71"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                            style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
-                                                            Missing</h6>
-
-                                                          
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="display:none">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="display:none;color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}"></span>
-                                                                Item Over</h6>
-
-                                                        
-                                                    @else
-                                                        @if($category['totalMissing'] == 0)
-                                                        <span
-                                                            class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                            style="color: rgb(52, 192, 92);">
-                                                            <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                    fill="#23AA26"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                        style="color: rgb(52, 192, 92);"><span
-                                                            id="missing-category-{{ $key }}">0</span> Missing</h6>
-                                                        @else
-                                                        <span
-                                                                class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                style="color: rgb(192, 52, 52);">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
-                                                                        fill="#F73C71"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 missing-category-h6-{{ $key }}"
-                                                            style="color: rgb(192, 52, 52);"><span
-                                                                id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
-                                                            Missing</h6>
-                                                        @endif
-
-                                                            @if ($category['remainingQnt'] < 0)
-                                                          
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
-                                                                Item Over</h6>
-
-                                                        @else
-                                                            <span
-                                                                class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                style="display:none">
-                                                                <svg width="14" height="14" viewBox="0 0 14 14"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
-                                                                        fill="#23AA26"></path>
-                                                                </svg>
-                                                            </span>
-                                                            <h6 class="me-2 extra-category-h6-{{ $key }}"
-                                                                style="display:none;color:#34C05C"><span
-                                                                    id="extra-category-{{ $key }}"></span>
-                                                                Item Over</h6>
-
+                                                            @if ($category['totalMissing'] > 0)
+                                                                <span
+                                                                    class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
+                                                                    style="color: rgb(192, 52, 52);">
+                                                                    <svg width="14" height="14"
+                                                                        viewBox="0 0 14 14" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M13.5067 9.61399L9.23998 1.93398C8.66665 0.900651 7.87332 0.333984 6.99998 0.333984C6.12665 0.333984 5.33332 0.900651 4.75998 1.93398L0.493318 9.61399C-0.0466816 10.594 -0.106682 11.534 0.326652 12.274C0.759985 13.014 1.61332 13.4207 2.73332 13.4207H11.2667C12.3867 13.4207 13.24 13.014 13.6733 12.274C14.1067 11.534 14.0467 10.5873 13.5067 9.61399ZM6.49998 5.00065C6.49998 4.72732 6.72665 4.50065 6.99998 4.50065C7.27332 4.50065 7.49998 4.72732 7.49998 5.00065V8.33398C7.49998 8.60732 7.27332 8.83398 6.99998 8.83398C6.72665 8.83398 6.49998 8.60732 6.49998 8.33398V5.00065ZM7.47332 10.8073C7.43998 10.834 7.40665 10.8607 7.37332 10.8873C7.33332 10.914 7.29332 10.934 7.25332 10.9473C7.21332 10.9673 7.17332 10.9807 7.12665 10.9873C7.08665 10.994 7.03998 11.0007 6.99998 11.0007C6.95998 11.0007 6.91332 10.994 6.86665 10.9873C6.82665 10.9807 6.78665 10.9673 6.74665 10.9473C6.70665 10.934 6.66665 10.914 6.62665 10.8873C6.59332 10.8607 6.55998 10.834 6.52665 10.8073C6.40665 10.6807 6.33332 10.5073 6.33332 10.334C6.33332 10.1607 6.40665 9.98732 6.52665 9.86065C6.55998 9.83399 6.59332 9.80732 6.62665 9.78065C6.66665 9.75398 6.70665 9.73398 6.74665 9.72065C6.78665 9.70065 6.82665 9.68732 6.86665 9.68065C6.95332 9.66065 7.04665 9.66065 7.12665 9.68065C7.17332 9.68732 7.21332 9.70065 7.25332 9.72065C7.29332 9.73398 7.33332 9.75398 7.37332 9.78065C7.40665 9.80732 7.43998 9.83399 7.47332 9.86065C7.59332 9.98732 7.66665 10.1607 7.66665 10.334C7.66665 10.5073 7.59332 10.6807 7.47332 10.8073Z"
+                                                                            fill="#F73C71"></path>
+                                                                    </svg>
+                                                                </span>
+                                                                <h6 class="me-2 missing-category-h6-{{ $key }}"
+                                                                    style="color: rgb(192, 52, 52);"><span
+                                                                        id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
+                                                                    Missing</h6>
+                                                                @if ($category['totalOver'] > 0)
+                                                                    <span
+                                                                        class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
+                                                                        style="">
+                                                                        <svg width="14" height="14"
+                                                                            viewBox="0 0 14 14" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                                fill="#23AA26"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6 class="me-2 extra-category-h6-{{ $key }}"
+                                                                        style="color:#34C05C"><span
+                                                                            id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
+                                                                        Item Over</h6>
+                                                                @else
+                                                                    <span
+                                                                        class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
+                                                                        style="display:none">
+                                                                        <svg width="14" height="14"
+                                                                            viewBox="0 0 14 14" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                                fill="#23AA26"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6 class="me-2 extra-category-h6-{{ $key }}"
+                                                                        style="display:none;color:#34C05C"><span
+                                                                            id="extra-category-{{ $key }}"></span>
+                                                                        Item Over</h6>
+                                                                @endif
+                                                            @else
+                                                                @if ($category['totalMissing'] == 0)
+                                                                    <span
+                                                                        class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
+                                                                        style="color: rgb(52, 192, 92);">
+                                                                        <svg width="14" height="14"
+                                                                            viewBox="0 0 14 14" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                                fill="#23AA26"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                    <h6 class="me-2 missing-category-h6-{{ $key }}"
+                                                                        style="color: rgb(52, 192, 92);"><span
+                                                                            id="missing-category-{{ $key }}">0</span>
+                                                                        Missing</h6>
+                                                                    @if ($category['totalOver'] > 0)
+                                                                        <span
+                                                                            class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
+                                                                            style="">
+                                                                            <svg width="14" height="14"
+                                                                                viewBox="0 0 14 14" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                                    fill="#23AA26"></path>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <h6 class="me-2 extra-category-h6-{{ $key }}"
+                                                                            style="color:#34C05C"><span
+                                                                                id="extra-category-{{ $key }}">{{ abs($category['totalOver']) }}</span>
+                                                                            Item Over</h6>
+                                                                    @else
+                                                                        <span
+                                                                            class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
+                                                                            style="display:none">
+                                                                            <svg width="14" height="14"
+                                                                                viewBox="0 0 14 14" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M7.00016 0.333984C3.32683 0.333984 0.333496 3.32732 0.333496 7.00065C0.333496 10.674 3.32683 13.6673 7.00016 13.6673C10.6735 13.6673 13.6668 10.674 13.6668 7.00065C13.6668 3.32732 10.6735 0.333984 7.00016 0.333984ZM10.1868 5.46732L6.40683 9.24732C6.3135 9.34065 6.18683 9.39398 6.0535 9.39398C5.92016 9.39398 5.7935 9.34065 5.70016 9.24732L3.8135 7.36065C3.62016 7.16732 3.62016 6.84732 3.8135 6.65398C4.00683 6.46065 4.32683 6.46065 4.52016 6.65398L6.0535 8.18732L9.48016 4.76065C9.6735 4.56732 9.9935 4.56732 10.1868 4.76065C10.3802 4.95398 10.3802 5.26732 10.1868 5.46732Z"
+                                                                                    fill="#23AA26"></path>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <h6 class="me-2 extra-category-h6-{{ $key }}"
+                                                                            style="display:none;color:#34C05C"><span
+                                                                                id="extra-category-{{ $key }}"></span>
+                                                                            Item Over</h6>
+                                                                    @endif
+                                                                @endif
+                                                            @endif
                                                             {{-- end code --}}
-                                                        @endif
-                                                    @endif
-                                                        {{-- end code --}}
 
                                                             <button type="button" class="me-3 "
-                                                                data-bs-toggle="modal" data-bs-target="#maindishes" style="background-color: transparent; box-shadow: none;"
+                                                                data-bs-toggle="modal" data-bs-target="#maindishes"
+                                                                style="background-color: transparent; box-shadow: none;"
                                                                 data-category-id="{{ $category['id'] }}"
                                                                 data-category-name="{{ $category['category'] }}">
                                                                 <svg width="22" height="22"
@@ -496,7 +537,8 @@
                                                     </div>
                                                     <span class="list-created">Created by:
                                                         {{ $category['created_by'] }}</span>
-                                                    <div class="list-body d-flex align-items-center {{$noneVal}}">
+                                                    <div
+                                                        class="list-body d-flex align-items-center {{ $noneVal }}">
                                                         <span
                                                             class="me-2 d-flex align-items-center justify-content-center">
                                                             <svg width="19" height="19" viewBox="0 0 14 15"
@@ -512,32 +554,37 @@
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $indexkey => $item)
-                                                            <input type="hidden"
+                                                                <input type="hidden"
                                                                     class="innerUserQnt-{{ $indexkey }}-{{ $key }}"
                                                                     value="{{ $item['innerUserQnt'] }}">
-                                                            <div class="accordion-item active">
+                                                                <div class="accordion-item active">
                                                                     <input type="hidden"
-                                                                                    class="category-item-quantity"
-                                                                                    value="{{ $item['quantity'] }}">
+                                                                        class="category-item-quantity"
+                                                                        value="{{ $item['quantity'] }}">
                                                                     <input type="hidden" id="category_item_id"
                                                                         name="event_potluck_category_item_id"
                                                                         value="{{ $item['id'] }}">
-                                                                        
-                                                                    <h2 class="accordion-header" id="sprite-{{ $item['id'] }}">
+
+                                                                    <h2 class="accordion-header"
+                                                                        id="sprite-{{ $item['id'] }}">
                                                                         <button class="accordion-btn accordion-button">
                                                                             <div class="d-flex align-items-center">
                                                                                 @php
                                                                                     $icons = 'd-none';
                                                                                     $missing = '';
                                                                                     if (
-                                                                                        (intval($item['itmquantity']) + intval($item['innerUserQnt'])) >= $item['quantity'] 
+                                                                                        intval($item['itmquantity']) +
+                                                                                            intval(
+                                                                                                $item['innerUserQnt'],
+                                                                                            ) >=
+                                                                                        $item['quantity']
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';
                                                                                     }
                                                                                 @endphp
                                                                                 <span
-                                                                                    id ="success_{{ $item['id'] }}"
+                                                                                    id ="success_{{ $indexkey }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 18 18"
@@ -549,7 +596,7 @@
                                                                                     </svg>
                                                                                 </span>
 
-                                                                                <span id ="danger_{{ $item['id'] }}"
+                                                                                <span id ="danger_{{ $indexkey }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons == 'd-none' ? '' : 'd-none' }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 14 14"
@@ -594,33 +641,38 @@
                                                                                     data-bs-toggle="collapse"
                                                                                     data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
                                                                                     aria-expanded="false"
-                                                                                    aria-controls="sprite-collapseOne-{{ $item['id'] }}">   <i
+                                                                                    aria-controls="sprite-collapseOne-{{ $item['id'] }}">
+                                                                                    <i
                                                                                         class="fa-solid fa-plus"></i></span>
                                                                             </div>
                                                                         </button>
                                                                     </h2>
 
-                                                                    @if(empty($item['item_carry_users']))
-                                                                    {{-- <div id="lumpia-collapseOne"
+                                                                    @if (empty($item['item_carry_users']))
+                                                                        {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
-                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
-                                                                                class="accordion-collapse collapse"
-                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
-                                                                                <div class="accordion-body"
-                                                                                    id="user-container-{{ $item['id'] }}">
-                                                                                </div>
+                                                                        <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                            class="accordion-collapse collapse show"
+                                                                            aria-labelledby="sprite-{{ $item['id'] }}"
+                                                                            data-bs-parent="#accordionFlushExample">
+                                                                            <div class="accordion-body"
+                                                                                id="user-container-{{ $item['id'] }}">
                                                                             </div>
+                                                                        </div>
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
-                                                                        @if ($login_user_id === $users['user_id'])
-                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                        <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                            class="accordion-collapse collapse collapse show"
+                                                                            aria-labelledby="sprite-{{ $item['id'] }}"
+                                                                            data-bs-parent="#accordionFlushExample">
+                                                                            @if ($login_user_id === $users['user_id'])
+                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
 
@@ -683,7 +735,9 @@
                                                                                         <div
                                                                                             class="qty-container qty-custom ms-auto">
                                                                                             <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}" data-categorykey="{{ $key }}"
+                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"
+                                                                                                data-itemkey="{{ $indexkey }}"
+                                                                                                data-categorykey="{{ $key }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-minus "></i></button>
@@ -697,13 +751,15 @@
                                                                                                 class="input-qty itemQty"
                                                                                                 data-max="{{ $item['quantity'] }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
-                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}" />
+                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}"
+                                                                                                readonly />
                                                                                             {{-- <button class="qty-btn-plus plus-potluck-item"
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
                                                                                             <button class="plus"
                                                                                                 data-category-id="{{ $category['id'] }}"
                                                                                                 data-categorykey="{{ $key }}"
+                                                                                                data-itemkey="{{ $indexkey }}"
                                                                                                 data-item-id="{{ $item['id'] }}"
                                                                                                 type="button"><i
                                                                                                     class="fa fa-plus"></i></button>
@@ -780,17 +836,17 @@
                                                                                     </div>
 
                                                                                 </div>
-                                                                            </div>
-                                                                        @else
-                                                                            {{-- <div id="lumpia-collapseOne"
+                                                                                {{-- </div> --}}
+                                                                            @else
+                                                                                {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
 
-                                                                                <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse "
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                data-bs-parent="#accordionFlushExample"> --}}
                                                                                 <div class="accordion-body"
                                                                                     id="user-container-{{ $item['id'] }}">
                                                                                     <div
@@ -851,11 +907,12 @@
                                                                                             {{ $users['last_name'] }}
                                                                                         </h5>
                                                                                         <span
-                                                                                            class="ms-auto slide-round">{{ $item['spoken_quantity'] }}</span>
+                                                                                            class="ms-auto slide-round">{{ $users['quantity'] }}</span>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        @endif
+                                                                                {{-- </div> --}}
+                                                                            @endif
+                                                                        </div>
                                                                     @endforeach
                                                                 </div>
                                                             @endforeach
@@ -863,7 +920,7 @@
                                                     </div>
                                                 </div>
 
-                                        </div>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -911,7 +968,8 @@
 
                     @csrf
                     <div class="input-form">
-                        <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"id="category" name="category"
+                        <input class="form-control" oninput="clearError(this)" maxlength="30"
+                            type="text"id="category" name="category"
                             placeholder="ie, Appetizers, Salads, Main Dishes">
                         <span id="category-sub-con" class="sub-con"><span id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
@@ -921,7 +979,8 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantity" name="category_quantity" value="0" class="input-qty" />
+                            <input type="number" id="quantity" name="category_quantity" value="0"
+                                class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>
@@ -951,8 +1010,8 @@
                     <!-- Example event_id -->
                     <input type="hidden" id="hiddenCategoryId" name="event_potluck_category_id" value="">
                     <div class="input-form">
-                        <input class="form-control" oninput="clearError(this)" maxlength="30" type="text" id="text1" name="description"
-                            placeholder="ie, Appetizers, Salads, Main Dishes">
+                        <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"
+                            id="text1" name="description" placeholder="ie, Appetizers, Salads, Main Dishes">
                         <span id="text-sub-con" class="sub-con">0/30</span>
                     </div>
             </form>
@@ -961,7 +1020,8 @@
                 <div class="toggle-button-cover toggle-custom">
                     <div class="buttons-cover">
                         <div class="button r" id="button-1">
-                            <input type="checkbox" id="selfBringItem" class="checkbox" name="self_bring_item" value="1"/>
+                            <input type="checkbox" id="selfBringItem" class="checkbox" name="self_bring_item"
+                                value="1" />
                             <div class="knobs"></div>
                             <div class="layer"></div>
                         </div>
@@ -975,21 +1035,24 @@
                     $user = Auth::guard('web')->user();
                 @endphp
                 @if ($user->profile != '')
-                <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}" alt="user-img">
+                    <img src="{{ url('storage/profile/' . Auth::guard('web')->user()->profile) }}" alt="user-img">
                 @else
-                @php
-                $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
-                $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
-                $initials = $firstInitial . $lastInitial;
-                $fontColor = 'fontcolor' . $firstInitial;
-                @endphp
-                <h5 class="{{ $fontColor }} add-item-under-text"> {{ $initials }}</h5>
+                    @php
+                        $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+                        $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+                        $initials = $firstInitial . $lastInitial;
+                        $fontColor = 'fontcolor' . $firstInitial;
+                    @endphp
+                    <h5 class="{{ $fontColor }} add-item-under-text"> {{ $initials }}</h5>
                 @endif
-                <h5>{{$user->firstname.' '.$user->lastname}}</h5>
+                <h5>{{ $user->firstname . ' ' . $user->lastname }}</h5>
                 <div class="qty-container ms-auto">
-                    <button class=" self_bring_quantity" data-type="minus" type="button"><i class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty" readonly/>
-                    <button class=" self_bring_quantity" data-type="plus" type="button"><i class="fa fa-plus"></i></button>
+                    <button class=" self_bring_quantity" data-type="minus" type="button"><i
+                            class="fa fa-minus"></i></button>
+                    <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty"
+                        readonly />
+                    <button class=" self_bring_quantity" data-type="plus" type="button"><i
+                            class="fa fa-plus"></i></button>
                 </div>
                 {{-- <div class="d-flex">
                     <a href="#" class="me-3">
@@ -1012,9 +1075,9 @@
             <div class="qantity-total">
                 <h6>Total Quantity Desired (You & Guests)</h6>
                 <div class="qty-container ms-auto">
-                   
+
                     <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
-                  
+
                     <input type="number" id="sub_quantity" name="sub_quantity" value="0" class="input-qty" />
                     <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
@@ -1045,8 +1108,9 @@
                     @csrf
                     {{-- @method('PUT') --}}
                     <div class="input-form">
-                        <input class="form-control" type="text" oninput="clearError(this)" maxlength="30" id="categorys" name="category"
-                            placeholder="ie, Appetizers, Salads, Main Dishes" val="">
+                        <input class="form-control" type="text" oninput="clearError(this)" maxlength="30"
+                            id="categorys" name="category" placeholder="ie, Appetizers, Salads, Main Dishes"
+                            val="">
                         <span id="categorys-sub-con" class="sub-con"><span id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
@@ -1055,7 +1119,8 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantitys" name="quantity" value="" class="input-qty" />
+                            <input type="number" id="quantitys" name="quantity" value=""
+                                class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                         <span class="error_message_quantity" style="color: red; font-size: 12px;"></span>
@@ -1080,7 +1145,7 @@
             <div class="modal-body">
                 <div class="delete-modal">
                     <div class="delete-icon">
-                        <img src="{{asset('assets/front/image/info-circle.png')}}" alt="delete">
+                        <img src="{{ asset('assets/front/image/info-circle.png') }}" alt="delete">
                     </div>
                     <h4>Delete Potluck Category</h4>
                     <h4>Deleting this category will delete all items under this category.</h4>

@@ -269,6 +269,7 @@ $(document).on("click", ".comment-send-icon_old", function () {
     const commentInput = $("#post_comment");
     const commentText = commentInput.val().trim();
     const commentId = $("#parent_comment_id").val();
+    var login_user_id = $("#login_user_id").val();
     const replyParentId = $(this)
         .closest(".reply-on-comment")
         .data("comment-id");
@@ -343,7 +344,11 @@ $(document).on("click", ".comment-send-icon_old", function () {
                             </div>
                             <div class="posts-card-like-comment-right">
                                 <p>${data.posttime}</p>
-                                <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                 <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
+                        data.id
+                    }" data-user-id="${login_user_id}">
+                                    <i class="fa-regular fa-heart"></i>
+                                    </button>
                             </div>
                         </div>
                         <div class="commented-user-content">
@@ -352,9 +357,13 @@ $(document).on("click", ".comment-send-icon_old", function () {
                         <div class="commented-user-reply-wrp">
                             <div class="position-relative d-flex align-items-center gap-2">
                                 <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                <p>0</p>
+                                <p id="commentTotalLike_${data.id}">
+                                  0
+                                    </p>
                             </div>
-                            <button class="commented-user-reply-btn">Reply</button>
+                            <button class="commented-user-reply-btn" data-comment-id="${
+                                    data.id
+                                }">Reply</button>
                         </div>
                         <ul class="primary-comment-replies"></ul>
                     </li>
@@ -898,6 +907,7 @@ $(document).on("click", ".open_photo_model", function () {
         $("#detail-photo-modal").modal("show");
     } // Open the modal
     // Fetch the post ID from the data attribute
+    var login_user_id = $("#login_user_id").val();
     const postId = $(this).data("post-id");
     const eventId = $(this).data("event-id");
     const rawData = $(this).data("image"); // Get raw data
@@ -987,7 +997,7 @@ $(document).on("click", ".open_photo_model", function () {
         data: { id: postId, event_id: eventId },
         success: function (response) {
             const dataArray = response.data; // This is an array
-            console.log(dataArray);
+            console.log(response);
 
             if (Array.isArray(dataArray) && dataArray.length > 0) {
                 const data = dataArray[0]; // Access the first object in the array
@@ -1026,9 +1036,13 @@ $(document).on("click", ".open_photo_model", function () {
                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
                 }
                 // Host Label Condition
-                if (data.is_host == "Host") {
+                if (data.is_host == "1") {
                     const host = `${data.is_host}`;
-                    $("#host_display").text(host);
+                    $("#host_display").text("Host");
+                }
+                if (data.is_co_host == "1") {
+                    const co_host = `${data.is_co_host}`;
+                    $("#host_display").text("co_host");
                 }
 
                 $(".likeModel")
@@ -1054,7 +1068,7 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log("Self Reaction:", data.self_reaction); // Debugging
                 console.log(typeof data.self_reaction); // Output: string
 
-                var reaction_store = data.self_reaction.trim(); // Ensure no leading/trailing whitespace
+                var reaction_store = data.self_reaction.trim();
                 console.log("Trimmed Reaction Store:", reaction_store); // Log trimmed reaction value
                 console.log(
                     "Reaction Unicode Code:",
@@ -1065,19 +1079,19 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reaction_store);
 
                 // Check and toggle the heart icon based on the reaction
-                // const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
+                const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
                 // console.log(likeButton);
 
-                // var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
-                // console.log(unicodeString); // Will log the Unicode code as a hex string
+                var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
+                console.log(unicodeString); // Will log the Unicode code as a hex string
 
-                // if (reaction_store == unicodeString) {
-                //     console.log("User has liked the post.");
-                //     likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
-                // } else {
-                //     console.log("User has not liked the post.");
-                //     likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
-                // }
+                if (reaction_store == unicodeString) {
+                    console.log("User has liked the post.");
+                    likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
+                } else {
+                    console.log("User has not liked the post.");
+                    likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
+                }
 
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
@@ -1140,9 +1154,10 @@ $(document).on("click", ".open_photo_model", function () {
                 if (data.latest_comment && Array.isArray(data.latest_comment)) {
                     data.latest_comment.forEach((comment) => {
                         let parentCommentId = comment.id;
-                        let displayName =
-                            comment.profile ||
-                            generatePlaceholderName(comment.username);
+                        let displayName = comment.profile
+                        ? `<img src="${comment.profile}" alt="User Profile" class="profile-image">`
+                        : generatePlaceholderName(comment.username);
+
                         commentsWrapper.append(`
                             <li class="commented-user-wrp" data-comment-id="${
                                 comment.id
@@ -1170,10 +1185,12 @@ $(document).on("click", ".open_photo_model", function () {
                                 </div>
                                 <div class="commented-user-reply-wrp">
                                     <div class="position-relative d-flex align-items-center gap-2">
-                                        <button class="posts-card-like-btn">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </button>
-                                        <p>${
+                                         <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
+                                            comment.id
+                    }" data-user-id="${login_user_id}">
+                                    <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                        <p id="commentTotalLike_${comment.id}">${
                                             comment.comment_total_likes || 0
                                         }</p>
                                     </div>
@@ -1191,9 +1208,9 @@ $(document).on("click", ".open_photo_model", function () {
                             comment.comment_replies.length > 0
                         ) {
                             comment.comment_replies.forEach(function (reply) {
-                                let displayName =
-                                    reply.profile ||
-                                    generatePlaceholderName(reply.username);
+                                let displayName =reply.profile
+                                ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
+                                : generatePlaceholderName(reply.username);
                                 const replyHTML = `
 
                             <div class="commented-user-head">
@@ -1679,4 +1696,70 @@ $(".modal").on("hidden.bs.modal", function () {
 $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
     $(".create-post-upload-img-inner").removeClass("d-none");
+});
+$(document).on("click", "#CommentlikeButton", function () {
+    const button = $(this);
+    const isLiked = button.hasClass("liked");
+    let reaction = "\u{2764}"; // Toggle between 💔 or ❤️// Toggle reaction: 💔 or ❤️
+
+    // Extract necessary data
+    const eventId = button.data("event-id");
+    const eventPostCommentId = button.data("event-post-comment-id");
+    const allLikeButtons = $(
+        `button[data-event-post-comment-id='${eventPostCommentId}']`
+    );
+    const allLikeIcons = allLikeButtons.find("i");
+
+    // Select both like icons (main comment and nested reply)
+    const mainLikeIcon = button.find("i");
+
+    // Toggle like button appearance for both elements
+    // if (isLiked) {
+    //     button.removeClass("liked");
+    //     mainLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+    //    replyLikeIcon.removeClass("fa-solid").addClass("fa-regular");
+    // } else {
+    //     button.addClass("liked");
+    //     mainLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+    //     replyLikeIcon.removeClass("fa-regular").addClass("fa-solid");
+    // }
+
+    // AJAX call to update like state
+    $.ajax({
+        url: base_url + "event_wall/userPostCommentReplyReaction",
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        contentType: "application/json",
+        data: JSON.stringify({
+            event_id: eventId,
+            event_post_comment_id: eventPostCommentId,
+            reaction: reaction,
+        }),
+        success: function (response) {
+            if (response.status === 1) {
+                console.log(response);
+
+                // Update like count for both main comment and nested reply
+                $(`#commentTotalLike_${eventPostCommentId}`).text(
+                    `${response.count}`
+                );
+                if (response.self_reaction == "\u{2764}") {
+                    // Update all like buttons with the same comment ID
+                    allLikeIcons
+                        .removeClass("fa-regular")
+                        .addClass("fa-solid");
+                } else {
+                    allLikeIcons
+                        .removeClass("fa-solid")
+                        .addClass("fa-regular");
+                }
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            alert("An error occurred. Please try again.");
+        },
+    });
 });

@@ -241,7 +241,8 @@ $(document).on("click", ".plus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-
+    const itemkey = $(this).data("itemkey");
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     const item_id = $(this).data("item-id");
 
     // Increment the quantity
@@ -250,13 +251,13 @@ $(document).on("click", ".plus", function () {
     // // Optional: Update associated UI elements
 
     $("#newQuantity_" + item_id).val(currentValue + 1);
-
+    let totalitemQnt = parseInt(currentValue) + parseInt(innerUserQnt) + 1;
     const maxQuantity = input.data("max");
     if (maxQuantity) {
         const devideCount = container
             .closest(".accordion-item")
             .find("#quantity-display");
-        devideCount.text(`${currentValue + 1}/${maxQuantity}`);
+        devideCount.text(`${(parseInt(currentValue) + parseInt(innerUserQnt)) + 1}/${maxQuantity}`);
     }
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
@@ -266,20 +267,24 @@ $(document).on("click", ".plus", function () {
     categoryList.find(".itemQty").each(function () {
         spokenQuantity += parseInt($(this).val(), 10) || 0;
     });
-
+    // let categoryCount= $(".category-count-"+categoryKey).attr('data-categorycount');
+    // const totalcategoryQnt = parseInt(categoryCount) + currentValue + 1;
+    // $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
-    if (missingQuantity <= 0 || missingQuantity === 0) {
+    // if (missingQuantity <= 0 || missingQuantity === 0) {
+    if(totalitemQnt >= maxQuantity){
         // If there are no missing items (or excess items), show the success icon
-        $("#success_" + category_id).removeClass("d-none");
-        $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
+        $("#success_" + itemkey).removeClass("d-none");
+        $("#danger_" + itemkey).addClass("d-none"); // Hide the danger icon
         // Change the color of the missing quantity text to green
         categoryList.find(".missing-quantity").css("color", "green");
     } else {
         // If there are missing items, show the danger icon
-        $("#danger_" + category_id).removeClass("d-none");
+        $("#danger_" + itemkey).removeClass("d-none");
         $(".missing-quantity").addClass("active");
+        $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
     const overQuantity = spokenQuantity - totalQuantity; // Only show if this is greater than 0
@@ -312,21 +317,31 @@ $(document).on("click", ".minus", function () {
     let currentValue = parseInt(input.val(), 10) || 0;
     const category_id = $(this).data("category-id");
     const categoryKey = $(this).data("categorykey");
-
+    const itemkey = $(this).data("itemkey");
     const item_id = $(this).data("item-id");
-
+    const innerUserQnt = $(`.innerUserQnt-${itemkey}-${categoryKey}`).val() || 0;
     // Decrement the quantity, but not below 0
+    if(currentValue <= 0){
+        return
+    }
     const newValue = Math.max(0, currentValue - 1);
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
+
+    
+//     let categoryCount= $(".category-count-"+categoryKey).text();
+//    const totalcategoryQnt = parseInt(categoryCount) - 1
+//     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
+
     // Optional: Update associated UI elements
     const maxQuantity = input.data("max");
     if (maxQuantity) {
         const devideCount = container
             .closest(".accordion-item")
             .find(".devide-count");
-        devideCount.text(`${newValue}/${maxQuantity}`);
+        devideCount.text(`${parseInt(newValue) + parseInt(innerUserQnt)}/${maxQuantity}`);
     }
+    let totalitemQnt = parseInt(newValue) + parseInt(innerUserQnt);
     const categoryList = container.closest(".category-list");
     const totalQuantity = categoryList.data("total-quantity"); // Store total in data attribute
     let spokenQuantity = 0;
@@ -339,17 +354,18 @@ $(document).on("click", ".minus", function () {
     // Update missing quantity
     const missingQuantity = Math.max(0, totalQuantity - spokenQuantity);
     categoryList.find(".missing-quantity").text(`${missingQuantity} Missing`);
-    if (missingQuantity === 0 || missingQuantity <= 0) {
+    if(totalitemQnt >= maxQuantity){
+    // if (missingQuantity === 0 || missingQuantity <= 0) {
         // If there are no missing items (or excess items), show the success icon
-        $("#success_" + category_id).removeClass("d-none");
-        $("#danger_" + category_id).addClass("d-none"); // Hide the danger icon
+        $("#success_" + itemkey).removeClass("d-none");
+        $("#danger_" + itemkey).addClass("d-none"); // Hide the danger icon
         // Change the color of the missing quantity text to green
         categoryList.find(".missing-quantity").css("color", "green");
     } else {
         // If there are missing items, show the danger icon
-        $("#danger_" + category_id).removeClass("d-none");
+        $("#danger_" + itemkey).removeClass("d-none");
         $(".missing-quantity").addClass("active");
-        $("#success_" + category_id).addClass("d-none");
+        $("#success_" + itemkey).addClass("d-none");
         categoryList.find(".missing-quantity").css("color", "red");
     }
     const overQuantity = spokenQuantity - totalQuantity;
@@ -397,6 +413,7 @@ $(document).on("click", ".saveItemBtn", function () {
             quantity: item_quantity,
         },
         success: function (response) {
+            window.location.href="";
             if (response.success) {
                 //   alert('Quantity saved successfully');
             }
@@ -587,6 +604,7 @@ function updateTOP(categoryIndex) {
 
     let totalMissing = 0;
     let totalOver = 0;
+    let totalcount = 0;
 
     for (let i = 0; i < totalItems; i++) {
         let categoryItem = accordions[i];
@@ -605,9 +623,11 @@ function updateTOP(categoryIndex) {
         console.log({ inputQty });
         let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
         console.log({ innerUserQnt });
+        
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
+        totalcount += inputQty 
         console.log({ inputQty });
 
         if (inputQty < requiredQty) {
@@ -616,6 +636,8 @@ function updateTOP(categoryIndex) {
             totalOver += inputQty - requiredQty;
         }
     }
+
+    $('.category-count-'+ categoryIndex).text(totalcount)
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {

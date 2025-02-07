@@ -247,7 +247,7 @@ class EventPotluckController extends Controller
                 }, 'event_schedule', 'event_settings' => function ($query) {
                     $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
                 },  'event_invited_user' => function ($query) {
-                    $query->where('is_co_host', '0')->with('user');
+                    $query->where('is_co_host', '1')->with('user');
                 }])->where('id', $event)->first();
                 $guestView = [];
                 $eventDetails['id'] = $eventDetail->id;
@@ -673,19 +673,19 @@ class EventPotluckController extends Controller
     {
         $user  = Auth::guard('web')->user();
 
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'],'user_id'=>$user->id, 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
 
         // if ($input['quantity'] <= $checkQty) {
         $checkIsExist = UserPotluckItem::where([
-            'id' => $checkCarryQty['id']
+            'id' => $checkCarryQty['id'],'user_id'=>$user->id,
         ])->first();
         if ($checkIsExist != null) {
             $checkIsExist->quantity = $request['quantity'];
             $checkIsExist->save();
         }
 
-        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id']])->first();
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id']])->sum('quantity');
+        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id'],'user_id'=>$user->id,])->first();
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id'],'user_id'=>$user->id,])->sum('quantity');
 
         $getCarryUser =  [
             "id" => $getUserItemData->id,
@@ -766,7 +766,8 @@ class EventPotluckController extends Controller
                 'is_host' => ($getUserItemData->user_id == $user->id) ? 1 : 0,
                 'profile' => $getUserItemData->users->profile ? asset('storage/profile/' . $getUserItemData->users->profile) : '',
                 'first_name' => $getUserItemData->users->firstname,
-                'quantity' => $getUserItemData->quantity ?? '0',
+                'quantity' => $quantity ?? '0',
+                // 'quantity' => $getUserItemData->quantity ?? '0',
                 'last_name' => $getUserItemData->users->lastname,
                 'event' => $request->event_id,
                 'category_id' => $categoryId,
@@ -793,9 +794,9 @@ class EventPotluckController extends Controller
     public function deleteUserPotluckItem(Request $request)
     {
         $user  = Auth::guard('web')->user();
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'user_id'=>$user->id,'event_potluck_item_id' => $request['category_item_id']])->first();
         $checkIsExist = UserPotluckItem::where([
-            'id' =>  $checkCarryQty['id']
+            'id' =>  $checkCarryQty['id'], 'user_id'=>$user->id
         ])->first();
 
         $event_potluck_item_id = $checkIsExist->event_potluck_item_id;
@@ -805,7 +806,7 @@ class EventPotluckController extends Controller
         }
 
 
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id])->sum('quantity');
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id , 'user_id'=>$user->id,'event_potluck_category_id' => $request['category_id'],])->sum('quantity');
         return response()->json([
             'success' => true,
             'spoken_for' => $spoken_for,

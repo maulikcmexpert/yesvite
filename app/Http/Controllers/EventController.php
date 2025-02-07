@@ -176,12 +176,14 @@ class EventController extends BaseController
         $eventDetail['isCohost'] = "1";
         $eventDetail['isCopy'] = "";
         $eventDetail['alreadyCount'] = 0;
+         
         if (isset($request->id) && $request->id != '') {
             $title = 'Edit Event';
-            $getEventData = Event::with('event_schedule')->where('id', $request->id)->first();
+            $eventID= decrypt($request->id);
+            $getEventData = Event::with('event_schedule')->where('id', $eventID)->first();
 
 
-            if ($request->id != "") {
+            if ($eventID != "") {
                 // dD();
                 $eventDetail['isCohost'] = $getEventData->is_draft_save;
 
@@ -190,7 +192,7 @@ class EventController extends BaseController
                 $userIds = session()->get('user_ids', []);
 
                 $invitedYesviteUsers = EventInvitedUser::with('user')
-                    ->where('event_id', $request->id)
+                    ->where('event_id', $eventID)
                     ->where('is_co_host', '0')
                     ->whereNotNull('user_id')
                     ->whereNull('sync_id')
@@ -235,7 +237,7 @@ class EventController extends BaseController
 
                 $userIdsSession = session()->get('contact_ids', []);
                 $invitedContactUsers = EventInvitedUser::with('user')
-                    ->where('event_id', $request->id)
+                    ->where('event_id', $eventID)
                     ->where('is_co_host', '0')
                     // ->whereNull('user_id')
                     ->whereNotNull('sync_id')
@@ -275,7 +277,7 @@ class EventController extends BaseController
             }
             $eventDetail['alreadyCount'] = count(session('contact_ids')) + count(session('user_ids'));
             // dd(session('user_ids'));
-            // $getEventData = Event::with('event_schedule')->where('id',decrypt($request->id))->first();
+            // $getEventData = Event::with('event_schedule')->where('id',decrypt($eventID))->first();
             if ($getEventData != null) {
 
                 if ($request->iscopy != null) {
@@ -283,7 +285,7 @@ class EventController extends BaseController
                 }
                 // dd($eventDetail );
                 $eventDetail['inviteCount'] = EventInvitedUser::with('user')
-                    ->where('event_id', $request->id)->where('is_co_host', '0')
+                    ->where('event_id', $eventID)->where('is_co_host', '0')
                     ->count();
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
 
@@ -3298,7 +3300,7 @@ class EventController extends BaseController
 
     public function  editStore(Request $request)
     {
-
+        
         // dd($request->slider_images);
 
 
