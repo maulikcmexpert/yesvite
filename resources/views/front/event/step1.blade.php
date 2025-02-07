@@ -810,6 +810,7 @@
                     foreach ($totalActivityByDate as $key => $value) {
                         $localdate[] = $key;
                     }
+                    dd($localdate);
                         $j=0;
                     @endphp
                     @while (strtotime($currentDate) <= strtotime($eventDetail['end_date']))
