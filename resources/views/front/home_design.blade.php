@@ -61,7 +61,7 @@
                                                                                             <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
                                                                                                 {{ $textData->subcategories->subcategory_name }}
                                                                                             </label>
-                                                                                            <input class="form-check-input" type="checkbox"
+                                                                                            <input class="form-check-input" name="design_subcategory" type="checkbox"
                                                                                                 id="subcategory{{ $textData->subcategories->id }}"
                                                                                                 data-category-id="{{ $textData->categories->id }}"
                                                                                                 data-subcategory-id="{{ $textData->subcategories->id }}">
