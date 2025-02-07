@@ -40,6 +40,7 @@ class EventPhotoController extends Controller
         $user  = Auth::guard('web')->user();
         $firstname = $user->firstname;
         $lastname = $user->lastname;
+        $selectedFilters=[];
         $photos = $user->profile;
         // dd(1);
         $js = ['event_photo'];
@@ -680,7 +681,7 @@ class EventPhotoController extends Controller
             }
             $current_page = "photos";
             $login_user_id  = $user->id;
-            return view('layout', compact('page', 'js', 'postList', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            return view('layout', compact('page', 'js', 'postList', 'selectedFilters','title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             dd($e);
