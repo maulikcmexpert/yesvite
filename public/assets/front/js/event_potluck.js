@@ -601,6 +601,7 @@ function updateTOP(categoryIndex) {
 
     let totalMissing = 0;
     let totalOver = 0;
+    let totalcount = 0;
 
     for (let i = 0; i < totalItems; i++) {
         let categoryItem = accordions[i];
@@ -619,9 +620,11 @@ function updateTOP(categoryIndex) {
         console.log({ inputQty });
         let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
         console.log({ innerUserQnt });
+        
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
+        totalcount += inputQty 
         console.log({ inputQty });
 
         if (inputQty < requiredQty) {
@@ -630,6 +633,8 @@ function updateTOP(categoryIndex) {
             totalOver += inputQty - requiredQty;
         }
     }
+
+    ('category-count-'+ categoryIndex).text(totalcount)
     $("#missing-category-" + categoryIndex).text(totalMissing);
     $("#extra-category-" + categoryIndex).text(totalOver);
     if (totalMissing == 0) {
