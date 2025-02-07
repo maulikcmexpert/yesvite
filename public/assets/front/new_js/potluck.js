@@ -5,6 +5,8 @@ var buttonMinus = $(".qty-btn-minus");
 var incrementPlus = buttonPlus.click(function(e) {
   // e.preventDefault();
   // e.stopPropagation();
+  alert(1)
+
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
@@ -14,6 +16,7 @@ $n.val(Number($n.val())+1 );
 var incrementMinus = buttonMinus.click(function(e) {
   // e.preventDefault();
   // e.stopPropagation();
+  alert(0)
 var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
