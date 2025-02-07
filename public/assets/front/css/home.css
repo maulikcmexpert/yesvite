@@ -892,6 +892,9 @@
 
     .step_2 .collection-card .card-img {
         height: 215px;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
     }
 }
 
@@ -1028,9 +1031,9 @@
         align-items: flex-start;
     }
 
-    .collection-wrapper .filter-main-wrp h5.total-items {
+    /* .collection-wrapper .filter-main-wrp h5.total-items {
         margin-left: 0 !important;
-    }
+    } */
 
     .collection-wrapper .filter-dropdowns {
         margin-top: 10px;
