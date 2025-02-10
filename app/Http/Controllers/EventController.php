@@ -111,7 +111,7 @@ class EventController extends BaseController
             ->orderBy('id', 'desc')
             ->get();
 
-        // dd($categories);
+        dd($categories);
         // Calculate total count of textdatas across all subcategories
         $totalTextDataCount = $categories->sum(function ($category) {
             return $category->subcategory->sum(function ($subcategory) {
