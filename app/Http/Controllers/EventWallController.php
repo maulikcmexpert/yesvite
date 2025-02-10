@@ -1779,10 +1779,11 @@ class EventWallController extends Controller
     public function get_reaction_post_list(Request $request){
         $user = Auth::guard('web')->user();
         $post_id=$request->post_id;
-        dd($user->id,$post_id);
-        $checkUserIsReaction = EventPostReaction::where('event_post_id', $value->id)
-    ->with(['user'])
-    ->get();
+        $getreaction = EventPostReaction::where('event_post_id', $post_id)
+        ->with(['user'])
+        ->get();
+
+        dd($getreaction);
     }
 
 
