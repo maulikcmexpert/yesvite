@@ -945,7 +945,7 @@
                                     <i id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                             alt="" class="emoji model_emoji"></i></button>
 
-                                <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
+                                <div class="photos-likes-options-wrp emoji-picker model_emoji" id="emojiDropdown"
                                     style="display: none;">
                                     <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
                                         class="emoji model_emoji" data-emoji="❤️" data-unicode="\\u{2764}">
