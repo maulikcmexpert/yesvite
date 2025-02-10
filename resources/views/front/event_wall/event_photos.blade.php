@@ -401,12 +401,12 @@
                                                                     <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
                                                                         loading="lazy" alt="Thumb Emoji"
                                                                         class="emoji" data-emoji="👍"
-                                                                        data-unicode="\\u{1F44D}">
+                                                                        data-unicode="\u{1F44D}">
                                                                 @elseif($reaction == '\u{1F44F}')
                                                                     <img src="{{ asset('assets/front/img/clap-icon.png') }}"
                                                                         loading="lazy" alt="Clap Emoji"
                                                                         class="emoji" data-emoji="👏"
-                                                                        data-unicode="\\u{1F44F}">
+                                                                        data-unicode="\u{1F44F}">
                                                                 @endif
 
                                                                 </li>
