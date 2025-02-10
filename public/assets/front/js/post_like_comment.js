@@ -310,7 +310,7 @@ $(document).ready(function () {
                             emoji_name="clap-icon";
                         }
 
-                        console.log(emoji_name);
+                        console.log(reactionIcons[reaction]);
                         if (reactionIcons[reaction]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
