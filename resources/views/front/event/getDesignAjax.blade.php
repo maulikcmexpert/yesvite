@@ -1,7 +1,7 @@
 @foreach ($categories as $category)
 @foreach ($category->subcategory as $subcategory)
     @foreach ($subcategory->textdatas as $image)
-        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
+        <div id="category_name" class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
             data-category-id="{{ $category->id }}" 
             data-subcategory-id="{{ $subcategory->id }}" 
             data-category_name="{{ $category->category_name }}" 
