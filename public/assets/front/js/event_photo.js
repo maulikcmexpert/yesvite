@@ -1,6 +1,19 @@
 $(document).ready(function () {
     // Function to update character count
 
+    let reactionIcons = {
+        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    };
+
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
@@ -897,6 +910,7 @@ $(document).on("click", ".download_img_single", function () {
     }
 });
 
+
 $(document).on("click", ".open_photo_model", function () {
     clearTimeout(pressTimer); // Clear the timer
     console.log("Mouse up or leave detected");
@@ -1076,22 +1090,14 @@ $(document).on("click", ".open_photo_model", function () {
                     reaction_store.charCodeAt(0)
                 ); // Log the Unicode code of the first character
 
-                // var reaction_store = data.self_reaction.trim(); // Ensure no leading/trailing whitespace
+
                 console.log(reaction_store);
 
-                // Check and toggle the heart icon based on the reaction
-                const likeButton = $("#likeButtonModel").find("i"); // Ensure this targets the right button
-                // console.log(likeButton);
 
-                var unicodeString = "\\u{2764}"; // This is the string as you want it: "\u{2764}"
-                console.log(unicodeString); // Will log the Unicode code as a hex string
 
-                if (reaction_store == unicodeString) {
-                    console.log("User has liked the post.");
-                    likeButton.removeClass("fa-regular").addClass("fa-solid"); // Add filled heart class
-                } else {
-                    console.log("User has not liked the post.");
-                    likeButton.removeClass("fa-solid").addClass("fa-regular"); // Add empty heart class
+                let reactionImageHtml = "";
+                if (reactionIcons[reaction]) {
+                    reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="Reaction Emoji">`;
                 }
 
                 // Update the emoji list based on the reaction
