@@ -35,12 +35,12 @@
         @foreach ($eventPasttList as $key=>$pastEvent )
               @php
                     $i=0;
-            
+
                     if($key==0){
                         $month=$pastEvent['event_month'];
                         $month_change = $month;
                     }
-                    
+
                     $current_month = $pastEvent['event_month'];
                   $colorClass = $series[$colorIndex % count($series)];
                   $colorIndex++;
@@ -54,9 +54,9 @@
                         @if($pastEvent['host_profile'] != "")
                             <img src="{{$pastEvent['host_profile']}}" loading="lazy" alt="">
                         @else
-                        @php 
+                        @php
                             $name = $pastEvent['host_name'];
-                            $parts = explode(" ", $name); 
+                            $parts = explode(" ", $name);
                             $firstInitial = isset($parts[0]) ? strtoupper($parts[0][0]) : '';
                             $secondInitial = isset($parts[1]) ? strtoupper($parts[1][0]) : '';
                             $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
@@ -76,7 +76,7 @@
                                 <li><span>Hosting</span></li>
                             @elseif($pastEvent['is_co_host'] == "1")
                               <li><span>Co-Hosting</span></li>
-                            @endif        
+                            @endif
                             @if($pastEvent['is_event_owner']!=1)                                      @if($pastEvent['rsvp_status'] == '1')
                                         <li><span>Guest : </span> RSVP - Yes</li>
                                     @elseif($pastEvent['rsvp_status'] == '2')
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-right zoom_img" data-img="{{ $upcomingEvent['event_images'] }}">
+                <a href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{ $pastEvent['event_images'] }}">
                   <img src="{{$pastEvent['event_images']}}" loading="lazy" alt="">
               </a>
             </div>
@@ -163,7 +163,7 @@
       <div class="all-events-month-show-wrp">
         {{-- <h6 class="all-events-month-show" id="tabbtn3">jun</h6> --}}
         @if ($month!="")
-        <h6 class="all-events-month-show" id="tabbtn3">{{$month}}</h6> 
+        <h6 class="all-events-month-show" id="tabbtn3">{{$month}}</h6>
         @endif
       </div>
     </div>

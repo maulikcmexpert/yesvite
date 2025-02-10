@@ -292,6 +292,7 @@ class AccountSettingController extends BaseController
         $id = Auth::guard('web')->user()->id;
 
         $user = User::with('user_profile_privacy')->withCount(
+
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
