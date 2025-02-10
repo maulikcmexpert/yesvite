@@ -115,7 +115,7 @@
         </div>
 
 
-        <div class="row list_all_design_catgeory">
+        <div class="row list_all_design_catgeory_image">
             
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)

@@ -15,10 +15,10 @@ $(document).ready(function () {
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         } if (rsvpStatus == "1") {
+
             adults = $('input[name="adults"]').val();
             kids = $('input[name="adults"]').val();
-            console.log($('input[name="adults"]').val(0));
-            console.log($('input[name="kids"]').val(0));
+
             $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
             $('button[type="submit"]').prop('disabled', true); // Disable submit initially
         }
@@ -205,6 +205,7 @@ $(document).ready(function () {
         $('button[type="submit"]').prop('disabled', true);
         var rsvpStatus = $('#statusRsvp').val();
         if (rsvpStatus == '1') {
+            $('button[type="submit"]').prop('disabled', true);
             $("#option6").prop('checked', false);
             $("#option5").prop('checked', true);
             $('.btn-plus, .btn-minus').prop('disabled', false);
