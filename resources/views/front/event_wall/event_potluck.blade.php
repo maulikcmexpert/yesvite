@@ -460,6 +460,7 @@
                                                                             data-bs-target="#editcategorymodal"
                                                                             data-category-id="{{ $category['id'] }}"
                                                                             data-category-name="{{ $category['category'] }}"
+                                                                            data-event-id="{{ $event }}"
                                                                             data-category-quantity="{{ $category['quantity'] }}">
                                                                             <div class="d-flex align-items-center">
                                                                                 <span class="me-2">
@@ -1112,7 +1113,7 @@
                         <input class="form-control" type="text" oninput="clearError(this)" maxlength="30"
                             id="categorys" name="category" placeholder="ie, Appetizers, Salads, Main Dishes"
                             val="">
-                        <span id="categorys-sub-con" class="sub-con"><span class="char_count" id="charCount">0</span>/30</span>
+                        <span id="categorys-sub-con" class="sub-con"><span class="char_count_{{$event}}" id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ $event }}">
