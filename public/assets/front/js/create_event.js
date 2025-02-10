@@ -1483,6 +1483,9 @@ function set_activity_html(selectedDates) {
             $("#firstActivityTime").val(dateID);
         }
         i++;
+        console.log(startDate);
+        console.log(sortedDates[0]);
+        console.log(startDate.isSame(moment(sortedDates[0]), "day"));
         var formHtml = `
      <div class="activity-schedule-wrp">
         <div class="activity-schedule-head">
