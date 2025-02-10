@@ -1475,26 +1475,31 @@ $(document).on('click','.get_post_emoji_list',function(){
                     if (reaction == "\\u{2764}"){
                         tabId = "nav-heart-reaction";
                         emoji_name="heart-emoji";
+                        count="heart-count";
                     }  
                         
                     else if (reaction == "\\u{1F44D}"){
                         tabId = "nav-thumb-reaction";
                         emoji_name="thumb-icon";
+                        count="thumb-count";
 
                     } 
                     else if (reaction == "\\u{1F604}"){
                         tabId = "nav-smily-reaction";
                         emoji_name="smily-emoji";
+                        count="smily-count";
 
                     } 
                     else if (reaction == "\\u{1F60D}"){
                         tabId = "nav-eye-heart-reaction"
                         emoji_name="eye-heart-emoji";
+                        count="eye-heart-count";
 
                     }
                     else if (reaction == "\\u{1F44F}"){
                         tabId = "nav-clap-reaction"
                         emoji_name="clap-icon";
+                        count="clap-count";
 
                     }
 
@@ -1536,7 +1541,7 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     // Update Reaction Counts in Tabs
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
-                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> ${reactionCount}`);
+                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
                 });
 
                 // Show modal
