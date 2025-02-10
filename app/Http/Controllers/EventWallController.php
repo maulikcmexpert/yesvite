@@ -1787,9 +1787,9 @@ class EventWallController extends Controller
         foreach ($getreaction as $reaction) {
             $reactionWiseUsers[$reaction->reaction][] = [
                 'user_id' => $reaction->user->id ?? null,
-                'firstname' => $reaction->user->first_name ?? null,
-                'lastname' => $reaction->user->last_name ?? null,
-                'profile' => $reaction->user->profile ?? null,
+                'firstname' => $reaction->user->firstname ?? null,
+                'lastname' => $reaction->user->lastname ?? null,
+                'profile' =>  asset('storage/profile/' . $reaction->user->profile) ?? null,
             ];
         }
         $totalReactions = $getreaction->count();
