@@ -202,6 +202,7 @@ $(document).ready(function () {
         }
     })
     $(".attending-btn").on('click', function () {
+        $('button[type="submit"]').prop('disabled', true);
         var rsvpStatus = $('#statusRsvp').val();
         if (rsvpStatus == '1') {
             $("#option6").prop('checked', false);
