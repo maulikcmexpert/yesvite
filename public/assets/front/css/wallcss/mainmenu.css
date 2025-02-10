@@ -3288,7 +3288,7 @@
         display: none;
     } */
     .home-upcoming-events-card-rsvp-data h6 {
-        font-size: 15px;
+        font-size: 16px;
     }
     .home-upcoming-events-card-right {
         max-width: 145px;
@@ -3493,7 +3493,7 @@
         border-bottom: 1px solid var(--border);
     }
     .home-upcoming-events-card-rsvp-data h6 {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .home-upcoming-events-card-left {
@@ -3528,5 +3528,8 @@
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 120px;
+    }
+    .home-upcoming-events-card-rsvp-data {
+        gap: 15px;
     }
 }
