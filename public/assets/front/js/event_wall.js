@@ -1424,24 +1424,7 @@ function generateProfileImage(firstname, lastname) {
 }
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
-    $("#nav-all-reaction ul").html("");
-
-    $('#nav-all-reaction-tab').html("All 0");
-    $(`#nav-heart-reaction ul`).html("");
-    $('#heart-count').text('0');
-
-    $(`#nav-thumb-reaction ul`).html("");
-    $('#thumb-count').text('0');
-
-    $(`#nav-smily-reaction ul`).html("");
-    $('#smily-count').text('0');
-
-    $(`#nav-eye-heart-reaction ul`).html("");
-    $('#eye-heart-count').text('0');
-
-    $(`#nav-clap-reaction ul`).html("");
-    $('#clap-count').text('0');
-
+ 
 
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
@@ -1542,18 +1525,37 @@ $(document).on('click','.get_post_emoji_list',function(){
         },
     });
 });
-// $("#reaction-modal").on("shown.bs.modal", function () {
-//     // $(".tab-pane").removeClass("active show");
-//     // $(".nav-link").removeClass("active");
+$("#reaction-modal").on("shown.bs.modal", function () {
+    // $(".tab-pane").removeClass("active show");
+    // $(".nav-link").removeClass("active");
 
-//     $("#nav-all-reaction").addClass("active show");
-//     $("#nav-all-reaction-tab").addClass("active");
-//     $("#nav-heart-reaction-tab").removeClass("active");
-//     $("#nav-thumb-reaction-tab").removeClass("active");
-//     $("#nav-smily-reaction-tab").removeClass("active");
-//     $("#nav-eye-heart-reaction-tab").removeClass("active");
-//     $("#nav-clap-reaction-tab").removeClass("active");  
-// });
+    $("#nav-all-reaction").addClass("active show");
+    $("#nav-all-reaction-tab").addClass("active");
+    $("#nav-heart-reaction-tab").removeClass("active");
+    $("#nav-thumb-reaction-tab").removeClass("active");
+    $("#nav-smily-reaction-tab").removeClass("active");
+    $("#nav-eye-heart-reaction-tab").removeClass("active");
+    $("#nav-clap-reaction-tab").removeClass("active");  
+
+    $("#nav-all-reaction ul").html("");
+
+    $('#nav-all-reaction-tab').html("All 0");
+    $(`#nav-heart-reaction ul`).html("");
+    $('#heart-count').text('0');
+
+    $(`#nav-thumb-reaction ul`).html("");
+    $('#thumb-count').text('0');
+
+    $(`#nav-smily-reaction ul`).html("");
+    $('#smily-count').text('0');
+
+    $(`#nav-eye-heart-reaction ul`).html("");
+    $('#eye-heart-count').text('0');
+
+    $(`#nav-clap-reaction ul`).html("");
+    $('#clap-count').text('0');
+
+});
 
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {
