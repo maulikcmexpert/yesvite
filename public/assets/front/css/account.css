@@ -241,7 +241,7 @@
     color: #000 !important;
 }
 
-.credit-hisotry-btn{
+.cmn-btn.credit-hisotry-btn{
     border: 1px solid #fff !important;
     backdrop-filter: blur(100px);
     background-color: transparent !important;
