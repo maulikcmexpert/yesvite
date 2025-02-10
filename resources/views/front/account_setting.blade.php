@@ -70,6 +70,15 @@
                                     <span>Exp: {{$user->join_date}}</span>
                                     <!-- <a href="#">Click to change plan</a> -->
                                 </div>
+                                <div class="account-setting-credit-wrp">
+                                    <div class="credits_balance_amout_wrp">
+                                        <h5>
+                                            <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
+                                            <span class="available-coins">558</span>
+                                        </h5>
+                                        <h6>Compared to 43 credits last month</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <span>
@@ -176,7 +185,7 @@
                             </svg>
                         </a>
                     </div>
-                   
+
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">SECURITY</h5>
                         <a href="{{route('profile.change_password')}}" class="d-flex align-items-center public-view border-bottom">
