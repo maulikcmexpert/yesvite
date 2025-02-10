@@ -184,7 +184,7 @@
                                 </div>
                         </div>
                     </div>
-                    <a  href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{ $events['event_images'] }}">
+                    <a  href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{ $upcomingEvent['event_images'] }}">
                         <img src="{{$upcomingEvent['event_images']}}" loading="lazy" alt="">
                     </a>
                 </div>
