@@ -2787,13 +2787,14 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    position: fixed;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15px;
-    z-index: 10;
+    bottom: 0px;
+    z-index: 20;
     border: none;
     pointer-events: auto;
+    margin-top: 20px;
 }
 
 .mobile-calender-btn span {
@@ -2982,9 +2983,12 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    padding: 50px;
+    padding: 20px;
     gap: 20px;
     overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 15px !important;
+    z-index: 10;
 }
 
 .responsive-calender-months {
@@ -3014,13 +3018,15 @@
 .responsive-calender-month-wrp {
     display: block;
     position: absolute;
-    top: 146px;
-    left: 0;
+    top: 121px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    max-width: 100%;
+    max-width: calc(100% - 40px);
     padding: 0px !important;
     z-index: 1000;
 }
+
 .responsive-calender-title-wrp {
     display: block;
     position: fixed;
@@ -3081,6 +3087,10 @@
 }
 
 .calender-supportive-div{
+    position: relative;
+}
+
+.home-center-main{
     position: relative;
 }
 
