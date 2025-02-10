@@ -2991,16 +2991,25 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100% - 2%);
+    width: 100%;
 }
 
 .responsive-calendar .month {
+    width: 100%;
     max-width: 100%;
     margin: 0px auto;
     margin-bottom: 20px;
 }
-.responsive-calendar .day {
-    width: 70px;
+
+.responsive-calendar .week{
+    display: flex;
+    align-items: center;
 }
+
+.responsive-calendar .day {
+    width: 100%;
+}
+
 .responsive-calender-month-wrp {
     display: block;
     position: absolute;

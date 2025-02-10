@@ -2081,7 +2081,29 @@
                         @csrf
                         <div class="modal-header">
                             <div class="d-flex align-items-center">
+                                @if ($eventDetails['user_profile'] != '')
                                 <img src="{{ $eventDetails['user_profile'] }}" alt="rs-img" class="about-rs-img">
+                            @else
+                                @php
+
+                                    // $parts = explode(" ", $name);
+                                    $nameParts = explode(' ', $eventDetails['hosted_by']);
+                                    $firstInitial = isset($nameParts[0][0])
+                                        ? strtoupper($nameParts[0][0])
+                                        : '';
+                                    $secondInitial = isset($nameParts[1][0])
+                                        ? strtoupper($nameParts[1][0])
+                                        : '';
+                                    $initials = $firstInitial . $secondInitial;
+
+                                    // Generate a font color class based on the first initial
+                                    $fontColor = 'fontcolor' . $firstInitial;
+                                @endphp
+                                <h5 class="{{ $fontColor }}">
+                                    {{ $initials }}
+                                </h5>
+                            @endif
+
                                 <div>
                                     <h4 class="modal-title" id="aboutsuccessLabel">{{ $eventDetails['event_name'] }}
                                     </h4>
