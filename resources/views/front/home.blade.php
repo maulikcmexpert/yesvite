@@ -9,7 +9,7 @@ $getSocialLink = getSocialLink();
         <div class="row">
             <x-front.sidebar :profileData="[]" />
 
-            <div class="col-xl-9 col-lg-9 col-md-8">
+            <div class="calender-supportive-div col-xl-9 col-lg-9 col-md-8">
                 <div class="row">
                     <div class="col-xl-8">
                         <div class="home-center-main">
