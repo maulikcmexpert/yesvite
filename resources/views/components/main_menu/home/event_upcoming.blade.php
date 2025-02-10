@@ -44,7 +44,7 @@
                     <p>{{$events['host_name']}}<span><i class="fa-solid fa-circle"></i> {{$events['post_time']}}</span></p>
                 </div>
               </a>
-              <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}">
+              <a href="{{ $eventRoute   }}">
                   <ul class="home-upcoming-events-card-left-detail">
                       @if($events['is_event_owner']==1)
                           <li><span>Hosting</span></li>
@@ -140,10 +140,27 @@
                 @endif
             </div>
         </div>
-        <a href="{{ route('event.event_wall', encrypt(value: $events['id']))  }}" class="home-upcoming-events-card-right">
-            <img src="{{$events['event_images']}}" loading="lazy" alt="">
+        <a href="" class="home-upcoming-events-card-right image-zoom-icon">
+            <img src="{{$events['event_images']}}"  data-img="{{ $events['event_images'] }}"loading="lazy" alt="">
         </a>
     </div>
     @endforeach
   </div>
   @endif
+  <script>
+  $(document).ready(function () {
+    $(".image-zoom-icon").click(function () {
+        var imgSrc = $(this).data("img");
+
+        $.magnificPopup.open({
+            items: {
+                src: imgSrc,
+                type: "image"
+            },
+            gallery: {
+                enabled: false
+            }
+        });
+    });
+});
+</script>

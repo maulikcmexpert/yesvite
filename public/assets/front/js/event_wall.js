@@ -1424,7 +1424,6 @@ function generateProfileImage(firstname, lastname) {
 }
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
-    $('#home_loader').css('display','flex');
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
         type: "POST",
@@ -1437,7 +1436,7 @@ $(document).on('click','.get_post_emoji_list',function(){
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            
+            console.log(response);
             if (response.status === 1) {
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
@@ -1483,11 +1482,6 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     let reactionHtml = "";
                     let profile="";
-                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> 0`);
-                    $(`#${tabId} ul`).html("");
-                    $("#nav-all-reaction ul").html("");
-
-
                     users.forEach(user => {
                         if(user.profile==""){
                             profile=generateProfileImage(user.firstname,user.lastname);
@@ -1527,11 +1521,10 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                 // Show modal
                 $("#reaction-modal").modal("show");
-                $('#home_loader').css('display','none');
             }
         },
         error: function (xhr, status, error) {
-            $('#home_loader').css('display','none');
+            $("#home_loader").css("loader", "none");
             toastr.error("Something went wrong!");
             console.error(xhr.responseText);
         },
