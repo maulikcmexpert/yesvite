@@ -1478,7 +1478,7 @@ class EventWallController extends Controller
         // } else {
         //     sendNotification('upload_post', $notificationParam);
         // }
-        return redirect()->back()->with('success', 'Event Post created successfully!');
+        return redirect()->back()->with('msg', 'Event Post created successfully!');
     }
 
     public function eventViewUser($user_id, $event_id)
@@ -1773,7 +1773,7 @@ class EventWallController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Poll created successfully!');
+        return redirect()->back()->with('msg', 'Poll created successfully!');
     }
 
     public function get_reaction_post_list(Request $request){

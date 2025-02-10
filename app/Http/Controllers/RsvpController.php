@@ -629,7 +629,7 @@ class RsvpController extends BaseController
         try {
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
-                return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', "Event is past , you can't attempt RSVP");
+                return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
@@ -841,14 +841,14 @@ class RsvpController extends BaseController
 
                 }
             }
-            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Rsvp not sent');
+            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Rsvp not sent');
         } catch (QueryException $e) {
             dd($e);
-            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'DB error');
+            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'DB error');
             DB::rollBack();
         } catch (\Exception $e) {
             dd($e);
-            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('error', 'Something went wrong');
+            return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
         }
     }
 

@@ -69,14 +69,14 @@ class RolesController extends Controller
 
 
         DB::commit();
-        return redirect()->route('roles.index')->with('success', 'Role Added successfully !');
+        return redirect()->route('roles.index')->with('msg', 'Role Added successfully !');
     } catch (QueryException $e) {
 
         DB::rollBack();
 
         Log::error('Database query error' . $e->getMessage());
 
-        return redirect()->route('roles.create')->with('danger', 'Role not added' . $e->getMessage());
+        return redirect()->route('roles.create')->with('msg_error', 'Role not added' . $e->getMessage());
     }
     }
 

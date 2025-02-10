@@ -770,10 +770,10 @@ class EventPhotoController extends Controller
             // echo "===================";
             // echo $imageCount;
             // die;
-            return redirect()->back()->with('success', 'Event post uploded successfully!');
+            return redirect()->back()->with('msg', 'Event post uploded successfully!');
         }
 
-        return redirect()->back()->with('success', 'Event Post created successfully!');
+        return redirect()->back()->with('msg', 'Event Post created successfully!');
     }
 
     public function fetchPost(Request $request)

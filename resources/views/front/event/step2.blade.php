@@ -107,10 +107,11 @@
                                     <h4>{{ $category->category_name }}</h4>
                                 </a>
                             </div>
-                            @continue
+                            @break
                         @endforeach
-                        @continue
+                       
                     @endforeach
+                    
                 @endforeach
 
 
@@ -118,8 +119,10 @@
 
 
             <div class="row list_all_design_catgeory_new">
-                <p id="allchecked">back</p>
-                <h5 id="category_name" style="display:none ">Test category</h5>
+                <div class="d-flex align-items-center" style="gap: 15px">
+                    <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left" style="color: #212529; cursor: pointer;"></i></p>
+                    <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
+                </div>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
                         @foreach ($subcategory->textdatas as $image)
@@ -301,14 +304,39 @@
         })
 
         function allCheckFun() {
+            $("#search_design_category").val('')
             $('.image-item-new').hide();
             $("#category_name").hide();
             $("#allchecked").hide();
-            
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
+            let search_value ='';
+            $.ajax({
+                    url: base_url + "search_design",
+                    method: 'GET',
+                    data: {
+                        search: search_value
+                    },
+                    success: function(response) {
+                        alert()
+                        if (response.view) {
+                            $('.list_all_design_catgeory').html('');
+                            $('.list_all_design_catgeory').html(response.view);
+                            $('#home_loader').css('display', 'none');
+                            $('.total_design_count').text(response.count + ' Items')
+
+                        } else {
+                            $('.list_all_design_catgeory').html('No Design Found');
+                            $('.total_design_count').text(response.count + ' Items')
+                            $('#home_loader').css('display', 'none');
+                        }
+                    },
+                    error: function(error) {
+                        toastr.error('Some thing went wrong');
+                    }
+                });
         }
     </script>
 @endpush

@@ -55,14 +55,14 @@ class Auth extends Controller
 
 
                 if ($sendMesage['status']  == true) {
-                    return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('success', 'Verification code is sent successfully');
+                    return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
                 } else if ($sendMesage['status'] == false) {
-                    return  Redirect::to('admin')->with('error', $sendMesage['message']);
+                    return  Redirect::to('admin')->with('msg_error', $sendMesage['message']);
                 }
             }
         }
 
-        return  Redirect::to('admin')->with('error', 'Invalid credentials!');
+        return  Redirect::to('admin')->with('msg_error', 'Invalid credentials!');
     }
 
     public function twoFactorAuthenticate($id)
@@ -88,20 +88,20 @@ class Auth extends Controller
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name,'role'=>$checkOtp->role];
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin') && $checkOtp->role=="admin") {
-                return Redirect::to(URL::to('/admin/dashboard'))->with('success', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/dashboard'))->with('msg', 'Loggedin successfully!');;
             }else if(Session::has('admin') && ($checkOtp->role=="designer"||$checkOtp->role=="Designer")){
-                return Redirect::to(URL::to('/admin/create_template'))->with('success', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Loggedin successfully!');;
             }else{
-                return Redirect::to(URL::to('/admin/create_template'))->with('success', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Loggedin successfully!');;
             }
 
             // if (Session::has('admin') && ($checkOtp->role=="designer"||$checkOtp->role=="Designer")) {
 
             // }
 
-            return Redirect::to(URL::to('/admin'))->with('error', 'Invalid credentials!');;
+            return Redirect::to(URL::to('/admin'))->with('msg_error', 'Invalid credentials!');;
         }
-        return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('error', 'Invalid verification code');
+        return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('msg_error', 'Invalid verification code');
     }
 
     public function checkEmail(Request $req)
@@ -140,9 +140,9 @@ class Auth extends Controller
         $admin->email = $req->input('email');
         $admin->password = Hash::make($req->input('password'));
         if ($admin->save()) {
-            return  Redirect::to('admin')->with('success', 'Admin Registered successfully!');
+            return  Redirect::to('admin')->with('msg', 'Admin Registered successfully!');
         }
-        return  Redirect::to('admin')->with('error', 'Error to registretion!');
+        return  Redirect::to('admin')->with('msg_error', 'Error to registretion!');
     }
     public function checkAdminEmail(Request $request)
     {
@@ -172,7 +172,7 @@ class Auth extends Controller
         $adminData->remember_token = $token;
         $adminData->save();
         Mail::to($req->input('email'))->send(new forgotpasswordMail($token));
-        return  Redirect::to('admin')->with('success', 'Email send successfully!');
+        return  Redirect::to('admin')->with('msg', 'Email send successfully!');
     }
 
     public function checkToken($token)
@@ -187,7 +187,7 @@ class Auth extends Controller
                 ->first();
             if ($userData == null) {
 
-                return  Redirect::to('admin')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('msg_error', 'Invalid token!');
             }
         }
         $data['js'] = ['login'];
@@ -220,21 +220,21 @@ class Auth extends Controller
 
             if ($userData == null) {
 
-                return  Redirect::to('admin')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('msg_error', 'Invalid token!');
             } else {
 
                 $user = User::where('email', $userData->email)
                     ->update(['password' => Hash::make($req->input('password'))]);
 
                 DB::table('password_resets')->where(['email' => $userData->email])->delete();
-                return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
+                return  Redirect::to('admin')->with('msg', 'Password Updated successfully!');
             }
         }
         $adminData->password = Hash::make($req->input('password'));
         $adminData->remember_token = null;
         $adminData->save();
 
-        return  Redirect::to('admin')->with('success', 'Password Updated successfully!');
+        return  Redirect::to('admin')->with('msg', 'Password Updated successfully!');
     }
 
 

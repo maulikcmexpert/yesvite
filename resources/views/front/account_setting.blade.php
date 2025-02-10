@@ -51,8 +51,8 @@
                     <div class="pro-account d-flex align-items-center justify-content-between">
                         <div class="w-100">
                             <div>
-                                <h4>Membership:</h4>
-                                <div class="d-flex align-items-center mb-1">
+                                <h4>Available Credits:</h4>
+                                {{-- <div class="d-flex align-items-center mb-1">
                                     <span>
                                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2 12.3385C0.895431 12.3385 0 11.4431 0 10.3385V3.27195C0 2.90315 0.38563 2.66127 0.717651 2.8218L3.99023 4.40415C4.20677 4.50885 4.46716 4.44454 4.61006 4.25107L7.59782 0.206116C7.79767 -0.0644616 8.20232 -0.0644622 8.40218 0.206115L11.3899 4.25107C11.5328 4.44454 11.7932 4.50885 12.0098 4.40415L15.2823 2.8218C15.6144 2.66127 16 2.90315 16 3.27195V10.3385C16 11.4431 15.1046 12.3385 14 12.3385H2Z" fill="#FCCD1E" />
@@ -65,28 +65,28 @@
                                     @else
                                     <h5>Pro Account</h5>
                                     @endif
-                                </div>
-                                <div class="exp-wrp">
+                                </div> --}}
+                                {{-- <div class="exp-wrp">
                                     <span>Exp: {{$user->join_date}}</span>
                                     <!-- <a href="#">Click to change plan</a> -->
-                                </div>
+                                </div> --}}
                                 <div class="account-setting-credit-wrp">
                                     <div class="credits_balance_amout_wrp">
                                         <h5>
-                                            <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
-                                            <span class="available-coins">1.200</span>
+                                            <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
+                                            <span class="available-coins">{{$user->coins}}</span>
                                         </h5>
-                                        <h6>Last Recharge : <span>500 Credits</span></h6>
+                                        <h6>Last Recharge : <span id="lastRecharge">{{$user->lastRecharge}}</span></h6>
                                     </div>
                                 </div>
                                 <div class="account-setting-credit-button-wrp">
-                                    <a href="" class="cmn-btn credit-hisotry-btn">
+                                    <a href="{{ route('profile.transaction')}}" class="cmn-btn credit-hisotry-btn">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.9974 1.66797C5.40573 1.66797 1.66406 5.40964 1.66406 10.0013C1.66406 14.593 5.40573 18.3346 9.9974 18.3346C14.5891 18.3346 18.3307 14.593 18.3307 10.0013C18.3307 5.40964 14.5891 1.66797 9.9974 1.66797ZM13.6224 12.9763C13.5057 13.1763 13.2974 13.2846 13.0807 13.2846C12.9724 13.2846 12.8641 13.2596 12.7641 13.193L10.1807 11.6513C9.53906 11.268 9.06406 10.4263 9.06406 9.68464V6.26797C9.06406 5.9263 9.3474 5.64297 9.68906 5.64297C10.0307 5.64297 10.3141 5.9263 10.3141 6.26797V9.68464C10.3141 9.98464 10.5641 10.4263 10.8224 10.5763L13.4057 12.118C13.7057 12.293 13.8057 12.6763 13.6224 12.9763Z" fill="white" fill-opacity="0.5"/>
                                         </svg>
                                         History
                                     </a>
-                                    <button type="button" class="cmn-btn">
+                                    <button id="buycredits" type="button" class="cmn-btn">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.9974 1.66797C5.40573 1.66797 1.66406 5.40964 1.66406 10.0013C1.66406 14.593 5.40573 18.3346 9.9974 18.3346C14.5891 18.3346 18.3307 14.593 18.3307 10.0013C18.3307 5.40964 14.5891 1.66797 9.9974 1.66797ZM13.3307 10.6263H10.6224V13.3346C10.6224 13.6763 10.3391 13.9596 9.9974 13.9596C9.65573 13.9596 9.3724 13.6763 9.3724 13.3346V10.6263H6.66406C6.3224 10.6263 6.03906 10.343 6.03906 10.0013C6.03906 9.65964 6.3224 9.3763 6.66406 9.3763H9.3724V6.66797C9.3724 6.3263 9.65573 6.04297 9.9974 6.04297C10.3391 6.04297 10.6224 6.3263 10.6224 6.66797V9.3763H13.3307C13.6724 9.3763 13.9557 9.65964 13.9557 10.0013C13.9557 10.343 13.6724 10.6263 13.3307 10.6263Z" fill="#CF3CB0"/>
                                         </svg>
@@ -95,20 +95,20 @@
                                 </div>
                             </div>
                         </div>
-                        <span>
+                        {{-- <span>
                             <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </span>
+                        </span> --}}
                     </div>
                     <div class="general-wrap mb-0">
-                        <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
+                        {{-- <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
                         <a href="{{ route('profile.transaction')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Transcations</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> --}}
                         {{-- <a href="{{route('account_settings.messagePrivacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Messaging Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">

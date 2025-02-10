@@ -521,15 +521,15 @@ class ChatController extends Controller
                     ->subject('Chat Report Mail');
             });
 
-            return redirect('messages')->with('success', 'Report submitted successfully!');
+            return redirect('messages')->with('msg', 'Report submitted successfully!');
         } catch (QueryException $e) {
 
 
             DB::rollBack();
-            return redirect('messages')->with('error', 'Database error occurred!');
+            return redirect('messages')->with('msg_error', 'Database error occurred!');
         } catch (\Exception $e) {
 
-            return redirect('messages')->with('error', 'Something went wrong!');
+            return redirect('messages')->with('msg_error', 'Something went wrong!');
         }
     }
 }

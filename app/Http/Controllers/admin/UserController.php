@@ -201,12 +201,12 @@ class UserController extends Controller
 
             DB::commit();
             $this->addInFirebase($addUser->id);
-            return redirect()->route('users.index')->with('success', 'User Add successfully !');
+            return redirect()->route('users.index')->with('msg', 'User Add successfully !');
         } catch (\Exception $e) {
             dd($e);
             // Rollback transaction on error
             DB::rollBack();
-            return redirect()->route('users.create')->with('error', 'User creation failed!');
+            return redirect()->route('users.create')->with('msg_error', 'User creation failed!');
         }
     }
 
@@ -377,7 +377,7 @@ class UserController extends Controller
 
         // Redirect back to the user list or show a success message
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully.');
+            ->with('msg', 'User updated successfully.');
     }
 
     /**
@@ -408,10 +408,10 @@ class UserController extends Controller
                 });
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+                return redirect()->back()->with('msg_error', 'Failed to send email: ' . $e->getMessage());
             }
             DB::commit();
-            return redirect()->route('users.index')->with('success', 'User password updated and email sent successfully!');
+            return redirect()->route('users.index')->with('msg', 'User password updated and email sent successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back();

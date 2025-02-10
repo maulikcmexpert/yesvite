@@ -170,12 +170,12 @@ class SubCategoryController extends Controller
             DB::commit();
 
             return redirect()->route('subcategory.index')
-                ->with('success', 'Subcategory deleted successfully');
+                ->with('msg', 'Subcategory deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
             return redirect()->route('subcategory.index')
-                ->with('danger', 'Subcategory not deleted');
+                ->with('msg_error', 'Subcategory not deleted');
         }
     }
 

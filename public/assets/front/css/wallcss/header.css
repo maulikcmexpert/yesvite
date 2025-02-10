@@ -602,7 +602,7 @@ header{
     border: 1px solid var(--border);
     border-radius: 16px;
     background-color: var(--white);
-    padding: 20px;
+    padding: 20px !important;
     width: 300px;
     top: 30px !important;
     left: auto !important;
@@ -683,7 +683,7 @@ header{
 .header-profile-button-wrp{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 15px;
 }
 
@@ -700,6 +700,7 @@ header{
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
     max-width: 100%;
     height: auto;
 }

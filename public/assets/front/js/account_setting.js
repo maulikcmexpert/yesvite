@@ -146,4 +146,8 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#buycredits").on('click',function(){
+        $("#buycreditsmodal").modal("show");
+    })
 });

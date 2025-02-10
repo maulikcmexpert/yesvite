@@ -14,6 +14,7 @@
                 <h4>{{ $category->category_name }}</h4>
             </a>
         </div>
+        @break
+        @endforeach
     @endforeach
-@endforeach
 @endforeach
