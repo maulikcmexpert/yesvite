@@ -52,9 +52,18 @@ class AccountSettingController extends BaseController
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
         $user['subscribe_status'] = checkSubscription($user->id);
+        $lastRecharge= Coin_transactions::where(['user_id' => $user->id, 'type' => 'credit'])->orderBy('id', 'DESC')->first();
+        $user['lastRecharge'] = '';
+        if ($lastRecharge) {
+            if ($lastRecharge->description == 'Signup Bonus') {
+                $user['lastRecharge'] = $lastRecharge->coins . ' Free trial credits';
+            } else {
+                $user['lastRecharge'] = $lastRecharge->coins . ' credits';
+            }
+        }
 
 
-
+        dd($user);
 
         return view('layout', compact(
             'title',
