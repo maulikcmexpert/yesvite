@@ -260,26 +260,10 @@ $(document).ready(function () {
 
         // Replace heart icon with selected emoji
         emojiDisplay.removeClass();
-        console.log(selectedEmoji);
-        const emoji_name="";
-        if (selectedEmoji == "\\u{2764}"){
-            emoji_name="heart-emoji";
-        }  
-        else if (selectedEmoji == "\\u{1F44D}"){
-            emoji_name="thumb-icon";
-        } 
-        else if (selectedEmoji == "\\u{1F60A}"){
-            emoji_name="smily-emoji";
-        } 
-        else if (selectedEmoji == "\\u{1F60D}"){
-            emoji_name="eye-heart-emoji";
-        }
-        else if (selectedEmoji == "\\u{1F44F}"){
-            emoji_name="clap-icon";
-        }
+
 
         // emojiDisplay.text(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt="">`);
-        // emojiDisplay.text(selectedEmoji);
+        emojiDisplay.text(selectedEmoji);
 
         // AJAX call to update emoji reaction
         const eventId = button.data("event-id");
