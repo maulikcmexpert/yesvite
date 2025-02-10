@@ -1,6 +1,6 @@
 let guestList = [];
 let guestPhoneList = [];
-
+var base_url=$('#base_url').val();
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
@@ -290,7 +290,7 @@ $(document).ready(function () {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
                         let emoji_name="";
-                        if (reaction == "\\u{2764}"){
+                        if (reaction == "❤️"){
                             emoji_name="heart-emoji";
                         }  
                             
