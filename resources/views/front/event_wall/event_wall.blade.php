@@ -1,4 +1,4 @@
-{{-- {{dd($postList)}} --}}
+{{dd($postList)}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -406,7 +406,7 @@
                                                         <div class="posts-card-like-commnet-wrp photo-card-head-right">
                                                             <div class="posts-card-like-comment-left">
                                                             <!-- data-bs-target="#reaction-modal" data-post="{{$post['id']}}"> -->
-                                                                <ul type="button" data-bs-toggle="modal"
+                                                                <ul type="button" data-bs-toggle="modal" class="get_post_emoji_list"
                                                                     data-bs-target="#reaction-modal" data-post="{{$post['id']}}">
                                                                     @php $i=0; $j = 0; @endphp
                                                                     @foreach ($post['reactionList'] as $reaction)
