@@ -1919,8 +1919,8 @@ $(document).ready(function () {
     };
     $(".posts-card-like-comment-right").each(function () {
       const $container = $(this); // Get the current container
-      const $likeButton = $container.find(".likeModel"); // Find the like button within the container
-      const $emojiDropdown = $container.find(".model_emoji"); // Find the emoji dropdown within the container
+      const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+      const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
       let pressTimer;
 
       // Handle long press to show emoji dropdown (for both desktop and mobile)
