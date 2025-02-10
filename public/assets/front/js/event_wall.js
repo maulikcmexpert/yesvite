@@ -1413,6 +1413,15 @@ $(document).on("click", function (e) {
     }
 });
 
+function generateProfileImage(firstname, lastname) {
+    firstname = firstname ? String(firstname).trim() : "";
+    lastname = lastname ? String(lastname).trim() : "";
+    const firstInitial = firstname[0] ? firstname[0].toUpperCase() : "";
+    const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
+    const initials = `${firstInitial}${secondInitial}`;
+    const fontColor = `fontcolor${firstInitial}`;
+    return `<h5 class="${fontColor} font_name">${initials || "NA"}</h5>`;
+}
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
     $.ajax({
@@ -1472,13 +1481,19 @@ $(document).on('click','.get_post_emoji_list',function(){
                     }
 
                     let reactionHtml = "";
+                    let profile="";
                     users.forEach(user => {
+                        if(user.profile==""){
+                            profile=generateProfileImage(user.firstname,user.lastname);
+                        }else{
+                            profile=user.profile;
+                        }
                         reactionHtml += `
                             <li class="reaction-info-wrp">
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
                                         <div class="commented-user-profile-img">
-                                            <img src="${user.profile}" alt="">
+                                            <img src="${profile}" alt="">
                                         </div>
                                         <div class="commented-user-profile-content">
                                             <h3>${user.firstname} ${user.lastname}</h3>
