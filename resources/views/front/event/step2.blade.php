@@ -118,6 +118,7 @@
 
 
             <div class="row list_all_design_catgeory_new">
+                <p id="allchecked">back</p>
                 <h5 id="category_name" style="display:none ">Test category</h5>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
@@ -273,7 +274,7 @@
 
 
             $(document).on('click', '#design_category', function() {
-                
+
                 $('.image-item-new').hide();
                 $('.image-item').hide();
                 const categoryId = $(this).data('category-id');
@@ -289,5 +290,18 @@
                 $('.total_design_count').text(visibleItems + ' Items');
             });
         });
+
+        $(document).on('click', '#allchecked', function() {
+            allCheckFun()
+        })
+
+        function allCheckFun() {
+            $('.image-item-new').hide();
+            $("#category_name").hide();
+            $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
+            $('.image-item').show();
+            var visibleItems = $('.all_designs:visible').length;
+            $('.total_design_count').text(visibleItems + ' Items');
+        }
     </script>
 @endpush
