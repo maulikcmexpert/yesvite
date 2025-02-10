@@ -1246,6 +1246,9 @@ label.error {
 #toast-container>.toast-success {
     background-image: url('../../../toater_success_icon.png') !important;
 }
+#toast-container>div{
+    opacity: 1 !important;
+}
 
 .guest-user-list .no-reply h5{
     text-transform: none !important;
