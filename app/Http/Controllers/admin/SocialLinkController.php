@@ -48,13 +48,13 @@ class SocialLinkController extends Controller
         if ($existingRecord) {
             $existingRecord->$column = $link;
             $existingRecord->save();
-            return redirect()->route('social_link.index')->with('error', 'Link Updated Successfully!');
+            return redirect()->route('social_link.index')->with('success', 'Link Updated Successfully!');
 
         } else {
             $saveLink = new Social_link();
             $saveLink->$column = $link;
             $saveLink->save();
-            return redirect()->route('social_link.index')->with('error', 'Link Added Successfully!');
+            return redirect()->route('social_link.index')->with('success', 'Link Added Successfully!');
 
         }
     }

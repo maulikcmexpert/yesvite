@@ -50,7 +50,7 @@ class SocialController extends Controller
         // dd($user);
         if($authUser){
             Auth::login($authUser, true);
-            return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
+            return redirect()->intended('/profile')->with('msg', 'Logged in successfully!');
         }
      
 

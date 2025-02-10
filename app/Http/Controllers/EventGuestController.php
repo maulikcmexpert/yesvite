@@ -853,7 +853,7 @@ class EventGuestController extends Controller
         }
 
         // Handle the case where guest is not found
-        return redirect()->back()->with('success', 'RSVP updated successfully.');
+        return redirect()->back()->with('msg', 'RSVP updated successfully.');
     }
 
 
