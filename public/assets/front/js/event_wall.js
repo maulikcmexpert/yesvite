@@ -1431,9 +1431,26 @@ $(document).on('click','.get_post_emoji_list',function(){
             if (response.status === 1) {
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
-
+                const reactionMap = {
+                    "\u{2764}": "nav-heart-reaction", // ❤️
+                    "\u{1F44D}": "nav-thumb-reaction", // 👍
+                    "\u{1F604}": "nav-smily-reaction", // 😄
+                    "\u{1F60D}": "nav-eye-heart-reaction", // 😍
+                    "\u{1F44F}": "nav-clap-reaction", // 👏
+                };
                 $("#nav-all-reaction-tab").html(`All ${reactionDetail.total_count}`);
 
+                $.each(reactionList, function (reactionUnicode, users) {
+                    let reactionEmoji = JSON.parse(`"${reactionUnicode}"`); // Convert Unicode sequence to emoji
+                    let tabId = reactionMap[reactionEmoji] || "";
+                
+                    if (tabId) {
+                        console.log(`Reaction: ${reactionEmoji}, Tab ID: ${tabId}`); // Debugging
+                        $("#" + tabId).html(users.map(user => `<li>${user.firstname} ${user.lastname}</li>`).join(""));
+                    } else {
+                        console.warn(`Unknown reaction type: ${reactionUnicode}`);
+                    }
+                });
                 // $(".tab-pane ul").html("");
 
                 // $.each(reactionList, function (reaction, users) {
