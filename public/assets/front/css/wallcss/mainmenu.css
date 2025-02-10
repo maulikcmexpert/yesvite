@@ -2913,9 +2913,9 @@
     background: #ecb015;
 }
 
-.mobile-calender-btn {
+/* .mobile-calender-btn {
     display: none;
-}
+} */
 
 #calendar .month h3 {
     font-family: var(--SFProDisplay-Bold);
