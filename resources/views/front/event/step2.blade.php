@@ -260,6 +260,7 @@
 
 
     $(document).on('click', '#design_category', function() {
+        alert()
         // If all individual checkboxes are checked, check "All Categories"
         // const totalCheckboxes = $('input[name="design_category"]:not(#Allcat)').length;
         // const checkedCheckboxes = $('input[name="design_category"]:not(#Allcat):checked').length;
