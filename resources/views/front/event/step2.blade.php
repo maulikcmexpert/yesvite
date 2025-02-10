@@ -320,7 +320,7 @@
                         search: search_value
                     },
                     success: function(response) {
-                        alert()
+                      
                         if (response.view) {
                             $('.list_all_design_catgeory').html('');
                             $('.list_all_design_catgeory').html(response.view);
