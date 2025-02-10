@@ -421,7 +421,7 @@
                                                                     @else
                                                                     <li>
                                                                     @endif
-                                                                            @if ($reaction == '\u{1F604}')
+                                                                            @if ($reaction == '\u{1F60A}')
                                                                                 <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
                                                                                     alt="Smiley Emoji">
                                                                             @elseif ($reaction == '\u{1F60D}')
