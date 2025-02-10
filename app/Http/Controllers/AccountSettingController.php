@@ -63,7 +63,7 @@ class AccountSettingController extends BaseController
         }
 
 
-        dd($user);
+        // dd($user);
 
         return view('layout', compact(
             'title',
