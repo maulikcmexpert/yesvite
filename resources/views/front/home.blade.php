@@ -8,7 +8,8 @@ $getSocialLink = getSocialLink();
     <div class="container">
         <div class="row">
             <x-front.sidebar :profileData="[]" />
-            <div class="col-xl-6 col-lg-9 col-md-8">
+            <div class="row">
+              <div class="col-xl-6 col-lg-9 col-md-8">
                 <div class="home-center-main">
                     <div class="home-center-content">
                         <x-main_menu.home.profile :profileData="$profileData" />
@@ -60,11 +61,12 @@ $getSocialLink = getSocialLink();
                     <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
                   </div>
               </div>
+            </div>
           </div>
     </div>
 </section>
 @push('scripts')
-  
+
 
 <script>
   $(document).ready(function () {
