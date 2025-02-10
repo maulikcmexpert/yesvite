@@ -915,8 +915,8 @@
                                 <button class="posts-card-like-btn likeModel " id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
-                                    <i class="fa-regular fa-heart" id="show_emoji"> <img src="" alt="Heart Emoji"
-                                        class="emoji model_emoji" ></i></button>
+                                    <i class="fa-regular fa-heart" id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt="Heart Emoji"
+                                        class="emoji model_emoji"></i></button>
 
                                 <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
                                     style="display: none;">
