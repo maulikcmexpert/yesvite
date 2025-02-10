@@ -156,6 +156,7 @@
 
             $('#Allcat').on('change', function() {
                 $('.image-item-new').hide();
+                $("#category_name").hide();
                 if ($(this).is(':checked')) {
                     $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
                     $('.image-item').show();
@@ -179,6 +180,7 @@
 
             $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
                 $('.image-item-new').hide();
+                $("#category_name").hide();
                 // If all individual checkboxes are checked, check "All Categories"
                 const totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
                 const checkedCheckboxes = $('input[name="design_subcategory"]:not(#Allcat):checked').length;
@@ -210,6 +212,7 @@
             });
             $('#resetCategories').on('click', function(e) {
                 $('.image-item-new').hide();
+                $("#category_name").hide();
                 e.preventDefault();
                 $('#Allcat').prop('checked', false);
                 $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
@@ -239,6 +242,7 @@
 
             $(document).on('input', '#search_design_category', function() {
                 $('.image-item-new').hide();
+                $("#category_name").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
                 $.ajax({
@@ -269,6 +273,7 @@
 
 
             $(document).on('click', '#design_category', function() {
+                
                 $('.image-item-new').hide();
                 $('.image-item').hide();
                 const categoryId = $(this).data('category-id');

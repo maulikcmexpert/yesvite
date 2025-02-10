@@ -151,7 +151,7 @@
   <script>
     $(document).ready(function () {
         $(document).on("click", ".zoom_img", function (e) {
-          alert();
+
             e.preventDefault();
             var imgSrc = $(this).data("img");
 
