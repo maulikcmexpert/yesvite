@@ -89,11 +89,11 @@ class Privacy_policyController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('privacy_policy.index')->with('success', 'Privacy Policies saved successfully!');
+            return redirect()->route('privacy_policy.index')->with('msg', 'Privacy Policies saved successfully!');
         } catch (\Exception $e) {
             // Rollback transaction on error
             DB::rollBack();
-            return redirect()->route('privacy_policy.index')->with('error', 'Privacy Policies creation failed!');
+            return redirect()->route('privacy_policy.index')->with('msg_error', 'Privacy Policies creation failed!');
         }
     }
 

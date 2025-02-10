@@ -131,11 +131,11 @@ class TemplateController extends Controller
             $textData->save();
             DB::commit();
 
-            return redirect()->route('create_template.edit_template', encrypt($textData->id))->with('success', 'Template added successfully!');
+            return redirect()->route('create_template.edit_template', encrypt($textData->id))->with('msg', 'Template added successfully!');
         } catch (QueryException $e) {
             DB::rollBack();
             Log::error('Database query error: ' . $e->getMessage());
-            return redirect()->route('create_template.index')->with('danger', 'Something went wrong!');
+            return redirect()->route('create_template.index')->with('msg_error', 'Something went wrong!');
         }
     }
 
@@ -233,7 +233,7 @@ class TemplateController extends Controller
             DB::commit();
 
             // Redirect with a success message
-            return redirect()->route('create_template.index')->with('success', 'Template updated successfully!');
+            return redirect()->route('create_template.index')->with('msg', 'Template updated successfully!');
         } catch (\Exception $e) {
             // Rollback the transaction if there's an error
             DB::rollBack();
@@ -242,7 +242,7 @@ class TemplateController extends Controller
             Log::error('Template Update Error: ' . $e->getMessage());
 
             // Redirect with an error message
-            return redirect()->back()->with('error', 'Failed to update template. Error: ' . $e->getMessage());
+            return redirect()->back()->with('msg_error', 'Failed to update template. Error: ' . $e->getMessage());
         }
     }
 
@@ -262,12 +262,12 @@ class TemplateController extends Controller
             DB::commit();
 
             return redirect()->route('create_template.index')
-                ->with('success', 'Template deleted successfully');
+                ->with('msg', 'Template deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
             return redirect()->route('create_template.index')
-                ->with('danger', 'Template not deleted');
+                ->with('msg_error', 'Template not deleted');
         }
     }
     public function View_template($id)
@@ -277,7 +277,7 @@ class TemplateController extends Controller
 
         // Handle the case if the template is not found
         if (!$template) {
-            return redirect()->route('create_template.edit_template')->with('error', 'Template not found.');
+            return redirect()->route('create_template.edit_template')->with('msg_error', 'Template not found.');
         }
 
         // Return the view to display the template

@@ -74,7 +74,18 @@ $(document).ready(function () {
 
     let longPressTimer;
     let isLongPresss = false;
-
+    let reactionIcons = {
+        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    };
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -163,6 +174,8 @@ $(document).ready(function () {
         const button = $(this)
             .closest(".photo-card-head-right")
             .find("#likeButton");
+            console.log(selectedEmoji);
+
         // const emojiDisplay = button.find('#show_Emoji');
 
         // Replace heart icon with selected emoji
@@ -186,6 +199,48 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    let reactionImageHtml = "";
+                    if (response.is_reaction == "1") {
+                        // ✅ User has liked the post, update the reaction image
+                        console.log("Like given, updating reaction image...");
+                        if (reactionIcons[selectedEmoji]) {
+                            reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+                        }
+                        button.addClass("liked"); // Add liked class
+                    } else {
+                        // ✅ User has removed like, set the first reaction from response
+                        console.log(
+                            "Like removed, updating first available reaction..."
+                        );
+                        if (response.reactionList.length > 0) {
+                            let firstReaction = response.reactionList[0];
+                            if (firstReaction.startsWith("\\u{")) {
+                                firstReaction = String.fromCodePoint(
+                                    parseInt(
+                                        firstReaction.replace(/\\u{|}/g, ""),
+                                        16
+                                    )
+                                );
+                            }
+                            if (reactionIcons[firstReaction]) {
+                                reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            } else {
+                                console.log({ firstReaction });
+                                console.log(reactionIcons[firstReaction]);
+                                //let reaction = "\u{2764}";
+                                reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
+                            }
+                        }
+                        button.removeClass("liked"); // Remove liked class
+                        button.html(
+                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                        ); // Reset button to default
+                    }
+
+                    // ✅ Update the reaction image container
+                    $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
+
+                    // ✅ Update like count
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
@@ -1076,7 +1131,7 @@ $(document).on("click", ".open_photo_model", function () {
                 $("#post_message").text(data.post_message);
                 $("#post_time_details").text(data.post_time);
 
-                $("#likes").text(data.total_likes + " Likes");
+                $("#likeCount").text(data.total_likes + " Likes");
                 // Add 'Likes' after the number
                 $("#comments").text(data.total_comments + " Comments");
 
@@ -1095,10 +1150,12 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reactionImageHtml);
 
                 if (reactionIcons[reaction_store]) {
+console.log(reactionIcons[reaction_store]);
 
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
-
+                $(`#likeButtonModel`).html(reactionImageHtml);
+                $(`#reactionImage`).html(reactionImageHtml);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
                 reactionList.find("li").each(function () {
@@ -1453,7 +1510,7 @@ $(document).on("click", ".open_photo_model", function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                 <h3>${firstname} ${lastname}</h3>
-                                                <p> ${location ? `<p>${location}</p>` : ''}
+                                                <p></p>
 
                                             </div>
                                         </div>

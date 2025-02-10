@@ -374,7 +374,8 @@
                                                         <ul>
                                                             @if (!empty($photo['reactionList']) && is_array($photo['reactionList']))
                                                                 @foreach ($photo['reactionList'] as $reaction)
-                                                                    <li>
+                                                                    <li id="reactionImage_{{ $photo['id'] }}">
+
                                                                         <span class="reaction-emoji">
                                                                             {{ preg_replace_callback(
                                                                                 '/\\\\u\{([0-9A-F]+)\}/',
@@ -899,7 +900,7 @@
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
                                 <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
-                                    <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                    <li id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
                                             loading="lazy">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
@@ -907,7 +908,7 @@
                                     <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
                                             loading="lazy">
                                     </li>
-                                    <p id="likes">5k Likes</p>
+                                    <p id="likeCount" >5k Likes</p>
                                 </ul>
                                 <h6 id="comments">354 Comments</h6>
                             </div>
@@ -915,7 +916,8 @@
                                 <button class="posts-card-like-btn likeModel " id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
-                                    <i class="fa-regular fa-heart" id="show_comment_emoji"></i></button>
+                                    <i  id="show_emoji"> <img src="" alt=""
+                                        class="emoji model_emoji"></i></button>
 
                                 <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
                                     style="display: none;">

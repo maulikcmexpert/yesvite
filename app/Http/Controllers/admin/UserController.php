@@ -206,7 +206,7 @@ class UserController extends Controller
             dd($e);
             // Rollback transaction on error
             DB::rollBack();
-            return redirect()->route('users.create')->with('error', 'User creation failed!');
+            return redirect()->route('users.create')->with('msg_error', 'User creation failed!');
         }
     }
 
