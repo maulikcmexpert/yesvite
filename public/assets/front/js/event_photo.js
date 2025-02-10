@@ -74,7 +74,18 @@ $(document).ready(function () {
 
     let longPressTimer;
     let isLongPresss = false;
-
+    let reactionIcons = {
+        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    };
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -163,6 +174,8 @@ $(document).ready(function () {
         const button = $(this)
             .closest(".photo-card-head-right")
             .find("#likeButton");
+            console.log(selectedEmoji);
+
         // const emojiDisplay = button.find('#show_Emoji');
 
         // Replace heart icon with selected emoji
