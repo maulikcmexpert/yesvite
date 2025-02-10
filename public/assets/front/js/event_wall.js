@@ -1458,17 +1458,7 @@ $(document).on('click','.get_post_emoji_list',function(){
             if (response.status === 1) {
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
-                const reactionMap = {
-                    "\u{2764}": "heart-emoji", // ❤️
-                    "\u{1F44D}": "thumb-icon", // 👍
-                    "\u{1F604}": "smily-emoji", // 😄
-                    "\u{1F60D}": "eye-heart-emoji", // 😍
-                    "\u{1F44F}": "clap-icon", // 👏
-                };
                 $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
-
-                // $(".tab-pane ul").html("");
-
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
                     let emoji_name="";
@@ -1500,7 +1490,6 @@ $(document).on('click','.get_post_emoji_list',function(){
                         tabId = "nav-clap-reaction"
                         emoji_name="clap-icon";
                         count="clap-count";
-
                     }
 
                     $(`#${tabId} ul`).html("");
@@ -1539,12 +1528,10 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     $("#nav-all-reaction ul").append(reactionHtml);
 
-                    // Update Reaction Counts in Tabs
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
                     $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
                 });
 
-                // Show modal
                 $("#reaction-modal").modal("show");
             }
         },

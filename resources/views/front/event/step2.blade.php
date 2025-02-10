@@ -115,14 +115,14 @@
 
 
         <div class="row list_all_design_catgeory" >
+            <h5>Test category</h5>
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
             @foreach ($subcategory->textdatas as $image)
             <div style="display: none" class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
             data-category-id="{{ $category->id }}" 
-            data-subcategory-id="{{ $subcategory->id }}" 
-            >
-            <h2>Test category</h2>
+            data-subcategory-id="{{ $subcategory->id }}" >
+          
                         <a href="javascript:;" class="collection-card card-blue">
                             <div class="card-img edit_design_tem design-card"  
                             data-image="{{ asset('storage/canvas/' . $image->image) }}"
