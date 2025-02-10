@@ -1406,19 +1406,19 @@
                             All 106
                         </button>
                         <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/heart-emoji.png')}}" alt=""> 0
+                            <img src="{{asset('assets/front/img/heart-emoji.png')}}" alt=""> <span id="heart-count">0</span> 
                         </button>
                         <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/thumb-icon.png')}}" alt=""> 0
+                            <img src="{{asset('assets/front/img/thumb-icon.png')}}" alt=""> <span id="thumb-count">0</span>
                         </button>
                         <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-smily-reaction" type="button" role="tab" aria-controls="nav-smily-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/smily-emoji.png')}}" alt=""> 0
+                            <img src="{{asset('assets/front/img/smily-emoji.png')}}" alt=""> <span id="smily-count">0</span>
                         </button>
                         <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-eye-heart-reaction" type="button" role="tab" aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/eye-heart-emoji.png')}}" alt=""> 0
+                            <img src="{{asset('assets/front/img/eye-heart-emoji.png')}}" alt=""> <span id="eye-heart-count">0</span>
                         </button>
                         <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-clap-reaction" type="button" role="tab" aria-controls="nav-clap-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/clap-icon.png')}}" alt=""> 0
+                            <img src="{{asset('assets/front/img/clap-icon.png')}}" alt=""> <span id="clap-count">0</span>
                         </button>
                       </div>
                     </nav>

@@ -151,7 +151,7 @@
   $(document).ready(function () {
     $(".zoom_img").click(function () {
         var imgSrc = $(this).data("img");
-
+alert(imgSrc);
         $.magnificPopup.open({
             items: {
                 src: imgSrc,
