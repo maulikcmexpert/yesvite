@@ -1096,8 +1096,8 @@ $(document).on("click", ".open_photo_model", function () {
 
 
                 let reactionImageHtml = "";
-                if (reactionIcons[reaction]) {
-                    reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="Reaction Emoji">`;
+                if (reactionIcons[reaction_store]) {
+                    reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
 
                 // Update the emoji list based on the reaction
