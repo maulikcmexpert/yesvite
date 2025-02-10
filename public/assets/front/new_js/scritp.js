@@ -405,6 +405,18 @@ $(document).on("change", ".fileInputtype", function (event) {
 
 // ===photo-likes-option===
 $(document).ready(function () {
+    let reactionIcons = {
+        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    };
     $(".photo-card-head-right").each(function () {
       const $container = $(this); // Get the current container
       const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
@@ -427,7 +439,7 @@ $(document).ready(function () {
         const emoji = $(this).data("emoji");
 
         // Remove the heart icon and set emoji inside the button
-        $likeButton.html(`<span class="emoji">${emoji}</span>`); // Show selected emoji inside button
+        $likeButton.html(`<span class="emoji">${reactionIcons[emoji]}</span>`); // Show selected emoji inside button
 
         $emojiDropdown.hide(); // Hide emoji dropdown after selection
       });

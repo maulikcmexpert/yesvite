@@ -1,6 +1,6 @@
 let guestList = [];
 let guestPhoneList = [];
-var base_url=$('#base_url').val();
+
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
@@ -289,9 +289,6 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
-                
-
-                        console.log(reactionIcons[reaction]);
                         if (reactionIcons[reaction]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
@@ -311,7 +308,6 @@ $(document).ready(function () {
                                     )
                                 );
                             }
-                         
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
                             } else {
