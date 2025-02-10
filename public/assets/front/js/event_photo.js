@@ -1091,7 +1091,7 @@ $(document).on("click", ".open_photo_model", function () {
 
 
 
-                let reactionImageHtml = $(`#likeButtonModel_${postId}`);
+                let reactionImageHtml = $('#likeButtonModel');
                 console.log(reactionImageHtml);
 
                 if (reactionIcons[reaction_store]) {
@@ -1099,7 +1099,7 @@ console.log(reactionIcons[reaction_store]);
 
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
-                $(`#likeButtonModel_${eventPostId}`).html(reactionImageHtml);
+                $(`#likeButtonModel`).html(reactionImageHtml);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
                 reactionList.find("li").each(function () {
