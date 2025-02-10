@@ -186,6 +186,48 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    let reactionImageHtml = "";
+                    if (response.is_reaction == "1") {
+                        // ✅ User has liked the post, update the reaction image
+                        console.log("Like given, updating reaction image...");
+                        if (reactionIcons[reaction]) {
+                            reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
+                        }
+                        button.addClass("liked"); // Add liked class
+                    } else {
+                        // ✅ User has removed like, set the first reaction from response
+                        console.log(
+                            "Like removed, updating first available reaction..."
+                        );
+                        if (response.reactionList.length > 0) {
+                            let firstReaction = response.reactionList[0];
+                            if (firstReaction.startsWith("\\u{")) {
+                                firstReaction = String.fromCodePoint(
+                                    parseInt(
+                                        firstReaction.replace(/\\u{|}/g, ""),
+                                        16
+                                    )
+                                );
+                            }
+                            if (reactionIcons[firstReaction]) {
+                                reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            } else {
+                                console.log({ firstReaction });
+                                console.log(reactionIcons[firstReaction]);
+                                //let reaction = "\u{2764}";
+                                reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
+                            }
+                        }
+                        button.removeClass("liked"); // Remove liked class
+                        button.html(
+                            '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                        ); // Reset button to default
+                    }
+
+                    // ✅ Update the reaction image container
+                    $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
+
+                    // ✅ Update like count
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
