@@ -1790,7 +1790,7 @@ class EventWallController extends Controller
                 'firstname' => $reaction->user->firstname ?? null,
                 'lastname' => $reaction->user->lastname ?? null,
                 'profile' => !empty($reaction->user->profile) ? asset('storage/profile/' . $reaction->user->profile) : "",
-                'location' => $value->user->city != "" ? trim($value->user->city) . ($value->user->state != "" ? ', ' . $value->user->state : '') : ""
+                'location' => $reaction->user->city != "" ? trim($reaction->user->city) . ($reaction->user->state != "" ? ', ' . $reaction->user->state : '') : ""
             ];
         }
         $totalReactions = $getreaction->count();
