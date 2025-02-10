@@ -4870,7 +4870,7 @@ async function captureImage(element) {
     try {
         const canvas = await html2canvas(element, { scale: 1 }); // Set scale to avoid large images
         return new Promise((resolve) => {
-            canvas.toBlob((blob) => resolve(blob), "image/png", 0.8);
+            canvas.toBlob((blob) => resolve(blob), "image/png", 1);
         });
     } catch (error) {
         console.error("Capture error:", error);
