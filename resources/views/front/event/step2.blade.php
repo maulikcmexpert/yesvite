@@ -269,6 +269,7 @@
 
 
             $(document).on('click', '#design_category', function() {
+                alert()
                 $('.image-item-new').hide();
                 $('.image-item').hide();
                 const categoryId = $(this).data('category-id');
