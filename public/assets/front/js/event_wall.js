@@ -1440,7 +1440,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                 };
                 $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
 
-                $(".tab-pane ul").html("");
+                // $(".tab-pane ul").html("");
 
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
