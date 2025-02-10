@@ -71,3 +71,36 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
 {{-- <script src="{{ asset('assets/front/js/design.js') }}"></script> --}}
+<script>
+  $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            @if (session('msg'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('msg') }}");
+            @endif
+            @if (session('msg_error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.error("{{ session('msg_error') }}");
+            @endif
+            @if (session('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.error("{{ session('error') }}");
+            @endif
+        });
+</script>
