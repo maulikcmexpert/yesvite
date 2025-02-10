@@ -9,7 +9,7 @@ $getSocialLink = getSocialLink();
         <div class="row">
             <x-front.sidebar :profileData="[]" />
             <div class="row col-xl-9 col-lg-9 col-md-8">
-              <div class="col-xl-9 col-lg-9 col-md-8">
+              <div class="col-xl-8 col-lg-9 col-md-8">
                 <div class="home-center-main">
                     <div class="home-center-content">
                         <x-main_menu.home.profile :profileData="$profileData" />
@@ -41,7 +41,7 @@ $getSocialLink = getSocialLink();
                     </button>
                 </div>
               </div>
-              <div class="col-xl-3">
+              <div class="col-xl-4">
                 <input type="hidden" id="totalmonths" value="{{$numMonths}}"/>
                 <input type="hidden" id="startmonths" value="{{$startMonth}}"/>
                 <input type="hidden" id="diffmonth" value="{{$diffmonth}}"/>
