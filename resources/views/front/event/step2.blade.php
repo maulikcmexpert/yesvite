@@ -273,12 +273,10 @@
 
         // Filter images based on checked categories
         // if (checkedCheckboxes > 0) {
-            $('.image-item-new').show(); // Hide all images first
+            $('.image-item-new').hide(); // Hide all images first
             // $('input[name="design_category"]:not(#Allcat):checked').each(function() {
                 const categoryId = $(this).data('category-id');
                 const subcategoryId = $(this).data('subcategory-id');
-                alert(categoryId);
-                alert(subcategoryId);
 
                 // Show images matching the selected categories and subcategories
                 $(`.image-item-new[data-category-id="${categoryId}"]`)
