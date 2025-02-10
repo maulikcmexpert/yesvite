@@ -212,10 +212,8 @@
 
 .account-setting-credit-wrp .credits_balance_amout_wrp h5{
     margin-left: 0px !important;
-}
-
-.account-setting-credit-wrp .credits_balance_amout_wrp h5 span{
-    color:#fff !important;
+    background-color: #fff !important;
+    font-size:16px !important;
 }
 
 .account-setting-credit-wrp .credits_balance_amout_wrp h6{
@@ -223,8 +221,16 @@
 }
 
 .account-setting-credit-wrp .credits_balance_amout_wrp h6 span{
+    font-family: var(--SFProDisplay-Semibold) !important;
     font-weight: 600 !important;
+    color:#fff !important;
 }
+
+.account-setting-credit-wrp{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 
 /* =========== responsive =========== */
 @media only screen and (max-width:768px) {
