@@ -333,7 +333,7 @@
 .home-upcoming-events-card-rsvp-data {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .home-upcoming-events-card-rsvp-data h6 {
@@ -1758,7 +1758,7 @@
 .home-upcoming-events-card-rsvp-data {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .home-upcoming-events-card-rsvp-data h6 {
