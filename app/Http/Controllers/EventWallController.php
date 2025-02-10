@@ -1800,6 +1800,7 @@ class EventWallController extends Controller
             'total_count'=>$totalReactions,
             'reaction_count'=>$reactionCounts,
         ];
+        return response()->json(['status' => 1, 'reaction_detail' => $reaction_detail,'reaction_list'=>$reactionWiseUsers]);
 
         // dd($reaction_detail,$reactionWiseUsers);
     }

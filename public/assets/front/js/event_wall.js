@@ -1428,13 +1428,55 @@ $(document).on('click','.get_post_emoji_list',function(){
         },
         success: function (response) {
             console.log(response);
-            // console.log(response.view);
-            // window.location.reload();
-            // $(".wall-post-content").html();
-            // $(".wall-post-content").html(response.view);
-            // $("#home_loader").css("display", "none");
+            if (response.status === 1) {
+                let reactionDetail = response.reaction_detail;
+                let reactionList = response.reaction_list;
 
-            // $("#main-center-modal-filter").modal("hide");
+                $("#nav-all-reaction-tab").html(`All ${reactionDetail.total_count}`);
+
+                $(".tab-pane ul").html("");
+
+                $.each(reactionList, function (reaction, users) {
+                    let tabId = "";
+                    if (reaction === "heart") tabId = "nav-heart-reaction";
+                    else if (reaction === "thumb") tabId = "nav-thumb-reaction";
+                    else if (reaction === "smily") tabId = "nav-smily-reaction";
+                    else if (reaction === "eye-heart") tabId = "nav-eye-heart-reaction";
+                    else if (reaction === "clap") tabId = "nav-clap-reaction";
+
+                    let reactionHtml = "";
+                    users.forEach(user => {
+                        reactionHtml += `
+                            <li class="reaction-info-wrp">
+                                <div class="commented-user-head">
+                                    <div class="commented-user-profile">
+                                        <div class="commented-user-profile-img">
+                                            <img src="${user.profile}" alt="">
+                                        </div>
+                                        <div class="commented-user-profile-content">
+                                            <h3>${user.firstname} ${user.lastname}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                        <img src="./assets/img/${reaction}-emoji.png" alt="">
+                                    </div>
+                                </div>
+                            </li>
+                        `;
+                    });
+
+                    if (tabId) {
+                        $(`#${tabId} ul`).append(reactionHtml);
+                    }
+
+                    // Update Reaction Counts in Tabs
+                    let reactionCount = reactionDetail.reaction_count[reaction] || 0;
+                    $(`#${tabId}-tab`).html(`<img src="./assets/img/${reaction}-emoji.png" alt=""> ${reactionCount}`);
+                });
+
+                // Show modal
+                $("#reaction-modal").modal("show");
+            }
         },
         error: function (xhr, status, error) {
             $("#home_loader").css("loader", "none");

@@ -1445,70 +1445,6 @@
                               </div>
                             </div>
                           </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                  <img src="./assets/img/thumb-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                  <img src="./assets/img/smily-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                  <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                  <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
                         </ul>
                       </div>
 
@@ -1527,70 +1463,6 @@
                               </div>
                               <div class="posts-card-like-comment-right reaction-profile-reaction-img">
                                   <img src="./assets/img/heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/heart-emoji.png" alt="">
                               </div>
                             </div>
                           </li>
@@ -1615,70 +1487,6 @@
                               </div>
                             </div>
                           </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/thumb-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/thumb-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/thumb-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/thumb-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
                         </ul>
                       </div>
 
@@ -1700,70 +1508,7 @@
                               </div>
                             </div>
                           </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/smily-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/smily-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/smily-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/smily-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
+                         
                         </ul>
                       </div>
 
@@ -1785,70 +1530,7 @@
                               </div>
                             </div>
                           </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/eye-heart-emoji.png" alt="">
-                              </div>
-                            </div>
-                          </li>
+                        
                         </ul>
                       </div>
 
@@ -1871,70 +1553,7 @@
                               </div>
                             </div>
                           </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/clap-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/clap-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/clap-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
-                          <li class="reaction-info-wrp">
-                            <div class="commented-user-head">
-                              <div class="commented-user-profile">
-                                  <div class="commented-user-profile-img">
-                                    <img src="./assets/img/header-profile-img.png" alt="">
-                                  </div>
-                                  <div class="commented-user-profile-content">
-                                    <h3>Angel Geidt</h3>
-                                    <p>New York</p>
-                                  </div>
-                              </div>
-                              <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                <img src="./assets/img/clap-icon.png" alt="">
-                              </div>
-                            </div>
-                          </li>
+
                         </ul>
                       </div>
                     </div>
