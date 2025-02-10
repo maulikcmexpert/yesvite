@@ -1783,16 +1783,24 @@ class EventWallController extends Controller
         ->with(['user'])
         ->get();
 
+        $reactionWiseUsers = [];
+        foreach ($getreaction as $reaction) {
+            $reactionWiseUsers[$reaction->reaction][] = [
+                'user_id' => $reaction->user->id ?? null,
+                'username' => $reaction->user->username ?? null,
+            ];
+        }
         $totalReactions = $getreaction->count();
         $reactionCounts = $getreaction->groupBy('reaction')->map(function ($group) {
             return $group->count();
-});
+        });
         $reaction_detail=[
             'total_count'=>$totalReactions,
-            'reaction_count'=>$reactionCounts
+            'reaction_count'=>$reactionCounts,
+            'reaction_wise_users'=>$reactionWiseUsers
         ];
 
-        // dd($reaction_detail);
+        dd($reaction_detail);
     }
 
 
