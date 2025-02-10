@@ -3230,6 +3230,11 @@
         text-align: center;
     }
 
+    .responsive-calendar .week{
+        display: inline-block;
+        text-align: center;
+    }
+
     .mobile-calender-btn {
         display: flex;
     }
