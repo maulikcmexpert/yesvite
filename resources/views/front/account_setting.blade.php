@@ -76,7 +76,7 @@
                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$user->coins}}</span>
                                         </h5>
-                                        <h6>Last Recharge : <span>{{$user->lastRecharge}}</span></h6>
+                                        <h6>Last Recharge : <span id="lastRecharge">{{$user->lastRecharge}}</span></h6>
                                     </div>
                                 </div>
                                 <div class="account-setting-credit-button-wrp">
