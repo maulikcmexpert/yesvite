@@ -70,8 +70,7 @@ $(document).ready(function () {
             // Set the values in the modal form
             $("#categorys").val(categoryName); // Set category name in the input field
             $("#quantitys").val(categoryQuantity); // Set category quantity in the input field
-            $("#charCount").text(categoryName.length)
-            alert(categoryName.length)
+            $(".char_count").text(categoryName.length)
             const formAction = `/event_potluck/updateCategory/${categoryId}) }}`;
             $("#categoryForms").attr("action", formAction);
         }
