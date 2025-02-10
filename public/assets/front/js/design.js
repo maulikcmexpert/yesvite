@@ -652,6 +652,7 @@ async function bindData(current_event_id) {
         if (image) {
             console.log(image);
             fabric.Image.fromURL(image, function (img) {
+                img.crossOrigin = "anonymous";
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
 

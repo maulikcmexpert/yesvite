@@ -1,6 +1,6 @@
 let guestList = [];
 let guestPhoneList = [];
-
+var base_url=$('#base_url').val();
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
@@ -21,8 +21,8 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
     let reactionIcons = {
-        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        // "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
@@ -260,6 +260,9 @@ $(document).ready(function () {
 
         // Replace heart icon with selected emoji
         emojiDisplay.removeClass();
+
+
+        // emojiDisplay.text(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt="">`);
         emojiDisplay.text(selectedEmoji);
 
         // AJAX call to update emoji reaction
@@ -286,6 +289,9 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
+                
+
+                        console.log(reactionIcons[reaction]);
                         if (reactionIcons[reaction]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
@@ -305,6 +311,7 @@ $(document).ready(function () {
                                     )
                                 );
                             }
+                         
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
                             } else {
