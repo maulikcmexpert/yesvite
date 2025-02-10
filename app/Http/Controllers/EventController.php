@@ -634,7 +634,7 @@ class EventController extends BaseController
             )
         );
 
-        $imagecount = $categories->count();
+        $imagecount = $totalTextDataCount;
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')
         //     ->get();
