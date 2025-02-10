@@ -278,7 +278,7 @@ $(document).ready(function () {
             emoji_name="clap-icon";
         }
 
-        emojiDisplay.text(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt="">`);
+        // emojiDisplay.text(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt="">`);
         // emojiDisplay.text(selectedEmoji);
 
         // AJAX call to update emoji reaction
