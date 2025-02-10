@@ -238,6 +238,7 @@
     justify-content: center;
     gap:5px;
     width: 100%;
+    color: #000 !important; 
 }
 
 
