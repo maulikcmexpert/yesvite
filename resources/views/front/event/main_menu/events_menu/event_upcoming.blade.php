@@ -45,7 +45,23 @@
                     <div class="home-upcoming-events-card-left">
                         <a href="{{ $eventRoute }}" class="home-upcoming-events-card-left-profile">
                             <div class="home-upcoming-events-card-left-profile-img">
-                                <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt="">
+                                <!-- <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt=""> -->
+                                @if($upcomingEvent['host_profile'] != "")
+                                    <img src="{{$upcomingEvent['host_profile']}}" class="lazy" alt="">
+                                @else
+                                @php
+                                    $name = $upcomingEvent['host_name'];
+                                    $parts = explode(" ", $name);
+
+                                    $firstInitial = isset($upcomingEvent['host_firstname'][0]) ? strtoupper($upcomingEvent['host_firstname'][0]) : '';  // Take the first letter of the first name
+                                    $secondInitial = isset($upcomingEvent['host_lastname'][0]) ? strtoupper($upcomingEvent['host_lastname'][0]) : '';  // Take the first letter of the last name
+
+                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+
+                                    $fontColor = "fontcolor" . strtoupper($firstInitial);
+                                @endphp
+                    <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
+                    @endif
                             </div>
                             <div class="home-upcoming-events-card-left-profile-content">
                                 <h3>{{$upcomingEvent['event_name']}}</h3>
