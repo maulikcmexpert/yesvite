@@ -73,7 +73,7 @@
                                 <div class="account-setting-credit-wrp">
                                     <div class="credits_balance_amout_wrp">
                                         <h5>
-                                            <img src="{{asset(front/image/credit-coin-img.png)}}" alt="">
+                                            <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$user->coins}}</span>
                                         </h5>
                                         <h6>Last Recharge : <span>{{$user->lastRecharge}}</span></h6>

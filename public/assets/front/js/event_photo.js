@@ -1,18 +1,6 @@
 $(document).ready(function () {
     // Function to update character count
 
-    let reactionIcons = {
-        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
-    };
 
     // Function to validate form fields
     function validateForm() {
@@ -910,6 +898,18 @@ $(document).on("click", ".download_img_single", function () {
     }
 });
 
+let reactionIcons = {
+    "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+    "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+    "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+};
 
 $(document).on("click", ".open_photo_model", function () {
     clearTimeout(pressTimer); // Clear the timer
@@ -1084,18 +1084,14 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(typeof data.self_reaction); // Output: string
 
                 var reaction_store = data.self_reaction.trim();
-                console.log("Trimmed Reaction Store:", reaction_store); // Log trimmed reaction value
-                console.log(
-                    "Reaction Unicode Code:",
-                    reaction_store.charCodeAt(0)
-                ); // Log the Unicode code of the first character
+
 
 
                 console.log(reaction_store);
 
 
 
-                let reactionImageHtml = "";
+                let reactionImageHtml = $('#likeButtonModel').find('i');
                 if (reactionIcons[reaction_store]) {
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
