@@ -140,9 +140,9 @@
                 @endif
             </div>
         </div>
-        <a href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{ $events['event_images'] }}">
+        <button class="home-upcoming-events-card-right zoom_img" data-img="{{ $events['event_images'] }}">
             <img src="{{$events['event_images']}}"  loading="lazy" alt="">
-        </a>
+        </button>
     </div>
     @endforeach
   </div>
