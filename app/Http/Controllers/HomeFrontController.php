@@ -116,6 +116,7 @@ class HomeFrontController extends BaseController
                         ->with('textdatas'); // Load the textdatas relationship
                 }
             ])
+            ->orderBy('id', 'ASC')
             ->get();
 
         // Calculate total count of textdatas across all subcategories
@@ -155,7 +156,7 @@ class HomeFrontController extends BaseController
                         ->with('textdatas'); // Load textdatas
                 }
             ])
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'ASC')
             ->get();
 
 
