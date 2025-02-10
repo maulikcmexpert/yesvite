@@ -1533,9 +1533,11 @@ $(document).on('click','.get_post_emoji_list',function(){
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
                     $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
                     $(`#${tabId}-tab`).removeClass('active');
+                    $(`#${tabId}`).removeClass('active show');
                 });
                 $("#nav-all-reaction-tab").addClass('active');
-                $("#reaction-modal").modal("show");
+                $("#nav-all-reaction").addClass('active');
+                $("#reaction-modal").modal("active show");
             }
         },
         error: function (xhr, status, error) {
