@@ -156,7 +156,7 @@ class HomeFrontController extends BaseController
                 return $subcategory->textdatas->count();
             });
         });
-
+        dd($categories);
         return response()->json([
             'view' => view('front.search_home_design', compact('categories'))->render(),
             'count' => $totalTextDataCount, // Count of categories
