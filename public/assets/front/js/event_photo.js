@@ -1178,6 +1178,7 @@ console.log(reactionIcons[reaction_store]);
 
 
                 reactionList.find("li").each(function () {
+                    alert()
                     const img = $(this).find("img");
                     if (img.length) {
                         const emojiSrc = img.attr("src");
