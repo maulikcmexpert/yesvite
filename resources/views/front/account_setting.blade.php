@@ -52,7 +52,7 @@
                         <div class="w-100">
                             <div>
                                 <h4>Available Credits:</h4>
-                                <div class="d-flex align-items-center mb-1">
+                                {{-- <div class="d-flex align-items-center mb-1">
                                     <span>
                                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2 12.3385C0.895431 12.3385 0 11.4431 0 10.3385V3.27195C0 2.90315 0.38563 2.66127 0.717651 2.8218L3.99023 4.40415C4.20677 4.50885 4.46716 4.44454 4.61006 4.25107L7.59782 0.206116C7.79767 -0.0644616 8.20232 -0.0644622 8.40218 0.206115L11.3899 4.25107C11.5328 4.44454 11.7932 4.50885 12.0098 4.40415L15.2823 2.8218C15.6144 2.66127 16 2.90315 16 3.27195V10.3385C16 11.4431 15.1046 12.3385 14 12.3385H2Z" fill="#FCCD1E" />
@@ -65,7 +65,7 @@
                                     @else
                                     <h5>Pro Account</h5>
                                     @endif
-                                </div>
+                                </div> --}}
                                 {{-- <div class="exp-wrp">
                                     <span>Exp: {{$user->join_date}}</span>
                                     <!-- <a href="#">Click to change plan</a> -->
