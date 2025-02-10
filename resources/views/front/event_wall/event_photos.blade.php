@@ -374,7 +374,8 @@
                                                         <ul>
                                                             @if (!empty($photo['reactionList']) && is_array($photo['reactionList']))
                                                                 @foreach ($photo['reactionList'] as $reaction)
-                                                                    <li>
+                                                                    <li id="reactionImage_{{ $photo['id'] }}">
+
                                                                         <span class="reaction-emoji">
                                                                             {{ preg_replace_callback(
                                                                                 '/\\\\u\{([0-9A-F]+)\}/',
