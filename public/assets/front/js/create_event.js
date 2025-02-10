@@ -1494,7 +1494,9 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    startDate.isSame(moment(sortedDates[0]), "day")
+                    // startDate.isSame(moment(sortedDates[0]), "day")
+                    startDate.startOf('day').isSame(moment(sortedDates[0], "MM-DD-YYYY").startOf('day'), "day")
+
                         ? `
                             <h4>Event Start</h4>
                             <div class="row">
