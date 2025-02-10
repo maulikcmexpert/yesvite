@@ -51,7 +51,7 @@
                     <div class="pro-account d-flex align-items-center justify-content-between">
                         <div class="w-100">
                             <div>
-                                <h4>Membership:</h4>
+                                <h4>Available Credits:</h4>
                                 <div class="d-flex align-items-center mb-1">
                                     <span>
                                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,10 +66,10 @@
                                     <h5>Pro Account</h5>
                                     @endif
                                 </div>
-                                <div class="exp-wrp">
+                                {{-- <div class="exp-wrp">
                                     <span>Exp: {{$user->join_date}}</span>
                                     <!-- <a href="#">Click to change plan</a> -->
-                                </div>
+                                </div> --}}
                                 <div class="account-setting-credit-wrp">
                                     <div class="credits_balance_amout_wrp">
                                         <h5>
@@ -95,11 +95,11 @@
                                 </div>
                             </div>
                         </div>
-                        <span>
+                        {{-- <span>
                             <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </span>
+                        </span> --}}
                     </div>
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
