@@ -274,6 +274,7 @@
         // Filter images based on checked categories
         // if (checkedCheckboxes > 0) {
             $('.image-item-new').hide(); // Hide all images first
+            $('.image-item').hide(); // Hide all images first
             // $('input[name="design_category"]:not(#Allcat):checked').each(function() {
                 const categoryId = $(this).data('category-id');
                 const subcategoryId = $(this).data('subcategory-id');
