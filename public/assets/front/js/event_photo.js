@@ -1178,7 +1178,6 @@ console.log(reactionIcons[reaction_store]);
 
 
                 reactionList.find("li").each(function () {
-                    alert()
                     const img = $(this).find("img");
                     if (img.length) {
                         const emojiSrc = img.attr("src");
@@ -1887,7 +1886,7 @@ function renderReactions(post) {
         let emojiSrc = reactionIcons[reaction] || null;
 
         if (emojiSrc) {
-            let listItemId = (j === 0 && selfReaction === reaction) ? `id="test1_${post.id}"` : `id="user_test_${post.id}"`;
+            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
             reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
