@@ -9,6 +9,8 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="https://kit.fontawesome.com/5da2e3556b.js" crossorigin="anonymous"></script>
 <script src="{{asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
