@@ -2956,6 +2956,7 @@
 
 .responsive-calendar .weekdays .day {
     border: none !important;
+    width: 100% !important;
     height: auto !important;
     min-height: auto !important;
 }
@@ -2990,7 +2991,7 @@
 }
 
 .responsive-calendar .month {
-    max-width: 500px;
+    max-width: 100%;
     margin: 0px auto;
     margin-bottom: 20px;
 }
@@ -3004,7 +3005,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     padding: 0px !important;
     z-index: 1000;
 }
