@@ -112,14 +112,14 @@ class DesignStyleController extends Controller
 
             DB::commit();
 
-            return redirect()->route('design_style.index')->with('success', 'design style Add successfully !');
+            return redirect()->route('design_style.index')->with('msg', 'design style Add successfully !');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('design_style.create')->with('danger', 'design style not added' . $e->getMessage());
+            return redirect()->route('design_style.create')->with('msg_error', 'design style not added' . $e->getMessage());
         }
     }
 
@@ -174,14 +174,14 @@ class DesignStyleController extends Controller
 
             DB::commit();
 
-            return redirect()->route('design_style.index')->with('success', 'Design style updated successfully!');
+            return redirect()->route('design_style.index')->with('msg', 'Design style updated successfully!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('design_style.edit', $id)->with('danger', 'Design style not updated!' . $e->getMessage());
+            return redirect()->route('design_style.edit', $id)->with('msg_error', 'Design style not updated!' . $e->getMessage());
         }
     }
 
@@ -204,13 +204,13 @@ class DesignStyleController extends Controller
             DB::commit();
 
             return redirect()->route('design_style.index')
-                ->with('success', 'Design style deleted successfully');
+                ->with('msg', 'Design style deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             return redirect()->route('design_style.index')
-                ->with('danger', 'Design style not deleted');
+                ->with('msg_error', 'Design style not deleted');
         }
     }
 

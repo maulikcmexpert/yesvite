@@ -104,11 +104,11 @@ class faqController extends Controller
 
             DB::commit();
 
-            return redirect()->route('faq.index')->with('success', 'FAQ added successfully!');
+            return redirect()->route('faq.index')->with('msg', 'FAQ added successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return redirect()->route('faq.index')->with('danger', 'Something went wrong!');
+            return redirect()->route('faq.index')->with('msg_error', 'Something went wrong!');
         }
     }
 
@@ -171,7 +171,7 @@ class faqController extends Controller
         $faq->save();
 
         // Redirect back to the FAQ list with a success message
-        return redirect()->route('faq.index')->with('success', 'FAQ updated successfully!');
+        return redirect()->route('faq.index')->with('msg', 'FAQ updated successfully!');
     }
 
 
@@ -190,12 +190,12 @@ class faqController extends Controller
             DB::commit();
 
             return redirect()->route('faq.index')
-                ->with('success', 'FAQ deleted successfully');
+                ->with('msg', 'FAQ deleted successfully');
         } catch (\Exception $e) {
 
             DB::rollBack();
             return redirect()->route('faq.index')
-                ->with('danger', 'FAQ not deleted');
+                ->with('msg_error', 'FAQ not deleted');
         }
     }
 }

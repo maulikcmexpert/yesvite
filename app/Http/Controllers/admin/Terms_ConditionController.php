@@ -81,11 +81,11 @@ class Terms_ConditionController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('terms_condition.index')->with('success', 'Terms and Condition saved successfully!');
+            return redirect()->route('terms_condition.index')->with('msg', 'Terms and Condition saved successfully!');
         } catch (\Exception $e) {
             // Rollback transaction on error
             DB::rollBack();
-            return redirect()->route('terms_condition.index')->with('error', 'Terms and Condition creation failed!');
+            return redirect()->route('terms_condition.index')->with('msg_error', 'Terms and Condition creation failed!');
         }
     }
 

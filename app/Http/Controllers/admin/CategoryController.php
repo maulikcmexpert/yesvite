@@ -178,14 +178,14 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('category.index')->with('success', 'Category Add successfully !');
+            return redirect()->route('category.index')->with('msg', 'Category Add successfully !');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('category.create')->with('danger', 'Category not added' . $e->getMessage());
+            return redirect()->route('category.create')->with('msg_error', 'Category not added' . $e->getMessage());
         }
     }
 
@@ -286,14 +286,14 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('category.index')->with('success', 'Category updated successfully!');
+            return redirect()->route('category.index')->with('msg', 'Category updated successfully!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('category.edit', $id)->with('danger', 'Category not updated!' . $e->getMessage());
+            return redirect()->route('category.edit', $id)->with('msg_error', 'Category not updated!' . $e->getMessage());
         }
     }
 
@@ -328,7 +328,7 @@ class CategoryController extends Controller
             DB::commit();
 
             return redirect()->route('category.index')
-                ->with('success', 'Category deleted successfully');
+                ->with('msg', 'Category deleted successfully');
         } catch (QueryException $e) {
 
 
@@ -336,7 +336,7 @@ class CategoryController extends Controller
             DB::rollBack();
 
             return redirect()->route('category.index')
-                ->with('danger', 'Category not deleted');
+                ->with('msg_error', 'Category not deleted');
         }
     }
 
