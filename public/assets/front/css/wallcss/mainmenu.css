@@ -2969,6 +2969,7 @@
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .responsive-calendar {
