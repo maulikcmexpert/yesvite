@@ -1446,6 +1446,7 @@ $(document).on("change", "#schedule", function () {
 });
 
 function set_activity_html(selectedDates) {
+    console.log(selectedDates);
     $(".activity_bar").html("");
     var activities = {};
     eventData.activity = {};
