@@ -1776,6 +1776,15 @@ class EventWallController extends Controller
         return redirect()->back()->with('success', 'Poll created successfully!');
     }
 
+    public function get_reaction_post_list(Request $request){
+        $user = Auth::guard('web')->user();
+        $post_id=$request->post_id;
+        dd($user->id,$post_id);
+        $checkUserIsReaction = EventPostReaction::where('event_post_id', $value->id)
+    ->with(['user'])
+    ->get();
+    }
+
 
 
 
