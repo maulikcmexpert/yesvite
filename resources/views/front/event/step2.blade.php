@@ -92,7 +92,7 @@
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
                 @foreach ($subcategory->textdatas as $image)
-                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
+                    <div id="design_category" class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
                         data-category-id="{{ $category->id }}" 
                         data-subcategory-id="{{ $subcategory->id }}" 
                        >
@@ -114,12 +114,12 @@
         </div>
 
 
-        <div class="row list_all_design_catgeory" style="display: none">
+        <div class="row list_all_design_catgeory" >
             
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
                 @foreach ($subcategory->textdatas as $image)
-                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
+                    <div style="display: none" class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
                         data-category-id="{{ $category->id }}" 
                         data-subcategory-id="{{ $subcategory->id }}" 
                        >
@@ -256,6 +256,38 @@
                toastr.error('Some thing went wrong');
             }
         });
+    });
+
+
+    $(document).on('click', '#design_category', function() {
+        // If all individual checkboxes are checked, check "All Categories"
+        // const totalCheckboxes = $('input[name="design_category"]:not(#Allcat)').length;
+        // const checkedCheckboxes = $('input[name="design_category"]:not(#Allcat):checked').length;
+
+        // if (checkedCheckboxes === totalCheckboxes) {
+        //     $('#Allcat').prop('checked', true);
+        // } else {
+        //     $('#Allcat').prop('checked', false);
+        // }
+
+        // Filter images based on checked categories
+        // if (checkedCheckboxes > 0) {
+            $('.image-item-new').hide(); // Hide all images first
+            $('input[name="design_category"]:not(#Allcat):checked').each(function() {
+                const categoryId = $(this).data('category-id');
+                const subcategoryId = $(this).data('subcategory-id');
+
+                // Show images matching the selected categories and subcategories
+                $(`.image-item-new[data-category-id="${categoryId}"]`)
+                    .show();
+                    var visibleItems = $('.all_designs:visible').length;
+                    $('.total_design_count').text(visibleItems + ' Items');
+            });
+        // } else {
+        //     $('.image-item').hide(); // Hide all images if no checkboxes are checked
+        //     var visibleItems = $('.all_designs:visible').length;
+        //     $('.total_design_count').text(visibleItems + ' Items');
+        // }
     });
 });
     </script>
