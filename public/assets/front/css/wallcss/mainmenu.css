@@ -3208,7 +3208,7 @@
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-        /* max-width: 500px; */
+        max-width: 500px;
         padding: 0px !important;
     }
     .responsive-calender-title-wrp {
@@ -3501,7 +3501,7 @@
         text-align: center;
     }
     .responsive-calender-month-wrp {
-        /* max-width: 400px; */
+        max-width: 400px;
         top: 135px;
     }
     .responsive-calendar {
@@ -3622,7 +3622,7 @@
         font-size: 16px;
     }
     .responsive-calender-month-wrp {
-        /* max-width: 316px; */
+        max-width: 316px;
     }
     .responsive-calendar .day {
         font-size: 12px;
