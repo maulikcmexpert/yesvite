@@ -1429,7 +1429,7 @@
 
                       <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel" aria-labelledby="nav-all-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1444,7 +1444,7 @@
                                   <img src="./assets/img/heart-emoji.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
 
