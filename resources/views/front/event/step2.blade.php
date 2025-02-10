@@ -285,6 +285,7 @@
                 const subcategoryId = $(this).data('subcategory-id');
                 const category_name = $(this).data('category_name');
                 $("#category_name").show();
+                $("#allchecked").show();
                 $("#category_name").text(category_name);
 
 
