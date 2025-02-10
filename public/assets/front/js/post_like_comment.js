@@ -289,26 +289,7 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
-                        let emoji_name="";
-                        if (reaction == "❤️"){
-                            emoji_name="heart-emoji";
-                        }  
-                            
-                        else if (reaction == "\\u{1F44D}"){
-                            emoji_name="thumb-icon";
-    
-                        } 
-                        else if (reaction == "\\u{1F60A}"){
-                            emoji_name="smily-emoji";
-    
-                        } 
-                        else if (reaction == "\\u{1F60D}"){
-                            emoji_name="eye-heart-emoji";
-    
-                        }
-                        else if (reaction == "\\u{1F44F}"){
-                            emoji_name="clap-icon";
-                        }
+                
 
                         console.log(reactionIcons[reaction]);
                         if (reactionIcons[reaction]) {
@@ -330,28 +311,7 @@ $(document).ready(function () {
                                     )
                                 );
                             }
-                            let emoji_name="";
-                            if (firstReaction == "\\u{2764}"){
-                                emoji_name="heart-emoji";
-                            }  
-                                
-                            else if (firstReaction == "\\u{1F44D}"){
-                                emoji_name="thumb-icon";
-        
-                            } 
-                            else if (firstReaction == "\\u{1F60A}"){
-                                emoji_name="smily-emoji";
-        
-                            } 
-                            else if (firstReaction == "\\u{1F60D}"){
-                                emoji_name="eye-heart-emoji";
-        
-                            }
-                            else if (firstReaction == "\\u{1F44F}"){
-                                emoji_name="clap-icon";
-                            }
-
-                            console.log(emoji_name);
+                         
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
                             } else {
