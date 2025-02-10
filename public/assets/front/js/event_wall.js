@@ -1486,14 +1486,14 @@ $(document).on('click','.get_post_emoji_list',function(){
                         if(user.profile==""){
                             profile=generateProfileImage(user.firstname,user.lastname);
                         }else{
-                            profile=user.profile;
+                            profile=` <img src="${user.profile}" alt="">`;
                         }
                         reactionHtml += `
                             <li class="reaction-info-wrp">
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
                                         <div class="commented-user-profile-img">
-                                            <img src="${profile}" alt="">
+                                            ${profile}
                                         </div>
                                         <div class="commented-user-profile-content">
                                             <h3>${user.firstname} ${user.lastname}</h3>
