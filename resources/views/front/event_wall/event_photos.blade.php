@@ -923,7 +923,7 @@
                             </div>
                         </div>
                         <div class="posts-card-like-commnet-wrp">
-                            <div class="posts-card-like-comment-left">
+                            <div class="posts-card-like-comment-left_new">
                                 <ul id="postCardEmoji" type="button" data-bs-toggle="modal"
                                     data-bs-target="#reaction-modal">
                                     {{-- <li class="reactionImage" id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
