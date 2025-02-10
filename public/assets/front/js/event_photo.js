@@ -1155,7 +1155,7 @@ console.log(reactionIcons[reaction_store]);
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
                 $(`#likeButtonModel`).html(reactionImageHtml);
-                $(`#reactionImage`).html(reactionImageHtml);
+                // $(`#reactionImage`).html(reactionImageHtml);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
                 reactionList.find("li").each(function () {
