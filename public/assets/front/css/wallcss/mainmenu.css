@@ -3015,12 +3015,14 @@
     display: block;
     position: absolute;
     top: 146px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    max-width: 100%;
+    max-width: calc(100% - 100px);
     padding: 0px !important;
     z-index: 1000;
 }
+
 .responsive-calender-title-wrp {
     display: block;
     position: fixed;
