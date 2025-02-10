@@ -289,6 +289,28 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
+                        let emoji_name="";
+                        if (reaction == "\\u{2764}"){
+                            emoji_name="heart-emoji";
+                        }  
+                            
+                        else if (reaction == "\\u{1F44D}"){
+                            emoji_name="thumb-icon";
+    
+                        } 
+                        else if (reaction == "\\u{1F60A}"){
+                            emoji_name="smily-emoji";
+    
+                        } 
+                        else if (reaction == "\\u{1F60D}"){
+                            emoji_name="eye-heart-emoji";
+    
+                        }
+                        else if (reaction == "\\u{1F44F}"){
+                            emoji_name="clap-icon";
+                        }
+
+                        console.log(emoji_name);
                         if (reactionIcons[reaction]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
