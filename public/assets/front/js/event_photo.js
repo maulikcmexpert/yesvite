@@ -1600,7 +1600,7 @@ $(document).on("mousedown", "#likeButtonModel", function () {
 });
 $(document).on("click", "#likeButtonModel", function () {
     // alert();
-    return;
+    // return;
     clearTimeout(longPressTimers); // Clear the long press timer
 
     // If it's a long press, don't process the click event
@@ -1651,7 +1651,6 @@ $(document).on("click", "#likeButtonModel", function () {
 });
 
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
-    return;
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButton");
     const emojiDisplay = button.find("#show_comment_emoji");
@@ -1881,24 +1880,25 @@ function renderReactions(post) {
     let j = 0;
     let i = 0;
 
-    reactionList.forEach((reaction) => {
-        if (i >= 3) return; // Limit to 3 reactions
+    for (let reaction of reactionList) {
+        if (i >= 3) break; // Limit to 3 reactions
 
         let emojiSrc = reactionIcons[reaction] || null;
 
         if (emojiSrc) {
-            let listItemId = (j === 0 && selfReaction === reaction) ? `id="test_${post.id}"` : "";
-            reactionHtml += `<li ${listItemId} style="display:flex !important;"><img src="${emojiSrc}" alt="Emoji"></li>`;
+            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
+            reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
         }
-    });
+    }
 
     if (j === 0 && i < 3) {
-        reactionHtml += `<li id="test_${post.id}" style="display:flex !important;"></li>`;
+        reactionHtml += `<li id="reactionImage_${post.id}" style="display:flex;"></li>`;
     }
 
     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
 
     return reactionHtml + likeCountHtml;
 }
+
