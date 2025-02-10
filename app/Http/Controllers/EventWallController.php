@@ -1801,7 +1801,7 @@ class EventWallController extends Controller
             'reaction_count'=>$reactionCounts,
         ];
 
-        dd($reaction_detail,$reactionWiseUsers);
+        // dd($reaction_detail,$reactionWiseUsers);
     }
 
 
