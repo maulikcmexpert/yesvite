@@ -2999,7 +2999,7 @@
 }
 .responsive-calender-month-wrp {
     display: block;
-    position: fixed;
+    position: absolute;
     top: 146px;
     left: 50%;
     transform: translateX(-50%);
