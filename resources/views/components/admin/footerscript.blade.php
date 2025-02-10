@@ -9,6 +9,8 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="https://kit.fontawesome.com/5da2e3556b.js" crossorigin="anonymous"></script>
 <script src="{{asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -71,3 +73,36 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
 {{-- <script src="{{ asset('assets/front/js/design.js') }}"></script> --}}
+<script>
+  $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            @if (session('msg'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('msg') }}");
+            @endif
+            @if (session('msg_error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.error("{{ session('msg_error') }}");
+            @endif
+            @if (session('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.error("{{ session('error') }}");
+            @endif
+        });
+</script>
