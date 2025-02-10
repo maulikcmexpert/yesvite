@@ -95,6 +95,7 @@
                     <div id="design_category" class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
                         data-category-id="{{ $category->id }}" 
                         data-subcategory-id="{{ $subcategory->id }}" 
+                        data-category_name="{{ $category->category_name }}" 
                        >
                         <a href="javascript:;" class="collection-card card-blue">
                             <div class="card-img design-card">
@@ -115,7 +116,7 @@
 
 
         <div class="row list_all_design_catgeory" >
-            <h5>Test category</h5>
+            <h5 id="category_name" style="display:none ">Test category</h5>
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
             @foreach ($subcategory->textdatas as $image)
@@ -278,6 +279,9 @@
             // $('input[name="design_category"]:not(#Allcat):checked').each(function() {
                 const categoryId = $(this).data('category-id');
                 const subcategoryId = $(this).data('subcategory-id');
+                const category_name = $(this).data('category_name');
+                $("#category_name").show();
+                $("#category_name").text(category_name);
 
                 // Show images matching the selected categories and subcategories
                 $(`.image-item-new[data-category-id="${categoryId}"]`)

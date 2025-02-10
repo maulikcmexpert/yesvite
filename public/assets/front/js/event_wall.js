@@ -1492,8 +1492,6 @@ $(document).on('click','.get_post_emoji_list',function(){
                         count="clap-count";
                     }
 
-                    $(`#${tabId} ul`).html("");
-
                     let reactionHtml = "";
                     let profile="";
                     users.forEach(user => {
