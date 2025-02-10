@@ -1424,6 +1424,37 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
     height: 100% !important;
 }
 
+.toast.toast-error{
+    background-color: #df1c41 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container>.toast-error {
+    background-image: url('../../../toaster_error_icon.png') !important;
+}
+
+.toast.toast-success{
+    background-color: #38c793 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container>.toast-success {
+    background-image: url('../../../toater_success_icon.png') !important;
+}
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
