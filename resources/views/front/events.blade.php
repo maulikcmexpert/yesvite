@@ -87,12 +87,13 @@
                     </div>
                     <x-main_menu.events.calender :profileData="$profileData" />
                 </div>
+                <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
+                    <h2 class="calendar-heading">All Events</h2>
+                    <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
+                    <div id="responsive-calender-months" class="responsive-calender-months"></div>
+                  </div>
             </div>
-            {{-- <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
-              <h2 class="calendar-heading">All Events</h2>
-              <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
-              <div id="responsive-calender-months" class="responsive-calender-months"></div>
-            </div> --}}
+
             <div class="responsive-calender-month-wrp">
               <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
             </div>
