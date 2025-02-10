@@ -241,6 +241,7 @@
     color: #000 !important;
     border-radius: 100px !important;
     border: 1px solid #fff !important;
+    line-height: normal !important;
 }
 
 .cmn-btn.credit-hisotry-btn{
@@ -289,6 +290,12 @@
 
     .profile-privacy-wrp .contact-title h3 {
         margin-bottom: 10px;
+    }
+    .account-setting-credit-button-wrp{
+        gap: 10px !important;
+    }
+    .account-setting-credit-button-wrp .cmn-btn{
+        gap: 5px !important;
     }
 
 }
