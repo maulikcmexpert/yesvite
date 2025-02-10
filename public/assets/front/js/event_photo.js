@@ -174,6 +174,8 @@ $(document).ready(function () {
         const button = $(this)
             .closest(".photo-card-head-right")
             .find("#likeButton");
+            console.log(selectedEmoji);
+            
         // const emojiDisplay = button.find('#show_Emoji');
 
         // Replace heart icon with selected emoji
