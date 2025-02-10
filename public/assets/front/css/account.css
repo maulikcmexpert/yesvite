@@ -243,8 +243,9 @@
 
 .cmn-btn.credit-hisotry-btn{
     border: 1px solid #fff !important;
-    backdrop-filter: blur(100px);
-    background-color: transparent !important;
+    background: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    backdrop-filter: blur(100px); /* Blur effect */
+    -webkit-backdrop-filter: blur(100px);
 }
 
 
