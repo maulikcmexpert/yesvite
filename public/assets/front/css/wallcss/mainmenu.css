@@ -2985,6 +2985,7 @@
     padding: 50px;
     gap: 20px;
     overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .responsive-calender-months {
