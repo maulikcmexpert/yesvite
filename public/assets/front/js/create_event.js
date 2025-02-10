@@ -1390,6 +1390,7 @@ $(function () {
                 var activities = {};
                 eventData.activity = {};
                 var total_activities = 0;
+                console.log(selectedDates);
                 set_activity_html(selectedDates);
             }
         }
@@ -1431,7 +1432,9 @@ $(document).on("change", "#schedule", function () {
                 selectedDates.add(eventDate);
             }
             // console.log(selectedDates.size);
+            console.log(selectedDates);
             if (selectedDates.size > 0) {
+                console.log(selectedDates);
                 set_activity_html(selectedDates);
             }
         } else {
