@@ -1543,8 +1543,8 @@ $(document).on('click','.get_post_emoji_list',function(){
     });
 });
 $("#reaction-modal").on("shown.bs.modal", function () {
-    $(".tab-pane").removeClass("active show");
-    $(".nav-link").removeClass("active");
+    // $(".tab-pane").removeClass("active show");
+    // $(".nav-link").removeClass("active");
 
     $("#nav-all-reaction").addClass("active show");
     $("#nav-all-reaction-tab").addClass("active");
