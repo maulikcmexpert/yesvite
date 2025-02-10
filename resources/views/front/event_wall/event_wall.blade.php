@@ -448,10 +448,10 @@
                                                                         </li>
                                                                         @php $i++;  if($i==3){break;} @endphp
                                                                     @endforeach
-                                                                    {{-- @if($j==0)
+                                                                    @if($j==0 && $i<3)
                                                                     <li id="reactionImage_{{ $post['id'] }}">
                                                                     </li>
-                                                                    @endif --}}
+                                                                    @endif
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
