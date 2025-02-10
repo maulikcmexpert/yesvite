@@ -3009,6 +3009,7 @@
 .responsive-calendar .week{
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .responsive-calendar .day {
@@ -3232,7 +3233,7 @@
 
     .responsive-calendar .week{
         display: inline-block;
-        text-align: center;
+        /* text-align: center; */
     }
 
     .mobile-calender-btn {
