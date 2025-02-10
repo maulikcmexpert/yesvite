@@ -214,6 +214,7 @@
     margin-left: 0px !important;
     background-color: #fff !important;
     font-size:16px !important;
+    min-width: 92px;
 }
 
 .account-setting-credit-wrp .credits_balance_amout_wrp h6{
@@ -301,7 +302,7 @@
 }
 
 @media only screen and (max-width: 424px) {
-    .account-setting-credit-wrp .credits_balance_amout_wrp {
+    .account-setting-credit-wrp .credits_balance_amout_wrp{
         flex-direction: row !important;
         align-items: center !important;
     }
