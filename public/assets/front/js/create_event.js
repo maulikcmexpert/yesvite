@@ -4639,6 +4639,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    alert()
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4668,6 +4669,7 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
 });
 
 function li_design_click() {
+    alert()
     // console.log(eventData);
     // if (
     //     eventData.event_type != "" &&
