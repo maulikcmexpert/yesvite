@@ -9315,3 +9315,12 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
 }
 colorchange();
+
+$(document).on("click", ".previousImeg", function (e) {
+  
+    $("#close_createEvent").css("display", "block");
+
+    e.preventDefault();
+    $(".subcategory-section").show();
+    li_design_click();
+});
