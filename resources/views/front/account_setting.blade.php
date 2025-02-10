@@ -76,7 +76,7 @@
                                             <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
                                             <span class="available-coins">1.200</span>
                                         </h5>
-                                        <h6>Last Recharge : <span>500 Credits</span></h6>
+                                        <h6>Last Recharge : <span>{{$user->lastRecharge}}s</span></h6>
                                     </div>
                                 </div>
                                 <div class="account-setting-credit-button-wrp">
