@@ -1533,13 +1533,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
                     $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
                 });
-                $("#nav-all-reaction").addClass("active show");
-                $("#nav-all-reaction-tab").addClass("active");
-                $("#nav-heart-reaction-tab").removeClass("active");
-                $("#nav-thumb-reaction-tab").removeClass("active");
-                $("#nav-smily-reaction-tab").removeClass("active");
-                $("#nav-eye-heart-reaction-tab").removeClass("active");
-                $("#nav-clap-reaction-tab").removeClass("active");
+
                 $("#reaction-modal").modal("show");
             }
         },
