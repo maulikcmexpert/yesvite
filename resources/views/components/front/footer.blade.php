@@ -366,6 +366,7 @@ $(document).on("click", ".buynow", function () {
 });
 $("#buycreditsmodal").on("shown.bs.modal", function () {
     $("input.price-option").prop("checked", false);
+    $(".purchase-button").prop("disabled",true);
 });
     $(document).on('click','.create_event_with_plan',function(){
     // toggleSidebar('sidebar_change_plan_create');
