@@ -1425,9 +1425,7 @@ function generateProfileImage(firstname, lastname) {
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
     $("#nav-all-reaction ul").html("");
-    $("#nav-all-reaction").addClass('active');
-    $("#nav-all-reaction").addClass('show');
-    $("#nav-all-reaction-tab").addClass('active');
+
     $('#nav-all-reaction-tab').html("All 0");
     $(`#nav-heart-reaction ul`).html("");
     $('#heart-count').text('0');
@@ -1544,6 +1542,14 @@ $(document).on('click','.get_post_emoji_list',function(){
         },
     });
 });
+$("#myModal").on("shown.bs.modal", function () {
+    $(".tab-pane").removeClass("active show");
+    $(".nav-link").removeClass("active");
+
+    $("#nav-all-reaction").addClass("active show");
+    $("#nav-all-reaction-tab").addClass("active");
+});
+
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {
 //         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
