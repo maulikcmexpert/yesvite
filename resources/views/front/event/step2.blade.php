@@ -120,7 +120,7 @@
             <div class="row list_all_design_catgeory_new">
                 <div class="d-flex align-items-center gap-1">
                     <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left" style="color: #212529"></i></p>
-                    <h5 id="category_name" style="display:none">Test category</h5>
+                    <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
