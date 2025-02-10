@@ -1457,6 +1457,20 @@ function set_activity_html(selectedDates) {
     );
     var i = 0;
     var start_time = $("#start-time").val();
+    console.log('sortedDates :'+sortedDates);
+    console.log('startDate :' +startDate);
+    console.log('endDate :' +endDate);
+    console.log('start_time :' +start_time);
+    if (!startDate.isValid()) {
+        startDate = new Date(sortedDates[0]);
+        console.log("Using native Date for startDate:", startDate);
+    }
+
+    if (!endDate.isValid()) {
+        endDate = new Date(sortedDates.length === 2 ? sortedDates[1] : sortedDates[0]);
+        console.log("Using native Date for endDate:", endDate);
+    }
+
     // Loop through the date range, including startDate and endDate
     // activity_html_set(startDate,endDate,dateID,sortedDates);
     while (startDate <= endDate) {

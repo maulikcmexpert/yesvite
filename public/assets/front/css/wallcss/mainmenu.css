@@ -2959,12 +2959,15 @@
     width: 100% !important;
     height: auto !important;
     min-height: auto !important;
+
 }
 
 .responsive-calendar .weekdays {
     width: 100%;
     text-align: center;
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
 }
 
 .responsive-calendar {
@@ -2988,15 +2991,17 @@
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100% - 2%);
+    width: 100%;
 }
 
 .responsive-calendar .month {
+    width: 100%;
     max-width: 100%;
     margin: 0px auto;
     margin-bottom: 20px;
 }
 .responsive-calendar .day {
-    width: 70px;
+    width: 100%;
 }
 .responsive-calender-month-wrp {
     display: block;
