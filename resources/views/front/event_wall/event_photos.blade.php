@@ -900,7 +900,8 @@
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
                                 <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
-                                    <li id="reactionImage">
+                                    <li id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                            loading="lazy">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
                                             loading="lazy"></li>
@@ -912,7 +913,7 @@
                                 <h6 id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right emoji_set">
-                                <button class="posts-card-like-btn likeModel " id="likeButton"
+                                <button class="posts-card-like-btn likeModel " id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
                                     <i  id="show_emoji"> <img src="" alt=""
