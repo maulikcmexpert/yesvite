@@ -1,4 +1,3 @@
-{{dd($eventDetails)}}
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
