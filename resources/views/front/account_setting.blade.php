@@ -73,10 +73,10 @@
                                 <div class="account-setting-credit-wrp">
                                     <div class="credits_balance_amout_wrp">
                                         <h5>
-                                            <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
-                                            <span class="available-coins">1.200</span>
+                                            <img src="{{asset(front/image/credit-coin-img.png)}}" alt="">
+                                            <span class="available-coins">{{$user->coins}}</span>
                                         </h5>
-                                        <h6>Last Recharge : <span>{{$user->lastRecharge}}s</span></h6>
+                                        <h6>Last Recharge : <span>{{$user->lastRecharge}}</span></h6>
                                     </div>
                                 </div>
                                 <div class="account-setting-credit-button-wrp">
