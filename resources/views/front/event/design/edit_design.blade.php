@@ -261,14 +261,14 @@
       
         @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )    
         <div class="design-seting">
-            <button type="button" class="previousImeg">
+            <a href="#" class="previousImeg">
                 <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.0002 13.2797L5.65355 8.93306C5.14022 8.41973 5.14022 7.57973 5.65355 7.06639L10.0002 2.71973" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </span>
                 <h5 class="ms-2">Choose Design</h5>
-            </button>
+            </a>
             {{-- <a href="#" class="d-flex"> --}}
                 {{-- <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
