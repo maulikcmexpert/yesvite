@@ -85,6 +85,7 @@ $(document).ready(function () {
         "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+        "👏": base_url + "assets/front/img/clap-icon.png", // 👏
     };
     $(document).on("mousedown", "#likeButton", function () {
         isLongPresss = false; // Reset the flag
@@ -964,6 +965,7 @@ let reactionIcons = {
     "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
     "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
     "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    "👏": base_url + "assets/front/img/clap-icon.png", // 👏
 };
 
 $(document).on("click", ".open_photo_model", function () {
