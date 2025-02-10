@@ -1776,6 +1776,25 @@ class EventWallController extends Controller
         return redirect()->back()->with('success', 'Poll created successfully!');
     }
 
+    public function get_reaction_post_list(Request $request){
+        $user = Auth::guard('web')->user();
+        $post_id=$request->post_id;
+        $getreaction = EventPostReaction::where('event_post_id', $post_id)
+        ->with(['user'])
+        ->get();
+
+        $totalReactions = $getreaction->count();
+        $reactionCounts = $getreaction->groupBy('reaction')->map(function ($group) {
+            return $group->count();
+});
+        $reaction_detail=[
+            'total_count'=>$totalReactions,
+            'reaction_count'=>$reactionCounts
+        ];
+
+        // dd($reaction_detail);
+    }
+
 
 
 
