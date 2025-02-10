@@ -1095,6 +1095,7 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reactionImageHtml);
 
                 if (reactionIcons[reaction_store]) {
+console.log(reactionIcons[reaction_store]);
 
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
