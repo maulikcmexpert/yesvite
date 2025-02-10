@@ -1536,8 +1536,8 @@ $(document).on('click','.get_post_emoji_list',function(){
                     $(`#${tabId}`).removeClass('active show');
                 });
                 $("#nav-all-reaction-tab").addClass('active');
-                $("#nav-all-reaction").addClass('active');
-                $("#reaction-modal").modal("active show");
+                $("#nav-all-reaction").addClass('active show');
+                $("#reaction-modal").modal("show");
             }
         },
         error: function (xhr, status, error) {
