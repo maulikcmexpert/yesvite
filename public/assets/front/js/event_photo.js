@@ -976,6 +976,7 @@ $(document).on("click", ".open_photo_model", function () {
         console.log("Short press detected");
         $("#detail-photo-modal").modal("show");
     } // Open the modal
+    $("#reactionImage").show()
     // Fetch the post ID from the data attribute
     var login_user_id = $("#login_user_id").val();
     const postId = $(this).data("post-id");

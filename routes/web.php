@@ -403,7 +403,7 @@ Route::controller(AuthController::class)->group(function () {
             @add_user_firebase($user->id, 'offline');
             Auth::logout();
         } else {
-            return redirect()->route('login');  // Or 'login' URL if you have it as a route name
+            return redirect('login');
         }
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
         Session::forget('advertisement_closed');
