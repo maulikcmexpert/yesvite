@@ -1438,7 +1438,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                     "\u{1F60D}": "nav-eye-heart-reaction", // 😍
                     "\u{1F44F}": "nav-clap-reaction", // 👏
                 };
-                $("#nav-all-reaction-tab").html(`All ${reactionDetail.total_count}`);
+                $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
 
                 $(".tab-pane ul").html("");
 
@@ -1464,7 +1464,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                                         </div>
                                     </div>
                                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                        <img src="./assets/img/${reaction}-emoji.png" alt="">
+                                        <img src="${base_url}assets/front/img/${reaction}-emoji.png" alt="">
                                     </div>
                                 </div>
                             </li>
