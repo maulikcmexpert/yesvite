@@ -11,7 +11,7 @@ $getSocialLink = getSocialLink();
 
             <div class="col-xl-9 col-lg-9 col-md-8">
                 <div class="row">
-                    <div class="col-xl-8 col-lg-9 col-md-8">
+                    <div class="col-xl-8">
                         <div class="home-center-main">
                             <div class="home-center-content">
                                 <x-main_menu.home.profile :profileData="$profileData" />
