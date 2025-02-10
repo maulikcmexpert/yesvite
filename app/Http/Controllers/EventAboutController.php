@@ -437,6 +437,6 @@ class EventAboutController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'RSVP updated successfully!');
+        return redirect()->back()->with('msg', 'RSVP updated successfully!');
     }
 }

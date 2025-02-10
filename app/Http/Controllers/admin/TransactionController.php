@@ -84,7 +84,7 @@ class TransactionController extends Controller
 
             $cryptId=encrypt($user->id);
             return redirect()->route('transcation.index',['user_id' => $cryptId])
-            ->with('success', 'Coins Credited Successfully');
+            ->with('msg', 'Coins Credited Successfully');
         }
         
     }

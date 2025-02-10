@@ -521,7 +521,7 @@ class ChatController extends Controller
                     ->subject('Chat Report Mail');
             });
 
-            return redirect('messages')->with('success', 'Report submitted successfully!');
+            return redirect('messages')->with('msg', 'Report submitted successfully!');
         } catch (QueryException $e) {
 
 

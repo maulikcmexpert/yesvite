@@ -52,7 +52,7 @@ class UserResendEmailVerify extends Controller
         $userDetails->resend_verification_mail="0";
         $userDetails->save();
         DB::commit();
-        return redirect()->route('user_resend_verification.index')->with('success', 'Verification Mail sent Successfully !');
+        return redirect()->route('user_resend_verification.index')->with('msg', 'Verification Mail sent Successfully !');
     } catch (QueryException $e) {
         DB::rollBack();
     }
