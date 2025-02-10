@@ -149,18 +149,19 @@
   @endif
   <script>
   $(document).ready(function () {
-    $(".zoom_img").click(function () {
-        var imgSrc = $(this).data("img");
-alert(imgSrc);
-        $.magnificPopup.open({
-            items: {
-                src: imgSrc,
-                type: "image"
-            },
-            gallery: {
-                enabled: false
-            }
-        });
-    });
-});
+      $(document).on("click", ".zoom_img", function (e) {
+          e.preventDefault();
+          var imgSrc = $(this).data("img");
+
+          $.magnificPopup.open({
+              items: {
+                  src: imgSrc,
+                  type: "image"
+              },
+              gallery: {
+                  enabled: false
+              }
+          });
+      });
+  });
 </script>
