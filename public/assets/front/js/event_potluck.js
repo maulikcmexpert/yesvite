@@ -62,6 +62,7 @@ $(document).ready(function () {
         function () {
             // Get data attributes from the clicked link
             const categoryId = $(this).data("category-id");
+            const event_id = $(this).data("event-id");
             const categoryName = $(this).data("category-name");
             const categoryQuantity = $(this).data("category-quantity");
             console.log(categoryId);
@@ -70,7 +71,7 @@ $(document).ready(function () {
             // Set the values in the modal form
             $("#categorys").val(categoryName); // Set category name in the input field
             $("#quantitys").val(categoryQuantity); // Set category quantity in the input field
-
+            $(".char_count_"+event_id).text(categoryName.length)
             const formAction = `/event_potluck/updateCategory/${categoryId}) }}`;
             $("#categoryForms").attr("action", formAction);
         }
