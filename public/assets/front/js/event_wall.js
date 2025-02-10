@@ -1413,6 +1413,37 @@ $(document).on("click", function (e) {
     }
 });
 
+$(document).on('click','.get_post_emoji_list',function(){
+    var post_id=$(this).data('post');
+    // $.ajax({
+    //     url: base_url + "event_wall/wallFilters",
+    //     type: "POST",
+    //     data: JSON.stringify({
+    //         event_id: event_id,
+    //         filters: selectedPostTypes,
+    //         is_delete:"0"
+    //     }),
+    //     contentType: "application/json",
+    //     headers: {
+    //         Authorization: "Bearer YOUR_ACCESS_TOKEN",
+    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //     },
+    //     success: function (response) {
+    //         // console.log(response.view);
+    //         window.location.reload();
+    //         // $(".wall-post-content").html();
+    //         // $(".wall-post-content").html(response.view);
+    //         // $("#home_loader").css("display", "none");
+
+    //         // $("#main-center-modal-filter").modal("hide");
+    //     },
+    //     error: function (xhr, status, error) {
+    //         $("#home_loader").css("loader", "none");
+    //         toastr.error("Something went wrong!");
+    //         console.error(xhr.responseText);
+    //     },
+    // });
+});
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {
 //         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
