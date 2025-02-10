@@ -1131,7 +1131,7 @@ $(document).on("click", ".open_photo_model", function () {
                 $("#post_message").text(data.post_message);
                 $("#post_time_details").text(data.post_time);
 
-                $("#likes").text(data.total_likes + " Likes");
+                $("#likeCount").text(data.total_likes + " Likes");
                 // Add 'Likes' after the number
                 $("#comments").text(data.total_comments + " Comments");
 
@@ -1155,6 +1155,7 @@ console.log(reactionIcons[reaction_store]);
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
                 $(`#likeButtonModel`).html(reactionImageHtml);
+                $(`#reactionImage`).html(reactionImageHtml);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
                 reactionList.find("li").each(function () {
