@@ -1859,14 +1859,14 @@ function renderReactions(post) {
 
         if (emojiSrc) {
             let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
-            reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
+            reactionHtml += `<li ${listItemId} style="display:flex"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
         }
     });
 
     if (j === 0 && i < 3) {
-        reactionHtml += `<li id="reactionImage_${post.id}"></li>`;
+        reactionHtml += `<li style="display:flex" id="reactionImage_${post.id}"></li>`;
     }
 
     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
