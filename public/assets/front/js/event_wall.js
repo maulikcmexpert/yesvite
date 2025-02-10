@@ -1497,6 +1497,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                                         </div>
                                         <div class="commented-user-profile-content">
                                             <h3>${user.firstname} ${user.lastname}</h3>
+                                            <p>${user.location}</p>
                                         </div>
                                     </div>
                                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
