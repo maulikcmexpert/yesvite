@@ -1092,8 +1092,11 @@ $(document).on("click", ".open_photo_model", function () {
 
 
                 let reactionImageHtml = $('#likeButtonModel').find('i');
+                console.log(reactionImageHtml);
+                
                 if (reactionIcons[reaction_store]) {
-                    reactionImageHtml.replaceWith(`<img src="${reactionIcons[reaction_store]}" alt="">`);
+
+                    reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
 
                 // Update the emoji list based on the reaction
