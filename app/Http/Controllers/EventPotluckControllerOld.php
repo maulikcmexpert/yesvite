@@ -456,7 +456,7 @@ class EventPotluckController extends Controller
         $category->quantity = $request->input('quantity');
         $category->save();
 
-        return redirect()->back()->with('success', 'Category updated successfully!');
+        return redirect()->back()->with('msg', 'Category updated successfully!');
     }
     public function deleteCategory(Request $request)
     {
@@ -548,7 +548,7 @@ class EventPotluckController extends Controller
 
 
 
-        return redirect()->back()->with('success', "Potluck category item updated");
+        return redirect()->back()->with('msg', "Potluck category item updated");
     }
 
     public function editUserPotluckItem(Request $request)
