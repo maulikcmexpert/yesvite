@@ -999,7 +999,7 @@ function datepicker() {
             // })
 
             .on("dp.close", function () {
-                alert();
+            
                 // const picker = $(this).data("DateTimePicker");
                 // const startTime = $(this).closest("div").find(".activity_start_time").val();
                 // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
@@ -4647,7 +4647,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
-    alert()
+  
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4677,7 +4677,7 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
 });
 
 function li_design_click() {
-    alert()
+
     // console.log(eventData);
     // if (
     //     eventData.event_type != "" &&
@@ -9321,3 +9321,12 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
 }
 colorchange();
+
+$(document).on("click", ".previousImeg", function (e) {
+  alert()
+    $("#close_createEvent").css("display", "block");
+
+    e.preventDefault();
+    $(".subcategory-section").show();
+    li_design_click();
+});
