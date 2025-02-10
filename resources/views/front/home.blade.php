@@ -9,7 +9,7 @@ $getSocialLink = getSocialLink();
         <div class="row">
             <x-front.sidebar :profileData="[]" />
 
-            <div class="col-xl-9 col-lg-9 col-md-8">
+            <div class="calender-supportive-div col-xl-9 col-lg-9 col-md-8">
                 <div class="row">
                     <div class="col-xl-8">
                         <div class="home-center-main">
@@ -54,16 +54,17 @@ $getSocialLink = getSocialLink();
                             <x-main_menu.calender :profileData="$profileData" />
                             <x-main_menu.home.event_drafts :draftEventArray="$draftEventArray" />
                         </div>
-                        <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
-                                <h2 class="calendar-heading">All Events</h2>
-                            <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
-                            <div id="responsive-calender-months" class="responsive-calender-months"></div>
-                        </div>
+
                         <div class="responsive-calender-month-wrp">
                             <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
                         </div>
                     </div>
                 </div>
+                <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
+                    <h2 class="calendar-heading">All Events</h2>
+                <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
+                <div id="responsive-calender-months" class="responsive-calender-months"></div>
+            </div>
             </div>
           </div>
     </div>

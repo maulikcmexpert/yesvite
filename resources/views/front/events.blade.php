@@ -36,17 +36,17 @@
                               </button>
                             </div>
                           </nav>
-          
+
                           <!-- ===tab-content-start=== -->
                           <div class="tab-content" id="nav-tabContent">
                                 <!-- ===tab-1-start=== -->
                                 <x-main_menu.events.event_upcoming :eventList="$eventList" />
                                 <!-- ===tab-1-end=== -->
-              
+
                                 <!-- ===tab-2-start=== -->
                                 <x-main_menu.events.event_draft :eventDraftdata="$eventDraftdata" />
                                 <!-- ===tab-2-end=== -->
-              
+
                                 <!-- ===tab-3-start=== -->
                                 <x-main_menu.events.event_past :eventPasttList="$eventPasttList" />
                                 <!-- ===tab-3-end=== -->
@@ -70,7 +70,7 @@
                     <path d="M7.41209 11.4167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    
+
                     {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                       <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -84,11 +84,11 @@
                 <input type="hidden" id="calender_json" value="{{$events_calender_json}}"/>
             </div>
             <x-main_menu.events.calender :profileData="$profileData" />
-            <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
+            {{-- <div id="responsive-calendar" class="responsive-calendar" style="display:none;">
               <h2 class="calendar-heading">All Events</h2>
               <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
               <div id="responsive-calender-months" class="responsive-calender-months"></div>
-            </div>
+            </div> --}}
             <div class="responsive-calender-month-wrp">
               <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
             </div>
@@ -149,7 +149,7 @@
       <!-- <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent3" tabindex="-1" aria-labelledby="canceleventLabel">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-              
+
                 <div class="modal-body">
                     <div class="delete-modal-head text-center">
                       <div class="delete-icon">

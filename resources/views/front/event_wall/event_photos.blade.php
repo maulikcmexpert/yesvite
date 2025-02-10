@@ -6,7 +6,7 @@
             <div class="col-xl-3 col-lg-4">
                 <!-- =============mainleft-====================== -->
 
-                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"  />
+                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
             <div class="col-xl-9 col-lg-8">
                 <div class="main-content-center">
@@ -20,7 +20,7 @@
                   "
                             aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists')}}">Events</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('event.event_lists') }}">Events</a></li>
                                 <li class="breadcrumb-item">
                                     <a
                                         href="{{ route('event.event_wall', encrypt($eventDetails['id'])) }}">{{ $eventDetails['event_name'] }}</a>
@@ -53,9 +53,7 @@
                                     $photos_show = 'show';
                                 }
                             @endphp
-                            <input type="hidden"
-                            id="login_user_id"
-                            value="{{ $login_user_id }}">
+                            <input type="hidden" id="login_user_id" value="{{ $login_user_id }}">
                             <div class="tab-pane fade {{ $photos_show }} {{ $photos_active }}" id="nav-photos"
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
@@ -181,7 +179,8 @@
                                                                 <h3>{{ $photo['firstname'] }} {{ $photo['lastname'] }}
                                                                 </h3>
 
-                                                                <p> {{ \Carbon\Carbon::parse($photo['post_time'] )->shortAbsoluteDiffForHumans() }}</p>
+                                                                <p> {{ \Carbon\Carbon::parse($photo['post_time'])->shortAbsoluteDiffForHumans() }}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div class="photo-card-head-right set_emoji_like">
@@ -218,7 +217,7 @@
                                                                             data-emoji="👏"
                                                                             data-unicode="\\u{1F44F}"></i>
                                                                 @else
-                                                                    <i class="fa-regular fa-heart" ></i>
+                                                                    <i class="fa-regular fa-heart"></i>
                                                                 @endif
                                                             </button>
 
@@ -242,7 +241,8 @@
                                                             </div>
 
                                                             <div class="photos-card-dropdown dropdown">
-                                                                <button class="photos-card-dropdown-btn dropdown-toggle"
+                                                                <button
+                                                                    class="photos-card-dropdown-btn dropdown-toggle"
                                                                     type="button" data-bs-toggle="dropdown"
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
@@ -335,12 +335,9 @@
 
 
                                                     @php
-                                                    $postMedia = [];
-                                                        foreach($photo['mediaData'] as $k =>$v){
-
-
-                                                                $postMedia[] = $photo['mediaData'][$k]['post_media'];
-
+                                                        $postMedia = [];
+                                                        foreach ($photo['mediaData'] as $k => $v) {
+                                                            $postMedia[] = $photo['mediaData'][$k]['post_media'];
                                                         }
                                                     @endphp
 
@@ -351,18 +348,21 @@
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
                                                             data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
-                                                            data-image="{{ json_encode($postMedia ) }}">
+                                                            data-image="{{ json_encode($postMedia) }}">
 
 
                                                             @if (!empty($photo['mediaData']) && isset($photo['mediaData'][0]['type']))
-                                                            @if ($photo['mediaData'][0]['type'] === 'image')
-                                                                <img src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" alt="Post Image">
-                                                            @elseif ($photo['mediaData'][0]['type'] === 'video')
-                                                                <video src="{{ $photo['mediaData'][0]['post_media'] }}" loading="lazy" ></video>
+                                                                @if ($photo['mediaData'][0]['type'] === 'image')
+                                                                    <img src="{{ $photo['mediaData'][0]['post_media'] }}"
+                                                                        loading="lazy" alt="Post Image">
+                                                                @elseif ($photo['mediaData'][0]['type'] === 'video')
+                                                                    <video
+                                                                        src="{{ $photo['mediaData'][0]['post_media'] }}"
+                                                                        loading="lazy"></video>
+                                                                @endif
+                                                            @else
+                                                                <p>No photos/videos</p>
                                                             @endif
-                                                        @else
-                                                            <p>No photos/videos</p>
-                                                        @endif
 
 
                                                         </div>
@@ -371,31 +371,56 @@
                                                                 type="button">{{ $photo['total_media'] }}</button>
                                                         @endif
                                                         {{-- {{dd($photo['reactionList'])}} --}}
-                                                        <ul>
-                                                            @if (!empty($photo['reactionList']) && is_array($photo['reactionList']))
-                                                                @foreach ($photo['reactionList'] as $reaction)
+                                                        <ul type="button" class="get_post_emoji_list"
+                                                            data-post="{{ $photo['id'] }}">
+                                                            @php
+                                                                $i = 0;
+                                                                $j = 0;
+                                                            @endphp
+                                                            @foreach ($photo['reactionList'] as $reaction)
+                                                                <!-- Smiley Emoji -->
+
+
+                                                                @if ($j == 0 && $photo['self_reaction'] == $reaction)
                                                                     <li id="reactionImage_{{ $photo['id'] }}">
 
-                                                                        <span class="reaction-emoji">
-                                                                            {{ preg_replace_callback(
-                                                                                '/\\\\u\{([0-9A-F]+)\}/',
-                                                                                function ($matches) {
-                                                                                    return mb_convert_encoding('&#x' . $matches[1] . ';', 'UTF-8', 'HTML-ENTITIES');
-                                                                                },
-                                                                                $reaction,
-                                                                            ) }}
-                                                                        </span>
+                                                                        @php $j++; @endphp
+                                                                    @else
+                                                                    <li>
+                                                                @endif
+                                                                @if ($reaction == '\u{1F60A}')
+                                                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                        alt="Smiley Emoji">
+                                                                @elseif ($reaction == '\u{1F60D}')
+                                                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                        alt="Eye Heart Emoji">
+                                                                @elseif ($reaction == '\u{2764}')
+                                                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                        alt="Heart Emoji">
+                                                                @elseif($reaction == '\u{1F44D}')
+                                                                    <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
+                                                                        loading="lazy" alt="Thumb Emoji"
+                                                                        class="emoji" data-emoji="👍"
+                                                                        data-unicode="\\u{1F44D}">
+                                                                @elseif($reaction == '\u{1F44F}')
+                                                                    <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                        loading="lazy" alt="Clap Emoji"
+                                                                        class="emoji" data-emoji="👏"
+                                                                        data-unicode="\\u{1F44F}">
+                                                                @endif
 
-                                                                    </li>
-                                                                @endforeach
+                                                                </li>
+                                                                @php
+                                                                    $i++;
+                                                                    if ($i == 3) {
+                                                                        break;
+                                                                    }
+                                                                @endphp
+                                                            @endforeach
+                                                            @if ($j == 0 && $i < 3)
+                                                                <li id="reactionImage_{{ $photo['id'] }}">
+                                                                </li>
                                                             @endif
-
-                                                            {{-- <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                    alt=""></li>
-                                                            <li><img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                    alt=""></li>
-                                                            <li><img src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                    alt=""></li> --}}
                                                             <p id="likeCount_{{ $photo['id'] }}">
                                                                 {{ $photo['total_likes'] }} Likes</p>
                                                         </ul>
@@ -438,7 +463,8 @@
                                         <div class="phototab-add-new-photos-wrp">
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photos != '')
-                                                    <img src="{{ asset('storage/profile/' . $photos) }}" alt="" loading="lazy">
+                                                    <img src="{{ asset('storage/profile/' . $photos) }}"
+                                                        alt="" loading="lazy">
                                                 @else
                                                     @php
 
@@ -510,8 +536,7 @@
                         <div class="create-post-profile-wrp">
 
                             @if ($photos != '')
-                                <img src="{{asset('storage/profile/'.$photos)}} " alt=""
-                                    loading="lazy">
+                                <img src="{{ asset('storage/profile/' . $photos) }} " alt="" loading="lazy">
                             @else
                                 @php
 
@@ -532,38 +557,38 @@
                         </div>
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
-                    enctype="multipart/form-data">
-                    <div class="create-post-upload-img-wrp ">
-                        <div class="create-post-upload-img-head">
-                            <h4>PHOTOS</h4>
-                            <div>
-                                <button type="button" class="uploadButton create-post-head-upload-btn "><i
-                                        class="fa-solid fa-plus"></i> Add Photos/video
-                                    <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
-                                        accept="image/* video/*" multiple></button>
-                                <span class="upload-img-delete">
-                                    <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
-                                            stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path
-                                            d="M8.854 5.17706L9.08317 3.81248C9.24984 2.8229 9.37484 2.08331 11.1353 2.08331H13.8644C15.6248 2.08331 15.7603 2.86456 15.9165 3.8229L16.1457 5.17706"
-                                            stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path
-                                            d="M19.6356 9.52081L18.9585 20.0104C18.8439 21.6458 18.7502 22.9166 15.8439 22.9166H9.15641C6.25016 22.9166 6.15641 21.6458 6.04183 20.0104L5.36475 9.52081"
-                                            stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M10.7603 17.1875H14.229" stroke="#0F172A" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M9.896 13.0208H15.1043" stroke="#0F172A" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
+                        enctype="multipart/form-data">
+                        <div class="create-post-upload-img-wrp ">
+                            <div class="create-post-upload-img-head">
+                                <h4>PHOTOS</h4>
+                                <div>
+                                    <button type="button" class="uploadButton create-post-head-upload-btn "><i
+                                            class="fa-solid fa-plus"></i> Add Photos/video
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
+                                            accept="image/* video/*" multiple></button>
+                                    <span class="upload-img-delete">
+                                        <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
+                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M8.854 5.17706L9.08317 3.81248C9.24984 2.8229 9.37484 2.08331 11.1353 2.08331H13.8644C15.6248 2.08331 15.7603 2.86456 15.9165 3.8229L16.1457 5.17706"
+                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path
+                                                d="M19.6356 9.52081L18.9585 20.0104C18.8439 21.6458 18.7502 22.9166 15.8439 22.9166H9.15641C6.25016 22.9166 6.15641 21.6458 6.04183 20.0104L5.36475 9.52081"
+                                                stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M10.7603 17.1875H14.229" stroke="#0F172A" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M9.896 13.0208H15.1043" stroke="#0F172A" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="create-post-upload-img-main">
+                            <div class="create-post-upload-img-main">
 
 
                                 @csrf
@@ -572,10 +597,10 @@
                                         value="{{ $event }}">
                                     <input type="hidden" name="content" id="photoContent">
                                     <input type="hidden" class="hiddenVisibility" name="post_privacys"
-                                    value="1">
-                                <input type="hidden" name="post_type" id="photoPostType" value="1">
-                                <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
-                                    value="1">
+                                        value="1">
+                                    <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                    <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
+                                        value="1">
                                     <span>
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -600,7 +625,7 @@
                                     <p>or drag and drop here</p>
                                     <button type="button" class="uploadButton">Upload
                                         <input type="file" id="fileInput" class="fileInputtype"
-                                        accept="image/*,video/*" name="files[]" multiple></button>
+                                            accept="image/*,video/*" name="files[]" multiple></button>
                                 </div>
                                 <div class="create-post-uploaded-images">
                                     <div class="row" id="imagePreview">
@@ -899,8 +924,9 @@
                         </div>
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
-                                <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
-                                    <li class="reactionImage" id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
+                                <ul id="postCardEmoji" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#reaction-modal">
+                                    {{-- <li class="reactionImage" id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
                                             loading="lazy">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
@@ -908,7 +934,7 @@
                                     <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
                                             loading="lazy">
                                     </li>
-                                    <p id="likeCount" >5k Likes</p>
+                                    <p id="likeCount" >5k Likes</p> --}}
                                 </ul>
                                 <h6 id="comments">354 Comments</h6>
                             </div>
@@ -916,8 +942,8 @@
                                 <button class="posts-card-like-btn likeModel " id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
-                                    <i  id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
-                                        class="emoji model_emoji"></i></button>
+                                    <i id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                            alt="" class="emoji model_emoji"></i></button>
 
                                 <div class="photos-likes-options-wrp emoji-picker" id="emojiDropdown"
                                     style="display: none;">
@@ -950,14 +976,14 @@
                             </div>
                         </div>
 
-                            <div class="posts-card-show-all-comments-wrp d-none">
+                        <div class="posts-card-show-all-comments-wrp d-none">
 
-                                <div class="posts-card-show-all-comments-inner">
-                                    <ul class="top-level-comments">
+                            <div class="posts-card-show-all-comments-inner">
+                                <ul class="top-level-comments">
 
-                                    </ul>
-                                </div>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1228,6 +1254,7 @@
     use Carbon\ Carbon;
 
     public
+
     function getShortTimeAttribute() {
         $time = Carbon::parse($this - > posttime);
 
