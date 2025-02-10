@@ -448,10 +448,10 @@
                                                                         </li>
                                                                         @php $i++;  if($i==3){break;} @endphp
                                                                     @endforeach
-                                                                    {{-- @if($j==0)
+                                                                    @if($j==0 && $i<3)
                                                                     <li id="reactionImage_{{ $post['id'] }}">
                                                                     </li>
-                                                                    @endif --}}
+                                                                    @endif
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
@@ -1560,10 +1560,7 @@
                     <!-- ===Tab-content=== -->  
                 </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="cmn-btn reset-btn">Reset</button>
-              <button type="button" class="cmn-btn">Apply</button>
-            </div>
+    
           </div>
         </div>
     </div>
