@@ -260,6 +260,7 @@ $(document).ready(function () {
 
         // Replace heart icon with selected emoji
         emojiDisplay.removeClass();
+        console.log(selectedEmoji);
         emojiDisplay.text(selectedEmoji);
 
         // AJAX call to update emoji reaction
