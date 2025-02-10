@@ -1425,13 +1425,6 @@ function generateProfileImage(firstname, lastname) {
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
  
-    $("#nav-all-reaction").addClass("active show");
-    $("#nav-all-reaction-tab").addClass("active");
-    $("#nav-heart-reaction-tab").removeClass("active");
-    $("#nav-thumb-reaction-tab").removeClass("active");
-    $("#nav-smily-reaction-tab").removeClass("active");
-    $("#nav-eye-heart-reaction-tab").removeClass("active");
-    $("#nav-clap-reaction-tab").removeClass("active");  
 
        $("#nav-all-reaction ul").html("");
 
@@ -1451,6 +1444,7 @@ $(document).on('click','.get_post_emoji_list',function(){
     $(`#nav-clap-reaction ul`).html("");
     $('#clap-count').text('0');
 
+    
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
         type: "POST",
