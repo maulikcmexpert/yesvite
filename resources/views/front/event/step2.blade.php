@@ -118,8 +118,8 @@
 
 
             <div class="row list_all_design_catgeory_new">
-                <p id="allchecked">back</p>
-                <h5 id="category_name" style="display:none ">Test category</h5>
+                <p id="allchecked" style="display:none">back</p>
+                <h5 id="category_name" style="display:none">Test category</h5>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
                         @foreach ($subcategory->textdatas as $image)
@@ -304,7 +304,6 @@
             $('.image-item-new').hide();
             $("#category_name").hide();
             $("#allchecked").hide();
-            
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
