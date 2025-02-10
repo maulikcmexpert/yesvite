@@ -1462,6 +1462,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
                     let emoji_name="";
+                    let count="";
                     if (reaction == "\\u{2764}"){
                         tabId = "nav-heart-reaction";
                         emoji_name="heart-emoji";
@@ -1474,7 +1475,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                         count="thumb-count";
 
                     } 
-                    else if (reaction == "\\u{1F604}"){
+                    else if (reaction == "\\u{1F60A}"){
                         tabId = "nav-smily-reaction";
                         emoji_name="smily-emoji";
                         count="smily-count";

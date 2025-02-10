@@ -147,21 +147,25 @@
     @endforeach
   </div>
   @endif
+  @push('scripts')
   <script>
-  $(document).ready(function () {
-      $(document).on("click", ".zoom_img", function (e) {
-          e.preventDefault();
-          var imgSrc = $(this).data("img");
+    $(document).ready(function () {
+        $(document).on("click", ".zoom_img", function (e) {
 
-          $.magnificPopup.open({
-              items: {
-                  src: imgSrc,
-                  type: "image"
-              },
-              gallery: {
-                  enabled: false
-              }
-          });
-      });
-  });
-</script>
+            e.preventDefault();
+            var imgSrc = $(this).data("img");
+
+            $.magnificPopup.open({
+                items: {
+                    src: imgSrc,
+                    type: "image"
+                },
+                gallery: {
+                    enabled: false
+                }
+            });
+        });
+    });
+  </script>
+  @endpush
+
