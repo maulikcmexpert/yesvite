@@ -683,7 +683,7 @@ header{
 .header-profile-button-wrp{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 15px;
 }
 
@@ -700,6 +700,7 @@ header{
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
     max-width: 100%;
     height: auto;
 }

@@ -408,11 +408,13 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
 
                 const price = option.getAttribute('data-price');
                 const priceId = option.getAttribute('data-price-id');
+                const coins = option.getAttribute('data-coins');
 
             console.log(parseFloat(price).toFixed(2))
             // Update the button with the selected price
                 purchaseButton.textContent = `Purchase - $${parseFloat(price).toFixed(2)}`;
                 purchaseButton.setAttribute('data-price-id', priceId);
+                purchaseButton.setAttribute('data-coins', coins);
                 purchaseButton.disabled = false;
             });
         });
@@ -420,6 +422,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         
             purchaseButton.addEventListener('click', () => {
                 const selectedPriceId = purchaseButton.getAttribute('data-price-id');
+                const coins = purchaseButton.getAttribute('data-coins');
                
                 if (selectedPriceId) {
                     const testTimer = setInterval(updateButtonText, 1000);
@@ -448,7 +451,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                 purchaseButton.textContent = `Purchase - $0.00`;
                                 const coinsSpans = document.querySelectorAll('.available-coins');
                                 const coinsInputs = document.querySelectorAll('.hidden-coins');
-                                
+                                $("#lastRecharge").text(coins+" credits")
                                 // Update the text content for each element
                                 coinsSpans.forEach(span => {
                                     span.textContent = data.data;
@@ -641,13 +644,13 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                 };
                 toastr.success("{{ session('msg') }}");
             @endif
-            @if (session('success'))
+            @if (session('msg_error'))
                 toastr.options = {
                     "closeButton": true,
                     "progressBar": true,
                     "positionClass": "toast-top-right",
                 };
-                toastr.success("{{ session('success') }}");
+                toastr.error("{{ session('msg_error') }}");
             @endif
             @if (session('error'))
                 toastr.options = {

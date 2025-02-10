@@ -57,12 +57,12 @@ class Auth extends Controller
                 if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
                 } else if ($sendMesage['status'] == false) {
-                    return  Redirect::to('admin')->with('error', $sendMesage['message']);
+                    return  Redirect::to('admin')->with('msg_error', $sendMesage['message']);
                 }
             }
         }
 
-        return  Redirect::to('admin')->with('error', 'Invalid credentials!');
+        return  Redirect::to('admin')->with('msg_error', 'Invalid credentials!');
     }
 
     public function twoFactorAuthenticate($id)
@@ -99,7 +99,7 @@ class Auth extends Controller
 
             // }
 
-            return Redirect::to(URL::to('/admin'))->with('error', 'Invalid credentials!');;
+            return Redirect::to(URL::to('/admin'))->with('msg_error', 'Invalid credentials!');;
         }
         return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('error', 'Invalid verification code');
     }
@@ -142,7 +142,7 @@ class Auth extends Controller
         if ($admin->save()) {
             return  Redirect::to('admin')->with('msg', 'Admin Registered successfully!');
         }
-        return  Redirect::to('admin')->with('error', 'Error to registretion!');
+        return  Redirect::to('admin')->with('msg_error', 'Error to registretion!');
     }
     public function checkAdminEmail(Request $request)
     {
@@ -187,7 +187,7 @@ class Auth extends Controller
                 ->first();
             if ($userData == null) {
 
-                return  Redirect::to('admin')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('msg_error', 'Invalid token!');
             }
         }
         $data['js'] = ['login'];
@@ -220,7 +220,7 @@ class Auth extends Controller
 
             if ($userData == null) {
 
-                return  Redirect::to('admin')->with('error', 'Invalid token!');
+                return  Redirect::to('admin')->with('msg_error', 'Invalid token!');
             } else {
 
                 $user = User::where('email', $userData->email)
