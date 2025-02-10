@@ -1548,6 +1548,11 @@ $("#reaction-modal").on("shown.bs.modal", function () {
 
     $("#nav-all-reaction").addClass("active show");
     $("#nav-all-reaction-tab").addClass("active");
+    $("#nav-heart-reaction-tab").removeClass("active");
+    $("#nav-thumb-reaction-tab").removeClass("active");
+    $("#nav-smily-reaction-tab").removeClass("active");
+    $("#nav-eye-heart-reaction-tab").removeClass("active");
+    $("#nav-clap-reaction-tab").removeClass("active");  
 });
 
 // $(document).on('click', function (e) {
