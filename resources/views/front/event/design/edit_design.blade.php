@@ -261,6 +261,17 @@
       
         @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )    
         <div class="design-seting">
+            <button type="button" class="d-flex footer-bottom-btn pick-card">
+                <h5 class="me-2">Choose Design</h5>
+                <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
+                            stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </button>
             <a href="#" class="d-flex">
                 {{-- <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
