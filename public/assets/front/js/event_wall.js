@@ -1532,8 +1532,9 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
                     $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
+                    $(`#${tabId}-tab`).removeClass('active');
                 });
-
+                $("#nav-all-reaction-tab").addClass('active');
                 $("#reaction-modal").modal("show");
             }
         },
