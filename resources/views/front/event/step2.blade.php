@@ -303,6 +303,7 @@
         })
 
         function allCheckFun() {
+            $("#search_design_category").val('');
             $('.image-item-new').hide();
             $("#category_name").hide();
             $("#allchecked").hide();
