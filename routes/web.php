@@ -399,8 +399,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', function () {
 
         $user = Auth::guard('web')->user();
-        @add_user_firebase(@$user->id, 'offline');
-        Auth::logout();
+        if ($user) {
+            @add_user_firebase($user->id, 'offline');
+            Auth::logout();
+        } else {
+            return redirect()->route('login');  // Or 'login' URL if you have it as a route name
+        }
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
         Session::forget('advertisement_closed');
         Session::forget('potluck_closed');
