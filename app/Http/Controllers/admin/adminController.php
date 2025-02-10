@@ -50,12 +50,12 @@ class adminController extends Controller
             $userUpdate->password = Hash::make($request->new_password);
             $userUpdate->save();
             DB::commit();
-            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('success', 'Password Updated Successfully!');;
+            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('msg', 'Password Updated Successfully!');;
             } 
         catch (QueryException $e) {
             DB::rollBack();
             Log::error('Database query error' . $e->getMessage());
-            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('success', 'Password Not Updated!!');;
+            return Redirect::to(URL::to(path: '/admin/dashboard'))->with('msg', 'Password Not Updated!!');;
             }
     }
 

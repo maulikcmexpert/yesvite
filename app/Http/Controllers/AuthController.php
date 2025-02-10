@@ -226,10 +226,10 @@ class AuthController extends Controller
         } catch (QueryException $e) {
             DB::Rollback();
 
-            return  Redirect::to('register')->with('error', 'Register not successfull');
+            return  Redirect::to('register')->with('msg_error', 'Register not successfull');
         } catch (Exception  $e) {
 
-            return  Redirect::to('register')->with('error', 'something went wrong');
+            return  Redirect::to('register')->with('msg_error', 'something went wrong');
         }
     }
 
@@ -312,7 +312,7 @@ class AuthController extends Controller
                             $loginHistory->save();
                         }
                         if ($user->isTemporary_password == "1") {
-                            return redirect()->route('profile.change_password')->with('success', 'Please changer your temparory password.');
+                            return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
                         } else {
                             return redirect()->route('home');
                         }
@@ -340,7 +340,7 @@ class AuthController extends Controller
                         $message->subject('Verify your Yesvite email address');
                     });
 
-                    return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
+                    return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
             }
         }
@@ -449,7 +449,7 @@ class AuthController extends Controller
                     }
 
 
-                    return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
+                    return  Redirect::to('profile')->with('msg_error', 'You have already login ' . $msg);
                 }
 
 
@@ -491,10 +491,10 @@ class AuthController extends Controller
                     }
                     event(new \App\Events\UserRegistered($secondUser));
                     $this->logoutFromApplication($secondUser->id);
-                    return redirect()->route('profile')->with('success', 'Logged in successfully!');
+                    return redirect()->route('profile')->with('msg', 'Logged in successfully!');
                 } else {
 
-                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                    return  Redirect::to('login')->with('msg_error', 'Invalid credentials!');
                 }
             } else {
                 $this->currentUserLogin($currentLogUser);
@@ -515,13 +515,13 @@ class AuthController extends Controller
                     $message->subject('Verify your Yesvite email address');
                 });
 
-                return  Redirect::to('add_account')->with('success', 'Please check and verify your email address.');
+                return  Redirect::to('add_account')->with('msg', 'Please check and verify your email address.');
             }
         }
 
         $this->currentUserLogin($currentLogUser);
 
-        return  Redirect::to('profile')->with('error', 'Email or Password invalid');
+        return  Redirect::to('profile')->with('msg_error', 'Email or Password invalid');
     }
 
 
@@ -565,9 +565,9 @@ class AuthController extends Controller
             Session::put(['user' => $sessionArray]);
 
             $this->logoutFromApplication($switchAccount->id);
-            return redirect()->route('profile')->with('success', 'Logged in successfully!');
+            return redirect()->route('profile')->with('msg', 'Logged in successfully!');
         }
-        return redirect()->route('profile')->with('error', 'Logged faild!');
+        return redirect()->route('profile')->with('msg_error', 'Logged faild!');
     }
 
     public function addAccount()
@@ -747,7 +747,7 @@ class AuthController extends Controller
 
         DB::commit();
         // toastr()->success('Password Changed');
-        return  Redirect::to('login')->with('success', 'Password has been changed.');
+        return  Redirect::to('login')->with('msg', 'Password has been changed.');
 
         // return  redirect()->route('auth.login');
     }
