@@ -258,6 +258,11 @@
     color: #000 !important;
 }
 
+.cmn-btn.credit-hisotry-btn:hover svg path{
+    fill: #CF3CB0;
+    fill-opacity: 1;
+}
+
 .account-setting-credit-button-wrp{
     display: flex;
     align-items: center;
