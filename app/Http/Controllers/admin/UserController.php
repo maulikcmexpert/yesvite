@@ -201,7 +201,7 @@ class UserController extends Controller
 
             DB::commit();
             $this->addInFirebase($addUser->id);
-            return redirect()->route('users.index')->with('msg', 'User Add successfully !');
+            return redirect()->route('users.index')->with('error_msg', 'User Add successfully !');
         } catch (\Exception $e) {
             dd($e);
             // Rollback transaction on error
