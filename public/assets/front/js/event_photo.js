@@ -203,7 +203,7 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
-                        if (reactionIcons[reaction]) {
+                        if (reactionIcons[selectedEmoji]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
                         button.addClass("liked"); // Add liked class
