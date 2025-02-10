@@ -140,7 +140,7 @@
                 @endif
             </div>
         </div>
-        <a href="" class="home-upcoming-events-card-right image-zoom-icon">
+        <a href="" class="home-upcoming-events-card-right zoom_img">
             <img src="{{$events['event_images']}}"  data-img="{{ $events['event_images'] }}"loading="lazy" alt="">
         </a>
     </div>
@@ -149,7 +149,7 @@
   @endif
   <script>
   $(document).ready(function () {
-    $(".image-zoom-icon").click(function () {
+    $(".zoom_img").click(function () {
         var imgSrc = $(this).data("img");
 
         $.magnificPopup.open({
