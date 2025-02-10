@@ -93,7 +93,7 @@
                                     @else
                                         <li><span>Guest : </span> RSVP - Pending</li>
                                     @endif
-                                @endif    
+                                @endif
                             <li><span>{{$upcomingEvent['event_date_mon']}} <i class="fa-solid fa-circle"></i> {{$upcomingEvent['event_day']}}</span> {{$upcomingEvent['start_time']}}</li>
                             </ul>
                         </a>
@@ -184,7 +184,7 @@
                                 </div>
                         </div>
                     </div>
-                    <a  href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-right">
+                    <a  href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{ $events['event_images'] }}">
                         <img src="{{$upcomingEvent['event_images']}}" loading="lazy" alt="">
                     </a>
                 </div>
@@ -210,3 +210,24 @@
         </div>
     </div>
   </div>
+  @push('scripts')
+  <script>
+    $(document).ready(function () {
+        $(document).on("click", ".zoom_img", function (e) {
+
+            e.preventDefault();
+            var imgSrc = $(this).data("img");
+
+            $.magnificPopup.open({
+                items: {
+                    src: imgSrc,
+                    type: "image"
+                },
+                gallery: {
+                    enabled: false
+                }
+            });
+        });
+    });
+  </script>
+  @endpush
