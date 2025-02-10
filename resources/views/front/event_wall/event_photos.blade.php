@@ -900,8 +900,7 @@
                         <div class="posts-card-like-commnet-wrp">
                             <div class="posts-card-like-comment-left">
                                 <ul type="button" data-bs-toggle="modal" data-bs-target="#reaction-modal">
-                                    <li id="reactionImage"><img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""
-                                            loading="lazy">
+                                    <li id="reactionImage">
                                     </li>
                                     <li><img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt=""
                                             loading="lazy"></li>
