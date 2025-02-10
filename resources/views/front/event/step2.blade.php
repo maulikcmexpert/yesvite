@@ -75,38 +75,7 @@
                                     </div>
                             @endforeach
 
-                                {{-- @foreach ($categories as $textData)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{{ $textData->categories->id }}">
-                                                <button class="accordion-button" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $textData->categories->id }}" aria-expanded="true"
-                                                    aria-controls="collapse{{ $textData->categories->id }}">
-                                                    {{ $textData->categories->category_name }}
-                                                </button>
-                                            </h2>
-                                            <div id="collapse{{ $textData->categories->id }}"
-                                                class="accordion-collapse collapse"
-                                                aria-labelledby="heading{{ $textData->categories->id }}"
-                                                data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                            <li>
-                                                                <div class="d-flex align-items-center justify-content-between">
-                                                                    <label class="form-check-label" for="subcategory{{ $textData->subcategories->id }}">
-                                                                        {{ $textData->subcategories->subcategory_name }}
-                                                                    </label>
-                                                                    <input class="form-check-input" type="checkbox" name="design_subcategory"
-                                                                        id="subcategory{{ $textData->subcategories->id }}"
-                                                                        data-category-id="{{ $textData->categories->id }}"
-                                                                        data-subcategory-id="{{ $textData->subcategories->id }}">
-                                                                </div>
-                                                            </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                @endforeach --}}
+            
 
                                 </div>
                             </div>
@@ -117,25 +86,37 @@
             </div>
             <h5 class="total-items ms-auto total_design_count">{{$imagecount}} Items</h5>
         </div>
-        {{-- {{ dd($categories);}} --}}
+      
         <div class="row list_all_design_catgeory">
-            {{-- @foreach ($categories as $textData)
-        
-                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                        data-category-id="{{ $textData->categories->id }}" data-subcategory-id="{{ $textData->subcategories->id }}">
+            
+            @foreach ($categories as $category)
+            @foreach ($category->subcategory as $subcategory)
+                @foreach ($subcategory->textdatas as $image)
+                    <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
+                        data-category-id="{{ $category->id }}" 
+                        data-subcategory-id="{{ $subcategory->id }}" 
+                       >
                         <a href="javascript:;" class="collection-card card-blue">
-                            <div class="card-img edit_design_tem design-card" data-image="{{ asset('storage/canvas/' . $textData->image) }}"
-                                data-shape_image="{{ $textData->shape_image != '' ? asset('storage/canvas/' . $textData->shape_image) : '' }}"
-                                data-json="{{ json_encode($textData->static_information) }}"
-                                data-id="{{ $textData->id }}">
-                                <img src="{{ asset('storage/canvas/' . $textData->filled_image) }}" alt="shower-card">
+                            <div class="card-img design-card" >
+                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                    alt="shower-card">
                             </div>
-                            <h4>{{ $textData->categories->category_name }}</h4>
+                            <h4>{{ $category->category_name }}</h4>
                         </a>
                     </div>
-        
-            @endforeach --}}
+                @continue
+                @endforeach
+                @continue
+                @endforeach
+                @continue
+        @endforeach
+          
+      
+        </div>
+
+
+        <div class="row list_all_design_catgeory">
+            
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
                 @foreach ($subcategory->textdatas as $image)
@@ -152,7 +133,7 @@
                                 <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                     alt="shower-card">
                             </div>
-                            <h4>{{ $category->category_name }}</h4>
+                            {{-- <h4>{{ $category->category_name }}</h4> --}}
                         </a>
                     </div>
                 @endforeach
