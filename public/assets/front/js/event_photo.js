@@ -291,6 +291,19 @@ $(document).on("click", function (e) {
         $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
     }
 });
+
+$(document).on("click", function (e) {
+    if (!$(e.target).closest(".posts-card-like-comment-right").length) {
+        $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
+    }
+});
+
+// Hide emoji picker when clicking outside
+$(document).on("click", function (e) {
+    if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1").length) {
+        $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
+    }
+});
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
     const eventId = button.data("event-id");
