@@ -912,7 +912,7 @@
                                 <h6 id="comments">354 Comments</h6>
                             </div>
                             <div class="posts-card-like-comment-right emoji_set">
-                                <button class="posts-card-like-btn likeModel " id="likeButton"
+                                <button class="posts-card-like-btn likeModel " id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
                                     <i  id="show_emoji"> <img src="" alt=""
