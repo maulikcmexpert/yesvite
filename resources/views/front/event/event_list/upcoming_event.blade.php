@@ -48,7 +48,7 @@
                             <li><span>Hosting</span></li>
                     @elseif($upcomingEvent['is_co_host']=="1")
                             <li><span>Co-Hosting</span></li>
-                    @endif        
+                    @endif
                       @if($upcomingEvent['is_event_owner']!=1)
                             @if($upcomingEvent['rsvp_status'] == '1')
                                 <li><span>Guest : </span> RSVP - Yes</li>
@@ -139,14 +139,14 @@
                                         Cancel Event
                                     </button>
                                     </li>
-                                @endif    
+                                @endif
                             </ul>
                         </div>
                         @endif
                         </div>
             </div>
         </div>
-        <a href="{{ route('event.event_wall', encrypt($upcomingEvent['id']))  }}" class="home-upcoming-events-card-right">
+        <a href="#" class="home-upcoming-events-card-right zoom_img" data-img="{{$upcomingEvent['event_images'] }}">
             <img src="{{$upcomingEvent['event_images']}}" class="lazy" alt="">
         </a>
     </div>
@@ -160,3 +160,24 @@
     @endif
 </div>
 @endforeach
+@push('scripts')
+  <script>
+    $(document).ready(function () {
+        $(document).on("click", ".zoom_img", function (e) {
+
+            e.preventDefault();
+            var imgSrc = $(this).data("img");
+
+            $.magnificPopup.open({
+                items: {
+                    src: imgSrc,
+                    type: "image"
+                },
+                gallery: {
+                    enabled: false
+                }
+            });
+        });
+    });
+  </script>
+  @endpush
