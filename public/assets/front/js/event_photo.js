@@ -1454,7 +1454,7 @@ console.log(reactionIcons[reaction_store]);
                                             </div>
                                             <div class="commented-user-profile-content">
                                                 <h3>${firstname} ${lastname}</h3>
-                                                <p> ${location ? `<p>${location}</p>` : ''}
+                                                <p></p>
 
                                             </div>
                                         </div>
