@@ -1587,7 +1587,7 @@ let longPressTimers;
 let isLong_press = false;
 
 $(document).on("mousedown", "#likeButtonModel", function () {
-    return
+    return;
     isLong_press = false; // Reset the flag
     const button = $(this);
 
