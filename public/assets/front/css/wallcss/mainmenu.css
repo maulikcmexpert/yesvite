@@ -3000,9 +3000,16 @@
     margin: 0px auto;
     margin-bottom: 20px;
 }
+
+.responsive-calendar .week{
+    display: flex;
+    align-items: center;
+}
+
 .responsive-calendar .day {
     width: 100%;
 }
+
 .responsive-calender-month-wrp {
     display: block;
     position: absolute;
