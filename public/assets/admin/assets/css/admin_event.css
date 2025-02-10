@@ -1456,6 +1456,10 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
     background-image: url('../../../toater_success_icon.png') !important;
 }
 
+#toast-container>div{
+    opacity: 1 !important;
+}
+
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
