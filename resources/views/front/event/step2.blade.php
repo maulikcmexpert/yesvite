@@ -117,7 +117,7 @@
             </div>
 
 
-            <div class="row list_all_design_catgeory">
+            <div class="row list_all_design_catgeory_new">
                 <h5 id="category_name" style="display:none ">Test category</h5>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
