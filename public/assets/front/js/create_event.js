@@ -1,8 +1,8 @@
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
-let isCheckOldcoHost = ($("#cohostId").val()) ? "1" : "0";
+let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
 // alert(isCheckOldcoHost);
-eventData.isCheckOldcoHost=isCheckOldcoHost;
+eventData.isCheckOldcoHost = isCheckOldcoHost;
 var total_activities = $("#TotalSedulare").val();
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
@@ -4859,13 +4859,23 @@ async function saveDesignData(direct = false) {
         $(".store_desgin_temp, .btn-close").prop("disabled", false);
     }
 }
-function captureImage(element) {
-    return new Promise((resolve, reject) => {
-        domtoimage
-            .toBlob(element)
-            .then((blob) => resolve(blob))
-            .catch((error) => reject(error));
-    });
+async function captureImage(element) {
+    // return new Promise((resolve, reject) => {
+    //     domtoimage
+    //         .toBlob(element)
+    //         .then((blob) => resolve(blob))
+    //         .catch((error) => reject(error));
+    // });
+
+    try {
+        const canvas = await html2canvas(element, { scale: 1 }); // Set scale to avoid large images
+        return new Promise((resolve) => {
+            canvas.toBlob((blob) => resolve(blob), "image/png", 0.8);
+        });
+    } catch (error) {
+        console.error("Capture error:", error);
+        return null;
+    }
 }
 function uploadImage(blob) {
     return new Promise((resolve, reject) => {
