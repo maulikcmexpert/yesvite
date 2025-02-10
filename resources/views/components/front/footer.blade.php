@@ -626,4 +626,38 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
     }
 </script>
 
+<script>
+  $(document).ready(function () {
+    toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+            @if (session('msg'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('msg') }}");
+            @endif
+            @if (session('success'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.success("{{ session('success') }}");
+            @endif
+            @if (session('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                };
+                toastr.error("{{ session('error') }}");
+            @endif
+        });
+</script>
+
 
