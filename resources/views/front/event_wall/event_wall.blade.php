@@ -1429,7 +1429,7 @@
 
                       <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel" aria-labelledby="nav-all-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1444,13 +1444,13 @@
                                   <img src="./assets/img/heart-emoji.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
 
                       <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel" aria-labelledby="nav-heart-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1465,13 +1465,13 @@
                                   <img src="./assets/img/heart-emoji.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
 
                       <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel" aria-labelledby="nav-thumb-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1486,13 +1486,13 @@
                                   <img src="./assets/img/thumb-icon.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
 
                       <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel" aria-labelledby="nav-smily-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1507,14 +1507,14 @@
                                   <img src="./assets/img/smily-emoji.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                          
                         </ul>
                       </div>
 
                       <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel" aria-labelledby="nav-eye-heart-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1529,7 +1529,7 @@
                                   <img src="./assets/img/eye-heart-emoji.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
                         
                         </ul>
                       </div>
@@ -1537,7 +1537,7 @@
 
                       <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel" aria-labelledby="nav-clap-reaction-tab">
                         <ul>
-                          <li class="reaction-info-wrp">
+                          <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1552,7 +1552,7 @@
                                   <img src="./assets/img/clap-icon.png" alt="">
                               </div>
                             </div>
-                          </li>
+                          </li> -->
 
                         </ul>
                       </div>

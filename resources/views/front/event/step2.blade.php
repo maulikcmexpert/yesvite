@@ -97,7 +97,7 @@
                         data-subcategory-id="{{ $subcategory->id }}" 
                        >
                         <a href="javascript:;" class="collection-card card-blue">
-                            <div class="card-img design-card" >
+                            <div class="card-img design-card">
                                 <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                     alt="shower-card">
                             </div>
@@ -108,7 +108,6 @@
                 @endforeach
                 @continue
                 @endforeach
-                @continue
         @endforeach
           
       
@@ -133,7 +132,7 @@
                                 <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                     alt="shower-card">
                             </div>
-                            {{-- <h4>{{ $category->category_name }}</h4> --}}
+                            <h4>{{ $category->category_name }}</h4>
                         </a>
                     </div>
                 @endforeach
