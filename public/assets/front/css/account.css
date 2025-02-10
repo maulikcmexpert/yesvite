@@ -216,10 +216,6 @@
     font-size:16px !important;
 }
 
-.account-setting-credit-wrp .credits_balance_amout_wrp h5 span{
-    color:#fff !important;
-}
-
 .account-setting-credit-wrp .credits_balance_amout_wrp h6{
     color:#fff !important;
 }
@@ -233,6 +229,22 @@
 .account-setting-credit-wrp{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.account-setting-credit-button-wrp .cmn-btn{
+    background-color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    width: 100%;
+    color: #000 !important;
+}
+
+.credit-hisotry-btn{
+    border: 1px solid #fff !important;
+    backdrop-filter: blur(100px);
+    background-color: transparent !important;
 }
 
 
