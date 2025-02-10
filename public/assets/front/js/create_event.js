@@ -1459,12 +1459,14 @@ function set_activity_html(selectedDates) {
     // var endDate = moment(
     //     sortedDates.length === 2 ? sortedDates[1] : sortedDates[0]
     // );
-    var sortedDates = selectedDates.split(",").sort((a, b) => moment(a, "MM-DD-YYYY") - moment(b, "MM-DD-YYYY"));
+    var sortedDates = [...selectedDates].sort((a, b) => moment(a, "MM-DD-YYYY") - moment(b, "MM-DD-YYYY"));
+
     var startDate = moment(sortedDates[0], "MM-DD-YYYY");
     var endDate = moment(sortedDates.length === 2 ? sortedDates[1] : sortedDates[0], "MM-DD-YYYY");
 
-console.log('startDate :', startDate.format("MM-DD-YYYY"));
-console.log('endDate :', endDate.format("MM-DD-YYYY"));
+    console.log('startDate :', startDate.format("MM-DD-YYYY"));
+    console.log('endDate :', endDate.format("MM-DD-YYYY"));
+
     var i = 0;
     var start_time = $("#start-time").val();
     console.log('sortedDates :'+sortedDates);
