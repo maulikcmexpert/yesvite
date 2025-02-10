@@ -651,26 +651,28 @@
             </div>
             {{-- {{ dd($categories);}} --}}
             <div class="row list_all_design_catgeory">
-                 @foreach ($categories as $category)
-                    @foreach ($category->subcategory as $subcategory)
-                        @foreach ($subcategory->textdatas as $image)
-                            <div id="design_category" class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
-                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"  data-category_name="{{ $category->category_name }}">
-                                <a  href="javascript:;" class="collection-card card-blue">
-                                    <div class="card-img">
-                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                            alt="shower-card">
-                                    </div>
-                                    <h4>{{ $category->category_name }}</h4>
-                                </a>
+                @foreach ($categories as $category)
+                @php
+                    $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
+                    $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
+                @endphp
+            
+                @if ($firstTextData)
+                <div id="design_category" class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $firstSubcategory->id }}"  data-category_name="{{ $category->category_name }}">
+                        <a href="#" class="collection-card card-blue">
+                            <div class="card-img">
+                                <img src="{{ asset('storage/canvas/' . $firstTextData->filled_image) }}" alt="shower-card">
                             </div>
-                            @break
-                        @endforeach
-                        @break
-                    @endforeach
-                   
-                @endforeach
+                            <h4>{{ $category->category_name }}</h4>
+                        </a>
+                    </div>
+                @endif
+            @endforeach
+            
+
+            </div>
            
 
                 <div class="row list_all_design_catgeory_new">
@@ -701,69 +703,7 @@
                 </div>
 
               
-                {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-green">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card2.png') }}" alt="kids-card">
-                        </div>
-                        <h4>Kids Birthdays</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-red">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card3.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Simple Designs</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-green">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card4.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Floral Delight</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-yellow">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card5.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Weddings</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-red">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card6.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Baby Announcements</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-green">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card7.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Minimalist Bliss</h4>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown"
-                    data-wow-duration="8s" data-wow-delay="0" data-wow-offset="0">
-                    <a href="#" class="collection-card card-blue">
-                        <div class="card-img">
-                            <img src="{{ asset('assets/front/image/collect-card8.png') }}" alt="collect-card">
-                        </div>
-                        <h4>Vintage Romance</h4>
-                    </a>
-                </div> --}}
+                
             </div>
         </div>
     </section>

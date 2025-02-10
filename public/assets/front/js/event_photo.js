@@ -229,7 +229,7 @@ $(document).ready(function () {
                                 console.log({ firstReaction });
                                 console.log(reactionIcons[firstReaction]);
                                 //let reaction = "\u{2764}";
-                                reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
+                                reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                             }
                         }
                         button.removeClass("liked"); // Remove liked class
@@ -1587,7 +1587,7 @@ let longPressTimers;
 let isLong_press = false;
 
 $(document).on("mousedown", "#likeButtonModel", function () {
-    return
+    return;
     isLong_press = false; // Reset the flag
     const button = $(this);
 
