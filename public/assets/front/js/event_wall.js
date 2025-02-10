@@ -1448,9 +1448,10 @@ $(document).on('click','.get_post_emoji_list',function(){
     $('#nav-smily-reaction-tab').removeClass('active');
     $('#nav-eye-heart-reaction-tab').removeClass('active');
     $('#nav-clap-reaction-tab').removeClass('active');
+
     $('#nav-heart-reaction').removeClass('active show');
     $('#nav-smily-reaction').removeClass('active show');
-    $('#nav-heart-reaction').removeClass('active show');
+    $('#nav-thumb-reaction').removeClass('active show');
     $('#nav-eye-heart-reaction').removeClass('active show');
     $('#nav-clap-reaction-tab').removeClass('active show');
     
