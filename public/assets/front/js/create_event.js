@@ -1606,10 +1606,14 @@ $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $("#ac-start-time").val();
     var firstActivity = $(this).data("activity");
 
+    console.log('startime :'+start_time);
+    console.log('firstActivity :'+firstActivity);
     if (
         (start_time == null || start_time == "") &&
         firstActivity == "add_activity_1"
     ) {
+        console.log('startime :'+start_time);
+        console.log('firstActivity :'+firstActivity);
         e.preventDefault();
         toastr.error("Plaese select start time");
         return;
@@ -9319,7 +9323,6 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
-  alert()
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
