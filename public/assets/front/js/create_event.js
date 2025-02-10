@@ -1483,6 +1483,9 @@ function set_activity_html(selectedDates) {
             $("#firstActivityTime").val(dateID);
         }
         i++;
+        console.log(startDate);
+        console.log(sortedDates[0]);
+        console.log(startDate.isSame(moment(sortedDates[0]), "day"));
         var formHtml = `
      <div class="activity-schedule-wrp">
         <div class="activity-schedule-head">
@@ -1491,7 +1494,9 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    startDate.isSame(moment(sortedDates[0]), "day")
+                    // startDate.isSame(moment(sortedDates[0]), "day")
+                    startDate.startOf('day').isSame(moment(sortedDates[0], "MM-DD-YYYY").startOf('day'), "day")
+
                         ? `
                             <h4>Event Start</h4>
                             <div class="row">
@@ -1563,6 +1568,8 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
+        $(".activity_bar")[0].offsetHeight;  // Trigger reflow/repaint
+
         // datepicker();
         startDate.add(1, "day");
     }
@@ -1606,10 +1613,14 @@ $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $("#ac-start-time").val();
     var firstActivity = $(this).data("activity");
 
+    console.log('startime :'+start_time);
+    console.log('firstActivity :'+firstActivity);
     if (
         (start_time == null || start_time == "") &&
         firstActivity == "add_activity_1"
     ) {
+        console.log('startime :'+start_time);
+        console.log('firstActivity :'+firstActivity);
         e.preventDefault();
         toastr.error("Plaese select start time");
         return;
@@ -9319,7 +9330,6 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
-  alert()
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
