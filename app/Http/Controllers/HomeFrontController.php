@@ -146,9 +146,18 @@ class HomeFrontController extends BaseController
         $query = $request->input('search');
 
         $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
-            ->with(['subcategory.textdatas']) // Load subcategories and their textdatas
+            ->whereHas('subcategory', function ($query) {
+                $query->whereHas('textdatas'); // Ensure subcategories have textdatas
+            })
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Only subcategories with textdatas
+                        ->with('textdatas'); // Load textdatas
+                }
+            ])
             ->orderBy('id', 'desc')
             ->get();
+
 
         // Calculate total count of textdatas across all subcategories
         $totalTextDataCount = $categories->sum(function ($category) {
@@ -156,7 +165,7 @@ class HomeFrontController extends BaseController
                 return $subcategory->textdatas->count();
             });
         });
-        dd($categories);
+        // dd($categories);
         return response()->json([
             'view' => view('front.search_home_design', compact('categories'))->render(),
             'count' => $totalTextDataCount, // Count of categories
