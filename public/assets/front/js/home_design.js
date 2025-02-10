@@ -274,7 +274,7 @@ function allCheckFun() {
     $(".total_design_count").text(visibleItems + " Items");
     let search_value = "";
     $.ajax({
-        url: base_url + "search_design",
+        url: base_url + "search_features",
         method: "GET",
         data: {
             search: search_value,
