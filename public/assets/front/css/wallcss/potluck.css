@@ -435,6 +435,7 @@
     display: flex;
     align-items:center;
     justify-content: center;
+    margin-bottom: 0px !important;
 }
 
 .post-potluck-category .list-slide .accordion-body img.slide-user-img
