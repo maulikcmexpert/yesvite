@@ -273,17 +273,19 @@
 
         // Filter images based on checked categories
         // if (checkedCheckboxes > 0) {
-            $('.image-item-new').hide(); // Hide all images first
-            $('input[name="design_category"]:not(#Allcat):checked').each(function() {
+            $('.image-item-new').show(); // Hide all images first
+            // $('input[name="design_category"]:not(#Allcat):checked').each(function() {
                 const categoryId = $(this).data('category-id');
                 const subcategoryId = $(this).data('subcategory-id');
+                alert(categoryId);
+                alert(subcategoryId);
 
                 // Show images matching the selected categories and subcategories
                 $(`.image-item-new[data-category-id="${categoryId}"]`)
                     .show();
                     var visibleItems = $('.all_designs:visible').length;
                     $('.total_design_count').text(visibleItems + ' Items');
-            });
+            // });
         // } else {
         //     $('.image-item').hide(); // Hide all images if no checkboxes are checked
         //     var visibleItems = $('.all_designs:visible').length;
