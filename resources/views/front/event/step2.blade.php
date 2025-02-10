@@ -158,6 +158,7 @@
             $('#Allcat').on('change', function() {
                 $('.image-item-new').hide();
                 $("#category_name").hide();
+                $("#allchecked").hide();
                 if ($(this).is(':checked')) {
                     $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
                     $('.image-item').show();
@@ -182,6 +183,7 @@
             $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
                 $('.image-item-new').hide();
                 $("#category_name").hide();
+                $("#allchecked").hide();
                 // If all individual checkboxes are checked, check "All Categories"
                 const totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
                 const checkedCheckboxes = $('input[name="design_subcategory"]:not(#Allcat):checked').length;
@@ -214,6 +216,7 @@
             $('#resetCategories').on('click', function(e) {
                 $('.image-item-new').hide();
                 $("#category_name").hide();
+                $("#allchecked").hide();
                 e.preventDefault();
                 $('#Allcat').prop('checked', false);
                 $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
@@ -244,6 +247,7 @@
             $(document).on('input', '#search_design_category', function() {
                 $('.image-item-new').hide();
                 $("#category_name").hide();
+                $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
                 $.ajax({
@@ -298,6 +302,8 @@
         function allCheckFun() {
             $('.image-item-new').hide();
             $("#category_name").hide();
+            $("#allchecked").hide();
+            
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
