@@ -641,13 +641,13 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                 };
                 toastr.success("{{ session('msg') }}");
             @endif
-            @if (session('success'))
+            @if (session('msg_error'))
                 toastr.options = {
                     "closeButton": true,
                     "progressBar": true,
                     "positionClass": "toast-top-right",
                 };
-                toastr.success("{{ session('success') }}");
+                toastr.error("{{ session('msg_error') }}");
             @endif
             @if (session('error'))
                 toastr.options = {

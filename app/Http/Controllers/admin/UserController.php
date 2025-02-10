@@ -408,7 +408,7 @@ class UserController extends Controller
                 });
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+                return redirect()->back()->with('msg_error', 'Failed to send email: ' . $e->getMessage());
             }
             DB::commit();
             return redirect()->route('users.index')->with('msg', 'User password updated and email sent successfully!');

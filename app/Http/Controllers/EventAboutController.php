@@ -361,12 +361,12 @@ class EventAboutController extends Controller
         // Check if the event exists
         $checkEvent = Event::where('id', $request->event_id)->first();
         if (!$checkEvent) {
-            return redirect()->back()->with('error', 'Event not found!');
+            return redirect()->back()->with('msg_error', 'Event not found!');
         }
 
         // Prevent RSVP for past events
         if ($checkEvent->end_date < date('Y-m-d')) {
-            return redirect()->back()->with('error', 'Event is past, you cannot attempt RSVP!');
+            return redirect()->back()->with('msg_error', 'Event is past, you cannot attempt RSVP!');
         }
 
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
@@ -374,7 +374,7 @@ class EventAboutController extends Controller
         })->where(['user_id' => $user, 'event_id' => $request->event_id])->first();
 
         if (!$rsvpSent) {
-            return redirect()->back()->with('error', 'No RSVP record found!');
+            return redirect()->back()->with('msg_error', 'No RSVP record found!');
         }
 
         // Determine RSVP change status
@@ -398,7 +398,7 @@ class EventAboutController extends Controller
         $rsvpSent->event_view_date = date('Y-m-d');
 
         if (!$rsvpSent->save()) {
-            return redirect()->back()->with('error', 'RSVP update failed!');
+            return redirect()->back()->with('msg_error', 'RSVP update failed!');
         }
 
         // Prepare post message
@@ -419,7 +419,7 @@ class EventAboutController extends Controller
             // Update existing RSVP post
             $existingPost->post_message = json_encode($postMessage);
             if (!$existingPost->save()) {
-                return redirect()->back()->with('error', 'RSVP post update failed!');
+                return redirect()->back()->with('msg_error', 'RSVP post update failed!');
             }
         } else {
             // Create a new RSVP post
@@ -433,7 +433,7 @@ class EventAboutController extends Controller
             $newPost->is_in_photo_moudle = "0";
 
             if (!$newPost->save()) {
-                return redirect()->back()->with('error', 'New RSVP post creation failed!');
+                return redirect()->back()->with('msg_error', 'New RSVP post creation failed!');
             }
         }
 
