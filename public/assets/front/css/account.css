@@ -210,6 +210,21 @@
     height: 14px;
 }
 
+.account-setting-credit-wrp .credits_balance_amout_wrp h5{
+    margin-left: 0px !important;
+}
+
+.account-setting-credit-wrp .credits_balance_amout_wrp h5 span{
+    color:#fff !important;
+}
+
+.account-setting-credit-wrp .credits_balance_amout_wrp h6{
+    color:#fff !important;
+}
+
+.account-setting-credit-wrp .credits_balance_amout_wrp h6 span{
+    font-weight: 600 !important;
+}
 
 /* =========== responsive =========== */
 @media only screen and (max-width:768px) {
