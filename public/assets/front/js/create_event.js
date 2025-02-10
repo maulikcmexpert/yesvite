@@ -9325,7 +9325,6 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
-  alert()
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
