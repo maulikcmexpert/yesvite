@@ -1600,7 +1600,7 @@ $(document).on("mousedown", "#likeButtonModel", function () {
 });
 $(document).on("click", "#likeButtonModel", function () {
     // alert();
-    // return;
+    return;
     clearTimeout(longPressTimers); // Clear the long press timer
 
     // If it's a long press, don't process the click event
@@ -1651,6 +1651,7 @@ $(document).on("click", "#likeButtonModel", function () {
 });
 
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
+    return;
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButton");
     const emojiDisplay = button.find("#show_comment_emoji");
