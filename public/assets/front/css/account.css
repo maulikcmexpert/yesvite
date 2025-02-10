@@ -231,6 +231,15 @@
     margin-bottom: 15px;
 }
 
+.account-setting-credit-button-wrp .cmn-btn{
+    background-color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    width: 100%;
+}
+
 
 /* =========== responsive =========== */
 @media only screen and (max-width:768px) {
