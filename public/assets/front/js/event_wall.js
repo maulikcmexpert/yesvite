@@ -1432,23 +1432,44 @@ $(document).on('click','.get_post_emoji_list',function(){
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
                 const reactionMap = {
-                    "\u{2764}": "nav-heart-reaction", // ❤️
-                    "\u{1F44D}": "nav-thumb-reaction", // 👍
-                    "\u{1F604}": "nav-smily-reaction", // 😄
-                    "\u{1F60D}": "nav-eye-heart-reaction", // 😍
-                    "\u{1F44F}": "nav-clap-reaction", // 👏
+                    "\u{2764}": "heart-emoji", // ❤️
+                    "\u{1F44D}": "thumb-icon", // 👍
+                    "\u{1F604}": "smily-emoji", // 😄
+                    "\u{1F60D}": "eye-heart-emoji", // 😍
+                    "\u{1F44F}": "clap-icon", // 👏
                 };
-                $("#nav-all-reaction-tab").html(`All ${reactionDetail.total_count}`);
+                $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
 
                 $(".tab-pane ul").html("");
 
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
-                    if (reaction == "\\u{2764}") tabId = "nav-heart-reaction";
-                    else if (reaction == "\\u{1F44D}") tabId = "nav-thumb-reaction";
-                    else if (reaction == "\\u{1F604}") tabId = "nav-smily-reaction";
-                    else if (reaction == "\\u{1F60D}") tabId = "nav-eye-heart-reaction";
-                    else if (reaction == "\\u{1F44F}") tabId = "nav-clap-reaction";
+                    let emoji_name="";
+                    if (reaction == "\\u{2764}"){
+                        tabId = "nav-heart-reaction";
+                        emoji_name="heart-emoji";
+                    }  
+                        
+                    else if (reaction == "\\u{1F44D}"){
+                        tabId = "nav-thumb-reaction";
+                        emoji_name="thumb-icon";
+
+                    } 
+                    else if (reaction == "\\u{1F604}"){
+                        tabId = "nav-smily-reaction";
+                        emoji_name="smily-emoji";
+
+                    } 
+                    else if (reaction == "\\u{1F60D}"){
+                        tabId = "nav-eye-heart-reaction"
+                        emoji_name="eye-heart-emoji";
+
+                    }
+                    else if (reaction == "\\u{1F44F}"){
+                        tabId = "nav-clap-reaction"
+                        emoji_name="clap-icon";
+
+                    }
 
                     let reactionHtml = "";
                     users.forEach(user => {
@@ -1464,7 +1485,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                                         </div>
                                     </div>
                                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                        <img src="./assets/img/${reaction}-emoji.png" alt="">
+                                        <img src="${base_url}assets/front/img/${emoji_name}.png" alt="">
                                     </div>
                                 </div>
                             </li>
@@ -1477,7 +1498,7 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     // Update Reaction Counts in Tabs
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
-                    $(`#${tabId}-tab`).html(`<img src="./assets/img/${reaction}-emoji.png" alt=""> ${reactionCount}`);
+                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> ${reactionCount}`);
                 });
 
                 // Show modal
