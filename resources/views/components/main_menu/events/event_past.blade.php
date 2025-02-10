@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-right">
+                <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-right zoom_img" data-img="{{ $upcomingEvent['event_images'] }}">
                   <img src="{{$pastEvent['event_images']}}" loading="lazy" alt="">
               </a>
             </div>
@@ -168,3 +168,25 @@
       </div>
     </div>
   </div>
+
+  @push('scripts')
+  <script>
+    $(document).ready(function () {
+        $(document).on("click", ".zoom_img", function (e) {
+
+            e.preventDefault();
+            var imgSrc = $(this).data("img");
+
+            $.magnificPopup.open({
+                items: {
+                    src: imgSrc,
+                    type: "image"
+                },
+                gallery: {
+                    enabled: false
+                }
+            });
+        });
+    });
+  </script>
+  @endpush
