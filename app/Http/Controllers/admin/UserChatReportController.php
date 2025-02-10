@@ -165,7 +165,7 @@ class UserChatReportController extends Controller
             UserReportChat::find($chat_report_id)->delete();
             DB::commit();
             return redirect()->route('/admin/user_chat_report')
-                ->with('msg', 'Chat Report deleted successfully');
+                ->with('success', 'Chat Report deleted successfully');
         } catch (QueryException $e) {
             DB::rollBack();
         }
