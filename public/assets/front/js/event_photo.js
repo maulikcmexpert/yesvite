@@ -1091,7 +1091,7 @@ $(document).on("click", ".open_photo_model", function () {
 
 
 
-                let reactionImageHtml = "";
+                let reactionImageHtml = $('#likeButtonModel').find('i');
                 if (reactionIcons[reaction_store]) {
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
