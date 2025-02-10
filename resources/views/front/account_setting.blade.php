@@ -76,7 +76,7 @@
                                             <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
                                             <span class="available-coins">558</span>
                                         </h5>
-                                        <h6>Compared to 43 credits last month</h6>
+                                        <h6>Last Recharge : <span>500 Credits</span></h6>
                                     </div>
                                 </div>
                             </div>
