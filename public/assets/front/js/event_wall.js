@@ -1496,6 +1496,8 @@ $(document).on('click','.get_post_emoji_list',function(){
                         $(`#${tabId} ul`).append(reactionHtml);
                     }
 
+                    $("#nav-all-reaction ul").append(reactionHtml);
+
                     // Update Reaction Counts in Tabs
                     let reactionCount = reactionDetail.reaction_count[reaction] || 0;
                     $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> ${reactionCount}`);
