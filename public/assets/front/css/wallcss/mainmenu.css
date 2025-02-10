@@ -2787,13 +2787,14 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    position: fixed;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15px;
+    bottom: 0px;
     z-index: 20;
     border: none;
     pointer-events: auto;
+    margin-top: 20px;
 }
 
 .mobile-calender-btn span {
