@@ -2969,6 +2969,7 @@
     box-shadow: 0px 15px 30px -15px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .responsive-calendar {
@@ -3198,6 +3199,7 @@
     }
     .responsive-calendar .day {
         width: 70px !important;
+        max-width: 70px !important;
     }
     .responsive-calender-month-wrp {
         display: block;
@@ -3344,6 +3346,7 @@
     }
     .responsive-calendar .day {
         width: 68px !important;
+        max-width: 68px !important;
     }
     .home-center-profile-img h5 {
         font-size: 17px;
@@ -3497,6 +3500,7 @@
     }
     .responsive-calendar .day {
         width: 56px !important;
+        max-width: 56px !important;
     }
     .calendar-heading {
         font-family: var(--SFProDisplay-Bold) !important;
@@ -3614,6 +3618,7 @@
     .responsive-calendar .day {
         font-size: 12px;
         width: 42px;
+        max-width: 42px !important;
     }
     .responsive-calendar .day .day-events span {
         vertical-align: top;
