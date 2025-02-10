@@ -1431,18 +1431,24 @@ $(document).on('click','.get_post_emoji_list',function(){
             if (response.status === 1) {
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
-
+                const reactionMap = {
+                    "\u{2764}": "nav-heart-reaction", // ❤️
+                    "\u{1F44D}": "nav-thumb-reaction", // 👍
+                    "\u{1F604}": "nav-smily-reaction", // 😄
+                    "\u{1F60D}": "nav-eye-heart-reaction", // 😍
+                    "\u{1F44F}": "nav-clap-reaction", // 👏
+                };
                 $("#nav-all-reaction-tab").html(`All ${reactionDetail.total_count}`);
 
                 $(".tab-pane ul").html("");
 
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
-                    if (reaction === "heart") tabId = "nav-heart-reaction";
-                    else if (reaction === "thumb") tabId = "nav-thumb-reaction";
-                    else if (reaction === "smily") tabId = "nav-smily-reaction";
-                    else if (reaction === "eye-heart") tabId = "nav-eye-heart-reaction";
-                    else if (reaction === "clap") tabId = "nav-clap-reaction";
+                    if (reaction == "\\u{2764}") tabId = "nav-heart-reaction";
+                    else if (reaction == "\\u{1F44D}") tabId = "nav-thumb-reaction";
+                    else if (reaction == "\\u{1F604}") tabId = "nav-smily-reaction";
+                    else if (reaction == "\\u{1F60D}") tabId = "nav-eye-heart-reaction";
+                    else if (reaction == "\\u{1F44F}") tabId = "nav-clap-reaction";
 
                     let reactionHtml = "";
                     users.forEach(user => {
