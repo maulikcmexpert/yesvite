@@ -1563,6 +1563,8 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
+        $(".activity_bar")[0].offsetHeight;  // Trigger reflow/repaint
+
         // datepicker();
         startDate.add(1, "day");
     }
