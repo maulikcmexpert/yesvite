@@ -76,11 +76,11 @@
                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$user->coins}}</span>
                                         </h5>
-                                        <h6>Last Recharge : <span>{{$user->lastRecharge}}</span></h6>
+                                        <h6>Last Recharge : <span id="lastRecharge">{{$user->lastRecharge}}</span></h6>
                                     </div>
                                 </div>
                                 <div class="account-setting-credit-button-wrp">
-                                    <a href="" class="cmn-btn credit-hisotry-btn">
+                                    <a href="{{ route('profile.transaction')}}" class="cmn-btn credit-hisotry-btn">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.9974 1.66797C5.40573 1.66797 1.66406 5.40964 1.66406 10.0013C1.66406 14.593 5.40573 18.3346 9.9974 18.3346C14.5891 18.3346 18.3307 14.593 18.3307 10.0013C18.3307 5.40964 14.5891 1.66797 9.9974 1.66797ZM13.6224 12.9763C13.5057 13.1763 13.2974 13.2846 13.0807 13.2846C12.9724 13.2846 12.8641 13.2596 12.7641 13.193L10.1807 11.6513C9.53906 11.268 9.06406 10.4263 9.06406 9.68464V6.26797C9.06406 5.9263 9.3474 5.64297 9.68906 5.64297C10.0307 5.64297 10.3141 5.9263 10.3141 6.26797V9.68464C10.3141 9.98464 10.5641 10.4263 10.8224 10.5763L13.4057 12.118C13.7057 12.293 13.8057 12.6763 13.6224 12.9763Z" fill="white" fill-opacity="0.5"/>
                                         </svg>
@@ -102,13 +102,13 @@
                         </span> --}}
                     </div>
                     <div class="general-wrap mb-0">
-                        <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
+                        {{-- <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
                         <a href="{{ route('profile.transaction')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Transcations</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> --}}
                         {{-- <a href="{{route('account_settings.messagePrivacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Messaging Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
