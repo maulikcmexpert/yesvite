@@ -1483,6 +1483,11 @@ $(document).on('click','.get_post_emoji_list',function(){
 
                     let reactionHtml = "";
                     let profile="";
+                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> 0`);
+                    $(`#${tabId} ul`).html("");
+                    $("#nav-all-reaction ul").html("");
+
+
                     users.forEach(user => {
                         if(user.profile==""){
                             profile=generateProfileImage(user.firstname,user.lastname);
