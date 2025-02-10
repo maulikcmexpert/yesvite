@@ -3498,7 +3498,7 @@
 
     .responsive-calendar .month {
         max-width: 400px;
-        text-align: center;
+        /* text-align: center; */
     }
     .responsive-calender-month-wrp {
         max-width: 400px;
