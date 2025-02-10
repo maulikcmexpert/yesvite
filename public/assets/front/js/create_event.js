@@ -1390,6 +1390,7 @@ $(function () {
                 var activities = {};
                 eventData.activity = {};
                 var total_activities = 0;
+                console.log(selectedDates);
                 set_activity_html(selectedDates);
             }
         }
@@ -1431,7 +1432,9 @@ $(document).on("change", "#schedule", function () {
                 selectedDates.add(eventDate);
             }
             // console.log(selectedDates.size);
+            console.log(selectedDates);
             if (selectedDates.size > 0) {
+                console.log(selectedDates);
                 set_activity_html(selectedDates);
             }
         } else {
@@ -1446,6 +1449,7 @@ $(document).on("change", "#schedule", function () {
 });
 
 function set_activity_html(selectedDates) {
+    console.log(selectedDates);
     $(".activity_bar").html("");
     var activities = {};
     eventData.activity = {};
@@ -4637,6 +4641,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    alert()
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4666,6 +4671,7 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
 });
 
 function li_design_click() {
+    alert()
     // console.log(eventData);
     // if (
     //     eventData.event_type != "" &&
