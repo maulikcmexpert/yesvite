@@ -1560,10 +1560,7 @@
                     <!-- ===Tab-content=== -->  
                 </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="cmn-btn reset-btn">Reset</button>
-              <button type="button" class="cmn-btn">Apply</button>
-            </div>
+    
           </div>
         </div>
     </div>
