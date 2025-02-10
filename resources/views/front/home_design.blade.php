@@ -684,7 +684,7 @@
                         @foreach ($category->subcategory as $subcategory)
                             @foreach ($subcategory->textdatas as $image)
                                 <div style="display: none"
-                                    class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                                    class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
                                     data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
     
                                     <a href="javascript:;" class="collection-card card-blue">
