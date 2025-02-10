@@ -231,6 +231,21 @@
     margin-bottom: 15px;
 }
 
+.account-setting-credit-button-wrp .cmn-btn{
+    background-color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    width: 100%;
+    color: #000 !important;
+}
+
+.credit-hisotry-btn{
+    border: 1px solid #fff !important;
+    backdrop-filter: blur(100px);
+}
+
 
 /* =========== responsive =========== */
 @media only screen and (max-width:768px) {
