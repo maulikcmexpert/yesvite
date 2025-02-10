@@ -1,6 +1,6 @@
 let guestList = [];
 let guestPhoneList = [];
-
+var base_url=$('#base_url').val();
 $(document).ready(function () {
     let longPressTimer;
     let isLongPresss = false;
@@ -21,8 +21,8 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
     let reactionIcons = {
-        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        // "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
@@ -289,28 +289,9 @@ $(document).ready(function () {
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
-                        let emoji_name="";
-                        if (reaction == "\\u{2764}"){
-                            emoji_name="heart-emoji";
-                        }  
-                            
-                        else if (reaction == "\\u{1F44D}"){
-                            emoji_name="thumb-icon";
-    
-                        } 
-                        else if (reaction == "\\u{1F60A}"){
-                            emoji_name="smily-emoji";
-    
-                        } 
-                        else if (reaction == "\\u{1F60D}"){
-                            emoji_name="eye-heart-emoji";
-    
-                        }
-                        else if (reaction == "\\u{1F44F}"){
-                            emoji_name="clap-icon";
-                        }
+                
 
-                        console.log(emoji_name);
+                        console.log(reactionIcons[reaction]);
                         if (reactionIcons[reaction]) {
                             reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
                         }
@@ -330,28 +311,7 @@ $(document).ready(function () {
                                     )
                                 );
                             }
-                            let emoji_name="";
-                            if (firstReaction == "\\u{2764}"){
-                                emoji_name="heart-emoji";
-                            }  
-                                
-                            else if (firstReaction == "\\u{1F44D}"){
-                                emoji_name="thumb-icon";
-        
-                            } 
-                            else if (firstReaction == "\\u{1F60A}"){
-                                emoji_name="smily-emoji";
-        
-                            } 
-                            else if (firstReaction == "\\u{1F60D}"){
-                                emoji_name="eye-heart-emoji";
-        
-                            }
-                            else if (firstReaction == "\\u{1F44F}"){
-                                emoji_name="clap-icon";
-                            }
-
-                            console.log(emoji_name);
+                         
                             if (reactionIcons[firstReaction]) {
                                 reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
                             } else {

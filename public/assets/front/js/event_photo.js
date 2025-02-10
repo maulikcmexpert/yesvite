@@ -1092,6 +1092,13 @@ $(document).on("click", ".open_photo_model", function () {
                     $(".posts-card-head-left-img").html(profileImage);
                 }
 
+                const post = {
+                    id: postId,
+                    reactionList: data.reactionList,
+                    self_reaction: data.self_reaction,
+                    total_likes: data.total_likes
+                };
+
                 function generateProfileImage(firstname, lastname) {
                     const firstInitial = firstname
                         ? firstname[0].toUpperCase()
@@ -1131,7 +1138,11 @@ $(document).on("click", ".open_photo_model", function () {
                 $("#post_message").text(data.post_message);
                 $("#post_time_details").text(data.post_time);
 
-                $("#likeCount").text(data.total_likes + " Likes");
+                const reactionVal = data.reactionList.forEach((that) => {
+
+                });
+
+                // $("#likeCount").text(data.total_likes + " Likes");
                 // Add 'Likes' after the number
                 $("#comments").text(data.total_comments + " Comments");
 
@@ -1155,10 +1166,17 @@ console.log(reactionIcons[reaction_store]);
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
                 $(`#likeButtonModel`).html(reactionImageHtml);
-                $(".reactionImage").show();
-                $(`#reactionImage`).html(reactionImageHtml);
+               let reaction_list = response.reactionList;
+            //    reaction_list.each(function () {
+
+            //     $(`#reactionImage`).html(reactionIcons[reaction_store]);
+            //    });
+
+            document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
+
+
                 reactionList.find("li").each(function () {
                     const img = $(this).find("img");
                     if (img.length) {
@@ -1826,3 +1844,32 @@ $(document).on("click", "#CommentlikeButton", function () {
         },
     });
 });
+
+function renderReactions(post) {
+    let reactionList = post.reactionList || [];
+    let selfReaction = post.self_reaction;
+    let reactionHtml = "";
+    let j = 0;
+    let i = 0;
+
+    reactionList.forEach((reaction) => {
+        if (i >= 3) return; // Limit to 3 reactions
+
+        let emojiSrc = reactionIcons[reaction] || null;
+
+        if (emojiSrc) {
+            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
+            reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
+            if (j === 0 && selfReaction === reaction) j++;
+            i++;
+        }
+    });
+
+    if (j === 0 && i < 3) {
+        reactionHtml += `<li id="reactionImage_${post.id}"></li>`;
+    }
+
+    let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
+
+    return reactionHtml + likeCountHtml;
+}

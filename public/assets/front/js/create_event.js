@@ -4816,6 +4816,7 @@ async function saveDesignData(direct = false) {
     }
     console.log({ eventData });
     console.log("here for save image");
+    $("#loader").css("display", "flex");
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
 
@@ -4827,7 +4828,6 @@ async function saveDesignData(direct = false) {
     });
     canvas.renderAll();
 
-    $("#loader").css("display", "flex");
     $(".store_desgin_temp, .btn-close").prop("disabled", true);
 
     try {
