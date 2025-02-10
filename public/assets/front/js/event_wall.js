@@ -1485,7 +1485,7 @@ $(document).on('click','.get_post_emoji_list',function(){
                                         </div>
                                     </div>
                                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                        <img src="${base_url}assets/front/img/${reaction}-emoji.png" alt="">
+                                        <img src="${base_url}assets/front/img/${emoji_name}.png" alt="">
                                     </div>
                                 </div>
                             </li>
