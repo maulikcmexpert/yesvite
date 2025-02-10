@@ -1424,7 +1424,10 @@ function generateProfileImage(firstname, lastname) {
 }
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
-    $("#nav-all-reaction ul").html("");
+ 
+
+       $("#nav-all-reaction ul").html("");
+
     $('#nav-all-reaction-tab').html("All 0");
     $(`#nav-heart-reaction ul`).html("");
     $('#heart-count').text('0');
@@ -1441,7 +1444,7 @@ $(document).on('click','.get_post_emoji_list',function(){
     $(`#nav-clap-reaction ul`).html("");
     $('#clap-count').text('0');
 
-
+    
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
         type: "POST",
@@ -1541,6 +1544,7 @@ $(document).on('click','.get_post_emoji_list',function(){
         },
     });
 });
+
 // $(document).on('click', function (e) {
 //     if (!$(e.target).closest('.photo-card-head-right').length) {
 //         $('.photos-likes-options-wrp').hide(); // Hide emoji picker when clicked outside
