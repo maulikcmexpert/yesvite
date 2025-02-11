@@ -106,7 +106,7 @@ if (chartData) {
                 },
             },
         },
-        colors: ["#ff3b53", "#0caf60"],
+        colors: [ "#0caf60","#ff3b53"],
         responsive: [
             {
                 breakpoint: 480,
