@@ -1,14 +1,7 @@
 
-<div class="home-center-content-head">
-    <!-- <h1>Hi, {{$profileData['firstname']}}!</h1> -->
-    <nav class="breadcrumb-nav" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
-                        </ol>
-    </nav>
-    <h1>Calender View</h1>
+<!-- <div class="home-center-content-head">
+    <h1>Hi, {{$profileData['firstname']}}!</h1>
+    
 
     <span class="home-center-content-head-calender-icon profile-calender-view">
       <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +17,16 @@
       <path d="M8.29138 17.2002H8.30036" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
+</div> -->
+<div>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                            {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
+                            <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
+                        </ol>
+    </nav>
+    <h1>Calender View</h1>
 </div>
 <div class="home-center-profile-wrp">
     <div class="home-center-profile-head">
