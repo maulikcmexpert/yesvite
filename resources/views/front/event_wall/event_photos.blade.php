@@ -958,7 +958,7 @@
                                         alt="Eye Heart Emoji" class="emoji model_emoji" data-emoji="😍"
                                         data-unicode="\\u{1F60D}">
                                     <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt="Clap Emoji"
-                                        class="emoji" data-emoji="👏" data-unicode="\\u{1F44F}">
+                                        class="emoji model_emoji" data-emoji="👏" data-unicode="\\u{1F44F}">
                                 </div>
 
 
