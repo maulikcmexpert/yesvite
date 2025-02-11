@@ -1741,8 +1741,8 @@ $(document).ready(function () {
         });
     });
 
-  
-   
+
+
     function renderReactions(post) {
         let reactionList = post.reactionList || [];
         let selfReaction = post.self_reaction;
