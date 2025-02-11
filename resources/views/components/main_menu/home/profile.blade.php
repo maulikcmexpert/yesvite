@@ -27,7 +27,7 @@
                         </ol>
     </nav>
     <h1>Calender View</h1>
-    <i class="fa-solid fa-arrow-left"></i>
+    <i class="fa-solid fa-arrow-left get-back-home-calender"></i>
 </div>
 <div class="home-center-profile-wrp">
     <div class="home-center-profile-head">

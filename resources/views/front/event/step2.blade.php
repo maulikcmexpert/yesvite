@@ -122,8 +122,9 @@
                     <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
                 @foreach ($categories as $category)
+                <div class="row list_all_design_wrp">
                     @foreach ($category->subcategory as $subcategory)
-                    <div class="row list_all_design_wrp">
+                    
                         @foreach ($subcategory->textdatas as $image)
                             
                                 <div style="display: none"
@@ -144,8 +145,8 @@
                                 </div>
                             
                         @endforeach
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 @endforeach
 
 
