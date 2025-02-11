@@ -313,12 +313,6 @@ $(document).on("click", function (e) {
 // end code
 
 
-// alfez code
-
-$(document).on('click','#likeButtonModel',function(){
-    $("#emojiDropdown").show();
-})
-//
 
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
@@ -1890,15 +1884,15 @@ $(document).ready(function () {
       let pressTimer;
 
       // Handle long press to show emoji dropdown (for both desktop and mobile)
-      $likeButton.on("mousedown touchstart", function () {
-        pressTimer = setTimeout(function () {
+      $(document).on('click','#likeButtonModel',function(){
           $emojiDropdown.show(); // Show emoji dropdown after long press
-        }, 500); // Trigger long press after 0.5 seconds
+        // pressTimer = setTimeout(function () {
+        // }, 500); // Trigger long press after 0.5 seconds
       });
 
-      $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-        clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-      });
+    //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+    //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+    //   });
 
       // Handle emoji click
       $emojiDropdown.on("click", ".emoji", function () {
