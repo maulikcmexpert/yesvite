@@ -197,19 +197,19 @@ $(document).on("click", "#detail_calender_view", function () {
     var $textSpan = $(this).find(".responsive-text");
     var $iconSpan = $(this).find(".responsive-icon");
     console.log($(this).html());
-    if (text == "Calendar") {
+    // if (text == "Calendar") {
         $textSpan.text("List View");
         $iconSpan.html(listSvg);
         $(".responsive-calendar").css("display", "flex");
         $(".responsive-calender-month-text").css("display", "inline-block");
-    }
+    // }
 
-    if (text == "List View") {
-        $textSpan.text("Calendar");
-        $iconSpan.html(calendarSvg);
-        $(".responsive-calendar").css("display", "none");
-        $(".responsive-calender-month-text").css("display", "none");
-    }
+    // if (text == "List View") {
+    //     $textSpan.text("Calendar");
+    //     $iconSpan.html(calendarSvg);
+    //     $(".responsive-calendar").css("display", "none");
+    //     $(".responsive-calender-month-text").css("display", "none");
+    // }
 });
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
