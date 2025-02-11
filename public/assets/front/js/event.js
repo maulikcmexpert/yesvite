@@ -954,7 +954,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
      $('#rsvp_notification_kids').val("0");
      $('#rsvp_notification_message').val('');
      $('#rsvp_notification_message').val('');
-     $('#rsvp_yes').prop('checked',true)
+     $('#rsvp_yes').prop('checked',false);
      $('.rsvp_minus_notify').prop('disabled',false);
      $('.rsvp_plus_notify').prop('disabled',false);
 
