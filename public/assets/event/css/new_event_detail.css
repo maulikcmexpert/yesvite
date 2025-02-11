@@ -197,7 +197,7 @@
 }
 
 .edit-design-sidebar.active .side-bar-sub-list h3::before {
-    left: 5px;
+    left: 10px;
 }
 
 .new-event-sidebar-menu ul li .active span {
