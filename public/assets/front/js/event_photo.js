@@ -102,74 +102,7 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
 
-    $(document).on("click", "#likeButton", function () {
-        return;
-        //clearTimeout(longPressTimer); // Clear the long press timer
-
-        // If it's a long press, don't process the click event
-        if (isLongPresss) return;
-
-        // Handle single tap like/unlike
-        const button = $(this);
-        const isLiked = button.hasClass("liked");
-        const reaction = isLiked ? "\u{2764}" : "\u{1F90D}"; // Toggle reaction: 💔 or ❤️
-
-        // Toggle like button appearance
-        if (isLiked) {
-            button.removeClass("liked");
-            button.find("i").removeClass("fa-solid").addClass("fa-regular");
-        } else {
-            button.addClass("liked");
-            button.find("i").removeClass("fa-regular").addClass("fa-solid");
-        }
-
-        // AJAX call to update the like state
-        const eventId = button.data("event-id");
-        const eventPostId = button.data("event-post-id");
-        $.ajax({
-            url: base_url + "event_photo/userPostLikeDislike",
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            contentType: "application/json",
-            data: JSON.stringify({
-                event_id: eventId,
-                event_post_id: eventPostId,
-                reaction: reaction,
-            }),
-            success: function (response) {
-                if (response.status === 1) {
-                    $(`#likeCount_${eventPostId}`).text(
-                        `${response.count} Likes`
-                    );
-                    $(".modal").on("hidden.bs.modal", function () {
-                        $("#postContent").val("");
-                        $("#pollForm")[0].reset(); // Reset poll form
-                        $("#photoForm")[0].reset(); // Reset photo form
-                        $("#imagePreview").empty(); // Clear image preview
-
-                        // Add `d-none` class back to hide the div
-                        $(".create-post-upload-img-inner").addClass("d-none");
-                    });
-
-                    $(".modal").on("shown.bs.modal", function () {
-                        // Remove `d-none` class to show the div
-                        $(".create-post-upload-img-inner").removeClass(
-                            "d-none"
-                        );
-                    });
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr) {
-                console.error(xhr.responseText);
-                alert("An error occurred. Please try again.");
-            },
-        });
-    });
-
+  
     $(document).on("click", "#emojiDropdown .emoji", function () {
         const selectedEmoji = $(this).data("emoji");
         const button = $(this)
@@ -1623,7 +1556,19 @@ let isLong_press = false;
 
 
 
-
+let reactionIcons = {
+    "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+    "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+    "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    "👏": base_url + "assets/front/img/clap-icon.png", // 👏
+};
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
