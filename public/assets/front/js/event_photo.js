@@ -1131,7 +1131,7 @@ $(document).on("click", ".open_photo_model", function () {
                 console.log(reactionImageHtml);
 
                 if (reactionIcons[reaction_store]) {
-console.log(reactionIcons[reaction_store]);
+                    console.log(reactionIcons[reaction_store]);
 
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
@@ -1561,6 +1561,8 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
+    const button_main = $(this).closest(".photo-card-head-right").find("#likeButton");
+    console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
     emojiDisplay.removeClass();
@@ -1599,6 +1601,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                     if (reactionIcons[selectedEmoji]) {
                         console.log (reactionIcons[selectedEmoji]);
                         reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+
                     }
                     button.addClass("liked"); // Add liked class
                 } else {
@@ -1631,7 +1634,8 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                     ); // Reset button to default
                 }
 
-
+                button_main.html(reactionImageHtml);
+                $(`#reactionImage_model_${eventPostId}`).html(reactionImageHtml);
                 $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
 
@@ -1846,7 +1850,7 @@ function renderReactions(post) {
         let emojiSrc = reactionIcons[reaction] || null;
 
         if (emojiSrc) {
-            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
+            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model_${post.id}"` : "";
             reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
@@ -1854,7 +1858,7 @@ function renderReactions(post) {
     }
 
     if (j === 0 && i < 3) {
-        reactionHtml += `<li id="reactionImage_${post.id}" style="display:flex;"></li>`;
+        reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
     }
 
     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
@@ -1877,8 +1881,14 @@ $(document).ready(function () {
     };
 
     $(document).on('click','#likeButtonModel',function(){
-        $("#emojiDropdown1").show();
+        console.log("asd")
+        setTimeout(function () {
+            $("#emojiDropdown1").show();
+            console.log("asd")
+        },1000)
 
+        $("#emojiDropdown1").css("display","block");
+ console.log($("#emojiDropdown1"))
     });
     $(".posts-card-like-comment-right").each(function () {
       const $container = $(this); // Get the current container
