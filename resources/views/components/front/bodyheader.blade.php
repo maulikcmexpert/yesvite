@@ -1619,7 +1619,6 @@ $notification_list=getNotificationList();
             @php
             if (Auth::guard('web')->user()) {
                     $userprofile = Auth::guard('web')->user();
-                    dd($userprofile);
                     if ($userprofile->profile != NULL || $userprofile->profile != "") {
                         $image = asset("storage/profile/" . $userprofile->profile);
                         $userProfile =  '<img src="' . $image . '" class="UserImg" alt="profile">';
