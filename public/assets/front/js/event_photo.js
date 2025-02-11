@@ -152,7 +152,7 @@ $(document).ready(function () {
                             "Like removed sf.kkshdfhjkfhjkhfjkhsdjkjkshfjksdhfhfdj, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
-                            let firstReaction = response.reactionList[0];
+                            let firstReaction = response.reactionList[0].reaction; // ✅
                             if (firstReaction.startsWith("\\u{")) {
                                 firstReaction = String.fromCodePoint(
                                     parseInt(
