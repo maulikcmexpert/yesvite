@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class ChatController extends Controller
+class ChatController extends BaseController
 {
     protected $database;
     protected $chatRoom;
