@@ -406,6 +406,7 @@
     line-height: 32px;
     margin-bottom: 0;
     margin-top: 20px;
+    word-wrap: break-word;
 }
 
 /* ========== different-wrapper =========== */
@@ -891,6 +892,15 @@
 }
 
 /* ============ responsive ============ */
+@media only screen and (max-width: 1499px) {
+    .collection-card .card-img {
+        height: 220px;
+        min-width: 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
 @media only screen and (max-width: 1399px) {
     .features-wrapper .owl-carousel .owl-dots {
         max-width: 470px;
