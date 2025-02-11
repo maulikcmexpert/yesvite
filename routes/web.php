@@ -59,13 +59,13 @@ Route::post('/run-queue-work', function () {
 });
 Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
     ->name('short.url');
-Route::get('/', [HomeFrontController::class, 'index'])->name('front.features')->middleware('isAuthenticate');
+Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
-Route::get('home', [HomeFrontController::class, 'homeDesign'])->name('home');
+Route::get('homes', [HomeFrontController::class, 'homeDesign'])->name('homes');
 Route::get('search_features', [HomeFrontController::class, 'searchDesign'])->name('search_features');
 Route::get('pricing', [HomeFrontController::class, 'homePricing'])->name('pricing');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
