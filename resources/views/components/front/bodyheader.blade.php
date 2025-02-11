@@ -1185,7 +1185,7 @@ $notification_list=getNotificationList();
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
                                       </div>
-                                      <div class="noification-simple-text-wrp">
+                                      <div class="noification-simple-text-wrp" style="flex-direction: column;align-items: start;">
                                               <p>{{$inner_data['comment_reply']}}</p>
                                               <p>{{$inner_data['comment']}}</p>
                                             </div>

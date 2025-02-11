@@ -124,7 +124,7 @@
 }
 
 .guest-content .right-note:first-child {
-    margin-bottom: 8px !important;
+    margin-bottom: 7px !important;
 }
 
 .guest-content .right-note input {
@@ -186,7 +186,6 @@
     display: flex;
     justify-content: space-between;
     align-items: start;
-
 }
 
 .guest-pro h5 {
@@ -197,7 +196,7 @@
 }
 
 .guest-pro h6 {
-    color: #1C8B5C;
+    color: #1c8b5c;
     font-size: 18px;
     font-weight: 700;
 }
@@ -209,12 +208,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 10px 20px 0px #0000001A;
+    box-shadow: 0px 10px 20px 0px #0000001a;
 }
 
 .invite-left {
     border: 1px solid var(--borderColor);
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     display: flex;
     align-items: center;
     border-radius: 6px;
@@ -223,7 +222,7 @@
 }
 
 .invite-left h6 {
-    color: #F73C71;
+    color: #f73c71;
     font-size: 15px;
     line-height: 26px;
     font-weight: 700;
@@ -235,7 +234,6 @@
     color: var(--secondryColor);
     font-size: 12px;
     line-height: 20px;
-
 }
 
 .invite-right {
@@ -252,7 +250,6 @@
 .invite-right span strong {
     margin-right: 6px;
     line-height: 15px;
-
 }
 
 .guest-contacts-wrp {
@@ -306,7 +303,7 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 23px;
-    background-color: #E2E8F0;
+    background-color: #e2e8f0;
 }
 
 .guest-contact .all-contact {
@@ -360,6 +357,11 @@
 
 .guest-main-content {
     padding-top: 0;
+}
+
+.guest-main-content .contact-tab .users-data .user_choice_group {
+    margin-top: 31px;
+    gap: 0 !important;
 }
 
 .new-group-name-wrp {
@@ -428,7 +430,7 @@
     margin-bottom: 10px;
 }
 
-#sidebar_add_co_host .list_all_invited_user{
+#sidebar_add_co_host .list_all_invited_user {
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 320px);
@@ -439,35 +441,35 @@
     max-height: calc(100vh - 320px);
 }
 
-#sidebar_add_co_host:has(.alert-box) .list_all_invited_user{
+#sidebar_add_co_host:has(.alert-box) .list_all_invited_user {
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 410px);
 }
 
-#sidebar_add_co_host:has(.alert-box) .list_all_contact_user{
+#sidebar_add_co_host:has(.alert-box) .list_all_contact_user {
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 410px);
 }
 
-
-#sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user{
+#sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user {
     max-height: calc(100vh - 430px);
 }
 
-#sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
+#sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user {
     max-height: calc(100vh - 430px);
 }
 
-#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user{
+#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test)
+    .list_all_invited_user {
     max-height: calc(100vh - 500px);
 }
 
-#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user{
+#sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test)
+    .list_all_contact_user {
     max-height: calc(100vh - 500px);
 }
-
 
 #sidebar_gift_registry #registry_list {
     overflow: hidden;
@@ -482,7 +484,7 @@
     max-height: calc(100vh - 280px);
 }
 
-#sidebar_potluck .potluck-category{
+#sidebar_potluck .potluck-category {
     overflow: hidden;
     overflow-y: scroll;
     max-height: calc(100vh - 200px);
@@ -493,7 +495,6 @@
     overflow-y: scroll;
     max-height: calc(100vh - 290px);
 }
-
 
 .swiper {
     width: 100%;
@@ -529,7 +530,7 @@
     border-radius: 100% !important;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
     font-size: 22px !important;
-    color: #64748B !important;
+    color: #64748b !important;
     z-index: 5;
 }
 
@@ -558,17 +559,17 @@
     margin-bottom: 0px !important;
 }
 
-.users-data.invited_user div a{
+.users-data.invited_user div a {
     max-width: 200px;
     word-break: break-word;
 }
 
-.users-data.invited_user a svg{
+.users-data.invited_user a svg {
     min-width: 14px;
     height: auto;
 }
 
-.item-dishes-toggle{
+.item-dishes-toggle {
     margin-bottom: 10px !important;
 }
 
@@ -576,54 +577,48 @@
     max-height: calc(100vh - 440px);
 }  */
 
-.new-guest-content-wrp:has(.group-card.view_members) .user-contacts{
+.new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
     max-height: calc(100vh - 440px);
 }
 
-
-
 /* ============ responsive ============ */
-@media only screen and (max-width:1800px) {
+@media only screen and (max-width: 1800px) {
     .guest-wrapper {
         max-width: 1000px;
     }
 }
 
-
-@media only screen and (max-width:1600px) {
+@media only screen and (max-width: 1600px) {
     .guest-wrapper {
         max-width: 800px;
     }
 }
 
-@media only screen and (max-width:1500px) {
+@media only screen and (max-width: 1500px) {
     .guest-wrapper {
         max-width: 750px;
     }
 }
 
-
-
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width: 1400px) {
     .guest-wrapper {
         max-width: 600px;
     }
 }
 
-
-@media only screen and (max-width:1200px) {
+@media only screen and (max-width: 1200px) {
     .guest-wrapper {
         max-width: 450px;
     }
 }
 
-@media only screen and (max-width:1024px) {
+@media only screen and (max-width: 1024px) {
     .guest-wrapper {
         max-width: 350px;
     }
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .guest-main-content .main-content-sidebar {
         display: none;
     }
@@ -641,7 +636,6 @@
         bottom: 80px;
         left: 50%;
         transform: translateX(-50%);
-
     }
 
     /* .guest-users{
@@ -695,24 +689,39 @@
         max-height: calc(100vh - 390px);
     } */
 
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #contact:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 390px);
     }
-    .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #phone:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 390px);
     }
-    .new-guest-content-wrp .tab-content #group:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #group:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 390px);
     }
 
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #contact:has(.responsive_invite_user)
+        .user-contacts {
         max-height: calc(100vh - 320px);
     }
-    .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #phone:has(.responsive_invite_user)
+        .user-contacts {
         max-height: calc(100vh - 320px);
     }
 
-    .new-guest-content-wrp .user-contacts{
+    .new-guest-content-wrp .user-contacts {
         max-height: calc(100vh - 260px);
     }
 
@@ -729,21 +738,21 @@
         overflow-y: scroll;
         max-height: calc(100vh - 210px) !important;
     }
-    .all-user-contacts-sidebar{
+    .all-user-contacts-sidebar {
         overflow: hidden;
         overflow-y: scroll;
         max-height: calc(100vh - 17vh);
-      }      
+    }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
     .guest-main-content .popular-list {
         display: flex;
         justify-content: space-between;
     }
 }
 
-@media only screen and (max-width:575px) {
+@media only screen and (max-width: 575px) {
     .guest-content {
         padding: 15px 15px 15px 15px;
     }
@@ -813,7 +822,7 @@
         max-height: calc(100vh - 360px);
     }
 
-    #sidebar_potluck .potluck-category{
+    #sidebar_potluck .potluck-category {
         overflow: hidden;
         overflow-y: scroll;
         max-height: calc(100vh - 300px);
@@ -858,51 +867,67 @@
         max-height: calc(100vh - 500px);
     }
 
-    #sidebar_add_co_host:has(.alert-box) .list_all_contact_user{
+    #sidebar_add_co_host:has(.alert-box) .list_all_contact_user {
         overflow: hidden;
         overflow-y: scroll;
         max-height: calc(100vh - 500px);
     }
 
-    #sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user{
+    #sidebar_add_co_host:has(.guest-contacts-test) .list_all_invited_user {
         max-height: calc(100vh - 500px);
     }
 
-    #sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user{
+    #sidebar_add_co_host:has(.guest-contacts-test) .list_all_contact_user {
         max-height: calc(100vh - 500px);
     }
 
-    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_invited_user {
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test)
+        .list_all_invited_user {
         max-height: calc(100vh - 590px);
     }
 
-    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test) .list_all_contact_user {
+    #sidebar_add_co_host:has(.alert-box):has(.guest-contacts-test)
+        .list_all_contact_user {
         max-height: calc(100vh - 590px);
     }
 
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #contact:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 44.5vh);
     }
-    .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #phone:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 44.5vh);
     }
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user):has(.group-card.view_members) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #contact:has(.responsive_invite_user):has(.group-card.view_members)
+        .user-contacts {
         max-height: calc(100vh - 44.5vh);
     }
 
-    .new-guest-content-wrp .tab-content #contact:has(.responsive_invite_user) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #contact:has(.responsive_invite_user)
+        .user-contacts {
         max-height: calc(100vh - 35.125vh);
     }
-    .new-guest-content-wrp .tab-content #phone:has(.responsive_invite_user) .user-contacts{
+    .new-guest-content-wrp
+        .tab-content
+        #phone:has(.responsive_invite_user)
+        .user-contacts {
         max-height: calc(100vh - 35.125vh);
     }
-    .new-guest-content-wrp .user-contacts{
+    .new-guest-content-wrp .user-contacts {
         max-height: calc(100vh - 27vh);
     }
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
         max-height: calc(100vh - 35.75vh);
     }
-
 
     #sidebar_thankyou_card:has(.alert-box) .list_thankyou_card {
         max-height: calc(100vh - 490px) !important;
