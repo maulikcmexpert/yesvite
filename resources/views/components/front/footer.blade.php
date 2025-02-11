@@ -390,7 +390,9 @@ defer
 @stack('scripts')
 
 <script>
-
+  $(document).on("click", ".buycredits", function () {
+    $("#buycreditsmodal").modal("show");
+});
 $(document).on("click", ".buynow", function () {
     $("input.price-option").prop("checked", false);
 });
@@ -694,9 +696,4 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         });
 </script>
 
-<script>
-    $(document).on("click", ".buycredits", function () {
-    $("#buycreditsmodal").modal("show");
-});
 
-</script>
