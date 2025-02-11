@@ -1626,7 +1626,7 @@ let isLong_press = false;
 
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
-    const button = $(this).closest(".emoji_set").find("#likeButton");
+    const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
 
     // Replace heart icon with selected emoji
