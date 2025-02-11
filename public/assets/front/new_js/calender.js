@@ -240,12 +240,24 @@ if (calender_json != undefined) {
             title.innerText = month.format("MMMM YYYY");
             monthContainer.appendChild(title);
 
+            const currentMonthButton = document.getElementsByClassName(
+                "today-btn-home"
+            );
+            if (month.isSame(today, "month")) {
+                $(currentMonthButton).show(); // Show the button
+            } else {
+                $(currentMonthButton).hide(); // Show the button
+            }
             const monthKey = month.format("YYYY-MM");
             const eventCount = monthEventCount[monthKey] || 0;
             const eventscount = document.createElement("h3");
             eventscount.innerText = `${eventCount} event${
                 eventCount !== 1 ? "s" : ""
             }`;
+            const todayButton = document.createElement("button");
+            todayButton.innerText = "Today";
+            todayButton.id = "today-btn-home"; 
+            monthContainer.appendChild(todayButton);
             monthContainer.appendChild(eventscount);
 
             // Weekdays
