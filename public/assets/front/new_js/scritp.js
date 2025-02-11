@@ -541,8 +541,8 @@ $(".upload-img-delete").click(function () {
     $("#photoForm")[0].reset();
 });
 $(".uploded-delete-icon").click(function () {
-    $(".create-post-upload-img-wrp").addClass("d-none");
-  
+
+    $(".preview-image").val('');
     $("#photoForm")[0].reset();
 });
 
