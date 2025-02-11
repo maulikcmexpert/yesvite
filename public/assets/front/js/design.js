@@ -2725,6 +2725,7 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
+    console.log("getTextDataFromCanvas");
     var objects = canvas.getObjects();
     var textData = [];
     var shapeImageData = [];
@@ -2739,7 +2740,7 @@ function getTextDataFromCanvas() {
 
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
-            alert(obj.text);
+            // alert(obj.text);
             var centerPoint = obj.getCenterPoint();
 
             // **Convert positions back to original 345×490**
