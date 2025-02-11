@@ -649,6 +649,9 @@ $(document).on("click",".event_nav",function () {
 $(document).on('click',".day",function () {
     // alert();
     var search_date=$(this).data('date');
+    if(search_date==undefined||search_date==""){
+        return;
+    }
     console.log(search_date);
     var searchValue = $(this).val();
     var current_month="";
