@@ -3627,8 +3627,8 @@
     }
     .responsive-calendar .day {
         font-size: 12px;
-        width: 45px !important;
-        max-width: 45px !important;
+        width: 42px !important;
+        max-width: 42px !important;
     }
     .responsive-calendar .day .day-events span {
         vertical-align: top;
