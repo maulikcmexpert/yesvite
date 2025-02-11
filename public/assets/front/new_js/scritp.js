@@ -403,6 +403,7 @@ $(document).on("change", ".fileInputtype", function (event) {
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
+                    document.querySelector(".fileInputtype").value = "";
                 }
             });
 
