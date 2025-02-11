@@ -88,6 +88,7 @@
     @include($page)
    
 
+@dd($prices)
    
     {{-- <x-front.footer :js="$js ?? []" /> --}}
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
