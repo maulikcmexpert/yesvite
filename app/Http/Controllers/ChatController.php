@@ -23,6 +23,7 @@ class ChatController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->firebase = Firebase::database();
         $this->usersReference = $this->firebase->getReference('users');
         // $this->database = $database;

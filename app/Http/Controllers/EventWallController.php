@@ -48,6 +48,7 @@ class EventWallController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->perPage = 5;
     }
     public function index_new(String $id)

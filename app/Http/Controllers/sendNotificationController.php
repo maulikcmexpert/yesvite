@@ -7,7 +7,7 @@ use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-class sendNotificationController extends Controller
+class sendNotificationController extends BaseController
 {
     public function index()
     {
