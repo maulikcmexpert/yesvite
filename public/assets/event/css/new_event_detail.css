@@ -34,6 +34,7 @@
     line-height: normal;
     margin-bottom: 0px;
     position: relative;
+    cursor: pointer;
 }
 
 .new_event_detail_header-right-wrp h6::after {
@@ -51,6 +52,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    cursor: pointer;
 }
 
 .new_event_detail_header-right-wrp h4 {
@@ -1424,6 +1426,28 @@
 
 .new_event_detail_header .dropdown-menu.show .dropdown-sub-menu li {
     list-style: disc !important;
+}
+
+.new_event_detail_header .dropdown-menu.show .dropdown-sub-menu.active {
+    padding: 10px;
+    margin: 0px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+
+.new_event_detail_header .dropdown-menu.show .dropdown-sub-menu li {
+    list-style: disc !important;
+}
+
+.dropdown-sub-menu {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
 }
 
 /* ======Responsiveness===== */

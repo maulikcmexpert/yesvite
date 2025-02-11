@@ -2204,7 +2204,7 @@
                                             <h5>RSVP Not Received</h5>
                                         </div>
                                         @endif      
-                             @endif           
+                                @endif           
                             <div class="rsvp-guest-user-replay">
                                 @if($guest_data['message_to_host']!="")
                                 <h6>“ {{$guest_data['message_to_host']}} “</h6>
