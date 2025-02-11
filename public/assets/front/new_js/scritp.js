@@ -541,6 +541,7 @@ $(".upload-img-delete").click(function () {
     $("#photoForm")[0].reset();
 });
 $(".uploded-delete-icon").click(function () {
+    alert();
     let fileInput = $("#fileInput");
 
 
