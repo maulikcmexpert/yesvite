@@ -468,15 +468,15 @@
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                     <input type="hidden" id="event_guest_left_count" />
                     <p class="invite-left_d"><strong>Invites | <span
-                                class="available-coins">{{ $coins }}</span></strong> Left</p>
+                                class="available-coins"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">{{ $coins }}</span></strong> Left</p>
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="invite-right">
                     {{-- <span><strong>15</strong>Guests or less</span> --}}
-                    <h5>
+                    {{-- <h5>
                         <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
                         <span class="available-coins">1174</span>
-                    </h5>
+                    </h5> --}}
                 </div>
             </div>
         </div>
