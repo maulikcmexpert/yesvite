@@ -1633,6 +1633,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
 
 
                 $(`#reactionImage_model${eventPostId}`).html(reactionImageHtml);
+                $(`#reactionImage${eventPostId}`).html(reactionImageHtml);
 
 
                 $(`#likeCount_${eventPostId}`).text(
