@@ -683,7 +683,10 @@ $(document).on('click',".day",function () {
 
     }
     search_user_ajax_timer = setTimeout(function () {
-        $('#loader').css('display','flex');    
+        $('#loader').css('display','flex');   
+        if(ajax_base_url==undefined||scrollStatus==undefined||tabbtn==undefined) {
+            return;
+        }
         console.log(ajax_base_url)
         console.log(scrollStatus);
         console.log(tabbtn);
