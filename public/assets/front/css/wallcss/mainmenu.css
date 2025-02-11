@@ -3116,6 +3116,10 @@
     align-items: start !important;
 }
 
+.supportive-home-wrp .responsive-calendar{
+    height: calc(100% - 80px);
+}
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
