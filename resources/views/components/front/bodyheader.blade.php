@@ -1619,6 +1619,7 @@ $notification_list=getNotificationList();
             @php
             if (Auth::guard('web')->user()) {
                     $userprofile = Auth::guard('web')->user();
+                    dd($userprofile);
                     if ($userprofile->profile != NULL || $userprofile->profile != "") {
                         $image = asset("storage/profile/" . $userprofile->profile);
                         $userProfile =  '<img src="' . $image . '" class="UserImg" alt="profile">';
@@ -1627,6 +1628,8 @@ $notification_list=getNotificationList();
                         $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
                         $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                     }
+
+
             }
           @endphp
           {!! $userProfile !!}
@@ -1656,6 +1659,7 @@ $notification_list=getNotificationList();
               <li><a href="{{route('profile')}}">Profile</a></li>
               <li><a href="{{route('profile.transaction')}}">Transactions History</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
+              <li><a href="#"> {{$userProfile->coins}}</a></li>
               {{-- <li><a href="#">Pro Subscription</a></li> --}}
             </ul>
             <div class="header-profile-button-wrp">
