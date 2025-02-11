@@ -205,6 +205,8 @@
     .side-bar-sub-list
     h3::before {
     left: 10px;
+    background: #fff;
+    border-radius: 100%;
 }
 
 .new-event-sidebar-menu ul li .active span {
