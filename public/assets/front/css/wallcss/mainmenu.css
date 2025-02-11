@@ -3649,9 +3649,9 @@
     }
 
     .responsive-calendar .month{
-        max-width: 293px;
+        max-width: 320px;
     }
     .responsive-calendar .weekdays{
-        max-width: 293px;
+        max-width: 320px;
     }
 }
