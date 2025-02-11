@@ -240,7 +240,7 @@ if (calender_json != undefined) {
             title.innerText = month.format("MMMM YYYY");
             monthContainer.appendChild(title);
 
-            const currentMonthButton = document.getElementsByClassName(
+            const currentMonthButton = document.getElementById(
                 "today-btn-home"
             );
             if (month.isSame(today, "month")) {
@@ -256,7 +256,7 @@ if (calender_json != undefined) {
             }`;
             const todayButton = document.createElement("button");
             todayButton.innerText = "Today";
-            todayButton.className = "today-btn-home"; 
+            todayButton.id = "today-btn-home"; 
             monthContainer.appendChild(todayButton);
             monthContainer.appendChild(eventscount);
 
