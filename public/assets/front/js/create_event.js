@@ -5055,7 +5055,8 @@ $(document).on("click", ".li_event_details", async function () {
     $("#loader").css("display", "flex");
     setTimeout(async function () {
         await saveDesignData();
-    }, 2000);
+        $("#loader").css("display", "none");
+    }, 1000);
 });
 
 $(document).on("click", ".li_event_detail", function () {
