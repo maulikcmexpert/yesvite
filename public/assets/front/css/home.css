@@ -528,7 +528,7 @@
 }
 
 .collection-wrapper .list_all_design_wrp {
-    max-height: calc(100vh - 25vh) !important;
+    max-height: calc(100vh - 30vh) !important;
     overflow-y: scroll !important;
     padding-bottom: 20px;
 }
@@ -598,6 +598,7 @@
 .step_2 .list_all_design_catgeory {
     max-height: 530px;
     overflow-y: scroll;
+    padding-bottom: 25px;
 }
 
 .step_2 .collection-card h4 {
@@ -1090,7 +1091,7 @@
     }
 
     .collection-wrapper .list_all_design_wrp {
-        /* max-height: calc(100vh - 32vh) !important; */
+        max-height: calc(100vh - 36vh) !important;
         overflow-y: scroll !important;
     }
 }
