@@ -835,6 +835,15 @@ class EventPhotoController extends Controller
             if ($postControl && $postControl->post_control === 'hide_post') {
                 continue;
             }
+            $reactions = getReaction($value->id)->map(function ($reaction) {
+                return [
+                    'reaction' => $reaction->reaction,
+                    'firstname' => $reaction->user->firstname ?? '',
+                    'lastname' => $reaction->user->lastname ?? '',
+                    'profile' => !empty($reaction->user->profile) ? asset('storage/profile/' . $reaction->user->profile) : '',
+                    'location' => ($reaction->user->city ?? '') . ', ' . ($reaction->user->state ?? ''),
+                ];
+            });
 
             $postPhotoDetail = [
                 'user_id' => $value->user->id,
@@ -855,7 +864,7 @@ class EventPhotoController extends Controller
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
                 'total_media' => ($value->post_image_count > 1) ? "+" . ($value->post_image_count - 1) : "",
-                'reactionList' => getReaction($value->id)->pluck('reaction')->toArray(),
+                'reactionList' => $reactions,
                 'total_likes' => $value->event_post_reaction_count,
                 'total_comments' => $value->event_post_comment_count
             ];

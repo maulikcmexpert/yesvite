@@ -254,7 +254,7 @@ function getTotalUnreadMessageCount()
 
 //                 foreach($notificationInfo as $notify_data){
 //                     if ($values->event_id === $notify_data['event_id']) {
-//                         $final_data[$values->event->event_name][] = $notify_data; 
+//                         $final_data[$values->event->event_name][] = $notify_data;
 //                     }
 //                 }
 
@@ -309,7 +309,7 @@ function getNotificationList($filter = [])
                 }
             });
         }
-        // $result = $notificationData->get(); 
+        // $result = $notificationData->get();
         // dd($result);
         $notificationDatacount = $notificationData->count();
         $total_page = ceil($notificationDatacount / 10);
@@ -382,11 +382,11 @@ function getNotificationList($filter = [])
                             $old_date_result = $old_start_end_date;
                         }
                         // list($old_start_date, $old_end_date) = explode(' to ', $old_start_end_date);
-                        // $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;                        
+                        // $old_date_result = ($old_start_date === $old_end_date) ? $old_start_date : $old_start_end_date;
                     }
                     // if($new_start_end_date!=""){
                     //     list($new_start_date, $new_end_date) = explode(' to ', $new_start_end_date);
-                    //     $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;               
+                    //     $new_date_result = ($new_start_date === $new_end_date) ? $new_start_date : $new_start_end_date;
                     // }
                     if ($new_start_end_date != "") {
                         // Check if the date contains ' to ' before exploding
@@ -524,7 +524,7 @@ function getNotificationList($filter = [])
 }
 // function setposttTime($dateTime)
 // {
-//     $commentDateTime = $dateTime; 
+//     $commentDateTime = $dateTime;
 //     $commentTime = Carbon::parse($commentDateTime);
 //     $timeAgo = $commentTime->diffForHumans();
 //     return $timeAgo;
@@ -827,8 +827,13 @@ function getPostImages($event_post_id)
 }
 function getReaction($event_post_id)
 {
-    return  EventPostReaction::with('user')->where('event_post_id', $event_post_id)->get();
+    return EventPostReaction::with(['user' => function ($query) {
+        $query->select('id', 'firstname', 'lastname', 'profile', 'city', 'state');
+    }])
+    ->where('event_post_id', $event_post_id)
+    ->get();
 }
+
 function getOnlyReaction($event_post_id)
 {
     $onlyReaction =   EventPostReaction::where([
