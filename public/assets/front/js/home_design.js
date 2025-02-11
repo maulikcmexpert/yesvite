@@ -145,13 +145,13 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#design_category", function () {
-        $('input[name="design_subcategory_new"]').prop('checked',true)
         $(".category").hide();
         $(".categoryNew").hide();
         $(".subcategoryNew").show();
         $(".image-item-new").hide();
         $(".image-item").hide();
         const categoryId = $(this).data("category-id");
+        $('.subcategory_'+categoryId).prop('checked',true)
         $(".category_"+categoryId).show()
         const subcategoryId = $(this).data("subcategory-id");
         const category_name = $(this).data("category_name");
