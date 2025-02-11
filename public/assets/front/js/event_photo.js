@@ -1623,47 +1623,48 @@ let isLong_press = false;
 
 
 
-$(document).on("click", "#emojiDropdown1 .model_emoji", function () {
-    const selectedEmoji = $(this).data("emoji");
-    const button = $(this).closest(".emoji_set").find("#likeButton");
-    const emojiDisplay = button.find("#show_comment_emoji");
+// $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
+//     const selectedEmoji = $(this).data("emoji");
+//     const button = $(this).closest(".emoji_set").find("#likeButton");
+//     const emojiDisplay = button.find("#show_comment_emoji");
 
-    // Replace heart icon with selected emoji
-    emojiDisplay.removeClass();
-    emojiDisplay.text(selectedEmoji);
+//     // Replace heart icon with selected emoji
+//     emojiDisplay.removeClass();
+//     emojiDisplay.text(selectedEmoji);
 
-    // AJAX call to update emoji reaction
-    const eventId = button.data("event-id");
-    const eventPostId = button.data("event-post-id");
-    console.log(eventPostId);
-    $.ajax({
-        url: base_url + "event_photo/userPostLikeDislike",
-        method: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        contentType: "application/json",
-        data: JSON.stringify({
-            event_id: eventId,
-            event_post_id: eventPostId,
-            reaction: selectedEmoji,
-        }),
-        success: function (response) {
-            if (response.status === 1) {
-                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert("An error occurred. Please try again.");
-        },
-    });
+//     // AJAX call to update emoji reaction
+//     const eventId = button.data("event-id");
+//     const eventPostId = button.data("event-post-id");
+//     console.log(eventId,eventPostId);
+//     console.log(eventPostId);
+//     $.ajax({
+//         url: base_url + "event_photo/userPostLikeDislike",
+//         method: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         contentType: "application/json",
+//         data: JSON.stringify({
+//             event_id: eventId,
+//             event_post_id: eventPostId,
+//             reaction: selectedEmoji,
+//         }),
+//         success: function (response) {
+//             if (response.status === 1) {
+//                 $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+//             } else {
+//                 alert(response.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             console.error(xhr.responseText);
+//             alert("An error occurred. Please try again.");
+//         },
+//     });
 
-    // Hide emoji picker
-    $(this).closest("#emojiDropdown1").hide();
-});
+//     // Hide emoji picker
+//     $(this).closest("#emojiDropdown1").hide();
+// });
 $(document).ready(function () {
     // Define visibility options
     const visibilityOptions = {
