@@ -3647,4 +3647,8 @@
     .home-upcoming-events-card-rsvp-data {
         gap: 15px;
     }
+
+    .responsive-calendar .month{
+        max-width: 320px;
+    }
 }
