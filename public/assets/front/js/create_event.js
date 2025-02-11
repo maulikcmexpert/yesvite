@@ -6200,6 +6200,10 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
+    if(selected_dataId!="" && isCohost =="0"){
+        toggleSidebar();
+        return;
+    }
     var checkedCheckbox = $('input[name="guest_list[]"]:checked');
     if ($("#contact-tab").hasClass("active")) {
         get_contact_status = "yesvite";
