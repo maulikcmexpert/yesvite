@@ -3651,4 +3651,7 @@
     .responsive-calendar .month{
         max-width: 320px;
     }
+    .responsive-calendar .weekdays{
+        max-width: 320px;
+    }
 }
