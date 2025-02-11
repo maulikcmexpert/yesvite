@@ -14,8 +14,9 @@ use Carbon\Carbon;
             <div class="accordion-body">
                 <div class="calender-main">
                     <div id="calendar" class="calendar"></div>
-                   
+
                 </div>
+                <button id="detail_calender_view">Detail Calender</button>
                 <div class="calender-month-event-stats-wrp">
                     <div class="calender-month-event-stats-title">
                         <h3>
@@ -68,7 +69,7 @@ use Carbon\Carbon;
                             <path d="M5.52987 11.3833H5.53585" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                           </span>
-                          Invited To 
+                          Invited To
                         </h5>
                         <h3 class="text-left month_total_event_invited_to">{{$profileData['invitedTo_count_current_month']}}</h3>
                       </div>
@@ -93,7 +94,7 @@ use Carbon\Carbon;
                         <h3 class="text-left month_total_event_hosting">{{$profileData['hosting_count_current_month']}}</h3>
                       </div>
                     </div>
-                    
+
                 </div>
             </div>
           </div>

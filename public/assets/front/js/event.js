@@ -16,6 +16,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
     var isWall=$('#isWall').val();
+    alert(isWall)
 
 
     if(reason==""){
@@ -542,6 +543,9 @@ function get_month_data(current_month){
 $(document).on('click','.cancel_event_option',function () {
     var event_id=$(this).data('event_id');
     var isWall=$(this).data('isWall') || "0";
+    alert("isWall1")
+    alert(isWall)
+    alert("isWall2")
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
