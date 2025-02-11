@@ -145,6 +145,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#design_category", function () {
+        $('input[name="design_subcategory_new"]').prop('checked',true)
         $(".category").hide();
         $(".categoryNew").hide();
         $(".subcategoryNew").show();
@@ -213,8 +214,8 @@ $(document).on(
     'input[name="design_subcategory_new"]:not(#Allcat)',
     function () {
         $(".image-item-new").hide();
-        $("#category_name").hide();
-        $("#allchecked").hide();
+        $("#category_name").show();
+        $("#allchecked").show();
         // If all individual checkboxes are checked, check "All Categories"
         const totalCheckboxes = $(
             'input[name="design_subcategory_new"]:not(#Allcat)'

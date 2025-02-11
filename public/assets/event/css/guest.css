@@ -582,7 +582,11 @@
 }
 
 .groupsidebar .users-data .user_choice_group {
-    margin-top: 32px;
+    margin-top: 33px;
+}
+
+.groupsidebar .users-data .user_choice_group .right-note {
+    margin-bottom: 7px !important;
 }
 
 /* ============ responsive ============ */
