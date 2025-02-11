@@ -87,19 +87,29 @@ const swipers = [];
 
 
 
+
+
 document.querySelectorAll(".posts-card-post").forEach((el, index) => {
     const slides = el.querySelectorAll(".swiper-slide"); // Get all slides
+    const paginationContainer = el.querySelector(".custom-pagination");
+    const dotsContainer = el.querySelector(".custom-dots-container");
 
     if (slides.length <= 1) {
-        // If there's only one image, do not initialize Swiper
+        // Hide pagination and dots if there's only one image
+        if (paginationContainer) paginationContainer.style.display = "none";
+        if (dotsContainer) dotsContainer.style.display = "none";
         return;
     }
+
+    // Show pagination and dots for multiple images
+    if (paginationContainer) paginationContainer.style.display = "block";
+    if (dotsContainer) dotsContainer.style.display = "flex";
 
     const swiperInstance = new Swiper(el, {
         slidesPerView: 1,
         spaceBetween: 30,
         pagination: {
-            el: el.querySelector(".custom-pagination"),
+            el: paginationContainer,
             type: "custom",
             renderCustom: (swiper, current, total) => {
                 return `<span>${current} of ${total}</span>`;
@@ -117,6 +127,7 @@ document.querySelectorAll(".posts-card-post").forEach((el, index) => {
 
     swipers.push(swiperInstance);
 });
+
 
 
 // Function to update dots for each Swiper instance
