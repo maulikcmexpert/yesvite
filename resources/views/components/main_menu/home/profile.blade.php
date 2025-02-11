@@ -1,7 +1,7 @@
 
 <div class="home-center-content-head">
-    <!-- <h1>Hi, {{$profileData['firstname']}}!</h1> -->
-    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <h1>Hi, {{$profileData['firstname']}}!</h1>
+    <nav class="breadcrumb-nav d-none" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                             {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
