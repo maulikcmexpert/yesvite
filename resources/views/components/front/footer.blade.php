@@ -85,6 +85,7 @@
 
 
 <!--Buy-Credits-Modal -->
+@dd($prices)
 @if(isset($prices)&&count($prices)>0)
     
 
@@ -391,7 +392,7 @@ defer
 
 <script>
   $(document).on("click", ".buycredits", function () {
-    console.log("hello")
+    console.log("hello",)
     $("#buycreditsmodal").modal("show");
 });
 $(document).on("click", ".buynow", function () {
