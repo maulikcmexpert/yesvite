@@ -6208,7 +6208,7 @@ $(document).on("click", ".save_event_co_host", function () {
 
     $(".add_co_host").attr("data-contact", get_contact_status);
 
-    if (checkedCheckbox.length === 0) {
+    if (checkedCheckbox.length === 0 && selected_dataId=="") {
         // alert();
         $(".add_new_co_host").html(`<span class="me-3">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
