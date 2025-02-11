@@ -145,6 +145,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#design_category", function () {
+        $('input[name="design_subcategory_new"]').prop('checked',true)
         $(".category").hide();
         $(".categoryNew").hide();
         $(".subcategoryNew").show();
