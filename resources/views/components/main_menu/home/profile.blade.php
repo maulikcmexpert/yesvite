@@ -1,6 +1,6 @@
 
 <div class="home-center-content-head">
-    <h1>Hi, {{$profileData['firstname']}}!</h1>
+    <!-- <h1>Hi, {{$profileData['firstname']}}!</h1> -->
     <nav class="breadcrumb-nav d-none" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
@@ -8,6 +8,8 @@
                             <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
                         </ol>
     </nav>
+    <h1>Calender View</h1>
+
     <span class="home-center-content-head-calender-icon profile-calender-view">
       <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 2.5V5.5" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
