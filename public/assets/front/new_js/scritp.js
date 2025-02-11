@@ -1129,5 +1129,6 @@ $(document).on('click', '.notification-showall-btn', function() {
     $('.notification_drp_down_div').each(function(index) {
         let count = index + 1; 
         $('#collapseOne'+count).addClass('show');
+        $('.main-notification-div-list').removeClass('collapsed');
     });
 });
