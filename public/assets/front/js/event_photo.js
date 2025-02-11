@@ -1483,7 +1483,7 @@ $(document).ready(function () {
                     case "\\u{1F44D}": // Thumbs Up
                         reactionType = "thumb";
                         break;
-                    case "\\u{1F604}": // Smiley
+                    case "\\u{1F60A}": // Smiley
                         reactionType = "smily";
                         break;
                     case "\\u{1F60D}": // Eye-Heart

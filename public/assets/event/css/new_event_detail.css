@@ -195,7 +195,7 @@
     font-weight: 700 !important;
 }
 
-.menu-success .new-event-sidebar-menu li .active h3 {
+.menu-success .new-event-sidebar-menu li.active h3 {
     padding-left: 35px !important;
 }
 
