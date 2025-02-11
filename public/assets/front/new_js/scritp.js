@@ -1127,6 +1127,8 @@ if (hiddenData != undefined) {
 
 $(document).on('click', '.notification-showall-btn', function() {
     var show=$(this).attr('data-show');
+    console.log(show);
+    
     if(show=="0"){
         $(this).text('Minimize All');
         $(this).attr('data-show','1');
