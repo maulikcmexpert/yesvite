@@ -59,7 +59,7 @@ Route::post('/run-queue-work', function () {
 });
 Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
     ->name('short.url');
-Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+Route::get('features', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
