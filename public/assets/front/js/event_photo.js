@@ -86,7 +86,7 @@ $(document).ready(function () {
         "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
         "👏": base_url + "assets/front/img/clap-icon.png", // 👏
     };
-    $(document).on("mousedown", "#likeButton", function () {
+    $(document).on("mousedown", ".like-btn", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
 
