@@ -40,7 +40,7 @@
     content: "";
     width: 2px;
     height: 12px;
-    background-color: #CBD5E1;
+    background-color: #cbd5e1;
     position: absolute;
     top: 50%;
     right: -9px;
@@ -76,7 +76,7 @@
     margin-bottom: 0px;
 }
 
-.new_event_detail_header-right>span {
+.new_event_detail_header-right > span {
     color: var(--lightColor);
     font-size: 24px;
     cursor: pointer;
@@ -107,7 +107,6 @@
     position: sticky;
     top: 20px;
     margin-right: 19px;
-
 }
 
 .new-event-sidebar-wrp {
@@ -132,7 +131,7 @@
     cursor: pointer;
 }
 
-.new-event-sidebar-menu ul li:last-child{
+.new-event-sidebar-menu ul li:last-child {
     padding-bottom: 0px;
 }
 
@@ -167,14 +166,11 @@
     background: var(--primaryColor);
 }
 
-
-
 .new-event-sidebar-menu ul li .menu-circle-wrp {
     display: flex;
     align-items: center;
     gap: 16px;
     width: 100%;
-
 }
 
 .new-event-sidebar-menu ul li h3 {
@@ -197,6 +193,11 @@
     background: var(--primaryColor);
     color: var(--white) !important;
     font-weight: 700 !important;
+    padding-left: 35px !important;
+}
+
+.edit-design-sidebar.active .side-bar-sub-list h3::before {
+    left: 10px;
 }
 
 .new-event-sidebar-menu ul li .active span {
@@ -216,7 +217,6 @@
     height: 100%;
     width: 100%;
 }
-
 
 .new-event-sidebar-sub-menu {
     padding-left: 40px !important;
@@ -255,7 +255,7 @@
     color: var(--secondryColor);
 }
 
-.new_event_detail_form form select:focus+label {
+.new_event_detail_form form select:focus + label {
     color: var(--primaryColor);
 }
 
@@ -292,7 +292,7 @@
     background-color: var(--lightgray);
 }
 
-.new_event_detail_form form textarea:focus+* {
+.new_event_detail_form form textarea:focus + * {
     font-size: 12px;
     top: 0;
     left: 10px;
@@ -325,7 +325,6 @@
     gap: 10px;
     margin-bottom: 15px;
 }
-
 
 .new_event_detail_header .dropdown-menu .dropdown-item svg {
     width: 100%;
@@ -405,7 +404,7 @@
 }
 
 .add-activity-schedule .fa-angle-right {
-    color: #94A3B8;
+    color: #94a3b8;
 }
 
 /* -----right-sidebar-content----- */
@@ -429,7 +428,7 @@
     color: var(--secondryColor);
     padding-bottom: 16px;
     margin-bottom: 16px;
-    border-bottom: 1px solid #21231E;
+    border-bottom: 1px solid #21231e;
 }
 
 .activity-schedule-inner h4 {
@@ -474,7 +473,7 @@
     border-radius: 16px 16px 0px 0px !important;
     border: none !important;
     padding-left: 16px !important;
-    background-color: #F8F9FD;
+    background-color: #f8f9fd;
 }
 
 .accordion-button.collapsed {
@@ -482,7 +481,7 @@
 }
 
 .activity-schedule-inner .accordion-button span {
-    color: #64748B;
+    color: #64748b;
 }
 
 .activity-schedule-inner .accordion-button::after {
@@ -502,27 +501,27 @@
 }
 
 .accordion-button-icons .fa-circle-plus {
-    color: #F73C71;
+    color: #f73c71;
     font-size: 20px;
 }
 
 .accordion-button-icons .fa-angle-down,
 .accordion-button .fa-angle-down {
-    color: #64748B;
+    color: #64748b;
     font-size: 20px;
 }
 
 .activity-schedule-inner .accordion-button:focus {
     box-shadow: none;
-    background-color: #F8F9FD;
+    background-color: #f8f9fd;
 }
 
 .activity-schedule-inner .accordion-collapse {
-    background-color: #F8F9FD;
+    background-color: #f8f9fd;
 }
 
 .activity-schedule-inner .accordion-button:not(.collapsed) {
-    background-color: #F8F9FD;
+    background-color: #f8f9fd;
     box-shadow: none;
 }
 
@@ -556,11 +555,10 @@
 }
 
 .activity-schedule-inner .accordion-body .activity-main-wrp {
-    box-shadow: 0px 2px 10px 0px #0000000D;
+    box-shadow: 0px 2px 10px 0px #0000000d;
     padding: 10px;
     border-radius: 10px;
     background: var(--white);
-
 }
 
 .activity-schedule-inner-btn {
@@ -575,13 +573,12 @@
     z-index: 10;
 }
 
-
 .activity-schedule-inner-btn .cmn-btn {
     width: 100%;
 }
 
 .new-event-sidebar-head {
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid #f1f5f9;
     padding-bottom: 10px;
 }
 
@@ -616,7 +613,6 @@
     border: none !important;
     z-index: 3;
     cursor: pointer;
-
 }
 
 .new_event_detail_form .form-group {
@@ -637,15 +633,6 @@
 .new_event_detail_form .form-group:has(input:focus) label {
     color: var(--primaryColor) !important;
 }
-
-
-
-
-
-
-
-
-
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
     border: 1px solid var(--borderColor);
@@ -685,8 +672,13 @@
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu table td.active.today:before,
-.bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover.today:before,
-.bootstrap-datetimepicker-widget.dropdown-menu table td span.active.today:before {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    table
+    td.active:hover.today:before,
+.bootstrap-datetimepicker-widget.dropdown-menu
+    table
+    td
+    span.active.today:before {
     border-bottom-color: #fff;
 }
 
@@ -730,7 +722,12 @@
     line-height: 27px;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .datepicker-decades
+    tbody
+    tr
+    td
+    span {
     display: block;
     float: left;
     width: 50%;
@@ -739,7 +736,12 @@
     padding: 0;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span:not(.decade) {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .datepicker-decades
+    tbody
+    tr
+    td
+    span:not(.decade) {
     display: none;
 }
 
@@ -750,13 +752,20 @@
     line-height: 20px;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td:nth-child(2) {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .timepicker-picker
+    table
+    td:nth-child(2) {
     width: 10%;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
 .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .timepicker-picker
+    table
+    td
+    button {
     border: none;
     border-radius: 0;
     height: 56px;
@@ -766,12 +775,20 @@
     text-align: center;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .timepicker-picker
+    table
+    td
+    span {
     color: #333;
     margin-top: -1px;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+.bootstrap-datetimepicker-widget.dropdown-menu
+    .timepicker-picker
+    table
+    td
+    button {
     background-color: var(--primaryColor);
     color: #fff;
     font-weight: bold;
@@ -828,15 +845,14 @@
     border-radius: 16px 16px 0px 0px !important;
 }
 
-
 .modal-content .alert-box {
-    border: 1px solid #23AA26;
+    border: 1px solid #23aa26;
     border-radius: 16px;
     padding: 10px 16px 10px 16px;
 }
 
 .modal-content .alert-box p {
-    color: #23AA26;
+    color: #23aa26;
     line-height: 21px;
     font-size: 12px;
 }
@@ -848,7 +864,6 @@
 .modal-content .alert-box {
     background-color: rgba(35, 170, 38, 0.1);
 }
-
 
 .user-contacts.inivted_user_list {
     overflow: hidden;
@@ -879,13 +894,12 @@
     color: #000 !important;
 } */
 
-
 .input-group.time input::placeholder {
     font-size: 12px;
 }
 
 .new-event-sidebar-menu ul li .menu-success span {
-    background: #23AA26;
+    background: #23aa26;
 }
 
 .new-event-sidebar-menu ul li .menu-success span::after {
@@ -894,7 +908,7 @@
     position: absolute;
     font-size: 12px;
     line-height: normal;
-    color: #23AA26;
+    color: #23aa26;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -927,13 +941,10 @@
     height: 100% !important;
 }
 
-
-
 .step_2 {
     width: 100%;
     height: 100vh;
 }
-
 
 .menu-success .side-bar-sub-list h3 {
     position: relative;
@@ -946,301 +957,300 @@
     top: 50%;
     transform: translateY(-50%);
     left: 0;
-    color: #2DA9FC;
+    color: #2da9fc;
 }
-
 
 /* ====fonts=== */
 .Botanica {
-    font-family: 'Botanica Script';
+    font-family: "Botanica Script";
 }
 
 .JosefinSans {
-    font-family: 'JosefinSans-Regular';
+    font-family: "JosefinSans-Regular";
 }
 
 .AbrilFatface {
-    font-family: 'AbrilFatface-Regular';
+    font-family: "AbrilFatface-Regular";
 }
 
 .AdleryPro {
-    font-family: 'AdleryPro-Regular';
+    font-family: "AdleryPro-Regular";
 }
 
 .AgencyFB {
-    font-family: 'AgencyFB-Bold';
+    font-family: "AgencyFB-Bold";
 }
 
 .AlexBrush {
-    font-family: 'AlexBrush-Regular';
+    font-family: "AlexBrush-Regular";
 }
 
 .Allura {
-    font-family: 'Allura-Regular';
+    font-family: "Allura-Regular";
 }
 
 .BotanicaScript-Regular {
-    font-family: 'BotanicaScript-Regular';
+    font-family: "BotanicaScript-Regular";
 }
 
 .Archer {
-    font-family: 'Archer-Bold';
+    font-family: "Archer-Bold";
 }
 
 .Archer-Book {
-    font-family: 'Archer-Book';
+    font-family: "Archer-Book";
 }
 
 .Archer-BookItalic {
-    font-family: 'Archer-BookItalic';
+    font-family: "Archer-BookItalic";
 }
 
 .Archer-ExtraLight {
-    font-family: 'Archer-ExtraLight';
+    font-family: "Archer-ExtraLight";
 }
 
 .Archer-Hairline {
-    font-family: 'Archer-Hairline';
+    font-family: "Archer-Hairline";
 }
 
 .Bebas-Regular {
-    font-family: 'Bebas-Regular';
+    font-family: "Bebas-Regular";
 }
 
 .BookAntiqua {
-    font-family: 'BookAntiqua';
+    font-family: "BookAntiqua";
 }
 
 .Bungee-Regular {
-    font-family: 'Bungee-Regular';
+    font-family: "Bungee-Regular";
 }
 
 .CandyCaneUnregistered {
-    font-family: 'CandyCaneUnregistered';
+    font-family: "CandyCaneUnregistered";
 }
 
 .CarbonBl-Regular {
-    font-family: 'CarbonBl-Regular';
+    font-family: "CarbonBl-Regular";
 }
 
 .CarmenSans-ExtraBold {
-    font-family: 'CarmenSans-ExtraBold';
+    font-family: "CarmenSans-ExtraBold";
 }
 
 .CarmenSans-Regular {
-    font-family: 'CarmenSans-Regular';
+    font-family: "CarmenSans-Regular";
 }
 
 .ChristmasCookies {
-    font-family: 'ChristmasCookies';
+    font-family: "ChristmasCookies";
 }
 
 .AdleryPro {
-    font-family: 'AdleryPro';
+    font-family: "AdleryPro";
 }
 
 .ArialRoundedMTBold {
-    font-family: 'ArialRoundedMTBold';
+    font-family: "ArialRoundedMTBold";
 }
 
 .BebasNeue-Regular {
-    font-family: 'BebasNeue-Regular';
+    font-family: "BebasNeue-Regular";
 }
 
 .Calibri {
-    font-family: 'Calibri';
+    font-family: "Calibri";
 }
 
 .CCHammerHorror-BoldItalic {
-    font-family: 'CCHammerHorror-BoldItalic';
+    font-family: "CCHammerHorror-BoldItalic";
 }
 
 .CCThatsAllFolks-Bold {
-    font-family: 'CCThatsAllFolks-Bold';
+    font-family: "CCThatsAllFolks-Bold";
 }
 
 .Changa-ExtraBold {
-    font-family: 'Changa-ExtraBold';
+    font-family: "Changa-ExtraBold";
 }
 
 .ChristmasMint-Regular {
-    font-family: 'ChristmasMint-Regular';
+    font-family: "ChristmasMint-Regular";
 }
 
 .CinderelaPersonalUse-Regular {
-    font-family: 'CinderelaPersonalUse-Regular';
+    font-family: "CinderelaPersonalUse-Regular";
 }
 
 .Claiborne {
-    font-family: 'Claiborne';
+    font-family: "Claiborne";
 }
 
 .Corporative-Regular {
-    font-family: 'Corporative-Regular';
+    font-family: "Corporative-Regular";
 }
 
 .foolish-Regular {
-    font-family: 'foolish-Regular';
+    font-family: "foolish-Regular";
 }
 
 .GrandHotel-Regular {
-    font-family: 'GrandHotel-Regular';
+    font-family: "GrandHotel-Regular";
 }
 
 .Joshico-Regular {
-    font-family: 'Joshico-Regular';
+    font-family: "Joshico-Regular";
 }
 
 .KaffeesatzEF-Schwarz {
-    font-family: 'KaffeesatzEF-Schwarz';
+    font-family: "KaffeesatzEF-Schwarz";
 }
 
 .KanedaGothic-Bold {
-    font-family: 'KanedaGothic-Bold';
+    font-family: "KanedaGothic-Bold";
 }
 
 .KanedaGothic-Medium {
-    font-family: 'KanedaGothic-Medium';
+    font-family: "KanedaGothic-Medium";
 }
 
 .KavarianSerif {
-    font-family: 'KavarianSerif';
+    font-family: "KavarianSerif";
 }
 
 .MelonScriptW00-CondRegular {
-    font-family: 'MelonScriptW00-CondRegular';
+    font-family: "MelonScriptW00-CondRegular";
 }
 
 .Montserrat-Regular {
-    font-family: 'Montserrat-Regular';
+    font-family: "Montserrat-Regular";
 }
 
 .NautilusPompilius {
-    font-family: 'NautilusPompilius';
+    font-family: "NautilusPompilius";
 }
 
 .OvinkRegular {
-    font-family: 'OvinkRegular';
+    font-family: "OvinkRegular";
 }
 
 .Rither {
-    font-family: 'Rither';
+    font-family: "Rither";
 }
 
 .Semringah {
-    font-family: 'Semringah';
+    font-family: "Semringah";
 }
 
 .SittingDuckDEMO-Regular {
-    font-family: 'SittingDuckDEMO-Regular';
+    font-family: "SittingDuckDEMO-Regular";
 }
 
 .SundayBest-Regular {
-    font-family: 'SundayBest-Regular';
+    font-family: "SundayBest-Regular";
 }
 
 .AdleryPro-Regular {
-    font-family: 'AdleryPro-Regular';
+    font-family: "AdleryPro-Regular";
 }
 
 .Arboria-Bold {
-    font-family: 'Arboria-Bold';
+    font-family: "Arboria-Bold";
 }
 
 .Arboria-Book {
-    font-family: 'Arboria-Book';
+    font-family: "Arboria-Book";
 }
 
 .Arboria-Light {
-    font-family: 'Arboria-Light';
+    font-family: "Arboria-Light";
 }
 
 .Arboria-Medium {
-    font-family: 'Arboria-Medium';
+    font-family: "Arboria-Medium";
 }
 
 .Cabin-Regular {
-    font-family: 'Cabin-Regular';
+    font-family: "Cabin-Regular";
 }
 
 .Candara-Bold {
-    font-family: 'Candara-Bold';
+    font-family: "Candara-Bold";
 }
 
 .Candara {
-    font-family: 'Candara';
+    font-family: "Candara";
 }
 
 .CrimsonText-Bold {
-    font-family: 'CrimsonText-Bold';
+    font-family: "CrimsonText-Bold";
 }
 
 .CrimsonText-BoldItalic {
-    font-family: 'CrimsonText-BoldItalic';
+    font-family: "CrimsonText-BoldItalic";
 }
 
 .CrimsonText-Italic {
-    font-family: 'CrimsonText-Italic';
+    font-family: "CrimsonText-Italic";
 }
 
 .CrimsonText-Regular {
-    font-family: 'CrimsonText-Regular';
+    font-family: "CrimsonText-Regular";
 }
 
 .CrimsonText-SemiBold {
-    font-family: 'CrimsonText-SemiBold';
+    font-family: "CrimsonText-SemiBold";
 }
 
 .CrimsonText-SemiBoldItalic {
-    font-family: 'CrimsonText-SemiBoldItalic';
+    font-family: "CrimsonText-SemiBoldItalic";
 }
 
 .QTMerryScript {
-    font-family: 'QTMerryScript';
+    font-family: "QTMerryScript";
 }
 
 .Rockwell-Condensed {
-    font-family: 'Rockwell-Condensed';
+    font-family: "Rockwell-Condensed";
 }
 
 .Rockwell-CondensedBold {
-    font-family: 'Rockwell-CondensedBold';
+    font-family: "Rockwell-CondensedBold";
 }
 
 .Tangerine-Bold {
-    font-family: 'Tangerine-Bold';
+    font-family: "Tangerine-Bold";
 }
 
 .Tangerine-Regular {
-    font-family: 'Tangerine-Regular';
+    font-family: "Tangerine-Regular";
 }
 
 .AlternateGotNo2D {
-    font-family: 'AlternateGotNo2D';
+    font-family: "AlternateGotNo2D";
 }
 
 .CaveatBrush-Regular {
-    font-family: 'CaveatBrush-Regular';
+    font-family: "CaveatBrush-Regular";
 }
 
 .ModernLove-Regular {
-    font-family: 'ModernLove-Regular';
+    font-family: "ModernLove-Regular";
 }
 
 .NeueHaasGroteskText-Bold {
-    font-family: 'NeueHaasGroteskText-Bold';
+    font-family: "NeueHaasGroteskText-Bold";
 }
 
 .NeueHaasGroteskText-Medium {
-    font-family: 'NeueHaasGroteskText-Medium';
+    font-family: "NeueHaasGroteskText-Medium";
 }
 
 .NeueHaasGroteskText-Regular {
-    font-family: 'NeueHaasGroteskText-Regular';
+    font-family: "NeueHaasGroteskText-Regular";
 }
 
 .PTSansPro-Regular {
-    font-family: 'PTSansPro-Regular';
+    font-family: "PTSansPro-Regular";
 }
 
 #edit-design-temp {
@@ -1252,16 +1262,16 @@
     z-index: 2;
 }
 
-.edit-images-button-inner button.activated{
+.edit-images-button-inner button.activated {
     background-color: var(--primaryColor) !important;
     border-radius: 10px !important;
 }
 
-.edit-images-button-inner button.activated h6{
+.edit-images-button-inner button.activated h6 {
     color: #fff !important;
 }
 
-.edit-images-button-inner button{
+.edit-images-button-inner button {
     padding: 10px !important;
 }
 
@@ -1274,9 +1284,8 @@
     cursor: pointer;
 }
 
-
 /* ======= sideguest-add ===== */
-.guest-wrp.side-guest-wrp{
+.guest-wrp.side-guest-wrp {
     /* border: none;
     box-shadow: none; */
     position: absolute;
@@ -1286,12 +1295,11 @@
     bottom: 0;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro{
+.guest-wrp.side-guest-wrp .invite-pro {
     margin-top: 5px;
 }
 
-
-.input-calender-icon{
+.input-calender-icon {
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
@@ -1304,35 +1312,34 @@
     padding: 0px !important;
 }
 
-.sidebar-invite-top-text h3{
+.sidebar-invite-top-text h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 23.87px;
-    color:#AE3BE4;
+    color: #ae3be4;
 }
 
-.sidebar-invite-top-text div{
+.sidebar-invite-top-text div {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.sidebar-invite-top-text button{
+.sidebar-invite-top-text button {
     background-color: transparent;
     border: none;
 }
 
-.sidebar-invite-top-text h4{
+.sidebar-invite-top-text h4 {
     font-size: 18px;
     font-weight: 700;
     line-height: 25.2px;
-    color: #1C8B5C;
+    color: #1c8b5c;
 }
 
-.guest-wrp.side-guest-wrp .invite-left p{
+.guest-wrp.side-guest-wrp .invite-left p {
     font-size: 13px !important;
 }
-
 
 .no-scroll {
     overflow: hidden; /* Prevent scrolling */
@@ -1340,12 +1347,11 @@
     width: 100%; /* Prevent layout shifts */
 }
 
-.new-event-sidebar-menu ul li{
+.new-event-sidebar-menu ul li {
     position: relative;
 }
 
-
-.new-event-sidebar-menu > ul > li::after{
+.new-event-sidebar-menu > ul > li::after {
     content: "";
     position: absolute;
     bottom: -8px;
@@ -1364,12 +1370,11 @@
     border: 1px dashed var(--green);
 }
 
-.footer-bottom-btn .guestBtn{
+.footer-bottom-btn .guestBtn {
     stroke: #b5b8bf !important;
 }
 
 /* ======Responsiveness===== */
-
 
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
@@ -1430,7 +1435,7 @@
     .new_event_detail_header .dropdown-menu.show .dropdown-sub-menu.active {
         padding: 10px;
         margin: 0px;
-        border: 1px solid #CBD5E1;
+        border: 1px solid #cbd5e1;
         border-radius: 10px;
         padding-left: 30px;
         padding-bottom: 0px;
@@ -1462,7 +1467,7 @@
 
     .dropdown-sub-menu {
         padding: 10px;
-        border: 1px solid #CBD5E1;
+        border: 1px solid #cbd5e1;
         border-radius: 10px;
         padding-left: 30px;
         margin-bottom: 20px;
@@ -1471,9 +1476,7 @@
     .sidebar-content {
         border-radius: 20px 20px 0px 0px;
     }
-
 }
-
 
 @media only screen and (max-width: 575px) {
     .new_event_detail_header-right-wrp h6 {
@@ -1507,7 +1510,6 @@
     }
 
     .new_event_detail_form .input-group.time .input-group-text {
-
         /* right: 0px; */
         padding: 0px !important;
         padding-right: 2px !important;
@@ -1524,11 +1526,11 @@
         padding: 5px !important;
     }
 
-    .new_event_detail_form .input-group.time input{
+    .new_event_detail_form .input-group.time input {
         padding-left: 5px !important;
     }
 
-    .new_event_detail_form .input-group.time input::placeholder{
+    .new_event_detail_form .input-group.time input::placeholder {
         font-size: 12px !important;
     }
 }
