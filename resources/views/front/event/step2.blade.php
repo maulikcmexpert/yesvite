@@ -121,8 +121,9 @@
                     <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left" style="color: #212529; cursor: pointer;"></i></p>
                     <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
-                @foreach ($categories as $category)
                 <div class="row list_all_design_wrp">
+                @foreach ($categories as $category)
+                
                     @foreach ($category->subcategory as $subcategory)
                     
                         @foreach ($subcategory->textdatas as $image)
@@ -146,9 +147,9 @@
                             
                         @endforeach
                         @endforeach
-                    </div>
+                    
                 @endforeach
-
+                </div>
 
             </div>
         </div>
