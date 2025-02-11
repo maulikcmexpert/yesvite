@@ -694,4 +694,9 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
         });
 </script>
 
+<script>
+    $(document).on("click", ".buycredits", function () {
+    $("#buycreditsmodal").modal("show");
+});
 
+</script>
