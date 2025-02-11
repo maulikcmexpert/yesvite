@@ -211,6 +211,11 @@ $(document).on("click", "#detail_calender_view", function () {
     //     $(".responsive-calender-month-text").css("display", "none");
     // }
 });
+
+$(document).on("click",'.get-back-home-calender',function(){
+        $(".responsive-calendar").css("display", "none");
+        $(".responsive-calender-month-text").css("display", "none");
+})
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
 const dropdownMenu = document.querySelector(".notification-dropdown-menu");
