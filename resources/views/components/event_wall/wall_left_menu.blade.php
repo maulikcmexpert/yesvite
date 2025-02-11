@@ -66,7 +66,7 @@
                       Cancel Event
                     </a>
                   </li>
-                </ul> 
+                </ul>
         </div>
     </div>
 
