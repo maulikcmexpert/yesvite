@@ -230,8 +230,8 @@ $(document).ready(function () {
                                     )
                                 );
                             }
-                            if (reactionIcons[firstReaction]) {
-                                reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            if (reactionIcons[selectedEmoji]) {
+                                reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                             } else {
                                 console.log({ firstReaction });
                                 console.log(reactionIcons[firstReaction]);
