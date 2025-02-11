@@ -124,7 +124,7 @@
                                 <input type="text" class="form-control inputText" style="background: transparent"
                                     id="event-date" data-isDate="{{ $event_date }}" name="event-date"
                                     onblur="clearError(this)" value="{{ $event_date }}" readonly>
-                                <label for="birthday" class="form-label input-field floating-label select-label">End Date of
+                                <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
                                     event * </label>
                                 <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +178,7 @@
                                 <input type="text" class="form-control inputText" style="background: transparent"
                                     id="event-date" data-isDate="{{ $event_date }}" name="event-date"
                                     onblur="clearError(this)" value="{{ $event_date }}" readonly>
-                                <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
+                                <label for="birthday" class="form-label input-field floating-label select-label">End Date of
                                     event * </label>
                                 <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
