@@ -1188,10 +1188,7 @@ $(document).ready(function () {
                     // Make sure you update the reactions after filtering them
                     updateReactions(
                         data.reactionList,
-                        data.firstname,
-                        data.lastname,
-                        data.profile,
-                        data.location
+
                     );
 
                     const commentsWrapper = $(
@@ -1416,14 +1413,8 @@ $(document).ready(function () {
 
         function updateReactions(
             reactions,
-            firstname,
-            lastname,
-            profile,
-            location
+
         ) {
-            console.log(reactions); // Debug the reactions array
-            console.log(firstname);
-            console.log(lastname);
 
             const emojiPaths = {
                 heart: "/assets/front/img/heart-emoji.png",
@@ -1474,7 +1465,7 @@ $(document).ready(function () {
             reactions.forEach((reaction) => {
                 let reactionType = "";
                 let emojiSrc = "";
-
+                const { reaction, firstname, lastname, profile, location } = reactionData;
                 // Map each reaction to a type
                 switch (reaction) {
                     case "\\u{2764}": // Heart
@@ -1502,7 +1493,9 @@ $(document).ready(function () {
 
                 // Get the emoji image source
                 emojiSrc = emojiPaths[reactionType];
-                const profileContent = getProfileContent();
+                const profileContent = profile && profile !== ""
+                ? `<img src="${profile}" alt="">`
+                : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ''}">${firstname ? firstname[0].toUpperCase() : ''}${lastname ? lastname[0].toUpperCase() : ''}</h5>`;
                 // Create reaction list item
                 const reactionItem = `<li class="reaction-info-wrp">
                                     <div class="commented-user-head">
@@ -1511,8 +1504,8 @@ $(document).ready(function () {
                                             ${profileContent}
                                             </div>
                                             <div class="commented-user-profile-content">
-                                                <h3>${firstname} ${lastname}</h3>
-                                                <p></p>
+                                                  <h3>${firstname} ${lastname}</h3>
+                                        <p>${location}</p>
 
                                             </div>
                                         </div>
