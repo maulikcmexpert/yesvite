@@ -581,8 +581,12 @@
     max-height: calc(100vh - 440px);
 }
 
+.groupsidebar .users-data .user_choice_group {
+    margin-top: 32px;
+}
+
 .groupsidebar .users-data .user_choice_group .right-note {
-    margin-top: 11px;
+    margin-bottom: 7px !important;
 }
 
 /* ============ responsive ============ */

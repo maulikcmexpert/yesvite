@@ -175,7 +175,7 @@ $(document).on("click", "#detail_calender_view", function () {
     $(".mobile-menu-wrp").removeClass("active");
     $('.view-calender-heading').removeClass("d-none");
     $('.user-name-title').addClass("d-none");
-    $('.home-calender').addClass("d-none");
+    $('.right-bar-menu-home').addClass("d-none");
     $(".line").removeClass("active");
     // var text = this.innerText;
     var text = this.textContent.trim(); // Use textContent.trim()
@@ -217,7 +217,7 @@ $(document).on("click", "#detail_calender_view", function () {
 
 $(document).on("click",'.get-back-home-calender',function(){
     $('.view-calender-heading').addClass("d-none");
-    $('.home-calender').removeClass("d-none");
+    $('.right-bar-menu-home').removeClass("d-none");
     $('.user-name-title').removeClass("d-none");
         $(".responsive-calendar").css("display", "none");
         $(".responsive-calender-month-text").css("display", "none");

@@ -50,7 +50,7 @@ $getSocialLink = getSocialLink();
                         <input type="hidden" id="calender_json" value="{{$events_calender_json}}"/>
 
 
-                        <div class="home-main-right">
+                        <div class="home-main-right right-bar-menu-home">
                             <x-main_menu.calender :profileData="$profileData" />
                             <x-main_menu.home.event_drafts :draftEventArray="$draftEventArray" />
                         </div>
