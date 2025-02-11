@@ -1188,7 +1188,6 @@ $(document).ready(function () {
                     // Make sure you update the reactions after filtering them
                     updateReactions(
                         data.reactionList,
-
                     );
 
                     const commentsWrapper = $(
@@ -1412,7 +1411,7 @@ $(document).ready(function () {
         });
 
         function updateReactions(
-            reactions,
+            reactions
 
         ) {
 
@@ -1446,22 +1445,7 @@ $(document).ready(function () {
             smilyReactionsList.empty();
             eyeHeartReactionsList.empty();
             clapReactionsList.empty();
-            // const getProfileContent = () => {
-            //     if (profile && profile !== "") {
-            //         return `<img src="${profile}" alt="">`;
-            //     } else {
-            //         const firstInitial = firstname
-            //             ? firstname[0].toUpperCase()
-            //             : "";
-            //         const secondInitial = lastname
-            //             ? lastname[0].toUpperCase()
-            //             : "";
-            //         const initials = `${firstInitial}${secondInitial}`;
-            //         const fontColor = `fontcolor${firstInitial}`;
-            //         return `<h5 class="${fontColor}">${initials}</h5>`;
-            //     }
-            // };
-            // Iterate through reactions array
+
             reactions.forEach((reactionData) => {
                 let reactionType = "";
                 let emojiSrc = "";
@@ -1507,7 +1491,8 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+                                                  ${location ? `<p>${location}</p>` : ""}
+
 
                                             </div>
                                         </div>
@@ -1756,58 +1741,42 @@ $(document).ready(function () {
         });
     });
 
-    // function renderReactions(post) {
-    //     let reactionList = post.reactionList || [];
-    //     let selfReaction = post.self_reaction;
-    //     let reactionHtml = "";
-    //     let j = 0;
-    //     let i = 0;
 
-    //     reactionList.forEach((reaction) => {
-    //         if (i >= 3) return; // Limit to 3 reactions
 
-    //         let emojiSrc = reactionIcons[reaction] || null;
-
-    //         if (emojiSrc) {
-    //             let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
-    //             reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
-    //             if (j === 0 && selfReaction === reaction) j++;
-    //             i++;
-    //         }
-    //     });
-
-    //     if (j === 0 && i < 3) {
-    //         reactionHtml += `<li id="reactionImage_${post.id}"></li>`;
-    //     }
-
-    //     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
-
-    //     return reactionHtml + likeCountHtml;
-    // }
     function renderReactions(post) {
         let reactionList = post.reactionList || [];
         let selfReaction = post.self_reaction;
         let reactionHtml = "";
-        let j = 0;
-        let i = 0;
+        let i = 0; // Count displayed reactions
 
-        for (let reaction of reactionList) {
+        for (let reactionData of reactionList) {
             if (i >= 3) break; // Limit to 3 reactions
 
-            let emojiSrc = reactionIcons[reaction] || null;
+            let { reaction, firstname, lastname, profile } = reactionData;
 
+            let emojiSrc = reactionIcons[reaction] || null; // Get emoji image
             if (emojiSrc) {
                 let listItemId =
-                    j === 0 && selfReaction === reaction
+                    i === 0 && selfReaction === reaction
                         ? `id="reactionImage_model_${post.id}"`
                         : "";
-                reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
-                if (j === 0 && selfReaction === reaction) j++;
+
+
+
+
+                // Append reaction
+                reactionHtml += `
+                    <li ${listItemId} style="display:flex; align-items:center;">
+
+
+                        <img src="${emojiSrc}" alt="Emoji">
+                    </li>`;
                 i++;
             }
         }
 
-        if (j === 0 && i < 3) {
+        // If no reactions found, show an empty reaction placeholder
+        if (i === 0) {
             reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
         }
 

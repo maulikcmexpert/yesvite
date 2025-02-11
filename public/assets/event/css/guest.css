@@ -361,6 +361,7 @@
 
 .guest-main-content .contact-tab .users-data .user_choice_group {
     margin-top: 31px;
+    gap: 0 !important;
 }
 
 .new-group-name-wrp {
@@ -371,7 +372,7 @@
 .guest-sidebar .toggle-wrp {
     border-bottom: 1px solid var(--borderColor);
     padding-bottom: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
 }
 
 .guest-sidebar .group-card {
