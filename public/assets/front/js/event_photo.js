@@ -1446,25 +1446,27 @@ $(document).ready(function () {
             smilyReactionsList.empty();
             eyeHeartReactionsList.empty();
             clapReactionsList.empty();
-            const getProfileContent = () => {
-                if (profile && profile !== "") {
-                    return `<img src="${profile}" alt="">`;
-                } else {
-                    const firstInitial = firstname
-                        ? firstname[0].toUpperCase()
-                        : "";
-                    const secondInitial = lastname
-                        ? lastname[0].toUpperCase()
-                        : "";
-                    const initials = `${firstInitial}${secondInitial}`;
-                    const fontColor = `fontcolor${firstInitial}`;
-                    return `<h5 class="${fontColor}">${initials}</h5>`;
-                }
-            };
+            // const getProfileContent = () => {
+            //     if (profile && profile !== "") {
+            //         return `<img src="${profile}" alt="">`;
+            //     } else {
+            //         const firstInitial = firstname
+            //             ? firstname[0].toUpperCase()
+            //             : "";
+            //         const secondInitial = lastname
+            //             ? lastname[0].toUpperCase()
+            //             : "";
+            //         const initials = `${firstInitial}${secondInitial}`;
+            //         const fontColor = `fontcolor${firstInitial}`;
+            //         return `<h5 class="${fontColor}">${initials}</h5>`;
+            //     }
+            // };
             // Iterate through reactions array
-            reactions.forEach((reaction) => {
+            reactions.forEach((reactionData) => {
                 let reactionType = "";
                 let emojiSrc = "";
+
+                // Extract user details from the reaction object
                 const { reaction, firstname, lastname, profile, location } = reactionData;
                 // Map each reaction to a type
                 switch (reaction) {
