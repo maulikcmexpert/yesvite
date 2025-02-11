@@ -1600,7 +1600,7 @@ $notification_list=getNotificationList();
 <header class="login-header">
   <div class="container-fluid">
       <nav class="navbar navbar-expand-md navbar-dark">
-          <a class="navbar-brand" href="{{(Auth::guard('web')->check())?route('profile'):route('front.features')}}">
+          <a class="navbar-brand" href="{{(Auth::guard('web')->check())?route('profile'):route('front.home')}}">
              <svg width="140" height="65" viewBox="0 0 140 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                  <rect width="128.118" height="36" fill="white"/>
                  <path fill-rule="evenodd" clip-rule="evenodd" d="M115.196 20.3691C115.196 24.4363 117.955 26.896 121.952 26.896C123.963 26.896 126.045 26.0264 127.337 24.1377L124.332 23.0484C123.858 23.593 123.015 23.9708 121.846 23.9708C120.458 23.9708 119.114 23.1274 118.991 21.3881H128.101C128.347 17.0397 125.843 13.9387 121.794 13.9387C118.192 13.9387 115.188 16.4423 115.188 20.3691H115.196ZM121.899 16.741C123.366 16.741 124.552 17.558 124.605 19.148H118.991C119.211 17.4614 120.485 16.741 121.899 16.741Z" fill="black"/>
@@ -1676,7 +1676,7 @@ $notification_list=getNotificationList();
                                          <a class="nav-link" href="{{ route('about')}}">About Us</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
-                                      <a class="nav-link" href="{{ route('front.features')}}">Features</a>
+                                      <a class="nav-link" href="{{ route('front.home')}}">Features</a>
                                    </li>
                                   <li class="nav-item {{ (Request::segment(1) == 'pricing')? 'active':'' }}">
                                     <a class="nav-link" href="{{ route('pricing')}}">Pricing</a>
