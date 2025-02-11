@@ -541,9 +541,16 @@ $(".upload-img-delete").click(function () {
     $("#photoForm")[0].reset();
 });
 $(".uploded-delete-icon").click(function () {
+    let fileInput = $("#fileInput");
 
-    $("#fileInput").val('');
+    // Clear file input value
+    fileInput.val("");
+
+    // If using a form, reset it as well
     $("#photoForm")[0].reset();
+
+
+
 });
 
 
