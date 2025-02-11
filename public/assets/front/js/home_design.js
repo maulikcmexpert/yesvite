@@ -134,6 +134,7 @@ $(document).ready(function () {
         $("#home_loader").css("display", "flex");
         if (search_value == "") {
             $('input[name="design_subcategory"]').prop("checked", true);
+            $("#Allcat").prop("checked", true);
         }
         $.ajax({
             url: base_url + "search_features",
