@@ -518,7 +518,7 @@ function getNotificationList($filter = [])
             }
         }
         $unreadCount = Notification::where(['user_id' => $user->id, 'read' => '0'])->count();
-        // dd($notificationInfo);
+        // dd($final_data);
         return $final_data;
     }
 }
