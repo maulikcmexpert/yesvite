@@ -1087,6 +1087,11 @@
         max-height: calc(100vh - 32vh) !important;
         overflow-y: scroll !important;
     }
+
+    .collection-wrapper .list_all_design_wrp {
+        max-height: calc(100vh - 32vh) !important;
+        overflow-y: scroll !important;
+    }
 }
 
 @media only screen and (max-width: 767px) {
