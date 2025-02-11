@@ -1963,7 +1963,7 @@ $(document).ready(function () {
 
             // Remove the heart icon and set emoji inside the button
             $likeButton.html(
-                `<i class="emoji"><img src='${reactionIcons[emoji]}'/></i>`
+                `<img src='${reactionIcons[emoji]}'/>`
             ); // Show selected emoji inside button
 
             $emojiDropdown.hide(); // Hide emoji dropdown after selection
