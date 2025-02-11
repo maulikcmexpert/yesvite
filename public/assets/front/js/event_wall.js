@@ -54,40 +54,43 @@ var selectedFiles = null; // To store selected files
 // }
 function previewStoryImage(event, userId) {
     const files = event.target.files;
+    if (!files.length) return; // Exit if no file is selected
+
     selectedFiles = files; // Store files for uploading later
     const previewContainer = document.getElementById(`preview-${userId}`);
     const uploadButton = document.getElementById(`upload-button-${userId}`);
+    const fileInput = event.target; // Get file input element
     previewContainer.innerHTML = ""; // Clear previous preview
 
-    if (files.length > 0) {
-        Array.from(files).forEach((file) => {
-            const fileUrl = URL.createObjectURL(file);
-            let mediaElement;
+    Array.from(files).forEach((file) => {
+        const fileUrl = URL.createObjectURL(file);
+        let mediaElement;
 
-            if (file.type.startsWith("image/")) {
-                mediaElement = document.createElement("img");
-            } else if (file.type.startsWith("video/")) {
-                mediaElement = document.createElement("video");
-                mediaElement.controls = true; // Add video controls for videos
-            }
-
-            if (mediaElement) {
-                mediaElement.src = fileUrl;
-                mediaElement.classList.add("story-preview"); // Add a class for styling if needed
-                previewContainer.appendChild(mediaElement);
-            }
-        });
-
-        // Show the Upload button after preview
-        uploadButton.style.display = "flex";
-        const previewModal = document.getElementById(`previewModel-${userId}`); // Modal itself
-        if (previewModal && previewContainer) {
-            previewModal.style.display = "flex"; // Show the modal
-            previewContainer.style.display = "flex"; // Ensure story display is visible
+        if (file.type.startsWith("image/")) {
+            mediaElement = document.createElement("img");
+        } else if (file.type.startsWith("video/")) {
+            mediaElement = document.createElement("video");
+            mediaElement.controls = true; // Add video controls
         }
-    } else {
-        console.log("No file selected.");
+
+        if (mediaElement) {
+            mediaElement.src = fileUrl;
+            mediaElement.classList.add("story-preview"); // Add styling class
+            previewContainer.appendChild(mediaElement);
+        }
+    });
+
+    // Show the Upload button after preview
+    uploadButton.style.display = "flex";
+    
+    // Display the preview modal
+    const previewModal = document.getElementById(`previewModel-${userId}`);
+    if (previewModal) {
+        previewModal.style.display = "flex";
     }
+
+    // Clear file input to allow re-selection of the same file
+    fileInput.value = "";
 }
 
 function closePreviewModal(userId) {
@@ -102,13 +105,14 @@ function closePreviewModal(userId) {
         // Revoke object URLs to free memory
         const mediaElements = previewContainer.querySelectorAll("img, video");
         mediaElements.forEach(media => {
-            URL.revokeObjectURL(media.src); // Revoke object URL
+            URL.revokeObjectURL(media.src);
         });
 
         // Clear the preview container for the next upload
         previewContainer.innerHTML = "";
     }
 }
+
 
 
 // Step 2: Upload the selected files on button click
