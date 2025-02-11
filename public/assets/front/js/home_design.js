@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
-            $(".subcategoryNew").hide();
+        $(".subcategoryNew").hide();
         $(".image-item-new").hide();
         $("#category_name").hide();
         $("#allchecked").hide();
@@ -151,8 +151,8 @@ $(document).ready(function () {
         $(".image-item-new").hide();
         $(".image-item").hide();
         const categoryId = $(this).data("category-id");
-        $('.subcategory_'+categoryId).prop('checked',true)
-        $(".category_"+categoryId).show()
+        $(".subcategory_" + categoryId).prop("checked", true);
+        $(".category_" + categoryId).show();
         const subcategoryId = $(this).data("subcategory-id");
         const category_name = $(this).data("category_name");
         $("#category_name").show();
@@ -170,20 +170,20 @@ $(document).on("click", "#allchecked", function () {
 });
 
 function allCheckFun() {
-    $('input[name="design_subcategory_new"]').prop('checked',false)
+    $('input[name="design_subcategory_new"]').prop("checked", false);
     $(".categoryNew").show();
     $(".subcategoryNew").hide();
     $(".image-item-new").hide();
     $("#category_name").hide();
     $("#allchecked").hide();
     // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
-    $("#Allcat").prop('checked',true)
-    $('.image-item').show();
+    $("#Allcat").prop("checked", true);
+    $(".image-item").show();
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
     let search_value = "";
-    if($("#search_design_category").val() ==""){
-        return
+    if ($("#search_design_category").val() == "") {
+        return;
     }
     $("#search_design_category").val("");
     $.ajax({
@@ -225,8 +225,6 @@ $(document).on(
             'input[name="design_subcategory_new"]:not(#Allcat):checked'
         ).length;
 
-        
-
         // Filter images based on checked categories
         if (checkedCheckboxes > 0) {
             $(".image-item").hide(); // Hide all images first
@@ -235,7 +233,9 @@ $(document).on(
                     const categoryId = $(this).data("category-id");
                     const subcategoryId = $(this).data("subcategory-id");
 
-                    $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+                    $(
+                        `.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+                    ).show();
 
                     var visibleItems = $(".all_designs:visible").length;
                     $(".total_design_count").text(visibleItems + " Items");
