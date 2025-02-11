@@ -195,11 +195,15 @@
     font-weight: 700 !important;
 }
 
-.menu-success .new-event-sidebar-menu ul li .active h3 {
+.menu-success .new-event-sidebar-menu li .active h3 {
     padding-left: 35px !important;
 }
 
-.menu-success .new-event-sidebar-sub-menu.active .side-bar-sub-list h3::before {
+.menu-success
+    .new-event-sidebar-sub-menu
+    .active
+    .side-bar-sub-list
+    h3::before {
     left: 10px;
 }
 
