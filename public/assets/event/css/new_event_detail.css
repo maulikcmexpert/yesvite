@@ -1440,6 +1440,14 @@
     list-style: disc !important;
 }
 
+.dropdown-sub-menu {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
