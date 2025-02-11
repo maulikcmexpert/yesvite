@@ -3623,7 +3623,7 @@
         font-size: 16px;
     }
     .responsive-calender-month-wrp {
-        max-width: calc(100% - 20px);
+        max-width: 300px;
     }
     .responsive-calendar .day {
         font-size: 12px;
