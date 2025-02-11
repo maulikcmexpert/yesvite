@@ -304,6 +304,11 @@ $(document).on("click", function (e) {
         $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
     }
 });
+$('#likeButtonModel').on("click", function (e) {
+
+    $("#emojiDropdown").show(); // Hide emoji picker when clicked outside
+
+});
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
     const eventId = button.data("event-id");
