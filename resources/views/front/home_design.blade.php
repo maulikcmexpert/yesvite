@@ -68,8 +68,8 @@
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                        <div class="accordion-item category category_{{$category->id}}">
+                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
@@ -83,7 +83,7 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         @foreach ($category->subcategory as $subcategory)
-                                                            <li class="category category_{{$category->id}}">
+                                                            <li>
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-between">
                                                                     <label class="form-check-label"
