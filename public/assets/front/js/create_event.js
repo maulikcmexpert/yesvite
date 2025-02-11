@@ -6991,26 +6991,13 @@ $(document).on("change", 'input[name="gift_registry[]"]', function () {
     //         gr_id: gr_id,
     //     });
     // }
-    selected_gift = [];
-
-    $('input[name="gift_registry[]"]:checked').each(function () {
-        var registry_name = $(this).data("item");
-        var registry_link = $(this).data("registry");
-        var gr_id = $(this).val();
-        selected_gift.push({
-            registry_name: registry_name,
-            registry_link: registry_link,
-            gr_id: gr_id,
-        });
-    });
-    eventData.gift_registry_data = selected_gift;
-    console.log(eventData);
 
     var selected = $('input[name="gift_registry[]"]:checked');
     if (selected.length > 2) {
         $(this).prop("checked", false);
         $(this).blur();
         toastr.error("Maximum two gift registry can select");
+        return;
 
         //    selected_gift = [];
         //     $('input[name="gift_registry[]"]:checked').each(function() {
@@ -7025,6 +7012,20 @@ $(document).on("change", 'input[name="gift_registry[]"]', function () {
         //     });
         //     eventData.gift_registry_data = selected_gift;
     }
+    selected_gift = [];
+
+    $('input[name="gift_registry[]"]:checked').each(function () {
+        var registry_name = $(this).data("item");
+        var registry_link = $(this).data("registry");
+        var gr_id = $(this).val();
+        selected_gift.push({
+            registry_name: registry_name,
+            registry_link: registry_link,
+            gr_id: gr_id,
+        });
+    });
+    eventData.gift_registry_data = selected_gift;
+    console.log(eventData);
 });
 
 $(document).on("click", ".brand-progress", function () {
