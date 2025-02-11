@@ -1480,7 +1480,7 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+
 
                                             </div>
                                         </div>
@@ -1721,7 +1721,7 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+
 
                                             </div>
                                         </div>
