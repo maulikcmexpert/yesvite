@@ -3150,6 +3150,14 @@
 }
 
 /* ===Responsive=== */
+
+@media only screen and (max-width: 10000px){
+    .responsive-calendar .day {
+        width: 100%;
+        max-width: 135px;
+    }
+}
+
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
         font-size: 32px;
@@ -3179,6 +3187,10 @@
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 250px;
+    }
+    .responsive-calendar .day {
+        width: 100%;
+        max-width: 116px;
     }
 }
 
