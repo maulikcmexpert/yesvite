@@ -1069,6 +1069,86 @@ $notification_list=getNotificationList();
                                       </div> --}}
                                     </div>
                                   </div>
+                            @elseif($inner_data['notification_type']=="like_post")
+                                <div class="notification-drodown-body-inner">
+                                  <div class="notification-drodown-body-inner-img">
+                                    @php
+                                        $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                                        $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                                        $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+                                    @endphp
+                                    @if($inner_data['profile']!="")
+                                        <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                                        <span class="active-dot"></span>
+
+                                    @else
+                                        {!! $userProfile !!}
+                                      <span class="active-dot"></span>
+                                    @endif
+                                  </div>
+                                  <div
+                                    class="notification-drodown-body-inner-content"
+                                  >
+                                    <div>
+                                      <h3>
+                                        {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                                        {{-- <span> posted on wall at </span> --}}
+                                        @if($inner_data['media_type']=="photo")
+                                            <span> posted new photo on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a> </span>
+                                        @elseif($inner_data['media_type']=="video")
+                                          <span> posted video on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
+                                        @else
+                                        <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
+                                        @endif
+                                      </h3>
+                                      <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                                    </div>
+                                    <div>
+                                      <p>
+                                        <!-- {{$inner_data['event_name']}} -->
+
+                                        <!-- <span><strong>Wall</strong></span> -->
+                                      </p>
+                                      @if($inner_data['read']=="0")
+                                            <h6 class="notification-read-dot"></h6>
+                                          @endif
+                                    </div>
+                                    {{-- <div class="notification-video-comment-wrp"> --}}
+                                      {{-- <h6>That’s was great! love it ❤️</h6> --}}
+                                      <div class="notification-video-wrp">
+                                        @if($inner_data['media_type']!="")
+                                          <div class="notification-video">
+                                                @if($inner_data['media_type']=="photo")
+                                                  <img src="{{$inner_data['post_image']}}" alt=""/>
+                                                @elseif($inner_data['media_type']=="video")
+                                                  <a href="{{$inner_data['post_image']}}" class="notification-video popup-videos">
+                                                  <video>
+                                                    <source src="{{$inner_data['post_image']}}" type="video/mp4" />
+                                                  </video>
+                                                  <span class="notification-video_play-icon"
+                                                    ><img
+                                                      src="{{asset('assets/front/image/notification-video_play-icon.png')}}"
+                                                      alt=""
+                                                      loading="lazy"
+
+                                                  /></span>
+                                                </a>
+                                              @endif
+                                          </div>
+                                          <div class="notification-video-content">
+                                            <p>
+                                              {{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}
+                                            </p>
+                                          </div>
+                                        @elseif($inner_data['media_type']=="")
+                                            <div class="noification-simple-text-wrp">
+                                              <p>{{($inner_data['post_message']!="")?$inner_data['post_message']:"See detail post"}}</p>
+                                            </div>
+                                        @endif
+                                      </div>
+                                    {{-- </div> --}}
+                                  </div>
+                                </div>
                         @endif
 
 
