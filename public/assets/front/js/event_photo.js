@@ -301,12 +301,24 @@ $(document).on("click", function (e) {
 });
 
 // Hide emoji picker when clicking outside
-$(document).on("click", function (e) {
-    if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1 , #emojiDropdown").length) {
-        $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
-        $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
-    }
-});
+
+// pratik sir code
+// $(document).on("click", function (e) {
+//     if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1 , #emojiDropdown").length) {
+//         $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
+//         $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
+//     }
+// });
+
+// end code
+
+
+// alfez code
+
+$(document).on('click','#likeButtonModel',function(){
+    $("#emojiDropdown").show();
+})
+//
 
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
