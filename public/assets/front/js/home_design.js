@@ -243,11 +243,11 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#design_category", function () {
-        $("category").hide();
+        $(".category").hide();
         $(".image-item-new").hide();
         $(".image-item").hide();
         const categoryId = $(this).data("category-id");
-        $("category_"+categoryId).show()
+        $(".category_"+categoryId).show()
         const subcategoryId = $(this).data("subcategory-id");
         const category_name = $(this).data("category_name");
         $("#category_name").show();

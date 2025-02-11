@@ -47,7 +47,7 @@
             </div>
         </div>
         {{-- {{$getDesignData}} --}}
-        <div class="filter-main-wrp">
+        <div class="filter-main-wrp categoryNew">
             <div class="filters-drp">
                 <h5>Filter By</h5>
                 <div class="filter-dropdowns">
@@ -68,7 +68,7 @@
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
-                                        <div class="accordion-item category category_{{$category->id}}">
+                                        <div class="accordion-item">
                                              <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
@@ -672,6 +672,67 @@
                                 </div>
                             </div>
                         </div> -->
+                </div>
+            </div>
+            <h5 class="total-items ms-auto total_design_count">{{ $count }} Items</h5>
+        </div>
+        <div class="filter-main-wrp subcategoryNew">
+            <div class="filters-drp">
+                <h5>Filter By</h5>
+                <div class="filter-dropdowns">
+                    <div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            Categories
+                        </button>
+                        <div class="dropdown-menu collection-menu">
+                            <div class="filter-head">
+                                <h5>Categories</h5>
+                                <a href="#" class="reset-btn" id="resetCategories">Reset</a>
+                            </div>
+                            <div class="filter-categories">
+                                <div class="accordion" id="accordionExample">
+
+                                    @foreach ($categories as $category)
+                                    <div class="accordion-item category category_{{$category->id}}">
+                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                                <button class="accordion-button" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                                                    aria-controls="collapse{{ $category->id }}">
+                                                    {{ $category->category_name }}
+                                                </button>
+                                            </h2>
+                                            <div id="collapse{{ $category->id }}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading{{ $category->id }}"
+                                                data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <ul>
+                                                        @foreach ($category->subcategory as $subcategory)
+                                                            <li>
+                                                                <div
+                                                                    class="d-flex align-items-center justify-content-between">
+                                                                    <label class="form-check-label"
+                                                                        for="subcategory{{ $subcategory->id }}">
+                                                                        {{ $subcategory->subcategory_name }}
+                                                                    </label>
+                                                                    <input class="form-check-input"
+                                                                        name="design_subcategory" type="checkbox"
+                                                                        id="subcategory{{ $subcategory->id }}"
+                                                                        data-category-id="{{ $category->id }}"
+                                                                        data-subcategory-id="{{ $subcategory->id }}">
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <h5 class="total-items ms-auto total_design_count">{{ $count }} Items</h5>
