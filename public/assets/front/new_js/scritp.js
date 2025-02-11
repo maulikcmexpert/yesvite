@@ -525,7 +525,7 @@ $("#create-photo-btn").click(function () {
     $("#postContent").val('');
     $(".create-post-upload-img-inner").removeClass("d-none");
     $('.create_post_btn').prop('disabled', false);
-    $("#photoForm").reset();
+    // $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {
