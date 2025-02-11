@@ -3096,6 +3096,10 @@
     position: relative;
 }
 
+.supportive-home-wrp .mobile-calender-btn{
+    display: none !important;
+}
+
 
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
@@ -3185,6 +3189,10 @@
         padding: 50px;
         gap: 20px;
         overflow: hidden;
+    }
+
+    .supportive-home-wrp .mobile-calender-btn{
+        display: block !important;
     }
 
     .responsive-calender-months {
@@ -3623,7 +3631,7 @@
         font-size: 16px;
     }
     .responsive-calender-month-wrp {
-        max-width: calc(100% - 20px);
+        max-width: 300px;
     }
     .responsive-calendar .day {
         font-size: 12px;
@@ -3646,5 +3654,12 @@
     }
     .home-upcoming-events-card-rsvp-data {
         gap: 15px;
+    }
+
+    .responsive-calendar .month{
+        max-width: 300px;
+    }
+    .responsive-calendar .weekdays{
+        max-width: 300px;
     }
 }

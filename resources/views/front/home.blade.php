@@ -4,7 +4,7 @@ $getSocialLink = getSocialLink();
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
-<section class="contact-details profile-details">
+<section class="contact-details profile-details supportive-home-wrp">
     <div class="container">
         <div class="row">
             <x-front.sidebar :profileData="[]" />
