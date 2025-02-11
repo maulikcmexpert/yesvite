@@ -37,7 +37,6 @@
     font-weight: 600;
 }
 
-
 .editable-links {
     gap: 16px;
     display: flex;
@@ -53,11 +52,12 @@
 
 .editable-links a {
     border-radius: 6px;
-    padding: 5px;
+    /* padding: 5px; */
     background-color: var(--tabBg);
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
+    justify-content: center !important;
 }
 
 .order-content {
@@ -78,12 +78,11 @@
     color: var(--secondryColor);
 }
 
-
 .new_event_detail_header-right-wrp h6.green {
-    color: #2EB67D !important;
+    color: #2eb67d !important;
 }
 
-.guest-pro h5~span {
+.guest-pro h5 ~ span {
     color: #000 !important;
     background: inherit;
     font-size: 20px;
@@ -106,7 +105,7 @@
 }
 
 .invite-guest h5 {
-    color: #1C8B5C;
+    color: #1c8b5c;
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 0;
@@ -132,7 +131,7 @@
 }
 
 .order-desc p a {
-    color: #FF5A5F;
+    color: #ff5a5f;
     text-decoration: underline !important;
 }
 
@@ -163,7 +162,7 @@
     border: 1px solid var(--borderColor);
     border-radius: 12px;
     padding: 10px;
-    box-shadow: 0px 10px 20px 0px #0000001A;
+    box-shadow: 0px 10px 20px 0px #0000001a;
     margin-bottom: 16px;
 }
 
@@ -175,7 +174,7 @@
 
 .invite-left-side {
     border: 1px solid var(--borderColor);
-    background-color: #F1F5F9;
+    background-color: #f1f5f9;
     display: flex;
     align-items: center;
     border-radius: 6px;
@@ -183,7 +182,7 @@
 }
 
 .invite-left-side h6 {
-    color: #F73C71;
+    color: #f73c71;
     font-size: 15px;
     line-height: 26px;
     font-weight: 700;
@@ -205,13 +204,13 @@
 }
 
 .change-plan .form-check-input:focus {
-    border: 1px solid #E2E8F0 !important;
+    border: 1px solid #e2e8f0 !important;
     box-shadow: none !important;
 }
 
 .change-plan .form-check-input:checked {
-    background-color: #2DA9FC !important;
-    border-color: #2DA9FC !important;
+    background-color: #2da9fc !important;
+    border-color: #2da9fc !important;
 }
 
 .change-plan.pro-wrp h6 {
@@ -237,7 +236,7 @@
 }
 
 .membership-wrap {
-    background: linear-gradient(266.99deg, #AE3BE4 -4.33%, #F73C71 124.92%);
+    background: linear-gradient(266.99deg, #ae3be4 -4.33%, #f73c71 124.92%);
     padding: 10px;
     border-radius: 0 0 16px 16px;
 }
@@ -281,14 +280,14 @@
 .feature-wrps .feauture-list {
     background-color: #fff;
     border: 1px solid var(--borderColor);
-    box-shadow: 0px 0px 20px 0px #0000001A;
+    box-shadow: 0px 0px 20px 0px #0000001a;
     padding: 16px;
     border-radius: 16px;
     margin-bottom: 24px;
 }
 
 .feature-lose-list h5 {
-    color: #EE1006;
+    color: #ee1006;
 }
 
 .feature-lose-list.feauture-list ul.feature-lose li {
@@ -340,7 +339,7 @@
 }
 
 .eventModal.deleteModal .delete-img {
-    background-color: #23AA26;
+    background-color: #23aa26;
 }
 
 .eventModal .google-play {
@@ -368,12 +367,12 @@
 }
 
 .plans-wrap.recomendat-plan.change-plan .rcomand-text {
-    background-color: #FFEAF3;
+    background-color: #ffeaf3;
     border-radius: 100px;
     padding: 8px;
     font-size: 10px;
     line-height: 18px;
-    color: #E73080;
+    color: #e73080;
     font-weight: 700;
     margin-left: 10px;
     height: 27px;
@@ -381,7 +380,7 @@
 }
 
 .recomend-pro-paln {
-    background: linear-gradient(266.99deg, #AE3BE4 -4.33%, #F73C71 124.92%);
+    background: linear-gradient(266.99deg, #ae3be4 -4.33%, #f73c71 124.92%);
     border-radius: 100px;
     gap: 4px;
     padding: 7px 8px 7px 8px;
@@ -418,7 +417,13 @@
     border-radius: 10px !important;
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 1199px) {
+    .setting-main-content .editable-links {
+        max-width: 120px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
     .editable-links {
         display: none;
     }
@@ -465,7 +470,7 @@
     }
 }
 
-@media only screen and (max-width:575px) {
+@media only screen and (max-width: 575px) {
     .invite-guest span {
         padding: 5px 9px;
     }
@@ -474,8 +479,7 @@
         max-width: 100% !important;
     }
 
-    .checkout-data .guest-pro h5~span {
+    .checkout-data .guest-pro h5 ~ span {
         font-size: 16px !important;
     }
-
 }

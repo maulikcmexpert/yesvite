@@ -274,7 +274,7 @@
                         const subcategoryId = $(this).data('subcategory-id');
 
                         // Show images matching the selected categories and subcategories
-                        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                        $(`.image-item[data-category-id="${categoryId}"]`)
                             .show();
                         var visibleItems = $('.all_designs:visible').length;
                         $('.total_design_count').text(visibleItems + ' Items');
@@ -326,6 +326,10 @@
                 $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
+                if(search_value==''){
+                    $('input[name="design_subcategory"]').prop('checked', true)
+                    $("#Allcat").prop("checked", true);
+                }
                 $.ajax({
                     url: base_url + "search_design",
                     method: 'GET',

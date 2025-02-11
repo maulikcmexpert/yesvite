@@ -525,7 +525,7 @@ $("#create-photo-btn").click(function () {
     $("#postContent").val('');
     $(".create-post-upload-img-inner").removeClass("d-none");
     $('.create_post_btn').prop('disabled', false);
-    $("#photoForm").reset();
+    // $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {
@@ -540,6 +540,20 @@ $(".upload-img-delete").click(function () {
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
 });
+$(".uploded-delete-icon").click(function () {
+    alert();
+    let fileInput = $("#fileInput");
+
+
+    fileInput.val("");
+
+    // If using a form, reset it as well
+    $("#photoForm")[0].reset();
+
+
+
+});
+
 
 $(".upload-poll-delete").click(function () {
     $(".create-post-poll-wrp").addClass("d-none");
