@@ -65,7 +65,7 @@ Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
-Route::get('home', [HomeFrontController::class, 'homeDesign'])->name('home');
+Route::get('features', [HomeFrontController::class, 'homeDesign'])->name('features');
 Route::get('search_features', [HomeFrontController::class, 'searchDesign'])->name('search_features');
 Route::get('pricing', [HomeFrontController::class, 'homePricing'])->name('pricing');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
