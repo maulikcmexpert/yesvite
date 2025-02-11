@@ -3129,7 +3129,7 @@
     display: none;
 }
 
-.supportive-home-wrp .responsive-calendar .month h3:last-child{
+.supportive-home-wrp .responsive-calendar .month h3:last-of-type{
     display: none !important;
 }
 
