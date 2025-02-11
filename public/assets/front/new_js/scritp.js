@@ -1125,6 +1125,9 @@ if (hiddenData != undefined) {
     });
 }
 
-$(document).on('click','.notification-showall-btn',function(){
-
+$(document).on('click', '.notification-showall-btn', function() {
+    $('.notification_drp_down_div').each(function(index) {
+        let count = index + 1; 
+        console.log('Notification Dropdown ' + count, $(this));
+    });
 });
