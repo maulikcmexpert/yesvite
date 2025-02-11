@@ -410,9 +410,9 @@ ul.nav-tabs .nav-link:focus {
     border-bottom: 1px solid var(--borderColor);
 }
 
-.users-data .user_choice_group {
+/* .users-data .user_choice_group {
     margin-top: 24px;
-}
+} */
 
 .users-data:last-child {
     border-bottom: none;
