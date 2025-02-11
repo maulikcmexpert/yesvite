@@ -589,13 +589,13 @@
                         <h6 class="invite-count">0</h6>
                         <p class="invite-left_d"><strong>Invites |<p class="coin-invite"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span></strong></p>
                     </div>
-                    <div class="invite-right">
+                    {{-- <div class="invite-right"> --}}
                         {{-- <h5>
                             <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
                             <span class="available-coins">1174</span>
                         </h5> --}}
                         {{-- <span><strong>15</strong>Guests or less</span> --}}
-                    </div>
+                    {{-- </div> --}}
                     <!-- <a href="#" class="edit-icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -645,13 +645,13 @@
                             <p class="invite-left_d"><strong>Invites | <p class="coin-invite"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span></strong></p>
                             <input type="hidden" id="currentInviteCount" value="0">
                         </div>
-                        <div class="invite-right">
+                        {{-- <div class="invite-right"> --}}
                             {{-- <span><strong>15</strong>Guests or less</span> --}}
                             {{-- <h5>
                                 
                                 <span class="available-coins">1174</span>
                             </h5> --}}
-                        </div>
+                        {{-- </div> --}}
                     </div>
                 </div>
                 <div class="user-contacts inivted_user_list">
