@@ -676,7 +676,7 @@
             </div>
             <h5 class="total-items ms-auto total_design_count">{{ $count }} Items</h5>
         </div>
-        <div class="filter-main-wrp subcategoryNew">
+        <div style="display: none" class="filter-main-wrp subcategoryNew">
             <div class="filters-drp">
                 <h5>Filter By</h5>
                 <div class="filter-dropdowns">
