@@ -1462,7 +1462,7 @@ $notification_list=getNotificationList();
 
 
               <div class="notification-dropdown-footer">
-                <a href="#" class="notification-showall-btn">Show All</a>
+                <a href="javascript:void(0);" class="notification-showall-btn" data-show="0">Show All</a>
               </div>
             </div>
           </ul>

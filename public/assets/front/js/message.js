@@ -2012,7 +2012,7 @@ function createMessageElement(
                 : "grey-tick"
             : "";
 
-        const reactionCode = messageData.react.replace(/\\u\{(.+)\}/, "$1"); // Extract the reaction code
+        const reactionCode = messageData?.react?.replace(/\\u\{(.+)\}/, "$1"); // Extract the reaction code
         console.log(reactionCode);
         const imageUrl = reactionImageMap[reactionCode];
         reaction =
