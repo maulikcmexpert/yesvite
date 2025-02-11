@@ -5,7 +5,7 @@ $(".posts-card-like-btn").on("click", function () {
     icon.classList.toggle("fa-solid");
 });
 
-$(".notification-btn").on("click", function () {
+$(document).on("click",'.notification-btn', function () {
     const icon = $(this).find("i");
 
     // Check if the bell icon is already in "silent" mode
