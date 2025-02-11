@@ -181,7 +181,7 @@ $notification_list=getNotificationList();
               @php
                 $i++;
               @endphp
-                <div class="accordion-item">
+                <div class="accordion-item notification_drp_down_div">
                   <h2 class="accordion-header">
                     <button
                       class="accordion-button collapsed main-notification-div-list"
