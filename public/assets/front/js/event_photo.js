@@ -1491,7 +1491,8 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+                                                  ${location ? `<p>${location}</p>` : ""}
+
 
                                             </div>
                                         </div>
@@ -1740,107 +1741,50 @@ $(document).ready(function () {
         });
     });
 
-    // function renderReactions(post) {
-    //     let reactionList = post.reactionList || [];
-    //     let selfReaction = post.self_reaction;
-    //     let reactionHtml = "";
-    //     let j = 0;
-    //     let i = 0;
 
-    //     reactionList.forEach((reaction) => {
-    //         if (i >= 3) return; // Limit to 3 reactions
 
-    //         let emojiSrc = reactionIcons[reaction] || null;
-
-    //         if (emojiSrc) {
-    //             let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
-    //             reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
-    //             if (j === 0 && selfReaction === reaction) j++;
-    //             i++;
-    //         }
-    //     });
-
-    //     if (j === 0 && i < 3) {
-    //         reactionHtml += `<li id="reactionImage_${post.id}"></li>`;
-    //     }
-
-    //     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
-
-    //     return reactionHtml + likeCountHtml;
-    // }
-    // function renderReactions(post) {
-    //     let reactionList = post.reactionList || [];
-    //     let selfReaction = post.self_reaction;
-    //     let reactionHtml = "";
-    //     let j = 0;
-    //     let i = 0;
-
-    //     for (let reaction of reactionList) {
-    //         if (i >= 3) break; // Limit to 3 reactions
-
-    //         let emojiSrc = reactionIcons[reaction] || null;
-
-    //         if (emojiSrc) {
-    //             let listItemId =
-    //                 j === 0 && selfReaction === reaction
-    //                     ? `id="reactionImage_model_${post.id}"`
-    //                     : "";
-    //             reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
-    //             if (j === 0 && selfReaction === reaction) j++;
-    //             i++;
-    //         }
-    //     }
-
-    //     if (j === 0 && i < 3) {
-    //         reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
-    //     }
-
-    //     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
-
-    //     return reactionHtml + likeCountHtml;
-    // }
     function renderReactions(post) {
         let reactionList = post.reactionList || [];
         let selfReaction = post.self_reaction;
         let reactionHtml = "";
         let i = 0; // Count displayed reactions
-    
+
         for (let reactionData of reactionList) {
             if (i >= 3) break; // Limit to 3 reactions
-    
+
             let { reaction, firstname, lastname, profile } = reactionData;
-    
+
             let emojiSrc = reactionIcons[reaction] || null; // Get emoji image
             if (emojiSrc) {
                 let listItemId =
                     i === 0 && selfReaction === reaction
                         ? `id="reactionImage_model_${post.id}"`
                         : "";
-    
-              
-               
-    
+
+
+
+
                 // Append reaction
                 reactionHtml += `
                     <li ${listItemId} style="display:flex; align-items:center;">
-                       
-                        
+
+
                         <img src="${emojiSrc}" alt="Emoji">
                     </li>`;
                 i++;
             }
         }
-    
+
         // If no reactions found, show an empty reaction placeholder
         if (i === 0) {
             reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
         }
-    
+
         let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
-    
+
         return reactionHtml + likeCountHtml;
     }
-    
+
     $(document).on("click", "#likeButtonModel", function () {
         console.log("asd");
         setTimeout(function () {
