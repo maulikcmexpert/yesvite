@@ -32,13 +32,15 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
-class EventDetailsController extends Controller
+class EventDetailsController extends BaseController
 {
 
     protected $perPage;
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->perPage = 5;
     }
 

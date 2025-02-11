@@ -25,11 +25,13 @@ use Throwable;
 
 use Illuminate\Http\Request;
 
-class EventListController extends Controller
+class EventListController extends BaseController
 {
     public $per_page;
     public function __construct()
     {
+        parent::__construct();
+
         $this->per_page = 10;
     }
     public function index()
@@ -690,7 +692,7 @@ class EventListController extends Controller
                 // }
                 $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventPastDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
-                
+
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;

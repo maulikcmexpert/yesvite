@@ -37,6 +37,7 @@ class HomeController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
 
         $this->perPage = 5;
     }
@@ -174,10 +175,10 @@ class HomeController extends BaseController
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
-                    
+
                     $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                     $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
-        
+
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
