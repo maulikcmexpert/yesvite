@@ -16,10 +16,10 @@ let event_id = null;
 let element = document.querySelector(".image-edit-inner-img");
 
 if (element) {
-    let { width, height } = element.getBoundingClientRect();
+    var { width, height } = element.getBoundingClientRect();
     console.log("Width:", width, "Height:", height);
 } else {
-    let { width, height } = { width: 590, height: 880 };
+    var { width, height } = { width: 590, height: 880 };
     console.log(width, height); // Output: 590 880
 
     console.log("Element not found!");
