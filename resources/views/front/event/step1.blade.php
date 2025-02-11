@@ -50,7 +50,7 @@
                         </div>
                         <lable for="hostedby" id="event-host-error" class="error"></lable>
                     </div>
-                    <div class="col-lg-12 mb-4">
+                    <!-- <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             @php
                                 $start_date = '';
@@ -72,6 +72,113 @@
                                     id="event-date" data-isDate="{{ $event_date }}" name="event-date"
                                     onblur="clearError(this)" value="{{ $event_date }}" readonly>
                                 <label for="birthday" class="form-label input-field floating-label select-label">Date of
+                                    event * </label>
+                                <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
+                                        stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+
+                        </div>
+                        <lable for="event-date" id="event-date-error" class="error"></lable>
+                    </div> -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="input-form">
+                            @php
+                                $start_date = '';
+                                $end_date = '';
+                                $event_date = '';
+                                if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
+                                    $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
+                                    $event_date = $start_date;
+                                }
+                                if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
+                                    $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
+                                    if ($start_date != $end_date) {
+                                        $event_date = $start_date . ' To ' . $end_date;
+                                    }
+                                }
+                            @endphp
+                            <div class="position-relative z-2">
+                                <input type="text" class="form-control inputText" style="background: transparent"
+                                    id="event-date" data-isDate="{{ $event_date }}" name="event-date"
+                                    onblur="clearError(this)" value="{{ $event_date }}" readonly>
+                                <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
+                                    event * </label>
+                                <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
+                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
+                                        stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+
+                        </div>
+                        <lable for="event-date" id="event-date-error" class="error"></lable>
+                    </div> 
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="input-form">
+                            @php
+                                $start_date = '';
+                                $end_date = '';
+                                $event_date = '';
+                                if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
+                                    $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
+                                    $event_date = $start_date;
+                                }
+                                if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
+                                    $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
+                                    if ($start_date != $end_date) {
+                                        $event_date = $start_date . ' To ' . $end_date;
+                                    }
+                                }
+                            @endphp
+                            <div class="position-relative z-2">
+                                <input type="text" class="form-control inputText" style="background: transparent"
+                                    id="event-date" data-isDate="{{ $event_date }}" name="event-date"
+                                    onblur="clearError(this)" value="{{ $event_date }}" readonly>
+                                <label for="birthday" class="form-label input-field floating-label select-label">End Date of
                                     event * </label>
                                 <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
