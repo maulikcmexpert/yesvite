@@ -62,6 +62,7 @@ class PaymentController extends BaseController
             dd($session->url);
             return redirect($session->url);
         } catch (\Exception $e) {
+            dd($e);
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
