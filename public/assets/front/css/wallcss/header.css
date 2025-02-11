@@ -831,6 +831,19 @@ header{
     margin-top: 20px;
 }
 
+.header-profile-dropdown .credits_balance_amout_wrp h5 {
+    width: max-content !important;
+    max-width: 100% !important;
+    font-size: 14px !important;
+    line-height: normal !important;
+}
+
+.header-profile-dropdown .credits_balance_amout_wrp h5 img {
+    width: 100% !important;
+    max-width: 20px !important;
+    height: 20px !important;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {
