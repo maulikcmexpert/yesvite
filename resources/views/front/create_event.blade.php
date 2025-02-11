@@ -472,7 +472,11 @@
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="invite-right">
-                    <span><strong>15</strong>Guests or less</span>
+                    {{-- <span><strong>15</strong>Guests or less</span> --}}
+                    <h5>
+                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt="">
+                        <span class="available-coins">1174</span>
+                    </h5>
                 </div>
             </div>
         </div>
