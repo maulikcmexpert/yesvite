@@ -266,6 +266,7 @@ $(document).on("click", "#allchecked", function () {
 function allCheckFun() {
     alert($("#search_design_category").val())
     $("#search_design_category").val("");
+    alert($("#search_design_category").val())
     $(".image-item-new").hide();
     $("#category_name").hide();
     $("#allchecked").hide();
