@@ -1,7 +1,18 @@
 $(document).ready(function () {
-    // Function to update character count
-
-    // Function to validate form fields
+    let reactionIcons = {
+        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
+        "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "u{1F60A}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+        "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+        "👏": base_url + "assets/front/img/clap-icon.png", // 👏
+    };
     function validateForm() {
         let isValid = true;
 
@@ -73,20 +84,7 @@ $(document).ready(function () {
 
     let longPressTimer;
     let isLongPresss = false;
-    let reactionIcons = {
-        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "\u{1F60A}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
-        "👏": base_url + "assets/front/img/clap-icon.png", // 👏
-    };
+
     $(document).on("mousedown", ".like-btn", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
@@ -914,20 +912,6 @@ $(document).on("click", ".download_img_single", function () {
         alert("Image source not found.");
     }
 });
-
-let reactionIcons = {
-    "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
-    "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
-    "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
-    "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
-    "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-    "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-    "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
-    "👏": base_url + "assets/front/img/clap-icon.png", // 👏
-};
 
 $(document).on("click", ".open_photo_model", function () {
     clearTimeout(pressTimer); // Clear the timer
@@ -1852,61 +1836,46 @@ function renderReactions(post) {
     return reactionHtml + likeCountHtml;
 }
 
-$(document).ready(function () {
-    let reactionIcons = {
-        "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
-        "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
-        "\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "/\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
-        "\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-        "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
-    };
-
-    $(document).on("click", "#likeButtonModel", function () {
+$(document).on("click", "#likeButtonModel", function () {
+    console.log("asd");
+    setTimeout(function () {
+        $("#emojiDropdown1").show();
         console.log("asd");
-        setTimeout(function () {
-            $("#emojiDropdown1").show();
-            console.log("asd");
-        }, 1000);
+    }, 1000);
 
-        $("#emojiDropdown1").css("display", "block");
-        console.log($("#emojiDropdown1"));
+    $("#emojiDropdown1").css("display", "block");
+    console.log($("#emojiDropdown1"));
+});
+$(".posts-card-like-comment-right").each(function () {
+    const $container = $(this); // Get the current container
+    const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+    const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+    let pressTimer;
+
+    // Handle long press to show emoji dropdown (for both desktop and mobile)
+
+    //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+    //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+    //   });
+
+    // Handle emoji click
+    $emojiDropdown.on("click", ".emoji", function () {
+        const emoji = $(this).data("emoji");
+
+        // Remove the heart icon and set emoji inside the button
+        $likeButton.html(
+            `<span class="emoji"><img src='${reactionIcons[emoji]}'/></span>`
+        ); // Show selected emoji inside button
+
+        $emojiDropdown.hide(); // Hide emoji dropdown after selection
     });
-    $(".posts-card-like-comment-right").each(function () {
-        const $container = $(this); // Get the current container
-        const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
-        const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
-        let pressTimer;
 
-        // Handle long press to show emoji dropdown (for both desktop and mobile)
-
-        //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-        //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-        //   });
-
-        // Handle emoji click
-        $emojiDropdown.on("click", ".emoji", function () {
-            const emoji = $(this).data("emoji");
-
-            // Remove the heart icon and set emoji inside the button
-            $likeButton.html(
-                `<span class="emoji"><img src='${reactionIcons[emoji]}'/></span>`
-            ); // Show selected emoji inside button
-
-            $emojiDropdown.hide(); // Hide emoji dropdown after selection
-        });
-
-        // Optional: Hide the emoji dropdown if you click outside of it
-        //   $(document).on("click touchstart", function (e) {
-        //   $(document).on('click','#likeButtonModel',function(e){
-        //       if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-        //         $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-        //       }
-        //   })
-        //   });
-    });
+    // Optional: Hide the emoji dropdown if you click outside of it
+    //   $(document).on("click touchstart", function (e) {
+    //   $(document).on('click','#likeButtonModel',function(e){
+    //       if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+    //         $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+    //       }
+    //   })
+    //   });
 });
