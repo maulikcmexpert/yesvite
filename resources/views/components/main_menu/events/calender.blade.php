@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 @endphp
 <div class="col-xl-4">
-    <div class="home-main-right right-bar-menu-home">
+    <div class="home-main-right">
         <div class="calendar-wrp">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
