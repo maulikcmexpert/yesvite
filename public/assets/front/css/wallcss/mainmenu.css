@@ -3113,6 +3113,12 @@
 }
 .view-calender-heading{
     flex-direction: column !important;
+    align-items: start !important;
+}
+
+.supportive-home-wrp .responsive-calendar{
+    height: calc(100% - 80px);
+    top: 100px;
 }
 
 /* ===Responsive=== */
@@ -3275,6 +3281,10 @@
     }
     .responsive-calendar .weekdays {
         justify-content: center;
+    }
+    .supportive-home-wrp .responsive-calendar{
+        height: calc(100% - 0px);
+        top: 100px;
     }
 }
 

@@ -1188,10 +1188,7 @@ $(document).ready(function () {
                     // Make sure you update the reactions after filtering them
                     updateReactions(
                         data.reactionList,
-                        data.firstname,
-                        data.lastname,
-                        data.profile,
-                        data.location
+
                     );
 
                     const commentsWrapper = $(
@@ -1416,14 +1413,8 @@ $(document).ready(function () {
 
         function updateReactions(
             reactions,
-            firstname,
-            lastname,
-            profile,
-            location
+
         ) {
-            console.log(reactions); // Debug the reactions array
-            console.log(firstname);
-            console.log(lastname);
 
             const emojiPaths = {
                 heart: "/assets/front/img/heart-emoji.png",
@@ -1455,26 +1446,28 @@ $(document).ready(function () {
             smilyReactionsList.empty();
             eyeHeartReactionsList.empty();
             clapReactionsList.empty();
-            const getProfileContent = () => {
-                if (profile && profile !== "") {
-                    return `<img src="${profile}" alt="">`;
-                } else {
-                    const firstInitial = firstname
-                        ? firstname[0].toUpperCase()
-                        : "";
-                    const secondInitial = lastname
-                        ? lastname[0].toUpperCase()
-                        : "";
-                    const initials = `${firstInitial}${secondInitial}`;
-                    const fontColor = `fontcolor${firstInitial}`;
-                    return `<h5 class="${fontColor}">${initials}</h5>`;
-                }
-            };
+            // const getProfileContent = () => {
+            //     if (profile && profile !== "") {
+            //         return `<img src="${profile}" alt="">`;
+            //     } else {
+            //         const firstInitial = firstname
+            //             ? firstname[0].toUpperCase()
+            //             : "";
+            //         const secondInitial = lastname
+            //             ? lastname[0].toUpperCase()
+            //             : "";
+            //         const initials = `${firstInitial}${secondInitial}`;
+            //         const fontColor = `fontcolor${firstInitial}`;
+            //         return `<h5 class="${fontColor}">${initials}</h5>`;
+            //     }
+            // };
             // Iterate through reactions array
-            reactions.forEach((reaction) => {
+            reactions.forEach((reactionData) => {
                 let reactionType = "";
                 let emojiSrc = "";
 
+                // Extract user details from the reaction object
+                const { reaction, firstname, lastname, profile, location } = reactionData;
                 // Map each reaction to a type
                 switch (reaction) {
                     case "\\u{2764}": // Heart
@@ -1502,7 +1495,9 @@ $(document).ready(function () {
 
                 // Get the emoji image source
                 emojiSrc = emojiPaths[reactionType];
-                const profileContent = getProfileContent();
+                const profileContent = profile && profile !== ""
+                ? `<img src="${profile}" alt="">`
+                : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ''}">${firstname ? firstname[0].toUpperCase() : ''}${lastname ? lastname[0].toUpperCase() : ''}</h5>`;
                 // Create reaction list item
                 const reactionItem = `<li class="reaction-info-wrp">
                                     <div class="commented-user-head">
@@ -1511,8 +1506,8 @@ $(document).ready(function () {
                                             ${profileContent}
                                             </div>
                                             <div class="commented-user-profile-content">
-                                                <h3>${firstname} ${lastname}</h3>
-                                                <p></p>
+                                                  <h3>${firstname} ${lastname}</h3>
+                                        <p>${location}</p>
 
                                             </div>
                                         </div>
@@ -1667,76 +1662,7 @@ $(document).ready(function () {
         $(this).closest("#emojiDropdown1").hide();
 
         // Define visibility options
-        const visibilityOptions = {
-            1: "Everyone",
-            2: "RSVP’d - Yes",
-            3: "RSVP’d - No",
-            4: "RSVP’d - No Reply",
-        };
 
-        // Load saved settings or set defaults
-        let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
-        let savedAllowComments =
-            localStorage.getItem("commenting_on_off") === "1"; // Convert to boolean
-
-        // Ensure the default value is set if no saved value exists for comments
-        if (savedAllowComments !== true) {
-            savedAllowComments = "1"; // Default to true
-            localStorage.setItem("commenting_on_off", savedAllowComments);
-        }
-
-        // Apply settings to the form
-        const visibilityRadio = $(
-            'input[name="post_privacy"][value="' + savedVisibility + '"]'
-        );
-        if (visibilityRadio.length > 0) {
-            visibilityRadio.prop("checked", true);
-        } else {
-            // Fallback to default visibility if saved value is invalid
-            savedVisibility = "1";
-            $('input[name="post_privacy"][value="1"]').prop("checked", true);
-        }
-
-        $("#allowComments").prop("checked", savedAllowComments);
-
-        // Update the hidden input fields dynamically
-        $(".hiddenVisibility").val(savedVisibility);
-        $(".hiddenAllowComments").val(savedAllowComments ? "1" : "0");
-
-        // Update the display area to show the current saved visibility and commenting status
-        const visibilityName = visibilityOptions[savedVisibility];
-        $("#savedSettingsDisplay").html(`
-        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-        <p>${savedAllowComments === "1" ? "" : ""}</p>
-    `);
-
-        // Save Button Click Handler
-        $("#saveSettings").on("click", function () {
-            // Fetch selected visibility
-            const visibility =
-                $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
-            // Fetch commenting status
-            const allowComments = $("#allowComments").is(":checked")
-                ? "1"
-                : "0";
-
-            // Save settings to localStorage
-            localStorage.setItem("post_privacys", visibility);
-            localStorage.setItem("commenting_on_off", allowComments);
-
-            // Update the hidden input fields dynamically for all forms
-            $(".hiddenVisibility").val(visibility);
-            $(".hiddenAllowComments").val(allowComments);
-
-            // Update display area
-            const visibilityName = visibilityOptions[visibility];
-            $("#savedSettingsDisplay").html(`
-            <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-            <p>${allowComments === "1" ? "" : ""}</p>
-        `);
-
-            console.log("Saved Settings:", { visibility, allowComments });
-        });
 
         // Dynamically set the hidden values in the forms
         $("form").on("submit", function () {
@@ -1932,5 +1858,77 @@ $(document).ready(function () {
         //       }
         //   })
         //   });
+    });
+});
+$(document).ready(function () {
+    const visibilityOptions = {
+        1: "Everyone",
+        2: "RSVP’d - Yes",
+        3: "RSVP’d - No",
+        4: "RSVP’d - No Reply",
+    };
+
+    // Load saved settings or set defaults
+    let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
+    let savedAllowComments =
+        localStorage.getItem("commenting_on_off") === "1"; // Convert to boolean
+
+    // Ensure the default value is set if no saved value exists for comments
+    if (savedAllowComments !== true) {
+        savedAllowComments = "1"; // Default to true
+        localStorage.setItem("commenting_on_off", savedAllowComments);
+    }
+
+    // Apply settings to the form
+    const visibilityRadio = $(
+        'input[name="post_privacy"][value="' + savedVisibility + '"]'
+    );
+    if (visibilityRadio.length > 0) {
+        visibilityRadio.prop("checked", true);
+    } else {
+        // Fallback to default visibility if saved value is invalid
+        savedVisibility = "1";
+        $('input[name="post_privacy"][value="1"]').prop("checked", true);
+    }
+
+    $("#allowComments").prop("checked", savedAllowComments);
+
+    // Update the hidden input fields dynamically
+    $(".hiddenVisibility").val(savedVisibility);
+    $(".hiddenAllowComments").val(savedAllowComments ? "1" : "0");
+
+    // Update the display area to show the current saved visibility and commenting status
+    const visibilityName = visibilityOptions[savedVisibility];
+    $("#savedSettingsDisplay").html(`
+    <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+    <p>${savedAllowComments === "1" ? "" : ""}</p>
+`);
+
+    // Save Button Click Handler
+    $("#saveSettings").on("click", function () {
+        // Fetch selected visibility
+        const visibility =
+            $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
+        // Fetch commenting status
+        const allowComments = $("#allowComments").is(":checked")
+            ? "1"
+            : "0";
+
+        // Save settings to localStorage
+        localStorage.setItem("post_privacys", visibility);
+        localStorage.setItem("commenting_on_off", allowComments);
+
+        // Update the hidden input fields dynamically for all forms
+        $(".hiddenVisibility").val(visibility);
+        $(".hiddenAllowComments").val(allowComments);
+
+        // Update display area
+        const visibilityName = visibilityOptions[visibility];
+        $("#savedSettingsDisplay").html(`
+        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+        <p>${allowComments === "1" ? "" : ""}</p>
+    `);
+
+        console.log("Saved Settings:", { visibility, allowComments });
     });
 });

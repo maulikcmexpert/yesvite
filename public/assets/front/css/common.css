@@ -9,7 +9,7 @@ label.error {
 }
 
 body {
-    font-family: 'SF Pro Display', sans-serif !important;
+    font-family: "SF Pro Display", sans-serif !important;
 }
 
 ul,
@@ -59,7 +59,6 @@ label {
     margin-bottom: 0 !important;
 }
 
-
 input,
 select {
     height: 48px !important;
@@ -74,7 +73,6 @@ select {
     color: var(--secondryColor);
 }
 
-
 input::placeholder {
     font-size: 14px !important;
     font-weight: 400 !important;
@@ -86,11 +84,11 @@ input:focus,
 select:focus,
 textarea:focus {
     border: 1px solid var(--primaryColor) !important;
-    box-shadow: 0 0 0 0.30rem rgba(247, 60, 113, .2) !important;
+    box-shadow: 0 0 0 0.3rem rgba(247, 60, 113, 0.2) !important;
 }
 
 select.form-select {
-    background-image: url('../image/down-arrow.svg');
+    background-image: url("../image/down-arrow.svg");
 }
 
 .cmn-btn {
@@ -170,7 +168,7 @@ select.form-select {
     -ms-border-radius: 100px !important;
     -o-border-radius: 100px !important;
     background-color: #fff;
-    box-shadow: 0px 4px 10px 0px #0000000D;
+    box-shadow: 0px 4px 10px 0px #0000000d;
 }
 
 ul.nav-tabs .nav-link:focus {
@@ -207,7 +205,6 @@ ul.nav-tabs .nav-link:focus {
 .radio-wrapper .form-check-input:checked {
     background-color: var(--primaryColor) !important;
     border-color: var(--primaryColor) !important;
-
 }
 
 .radio-wrapper .form-check .form-check-input {
@@ -274,7 +271,6 @@ ul.nav-tabs .nav-link:focus {
     z-index: 1;
 }
 
-
 /* / Button 1 / */
 #button-1 .knobs:before {
     /* content: "\f00d"; */
@@ -303,19 +299,18 @@ ul.nav-tabs .nav-link:focus {
     -o-transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#button-1 .checkbox:checked+.knobs:before {
+#button-1 .checkbox:checked + .knobs:before {
     content: "\f00c";
     right: 4px;
     background-color: #fff;
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     font-family: "Font Awesome 5 Free";
     transform: translateY(-50%);
-    color: #2DA9FC;
+    color: #2da9fc;
 }
 
-
-#button-1 .checkbox:checked~.layer {
-    background-color: #2DA9FC;
+#button-1 .checkbox:checked ~ .layer {
+    background-color: #2da9fc;
 }
 
 #button-1 .knobs,
@@ -332,17 +327,15 @@ ul.nav-tabs .nav-link:focus {
     padding: 100px 0;
 }
 
-
 .loaderbtn {
     display: inline-block;
     outline: none;
     line-height: 1.4;
     position: relative;
-    transition: 0.5S;
+    transition: 0.5s;
     font-weight: 700;
     background-color: var(--primaryColor) !important;
 }
-
 
 .loaderbtn.spinning {
     background-color: rgb(255, 255, 255);
@@ -350,7 +343,7 @@ ul.nav-tabs .nav-link:focus {
 }
 
 .loaderbtn.spinning:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 6px;
     top: 50%;
@@ -359,7 +352,7 @@ ul.nav-tabs .nav-link:focus {
     box-shadow: 0px 0px 0 1px darken(rgb(255, 255, 255), 10%);
     position: absolute;
     border-radius: 50%;
-    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+    animation: rotate360 0.5s infinite linear, exist 0.1s forwards ease;
 }
 
 .loaderbtn.spinning:before {
@@ -372,10 +365,8 @@ ul.nav-tabs .nav-link:focus {
     position: absolute;
     border: 2px solid darken(rgb(255, 255, 255), 40%);
     border-right: 3px solid rgb(255, 255, 255);
-    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
-
+    animation: rotate360 0.5s infinite linear, exist 0.1s forwards ease;
 }
-
 
 .floating-label {
     position: absolute;
@@ -419,6 +410,10 @@ ul.nav-tabs .nav-link:focus {
     border-bottom: 1px solid var(--borderColor);
 }
 
+.users-data .user_choice_group {
+    margin-top: 24px;
+}
+
 .users-data:last-child {
     border-bottom: none;
 }
@@ -445,7 +440,7 @@ ul.nav-tabs .nav-link:focus {
     margin-right: 6px !important;
 }
 
-.breadcrumb-nav .breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-nav .breadcrumb-item + .breadcrumb-item::before {
     font-family: "Font Awesome 5 Free";
     content: "\f054";
     display: inline-block;
@@ -565,11 +560,11 @@ ul.nav-tabs .nav-link:focus {
     padding-left: 87px !important;
 }
 
-.input-form #phone_number~label {
+.input-form #phone_number ~ label {
     left: 85px;
 }
 
-.input-form #phone_number~label.floatingfocus {
+.input-form #phone_number ~ label.floatingfocus {
     left: 10px;
     z-index: 1;
 }
@@ -613,15 +608,15 @@ ul.nav-tabs .nav-link:focus {
     height: 100%;
     margin-bottom: 0;
     border: 1px solid transparent;
-    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
+    background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163))
+        rgb(14, 114, 207);
     color: #fff;
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
-
 }
 
-.toast.toast-error{
+.toast.toast-error {
     background-color: #df1c41 !important;
     box-shadow: none !important;
     border-radius: 12px !important;
@@ -633,11 +628,11 @@ ul.nav-tabs .nav-link:focus {
     line-height: normal !important;
 }
 
-#toast-container>.toast-error {
-    background-image: url('../../toaster_error_icon.png') !important;
+#toast-container > .toast-error {
+    background-image: url("../../toaster_error_icon.png") !important;
 }
 
-.toast.toast-success{
+.toast.toast-success {
     background-color: #38c793 !important;
     box-shadow: none !important;
     border-radius: 12px !important;
@@ -649,10 +644,10 @@ ul.nav-tabs .nav-link:focus {
     line-height: normal !important;
 }
 
-#toast-container>.toast-success {
-    background-image: url('../../toater_success_icon.png') !important;
+#toast-container > .toast-success {
+    background-image: url("../../toater_success_icon.png") !important;
 }
-#toast-container>div{
+#toast-container > div {
     opacity: 1 !important;
 }
 
@@ -760,7 +755,6 @@ ul.nav-tabs .nav-link:focus {
     background: linear-gradient(2.35619rad, rgb(224, 250, 255), rgb(167, 238, 252)) !important;
 } */
 
-
 .fontcolorA {
     background: #36c5f0 !important;
 }
@@ -865,8 +859,6 @@ ul.nav-tabs .nav-link:focus {
     background: #ff5a5f !important;
 }
 
-
-
 .ui-widget-content.ui-autocomplete {
     padding: 5px !important;
     border-radius: 5px !important;
@@ -946,8 +938,7 @@ ul.nav-tabs .nav-link:focus {
     height: 100% !important;
 } */
 
-
-.new-msg-class>span>span {
+.new-msg-class > span > span {
     display: none !important;
 }
 
@@ -957,11 +948,10 @@ ul.nav-tabs .nav-link:focus {
     max-height: calc(100vh - 210px);
 }
 
-.qty-container input:focus{
+.qty-container input:focus {
     border: none !important;
     box-shadow: none !important;
 }
-
 
 .loader {
     display: flex;
@@ -975,21 +965,36 @@ ul.nav-tabs .nav-link:focus {
     animation: bounce 0.8s infinite ease-in-out;
 }
 
-.loader div:nth-child(1) { background-color: #3CBDE7; animation-delay: 0s; } 
-.loader div:nth-child(2) { background-color: #23AA25; animation-delay: 0.15s; }  
-.loader div:nth-child(3) { background-color: #ECAF15; animation-delay: 0.3s; } 
-.loader div:nth-child(4) { background-color: #E93370; animation-delay: 0.45s; }  
-
-@keyframes bounce {
-    0%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-20px); }
+.loader div:nth-child(1) {
+    background-color: #3cbde7;
+    animation-delay: 0s;
+}
+.loader div:nth-child(2) {
+    background-color: #23aa25;
+    animation-delay: 0.15s;
+}
+.loader div:nth-child(3) {
+    background-color: #ecaf15;
+    animation-delay: 0.3s;
+}
+.loader div:nth-child(4) {
+    background-color: #e93370;
+    animation-delay: 0.45s;
 }
 
-
-
+@keyframes bounce {
+    0%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+}
 
 /* ======== Responsive ========= */
-@media (min-width:2000px) and (max-width:10000px) {
+@media (min-width: 2000px) and (max-width: 10000px) {
     /* footer {
         position: absolute;
         bottom: 0;
@@ -1004,8 +1009,7 @@ ul.nav-tabs .nav-link:focus {
     }
 }
 
-
-@media only screen and (max-width:1199px) {
+@media only screen and (max-width: 1199px) {
     h2 {
         font-size: 45px !important;
         color: var(--headingColor);
@@ -1013,7 +1017,7 @@ ul.nav-tabs .nav-link:focus {
     }
 }
 
-@media only screen and (max-width:991px) {
+@media only screen and (max-width: 991px) {
     .cmn-btn {
         padding: 10px 15px;
     }
@@ -1023,11 +1027,9 @@ ul.nav-tabs .nav-link:focus {
         color: var(--headingColor);
         line-height: 45px !important;
     }
-
 }
 
-
-@media only screen and (max-width:767px) {
+@media only screen and (max-width: 767px) {
     h1 {
         font-size: 28px;
         line-height: 33px;
@@ -1047,10 +1049,9 @@ ul.nav-tabs .nav-link:focus {
     #myModal .save-btn {
         width: 100%;
     }
-
 }
 
-@media only screen and (max-width:575px) {
+@media only screen and (max-width: 575px) {
     h2 {
         font-size: 24px !important;
         color: var(--headingColor);
@@ -1083,13 +1084,12 @@ ul.nav-tabs .nav-link:focus {
         max-height: calc(100vh - 270px);
     }
 
-    input, textarea, select{
+    input,
+    textarea,
+    select {
         font-size: 16px !important;
     }
 }
-
-
-
 
 @keyframes rotate360 {
     100% {
