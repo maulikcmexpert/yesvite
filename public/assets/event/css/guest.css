@@ -581,6 +581,10 @@
     max-height: calc(100vh - 440px);
 }
 
+.groupsidebar .users-data .user_choice_group .right-note {
+    margin-top: 11px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
