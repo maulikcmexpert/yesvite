@@ -542,7 +542,7 @@ $(".upload-img-delete").click(function () {
 });
 $(".uploded-delete-icon").click(function () {
 
-    $(".preview-image").val('');
+    $("#fileInput").val('');
     $("#photoForm")[0].reset();
 });
 
