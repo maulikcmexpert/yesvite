@@ -119,12 +119,12 @@ class EventController extends BaseController
 
 
         // Calculate total count of textdatas across all subcategories
-        $totalTextDataCount = $categories->sum(function ($category) {
-            return $category->subcategory->sum(function ($subcategory) {
-                return $subcategory->textdatas->count();
-            });
-        });
-
+        // $totalTextDataCount = $categories->sum(function ($category) {
+        //     return $category->subcategory->sum(function ($subcategory) {
+        //         return $subcategory->textdatas->count();
+        //     });
+        // });
+        $totalTextDataCount = $categories->count();
         return response()->json([
             'view' => view('front.event.getDesignAjax', compact('categories'))->render(),
 
@@ -641,14 +641,14 @@ class EventController extends BaseController
 
 
 
-        $totalTextDataCount = $categories->sum(
-            fn($category) =>
-            $category->subcategory->sum(
-                fn($subcategory) =>
-                $subcategory->textdatas->count()
-            )
-        );
-
+        // $totalTextDataCount = $categories->sum(
+        //     fn($category) =>
+        //     $category->subcategory->sum(
+        //         fn($subcategory) =>
+        //         $subcategory->textdatas->count()
+        //     )
+        // );
+        $totalTextDataCount = $categories->count();
         $imagecount = $totalTextDataCount;
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')
