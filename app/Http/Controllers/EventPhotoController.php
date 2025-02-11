@@ -841,7 +841,7 @@ class EventPhotoController extends Controller
                     'firstname' => $reaction->user->firstname ?? '',
                     'lastname' => $reaction->user->lastname ?? '',
                     'profile' => !empty($reaction->user->profile) ? asset('storage/profile/' . $reaction->user->profile) : '',
-                    'location' => ($reaction->user->city ?? '') . ', ' . ($reaction->user->state ?? ''),
+                    'location' => ($reaction->user->city ?? '') . ' ' . ($reaction->user->state ?? ''),
                 ];
             });
 

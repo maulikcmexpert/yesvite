@@ -91,7 +91,11 @@
             </div>
 
             <div class="row list_all_design_catgeory">
-
+                
+                <label for="" class="custome-designcategory">
+                    Upload own design/card
+                    <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png"/>
+                </label>
                 @foreach ($categories as $category)               
                 @php
                     $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
