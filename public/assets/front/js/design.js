@@ -697,6 +697,8 @@ async function bindData(current_event_id) {
             });
 
             if (dbJson) {
+                const scaleX = width / originalWidth;
+                const scaleY = height / originalHeight;
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
