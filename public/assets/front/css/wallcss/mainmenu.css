@@ -3113,6 +3113,7 @@
 }
 .view-calender-heading{
     flex-direction: column !important;
+    align-items: start !important;
 }
 
 /* ===Responsive=== */
