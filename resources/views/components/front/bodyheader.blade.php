@@ -1149,7 +1149,7 @@ $notification_list=getNotificationList();
                                     {{-- </div> --}}
                                   </div>
                                 </div>
-                        @elseif($inner_data['notification_type']=="reply_on_comment_post")
+                            @elseif($inner_data['notification_type']=="reply_on_comment_post")
                                   <div class="notification-drodown-body-inner">
                                     <div class="notification-drodown-body-inner-img">
                                       @php
@@ -1172,8 +1172,7 @@ $notification_list=getNotificationList();
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                            <span> {{$inner_data['comment_reply']}} <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                                            <span> {{$inner_data['comment']}}</span>
+                                            <span> replied to your comment in post on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
@@ -1186,6 +1185,10 @@ $notification_list=getNotificationList();
                                             <h6 class="notification-read-dot"></h6>
                                           @endif
                                       </div>
+                                      <div class="noification-simple-text-wrp">
+                                              <p>{{$inner_data['comment_reply']}}</p>
+                                              <p>{{$inner_data['comment']}}</p>
+                                            </div>
                                       {{-- <div class="notification-video-comment-wrp">
                                         <h6>That’s was great! love it ❤️</h6>
                                         <div class="notification-video-wrp">
