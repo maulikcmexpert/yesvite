@@ -1577,6 +1577,8 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    console.log(response.reactionList);
+
                     // const post = {
                     //     id: eventPostId,
                     //     reactionList: response.reactionList,
@@ -1634,6 +1636,9 @@ $(document).ready(function () {
                     );
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
+                    );
+                    updateReactions(
+                        response.reactionList,
                     );
                 } else {
                     alert(response.message);
