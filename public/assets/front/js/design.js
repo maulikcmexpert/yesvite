@@ -13,6 +13,10 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
+
+// Original static size
+const originalWidth = 345;
+const originalHeight = 490;
 let element = document.querySelector(".image-edit-inner-img");
 
 if (element) {
@@ -693,6 +697,8 @@ async function bindData(current_event_id) {
             });
 
             if (dbJson) {
+                const scaleX = canvasWidth / originalWidth;
+                const scaleY = canvasHeight / originalHeight;
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
@@ -724,31 +730,29 @@ async function bindData(current_event_id) {
                             fontWeight: element.fontWeight,
                             fontStyle: element.fontStyle,
                             underline: element.underline,
-                            linethrough:
-                                element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
-                                    ? true
-                                    : false,
+                            linethrough: ["true", "True", true].includes(
+                                element.linethrough
+                            ),
                         });
 
-                        const textWidth = textMeasurement.width;
-                        console.log(element.text);
-                        if (element.left === undefined) {
-                            let width = element.width / 2;
-                            element.left = element.centerX - width;
-                        }
+                        let textWidth = textMeasurement.width;
 
-                        if (element.top === undefined) {
-                            element.top = element.centerY - 10;
-                        }
+                        // **Scale Positions & Sizes**
+                        let left = element.left
+                            ? parseFloat(element.left) * scaleX
+                            : (element.centerX - textWidth / 2) * scaleX;
+                        let top = element.top
+                            ? parseFloat(element.top) * scaleY
+                            : (element.centerY - 10) * scaleY;
+                        let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                        let width = (textWidth + 10) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
-                            left: parseFloat(element.left),
-                            top: parseFloat(element.top),
-                            width: textWidth + 10, // Default width if not provided
-                            fontSize: parseFloat(element.fontSize),
+                            left: parseFloat(left),
+                            top: parseFloat(top),
+                            width: width, // Default width if not provided
+                            fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily,
                             fontWeight: element.fontWeight,
