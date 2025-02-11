@@ -85,7 +85,16 @@ var swiper = new Swiper(".latest-draf-slider", {
 // Initialize all Swiper instances for each `.posts-card-post`
 const swipers = [];
 
+
+
 document.querySelectorAll(".posts-card-post").forEach((el, index) => {
+    const slides = el.querySelectorAll(".swiper-slide"); // Get all slides
+
+    if (slides.length <= 1) {
+        // If there's only one image, do not initialize Swiper
+        return;
+    }
+
     const swiperInstance = new Swiper(el, {
         slidesPerView: 1,
         spaceBetween: 30,
@@ -108,6 +117,7 @@ document.querySelectorAll(".posts-card-post").forEach((el, index) => {
 
     swipers.push(swiperInstance);
 });
+
 
 // Function to update dots for each Swiper instance
 function updateDots(swiperInstance, swiperContainer) {
