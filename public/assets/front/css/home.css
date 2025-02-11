@@ -526,8 +526,8 @@
 }
 
 .collection-wrapper .list_all_design_wrp {
-    max-width: 500px;
-    overflow-y: scroll;
+    max-height: calc(100vh - 25vh) !important;
+    overflow-y: scroll !important;
 }
 
 .collection-wrapper .filter-main-wrp .filters-drp {
