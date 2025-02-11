@@ -292,6 +292,7 @@ class AccountSettingController extends BaseController
         $id = Auth::guard('web')->user()->id;
 
         $user = User::with('user_profile_privacy')->withCount(
+
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
@@ -307,6 +308,12 @@ class AccountSettingController extends BaseController
 
             ]
         )->findOrFail($id);
+        $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
+        $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;        $user['photo_via_wifi'] = $user->photo_via_wifi;
+        $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
         $groupCount = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
             ->orderBy('id', 'DESC')

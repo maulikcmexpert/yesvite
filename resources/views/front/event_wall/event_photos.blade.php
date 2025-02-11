@@ -943,7 +943,8 @@
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
                                     <i id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                            alt="" class="emoji model_emoji"></i></button>
+                                            alt="" class="emoji model_emoji"></i>
+                                        </button>
 
                                 <div class="photos-likes-options-wrp emoji-picker model_emoji" id="emojiDropdown"
                                     style="display: none;">

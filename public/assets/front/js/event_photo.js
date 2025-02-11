@@ -229,7 +229,7 @@ $(document).ready(function () {
                                 console.log({ firstReaction });
                                 console.log(reactionIcons[firstReaction]);
                                 //let reaction = "\u{2764}";
-                                reactionImageHtml = `<img src="${reactionIcons[reaction]}" alt="Reaction Emoji">`;
+                                reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                             }
                         }
                         button.removeClass("liked"); // Remove liked class
@@ -289,6 +289,19 @@ $(document).on("click", function (e) {
 $(document).on("click", function (e) {
     if (!$(e.target).closest("#likeButton, #emojiDropdown").length) {
         $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
+    }
+});
+
+$(document).on("click", function (e) {
+    if (!$(e.target).closest(".posts-card-like-comment-right").length) {
+        $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
+    }
+});
+
+// Hide emoji picker when clicking outside
+$(document).on("click", function (e) {
+    if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1").length) {
+        $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
     }
 });
 $(document).on("click", "#delete_post", function () {
@@ -1587,6 +1600,7 @@ let longPressTimers;
 let isLong_press = false;
 
 $(document).on("mousedown", "#likeButtonModel", function () {
+    return;
     isLong_press = false; // Reset the flag
     const button = $(this);
 

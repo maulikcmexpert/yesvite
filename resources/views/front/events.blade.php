@@ -92,11 +92,12 @@
                     <div class="weekdays" style="position: sticky;"><div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div></div>
                     <div id="responsive-calender-months" class="responsive-calender-months"></div>
                   </div>
+                  <div class="responsive-calender-month-wrp">
+                    <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
+                  </div>
             </div>
 
-            <div class="responsive-calender-month-wrp">
-              <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
-            </div>
+
         </div>
     </div>
 <section>

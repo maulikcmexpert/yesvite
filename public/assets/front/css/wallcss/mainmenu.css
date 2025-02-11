@@ -2851,6 +2851,7 @@
     margin-bottom: 15px;
     display: inline-block;
     width: 50%;
+    text-align: left;
 }
 
 .responsive-calendar .month h3:nth-child(2) {
@@ -3008,11 +3009,12 @@
 .responsive-calendar .week{
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .responsive-calendar .day {
     width: 100%;
-    max-width: 127px;
+    max-width: 136px;
 }
 
 .responsive-calender-month-wrp {
@@ -3197,7 +3199,8 @@
         margin-bottom: 20px;
     }
     .responsive-calendar .day {
-        width: 70px;
+        width: 70px !important;
+        max-width: 70px !important;
     }
     .responsive-calender-month-wrp {
         display: block;
@@ -3228,11 +3231,28 @@
         text-align: center;
     }
 
+    .responsive-calendar .week{
+        display: inline-block;
+        /* text-align: center; */
+    }
+
     .mobile-calender-btn {
         display: flex;
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 340px;
+    }
+
+    .mobile-calender-btn {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 15px;
+        z-index: 20;
+        margin-top: 0px;
+    }
+    .responsive-calendar .weekdays {
+        justify-content: center;
     }
 }
 
@@ -3334,7 +3354,8 @@
         margin-bottom: 10px;
     }
     .responsive-calendar .day {
-        width: 68px;
+        width: 68px !important;
+        max-width: 68px !important;
     }
     .home-center-profile-img h5 {
         font-size: 17px;
@@ -3478,6 +3499,7 @@
 
     .responsive-calendar .month {
         max-width: 400px;
+        /* text-align: center; */
     }
     .responsive-calender-month-wrp {
         max-width: 400px;
@@ -3487,7 +3509,8 @@
         padding: 40px 10px;
     }
     .responsive-calendar .day {
-        width: 56px;
+        width: 56px !important;
+        max-width: 56px !important;
     }
     .calendar-heading {
         font-family: var(--SFProDisplay-Bold) !important;
@@ -3600,11 +3623,12 @@
         font-size: 16px;
     }
     .responsive-calender-month-wrp {
-        max-width: 316px;
+        max-width: calc(100% - 20px);
     }
     .responsive-calendar .day {
         font-size: 12px;
-        width: 42px;
+        width: 42px !important;
+        max-width: 42px !important;
     }
     .responsive-calendar .day .day-events span {
         vertical-align: top;

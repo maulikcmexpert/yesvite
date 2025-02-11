@@ -61,14 +61,29 @@
                                 @if($upcomingEvent['host_profile'] != "")
                                     <img src="{{$upcomingEvent['host_profile']}}" loading="lazy" alt="">
                                 @else
-                                @php
+                                <!-- @php
                                     $name = $upcomingEvent['host_name'];
                                     $parts = explode(" ", $name);
                                     $firstInitial = isset($upcomingEvent['host_firstname'][0]) ? strtoupper($upcomingEvent['host_firstname'][0][0]) : '';
                                     $secondInitial = isset($upcomingEvent['host_lastname'][1]) ? strtoupper($upcomingEvent['host_lastname'][1][0]) : '';
                                     $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
                                     $fontColor = "fontcolor" . strtoupper($firstInitial);
+                                @endphp -->
+                                @php
+                                    $name = $upcomingEvent['host_name'];
+                                    $parts = explode(" ", $name);
+
+                                    // Correcting the way first and last initials are handled
+                                    $firstInitial = isset($upcomingEvent['host_firstname'][0]) ? strtoupper($upcomingEvent['host_firstname'][0]) : '';  // Take the first letter of the first name
+                                    $secondInitial = isset($upcomingEvent['host_lastname'][0]) ? strtoupper($upcomingEvent['host_lastname'][0]) : '';  // Take the first letter of the last name
+
+                                    // Combine both initials
+                                    $initials = strtoupper($firstInitial) . strtoupper($secondInitial);
+
+                                    // Font color based on first initial
+                                    $fontColor = "fontcolor" . strtoupper($firstInitial);
                                 @endphp
+
                                 <h5 class="{{$fontColor}}"> {{ $initials }}</h5>
                                 @endif
                             </div>

@@ -267,8 +267,9 @@
                                      </div>
                                      <div class="guest-user-list rsvp-guest-user-list-wrp cmn-card">
                                          <div class="rsvp-guest-user-list-title">
-                                           <h5 class="heading">Guest List ({{ count($getInvitedusers['all_invited_users'] ?? []) }}
-                                            Guests)</h5>
+                                           <!-- <h5 class="heading">Guest List ({{ count($getInvitedusers['all_invited_users'] ?? []) }}
+                                            Guests)</h5> -->
+                                           <h5 class="heading">Guest List</h5>
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#rsvp-guest-list-modal">See All</a>
                                          </div>
                                          <div>
@@ -2065,8 +2066,9 @@
           <div class="modal-header">
               <div class="d-flex align-items-center">
                   <div>
-                    <h4 class="modal-title" id="aboutsuccessLabel">Guest List ({{ count($getInvitedusers['all_invited_users']?? []) }}
-                        Guests)</h4>
+                    <!-- <h4 class="modal-title" id="aboutsuccessLabel">Guest List ({{ count($getInvitedusers['all_invited_users']?? []) }}
+                        Guests)</h4> -->
+                    <h4 class="modal-title" id="aboutsuccessLabel">Guest List</h4>
                   </div>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

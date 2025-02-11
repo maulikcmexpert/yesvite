@@ -104,14 +104,20 @@ class EventController extends BaseController
         //     ->get();
 
         $query = $request->input('search');
-        $categories = EventDesignCategory::with(['subcategory.textdatas']) // Load subcategories and their textdatas
-            ->when($query, function ($queryBuilder) use ($query) {
-                return $queryBuilder->where('category_name', 'LIKE', "%$query%");
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->whereHas('subcategory', function ($query) {
+                $query->whereHas('textdatas'); // Ensure subcategories have textdatas
             })
-            ->orderBy('id', 'desc')
+            ->with([
+                'subcategory' => function ($query) {
+                    $query->whereHas('textdatas') // Only subcategories with textdatas
+                        ->with('textdatas'); // Load textdatas
+                }
+            ])
+            ->orderBy('id', 'ASC')
             ->get();
 
-      
+
         // Calculate total count of textdatas across all subcategories
         $totalTextDataCount = $categories->sum(function ($category) {
             return $category->subcategory->sum(function ($subcategory) {
