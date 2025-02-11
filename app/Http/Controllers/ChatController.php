@@ -61,18 +61,18 @@ class ChatController extends BaseController
         }
         return true;
     }
-    public function index($id = null,$is_host=null)
+    public function index($id = null, $is_host = null)
     {
-        $hosts_id="";
-        $hosts_name="";
-        $hosts_profile="";
+        $hosts_id = "";
+        $hosts_name = "";
+        $hosts_profile = "";
         if ($id !== null) {
             $hosts_id = decrypt($id);
             $hosts_data = User::where('id', $hosts_id)->first();
             if (!$hosts_data) {
                 $hosts_data = contact_sync::where('id', $hosts_id)->first();
             }
-        
+
             if ($hosts_data) {
                 $hosts_name = trim(($hosts_data->firstName ?? $hosts_data->firstname) . ' ' . ($hosts_data->lastName ?? $hosts_data->lastname));
                 $photo_field = isset($hosts_data->photo) && !empty($hosts_data->photo) ? $hosts_data->photo : $hosts_data->profile;
