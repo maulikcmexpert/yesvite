@@ -177,8 +177,8 @@ class EventPhotoController extends Controller
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
             $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
-            $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->exists() ? 1 : 0,
-            $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+            // $is_Co_Host =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->exists() ? 1 : 0;
+            $eventDetails['is_co_host'] =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->exists() ? 1 : 0;
 
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
             $rsvp_status = "";
