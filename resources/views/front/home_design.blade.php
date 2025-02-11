@@ -123,7 +123,7 @@
                         <div class="dropdown-menu collection-menu">
                             <div class="filter-head">
                                 <h5>Categories</h5>
-                                <a href="#" class="reset-btn" id="resetCategories">Reset</a>
+                                <a href="#" class="reset-btn" id="resetCategoriesNew">Reset</a>
                             </div>
                             <div class="filter-categories">
                                 <div class="accordion" id="accordionExample">
@@ -151,7 +151,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input"
+                                                                    <input class="form-check-input subcategory_{{$category->id}}"
                                                                         name="design_subcategory_new" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"

@@ -31,25 +31,38 @@
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
                         // Load background image (imagePath)
-                        if (data.imagePath) {
-                            fabric.Image.fromURL(data.imagePath, function(img) {
-                                var canvasWidth = canvas.getWidth();
-                                var canvasHeight = canvas.getHeight();
+                        if (data.imagePath) {                           
 
-                                // Calculate scale to maintain aspect ratio
-                                var scaleFactor = Math.min(canvasWidth / img.width, canvasHeight / img.height);
+                        fabric.Image.fromURL(data.imagePath, function (img) {
+                            img.crossOrigin = "anonymous";
+                            var canvasWidth = canvas.getWidth();
+                            var canvasHeight = canvas.getHeight();
 
-                                img.set({
-                                    left: 0,
-                                    top: 0,
-                                    scaleX: scaleFactor,
-                                    scaleY: scaleFactor,
-                                    selectable: false, // Non-draggable background image
-                                    hasControls: false // Disable resizing controls
-                                });
-                                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+                            // Use Math.max to ensure the image covers the entire canvas
+                            var scaleFactor = Math.max(
+                                canvasWidth / img.width,
+                                canvasHeight / img.height
+                            );
+
+                            img.set({
+                                left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
+                                top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
+                                scaleX: scaleFactor,
+                                scaleY: scaleFactor,
+                                selectable: false,
+                                hasControls: false,
                             });
-                        }
+
+                            // Disable image smoothing for high-quality rendering
+                            canvas.getContext("2d").imageSmoothingEnabled = false;
+
+                            // Set high-quality background image
+                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                                crossOrigin: "anonymous",
+                                backgroundImageStretch: true,
+                            });
+                        });
+                    }
 
                         if (data.static_information) {
                             const staticInfo = JSON.parse(data.static_information);
@@ -1659,17 +1672,49 @@
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    fabric.Image.fromURL(e.target.result, function(img) {
+
+                    fabric.Image.fromURL(e.target.result, function (img) {
+                        img.crossOrigin = "anonymous";
+                        var canvasWidth = canvas.getWidth();
+                        var canvasHeight = canvas.getHeight();
+
+                        // Use Math.max to ensure the image covers the entire canvas
+                        var scaleFactor = Math.max(
+                            canvasWidth / img.width,
+                            canvasHeight / img.height
+                        );
+
                         img.set({
-                            left: 0,
-                            top: 0,
-                            selectable: false, // Make the image non-draggable
-                            hasControls: false // Disable resizing controls for the image
+                            left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
+                            top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
+                            scaleX: scaleFactor,
+                            scaleY: scaleFactor,
+                            selectable: false,
+                            hasControls: false,
                         });
-                        canvas.setBackgroundImage(img);
+
+                        // Disable image smoothing for high-quality rendering
+                        canvas.getContext("2d").imageSmoothingEnabled = false;
+
+                        // Set high-quality background image
+                        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                            crossOrigin: "anonymous",
+                            backgroundImageStretch: true,
+                        });
                         canvas.renderAll();
-                        console.log(`Image width: ${img.width}, Image height: ${img.height}`);
                     });
+
+                    // fabric.Image.fromURL(e.target.result, function(img) {
+                    //     img.set({
+                    //         left: 0,
+                    //         top: 0,
+                    //         selectable: false, // Make the image non-draggable
+                    //         hasControls: false // Disable resizing controls for the image
+                    //     });
+                    //     canvas.setBackgroundImage(img);
+                    //     canvas.renderAll();
+                    //     console.log(`Image width: ${img.width}, Image height: ${img.height}`);
+                    // });
                 };
                 reader.readAsDataURL(file);
             }

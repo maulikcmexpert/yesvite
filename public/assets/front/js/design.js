@@ -13,6 +13,17 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
+let element = document.querySelector(".image-edit-inner-img");
+
+if (element) {
+    var { width, height } = element.getBoundingClientRect();
+    console.log("Width:", width, "Height:", height);
+} else {
+    var { width, height } = { width: 590, height: 880 };
+    console.log(width, height); // Output: 590 880
+
+    console.log("Element not found!");
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded fired");
@@ -116,8 +127,8 @@ $(document).on("click", ".design-cards", function () {
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
-        width: 345,
-        height: 490,
+        width: width,
+        height: height,
     });
 
     // Append the new canvas to the modal-design-card
@@ -127,8 +138,8 @@ $(document).on("click", ".design-cards", function () {
     $("#exampleModal").modal("show");
 
     canvas = new fabric.Canvas("imageEditor2", {
-        width: 345,
-        height: 490,
+        width: width,
+        height: height,
         position: "relative",
     });
 
@@ -1505,8 +1516,8 @@ async function bindData(current_event_id) {
         $(this).addClass("activated");
     });
     canvas = new fabric.Canvas("imageEditor1", {
-        width: 345, // Canvas width
-        height: 490, // Canvas height
+        width: width, // Canvas width
+        height: height, // Canvas height
     });
     const ctx = canvas.getContext("2d");
     const defaultSettings = {

@@ -4182,4 +4182,25 @@ class EventController extends BaseController
             Session::forget('notification_event_ids');
         }
     }
+    public function notification_on_off(Request $request){
+        $status =$request->status;
+        $is_owner=$request->is_owner;
+        $event_id=$request->event_id;
+        $user  = Auth::guard('web')->user();
+
+        if($is_owner=="1"){
+            $event=Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
+            $event->update(['notification_on_off' => $status]);
+
+        }else{
+            $Guest = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user->id])->first();
+            $Guest->update(['notification_on_off' => $status]);
+        }
+       
+        if($status=="1"){
+            return response()->json(['status' => 1, 'message' =>'Notification turnen off']);
+        }else{
+            return response()->json(['status' => 1, 'message' =>'Notification turnen on']);
+        }
+    }
 }
