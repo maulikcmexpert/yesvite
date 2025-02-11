@@ -1098,7 +1098,7 @@ $notification_list=getNotificationList();
                                         @elseif($inner_data['media_type']=="video")
                                           <span> liked your posted video on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @else
-                                        <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
+                                        <span> liked a post you made on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
