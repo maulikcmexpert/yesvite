@@ -4199,9 +4199,9 @@ class EventController extends BaseController
         }
        
         if($status=="1"){
-            return response()->json(['status' => 1, 'message' =>'Notification turnen off']);
+            return response()->json(['status' => 1, 'message' =>'Notification turned on']);
         }else{
-            return response()->json(['status' => 1, 'message' =>'Notification turnen on']);
+            return response()->json(['status' => 1, 'message' =>'Notification turned off']);
         }
     }
 }
