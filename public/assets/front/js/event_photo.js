@@ -1875,6 +1875,11 @@ $(document).ready(function () {
         "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
+
+    $(document).on('click','#likeButtonModel',function(){
+        $("#emojiDropdown1").show();
+
+    });
     $(".posts-card-like-comment-right").each(function () {
       const $container = $(this); // Get the current container
       const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
@@ -1882,11 +1887,7 @@ $(document).ready(function () {
       let pressTimer;
 
       // Handle long press to show emoji dropdown (for both desktop and mobile)
-      $(document).on('click','#likeButtonModel',function(){
-          $emojiDropdown.show(); // Show emoji dropdown after long press
-        // pressTimer = setTimeout(function () {
-        // }, 500); // Trigger long press after 0.5 seconds
-      });
+
 
     //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
     //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
