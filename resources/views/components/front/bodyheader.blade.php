@@ -1669,8 +1669,8 @@ $notification_list=getNotificationList();
 
                              <div class="collapse navbar-collapse" id="mynavbar">
                                  <ul class="navbar-nav align-items-center ms-auto">
-                                     <li class="nav-item {{ (Request::segment(1) == 'features')? 'active':'' }}">
-                                         <a class="nav-link" href="{{ route('features')}}">Home</a>
+                                     <li class="nav-item {{ (Request::segment(1) == 'homes')? 'active':'' }}">
+                                         <a class="nav-link" href="{{ route('homes')}}">Home</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
                                          <a class="nav-link" href="{{ route('about')}}">About Us</a>
