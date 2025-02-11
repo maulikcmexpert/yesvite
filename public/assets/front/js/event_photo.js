@@ -200,6 +200,13 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    // const post = {
+                    //     id: eventPostId,
+                    //     reactionList: response.reactionList,
+                    //     // self_reaction: response.self_reaction,
+                    //     total_likes: response.count
+                    // };
+                    // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
                     let reactionImageHtml = "";
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
@@ -211,7 +218,7 @@ $(document).ready(function () {
                     } else {
                         // ✅ User has removed like, set the first reaction from response
                         console.log(
-                            "Like removed, updating first available reaction..."
+                            "Like removed sf.kkshdfhjkfhjkhfjkhsdjkjkshfjksdhfhfdj, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
                             let firstReaction = response.reactionList[0];
@@ -223,8 +230,8 @@ $(document).ready(function () {
                                     )
                                 );
                             }
-                            if (reactionIcons[firstReaction]) {
-                                reactionImageHtml = `<img src="${reactionIcons[firstReaction]}" alt="Reaction Emoji">`;
+                            if (reactionIcons[selectedEmoji]) {
+                                reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                             } else {
                                 console.log({ firstReaction });
                                 console.log(reactionIcons[firstReaction]);
@@ -238,10 +245,10 @@ $(document).ready(function () {
                         ); // Reset button to default
                     }
 
-                    // ✅ Update the reaction image container
+
                     $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
-                    // ✅ Update like count
+
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
@@ -301,12 +308,21 @@ $(document).on("click", function (e) {
 });
 
 // Hide emoji picker when clicking outside
-$(document).on("click", function (e) {
-    if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1 , #emojiDropdown").length) {
-        $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
-        $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
-    }
-});
+
+// pratik sir code
+// $(document).on("click", function (e) {
+//     if (!$(e.target).closest("#likeButtonModel, #emojiDropdown1 , #emojiDropdown").length) {
+//         $("#emojiDropdown1").hide(); // Hide emoji picker when clicked outside
+//         $("#emojiDropdown").hide(); // Hide emoji picker when clicked outside
+//     }
+// });
+
+// end code
+
+
+
+
+//
 
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
@@ -1878,15 +1894,15 @@ $(document).ready(function () {
       let pressTimer;
 
       // Handle long press to show emoji dropdown (for both desktop and mobile)
-      $likeButton.on("mousedown touchstart", function () {
-        pressTimer = setTimeout(function () {
+      $(document).on('click','#likeButtonModel',function(){
           $emojiDropdown.show(); // Show emoji dropdown after long press
-        }, 500); // Trigger long press after 0.5 seconds
+        // pressTimer = setTimeout(function () {
+        // }, 500); // Trigger long press after 0.5 seconds
       });
 
-      $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-        clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-      });
+    //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+    //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+    //   });
 
       // Handle emoji click
       $emojiDropdown.on("click", ".emoji", function () {
@@ -1899,10 +1915,12 @@ $(document).ready(function () {
       });
 
       // Optional: Hide the emoji dropdown if you click outside of it
-      $(document).on("click touchstart", function (e) {
-        if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-          $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-        }
-      });
+    //   $(document).on("click touchstart", function (e) {
+      $(document).on('click','#likeButtonModel',function(){
+          if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+            $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+          }
+      })
+    //   });
     });
   });
