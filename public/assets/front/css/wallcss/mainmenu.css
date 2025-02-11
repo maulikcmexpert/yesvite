@@ -3121,6 +3121,15 @@
     top: 100px;
 }
 
+.supportive-home-wrp .responsive-calender-month-wrp{
+    display: none;
+}
+
+.supportive-home-wrp .calendar-heading{
+    display: none;
+}
+
+
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
