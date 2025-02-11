@@ -24,7 +24,7 @@
                 <h3>Hosted by <span>{{ $eventDetails['hosted_by'] }}</span></h3>
             </div>
         </div>
-        @if($eventDetails['is_event_owner']==1 || $eventDetails['is_co_host']=="1")
+        @if($eventDetails['is_co_host']=="1")
         <div class="dropdown hosted-by-title-dropdown">
             <button class="hosted-by-title-menu dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
