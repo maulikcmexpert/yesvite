@@ -1652,7 +1652,59 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
         }),
         success: function (response) {
             if (response.status === 1) {
-                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
+                // const post = {
+                //     id: eventPostId,
+                //     reactionList: response.reactionList,
+                //     // self_reaction: response.self_reaction,
+                //     total_likes: response.count
+                // };
+                // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
+                let reactionImageHtml = "";
+                if (response.is_reaction == "1") {
+                    // ✅ User has liked the post, update the reaction image
+                    console.log("Like given, updating reaction image...");
+                    if (reactionIcons[selectedEmoji]) {
+                        console.log (reactionIcons[selectedEmoji]);
+                        reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+                    }
+                    button.addClass("liked"); // Add liked class
+                } else {
+                    // ✅ User has removed like, set the first reaction from response
+                    console.log(
+                        "Like removed , updating first available reaction..."
+                    );
+                    if (response.reactionList.length > 0) {
+                        let firstReaction = response.reactionList[0];
+                        if (firstReaction.startsWith("\\u{")) {
+                            firstReaction = String.fromCodePoint(
+                                parseInt(
+                                    firstReaction.replace(/\\u{|}/g, ""),
+                                    16
+                                )
+                            );
+                        }
+                        if (reactionIcons[selectedEmoji]) {
+                            reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+                        } else {
+                            console.log({ firstReaction });
+                            console.log(reactionIcons[firstReaction]);
+                            //let reaction = "\u{2764}";
+                            reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+                        }
+                    }
+                    button.removeClass("liked"); // Remove liked class
+                    button.html(
+                        '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+                    ); // Reset button to default
+                }
+
+
+                $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
+
+
+                $(`#likeCount_${eventPostId}`).text(
+                    `${response.count} Likes`
+                );
             } else {
                 alert(response.message);
             }
