@@ -274,7 +274,7 @@
                         const subcategoryId = $(this).data('subcategory-id');
 
                         // Show images matching the selected categories and subcategories
-                        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                        $(`.image-item[data-category-id="${categoryId}"]`)
                             .show();
                         var visibleItems = $('.all_designs:visible').length;
                         $('.total_design_count').text(visibleItems + ' Items');
