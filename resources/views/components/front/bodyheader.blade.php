@@ -1654,6 +1654,7 @@ $notification_list=getNotificationList();
             </div>
             <ul>
               <li><a href="{{route('profile')}}">Profile</a></li>
+              <li><a href="{{route('profile.transaction')}}">Transactions History</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
               {{-- <li><a href="#">Pro Subscription</a></li> --}}
             </ul>
