@@ -1126,9 +1126,22 @@ if (hiddenData != undefined) {
 }
 
 $(document).on('click', '.notification-showall-btn', function() {
-    $('.notification_drp_down_div').each(function(index) {
-        let count = index + 1; 
-        $('#collapseOne'+count).addClass('show');
-        $('.main-notification-div-list').removeClass('collapsed');
-    });
+    var show=$(this).attr('data-show');
+    if(show=="0"){
+        $(this).text('Minimize All');
+        $(this).attr('data-show','1');
+        $('.notification_drp_down_div').each(function(index) {
+            let count = index + 1; 
+            $('#collapseOne'+count).addClass('show');
+            $('.main-notification-div-list').removeClass('collapsed');
+        });
+    }else{
+        $(this).text('Show All');
+        $('.notification_drp_down_div').each(function(index) {
+            let count = index + 1; 
+            $('#collapseOne'+count).removeClass('show');
+            $('.main-notification-div-list').addClass('collapsed');
+        });
+    }
+   
 });
