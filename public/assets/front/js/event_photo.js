@@ -1632,6 +1632,9 @@ $(document).ready(function () {
                     $(`#like_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
                 } else {
                     alert(response.message);
                 }
