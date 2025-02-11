@@ -999,7 +999,6 @@ function datepicker() {
             // })
 
             .on("dp.close", function () {
-            
                 // const picker = $(this).data("DateTimePicker");
                 // const startTime = $(this).closest("div").find(".activity_start_time").val();
                 // const startMoment = moment(startTime, "LT") : moment().hours(12).minutes(0).seconds(0);
@@ -1459,21 +1458,25 @@ function set_activity_html(selectedDates) {
     // var endDate = moment(
     //     sortedDates.length === 2 ? sortedDates[1] : sortedDates[0]
     // );
-    var sortedDates = [...selectedDates].sort((a, b) => moment(a, "MM-DD-YYYY") - moment(b, "MM-DD-YYYY"));
+    var sortedDates = [...selectedDates].sort(
+        (a, b) => moment(a, "MM-DD-YYYY") - moment(b, "MM-DD-YYYY")
+    );
 
     var startDate = moment(sortedDates[0], "MM-DD-YYYY");
-    var endDate = moment(sortedDates.length === 2 ? sortedDates[1] : sortedDates[0], "MM-DD-YYYY");
+    var endDate = moment(
+        sortedDates.length === 2 ? sortedDates[1] : sortedDates[0],
+        "MM-DD-YYYY"
+    );
 
-    console.log('startDate :', startDate.format("MM-DD-YYYY"));
-    console.log('endDate :', endDate.format("MM-DD-YYYY"));
+    console.log("startDate :", startDate.format("MM-DD-YYYY"));
+    console.log("endDate :", endDate.format("MM-DD-YYYY"));
 
     var i = 0;
     var start_time = $("#start-time").val();
-    console.log('sortedDates :'+sortedDates);
-    console.log('startDate :' +startDate);
-    console.log('endDate :' +endDate);
-    console.log('start_time :' +start_time);
-
+    console.log("sortedDates :" + sortedDates);
+    console.log("startDate :" + startDate);
+    console.log("endDate :" + endDate);
+    console.log("start_time :" + start_time);
 
     // Loop through the date range, including startDate and endDate
     // activity_html_set(startDate,endDate,dateID,sortedDates);
@@ -1495,8 +1498,12 @@ function set_activity_html(selectedDates) {
             <form>
                 ${
                     // startDate.isSame(moment(sortedDates[0]), "day")
-                    startDate.startOf('day').isSame(moment(sortedDates[0], "MM-DD-YYYY").startOf('day'), "day")
-
+                    startDate
+                        .startOf("day")
+                        .isSame(
+                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                            "day"
+                        )
                         ? `
                             <h4>Event Start</h4>
                             <div class="row">
@@ -1568,7 +1575,7 @@ function set_activity_html(selectedDates) {
     `;
 
         $(".activity_bar").append(formHtml);
-        $(".activity_bar")[0].offsetHeight;  // Trigger reflow/repaint
+        $(".activity_bar")[0].offsetHeight; // Trigger reflow/repaint
 
         // datepicker();
         startDate.add(1, "day");
@@ -1613,14 +1620,14 @@ $(document).on("click", ".add_more_activity", function (e) {
     var start_time = $("#ac-start-time").val();
     var firstActivity = $(this).data("activity");
 
-    console.log('startime :'+start_time);
-    console.log('firstActivity :'+firstActivity);
+    console.log("startime :" + start_time);
+    console.log("firstActivity :" + firstActivity);
     if (
         (start_time == null || start_time == "") &&
         firstActivity == "add_activity_1"
     ) {
-        console.log('startime :'+start_time);
-        console.log('firstActivity :'+firstActivity);
+        console.log("startime :" + start_time);
+        console.log("firstActivity :" + firstActivity);
         e.preventDefault();
         toastr.error("Plaese select start time");
         return;
@@ -4654,7 +4661,6 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
-  
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4684,7 +4690,6 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
 });
 
 function li_design_click() {
-
     // console.log(eventData);
     // if (
     //     eventData.event_type != "" &&
@@ -5047,7 +5052,11 @@ function save_image_design(downloadImage, textData) {
         });
 }
 $(document).on("click", ".li_event_details", async function () {
-    await saveDesignData();
+    $("#loader").css("display", "flex");
+    setTimeout(async function () {
+        await saveDesignData();
+        $("#loader").css("display", "none");
+    }, 1000);
 });
 
 $(document).on("click", ".li_event_detail", function () {
