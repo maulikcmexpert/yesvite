@@ -1082,6 +1082,11 @@
     .step_2 {
         padding: 10px 13px;
     }
+
+    .step_2 .list_all_design_catgeory {
+        max-height: calc(100vh - 32vh) !important;
+        overflow-y: scroll !important;
+    }
 }
 
 @media only screen and (max-width: 767px) {
