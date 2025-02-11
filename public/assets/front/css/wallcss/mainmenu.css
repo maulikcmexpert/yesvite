@@ -3132,7 +3132,17 @@
 .supportive-home-wrp .responsive-calendar .month h3:last-of-type{
     display: none !important;
 }
-
+.today-btn-home{
+    border: 1px solid var(--border);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    color: var(--secondary-black);
+    display: inline-block;
+    background-color: transparent;
+}
 
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
