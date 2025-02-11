@@ -530,6 +530,7 @@
 .collection-wrapper .list_all_design_wrp {
     max-height: calc(100vh - 25vh) !important;
     overflow-y: scroll !important;
+    padding-bottom: 20px;
 }
 
 .collection-wrapper .filter-main-wrp .filters-drp {
@@ -1089,7 +1090,7 @@
     }
 
     .collection-wrapper .list_all_design_wrp {
-        max-height: calc(100vh - 32vh) !important;
+        /* max-height: calc(100vh - 32vh) !important; */
         overflow-y: scroll !important;
     }
 }
