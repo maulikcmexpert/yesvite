@@ -222,23 +222,27 @@
                 </div>
                 @if ($eventDetail['id'] == '')
                 <div class="new-event-btn">
-                    <a href="#" class="cmn-btn final_create_event">Purchase & Send Invites</a>
+                    <a href="#" class="cmn-btn final_create_event">Send Invites</a>
+                    {{-- <a href="#" class="cmn-btn final_create_event">Purchase & Send Invites</a> --}}
                 </div>
                 
             @else    
             <div class="new-event-btn text-center">
-                <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Purchase & Send Invites</button>
+                {{-- <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Purchase & Send Invites</button> --}}
+                <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Send Invites</button>
             </div>
             @endif
             </div>
         </div>
         @if ($eventDetail['id'] == '')
         <div class="new-event-btn new-event-respo">
-            <a href="#" class="cmn-btn final_create_event" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
+            <a href="#" class="cmn-btn final_create_event" data-bs-toggle="modal" data-bs-target="#eventModal">Send Invites</a>
+            {{-- <a href="#" class="cmn-btn final_create_event" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a> --}}
         </div>
         @else    
         <div class="new-event-btn new-event-respo text-center">
-            <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a>
+            <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Send Invites</a>
+            {{-- <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a> --}}
         </div>
         @endif
     </div>
