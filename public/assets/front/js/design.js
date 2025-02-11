@@ -2726,23 +2726,30 @@ async function bindData(current_event_id) {
 
 function getTextDataFromCanvas() {
     var objects = canvas.getObjects();
-    console.log(objects);
     var textData = [];
     var shapeImageData = [];
+
+    // **Current Dynamic Canvas Size**
+    let canvasWidth = canvas.getWidth();
+    let canvasHeight = canvas.getHeight();
+
+    // **Calculate Reverse Scaling Factors**
+    const scaleX = originalWidth / canvasWidth;
+    const scaleY = originalHeight / canvasHeight;
+
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
-            console.log(obj.underline);
             var centerPoint = obj.getCenterPoint();
+
+            // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
-                left: obj.left,
-                top: obj.top,
-                fontSize: parseInt(obj.fontSize),
+                left: obj.left * scaleX, // Scale back X position
+                top: obj.top * scaleY, // Scale back Y position
+                fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                centerX: centerPoint.x, // Use the center point from getCenterPoint()
-                centerY: centerPoint.y,
-                dx: obj.left, // Calculate dx
-                dy: obj.top, // Calculate dy
+                centerX: centerPoint.x * scaleX, // Scale back center position
+                centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
@@ -2756,21 +2763,23 @@ function getTextDataFromCanvas() {
                 rotation: obj.angle,
             });
         }
+
         if (obj.type === "image") {
-            var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
-            var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
+            var centerX = obj.left + obj.getScaledWidth() / 2;
+            var centerY = obj.top + obj.getScaledHeight() / 2;
 
             shapeImageData = {
-                shape: obj.clipPath ? obj.clipPath.type : "none", // Handle case when clipPath is null
-                centerX: centerX,
-                centerY: centerY,
-                width: obj.getScaledWidth(), // Get the scaled width
-                height: obj.getScaledHeight(), // Get the scaled height
+                shape: obj.clipPath ? obj.clipPath.type : "none",
+                centerX: centerX * scaleX, // Scale back image center position
+                centerY: centerY * scaleY,
+                width: obj.getScaledWidth() * scaleX, // Scale back width
+                height: obj.getScaledHeight() * scaleY, // Scale back height
             };
         }
     });
 
-    dbJson = {
+    // **Final JSON to Save**
+    let dbJson = {
         textElements: textData,
         shapeImageData: shapeImageData,
     };
@@ -2778,6 +2787,7 @@ function getTextDataFromCanvas() {
 
     return dbJson;
 }
+
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
         loadAgain();
