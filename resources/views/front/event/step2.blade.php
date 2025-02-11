@@ -302,7 +302,6 @@
         })
 
         function allCheckFun() {
-            $("#search_design_category").val('')
             $('.image-item-new').hide();
             $("#category_name").hide();
             $("#allchecked").hide();
@@ -311,6 +310,10 @@
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
+            if($("#search_design_category").val() ==""){
+                return
+            }
+            $("#search_design_category").val('')
             let search_value ='';
             $.ajax({
                     url: base_url + "search_design",

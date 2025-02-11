@@ -264,15 +264,19 @@ $(document).on("click", "#allchecked", function () {
 });
 
 function allCheckFun() {
-    $("#search_design_category").val("");
     $(".image-item-new").hide();
     $("#category_name").hide();
     $("#allchecked").hide();
-    $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
-    $(".image-item").show();
+    // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
+    $("#Allcat").prop('checked',true)
+    $('.image-item').show();
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
     let search_value = "";
+    if($("#search_design_category").val() ==""){
+        return
+    }
+    $("#search_design_category").val("");
     $.ajax({
         url: base_url + "search_features",
         method: "GET",
