@@ -3129,6 +3129,10 @@
     display: none;
 }
 
+.supportive-home-wrp .responsive-calendar .month h3{
+    display: none;
+}
+
 
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
