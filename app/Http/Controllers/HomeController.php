@@ -227,7 +227,7 @@ class HomeController extends BaseController
                     $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                     $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                     $eventDetail['event_date'] = $value->start_date;
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d Y'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
 
                     $event_time = "-";
