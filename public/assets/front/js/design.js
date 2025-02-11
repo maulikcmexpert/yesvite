@@ -2739,6 +2739,7 @@ function getTextDataFromCanvas() {
 
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
+            alert(obj.text);
             var centerPoint = obj.getCenterPoint();
 
             // **Convert positions back to original 345×490**
