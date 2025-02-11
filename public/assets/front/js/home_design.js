@@ -170,6 +170,7 @@ $(document).on("click", "#allchecked", function () {
 });
 
 function allCheckFun() {
+    $('input[name="design_subcategory_new"]').prop('checked',false)
     $(".categoryNew").show();
     $(".subcategoryNew").hide();
     $(".image-item-new").hide();
