@@ -267,7 +267,7 @@ function getTotalUnreadMessageCount()
 function getNotificationList($filter = [])
 {
     $user = Auth::guard('web')->user();
-    dd($user);
+    // dd($user);
     // $rawData = $request->getContent();
     // $input = json_decode($rawData, true);
     // if ($input == null) {
