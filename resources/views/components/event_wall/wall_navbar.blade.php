@@ -54,7 +54,7 @@
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['podluck'] == "1") ||
             ($eventDetails['is_host'] == 0 && $eventDetails['is_co_host'] == "0"  && $eventDetails['rsvp_status'] == '1'  &&  $eventDetails['podluck'] == "1") ||
-            ($eventDetails['is_co_host'] == "1" && $eventDetails['podluck'] == "1")
+            ($eventDetails['is_co_host'] == "0" && $eventDetails['podluck'] == "1")
             // ($eventDetails['is_co_host'] == "0" && $eventDetails['rsvp_status'] =='1')
         )
         <!-- Potluck Tab -->
