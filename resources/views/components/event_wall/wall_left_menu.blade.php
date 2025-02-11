@@ -1,4 +1,4 @@
-{{dd($eventDetails)}}
+{{-- {{dd($eventDetails)}} --}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -24,7 +24,7 @@
                 <h3>Hosted by <span>{{ $eventDetails['hosted_by'] }}</span></h3>
             </div>
         </div>
-        @if($eventDetails['is_co_host']=="1")
+        @if($eventDetails['is_co_host']=="1" || $eventDetails['is_host']==1) 
         <div class="dropdown hosted-by-title-dropdown">
             <button class="hosted-by-title-menu dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -44,7 +44,7 @@
                       Edit Event
                     </a>
                   </li>
-                  @if($eventDetails['is_event_owner']==1)
+                  @if($eventDetails['is_host']==1)
                   <li>
                     <a class="dropdown-item" href="{{ route('event', ['id' => encrypt($eventDetails['id']), 'iscopy' => 1]) }}">
                       <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
