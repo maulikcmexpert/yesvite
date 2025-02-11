@@ -656,19 +656,29 @@ async function bindData(current_event_id) {
                 var canvasWidth = canvas.getWidth();
                 var canvasHeight = canvas.getHeight();
 
-                var scaleFactor = Math.min(
+                // Use Math.max to ensure the image covers the entire canvas
+                var scaleFactor = Math.max(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
+
                 img.set({
-                    left: 0,
-                    top: 0,
+                    left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
+                    top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
                     scaleX: scaleFactor,
                     scaleY: scaleFactor,
                     selectable: false,
                     hasControls: false,
                 });
-                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+
+                // Disable image smoothing for high-quality rendering
+                canvas.getContext("2d").imageSmoothingEnabled = false;
+
+                // Set high-quality background image
+                canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                    crossOrigin: "anonymous",
+                    backgroundImageStretch: true,
+                });
             });
 
             if (dbJson) {
