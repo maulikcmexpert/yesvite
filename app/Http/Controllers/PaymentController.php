@@ -59,9 +59,10 @@ class PaymentController extends BaseController
                 'cancel_url' => route('payment.failed'),
                 'expand' => ['line_items'],
             ]);
-            dd($session->url);
+
             return redirect($session->url);
         } catch (\Exception $e) {
+
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
