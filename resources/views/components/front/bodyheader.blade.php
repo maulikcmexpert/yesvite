@@ -1658,7 +1658,7 @@ $notification_list=getNotificationList();
               <li><a href="{{route('profile')}}">Profile</a></li>
               <li><a href="{{route('profile.transaction')}}">Transactions History</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
-              <li><a href="javascript:;" class="credits_balance_amout_wrp">Credits  
+              <li><a href="javascript:;" id="buycredits" class="credits_balance_amout_wrp">Credits  
                                         <h5>
                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$userprofile->coins}}</span>
