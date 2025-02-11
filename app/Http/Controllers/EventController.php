@@ -4190,11 +4190,12 @@ class EventController extends BaseController
 
         if($is_owner=="1"){
             $event=Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
-            $event->update(['notification_on_off' => $status]);
-
+            $event->notification_on_off = $status;
+            $event->save();
         }else{
             $Guest = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user->id])->first();
-            $Guest->update(['notification_on_off' => $status]);
+            $Guest->notification_on_off = $status;
+            $Guest->save();
         }
        
         if($status=="1"){
