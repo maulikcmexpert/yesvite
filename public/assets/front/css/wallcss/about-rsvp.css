@@ -1,18 +1,18 @@
-.about-details h4.title{
+.about-details h4.title {
     color: var(--primary-black);
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 20px;
 }
 
-.birth-details .birth-img{
-  width: 67px;
-  min-width: 67px;
-  height: 66px;
-  margin-right: 16px;
+.birth-details .birth-img {
+    width: 67px;
+    min-width: 67px;
+    height: 66px;
+    margin-right: 16px;
 }
 
-.birth-details .birth-img h5{
+.birth-details .birth-img h5 {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -25,43 +25,42 @@
     line-height: normal !important;
 }
 
-.birth-details .birth-img img{
+.birth-details .birth-img img {
     width: 100%;
     height: 100%;
     border-radius: 8px;
 }
 
-.birth-details .birth-host h5{
+.birth-details .birth-host h5 {
     color: var(--secondary-black);
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 8px;
-
 }
 
-.birth-details .birth-host span{
+.birth-details .birth-host span {
     font-size: 14px;
     font-family: var(--SFProDisplay-Regular);
     color: var(--lightgreay);
 }
 
-.birth-details .birth-host span span{
+.birth-details .birth-host span span {
     color: var(--secondary-black);
 }
 
-.birth-details .host-detail{
+.birth-details .host-detail {
     margin-top: 24px;
     margin-bottom: 15px;
 }
 
-.birth-details .host-detail ul{
+.birth-details .host-detail ul {
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
 }
 
-.birth-details .host-detail li{
+.birth-details .host-detail li {
     width: 50%;
     list-style-type: disc !important;
     list-style-position: inside;
@@ -72,34 +71,33 @@
     line-height: 25.5px;
 }
 
-
-.birth-details .hosted-by-date-time-left:first-child::before{
+.birth-details .hosted-by-date-time-left:first-child::before {
     display: none;
 }
 
-.birth-details .hosted-by-date-time-left:last-child{
+.birth-details .hosted-by-date-time-left:last-child {
     padding-left: 13px;
 }
 
-.birth-details .hosted-by-date-time-left:last-child::before{
+.birth-details .hosted-by-date-time-left:last-child::before {
     display: block;
     left: 0;
     right: auto;
 }
 
-.birth-details .countdown-event{
-   border: 1px solid var(--border);
-   border-radius: 16px;
-   padding: 16px;
-   margin-bottom: 20px;
+.birth-details .countdown-event {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
 }
 
-.birth-details .countdown-event span svg{
+.birth-details .countdown-event span svg {
     width: 14px;
     height: 14px;
 }
 
-.birth-details .countdown-event h5{
+.birth-details .countdown-event h5 {
     color: var(--secondary-black);
     font-size: 20px;
     margin-left: 10px;
@@ -107,40 +105,40 @@
     font-family: var(--SFProDisplay-Semibold);
 }
 
-.birth-details .hosted-by-date-time{
+.birth-details .hosted-by-date-time {
     flex-direction: row !important;
 }
 
-.countdown-event .countevent-head{
+.countdown-event .countevent-head {
     margin-bottom: 22px;
 }
 
-.countevent-counter-box{
+.countevent-counter-box {
     display: flex;
     justify-content: center;
 }
 
-.countevent-counter-box .countevent-counter{
+.countevent-counter-box .countevent-counter {
     width: 168px;
     height: 80px;
     text-align: center;
     position: relative;
 }
 
-.countevent-counter-box .countevent-counter h4{
-   color: var(--secondary-black);
-   font-size: 32px;
-   font-family: var(--SFProDisplay-Bold);
-   margin-bottom: 10px;
+.countevent-counter-box .countevent-counter h4 {
+    color: var(--secondary-black);
+    font-size: 32px;
+    font-family: var(--SFProDisplay-Bold);
+    margin-bottom: 10px;
 }
 
-.countevent-counter-box .countevent-counter span{
-    color: #A0AEC0;
+.countevent-counter-box .countevent-counter span {
+    color: #a0aec0;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium);
 }
 
-.countevent-counter .colon-img{
+.countevent-counter .colon-img {
     position: absolute;
     right: 0;
     width: 6px;
@@ -148,14 +146,14 @@
     top: 12px;
 }
 
-.birth-details .detail-btn-wrp{
+.birth-details .detail-btn-wrp {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
 }
 
-.birth-details .detail-btn-wrp .btn{
+.birth-details .detail-btn-wrp .btn {
     display: block;
     width: 50%;
     text-align: center;
@@ -173,37 +171,37 @@
     font-family: var(--SFProDisplay-Semibold);
 }
 
-.birth-details .detail-btn-wrp .add-calender{
+.birth-details .detail-btn-wrp .add-calender {
     border-radius: 8px;
     background-color: transparent !important;
     border: 1px solid var(--border);
     color: var(--secondary-black);
 }
 
-.birth-details .detail-btn-wrp svg{
+.birth-details .detail-btn-wrp svg {
     width: 16px;
     height: 16px;
     margin-left: 6px;
 }
 
-.detail-btn-wrp .noattending-btn{
-   background-color: #DE3110 !important;
-   border: 1px solid #DE3110 !important;
+.detail-btn-wrp .noattending-btn {
+    background-color: #de3110 !important;
+    border: 1px solid #de3110 !important;
 }
 
-.detail-btn-wrp .attending-btn{
-    background-color: #23AA26 !important;
-    border: 1px solid #23AA26 !important;
+.detail-btn-wrp .attending-btn {
+    background-color: #23aa26 !important;
+    border: 1px solid #23aa26 !important;
 }
 
-.host-users-detail h4.title{
+.host-users-detail h4.title {
     margin-bottom: 20px;
     color: var(--primary-black);
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
 }
 
-.host-user-con-box{
+.host-user-con-box {
     display: flex;
     align-items: start;
     justify-content: center;
@@ -211,16 +209,16 @@
     flex-wrap: wrap;
 }
 
-.host-users-detail .img-wrp{
+.host-users-detail .img-wrp {
     width: 100px;
     height: 100px;
     margin: 0 auto 16px;
 }
 
-.host-users-detail .img-wrp h5{
+.host-users-detail .img-wrp h5 {
     width: 100%;
     height: 100%;
-    border-radius: 50% ;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,32 +228,32 @@
     line-height: normal !important;
 }
 
-.host-users-detail .img-wrp img{
+.host-users-detail .img-wrp img {
     width: 100%;
     height: 100%;
     border-radius: 100%;
 }
 
-.host-users-detail .host-user-con{
+.host-users-detail .host-user-con {
     text-align: center;
 }
 
-.host-users-detail .host-user-con h5{
+.host-users-detail .host-user-con h5 {
     color: var(--secondary-black);
     font-size: 18px;
     font-family: var(--SFProDisplay-Semibold);
     margin-bottom: 8px;
 }
 
-.host-users-detail .host-user-con span{
-    color: #A0AEC0;
+.host-users-detail .host-user-con span {
+    color: #a0aec0;
     font-size: 14px;
     margin-bottom: 6px;
     font-family: var(--SFProDisplay-Medium);
     display: block;
 }
 
-.host-users-detail .host-user-con .msg-btn{
+.host-users-detail .host-user-con .msg-btn {
     display: inline-block;
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -266,7 +264,7 @@
     padding: 10px 44px;
 }
 
-.host-users-detail p{
+.host-users-detail p {
     text-align: center;
     color: var(--secondary-black);
     font-size: 20px;
@@ -275,33 +273,33 @@
     margin-bottom: 0;
 }
 
-.location-wrp h4.title{
+.location-wrp h4.title {
     margin-bottom: 11px;
     color: var(--primary-black);
     font-size: 20px;
     font-family: var(--SFProDisplay-Bold);
 }
 
-.location-wrp h5{
+.location-wrp h5 {
     font-size: 18px;
     color: var(--secondary-black);
     margin-bottom: 6px;
     font-family: var(--SFProDisplay-Bold);
 }
 
-.location-wrp p{
+.location-wrp p {
     font-size: 18px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Regular);
 }
 
-.location-wrp #map iframe{
+.location-wrp #map iframe {
     width: 100%;
     height: 198px;
     border-radius: 16px;
 }
 
-.location-wrp .direction-btn{
+.location-wrp .direction-btn {
     padding: 12px 24px;
     cursor: pointer;
     text-align: center;
@@ -317,26 +315,26 @@
     margin-top: 16px;
 }
 
-.location-wrp #map{
+.location-wrp #map {
     position: relative;
 }
 
-.location-wrp #map img.marker{
-   max-width: 35px;
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%, -50%);
+.location-wrp #map img.marker {
+    max-width: 35px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.schedule-wrp h4.title{
+.schedule-wrp h4.title {
     font-size: 18px;
     font-family: var(--SFProDisplay-Semibold);
     color: var(--secondary-black);
     margin-bottom: 5px;
 }
 
-.schedule-wrp span.timing{
+.schedule-wrp span.timing {
     color: var(--lightgreay);
     font-size: 14px;
     font-family: var(--SFProDisplay-Regular);
@@ -344,26 +342,25 @@
     display: block;
 }
 
-.schedule-wrp .shedule-img{
-   width: 100%;
-   margin-bottom: 16px;
-   display: block;
+.schedule-wrp .shedule-img {
+    width: 100%;
+    margin-bottom: 16px;
+    display: block;
 }
 
-
-.schedule-wrp .shedule-manage-timing{
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   margin-bottom: 12px;
-   position: relative;
+.schedule-wrp .shedule-manage-timing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    position: relative;
 }
 
-.schedule-wrp .shedule-manage-timing:last-child{
+.schedule-wrp .shedule-manage-timing:last-child {
     margin-bottom: 0;
 }
 
-.schedule-wrp .shedule-box{
+.schedule-wrp .shedule-box {
     padding: 10px 16px;
     border-radius: 8px;
     display: flex;
@@ -372,12 +369,12 @@
     width: 90%;
 }
 
-.schedule-wrp .shedule-box.green{
-    background-color: #F3FFFA;
-    border-left: 4px solid #2EB67D;
+.schedule-wrp .shedule-box.green {
+    background-color: #f3fffa;
+    border-left: 4px solid #2eb67d;
 }
 
-.schedule-wrp .shedule-timing h6{
+.schedule-wrp .shedule-timing h6 {
     color: #111827;
     margin-bottom: 0;
     font-size: 14px;
@@ -387,46 +384,46 @@
     text-align: center;
 }
 
-.schedule-wrp .shedule-box h6{
+.schedule-wrp .shedule-box h6 {
     color: #111827;
     font-size: 16px;
     margin-bottom: 4px;
     font-family: var(--SFProDisplay-Semibold);
 }
 
-.schedule-wrp .shedule-box-left span{
-  color: var(--lightgreay);
-  font-size: 14px;
-  font-family: var(--SFProDisplay-Regular);
-}
-
-.schedule-wrp .shedule-box span.hrs{
+.schedule-wrp .shedule-box-left span {
     color: var(--lightgreay);
     font-size: 14px;
     font-family: var(--SFProDisplay-Regular);
 }
 
-.schedule-wrp .shedule-box.yellow{
-    background-color: #FFFCF0;
-    border-left: 4px solid #FCCD1E;
+.schedule-wrp .shedule-box span.hrs {
+    color: var(--lightgreay);
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Regular);
 }
 
-.schedule-wrp .shedule-box.pink{
-    background-color: #FFF6FD;
-    border-left: 4px solid #C837AB;
+.schedule-wrp .shedule-box.yellow {
+    background-color: #fffcf0;
+    border-left: 4px solid #fccd1e;
 }
 
-.schedule-wrp .shedule-box.blue{
-    background-color: #EFFBFF;
-    border-left: 4px solid #3ABEEA;
+.schedule-wrp .shedule-box.pink {
+    background-color: #fff6fd;
+    border-left: 4px solid #c837ab;
 }
 
-.schedule-wrp .shedule-box.red{
-    background-color: #FFF8FA;
-    border-left: 4px solid #FF4F84;
+.schedule-wrp .shedule-box.blue {
+    background-color: #effbff;
+    border-left: 4px solid #3abeea;
 }
 
-.schedule-wrp .shedule-manage-timing img{
+.schedule-wrp .shedule-box.red {
+    background-color: #fff8fa;
+    border-left: 4px solid #ff4f84;
+}
+
+.schedule-wrp .shedule-manage-timing img {
     position: absolute;
     bottom: -25px;
     left: 27px;
@@ -434,14 +431,14 @@
     height: 38px;
 }
 
-.gift-register h4.title{
+.gift-register h4.title {
     font-size: 18px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Semibold);
     margin-bottom: 8px;
 }
 
-.gift-register span{
+.gift-register span {
     color: var(--lightgreay);
     font-size: 14px;
     font-family: var(--SFProDisplay-Regular);
@@ -449,13 +446,13 @@
     margin-bottom: 16px;
 }
 
-.gift-register .play-store{
+.gift-register .play-store {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.gift-register .play-store .play-store-btn{
+.gift-register .play-store .play-store-btn {
     border: 1px solid var(--border);
     border-radius: 16px;
     width: 50%;
@@ -464,61 +461,69 @@
     text-align: center;
 }
 
-.gift-register .target-btn{
+.gift-register .target-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
-.gift-register .target-btn img{
+.gift-register .target-btn img {
     width: 50px;
     height: 50px;
     margin-right: 8px;
 }
 
-.gift-register .target-btn h6{
+.gift-register .target-btn h6 {
     color: var(--primary-black);
     font-size: 20px;
     font-family: var(--SFProDisplay-Medium);
     margin-bottom: 0;
 }
 
-.gift-register .amazon-btn{
+.gift-register .amazon-btn {
     display: inline-block;
 }
 
-.gift-register .amazon-btn img{
+.gift-register .amazon-btn img {
     max-width: 140px;
     margin: 0 auto;
     object-fit: contain;
 }
 
-.about-rsvp .about-rs-img{
+.about-rsvp .about-rs-img {
     width: 56px;
     height: 56px;
     margin-right: 16px;
     border-radius: 100%;
 }
 
+.about-rsvp .modal-header h5 {
+    width: 56px;
+    height: 56px;
+    margin-right: 16px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.about-rsvp .modal-header h4{
+.about-rsvp .modal-header h4 {
     font-size: 18px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Bold);
 }
 
-.about-rsvp .modal-header span{
+.about-rsvp .modal-header span {
     color: var(--lightgreay);
     font-family: var(--SFProDisplay-Regular);
     font-size: 12px;
 }
 
-.about-rsvp .modal-header span span{
+.about-rsvp .modal-header span span {
     color: var(--secondary-black);
 }
 
-.about-rsvp .host-detail h5{
+.about-rsvp .host-detail h5 {
     font-size: 14px;
     color: var(--secondary-black);
     margin-bottom: 7px;
@@ -543,31 +548,29 @@
     margin-bottom: 7px;
 }
 
-.about-rsvp .rsvp-custom-radio{
+.about-rsvp .rsvp-custom-radio {
     margin-top: 10px;
 }
 
-.about-rsvp .rsvp-custom-radio h6{
+.about-rsvp .rsvp-custom-radio h6 {
     font-size: 14px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Bold);
     margin-bottom: 10px;
 }
 
-.about-rsvp .rsvp-input-form{
+.about-rsvp .rsvp-input-form {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-
-.about-rsvp .rsvp-input-form .input-form{
+.about-rsvp .rsvp-input-form .input-form {
     width: 50%;
     margin-bottom: 18px;
 }
 
-
-.about-rsvp .rsvp-msgbox .input-form textarea{
+.about-rsvp .rsvp-msgbox .input-form textarea {
     border: 1px solid var(--border) !important;
     border-radius: 16px !important;
     margin-top: 10px;
@@ -580,24 +583,24 @@
     padding-top: 13px;
 }
 
-.about-rsvp .rsvp-msgbox label{
+.about-rsvp .rsvp-msgbox label {
     color: var(--lightgreay);
     font-size: 14px;
     font-family: var(--SFProDisplay-Regular);
 }
 
-.about-rsvp .rsvp-msgbox .input-form{
+.about-rsvp .rsvp-msgbox .input-form {
     margin-bottom: 10px;
 }
 
-.about-rsvp .rsvp-msgbox h5{
-   font-size: 16px;
-   color: var(--secondary-black);
-   font-family: var(--SFProDisplay-Semibold);
-   margin-bottom: 20px;
+.about-rsvp .rsvp-msgbox h5 {
+    font-size: 16px;
+    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Semibold);
+    margin-bottom: 20px;
 }
 
-.about-rsvp .rsvp-msgbox h6{
+.about-rsvp .rsvp-msgbox h6 {
     color: var(--lightgreay);
     font-size: 12px;
     font-family: var(--SFProDisplay-Regular);
@@ -605,93 +608,119 @@
     margin-left: 5px;
 }
 
-.about-rsvp .modal-footer{
+.about-rsvp .modal-footer {
     margin-top: 30px;
 }
 
-#aboutsuccess .modal-header{
+#aboutsuccess .modal-header {
     margin-bottom: 0;
 }
 
-#aboutsuccess .guest-rsvp-attend input[type=radio]:checked ~ label{
+#aboutsuccess .guest-rsvp-attend input[type="radio"]:checked ~ label {
     border: 1px solid var(--green) !important;
 }
 
-#aboutsuccess .guest-rsvp-attend input[type=radio]:checked ~ label:after{
+#aboutsuccess .guest-rsvp-attend input[type="radio"]:checked ~ label:after {
     background-color: var(--green) !important;
     border-color: var(--green) !important;
 }
 
-#aboutsuccess .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label{
+#aboutsuccess
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label {
     border: 1px solid var(--pink) !important;
 }
 
-#aboutsuccess .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label svg path{
-    stroke: #E03137;
+#aboutsuccess
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label
+    svg
+    path {
+    stroke: #e03137;
 }
 
-#aboutsuccess .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label::after{
+#aboutsuccess
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label::after {
     background-color: var(--pink) !important;
     border-color: var(--pink) !important;
 }
 
-
-#aboutsuccess .rsvp-guest h5{
+#aboutsuccess .rsvp-guest h5 {
     font-size: 14px;
     font-family: var(--SFProDisplay-Bold);
     color: var(--secondary-black);
     margin-bottom: 8px;
 }
 
-
-
-
-#rsvp_by_notification .modal-header{
+#rsvp_by_notification .modal-header {
     margin-bottom: 0;
 }
 
-#rsvp_by_notification .guest-rsvp-attend input[type=radio]:checked ~ label{
+#rsvp_by_notification .guest-rsvp-attend input[type="radio"]:checked ~ label {
     border: 1px solid var(--green) !important;
 }
 
-#rsvp_by_notification .guest-rsvp-attend input[type=radio]:checked ~ label:after{
+#rsvp_by_notification
+    .guest-rsvp-attend
+    input[type="radio"]:checked
+    ~ label:after {
     background-color: var(--green) !important;
     border-color: var(--green) !important;
 }
 
-#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label{
+#rsvp_by_notification
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label {
     border: 1px solid var(--pink) !important;
 }
 
-#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label svg path{
-    stroke: #E03137;
+#rsvp_by_notification
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label
+    svg
+    path {
+    stroke: #e03137;
 }
 
-#rsvp_by_notification .guest-rsvp-attend .rsvp-no-checkbox input[type=radio]:checked ~ label::after{
+#rsvp_by_notification
+    .guest-rsvp-attend
+    .rsvp-no-checkbox
+    input[type="radio"]:checked
+    ~ label::after {
     background-color: var(--pink) !important;
     border-color: var(--pink) !important;
 }
 
-
-#rsvp_by_notification .rsvp-guest h5{
+#rsvp_by_notification .rsvp-guest h5 {
     font-size: 14px;
     font-family: var(--SFProDisplay-Bold);
     color: var(--secondary-black);
     margin-bottom: 8px;
 }
 
-.rsvp-guest .rsvp-guest-count{
+.rsvp-guest .rsvp-guest-count {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 22px;
 }
 
-.rsvp-guest .rsvp-guest-count > div{
+.rsvp-guest .rsvp-guest-count > div {
     width: 100%;
 }
 
-.rsvp-guest .rsvp-guest-count .qty-container{
+.rsvp-guest .rsvp-guest-count .qty-container {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 16px;
@@ -699,12 +728,12 @@
     align-items: center;
 }
 
-.rsvp-guest .rsvp-guest-count .qty-container button{
+.rsvp-guest .rsvp-guest-count .qty-container button {
     width: 100%;
     max-width: 27px;
     height: 27px;
     border-radius: 100%;
-    background-color: #2DA9FC;
+    background-color: #2da9fc;
     border: 1px solid transparent;
     color: #fff;
     display: flex;
@@ -712,11 +741,11 @@
     justify-content: center;
 }
 
-.rsvp-guest .rsvp-guest-count .qty-container button i{
+.rsvp-guest .rsvp-guest-count .qty-container button i {
     color: #fff;
 }
 
-.rsvp-guest .rsvp-guest-count .qty-container input{
+.rsvp-guest .rsvp-guest-count .qty-container input {
     border: none;
     outline: 0;
     font-size: 14px;
@@ -727,47 +756,44 @@
     padding: 0px;
 }
 
-.rsvp-guest .rsvp-guest-count h6{
+.rsvp-guest .rsvp-guest-count h6 {
     font-size: 14px;
     color: var(--secondary-black);
     font-family: var(--SFProDisplay-Regular);
     margin-bottom: 6px;
 }
 
-.about-details .about-slider{
+.about-details .about-slider {
     display: none;
 }
 
-.about-details .hosted-by-date-time .hosted-by-date-time-left-icon{
+.about-details .hosted-by-date-time .hosted-by-date-time-left-icon {
     width: 100%;
     max-width: 25px;
     height: 25px;
 }
 
-.about-details .hosted-by-date-time svg path{
+.about-details .hosted-by-date-time svg path {
     stroke: #000;
 }
 
-.qty-container button:disabled{
+.qty-container button:disabled {
     background-color: gray !important;
 }
 
-
 /* ========= responsive =========== */
-@media only screen and (max-width:1399px){
-    .birth-details .hosted-by-date-time{
+@media only screen and (max-width: 1399px) {
+    .birth-details .hosted-by-date-time {
         flex-direction: row;
     }
-
 
     .apexcharts-inner {
         transform: translate(16%, 0);
     }
-
 }
 
-@media only screen and (max-width:1199px){
-    .schedule-wrp .shedule-box{
+@media only screen and (max-width: 1199px) {
+    .schedule-wrp .shedule-box {
         width: 85%;
     }
     .apexcharts-inner {
@@ -775,32 +801,31 @@
     }
 }
 
-@media only screen and (max-width:991px){
+@media only screen and (max-width: 991px) {
     .apexcharts-inner {
         transform: translate(25%, 0);
     }
 }
 
-@media only screen and (max-width:767px){
-    .schedule-wrp .shedule-box{
+@media only screen and (max-width: 767px) {
+    .schedule-wrp .shedule-box {
         width: 87%;
     }
     .apexcharts-inner {
         transform: translate(14%, 0);
     }
-
 }
 
-@media only screen and (max-width:575px){
-    .birth-details .host-detail li{
+@media only screen and (max-width: 575px) {
+    .birth-details .host-detail li {
         width: 100%;
     }
 
-    .location-wrp p{
+    .location-wrp p {
         font-size: 16px;
     }
 
-    .birth-details .detail-btn-wrp .btn{
+    .birth-details .detail-btn-wrp .btn {
         padding: 12px 10px;
     }
 
@@ -808,44 +833,43 @@
         width: 85%;
     }
 
-    .about-details .about-slider{
+    .about-details .about-slider {
         display: block;
     }
-
 }
 
-@media only screen and (max-width:424px){
-    .birth-details .hosted-by-date-time{
+@media only screen and (max-width: 424px) {
+    .birth-details .hosted-by-date-time {
         flex-direction: column !important;
     }
 
-    .birth-details .hosted-by-date-time-left:last-child{
+    .birth-details .hosted-by-date-time-left:last-child {
         padding-left: 0;
         margin-top: 8px;
     }
 
-    .birth-details .hosted-by-date-time-left:last-child::before{
+    .birth-details .hosted-by-date-time-left:last-child::before {
         display: none;
     }
 
-    .birth-details .detail-btn-wrp{
+    .birth-details .detail-btn-wrp {
         gap: 8px;
     }
 
-    .birth-details .detail-btn-wrp .btn{
+    .birth-details .detail-btn-wrp .btn {
         padding: 12px 10px;
         font-size: 12px;
     }
 
-    .host-user-con-box{
+    .host-user-con-box {
         flex-direction: column;
     }
 
-    .host-users-detail p{
+    .host-users-detail p {
         font-size: 18px;
     }
 
-    .host-users-detail p br{
+    .host-users-detail p br {
         display: none;
     }
 
@@ -853,22 +877,22 @@
         width: 80%;
     }
 
-    .schedule-wrp .shedule-box h6{
+    .schedule-wrp .shedule-box h6 {
         font-size: 14px;
     }
 }
 
-  @media only screen and (max-width: 399px){
+@media only screen and (max-width: 399px) {
     .apexcharts-inner {
-      transform: translate(8%, 0);
+        transform: translate(8%, 0);
     }
-  }
-  @media only screen and (max-width: 379px){
+}
+@media only screen and (max-width: 379px) {
     .apexcharts-inner {
-      transform: translate(5%, 0);
+        transform: translate(5%, 0);
     }
-  }
+}
 
-  .d-none {
+.d-none {
     display: none;
 }

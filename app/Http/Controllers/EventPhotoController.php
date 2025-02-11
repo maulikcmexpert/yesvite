@@ -1118,12 +1118,21 @@ class EventPhotoController extends Controller
             'event_id' => $request['event_id'],
             'event_post_id' => $request['event_post_id']
         ])
-            ->select('reaction', 'unicode', DB::raw('COUNT(*) as count'))
-            ->groupBy('reaction', 'unicode')
+        ->join('users', 'users.id', '=', 'event_post_reactions.user_id')
+        ->select(
+            'event_post_reactions.reaction',
+            'event_post_reactions.unicode',
+            'users.firstname',
+            'users.lastname',
+            'users.city',
+            'users.state',
+            DB::raw('CONCAT(users.city, IF(users.city IS NOT NULL AND users.state IS NOT NULL, ", ", ""), users.state) as location'),
+            DB::raw('COUNT(*) as count'))
+            ->groupBy('event_post_reactions.reaction', 'event_post_reactions.unicode', 'users.firstname', 'users.lastname', 'users.city', 'users.state')
             ->orderByDesc('count')
             ->take(3)
-            ->pluck('reaction')
-            ->toArray();
+            ->orderByDesc('count')
+             ->get();
 
         // Get post reactions with user details
         $postReactions = getReaction($request['event_post_id']);
