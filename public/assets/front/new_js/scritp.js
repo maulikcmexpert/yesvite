@@ -398,7 +398,7 @@ $(document).on("change", ".fileInputtype", function (event) {
         </svg>
       `;
             deleteIcon.classList.add("uploded-delete-icon");
-            
+
             // Delete image functionality
             deleteIcon.addEventListener("click", function () {
                 imagePreview.removeChild(previewDiv);
@@ -407,7 +407,7 @@ $(document).on("change", ".fileInputtype", function (event) {
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
-                    
+
                     // Clear the value of the current file input
                     currentFileInput.value = "";
                 }
