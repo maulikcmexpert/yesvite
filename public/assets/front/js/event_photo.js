@@ -1544,9 +1544,11 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
+    const eventId = button.data("event-id");
+    const eventPostId = button.data("event-post-id");
     const button_main = $(this)
         .closest(".photo-card-head-right")
-        .find(".like-btn");
+        .find("#likeButton_" + eventPostId);
     console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
@@ -1554,8 +1556,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     emojiDisplay.text(selectedEmoji);
 
     // AJAX call to update emoji reaction
-    const eventId = button.data("event-id");
-    const eventPostId = button.data("event-post-id");
+
     console.log(eventId, eventPostId);
     console.log(eventPostId);
     $.ajax({
