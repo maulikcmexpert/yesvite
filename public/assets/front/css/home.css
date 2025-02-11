@@ -893,6 +893,10 @@
     font-size: 25px;
 }
 
+.step_2 .collection-wrapper .filter-main-wrp {
+    margin-bottom: 7px;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width: 1499px) {
     .collection-card .card-img {
@@ -972,7 +976,7 @@
     }
 
     .step_2 .collection-wrapper .filter-main-wrp {
-        margin-bottom: 15px;
+        margin-bottom: 7px;
     }
 
     .step_2 .list_all_design_catgeory {
@@ -1161,9 +1165,9 @@
         line-height: 24px;
     }
 
-    .collection-card .card-img {
+    /* .collection-card .card-img {
         margin-bottom: 15px;
-    }
+    } */
 
     .features-wrapper .owl-carousel .owl-dots {
         display: flex;
@@ -1240,6 +1244,10 @@
 
     .collection-wrapper .filter-dropdowns {
         width: 100%;
+    }
+
+    .collection-card {
+        padding: 10px 10px;
     }
 }
 
