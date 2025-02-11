@@ -380,6 +380,7 @@
 
         function allCheckFun() {
             $('input[name="design_subcategory_new"]').prop('checked', false)
+            $('input[name="design_subcategory"]').prop('checked', true)
             $(".categoryNew").show();
             $(".subcategoryNew").hide();
             $(".image-item-new").hide();

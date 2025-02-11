@@ -13,6 +13,10 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
+
+// Original static size
+const originalWidth = 345;
+const originalHeight = 490;
 let element = document.querySelector(".image-edit-inner-img");
 
 if (element) {
@@ -693,6 +697,8 @@ async function bindData(current_event_id) {
             });
 
             if (dbJson) {
+                const scaleX = width / originalWidth;
+                const scaleY = height / originalHeight;
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
@@ -724,31 +730,29 @@ async function bindData(current_event_id) {
                             fontWeight: element.fontWeight,
                             fontStyle: element.fontStyle,
                             underline: element.underline,
-                            linethrough:
-                                element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
-                                    ? true
-                                    : false,
+                            linethrough: ["true", "True", true].includes(
+                                element.linethrough
+                            ),
                         });
 
-                        const textWidth = textMeasurement.width;
-                        console.log(element.text);
-                        if (element.left === undefined) {
-                            let width = element.width / 2;
-                            element.left = element.centerX - width;
-                        }
+                        let textWidth = textMeasurement.width;
 
-                        if (element.top === undefined) {
-                            element.top = element.centerY - 10;
-                        }
+                        // **Scale Positions & Sizes**
+                        let left = element.left
+                            ? parseFloat(element.left) * scaleX
+                            : (element.centerX - textWidth / 2) * scaleX;
+                        let top = element.top
+                            ? parseFloat(element.top) * scaleY
+                            : (element.centerY - 10) * scaleY;
+                        let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                        let width = (textWidth + 10) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
-                            left: parseFloat(element.left),
-                            top: parseFloat(element.top),
-                            width: textWidth + 10, // Default width if not provided
-                            fontSize: parseFloat(element.fontSize),
+                            left: parseFloat(left),
+                            top: parseFloat(top),
+                            width: width, // Default width if not provided
+                            fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily,
                             fontWeight: element.fontWeight,
@@ -2721,24 +2725,33 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
+    console.log("getTextDataFromCanvas");
     var objects = canvas.getObjects();
-    console.log(objects);
     var textData = [];
     var shapeImageData = [];
+
+    // **Current Dynamic Canvas Size**
+    let canvasWidth = canvas.getWidth();
+    let canvasHeight = canvas.getHeight();
+
+    // **Calculate Reverse Scaling Factors**
+    const scaleX = originalWidth / canvasWidth;
+    const scaleY = originalHeight / canvasHeight;
+
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
-            console.log(obj.underline);
+            // alert(obj.text);
             var centerPoint = obj.getCenterPoint();
+
+            // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
-                left: obj.left,
-                top: obj.top,
-                fontSize: parseInt(obj.fontSize),
+                left: obj.left * scaleX, // Scale back X position
+                top: obj.top * scaleY, // Scale back Y position
+                fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                centerX: centerPoint.x, // Use the center point from getCenterPoint()
-                centerY: centerPoint.y,
-                dx: obj.left, // Calculate dx
-                dy: obj.top, // Calculate dy
+                centerX: centerPoint.x * scaleX, // Scale back center position
+                centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
@@ -2752,21 +2765,23 @@ function getTextDataFromCanvas() {
                 rotation: obj.angle,
             });
         }
+
         if (obj.type === "image") {
-            var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
-            var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
+            var centerX = obj.left + obj.getScaledWidth() / 2;
+            var centerY = obj.top + obj.getScaledHeight() / 2;
 
             shapeImageData = {
-                shape: obj.clipPath ? obj.clipPath.type : "none", // Handle case when clipPath is null
-                centerX: centerX,
-                centerY: centerY,
-                width: obj.getScaledWidth(), // Get the scaled width
-                height: obj.getScaledHeight(), // Get the scaled height
+                shape: obj.clipPath ? obj.clipPath.type : "none",
+                centerX: centerX * scaleX, // Scale back image center position
+                centerY: centerY * scaleY,
+                width: obj.getScaledWidth() * scaleX, // Scale back width
+                height: obj.getScaledHeight() * scaleY, // Scale back height
             };
         }
     });
 
-    dbJson = {
+    // **Final JSON to Save**
+    let dbJson = {
         textElements: textData,
         shapeImageData: shapeImageData,
     };
@@ -2774,6 +2789,7 @@ function getTextDataFromCanvas() {
 
     return dbJson;
 }
+
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
         loadAgain();

@@ -1383,6 +1383,19 @@
     stroke: #b5b8bf !important;
 }
 
+.guest-wrp.side-guest-wrp .invite-pro img{
+    max-width: 19px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.guest-wrp.side-guest-wrp .invite-pro strong{
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
