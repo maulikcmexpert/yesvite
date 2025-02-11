@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let reactionIcons = {
+    var reactionIcons = {
         "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
         "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
@@ -1621,8 +1621,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
 
     // Hide emoji picker
     $(this).closest("#emojiDropdown1").hide();
-});
-$(document).ready(function () {
+
     // Define visibility options
     const visibilityOptions = {
         1: "Everyone",
