@@ -117,28 +117,30 @@
 
 
             <div class="row list_all_design_catgeory_new">
-                <div class="d-flex align-items-center" style="gap: 15px">
+                <div class="d-flex align-items-center mb-2" style="gap: 15px">
                     <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left" style="color: #212529; cursor: pointer;"></i></p>
                     <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
                         @foreach ($subcategory->textdatas as $image)
-                            <div style="display: none"
-                                class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
-                                data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
+                            <div class="row list_all_design_wrp">
+                                <div style="display: none"
+                                    class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
+                                    data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
 
-                                <a href="javascript:;" class="collection-card card-blue">
-                                    <div class="card-img edit_design_tem design-card"
-                                        data-image="{{ asset('storage/canvas/' . $image->image) }}"
-                                        data-shape_image="{{ $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '' }}"
-                                        data-json="{{ json_encode($image->static_information) }}"
-                                        data-id="{{ $image->id }}">
-                                        <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                            alt="shower-card">
-                                    </div>
-                                    {{-- <h4>{{ $category->category_name }}</h4> --}}
-                                </a>
+                                    <a href="javascript:;" class="collection-card card-blue">
+                                        <div class="card-img edit_design_tem design-card"
+                                            data-image="{{ asset('storage/canvas/' . $image->image) }}"
+                                            data-shape_image="{{ $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '' }}"
+                                            data-json="{{ json_encode($image->static_information) }}"
+                                            data-id="{{ $image->id }}">
+                                            <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                                alt="shower-card">
+                                        </div>
+                                        {{-- <h4>{{ $category->category_name }}</h4> --}}
+                                    </a>
+                                </div>
                             </div>
                         @endforeach
                     @endforeach
