@@ -249,6 +249,12 @@ $(".notification-toggle-menu").on("click", function (event) {
         $(".mobile-menu-wrp").removeClass("active");
         $(".line").removeClass("active");
     }
+    $('.notification-showall-btn').attr('data-show','0');
+    $('.notification_drp_down_div').each(function(index) {
+        let count = index + 1;
+        $('#collapseOne'+count).removeClass('show');
+        $('.main-notification-div-list').addClass('collapsed');
+    });
 });
 document.addEventListener("click", (event) => {
     if (
