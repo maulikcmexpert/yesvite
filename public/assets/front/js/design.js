@@ -14,21 +14,6 @@ let undoStack = [];
 let redoStack = [];
 let event_id = null;
 
-// Original static size
-const originalWidth = 345;
-const originalHeight = 490;
-let element = document.querySelector(".image-edit-inner-img");
-
-if (element) {
-    var { width, height } = element.getBoundingClientRect();
-    console.log("Width:", width, "Height:", height);
-} else {
-    var { width, height } = { width: 590, height: 880 };
-    console.log(width, height); // Output: 590 880
-
-    console.log("Element not found!");
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded fired");
     preloadAllFonts(); // Load all fonts on page load
@@ -131,8 +116,8 @@ $(document).on("click", ".design-cards", function () {
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
-        width: width,
-        height: height,
+        width: 345,
+        height: 490,
     });
 
     // Append the new canvas to the modal-design-card
@@ -142,8 +127,8 @@ $(document).on("click", ".design-cards", function () {
     $("#exampleModal").modal("show");
 
     canvas = new fabric.Canvas("imageEditor2", {
-        width: width,
-        height: height,
+        width: 345,
+        height: 490,
         position: "relative",
     });
 
@@ -697,8 +682,6 @@ async function bindData(current_event_id) {
             });
 
             if (dbJson) {
-                const scaleX = width / originalWidth;
-                const scaleY = height / originalHeight;
                 const staticInfo = {};
 
                 if (current_event_id != "" && eventData.desgin_selected == "") {
@@ -730,29 +713,31 @@ async function bindData(current_event_id) {
                             fontWeight: element.fontWeight,
                             fontStyle: element.fontStyle,
                             underline: element.underline,
-                            linethrough: ["true", "True", true].includes(
-                                element.linethrough
-                            ),
+                            linethrough:
+                                element.linethrough == true ||
+                                element.linethrough == "true" ||
+                                element.linethrough == "True"
+                                    ? true
+                                    : false,
                         });
 
-                        let textWidth = textMeasurement.width;
+                        const textWidth = textMeasurement.width;
+                        console.log(element.text);
+                        if (element.left === undefined) {
+                            let width = element.width / 2;
+                            element.left = element.centerX - width;
+                        }
 
-                        // **Scale Positions & Sizes**
-                        let left = element.left
-                            ? parseFloat(element.left) * scaleX
-                            : (element.centerX - textWidth / 2) * scaleX;
-                        let top = element.top
-                            ? parseFloat(element.top) * scaleY
-                            : (element.centerY - 10) * scaleY;
-                        let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
-                        let width = (textWidth + 10) * scaleX; // Scale text box width
+                        if (element.top === undefined) {
+                            element.top = element.centerY - 10;
+                        }
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
-                            left: parseFloat(left),
-                            top: parseFloat(top),
-                            width: width, // Default width if not provided
-                            fontSize: fontSize,
+                            left: parseFloat(element.left),
+                            top: parseFloat(element.top),
+                            width: textWidth + 10, // Default width if not provided
+                            fontSize: parseFloat(element.fontSize),
                             fill: element.fill,
                             fontFamily: element.fontFamily,
                             fontWeight: element.fontWeight,
@@ -1520,8 +1505,8 @@ async function bindData(current_event_id) {
         $(this).addClass("activated");
     });
     canvas = new fabric.Canvas("imageEditor1", {
-        width: width, // Canvas width
-        height: height, // Canvas height
+        width: 345, // Canvas width
+        height: 490, // Canvas height
     });
     const ctx = canvas.getContext("2d");
     const defaultSettings = {
@@ -2725,33 +2710,24 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
-    console.log("getTextDataFromCanvas");
     var objects = canvas.getObjects();
+    console.log(objects);
     var textData = [];
     var shapeImageData = [];
-
-    // **Current Dynamic Canvas Size**
-    let canvasWidth = canvas.getWidth();
-    let canvasHeight = canvas.getHeight();
-
-    // **Calculate Reverse Scaling Factors**
-    const scaleX = originalWidth / canvasWidth;
-    const scaleY = originalHeight / canvasHeight;
-
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
-            // alert(obj.text);
+            console.log(obj.underline);
             var centerPoint = obj.getCenterPoint();
-
-            // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
-                left: obj.left * scaleX, // Scale back X position
-                top: obj.top * scaleY, // Scale back Y position
-                fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
+                left: obj.left,
+                top: obj.top,
+                fontSize: parseInt(obj.fontSize),
                 fill: obj.fill,
-                centerX: centerPoint.x * scaleX, // Scale back center position
-                centerY: centerPoint.y * scaleY,
+                centerX: centerPoint.x, // Use the center point from getCenterPoint()
+                centerY: centerPoint.y,
+                dx: obj.left, // Calculate dx
+                dy: obj.top, // Calculate dy
                 backgroundColor: obj.backgroundColor,
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
@@ -2765,23 +2741,21 @@ function getTextDataFromCanvas() {
                 rotation: obj.angle,
             });
         }
-
         if (obj.type === "image") {
-            var centerX = obj.left + obj.getScaledWidth() / 2;
-            var centerY = obj.top + obj.getScaledHeight() / 2;
+            var centerX = obj.left + obj.getScaledWidth() / 2; // Use getScaledWidth()
+            var centerY = obj.top + obj.getScaledHeight() / 2; // Use getScaledHeight()
 
             shapeImageData = {
-                shape: obj.clipPath ? obj.clipPath.type : "none",
-                centerX: centerX * scaleX, // Scale back image center position
-                centerY: centerY * scaleY,
-                width: obj.getScaledWidth() * scaleX, // Scale back width
-                height: obj.getScaledHeight() * scaleY, // Scale back height
+                shape: obj.clipPath ? obj.clipPath.type : "none", // Handle case when clipPath is null
+                centerX: centerX,
+                centerY: centerY,
+                width: obj.getScaledWidth(), // Get the scaled width
+                height: obj.getScaledHeight(), // Get the scaled height
             };
         }
     });
 
-    // **Final JSON to Save**
-    let dbJson = {
+    dbJson = {
         textElements: textData,
         shapeImageData: shapeImageData,
     };
@@ -2789,7 +2763,6 @@ function getTextDataFromCanvas() {
 
     return dbJson;
 }
-
 $(".edit-design-sidebar").on("click", function () {
     if (imageId != null && imageId != "") {
         loadAgain();
