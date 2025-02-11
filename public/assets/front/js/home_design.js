@@ -181,6 +181,8 @@ $(document).ready(function () {
     $("#resetCategories").on("click", function (e) {
         $(".image-item-new").hide();
         $("#category_name").hide();
+        $(".subcategoryHide").show();
+        $(".categoryHide").hide();
         $("#allchecked").hide();
         e.preventDefault();
         $("#Allcat").prop("checked", false);
