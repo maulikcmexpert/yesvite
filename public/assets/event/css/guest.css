@@ -361,6 +361,7 @@
 
 .guest-main-content .contact-tab .users-data .user_choice_group {
     margin-top: 31px;
+    margin-bottom: 0 !important;
 }
 
 .new-group-name-wrp {
