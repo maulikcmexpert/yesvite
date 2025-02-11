@@ -245,6 +245,7 @@ $(document).ready(function () {
     $(document).on("click", "#design_category", function () {
         $(".category").hide();
         $(".categoryNew").hide();
+        $(".subcategoryNew").show();
         $(".image-item-new").hide();
         $(".image-item").hide();
         const categoryId = $(this).data("category-id");
