@@ -1,7 +1,7 @@
 
 <div class="home-center-content-head">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
-    
+
 
     <span class="home-center-content-head-calender-icon profile-calender-view">
       <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,16 +18,16 @@
       </svg>
     </span>
 </div>
-<div class="view-calender-heading d-none">
-<nav class="breadcrumb-nav" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
-                        </ol>
+<div class="view-calender-heading home-center-content-head">
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+            {{-- <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li> --}}
+            <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
+        </ol>
     </nav>
-    <h1>Calender View</h1>
-    <i class="fa-solid fa-arrow-left get-back-home-calender"></i>
+    <h1 class="d-flex align-items-center gap-2"><span><i class="fa-solid fa-arrow-left get-back-home-calender"></i></span> Calender View</h1>
+    
 </div>
 <div class="home-center-profile-wrp">
     <div class="home-center-profile-head">
@@ -45,7 +45,7 @@
         @if($profileData['profile']!="")
           <img src="{{$profileData['profile']}}" class="lazy" alt="">
         @else
-        {!! $userProfile !!}         
+        {!! $userProfile !!}
         <span class="active-dot"></span>
         @endif
       </div>
@@ -92,5 +92,5 @@
           <h3>{{$profileData['total_upcoming_events']}}</h3>
         </div>
     </div>
-    
+
 </div>
