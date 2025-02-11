@@ -200,6 +200,13 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
+                    const post = {
+                        id: eventPostId,
+                        reactionList: data.reactionList,
+                        self_reaction: data.self_reaction,
+                        total_likes: data.count
+                    };
+                    document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
                     let reactionImageHtml = "";
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
@@ -238,10 +245,10 @@ $(document).ready(function () {
                         ); // Reset button to default
                     }
 
-                    // ✅ Update the reaction image container
+
                     $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
-                    // ✅ Update like count
+
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
@@ -313,6 +320,9 @@ $(document).on("click", function (e) {
 // end code
 
 
+
+
+//
 
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
