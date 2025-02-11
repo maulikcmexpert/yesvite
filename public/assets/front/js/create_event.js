@@ -1180,7 +1180,7 @@ function rsvp_by_date(start_time) {
         // }
     });
 }
-
+    
 $(function () {
     var current_event_date = $("#event-date").val();
 
@@ -9357,6 +9357,6 @@ $(document).on("click", ".previousImeg", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-$(document).on('click','#buycredits',function(){
+$(document).on("click", "#buycredits", function () {
     $("#buycreditsmodal").modal("show");
-})
+});
