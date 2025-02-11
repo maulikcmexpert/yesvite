@@ -525,6 +525,11 @@
     margin-bottom: 40px;
 }
 
+.collection-wrapper .list_all_design_wrp {
+    max-width: 500px;
+    overflow-y: scroll;
+}
+
 .collection-wrapper .filter-main-wrp .filters-drp {
     display: flex;
     align-items: center;
