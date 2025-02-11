@@ -1774,7 +1774,7 @@ $(document).ready(function () {
         let selfReaction = post.self_reaction;
         let reactionHtml = "";
         let i = 0; // Count displayed reactions
-        let j = 0;
+       let j = 0;
 
         for (let reactionData of reactionList) {
             if (i >= 3) break; // Limit to 3 reactions
