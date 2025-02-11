@@ -540,6 +540,12 @@ $(".upload-img-delete").click(function () {
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
 });
+$(".uploded-delete-icon").click(function () {
+    $(".create-post-upload-img-wrp").addClass("d-none");
+  
+    $("#photoForm")[0].reset();
+});
+
 
 $(".upload-poll-delete").click(function () {
     $(".create-post-poll-wrp").addClass("d-none");
