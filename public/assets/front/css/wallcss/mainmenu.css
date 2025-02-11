@@ -3281,6 +3281,9 @@
     .responsive-calendar .weekdays {
         justify-content: center;
     }
+    .supportive-home-wrp .responsive-calendar{
+        height: calc(100% - 0px);
+    }
 }
 
 @media only screen and (max-width: 991px) {
