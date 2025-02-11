@@ -102,7 +102,7 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
 
-  
+
     $(document).on("click", "#emojiDropdown .emoji", function () {
         const selectedEmoji = $(this).data("emoji");
         const button = $(this)
@@ -1556,19 +1556,7 @@ let isLong_press = false;
 
 
 
-let reactionIcons = {
-    "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
-    "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
-    "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
-    "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
-    "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
-    "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-    "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
-    "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
-    "👏": base_url + "assets/front/img/clap-icon.png", // 👏
-};
+
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
