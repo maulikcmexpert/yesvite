@@ -403,6 +403,7 @@ $(document).on("change", ".fileInputtype", function (event) {
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
+                    document.querySelector(".fileInputtype").value = "";
                 }
             });
 
@@ -525,7 +526,7 @@ $("#create-photo-btn").click(function () {
     $("#postContent").val('');
     $(".create-post-upload-img-inner").removeClass("d-none");
     $('.create_post_btn').prop('disabled', false);
-    $("#photoForm").reset();
+    // $("#photoForm").reset();
 });
 
 $("#create-poll-btn").click(function () {
@@ -541,9 +542,17 @@ $(".upload-img-delete").click(function () {
     $("#photoForm")[0].reset();
 });
 $(".uploded-delete-icon").click(function () {
+    alert();
+    let fileInput = $("#fileInput");
 
-    $(".preview-image").val('');
+
+    fileInput.val("");
+
+    // If using a form, reset it as well
     $("#photoForm")[0].reset();
+
+
+
 });
 
 

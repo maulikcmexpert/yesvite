@@ -846,6 +846,10 @@ header{
     height: 20px !important;
 }
 
+.header-profile-dropdown .credits_balance_amout_wrp{
+    display: flex !important;
+    justify-content: space-between !important;
+}
 
 /* ===Responsive=== */
 
