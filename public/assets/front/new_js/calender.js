@@ -257,7 +257,7 @@ if (calender_json != undefined) {
                 "today-btn-home"
             );
             if (month.isSame(today, "month")) {
-                    todayButton.style.display = "block"; // Show the button
+                    todayButton.style.display = "inline-block"; // Show the button
                 } else {
                     todayButton.style.display = "none"; // Hide the button
                 }

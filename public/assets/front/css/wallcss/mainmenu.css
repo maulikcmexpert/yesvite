@@ -3132,9 +3132,14 @@
 .supportive-home-wrp .responsive-calendar .month h3:last-of-type{
     display: none !important;
 }
+
+.supportive-home-wrp .responsive-calendar .month h3{
+    width: 91%;
+}
+
 .today-btn-home{
     border: 1px solid var(--border);
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 10px;
     font-family: var(--SFProDisplay-Medium);
     font-size: 14px;
