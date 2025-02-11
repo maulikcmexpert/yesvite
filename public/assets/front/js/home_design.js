@@ -303,3 +303,45 @@ function allCheckFun() {
         },
     });
 }
+
+$(document).on(
+    "change",
+    'input[name="design_subcategory_new"]:not(#Allcat)',
+    function () {
+        $(".image-item-new").hide();
+        $("#category_name").hide();
+        $("#allchecked").hide();
+        // If all individual checkboxes are checked, check "All Categories"
+        const totalCheckboxes = $(
+            'input[name="design_subcategory_new"]:not(#Allcat)'
+        ).length;
+        const checkedCheckboxes = $(
+            'input[name="design_subcategory_new"]:not(#Allcat):checked'
+        ).length;
+
+        if (checkedCheckboxes === totalCheckboxes) {
+            $("#Allcat").prop("checked", true);
+        } else {
+            $("#Allcat").prop("checked", false);
+        }
+
+        // Filter images based on checked categories
+        if (checkedCheckboxes > 0) {
+            $(".image-item").hide(); // Hide all images first
+            $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
+                function () {
+                    const categoryId = $(this).data("category-id");
+                    const subcategoryId = $(this).data("subcategory-id");
+
+                    $(`.image-item-new[data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"]`).show();
+                    var visibleItems = $(".all_designs:visible").length;
+                    $(".total_design_count").text(visibleItems + " Items");
+                }
+            );
+        } else {
+            $(".image-item-new").hide(); // Hide all images if no checkboxes are checked
+            var visibleItems = $(".all_designs:visible").length;
+            $(".total_design_count").text(visibleItems + " Items");
+        }
+    }
+);

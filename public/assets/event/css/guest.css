@@ -372,7 +372,7 @@
 .guest-sidebar .toggle-wrp {
     border-bottom: 1px solid var(--borderColor);
     padding-bottom: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
 }
 
 .guest-sidebar .group-card {
