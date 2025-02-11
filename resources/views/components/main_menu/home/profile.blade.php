@@ -26,8 +26,8 @@
             <li class="breadcrumb-item active" aria-current="page">Detail  Calender</li>
         </ol>
     </nav>
-    <h1>Calender View</h1>
-    <i class="fa-solid fa-arrow-left get-back-home-calender"></i>
+    <h1 class="d-flex align-items-center gap-2"><span><i class="fa-solid fa-arrow-left get-back-home-calender"></i></span> Calender View</h1>
+    
 </div>
 <div class="home-center-profile-wrp">
     <div class="home-center-profile-head">
