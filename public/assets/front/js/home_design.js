@@ -94,9 +94,6 @@ $(document).ready(function () {
     });
 
     $("#resetCategoriesNew").on("click", function (e) {
-       
-        
-        
         e.preventDefault();
         $("#Allcat").prop("checked", false);
         $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
@@ -135,6 +132,9 @@ $(document).ready(function () {
         $("#allchecked").hide();
         var search_value = $(this).val();
         $("#home_loader").css("display", "flex");
+        if (search_value == "") {
+            $('input[name="design_subcategory"]').prop("checked", true);
+        }
         $.ajax({
             url: base_url + "search_features",
             method: "GET",
