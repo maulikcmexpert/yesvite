@@ -2,7 +2,7 @@
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
-<section class="contact-details profile-details">
+<section class="contact-details profile-details supportive-event-wrp">
     <div class="container mb-5">
         <div class="row">
             <x-front.sidebar :profileData="[]" />
