@@ -1662,6 +1662,7 @@ $notification_list=getNotificationList();
                                         <h5>
                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$userprofile->coins}}</span>
+                                            <i class="fa-solid fa-angle-right"></i>
                                         </h5>
                                       </a>
               </li>

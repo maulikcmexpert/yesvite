@@ -1180,7 +1180,7 @@ function rsvp_by_date(start_time) {
         // }
     });
 }
-
+    
 $(function () {
     var current_event_date = $("#event-date").val();
 
