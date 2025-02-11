@@ -312,30 +312,30 @@
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
             let search_value ='';
-            $.ajax({
-                    url: base_url + "search_design",
-                    method: 'GET',
-                    data: {
-                        search: search_value
-                    },
-                    success: function(response) {
+            // $.ajax({
+            //         url: base_url + "search_design",
+            //         method: 'GET',
+            //         data: {
+            //             search: search_value
+            //         },
+            //         success: function(response) {
                       
-                        if (response.view) {
-                            $('.list_all_design_catgeory').html('');
-                            $('.list_all_design_catgeory').html(response.view);
-                            $('#home_loader').css('display', 'none');
-                            $('.total_design_count').text(response.count + ' Items')
+            //             if (response.view) {
+            //                 $('.list_all_design_catgeory').html('');
+            //                 $('.list_all_design_catgeory').html(response.view);
+            //                 $('#home_loader').css('display', 'none');
+            //                 $('.total_design_count').text(response.count + ' Items')
 
-                        } else {
-                            $('.list_all_design_catgeory').html('No Design Found');
-                            $('.total_design_count').text(response.count + ' Items')
-                            $('#home_loader').css('display', 'none');
-                        }
-                    },
-                    error: function(error) {
-                        toastr.error('Some thing went wrong');
-                    }
-                });
+            //             } else {
+            //                 $('.list_all_design_catgeory').html('No Design Found');
+            //                 $('.total_design_count').text(response.count + ' Items')
+            //                 $('#home_loader').css('display', 'none');
+            //             }
+            //         },
+            //         error: function(error) {
+            //             toastr.error('Some thing went wrong');
+            //         }
+            //     });
         }
     </script>
 @endpush
