@@ -120,13 +120,14 @@ class HomeFrontController extends BaseController
             ->get();
 
         // Calculate total count of textdatas across all subcategories
-        $totalTextDataCount = $categories->sum(
-            fn($category) =>
-            $category->subcategory->sum(
-                fn($subcategory) =>
-                $subcategory->textdatas->count()
-            )
-        );
+        // $totalTextDataCount = $categories->sum(
+        //     fn($category) =>
+        //     $category->subcategory->sum(
+        //         fn($subcategory) =>
+        //         $subcategory->textdatas->count()
+        //     )
+        // );
+        $totalTextDataCount = $categories->count();
 
         $count = $totalTextDataCount;
 
