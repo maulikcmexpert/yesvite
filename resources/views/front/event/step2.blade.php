@@ -326,6 +326,9 @@
                 $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
+                if(search_value==''){
+                    $('input[name="design_subcategory"]').prop('checked', true)
+                }
                 $.ajax({
                     url: base_url + "search_design",
                     method: 'GET',
