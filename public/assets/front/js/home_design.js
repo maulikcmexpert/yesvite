@@ -214,7 +214,7 @@ $(document).on(
     function () {
         $(".image-item-new").hide();
         $("#category_name").hide();
-        $("#allchecked").hide();
+        $("#allchecked").show();
         // If all individual checkboxes are checked, check "All Categories"
         const totalCheckboxes = $(
             'input[name="design_subcategory_new"]:not(#Allcat)'
