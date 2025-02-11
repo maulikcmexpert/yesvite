@@ -152,7 +152,7 @@ $(document).ready(function () {
                             "Like removed sf.kkshdfhjkfhjkhfjkhsdjkjkshfjksdhfhfdj, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
-                            let firstReaction = response.reactionList[0];
+                            let firstReaction = response.reactionList[0].reaction; // ✅
                             if (firstReaction.startsWith("\\u{")) {
                                 firstReaction = String.fromCodePoint(
                                     parseInt(
@@ -599,9 +599,8 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${data.posttime}</p>
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                        data.id
-                    }" data-user-id="1">
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="1">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
                                 </div>
@@ -611,18 +610,16 @@ $(document).ready(function () {
                                 </div>
                                 <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                        data.id
-                    }" data-user-id="1">
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="1">
                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                     </button>
                                     <p id="commentTotalLike_${data.id}">
                                   1
                                     </p>
                                 </div>
-                                <button data-comment-id="${
-                                    data.id
-                                }" class="commented-user-reply-btn">Reply</button>
+                                <button data-comment-id="${data.id
+                        }" class="commented-user-reply-btn">Reply</button>
                                 </div>
 
                 `;
@@ -728,15 +725,13 @@ $(document).ready(function () {
                     ) {
                         data.comment_replies.forEach(function (reply) {
                             const replyHTML = `
-                        <li class="reply-on-comment" data-comment-id="${
-                            reply.id
-                        }">
+                        <li class="reply-on-comment" data-comment-id="${reply.id
+                                }">
                             <div class="commented-user-head">
                                 <div class="commented-user-profile">
                                     <div class="commented-user-profile-img">
-                                        <img src="${
-                                            reply.profile || "default-image.png"
-                                        }" alt="">
+                                        <img src="${reply.profile || "default-image.png"
+                                }" alt="">
                                     </div>
                                     <div class="commented-user-profile-content">
                                         <h3>${reply.username}</h3>
@@ -1107,7 +1102,7 @@ $(document).ready(function () {
                     $("#post_message").text(data.post_message);
                     $("#post_time_details").text(data.post_time);
 
-                    const reactionVal = data.reactionList.forEach((that) => {});
+                    const reactionVal = data.reactionList.forEach((that) => { });
 
                     // $("#likeCount").text(data.total_likes + " Likes");
                     // Add 'Likes' after the number
@@ -1127,7 +1122,7 @@ $(document).ready(function () {
                         console.log(reactionIcons[reaction_store]);
 
                         reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
-                    }else {
+                    } else {
                         // If reaction_store is not found, show a default icon
                         reactionImageHtml = `<i class="fa-regular fa-heart"></i>`;
                     }
@@ -1206,9 +1201,8 @@ $(document).ready(function () {
                                 : generatePlaceholderName(comment.username);
 
                             commentsWrapper.append(`
-                            <li class="commented-user-wrp" data-comment-id="${
-                                comment.id
-                            }">
+                            <li class="commented-user-wrp" data-comment-id="${comment.id
+                                }">
 
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
@@ -1232,20 +1226,16 @@ $(document).ready(function () {
                                 </div>
                                 <div class="commented-user-reply-wrp">
                                     <div class="position-relative d-flex align-items-center gap-2">
-                                         <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                                comment.id
-                            }" data-user-id="${login_user_id}">
+                                         <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+                                }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
-                                        <p id="commentTotalLike_${
-                                            comment.id
-                                        }">${
-                                comment.comment_total_likes || 0
-                            }</p>
+                                        <p id="commentTotalLike_${comment.id
+                                }">${comment.comment_total_likes || 0
+                                }</p>
                                     </div>
-                                    <button class="commented-user-reply-btn" data-comment-id="${
-                                        comment.id
-                                    }">Reply</button>
+                                    <button class="commented-user-reply-btn" data-comment-id="${comment.id
+                                }">Reply</button>
                                 </div>
  <ul class="primary-comment-replies"></ul>
                             </li>
@@ -1262,8 +1252,8 @@ $(document).ready(function () {
                                     let displayName = reply.profile
                                         ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
                                         : generatePlaceholderName(
-                                              reply.username
-                                          );
+                                            reply.username
+                                        );
                                     const replyHTML = `
 
                             <div class="commented-user-head">
@@ -1289,9 +1279,8 @@ $(document).ready(function () {
                                     <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                                     <p>${reply.comment_total_likes || 0}</p>
                                 </div>
-                                <button class="commented-user-reply-btn" data-comment-id="${
-                                    reply.id
-                                }">Reply</button>
+                                <button class="commented-user-reply-btn" data-comment-id="${reply.id
+                                        }">Reply</button>
                             </div>
                         `;
 
@@ -1480,8 +1469,8 @@ $(document).ready(function () {
                 // Get the emoji image source
                 emojiSrc = emojiPaths[reactionType];
                 const profileContent = profile && profile !== ""
-                ? `<img src="${profile}" alt="">`
-                : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ''}">${firstname ? firstname[0].toUpperCase() : ''}${lastname ? lastname[0].toUpperCase() : ''}</h5>`;
+                    ? `<img src="${profile}" alt="">`
+                    : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ''}">${firstname ? firstname[0].toUpperCase() : ''}${lastname ? lastname[0].toUpperCase() : ''}</h5>`;
                 // Create reaction list item
                 const reactionItem = `<li class="reaction-info-wrp">
                                     <div class="commented-user-head">
@@ -1601,7 +1590,7 @@ $(document).ready(function () {
                             "Like removed , updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
-                            let firstReaction = response.reactionList[0];
+                            let firstReaction = response.reactionList[0].reaction; // ✅
                             if (firstReaction.startsWith("\\u{")) {
                                 firstReaction = String.fromCodePoint(
                                     parseInt(
@@ -1643,13 +1632,145 @@ $(document).ready(function () {
                 } else {
                     alert(response.message);
                 }
+
             },
             error: function (xhr) {
                 console.error(xhr.responseText);
                 alert("An error occurred. Please try again.");
             },
-        });
 
+        });
+        function updateReactions(
+            reactions
+
+        ) {
+
+            const emojiPaths = {
+                heart: "/assets/front/img/heart-emoji.png",
+                thumb: "/assets/front/img/thumb-icon.png",
+                smily: "/assets/front/img/smily-emoji.png",
+                "eye-heart": "/assets/front/img/eye-heart-emoji.png",
+                clap: "/assets/front/img/clap-icon.png",
+            };
+
+            const allReactionsList = $("#nav-all-reaction ul");
+            const heartReactionsList = $("#nav-heart-reaction ul");
+            const thumbReactionsList = $("#nav-thumb-reaction ul");
+            const smilyReactionsList = $("#nav-smily-reaction ul");
+            const eyeHeartReactionsList = $("#nav-eye-heart-reaction ul");
+            const clapReactionsList = $("#nav-clap-reaction ul");
+
+            const reactionCounts = {
+                heart: 0,
+                thumb: 0,
+                smily: 0,
+                "eye-heart": 0,
+                clap: 0,
+            };
+
+            // Clear all reaction lists
+            allReactionsList.empty();
+            heartReactionsList.empty();
+            thumbReactionsList.empty();
+            smilyReactionsList.empty();
+            eyeHeartReactionsList.empty();
+            clapReactionsList.empty();
+
+            reactions.forEach((reactionData) => {
+                let reactionType = "";
+                let emojiSrc = "";
+
+                // Extract user details from the reaction object
+                const { reaction, firstname, lastname, profile, location } = reactionData;
+                // Map each reaction to a type
+                switch (reaction) {
+                    case "\\u{2764}": // Heart
+                        reactionType = "heart";
+                        break;
+                    case "\\u{1F44D}": // Thumbs Up
+                        reactionType = "thumb";
+                        break;
+                    case "\\u{1F60A}": // Smiley
+                        reactionType = "smily";
+                        break;
+                    case "\\u{1F60D}": // Eye-Heart
+                        reactionType = "eye-heart";
+                        break;
+                    case "\\u{1F44F}": // Clap
+                        reactionType = "clap";
+                        break;
+                    default:
+                        console.warn(`Unknown reaction: ${reaction}`);
+                        return; // Skip unknown reactions
+                }
+
+                // Increment the reaction count
+                reactionCounts[reactionType]++;
+
+                // Get the emoji image source
+                emojiSrc = emojiPaths[reactionType];
+                const profileContent = profile && profile !== ""
+                    ? `<img src="${profile}" alt="">`
+                    : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ''}">${firstname ? firstname[0].toUpperCase() : ''}${lastname ? lastname[0].toUpperCase() : ''}</h5>`;
+                // Create reaction list item
+                const reactionItem = `<li class="reaction-info-wrp">
+                                    <div class="commented-user-head">
+                                        <div class="commented-user-profile">
+                                            <div class="commented-user-profile-img">
+                                            ${profileContent}
+                                            </div>
+                                            <div class="commented-user-profile-content">
+                                                  <h3>${firstname} ${lastname}</h3>
+                                        <p>${location}</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+                                            <img src="${emojiSrc}" alt="">
+                                        </div>
+                                    </div>
+                                  </li>`;
+
+                // Append to specific reaction list
+                if (reactionType === "heart") {
+                    heartReactionsList.append(reactionItem);
+                } else if (reactionType === "thumb") {
+                    thumbReactionsList.append(reactionItem);
+                } else if (reactionType === "smily") {
+                    smilyReactionsList.append(reactionItem);
+                } else if (reactionType === "eye-heart") {
+                    eyeHeartReactionsList.append(reactionItem);
+                } else if (reactionType === "clap") {
+                    clapReactionsList.append(reactionItem);
+                }
+
+                // Append the same item to "All Reactions" list
+                console.log("Appending to All Reactions:", reactionItem);
+                allReactionsList.append(reactionItem);
+            });
+
+            // Update the counts in the navigation tabs
+            const totalReactions = Object.values(reactionCounts).reduce(
+                (sum, count) => sum + count,
+                0
+            );
+            $("#nav-all-reaction-tab").html(`All ${totalReactions}`);
+            $("#nav-heart-reaction-tab").html(
+                `<img src="${emojiPaths["heart"]}" alt=""> ${reactionCounts.heart}`
+            );
+            $("#nav-thumb-reaction-tab").html(
+                `<img src="${emojiPaths["thumb"]}" alt=""> ${reactionCounts.thumb}`
+            );
+            $("#nav-smily-reaction-tab").html(
+                `<img src="${emojiPaths["smily"]}" alt=""> ${reactionCounts.smily}`
+            );
+            $("#nav-eye-heart-reaction-tab").html(
+                `<img src="${emojiPaths["eye-heart"]}" alt=""> ${reactionCounts["eye-heart"]}`
+            );
+            $("#nav-clap-reaction-tab").html(
+                `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
+            );
+        }
         // Hide emoji picker
         $(this).closest("#emojiDropdown1").hide();
 
@@ -1782,7 +1903,7 @@ $(document).ready(function () {
         let selfReaction = post.self_reaction;
         let reactionHtml = "";
         let i = 0; // Count displayed reactions
-       let j = 0;
+        let j = 0;
 
         for (let reactionData of reactionList) {
             if (i >= 3) break; // Limit to 3 reactions
@@ -1792,9 +1913,9 @@ $(document).ready(function () {
             let emojiSrc = reactionIcons[reaction] || null; // Get emoji image
             if (emojiSrc) {
                 let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model_${post.id}"` : "";
-                            reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
-                            if (j === 0 && selfReaction === reaction) j++;
-                            i++;
+                reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
+                if (j === 0 && selfReaction === reaction) j++;
+                i++;
 
 
 
@@ -1806,8 +1927,8 @@ $(document).ready(function () {
 
         // If no reactions found, show an empty reaction placeholder
         if (j === 0 && i < 3) {
-                    reactionHtml += `<li id="reactionImage_model_${post.id}"></li>`;
-                }
+            reactionHtml += `<li id="reactionImage_model_${post.id}"></li>`;
+        }
 
         let likeCountHtml = `<p id="like_${post.id}">${post.total_likes} Likes</p>`;
 

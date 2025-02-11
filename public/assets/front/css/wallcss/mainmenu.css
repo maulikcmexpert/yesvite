@@ -3149,6 +3149,14 @@
     background-color: transparent;
 }
 
+.supportive-event-wrp .today-btn-home{
+    display: none !important;
+}
+
+.responsive-calendar .month h3:last-of-type{
+    text-align: right;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
@@ -3324,7 +3332,7 @@
     }
     .supportive-home-wrp .responsive-calendar{
         height: calc(100% - 0px);
-        top: 100px;
+        top: 0px;
     }
 }
 
