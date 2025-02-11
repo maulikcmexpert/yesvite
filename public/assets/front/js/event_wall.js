@@ -1,6 +1,6 @@
 // const { error } = require("toastr");
 
-let selectedFiles = null; // To store selected files
+var selectedFiles = null; // To store selected files
 
 // // Step 1: Preview the selected media
 // function previewStoryImage(event, userId) {
@@ -92,12 +92,24 @@ function previewStoryImage(event, userId) {
 
 function closePreviewModal(userId) {
     const previewContainer = document.getElementById(`preview-${userId}`);
-    const previewModal = document.getElementById(`previewModel-${userId}`); // Correct ID
+    const previewModal = document.getElementById(`previewModel-${userId}`);
+
     if (previewModal && previewContainer) {
-        previewModal.style.display = "none"; // Close the modal
-        previewContainer.style.display = "none"; // Hide the preview container
+        // Hide the modal and preview container
+        previewModal.style.display = "none";
+        previewContainer.style.display = "none";
+
+        // Revoke object URLs to free memory
+        const mediaElements = previewContainer.querySelectorAll("img, video");
+        mediaElements.forEach(media => {
+            URL.revokeObjectURL(media.src); // Revoke object URL
+        });
+
+        // Clear the preview container for the next upload
+        previewContainer.innerHTML = "";
     }
 }
+
 
 // Step 2: Upload the selected files on button click
 function uploadStoryImage(eventId, userId) {
@@ -1424,7 +1436,7 @@ function generateProfileImage(firstname, lastname) {
 }
 $(document).on('click','.get_post_emoji_list',function(){
     var post_id=$(this).data('post');
- 
+
 
        $("#nav-all-reaction ul").html("");
 
@@ -1454,7 +1466,7 @@ $(document).on('click','.get_post_emoji_list',function(){
     $('#nav-thumb-reaction').removeClass('active show');
     $('#nav-eye-heart-reaction').removeClass('active show');
     $('#nav-clap-reaction-tab').removeClass('active show');
-    
+
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
         type: "POST",
@@ -1480,20 +1492,20 @@ $(document).on('click','.get_post_emoji_list',function(){
                         tabId = "nav-heart-reaction";
                         emoji_name="heart-emoji";
                         count="heart-count";
-                    }  
-                        
+                    }
+
                     else if (reaction == "\\u{1F44D}"){
                         tabId = "nav-thumb-reaction";
                         emoji_name="thumb-icon";
                         count="thumb-count";
 
-                    } 
+                    }
                     else if (reaction == "\\u{1F60A}"){
                         tabId = "nav-smily-reaction";
                         emoji_name="smily-emoji";
                         count="smily-count";
 
-                    } 
+                    }
                     else if (reaction == "\\u{1F60D}"){
                         tabId = "nav-eye-heart-reaction"
                         emoji_name="eye-heart-emoji";
