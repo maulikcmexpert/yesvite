@@ -10,6 +10,7 @@ function getActiveTabPage() {
 }
 getActiveTabPage();
 $(document).on('click','#confirm_cancel_event_btn',function (event) {
+    alert(1)
     event.stopPropagation(); // Prevents event bubbling
     event.preventDefault();
     var event=parseInt($('#cancel_event_id').val());
