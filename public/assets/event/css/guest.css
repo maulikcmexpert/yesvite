@@ -585,6 +585,10 @@
     margin-top: 32px;
 }
 
+.groupsidebar .users-data .user_choice_group .right-note {
+    margin-bottom: 7px !important;
+}
+
 /* ============ responsive ============ */
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
