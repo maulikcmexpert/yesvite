@@ -1577,7 +1577,7 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
-                    console.log(response);
+                    console.log(response.reactionList);
 
                     // const post = {
                     //     id: eventPostId,

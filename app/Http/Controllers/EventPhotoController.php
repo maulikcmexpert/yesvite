@@ -1132,8 +1132,7 @@ class EventPhotoController extends Controller
             ->orderByDesc('count')
             ->take(3)
             ->orderByDesc('count')
-
-    ->get();
+             ->get();
 
         // Get post reactions with user details
         $postReactions = getReaction($request['event_post_id']);
