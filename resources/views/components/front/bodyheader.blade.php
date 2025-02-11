@@ -189,7 +189,7 @@ $notification_list=getNotificationList();
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne{{$i}}"
                       aria-expanded="true"
-                      aria-controls="collapseOne"
+                      aria-controls="collapseOne{{$i}}"
                       data-event_id="{{$value[0]['event_id']}}"
                     >
                       <div class="accordion-button-wrp">
