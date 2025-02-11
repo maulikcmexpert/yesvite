@@ -123,8 +123,9 @@
                 </div>
                 @foreach ($categories as $category)
                     @foreach ($category->subcategory as $subcategory)
+                    <div class="row list_all_design_wrp">
                         @foreach ($subcategory->textdatas as $image)
-                            <div class="row list_all_design_wrp">
+                            
                                 <div style="display: none"
                                     class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
                                     data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
@@ -141,8 +142,9 @@
                                         {{-- <h4>{{ $category->category_name }}</h4> --}}
                                     </a>
                                 </div>
-                            </div>
+                            
                         @endforeach
+                        </div>
                     @endforeach
                 @endforeach
 
