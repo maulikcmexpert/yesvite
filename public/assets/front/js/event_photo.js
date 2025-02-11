@@ -1632,8 +1632,8 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                 }
 
 
-                $(`#reactionImage_model${eventPostId}`).html(reactionImageHtml);
-                $(`#reactionImage${eventPostId}`).html(reactionImageHtml);
+                $(`#reactionImage_model_${eventPostId}`).html(reactionImageHtml);
+                $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
 
                 $(`#likeCount_${eventPostId}`).text(
@@ -1847,7 +1847,7 @@ function renderReactions(post) {
         let emojiSrc = reactionIcons[reaction] || null;
 
         if (emojiSrc) {
-            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model${post.id}"` : "";
+            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model_${post.id}"` : "";
             reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
@@ -1855,7 +1855,7 @@ function renderReactions(post) {
     }
 
     if (j === 0 && i < 3) {
-        reactionHtml += `<li id="reactionImage_model${post.id}" style="display:flex;"></li>`;
+        reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
     }
 
     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
