@@ -3134,7 +3134,8 @@
 }
 
 .supportive-home-wrp .responsive-calendar .month h3{
-    width: 91%;
+    max-width: 91%;
+    width: 100%;
 }
 
 .today-btn-home{
