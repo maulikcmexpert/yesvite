@@ -264,9 +264,6 @@ $(document).on("click", "#allchecked", function () {
 });
 
 function allCheckFun() {
-    alert($("#search_design_category").val())
-    $("#search_design_category").val("");
-    alert($("#search_design_category").val())
     $(".image-item-new").hide();
     $("#category_name").hide();
     $("#allchecked").hide();
@@ -276,6 +273,10 @@ function allCheckFun() {
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
     let search_value = "";
+    if($("#search_design_category").val() ==""){
+        return
+    }
+    $("#search_design_category").val("");
     $.ajax({
         url: base_url + "search_features",
         method: "GET",
