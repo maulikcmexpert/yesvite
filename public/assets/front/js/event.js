@@ -15,6 +15,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
     var event=parseInt($('#cancel_event_id').val());
     var reason=$('#reason_to_cancel_event').val();
     var cancel=$('#type_cancel').val();
+    var isWall=$('#isWall').val();
 
 
     if(reason==""){
@@ -43,7 +44,11 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
                     toastr.success("Event Cancelled successfully");
                 }
                 // $('#cancelevent').modal('hide');
-                window.location.reload();
+                if(isWall == "1"){
+                    window.location.href =base_url+'home'
+                }else{
+                    window.location.reload();
+                }
                 $('#loader').css('display','none');
 
 
@@ -536,10 +541,12 @@ function get_month_data(current_month){
 
 $(document).on('click','.cancel_event_option',function () {
     var event_id=$(this).data('event_id');
+    var isWall=$(this).data('isWall') || "0";
     console.log(event_id);
     $('#reason_to_cancel_event').val('');
     $('#type_cancel').val('');
     $('#cancel_event_id').val(event_id);
+    $('#isWall').val(isWall);
 });
 
 $(document).on('input', '#type_cancel', function () {
