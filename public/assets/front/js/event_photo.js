@@ -200,13 +200,13 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.status === 1) {
-                    const post = {
-                        id: eventPostId,
-                        reactionList: response.reactionList,
-                        // self_reaction: response.self_reaction,
-                        total_likes: response.count
-                    };
-                    document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
+                    // const post = {
+                    //     id: eventPostId,
+                    //     reactionList: response.reactionList,
+                    //     // self_reaction: response.self_reaction,
+                    //     total_likes: response.count
+                    // };
+                    // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
                     let reactionImageHtml = "";
                     if (response.is_reaction == "1") {
                         // ✅ User has liked the post, update the reaction image
@@ -218,7 +218,7 @@ $(document).ready(function () {
                     } else {
                         // ✅ User has removed like, set the first reaction from response
                         console.log(
-                            "Like removed, updating first available reaction..."
+                            "Like removed sf.kkshdfhjkfhjkhfjkhsdjkjkshfjksdhfhfdj, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
                             let firstReaction = response.reactionList[0];
