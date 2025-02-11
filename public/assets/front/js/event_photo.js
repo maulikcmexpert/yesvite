@@ -1546,9 +1546,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const emojiDisplay = button.find("#show_comment_emoji");
     const eventId = button.data("event-id");
     const eventPostId = button.data("event-post-id");
-    const button_main = $(this)
-        .closest(".photo-card-head-right")
-        .find("#likeButton_" + eventPostId);
+    const button_main = $("#likeButton_" + eventPostId);
     console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
