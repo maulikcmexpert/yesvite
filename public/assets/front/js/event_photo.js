@@ -1632,6 +1632,9 @@ $(document).ready(function () {
                     $(`#like_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
+                    $(`#likeCount_${eventPostId}`).text(
+                        `${response.count} Likes`
+                    );
                 } else {
                     alert(response.message);
                 }
@@ -1834,7 +1837,7 @@ $(document).ready(function () {
 
             // Remove the heart icon and set emoji inside the button
             $likeButton.html(
-                `<span class="emoji"><img src='${reactionIcons[emoji]}'/></span>`
+                `<i class="emoji"><img src='${reactionIcons[emoji]}'/></i>`
             ); // Show selected emoji inside button
 
             $emojiDropdown.hide(); // Hide emoji dropdown after selection
