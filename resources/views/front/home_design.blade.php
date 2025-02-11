@@ -151,7 +151,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input"
+                                                                    <input class="form-check-input subcategory_{{$subcategory->id}}"
                                                                         name="design_subcategory_new" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"

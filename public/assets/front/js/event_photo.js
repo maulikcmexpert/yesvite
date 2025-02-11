@@ -1620,7 +1620,7 @@ $(document).ready(function () {
                         button.removeClass("liked"); // Remove liked class
                         button.html(
                             '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
-                        ); // Reset button to default
+                        );
                     }
 
                     button_main.html(reactionImageHtml);
@@ -1783,7 +1783,7 @@ $(document).ready(function () {
 
             let emojiSrc = reactionIcons[reaction] || null; // Get emoji image
             if (emojiSrc) {
-                let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_${post.id}"` : "";
+                let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model_${post.id}"` : "";
                             reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
                             if (j === 0 && selfReaction === reaction) j++;
                             i++;
@@ -1798,7 +1798,7 @@ $(document).ready(function () {
 
         // If no reactions found, show an empty reaction placeholder
         if (j === 0 && i < 3) {
-                    reactionHtml += `<li id="reactionImage_${post.id}"></li>`;
+                    reactionHtml += `<li id="reactionImage_model_${post.id}"></li>`;
                 }
 
         let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
