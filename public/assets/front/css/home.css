@@ -525,6 +525,11 @@
     margin-bottom: 40px;
 }
 
+.collection-wrapper .list_all_design_wrp {
+    max-height: calc(100vh - 25vh) !important;
+    overflow-y: scroll !important;
+}
+
 .collection-wrapper .filter-main-wrp .filters-drp {
     display: flex;
     align-items: center;

@@ -186,6 +186,7 @@ $(document).ready(function () {
         // AJAX call to update emoji reaction
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
+        console.log(eventId,eventPostId);
         $.ajax({
             url: base_url + "event_photo/userPostLikeDislike",
             method: "POST",
@@ -1635,7 +1636,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     // AJAX call to update emoji reaction
     const eventId = button.data("event-id");
     const eventPostId = button.data("event-post-id");
-    console.log(eventId,eventPostId)
+    console.log(eventId,eventPostId);
     console.log(eventPostId);
     $.ajax({
         url: base_url + "event_photo/userPostLikeDislike",
