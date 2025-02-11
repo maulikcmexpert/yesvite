@@ -1124,3 +1124,7 @@ if (hiddenData != undefined) {
         },
     });
 }
+
+$(document).on('click','.notification-showall-btn',function(){
+
+});
