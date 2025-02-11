@@ -240,7 +240,7 @@ if (calender_json != undefined) {
             title.innerText = month.format("MMMM YYYY");
             monthContainer.appendChild(title);
 
-           
+
             const monthKey = month.format("YYYY-MM");
             const eventCount = monthEventCount[monthKey] || 0;
             const eventscount = document.createElement("h3");
@@ -249,7 +249,7 @@ if (calender_json != undefined) {
             }`;
             const todayButton = document.createElement("button");
             todayButton.innerText = "Today";
-            todayButton.className = "today-btn-home"; 
+            todayButton.className = "today-btn-home";
             monthContainer.appendChild(todayButton);
             monthContainer.appendChild(eventscount);
 
@@ -257,7 +257,7 @@ if (calender_json != undefined) {
                 "today-btn-home"
             );
             if (month.isSame(today, "month")) {
-                    todayButton.style.display = "block"; // Show the button
+                    todayButton.style.display = "inline-block"; // Show the button
                 } else {
                     todayButton.style.display = "none"; // Hide the button
                 }
