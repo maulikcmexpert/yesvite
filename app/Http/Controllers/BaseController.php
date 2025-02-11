@@ -12,6 +12,7 @@ class BaseController extends Controller
     public function __construct()
     {
         // Share prices with all views globally
+        dd($this->getPrices());
         View::share('prices', $this->getPrices());
         // Share coins globally with all views
         $user = $this->getUser();
