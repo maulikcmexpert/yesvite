@@ -188,8 +188,8 @@ $notification_list=getNotificationList();
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne{{$i}}"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
+                      aria-expanded="false"
+                      aria-controls="collapseOne{{$i}}"
                       data-event_id="{{$value[0]['event_id']}}"
                     >
                       <div class="accordion-button-wrp">
@@ -208,10 +208,10 @@ $notification_list=getNotificationList();
 
                     </button>
                   </h2>
+                  <!-- data-bs-parent="#accordionExample"> -->
                   <div
                     id="collapseOne{{$i}}"
-                    class="accordion-collapse collapse"
-                    data-bs-parent="#accordionExample">
+                    class="accordion-collapse collapse">
 
                     @foreach ($value as $inner_data )
 
