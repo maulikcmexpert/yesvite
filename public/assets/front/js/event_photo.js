@@ -1911,10 +1911,12 @@ $(document).ready(function () {
       });
 
       // Optional: Hide the emoji dropdown if you click outside of it
-      $(document).on("click touchstart", function (e) {
-        if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-          $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-        }
-      });
+    //   $(document).on("click touchstart", function (e) {
+      $(document).on('click','#likeButtonModel',function(){
+          if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+            $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+          }
+      })
+    //   });
     });
   });
