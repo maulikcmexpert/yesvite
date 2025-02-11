@@ -1,6 +1,6 @@
 // const { error } = require("toastr");
-$(document).ready(function () {
-let selectedFiles = null; // To store selected files
+
+var selectedFiles = null; // To store selected files
 
 // // Step 1: Preview the selected media
 // function previewStoryImage(event, userId) {
@@ -1593,4 +1593,3 @@ $(document).on('click','.get_post_emoji_list',function(){
 // const longPressDelay = 3000; // 3 seconds for long press
 // let pressTimer;
 // let isLongPress = false;
-});
