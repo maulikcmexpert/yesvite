@@ -254,13 +254,9 @@ if (calender_json != undefined) {
             eventscount.innerText = `${eventCount} event${
                 eventCount !== 1 ? "s" : ""
             }`;
-            const buttonWrapper = document.createElement("div");
-            buttonWrapper.className = "home-cal-button-wrapper"; 
-            
             const todayButton = document.createElement("button");
             todayButton.innerText = "Today";
-            todayButton.className = "today-btn-home";
-
+            todayButton.className = "today-btn-home"; 
             monthContainer.appendChild(todayButton);
             monthContainer.appendChild(eventscount);
 
