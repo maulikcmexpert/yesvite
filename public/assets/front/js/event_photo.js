@@ -202,9 +202,9 @@ $(document).ready(function () {
                 if (response.status === 1) {
                     const post = {
                         id: eventPostId,
-                        reactionList: data.reactionList,
-                        // self_reaction: data.self_reaction,
-                        total_likes: data.count
+                        reactionList: response.reactionList,
+                        // self_reaction: response.self_reaction,
+                        total_likes: response.count
                     };
                     document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
                     let reactionImageHtml = "";
