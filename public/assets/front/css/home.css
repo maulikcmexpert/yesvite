@@ -1161,9 +1161,9 @@
         line-height: 24px;
     }
 
-    .collection-card .card-img {
+    /* .collection-card .card-img {
         margin-bottom: 15px;
-    }
+    } */
 
     .features-wrapper .owl-carousel .owl-dots {
         display: flex;
