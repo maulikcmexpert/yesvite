@@ -13,10 +13,17 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
-let { width, height } = document
-    .querySelector(".image-edit-inner-img")
-    .getBoundingClientRect();
-console.log("Width:", width, "Height:", height);
+let element = document.querySelector(".image-edit-inner-img");
+
+if (element) {
+    let { width, height } = element.getBoundingClientRect();
+    console.log("Width:", width, "Height:", height);
+} else {
+    let { width, height } = { width: 590, height: 880 };
+    console.log(width, height); // Output: 590 880
+
+    console.log("Element not found!");
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded fired");
