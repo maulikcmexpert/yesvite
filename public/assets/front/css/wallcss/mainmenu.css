@@ -3111,6 +3111,14 @@
     width: 100%;
     background-color: transparent;
 }
+.view-calender-heading{
+    flex-direction: column !important;
+    align-items: start !important;
+}
+
+.supportive-home-wrp .responsive-calendar{
+    height: calc(100% - 80px);
+}
 
 /* ===Responsive=== */
 @media only screen and (max-width: 1399px) {
