@@ -837,6 +837,7 @@ header{
     max-width: 100% !important;
     font-size: 14px !important;
     line-height: normal !important;
+    height: auto !important;
 }
 
 .header-profile-dropdown .credits_balance_amout_wrp h5 img {
