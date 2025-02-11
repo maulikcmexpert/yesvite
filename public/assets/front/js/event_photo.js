@@ -1561,9 +1561,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
-    const button_main = $(this)
-    .closest(".photo-card-head-right")
-    .find("#likeButton");
+    const button_main = $(this).closest(".photo-card-head-right").find("#likeButton");
     console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
@@ -1603,7 +1601,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                     if (reactionIcons[selectedEmoji]) {
                         console.log (reactionIcons[selectedEmoji]);
                         reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
-                       
+
                     }
                     button.addClass("liked"); // Add liked class
                 } else {
