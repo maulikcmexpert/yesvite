@@ -391,6 +391,7 @@ defer
 
 <script>
   $(document).on("click", ".buycredits", function () {
+    console.log("hello")
     $("#buycreditsmodal").modal("show");
 });
 $(document).on("click", ".buynow", function () {
