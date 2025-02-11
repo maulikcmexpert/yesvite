@@ -152,7 +152,7 @@ $(document).ready(function () {
                             "Like removed sf.kkshdfhjkfhjkhfjkhsdjkjkshfjksdhfhfdj, updating first available reaction..."
                         );
                         if (response.reactionList.length > 0) {
-                            let firstReaction = response.reactionList[0];
+                            let firstReaction = response.reactionList[0].reaction; // ✅
                             if (firstReaction.startsWith("\\u{")) {
                                 firstReaction = String.fromCodePoint(
                                     parseInt(
@@ -1480,7 +1480,7 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+
 
                                             </div>
                                         </div>
@@ -1721,7 +1721,7 @@ $(document).ready(function () {
                                             </div>
                                             <div class="commented-user-profile-content">
                                                   <h3>${firstname} ${lastname}</h3>
-                                        <p>${location}</p>
+
 
                                             </div>
                                         </div>
@@ -1963,7 +1963,7 @@ $(document).ready(function () {
 
             // Remove the heart icon and set emoji inside the button
             $likeButton.html(
-                `<i class="emoji"><img src='${reactionIcons[emoji]}'/></i>`
+                `<img src='${reactionIcons[emoji]}'/>`
             ); // Show selected emoji inside button
 
             $emojiDropdown.hide(); // Hide emoji dropdown after selection

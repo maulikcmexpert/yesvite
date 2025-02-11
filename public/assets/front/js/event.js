@@ -649,6 +649,9 @@ $(document).on("click",".event_nav",function () {
 $(document).on('click',".day",function () {
     // alert();
     var search_date=$(this).data('date');
+    if(search_date==undefined||search_date==""){
+        return;
+    }
     console.log(search_date);
     var searchValue = $(this).val();
     var current_month="";
@@ -680,7 +683,10 @@ $(document).on('click',".day",function () {
 
     }
     search_user_ajax_timer = setTimeout(function () {
-        $('#loader').css('display','flex');    
+        $('#loader').css('display','flex');   
+        if(ajax_base_url==undefined||scrollStatus==undefined||tabbtn==undefined) {
+            return;
+        }
         console.log(ajax_base_url)
         console.log(scrollStatus);
         console.log(tabbtn);
@@ -954,7 +960,7 @@ $(document).on('click','.notification-rsvp-btn', function () {
      $('#rsvp_notification_kids').val("0");
      $('#rsvp_notification_message').val('');
      $('#rsvp_notification_message').val('');
-     $('#rsvp_yes').prop('checked',true)
+     $('#rsvp_yes').prop('checked',false);
      $('.rsvp_minus_notify').prop('disabled',false);
      $('.rsvp_plus_notify').prop('disabled',false);
 

@@ -1627,6 +1627,8 @@ $notification_list=getNotificationList();
                         $fontColor = "fontcolor" . strtoupper($userprofile->firstname[0]);
                         $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
                     }
+
+
             }
           @endphp
           {!! $userProfile !!}
@@ -1654,7 +1656,16 @@ $notification_list=getNotificationList();
             </div>
             <ul>
               <li><a href="{{route('profile')}}">Profile</a></li>
+              <li><a href="{{route('profile.transaction')}}">Transactions History</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
+              <li><a href="javascript:;" class="credits_balance_amout_wrp">Credits  
+                                        <h5>
+                                            <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
+                                            <span class="available-coins">{{$userprofile->coins}}</span>
+                                        </h5>
+                                      </a>
+              </li>
+             
               {{-- <li><a href="#">Pro Subscription</a></li> --}}
             </ul>
             <div class="header-profile-button-wrp">
