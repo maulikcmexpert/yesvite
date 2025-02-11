@@ -361,7 +361,7 @@
 
 .guest-main-content .contact-tab .users-data .user_choice_group {
     margin-top: 31px;
-    margin-bottom: 0 !important;
+    gap: 0 !important;
 }
 
 .new-group-name-wrp {
@@ -372,7 +372,7 @@
 .guest-sidebar .toggle-wrp {
     border-bottom: 1px solid var(--borderColor);
     padding-bottom: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
 }
 
 .guest-sidebar .group-card {
@@ -579,6 +579,14 @@
 
 .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
     max-height: calc(100vh - 440px);
+}
+
+.groupsidebar .users-data .user_choice_group {
+    margin-top: 31px;
+}
+
+.groupsidebar .users-data .user_choice_group .right-note {
+    margin-top: 11px;
 }
 
 /* ============ responsive ============ */

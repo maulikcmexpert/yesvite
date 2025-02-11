@@ -1,5 +1,5 @@
 
-<div class="home-center-content-head">
+<div class="home-center-content-head user-name-title">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
 
 
@@ -18,7 +18,7 @@
       </svg>
     </span>
 </div>
-<div class="view-calender-heading home-center-content-head">
+<div class="view-calender-heading home-center-content-head d-none">
     <nav class="breadcrumb-nav" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>

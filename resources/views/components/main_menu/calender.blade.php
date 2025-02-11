@@ -1,7 +1,7 @@
 @php
 use Carbon\Carbon;
 @endphp
-<div class="calendar-wrp">
+<div class="calendar-wrp home-calender">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
