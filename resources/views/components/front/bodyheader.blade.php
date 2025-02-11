@@ -1094,9 +1094,9 @@ $notification_list=getNotificationList();
                                         {{$inner_data['first_name']}} {{$inner_data['last_name']}}
                                         {{-- <span> posted on wall at </span> --}}
                                         @if($inner_data['media_type']=="photo")
-                                            <span> posted new photo on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a> </span>
+                                            <span> liked your posted photo on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a> </span>
                                         @elseif($inner_data['media_type']=="video")
-                                          <span> posted video on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
+                                          <span> liked your posted video on <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @else
                                         <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @endif
