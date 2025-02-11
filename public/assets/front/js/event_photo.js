@@ -1128,6 +1128,9 @@ $(document).ready(function () {
                         console.log(reactionIcons[reaction_store]);
 
                         reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
+                    }else {
+                        // If reaction_store is not found, show a default icon
+                        reactionImageHtml = `<i class="fa-regular fa-heart"></i>`;
                     }
                     $(`#likeButtonModel`).html(reactionImageHtml);
                     let reaction_list = response.reactionList;

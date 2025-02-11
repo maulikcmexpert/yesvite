@@ -1245,6 +1245,10 @@
     .collection-wrapper .filter-dropdowns {
         width: 100%;
     }
+
+    .collection-card {
+        padding: 10px 10px;
+    }
 }
 
 @media only screen and (max-width: 435px) {
