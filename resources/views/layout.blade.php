@@ -33,7 +33,6 @@
 
     <x-front.footer :js="$js ?? []" /> --}}
     <x-front.bodyfooter page="{{ $page }}" />
-@dd($prices)
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
 </body>
 
