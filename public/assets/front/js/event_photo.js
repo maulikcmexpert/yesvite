@@ -203,7 +203,7 @@ $(document).ready(function () {
                     const post = {
                         id: eventPostId,
                         reactionList: data.reactionList,
-                        self_reaction: data.self_reaction,
+                        // self_reaction: data.self_reaction,
                         total_likes: data.count
                     };
                     document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
