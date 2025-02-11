@@ -313,12 +313,6 @@ $(document).on("click", function (e) {
 // end code
 
 
-// alfez code
-
-$(document).on('click','#likeButtonModel',function(){
-    $("#emojiDropdown").show();
-})
-//
 
 $(document).on("click", "#delete_post", function () {
     const button = $(this);
