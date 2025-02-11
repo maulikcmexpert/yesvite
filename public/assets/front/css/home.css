@@ -616,7 +616,7 @@
     height: 10px;
     position: absolute;
     right: 18px;
-    top: 39%;
+    top: 35%;
     transform: translateY(-50%);
     color: var(--lightColor);
     pointer-events: none;
@@ -1161,9 +1161,9 @@
         line-height: 24px;
     }
 
-    .collection-card .card-img {
+    /* .collection-card .card-img {
         margin-bottom: 15px;
-    }
+    } */
 
     .features-wrapper .owl-carousel .owl-dots {
         display: flex;

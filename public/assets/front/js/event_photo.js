@@ -80,6 +80,7 @@ $(document).ready(function () {
         "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
         "\\u{1F604}": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\\u{1F44F}": base_url + "assets/front/img/smily-emoji.png", // 😄
+        "\u{1F60A}": base_url + "assets/front/img/smily-emoji.png", // 😄
         "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
         "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
         "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
@@ -1544,9 +1545,9 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
-    const button_main = $(this)
-        .closest(".photo-card-head-right")
-        .find(".like-btn");
+    const eventId = button.data("event-id");
+    const eventPostId = button.data("event-post-id");
+    const button_main = $("#likeButton_" + eventPostId);
     console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
@@ -1554,8 +1555,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     emojiDisplay.text(selectedEmoji);
 
     // AJAX call to update emoji reaction
-    const eventId = button.data("event-id");
-    const eventPostId = button.data("event-post-id");
+
     console.log(eventId, eventPostId);
     console.log(eventPostId);
     $.ajax({
