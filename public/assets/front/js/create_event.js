@@ -9357,6 +9357,3 @@ $(document).on("click", ".previousImeg", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-$(document).on("click", "#buycredits", function () {
-    $("#buycreditsmodal").modal("show");
-});

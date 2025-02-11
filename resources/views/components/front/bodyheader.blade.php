@@ -1658,7 +1658,7 @@ $notification_list=getNotificationList();
               <li><a href="{{route('profile')}}">Profile</a></li>
               <li><a href="{{route('profile.transaction')}}">Transactions History</a></li>
               <li><a href="{{route('profile.account_settings')}}">Account Settings</a></li>
-              <li><a href="javascript:;" id="buycredits" class="credits_balance_amout_wrp">Credits  
+              <li><a href="javascript:;" class="buycredits credits_balance_amout_wrp">Credits  
                                         <h5>
                                             <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                             <span class="available-coins">{{$userprofile->coins}}</span>
@@ -1827,14 +1827,14 @@ $notification_list=getNotificationList();
 
                              <div class="collapse navbar-collapse" id="mynavbar">
                                  <ul class="navbar-nav align-items-center ms-auto">
-                                     <li class="nav-item {{ (Request::segment(1) == 'homes')? 'active':'' }}">
-                                         <a class="nav-link" href="{{ route('homes')}}">Home</a>
+                                     <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
+                                         <a class="nav-link" href="{{ route('front.home')}}">Home</a>
                                      </li>
                                      <li class="nav-item {{ (Request::segment(1) == 'about-us')? 'active':'' }}">
                                          <a class="nav-link" href="{{ route('about')}}">About Us</a>
                                      </li>
-                                     <li class="nav-item {{ (Request::segment(1) == '')? 'active':'' }}">
-                                      <a class="nav-link" href="{{ route('front.home')}}">Features</a>
+                                     <li class="nav-item {{ (Request::segment(1) == 'features')? 'active':'' }}">
+                                      <a class="nav-link" href="{{ route('features')}}">Features</a>
                                    </li>
                                   <li class="nav-item {{ (Request::segment(1) == 'pricing')? 'active':'' }}">
                                     <a class="nav-link" href="{{ route('pricing')}}">Pricing</a>

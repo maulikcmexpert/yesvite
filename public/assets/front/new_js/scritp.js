@@ -363,6 +363,9 @@ $(document).on("change", ".fileInputtype", function (event) {
 
     const totalFiles = imagePreview.children.length + files.length;
 
+    // Store reference to the current input element
+    const currentFileInput = event.target;
+
     // Toggle visibility based on file presence
     if (files.length > 0) {
         uploadImgInner.classList.add("d-none");
@@ -395,14 +398,18 @@ $(document).on("change", ".fileInputtype", function (event) {
         </svg>
       `;
             deleteIcon.classList.add("uploded-delete-icon");
+
             // Delete image functionality
             deleteIcon.addEventListener("click", function () {
                 imagePreview.removeChild(previewDiv);
 
-                // Show `create-post-upload-img-inner` and hide `create-post-head-upload-btn` if no images left
+                // Check if there are any images left
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
+
+                    // Clear the value of the current file input
+                    currentFileInput.value = "";
                 }
             });
 
@@ -428,6 +435,7 @@ $(document).on("change", ".fileInputtype", function (event) {
         fileReader.readAsDataURL(file);
     });
 });
+
 
 // Add new option on click
 // $(".option-add-btn").on("click", function () {

@@ -21,7 +21,7 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on("click", ".create_post", function () {
         // Check if the poll form exists and is valid
-
+        var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
         //   var postContent = document.getElementById('postContent').value.trim();
@@ -42,6 +42,7 @@ $(document).ready(function () {
             // }
             // Set the value of the hidden input in the photo form
             //  document.getElementById('photoContent').value = postContent;
+            $this.prop("disabled", true);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
