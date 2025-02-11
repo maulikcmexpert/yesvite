@@ -4189,11 +4189,11 @@ class EventController extends BaseController
         $user  = Auth::guard('web')->user();
 
         if($is_owner=="1"){
-            $event=Event::where(['event_id' => $event_id, 'user_id' => $user->id])->first();
+            $event=Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
             $event->update(['is_notification_on_off' => $status]);
 
         }else{
-            $Guest = EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
+            $Guest = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user->id])->first();
             $Guest->update(['is_notification_on_off' => $status]);
         }
        
