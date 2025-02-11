@@ -293,8 +293,9 @@ $(document).on("click", function (e) {
 });
 
 $(document).on("click", function (e) {
-    alert()
+
     if (!$(e.target).closest(".posts-card-like-comment-right").length) {
+        // alert();
         $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
     }
 });
