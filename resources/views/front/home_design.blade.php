@@ -123,7 +123,7 @@
                         <div class="dropdown-menu collection-menu">
                             <div class="filter-head">
                                 <h5>Categories</h5>
-                                <a href="#" class="reset-btn" id="resetCategories">Reset</a>
+                                <a href="#" class="reset-btn" id="resetCategoriesNew">Reset</a>
                             </div>
                             <div class="filter-categories">
                                 <div class="accordion" id="accordionExample">
