@@ -1,7 +1,6 @@
 $(document).ready(function () {
     // Function to update character count
 
-
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
@@ -87,7 +86,7 @@ $(document).ready(function () {
         "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
         "👏": base_url + "assets/front/img/clap-icon.png", // 👏
     };
-    $(document).on("mousedown", "#likeButton", function () {
+    $(document).on("mousedown", ".like-btn", function () {
         isLongPresss = false; // Reset the flag
         const button = $(this);
 
@@ -102,13 +101,12 @@ $(document).ready(function () {
         }, 500); // 500ms for long press
     });
 
-
     $(document).on("click", "#emojiDropdown .emoji", function () {
         const selectedEmoji = $(this).data("emoji");
         const button = $(this)
             .closest(".photo-card-head-right")
-            .find("#likeButton");
-            console.log(selectedEmoji);
+            .find(".like-btn");
+        console.log(selectedEmoji);
 
         // const emojiDisplay = button.find('#show_Emoji');
 
@@ -119,7 +117,7 @@ $(document).ready(function () {
         // AJAX call to update emoji reaction
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
-        console.log(eventId,eventPostId);
+        console.log(eventId, eventPostId);
         $.ajax({
             url: base_url + "event_photo/userPostLikeDislike",
             method: "POST",
@@ -146,7 +144,7 @@ $(document).ready(function () {
                         // ✅ User has liked the post, update the reaction image
                         console.log("Like given, updating reaction image...");
                         if (reactionIcons[selectedEmoji]) {
-                            console.log (reactionIcons[selectedEmoji]);
+                            console.log(reactionIcons[selectedEmoji]);
                             reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                         }
                         button.addClass("liked"); // Add liked class
@@ -180,9 +178,7 @@ $(document).ready(function () {
                         ); // Reset button to default
                     }
 
-
                     $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
-
 
                     $(`#likeCount_${eventPostId}`).text(
                         `${response.count} Likes`
@@ -235,7 +231,6 @@ $(document).on("click", function (e) {
 });
 
 $(document).on("click", function (e) {
-
     if (!$(e.target).closest(".posts-card-like-comment-right").length) {
         // alert();
         $(".photos-likes-options-wrp").hide(); // Hide emoji picker when clicked outside
@@ -253,9 +248,6 @@ $(document).on("click", function (e) {
 // });
 
 // end code
-
-
-
 
 //
 
@@ -1066,7 +1058,7 @@ $(document).on("click", ".open_photo_model", function () {
                     id: postId,
                     reactionList: data.reactionList,
                     self_reaction: data.self_reaction,
-                    total_likes: data.total_likes
+                    total_likes: data.total_likes,
                 };
 
                 function generateProfileImage(firstname, lastname) {
@@ -1108,9 +1100,7 @@ $(document).on("click", ".open_photo_model", function () {
                 $("#post_message").text(data.post_message);
                 $("#post_time_details").text(data.post_time);
 
-                const reactionVal = data.reactionList.forEach((that) => {
-
-                });
+                const reactionVal = data.reactionList.forEach((that) => {});
 
                 // $("#likeCount").text(data.total_likes + " Likes");
                 // Add 'Likes' after the number
@@ -1121,13 +1111,9 @@ $(document).on("click", ".open_photo_model", function () {
 
                 var reaction_store = data.self_reaction.trim();
 
-
-
                 console.log(reaction_store);
 
-
-
-                let reactionImageHtml = $('#likeButtonModel');
+                let reactionImageHtml = $("#likeButtonModel");
                 console.log(reactionImageHtml);
 
                 if (reactionIcons[reaction_store]) {
@@ -1136,16 +1122,16 @@ $(document).on("click", ".open_photo_model", function () {
                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
                 }
                 $(`#likeButtonModel`).html(reactionImageHtml);
-               let reaction_list = response.reactionList;
-            //    reaction_list.each(function () {
+                let reaction_list = response.reactionList;
+                //    reaction_list.each(function () {
 
-            //     $(`#reactionImage`).html(reactionIcons[reaction_store]);
-            //    });
+                //     $(`#reactionImage`).html(reactionIcons[reaction_store]);
+                //    });
 
-            document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
+                document.getElementById("postCardEmoji").innerHTML =
+                    renderReactions(post);
                 // Update the emoji list based on the reaction
                 const reactionList = $(".posts-card-like-comment-left ul");
-
 
                 reactionList.find("li").each(function () {
                     const img = $(this).find("img");
@@ -1554,22 +1540,22 @@ $(document).on("click", ".open_photo_model", function () {
 let longPressTimers;
 let isLong_press = false;
 
-
-
-
 $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
     const selectedEmoji = $(this).data("emoji");
     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
     const emojiDisplay = button.find("#show_comment_emoji");
+    const eventId = button.data("event-id");
+    const eventPostId = button.data("event-post-id");
+    const button_main = $("#likeButton_" + eventPostId);
+    console.log(selectedEmoji);
 
     // Replace heart icon with selected emoji
     emojiDisplay.removeClass();
     emojiDisplay.text(selectedEmoji);
 
     // AJAX call to update emoji reaction
-    const eventId = button.data("event-id");
-    const eventPostId = button.data("event-post-id");
-    console.log(eventId,eventPostId);
+
+    console.log(eventId, eventPostId);
     console.log(eventPostId);
     $.ajax({
         url: base_url + "event_photo/userPostLikeDislike",
@@ -1597,7 +1583,7 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                     // ✅ User has liked the post, update the reaction image
                     console.log("Like given, updating reaction image...");
                     if (reactionIcons[selectedEmoji]) {
-                        console.log (reactionIcons[selectedEmoji]);
+                        console.log(reactionIcons[selectedEmoji]);
                         reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
                     }
                     button.addClass("liked"); // Add liked class
@@ -1631,14 +1617,13 @@ $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
                     ); // Reset button to default
                 }
 
-
-                $(`#reactionImage_model${eventPostId}`).html(reactionImageHtml);
-                $(`#reactionImage${eventPostId}`).html(reactionImageHtml);
-
-
-                $(`#likeCount_${eventPostId}`).text(
-                    `${response.count} Likes`
+                button_main.html(reactionImageHtml);
+                $(`#reactionImage_model_${eventPostId}`).html(
+                    reactionImageHtml
                 );
+                $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
+
+                $(`#likeCount_${eventPostId}`).text(`${response.count} Likes`);
             } else {
                 alert(response.message);
             }
@@ -1847,7 +1832,10 @@ function renderReactions(post) {
         let emojiSrc = reactionIcons[reaction] || null;
 
         if (emojiSrc) {
-            let listItemId = (j === 0 && selfReaction === reaction) ? `id="reactionImage_model${post.id}"` : "";
+            let listItemId =
+                j === 0 && selfReaction === reaction
+                    ? `id="reactionImage_model_${post.id}"`
+                    : "";
             reactionHtml += `<li ${listItemId} style="display:flex;"><img src="${emojiSrc}" alt="Emoji"></li>`;
             if (j === 0 && selfReaction === reaction) j++;
             i++;
@@ -1855,7 +1843,7 @@ function renderReactions(post) {
     }
 
     if (j === 0 && i < 3) {
-        reactionHtml += `<li id="reactionImage_model${post.id}" style="display:flex;"></li>`;
+        reactionHtml += `<li id="reactionImage_model_${post.id}" style="display:flex;"></li>`;
     }
 
     let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
@@ -1877,46 +1865,47 @@ $(document).ready(function () {
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
 
-    $(document).on('click','#likeButtonModel',function(){
-        console.log("asd")
+    $(document).on("click", "#likeButtonModel", function () {
+        console.log("asd");
         setTimeout(function () {
             $("#emojiDropdown1").show();
-            console.log("asd")
-        },1000)
+            console.log("asd");
+        }, 1000);
 
-        $("#emojiDropdown1").css("display","block");
- console.log($("#emojiDropdown1"))
+        $("#emojiDropdown1").css("display", "block");
+        console.log($("#emojiDropdown1"));
     });
     $(".posts-card-like-comment-right").each(function () {
-      const $container = $(this); // Get the current container
-      const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
-      const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
-      let pressTimer;
+        const $container = $(this); // Get the current container
+        const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+        const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+        let pressTimer;
 
-      // Handle long press to show emoji dropdown (for both desktop and mobile)
+        // Handle long press to show emoji dropdown (for both desktop and mobile)
 
+        //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+        //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+        //   });
 
-    //   $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-    //     clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-    //   });
+        // Handle emoji click
+        $emojiDropdown.on("click", ".emoji", function () {
+            const emoji = $(this).data("emoji");
 
-      // Handle emoji click
-      $emojiDropdown.on("click", ".emoji", function () {
-        const emoji = $(this).data("emoji");
+            // Remove the heart icon and set emoji inside the button
+            $likeButton.html(
+                `<span class="emoji"><img src='${reactionIcons[emoji]}'/></span>`
+            ); // Show selected emoji inside button
 
-        // Remove the heart icon and set emoji inside the button
-        $likeButton.html(`<span class="emoji"><img src='${reactionIcons[emoji]}'/></span>`); // Show selected emoji inside button
+            $emojiDropdown.hide(); // Hide emoji dropdown after selection
+        });
 
-        $emojiDropdown.hide(); // Hide emoji dropdown after selection
-      });
-
-      // Optional: Hide the emoji dropdown if you click outside of it
-    //   $(document).on("click touchstart", function (e) {
-    //   $(document).on('click','#likeButtonModel',function(e){
-    //       if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-    //         $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-    //       }
-    //   })
-    //   });
+        // Optional: Hide the emoji dropdown if you click outside of it
+        //   $(document).on("click touchstart", function (e) {
+        //   $(document).on('click','#likeButtonModel',function(e){
+        //       if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+        //         $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+        //       }
+        //   })
+        //   });
     });
-  });
+});
