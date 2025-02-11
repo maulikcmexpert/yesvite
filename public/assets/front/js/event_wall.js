@@ -59,7 +59,7 @@ function previewStoryImage(event, userId) {
     selectedFiles = files; // Store files for uploading later
     const previewContainer = document.getElementById(`preview-${userId}`);
     const uploadButton = document.getElementById(`upload-button-${userId}`);
-    const fileInput = event.target; // Get file input element
+
     previewContainer.innerHTML = ""; // Clear previous preview
 
     Array.from(files).forEach((file) => {
@@ -82,7 +82,7 @@ function previewStoryImage(event, userId) {
 
     // Show the Upload button after preview
     uploadButton.style.display = "flex";
-    
+
     // Display the preview modal
     const previewModal = document.getElementById(`previewModel-${userId}`);
     if (previewModal) {
@@ -90,7 +90,7 @@ function previewStoryImage(event, userId) {
     }
 
     // Clear file input to allow re-selection of the same file
-    fileInput.value = "";
+
 }
 
 function closePreviewModal(userId) {
@@ -110,6 +110,7 @@ function closePreviewModal(userId) {
 
         // Clear the preview container for the next upload
         previewContainer.innerHTML = "";
+        
     }
 }
 
