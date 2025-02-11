@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
 
-class EventWallController extends Controller
+class EventWallController extends BaseController
 {
     protected $perPage;
 
@@ -548,12 +548,12 @@ class EventWallController extends Controller
         $event = decrypt($id);
         $encrypt_event_id = $id;
         $page = 'front.event_wall.event_wall';
-        $selectedFilters=[];
+        $selectedFilters = [];
         // $selectedFilters = (session('filterSession')=="")?[]:$selectedFilters ;
         $selectedFilters = empty(session('filterSession')) ? [] : session('filterSession');
-        $is_filter_applied="0";
-        if(!empty(session('filterSession'))){
-            $is_filter_applied="1";
+        $is_filter_applied = "0";
+        if (!empty(session('filterSession'))) {
+            $is_filter_applied = "1";
         }
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -1776,12 +1776,13 @@ class EventWallController extends Controller
         return redirect()->back()->with('msg', 'Poll created successfully!');
     }
 
-    public function get_reaction_post_list(Request $request){
+    public function get_reaction_post_list(Request $request)
+    {
         $user = Auth::guard('web')->user();
-        $post_id=$request->post_id;
+        $post_id = $request->post_id;
         $getreaction = EventPostReaction::where('event_post_id', $post_id)
-        ->with(['user'])
-        ->get();
+            ->with(['user'])
+            ->get();
 
         $reactionWiseUsers = [];
         foreach ($getreaction as $reaction) {
@@ -1797,11 +1798,11 @@ class EventWallController extends Controller
         $reactionCounts = $getreaction->groupBy('reaction')->map(function ($group) {
             return $group->count();
         });
-        $reaction_detail=[
-            'total_count'=>$totalReactions,
-            'reaction_count'=>$reactionCounts,
+        $reaction_detail = [
+            'total_count' => $totalReactions,
+            'reaction_count' => $reactionCounts,
         ];
-        return response()->json(['status' => 1, 'reaction_detail' => $reaction_detail,'reaction_list'=>$reactionWiseUsers]);
+        return response()->json(['status' => 1, 'reaction_detail' => $reaction_detail, 'reaction_list' => $reactionWiseUsers]);
 
         // dd($reaction_detail,$reactionWiseUsers);
     }
@@ -2951,7 +2952,7 @@ class EventWallController extends Controller
         $postList = [];
         $selectedFilters = $request->input('filters');
 
-        if($request->is_delete=="1"){
+        if ($request->is_delete == "1") {
             Session::forget('filterSession');
             return;
         }

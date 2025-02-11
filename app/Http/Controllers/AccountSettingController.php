@@ -52,7 +52,7 @@ class AccountSettingController extends BaseController
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
         $user['subscribe_status'] = checkSubscription($user->id);
-        $lastRecharge= Coin_transactions::where(['user_id' => $user->id, 'type' => 'credit'])->orderBy('id', 'DESC')->first();
+        $lastRecharge = Coin_transactions::where(['user_id' => $user->id, 'type' => 'credit'])->orderBy('id', 'DESC')->first();
         $user['lastRecharge'] = '';
         if ($lastRecharge) {
             if ($lastRecharge->description == 'Signup Bonus') {
@@ -312,7 +312,8 @@ class AccountSettingController extends BaseController
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
-        $user['join_date'] = $formatted_date;        $user['photo_via_wifi'] = $user->photo_via_wifi;
+        $user['join_date'] = $formatted_date;
+        $user['photo_via_wifi'] = $user->photo_via_wifi;
         $user['show_profile_photo_only_frds'] = $user->show_profile_photo_only_frds;
 
         $groupCount = Coin_transactions::with(['users', 'event', 'user_subscriptions'])->where('user_id', $id)
