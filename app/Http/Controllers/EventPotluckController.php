@@ -33,7 +33,7 @@ class EventPotluckController extends Controller
 {
     public function index(String $id)
     {
-        
+
         $title = 'Event Potluck';
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
@@ -44,7 +44,7 @@ class EventPotluckController extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
         try {
-            // New Code 
+            // New Code
             $eventpotluckData =  EventPotluckCategory::with(['users', 'event_potluck_category_item' => function ($query) {
                 $query->with(['users', 'user_potluck_items' => function ($subquery) {
                     $subquery->with('users')->sum('quantity');
@@ -52,13 +52,13 @@ class EventPotluckController extends Controller
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
 
             // if (!empty($eventpotluckData)) {
-                
+
             //     // dd($eventDetail);
             // }
 
 
 
-          
+
 
 
 
@@ -77,7 +77,7 @@ class EventPotluckController extends Controller
                     $subquery->with('users')->sum('quantity');
                 }]);
             }])->withCount('event_potluck_category_item')->where('event_id', $event)->get();
-           
+
             $totalItems = EventPotluckCategoryItem::where('event_id', $event)->sum('quantity');
 
 
@@ -92,17 +92,17 @@ class EventPotluckController extends Controller
             $potluckDetail['left'] = $totalItems - $spoken_for;
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
-        
+
             $potluckDetail['podluck_category_list_new']=[];
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
-               
+
                 $potluckDetail['total_potluck_item'] = EventPotluckCategoryItem::where('event_id', $event)->count();
                 $categories = session()->get('category', []);
                 $totalCategoryItem = 0;
                 foreach ($eventpotluckData as  $key => $value) {
-                 
+
                     $potluckCategory['id'] = $value->id;
                     $potluckCategory['category'] = $value->category;
                     $potluckCategory['created_by'] = $value->users->firstname . ' ' . $value->users->lastname;
@@ -110,16 +110,16 @@ class EventPotluckController extends Controller
                     $potluckCategory['items'] = [];
                     $categoryQuantity = 0;
                     $remainingQnt = 0;
-                    $totalItem = 0; 
-                   
-                   
+                    $totalItem = 0;
+
+
                     if (!empty($value->event_potluck_category_item) || $value->event_potluck_category_item != null) {
 
                         $itemData = [];
                         $totalMissing = 0;
                         $totalOver = 0;
                         foreach ($value->event_potluck_category_item as $itemkey => $itemValue) {
-                         
+
                             $itmquantity = 0;
                             $innnerUserItem = 0;
                             $userQuantity=0;
@@ -156,10 +156,10 @@ class EventPotluckController extends Controller
                             } else if ($userQuantity >  $itemValue->quantity) {
                                 $totalOver += $userQuantity -  $itemValue->quantity;
                             }
-                            
+
                             $totalItem = $totalItem + 1;
                             $remainingQnt = $remainingQnt + $itemValue->quantity;
-                          
+
                             $potluckItem['itmquantity'] =  $itmquantity;
                             $potluckItem['innerUserQnt'] =  $innnerUserItem;
 
@@ -169,7 +169,7 @@ class EventPotluckController extends Controller
                     }
                     //$data['remainingQnt1']= $remainingQnt;
                     // dd($remainingQnt);
-                    
+
                     $remainingQnt =  $remainingQnt - $categoryQuantity;
                     $potluckCategory['totalMissing'] = $totalMissing;
                     $potluckCategory['totalOver'] = $totalOver;
@@ -727,7 +727,7 @@ class EventPotluckController extends Controller
         if ($item) {
             $isUser = true; // If quantity is greater than zero
         }
-        
+
         // Check if there's enough quantity available
         if ($checkCarryQty < $checkQty && $isUser==false ) {
             // Check if the user has already added this item
@@ -777,7 +777,7 @@ class EventPotluckController extends Controller
                 "key" => $request->categorykey,
                 "itemkey"=> $request->itemkey
             ])->render();
-                
+
             // Return the response
             return response()->json([
                 'status' => 'success',
