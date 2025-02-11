@@ -1,5 +1,5 @@
 
-<!-- <div class="home-center-content-head">
+<div class="home-center-content-head">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
     
 
@@ -17,8 +17,8 @@
       <path d="M8.29138 17.2002H8.30036" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
-</div> -->
-<div>
+</div>
+<div class="view-calender-heading d-none">
 <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
@@ -27,6 +27,7 @@
                         </ol>
     </nav>
     <h1>Calender View</h1>
+    <i class="fa-solid fa-arrow-left"></i>
 </div>
 <div class="home-center-profile-wrp">
     <div class="home-center-profile-head">
