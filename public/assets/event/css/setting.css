@@ -1141,6 +1141,10 @@
         height: 600px;
         object-fit: contain;
     }
+
+    .checkout-data .setting-img {
+        height: 420px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
