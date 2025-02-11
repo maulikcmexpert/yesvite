@@ -1629,7 +1629,7 @@ $(document).ready(function () {
                     );
                     $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
-                    $(`#likeCount_${eventPostId}`).text(
+                    $(`#like_${eventPostId}`).text(
                         `${response.count} Likes`
                     );
                 } else {
@@ -1801,7 +1801,7 @@ $(document).ready(function () {
                     reactionHtml += `<li id="reactionImage_model_${post.id}"></li>`;
                 }
 
-        let likeCountHtml = `<p id="likeCount_${post.id}">${post.total_likes} Likes</p>`;
+        let likeCountHtml = `<p id="like_${post.id}">${post.total_likes} Likes</p>`;
 
         return reactionHtml + likeCountHtml;
     }
