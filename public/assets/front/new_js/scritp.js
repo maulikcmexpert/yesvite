@@ -543,7 +543,7 @@ $(".upload-img-delete").click(function () {
 $(".uploded-delete-icon").click(function () {
     let fileInput = $("#fileInput");
 
-    // Clear file input value
+
     fileInput.val("");
 
     // If using a form, reset it as well
