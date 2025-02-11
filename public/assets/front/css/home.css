@@ -526,7 +526,7 @@
 }
 
 .collection-wrapper .list_all_design_wrp {
-    max-height: calc(100vh - 25vh) !important;
+    max-height: calc(100vh - 35vh) !important;
     overflow-y: scroll !important;
 }
 
