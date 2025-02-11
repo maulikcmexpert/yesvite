@@ -934,7 +934,7 @@
                                     <li><img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""
                                             loading="lazy">
                                     </li>
-                                    <p id="likeCount" >5k Likes</p> --}}
+                                    {{-- <p id="likeCount" >5k Likes</p> --}} --}}
                                 </ul>
                                 <h6 id="comments">354 Comments</h6>
                             </div>
