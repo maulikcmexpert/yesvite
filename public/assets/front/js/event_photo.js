@@ -1667,7 +1667,7 @@ $(document).ready(function () {
         $(this).closest("#emojiDropdown1").hide();
 
         // Define visibility options
-       
+
 
         // Dynamically set the hidden values in the forms
         $("form").on("submit", function () {

@@ -744,7 +744,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="post_privacy"
-                                    id="flexRadioDefault4" value=" 4">
+                                    id="flexRadioDefault4" value="4">
                                 <label class="form-check-label" for="flexRadioDefault4">
                                     RSVP’d - No Reply
                                 </label>
