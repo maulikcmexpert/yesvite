@@ -100,7 +100,7 @@
                             <div class="dropdown-menu collection-menu">
                                 <div class="filter-head">
                                     <h5>Categories</h5>
-                                    <a href="#" class="reset-btn" id="resetCategories">Reset</a>
+                                    <a href="#" class="reset-btn" id="resetCategoriesNew">Reset</a>
                                 </div>
                                 <div class="filter-categories">
                                     <div class="accordion" id="accordionExample">
@@ -461,5 +461,20 @@
                 }
             }
         );
+
+        $("#resetCategoriesNew").on("click", function (e) {
+       
+        
+        
+       e.preventDefault();
+       $("#Allcat").prop("checked", false);
+       $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
+           "checked",
+           false
+       );
+       $(".image-item-new").hide();
+       var visibleItems = $(".all_designs:visible").length;
+       $(".total_design_count").text(visibleItems + " Items");
+   });
     </script>
 @endpush

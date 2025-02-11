@@ -93,6 +93,21 @@ $(document).ready(function () {
         $(".total_design_count").text(visibleItems + " Items");
     });
 
+    $("#resetCategoriesNew").on("click", function (e) {
+       
+        
+        
+        e.preventDefault();
+        $("#Allcat").prop("checked", false);
+        $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
+            "checked",
+            false
+        );
+        $(".image-item-new").hide();
+        var visibleItems = $(".all_designs:visible").length;
+        $(".total_design_count").text(visibleItems + " Items");
+    });
+
     document.querySelectorAll(".collection-menu").forEach((button) => {
         button.addEventListener("click", (event) => {
             event.stopPropagation();
