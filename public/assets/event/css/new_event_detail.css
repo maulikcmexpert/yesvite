@@ -1450,6 +1450,10 @@
     margin-bottom: 20px;
 }
 
+.new_event_detail_form .button-cover{
+    margin-top: 0px !important;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
