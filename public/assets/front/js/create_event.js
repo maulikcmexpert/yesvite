@@ -6494,9 +6494,9 @@ $(document).on("click", ".final_create_event", function (e) {
     e.stopPropagation();
     e.preventDefault();
     // if (isCopy != "") {
-        savePage1Data();
-        savePage3Data();
-        savePage4Data();
+        savePage1Data(null, true);
+        savePage3Data(null, true);
+        savePage4Data(null, true);
     // }
     // var imagePath = '';
 
