@@ -954,6 +954,11 @@
         position: fixed;
     }
 
+    .guest-main-content .guest-wrapper .invite-pro{
+        max-width: 100%;
+        min-width: 100%;
+    }
+
     #YesviteUserAll .users-data .text-start {
         max-width: 100px;
     }
