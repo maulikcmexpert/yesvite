@@ -8688,10 +8688,6 @@ $(document).on("click", "#close_editEvent", function (e) {
         $("#loader").css("display", "none");
         return;
     }
-    
-        await saveDesignData();
-        $("#loader").css("display", "none");
-   
     // }
     $("#loader").css("display", "flex");
     eventData.step = final_step;
@@ -9318,7 +9314,7 @@ $(document).on(
     }
 );
 
-if (isDraftEvent == "0" && eventId != "" && isCohost=="0") {
+if (isDraftEvent == "0" && eventId != "") {
     $(".li_design").addClass("menu-success");
     $(".li_event_detail").addClass("menu-success");
     $(".li_guest").addClass("menu-success");
