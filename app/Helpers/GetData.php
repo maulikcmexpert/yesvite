@@ -1083,10 +1083,12 @@ function getInvitedUsersListNew($eventId, $search = null)
         // dd($search);
         $invitedUsers->where(function ($query) use ($search) {
             $query->whereHas('user', function ($q) use ($search) {
-                $q->where('firstname', 'LIKE', "%$search%");
+                $q->where('firstname', 'LIKE', "%$search%")
+                ->orWhere('lastname', 'LIKE', "%$search%");
             })
                 ->orWhereHas('contact_sync', function ($q) use ($search) {
-                    $q->where('firstName', 'LIKE', "%$search%");
+                    $q->where('firstName', 'LIKE', "%$search%")
+                    ->orWhere('lastName', 'LIKE', "%$search%");
                 });
         });
     }
