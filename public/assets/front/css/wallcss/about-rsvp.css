@@ -785,6 +785,10 @@
     color: #fff !important;
 }
 
+.potuck-main-wrp .apexcharts-inner {
+    transform: translate(0, 0) !important;
+}
+
 /* ========= responsive =========== */
 @media only screen and (max-width: 1399px) {
     .birth-details .hosted-by-date-time {
