@@ -1190,7 +1190,7 @@ async function bindData(current_event_id) {
                     },
                     mouseUpHandler: deleteTextbox,
                     render: renderDeleteIcon,
-                    cornerSize: 28,
+                    cornerSize: 40,
                     withConnection: false, // Disable the line connection
                 });
 
@@ -1201,7 +1201,7 @@ async function bindData(current_event_id) {
                 cursorStyle: "pointer",
                 mouseUpHandler: cloneTextbox,
                 render: renderCopyIcon,
-                cornerSize: 28,
+                cornerSize: 40,
                 withConnection: false, // Disable the line connection
             });
 
@@ -2800,7 +2800,7 @@ $(".edit-design-sidebar").on("click", function () {
 function loadAgain() {
     //  $(".side-bar-list").removeClass("active");
     $(".edit-design-sidebar").addClass("active");
-    
+
     // e.preventDefault();
     var eventID = $("#eventID").val();
     var isDraft = $("#isDraft").val();
