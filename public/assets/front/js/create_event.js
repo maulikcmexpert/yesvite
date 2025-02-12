@@ -9344,6 +9344,7 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
+    var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
     $(".pick-card").addClass("active");
@@ -9351,6 +9352,11 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_event_detail").find(".side-bar-list").removeClass("menu-success");
     $(".li_guest").find(".side-bar-list").removeClass("menu-success");
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
+    if(dbJson!="" && dbJson!=undefined){
+        $(".pick-card").removeClass("active");
+        $(".edit-design-sidebar").addClass("active");
+        loadAgain();
+    }
 }
 colorchange();
 
@@ -9361,5 +9367,3 @@ $(document).on("click", ".previousImeg", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-var dbJson = $("#static_information").val() || null;
-alert(dbJson)
