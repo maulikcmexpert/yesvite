@@ -4685,6 +4685,9 @@ $(document).on("click", ".li_design .pick-card", function (e) {
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
