@@ -98,7 +98,9 @@
             </div>
 
 
+            @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 1)
             <div class="custom-pagination"></div>
+        @endif
             <!-- <button class="image-zoom-icon"><img src="{{ asset('assets/front/img/image-zoom-icon.png') }}" alt=""></button> -->
         </div>
     </div>
