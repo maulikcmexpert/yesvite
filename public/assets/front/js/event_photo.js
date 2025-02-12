@@ -899,19 +899,26 @@ $(document).ready(function () {
     });
 
     $(".download_img").on("click", function () {
-        // $('.form-check-input:checked').each(function () {
-        //     console.log('Checkbox selected: ', $(this).data('image-src')); // Check if data-image-src exists
-        // });
-
-        // Get selected image URLs from the checkboxes
-        const selectedImages = $(".selected_image:checked")
-            .map(function () {
-                return $(this).data("image-src"); // Get image URLs
-            })
-            .get();
-
-        console.log("Selected Images: ", selectedImages);
+        const selectedImages = $(".selected_image:checked").map(function () {
+            return $(this).closest(".photo-card-photos-main-img").data("img-src"); // Get image URLs
+        }).get();
+    
+        if (selectedImages.length === 0) {
+            alert("Please select at least one image to download.");
+            return;
+        }
+    
+        // Download each selected image
+        selectedImages.forEach((imgSrc, index) => {
+            const link = document.createElement("a");
+            link.href = imgSrc;
+            link.download = `image_${index + 1}.jpg`; // Customize filename
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
     });
+    
     $(document).on("click", ".download_img_single", function () {
         // Find the image source stored in the data attribute
         const imgSrc = $(".downloadImg").data("img-src");
