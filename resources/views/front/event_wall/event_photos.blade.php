@@ -705,7 +705,7 @@
                         </button> --}}
                     </div>
                     <div class="">
-                        <button type ="button" class="cmn-btn create_post">
+                        <button type ="button" class="cmn-btn create_post" >
                             post
                         </button>
                     </div>

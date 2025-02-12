@@ -3730,12 +3730,16 @@ if ($(".edit-design").hasClass("active")) {
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
-$(document).on("click", "#close_createEvent", function () {
+$(document).on("click", "#close_createEvent", async function () {
     $("#loader").css("display", "flex");
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
-
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -3836,7 +3840,7 @@ $(document).on("click", "#close_createEvent", function () {
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
-                    }, 4000);
+                    }, 100000);
                 }
             },
             error: function (xhr, status, error) {
@@ -4671,7 +4675,7 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     li_design_click();
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
-    $("#close_createEvent").css("display", "block");
+    // $("#close_createEvent").css("display", "block");
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
@@ -9340,6 +9344,7 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
+    var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
     $(".pick-card").addClass("active");
@@ -9347,6 +9352,11 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_event_detail").find(".side-bar-list").removeClass("menu-success");
     $(".li_guest").find(".side-bar-list").removeClass("menu-success");
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
+    if(dbJson!="" && dbJson!=undefined){
+        $(".pick-card").removeClass("active");
+        $(".edit-design-sidebar").addClass("active");
+        loadAgain();
+    }
 }
 colorchange();
 
