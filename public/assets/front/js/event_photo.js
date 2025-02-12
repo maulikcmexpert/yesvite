@@ -1108,7 +1108,7 @@ $(document).ready(function () {
 
                     if (data.user_id == login_user_id) {
 
-                        $("#report_btn").hide(); 
+                        $("#report_btn").hide();
 
                     }
 
