@@ -63,6 +63,12 @@ main {
   font-size: 20px;
 }
 
+.hosted-by-title-menu:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 .hosted-by-title {
   display: flex;
   align-items: center;
