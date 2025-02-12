@@ -785,9 +785,9 @@
     color: #fff !important;
 }
 
-/* .potuck-main-wrp .apexcharts-inner {
-    transform: translate(0, 0) !important;
-} */
+.potuck-main-wrp .apexcharts-inner {
+    width: 350px;
+}
 
 /* ========= responsive =========== */
 @media only screen and (max-width: 1399px) {
