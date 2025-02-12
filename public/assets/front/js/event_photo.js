@@ -24,14 +24,24 @@ $(document).ready(function () {
         var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-      
+        var postContent = $(".post_message").val().trim();
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
-       
+
         if (photoForm.is(":visible") && photoForm.length > 0) {
-         
+            var photoInput = document.getElementById("fileInput");
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent === ""
+            ) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
+                return;
+            }
             $this.prop("disabled", false);
             photoForm.submit();
         }
@@ -41,7 +51,7 @@ $(document).ready(function () {
         }
         // If no valid content is provided, show an alert
         else {
-            alert("Please fill all required fields before submitting.");
+           toastr.error("Please fill all required fields before submitting.");
         }
     });
 
