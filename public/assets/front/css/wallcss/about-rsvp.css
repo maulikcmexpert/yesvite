@@ -505,6 +505,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fff !important;
 }
 
 .about-rsvp .modal-header h4 {
