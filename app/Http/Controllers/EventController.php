@@ -1067,8 +1067,10 @@ class EventController extends BaseController
                 // UserPotluckItem::where('event_id', $request->event_id)->delete();
                 // }
                 if (isset($potluck) && !empty($potluck)) {
-
                     foreach ($potluck as $category) {
+                        if($category['iscateogry']=='0'){
+                            continue;
+                        }
                         $eventPodluck = EventPotluckCategory::create([
                             'event_id' => $eventId,
                             'user_id' => $user_id,
@@ -1970,7 +1972,7 @@ class EventController extends BaseController
         $quantity = (string)$request->quantity;
 
         $categories = session()->get('category', []);
-        dd($categories);
+
 
         $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
@@ -3675,7 +3677,7 @@ class EventController extends BaseController
                         $eventInvite->event_id = $eventId;
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
-                        $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        $eventInvite->prStore_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                         $eventInvite->save();
                     }
                     // }
@@ -3778,6 +3780,9 @@ class EventController extends BaseController
                 if (isset($potluck) && !empty($potluck)) {
 
                     foreach ($potluck as $category) {
+                        if($category['iscateogry']=='0'){
+                            continue;
+                        }
                         $eventPodluck = EventPotluckCategory::create([
                             'event_id' => $eventId,
                             'user_id' => $user_id,
