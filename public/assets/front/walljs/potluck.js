@@ -153,6 +153,7 @@ if (chartData) {
         series: [spoken_for, missing_still],
         labels: ["Spoken For", "Missing Still"],
         chart: {
+            width: 350,
             type: "donut",
         },
         dataLabels: {
