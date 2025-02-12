@@ -2,7 +2,8 @@
 ;
 
     document.addEventListener('DOMContentLoaded', function() {
-
+        const originalWidth = 345;
+        const originalHeight = 490;
         let element = document.querySelector(".image-edit-inner-img");
         if (element) {
             var { width, height } = element.getBoundingClientRect();
@@ -13,6 +14,10 @@
 
             console.log("Element not found!");
         }
+
+        const scaleX = width / originalWidth;
+        const scaleY = height / originalHeight;
+
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
             width: width, // Canvas width
@@ -997,13 +1002,38 @@
 
                             // Render text elements or shapes on canvas
                             staticInfo.textElements.forEach(element => {
+
+                            const textMeasurement = new fabric.Text(element.text, {
+                                fontSize: element.fontSize,
+                                fontFamily: element.fontFamily,
+                                fontWeight: element.fontWeight,
+                                fontStyle: element.fontStyle,
+                                underline: element.underline,
+                                linethrough: ["true", "True", true].includes(
+                                    element.linethrough
+                                ),
+                            });
+
+                            let textWidth = textMeasurement.width;
+
+                            // **Scale Positions & Sizes**
+                            let left = element.left
+                                ? parseFloat(element.left) * scaleX
+                                : (element.centerX - textWidth / 2) * scaleX;
+                            let top = element.top
+                                ? parseFloat(element.top) * scaleY
+                                : (element.centerY - 10) * scaleY;
+                            let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                            let width = (textWidth + 25) * scaleX; // Scale text box width
+
+
                                 if (element.text) {
                                     let textElement = new fabric.Textbox(element.text, {
-                                        left: element.left,
-                                        top: element.top,
-                                        width: element.width,
+                                        left: left,
+                                        top: top,
+                                        width: width,
                                         // width: element.width || 200,
-                                        fontSize: element.fontSize,
+                                        fontSize: fontSize,
                                         fill: element.fill,
                                         fontFamily: element.fontFamily,
                                         fontWeight: element.fontWeight,
