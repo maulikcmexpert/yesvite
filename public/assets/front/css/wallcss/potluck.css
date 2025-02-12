@@ -908,9 +908,18 @@
     background-color: #CBD5E1;
     color: #fff;
     border: 1px solid transparent;
-    line-height: 20px;
+    line-height: normal !important;
     font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.item-on .qty-container button i{
+    line-height: normal !important;
+}
+
+
 .qty-container input {
     border: none !important;
     text-align: center;
