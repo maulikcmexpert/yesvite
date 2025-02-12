@@ -122,8 +122,8 @@
                             @endphp
                             <div class="position-relative z-2">
                                 <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="start-event-date" data-isDate="{{ $event_date }}" name="event-date"
-                                    onblur="clearError(this)" value="{{ $event_date }}" readonly>
+                                    id="start-event-date" data-isDate="{{ $start_date }}" name="event-date"
+                                    onblur="clearError(this)" value="{{ $start_date }}" readonly>
                                 <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
                                     event * </label>
                                 <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
@@ -154,7 +154,7 @@
                             </div>
 
                         </div>
-                        <lable for="event-date" id="event-date-error" class="error"></lable>
+                        <lable for="start_event-date" id="start_event-date-error" class="error"></lable>
                     </div> 
                     
                     <div class="col-lg-6 mb-4">
@@ -176,8 +176,8 @@
                             @endphp
                             <div class="position-relative z-2">
                                 <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="end-event-date" data-isDate="{{ $event_date }}" name="event-date"
-                                    onblur="clearError(this)" value="{{ $event_date }}" readonly>
+                                    id="end-event-date" data-isDate="{{ $end_date }}" name="event-date"
+                                    onblur="clearError(this)" value="{{ $end_date }}" readonly>
                                 <label for="birthday" class="form-label input-field floating-label select-label">End Date of
                                     event * </label>
                                 <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
@@ -208,7 +208,7 @@
                             </div>
 
                         </div>
-                        <lable for="event-date" id="event-date-error" class="error"></lable>
+                        <lable for="end_event-date" id="end_event-date-error" class="error"></lable>
                     </div>
                     <div class="col-6 mb-4">
                         <div class="form-group">
