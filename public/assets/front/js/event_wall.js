@@ -776,7 +776,7 @@ const voteOnPoll = (pollId, optionId) => {
                 updatePollUI(data, pollId);
                 //  alert('Vote submitted/updated successfully!');
             } else {
-                alert(data.message || "Failed to submit vote.");
+                toastr.error(data.message || "Failed to submit vote.");
             }
         },
         error: function (xhr, status, error) {

@@ -2,10 +2,21 @@
 ;
 
     document.addEventListener('DOMContentLoaded', function() {
+
+        let element = document.querySelector(".image-edit-inner-img");
+        if (element) {
+            var { width, height } = element.getBoundingClientRect();
+            console.log("Width:", width, "Height:", height);
+        } else {
+            var { width, height } = { width: 590, height: 880 };
+            console.log(width, height); // Output: 590 880
+
+            console.log("Element not found!");
+        }
         // Initialize fabric canvas
         var canvas = new fabric.Canvas('imageEditor1', {
-            width: 345, // Canvas width
-            height: 490, // Canvas height
+            width: width, // Canvas width
+            height: height, // Canvas height
         });
 
 

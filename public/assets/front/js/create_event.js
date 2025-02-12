@@ -1451,7 +1451,7 @@ let selectedDates = new Set();
 initializeDatePicker("#start-event-date", { minDate: moment() }, function (selectedDate) {
     let formattedDate = selectedDate.format("MM-DD-YYYY");
     $("#start-event-date").val(formattedDate); // Show date after selection
-    $("#end-event-date").val(""); // Clear end date when selecting a new start date
+    $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
     let endPicker = $("#end-event-date").data("daterangepicker");
     endPicker.setStartDate(moment(selectedDate).add(0, 'days'));
     endPicker.minDate = moment(selectedDate).add(0, 'days'); // Disable past dates in end date
@@ -1474,6 +1474,8 @@ initializeDatePicker("#end-event-date", { minDate: moment() }, function (selecte
 //new date logic prakash
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
+    var startDate = $("#start-event-date").val();
+    var endDate = $("#end-event-date").val();
     var activities = {};
     eventData.activity = {};
     var total_activities = 0;
@@ -1485,19 +1487,19 @@ $(document).on("change", "#schedule", function () {
             // console.log(eventDate);
             var selectedDates = new Set();
             $(".add-activity-schedule").show();
-            if (eventDate.includes(" To ")) {
-                // Split and set start and end for a date range
-                let [start, end] = eventDate.split(" To ");
-                // console.log(start);
-                selectedDates.clear();
-                selectedDates.add(start);
-                selectedDates.add(end);
-            } else {
+            // if (eventDate.includes(" To ")) {
+            //     // Split and set start and end for a date range
+            //     // let [start, end] = eventDate.split(" To ");
+            //     // console.log(start);
+            //     selectedDates.clear();
+            //     selectedDates.add(startDate);
+            //     selectedDates.add(endDate);
+            // } else {
                 // For a single date, set both start and end to the same date
                 selectedDates.clear();
-                selectedDates.add(eventDate);
-                selectedDates.add(eventDate);
-            }
+                selectedDates.add(startDate);
+                selectedDates.add(endDate);
+            // }
             // console.log(selectedDates.size);
             console.log(selectedDates);
             if (selectedDates.size > 0) {
@@ -3813,6 +3815,8 @@ $(document).on("click", "#close_createEvent", async function () {
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData();
@@ -4120,20 +4124,11 @@ function savePage1Data(close = null, direct = false) {
             $("#start_event-date-error")
                 .css("display", "block")
                 .css("color", "red")
-                .text("Event Date: Please select an start date");
+                .text("Event Date: Please select an event date");
             focus_timeOut("start_event-date");
             return;
         } else {
             $("#start_event-date-error").css("display", "none");
-        }if (end_event_date == "") {
-            $("#end_event-date-error")
-                .css("display", "block")
-                .css("color", "red")
-                .text("Event Date: Please select an event date");
-            focus_timeOut("end_event-date");
-            return;
-        } else {
-            $("#end_event-date-error").css("display", "none");
         }
         if (start_time == "") {
             $("#event-start_time-error")
@@ -4576,7 +4571,7 @@ function clearError(input = null) {
     $("#event-type-error").text("");
     $("#event-name-error").text("");
     $("#event-host-error").text("");
-    $("#event-date-error").text("");
+    $("#start_event-date-error").text("");
     $("#event-rsvpby-error").text("");
     $("#event-start_time-error").text("");
     $("#end-time-error").text("");
@@ -8954,7 +8949,8 @@ async function step3open() {
     }
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
-    var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
     var start_time = $("#start-time").val();
 
     var schedule = $("#schedule").is(":checked");
@@ -8983,7 +8979,7 @@ async function step3open() {
         toastr.error("Please enter hosted by");
         return;
     }
-    if (event_date == "") {
+    if (start_event_date == "") {
         toastr.error("Please enter start date");
         return;
     }
@@ -9070,7 +9066,8 @@ async function step4open() {
 
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
-    var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
     var start_time = $("#start-time").val();
     var end_time = $("#end_time").is(":checked");
     var rsvp_by_date_set = $("#rsvp_by_date").is(":checked");
@@ -9091,7 +9088,7 @@ async function step4open() {
         toastr.error("Please enter event name");
         return;
     }
-    if (event_date == "") {
+    if (start_event_date == "") {
         toastr.error("Please enter start date");
         return;
     }
@@ -9437,7 +9434,7 @@ if (category != 0) {
 
 $(document).on(
     "blur change click",
-    "#event-name, #event-date, #start-time",
+    "#event-name, #start-event-date, #start-time",
     function () {
         colorchange();
     }
@@ -9455,9 +9452,11 @@ checkbox_count();
 function colorchange() {
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
     var start_time = $("#start-time").val();
     // Check if all fields are not empty
-    if (event_name !== "" && event_date !== "" && start_time !== "") {
+    if (event_name !== "" && start_event_date !== "" && start_time !== "") {
         // When all fields are filled
         $(".guestBtn").css("color", "black"); // Set text color to black
         $("#guestBtn").removeClass("guestBtn");
