@@ -664,6 +664,17 @@ async function bindData(current_event_id) {
     }
 
     function loadTextDataFromDatabase() {
+        let element = document.querySelector(".image-edit-inner-img");
+        if (element) {
+            var { width, height } = element.getBoundingClientRect();
+            console.log("Width:", width, "Height:", height);
+        } else {
+            var { width, height } = { width: 590, height: 880 };
+            console.log(width, height); // Output: 590 880
+
+            console.log("Element not found!");
+        }
+
         if (image) {
             console.log(image);
             fabric.Image.fromURL(image, function (img) {
