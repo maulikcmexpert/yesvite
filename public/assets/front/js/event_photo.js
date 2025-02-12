@@ -2017,25 +2017,31 @@ $(document).ready(function () {
         4: "RSVP’d - No Reply",
     };
 
-    // Always reset to "Everyone" (1) on page load
-    let defaultVisibility = "1"; // Default value "Everyone"
-    let defaultAllowComments = "1"; // Default value to allow comments
+    // Check if localStorage has saved values, else set defaults
+    let savedVisibility = localStorage.getItem("post_privacys");
+    let savedAllowComments = localStorage.getItem("commenting_on_off");
 
-    // Set the default values in localStorage on page load
-    localStorage.setItem("post_privacys", defaultVisibility);
-    localStorage.setItem("commenting_on_off", defaultAllowComments);
+    if (savedVisibility === null) {
+        savedVisibility = "1"; // Default to "Everyone"
+        localStorage.setItem("post_privacys", savedVisibility);
+    }
 
-    // Apply default settings to the form
-    $('input[name="post_privacy"][value="1"]').prop("checked", true);
-    $("#allowComments").prop("checked", true);
+    if (savedAllowComments === null) {
+        savedAllowComments = "1"; // Default to allow comments
+        localStorage.setItem("commenting_on_off", savedAllowComments);
+    }
+
+    // Apply saved values to the form
+    $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
+    $("#allowComments").prop("checked", savedAllowComments === "1");
 
     // Update hidden input fields
-    $(".hiddenVisibility").val(defaultVisibility);
-    $(".hiddenAllowComments").val(defaultAllowComments);
+    $(".hiddenVisibility").val(savedVisibility);
+    $(".hiddenAllowComments").val(savedAllowComments);
 
-    // Update the display area
+    // Update the display area with saved settings
     $("#savedSettingsDisplay").html(`
-        <h4>${visibilityOptions[defaultVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
+        <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
     `);
 
     // Save Button Click Handler
