@@ -849,6 +849,7 @@
                                                 <span id="buttonText" class="mute-post-btn-text">Mute</span>
                                             </button>
                                         </li>
+                                        @if ($postPhotoList['user_id'] != $login_user_id)
                                         <li>
                                             <a class="dropdown-item" href="#">
                                                 <svg viewBox="0 0 20 20" fill="none"
@@ -866,6 +867,7 @@
                                                 Report
                                             </a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <h5 id="post_time_details"> 10m
