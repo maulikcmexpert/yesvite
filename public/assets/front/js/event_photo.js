@@ -32,8 +32,9 @@ $(document).ready(function () {
 
         if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
+            var photoInput2 = document.getElementById("fileInput2");
             if (
-                photoInput &&
+                
                 photoInput.files.length === 0
 
             ) {
