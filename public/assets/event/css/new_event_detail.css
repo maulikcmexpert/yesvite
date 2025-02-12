@@ -1386,9 +1386,9 @@
 }
 
 .guest-wrp.side-guest-wrp .invite-pro img{
-    max-width: 19px;
+    max-width: 60px;
     margin-left: 5px;
-    margin-right: 5px;
+    margin-right: 0px;
     cursor: pointer;
 }
 
@@ -1412,7 +1412,7 @@
 .coin-invite-wrp .coin-invite{
     max-width: 20px;
     margin-left: 0;
-    margin-right: 22px;
+    margin-right: 5px;
     cursor: pointer;
 }
 
