@@ -9355,6 +9355,8 @@ if (final_step == "1" && isCohost == "1") {
     if(dbJson!="" && dbJson!=undefined){
         $(".pick-card").removeClass("active");
         $(".edit-design-sidebar").addClass("active");
+        $("#close_createEvent").css("display", "none");
+        $("#close_editEvent").css("display", "none");
         loadAgain();
     }
 }
