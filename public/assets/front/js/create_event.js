@@ -1310,155 +1310,166 @@ $(function () {
 // $(document).on('click',,function(){
 
 //old date logic
-$(function () {
-    var selectedDates = new Set();
-    let ed = document.getElementById("event-date");
-    var event_date = $("#event-date").val(); // Get the current value of the date input
-    if (event_date == "") {
-        event_date = moment().format("MM/DD/YYYY");
-    }
-    let startDate;
-    let endDate;
-    let check = event_date.split("To");
-    console.log(check);
-    if (check.length == 2) {
-        startDate = check[0];
-        endDate = check[1];
-    } else {
-        startDate = check[0];
-        endDate = check[0];
-    }
-    // // If event_date is not null or empty, format it as MM/DD/YYYY
-    // if (event_date) {
-    //     event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
-    // } else {
-    //     // If no event_date, set it to today's date in MM/DD/YYYY format
-    //     event_date = moment().format("MM/DD/YYYY");
-    // }
-    var oldDate = $(ed).attr("data-isDate");
-    console.log($("#event-date").val());
-    console.log(event_date);
-    //old start_time
-    $("#event-date").daterangepicker(
-        {
-            autoUpdateInput: false,
-            locale: {
-                format: "MM/DD/YYYY",
-            },
-            showDropdowns: false,
-            startDate: startDate,
-            endDate: endDate,
-            // endDate: moment().endOf("month"),
-            // minDate: moment().add(1, 'days'),
-            minDate: moment(),
-            // alwaysShowCalendars: true, // Keep the calendar visible
-            maxSpan: { days: 2 },
-        },
+// $(function () {
+//     var selectedDates = new Set();
+//     let ed = document.getElementById("event-date");
+//     var event_date = $("#event-date").val(); // Get the current value of the date input
+//     if (event_date == "") {
+//         event_date = moment().format("MM/DD/YYYY");
+//     }
+//     let startDate;
+//     let endDate;
+//     let check = event_date.split("To");
+//     console.log(check);
+//     if (check.length == 2) {
+//         startDate = check[0];
+//         endDate = check[1];
+//     } else {
+//         startDate = check[0];
+//         endDate = check[0];
+//     }
+//     // // If event_date is not null or empty, format it as MM/DD/YYYY
+//     // if (event_date) {
+//     //     event_date = moment(event_date, "YYYY-MM-DD").format("MM/DD/YYYY");
+//     // } else {
+//     //     // If no event_date, set it to today's date in MM/DD/YYYY format
+//     //     event_date = moment().format("MM/DD/YYYY");
+//     // }
+//     var oldDate = $(ed).attr("data-isDate");
+//     console.log($("#event-date").val());
+//     console.log(event_date);
+//     //old start_time
+//     $("#event-date").daterangepicker(
+//         {
+//             autoUpdateInput: false,
+//             locale: {
+//                 format: "MM/DD/YYYY",
+//             },
+//             showDropdowns: false,
+//             startDate: startDate,
+//             endDate: endDate,
+//             // endDate: moment().endOf("month"),
+//             // minDate: moment().add(1, 'days'),
+//             minDate: moment(),
+//             // alwaysShowCalendars: true, // Keep the calendar visible
+//             maxSpan: { days: 2 },
+//         },
 
-        function (start, end, label) {
-            // const isDate = $(this)  // Get the data attribute inside the callback
+//         function (start, end, label) {
+//             // const isDate = $(this)  // Get the data attribute inside the callback
 
-            selectedDates.clear();
-            // selectedDates.add(start.format("YYYY-MM-DD"));
-            // selectedDates.add(end.format("YYYY-MM-DD"));
-            // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
-            selectedDates.add(start.format("MM-DD-YYYY"));
-            selectedDates.add(end.format("MM-DD-YYYY"));
-            var eventDate =
-                start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
-            rsvp_by_date(start.format("MM-DD-YYYY"));
-            if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
-                eventDate = end.format("MM-DD-YYYY");
-            }
-            $("#event-date").val(eventDate);
-            $(".step_1_activity").html(
-                '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
-            );
+//             selectedDates.clear();
+//             // selectedDates.add(start.format("YYYY-MM-DD"));
+//             // selectedDates.add(end.format("YYYY-MM-DD"));
+//             // var eventDate = start.format("YYYY-MM-DD") + " To " + end.format("YYYY-MM-DD")
+//             selectedDates.add(start.format("MM-DD-YYYY"));
+//             selectedDates.add(end.format("MM-DD-YYYY"));
+//             var eventDate =
+//                 start.format("MM-DD-YYYY") + " To " + end.format("MM-DD-YYYY");
+//             rsvp_by_date(start.format("MM-DD-YYYY"));
+//             if (start.format("MM-DD-YYYY") == end.format("MM-DD-YYYY")) {
+//                 eventDate = end.format("MM-DD-YYYY");
+//             }
+//             $("#event-date").val(eventDate);
+//             $(".step_1_activity").html(
+//                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
+//             );
 
-            $("#event-date").val(eventDate).trigger("change");
+//             $("#event-date").val(eventDate).trigger("change");
 
-            $(".activity_bar").children().not(".toggle-wrp").remove();
-            // $('#schedule').prop("checked",false);
-            // $('.add-activity-schedule').hide();
-            if (oldDate != "") {
-                $("#isnewdata").show();
-                $("#isolddata").hide();
-            }
-            // alert();
-            $("#end_time").prop("checked", false);
-            $(".end-time-create").val("");
-            $(".start-time-create").val("");
-            $(".end_time").css("display", "none");
-            if (selectedDates.size > 0) {
-                var activities = {};
-                eventData.activity = {};
-                var total_activities = 0;
-                console.log(selectedDates);
-                set_activity_html(selectedDates);
-            }
-        }
-    );
+//             $(".activity_bar").children().not(".toggle-wrp").remove();
+//             // $('#schedule').prop("checked",false);
+//             // $('.add-activity-schedule').hide();
+//             if (oldDate != "") {
+//                 $("#isnewdata").show();
+//                 $("#isolddata").hide();
+//             }
+//             // alert();
+//             $("#end_time").prop("checked", false);
+//             $(".end-time-create").val("");
+//             $(".start-time-create").val("");
+//             $(".end_time").css("display", "none");
+//             if (selectedDates.size > 0) {
+//                 var activities = {};
+//                 eventData.activity = {};
+//                 var total_activities = 0;
+//                 console.log(selectedDates);
+//                 set_activity_html(selectedDates);
+//             }
+//         }
+//     );
 
-    $("#event-date").on("apply.daterangepicker", function (ev, picker) {
-        picker.hide();
-        $("#event-date").next().addClass("floatingfocus");
-    });
-    $("#event-date").on("hide.daterangepicker", function (ev, picker) {
-        picker.show();
-        $("#event-date").next().addClass("floatingfocus");
-    });
-        //old start_time
+//     $("#event-date").on("apply.daterangepicker", function (ev, picker) {
+//         picker.hide();
+//         $("#event-date").next().addClass("floatingfocus");
+//     });
+//     $("#event-date").on("hide.daterangepicker", function (ev, picker) {
+//         picker.show();
+//         $("#event-date").next().addClass("floatingfocus");
+//     });
+//         //old start_time
 
-});
+// });
 //old data logic
 
 
 //new date logic prakash
-// $(function () {
-//     let startEventInput = $("#start-event-date"); // Start date input
-//     let endEventInput = $("#end-event-date"); // End date input
+function initializeDatePicker(selector, options, callback) {
+    $(selector).daterangepicker({
+        singleDatePicker: true,
+        autoApply: true,
+        autoUpdateInput: false, // Prevents showing default date
+        locale: {
+            format: "MM-DD-YYYY",
+        },
+        ...options // Merge additional options
+    }, callback);
+}
 
-//     // Initialize single date picker for start date
-//     startEventInput.daterangepicker({
-//         singleDatePicker: true,
-//         autoUpdateInput: false,
-//         locale: { format: "MM/DD/YYYY" },
-//         minDate: moment(),
-//     }, function (selectedDate) {
-//         let formattedDate = selectedDate.format("MM/DD/YYYY");
-//         startEventInput.val(formattedDate);
+function updateEventDate() {
+    let startDate = $("#start-event-date").val();
+    let endDate = $("#end-event-date").val();
+    let eventDate = startDate;
 
-//         // Ensure the end date is not before the start date
-//         let currentEndDate = moment(endEventInput.val(), "MM/DD/YYYY");
-//         if (!currentEndDate.isValid() || currentEndDate.isBefore(selectedDate)) {
-//             endEventInput.val(formattedDate);
-//         }
+    if (startDate && endDate && startDate !== endDate) {
+        eventDate += " To " + endDate;
+    }
 
-//         // Update minDate for end date picker
-//         endEventInput.data('daterangepicker').setStartDate(selectedDate);
-//         endEventInput.data('daterangepicker').setMinDate(selectedDate);
-//     });
+    $("#event-date").val(eventDate).trigger("change");
+    $(".step_1_activity").html(
+        '<span><i class="fa-solid fa-triangle-exclamation"></i></span> Setup activity schedule'
+    );
+    $(".activity_bar").children().not(".toggle-wrp").remove();
 
-//     // Initialize single date picker for end date
-//     endEventInput.daterangepicker({
-//         singleDatePicker: true,
-//         autoUpdateInput: false,
-//         locale: { format: "MM/DD/YYYY" },
-//         minDate: moment(),
-//     }, function (selectedDate) {
-//         endEventInput.val(selectedDate.format("MM/DD/YYYY"));
-//     });
+    if (selectedDates.size > 0) {
+        set_activity_html(selectedDates);
+    }
+}
 
-//     // Auto-focus behavior
-//     startEventInput.on("apply.daterangepicker", function (ev, picker) {
-//         $(this).next().addClass("floatingfocus");
-//     });
+let selectedDates = new Set();
 
-//     endEventInput.on("apply.daterangepicker", function (ev, picker) {
-//         $(this).next().addClass("floatingfocus");
-//     });
+initializeDatePicker("#start-event-date", { minDate: moment() }, function (selectedDate) {
+    let formattedDate = selectedDate.format("MM-DD-YYYY");
+    $("#start-event-date").val(formattedDate); // Show date after selection
+    $("#end-event-date").val(""); // Clear end date when selecting a new start date
+    let endPicker = $("#end-event-date").data("daterangepicker");
+    endPicker.setStartDate(moment(selectedDate).add(0, 'days'));
+    endPicker.minDate = moment(selectedDate).add(0, 'days'); // Disable past dates in end date
+    endPicker.maxDate = moment(selectedDate).add(3, 'days'); // Restrict to +4 days from start date
 
-// });
+    // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
+    selectedDates.clear();
+    selectedDates.add(formattedDate);
+    rsvp_by_date(formattedDate);
+    updateEventDate();
+});
+
+initializeDatePicker("#end-event-date", { minDate: moment() }, function (selectedDate) {
+    let formattedDate = selectedDate.format("MM-DD-YYYY");
+    $("#end-event-date").val(formattedDate); // Show date after selection
+    selectedDates.add(formattedDate);
+    updateEventDate();
+});
 
 //new date logic prakash
 $(document).on("change", "#schedule", function () {
@@ -3956,6 +3967,8 @@ function savePage1Data(close = null, direct = false) {
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
     var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
     var start_time = $("#start-time").val();
     var start_time_zone = $("#start-time-zone").val();
     var end_time_zone = $("#end-time-zone").val();
@@ -4159,7 +4172,7 @@ function savePage1Data(close = null, direct = false) {
         // event_type != "" &&
         event_name != "" &&
         hostedby != "" &&
-        event_date != "" &&
+        start_event_date != "" &&
         start_time != ""
         // address1 != "" &&
         // city != "" &&
@@ -4192,6 +4205,8 @@ function savePage1Data(close = null, direct = false) {
         eventData.event_name = event_name;
         eventData.hosted_by = hostedby;
         eventData.event_date = event_date;
+        eventData.start_event_date = start_event_date;
+        eventData.end_event_date = end_event_date;
         eventData.rsvp_by_date_set = rsvp_by_date_set;
         eventData.rsvp_by_date = rsvp_by_date;
         eventData.start_time = start_time;

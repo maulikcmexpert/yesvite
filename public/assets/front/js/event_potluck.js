@@ -389,6 +389,7 @@ $(document).on("click", ".minus", function () {
     // updateQuantityStatusOnLoad();
 });
 $(document).on("click", ".saveItemBtn", function () {
+    $("#home_loader").css('display','flex');
     var categoryId = $(this).data("category-id");
     var categoryItemId = $(this).data("item-id");
     var item_quantity = $("#newQuantity_" + categoryItemId).val();
@@ -555,6 +556,7 @@ $(document).on("click", ".according_toggel", function () {
 // });
 
 $(document).on("click", ".deleteBtn", function () {
+    $("#home_loader").css('display','flex');
     var categoryId = $(this).data("category-id");
     var categoryItemId = $(this).data("item-id");
     var item_quantity = $("#newQuantity_" + categoryItemId).val();
