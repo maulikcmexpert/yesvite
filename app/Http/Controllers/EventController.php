@@ -1970,7 +1970,7 @@ class EventController extends BaseController
         $quantity = (string)$request->quantity;
 
         $categories = session()->get('category', []);
-        dd($categories);
+        // dd($categories);
 
         $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
