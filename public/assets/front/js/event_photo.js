@@ -2017,32 +2017,32 @@ $(document).ready(function () {
         4: "RSVP’d - No Reply",
     };
 
-    // Check if localStorage has saved values, else set defaults
-    let savedVisibility = localStorage.getItem("post_privacys");
-    let savedAllowComments = localStorage.getItem("commenting_on_off");
+    // Function to load settings from localStorage
+    function loadSettings() {
+        let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
+        let savedAllowComments = localStorage.getItem("commenting_on_off") || "1"; // Default: allow comments
 
-    if (savedVisibility === null) {
-        savedVisibility = "1"; // Default to "Everyone"
-        localStorage.setItem("post_privacys", savedVisibility);
+        // Apply values to form
+        $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
+        $("#allowComments").prop("checked", savedAllowComments === "1");
+
+        // Update hidden input fields
+        $(".hiddenVisibility").val(savedVisibility);
+        $(".hiddenAllowComments").val(savedAllowComments);
+
+        // Update display area
+        $("#savedSettingsDisplay").html(`
+            <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
+        `);
     }
 
-    if (savedAllowComments === null) {
-        savedAllowComments = "1"; // Default to allow comments
-        localStorage.setItem("commenting_on_off", savedAllowComments);
-    }
+    // Load settings initially when page loads
+    loadSettings();
 
-    // Apply saved values to the form
-    $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
-    $("#allowComments").prop("checked", savedAllowComments === "1");
-
-    // Update hidden input fields
-    $(".hiddenVisibility").val(savedVisibility);
-    $(".hiddenAllowComments").val(savedAllowComments);
-
-    // Update the display area with saved settings
-    $("#savedSettingsDisplay").html(`
-        <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
-    `);
+    // When modal opens, update settings without refresh
+    $("#myModal").on("show.bs.modal", function () {
+        loadSettings(); // Reload stored settings when modal opens
+    });
 
     // Save Button Click Handler
     $("#saveSettings").on("click", function () {
