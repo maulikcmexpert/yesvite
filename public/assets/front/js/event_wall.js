@@ -1107,7 +1107,7 @@ $(document).ready(function () {
             ) {
 
                 document.getElementById("photoPostType").value = 0;
-                $this.prop("disabled", true);
+
             }else{
 
 
@@ -1116,7 +1116,7 @@ $(document).ready(function () {
 
 
 
-            $this.prop("disabled", true);
+
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
