@@ -24,25 +24,15 @@ $(document).ready(function () {
         var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-        //   var postContent = document.getElementById('postContent').value.trim();
-        // Fallback to empty string if #postContent does not exist
-
+      
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
-        // console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
-        //console.log('Post Content:', postContent);
-
-        // If a photo form exists and is visible, submit it
+       
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the photo post.');
-            //     return;
-            // }
-            // Set the value of the hidden input in the photo form
-            //  document.getElementById('photoContent').value = postContent;
-            $this.prop("disabled", true);
+         
+            $this.prop("disabled", false);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
