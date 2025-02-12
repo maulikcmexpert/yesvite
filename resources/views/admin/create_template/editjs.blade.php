@@ -1993,7 +1993,13 @@
             var finalArray = [];
             var shapeImageData = null;
             // console.log(objects);
+        // **Current Dynamic Canvas Size**
+            let canvasWidth = canvas.getWidth();
+            let canvasHeight = canvas.getHeight();
 
+            // **Calculate Reverse Scaling Factors**
+            const scaleX = originalWidth / canvasWidth;
+            const scaleY = originalHeight / canvasHeight;
             objects.forEach(function(obj) {
                 if (obj.type === 'textbox') {
                     var centerPoint = obj.getCenterPoint();
@@ -2016,16 +2022,43 @@
 
                     // console.log({centerX})
                     // console.log({centerY})
+
+
+                    // textData.push({
+                        
+                    //     text: obj.text,
+                    //     left: obj.left,
+                    //     top: obj.top,
+                    //     fontSize: parseInt(obj.fontSize),
+                    //     fill: obj.fill,
+                    //     centerX: centerX, // Include centerX in the data
+                    //     centerY: centerY, // Include centerY in the data
+                    //     dx: obj.left, // Calculate dx
+                    //     dy: obj.top, // Calculate dy
+                    //     backgroundColor: obj.backgroundColor,
+                    //     fontFamily: obj.fontFamily,
+                    //     textAlign: obj.textAlign,
+                    //     fontWeight: obj.fontWeight,
+                    //     fontStyle: obj.fontStyle,
+                    //     underline: obj.underline,
+                    //     linethrough: obj.linethrough,
+                    //     date_formate: obj.date_formate,
+                    //     letterSpacing: obj.charSpacing /
+                    //         10, // Divide by 10 to convert to standard spacing
+                    //     lineHeight: obj
+                    //         .lineHeight, // Line height of the tex// Include date_formate if set
+                    //     rotation: obj.angle
+                    // });
                     textData.push({
-                        text: obj.text,
-                        left: obj.left,
-                        top: obj.top,
-                        fontSize: parseInt(obj.fontSize),
+                        left: obj.left * scaleX, // Scale back X position
+                        top: obj.top * scaleY, // Scale back Y position
+                        fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                         fill: obj.fill,
-                        centerX: centerX, // Include centerX in the data
-                        centerY: centerY, // Include centerY in the data
-                        dx: obj.left, // Calculate dx
-                        dy: obj.top, // Calculate dy
+                        centerX: centerPoint.x * scaleX, // Scale back center position
+                        centerY: centerPoint.y * scaleY,
+                        text: obj.text, 
+                        dx: obj.left * scaleX, // Calculate dx
+                        dy: obj.top * scaleX, // Calculate dy
                         backgroundColor: obj.backgroundColor,
                         fontFamily: obj.fontFamily,
                         textAlign: obj.textAlign,
@@ -2592,46 +2625,7 @@
             }
         }
 
-        // fileInput.addEventListener('change', function(event) {
-        //     const file = event.target.files[0];
-        //     if (file) {
-        //         const formData = new FormData();
-        //         formData.append('image', file);
-        //         var id = $('#template_id').val();
-        //         // console.log(formData);
-        //         // Include shape information in the form data
-        //         formData.append('shape', shape); // Send the current shape value
-
-        //         fetch(`/user_image/${id}`, {
-        //                 method: 'POST',
-        //                 body: formData,
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-        //                         .getAttribute('content')
-        //                 }
-        //             })
-        //             .then(response => {
-        //                 if (!response.ok) {
-        //                     throw new Error('Network response was not ok');
-        //                 }
-        //                 return response.json();
-        //             })
-        //             .then(data => {
-        //                 console.log('Server response:', data);
-        //                 updatedOBJImage = {
-        //                     shape: 'rectangle',
-
-        //                     width: 100,
-        //                     height: 100
-        //                 };
-        //                 updateClipPath(data.imagePath, updatedOBJImage)
-
-        //             })
-        //             .catch(error => {
-        //                 console.error('There was a problem with the fetch operation:', error);
-        //             });
-        //     }
-        // });
+        
 
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();
