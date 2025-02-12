@@ -435,7 +435,7 @@
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-                                                                type="checkbox" value="" id="flexCheckDefault">
+                                                                type="checkbox" value="" id="flexCheckDefault" data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
                                                         </button>
                                                     </div>
 
@@ -564,7 +564,7 @@
                                 <div>
                                     <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput" name="files[]" class="fileInputtype"
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
                                             accept="image/* video/*" multiple></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
