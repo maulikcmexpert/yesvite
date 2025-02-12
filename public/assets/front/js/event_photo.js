@@ -24,24 +24,17 @@ $(document).ready(function () {
         var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-        //   var postContent = document.getElementById('postContent').value.trim();
-        // Fallback to empty string if #postContent does not exist
 
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
-        // console.log('Text Form:', textForm.length > 0 ? 'Exists' : 'Does not exist');
-        //console.log('Post Content:', postContent);
 
-        // If a photo form exists and is visible, submit it
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the photo post.');
-            //     return;
-            // }
-            // Set the value of the hidden input in the photo form
-            //  document.getElementById('photoContent').value = postContent;
+            var photoInput = document.getElementById("fileInput");
+            var photoInput2 = document.getElementById("fileInput2");
+
+
             $this.prop("disabled", true);
             photoForm.submit();
         }
@@ -838,7 +831,8 @@ $(document).ready(function () {
     //     // Optionally, you can make an AJAX request here to update the server
     //     console.log('Heart button clicked');
     // });
-    const longPressDelay = 3000; // 3 seconds for long press
+    const longPressDelay = 2000; // 3 seconds for long press
+
     let pressTimer;
     let isLongPress = false;
 
@@ -869,7 +863,7 @@ $(document).ready(function () {
                 .find(".phototab-add-new-photos-img p")
                 .text(`${selectedCount} Photos Selected`); // Update the count
         } else if (selectedCount <= 1) {
-            // bulkSelectWrapper.addClass('d-none');
+            bulkSelectWrapper.addClass('d-none');
         }
 
         // Remove the div if more than 1 image is selected
@@ -877,6 +871,17 @@ $(document).ready(function () {
         //     bulkSelectWrapper.addClass('d-none'); // Hide the div when more than 1 image is selected
         // }
     }
+    $(document).on("change", ".selected_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-photo-btn").show();
+        } else {
+            photoCard.find(".selected-photo-btn").hide();
+        }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
 
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
@@ -909,7 +914,14 @@ $(document).ready(function () {
             })
             .get();
 
-        console.log("Selected Images: ", selectedImages);
+            selectedImages.forEach((imgSrc, index) => {
+                const link = document.createElement("a");
+                link.href = imgSrc;
+                link.download = `image_${index + 1}.jpg`; // Customize filename
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
     });
     $(document).on("click", ".download_img_single", function () {
         // Find the image source stored in the data attribute
@@ -1022,6 +1034,8 @@ $(document).ready(function () {
         var url;
 
         url = base_url + "event_photo/fetch-photo-details";
+        $("#host_display").text("");
+        $("#host_display").removeClass('host');
 
         $.ajax({
             url: url, // Update with your server-side endpoint
@@ -1081,10 +1095,12 @@ $(document).ready(function () {
                     if (data.is_host == "1") {
                         const host = `${data.is_host}`;
                         $("#host_display").text("Host");
+                        $("#host_display").addClass('host');
                     }
                     if (data.is_co_host == "1") {
                         const co_host = `${data.is_co_host}`;
                         $("#host_display").text("co_host");
+                        $("#host_display").addClass('host');
                     }
 
                     $(".likeModel")

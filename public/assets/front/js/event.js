@@ -1082,6 +1082,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
 $(document).on('click','.main-notification-div-list',function(){
     const event_id=$(this).data('event_id');
     console.log(event_id);
+    $(this).removeClass('unseen-notification');
     $.ajax({
         url: `${base_url}mark_as_read`,
         type: 'GET',        

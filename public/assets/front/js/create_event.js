@@ -4,6 +4,7 @@ let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
 // alert(isCheckOldcoHost);
 eventData.isCheckOldcoHost = isCheckOldcoHost;
 var total_activities = $("#TotalSedulare").val();
+var isEditCohost = $("#cohostId").val() !== "" ? "1" : "0";
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -3702,6 +3703,10 @@ $(document).on("click", "#next_setting", function () {
 });
 
 $(document).on("click", "#next_design", function () {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
+    $("#close_createEvent").css("display", "none");
     console.log(eventData);
     console.log(dbJson);
     $(".li_event_detail").find(".side-bar-list").removeClass("active");
@@ -3723,19 +3728,30 @@ $(document).on("click", "#next_design", function () {
 });
 
 if ($(".edit-design").hasClass("active")) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
     $("#close_createEvent").css("display", "none");
 } else {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 }
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
-$(document).on("click", "#close_createEvent", function () {
-    $("#loader").css("display", "flex");
+$(document).on("click", "#close_createEvent", async function () {
+   
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
-
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -3836,7 +3852,7 @@ $(document).on("click", "#close_createEvent", function () {
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
-                    }, 4000);
+                    }, 100000);
                 }
             },
             error: function (xhr, status, error) {
@@ -4664,6 +4680,9 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4671,7 +4690,11 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     li_design_click();
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
-    $("#close_createEvent").css("display", "block");
+    // $("#close_createEvent").css("display", "block");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
+    $("#close_createEvent").css("display", "none");
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
@@ -4856,6 +4879,9 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
 
@@ -6202,7 +6228,7 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
-    if (selected_dataId != "" && isCohost == "0") {
+    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy=="") {
         toggleSidebar();
         return;
     }
@@ -6467,11 +6493,11 @@ $(document).on("click", ".final_create_event", function (e) {
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
-    if (isCopy != "") {
-        savePage1Data();
-        savePage3Data();
-        savePage4Data();
-    }
+    // if (isCopy != "") {
+        savePage1Data(null, true);
+        savePage3Data(null, true);
+        savePage4Data(null, true);
+    // }
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
@@ -8675,10 +8701,16 @@ $(document).on("click", ".design-sidebar-action", function () {
     }
 });
 
-$(document).on("click", "#close_editEvent", function (e) {
+$(document).on("click", "#close_editEvent",async function (e) {
     // if (final_step == 2) {
     savePage1Data(1);
     // }
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
     // if (final_step == 3) {
     var savePage3Result = savePage3Data(1);
     if (savePage3Result === false) {
@@ -8760,6 +8792,9 @@ if (final_step == "4" && isCohost == "1") {
 }
 
 async function step2Open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
@@ -8812,6 +8847,9 @@ async function step2Open() {
 }
 
 async function step3open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
@@ -8933,6 +8971,9 @@ async function step4open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
 
@@ -9172,7 +9213,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if (innerUserQnt + quantity >= categoryItemQuantity) {
+            if ((parseInt(innerUserQnt) + parseInt(quantity)) >= parseInt(categoryItemQuantity)) {
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
@@ -9340,6 +9381,7 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
+    var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
     $(".pick-card").addClass("active");
@@ -9347,10 +9389,20 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_event_detail").find(".side-bar-list").removeClass("menu-success");
     $(".li_guest").find(".side-bar-list").removeClass("menu-success");
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
+    if(dbJson!="" && dbJson!=undefined){
+        $(".pick-card").removeClass("active");
+        $(".edit-design-sidebar").addClass("active");
+        $("#close_createEvent").css("display", "none");
+        $("#close_editEvent").css("display", "none");
+        loadAgain();
+    }
 }
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();

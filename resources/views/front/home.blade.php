@@ -72,7 +72,7 @@ $getSocialLink = getSocialLink();
 @push('scripts')
 
 
-<script>
+<!-- <script>
   $(document).ready(function () {
     toastr.options = {
                     "closeButton": true,
@@ -88,5 +88,5 @@ $getSocialLink = getSocialLink();
                 toastr.success("{{ session('msg') }}");
             @endif
         });
-</script>
+</script> -->
 @endpush

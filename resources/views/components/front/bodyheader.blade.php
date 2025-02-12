@@ -176,15 +176,17 @@ $notification_list=getNotificationList();
                   $notification_list=getNotificationList();
                   $i=0;
               @endphp
-
               @foreach ($notification_list as $key=>$value)
+
               @php
                 $i++;
+                $hasUnread = collect($value)->contains(fn($item) => $item['read'] === "0");
+                $unseenClass  = $hasUnread ? "unseen-notification" : "";
               @endphp
                 <div class="accordion-item notification_drp_down_div">
                   <h2 class="accordion-header">
                     <button
-                      class="accordion-button collapsed main-notification-div-list"
+                      class="accordion-button collapsed main-notification-div-list {{ $unseenClass }}"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne{{$i}}"

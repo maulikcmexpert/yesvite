@@ -207,7 +207,7 @@
     .side-bar-sub-list
     h3::before {
     left: 10px;
-    background: #fff;
+    color: #fff;
     border-radius: 100%;
 }
 
@@ -1448,6 +1448,13 @@
     border-radius: 10px;
     padding-left: 30px;
     margin-bottom: 20px;
+}
+
+.new_event_detail_form .button-cover{
+    margin-top: 0px !important;
+}
+.new_event_detail_form form h6{
+    margin-bottom: 0px !important;
 }
 
 /* ======Responsiveness===== */

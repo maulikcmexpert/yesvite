@@ -435,7 +435,7 @@
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-                                                                type="checkbox" value="" id="flexCheckDefault">
+                                                                type="checkbox" value="" id="flexCheckDefault" data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
                                                         </button>
                                                     </div>
 
@@ -558,6 +558,7 @@
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
                         enctype="multipart/form-data">
+                        @csrf
                         <div class="create-post-upload-img-wrp ">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -591,7 +592,7 @@
                             <div class="create-post-upload-img-main">
 
 
-                                @csrf
+
                                 <div class="create-post-upload-img-inner">
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
@@ -705,7 +706,7 @@
                         </button> --}}
                     </div>
                     <div class="">
-                        <button type ="button" class="cmn-btn create_post">
+                        <button type ="button" class="cmn-btn create_post" >
                             post
                         </button>
                     </div>
@@ -799,7 +800,7 @@
                                     <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">Chance Curtis
                                         </h3>
-                                        <span id="host_display" class="host"></span>
+                                        <span id="host_display" ></span>
                                     </div>
                                     <p id="location">New York, NY</p>
                                 </div>

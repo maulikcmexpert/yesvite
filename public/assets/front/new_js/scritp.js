@@ -548,19 +548,7 @@ $(".upload-img-delete").click(function () {
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
 });
-$(".uploded-delete-icon").click(function () {
-    alert();
-    let fileInput = $("#fileInput");
 
-
-    fileInput.val("");
-
-    // If using a form, reset it as well
-    $("#photoForm")[0].reset();
-
-
-
-});
 
 
 $(".upload-poll-delete").click(function () {
@@ -1207,6 +1195,8 @@ if (hiddenData != undefined) {
 
 $(document).on('click', '.notification-showall-btn', function() {
     var show=$(this).attr('data-show');
+    $('.main-notification-div-list').removeClass('unseen-notification');
+
     if(show=="0"){
         $(this).text('Minimize All');
         $(this).attr('data-show','1');

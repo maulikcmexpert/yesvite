@@ -93,6 +93,7 @@ function previewStoryImage(event, userId) {
 function closePreviewModal(userId) {
     const previewContainer = document.getElementById(`preview-${userId}`);
     const previewModal = document.getElementById(`previewModel-${userId}`);
+    const fileInput = document.getElementById(`story-upload-${userId}`);
 
     if (previewModal && previewContainer) {
         // Hide the modal and preview container
@@ -107,8 +108,12 @@ function closePreviewModal(userId) {
 
         // Clear the preview container for the next upload
         previewContainer.innerHTML = "";
+
+        // ✅ Reset the file input to allow re-uploading the same file
+        fileInput.value = "";
     }
 }
+
 
 
 // Step 2: Upload the selected files on button click
@@ -1107,8 +1112,8 @@ $(document).ready(function () {
             ) {
 
                 document.getElementById("photoPostType").value = 0;
-                $this.prop("disabled", true);
-            }else{
+
+            } else {
 
 
                 document.getElementById("photoPostType").value = 1;
@@ -1116,7 +1121,7 @@ $(document).ready(function () {
 
 
 
-            $this.prop("disabled", true);
+
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
@@ -1322,7 +1327,7 @@ $(document).on("click", ".wall_filter_reset", function () {
         data: JSON.stringify({
             event_id: event_id,
             filters: selectedPostTypes,
-            is_delete:"1"
+            is_delete: "1"
         }),
         contentType: "application/json",
         headers: {
@@ -1376,7 +1381,7 @@ $(document).on("click", ".wall_apply_filter", function () {
         data: JSON.stringify({
             event_id: event_id,
             filters: selectedPostTypes,
-            is_delete:"0"
+            is_delete: "0"
         }),
         contentType: "application/json",
         headers: {
@@ -1434,11 +1439,11 @@ function generateProfileImage(firstname, lastname) {
     const fontColor = `fontcolor${firstInitial}`;
     return `<h5 class="${fontColor} font_name">${initials || "NA"}</h5>`;
 }
-$(document).on('click','.get_post_emoji_list',function(){
-    var post_id=$(this).data('post');
+$(document).on('click', '.get_post_emoji_list', function () {
+    var post_id = $(this).data('post');
 
 
-       $("#nav-all-reaction ul").html("");
+    $("#nav-all-reaction ul").html("");
 
     $('#nav-all-reaction-tab').html("All 0");
     $(`#nav-heart-reaction ul`).html("");
@@ -1486,45 +1491,45 @@ $(document).on('click','.get_post_emoji_list',function(){
                 $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
-                    let emoji_name="";
-                    let count="";
-                    if (reaction == "\\u{2764}"){
+                    let emoji_name = "";
+                    let count = "";
+                    if (reaction == "\\u{2764}") {
                         tabId = "nav-heart-reaction";
-                        emoji_name="heart-emoji";
-                        count="heart-count";
+                        emoji_name = "heart-emoji";
+                        count = "heart-count";
                     }
 
-                    else if (reaction == "\\u{1F44D}"){
+                    else if (reaction == "\\u{1F44D}") {
                         tabId = "nav-thumb-reaction";
-                        emoji_name="thumb-icon";
-                        count="thumb-count";
+                        emoji_name = "thumb-icon";
+                        count = "thumb-count";
 
                     }
-                    else if (reaction == "\\u{1F60A}"){
+                    else if (reaction == "\\u{1F60A}") {
                         tabId = "nav-smily-reaction";
-                        emoji_name="smily-emoji";
-                        count="smily-count";
+                        emoji_name = "smily-emoji";
+                        count = "smily-count";
 
                     }
-                    else if (reaction == "\\u{1F60D}"){
+                    else if (reaction == "\\u{1F60D}") {
                         tabId = "nav-eye-heart-reaction"
-                        emoji_name="eye-heart-emoji";
-                        count="eye-heart-count";
+                        emoji_name = "eye-heart-emoji";
+                        count = "eye-heart-count";
 
                     }
-                    else if (reaction == "\\u{1F44F}"){
+                    else if (reaction == "\\u{1F44F}") {
                         tabId = "nav-clap-reaction"
-                        emoji_name="clap-icon";
-                        count="clap-count";
+                        emoji_name = "clap-icon";
+                        count = "clap-count";
                     }
 
                     let reactionHtml = "";
-                    let profile="";
+                    let profile = "";
                     users.forEach(user => {
-                        if(user.profile==""){
-                            profile=generateProfileImage(user.firstname,user.lastname);
-                        }else{
-                            profile=` <img src="${user.profile}" alt="">`;
+                        if (user.profile == "") {
+                            profile = generateProfileImage(user.firstname, user.lastname);
+                        } else {
+                            profile = ` <img src="${user.profile}" alt="">`;
                         }
                         reactionHtml += `
                             <li class="reaction-info-wrp">
