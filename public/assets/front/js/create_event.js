@@ -6493,11 +6493,11 @@ $(document).on("click", ".final_create_event", function (e) {
     $(".main-content-wrp").addClass("blurred");
     e.stopPropagation();
     e.preventDefault();
-    if (isCopy != "") {
+    // if (isCopy != "") {
         savePage1Data();
         savePage3Data();
         savePage4Data();
-    }
+    // }
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
