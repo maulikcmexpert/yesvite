@@ -3840,7 +3840,7 @@ $(document).on("click", "#close_createEvent", async function () {
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
-                    }, 4000);
+                    }, 100000);
                 }
             },
             error: function (xhr, status, error) {
