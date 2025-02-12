@@ -1778,12 +1778,14 @@ class EventController extends BaseController
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
+                        'iscateogry'=>"1",
                         'item' => $item
                     ];
                 } else {
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
+                        'iscateogry'=>"1",
                         'item' => []
                     ];
                 }
@@ -1806,7 +1808,7 @@ class EventController extends BaseController
             if (in_array($categoryName, $categoryNames)) {
                 return response()->json(['view' => '', 'status' => '0']);
             } else {
-                $categories[] = ['category_name' => $categoryName, 'category_quantity' => $categoryQuantity];
+                $categories[] = ['category_name' => $categoryName, 'iscateogry'=>"1", 'category_quantity' => $categoryQuantity];
             }
             session()->put('category', $categories);
             $status = '1';
