@@ -1042,7 +1042,7 @@ $(document).ready(function () {
 
         url = base_url + "event_photo/fetch-photo-details";
         $("#host_display").text("");
-        $("#host_display").removeClass('host');
+        $("#host_display").remove();
         $.ajax({
             url: url, // Update with your server-side endpoint
             type: "POST", // Use GET or POST depending on your API
