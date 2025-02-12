@@ -1336,6 +1336,7 @@ $(function () {
     var oldDate = $(ed).attr("data-isDate");
     console.log($("#event-date").val());
     console.log(event_date);
+    //old start_time
     $("#event-date").daterangepicker(
         {
             autoUpdateInput: false,
@@ -1404,6 +1405,8 @@ $(function () {
         picker.show();
         $("#event-date").next().addClass("floatingfocus");
     });
+        //old start_time
+
 });
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
@@ -9213,7 +9216,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if ((parseInt(innerUserQnt) + parseInt(quantity)) >= parseInt(categoryItemQuantity)) {
+            if (innerUserQnt + quantity >= categoryItemQuantity) {
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +

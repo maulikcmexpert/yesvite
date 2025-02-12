@@ -50,7 +50,7 @@
                         </div>
                         <lable for="hostedby" id="event-host-error" class="error"></lable>
                     </div>
-                    <div class="col-lg-12 mb-4">
+                    <!-- <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             @php
                                 $start_date = '';
@@ -102,8 +102,8 @@
 
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
-                    </div>
-                    <!-- <div class="col-lg-6 mb-4">
+                    </div> -->
+                    <div class="col-lg-6 mb-4">
                         <div class="input-form">
                             @php
                                 $start_date = '';
@@ -122,7 +122,7 @@
                             @endphp
                             <div class="position-relative z-2">
                                 <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="start-event-date" data-isDate="{{ $event_date }}" name="event-date"
+                                    id="event-date" data-isDate="{{ $event_date }}" name="event-date"
                                     onblur="clearError(this)" value="{{ $event_date }}" readonly>
                                 <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
                                     event * </label>
@@ -209,7 +209,7 @@
 
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
-                    </div> -->
+                    </div>
                     <div class="col-6 mb-4">
                         <div class="form-group">
                             <label>Start Time *</label>
