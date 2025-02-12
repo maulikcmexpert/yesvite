@@ -1119,10 +1119,10 @@
     transform: rotate(0deg);
 }
 #sidebar_add_thankyou_card .guest-group-name .input-form{
-    margin-bottom: 10px !important;
+    margin-bottom: 0px !important;
 }
 #sidebar_add_thankyou_card .guest-group-name .common_error{
-    margin-bottom: 10px !important;
+    margin-bottom: 12px !important;
 }
 
 /* ============ responsive ============ */
