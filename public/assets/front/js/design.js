@@ -664,6 +664,17 @@ async function bindData(current_event_id) {
     }
 
     function loadTextDataFromDatabase() {
+        let element = document.querySelector(".image-edit-inner-img");
+        if (element) {
+            var { width, height } = element.getBoundingClientRect();
+            console.log("Width:", width, "Height:", height);
+        } else {
+            var { width, height } = { width: 590, height: 880 };
+            console.log(width, height); // Output: 590 880
+
+            console.log("Element not found!");
+        }
+
         if (image) {
             console.log(image);
             fabric.Image.fromURL(image, function (img) {
@@ -745,7 +756,7 @@ async function bindData(current_event_id) {
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
-                        let width = (textWidth + 10) * scaleX; // Scale text box width
+                        let width = (textWidth + 25) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
