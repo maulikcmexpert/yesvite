@@ -3702,6 +3702,10 @@ $(document).on("click", "#next_setting", function () {
 });
 
 $(document).on("click", "#next_design", function () {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
+    $("#close_createEvent").css("display", "none");
     console.log(eventData);
     console.log(dbJson);
     $(".li_event_detail").find(".side-bar-list").removeClass("active");
