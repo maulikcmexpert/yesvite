@@ -207,7 +207,7 @@
     .side-bar-sub-list
     h3::before {
     left: 10px;
-    background: #fff;
+    color: #fff;
     border-radius: 100%;
 }
 
