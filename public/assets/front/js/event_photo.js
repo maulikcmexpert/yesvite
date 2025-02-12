@@ -870,7 +870,7 @@ $(document).ready(function () {
                 .find(".phototab-add-new-photos-img p")
                 .text(`${selectedCount} Photos Selected`); // Update the count
         } else if (selectedCount <= 1) {
-            // bulkSelectWrapper.addClass('d-none');
+            bulkSelectWrapper.addClass('d-none');
         }
 
         // Remove the div if more than 1 image is selected
@@ -880,16 +880,16 @@ $(document).ready(function () {
     }
     $(document).on("change", ".selected_image", function () {
         const photoCard = $(this).closest(".photo-card-photos-wrp");
-    
+
         if ($(this).is(":checked")) {
             photoCard.find(".selected-photo-btn").show();
         } else {
             photoCard.find(".selected-photo-btn").hide();
         }
-    
+
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
-    
+
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
         e.preventDefault();
