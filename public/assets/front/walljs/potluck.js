@@ -199,7 +199,7 @@ if (chartData) {
             fontFamily: "Arial, sans-serif",
             fontWeight: "normal",
             formatter: function (seriesName, opts) {
-                return `<div style="width: 100%; display: block;">
+                return `<div style="width: 100%; display: flex;align-items: center;justify-content: space-between;">
                     <span style="display: inline-block; width: 100%;">${seriesName}</span>
                     <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
                 </div>`;
