@@ -745,7 +745,7 @@ async function bindData(current_event_id) {
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
-                        let width = (textWidth + 10) * scaleX; // Scale text box width
+                        let width = (textWidth + 25) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
