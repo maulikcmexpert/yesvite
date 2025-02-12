@@ -940,6 +940,13 @@
     justify-content: center;
 }
 
+#nav-potluck .list-header .d-flex.align-items-center {
+    width: 100%;
+    display: flex; /* Ensure it's explicitly flex */
+    -webkit-justify-content: flex-end; /* Safari prefix */
+    justify-content: flex-end;
+}
+
 /* ======== responsive ======= */
 @media only screen and (max-width:575px){
     .cmn-modal.show .modal-dialog-centered{
@@ -1012,3 +1019,4 @@
 .is-invalid {
     border: 1px solid red;
 }
+ 

@@ -27,7 +27,11 @@
                                 <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                                 <span class="available-coins">{{$coins}}</span>
                             </h5>
-                            <h6><span><i class="fa-solid fa-arrow-up"></i> {{$data['last_month_comparison_percentage']}}%</span>Compared to {{$data['last_month_balance']}} credits last month</h6>
+                            @php
+                                $last_month_comparison_percentage = $data['last_month_comparison_percentage'];
+                                $color = $last_month_comparison_percentage < 0 ? 'red' : 'green';
+                            @endphp
+                            <h6><span style="color: <?= $color ?>;"><i class="fa-solid fa-arrow-up"></i> {{$data['last_month_comparison_percentage']}}%</span>Compared to {{$data['last_month_balance']}} credits last month</h6>
                         </div>
                         <canvas id="creditChart"></canvas>
                         <div class="credits_balance_used_wrp">
@@ -38,7 +42,11 @@
                             <h5>
                                 <span>{{$data['credit_use_this_year']}}</span>
                             </h5>
-                            <h6><span><i class="fa-solid fa-arrow-up"></i> {{$data['last_year_comparison']}}%</span>Over last year</h6>
+                            @php
+                                $last_year_comparison = $data['last_year_comparison'];
+                                $color = $last_year_comparison >= 0 ? 'green' : 'red';
+                            @endphp
+                            <h6><span style="color: <?= $color ?>;"><i class="fa-solid fa-arrow-up"></i> {{$data['last_year_comparison']}}%</span>Over last year</h6>
                         </div>
                         <div class="transaction_detail_wrp">
                             <div class="transaction_detail_title">
