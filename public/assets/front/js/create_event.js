@@ -1418,10 +1418,6 @@ $(function () {
     let startEventInput = $("#start-event-date"); // Start date input
     let endEventInput = $("#end-event-date"); // End date input
 
-    // Default start and end dates
-    let startEventDate = startEventInput.val() || moment().format("MM/DD/YYYY");
-    let endEventDate = endEventInput.val() || moment().format("MM/DD/YYYY");
-
     // Initialize single date picker for start date
     startEventInput.daterangepicker({
         singleDatePicker: true,
@@ -1432,21 +1428,15 @@ $(function () {
         let formattedDate = selectedDate.format("MM/DD/YYYY");
         startEventInput.val(formattedDate);
 
-        // Ensure end date is at least the start date
+        // Ensure the end date is not before the start date
         let currentEndDate = moment(endEventInput.val(), "MM/DD/YYYY");
         if (!currentEndDate.isValid() || currentEndDate.isBefore(selectedDate)) {
             endEventInput.val(formattedDate);
         }
 
         // Update minDate for end date picker
-        endEventInput.daterangepicker({
-            singleDatePicker: true,
-            autoUpdateInput: false,
-            locale: { format: "MM/DD/YYYY" },
-            minDate: selectedDate,
-        });
-
-        endEventInput.trigger("change");
+        endEventInput.data('daterangepicker').setStartDate(selectedDate);
+        endEventInput.data('daterangepicker').setMinDate(selectedDate);
     });
 
     // Initialize single date picker for end date
@@ -1461,12 +1451,10 @@ $(function () {
 
     // Auto-focus behavior
     startEventInput.on("apply.daterangepicker", function (ev, picker) {
-        picker.hide();
         $(this).next().addClass("floatingfocus");
     });
 
     endEventInput.on("apply.daterangepicker", function (ev, picker) {
-        picker.hide();
         $(this).next().addClass("floatingfocus");
     });
 
