@@ -854,7 +854,7 @@
                                                                                         </li>
                                                                                     @endforeach
 
-                                                                                    
+
                                                                                     @if ($comment['total_replies'] > 0)
                                                                                         <button
                                                                                             class="show-comment-reply-btn">Hide
@@ -873,7 +873,7 @@
 
                                                 </div>
 
-                                                
+
                                             @endforeach
                                         </div>
                                     </div>
@@ -1408,7 +1408,7 @@
                             All 106
                         </button>
                         <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/heart-emoji.png')}}" alt=""> <span id="heart-count">0</span> 
+                            <img src="{{asset('assets/front/img/heart-emoji.png')}}" alt=""> <span id="heart-count">0</span>
                         </button>
                         <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction" aria-selected="false" tabindex="-1">
                             <img src="{{asset('assets/front/img/thumb-icon.png')}}" alt=""> <span id="thumb-count">0</span>
@@ -1510,7 +1510,7 @@
                               </div>
                             </div>
                           </li> -->
-                         
+
                         </ul>
                       </div>
 
@@ -1532,7 +1532,7 @@
                               </div>
                             </div>
                           </li> -->
-                        
+
                         </ul>
                       </div>
 
@@ -1559,10 +1559,10 @@
                         </ul>
                       </div>
                     </div>
-                    <!-- ===Tab-content=== -->  
+                    <!-- ===Tab-content=== -->
                 </div>
             </div>
-    
+
           </div>
         </div>
     </div>
