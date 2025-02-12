@@ -589,8 +589,8 @@
                         <h6 class="invite-count">0</h6>
                         <p class="invite-left_d"><strong>Invites |</strong></p>
                     </div>
-                    <div>
-                        <p  class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span>
+                    <div class="coin-invite-wrp">
+                        <div class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></div> <span class="available-coins">{{$coins}}</span>
                     </div>
                     {{-- <div class="invite-right"> --}}
                         {{-- <h5>
