@@ -9088,7 +9088,7 @@ async function step4open() {
         toastr.error("Please enter event name");
         return;
     }
-    if (event_date == "") {
+    if (start_event_date == "") {
         toastr.error("Please enter start date");
         return;
     }
