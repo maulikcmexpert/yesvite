@@ -189,8 +189,7 @@
                 </a>
                 <div class="w-100">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal"
-                            data-bs-target="#editguest"
+                        <a href="javascript:;" class="invite-user-name yesvite-search" 
                             data-profile="{{$contact->profile}}"
                             data-search = "{{ $contact->firstname }} {{ $contact->lastname }}">
                             {{ $contact->firstname }} {{ $contact->lastname }}</a>
@@ -427,8 +426,9 @@
                 </a>
                 <div class="w-100">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="#" class="invite-user-name phone-search" data-bs-toggle="modal"
-                            data-bs-target="#editguest"
+                    <!-- data-bs-toggle="modal"
+                    data-bs-target="#editguest" -->
+                        <a href="javascript:;" class="invite-user-name phone-search"
                             data-search="{{ $contact->firstName }}{{ $contact->lastName }}">
                             {{ $contact->firstName }} {{ $contact->lastName }}</a>
                     </div>
