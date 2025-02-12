@@ -578,7 +578,7 @@
                                                                                             intval(
                                                                                                 $item['innerUserQnt'],
                                                                                             ) >=
-                                                                                        $item['quantity']
+                                                                                        intval($item['quantity'])
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';

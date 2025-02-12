@@ -32,8 +32,9 @@ $(document).ready(function () {
 
         if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
+
             if (
-                photoInput &&
+
                 photoInput.files.length === 0
 
             ) {
@@ -840,6 +841,7 @@ $(document).ready(function () {
     //     console.log('Heart button clicked');
     // });
     const longPressDelay = 2000; // 3 seconds for long press
+
     let pressTimer;
     let isLongPress = false;
 

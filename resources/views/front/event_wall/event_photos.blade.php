@@ -558,6 +558,7 @@
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
                         enctype="multipart/form-data">
+                        @csrf
                         <div class="create-post-upload-img-wrp ">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
@@ -591,7 +592,7 @@
                             <div class="create-post-upload-img-main">
 
 
-                                @csrf
+
                                 <div class="create-post-upload-img-inner">
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
