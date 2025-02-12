@@ -924,11 +924,17 @@
     width: 30px;
 }
 
-.missing-category-h6-0{
+/* .missing-category-h6-0{
     width: 100%;
     max-width: 15px;
     height: 15px;
     display: inline-block;
+} */
+
+.post-potluck-category .list-header > .d-flex.align-items-center span:has(svg){
+    width: 100%;
+    max-width: 15px;
+    height: 15px;
 }
 
 /* ======== responsive ======= */

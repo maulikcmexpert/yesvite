@@ -58,9 +58,9 @@
                                 <path d="M6.88672 11H9.10672" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M6.3335 8.33398H9.66683" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Delete   
+                                Delete
                             </li>
-                        </ul>                        
+                        </ul>
                     </div>
                 </div>
             </div>
