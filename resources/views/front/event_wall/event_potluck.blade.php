@@ -633,7 +633,7 @@
 
 
                                                                                 <span
-                                                                                    class="accordion-button plus_icon_user collapsed"
+                                                                                    class="accordion-button plus_icon_user"
                                                                                     data-category-id="{{ $category['id'] }}"
                                                                                     data-categorykey="{{ $key }}"
                                                                                     data-itemkey="{{ $indexkey }}"
@@ -642,7 +642,7 @@
                                                                                     data-event-id="{{ $event }}"
                                                                                     data-login-user-id={{ $login_user_id }}
                                                                                     type="button"
-                                                                                    data-bs-toggle="collapse"
+                                                                                    {{-- data-bs-toggle="collapse" --}}
                                                                                     data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
                                                                                     aria-expanded="false"
                                                                                     aria-controls="sprite-collapseOne-{{ $item['id'] }}">
