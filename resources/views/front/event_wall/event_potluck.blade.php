@@ -337,7 +337,7 @@
                                                                 @if ($category['totalOver'] > 0)
                                                                     <span
                                                                         class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                        style="">
+                                                                        style=" width: 100%;max-width: 15px;height: 15px;">
                                                                         <svg width="14" height="14"
                                                                             viewBox="0 0 14 14" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -353,7 +353,7 @@
                                                                 @else
                                                                     <span
                                                                         class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                        style="display:none">
+                                                                        style="display:none; width: 100%;max-width: 15px;height: 15px;">
                                                                         <svg width="14" height="14"
                                                                             viewBox="0 0 14 14" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -371,7 +371,7 @@
                                                                 @if ($category['totalMissing'] == 0)
                                                                     <span
                                                                         class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                        style="color: rgb(52, 192, 92);">
+                                                                        style="color: rgb(52, 192, 92); width: 100%;max-width: 15px;height: 15px;">
                                                                         <svg width="14" height="14"
                                                                             viewBox="0 0 14 14" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
@@ -387,7 +387,7 @@
                                                                     @if ($category['totalOver'] > 0)
                                                                         <span
                                                                             class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                            style="">
+                                                                            style=" width: 100%;max-width: 15px;height: 15px;">
                                                                             <svg width="14" height="14"
                                                                                 viewBox="0 0 14 14" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -403,7 +403,7 @@
                                                                     @else
                                                                         <span
                                                                             class="me-2 extra-category-h6-{{ $key }} extra-category-svg-{{ $key }}"
-                                                                            style="display:none">
+                                                                            style="display:none; width: 100%;max-width: 15px;height: 15px;">
                                                                             <svg width="14" height="14"
                                                                                 viewBox="0 0 14 14" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
