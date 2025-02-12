@@ -3811,7 +3811,8 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", async function (e) {
-    e.stopPropagation();
+    
+    $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
     if (temp_id==undefined ||  temp_id =="" || temp_id ==null){
         $("#deleteModal").modal("show");
@@ -8795,6 +8796,7 @@ $(document).on("click", ".design-sidebar-action", function () {
 
 $(document).on("click", "#close_editEvent",async function (e) {
     // if (final_step == 2) {
+    $(".dropdown-menu").removeClass('show');
     savePage1Data(1);
     // }
     var design = eventData.desgin_selected;
