@@ -2017,7 +2017,7 @@ $(document).ready(function () {
     };
 
     // Load saved settings or set defaults
-    let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
+    let savedVisibility = localStorage.getItem("post_privacys") || "Everyone"; // Default: Everyone
     let savedAllowComments = localStorage.getItem("commenting_on_off");
 
     // Ensure the default value is set if no saved value exists for comments
@@ -2043,7 +2043,7 @@ $(document).ready(function () {
     // Save Button Click Handler
     $("#saveSettings").on("click", function () {
         // Fetch selected visibility
-        const visibility = $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
+        const visibility = $('input[name="post_privacy"]:checked').val() || "Everyone"; // Default to Everyone if null
         // Fetch commenting status
         const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
