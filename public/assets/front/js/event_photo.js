@@ -31,12 +31,18 @@ $(document).ready(function () {
         );
 
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            // if (postContent === '') {
-            //     alert('Please enter some content for the photo post.');
-            //     return;
-            // }
-            // Set the value of the hidden input in the photo form
-            //  document.getElementById('photoContent').value = postContent;
+            var photoInput = document.getElementById("fileInput");
+            if (
+                photoInput &&
+                photoInput.files.length === 0 &&
+                postContent === ""
+            ) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
+                return;
+            }
+
             $this.prop("disabled", true);
             photoForm.submit();
         }
