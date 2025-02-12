@@ -548,19 +548,7 @@ $(".upload-img-delete").click(function () {
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
 });
-// $(".uploded-delete-icon").click(function () {
 
-//     // let fileInput = $("#fileInput");
-
-
-//     // fileInput.val("");
-
-//     // If using a form, reset it as well
-//     $("#photoForm")[0].reset();
-
-
-
-// });
 
 
 $(".upload-poll-delete").click(function () {
