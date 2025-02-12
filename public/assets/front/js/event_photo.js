@@ -33,7 +33,7 @@ $(document).ready(function () {
         if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
             var photoInput2 = document.getElementById("fileInput2");
-          
+
 
             $this.prop("disabled", true);
             photoForm.submit();
