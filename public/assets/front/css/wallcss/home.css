@@ -1298,6 +1298,7 @@ main {
   line-height: 23.8px;
   color: var(--primary-black);
   margin-bottom: 20px;
+  word-break: break-all;
 }
 
 .posts-card-show-post-img{
