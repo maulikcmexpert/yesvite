@@ -3389,6 +3389,8 @@ class EventController extends BaseController
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
+        $startDate = (isset($request->start_event_date)) ? $request->start_event_date : "";
+        $endDate = (isset($request->end_event_date)) ? $request->end_event_date : "";
 
 
         // if (strpos($dateString, ' To ') !== false) {
@@ -3400,12 +3402,12 @@ class EventController extends BaseController
 
         // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
         // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-        if (strpos($dateString, ' To ') !== false) {
-            list($startDate, $endDate) = explode(' To ', $dateString);
-        } else {
-            $startDate = $dateString;
-            $endDate = $dateString;
-        }
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         $rsvpdateObj = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
