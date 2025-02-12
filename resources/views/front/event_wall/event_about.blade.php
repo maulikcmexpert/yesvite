@@ -2254,43 +2254,46 @@
     </main>
 @endisset
 <script>
-    // Get event date and time from PHP
-    const startdate = "{{ $startdate }}"; // '2025-01-30' format
-    const starttime = "{{ $starttime }}"; // '9:30 PM' format
+  // Get event date and time from PHP
+const startdate = "{{ $startdate }}".replace(/-/g, "/"); // Replace dashes with slashes
+const starttime = "{{ $starttime }}";
 
-    // Convert start date and time into a timestamp
-    const eventTimestamp = new Date(`${startdate} ${starttime}`).getTime();
+// Ensure proper formatting for Safari by combining date and time
+const eventTimestamp = new Date(`${startdate} ${starttime}`).getTime();
+console.log("Event Timestamp:", eventTimestamp);
 
-    function updateCountdown() {
-        const currentDate = new Date();
-        const currentTime = currentDate.getTime(); // Use currentDate.getTime() to get current time in milliseconds
+function updateCountdown() {
+    const currentDate = new Date();
+    const currentTime = currentDate.getTime();
+    console.log("Current Date & Time:", currentDate, currentTime);
 
-        const remainingTime = eventTimestamp - currentTime; // Subtract current time from event timestamp
+    const remainingTime = eventTimestamp - currentTime;
+    console.log("Remaining Time:", remainingTime);
 
-        if (remainingTime > 0) {
-            // Calculate days, hours, minutes, and seconds
-            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            // const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    if (remainingTime > 0) {
+        // Calculate time units
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
 
-            // Update HTML elements
-            document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
-            document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
-            // document.getElementById('countdownSeconds').innerText = seconds.toString().padStart(2, '0');
-        } else {
-            // Event has passed, set everything to "00"
-            document.getElementById('countdownDays').innerText = "00";
-            document.getElementById('countdownHours').innerText = "00";
-            document.getElementById('countdownMinutes').innerText = "00";
-            // document.getElementById('countdownSeconds').innerText = "00";
-        }
+        console.log("Countdown:", days, hours, minutes);
+
+        // Update countdown display
+        document.getElementById('countdownDays').innerText = days.toString().padStart(2, '0');
+        document.getElementById('countdownHours').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('countdownMinutes').innerText = minutes.toString().padStart(2, '0');
+    } else {
+        // Set countdown to 00 if event has passed
+        document.getElementById('countdownDays').innerText = "00";
+        document.getElementById('countdownHours').innerText = "00";
+        document.getElementById('countdownMinutes').innerText = "00";
     }
+}
 
-    // Update countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call to set the countdown immediately
+// Update countdown every second
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
 </script>
 @if ($eventDetails['latitude']!=0 && $eventDetails['latitude']!=null && $eventDetails['latitude']!='' && $eventDetails['longitude']!=''  && $eventDetails['longitude']!=null  && $eventDetails['longitude']!=0 )
 @php
