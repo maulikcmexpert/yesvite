@@ -3811,6 +3811,11 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", async function () {
+    var temp_id = eventData.temp_id;
+    if (temp_id==undefined ||  temp_id =="" || temp_id ==null){
+        $("#deleteModal").modal("show");
+        return;
+    } 
    
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
