@@ -177,7 +177,7 @@
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
                                         @foreach ($potluckDetail['podluck_category_list'] as $category)
-                                        
+
                                         <div class="category-main-dishesh">
 
 
@@ -200,12 +200,12 @@
                                                             $total_item_quantity == $total_missing_quantity
                                                                 ? 'disabled'
                                                                 : '';
-                                                            } 
+                                                            }
                                                             $noneVal =
                                                                 $total_item_quantity > 0
                                                                     ? 'd-none'
                                                                     : '';@endphp
-                                                      
+
                                                 <div class="category-list" id="sublist"
                                                     data-category-id="{{ $category['id'] }}"
                                                     data-total-quantity="{{ $total_item_quantity }}">
