@@ -3816,7 +3816,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         return;
     }
     apiCalled = true;
-    $("#loader").css("display", "flex");
+    
     $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
     if (dbJson == "" || dbJson == null || dbJson==undefined){
