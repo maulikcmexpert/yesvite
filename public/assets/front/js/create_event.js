@@ -4675,7 +4675,7 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     li_design_click();
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
-    $("#close_createEvent").css("display", "block");
+    // $("#close_createEvent").css("display", "block");
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
