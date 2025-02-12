@@ -366,7 +366,7 @@
                                 <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
                                 <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
                                 <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30
+                                {{-- <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30 --}}
                                 </option>
 
                                 {{-- <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
