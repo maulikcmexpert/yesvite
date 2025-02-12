@@ -945,6 +945,10 @@
         overflow-y: scroll;
         max-height: calc(100vh - 440px) !important;
     }
+    .guest-main-content .guest-wrapper .invite-pro .invite-left{
+        max-width: 100%;
+        min-width: 100%;
+    }
 }
 
 @media only screen and (max-width: 424px) {
@@ -952,6 +956,11 @@
         max-width: 280px;
         min-width: 280px;
         position: fixed;
+    }
+
+    .guest-main-content .guest-wrapper .invite-pro{
+        max-width: 100%;
+        min-width: 100%;
     }
 
     #YesviteUserAll .users-data .text-start {

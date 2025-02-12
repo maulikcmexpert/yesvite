@@ -781,6 +781,10 @@
     background-color: gray !important;
 }
 
+#aboutsuccess .modal-header h5{
+    color: #fff !important;
+}
+
 /* ========= responsive =========== */
 @media only screen and (max-width: 1399px) {
     .birth-details .hosted-by-date-time {

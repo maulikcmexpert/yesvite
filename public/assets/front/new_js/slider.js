@@ -11,16 +11,16 @@ var swiper = new Swiper(".photo-detail-slider", {
 // var swiper = new Swiper(".photo-detail-slider", {});
 
 // ===hostby-slider===
-// const path = "";
-// var swiper = new Swiper(".mySwiper", {
-//     slidesPerView: 1,
-//     spaceBetween: 30,
-//     pagination: {
-//         el: ".custom-pagination",
-//         type: "custom",
-//         renderCustom: (swiper, current, total) => `${current} of ${total}`,
-//     },
-// });
+const path = "";
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    pagination: {
+        el: ".custom-pagination",
+        type: "custom",
+        renderCustom: (swiper, current, total) => `${current} of ${total}`,
+    },
+});
 
 //   ===story-slider===
 //   ===story-slider===

@@ -435,7 +435,7 @@
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-                                                                type="checkbox" value="" id="flexCheckDefault">
+                                                                type="checkbox" value="" id="flexCheckDefault" data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
                                                         </button>
                                                     </div>
 
@@ -799,7 +799,7 @@
                                     <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">Chance Curtis
                                         </h3>
-                                        <span id="host_display" class="host"></span>
+                                        <span id="host_display" ></span>
                                     </div>
                                     <p id="location">New York, NY</p>
                                 </div>
