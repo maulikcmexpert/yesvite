@@ -3723,8 +3723,14 @@ $(document).on("click", "#next_design", function () {
 });
 
 if ($(".edit-design").hasClass("active")) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
     $("#close_createEvent").css("display", "none");
 } else {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 }
 // $(document).on("click",'.edit-design',function(){
@@ -4668,6 +4674,9 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4860,6 +4869,9 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
 
@@ -8764,6 +8776,9 @@ if (final_step == "4" && isCohost == "1") {
 }
 
 async function step2Open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
@@ -8816,6 +8831,9 @@ async function step2Open() {
 }
 
 async function step3open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
@@ -8937,6 +8955,9 @@ async function step4open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
 
@@ -9363,6 +9384,9 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
