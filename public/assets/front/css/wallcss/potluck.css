@@ -924,6 +924,22 @@
     width: 30px;
 }
 
+/* .missing-category-h6-0{
+    width: 100%;
+    max-width: 15px;
+    height: 15px;
+    display: inline-block;
+} */
+
+.post-potluck-category .list-header > .d-flex.align-items-center span:has(svg){
+    width: 100%;
+    max-width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ======== responsive ======= */
 @media only screen and (max-width:575px){
     .cmn-modal.show .modal-dialog-centered{
