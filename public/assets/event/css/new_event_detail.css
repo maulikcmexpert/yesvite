@@ -1453,6 +1453,9 @@
 .new_event_detail_form .button-cover{
     margin-top: 0px !important;
 }
+.new_event_detail_form form h6{
+    margin-bottom: 0px !important;
+}
 
 /* ======Responsiveness===== */
 
