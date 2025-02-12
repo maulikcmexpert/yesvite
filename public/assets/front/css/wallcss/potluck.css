@@ -940,9 +940,11 @@
     justify-content: center;
 }
 
-#nav-potluck .list-header .d-flex.align-items-center{
+#nav-potluck .list-header .d-flex.align-items-center {
     width: 100%;
-    justify-content: end;
+    display: flex; /* Ensure it's explicitly flex */
+    -webkit-justify-content: flex-end; /* Safari prefix */
+    justify-content: flex-end;
 }
 
 /* ======== responsive ======= */
