@@ -3741,7 +3741,7 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", async function () {
-    $("#loader").css("display", "flex");
+   
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -3750,6 +3750,7 @@ $(document).on("click", "#close_createEvent", async function () {
         await saveDesignData();
         design = eventData.desgin_selected;
     }
+    $("#loader").css("display", "flex");
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
