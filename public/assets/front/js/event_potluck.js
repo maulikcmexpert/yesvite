@@ -445,6 +445,7 @@ $(document).on("change", ".itemQty", function () {
 });
 
 $(document).on("click", ".plus_icon_user", function () {
+    $(".accordion-collapse").addClass('show')
     const categoryId = $(this).data("category-id");
     const itemId = $(this).data("item-id");
     const eventId = $(this).data("event-id");
