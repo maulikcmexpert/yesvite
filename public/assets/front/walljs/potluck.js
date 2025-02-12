@@ -153,7 +153,7 @@ if (chartData) {
         series: [spoken_for, missing_still],
         labels: ["Spoken For", "Missing Still"],
         chart: {
-            width: 350,
+            width: "100%", // Ensure full width
             type: "donut",
         },
         dataLabels: {
@@ -169,9 +169,9 @@ if (chartData) {
                             label: "Potluck Items",
                             color: "#0f172a",
                             fontSize: "18px",
-                            fontFamily: "Arial, sans-serif", // Ensure a Safari-supported font
+                            fontFamily: "Arial, sans-serif",
                             formatter: function (w) {
-                                return potluck_item.toString(); // Ensure it's a string
+                                return potluck_item.toString();
                             },
                         },
                     },
@@ -184,7 +184,7 @@ if (chartData) {
                 breakpoint: 480,
                 options: {
                     chart: {
-                        width: 270,
+                        width: "100%",
                     },
                     legend: {
                         show: true,
@@ -197,10 +197,13 @@ if (chartData) {
             horizontalAlign: "left",
             offsetY: 0,
             fontSize: "14px",
-            fontFamily: "Arial, sans-serif", // More Safari-friendly font
-            fontWeight: "normal", // Avoid font-weight rendering issues
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "normal",
             formatter: function (seriesName, opts) {
-                return `${seriesName} <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>`;
+                return `<div style="display: flex; justify-content: space-between; width: 100%;">
+                    <span>${seriesName}</span>
+                    <span style="font-weight: bold; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
+                </div>`;
             },
         },
     };
