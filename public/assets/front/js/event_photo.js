@@ -1104,6 +1104,13 @@ $(document).ready(function () {
                         $("#host_display").text("co_host");
                         $("#host_display").addClass('host');
                     }
+                    const login_user_id = $('#login_user_id').val();
+                    alert(login_user_id);
+                    if (data.user_id != login_user_id) {
+
+                        $("#report_btn").css("display:none");
+
+                    }
 
                     $(".likeModel")
                         .data("event-id", data.event_id)

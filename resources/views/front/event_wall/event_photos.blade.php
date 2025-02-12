@@ -849,9 +849,9 @@
                                                 <span id="buttonText" class="mute-post-btn-text">Mute</span>
                                             </button>
                                         </li>
-
+<input type ="hidden" id="login_user_id" value={{$login_user_id}}>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="#" id="report_btn">
                                                 <svg viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
