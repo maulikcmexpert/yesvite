@@ -878,7 +878,18 @@ $(document).ready(function () {
         //     bulkSelectWrapper.addClass('d-none'); // Hide the div when more than 1 image is selected
         // }
     }
-
+    $(document).on("change", ".selected_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+    
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-photo-btn").show();
+        } else {
+            photoCard.find(".selected-photo-btn").hide();
+        }
+    
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
+    
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
         e.preventDefault();
