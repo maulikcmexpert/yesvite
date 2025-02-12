@@ -6228,7 +6228,7 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
-    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0") {
+    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy!="") {
         toggleSidebar();
         return;
     }
