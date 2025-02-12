@@ -661,7 +661,7 @@
                                                                             class="accordion-collapse collapse show"
                                                                             aria-labelledby="sprite-{{ $item['id'] }}"
                                                                             data-bs-parent="#accordionFlushExample">
-                                                                            <div class="accordion-body"
+                                                                            <div class=""
                                                                                 id="user-container-{{ $item['id'] }}">
                                                                             </div>
                                                                         </div>
@@ -677,7 +677,7 @@
                                                                                 class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
-                                                                                <div class="accordion-body">
+                                                                                <div class="">
                                                                                     {{-- {{ dd($item['item_carry_users'])}} --}}
 
                                                                                     <div
@@ -851,7 +851,7 @@
                                                                                 class="accordion-collapse collapse "
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
-                                                                                <div class="accordion-body"
+                                                                                <div class=""
                                                                                     id="user-container-{{ $item['id'] }}">
                                                                                     <div
                                                                                         class="accordion-body-content">
