@@ -21,28 +21,23 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on("click", ".create_post", function () {
         // Check if the poll form exists and is valid
-
+        var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-        var postContent = $(".post_message").val().trim();
+
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
 
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            var photoInput = document.getElementById("fileInput");
-            if (
-                photoInput &&
-                photoInput.files.length === 0 &&
-                postContent === ""
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
-                return;
-            }
-
+            // if (postContent === '') {
+            //     alert('Please enter some content for the photo post.');
+            //     return;
+            // }
+            // Set the value of the hidden input in the photo form
+            //  document.getElementById('photoContent').value = postContent;
+            $this.prop("disabled", true);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
@@ -51,7 +46,7 @@ $(document).ready(function () {
         }
         // If no valid content is provided, show an alert
         else {
-           toastr.error("Please fill all required fields before submitting.");
+            alert("Please fill all required fields before submitting.");
         }
     });
 
