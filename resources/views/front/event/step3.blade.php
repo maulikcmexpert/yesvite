@@ -648,8 +648,8 @@
                             <p class="invite-left_d"><strong>Invites | </strong></p>
                             <input type="hidden" id="currentInviteCount" value="0">
                         </div>
-                        <div>
-                            <p class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span>
+                        <div class="coin-invite-wrp">
+                            <div class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></div> <span class="available-coins">{{$coins}}</span>
                         </div>
                         {{-- <div class="invite-right"> --}}
                             {{-- <span><strong>15</strong>Guests or less</span> --}}
