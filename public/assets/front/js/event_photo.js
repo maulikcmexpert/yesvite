@@ -1037,7 +1037,7 @@ $(document).ready(function () {
 
         url = base_url + "event_photo/fetch-photo-details";
         $("#host_display").text("");
-     
+
         $("#host_display").hide();
         $.ajax({
             url: url, // Update with your server-side endpoint
