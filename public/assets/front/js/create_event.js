@@ -3735,6 +3735,7 @@ $(document).on("click", "#close_createEvent", async function () {
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
+    var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
