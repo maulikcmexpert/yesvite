@@ -3730,12 +3730,16 @@ if ($(".edit-design").hasClass("active")) {
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
-$(document).on("click", "#close_createEvent", function () {
+$(document).on("click", "#close_createEvent", async function () {
     $("#loader").css("display", "flex");
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
-
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -9311,7 +9315,7 @@ $(document).on(
     }
 );
 
-if (isDraftEvent == "0" && eventId != "" && isCohost=="0") {
+if (isDraftEvent == "0" && eventId != "") {
     $(".li_design").addClass("menu-success");
     $(".li_event_detail").addClass("menu-success");
     $(".li_guest").addClass("menu-success");
@@ -9357,3 +9361,4 @@ $(document).on("click", ".previousImeg", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
+alert(eventData.desgin_selected);
