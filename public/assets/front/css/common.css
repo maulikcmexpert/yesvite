@@ -983,6 +983,18 @@ ul.nav-tabs .nav-link:focus {
     animation-delay: 0.45s;
 }
 
+.hosted-by-title-menu:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 @keyframes bounce {
     0%,
     80%,
