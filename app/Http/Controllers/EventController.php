@@ -495,6 +495,7 @@ class EventController extends BaseController
                         $categories[$key] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
+                            'iscateogry'=>"1",
                             'isAlready' => "1",
                         ];
                         // session()->put('category', $categories);
@@ -1842,9 +1843,10 @@ class EventController extends BaseController
             if (isset($category[$delete_potluck_id]['item'])) {
                 $category_item = count($category[$delete_potluck_id]['item']);
             }
-            if (isset($category[$delete_potluck_id])) {
-                unset($category[$delete_potluck_id]);
-            }
+            // if (isset($category[$delete_potluck_id])) {
+            //     unset($category[$delete_potluck_id]);
+            // }
+            $category[$delete_potluck_id]['iscateogry']='0';
             Session::put('category', $category);
         }
 
@@ -1968,6 +1970,7 @@ class EventController extends BaseController
         $quantity = (string)$request->quantity;
 
         $categories = session()->get('category', []);
+        dd($categories);
 
         $id = Auth::guard('web')->user()->id;
         $categories[$categoryIndexKey]['item'][$categoryItemKey]['self_bring'] = ($quantity == 0) ? '0' : '1';
