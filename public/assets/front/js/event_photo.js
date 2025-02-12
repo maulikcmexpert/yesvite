@@ -34,7 +34,7 @@ $(document).ready(function () {
             var photoInput = document.getElementById("fileInput");
             if (
                 photoInput &&
-                photoInput.files.length === 0 
+                photoInput.files.length === 0
 
             ) {
                 toastr.error(
