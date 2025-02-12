@@ -1059,6 +1059,7 @@ class EventController extends BaseController
             //     }
             // }
 
+            
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 // if ($request->isdraft == "1") {
@@ -3768,6 +3769,11 @@ class EventController extends BaseController
                         'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
                     ]);
                 }
+            }
+            if(isset($request->potluck) && $request->potluck == "0"){
+                EventPotluckCategory::where('event_id', $request->event_id)->delete();
+                EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
+                UserPotluckItem::where('event_id', $request->event_id)->delete();
             }
 
             if (isset($request->potluck) && $request->potluck == "1") {
