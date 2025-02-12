@@ -4105,15 +4105,35 @@ function savePage1Data(close = null, direct = false) {
         } else {
             $("#event-host-error").css("display", "none");
         }
-        if (event_date == "") {
-            $("#event-date-error")
+        // if (event_date == "") {
+        //     $("#event-date-error")
+        //         .css("display", "block")
+        //         .css("color", "red")
+        //         .text("Event Date: Please select an event date");
+        //     focus_timeOut("event-date");
+        //     return;
+        // } else {
+        //     $("#event-date-error").css("display", "none");
+        // }
+
+        if (start_event_date == "") {
+            $("#start_event-date-error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Event Date: Please select an start date");
+            focus_timeOut("start_event-date");
+            return;
+        } else {
+            $("#start_event-date-error").css("display", "none");
+        }if (end_event_date == "") {
+            $("#end_event-date-error")
                 .css("display", "block")
                 .css("color", "red")
                 .text("Event Date: Please select an event date");
-            focus_timeOut("event-date");
+            focus_timeOut("end_event-date");
             return;
         } else {
-            $("#event-date-error").css("display", "none");
+            $("#end_event-date-error").css("display", "none");
         }
         if (start_time == "") {
             $("#event-start_time-error")

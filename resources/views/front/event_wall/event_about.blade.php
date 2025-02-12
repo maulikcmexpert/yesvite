@@ -2320,7 +2320,7 @@ updateCountdown();
         var marker = new google.maps.Marker({
             position: eventLocation,
             map: map,
-            title: "{{ $eventDetails['address_1'] }} ",
+            title: "{{ $eventDetails['address_1'] }}",
             icon: {
                 url: base_url+"pin.svg", // Custom marker icon
                 scaledSize: new google.maps.Size(40, 40) // Adjust size
