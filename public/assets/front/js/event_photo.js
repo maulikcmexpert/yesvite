@@ -2016,52 +2016,46 @@ $(document).ready(function () {
         4: "RSVP’d - No Reply",
     };
 
-    // Load saved settings or set defaults
-    let savedVisibility = localStorage.getItem("post_privacys") || "Everyone"; // Default: Everyone
-    let savedAllowComments = localStorage.getItem("commenting_on_off");
+    function loadSettings() {
+        console.log("Loading settings..."); // Debugging
+        let savedVisibility = localStorage.getItem("post_privacy") || "Everyone";
+        let savedAllowComments = localStorage.getItem("commenting_on_off") || "1";
 
-    // Ensure the default value is set if no saved value exists for comments
-    if (savedAllowComments === null) {
-        savedAllowComments = "Everyone"; // Default to enabled
-        localStorage.setItem("commenting_on_off", savedAllowComments);
+        $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
+        $("#allowComments").prop("checked", savedAllowComments === "1");
+
+        $(".hiddenVisibility").val(savedVisibility);
+        $(".hiddenAllowComments").val(savedAllowComments);
+
+        $("#savedSettingsDisplay").html(`
+            <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
+        `);
     }
 
-    // Apply settings to the form
-    $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
-    $("#allowComments").prop("checked", savedAllowComments === "1");
+    // Page load settings
+    loadSettings();
 
-    // Update the hidden input fields dynamically
-    $(".hiddenVisibility").val(savedVisibility);
-    $(".hiddenAllowComments").val(savedAllowComments);
-
-    // Update the display area to show the current saved visibility and commenting status
-    const visibilityName = visibilityOptions[savedVisibility] || "Everyone"; // Ensure fallback
-    $("#savedSettingsDisplay").html(`
-        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
-    `);
+    // Check modal ID & trigger loadSettings()
+    $("#add-new-photomodal").on("show.bs.modal", function () {
+        console.log("Modal Opened & Settings Loaded"); // Debugging
+        loadSettings();
+    });
 
     // Save Button Click Handler
     $("#saveSettings").on("click", function () {
-        // Fetch selected visibility
-        const visibility = $('input[name="post_privacy"]:checked').val() || "Everyone"; // Default to Everyone if null
-        // Fetch commenting status
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
         const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
-        // Save settings to localStorage
         localStorage.setItem("post_privacys", visibility);
         localStorage.setItem("commenting_on_off", allowComments);
 
-        // Update the hidden input fields dynamically for all forms
         $(".hiddenVisibility").val(visibility);
         $(".hiddenAllowComments").val(allowComments);
 
-        // Update display area
-        const visibilityName = visibilityOptions[visibility] || "Everyone";
         $("#savedSettingsDisplay").html(`
-            <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+            <h4>${visibilityOptions[visibility]} <i class="fa-solid fa-angle-down"></i></h4>
         `);
 
         console.log("Saved Settings:", { visibility, allowComments });
     });
 });
-
