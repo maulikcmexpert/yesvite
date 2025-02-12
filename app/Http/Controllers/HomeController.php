@@ -37,6 +37,7 @@ class HomeController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
 
         $this->perPage = 5;
     }
@@ -174,10 +175,10 @@ class HomeController extends BaseController
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id])->first();
-                    
+
                     $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                     $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
-        
+
                     $eventDetail['is_notification_on_off']  = "";
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
@@ -226,7 +227,7 @@ class HomeController extends BaseController
                     $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                     $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                     $eventDetail['event_date'] = $value->start_date;
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
 
                     $event_time = "-";

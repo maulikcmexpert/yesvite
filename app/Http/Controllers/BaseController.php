@@ -12,6 +12,7 @@ class BaseController extends Controller
     public function __construct()
     {
         // Share prices with all views globally
+        // dd($this->getPrices());
         View::share('prices', $this->getPrices());
         // Share coins globally with all views
         $user = $this->getUser();
@@ -35,17 +36,17 @@ class BaseController extends Controller
         // handleIncomingMessage("+918780258675", "yes");
         // handleSMSInvite("+91 97238 40340", "yesvite web", "srryghhhggguvj", 814, 2787);
         return [
-            '15' => ['priceId' => 'price_1QjcEZEunmtSe18EsKcUG55D', 'coins' => 15, 'price' => 21.00],
+            '15' => ['priceId' => 'price_1QrC0dEunmtSe18EOUZgSmuy', 'coins' => 15, 'price' => 14.99],
 
-            '30' => ['priceId' => 'price_1QnbS0EunmtSe18EFuz4qYpN', 'coins' => 30, 'price' => 36.99],
+            '30' => ['priceId' => 'price_1QrC6BEunmtSe18EmbwOERSM', 'coins' => 30, 'price' => 24.99],
 
-            '50' => ['priceId' => 'price_1QnbS0EunmtSe18EGEbp4K0L', 'coins' => 50, 'price' => 45.00],
+            '50' => ['priceId' => 'price_1QrC6BEunmtSe18ErhNVPfNH', 'coins' => 50, 'price' => 34.99],
 
-            '100' => ['priceId' => 'price_1QnbR6EunmtSe18EjI3fQkjt', 'coins' => 100, 'price' => 70.00],
+            '100' => ['priceId' => 'price_1QrC6BEunmtSe18E07TR4iCC', 'coins' => 100, 'price' => 59.99],
 
-            '200' => ['priceId' => 'price_1QnbPnEunmtSe18EWVSpsUKw', 'coins' => 250, 'price' => 100.00],
+            '200' => ['priceId' => 'price_1QrC6BEunmtSe18EQU01LFNR', 'coins' => 250, 'price' => 99.99],
 
-            '500' => ['priceId' => 'price_1QnbSfEunmtSe18E4DQoalB7', 'coins' => 500, 'price' => 125.99],
+            '500' => ['priceId' => 'price_1QrC6BEunmtSe18EnzZELzAp', 'coins' => 500, 'price' => 125.99],
         ];
     }
 }

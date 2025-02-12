@@ -25,11 +25,13 @@ use Throwable;
 
 use Illuminate\Http\Request;
 
-class EventListController extends Controller
+class EventListController extends BaseController
 {
     public $per_page;
     public function __construct()
     {
+        parent::__construct();
+
         $this->per_page = 10;
     }
     public function index()
@@ -141,7 +143,7 @@ class EventListController extends Controller
                 $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventDetail['event_date'] = $value->start_date;
                 $eventDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
-                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
                 $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
 
@@ -351,7 +353,7 @@ class EventListController extends Controller
                 $eventPastDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventPastDetail['event_date'] = $value->start_date;
                 $eventPastDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
-                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventPastDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                 $eventPastDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
 
@@ -690,7 +692,7 @@ class EventListController extends Controller
                 // }
                 $cohost =  EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                 $eventPastDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
-                
+
                 $eventPastDetail['user_id'] = $value->user->id;
                 $eventPastDetail['host_profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $eventPastDetail['message_to_guests'] = $value->message_to_guests;
@@ -717,7 +719,7 @@ class EventListController extends Controller
                 $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                 $eventPastDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventPastDetail['event_date'] = $value->start_date;
-                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventPastDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                 $eventPastDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
                 $eventPastDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
@@ -921,7 +923,7 @@ class EventListController extends Controller
                 $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                 $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventDetail['event_date'] = $value->start_date;
-                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                 $eventDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
                 $eventDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
@@ -1128,7 +1130,7 @@ class EventListController extends Controller
                 $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                 $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventDetail['event_date'] = $value->start_date;
-                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                 $eventDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
                 $eventDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
@@ -1402,7 +1404,7 @@ class EventListController extends Controller
                 $images = EventImage::where('event_id', $value->id)->orderBy('type', 'ASC')->first();
                 $eventPastDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                 $eventPastDetail['event_date'] = $value->start_date;
-                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                $eventPastDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                 $eventPastDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                 $eventPastDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
                 $eventPastDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
@@ -1564,7 +1566,7 @@ class EventListController extends Controller
                     $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                     $eventDetail['event_date'] = $value->start_date;
                     $eventDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                     $event_time = "-";
@@ -1721,7 +1723,7 @@ class EventListController extends Controller
 
                     $eventDetail['event_date'] = $value->event->start_date;
                     $eventDetail['event_date_only'] = Carbon::parse($value->event->start_date)->format('d');
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('d M'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_month'] = Carbon::parse($value->event->start_date)->format('M'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->event->start_date)->format('l'); // "Monday"
                     $event_time = "-";
@@ -1892,7 +1894,7 @@ class EventListController extends Controller
                     }
                     $eventDetail['event_date'] = $value->event->start_date;
                     $eventDetail['event_date_only'] = Carbon::parse($value->event->start_date)->format('d');
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('d M'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_month'] = Carbon::parse($value->event->start_date)->format('M'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->event->start_date)->format('l'); // "Monday"
                     // $event_time = "-";
@@ -2070,7 +2072,7 @@ class EventListController extends Controller
                     $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
                     $eventDetail['event_date'] = $value->start_date;
                     $eventDetail['event_date_only'] = Carbon::parse($value->start_date)->format('d');
-                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('d M'); // "21 Nov"
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->start_date)->format('M d,Y'); // "21 Nov"
                     $eventDetail['event_month'] = Carbon::parse($value->start_date)->format('M'); // "21 Nov"
                     $eventDetail['event_day'] = Carbon::parse($value->start_date)->format('l'); // "Monday"
                     $event_time = "-";

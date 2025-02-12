@@ -85,7 +85,7 @@
 
 
 <!--Buy-Credits-Modal -->
-@dd($prices)
+{{-- @dd($prices) --}}
 @if(isset($prices)&&count($prices)>0)
     
 
