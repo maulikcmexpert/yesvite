@@ -1173,7 +1173,7 @@ async function bindData(current_event_id) {
                 actionHandler: fabric.controlsUtils.rotationWithSnapping,
                 actionName: "rotate",
                 render: renderIcon,
-                cornerSize: 28,
+                cornerSize: 40,
             });
 
             fabric.Textbox.prototype.controls.deleteControl =
