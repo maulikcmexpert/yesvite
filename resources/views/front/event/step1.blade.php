@@ -122,7 +122,7 @@
                             @endphp
                             <div class="position-relative z-2">
                                 <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="start-event-date" data-isDate="{{ $event_date }}" name="event-date"
+                                    id="event-date" data-isDate="{{ $event_date }}" name="event-date"
                                     onblur="clearError(this)" value="{{ $event_date }}" readonly>
                                 <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
                                     event * </label>
