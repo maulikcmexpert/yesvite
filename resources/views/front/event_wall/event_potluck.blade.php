@@ -123,6 +123,11 @@
                                     @if ($eventDetails['hosted_by'])
                                         <div class="host-users-detail cmn-card">
                                             <h4 class="title">Your hosts</h4>
+                                            @if (!empty($eventDetails['co_hosts']))
+                                            <h4 class="title">Your hosts</h4>
+                                            @else   
+                                            <h4 class="title">Your host</h4>
+                                            @endif   
                                             <div class="host-user-con-box">
                                                 @if ($eventDetails['hosted_by'])
                                                     <div class="host-user-con">
