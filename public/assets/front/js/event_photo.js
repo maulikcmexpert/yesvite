@@ -2018,7 +2018,7 @@ $(document).ready(function () {
 
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
-        let savedVisibility = localStorage.getItem("post_privacys") || "1";
+        let savedVisibility = localStorage.getItem("post_privacy") || "Everyone";
         let savedAllowComments = localStorage.getItem("commenting_on_off") || "1";
 
         $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
