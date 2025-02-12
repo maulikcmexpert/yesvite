@@ -989,7 +989,7 @@ ul.nav-tabs .nav-link:focus {
     border: none !important;
 }
 
-button:has(svg):focus{
+button:focus{
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
