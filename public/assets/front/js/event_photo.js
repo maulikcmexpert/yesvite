@@ -24,23 +24,16 @@ $(document).ready(function () {
         var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-
+        var photoInput = document.getElementById("fileInput");
+        var imagePreview = $("#imagePreview").children().length; // Che
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
 
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            var photoInput = document.getElementById("fileInput");
-
-            if (
-
-                photoInput.files.length === 0
-
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
+            if (photoInput.files.length === 0 && imagePreview === 0) {
+                toastr.error("Please upload a photo or enter some content for the photo post.");
                 return;
             }
 

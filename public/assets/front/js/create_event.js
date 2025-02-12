@@ -1421,7 +1421,6 @@ $(function () {
         // minDate: moment().add(1, 'days'),
         minDate: moment(),
         // alwaysShowCalendars: true, // Keep the calendar visible
-        maxSpan: { days: 2 },
     },
 
     // function (start, end, label) {
@@ -9286,7 +9285,7 @@ function update_self_bring(
                 $(".total-self-bring-" + categoryIndexKey).text(current_item);
             }
 
-            if ((parseInt(innerUserQnt) + parseInt(quantity)) >= parseInt(categoryItemQuantity)) {
+            if (innerUserQnt + quantity >= categoryItemQuantity) {
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
