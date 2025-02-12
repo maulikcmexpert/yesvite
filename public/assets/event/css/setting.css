@@ -1079,6 +1079,7 @@
 .setting-accordion-wrp .accordion-con button[data-position="bottom"] span {
     bottom: -50px;
     left: -20px;
+    z-index: 20;
 }
 .setting-accordion-wrp
     .accordion-con
