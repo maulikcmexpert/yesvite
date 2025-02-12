@@ -1408,6 +1408,7 @@
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
+    padding-left: 2px;
 }
 
 .coin-invite-wrp .coin-invite{
