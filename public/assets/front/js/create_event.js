@@ -3730,12 +3730,15 @@ if ($(".edit-design").hasClass("active")) {
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
-$(document).on("click", "#close_createEvent", function () {
+$(document).on("click", "#close_createEvent", async function () {
     $("#loader").css("display", "flex");
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
-
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -8685,6 +8688,10 @@ $(document).on("click", "#close_editEvent", function (e) {
         $("#loader").css("display", "none");
         return;
     }
+    
+        await saveDesignData();
+        $("#loader").css("display", "none");
+   
     // }
     $("#loader").css("display", "flex");
     eventData.step = final_step;
