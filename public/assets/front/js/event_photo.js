@@ -34,8 +34,8 @@ $(document).ready(function () {
             var photoInput = document.getElementById("fileInput");
             if (
                 photoInput &&
-                photoInput.files.length === 0 &&
-                postContent === ""
+                photoInput.files.length === 0
+
             ) {
                 toastr.error(
                     "Please upload a photo or enter some content for the photo post."

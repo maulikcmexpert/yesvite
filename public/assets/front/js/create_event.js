@@ -3702,6 +3702,10 @@ $(document).on("click", "#next_setting", function () {
 });
 
 $(document).on("click", "#next_design", function () {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
+    $("#close_createEvent").css("display", "none");
     console.log(eventData);
     console.log(dbJson);
     $(".li_event_detail").find(".side-bar-list").removeClass("active");
@@ -3723,15 +3727,21 @@ $(document).on("click", "#next_design", function () {
 });
 
 if ($(".edit-design").hasClass("active")) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
     $("#close_createEvent").css("display", "none");
 } else {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 }
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", async function () {
-    $("#loader").css("display", "flex");
+   
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -3740,6 +3750,7 @@ $(document).on("click", "#close_createEvent", async function () {
         await saveDesignData();
         design = eventData.desgin_selected;
     }
+    $("#loader").css("display", "flex");
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
     //     // confirm('Event type is empty. Are you sure you want to proceed?')
@@ -4668,6 +4679,9 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
@@ -4676,6 +4690,10 @@ $(document).on("click", ".li_design .pick-card", function (e) {
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "none");
+    }
+    $("#close_createEvent").css("display", "none");
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
@@ -4860,6 +4878,9 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     $("#sidebar_select_design_category").css("display", "none");
 
@@ -8679,10 +8700,16 @@ $(document).on("click", ".design-sidebar-action", function () {
     }
 });
 
-$(document).on("click", "#close_editEvent", function (e) {
+$(document).on("click", "#close_editEvent",async function (e) {
     // if (final_step == 2) {
     savePage1Data(1);
     // }
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
     // if (final_step == 3) {
     var savePage3Result = savePage3Data(1);
     if (savePage3Result === false) {
@@ -8764,6 +8791,9 @@ if (final_step == "4" && isCohost == "1") {
 }
 
 async function step2Open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     var design = eventData.desgin_selected;
@@ -8816,6 +8846,9 @@ async function step2Open() {
 }
 
 async function step3open() {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
     // var eventDetail2 = $('#eventDetail').val();
     // eventDetail2 = JSON.parse(eventDetail2);
@@ -8937,6 +8970,9 @@ async function step4open() {
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
+    }
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
 
@@ -9355,12 +9391,17 @@ if (final_step == "1" && isCohost == "1") {
     if(dbJson!="" && dbJson!=undefined){
         $(".pick-card").removeClass("active");
         $(".edit-design-sidebar").addClass("active");
+        $("#close_createEvent").css("display", "none");
+        $("#close_editEvent").css("display", "none");
         loadAgain();
     }
 }
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
+    if(isCohost!="0"){
+        $("#close_editEvent").css("display", "block");
+    }
     $("#close_createEvent").css("display", "block");
 
     e.preventDefault();
