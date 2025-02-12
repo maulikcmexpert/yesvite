@@ -870,7 +870,7 @@ $(document).ready(function () {
                 .find(".phototab-add-new-photos-img p")
                 .text(`${selectedCount} Photos Selected`); // Update the count
         } else if (selectedCount <= 1) {
-            // bulkSelectWrapper.addClass('d-none');
+            bulkSelectWrapper.addClass('d-none');
         }
 
         // Remove the div if more than 1 image is selected
@@ -878,6 +878,17 @@ $(document).ready(function () {
         //     bulkSelectWrapper.addClass('d-none'); // Hide the div when more than 1 image is selected
         // }
     }
+    $(document).on("change", ".selected_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-photo-btn").show();
+        } else {
+            photoCard.find(".selected-photo-btn").hide();
+        }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
 
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
@@ -910,7 +921,14 @@ $(document).ready(function () {
             })
             .get();
 
-        console.log("Selected Images: ", selectedImages);
+            selectedImages.forEach((imgSrc, index) => {
+                const link = document.createElement("a");
+                link.href = imgSrc;
+                link.download = `image_${index + 1}.jpg`; // Customize filename
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
     });
     $(document).on("click", ".download_img_single", function () {
         // Find the image source stored in the data attribute
