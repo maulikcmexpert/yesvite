@@ -360,6 +360,7 @@ main {
   padding: 10px 16px !important;
   text-align: center;
   border-radius: 0px !important;
+  font-weight: 500 !important;
 }
 
 .event-center-tabs-main .nav-tabs .nav-link.active {
@@ -1298,6 +1299,7 @@ main {
   line-height: 23.8px;
   color: var(--primary-black);
   margin-bottom: 20px;
+  word-break: break-all;
 }
 
 .posts-card-show-post-img{

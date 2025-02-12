@@ -60,6 +60,7 @@ var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
 var create_co_event_phone_scroll = false;
 var create_co_event_yesvite_scroll = false;
+var apiCalled = false;
 var base_url = $("#base_url").val();
 if (final_profile_or_text == "1") {
     $(".guest-img .selected-co-host-image").show();
@@ -3810,9 +3811,16 @@ if ($(".edit-design").hasClass("active")) {
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
-$(document).on("click", "#close_createEvent", async function () {
+$(document).on("click", "#close_createEvent", async function (e) {
+    if(apiCalled == true){
+        return;
+    }
+    apiCalled = true;
+    
+    $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
-    if (temp_id==undefined ||  temp_id =="" || temp_id ==null){
+    if (dbJson == "" || dbJson == null || dbJson==undefined){
+        apiCalled = false;
         $("#deleteModal").modal("show");
         return;
     } 
@@ -6576,6 +6584,10 @@ $(document).on("click", ".final_checkout", function () {
 });
 
 $(document).on("click", ".final_create_event", function (e) {
+    if(apiCalled == true){
+        return;
+    }
+    apiCalled = true;
     eventData.is_update_event = "0";
     eventData.isPhonecontact = isPhonecontact;
     var data = eventData;
@@ -8634,6 +8646,10 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
+    if(apiCalled == true){
+        return;
+    }
+    apiCalled = true;
     eventData.isdraft = "0";
 
     var data = eventData;
@@ -8793,7 +8809,12 @@ $(document).on("click", ".design-sidebar-action", function () {
 });
 
 $(document).on("click", "#close_editEvent",async function (e) {
+    if(apiCalled == true){
+        return;
+    }
+    apiCalled = true;
     // if (final_step == 2) {
+    $(".dropdown-menu").removeClass('show');
     savePage1Data(1);
     // }
     var design = eventData.desgin_selected;

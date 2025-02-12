@@ -785,39 +785,43 @@
     color: #fff !important;
 }
 
+.potuck-main-wrp .apexcharts-inner {
+    transform: translate(0, 0) !important;
+}
+
 /* ========= responsive =========== */
 @media only screen and (max-width: 1399px) {
     .birth-details .hosted-by-date-time {
         flex-direction: row;
     }
 
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(16%, 0);
-    }
+    } */
 }
 
 @media only screen and (max-width: 1199px) {
     .schedule-wrp .shedule-box {
         width: 85%;
     }
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(20%, 0);
-    }
+    } */
 }
 
 @media only screen and (max-width: 991px) {
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(25%, 0);
-    }
+    } */
 }
 
 @media only screen and (max-width: 767px) {
     .schedule-wrp .shedule-box {
         width: 87%;
     }
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(14%, 0);
-    }
+    } */
 }
 
 @media only screen and (max-width: 575px) {
@@ -887,14 +891,14 @@
 }
 
 @media only screen and (max-width: 399px) {
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(8%, 0);
-    }
+    } */
 }
 @media only screen and (max-width: 379px) {
-    .apexcharts-inner {
+    /* .apexcharts-inner {
         transform: translate(5%, 0);
-    }
+    } */
 }
 
 .d-none {
