@@ -2017,46 +2017,41 @@ $(document).ready(function () {
     };
 
     function loadSettings() {
-        let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
-        let savedAllowComments = localStorage.getItem("commenting_on_off") || "1"; // Default: allow comments
+        console.log("Loading settings..."); // Debugging
+        let savedVisibility = localStorage.getItem("post_privacys") || "1";
+        let savedAllowComments = localStorage.getItem("commenting_on_off") || "1";
 
-        // Apply settings to the form
         $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
         $("#allowComments").prop("checked", savedAllowComments === "1");
 
-        // Update hidden input fields
         $(".hiddenVisibility").val(savedVisibility);
         $(".hiddenAllowComments").val(savedAllowComments);
 
-        // Update display area
         $("#savedSettingsDisplay").html(`
             <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
         `);
     }
 
-    // Load settings when page loads
+    // Page load settings
     loadSettings();
 
-    // When modal opens, reload saved settings
-    $("#myModal").on("show.bs.modal", function () {
+    // Check modal ID & trigger loadSettings()
+    $("#add-new-photomodal").on("show.bs.modal", function () {
+        console.log("Modal Opened & Settings Loaded"); // Debugging
         loadSettings();
     });
 
     // Save Button Click Handler
     $("#saveSettings").on("click", function () {
-        // Fetch selected values
         const visibility = $('input[name="post_privacy"]:checked').val() || "1";
         const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
-        // Save to localStorage
         localStorage.setItem("post_privacys", visibility);
         localStorage.setItem("commenting_on_off", allowComments);
 
-        // Update hidden input fields
         $(".hiddenVisibility").val(visibility);
         $(".hiddenAllowComments").val(allowComments);
 
-        // Update display area
         $("#savedSettingsDisplay").html(`
             <h4>${visibilityOptions[visibility]} <i class="fa-solid fa-angle-down"></i></h4>
         `);
