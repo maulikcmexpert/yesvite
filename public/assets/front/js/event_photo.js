@@ -839,7 +839,8 @@ $(document).ready(function () {
     //     // Optionally, you can make an AJAX request here to update the server
     //     console.log('Heart button clicked');
     // });
-    const longPressDelay = 3000; // 3 seconds for long press
+    const longPressDelay = 2000; // 3 seconds for long press
+
     let pressTimer;
     let isLongPress = false;
 
@@ -1042,6 +1043,8 @@ $(document).ready(function () {
 
         url = base_url + "event_photo/fetch-photo-details";
         $("#host_display").text("");
+        $("#host_display").removeClass('host');
+
         $.ajax({
             url: url, // Update with your server-side endpoint
             type: "POST", // Use GET or POST depending on your API
@@ -1100,10 +1103,12 @@ $(document).ready(function () {
                     if (data.is_host == "1") {
                         const host = `${data.is_host}`;
                         $("#host_display").text("Host");
+                        $("#host_display").addClass('host');
                     }
                     if (data.is_co_host == "1") {
                         const co_host = `${data.is_co_host}`;
                         $("#host_display").text("co_host");
+                        $("#host_display").addClass('host');
                     }
 
                     $(".likeModel")
