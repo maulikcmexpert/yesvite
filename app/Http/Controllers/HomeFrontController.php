@@ -17,7 +17,7 @@ class HomeFrontController extends BaseController
     {
         $serverKey  = ServerKey::first();
 
-        $title = 'Yesvite-Home';
+        $title = 'Yesvite-Features';
         $page = 'front.homefront';
 
         $images = TextData::all();
@@ -103,7 +103,7 @@ class HomeFrontController extends BaseController
     {
         $serverKey  = ServerKey::first();
 
-        $title = 'Yesvite-Features';
+        $title = 'Yesvite-Home';
         $page = 'front.home_design';
         $js = ['home_design'];
 

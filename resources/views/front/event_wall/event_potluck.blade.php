@@ -574,11 +574,13 @@
                                                                                     $icons = 'd-none';
                                                                                     $missing = '';
                                                                                     if (
-                                                                                        intval($item['itmquantity']) +
-                                                                                            intval(
-                                                                                                $item['innerUserQnt'],
-                                                                                            ) >=
-                                                                                        intval($item['quantity'])
+                                                                                        // intval($item['itmquantity']) +
+                                                                                        //     intval(
+                                                                                        //         $item['innerUserQnt'],
+                                                                                        //     ) >=
+                                                                                        // intval($item['quantity'])
+
+                                                                                        intval($item['spoken_quantity']) >= intval($item['quantity'])
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';
