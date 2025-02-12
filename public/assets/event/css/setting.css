@@ -1119,7 +1119,7 @@
     transform: rotate(0deg);
 }
 #sidebar_add_thankyou_card .guest-group-name .input-form{
-    margin-bottom: 0px !important;
+    margin-bottom: 10px !important;
 }
 #sidebar_add_thankyou_card .guest-group-name .common_error{
     margin-bottom: 10px !important;
