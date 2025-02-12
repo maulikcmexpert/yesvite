@@ -9361,4 +9361,5 @@ $(document).on("click", ".previousImeg", function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
-alert(eventData.desgin_selected);
+var dbJson = $("#static_information").val() || null;
+alert(dbJson)
