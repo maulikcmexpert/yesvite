@@ -995,6 +995,12 @@ ul.nav-tabs .nav-link:focus {
     border: none !important;
 }
 
+button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 @keyframes bounce {
     0%,
     80%,
