@@ -1037,8 +1037,8 @@ $(document).ready(function () {
 
         url = base_url + "event_photo/fetch-photo-details";
         $("#host_display").text("");
-        $("#host_display").removeClass('host');
-
+     
+        $("#host_display").hide();
         $.ajax({
             url: url, // Update with your server-side endpoint
             type: "POST", // Use GET or POST depending on your API
@@ -1096,13 +1096,23 @@ $(document).ready(function () {
                     // Host Label Condition
                     if (data.is_host == "1") {
                         const host = `${data.is_host}`;
+                        $("#host_display").show();
                         $("#host_display").text("Host");
                         $("#host_display").addClass('host');
                     }
                     if (data.is_co_host == "1") {
+                        $("#host_display").show();
                         const co_host = `${data.is_co_host}`;
                         $("#host_display").text("co_host");
                         $("#host_display").addClass('host');
+                    }
+                    const login_user_id = $('#login_user_id').val();
+                    $("#report_btn").show();
+
+                    if (data.user_id == login_user_id) {
+
+                        $("#report_btn").hide();
+
                     }
 
                     $(".likeModel")

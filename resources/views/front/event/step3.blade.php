@@ -587,7 +587,10 @@
                 <div class="invite-pro">
                     <div class="invite-left">
                         <h6 class="invite-count">0</h6>
-                        <p class="invite-left_d"><strong>Invites |<p  class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span></strong></p>
+                        <p class="invite-left_d"><strong>Invites |</strong></p>
+                    </div>
+                    <div>
+                        <p  class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span>
                     </div>
                     {{-- <div class="invite-right"> --}}
                         {{-- <h5>
@@ -642,8 +645,11 @@
                             <h6 class="invite-count">0</h6>
                             {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                             <input type="hidden" id="event_guest_left_count" />
-                            <p class="invite-left_d"><strong>Invites | <p class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span></strong></p>
+                            <p class="invite-left_d"><strong>Invites | </strong></p>
                             <input type="hidden" id="currentInviteCount" value="0">
+                        </div>
+                        <div>
+                            <p class="coin-invite buycredits"><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></p> <span class="available-coins">{{$coins}}</span>
                         </div>
                         {{-- <div class="invite-right"> --}}
                             {{-- <span><strong>15</strong>Guests or less</span> --}}

@@ -705,22 +705,24 @@ class EventController extends BaseController
 
         // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
         // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-        if (strpos($dateString, ' To ') !== false) {
-            list($startDate, $endDate) = explode(' To ', $dateString);
-        } else {
-            $startDate = $dateString;
-            $endDate = $dateString;
-        }
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
 
-        $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
-        $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
+        $startDateObj = DateTime::createFromFormat('m-d-Y', $request->start_event_date);
+        $endDateObj = DateTime::createFromFormat('m-d-Y', $request->end_event_date);
+
 
         $startDateFormat = "";
         $endDateFormat = "";
-        if ($startDateObj && $endDateObj) {
-            $startDateFormat = $startDateObj->format('Y-m-d');
-            $endDateFormat = $endDateObj->format('Y-m-d');
-        }
+        // if ($startDateObj && $endDateObj) {
+        $startDateFormat = $startDateObj->format('Y-m-d');
+        $endDateFormat = $endDateObj->format('Y-m-d');
+
+        // }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
             // dd($request->rsvp_by_date);
             // $rsvp_by_date = Carbon::parse($request->rsvp_by_date)->format('Y-m-d');
@@ -761,8 +763,8 @@ class EventController extends BaseController
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
-        $event_creation->start_date = (isset($startDate) && $startDate != "") ? $startDateFormat : null;
-        $event_creation->end_date = (isset($endDate) && $endDate != "") ? $endDateFormat : null;
+        $event_creation->start_date = (isset($startDateFormat) && $endDateFormat != "") ? $startDateFormat : null;
+        $event_creation->end_date = (isset($endDateFormat) && $endDateFormat != "") ? $endDateFormat : null;
         $event_creation->rsvp_by_date_set =  $rsvp_by_date_set;
         // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
@@ -3387,6 +3389,8 @@ class EventController extends BaseController
 
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
+        $startDate = (isset($request->start_event_date)) ? $request->start_event_date : "";
+        $endDate = (isset($request->end_event_date)) ? $request->end_event_date : "";
 
 
         // if (strpos($dateString, ' To ') !== false) {
@@ -3398,12 +3402,12 @@ class EventController extends BaseController
 
         // $startDateFormat = DateTime::createFromFormat('m-d-Y', $startDate)->format('Y-m-d');
         // $endDateFormat = DateTime::createFromFormat('m-d-Y', $endDate)->format('Y-m-d');
-        if (strpos($dateString, ' To ') !== false) {
-            list($startDate, $endDate) = explode(' To ', $dateString);
-        } else {
-            $startDate = $dateString;
-            $endDate = $dateString;
-        }
+        // if (strpos($dateString, ' To ') !== false) {
+        //     list($startDate, $endDate) = explode(' To ', $dateString);
+        // } else {
+        //     $startDate = $dateString;
+        //     $endDate = $dateString;
+        // }
         $startDateObj = DateTime::createFromFormat('m-d-Y', $startDate);
         $endDateObj = DateTime::createFromFormat('m-d-Y', $endDate);
         $rsvpdateObj = DateTime::createFromFormat('m-d-Y', $request->rsvp_by_date);
