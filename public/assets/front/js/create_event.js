@@ -9356,6 +9356,7 @@ if (final_step == "1" && isCohost == "1") {
         $(".pick-card").removeClass("active");
         $(".edit-design-sidebar").addClass("active");
         $("#close_createEvent").css("display", "none");
+        $("#close_editEvent").css("display", "none");
         loadAgain();
     }
 }
