@@ -3814,7 +3814,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
   
     $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
-    if (dbJson == ""){
+    if (dbJson == "" || dbJson == null || dbJson==undefined){
         $("#deleteModal").modal("show");
         return;
     } 
