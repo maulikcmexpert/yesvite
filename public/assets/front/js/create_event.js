@@ -4692,6 +4692,7 @@ $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     if(isCohost!="0"){
         $("#close_editEvent").css("display", "none");
     }
+    $("#close_createEvent").css("display", "none");
     e.preventDefault();
     $(".subcategory-section").hide();
     $(".design-span").addClass("active");
