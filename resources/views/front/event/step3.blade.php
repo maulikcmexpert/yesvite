@@ -590,7 +590,7 @@
                         <p class="invite-left_d"><strong>Invites |</strong></p>
                     </div>
                     <div class="coin-invite-wrp buycredits">
-                        <div class="coin-invite"><img src="{{asset(assets/front/image/credit-coin-img.png)}}" alt=""></div> <span class="available-coins">{{$coins}}</span>
+                        <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="available-coins">{{$coins}}</span>
                     </div>
                     {{-- <div class="invite-right"> --}}
                         {{-- <h5>
@@ -649,7 +649,7 @@
                             <input type="hidden" id="currentInviteCount" value="0">
                         </div>
                         <div class="coin-invite-wrp buycredits">
-                            <div class="coin-invite"><img src="{{asset(assets/front/image/credit-coin-img.png)}}" alt=""></div> <span class="available-coins">{{$coins}}</span>
+                            <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="available-coins">{{$coins}}</span>
                         </div>
                         {{-- <div class="invite-right"> --}}
                             {{-- <span><strong>15</strong>Guests or less</span> --}}
