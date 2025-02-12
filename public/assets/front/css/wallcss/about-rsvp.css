@@ -505,6 +505,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fff !important;
 }
 
 .about-rsvp .modal-header h4 {
@@ -779,6 +780,10 @@
 
 .qty-container button:disabled {
     background-color: gray !important;
+}
+
+.aboutsuccess .modal-header h5{
+    color: #fff !important;
 }
 
 /* ========= responsive =========== */
