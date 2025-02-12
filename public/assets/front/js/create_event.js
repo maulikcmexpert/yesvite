@@ -8700,10 +8700,16 @@ $(document).on("click", ".design-sidebar-action", function () {
     }
 });
 
-$(document).on("click", "#close_editEvent", function (e) {
+$(document).on("click", "#close_editEvent",async function (e) {
     // if (final_step == 2) {
     savePage1Data(1);
     // }
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
     // if (final_step == 3) {
     var savePage3Result = savePage3Data(1);
     if (savePage3Result === false) {
