@@ -321,7 +321,7 @@
                                                             @if ($category['totalMissing'] > 0)
                                                                 <span
                                                                     class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
-                                                                    style="color: rgb(192, 52, 52);">
+                                                                    style="color: rgb(192, 52, 52); width: 100%;max-width: 15px;height: 15px;">
                                                                     <svg width="14" height="14"
                                                                         viewBox="0 0 14 14" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
