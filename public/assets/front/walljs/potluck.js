@@ -153,7 +153,6 @@ if (chartData) {
         series: [spoken_for, missing_still],
         labels: ["Spoken For", "Missing Still"],
         chart: {
-            width: "100%", // Ensure full width
             type: "donut",
         },
         dataLabels: {
@@ -200,9 +199,9 @@ if (chartData) {
             fontFamily: "Arial, sans-serif",
             fontWeight: "normal",
             formatter: function (seriesName, opts) {
-                return `<div style="display: flex; justify-content: space-between; width: 100%;">
-                    <span>${seriesName}</span>
-                    <span style="font-weight: bold; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
+                return `<div style="width: 100%; display: block;">
+                    <span style="display: inline-block; width: 100%;">${seriesName}</span>
+                    <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
                 </div>`;
             },
         },
