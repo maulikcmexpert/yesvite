@@ -193,6 +193,7 @@
                                                                                     class="unmuteClass">Unmute</span>
                                                                             </button>
                                                                         </li>
+                                                                        @if ($post['user_id'] != $login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item postControlButton"
@@ -217,6 +218,7 @@
                                                                                 Report
                                                                             </button>
                                                                         </li>
+                                                                        @endif
                                                                     </ul>
                                                                 </div>
                                                                 <h5>
