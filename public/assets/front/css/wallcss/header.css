@@ -474,7 +474,7 @@ header{
     line-height: normal;
 }
 .unseen-notification{
-    background-color: #f9779c4f;
+    background-color: #f9779c4f !important;
 }
 .notification-video{
     width: 100%;
