@@ -180,10 +180,14 @@
     margin-bottom: 0px;
 }
 
-.amount-plus{
+.amount-plus,
+.amount-plus p
+{
     color: var(--green);
 }
-.amount-minus{
+.amount-minus,
+.amount-minus p
+{
     color: var(--pink);
 }
 

@@ -2009,6 +2009,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
+    // Define visibility options
     const visibilityOptions = {
         1: "Everyone",
         2: "RSVP’d - Yes",
@@ -2016,52 +2017,62 @@ $(document).ready(function () {
         4: "RSVP’d - No Reply",
     };
 
-    // Load saved settings or set defaults
-    let savedVisibility = localStorage.getItem("post_privacys") || "1"; // Default: Everyone
+    // Check if localStorage has saved values, else set defaults
+    let savedVisibility = localStorage.getItem("post_privacys");
     let savedAllowComments = localStorage.getItem("commenting_on_off");
 
-    // Ensure the default value is set if no saved value exists for comments
+    if (savedVisibility === null) {
+        savedVisibility = "1"; // Default to "Everyone"
+        localStorage.setItem("post_privacys", savedVisibility);
+    }
+
     if (savedAllowComments === null) {
-        savedAllowComments = "1"; // Default to enabled
+        savedAllowComments = "1"; // Default to allow comments
         localStorage.setItem("commenting_on_off", savedAllowComments);
     }
 
-    // Apply settings to the form
+    // Apply saved values to the form
     $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true);
     $("#allowComments").prop("checked", savedAllowComments === "1");
 
-    // Update the hidden input fields dynamically
+    // Update hidden input fields
     $(".hiddenVisibility").val(savedVisibility);
     $(".hiddenAllowComments").val(savedAllowComments);
 
-    // Update the display area to show the current saved visibility and commenting status
-    const visibilityName = visibilityOptions[savedVisibility] || "Everyone"; // Ensure fallback
+    // Update the display area with saved settings
     $("#savedSettingsDisplay").html(`
-        <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+        <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
     `);
 
     // Save Button Click Handler
     $("#saveSettings").on("click", function () {
-        // Fetch selected visibility
-        const visibility = $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
-        // Fetch commenting status
+        // Fetch selected values
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
         const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
 
-        // Save settings to localStorage
+        // Save to localStorage
         localStorage.setItem("post_privacys", visibility);
         localStorage.setItem("commenting_on_off", allowComments);
 
-        // Update the hidden input fields dynamically for all forms
+        // Update hidden inputs
         $(".hiddenVisibility").val(visibility);
         $(".hiddenAllowComments").val(allowComments);
 
         // Update display area
-        const visibilityName = visibilityOptions[visibility] || "Everyone";
         $("#savedSettingsDisplay").html(`
-            <h4>${visibilityName} <i class="fa-solid fa-angle-down"></i></h4>
+            <h4>${visibilityOptions[visibility]} <i class="fa-solid fa-angle-down"></i></h4>
         `);
 
         console.log("Saved Settings:", { visibility, allowComments });
+    });
+
+    // Ensure the form updates hidden values before submission
+    $("form").on("submit", function () {
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
+        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
+
+        $("#hiddenVisibility").val(visibility);
+        $("#hiddenAllowComments").val(allowComments);
     });
 });
 
