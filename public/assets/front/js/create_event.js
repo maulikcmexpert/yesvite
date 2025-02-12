@@ -4,6 +4,7 @@ let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
 // alert(isCheckOldcoHost);
 eventData.isCheckOldcoHost = isCheckOldcoHost;
 var total_activities = $("#TotalSedulare").val();
+var isEditCohost = $("#cohostId").val() !== "" ? "1" : "0";
 var category = $("#category_count").val() || 0;
 var items = $("#totalCategoryItem").val() || 0;
 var eventId = $("#eventID").val();
@@ -6227,7 +6228,7 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
-    if (selected_dataId != "" && isCohost == "0") {
+    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy=="") {
         toggleSidebar();
         return;
     }
