@@ -50,7 +50,7 @@
                         </div>
                         <lable for="hostedby" id="event-host-error" class="error"></lable>
                     </div>
-                    <!-- <div class="col-lg-12 mb-4">
+                    <div class="col-lg-12 mb-4">
                         <div class="input-form">
                             @php
                                 $start_date = '';
@@ -102,8 +102,8 @@
 
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
-                    </div> -->
-                    <div class="col-lg-6 mb-4">
+                    </div>
+                    <!-- <div class="col-lg-6 mb-4">
                         <div class="input-form">
                             @php
                                 $start_date = '';
@@ -209,7 +209,7 @@
 
                         </div>
                         <lable for="event-date" id="event-date-error" class="error"></lable>
-                    </div>
+                    </div> -->
                     <div class="col-6 mb-4">
                         <div class="form-group">
                             <label>Start Time *</label>
