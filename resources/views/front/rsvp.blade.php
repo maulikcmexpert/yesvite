@@ -185,7 +185,12 @@
                                          </a>
                                      </div>
                                      <div class="host-users-detail rsvp-host-users-detail cmn-card">
-                                         <h4 class="title">Your hosts</h4>
+                                     @if(!empty($eventInfo['guest_view']['co_hosts']))
+                                        <h4 class="title">Your hosts</h4>
+                                      @else
+                                        <h4 class="title">Your host</h4>
+                                      @endif  
+
                                          <div class="host-user-con-box">
                                             <div class="host-user-con">
                                                 <div class="img-wrp">
