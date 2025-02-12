@@ -1105,10 +1105,11 @@ $(document).ready(function () {
                         $("#host_display").addClass('host');
                     }
                     const login_user_id = $('#login_user_id').val();
+                    $("#report_btn").show();
 
                     if (data.user_id == login_user_id) {
 
-                        $("#report_btn").css("display:none");
+                        $("#report_btn").hide();
 
                     }
 
