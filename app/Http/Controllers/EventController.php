@@ -495,7 +495,7 @@ class EventController extends BaseController
                         $categories[$key] = [
                             'category_name' => $value->category,
                             'category_quantity' => $value->quantity,
-                            'iscateogry'=>"1",
+                            'iscateogry' => "1",
                             'isAlready' => "1",
                         ];
                         // session()->put('category', $categories);
@@ -719,8 +719,8 @@ class EventController extends BaseController
         $startDateFormat = "";
         $endDateFormat = "";
         // if ($startDateObj && $endDateObj) {
-        $startDateFormat = $startDateObj->format('Y-m-d');
-        $endDateFormat = $endDateObj->format('Y-m-d');
+        $startDateFormat = @$startDateObj->format('Y-m-d');
+        $endDateFormat = @$endDateObj->format('Y-m-d');
 
         // }
         if (isset($request->rsvp_by_date) && $request->rsvp_by_date != '') {
@@ -1061,7 +1061,7 @@ class EventController extends BaseController
             //     }
             // }
 
-            
+
             if (isset($request->potluck) && $request->potluck == "1") {
                 $potluck = session('category');
                 // if ($request->isdraft == "1") {
@@ -1071,7 +1071,7 @@ class EventController extends BaseController
                 // }
                 if (isset($potluck) && !empty($potluck)) {
                     foreach ($potluck as $category) {
-                        if($category['iscateogry']=='0'){
+                        if ($category['iscateogry'] == '0') {
                             continue;
                         }
                         $eventPodluck = EventPotluckCategory::create([
@@ -1784,14 +1784,14 @@ class EventController extends BaseController
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
-                        'iscateogry'=>"1",
+                        'iscateogry' => "1",
                         'item' => $item
                     ];
                 } else {
                     $categories[$edit_category_id] = [
                         'category_name' => $categoryName,
                         'category_quantity' => $categoryQuantity,
-                        'iscateogry'=>"1",
+                        'iscateogry' => "1",
                         'item' => []
                     ];
                 }
@@ -1814,7 +1814,7 @@ class EventController extends BaseController
             if (in_array($categoryName, $categoryNames)) {
                 return response()->json(['view' => '', 'status' => '0']);
             } else {
-                $categories[] = ['category_name' => $categoryName, 'iscateogry'=>"1", 'category_quantity' => $categoryQuantity];
+                $categories[] = ['category_name' => $categoryName, 'iscateogry' => "1", 'category_quantity' => $categoryQuantity];
             }
             session()->put('category', $categories);
             $status = '1';
@@ -1851,7 +1851,7 @@ class EventController extends BaseController
             // if (isset($category[$delete_potluck_id])) {
             //     unset($category[$delete_potluck_id]);
             // }
-            $category[$delete_potluck_id]['iscateogry']='0';
+            $category[$delete_potluck_id]['iscateogry'] = '0';
             Session::put('category', $category);
         }
 
@@ -3774,7 +3774,7 @@ class EventController extends BaseController
                     ]);
                 }
             }
-            if(isset($request->potluck) && $request->potluck == "0"){
+            if (isset($request->potluck) && $request->potluck == "0") {
                 EventPotluckCategory::where('event_id', $request->event_id)->delete();
                 EventPotluckCategoryItem::where('event_id', $request->event_id)->delete();
                 UserPotluckItem::where('event_id', $request->event_id)->delete();
@@ -3790,7 +3790,7 @@ class EventController extends BaseController
                 if (isset($potluck) && !empty($potluck)) {
 
                     foreach ($potluck as $category) {
-                        if($category['iscateogry']=='0'){
+                        if ($category['iscateogry'] == '0') {
                             continue;
                         }
                         $eventPodluck = EventPotluckCategory::create([
@@ -4202,26 +4202,27 @@ class EventController extends BaseController
             Session::forget('notification_event_ids');
         }
     }
-    public function notification_on_off(Request $request){
-        $status =$request->status;
-        $is_owner=$request->is_owner;
-        $event_id=$request->event_id;
+    public function notification_on_off(Request $request)
+    {
+        $status = $request->status;
+        $is_owner = $request->is_owner;
+        $event_id = $request->event_id;
         $user  = Auth::guard('web')->user();
 
-        if($is_owner=="1"){
-            $event=Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
+        if ($is_owner == "1") {
+            $event = Event::where(['id' => $event_id, 'user_id' => $user->id])->first();
             $event->notification_on_off = $status;
             $event->save();
-        }else{
+        } else {
             $Guest = EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user->id])->first();
             $Guest->notification_on_off = $status;
             $Guest->save();
         }
-       
-        if($status=="1"){
-            return response()->json(['status' => 1, 'message' =>'Notification turned on']);
-        }else{
-            return response()->json(['status' => 1, 'message' =>'Notification turned off']);
+
+        if ($status == "1") {
+            return response()->json(['status' => 1, 'message' => 'Notification turned on']);
+        } else {
+            return response()->json(['status' => 1, 'message' => 'Notification turned off']);
         }
     }
 }
