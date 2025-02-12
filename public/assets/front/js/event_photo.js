@@ -840,7 +840,7 @@ $(document).ready(function () {
     //     console.log('Heart button clicked');
     // });
     const longPressDelay = 2000; // 3 seconds for long press
-    
+
     let pressTimer;
     let isLongPress = false;
 
