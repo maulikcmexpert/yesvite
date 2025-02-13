@@ -84,12 +84,24 @@ class EventListController extends BaseController
         // ->get();
         $allEvents = $usercreatedList->union($invitedEventsList);
 
-        $allEvent = $allEvents
-            ->orderBy('start_date', 'asc')
-            ->offset(0)
-            ->limit($this->per_page)
-            ->get();
-
+        // $allEvent = $allEvents
+        //     ->orderBy('start_date', 'asc')
+        //     ->offset(0)
+        //     ->limit($this->per_page)
+        //     ->get();
+            if($from_page=="upcoming"){
+                $allEvent = $allEvents
+                ->orderBy('start_date', 'asc')
+                // ->offset(0)
+                // ->limit($this->per_page)
+                ->get();
+            }else{
+                $allEvent = $allEvents
+                ->orderBy('start_date', 'asc')
+                ->offset(0)
+                ->limit($this->per_page)
+                ->get();
+            }
         // $totalCounts += count($allEvent);
         // // Calculate offset based on current page and perPage
         // $offset = ($pages - 1) * $this->perPage;
