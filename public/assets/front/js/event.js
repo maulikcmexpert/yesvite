@@ -739,14 +739,19 @@ today.setHours(0, 0, 0, 0);
                 $('#all-months-upcoming').css('display','none');
                 if(response.page=="upcoming"){
 
+                    $('.count_of_upcoming').text(response.total);
+
                     $('#tabbtn1').css('display','none');
                 }
 
                 if(response.page=="past"){
 
                     $('#tabbtn3').css('display','none');
+                    $('.count_of_past').text(response.total);
+
                 }
                 if(response.page=="draft"){
+                    $('.count_of_draft').text(response.total);
 
                     $('#tabbtn2').css('display','none');
                 }
