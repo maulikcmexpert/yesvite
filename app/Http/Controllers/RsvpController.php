@@ -483,7 +483,7 @@ class RsvpController extends BaseController
                 $userSnapshot = $userRef->getValue();
                 $updateFirebase = false;
 
-                dd($userSnapshot);
+                dd($userRef);
                 if ($userSnapshot) {
                     if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
                         $updateFirebase = true;
