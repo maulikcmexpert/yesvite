@@ -283,7 +283,7 @@
                                     @endphp
                                     @foreach ($getInvitedusers['all_invited_users'] as $guest_data )
                                             @php
-                                            $i++;
+                                            
                                             $yes_modal="";
                                             $no_modal="";
                                             if($user_id==$guest_data['id'])
@@ -311,7 +311,10 @@
                                              @if($is_host == "1" || 
                                              ($user_id == $guest_data['id']) || 
                                              ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
-                                            <div class="guest-user-box">
+                                            @php
+                                                $i++;
+                                            @endphp
+                                           <div class="guest-user-box">
                                                 <div class="guest-list-data">
                                                     <div class="guest-img">
                                                         @if ($guest_data['profile'] != '')
@@ -712,11 +715,11 @@
                                                 
                                                 </div>
                                                 @endif
-                                            {{-- @php
+                                            @php
                                             if($i==3){
                                                 break;
                                             }
-                                            @endphp --}}
+                                            @endphp
                                     @endforeach
                                             {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
                                             <div class="guest-user-box">

@@ -648,6 +648,7 @@ $(document).on("click",".event_nav",function () {
 
 $(document).on('click',".day",function () {
     var current_page=$('#current_page').val();
+    var fromhome="";
     var search_date=$(this).data('date');
     if(search_date==undefined||search_date==""){
         return;
@@ -661,8 +662,10 @@ $(document).on('click',".day",function () {
         const today = new Date();
         if (specificDate < today) {
            page="past";
+           fromhome="1"
           } else if(specificDate>=today) {
             page='upcoming';
+            fromhome="1"
         }
     }
 
@@ -691,6 +694,9 @@ $(document).on('click',".day",function () {
         var scrollStatus="#scrollStatus3";
         var tabbtn="#tabbtn3";
         date_past=true;
+
+    }
+    if(fromhome=="1"){
 
     }
     search_user_ajax_timer = setTimeout(function () {
