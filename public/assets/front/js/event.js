@@ -868,7 +868,7 @@ today.setHours(0, 0, 0, 0);
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
             $('.all-events-month-show').css('display','flex');
-            $('.home_loader').css('display','none');    
+            $('#home_loader').css('display','none');    
 
         },
         error: function (xhr, status, error) {
@@ -877,7 +877,7 @@ today.setHours(0, 0, 0, 0);
             // $('.loader').css('display','none');    
         },
         complete: function () {
-         $('.home_loader').css('display','none');    
+         $('#home_loader').css('display','none');    
         }
 
     });
