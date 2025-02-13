@@ -117,7 +117,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
+                <button class="design-sidebar-action activated" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
