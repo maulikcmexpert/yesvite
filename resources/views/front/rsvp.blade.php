@@ -311,7 +311,7 @@
                                              @if($is_host == "1" || 
                                                 ($user_id == $guest_data['id']) || 
                                                 ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
-                                                <div class="guest-user-box">
+                                            <div class="guest-user-box">
                                                 <div class="guest-list-data">
                                                     <div class="guest-img">
                                                         @if ($guest_data['profile'] != '')
@@ -2169,71 +2169,50 @@
                                                 $open_modal="";
                                             }
                     @endphp
-                    <div class="guest-user-box">
-                        <div class="guest-list-data">
-                        <div class="guest-img">
-                            @if ($guest_data['profile'] != '')
-                            <img src="{{$guest_data['profile']}}" alt="guest-img">
-                            @else
-                            @php
-                                $firstInitial = !empty($guest_data['first_name']) ? strtoupper($guest_data['first_name'][0]) : '';
-                                $lastInitial = !empty($guest_data['last_name']) ? strtoupper($guest_data['last_name'][0]) : '';
-                                $initials = $firstInitial . $lastInitial;
-                                $fontColor = 'fontcolor' . $firstInitial;
-                                @endphp
-                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                            @endif                      
-                          </div>
-                        <div class="w-100">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex flex-column">
-                                  <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
-                                  <span class="guest-email">{{($guest_data['email']!="")?$guest_data['email'] :$guest_data['phone_number']}}</span>
-                                </div>
-                                @if($rsvp_status!="" &&($user_id==$guest_data['id']))
-                                    <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12.4219 3.45898C12.9802 5.45065 14.5385 7.00898 16.5385 7.57565" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </button>
-                                @endif
-                                @if($rsvp_status!="" && empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id'])
-                                    <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
+                      @if($is_host == "1" || 
+                    ($user_id == $guest_data['id']) || 
+                    ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
+                        <div class="guest-user-box">
+                            <div class="guest-list-data">
+                            <div class="guest-img">
+                                @if ($guest_data['profile'] != '')
+                                <img src="{{$guest_data['profile']}}" alt="guest-img">
+                                @else
+                                @php
+                                    $firstInitial = !empty($guest_data['first_name']) ? strtoupper($guest_data['first_name'][0]) : '';
+                                    $lastInitial = !empty($guest_data['last_name']) ? strtoupper($guest_data['last_name'][0]) : '';
+                                    $initials = $firstInitial . $lastInitial;
+                                    $fontColor = 'fontcolor' . $firstInitial;
+                                    @endphp
+                                        <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                @endif                      
+                            </div>
+                            <div class="w-100">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex flex-column">
+                                    <p href="#" class="guest-name">{{$guest_data['first_name']}} {{$guest_data['last_name']}}</p>
+                                    <span class="guest-email">{{($guest_data['email']!="")?$guest_data['email'] :$guest_data['phone_number']}}</span>
+                                    </div>
+                                    @if($rsvp_status!="" &&($user_id==$guest_data['id']))
+                                        <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M12.4219 3.45898C12.9802 5.45065 14.5385 7.00898 16.5385 7.57565" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </button>
-                                @endif
-                              </div>
-                            @if($is_host=="1")
-                                @if($guest_data['rsvp_status']=="1")
-                                    <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
-                                    <h5 class="green">RSVP'd YES</h5>
-                                    <div class="sucesss-cat ms-auto">
-                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
-                                        <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
-                                        <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
-                                        <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
-                                        </svg>
-                                        <h5>{{$guest_data['adults']}} Adults</h5>
-                                        <h5>{{$guest_data['kids']}} Kids</h5>
-                                    </div>
-                                    </div>
-                                @elseif ($guest_data['rsvp_status']=="0")
-                                    <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
-                                        <h5>NO</h5>
-                                    </div>
-                                @else
-                                    <div class="no-reply">
-                                        <h5>RSVP Not Received</h5>
-                                    </div>
-                                @endif
-                            @elseif($user_id==$guest_data['id'])
+                                    @endif
+                                    @if($rsvp_status!="" && empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id'])
+                                        <button class="guest-list-edit-btn" data-bs-toggle="modal" data-bs-target={{$open_modal}}>
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.16406 1.66602H7.4974C3.33073 1.66602 1.66406 3.33268 1.66406 7.49935V12.4993C1.66406 16.666 3.33073 18.3327 7.4974 18.3327H12.4974C16.6641 18.3327 18.3307 16.666 18.3307 12.4993V10.8327" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M13.3675 2.51639L6.80088 9.08306C6.55088 9.33306 6.30088 9.82472 6.25088 10.1831L5.89254 12.6914C5.75921 13.5997 6.40088 14.2331 7.30921 14.1081L9.81754 13.7497C10.1675 13.6997 10.6592 13.4497 10.9175 13.1997L17.4842 6.63306C18.6175 5.49972 19.1509 4.18306 17.4842 2.51639C15.8175 0.849722 14.5009 1.38306 13.3675 2.51639Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M12.4219 3.45898C12.9802 5.45065 14.5385 7.00898 16.5385 7.57565" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                    @endif
+                                </div>
+                                @if($is_host=="1")
                                     @if($guest_data['rsvp_status']=="1")
                                         <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
                                         <h5 class="green">RSVP'd YES</h5>
@@ -2257,60 +2236,85 @@
                                             <h5>RSVP Not Received</h5>
                                         </div>
                                     @endif
-                             @elseif($rsvp_status!="" && empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id']) 
-                                           @if($guest_data['rsvp_status']=="1")
-                                        <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
-                                        <h5 class="green">RSVP'd YES</h5>
-                                        <div class="sucesss-cat ms-auto">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
-                                            </svg>
-                                            <h5>{{$guest_data['adults']}} Adults</h5>
-                                            <h5>{{$guest_data['kids']}} Kids</h5>
-                                        </div>
-                                        </div>
-                                         @elseif ($guest_data['rsvp_status']=="0")
-                                        <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
-                                            <h5>NO</h5>
-                                        </div>
-                                         @else
-                                        <div class="no-reply">
-                                            <h5>RSVP Not Received</h5>
-                                        </div>
-                                        @endif   
-                                @else
-                                @if($guest_data['rsvp_status']=="1")
-                                        <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
-                                        <h5 class="green">RSVP'd YES</h5>
-                                        <div class="sucesss-cat ms-auto">
-                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
-                                            <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
-                                            </svg>
-                                            <h5>{{$guest_data['adults']}} Adults</h5>
-                                            <h5>{{$guest_data['kids']}} Kids</h5>
-                                        </div>
-                                        </div>
-                                         @elseif ($guest_data['rsvp_status']=="0")
-                                        <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
-                                            <h5>NO</h5>
-                                        </div>
-                                @endif       
-                                @endif           
-                            <div class="rsvp-guest-user-replay">
-                                @if($guest_data['message_to_host']!="")
-                                <h6>“ {{$guest_data['message_to_host']}} “</h6>
-                            @endif
-                         </div>
+                                @elseif($user_id==$guest_data['id'])
+                                        @if($guest_data['rsvp_status']=="1")
+                                            <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
+                                            <h5 class="green">RSVP'd YES</h5>
+                                            <div class="sucesss-cat ms-auto">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
+                                                </svg>
+                                                <h5>{{$guest_data['adults']}} Adults</h5>
+                                                <h5>{{$guest_data['kids']}} Kids</h5>
+                                            </div>
+                                            </div>
+                                        @elseif ($guest_data['rsvp_status']=="0")
+                                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
+                                                <h5>NO</h5>
+                                            </div>
+                                        @else
+                                            <div class="no-reply">
+                                                <h5>RSVP Not Received</h5>
+                                            </div>
+                                        @endif
+                                @elseif($rsvp_status!="" && empty($user_id) && !empty($sync_contact_user_id) && $sync_contact_user_id == $guest_data['id']) 
+                                            @if($guest_data['rsvp_status']=="1")
+                                            <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
+                                            <h5 class="green">RSVP'd YES</h5>
+                                            <div class="sucesss-cat ms-auto">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
+                                                </svg>
+                                                <h5>{{$guest_data['adults']}} Adults</h5>
+                                                <h5>{{$guest_data['kids']}} Kids</h5>
+                                            </div>
+                                            </div>
+                                            @elseif ($guest_data['rsvp_status']=="0")
+                                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
+                                                <h5>NO</h5>
+                                            </div>
+                                            @else
+                                            <div class="no-reply">
+                                                <h5>RSVP Not Received</h5>
+                                            </div>
+                                            @endif   
+                                    @else
+                                    @if($guest_data['rsvp_status']=="1")
+                                            <div class="sucess-yes"  data-bs-toggle="modal" data-bs-target="{{$no_modal}}">
+                                            <h5 class="green">RSVP'd YES</h5>
+                                            <div class="sucesss-cat ms-auto">
+                                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.625 1.25C3.9875 1.25 2.65625 2.58125 2.65625 4.21875C2.65625 5.825 3.9125 7.125 5.55 7.18125C5.6 7.175 5.65 7.175 5.6875 7.18125C5.7 7.18125 5.70625 7.18125 5.71875 7.18125C5.725 7.18125 5.725 7.18125 5.73125 7.18125C7.33125 7.125 8.5875 5.825 8.59375 4.21875C8.59375 2.58125 7.2625 1.25 5.625 1.25Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M8.8001 8.84453C7.05635 7.68203 4.2126 7.68203 2.45635 8.84453C1.6626 9.37578 1.2251 10.0945 1.2251 10.8633C1.2251 11.632 1.6626 12.3445 2.4501 12.8695C3.3251 13.457 4.4751 13.7508 5.6251 13.7508C6.7751 13.7508 7.9251 13.457 8.8001 12.8695C9.5876 12.3383 10.0251 11.6258 10.0251 10.8508C10.0188 10.082 9.5876 9.36953 8.8001 8.84453Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M12.4938 4.58732C12.5938 5.79982 11.7313 6.86232 10.5376 7.00607C10.5313 7.00607 10.5313 7.00607 10.5251 7.00607H10.5063C10.4688 7.00607 10.4313 7.00607 10.4001 7.01857C9.79385 7.04982 9.2376 6.85607 8.81885 6.49982C9.4626 5.92482 9.83135 5.06232 9.75635 4.12482C9.7126 3.61857 9.5376 3.15607 9.2751 2.76232C9.5126 2.64357 9.7876 2.56857 10.0688 2.54357C11.2938 2.43732 12.3876 3.34982 12.4938 4.58732Z" fill="black" fill-opacity="0.2"></path>
+                                                <path d="M13.7437 10.369C13.6937 10.9752 13.3062 11.5002 12.6562 11.8565C12.0312 12.2002 11.2437 12.3627 10.4624 12.344C10.9124 11.9377 11.1749 11.4315 11.2249 10.894C11.2874 10.119 10.9187 9.37525 10.1812 8.7815C9.7624 8.45025 9.2749 8.18775 8.74365 7.994C10.1249 7.594 11.8624 7.86275 12.9312 8.72525C13.5062 9.18775 13.7999 9.769 13.7437 10.369Z" fill="black" fill-opacity="0.2"></path>
+                                                </svg>
+                                                <h5>{{$guest_data['adults']}} Adults</h5>
+                                                <h5>{{$guest_data['kids']}} Kids</h5>
+                                            </div>
+                                            </div>
+                                            @elseif ($guest_data['rsvp_status']=="0")
+                                            <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
+                                                <h5>NO</h5>
+                                            </div>
+                                    @endif       
+                                    @endif           
+                                <div class="rsvp-guest-user-replay">
+                                    @if($guest_data['message_to_host']!="")
+                                    <h6>“ {{$guest_data['message_to_host']}} “</h6>
+                                @endif
+                            </div>
+                            </div>
+                            </div>
+                            
                         </div>
-                        </div>
-                        
-                    </div>
+                    @endif
                 @endforeach
 
                 {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
