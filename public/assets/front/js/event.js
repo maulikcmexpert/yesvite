@@ -814,7 +814,7 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus').html(response.view);
                 $('#tabbtn1').text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
-                $('#count_of_upcoming').text(response.total);
+                $('.count_of_upcoming').text(response.total);
 
             }else{
                 $('#scrollStatus').html('');
