@@ -478,12 +478,12 @@ class RsvpController extends BaseController
                     'userTypingStatus' => 'Not typing...'
                 ];
 
-                dd($updateData);
                 // Create a new user node with the userId
                 $userRef = $this->usersReference->getChild((string)$userId);
                 $userSnapshot = $userRef->getValue();
                 $updateFirebase = false;
 
+                dd($userSnapshot['userName']);
                 if ($userSnapshot) {
                     if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
                         $updateFirebase = true;
