@@ -1303,7 +1303,8 @@ class EventListController extends BaseController
         if (!empty($eventList)) {
             $last_month = $eventList[0]['event_month'];
         }
-        return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'upcoming']);
+        $total=Count($eventList);
+        return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'upcoming','total'=>$total]);
     }
 
     public function SearchDraftEvent(Request $request)
