@@ -12,6 +12,14 @@
                 </button>
             </div>
         </nav>
+        <div class="tab-content">
+            <div class="tab-pane fade" id="nav-explore-designs" role="tabpanel" aria-labelledby="explore-designs-tab">
+                design tab
+            </div>
+            <div class="tab-pane fade" id="nav-profile-home" role="tabpanel" aria-labelledby="nav-profile-home-tab">
+                profile tab
+            </div>
+        </div>
     </div>
 </section>
 
