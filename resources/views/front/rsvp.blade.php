@@ -303,7 +303,6 @@
                                             }else{
                                                 $open_modal="";
                                             }
-                                            $self_status="";
                                             if($user_id==$guest_data['id']){
                                                 $self_status=$guest_data['id'];
                                             }
