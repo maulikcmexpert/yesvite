@@ -828,6 +828,62 @@ today.setHours(0, 0, 0, 0);
     });
 }, 750);
   });
+
+  $(document).on('click','#nav-past-tab',function(){
+    var searchValue = $(this).val();
+    var current_month="";
+
+    $('.latest_month_past').each(function () { 
+        current_month=$(this).val();
+    });
+
+    clearTimeout(search_user_ajax_timer);
+    
+    $('#home_loader').css('display','flex');    
+
+    search_user_ajax_timer = setTimeout(function () {
+    $.ajax({
+        url: `${base_url}search_past_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+
+            if (response.view) {
+                
+                $('#scrollStatus3').html('');
+                $('#scrollStatus3').html(response.view);
+                $('#tabbtn3').css('display','flex');
+                $('#tabbtn3').text(response.last_month);
+                
+                // $('.loader').css('display','none');    
+
+            }else{
+                
+                $('#scrollStatus3').html('');
+                $('#scrollStatus3').html('No Data Found');
+                $('#tabbtn3').css('display','none');
+
+                // $('.loader').css('display','none');    
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('.all-events-month-show').css('display','flex');
+            $('.home_loader').css('display','none');    
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            // $('.loader').css('display','none');    
+        },
+        complete: function () {
+         $('.home_loader').css('display','none');    
+        }
+
+    });
+        }, 750);
+
+  });
 $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');
