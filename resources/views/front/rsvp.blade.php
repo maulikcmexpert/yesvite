@@ -305,7 +305,8 @@
                                             }
 
                                             @endphp
-                                             @if($is_host == "1" || ($is_host == "" && ($guest_data['rsvp_status'] != "" && $guest_data['rsvp_status'] != null)))
+                                             
+@if($is_host == "1" || $user_id==$guest_data['id'] ||($is_host == "0" && ($guest_data['rsvp_status'] != "" && $guest_data['rsvp_status'] != null)))
                                                 <div class="guest-user-box">
                                                 <div class="guest-list-data">
                                                     <div class="guest-img">
@@ -706,7 +707,7 @@
                                                 </div>
                                                 
                                                 </div>
-                                            @endif
+                                                @endif
                                             @php
                                             if($i==3){
                                                 break;
