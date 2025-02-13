@@ -1,4 +1,10 @@
-<div class="tab-pane fade" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
+@php
+ $show="";
+  if( $from_page=="past"){
+    $show="active show"
+  }
+@endphp
+<div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
     <div class="all-events-searchbar-wrp">
       <form>
         <div class="position-relative">
