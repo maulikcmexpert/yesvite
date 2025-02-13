@@ -307,6 +307,7 @@
                                                 $self_status=$guest_data['id'];
                                             }
                                             @endphp
+                                            {{dd($is_host,$user_id)}}
                                              @if($is_host == "1" || 
                                              ($user_id == $guest_data['id']) || 
                                              ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
