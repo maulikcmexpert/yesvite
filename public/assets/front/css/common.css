@@ -1001,6 +1001,10 @@ button:focus{
     border: none !important;
 }
 
+main{
+    height: 100vh;
+}
+
 @keyframes bounce {
     0%,
     80%,
