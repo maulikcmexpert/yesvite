@@ -815,7 +815,7 @@ today.setHours(0, 0, 0, 0);
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
             $('#home_loader').hide();
-            $('#all-events-month-show').css('display','flex');
+            $('.all-events-month-show').css('display','flex');
         },
         error: function (xhr, status, error) {
             console.error('Error fetching events:', error);
