@@ -296,6 +296,11 @@ class EventListController extends BaseController
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
+        if($page=="past"){
+            $invitedPastEventsList->where('start_date', $date);
+        }else{
+            $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
+        }
         $invitedPastEventsList->where('is_draft_save', '0');
 
         // $invitedPastEventsList->orderBy('start_date', 'ASC')->limit(10);
