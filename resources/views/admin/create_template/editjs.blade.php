@@ -1055,10 +1055,10 @@
                                         angle: element?.rotation ? element?.rotation : 0
                                     });
 
-                                    const textWidth = textElement.calcTextWidth();
-                                    textElement.set({
-                                        width: textWidth
-                                    });
+                                    // const textWidth = textElement.calcTextWidth();
+                                    // textElement.set({
+                                    //     width: textWidth
+                                    // });
                                     // textElement.setControlsVisibility({
                                     //     mt: false,
                                     //     mb: false,
