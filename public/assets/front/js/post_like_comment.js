@@ -352,6 +352,7 @@ $(document).ready(function () {
     $(document).on("click", ".comment-send-icon", function () {
         console.log("clicked");
         var commentVal = $(this).prev(".post_comment").val();
+        console.log(commentVal);
         var login_user_id = $("#login_user_id").val();
         const parentWrapper = $(this).closest(".posts-card-main-comment"); // Find the closest comment wrapper
         const commentInput = parentWrapper.find("#post_comment"); // Find the input within the current post
