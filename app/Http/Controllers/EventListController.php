@@ -1537,9 +1537,10 @@ class EventListController extends BaseController
             if (!empty($eventPasttList)) {
                 $last_month = $eventPasttList[0]['event_month'];
             }
+            $total=Count($eventPasttList);
         }
 
-        return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'past'],);
+        return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'past','total'=>$total]);
     }
 
     public function EventFilter(Request $request)

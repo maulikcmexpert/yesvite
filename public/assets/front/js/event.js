@@ -863,7 +863,8 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus3').html(response.view);
                 $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
-                
+                $('.count_of_past').text(response.total);
+
                 // $('.loader').css('display','none');    
 
             }else{
