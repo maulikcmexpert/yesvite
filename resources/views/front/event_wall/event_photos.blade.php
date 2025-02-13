@@ -184,7 +184,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="photo-card-head-right set_emoji_like">
-                                                            <button class="posts-card-like-btn like-btn" id="likeButton_{{$photo['id']}}"
+                                                            <button class="posts-card-like-btn like-btn"
+                                                                id="likeButton_{{ $photo['id'] }}"
                                                                 data-event-id="{{ $event }}"
                                                                 data-event-post-id="{{ $photo['id'] }} "
                                                                 data-user-id="{{ $login_user_id }}">
@@ -315,21 +316,21 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Delete </button></li>
-                                                                            @if ($photo['user_id'] != $login_user_id)
-                                                                    <li><button class="dropdown-item"><svg
-                                                                                viewBox="0 0 20 20" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path
-                                                                                    d="M10.0013 18.9587C5.05964 18.9587 1.04297 14.942 1.04297 10.0003C1.04297 5.05866 5.05964 1.04199 10.0013 1.04199C14.943 1.04199 18.9596 5.05866 18.9596 10.0003C18.9596 14.942 14.943 18.9587 10.0013 18.9587ZM10.0013 2.29199C5.7513 2.29199 2.29297 5.75033 2.29297 10.0003C2.29297 14.2503 5.7513 17.7087 10.0013 17.7087C14.2513 17.7087 17.7096 14.2503 17.7096 10.0003C17.7096 5.75033 14.2513 2.29199 10.0013 2.29199Z"
-                                                                                    fill="#94A3B8" />
-                                                                                <path
-                                                                                    d="M10 11.4587C9.65833 11.4587 9.375 11.1753 9.375 10.8337V6.66699C9.375 6.32533 9.65833 6.04199 10 6.04199C10.3417 6.04199 10.625 6.32533 10.625 6.66699V10.8337C10.625 11.1753 10.3417 11.4587 10 11.4587Z"
-                                                                                    fill="#94A3B8" />
-                                                                                <path
-                                                                                    d="M10.0013 14.1664C9.89297 14.1664 9.78464 14.1414 9.68464 14.0997C9.58464 14.0581 9.49297 13.9997 9.40964 13.9247C9.33464 13.8414 9.2763 13.7581 9.23464 13.6497C9.19297 13.5497 9.16797 13.4414 9.16797 13.3331C9.16797 13.2247 9.19297 13.1164 9.23464 13.0164C9.2763 12.9164 9.33464 12.8247 9.40964 12.7414C9.49297 12.6664 9.58464 12.6081 9.68464 12.5664C9.88464 12.4831 10.118 12.4831 10.318 12.5664C10.418 12.6081 10.5096 12.6664 10.593 12.7414C10.668 12.8247 10.7263 12.9164 10.768 13.0164C10.8096 13.1164 10.8346 13.2247 10.8346 13.3331C10.8346 13.4414 10.8096 13.5497 10.768 13.6497C10.7263 13.7581 10.668 13.8414 10.593 13.9247C10.5096 13.9997 10.418 14.0581 10.318 14.0997C10.218 14.1414 10.1096 14.1664 10.0013 14.1664Z"
-                                                                                    fill="#94A3B8" />
-                                                                            </svg> Report</button></li>
-                                                                            @endif
+                                                                    @if ($photo['user_id'] != $login_user_id)
+                                                                        <li><button class="dropdown-item"><svg
+                                                                                    viewBox="0 0 20 20" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path
+                                                                                        d="M10.0013 18.9587C5.05964 18.9587 1.04297 14.942 1.04297 10.0003C1.04297 5.05866 5.05964 1.04199 10.0013 1.04199C14.943 1.04199 18.9596 5.05866 18.9596 10.0003C18.9596 14.942 14.943 18.9587 10.0013 18.9587ZM10.0013 2.29199C5.7513 2.29199 2.29297 5.75033 2.29297 10.0003C2.29297 14.2503 5.7513 17.7087 10.0013 17.7087C14.2513 17.7087 17.7096 14.2503 17.7096 10.0003C17.7096 5.75033 14.2513 2.29199 10.0013 2.29199Z"
+                                                                                        fill="#94A3B8" />
+                                                                                    <path
+                                                                                        d="M10 11.4587C9.65833 11.4587 9.375 11.1753 9.375 10.8337V6.66699C9.375 6.32533 9.65833 6.04199 10 6.04199C10.3417 6.04199 10.625 6.32533 10.625 6.66699V10.8337C10.625 11.1753 10.3417 11.4587 10 11.4587Z"
+                                                                                        fill="#94A3B8" />
+                                                                                    <path
+                                                                                        d="M10.0013 14.1664C9.89297 14.1664 9.78464 14.1414 9.68464 14.0997C9.58464 14.0581 9.49297 13.9997 9.40964 13.9247C9.33464 13.8414 9.2763 13.7581 9.23464 13.6497C9.19297 13.5497 9.16797 13.4414 9.16797 13.3331C9.16797 13.2247 9.19297 13.1164 9.23464 13.0164C9.2763 12.9164 9.33464 12.8247 9.40964 12.7414C9.49297 12.6664 9.58464 12.6081 9.68464 12.5664C9.88464 12.4831 10.118 12.4831 10.318 12.5664C10.418 12.6081 10.5096 12.6664 10.593 12.7414C10.668 12.8247 10.7263 12.9164 10.768 13.0164C10.8096 13.1164 10.8346 13.2247 10.8346 13.3331C10.8346 13.4414 10.8096 13.5497 10.768 13.6497C10.7263 13.7581 10.668 13.8414 10.593 13.9247C10.5096 13.9997 10.418 14.0581 10.318 14.0997C10.218 14.1414 10.1096 14.1664 10.0013 14.1664Z"
+                                                                                        fill="#94A3B8" />
+                                                                                </svg> Report</button></li>
+                                                                    @endif
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -437,7 +438,8 @@
                                                         </h5>
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
-                                                                type="checkbox" value="" id="flexCheckDefault" data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
+                                                                type="checkbox" value="" id="flexCheckDefault"
+                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
                                                         </button>
                                                     </div>
 
@@ -708,7 +710,7 @@
                         </button> --}}
                     </div>
                     <div class="">
-                        <button type ="button" class="cmn-btn create_post" >
+                        <button type ="button" class="cmn-btn create_post">
                             post
                         </button>
                     </div>
@@ -802,7 +804,7 @@
                                     <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">Chance Curtis
                                         </h3>
-                                        <span id="host_display" ></span>
+                                        <span id="host_display"></span>
                                     </div>
                                     <p id="location">New York, NY</p>
                                 </div>
@@ -849,7 +851,7 @@
                                                 <span id="buttonText" class="mute-post-btn-text">Mute</span>
                                             </button>
                                         </li>
-<input type ="hidden" id="login_user_id" value={{$login_user_id}}>
+                                        <input type ="hidden" id="login_user_id" value={{ $login_user_id }}>
                                         <li>
                                             <a class="dropdown-item" href="#" id="report_btn">
                                                 <svg viewBox="0 0 20 20" fill="none"
@@ -949,7 +951,7 @@
                                     data-user-id="{{ $login_user_id }}">
                                     <i id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
                                             alt="" class="emoji model_emoji"></i>
-                                        </button>
+                                </button>
 
                                 <div class="photos-likes-options-wrp emoji-picker model_emoji" id="emojiDropdown1"
                                     style="display: none;">
