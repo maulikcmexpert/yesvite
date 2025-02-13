@@ -537,7 +537,7 @@
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="bold">
+                        <button class="bold-btn format-btn" data-command="bold">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -550,7 +550,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="italic">
+                        <button class="italic-btn format-btn" data-command="italic">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.62 3H18.87" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -561,7 +561,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="underline">
+                        <button class="underline-btn format-btn" data-command="underline">
                             <svg width="25" height="30" viewBox="0 0 25 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68294)">
@@ -597,13 +597,13 @@
                 <div class="format-text-inner font-tranform-wrp">
                     <h3>Font Size</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="uppercase">
+                        <button class="uppercase-btn size-btn format-btn" data-command="uppercase">
                             AA
                         </button>
-                        <button data-command="lowercase">
+                        <button class="lowercase-btn size-btn format-btn" data-command="lowercase">
                             aa
                         </button>
-                        <button data-command="capitalize">
+                        <button class="capitalize-btn size-btn format-btn" data-command="capitalize">
                             Aa
                         </button>
                     </div>
@@ -611,7 +611,7 @@
                 <div class="format-text-inner font-alignment-wrp">
                     <h3>Alignment</h3>
                     <div class="format-text-inner-options">
-                        <button data-command="justifyLeft">
+                        <button class="justyfy-left-btn format-btn" data-command="justifyLeft">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H3.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -624,7 +624,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyCenter">
+                        <button class="justyfy-center-btn format-btn" data-command="justifyCenter">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -637,7 +637,7 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyRight">
+                        <button class="justyfy-right-btn format-btn" data-command="justifyRight">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.5 4.5H21.5" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"
@@ -650,7 +650,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </button>
-                        <button data-command="justifyFull">
+                        <button class="justyfy-full-btn format-btn" data-command="justifyFull">
                             <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_d_5633_68315)">
@@ -685,6 +685,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
