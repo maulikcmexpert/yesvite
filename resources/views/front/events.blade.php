@@ -34,8 +34,8 @@
                       @endphp
                             <div class="event-center-tabs-main all-events-center-tabs">
                                 <nav>
-                                    <div class="nav nav-tabs" id="nav-tab {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" role="tablist">
-                                    <button class="nav-link event_nav" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
                                         Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
@@ -59,7 +59,7 @@
                                       @endphp
                         
                                         <!-- ===tab-1-start=== -->
-                                        <div class="tab-pane fade {{ $show == 'upcoming' ? 'active show' : '' }} {{ $show == "" ? 'active show' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+                                        <div class="tab-pane fade {{ $show == 'upcoming' ? ' active show' : '' }} {{ $show == "" ? 'active show' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                                         <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
                                         </div>
 
@@ -71,7 +71,7 @@
 
                                         <!-- ===tab-3-start=== -->
                                        
-                                        <div class="tab-pane fade{{ $show == 'past' ? 'active show' : '' }}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
+                                        <div class="tab-pane fade{{ $show == 'past' ? ' active show' : '' }}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
                                         <x-main_menu.events.event_past :eventPasttList="$eventPasttList" :from_page="$from_page" />
                                         </div>
 
