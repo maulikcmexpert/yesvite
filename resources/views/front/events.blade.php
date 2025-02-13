@@ -26,22 +26,45 @@
                             <input type="hidden" value="{{$from_page}}" id="already_selected_date"/>
                             @php
                             $show_tab="";
-                                if($from_page=="past"){
-                                  $show_tab="active";
-                                }
-                            @endphp
+                            if( $from_page=="past"){
+                              $show_tab="past";
+                            }elseif ($from_page=="upcoming") {
+                              $show_tab="upcoming";
+                            }
+                      @endphp
                             <div class="event-center-tabs-main all-events-center-tabs">
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link event_nav" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                    {{-- <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
                                         Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
                                         Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
                                     </button>
-                                    <button class="nav-link event_nav {{$show_tab}}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
+                                    <button class="nav-link event_nav {{ $show_tab == 'past' ? 'active' : '' }}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
+                                        Past <span class="d-sm-flex d-none">{{$filter['past_event']}}</span> <span class="d-sm-none d-flex">({{$filter['past_event']}})</span>
+                                    </button> --}}
+                                    @if($from_page!=""||$from_page!=null)
+                                      <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                        Upcoming <span class="d-sm-flex d-none">{{count($eventList)}}</span> <span class="d-sm-none d-flex">({{count($eventList)}})</span>
+                                    </button>
+                                    <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
+                                        Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
+                                    </button>
+                                    <button class="nav-link event_nav {{ $show_tab == 'past' ? 'active' : '' }}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
+                                        Past <span class="d-sm-flex d-none">{{count($eventPasttList)}}</span> <span class="d-sm-none d-flex">({{count($eventPasttList)}})</span>
+                                    </button>
+                                    @else
+                                      <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                        Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
+                                    </button>
+                                    <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
+                                        Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
+                                    </button>
+                                    <button class="nav-link event_nav {{ $show_tab == 'past' ? 'active' : '' }}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
                                         Past <span class="d-sm-flex d-none">{{$filter['past_event']}}</span> <span class="d-sm-none d-flex">({{$filter['past_event']}})</span>
                                     </button>
+                                    @endif
                                     </div>
                                 </nav>
 
@@ -50,12 +73,14 @@
                                             @php
                                             $show="";
                                       if( $from_page=="past"){
-                                        $show="active show";
+                                        $show="past";
+                                      }elseif ($from_page=="upcoming") {
+                                        $show="upcoming";
                                       }
                                       @endphp
                         
                                         <!-- ===tab-1-start=== -->
-                                        <div class="tab-pane fade {{ $show == 'upcoming' ? 'active' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+                                        <div class="tab-pane fade {{ $show == 'upcoming' ? ' active show' : '' }} {{ $show == "" ? 'active show' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                                         <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
                                         </div>
 
@@ -67,7 +92,7 @@
 
                                         <!-- ===tab-3-start=== -->
                                        
-                                        <div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
+                                        <div class="tab-pane fade{{ $show == 'past' ? ' active show' : '' }}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
                                         <x-main_menu.events.event_past :eventPasttList="$eventPasttList" :from_page="$from_page" />
                                         </div>
 
