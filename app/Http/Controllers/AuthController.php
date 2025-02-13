@@ -449,7 +449,7 @@ class AuthController extends Controller
                     }
 
 
-                    return  Redirect::to('profile')->with('msg_error', 'You have already login ' . $msg);
+                    return  Redirect::to('home')->with('msg_error', 'You have already login ' . $msg);
                 }
 
 
@@ -491,7 +491,7 @@ class AuthController extends Controller
                     }
                     event(new \App\Events\UserRegistered($secondUser));
                     $this->logoutFromApplication($secondUser->id);
-                    return redirect()->route('profile')->with('msg', 'Logged in successfully!');
+                    return redirect()->route('home')->with('msg', 'Logged in successfully!');
                 } else {
 
                     return  Redirect::to('login')->with('msg_error', 'Invalid credentials!');
