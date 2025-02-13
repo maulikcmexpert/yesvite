@@ -66,6 +66,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
     });
     
 })
+$('#home_loader').css('display','none');    
 
 var base_url=$('#base_url').val();
 var busy1 = false;
@@ -650,6 +651,8 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
+    $('#home_loader').css('display','flex');    
+
     var current_page=$('#current_page').val();
     var fromhome="";
     var search_date=$(this).data('date');
@@ -704,7 +707,8 @@ today.setHours(0, 0, 0, 0);
 
     }
     if(fromhome=="1"){
-        window.location.href=base_url+`event_lists/${search_date}/${page}`
+        window.location.href=base_url+`event_lists/${search_date}/${page}`;
+        return;
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   
@@ -751,6 +755,8 @@ today.setHours(0, 0, 0, 0);
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
             $('#loader').hide();
+            $('#home_loader').css('display','none');    
+
            
             var $textSpan = $('.responsive-text');
             var $iconSpan = $('.responsive-icon'); 
@@ -775,6 +781,8 @@ today.setHours(0, 0, 0, 0);
             console.error('Error fetching events:', error);
             busy = false;
             $('#loader').hide();
+            $('#home_loader').css('display','none');    
+
         },
         complete: function () {
             $('.loader_up').css('display','none');    
@@ -814,18 +822,75 @@ today.setHours(0, 0, 0, 0);
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
-            $('#home_loader').hide();
+            $('#home_loader').css('display','none');    
+            $('.all-events-month-show').css('display','flex');
         },
         error: function (xhr, status, error) {
             console.error('Error fetching events:', error);
             busy = false;
-            $('#home_loader').hide();
+            $('#home_loader').css('display','none');    
         },
         complete: function () {
             $('.loader_up').css('display','none');    
            }
     });
 }, 750);
+  });
+
+  $(document).on('click','#nav-past-tab',function(){
+    var searchValue = $('#search_past_event').val();
+    var current_month="";
+
+    $('.latest_month_past').each(function () { 
+        current_month=$(this).val();
+    });
+
+    clearTimeout(search_user_ajax_timer);
+    
+    $('#home_loader').css('display','flex');    
+
+    search_user_ajax_timer = setTimeout(function () {
+    $.ajax({
+        url: `${base_url}search_past_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+
+            if (response.view) {
+                
+                $('#scrollStatus3').html('');
+                $('#scrollStatus3').html(response.view);
+                $('#tabbtn3').css('display','flex');
+                $('#tabbtn3').text(response.last_month);
+                
+                // $('.loader').css('display','none');    
+
+            }else{
+                
+                $('#scrollStatus3').html('');
+                $('#scrollStatus3').html('No Data Found');
+                $('#tabbtn3').css('display','none');
+
+                // $('.loader').css('display','none');    
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('.all-events-month-show').css('display','flex');
+            $('#home_loader').css('display','none');    
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            // $('.loader').css('display','none');    
+        },
+        complete: function () {
+         $('#home_loader').css('display','none');    
+        }
+
+    });
+        }, 750);
+
   });
 $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
