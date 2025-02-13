@@ -661,7 +661,7 @@ $(document).on('click',".day",function () {
         const today = new Date();
         if (specificDate < today) {
            page="past";
-          } else {
+          } else if(specificDate>=today) {
             page='upcoming';
         }
     }
