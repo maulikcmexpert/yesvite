@@ -1,5 +1,4 @@
 @php
-dd($eventPasttList);
  $show="";
   if( $from_page=="past"){
     $show="active show";
