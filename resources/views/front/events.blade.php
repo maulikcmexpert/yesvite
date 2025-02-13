@@ -27,9 +27,9 @@
                             @php
                             $show_tab="";
                             if( $from_page=="past"){
-                              $show="past";
+                              $show_tab="past";
                             }elseif ($from_page=="upcoming") {
-                              $show="upcoming";
+                              $show_tab="upcoming";
                             }
                       @endphp
                             <div class="event-center-tabs-main all-events-center-tabs">
@@ -56,6 +56,7 @@
                                       }elseif ($from_page=="upcoming") {
                                         $show="upcoming";
                                       }
+
                                       @endphp
                         
                                         <!-- ===tab-1-start=== -->
