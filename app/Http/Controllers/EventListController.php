@@ -284,7 +284,6 @@ class EventListController extends BaseController
         if($page=="past"){
             $usercreatedAllPastEventList->where('start_date', $date);
         }else{
-            dd($page,$date);
             $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
         }
         $usercreatedAllPastEventList->where('is_draft_save', '0');
@@ -313,11 +312,18 @@ class EventListController extends BaseController
 
         $allPastEventsQuery = $usercreatedAllPastEventList->union($invitedPastEventsList);
         // dd($allPastEventsQuery->toSql());
-        $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc')
-            ->offset(0)
-            ->limit(10)
-            ->get();
+        
+            if($page=="past"){
+                $allPastEvents = $allPastEventsQuery
+                ->orderBy('start_date', 'asc')
+                ->get();
+            }else{
+                $allPastEvents = $allPastEventsQuery
+                ->orderBy('start_date', 'asc')
+                ->offset(0)
+                ->limit(10)
+                ->get();
+            }
         // $allPastEvents =  collect($allPastEvent)->sortBy('start_date');
 
         $totalCounts = 0;
