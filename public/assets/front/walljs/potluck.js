@@ -200,9 +200,9 @@ if (chartData) {
             fontFamily: "Arial, sans-serif",
             fontWeight: "normal",
             formatter: function (seriesName, opts) {
-                return `<div style="width: 100%; display: flex;align-items: center;justify-content: space-between;">
-                    <span style="display: inline-block;">${seriesName}</span>
-                    <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
+                return `<div style="width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap;">
+                    <span style="display: block; width: 100%;">${seriesName}</span>
+                    <span style="display: block; width: 100%; text-align: right; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
                 </div>`;
             },
         },
