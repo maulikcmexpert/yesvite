@@ -647,7 +647,9 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
-    // alert();
+    alert();
+    var current_page=$('#current_page').val();
+    alert(current_page);
     var search_date=$(this).data('date');
     if(search_date==undefined||search_date==""){
         return;
