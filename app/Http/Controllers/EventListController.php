@@ -1355,10 +1355,11 @@ class EventListController extends BaseController
             $last_month = $draftEventArray[0]['event_month'];
         }
         //   dd($last_month);
+        $total=Count($draftEventArray);
         if ($is_draft_page != "") {
-            return response()->json(['view' => view('front.event.event_list.search_draft_page', compact('draftEventArray', 'get_current_month'))->render(), "draft_count" => count($draftEventArray)]);
+            return response()->json(['view' => view('front.event.event_list.search_draft_page', compact('draftEventArray', 'get_current_month'))->render(), "draft_count" => count($draftEventArray),"total"=>$total]);
         }
-        return response()->json(['view' => view('front.event.event_list.draft_event', compact('draftEventArray', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'draft']);
+        return response()->json(['view' => view('front.event.event_list.draft_event', compact('draftEventArray', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'draft',"total"=>$total]);
     }
 
     public function SearchPastEvent(Request $request)
