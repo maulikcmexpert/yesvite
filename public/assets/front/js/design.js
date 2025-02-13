@@ -1479,6 +1479,7 @@ async function bindData(current_event_id) {
         }
         let targetFontFamily = target.fontFamily;
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
+        $("#letterSpacingRange").val(target?.charSpacing || 0);
 
         // const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
         const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
