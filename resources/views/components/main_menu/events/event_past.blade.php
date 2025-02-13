@@ -1,7 +1,7 @@
 @php
  $show="";
   if( $from_page=="past"){
-    $show="active show"
+    $show="active show";
   }
 @endphp
 <div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
