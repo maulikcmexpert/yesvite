@@ -56,7 +56,6 @@
                                       }elseif ($from_page=="upcoming") {
                                         $show="upcoming";
                                       }
-
                                       @endphp
                         
                                         <!-- ===tab-1-start=== -->
