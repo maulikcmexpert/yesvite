@@ -647,9 +647,7 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
-    alert();
     var current_page=$('#current_page').val();
-    alert(current_page);
     var search_date=$(this).data('date');
     if(search_date==undefined||search_date==""){
         return;
@@ -658,6 +656,17 @@ $(document).on('click',".day",function () {
     var searchValue = $(this).val();
     var current_month="";
     var page=getActiveTabPage();
+    if(page==undefined){
+        const specificDate = new Date(search_date);
+        const today = new Date();
+        if (specificDate < today) {
+           page="past";
+          } else {
+            page='upcoming';
+        }
+    }
+
+    console.log(page);
    
     $('.latest_month').each(function () { 
         current_month=$(this).val();
