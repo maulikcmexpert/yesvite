@@ -98,6 +98,7 @@ $(document).on('paste','input[type="text"],textarea', function(e) {
     }
 });
 
+if($selected_by_date_page!="upcoming"){
 $('#scrollStatus').scroll(function () {
     // if (busy1) return; 
     if (busy1 || date_upcoming) return; // Add this check to prevent the scroll ajax call after a date click.
@@ -146,7 +147,7 @@ $('#scrollStatus').scroll(function () {
         });
     }
 });
-
+}
 $('#scrollStatus2').scroll(function () {
     // if (busy2) return; 
     if (busy2 || date_draft) return; // Add this check to prevent the scroll ajax call after a date click.
@@ -188,7 +189,7 @@ $('#scrollStatus2').scroll(function () {
     }
 });
 
-if($selected_by_date_page==""||$selected_by_date_page==null){
+if($selected_by_date_page!="past"){
     $('#scrollStatus3').scroll(function () {
         // if (busy3) return; 
         if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
@@ -699,7 +700,7 @@ $(document).on('click',".day",function () {
 
     }
     if(fromhome=="1"){
-        window.location.href=base_url+`event_lists/${search_date}/past`
+        window.location.href=base_url+`event_lists/${search_date}/${page}`
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   
