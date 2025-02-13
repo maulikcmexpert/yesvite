@@ -732,6 +732,21 @@ today.setHours(0, 0, 0, 0);
                 $('#tabbtn3').css('display','flex');
                 $(tabbtn).text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
+                if(response.page=="upcoming"){
+
+                    $('.count_of_upcoming').text(response.total);
+
+                }
+
+                if(response.page=="past"){
+
+                    $('.count_of_past').text(response.total);
+
+                }
+                if(response.page=="draft"){
+                    $('.count_of_draft').text(response.total);
+
+                }
 
             }else{
                 $(scrollStatus).html('');
