@@ -105,7 +105,7 @@
                             <!-- Slides -->
                             @foreach ($draftEventArray as $draft )
                               <div class="swiper-slide">
-                                <a href="" class="home-latest-draf-card">
+                                <a href="{{ route('event', encrypt($draft['id'])) }}" class="home-latest-draf-card">
                                   <div class="home-latest-draf-card-head">
                                       <div class="home-latest-draf-card-head-img">
                                           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,17 +118,45 @@
                                           </svg>
                                       </div>
                                       <div class="home-latest-draf-card-head-content">
-                                        <h3>Brenden’s BBQ</h3>
-                                        <p>Last Save:  December 23, 2022 - 8:31 PM</p>
-                                      </div>
-                                      
+                                        <h3>{{$draft['event_name']}}</h3>
+                                        <p class="last-save" data-save-date="{{$draft['saved_date']}}"></p>
+                                      </div>                                      
                                   </div>
-                                  <div class="progress-bar__wrapper">
-                                    <progress id="progress-bar" value="75" max="100"></progress>
+                                  @php
+                                      if($draft['step']=="1"){
+                                          $color="red";
+                                          $percent="25";
+                                      }elseif ($draft['step']=="2") {
+                                          $color="yellow";
+                                          $percent="50";
+                                      }elseif ($draft['step']=="3") {
+                                          $color="green";
+                                          $percent="75"; 
+                                      }
+                                      else {
+                                          $color="blue";
+                                          $percent="99";         
+                                      }
+
+                                    $step_name="";
+                                      if($draft['step']=='1'){
+                                        $step_name="Design";
+                                      }elseif ($draft['step']=='2') {
+                                        $step_name="Event Details";
+                                      }elseif ($draft['step']=='3') {
+                                        $step_name="Guests";
+                                      }elseif ($draft['step']=='4') {
+                                        $step_name="Event Settings";
+                                      }
+                              @endphp
+                                  <div class="progress-bar__wrapper {{$color}}">
+                                    <progress id="progress-bar" value="{{$percent}}" max="100"></progress>
+                                    <div class="progress-bar-fill"></div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4>3/4 Steps - Guest</h4>
-                                        <label class="progress-bar__value" htmlfor="progress-bar"> 75%</label>
-                                        <p><span class="prograsbar-hosting">Hosting</span><span class="prograsbar-pro">Pro</span></p>
+                                        <h4>{{$draft['step']}}/4 Steps - {{$step_name}}</h4>
+
+                                        <label class="progress-bar__value" htmlfor="progress-bar"> {{$percent}}%</label>
+                                        {{-- <p><span class="prograsbar-hosting">Hosting</span><span class="prograsbar-pro">Pro</span></p> --}}
                                     </div>
                                   </div>
                                 </a>
