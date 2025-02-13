@@ -14,7 +14,7 @@ $getSocialLink = getSocialLink();
                     <div class="col-xl-8">
                         <div class="home-center-main">
                             <div class="home-center-content">
-                                <x-main_menu.home.profile :profileData="$profileData" />
+                                <x-main_menu.home.profile :profileData="$profileData" :draftEventArray="$draftEventArray" />
 
                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                             </div>

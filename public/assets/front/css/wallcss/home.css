@@ -327,6 +327,7 @@ main {
   font-size: 36px;
   line-height: 42.96px;
   color: var(--primary-black);
+  word-break: break-all;
 }
 
 .event-center-title button {
