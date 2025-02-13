@@ -2001,7 +2001,7 @@
             discardIfMultipleObjects(options);
             if (options.target && options.target.type === "textbox") {
                 console.log("clicked on text box");
-                eventData.desgin_selected = "";
+                //eventData.desgin_selected = "";
                 canvas.setActiveObject(options.target);
                 addIconsToTextbox(options.target);
             } else {
