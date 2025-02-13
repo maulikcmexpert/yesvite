@@ -739,14 +739,19 @@ today.setHours(0, 0, 0, 0);
                 $('#all-months-upcoming').css('display','none');
                 if(response.page=="upcoming"){
 
+                    $('.count_of_upcoming').text(response.total);
+
                     $('#tabbtn1').css('display','none');
                 }
 
                 if(response.page=="past"){
 
                     $('#tabbtn3').css('display','none');
+                    $('.count_of_past').text(response.total);
+
                 }
                 if(response.page=="draft"){
+                    $('.count_of_draft').text(response.total);
 
                     $('#tabbtn2').css('display','none');
                 }
@@ -814,6 +819,7 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus').html(response.view);
                 $('#tabbtn1').text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
+                $('.count_of_upcoming').text(response.total);
 
             }else{
                 $('#scrollStatus').html('');
@@ -862,7 +868,8 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus3').html(response.view);
                 $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
-                
+                $('.count_of_past').text(response.total);
+
                 // $('.loader').css('display','none');    
 
             }else{

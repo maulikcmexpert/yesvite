@@ -46,23 +46,23 @@
                                     </button> --}}
                                     @if($from_page!=""||$from_page!=null)
                                       <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
-                                        Upcoming <span class="d-sm-flex d-none">{{count($eventList)}}</span> <span class="d-sm-none d-flex">({{count($eventList)}})</span>
+                                        Upcoming <span class="d-sm-flex d-none count_of_upcoming">{{count($eventList)}}</span> <span class="d-sm-none d-flex count_of_upcoming">({{count($eventList)}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
-                                        Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
+                                        Drafts <span class="d-sm-flex d-none count_of_draft">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex count_of_draft">({{$filter['total_draft']}})</span>
                                     </button>
                                     <button class="nav-link event_nav {{ $show_tab == 'past' ? 'active' : '' }}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
-                                        Past <span class="d-sm-flex d-none">{{count($eventPasttList)}}</span> <span class="d-sm-none d-flex">({{count($eventPasttList)}})</span>
+                                        Past <span class="d-sm-flex d-none count_of_past">{{count($eventPasttList)}}</span> <span class="d-sm-none d-flex count_of_past">({{count($eventPasttList)}})</span>
                                     </button>
                                     @else
                                       <button class="nav-link event_nav {{ $show_tab == 'upcoming' ? 'active' : '' }} {{ $show_tab == "" ? 'active' : '' }}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
-                                        Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
+                                        Upcoming <span class="d-sm-flex d-none count_of_upcoming">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex count_of_upcoming">({{$filter['total_upcoming']}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
-                                        Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
+                                        Drafts <span class="d-sm-flex d-none count_of_draft">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex count_of_draft">({{$filter['total_draft']}})</span>
                                     </button>
                                     <button class="nav-link event_nav {{ $show_tab == 'past' ? 'active' : '' }}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
-                                        Past <span class="d-sm-flex d-none">{{$filter['past_event']}}</span> <span class="d-sm-none d-flex">({{$filter['past_event']}})</span>
+                                        Past <span class="d-sm-flex d-none count_of_past">{{$filter['past_event']}}</span> <span class="d-sm-none d-flex count_of_past">({{$filter['past_event']}})</span>
                                     </button>
                                     @endif
                                     </div>
