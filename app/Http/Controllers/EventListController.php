@@ -282,9 +282,9 @@ class EventListController extends BaseController
         }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
         
         if($page=="past"){
-            dd($page,$date);
             $usercreatedAllPastEventList->where('start_date', $date);
         }else{
+            dd($page,$date);
             $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
         }
         $usercreatedAllPastEventList->where('is_draft_save', '0');
