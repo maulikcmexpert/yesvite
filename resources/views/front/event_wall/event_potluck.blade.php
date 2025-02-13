@@ -326,7 +326,7 @@
                                                                 <span
                                                                     class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                     style="color: rgb(192, 52, 52);">
-                                                                    <svg width="14" height="14"
+                                                                    <svg width="14" height="14" style="width: 15px;height:15px;"
                                                                         viewBox="0 0 14 14" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                         <path
