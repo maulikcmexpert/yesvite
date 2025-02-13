@@ -33,13 +33,13 @@
                             <div class="event-center-tabs-main all-events-center-tabs">
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link event_nav {{$show_tab}}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                    <button class="nav-link event_nav" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
                                         Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
                                         Drafts <span class="d-sm-flex d-none">{{$filter['total_draft']}}</span> <span class="d-sm-none d-flex">({{$filter['total_draft']}})</span>
                                     </button>
-                                    <button class="nav-link event_nav" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
+                                    <button class="nav-link event_nav {{$show_tab}}" data-page="past" id="nav-past-tab" data-bs-toggle="tab" data-bs-target="#nav-past" type="button" role="tab" aria-controls="nav-past" aria-selected="false" tabindex="-1">
                                         Past <span class="d-sm-flex d-none">{{$filter['past_event']}}</span> <span class="d-sm-none d-flex">({{$filter['past_event']}})</span>
                                     </button>
                                     </div>
@@ -47,8 +47,17 @@
 
                                 <!-- ===tab-content-start=== -->
                                 <div class="tab-content" id="nav-tabContent">
+                                            @php
+                                            $show="";
+                                      if( $from_page=="past"){
+                                        $show="active show";
+                                      }
+                                      @endphp
+                        
                                         <!-- ===tab-1-start=== -->
+                                        <div class="tab-pane fade {{ $show == 'upcoming' ? 'active' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                                         <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
+                                        </div>
 
                                         <!-- ===tab-1-end=== -->
 
@@ -57,7 +66,11 @@
                                         <!-- ===tab-2-end=== -->
 
                                         <!-- ===tab-3-start=== -->
+                                       
+                                        <div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
                                         <x-main_menu.events.event_past :eventPasttList="$eventPasttList" :from_page="$from_page" />
+                                        </div>
+
                                         <!-- ===tab-3-end=== -->
                                 </div>
                                 <!-- ===tab-content-end=== -->

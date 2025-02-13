@@ -474,8 +474,8 @@
             </div>
 
             <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn save-btn">Save</button>
+                <button class="cmn-btn edit-text-reset reset-btn">Reset</button>
+                <button class="cmn-btn edit-text-save save-btn">Save</button>
             </div>
         </div>
 
@@ -513,8 +513,8 @@
             <input id="color-picker" type="color" value="#276cb8" />
 
             <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn reset-btn color-reset">Reset</button>
+                <button class="cmn-btn color-save color-save">Save</button>
             </div>
         </div>
 
@@ -688,8 +688,8 @@
 
 
             <div class="footer-buttons">
-                <button class="cmn-btn reset-btn">Reset</button>
-                <button class="cmn-btn">Save</button>
+                <button class="cmn-btn reset-btn formate-text-reset">Reset</button>
+                <button class="cmn-btn formate-text-save">Save</button>
             </div>
         </div>
 
