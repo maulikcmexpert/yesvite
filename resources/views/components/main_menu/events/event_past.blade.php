@@ -1,4 +1,5 @@
 @php
+dd($from_page);
  $show="";
   if( $from_page=="past"){
     $show="active show";
