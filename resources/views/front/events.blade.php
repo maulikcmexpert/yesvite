@@ -55,7 +55,9 @@
                                       @endphp
                         
                                         <!-- ===tab-1-start=== -->
+                                        <div class="tab-pane fade {{ $show == 'upcoming' ? 'active' : '' }}" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
                                         <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
+                                        </div>
 
                                         <!-- ===tab-1-end=== -->
 
