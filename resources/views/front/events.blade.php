@@ -1,4 +1,4 @@
-{{-- {{dd($filter)}} --}}
+{{dd($from_page)}}
 
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
@@ -24,10 +24,17 @@
                                     </svg>
                                 </span>
                             </div>
+                            <input type="hidden" value="{{$from_page}}" id="already_selected_date"/>
+                            @php
+                            $show_tab="";
+                                if($from_page=="past"){
+                                  $show_tab="active";
+                                }
+                            @endphp
                             <div class="event-center-tabs-main all-events-center-tabs">
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link event_nav active" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
+                                    <button class="nav-link event_nav {{$show_tab}}" id="nav-upcoming-tab" data-page="upcoming" data-bs-toggle="tab" data-bs-target="#nav-upcoming" type="button" role="tab" aria-controls="nav-upcoming" aria-selected="true">
                                         Upcoming <span class="d-sm-flex d-none">{{$filter['total_upcoming']}}</span> <span class="d-sm-none d-flex">({{$filter['total_upcoming']}})</span>
                                     </button>
                                     <button class="nav-link event_nav" data-page="draft" id="nav-drafts-tab" onclick="sticky_relocate1()" data-bs-toggle="tab" data-bs-target="#nav-drafts" type="button" role="tab" aria-controls="nav-drafts" aria-selected="false" tabindex="-1">
@@ -42,15 +49,15 @@
                                 <!-- ===tab-content-start=== -->
                                 <div class="tab-content" id="nav-tabContent">
                                         <!-- ===tab-1-start=== -->
-                                        <x-main_menu.events.event_upcoming :eventList="$eventList" />
+                                        <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
                                         <!-- ===tab-1-end=== -->
 
                                         <!-- ===tab-2-start=== -->
-                                        <x-main_menu.events.event_draft :eventDraftdata="$eventDraftdata" />
+                                        <x-main_menu.events.event_draft :eventDraftdata="$eventDraftdata" :from_page="$from_page" />
                                         <!-- ===tab-2-end=== -->
 
                                         <!-- ===tab-3-start=== -->
-                                        <x-main_menu.events.event_past :eventPasttList="$eventPasttList" />
+                                        <x-main_menu.events.event_past :eventPasttList="$eventPasttList" :from_page="$from_page" />
                                         <!-- ===tab-3-end=== -->
                                 </div>
                                 <!-- ===tab-content-end=== -->

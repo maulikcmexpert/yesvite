@@ -77,7 +77,7 @@ var offset1 = 0;
 var offset2 = 0;
 var offset3 = 0;
 var offset4 = 0;
-
+var $selected_by_date_page=$('#already_selected_date').val();
 
 var page = '';
 var busy=false;
@@ -188,44 +188,46 @@ $('#scrollStatus2').scroll(function () {
     }
 });
 
-$('#scrollStatus3').scroll(function () {
-    // if (busy3) return; 
-    if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
-
-    var scrollTop = $(this).scrollTop(); 
-    var scrollHeight = $(this)[0].scrollHeight; 
-    var elementHeight = $(this).height();
-    if (scrollTop + elementHeight >= scrollHeight-2) {
-        busy3 = true;
-        offset3 += limit;
-        var current_month3="";
-        $('.latest_month_past').each(function () { 
-            current_month3=$(this).val();
-        });
-        $('.loader').css('display','flex');    
-
-        $.ajax({
-            url: `${base_url}fetch_past_event`,
-            type: 'GET',
-            data: { limit: limit, offset: offset3,current_month:current_month3},
-            success: function (response) {
-                if (response.view && response.view!="") {
-                    $('#scrollStatus3').append(response.view);
+if($selected_by_date_page==""||$selected_by_date_page==null){
+    $('#scrollStatus3').scroll(function () {
+        // if (busy3) return; 
+        if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
+    
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+        if (scrollTop + elementHeight >= scrollHeight-2) {
+            busy3 = true;
+            offset3 += limit;
+            var current_month3="";
+            $('.latest_month_past').each(function () { 
+                current_month3=$(this).val();
+            });
+            $('.loader').css('display','flex');    
+    
+            $.ajax({
+                url: `${base_url}fetch_past_event`,
+                type: 'GET',
+                data: { limit: limit, offset: offset3,current_month:current_month3},
+                success: function (response) {
+                    if (response.view && response.view!="") {
+                        $('#scrollStatus3').append(response.view);
+                        busy3 = false;
+                    }else{
+                        $('.loader').css('display', 'none');
+                        return;  
+                    }
+                    $('.loader').css('display','none');    
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching events:', error);
                     busy3 = false;
-                }else{
-                    $('.loader').css('display', 'none');
-                    return;  
+                    $('.loader').css('display','none');    
                 }
-                $('.loader').css('display','none');    
-            },
-            error: function (xhr, status, error) {
-                console.error('Error fetching events:', error);
-                busy3 = false;
-                $('.loader').css('display','none');    
-            }
-        });
-    }
-});
+            });
+        }
+    });
+}
 
 $('#all-months-upcoming').css('display','block');
 
