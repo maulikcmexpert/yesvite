@@ -24,6 +24,7 @@
                                     </svg>
                                 </span>
                             </div>
+                            <input type="hidden" value="{{$from_page}}" id="already_selected_date"/>
                             <div class="event-center-tabs-main all-events-center-tabs">
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">

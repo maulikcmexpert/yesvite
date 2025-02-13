@@ -234,7 +234,7 @@ Route::middleware('checkUserExist')->group(function () {
 
 
     Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
-    Route::get('event_lists/{date?}/{page?}',  [EventListController::class, 'index'])->name('event.event_lists');
+    Route::get('event_lists/{selected_date?}/{from_page?}',  [EventListController::class, 'index'])->name('event.event_lists');
     Route::get('fetch_past_event',  [EventListController::class, 'fetchPastEvents'])->name('fetch_past_event');
     Route::get('fetch_draft_event',  [EventListController::class, 'fetchDraftEvents'])->name('fetch_draft_event');
     Route::get('fetch_upcoming_event',  [EventListController::class, 'fetchUpcomingEvents'])->name('fetch_upcoming_event');
