@@ -66,6 +66,7 @@ $(document).on('click','#confirm_cancel_event_btn',function (event) {
     });
     
 })
+$('#home_loader').css('display','none');    
 
 var base_url=$('#base_url').val();
 var busy1 = false;
@@ -650,6 +651,8 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
+    $('#home_loader').css('display','flex');    
+
     var current_page=$('#current_page').val();
     var fromhome="";
     var search_date=$(this).data('date');
