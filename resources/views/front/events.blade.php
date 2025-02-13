@@ -48,7 +48,6 @@
                                 <!-- ===tab-content-start=== -->
                                 <div class="tab-content" id="nav-tabContent">
                                         <!-- ===tab-1-start=== -->
-                                        {{dd($from_page);}}
                                         <x-main_menu.events.event_upcoming :eventList="$eventList" :from_page="$from_page" />
 
                                         <!-- ===tab-1-end=== -->
