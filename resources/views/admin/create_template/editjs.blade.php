@@ -2942,8 +2942,8 @@
         // Update the range slider with the original value
         $("#letterSpacingRange").val(charSpacing);
 
-        $("#fontSizeInput").val(target.fontSize.toFixed(0));
-        $("#fontSizeRange").val(target.fontSize.toFixed(0));
+        $("#fontSizeInput").val(Number(target.fontSize).toFixed(0));
+        $("#fontSizeRange").val(Number(target.fontSize).toFixed(0));
         // $("#letterSpacingInput").val(target.charSpacing);
         // $("#letterSpacingRange").val(target.charSpacing);
         $("#lineHeightInput").val(target.lineHeight);
