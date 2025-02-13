@@ -71,83 +71,11 @@ $(function () {
 });
 
 // ======== potluck-circluler-process
-var chartData = document.getElementById("chartData");
-if (chartData) {
-    var spoken_for = parseInt(chartData.getAttribute("data-spoken_for"));
-    var missing_still = parseInt(chartData.getAttribute("data-missing-still"));
-    var potluck_item = parseInt(chartData.getAttribute("data-potluck-item"));
-
-    var options = {
-        series: [spoken_for, missing_still],
-        labels: ["Spoken For", "Missing Still"],
-        chart: {
-            width: 350,
-            type: "donut",
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        total: {
-                            show: true,
-                            label: "Potluck Items",
-                            color: "#0f172a",
-                            fontSize: "18px",
-                            fontFamily: "SFProDisplay-Regular",
-                            formatter: function (w) {
-                                return `${potluck_item}`;
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        colors: [ "#0caf60","#ff3b53"],
-        responsive: [
-            {
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 270,
-                    },
-                    legend: {
-                        show: true,
-                    },
-                },
-            },
-        ],
-        legend: {
-            position: "bottom",
-            horizontalAlign: "left",
-            offsetY: 0,
-            fontSize: "14px",
-            width: 215,
-            fontFamily: "SFProDisplay-Regular",
-            fontWeight: "500",
-            formatter: function (seriesName, opts) {
-                return (
-                    seriesName +
-                    '<span style="margin-left: 10px; color: #000;">' +
-                    opts.w.globals.series[opts.seriesIndex] +
-                    "</span>"
-                );
-            },
-        },
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-}
-
 // var chartData = document.getElementById("chartData");
 // if (chartData) {
-//     var spoken_for = Number(chartData.getAttribute("data-spoken_for")) || 0;
-//     var missing_still = Number(chartData.getAttribute("data-missing-still")) || 0;
-//     var potluck_item = Number(chartData.getAttribute("data-potluck-item")) || 0;
+//     var spoken_for = parseInt(chartData.getAttribute("data-spoken_for"));
+//     var missing_still = parseInt(chartData.getAttribute("data-missing-still"));
+//     var potluck_item = parseInt(chartData.getAttribute("data-potluck-item"));
 
 //     var options = {
 //         series: [spoken_for, missing_still],
@@ -169,22 +97,22 @@ if (chartData) {
 //                             label: "Potluck Items",
 //                             color: "#0f172a",
 //                             fontSize: "18px",
-//                             fontFamily: "Arial, sans-serif",
+//                             fontFamily: "SFProDisplay-Regular",
 //                             formatter: function (w) {
-//                                 return potluck_item.toString();
+//                                 return `${potluck_item}`;
 //                             },
 //                         },
 //                     },
 //                 },
 //             },
 //         },
-//         colors: ["#0caf60", "#ff3b53"],
+//         colors: [ "#0caf60","#ff3b53"],
 //         responsive: [
 //             {
 //                 breakpoint: 480,
 //                 options: {
 //                     chart: {
-//                         width: "100%",
+//                         width: 270,
 //                     },
 //                     legend: {
 //                         show: true,
@@ -197,13 +125,16 @@ if (chartData) {
 //             horizontalAlign: "left",
 //             offsetY: 0,
 //             fontSize: "14px",
-//             fontFamily: "Arial, sans-serif",
-//             fontWeight: "normal",
+//             width: 215,
+//             fontFamily: "SFProDisplay-Regular",
+//             fontWeight: "500",
 //             formatter: function (seriesName, opts) {
-//                 return `<div style="width: 100%; display: flex;align-items: center;justify-content: space-between;">
-//                     <span style="display: inline-block;">${seriesName}</span>
-//                     <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
-//                 </div>`;
+//                 return (
+//                     seriesName +
+//                     '<span style="margin-left: 10px; color: #000;">' +
+//                     opts.w.globals.series[opts.seriesIndex] +
+//                     "</span>"
+//                 );
 //             },
 //         },
 //     };
@@ -211,3 +142,72 @@ if (chartData) {
 //     var chart = new ApexCharts(document.querySelector("#chart"), options);
 //     chart.render();
 // }
+
+var chartData = document.getElementById("chartData");
+if (chartData) {
+    var spoken_for = Number(chartData.getAttribute("data-spoken_for")) || 0;
+    var missing_still = Number(chartData.getAttribute("data-missing-still")) || 0;
+    var potluck_item = Number(chartData.getAttribute("data-potluck-item")) || 0;
+
+    var options = {
+        series: [spoken_for, missing_still],
+        labels: ["Spoken For", "Missing Still"],
+        chart: {
+            width: 350,
+            type: "donut",
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    labels: {
+                        show: true,
+                        total: {
+                            show: true,
+                            label: "Potluck Items",
+                            color: "#0f172a",
+                            fontSize: "18px",
+                            fontFamily: "Arial, sans-serif",
+                            formatter: function (w) {
+                                return potluck_item.toString();
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        colors: ["#0caf60", "#ff3b53"],
+        responsive: [
+            {
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: "100%",
+                    },
+                    legend: {
+                        show: true,
+                    },
+                },
+            },
+        ],
+        legend: {
+            position: "bottom",
+            horizontalAlign: "left",
+            offsetY: 0,
+            fontSize: "14px",
+            fontFamily: "Arial, sans-serif",
+            fontWeight: "normal",
+            formatter: function (seriesName, opts) {
+                return `<div style="width: 100%; display: flex;align-items: center;justify-content: space-between;">
+                    <span style="display: inline-block;">${seriesName}</span>
+                    <span style="margin-left: 10px; color: #000;">${opts.w.globals.series[opts.seriesIndex]}</span>
+                </div>`;
+            },
+        },
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+}
