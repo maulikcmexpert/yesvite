@@ -783,6 +783,49 @@ today.setHours(0, 0, 0, 0);
 }, 750);
   })
 
+
+  $(document).on('click','#nav-upcoming-tab',function(){
+    var searchValue = $('#search_upcoming_event').val();
+    var current_month="";
+
+    $('.latest_month').each(function () { 
+        current_month=$(this).val();
+    });
+    clearTimeout(search_user_ajax_timer);
+
+    search_user_ajax_timer = setTimeout(function () {
+        $('#loader').css('display','flex');    
+    $.ajax({
+        url: `${base_url}search_upcoming_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+            if (response.view) {
+                $('#scrollStatus').html('');
+                $('#scrollStatus').html(response.view);
+                $('#tabbtn1').text(response.last_month);
+                $('#all-months-upcoming').css('display','block');
+
+            }else{
+                $('#scrollStatus').html('');
+                $('#scrollStatus').html('No Data Found');
+                $('#all-months-upcoming').css('display','none');
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('#loader').hide();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            $('#loader').hide();
+        },
+        complete: function () {
+            $('.loader_up').css('display','none');    
+           }
+    });
+}, 750);
+  });
 $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');
