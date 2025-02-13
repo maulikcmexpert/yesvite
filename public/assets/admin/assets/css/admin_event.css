@@ -1425,6 +1425,7 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 .image-edit-inner-img img {
     width: 100% !important;
     height: 100% !important;
+    object-fit: cover;
 }
 
 .toast.toast-error{
