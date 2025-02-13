@@ -1701,25 +1701,35 @@
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
-            console.log("updateColorPicker")
-            const activeObject = canvas.getActiveObject();
-            const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+        const activeObject = canvas.getActiveObject();
+        const selectedColorType = document.querySelector(
+            'input[name="colorType"]:checked'
+        ).value;
 
-            if (activeObject && activeObject.type === 'textbox') {
-                console.log({
-                    selectedColorType
-                })
-                if (selectedColorType === 'font') {
-                    $('#color-picker').spectrum('set', activeObject.fill || '#0a0b0a'); // Set font color in picker
-                } else if (selectedColorType === 'background') {
-                    const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-                    $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
-                }
-
+        if (activeObject && activeObject.type === "textbox") {
+            if (selectedColorType === "font") {
+                console.log("colorpicker update");
+                $("#color-picker").spectrum(
+                    "set",
+                    activeObject.fill || "#000000"
+                ); // Set font color in picker
+            } else if (selectedColorType === "background") {
+                const bgColor =
+                    activeObject.backgroundColor || "rgba(0, 0, 0, 0)"; // Default to transparent background
+                $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
+            //console.log(selectedColorType);
+            //console.log(activeObject.type);
+            //console.log(activeObject.fill);
+            //console.log(activeObject.backgroundColor);
 
+            const activeObjec = canvas.getActiveObject();
+
+            //console.log(activeObjec.fill);
+            //console.log(activeObjec.backgroundColor);
         }
+    }
 
         // Update color picker when object selection changes
         canvas.on('selection:created', updateColorPicker);
