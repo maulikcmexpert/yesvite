@@ -2387,6 +2387,7 @@
 
                 canvas.renderAll(); // Re-render canvas after change
             }
+            addIconsToTextbox(activeObject);
         }
 
 
@@ -2967,4 +2968,75 @@
             $(".capitalize-btn").addClass("activated");
         }
     }
+
+    $(document).on("click", ".formate-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+
+        console.log(dbJson);
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                activeObject.set({
+                    fontWeight: element.fontWeight || "",
+                    fontStyle: element.fontStyle || "",
+                    underline: element.underline || false,
+                    linethrough: element.linethrough || false,
+                    fontFamily: element.fontFamily || "Times New Roman",
+                    fontSize: element.fontSize || 20,
+                    textAlign: element.textAlign || "left",
+                    lineHeight: element.lineHeight || 1,
+                    text: element.text || activeObject.text,
+                });
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fontWeight: "",
+                fontStyle: "",
+                underline: false,
+                linethrough: false,
+                fontFamily: "Times New Roman",
+                fontSize: 20,
+                textAlign: "left",
+                lineHeight: 1,
+                text: activeObject.text.toLowerCase(),
+            });
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".color-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                console.log(element.fill);
+                let selectedColor = element.fill || "#000000";
+                console.log("color-picker");
+                $("#color-picker").spectrum("set", selectedColor || "#000000");
+
+                activeObject.set("fill", selectedColor);
+            }
+        });
+        if (seted == 0) {
+            $("#color-picker").spectrum("set", "#000000");
+
+            activeObject.set("fill", "#000000");
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
 </script>
