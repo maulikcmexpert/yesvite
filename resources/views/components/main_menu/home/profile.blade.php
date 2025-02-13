@@ -1,4 +1,4 @@
-
+{{dd($draftEventArray);}}
 <div class="home-center-content-head user-name-title">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
 
