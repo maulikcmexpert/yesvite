@@ -1149,40 +1149,65 @@ $(document).ready(function () {
 //     minuteIncrement: 15, // Set 15-minute intervals
 // });
 
+// function rsvp_by_date(start_time) {
+//     var adjustedStartTime = moment(start_time).subtract(1, "days");
+
+//     $("#rsvp-by-date").daterangepicker(
+//         {
+//             singleDatePicker: true,
+//             autoUpdateInput: false,
+//             //   showDropdowns: true,
+//             minYear: 2024,
+//             maxDate: adjustedStartTime,
+//             minDate: moment(),
+//             minDate: moment().add(0, "days"),
+//             locale: {
+//                 format: "MM-DD-YYYY", // Set the desired format
+//             },
+//             maxYear: parseInt(moment().format("YYYY"), 10),
+//         },
+//         function (start, end, label) {
+//             //   var years = moment().diff(start, 'years');
+//             //   alert("You are " + years + " years old!");
+//         }
+//     );
+//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
+//         $("#rsvp-by-date").next().addClass("floatingfocus");
+//     });
+//     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
+//         // if (picker.startDate.isValid()) {
+//         //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+//         //     $("#rsvp-by-date").next().addClass("floatingfocus");
+//         // }
+//     });
+// }
+   
+//only rsvp_date by prakash
 function rsvp_by_date(start_time) {
-    var adjustedStartTime = moment(start_time).subtract(1, "days");
+    var adjustedStartTime = moment(start_time, "MM-DD-YYYY").subtract(1, "days").format("MM-DD-YYYY");
 
     $("#rsvp-by-date").daterangepicker(
         {
             singleDatePicker: true,
             autoUpdateInput: false,
-            //   showDropdowns: true,
             minYear: 2024,
-            maxDate: adjustedStartTime,
-            minDate: moment(),
-            minDate: moment().add(0, "days"),
+            minDate: moment().format("MM-DD-YYYY"), // Ensure format
+            maxDate: adjustedStartTime, // Use formatted date
             locale: {
-                format: "MM-DD-YYYY", // Set the desired format
+                format: "MM-DD-YYYY",
             },
             maxYear: parseInt(moment().format("YYYY"), 10),
-        },
-        function (start, end, label) {
-            //   var years = moment().diff(start, 'years');
-            //   alert("You are " + years + " years old!");
         }
     );
+
     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
         $(this).val(picker.startDate.format("MM-DD-YYYY"));
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
-    $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-        // if (picker.startDate.isValid()) {
-        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
-        //     $("#rsvp-by-date").next().addClass("floatingfocus");
-        // }
-    });
 }
-    
+
+//only rsvp_date by prakash
 $(function () {
     var current_event_date = $("#event-date").val();
 
