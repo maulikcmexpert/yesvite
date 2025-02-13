@@ -2786,7 +2786,10 @@
             $(".design-sidebar").addClass('d-none')
             $(".design-sidebar_" + designId).removeClass('d-none')
             $('.close-btn').attr('data-id', "design-sidebar_" + designId);
+            $(".design-sidebar-action").removeClass("activated");
+            $(this).addClass("activated");
         }
+        
     })
 
     $(document).on("click", ".close-btn", function() {
