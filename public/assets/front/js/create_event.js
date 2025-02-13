@@ -3665,7 +3665,7 @@ function convertTo24Hour(timeStr) {
 }
 
 
-$("#saveGiftRegistryButton").click(function () {
+$ ("#saveGiftRegistryButton").click(function () {
     // e.preventDefault();
     // var categoryName = $("#categoryName").val().trim();
     // var categoryQuantity = parseInt($("#categoryquantity").val().trim());
