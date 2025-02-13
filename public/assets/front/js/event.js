@@ -899,6 +899,50 @@ today.setHours(0, 0, 0, 0);
         }, 750);
 
   });
+  $(document).on('click','#nav-drafts-tab',function(){
+    var searchValue = $(this).val();
+    var current_month="";
+
+    $('.latest_month_draft').each(function () { 
+        current_month=$(this).val();
+    });
+    $('#home_loader').css('display','flex');    
+
+    clearTimeout(search_user_ajax_timer);
+    search_user_ajax_timer = setTimeout(function () {
+    $.ajax({
+        url: `${base_url}search_draft_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+
+            if (response.view) {
+                $('#scrollStatus2').html('');
+                $('#scrollStatus2').html(response.view);
+                $('#tabbtn2').text(response.last_month);
+
+            }else{
+                $('#scrollStatus2').html('');
+                $('#scrollStatus2').html('No Data Found');
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('#home_loader').hide();
+            $('.all-events-month-show').css('display','flex');
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            $('#home_loader').hide();
+        },
+        complete: function () {
+            $('.loader_up').css('display','none');    
+           }
+    })
+ }, 750);
+
+  });
 $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');
