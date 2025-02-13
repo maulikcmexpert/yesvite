@@ -707,7 +707,8 @@ today.setHours(0, 0, 0, 0);
 
     }
     if(fromhome=="1"){
-        window.location.href=base_url+`event_lists/${search_date}/${page}`
+        window.location.href=base_url+`event_lists/${search_date}/${page}`;
+        return;
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   
