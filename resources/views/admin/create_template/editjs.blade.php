@@ -2930,7 +2930,7 @@
 
         // const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
         const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
-
+        console.log({charSpacing})
         const percentageValue = (charSpacing / 500) * 100;
 
         // Update the input box with the percentage value
