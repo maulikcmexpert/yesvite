@@ -303,10 +303,12 @@
                                             }else{
                                                 $open_modal="";
                                             }
-
+                                            if($user_id==$guest_data['id']){
+                                                $self_status=$guest_data['id'];
+                                            }
                                             @endphp
                                              
-@if($is_host == "1" || $user_id==$guest_data['id'] ||($is_host == "0" && ($guest_data['rsvp_status'] != "" && $guest_data['rsvp_status'] != null)))
+@if($is_host == "1" ||  ($user_id==$guest_data['id'] && ($guest_data['rsvp_status'] != "" && $guest_data['rsvp_status'] != null && isset($self_status))))
                                                 <div class="guest-user-box">
                                                 <div class="guest-list-data">
                                                     <div class="guest-img">
