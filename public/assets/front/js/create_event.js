@@ -3546,7 +3546,6 @@ $(document).on("click", "#save_activity_schedule", function () {
     var end_time = $("#ac-end-time").val() || "";
 
     let activityendtime;
-    // checkEndTimes();
     $("#start-time").val(start_time);
     $("#end-time").val(end_time);
     var isValid = 0;
@@ -3558,69 +3557,40 @@ $(document).on("click", "#save_activity_schedule", function () {
         var dataId = $(this).data("id");
         activities[dataId] = [];
         var previousEndTime = null;
-        // showAlert = false;
         isendtime = isendtime + 1;
+
         var activityWrappers = $(this).find(".activity-main-wrp");
         if (activityWrappers.length === 0) {
-            activityendtime = null; // Set to null if no .activity-main-wrp found
+            activityendtime = null;
         } else {
             $(this)
                 .find(".activity-main-wrp")
                 .each(function (index) {
                     istrue = istrue + 1;
                     var id = $(this).data("id");
-                    var description = $(this)
-                        .find('input[name="description[]"]')
-                        .val();
-                    var startTime = $(this)
-                        .find('input[name="activity-start-time[]"]')
-                        .val();
-                    var endTime = $(this)
-                        .find('input[name="activity-end-time[]"]')
-                        .val();
+                    var description = $(this).find('input[name="description[]"]').val();
+                    var startTime = $(this).find('input[name="activity-start-time[]"]').val();
+                    var endTime = $(this).find('input[name="activity-end-time[]"]').val();
                     activityendtime = endTime;
 
                     $("#desc-error-" + id).text("");
                     $("#start-error-" + id).text("");
                     $("#end-error-" + id).text("");
 
-                    if (description == "") {
-                        $("#desc-error-" + id)
-                            .text("Description is required")
-                            .css("color", "red");
+                    if (!description) {
+                        $("#desc-error-" + id).text("Description is required").css("color", "red");
                         isValid++;
                     }
-                    $(this)
-                        .find('input[name="description[]"]')
-                        .on("input", function () {
-                            if ($(this).val() != "") {
-                                $("#desc-error-" + id).text("");
-                            }
-                        });
 
-                    if (startTime == "") {
+                    if (!startTime) {
                         $("#start-error-" + id).text("Start time is required");
                         isValid++;
                     }
-                    $(this)
-                        .find('input[name="activity-start-time[]"]')
-                        .on("change", function () {
-                            if ($(this).val() != "") {
-                                $("#start-error-" + id).text("");
-                            }
-                        });
 
-                    if (endTime == "") {
+                    if (!endTime) {
                         $("#end-error-" + id).text("End time is required");
                         isValid++;
                     }
-                    $(this)
-                        .find('input[name="activity-end-time[]"]')
-                        .on("change", function () {
-                            if ($(this).val() != "") {
-                                $("#end-error-" + id).text("");
-                            }
-                        });
 
                     var activity = {
                         activity: description,
@@ -3629,14 +3599,9 @@ $(document).on("click", "#save_activity_schedule", function () {
                     };
                     activities[dataId].push(activity);
 
-                    if (
-                        previousEndTime &&
-                        previousEndTime > startTime &&
-                        !showAlert
-                    ) {
+                    if (previousEndTime && convertTo24Hour(previousEndTime) > convertTo24Hour(startTime) && !showAlert) {
                         toastr.error("Please enter proper time");
                         showAlert = true;
-                        // return;
                     } else {
                         showAlert = false;
                     }
@@ -3645,38 +3610,25 @@ $(document).on("click", "#save_activity_schedule", function () {
         }
     });
 
-    if (showAlert == true) {
+    if (showAlert) {
         return;
     }
-    // if(istrue != isendtime ){
-    //     activityendtime =null;
-    // }
-    console.log({ activityendtime });
 
     if (activityendtime != null) {
         let lastendtime = convertTo24Hour(end_time);
         let lastScheduleEndtime = convertTo24Hour(activityendtime);
 
-        console.log(lastendtime);
-        console.log(lastScheduleEndtime);
-
         if (lastScheduleEndtime > lastendtime) {
-            isStartTime = 1;
             toastr.error("Please enter proper time");
             $("#end-time").val("");
             return;
         }
     }
 
-    if (isValid == 0) {
-        isStartTime = 0;
+    if (isValid === 0) {
         var total_activity_count = $(".event_all_activity_list").length;
         if (total_activity_count >= 1) {
-            // if (total_activities == 1) {
-            //     $(".step_1_activity").text(total_activities + " Activity");
-            // } else {
             $(".step_1_activity").text(total_activity_count + " Activities");
-            // }
         } else {
             $(".step_1_activity").html(
                 '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
@@ -3688,6 +3640,30 @@ $(document).on("click", "#save_activity_schedule", function () {
         eventData.activity = activities;
     }
 });
+
+/**
+ * Converts a 12-hour time format (HH:MM AM/PM) into 24-hour format.
+ * Handles Safari compatibility.
+ */
+function convertTo24Hour(timeStr) {
+    if (!timeStr) return null;
+
+    let [time, modifier] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":");
+
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
+
+    if (modifier && modifier.toLowerCase() === "pm" && hours !== 12) {
+        hours += 12;
+    } else if (modifier && modifier.toLowerCase() === "am" && hours === 12) {
+        hours = 0;
+    }
+
+    // Return in HH:MM format
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+}
+
 
 $("#saveGiftRegistryButton").click(function () {
     // e.preventDefault();
