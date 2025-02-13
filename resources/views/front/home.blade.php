@@ -48,6 +48,8 @@ $getSocialLink = getSocialLink();
                         <input type="hidden" id="startmonths" value="{{$startMonth}}"/>
                         <input type="hidden" id="diffmonth" value="{{$diffmonth}}"/>
                         <input type="hidden" id="calender_json" value="{{$events_calender_json}}"/>
+                        <input type="hidden" id="current_page" value="{{ (Request::segment(1)) }}"/>
+
 
 
                         <div class="home-main-right right-bar-menu-home">
