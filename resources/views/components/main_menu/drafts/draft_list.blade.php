@@ -43,7 +43,7 @@
                               <p class="last-save" data-save-date="{{$draft['saved_date']}}"></p>
 
                             </div>
-                            
+
                         </div>
                         @php
                         if($draft['step']=="1"){
@@ -54,11 +54,11 @@
                             $percent="50";
                         }elseif ($draft['step']=="3") {
                             $color="green";
-                            $percent="75"; 
+                            $percent="75";
                         }
                         else {
                             $color="blue";
-                            $percent="99";         
+                            $percent="99";
                         }
                     @endphp
                         <div class="progress-bar__wrapper {{$color}}">
@@ -83,7 +83,7 @@
                           </div>
                         </div>
                       </a>
-                    </div>                                    
+                    </div>
                     @endforeach
               </div>
           </div>
@@ -91,38 +91,48 @@
     </div>
   </div>
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const saveDates = document.querySelectorAll('.last-save');
+    document.addEventListener("DOMContentLoaded", function () {
+      const saveDates = document.querySelectorAll('.last-save');
 
-  saveDates.forEach(function (saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date');
-    const losAngelesTime = new Date(savedDate + ' GMT-0800'); // Adjusting for LA timezone
+      saveDates.forEach(function (saveDateElement) {
+        const savedDate = saveDateElement.getAttribute('data-save-date');
 
-    // Format the date according to the required format
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true
-    };
+        if (!savedDate) {
+          console.error('Missing date attribute');
+          return;
+        }
 
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(losAngelesTime);
+        // Convert to ISO format if necessary
+        const dateObject = new Date(savedDate.includes('T') ? savedDate : savedDate.replace(" ", "T") + 'Z');
 
-    if (formattedDate) {
-      // Ensure AM/PM is uppercase by replacing only the AM/PM part
-      // const finalDate = formattedDate.replace(' at ', ' - ');
-      // const finalDate = formattedDate.replace(/\b(am|pm)\b/i, match => match.toUpperCase());
-      const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
-      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-    } else {
-      console.error('Date formatting failed:', savedDate);
-    }
-  });
-});
-</script>
+        if (isNaN(dateObject.getTime())) {
+          console.error('Invalid date format:', savedDate);
+          return;
+        }
 
+        // Adjust for Los Angeles Time Zone (PST/PDT)
+        const options = {
+          timeZone: 'America/Los_Angeles', // Ensures conversion to LA timezone
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        };
+
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+
+        if (formattedDate) {
+          const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+          saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+        } else {
+          console.error('Date formatting failed:', savedDate);
+        }
+      });
+    });
+
+    </script>
 
 
 
