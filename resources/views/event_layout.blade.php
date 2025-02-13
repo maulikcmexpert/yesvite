@@ -76,6 +76,7 @@
 </head>
 
 <body>
+<main>
     <!-- <div id="loader" style="display: none;">
         <img src="{{asset('assets/front/loader.gif')}}" alt="loader" style="width:146px;height:146px;z-index:1000">
     </div> -->
@@ -88,7 +89,7 @@
     @include($page)
    
 
-   
+</main>
     {{-- <x-front.footer :js="$js ?? []" /> --}}
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
 

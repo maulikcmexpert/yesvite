@@ -948,12 +948,7 @@ button:focus{
     40% { transform: translateY(-20px); }
 }
 
-@media only screen and (min-width: 1400px){
-    .container{
-        max-width: calc(100% - 10%) !important;
-        margin: 0px auto !important;
-    }
-}
+
 
 
 /* ======== Responsive ========= */

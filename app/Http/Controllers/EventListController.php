@@ -34,7 +34,7 @@ class EventListController extends BaseController
 
         $this->per_page = 10;
     }
-    public function index()
+    public function index($date = null, $page = null)
     {
         $user  = Auth::guard('web')->user();
         $eventList = [];
@@ -280,7 +280,13 @@ class EventListController extends BaseController
         $usercreatedAllPastEventList->with(['event_image' => function ($query) {
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
-        $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
+        
+        if($page=="past"){
+            dd($page,$date);
+            $usercreatedAllPastEventList->where('start_date', $date);
+        }else{
+            $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
+        }
         $usercreatedAllPastEventList->where('is_draft_save', '0');
 
         $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
@@ -292,6 +298,11 @@ class EventListController extends BaseController
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
+        if($page=="past"){
+            $invitedPastEventsList->where('start_date', $date);
+        }else{
+            $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
+        }
         $invitedPastEventsList->where('is_draft_save', '0');
 
         // $invitedPastEventsList->orderBy('start_date', 'ASC')->limit(10);
