@@ -737,7 +737,7 @@
             <label for="thankyou_templatename" id="template_name_error" class="common_error"></label>
             <input type="hidden" id="edit_template_id">
             <div class="input-form">
-                <input class="form-control" oninput="clearError(this)" type="number" id="thankyou_when_to_send"
+                <input class="form-control"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number" id="thankyou_when_to_send"
                     name="text2">
                 {{-- <label for="email" class="floating-label">When to send (Hours after event) <span>*</span></label> --}}
                 <label class="form-label input-field floating-label about-label">When to send (Hours
@@ -845,7 +845,7 @@
                                 </svg>
                             </a>
                             @endif
-                                
+
                             @elseif  ($eventDetail['isCohost'] == '1' || $eventDetail['isCopy']=!"")
                             <a href="#" class="close remove_co_host">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
@@ -2091,7 +2091,7 @@
                 @endif
 
 
-                {{-- <div class="category-main-dishesh"> 
+                {{-- <div class="category-main-dishesh">
                 <div class="category-list">
                     <div class="list-header">
                         <span class="me-1 list-sub-head">0</span>
@@ -2170,7 +2170,7 @@
                                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="#" class="me-3"> 
+                                            <a href="#" class="me-3">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2191,7 +2191,7 @@
                               </div>
                             </div>
                         </div>
- 
+
                     </div>
                 </div>
                 <a href="#" class="listing-arrow">
@@ -2202,7 +2202,7 @@
            </div> --}}
 
 
-                {{-- <div class="category-main-dishesh"> 
+                {{-- <div class="category-main-dishesh">
                 <div class="category-list">
                     <div class="list-header">
                         <span class="me-1 list-sub-head">7</span>
@@ -2275,7 +2275,7 @@
                                                 <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                             <div class="d-flex">
-                                                <a href="#" class="me-3"> 
+                                                <a href="#" class="me-3">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2335,7 +2335,7 @@
                                                 <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                             <div class="d-flex">
-                                                <a href="#" class="me-3"> 
+                                                <a href="#" class="me-3">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2395,7 +2395,7 @@
                                                 <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                             </div>
                                             <div class="d-flex">
-                                                <a href="#" class="me-3"> 
+                                                <a href="#" class="me-3">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2416,7 +2416,7 @@
                                 </div>
                             </div>
                         </div>
- 
+
                     </div>
                 </div>
                 <a href="#" class="listing-arrow">
@@ -2425,7 +2425,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="category-main-dishesh"> 
+            <div class="category-main-dishesh">
                 <div class="category-list">
                     <div class="list-header">
                         <span class="me-1 list-sub-head">5</span>
@@ -2525,7 +2525,7 @@
                                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="#" class="me-3"> 
+                                            <a href="#" class="me-3">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2580,7 +2580,7 @@
                                               <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                                           </div>
                                           <div class="d-flex">
-                                              <a href="#" class="me-3"> 
+                                              <a href="#" class="me-3">
                                                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <path d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                       <path d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2601,7 +2601,7 @@
                                 </div>
                               </div>
                         </div>
- 
+
                     </div>
                 </div>
                 <a href="#" class="listing-arrow">
@@ -2610,7 +2610,7 @@
                     </svg>
                 </a>
            </div>
-           <div class="category-main-dishesh"> 
+           <div class="category-main-dishesh">
             <div class="category-list">
                 <div class="list-header">
                     <span class="me-1 list-sub-head">0</span>
@@ -2625,7 +2625,7 @@
                             </svg>
                         </span>
                         <h6 class="me-3">7 Missing</h6> -->
- 
+
                         <a href="#" class="me-3">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.9998 0.166016C5.03067 0.166016 0.166504 5.03018 0.166504 10.9993C0.166504 16.9685 5.03067 21.8327 10.9998 21.8327C16.969 21.8327 21.8332 16.9685 21.8332 10.9993C21.8332 5.03018 16.969 0.166016 10.9998 0.166016ZM15.3332 11.8118H11.8123V15.3327C11.8123 15.7768 11.444 16.1452 10.9998 16.1452C10.5557 16.1452 10.1873 15.7768 10.1873 15.3327V11.8118H6.6665C6.22234 11.8118 5.854 11.4435 5.854 10.9993C5.854 10.5552 6.22234 10.1868 6.6665 10.1868H10.1873V6.66602C10.1873 6.22185 10.5557 5.85352 10.9998 5.85352C11.444 5.85352 11.8123 6.22185 11.8123 6.66602V10.1868H15.3332C15.7773 10.1868 16.1457 10.5552 16.1457 10.9993C16.1457 11.4435 15.7773 11.8118 15.3332 11.8118Z" fill="#F73C71"/>
@@ -2701,7 +2701,7 @@
                 </a>
                 <h5>Add Item Under: Main Dishes</h5>
             </div>
- 
+
             <button class="close-btn" onclick="toggleSidebar()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3033,7 +3033,7 @@
                     @foreach ($yesvite_user as $user)
                         @php
                             $i++;
-                        @endphp 
+                        @endphp
                         <div class="users-data">
                             <div class="d-flex align-items-start">
                                 <div class="contact-img">
