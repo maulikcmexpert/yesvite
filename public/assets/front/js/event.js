@@ -787,6 +787,7 @@ today.setHours(0, 0, 0, 0);
   $(document).on('click','#nav-upcoming-tab',function(){
     var searchValue = $('#search_upcoming_event').val();
     var current_month="";
+    $('#home_loader').css('display','flex');    
 
     $('.latest_month').each(function () { 
         current_month=$(this).val();
@@ -794,7 +795,7 @@ today.setHours(0, 0, 0, 0);
     clearTimeout(search_user_ajax_timer);
 
     search_user_ajax_timer = setTimeout(function () {
-        $('#loader').css('display','flex');    
+        // $('#home_loader').css('display','flex');    
     $.ajax({
         url: `${base_url}search_upcoming_event`,
         type: 'GET',
@@ -813,12 +814,12 @@ today.setHours(0, 0, 0, 0);
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
-            $('#loader').hide();
+            $('#home_loader').hide();
         },
         error: function (xhr, status, error) {
             console.error('Error fetching events:', error);
             busy = false;
-            $('#loader').hide();
+            $('#home_loader').hide();
         },
         complete: function () {
             $('.loader_up').css('display','none');    
