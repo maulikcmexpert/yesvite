@@ -416,7 +416,7 @@
             @endforeach
         </div>
 
-            </div> -->
+           
             <div class="footer-buttons">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn saveButton">Save</button>
