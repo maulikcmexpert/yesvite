@@ -662,17 +662,21 @@ $(document).on('click',".day",function () {
     var page=getActiveTabPage();
     if(page==undefined){
         const specificDate = new Date(search_date);
+        // const today = new Date();
         const today = new Date();
+
+// Reset the time of the today date to compare only the date part (ignoring time)
+today.setHours(0, 0, 0, 0);
         if (specificDate < today) {
            page="past";
            fromhome="1"
-          } else if(specificDate>=today) {
+          } else{
             page='upcoming';
             fromhome="1"
         }
     }
 
-    console.log(page);
+    console.log(search_date+' '+page);
    
     $('.latest_month').each(function () { 
         current_month=$(this).val();
@@ -700,7 +704,7 @@ $(document).on('click',".day",function () {
 
     }
     if(fromhome=="1"){
-        window.location.href=base_url+`event_lists/${search_date}/${page}`
+        // window.location.href=base_url+`event_lists/${search_date}/${page}`
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   
