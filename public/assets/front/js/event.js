@@ -754,6 +754,8 @@ today.setHours(0, 0, 0, 0);
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
             $('#loader').hide();
+            $('#home_loader').css('display','none');    
+
            
             var $textSpan = $('.responsive-text');
             var $iconSpan = $('.responsive-icon'); 
@@ -778,6 +780,8 @@ today.setHours(0, 0, 0, 0);
             console.error('Error fetching events:', error);
             busy = false;
             $('#loader').hide();
+            $('#home_loader').css('display','none');    
+
         },
         complete: function () {
             $('.loader_up').css('display','none');    
