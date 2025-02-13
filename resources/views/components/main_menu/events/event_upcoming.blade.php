@@ -1,4 +1,4 @@
-{{-- {{dd($eventList)}} --}}
+{{dd($from_page)}}
 <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
     <div class="all-events-searchbar-wrp">
       <form>
