@@ -255,11 +255,15 @@ $(document).on('input','#search_upcoming_event',function(){
                 $('#scrollStatus').html(response.view);
                 $('#tabbtn1').text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
+                $('.count_of_upcoming').text(response.total);
+
 
             }else{
                 $('#scrollStatus').html('');
                 $('#scrollStatus').html('No Data Found');
                 $('#all-months-upcoming').css('display','none');
+                $('.count_of_upcoming').text(response.total);
+
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
@@ -299,10 +303,13 @@ $(document).on('input','#search_draft_event',function(){
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html(response.view);
                 $('#tabbtn2').text(response.last_month);
+                $('.count_of_draft').text(response.total);
 
             }else{
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html('No Data Found');
+                $('.count_of_draft').text(response.total);
+
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
@@ -347,7 +354,8 @@ $(document).on('input','#search_past_event',function(e){
                 $('#scrollStatus3').html(response.view);
                 $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
-                
+                $('.count_of_past').text(response.total);
+
                 // $('.loader').css('display','none');    
 
             }else{
@@ -355,6 +363,7 @@ $(document).on('input','#search_past_event',function(e){
                 $('#scrollStatus3').html('');
                 $('#scrollStatus3').html('No Data Found');
                 $('#tabbtn3').css('display','none');
+                $('.count_of_past').text(response.total);
 
                 // $('.loader').css('display','none');    
             }
