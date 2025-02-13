@@ -34,9 +34,9 @@ class EventListController extends BaseController
 
         $this->per_page = 10;
     }
-    public function index(Request $request)
+    public function index($date = null, $page = null)
     {
-        // dd($request);
+        dd($date,$page);
         $user  = Auth::guard('web')->user();
         $eventList = [];
         // $pages = ($page != "") ? $page : 1;
