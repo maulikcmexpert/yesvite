@@ -1997,26 +1997,24 @@
 
         }
 
-        canvas.on("mouse:down", function (options) {
+        canvas.on('mouse:down', function(options) {
             discardIfMultipleObjects(options);
-            if (options.target && options.target.type === "textbox") {
-                console.log("clicked on text box");
-                eventData.desgin_selected = "";
+            if (options.target && options.target.type === 'textbox') {
                 canvas.setActiveObject(options.target);
-                addIconsToTextbox(options.target);
+
             } else {
                 // alert();
-                canvas.getObjects("textbox").forEach(function (tb) {
-                    if (tb.trashIcon) tb.trashIcon.set("visible", false);
-                    if (tb.copyIcon) tb.copyIcon.set("visible", false);
+                canvas.getObjects('textbox').forEach(function(tb) {
+                    if (tb.trashIcon) tb.trashIcon.set('visible', false);
+                    if (tb.copyIcon) tb.copyIcon.set('visible', false);
                 });
             }
+
         });
 
-        canvas.on("mouse:up", function (options) {
+        canvas.on('mouse:up', function(options) {
             discardIfMultipleObjects(options);
         });
-
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
