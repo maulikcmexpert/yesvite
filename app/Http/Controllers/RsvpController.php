@@ -478,6 +478,7 @@ class RsvpController extends BaseController
                     'userTypingStatus' => 'Not typing...'
                 ];
 
+                dd($updateData);
                 // Create a new user node with the userId
                 $userRef = $this->usersReference->getChild((string)$userId);
                 $userSnapshot = $userRef->getValue();
