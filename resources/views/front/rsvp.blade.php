@@ -305,7 +305,7 @@
                                             }
 
                                             @endphp
-                                             @if($is_host == "1" || ($is_host == "" && ($guest_data['rsvp_status'] != "" && $guest_data['rsvp_status'] != null)))
+                                             @if($is_host == "1" || ($is_host == "" && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
                                                 <div class="guest-user-box">
                                                 <div class="guest-list-data">
                                                     <div class="guest-img">
