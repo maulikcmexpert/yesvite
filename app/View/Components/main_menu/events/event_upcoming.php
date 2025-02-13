@@ -11,9 +11,11 @@ class event_upcoming extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $from_page;
+
+    public function __construct($from_page)
     {
-        //
+        $this->from_page = $from_page;
     }
 
     /**

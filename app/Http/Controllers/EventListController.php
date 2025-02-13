@@ -34,36 +34,74 @@ class EventListController extends BaseController
 
         $this->per_page = 10;
     }
-    public function index($date = null, $page = null)
+    public function index($selected_date = null, $from_page = null)
     {
         $user  = Auth::guard('web')->user();
         $eventList = [];
         // $pages = ($page != "") ? $page : 1;
 
         //upcoming_event
-        $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
-            ->where('user_id', $user->id)
-            ->where('is_draft_save', '0');
+        // $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+        //     ->where('user_id', $user->id)
+        //     ->where('is_draft_save', '0');
+
+
+            if($from_page=="upcoming"){
+                $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date',$selected_date)
+                ->where('user_id', $user->id)
+                ->where('is_draft_save', '0');      
+                  }else{
+                    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+                    ->where('user_id', $user->id)
+                    ->where('is_draft_save', '0');  
+                          }
         // ->orderBy('start_date', 'ASC')
         // ->get();
         $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where('user_id', $user->id)->get()->pluck('event_id');
-        $invitedEventsList = Event::with(['event_image' => function ($query) {
-            $query->orderBy('type', 'ASC'); // Order event images by type
-        }, 'user', 'event_settings', 'event_schedule'])
-            ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
-            ->where('is_draft_save', '0');
+
+        // $invitedEventsList = Event::with(['event_image' => function ($query) {
+        //     $query->orderBy('type', 'ASC'); // Order event images by type
+        // }, 'user', 'event_settings', 'event_schedule'])
+        //     ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+        //     ->where('is_draft_save', '0');
+
+            if($from_page=="upcoming"){
+                $invitedEventsList = Event::with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC'); // Order event images by type
+                }, 'user', 'event_settings', 'event_schedule'])
+                    ->whereIn('id', $invitedEvents)->where('start_date',$selected_date)
+                    ->where('is_draft_save', '0');
+            }else{
+                $invitedEventsList = Event::with(['event_image' => function ($query) {
+                    $query->orderBy('type', 'ASC'); // Order event images by type
+                }, 'user', 'event_settings', 'event_schedule'])
+                    ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+                    ->where('is_draft_save', '0');
+            }
         // ->orderBy('start_date', 'ASC')
         // ->get();
         $allEvents = $usercreatedList->union($invitedEventsList);
 
-        $allEvent = $allEvents
-            ->orderBy('start_date', 'asc')
-            ->offset(0)
-            ->limit($this->per_page)
-            ->get();
-
+        // $allEvent = $allEvents
+        //     ->orderBy('start_date', 'asc')
+        //     ->offset(0)
+        //     ->limit($this->per_page)
+        //     ->get();
+            if($from_page=="upcoming"){
+                $allEvent = $allEvents
+                ->orderBy('start_date', 'asc')
+                // ->offset(0)
+                // ->limit($this->per_page)
+                ->get();
+            }else{
+                $allEvent = $allEvents
+                ->orderBy('start_date', 'asc')
+                ->offset(0)
+                ->limit($this->per_page)
+                ->get();
+            }
         // $totalCounts += count($allEvent);
         // // Calculate offset based on current page and perPage
         // $offset = ($pages - 1) * $this->perPage;
@@ -281,9 +319,8 @@ class EventListController extends BaseController
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
         
-        if($page=="past"){
-            dd($page,$date);
-            $usercreatedAllPastEventList->where('start_date', $date);
+        if($from_page=="past"){
+            $usercreatedAllPastEventList->where('start_date', $selected_date);
         }else{
             $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
         }
@@ -298,8 +335,8 @@ class EventListController extends BaseController
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
         $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
-        if($page=="past"){
-            $invitedPastEventsList->where('start_date', $date);
+        if($from_page=="past"){
+            $invitedPastEventsList->where('start_date', $selected_date);
         }else{
             $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
         }
@@ -313,11 +350,18 @@ class EventListController extends BaseController
 
         $allPastEventsQuery = $usercreatedAllPastEventList->union($invitedPastEventsList);
         // dd($allPastEventsQuery->toSql());
-        $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc')
-            ->offset(0)
-            ->limit(10)
-            ->get();
+        
+            if($from_page=="past"){
+                $allPastEvents = $allPastEventsQuery
+                ->orderBy('start_date', 'asc')
+                ->get();
+            }else{
+                $allPastEvents = $allPastEventsQuery
+                ->orderBy('start_date', 'asc')
+                ->offset(0)
+                ->limit(10)
+                ->get();
+            }
         // $allPastEvents =  collect($allPastEvent)->sortBy('start_date');
 
         $totalCounts = 0;
@@ -596,7 +640,7 @@ class EventListController extends BaseController
         $js = ['event'];
         $title = 'Events';
         $page = 'front.events';
-        return view('layout', compact('title', 'page', 'js', 'filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
+        return view('layout', compact('title', 'page', 'js', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
     }
 
     public function evenGoneTime($enddate)

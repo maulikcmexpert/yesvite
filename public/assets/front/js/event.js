@@ -77,7 +77,7 @@ var offset1 = 0;
 var offset2 = 0;
 var offset3 = 0;
 var offset4 = 0;
-
+var $selected_by_date_page=$('#already_selected_date').val();
 
 var page = '';
 var busy=false;
@@ -98,6 +98,7 @@ $(document).on('paste','input[type="text"],textarea', function(e) {
     }
 });
 
+if($selected_by_date_page!="upcoming"){
 $('#scrollStatus').scroll(function () {
     // if (busy1) return; 
     if (busy1 || date_upcoming) return; // Add this check to prevent the scroll ajax call after a date click.
@@ -146,7 +147,7 @@ $('#scrollStatus').scroll(function () {
         });
     }
 });
-
+}
 $('#scrollStatus2').scroll(function () {
     // if (busy2) return; 
     if (busy2 || date_draft) return; // Add this check to prevent the scroll ajax call after a date click.
@@ -188,44 +189,46 @@ $('#scrollStatus2').scroll(function () {
     }
 });
 
-$('#scrollStatus3').scroll(function () {
-    // if (busy3) return; 
-    if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
-
-    var scrollTop = $(this).scrollTop(); 
-    var scrollHeight = $(this)[0].scrollHeight; 
-    var elementHeight = $(this).height();
-    if (scrollTop + elementHeight >= scrollHeight-2) {
-        busy3 = true;
-        offset3 += limit;
-        var current_month3="";
-        $('.latest_month_past').each(function () { 
-            current_month3=$(this).val();
-        });
-        $('.loader').css('display','flex');    
-
-        $.ajax({
-            url: `${base_url}fetch_past_event`,
-            type: 'GET',
-            data: { limit: limit, offset: offset3,current_month:current_month3},
-            success: function (response) {
-                if (response.view && response.view!="") {
-                    $('#scrollStatus3').append(response.view);
+if($selected_by_date_page!="past"){
+    $('#scrollStatus3').scroll(function () {
+        // if (busy3) return; 
+        if (busy3 || date_past) return; // Add this check to prevent the scroll ajax call after a date click.
+    
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+        if (scrollTop + elementHeight >= scrollHeight-2) {
+            busy3 = true;
+            offset3 += limit;
+            var current_month3="";
+            $('.latest_month_past').each(function () { 
+                current_month3=$(this).val();
+            });
+            $('.loader').css('display','flex');    
+    
+            $.ajax({
+                url: `${base_url}fetch_past_event`,
+                type: 'GET',
+                data: { limit: limit, offset: offset3,current_month:current_month3},
+                success: function (response) {
+                    if (response.view && response.view!="") {
+                        $('#scrollStatus3').append(response.view);
+                        busy3 = false;
+                    }else{
+                        $('.loader').css('display', 'none');
+                        return;  
+                    }
+                    $('.loader').css('display','none');    
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching events:', error);
                     busy3 = false;
-                }else{
-                    $('.loader').css('display', 'none');
-                    return;  
+                    $('.loader').css('display','none');    
                 }
-                $('.loader').css('display','none');    
-            },
-            error: function (xhr, status, error) {
-                console.error('Error fetching events:', error);
-                busy3 = false;
-                $('.loader').css('display','none');    
-            }
-        });
-    }
-});
+            });
+        }
+    });
+}
 
 $('#all-months-upcoming').css('display','block');
 
@@ -659,17 +662,21 @@ $(document).on('click',".day",function () {
     var page=getActiveTabPage();
     if(page==undefined){
         const specificDate = new Date(search_date);
+        // const today = new Date();
         const today = new Date();
+
+// Reset the time of the today date to compare only the date part (ignoring time)
+today.setHours(0, 0, 0, 0);
         if (specificDate < today) {
            page="past";
            fromhome="1"
-          } else if(specificDate>=today) {
+          } else{
             page='upcoming';
             fromhome="1"
         }
     }
 
-    console.log(page);
+    console.log(search_date+' '+page);
    
     $('.latest_month').each(function () { 
         current_month=$(this).val();
@@ -697,7 +704,7 @@ $(document).on('click',".day",function () {
 
     }
     if(fromhome=="1"){
-        window.location.href=base_url+`event_lists/${search_date}/past`
+        window.location.href=base_url+`event_lists/${search_date}/${page}`
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   
@@ -776,6 +783,50 @@ $(document).on('click',".day",function () {
 }, 750);
   })
 
+
+  $(document).on('click','#nav-upcoming-tab',function(){
+    var searchValue = $('#search_upcoming_event').val();
+    var current_month="";
+    $('#home_loader').css('display','flex');    
+
+    $('.latest_month').each(function () { 
+        current_month=$(this).val();
+    });
+    clearTimeout(search_user_ajax_timer);
+
+    search_user_ajax_timer = setTimeout(function () {
+        // $('#home_loader').css('display','flex');    
+    $.ajax({
+        url: `${base_url}search_upcoming_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+            if (response.view) {
+                $('#scrollStatus').html('');
+                $('#scrollStatus').html(response.view);
+                $('#tabbtn1').text(response.last_month);
+                $('#all-months-upcoming').css('display','block');
+
+            }else{
+                $('#scrollStatus').html('');
+                $('#scrollStatus').html('No Data Found');
+                $('#all-months-upcoming').css('display','none');
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('#home_loader').hide();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            $('#home_loader').hide();
+        },
+        complete: function () {
+            $('.loader_up').css('display','none');    
+           }
+    });
+}, 750);
+  });
 $(document).on('click','.notification-filter-events',function () {
     $('.all-events-filter-info').addClass('d-none');
     $('.notification-all-event-wrp').removeClass('d-none');

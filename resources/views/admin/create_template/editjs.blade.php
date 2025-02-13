@@ -1450,6 +1450,7 @@
             letterSpacing: defaultSettings.letterSpacing,
             lineHeight: defaultSettings.lineHeight
         };
+        var updateTextBoxTime = 0;
 
         // Function to update textbox width dynamically
         const updateTextboxWidth = (textbox) => {
@@ -1480,17 +1481,47 @@
         };
 
 
+        // const setLetterSpacing = () => {
+        //     const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
+        //     letterSpacingInput.value = newValue;
+        //     letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+
+        //     const activeObject = canvas.getActiveObject();
+        //     if (activeObject && activeObject.type === 'textbox') {
+        //         activeObject.set('charSpacing', newValue); // Update letter spacing
+
+        //         // Now call updateTextboxWidth to handle width adjustments
+        //         updateTextboxWidth(activeObject);
+        //     }
+        // };
+       
+  
         const setLetterSpacing = () => {
-            const newValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
-            letterSpacingInput.value = newValue;
-            letterSpacingTooltip.innerHTML = `<span>${newValue}</span>`;
+            const sliderValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
+            const percentageValue = (sliderValue / 500) * 100; // Normalize to percentage
 
+            // Update the input with the percentage value
+            letterSpacingInput.value = `${percentageValue.toFixed(0)}%`;
+            letterSpacingTooltip.innerHTML = `<span>${percentageValue.toFixed(
+                0
+            )}%</span>`;
+
+            // Log the slider value and percentage for debugging
+            console.log(
+                `Slider Value: ${sliderValue}, Percentage: ${percentageValue.toFixed(
+                    0
+                )}%`
+            );
+
+            // Update the canvas object
             const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('charSpacing', newValue); // Update letter spacing
-
-                // Now call updateTextboxWidth to handle width adjustments
-                updateTextboxWidth(activeObject);
+            if (activeObject && activeObject.type === "textbox") {
+                clearTimeout(updateTextBoxTime);
+                updateTextBoxTime = setTimeout(function () {
+                    addToUndoStack(canvas);
+                    activeObject.set("charSpacing", sliderValue);
+                    updateTextboxWidth(activeObject);
+                }, 800);
             }
         };
 
@@ -1672,25 +1703,35 @@
 
         // Update color picker based on the selected object's current font or background color
         function updateColorPicker() {
-            console.log("updateColorPicker")
-            const activeObject = canvas.getActiveObject();
-            const selectedColorType = document.querySelector('input[name="colorType"]:checked').value;
+        const activeObject = canvas.getActiveObject();
+        const selectedColorType = document.querySelector(
+            'input[name="colorType"]:checked'
+        ).value;
 
-            if (activeObject && activeObject.type === 'textbox') {
-                console.log({
-                    selectedColorType
-                })
-                if (selectedColorType === 'font') {
-                    $('#color-picker').spectrum('set', activeObject.fill || '#0a0b0a'); // Set font color in picker
-                } else if (selectedColorType === 'background') {
-                    const bgColor = activeObject.backgroundColor || 'rgba(0, 0, 0, 0)'; // Default to transparent background
-                    $('#color-picker').spectrum('set', bgColor); // Set current background color in picker
-                }
-
+        if (activeObject && activeObject.type === "textbox") {
+            if (selectedColorType === "font") {
+                console.log("colorpicker update");
+                $("#color-picker").spectrum(
+                    "set",
+                    activeObject.fill || "#000000"
+                ); // Set font color in picker
+            } else if (selectedColorType === "background") {
+                const bgColor =
+                    activeObject.backgroundColor || "rgba(0, 0, 0, 0)"; // Default to transparent background
+                $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
+            //console.log(selectedColorType);
+            //console.log(activeObject.type);
+            //console.log(activeObject.fill);
+            //console.log(activeObject.backgroundColor);
 
+            const activeObjec = canvas.getActiveObject();
+
+            //console.log(activeObjec.fill);
+            //console.log(activeObjec.backgroundColor);
         }
+    }
 
         // Update color picker when object selection changes
         canvas.on('selection:created', updateColorPicker);
@@ -1968,24 +2009,26 @@
 
         }
 
-        canvas.on('mouse:down', function(options) {
+        canvas.on("mouse:down", function (options) {
             discardIfMultipleObjects(options);
-            if (options.target && options.target.type === 'textbox') {
+            if (options.target && options.target.type === "textbox") {
+                console.log("clicked on text box");
+                //eventData.desgin_selected = "";
                 canvas.setActiveObject(options.target);
-
+                addIconsToTextbox(options.target);
             } else {
                 // alert();
-                canvas.getObjects('textbox').forEach(function(tb) {
-                    if (tb.trashIcon) tb.trashIcon.set('visible', false);
-                    if (tb.copyIcon) tb.copyIcon.set('visible', false);
+                canvas.getObjects("textbox").forEach(function (tb) {
+                    if (tb.trashIcon) tb.trashIcon.set("visible", false);
+                    if (tb.copyIcon) tb.copyIcon.set("visible", false);
                 });
             }
-
         });
 
-        canvas.on('mouse:up', function(options) {
+        canvas.on("mouse:up", function (options) {
             discardIfMultipleObjects(options);
         });
+
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
@@ -2346,6 +2389,7 @@
 
                 canvas.renderAll(); // Re-render canvas after change
             }
+            addIconsToTextbox(activeObject);
         }
 
 
@@ -2409,7 +2453,55 @@
             redoStack = [];
         }
 
+
         function undo() {
+        console.log("undoStack", undoStack.length);
+        if (undoStack.length > 0) {
+            // Ensure at least one previous state exists
+            if (undoStack.length == 1) {
+                $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
+            redoStack.push(canvas.toJSON()); // Save current state to redo stack
+            const lastState = undoStack.pop(); // Get the last state to undo
+            canvas.loadFromJSON(lastState, function () {
+                canvas.renderAll(); // Render the canvas after loading state
+            });
+            if (redoStack.length > 0) {
+                $("#redoButton").find("svg path").attr("fill", "#0F172A");
+            }
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
+        } else {
+            $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+        }
+    }
+
+    function redo() {
+        if (redoStack.length > 0) {
+            undoStack.push(canvas.toJSON()); // Save current state to undo stack
+            const nextState = redoStack.pop(); // Get the next state to redo
+            canvas.loadFromJSON(nextState, function () {
+                canvas.renderAll(); // Render the canvas after loading state
+            });
+            if (redoStack.length == 1) {
+                $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+            }
+            if (undoStack.length > 0) {
+                $("#undoButton").find("svg path").attr("fill", "#0F172A");
+            }
+            $("#redoButton").find("svg path").attr("fill", "#0F172A");
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
+        } else {
+            $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+        }
+    }
+
+
+
+        function undo_() {
             if (undoStack.length > 0) { // Ensure at least one previous state exists
 
                 redoStack.push(canvas.toJSON()); // Save current state to redo stack
@@ -2430,7 +2522,7 @@
             }
         }
 
-        function redo() {
+        function redo_() {
             if (redoStack.length > 0) {
 
                 undoStack.push(canvas.toJSON()); // Save current state to undo stack
@@ -2702,4 +2794,251 @@
         var id = $(this).data('id');
         $('#sidebar').removeClass(id);
     })
+
+
+    $(document).on("click", ".font-reset-btn", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                console.log(element.fill);
+
+                activeObject.set(
+                    "fontFamily",
+                    element.fontFamily || "Times New Roman"
+                );
+            }
+        });
+        if (seted == 0) {
+            activeObject.set("fontFamily", "Times New Roman");
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".edit-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+
+                activeObject.set({
+                    fontSize: element.fontSize || "20",
+                    charSpacing: element.charSpacing || "0",
+                    lineHeight: element.lineHeight || "1.16",
+                });
+
+                $("#fontSizeInput").val(element.fontSize || "20");
+                $("#fontSizeRange").val(element.fontSize || "20");
+                $("#letterSpacingInput").val(element.charSpacing || "0");
+                $("#letterSpacingRange").val(element.charSpacing || "0");
+                $("#lineHeightInput").val(element.lineHeight || "1.16");
+                $("#lineHeightRange").val(element.lineHeight || "1.16");
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fontSize: "20",
+                charSpacing: "0",
+                lineHeight: "1.16",
+            });
+
+            $("#fontSizeInput").val("20");
+            $("#fontSizeRange").val("20");
+            $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);
+            $("#letterSpacingRange").val("0");
+            $("#lineHeightInput").val("1.16");
+            $("#lineHeightRange").val("1.16");
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+    $(document).on("click", ".edit-text-save", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        addToUndoStack(canvas);
+        let fontSize = $("#fontSizeInput").val();
+        const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
+        let lineHeight = $("#lineHeightInput").val();
+        activeObject.set({
+            fontSize: fontSize,
+            charSpacing: charSpacing,
+            lineHeight: lineHeight,
+        });
+
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    function addIconsToTextbox(target) {
+        console.log("add to here");
+        console.log(target);
+        if (target == undefined) {
+            return;
+        }
+        if (target.fontWeight == "bold") {
+            $(".bold-btn").addClass("activated");
+        } else {
+            $(".bold-btn").removeClass("activated");
+        }
+        if (target.fontStyle == "italic") {
+            $(".italic-btn").addClass("activated");
+        } else {
+            $(".italic-btn").removeClass("activated");
+        }
+        if (target.underline == true) {
+            $(".underline-btn").addClass("activated");
+        } else {
+            $(".underline-btn").removeClass("activated");
+        }
+        if (target.textAlign == "left") {
+            $(".justyfy-left-btn").addClass("activated");
+        } else {
+            $(".justyfy-left-btn").removeClass("activated");
+        }
+        if (target.textAlign == "center") {
+            $(".justyfy-center-btn").addClass("activated");
+        } else {
+            $(".justyfy-center-btn").removeClass("activated");
+        }
+        if (target.textAlign == "right") {
+            $(".justyfy-right-btn").addClass("activated");
+        } else {
+            $(".justyfy-right-btn").removeClass("activated");
+        }
+        if (target.textAlign == "justify") {
+            $(".justyfy-full-btn").addClass("activated");
+        } else {
+            $(".justyfy-full-btn").removeClass("activated");
+        }
+        let targetFontFamily = target.fontFamily;
+        $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
+
+        // const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
+        const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
+        console.log({charSpacing})
+        const percentageValue = (charSpacing / 500) * 100;
+
+        // Update the input box with the percentage value
+        $("#letterSpacingInput").val(`${percentageValue.toFixed(0)}%`);
+
+        // Update the range slider with the original value
+        $("#letterSpacingRange").val(charSpacing);
+
+        $("#fontSizeInput").val(target.fontSize.toFixed(0));
+        $("#fontSizeRange").val(target.fontSize.toFixed(0));
+        // $("#letterSpacingInput").val(target.charSpacing);
+        // $("#letterSpacingRange").val(target.charSpacing);
+        $("#lineHeightInput").val(target.lineHeight);
+        $("#lineHeightRange").val(target.lineHeight);
+        $(".size-btn").removeClass("activated");
+
+        const text = target.text.trim();
+        console.log({ text });
+        // Helper functions to determine the case
+        const isUpperCase = (str) => str === str.toUpperCase();
+        const isLowerCase = (str) => str === str.toLowerCase();
+        const isCapitalized = (str) =>
+            str
+                .split(" ")
+                .every(
+                    (word) =>
+                        word.charAt(0).toUpperCase() +
+                            word.slice(1).toLowerCase() ===
+                        word
+                );
+
+        if (isUpperCase(text)) {
+            $(".uppercase-btn").addClass("activated");
+        } else if (isLowerCase(text)) {
+            $(".lowercase-btn").addClass("activated");
+        } else if (isCapitalized(text)) {
+            $(".capitalize-btn").addClass("activated");
+        }
+    }
+
+    $(document).on("click", ".formate-text-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+
+        console.log(dbJson);
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                activeObject.set({
+                    fontWeight: element.fontWeight || "",
+                    fontStyle: element.fontStyle || "",
+                    underline: element.underline || false,
+                    linethrough: element.linethrough || false,
+                    fontFamily: element.fontFamily || "Times New Roman",
+                    fontSize: element.fontSize || 20,
+                    textAlign: element.textAlign || "left",
+                    lineHeight: element.lineHeight || 1,
+                    text: element.text || activeObject.text,
+                });
+            }
+        });
+        if (seted == 0) {
+            activeObject.set({
+                fontWeight: "",
+                fontStyle: "",
+                underline: false,
+                linethrough: false,
+                fontFamily: "Times New Roman",
+                fontSize: 20,
+                textAlign: "left",
+                lineHeight: 1,
+                text: activeObject.text.toLowerCase(),
+            });
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
+
+    $(document).on("click", ".color-reset", function (e) {
+        var activeObject = canvas.getActiveObject();
+        if (!activeObject || activeObject.type !== "textbox") {
+            return;
+        }
+        let seted = 0;
+        dbJson.textElements.forEach(function (element) {
+            if (
+                element.text.toLowerCase() === activeObject.text.toLowerCase()
+            ) {
+                seted = 1;
+                console.log(element.fill);
+                let selectedColor = element.fill || "#000000";
+                console.log("color-picker");
+                $("#color-picker").spectrum("set", selectedColor || "#000000");
+
+                activeObject.set("fill", selectedColor);
+            }
+        });
+        if (seted == 0) {
+            $("#color-picker").spectrum("set", "#000000");
+
+            activeObject.set("fill", "#000000");
+        }
+        canvas.renderAll();
+        addIconsToTextbox(canvas.getActiveObject());
+    });
 </script>

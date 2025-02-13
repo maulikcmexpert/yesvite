@@ -1,5 +1,4 @@
-{{-- {{dd($eventList)}} --}}
-<div class="tab-pane fade active show" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+{{-- <div class="tab-pane fade" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab"> --}}
     <div class="all-events-searchbar-wrp">
       <form>
         <div class="position-relative">
@@ -224,7 +223,7 @@
         @endif
         </div>
     </div>
-  </div>
+  {{-- </div> --}}
   @push('scripts')
   <script>
     $(document).ready(function () {

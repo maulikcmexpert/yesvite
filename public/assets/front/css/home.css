@@ -910,6 +910,7 @@
     padding: 0px !important;
     width: 100% !important;
     flex-wrap: nowrap !important;
+    justify-content: center;
 }
 .home-web-tabs-wrp .nav-tabs .nav-link.active {
     border: none !important;
