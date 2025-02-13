@@ -1003,6 +1003,8 @@ button:focus{
 
 main{
     height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 @keyframes bounce {
