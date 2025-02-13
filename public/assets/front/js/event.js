@@ -697,7 +697,7 @@ $(document).on('click',".day",function () {
 
     }
     if(fromhome=="1"){
-
+        window.location.href=base_url+`event_lists/${specificDate}/past`
     }
     search_user_ajax_timer = setTimeout(function () {
         $('#loader').css('display','flex');   

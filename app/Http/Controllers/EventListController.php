@@ -34,7 +34,7 @@ class EventListController extends BaseController
 
         $this->per_page = 10;
     }
-    public function index()
+    public function index(Request $request)
     {
         $user  = Auth::guard('web')->user();
         $eventList = [];
