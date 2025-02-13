@@ -4,7 +4,7 @@
   //   $show="active show";
   // }
 @endphp
-<div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
+{{-- <div class="tab-pane fade {{$show}}" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab"> --}}
     <div class="all-events-searchbar-wrp">
       <form>
         <div class="position-relative">
@@ -173,7 +173,7 @@
         @endif
       </div>
     </div>
-  </div>
+  {{-- </div> --}}
 
   @push('scripts')
   <script>
