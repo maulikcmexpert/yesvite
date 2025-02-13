@@ -1182,7 +1182,7 @@ $(document).ready(function () {
 //         // }
 //     });
 // }
-   
+
 //only rsvp_date by prakash
 function rsvp_by_date(start_time) {
     var adjustedStartTime = moment(start_time, "MM-DD-YYYY").subtract(1, "days").format("MM-DD-YYYY");
@@ -1650,7 +1650,7 @@ function set_activity_html(selectedDates) {
                         "day"
                     )
                         ? `
-                        <div class="ac-end-time" > 
+                        <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
                         <div class="col-12 ac-end-time">
@@ -3736,7 +3736,7 @@ $("#saveThankyoucard").click(function () {
 
     if (template_name.trim() !== "") {
         var thankyou = `<li class="list-group-item thankyoucardlist ${template_name}">
- 
+
         <input type="checkbox" id="${template_name}" name="thankyoucard[]" data-template_name='${template_name}' data-send='${send}' data-message='${message}'/><i type="button" class="fa-regular fa-pen-to-square edit_card" style="margin-left:290px;display:inline"></i><i type="button" class="fa-solid fa-trash deletecard" style="margin-left:330px;display:inline"></i>
         <h5>${template_name}</h5></br>
         <p>${message}</p>
@@ -3775,7 +3775,7 @@ $(document).on("click", "#edit_saveThankyoucard", function () {
     $(li).remove();
 
     var thankyou = `<li class="list-group-item thankyoucardlist ${template_name}">
- 
+
     <input type="checkbox" id="${template_name}" name="thankyoucard[]" data-template_name='${template_name}' data-send='${send}' data-message='${message}'/><i type="button" class="fa-regular fa-pen-to-square edit_card" style="margin-left:290px;display:inline"></i><i type="button" class="fa-solid fa-trash deletecard" style="margin-left:330px;display:inline"></i>
     <h5>${template_name}</h5></br>
     <p>${message}</p>
@@ -3842,15 +3842,15 @@ $(document).on("click", "#close_createEvent", async function (e) {
         return;
     }
     apiCalled = true;
-    
+
     $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
     if (dbJson == "" || dbJson == null || dbJson==undefined){
         apiCalled = false;
         $("#deleteModal").modal("show");
         return;
-    } 
-   
+    }
+
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var event_date = $("#event-date").val();
@@ -4233,8 +4233,14 @@ function savePage1Data(close = null, direct = false) {
         // state != "" &&
         // zipcode != ""
     ) {
+
         if (rsvp_end_time_set == "1" && start_time_zone != end_time_zone) {
             $("#end-time-zone").focus();
+            $(".guestBtn").each(function () {
+                $(this).css("color", "gray");
+                this.style.setProperty("color", "gray", "important");
+            }); // Set text color to a light gray
+            $("#guestBtn").addClass("guestBtn");
             $("#end-time-zone-error")
                 .text(
                     "End Time zone : Please select same start time zone and end time zone"
@@ -4242,6 +4248,19 @@ function savePage1Data(close = null, direct = false) {
                 .css("display", "block")
                 .css("color", "red");
             return;
+        }
+
+        var event_name = $("#event-name").val();
+        var event_date = $("#event-date").val();
+        var start_event_date = $("#start-event-date").val();
+        var end_event_date = $("#end-event-date").val();
+        var start_time = $("#start-time").val();
+        // Check if all fields are not empty
+        if (event_name !== "" && start_event_date !== "" && start_time !== "") {
+            // When all fields are filled
+            $(".guestBtn").css("color", "black"); // Set text color to black
+            $("#guestBtn").removeClass("guestBtn");
+            // Add a class to SVG for active state
         }
         // eventData = {
         if (end_time) {
@@ -8171,8 +8190,25 @@ function getStartEndTimeZone() {
                 )
                 .css("display", "block")
                 .css("color", "red");
+                $(".guestBtn").each(function () {
+                    $(this).css("color", "gray");
+                    this.style.setProperty("color", "gray", "important");
+                });
+                $("#guestBtn").addClass("guestBtn");
             return;
         } else {
+            var event_name = $("#event-name").val();
+            var event_date = $("#event-date").val();
+            var start_event_date = $("#start-event-date").val();
+            var end_event_date = $("#end-event-date").val();
+            var start_time = $("#start-time").val();
+            // Check if all fields are not empty
+            if (event_name !== "" && start_event_date !== "" && start_time !== "") {
+                // When all fields are filled
+                $(".guestBtn").css("color", "black"); // Set text color to black
+                $("#guestBtn").removeClass("guestBtn");
+                // Add a class to SVG for active state
+            }
             $("#end-time-zone-error")
                 .text("")
                 .css("display", "none")
