@@ -280,6 +280,8 @@ class EventListController extends BaseController
         $usercreatedAllPastEventList->with(['event_image' => function ($query) {
             $query->orderBy('type', 'ASC'); // Order event images by type
         }, 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
+        dd($page,$date);
+
         if($page=="past"){
             $usercreatedAllPastEventList->where('start_date', $date);
         }else{
