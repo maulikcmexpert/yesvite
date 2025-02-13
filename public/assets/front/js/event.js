@@ -830,7 +830,7 @@ today.setHours(0, 0, 0, 0);
   });
 
   $(document).on('click','#nav-past-tab',function(){
-    var searchValue = $(this).val();
+    var searchValue = $('#search_past_event').val();
     var current_month="";
 
     $('.latest_month_past').each(function () { 
