@@ -97,21 +97,26 @@ $getSocialLink = getSocialLink();
 @push('scripts')
 
 
-<!-- <script>
-  $(document).ready(function () {
-    toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-            @if (session('msg'))
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-                toastr.success("{{ session('msg') }}");
-            @endif
-        });
-</script> -->
+<script>
+    var base_url = $("#base_url").val()
+    $(document).on("click",".edit_design_tem",function(){
+        var id=$(this).attr('data-id');
+        window.location.href=base_url+"events?design_id="+id;
+    })
+//   $(document).ready(function () {
+//     toastr.options = {
+//                     "closeButton": true,
+//                     "progressBar": true,
+//                     "positionClass": "toast-top-right",
+//                 };
+//             @if (session('msg'))
+//                 toastr.options = {
+//                     "closeButton": true,
+//                     "progressBar": true,
+//                     "positionClass": "toast-top-right",
+//                 };
+//                 toastr.success("{{ session('msg') }}");
+//             @endif
+//         });
+</script>
 @endpush
