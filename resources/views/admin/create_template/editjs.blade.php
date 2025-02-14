@@ -1551,7 +1551,7 @@
             const newValue = parseFloat(lineHeightRange.value);
             lineHeightInput.value = newValue;
             lineHeightTooltip.innerHTML = `<span>${newValue}</span>`;
-
+            addToUndoStack(canvas);
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
                 activeObject.set('lineHeight', newValue);
