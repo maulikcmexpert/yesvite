@@ -88,7 +88,7 @@ $getSocialLink = getSocialLink();
                 </section>
             </div>
             <div class="tab-pane fade" id="nav-profile-home" role="tabpanel" aria-labelledby="nav-profile-home-tab">
-                profile tab
+               @include('front.event.step2')
             </div>
         </div>
     </div>
