@@ -424,7 +424,7 @@ ul.chat-list > div:last-child li {
 .msg-body {
     padding: 20px 24px;
     position: relative;
-    max-height: 580px;
+    max-height: calc(100vh - 100px);
     overflow-y: scroll;
     margin-bottom: 65px;
 }
