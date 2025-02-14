@@ -272,7 +272,7 @@ li{
     font-family: var(--SFProDisplay-Semibold);
 }
 
-@media only screen and (min-width: 1400px){
+@media only screen and (min-width: 1400px) and (max-width:1800px){
     .container{
         max-width: calc(100% - 10%) !important;
         margin: 0px auto !important;
