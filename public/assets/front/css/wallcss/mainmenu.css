@@ -1651,7 +1651,8 @@
 }
 
 .home-upcoming-events-card-left {
-    flex-basis: 72%;
+    /* flex-basis: 72%; */
+    flex-basis: calc(100% - 210px);
 }
 
 .home-upcoming-events-card-right {
