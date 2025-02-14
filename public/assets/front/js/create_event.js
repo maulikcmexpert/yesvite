@@ -52,9 +52,9 @@ var final_prefer_by =
 var final_initial =
     final_user_name != ""
         ? (
-              $("#cohostFname").val().charAt(0) +
-              $("#cohostLname").val().charAt(0)
-          ).toUpperCase()
+            $("#cohostFname").val().charAt(0) +
+            $("#cohostLname").val().charAt(0)
+        ).toUpperCase()
         : "";
 var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
@@ -1522,10 +1522,10 @@ $(document).on("change", "#schedule", function () {
             //     selectedDates.add(startDate);
             //     selectedDates.add(endDate);
             // } else {
-                // For a single date, set both start and end to the same date
-                selectedDates.clear();
-                selectedDates.add(startDate);
-                selectedDates.add(endDate);
+            // For a single date, set both start and end to the same date
+            selectedDates.clear();
+            selectedDates.add(startDate);
+            selectedDates.add(endDate);
             // }
             // console.log(selectedDates.size);
             console.log(selectedDates);
@@ -1594,14 +1594,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    // startDate.isSame(moment(sortedDates[0]), "day")
-                    startDate
-                        .startOf("day")
-                        .isSame(
-                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                            "day"
-                        )
-                        ? `
+            // startDate.isSame(moment(sortedDates[0]), "day")
+            startDate
+                .startOf("day")
+                .isSame(
+                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                    "day"
+                )
+                ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1616,8 +1616,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                        : ""
-                }
+                : ""
+            }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1638,18 +1638,17 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-            "YYYY-MM-DD"
-        )}">
+                "YYYY-MM-DD"
+            )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${
-                    startDate.isSame(
-                        moment(sortedDates[sortedDates.length - 1]),
-                        "day"
-                    )
-                        ? `
+                ${startDate.isSame(
+                moment(sortedDates[sortedDates.length - 1]),
+                "day"
+            )
+                ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1664,8 +1663,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                        : ""
-                }
+                : ""
+            }
             </form>
         </div>
     </div>
@@ -2373,7 +2372,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
             },
-            error: function (xhr, status, error) {},
+            error: function (xhr, status, error) { },
         });
     } else {
         $("#loader").css("display", "flex");
@@ -2741,14 +2740,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                        quantity +
-                        '</p><li class="list-group-item" data-quantity="' +
-                        quantity +
-                        '" data-selfbring="' +
-                        selfbring +
-                        '">' +
-                        subItemName +
-                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                    quantity +
+                    '</p><li class="list-group-item" data-quantity="' +
+                    quantity +
+                    '" data-selfbring="' +
+                    selfbring +
+                    '">' +
+                    subItemName +
+                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3155,7 +3154,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
+            convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3370,7 +3369,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newstartTime)
+            convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3665,7 +3664,7 @@ function convertTo24Hour(timeStr) {
 }
 
 
-$ ("#saveGiftRegistryButton").click(function () {
+$("#saveGiftRegistryButton").click(function () {
     // e.preventDefault();
     // var categoryName = $("#categoryName").val().trim();
     // var categoryQuantity = parseInt($("#categoryquantity").val().trim());
@@ -3775,7 +3774,7 @@ $(document).on("click", "#next_setting", function () {
 });
 
 $(document).on("click", "#next_design", function () {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "none");
     }
     $("#close_createEvent").css("display", "none");
@@ -3800,12 +3799,12 @@ $(document).on("click", "#next_design", function () {
 });
 
 if ($(".edit-design").hasClass("active")) {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "none");
     }
     $("#close_createEvent").css("display", "none");
 } else {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -3814,14 +3813,14 @@ if ($(".edit-design").hasClass("active")) {
 //     $('#close_createEvent').css('display','none');
 // });
 $(document).on("click", "#close_createEvent", async function (e) {
-    if(apiCalled == true){
+    if (apiCalled == true) {
         return;
     }
     apiCalled = true;
 
     $(".dropdown-menu").removeClass('show');
     var temp_id = eventData.temp_id;
-    if (dbJson == "" || dbJson == null || dbJson==undefined){
+    if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#deleteModal").modal("show");
         return;
@@ -4800,7 +4799,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
 });
 
 $(document).on("click", ".li_design .pick-card", function (e) {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -4811,7 +4810,7 @@ $(document).on("click", ".li_design .pick-card", function (e) {
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "none");
     }
     $("#close_createEvent").css("display", "none");
@@ -4999,7 +4998,7 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -5722,9 +5721,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -5744,10 +5743,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5756,10 +5755,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5778,10 +5777,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5789,10 +5788,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6348,7 +6347,7 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
-    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy=="") {
+    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy == "") {
         toggleSidebar();
         return;
     }
@@ -6473,16 +6472,16 @@ $(document).on("click", ".final_checkout", function () {
     $("#eventImage").attr(
         "src",
         base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
+        "public/storage/event_images/" +
+        eventData.desgin_selected +
+        ""
     );
     $("#eventTempImage").attr(
         "src",
         base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
+        "public/storage/event_images/" +
+        eventData.desgin_selected +
+        ""
     );
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
@@ -6605,7 +6604,7 @@ $(document).on("click", ".final_checkout", function () {
 });
 
 $(document).on("click", ".final_create_event", function (e) {
-    if(apiCalled == true){
+    if (apiCalled == true) {
         return;
     }
     apiCalled = true;
@@ -6618,9 +6617,9 @@ $(document).on("click", ".final_create_event", function (e) {
     e.stopPropagation();
     e.preventDefault();
     // if (isCopy != "") {
-        savePage1Data(null, true);
-        savePage3Data(null, true);
-        savePage4Data(null, true);
+    savePage1Data(null, true);
+    savePage3Data(null, true);
+    savePage4Data(null, true);
     // }
     // var imagePath = '';
 
@@ -6840,7 +6839,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             const coins = $("#coins").val();
@@ -8166,11 +8165,11 @@ function getStartEndTimeZone() {
                 )
                 .css("display", "block")
                 .css("color", "red");
-                $(".guestBtn").each(function () {
-                    $(this).css("color", "gray");
-                    this.style.setProperty("color", "gray", "important");
-                });
-                $("#guestBtn").addClass("guestBtn");
+            $(".guestBtn").each(function () {
+                $(this).css("color", "gray");
+                this.style.setProperty("color", "gray", "important");
+            });
+            $("#guestBtn").addClass("guestBtn");
             return;
         } else {
             var event_name = $("#event-name").val();
@@ -8308,7 +8307,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             console.log(html);
             isSetSession = 1;
@@ -8628,7 +8627,7 @@ $(document).on("click", ".delete_silder", function (e) {
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
                 },
-                error: function (xhr, status, error) {},
+                error: function (xhr, status, error) { },
             });
         } else {
             $(this).parent().find(".slider_img").attr("src", "");
@@ -8684,7 +8683,7 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
-    if(apiCalled == true){
+    if (apiCalled == true) {
         return;
     }
     apiCalled = true;
@@ -8846,8 +8845,8 @@ $(document).on("click", ".design-sidebar-action", function () {
     }
 });
 
-$(document).on("click", "#close_editEvent",async function (e) {
-    if(apiCalled == true){
+$(document).on("click", "#close_editEvent", async function (e) {
+    if (apiCalled == true) {
         return;
     }
     apiCalled = true;
@@ -8942,7 +8941,7 @@ if (final_step == "4" && isCohost == "1") {
 }
 
 async function step2Open() {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -8997,7 +8996,7 @@ async function step2Open() {
 }
 
 async function step3open() {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -9123,7 +9122,7 @@ async function step4open() {
         await saveDesignData();
         design = eventData.desgin_selected;
     }
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
@@ -9318,9 +9317,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                        parseInt(quantity) +
-                        "/" +
-                        categoryItemQuantity
+                    parseInt(quantity) +
+                    "/" +
+                    categoryItemQuantity
                 );
             }
 
@@ -9346,9 +9345,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -9369,10 +9368,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9381,10 +9380,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9403,10 +9402,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9414,10 +9413,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9457,7 +9456,7 @@ function sliderImages(id) {
             //$("#loader").css("display", "none");
             //toastr.success("Slider Image saved Successfully");
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) { },
     });
 }
 
@@ -9543,7 +9542,7 @@ if (final_step == "1" && isCohost == "1") {
     $(".li_event_detail").find(".side-bar-list").removeClass("menu-success");
     $(".li_guest").find(".side-bar-list").removeClass("menu-success");
     $(".li_setting").find(".side-bar-list").removeClass("menu-success");
-    if(dbJson!="" && dbJson!=undefined){
+    if (dbJson != "" && dbJson != undefined) {
         $(".pick-card").removeClass("active");
         $(".edit-design-sidebar").addClass("active");
         $("#close_createEvent").css("display", "none");
@@ -9554,7 +9553,7 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", function (e) {
-    if(isCohost!="0"){
+    if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
     $("#close_createEvent").css("display", "block");
