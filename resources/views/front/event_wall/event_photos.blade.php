@@ -890,35 +890,7 @@
                                                     alt="" loading="lazy" />
                                             </div>
                                         </div>
-                                        {{-- <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt=""  loading="lazy"/>
-                                            </div>
-                                        </div>   <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt=""  loading="lazy"/>
-                                            </div>
-                                        </div> --}}
-                                        {{-- <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="posts-card-show-post-img">
-                                                <img src="{{ asset('assets/front/img/photo-detail-img.png') }}"
-                                                    alt="" />
-                                            </div>
-                                        </div> --}}
+                                      
                                     </div>
                                     <div class="swiper-button-next">
                                         <i class="fa-solid fa-angle-right"></i>
