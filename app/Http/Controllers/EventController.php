@@ -366,6 +366,9 @@ class EventController extends BaseController
                         redirect('front.home');
                     }
                 }
+                if($getEventData->user_id != $id){
+                    redirect('front.home');
+                }
 
 
 
