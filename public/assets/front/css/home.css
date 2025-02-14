@@ -1292,6 +1292,9 @@
     .collection-card {
         padding: 10px 10px;
     }
+    .home-web-tabs-wrp .nav-tabs .nav-link {
+        flex-basis: 50% !important;
+    }
 }
 
 @media only screen and (max-width: 435px) {
