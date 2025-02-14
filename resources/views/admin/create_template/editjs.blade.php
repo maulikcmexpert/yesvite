@@ -2380,12 +2380,22 @@
                 justifyCenter: () => activeObject.set('textAlign', 'center'),
                 justifyRight: () => activeObject.set('textAlign', 'right'),
                 justifyFull: () => activeObject.set('textAlign', 'justify'),
-                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                uppercase: () => {
+                    activeObject.set("text", activeObject.text.toUpperCase());
+                    activeObject.set("textCase", "uppercase"); // Add custom property
+                },
+                lowercase: () => {
+                    activeObject.set("text", activeObject.text.toLowerCase());
+                    activeObject.set("textCase", "lowercase"); // Add custom property
+                },
                 capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                    activeObject.set('text', capitalizedText);
-                }
+                    const capitalizedText = activeObject.text.replace(
+                        /\b\w/g,
+                        (char) => char.toUpperCase()
+                    );
+                    activeObject.set("text", capitalizedText);
+                    activeObject.set("textCase", "capitalize"); // Add custom property
+                },
             };
 
             // Execute the corresponding command
@@ -2436,7 +2446,8 @@
                 obj.set('cornerColor', "#fff");
                 // Set text alignment if the object is a text-based object
                 if (obj.type === 'textbox' || obj.type === 'text') {
-                    obj.set('textAlign', 'center'); // Set text alignment to center
+                    // alert('textAllign')
+                    // obj.set('textAlign', 'center'); // Set text alignment to center
                 }
 
                 obj.on('rotating', function() {
