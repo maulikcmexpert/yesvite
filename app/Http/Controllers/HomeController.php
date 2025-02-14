@@ -12,6 +12,7 @@ use App\Models\{
     Notification,
     EventInvitedUser,
     Event,
+    EventDesignCategory,
     EventImage,
     UserNotificationType,
     UserProfilePrivacy
@@ -371,6 +372,21 @@ class HomeController extends BaseController
 
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
+
+            $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+                $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+            })
+                ->with([
+                    'subcategory' => function ($query) {
+                        $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                            ->with('textdatas'); // Load the textdatas relationship
+                    }
+                ])
+                ->get();
+
+            $totalTextDataCount = $categories->count();
+            $imagecount = $totalTextDataCount;
+
             $title = 'Home';
             $js = ['event'];
             $page = 'front.home';
@@ -381,6 +397,8 @@ class HomeController extends BaseController
                 'profileData',
                 'eventList',
                 'draftEventArray',
+                'categories',
+                'imagecount',
                 'startMonth',
                 'numMonths',
                 'diffmonth',
