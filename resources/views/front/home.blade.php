@@ -7,11 +7,11 @@ $getSocialLink = getSocialLink();
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" data-tab="explore-designs-tab" id="nav-explore-designs-tab" data-bs-toggle="tab" data-bs-target="#nav-explore-designs" type="button" role="tab" aria-controls="nav-explore-designs" aria-selected="true">
-                    Explore Designs
+                    Profile Home
                 </button>
 
                 <button class="nav-link" id="nav-profile-home-tab" data-bs-toggle="tab" data-bs-target="#nav-profile-home" type="button" role="tab" aria-controls="nav-profile-home" aria-selected="false" tabindex="-1">
-                    Profile Home
+                    Explore Designs
                 </button>
             </div>
         </nav>
