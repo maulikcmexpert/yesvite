@@ -4010,22 +4010,6 @@ function savePage1Data(close = null, direct = false) {
     var events_schedule = "0";
     var rsvp_end_time_set = "0";
 
-    if (rsvp_end_time_set == "1" && start_time_zone != end_time_zone) {
-        $("#end-time-zone").focus();
-        $(".guestBtn").each(function () {
-            $(this).css("color", "gray");
-            this.style.setProperty("color", "gray", "important");
-        }); // Set text color to a light gray
-        $("#guestBtn").addClass("guestBtn");
-        $("#end-time-zone-error")
-            .text(
-                "End Time zone : Please select same start time zone and end time zone"
-            )
-            .css("display", "block")
-            .css("color", "red");
-        return;
-    }
-
     // if(rsvp_by_date_set){
     //     rsvp_by_date_set = '1';
     // }else{
@@ -4225,21 +4209,7 @@ function savePage1Data(close = null, direct = false) {
         // zipcode != ""
     ) {
 
-        if (rsvp_end_time_set == "1" && start_time_zone != end_time_zone) {
-            $("#end-time-zone").focus();
-            $(".guestBtn").each(function () {
-                $(this).css("color", "gray");
-                this.style.setProperty("color", "gray", "important");
-            }); // Set text color to a light gray
-            $("#guestBtn").addClass("guestBtn");
-            $("#end-time-zone-error")
-                .text(
-                    "End Time zone : Please select same start time zone and end time zone"
-                )
-                .css("display", "block")
-                .css("color", "red");
-            return;
-        }
+
 
         var event_name = $("#event-name").val();
         var event_date = $("#event-date").val();
@@ -4264,6 +4234,21 @@ function savePage1Data(close = null, direct = false) {
             rsvp_by_date_set = "0";
         }
 
+        if (rsvp_end_time_set == "1" && start_time_zone != end_time_zone) {
+            $("#end-time-zone").focus();
+            $(".guestBtn").each(function () {
+                $(this).css("color", "gray");
+                this.style.setProperty("color", "gray", "important");
+            }); // Set text color to a light gray
+            $("#guestBtn").addClass("guestBtn");
+            $("#end-time-zone-error")
+                .text(
+                    "End Time zone : Please select same start time zone and end time zone"
+                )
+                .css("display", "block")
+                .css("color", "red");
+            return;
+        }
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
         eventData.event_name = event_name;
@@ -4301,7 +4286,31 @@ function savePage1Data(close = null, direct = false) {
             day: "numeric",
         });
 
+        // var formattedTime = convertTo12HourFormat(start_time);
+        // if(close == 'next'){
+        //     $(".step_1").hide();
+        //     handleActiveClass('.li_design');
+        //     $('.pick-card').addClass('active');
+        //     $('.design-span').addClass('active');
+        //     $('.li_event_detail').find(".side-bar-list").addClass("menu-success");
+        // }
+        // // alert(description);
+        // // $(".titlename").text(hostedby);
+        // // $(".event_name").text(event_name);
+        // // $(".event_date").text(formattedDate);
+        // // $(".event_address").text(description);
+        // // $(".event_time").text(formattedTime);
+        // $(".step_2").show();
+        // $('.event_create_percent').text('25%');
+        // $('.current_step').text('1 of 4');
+        // active_responsive_dropdown('drop-down-event-design','drop-down-pick-card');
+        // if(final_step == 1){
+        //     final_step = 2;
+        // }
+        // eventData.step = final_step;
+        // console.log(eventData);
 
+        // ---------------newcode-------------
         if (direct) {
             return 8;
         }
