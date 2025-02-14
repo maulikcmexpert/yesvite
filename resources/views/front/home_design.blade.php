@@ -1,4 +1,4 @@
-
+{{-- 
 <section class="home-web-tabs-wrp">
     <div class="container">
         <nav>
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <section class="collection-wrapper">
     <div class="container">
