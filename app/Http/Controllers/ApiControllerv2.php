@@ -1929,9 +1929,9 @@ class ApiControllerv2 extends Controller
             // $total_allEvent_page = ceil(count($uniqueArray) / $this->perPage);
             // $offset = ($page - 1) * $this->perPage;
             // $paginatedArray = array_slice($uniqueArray, $offset, $this->perPage);
-            $total_allEvent_page = ceil(count($uniqueArray) / 5);
-            $offset = ($page - 1) * 5;
-            $paginatedArray = array_slice($uniqueArray, $offset, 5);
+            $total_allEvent_page = ceil(count($uniqueArray) / 6);
+            $offset = ($page - 1) * 6;
+            $paginatedArray = array_slice($uniqueArray, $offset, 6);
             $draft_count = Event::where(['is_draft_save' => '1', 'user_id' => $user->id])->count();
             if (!empty($paginatedArray)) {
                 return response()->json(['status' => 1, "draft_count" => $draft_count, "upcoming_event_count" => $this->upcomingEventCount, "total_invited" => $totalInvited, "total_hosting" => $totalHosting, 'total_past_event_count' => $totalPastEventCount, 'total_need_rsvp_event_count' => $total_need_rsvp_event_count, "count" => $totalCounts, 'total_allEvent_page' => $total_allEvent_page, 'data' => $paginatedArray, 'message' => "All events"]);
