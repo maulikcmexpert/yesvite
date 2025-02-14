@@ -676,7 +676,7 @@ async function bindData(current_event_id) {
         }
 
         if (image) {
-            console.log(image);
+            // console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 img.crossOrigin = "anonymous";
                 var canvasWidth = canvas.getWidth();
@@ -735,7 +735,7 @@ async function bindData(current_event_id) {
                     staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
                 }
                 if (staticInfo.textElements != undefined) {
-                    console.log(staticInfo);
+                    // console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
                         // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
