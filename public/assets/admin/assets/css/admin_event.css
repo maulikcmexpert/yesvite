@@ -1438,6 +1438,9 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 .activated svg path {
     stroke: #fff !important;
 }
+.format-text-inner-options.activated svg path {
+    stroke: #000000 !important;
+}
 .toast.toast-error{
     background-color: #df1c41 !important;
     box-shadow: none !important;
