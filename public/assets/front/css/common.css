@@ -1001,10 +1001,14 @@ button:focus{
     border: none !important;
 }
 
+body, html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 main{
-    height: 100vh;
-    overflow: hidden;
-    overflow-y: scroll;
+    min-height: 100vh;
 }
 
 @keyframes bounce {
