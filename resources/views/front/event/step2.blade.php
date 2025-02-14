@@ -219,6 +219,15 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const designId = urlParams.get('design_id'); // Get 'design_id' from URL
+
+            if (designId) {
+                // Find the element with class 'edit_design_tem' and matching data-id, then trigger click
+                $('.edit_design_tem[data-id="' + designId + '"]').trigger('click');
+            }
+        
+
             // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
             $('input[name="design_subcategory"]').prop('checked', true);
             $('#Allcat').prop('checked', true);
