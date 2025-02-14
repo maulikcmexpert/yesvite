@@ -95,11 +95,14 @@
 
   #calendar .week {
    /* background: #4A4A4A; */
+   display: flex;
+   align-items: center;
   }
 
   #calendar .day {
     display: inline-block;
-    width: 40px;
+    /* width: 40px; */
+    width: 100%;
     padding: 0px 0px;
     padding-bottom: 5px;
     text-align: center;

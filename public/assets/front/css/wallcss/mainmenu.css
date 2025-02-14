@@ -2340,7 +2340,7 @@
 
 .all-events-month-wise-inner {
     padding-left: 50px;
-    max-height: calc(100% - 100px);
+    max-height: calc(100vh - 100px);
     overflow: hidden;
     overflow-y: scroll;
 }
