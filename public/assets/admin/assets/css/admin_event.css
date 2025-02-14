@@ -1432,8 +1432,11 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
     border-radius: 10px !important;
 }
 
-.edit-images-button-inner button.activated h6 {
+.activated h6 {
     color: #fff !important;
+}
+.activated svg path {
+    stroke: #fff !important;
 }
 .toast.toast-error{
     background-color: #df1c41 !important;
