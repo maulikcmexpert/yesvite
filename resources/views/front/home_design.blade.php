@@ -1,5 +1,5 @@
 
-{{-- <section class="home-web-tabs-wrp">
+<section class="home-web-tabs-wrp">
     <div class="container">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</section> --}}
+</section>
 
 <section class="collection-wrapper">
     <div class="container">
