@@ -30,7 +30,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EventGuestController extends Controller
+class EventGuestController extends BaseController
 {
     public function index(string $id)
     {
@@ -39,7 +39,7 @@ class EventGuestController extends Controller
         $user  = Auth::guard('web')->user();
         $js = ['event_guest', 'post_like_comment', 'guest_rsvp'];
         $event = decrypt($id);
-        $selectedFilters=[];
+        $selectedFilters = [];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -730,7 +730,7 @@ class EventGuestController extends Controller
             $login_user_id  = $user->id;
             $current_page = "guest";
 
-            return view('layout', compact('page', 'title', 'event', 'postList', 'js','selectedFilters','eventDetails', 'postList', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
+            return view('layout', compact('page', 'title', 'event', 'postList', 'js', 'selectedFilters', 'eventDetails', 'postList', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
 
         } catch (QueryException $e) {
 
