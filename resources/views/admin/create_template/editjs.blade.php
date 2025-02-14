@@ -1003,139 +1003,140 @@
                             // Render text elements or shapes on canvas
                             staticInfo.textElements.forEach(element => {
 
-                            const textMeasurement = new fabric.Text(element.text, {
-                                fontSize: element.fontSize,
-                                fontFamily: element.fontFamily,
-                                fontWeight: element.fontWeight,
-                                fontStyle: element.fontStyle,
-                                underline: element.underline,
-                                linethrough: ["true", "True", true].includes(
-                                    element.linethrough
-                                ),
-                            });
+                                const textMeasurement = new fabric.Text(element.text, {
+                                    fontSize: element.fontSize,
+                                    fontFamily: element.fontFamily,
+                                    fontWeight: element.fontWeight,
+                                    fontStyle: element.fontStyle,
+                                    underline: element.underline,
+                                    linethrough: ["true", "True", true].includes(
+                                        element.linethrough
+                                    ),
+                                });
 
-                            let textWidth = textMeasurement.width;
+                                let textWidth = textMeasurement.width;
 
-                            // **Scale Positions & Sizes**
-                            let left = element.left
-                                ? parseFloat(element.left) * scaleX
-                                : (element.centerX - textWidth / 2) * scaleX;
-                            let top = element.top
-                                ? parseFloat(element.top) * scaleY
-                                : (element.centerY - 10) * scaleY;
-                            let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
-                            let width = (textWidth + 25) * scaleX; // Scale text box width
+                                // **Scale Positions & Sizes**
+                                let left = element.left
+                                    ? parseFloat(element.left) * scaleX
+                                    : (element.centerX - textWidth / 2) * scaleX;
+                                let top = element.top
+                                    ? parseFloat(element.top) * scaleY
+                                    : (element.centerY - 10) * scaleY;
+                                let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                                let width = (textWidth + 25) * scaleX; // Scale text box width
 
-                            console.log('textAlign',element.textAlign)
-                                if (element.text) {
-                                    let textElement = new fabric.Textbox(element.text, {
-                                        left: parseFloat(left),
-                                        top: parseFloat(top),
-                                        width: width, // Default width if not provided
-                                        fontSize: fontSize,
-                                        fill: element.fill,
-                                        fontFamily: element.fontFamily,
-                                        fontWeight: element.fontWeight,
-                                        fontStyle: element.fontStyle,
-                                        underline: element.underline,
-                                        lineHeight: element.lineHeight || 2,
-                                        letterSpacing: 0,
-                                        linethrough:
-                                            element.linethrough == true ||
-                                            element.linethrough == "true" ||
-                                            element.linethrough == "True"
-                                                ? true
-                                                : false,
-                                        backgroundColor: element.backgroundColor,
-                                        textAlign: element.textAlign,
-                                        hasControls: true,
-                                        borderColor: "#2DA9FC",
-                                        cornerColor: "#fff",
-                                        cornerSize: 10,
-                                        cornerStyle: "circle",
-                                        transparentCorners: false,
-                                        lockScalingFlip: true,
-                                        hasBorders: true,
-                                        centeredRotation: true,
-                                        angle: element?.rotation ? element?.rotation : 0,
-                                    });
+                                console.log('textAlign '+element.text,element.textAlign)
+                                    if (element.text) {
+                                        let textElement = new fabric.Textbox(element.text, {
+                                            left: parseFloat(left),
+                                            top: parseFloat(top),
+                                            width: width, // Default width if not provided
+                                            fontSize: fontSize,
+                                            fill: element.fill,
+                                            fontFamily: element.fontFamily,
+                                            fontWeight: element.fontWeight,
+                                            fontStyle: element.fontStyle,
+                                            underline: element.underline,
+                                            lineHeight: element.lineHeight || 2,
+                                            letterSpacing: 0,
+                                            linethrough:
+                                                element.linethrough == true ||
+                                                element.linethrough == "true" ||
+                                                element.linethrough == "True"
+                                                    ? true
+                                                    : false,
+                                            backgroundColor: element.backgroundColor,
+                                            textAlign: element.textAlign,
+                                            hasControls: true,
+                                            borderColor: "#2DA9FC",
+                                            cornerColor: "#fff",
+                                            cornerSize: 10,
+                                            cornerStyle: "circle",
+                                            transparentCorners: false,
+                                            lockScalingFlip: true,
+                                            hasBorders: true,
+                                            centeredRotation: true,
+                                            angle: element?.rotation ? element?.rotation : 0,
+                                        });
 
-                                    // const textWidth = textElement.calcTextWidth();
-                                    // textElement.set({
-                                    //     width: textWidth
-                                    // });
-                                    // textElement.setControlsVisibility({
-                                    //     mt: false,
-                                    //     mb: false,
-                                    //     bl: true,
-                                    //     br: true,
-                                    //     tl: true,
-                                    //     tr: true,
-                                    //     ml: true,
-                                    //     mr: true
-                                    // });
+                                        // const textWidth = textElement.calcTextWidth();
+                                        // textElement.set({
+                                        //     width: textWidth
+                                        // });
+                                        // textElement.setControlsVisibility({
+                                        //     mt: false,
+                                        //     mb: false,
+                                        //     bl: true,
+                                        //     br: true,
+                                        //     tl: true,
+                                        //     tr: true,
+                                        //     ml: true,
+                                        //     mr: true
+                                        // });
 
-                                    // textElement.on('rotating', function () {
-                                    //     // Get the bounding rectangle of the textboxbox
-                                    //     var boundingRect = textElement.getBoundingRect();
-                                    //     var centerX = boundingRect.left + boundingRect.width / 2;
-                                    //     var centerY = boundingRect.top + boundingRect.height / 2;
-                                    //     var rotationAngle = textElement.angle;
-                                    //     console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
-                                    // });
+                                        // textElement.on('rotating', function () {
+                                        //     // Get the bounding rectangle of the textboxbox
+                                        //     var boundingRect = textElement.getBoundingRect();
+                                        //     var centerX = boundingRect.left + boundingRect.width / 2;
+                                        //     var centerY = boundingRect.top + boundingRect.height / 2;
+                                        //     var rotationAngle = textElement.angle;
+                                        //     console.log('Rotated Position:', { centerX: centerX, centerY: centerY, rotation: rotationAngle });
+                                        // });
 
 
-                                    canvas.add(textElement);
-                                    console.log(textElement);
-                                    canvas.renderAll();
+                                        canvas.add(textElement);
+                                        
 
-                                    // Event Listener to get and update the fontSize during dragging/moving
-                                    canvas.on('object:scaling', function(e) {
-                                        var activeObject = e.target;
+                                        // Event Listener to get and update the fontSize during dragging/moving
+                                        canvas.on('object:scaling', function(e) {
+                                            var activeObject = e.target;
 
-                                        // Check if the scaled object is the textbox
-                                        if (activeObject && activeObject.type ===
-                                            'textbox') {
-                                            // Get the current font size
-                                            var currentFontSize = activeObject.fontSize;
-                                            console.log("Current font size: " +
-                                                currentFontSize);
+                                            // Check if the scaled object is the textbox
+                                            if (activeObject && activeObject.type ===
+                                                'textbox') {
+                                                // Get the current font size
+                                                var currentFontSize = activeObject.fontSize;
+                                                console.log("Current font size: " +
+                                                    currentFontSize);
 
-                                            // Calculate new font size based on scale factor
-                                            var newFontSize = currentFontSize * activeObject
-                                                .scaleX; // Adjust the font size based on the horizontal scaling factor
-                                            const textMeasurement = new fabric.Text(
-                                                activeObject.text, {
+                                                // Calculate new font size based on scale factor
+                                                var newFontSize = currentFontSize * activeObject
+                                                    .scaleX; // Adjust the font size based on the horizontal scaling factor
+                                                const textMeasurement = new fabric.Text(
+                                                    activeObject.text, {
+                                                        fontSize: newFontSize,
+                                                        fontFamily: element.fontFamily,
+                                                        fontWeight: element.fontWeight,
+                                                        fontStyle: element.fontStyle,
+                                                        underline: element.underline,
+                                                        linethrough: element.linethrough,
+                                                    });
+                                                const textWidth = textMeasurement.width;
+                                                // Set the new font size and reset scale
+                                                activeObject.set({
                                                     fontSize: newFontSize,
-                                                    fontFamily: element.fontFamily,
-                                                    fontWeight: element.fontWeight,
-                                                    fontStyle: element.fontStyle,
-                                                    underline: element.underline,
-                                                    linethrough: element.linethrough,
+                                                    scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
+                                                    scaleY: 1, // Reset scaleY to 1 if you want to keep uniform scaling
+                                                    width: textWidth,
+                                                    textAlign: element.textAlign,
                                                 });
-                                            const textWidth = textMeasurement.width;
-                                            // Set the new font size and reset scale
-                                            activeObject.set({
-                                                fontSize: newFontSize,
-                                                scaleX: 1, // Reset scaleX to 1 to prevent cumulative scaling
-                                                scaleY: 1, // Reset scaleY to 1 if you want to keep uniform scaling
-                                                width: textWidth,
-                                                textAlign: element.textAlign,
-                                            });
 
-                                            // Re-render the canvas to apply the changes
-                                            canvas.renderAll();
+                                                // Re-render the canvas to apply the changes
+                                                canvas.renderAll();
 
-                                            console.log("Updated font size: " +
-                                                newFontSize);
-                                        }
-                                    });
+                                                console.log("Updated font size: " +
+                                                    newFontSize);
+                                            }
+                                        });
 
-                                }
+                                    }
 
 
 
                             });
+                           
+                            canvas.renderAll();
                         } else {
                             showStaticTextElements();
                             addDraggableText(150, 50, 'event_name', 'xyz'); // Position this outside the image area
@@ -2379,12 +2380,22 @@
                 justifyCenter: () => activeObject.set('textAlign', 'center'),
                 justifyRight: () => activeObject.set('textAlign', 'right'),
                 justifyFull: () => activeObject.set('textAlign', 'justify'),
-                uppercase: () => activeObject.set('text', activeObject.text.toUpperCase()),
-                lowercase: () => activeObject.set('text', activeObject.text.toLowerCase()),
+                uppercase: () => {
+                    activeObject.set("text", activeObject.text.toUpperCase());
+                    activeObject.set("textCase", "uppercase"); // Add custom property
+                },
+                lowercase: () => {
+                    activeObject.set("text", activeObject.text.toLowerCase());
+                    activeObject.set("textCase", "lowercase"); // Add custom property
+                },
                 capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(/\b\w/g, char => char.toUpperCase());
-                    activeObject.set('text', capitalizedText);
-                }
+                    const capitalizedText = activeObject.text.replace(
+                        /\b\w/g,
+                        (char) => char.toUpperCase()
+                    );
+                    activeObject.set("text", capitalizedText);
+                    activeObject.set("textCase", "capitalize"); // Add custom property
+                },
             };
 
             // Execute the corresponding command
@@ -2435,7 +2446,8 @@
                 obj.set('cornerColor', "#fff");
                 // Set text alignment if the object is a text-based object
                 if (obj.type === 'textbox' || obj.type === 'text') {
-                    obj.set('textAlign', 'center'); // Set text alignment to center
+                    // alert('textAllign')
+                    // obj.set('textAlign', 'center'); // Set text alignment to center
                 }
 
                 obj.on('rotating', function() {
