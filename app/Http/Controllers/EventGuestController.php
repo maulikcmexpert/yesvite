@@ -30,7 +30,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EventGuestController extends Controller
+class EventGuestController extends BaseController
 {
     public function index(string $id)
     {
