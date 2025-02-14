@@ -483,6 +483,10 @@
    display: flex;
    align-items: center;
   }
+  #calendar .weekdays {
+   display: flex;
+   align-items: center;
+  }
 
   #calendar .day {
     font-family: var(--SFProDisplay-Bold);
