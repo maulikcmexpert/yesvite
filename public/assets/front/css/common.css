@@ -1031,11 +1031,11 @@ main{
         width: 100%;
     } */
 
-    .contact-details {
+    /* .contact-details {
         max-height: 880px;
         overflow-y: scroll;
         height: 60vh;
-    }
+    } */
 }
 
 @media only screen and (max-width: 1199px) {
