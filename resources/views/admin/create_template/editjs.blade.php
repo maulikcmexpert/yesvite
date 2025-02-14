@@ -1026,7 +1026,7 @@
                             let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                             let width = (textWidth + 25) * scaleX; // Scale text box width
 
-
+                            console.log('textAlign',element.textAlign)
                                 if (element.text) {
                                     let textElement = new fabric.Textbox(element.text, {
                                         left: parseFloat(left),
