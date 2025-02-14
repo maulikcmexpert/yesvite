@@ -280,7 +280,7 @@ li{
 }
 
 @media (min-width: 1400px) and (max-width: 2000px){
-    .container{
+    .container:{
         max-width: calc(100% - 10%) !important;
         margin: 0px auto !important;
     }
@@ -294,6 +294,14 @@ li{
 } */
 
 /* ======== responsive ========== */
+
+@media only screen and (max-width:767px){
+    .home-web-tabs-wrp .nav-tabs .nav-link {
+        flex-basis: 32% !important;
+    }
+}
+
+
 @media only screen and (max-width:424px){
     #payment .payment-method-list .main-method-btn{
         max-width: 100px;
@@ -333,5 +341,8 @@ li{
 
     .order-history .history-box h6{
         font-size: 14px;
+    }
+    .home-web-tabs-wrp .nav-tabs .nav-link {
+        flex-basis: 50% !important;
     }
 }
