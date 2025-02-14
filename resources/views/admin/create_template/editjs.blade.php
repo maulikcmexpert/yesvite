@@ -1055,10 +1055,10 @@
                                         angle: element?.rotation ? element?.rotation : 0
                                     });
 
-                                    const textWidth = textElement.calcTextWidth();
-                                    textElement.set({
-                                        width: textWidth
-                                    });
+                                    // const textWidth = textElement.calcTextWidth();
+                                    // textElement.set({
+                                    //     width: textWidth
+                                    // });
                                     // textElement.setControlsVisibility({
                                     //     mt: false,
                                     //     mb: false,
@@ -2786,7 +2786,10 @@
             $(".design-sidebar").addClass('d-none')
             $(".design-sidebar_" + designId).removeClass('d-none')
             $('.close-btn').attr('data-id', "design-sidebar_" + designId);
+            $(".design-sidebar-action").removeClass("activated");
+            $(this).addClass("activated");
         }
+        
     })
 
     $(document).on("click", ".close-btn", function() {
@@ -2927,10 +2930,10 @@
         }
         let targetFontFamily = target.fontFamily;
         $(`.fontfamily[data-font="${targetFontFamily}"]`).prop("checked", true);
-
+        $("#letterSpacingRange").val(target?.charSpacing||0)
         // const charSpacing = target.charSpacing || 0; // Ensure there's a valid value
         const charSpacing = parseFloat($("#letterSpacingRange").val()); // Ensure there's a valid value
-
+        console.log({charSpacing})
         const percentageValue = (charSpacing / 500) * 100;
 
         // Update the input box with the percentage value
@@ -2939,8 +2942,8 @@
         // Update the range slider with the original value
         $("#letterSpacingRange").val(charSpacing);
 
-        $("#fontSizeInput").val(target.fontSize);
-        $("#fontSizeRange").val(target.fontSize);
+        $("#fontSizeInput").val(Number(target.fontSize).toFixed(0));
+        $("#fontSizeRange").val(Number(target.fontSize).toFixed(0));
         // $("#letterSpacingInput").val(target.charSpacing);
         // $("#letterSpacingRange").val(target.charSpacing);
         $("#lineHeightInput").val(target.lineHeight);

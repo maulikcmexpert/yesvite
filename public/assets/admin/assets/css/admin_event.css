@@ -1427,7 +1427,10 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
     height: 100% !important;
     object-fit: cover;
 }
-
+.edit-images-button-inner button.activated {
+    background-color: #F73C71 !important;
+    border-radius: 10px !important;
+}
 .toast.toast-error{
     background-color: #df1c41 !important;
     box-shadow: none !important;

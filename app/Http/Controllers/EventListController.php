@@ -1303,7 +1303,8 @@ class EventListController extends BaseController
         if (!empty($eventList)) {
             $last_month = $eventList[0]['event_month'];
         }
-        return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'upcoming']);
+        $total=Count($eventList);
+        return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'upcoming','total'=>$total]);
     }
 
     public function SearchDraftEvent(Request $request)
@@ -1354,10 +1355,11 @@ class EventListController extends BaseController
             $last_month = $draftEventArray[0]['event_month'];
         }
         //   dd($last_month);
+        $total=Count($draftEventArray);
         if ($is_draft_page != "") {
-            return response()->json(['view' => view('front.event.event_list.search_draft_page', compact('draftEventArray', 'get_current_month'))->render(), "draft_count" => count($draftEventArray)]);
+            return response()->json(['view' => view('front.event.event_list.search_draft_page', compact('draftEventArray', 'get_current_month'))->render(), "draft_count" => count($draftEventArray),"total"=>$total]);
         }
-        return response()->json(['view' => view('front.event.event_list.draft_event', compact('draftEventArray', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'draft']);
+        return response()->json(['view' => view('front.event.event_list.draft_event', compact('draftEventArray', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'draft',"total"=>$total]);
     }
 
     public function SearchPastEvent(Request $request)
@@ -1536,9 +1538,10 @@ class EventListController extends BaseController
             if (!empty($eventPasttList)) {
                 $last_month = $eventPasttList[0]['event_month'];
             }
+            $total=Count($eventPasttList);
         }
 
-        return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'past'],);
+        return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'past','total'=>$total]);
     }
 
     public function EventFilter(Request $request)
