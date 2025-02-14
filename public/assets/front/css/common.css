@@ -1011,6 +1011,10 @@ main{
     min-height: 100vh;
 }
 
+.container{
+    max-width: calc(100% - 10%) !important;
+}
+
 @keyframes bounce {
     0%,
     80%,
