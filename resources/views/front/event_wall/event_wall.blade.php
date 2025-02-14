@@ -29,7 +29,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <input type="hidden" id="is_filter_applied" value="{{$is_filter_applied}}"/>
+                    <input type="hidden" id="is_filter_applied" value="{{ $is_filter_applied }}" />
                     <!-- ===event-breadcrumb-wrp-end=== -->
                     <x-event_wall.wall_title :eventDetails="$eventDetails" :selectedFilters="$selectedFilters" />
                     <!-- ===event-center-title-start=== -->
@@ -194,30 +194,30 @@
                                                                             </button>
                                                                         </li>
                                                                         @if ($post['user_id'] != $login_user_id)
-                                                                        <li>
-                                                                            <button
-                                                                                class="dropdown-item postControlButton"
-                                                                                href="#"
-                                                                                data-event-id="{{ $event }}"
-                                                                                data-event-post-id="{{ $post['id'] }}"
-                                                                                data-user-id="{{ $login_user_id }}"
-                                                                                data-post-control="report">
-                                                                                <svg viewBox="0 0 20 20"
-                                                                                    fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M10.0013 18.9583C5.05964 18.9583 1.04297 14.9416 1.04297 9.99996C1.04297 5.05829 5.05964 1.04163 10.0013 1.04163C14.943 1.04163 18.9596 5.05829 18.9596 9.99996C18.9596 14.9416 14.943 18.9583 10.0013 18.9583ZM10.0013 2.29163C5.7513 2.29163 2.29297 5.74996 2.29297 9.99996C2.29297 14.25 5.7513 17.7083 10.0013 17.7083C14.2513 17.7083 17.7096 14.25 17.7096 9.99996C17.7096 5.74996 14.2513 2.29163 10.0013 2.29163Z"
-                                                                                        fill="#94A3B8" />
-                                                                                    <path
-                                                                                        d="M10 11.4583C9.65833 11.4583 9.375 11.175 9.375 10.8333V6.66663C9.375 6.32496 9.65833 6.04163 10 6.04163C10.3417 6.04163 10.625 6.32496 10.625 6.66663V10.8333C10.625 11.175 10.3417 11.4583 10 11.4583Z"
-                                                                                        fill="#94A3B8" />
-                                                                                    <path
-                                                                                        d="M10.0013 14.1667C9.89297 14.1667 9.78464 14.1417 9.68464 14.1C9.58464 14.0583 9.49297 14 9.40964 13.925C9.33464 13.8417 9.2763 13.7583 9.23464 13.65C9.19297 13.55 9.16797 13.4417 9.16797 13.3333C9.16797 13.225 9.19297 13.1167 9.23464 13.0167C9.2763 12.9167 9.33464 12.825 9.40964 12.7417C9.49297 12.6667 9.58464 12.6083 9.68464 12.5667C9.88464 12.4833 10.118 12.4833 10.318 12.5667C10.418 12.6083 10.5096 12.6667 10.593 12.7417C10.668 12.825 10.7263 12.9167 10.768 13.0167C10.8096 13.1167 10.8346 13.225 10.8346 13.3333C10.8346 13.4417 10.8096 13.55 10.768 13.65C10.7263 13.7583 10.668 13.8417 10.593 13.925C10.5096 14 10.418 14.0583 10.318 14.1C10.218 14.1417 10.1096 14.1667 10.0013 14.1667Z"
-                                                                                        fill="#94A3B8" />
-                                                                                </svg>
-                                                                                Report
-                                                                            </button>
-                                                                        </li>
+                                                                            <li>
+                                                                                <button
+                                                                                    class="dropdown-item postControlButton"
+                                                                                    href="#"
+                                                                                    data-event-id="{{ $event }}"
+                                                                                    data-event-post-id="{{ $post['id'] }}"
+                                                                                    data-user-id="{{ $login_user_id }}"
+                                                                                    data-post-control="report">
+                                                                                    <svg viewBox="0 0 20 20"
+                                                                                        fill="none"
+                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path
+                                                                                            d="M10.0013 18.9583C5.05964 18.9583 1.04297 14.9416 1.04297 9.99996C1.04297 5.05829 5.05964 1.04163 10.0013 1.04163C14.943 1.04163 18.9596 5.05829 18.9596 9.99996C18.9596 14.9416 14.943 18.9583 10.0013 18.9583ZM10.0013 2.29163C5.7513 2.29163 2.29297 5.74996 2.29297 9.99996C2.29297 14.25 5.7513 17.7083 10.0013 17.7083C14.2513 17.7083 17.7096 14.25 17.7096 9.99996C17.7096 5.74996 14.2513 2.29163 10.0013 2.29163Z"
+                                                                                            fill="#94A3B8" />
+                                                                                        <path
+                                                                                            d="M10 11.4583C9.65833 11.4583 9.375 11.175 9.375 10.8333V6.66663C9.375 6.32496 9.65833 6.04163 10 6.04163C10.3417 6.04163 10.625 6.32496 10.625 6.66663V10.8333C10.625 11.175 10.3417 11.4583 10 11.4583Z"
+                                                                                            fill="#94A3B8" />
+                                                                                        <path
+                                                                                            d="M10.0013 14.1667C9.89297 14.1667 9.78464 14.1417 9.68464 14.1C9.58464 14.0583 9.49297 14 9.40964 13.925C9.33464 13.8417 9.2763 13.7583 9.23464 13.65C9.19297 13.55 9.16797 13.4417 9.16797 13.3333C9.16797 13.225 9.19297 13.1167 9.23464 13.0167C9.2763 12.9167 9.33464 12.825 9.40964 12.7417C9.49297 12.6667 9.58464 12.6083 9.68464 12.5667C9.88464 12.4833 10.118 12.4833 10.318 12.5667C10.418 12.6083 10.5096 12.6667 10.593 12.7417C10.668 12.825 10.7263 12.9167 10.768 13.0167C10.8096 13.1167 10.8346 13.225 10.8346 13.3333C10.8346 13.4417 10.8096 13.55 10.768 13.65C10.7263 13.7583 10.668 13.8417 10.593 13.925C10.5096 14 10.418 14.0583 10.318 14.1C10.218 14.1417 10.1096 14.1667 10.0013 14.1667Z"
+                                                                                            fill="#94A3B8" />
+                                                                                    </svg>
+                                                                                    Report
+                                                                                </button>
+                                                                            </li>
                                                                         @endif
                                                                     </ul>
                                                                 </div>
@@ -343,16 +343,15 @@
                                                                         <h5>{{ $post['kids'] }} Kids</h5>
                                                                     </div>
                                                                 </div>
-
                                                             @else
-                                                            <div class="success-no">
-                                                                <h5>NO</h5>
-                                                            </div>
+                                                                <div class="success-no">
+                                                                    <h5>NO</h5>
+                                                                </div>
                                                             @endif
                                                         @endif
 
                                                         @if ($post['post_type'] == '2')
-                                                            @if($post['post_message']=="")
+                                                            @if ($post['post_message'] == '')
                                                                 <div class="posts-card-inner-wrp">
                                                                     <h3 class="posts-card-inner-questions">
                                                                         {{ $post['poll_question'] }}
@@ -362,22 +361,35 @@
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
-                                                            @if($post['post_message']!="")
+                                                                @if ($post['post_message'] != '')
                                                                     <h3 class="posts-card-inner-questions">
                                                                         {{ $post['poll_question'] }}</h3>
-                                                             @endif
+                                                                @endif
                                                                 <div class="post-card-poll-inner">
-                                                                <div class="d-flex align-items-center justify-content-between w-100 mb-1">
-                                                                <h5>
-                                                                    {{ $post['total_poll_vote'] }} Votes
-                                                                    <span>{{ $post['poll_duration'] }} left</span>
-                                                                </h5>
-                                                                    <svg style="width: 18px;height:18px" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M16.5 16.5H1.5C1.1925 16.5 0.9375 16.245 0.9375 15.9375C0.9375 15.63 1.1925 15.375 1.5 15.375H16.5C16.8075 15.375 17.0625 15.63 17.0625 15.9375C17.0625 16.245 16.8075 16.5 16.5 16.5Z" fill="#94A3B8"></path>
-                                                                        <path d="M7.3125 3V16.5H10.6875V3C10.6875 2.175 10.35 1.5 9.3375 1.5H8.6625C7.65 1.5 7.3125 2.175 7.3125 3Z" fill="#94A3B8"></path>
-                                                                        <path d="M2.25 7.5V16.5H5.25V7.5C5.25 6.675 4.95 6 4.05 6H3.45C2.55 6 2.25 6.675 2.25 7.5Z" fill="#94A3B8"></path>
-                                                                        <path d="M12.75 11.25V16.5H15.75V11.25C15.75 10.425 15.45 9.75 14.55 9.75H13.95C13.05 9.75 12.75 10.425 12.75 11.25Z" fill="#94A3B8"></path>
-                                                                    </svg>
+                                                                    <div
+                                                                        class="d-flex align-items-center justify-content-between w-100 mb-1">
+                                                                        <h5>
+                                                                            {{ $post['total_poll_vote'] }} Votes
+                                                                            <span>{{ $post['poll_duration'] }}
+                                                                                left</span>
+                                                                        </h5>
+                                                                        <svg style="width: 18px;height:18px"
+                                                                            width="18" height="18"
+                                                                            viewBox="0 0 18 18" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M16.5 16.5H1.5C1.1925 16.5 0.9375 16.245 0.9375 15.9375C0.9375 15.63 1.1925 15.375 1.5 15.375H16.5C16.8075 15.375 17.0625 15.63 17.0625 15.9375C17.0625 16.245 16.8075 16.5 16.5 16.5Z"
+                                                                                fill="#94A3B8"></path>
+                                                                            <path
+                                                                                d="M7.3125 3V16.5H10.6875V3C10.6875 2.175 10.35 1.5 9.3375 1.5H8.6625C7.65 1.5 7.3125 2.175 7.3125 3Z"
+                                                                                fill="#94A3B8"></path>
+                                                                            <path
+                                                                                d="M2.25 7.5V16.5H5.25V7.5C5.25 6.675 4.95 6 4.05 6H3.45C2.55 6 2.25 6.675 2.25 7.5Z"
+                                                                                fill="#94A3B8"></path>
+                                                                            <path
+                                                                                d="M12.75 11.25V16.5H15.75V11.25C15.75 10.425 15.45 9.75 14.55 9.75H13.95C13.05 9.75 12.75 10.425 12.75 11.25Z"
+                                                                                fill="#94A3B8"></path>
+                                                                        </svg>
                                                                     </div>
                                                                     @foreach ($post['poll_option'] as $index => $option)
                                                                         <div class="poll-click-wrp poll-progress-one"
@@ -406,53 +418,57 @@
                                                         @endif
                                                         <div class="posts-card-like-commnet-wrp photo-card-head-right">
                                                             <div class="posts-card-like-comment-left">
-                                                            <!-- data-bs-target="#reaction-modal" data-post="{{$post['id']}}"> -->
-                                                                <ul type="button"  class="get_post_emoji_list"
-                                                                     data-post="{{$post['id']}}">
-                                                                    @php $i=0; $j = 0; @endphp
+                                                                <!-- data-bs-target="#reaction-modal" data-post="{{ $post['id'] }}"> -->
+                                                                <ul type="button" class="get_post_emoji_list"
+                                                                    data-post="{{ $post['id'] }}">
+                                                                    @php
+                                                                        $i = 0;
+                                                                        $j = 0;
+                                                                    @endphp
                                                                     @foreach ($post['reactionList'] as $reaction)
+                                                                        <!-- Smiley Emoji -->
 
 
-                                                                    <!-- Smiley Emoji -->
+                                                                        @if ($j == 0 && $post['self_reaction'] == $reaction)
+                                                                            <li
+                                                                                id="reactionImage_{{ $post['id'] }}">
 
-
-                                                                    @if ($j==0 && ($post['self_reaction'] == $reaction))
-                                                                        <li id="reactionImage_{{ $post['id'] }}">
-
-                                                                        @php $j++; @endphp
-                                                                    @else
-                                                                    <li>
-                                                                    @endif
-                                                                            @if ($reaction == '\u{1F60A}')
-                                                                                <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
-                                                                                    alt="Smiley Emoji">
-                                                                            @elseif ($reaction == '\u{1F60D}')
-                                                                                <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
-                                                                                    alt="Eye Heart Emoji">
-                                                                            @elseif ($reaction == '\u{2764}')
-                                                                                <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
-                                                                                    alt="Heart Emoji">
-
-                                                                            @elseif($reaction == '\u{1F44D}')
+                                                                                @php $j++; @endphp
+                                                                            @else
+                                                                            <li>
+                                                                        @endif
+                                                                        @if ($reaction == '\u{1F60A}')
+                                                                            <img src="{{ asset('assets/front/img/smily-emoji.png') }}"
+                                                                                alt="Smiley Emoji">
+                                                                        @elseif ($reaction == '\u{1F60D}')
+                                                                            <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}"
+                                                                                alt="Eye Heart Emoji">
+                                                                        @elseif ($reaction == '\u{2764}')
+                                                                            <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
+                                                                                alt="Heart Emoji">
+                                                                        @elseif($reaction == '\u{1F44D}')
                                                                             <img src="{{ asset('assets/front/img/thumb-icon.png') }}"
-                                                                                    loading="lazy" alt="Thumb Emoji"
-                                                                                    class="emoji" data-emoji="👍"
-                                                                                    data-unicode="\\u{1F44D}">
-
-                                                                            @elseif($reaction == '\u{1F44F}')
-                                                                                <img
-                                                                                    src="{{ asset('assets/front/img/clap-icon.png') }}"
-                                                                                    loading="lazy" alt="Clap Emoji"
-                                                                                    class="emoji" data-emoji="👏"
-                                                                                    data-unicode="\\u{1F44F}">
-                                                                                @endif
+                                                                                loading="lazy" alt="Thumb Emoji"
+                                                                                class="emoji" data-emoji="👍"
+                                                                                data-unicode="\\u{1F44D}">
+                                                                        @elseif($reaction == '\u{1F44F}')
+                                                                            <img src="{{ asset('assets/front/img/clap-icon.png') }}"
+                                                                                loading="lazy" alt="Clap Emoji"
+                                                                                class="emoji" data-emoji="👏"
+                                                                                data-unicode="\\u{1F44F}">
+                                                                        @endif
 
                                                                         </li>
-                                                                        @php $i++;  if($i==3){break;} @endphp
+                                                                        @php
+                                                                            $i++;
+                                                                            if ($i == 3) {
+                                                                                break;
+                                                                            }
+                                                                        @endphp
                                                                     @endforeach
-                                                                    @if($j==0 && $i<3)
-                                                                    <li id="reactionImage_{{ $post['id'] }}">
-                                                                    </li>
+                                                                    @if ($j == 0 && $i < 3)
+                                                                        <li id="reactionImage_{{ $post['id'] }}">
+                                                                        </li>
                                                                     @endif
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
@@ -872,8 +888,6 @@
                                                     </div>
 
                                                 </div>
-
-
                                             @endforeach
                                         </div>
                                     </div>
@@ -1392,46 +1406,65 @@
         </div>
     </div>
 
-    <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade create-post-modal all-events-filtermodal" id="reaction-modal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="reactions-info-main event-center-tabs-main">
-                    <!-- ===tabs=== -->
-                    <nav>
-                      <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-all-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-all-reaction" type="button" role="tab" aria-controls="nav-all-reaction" aria-selected="true">
-                            All 106
-                        </button>
-                        <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-heart-reaction" type="button" role="tab" aria-controls="nav-heart-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/heart-emoji.png')}}" alt=""> <span id="heart-count">0</span>
-                        </button>
-                        <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-thumb-reaction" type="button" role="tab" aria-controls="nav-thumb-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/thumb-icon.png')}}" alt=""> <span id="thumb-count">0</span>
-                        </button>
-                        <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-smily-reaction" type="button" role="tab" aria-controls="nav-smily-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/smily-emoji.png')}}" alt=""> <span id="smily-count">0</span>
-                        </button>
-                        <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-eye-heart-reaction" type="button" role="tab" aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/eye-heart-emoji.png')}}" alt=""> <span id="eye-heart-count">0</span>
-                        </button>
-                        <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab" data-bs-target="#nav-clap-reaction" type="button" role="tab" aria-controls="nav-clap-reaction" aria-selected="false" tabindex="-1">
-                            <img src="{{asset('assets/front/img/clap-icon.png')}}" alt=""> <span id="clap-count">0</span>
-                        </button>
-                      </div>
-                    </nav>
-                    <!-- ===tabs=== -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reactions</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="reactions-info-main event-center-tabs-main">
+                        <!-- ===tabs=== -->
+                        <nav>
+                            <div class="nav nav-tabs reaction-nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-all-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-all-reaction" type="button" role="tab"
+                                    aria-controls="nav-all-reaction" aria-selected="true">
+                                    All 106
+                                </button>
+                                <button class="nav-link" id="nav-heart-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-heart-reaction" type="button" role="tab"
+                                    aria-controls="nav-heart-reaction" aria-selected="false" tabindex="-1">
+                                    <img src="{{ asset('assets/front/img/heart-emoji.png') }}" alt=""> <span
+                                        id="heart-count">0</span>
+                                </button>
+                                <button class="nav-link" id="nav-thumb-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-thumb-reaction" type="button" role="tab"
+                                    aria-controls="nav-thumb-reaction" aria-selected="false" tabindex="-1">
+                                    <img src="{{ asset('assets/front/img/thumb-icon.png') }}" alt=""> <span
+                                        id="thumb-count">0</span>
+                                </button>
+                                <button class="nav-link" id="nav-smily-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-smily-reaction" type="button" role="tab"
+                                    aria-controls="nav-smily-reaction" aria-selected="false" tabindex="-1">
+                                    <img src="{{ asset('assets/front/img/smily-emoji.png') }}" alt=""> <span
+                                        id="smily-count">0</span>
+                                </button>
+                                <button class="nav-link" id="nav-eye-heart-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-eye-heart-reaction" type="button" role="tab"
+                                    aria-controls="nav-eye-heart-reaction" aria-selected="false" tabindex="-1">
+                                    <img src="{{ asset('assets/front/img/eye-heart-emoji.png') }}" alt="">
+                                    <span id="eye-heart-count">0</span>
+                                </button>
+                                <button class="nav-link" id="nav-clap-reaction-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-clap-reaction" type="button" role="tab"
+                                    aria-controls="nav-clap-reaction" aria-selected="false" tabindex="-1">
+                                    <img src="{{ asset('assets/front/img/clap-icon.png') }}" alt=""> <span
+                                        id="clap-count">0</span>
+                                </button>
+                            </div>
+                        </nav>
+                        <!-- ===tabs=== -->
 
-                    <!-- ===Tab-content=== -->
-                    <div class="tab-content" id="myTabContent">
+                        <!-- ===Tab-content=== -->
+                        <div class="tab-content" id="myTabContent">
 
-                      <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel" aria-labelledby="nav-all-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade active show" id="nav-all-reaction" role="tabpanel"
+                                aria-labelledby="nav-all-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1447,12 +1480,13 @@
                               </div>
                             </div>
                           </li> -->
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
 
-                      <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel" aria-labelledby="nav-heart-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade" id="nav-heart-reaction" role="tabpanel"
+                                aria-labelledby="nav-heart-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1468,12 +1502,13 @@
                               </div>
                             </div>
                           </li> -->
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
 
-                      <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel" aria-labelledby="nav-thumb-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade" id="nav-thumb-reaction" role="tabpanel"
+                                aria-labelledby="nav-thumb-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1489,12 +1524,13 @@
                               </div>
                             </div>
                           </li> -->
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
 
-                      <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel" aria-labelledby="nav-smily-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade" id="nav-smily-reaction" role="tabpanel"
+                                aria-labelledby="nav-smily-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1511,12 +1547,13 @@
                             </div>
                           </li> -->
 
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
 
-                      <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel" aria-labelledby="nav-eye-heart-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade" id="nav-eye-heart-reaction" role="tabpanel"
+                                aria-labelledby="nav-eye-heart-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1533,13 +1570,14 @@
                             </div>
                           </li> -->
 
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
 
 
-                      <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel" aria-labelledby="nav-clap-reaction-tab">
-                        <ul>
-                          <!-- <li class="reaction-info-wrp">
+                            <div class="tab-pane fade" id="nav-clap-reaction" role="tabpanel"
+                                aria-labelledby="nav-clap-reaction-tab">
+                                <ul>
+                                    <!-- <li class="reaction-info-wrp">
                             <div class="commented-user-head">
                               <div class="commented-user-profile">
                                   <div class="commented-user-profile-img">
@@ -1556,14 +1594,14 @@
                             </div>
                           </li> -->
 
-                        </ul>
-                      </div>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ===Tab-content=== -->
                     </div>
-                    <!-- ===Tab-content=== -->
                 </div>
-            </div>
 
-          </div>
+            </div>
         </div>
     </div>
 
@@ -1574,6 +1612,7 @@
     use Carbon\ Carbon;
 
     public
+
     function getShortTimeAttribute() {
         $time = Carbon::parse($this - > posttime);
 
