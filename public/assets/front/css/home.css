@@ -1211,6 +1211,10 @@
     .features-wrapper .owl-carousel .owl-dots {
         display: flex;
     }
+
+    .home-web-tabs-wrp .nav-tabs .nav-link {
+        flex-basis: 32% !important;
+    }
 }
 
 @media only screen and (max-width: 575px) {
@@ -1310,6 +1314,13 @@
     .step_2 .collection-card h4 {
         font-size: 15px;
         line-height: 17px;
+    }
+}
+
+
+@media only screen and (max-width: 424px) {
+    .home-web-tabs-wrp .nav-tabs .nav-link {
+        flex-basis: 50% !important;
     }
 }
 
