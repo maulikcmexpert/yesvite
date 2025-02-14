@@ -288,7 +288,7 @@ ul.chat-list li:last-child{
     padding: 20px 24px;
     position: relative;
     /* max-height: 580px; */
-    max-height: calc(100vh - 100px);
+    max-height: calc(100% - 100px);
     overflow-y: scroll;
     margin-bottom: 65px;
 }
