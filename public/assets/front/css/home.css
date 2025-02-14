@@ -923,7 +923,7 @@
     background-color: #fff;
 }
 .home-web-tabs-wrp .nav-tabs .nav-link {
-    font-family: var(--SFProDisplay-Medium) !important;
+    /* font-family: var(--SFProDisplay-Medium) !important; */
     font-size: 15px !important;
     line-height: 22.4px !important;
     color: var(--lightgreay) !important;
