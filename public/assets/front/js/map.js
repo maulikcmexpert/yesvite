@@ -20,7 +20,9 @@ function initMap() {
         }
     });
     // Initialize autocomplete and bind it to the map's bounds
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var autocomplete = new google.maps.places.Autocomplete(input, {
+        componentRestrictions: { country: "us" }, // Restrict results to the US
+    });
     autocomplete.bindTo("bounds", map);
 
     // Info window and marker for the selected location
