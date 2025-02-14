@@ -2680,7 +2680,8 @@ main {
   }
 
   .event-center-wall-main, .about-main-wrp, .guest-main-wrp, .potuck-main-wrp{
-    max-height: 800px;
+    /* max-height: 800px; */
+    max-height: calc(100vh - 100px);
     overflow: hidden;
     overflow-y: scroll;
   }
