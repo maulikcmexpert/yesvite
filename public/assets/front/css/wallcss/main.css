@@ -276,6 +276,7 @@ li{
     position: relative;
     font-size: 15px !important;
     margin: 10px 0px;
+    display: inline-block;
 }
 
 .custome-designcategory input{
