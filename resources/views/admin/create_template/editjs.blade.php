@@ -1551,9 +1551,10 @@
             const newValue = parseFloat(lineHeightRange.value);
             lineHeightInput.value = newValue;
             lineHeightTooltip.innerHTML = `<span>${newValue}</span>`;
-            addToUndoStack(canvas);
+            
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
+                addToUndoStack(canvas);
                 activeObject.set('lineHeight', newValue);
                 canvas.renderAll();
             }
@@ -2424,9 +2425,7 @@
         });
 
         // Undo and Redo actions (basic implementation)
-        let undoStack = [];
-        let redoStack = [];
-        let isAddingToUndoStack = 0;
+        
 
         function setControlVisibilityForAll() {
             canvas.getObjects().forEach((obj) => {
@@ -2463,7 +2462,9 @@
             });
             canvas.renderAll();
         }
-
+        let undoStack = [];
+        let redoStack = [];
+        let isAddingToUndoStack = 0;
         function addToUndoStack(canvas) {
             undoStack.push(canvas.toJSON());
             if (undoStack.length > 0) {
