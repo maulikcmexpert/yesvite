@@ -307,7 +307,7 @@ class EventController extends BaseController
                 if ($request->iscopy != null) {
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
-                dd($getEventData );
+                // dd($getEventData );
                 $eventDetail['inviteCount'] = EventInvitedUser::with('user')
                     ->where('event_id', $eventID)->where('is_co_host', '0')
                     ->count();
