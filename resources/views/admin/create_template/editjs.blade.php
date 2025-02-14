@@ -1029,30 +1029,35 @@
 
                                 if (element.text) {
                                     let textElement = new fabric.Textbox(element.text, {
-                                        left: left,
-                                        top: top,
-                                        width: width,
-                                        // width: element.width || 200,
+                                        left: parseFloat(left),
+                                        top: parseFloat(top),
+                                        width: width, // Default width if not provided
                                         fontSize: fontSize,
                                         fill: element.fill,
                                         fontFamily: element.fontFamily,
                                         fontWeight: element.fontWeight,
                                         fontStyle: element.fontStyle,
                                         underline: element.underline,
-                                        linethrough: element.linethrough,
+                                        lineHeight: element.lineHeight || 2,
+                                        letterSpacing: 0,
+                                        linethrough:
+                                            element.linethrough == true ||
+                                            element.linethrough == "true" ||
+                                            element.linethrough == "True"
+                                                ? true
+                                                : false,
                                         backgroundColor: element.backgroundColor,
                                         textAlign: element.textAlign,
-                                        editable: true,
                                         hasControls: true,
-                                        // borderColor: 'blue',
-                                        // cornerColor: 'red',
-                                        borderColor: '#2DA9FC',
-                                        // cornerColor: 'red',
-                                        cornerColor: '#fff',
-                                        cornerSize: 6,
+                                        borderColor: "#2DA9FC",
+                                        cornerColor: "#fff",
+                                        cornerSize: 10,
+                                        cornerStyle: "circle",
                                         transparentCorners: false,
-                                        isStatic: true,
-                                        angle: element?.rotation ? element?.rotation : 0
+                                        lockScalingFlip: true,
+                                        hasBorders: true,
+                                        centeredRotation: true,
+                                        angle: element?.rotation ? element?.rotation : 0,
                                     });
 
                                     // const textWidth = textElement.calcTextWidth();
@@ -1923,6 +1928,7 @@
                 fontFamily: originalTextbox.fontFamily,
                 originX: originalTextbox.originX,
                 originY: originalTextbox.originY,
+                textAlign: originalTextbox.textAlign,
                 hasControls: true,
                 hasBorders: true,
                 lockScalingFlip: true,
@@ -2186,7 +2192,6 @@
                 cornerColor: '#fff',
                 cornerSize: 6,
                 transparentCorners: false,
-                textAlign: 'center',
             });
             textbox.setControlsVisibility({
                 mt: false, // Hide middle top control
