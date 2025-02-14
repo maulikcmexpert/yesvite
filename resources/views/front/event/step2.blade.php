@@ -225,6 +225,9 @@
             if (designId) {
                 // Find the element with class 'edit_design_tem' and matching data-id, then trigger click
                 $('.edit_design_tem[data-id="' + designId + '"]').trigger('click');
+                urlParams.delete('design_id');
+                const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+                window.history.replaceState(null, '', newUrl);
             }
         
 
