@@ -687,7 +687,10 @@ async function bindData(current_event_id) {
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-
+                console.log({ canvasWidth });
+                console.log({ canvasHeight });
+                console.log(img.width);
+                console.log(img.height);
                 img.set({
                     left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
                     top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
@@ -755,6 +758,9 @@ async function bindData(current_event_id) {
                         let top = element.top
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
+
+                        console.log({ left });
+                        console.log({ top });
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         let width = (textWidth + 25) * scaleX; // Scale text box width
 
