@@ -1438,7 +1438,7 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 .activated svg path {
     stroke: #fff !important;
 }
-.design-sidebar-action.activated svg path {
+.format-text-inner-options.activated svg path {
     stroke: #000000 !important;
 }
 .toast.toast-error{
