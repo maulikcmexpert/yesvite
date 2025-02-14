@@ -1,7 +1,7 @@
 @php
 $getSocialLink = getSocialLink();
 @endphp
-
+<x-front.advertise />
 <section class="home-web-tabs-wrp">
     <div class="container">
         <nav>
@@ -17,7 +17,7 @@ $getSocialLink = getSocialLink();
         </nav>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="nav-explore-designs" role="tabpanel" aria-labelledby="explore-designs-tab">
-                <x-front.advertise />
+                
                 <!-- ============= contact-details ============ -->
                 <section class="contact-details profile-details supportive-home-wrp">
                     <div class="container">
