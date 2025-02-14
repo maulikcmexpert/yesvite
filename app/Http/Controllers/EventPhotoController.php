@@ -30,7 +30,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class EventPhotoController extends Controller
+class EventPhotoController extends BaseController
 {
     public function index(String $id)
     {
@@ -40,7 +40,7 @@ class EventPhotoController extends Controller
         $user  = Auth::guard('web')->user();
         $firstname = $user->firstname;
         $lastname = $user->lastname;
-        $selectedFilters=[];
+        $selectedFilters = [];
         $photos = $user->profile;
         // dd(1);
         $js = ['event_photo'];
@@ -681,7 +681,7 @@ class EventPhotoController extends Controller
             }
             $current_page = "photos";
             $login_user_id  = $user->id;
-            return view('layout', compact('page', 'js', 'postList', 'selectedFilters','title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            return view('layout', compact('page', 'js', 'postList', 'selectedFilters', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             dd($e);
@@ -1118,15 +1118,16 @@ class EventPhotoController extends Controller
             'event_id' => $request['event_id'],
             'event_post_id' => $request['event_post_id']
         ])
-        ->join('users', 'users.id', '=', 'event_post_reactions.user_id')
-        ->select(
-            'event_post_reactions.reaction',
-            'event_post_reactions.unicode',
-            'users.firstname',
-            'users.lastname',
+            ->join('users', 'users.id', '=', 'event_post_reactions.user_id')
+            ->select(
+                'event_post_reactions.reaction',
+                'event_post_reactions.unicode',
+                'users.firstname',
+                'users.lastname',
 
-            DB::raw('CONCAT(users.city, IF(users.city IS NOT NULL AND users.state IS NOT NULL, ", ", ""), users.state) as location'),
-            DB::raw('COUNT(*) as count'))
+                DB::raw('CONCAT(users.city, IF(users.city IS NOT NULL AND users.state IS NOT NULL, ", ", ""), users.state) as location'),
+                DB::raw('COUNT(*) as count')
+            )
             ->groupBy('event_post_reactions.reaction', 'event_post_reactions.unicode', 'users.firstname', 'users.lastname', 'users.city', 'users.state')
             ->orderByDesc('count')
             ->take(3)
