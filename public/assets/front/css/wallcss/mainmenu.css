@@ -1652,7 +1652,7 @@
 
 .home-upcoming-events-card-left {
     /* flex-basis: 72%; */
-    flex-basis: calc(100% - 0px);
+    flex-basis: calc(100% - 50px);
 }
 
 .home-upcoming-events-card-right {
