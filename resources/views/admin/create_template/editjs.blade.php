@@ -1537,11 +1537,13 @@
             fontSizeTooltip.innerHTML = `<span>${newValue}px</span>`;
 
             const activeObject = canvas.getActiveObject();
-            if (activeObject && activeObject.type === 'textbox') {
-                activeObject.set('fontSize', newValue); // Update font size
-
-                // Call updateTextboxWidth to adjust textbox width accordingly
-                updateTextboxWidth(activeObject);
+            if (activeObject && activeObject.type === "textbox") {
+                clearTimeout(updateTextBoxTime);
+                updateTextBoxTime = setTimeout(function () {
+                    addToUndoStack(canvas);
+                    activeObject.set("fontSize", newValue);
+                    updateTextboxWidth(activeObject);
+                }, 800);
             }
         };
         // Function to update line height
