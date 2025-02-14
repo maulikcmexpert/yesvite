@@ -29,7 +29,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EventPotluckController extends Controller
+class EventPotluckController extends BaseController
 {
     public function index(String $id)
     {
@@ -38,7 +38,7 @@ class EventPotluckController extends Controller
         $page = 'front.event_wall.event_potluck';
         $user  = Auth::guard('web')->user();
         $event = decrypt($id);
-        $selectedFilters=[];
+        $selectedFilters = [];
         $js = ['event_potluck', 'guest_rsvp', 'post_like_comment', 'guest'];
         if ($event == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
@@ -93,7 +93,7 @@ class EventPotluckController extends Controller
             $potluckDetail['item'] = $totalItems;
             $potluckDetail['available'] = $totalItems;
 
-            $potluckDetail['podluck_category_list_new']=[];
+            $potluckDetail['podluck_category_list_new'] = [];
             if (!empty($eventpotluckData)) {
                 $potluckCategoryData = [];
                 $potluckItemsSummury = [];
@@ -122,7 +122,7 @@ class EventPotluckController extends Controller
 
                             $itmquantity = 0;
                             $innnerUserItem = 0;
-                            $userQuantity=0;
+                            $userQuantity = 0;
                             $potluckItem['id'] =  $itemValue->id;
                             $potluckItem['description'] =  $itemValue->description;
                             $potluckItem['is_host'] = ($itemValue->user_id == $id) ? 1 : 0;
@@ -145,10 +145,9 @@ class EventPotluckController extends Controller
                                 $categoryQuantity = $categoryQuantity + $itemcarryUser->quantity;
                                 if ($itemcarryUser->user_id != $user->id) {
                                     $innnerUserItem = $innnerUserItem + $itemcarryUser->quantity;
-                                }else{
+                                } else {
                                     $userQuantity = $userQuantity + $itemcarryUser->quantity;
                                 }
-
                             }
                             $userQuantity =  $userQuantity + $innnerUserItem;
                             if ($userQuantity <  $itemValue->quantity) {
@@ -515,7 +514,7 @@ class EventPotluckController extends Controller
                 $eventInfo['host_view'] = $eventAboutHost;
                 $current_page = "potluck";
                 $login_user_id  = $user->id;
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo','selectedFilters','potluckDetail', 'current_page')); // return compact('eventInfo');
+                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {
@@ -616,7 +615,7 @@ class EventPotluckController extends Controller
         if ($request['self_bring_item'] == '1' || $request['self_bring_item'] == '0') {
             // Use the 'self_quantity' if provided, otherwise use the 'quantity'
             $selfQuantity = $request->has('self_quantity') ? $request['self_quantity'] : $request['quantity'];
-            $self_bring_quantity=$request->self_bring_quantity;
+            $self_bring_quantity = $request->self_bring_quantity;
             UserPotluckItem::create([
                 'event_id' => $request['event_id'],
                 'user_id' => $user->id,
@@ -674,19 +673,20 @@ class EventPotluckController extends Controller
     {
         $user  = Auth::guard('web')->user();
 
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'],'user_id'=>$user->id, 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'user_id' => $user->id, 'event_id' => $request['event_id'], 'event_potluck_item_id' => $request['category_item_id']])->first();
 
         // if ($input['quantity'] <= $checkQty) {
         $checkIsExist = UserPotluckItem::where([
-            'id' => $checkCarryQty['id'],'user_id'=>$user->id,
+            'id' => $checkCarryQty['id'],
+            'user_id' => $user->id,
         ])->first();
         if ($checkIsExist != null) {
             $checkIsExist->quantity = $request['quantity'];
             $checkIsExist->save();
         }
 
-        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id'],'user_id'=>$user->id,])->first();
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id'],'user_id'=>$user->id,])->sum('quantity');
+        $getUserItemData = UserPotluckItem::with('users')->where(['id' => $checkCarryQty['id'], 'user_id' => $user->id,])->first();
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $request['category_item_id'], 'user_id' => $user->id,])->sum('quantity');
 
         $getCarryUser =  [
             "id" => $getUserItemData->id,
@@ -729,7 +729,7 @@ class EventPotluckController extends Controller
         }
 
         // Check if there's enough quantity available
-        if ($checkCarryQty < $checkQty && $isUser==false ) {
+        if ($checkCarryQty < $checkQty && $isUser == false) {
             // Check if the user has already added this item
             $checkIsExist = UserPotluckItem::where([
                 'event_id' => $request->event_id,
@@ -775,7 +775,7 @@ class EventPotluckController extends Controller
                 'item_id' => $itemId,
                 'spoken_for' => $spokenFor,
                 "key" => $request->categorykey,
-                "itemkey"=> $request->itemkey
+                "itemkey" => $request->itemkey
             ])->render();
 
             // Return the response
@@ -796,9 +796,10 @@ class EventPotluckController extends Controller
     public function deleteUserPotluckItem(Request $request)
     {
         $user  = Auth::guard('web')->user();
-        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'user_id'=>$user->id,'event_potluck_item_id' => $request['category_item_id']])->first();
+        $checkCarryQty = UserPotluckItem::where(['event_potluck_category_id' => $request['category_id'], 'event_id' => $request['event_id'], 'user_id' => $user->id, 'event_potluck_item_id' => $request['category_item_id']])->first();
         $checkIsExist = UserPotluckItem::where([
-            'id' =>  $checkCarryQty['id'], 'user_id'=>$user->id
+            'id' =>  $checkCarryQty['id'],
+            'user_id' => $user->id
         ])->first();
 
         $event_potluck_item_id = $checkIsExist->event_potluck_item_id;
@@ -808,7 +809,7 @@ class EventPotluckController extends Controller
         }
 
 
-        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id , 'user_id'=>$user->id,'event_potluck_category_id' => $request['category_id'],])->sum('quantity');
+        $spoken_for = UserPotluckItem::where(['event_potluck_item_id' => $event_potluck_item_id, 'user_id' => $user->id, 'event_potluck_category_id' => $request['category_id'],])->sum('quantity');
         return response()->json([
             'success' => true,
             'spoken_for' => $spoken_for,
