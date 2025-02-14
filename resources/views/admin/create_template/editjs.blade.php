@@ -1031,7 +1031,7 @@
                                         let textElement = new fabric.Textbox(element.text, {
                                             left: parseFloat(left),
                                             top: parseFloat(top),
-                                            width: width, // Default width if not provided
+                                            width: element.width || width, // Default width if not provided
                                             fontSize: fontSize,
                                             fill: element.fill,
                                             fontFamily: element.fontFamily,
@@ -2118,6 +2118,7 @@
                         fontWeight: obj.fontWeight,
                         fontStyle: obj.fontStyle,
                         underline: obj.underline,
+                        width: obj.width,
                         linethrough: obj.linethrough,
                         date_formate: obj.date_formate,
                         letterSpacing: obj.charSpacing /
