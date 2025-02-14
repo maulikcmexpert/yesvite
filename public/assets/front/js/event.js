@@ -255,11 +255,15 @@ $(document).on('input','#search_upcoming_event',function(){
                 $('#scrollStatus').html(response.view);
                 $('#tabbtn1').text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
+                $('.count_of_upcoming').text(response.total);
+
 
             }else{
                 $('#scrollStatus').html('');
                 $('#scrollStatus').html('No Data Found');
                 $('#all-months-upcoming').css('display','none');
+                $('.count_of_upcoming').text(response.total);
+
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
@@ -299,10 +303,13 @@ $(document).on('input','#search_draft_event',function(){
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html(response.view);
                 $('#tabbtn2').text(response.last_month);
+                $('.count_of_draft').text(response.total);
 
             }else{
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html('No Data Found');
+                $('.count_of_draft').text(response.total);
+
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
@@ -347,7 +354,8 @@ $(document).on('input','#search_past_event',function(e){
                 $('#scrollStatus3').html(response.view);
                 $('#tabbtn3').css('display','flex');
                 $('#tabbtn3').text(response.last_month);
-                
+                $('.count_of_past').text(response.total);
+
                 // $('.loader').css('display','none');    
 
             }else{
@@ -355,6 +363,7 @@ $(document).on('input','#search_past_event',function(e){
                 $('#scrollStatus3').html('');
                 $('#scrollStatus3').html('No Data Found');
                 $('#tabbtn3').css('display','none');
+                $('.count_of_past').text(response.total);
 
                 // $('.loader').css('display','none');    
             }
@@ -732,6 +741,21 @@ today.setHours(0, 0, 0, 0);
                 $('#tabbtn3').css('display','flex');
                 $(tabbtn).text(response.last_month);
                 $('#all-months-upcoming').css('display','block');
+                if(response.page=="upcoming"){
+
+                    $('.count_of_upcoming').text(response.total);
+
+                }
+
+                if(response.page=="past"){
+
+                    $('.count_of_past').text(response.total);
+
+                }
+                if(response.page=="draft"){
+                    $('.count_of_draft').text(response.total);
+
+                }
 
             }else{
                 $(scrollStatus).html('');
@@ -825,6 +849,8 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus').html('');
                 $('#scrollStatus').html('No Data Found');
                 $('#all-months-upcoming').css('display','none');
+                $('.count_of_upcoming').text(response.total);
+
             }
             // hasMore = response.has_more; // Update the `hasMore` flag
             busy = false;
@@ -877,6 +903,8 @@ today.setHours(0, 0, 0, 0);
                 $('#scrollStatus3').html('');
                 $('#scrollStatus3').html('No Data Found');
                 $('#tabbtn3').css('display','none');
+                $('.count_of_past').text(response.total);
+
 
                 // $('.loader').css('display','none');    
             }
@@ -897,6 +925,54 @@ today.setHours(0, 0, 0, 0);
 
     });
         }, 750);
+
+  });
+  $(document).on('click','#nav-drafts-tab',function(){
+    var searchValue = $(this).val();
+    var current_month="";
+
+    $('.latest_month_draft').each(function () { 
+        current_month=$(this).val();
+    });
+    $('#home_loader').css('display','flex');    
+
+    clearTimeout(search_user_ajax_timer);
+    search_user_ajax_timer = setTimeout(function () {
+    $.ajax({
+        url: `${base_url}search_draft_event`,
+        type: 'GET',
+        data: { searchValue: searchValue,current_month:current_month},
+        success: function (response) {
+
+            if (response.view) {
+                $('#scrollStatus2').html('');
+                $('#scrollStatus2').html(response.view);
+                $('#tabbtn2').text(response.last_month);
+                $('.count_of_draft').text(response.total);
+
+
+            }else{
+                $('#scrollStatus2').html('');
+                $('#scrollStatus2').html('No Data Found');
+                $('.count_of_draft').text(response.total);
+
+            }
+            // hasMore = response.has_more; // Update the `hasMore` flag
+            busy = false;
+            $('#home_loader').hide();
+            $('.all-events-month-show').css('display','flex');
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching events:', error);
+            busy = false;
+            $('#home_loader').hide();
+        },
+        complete: function () {
+            $('.loader_up').css('display','none');    
+           }
+    })
+ }, 750);
 
   });
 $(document).on('click','.notification-filter-events',function () {
