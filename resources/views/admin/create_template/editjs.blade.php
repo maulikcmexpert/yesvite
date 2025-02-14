@@ -2424,9 +2424,7 @@
         });
 
         // Undo and Redo actions (basic implementation)
-        let undoStack = [];
-        let redoStack = [];
-        let isAddingToUndoStack = 0;
+        
 
         function setControlVisibilityForAll() {
             canvas.getObjects().forEach((obj) => {
@@ -2463,7 +2461,9 @@
             });
             canvas.renderAll();
         }
-
+        let undoStack = [];
+        let redoStack = [];
+        let isAddingToUndoStack = 0;
         function addToUndoStack(canvas) {
             undoStack.push(canvas.toJSON());
             if (undoStack.length > 0) {
