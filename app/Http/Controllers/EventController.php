@@ -362,6 +362,8 @@ class EventController extends BaseController
 
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
 
+                dd($eventDetail['co_host_list']);
+
                 $invitedUser = EventInvitedUser::with('user')->where(['event_id' => $getEventData->id])->get();
 
                 $eventDetail['events_schedule_list'] = null;
@@ -584,7 +586,7 @@ class EventController extends BaseController
                         // $potluckCategory['innerCategoryUserQnt'] =  $innnerUserItem;
                         $eventDetail['podluck_category_list'][] = $potluckCategory;
                     }
-                    // Update session after the loop    
+                    // Update session after the loop
                     session()->put('category', $categories);
                     session()->put('category_item', $categories_item);
                     Session::save();
@@ -1238,12 +1240,12 @@ class EventController extends BaseController
             //         // dd($gift_registry);
             //         foreach ($thankyou_card as $data) {
             //             $thankyou_card_data[] = [
-            //                 
+            //
             //             ];
             //         }
             //         EventGiftRegistry::insert($thankyou_card_data);
             //     }
-            // }     
+            // }
             // return  Redirect::to('event')->with('success', 'Event Created successfully');
             Session::forget('desgin');
             Session::forget('shape_image');
@@ -2052,7 +2054,7 @@ class EventController extends BaseController
     }
     // public function updateSelfBring(Request $request)
     // {
-    //     // Retrieving values from the request 
+    //     // Retrieving values from the request
     //     $categoryItemKey = $request->categoryItemKey;
     //     $categoryIndexKey = $request->categoryIndexKey;
     //     $quantity = (string)$request->quantity;
@@ -2324,7 +2326,7 @@ class EventController extends BaseController
 
         // if (!empty($userIds)) {
         //     foreach ($userIds as $user) {
-        //         $selectedIds[] = $user->id; 
+        //         $selectedIds[] = $user->id;
         //     }
         // }
 
@@ -4081,7 +4083,7 @@ class EventController extends BaseController
                     //     // dd($newInviteGuest);
                     //     sendNotificationGuest('invite', $notificationParam);
                     // }
-                    // $total_count = count($filteredIds) + count($newInviteGuest);                  
+                    // $total_count = count($filteredIds) + count($newInviteGuest);
                 }
             }
 
@@ -4092,12 +4094,12 @@ class EventController extends BaseController
             //         // dd($gift_registry);
             //         foreach ($thankyou_card as $data) {
             //             $thankyou_card_data[] = [
-            //                 
+            //
             //             ];
             //         }
             //         EventGiftRegistry::insert($thankyou_card_data);
             //     }
-            // }     
+            // }
             // return  Redirect::to('event')->with('success', 'Event Created successfully');
             Session::forget('desgin');
             Session::forget('shape_image');
