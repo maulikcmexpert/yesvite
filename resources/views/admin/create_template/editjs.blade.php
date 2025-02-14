@@ -2446,8 +2446,8 @@
                 obj.set('cornerColor', "#fff");
                 // Set text alignment if the object is a text-based object
                 if (obj.type === 'textbox' || obj.type === 'text') {
-                    alert('textAllign')
-                    obj.set('textAlign', 'center'); // Set text alignment to center
+                    // alert('textAllign')
+                    // obj.set('textAlign', 'center'); // Set text alignment to center
                 }
 
                 obj.on('rotating', function() {
