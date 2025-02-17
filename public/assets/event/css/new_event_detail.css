@@ -1325,6 +1325,11 @@
 }
 
 .guest-wrp.side-guest-wrp .invite-pro .heading{
+    display: flex;
+    align-items: center;
+}
+
+.guest-wrp.side-guest-wrp .invite-pro .heading{
     margin-bottom: 5px;
 }
 
@@ -1332,6 +1337,7 @@
    font-size: 17px;
    color: var(--secondryColor);
    font-weight: 500;
+   margin-left: 7px;
 }
 
 .input-calender-icon {
