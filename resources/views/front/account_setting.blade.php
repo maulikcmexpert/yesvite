@@ -185,7 +185,7 @@
                         </a>
                     </div>
                     <div class="general-wrap mb-0">
-                        <h5 class="border-bottom pt-0">PROFILE & MESSAGING</h5>
+                        <h5 class="border-bottom pt-0">PROFILE | MESSAGING PRIVACY</h5>
                         <a href="{{ route('profile.privacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Profile Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
