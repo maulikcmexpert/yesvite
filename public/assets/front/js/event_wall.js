@@ -1538,3 +1538,59 @@ $(document).on('click', '.get_post_emoji_list', function () {
 // const longPressDelay = 3000; // 3 seconds for long press
 // let pressTimer;
 // let isLongPress = false;
+$(document).ready(function () {
+    const visibilityOptions = {
+        1: "Everyone",
+        2: "RSVP’d - Yes",
+        3: "RSVP’d - No",
+        4: "RSVP’d - No Reply",
+    };
+
+    function loadSettings() {
+        console.log("Loading settings..."); // Debugging
+        let savedVisibility =
+            localStorage.getItem("post_privacys") || "Everyone";
+        let savedAllowComments =
+            localStorage.getItem("commenting_on_off") || "1";
+
+        $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop(
+            "checked",
+            true
+        );
+        $("#allowComments").prop("checked", savedAllowComments === "1");
+
+        $(".hiddenVisibility").val(savedVisibility);
+        $(".hiddenAllowComments").val(savedAllowComments);
+
+        $("#savedSettingsDisplay").html(`
+            <h4>${visibilityOptions[savedVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
+        `);
+    }
+
+    // Page load settings
+    loadSettings();
+
+    // Check modal ID & trigger loadSettings()
+    $("#add-new-photomodal").on("show.bs.modal", function () {
+        console.log("Modal Opened & Settings Loaded"); // Debugging
+        loadSettings();
+    });
+
+    // Save Button Click Handler
+    $("#saveSettings").on("click", function () {
+        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
+        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
+
+        localStorage.setItem("post_privacys", visibility);
+        localStorage.setItem("commenting_on_off", allowComments);
+
+        $(".hiddenVisibility").val(visibility);
+        $(".hiddenAllowComments").val(allowComments);
+
+        $("#savedSettingsDisplay").html(`
+            <h4>${visibilityOptions[visibility]} <i class="fa-solid fa-angle-down"></i></h4>
+        `);
+
+        console.log("Saved Settings:", { visibility, allowComments });
+    });
+});
