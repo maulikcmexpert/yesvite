@@ -115,11 +115,14 @@
 .new-event-sidebar-wrp {
     border: 1px solid var(--borderColor);
     border-radius: 16px;
-    padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
     /* height: 100%; */
     position: relative;
+}
+
+.new-event-sidebar-menu{
+    padding: 16px 24px 24px 24px;
 }
 
 .new-event-sidebar-menu ul {
