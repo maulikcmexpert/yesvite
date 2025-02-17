@@ -71,7 +71,7 @@
 
 .photos-main-wrp{
     margin-top: 0px;
-    height: 100vh;
+    height: 1000px;
     max-height: calc(100% - 10%);
     padding: 10px 10px 40px 10px;
     position: relative;
@@ -507,8 +507,8 @@
 }
 
 .photos-main-wrp:has(.photos-card-wrp) > .row{
-    height: calc(100% - 0%);
-    max-height: calc(100% - 1%);
+    height: 1000px;
+    max-height: 1000px;
     overflow: hidden;
     overflow-y: scroll;
     padding-top: 40px !important;
@@ -539,6 +539,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.no-photos-screen{
+    position: sticky;
+    bottom: 0;
 }
 
 /* ===Responsive=== */
