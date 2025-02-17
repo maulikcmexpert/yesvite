@@ -12,7 +12,6 @@ $(document).ready(function () {
     var offset1 = 0;
 
 $("#product-scroll").on("scroll", function () {
-    alert();
         if (busy1) return; 
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
