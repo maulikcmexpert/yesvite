@@ -1333,8 +1333,13 @@
     margin-bottom: 5px;
 }
 
+.guest-wrp.side-guest-wrp .invite-pro .heading svg{
+    width: 23px;
+    height: 23px;
+}
+
 .guest-wrp.side-guest-wrp .invite-pro .heading p{
-   font-size: 17px;
+   font-size: 16px;
    color: var(--secondryColor);
    font-weight: 500;
    margin-left: 7px;
@@ -1423,7 +1428,7 @@
 }
 
 .guest-wrp.side-guest-wrp .invite-pro strong{
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     cursor: pointer;
 }
@@ -1468,7 +1473,7 @@
 }
 
 .coin-invite-wrp span{
-    font-size: 12px;
+    font-size: 11px;
 }
 
 
