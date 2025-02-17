@@ -1304,9 +1304,9 @@
 .guest-wrp.side-guest-wrp {
     /* border: none;
     box-shadow: none; */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: sticky;
+    /* left: 50%;
+    transform: translateX(-50%); */
     width: 100%;
     bottom: 0;
 }
