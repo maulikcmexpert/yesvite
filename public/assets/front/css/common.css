@@ -48,6 +48,7 @@ p {
 }
 .privacy-policy p {
     font-size: 16px;
+    color: #000 !important;
     margin-bottom: 0 !important;
 }
 
