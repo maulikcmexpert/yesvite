@@ -63,9 +63,20 @@
 .order-content {
     border: 1px solid var(--borderColor);
     border-radius: 16px;
-    padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.order-inner-content{
+    padding: 16px 24px 24px 24px;
+}
+
+.order-content .new-event-btn{
+    position: sticky !important;
+    bottom: 10px !important;
 }
 
 .order-content h4 {
