@@ -142,9 +142,8 @@ if ($hostView) {
 
                                             <input type="hidden" id="eventID" value="{{ $eventId }}">
                                             <input type="hidden" id="user_id" value="{{ $guest['id'] }}">
-                                            <input type="hidden" id="user_id_rsvp" value="{{ $guest['id'] }}">
+
                                             <input type="hidden" id="sync" value="{{  $guest['is_sync']}}">
-                                            <input type="hidden" id="sync_rsvp" value="{{  $guest['is_sync']}}">
                                         </div>
                                     </div>
                                     @if($guest['is_sync']=="0")
@@ -281,6 +280,8 @@ if ($hostView) {
                 </div>
                 <div class="guest-rsvp-incres">
                     <h6>Guests</h6>
+                    <input type="hidden" id="user_id_rsvp" value="">
+                    <input type="hidden" id="sync_rsvp" value="">
                     <div class="guest-edit-wrp">
                         <div class="guest-edit-box">
                             <p>Adults</p>
