@@ -993,7 +993,7 @@
 }
 
 .checkout-data .setting-img img {
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .event_images_slider .owl-dots {
