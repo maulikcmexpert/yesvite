@@ -1,4 +1,4 @@
-{{dd($all_invited_user['all_invited_users']);
+{{dd($eventInfo);
 }}
 <main class="new-main-content">
 
