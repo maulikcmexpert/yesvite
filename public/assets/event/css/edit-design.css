@@ -920,7 +920,75 @@
 }
 
 
-@media only screen and (min-width: 2000px) and (max-width: 6000px) {
+@media only screen and (min-width: 3801px) and (max-width: 4000px){
+    .image-edit-inner-img {
+        width: 1000px;
+        height: 1500px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 900px;
+    }
+}
+
+@media only screen and (min-width: 3601px) and (max-width: 3800px){
+    .image-edit-inner-img {
+        width: 1000px;
+        height: 1500px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 900px;
+    }
+}
+
+@media only screen and (min-width: 3401px) and (max-width: 3600px){
+    .image-edit-inner-img {
+        width: 950px;
+        height: 1400px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 800px;
+    }
+}
+
+
+@media only screen and (min-width: 3201px) and (max-width: 3400px){
+    .image-edit-inner-img {
+        width: 900px;
+        height: 1300px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 800px;
+    }
+}
+
+@media only screen and (min-width: 3001px) and (max-width: 3200px){
+    .image-edit-inner-img {
+        width: 900px;
+        height: 1200px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 700px;
+    }
+}
+
+
+@media only screen and (min-width: 2801px) and (max-width: 3000px){
+    .image-edit-inner-img {
+        width: 800px;
+        height: 1100px;
+        /* margin: 0px auto; */
+    }
+    .edit-images-button-wrp {
+        max-width: 700px;
+    }
+}
+
+@media only screen and (min-width: 2000px) and (max-width: 2800px) {
     .image-edit-inner-img {
         width: 690px;
         height: 980px;
