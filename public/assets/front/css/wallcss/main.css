@@ -302,6 +302,9 @@ li{
         max-width: calc(100% - 10%) !important;
         margin: 0px auto !important;
     }
+    .supportive-home-wrp .container{
+        max-width: 100%     !important; 
+    }
 }
 
 /* @media only screen and (min-width: 1400px){
