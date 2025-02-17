@@ -2119,12 +2119,7 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
-
-        dd(1);
-        $userId = Auth::guard('web')->user()->id;
-            if (!$userId || !User::find($userId)) {
-                return response()->json(['info' => 'logged_out','status'=>401]);
-            }   
+      
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {

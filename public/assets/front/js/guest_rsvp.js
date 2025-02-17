@@ -51,6 +51,11 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             $('#editrsvp3 .remove-Rsvp-btn').data('guest-update-id', guestId);
             $('#editrsvp3 .remove-Rsvp-btn').data('guest-is_sync', is_sync);
             $('#editrsvp3 .remove-Rsvp-btn').data('user-id', response.user_id);
+            if(response.is_sync=="1" || response.is_sync==1){
+                $('#sync_rsvp').val(response.user_id);
+            }else{
+                $('#user_id_rsvp').val(response.user_id);
+            }
             $('#editrsvp3 .remove-Rsvp-btn').data('event-id', response.event_id);
 
             $('#editrsvp3').modal('show'); // Show the modal
@@ -90,10 +95,11 @@ $(document).on('change', '.rsvp_yes', function () {
 $(document).on('click', '.save-rsvp', function () {
     const eventId = $('#event_id').val();
     const guestId = $(this).data('guest-update-id');
-    const user_id = $("#user_id").val();
-    const sync = $("#sync").val();
-    alert(user_id);
-    alert(sync);
+    const user_id = $("#user_id_rsvp").val();
+
+    const sync = $("#sync_rsvp").val();
+
+
     const updatedData = {
         event_id:eventId,
         guestId: guestId,
