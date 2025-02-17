@@ -71,7 +71,8 @@
 
 .photos-main-wrp{
     margin-top: 0px;
-    height: calc(100% - 10%);
+    height: 100%;
+    max-height: calc(100% - 10%);
     padding: 10px 10px 40px 10px;
     position: relative;
 }
