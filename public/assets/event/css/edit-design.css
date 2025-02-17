@@ -1081,7 +1081,7 @@
 
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
-        font-size: 20px;
+        font-size: 20px !important;
     }
 } 
 
