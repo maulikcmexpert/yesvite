@@ -101,21 +101,21 @@
                             </svg>
                         </span> --}}
                     </div>
-                    <div class="general-wrap mb-0">
+                    {{-- <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">PURCHASE INFO</h5>
                         <a href="{{ route('profile.transaction')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Transactions</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> --}}
                         {{-- <a href="{{route('account_settings.messagePrivacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Messaging Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a> --}}
-                    </div>
+                    {{-- </div> --}}
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom">General</h5>
                         <div class="d-flex align-items-center justify-content-between border-bottom">
@@ -185,7 +185,7 @@
                         </a>
                     </div>
                     <div class="general-wrap mb-0">
-                        <h5 class="border-bottom pt-0">PROFILE & MESSAGING</h5>
+                        <h5 class="border-bottom pt-0">PROFILE | MESSAGING PRIVACY</h5>
                         <a href="{{ route('profile.privacy')}}" class="d-flex align-items-center public-view border-bottom">
                             <h6>Profile Privacy</h6>
                             <svg class="ms-auto" width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">

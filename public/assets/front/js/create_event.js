@@ -259,8 +259,8 @@ $(document).ready(function () {
             },
 
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 if (response.success) {
@@ -446,8 +446,8 @@ $(document).on("click", "#delete_group", function (e) {
             group_id: group_id,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (response.status == "1") {
@@ -501,8 +501,8 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
-                    if (response.status == 401 && response.info == 'logout') {
-                        window.location.href = '/'; // Redirect to home page
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/"; // Redirect to home page
                         return;
                     }
                     var grplth = $(".group_list .listgroups").length;
@@ -1784,8 +1784,8 @@ $(document).on("click", ".add_more_activity", function (e) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $("#" + id).append(response);
@@ -1797,7 +1797,7 @@ $(document).on("click", ".add_more_activity", function (e) {
         },
         error: function (xhr, status, error) {
             console.error("An error occurred");
-            toastr.error('An error occurred');
+            toastr.error("An error occurred");
         },
     });
 });
@@ -2034,8 +2034,8 @@ function loadMoreData(page, search_name) {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (data.html == " ") {
@@ -2146,8 +2146,8 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 console.log(response);
@@ -2244,10 +2244,12 @@ function guest_counter(total_guest, max_guest) {
         remainingCount = max_guest - total_guest;
     }
 
-    if (remainingCount < 0) {
+    if (remainingCount <= 0) {
         $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").addClass("left-minus");
     } else {
         $(".invite-left_d").text(remainingCount + " Left");
+        $(".invite-left_d").removeClass("left-minus");
     }
     // $(".invite-left_d").text(
     //     remainingCount + " Left"
@@ -2266,8 +2268,8 @@ function delete_invited_user(userId, is_contact = "0") {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             var currentInviteCount = parseInt($("#currentInviteCount").val());
@@ -2360,8 +2362,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             },
             success: function (response) {
                 console.log(response);
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 var currentInviteCount = $("#currentInviteCount").val();
@@ -2422,7 +2424,6 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             },
             error: function (xhr, status, error) {
                 toastr.error(error);
-
             },
         });
     } else {
@@ -2437,8 +2438,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 if (is_contact == "1") {
@@ -2568,8 +2569,8 @@ $(document).on("click", ".add_category_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $("#hidden_potluck_key").val("");
@@ -2700,8 +2701,8 @@ $(document).on("click", ".add_category_item_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(response);
@@ -3970,8 +3971,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 if (response == 1) {
@@ -4016,8 +4017,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 if (response == 1) {
@@ -5174,8 +5175,8 @@ function uploadImage(blob) {
             processData: false,
             contentType: false,
             success: (response) => {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 resolve(response);
@@ -5235,8 +5236,8 @@ function save_image_design(downloadImage, textData) {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    if (response.status == 401 && response.info == 'logout') {
-                        window.location.href = '/'; // Redirect to home page
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/"; // Redirect to home page
                         return;
                     }
                     console.log(response);
@@ -5297,7 +5298,7 @@ function save_image_design(downloadImage, textData) {
                         "Failed to upload and save the image:",
                         error
                     );
-                    toastr.error("Failed to upload and save the image:",error);
+                    toastr.error("Failed to upload and save the image:", error);
                 },
             });
         })
@@ -5385,10 +5386,12 @@ $(document).on("click", "#delete_invited_user", function () {
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
     // $(".invite-left_d").text(re_total_remaining_count + " Left");
-    if (re_total_remaining_count < 0) {
+    if (re_total_remaining_count <= 0) {
         $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").addClass("left-minus");
     } else {
         $(".invite-left_d").text(re_total_remaining_count + " Left");
+        $(".invite-left_d").removeClass("left-minus");
     }
 
     $("#event_guest_left_count").val(re_total_remaining_count);
@@ -5426,10 +5429,12 @@ $(document).on("click", "#delete_invited_user_tel", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    if (re_total_remaining_count < 0) {
+    if (re_total_remaining_count <= 0) {
         $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").addClass("left-minus");
     } else {
         $(".invite-left_d").text(re_total_remaining_count + " Left");
+        $(".invite-left_d").removeClass("left-minus");
     }
     // $(".invite-left_d").text(re_total_remaining_count + " Left");
     $("#event_guest_left_count").val(re_total_remaining_count);
@@ -5521,10 +5526,12 @@ $(document).on(
             var max_guest = $("#coins").val();
 
             var remainingCount = max_guest - total_guest;
-            if (remainingCount < 0) {
+            if (remainingCount <= 0) {
                 $(".invite-left_d").text("0 Left");
+                $(".invite-left_d").addClass("left-minus");
             } else {
                 $(".invite-left_d").text(remainingCount + " Left");
+                $(".invite-left_d").removeClass("left-minus");
             }
             $("#event_guest_left_count").val(remainingCount);
         }
@@ -5545,10 +5552,12 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
         var max_guest = $("#coins").val();
 
         var remainingCount = max_guest - total_guest;
-        if (remainingCount < 0) {
+        if (remainingCount <= 0) {
             $(".invite-left_d").text("0 Left");
+            $(".invite-left_d").addClass("left-minus");
         } else {
             $(".invite-left_d").text(remainingCount + " Left");
+            $(".invite-left_d").removeClass("left-minus");
         }
         $("#event_guest_left_count").val(remainingCount);
     }
@@ -5604,8 +5613,8 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
 
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (potluck_delete_id == "all_potluck") {
@@ -5797,8 +5806,8 @@ function update_self_bring_bck(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(quantity + "/" + categoryItemQuantity);
@@ -5918,7 +5927,6 @@ function update_self_bring_bck(
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
             toastr.error(error);
-
         },
     });
 }
@@ -6055,8 +6063,8 @@ $(document).on("click", ".add_gift_item_btn", function () {
                 registry_link: registry_link,
             },
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 console.log(response);
@@ -6077,7 +6085,6 @@ $(document).on("click", ".add_gift_item_btn", function () {
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
                 toastr.error(error);
-
             },
         });
         registry_item++;
@@ -6105,8 +6112,8 @@ $(document).on("click", ".delete_gift_registry", function () {
             registry_item: id,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(response);
@@ -6115,7 +6122,6 @@ $(document).on("click", ".delete_gift_registry", function () {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -6194,8 +6200,8 @@ $(document).on("click", ".add_thankyou_card", function () {
             thankyou_template_id: edit_template_id ? edit_template_id : "",
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(response);
@@ -6229,7 +6235,6 @@ $(document).on("click", ".add_thankyou_card", function () {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
     thankyou_template_id++;
@@ -6248,8 +6253,8 @@ $(document).on("click", ".delete_thankyou_card", function () {
             thank_you_card_id: id,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             var thankscardcount = $(".thank-you-card").length;
@@ -6268,7 +6273,6 @@ $(document).on("click", ".delete_thankyou_card", function () {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -6778,8 +6782,8 @@ $(document).on("click", ".final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $("#loader").css("display", "none");
@@ -6802,7 +6806,6 @@ $(document).on("click", ".final_create_event", function (e) {
             $("#loader").css("display", "none");
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -7078,8 +7081,8 @@ function loadSearchUser(search_name) {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (data == "") {
@@ -7190,8 +7193,8 @@ $(document).on("click", ".invite_group_member", function () {
             unselectedValues: unselectedValues,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (response?.isTrue && response.isTrue) {
@@ -7245,7 +7248,6 @@ $(document).on("click", ".invite_group_member", function () {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -7264,8 +7266,8 @@ $(document).on("click", ".view_members", function () {
             group_id: group_id,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (response.status == "1") {
@@ -7279,7 +7281,6 @@ $(document).on("click", ".view_members", function () {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -7472,8 +7473,8 @@ function ajax_tip_close(type) {
             tip: type,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             // console.log(response);
@@ -7541,8 +7542,8 @@ $(document).on("keyup", "#group_search_ajax", function () {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(data.html);
@@ -7581,8 +7582,8 @@ function groupToggleSearch(search_name = null) {
     })
         .done(function (data) {
             console.log(data.html);
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (data.html == " ") {
@@ -7824,8 +7825,8 @@ function get_co_host_list(
     })
         .done(function (data) {
             console.log(data);
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (search_name == "") {
@@ -8062,8 +8063,8 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             // console.log(data);
@@ -8272,8 +8273,8 @@ $(document).on("click", ".thank_you_card_toggle", function () {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $("#loader").hide();
@@ -8309,8 +8310,8 @@ $(document).on("click", ".add_gift_registry", function () {
         },
     })
         .done(function (data) {
-            if (data.status == 401 && data.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (data.status == 401 && data.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $("#loader").hide();
@@ -8398,8 +8399,8 @@ $(document).on("click", ".all_user_list", function () {
         url: base_url + "event/see_all",
         method: "POST",
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(response);
@@ -8508,8 +8509,8 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
         cache: false,
         beforeSend: function () {},
         success: function (html) {
-            if (html.status == 401 && html.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (html.status == 401 && html.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(html);
@@ -8673,8 +8674,8 @@ function searchRecords(lim, off, type, search = null) {
         },
         cache: false,
         success: function (html) {
-            if (html.status == 401 && html.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (html.status == 401 && html.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(html);
@@ -8683,7 +8684,6 @@ function searchRecords(lim, off, type, search = null) {
         error: function (xhr, status, error) {
             console.error("Error fetching data:", error);
             toastr.error(error);
-
         },
     });
 }
@@ -8786,8 +8786,8 @@ $(document).on("click", ".save-slider-image", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 var savedImages = response.images;
@@ -8799,7 +8799,6 @@ $(document).on("click", ".save-slider-image", function () {
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
                 toastr.error(error);
-
             },
         });
     }
@@ -8831,8 +8830,8 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    if (response.status == 401 && response.info == 'logout') {
-                        window.location.href = '/'; // Redirect to home page
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/"; // Redirect to home page
                         return;
                     }
                     if (delete_id == 1) {
@@ -8848,7 +8847,6 @@ $(document).on("click", ".delete_silder", function (e) {
                 },
                 error: function (xhr, status, error) {
                     toastr.error(error);
-
                 },
             });
         } else {
@@ -8921,9 +8919,8 @@ function updateEventData() {
         },
         data: data,
         success: function (response) {
-
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             $(".main-content-wrp").removeClass("blurred");
@@ -9113,8 +9110,8 @@ $(document).on("click", "#close_editEvent", async function (e) {
         },
         data: eventData,
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             if (response == 1) {
@@ -9128,7 +9125,6 @@ $(document).on("click", "#close_editEvent", async function (e) {
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
             toastr.error(error);
-
         },
     });
 });
@@ -9531,8 +9527,8 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             IsPotluck = 1;
@@ -9674,7 +9670,6 @@ function update_self_bring(
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
             toastr.error(error);
-
         },
     });
 }
@@ -9688,8 +9683,8 @@ function sliderImages(id) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             var savedImages = response.images;
@@ -9734,6 +9729,12 @@ function getcoins() {
     }
 
     $(".invite-left_d").text(AllCoins + " Left");
+
+    if (AllCoins <= 0) {
+        $(".invite-left_d").addClass("left-minus");
+    } else {
+        $(".invite-left_d").removeClass("left-minus");
+    }
 }
 getcoins();
 if (category != 0) {
