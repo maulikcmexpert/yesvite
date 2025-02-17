@@ -507,7 +507,7 @@
 }
 
 .photos-main-wrp:has(.photos-card-wrp) > .row{
-    height: calc(100% - 10%);
+    height: calc(100% - 0%);
     max-height: calc(100% - 1%);
     overflow: hidden;
     overflow-y: scroll;
