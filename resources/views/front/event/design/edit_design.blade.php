@@ -299,7 +299,7 @@
         @endif
     </div>
 
-    <div id="sidebar" class="sidebar choose-design-sidebar" >
+    <div id="sidebar" class="sidebar choose-design-sidebar" style="right: 0%;">
         <!-- =====fonts-family-options==== -->
         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
