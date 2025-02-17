@@ -92,6 +92,8 @@ $(document).on('click', '.save-rsvp', function () {
     const guestId = $(this).data('guest-update-id');
     const user_id = $("#user_id").val();
     const sync = $("#sync").val();
+    alert(user_id);
+    alert(sync);
     const updatedData = {
         event_id:eventId,
         guestId: guestId,
