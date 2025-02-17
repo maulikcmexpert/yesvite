@@ -1509,7 +1509,7 @@ $(document).on("change", "#schedule", function () {
     $(".step_1_activity").html(
         '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
     );
-    if (eventDate != "") {
+    if (startDate != "") {
         if ($(this).is(":checked")) {
             // console.log(eventDate);
             var selectedDates = new Set();
