@@ -431,6 +431,8 @@
     bottom: 10px !important;
     left: auto !important;
     transform: translateY(0) !important;
+    left: 50%;
+    transform: translateX(-50%) !important;
 }
 
 #sidebar_add_co_host .alert-box {
