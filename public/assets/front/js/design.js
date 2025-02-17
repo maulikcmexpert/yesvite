@@ -648,12 +648,14 @@ $(document).on("click", ".edit_design_tem", function (e) {
         success: async function (response) {
             console.log (response);
 
-            // let jsonResponse = JSON.parse(response); 
-
-            // if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
-            //     window.location.href = "/"; // Redirect to home page
-            //     return;
-            // }
+            if (isJSON(response)) {
+                let jsonResponse = JSON.parse(response);
+            
+                if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
+                    return;
+                }
+            }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
@@ -2893,9 +2895,13 @@ function loadAgain() {
         },
         success: function (response) {
             console.log (response);
-            if (response.status == 401 && response.info == "logout") {
-                window.location.href = "/"; // Redirect to home page
-                return;
+            if (isJSON(response)) {
+                let jsonResponse = JSON.parse(response);
+            
+                if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
+                    return;
+                }
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
@@ -2903,4 +2909,12 @@ function loadAgain() {
         },
         error: function (xhr, status, error) {},
     });
+}
+function isJSON(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (e) {
+        return false;
+    }
 }
