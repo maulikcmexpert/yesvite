@@ -427,6 +427,10 @@
 
 .step_3 .design-seting {
     max-width: calc(100vh - 150px);
+    position: sticky !important;
+    bottom: 0;
+    left: auto !important;
+    transform: translateY(0) !important;
 }
 
 #sidebar_add_co_host .alert-box {
