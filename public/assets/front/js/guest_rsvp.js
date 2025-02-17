@@ -91,9 +91,13 @@ $(document).on('click', '.save-rsvp', function () {
     const eventId = $('#event_id').val();
     const guestId = $(this).data('guest-update-id');
     const user_id = $("#user_id").val();
+    const sync = $("#sync").val();
+    alert(user_id);
+    alert(sync);
     const updatedData = {
         event_id:eventId,
         guestId: guestId,
+        sync_id :sync,
         user_id:user_id,
         adults: $('#editrsvp3 input[name="adults"]').val(),
         kids: $('#editrsvp3 input[name="kids"]').val(),
