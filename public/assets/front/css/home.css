@@ -900,7 +900,7 @@
 }
 
 /* ===new-home-tabs=== */
-.home-web-tabs-wrp > nav {
+.home-web-tabs-wrp nav:first-child {
     border-bottom: 1px solid var(--border);
 }
 .home-web-tabs-wrp .nav-tabs {
