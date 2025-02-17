@@ -758,6 +758,7 @@ async function bindData(current_event_id) {
                         console.log({ left });
                         console.log({ top });
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                        fontSize = Number(fontSize).toFixed(0);
                         let width = (textWidth + 25) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
