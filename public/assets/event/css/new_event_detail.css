@@ -1312,7 +1312,7 @@
     /* left: 50%;
     transform: translateX(-50%); */
     width: 100%;
-    bottom: 0;
+    bottom: 10px;
 }
 
 .guest-wrp.side-guest-wrp .invite-pro {
