@@ -941,6 +941,9 @@
     .edit-images-button-inner button h6{
         font-size: 24px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
 }
 
 @media only screen and (min-width: 3601px) and (max-width: 3800px){
@@ -964,6 +967,9 @@
     .edit-images-button-inner button h6{
         font-size: 24px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
 }
 
 @media only screen and (min-width: 3401px) and (max-width: 3600px){
@@ -986,6 +992,9 @@
     }
     .edit-images-button-inner button h6{
         font-size: 24px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
     }
 }
 
@@ -1011,6 +1020,9 @@
     .edit-images-button-inner button h6{
         font-size: 20px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
 }
 
 @media only screen and (min-width: 3001px) and (max-width: 3200px){
@@ -1033,6 +1045,9 @@
     }
     .edit-images-button-inner button h6{
         font-size: 20px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
     }
 }
 
@@ -1057,6 +1072,9 @@
     }
     .edit-images-button-inner button h6{
         font-size: 20px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
     }
 }
 
@@ -1086,6 +1104,12 @@
     }
     .edit-images-button-wrp{
         max-width: 600px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 18px;
     }
 }
 
