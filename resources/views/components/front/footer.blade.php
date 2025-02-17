@@ -545,7 +545,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                     
 
                     // Reference to the user's overview data in Firebase
-                    const overviewRef = ref(database, `overview/${userId}`);
+                    const overviewRef = ref(database, `users/${userId}`);
 
                     const isOnlineForDatabase = {
                         userStatus: "Online",
