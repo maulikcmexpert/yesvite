@@ -470,7 +470,10 @@
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="coin-invite-wrp buycredits">
-                    <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="available-coins">{{$coins}}</span>
+                    @php
+                        $setPrice = array_reverse($prices);
+                    @endphp
+                    <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="available-coins">{{$setPrice[0]['coins']}} <span class="green-price">{{$setPrice[0]['price']}}</span></span>
                 </div>
                 {{-- <div class="invite-right"> --}}
                     {{-- <span><strong>15</strong>Guests or less</span> --}}
