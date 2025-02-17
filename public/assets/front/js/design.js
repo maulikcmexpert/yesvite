@@ -76,6 +76,10 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 if (response.image) {
                     eventData.temp_id = null;
                     image = base_url + "storage/canvas/" + response.image;
@@ -642,6 +646,10 @@ $(document).on("click", ".edit_design_tem", function (e) {
             id: id,
         },
         success: async function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
@@ -2878,6 +2886,10 @@ function loadAgain() {
             image,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
