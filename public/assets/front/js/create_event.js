@@ -271,6 +271,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.log(base_url + "event/delete-session");
+                toastr.error(error);
                 console.log("AJAX error: " + error);
             },
         });
@@ -472,6 +473,7 @@ $(document).on("click", "#delete_group", function (e) {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
         },
     });
 });
@@ -539,6 +541,7 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
+                toastr.error(error);
             },
         });
     } else {
@@ -1794,6 +1797,7 @@ $(document).on("click", ".add_more_activity", function (e) {
         },
         error: function (xhr, status, error) {
             console.error("An error occurred");
+            toastr.error('An error occurred');
         },
     });
 });
@@ -2194,6 +2198,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
+                toastr.error(error);
             },
         });
     } else {
@@ -2313,6 +2318,7 @@ function delete_invited_user(userId, is_contact = "0") {
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
+            toastr.error("An error occurred while storing the User ID.");
         },
     });
 }
@@ -2414,7 +2420,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
             },
-            error: function (xhr, status, error) {},
+            error: function (xhr, status, error) {
+                toastr.error(error);
+
+            },
         });
     } else {
         $("#loader").css("display", "flex");
@@ -2464,6 +2473,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             },
             error: function (xhr, status, error) {
                 console.error("An error occurred while storing the User ID.");
+                toastr.error(error);
             },
         });
     }
@@ -2614,6 +2624,7 @@ $(document).on("click", ".add_category_btn", function () {
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
+            toastr.error(error);
         },
     });
     // $(".add_sub_category").show();
@@ -2740,6 +2751,7 @@ $(document).on("click", ".add_category_item_btn", function () {
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
+            toastr.error(error);
         },
     });
 });
@@ -4018,6 +4030,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
+                toastr.error(error);
                 console.log("AJAX error: " + error);
             },
         });
@@ -5284,6 +5297,7 @@ function save_image_design(downloadImage, textData) {
                         "Failed to upload and save the image:",
                         error
                     );
+                    toastr.error("Failed to upload and save the image:",error);
                 },
             });
         })
@@ -5614,6 +5628,7 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
         },
     });
 });
@@ -5902,6 +5917,8 @@ function update_self_bring_bck(
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
+            toastr.error(error);
+
         },
     });
 }
@@ -6059,6 +6076,8 @@ $(document).on("click", ".add_gift_item_btn", function () {
             },
             error: function (xhr, status, error) {
                 console.log("AJAX error: " + error);
+                toastr.error(error);
+
             },
         });
         registry_item++;
@@ -6095,6 +6114,8 @@ $(document).on("click", ".delete_gift_registry", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -6207,6 +6228,8 @@ $(document).on("click", ".add_thankyou_card", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
     thankyou_template_id++;
@@ -6244,6 +6267,8 @@ $(document).on("click", ".delete_thankyou_card", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -6776,6 +6801,8 @@ $(document).on("click", ".final_create_event", function (e) {
         error: function (xhr, status, error) {
             $("#loader").css("display", "none");
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -7217,6 +7244,8 @@ $(document).on("click", ".invite_group_member", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -7249,6 +7278,8 @@ $(document).on("click", ".view_members", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -8651,6 +8682,8 @@ function searchRecords(lim, off, type, search = null) {
         },
         error: function (xhr, status, error) {
             console.error("Error fetching data:", error);
+            toastr.error(error);
+
         },
     });
 }
@@ -8765,6 +8798,8 @@ $(document).on("click", ".save-slider-image", function () {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
+                toastr.error(error);
+
             },
         });
     }
@@ -8811,7 +8846,10 @@ $(document).on("click", ".delete_silder", function (e) {
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
                 },
-                error: function (xhr, status, error) {},
+                error: function (xhr, status, error) {
+                    toastr.error(error);
+
+                },
             });
         } else {
             $(this).parent().find(".slider_img").attr("src", "");
@@ -9089,6 +9127,8 @@ $(document).on("click", "#close_editEvent", async function (e) {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            toastr.error(error);
+
         },
     });
 });
@@ -9633,6 +9673,8 @@ function update_self_bring(
         },
         error: function (xhr, status, error) {
             console.error("An error occurred while storing the User ID.");
+            toastr.error(error);
+
         },
     });
 }
@@ -9657,7 +9699,9 @@ function sliderImages(id) {
             //$("#loader").css("display", "none");
             //toastr.success("Slider Image saved Successfully");
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) {
+            toastr.error(error);
+        },
     });
 }
 
