@@ -2393,10 +2393,11 @@
                     activeObject.set("textCase", "lowercase"); // Add custom property
                 },
                 capitalize: () => {
-                    const capitalizedText = activeObject.text.replace(
-                        /\b\w/g,
-                        (char) => char.toUpperCase()
-                    );
+                    const capitalizedText = activeObject.text
+                    .toLowerCase() // Convert everything to lowercase first
+                    .replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize first letter of each word
+                    .replace(/'\w/g, (match) => match.toLowerCase()); // Ensure letters after apostrophe stay lowercase
+
                     activeObject.set("text", capitalizedText);
                     activeObject.set("textCase", "capitalize"); // Add custom property
                 },

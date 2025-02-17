@@ -127,7 +127,7 @@ $(document).on("click", ".design-cards", function () {
 
     // Remove the old canvas if it exists
     $("#imageEditor2").remove();
-
+    alert(2);
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
@@ -679,8 +679,10 @@ async function bindData(current_event_id) {
             // console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 img.crossOrigin = "anonymous";
-                var canvasWidth = canvas.getWidth();
-                var canvasHeight = canvas.getHeight();
+                // var canvasWidth = canvas.getWidth();
+                // var canvasHeight = canvas.getHeight();
+                var canvasWidth = width;
+                var canvasHeight = height;
 
                 // Use Math.max to ensure the image covers the entire canvas
                 var scaleFactor = Math.max(
@@ -1443,6 +1445,15 @@ async function bindData(current_event_id) {
     });
 
     function addIconsToTextbox(target) {
+        let element = document.querySelector(".image-edit-inner-img");
+        if (element) {
+            var { width, height } = element.getBoundingClientRect();
+            console.log("Width:", width, "Height:", height);
+        } else {
+            var { width, height } = { width: 590, height: 880 };
+            console.log(width, height); // Output: 590 880
+            console.log("Element not found!");
+        }
         console.log("add to here");
         console.log(target);
         if (target == undefined) {
@@ -2538,10 +2549,11 @@ async function bindData(current_event_id) {
                 activeObject.set("textCase", "lowercase"); // Add custom property
             },
             capitalize: () => {
-                const capitalizedText = activeObject.text.replace(
-                    /\b\w/g,
-                    (char) => char.toUpperCase()
-                );
+                const capitalizedText = activeObject.text
+                    .toLowerCase() // Convert everything to lowercase first
+                    .replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize first letter of each word
+                    .replace(/'\w/g, (match) => match.toLowerCase()); // Ensure letters after apostrophe stay lowercase
+
                 activeObject.set("text", capitalizedText);
                 activeObject.set("textCase", "capitalize"); // Add custom property
             },
@@ -2743,14 +2755,25 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
+    let element = document.querySelector(".image-edit-inner-img");
+    if (element) {
+        var { width, height } = element.getBoundingClientRect();
+        console.log("Width:", width, "Height:", height);
+    } else {
+        var { width, height } = { width: 590, height: 880 };
+        console.log(width, height); // Output: 590 880
+
+        console.log("Element not found!");
+    }
+
     console.log("getTextDataFromCanvas");
     var objects = canvas.getObjects();
     var textData = [];
     var shapeImageData = [];
 
     // **Current Dynamic Canvas Size**
-    let canvasWidth = canvas.getWidth();
-    let canvasHeight = canvas.getHeight();
+    let canvasWidth = width;
+    let canvasHeight = height;
 
     // **Calculate Reverse Scaling Factors**
     const scaleX = originalWidth / canvasWidth;
