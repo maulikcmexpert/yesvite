@@ -174,7 +174,7 @@ class ContactController extends Controller
                 ->limit($request->limit);
             })
             ->when(empty($request->search_name), function ($query) {
-                $query->limit(6);
+                $query->limit(10);
             })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
@@ -310,7 +310,7 @@ class ContactController extends Controller
         }
         if(empty($searchPhone) && empty($request->offset)){
             // dd(1);
-            $query->limit(6);
+            $query->limit(10);
         }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
