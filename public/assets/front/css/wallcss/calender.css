@@ -111,6 +111,7 @@
     /* background: #4A4A4A; */
     position: relative;
     z-index: 100;
+    flex-basis: 14%;
   }
 
   #calendar .day.other {
