@@ -1204,7 +1204,7 @@ async function bindData(current_event_id) {
                 actionHandler: fabric.controlsUtils.rotationWithSnapping,
                 actionName: "rotate",
                 render: renderIcon,
-                cornerSize: 30,
+                cornerSize: 40,
             });
 
             fabric.Textbox.prototype.controls.deleteControl =
@@ -1221,7 +1221,7 @@ async function bindData(current_event_id) {
                     },
                     mouseUpHandler: deleteTextbox,
                     render: renderDeleteIcon,
-                    cornerSize: 30,
+                    cornerSize: 40,
                     withConnection: false, // Disable the line connection
                 });
 
@@ -1232,7 +1232,7 @@ async function bindData(current_event_id) {
                 cursorStyle: "pointer",
                 mouseUpHandler: cloneTextbox,
                 render: renderCopyIcon,
-                cornerSize: 30,
+                cornerSize: 40,
                 withConnection: false, // Disable the line connection
             });
 
