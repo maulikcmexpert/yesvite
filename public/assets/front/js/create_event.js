@@ -1482,7 +1482,7 @@ initializeDatePicker("#start-event-date", { minDate: moment() }, function (selec
     let endPicker = $("#end-event-date").data("daterangepicker");
     endPicker.setStartDate(moment(selectedDate).add(0, 'days'));
     endPicker.minDate = moment(selectedDate).add(0, 'days'); // Disable past dates in end date
-    endPicker.maxDate = moment(selectedDate).add(3, 'days'); // Restrict to +4 days from start date
+    endPicker.maxDate = moment(selectedDate).add(2, 'days'); // Restrict to +4 days from start date
 
     // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
     selectedDates.clear();
@@ -1509,7 +1509,7 @@ $(document).on("change", "#schedule", function () {
     $(".step_1_activity").html(
         '<span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule'
     );
-    if (eventDate != "") {
+    if (startDate != "") {
         if ($(this).is(":checked")) {
             // console.log(eventDate);
             var selectedDates = new Set();
