@@ -463,7 +463,10 @@
             </div>
             <div class="invite-pro">
                 <div class="invite-left">
-                    <p>Guests</p>
+                    <div class="heading">
+                        <p>Guests</p>
+                    </div>
+                   
                     <h6 class="invite-count">0</h6>
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                     <input type="hidden" id="event_guest_left_count" />
@@ -471,8 +474,9 @@
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="coin-invite-wrp buycredits">
-                    <p>Purchasing</p>
-
+                    <div class="heading">
+                        <p>Purchasing</p>
+                    </div>
                     @php
                         $setPrice = array_reverse($prices);
                     @endphp
