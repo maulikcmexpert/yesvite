@@ -74,6 +74,7 @@ class EventController extends BaseController
 {
 
 
+
     public function homeDesign()
     {
 
@@ -2118,6 +2119,11 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
+
+        $userId = Auth::guard('web')->user()->id;
+        if (!$userId || !User::find($userId)) {
+            return redirect()->route('/');
+        }
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
