@@ -8,14 +8,19 @@ $(document).ready(function () {
     // Listen for changes in RSVP status (YES/NO)
     $('input[name="rsvp_status"]').change(function () {
         var rsvpStatus = $(this).val();
-
+        console.log(rsvpStatus);
         if (rsvpStatus == "0") {
-            $('input[name="adults"], input[name="kids"]').val(0);
-            $('.btn-plus, .btn-minus').prop('disabled', true);
-            $('button[type="submit"]').prop('disabled', false); // Enable submit for "No"
-        } else if (rsvpStatus == "1") {
-            $('.btn-plus, .btn-minus').prop('disabled', false);
-            $('button[type="submit"]').prop('disabled', true); // Initially disable submit
+            $('input[name="adults"]').val(0);
+            $('input[name="kids"]').val(0);
+            $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
+            $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
+        } if (rsvpStatus == "1") {
+
+            adults = $('input[name="adults"]').val();
+            kids = $('input[name="adults"]').val();
+
+            $('.btn-plus, .btn-minus').prop('disabled', false); // Enable buttons
+            $('button[type="submit"]').prop('disabled', true); // Disable submit initially
         }
         validateForm();
     });
@@ -91,13 +96,11 @@ $(document).ready(function () {
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
         var adults = parseInt($('input[name="adults"]').val()) || 0;
         var kids = parseInt($('input[name="kids"]').val()) || 0;
-
-        if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
+        console.log(adults, kids);
+        if (rsvpStatus == "0") {
             $('button[type="submit"]').prop('disabled', false);
-        } else if (rsvpStatus == "0") {
+        } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
             $('button[type="submit"]').prop('disabled', false);
-        } else {
-            $('button[type="submit"]').prop('disabled', true);
         }
     }
 
