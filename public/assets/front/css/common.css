@@ -1016,6 +1016,10 @@ main{
     min-height: 100vh;
 }
 
+main:has(.main-content-wrp){
+    min-height: auto;
+}
+
 
 
 @keyframes bounce {

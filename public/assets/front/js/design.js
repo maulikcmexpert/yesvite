@@ -18,15 +18,12 @@ let event_id = null;
 const originalWidth = 345;
 const originalHeight = 490;
 let element = document.querySelector(".image-edit-inner-img");
-
+var { width, height } = { width: 590, height: 880 };
 if (element) {
-    var { width, height } = element.getBoundingClientRect();
+    ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
     console.log("Width:", width, "Height:", height);
 } else {
-    var { width, height } = { width: 590, height: 880 };
-    console.log(width, height); // Output: 590 880
-
-    console.log("Element not found!");
+    console.log("Element not found! Using default values.");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -663,18 +660,15 @@ async function bindData(current_event_id) {
         await ensureFontsLoaded();
     }
 
+    let element = document.querySelector(".image-edit-inner-img");
+    if (element) {
+        ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
+        console.log("Width:", width, "Height:", height);
+    } else {
+        console.log("Element not found! Using default values.");
+    }
+
     function loadTextDataFromDatabase() {
-        let element = document.querySelector(".image-edit-inner-img");
-        if (element) {
-            var { width, height } = element.getBoundingClientRect();
-            console.log("Width:", width, "Height:", height);
-        } else {
-            var { width, height } = { width: 590, height: 880 };
-            console.log(width, height); // Output: 590 880
-
-            console.log("Element not found!");
-        }
-
         if (image) {
             // console.log(image);
             fabric.Image.fromURL(image, function (img) {
@@ -1445,17 +1439,6 @@ async function bindData(current_event_id) {
     });
 
     function addIconsToTextbox(target) {
-        let element = document.querySelector(".image-edit-inner-img");
-        if (element) {
-            var { width, height } = element.getBoundingClientRect();
-            console.log("Width:", width, "Height:", height);
-        } else {
-            var { width, height } = { width: 590, height: 880 };
-            console.log(width, height); // Output: 590 880
-            console.log("Element not found!");
-        }
-        console.log("add to here");
-        console.log(target);
         if (target == undefined) {
             return;
         }
@@ -2757,13 +2740,10 @@ async function bindData(current_event_id) {
 function getTextDataFromCanvas() {
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
-        var { width, height } = element.getBoundingClientRect();
+        ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
         console.log("Width:", width, "Height:", height);
     } else {
-        var { width, height } = { width: 590, height: 880 };
-        console.log(width, height); // Output: 590 880
-
-        console.log("Element not found!");
+        console.log("Element not found! Using default values.");
     }
 
     console.log("getTextDataFromCanvas");
