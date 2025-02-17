@@ -357,8 +357,9 @@
 }
 
 .guest-main-content {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
 }
 
 .guest-main-content .contact-tab .users-data .user_choice_group {
