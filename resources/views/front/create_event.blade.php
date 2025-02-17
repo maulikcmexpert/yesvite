@@ -462,10 +462,12 @@
                 <h4>$15.00</h4>
             </div>
             <div class="invite-pro">
-                <div class="invite-left">
-                    <div class="heading">
+                <div>
+                <div class="heading">
                         <p>Guests</p>
                     </div>
+                <div class="invite-left">
+                   
                    
                     <h6 class="invite-count">0</h6>
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
@@ -473,10 +475,13 @@
                     <p><strong>Invites |<div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="invite-left_d"></span></strong></p>
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
-                <div class="coin-invite-wrp buycredits">
-                    <div class="heading">
+                </div>
+                <div class="coin-invite-main">
+                <div class="heading">
                         <p>Purchasing</p>
                     </div>
+                <div class="coin-invite-wrp buycredits">
+                    
                     @php
                         $setPrice = array_reverse($prices);
                     @endphp
@@ -484,6 +489,7 @@
                     <span class="available-coins">{{$setPrice[0]['coins']}} 
                       |  <span class="green-price">${{$setPrice[0]['price']}}</span>
                     </span>
+                </div>
                 </div>
                 {{-- <div class="invite-right"> --}}
                     {{-- <span><strong>15</strong>Guests or less</span> --}}

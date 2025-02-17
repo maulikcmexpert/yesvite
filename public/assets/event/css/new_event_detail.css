@@ -1411,13 +1411,17 @@
     cursor: pointer;
 }
 
+.coin-invite-main{
+    margin-left: 10px;
+}
+
 .coin-invite-wrp{
     display: flex
 ;
     align-items: center;
     border: 1px solid #ccc;
     height: 42px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
