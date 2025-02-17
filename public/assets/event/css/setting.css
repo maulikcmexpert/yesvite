@@ -987,12 +987,13 @@
 
 .checkout-data .setting-img {
     border: 1px solid lightgray;
-    height: 560px;
+    height: 100%;
+    min-height: 650px;
     object-fit: contain;
 }
 
 .checkout-data .setting-img img {
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .event_images_slider .owl-dots {

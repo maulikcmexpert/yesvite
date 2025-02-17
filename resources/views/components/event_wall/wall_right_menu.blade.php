@@ -72,8 +72,14 @@ if ($hostView) {
                 </h4>
             </div>
             <div class="type-guset-wrp">
-                <h4>{{ $totalAdults }} <span>Adults</span></h4>
-                <h4>{{ $totalKids }} <span>Kids</span></h4>
+                {{-- <h4>{{ $totalAdults }} <span>Adults</span></h4>
+                <h4>{{ $totalKids }} <span>Kids</span></h4> --}}
+                <h4>
+                    {{ $totalAdults }} <span>{{ $totalAdults == 1 ? 'Adult' : 'Adults' }}</span>
+                </h4>
+                <h4>
+                    {{ $totalKids }} <span>{{ $totalKids == 1 ? 'Kid' : 'Kids' }}</span>
+                </h4>
             </div>
         </div>
         <div class="all-events-searchbar-wrp">
