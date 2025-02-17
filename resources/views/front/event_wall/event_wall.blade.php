@@ -93,7 +93,7 @@
                                                                         </h5>
                                                                     @endif
 
-                                                                    <span class="active-dot"></span>
+                                                                    <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
                                                                     <h3>{{ $post['username'] }}
