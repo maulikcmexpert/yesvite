@@ -647,10 +647,13 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
         success: async function (response) {
             console.log (response);
-            if (response.status == 401 && response.info == "logout") {
-                window.location.href = "/"; // Redirect to home page
-                return;
-            }
+
+            // let jsonResponse = JSON.parse(response); 
+
+            // if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
+            //     window.location.href = "/"; // Redirect to home page
+            //     return;
+            // }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
