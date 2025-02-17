@@ -1,4 +1,5 @@
-
+{{dd($all_invited_user['all_invited_users']);
+}}
 <main class="new-main-content">
 
     <div class="container">
