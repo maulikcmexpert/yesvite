@@ -46,6 +46,10 @@ p {
     color: var(--lightColor);
     margin-bottom: 0 !important;
 }
+.privacy-policy p {
+    font-size: 16px;
+    margin-bottom: 0 !important;
+}
 
 label {
     font-size: 12px;
