@@ -463,7 +463,8 @@
             </div>
             <div class="invite-pro">
                 <div>
-                <div class="heading">
+                    <div class="heading">
+                        
                         <p>Guests</p>
                     </div>
                 <div class="invite-left">
