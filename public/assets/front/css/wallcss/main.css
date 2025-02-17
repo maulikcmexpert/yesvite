@@ -291,14 +291,14 @@ li{
 }
 
 @media (min-width: 2001px) and (max-width: 10000px){
-    .home-web-tabs-wrp .container:first-child{
+    .home-web-tabs-wrp > .container{
         max-width: 1800px !important;
         margin: 0px auto !important;
     }
 }
 
 @media (min-width: 1400px) and (max-width: 2000px){
-    .home-web-tabs-wrp .container:first-child{
+    .home-web-tabs-wrp > .container{
         max-width: calc(100% - 10%) !important;
         margin: 0px auto !important;
     }
