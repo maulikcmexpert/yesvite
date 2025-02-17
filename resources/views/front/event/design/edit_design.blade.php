@@ -88,7 +88,7 @@
                 </button>
             </div>
             <div class="edit-images-button-inner fonts-edit-wrp">
-                <button class="design-sidebar-action" design-id="2" onclick="toggleSidebar('sidebar')">
+                <button class="design-sidebar-action activated" design-id="2" onclick="toggleSidebar('sidebar')">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -301,7 +301,7 @@
 
     <div id="sidebar" class="sidebar choose-design-sidebar" style="right: -200%; width: 0px;">
         <!-- =====fonts-family-options==== -->
-        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner ">
+        <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
                 <h5>Change Font</h5>
                 <button class="close-btn">
