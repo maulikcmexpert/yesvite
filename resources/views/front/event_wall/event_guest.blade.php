@@ -1,5 +1,5 @@
 
-{{dd($eventInfo);}}
+{{-- {{dd($eventInfo);}} --}}
 <main class="new-main-content">
 
     <div class="container">
