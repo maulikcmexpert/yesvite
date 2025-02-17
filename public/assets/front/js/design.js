@@ -646,12 +646,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
             id: id,
         },
         success: async function (response) {
-            console.log (response);
+            console.log(response);
 
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
-            
-                if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
+
+                if (
+                    jsonResponse.status == 401 &&
+                    jsonResponse.info == "logout"
+                ) {
                     window.location.href = "/"; // Redirect to home page
                     return;
                 }
@@ -1179,17 +1182,17 @@ async function bindData(current_event_id) {
                 //showStaticTextElements();
             }
             var rotateIcon =
-                "data:image/svg+xml,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%2013%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M4.71811%202.75377C5.15252%202.62395%205.63187%202.53906%206.16115%202.53906C8.5529%202.53906%2010.4903%204.47643%2010.4903%206.86818C10.4903%209.25993%208.5529%2011.1973%206.16115%2011.1973C3.7694%2011.1973%201.83203%209.25993%201.83203%206.86818C1.83203%205.97939%202.10166%205.15051%202.56104%204.46145%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.10156%202.87454L5.5446%201.2168%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.10156%202.875L5.78428%204.10333%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
+                "data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2223.9674%22%20height%3D%2223.9674%22%20rx%3D%2211.9837%22%20fill%3D%22white%22%2F%3E%3Cpath%20d%3D%22M10.5407%208.52841C10.9751%208.39859%2011.4544%208.31371%2011.9837%208.31371C14.3755%208.31371%2016.3128%2010.2511%2016.3128%2012.6428C16.3128%2015.0346%2014.3755%2016.9719%2011.9837%2016.9719C9.59197%2016.9719%207.6546%2015.0346%207.6546%2012.6428C7.6546%2011.754%207.92424%2010.9252%208.38361%2010.2361%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9.92152%208.64825L11.3646%206.9905%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9.92152%208.64825L11.6042%209.87658%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
             var img = document.createElement("img");
             img.src = rotateIcon;
 
             var deleteIcon =
-                "data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%2213%22%20viewBox%3D%220%200%2013%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10.6792%203.34927C9.01645%203.18449%207.34373%203.09961%205.67599%203.09961C4.68734%203.09961%203.69868%203.14954%202.71002%203.24941L1.69141%203.34927%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.44141%202.84431L4.55126%202.1902C4.63115%201.71585%204.69107%201.36133%205.53492%201.36133H6.84314C7.687%201.36133%207.75191%201.73582%207.82681%202.1952L7.93666%202.84431%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9.61024%204.92773L9.28568%209.9559C9.23075%2010.7398%209.18581%2011.349%207.79271%2011.349H4.58706C3.19395%2011.349%203.14902%2010.7398%203.09409%209.9559L2.76953%204.92773%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M5.35156%208.60156H7.0143%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.9375%206.60547H7.43411%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
+                "data:image/svg+xml,%3Csvg%20width%3D%2225%22%20height%3D%2225%22%20viewBox%3D%220%200%2025%2025%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20x%3D%220.203125%22%20y%3D%220.371094%22%20width%3D%2223.9674%22%20height%3D%2223.9674%22%20rx%3D%2211.9837%22%20fill%3D%22white%22%2F%3E%3Cpath%20d%3D%22M16.6807%209.3489C15.018%209.18412%2013.3453%209.09924%2011.6775%209.09924C10.6889%209.09924%209.70022%209.14917%208.71156%209.24903L7.69295%209.3489%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M10.4392%208.84458L10.5491%208.19047C10.629%207.71611%2010.6889%207.3616%2011.5327%207.3616H12.841C13.6848%207.3616%2013.7497%207.73609%2013.8246%208.19546L13.9345%208.84458%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M15.6072%2010.9268L15.2826%2015.9549C15.2277%2016.7389%2015.1828%2017.348%2013.7897%2017.348H10.584C9.19091%2017.348%209.14598%2016.7389%209.09105%2015.9549L8.76649%2010.9268%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M11.353%2014.6018H13.0157%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M10.9385%2012.6045H13.4351%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
             var img1 = document.createElement("img");
             img1.src = deleteIcon;
 
             var copyIcon =
-                "data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8.12586%207.35378V1.36192C8.12586%200.810389%207.67876%200.363281%207.12722%200.363281H1.13536C0.583826%200.363281%200.136719%200.810389%200.136719%201.36192V7.35378C0.136719%207.90532%200.583826%208.35243%201.13536%208.35243H7.12722C7.67876%208.35243%208.12586%207.90532%208.12586%207.35378ZM1.13536%201.36192H7.12722V7.35378H1.13536V1.36192ZM9.12451%208.35243V2.36057C9.67604%202.36057%2010.1231%202.80768%2010.1231%203.35921V8.35243C10.1231%209.4555%209.22893%2010.3497%208.12586%2010.3497H3.13265C2.58111%2010.3497%202.13401%209.9026%202.13401%209.35107H8.12586C8.6774%209.35107%209.12451%208.90396%209.12451%208.35243Z%22%20fill%3D%22%230F172A%22%2F%3E%3C%2Fsvg%3E";
+                "data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2223.9674%22%20height%3D%2223.9674%22%20rx%3D%2211.9837%22%20fill%3D%22white%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M14.9796%2013.981V7.98915C14.9796%207.43761%2014.5325%206.9905%2013.981%206.9905H7.98914C7.43761%206.9905%206.9905%207.43761%206.9905%207.98915V13.981C6.9905%2014.5325%207.43761%2014.9796%207.98914%2014.9796H13.981C14.5325%2014.9796%2014.9796%2014.5325%2014.9796%2013.981ZM7.98914%207.98914H13.981V13.981H7.98914V7.98914ZM15.9783%2014.9796V8.98779C16.5298%208.98779%2016.9769%209.4349%2016.9769%209.98643V14.9796C16.9769%2016.0827%2016.0827%2016.9769%2014.9796%2016.9769H9.98643C9.43489%2016.9769%208.98779%2016.5298%208.98779%2015.9783H14.9796C15.5312%2015.9783%2015.9783%2015.5312%2015.9783%2014.9796Z%22%20fill%3D%22%230F172A%22%2F%3E%3C%2Fsvg%3E";
             var img2 = document.createElement("img");
             img2.src = copyIcon;
 
@@ -2894,11 +2897,14 @@ function loadAgain() {
             image,
         },
         success: function (response) {
-            console.log (response);
+            console.log(response);
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
-            
-                if (jsonResponse.status == 401 && jsonResponse.info == "logout") {
+
+                if (
+                    jsonResponse.status == 401 &&
+                    jsonResponse.info == "logout"
+                ) {
                     window.location.href = "/"; // Redirect to home page
                     return;
                 }
