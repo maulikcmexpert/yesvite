@@ -380,7 +380,7 @@
                         </div>
                         <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                     </div>
-                    <div class="col-lg-12 mb-4 end_time">
+                    <div class="col-lg-12 mb-4 end_time" style="display: none;">
                         <div class="input-form">
                             @php
                                 $start_date = '';
