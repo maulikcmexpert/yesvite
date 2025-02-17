@@ -1,7 +1,7 @@
 @php
 
     $guestArray = $eventInfo['guest_view']['event_detail']['guests']['all_invited_users'] ?? null;
-   
+
     $eventId = $eventInfo['guest_view']['event_detail']['id']?? null;
     $total_invite=$eventInfo['host_view']['total_invite']??0;
     $totalAdults = 0;
@@ -142,6 +142,7 @@ if ($hostView) {
 
                                             <input type="hidden" id="eventID" value="{{ $eventId }}">
                                             <input type="hidden" id="user_id" value="{{ $guest['id'] }}">
+
                                             <input type="hidden" id="sync" value="{{  $guest['is_sync']}}">
                                         </div>
                                     </div>
@@ -191,7 +192,7 @@ if ($hostView) {
                                             @endif
                                             </div>
                                             @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
-                                            
+
                                                         @if($guest['is_sync']=="1")
                                                         <button type="button" ><i
                                                         class="fa-solid fa-ellipsis-vertical"
@@ -201,7 +202,7 @@ if ($hostView) {
                                                         class="fa-solid fa-ellipsis-vertical edit_rsvp_guest"
                                                         data-guest-id="{{ $guest['guest_id'] }}"  data-is_sync="{{ $guest['is_sync'] }}"></i></button>
                                                         @endif
-                                            
+
                                             @endif
                                         </div>
                                     @endif
@@ -232,17 +233,17 @@ if ($hostView) {
                                         @elseif($guest['rsvp_status'] == '0')
                                             <div class="sucess-no">
                                                     <h5>NO</h5>
-                                                
+
                                             </div>
                                         @else
                                             <div class="no-reply">
                                                         <h5>NO REPLY</h5>
-                                                    
+
                                                 </div>
                                             @endif
-                            @endif                
+                            @endif
                             </li>
-                            
+
                         @endif
                     @endforeach
                 @endif
@@ -279,6 +280,8 @@ if ($hostView) {
                 </div>
                 <div class="guest-rsvp-incres">
                     <h6>Guests</h6>
+                    <input type="hidden" id="user_id_rsvp" value="">
+                    <input type="hidden" id="sync_rsvp" value="">
                     <div class="guest-edit-wrp">
                         <div class="guest-edit-box">
                             <p>Adults</p>

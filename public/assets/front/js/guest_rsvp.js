@@ -33,13 +33,13 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Update the radio buttons based on RSVP status
             if (response.rsvp_status == "1") {
-                $('.rsvp_yes').prop('checked', true); 
+                $('.rsvp_yes').prop('checked', true);
                 $('.side_menu_minus').prop('disabled',false)
                 $('.side_menu_plus').prop('disabled',false)
                 // Attending
             }
             if (response.rsvp_status == "0") {
-                $('.rsvp_no').prop('checked', true); 
+                $('.rsvp_no').prop('checked', true);
                 $('.side_menu_minus').prop('disabled',true)
                 $('.side_menu_plus').prop('disabled',true)
             }
@@ -51,6 +51,11 @@ $(document).on('click', '.edit_rsvp_guest', function () {
             $('#editrsvp3 .remove-Rsvp-btn').data('guest-update-id', guestId);
             $('#editrsvp3 .remove-Rsvp-btn').data('guest-is_sync', is_sync);
             $('#editrsvp3 .remove-Rsvp-btn').data('user-id', response.user_id);
+            if(response.is_sync=="1" || response.is_sync==1){
+                $('#sync_rsvp').val(response.user_id);
+            }else{
+                $('#user_id_rsvp').val(response.user_id);
+            }
             $('#editrsvp3 .remove-Rsvp-btn').data('event-id', response.event_id);
 
             $('#editrsvp3').modal('show'); // Show the modal
@@ -89,18 +94,17 @@ $(document).on('change', '.rsvp_yes', function () {
 });
 $(document).on('click', '.save-rsvp', function () {
     const eventId = $('#event_id').val();
-    const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
-    console.log('Updating Guest ID:', guestId);
+    const guestId = $(this).data('guest-update-id');
+    const user_id = $("#user_id_rsvp").val();
 
-    if (!guestId) {
-        alert("No guest selected for update.");
-        return;
-    }
+    const sync = $("#sync_rsvp").val();
 
-    // Gather updated data
+
     const updatedData = {
         event_id:eventId,
         guestId: guestId,
+        sync_id :sync,
+        user_id:user_id,
         adults: $('#editrsvp3 input[name="adults"]').val(),
         kids: $('#editrsvp3 input[name="kids"]').val(),
         rsvp_status: $('#editrsvp3 input[name="rsvp_status"]:checked').val() // Get the selected RSVP status
@@ -146,12 +150,12 @@ $(document).on('click', '.save-rsvp', function () {
                     zIndex: 9999
                 }).appendTo('body');
 
-                
+
                 $('#editrsvp3').modal('hide');
                 toastr.success('RSVP updated successfully');
                 setTimeout(() => {
                     window.location.reload();
-                }, 50); 
+                }, 50);
 
                 // Append new RSVP status based on the response
                 if (response.rsvp_status == '1') {

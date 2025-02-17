@@ -2119,6 +2119,7 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
+      
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
