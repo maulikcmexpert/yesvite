@@ -784,7 +784,7 @@ class EventGuestController extends BaseController
             'kids' => 'required|integer|min:0',
             'rsvp_status' => 'nullable',
         ]);
-
+        $guest_user_id = Auth::guard('web')->user()->id;
         // Find the existing guest by ID
         $guest = EventInvitedUser::find($id);
         // dd($guest);
@@ -822,7 +822,7 @@ class EventGuestController extends BaseController
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $guest->event_id;
 
-            if ($request->input('user_id') != "") {
+            if ($guest_user_id != "") {
                 $creatEventPost->user_id =  $userId;
             } else {
                 $creatEventPost->sync_id =  $sync_id;
