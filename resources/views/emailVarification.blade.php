@@ -124,7 +124,7 @@
                     @if(isset($faild)&&$faild != 'faild')
                     <i class="fa-regular fa-circle-check"></i>
                     @else
-                    <i class="fa-regular fa-circle-xmark"></i>
+                    {{-- <i class="fa-regular fa-circle-xmark"></i> --}}
                     @endif
                 </div>
 
