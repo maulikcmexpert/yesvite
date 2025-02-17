@@ -1445,6 +1445,15 @@ async function bindData(current_event_id) {
     });
 
     function addIconsToTextbox(target) {
+        let element = document.querySelector(".image-edit-inner-img");
+        if (element) {
+            var { width, height } = element.getBoundingClientRect();
+            console.log("Width:", width, "Height:", height);
+        } else {
+            var { width, height } = { width: 590, height: 880 };
+            console.log(width, height); // Output: 590 880
+            console.log("Element not found!");
+        }
         console.log("add to here");
         console.log(target);
         if (target == undefined) {
@@ -1539,7 +1548,6 @@ async function bindData(current_event_id) {
         $(".size-btn").removeClass("activated");
         $(this).addClass("activated");
     });
-    alert(1);
     canvas = new fabric.Canvas("imageEditor1", {
         width: width, // Canvas width
         height: height, // Canvas height
