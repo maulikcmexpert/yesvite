@@ -1504,7 +1504,7 @@
 }
 
 .step_1 .main-content-right{
-    height: 100vh !important;
+    min-height: 100vh !important;
 }
 
 .design-seting{
