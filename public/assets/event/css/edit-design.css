@@ -944,6 +944,9 @@
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
     }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 26px !important;
+    }
 }
 
 @media only screen and (min-width: 3601px) and (max-width: 3800px){
@@ -970,6 +973,9 @@
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
     }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 25px !important;
+    }
 }
 
 @media only screen and (min-width: 3401px) and (max-width: 3600px){
@@ -995,6 +1001,9 @@
     }
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 24px !important;
     }
 }
 
@@ -1023,6 +1032,9 @@
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
     }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 23px !important;
+    }
 }
 
 @media only screen and (min-width: 3001px) and (max-width: 3200px){
@@ -1048,6 +1060,9 @@
     }
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 22px !important;
     }
 }
 
@@ -1075,6 +1090,9 @@
     }
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 21px !important;
     }
 
 }
