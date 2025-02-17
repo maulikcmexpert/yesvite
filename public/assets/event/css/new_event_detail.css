@@ -1312,15 +1312,26 @@
     position: sticky;
     /* left: 50%;
     transform: translateX(-50%); */
-    width: 100%;
-    bottom: 10px;
+    width: 95%;
+    bottom: 4%;
     margin-bottom: 0px !important;
     background-color: #fff !important;
     z-index: 10;
+    padding: 15px 10px;
 }
 
 .guest-wrp.side-guest-wrp .invite-pro {
     margin-top: 5px;
+}
+
+.guest-wrp.side-guest-wrp .invite-pro .heading{
+    margin-bottom: 5px;
+}
+
+.guest-wrp.side-guest-wrp .invite-pro .heading p{
+   font-size: 17px;
+   color: var(--secondryColor);
+   font-weight: 500;
 }
 
 .input-calender-icon {
@@ -1437,12 +1448,12 @@
 
 .invite-left .coin-invite{
     max-width: 20px;
-    margin-left: 0;
-    margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 4px;
 }
 
 .coin-invite-wrp span{
-    font-size: 13px;
+    font-size: 12px;
 }
 
 
