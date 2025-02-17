@@ -13782,7 +13782,9 @@ class ApiControllerv2 extends Controller
                 if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
                     Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
                         $message->to($input['email']);
-                        $message->subject('Yesvite Invite');
+                        // $message->subject('Yesvite Invite');
+                       $message->subject('Yesvite: You have a new message by ' . $input['send_by']);
+
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
                 } elseif (count($checkNotificationSetting) == 0) {
@@ -13793,7 +13795,9 @@ class ApiControllerv2 extends Controller
 
                     Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($input) {
                         $message->to($input['email']);
-                        $message->subject('Yesvite Invite');
+                        // $message->subject('Yesvite Invite');
+                        $message->subject('Yesvite: You have a new message by ' . $input['send_by']);
+
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
                 }
