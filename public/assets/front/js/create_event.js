@@ -52,9 +52,9 @@ var final_prefer_by =
 var final_initial =
     final_user_name != ""
         ? (
-            $("#cohostFname").val().charAt(0) +
-            $("#cohostLname").val().charAt(0)
-        ).toUpperCase()
+              $("#cohostFname").val().charAt(0) +
+              $("#cohostLname").val().charAt(0)
+          ).toUpperCase()
         : "";
 var create_event_phone_scroll = false;
 var create_event_yesvite_scroll = false;
@@ -259,6 +259,10 @@ $(document).ready(function () {
             },
 
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 if (response.success) {
                     console.log(response.message);
                 } else {
@@ -441,6 +445,10 @@ $(document).on("click", "#delete_group", function (e) {
             group_id: group_id,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (response.status == "1") {
                 $(".added_group" + group_id).remove();
 
@@ -491,6 +499,10 @@ $(document).on("click", ".add_new_group_member", function () {
             },
             success: function (response) {
                 if (response.status == "1") {
+                    if (response.status == 401 && response.info == 'logout') {
+                        window.location.href = '/'; // Redirect to home page
+                        return;
+                    }
                     var grplth = $(".group_list .listgroups").length;
                     if (grplth == 0) {
                         $(".group_list").html("");
@@ -1185,21 +1197,21 @@ $(document).ready(function () {
 
 //only rsvp_date by prakash
 function rsvp_by_date(start_time) {
-    var adjustedStartTime = moment(start_time, "MM-DD-YYYY").subtract(1, "days").format("MM-DD-YYYY");
+    var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
+        .subtract(1, "days")
+        .format("MM-DD-YYYY");
 
-    $("#rsvp-by-date").daterangepicker(
-        {
-            singleDatePicker: true,
-            autoUpdateInput: false,
-            minYear: 2024,
-            minDate: moment().format("MM-DD-YYYY"), // Ensure format
-            maxDate: adjustedStartTime, // Use formatted date
-            locale: {
-                format: "MM-DD-YYYY",
-            },
-            maxYear: parseInt(moment().format("YYYY"), 10),
-        }
-    );
+    $("#rsvp-by-date").daterangepicker({
+        singleDatePicker: true,
+        autoUpdateInput: false,
+        minYear: 2024,
+        minDate: moment().format("MM-DD-YYYY"), // Ensure format
+        maxDate: adjustedStartTime, // Use formatted date
+        locale: {
+            format: "MM-DD-YYYY",
+        },
+        maxYear: parseInt(moment().format("YYYY"), 10),
+    });
 
     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
         $(this).val(picker.startDate.format("MM-DD-YYYY"));
@@ -1438,18 +1450,20 @@ $(function () {
 // });
 //old data logic
 
-
 //new date logic prakash
 function initializeDatePicker(selector, options, callback) {
-    $(selector).daterangepicker({
-        singleDatePicker: true,
-        autoApply: true,
-        autoUpdateInput: false, // Prevents showing default date
-        locale: {
-            format: "MM-DD-YYYY",
+    $(selector).daterangepicker(
+        {
+            singleDatePicker: true,
+            autoApply: true,
+            autoUpdateInput: false, // Prevents showing default date
+            locale: {
+                format: "MM-DD-YYYY",
+            },
+            ...options, // Merge additional options
         },
-        ...options // Merge additional options
-    }, callback);
+        callback
+    );
 }
 
 function updateEventDate() {
@@ -1474,29 +1488,37 @@ function updateEventDate() {
 
 let selectedDates = new Set();
 
-initializeDatePicker("#start-event-date", { minDate: moment() }, function (selectedDate) {
-    let formattedDate = selectedDate.format("MM-DD-YYYY");
-    $("#start-event-date").val(formattedDate); // Show date after selection
-    $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
-    $('#rsvp-by-date').val("");
-    let endPicker = $("#end-event-date").data("daterangepicker");
-    endPicker.setStartDate(moment(selectedDate).add(0, 'days'));
-    endPicker.minDate = moment(selectedDate).add(0, 'days'); // Disable past dates in end date
-    endPicker.maxDate = moment(selectedDate).add(2, 'days'); // Restrict to +4 days from start date
+initializeDatePicker(
+    "#start-event-date",
+    { minDate: moment() },
+    function (selectedDate) {
+        let formattedDate = selectedDate.format("MM-DD-YYYY");
+        $("#start-event-date").val(formattedDate); // Show date after selection
+        $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
+        $("#rsvp-by-date").val("");
+        let endPicker = $("#end-event-date").data("daterangepicker");
+        endPicker.setStartDate(moment(selectedDate).add(0, "days"));
+        endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
+        endPicker.maxDate = moment(selectedDate).add(2, "days"); // Restrict to +4 days from start date
 
-    // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
-    selectedDates.clear();
-    selectedDates.add(formattedDate);
-    rsvp_by_date(formattedDate);
-    updateEventDate();
-});
+        // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
+        selectedDates.clear();
+        selectedDates.add(formattedDate);
+        rsvp_by_date(formattedDate);
+        updateEventDate();
+    }
+);
 
-initializeDatePicker("#end-event-date", { minDate: moment() }, function (selectedDate) {
-    let formattedDate = selectedDate.format("MM-DD-YYYY");
-    $("#end-event-date").val(formattedDate); // Show date after selection
-    selectedDates.add(formattedDate);
-    updateEventDate();
-});
+initializeDatePicker(
+    "#end-event-date",
+    { minDate: moment() },
+    function (selectedDate) {
+        let formattedDate = selectedDate.format("MM-DD-YYYY");
+        $("#end-event-date").val(formattedDate); // Show date after selection
+        selectedDates.add(formattedDate);
+        updateEventDate();
+    }
+);
 
 //new date logic prakash
 $(document).on("change", "#schedule", function () {
@@ -1594,14 +1616,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-            // startDate.isSame(moment(sortedDates[0]), "day")
-            startDate
-                .startOf("day")
-                .isSame(
-                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                    "day"
-                )
-                ? `
+                    // startDate.isSame(moment(sortedDates[0]), "day")
+                    startDate
+                        .startOf("day")
+                        .isSame(
+                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                            "day"
+                        )
+                        ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1616,8 +1638,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                : ""
-            }
+                        : ""
+                }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1638,17 +1660,18 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-                "YYYY-MM-DD"
-            )}">
+            "YYYY-MM-DD"
+        )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${startDate.isSame(
-                moment(sortedDates[sortedDates.length - 1]),
-                "day"
-            )
-                ? `
+                ${
+                    startDate.isSame(
+                        moment(sortedDates[sortedDates.length - 1]),
+                        "day"
+                    )
+                        ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1663,8 +1686,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                : ""
-            }
+                        : ""
+                }
             </form>
         </div>
     </div>
@@ -1758,6 +1781,10 @@ $(document).on("click", ".add_more_activity", function (e) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $("#" + id).append(response);
             total_activities++;
             console.log(total_activities);
@@ -2003,6 +2030,10 @@ function loadMoreData(page, search_name) {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (data.html == " ") {
                 $("#loader").html("No more contacts found");
                 return;
@@ -2111,6 +2142,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 console.log(response);
                 var currentInviteCount = parseInt(
                     $("#currentInviteCount").val()
@@ -2205,12 +2240,12 @@ function guest_counter(total_guest, max_guest) {
     }
 
     if (remainingCount < 0) {
-        $(".invite-left_d").text("Invites | 0 Left");
+        $(".invite-left_d").text("0 Left");
     } else {
-        $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+        $(".invite-left_d").text(remainingCount + " Left");
     }
     // $(".invite-left_d").text(
-    //     "Invites | " + remainingCount + " Left"
+    //     remainingCount + " Left"
     // );
     $("#event_guest_left_count").val(remainingCount);
 }
@@ -2226,6 +2261,10 @@ function delete_invited_user(userId, is_contact = "0") {
             _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             currentInviteCount--;
             $("#currentInviteCount").val(currentInviteCount);
@@ -2261,10 +2300,10 @@ function delete_invited_user(userId, is_contact = "0") {
             // var remainingCount = max_guest - total_guest;
 
             // if (remainingCount < 0) {
-            //     $(".invite-left_d").text("Invites | 0 Left");
+            //     $(".invite-left_d").text("0 Left");
             // } else {
             //     $(".invite-left_d").text(
-            //         "Invites | " + remainingCount + " Left"
+            //         remainingCount + " Left"
             //     );
             // }
             // $("#event_guest_left_count").val(remainingCount);
@@ -2315,7 +2354,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
             },
             success: function (response) {
                 console.log(response);
-
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 var currentInviteCount = $("#currentInviteCount").val();
                 currentInviteCount++;
                 $("#currentInviteCount").val(currentInviteCount);
@@ -2365,14 +2407,14 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 //     // add_user_counter();
                 // }
                 // if(remainingCount < 0){
-                //     $(".invite-left_d").text("Invites | 0 Left");
+                //     $(".invite-left_d").text("0 Left");
                 // }else{
-                //     $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+                //     $(".invite-left_d").text(remainingCount + " Left");
 
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
             },
-            error: function (xhr, status, error) { },
+            error: function (xhr, status, error) {},
         });
     } else {
         $("#loader").css("display", "flex");
@@ -2386,6 +2428,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
             },
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 if (is_contact == "1") {
                     $("#contact_tel-" + userId).remove();
                     $(".sync_user_id_tel-" + userId).remove();
@@ -2405,10 +2451,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var remainingCount = max_guest - total_guest;
                 guest_counter(0, max_guest);
                 // if (remainingCount < 0) {
-                //     $(".invite-left_d").text("Invites | 0 Left");
+                //     $(".invite-left_d").text("0 Left");
                 // } else {
                 //     $(".invite-left_d").text(
-                //         "Invites | " + remainingCount + " Left"
+                //         remainingCount + " Left"
                 //     );
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
@@ -2512,6 +2558,10 @@ $(document).on("click", ".add_category_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $("#hidden_potluck_key").val("");
             $("#add_update_category_head").text("Add New Category");
             $("#categoryName").val("");
@@ -2639,6 +2689,10 @@ $(document).on("click", ".add_category_item_btn", function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(response);
             $("#item_name").val("");
             $("#item_quantity").val("1");
@@ -2740,14 +2794,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                    quantity +
-                    '</p><li class="list-group-item" data-quantity="' +
-                    quantity +
-                    '" data-selfbring="' +
-                    selfbring +
-                    '">' +
-                    subItemName +
-                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                        quantity +
+                        '</p><li class="list-group-item" data-quantity="' +
+                        quantity +
+                        '" data-selfbring="' +
+                        selfbring +
+                        '">' +
+                        subItemName +
+                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3154,7 +3208,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newStartTime)
+                convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3369,7 +3423,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newstartTime)
+                convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3567,9 +3621,15 @@ $(document).on("click", "#save_activity_schedule", function () {
                 .each(function (index) {
                     istrue = istrue + 1;
                     var id = $(this).data("id");
-                    var description = $(this).find('input[name="description[]"]').val();
-                    var startTime = $(this).find('input[name="activity-start-time[]"]').val();
-                    var endTime = $(this).find('input[name="activity-end-time[]"]').val();
+                    var description = $(this)
+                        .find('input[name="description[]"]')
+                        .val();
+                    var startTime = $(this)
+                        .find('input[name="activity-start-time[]"]')
+                        .val();
+                    var endTime = $(this)
+                        .find('input[name="activity-end-time[]"]')
+                        .val();
                     activityendtime = endTime;
 
                     $("#desc-error-" + id).text("");
@@ -3577,7 +3637,9 @@ $(document).on("click", "#save_activity_schedule", function () {
                     $("#end-error-" + id).text("");
 
                     if (!description) {
-                        $("#desc-error-" + id).text("Description is required").css("color", "red");
+                        $("#desc-error-" + id)
+                            .text("Description is required")
+                            .css("color", "red");
                         isValid++;
                     }
 
@@ -3598,7 +3660,12 @@ $(document).on("click", "#save_activity_schedule", function () {
                     };
                     activities[dataId].push(activity);
 
-                    if (previousEndTime && convertTo24Hour(previousEndTime) > convertTo24Hour(startTime) && !showAlert) {
+                    if (
+                        previousEndTime &&
+                        convertTo24Hour(previousEndTime) >
+                            convertTo24Hour(startTime) &&
+                        !showAlert
+                    ) {
                         toastr.error("Please enter proper time");
                         showAlert = true;
                     } else {
@@ -3660,9 +3727,10 @@ function convertTo24Hour(timeStr) {
     }
 
     // Return in HH:MM format
-    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}`;
 }
-
 
 $("#saveGiftRegistryButton").click(function () {
     // e.preventDefault();
@@ -3818,7 +3886,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     }
     apiCalled = true;
 
-    $(".dropdown-menu").removeClass('show');
+    $(".dropdown-menu").removeClass("show");
     var temp_id = eventData.temp_id;
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
@@ -3890,6 +3958,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 if (response == 1) {
                     toastr.success("Event Saved as Draft");
                     window.location.href = "home";
@@ -3932,6 +4004,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 if (response == 1) {
                     window.location.href = "home";
                     toastr.success("Event Saved as Draft");
@@ -4208,9 +4284,6 @@ function savePage1Data(close = null, direct = false) {
         // state != "" &&
         // zipcode != ""
     ) {
-
-
-
         var event_name = $("#event-name").val();
         var event_date = $("#event-date").val();
         var start_event_date = $("#start-event-date").val();
@@ -5143,15 +5216,19 @@ function save_image_design(downloadImage, textData) {
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    console.log(response);
-                    let image = response.image;
-                    eventData.desgin_selected = image;
-
                     if (response.status == 401 && response.info == 'logout') {
                         window.location.href = '/'; // Redirect to home page
                         return;
                     }
-            
+                    console.log(response);
+                    let image = response.image;
+                    eventData.desgin_selected = image;
+
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/"; // Redirect to home page
+                        return;
+                    }
+
                     // if(eventData.step == '1'){
                     //     eventData.step = '2';
                     // }
@@ -5287,13 +5364,11 @@ $(document).on("click", "#delete_invited_user", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    // $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+    // $(".invite-left_d").text(re_total_remaining_count + " Left");
     if (re_total_remaining_count < 0) {
-        $(".invite-left_d").text("Invites | 0 Left");
+        $(".invite-left_d").text("0 Left");
     } else {
-        $(".invite-left_d").text(
-            "Invites | " + re_total_remaining_count + " Left"
-        );
+        $(".invite-left_d").text(re_total_remaining_count + " Left");
     }
 
     $("#event_guest_left_count").val(re_total_remaining_count);
@@ -5332,13 +5407,11 @@ $(document).on("click", "#delete_invited_user_tel", function () {
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
     if (re_total_remaining_count < 0) {
-        $(".invite-left_d").text("Invites | 0 Left");
+        $(".invite-left_d").text("0 Left");
     } else {
-        $(".invite-left_d").text(
-            "Invites | " + re_total_remaining_count + " Left"
-        );
+        $(".invite-left_d").text(re_total_remaining_count + " Left");
     }
-    // $(".invite-left_d").text("Invites | " + re_total_remaining_count + " Left");
+    // $(".invite-left_d").text(re_total_remaining_count + " Left");
     $("#event_guest_left_count").val(re_total_remaining_count);
 
     delete_invited_user(userId, is_contact);
@@ -5429,11 +5502,9 @@ $(document).on(
 
             var remainingCount = max_guest - total_guest;
             if (remainingCount < 0) {
-                $(".invite-left_d").text("Invites | 0 Left");
+                $(".invite-left_d").text("0 Left");
             } else {
-                $(".invite-left_d").text(
-                    "Invites | " + remainingCount + " Left"
-                );
+                $(".invite-left_d").text(remainingCount + " Left");
             }
             $("#event_guest_left_count").val(remainingCount);
         }
@@ -5455,9 +5526,9 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 
         var remainingCount = max_guest - total_guest;
         if (remainingCount < 0) {
-            $(".invite-left_d").text("Invites | 0 Left");
+            $(".invite-left_d").text("0 Left");
         } else {
-            $(".invite-left_d").text("Invites | " + remainingCount + " Left");
+            $(".invite-left_d").text(remainingCount + " Left");
         }
         $("#event_guest_left_count").val(remainingCount);
     }
@@ -5513,6 +5584,10 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
         },
 
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (potluck_delete_id == "all_potluck") {
                 $(".potluck").hide();
                 $(".category-main-dishesh").remove();
@@ -5701,6 +5776,10 @@ function update_self_bring_bck(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(quantity + "/" + categoryItemQuantity);
             $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                 quantity + "/" + categoryItemQuantity
@@ -5728,9 +5807,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -5750,10 +5829,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5762,10 +5841,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5784,10 +5863,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5795,10 +5874,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5953,6 +6032,10 @@ $(document).on("click", ".add_gift_item_btn", function () {
                 registry_link: registry_link,
             },
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 console.log(response);
                 if (response.status == "1") {
                     toastr.success("Registry Updated");
@@ -5997,6 +6080,10 @@ $(document).on("click", ".delete_gift_registry", function () {
             registry_item: id,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(response);
             countGiftRegestry();
         },
@@ -6080,6 +6167,10 @@ $(document).on("click", ".add_thankyou_card", function () {
             thankyou_template_id: edit_template_id ? edit_template_id : "",
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(response);
             if (response.status == "1") {
                 toastr.success("Greeting card updated");
@@ -6128,6 +6219,10 @@ $(document).on("click", ".delete_thankyou_card", function () {
             thank_you_card_id: id,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             var thankscardcount = $(".thank-you-card").length;
             if (thankscardcount == 0) {
                 $(".add_new_thankyou_card").html(`<span class="me-3">
@@ -6354,7 +6449,12 @@ $(document).on("click", ".remove_co_host", function () {
 });
 
 $(document).on("click", ".save_event_co_host", function () {
-    if (isEditCohost == "1" && selected_dataId != "" && isCohost == "0" && isCopy == "") {
+    if (
+        isEditCohost == "1" &&
+        selected_dataId != "" &&
+        isCohost == "0" &&
+        isCopy == ""
+    ) {
         toggleSidebar();
         return;
     }
@@ -6479,16 +6579,16 @@ $(document).on("click", ".final_checkout", function () {
     $("#eventImage").attr(
         "src",
         base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
     );
     $("#eventTempImage").attr(
         "src",
         base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
     );
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
@@ -6647,6 +6747,10 @@ $(document).on("click", ".final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
             $("#created_event_id").val(response.event_id);
@@ -6846,10 +6950,10 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
-            if (html.status == 401 && html.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (html.status == 401 && html.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             var currentInviteCount = parseInt($("#currentInviteCount").val());
@@ -6941,6 +7045,10 @@ function loadSearchUser(search_name) {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (data == "") {
                 $("#loader").html("No more contacts found");
                 return;
@@ -7049,6 +7157,10 @@ $(document).on("click", ".invite_group_member", function () {
             unselectedValues: unselectedValues,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (response?.isTrue && response.isTrue) {
                 $("#loader").css("display", "none");
                 toggleSidebar();
@@ -7117,6 +7229,10 @@ $(document).on("click", ".view_members", function () {
             group_id: group_id,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (response.status == "1") {
                 $(".user-contacts-sidebar").html("");
                 $(".user-contacts-sidebar").html(response.view);
@@ -7319,6 +7435,10 @@ function ajax_tip_close(type) {
             tip: type,
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             // console.log(response);
         },
     });
@@ -7384,6 +7504,10 @@ $(document).on("keyup", "#group_search_ajax", function () {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(data.html);
             if (data.html == "") {
                 $(".group_search_list").html("No data found");
@@ -7420,6 +7544,10 @@ function groupToggleSearch(search_name = null) {
     })
         .done(function (data) {
             console.log(data.html);
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (data.html == " ") {
                 $("#loader").html("No more contacts found");
                 return;
@@ -7659,7 +7787,10 @@ function get_co_host_list(
     })
         .done(function (data) {
             console.log(data);
-
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (search_name == "") {
                 create_co_event_yesvite_scroll = false;
             } else {
@@ -7894,6 +8025,10 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             // console.log(data);
             if (search_name == "") {
                 create_co_event_phone_scroll = false;
@@ -8100,6 +8235,10 @@ $(document).on("click", ".thank_you_card_toggle", function () {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $("#loader").hide();
             if (data.status == "1") {
                 toastr.success("Greeting card updated");
@@ -8133,6 +8272,10 @@ $(document).on("click", ".add_gift_registry", function () {
         },
     })
         .done(function (data) {
+            if (data.status == 401 && data.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $("#loader").hide();
             $("#registry_list").html(data);
 
@@ -8189,7 +8332,11 @@ function getStartEndTimeZone() {
             var end_event_date = $("#end-event-date").val();
             var start_time = $("#start-time").val();
             // Check if all fields are not empty
-            if (event_name !== "" && start_event_date !== "" && start_time !== "") {
+            if (
+                event_name !== "" &&
+                start_event_date !== "" &&
+                start_time !== ""
+            ) {
                 // When all fields are filled
                 $(".guestBtn").css("color", "black"); // Set text color to black
                 $("#guestBtn").removeClass("guestBtn");
@@ -8214,6 +8361,10 @@ $(document).on("click", ".all_user_list", function () {
         url: base_url + "event/see_all",
         method: "POST",
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(response);
             $(".see-all-invite-member-wrp").empty();
             $(".see-all-invite-member-wrp").html(response.view);
@@ -8318,8 +8469,12 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
+            if (html.status == 401 && html.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(html);
             isSetSession = 1;
             var currentInviteCount = parseInt($("#currentInviteCount").val());
@@ -8481,6 +8636,10 @@ function searchRecords(lim, off, type, search = null) {
         },
         cache: false,
         success: function (html) {
+            if (html.status == 401 && html.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             console.log(html);
             $(".designCategory").html(html.view);
         },
@@ -8588,6 +8747,10 @@ $(document).on("click", ".save-slider-image", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
                 var savedImages = response.images;
                 eventData.slider_images = savedImages;
                 console.log(eventData);
@@ -8627,6 +8790,10 @@ $(document).on("click", ".delete_silder", function (e) {
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
+                    if (response.status == 401 && response.info == 'logout') {
+                        window.location.href = '/'; // Redirect to home page
+                        return;
+                    }
                     if (delete_id == 1) {
                         $(".slider_photo").val("");
                     } else {
@@ -8638,7 +8805,7 @@ $(document).on("click", ".delete_silder", function (e) {
                     toastr.success("Slider Image Deleted Successfully");
                     $("#loader").css("display", "none");
                 },
-                error: function (xhr, status, error) { },
+                error: function (xhr, status, error) {},
             });
         } else {
             $(this).parent().find(".slider_img").attr("src", "");
@@ -8710,6 +8877,11 @@ function updateEventData() {
         },
         data: data,
         success: function (response) {
+
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             $(".main-content-wrp").removeClass("blurred");
 
             if (response.isupadte == true) {
@@ -8862,7 +9034,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
     }
     apiCalled = true;
     // if (final_step == 2) {
-    $(".dropdown-menu").removeClass('show');
+    $(".dropdown-menu").removeClass("show");
     savePage1Data(1);
     // }
     var design = eventData.desgin_selected;
@@ -8897,6 +9069,10 @@ $(document).on("click", "#close_editEvent", async function (e) {
         },
         data: eventData,
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             if (response == 1) {
                 window.location.href = base_url + "home";
                 toastr.success("Event Saved as Draft");
@@ -9309,6 +9485,10 @@ function update_self_bring(
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             IsPotluck = 1;
             var newdata = $(
                 "#h6-" + categoryItemKey + "-" + categoryIndexKey
@@ -9328,9 +9508,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                    parseInt(quantity) +
-                    "/" +
-                    categoryItemQuantity
+                        parseInt(quantity) +
+                        "/" +
+                        categoryItemQuantity
                 );
             }
 
@@ -9356,9 +9536,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -9379,10 +9559,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9391,10 +9571,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9413,10 +9593,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9424,10 +9604,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9460,6 +9640,10 @@ function sliderImages(id) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            if (response.status == 401 && response.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             var savedImages = response.images;
             eventData.slider_images = savedImages;
             eventData.desgin_selected = response.designImg;
@@ -9467,7 +9651,7 @@ function sliderImages(id) {
             //$("#loader").css("display", "none");
             //toastr.success("Slider Image saved Successfully");
         },
-        error: function (xhr, status, error) { },
+        error: function (xhr, status, error) {},
     });
 }
 
@@ -9499,7 +9683,7 @@ function getcoins() {
         AllCoins = max_guest;
     }
 
-    $(".invite-left_d").text("Invites | " + AllCoins + " Left");
+    $(".invite-left_d").text(AllCoins + " Left");
 }
 getcoins();
 if (category != 0) {
