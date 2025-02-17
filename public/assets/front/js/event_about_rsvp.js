@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('.btn-plus, .btn-minus').prop('disabled', true); // Disable buttons
             $('button[type="submit"]').prop('disabled', false); // Allow submission if RSVP is No
         } if (rsvpStatus == "1") {
-            $('button[type="submit"]').prop('disabled', true);
+
             adults = $('input[name="adults"]').val();
             kids = $('input[name="adults"]').val();
 
