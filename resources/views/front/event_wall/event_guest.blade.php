@@ -1,4 +1,5 @@
 
+{{-- {{dd($eventInfo);}} --}}
 <main class="new-main-content">
 
     <div class="container">
@@ -426,11 +427,19 @@
                                                                                         fill="black"
                                                                                         fill-opacity="0.2" />
                                                                                 </svg>
-                                                                                <h5 id="adults{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                                {{-- <h5 id="adults{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
                                                                                     {{ $guest['adults'] }} Adults
                                                                                 </h5>
                                                                                 <h5 id="kids{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
-                                                                                    {{ $guest['kids'] }} Kids</h5>
+                                                                                    {{ $guest['kids'] }} Kids</h5> --}}
+
+
+                                                                                    <h5 id="adults{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                                        {{$guest['adults'] == 1 ? $guest['adults'] . ' Adult' : $guest['adults'] . ' Adults'}}
+                                                                                    </h5>
+                                                                                    <h5 id="kids{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync']}}">
+                                                                                        {{$guest['kids'] == 1 ? $guest['kids'] . ' Kid' : $guest['kids'] . ' Kids'}}
+                                                                                    </h5>
                                                                             </div>
                                                                         </div>
                                                                     @elseif ($guest['rsvp_status'] == '0')
