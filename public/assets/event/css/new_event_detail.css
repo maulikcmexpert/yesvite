@@ -1496,11 +1496,12 @@
 .step_1 .col-lg-12:has(.design-seting){
     position: sticky;
     bottom: 10px;
+    z-index: 10;
 }
 
 .design-seting{
     background-color: #fff !important;
-    mar
+    z-index: 1;
 }
 
 
