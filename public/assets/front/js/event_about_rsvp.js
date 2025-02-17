@@ -99,8 +99,8 @@ $(document).ready(function () {
         console.log(adults, kids);
         if (rsvpStatus == "0") {
             $('button[type="submit"]').prop('disabled', false);
-        } else if (rsvpStatus == "1" && (adults > 0 || kids > 0)) {
-            $('button[type="submit"]').prop('disabled', false);
+        } else if (rsvpStatus == "1") {
+            $('button[type="submit"]').prop('disabled', true);
         }
     }
 
