@@ -1024,6 +1024,7 @@
                                     ? parseFloat(element.top) * scaleY
                                     : (element.centerY - 10) * scaleY;
                                 let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
+                                fontSize = Number(fontSize).toFixed(0)
                                 let width = (textWidth + 25) * scaleX; // Scale text box width
 
                                 console.log('textAlign '+element.text,element.textAlign)
