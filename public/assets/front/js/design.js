@@ -76,8 +76,8 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                if (response.status == 401 && response.info == 'logout') {
-                    window.location.href = '/'; // Redirect to home page
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
                     return;
                 }
                 if (response.image) {
@@ -646,8 +646,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
             id: id,
         },
         success: async function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(dbJson);
@@ -2180,6 +2180,8 @@ async function bindData(current_event_id) {
             lockScalingFlip: true,
             editable: true,
             fontWeight: originalTextbox.fontWeight,
+            fontStyle: originalTextbox.fontStyle,
+            underline: originalTextbox.underline,
             borderColor: "#2DA9FC",
             // cornerColor: 'red',
             cornerColor: "#fff",
@@ -2886,8 +2888,8 @@ function loadAgain() {
             image,
         },
         success: function (response) {
-            if (response.status == 401 && response.info == 'logout') {
-                window.location.href = '/'; // Redirect to home page
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/"; // Redirect to home page
                 return;
             }
             console.log(dbJson);
