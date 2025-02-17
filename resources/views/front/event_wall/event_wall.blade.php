@@ -339,8 +339,8 @@
                                                                                 fill="black" fill-opacity="0.2">
                                                                             </path>
                                                                         </svg>
-                                                                        <h5>{{ $post['adults'] }} Adults</h5>
-                                                                        <h5>{{ $post['kids'] }} Kids</h5>
+                                                                        <h5>{{ $post['adults'] }} Adult</h5>
+                                                                        <h5>{{ $post['kids'] }} Kid</h5>
                                                                     </div>
                                                                 </div>
                                                             @else
