@@ -471,7 +471,7 @@
                 </div>
                 <div class="coin-invite-wrp buycredits">
                     @php
-                        $setPrice = array_reverce($prices);
+                        $setPrice = array_reverse($prices);
                     @endphp
                     <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="available-coins">{{$setPrice[0]['price']}}</span>
                 </div>
