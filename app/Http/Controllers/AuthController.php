@@ -286,7 +286,6 @@ class AuthController extends Controller
                             Cookie::queue('email', $user->email, 120);
                             Cookie::queue('password', $request->password, 120);
                         } else {
-                            dd(1);
                             Cookie::forget('email');
                             Cookie::forget('password');
                         }
