@@ -424,8 +424,7 @@
                     </ul>
                 @endif
             </div>
-        </div>
-        <div class="guest-wrp side-guest-wrp">
+            <div class="guest-wrp side-guest-wrp">
             <div class="guest-pro">
                 <div>
                     <!-- <h5>Pro</h5>
@@ -482,6 +481,8 @@
                 {{-- </div> --}}
             </div>
         </div>
+        </div>
+       
     </div>
     <input type="hidden" value="{{ $user->id }}" id="user_id">
     <input type="hidden" id="CheckCuurentStep" value="0">

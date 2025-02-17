@@ -115,11 +115,19 @@
 .new-event-sidebar-wrp {
     border: 1px solid var(--borderColor);
     border-radius: 16px;
-    padding: 16px 24px 24px 24px;
     background: var(--white);
     height: 100vh;
     /* height: 100%; */
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.new-event-sidebar-menu{
+    padding: 16px 24px 24px 24px;
+    width: 100%;
 }
 
 .new-event-sidebar-menu ul {
@@ -1301,11 +1309,12 @@
 .guest-wrp.side-guest-wrp {
     /* border: none;
     box-shadow: none; */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: sticky;
+    /* left: 50%;
+    transform: translateX(-50%); */
     width: 100%;
-    bottom: 0;
+    bottom: 10px;
+    margin-bottom: 0px !important;
 }
 
 .guest-wrp.side-guest-wrp .invite-pro {
@@ -1483,6 +1492,18 @@
 .new_event_detail_form form h6{
     margin-bottom: 0px !important;
 }
+
+.step_1 .col-lg-12:has(.design-seting){
+    position: sticky;
+    bottom: 10px;
+    z-index: 10;
+}
+
+.design-seting{
+    background-color: #fff !important;
+    z-index: 1;
+}
+
 
 /* ======Responsiveness===== */
 
