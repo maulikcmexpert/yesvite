@@ -822,15 +822,14 @@ class EventGuestController extends BaseController
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $guest->event_id;
 
-            if ($guest_user_id != "") {
-                $creatEventPost->user_id =  $userId;
+            if ($request->input('user_id') != "") {
+                $creatEventPost->user_id =  $request->input('user_id');
             } else {
-                $creatEventPost->sync_id =  $sync_id;
+                $creatEventPost->sync_id =  $request->input('user_id');
             }
             $creatEventPost->post_message = json_encode($postMessage);
             $creatEventPost->post_privacy = "1";
             $creatEventPost->post_type = "4";
-            $creatEventPost->user_id = $guest_user_id;
             $creatEventPost->commenting_on_off = "0";
             $creatEventPost->is_in_photo_moudle = "0";
             $creatEventPost->save();

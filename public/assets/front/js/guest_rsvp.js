@@ -33,13 +33,13 @@ $(document).on('click', '.edit_rsvp_guest', function () {
 
             // Update the radio buttons based on RSVP status
             if (response.rsvp_status == "1") {
-                $('.rsvp_yes').prop('checked', true); 
+                $('.rsvp_yes').prop('checked', true);
                 $('.side_menu_minus').prop('disabled',false)
                 $('.side_menu_plus').prop('disabled',false)
                 // Attending
             }
             if (response.rsvp_status == "0") {
-                $('.rsvp_no').prop('checked', true); 
+                $('.rsvp_no').prop('checked', true);
                 $('.side_menu_minus').prop('disabled',true)
                 $('.side_menu_plus').prop('disabled',true)
             }
@@ -89,18 +89,12 @@ $(document).on('change', '.rsvp_yes', function () {
 });
 $(document).on('click', '.save-rsvp', function () {
     const eventId = $('#event_id').val();
-    const guestId = $(this).data('guest-update-id'); // Retrieve the guest ID
-    console.log('Updating Guest ID:', guestId);
-
-    if (!guestId) {
-        alert("No guest selected for update.");
-        return;
-    }
-
-    // Gather updated data
+    const guestId = $(this).data('guest-update-id');
+    const user_id = $("#user_id").val();
     const updatedData = {
         event_id:eventId,
         guestId: guestId,
+        user_id:user_id,
         adults: $('#editrsvp3 input[name="adults"]').val(),
         kids: $('#editrsvp3 input[name="kids"]').val(),
         rsvp_status: $('#editrsvp3 input[name="rsvp_status"]:checked').val() // Get the selected RSVP status
@@ -146,12 +140,12 @@ $(document).on('click', '.save-rsvp', function () {
                     zIndex: 9999
                 }).appendTo('body');
 
-                
+
                 $('#editrsvp3').modal('hide');
                 toastr.success('RSVP updated successfully');
                 setTimeout(() => {
                     window.location.reload();
-                }, 50); 
+                }, 50);
 
                 // Append new RSVP status based on the response
                 if (response.rsvp_status == '1') {
