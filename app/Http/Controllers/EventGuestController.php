@@ -825,7 +825,7 @@ class EventGuestController extends BaseController
             if ($request->input('user_id') != "") {
                 $creatEventPost->user_id =  $request->input('user_id');
             } else {
-                $creatEventPost->sync_id =  $request->input('user_id');
+                $creatEventPost->sync_id =  $request->input('sync_id');
             }
             $creatEventPost->post_message = json_encode($postMessage);
             $creatEventPost->post_privacy = "1";
