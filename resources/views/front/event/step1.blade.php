@@ -308,7 +308,7 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h6>Add end time?</h6>
+                            <h6>Add End Date and Time?</h6>
                             <div class="toggle-button-cover ">
                                 <div class="button-cover">
                                     <div class="button r" id="button-1">
