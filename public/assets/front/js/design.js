@@ -127,7 +127,7 @@ $(document).on("click", ".design-cards", function () {
 
     // Remove the old canvas if it exists
     $("#imageEditor2").remove();
-
+    alert(2);
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
@@ -1539,6 +1539,7 @@ async function bindData(current_event_id) {
         $(".size-btn").removeClass("activated");
         $(this).addClass("activated");
     });
+    alert(1);
     canvas = new fabric.Canvas("imageEditor1", {
         width: width, // Canvas width
         height: height, // Canvas height
