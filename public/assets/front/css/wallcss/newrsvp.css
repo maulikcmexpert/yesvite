@@ -641,6 +641,7 @@ display:none;}
     margin: 0px;
     padding: 0px 24px;
     border-radius: 0px !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 .rsvp-location-wrp h5{
     font-family: var(--SFProDisplay-Regular);
