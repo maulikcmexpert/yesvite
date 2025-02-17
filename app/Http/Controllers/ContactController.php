@@ -69,10 +69,10 @@ class ContactController extends Controller
 
         $yesvite_users = User::select('id', 'firstname', 'profile', 'lastname', 'email', 'country_code', 'phone_number', 'app_user', 'prefer_by', 'email_verified_at', 'parent_user_phone_contact', 'visible', 'message_privacy')
                 ->where('id', '!=', $id)
-                ->where(['app_user' => '1'])
+                // ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(6)
+                ->limit(10)
                 ->get();
 
             // dd($yesvite_users);
@@ -101,7 +101,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(6)
+        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(10)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -174,7 +174,7 @@ class ContactController extends Controller
                 ->limit($request->limit);
             })
             ->when(empty($request->search_name), function ($query) {
-                $query->limit(6);
+                $query->limit(10);
             })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
@@ -310,7 +310,7 @@ class ContactController extends Controller
         }
         if(empty($searchPhone) && empty($request->offset)){
             // dd(1);
-            $query->limit(6);
+            $query->limit(10);
         }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
