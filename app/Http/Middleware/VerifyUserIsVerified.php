@@ -42,9 +42,10 @@ class VerifyUserIsVerified
         }
         elseif($request->ajax()){
             return response()->json([
-                'status' => 'error',
+                'info' => 'logout',
+                'status'=>401,
                 'message' => 'Unauthenticated. Please log in.'
-            ], 401);
+            ]);
         }
         // return redirect('/')->with('msg_error', 'Unauthorised');
         return redirect('/');
