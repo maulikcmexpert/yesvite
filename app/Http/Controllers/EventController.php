@@ -2120,6 +2120,13 @@ class EventController extends BaseController
     public function saveTempDesign(Request $request)
     {
 
+        $userId = Auth::guard('web')->user()->id;
+        if (!$userId || !User::find($userId)) {
+            if (!$userId || !User::find($userId)) {
+                return response()->json(['info' => 'logged_out','status'=>401]);
+            }   
+             }
+
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
             // EventImage::where('event_id', $eventID)->where('type', 0)->delete();
