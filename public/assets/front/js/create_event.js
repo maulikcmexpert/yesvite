@@ -5160,7 +5160,13 @@ function uploadImage(blob) {
             data: formData,
             processData: false,
             contentType: false,
-            success: (response) => resolve(response),
+            success: (response) => {
+                if (response.status == 401 && response.info == 'logout') {
+                    window.location.href = '/'; // Redirect to home page
+                    return;
+                }
+                resolve(response);
+            },
             error: (xhr, status, error) => reject(error),
         });
     });
