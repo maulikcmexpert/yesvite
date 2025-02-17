@@ -40,6 +40,7 @@ class VerifyUserIsVerified
             $user->save();
             return $next($request);
         }
+        dd(1);
         // return redirect('/')->with('msg_error', 'Unauthorised');
         return redirect('/');
 
