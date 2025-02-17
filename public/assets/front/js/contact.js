@@ -7,7 +7,7 @@ $(document).ready(function () {
     var base_url=$('#base_url').val();
     var busy1 = false;
     var busy2=false;
-    var limit = 6;
+    var limit = 10;
     var offset = 0;
     var offset1 = 0;
 
@@ -103,7 +103,7 @@ $(document).on("keyup", ".search_name", function () {
         // loadMoreData(page, search_name);
         if(search_name==''){
             offset=0;
-            limit=6;
+            limit=10;
         
         }else{
             offset=null;
@@ -126,7 +126,7 @@ $(document).on("keyup", ".search_phone", function () {
         $("#yesvitePhones").html("");
         if(search_phone==''){
             offset1=null;
-            limit=6;
+            limit=10;
         }else{
             offset1=null;
             limit=null;
