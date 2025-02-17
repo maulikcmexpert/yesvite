@@ -390,7 +390,7 @@ $(document).ready(function () {
             parentCommentId = "";
         }
         if (commentText === "") {
-            alert("Please enter a comment");
+            toastr.error("Please enter a comment");
             return;
         }
 

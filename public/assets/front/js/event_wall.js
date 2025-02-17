@@ -1138,67 +1138,7 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
-$(document).ready(function () {
-    // Define visibility options
-    const visibilityOptions = {
-        1: "Everyone",
-        2: "RSVP’d - Yes",
-        3: "RSVP’d - No",
-        4: "RSVP’d - No Reply",
-    };
 
-    // Always reset to "Everyone" (1) on page load
-    let defaultVisibility = "1"; // Default value "Everyone"
-    let defaultAllowComments = "1"; // Default value to allow comments
-
-    // Set the default values in localStorage on page load
-    localStorage.setItem("post_privacys", defaultVisibility);
-    localStorage.setItem("commenting_on_off", defaultAllowComments);
-
-    // Apply default settings to the form
-    $('input[name="post_privacy"][value="1"]').prop("checked", true);
-    $("#allowComments").prop("checked", true);
-
-    // Update hidden input fields
-    $(".hiddenVisibility").val(defaultVisibility);
-    $(".hiddenAllowComments").val(defaultAllowComments);
-
-    // Update the display area
-    $("#savedSettingsDisplay").html(`
-        <h4>${visibilityOptions[defaultVisibility]} <i class="fa-solid fa-angle-down"></i></h4>
-    `);
-
-    // Save Button Click Handler
-    $("#saveSettings").on("click", function () {
-        // Fetch selected values
-        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
-        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
-
-        // Save to localStorage
-        localStorage.setItem("post_privacys", visibility);
-        localStorage.setItem("commenting_on_off", allowComments);
-
-        // Update hidden inputs
-        $(".hiddenVisibility").val(visibility);
-        $(".hiddenAllowComments").val(allowComments);
-
-        // Update display area
-        $("#savedSettingsDisplay").html(`
-            <h4>${visibilityOptions[visibility]} <i class="fa-solid fa-angle-down"></i></h4>
-        `);
-
-        console.log("Saved Settings:", { visibility, allowComments });
-    });
-
-    // Ensure the form updates hidden values before submission
-    $("form").on("submit", function () {
-        const visibility = $('input[name="post_privacy"]:checked').val() || "1";
-        const allowComments = $("#allowComments").is(":checked") ? "1" : "0";
-
-        $("#hiddenVisibility").val(visibility);
-        $("#hiddenAllowComments").val(allowComments);
-    });
-});
 
 $(".posts-card-like-btn").on("click", function () {
     const icon = this.querySelector("i");
