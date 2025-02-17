@@ -33,7 +33,7 @@
     background: var(--white);
     height: 100vh;
     overflow: hidden;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .guest-content h4 {
