@@ -1499,6 +1499,10 @@
     z-index: 10;
 }
 
+.step_1{
+    min-height: 100vh;
+}
+
 .design-seting{
     background-color: #fff !important;
     z-index: 1;
