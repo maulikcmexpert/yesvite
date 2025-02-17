@@ -5146,7 +5146,7 @@ function save_image_design(downloadImage, textData) {
                     let image = response.image;
                     eventData.desgin_selected = image;
 
-                    if (response.status === 401 && response.info == 'logged_out') {
+                    if (response.status == 401 && response.info == 'logout') {
                         window.location.href = '/'; // Redirect to home page
                     }
             
