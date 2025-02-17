@@ -18,15 +18,12 @@ let event_id = null;
 const originalWidth = 345;
 const originalHeight = 490;
 let element = document.querySelector(".image-edit-inner-img");
-
+var { width, height } = { width: 590, height: 880 };
 if (element) {
-    var { width, height } = element.getBoundingClientRect();
+    ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
     console.log("Width:", width, "Height:", height);
 } else {
-    var { width, height } = { width: 590, height: 880 };
-    console.log(width, height); // Output: 590 880
-
-    console.log("Element not found!");
+    console.log("Element not found! Using default values.");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -127,7 +124,7 @@ $(document).on("click", ".design-cards", function () {
 
     // Remove the old canvas if it exists
     $("#imageEditor2").remove();
-
+    alert(2);
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
@@ -663,18 +660,15 @@ async function bindData(current_event_id) {
         await ensureFontsLoaded();
     }
 
+    let element = document.querySelector(".image-edit-inner-img");
+    if (element) {
+        ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
+        console.log("Width:", width, "Height:", height);
+    } else {
+        console.log("Element not found! Using default values.");
+    }
+
     function loadTextDataFromDatabase() {
-        let element = document.querySelector(".image-edit-inner-img");
-        if (element) {
-            var { width, height } = element.getBoundingClientRect();
-            console.log("Width:", width, "Height:", height);
-        } else {
-            var { width, height } = { width: 590, height: 880 };
-            console.log(width, height); // Output: 590 880
-
-            console.log("Element not found!");
-        }
-
         if (image) {
             // console.log(image);
             fabric.Image.fromURL(image, function (img) {
@@ -1170,17 +1164,17 @@ async function bindData(current_event_id) {
                 //showStaticTextElements();
             }
             var rotateIcon =
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHqSURBVHgBtZW7S8NQFMZPxFXbzUGULIJPdHBwUAgWQamDj1msg0MXHQWXCiIdHFpQKupgrVR0sovgZBEfQx0UdHBLH9bVpv0DjueksRbb5Da2/uBrm4Z7vvvde5IrgQBEdNLXDGmQJJOcxq0c6YYUkyQpCX+BisukAOkTxcRJip36bLBaY/HfBIzkQgMf1odKkv/T4JsnrJaI/lSwsQSqmaiiUTktj6l0Fm2gcO0mw8ADxfY0RcsXYMw1D3cPCbCBrzxFXDQl78o6Otp6sbNrBEddc/p1jamcTYaPIprSQH83OFpbwL+5BqHgFnR2tMP0nAfSmQ/R0Bnhhvu3d3UxqfQ7hvYjpXvRswscGJ4QJQkKTXh5uLgZ7tlFvL1PWJU44uWSzXKmM1lwOFr0pTFdxr5uYTOwSRLqhPfKAs3ShBNoWoFm+mha4fLqmpqiByxI6p9o8SCGDiL65lZrV24IbmUBQ82G2zGUPzhleJcX9DTcrvybW5n36vQ8pt+PhncsU9BZ8ywZSfhlpsLPgVQBF947PIGX1zd9Gd1T4+CedIGAJTIJl67IaAMbi1phyWmw+IpuFHLVbFg8clWsHw9YUacRH9kK1AoW90i1YRBHq2NXkMqD5keBSgqKZi+BDYyZspKkHLVnrpZxX+O67qGyL3x/AAAAAElFTkSuQmCC";
+                "data:image/svg+xml,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%2013%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M4.71811%202.75377C5.15252%202.62395%205.63187%202.53906%206.16115%202.53906C8.5529%202.53906%2010.4903%204.47643%2010.4903%206.86818C10.4903%209.25993%208.5529%2011.1973%206.16115%2011.1973C3.7694%2011.1973%201.83203%209.25993%201.83203%206.86818C1.83203%205.97939%202.10166%205.15051%202.56104%204.46145%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.10156%202.87454L5.5446%201.2168%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.10156%202.875L5.78428%204.10333%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
             var img = document.createElement("img");
             img.src = rotateIcon;
 
             var deleteIcon =
-                "data:image/png;base64,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";
+                "data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%2213%22%20viewBox%3D%220%200%2013%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10.6792%203.34927C9.01645%203.18449%207.34373%203.09961%205.67599%203.09961C4.68734%203.09961%203.69868%203.14954%202.71002%203.24941L1.69141%203.34927%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.44141%202.84431L4.55126%202.1902C4.63115%201.71585%204.69107%201.36133%205.53492%201.36133H6.84314C7.687%201.36133%207.75191%201.73582%207.82681%202.1952L7.93666%202.84431%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9.61024%204.92773L9.28568%209.9559C9.23075%2010.7398%209.18581%2011.349%207.79271%2011.349H4.58706C3.19395%2011.349%203.14902%2010.7398%203.09409%209.9559L2.76953%204.92773%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M5.35156%208.60156H7.0143%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4.9375%206.60547H7.43411%22%20stroke%3D%22%230F172A%22%20stroke-width%3D%220.998643%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E";
             var img1 = document.createElement("img");
             img1.src = deleteIcon;
 
             var copyIcon =
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMnSURBVHgB3Zq/axRBFMe/J7bm0gmKZtMFNRhBG1HYgHaCv0rRnIVCGqOdKYIGCyMIiY2CTQ6s1QgGLQwXMaTQIqeXkFjtoVibu/wBz/dud8ze5k5uZ2bv9vzAy/7I7t58982PN/M2g4QgIoc3vYEpNtnKmUxmExbJwAJcYCnoENt5NpfNQX3hoxTZymwf2eZYVBmdggvvsk2z/SYzVthyaCdB4QtkH4/tHpKEf6CX/DefNB7bBdiGHzoUPLyd2PMKP2yEzOu9LtJeHJggb4M6j0e6QvjGMUoPHvld+Q4y/xDg8qaAdFHkMeVY9OSuRleS77pZpA/pXKajJxt6gi8UD7hIL8PskUV1sMMT5I+cLtLNbLh9NKpOyY6YdnDYbquDuuoUeCFWW6hUt1Ba3UBcTp08AUMkEu6XiDgqwoOvsiXm3y/gSu4WdBg8MoBPH17CkDssYma3Ogq6VAcxePb8hV+gwwPIZve0fF9p9XvNe6W1jdq9Bkjovy2CGYEmDx/cjVU9zl3KYWn5CyqVLRgi0XRfuGG76BDiEQMu1kSwGpmVOegQ4xNTOH3mMjQ5qjzhoMOoNqKBq0QMIQVothEnNZ4wQYnIootRInrRxSgRVhez2o0SUUEX8194QoUdRRhQWluPdb2FcCPMppEIiZckBhqfeAQdDh7YBwsUlYgy/CoVq5cavXENMiVZWv4c5zZke3owevMqi9gPC3z9u0fJrK22xODxs5Tde4i+ra6TBm44FH8Dw0hWYp849b1SrdbmJD9+/qpVLY25heQ6FsMi8vDn19oD3/y7BUw9foq4iIC3r/LQYFH+RKenM7wZgwEiotU2Im1DpqnSPrI9rc8MQ8gcuxwV4fDGQ3eQZwHXZaduySZIOz1BdzCpdhqtO91H+kfwyXCer9kypmRpXiOdSI/UHz7RcEGZL5pDOquV1JDhWHdQBwfAJsTP45GfaFyhdJCDLpQOITnYgB80Q+3HI39NzB7yRqh9aeACNcnR2RDisOUpOTzyF7eTJwExBWr39x0RMbmgEHET9h75bc2FAVY+FQpD23kOsb7Iv2VVpRxY0dYnQn8AxkwzSD/FREQAAAAASUVORK5CYII=";
+                "data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8.12586%207.35378V1.36192C8.12586%200.810389%207.67876%200.363281%207.12722%200.363281H1.13536C0.583826%200.363281%200.136719%200.810389%200.136719%201.36192V7.35378C0.136719%207.90532%200.583826%208.35243%201.13536%208.35243H7.12722C7.67876%208.35243%208.12586%207.90532%208.12586%207.35378ZM1.13536%201.36192H7.12722V7.35378H1.13536V1.36192ZM9.12451%208.35243V2.36057C9.67604%202.36057%2010.1231%202.80768%2010.1231%203.35921V8.35243C10.1231%209.4555%209.22893%2010.3497%208.12586%2010.3497H3.13265C2.58111%2010.3497%202.13401%209.9026%202.13401%209.35107H8.12586C8.6774%209.35107%209.12451%208.90396%209.12451%208.35243Z%22%20fill%3D%22%230F172A%22%2F%3E%3C%2Fsvg%3E";
             var img2 = document.createElement("img");
             img2.src = copyIcon;
 
@@ -1197,7 +1191,7 @@ async function bindData(current_event_id) {
 
             fabric.Textbox.prototype.controls.deleteControl =
                 new fabric.Control({
-                    x: 0.3,
+                    x: 0.1,
                     y: -0.5,
                     offsetY: -20,
                     cursorStyle: "pointer",
@@ -1214,7 +1208,7 @@ async function bindData(current_event_id) {
                 });
 
             fabric.Textbox.prototype.controls.copyControl = new fabric.Control({
-                x: -0.3,
+                x: -0.1,
                 y: -0.5,
                 offsetY: -20,
                 cursorStyle: "pointer",
@@ -1230,7 +1224,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                ctx.drawImage(img, -size / 4, -size / 4, size, size);
                 ctx.restore();
             }
 
@@ -1245,7 +1239,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img1, -size / 2, -size / 2, size, size);
+                ctx.drawImage(img1, -size / 4, -size / 4, size, size);
                 ctx.restore();
             }
             function renderCopyIcon(
@@ -1259,7 +1253,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img2, -size / 2, -size / 2, size, size);
+                ctx.drawImage(img2, -size / 4, -size / 4, size, size);
                 ctx.restore();
             }
 
@@ -1445,8 +1439,6 @@ async function bindData(current_event_id) {
     });
 
     function addIconsToTextbox(target) {
-        console.log("add to here");
-        console.log(target);
         if (target == undefined) {
             return;
         }
@@ -2748,13 +2740,10 @@ async function bindData(current_event_id) {
 function getTextDataFromCanvas() {
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
-        var { width, height } = element.getBoundingClientRect();
+        ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
         console.log("Width:", width, "Height:", height);
     } else {
-        var { width, height } = { width: 590, height: 880 };
-        console.log(width, height); // Output: 590 880
-
-        console.log("Element not found!");
+        console.log("Element not found! Using default values.");
     }
 
     console.log("getTextDataFromCanvas");
