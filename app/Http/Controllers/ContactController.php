@@ -72,7 +72,7 @@ class ContactController extends Controller
                 ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(6)
+                ->limit(10)
                 ->get();
 
             // dd($yesvite_users);
@@ -101,7 +101,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(6)
+        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(10)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
