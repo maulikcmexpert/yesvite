@@ -5149,6 +5149,7 @@ function save_image_design(downloadImage, textData) {
 
                     if (response.status == 401 && response.info == 'logout') {
                         window.location.href = '/'; // Redirect to home page
+                        return;
                     }
             
                     // if(eventData.step == '1'){
@@ -6847,6 +6848,10 @@ function displayRecords(
         cache: false,
         beforeSend: function () { },
         success: function (html) {
+            if (html.status == 401 && html.info == 'logout') {
+                window.location.href = '/'; // Redirect to home page
+                return;
+            }
             var currentInviteCount = parseInt($("#currentInviteCount").val());
             const coins = $("#coins").val();
             if (search == "" || search == null) {
