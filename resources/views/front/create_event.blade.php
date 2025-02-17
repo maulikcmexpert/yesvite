@@ -476,7 +476,7 @@
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 </div>
-                <div>
+                <div class="coin-invite-main">
                 <div class="heading">
                         <p>Purchasing</p>
                     </div>
