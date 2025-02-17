@@ -830,6 +830,7 @@ class EventGuestController extends BaseController
             $creatEventPost->post_message = json_encode($postMessage);
             $creatEventPost->post_privacy = "1";
             $creatEventPost->post_type = "4";
+            $creatEventPost->user_id = $guest_user_id;
             $creatEventPost->commenting_on_off = "0";
             $creatEventPost->is_in_photo_moudle = "0";
             $creatEventPost->save();
