@@ -903,6 +903,11 @@
 .home-web-tabs-wrp nav:first-child {
     border-bottom: 1px solid var(--border);
 }
+
+.breadcrumb-nav{
+    border-bottom: none !important;
+}
+
 .home-web-tabs-wrp .nav-tabs {
     background-color: transparent !important;
     border-bottom: none !important;
