@@ -1186,7 +1186,7 @@ async function bindData(current_event_id) {
                 actionHandler: fabric.controlsUtils.rotationWithSnapping,
                 actionName: "rotate",
                 render: renderIcon,
-                cornerSize: 40,
+                cornerSize: 20,
             });
 
             fabric.Textbox.prototype.controls.deleteControl =
@@ -1224,7 +1224,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img, -size / 4, -size / 4, size, size);
+                ctx.drawImage(img, -size / 2, -size / 2, size, size);
                 ctx.restore();
             }
 
@@ -1239,7 +1239,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img1, -size / 4, -size / 4, size, size);
+                ctx.drawImage(img1, -size / 2, -size / 2, size, size);
                 ctx.restore();
             }
             function renderCopyIcon(
@@ -1253,7 +1253,7 @@ async function bindData(current_event_id) {
                 ctx.save();
                 ctx.translate(left, top);
                 ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-                ctx.drawImage(img2, -size / 4, -size / 4, size, size);
+                ctx.drawImage(img2, -size / 2, -size / 2, size, size);
                 ctx.restore();
             }
 
