@@ -759,8 +759,8 @@ class ApiAuthController extends Controller
             }
         } else {
             $message = "You have already verified your account.";
-            $faild = "verified";
-            return view('emailVarification', data: compact('message','faild'));
+            $faild = "";
+            return view('emailVarification', data: compact('message'));
         }
     }
 }
