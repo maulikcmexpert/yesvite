@@ -941,6 +941,12 @@
     .edit-images-button-inner button h6{
         font-size: 24px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 24px !important;
+    }
 }
 
 @media only screen and (min-width: 3601px) and (max-width: 3800px){
@@ -962,7 +968,13 @@
         height: 100%;
     }
     .edit-images-button-inner button h6{
-        font-size: 24px;
+        font-size: 23px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 25px !important;
     }
 }
 
@@ -986,6 +998,12 @@
     }
     .edit-images-button-inner button h6{
         font-size: 24px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 22px !important;
     }
 }
 
@@ -1011,6 +1029,12 @@
     .edit-images-button-inner button h6{
         font-size: 20px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 22px !important;
+    }
 }
 
 @media only screen and (min-width: 3001px) and (max-width: 3200px){
@@ -1033,6 +1057,12 @@
     }
     .edit-images-button-inner button h6{
         font-size: 20px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 22px !important;
     }
 }
 
@@ -1058,7 +1088,20 @@
     .edit-images-button-inner button h6{
         font-size: 20px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 21px !important;
+    }
+
 }
+
+@media only screen and (min-width: 2400px) and (max-width: 2800px){
+    .new-event-sidebar-menu ul li h3{
+        font-size: 20px !important;
+    }
+} 
 
 @media only screen and (min-width: 2000px) and (max-width: 2800px) {
     .image-edit-inner-img {
@@ -1086,6 +1129,12 @@
     }
     .edit-images-button-wrp{
         max-width: 600px;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+    .new-event-sidebar-menu ul li h3{
+        font-size: 18px;
     }
 }
 
