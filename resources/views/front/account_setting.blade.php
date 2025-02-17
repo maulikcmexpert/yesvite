@@ -12,11 +12,11 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{route('profile')}}">Profile</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Account Setting</li>
+                            <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
                         </ol>
                     </nav>
                     <div class="contact-title">
-                        <h3>Account Setting</h3>
+                        <h3>Account Settings</h3>
 
                     </div>
                 </div>
