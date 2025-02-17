@@ -199,11 +199,16 @@ $(document).ready(function () {
         }
     })
     $(".attending-btn").on('click', function () {
-        $("#option6").prop('checked', false);
-        $("#option5").prop('checked', true);
-        $('.btn-plus, .btn-minus').prop('disabled', false);
-        validateForm();
-    });
+        $('button[type="submit"]').prop('disabled', true);
+        var rsvpStatus = $('#statusRsvp').val();
+        if (rsvpStatus == '1') {
+            $('button[type="submit"]').prop('disabled', true);
+            $("#option6").prop('checked', false);
+            $("#option5").prop('checked', true);
+            $('.btn-plus, .btn-minus').prop('disabled', false);
+            $('button[type="submit"]').prop('disabled', false);
+        }
+    })
 });
 
 // $(".modal").on("hidden.bs.modal", function () {
