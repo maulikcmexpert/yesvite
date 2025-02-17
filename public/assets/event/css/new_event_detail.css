@@ -1315,6 +1315,7 @@
     width: 100%;
     bottom: 10px;
     margin-bottom: 0px !important;
+    background-color: #fff !important;
 }
 
 .guest-wrp.side-guest-wrp .invite-pro {

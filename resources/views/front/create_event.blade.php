@@ -466,7 +466,7 @@
                     <h6 class="invite-count">0</h6>
                     {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                     <input type="hidden" id="event_guest_left_count" />
-                    <p class="invite-left_d"><strong>Invites | </strong></p>
+                    <p><strong>Invites |<div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="invite-left_d"></span></strong></p>
                     <input type="hidden" id="currentInviteCount" value="0">
                 </div>
                 <div class="coin-invite-wrp buycredits">
