@@ -357,8 +357,9 @@
 }
 
 .guest-main-content {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
 }
 
 .guest-main-content .contact-tab .users-data .user_choice_group {
@@ -426,6 +427,10 @@
 
 .step_3 .design-seting {
     max-width: calc(100vh - 150px);
+    position: sticky !important;
+    bottom: 10px !important;
+    left: auto !important;
+    transform: translateY(0) !important;
 }
 
 #sidebar_add_co_host .alert-box {
