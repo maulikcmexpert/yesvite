@@ -1503,6 +1503,10 @@
     min-height: 100vh;
 }
 
+.step_1 .main-content-right{
+    height: 100vh !important;
+}
+
 .design-seting{
     background-color: #fff !important;
     z-index: 1;
