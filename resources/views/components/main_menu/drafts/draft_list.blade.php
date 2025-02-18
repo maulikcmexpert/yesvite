@@ -134,7 +134,7 @@
 
     </script> -->
 
-<script>
+<!-- <script>
  document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
@@ -178,7 +178,7 @@
   });
 });
 
-</script>
+</script> -->
 
 
 
