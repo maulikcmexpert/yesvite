@@ -5203,6 +5203,7 @@ function updateUIAfterSave(image) {
 
     final_step = final_step === 1 ? 2 : final_step;
     eventData.step = final_step;
+    alert(final_step)
 
     $("#myCustomModal, #exampleModal").modal("hide");
     $(".main-content-wrp").removeClass("blurred");
