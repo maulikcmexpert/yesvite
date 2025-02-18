@@ -59,7 +59,7 @@
                                 <div class="photos-main-wrp">
                                     @php
 
-                                        $photo =  $postPhotoList['mediaData'][0]['post_media'] ?? "";
+                                        $photo =  empty($postPhotoList);
                                         if($photo == ""){
                                             $hide_image = 'd-none';
                                         }else{
