@@ -677,7 +677,7 @@ class EventController extends BaseController
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
-            dd($eventDetail['isCopy']);
+            
         return view('event_layout', compact(
             'title',
             'page',
