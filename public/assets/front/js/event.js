@@ -1265,8 +1265,17 @@ $('#notification_rsvp_btn').on('click', function (e) {
        $('#rsvp_notification_kids').prop('disabled',true);
        $('.rsvp_minus_notify').prop('disabled',true);
        $('.rsvp_plus_notify').prop('disabled',true);
+       toastr.error('Please select RSVP');
+       return;
+
     }
-    $('#rsvp_by_notification').modal('hide');
+    console.log(adults+' '+kids);
+
+    if(adults==""&&kids==""){
+        toastr.error('Please select atleast one kid or adult');
+        return;
+    }
+    // $('#rsvp_by_notification').modal('hide');
 
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
