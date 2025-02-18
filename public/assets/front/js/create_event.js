@@ -5365,7 +5365,7 @@ function downloadPhotoAndUpload() {
             link.click();
         });
 }
-
+toggleSidebar('sidebar')
 $(document).on("click", "#delete_invited_user", function () {
     $("#loader").css("display", "flex");
     var id = $(this).data("id");
