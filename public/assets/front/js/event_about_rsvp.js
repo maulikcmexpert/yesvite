@@ -205,7 +205,7 @@ $(document).ready(function () {
     $(".attending-btn").on('click', function () {
 
         var rsvpStatus = $('#statusRsvp').val();
-        alert(rsvpStatus);
+
         if (rsvpStatus == 1) {
 
             $('button[type="submit"]').prop('disabled',true);
