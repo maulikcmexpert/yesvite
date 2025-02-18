@@ -197,7 +197,7 @@ $(document).ready(function () {
         if (rsvpStatus == 0) {
             $("#option6").prop('checked', true);
             $("#option5").prop('checked', false);
-            $('.btn-plus, .btn-minus').prop('disabled', true);
+            $('.btn-plus, .btn-minus').prop('disabled',true);
             $("#rsvp_status_adults").val(0);
             $("#rsvp_status_kids").val(0);
         }
@@ -208,7 +208,7 @@ $(document).ready(function () {
         alert(rsvpStatus);
         if (rsvpStatus == 1) {
 
-            $('button[type="submit"]').prop('disabled', true);
+            $('button[type="submit"]').prop('disabled',true);
             $("#option6").prop('checked', false);
             $("#option5").prop('checked', true);
             $('.btn-plus, .btn-minus').prop('disabled', false);
