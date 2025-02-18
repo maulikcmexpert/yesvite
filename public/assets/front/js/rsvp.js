@@ -336,24 +336,23 @@ function addToOutlookCalendar() {
 
     console.log(eventDate);
     console.log(eventEndDate);
-    console.log(eventTime);
-    console.log(eventEndTime);
+    console.log(convertTo24Hour(eventTime));
+    console.log(convertTo24Hour(eventEndTime));
     console.log(eventName);
     
-         let startDateTime = new Date("2025-02-19T10:00:00");
-         let endDateTime = new Date("2025-02-19T11:00:00");
-        
-        let subject = "Meeting with Client";
-        let details = "Discussion on project updates.";
-        let location = "Online";
+         let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+         let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+        let subject = eventName;
+        let details = eventName;
+        // let location = "Online";
         
         // 1. Convert to ISO String (and remove milliseconds)
         let startISO = startDateTime.toISOString().replace(/\.000Z$/, 'Z');
         let endISO = endDateTime.toISOString().replace(/\.000Z$/, 'Z');
         
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
-            &body=${encodeURIComponent(details)}
-            &location=${encodeURIComponent(location)}`;
+            &body=${encodeURIComponent(details)}`;
+            // &location=${encodeURIComponent(location)}`;
         
         // 2. Check if start and end times are the same
         if (startISO === endISO) {
@@ -904,4 +903,16 @@ function getInitials(name) {
         .map((part) => part.charAt(0).toUpperCase()) // Get first letter of each word
         .join("")
         .slice(0, 2); // Ensure max 2 characters
+}
+function convertTo24Hour(timeStr) {
+    let [time, period] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (period === "PM" && hours !== 12) {
+        hours += 12; // Convert PM hours except 12 PM
+    } else if (period === "AM" && hours === 12) {
+        hours = 0; // Convert 12 AM to 00
+    }
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
 }
