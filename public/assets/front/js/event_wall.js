@@ -1571,7 +1571,7 @@ $(document).ready(function () {
     loadSettings();
 
     // Check modal ID & trigger loadSettings()
-    $("#add-new-photomodal").on("show.bs.modal", function () {
+    $("#creatpostmodal").on("show.bs.modal", function () {
         console.log("Modal Opened & Settings Loaded"); // Debugging
         loadSettings();
     });
