@@ -3942,23 +3942,26 @@ $(document).on("click", "#close_createEvent", async function (e) {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
 
-        if (final_step == 2) {
-            savePage1Data(1);
-        }
-        if (final_step == 3) {
-            savePage1Data(1);
-            var savePage3Result = savePage3Data(1);
-            console.log(savePage3Result);
+        // if (final_step == 2) {
+        //     savePage1Data(1);
+        // }
+        // if (final_step == 3) {
+        //     savePage1Data(1);
+        //     var savePage3Result = savePage3Data(1);
+        //     console.log(savePage3Result);
 
-            if (savePage3Result === false) {
-                $("#loader").css("display", "none");
-                return; // Exit if savePage3Data returns a stopping condition
-            }
-        }
+        //     if (savePage3Result === false) {
+        //         $("#loader").css("display", "none");
+        //         return; // Exit if savePage3Data returns a stopping condition
+        //     }
+        // }
 
         eventData.step = final_step;
         eventData.isdraft = "1";
-        savePage4Data();
+        // savePage4Data();
+        savePage1Data(null, true);
+        savePage3Data(null, true);
+        savePage4Data(null, true);
         var schedule = $("#schedule").is(":checked");
         if (schedule) {
             eventData.events_schedule = "1";
@@ -3993,22 +3996,24 @@ $(document).on("click", "#close_createEvent", async function (e) {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
 
-        if (final_step == 2) {
-            savePage1Data(1);
-        }
-        if (final_step == 3) {
-            var savePage3Result = savePage3Data(1);
-            console.log(savePage3Result);
+        // if (final_step == 2) {
+        //     savePage1Data(1);
+        // }
+        // if (final_step == 3) {
+        //     var savePage3Result = savePage3Data(1);
+        //     console.log(savePage3Result);
 
-            if (savePage3Result === false) {
-                $("#loader").css("display", "none");
-                return; // Exit if savePage3Data returns a stopping condition
-            }
-        }
-
+        //     if (savePage3Result === false) {
+        //         $("#loader").css("display", "none");
+        //         return; // Exit if savePage3Data returns a stopping condition
+        //     }
+        // }
         eventData.step = final_step;
         eventData.isdraft = "1";
-        savePage4Data();
+        savePage1Data(null, true);
+        savePage3Data(null, true);
+        savePage4Data(null, true);
+        // savePage4Data();
 
         console.log(eventData);
         $.ajax({
