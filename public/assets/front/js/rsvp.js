@@ -326,7 +326,7 @@ function addToGoogleCalendar() {
 }
 
 function addToOutlookCalendar() {
-    function createOutlookEvent() {
+    // function createOutlookEvent() {
         let startDate = "20250219"; // Format: YYYYMMDD
         let startTime = "100000";   // Format: HHMMSS
         let endTime = "110000";     // Format: HHMMSS
@@ -337,7 +337,7 @@ function addToOutlookCalendar() {
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&startdt=${startDate}T${startTime}&enddt=${startDate}T${endTime}`;
     
         window.open(outlookLink, "_blank");
-    }
+    // }
     // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     // if (!startDateTime) return;
 
