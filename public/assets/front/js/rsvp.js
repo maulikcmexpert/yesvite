@@ -220,21 +220,18 @@ function addToOutlookCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     if (!startDateTime) return;
 
-    // Convert to `YYYY-MM-DDTHH:MM:SS` format without `Z` (UTC issue fix)
-    const formatToOutlookDate = (date) => {
-        return date.toISOString().slice(0, 19); // `YYYY-MM-DDTHH:MM:SS`
+    const formatToICSDate = (date) => {
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
     };
 
-    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
-        &startdt=${encodeURIComponent(formatToOutlookDate(startDateTime))}
-        &enddt=${encodeURIComponent(formatToOutlookDate(endDateTime))}
-        &subject=${encodeURIComponent(eventName)}
-        &body=Event%20on%20${encodeURIComponent(eventDate)}%20-%20${encodeURIComponent(eventEndDate)}
-        &allday=false`;
+    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${encodeURIComponent(
+        formatToICSDate(startDateTime)
+    )}&enddt=${encodeURIComponent(
+        formatToICSDate(endDateTime)
+    )}&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
 
     window.open(outlookCalendarUrl);
 }
-
 
 function addToAppleCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
