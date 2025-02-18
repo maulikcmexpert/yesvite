@@ -57,7 +57,17 @@
                             <div class="tab-pane fade {{ $photos_show }} {{ $photos_active }}" id="nav-photos"
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
-                                    <div class="row">
+                                    @php
+
+                                        $photo =  $postPhotoList['mediaData'][0]['post_media'];
+                                        if($photo == ""){
+                                            $hide_image = 'd-none';
+                                        }else{
+                                            $hide_image = '';
+                                        }
+
+                                    @endphp
+                                    <div class="row {{$hide_image }}" >
                                         {{-- <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                             <div class="photos-card-wrp">
                                                 <div class="photo-card-head">
@@ -890,7 +900,7 @@
                                                     alt="" loading="lazy" />
                                             </div>
                                         </div>
-                                      
+
                                     </div>
                                     <div class="swiper-button-next">
                                         <i class="fa-solid fa-angle-right"></i>
