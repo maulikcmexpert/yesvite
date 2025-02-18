@@ -1252,7 +1252,6 @@ $('#notification_rsvp_btn').on('click', function (e) {
        
     } else {
         // If no input is checked, show an alert
-        alert('Please select an RSVP status');
         if (!$('.toast').length) {
             toastr.error('Please select RSVP');
         }
