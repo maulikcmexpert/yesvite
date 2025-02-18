@@ -1265,6 +1265,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
        $('#rsvp_notification_kids').prop('disabled',true);
        $('.rsvp_minus_notify').prop('disabled',true);
        $('.rsvp_plus_notify').prop('disabled',true);
+       toastr.clear();
        toastr.error('Please select RSVP');
        return;
 
