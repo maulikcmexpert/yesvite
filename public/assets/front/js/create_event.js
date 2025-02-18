@@ -16,7 +16,6 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 
-
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
 var isStartTime = 0;
@@ -4888,7 +4887,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
     }
 });
 
-$(document).on("click", ".li_design .pick-card",async function (e) {
+$(document).on("click", ".li_design .pick-card", async function (e) {
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData(true);
@@ -4902,7 +4901,6 @@ $(document).on("click", ".li_design .pick-card",async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-   
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -5365,7 +5363,7 @@ function downloadPhotoAndUpload() {
             link.click();
         });
 }
-toggleSidebar('sidebar')
+
 $(document).on("click", "#delete_invited_user", function () {
     $("#loader").css("display", "flex");
     var id = $(this).data("id");
@@ -9732,7 +9730,7 @@ function getcoins() {
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
-    
+
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
@@ -9822,5 +9820,4 @@ $(document).on("click", ".previousImeg", async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-    
 });
