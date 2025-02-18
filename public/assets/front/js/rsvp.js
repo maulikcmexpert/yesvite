@@ -340,20 +340,19 @@ function addToOutlookCalendar() {
     console.log(convertTo24Hour(eventEndTime));
     console.log(eventName);
     
-         let startDateTime = new Date("2025-02-19T10:00:00");
-         let endDateTime = new Date("2025-02-19T11:00:00");
-        
-        let subject = "Meeting with Client";
-        let details = "Discussion on project updates.";
-        let location = "Online";
+         let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+         let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+        let subject = eventName;
+        let details = eventName;
+        // let location = "Online";
         
         // 1. Convert to ISO String (and remove milliseconds)
         let startISO = startDateTime.toISOString().replace(/\.000Z$/, 'Z');
         let endISO = endDateTime.toISOString().replace(/\.000Z$/, 'Z');
         
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
-            &body=${encodeURIComponent(details)}
-            &location=${encodeURIComponent(location)}`;
+            &body=${encodeURIComponent(details)}`;
+            // &location=${encodeURIComponent(location)}`;
         
         // 2. Check if start and end times are the same
         if (startISO === endISO) {
