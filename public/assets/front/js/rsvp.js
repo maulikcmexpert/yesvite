@@ -197,8 +197,12 @@ document.getElementById("openOutlook").addEventListener("click", function () {
     addToOutlookCalendar();
 });
 
+document.getElementById("openApple").addEventListener("click", function () {
+    addToAppleCalendar();
+});
+
 function addToGoogleCalendar() {
-    const { eventName, eventDate, eventEndDate, startDateTime, endDateTime } = getEventDetails();
+    const { eventName, startDateTime, endDateTime } = getEventDetails();
     if (!startDateTime) return;
 
     const formatToGoogleCalendar = (date) => {
@@ -213,7 +217,7 @@ function addToGoogleCalendar() {
 }
 
 function addToOutlookCalendar() {
-    const { eventName, eventDate, eventEndDate, startDateTime, endDateTime } = getEventDetails();
+    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     if (!startDateTime) return;
 
     const formatToICSDate = (date) => {
@@ -229,9 +233,40 @@ function addToOutlookCalendar() {
     window.open(outlookCalendarUrl);
 }
 
+function addToAppleCalendar() {
+    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
+    if (!startDateTime) return;
+
+    const formatToICSDate = (date) => {
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    };
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//YourApp//Event//EN
+BEGIN:VEVENT
+UID:${new Date().getTime()}@yourdomain.com
+DTSTAMP:${formatToICSDate(new Date())}
+DTSTART:${formatToICSDate(startDateTime)}
+DTEND:${formatToICSDate(endDateTime)}
+SUMMARY:${eventName}
+DESCRIPTION:Event on ${eventDate} - ${eventEndDate}
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: "text/calendar" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "event.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
 function getEventDetails() {
     const eventDate = $("#eventDate").val();
-    const eventEndDate = $("#eventEndDate").val() || eventDate; // Default to same date if no end date
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
     const eventTime = $("#eventTime").val();
     const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
     const eventName = $("#eventName").val() || "Meeting with Team";
@@ -280,6 +315,7 @@ function getEventDetails() {
 
     return { eventName, eventDate, eventEndDate, startDateTime, endDateTime };
 }
+
 
 //by prakash
 
