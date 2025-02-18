@@ -334,20 +334,20 @@ function addToOutlookCalendar() {
         let details = "Discussion on project updates.";
         let location = "Online";
         
-        // 1. Convert to ISO String
-        let startISO = startDateTime.toISOString();
-        let endISO = endDateTime.toISOString();
-        
-        // 2. Remove milliseconds (optional but recommended)
-        startISO = startISO.replace(/\.000Z$/, 'Z'); // Remove .000Z
-        endISO = endISO.replace(/\.000Z$/, 'Z');     // Remove .000Z
-        
+        // 1. Convert to ISO String (and remove milliseconds)
+        let startISO = startDateTime.toISOString().replace(/\.000Z$/, 'Z');
+        let endISO = endDateTime.toISOString().replace(/\.000Z$/, 'Z');
         
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
             &body=${encodeURIComponent(details)}
-            &location=${encodeURIComponent(location)}
-            &startdt=${encodeURIComponent(startISO)}
-            &enddt=${encodeURIComponent(endISO)}`;
+            &location=${encodeURIComponent(location)}`;
+        
+        // 2. Check if start and end times are the same
+        if (startISO === endISO) {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}`; // Only start time
+        } else {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}&enddt=${encodeURIComponent(endISO)}`; // Both start and end times
+        }
         
         window.open(outlookLink, "_blank");
     // }
