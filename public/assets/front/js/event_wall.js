@@ -1549,7 +1549,7 @@ $(document).ready(function () {
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
         let savedVisibility =
-           "Everyone";
+           "1";
         let savedAllowComments =
             "1";
 
