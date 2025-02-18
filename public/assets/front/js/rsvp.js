@@ -327,20 +327,33 @@ function addToGoogleCalendar() {
 
 function addToOutlookCalendar() {
     // function createOutlookEvent() {
-        let startDateTime = new Date("2025-02-19T10:00:00"); // Adjust as needed
-    let endDateTime = new Date("2025-02-19T11:00:00");
-
-    let subject = "Meeting with Client";
-    let details = "Discussion on project updates.";
-    let location = "Online";
-
-    let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
-        &body=${encodeURIComponent(details)}
-        &location=${encodeURIComponent(location)}
-        &startdt=${encodeURIComponent(startDateTime.toISOString())}
-        &enddt=${encodeURIComponent(endDateTime.toISOString())}`;
-
-    window.open(outlookLink, "_blank");
+        let startDateTime = new Date(2025, 1, 19, 10, 0, 0); // Month is 0-based (1 = Feb)
+        let endDateTime = new Date(2025, 1, 19, 11, 0, 0);
+    
+        let subject = "Meeting with Client";
+        let details = "Discussion on project updates.";
+        let location = "Online";
+    
+        // Function to format date as YYYY-MM-DDTHH:mm:ss (without UTC 'Z')
+        function formatDateTime(date) {
+            return date.getFullYear() + "-" +
+                String(date.getMonth() + 1).padStart(2, "0") + "-" +
+                String(date.getDate()).padStart(2, "0") + "T" +
+                String(date.getHours()).padStart(2, "0") + ":" +
+                String(date.getMinutes()).padStart(2, "0") + ":" +
+                String(date.getSeconds()).padStart(2, "0");
+        }
+    
+        let formattedStartDateTime = formatDateTime(startDateTime);
+        let formattedEndDateTime = formatDateTime(endDateTime);
+    
+        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
+            &body=${encodeURIComponent(details)}
+            &location=${encodeURIComponent(location)}
+            &startdt=${encodeURIComponent(formattedStartDateTime)}
+            &enddt=${encodeURIComponent(formattedEndDateTime)}`;
+    
+        window.open(outlookLink, "_blank");
     // }
     // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     // if (!startDateTime) return;
