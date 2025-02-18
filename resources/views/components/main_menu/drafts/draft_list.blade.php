@@ -136,46 +136,46 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-  const saveDates = document.querySelectorAll('.last-save');
+  const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
   saveDates.forEach(function (saveDateElement) {
-    const savedDate = saveDateElement.getAttribute('data-save-date');
+    const savedDate = saveDateElement.getAttribute('data-save-date'); // Get the saved date attribute
 
     if (!savedDate) {
       console.error('Missing date attribute');
       return;
     }
 
-    // Convert to ISO format if necessary
-    const dateObject = new Date(savedDate.includes('T') ? savedDate : savedDate.replace(" ", "T") + 'Z');
+    // Convert to Date object (ensuring the format is proper)
+    const dateObject = new Date(savedDate.includes('T') ? savedDate : savedDate.replace(" ", "T"));
 
     if (isNaN(dateObject.getTime())) {
       console.error('Invalid date format:', savedDate);
       return;
     }
 
-    // Adjust for the current PC Time Zone
+    // Get the local time zone of the user's machine
     const options = {
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Current time zone of the user's system
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
-      hour12: true
+      hour12: true // AM/PM format
     };
 
+    // Format the date to the user's local time zone
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
 
     if (formattedDate) {
+      // Replacing 'at' with '-' and adjusting AM/PM case
       const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
-      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`; // Display it in the element
     } else {
       console.error('Date formatting failed:', savedDate);
     }
   });
 });
-
 </script>
 
 
