@@ -2606,135 +2606,135 @@
 //             @endif
 //         });
 
-    const createICSFile = (
-                start,
-                end,
-                title,
-                description,
-                location
-            ) => {
-                // Create a new calendar object
-                const calendar = new ICAL.Component(["vcalendar", [], []]);
+    // const createICSFile = (
+    //             start,
+    //             end,
+    //             title,
+    //             description,
+    //             location
+    //         ) => {
+    //             // Create a new calendar object
+    //             const calendar = new ICAL.Component(["vcalendar", [], []]);
 
-                // Add calendar metadata
-                calendar.updatePropertyWithValue("version", "2.0");
-                calendar.updatePropertyWithValue(
-                    "prodid",
-                    "-//Your Company//Your App//EN"
-                );
+    //             // Add calendar metadata
+    //             calendar.updatePropertyWithValue("version", "2.0");
+    //             calendar.updatePropertyWithValue(
+    //                 "prodid",
+    //                 "-//Your Company//Your App//EN"
+    //             );
 
-                // Create an event component
-                const event = new ICAL.Component("vevent");
+    //             // Create an event component
+    //             const event = new ICAL.Component("vevent");
 
-                // Convert JavaScript Date objects to iCalendar format
-                const startICAL = ICAL.Time.fromJSDate(start, true); // UTC
-                const endICAL = ICAL.Time.fromJSDate(end, true);
+    //             // Convert JavaScript Date objects to iCalendar format
+    //             const startICAL = ICAL.Time.fromJSDate(start, true); // UTC
+    //             const endICAL = ICAL.Time.fromJSDate(end, true);
 
-                // Add event details
-                event.addPropertyWithValue(
-                    "uid",
-                    `${Date.now()}@yourdomain.com`
-                );
-                event.addPropertyWithValue(
-                    "dtstamp",
-                    ICAL.Time.now().toString()
-                );
-                event.addPropertyWithValue("dtstart", startICAL.toString());
-                event.addPropertyWithValue("dtend", endICAL.toString());
-                event.addPropertyWithValue("summary", title);
-                event.addPropertyWithValue("description", description);
-                event.addPropertyWithValue("location", location);
+    //             // Add event details
+    //             event.addPropertyWithValue(
+    //                 "uid",
+    //                 `${Date.now()}@yourdomain.com`
+    //             );
+    //             event.addPropertyWithValue(
+    //                 "dtstamp",
+    //                 ICAL.Time.now().toString()
+    //             );
+    //             event.addPropertyWithValue("dtstart", startICAL.toString());
+    //             event.addPropertyWithValue("dtend", endICAL.toString());
+    //             event.addPropertyWithValue("summary", title);
+    //             event.addPropertyWithValue("description", description);
+    //             event.addPropertyWithValue("location", location);
 
-                // Add the event to the calendar
-                calendar.addSubcomponent(event);
+    //             // Add the event to the calendar
+    //             calendar.addSubcomponent(event);
 
-                // Generate the ICS file content
-                return calendar.toString();
-            };
+    //             // Generate the ICS file content
+    //             return calendar.toString();
+    //         };
 
-                    // Get event details from the form (using vanilla JS)
-            const eventDate = document.querySelector("#eventDate").value;
-            const eventEndDate = document.querySelector("#eventEndDate").value;
-            const eventTime = document.querySelector("#eventTime").value;
-            const eventEndTime = document.querySelector("#eventEndTime").value || "12:00 PM"; // Default value if end time is empty
-            const eventName = document.querySelector("#eventName").value;
-           // Function to convert 12-hour format time to 24-hour format
-                const convertTo24Hour = (time) => {
-                    const [hoursMinutes, period] = time.split(" ");
-                    let [hours, minutes] = hoursMinutes.split(":");
-                    if (period === "PM" && hours !== "12") hours = (parseInt(hours) + 12).toString();
-                    if (period === "AM" && hours === "12") hours = "00";
-                    return `${hours}:${minutes}`;
-                };
+    //                 // Get event details from the form (using vanilla JS)
+    //         const eventDate = document.querySelector("#eventDate").value;
+    //         const eventEndDate = document.querySelector("#eventEndDate").value;
+    //         const eventTime = document.querySelector("#eventTime").value;
+    //         const eventEndTime = document.querySelector("#eventEndTime").value || "12:00 PM"; // Default value if end time is empty
+    //         const eventName = document.querySelector("#eventName").value;
+    //        // Function to convert 12-hour format time to 24-hour format
+    //             const convertTo24Hour = (time) => {
+    //                 const [hoursMinutes, period] = time.split(" ");
+    //                 let [hours, minutes] = hoursMinutes.split(":");
+    //                 if (period === "PM" && hours !== "12") hours = (parseInt(hours) + 12).toString();
+    //                 if (period === "AM" && hours === "12") hours = "00";
+    //                 return `${hours}:${minutes}`;
+    //             };
 
-                // Convert eventDate and eventEndDate to Date objects
-                const startTime24 = convertTo24Hour(eventTime);
-                const endTime24 = convertTo24Hour(eventEndTime);
+    //             // Convert eventDate and eventEndDate to Date objects
+    //             const startTime24 = convertTo24Hour(eventTime);
+    //             const endTime24 = convertTo24Hour(eventEndTime);
 
-                const startDateTime = new Date(`${eventDate}T${startTime24}`); // Ensure the time and date are correctly combined
-                const endDateTime = new Date(`${eventEndDate}T${endTime24}`); // Ensure the time and date are correctly combined
+    //             const startDateTime = new Date(`${eventDate}T${startTime24}`); // Ensure the time and date are correctly combined
+    //             const endDateTime = new Date(`${eventEndDate}T${endTime24}`); // Ensure the time and date are correctly combined
 
-                // Check if the Date objects are valid
-                if (isNaN(startDateTime)) {
-                    console.error("Invalid startDateTime");
-                }
-                if (isNaN(endDateTime)) {
-                    console.error("Invalid endDateTime");
-                }
-                const address1 = "{{ $eventInfo['guest_view']['address_1'] }}";
-                const city = "{{ $eventInfo['guest_view']['city'] }}";
-                const state = "{{ $eventInfo['guest_view']['state'] }}";
-                const zipCode = "{{ $eventInfo['guest_view']['zip_code'] }}";
+    //             // Check if the Date objects are valid
+    //             if (isNaN(startDateTime)) {
+    //                 console.error("Invalid startDateTime");
+    //             }
+    //             if (isNaN(endDateTime)) {
+    //                 console.error("Invalid endDateTime");
+    //             }
+    //             const address1 = "{{ $eventInfo['guest_view']['address_1'] }}";
+    //             const city = "{{ $eventInfo['guest_view']['city'] }}";
+    //             const state = "{{ $eventInfo['guest_view']['state'] }}";
+    //             const zipCode = "{{ $eventInfo['guest_view']['zip_code'] }}";
 
-                // Check if address1 is not empty
-                let el = "";  // Default location if no address is provided
+    //             // Check if address1 is not empty
+    //             let el = "";  // Default location if no address is provided
 
-                if (address1 && city && state && zipCode) {
-                    el = `${address1} ${city}, ${state} ${zipCode}`;  // Combine the address components
-                }
+    //             if (address1 && city && state && zipCode) {
+    //                 el = `${address1} ${city}, ${state} ${zipCode}`;  // Combine the address components
+    //             }
 
-            const eventDetails = {
-                title: eventName,
-                description: `${eventName} is scheduled on ${eventDate}.`, // Customize the description if needed
-                location:el, // You can customize the location based on input or hardcode
-            };
-            console.log({eventDetails})
+    //         const eventDetails = {
+    //             title: eventName,
+    //             description: `${eventName} is scheduled on ${eventDate}.`, // Customize the description if needed
+    //             location:el, // You can customize the location based on input or hardcode
+    //         };
+    //         console.log({eventDetails})
 
-            // Generate the ICS file using the extracted details
-            const icsData = createICSFile(
-                startDateTime,
-                endDateTime,
-                eventDetails.title,
-                eventDetails.description,
-                eventDetails.location
-            );
+    //         // Generate the ICS file using the extracted details
+    //         const icsData = createICSFile(
+    //             startDateTime,
+    //             endDateTime,
+    //             eventDetails.title,
+    //             eventDetails.description,
+    //             eventDetails.location
+    //         );
 
-            // Create a downloadable link
-            const icsBlob = new Blob([icsData], {
-                type: "text/calendar;charset=utf-8",
-            });
-            const downloadLink = document.createElement("a");
-            downloadLink.href = URL.createObjectURL(icsBlob);
-            downloadLink.download = "event.ics";
-            downloadLink.textContent = "Download Event (.ics)";
-            downloadLink.style.display = "block";
-            downloadLink.style.margin = "20px";
-            downloadLink.style.color = "blue";
-            downloadLink.style.textDecoration = "underline";
-            // document.body.appendChild(downloadLink);
-            // downloadLink.click();
-            // document.querySelector(".author-title").appendChild(link);
+    //         // Create a downloadable link
+    //         const icsBlob = new Blob([icsData], {
+    //             type: "text/calendar;charset=utf-8",
+    //         });
+    //         const downloadLink = document.createElement("a");
+    //         downloadLink.href = URL.createObjectURL(icsBlob);
+    //         downloadLink.download = "event.ics";
+    //         downloadLink.textContent = "Download Event (.ics)";
+    //         downloadLink.style.display = "block";
+    //         downloadLink.style.margin = "20px";
+    //         downloadLink.style.color = "blue";
+    //         downloadLink.style.textDecoration = "underline";
+    //         // document.body.appendChild(downloadLink);
+    //         // downloadLink.click();
+    //         // document.querySelector(".author-title").appendChild(link);
 
 
-                        // Get the existing <a> tag with class .add-calendar
-            const calendarLink = document.querySelector("#openApple");
+    //                     // Get the existing <a> tag with class .add-calendar
+    //         const calendarLink = document.querySelector("#openGoogle");
 
-            // Set the href attribute to the URL of the .ics file
-            calendarLink.href = URL.createObjectURL(icsBlob);
+    //         // Set the href attribute to the URL of the .ics file
+    //         calendarLink.href = URL.createObjectURL(icsBlob);
          
-            let down = eventName.replace(" ", "_");
+    //         let down = eventName.replace(" ", "_");
 
-            calendarLink.download = down+".ics";
+    //         calendarLink.download = down+".ics";
 
 </script>
 @endpush
