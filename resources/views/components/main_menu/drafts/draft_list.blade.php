@@ -135,7 +135,7 @@
     </script> -->
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
   saveDates.forEach(function (saveDateElement) {
@@ -154,18 +154,19 @@
       return;
     }
 
-    // Get the local time zone of the user's machine
+    // Get the local time zone of the user's machine (automatic by default)
     const options = {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
+      second: 'numeric',
       hour12: true // AM/PM format
     };
 
     // Format the date to the user's local time zone
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(dateObject);
 
     if (formattedDate) {
       // Replacing 'at' with '-' and adjusting AM/PM case
@@ -176,6 +177,7 @@
     }
   });
 });
+
 </script>
 
 
