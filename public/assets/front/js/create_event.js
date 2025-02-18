@@ -15,6 +15,8 @@ var selected_co_host_prefer_by =
 var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
+
+
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
 var isStartTime = 0;
@@ -4886,7 +4888,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
     }
 });
 
-$(document).on("click", ".li_design .pick-card", function (e) {
+$(document).on("click", ".li_design .pick-card",async function (e) {
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
@@ -4895,6 +4897,11 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -9724,6 +9731,7 @@ function getcoins() {
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
+    
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
@@ -9798,7 +9806,7 @@ if (final_step == "1" && isCohost == "1") {
 }
 colorchange();
 
-$(document).on("click", ".previousImeg", function (e) {
+$(document).on("click", ".previousImeg", async function (e) {
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
@@ -9807,4 +9815,9 @@ $(document).on("click", ".previousImeg", function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
 });

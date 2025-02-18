@@ -754,8 +754,8 @@ async function bindData(current_event_id) {
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
-                            fontWeight: element.fontWeight,
-                            fontStyle: element.fontStyle,
+                            fontWeight: element.fontWeight || "normal",
+                            fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             linethrough: ["true", "True", true].includes(
                                 element.linethrough
@@ -785,9 +785,9 @@ async function bindData(current_event_id) {
                             width: element.width || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
-                            fontFamily: element.fontFamily,
-                            fontWeight: element.fontWeight,
-                            fontStyle: element.fontStyle,
+                            fontFamily: element.fontFamily || "Times New Roman",
+                            fontWeight: element.fontWeight || "normal",
+                            fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             lineHeight: element.lineHeight || 2,
                             letterSpacing: 0,
@@ -2512,12 +2512,12 @@ async function bindData(current_event_id) {
             bold: () =>
                 activeObject.set(
                     "fontWeight",
-                    activeObject.fontWeight === "bold" ? "" : "bold"
+                    activeObject.fontWeight === "bold" ? "normal" : "bold"
                 ),
             italic: () =>
                 activeObject.set(
                     "fontStyle",
-                    activeObject.fontStyle === "italic" ? "" : "italic"
+                    activeObject.fontStyle === "italic" ? "normal" : "italic"
                 ),
             underline: () =>
                 activeObject.set("underline", !activeObject.underline),

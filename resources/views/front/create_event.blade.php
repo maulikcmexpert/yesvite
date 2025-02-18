@@ -1,4 +1,5 @@
 {{-- {{dd(session()->get('user_ids'))}} --}}
+
 {{-- {{dd($inviteduser)}} --}}
 {{-- <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +25,7 @@
     --}}
 @php
     $userS = Auth::guard('web')->user();
+    $isCopyNew = $eventDetail['isCopy'];
 
     // Get the authenticated user
     $firstInitialUser = !empty($userS->firstname) ? strtoupper($userS->firstname[0]) : '';
@@ -3329,7 +3331,7 @@
 <input type="hidden" id="cohostLname" value="{{ $cohostLname }}">
 <input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
 <input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
-<input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] }}">
+<input type="hidden" id="isCopy" value="{{ $isCopyNew }}">
 <input type="hidden" id="alreadyCount" value="{{ $eventDetail['alreadyCount'] }}">
 <input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 

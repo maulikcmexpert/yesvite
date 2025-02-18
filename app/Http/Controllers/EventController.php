@@ -306,6 +306,7 @@ class EventController extends BaseController
             if ($getEventData != null) {
 
                 if ($request->iscopy != null) {
+                    
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
                 // dd($getEventData );
@@ -600,7 +601,7 @@ class EventController extends BaseController
                     session()->put('category_item', $categories_item);
                     Session::save();
                     $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
-                    // dd($eventDetail['podluck_category_list']);
+                   
                 }
             }
         } else {
@@ -676,7 +677,7 @@ class EventController extends BaseController
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
-
+            
         return view('event_layout', compact(
             'title',
             'page',
