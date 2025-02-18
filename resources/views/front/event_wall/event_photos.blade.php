@@ -1,4 +1,3 @@
-{{-- {{dd($postPhotoList)}} --}}
 <main class="new-main-content">
     <input type="hidden" id="parent_comment_id" value="">
     <div class="container">
@@ -58,9 +57,9 @@
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
                                     @php
-$hide_image="";
-                                        $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;
-                                        $hide_image = empty($photo) ? 'd-none' : "";
+                                        $hide_image="";
+                                        // $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;
+                                        $hide_image = empty($postPhotoList) ? 'd-none' : "";
 
                                     @endphp
                                     <div class="row {{$hide_image }}" >
