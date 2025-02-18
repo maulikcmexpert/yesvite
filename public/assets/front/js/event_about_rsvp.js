@@ -238,7 +238,7 @@ $(document).ready(function () {
 // });
 $(".modal").on("hidden.bs.modal", function () {
     var rsvpStatus = $('#statusRsvp').val();
-
+alert(rsvpStatus);
 
     if (rsvpStatus == '1') {
         clearModalValues();
