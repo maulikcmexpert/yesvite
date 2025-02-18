@@ -224,11 +224,13 @@ function addToOutlookCalendar() {
         return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
     };
 
-    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${encodeURIComponent(
-        formatToICSDate(startDateTime)
-    )}&enddt=${encodeURIComponent(
-        formatToICSDate(endDateTime)
-    )}&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
+    // const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
+    // &startdt=${encodeURIComponent(
+    //     formatToICSDate(startDateTime)
+    // )}&enddt=${encodeURIComponent(
+    //     formatToICSDate(endDateTime)
+    // )}&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
+    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
 
     window.open(outlookCalendarUrl);
 }
