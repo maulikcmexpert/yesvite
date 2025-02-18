@@ -1,4 +1,3 @@
-{{-- {{dd($eventList)}} --}}
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details">
