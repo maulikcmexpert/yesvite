@@ -392,38 +392,36 @@ function addToOutlookCalendar() {
 }
 
 
-function addToAppleCalendar() {
-    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
-    if (!startDateTime) return;
+    function addToAppleCalendar() {
+        const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
+        if (!startDateTime) return;
 
-    const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    };
+        const formatToICSDate = (date) => {
+            return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+        };
 
-    // Create the ICS content
-    const icsContent = `BEGIN:VCALENDAR
-        VERSION:2.0
-        PRODID:-//YourApp//Event//EN
-        BEGIN:VEVENT
-        UID:${new Date().getTime()}@yourdomain.com
-        DTSTAMP:${formatToICSDate(new Date())}
-        DTSTART:${formatToICSDate(startDateTime)}
-        DTEND:${formatToICSDate(endDateTime)}
-        SUMMARY:${eventName}
-        DESCRIPTION:Event on ${eventDate} - ${eventEndDate}
-        END:VEVENT
-        END:VCALENDAR`;
+        const icsContent = `BEGIN:VCALENDAR
+            VERSION:2.0
+            PRODID:-//YourApp//Event//EN
+            BEGIN:VEVENT
+            UID:${new Date().getTime()}@yourdomain.com
+            DTSTAMP:${formatToICSDate(new Date())}
+            DTSTART:${formatToICSDate(startDateTime)}
+            DTEND:${formatToICSDate(endDateTime)}
+            SUMMARY:${eventName}
+            DESCRIPTION:Event on ${eventDate} - ${eventEndDate}
+            END:VEVENT
+            END:VCALENDAR`;
 
-    // Create a Blob from the ICS content
-    const blob = new Blob([icsContent], { type: "text/calendar" });
-
-    // Use FileSaver.js to trigger the download
-    saveAs(blob, "event.ics");
-}
-
-
-
-
+        const blob = new Blob([icsContent], { type: "text/calendar" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "event.ics";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 
 function getEventDetails() {
     const eventDate = $("#eventDate").val();
