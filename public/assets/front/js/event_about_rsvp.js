@@ -244,7 +244,7 @@ if (rsvpStatus == 1 ) {
     clearModalValues();
 
 }
-if (rsvpStatus == null) {
+if (rsvpStatus == "") {
     clearModalValues();
     clearModalALLValues();
 
@@ -262,7 +262,7 @@ $(document).on("click", ".btn-close", function () {
         clearModalValues();
 
     }
-    if (rsvpStatus == null) {
+    if (rsvpStatus == "") {
         clearModalValues();
         clearModalALLValues();
 
