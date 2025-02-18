@@ -1252,7 +1252,6 @@ $('#notification_rsvp_btn').on('click', function (e) {
        
     } else {
         // If no input is checked, show an alert
-        alert('Please select an RSVP status');
         if (!$('.toast').length) {
             toastr.error('Please select RSVP');
         }
@@ -1287,7 +1286,6 @@ $('#notification_rsvp_btn').on('click', function (e) {
     console.log(adults+' '+kids);
 
   
-    // $('#rsvp_by_notification').modal('hide');
 
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
@@ -1313,6 +1311,8 @@ $('#notification_rsvp_btn').on('click', function (e) {
                 toastr.success(response.text);
             }
         }
+            $('#rsvp_by_notification').modal('hide');
+
       },
       error: function (error) {
         toastr.error('Something went wrong. Please try again!');
