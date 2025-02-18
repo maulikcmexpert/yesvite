@@ -193,7 +193,7 @@ $(document).ready(function () {
 
     $(".noattending-btn").on('click', function () {
         var rsvpStatus = $('#statusRsvp').val();
-        if (rsvpStatus == '0') {
+        if (rsvpStatus == 0) {
             $("#option6").prop('checked', true);
             $("#option5").prop('checked', false);
             $('.btn-plus, .btn-minus').prop('disabled', true);
@@ -204,7 +204,7 @@ $(document).ready(function () {
     $(".attending-btn").on('click', function () {
         $('button[type="submit"]').prop('disabled', true);
         var rsvpStatus = $('#statusRsvp').val();
-        if (rsvpStatus == '1') {
+        if (rsvpStatus == 1) {
             $('button[type="submit"]').prop('disabled', true);
             $("#option6").prop('checked', false);
             $("#option5").prop('checked', true);
