@@ -334,15 +334,20 @@ function addToOutlookCalendar() {
         let details = "Discussion on project updates.";
         let location = "Online";
         
-        // Format the date and time parts separately
-        const formattedStartDate = startDateTime.toISOString().replace(/[-:]/g, ''); // Remove hyphens and colons
-        const formattedEndDate = endDateTime.toISOString().replace(/[-:]/g, '');
+        // 1. Convert to ISO String
+        let startISO = startDateTime.toISOString();
+        let endISO = endDateTime.toISOString();
+        
+        // 2. Remove milliseconds (optional but recommended)
+        startISO = startISO.replace(/\.000Z$/, 'Z'); // Remove .000Z
+        endISO = endISO.replace(/\.000Z$/, 'Z');     // Remove .000Z
+        
         
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
             &body=${encodeURIComponent(details)}
             &location=${encodeURIComponent(location)}
-            &startdt=${formattedStartDate}
-            &enddt=${formattedEndDate}`;
+            &startdt=${encodeURIComponent(startISO)}
+            &enddt=${encodeURIComponent(endISO)}`;
         
         window.open(outlookLink, "_blank");
     // }
