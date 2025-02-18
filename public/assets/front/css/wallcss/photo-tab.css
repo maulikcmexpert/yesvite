@@ -75,6 +75,9 @@
     max-height: calc(100% - 10%);
     padding: 10px 10px 40px 10px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .photos-main-wrp .col-lg-4,.photos-main-wrp .col-lg-6, .photos-main-wrp .col-md-4, .photos-main-wrp .col-sm-6{
@@ -507,7 +510,7 @@
 }
 
 .photos-main-wrp:has(.photos-card-wrp) > .row{
-    height: 100%;
+    height: auto;
     max-height: 1000px;
     overflow: hidden;
     overflow-y: scroll;
