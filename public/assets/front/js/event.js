@@ -1236,12 +1236,20 @@ $(document).on('click','.rsvp-no-checkbox',function(){
 
     $('#rsvp_notification_adult').val("0");
      $('#rsvp_notification_kids').val("0");
+
+
+
+
 });
 $(document).on('click','.rsvp-yes-checkbox',function(){
     $('.rsvp_minus_notify').prop('disabled',false);
     $('.rsvp_plus_notify').prop('disabled',false);
     $('#rsvp_notification_adult').val("0");
     $('#rsvp_notification_kids').val("0");
+
+  
+    $('.rsvp_minus_notify').prop('disabled',false);
+    $('.rsvp_plus_notify').prop('disabled',false);
 });
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
