@@ -2607,7 +2607,7 @@ class EventListController extends BaseController
                     $rsvp_attempt =  'yes_to_no';
                 }
 
-                dd($adults,$rsvpSent->adults);
+                // dd($adults,$rsvpSent->adults);
                 if ($rsvpSentAttempt == "1" && $rsvp_status == "1" && ($adults==$rsvpSent->adults && $kids==$rsvpSent->kids)) {
                     return response()->json(['status' => 3, 'text' => 'You have already done rsvp yes']);
                 }
