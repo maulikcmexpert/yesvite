@@ -464,6 +464,10 @@
     padding: 0px 24px;
 }
 
+.transaction_history_wrp{
+    padding: 50px 0px !important;
+}
+
 /* ==responsive== */
 
 @media only screen and (max-width: 1399px) {
