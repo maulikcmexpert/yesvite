@@ -212,7 +212,7 @@ $(document).ready(function () {
             $("#option6").prop('checked', false);
             $("#option5").prop('checked', true);
             $('.btn-plus, .btn-minus').prop('disabled', false);
-            $('button[type="submit"]').prop('disabled', false);
+            $('button[type="submit"]').prop('disabled', true);
         }
     })
 });
