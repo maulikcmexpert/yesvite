@@ -188,7 +188,7 @@ $(document).ready(function () {
         });
 
         document
-        .getElementById("outlookbtn")
+        .getElementById("openOutlook")
         .addEventListener("click", function () {
             const eventDate = $("#eventDate").val();  // Get the event start date
             const eventEndDate = $("#eventEndDate").val();  // Get the event end date
