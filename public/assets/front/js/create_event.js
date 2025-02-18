@@ -3981,7 +3981,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                     console.log(eventData);
                     
                     toastr.success("Event Saved as Draft");
-                    // window.location.href = "home";
+                    window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
@@ -4027,7 +4027,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 }
                 if (response == 1) {
                     console.log(eventData);
-                    // window.location.href = "home";
+                    window.location.href = "home";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
                         $("#loader").css("display", "none");
