@@ -16,7 +16,6 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 
-
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
 var isStartTime = 0;
@@ -3914,11 +3913,11 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_date = $("#event-date").val();
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
-    var design = eventData.desgin_selected;
-    if (design == undefined || design == "") {
-        await saveDesignData();
-        design = eventData.desgin_selected;
-    }
+    // var design = eventData.desgin_selected;
+    // if (design == undefined || design == "") {
+    //     await saveDesignData();
+    //     design = eventData.desgin_selected;
+    // }
     $("#loader").css("display", "flex");
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
@@ -4888,10 +4887,10 @@ $(document).on("click", ".li_design .edit-design", function (e) {
     }
 });
 
-$(document).on("click", ".li_design .pick-card",async function (e) {
+$(document).on("click", ".li_design .pick-card", async function (e) {
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
-        await saveDesignData();
+        await saveDesignData(false, 1);
         design = eventData.desgin_selected;
     }
     if (isCohost != "0") {
@@ -4902,7 +4901,6 @@ $(document).on("click", ".li_design .pick-card",async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-   
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -5073,7 +5071,7 @@ function edit_design_modal() {
 }
 
 var design_inner_image = "";
-async function saveDesignData(direct = false) {
+async function saveDesignData(direct = false, isFalse = 0) {
     if (typeof canvas == "undefined") {
         console.log("no canvas found");
         return;
@@ -5086,7 +5084,7 @@ async function saveDesignData(direct = false) {
             return true;
         } else {
             if (eventData.desgin_selected) {
-                updateUIAfterSave(eventData.desgin_selected);
+                updateUIAfterSave(eventData.desgin_selected, isFalse);
                 return;
             }
         }
@@ -5193,15 +5191,18 @@ function uploadImage(blob) {
         });
     });
 }
-function updateUIAfterSave(image) {
+function updateUIAfterSave(image, isFalse) {
     console.log("Image uploaded successfully:", image);
 
     $("#eventImage, #eventTempImage").attr(
         "src",
         base_url + "public/storage/event_images/" + image
     );
-
-    final_step = final_step === 1 ? 2 : final_step;
+    if (isFalse == 1) {
+        final_step = final_step === 1 ? final_step : final_step;
+    } else {
+        final_step = final_step === 1 ? 2 : final_step;
+    }
     eventData.step = final_step;
 
     $("#myCustomModal, #exampleModal").modal("hide");
@@ -9732,7 +9733,7 @@ function getcoins() {
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
-    
+
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
@@ -9810,7 +9811,7 @@ colorchange();
 $(document).on("click", ".previousImeg", async function (e) {
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
-        await saveDesignData();
+        await saveDesignData(false, 1);
         design = eventData.desgin_selected;
     }
 
@@ -9822,5 +9823,4 @@ $(document).on("click", ".previousImeg", async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-    
 });
