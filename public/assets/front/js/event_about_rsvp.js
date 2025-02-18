@@ -263,6 +263,7 @@ $(document).on("click", ".btn-close", function () {
 function clearModalValues() {
     $("#option6").prop("checked", false);
     $("#option5").prop("checked", false);
+    $('button[type="submit"]').prop('disabled', true);
     $("#message_to_host").val(""); // Clear input field
 
 }
