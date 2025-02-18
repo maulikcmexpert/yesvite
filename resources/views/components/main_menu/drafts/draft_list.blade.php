@@ -90,7 +90,7 @@
         </div>
     </div>
   </div>
-  <script>
+  <!-- <script>
     document.addEventListener("DOMContentLoaded", function () {
       const saveDates = document.querySelectorAll('.last-save');
 
@@ -132,9 +132,51 @@
       });
     });
 
-    </script>
+    </script> -->
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const saveDates = document.querySelectorAll('.last-save');
 
+  saveDates.forEach(function (saveDateElement) {
+    const savedDate = saveDateElement.getAttribute('data-save-date');
+
+    if (!savedDate) {
+      console.error('Missing date attribute');
+      return;
+    }
+
+    // Convert to ISO format if necessary
+    const dateObject = new Date(savedDate.includes('T') ? savedDate : savedDate.replace(" ", "T") + 'Z');
+
+    if (isNaN(dateObject.getTime())) {
+      console.error('Invalid date format:', savedDate);
+      return;
+    }
+
+    // Adjust for the current PC Time Zone
+    const options = {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Current time zone of the user's system
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+
+    if (formattedDate) {
+      const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+      saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+    } else {
+      console.error('Date formatting failed:', savedDate);
+    }
+  });
+});
+
+</script>
 
 
 
