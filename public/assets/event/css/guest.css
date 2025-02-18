@@ -784,12 +784,12 @@
     }
 
     .step_3 .design-seting {
-        position: fixed;
-        bottom: 0;
-        left: 0;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
         border-radius: 0px !important;
         max-width: 100% !important;
-        transform: translateX(0%);
+        transform: translateX(0%) !important;
     }
 
     .step_3 .guest-main-content {
