@@ -306,6 +306,7 @@ class EventController extends BaseController
             if ($getEventData != null) {
 
                 if ($request->iscopy != null) {
+                    dd(1);
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
                 // dd($getEventData );
