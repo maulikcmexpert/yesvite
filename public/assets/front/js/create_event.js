@@ -3979,7 +3979,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 }
                 if (response == 1) {
                     toastr.success("Event Saved as Draft");
-                    window.location.href = "home";
+                    // window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
