@@ -1549,9 +1549,9 @@ $(document).ready(function () {
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
         let savedVisibility =
-            localStorage.getItem("post_privacys") || "Everyone";
+           "Everyone";
         let savedAllowComments =
-            localStorage.getItem("commenting_on_off") || "1";
+            "1";
 
         $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop(
             "checked",
@@ -1571,7 +1571,7 @@ $(document).ready(function () {
     loadSettings();
 
     // Check modal ID & trigger loadSettings()
-    $("#add-new-photomodal").on("show.bs.modal", function () {
+    $("#creatpostmodal").on("show.bs.modal", function () {
         console.log("Modal Opened & Settings Loaded"); // Debugging
         loadSettings();
     });
