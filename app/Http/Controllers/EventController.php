@@ -601,7 +601,7 @@ class EventController extends BaseController
                     session()->put('category_item', $categories_item);
                     Session::save();
                     $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
-                    // dd($eventDetail);
+                   
                 }
             }
         } else {
@@ -677,7 +677,7 @@ class EventController extends BaseController
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
-
+            dd($eventDetail);
         return view('event_layout', compact(
             'title',
             'page',
