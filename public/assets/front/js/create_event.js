@@ -9726,6 +9726,7 @@ function getcoins() {
     var AllCoins = max_guest - Alreadyguest;
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
+        alert();
     }
 
     $(".invite-left_d").text(AllCoins + " Left");
