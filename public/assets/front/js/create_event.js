@@ -4464,6 +4464,8 @@ function savePage1Data(close = null, direct = false) {
         eventData.event_name = event_name;
         eventData.hosted_by = hostedby;
         eventData.start_event_date = start_event_date;
+        eventData.end_event_date = end_event_date;
+
     }
 
     // eventData.page1 = {
