@@ -220,18 +220,21 @@ function addToOutlookCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     if (!startDateTime) return;
 
-    const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    // Format date to YYYY-MM-DDTHH:MM:SS (local time)
+    const formatToOutlookDate = (date) => {
+        return date.toISOString().split(".")[0]; // Removes milliseconds
     };
 
-    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${encodeURIComponent(
-        formatToICSDate(startDateTime)
-    )}&enddt=${encodeURIComponent(
-        formatToICSDate(endDateTime)
-    )}&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
+    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
+        &startdt=${encodeURIComponent(formatToOutlookDate(startDateTime))}
+        &enddt=${encodeURIComponent(formatToOutlookDate(endDateTime))}
+        &subject=${encodeURIComponent(eventName)}
+        &body=Event on ${eventDate} - ${eventEndDate}
+        &allday=false`;
 
     window.open(outlookCalendarUrl);
 }
+
 
 function addToAppleCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
