@@ -486,7 +486,7 @@
                         $setPrice = array_reverse($prices);
                     @endphp
                     <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> 
-                    <span class="available-coins">{{$setPrice[0]['coins']}} 
+                    <span class="">{{$setPrice[0]['coins']}} 
                       |  <span class="green-price">${{$setPrice[0]['price']}}</span>
                     </span>
                 </div>
