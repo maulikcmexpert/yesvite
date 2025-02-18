@@ -1262,6 +1262,10 @@ $('#notification_rsvp_btn').on('click', function (e) {
             $('#rsvp_by_notification').off('hide.bs.modal');
         
         }
+        $('#rsvp_notification_adult').prop('disabled',false);
+        $('#rsvp_notification_kids').prop('disabled',false);
+        $('.rsvp_minus_notify').prop('disabled',false);
+        $('.rsvp_plus_notify').prop('disabled',false);
     }else{
         $('#rsvp_notification_adult').prop('disabled',true);
        $('#rsvp_notification_kids').prop('disabled',true);
