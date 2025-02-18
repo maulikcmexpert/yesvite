@@ -15,6 +15,8 @@ var selected_co_host_prefer_by =
 var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
+alert(isCopy);
+
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
 var isStartTime = 0;
