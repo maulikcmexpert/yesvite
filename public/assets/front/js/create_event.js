@@ -9138,6 +9138,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
 });
 
 if (final_step == "2" && isCohost == "1") {
+    alert()
     $("#loader").css("display", "flex");
 
     setTimeout(function () {
@@ -9789,6 +9790,7 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
+   
     var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
