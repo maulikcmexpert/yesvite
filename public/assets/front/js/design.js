@@ -754,8 +754,8 @@ async function bindData(current_event_id) {
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
-                            fontWeight: element.fontWeight,
-                            fontStyle: element.fontStyle,
+                            fontWeight: element.fontWeight || "normal",
+                            fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             linethrough: ["true", "True", true].includes(
                                 element.linethrough
