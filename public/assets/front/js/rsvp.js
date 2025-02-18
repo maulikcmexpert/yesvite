@@ -306,9 +306,9 @@ document.getElementById("openOutlook").addEventListener("click", function () {
     addToOutlookCalendar();
 });
 
-document.getElementById("openApple").addEventListener("click", function () {
-    addToAppleCalendar();
-});
+// document.getElementById("openApple").addEventListener("click", function () {
+//     addToAppleCalendar();
+// });
 
 function addToGoogleCalendar() {
     const { eventName, startDateTime, endDateTime } = getEventDetails();
@@ -392,62 +392,62 @@ function addToOutlookCalendar() {
 }
 
 
-function addToAppleCalendar() {
-    const eventDate = $("#eventDate").val();
-    const eventEndDate = $("#eventEndDate").val() || eventDate;
-    const eventTime = $("#eventTime").val();
-    const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
-    const eventName = $("#eventName").val() || "Meeting with Team";
+// function addToAppleCalendar() {
+//     const eventDate = $("#eventDate").val();
+//     const eventEndDate = $("#eventEndDate").val() || eventDate;
+//     const eventTime = $("#eventTime").val();
+//     const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
+//     const eventName = $("#eventName").val() || "Meeting with Team";
 
-    console.log(eventDate);
-    console.log(eventEndDate);
-    console.log(convertTo24Hour(eventTime));
-    console.log(convertTo24Hour(eventEndTime));
-    console.log(eventName);
+//     console.log(eventDate);
+//     console.log(eventEndDate);
+//     console.log(convertTo24Hour(eventTime));
+//     console.log(convertTo24Hour(eventEndTime));
+//     console.log(eventName);
     
-    let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
-    let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+//     let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+//     let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
     
-    let subject = eventName;
-    let details = eventName;
+//     let subject = eventName;
+//     let details = eventName;
     
-    // Format dates to match iCalendar format (YYYYMMDDTHHmmSSZ)
-    const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format
-    };
+//     // Format dates to match iCalendar format (YYYYMMDDTHHmmSSZ)
+//     const formatToICSDate = (date) => {
+//         return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format
+//     };
 
-    let startFormatted = formatToICSDate(startDateTime);
-    let endFormatted = formatToICSDate(endDateTime);
+//     let startFormatted = formatToICSDate(startDateTime);
+//     let endFormatted = formatToICSDate(endDateTime);
     
-    // Create iCalendar (.ics) content
-    let icsContent = `
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Apple Inc.//Mac OS X//EN
-BEGIN:VEVENT
-SUMMARY:${subject}
-DESCRIPTION:${details}
-DTSTART:${startFormatted}
-DTEND:${endFormatted}
-LOCATION:Online
-STATUS:TENTATIVE
-SEQUENCE:0
-BEGIN:VALARM
-TRIGGER:-PT15M
-DESCRIPTION:Reminder
-ACTION:DISPLAY
-END:VALARM
-END:VEVENT
-END:VCALENDAR
-    `;
+//     // Create iCalendar (.ics) content
+//     let icsContent = `
+// BEGIN:VCALENDAR
+// VERSION:2.0
+// PRODID:-//Apple Inc.//Mac OS X//EN
+// BEGIN:VEVENT
+// SUMMARY:${subject}
+// DESCRIPTION:${details}
+// DTSTART:${startFormatted}
+// DTEND:${endFormatted}
+// LOCATION:Online
+// STATUS:TENTATIVE
+// SEQUENCE:0
+// BEGIN:VALARM
+// TRIGGER:-PT15M
+// DESCRIPTION:Reminder
+// ACTION:DISPLAY
+// END:VALARM
+// END:VEVENT
+// END:VCALENDAR
+//     `;
     
-    // Create a Blob and download the .ics file
-    let blob = new Blob([icsContent], { type: 'text/calendar' });
-    let link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${subject}.ics`; // Name of the file
-    link.click();
-}
+//     // Create a Blob and download the .ics file
+//     let blob = new Blob([icsContent], { type: 'text/calendar' });
+//     let link = document.createElement('a');
+//     link.href = URL.createObjectURL(blob);
+//     link.download = `${subject}.ics`; // Name of the file
+//     link.click();
+// }
 
 
 function getEventDetails() {
