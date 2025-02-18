@@ -1269,6 +1269,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
        return;
 
     }
+    console.log(adults+' '+kids);
 
     if(adults==""&&kids==""){
         toastr.error('Please select atleast one kid or adult');
