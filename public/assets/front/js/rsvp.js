@@ -220,16 +220,16 @@ function addToOutlookCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     if (!startDateTime) return;
 
-    // Format date to YYYY-MM-DDTHH:MM:SS (local time)
+    // Format to Outlook-supported format (local time, no UTC/Z)
     const formatToOutlookDate = (date) => {
-        return date.toISOString().split(".")[0]; // Removes milliseconds
+        return date.toISOString().split(".")[0]; // YYYY-MM-DDTHH:MM:SS (local time)
     };
 
     const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
         &startdt=${encodeURIComponent(formatToOutlookDate(startDateTime))}
         &enddt=${encodeURIComponent(formatToOutlookDate(endDateTime))}
         &subject=${encodeURIComponent(eventName)}
-        &body=Event on ${eventDate} - ${eventEndDate}
+        &body=Event%20on%20${encodeURIComponent(eventDate)}%20-%20${encodeURIComponent(eventEndDate)}
         &allday=false`;
 
     window.open(outlookCalendarUrl);
