@@ -3914,11 +3914,11 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_date = $("#event-date").val();
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
-    var design = eventData.desgin_selected;
-    if (design == undefined || design == "") {
-        await saveDesignData();
-        design = eventData.desgin_selected;
-    }
+    // var design = eventData.desgin_selected;
+    // if (design == undefined || design == "") {
+    //     await saveDesignData();
+    //     design = eventData.desgin_selected;
+    // }
     $("#loader").css("display", "flex");
     // if (event_type == "") {
     //     $("#deleteModal").modal("show");
@@ -4888,7 +4888,12 @@ $(document).on("click", ".li_design .edit-design", function (e) {
     }
 });
 
-$(document).on("click", ".li_design .pick-card", function (e) {
+$(document).on("click", ".li_design .pick-card",async function (e) {
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData(true);
+        design = eventData.desgin_selected;
+    }
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
@@ -4897,6 +4902,7 @@ $(document).on("click", ".li_design .pick-card", function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
+   
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -9801,7 +9807,13 @@ if (final_step == "1" && isCohost == "1") {
 }
 colorchange();
 
-$(document).on("click", ".previousImeg", function (e) {
+$(document).on("click", ".previousImeg", async function (e) {
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData(true);
+        design = eventData.desgin_selected;
+    }
+
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
@@ -9810,4 +9822,5 @@ $(document).on("click", ".previousImeg", function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
+    
 });
