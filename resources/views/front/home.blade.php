@@ -99,6 +99,7 @@ $getSocialLink = getSocialLink();
 
 <script>
     var base_url = $("#base_url").val()
+    $('.custome-designcategory').hide();
     $(document).on("click",".edit_design_tem",function(){
         var id=$(this).attr('data-id');
         window.location.href=base_url+"events?design_id="+id;
