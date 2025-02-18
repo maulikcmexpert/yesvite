@@ -3329,7 +3329,7 @@
 <input type="hidden" id="cohostLname" value="{{ $cohostLname }}">
 <input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
 <input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
-<input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] }}">
+<input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] ?$eventDetail['isCopy']:''  }}">
 <input type="hidden" id="alreadyCount" value="{{ $eventDetail['alreadyCount'] }}">
 <input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 
