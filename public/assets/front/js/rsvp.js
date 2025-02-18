@@ -413,32 +413,20 @@ function addToAppleCalendar() {
         END:VEVENT
         END:VCALENDAR`;
 
-    // Create a Blob object to hold the ICS content
-    const blob = new Blob([icsContent], { type: "text/calendar" });
+    // Encode the ICS content to a data URL
+    const dataUrl = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent);
 
-    // If using Safari, create a download link with the Blob URL
-    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
-        // Safari needs a different approach
-        const reader = new FileReader();
-        reader.onload = function() {
-            const a = document.createElement("a");
-            a.href = reader.result;
-            a.download = "event.ics";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        };
-        reader.readAsDataURL(blob);
-    } else {
-        // Other browsers (Chrome, Firefox, etc.)
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "event.ics";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
+    // Create an anchor element to trigger the download
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = 'event.ics';
+    
+    // Append the anchor to the document body
+    document.body.appendChild(a);
+    a.click();
+    
+    // Remove the anchor from the document body
+    document.body.removeChild(a);
 }
 
 
