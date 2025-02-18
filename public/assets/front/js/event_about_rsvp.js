@@ -240,7 +240,7 @@ $(".modal").on("hidden.bs.modal", function () {
     var rsvpStatus = $('#statusRsvp').val();
 
 
-    if (rsvpStatus == '1') {
+    if (rsvpStatus == '1'  && rsvpStatus == '') {
         clearModalValues();
 
     } else {
@@ -251,7 +251,7 @@ $(".modal").on("hidden.bs.modal", function () {
 $(document).on("click", ".btn-close", function () {
     var rsvpStatus = $('#statusRsvp').val();
 
-    if (rsvpStatus == '1') {
+    if (rsvpStatus == '1'  && rsvpStatus == '') {
         clearModalValues();
 
     } else {
@@ -263,6 +263,7 @@ $(document).on("click", ".btn-close", function () {
 function clearModalValues() {
     $("#option6").prop("checked", false);
     $("#option5").prop("checked", false);
+    $('button[type="submit"]').prop('disabled', true);
     $("#message_to_host").val(""); // Clear input field
 
 }
