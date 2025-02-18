@@ -1,3 +1,4 @@
+
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -339,8 +340,14 @@
                                                                                 fill="black" fill-opacity="0.2">
                                                                             </path>
                                                                         </svg>
-                                                                        <h5>{{ $post['adults'] }} Adults</h5>
-                                                                        <h5>{{ $post['kids'] }} Kids</h5>
+                                                                        {{-- <h5>{{ $post['adults'] }} Adults</h5>
+                                                                        <h5>{{ $post['kids'] }} Kids</h5> --}}
+                                                                        <h5>
+                                                                            {{ $post['adults'] }} <span>{{ $post['adults'] == "1" ? 'Adult' : 'Adults' }}</span>
+                                                                        </h5>
+                                                                        <h5>
+                                                                            {{ $post['kids'] }} <span>{{ $post['kids'] == "1" ? 'Kid' : 'Kids' }}</span>
+                                                                        </h5>
                                                                     </div>
                                                                 </div>
                                                             @else

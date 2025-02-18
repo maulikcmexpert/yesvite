@@ -630,13 +630,18 @@ display:none;}
     font-size: 18px;
     font-family: var(--SFProDisplay-Semibold);
     color: var(--secondary-black);
+    
 }
 
 .rsvp-location-wrp{
-    border: none !important;
-    box-shadow: none;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
     margin: 0px;
     padding: 0px 24px;
+    border-radius: 0px !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 .rsvp-location-wrp h5{
     font-family: var(--SFProDisplay-Regular);

@@ -255,7 +255,13 @@ if ($hostView) {
                 <!-- <a href="javascript:void(0);" class="cmn-btn see-all-btn">See All</a> -->
                 <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn" data-eventId="{{$eventId}}">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
-                    <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add Guest</button>
+                    @php
+                        $event_date = $eventInfo['guest_view']['event_date']; 
+                        $current_date = date("Y-m-d"); 
+                    @endphp
+                    @if($event_date >= $current_date)
+                        <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add Guest</button>
+                    @endif
                     <!-- data-bs-toggle="modal"
                     data-bs-target="#addguest" -->
                 @endif
