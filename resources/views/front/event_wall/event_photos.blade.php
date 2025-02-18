@@ -1,4 +1,3 @@
-{{dd($postPhotoList)}}
 <main class="new-main-content">
     <input type="hidden" id="parent_comment_id" value="">
     <div class="container">
