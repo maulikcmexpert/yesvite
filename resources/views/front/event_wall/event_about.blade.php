@@ -89,9 +89,9 @@
 
                                                     <!-- Custom Pagination -->
                                                     <div class="custom-pagination"></div>
-                                                    <button class="image-zoom-icon"><img
+                                                    {{-- <button class="image-zoom-icon"><img
                                                             src="{{ asset('assets/front/img/image-zoom-icon.png') }}"
-                                                            alt=""></button>
+                                                            alt=""></button> --}}
                                                 </div>
                                             </div>
                                             <div class="birth-details">
@@ -419,9 +419,9 @@
                                         <div class="host-users-detail cmn-card">
                                         @if (!empty($eventDetails['co_hosts']))
                                             <h4 class="title">Message From Hosts</h4>
-                                         @else   
+                                         @else
                                             <h4 class="title">Message From Host</h4>
-                                         @endif   
+                                         @endif
 
                                             <div class="host-user-con-box">
                                                 @if ($eventDetails['hosted_by'])

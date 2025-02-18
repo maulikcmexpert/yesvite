@@ -195,8 +195,7 @@
                                     </svg>
                                 </span>
                             </div>
-                            <div class="user-contacts" id="inviteUser">
-
+                            <div class="user-contacts d-none" id="inviteUser">
                             </div>
                             <div class="user-contacts" id="YesviteUserAll">
 
