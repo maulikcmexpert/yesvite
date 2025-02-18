@@ -327,20 +327,29 @@ function addToGoogleCalendar() {
 
 function addToOutlookCalendar() {
     // function createOutlookEvent() {
-        let startDateTime = new Date("2025-02-19T10:00:00"); // Adjust as needed
-    let endDateTime = new Date("2025-02-19T11:00:00");
-
-    let subject = "Meeting with Client";
-    let details = "Discussion on project updates.";
-    let location = "Online";
-
-    let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
-        &body=${encodeURIComponent(details)}
-        &location=${encodeURIComponent(location)}
-        &startdt=${encodeURIComponent(startDateTime.toISOString())}
-        &enddt=${encodeURIComponent(endDateTime.toISOString())}`;
-
-    window.open(outlookLink, "_blank");
+        let startDateTime = new Date("2025-02-19T10:00:00");
+        let endDateTime = new Date("2025-02-19T11:00:00");
+        
+        let subject = "Meeting with Client";
+        let details = "Discussion on project updates.";
+        let location = "Online";
+        
+        // 1. Convert to ISO String (and remove milliseconds)
+        let startISO = startDateTime.toISOString().replace(/\.000Z$/, 'Z');
+        let endISO = endDateTime.toISOString().replace(/\.000Z$/, 'Z');
+        
+        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
+            &body=${encodeURIComponent(details)}
+            &location=${encodeURIComponent(location)}`;
+        
+        // 2. Check if start and end times are the same
+        if (startISO === endISO) {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}`; // Only start time
+        } else {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}&enddt=${encodeURIComponent(endISO)}`; // Both start and end times
+        }
+        
+        window.open(outlookLink, "_blank");
     // }
     // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     // if (!startDateTime) return;
