@@ -1250,7 +1250,9 @@ $('#notification_rsvp_btn').on('click', function (e) {
     const kids = $('#rsvp_notification_kids').val();
     if(selectedValue=="1"){
         if(adults=="0" && kids=="0"){
-            toastr.error('Please select atleast one kid or adult');
+            if (!$('.toast').length) {
+                toastr.error('Please select atleast one kid or adult');
+            }
             $('#rsvp_by_notification').on('hide.bs.modal', function (e) {
                 e.preventDefault();
             });
@@ -1265,17 +1267,15 @@ $('#notification_rsvp_btn').on('click', function (e) {
        $('#rsvp_notification_kids').prop('disabled',true);
        $('.rsvp_minus_notify').prop('disabled',true);
        $('.rsvp_plus_notify').prop('disabled',true);
-       toastr.clear();
-       toastr.error('Please select RSVP');
+       if (!$('.toast').length) {
+        toastr.error('Please select RSVP');
+    }
        return;
 
     }
     console.log(adults+' '+kids);
 
-    if(adults==""&&kids==""){
-        toastr.error('Please select atleast one kid or adult');
-        return;
-    }
+   
     // $('#rsvp_by_notification').modal('hide');
 
     const formData = $('#notification_rsvp').serialize();
@@ -1288,17 +1288,24 @@ $('#notification_rsvp_btn').on('click', function (e) {
       data: formData,          
       success: function (response) { 
         if(response.status==3){
-            toastr.error(response.text);
+            if (!$('.toast').length) {
+                toastr.error('Please select atleast one kid or adult');
+            }
         }       
         if(response.status==1){
-            toastr.success(response.text);
+            if (!$('.toast').length) {
+                toastr.success(response.text);
+            }
         }
         if(response.status==0){
-            toastr.success(response.text);
-        }
+ if (!$('.toast').length) {
+                toastr.success(response.text);
+            }        }
       },
       error: function (error) {
-        toastr.error('Something went wrong. Please try again!');
+        if (!$('.toast').length) {
+            toastr.error('Something went wrong. Please try again!');
+        }
       },
     });
 
