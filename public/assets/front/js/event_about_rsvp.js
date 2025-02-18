@@ -240,8 +240,14 @@ $(".modal").on("hidden.bs.modal", function () {
     var rsvpStatus = $('#statusRsvp').val();
 
 
-    if (rsvpStatus == '1'   || rsvpStatus == '') {
+    if (rsvpStatus == '1' ) {
         clearModalValues();
+
+    }
+    if (rsvpStatus == '') {
+        clearModalValues();
+        clearModalALLValues();
+
 
     } else {
         clearModalALLValues();
@@ -251,10 +257,16 @@ $(".modal").on("hidden.bs.modal", function () {
 $(document).on("click", ".btn-close", function () {
     var rsvpStatus = $('#statusRsvp').val();
 
-    if (rsvpStatus == '1'  ||  rsvpStatus == '') {
+    if (rsvpStatus == '1' ) {
         clearModalValues();
 
-    } else {
+    }
+    if (rsvpStatus == '') {
+        clearModalValues();
+        clearModalALLValues();
+
+
+    }else  {
         clearModalALLValues();
     }
 });
