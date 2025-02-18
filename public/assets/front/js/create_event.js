@@ -9808,11 +9808,11 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", async function (e) {
-    // var design = eventData.desgin_selected;
-    // if (design == undefined || design == "") {
-    //     await saveDesignData();
-    //     design = eventData.desgin_selected;
-    // }
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
 
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
