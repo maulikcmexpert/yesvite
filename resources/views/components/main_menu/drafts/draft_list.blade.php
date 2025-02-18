@@ -154,7 +154,7 @@
       return;
     }
 
-    // Get the local time zone of the user's machine (automatic by default)
+    // Get the local time zone of the user's machine
     const options = {
       year: 'numeric',
       month: 'long',
@@ -165,11 +165,11 @@
       hour12: true // AM/PM format
     };
 
-    // Format the date to the user's local time zone
+    // Format the date to the user's local time zone using Intl.DateTimeFormat
     const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(dateObject);
 
     if (formattedDate) {
-      // Replacing 'at' with '-' and adjusting AM/PM case
+      // Replacing ' at ' with '-' and adjusting AM/PM case
       const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
       saveDateElement.innerHTML = `Last Save: ${finalDate}`; // Display it in the element
     } else {
