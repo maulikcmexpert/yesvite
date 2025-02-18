@@ -1,5 +1,5 @@
 {{-- {{dd(session()->get('user_ids'))}} --}}
-{{dd($eventDetail['isCopy']);}}
+
 {{-- {{dd($inviteduser)}} --}}
 {{-- <!DOCTYPE html>
 <html lang="en">
@@ -3330,6 +3330,7 @@
 <input type="hidden" id="cohostLname" value="{{ $cohostLname }}">
 <input type="hidden" id="cohostemail" value="{{ $cohostemail }}">
 <input type="hidden" id="cohostphone_number" value="{{ $cohostphone_number }}">
+{{dd($eventDetail['isCopy']);}}
 <input type="hidden" id="isCopy" value="{{ $eventDetail['isCopy'] }}">
 <input type="hidden" id="alreadyCount" value="{{ $eventDetail['alreadyCount'] }}">
 <input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
