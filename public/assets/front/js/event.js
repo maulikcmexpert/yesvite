@@ -1248,6 +1248,15 @@ $('#notification_rsvp_btn').on('click', function (e) {
     const selectedValue = $('input[name="rsvp_status"]:checked').val();
     const adults = $('#rsvp_notification_adult').val();
     const kids = $('#rsvp_notification_kids').val();
+    if (selectedValue) {
+    } else {
+        // If no input is checked, show an alert
+        alert('Please select an RSVP status');
+        if (!$('.toast').length) {
+            toastr.error('Please select RSVP');
+        }
+        return;
+    }
     if(selectedValue=="1"){
         // if(adults=="0" && kids=="0"){
         //     toastr.error('Please select atleast one kid or adult');
@@ -1265,10 +1274,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
        $('#rsvp_notification_kids').prop('disabled',true);
        $('.rsvp_minus_notify').prop('disabled',true);
        $('.rsvp_plus_notify').prop('disabled',true);
-       if (!$('.toast').length) {
-        toastr.error('Please select RSVP');
-    }
-       return;
+     
 
     }
     console.log(adults+' '+kids);
