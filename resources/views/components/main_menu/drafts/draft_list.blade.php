@@ -134,7 +134,7 @@
 
     </script> -->
 
-<!-- <script>
+<script>
  document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
@@ -146,15 +146,17 @@
       return;
     }
 
-    // Convert to Date object (ensuring the format is proper)
-    const dateObject = new Date(savedDate.includes('T') ? savedDate : savedDate.replace(" ", "T"));
+    // Convert the savedDate to a Date object and adjust it to Los Angeles time zone
+    // For example, if the saved date is '2025-02-18 04:33:08' in Los Angeles time, we will add the timezone info
+    const losAngelesDate = new Date(savedDate + ' GMT-0800'); // Assume input is in Los Angeles time (PST/PDT)
 
-    if (isNaN(dateObject.getTime())) {
+    // Check if the date is valid
+    if (isNaN(losAngelesDate.getTime())) {
       console.error('Invalid date format:', savedDate);
       return;
     }
 
-    // Get the local time zone of the user's machine
+    // Format the date to the user's local time zone
     const options = {
       year: 'numeric',
       month: 'long',
@@ -162,14 +164,15 @@
       hour: 'numeric',
       minute: 'numeric',
       second: 'numeric',
-      hour12: true // AM/PM format
+      hour12: true // Use AM/PM format
     };
 
-    // Format the date to the user's local time zone using Intl.DateTimeFormat
-    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(dateObject);
+    // Get the formatted date string using the user's local time zone
+    const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesDate);
 
+    // If formatting is successful, update the element with the formatted date
     if (formattedDate) {
-      // Replacing ' at ' with '-' and adjusting AM/PM case
+      // Adjusting the format (e.g., replace " at " with " - " and uppercase AM/PM)
       const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
       saveDateElement.innerHTML = `Last Save: ${finalDate}`; // Display it in the element
     } else {
@@ -178,7 +181,7 @@
   });
 });
 
-</script> -->
+</script>
 
 
 
