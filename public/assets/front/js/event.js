@@ -1234,22 +1234,14 @@ $(document).on('click','.rsvp-no-checkbox',function(){
     $('.rsvp_minus_notify').prop('disabled',true);
     $('.rsvp_plus_notify').prop('disabled',true);
 
-    $('#rsvp_notification_adult').val("0");
-     $('#rsvp_notification_kids').val("0");
-
-
-
-
+    $('#rsvp_notification_adult').val(0);
+     $('#rsvp_notification_kids').val(0);
 });
 $(document).on('click','.rsvp-yes-checkbox',function(){
     $('.rsvp_minus_notify').prop('disabled',false);
     $('.rsvp_plus_notify').prop('disabled',false);
     $('#rsvp_notification_adult').val(0);
     $('#rsvp_notification_kids').val(0);
-
-  
-    $('.rsvp_minus_notify').prop('disabled',false);
-    $('.rsvp_plus_notify').prop('disabled',false);
 });
 $('#notification_rsvp_btn').on('click', function (e) {
     e.preventDefault(); 
@@ -1257,23 +1249,17 @@ $('#notification_rsvp_btn').on('click', function (e) {
     const adults = $('#rsvp_notification_adult').val();
     const kids = $('#rsvp_notification_kids').val();
     if(selectedValue=="1"){
-        if(adults=="0" && kids=="0"){
-            if (!$('.toast').length) {
-                toastr.error('Please select atleast one kid or adult');
-            }
-            // $('#rsvp_by_notification').on('hide.bs.modal', function (e) {
-            //     e.preventDefault();
-            // });
-            return;
-        } else {
-            // If valid input is provided, allow closing of the modal
-            $('#rsvp_by_notification').off('hide.bs.modal');
+        // if(adults=="0" && kids=="0"){
+        //     toastr.error('Please select atleast one kid or adult');
+        //     $('#rsvp_by_notification').on('hide.bs.modal', function (e) {
+        //         e.preventDefault();
+        //     });
+        //     return;
+        // } else {
+        //     // If valid input is provided, allow closing of the modal
+        //     $('#rsvp_by_notification').off('hide.bs.modal');
         
-        }
-        $('#rsvp_notification_adult').prop('disabled',false);
-        $('#rsvp_notification_kids').prop('disabled',false);
-        $('.rsvp_minus_notify').prop('disabled',false);
-        $('.rsvp_plus_notify').prop('disabled',false);
+        // }
     }else{
         $('#rsvp_notification_adult').prop('disabled',true);
        $('#rsvp_notification_kids').prop('disabled',true);
@@ -1287,7 +1273,12 @@ $('#notification_rsvp_btn').on('click', function (e) {
     }
     console.log(adults+' '+kids);
 
-   
+    if(adults==0&&kids==0){
+        if (!$('.toast').length) {
+            toastr.error('Please select atleast one kid or adult');
+        }
+        return;
+    }
     // $('#rsvp_by_notification').modal('hide');
 
     const formData = $('#notification_rsvp').serialize();
@@ -1301,7 +1292,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
       success: function (response) { 
         if(response.status==3){
             if (!$('.toast').length) {
-                toastr.error('Please select atleast one kid or adult');
+                toastr.success(response.text);
             }
         }       
         if(response.status==1){
@@ -1310,14 +1301,13 @@ $('#notification_rsvp_btn').on('click', function (e) {
             }
         }
         if(response.status==0){
- if (!$('.toast').length) {
+            if (!$('.toast').length) {
                 toastr.success(response.text);
-            }        }
+            }
+        }
       },
       error: function (error) {
-        if (!$('.toast').length) {
-            toastr.error('Something went wrong. Please try again!');
-        }
+        toastr.error('Something went wrong. Please try again!');
       },
     });
 
