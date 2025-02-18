@@ -230,6 +230,9 @@ function addToOutlookCalendar() {
         return date.toISOString().split('T')[0]; // YYYY-MM-DD format
     };
 
+    console.log(formatToICSDate(startDateTime));
+    console.log(formatToICSDate(endDateTime));
+
     const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
     &startdt=${formatToICSDate(startDateTime)}
     &enddt=${formatToICSDate(endDateTime)}
