@@ -413,21 +413,19 @@ function addToAppleCalendar() {
         END:VEVENT
         END:VCALENDAR`;
 
-    // Encode the ICS content to a data URL
-    const dataUrl = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent);
+    // Encode the ICS content as a Data URI
+    const encodedUri = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsContent);
 
-    // Create an anchor element to trigger the download
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = 'event.ics';
-    
-    // Append the anchor to the document body
+    // Create a link with the Data URI and simulate a click
+    const a = document.createElement("a");
+    a.href = encodedUri;
+    a.download = "event.ics";
+    a.style.display = "none"; // Hide the link
     document.body.appendChild(a);
     a.click();
-    
-    // Remove the anchor from the document body
     document.body.removeChild(a);
 }
+
 
 
 function getEventDetails() {
