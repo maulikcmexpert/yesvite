@@ -193,6 +193,7 @@ $(document).ready(function () {
 
     $(".noattending-btn").on('click', function () {
         var rsvpStatus = $('#statusRsvp').val();
+
         if (rsvpStatus == 0) {
             $("#option6").prop('checked', true);
             $("#option5").prop('checked', false);
