@@ -204,6 +204,7 @@ $(document).ready(function () {
             return;
         }
 
+        console.log(`${eventDate,eventTime,eventEndTime,eventEndDate}`);
         const convertTo24HourFormat = (time) => {
             const [hour, minuteWithPeriod] = time.split(":");
             let minute = minuteWithPeriod.replace(/(am|pm)/i, "").trim(); // Remove 'am' or 'pm'
