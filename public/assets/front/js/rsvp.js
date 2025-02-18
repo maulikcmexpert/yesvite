@@ -327,16 +327,25 @@ function addToGoogleCalendar() {
 
 function addToOutlookCalendar() {
     // function createOutlookEvent() {
-        let startDate = "20250219"; // Format: YYYYMMDD
-        let startTime = "100000";   // Format: HHMMSS
-        let endTime = "110000";     // Format: HHMMSS
+        let startDate = "2025-02-19"; // YYYY-MM-DD
+        let startTime = "10:00:00";   // HH:MM:SS
+        let endTime = "11:00:00";     // HH:MM:SS
+    
         let subject = "Meeting with Client";
         let details = "Discussion on project updates.";
         let location = "Online";
-        
-        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&startdt=${startDate}T${startTime}&enddt=${startDate}T${endTime}`;
+    
+        let startDateTime = `${startDate}T${startTime}`;
+        let endDateTime = `${startDate}T${endTime}`;
+    
+        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
+            &body=${encodeURIComponent(details)}
+            &location=${encodeURIComponent(location)}
+            &startdt=${encodeURIComponent(startDateTime)}
+            &enddt=${encodeURIComponent(endDateTime)}`;
     
         window.open(outlookLink, "_blank");
+    
     // }
     // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     // if (!startDateTime) return;
