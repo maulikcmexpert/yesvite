@@ -58,11 +58,13 @@
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
                                     @php
-$hide_image="";
-                                        $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;
-                                        $hide_image = empty($photo) ? 'd-none' : "";
+                                    $mediaData = $postPhotoList['mediaData'] ?? []; // Default to an empty array if not set
+                                    $photo = $mediaData[0]['post_media'] ?? null;
 
-                                    @endphp
+                                    // If mediaData is empty or post_media is empty, add 'd-none'
+                                    $hide_image = empty($mediaData) || empty($photo) ? 'd-none' : '';
+                                @endphp
+
                                     <div class="row {{$hide_image }}" >
                                         {{-- <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                             <div class="photos-card-wrp">
