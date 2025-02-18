@@ -3936,7 +3936,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
 
-    if (event_date != "") {
+    if (start_event_date != "") {
         // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $(".current_step").text();
@@ -3978,6 +3978,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
                     return;
                 }
                 if (response == 1) {
+                    console.log(eventData);
+                    
                     toastr.success("Event Saved as Draft");
                     window.location.href = "home";
                 }
@@ -4024,6 +4026,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                     return;
                 }
                 if (response == 1) {
+                    console.log(eventData);
                     window.location.href = "home";
                     toastr.success("Event Saved as Draft");
                     setTimeout(function () {
@@ -4460,7 +4463,9 @@ function savePage1Data(close = null, direct = false) {
     } else {
         eventData.event_name = event_name;
         eventData.hosted_by = hostedby;
-        eventData.event_date = event_date;
+        eventData.start_event_date = start_event_date;
+        eventData.end_event_date = end_event_date;
+
     }
 
     // eventData.page1 = {
@@ -9154,7 +9159,7 @@ if (final_step == "2" && isCohost == "1") {
         $(".li_design").find(".side-bar-list").addClass("menu-success");
         $(".li_event_detail").find(".side-bar-list").addClass("active");
         $("#loader").css("display", "none");
-    }, 1000);
+    }, 3000);
 }
 
 if (final_step == "3" && isCohost == "1") {
@@ -9163,7 +9168,7 @@ if (final_step == "3" && isCohost == "1") {
         step3open();
         $(".li_setting").find(".menu-circle-wrp").removeClass("menu-success");
         $("#loader").css("display", "none");
-    }, 1000);
+    }, 3000);
 }
 
 if (final_step == "4" && isCohost == "1") {
@@ -9174,7 +9179,7 @@ if (final_step == "4" && isCohost == "1") {
         $(".li_guest").addClass("menu-success");
         step4open();
         $("#loader").css("display", "none");
-    }, 1000);
+    }, 3000);
 }
 
 async function step2Open() {
@@ -9789,6 +9794,7 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
+   
     var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
