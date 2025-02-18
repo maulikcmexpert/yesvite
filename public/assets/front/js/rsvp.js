@@ -231,13 +231,13 @@ function addToOutlookCalendar() {
     };
 
     const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
-    &startdt=${encodeURIComponent(formatToICSDate(startDateTime))}
-    &enddt=${encodeURIComponent(formatToICSDate(endDateTime))}
-    &subject=${encodeURIComponent(eventName)}
-    &body=${encodeURIComponent('Event on ' + eventDate + ' - ' + eventEndDate)}
+    &startdt=${formatToICSDate(startDateTime)}
+    &enddt=${formatToICSDate(endDateTime)}
+    &subject=${eventName}
+    &body=${'Event on ' + eventDate + ' - ' + eventEndDate}
     &allday=false
-    &start=${encodeURIComponent(formatToDatePickerDate(startDateTime))}
-    &end=${encodeURIComponent(formatToDatePickerDate(endDateTime))}`;
+    &start=${formatToDatePickerDate(startDateTime)}
+    &end=${formatToDatePickerDate(endDateTime)}`;
 
     window.open(outlookCalendarUrl);
 }
