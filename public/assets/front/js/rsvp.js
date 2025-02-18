@@ -393,52 +393,62 @@ function addToOutlookCalendar() {
 
 
 function addToAppleCalendar() {
-    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
-    if (!startDateTime) return;
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
+    const eventName = $("#eventName").val() || "Meeting with Team";
 
+    console.log(eventDate);
+    console.log(eventEndDate);
+    console.log(convertTo24Hour(eventTime));
+    console.log(convertTo24Hour(eventEndTime));
+    console.log(eventName);
+    
+    let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+    let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+    
+    let subject = eventName;
+    let details = eventName;
+    
+    // Format dates to match iCalendar format (YYYYMMDDTHHmmSSZ)
     const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format
     };
 
-    // Create the ICS content
-    const icsContent = `BEGIN:VCALENDAR
-        VERSION:2.0
-        PRODID:-//YourApp//Event//EN
-        BEGIN:VEVENT
-        UID:${new Date().getTime()}@yourdomain.com
-        DTSTAMP:${formatToICSDate(new Date())}
-        DTSTART:${formatToICSDate(startDateTime)}
-        DTEND:${formatToICSDate(endDateTime)}
-        SUMMARY:${eventName}
-        DESCRIPTION:Event on ${eventDate} - ${eventEndDate}
-        END:VEVENT
-        END:VCALENDAR`;
-
-    // Create a Blob from the ICS content
-    const icsBlob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-
-    // Create a download link
-    const downloadLink = document.createElement("a");
-
-    // Use URL.createObjectURL to create a temporary link to the blob
-    downloadLink.href = URL.createObjectURL(icsBlob);
-
-    // Generate a filename by replacing spaces with underscores in the event name
-    const filename = eventName.replace(/\s+/g, "_") + ".ics";
-    downloadLink.download = filename; // Set the download attribute
-
-    // Optionally, style the link (if you want to make it visible as a download link)
-    downloadLink.textContent = "Download Event (.ics)";
-    downloadLink.style.display = "block";
-    downloadLink.style.margin = "20px";
-    downloadLink.style.color = "blue";
-    downloadLink.style.textDecoration = "underline";
-
-    // Programmatically trigger the download by appending the link to the DOM and clicking it
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink); // Clean up the DOM after triggering the download
+    let startFormatted = formatToICSDate(startDateTime);
+    let endFormatted = formatToICSDate(endDateTime);
+    
+    // Create iCalendar (.ics) content
+    let icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Apple Inc.//Mac OS X//EN
+BEGIN:VEVENT
+SUMMARY:${subject}
+DESCRIPTION:${details}
+DTSTART:${startFormatted}
+DTEND:${endFormatted}
+LOCATION:Online
+STATUS:TENTATIVE
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT15M
+DESCRIPTION:Reminder
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR
+    `;
+    
+    // Create a Blob and download the .ics file
+    let blob = new Blob([icsContent], { type: 'text/calendar' });
+    let link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${subject}.ics`; // Name of the file
+    link.click();
 }
+
 
 function getEventDetails() {
     const eventDate = $("#eventDate").val();
