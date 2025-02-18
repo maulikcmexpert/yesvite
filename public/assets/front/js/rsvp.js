@@ -326,32 +326,44 @@ function addToGoogleCalendar() {
 }
 
 function addToOutlookCalendar() {
-    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
-    if (!startDateTime) return;
+    function createOutlookEvent() {
+        let startDate = "20250219"; // Format: YYYYMMDD
+        let startTime = "100000";   // Format: HHMMSS
+        let endTime = "110000";     // Format: HHMMSS
+        let subject = "Meeting with Client";
+        let details = "Discussion on project updates.";
+        let location = "Online";
+        
+        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&startdt=${startDate}T${startTime}&enddt=${startDate}T${endTime}`;
+    
+        window.open(outlookLink, "_blank");
+    }
+    // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
+    // if (!startDateTime) return;
 
-    // Format to remove any unwanted characters for ICS compatibility
-    const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format in UTC
-    };
+    // // Format to remove any unwanted characters for ICS compatibility
+    // const formatToICSDate = (date) => {
+    //     return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format in UTC
+    // };
 
-    // Format date for the date picker in Outlook (YYYY-MM-DD)
-    const formatToDatePickerDate = (date) => {
-        return date.toISOString().split('T')[0]; // YYYY-MM-DD format
-    };
+    // // Format date for the date picker in Outlook (YYYY-MM-DD)
+    // const formatToDatePickerDate = (date) => {
+    //     return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    // };
 
-    console.log(formatToICSDate(startDateTime));
-        console.log(formatToICSDate(endDateTime));
+    // console.log(formatToICSDate(startDateTime));
+    //     console.log(formatToICSDate(endDateTime));
 
-    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
-    &startdt=${formatToICSDate(startDateTime)}
-    &enddt=${formatToICSDate(endDateTime)}
-    &subject=${eventName}
-    &body=${'Event on ' + eventDate + ' - ' + eventEndDate}
-    &allday=false
-    &start=${formatToDatePickerDate(startDateTime)}
-    &end=${formatToDatePickerDate(endDateTime)}`;
+    // const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
+    // &startdt=${formatToICSDate(startDateTime)}
+    // &enddt=${formatToICSDate(endDateTime)}
+    // &subject=${eventName}
+    // &body=${'Event on ' + eventDate + ' - ' + eventEndDate}
+    // &allday=false
+    // &start=${formatToDatePickerDate(startDateTime)}
+    // &end=${formatToDatePickerDate(endDateTime)}`;
 
-    window.open(outlookCalendarUrl);
+    // window.open(outlookCalendarUrl);
 }
 
 
