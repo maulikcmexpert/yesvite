@@ -3914,7 +3914,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_date = $("#event-date").val();
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
-    // var design = eventData.desgin_selected;
+    var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData();
         design = eventData.desgin_selected;
@@ -5203,7 +5203,6 @@ function updateUIAfterSave(image) {
 
     final_step = final_step === 1 ? 2 : final_step;
     eventData.step = final_step;
-    alert(final_step)
 
     $("#myCustomModal, #exampleModal").modal("hide");
     $(".main-content-wrp").removeClass("blurred");
