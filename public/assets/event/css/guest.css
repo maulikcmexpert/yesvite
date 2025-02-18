@@ -980,6 +980,9 @@
         /* max-width: 100%;
         min-width: 100%; */
     }
+    .new-guest-content-wrp .invite-pro{
+        gap: 10px;
+    }
 }
 
 @media only screen and (max-width: 424px) {
