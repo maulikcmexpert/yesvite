@@ -240,33 +240,35 @@ $(".modal").on("hidden.bs.modal", function () {
     var rsvpStatus = $('#statusRsvp').val();
 alert( rsvpStatus);
 
-    if (rsvpStatus == '1' ) {
-        clearModalValues();
+if (rsvpStatus == 1 ) {
+    clearModalValues();
 
-    }
-    if (rsvpStatus == '') {
-        clearModalValues();
-        clearModalALLValues();
+}
+if (rsvpStatus == "") {
+    clearModalValues();
+    clearModalALLValues();
 
 
-    } else {
-        clearModalALLValues();
-    }
+}
+ if (rsvpStatus == 0) {
+    clearModalALLValues();
+}
 });
 
 $(document).on("click", ".btn-close", function () {
     var rsvpStatus = $('#statusRsvp').val();
 
-    if (rsvpStatus == '1' ) {
+    if (rsvpStatus == 1 ) {
         clearModalValues();
 
     }
-    if (rsvpStatus == '') {
+    if (rsvpStatus == "") {
         clearModalValues();
         clearModalALLValues();
 
 
-    }else  {
+    }
+     if (rsvpStatus == 0) {
         clearModalALLValues();
     }
 });
