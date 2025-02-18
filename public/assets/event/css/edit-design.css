@@ -89,7 +89,7 @@
     justify-content: space-between;
     gap: 5px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 50px !important;
 }
 
 .edit-images-button-inner button {
@@ -1097,6 +1097,11 @@
 
 }
 
+@media only screen and (min-width: 2600px) and (max-width: 2800px){
+    .edit-image-main-wrp .design-seting{
+        position: absolute !important;
+    }
+} 
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
         font-size: 20px !important;
@@ -1130,9 +1135,7 @@
     .edit-images-button-wrp{
         max-width: 600px;
     }
-    .edit-image-main-wrp .design-seting{
-        position: absolute !important;
-    }
+    
     .new-event-sidebar-menu ul li h3{
         font-size: 18px;
     }

@@ -495,7 +495,7 @@ $("#buycreditsmodal").on("shown.bs.modal", function () {
                                     inp.value = data.data; 
                                 });
                                 $(".invite-left_d").text(
-                                    "Invites | " + data.data + " Left"
+                                    data.data + " Left"
                                 );
                                 $('#buycreditsmodal').modal('hide');
                                 setTimeout(() => {
