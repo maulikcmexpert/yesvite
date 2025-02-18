@@ -350,9 +350,9 @@ function addToOutlookCalendar() {
         let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
             &body=${encodeURIComponent(details)}
             &location=${encodeURIComponent(location)}
-            &startdt=${encodeURIComponent(formattedStartDateTime)}
             &enddt=${encodeURIComponent(formattedEndDateTime)}`;
-    
+            // &startdt=${encodeURIComponent(formattedStartDateTime)}
+
         window.open(outlookLink, "_blank");
     // }
     // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
