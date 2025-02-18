@@ -400,6 +400,7 @@ function addToAppleCalendar() {
         return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
     };
 
+    // Create the ICS content
     const icsContent = `BEGIN:VCALENDAR
         VERSION:2.0
         PRODID:-//YourApp//Event//EN
@@ -413,21 +414,13 @@ function addToAppleCalendar() {
         END:VEVENT
         END:VCALENDAR`;
 
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsContent); // Data URI
+    // Create a Blob from the ICS content
+    const blob = new Blob([icsContent], { type: "text/calendar" });
 
-    const hiddenField = document.createElement("input");
-    hiddenField.type = "hidden";
-    hiddenField.name = "download";
-    hiddenField.value = icsContent;
-
-    form.appendChild(hiddenField);
-    document.body.appendChild(form);
-
-    form.submit(); // Simulate form submission
-    document.body.removeChild(form);
+    // Use FileSaver.js to trigger the download
+    saveAs(blob, "event.ics");
 }
+
 
 
 
