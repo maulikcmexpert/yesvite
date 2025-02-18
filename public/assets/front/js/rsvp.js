@@ -336,8 +336,8 @@ function addToOutlookCalendar() {
 
     console.log(eventDate);
     console.log(eventEndDate);
-    console.log(eventTime);
-    console.log(eventEndTime);
+    console.log(convertTo24Hour(eventTime));
+    console.log(convertTo24Hour(eventEndTime));
     console.log(eventName);
     
          let startDateTime = new Date("2025-02-19T10:00:00");
@@ -904,4 +904,16 @@ function getInitials(name) {
         .map((part) => part.charAt(0).toUpperCase()) // Get first letter of each word
         .join("")
         .slice(0, 2); // Ensure max 2 characters
+}
+function convertTo24Hour(timeStr) {
+    let [time, period] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (period === "PM" && hours !== 12) {
+        hours += 12; // Convert PM hours except 12 PM
+    } else if (period === "AM" && hours === 12) {
+        hours = 0; // Convert 12 AM to 00
+    }
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
 }
