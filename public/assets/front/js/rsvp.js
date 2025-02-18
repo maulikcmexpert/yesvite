@@ -327,8 +327,21 @@ function addToGoogleCalendar() {
 
 function addToOutlookCalendar() {
     // function createOutlookEvent() {
-        let startDateTime = new Date("2025-02-19T10:00:00");
-        let endDateTime = new Date("2025-02-19T11:00:00");
+
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
+    const eventName = $("#eventName").val() || "Meeting with Team";
+
+    console.log(eventDate);
+    console.log(eventEndDate);
+    console.log(eventTime);
+    console.log(eventEndTime);
+    console.log(eventName);
+    
+         let startDateTime = new Date("2025-02-19T10:00:00");
+         let endDateTime = new Date("2025-02-19T11:00:00");
         
         let subject = "Meeting with Client";
         let details = "Discussion on project updates.";

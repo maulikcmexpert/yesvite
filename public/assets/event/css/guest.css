@@ -211,6 +211,13 @@
     /* box-shadow: 0px 10px 20px 0px #0000001a; */
 }
 
+.new-guest-content-wrp .invite-pro{
+    box-shadow: 0px 10px 20px 0px #0000001a;
+    border: 1px solid var(--borderColor);
+    border-radius: 16px;
+    padding: 10px 10px 10px 10px;
+}
+
 .invite-left {
     border: 1px solid var(--borderColor);
     background-color: #f1f5f9;
@@ -809,6 +816,7 @@
         max-width: 350px;
         min-width: 350px;
         position: fixed;
+        justify-content: center;
     }
 
     .invite-left {
@@ -969,8 +977,11 @@
         max-height: calc(100vh - 440px) !important;
     }
     .guest-main-content .guest-wrapper .invite-pro .invite-left{
-        max-width: 100%;
-        min-width: 100%;
+        /* max-width: 100%;
+        min-width: 100%; */
+    }
+    .new-guest-content-wrp .invite-pro{
+        gap: 10px;
     }
 }
 
