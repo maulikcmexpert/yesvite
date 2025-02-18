@@ -220,20 +220,28 @@ function addToOutlookCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
     if (!startDateTime) return;
 
+    // Format to remove any unwanted characters for ICS compatibility
     const formatToICSDate = (date) => {
-        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format in UTC
     };
 
-    // const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
-    // &startdt=${encodeURIComponent(
-    //     formatToICSDate(startDateTime)
-    // )}&enddt=${encodeURIComponent(
-    //     formatToICSDate(endDateTime)
-    // )}&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
-    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(eventName)}&body=Event on ${eventDate} - ${eventEndDate}&allday=false`;
+    // Format date for the date picker in Outlook (YYYY-MM-DD)
+    const formatToDatePickerDate = (date) => {
+        return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    };
+
+    const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
+    &startdt=${encodeURIComponent(formatToICSDate(startDateTime))}
+    &enddt=${encodeURIComponent(formatToICSDate(endDateTime))}
+    &subject=${encodeURIComponent(eventName)}
+    &body=${encodeURIComponent('Event on ' + eventDate + ' - ' + eventEndDate)}
+    &allday=false
+    &start=${encodeURIComponent(formatToDatePickerDate(startDateTime))}
+    &end=${encodeURIComponent(formatToDatePickerDate(endDateTime))}`;
 
     window.open(outlookCalendarUrl);
 }
+
 
 function addToAppleCalendar() {
     const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
