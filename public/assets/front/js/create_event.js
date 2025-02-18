@@ -3936,7 +3936,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
 
-    if (event_date != "") {
+    if (start_event_date != "") {
         // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $(".current_step").text();
