@@ -4463,7 +4463,7 @@ function savePage1Data(close = null, direct = false) {
     } else {
         eventData.event_name = event_name;
         eventData.hosted_by = hostedby;
-        eventData.event_date = event_date;
+        eventData.start_event_date = start_event_date;
     }
 
     // eventData.page1 = {
