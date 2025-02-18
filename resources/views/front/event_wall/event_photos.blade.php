@@ -58,13 +58,9 @@
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
                                     @php
-
-                                        $photo =  empty($postPhotoList);
-                                        if($photo == ""){
-                                            $hide_image = 'd-none';
-                                        }else{
-                                            $hide_image = '';
-                                        }
+$hide_image="";
+                                        $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;
+                                        $hide_image = empty($photo) ? 'd-none' : "";
 
                                     @endphp
                                     <div class="row {{$hide_image }}" >
