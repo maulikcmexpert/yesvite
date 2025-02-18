@@ -15,7 +15,7 @@ var selected_co_host_prefer_by =
 var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
-alert(isCopy);
+
 
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
@@ -9726,8 +9726,7 @@ function getcoins() {
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
-    alert(AllCoins);
-    alert(isCopy);
+    
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
