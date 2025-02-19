@@ -1171,6 +1171,15 @@ $(document).on('click','.notification-rsvp-btn', function () {
     const lastName = $(this).data('lastname');
     const hosted_by = firstName + ' ' + lastName; 
     const event_name = $(this).data('event_name');
+    const rsvp_status=$(this).attr('data-rsvp');
+    const kids=$(this).attr('data-rsvp_kids');
+    const adults=$(this).attr('data-rsvp_adults');
+
+    console.log(rsvp_status);
+    console.log(kids);
+    console.log(adults);
+
+
     
     $('#rsvp_notification_adult').val("0");
      $('#rsvp_notification_kids').val("0");
@@ -1214,6 +1223,16 @@ $(document).on('click','.notification-rsvp-btn', function () {
                         ${initials}
                     </h4>`
                 );
+            }
+
+            if(rsvp_status!=""){
+
+            }
+            if(kids!=""){
+                
+            }
+            if(adults!=""){
+                
             }
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);

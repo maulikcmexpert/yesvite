@@ -1487,6 +1487,9 @@ function updateEventDate() {
     $(".activity_bar").children().not(".toggle-wrp").remove();
 
     if (selectedDates.size > 0) {
+        var activities = {};
+        eventData.activity = {};
+        var total_activities = 0;
         set_activity_html(selectedDates);
     }
 }
@@ -1518,6 +1521,7 @@ initializeDatePicker(
     "#end-event-date",
     { minDate: moment() },
     function (selectedDate) {
+        eventData.activity = {};
         let formattedDate = selectedDate.format("MM-DD-YYYY");
         $("#end-event-date").val(formattedDate); // Show date after selection
         selectedDates.add(formattedDate);
@@ -1574,7 +1578,7 @@ $(document).on("change", "#schedule", function () {
 function set_activity_html(selectedDates) {
     console.log(selectedDates);
     $(".activity_bar").html("");
-    var activities = {};
+    activities = {};
     eventData.activity = {};
     total_activities = 0;
     // var sortedDates = [...selectedDates].sort();

@@ -810,8 +810,6 @@ class EventController extends BaseController
         }
         if (isset($request->isdraft) && $request->isdraft == "0") {
             debit_coins($user_id, $eventId, $get_count_invited_user);
-        }
-        if (isset($request->event_id) && $request->event_id != NULL) {
             $step = $event_creation->step;
             if (isset($request->step) && $request->step != '' && $step < $request->step) {
                 $event_creation->step = $request->step;
@@ -1142,7 +1140,7 @@ class EventController extends BaseController
                 $addStartschedule =  new EventSchedule();
                 $addStartschedule->event_id = $eventId;
                 $addStartschedule->start_time = isset($request->start_time) ? $request->start_time : '';
-                $addStartschedule->event_date = isset($startDate) ? $startDateFormat : '';
+                $addStartschedule->event_date = isset($startDateFormat) ? $startDateFormat : '';
                 $addStartschedule->type = '1';
                 $addStartschedule->save();
 
@@ -1165,7 +1163,7 @@ class EventController extends BaseController
                 $addEndschedule =  new EventSchedule();
                 $addEndschedule->event_id = $eventId;
                 $addEndschedule->end_time = isset($request->end_time)  ? $request->end_time : '';
-                $addEndschedule->event_date = isset($endDate) ? $endDateFormat : '';
+                $addEndschedule->event_date = isset($endDateFormat) ? $endDateFormat : '';
                 $addEndschedule->type = '3';
                 $addEndschedule->save();
             }

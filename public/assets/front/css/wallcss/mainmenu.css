@@ -749,6 +749,8 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    position: relative;
+    top: 1px;
 }
 
 #nav-upcoming-tab span {
@@ -3337,6 +3339,24 @@
     .supportive-home-wrp .responsive-calendar{
         height: calc(100% - 0px);
         top: 0px;
+    }
+
+    .supportive-home-wrp .responsive-calender-month-wrp{
+        display: inline-block;
+    }
+    
+    .supportive-home-wrp .calendar-heading{
+        display: block;
+    }
+    
+    .supportive-home-wrp .responsive-calendar .month h3:last-of-type{
+        display: inline-block !important;
+    }
+    .supportive-home-wrp .responsive-calendar .month h3{
+        width: 50%;
+    }
+    .today-btn-home{
+        display: none !important;
     }
 }
 
