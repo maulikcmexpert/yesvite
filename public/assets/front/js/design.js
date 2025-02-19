@@ -1543,6 +1543,7 @@ async function bindData(current_event_id) {
         }
     }
     $(".design-sidebar-action").click(function () {
+        $(".choose-design-sidebar").removeClass("ds");
         $(".design-sidebar-action").removeClass("activated");
         $(this).addClass("activated");
     });
