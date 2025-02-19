@@ -3354,7 +3354,7 @@
         width: 50%;
     }
     .today-btn-home{
-        display: none;
+        display: none !important;
     }
 }
 
