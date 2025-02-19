@@ -892,6 +892,28 @@ ul.listing li span {
         position: fixed;
         bottom: 0;
     }
+    #myModal1 .modal-body{
+        padding-top: 15px !important;
+        padding-bottom: 0px !important;
+    }
+    #save_contact{
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #myModal .modal-content{
+        margin: 0px !important;
+        position: fixed;
+        bottom: 0;
+    }
+    #myModal .modal-body{
+        padding-top: 15px !important;
+        padding-bottom: 0px !important;
+    }
+    #save_edit_contact{
+        width: 100%;
+        max-width: 100%;
+    }
 
 }
 
