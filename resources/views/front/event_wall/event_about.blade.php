@@ -589,9 +589,9 @@
                                                 @endif
                                             @endforeach --}}
                                             <span class="timing">{{ $eventDetails['event_time'] }}
-                                            @if (!empty($eventDetails['end_time']))
-                                            to {{ $eventDetails['end_time'] }}
-                                                @endif
+                                                @if (!empty($eventDetails['end_time']))
+                                                to {{ $eventDetails['end_time'] }}
+                                                    @endif
 
 
                                             </span>

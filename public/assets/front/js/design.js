@@ -1887,6 +1887,15 @@ async function bindData(current_event_id) {
         }
     });
 
+
+    // Prevent color change if no text box is selected
+    $(document).on("click", "#color-picker", function (e) {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            //console.log(activeObject.type);
+            updateColorPicker(); // Update picker when the selected color type changes
+        }
+    });
     // Load background image and make it non-draggable
     document
         .getElementById("image")

@@ -887,6 +887,19 @@ ul.listing li span {
     .about-banner .content h1.contact-u-form-title{
         margin-bottom: 40px !important;
     }
+    #myModal1 .modal-content{
+        margin: 0px !important;
+        position: fixed;
+        bottom: 0;
+    }
+    #myModal1 .modal-body{
+        padding-top: 15px !important;
+        padding-bottom: 0px !important;
+    }
+    #save_contact{
+        width: 100%;
+        max-width: 100%;
+    }
 
 }
 
