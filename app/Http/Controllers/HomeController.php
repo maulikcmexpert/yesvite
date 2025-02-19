@@ -300,7 +300,7 @@ class HomeController extends BaseController
 
                 // $draftEventArray =[];
                 $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->limit(3)->get();
-                
+                dd($draftEvents);
                 if (!empty($draftEvents) && count($draftEvents) != 0) {
 
                     foreach ($draftEvents as $value) {
