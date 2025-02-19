@@ -272,7 +272,7 @@ $notification_list=getNotificationList();
                                       </div>
                                         @if($inner_data['co_host_notification']!="1")
                                           <div>
-                                              <button class="notification-rsvp-btn" data-rsvp="{{$inner_data['rsvp_status']}}" data-rsvp_adults={{$inner_data['rsvp_adults']}} type="button" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
+                                              <button class="notification-rsvp-btn" data-rsvp="{{$inner_data['rsvp_status']}}" data-rsvp_adults={{$inner_data['rsvp_adults']}} data-rsvp_kids={{$inner_data['rsvp_kids']}} type="button" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
                                           </div>
                                         @endif
                                      <div>
