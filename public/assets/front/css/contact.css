@@ -898,6 +898,7 @@ ul.listing li span {
     }
     #save_contact{
         width: 100%;
+        max-width: 100%;
     }
 
 }
