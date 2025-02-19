@@ -1232,6 +1232,8 @@ $(document).on('click','.notification-rsvp-btn', function () {
                     $('#rsvp_yes').prop('checked',true);
                 }else{
                     $('#rsvp_no').prop('checked',true);
+                    $('.rsvp_minus_notify').prop('disabled',true);
+                    $('.rsvp_plus_notify').prop('disabled',true);
                 }
             }
             if(kids!=""){
@@ -1310,7 +1312,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
     }
     console.log(adults+' '+kids);
 
-  
+    $('#home_loader').css('display','flex');
 
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
@@ -1324,12 +1326,14 @@ $('#notification_rsvp_btn').on('click', function (e) {
         if(response.status==3){
             // if (!$('.toast').length) {
                 toastr.success(response.text);
+                $('#home_loader').css('display','none');
             // }
         }       
         if(response.status==1){
             // if (!$('.toast').length) {
                 toastr.success(response.text);
                 window.location.reload();
+                $('#home_loader').css('display','none');
                 // $('#rsvp_by_notification').modal('hide');
 
             // }
@@ -1338,14 +1342,18 @@ $('#notification_rsvp_btn').on('click', function (e) {
             // if (!$('.toast').length) {
                 toastr.success(response.text);
                 window.location.reload();
+                $('#home_loader').css('display','none');
                 // $('#rsvp_by_notification').modal('hide');
 
             // }
         }
+        $('#home_loader').css('display','none');
 
       },
       error: function (error) {
         toastr.error('Something went wrong. Please try again!');
+        $('#home_loader').css('display','none');
+
       },
     });
 
