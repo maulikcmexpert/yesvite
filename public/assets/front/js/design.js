@@ -1778,7 +1778,8 @@ async function bindData(current_event_id) {
             }, 1000);
         });
     }, 1000);
-    $(".sp-input").on("change",function(){
+
+    $(document).on("change",".sp-input",function(){
         var color = $(this).val();
         console.log(color)
         changeColor(color);
@@ -1796,7 +1797,7 @@ async function bindData(current_event_id) {
                 console.log("color");
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                //console.log("rgba")
+                console.log("rgba")
                 changeColor("#000000"); // Handle transparency by default
             }
         },
