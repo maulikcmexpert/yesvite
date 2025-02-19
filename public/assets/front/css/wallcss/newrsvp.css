@@ -1314,6 +1314,8 @@ label.error {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0px !important;
+    padding: 7px 10px !important;
 }
 
 #openOutlook svg, #openApple svg{
