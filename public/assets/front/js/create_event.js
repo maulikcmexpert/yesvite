@@ -6896,6 +6896,7 @@ $("#YesviteUserAll").on("scroll", function () {
     }
 });
 function get_user(type) {
+    $("#CheckCuurentStep").val("1");
     // if (busyyesvite == false) {
     busyyesvite = true;
     page = 3;
@@ -9358,7 +9359,7 @@ async function step3open() {
         if (stepVal == "0") {
             get_user(type);
         }
-        $("#CheckCuurentStep").val("1");
+        
     }
 }
 
