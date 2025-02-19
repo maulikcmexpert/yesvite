@@ -589,9 +589,11 @@
                                                 @endif
                                             @endforeach --}}
                                             <span class="timing">{{ $eventDetails['event_time'] }}
-                                                @if (!empty($eventDetails['end_time']))
-                                                    to {{ $eventDetails['end_time'] }}
+                                            @if (!empty($eventDetails['end_time']))
+                                            to {{ $eventDetails['end_time'] }}
                                                 @endif
+
+
                                             </span>
                                                 <span class="shedule-img">
                                                     <img src="{{ asset('assets/front/img/shedule-img.svg') }}"
@@ -747,7 +749,6 @@
 
 
         <!-- ===modals=== -->
-
         <!-- Modal -->
         <div class="modal fade create-post-modal all-events-filtermodal" id="main-center-modal-filter" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
