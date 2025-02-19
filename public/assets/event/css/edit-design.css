@@ -1271,8 +1271,8 @@
     }
 
     .choose-design-sidebar.design-sidebar_2{
-        right: -200%;
-        width: 0px;
+        right: -200% !important;
+        width: 0px !important;
     }
 
 }
