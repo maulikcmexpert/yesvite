@@ -388,6 +388,7 @@ class HomeController extends BaseController
             $totalTextDataCount = $categories->count();
             $imagecount = $totalTextDataCount;
 
+            dd($draftEventArray);
             $title = 'Home';
             $js = ['event'];
             $page = 'front.home';
