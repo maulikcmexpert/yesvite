@@ -1329,14 +1329,16 @@ $('#notification_rsvp_btn').on('click', function (e) {
         if(response.status==1){
             // if (!$('.toast').length) {
                 toastr.success(response.text);
-                $('#rsvp_by_notification').modal('hide');
+                window.location.reload();
+                // $('#rsvp_by_notification').modal('hide');
 
             // }
         }
         if(response.status==0){
             // if (!$('.toast').length) {
                 toastr.success(response.text);
-                $('#rsvp_by_notification').modal('hide');
+                window.location.reload();
+                // $('#rsvp_by_notification').modal('hide');
 
             // }
         }
