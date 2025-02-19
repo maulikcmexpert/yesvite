@@ -1279,16 +1279,16 @@ $('#notification_rsvp_btn').on('click', function (e) {
        
     } else {
         // If no input is checked, show an alert
-        if (!$('.toast').length) {
+        // if (!$('.toast').length) {
             toastr.error('Please select RSVP');
-        }
+        // }
         return;
     }
     if(selectedValue=="1"){
         if(adults==0&&kids==0){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.error('Please select atleast one kid or adult');
-            }
+            // }
             return;
         }
         // if(adults=="0" && kids=="0"){
