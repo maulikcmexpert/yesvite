@@ -749,6 +749,8 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    position: relative;
+    top: 1px;
 }
 
 #nav-upcoming-tab span {
