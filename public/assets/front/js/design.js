@@ -1889,7 +1889,7 @@ async function bindData(current_event_id) {
 
 
     // Prevent color change if no text box is selected
-    $(document).on("click", ".sp-thumb-inner", function (e) {
+    $(document).on("click", ".sp-thumb-el", function (e) {
         alert();
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
