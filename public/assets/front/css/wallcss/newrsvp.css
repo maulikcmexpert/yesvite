@@ -1275,6 +1275,21 @@ label.error {
     font-size: 20px !important;
 }
 
+.rsvp-calender-body-head h3{
+    color: var(--secondary-black);
+    transition: 0.5s;
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.rsvp-calender-body-head h3 svg{
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
