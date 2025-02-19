@@ -1309,13 +1309,25 @@ label.error {
 .rsvp-calender-accordion .accordion-body .add-calender{
     border: none !important;
     box-shadow: none !important;
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px !important;
+    padding: 7px 10px !important;
 }
 
 #openOutlook svg, #openApple svg{
     width: 30px;
     height: 30px;
     margin-left: 0px !important;
-    margin-right: 6px !important;
+    margin-right: 10px !important;
+}
+
+#openGoogle svg{
+    margin-left: 0px !important;
+    margin-right: 10px !important;
 }
 
 /* ====== responsive ======= */
