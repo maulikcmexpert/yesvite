@@ -1578,7 +1578,7 @@ $(document).on("change", "#schedule", function () {
 function set_activity_html(selectedDates) {
     console.log(selectedDates);
     $(".activity_bar").html("");
-    var activities = {};
+    activities = {};
     eventData.activity = {};
     total_activities = 0;
     // var sortedDates = [...selectedDates].sort();
