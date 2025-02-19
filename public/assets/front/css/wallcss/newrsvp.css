@@ -1285,7 +1285,6 @@ label.error {
     transition: 0.5s;
     font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
-    font-weight: 600;
     cursor: pointer;
     text-align: center;
     display: flex;
