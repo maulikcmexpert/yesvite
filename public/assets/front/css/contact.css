@@ -894,6 +894,7 @@ ul.listing li span {
     .contact-title > div{
         width: 100%;
         flex-direction: column;
+        gap: 10px !important;
     }
 }
 
