@@ -1326,6 +1326,8 @@ label.error {
 }
 
 #openGoogle svg{
+    width: 30px;
+    height: 30px;
     margin-left: 0px !important;
     margin-right: 10px !important;
 }
