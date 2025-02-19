@@ -703,7 +703,7 @@
                                                 <div class="play-store">
                                                     @foreach ($eventDetails['gift_registry'] as $gift)
                                                     @php
-                                                        $registryName = strtolower($gift['registry_recipient_name']);
+                                                        $registryName = strtolower( $gift['registry_link']);
                                                     @endphp
 
                                                     @if (str_contains($registryName, 'target'))
