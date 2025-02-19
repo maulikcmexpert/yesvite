@@ -1209,7 +1209,7 @@ async function bindData(current_event_id) {
 
             fabric.Textbox.prototype.controls.deleteControl =
                 new fabric.Control({
-                    x: 0.1,
+                    x: 0.2,
                     y: -0.5,
                     offsetY: -20,
                     cursorStyle: "pointer",
@@ -1226,7 +1226,7 @@ async function bindData(current_event_id) {
                 });
 
             fabric.Textbox.prototype.controls.copyControl = new fabric.Control({
-                x: -0.1,
+                x: -0.2,
                 y: -0.5,
                 offsetY: -20,
                 cursorStyle: "pointer",
