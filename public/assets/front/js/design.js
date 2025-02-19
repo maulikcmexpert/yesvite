@@ -1792,6 +1792,11 @@ async function bindData(current_event_id) {
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
         preferredFormat: "hex",
+        move: function (color) {
+            if (color) {
+                changeColor(color.toHexString()); // Apply color in real-time
+            }
+        },
         change: function (color) {
             if (color) {
                 console.log("color");
