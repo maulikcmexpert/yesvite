@@ -1195,6 +1195,8 @@ $(document).on('click','.notification-rsvp-btn', function () {
     $('#rsvp_user_id').val("");
     $('#rsvp_event_id').val("");
     $('.rsvp_initials').remove(); // Remove any previously added initials
+    $('#rsvp_yes').prop('checked',false);
+    $('#rsvp_no').prop('checked',false);
 
     // $.ajax({
     //     url: `${base_url}get_user_info_rsvp`,
@@ -1226,13 +1228,17 @@ $(document).on('click','.notification-rsvp-btn', function () {
             }
 
             if(rsvp_status!=""){
-
+                if(rsvp_status=="1"){
+                    $('#rsvp_yes').prop('checked',true);
+                }else{
+                    $('#rsvp_no').prop('checked',true);
+                }
             }
             if(kids!=""){
-                
+                $('#rsvp_notification_kids').val(kids);
             }
             if(adults!=""){
-                
+                $('#rsvp_notification_adult').val(adults);
             }
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);
