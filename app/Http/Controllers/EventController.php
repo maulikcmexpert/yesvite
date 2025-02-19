@@ -809,7 +809,7 @@ class EventController extends BaseController
             $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
         }
         if (isset($request->isdraft) && $request->isdraft == "0") {
-            debit_coins($user_id, $eventId, $get_count_invited_user);startDateFormat
+            debit_coins($user_id, $eventId, $get_count_invited_user);
             $step = $event_creation->step;
             if (isset($request->step) && $request->step != '' && $step < $request->step) {
                 $event_creation->step = $request->step;
