@@ -1101,12 +1101,12 @@
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
     }
-} 
+}
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
         font-size: 20px !important;
     }
-} 
+}
 
 @media only screen and (min-width: 2000px) and (max-width: 2800px) {
     .image-edit-inner-img {
@@ -1135,7 +1135,7 @@
     .edit-images-button-wrp{
         max-width: 600px;
     }
-    
+
     .new-event-sidebar-menu ul li h3{
         font-size: 18px;
     }
@@ -1268,6 +1268,11 @@
 
     .design-sidebar_2 {
         height: 90vh;
+    }
+
+    .design-sidebar_2{
+        right: -200%;
+        width: 0px;
     }
 
 }
