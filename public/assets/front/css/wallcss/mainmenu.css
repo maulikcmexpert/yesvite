@@ -3340,7 +3340,7 @@
     }
 
     .supportive-home-wrp .responsive-calender-month-wrp{
-        display: block;
+        display: inline-block;
     }
     
     .supportive-home-wrp .calendar-heading{
@@ -3348,7 +3348,13 @@
     }
     
     .supportive-home-wrp .responsive-calendar .month h3:last-of-type{
-        display: block !important;
+        display: inline-block !important;
+    }
+    .supportive-home-wrp .responsive-calendar .month h3{
+
+    }
+    .today-btn-home{
+        display: none;
     }
 }
 
