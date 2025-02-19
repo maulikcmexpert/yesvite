@@ -222,7 +222,7 @@
                                                         <path d="M5.33203 8H10.6654" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                         <path d="M8 10.6668V5.3335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                     </svg>
-                                                        ADD To
+                                                    ADD To
                                                 </h3>
                                             </div>
                                             <a href="javascript:;" id="openGoogle" class="add-calender btn">Add to calendar 
