@@ -299,22 +299,22 @@ class HomeController extends BaseController
                 // dd($eventList);
 
                 // $draftEventArray =[];
-                $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->limit(3)->get();
-                dd($draftEvents);
-                if (!empty($draftEvents) && count($draftEvents) != 0) {
-
-                    foreach ($draftEvents as $value) {
-                        $eventdraft['id'] = $value->id;
-                        $eventdraft['event_name'] = ($value->event_name != "") ? $value->event_name : "No name";;
-                        $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
-                        $eventdraft['saved_date'] = $value->updated_at;
-                        $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
-                        $eventdraft['event_plan_name'] = $value->subscription_plan_name;
-
-                        $draftEventArray[] = $eventdraft;
-                    }
-                }
+           
                 // return compact('draftEventArray','profileData');
+            }
+            $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->limit(3)->get();
+            if (!empty($draftEvents) && count($draftEvents) != 0) {
+
+                foreach ($draftEvents as $value) {
+                    $eventdraft['id'] = $value->id;
+                    $eventdraft['event_name'] = ($value->event_name != "") ? $value->event_name : "No name";;
+                    $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
+                    $eventdraft['saved_date'] = $value->updated_at;
+                    $eventdraft['step'] = ($value->step != NULL) ? $value->step : 0;
+                    $eventdraft['event_plan_name'] = $value->subscription_plan_name;
+
+                    $draftEventArray[] = $eventdraft;
+                }
             }
             $event_calender_start = User::select('created_at')->where('id', $user->id)->get();
             // dd($event_calender_start);
