@@ -1283,7 +1283,7 @@ label.error {
 .rsvp-calender-body-head h3{
     color: var(--secondary-black);
     transition: 0.5s;
-    font-family: var(--SFProDisplay-Semibold);
+    font-family: var(--SFProDisplay-Medium);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -1291,6 +1291,9 @@ label.error {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
 }
 .rsvp-calender-body-head h3 svg{
     width: 16px;
