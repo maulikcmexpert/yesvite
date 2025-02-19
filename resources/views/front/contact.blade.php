@@ -577,7 +577,7 @@
                     <form method="POST" id="add_contact" action="{{route('.addcontact',encrypt($user->id))}}">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-6">
                                 <div class="input-form">
                                     <input type="text" class="form-control inputText" id="Fname" name="Fname">
                                     <label for="Fname" class="floating-label">First
@@ -587,7 +587,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-6">
                                 <div class="input-form">
                                     <input type="text" class="form-control inputText" id="Lname" name="Lname">
                                     <label for="Lname" class="floating-label">Last
