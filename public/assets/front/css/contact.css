@@ -793,6 +793,8 @@ ul.listing li span {
     text-align:left;
 }
 
+
+
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
     .contact-details .col-xxl-9 {
@@ -886,6 +888,13 @@ ul.listing li span {
         margin-bottom: 40px !important;
     }
 
+}
+
+@media only screen and (max-width:424px) {
+    .contact-title > div{
+        width: 100%;
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width:360px) {
