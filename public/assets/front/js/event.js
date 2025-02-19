@@ -1322,23 +1322,23 @@ $('#notification_rsvp_btn').on('click', function (e) {
       data: formData,          
       success: function (response) { 
         if(response.status==3){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
-            }
+            // }
         }       
         if(response.status==1){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
                 $('#rsvp_by_notification').modal('hide');
 
-            }
+            // }
         }
         if(response.status==0){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
                 $('#rsvp_by_notification').modal('hide');
 
-            }
+            // }
         }
 
       },
