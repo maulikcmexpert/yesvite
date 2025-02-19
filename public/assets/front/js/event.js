@@ -1224,6 +1224,16 @@ $(document).on('click','.notification-rsvp-btn', function () {
                     </h4>`
                 );
             }
+
+            if(rsvp_status!=""){
+
+            }
+            if(kids!=""){
+                
+            }
+            if(adults!=""){
+                
+            }
             $('#notification_rsvp_eventName').text(event_name);
             $('#notification_rsvp_host').text(hosted_by);
             $('#rsvp_user_id').val(userId);

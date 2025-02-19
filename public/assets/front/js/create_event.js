@@ -1501,6 +1501,7 @@ initializeDatePicker(
         $("#start-event-date").val(formattedDate); // Show date after selection
         $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
         $("#rsvp-by-date").val("");
+        eventData.activity = {};
         let endPicker = $("#end-event-date").data("daterangepicker");
         endPicker.setStartDate(moment(selectedDate).add(0, "days"));
         endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
