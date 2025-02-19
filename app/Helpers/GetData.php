@@ -472,6 +472,9 @@ function getNotificationList($filter = [])
                     $checkrsvp =  EventInvitedUser::where(['user_id' => $values->user_id, 'event_id' => $values->event_id])->first();
                     if (!empty($checkrsvp)) {
                         $notificationDetail['rsvp_status'] =  (isset($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
+                        $notificationDetail['rsvp_kids'] =  (isset($checkrsvp->adults) || $checkrsvp->adults != null) ? $checkrsvp->adults : "";
+                        $notificationDetail['rsvp_adults'] =  (isset($checkrsvp->kids) || $checkrsvp->kids != null) ? $checkrsvp->kids : "";
+
                     } else {
                         $notificationDetail['rsvp_status'] = '';
                     }
