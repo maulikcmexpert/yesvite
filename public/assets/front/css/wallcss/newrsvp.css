@@ -1311,6 +1311,12 @@ label.error {
     box-shadow: none !important;
 }
 
+#openOutlook svg, #openApple svg{
+    width: 30px;
+    height: 30px;
+    margin-left: 0px !important;
+    margin-right: 6px !important;
+}
 
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
