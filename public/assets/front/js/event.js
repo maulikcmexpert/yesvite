@@ -1334,6 +1334,16 @@ $('#notification_rsvp_btn').on('click', function (e) {
                 toastr.success(response.text);
                 window.location.reload();
                 $('#home_loader').css('display','none');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
+
                 // $('#rsvp_by_notification').modal('hide');
 
             // }
@@ -1343,6 +1353,16 @@ $('#notification_rsvp_btn').on('click', function (e) {
                 toastr.success(response.text);
                 window.location.reload();
                 $('#home_loader').css('display','none');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
+
                 // $('#rsvp_by_notification').modal('hide');
 
             // }
