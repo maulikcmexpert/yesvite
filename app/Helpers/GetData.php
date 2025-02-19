@@ -475,9 +475,9 @@ function getNotificationList($filter = [])
                     } else {
                         $notificationDetail['rsvp_status'] = '';
                     }
-                    $rsvpData['rsvpd_status'] = (!empty($checkrsvp->rsvp_status) || $checkrsvp->rsvp_status != null) ? $checkrsvp->rsvp_status : "";
-                    $rsvpData['Adults'] = (!empty($checkrsvp->adults) || $checkrsvp->adults != null) ? $checkrsvp->adults : 0;
-                    $rsvpData['Kids']  =  (!empty($checkrsvp->kids) || $checkrsvp->kids != null) ? $checkrsvp->kids : 0;
+                    $rsvpData['rsvpd_status'] = (!empty($values->rsvp_status) || $values->rsvp_status != null) ? $values->rsvp_status : "";
+                    $rsvpData['Adults'] = (!empty($values->adults) || $values->adults != null) ? $values->adults : 0;
+                    $rsvpData['Kids']  =  (!empty($values->kids) || $values->kids != null) ? $values->kids : 0;
 
                     $notificationDetail['notification_id'] = $values->id;
                     $notificationDetail['notification_type'] = $values->notification_type;
