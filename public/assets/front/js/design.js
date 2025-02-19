@@ -1778,7 +1778,11 @@ async function bindData(current_event_id) {
             }, 1000);
         });
     }, 1000);
-
+    $(".sp-input").on("change",function(){
+        var color = $(this).val();
+        console.log(color)
+        changeColor(color);
+    })
     // Initialize the color picker
     $("#color-picker").spectrum({
         type: "flat",
@@ -1804,7 +1808,7 @@ async function bindData(current_event_id) {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        //console.log("before update");
+        console.log("before update");
 
         //console.log(activeObject);
         if (!activeObject) {
