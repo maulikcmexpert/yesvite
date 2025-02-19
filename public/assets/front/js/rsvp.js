@@ -393,35 +393,59 @@ function addToOutlookCalendar() {
 
 
 function addToAppleCalendar() {
-    const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
-    if (!startDateTime) return;
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || eventTime;
+    const eventName = $("#eventName").val() || "Meeting with Team";
 
+    if (!eventDate || !eventTime) {
+        alert("Please enter a valid event date and time.");
+        return;
+    }
+
+    console.log("Event Date:", eventDate);
+    console.log("Event End Date:", eventEndDate);
+    console.log("Start Time:", convertTo24Hour(eventTime));
+    console.log("End Time:", convertTo24Hour(eventEndTime));
+    console.log("Event Name:", eventName);
+
+    let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+    let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+
+    // Format dates for iCalendar (YYYYMMDDTHHmmSSZ)
     const formatToICSDate = (date) => {
         return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
     };
 
-    const icsContent = `BEGIN:VCALENDAR
-        VERSION:2.0
-        PRODID:-//YourApp//Event//EN
-        BEGIN:VEVENT
-        UID:${new Date().getTime()}@yourdomain.com
-        DTSTAMP:${formatToICSDate(new Date())}
-        DTSTART:${formatToICSDate(startDateTime)}
-        DTEND:${formatToICSDate(endDateTime)}
-        SUMMARY:${eventName}
-        DESCRIPTION:Event on ${eventDate} - ${eventEndDate}
-        END:VEVENT
-        END:VCALENDAR`;
+    let startFormatted = formatToICSDate(startDateTime);
+    let endFormatted = formatToICSDate(endDateTime);
 
-    const blob = new Blob([icsContent], { type: "text/calendar" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "event.ics";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // Create iCalendar (.ics) content
+    let icsContent = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Apple Inc.//Mac OS X//EN\r\nBEGIN:VEVENT\r\nSUMMARY:${eventName}\r\nDESCRIPTION:${eventName}\r\nDTSTART:${startFormatted}\r\nDTEND:${endFormatted}\r\nLOCATION:Online\r\nSTATUS:TENTATIVE\r\nSEQUENCE:0\r\nBEGIN:VALARM\r\nTRIGGER:-PT15M\r\nDESCRIPTION:Reminder\r\nACTION:DISPLAY\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+
+    // Create a Blob and download the .ics file
+    let blob = new Blob([icsContent], { type: "text/calendar" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${eventName.replace(/\s+/g, "_")}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
+
+// Convert time to 24-hour format if needed
+function convertTo24Hour(time) {
+    const [hour, minute, period] = time.match(/(\d+):(\d+)\s*(AM|PM)?/i).slice(1);
+    let hours = parseInt(hour);
+    if (period) {
+        if (period.toUpperCase() === "PM" && hours < 12) hours += 12;
+        if (period.toUpperCase() === "AM" && hours === 12) hours = 0;
+    }
+    return `${String(hours).padStart(2, "0")}:${minute}:00`;
+}
+
+
 
 function getEventDetails() {
     const eventDate = $("#eventDate").val();

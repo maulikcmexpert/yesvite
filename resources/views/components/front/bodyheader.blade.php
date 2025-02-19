@@ -869,7 +869,7 @@ $notification_list=getNotificationList();
                                   </div>
                                   <div>
                                     <p>
-                                      {{$inner_data['event_name']}}
+                                      <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}}</a>
                                       <!-- <span><strong>Wall</strong></span> -->
                                     </p>
                                     @if($inner_data['read']=="0")
@@ -909,7 +909,7 @@ $notification_list=getNotificationList();
                                   </div>
                                   <div>
                                     <p>
-                                      {{$inner_data['event_name']}}
+                                      <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}}</a>
                                       <!-- <span><strong>Wall</strong></span> -->
                                     </p>
                                     @if($inner_data['read']=="0")
@@ -1032,7 +1032,7 @@ $notification_list=getNotificationList();
                                       <div>
                                         <h3>
                                           {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                                          <span> Accepted your invitation to co-host <span style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </span></span>
+                                          <span> Accepted your invitation to co-host <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
                                         </h3>
                                         <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
                                       </div>
