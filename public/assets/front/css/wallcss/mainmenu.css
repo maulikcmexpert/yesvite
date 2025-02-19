@@ -3338,6 +3338,24 @@
         height: calc(100% - 0px);
         top: 0px;
     }
+
+    .supportive-home-wrp .responsive-calender-month-wrp{
+        display: inline-block;
+    }
+    
+    .supportive-home-wrp .calendar-heading{
+        display: block;
+    }
+    
+    .supportive-home-wrp .responsive-calendar .month h3:last-of-type{
+        display: inline-block !important;
+    }
+    .supportive-home-wrp .responsive-calendar .month h3{
+
+    }
+    .today-btn-home{
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 991px) {
