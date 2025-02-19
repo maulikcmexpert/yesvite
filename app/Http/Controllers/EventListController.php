@@ -2582,7 +2582,7 @@ class EventListController extends BaseController
 
     public function store_rsvp(Request $request)
     {
-        // dd($request);
+        dd(1);
         try {
             $userId = $request->rsvp_user_id;
             $eventId = $request->rsvp_event_id;
@@ -2607,7 +2607,6 @@ class EventListController extends BaseController
                     $rsvp_attempt =  'yes_to_no';
                 }
 
-                // dd($adults,$kids,$rsvpSent);
 
                 if ($rsvpSentAttempt == "1" && $rsvp_status == "1") {
                     if ($adults==$rsvpSent->adults && $kids==$rsvpSent->kids){
