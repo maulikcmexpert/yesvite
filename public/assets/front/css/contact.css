@@ -901,6 +901,20 @@ ul.listing li span {
         max-width: 100%;
     }
 
+    #myModal .modal-content{
+        margin: 0px !important;
+        position: fixed;
+        bottom: 0;
+    }
+    #myModal .modal-body{
+        padding-top: 15px !important;
+        padding-bottom: 0px !important;
+    }
+    #save_edit_contact{
+        width: 100%;
+        max-width: 100%;
+    }
+
 }
 
 @media only screen and (max-width:424px) {

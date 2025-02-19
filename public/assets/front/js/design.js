@@ -1778,7 +1778,11 @@ async function bindData(current_event_id) {
             }, 1000);
         });
     }, 1000);
-
+    $(".sp-input").on("change",function(){
+        var color = $(this).val();
+        console.log(color)
+        changeColor(color);
+    })
     // Initialize the color picker
     $("#color-picker").spectrum({
         type: "flat",
@@ -1804,7 +1808,7 @@ async function bindData(current_event_id) {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        //console.log("before update");
+        console.log("before update");
 
         //console.log(activeObject);
         if (!activeObject) {
@@ -1879,7 +1883,7 @@ async function bindData(current_event_id) {
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function (e) {
         e.stopPropagation();
-        //console.log(123);
+        console.log(123);
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             //console.log(activeObject.type);
@@ -1887,15 +1891,6 @@ async function bindData(current_event_id) {
         }
     });
 
-
-    // Prevent color change if no text box is selected
-    $(document).on("click", "#color-picker", function (e) {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            //console.log(activeObject.type);
-            updateColorPicker(); // Update picker when the selected color type changes
-        }
-    });
     // Load background image and make it non-draggable
     document
         .getElementById("image")
