@@ -47,7 +47,7 @@
                         var canvasElement = document.getElementById('imageEditor1');
                         canvasElement.setAttribute('data-canvas-id', data.id);
                         // Load background image (imagePath)
-                        if (data.imagePath) {                           
+                        if (data.imagePath) {
 
                         fabric.Image.fromURL(data.imagePath, function (img) {
                             img.crossOrigin = "anonymous";
@@ -618,7 +618,7 @@
                                                         var filedimage = data.imagePath;
                                                         // console.log({
                                                         //     filedimage
-                                                        // });  
+                                                        // });
 
                                                         img.set({
 
@@ -875,7 +875,7 @@
                                                     var filedimage = data.imagePath;
                                                     // console.log({
                                                     //     filedimage
-                                                    // });  
+                                                    // });
 
                                                     img.set({
 
@@ -1087,7 +1087,7 @@
 
 
                                         canvas.add(textElement);
-                                        
+
 
                                         // Event Listener to get and update the fontSize during dragging/moving
                                         canvas.on('object:scaling', function(e) {
@@ -1136,7 +1136,7 @@
 
 
                             });
-                           
+
                             canvas.renderAll();
                         } else {
                             showStaticTextElements();
@@ -1503,8 +1503,8 @@
         //         updateTextboxWidth(activeObject);
         //     }
         // };
-       
-  
+
+
         const setLetterSpacing = () => {
             const sliderValue = parseFloat(letterSpacingRange.value); // Ensure it's a number
             const percentageValue = (sliderValue / 500) * 100; // Normalize to percentage
@@ -1554,7 +1554,7 @@
             const newValue = parseFloat(lineHeightRange.value);
             lineHeightInput.value = newValue;
             lineHeightTooltip.innerHTML = `<span>${newValue}</span>`;
-            
+
             const activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === 'textbox') {
                 addToUndoStack(canvas);
@@ -1674,7 +1674,11 @@
                 }, 1000)
             })
         }, 1000)
-
+        $(document).on("change",".sp-input",function(){
+        var color = $(this).val();
+        console.log(color)
+        changeColor(color);
+    })
         // Initialize the color picker
         $('#color-picker').spectrum({
             type: "flat",
@@ -1683,6 +1687,11 @@
             allowEmpty: true, // Allows setting background to transparent
             showAlpha: true, // Allows transparency adjustment
             preferredFormat: "hex",
+            move: function (color) {
+            if (color) {
+                changeColor(color.toHexString()); // Apply color in real-time
+            }
+        },
             change: function(color) {
                 if (color) {
                     changeColor(color.toHexString()); // Use RGB string for color changes
@@ -1702,9 +1711,9 @@
             }
 
             if (activeObject.type == 'textbox') {
-                clrcanvas = canvas.toJSON(); // Store the current state of the canvas              
+                clrcanvas = canvas.toJSON(); // Store the current state of the canvas
                 if (selectedColorType == 'font') {
-                    activeObject.set('fill', selectedColor); // Change font color                    
+                    activeObject.set('fill', selectedColor); // Change font color
                 } else if (selectedColorType == 'background') {
                     activeObject.set('backgroundColor', selectedColor); // Change background color
                 }
@@ -2084,7 +2093,7 @@
 
 
                     // textData.push({
-                        
+
                     //     text: obj.text,
                     //     left: obj.left,
                     //     top: obj.top,
@@ -2115,7 +2124,7 @@
                         fill: obj.fill,
                         centerX: centerPoint.x * scaleX, // Scale back center position
                         centerY: centerPoint.y * scaleY,
-                        text: obj.text, 
+                        text: obj.text,
                         dx: obj.left * scaleX, // Calculate dx
                         dy: obj.top * scaleX, // Calculate dy
                         backgroundColor: obj.backgroundColor,
@@ -2232,7 +2241,7 @@
 
         function saveTextDataToDatabase() {
 
-            // hideStaticTextElements(); 
+            // hideStaticTextElements();
             var textData = getTextDataFromCanvas();
             var textElements = textData[0].textElements;
             console.log(textData[0].textElements);
@@ -2304,8 +2313,8 @@
                         window.location.href = "{{URL::to('/admin/create_template')}}";
                     }
                 });
-          
-            
+
+
             // window.location.href = "{{URL::to('/admin/create_template')}}";
 
                 })
@@ -2433,7 +2442,7 @@
         });
 
         // Undo and Redo actions (basic implementation)
-        
+
 
         function setControlVisibilityForAll() {
             canvas.getObjects().forEach((obj) => {
@@ -2745,7 +2754,7 @@
             }
         }
 
-        
+
 
         document.getElementById('saveButton').addEventListener('click', function() {
             // alert();
@@ -2817,7 +2826,7 @@
             $(".design-sidebar-action").removeClass("activated");
             $(this).addClass("activated");
         }
-        
+
     })
 
     $(document).on("click", ".close-btn", function() {
