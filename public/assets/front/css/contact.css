@@ -889,6 +889,8 @@ ul.listing li span {
     }
     #myModal1 .modal-content{
         margin: 0px !important;
+        position: fixed;
+        bottom: 0;
     }
 
 }
