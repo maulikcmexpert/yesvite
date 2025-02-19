@@ -2582,7 +2582,6 @@ class EventListController extends BaseController
 
     public function store_rsvp(Request $request)
     {
-        dd(1);
         try {
             $userId = $request->rsvp_user_id;
             $eventId = $request->rsvp_event_id;
