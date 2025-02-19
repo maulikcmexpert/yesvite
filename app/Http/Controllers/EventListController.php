@@ -637,10 +637,10 @@ class EventListController extends BaseController
 
         // dd($eventList);
         // return compact('filter','eventList','eventPasttList','eventDraftdata');
-        $js = ['event'];
+        // $js = ['event'];
         $title = 'Events';
         $page = 'front.events';
-        return view('layout', compact('title', 'page', 'js', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
+        return view('layout', compact('title', 'page', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
     }
 
     public function evenGoneTime($enddate)
