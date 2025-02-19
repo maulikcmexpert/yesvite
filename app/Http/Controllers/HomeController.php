@@ -389,12 +389,11 @@ class HomeController extends BaseController
             $imagecount = $totalTextDataCount;
 
             $title = 'Home';
-            $js = ['event'];
+            // $js = ['event'];
             $page = 'front.home';
             return view('layout', compact(
                 'title',
                 'page',
-                'js',
                 'profileData',
                 'eventList',
                 'draftEventArray',
