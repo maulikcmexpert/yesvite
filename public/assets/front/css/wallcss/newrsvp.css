@@ -1325,6 +1325,11 @@ label.error {
     margin-right: 10px !important;
 }
 
+#openGoogle{
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
