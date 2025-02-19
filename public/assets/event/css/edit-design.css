@@ -1270,7 +1270,7 @@
         height: 90vh;
     }
 
-    .choose-design-sidebar.design-sidebar_2{
+    .choose-design-sidebar{
         right: -200% !important;
         width: 0px !important;
     }
