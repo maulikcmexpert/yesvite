@@ -2607,7 +2607,7 @@ class EventListController extends BaseController
                     $rsvp_attempt =  'yes_to_no';
                 }
 
-                dd($adults,$kids,$rsvpSent->adults);
+                dd($adults,$kids,$rsvpSent->adults,$rsvpSent->kids);
 
                 if ($rsvpSentAttempt == "1" && $rsvp_status == "1") {
                     if ($adults==$rsvpSent->adults && $kids==$rsvpSent->kids){
