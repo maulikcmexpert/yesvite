@@ -605,6 +605,11 @@ display:none;}
     text-align: center;
     font-family: var(--SFProDisplay-Semibold);
 }
+
+.rsvp-hosted-by-date-time-wrp .add-calender:focus{
+    border: 1px solid var(--border) !important;
+}
+
 .rsvp-hosted-by-date-time-wrp .add-calender svg {
     width: 16px;
     height: 16px;
