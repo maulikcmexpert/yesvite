@@ -578,10 +578,7 @@ $(document).on("click", ".close-btn", function () {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
-    $("#choose-design-sidebar").css({
-        "width": "0px",
-        "right": "-200%" // Moves sidebar out of view
-    });
+
 });
 
 $(document).on("click", ".edit_design_tem", function (e) {
