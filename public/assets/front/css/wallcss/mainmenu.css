@@ -3351,7 +3351,7 @@
         display: inline-block !important;
     }
     .supportive-home-wrp .responsive-calendar .month h3{
-
+        width: 50%;
     }
     .today-btn-home{
         display: none;
