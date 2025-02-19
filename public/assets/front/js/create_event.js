@@ -1487,6 +1487,9 @@ function updateEventDate() {
     $(".activity_bar").children().not(".toggle-wrp").remove();
 
     if (selectedDates.size > 0) {
+        var activities = {};
+        eventData.activity = {};
+        var total_activities = 0;
         set_activity_html(selectedDates);
     }
 }
@@ -1501,7 +1504,6 @@ initializeDatePicker(
         $("#start-event-date").val(formattedDate); // Show date after selection
         $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
         $("#rsvp-by-date").val("");
-        eventData.activity = {};
         let endPicker = $("#end-event-date").data("daterangepicker");
         endPicker.setStartDate(moment(selectedDate).add(0, "days"));
         endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
@@ -1519,6 +1521,7 @@ initializeDatePicker(
     "#end-event-date",
     { minDate: moment() },
     function (selectedDate) {
+        eventData.activity = {};
         let formattedDate = selectedDate.format("MM-DD-YYYY");
         $("#end-event-date").val(formattedDate); // Show date after selection
         selectedDates.add(formattedDate);
