@@ -1879,7 +1879,7 @@ async function bindData(current_event_id) {
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function (e) {
         e.stopPropagation();
-        //console.log(123);
+        console.log(123);
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             //console.log(activeObject.type);
@@ -1887,16 +1887,6 @@ async function bindData(current_event_id) {
         }
     });
 
-
-    // Prevent color change if no text box is selected
-    $(document).on("click", ".sp-thumb-el", function (e) {
-        alert();
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            //console.log(activeObject.type);
-            updateColorPicker(); // Update picker when the selected color type changes
-        }
-    });
     // Load background image and make it non-draggable
     document
         .getElementById("image")
