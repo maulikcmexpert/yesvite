@@ -596,7 +596,7 @@ display:none;}
     padding: 12px 24px;
     border-radius: 8px;
     background-color: transparent !important;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border) !important;
     color: var(--secondary-black);
     transition: 0.5s;
     font-size: 16px;
