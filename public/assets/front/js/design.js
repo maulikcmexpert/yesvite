@@ -2279,9 +2279,9 @@ async function bindData(current_event_id) {
     }
 
     $(document).on('click', '.main-content-right', function (e) {
-
+console.log(e);
         let target = e.target;
-        if (target.classList && (target.classList.contains("upper-canvas") || target.classList.contains("design-sidebar-action"))) {
+        if (target.classList && (target.classList.contains("upper-canvas") || target.classList.contains("design-sidebar-action" ||   target.id === "addTextButton"))) {
             return; // Do nothing if clicked on these elements
         }
 
