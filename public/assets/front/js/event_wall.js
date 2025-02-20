@@ -184,7 +184,7 @@ function uploadStoryImage(eventId, userId) {
                     if (listItem) {
                         listItem.classList.remove("new-story"); // Optionally, remove the 'new-story' class
                     }
-                }, 5000); // Adjust the timeout duration as needed
+                }, 10000); // Adjust the timeout duration as needed
             }
         },
         error: function (error) {
