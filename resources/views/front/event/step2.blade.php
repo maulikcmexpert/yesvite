@@ -447,13 +447,17 @@
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
             $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function() {
-                let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
+                // let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
 
-                alert(checkedCheckboxes); // Display count of checked checkboxes
+                // alert(checkedCheckboxes); // Display count of checked checkboxes
 
-                if (checkedCheckboxes == 0) {
-                    $('.categoryChecked_' + categoryId).prop('checked', false);
-                    $(`.image-item[data-category-id="${categoryId}"]`).hide();
+                // if (checkedCheckboxes == 0) {
+                    $('.categoryChecked_' + categoryIds).prop('checked', false);
+                    // $(`.image-item[data-category-id="${subcategoryIds}"]`).hide();
+                // }
+                  if (checkedCheckboxes == 0) {
+                    $('.categoryChecked_' + categoryIds).prop('checked', false);
+                    $(`.image-item[data-category-id="${categoryIds}"]`).hide();
                 }
             });
 
