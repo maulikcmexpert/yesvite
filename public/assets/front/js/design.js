@@ -2277,12 +2277,18 @@ async function bindData(current_event_id) {
             canvas.renderAll();
         }
     }
-$(document).on('click','.design-seting',function(){
-    canvas.discardActiveObject();
-    canvas.renderAll();
+removeActive=0;
+$(document).on('click','.main-content-wrp',function(){
+    clearTimeout(removeActive);
+    removeActive = setTimeout(function(){
+        canvas.discardActiveObject();
+        canvas.renderAll();
+    },800)
+
 })
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
+        clearTimeout(removeActive);
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
@@ -2297,6 +2303,7 @@ $(document).on('click','.design-seting',function(){
             canvas.discardActiveObject();
             canvas.renderAll();
         }
+        clearTimeout(removeActive);
     });
 
     canvas.on("mouse:up", function (options) {
