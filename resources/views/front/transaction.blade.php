@@ -32,7 +32,7 @@
                                 $color = $last_month_comparison_percentage < 0 ? 'red' : 'green';
                                 $arrow=$last_month_comparison_percentage < 0 ? '<i class="fa-solid fa-arrow-down"></i>' : '<i class="fa-solid fa-arrow-up"></i>';
                             @endphp
-                            <h6><span style="color: <?= $color ?>;">{{$arrow}} {{$data['last_month_comparison_percentage']}}%</span>Compared to {{$data['last_month_balance']}} credits last month</h6>
+                            <h6><span style="color: <?= $color ?>;">{!! $arrow !!} {{$data['last_month_comparison_percentage']}}%</span>Compared to {{$data['last_month_balance']}} credits last month</h6>
                         </div>
                         <canvas id="creditChart"></canvas>
                         <div class="credits_balance_used_wrp">
