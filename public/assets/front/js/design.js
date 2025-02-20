@@ -532,9 +532,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                                "drag" &&
+                                            "drag" &&
                                             event.transform.actionPerformed ===
-                                                undefined
+                                            undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -791,8 +791,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
+                                    element.linethrough == "true" ||
+                                    element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -940,7 +940,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                        undefined
+                                    undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1111,12 +1111,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                            defaultShape
+                                                        defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                                currentShapeIndex
+                                                            currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1129,10 +1129,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                    "drag" &&
+                                                                "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                    undefined
+                                                                undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1141,7 +1141,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                            currentShapeIndex
+                                                                        currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1153,7 +1153,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                    currentShapeIndex
+                                                                currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1527,7 +1527,7 @@ async function bindData(current_event_id) {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase() ===
+                        word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -1903,7 +1903,7 @@ async function bindData(current_event_id) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) {};
+                reader.onload = function (e) { };
                 reader.readAsDataURL(file);
             }
         });
@@ -2277,30 +2277,22 @@ async function bindData(current_event_id) {
             canvas.renderAll();
         }
     }
-removeActive=0;
-$(document).on('click', '.main-content-wrp', function (e) {
-    console.log("Clicked Element:", e.target);
 
-    let targetClasses = e.target.classList;
+    $(document).on('click', '.main-content-wrp', function (e) {
 
+        let targetClasses = e.target.classList;
+        if (targetClasses.contains("upper-canvas")) {
+            return;
+        }
 
-    if (targetClasses.contains("upper-canvas") ) {
-        console.log("Clicked on upper-canvas, canvas, or new - Ignoring.");
-        return;
-    }
-
-
-    clearTimeout(removeActive);
-    removeActive = setTimeout(function () {
-        console.log("No interaction detected, removing active object.");
         canvas.discardActiveObject();
         canvas.renderAll();
-    },500);
-});
+
+    });
 
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
-        clearTimeout(removeActive);
+
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
@@ -2315,7 +2307,7 @@ $(document).on('click', '.main-content-wrp', function (e) {
             canvas.discardActiveObject();
             canvas.renderAll();
         }
-        clearTimeout(removeActive);
+
     });
 
     canvas.on("mouse:up", function (options) {
@@ -2953,7 +2945,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) { },
     });
 }
 function isJSON(str) {
