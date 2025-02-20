@@ -1042,6 +1042,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1106,6 +1107,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1170,6 +1172,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1235,6 +1238,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1299,6 +1303,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1364,6 +1369,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1395,6 +1401,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1424,6 +1431,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1523,6 +1531,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 400px !important;
+        min-width: 400px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1561,6 +1570,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 370px !important;
+        min-width: 370px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1599,6 +1609,7 @@
     .main-content-sidebar {
         width: 100%;
         max-width: 330px;
+        min-width: 330px;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
@@ -1621,6 +1632,19 @@
     }
 }
 
+
+
+@media only screen and (max-width: 1399px) {
+    .guest-wrp.side-guest-wrp .invite-pro{
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+    .guest-wrp.side-guest-wrp .coin-invite-main{
+        margin-left: 0px !important;
+    }
+    
+}
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
