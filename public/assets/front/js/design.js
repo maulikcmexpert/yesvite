@@ -2814,7 +2814,7 @@ function getTextDataFromCanvas() {
                 underline: obj.underline,
                 linethrough: obj.linethrough,
                 date_formate: obj.date_formate, // Include date_formate if set
-                rotation: parseFloat(obj.angle),
+                rotation: parseFloat(obj.angle).toFixed(2),
             });
         }
 
