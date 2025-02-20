@@ -2259,7 +2259,7 @@ async function bindData(current_event_id) {
             options.target?._objects &&
             options.target?._objects.length > 1
         ) {
-            //console.log('Multiple objects selected:', options.target);
+            console.log('Multiple objects selected:', options.target);
             canvas.discardActiveObject();
             canvas.renderAll(); // Ensure the canvas is refreshed
         }
@@ -2267,9 +2267,14 @@ async function bindData(current_event_id) {
         const activeObjects = canvas.getActiveObjects(); // Get all selected objects
         //console.log(activeObjects)
         if (activeObjects.length > 1) {
-            //console.log('Multiple objects selected:', activeObjects);
+            console.log('Multiple objects selected:', activeObjects);
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
+        }
+        if (!options.target) {
+            console.log("Clicked outside, unselecting textboxes");
+            canvas.discardActiveObject();
+            canvas.renderAll();
         }
     }
 
@@ -2293,7 +2298,7 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
-        canvas.renderAll();
+
     });
 
     document
