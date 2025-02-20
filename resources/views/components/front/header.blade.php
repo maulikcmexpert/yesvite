@@ -1,6 +1,5 @@
 <title>{{$title}}</title>
 <meta charset="UTF-8">
-<meta name="google-adsense-account" content="ca-pub-1693502653295820">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Latest compiled and minified CSS -->
