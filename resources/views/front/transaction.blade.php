@@ -1,8 +1,7 @@
 {{-- {{dd($transcation);}} --}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1693502653295820"
-     crossorigin="anonymous"></script>
+
 <!-- demo -->
 <ins class="adsbygoogle"
      style="display:block"
