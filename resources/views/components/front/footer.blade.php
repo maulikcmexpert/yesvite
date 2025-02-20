@@ -326,15 +326,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 <script src="{{ asset('assets/front/js/dom-to-image.min.js') }}"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1693502653295820"
-     data-ad-slot="2645012075"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
 
 {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
