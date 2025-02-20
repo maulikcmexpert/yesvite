@@ -2281,7 +2281,7 @@ async function bindData(current_event_id) {
     $(document).on('click', '.main-content-right', function (e) {
 
         let targetClasses = e.target.classList;
-        if (targetClasses.contains("upper-canvas")) {
+        if (targetClasses.contains("upper-canvas") || targetClasses.contains("edit-images-button-inner") ) {
             return;
         }
 
