@@ -984,6 +984,11 @@
 
     .guest-main-content .guest-wrapper .invite-pro .invite-left{
         max-width: 100% !important;
+        padding: 2px 7px 1px 7px;
+    }
+    
+    .guest-main-content .guest-wrapper .invite-pro .coin-invite-wrp{
+        height: 31px;
     }
 
     .guest-main-content .guest-wrapper .invite-pro .coin-invite-main{

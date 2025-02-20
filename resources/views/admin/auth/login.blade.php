@@ -36,13 +36,13 @@
 
     <div class="card-body">
 
-      <form action="{{URL::to('admin/login')}}" method="post" id="loginForm">
+      <form action="{{URL::to('admin/login')}}" method="post" id="loginForm" autocomplete="off">
 
         @csrf
 
         <div class="input-group mb-2">
 
-          <input name="email" type="email" value="{{ (old('email')!='')?old('email'):Cookie::get('email') }}" class="form-control" placeholder="Email">
+          <input name="email" type="email" value="{{ old('admin_email', Cookie::get('admin_email')) }}" class="form-control" placeholder="Email" autocomplete="off">
 
           <div class="input-group-append">
 
@@ -60,7 +60,7 @@
 
         <div class="input-group mb-2">
 
-          <input name="password" type="password" value="{{ (old('password')!='')?old('password'):Cookie::get('password') }}" class="form-control" placeholder="Password">
+          <input name="password" type="password" value="{{ old('admin_email', Cookie::get('admin_password')) }}" class="form-control" placeholder="Password" autocomplete="off">
 
           <div class="input-group-append">
 
@@ -82,7 +82,7 @@
 
             <div class="icheck-primary">
 
-              <input type="checkbox" id="remember" name="remember" {{(Cookie::get('email')!='')?'CHECKED':''}}>
+              <input type="checkbox" id="remember" name="remember" {{(Cookie::get('admin_email')!='')?'checked':''}}>
 
               <label for="remember">
 
