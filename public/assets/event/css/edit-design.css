@@ -188,7 +188,7 @@
     color: var(--secondryColor);
 }
 
-.footer-buttons {
+/* .footer-buttons {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -201,6 +201,24 @@
     background-color: var(--white);
     z-index: 5;
     border-radius: 0px 0px 20px 20px;
+} */
+
+.footer-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: fixed;
+    bottom: 17px;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 24px;
+    background-color: var(--white);
+    z-index: 5;
+    border-radius: 0px 0px 20px 20px;
+    width: 100%;
+    max-width: 347px;
+    left: calc(100% - 381px);
 }
 
 .edit-images-button-more button svg {
