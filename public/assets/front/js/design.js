@@ -2277,7 +2277,10 @@ async function bindData(current_event_id) {
             canvas.renderAll();
         }
     }
-
+$(document).on('click','.design-seting',function(){
+    canvas.discardActiveObject();
+    canvas.renderAll();
+})
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
         if (options.target && options.target.type === "textbox") {
