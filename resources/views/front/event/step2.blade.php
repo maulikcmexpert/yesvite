@@ -443,13 +443,12 @@
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
             let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
-            $(checkedCheckboxes).each(
 alert(checkedCheckboxes)
             if(checkedCheckboxes == 0){
                 $('.categoryChecked_'+categoryIds).prop('checked',false);
                 $(`.image-item[data-category-id="${categoryIds}"]`).hide();
             }
-        )
+
             if ($("#search_design_category").val() == "") {
                 return
             }
