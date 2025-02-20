@@ -2278,7 +2278,9 @@ async function bindData(current_event_id) {
         }
     }
 removeActive=0;
-$(document).on('click','.main-content-wrp',function(){
+$(document).on('click','.main-content-wrp',function(e){
+    console.log(e);
+
     clearTimeout(removeActive);
     removeActive = setTimeout(function(){
         canvas.discardActiveObject();
