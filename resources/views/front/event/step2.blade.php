@@ -188,7 +188,7 @@
 
             <div class="row list_all_design_catgeory_new">
                 <div class="d-flex align-items-center mb-2" style="gap: 15px">
-                    <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left"
+                    <p id="allchecked" data-categoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
                             style="color: #212529; cursor: pointer;"></i></p>
                     <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
@@ -397,6 +397,7 @@
                 const category_name = $(this).data("category_name");
                 $("#category_name").show();
                 $("#allchecked").show();
+                $("#allchecked").attr("data-categoryid", categoryId);
                 $("#category_name").text(category_name);
 
                 // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
@@ -436,7 +437,11 @@
                         var visibleItems = $(".all_designs:visible").length;
                         $(".total_design_count").text(visibleItems + " Items");
                     }
-                );
+            );
+
+            let totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
+            let checkedCheckboxes = $('input[name="design_subcategory"]:not(#Allcat):checked').length;
+
             if ($("#search_design_category").val() == "") {
                 return
             }
