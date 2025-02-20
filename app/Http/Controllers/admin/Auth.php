@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Cookie;
+// use Cookie;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+
 use Illuminate\Support\Facades\DB;
 use App\Mail\forgotpasswordMail;
 use App\Models\User;
@@ -40,6 +43,20 @@ class Auth extends Controller
         if (Hash::check($req->input('password'), $adminData->password)) {
 
             if ($adminData) {
+
+
+                $remember = $req->has('remember');
+                if ($remember) {
+                    Cookie::queue('admin_email', $adminData->email, 120);
+                    Cookie::queue('admin_password', $req->password, 120);
+                } else {
+                    Cookie::queue(Cookie::forget('admin_email'));
+                    Cookie::queue(Cookie::forget('admin_password'));
+
+                    Cookie::forget('admin_email');
+                    Cookie::forget('admin_password');
+                }
+
                 $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
                 $saveOtp->otp = "111111";
