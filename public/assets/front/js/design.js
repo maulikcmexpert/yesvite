@@ -700,10 +700,7 @@ async function bindData(current_event_id) {
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-                console.log({ canvasWidth });
-                console.log({ canvasHeight });
-                console.log(img.width);
-                console.log(img.height);
+
                 img.set({
                     left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
                     top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
@@ -772,8 +769,7 @@ async function bindData(current_event_id) {
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
 
-                        console.log({ left });
-                        console.log({ top });
+                        console.log(element.width);
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         fontSize = Number(fontSize).toFixed(0);
                         let width = (textWidth + 25) * scaleX; // Scale text box width
@@ -782,7 +778,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width: parseInt(element.width) || width, // Default width if not provided
+                            width: width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
