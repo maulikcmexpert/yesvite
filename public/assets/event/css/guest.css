@@ -607,19 +607,19 @@
 /* ============ responsive ============ */
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
-        max-width: 100%;
+        max-width: 1000px;
     }
 }
 
 @media only screen and (max-width: 1600px) {
     .guest-wrapper {
-        max-width: 100%;
+        max-width: 800px;
     }
 }
 
 @media only screen and (max-width: 1500px) {
     .guest-wrapper {
-        max-width: 100%;
+        max-width: 750px;
     }
 }
 
