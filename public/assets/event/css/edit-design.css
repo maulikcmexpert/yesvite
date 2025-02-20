@@ -988,6 +988,12 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.new_event_detail_form{
+    height: 100vh;
 }
 
 
