@@ -387,10 +387,10 @@
                 const subcategoryId = $(this).data("subcategory-id");
                 $(`.categoryChecked_${categoryId}:checked`).each(function () {
                     const subcategoryId = $(this).data("subcategory-id");
-                    alert(subcategoryId)
+                    $('#subcategory' + subcategoryId).prop('checked', true)
                 });
 
-                $('.subcategory_' + categoryId).prop('checked', true)
+                // $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const category_name = $(this).data("category_name");
                 $("#category_name").show();
