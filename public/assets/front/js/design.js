@@ -786,7 +786,7 @@ async function bindData(current_event_id) {
                             fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             lineHeight: element.lineHeight || 2,
-                            letterSpacing: 0,
+                            letterSpacing: element.letterSpacing || 0,
                             linethrough:
                                 element.linethrough == true ||
                                 element.linethrough == "true" ||
