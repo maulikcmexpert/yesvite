@@ -104,18 +104,20 @@
                                 </div>
                                 <div class="filter-categories">
                                     <div class="accordion" id="accordionExample">
-    
+
                                         @foreach ($categories as $category)
-                                        <div class="accordion-item category category_{{$category->id}}">
-                                                 <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                            <div class="accordion-item category category_{{ $category->id }}">
+                                                <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                     <button class="accordion-button" type="button"
                                                         data-bs-toggle="collapse"
-                                                        data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                                                        data-bs-target="#collapse{{ $category->id }}"
+                                                        aria-expanded="true"
                                                         aria-controls="collapse{{ $category->id }}">
                                                         {{ $category->category_name }}
                                                     </button>
                                                 </h2>
-                                                <div id="collapse{{ $category->id }}" class="accordion-collapse collapse"
+                                                <div id="collapse{{ $category->id }}"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="heading{{ $category->id }}"
                                                     data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
@@ -128,8 +130,10 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input subcategory_{{$category->id}}"
-                                                                            name="design_subcategory_new" type="checkbox"
+                                                                        <input
+                                                                            class="form-check-input subcategory_{{ $category->id }}"
+                                                                            name="design_subcategory_new"
+                                                                            type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -141,7 +145,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-    
+
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +160,7 @@
             </label>
             <div class="row list_all_design_catgeory">
 
-                
+
                 @foreach ($categories as $category)
                     @php
                         $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
@@ -230,7 +234,7 @@
                 const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
                 window.history.replaceState(null, '', newUrl);
             }
-        
+
 
             // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
             $('input[name="design_subcategory"]').prop('checked', true);
@@ -339,7 +343,7 @@
                 $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
-                if(search_value==''){
+                if (search_value == '') {
                     $('input[name="design_subcategory"]').prop('checked', true)
                     $("#Allcat").prop("checked", true);
                 }
@@ -404,7 +408,7 @@
             $("#category_name").hide();
             $("#allchecked").hide();
             // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
-            $("#Allcat").prop('checked', true)
+            // $("#Allcat").prop('checked', true)
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
@@ -480,19 +484,19 @@
             }
         );
 
-        $("#resetCategoriesNew").on("click", function (e) {
-       
-        
-        
-       e.preventDefault();
-       $("#Allcat").prop("checked", false);
-       $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
-           "checked",
-           false
-       );
-       $(".image-item-new").hide();
-       var visibleItems = $(".all_designs:visible").length;
-       $(".total_design_count").text(visibleItems + " Items");
-   });
+        $("#resetCategoriesNew").on("click", function(e) {
+
+
+
+            e.preventDefault();
+            $("#Allcat").prop("checked", false);
+            $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
+                "checked",
+                false
+            );
+            $(".image-item-new").hide();
+            var visibleItems = $(".all_designs:visible").length;
+            $(".total_design_count").text(visibleItems + " Items");
+        });
     </script>
 @endpush
