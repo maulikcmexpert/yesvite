@@ -445,28 +445,28 @@
 
 
 
-            let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+//             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
-    let checkedCheckboxes = $('input[name="design_subcategory_new"]:checked').length;
-    alert("Checked Count: " + checkedCheckboxes);
-    console.log("Checked Elements:", checkedCheckboxes);
-    console.log("Checked Count:", checkedCheckboxes.length);
+//     let checkedCheckboxes = $('input[name="design_subcategory_new"]:checked').length;
+//     alert("Checked Count: " + checkedCheckboxes);
+//     console.log("Checked Elements:", checkedCheckboxes);
+//     console.log("Checked Count:", checkedCheckboxes.length);
 
 
 
-// alert(`Total: ${totalCheckboxes}, Checked: ${checkedCheckboxes}`);
+// // alert(`Total: ${totalCheckboxes}, Checked: ${checkedCheckboxes}`);
 
-            // if(checkedCheckboxes == 0){
-            //     $('.categoryChecked_'+categoryIds).prop('checked',false);
-            //     $(`.image-item[data-category-id="${categoryIds}"]`).hide();
-            // }
+//             // if(checkedCheckboxes == 0){
+//             //     $('.categoryChecked_'+categoryIds).prop('checked',false);
+//             //     $(`.image-item[data-category-id="${categoryIds}"]`).hide();
+//             // }
 
-            $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function () {
-alert();
-            $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
-            .show();
-            $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
-        });
+//             $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function () {
+// alert();
+//             $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
+//             .show();
+//             $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
+//         });
 
             if ($("#search_design_category").val() == "") {
                 return
