@@ -1,6 +1,6 @@
 .guest-wrapper {
     width: 100%;
-    max-width: 100%;
+    max-width: 1150px;
     height: 100vh;
     position: sticky;
     margin-right: 20px;
@@ -46,6 +46,7 @@
 }
 
 .guest-content .contact-user {
+    
     border: none;
     padding: 0;
 }
