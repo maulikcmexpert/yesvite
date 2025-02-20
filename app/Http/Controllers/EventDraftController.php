@@ -74,11 +74,11 @@ class EventDraftController extends Controller
             //     );
 
             $title = 'Drafts';
-            $js = ['event'];
+            // $js = ['event'];
             $page = 'front.event_drafts';
             return view('layout', compact(
                 'title',
-                'page','js',
+                'page',
                             'profileData','eventDraftdata'
             )); 
         } catch (QueryException $e) {

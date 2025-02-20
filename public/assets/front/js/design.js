@@ -578,6 +578,7 @@ $(document).on("click", ".close-btn", function () {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
+
 });
 
 $(document).on("click", ".edit_design_tem", function (e) {
@@ -1209,7 +1210,7 @@ async function bindData(current_event_id) {
 
             fabric.Textbox.prototype.controls.deleteControl =
                 new fabric.Control({
-                    x: 0.1,
+                    x: 0.2,
                     y: -0.5,
                     offsetY: -20,
                     cursorStyle: "pointer",
@@ -1226,7 +1227,7 @@ async function bindData(current_event_id) {
                 });
 
             fabric.Textbox.prototype.controls.copyControl = new fabric.Control({
-                x: -0.1,
+                x: -0.2,
                 y: -0.5,
                 offsetY: -20,
                 cursorStyle: "pointer",
@@ -1542,6 +1543,7 @@ async function bindData(current_event_id) {
         }
     }
     $(".design-sidebar-action").click(function () {
+        $(".choose-design-sidebar").removeClass("ds");
         $(".design-sidebar-action").removeClass("activated");
         $(this).addClass("activated");
     });
@@ -1779,6 +1781,11 @@ async function bindData(current_event_id) {
         });
     }, 1000);
 
+    $(document).on("change",".sp-input",function(){
+        var color = $(this).val();
+        console.log(color)
+        changeColor(color);
+    })
     // Initialize the color picker
     $("#color-picker").spectrum({
         type: "flat",
@@ -1787,12 +1794,17 @@ async function bindData(current_event_id) {
         allowEmpty: true, // Allows setting background to transparent
         showAlpha: true, // Allows transparency adjustment
         preferredFormat: "hex",
+        move: function (color) {
+            if (color) {
+                changeColor(color.toHexString()); // Apply color in real-time
+            }
+        },
         change: function (color) {
             if (color) {
                 console.log("color");
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                //console.log("rgba")
+                console.log("rgba")
                 changeColor("#000000"); // Handle transparency by default
             }
         },
@@ -1804,7 +1816,7 @@ async function bindData(current_event_id) {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        //console.log("before update");
+        console.log("before update");
 
         //console.log(activeObject);
         if (!activeObject) {
@@ -1879,7 +1891,7 @@ async function bindData(current_event_id) {
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function (e) {
         e.stopPropagation();
-        //console.log(123);
+        console.log(123);
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             //console.log(activeObject.type);
@@ -1887,15 +1899,6 @@ async function bindData(current_event_id) {
         }
     });
 
-
-    // Prevent color change if no text box is selected
-    $(document).on("click", "#color-picker", function (e) {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            //console.log(activeObject.type);
-            updateColorPicker(); // Update picker when the selected color type changes
-        }
-    });
     // Load background image and make it non-draggable
     document
         .getElementById("image")

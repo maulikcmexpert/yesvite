@@ -1232,6 +1232,8 @@ $(document).on('click','.notification-rsvp-btn', function () {
                     $('#rsvp_yes').prop('checked',true);
                 }else{
                     $('#rsvp_no').prop('checked',true);
+                    $('.rsvp_minus_notify').prop('disabled',true);
+                    $('.rsvp_plus_notify').prop('disabled',true);
                 }
             }
             if(kids!=""){
@@ -1277,16 +1279,16 @@ $('#notification_rsvp_btn').on('click', function (e) {
        
     } else {
         // If no input is checked, show an alert
-        if (!$('.toast').length) {
+        // if (!$('.toast').length) {
             toastr.error('Please select RSVP');
-        }
+        // }
         return;
     }
     if(selectedValue=="1"){
         if(adults==0&&kids==0){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.error('Please select atleast one kid or adult');
-            }
+            // }
             return;
         }
         // if(adults=="0" && kids=="0"){
@@ -1310,7 +1312,7 @@ $('#notification_rsvp_btn').on('click', function (e) {
     }
     console.log(adults+' '+kids);
 
-  
+    $('#home_loader').css('display','flex');
 
     const formData = $('#notification_rsvp').serialize();
     $.ajax({
@@ -1322,28 +1324,56 @@ $('#notification_rsvp_btn').on('click', function (e) {
       data: formData,          
       success: function (response) { 
         if(response.status==3){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
-            }
+                $('#home_loader').css('display','none');
+            // }
         }       
         if(response.status==1){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
-                $('#rsvp_by_notification').modal('hide');
+                window.location.reload();
+                $('#home_loader').css('display','none');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
 
-            }
+                // $('#rsvp_by_notification').modal('hide');
+
+            // }
         }
         if(response.status==0){
-            if (!$('.toast').length) {
+            // if (!$('.toast').length) {
                 toastr.success(response.text);
-                $('#rsvp_by_notification').modal('hide');
+                window.location.reload();
+                $('#home_loader').css('display','none');
+                $('<div id="pageOverlay"></div>').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(255, 255, 255, 0)', // Transparent background
+                    zIndex: 9999
+                }).appendTo('body');
 
-            }
+                // $('#rsvp_by_notification').modal('hide');
+
+            // }
         }
+        $('#home_loader').css('display','none');
 
       },
       error: function (error) {
         toastr.error('Something went wrong. Please try again!');
+        $('#home_loader').css('display','none');
+
       },
     });
 

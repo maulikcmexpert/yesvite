@@ -161,7 +161,7 @@
                 </button>
             </div>
 
-            
+
             <div class="edit-images-button-inner format-edit-wrp">
                 <button class="design-sidebar-action" design-id="5" onclick="toggleSidebar('sidebar')">
                     <span>
@@ -258,8 +258,8 @@
             </div>
         </div>
 
-      
-        @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )    
+
+        @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )
         <div class="design-seting">
             <a href="#" class="d-flex previousImeg">
                 <span>
@@ -299,7 +299,7 @@
         @endif
     </div>
 
-    <div id="sidebar" class="sidebar choose-design-sidebar" style="right: 0px; width: 100%;">
+    <div id="sidebar" class="sidebar choose-design-sidebar ds" style="right: 0px; width: 100%;">
         <!-- =====fonts-family-options==== -->
         <div class="design-sidebar design-sidebar_2 setting-category-wrp choose-design-form activity-schedule-inner">
             <div class="d-flex align-items-center justify-content-between toggle-wrp new-event-sidebar-head">
@@ -314,7 +314,7 @@
                     </svg>
                 </button>
             </div>
-            
+
             @php
             $fonts = [
                 "AbrilFatface-Regular" => "AbrilFatface",
@@ -483,7 +483,7 @@
                     <label class="form-check-label" for="flexRadioDefaults">
                         Font Color
                     </label>
-                </div>               
+                </div>
             </div>
             <input id="color-picker" type="color" value="#276cb8" />
 
@@ -982,8 +982,8 @@
                 <button class="cmn-btn save-slider-image">Save</button>
                 <button class="cmn-btn update-slider-image" style="display:none;">Save</button>
 
-            </div> 
-            
+            </div>
+
         </div>
     </div>
 </main>

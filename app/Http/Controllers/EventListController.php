@@ -637,10 +637,10 @@ class EventListController extends BaseController
 
         // dd($eventList);
         // return compact('filter','eventList','eventPasttList','eventDraftdata');
-        $js = ['event'];
+        // $js = ['event'];
         $title = 'Events';
         $page = 'front.events';
-        return view('layout', compact('title', 'page', 'js', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
+        return view('layout', compact('title', 'page', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
     }
 
     public function evenGoneTime($enddate)
@@ -2582,7 +2582,6 @@ class EventListController extends BaseController
 
     public function store_rsvp(Request $request)
     {
-        // dd($request);
         try {
             $userId = $request->rsvp_user_id;
             $eventId = $request->rsvp_event_id;
@@ -2607,7 +2606,6 @@ class EventListController extends BaseController
                     $rsvp_attempt =  'yes_to_no';
                 }
 
-                // dd($adults,$kids,$rsvpSent);
 
                 if ($rsvpSentAttempt == "1" && $rsvp_status == "1") {
                     if ($adults==$rsvpSent->adults && $kids==$rsvpSent->kids){
