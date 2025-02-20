@@ -188,7 +188,7 @@
 
             <div class="row list_all_design_catgeory_new">
                 <div class="d-flex align-items-center mb-2" style="gap: 15px">
-                    <p id="allchecked" data-categoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
+                    <p id="allchecked" data-categoryid="0" data-subcategoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
                             style="color: #212529; cursor: pointer;"></i></p>
                     <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
                 </div>
@@ -398,6 +398,7 @@
                 $("#category_name").show();
                 $("#allchecked").show();
                 $("#allchecked").attr("data-categoryid", categoryId);
+                $("#allchecked").attr("data-subcategoryid", subcategoryId);
                 $("#category_name").text(category_name);
 
                 // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
@@ -408,10 +409,11 @@
 
         $(document).on('click', '#allchecked', function() {
             const categoryId =  $(this).attr('data-categoryid');
-            allCheckFun(categoryId)
+            const subcategoryId =  $(this).attr('data-subcategoryid');
+            allCheckFun(categoryId,subcategoryId)
         })
 
-        function allCheckFun(categoryIds) {
+        function allCheckFun(categoryIds,subcategoryIds) {
             $('input[name="design_subcategory_new"]').prop('checked', false)
             // $('input[name="design_subcategory"]').prop('checked', true)
             $(".categoryNew").show();
@@ -440,14 +442,21 @@
                     }
             );
 
-            let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+            // let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
-            let checkedCheckboxes = $(`.subcategory_${categoryIds}:not(#Allcat):checked`).length;
-alert(checkedCheckboxes)
-            if(checkedCheckboxes == 0){
-                $('.categoryChecked_'+categoryIds).prop('checked',false);
-                $(`.image-item[data-category-id="${categoryIds}"]`).hide();
-            }
+            // let checkedCheckboxes = $(`.subcategory_${categoryIds}:not(#Allcat):checked`).length;
+
+            // if(checkedCheckboxes == 0){
+            //     $('.categoryChecked_'+categoryIds).prop('checked',false);
+            //     $(`.image-item[data-category-id="${categoryIds}"]`).hide();
+            // }
+
+            $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function () {
+alert();
+            $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
+            .show();
+            $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
+        });
 
             if ($("#search_design_category").val() == "") {
                 return
