@@ -176,12 +176,12 @@ function uploadStoryImage(eventId, userId) {
                 // showStories(eventId, userId, true);
                 fetchStories(eventId, userId, true, "image");
                 // Set the border color to gray after viewing the story
-                setTimeout(() => {
+                // setTimeout(() => {
 
-                    if (listItem) {
-                        listItem.classList.remove("new-story"); // Optionally, remove the 'new-story' class
-                    }
-                }, 10000); // Adjust the timeout duration as needed
+                //     if (listItem) {
+                //         listItem.classList.remove("new-story"); // Optionally, remove the 'new-story' class
+                //     }
+                // }, 10000); // Adjust the timeout duration as needed
             }
         },
         error: function (error) {
@@ -538,6 +538,10 @@ function displayStoriesWithProgressBars(
                 showStory(index);
                 console.log("window index" + index);
             };
+        }
+        let listItem = document.getElementById(`profile-pic-${userId}`)?.closest(".wall-main-story-item");
+        if (listItem) {
+            listItem.classList.remove("new-story");
         }
     }
 
