@@ -1246,6 +1246,21 @@
     }
 }
 
+@media only screen and (min-width: 1600px){
+    .main-content-sidebar {
+        width: 100%;
+        max-width: 350px;
+        /* height: 100vh; */
+        height: 100%;
+        position: sticky;
+        top: 20px;
+        margin-right: 19px;
+    }
+    .guest-wrp.side-guest-wrp .invite-pro{
+        justify-content: center;
+    }
+}
+
 @media only screen and (min-width: 1400px){
     .main-content-sidebar {
         width: 100%;
