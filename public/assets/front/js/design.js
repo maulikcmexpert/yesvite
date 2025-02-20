@@ -2278,16 +2278,26 @@ async function bindData(current_event_id) {
         }
     }
 removeActive=0;
-$(document).on('click','.main-content-wrp',function(e){
-    console.log(e);
+$(document).on('click', '.main-content-wrp', function (e) {
+    console.log("Clicked Element:", e.target);
+
+    let targetClasses = e.target.classList;
+
+
+    if (targetClasses.contains("upper-canvas") ) {
+        console.log("Clicked on upper-canvas, canvas, or new - Ignoring.");
+        return;
+    }
+
 
     clearTimeout(removeActive);
-    removeActive = setTimeout(function(){
+    removeActive = setTimeout(function () {
+        console.log("No interaction detected, removing active object.");
         canvas.discardActiveObject();
         canvas.renderAll();
-    },800)
+    }, 800);
+});
 
-})
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
         clearTimeout(removeActive);
