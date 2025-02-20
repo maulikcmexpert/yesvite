@@ -64,7 +64,7 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input"
+                                                                        <input class="form-check-input categoryWiseCheckBox"
                                                                             name="design_subcategory" type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
@@ -89,7 +89,9 @@
                 </div>
                 <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
             </div>
-            <div style="display: none" class="filter-main-wrp subcategoryNew">
+
+
+            <div style="display: flex" class="filter-main-wrp subcategoryNew">
                 <div class="filters-drp">
                     <h5>Filter By</h5>
                     <div class="filter-dropdowns">
@@ -131,7 +133,7 @@
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
                                                                         <input
-                                                                            class="form-check-input subcategory_{{ $category->id }}"
+                                                                            class="form-check-input categoryWiseCheckBox subcategory_{{ $category->id }}"
                                                                             name="design_subcategory_new"
                                                                             type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
@@ -154,6 +156,8 @@
                 </div>
                 <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
             </div>
+
+
             <label for="" class="custome-designcategory">
                 Upload own design/card
                 <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png" />
@@ -381,7 +385,11 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
+
+
                 // $('.subcategory_' + categoryId).prop('checked', true)
+
+
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
                 const category_name = $(this).data("category_name");
