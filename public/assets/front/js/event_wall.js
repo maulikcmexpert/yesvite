@@ -497,6 +497,7 @@ function displayStoriesWithProgressBars(
 
         const { element, type } = storyElements[currentIndex];
         storyContent.appendChild(element);
+
         // console.log('progess'+ currentIndex);
         const progress = progressBarContainer.children[currentIndex].firstChild;
 
