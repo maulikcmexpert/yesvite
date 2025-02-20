@@ -1,8 +1,11 @@
 .edit-imag-main-content-wrp .setting-category-wrp {
-    padding: 16px 24px 90px 24px;
+    /* padding: 16px 24px 0px 24px; */
     /* overflow: hidden;
     overflow-y: auto; */
 }
+
+
+
 .activated{
     background-color: var(--primaryColor) !important;
 }
@@ -116,6 +119,14 @@
 .common-font-wrp {
     margin-bottom: 15px;
     border-bottom: 1px solid var(--headerBorder);
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: calc(100vh - 23vh);
+    padding: 0px 24px 0px 24px;
+}
+
+.new-event-sidebar-head{
+    padding: 16px 24px 0px 24px;
 }
 
 .common-font-wrp h3 {
