@@ -1463,6 +1463,17 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
@@ -1490,6 +1501,17 @@
     .coin-invite-wrp span {
         font-size: 14px;
     }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 1400px) and (max-width: 1599px){
@@ -1504,6 +1526,17 @@
     }
     .guest-wrp.side-guest-wrp .invite-pro{
         justify-content: center;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
     }
 }
 
