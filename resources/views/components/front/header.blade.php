@@ -2,8 +2,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1693502653295820"
-crossorigin="anonymous"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
 <!-- custom-style -->
