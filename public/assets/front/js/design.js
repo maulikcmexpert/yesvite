@@ -2275,31 +2275,25 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
-
         if (options.target && options.target.type === "textbox") {
-            console.log("Clicked on a text box");
+            console.log("clicked on text box");
             eventData.desgin_selected = "";
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
         } else {
-            // Hide all textbox icons
+            // alert();
             canvas.getObjects("textbox").forEach(function (tb) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false);
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
-
-            // **Unset active object (deselect the textbox)**
-            canvas.discardActiveObject();
+            discardIfMultipleObjects(options);;
             canvas.renderAll();
         }
     });
 
-    // Ensure active objects are unset when mouse is released
-    canvas.on("mouse:up", function () {
-        canvas.discardActiveObject();
-        canvas.renderAll();
+    canvas.on("mouse:up", function (options) {
+        discardIfMultipleObjects(options);
     });
-
 
     document
         .getElementById("addTextButton")
