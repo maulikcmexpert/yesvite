@@ -391,6 +391,12 @@
                     $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
                 });
                 const subcategoryId = $(this).data("subcategory-id");
+                $(`.subcategoryChecked_${subcategoryId}:checked`).each(function () {
+alert();
+            $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
+            .show();
+            $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
+        });
 
                 // $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
