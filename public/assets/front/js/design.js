@@ -2292,7 +2292,7 @@ async function bindData(current_event_id) {
     });
 
     canvas.on("mouse:up", function (options) {
-        canvas.discardActiveObject();
+        discardIfMultipleObjects(options);
         canvas.renderAll();
     });
 
