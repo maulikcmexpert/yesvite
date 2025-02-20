@@ -46,7 +46,7 @@
 }
 
 .guest-content .contact-user {
-    
+
     border: none;
     padding: 0;
 }
@@ -606,6 +606,16 @@
 }
 
 /* ============ responsive ============ */
+
+
+@media only screen and (max-width: 1801px) {
+    .guest-wrapper {
+        max-width: calc(100% - 43%);
+    }
+}
+
+
+
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
         max-width: 1000px;
