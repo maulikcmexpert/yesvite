@@ -976,10 +976,32 @@
         overflow-y: scroll;
         max-height: calc(100vh - 440px) !important;
     }
-    .guest-main-content .guest-wrapper .invite-pro .invite-left{
-        /* max-width: 100%;
-        min-width: 100%; */
+    .guest-main-content .guest-wrapper .invite-pro .invite-left .invite-left_d{
+        font-size: 12px;
+        display: block;
+        width: max-content;
     }
+
+    .guest-main-content .guest-wrapper .invite-pro .coin-invite-main{
+        margin-left: 0px !important;
+    }
+
+    .guest-main-content .guest-wrapper .invite-pro .heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+     .guest-main-content .guest-wrapper .invite-pro .heading svg {
+        width: 18px;
+        height: 18px;
+    }
+     .guest-main-content .guest-wrapper .invite-pro .heading p {
+        font-size: 12px;
+        color: var(--secondryColor);
+        font-weight: 600;
+        margin-left: 7px;
+    }
+
     .new-guest-content-wrp .invite-pro{
         gap: 10px;
     }
