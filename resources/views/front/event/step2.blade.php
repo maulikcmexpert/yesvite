@@ -423,14 +423,7 @@
             $('input[name="design_subcategory"]:not(#Allcat):checked').each(
                     function () {
 
-                        const categoryId = $(this).data("category-id");
-                        const subcategoryId = $(this).data("subcategory-id");
-                        alert(categoryId);
-                        alert(subcategoryId);
-                        // Show images matching the selected categories and subcategories
-                        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`).show();
-                        var visibleItems = $(".all_designs:visible").length;
-                        $(".total_design_count").text(visibleItems + " Items");
+                    alert()
                     }
                 );
             var visibleItems = $('.all_designs:visible').length;
