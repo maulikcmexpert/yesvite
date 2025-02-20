@@ -2295,7 +2295,7 @@ $(document).on('click', '.main-content-wrp', function (e) {
         console.log("No interaction detected, removing active object.");
         canvas.discardActiveObject();
         canvas.renderAll();
-    }, 800);
+    },500);
 });
 
     canvas.on("mouse:down", function (options) {
