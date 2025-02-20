@@ -1249,7 +1249,7 @@
 @media only screen and (min-width: 1600px){
     .main-content-sidebar {
         width: 100%;
-        max-width: 350px;
+        max-width: 350px !important;
         /* height: 100vh; */
         height: 100%;
         position: sticky;
