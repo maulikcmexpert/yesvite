@@ -443,26 +443,12 @@
             );
 
 
-            $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
-                    function () {
 
-                        const subcategoryId = $(this).data("subcategory-id");
-
-                        // const subcategoryId = $(this).data("subcategory-id");
-
-                        // // Show images matching the selected categories and subcategories
-                        $(`.image-item[data-category-id="${categoryId}"]`).show();
-                        var visibleItems = $(".all_designs:visible").length;
-                        $(".total_design_count").text(visibleItems + " Items");
-
-                        alert(visibleItems);
-                    }
-            );
 
             // let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
-            // let checkedCheckboxes = $(`.subcategory_${categoryIds}:not(#Allcat):checked`).length;
-
+            let checkedCheckboxes = $(`.subcategoryChecked:not(#Allcat):checked`).length;
+            alert(checkedCheckboxes);
             // if(checkedCheckboxes == 0){
             //     $('.categoryChecked_'+categoryIds).prop('checked',false);
             //     $(`.image-item[data-category-id="${categoryIds}"]`).hide();
