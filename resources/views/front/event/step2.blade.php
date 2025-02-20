@@ -399,7 +399,7 @@
                 $("#allchecked").show();
                 $("#category_name").text(category_name);
 
-                $(`.image-item-new[data-category-id="${categoryId}"]`).show();
+                // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
                 var visibleItems = $(".all_designs:visible").length;
                 $(".total_design_count").text(visibleItems + " Items");
             });
