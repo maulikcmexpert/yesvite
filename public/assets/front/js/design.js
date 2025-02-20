@@ -2281,10 +2281,15 @@ async function bindData(current_event_id) {
     $(document).on('click', '.main-content-right', function (e) {
 console.log(e);
         let target = e.target;
-        if (target.classList && (target.classList.contains("upper-canvas") || target.classList.contains("design-sidebar-action" ||   target.id === "addTextButton"))) {
-            return; // Do nothing if clicked on these elements
+        let tagName = target.tagName.toLowerCase();
+        if (
+            target.id === "addTextButton" || // Ignore "Add Text" button
+            target.classList.contains("design-sidebar-action") || // Ignore sidebar buttons
+            target.classList.contains("upper-canvas") || // Ignore Fabric.js canvas interactions
+            ["svg", "path", "h6", "button"].includes(tagName) // Ignore SVGs, paths, text elements, and buttons
+        ) {
+            return; // Do nothing
         }
-
         canvas.discardActiveObject();
         canvas.renderAll();
 
