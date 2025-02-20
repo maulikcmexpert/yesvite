@@ -1,5 +1,5 @@
 .edit-imag-main-content-wrp .setting-category-wrp {
-    padding: 16px 24px 90px 24px;
+    padding: 16px 24px 0px 24px;
     overflow: hidden;
     overflow-y: auto;
 }
@@ -192,7 +192,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
