@@ -121,12 +121,24 @@
     border-bottom: 1px solid var(--headerBorder);
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 23vh);
+    max-height: calc(100vh - 174px);
     padding: 0px 24px 0px 24px;
 }
 
+.size-spacing-main-wrp{
+    padding: 0px 24px 0px 24px;
+    overflow: hidden;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
+}
+
+.sp-container.sp-flat{
+    padding: 0px 24px 0px 24px;
+}
+
+
 .new-event-sidebar-head{
-    padding: 16px 24px 0px 24px;
+    padding: 16px 24px 10px 24px;
 }
 
 .common-font-wrp h3 {
