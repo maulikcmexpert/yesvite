@@ -947,6 +947,17 @@
     .new-event-sidebar-menu ul li h3{
         font-size: 24px !important;
     }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 3601px) and (max-width: 3800px){
@@ -976,6 +987,17 @@
     .new-event-sidebar-menu ul li h3{
         font-size: 25px !important;
     }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 3401px) and (max-width: 3600px){
@@ -1004,6 +1026,17 @@
     }
     .new-event-sidebar-menu ul li h3{
         font-size: 22px !important;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
     }
 }
 
@@ -1035,6 +1068,17 @@
     .new-event-sidebar-menu ul li h3{
         font-size: 22px !important;
     }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 3001px) and (max-width: 3200px){
@@ -1063,6 +1107,17 @@
     }
     .new-event-sidebar-menu ul li h3{
         font-size: 22px !important;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
     }
 }
 
@@ -1093,6 +1148,17 @@
     }
     .new-event-sidebar-menu ul li h3{
         font-size: 21px !important;
+    }
+    .edit-image-main-wrp .design-seting{
+        position: fixed !important;
+        bottom: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
     }
 
 }
