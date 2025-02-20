@@ -265,9 +265,6 @@
     background-color: var(--white);
     z-index: 5;
     border-radius: 0px 0px 20px 20px;
-    width: 100%;
-    max-width: 347px;
-    left: calc(100% - 381px);
 }
 
 .edit-images-button-more button svg {
