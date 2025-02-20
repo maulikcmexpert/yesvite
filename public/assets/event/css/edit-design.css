@@ -1147,6 +1147,9 @@
         width: 100% !important;
         max-width: calc(100% - 45%) !important;
     }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
