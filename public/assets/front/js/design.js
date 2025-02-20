@@ -786,7 +786,7 @@ async function bindData(current_event_id) {
                             fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             lineHeight: element.lineHeight || 2,
-                            letterSpacing: 0,
+                            letterSpacing: element.letterSpacing || 0,
                             linethrough:
                                 element.linethrough == true ||
                                 element.linethrough == "true" ||
@@ -2804,8 +2804,8 @@ function getTextDataFromCanvas() {
                 backgroundColor: obj.backgroundColor,
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
-                lineHeight: obj.lineHeight || 2,
-                letterSpacing: obj.letterSpacing || 0,
+                lineHeight: parseFloat(obj.lineHeight) || 2,
+                letterSpacing: parseFloat(obj.letterSpacing) || 0,
                 fontWeight: obj.fontWeight,
                 fontStyle: obj.fontStyle,
                 underline: obj.underline,
