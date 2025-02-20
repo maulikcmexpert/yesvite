@@ -2286,13 +2286,14 @@ async function bindData(current_event_id) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false);
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
-            discardIfMultipleObjects(options);;
+            canvas.discardActiveObject();
             canvas.renderAll();
         }
     });
 
     canvas.on("mouse:up", function (options) {
-        discardIfMultipleObjects(options);
+        canvas.discardActiveObject();
+        canvas.renderAll();
     });
 
     document
