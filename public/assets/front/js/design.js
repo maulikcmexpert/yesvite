@@ -578,7 +578,6 @@ $(document).on("click", ".close-btn", function () {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
-
 });
 
 $(document).on("click", ".edit_design_tem", function (e) {
@@ -783,7 +782,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width: element.width || width, // Default width if not provided
+                            width: parseInt(element.width) || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
@@ -1781,11 +1780,11 @@ async function bindData(current_event_id) {
         });
     }, 1000);
 
-    $(document).on("change",".sp-input",function(){
+    $(document).on("change", ".sp-input", function () {
         var color = $(this).val();
-        console.log(color)
+        console.log(color);
         changeColor(color);
-    })
+    });
     // Initialize the color picker
     $("#color-picker").spectrum({
         type: "flat",
@@ -1804,7 +1803,7 @@ async function bindData(current_event_id) {
                 console.log("color");
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba")
+                console.log("rgba");
                 changeColor("#000000"); // Handle transparency by default
             }
         },
