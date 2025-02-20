@@ -784,6 +784,12 @@
 #aboutsuccess .modal-header h5{
     color: #fff !important;
 }
+.detail-btn-wrp #openGoogle svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 10px !important;
+    margin-right: 0px !important;
+}
 
 /* .potuck-main-wrp .apexcharts-inner {
     transform: translate(0, 0) !important;
