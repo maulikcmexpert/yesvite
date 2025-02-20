@@ -47,7 +47,6 @@
                                 $last_year_comparison = $data['last_year_comparison'];
                                 $color = $last_year_comparison >= 0 ? 'green' : 'red';
                                 $arrow_c=$last_year_comparison >= 0 ? '<i class="fa-solid fa-arrow-up"></i>' : '<i class="fa-solid fa-arrow-down"></i>';
-
                             @endphp
                             <h6><span style="color: <?= $color ?>;">{!! $arrow_c !!}</i> {{$data['last_year_comparison']}}%</span>Over last year</h6>
                         </div>
