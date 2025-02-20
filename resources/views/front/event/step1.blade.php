@@ -7,7 +7,7 @@
     <div class="main-content-right">
         <div class="new_event_detail_form">
             <form action="">
-                <div>
+                <div class="new_event_detail_form_inner">
                     <h3>Detail Pages</h3>
                     <div class="row">
 
