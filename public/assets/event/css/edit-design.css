@@ -992,6 +992,10 @@
     overflow-y: scroll;
 }
 
+.new_event_detail_form form .row{
+    padding-bottom: 50px !important;
+}
+
 .new_event_detail_form{
     height: 100vh;
 }
