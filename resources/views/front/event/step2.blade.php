@@ -445,10 +445,11 @@
 
 
 
-            // let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+            let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
 
-            let checkedCheckboxes = $(`.subcategoryChecked:not(#Allcat):checked`).length;
-            alert(checkedCheckboxes);
+alert(`Total: ${totalCheckboxes}, Checked: ${checkedCheckboxes}`);
+
             // if(checkedCheckboxes == 0){
             //     $('.categoryChecked_'+categoryIds).prop('checked',false);
             //     $(`.image-item[data-category-id="${categoryIds}"]`).hide();
