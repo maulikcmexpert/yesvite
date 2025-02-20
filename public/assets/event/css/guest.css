@@ -608,11 +608,11 @@
 /* ============ responsive ============ */
 
 
-@media only screen and (min-width: 1801px) {
+/* @media only screen and (min-width: 1801px) {
     .guest-wrapper {
-        max-width: calc(100% - 43%);
+        max-width: calc(100vw - 43%);
     }
-}
+} */
 
 
 
