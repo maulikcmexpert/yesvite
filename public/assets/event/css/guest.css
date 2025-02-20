@@ -982,6 +982,10 @@
         width: max-content;
     }
 
+    .guest-main-content .guest-wrapper .invite-pro .invite-left{
+        max-width: 100% !important;
+    }
+
     .guest-main-content .guest-wrapper .invite-pro .coin-invite-main{
         margin-left: 0px !important;
     }
@@ -1015,8 +1019,8 @@
     }
 
     .guest-main-content .guest-wrapper .invite-pro{
-        max-width: 100%;
-        min-width: 100%;
+        max-width: calc(100% - 5%);
+        min-width: calc(100% - 5%);
     }
 
     #YesviteUserAll .users-data .text-start {
