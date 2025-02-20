@@ -447,7 +447,7 @@
 
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
-    let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
+    let checkedCheckboxes = $('input[name="design_subcategory_new"]:checked').length;
     alert("Checked Count: " + checkedCheckboxes);
     console.log("Checked Elements:", checkedCheckboxes);
     console.log("Checked Count:", checkedCheckboxes.length);
