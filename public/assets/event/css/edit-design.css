@@ -1,8 +1,13 @@
 .edit-imag-main-content-wrp .setting-category-wrp {
-    padding: 16px 24px 90px 24px;
+    padding: 16px 0px 0px 0px;
     overflow: hidden;
     overflow-y: auto;
 }
+
+.common-font-wrp{
+    padding: 16px 24px 0px 24px;
+}
+
 .activated{
     background-color: var(--primaryColor) !important;
 }
