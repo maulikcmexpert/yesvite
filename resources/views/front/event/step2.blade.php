@@ -384,13 +384,14 @@
                 const categoryId = $(this).data("category-id");
 
 
-                $(`.categoryChecked_${categoryId}`).each(function() {
-                    alert()
+                const subcategoryId = $(this).data("subcategory-id");
+                $(`.categoryChecked_${categoryId}:checked`).each(function () {
+                    const subcategoryId = $(this).data("subcategory-id");
+                    alert(subcategoryId)
                 });
 
                 $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
-                const subcategoryId = $(this).data("subcategory-id");
                 const category_name = $(this).data("category_name");
                 $("#category_name").show();
                 $("#allchecked").show();
