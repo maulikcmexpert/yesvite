@@ -411,7 +411,7 @@
             allCheckFun(categoryId)
         })
 
-        function allCheckFun(categoryId) {
+        function allCheckFun(categoryIds) {
             $('input[name="design_subcategory_new"]').prop('checked', false)
             // $('input[name="design_subcategory"]').prop('checked', true)
             $(".categoryNew").show();
@@ -439,9 +439,13 @@
                         $(".total_design_count").text(visibleItems + " Items");
                     }
             );
-alert(categoryId)
-            let totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
-            let checkedCheckboxes = $('input[name="design_subcategory"]:not(#Allcat):checked').length;
+
+            let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+            let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
+                    alert(checkedCheckboxes)
+            if(checkedCheckboxes == 0){
+                $(`.image-item[data-category-id="${categoryIds}"]`).hide();
+            }
 
             if ($("#search_design_category").val() == "") {
                 return
