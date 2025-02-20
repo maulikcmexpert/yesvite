@@ -377,7 +377,6 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
-
                 $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
