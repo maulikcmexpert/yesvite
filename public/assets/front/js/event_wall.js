@@ -177,10 +177,7 @@ function uploadStoryImage(eventId, userId) {
                 fetchStories(eventId, userId, true, "image");
                 // Set the border color to gray after viewing the story
                 setTimeout(() => {
-                    // if (profilePic) {
-                    //     profilePic.style.borderColor = 'gray'; // Change the border color to gray after viewing
-                    //     profilePic.classList.remove('pink-border'); // Remove the pink border class
-                    // }
+
                     if (listItem) {
                         listItem.classList.remove("new-story"); // Optionally, remove the 'new-story' class
                     }
