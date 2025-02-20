@@ -2,6 +2,8 @@
 <x-front.advertise />
 <section class="transaction_history_wrp">
 <!-- demo -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1693502653295820"
+     crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-1693502653295820"
