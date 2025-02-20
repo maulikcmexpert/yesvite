@@ -385,9 +385,11 @@
 
 
                 const subcategoryId = $(this).data("subcategory-id");
-                $(`.categoryChecked_${categoryId}:checked`).each(function () {
-                    const subcategoryId = $(this).data("subcategory-id");
-                    $('#subcategory' + subcategoryId).prop('checked', true)
+                $(`.categoryChecked_${categoryId}:checked`).each(function() {
+                    const subId = $(this).data("subcategory-id");
+                    alert(subId)
+                    $('#subcategory' + subId).prop('checked',
+                    true); // Ensures checkbox remains checked
                 });
 
                 // $('.subcategory_' + categoryId).prop('checked', true)
