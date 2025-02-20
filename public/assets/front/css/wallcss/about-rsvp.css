@@ -877,6 +877,7 @@
 
     .host-user-con-box {
         flex-direction: column;
+        align-items: center;
     }
 
     .host-users-detail p {
