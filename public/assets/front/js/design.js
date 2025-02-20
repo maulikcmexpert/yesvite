@@ -2798,7 +2798,7 @@ function getTextDataFromCanvas() {
                 top: obj.top * scaleY, // Scale back Y position
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                width: obj.width,
+                width: parseInt(obj.width),
                 centerX: centerPoint.x * scaleX, // Scale back center position
                 centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
@@ -2811,7 +2811,7 @@ function getTextDataFromCanvas() {
                 underline: obj.underline,
                 linethrough: obj.linethrough,
                 date_formate: obj.date_formate, // Include date_formate if set
-                rotation: obj.angle,
+                rotation: parseFloat(obj.angle),
             });
         }
 
