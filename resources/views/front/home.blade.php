@@ -3,6 +3,15 @@ $getSocialLink = getSocialLink();
 @endphp
 <x-front.advertise />
 <section class="home-web-tabs-wrp">
+    <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-1693502653295820"
+    data-ad-slot="2645012075"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
     <div class="container">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
