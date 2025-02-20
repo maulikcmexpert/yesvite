@@ -100,7 +100,6 @@ $(document).ready(function () {
 });
 
 $(document).on("click", ".design-cards", function () {
-    alert(0);
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
@@ -128,7 +127,7 @@ $(document).on("click", ".design-cards", function () {
 
     // Remove the old canvas if it exists
     $("#imageEditor2").remove();
-    alert(2);
+
     // Create a new canvas element
     var newCanvas = $("<canvas>", {
         id: "imageEditor2",
@@ -786,7 +785,10 @@ async function bindData(current_event_id) {
                             fontStyle: element.fontStyle || "normal",
                             underline: element.underline,
                             lineHeight: element.lineHeight || 2,
-                            letterSpacing: element.letterSpacing || 0,
+                            charSpacing:
+                                element.charSpacing ||
+                                element.letterSpacing ||
+                                0,
                             linethrough:
                                 element.linethrough == true ||
                                 element.linethrough == "true" ||
@@ -1624,11 +1626,11 @@ async function bindData(current_event_id) {
         )}%</span>`;
 
         // Log the slider value and percentage for debugging
-        console.log(
-            `Slider Value: ${sliderValue}, Percentage: ${percentageValue.toFixed(
-                0
-            )}%`
-        );
+        // console.log(
+        //     `Slider Value: ${sliderValue}, Percentage: ${percentageValue.toFixed(
+        //         0
+        //     )}%`
+        // );
 
         // Update the canvas object
         const activeObject = canvas.getActiveObject();
@@ -2790,7 +2792,7 @@ function getTextDataFromCanvas() {
         if (obj.type === "textbox") {
             // alert(obj.text);
             var centerPoint = obj.getCenterPoint();
-            console.log(obj.text, obj.letterSpacing);
+            console.log(obj.text, obj.charSpacing);
             // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
@@ -2805,7 +2807,8 @@ function getTextDataFromCanvas() {
                 fontFamily: obj.fontFamily,
                 textAlign: obj.textAlign,
                 lineHeight: parseFloat(obj.lineHeight) || 2,
-                letterSpacing: parseFloat(obj.letterSpacing) || 0,
+                letterSpacing: parseFloat(obj.charSpacing) || 0,
+                charSpacing: parseFloat(obj.charSpacing) || 0,
                 fontWeight: obj.fontWeight,
                 fontStyle: obj.fontStyle,
                 underline: obj.underline,
