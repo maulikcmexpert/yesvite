@@ -127,6 +127,13 @@
 
 .size-spacing-main-wrp{
     padding: 0px 24px 0px 24px;
+    overflow: hidden;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
+}
+
+.sp-container.sp-flat{
+    padding: 0px 24px 0px 24px;
 }
 
 
