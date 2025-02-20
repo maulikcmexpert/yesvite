@@ -2278,7 +2278,7 @@ async function bindData(current_event_id) {
         }
     }
 
-    $(document).on('click', '.main-content-wrp', function (e) {
+    $(document).on('click', '.main-content-right', function (e) {
 
         let targetClasses = e.target.classList;
         if (targetClasses.contains("upper-canvas")) {
