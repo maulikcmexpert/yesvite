@@ -132,7 +132,7 @@
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
                                                                         <input
-                                                                            class="form-check-input subcategory_{{ $category->id }}"
+                                                                            class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{ $category->id }}"
                                                                             name="design_subcategory_new"
                                                                             type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
@@ -386,8 +386,8 @@
 
                 $(`.categoryChecked_${categoryId}:checked`).each(function () {
                     const subcategoryIds= $(this).data("subcategory-id");
-                    alert(subcategoryIds)
-                    $('#subcategory' + subcategoryIds).prop('checked', true)
+
+                    $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
                 });
                 const subcategoryId = $(this).data("subcategory-id");
 
