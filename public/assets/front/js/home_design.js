@@ -179,6 +179,7 @@ $(document).ready(function () {
         const category_name = $(this).data("category_name");
         $("#category_name").show();
         $("#allchecked").show();
+        $("#allchecked").attr("data-categoryid", categoryId);
         $("#category_name").text(category_name);
 
         // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
@@ -188,7 +189,8 @@ $(document).ready(function () {
 });
 
 $(document).on("click", "#allchecked", function () {
-    allCheckFun();
+    const categoryId =  $(this).attr('data-categoryid');
+    allCheckFun(categoryId)
 });
 
 function allCheckFun() {
@@ -218,6 +220,12 @@ function allCheckFun() {
             $(".total_design_count").text(visibleItems + " Items");
         }
     );
+    let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
+            let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
+            if(checkedCheckboxes == 0){
+                $('.categoryChecked_'+categoryIds).prop('checked',false);
+                $(`.image-item[data-category-id="${categoryIds}"]`).hide();
+            }
     let search_value = "";
     if ($("#search_design_category").val() == "") {
         return;
