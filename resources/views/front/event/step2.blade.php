@@ -64,7 +64,7 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input categoryWiseCheckBox"
+                                                                        <input class="form-check-input"
                                                                             name="design_subcategory" type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
@@ -89,9 +89,7 @@
                 </div>
                 <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
             </div>
-
-
-            <div style="display: flex" class="filter-main-wrp subcategoryNew">
+            <div style="display: none" class="filter-main-wrp subcategoryNew">
                 <div class="filters-drp">
                     <h5>Filter By</h5>
                     <div class="filter-dropdowns">
@@ -108,18 +106,16 @@
                                     <div class="accordion" id="accordionExample">
 
                                         @foreach ($categories as $category)
-                                            <div class="accordion-item category category_{{ $category->id }}">
-                                                <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                        <div class="accordion-item category category_{{$category->id}}">
+                                                 <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                     <button class="accordion-button" type="button"
                                                         data-bs-toggle="collapse"
-                                                        data-bs-target="#collapse{{ $category->id }}"
-                                                        aria-expanded="true"
+                                                        data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
                                                         aria-controls="collapse{{ $category->id }}">
                                                         {{ $category->category_name }}
                                                     </button>
                                                 </h2>
-                                                <div id="collapse{{ $category->id }}"
-                                                    class="accordion-collapse collapse"
+                                                <div id="collapse{{ $category->id }}" class="accordion-collapse collapse"
                                                     aria-labelledby="heading{{ $category->id }}"
                                                     data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
@@ -132,10 +128,8 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input
-                                                                            class="form-check-input categoryWiseCheckBox subcategory_{{ $category->id }}"
-                                                                            name="design_subcategory_new"
-                                                                            type="checkbox"
+                                                                        <input class="form-check-input subcategory_{{$category->id}}"
+                                                                            name="design_subcategory_new" type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -156,8 +150,6 @@
                 </div>
                 <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
             </div>
-
-
             <label for="" class="custome-designcategory">
                 Upload own design/card
                 <input type="file" name="custom_template" id="custom_template" accept=".jpg,.jpeg,.png" />
@@ -246,7 +238,7 @@
 
             $('#Allcat').on('change', function() {
                 $(".categoryNew").show();
-                // $(".subcategoryNew").hide();
+                $(".subcategoryNew").hide();
                 $(".image-item-new").hide();
                 $("#category_name").hide();
                 $("#allchecked").hide();
@@ -275,7 +267,7 @@
                 $(".image-item-new").hide();
                 $("#category_name").hide();
                 $(".categoryNew").show();
-                // $(".subcategoryNew").hide();
+                $(".subcategoryNew").hide();
                 $("#allchecked").hide();
                 // If all individual checkboxes are checked, check "All Categories"
                 const totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
@@ -308,7 +300,7 @@
             });
             $('#resetCategories').on('click', function(e) {
                 $(".categoryNew").show();
-                // $(".subcategoryNew").hide();
+                $(".subcategoryNew").hide();
                 $(".image-item-new").hide();
                 $("#category_name").hide();
                 $("#allchecked").hide();
@@ -341,13 +333,13 @@
 
             $(document).on('input', '#search_design_category', function() {
                 $(".categoryNew").show();
-                // $(".subcategoryNew").hide();
+                $(".subcategoryNew").hide();
                 $(".image-item-new").hide();
                 $("#category_name").hide();
                 $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
-                if (search_value == '') {
+                if(search_value==''){
                     $('input[name="design_subcategory"]').prop('checked', true)
                     $("#Allcat").prop("checked", true);
                 }
@@ -385,11 +377,10 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
-
-
-                // $('.subcategory_' + categoryId).prop('checked', true)
-
-
+                $('input[name="design_subcategory"]:not(#Allcat):checked').each(function() {
+                    alert(categoryId)
+                });
+                $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
                 const category_name = $(this).data("category_name");
@@ -411,7 +402,7 @@
             $('input[name="design_subcategory_new"]').prop('checked', false)
             $('input[name="design_subcategory"]').prop('checked', true)
             $(".categoryNew").show();
-            // $(".subcategoryNew").hide();
+            $(".subcategoryNew").hide();
             $(".image-item-new").hide();
             $("#category_name").hide();
             $("#allchecked").hide();
@@ -492,19 +483,19 @@
             }
         );
 
-        $("#resetCategoriesNew").on("click", function(e) {
+        $("#resetCategoriesNew").on("click", function (e) {
 
 
 
-            e.preventDefault();
-            $("#Allcat").prop("checked", false);
-            $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
-                "checked",
-                false
-            );
-            $(".image-item-new").hide();
-            var visibleItems = $(".all_designs:visible").length;
-            $(".total_design_count").text(visibleItems + " Items");
-        });
+       e.preventDefault();
+       $("#Allcat").prop("checked", false);
+       $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
+           "checked",
+           false
+       );
+       $(".image-item-new").hide();
+       var visibleItems = $(".all_designs:visible").length;
+       $(".total_design_count").text(visibleItems + " Items");
+   });
     </script>
 @endpush
