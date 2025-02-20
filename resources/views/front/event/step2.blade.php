@@ -452,7 +452,7 @@
                 // alert(checkedCheckboxes); // Display count of checked checkboxes
 
                 // if (checkedCheckboxes == 0) {
-                    $('.categoryChecked_' + categoryIds).prop('checked', false);
+                    $('.subcategoryChecked_' + subcategoryIds).prop('checked', false);
                     // $(`.image-item[data-category-id="${subcategoryIds}"]`).hide();
                 // }
                   if (checkedCheckboxes == 0) {
