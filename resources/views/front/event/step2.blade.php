@@ -386,7 +386,8 @@
 
                 $(`.categoryChecked_${categoryId}:checked`).each(function () {
                     const subcategoryIds= $(this).data("subcategory-id");
-
+                    $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
+                    .show();
                     $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
                 });
                 const subcategoryId = $(this).data("subcategory-id");
