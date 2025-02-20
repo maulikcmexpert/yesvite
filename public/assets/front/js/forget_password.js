@@ -89,25 +89,25 @@ $("#change_forgetpassword").validate({
     rules: {
         new_password: {
             required: true,
-            passwordCheck: true, 
+            // passwordCheck: true, 
         },
         conform_password: {
             required: true,
-            passwordCheck: true, 
+            // passwordCheck: true, 
             equalTo: "#new_password",
         },
     },
     messages: {
         new_password: {
             required: "Please enter your New password",
-            passwordCheck:
-            "At least 6 characters with a combination of letters, numbers, and a special character",
+            // passwordCheck:
+            // "At least 6 characters with a combination of letters, numbers, and a special character",
     },
         conform_password: {
             required: "Please Re-type your New password",
             // minlength: "Please enter minimum 8 character",
-            passwordCheck:
-            "At least 6 characters with a combination of letters, numbers, and a special character",
+            // passwordCheck:
+            // "At least 6 characters with a combination of letters, numbers, and a special character",
     },
     },
 
