@@ -1507,7 +1507,7 @@
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100% !important;
-        max-width: calc(100% - 45%) !important;
+        max-width: calc(100% - 50%) !important;
     }
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
@@ -1533,7 +1533,7 @@
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100% !important;
-        max-width: calc(100% - 45%) !important;
+        max-width: calc(100% - 55%) !important;
     }
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
