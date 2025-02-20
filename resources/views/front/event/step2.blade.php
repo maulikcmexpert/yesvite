@@ -441,14 +441,14 @@
             );
 
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
-            $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
+
             let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
 alert(checkedCheckboxes)
             if(checkedCheckboxes == 0){
                 $('.categoryChecked_'+categoryIds).prop('checked',false);
                 $(`.image-item[data-category-id="${categoryIds}"]`).hide();
             }
-            );
+
             if ($("#search_design_category").val() == "") {
                 return
             }
