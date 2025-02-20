@@ -363,6 +363,8 @@ main.new-main-content {
   text-align: center;
   border-radius: 0px !important;
   font-weight: 500 !important;
+  position: relative;
+  top: 1px;
 }
 
 .event-center-tabs-main .nav-tabs .nav-link.active {
