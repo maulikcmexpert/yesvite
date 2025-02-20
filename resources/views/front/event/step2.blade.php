@@ -455,7 +455,7 @@
 alert();
             $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
             .show();
-            $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
+            $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
         });
 
             if ($("#search_design_category").val() == "") {
