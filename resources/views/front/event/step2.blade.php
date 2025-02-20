@@ -422,6 +422,7 @@
             $('.image-item').show();
             $('input[name="design_subcategory"]:not(#Allcat):checked').each(
                     function () {
+                        alert();
                         const categoryId = $(this).data("category-id");
                         const subcategoryId = $(this).data("subcategory-id");
 
