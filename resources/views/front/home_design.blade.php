@@ -201,7 +201,7 @@
 
         <div class="row list_all_design_catgeory_new">
             <div class="d-flex align-items-center" style="gap: 15px">
-                <p id="allchecked" style="display:none"><i class="fa-solid fa-arrow-left"
+                <p id="allchecked" data-categoryid='0' style="display:none"><i class="fa-solid fa-arrow-left"
                         style="color: #212529; cursor: pointer;"></i></p>
                 <h5 id="category_name" class="mb-0" style="display:none">Test category</h5>
             </div>
