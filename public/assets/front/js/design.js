@@ -2286,6 +2286,8 @@ async function bindData(current_event_id) {
                 if (tb.trashIcon) tb.trashIcon.set("visible", false);
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
+            canvas.discardActiveObject();
+            canvas.renderAll();
         }
     });
 
