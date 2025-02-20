@@ -4,8 +4,12 @@
     overflow-y: auto;
 }
 
-.common-font-wrp{
+.edit-imag-main-content-wrp .setting-category-wrp .new-event-sidebar-head{
     padding: 16px 24px 0px 24px;
+}
+
+.common-font-wrp{
+    padding: 0px 24px 0px 24px;
 }
 
 .activated{
@@ -197,7 +201,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
