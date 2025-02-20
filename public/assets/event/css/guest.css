@@ -982,6 +982,10 @@
         width: max-content;
     }
 
+    .guest-main-content .guest-wrapper .invite-pro .invite-left{
+        max-width: 100% !important;
+    }
+
     .guest-main-content .guest-wrapper .invite-pro .coin-invite-main{
         margin-left: 0px !important;
     }
