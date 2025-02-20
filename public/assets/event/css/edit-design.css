@@ -201,7 +201,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
