@@ -381,7 +381,7 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
-                $('.subcategory_' + categoryId).prop('checked', true)
+                // $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
                 const category_name = $(this).data("category_name");
@@ -408,7 +408,7 @@
             $("#category_name").hide();
             $("#allchecked").hide();
             // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
-            // $("#Allcat").prop('checked', true)
+            $("#Allcat").prop('checked', true)
             $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
