@@ -1141,11 +1141,11 @@
     }
     .edit-image-main-wrp .design-seting{
         position: fixed !important;
-        bottom: 0 !important;
+        bottom: 15px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 100%;
-        max-width: calc(100% - 20%);
+        width: 100% !important;
+        max-width: calc(100% - 45%) !important;
     }
 }
 
