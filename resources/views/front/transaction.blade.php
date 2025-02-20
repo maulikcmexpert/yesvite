@@ -1,6 +1,7 @@
 {{-- {{dd($transcation);}} --}}
 <x-front.advertise />
 <section class="transaction_history_wrp">
+    
     <div class="container">
         <div class="row">
             {{-- <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4"> --}}
