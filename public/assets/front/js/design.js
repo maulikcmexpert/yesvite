@@ -578,7 +578,6 @@ $(document).on("click", ".close-btn", function () {
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
-
 });
 
 $(document).on("click", ".edit_design_tem", function (e) {
@@ -701,10 +700,7 @@ async function bindData(current_event_id) {
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-                console.log({ canvasWidth });
-                console.log({ canvasHeight });
-                console.log(img.width);
-                console.log(img.height);
+
                 img.set({
                     left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
                     top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
@@ -773,8 +769,7 @@ async function bindData(current_event_id) {
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
 
-                        console.log({ left });
-                        console.log({ top });
+                        console.log(element.width);
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         fontSize = Number(fontSize).toFixed(0);
                         let width = (textWidth + 25) * scaleX; // Scale text box width
@@ -783,7 +778,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width: element.width || width, // Default width if not provided
+                            width: parseInt(element.width) || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
@@ -1781,11 +1776,11 @@ async function bindData(current_event_id) {
         });
     }, 1000);
 
-    $(document).on("change",".sp-input",function(){
+    $(document).on("change", ".sp-input", function () {
         var color = $(this).val();
-        console.log(color)
+        console.log(color);
         changeColor(color);
-    })
+    });
     // Initialize the color picker
     $("#color-picker").spectrum({
         type: "flat",
@@ -1804,7 +1799,7 @@ async function bindData(current_event_id) {
                 console.log("color");
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba")
+                console.log("rgba");
                 changeColor("#000000"); // Handle transparency by default
             }
         },
@@ -2803,7 +2798,7 @@ function getTextDataFromCanvas() {
                 top: obj.top * scaleY, // Scale back Y position
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                width: obj.width,
+                width: parseInt(obj.width),
                 centerX: centerPoint.x * scaleX, // Scale back center position
                 centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
@@ -2816,7 +2811,7 @@ function getTextDataFromCanvas() {
                 underline: obj.underline,
                 linethrough: obj.linethrough,
                 date_formate: obj.date_formate, // Include date_formate if set
-                rotation: obj.angle,
+                rotation: parseFloat(obj.angle),
             });
         }
 
