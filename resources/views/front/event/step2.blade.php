@@ -64,7 +64,8 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input"
+                                                                        <input
+                                                                            class="form-check-input categoryChecked_{{ $category->id }}"
                                                                             name="design_subcategory" type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
@@ -106,16 +107,18 @@
                                     <div class="accordion" id="accordionExample">
 
                                         @foreach ($categories as $category)
-                                        <div class="accordion-item category category_{{$category->id}}">
-                                                 <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                            <div class="accordion-item category category_{{ $category->id }}">
+                                                <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                     <button class="accordion-button" type="button"
                                                         data-bs-toggle="collapse"
-                                                        data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
+                                                        data-bs-target="#collapse{{ $category->id }}"
+                                                        aria-expanded="true"
                                                         aria-controls="collapse{{ $category->id }}">
                                                         {{ $category->category_name }}
                                                     </button>
                                                 </h2>
-                                                <div id="collapse{{ $category->id }}" class="accordion-collapse collapse"
+                                                <div id="collapse{{ $category->id }}"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="heading{{ $category->id }}"
                                                     data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
@@ -128,8 +131,10 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input subcategory_{{$category->id}}"
-                                                                            name="design_subcategory_new" type="checkbox"
+                                                                        <input
+                                                                            class="form-check-input subcategory_{{ $category->id }}"
+                                                                            name="design_subcategory_new"
+                                                                            type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -339,7 +344,7 @@
                 $("#allchecked").hide();
                 var search_value = $(this).val();
                 $('#home_loader').css('display', 'flex');
-                if(search_value==''){
+                if (search_value == '') {
                     $('input[name="design_subcategory"]').prop('checked', true)
                     $("#Allcat").prop("checked", true);
                 }
@@ -377,6 +382,12 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
+
+
+                $(`.categoryChecked_${categoryId}`).each(function() {
+                    alert()
+                });
+
                 $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
@@ -480,19 +491,19 @@
             }
         );
 
-        $("#resetCategoriesNew").on("click", function (e) {
+        $("#resetCategoriesNew").on("click", function(e) {
 
 
 
-       e.preventDefault();
-       $("#Allcat").prop("checked", false);
-       $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
-           "checked",
-           false
-       );
-       $(".image-item-new").hide();
-       var visibleItems = $(".all_designs:visible").length;
-       $(".total_design_count").text(visibleItems + " Items");
-   });
+            e.preventDefault();
+            $("#Allcat").prop("checked", false);
+            $('input[name="design_subcategory_new"]:not(#Allcat)').prop(
+                "checked",
+                false
+            );
+            $(".image-item-new").hide();
+            var visibleItems = $(".all_designs:visible").length;
+            $(".total_design_count").text(visibleItems + " Items");
+        });
     </script>
 @endpush
