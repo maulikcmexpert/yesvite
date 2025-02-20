@@ -2280,9 +2280,9 @@ async function bindData(current_event_id) {
 
     $(document).on('click', '.main-content-right', function (e) {
 
-        let targetClasses = e.target.classList;
-        if (targetClasses.contains("upper-canvas") || targetClasses.contains("design-sidebar-action") ) {
-            return;
+        let target = e.target;
+        if (target.classList && (target.classList.contains("upper-canvas") || target.classList.contains("design-sidebar-action"))) {
+            return; // Do nothing if clicked on these elements
         }
 
         canvas.discardActiveObject();
