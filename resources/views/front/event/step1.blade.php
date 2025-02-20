@@ -7,572 +7,572 @@
     <div class="main-content-right">
         <div class="new_event_detail_form">
             <form action="">
-                <h3>Detail Pages</h3>
-                <div class="row">
+                <div>
+                    <h3>Detail Pages</h3>
+                    <div class="row">
 
-                    {{-- <div class="col-12 mb-4">
-                        <div class="input-form">
-                            <select class="form-select" id="event-type" onchange="clearError(this)">
-                                <option value="">Select Event Type</option>
-                                @foreach ($event_type as $type)
+                        {{-- <div class="col-12 mb-4">
+                            <div class="input-form">
+                                <select class="form-select" id="event-type" onchange="clearError(this)">
+                                    <option value="">Select Event Type</option>
+                                    @foreach ($event_type as $type)
+                                    @php
+                                        $event_type_id = '';
+                                        if(isset($eventDetail['event_type_id']) && $eventDetail['event_type_id']!=''){
+                                            $event_type_id = $eventDetail['event_type_id']; 
+                                        }
+                                    @endphp
+                                    <option value="{{ $type->id }}" {{($event_type_id == $type->id)?'selected':''}}>{{ $type->event_type }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="select-label"
+                                    class="form-label input-field floating-label select-label floatingfocus">Event
+                                    Type</label>
+                            </div>
+                                <lable for="event-type" id="event-type-error" class="error"></lable>
+                        </div> --}}
+                        <div class="col-12 mb-4">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText"
+                                    value="{{ isset($eventDetail['event_name']) && $eventDetail['event_name'] != null ? $eventDetail['event_name'] : '' }}"
+                                    id="event-name" name="event-name" oninput="clearError(this)" required="">
+                                <label for="event-name" class="form-label input-field floating-label">Event Name
+                                    *</label>
+                            </div>
+                            <lable for="event-name" id="event-name-error" class="error"></lable>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
+                                    oninput="clearError(this)" required=""
+                                    value="{{ isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != null ? $eventDetail['hosted_by'] : $user->firstname . ' ' . $user->lastname }}">
+                                <label for="hostedby" class="form-label input-field floating-label">Hosted By
+                                    *</label>
+                            </div>
+                            <lable for="hostedby" id="event-host-error" class="error"></lable>
+                        </div>
+                        <!-- <div class="col-lg-12 mb-4">
+                            <div class="input-form">
                                 @php
-                                    $event_type_id = '';
-                                    if(isset($eventDetail['event_type_id']) && $eventDetail['event_type_id']!=''){
-                                        $event_type_id = $eventDetail['event_type_id']; 
+                                    $start_date = '';
+                                    $end_date = '';
+                                    $event_date = '';
+                                    if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
+                                        $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
+                                        $event_date = $start_date;
+                                    }
+                                    if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
+                                        $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
+                                        if ($start_date != $end_date) {
+                                            $event_date = $start_date . ' To ' . $end_date;
+                                        }
                                     }
                                 @endphp
-                                <option value="{{ $type->id }}" {{($event_type_id == $type->id)?'selected':''}}>{{ $type->event_type }}</option>
-                                @endforeach
-                            </select>
-                            <label for="select-label"
-                                class="form-label input-field floating-label select-label floatingfocus">Event
-                                Type</label>
-                        </div>
-                            <lable for="event-type" id="event-type-error" class="error"></lable>
-                    </div> --}}
-                    <div class="col-12 mb-4">
-                        <div class="input-form">
-                            <input type="text" class="form-control inputText"
-                                value="{{ isset($eventDetail['event_name']) && $eventDetail['event_name'] != null ? $eventDetail['event_name'] : '' }}"
-                                id="event-name" name="event-name" oninput="clearError(this)" required="">
-                            <label for="event-name" class="form-label input-field floating-label">Event Name
-                                *</label>
-                        </div>
-                        <lable for="event-name" id="event-name-error" class="error"></lable>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="input-form">
-                            <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
-                                oninput="clearError(this)" required=""
-                                value="{{ isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != null ? $eventDetail['hosted_by'] : $user->firstname . ' ' . $user->lastname }}">
-                            <label for="hostedby" class="form-label input-field floating-label">Hosted By
-                                *</label>
-                        </div>
-                        <lable for="hostedby" id="event-host-error" class="error"></lable>
-                    </div>
-                    <!-- <div class="col-lg-12 mb-4">
-                        <div class="input-form">
-                            @php
-                                $start_date = '';
-                                $end_date = '';
-                                $event_date = '';
-                                if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
-                                    $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
-                                    $event_date = $start_date;
-                                }
-                                if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
-                                    $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
-                                    if ($start_date != $end_date) {
-                                        $event_date = $start_date . ' To ' . $end_date;
-                                    }
-                                }
-                            @endphp
-                            <div class="position-relative z-2">
-                                <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="event-date" data-isDate="{{ $event_date }}" name="event-date"
-                                    onblur="clearError(this)" value="{{ $event_date }}" readonly>
-                                <label for="birthday" class="form-label input-field floating-label select-label">Date of
-                                    event * </label>
-                                <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
-                                        stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
+                                <div class="position-relative z-2">
+                                    <input type="text" class="form-control inputText" style="background: transparent"
+                                        id="event-date" data-isDate="{{ $event_date }}" name="event-date"
+                                        onblur="clearError(this)" value="{{ $event_date }}" readonly>
+                                    <label for="birthday" class="form-label input-field floating-label select-label">Date of
+                                        event * </label>
+                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
+                                            stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
 
-                        </div>
-                        <lable for="event-date" id="event-date-error" class="error"></lable>
-                    </div> -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="input-form">
-                            @php
-                                $start_date = '';
-                                $end_date = '';
-                                $event_date = '';
-                                if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
-                                    $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
-                                    $event_date = $start_date;
-                                }
-                                if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
-                                    $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
-                                    if ($start_date != $end_date) {
-                                        $event_date = $start_date . ' To ' . $end_date;
-                                    }
-                                }
-                            @endphp
-                            <div class="position-relative z-2">
-                                <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="start-event-date" data-isDate="{{ $start_date }}" name="event-date"
-                                    onblur="clearError(this)" value="{{ $start_date }}" readonly>
-                                <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
-                                    event * </label>
-                                <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
-                                        stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
                             </div>
-
-                        </div>
-                        <lable for="start_event-date" id="start_event-date-error" class="error"></lable>
-                    </div> 
-                    
-                    <div class="col-lg-6 mb-4">
-                        <div class="input-form">
-                            @php
-                                $start_date = '';
-                                $end_date = '';
-                                $event_date = '';
-                                if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
-                                    $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
-                                    $event_date = $start_date;
-                                }
-                                if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
-                                    $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
-                                    if ($start_date != $end_date) {
-                                        $event_date = $start_date . ' To ' . $end_date;
-                                    }
-                                }
-                            @endphp
-                            <div class="position-relative z-2">
-                                <input type="text" class="form-control inputText" style="background: transparent"
-                                    id="end-event-date" data-isDate="{{ $end_date }}" name="event-date"
-                                    onblur="clearError(this)" value="{{ $end_date }}" readonly>
-                                <label for="birthday" class="form-label input-field floating-label select-label">End Date of
-                                    event * </label>
-                                <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
-                                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
-                                        stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-
-                        </div>
-                        <lable for="end_event-date" id="end_event-date-error" class="error"></lable>
-                    </div>
-                    <div class="col-6 mb-4">
-                        <div class="form-group">
-                            <label>Start Time *</label>
-                            <div class="input-group time start-time timepicker start-time-create">
-                                <input type="text" class="form-control start_timepicker" placeholder="HH:MM AM/PM"
-                                    id="start-time" name="start-time" onblur="clearError(this)" readonly
-                                    value="{{ isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '' ? $eventDetail['rsvp_start_time'] : '' }}" /><span
-                                    class="input-group-append input-group-addon"><span class="input-group-text"><svg
-                                            width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
-                                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
-                                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg></span></span>
-                            </div>
-                            <lable for="start-time" id="event-start_time-error" class="error"></lable>
-                        </div>
-                    </div>
-                    <div class="col-6 mb-4">
-                        <div class="input-form">
-                            <select class="form-select" name="start_time_zone" id="start-time-zone"
-                                onchange="getStartEndTimeZone()">
+                            <lable for="event-date" id="event-date-error" class="error"></lable>
+                        </div> -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="input-form">
                                 @php
-                                    $start_time_zone = '';
-                                    if (
-                                        isset($eventDetail['rsvp_start_timezone']) &&
-                                        $eventDetail['rsvp_start_timezone'] != ''
-                                    ) {
-                                        $start_time_zone = $eventDetail['rsvp_start_timezone'];
+                                    $start_date = '';
+                                    $end_date = '';
+                                    $event_date = '';
+                                    if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
+                                        $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
+                                        $event_date = $start_date;
+                                    }
+                                    if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
+                                        $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
+                                        if ($start_date != $end_date) {
+                                            $event_date = $start_date . ' To ' . $end_date;
+                                        }
                                     }
                                 @endphp
-                                {{-- <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option> --}}
-                                <option value="PST" {{ $start_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
-                                <option value="MST" {{ $start_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
-                                <option value="CST" {{ $start_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
-                                <option value="EST" {{ $start_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                <option value="GMT+5:30" {{ $start_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30
-                                </option>
+                                <div class="position-relative z-2">
+                                    <input type="text" class="form-control inputText" style="background: transparent"
+                                        id="start-event-date" data-isDate="{{ $start_date }}" name="event-date"
+                                        onblur="clearError(this)" value="{{ $start_date }}" readonly>
+                                    <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
+                                        event * </label>
+                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
+                                            stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
 
-                                {{-- <option value="PST">PST</option>
-                                <option value="MST">MST</option>
-                                <option value="CST">CST</option>
-                                <option value="EST">EST</option>
-                                <option value="GMT05:30">GMT+05:30</option> --}}
-                            </select>
-                            <label for="select-label"
-                                class="form-label input-field floating-label select-label floatingfocus">Time
-                                Zone *</label>
+                            </div>
+                            <lable for="start_event-date" id="start_event-date-error" class="error"></lable>
+                        </div> 
+                        
+                        <div class="col-lg-6 mb-4">
+                            <div class="input-form">
+                                @php
+                                    $start_date = '';
+                                    $end_date = '';
+                                    $event_date = '';
+                                    if (isset($eventDetail['start_date']) && $eventDetail['start_date'] != '') {
+                                        $start_date = Carbon::parse($eventDetail['start_date'])->format('m-d-Y');
+                                        $event_date = $start_date;
+                                    }
+                                    if (isset($eventDetail['end_date']) && $eventDetail['end_date'] != '') {
+                                        $end_date = Carbon::parse($eventDetail['end_date'])->format('m-d-Y');
+                                        if ($start_date != $end_date) {
+                                            $event_date = $start_date . ' To ' . $end_date;
+                                        }
+                                    }
+                                @endphp
+                                <div class="position-relative z-2">
+                                    <input type="text" class="form-control inputText" style="background: transparent"
+                                        id="end-event-date" data-isDate="{{ $end_date }}" name="event-date"
+                                        onblur="clearError(this)" value="{{ $end_date }}" readonly>
+                                    <label for="birthday" class="form-label input-field floating-label select-label">End Date of
+                                        event * </label>
+                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M3.41797 7.57422H17.5846" stroke="#64748B" stroke-width="1.5"
+                                            stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M18 7.08268V14.166C18 16.666 16.75 18.3327 13.8333 18.3327H7.16667C4.25 18.3327 3 16.666 3 14.166V7.08268C3 4.58268 4.25 2.91602 7.16667 2.91602H13.8333C16.75 2.91602 18 4.58268 18 7.08268Z"
+                                            stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 11.4167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5801 13.9167H13.5875" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 11.4167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10.498 13.9167H10.5055" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 11.4167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.41209 13.9167H7.41957" stroke="#64748B" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <lable for="end_event-date" id="end_event-date-error" class="error"></lable>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <div class="form-group">
+                                <label>Start Time *</label>
+                                <div class="input-group time start-time timepicker start-time-create">
+                                    <input type="text" class="form-control start_timepicker" placeholder="HH:MM AM/PM"
+                                        id="start-time" name="start-time" onblur="clearError(this)" readonly
+                                        value="{{ isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '' ? $eventDetail['rsvp_start_time'] : '' }}" /><span
+                                        class="input-group-append input-group-addon"><span class="input-group-text"><svg
+                                                width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg></span></span>
+                                </div>
+                                <lable for="start-time" id="event-start_time-error" class="error"></lable>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <div class="input-form">
+                                <select class="form-select" name="start_time_zone" id="start-time-zone"
+                                    onchange="getStartEndTimeZone()">
+                                    @php
+                                        $start_time_zone = '';
+                                        if (
+                                            isset($eventDetail['rsvp_start_timezone']) &&
+                                            $eventDetail['rsvp_start_timezone'] != ''
+                                        ) {
+                                            $start_time_zone = $eventDetail['rsvp_start_timezone'];
+                                        }
+                                    @endphp
+                                    {{-- <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option> --}}
+                                    <option value="PST" {{ $start_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
+                                    <option value="MST" {{ $start_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
+                                    <option value="CST" {{ $start_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
+                                    <option value="EST" {{ $start_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
+                                    <option value="GMT+5:30" {{ $start_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30
+                                    </option>
+
+                                    {{-- <option value="PST">PST</option>
+                                    <option value="MST">MST</option>
+                                    <option value="CST">CST</option>
+                                    <option value="EST">EST</option>
+                                    <option value="GMT05:30">GMT+05:30</option> --}}
+                                </select>
+                                <label for="select-label"
+                                    class="form-label input-field floating-label select-label floatingfocus">Time
+                                    Zone *</label>
+                            </div>
+
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6>Add activity schedule to event </h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="schedule"
+                                                {{ isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule'] == '1' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @php
+                                $style = 'display:none';
+                                if (
+                                    isset($eventDetail['event_setting']['events_schedule']) &&
+                                    $eventDetail['event_setting']['events_schedule'] == '1'
+                                ) {
+                                    $style = '';
+                                }
+                            @endphp
+                            <div class="add-activity-schedule" style="{{ $style }}">
+                                <h5 class="step_1_activity">
+                                    @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
+                                <input type="hidden" id="TotalSedulare" value="{{ count($eventDetail['events_schedule_list']->data) }}">
+                                        <p id="isolddata"> {{ count($eventDetail['events_schedule_list']->data) }}
+                                            Activity </p>
+                                    @else
+                                        <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
+                                        schedule
+                                    @endif
+                                    <p id="isnewdata" style="display: none"> <span><i
+                                                class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
+                                    </p>
+                                </h5>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6>Add end time?</h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="end_time"
+                                                {{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] == '1' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h6>Add activity schedule to event </h6>
-                            <div class="toggle-button-cover ">
-                                <div class="button-cover">
-                                    <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="schedule"
-                                            {{ isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule'] == '1' ? 'checked' : '' }}>
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
+                        <div class="col-6 mb-4 end_time"
+                            style="{{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] !== '0' ? '' : 'display: none;' }}">
+                            <div class="form-group end-time-wrp">
+                                <label>End Time</label>
+                                <div class="input-group time timepicker">
+                                    <input type="text" class="form-control end_timepicker end-time-create"
+                                        placeholder="HH:MM AM/PM" id="end-time"
+                                        value="{{ isset($eventDetail['rsvp_end_time']) && $eventDetail['rsvp_end_time'] != '' ? $eventDetail['rsvp_end_time'] : '' }}"
+                                        name="end-time" onblur="clearError(this)" readonly /><span
+                                        class="input-group-append input-group-addon"><span class="input-group-text"><svg
+                                                width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg></span></span>
+                                </div>
+                                <label for="end-time" id="end-time-error" class="error"></label>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-4 end_time"
+                            style="{{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] !== '0' ? '' : 'display: none;' }}">
+                            <div class="input-form">
+                                <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()"
+                                    id="end-time-zone">
+                                    @php
+                                        $end_time_zone = '';
+                                        if (
+                                            isset($eventDetail['rsvp_end_time_set']) &&
+                                            $eventDetail['rsvp_end_time_set'] != ''
+                                        ) {
+                                            $end_time_zone = $eventDetail['rsvp_end_timezone'];
+                                        }
+                                    @endphp
+
+                                    <option value="PST" {{ $end_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
+                                    <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
+                                    <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
+                                    <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
+                                    {{-- <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30 --}}
+                                    </option>
+
+                                    {{-- <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
+                                    <option value="MST" {{($end_time_zone == 'MST')?'selected':''}}>MST</option>
+                                    <option value="CST" {{($end_time_zone == 'CST')?'selected':''}}>CST</option>
+                                    <option value="EST" {{($end_time_zone == 'EST')?'selected':''}}>EST</option> --}}
+                                </select>
+                                <label for="select-label"
+                                    class="form-label input-field floating-label select-label floatingfocus">Time
+                                    Zone *</label>
+                            </div>
+                            <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6>RSVP By Date</h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="rsvp_by_date"
+                                                {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @php
                             $style = 'display:none';
-                            if (
-                                isset($eventDetail['event_setting']['events_schedule']) &&
-                                $eventDetail['event_setting']['events_schedule'] == '1'
-                            ) {
+                            if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
                                 $style = '';
                             }
                         @endphp
-                        <div class="add-activity-schedule" style="{{ $style }}">
-                            <h5 class="step_1_activity">
-                                @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
-                            <input type="hidden" id="TotalSedulare" value="{{ count($eventDetail['events_schedule_list']->data) }}">
-                                    <p id="isolddata"> {{ count($eventDetail['events_schedule_list']->data) }}
-                                        Activity </p>
-                                @else
-                                    <span><i class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
-                                    schedule
-                                @endif
-                                <p id="isnewdata" style="display: none"> <span><i
-                                            class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
-                                </p>
-                            </h5>
-                            <i class="fa-solid fa-angle-right"></i>
+                        <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
+                            <div class="input-form">
+
+                                <input type="text" class="form-control inputText " id="rsvp-by-date"
+                                    name="rsvp-by-date" onblur="clearError(this)"
+                                    value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
+                                    readonly autocomplete="off">
+                                <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
+                                    Date</label>
+                            </div>
+                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                         </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h6>Add end time?</h6>
-                            <div class="toggle-button-cover ">
-                                <div class="button-cover">
-                                    <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="end_time"
-                                            {{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] == '1' ? 'checked' : '' }}>
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
+                        <div class="col-12 mb-4">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText" id="description" name="description"
+                                    value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
+                                <label for="description" class="form-label input-field floating-label">Event
+                                    Location Description</label>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="mb-0">Add Address</h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="isCheckAddress"
+                                                {{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-12 mb-4 ckeckedAddress"
+                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                            <div class="input-form location-icon">
+                                <input type="text" class="form-control inputText" id="address1" name="address1"
+                                    oninput="clearError(this)"
+                                    value="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? $eventDetail['address_1'] : '' }}"
+                                    required="">
+                                <label for="address1" class="form-label input-field floating-label">Address 1
+                                    *</label>
+                                <input type="hidden" id="latitude"
+                                    value="{{ isset($eventDetail['latitude']) && $eventDetail['latitude'] != '' ? $eventDetail['latitude'] : '' }}" />
+                                <input type="hidden" id="longitude"
+                                    value="{{ isset($eventDetail['longitude']) && $eventDetail['longitude'] != '' ? $eventDetail['longitude'] : '' }}" />
+                                <div id="map"></div>
 
-                    <div class="col-6 mb-4 end_time"
-                        style="{{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] !== '0' ? '' : 'display: none;' }}">
-                        <div class="form-group end-time-wrp">
-                            <label>End Time</label>
-                            <div class="input-group time timepicker">
-                                <input type="text" class="form-control end_timepicker end-time-create"
-                                    placeholder="HH:MM AM/PM" id="end-time"
-                                    value="{{ isset($eventDetail['rsvp_end_time']) && $eventDetail['rsvp_end_time'] != '' ? $eventDetail['rsvp_end_time'] : '' }}"
-                                    name="end-time" onblur="clearError(this)" readonly /><span
-                                    class="input-group-append input-group-addon"><span class="input-group-text"><svg
-                                            width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
-                                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
-                                                stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg></span></span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
+                                        stroke="#64748B" stroke-width="1.5" />
+                                    <path
+                                        d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
+                                        stroke="#64748B" stroke-width="1.5" />
+                                </svg>
                             </div>
-                            <label for="end-time" id="end-time-error" class="error"></label>
+                            <lable for="address1" id="event-address1-error" class="error"></lable>
                         </div>
-                    </div>
-                    <div class="col-6 mb-4 end_time"
-                        style="{{ isset($eventDetail['rsvp_end_time_set']) && $eventDetail['rsvp_end_time_set'] !== '0' ? '' : 'display: none;' }}">
-                        <div class="input-form">
-                            <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()"
-                                id="end-time-zone">
-                                @php
-                                    $end_time_zone = '';
-                                    if (
-                                        isset($eventDetail['rsvp_end_time_set']) &&
-                                        $eventDetail['rsvp_end_time_set'] != ''
-                                    ) {
-                                        $end_time_zone = $eventDetail['rsvp_end_timezone'];
-                                    }
-                                @endphp
-
-                                <option value="PST" {{ $end_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
-                                <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
-                                <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
-                                <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                {{-- <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30 --}}
-                                </option>
-
-                                {{-- <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
-                                <option value="MST" {{($end_time_zone == 'MST')?'selected':''}}>MST</option>
-                                <option value="CST" {{($end_time_zone == 'CST')?'selected':''}}>CST</option>
-                                <option value="EST" {{($end_time_zone == 'EST')?'selected':''}}>EST</option> --}}
-                            </select>
-                            <label for="select-label"
-                                class="form-label input-field floating-label select-label floatingfocus">Time
-                                Zone *</label>
-                        </div>
-                        <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h6>RSVP By Date</h6>
-                            <div class="toggle-button-cover ">
-                                <div class="button-cover">
-                                    <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="rsvp_by_date"
-                                            {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
-                                    </div>
-                                </div>
+                        <div class="col-12 mb-4 ckeckedAddress"
+                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                            <div class="input-form location-icon">
+                                <input type="text" class="form-control inputText" id="address2" name="address2"
+                                    required=""
+                                    value="{{ isset($eventDetail['address_2']) && $eventDetail['address_2'] != '' ? $eventDetail['address_2'] : '' }}">
+                                <label for="address2" class="form-label input-field floating-label">Address
+                                    2</label>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
+                                        stroke="#64748B" stroke-width="1.5" />
+                                    <path
+                                        d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
+                                        stroke="#64748B" stroke-width="1.5" />
+                                </svg>
                             </div>
                         </div>
-                    </div>
-                    @php
-                        $style = 'display:none';
-                        if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
-                            $style = '';
-                        }
-                    @endphp
-                    <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
-                        <div class="input-form">
+                        <div class="col-12 mb-4 ckeckedAddress"
+                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText" id="city" name="city"
+                                    oninput="clearError(this)" required=""
+                                    value="{{ isset($eventDetail['city']) && $eventDetail['city'] != '' ? $eventDetail['city'] : '' }}">
+                                <label for="select-label" class="form-label input-field floating-label select-label">City
+                                    *</label>
 
-                            <input type="text" class="form-control inputText " id="rsvp-by-date"
-                                name="rsvp-by-date" onblur="clearError(this)"
-                                value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
-                                readonly autocomplete="off">
-                            <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
-                                Date</label>
+                            </div>
+                            <lable for="city" id="event-city-error" class="error"></lable>
                         </div>
-                        <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="input-form">
-                            <input type="text" class="form-control inputText" id="description" name="description"
-                                value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
-                            <label for="description" class="form-label input-field floating-label">Event
-                                Location Description</label>
+                        <div class="col-6 mb-4 ckeckedAddress"
+                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText" id="state" name="state"
+                                    oninput="clearError(this)"
+                                    value="{{ isset($eventDetail['state']) && $eventDetail['state'] != '' ? $eventDetail['state'] : '' }}"
+                                    required="">
+
+                                <label for="select-label" class="form-label input-field floating-label select-label">State
+                                    *</label>
+
+                            </div>
+                            <lable for="city" id="event-state-error" class="error"></lable>
                         </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h6 class="mb-0">Add Address</h6>
-                            <div class="toggle-button-cover ">
-                                <div class="button-cover">
-                                    <div class="button r" id="button-1">
-                                        <input type="checkbox" class="checkbox" id="isCheckAddress"
-                                            {{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? 'checked' : '' }}>
-                                        <div class="knobs"></div>
-                                        <div class="layer"></div>
-                                    </div>
-                                </div>
+                        <div class="col-6 mb-4 ckeckedAddress"
+                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                            <div class="input-form">
+                                {{-- <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
+                                    oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}"> --}}
+                                <input type="text" class="form-control inputText" id="zipcode" name="zipcode"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)"
+                                    required=""
+                                    value="{{ isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '' ? $eventDetail['zip_code'] : '' }}">
+
+                                <label for="select-label" class="form-label input-field floating-label select-label">Zip
+                                    Code *</label>
+
+                            </div>
+                            <lable for="city" id="event-zipcode-error" class="error"></lable>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="input-form">
+                                <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests" style="resize:none;">{{ isset($eventDetail['message_to_guests']) && $eventDetail['message_to_guests'] != '' ? $eventDetail['message_to_guests'] : '' }}</textarea>
+                                <label for="code" class="form-label input-field floating-label textarea-label">Message
+                                    to Guests</label>
                             </div>
                         </div>
+                        <!-- Modal -->
+
+                        
                     </div>
-                    <div class="col-12 mb-4 ckeckedAddress"
-                        style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                        <div class="input-form location-icon">
-                            <input type="text" class="form-control inputText" id="address1" name="address1"
-                                oninput="clearError(this)"
-                                value="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? $eventDetail['address_1'] : '' }}"
-                                required="">
-                            <label for="address1" class="form-label input-field floating-label">Address 1
-                                *</label>
-                            <input type="hidden" id="latitude"
-                                value="{{ isset($eventDetail['latitude']) && $eventDetail['latitude'] != '' ? $eventDetail['latitude'] : '' }}" />
-                            <input type="hidden" id="longitude"
-                                value="{{ isset($eventDetail['longitude']) && $eventDetail['longitude'] != '' ? $eventDetail['longitude'] : '' }}" />
-                            <div id="map"></div>
-
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
-                                    stroke="#64748B" stroke-width="1.5" />
-                                <path
-                                    d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
-                                    stroke="#64748B" stroke-width="1.5" />
-                            </svg>
-                        </div>
-                        <lable for="address1" id="event-address1-error" class="error"></lable>
-                    </div>
-                    <div class="col-12 mb-4 ckeckedAddress"
-                        style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                        <div class="input-form location-icon">
-                            <input type="text" class="form-control inputText" id="address2" name="address2"
-                                required=""
-                                value="{{ isset($eventDetail['address_2']) && $eventDetail['address_2'] != '' ? $eventDetail['address_2'] : '' }}">
-                            <label for="address2" class="form-label input-field floating-label">Address
-                                2</label>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
-                                    stroke="#64748B" stroke-width="1.5" />
-                                <path
-                                    d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
-                                    stroke="#64748B" stroke-width="1.5" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-12 mb-4 ckeckedAddress"
-                        style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                        <div class="input-form">
-                            <input type="text" class="form-control inputText" id="city" name="city"
-                                oninput="clearError(this)" required=""
-                                value="{{ isset($eventDetail['city']) && $eventDetail['city'] != '' ? $eventDetail['city'] : '' }}">
-                            <label for="select-label" class="form-label input-field floating-label select-label">City
-                                *</label>
-
-                        </div>
-                        <lable for="city" id="event-city-error" class="error"></lable>
-                    </div>
-                    <div class="col-6 mb-4 ckeckedAddress"
-                        style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                        <div class="input-form">
-                            <input type="text" class="form-control inputText" id="state" name="state"
-                                oninput="clearError(this)"
-                                value="{{ isset($eventDetail['state']) && $eventDetail['state'] != '' ? $eventDetail['state'] : '' }}"
-                                required="">
-
-                            <label for="select-label" class="form-label input-field floating-label select-label">State
-                                *</label>
-
-                        </div>
-                        <lable for="city" id="event-state-error" class="error"></lable>
-                    </div>
-                    <div class="col-6 mb-4 ckeckedAddress"
-                        style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                        <div class="input-form">
-                            {{-- <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
-                                oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}"> --}}
-                            <input type="text" class="form-control inputText" id="zipcode" name="zipcode"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)"
-                                required=""
-                                value="{{ isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '' ? $eventDetail['zip_code'] : '' }}">
-
-                            <label for="select-label" class="form-label input-field floating-label select-label">Zip
-                                Code *</label>
-
-                        </div>
-                        <lable for="city" id="event-zipcode-error" class="error"></lable>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="input-form">
-                            <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests" style="resize:none;">{{ isset($eventDetail['message_to_guests']) && $eventDetail['message_to_guests'] != '' ? $eventDetail['message_to_guests'] : '' }}</textarea>
-                            <label for="code" class="form-label input-field floating-label textarea-label">Message
-                                to Guests</label>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-
-
-
-
-                    <div class="col-lg-12 mt-3">
-                        @if (isset($eventDetail['is_draft_save']) &&
-                                $eventDetail['is_draft_save'] == '0' &&
-                                (isset($eventDetail['id']) && $eventDetail['id'] != ''))
-                            <div class="guest-checkout new-edit-save-btn">
-                                <div>
-                                    <a href="#" class="cmn-btn saveDetailOnly">Save Changes</a>
-                                </div>
+                </div>
+                <div class="col-lg-12 mt-3">
+                    @if (isset($eventDetail['is_draft_save']) &&
+                            $eventDetail['is_draft_save'] == '0' &&
+                            (isset($eventDetail['id']) && $eventDetail['id'] != ''))
+                        <div class="guest-checkout new-edit-save-btn">
+                            <div>
+                                <a href="#" class="cmn-btn saveDetailOnly">Save Changes</a>
                             </div>
-                        @else
-                            <div class="design-seting">
-                                <a href="#" class="d-flex" id="next_design">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M10.0002 13.2797L5.65355 8.93306C5.14022 8.41973 5.14022 7.57973 5.65355 7.06639L10.0002 2.71973"
-                                                stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
-                                                stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                    <h5 class="ms-2">Edit Design</h5>
-                                </a>
-                                <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
-                                    <h5 class="me-2 guestBtn"  style="color: #b5b8bf !important;">Next: Guests</h5>
-                                    <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path id='guestBtn' class="guestBtn"
-                                                d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
-                                                stroke="#b5b8bf !important;" stroke-width="1.5" stroke-miterlimit="10"
-                                                stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-                        @endif
-                    </div>
+                        </div>
+                    @else
+                        <div class="design-seting">
+                            <a href="#" class="d-flex" id="next_design">
+                                <span>
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M10.0002 13.2797L5.65355 8.93306C5.14022 8.41973 5.14022 7.57973 5.65355 7.06639L10.0002 2.71973"
+                                            stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <h5 class="ms-2">Edit Design</h5>
+                            </a>
+                            <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
+                                <h5 class="me-2 guestBtn"  style="color: #b5b8bf !important;">Next: Guests</h5>
+                                <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path id='guestBtn' class="guestBtn"
+                                            d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
+                                            stroke="#b5b8bf !important;" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </form>
         </div>
