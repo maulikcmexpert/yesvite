@@ -446,9 +446,15 @@
 
 
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
-let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked').length;
+            $('input[name="design_subcategory_new"]').on('change', function () {
+    let checkedCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat):checked');
+    alert("Checked Count: " + checkedCheckboxes);
+    console.log("Checked Elements:", checkedCheckboxes);
+    console.log("Checked Count:", checkedCheckboxes.length);
+});
 
-alert(`Total: ${totalCheckboxes}, Checked: ${checkedCheckboxes}`);
+
+// alert(`Total: ${totalCheckboxes}, Checked: ${checkedCheckboxes}`);
 
             // if(checkedCheckboxes == 0){
             //     $('.categoryChecked_'+categoryIds).prop('checked',false);
