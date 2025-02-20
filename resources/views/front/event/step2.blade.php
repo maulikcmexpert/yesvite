@@ -443,8 +443,8 @@
             let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
 
             $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(function () {
-    let categoryId_new = $(this).data('category-id'); // Get category ID from data attribute
-    alert("Category ID: " + categoryId_new);
+    const categoryId_new = $(this).data('category-id');
+    alert( categoryId_new)
 
     if ($(`input[name="design_subcategory_new"][data-category-id="${categoryId_new}"]:checked`).length == 0) {
         $('.categoryChecked_' + categoryId_new).prop('checked', false);
