@@ -983,6 +983,13 @@
     display: block !important;
 }
 
+.new_event_detail_form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
 
 @media only screen and (min-width: 3801px) and (max-width: 4000px){
     .image-edit-inner-img {
