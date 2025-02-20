@@ -64,8 +64,8 @@
                                                                             for="subcategory{{ $subcategory->id }}">
                                                                             {{ $subcategory->subcategory_name }}
                                                                         </label>
-                                                                        <input class="form-check-input selectedCategory_{{ $category->id }}"
-                                                                            name="design_subcategory " type="checkbox"
+                                                                        <input class="form-check-input"
+                                                                            name="design_subcategory" type="checkbox"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -377,11 +377,6 @@
                 $(".image-item-new").hide();
                 $(".image-item").hide();
                 const categoryId = $(this).data("category-id");
-                $(`.subcategory_${categoryId} input[type="checkbox"]:not(#Allcat):checked`).each(function() {
-                    alert($(this).val()); // Or any specific logic
-                });
-
-
                 $('.subcategory_' + categoryId).prop('checked', true)
                 $(".category_" + categoryId).show()
                 const subcategoryId = $(this).data("subcategory-id");
