@@ -355,9 +355,7 @@ defer
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
 <script src="{{ asset('assets/front/new_js/scritp.js')}}"></script>
 <script src="{{ asset('assets/front/walljs/scritp.js')}}"></script>
