@@ -510,7 +510,7 @@
                 </button>
             </div>
 
-            <div class="format-text-main=wrp">
+            <div class="format-text-main-wrp">
                 <div class="format-text-inner format-type-wrp">
                     <h3>Type</h3>
                     <div class="format-text-inner-options">

@@ -134,6 +134,24 @@
 
 .sp-container.sp-flat{
     padding: 0px 24px 0px 24px;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
+}
+.format-text-main-wrp{
+    padding: 0px 24px 0px 24px;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
+}
+
+.upload-image-main-wrp{
+    padding: 0px 24px 0px 24px;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
+}
+.uploaded-images-wrp{
+    padding: 0px 24px 0px 24px;
+    max-height: calc(100vh - 174px);
+    height: calc(100vh - 174px);
 }
 
 
