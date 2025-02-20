@@ -1,4 +1,4 @@
-{{-- 
+{{--
 <section class="home-web-tabs-wrp">
     <div class="container">
         <nav>
@@ -87,7 +87,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input"
+                                                                    <input class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
@@ -148,7 +148,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input subcategory_{{$category->id}}"
+                                                                    <input class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{$category->id}}"
                                                                         name="design_subcategory_new" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
