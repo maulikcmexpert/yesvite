@@ -144,11 +144,11 @@
         .then(editor => {
             questionEditor = editor;
             editor.model.document.on('change:data', function() {
-                let questionContent = questionEditor.getData().trim(); // Allow spaces inside, but prevent empty input
-                if (questionContent.length > 0) {
+                let questionContent = questionEditor.getData().trim();
+                if (/\s/.test(questionContent)) {  // Checks if there is at least one space
                     $('.err_question').text('');
                 } else {
-                    $('.err_question').text('Please enter a question.');
+                    $('.err_question').text('Please enter at least two words.');
                 }
             });
         })
@@ -159,10 +159,10 @@
             answerEditor = editor;
             editor.model.document.on('change:data', function() {
                 let answerContent = answerEditor.getData().trim();
-                if (answerContent.length > 0) {
+                if (/\s/.test(answerContent)) {
                     $('.err_answer').text('');
                 } else {
-                    $('.err_answer').text('Please enter an answer.');
+                    $('.err_answer').text('Please enter at least two words.');
                 }
             });
         })
@@ -176,12 +176,12 @@
         $('.err_question').text('');
         $('.err_answer').text('');
 
-        if (questionContent.length === 0) {
-            $('.err_question').text('Please enter a question.');
+        if (!/\s/.test(questionContent)) {
+            $('.err_question').text('Please enter at least two words.');
             isValid = false;
         }
-        if (answerContent.length === 0) {
-            $('.err_answer').text('Please enter an answer.');
+        if (!/\s/.test(answerContent)) {
+            $('.err_answer').text('Please enter at least two words.');
             isValid = false;
         }
         if (!isValid) {
