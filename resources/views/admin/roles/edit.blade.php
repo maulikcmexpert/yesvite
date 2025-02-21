@@ -26,7 +26,7 @@
             </div>
 
 
-            <form method="post" action="{{ route('roles.store')}}" id="roleStoreForm">
+            <form method="post" action="{{ route('roles.update', $get_role_data->id) }}" id="roleEditForm">
 
                 @csrf
 
@@ -103,7 +103,7 @@
 
                 <div class="card-footer">
 
-                    <input type="submit" class="btn btn-primary" id="EventTypeAdd" value="Add">
+                    <input type="submit" class="btn btn-primary" id="EventTypeAdd" value="Update">
 
                 </div>
 

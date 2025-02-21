@@ -121,7 +121,34 @@ class RolesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Admin::findOrFail($id);
+
+        // Validate the incoming request data
+        // $request->validate([
+        //     'firstname' => 'required|string|max:255',
+        //     'lastname' => 'required|string|max:255',
+        //     'email' => 'required|email',
+        //     'phone_number' => 'nullable|numeric',
+        //     'address' => 'nullable|string|max:255',
+        //     // 'ci' => 'required|string|max:255',
+        //     // 'lastname' => 'required|string|max:255',
+        // ]);
+
+
+
+
+        // Update user data
+        $user->phone_number = $request->input('phone_number');
+
+
+
+
+        // Save the updated user details
+        $user->save();
+
+        // Redirect back to the user list or show a success message
+        return redirect()->route('roles.index')
+            ->with('msg', 'Role updated successfully.');
     }
 
     /**
