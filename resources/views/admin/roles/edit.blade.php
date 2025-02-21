@@ -26,7 +26,7 @@
             </div>
 
 
-            <form method="post" action="{{ route('roles.store')}}" id="roleStoreForm">
+            <form method="post" action="{{ route('roles.update', $get_role_data->id) }}" id="roleEditForm" enctype="multipart/form-data">
 
                 @csrf
 
@@ -85,7 +85,7 @@
 
                             <label for="exampleInputEmail1">Phone Number</label>
 
-                            <input type="password" class="form-control" name="phone_number" placeholder="Enter Phone Number" value="{{$get_role_data->phone_number}}">
+                            <input type="text" class="form-control" name="phone_number" placeholder="Enter Phone Number" value="{{$get_role_data->phone_number}}">
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
@@ -103,7 +103,7 @@
 
                 <div class="card-footer">
 
-                    <input type="submit" class="btn btn-primary" id="EventTypeAdd" value="Add">
+                    <input type="submit" class="btn btn-primary" value="Update">
 
                 </div>
 
