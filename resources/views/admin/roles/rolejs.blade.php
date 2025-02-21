@@ -1,4 +1,5 @@
 <script>
+    alert();
     $(document).ready(function() {
         $("#roleStoreForm").validate({
             rules: {
