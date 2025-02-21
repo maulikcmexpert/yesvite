@@ -84,7 +84,6 @@ $(document).ready(function () {
 });
 
 $(document).on("click", ".design-cards", function () {
-    alert(0);
     var url = $(this).data("url");
     var template = $(this).data("template");
     var imageUrl = $(this).data("image");
