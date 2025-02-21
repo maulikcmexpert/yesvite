@@ -81,6 +81,17 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1">Phone Number</label>
+
+                            <input type="text" class="form-control" name="phone_number" placeholder="Enter Phone Number" value="{{$get_role_data->phone_number}}"  oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+                            <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
+
+                        </div>
+                    </div>
                 </div>
 
                 {{-- <div class="text-center">

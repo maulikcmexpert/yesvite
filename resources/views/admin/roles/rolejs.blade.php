@@ -1,5 +1,5 @@
 <script>
-    alert();
+
     $(document).ready(function() {
         $("#roleStoreForm").validate({
             rules: {
@@ -39,7 +39,31 @@
                 role: {
                     required: true,
                     // minlength: 3
-                }
+                },
+                phone_number: {
+                        // required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15,
+                        // remote: {
+                        //     headers: {
+                        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        //             "content"
+                        //         ),
+                        //     },
+                        //     url: "{{URL::to('admin/user/check_new_contactnumber')}}",
+                        //     type: "POST",
+                        //     data: {
+                        //         phone_number: function() {
+                        //             return $(".phone_number").val();
+                        //         },
+                        //         id: function() {
+                        //             return $("#edit_id").val();
+                        //         },
+                        //     },
+                        // },
+                    }
+
             },
             messages: {
                 name: {
@@ -63,7 +87,15 @@
                 role: {
                     required: "Please enter a role",
                     // minlength: "Role must be at least 3 characters long"
-                }
+                },
+                phone_number: {
+                        // required: "Please Enter Mobile Number",
+                        // required: "Please enter a Phone Number",
+                        digits: "Please enter a valid Phone Number",
+                        minlength: "Phone Number must be minimum 10 digit",
+                        maxlength: "Phone Number must be maxmimum 15 digit",
+                        // remote: "Phone Number is already exsits",
+                        }
             },
             submitHandler: function(form) {
                 form.submit();
