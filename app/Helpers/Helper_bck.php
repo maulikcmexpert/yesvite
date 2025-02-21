@@ -1665,10 +1665,14 @@ function logoutFromWeb($userId)
 function sendSMS($receiverNumber, $message)
 {
     try {
-
-        $account_sid = env('ACCOUNT_SID');
-        $auth_token = env("AUTH_TOKEN");
-        $twilio_number = env("TWILIO_NUMBER");
+        dd($receiverNumber,$message);
+        $twl_acc=ServerKey::get()->first();
+        // $account_sid = env('ACCOUNT_SID');
+        // $auth_token = env("AUTH_TOKEN");
+        // $twilio_number = env("TWILIO_NUMBER");
+        $account_sid = $twl_acc->twilio_account_sid;
+        $auth_token = $twl_acc->twilio_auth_token;
+        $twilio_number = $twl_acc->twilio_number;
 
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($receiverNumber, [
