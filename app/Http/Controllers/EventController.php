@@ -4077,6 +4077,8 @@ class EventController extends BaseController
                         // dd($newInviteGuest);
 
                         sendNotification('invite', $notificationParam);
+                        sendNotificationGuest('invite', $notificationParam);
+
                     }
 
                     // $newInviteGuest = array_map(
