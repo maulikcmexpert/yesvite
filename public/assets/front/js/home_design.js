@@ -6,14 +6,6 @@ $(document).ready(function () {
     $("#Allcat").prop("checked", false);
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
-    $(".image-item").each(function () {
-        var subcategoryId = $(this).data("subcategory-id");
-        var images = $(`.image-item[data-subcategory-id="${subcategoryId}"]`);
-
-        if (images.length > 5) {
-            images.slice(5).hide(); // Hide images after the 5th one
-        }
-    });
 
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
