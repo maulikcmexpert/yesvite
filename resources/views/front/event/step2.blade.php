@@ -244,6 +244,7 @@
         } else {
             // If unchecked, uncheck the corresponding checkbox in design_subcategory
             $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
+            $('#Allcat').prop('checked', false);
         }
     });
 
