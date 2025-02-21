@@ -82,7 +82,7 @@ class Auth extends Controller
                             ];
                         }else{
                             $sendMesage = [
-                                "status" => true,
+                                "status" => false,
                                 "message" => "Please add mobile number",
                             ];
                         }
