@@ -200,6 +200,21 @@
     <!-- /.card -->
 
 </div>
+<script>
+    document.querySelectorAll(".inputOtp").forEach(function (input) {
+        input.addEventListener("input", function () {
+            // Allow only numbers (0-9)
+            this.value = this.value.replace(/[^0-9]/g, "");
+        });
+
+        input.addEventListener("keydown", function (event) {
+            // Prevent entering special characters (except Backspace, Arrow keys)
+            if (!/[0-9]/.test(event.key) && event.key !== "Backspace" && event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 {{-- @push('scripts') --}}
 
 {{-- @endpush --}}
