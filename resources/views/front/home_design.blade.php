@@ -175,7 +175,8 @@
             @foreach ($categories as $category)
                 @foreach ($category->subcategory as $subcategory)
                     @php
-                        $firstFiveImages = $subcategory->textdatas->take(5); // Get only first 5 images
+                        $firstFiveImages = $subcategory->textdatas->take(5);
+                        dd($firstFiveImages);
                     @endphp
 
                     @foreach ($firstFiveImages as $image)
