@@ -996,7 +996,7 @@
     overflow-y: scroll;
 }
 
-.new_event_detail_form form .row{
+.new_event_detail_form form ~ .row{
     padding-bottom: 50px !important;
 }
 
