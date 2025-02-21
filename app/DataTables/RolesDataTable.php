@@ -41,7 +41,10 @@ class RolesDataTable extends DataTable
             ->addColumn('role', function ($row) {
                 return (isset($row->role) && $row->role != "") ? $row->role : "";
             })
-            ->rawColumns(['name', 'email','role']);
+            ->addColumn('phone', function ($row) {
+                return (isset($row->phone_number) && $row->phone_number != "") ? $row->phone_number : "";
+            })
+            ->rawColumns(['name', 'email','role','phone']);
 
     }
 
@@ -87,6 +90,8 @@ class RolesDataTable extends DataTable
             Column::make('name')->title('Name')->orderable(true),
             Column::make('email')->title("Email")->orderable(true),
             Column::make('role')->title("Role")->orderable(true),
+            Column::make('phone')->title("Phone Number")->orderable(true),
+
 
            // Column::make('action')->title("Action"),
         ];
