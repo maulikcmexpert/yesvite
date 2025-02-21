@@ -61,7 +61,11 @@ class RolesController extends Controller
         $storerole = new Admin;
         $storerole->name=$request->name;
         $storerole->email=$request->email;
-        $storerole->password= Hash::make($request->password);;
+        $storerole->password= Hash::make($request->password);
+        $storerole->country_code = '+1';
+        $storerole->phone_number = $request->phone_number;
+
+
         $storerole->is_admin='0';
         $storerole->role=$request->role;
         
@@ -138,7 +142,10 @@ class RolesController extends Controller
 
 
         // Update user data
+        $user->country_code = '+1';
         $user->phone_number = $request->input('phone_number');
+        
+        
 
 
 
