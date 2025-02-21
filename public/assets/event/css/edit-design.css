@@ -983,7 +983,7 @@
     display: block !important;
 }
 
-.new_event_detail_form form{
+.new_event_detail_form > form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
