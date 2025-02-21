@@ -616,27 +616,37 @@
 
 
 
+@media only screen and (min-width: 1801px) {
+    .guest-wrapper {
+        width: 100%;
+        max-width: calc(100% - 780px);
+        height: 100vh;
+        position: sticky;
+        margin-right: 20px;
+        /* top: 20px; */
+    }
+}
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
-        max-width: 1000px;
+        max-width: 950px;
     }
 }
 
 @media only screen and (max-width: 1600px) {
     .guest-wrapper {
-        max-width: 800px;
+        max-width: 750px;
     }
 }
 
 @media only screen and (max-width: 1500px) {
     .guest-wrapper {
-        max-width: 750px;
+        max-width: 700px;
     }
 }
 
 @media only screen and (max-width: 1400px) {
     .guest-wrapper {
-        max-width: 600px;
+        max-width: 550px;
     }
 }
 
