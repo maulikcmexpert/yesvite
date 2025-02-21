@@ -89,10 +89,10 @@ class faqController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'question' => 'required|string|max:255',
-        //     'answer' => 'required|string|max:5000',
-        // ]);
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string|max:5000',
+        ]);
 
         try {
             DB::beginTransaction();

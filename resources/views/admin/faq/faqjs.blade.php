@@ -91,57 +91,62 @@
 
 
 
-        $(document).ready(function() {
-            let questionEditor, answerEditor;
-            // Initialize CKEditors for question and answer
-            ClassicEditor.create(document.querySelector('#question'))
-                .then(editor => {
-                    questionEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let questionContent = questionEditor.getData().trim();
-                        if (questionContent) {
-                            $('.err_question').text('');
-                        } else {
-                            $('.err_question').text('Please enter a question.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
+    $(document).ready(function() {
+    let questionEditor, answerEditor;
 
-            ClassicEditor.create(document.querySelector('#answer'))
-                .then(editor => {
-                    answerEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let answerContent = answerEditor.getData().trim();
-                        if (answerContent) {
-                            $('.err_answer').text('');
-                        } else {
-                            $('.err_answer').text('Please enter an answer.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
-
-            $('#faqAddForm').on('submit', function(e) {
-                let isValid = true;
+    // Initialize CKEditors for question and answer
+    ClassicEditor.create(document.querySelector('#question'))
+        .then(editor => {
+            questionEditor = editor;
+            editor.model.document.on('change:data', function() {
                 let questionContent = questionEditor.getData().trim();
-                let answerContent = answerEditor.getData().trim();
-                $('.err_question').text('');
-                $('.err_answer').text('');
-                if (!questionContent) {
+                if (questionContent.length === 0) {
                     $('.err_question').text('Please enter a question.');
-                    isValid = false;
-                }
-                if (!answerContent) {
-                    $('.err_answer').text('Please enter an answer.');
-                    isValid = false;
-                }
-                if (!isValid) {
-                    e.preventDefault();
+                } else {
+                    $('.err_question').text('');
                 }
             });
-});
+        })
+        .catch(error => console.error(error));
 
+    ClassicEditor.create(document.querySelector('#answer'))
+        .then(editor => {
+            answerEditor = editor;
+            editor.model.document.on('change:data', function() {
+                let answerContent = answerEditor.getData().trim();
+                if (answerContent.length === 0) {
+                    $('.err_answer').text('Please enter an answer.');
+                } else {
+                    $('.err_answer').text('');
+                }
+            });
+        })
+        .catch(error => console.error(error));
+
+    $('#faqAddForm').on('submit', function(e) {
+        let isValid = true;
+        let questionContent = questionEditor.getData().trim();
+        let answerContent = answerEditor.getData().trim();
+
+        $('.err_question').text('');
+        $('.err_answer').text('');
+
+        let wordCountQuestion = questionContent.split(/\s+/).filter(word => word.length > 0).length;
+        let wordCountAnswer = answerContent.split(/\s+/).filter(word => word.length > 0).length;
+
+        if (wordCountQuestion < 2) {
+            $('.err_question').text('Please enter at least two words.');
+            isValid = false;
+        }
+        if (wordCountAnswer < 2) {
+            $('.err_answer').text('Please enter at least two words.');
+            isValid = false;
+        }
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+});
 
     });
 </script>
