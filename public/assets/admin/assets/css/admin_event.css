@@ -1458,6 +1458,7 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 
 #toast-container>.toast-error {
     background-image: url('../../../toaster_error_icon.png') !important;
+    
 }
 
 .toast.toast-success{
@@ -1474,6 +1475,9 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 
 #toast-container>.toast-success {
     background-image: url('../../../toater_success_icon.png') !important;
+    
+
+    ('../../../assets/toater_success_icon.png')
 }
 
 #toast-container>div{
