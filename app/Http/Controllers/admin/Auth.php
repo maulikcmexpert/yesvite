@@ -58,6 +58,8 @@ class Auth extends Controller
                 }
 
                 $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
+                session()->forget('otp');
+                session(['otp' => $token]);
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
                 $saveOtp->otp = "111111";
                 $saveOtp->save();
