@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="phone_number">Phone Number</label>
                             <input type="text" class="form-control" name="phone_number"
-                                placeholder="Enter Phone Number" value="{{ $getTemData->phone_number }}">
+                                placeholder="Enter Phone Number" value="{{ $getTemData->phone_number }}"  oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                         </div>
                     </div>
