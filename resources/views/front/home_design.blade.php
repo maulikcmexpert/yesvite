@@ -174,6 +174,7 @@
         <div class="row list_all_design_catgeory">
             @foreach ($categories as $category)
             @foreach ($category->subcategory as $subcategory)
+            @foreach ($subcategory->textdatas as $image)
                 @php
                     $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
                     $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
@@ -195,8 +196,9 @@
                     </div>
                 @endif
                 @endforeach
-            @endforeach
+                @endforeach
 
+                @endforeach
 
         </div>
 
