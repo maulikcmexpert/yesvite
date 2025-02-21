@@ -97,7 +97,7 @@
 }
 
 #toast-container > .toast-error {
-    background-image: url("../../toaster_error_icon.png") !important;
+    background-image: url("../toaster_error_icon.png") !important;
 
 }
 
