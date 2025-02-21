@@ -1,4 +1,3 @@
-{{dd($get_role_data->name);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -38,7 +37,7 @@
 
                             <label for="exampleInputEmail1">Name</label>
 
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{$get_role_data->name}}" readonly>
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
@@ -51,7 +50,7 @@
 
                             <label for="exampleInputEmail1">Email</label>
 
-                            <input type="text" class="form-control email" name="email" placeholder="Enter Email" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control email" name="email" placeholder="Enter Email" value="{{$get_role_data->email}}" readonly>
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
@@ -63,7 +62,7 @@
 
                             <label for="exampleInputEmail1">Password</label>
 
-                            <input type="password" class="form-control" name="password" placeholder="Enter Password" value="{{ old('event_type.*')}}">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" value="{{$get_role_data->password}}" readonly>
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
@@ -81,7 +80,17 @@
 
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
 
+                            <label for="exampleInputEmail1">Phone Number</label>
+
+                            <input type="password" class="form-control" name="phone_number" placeholder="Enter Phone Number" value="{{$get_role_data->phone_number}}">
+
+                            <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
+
+                        </div>
+                    </div>
                 </div>
 
                 {{-- <div class="text-center">
