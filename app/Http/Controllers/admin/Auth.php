@@ -60,29 +60,26 @@ class Auth extends Controller
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
 
                 if (config('app.debug', true)) {
-                    // return false;
-                    $saveOtp->otp = '111111';
-                    $saveOtp->save();
-                    $sendMesage = [
-                        "status" => true,
-                        "message" => "success"
-                    ];
+                        $saveOtp->otp = '111111';
+                        $saveOtp->save();
+                        $sendMesage = [
+                            "status" => true,
+                            "message" => "success"
+                        ];
                 }else{
-                $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
-                session()->forget('otp');
-                session(['otp' => $token]);
-                $saveOtp->otp = $token;
-                $saveOtp->save();
-                $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
-                // $phoneNumber = '+' . '91' . '9723840340';
-                $message = "Your verification code for Admin is: " . $token;
-                $sendMesage =  sendSMS($phoneNumber, $message);
-                $sendMesage = [
-                    "status" => true,
-                    "message" => "success"
-                ];
+                        $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
+                        session()->forget('otp');
+                        session(['otp' => $token]);
+                        $saveOtp->otp = $token;
+                        $saveOtp->save();
+                        $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                        $message = "Your verification code for Admin is: " . $token;
+                        $sendMesage =  sendSMS($phoneNumber, $message);
+                        $sendMesage = [
+                            "status" => true,
+                            "message" => "success"
+                        ];
             }
-                // dd($sendMesage);
 
                 if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
