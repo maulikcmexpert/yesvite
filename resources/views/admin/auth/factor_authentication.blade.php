@@ -162,7 +162,7 @@
     <!-- /.card -->
 
 </div>
-@push('scripts')
+{{-- @push('scripts') --}}
 <script>
 $(document).ready(function () {
     toastr.options = {
@@ -196,4 +196,4 @@ $(document).ready(function () {
             @endif
         });
 </script>
-@endpush
+{{-- @endpush --}}
