@@ -173,34 +173,29 @@
         {{-- {{ dd($categories);}} --}}
         <div class="row list_all_design_catgeory">
             @foreach ($categories as $category)
-            @foreach ($category->subcategory as $subcategory)
-            @foreach ($subcategory->textdatas as $image)
-                @php
-                    $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
-                    $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
-                @endphp
+                @foreach ($category->subcategory as $subcategory)
+                    @php
+                        $firstFiveImages = $subcategory->textdatas->take(5); // Get only first 5 images
+                    @endphp
 
-                @if ($firstTextData)
-                    <div id="design_category"
-                        class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                        data-category-id="{{ $category->id }}" data-subcategory-id="{{$subcategory->id }}"
-                        data-category_name="{{ $category->category_name }}">
-                        <a href="#" class="collection-card card-blue">
-                            <div class="card-img">
-                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                alt="shower-card">
-                            </div>
-                            {{-- <h4>{{ $category->category_name }}</h4> --}}
-                        </a>
-                    </div>
-                @endif
+                    @foreach ($firstFiveImages as $image)
+                        <div id="design_category"
+                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                            data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
+                            data-category_name="{{ $category->category_name }}">
+                            <a href="#" class="collection-card card-blue">
+                                <div class="card-img">
+                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                        alt="shower-card">
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 @endforeach
-                @endforeach
-
-                @endforeach
-
+            @endforeach
         </div>
+
 
 
         {{-- <div class="row list_all_design_catgeory_new">

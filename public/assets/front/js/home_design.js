@@ -6,6 +6,15 @@ $(document).ready(function () {
     $("#Allcat").prop("checked", false);
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
+    $(".image-item").each(function () {
+        var subcategoryId = $(this).data("subcategory-id");
+        var images = $(`.image-item[data-subcategory-id="${subcategoryId}"]`);
+
+        if (images.length > 5) {
+            images.slice(5).hide(); // Hide images after the 5th one
+        }
+    });
+
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
@@ -67,7 +76,9 @@ $(document).ready(function () {
                     ).show();
                 });
             } else {
-                $(".image-item").show(); // Show all images when nothing is checked
+                var images = $(`.image-item[data-subcategory-id="${subcategoryId}"]`);
+            images.hide(); // Hide all
+            images.slice(0, 5).show(); // Show first 5
             }
 
             // Update count
