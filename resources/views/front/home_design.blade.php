@@ -186,7 +186,7 @@
                         data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                         data-category-id="{{ $category->id }}" data-subcategory-id="{{ $firstSubcategory->id }}"
                         data-category_name="{{ $category->category_name }}">
-                        <a href="javascript:;" class="collection-card card-blue">
+                        <a href="#" class="collection-card card-blue">
                             <div class="card-img">
                                 <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                 alt="shower-card">
