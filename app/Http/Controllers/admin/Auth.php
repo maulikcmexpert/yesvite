@@ -101,6 +101,7 @@ class Auth extends Controller
 
         $id = decrypt($request->adminId);
 
+        dd($request);
         $checkOtp = Admin::where(['id' => $id, 'otp' => $request->verification_otp])->first();
 
         // $role=$checkOtp->role;
