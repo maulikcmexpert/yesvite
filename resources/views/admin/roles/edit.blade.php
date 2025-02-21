@@ -1,4 +1,4 @@
-{{dd('get_role_data');}}
+{{dd($get_role_data);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
