@@ -144,7 +144,7 @@
         .then(editor => {
             questionEditor = editor;
             editor.model.document.on('change:data', function() {
-                let questionContent = questionEditor.getData().replace(/<[^>]*>/g, '').trim(); // Remove HTML tags and trim
+                let questionContent = questionEditor.getData(); // Remove HTML tags and trim
                 if (questionContent.length > 0) {
                     $('.err_question').text('');
                 } else {
@@ -158,7 +158,7 @@
         .then(editor => {
             answerEditor = editor;
             editor.model.document.on('change:data', function() {
-                let answerContent = answerEditor.getData().replace(/<[^>]*>/g, '').trim();
+                let answerContent = answerEditor.getData();
                 if (answerContent.length > 0) {
                     $('.err_answer').text('');
                 } else {
@@ -170,8 +170,8 @@
 
     $('#faqAddForm').on('submit', function(e) {
         let isValid = true;
-        let questionContent = questionEditor.getData().replace(/<[^>]*>/g, '').trim();
-        let answerContent = answerEditor.getData().replace(/<[^>]*>/g, '').trim();
+        let questionContent = questionEditor.getData();
+        let answerContent = answerEditor.getData();
 
         $('.err_question').text('');
         $('.err_answer').text('');
