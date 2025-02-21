@@ -137,56 +137,73 @@
 
         // });
 
-        $(document).ready(function() {
-            let questionEditor, answerEditor;
-            // Initialize CKEditors for question and answer
-            ClassicEditor.create(document.querySelector('#question'))
-                .then(editor => {
-                    questionEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let questionContent = questionEditor.getData().replace(/<p>&nbsp;<\/p>/g, '');
-                        if (questionContent) {
-                            $('.err_question').text('');
-                        } else {
-                            $('.err_question').text('Please enter a question.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
 
-            ClassicEditor.create(document.querySelector('#answer'))
-                .then(editor => {
-                    answerEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let answerContent = answerEditor.getData().replace(/<p>&nbsp;<\/p>/g, '');
-                        if (answerContent) {
-                            $('.err_answer').text('');
-                        } else {
-                            $('.err_answer').text('Please enter an answer.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
+    let questionEditor, answerEditor;
 
-            $('#faqAddForm').on('submit', function(e) {
-                let isValid = true;
-                let questionContent = questionEditor.getData().trim();
-                let answerContent = answerEditor.getData().trim();
+    // Initialize CKEditor for the "Question" with Autoformat disabled.
+    ClassicEditor.create(document.querySelector('#question'), {
+        removePlugins: ['Autoformat']
+    })
+    .then(editor => {
+        questionEditor = editor;
+        // Log keydown events to see if space (key code 32) is captured.
+        editor.editing.view.document.on('keydown', (evt, data) => {
+            console.log('Question Editor Key pressed:', data.keyCode);
+        });
+        editor.model.document.on('change:data', function() {
+            let questionContent = questionEditor.getData();
+            if (questionContent.trim().length > 0) {
                 $('.err_question').text('');
+            } else {
+                $('.err_question').text('Please enter a question.');
+            }
+        });
+    })
+    .catch(error => console.error(error));
+
+    // Initialize CKEditor for the "Answer" with Autoformat disabled.
+    ClassicEditor.create(document.querySelector('#answer'), {
+        removePlugins: ['Autoformat']
+    })
+    .then(editor => {
+        answerEditor = editor;
+        editor.editing.view.document.on('keydown', (evt, data) => {
+            console.log('Answer Editor Key pressed:', data.keyCode);
+        });
+        editor.model.document.on('change:data', function() {
+            let answerContent = answerEditor.getData();
+            if (answerContent.trim().length > 0) {
                 $('.err_answer').text('');
-                if (!questionContent) {
-                    $('.err_question').text('Please enter a question.');
-                    isValid = false;
-                }
-                if (!answerContent) {
-                    $('.err_answer').text('Please enter an answer.');
-                    isValid = false;
-                }
-                if (!isValid) {
-                    e.preventDefault();
-                }
-            });
-});
+            } else {
+                $('.err_answer').text('Please enter an answer.');
+            }
+        });
+    })
+    .catch(error => console.error(error));
+
+    // Form validation on submit
+    $('#faqAddForm').on('submit', function(e) {
+        let isValid = true;
+        let questionContent = questionEditor.getData().trim();
+        let answerContent = answerEditor.getData().trim();
+
+        $('.err_question').text('');
+        $('.err_answer').text('');
+
+        if (questionContent.length === 0) {
+            $('.err_question').text('Please enter a question.');
+            isValid = false;
+        }
+        if (answerContent.length === 0) {
+            $('.err_answer').text('Please enter an answer.');
+            isValid = false;
+        }
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+
+
 
 
     });
