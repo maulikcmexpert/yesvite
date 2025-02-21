@@ -1,7 +1,7 @@
 @php
 use Carbon\Carbon;
 @endphp
-<div class="col-xl-4">
+<div class="col-xl-5">
     <div class="home-main-right">
         <div class="calendar-wrp">
             <div class="accordion" id="accordionExample">
