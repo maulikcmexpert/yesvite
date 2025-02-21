@@ -44,13 +44,10 @@ $(document).ready(function () {
             $(".categoryNew").show();
             $(".subcategoryNew").hide();
             $("#allchecked").hide();
-            // If all individual checkboxes are checked, check "All Categories"
-            const totalCheckboxes = $(
-                'input[name="design_subcategory"]:not(#Allcat)'
-            ).length;
-            const checkedCheckboxes = $(
-                'input[name="design_subcategory"]:not(#Allcat):checked'
-            ).length;
+
+            // Get total checkboxes and checked checkboxes
+            const totalCheckboxes = $('input[name="design_subcategory"]:not(#Allcat)').length;
+            const checkedCheckboxes = $('input[name="design_subcategory"]:not(#Allcat):checked').length;
 
             if (checkedCheckboxes === totalCheckboxes) {
                 $("#Allcat").prop("checked", true);
@@ -58,29 +55,25 @@ $(document).ready(function () {
                 $("#Allcat").prop("checked", false);
             }
 
-            // Filter images based on checked categories
+            // If any checkbox is checked, filter images
             if (checkedCheckboxes > 0) {
                 $(".image-item").hide(); // Hide all images first
-                $('input[name="design_subcategory"]:not(#Allcat):checked').each(
-                    function () {
-                        const categoryId = $(this).data("category-id");
-                        const subcategoryId = $(this).data("subcategory-id");
+                $('input[name="design_subcategory"]:checked').each(function () {
+                    const categoryId = $(this).data("category-id");
+                    const subcategoryId = $(this).data("subcategory-id");
 
-                        // Show images matching the selected categories and subcategories
-                        $(
-                            `.image-item[data-category-id="${categoryId}"]`
-                        ).show();
-                        var visibleItems = $(".all_designs:visible").length;
-                        $(".total_design_count").text(visibleItems + " Items");
-                    }
-                );
+                    $(`.image-item[data-category-id="${categoryId}"]`).show();
+                });
             } else {
-                $(".image-item").hide(); // Hide all images if no checkboxes are checked
-                var visibleItems = $(".all_designs:visible").length;
-                $(".total_design_count").text(visibleItems + " Items");
+                $(".image-item").show(); // Show all images when nothing is checked
             }
+
+            // Update count
+            var visibleItems = $(".all_designs:visible").length;
+            $(".total_design_count").text(visibleItems + " Items");
         }
     );
+
     $("#resetCategories").on("click", function (e) {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
