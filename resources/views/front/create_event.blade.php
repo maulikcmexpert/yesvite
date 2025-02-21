@@ -496,9 +496,9 @@
                     <span class="">
                         {{-- {{$setPrice[0]['coins']}}  |  --}}
 
-                      <span class="green-price">Buy >
+                      <span class="green-price">Buy &nbsp;&nbsp;&nbsp;
                         {{-- ${{$setPrice[0]['price']}} --}}
-                    </span>
+                    </span> >
                     </span>
                 </div>
                 </div>
