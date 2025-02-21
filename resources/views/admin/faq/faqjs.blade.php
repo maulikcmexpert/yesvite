@@ -144,11 +144,11 @@
         .then(editor => {
             questionEditor = editor;
             editor.model.document.on('change:data', function() {
-                let questionContent = questionEditor.getData().replace(/<[^>]*>/g, '').trim(); // Remove HTML tags and trim
-                if (questionContent.length > 0) {
+                let questionContent = questionEditor.getData().trim();
+                if (/\s/.test(questionContent)) {  // Checks if there is at least one space
                     $('.err_question').text('');
                 } else {
-                    $('.err_question').text('Please enter a valid question.');
+                    $('.err_question').text('Please enter at least two words.');
                 }
             });
         })
@@ -158,11 +158,11 @@
         .then(editor => {
             answerEditor = editor;
             editor.model.document.on('change:data', function() {
-                let answerContent = answerEditor.getData().replace(/<[^>]*>/g, '').trim();
-                if (answerContent.length > 0) {
+                let answerContent = answerEditor.getData().trim();
+                if (/\s/.test(answerContent)) {
                     $('.err_answer').text('');
                 } else {
-                    $('.err_answer').text('Please enter a valid answer.');
+                    $('.err_answer').text('Please enter at least two words.');
                 }
             });
         })
@@ -170,18 +170,18 @@
 
     $('#faqAddForm').on('submit', function(e) {
         let isValid = true;
-        let questionContent = questionEditor.getData().replace(/<[^>]*>/g, '').trim();
-        let answerContent = answerEditor.getData().replace(/<[^>]*>/g, '').trim();
+        let questionContent = questionEditor.getData().trim();
+        let answerContent = answerEditor.getData().trim();
 
         $('.err_question').text('');
         $('.err_answer').text('');
 
-        if (questionContent.length === 0) {
-            $('.err_question').text('Please enter a valid question.');
+        if (!/\s/.test(questionContent)) {
+            $('.err_question').text('Please enter at least two words.');
             isValid = false;
         }
-        if (answerContent.length === 0) {
-            $('.err_answer').text('Please enter a valid answer.');
+        if (!/\s/.test(answerContent)) {
+            $('.err_answer').text('Please enter at least two words.');
             isValid = false;
         }
         if (!isValid) {
