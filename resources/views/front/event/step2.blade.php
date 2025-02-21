@@ -235,19 +235,21 @@
                 const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
                 window.history.replaceState(null, '', newUrl);
             }
-            $('input[name="design_subcategory_new"]').on('change', function () {
-        let subcategoryId = $(this).data('subcategory-id');
+            $('input[name="design_subcategory_new"]').on('change', function() {
+                let subcategoryId = $(this).data('subcategory-id');
 
-        // If checked, check the corresponding checkbox in design_subcategory
-        if ($(this).is(':checked')) {
-            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
-            $('#Allcat').prop('checked', true);
-        } else {
-            // If unchecked, uncheck the corresponding checkbox in design_subcategory
-            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
-            $('#Allcat').prop('checked', false);
-        }
-    });
+                // If checked, check the corresponding checkbox in design_subcategory
+                if ($(this).is(':checked')) {
+                    $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop(
+                        'checked', true);
+                    $('#Allcat').prop('checked', true);
+                } else {
+                    // If unchecked, uncheck the corresponding checkbox in design_subcategory
+                    $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop(
+                        'checked', false);
+                    $('#Allcat').prop('checked', false);
+                }
+            });
 
             // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
             $('input[name="design_subcategory"]').prop('checked', true);
