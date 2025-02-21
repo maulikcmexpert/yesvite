@@ -66,7 +66,7 @@
                                                     <div class="posts-card-wrp guest-user-list">
                                                         <div class="posts-card-head">
                                                             <div class="posts-card-head-left">
-                                                                <div class="posts-card-head-left-img">
+                                                                <div class="posts-card-head-left-img guest-users" data-userid="{{ $post['user_id'] }}">
                                                                     @if ($post['profile'] != '')
                                                                         <img src="{{ $post['profile'] }}"
                                                                             alt="">

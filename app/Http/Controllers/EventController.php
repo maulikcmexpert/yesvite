@@ -3952,6 +3952,7 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
+            dd($invitedusersession);
             if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
@@ -3963,7 +3964,6 @@ class EventController extends BaseController
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
-                    dd(1);
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
