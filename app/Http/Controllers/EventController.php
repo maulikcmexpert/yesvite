@@ -3970,7 +3970,7 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
-                    sendNotificationGuest('invite', $notificationParam);
+                    // sendNotificationGuest('invite', $notificationParam);
                 }
             }
             if ($request->is_update_event == '1') {
