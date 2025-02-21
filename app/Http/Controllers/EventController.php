@@ -1221,6 +1221,7 @@ class EventController extends BaseController
                     ];
 
                     sendNotification('invite', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
