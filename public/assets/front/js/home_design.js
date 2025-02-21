@@ -4,6 +4,8 @@ $(document).ready(function () {
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
     $('input[name="design_subcategory"]').prop("checked", false);
     $("#Allcat").prop("checked", false);
+    var visibleItems = $(".all_designs:visible").length;
+    $(".total_design_count").text(visibleItems + " Items");
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
@@ -17,7 +19,7 @@ $(document).ready(function () {
             );
             $(".image-item").show();
             var visibleItems = $(".all_designs:visible").length;
-            console.log('checked lenght' +visibleItems );
+
 
             $(".total_design_count").text(visibleItems + " Items");
         } else {
@@ -25,7 +27,7 @@ $(document).ready(function () {
                 "checked",
                 false
             );
-            console.log('unchecked lenght' +visibleItems );
+
             $(".image-item").hide();
             var visibleItems = $(".all_designs:visible").length;
             $(".total_design_count").text(visibleItems + " Items");
