@@ -7,7 +7,7 @@
             <x-front.sidebar :profileData="[]" />
             <div class="calender-supportive-div col-xl-9 col-lg-9 col-md-8">
                 <div class="row">
-                    <div class="col-xl-8">
+                    <div class="col-xl-7">
                         <div class="home-center-main events-center-main">
                             <div class="home-center-content">
                             <div class="home-center-content-head">
