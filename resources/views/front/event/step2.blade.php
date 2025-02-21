@@ -419,7 +419,7 @@
 
                 //     // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
                 var visibleItems = $(".all_designs:visible").length;
-                alert(visibleItems);
+
                 $(".total_design_count").text(visibleItems + " Items");
             });
         });
