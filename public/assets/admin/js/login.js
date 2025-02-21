@@ -1,5 +1,4 @@
-    
-toastr.success('helllooooo');
+
 var base_url = $("#base_url").val();
 console.log(base_url);
 $("#loginForm").validate({

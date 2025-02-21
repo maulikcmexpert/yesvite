@@ -174,7 +174,7 @@
                         toastr.error("{{ session('error') }}");
                     @endif
                 });
-        </script>
+</script>
 </body>
 
 
