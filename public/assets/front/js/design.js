@@ -1798,10 +1798,10 @@ async function bindData(current_event_id) {
         },
         change: function (color) {
             if (color) {
-                console.log("color");
+
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-                console.log("rgba");
+
                 changeColor("#000000"); // Handle transparency by default
             }
         },
@@ -2279,7 +2279,7 @@ async function bindData(current_event_id) {
     }
 
     $(document).on('click', '.main-content-right', function (e) {
-console.log(e);
+// console.log(e);
         let target = e.target;
         let tagName = target.tagName.toLowerCase();
         if (
