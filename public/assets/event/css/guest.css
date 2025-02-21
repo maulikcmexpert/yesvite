@@ -619,7 +619,7 @@
 @media only screen and (min-width: 1801px) {
     .guest-wrapper {
         width: 100%;
-        max-width: calc(100% - 780px);
+        max-width: calc(100vw - 800px);
         height: 100vh;
         position: sticky;
         margin-right: 20px;
