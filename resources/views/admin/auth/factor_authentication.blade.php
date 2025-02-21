@@ -170,12 +170,12 @@
                     <input type="hidden" value="{{session('otp');}}" class="current_otp"/>
                     <div id="otp">
                         <div class="inputs">
-                            <input type="text" id="otp1" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-                            <input type="text" id="otp3" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-                            <input type="text" id="otp2" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-                            <input type="text" id="otp4" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-                            <input type="text" id="otp5" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
-                            <input type="text" id="otp6" inputmode="numeric" maxlength="1" class="inputOtp" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
+                            <input type="text" id="otp1" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
+                            <input type="text" id="otp2" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
+                            <input type="text" id="otp3" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
+                            <input type="text" id="otp4" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
+                            <input type="text" id="otp5" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
+                            <input type="text" id="otp6" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
 
                         </div>
                         <span class="text-danger" id="twoFactorAuthForm-error"></span>
