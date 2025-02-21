@@ -3693,7 +3693,7 @@ class EventController extends BaseController
                         $eventInvite->event_id = $eventId;
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
-                        $eventInvite->prStore_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                         $eventInvite->save();
                     }
                     // }
