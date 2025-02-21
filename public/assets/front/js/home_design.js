@@ -62,7 +62,9 @@ $(document).ready(function () {
                     const categoryId = $(this).data("category-id");
                     const subcategoryId = $(this).data("subcategory-id");
 
-                    $(`.image-item[data-category-id="${categoryId}"]`).show();
+                    $(
+                        `.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+                    ).show();
                 });
             } else {
                 $(".image-item").show(); // Show all images when nothing is checked
