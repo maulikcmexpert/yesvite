@@ -44,7 +44,17 @@ class RolesDataTable extends DataTable
             ->addColumn('phone', function ($row) {
                 return (isset($row->phone_number) && $row->phone_number != "") ? $row->phone_number : "";
             })
-            ->rawColumns(['name', 'email','role','phone']);
+            ->addColumn('action', function ($row) {
+                $cryptId = encrypt($row->id);
+                $edit_url = route('users.edit', $cryptId);
+
+                $actionBtn = '<div class="action-icon">
+                    <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
+
+                    </div>';
+                return $actionBtn;
+            })
+            ->rawColumns(['name', 'email','role','phone','action']);
 
     }
 
@@ -91,6 +101,8 @@ class RolesDataTable extends DataTable
             Column::make('email')->title("Email")->orderable(true),
             Column::make('role')->title("Role")->orderable(true),
             Column::make('phone')->title("Phone Number")->orderable(true),
+            Column::make('action')->title("Action")->orderable(false),
+
 
 
            // Column::make('action')->title("Action"),
