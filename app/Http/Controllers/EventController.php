@@ -3693,7 +3693,7 @@ class EventController extends BaseController
                         $eventInvite->event_id = $eventId;
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
-                        $eventInvite->prStore_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                         $eventInvite->save();
                     }
                     // }
@@ -3952,6 +3952,7 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
+            dd($checkUserInvited);
             if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
@@ -3969,6 +3970,7 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
                 }
             }
             if ($request->is_update_event == '1') {
@@ -4074,45 +4076,15 @@ class EventController extends BaseController
                             'event_id' => $eventId,
                             'newUser' => $filteredIds
                         ];
-                        // dd($newInviteGuest);
 
                         sendNotification('invite', $notificationParam);
                         sendNotificationGuest('invite', $notificationParam);
 
                     }
 
-                    // $newInviteGuest = array_map(
-                    //     fn($guest) => $guest['id'],
-                    //     array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
-                    // );
-
-                    // if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
-                    //     $notificationParam = [
-                    //         'sender_id' => $user->id,
-                    //         'event_id' => $eventData['event_id'],
-                    //         'newUser' => $newInviteGuest
-                    //     ];
-                    //     // dd($newInviteGuest);
-                    //     sendNotificationGuest('invite', $notificationParam);
-                    // }
-                    // $total_count = count($filteredIds) + count($newInviteGuest);
+            
                 }
             }
-
-
-            // if ($request->thankyou_message == "1") {
-            //     $thankyou_card = session('thankyou_card_data');
-            //     if (isset($thankyou_card) && !empty($thankyou_card)) {
-            //         // dd($gift_registry);
-            //         foreach ($thankyou_card as $data) {
-            //             $thankyou_card_data[] = [
-            //
-            //             ];
-            //         }
-            //         EventGiftRegistry::insert($thankyou_card_data);
-            //     }
-            // }
-            // return  Redirect::to('event')->with('success', 'Event Created successfully');
             Session::forget('desgin');
             Session::forget('shape_image');
         }
