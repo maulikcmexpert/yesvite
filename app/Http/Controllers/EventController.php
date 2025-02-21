@@ -3963,12 +3963,14 @@ class EventController extends BaseController
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
+                    dd(1);
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
                 }
             }
             if ($request->is_update_event == '1') {
@@ -4074,7 +4076,6 @@ class EventController extends BaseController
                             'event_id' => $eventId,
                             'newUser' => $filteredIds
                         ];
-                        dd($notificationParam);
 
                         sendNotification('invite', $notificationParam);
                         sendNotificationGuest('invite', $notificationParam);
