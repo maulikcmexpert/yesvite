@@ -26,7 +26,7 @@
             </div>
 
 
-            <form method="post" action="{{ route('roles.update', $get_role_data->id) }}" id="roleEditForm">
+            <form method="post" action="{{ route('roles.update', $get_role_data->id) }}" id="roleEditForm" enctype="multipart/form-data">
 
                 @csrf
 
