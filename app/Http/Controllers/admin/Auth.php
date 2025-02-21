@@ -74,6 +74,7 @@ class Auth extends Controller
 
                 ];
 
+                // dd($sendMesage);
 
                 if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
