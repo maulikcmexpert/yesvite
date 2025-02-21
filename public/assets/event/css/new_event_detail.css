@@ -1558,7 +1558,7 @@
 .new_event_detail_header{
     position: sticky !important;
     top: 0 !important;
-    z-index: 1000;
+    z-index: 10000 !important;
 }
 
 /* ======Responsiveness===== */
