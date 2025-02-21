@@ -72,7 +72,7 @@ class Auth extends Controller
                         session(['otp' => $token]);
                         $saveOtp->otp = $token;
                         $saveOtp->save();
-                        if($adminData->phone_number!=""){
+                        if($adminData->phone_number!=""||$adminData->phone_number!=null){
                             $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
                             $message = "Your verification code for Admin is: " . $token;
                             $sendMesage =  sendSMS($phoneNumber, $message);
