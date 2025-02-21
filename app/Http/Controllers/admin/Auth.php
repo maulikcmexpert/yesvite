@@ -122,8 +122,8 @@ class Auth extends Controller
 
             return Redirect::to(URL::to('/admin'))->with('msg_error', 'Invalid credentials!');;
         }
-        // return redirect()->to(URL::to('admin/factor_authenticate', $request->adminId))
-        // ->with('msg_error', 'Invalid verification code');
+        return redirect()->to(URL::to('admin/factor_authenticate', $request->adminId))
+        ->with('msg_error', 'Invalid verification code');
         // return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('msg_error', 'Invalid verification code');
     }
 
