@@ -91,7 +91,7 @@
 
 
 
-
+    $(document).ready(function() {
     let questionEditor, answerEditor;
 
     // Initialize CKEditors for question and answer
@@ -139,7 +139,7 @@
             e.preventDefault();
         }
     });
-
+});
 
 
     });
