@@ -86,8 +86,8 @@ class Auth extends Controller
                                 "message" => "Please add mobile number",
                             ];
                         }
-                    //    
-            }
+                       
+            // }
 
                 if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
