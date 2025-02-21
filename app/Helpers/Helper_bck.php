@@ -1665,7 +1665,7 @@ function logoutFromWeb($userId)
 function sendSMS($receiverNumber, $message)
 {
     try {
-
+        dd($receiverNumber,$message);
         $twl_acc=ServerKey::get()->first();
         // $account_sid = env('ACCOUNT_SID');
         // $auth_token = env("AUTH_TOKEN");
