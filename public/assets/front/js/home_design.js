@@ -160,32 +160,32 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("click", "#design_category", function () {
-        $(".category").hide();
-        $(".categoryNew").hide();
-        $(".subcategoryNew").show();
-        $(".image-item-new").hide();
-        $(".image-item").hide();
-        const categoryId = $(this).data("category-id");
-        $(`.categoryChecked_${categoryId}:checked`).each(function () {
-            const subcategoryIds= $(this).data("subcategory-id");
-            $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
-            .show();
-            $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
-        });
-        // $(".subcategory_" + categoryId).prop("checked", true);
-        $(".category_" + categoryId).show();
-        const subcategoryId = $(this).data("subcategory-id");
-        const category_name = $(this).data("category_name");
-        $("#category_name").show();
-        $("#allchecked").show();
-        $("#allchecked").attr("data-categoryid", categoryId);
-        $("#category_name").text(category_name);
+    // $(document).on("click", "#design_category", function () {
+    //     $(".category").hide();
+    //     $(".categoryNew").hide();
+    //     $(".subcategoryNew").show();
+    //     $(".image-item-new").hide();
+    //     $(".image-item").hide();
+    //     const categoryId = $(this).data("category-id");
+    //     $(`.categoryChecked_${categoryId}:checked`).each(function () {
+    //         const subcategoryIds= $(this).data("subcategory-id");
+    //         $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
+    //         .show();
+    //         $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
+    //     });
+    //     // $(".subcategory_" + categoryId).prop("checked", true);
+    //     $(".category_" + categoryId).show();
+    //     const subcategoryId = $(this).data("subcategory-id");
+    //     const category_name = $(this).data("category_name");
+    //     $("#category_name").show();
+    //     $("#allchecked").show();
+    //     $("#allchecked").attr("data-categoryid", categoryId);
+    //     $("#category_name").text(category_name);
 
-        // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
-        var visibleItems = $(".all_designs:visible").length;
-        $(".total_design_count").text(visibleItems + " Items");
-    });
+    //     // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
+    //     var visibleItems = $(".all_designs:visible").length;
+    //     $(".total_design_count").text(visibleItems + " Items");
+    // });
 });
 $('input[name="design_subcategory_new"]').on('change', function() {
     let subcategoryId = $(this).data('subcategory-id');
@@ -218,8 +218,8 @@ function allCheckFun(categoryIds) {
     // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
     // $("#Allcat").prop("checked", true);
     // $(".image-item").show();
-    // var visibleItems = $(".all_designs:visible").length;
-    // $(".total_design_count").text(visibleItems + " Items");
+    var visibleItems = $(".all_designs:visible").length;
+    $(".total_design_count").text(visibleItems + " Items");
 
     $('input[name="design_subcategory"]:not(#Allcat):checked').each(
         function () {
