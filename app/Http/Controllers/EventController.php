@@ -4074,45 +4074,16 @@ class EventController extends BaseController
                             'event_id' => $eventId,
                             'newUser' => $filteredIds
                         ];
-                        // dd($newInviteGuest);
+                        dd($notificationParam);
 
                         sendNotification('invite', $notificationParam);
                         sendNotificationGuest('invite', $notificationParam);
 
                     }
 
-                    // $newInviteGuest = array_map(
-                    //     fn($guest) => $guest['id'],
-                    //     array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 0)
-                    // );
-
-                    // if (isset($newInviteGuest) && count($newInviteGuest) != 0) {
-                    //     $notificationParam = [
-                    //         'sender_id' => $user->id,
-                    //         'event_id' => $eventData['event_id'],
-                    //         'newUser' => $newInviteGuest
-                    //     ];
-                    //     // dd($newInviteGuest);
-                    //     sendNotificationGuest('invite', $notificationParam);
-                    // }
-                    // $total_count = count($filteredIds) + count($newInviteGuest);
+            
                 }
             }
-
-
-            // if ($request->thankyou_message == "1") {
-            //     $thankyou_card = session('thankyou_card_data');
-            //     if (isset($thankyou_card) && !empty($thankyou_card)) {
-            //         // dd($gift_registry);
-            //         foreach ($thankyou_card as $data) {
-            //             $thankyou_card_data[] = [
-            //
-            //             ];
-            //         }
-            //         EventGiftRegistry::insert($thankyou_card_data);
-            //     }
-            // }
-            // return  Redirect::to('event')->with('success', 'Event Created successfully');
             Session::forget('desgin');
             Session::forget('shape_image');
         }
