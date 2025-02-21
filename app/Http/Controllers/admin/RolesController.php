@@ -100,7 +100,7 @@ class RolesController extends Controller
 
         $title = 'Edit Role';
         $page = 'admin.roles.edit';
-        // $js = 'admin.user.userjs';
+        $js = 'admin.roles.rolejs';
         $subcatId = $id;
 
 
@@ -110,7 +110,7 @@ class RolesController extends Controller
         return view('admin.includes.layout', compact(
             'title',
             'page',
-            // 'js',
+            'js',
             'get_role_data',
 
         ));
