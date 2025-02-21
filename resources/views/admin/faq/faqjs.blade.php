@@ -91,7 +91,7 @@
 
 
 
-    $(document).ready(function() {
+
     let questionEditor, answerEditor;
 
     // Initialize CKEditors for question and answer
@@ -100,11 +100,7 @@
             questionEditor = editor;
             editor.model.document.on('change:data', function() {
                 let questionContent = questionEditor.getData().trim();
-                if (questionContent.length === 0) {
-                    $('.err_question').text('Please enter a question.');
-                } else {
-                    $('.err_question').text('');
-                }
+                $('.err_question').text('');
             });
         })
         .catch(error => console.error(error));
@@ -114,11 +110,7 @@
             answerEditor = editor;
             editor.model.document.on('change:data', function() {
                 let answerContent = answerEditor.getData().trim();
-                if (answerContent.length === 0) {
-                    $('.err_answer').text('Please enter an answer.');
-                } else {
-                    $('.err_answer').text('');
-                }
+                $('.err_answer').text('');
             });
         })
         .catch(error => console.error(error));
@@ -131,6 +123,7 @@
         $('.err_question').text('');
         $('.err_answer').text('');
 
+        // Count words by splitting on spaces and filtering out empty words
         let wordCountQuestion = questionContent.split(/\s+/).filter(word => word.length > 0).length;
         let wordCountAnswer = answerContent.split(/\s+/).filter(word => word.length > 0).length;
 
@@ -146,7 +139,8 @@
             e.preventDefault();
         }
     });
-});
+
+
 
     });
 </script>
