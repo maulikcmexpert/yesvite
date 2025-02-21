@@ -91,29 +91,33 @@
 
 
 
-    $(document).ready(function() {
+
     let questionEditor, answerEditor;
 
     // Initialize CKEditors for question and answer
     ClassicEditor.create(document.querySelector('#question'))
-        .then(editor => {
-            questionEditor = editor;
-            editor.model.document.on('change:data', function() {
-                let questionContent = questionEditor.getData().trim();
-                $('.err_question').text('');
-            });
-        })
-        .catch(error => console.error(error));
+    .then(editor => {
+        questionEditor = editor;
+        editor.model.document.on('change:data', function() {
+            let questionContent = questionEditor.getData(); // Do not trim spaces
+            $('.err_question').text('');
+        });
+    })
+    .catch(error => console.error(error));
+    ClassicEditor.create(document.querySelector('#question'), {
+    enterMode: CKEDITOR.ENTER_BR,
+    shiftEnterMode: CKEDITOR.ENTER_P
+});
 
-    ClassicEditor.create(document.querySelector('#answer'))
-        .then(editor => {
-            answerEditor = editor;
-            editor.model.document.on('change:data', function() {
-                let answerContent = answerEditor.getData().trim();
-                $('.err_answer').text('');
-            });
-        })
-        .catch(error => console.error(error));
+ClassicEditor.create(document.querySelector('#answer'))
+    .then(editor => {
+        answerEditor = editor;
+        editor.model.document.on('change:data', function() {
+            let answerContent = answerEditor.getData(); // Do not trim spaces
+            $('.err_answer').text('');
+        });
+    })
+    .catch(error => console.error(error));
 
     $('#faqAddForm').on('submit', function(e) {
         let isValid = true;
@@ -139,7 +143,7 @@
             e.preventDefault();
         }
     });
-});
+
 
 
     });
