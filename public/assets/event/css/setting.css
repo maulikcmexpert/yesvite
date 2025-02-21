@@ -10,6 +10,9 @@
     background: var(--white);
     height: 100vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .setting-content h4 {
