@@ -61,7 +61,7 @@ class Auth extends Controller
                 session()->forget('otp');
                 session(['otp' => $token]);
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
-                $saveOtp->otp = "111111";
+                $saveOtp->otp = $token;
                 $saveOtp->save();
                 $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
                 $message = "Your verification code for Admin is: " . $token;

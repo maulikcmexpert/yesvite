@@ -129,6 +129,7 @@
                     <p>Enter 6-digit code from your authenticator application</p>
                     <input type="hidden" class="verification_otp" name="verification_otp" id="verification_otp" value="" />
                     <input type="hidden" class="" name="adminId" value="{{$id}}" />
+                    <input type="hidden" value="{{session('otp');}}" class="current_otp"/>
                     <div id="otp">
                         <div class="inputs">
                             <input type="text" id="otp1" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
