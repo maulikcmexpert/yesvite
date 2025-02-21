@@ -3963,6 +3963,7 @@ class EventController extends BaseController
                     sendNotification('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
+                    dd(1);
                     $notificationParam = [
                         'sender_id' => $user_id,
                         'event_id' => $eventId,
