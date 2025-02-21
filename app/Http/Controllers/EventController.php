@@ -3969,6 +3969,7 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
                 }
             }
             if ($request->is_update_event == '1') {
@@ -4074,7 +4075,6 @@ class EventController extends BaseController
                             'event_id' => $eventId,
                             'newUser' => $filteredIds
                         ];
-                        dd($notificationParam);
 
                         sendNotification('invite', $notificationParam);
                         sendNotificationGuest('invite', $notificationParam);
