@@ -3675,7 +3675,7 @@ class EventController extends BaseController
                     }
                 }
             }
-            dd($conatctId);
+            // dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
@@ -4068,6 +4068,28 @@ class EventController extends BaseController
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
                         array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
+                    );
+                    if (isset($filteredIds) && count($filteredIds) != 0) {
+
+
+                        $notificationParam = [
+                            'sender_id' => $user_id,
+                            'event_id' => $eventId,
+                            'newUser' => $filteredIds
+                        ];
+
+                        sendNotification('invite', $notificationParam);
+                        sendNotificationGuest('invite', $notificationParam);
+
+                    }
+
+            
+                }
+                if (isset($conatctId)) {
+
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['id'],
+                        array_filter($conatctId, fn($guest) => !isset($guest['isAlready']))
                     );
                     if (isset($filteredIds) && count($filteredIds) != 0) {
 
