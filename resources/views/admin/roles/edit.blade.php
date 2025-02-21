@@ -1,3 +1,4 @@
+{{dd($get_role_data->name);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -21,7 +22,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">Add Role</h3>
+                <h3 class="card-title">Edit Role</h3>
 
             </div>
 
@@ -37,7 +38,7 @@
 
                             <label for="exampleInputEmail1">Name</label>
 
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{ old('event_type.*')}}">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="">
 
                             <span class="text-danger">{{ $errors->first('event_type.*') }}</span>
 
