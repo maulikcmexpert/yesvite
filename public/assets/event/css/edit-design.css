@@ -1077,7 +1077,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 70%) !important;
+        width: calc(100% - 60%) !important;
         height: calc(100vh - 10vh) !important;
         margin: 0px auto !important;
     }
@@ -1155,7 +1155,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 70%) !important;
+        width: calc(100% - 60%) !important;
         height: calc(100vh - 10vh) !important;
         margin: 0px auto !important;
     }
