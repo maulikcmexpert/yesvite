@@ -140,67 +140,70 @@
 
     let questionEditor, answerEditor;
 
-    // Initialize CKEditor for the "Question"
-    ClassicEditor.create(document.querySelector('#question'))
-        .then(editor => {
-            questionEditor = editor;
-            editor.model.document.on('change:data', function() {
-                // Simply get the data without stripping spaces
-                let questionContent = questionEditor.getData();
+    // Initialize CKEditor for the "Question" with Autoformat disabled.
+    ClassicEditor.create(document.querySelector('#question'), {
+        removePlugins: ['Autoformat']
+    })
+    .then(editor => {
+        questionEditor = editor;
+        // Log keydown events to see if space (key code 32) is captured.
+        editor.editing.view.document.on('keydown', (evt, data) => {
+            console.log('Question Editor Key pressed:', data.keyCode);
+        });
+        editor.model.document.on('change:data', function() {
+            let questionContent = questionEditor.getData();
+            if (questionContent.trim().length > 0) {
+                $('.err_question').text('');
+            } else {
+                $('.err_question').text('Please enter a question.');
+            }
+        });
+    })
+    .catch(error => console.error(error));
 
-                // Check if there's any non-whitespace text
-                if (questionContent.trim().length > 0) {
-                    $('.err_question').text('');
-                } else {
-                    $('.err_question').text('Please enter a question.');
-                }
-            });
-        })
-        .catch(error => console.error(error));
+    // Initialize CKEditor for the "Answer" with Autoformat disabled.
+    ClassicEditor.create(document.querySelector('#answer'), {
+        removePlugins: ['Autoformat']
+    })
+    .then(editor => {
+        answerEditor = editor;
+        editor.editing.view.document.on('keydown', (evt, data) => {
+            console.log('Answer Editor Key pressed:', data.keyCode);
+        });
+        editor.model.document.on('change:data', function() {
+            let answerContent = answerEditor.getData();
+            if (answerContent.trim().length > 0) {
+                $('.err_answer').text('');
+            } else {
+                $('.err_answer').text('Please enter an answer.');
+            }
+        });
+    })
+    .catch(error => console.error(error));
 
-    // Initialize CKEditor for the "Answer"
-    ClassicEditor.create(document.querySelector('#answer'))
-        .then(editor => {
-            answerEditor = editor;
-            editor.model.document.on('change:data', function() {
-                let answerContent = answerEditor.getData();
-
-                if (answerContent.trim().length > 0) {
-                    $('.err_answer').text('');
-                } else {
-                    $('.err_answer').text('Please enter an answer.');
-                }
-            });
-        })
-        .catch(error => console.error(error));
-
-    // Validate on form submission
+    // Form validation on submit
     $('#faqAddForm').on('submit', function(e) {
         let isValid = true;
         let questionContent = questionEditor.getData().trim();
         let answerContent = answerEditor.getData().trim();
 
-        // Clear previous errors
         $('.err_question').text('');
         $('.err_answer').text('');
 
-        // If question is only spaces (or empty)
         if (questionContent.length === 0) {
             $('.err_question').text('Please enter a question.');
             isValid = false;
         }
-
-        // If answer is only spaces (or empty)
         if (answerContent.length === 0) {
             $('.err_answer').text('Please enter an answer.');
             isValid = false;
         }
-
-        // Prevent form submission if not valid
         if (!isValid) {
             e.preventDefault();
         }
     });
+
+
 
 
     });
