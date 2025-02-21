@@ -241,6 +241,7 @@
         // If checked, check the corresponding checkbox in design_subcategory
         if ($(this).is(':checked')) {
             $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
+            $('#Allcat').prop('checked', true);
         } else {
             // If unchecked, uncheck the corresponding checkbox in design_subcategory
             $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
