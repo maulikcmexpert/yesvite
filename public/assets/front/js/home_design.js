@@ -187,7 +187,21 @@ $(document).ready(function () {
         $(".total_design_count").text(visibleItems + " Items");
     });
 });
+$('input[name="design_subcategory_new"]').on('change', function() {
+    let subcategoryId = $(this).data('subcategory-id');
 
+    // If checked, check the corresponding checkbox in design_subcategory
+    if ($(this).is(':checked')) {
+        $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop(
+            'checked', true);
+        $('#Allcat').prop('checked', true);
+    } else {
+        // If unchecked, uncheck the corresponding checkbox in design_subcategory
+        $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop(
+            'checked', false);
+        $('#Allcat').prop('checked', false);
+    }
+});
 $(document).on("click", "#allchecked", function () {
     const categoryId =  $(this).attr('data-categoryid');
     allCheckFun(categoryId)
