@@ -59,14 +59,14 @@ class Auth extends Controller
 
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
 
-                // if (config('app.debug', true)) {
-                //         $saveOtp->otp = '111111';
-                //         $saveOtp->save();
-                //         $sendMesage = [
-                //             "status" => true,
-                //             "message" => "success"
-                //         ];
-                // }else{
+                if (config('app.debug', true)) {
+                        $saveOtp->otp = '111111';
+                        $saveOtp->save();
+                        $sendMesage = [
+                            "status" => true,
+                            "message" => "success"
+                        ];
+                }else{
                         $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
                         session()->forget('otp');
                         session(['otp' => $token]);
@@ -87,7 +87,7 @@ class Auth extends Controller
                             ];
                         }
                        
-            // }
+            }
 
                 if ($sendMesage['status']  == true) {
                     return Redirect::to(URL::to('admin/factor_authenticate', encrypt($adminData->id)))->with('msg', 'Verification code is sent successfully');
