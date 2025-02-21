@@ -70,126 +70,77 @@
 
 
         $(document).on('click', '.delete_faq', function() {
-            var id = $(this).data('id');
+            var id=$(this).data('id');
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#delete_faq_from' + id).submit();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#delete_faq_from'+id).submit();
 
-                }
-            });
-        })
-
-
+            }
+        });
+    })
 
 
-        // document.querySelectorAll('.question').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height =
-        //             '100px'; // Set the desired height here
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
-        // document.querySelectorAll('.answer').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height = '100px';
-
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
 
 
-        // $('#faqAddForm').validate({
-        //             rules: {
-        //                 question: {
-        //                     required: true
-        //                 },
-        //                 answer: {
-        //                     required: true
-        //                 }
-        //             },
-        //             messages: {
-        //                 question: {
-        //                     required: "Please enter the question"
-        //                 },
-        //                 answer: {
-        //                     required: "Please enter the answer"
-        //                 }
-        //             },
-
-        // });
         $(document).ready(function() {
-    let questionEditor, answerEditor;
+            let questionEditor, answerEditor;
+            // Initialize CKEditors for question and answer
+            ClassicEditor.create(document.querySelector('#question'))
+                .then(editor => {
+                    questionEditor = editor;
+                    editor.model.document.on('change:data', function() {
+                        let questionContent = questionEditor.getData().trim();
+                        if (questionContent) {
+                            $('.err_question').text('');
+                        } else {
+                            $('.err_question').text('Please enter a question.');
+                        }
+                    });
+                })
+                .catch(error => console.error(error));
 
-    // Initialize CKEditors for question and answer
-    ClassicEditor.create(document.querySelector('#question'))
-        .then(editor => {
-            questionEditor = editor;
-            editor.model.document.on('change:data', function() {
+            ClassicEditor.create(document.querySelector('#answer'))
+                .then(editor => {
+                    answerEditor = editor;
+                    editor.model.document.on('change:data', function() {
+                        let answerContent = answerEditor.getData().trim();
+                        if (answerContent) {
+                            $('.err_answer').text('');
+                        } else {
+                            $('.err_answer').text('Please enter an answer.');
+                        }
+                    });
+                })
+                .catch(error => console.error(error));
+
+            $('#faqAddForm').on('submit', function(e) {
+                let isValid = true;
                 let questionContent = questionEditor.getData().trim();
-                if (/\s/.test(questionContent)) {  // Checks if there is at least one space
-                    $('.err_question').text('');
-                } else {
-                    $('.err_question').text('Please enter at least two words.');
-                }
-            });
-        })
-        .catch(error => console.error(error));
-
-    ClassicEditor.create(document.querySelector('#answer'))
-        .then(editor => {
-            answerEditor = editor;
-            editor.model.document.on('change:data', function() {
                 let answerContent = answerEditor.getData().trim();
-                if (/\s/.test(answerContent)) {
-                    $('.err_answer').text('');
-                } else {
-                    $('.err_answer').text('Please enter at least two words.');
+                $('.err_question').text('');
+                $('.err_answer').text('');
+                if (!questionContent) {
+                    $('.err_question').text('Please enter a question.');
+                    isValid = false;
+                }
+                if (!answerContent) {
+                    $('.err_answer').text('Please enter an answer.');
+                    isValid = false;
+                }
+                if (!isValid) {
+                    e.preventDefault();
                 }
             });
-        })
-        .catch(error => console.error(error));
-
-    $('#faqAddForm').on('submit', function(e) {
-        let isValid = true;
-        let questionContent = questionEditor.getData().trim();
-        let answerContent = answerEditor.getData().trim();
-
-        $('.err_question').text('');
-        $('.err_answer').text('');
-
-        if (!/\s/.test(questionContent)) {
-            $('.err_question').text('Please enter at least two words.');
-            isValid = false;
-        }
-        if (!/\s/.test(answerContent)) {
-            $('.err_answer').text('Please enter at least two words.');
-            isValid = false;
-        }
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
 });
-
 
 
     });
