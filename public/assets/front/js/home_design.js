@@ -6,6 +6,7 @@ $(document).ready(function () {
     $("#Allcat").prop("checked", false);
     var visibleItems = $(".all_designs:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
+
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
