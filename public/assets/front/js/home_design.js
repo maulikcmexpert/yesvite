@@ -1,4 +1,4 @@
-$("#Allcat").prop("checked", true);
+    $("#Allcat").prop("checked", true);
 
 $(document).ready(function () {
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);

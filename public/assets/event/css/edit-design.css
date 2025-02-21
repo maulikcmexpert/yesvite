@@ -1076,6 +1076,11 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 60%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 3601px) and (max-width: 3800px){
@@ -1149,6 +1154,11 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 60%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 3401px) and (max-width: 3600px){
@@ -1221,6 +1231,11 @@
     }
     .coin-invite-wrp span {
         font-size: 16px;
+    }
+    .image-edit-inner-img {
+        width: calc(100% - 60%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
     }
 }
 
@@ -1296,6 +1311,11 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 60%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 3001px) and (max-width: 3200px){
@@ -1368,6 +1388,11 @@
     }
     .coin-invite-wrp span {
         font-size: 16px;
+    }
+    .image-edit-inner-img {
+        width: calc(100% - 60%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
     }
 }
 
@@ -1443,6 +1468,11 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 50%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 
 }
 
@@ -1475,6 +1505,11 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 30%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
@@ -1504,6 +1539,11 @@
     }
     .coin-invite-wrp span {
         font-size: 16px;
+    }
+    .image-edit-inner-img {
+        width: calc(100% - 30%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
     }
 }
 
@@ -1557,6 +1597,11 @@
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 50%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
@@ -1584,6 +1629,11 @@
     }
     .edit-images-button-wrp{
         max-width: 500px;
+    }
+    .image-edit-inner-img {
+        width: calc(100% - 50%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
     }
 }
 
@@ -1632,6 +1682,11 @@
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 50%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
@@ -1679,6 +1734,11 @@
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 30%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 @media only screen and (min-width: 1400px) and (max-width: 1599px){
@@ -1713,6 +1773,11 @@
     }
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
+    }
+    .image-edit-inner-img {
+        width: calc(100% - 30%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
     }
 }
 

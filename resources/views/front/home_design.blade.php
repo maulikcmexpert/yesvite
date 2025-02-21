@@ -173,6 +173,8 @@
         {{-- {{ dd($categories);}} --}}
         <div class="row list_all_design_catgeory">
             @foreach ($categories as $category)
+            @foreach ($category->subcategory as $subcategory)
+            @foreach ($subcategory->textdatas as $image)
                 @php
                     $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
                     $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
@@ -186,20 +188,22 @@
                         data-category_name="{{ $category->category_name }}">
                         <a href="javascript:;" class="collection-card card-blue">
                             <div class="card-img">
-                                <img src="{{ asset('storage/canvas/' . $firstTextData->filled_image) }}"
-                                    alt="shower-card">
+                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
+                                alt="shower-card">
                             </div>
-                            <h4>{{ $category->category_name }}</h4>
+                            {{-- <h4>{{ $category->category_name }}</h4> --}}
                         </a>
                     </div>
                 @endif
-            @endforeach
+                @endforeach
+                @endforeach
 
+                @endforeach
 
         </div>
 
 
-        <div class="row list_all_design_catgeory_new">
+        {{-- <div class="row list_all_design_catgeory_new">
             <div class="d-flex align-items-center" style="gap: 15px">
                 <p id="allchecked" data-categoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
                         style="color: #212529; cursor: pointer;"></i></p>
@@ -217,7 +221,7 @@
                                     <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                         alt="shower-card">
                                 </div>
-                                {{-- <h4>{{ $category->category_name }}</h4> --}}
+                                {{-- <h4>{{ $category->category_name }}</h4>
                             </a>
                         </div>
                     @endforeach
@@ -225,7 +229,7 @@
             @endforeach
 
 
-        </div>
+        </div> --}}
 
 
 
