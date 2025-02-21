@@ -4085,9 +4085,8 @@ class EventController extends BaseController
             
                 }
                 if (isset($conatctId)) {
-
                     $filteredIds = array_map(
-                        fn($guest) => $guest['id'],
+                        fn($guest) => $guest['sync_id'],
                         array_filter($conatctId, fn($guest) => !isset($guest['isAlready']))
                     );
                     if (isset($filteredIds) && count($filteredIds) != 0) {
