@@ -983,7 +983,7 @@
     display: block !important;
 }
 
-.new_event_detail_form form:nth-child(1){
+.new_event_detail_form .new_event_detail_form_wrp{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -996,7 +996,7 @@
     overflow-y: scroll;
 }
 
-.new_event_detail_form form .row{
+.new_event_detail_form form ~ .row{
     padding-bottom: 50px !important;
 }
 
