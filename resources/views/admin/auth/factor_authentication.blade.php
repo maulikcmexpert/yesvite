@@ -114,7 +114,7 @@
 }
 
 #toast-container > .toast-success {
-    background-image: url("../../toater_success_icon.png") !important;
+    background-image: url('../../../assets/toater_success_icon.png') !important;
 }
 #toast-container > div {
     opacity: 1 !important;
