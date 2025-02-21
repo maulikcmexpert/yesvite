@@ -10,6 +10,9 @@
     background: var(--white);
     height: 100vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .setting-content h4 {
@@ -25,6 +28,7 @@
     background-color: #f8f9fd;
     overflow: hidden;
     overflow-y: scroll;
+    max-height: calc(100vh - 140px);
 }
 
 .setting-accordion-wrp .accordion-item {
