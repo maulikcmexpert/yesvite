@@ -1714,6 +1714,11 @@
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
     }
+    .image-edit-inner-img {
+        width: calc(100% - 30%) !important;
+        height: calc(100vh - 10vh) !important;
+        margin: 0px auto !important;
+    }
 }
 
 
