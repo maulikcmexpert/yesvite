@@ -63,15 +63,14 @@ class Auth extends Controller
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
                 $saveOtp->otp = $token;
                 $saveOtp->save();
-                $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
-                // $phoneNumber = '+' . '91' . '9691905903';
+                // $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                // $phoneNumber = '+' . '91' . '9723840340';
 
                 $message = "Your verification code for Admin is: " . $token;
                 // $sendMesage =  sendSMS($phoneNumber, $message);
                 $sendMesage = [
                     "status" => true,
                     "message" => "success"
-
                 ];
 
                 // dd($sendMesage);
@@ -123,7 +122,9 @@ class Auth extends Controller
 
             return Redirect::to(URL::to('/admin'))->with('msg_error', 'Invalid credentials!');;
         }
-        return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('msg_error', 'Invalid verification code');
+        return redirect()->to(URL::to('admin/factor_authenticate', $request->adminId))
+        ->with('msg_error', 'Invalid verification code');
+        // return Redirect::to(URL::to('admin/factor_authenticate', $request->adminId))->with('msg_error', 'Invalid verification code');
     }
 
     public function checkEmail(Request $req)

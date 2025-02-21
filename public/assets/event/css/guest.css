@@ -616,6 +616,16 @@
 
 
 
+@media only screen and (min-width: 1801px) {
+    .guest-wrapper {
+        width: 100%;
+        max-width: calc(100vw - 800px);
+        height: 100vh;
+        position: sticky;
+        margin-right: 20px;
+        /* top: 20px; */
+    }
+}
 @media only screen and (max-width: 1800px) {
     .guest-wrapper {
         max-width: 1000px;
@@ -630,13 +640,13 @@
 
 @media only screen and (max-width: 1500px) {
     .guest-wrapper {
-        max-width: 750px;
+        max-width: 720px;
     }
 }
 
 @media only screen and (max-width: 1400px) {
     .guest-wrapper {
-        max-width: 600px;
+        max-width: 550px;
     }
 }
 

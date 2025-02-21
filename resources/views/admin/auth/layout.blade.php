@@ -32,6 +32,7 @@
     <!-- Theme style -->
 
     <link rel="stylesheet" href="{{asset('assets/admin/assets/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" crossorigin="anonymous">
 
     <style>
         :root {
@@ -129,6 +130,8 @@
 
     <script src="{{ asset('assets/admin/js/jquery-validate-additional.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/2.6.1/jquery.mockjax.min.js" integrity="sha512-LbhUoRYSZ3tFp6RrcQOwGL2P/SlbfF9B+2yiJAMcJhuxJQTgvzWaG6W+XxX9t8+aQ8z+zUxx/XQ0fOo1/ft4tA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     @if(isset($js))
 
     @foreach($js as $value)
@@ -139,6 +142,39 @@
 
     @endif
 
+<script>
+        $(document).ready(function () {
+            toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                        };
+                    @if (session('msg'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                        };
+                        toastr.success("{{ session('msg') }}");
+                    @endif
+                    @if (session('msg_error'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                        };
+                        toastr.error("{{ session('msg_error') }}");
+                    @endif
+                    @if (session('error'))
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                        };
+                        toastr.error("{{ session('error') }}");
+                    @endif
+                });
+</script>
 </body>
 
 

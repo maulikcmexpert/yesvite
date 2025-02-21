@@ -169,7 +169,7 @@
                     @endphp
                     @if ($firstTextData)
                         <div id="design_category"
-                            class="col-xxl-3 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
+                            class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
                             data-category-id="{{ $category->id }}" data-subcategory-id="{{ $firstSubcategory->id }}"
                             data-category_name="{{ $category->category_name }}">
                             <a href="javascript:;" class="collection-card card-blue">
@@ -197,7 +197,7 @@
                         @foreach ($category->subcategory as $subcategory)
                             @foreach ($subcategory->textdatas as $image)
                                 <div style="display: none"
-                                    class="col-xxl-3 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
+                                    class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item-new all_designs"
                                     data-category-id="{{ $category->id }}"
                                     data-subcategory-id="{{ $subcategory->id }}">
 
