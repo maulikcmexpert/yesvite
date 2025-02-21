@@ -1,3 +1,43 @@
+
+<style>
+
+
+.toast.toast-error {
+    background-color: #df1c41 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container > .toast-error {
+    background-image: url('../../../assets/toaster_error_icon.png') !important;
+
+}
+
+.toast.toast-success {
+    background-color: #38c793 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container > .toast-success {
+    background-image: url('../../../assets/toater_success_icon.png') !important;
+}
+#toast-container > div {
+    opacity: 1 !important;
+}
+</style>
 <div class="login-box">
 
   <!-- /.login-logo -->
