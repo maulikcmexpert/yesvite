@@ -6,7 +6,7 @@
 <div class="step_1" style="display: none;">
     <div class="main-content-right">
         <div class="new_event_detail_form">
-            <form action="">
+            <form action="" class="new_event_detail_form_wrp">
                 <div class="new_event_detail_form_inner">
                     <h3>Detail Pages</h3>
                     <div class="row">
