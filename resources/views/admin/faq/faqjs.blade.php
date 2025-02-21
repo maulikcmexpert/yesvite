@@ -104,6 +104,10 @@
         });
     })
     .catch(error => console.error(error));
+    ClassicEditor.create(document.querySelector('#question'), {
+    enterMode: CKEDITOR.ENTER_BR,
+    shiftEnterMode: CKEDITOR.ENTER_P
+});
 
 ClassicEditor.create(document.querySelector('#answer'))
     .then(editor => {
