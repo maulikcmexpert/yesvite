@@ -3675,6 +3675,7 @@ class EventController extends BaseController
                     }
                 }
             }
+            // dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
@@ -3952,7 +3953,6 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
-            dd($checkUserInvited);
             if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
                 if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
@@ -3970,7 +3970,7 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
                     sendNotification('owner_notify', $notificationParam);
-                    sendNotificationGuest('invite', $notificationParam);
+                    // sendNotificationGuest('invite', $notificationParam);
                 }
             }
             if ($request->is_update_event == '1') {
@@ -4067,6 +4067,27 @@ class EventController extends BaseController
                     $filteredIds = array_map(
                         fn($guest) => $guest['id'],
                         array_filter($invitedusersession, fn($guest) => !isset($guest['isAlready']))
+                    );
+                    if (isset($filteredIds) && count($filteredIds) != 0) {
+
+
+                        $notificationParam = [
+                            'sender_id' => $user_id,
+                            'event_id' => $eventId,
+                            'newUser' => $filteredIds
+                        ];
+
+                        sendNotification('invite', $notificationParam);
+                        sendNotificationGuest('invite', $notificationParam);
+
+                    }
+
+            
+                }
+                if (isset($conatctId)) {
+                    $filteredIds = array_map(
+                        fn($guest) => $guest['sync_id'],
+                        array_filter($conatctId, fn($guest) => !isset($guest['isAlready']))
                     );
                     if (isset($filteredIds) && count($filteredIds) != 0) {
 
