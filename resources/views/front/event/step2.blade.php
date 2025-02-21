@@ -164,7 +164,7 @@
 
                 @foreach ($categories as $category)
                 @foreach ($category->subcategory as $subcategory)
-                @foreach ($firstFiveImages as $image)
+                @foreach ($subcategory as $image)
                     @php
                         $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
                         $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
@@ -174,7 +174,7 @@
                             class="col-xxl-2 col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs"
                             data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
                             data-category_name="{{ $category->category_name }}">
-                            <a href="javascript:;" class="collection-card card-blue">
+                            <a href="#" class="collection-card card-blue">
                                 <div class="card-img design-card">
                                     <img src="{{ asset('storage/canvas/' .$image->filled_image) }}"
                                         alt="shower-card">
