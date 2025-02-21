@@ -218,8 +218,8 @@ function allCheckFun(categoryIds) {
     // $('input[name="design_subcategory"]:not(#Allcat)').prop("checked", true);
     // $("#Allcat").prop("checked", true);
     // $(".image-item").show();
-    // var visibleItems = $(".all_designs:visible").length;
-    // $(".total_design_count").text(visibleItems + " Items");
+    var visibleItems = $(".all_designs:visible").length;
+    $(".total_design_count").text(visibleItems + " Items");
 
     $('input[name="design_subcategory"]:not(#Allcat):checked').each(
         function () {
