@@ -8,7 +8,7 @@
     border-radius: 16px;
     padding: 16px 24px 24px 24px;
     background: var(--white);
-    height: 100%;
+    height: 100vh;
     position: relative;
 }
 
@@ -23,6 +23,8 @@
 
 .setting-accordion-wrp {
     background-color: #f8f9fd;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .setting-accordion-wrp .accordion-item {
