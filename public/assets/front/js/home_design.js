@@ -63,7 +63,7 @@ $(document).ready(function () {
                     const subcategoryId = $(this).data("subcategory-id");
 
                     $(
-                        `.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+                        `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
                     ).show();
                 });
             } else {
