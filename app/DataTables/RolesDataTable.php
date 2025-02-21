@@ -46,7 +46,7 @@ class RolesDataTable extends DataTable
             })
             ->addColumn('action', function ($row) {
                 $cryptId = encrypt($row->id);
-                $edit_url = route('users.edit', $cryptId);
+                $edit_url = route('roles.edit', $cryptId);
 
                 $actionBtn = '<div class="action-icon">
                     <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>

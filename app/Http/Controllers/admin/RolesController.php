@@ -91,9 +91,29 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id,Request $request)
     {
-        //
+        $user_id = decrypt($id);
+
+        // Get the template data by ID
+        $get_role_data = Admin::findOrFail($user_id);
+
+        $title = 'Edit Role';
+        $page = 'admin.roles.edit';
+        // $js = 'admin.user.userjs';
+        $subcatId = $id;
+
+
+
+
+        // Pass the data to the view
+        return view('admin.includes.layout', compact(
+            'title',
+            'page',
+            // 'js',
+            'get_role_data',
+
+        ));
     }
 
     /**
