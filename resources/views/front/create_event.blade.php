@@ -493,7 +493,7 @@
                         $setPrice = array_reverse($prices);
                     @endphp --}}
                     <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div>
-                    <span class="">
+                    <span class="coin-invite-wrp-inner">
                         {{-- {{$setPrice[0]['coins']}}  |  --}}
 
                       <span class="green-price">Buy &nbsp;&nbsp;&nbsp;

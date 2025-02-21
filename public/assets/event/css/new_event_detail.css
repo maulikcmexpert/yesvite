@@ -1568,7 +1568,7 @@
     color: lightgray !important;
 }
 
-.coin-invite-wrp ~ span{
+.coin-invite-wrp ~ .coin-invite-wrp-inner{
     display: flex;
     align-items: center;
 }
