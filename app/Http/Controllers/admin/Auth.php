@@ -64,10 +64,10 @@ class Auth extends Controller
                 $saveOtp->otp = $token;
                 $saveOtp->save();
                 // $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
-                $phoneNumber = '+' . '91' . '9723840340';
+                // $phoneNumber = '+' . '91' . '9723840340';
 
                 $message = "Your verification code for Admin is: " . $token;
-                $sendMesage =  sendSMS($phoneNumber, $message);
+                // $sendMesage =  sendSMS($phoneNumber, $message);
                 $sendMesage = [
                     "status" => true,
                     "message" => "success"
