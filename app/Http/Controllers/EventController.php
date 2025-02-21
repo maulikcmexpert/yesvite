@@ -3675,6 +3675,7 @@ class EventController extends BaseController
                     }
                 }
             }
+            dd($conatctId);
             if (!empty($conatctId)) {
                 $invitedGuestUsers = $conatctId;
 
