@@ -944,7 +944,7 @@
 #nav-profile-home{
     margin: 30px 0px;
 }
-.image-item.all_designs{
+.image-item.all_designs, .image-item-new.all_designs{
     min-width: 250px;
 }
 
