@@ -1,59 +1,17 @@
 <script type="text/javascript">
     var base_url = "{{ url('/') }}/";
+
     $(function() {
-
-
-
-
-
-
-
-
         var table = $("#template_table").DataTable({
             processing: true,
             serverSide: true,
-
-
             ajax: '{{ URL::to('/admin/faq') }}',
-            columns: [{
-
-                    data: "number",
-
-                    name: "number"
-
-                },
-
-                {
-
-                    data: "question",
-
-                    name: "question"
-
-                },
-
-                {
-
-                    data: "answer",
-
-                    name: "answer"
-
-                },
-
-
-
-                {
-
-                    data: "action",
-
-                    name: "action",
-
-                    orderable: false,
-
-                    searchable: true,
-
-                },
-
-            ],
+            columns: [
+                { data: "number", name: "number" },
+                { data: "question", name: "question" },
+                { data: "answer", name: "answer" },
+                { data: "action", name: "action", orderable: false, searchable: true }
+            ]
         });
 
         $("#addMoreTemplate").click(function() {
@@ -62,12 +20,8 @@
         });
 
         $(document).on("click", ".remove", function() {
-            $(this).closest('.col-lg-3')
-                .remove(); // Remove the entire col-lg-3 div containing the input
+            $(this).closest('.col-lg-3').remove(); // Remove the entire col-lg-3 div containing the input
         });
-
-
-
 
         $(document).on('click', '.delete_faq', function() {
             var id = $(this).data('id');
@@ -83,114 +37,55 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $('#delete_faq_from' + id).submit();
-
                 }
             });
-        })
+        });
 
+        // CKEditor Initialization
+        let questionEditor, answerEditor;
 
-
-
-        // document.querySelectorAll('.question').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height =
-        //             '100px'; // Set the desired height here
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
-        // document.querySelectorAll('.answer').forEach(function(textarea) {
-        //     ClassicEditor
-        //         .create(textarea)
-        //         .then(editor => {
-        //             // Access the editor's editing view container
-        //             editor.ui.view.editable.element.style.height = '100px';
-
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
-        // });
-
-
-        // $('#faqAddForm').validate({
-        //             rules: {
-        //                 question: {
-        //                     required: true
-        //                 },
-        //                 answer: {
-        //                     required: true
-        //                 }
-        //             },
-        //             messages: {
-        //                 question: {
-        //                     required: "Please enter the question"
-        //                 },
-        //                 answer: {
-        //                     required: "Please enter the answer"
-        //                 }
-        //             },
-
-        // });
-        $(document).ready(function() {
-    let questionEditor, answerEditor;
-
-    // Initialize CKEditors for question and answer
-    ClassicEditor.create(document.querySelector('#question'))
-        .then(editor => {
+        ClassicEditor.create(document.querySelector('#question'), {
+            removePlugins: ['Autoformat'] // Prevents CKEditor from blocking spaces
+        }).then(editor => {
             questionEditor = editor;
             editor.model.document.on('change:data', function() {
-                let questionContent = questionEditor.getData().trim();
-                if (/\s/.test(questionContent)) {  // Checks if there is at least one space
-                    $('.err_question').text('');
-                } else {
-                    $('.err_question').text('Please enter at least two words.');
-                }
+                $('.err_question').text('');
             });
-        })
-        .catch(error => console.error(error));
+        }).catch(error => console.error(error));
 
-    ClassicEditor.create(document.querySelector('#answer'))
-        .then(editor => {
+        ClassicEditor.create(document.querySelector('#answer'), {
+            removePlugins: ['Autoformat']
+        }).then(editor => {
             answerEditor = editor;
             editor.model.document.on('change:data', function() {
-                let answerContent = answerEditor.getData().trim();
-                if (/\s/.test(answerContent)) {
-                    $('.err_answer').text('');
-                } else {
-                    $('.err_answer').text('Please enter at least two words.');
-                }
+                $('.err_answer').text('');
             });
-        })
-        .catch(error => console.error(error));
+        }).catch(error => console.error(error));
 
-    $('#faqAddForm').on('submit', function(e) {
-        let isValid = true;
-        let questionContent = questionEditor.getData().trim();
-        let answerContent = answerEditor.getData().trim();
+        // Form Validation
+        $('#faqAddForm').on('submit', function(e) {
+            let isValid = true;
+            let questionContent = questionEditor.getData().trim();
+            let answerContent = answerEditor.getData().trim();
 
-        $('.err_question').text('');
-        $('.err_answer').text('');
+            $('.err_question').text('');
+            $('.err_answer').text('');
 
-        if (!/\s/.test(questionContent)) {
-            $('.err_question').text('Please enter at least two words.');
-            isValid = false;
-        }
-        if (!/\s/.test(answerContent)) {
-            $('.err_answer').text('Please enter at least two words.');
-            isValid = false;
-        }
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
-});
+            // Count words, ensuring spaces are allowed
+            let wordCountQuestion = questionContent.split(/\s+/).filter(word => word.length > 0).length;
+            let wordCountAnswer = answerContent.split(/\s+/).filter(word => word.length > 0).length;
 
-
-
+            if (wordCountQuestion < 2) {
+                $('.err_question').text('Please enter at least two words.');
+                isValid = false;
+            }
+            if (wordCountAnswer < 2) {
+                $('.err_answer').text('Please enter at least two words.');
+                isValid = false;
+            }
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
     });
 </script>
