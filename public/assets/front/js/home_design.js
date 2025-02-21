@@ -1,9 +1,9 @@
-    $("#Allcat").prop("checked", false);
+    $("#Allcat").prop("checked", true);
 
 $(document).ready(function () {
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
     $('input[name="design_subcategory"]').prop("checked", true);
-    $("#Allcat").prop("checked", true);
+    // $("#Allcat").prop("checked", );
 
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
