@@ -63,9 +63,11 @@ class Auth extends Controller
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
                 $saveOtp->otp = $token;
                 $saveOtp->save();
-                $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                // $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                $phoneNumber = '+' . '91' . '9691905903';
+
                 $message = "Your verification code for Admin is: " . $token;
-                // $sendMesage =  sendSMS($phoneNumber, $message);
+                $sendMesage =  sendSMS($phoneNumber, $message);
                 $sendMesage = [
                     "status" => true,
                     "message" => "success"
