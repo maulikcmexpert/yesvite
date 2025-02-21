@@ -176,7 +176,7 @@
                 @foreach ($category->subcategory as $subcategory)
                     @php
                         $firstFiveImages = $subcategory->textdatas->take(5);
-                        dd($firstFiveImages);
+                        // dd($firstFiveImages);
                     @endphp
 
                     @foreach ($firstFiveImages as $image)
