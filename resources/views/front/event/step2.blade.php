@@ -164,7 +164,7 @@
 
                 @foreach ($categories as $category)
                 @foreach ($category->subcategory as $subcategory)
-                @foreach ($subcategory as $image)
+                @foreach ($subcategory->textdatas as $image)
                     @php
                         $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
                         $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
