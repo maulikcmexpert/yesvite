@@ -8970,6 +8970,8 @@ function updateEventData() {
         },
         error: function (xhr, status, error) {
             toastr.error("Something went wrong!!");
+            $("#loader").css("display", "none");
+
             console.log("AJAX error: " + error);
         },
     });
