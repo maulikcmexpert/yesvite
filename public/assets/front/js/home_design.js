@@ -76,9 +76,7 @@ $(document).ready(function () {
                     ).show();
                 });
             } else {
-                var images = $(`.image-item[data-subcategory-id="${subcategoryId}"]`);
-            images.hide(); // Hide all
-            images.slice(0, 5).show(); // Show first 5
+                $(".image-item").show(); // Show all images when nothing is checked
             }
 
             // Update count
