@@ -59,21 +59,21 @@ class Auth extends Controller
 
                 $saveOtp =   Admin::where("id", $adminData->id)->first();
 
-                if (config('app.debug', true)) {
-                        $saveOtp->otp = '111111';
-                        $saveOtp->save();
-                        $sendMesage = [
-                            "status" => true,
-                            "message" => "success"
-                        ];
-                }else{
+                // if (config('app.debug', true)) {
+                //         $saveOtp->otp = '111111';
+                //         $saveOtp->save();
+                //         $sendMesage = [
+                //             "status" => true,
+                //             "message" => "success"
+                //         ];
+                // }else{
                         $token = str_pad(random_int(0, 9999), 6, '0', STR_PAD_LEFT);
                         session()->forget('otp');
                         session(['otp' => $token]);
                         $saveOtp->otp = $token;
                         $saveOtp->save();
-                        if($adminData->phone_number!=""||$adminData->phone_number!=null){
-                            $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
+                        if (!empty($adminData->phone_number)){
+                        $phoneNumber = '+' . $adminData->country_code . $adminData->phone_number;
                             $message = "Your verification code for Admin is: " . $token;
                             $sendMesage =  sendSMS($phoneNumber, $message);
                             $sendMesage = [
@@ -85,7 +85,7 @@ class Auth extends Controller
                                 "status" => false,
                                 "message" => "Please add mobile number",
                             ];
-                        }
+                        // }
                        
             }
 
