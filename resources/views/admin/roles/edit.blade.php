@@ -103,7 +103,7 @@
 
                 <div class="card-footer">
 
-                    <input type="submit" class="btn btn-primary" id="EventTypeAdd" value="Update">
+                    <input type="submit" class="btn btn-primary" value="Update">
 
                 </div>
 
