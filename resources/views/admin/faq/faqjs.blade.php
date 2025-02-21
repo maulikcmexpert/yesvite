@@ -137,56 +137,70 @@
 
         // });
 
-        $(document).ready(function() {
-            let questionEditor, answerEditor;
-            // Initialize CKEditors for question and answer
-            ClassicEditor.create(document.querySelector('#question'))
-                .then(editor => {
-                    questionEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let questionContent = questionEditor.getData().replace(/<p>&nbsp;<\/p>/g, '');
-                        if (questionContent) {
-                            $('.err_question').text('');
-                        } else {
-                            $('.err_question').text('Please enter a question.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
 
-            ClassicEditor.create(document.querySelector('#answer'))
-                .then(editor => {
-                    answerEditor = editor;
-                    editor.model.document.on('change:data', function() {
-                        let answerContent = answerEditor.getData().replace(/<p>&nbsp;<\/p>/g, '');
-                        if (answerContent) {
-                            $('.err_answer').text('');
-                        } else {
-                            $('.err_answer').text('Please enter an answer.');
-                        }
-                    });
-                })
-                .catch(error => console.error(error));
+    let questionEditor, answerEditor;
 
-            $('#faqAddForm').on('submit', function(e) {
-                let isValid = true;
-                let questionContent = questionEditor.getData().trim();
-                let answerContent = answerEditor.getData().trim();
-                $('.err_question').text('');
-                $('.err_answer').text('');
-                if (!questionContent) {
+    // Initialize CKEditor for the "Question"
+    ClassicEditor.create(document.querySelector('#question'))
+        .then(editor => {
+            questionEditor = editor;
+            editor.model.document.on('change:data', function() {
+                // Simply get the data without stripping spaces
+                let questionContent = questionEditor.getData();
+
+                // Check if there's any non-whitespace text
+                if (questionContent.trim().length > 0) {
+                    $('.err_question').text('');
+                } else {
                     $('.err_question').text('Please enter a question.');
-                    isValid = false;
-                }
-                if (!answerContent) {
-                    $('.err_answer').text('Please enter an answer.');
-                    isValid = false;
-                }
-                if (!isValid) {
-                    e.preventDefault();
                 }
             });
-});
+        })
+        .catch(error => console.error(error));
+
+    // Initialize CKEditor for the "Answer"
+    ClassicEditor.create(document.querySelector('#answer'))
+        .then(editor => {
+            answerEditor = editor;
+            editor.model.document.on('change:data', function() {
+                let answerContent = answerEditor.getData();
+
+                if (answerContent.trim().length > 0) {
+                    $('.err_answer').text('');
+                } else {
+                    $('.err_answer').text('Please enter an answer.');
+                }
+            });
+        })
+        .catch(error => console.error(error));
+
+    // Validate on form submission
+    $('#faqAddForm').on('submit', function(e) {
+        let isValid = true;
+        let questionContent = questionEditor.getData().trim();
+        let answerContent = answerEditor.getData().trim();
+
+        // Clear previous errors
+        $('.err_question').text('');
+        $('.err_answer').text('');
+
+        // If question is only spaces (or empty)
+        if (questionContent.length === 0) {
+            $('.err_question').text('Please enter a question.');
+            isValid = false;
+        }
+
+        // If answer is only spaces (or empty)
+        if (answerContent.length === 0) {
+            $('.err_answer').text('Please enter an answer.');
+            isValid = false;
+        }
+
+        // Prevent form submission if not valid
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
 
 
     });
