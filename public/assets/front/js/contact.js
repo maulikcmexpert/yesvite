@@ -123,7 +123,7 @@ $(document).on("keyup", ".search_group", function () {
 $(document).on("input", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
-        $("#yesvitePhones").html("");
+        // $("#yesvitePhones").html("");
         if(search_phone==''){
             offset1=null;
             limit=10;
@@ -229,6 +229,7 @@ $(document).on("input", ".search_phone", function () {
     }
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
+        $("#yesvitePhones").html("");
         $('#home_loader').css('display','flex');
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
