@@ -26,7 +26,7 @@
 <section class="collection-wrapper">
     <div class="container">
         <div class="content">
-            <a href="{{route('events');}}">link</a>
+            <a href="{{route('event');}}">link</a>
             <h2>Find the Perfect <br> Design in Our Collection</h2>
             <p>Customizable Designs to Reflect Your Unique Event</p>
             <div class="position-relative search-wrapper">
