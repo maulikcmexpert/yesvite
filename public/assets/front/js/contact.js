@@ -120,7 +120,7 @@ $(document).on("keyup", ".search_group", function () {
         loadMoreGroups(page, search_group);
 });
 
-$(document).on("keyup", ".search_phone", function () {
+$(document).on("input", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
