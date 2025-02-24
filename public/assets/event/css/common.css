@@ -359,7 +359,7 @@ ul.nav-tabs .nav-link:focus {
     color: #fff;
     transition: right 0.3s ease;
     /* overflow-y: auto; */
-    z-index: 1000;
+    z-index: 999;
 }
 
 .sidebar-content {
