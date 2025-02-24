@@ -107,6 +107,7 @@ $(document).on("keyup", ".search_name", function () {
         if(search_name==''){
             offset=0;
             limit=10;
+            $("#yesviteUser").html("");
             loadMoreData(search_name,type=null,offset,limit);
 
         
@@ -141,6 +142,7 @@ $(document).on("input", ".search_phone", function () {
         if(search_phone==''){
             offset1=null;
             limit=10;
+            $("#yesvitePhones").html("");
             loadMorePhones(search_phone,type=null,offset1,limit);
 
         }else{
