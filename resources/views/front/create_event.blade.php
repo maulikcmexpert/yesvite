@@ -446,7 +446,7 @@
                 </a> -->
             </div>
             <div class="sidebar-invite-top-text d-none">
-                <div class="credit-invite-pro-left">
+                <div >
                     <h3>Pro</h3>
                     <button class="">
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -464,7 +464,7 @@
                 <h4>$15.00</h4>
             </div>
             <div class="invite-pro">
-                <div>
+                <div class="credit-invite-pro-left">
                     <div class="heading">
 
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
