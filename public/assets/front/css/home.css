@@ -573,7 +573,7 @@
     .dropdown
     button.dropdown-toggle {
     background-color: transparent;
-    border: 1px solid var(--borderColor);
+    border: 1px solid var(--borderColor) !important;
     border-radius: 100px;
     width: 100%;
     text-align: left;
