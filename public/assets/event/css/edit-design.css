@@ -1077,7 +1077,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 60%) !important;
+        width: calc(100% - 50%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1155,7 +1155,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 60%) !important;
+        width: calc(100% - 50%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1233,7 +1233,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 60%) !important;
+        width: calc(100% - 50%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1312,7 +1312,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 60%) !important;
+        width: calc(100% - 50%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1390,10 +1390,10 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 60%) !important;
+        width: calc(100% - 50%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
-    }
+    }   
 }
 
 
@@ -1469,7 +1469,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 50%) !important;
+        width: calc(100% - 40%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1506,7 +1506,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 30%) !important;
+        width: calc(100% - 40%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1541,7 +1541,7 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 30%) !important;
+        width: calc(100% - 40%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1598,7 +1598,7 @@
         padding-bottom: 50px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 50%) !important;
+        width: calc(100% - 40%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1683,7 +1683,7 @@
         padding-bottom: 50px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 50%) !important;
+        width: calc(100% - 30%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1735,7 +1735,7 @@
         padding-bottom: 50px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 30%) !important;
+        width: calc(100% - 20%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
@@ -1775,7 +1775,7 @@
         padding-bottom: 50px;
     }
     .image-edit-inner-img {
-        width: calc(100% - 30%) !important;
+        width: calc(100% - 20%) !important;
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     }
