@@ -2636,14 +2636,24 @@ class EventController extends BaseController
                         'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
                     ];
 
+                    // dd($userIds);
+                    // $userExists = array_filter($userIds, function ($entry) use ($id) {
+                    //     return $entry['id'] === $id;
+                    // });
+
+                    // $userIds = array_filter($userIds, function ($entry) use ($id) {
+                    //     return $entry['id'] !== $id;
+                    // });
+                    $userIds = is_array($userIds) ? $userIds : []; // Ensure $userIds is an array
+
                     $userExists = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] === $id;
                     });
-
+                    
                     $userIds = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] !== $id;
                     });
-
+                    
                     $userIds[] = $userEntry;
 
                     if (!empty($userExists)) {

@@ -101,17 +101,28 @@ $("#product-scroll-phone").on("scroll", function () {
 $(document).on("keyup", ".search_name", function () {
         var search_name = $(this).val();
         page = 1;
-        $("#yesviteUser").html("");
+        // $("#yesviteUser").html("");
+        clearTimeout(searchTimeout);
         // loadMoreData(page, search_name);
         if(search_name==''){
             offset=0;
             limit=10;
+            $("#yesviteUser").html("");
+            loadMoreData(search_name,type=null,offset,limit);
+
         
         }else{
             offset=null;
             limit=null;
+            searchTimeout = setTimeout(function () {
+                $("#yesviteUser").html("");
+
+            loadMoreData(search_name,type=null,offset,limit);
+        }, 1000);
+
+
         }
-        loadMoreData(search_name,type=null,offset,limit);
+        // loadMoreData(search_name,type=null,offset,limit);
 
 });
 
@@ -125,18 +136,20 @@ $(document).on("keyup", ".search_group", function () {
 $(document).on("input", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
-        $("#yesvitePhones").html("");
+        // $("#yesvitePhones").html("");
         clearTimeout(searchTimeout);
 
         if(search_phone==''){
             offset1=null;
             limit=10;
+            $("#yesvitePhones").html("");
             loadMorePhones(search_phone,type=null,offset1,limit);
 
         }else{
             offset1=null;
             limit=null;
             searchTimeout = setTimeout(function () {
+                $("#yesvitePhones").html("");
                 loadMorePhones(search_phone, type = null, offset1, limit);
             }, 1000);
         }
