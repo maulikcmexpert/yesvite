@@ -68,6 +68,8 @@ class CategoryController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $cryptId = encrypt($row->id);
+                    $category_id = decrypt($cryptId);
+
 
                     $edit_url = route('category.edit', $cryptId);
 
@@ -75,10 +77,10 @@ class CategoryController extends Controller
 
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_category_from'.$category_id.'" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" data-id="'.$category_id.'" class="btn bg-transparen delete_category"><i class="fas fa-trash"></i></button></form>
                         </div>';
 
                     return $actionBtn;
@@ -176,14 +178,14 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('category.index')->with('success', 'Category Add successfully !');
+            return redirect()->route('category.index')->with('msg', 'Category Add successfully !');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('category.create')->with('danger', 'Category not added' . $e->getMessage());
+            return redirect()->route('category.create')->with('msg_error', 'Category not added' . $e->getMessage());
         }
     }
 
@@ -284,14 +286,14 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('category.index')->with('success', 'Category updated successfully!');
+            return redirect()->route('category.index')->with('msg', 'Category updated successfully!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error' . $e->getMessage());
 
-            return redirect()->route('category.edit', $id)->with('danger', 'Category not updated!' . $e->getMessage());
+            return redirect()->route('category.edit', $id)->with('msg_error', 'Category not updated!' . $e->getMessage());
         }
     }
 
@@ -326,7 +328,7 @@ class CategoryController extends Controller
             DB::commit();
 
             return redirect()->route('category.index')
-                ->with('success', 'Category deleted successfully');
+                ->with('msg', 'Category deleted successfully');
         } catch (QueryException $e) {
 
 
@@ -334,7 +336,7 @@ class CategoryController extends Controller
             DB::rollBack();
 
             return redirect()->route('category.index')
-                ->with('danger', 'Category not deleted');
+                ->with('msg_error', 'Category not deleted');
         }
     }
 

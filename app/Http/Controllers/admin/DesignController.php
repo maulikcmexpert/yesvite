@@ -330,12 +330,12 @@ class DesignController extends Controller
             DB::commit();
 
             return redirect()->route('design.index')
-                ->with('success', 'Design deleted successfully');
+                ->with('msg', 'Design deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
             return redirect()->route('design.index')
-                ->with('danger', 'Design not deleted');
+                ->with('msg_error', 'Design not deleted');
         }
     }
 }

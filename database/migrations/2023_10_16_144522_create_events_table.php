@@ -46,6 +46,8 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('static_information')->nullable();
+            $table->string('design_image')->nullable();
         });
     }
 

@@ -93,8 +93,15 @@
   <x-admin.footerscript />
 
 
+
   @if(isset($js))
+  @if(is_array($js))
+  @foreach($js as $script)
+  @include($script)
+  @endforeach
+  @else
   @include($js)
+  @endif
   @endif
 </body>
 

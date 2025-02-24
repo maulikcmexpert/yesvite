@@ -64,6 +64,10 @@ class Event extends Model
     {
         return $this->hasMany(InviteViewRate::class);
     }
+    public function contact_sync()
+    {
+        return $this->belongsTo(contact_sync::class,'sync_id','id');
+    }
 
     public function user()
     {
@@ -145,5 +149,9 @@ class Event extends Model
     {
 
         return $this->hasMany(UserPotluckItem::class, 'event_id', 'id');
+    }
+    public function coin_transactions()
+    {
+        return $this->hasMany(Coin_transactions::class, 'event_id', 'id');
     }
 }

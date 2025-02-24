@@ -1,6 +1,6 @@
-/*! jQuery Validation Plugin - v1.19.5 - 7/1/2022
+/*! jQuery Validation Plugin - v1.21.0 - 7/17/2024
  * https://jqueryvalidation.org/
- * Copyright (c) 2022 Jörn Zaefferer; Licensed MIT */
+ * Copyright (c) 2024 Jörn Zaefferer; Licensed MIT */
 !(function (a) {
     "function" == typeof define && define.amd
         ? define(["jquery"], a)
@@ -213,6 +213,7 @@
                 onsubmit: !0,
                 ignore: ":hidden",
                 ignoreTitle: !1,
+                customElements: [],
                 onfocusin: function (a) {
                     (this.lastActive = a),
                         this.settings.focusCleanup &&
@@ -340,18 +341,48 @@
                         (c = this.settings.rules),
                         a.each(c, function (b, d) {
                             c[b] = a.validator.normalizeRule(d);
-                        }),
-                        a(this.currentForm)
-                            .on(
-                                "focusin.validate focusout.validate keyup.validate",
-                                ":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], [type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], [type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], [type='radio'], [type='checkbox'], [contenteditable], [type='button']",
-                                b
-                            )
-                            .on(
-                                "click.validate",
-                                "select, option, [type='radio'], [type='checkbox']",
-                                b
-                            ),
+                        });
+                    var f = [
+                            ":text",
+                            "[type='password']",
+                            "[type='file']",
+                            "select",
+                            "textarea",
+                            "[type='number']",
+                            "[type='search']",
+                            "[type='tel']",
+                            "[type='url']",
+                            "[type='email']",
+                            "[type='datetime']",
+                            "[type='date']",
+                            "[type='month']",
+                            "[type='week']",
+                            "[type='time']",
+                            "[type='datetime-local']",
+                            "[type='range']",
+                            "[type='color']",
+                            "[type='radio']",
+                            "[type='checkbox']",
+                            "[contenteditable]",
+                            "[type='button']",
+                        ],
+                        g = [
+                            "select",
+                            "option",
+                            "[type='radio']",
+                            "[type='checkbox']",
+                        ];
+                    a(this.currentForm)
+                        .on(
+                            "focusin.validate focusout.validate keyup.validate",
+                            f.concat(this.settings.customElements).join(", "),
+                            b
+                        )
+                        .on(
+                            "click.validate",
+                            g.concat(this.settings.customElements).join(", "),
+                            b
+                        ),
                         this.settings.invalidHandler &&
                             a(this.currentForm).on(
                                 "invalid-form.validate",
@@ -526,9 +557,15 @@
                 },
                 elements: function () {
                     var b = this,
-                        c = {};
+                        c = {},
+                        d = [
+                            "input",
+                            "select",
+                            "textarea",
+                            "[contenteditable]",
+                        ];
                     return a(this.currentForm)
-                        .find("input, select, textarea, [contenteditable]")
+                        .find(d.concat(this.settings.customElements).join(", "))
                         .not(":submit, :reset, :image, :disabled")
                         .not(this.settings.ignore)
                         .filter(function () {
@@ -625,10 +662,11 @@
                         }).length,
                         i = !1,
                         j = this.elementValue(b);
-                    "function" == typeof g.normalizer
-                        ? (f = g.normalizer)
-                        : "function" == typeof this.settings.normalizer &&
-                          (f = this.settings.normalizer),
+                    this.abortRequest(b),
+                        "function" == typeof g.normalizer
+                            ? (f = g.normalizer)
+                            : "function" == typeof this.settings.normalizer &&
+                              (f = this.settings.normalizer),
                         f && ((j = f.call(b, j)), delete g.normalizer);
                     for (d in g) {
                         e = { method: d, parameters: g[d] };
@@ -786,11 +824,15 @@
                         ? (h
                               .removeClass(this.settings.validClass)
                               .addClass(this.settings.errorClass),
-                          h.html(c))
+                          this.settings && this.settings.escapeHtml
+                              ? h.text(c || "")
+                              : h.html(c || ""))
                         : ((h = a("<" + this.settings.errorElement + ">")
                               .attr("id", i + "-error")
-                              .addClass(this.settings.errorClass)
-                              .html(c || "")),
+                              .addClass(this.settings.errorClass)),
+                          this.settings && this.settings.escapeHtml
+                              ? h.text(c || "")
+                              : h.html(c || ""),
                           (d = h),
                           this.settings.wrapper &&
                               (d = h
@@ -922,6 +964,9 @@
                         "dependency-mismatch"
                     );
                 },
+                elementAjaxPort: function (a) {
+                    return "validate" + a.name;
+                },
                 startRequest: function (b) {
                     this.pending[b.name] ||
                         (this.pendingRequest++,
@@ -955,6 +1000,16 @@
                                   [this]
                               ),
                               (this.formSubmitted = !1));
+                },
+                abortRequest: function (b) {
+                    var c;
+                    this.pending[b.name] &&
+                        ((c = this.elementAjaxPort(b)),
+                        a.ajaxAbort(c),
+                        this.pendingRequest--,
+                        this.pendingRequest < 0 && (this.pendingRequest = 0),
+                        delete this.pending[b.name],
+                        a(b).removeClass(this.settings.pendingClass));
                 },
                 previousValue: function (b, c) {
                     return (
@@ -1209,7 +1264,7 @@
                 number: function (a, b) {
                     return (
                         this.optional(b) ||
-                        /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(a)
+                        /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:-?\.\d+)?$/.test(a)
                     );
                 },
                 digits: function (a, b) {
@@ -1290,9 +1345,10 @@
                         (this.settings.messages[c.name][e] = i.message),
                         (d = ("string" == typeof d && { url: d }) || d),
                         (h = a.param(a.extend({ data: b }, d.data))),
-                        i.old === h
+                        null !== i.valid && i.old === h
                             ? i.valid
                             : ((i.old = h),
+                              (i.valid = null),
                               (f = this),
                               this.startRequest(c),
                               (g = {}),
@@ -1302,7 +1358,7 @@
                                       !0,
                                       {
                                           mode: "abort",
-                                          port: "validate" + c.name,
+                                          port: this.elementAjaxPort(c),
                                           dataType: "json",
                                           data: g,
                                           context: f.currentForm,
@@ -1315,7 +1371,6 @@
                                                   i.originalMessage),
                                                   j
                                                       ? ((h = f.formSubmitted),
-                                                        f.resetInternals(),
                                                         (f.toHide =
                                                             f.errorsFor(c)),
                                                         (f.formSubmitted = h),
@@ -1355,20 +1410,23 @@
         d = {};
     return (
         a.ajaxPrefilter
-            ? a.ajaxPrefilter(function (a, b, c) {
-                  var e = a.port;
-                  "abort" === a.mode && (d[e] && d[e].abort(), (d[e] = c));
+            ? a.ajaxPrefilter(function (b, c, e) {
+                  var f = b.port;
+                  "abort" === b.mode && (a.ajaxAbort(f), (d[f] = e));
               })
             : ((c = a.ajax),
               (a.ajax = function (b) {
                   var e = ("mode" in b ? b : a.ajaxSettings).mode,
                       f = ("port" in b ? b : a.ajaxSettings).port;
                   return "abort" === e
-                      ? (d[f] && d[f].abort(),
+                      ? (a.ajaxAbort(f),
                         (d[f] = c.apply(this, arguments)),
                         d[f])
                       : c.apply(this, arguments);
               })),
+        (a.ajaxAbort = function (a) {
+            d[a] && (d[a].abort(), delete d[a]);
+        }),
         a
     );
 });

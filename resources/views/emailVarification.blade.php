@@ -80,6 +80,34 @@
             margin: 15px auto 0;
             color: #5c5555;
         }
+
+        .email-login-btn {
+            background-color: #F73C71 !important;
+            border: 1px solid #F73C71 !important;
+            color: #fff;
+            border-radius: 16px;
+            -webkit-border-radius: 16px;
+            -moz-border-radius: 16px;
+            -ms-border-radius: 16px;
+            -o-border-radius: 16px;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.5s;
+            -webkit-transition: 0.5s;
+            -moz-transition: 0.5s;
+            -ms-transition: 0.5s;
+            -o-transition: 0.5s;
+            text-transform: capitalize;
+
+        }
+
+        .email-login-btn-wrp {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px !important;
+        }
     </style>
 
 </head>
@@ -93,18 +121,28 @@
                 </div>
                 <div class="success-img">
 
-                    @if($faild != 'faild')
+                    @if(isset($faild)&&$faild != 'faild')
                     <i class="fa-regular fa-circle-check"></i>
                     @else
-                    <i class="fa-regular fa-circle-xmark"></i>
+                    {{-- <i class="fa-regular fa-circle-xmark"></i> --}}
                     @endif
                 </div>
-                @if($faild != 'faild')
+
+                @if(isset($faild)&&$faild == 'verified')
                 <h3 class="text-center">Email Verification</h3>
-                @else
-                <h3 class="text-center">Invalid Token</h3>
-                @endif
                 <p>{{$message}}</p>
+                <a href="{{route('auth.login')}}" class="email-login-btn-wrp"><button type="button" class="email-login-btn">Login</button></a>
+                @elseif (isset($faild)&&$faild == 'faild')
+                <h3 class="text-center">Invalid Token</h3>
+                <p>{{$message}}</p>
+                <a href="{{route('ResendVerificationMail',$user_id)}}" class="email-login-btn-wrp" id="requestEmail"><button type="button" class="email-login-btn">Request Another Email</button></a>
+                @else
+                <p>{{$message}}</p>
+                @endif
+
+
+          
+
 
             </div>
         </div>

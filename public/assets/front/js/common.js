@@ -1,5 +1,6 @@
 // alert();
 //  ===== focusinput =====
+var base_url = $("#base_url").val();
 
 $(document).on("click", "#ChangeToggle", function () {
     $("#navbar-hamburger").toggleClass("hidden");
@@ -17,7 +18,67 @@ $(".form-control").on("focusin", function () {
     $(this).next().addClass("floatingfocus");
 });
 
-$(".form-control").on("focusout", function () {
+$(document).ready(function(){
+    $('.toggleButton').on('click', function() {
+        
+        const $details = $('.details');
+        const $button = $('.toggleButton');
+        
+        $details.stop(true, true).slideToggle(300, function() {
+            const isVisible = $details.is(':visible');
+            $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between"><span class="limited-hide">Limited Featres</span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between"> <span class="limited-show">Limited Featres (15 guests max)</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
+            // ▲ for up, ▼ for down
+        });
+    });
+});
+
+
+$(document).ready(function(){
+    $('.toggleButtonpro').on('click', function() {
+        const $details = $('.detailspro');
+        const $button = $('.toggleButtonpro');
+        
+        $details.stop(true, true).slideToggle(300, function() {
+            const isVisible = $details.is(':visible');
+            $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Pay as you go <strong>per event</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">All the PRO features for this one event</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
+            // ▲ for up, ▼ for down
+        });
+    });
+});
+
+
+$(document).ready(function(){
+    $('.toggledeal').on('click', function() {
+        const $details = $('.detailsdeal');
+        const $button = $('.toggledeal');
+        
+        $details.stop(true, true).slideToggle(300, function() {
+            const isVisible = $details.is(':visible');
+            $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Best Deal!</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">Best Deal!</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
+            // ▲ for up, ▼ for down
+        });
+    });
+    setTimeout(() => {
+        $(".form-control").each(function () {
+            var text = $(this).val();
+            if (text === "") {
+                $(this).next().removeClass("floatingfocus");
+            } else {
+                $(this).next().addClass("floatingfocus");
+            }
+        });
+    }, 500);
+});
+
+// $(".form-control").on("focusout", function () {
+//     var text_val = $(this).val();
+//     if (text_val === "") {
+//         $(this).next().removeClass("floatingfocus");
+//     } else {
+//         $(this).next().addClass("floatingfocus");
+//     }
+// });
+$(".form-control").on("focusout change keyup focus", function () {
     var text_val = $(this).val();
     if (text_val === "") {
         $(this).next().removeClass("floatingfocus");
@@ -35,33 +96,53 @@ $(".form-control").each(function () {
     }
 });
 
+$('html').mouseover(function() {
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
+});
+
 // ========= show-password ===========
+// $(document).on('click','.toggle-password',function () {
+//     // alert();
+//     $(this).toggleClass("fa-eye-slash fa-eye");
+//     var input = $(this).prev().prev();
+//     if (input.attr("type") == "password") {
+//         input.attr("type", "text");
+//     } else {
+//         input.attr("type", "password");
+//     }
+// });
+
+
+// $(".toggle-password").click(function () {
+//     $(this).toggleClass("fa-eye-slash fa-eye");
+//     var input = $(this).parent().html();
+//     console.log(input);
+    
+//     if (input.attr("type") == "password") {
+//         console.log('text'+input);
+//         input.attr("type", "text");
+//     } else {
+//         console.log('pass'+input);
+//         input.attr("type", "password");
+//     }
+// });
+
 $(".toggle-password").click(function () {
     $(this).toggleClass("fa-eye-slash fa-eye");
-    var input = $(this).prev().prev();
-    if (input.attr("type") == "password") {
+        var input = $(this).siblings('input[type="password"], input[type="text"]');
+    if (input.attr("type") === "password") {
         input.attr("type", "text");
     } else {
         input.attr("type", "password");
     }
 });
-
-toastr.options = {
-    closeButton: true,
-    newestOnTop: false,
-    progressBar: true,
-    positionClass: "toast-top-right",
-    preventDuplicates: false,
-    onclick: null,
-    showDuration: "300",
-    hideDuration: "1000",
-    timeOut: "5000",
-    extendedTimeOut: "1000",
-    showEasing: "swing",
-    hideEasing: "linear",
-    showMethod: "fadeIn",
-    hideMethod: "fadeOut",
-};
 
 function loaderHandle(querySelectorId, btnName) {
     var loaderbtn = document.querySelector(querySelectorId);
@@ -84,12 +165,18 @@ function removeLoaderHandle(querySelectorId, btnName) {
 var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 
-var incrementPlus = buttonPlus.click(function () {
+var incrementPlus = buttonPlus.click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var $n = $(this).parent(".qty-container").find(".input-qty");
     $n.val(Number($n.val()) + 1);
 });
 
-var incrementMinus = buttonMinus.click(function () {
+var incrementMinus = buttonMinus.click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var $n = $(this).parent(".qty-container").find(".input-qty");
     var amount = Number($n.val());
     if (amount > 0) {
@@ -158,7 +245,27 @@ $(function () {
     });
 });
 
+$('label[for="email"]').addClass("floatingfocus");
+$('label[for="password"]').addClass("floatingfocus");
 
-
-$('label[for="email"]').addClass('floatingfocus');
-$('label[for="password"]').addClass('floatingfocus');
+$(document).ready(function () {
+    $(".close_advertise").on("click", function (e) {
+        e.preventDefault();
+        $(".google-add").hide();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                ),
+            },
+            url: base_url+"advertisement_status",
+            method: "POST",
+            data: {
+                closed: true,
+            },
+            success: function (response) {
+                // console.log(response);
+            },
+        });
+    });
+});

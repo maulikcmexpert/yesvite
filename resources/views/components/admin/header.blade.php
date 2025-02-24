@@ -2,9 +2,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.png')}}">
-  <title>Yesvite | {{$title}}</title>
+  <title>Yesvite | {!! $title !!}</title>
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- Google Font: Source Sans Pro -->
+  <script src="{{ asset('assets/admin/js/ckeditor.js') }}"></script>
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}">
@@ -43,6 +45,21 @@
   <link>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+  <input type="hidden" id="base_url" value="{{url('/')}}/" />
+  {{-- <link rel="stylesheet" href="https://fabricjs.com/css/googlefonts.css"> --}}
+  @if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
+    <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet.css') }}">
+  @else
+    <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet_live.css') }}">
+  @endif
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/admin_event.css') }}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+  <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
 
+  {{-- <script src= https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js></script> --}}
 
 </head>

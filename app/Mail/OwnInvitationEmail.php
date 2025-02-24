@@ -27,7 +27,7 @@ class OwnInvitationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Invitation Email',
+            subject: 'Your invites were successfully sent',
         );
     }
 

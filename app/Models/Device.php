@@ -9,6 +9,7 @@ use App\Models\User;
 class Device extends Model
 {
     use HasFactory;
+    
 
     public function user()
     {

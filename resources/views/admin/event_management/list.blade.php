@@ -75,7 +75,7 @@
                 <th>Email</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Vanue</th>
+                <th>Venue</th>
                 <th>Event Status</th>
                 <th>Action</th>
             </tr>

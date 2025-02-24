@@ -1,0 +1,549 @@
+.transaction_history_wrp{
+    margin: 50px 0px;
+}
+.transaction_history_info_title h4{
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 24px;
+    line-height: 36px;
+    color: #050505;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.credits_balance_wrp{
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.credits_balance_wrp .credits_balance_title{
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 18px;
+    line-height: 25.2px;
+    color: var(--secondary-black);
+    margin-bottom: 20px;
+}
+
+.credits_balance_amout_wrp h5{
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--secondary-black);
+    margin-bottom: 0px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.credits_balance_amout_wrp h5 img{
+    width: 100%;
+    max-width: 24px;
+    height: 24px;
+}
+
+.credits_balance_amout_wrp h6{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 14px;
+    line-height:normal;
+    color: #96969D;
+    gap: 5px;
+    margin-bottom: 0px;
+}
+
+.credits_balance_amout_wrp h6 span{
+    font-family: var(--SFProDisplay-Semibold);
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-right: 5px;
+}
+
+.credits_balance_amout_wrp{
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.credits_balance_used_wrp{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.credits_balance_used_wrp h6{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    margin-bottom: 0;
+    color: var(--secondary-black);
+}
+
+.credits_balance_used_wrp img{
+    width: 100%;
+    max-width: 25px;
+    height: 25px;
+}
+
+.credits_balance_amout_after h5{
+    padding: 0px;
+    border: none;
+}
+
+.credits_balance_amout_after{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.transaction_detail_wrp{
+    padding-top: 20px;
+    border-top: 1px solid #F1F5F9;
+}
+
+.transaction_detail_title h3{
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 18px;
+    line-height: 25.2px;
+    color: var(--secondary-black);
+    margin-bottom: 10px;
+}
+
+.transaction_detail_list{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.transaction_detail_list_left h3{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 16px;
+    line-height: 26.4px;
+    color: var(--secondary-black);
+    margin-bottom: 2px;
+}
+
+.transaction_detail_list_left ul{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction_detail_list_left ul li{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--light-color);
+    position: relative;
+}
+
+.transaction_detail_list_left ul li::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px; 
+    border-radius: 50%;
+    background: var(--border);
+}
+
+.transaction_detail_list_left ul li:last-child::before{
+    display: none;
+}
+
+.transaction_detail_amount{
+    border: 1px solid #F1F5F9;
+    border-radius: 100px;
+    padding: 4px 10px 4px 4px;
+}
+
+.transaction_detail_amount{
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.transaction_detail_amount img{
+    width: 100%;
+    max-width: 20px;
+    height: 20px;
+}
+
+.transaction_detail_amount p{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0px;
+}
+
+.amount-plus p{
+    color: var(--green);
+}
+.amount-minus p{
+    color: var(--pink);
+}
+
+.transaction_detail_list > li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #F1F5F9;
+    margin-bottom: 15px;
+}
+
+.transaction_detail_list > li:last-child{
+    border: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+#creditChart{
+    margin: 30px 0px;
+}
+
+.buycreditsmodal .modal-header h4 {
+    font-family: var(--SFProDisplay-Semibold) !important;
+    font-size: 18px !important;
+    line-height: 26.4px !important;
+}
+
+.buycreditsmodal .modal-body{
+    padding: 12px 0px !important;
+}
+
+.credit-feature-details-wrp{
+    padding: 0px 24px;
+}
+
+.totle_credit_buy_wrp{
+    border: 1px solid #E03137;
+    border-radius: 50px;
+    padding: 4px;
+    padding-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 47px;
+    margin-right: 10px;
+}
+
+.totle_credit_buy_wrp img{
+    width: 100%;
+    max-width: 20px;
+    height: 20px;
+}
+
+.totle_credit_buy_wrp p{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    color: var(--secondary-black);
+    margin-bottom: 0;
+}
+
+.buycreditsmodal .nav-tabs .nav-link{
+    flex-basis: 50% !important;
+}
+
+
+
+.bulk-credit-options-head{
+    margin: 24px 0px;
+}
+.bulk-credit-options-head h5{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: 22.4px;
+    color: var(--secondary-black);
+    margin-bottom: 5px;
+}
+.bulk-credit-options-head p{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 14px;
+    line-height: 23.8px;
+    color: var(--light-color);
+    margin-bottom: 0px;
+}
+
+.bulk-credit-options-listing ul li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.03);
+    margin-bottom: 15px;
+    background-color: var(--white);
+}
+
+.bulk-credit-options-listing-left h3{
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 18px;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.bulk-credit-options-listing-left h3 span{
+    display: inline-block;
+    width: 100%;
+    max-width: 22px;
+    height: 22px;
+}
+
+.bulk-credit-options-listing-left{
+    width: 100%;
+}
+
+.bulk-credit-options-listing-left p{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 14px;
+    line-height: 23.8px;
+    color: var(--lightgreay);
+    margin-bottom: 0;
+}
+
+.bulk-credit-options-listing-right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bulk-credit-options-listing-right h4{
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 16px;
+    line-height: normal;
+    color: var(--secondary-black);
+    margin-bottom: 0;
+}
+
+.bulk-credit-options-listing-right .form-check-input{
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    margin-top: 0px;
+    border-radius: 8px;
+}
+
+.bulk-credit-options-listing-right .form-check-input:focus{
+    box-shadow: none;
+}
+
+.bulk-credit-options-listing-right .form-check-input:checked{
+    background-color: #2DA9FC;
+    border-color: #2DA9FC;
+}
+.bulk-credit-options-listing-right .form-check{
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+}
+
+
+.best-deal-wrp{
+    background: linear-gradient(266.99deg, #AE3BE4 -4.33%, #F73C71 124.92%);
+    border-radius: 16px;
+    padding: 6px 3px 3px 3px;
+}
+
+.best-deal-wrp li{
+    margin-bottom: 0px !important;
+}
+
+.best-deal-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px 10px 10px;
+}
+
+
+.best-deal-title h5{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    color: var(--white);
+    margin-bottom: 0;
+}
+
+.best-deal-title h4{
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 12px;
+    line-height: normal;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.bulk-credit-options-listing ul{
+    max-height: 350px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.credit-feature-details-note{
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.03);
+    margin-top: 20px;
+}
+
+.credit-feature-details-note p{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22.4px;
+    color: var(--secondary-black);
+    margin-bottom: 0;
+}
+
+.credit-feature-details-wrp .bulk-credit-options-head{
+    margin: 16px 0px 20px 0px;
+}
+
+.credit-feature-details-listing{
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.credit-feature-details-listing li{
+    font-family: var(--SFProDisplay-Regular);
+    font-size: 15px;
+    line-height: 23.8px;
+    letter-spacing: 0.20000000298023224px;
+    color: var(--secondary-black);
+    padding: 0px !important;
+    border-bottom: none !important;
+    padding-bottom: 15px !important;
+}
+
+.credit-feature-details-listing li span{
+    color: var(--green);
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.bulk-credit-options-wrp{
+    padding: 0px 24px;
+}
+
+/* ==responsive== */
+
+@media only screen and (max-width: 1399px) {
+
+}
+
+@media only screen and (max-width: 1199px) {
+    .transaction_history_info_title h4 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .transaction_history_info_title h4 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .credits_balance_amout_wrp h5{
+        font-size: 16px;
+    }
+    .credits_balance_amout_wrp h5 img {
+        width: 100%;
+        max-width: 20px;
+        height: 20px;
+    }
+    .credits_balance_wrp{
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .transaction_history_info_title h4 {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    #creditChart{
+        margin: 20px 0px;
+    }
+    .transaction_detail_list_left h3{
+        font-size: 15px;
+    }
+}
+
+
+@media only screen and (max-width: 575px) {
+    .credits_balance_amout_wrp h5 {
+        font-size: 14px;
+    }
+    .credits_balance_amout_wrp h6 {
+        font-size: 13px;
+    }
+    .transaction_detail_list_left h3 {
+        font-size: 14px;
+    }
+    .transaction_detail_amount p {
+        font-size: 13px;
+    }
+    .bulk-credit-options-listing ul{
+        max-height: 400px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+    .credit-feature-details-note p{
+        font-size: 15px;
+        line-height: 20px;
+    }
+    .credit-feature-details-listing li {
+        font-size: 14px;
+        line-height: 23.8px;
+        padding-bottom: 5px !important;
+    }
+    .bulk-credit-options-wrp{
+        padding: 0px 15px;
+    }
+    .credit-feature-details-wrp{
+        padding: 0px 15px;
+    }
+}
+
+@media only screen and (max-width: 424px) {
+    .credits_balance_amout_wrp{
+        flex-direction: column;
+        align-items: start;
+    }
+    .credits_balance_amout_after{
+        flex-direction: row;
+    }
+    .transaction_detail_list > li{
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+    .bulk-credit-options-listing ul{
+        max-height: 400px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+}

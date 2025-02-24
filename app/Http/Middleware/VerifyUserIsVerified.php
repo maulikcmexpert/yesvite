@@ -30,16 +30,25 @@ class VerifyUserIsVerified
 
             $user = Auth::user();
             $currentSessionId = Session::getId();
-
-            if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
-                Auth::guard('web')->logout();
-                return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
-            }
+            
+            // if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
+            //     Auth::guard('web')->logout();
+            //     return redirect('/')->with('error', 'You have been logged out because your account was logged in from another device.');
+            // }
 
             $user->current_session_id = $currentSessionId;
             $user->save();
             return $next($request);
         }
-        return redirect('/')->with('error', 'Unauthorised');
+        elseif($request->ajax()){
+            return response()->json([
+                'info' => 'logout',
+                'status'=>401,
+                'message' => 'Unauthenticated. Please log in.'
+            ]);
+        }
+        // return redirect('/')->with('msg_error', 'Unauthorised');
+        return redirect('/');
+
     }
 }

@@ -5,6 +5,7 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use App\Models\Event;
+use App\Models\EventInvitedUser;
 use Illuminate\Support\Facades\Auth;
 
 class checkIsUserEvent implements ValidationRule
@@ -25,8 +26,10 @@ class checkIsUserEvent implements ValidationRule
             ->where('id', $event_id)
             ->exists();
 
-        if (!$exists) {
-            $fail("The combination of user and event is invalid.");
-        }
+        $isCoHost =  EventInvitedUser::where(['event_id' => $event_id, 'user_id' => $user_id,'is_co_host'=>'1'])->exists();
+            
+            if (!$exists && !$isCoHost) {
+                $fail("The combination of user and event is invalid.");
+            }
     }
 }

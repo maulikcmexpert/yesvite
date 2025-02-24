@@ -11,26 +11,79 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
-use Cookie;
+// use Cookie;
 use App\Models\User;
+use App\Models\LoginHistory;
+
 use App\Rules\EmailExists;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Flasher\Prime\FlasherInterface;
+use Google_Client;
+use App\Mail\forgotpasswordMail;
+use App\Models\Coin_transactions;
 use Laravel\Passport\Token;
-use GuzzleHttp\Client;
+// use GuzzleHttp\Client;
+use Google\Client;
+use Google\Service\AndroidPublisher;
+use Laravel\Socialite\Facades\Socialite;
+use Biscolab\ReCaptcha\Facades\ReCaptcha;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    protected $firebase;
+    protected $usersReference;
+
+    public function __construct()
     {
+        $this->firebase = Firebase::database();
+        $this->usersReference = $this->firebase->getReference('users');
+        // $this->database = $database;
+        // $this->chatRoom = $this->database->getReference();
+    }
+    public function index() {}
+
+    public function redirectToGoogle()
+    {
+        $client = new Google_Client();
+        $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
+        $client->addScope('https://www.googleapis.com/auth/androidpublisher');
+        $client->setRedirectUri(route('google/callback'));
+
+        $authUrl = $client->createAuthUrl();
+        return redirect($authUrl);
+    }
+
+    public function handleGoogleCallback(Request $request)
+    {
+
+        $client = new Client();
+        $client->setAuthConfig(storage_path('app/google-play-service-account.json'));
+        $client->setRedirectUri('https://yesvite.cmexpertiseinfotech.in/google/callback');
+
+        $client->authenticate($request->input('code'));
+        $accessToken = $client->getAccessToken();
+        dd($accessToken);
+
+        // Save the refresh token
+        $refreshToken = $accessToken['refresh_token'];
+        dd($refreshToken);
+        // Save this refresh token securely, e.g., in the database
+        // User::update(['google_refresh_token' => $refreshToken]);
+
+        return 'Refresh token saved!';
     }
 
     /**
@@ -65,7 +118,7 @@ class AuthController extends Controller
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
-                'businesspassword' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'businesspassword' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
                 'businesscpassword' => 'required|same:businesspassword',
             ], [
                 'firstname.required' => 'Please enter your first name',
@@ -74,7 +127,7 @@ class AuthController extends Controller
                 'email.email' => 'Please enter a valid email address',
                 'zip_code.required' => 'Please enter your zip code',
                 'businesspassword.required' => 'Please enter your password',
-                'businesspassword.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                'businesspassword.regex' => 'Your password must be at least 6 characters long and contain both letters and numbers',
                 'businesscpassword.required' => 'Please confirm your password',
                 'businesscpassword.same' => 'Passwords do not match',
             ]);
@@ -84,7 +137,8 @@ class AuthController extends Controller
                 'lastname' => 'required|string|max:255',
                 'email' => ['required', 'email', new EmailExists], // Use the custom validation rule
                 'zip_code' => 'required|string|max:10',
-                'password' => 'required|string|min:8|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                // 'password' => 'required|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/',
+                'password' => 'required|string|min:6',
                 'cpassword' => 'required|same:password',
 
             ], [
@@ -94,16 +148,29 @@ class AuthController extends Controller
                 'email.email' => 'Please enter a valid email address',
                 'zip_code.required' => 'Please enter your zip code',
                 'password.required' => 'Please enter your password',
-                'password.regex' => 'Your password must be at least 8 characters long and contain both letters and numbers',
+                // 'password.regex' => 'Your password must be at least 6 characters long and contain both letters and numbers',
                 'cpassword.required' => 'Please confirm your password',
                 'cpassword.same' => 'Passwords do not match',
 
             ]);
         }
 
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response')
+        ]);
+
+        $responseBody = $response->json();
+
+        if (!$responseBody['success']) {
+            toastr('reCAPTCHA verification failed. Please try again.', 'error');
+            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        }
 
         if ($validator->fails()) {
-            Redirect::to('register')->with('error', $validator->errors()->first());;
+            toastr($validator->errors()->first(), 'error');
+            return redirect()->back()->withErrors(['captcha' => $validator->errors()->first()]);
+            // Redirect::to('register')->with('error', $validator->errors()->first());
         }
 
         try {
@@ -127,29 +194,43 @@ class AuthController extends Controller
 
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
+            $storeUser->register_type =   'web normal register';
+            $storeUser->coins =  config('app.default_coin', 30);
             $storeUser->save();
             DB::commit();
             $userDetails = User::where('id', $storeUser->id)->first();
 
+            $coin_transaction = new Coin_transactions();
+            $coin_transaction->user_id = $storeUser->id;
+            $coin_transaction->status = '0';
+            $coin_transaction->type = 'credit';
+            $coin_transaction->coins = config('app.default_coin', 30);
+            $coin_transaction->current_balance = config('app.default_coin', 30);
+            $coin_transaction->description = 'Signup Bonus';
+            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            $coin_transaction->save();
+
             $userData = [
-                'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+                'username' => $userDetails->firstname,
                 'email' => $userDetails->email,
                 'token' => $randomString
             ];
+            $this->addInFirebase($storeUser->id);
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
                 $message->to($request->email);
-                $message->subject('Email Verification Mail');
+                $message->subject('Verify your Yesvite email address');
             });
 
 
-            return  Redirect::to('login')->with('success', 'Account successfully created, please verify your email before you can log in');;
+            return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
         } catch (QueryException $e) {
             DB::Rollback();
 
-            return  Redirect::to('register')->with('error', 'Register not successfull');
+            return  Redirect::to('register')->with('msg_error', 'Register not successfull');
         } catch (Exception  $e) {
 
-            return  Redirect::to('register')->with('error', 'something went wrong');
+            return  Redirect::to('register')->with('msg_error', 'something went wrong');
         }
     }
 
@@ -160,77 +241,149 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
+            'password' => ['required', 'min:6'],
         ], [
             'email.required' => 'Please enter Email',
             'email.email' => 'Please enter a valid Email',
             'password.required' => 'Please enter a Password',
-            'password.min' => 'Password must be at least 8 characters',
+            'password.min' => 'Password must be at least 6 characters',
         ]);
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
+        $userData = User::where('email', $request->email)->first();
+        if ($userData != NULL) {
+            if ($userData->account_status != 'Unblock') {
+                return redirect()->back()->withErrors([
+                    'email' => 'Ban User: Temporarily or permanently suspend user.',
+                ])->withInput();
+            }
+            if (Auth::attempt($credentials, $remember)) {
+                $userIpAddress = request()->ip();
 
-        if (Auth::attempt($credentials, $remember)) {
-            $user = Auth::guard('web')->user();
-            if ($user->email_verified_at != NULL) {
+                $user = Auth::guard('web')->user();
+                if ($user->email_verified_at != NULL) {
 
-                Session::regenerate();
-                $user->current_session_id = Session::getId();
-                $user->save();
+                    Session::regenerate();
+                    $user->current_session_id = Session::getId();
+                    $user->save();
 
-                $sessionArray = [
-                    'id' => encrypt($user->id),
+                    $sessionArray = [
+                        'id' => encrypt($user->id),
+                        'first_name' => $user->firstname,
+                        'last_name' => $user->lastname,
+                        'username' => $user->firstname . ' ' . $user->lastname,
+                        'email' => $user->email,
 
-                    'first_name' => $user->firstname,
-                    'last_name' => $user->lastname,
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'email' => $user->email,
+                        'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
+                    ];
+                    Session::put(['user' => $sessionArray]);
 
-                    'profile' => ($user->profile != NULL || $user->profile != "") ? asset('public/storage/profile/' . $user->profile) : asset('public/storage/profile/no_profile.png')
-                ];
-                Session::put(['user' => $sessionArray]);
-
-                if (Session::has('user')) {
+                    if (Session::has('user')) {
 
 
-                    if ($remember) {
-                        Cookie::queue('email', $user->email, 120);
-                        Cookie::queue('password', $request->password, 120);
+                        if ($remember) {
+                            Cookie::queue('email', $user->email, 120);
+                            Cookie::queue('password', $request->password, 120);
+                        } else {
+                            Cookie::queue(Cookie::forget('email'));
+                            Cookie::queue(Cookie::forget('password'));
+
+                            Cookie::forget('email');
+                            Cookie::forget('password');
+                        }
+
+                        // $this->logoutFromApplication($user->id);
+                        event(new \App\Events\UserRegistered($user));
+
+                        add_user_firebase($user->id, 'Online');
+
+                        $loginHistory = LoginHistory::where('user_id', $user->id)->first();
+
+                        if ($loginHistory) {
+                            $new_count = $loginHistory->login_count + 1;
+                            $loginHistory->ip_address = $userIpAddress;
+                            $loginHistory->login_at = now();
+                            $loginHistory->login_count = $new_count;
+                            $loginHistory->save();
+                        } else {
+                            $loginHistory = new LoginHistory();
+                            $loginHistory->user_id = $user->id;
+                            $loginHistory->ip_address = $userIpAddress;
+                            $loginHistory->login_at = now();
+                            $loginHistory->login_count = 1;
+                            $loginHistory->save();
+                        }
+                        if ($user->isTemporary_password == "1") {
+                            return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
+                        } else {
+                            return redirect()->route('home');
+                        }
                     } else {
-
-                        Cookie::forget('email');
-                        Cookie::forget('password');
+                        return redirect()->back()->withErrors([
+                            'email' => 'Invalid credentials!',
+                        ])->withInput();
+                        // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
-
-                    $this->logoutFromApplication($user->id);
-                    event(new \App\Events\UserRegistered($user));
-
-                    return redirect()->route('home')->with('success', 'Logged in successfully!');
                 } else {
+                    $randomString = Str::random(30);
+                    $user->remember_token = $randomString;
+                    $user->save();
 
-                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                    $userData = [
+                        'username' => $user->firstname,
+                        'email' => $user->email,
+                        'token' => $randomString,
+                        'is_first_login' => $user->is_first_login
+                    ];
+
+
+                    Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                        $message->to($user->email);
+                        $message->subject('Verify your Yesvite email address');
+                    });
+
+                    return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
-            } else {
-                $randomString = Str::random(30);
-                $user->remember_token = $randomString;
-                $user->save();
-
-                $userData = [
-                    'username' => $user->firstname . ' ' . $user->lastname,
-                    'email' => $user->email,
-                    'token' => $randomString,
-                    'is_first_login' => $user->is_first_login
-                ];
-                Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Email Verification Mail');
-                });
-
-                return  Redirect::to('login')->with('success', 'Please check and verify your email address.');
             }
         }
-        return  Redirect::to('login')->with('error', 'Email or Password invalid!');
+        return redirect()->back()->withErrors([
+            'email' => 'Email or Password invalid!',
+        ])->withInput();
+        // return  Redirect::to('login')->with('error', 'Email or Password invalid!');
+    }
+
+
+    public function addInFirebase($userId)
+    {
+        $userData = User::findOrFail($userId);
+        // dd($userData);
+        $userName =  $userData->firstname . ' ' . $userData->lastname;
+        $updateData = [
+            'userChatId' => '',
+            'userCountryCode' => (string)$userData->country_code,
+            'userGender' => 'male',
+            'userEmail' => $userData->email,
+            'userId' => (string)$userId,
+            'userLastSeen' => now()->timestamp * 1000, // Convert to milliseconds
+            'userName' => $userName,
+            'userPhone' => (string)$userData->phone_number,
+            'userProfile' => request()->server('HTTP_HOST') . '/public/storage/profile/' . $userData->profile,
+            'userStatus' => 'Online',
+            'userTypingStatus' => 'Not typing...'
+        ];
+
+        // Create a new user node with the userId
+        $userRef = $this->usersReference->getChild((string)$userId);
+        $userSnapshot = $userRef->getValue();
+
+        if ($userSnapshot) {
+            // User exists, update the existing data
+            $userRef->update($updateData);
+        } else {
+            // User does not exist, create a new user node
+            $userRef->set($updateData);
+        }
     }
 
 
@@ -299,7 +452,7 @@ class AuthController extends Controller
                     }
 
 
-                    return  Redirect::to('profile')->with('error', 'You have already login ' . $msg);
+                    return  Redirect::to('home')->with('msg_error', 'You have already login ' . $msg);
                 }
 
 
@@ -341,10 +494,10 @@ class AuthController extends Controller
                     }
                     event(new \App\Events\UserRegistered($secondUser));
                     $this->logoutFromApplication($secondUser->id);
-                    return redirect()->route('home')->with('success', 'Logged in successfully!');
+                    return redirect()->route('home')->with('msg', 'Logged in successfully!');
                 } else {
 
-                    return  Redirect::to('login')->with('error', 'Invalid credentials!');
+                    return  Redirect::to('login')->with('msg_error', 'Invalid credentials!');
                 }
             } else {
                 $this->currentUserLogin($currentLogUser);
@@ -362,16 +515,16 @@ class AuthController extends Controller
                 ];
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($secondUser) {
                     $message->to($secondUser->email);
-                    $message->subject('Email Verification Mail');
+                    $message->subject('Verify your Yesvite email address');
                 });
 
-                return  Redirect::to('add_account')->with('success', 'Please check and verify your email address.');
+                return  Redirect::to('add_account')->with('msg', 'Please check and verify your email address.');
             }
         }
 
         $this->currentUserLogin($currentLogUser);
 
-        return  Redirect::to('profile')->with('error', 'Email or Password invalid');
+        return  Redirect::to('profile')->with('msg_error', 'Email or Password invalid');
     }
 
 
@@ -415,9 +568,9 @@ class AuthController extends Controller
             Session::put(['user' => $sessionArray]);
 
             $this->logoutFromApplication($switchAccount->id);
-            return redirect()->route('home')->with('success', 'Logged in successfully!');
+            return redirect()->route('profile')->with('msg', 'Logged in successfully!');
         }
-        return redirect()->route('profile')->with('error', 'Logged faild!');
+        return redirect()->route('profile')->with('msg_error', 'Logged faild!');
     }
 
     public function addAccount()
@@ -425,9 +578,8 @@ class AuthController extends Controller
 
         $page = 'auth/add_account';
         $title = "Login";
-        // $js = ['login'];
-
-        return view('layout', compact('page', 'title'));
+        $js = ['login'];
+        return view('layout', compact('page', 'title', 'js'));
     }
 
     /**
@@ -474,6 +626,29 @@ class AuthController extends Controller
         }
     }
 
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $exists = User::where('email', $email)->exists();
+
+        return response()->json($exists);
+    }
+
+
+
+    public function storeAdvertisementStatus(Request $request)
+    {
+        if (Auth::check()) {
+            if ($request->has('closed') && $request->closed) {
+                session(['advertisement_closed' => true]);
+            }
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'User not logged in']);
+        }
+    }
+
     public function logoutFromApplication($id)
     {
 
@@ -486,5 +661,103 @@ class AuthController extends Controller
             $check->delete();
             Token::where('user_id', $id)->delete();
         }
+    }
+
+    public function forgetpassword()
+    {
+        $page = 'front/forgetpassword';
+        $title = "Forget Password";
+        $js = ['forget_password'];
+        return view('layout', compact('page', 'title', 'js'));
+    }
+
+    public function otpverification(Request $request)
+    {
+        // dd($request);
+        $token = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        $userDetails = User::where('email', $request->email)->first();
+
+        if ($userDetails == null) {
+            return redirect()->back()->with('msg', 'You have not entered existing email');
+        }
+
+        $user_id = $userDetails->id;
+
+        $digit1 = substr($token, 0, 1);
+        $digit2 = substr($token, 1, 1);
+        $digit3 = substr($token, 2, 1);
+        $digit4 = substr($token, 3, 1);
+
+        $useremail = $request->email;
+
+        $userData = [
+            'username' => $userDetails->firstname,
+            // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
+            'email' => $userDetails->email,
+            'digit1' => $digit1,
+            'digit2' => $digit2,
+            'digit3' => $digit3,
+            'digit4' => $digit4
+        ];
+
+        $otp = $digit1 . $digit2 . $digit3 . $digit4;
+
+        Mail::to($request->email)->send(new forgotpasswordMail(array($userData)));
+
+        // dd($otp);
+        $page = 'front/otpverification';
+        $title = "Verify Otp";
+        $js = ['forget_password'];
+
+        if ($request->ajax()) {
+            return response()->json(['success' => '1', 'otp' => $otp]);
+        }
+        return view('layout', compact('page', 'title', 'js', 'otp', 'user_id', 'useremail'));
+    }
+
+    public function checkOtp(Request $request)
+    {
+        $user_id = $request->user_id;
+        $num1 = $request->number1;
+        $num2 = $request->number2;
+        $num3 = $request->number3;
+        $num4 = $request->number4;
+
+        $otp = $num1 . $num2 . $num3 . $num4;
+
+        if ($request->generated_otp == $otp) {
+            $page = 'front/forget_changepassword';
+            $title = "Change Password";
+            $js = ['forget_password'];
+            return view('layout', compact('page', 'title', 'js', 'user_id'));
+        }
+    }
+
+    public function forgetChangepassword(Request $request)
+    {
+
+        // $request->validate([
+        //     'new_password' => 'required|min:8',
+        //     'conform_password' => 'required|min:8|same:new_password',
+        //     'user_id'=>'required'
+        // ]);
+
+        $userUpdate = User::where('id', $request->user_id)->first();
+        $userUpdate->password = Hash::make($request->new_password);
+        $userUpdate->password_updated_date = date('Y-m-d');
+        $userUpdate->save();
+
+        DB::commit();
+        // toastr()->success('Password Changed');
+        return  Redirect::to('login')->with('msg', 'Password has been changed.');
+
+        // return  redirect()->route('auth.login');
+    }
+
+    public function getAccessToken()
+    {
+        $accessToken = getAccessToken();
+        return response()->json(['access_token' => $accessToken]);
     }
 }

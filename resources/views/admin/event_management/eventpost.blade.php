@@ -778,6 +778,14 @@
         border: 1px solid var(--ButtonColor);
     }
 
+    .video-pane-slider {
+        width: 100% !important;
+        height: 200px !important;
+        max-width: 247px;
+        object-fit: cover;
+    }
+
+
     @media only screen and (max-width: 1399px) {
         .event_postsmain .aVolIco {
             margin: 0px 5px;
@@ -874,9 +882,19 @@
                                         <div class="product-images demo-gallery">
                                             <!-- Begin Product Images Slider -->
                                             <div class="main-img-slider">
-                                                @foreach($postVal->post_image as $key=>$postImg)
+                                                <!-- @foreach($postVal->post_image as $key=>$postImg)
                                                 <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
-                                                @endforeach
+                                                @endforeach -->
+                                                @foreach($postVal->post_image as $key=>$postImg)
+                                                @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
+                                                <video controls class="video-pane-slider">
+                                                    <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
+                                                </video>
+                                                @else
+                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                                    <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
+                                                </a>
+                                                @endif @endforeach
                                             </div>
                                             <!-- End Product Images Slider -->
                                         </div>
@@ -920,7 +938,10 @@
                                 @endif
                                 @if($postVal->post_type == '3')
                                 <div class="col-xl-6 col-lg-12 col-md-12">
-                                    <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+                                    <audio controls src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
+
+                                    </audio>
+                                    <!-- <div class="aWrap" data-src="{{ asset('public/storage/event_post_recording/'.$postVal->post_recording)}}">
                                         <button class="aPlay" disabled><span class="aPlayIco"><i class="fa fa-play"></i></span></button>
                                         <div class="range">
                                             <span class="under-ranger"></span>
@@ -936,7 +957,7 @@
                                                 <input class="aVolume" type="range" min="0" max="1" value="1" step="0.1" disabled><span class="change-range"></span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 @endif
 
@@ -964,7 +985,7 @@
                                         </div>
                                         <div class="event_posts_creator">
                                             <div class="event_posts_creator_img">
-                                                <img src="{{ asset('public/storage/profile/'.$postVal->user->profile)}}" alt="placeholder image" />
+                                                <img src="{{ asset('public/storage/profile/'.($postVal->user->profile != null ? $postVal->user->profile : 'no_profile.png')) }}" alt="placeholder image" />
                                             </div>
                                             <div class="event_posts_creator_content">
                                                 <h6>{{$postVal->user->firstname.' '.$postVal->user->lastname}}</h6>

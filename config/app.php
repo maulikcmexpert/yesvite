@@ -17,6 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Yesvite'),
+    'default_coin' => env('DEFAULT_COIN', 30),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +71,8 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kolkata',
+    // 'timezone' => 'Asia/Kolkata',
+    'timezone' => 'America/Los_Angeles',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +175,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         App\Providers\FirebaseServiceProvider::class,
-
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ])->toArray(),
 
@@ -191,8 +194,12 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
 
         // 'Example' => App\Facades\Example::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Flasher' => Flasher\Laravel\Facade\Flasher::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        // 'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        // 'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+
     ])->toArray(),
 
 ];

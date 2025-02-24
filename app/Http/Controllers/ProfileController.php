@@ -26,7 +26,7 @@ use App\Rules\PhoneNumberExists;
 use Illuminate\Validation\Rule;
 
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
 
     public function index()
@@ -37,18 +37,19 @@ class ProfileController extends Controller
         $title = 'Profile';
         $page = 'front.profile';
         $id = Auth::guard('web')->user()->id;
-
+        // $js = ['create_event'];
+        $js = [];
 
         $user = User::withCount(
 
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
-
+                'event_post_comment',
             ]
         )->findOrFail($id);
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
@@ -57,7 +58,10 @@ class ProfileController extends Controller
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
-
+        $draft_events =   Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])
+            ->select('event_name', 'step', 'updated_at', 'id')
+            ->orderBy('id', 'DESC')
+            ->get();
         if ($user->visible == 1) {
             $user['visible'] = 'Guests from events';
         }
@@ -68,11 +72,14 @@ class ProfileController extends Controller
         if ($user->visible == 3) {
             $user['visible'] = 'Anyone';
         }
+        $user['subscribe_status'] = checkSubscription($user->id);
 
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'draft_events',
+            'js'
 
         ));
     }
@@ -87,10 +94,14 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
 
             ]
         )->findOrFail($id);
@@ -98,13 +109,18 @@ class ProfileController extends Controller
         $page = 'front.public_profile';
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
+        $user['subscribe_status'] = checkSubscription($user->id);
+
         $date = Carbon::parse($user->created_at);
         $formatted_date = $date->format('F, Y');
         $user['join_date'] = $formatted_date;
+
+        $user_privacy = UserProfilePrivacy::where('user_id', $user->id)->get();
         return view('layout', compact(
             'title',
             'page',
             'user',
+            'user_privacy'
         ));
     }
 
@@ -119,7 +135,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
@@ -128,6 +145,7 @@ class ProfileController extends Controller
         )->findOrFail($id);
         $title = 'Edit Profile';
         $page = 'front.edit_profile';
+        $user_birth_date = Carbon::parse($user->birth_date)->format('F j, Y');
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
@@ -135,6 +153,7 @@ class ProfileController extends Controller
             'title',
             'page',
             'user',
+            'user_birth_date',
             'js'
         ));
     }
@@ -181,14 +200,14 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string', // max 2MB
                 'lastname' => 'required|string', // max 2MB
-                'phone_number' => ['present', 'nullable', 'numeric', 'regex:/^\d{10,15}$/', Rule::unique('users')->ignore(decrypt($request->id))],
+                'phone_number' => ['present', 'nullable', 'regex:/^\d{3}-\d{3}-\d{4}$/', Rule::unique('users')->ignore(decrypt($request->id))],
                 'zip_code' => 'required|numeric|regex:/^\d{5,9}$/', // max 2MB
 
             ], [
                 'firstname.required' => 'Please enter First Name',
                 'lastname.required' => 'Please enter Last Name',
 
-                'phone_number.numeric' => 'Please enter Phone Number in digit',
+                // 'phone_number.numeric' => 'Please enter Phone Number in digit',
                 'phone_number.regex' => 'Phone Number format is invalid.',
 
                 'zip_code.required' => 'Please enter Zip Code',
@@ -212,11 +231,13 @@ class ProfileController extends Controller
 
             $userUpdate->lastname = $request->lastname;
             $userUpdate->gender = ($request->gender != "" || $request->gender != NULL) ? $request->gender : $userUpdate->gender;
-            $userUpdate->birth_date = ($request->birth_date != "" || $request->birth_date != NULL) ? $request->birth_date : $userUpdate->birth_date;
+
+            $user_birth_date = Carbon::parse($request->birth_date)->format("Y-m-d");
+            $userUpdate->birth_date = ($request->birth_date != "" || $request->birth_date != NULL) ? $user_birth_date : $userUpdate->birth_date;
             $userUpdate->country_code = ($request->country_code != "" || $request->country_code != NULL) ? $request->country_code : $userUpdate->country_code;
             $userUpdate->phone_number = ($request->phone_number != ""  || $request->phone_number != NULL)  ? $request->phone_number : "";
             $userUpdate->about_me = ($request->about_me != "" || $request->about_me != NULL) ? $request->about_me : "";
-            $userUpdate->zip_code = ($request->zip_code != "" || $request->zip_code != NULL) ? $request->zip_code : $userUpdate->zip_code;
+            $userUpdate->zip_code = ($request->zip_code != "" || $request->zip_code != NULL) ? $request->zip_code : "";
             // if ($userUpdate->account_type == '1') {
             //     $validator = Validator::make($request, [
             //         'company_name' => 'required',
@@ -225,8 +246,8 @@ class ProfileController extends Controller
             // }
             $userUpdate->address = ($request->address != "") ? $request->address : $userUpdate->address;
             $userUpdate->address_2 = (isset($request->address_2)  && $request->address_2 != "" || $request->address_2 != NULL) ? $request->address_2 : $userUpdate->address_2;
-            $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : $userUpdate->city;
-            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state : $userUpdate->state;
+            $userUpdate->city = ($request->city != "" || $request->city != NULL) ? $request->city : "";
+            $userUpdate->state = ($request->state != "" ||  $request->state != NULL) ? $request->state : "";
             $userUpdate->save();
             DB::commit();
 
@@ -341,7 +362,8 @@ class ProfileController extends Controller
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
                 'event_post_comment'
@@ -367,7 +389,7 @@ class ProfileController extends Controller
 
         $password = $request->input('current_password');
 
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
 
         $user = User::findOrFail($id);
 
@@ -383,9 +405,9 @@ class ProfileController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|min:8',
-            'new_password' => 'required|min:8',
-            'conform_password' => 'required|min:8|same:new_password',
+            'current_password' => 'required|min:6',
+            'new_password' => 'required|min:6',
+            'conform_password' => 'required|min:6|same:new_password',
         ]);
 
         if ($validator->fails()) {
@@ -393,11 +415,14 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
 
         $userUpdate = User::where('id', $id)->first();
         $userUpdate->password = Hash::make($request->new_password);
         $userUpdate->password_updated_date = date('Y-m-d');
+        if ($userUpdate->isTemporary_password == "1") {
+            $userUpdate->isTemporary_password = "0";
+        }
         $userUpdate->save();
 
         DB::commit();
@@ -407,16 +432,21 @@ class ProfileController extends Controller
 
     public function profilePrivacy()
     {
-        $id = decrypt(session()->get('user')['id']);
+        $id = Auth::guard('web')->user()->id;
         $user = User::with('user_profile_privacy')->withCount(
 
             [
                 'event' => function ($query) {
                     $query->where('is_draft_save', '0');
-                }, 'event_post' => function ($query) {
+                },
+                'event_post' => function ($query) {
                     $query->where('post_type', '1');
                 },
-                'event_post_comment'
+                'event_post_comment',
+                'user_subscriptions' => function ($query) {
+                    $query->orderBy('id', 'DESC')->limit(1);
+                }
+
 
             ]
         )->findOrFail($id);
@@ -425,7 +455,9 @@ class ProfileController extends Controller
         $js = ['profile'];
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
-
+        $date = Carbon::parse($user->created_at);
+        $formatted_date = $date->format('F, Y');
+        $user['join_date'] = $formatted_date;
         if ($user->user_profile_privacy->isNotEmpty()) {
 
             foreach ($user->user_profile_privacy as $value) {
@@ -458,19 +490,14 @@ class ProfileController extends Controller
 
     public function updateProfilePrivacy(Request $request)
     {
-
+        // dd($request);
+        $user = Auth::guard('web')->user();
         try {
-
-            $user = Auth::guard('web')->user();
             if ($request->visible != null) {
-
-
                 $user->visible = $request->visible;
                 $user->save();
             }
-
             $checkProfilePrivacy = UserProfilePrivacy::where('user_id', $user->id)->count();
-
             if ($checkProfilePrivacy == 0) {
                 foreach ($request->profile_privacy as $key => $value) {
                     $setPrivacyData = new UserProfilePrivacy();
@@ -497,7 +524,7 @@ class ProfileController extends Controller
             return response()->json([
                 'status' => 1,
                 'message' => "Profile Privacy updated successfully",
-
+                'visible' => $request->visible
             ]);
         } catch (QueryException $e) {
             DB::Rollback();
@@ -507,7 +534,6 @@ class ProfileController extends Controller
 
             ]);
         } catch (Exception  $e) {
-
             return response()->json([
                 'status' => 0,
                 'message' => "something went wrong",

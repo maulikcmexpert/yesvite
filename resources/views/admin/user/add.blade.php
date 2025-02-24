@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/users')}}">User List</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/users')}}">Users</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -19,7 +19,7 @@
 
             <div class="card-header">
 
-                <h3 class="card-title">{{$title}}<  /h3>
+                <h3 class="card-title">{{$title}}</h3>
 
             </div>
 
@@ -56,18 +56,26 @@
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone_number">Phone Number</label>
-                            <input type="text" class="form-control phone_number" name="phone_number" placeholder="Enter Email Address" value="">
+                            <input type="text" class="form-control phone_number" name="phone_number" placeholder="Enter Phone Number" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                             <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="require_new_password">
+                                <input type="checkbox" name="require_new_password" id="require_new_password">
+                                Require New Password on Login
+                            </label>
+                        </div>
+                    </div>
 
 
 
                 </div>
 
                 <div class="card-footer">
-                    <input type="submit" class="btn btn-primary" id="UserAdd" value="Add">
+                    <input type="button" class="btn btn-primary" id="UserAdd" value="Add">
                 </div>
 
             </form>

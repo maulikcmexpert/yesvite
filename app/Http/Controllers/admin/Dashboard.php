@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\EventInvitedUser;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
+
 
 class Dashboard extends Controller
 {
@@ -41,8 +43,8 @@ class Dashboard extends Controller
         $title = 'Dashboard';
         $page = 'admin.dashboard.dashboard';
 
-
-        $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
+        // dd(Session::get('admin'));
+                $lastWeekStart = Carbon::now()->subWeek()->startOfWeek();
         $lastWeekEnd = Carbon::now()->subWeek()->endOfWeek();
 
         $normalUsersLastWeek = User::where('account_type', '0')
@@ -123,6 +125,7 @@ class Dashboard extends Controller
                     }
                 ])
                 ->where('start_date', $eventdate)
+                ->orderBy('start_date','ASC')
                 ->paginate($perPage, ['*'], 'page', 1);
         } else {
             $totalUpcomingEvents = Event::where('start_date', '>', date('Y-m-d'))
@@ -145,6 +148,8 @@ class Dashboard extends Controller
                         })->where('rsvp_status', '1');
                     }
                 ])
+                ->orderBy('start_date','ASC')
+
                 ->paginate($perPage, ['*'], 'page', 1);
         }
 
@@ -168,7 +173,7 @@ class Dashboard extends Controller
                     <h5>' . date('D', strtotime($value->start_date)) . '</h5>
                 </div>
                 <div class="event-list-content">
-                    <h6 class=""><a class="text-black" href="">' . $value->event_name . '</a></h6>
+                    <h6 class=""><a class="text-black" href="#">' . $value->event_name . '</a></h6>
                     <ul class="d-flex justify-content-between">
                         <li>User RSVP</li>
                         <li>' . $value->total_adults + $value->total_kids . '/' . $totalInvited . '</li>

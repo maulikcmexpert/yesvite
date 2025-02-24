@@ -10,6 +10,7 @@ class EventInvitedUser extends Model
 {
     protected $fillable = [
         'event_id',
+        'sync_id',
         'user_id',
         'rsvp_status',
         'adults',
@@ -31,6 +32,10 @@ class EventInvitedUser extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function contact_sync()
+    {
+        return $this->belongsTo(contact_sync::class,'sync_id','id');
     }
 
     public function event_post_photo()

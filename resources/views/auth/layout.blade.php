@@ -88,9 +88,11 @@
 
     <script src="{{ asset('assets/front') }}/js/{{$value}}.js"></script>
 
+
     @endforeach
 
     @endif
+    
 </body>
 
 </html>

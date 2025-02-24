@@ -32,7 +32,7 @@ class forgotpasswordMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Forgotpassword Mail OTP',
+            subject: 'Your Password Reset Verification Code',
         );
     }
 

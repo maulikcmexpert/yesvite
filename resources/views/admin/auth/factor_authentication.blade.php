@@ -82,6 +82,44 @@
         border: 1px solid var(--primaryColor);
         color: var(--primaryColor);
     }
+
+
+.toast.toast-error {
+    background-color: #df1c41 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container > .toast-error {
+    background-image: url('../../../assets/toaster_error_icon.png') !important;
+
+}
+
+.toast.toast-success {
+    background-color: #38c793 !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    padding-left: 50px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 15px !important;
+    color: var(--white) !important;
+    line-height: normal !important;
+}
+
+#toast-container > .toast-success {
+    background-image: url('../../../assets/toater_success_icon.png') !important;
+}
+#toast-container > div {
+    opacity: 1 !important;
+}
+
 </style>
 
 <div class="authonticate-box login-box">
@@ -129,6 +167,7 @@
                     <p>Enter 6-digit code from your authenticator application</p>
                     <input type="hidden" class="verification_otp" name="verification_otp" id="verification_otp" value="" />
                     <input type="hidden" class="" name="adminId" value="{{$id}}" />
+                    <input type="hidden" value="{{session('otp');}}" class="current_otp"/>
                     <div id="otp">
                         <div class="inputs">
                             <input type="text" id="otp1" inputmode="numeric" maxlength="1" class="inputOtp" value="" />
@@ -161,3 +200,21 @@
     <!-- /.card -->
 
 </div>
+<script>
+    document.querySelectorAll(".inputOtp").forEach(function (input) {
+        input.addEventListener("input", function () {
+            // Allow only numbers (0-9)
+            this.value = this.value.replace(/[^0-9]/g, "");
+        });
+
+        input.addEventListener("keydown", function (event) {
+            // Prevent entering special characters (except Backspace, Arrow keys)
+            if (!/[0-9]/.test(event.key) && event.key !== "Backspace" && event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+{{-- @push('scripts') --}}
+
+{{-- @endpush --}}

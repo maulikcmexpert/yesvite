@@ -778,6 +778,13 @@
         border: 1px solid var(--ButtonColor);
     }
 
+    .main-img-slider .video-pane-slider {
+        width: 100% !important;
+        height: 200px !important;
+        max-width: 247px;
+        object-fit: cover;
+    }
+
     @media only screen and (max-width: 1399px) {
         .event_postsmain .aVolIco {
             margin: 0px 5px;
@@ -832,8 +839,12 @@
             height: 200px;
             margin: 0px auto;
         }
+
+
     }
 </style>
+
+
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -877,7 +888,26 @@
 
                                 <!-- video -->
                                 @if($reportDetail->post_image->type == 'video')
-
+                                <div class="col-xl-6 col-lg-12 col-md-12">
+                                    <div class="event_posts_left">
+                                        <div class="product-images demo-gallery">
+                                            <!-- Begin Product Images Slider -->
+                                            <div class="main-img-slider">
+                                                @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
+                                                @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
+                                                <video controls class="video-pane-slider">
+                                                    <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
+                                                </video>
+                                                @else
+                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                                    <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
+                                                </a>
+                                                @endif @endforeach
+                                            </div>
+                                            <!-- End Product Images Slider -->
+                                        </div>
+                                    </div>
+                                </div>
                                 @endif
                                 <!-- video -->
                                 @else
@@ -891,8 +921,15 @@
                                             <!-- Begin Product Images Slider -->
                                             <div class="main-img-slider">
                                                 @foreach($reportDetail->event_posts->post_image as $key=>$postImg)
-                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image)}}"><img src="{{ asset('public/storage/post_image/'.$postImg->post_image)}}" /></a>
-                                                @endforeach
+                                                @if(pathinfo($postImg->post_image, PATHINFO_EXTENSION) === 'mp4')
+                                                <video controls class="video-pane-slider">
+                                                    <source src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" type="video/mp4">
+                                                </video>
+                                                @else
+                                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                                    <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
+                                                </a>
+                                                @endif @endforeach
                                             </div>
                                             <!-- End Product Images Slider -->
                                         </div>
@@ -1017,7 +1054,7 @@
                                             <div class="col-lg-6">
                                                 <div class="event_posts_right_content">
                                                     <h6>
-                                                        Reborted By <span>({{ $reportDetail->created_at }})</span>
+                                                        Reported By <span>({{ $reportDetail->created_at }})</span>
                                                     </h6>
                                                     <div class="event_posts_creator">
 
@@ -1049,6 +1086,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-0 mb-4">
+                <button type="button" class="btn btn-danger DeleteReport_post" data-id="{{encrypt($reportDetail->id)}}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete
+                </button>
+                <!-- <a type="button" class="btn btn-danger" href="{{route('delete_post_report',['id' => encrypt($reportDetail->id) ])}}" data-id="{{$reportDetail->id}}" class="DeleteReport_post">Delete</a> -->
             </div>
         </div>
 

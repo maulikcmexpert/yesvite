@@ -25,7 +25,7 @@
 
      </div> -->
 
-    <table id="professional_users_table" class="table table-bordered data-table users-data-table">
+    <!-- <table id="professional_users_table" class="table table-bordered data-table users-data-table">
 
         <thead>
 
@@ -47,6 +47,10 @@
 
         </tbody>
 
-    </table>
+    </table> -->
+
+
+    {{ $dataTable->table() }}
+
 
 </div>

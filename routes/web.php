@@ -12,10 +12,26 @@ use App\Http\Controllers\{
     SocialController,
     AccountSettingController,
     RsvpController,
+    EventController as ControllersEventController,
     ChatController,
     PrivacyPolicyController,
-    TermsAndConditionController
+    TermsAndConditionController,
+    DesignController,
+    ContactUsController,
+    FaqController,
+    EventDraftController,
+    EventListController,
+    EventAboutController,
+    EventPotluckController,
+    EventPhotoController,
+    EventGuestController,
+    EventWallController,
+    EventDetailsController,
+    PaymentController,
+    UrlController
 };
+use App\Http\Controllers\admin\EventController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -34,24 +50,83 @@ use Illuminate\Support\Facades\Auth;
 
 //     return view('welcome');
 // });
-Route::get('/', [HomeFrontController::class, 'index'])->name('front.home')->middleware('isAuthenticate');
+
+
+
+Route::post('/run-queue-work', function () {
+    Artisan::call('queue:work');
+    return response()->json(['message' => 'Queue worker started successfully']);
+});
+Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
+    ->name('short.url');
+Route::get('/', [HomeFrontController::class, 'homeDesign'])->name('front.home')->middleware('isAuthenticate');
+Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
+Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
+
+Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
+Route::get('features', [HomeFrontController::class, 'index'])->name('features');
+Route::get('search_features', [HomeFrontController::class, 'searchDesign'])->name('search_features');
+Route::get('pricing', [HomeFrontController::class, 'homePricing'])->name('pricing');
 Route::get('privacy_policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy');
 Route::get('term_and_condition', [TermsAndConditionController::class, 'index'])->name('term_and_condition');
 // Route::get('contact', [ContactController::class, 'index'])->name('contact');
-Route::get('rsvp/{userId}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
+Route::get('rsvp/{event_invited_user_id}/{eventId}', [RsvpController::class, 'index'])->name('rsvp');
 Route::post('rsvp/store', [RsvpController::class, 'store'])->name('rsvp.store');
+Route::get('check_rsvp_status', [RsvpController::class, 'CheckRsvpStatus'])->name('check_rsvp_status');
 
+Route::view('/design/post_temp_1', 'front.event.design.post_temp_1')->name('post_temp_1');
+Route::view('/design/post_temp_2', 'front.event.design.post_temp_2')->name('post_temp_2');
+Route::view('/design/post_temp_3', 'front.event.design.post_temp_3')->name('post_temp_3');
+Route::view('/design/post_temp_4', 'front.event.design.post_temp_4')->name('post_temp_4');
+Route::view('/design/post_temp_5', 'front.event.design.post_temp_5')->name('post_temp_5');
+Route::view('/design/post_temp_6', 'front.event.design.post_temp_6')->name('post_temp_6');
+Route::view('/design/post_temp_7', 'front.event.design.post_temp_7')->name('post_temp_7');
+Route::view('/design/post_temp_8', 'front.event.design.post_temp_8')->name('post_temp_8');
+Route::view('/design/post_temp_9', 'front.event.design.post_temp_9')->name('post_temp_9');
+Route::view('/design/post_temp_10', 'front.event.design.post_temp_10')->name('post_temp_10');
+Route::view('/design/post_temp_11', 'front.event.design.post_temp_11')->name('post_temp_11');
+
+Route::view('/template/post_temp_1', 'front.event.template.post_temp_1')->name('template_post_temp_1');
+Route::view('/template/post_temp_2', 'front.event.template.post_temp_2')->name('template_post_temp_2');
+Route::view('/template/post_temp_3', 'front.event.template.post_temp_3')->name('template_post_temp_3');
+Route::view('/template/post_temp_4', 'front.event.template.post_temp_4')->name('template_post_temp_4');
+Route::view('/template/post_temp_5', 'front.event.template.post_temp_5')->name('template_post_temp_5');
+Route::view('/template/post_temp_6', 'front.event.template.post_temp_6')->name('template_post_temp_6');
+Route::view('/template/post_temp_7', 'front.event.template.post_temp_7')->name('template_post_temp_7');
+Route::view('/template/post_temp_8', 'front.event.template.post_temp_8')->name('template_post_temp_8');
+Route::view('/template/post_temp_9', 'front.event.template.post_temp_9')->name('template_post_temp_9');
+Route::view('/template/post_temp_10', 'front.event.template.post_temp_10')->name('template_post_temp_10');
+Route::view('/template/post_temp_11', 'front.event.template.post_temp_11')->name('template_post_temp_11');
 
 
 
 Route::get('add_account', [AuthController::class, 'addAccount'])->name('auth.add_account');
 Route::post('check_add_account', [AuthController::class, 'checkAddAccount'])->name('auth.checkAddAccount');
 
+
+
+
+Route::get('faq', [FaqController::class, 'index'])->name('faq');
+Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact');
+Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('contact.submit');
+
+
 Route::middleware('checkUserExist')->group(function () {
 
+    Route::post('/chatReport', [ChatController::class, 'chatReport'])->name('chatReport');
+    Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('checkout');
+    Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+    Route::post('/check-payment', [PaymentController::class, 'checkPayment'])->name('payment.checkPay');
+    Route::get('/payment-start/{priceId}', [PaymentController::class, 'processPayment'])->name('payment-start');
+    Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/payment-failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
 
+
+    Route::get('/home1', [HomeController::class, 'home'])->name('home1');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/notification_filter', [HomeController::class, 'notificationFilter'])->name('notification_filter');
+    Route::get('/notification_all', [HomeController::class, 'notificationAll'])->name('notification_all');
     Route::post('/import-csv', [HomeController::class, 'importCSV'])->name('import.csv');
     Route::get('profile',  [ProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('profile.edit');
@@ -72,6 +147,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('profile/profile_privacy',  [ProfileController::class, 'profilePrivacy'])->name('profile.privacy');
     Route::post('profile/update_profile_privacy',  [ProfileController::class, 'updateProfilePrivacy']);
     Route::get('account_settings',  [AccountSettingController::class, 'index'])->name('profile.account_settings');
+    Route::get('transactions',  [AccountSettingController::class, 'transactions'])->name('profile.transaction');
     Route::get('account_settings/notification_setting',  [AccountSettingController::class, 'notificationSetting'])->name('account_settings.notificationSetting');
     Route::post('update_account_setting',  [AccountSettingController::class, 'updateAccountSetting']);
     Route::get('delete_account',  [AccountSettingController::class, 'deleteAccount'])->name('account.delete');
@@ -84,6 +160,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('upload_bg_profile',  [ProfileController::class, 'uploadBgProfile'])->name('profile.uploadbgprofile');
 
     Route::get('contact',  [ContactController::class, 'index'])->name('profile.contact');
+    // Route::get('addContact',  [ContactController::class, 'addContact'])->name('addContact');
 
     Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
     Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
@@ -94,28 +171,199 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/add/{id}', [ContactController::class, 'addContact'])->name('.addcontact');
 
     Route::post('contacts/edit/{id}', [ContactController::class, 'editContact'])->name('editcontact');
+    Route::post('contacts/edit_yesvite/{id}', [ContactController::class, 'editYesviteContact'])->name('editYesviteContact');
 
     Route::post('contacts/save_edit', [ContactController::class, 'save_editContact'])->name('.saveeditcontact');
-    Route::get('messages',  [ChatController::class, 'index'])->name('message.list');
+    Route::post('contacts/save_edit_phone', [ContactController::class, 'save_editPhoneContact'])->name('.saveeditphonecontact');
+    Route::get('messages/{id?}/{is_host?}',  [ChatController::class, 'index'])->name('message.list');
     Route::post('getChat',  [ChatController::class, 'getChat'])->name('message.getChat');
+    Route::post('getUserByName',  [ChatController::class, 'get_user_by_name'])->name('message.getUserByName');
     Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
+    Route::post('updateUserinFB',  [ChatController::class, 'updateUserinFB'])->name('message.updateUserinFB');
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
+
+    Route::get('search_design', [ControllersEventController::class, 'searchDesign'])->name('search_design');
+
+    Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
+    // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
+    Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
+    Route::post('event/editStore',  [ControllersEventController::class, 'editStore'])->name('event.event_edit');
+    Route::post('event/store_user_id',  [ControllersEventController::class, 'storeUserId'])->name('event.store_user_id');
+    Route::post('event/delete_user_id',  [ControllersEventController::class, 'removeUserId'])->name('event.delete_user_id');
+    Route::post('event/delete-session', [ControllersEventController::class, 'deleteSession'])->name('delete.session');
+    Route::post('event/category_session', [ControllersEventController::class, 'storeCategorySession'])->name('category.session');
+    Route::post('event/category_item_session', [ControllersEventController::class, 'storeCategoryitemSession'])->name('category_itme.session');
+    Route::post('event/add_activity', [ControllersEventController::class, 'addActivity'])->name('add.activity');
+    Route::post('event/delete_potluck_category', [ControllersEventController::class, 'deletePotluckCategory'])->name('delete.potluck_category');
+    Route::post('event/add_new_gift_registry', [ControllersEventController::class, 'addNewGiftRegistry'])->name('add.gift_registry');
+    Route::post('event/remove_gift_registry', [ControllersEventController::class, 'removeGiftRegistry'])->name('remove.gift_registry');
+    Route::post('event/get_all_invited_guest', [ControllersEventController::class, 'getAllInvitedGuest'])->name('get.invited_list');
+    Route::post('event/add_new_thankyou_card', [ControllersEventController::class, 'addNewThankyouCard'])->name('add.thankyou_card');
+    Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
+    Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
+    Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
+    Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
+    Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
+    Route::post('event/list_group_memeber', [ControllersEventController::class, 'listGroupMember']);
+    Route::get('event/get_user_ajax', [ControllersEventController::class, 'getUserAjax']);
+    Route::get('event/getCategory', [ControllersEventController::class, 'getCategory']);
+    Route::get('event/get_contacts', [ControllersEventController::class, 'getContacts']);
+    Route::get('event/getPhoneContact', [ControllersEventController::class, 'getPhoneContact']);
+    Route::post('event/search_user_ajax', [ControllersEventController::class, 'searchUserAjax']);
+    Route::post('event/get_all_group_member_list', [ControllersEventController::class, 'getAllGroupMember']);
+    Route::post('event/invite_user_by_group', [ControllersEventController::class, 'inviteByGroup']);
+    Route::post('event/edit_event', [ControllersEventController::class, 'editEvent']);
+    Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
+    Route::post('event/group_search_ajax', [ControllersEventController::class, 'groupSearchAjax']);
+    Route::post('event/group_toggle_search', [ControllersEventController::class, 'group_toggle_search']);
+    Route::post('event/delete_sessions', [ControllersEventController::class, 'delete_sessions']);
+    Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
+    Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
+    Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
+    Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+    Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
+    Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
+
+    Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
+    Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
+    Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
+    Route::post('event/cancel_event', [ControllersEventController::class, 'CancelEvent']);
+    Route::post('event/notification_on_off', [ControllersEventController::class, 'notification_on_off']);
+    Route::get('event/store_notification_filter', [ControllersEventController::class, 'store_notification_filter']);
+
+
+    Route::get('event_drafts',  [EventDraftController::class, 'index'])->name('event.event_drafts');
+    Route::get('event_lists/{selected_date?}/{from_page?}',  [EventListController::class, 'index'])->name('event.event_lists');
+    Route::get('fetch_past_event',  [EventListController::class, 'fetchPastEvents'])->name('fetch_past_event');
+    Route::get('fetch_draft_event',  [EventListController::class, 'fetchDraftEvents'])->name('fetch_draft_event');
+    Route::get('fetch_upcoming_event',  [EventListController::class, 'fetchUpcomingEvents'])->name('fetch_upcoming_event');
+    Route::get('search_upcoming_event',  [EventListController::class, 'SearchUpcomingEvent'])->name('search_upcoming_event');
+    Route::get('search_draft_event',  [EventListController::class, 'SearchDraftEvent'])->name('search_draft_event');
+    Route::get('search_past_event',  [EventListController::class, 'SearchPastEvent'])->name('search_past_event');
+    Route::get('event_filter',  [EventListController::class, 'EventFilter'])->name('event_filter');
+    Route::get('get_total_month_data',  [EventListController::class, 'TotalMonthData'])->name('get_total_month_data');
+
+    Route::get('event_filter_data',  [EventListController::class, 'EventFilterData'])->name('event_filter_data');
+    Route::get('get_event_list_data',  [EventListController::class, 'getEventDateList'])->name('get_event_list_data');
+    Route::get('update_notification_read',  [EventListController::class, 'UpdateNotificationRead'])->name('update_notification_read');
+    Route::get('get_all_notification',  [EventListController::class, 'notificationList'])->name('get_all_notification');
+
+    Route::get('mark_as_read',  [EventListController::class, 'mark_as_read'])->name('mark_as_read');
+    Route::post('store_rsvp',  [EventListController::class, 'store_rsvp'])->name('store_rsvp');
+    Route::get('filter_search_event',  [EventListController::class, 'filter_search_event'])->name('filter_search_event');
+    Route::get('reset_notification_eventId',  [EventListController::class, 'reset_notification_eventId'])->name('reset_notification_eventId');
+    Route::get('store_add_new_guest',  [EventListController::class, 'store_add_new_guest']);
+
+
+    // //vrushali
+    //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
+    //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
+    //     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
+    //     Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
+    //     Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
+
+
+    //     Route::post('event_wall/event_post', [EventWallController::class, 'createEventPost'])->name('event_wall.eventPost');
+    // //vrushali
+
+
+    Route::get('event_about/{id}',  [EventAboutController::class, 'index'])->name('event.event_about');
+    Route::post('event_about/sentRsvpData',  [EventAboutController::class, 'sentRsvpData'])->name('event.sentRsvpData');
+    Route::get('event_potluck/{id}',  [EventPotluckController::class, 'index'])->name('event.event_potluck');
+    Route::post('event_potluck/createCategory',  [EventPotluckController::class, 'addPotluckCategory'])->name('event_potluck.addCategory');
+    Route::post('event_potluck/updateCategory/{id}', [EventPotluckController::class, 'updateCategory'])->name('event_potluck.updateCategory');
+    Route::get('event_potluck/getCategory/{id}', [EventPotluckController::class, 'getCategory'])->name('event_potluck.getCategory');
+    Route::post('event_potluck/delete-category', [EventPotluckController::class, 'deleteCategory']);
+    Route::post('event_potluck/add-potluck-category-item', [EventPotluckController::class, 'addPotluckCategoryItem']);
+    Route::post('event_potluck/editPotluckCategoryItem', [EventPotluckController::class, 'editPotluckCategoryItem']);
+    Route::post('event_potluck/fetch-user', [EventPotluckController::class, 'fetchUserDetails']);
+    Route::post('event_potluck/editUserPotluckItem', [EventPotluckController::class, 'editUserPotluckItem']);
+    Route::post('event_potluck/deleteUserPotluckItem', [EventPotluckController::class, 'deleteUserPotluckItem']);
+
+    Route::get('event_photo/{id}',  [EventPhotoController::class, 'index'])->name('event.event_photos');
+    Route::post('event_photo/event_post', [EventPhotoController::class, 'createEventPost'])->name('event_photo.eventPost');
+    Route::post('event_photo/fetch-photo-details', [EventPhotoController::class, 'fetchPost']);
+    Route::post('event_photo/deletePost', [EventPhotoController::class, 'deletePost']);
+    Route::post('event_photo/userPostComment', [EventPhotoController::class, 'userPostComment']);
+    Route::post('event_photo/postControl', [EventPhotoController::class, 'postControl']);
+    Route::post('event_photo/userPostCommentReply', [EventPhotoController::class, 'userPostCommentReply']);
+    Route::post('event_photo/userPostLikeDislike', [EventPhotoController::class, 'userPostLikeDislike'])->name('event_photo.userPostLikeDislike');
+    Route::get('event_guest/{id}',  [EventGuestController::class, 'index'])->name('event.event_guest');
+    Route::get('event_guest/fetch_guest/{id}/{is_sync}',  [EventGuestController::class, 'fetch_guest'])->name('event.fetch_guest');
+    Route::post('event_guest/removeGuestFromInvite',  [EventGuestController::class, 'removeGuestFromInvite']);
+    Route::post('event_guest/see_all_invite_yesvite',  [EventGuestController::class, 'see_all_invite_yesvite']);
+    Route::post('event_guest/editContact',  [EventGuestController::class, 'editContact']);
+    Route::post('event_guest/deleteContact',  [EventGuestController::class, 'deleteContact']);
+    Route::post('event_guest/right_bar_guest_list',  [EventGuestController::class, 'right_bar_guest_list']);
+    Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
+    Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
+    Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
+    Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
+    Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
+    Route::post('event_wall/get_poll', [EventWallController::class, 'GetPollData']);
+    Route::post('event_wall/votePoll',  [EventWallController::class, 'VoteOfPoll'])->name('event_wall.VoteOfWall');
+    Route::post('event_wall/userPostComment', [EventWallController::class, 'userPostComment']);
+    Route::post('event_wall/userPostCommentReplyReaction', [EventWallController::class, 'userPostCommentReplyReaction']);
+    Route::post('event_wall/userPostCommentReply', [EventWallController::class, 'userPostCommentReply']);
+    Route::post('event_wall/userPostLikeDislike', [EventWallController::class, 'userPostLikeDislike'])->name('event_wall.userPostLikeDislike');
+    Route::post('event_wall/event_post', [EventWallController::class, 'createPost'])->name('event_wall.eventPost');
+    Route::post('event_wall/get_phoneContact', [EventWallController::class, 'get_PhoneContact'])->name('event_wall.get_phoneContact');
+    Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
+    Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
+    Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
+    Route::post('event_wall/fetch_all_invited_user', [EventWallController::class, 'fetch_all_invited_user']);
+    Route::post('event_wall/wallFilters', [EventWallController::class, 'wallFilters']);
+    Route::post('event_wall/get_reaction_post_list', [EventWallController::class, 'get_reaction_post_list']);
+    Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 });
 
 
 
+Route::get('event/editd', [DesignController::class, 'index']);
+Route::post('/saveTextData', [DesignController::class, 'saveTextData'])->name('saveTextData');
+// Route::post('/saveCanvasImage', [DesignController::class, 'saveCanvasImage'])->name('saveCanvasImage');
+Route::post('/uploadImage', [DesignController::class, 'uploadImage'])->name('uploadImage');
+Route::get('/loadTextData/{id}', [DesignController::class, 'loadTextData']);
+Route::post('/saveData', [DesignController::class, 'saveData'])->name('saveData');
+Route::get('/templates/view', [DesignController::class, 'AllImage'])->name('displayAllImage');
+Route::get('/templates/view', [DesignController::class, 'viewAllImages'])->name('viewAllImages');
+Route::get('/loadAllData', [DesignController::class, 'loadAllData']);
+// routes/web.php
+Route::post('/saveImagePath', action: [DesignController::class, 'storeImagePath']);
+Route::post('/user_image/{id}', [DesignController::class, 'user_image']);
+Route::post('/save_shape/{id}', [DesignController::class, 'save_shape']);
+
+Route::get('access_token', [AuthController::class, 'handleGoogleCallback'])->name('access_token');
+
+
 Route::controller(AuthController::class)->group(function () {
+
     Route::get('google/auth', 'redirectToGoogle');
-    Route::get('google/callback', 'handleGoogleCallback');
+    Route::get('google/callback', 'handleGoogleCallback')->name('google/callback');
 
     Route::get('login', 'create')->name('auth.login')->middleware('isAuthenticate');
+
     Route::post('login', 'checkLogin')->name('auth.checkLogin');
+
+    // Route::post('resend_email', 'ResendVerificationMail')->name('auth.ResendVerificationMail');
+
     Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
+    Route::post('check_mail', 'checkEmail');
 
-    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
-    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+
+    Route::post('advertisement_status', 'storeAdvertisementStatus');
+    Route::get('forget_password', 'forgetpassword')->name('auth.forgetpassword');
+    Route::post('otp_verify', 'otpverification')->name('auth.otpverification');
+    Route::post('check_otp', 'checkOtp')->name('auth.checkOtp');
+    Route::post('forget_changepassword', 'forgetChangepassword')->name('auth.forgetChangepassword');
+    Route::get('get_access_token', 'getAccessToken');
+
+
+
+
 
     // Route::get('register', function () {
 
@@ -128,7 +376,10 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::post('/checkEmail', 'checkEmail');
 
+    Route::post('/checkAdminEmail', 'checkAdminEmail');
+
     Route::post('/register', 'registerAdmin');
+
 
     Route::get('/forgotpassword', function () {
 
@@ -149,11 +400,44 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', function () {
 
         $user = Auth::guard('web')->user();
-        Auth::logout();
+        if ($user) {
+            @add_user_firebase($user->id, 'offline');
+            Auth::logout();
+        } else {
+            return redirect('login');
+        }
         // Invalidate the session and regenerate the CSRF token to prevent session fixation attacks
-
+        Session::forget('advertisement_closed');
+        Session::forget('potluck_closed');
+        Session::forget('create_new_event_closed');
+        Session::forget('co_host_closed');
+        Session::forget('thankyou_card_closed');
+        Session::forget('design_closed');
+        Session::forget('edit_design_closed');
         Session::forget('user');
         Session::forget('secondary_user');
+        Session::forget('desgin_slider');
+        Session::forget('notification_event_ids');
+        Session::forget('add_guest_user_id');
+        Session::forget('filterSession');
+        Session::flush(); // removes all session data
+
         return redirect('login');
     })->name('logout');
+});
+
+Route::middleware(['web'])->group(function () {
+    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
+    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+});
+
+Route::fallback(function () {
+    $title = "No Found";
+
+    $page = 'not_found';
+
+    return view('layout', compact(
+        'title',
+        'page',
+    ));
 });

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('productId')->nullable();
             $table->string('startDate')->nullable();
             $table->string('endDate')->nullable();
-            $table->string('purchaseToken')->nullable();
+            $table->text('purchaseToken')->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
     }

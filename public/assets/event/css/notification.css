@@ -1,0 +1,104 @@
+/* ========== notification-wrap ========== */
+
+.notification-wrap .notification{
+    border: 1px solid var(--borderColor);
+    padding: 0 24px 0;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.notification .title-wrp h5{
+    color: #94A3B8;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.notification .left-note{
+   width: 88%;
+}
+
+.notification .left-note h5{
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.notification .right-note{
+    display: flex;
+    justify-content: space-between;
+    width: 12%;
+}
+
+.notification .right-note div{
+    width: 30px;
+    height: 24px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.right-note .form-check-input{
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+    box-shadow: none !important;
+    border: 1px solid var(--borderColor) !important;
+    margin: 0 !important;
+}
+
+.right-note .form-check-input:checked{
+    background-color: #2DA9FC !important;
+    border-color: #2DA9FC !important;
+} 
+
+.notification h6.title,
+.reminder h6.title
+{
+   font-size: 18px;
+   color: var(--secondryColor);
+   font-weight: 700;
+   padding: 24px 0;
+   margin-bottom: 0;
+}
+
+.reminder .border-bottom:last-child{
+    border-bottom: none !important;
+    padding-top: 16px;
+} 
+
+@media only screen and (max-width:1199px){
+    .notification .left-note {
+        width: 85%;
+    }
+
+    .notification .right-note{
+        width: 15%;
+    }
+}
+
+@media only screen and (max-width:991px){
+    .notification .left-note {
+        width: 70%;
+    }
+
+    .notification .right-note{
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width:575px){
+    .notification-wrap .notification{
+        border: none;
+        padding: 0 0px 0;
+    }
+    .notification-wrap .contact-title{
+        margin-bottom: 0;
+    }
+}

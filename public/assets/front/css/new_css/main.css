@@ -1,0 +1,46 @@
+@import url('./fonts.css');
+@import url('./var.css');
+@import url('./header.css');
+@import url('./home.css');
+@import url('./mainmenu.css');
+@import url('./potluck.css');
+@import url('./guest.css');
+@import url('./calender.css');
+@import url('./newrsvp.css');
+@import url('./about-rsvp.css');
+@import url('./transactionhistory.css');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.new-main-content svg{
+    width: 100%;
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style-type: none;
+}
+
+.cmn-btn{
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 18px;
+    line-height: 18px;
+    color: var(--white);
+    background-color: var(--pink);
+    border: 1px solid var(--pink);;
+    padding: 10px 30px;
+    border-radius: 16px;
+}

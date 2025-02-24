@@ -55,10 +55,10 @@ class EventTypeController extends Controller
 
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_event_type_form" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" class="btn bg-transparent delete_event_type"><i class="fas fa-trash"></i></button></form>
                         </div>';
 
                     return $actionBtn;
@@ -115,14 +115,14 @@ class EventTypeController extends Controller
 
             DB::commit();
 
-            return redirect()->route('event_type.index')->with('success', 'Event type Add successfully !');
+            return redirect()->route('event_type.index')->with('msg', 'Event type Add successfully !');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error');
 
-            return redirect()->route('category.create')->with('danger', 'Event type not added');
+            return redirect()->route('category.create')->with('msg_error', 'Event type not added');
         }
     }
 
@@ -177,14 +177,14 @@ class EventTypeController extends Controller
 
             DB::commit();
 
-            return redirect()->route('event_type.index')->with('success', 'Event type updated successfully!');
+            return redirect()->route('event_type.index')->with('msg', 'Event type updated successfully!');
         } catch (QueryException $e) {
 
             DB::rollBack();
 
             Log::error('Database query error');
 
-            return redirect()->route('event_type.edit', $id)->with('danger', 'Event type not updated!');
+            return redirect()->route('event_type.edit', $id)->with('msg_error', 'Event type not updated!');
         }
     }
 
@@ -206,7 +206,7 @@ class EventTypeController extends Controller
             DB::commit();
 
             return redirect()->route('event_type.index')
-                ->with('success', 'Event type deleted successfully');
+                ->with('msg', 'Event type deleted successfully');
         } catch (QueryException $e) {
 
 
@@ -214,7 +214,7 @@ class EventTypeController extends Controller
             DB::rollBack();
 
             return redirect()->route('event_type.index')
-                ->with('danger', 'Event type not deleted');
+                ->with('msg_error', 'Event type not deleted');
         }
     }
 

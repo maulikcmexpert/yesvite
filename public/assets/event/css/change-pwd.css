@@ -1,0 +1,62 @@
+/* ======== change-password ======= */
+
+.change-password-wrap .save-btn{
+    background-color: var(--lightBtn);
+    color: var(--lightColor);
+    font-weight: 600 !important;
+    border: 1px solid var(--borderColor);
+}
+
+.change-password{
+    border: 1px solid var(--borderColor);
+    padding: 24px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.change-password .content{
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.change-password .content h6{
+    font-size: 14px;
+    color: var(--secondryColor);
+}
+
+.change-password .content p{
+    font-size: 12px;
+    color: var(--lightColor);
+    margin-bottom: 5px !important;
+}
+
+.change-password .content p:last-child{
+    margin-bottom: 0 !important;
+}
+
+.change-password .login-form-wrap{
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    margin-bottom: 0;
+}
+
+.change-password .login-form-wrap a{
+    display: block;
+    text-align: right;
+    color: #2DA9FC;
+    font-size: 14px;
+}
+
+
+/* ========== responsive =========== */
+@media only screen and (max-width:575px){
+    .change-password{
+        border: none;
+    }
+}
+
+

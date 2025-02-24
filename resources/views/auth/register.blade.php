@@ -1,4 +1,5 @@
 <x-front.advertise />
+
 <section class="login-wrapper">
     <div class="container">
         <div class="login-content text-center">
@@ -21,7 +22,7 @@
             <p>Let’s create your new account!</p>
         </div>
         <div class="register-wrap login-form-wrap">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link userRegister active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="#contact" aria-selected="true">Personal</button>
                 </li>
@@ -29,12 +30,12 @@
                     <button class="nav-link businessRegister" id="phone-tab" data-bs-toggle="tab" data-bs-target="#phone" type="button" role="tab" aria-controls="phone" aria-selected="false">Business</button>
                 </li>
 
-            </ul>
+            </ul> -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="">
 
-                        <form method="POST" action="{{route('store.register')}}" id="register">
+                        <form method="POST" action="{{route('store.register')}}" id="register" autocomplete="off">
                             @csrf
                             <input type="hidden" id="account_type" name="account_type" value="0">
                             <div class="row">
@@ -64,7 +65,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" autocomplete="off">
                                         <label for="email" class="floating-label">Email Address <span>*</span></label>
 
                                         <div class="label-error">
@@ -77,7 +78,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}">
+                                        <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                         <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
                                         <div class="label-error">
                                             <label id="zip_code-error" class="error" for="zip_code" style="color: red;"></label>
@@ -89,7 +90,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}">
+                                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" autocomplete="new-password">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
@@ -115,9 +116,12 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="text-start mt-1" id="passValidation">
-
-
                                     </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
+                                    <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                    <script src="https://www.google.com/recaptcha/api.js"></script>
+                                    
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary loaderbtn" id="createUser">Create account</button>
@@ -125,13 +129,13 @@
                             </div>
                         </form>
                         <div class="social-links">
-                            <a href="#">
+                            {{-- <a href="#">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect y="0.376953" width="24" height="24" rx="12" fill="#1877F2" />
                                     <path d="M17.1098 15.6217L17.6784 12.0619H14.1215V9.7527C14.1215 8.77771 14.6174 7.82837 16.2104 7.82837H17.8285V4.79716C16.879 4.64983 15.9195 4.56939 14.9578 4.55649C12.0272 4.55649 10.1136 6.2617 10.1136 9.34782V12.0614H6.85709V15.6217H10.1136V24.2278C11.4416 24.4266 12.7936 24.4266 14.1215 24.2278V15.6217H17.1098Z" fill="white" />
                                 </svg>
-                            </a>
-                            <a href="#">
+                            </a> --}}
+                            <a href="{{ url('login/google') }}">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.0002 5.01638C13.7196 4.98993 15.3824 5.63036 16.6397 6.80327L20.0261 3.4925C17.8535 1.45706 14.9774 0.340936 12.0002 0.37784C9.77578 0.377326 7.59503 0.995507 5.70187 2.16325C3.8087 3.331 2.27777 5.00226 1.28027 6.99015L5.16051 10.0021C5.63496 8.55977 6.5503 7.30269 7.77745 6.40818C9.00459 5.51367 10.4816 5.02685 12.0002 5.01638Z" fill="#EA4335" />
                                     <path d="M23.5192 12.6417C23.5334 11.8169 23.4482 10.9935 23.2654 10.1891H11.9997V14.642H18.6133C18.4878 15.4226 18.2057 16.1699 17.784 16.8388C17.3623 17.5076 16.8096 18.0843 16.1591 18.5341L19.9459 21.4665C21.1261 20.3273 22.0542 18.9533 22.6703 17.4333C23.2864 15.9132 23.5768 14.2809 23.5227 12.6417H23.5192Z" fill="#4285F4" />
@@ -139,7 +143,7 @@
                                     <path d="M12.0003 24.3724C14.9232 24.4551 17.7668 23.4152 19.9465 21.4665L16.1598 18.5342C14.932 19.3571 13.4779 19.7765 12.0003 19.7339C10.483 19.7249 9.00702 19.2384 7.7818 18.3434C6.55658 17.4485 5.64431 16.1906 5.17442 14.7481L1.29419 17.7613C2.289 19.7483 3.81742 21.4191 5.7083 22.5868C7.59918 23.7544 9.77785 24.3727 12.0003 24.3724Z" fill="#34A853" />
                                 </svg>
                             </a>
-                            <a href="#">
+                            {{-- <a href="#">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_3295_212)">
                                         <path d="M1.50029 2.00963C-0.385709 3.96863 0.000290804 6.04963 0.000290804 12.3716C0.000290804 17.6216 -0.915709 22.8846 3.87829 24.1236C5.37529 24.5086 18.6393 24.5086 20.1343 24.1216C22.1303 23.6066 23.7543 21.9876 23.9763 19.1646C24.0073 18.7706 24.0073 5.97963 23.9753 5.57763C23.7393 2.57063 21.8883 0.837633 19.4493 0.486633C18.8903 0.405633 18.7783 0.381633 15.9103 0.376633C5.73729 0.381633 3.50729 -0.0713668 1.50029 2.00963Z" fill="url(#paint0_linear_3295_212)" />
@@ -156,16 +160,16 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                            </a>
+                            </a> --}}
 
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
+                <!-- <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
                     <div class="">
                         <form method="POST" action="{{route('store.register')}}" id="business">
                             @csrf
-                            <input type="hidden" id="account_type" name="account_type" value="1">
+                            <input type="hidden" id="account_type" name="account_type" value="1" autocomplete="off">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="input-form">
@@ -193,7 +197,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="email" class="form-control" id="businessemail" name="email" value="{{ old('email')}}">
+                                        <input type="email" class="form-control" id="businessemail" name="email" value="{{ old('email')}}" autocomplete="off">
                                         <label for="email" class="floating-label">Email Address <span>*</span></label>
                                         <div class="label-error">
                                             <label id="email-error" class="error" for="businessemail" style="color: red;"></label>
@@ -217,7 +221,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="input-form">
-                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}">
+                                        <input type="password" class="form-control" id="businesspassword" name="businesspassword" value="{{ old('businesspassword')}}" autocomplete="new-password">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
                                         <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                         <div class="label-error">
@@ -268,27 +272,27 @@
                                 </svg>
                             </a>
                             <a href="#">
-                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_3682_69601)">
-                                    <path d="M1.99971 1.63231C0.113711 3.59131 0.499711 5.67231 0.499711 11.9943C0.499711 17.2443 -0.416289 22.5073 4.37771 23.7463C5.87471 24.1313 19.1387 24.1313 20.6337 23.7443C22.6297 23.2293 24.2537 21.6103 24.4757 18.7873C24.5067 18.3933 24.5067 5.60231 24.4747 5.20031C24.2387 2.19331 22.3877 0.460314 19.9487 0.109314C19.3897 0.028314 19.2777 0.00431398 16.4097 -0.000686023C6.23671 0.00431398 4.00671 -0.448686 1.99971 1.63231Z" fill="url(#paint0_linear_3682_69601)"/>
-                                    <path d="M12.4978 3.13746C8.86681 3.13746 5.41881 2.81446 4.10181 6.19446C3.55781 7.59046 3.63681 9.40346 3.63681 11.9995C3.63681 14.2775 3.56381 16.4185 4.10181 17.8035C5.41581 21.1855 8.89181 20.8615 12.4958 20.8615C15.9728 20.8615 19.5578 21.2235 20.8908 17.8035C21.4358 16.3935 21.3558 14.6075 21.3558 11.9995C21.3558 8.53746 21.5468 6.30246 19.8678 4.62446C18.1678 2.92446 15.8688 3.13746 12.4938 3.13746H12.4978ZM11.7038 4.73446C19.2778 4.72246 20.2418 3.88046 19.7098 15.5775C19.5208 19.7145 16.3708 19.2605 12.4988 19.2605C5.43881 19.2605 5.23581 19.0585 5.23581 11.9955C5.23581 4.85046 5.79581 4.73846 11.7038 4.73246V4.73446ZM17.2278 6.20546C16.6408 6.20546 16.1648 6.68146 16.1648 7.26846C16.1648 7.85546 16.6408 8.33146 17.2278 8.33146C17.8148 8.33146 18.2908 7.85546 18.2908 7.26846C18.2908 6.68146 17.8148 6.20546 17.2278 6.20546ZM12.4978 7.44846C9.98481 7.44846 7.94781 9.48646 7.94781 11.9995C7.94781 14.5125 9.98481 16.5495 12.4978 16.5495C15.0108 16.5495 17.0468 14.5125 17.0468 11.9995C17.0468 9.48646 15.0108 7.44846 12.4978 7.44846ZM12.4978 9.04546C16.4028 9.04546 16.4078 14.9535 12.4978 14.9535C8.59381 14.9535 8.58781 9.04546 12.4978 9.04546Z" fill="white"/>
+                                        <path d="M1.99971 1.63231C0.113711 3.59131 0.499711 5.67231 0.499711 11.9943C0.499711 17.2443 -0.416289 22.5073 4.37771 23.7463C5.87471 24.1313 19.1387 24.1313 20.6337 23.7443C22.6297 23.2293 24.2537 21.6103 24.4757 18.7873C24.5067 18.3933 24.5067 5.60231 24.4747 5.20031C24.2387 2.19331 22.3877 0.460314 19.9487 0.109314C19.3897 0.028314 19.2777 0.00431398 16.4097 -0.000686023C6.23671 0.00431398 4.00671 -0.448686 1.99971 1.63231Z" fill="url(#paint0_linear_3682_69601)" />
+                                        <path d="M12.4978 3.13746C8.86681 3.13746 5.41881 2.81446 4.10181 6.19446C3.55781 7.59046 3.63681 9.40346 3.63681 11.9995C3.63681 14.2775 3.56381 16.4185 4.10181 17.8035C5.41581 21.1855 8.89181 20.8615 12.4958 20.8615C15.9728 20.8615 19.5578 21.2235 20.8908 17.8035C21.4358 16.3935 21.3558 14.6075 21.3558 11.9995C21.3558 8.53746 21.5468 6.30246 19.8678 4.62446C18.1678 2.92446 15.8688 3.13746 12.4938 3.13746H12.4978ZM11.7038 4.73446C19.2778 4.72246 20.2418 3.88046 19.7098 15.5775C19.5208 19.7145 16.3708 19.2605 12.4988 19.2605C5.43881 19.2605 5.23581 19.0585 5.23581 11.9955C5.23581 4.85046 5.79581 4.73846 11.7038 4.73246V4.73446ZM17.2278 6.20546C16.6408 6.20546 16.1648 6.68146 16.1648 7.26846C16.1648 7.85546 16.6408 8.33146 17.2278 8.33146C17.8148 8.33146 18.2908 7.85546 18.2908 7.26846C18.2908 6.68146 17.8148 6.20546 17.2278 6.20546ZM12.4978 7.44846C9.98481 7.44846 7.94781 9.48646 7.94781 11.9995C7.94781 14.5125 9.98481 16.5495 12.4978 16.5495C15.0108 16.5495 17.0468 14.5125 17.0468 11.9995C17.0468 9.48646 15.0108 7.44846 12.4978 7.44846ZM12.4978 9.04546C16.4028 9.04546 16.4078 14.9535 12.4978 14.9535C8.59381 14.9535 8.58781 9.04546 12.4978 9.04546Z" fill="white" />
                                     </g>
                                     <defs>
-                                    <linearGradient id="paint0_linear_3682_69601" x1="2.04573" y1="22.4664" x2="24.3512" y2="3.16129" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#FFDD55"/>
-                                    <stop offset="0.5" stop-color="#FF543E"/>
-                                    <stop offset="1" stop-color="#C837AB"/>
-                                    </linearGradient>
-                                    <clipPath id="clip0_3682_69601">
-                                    <rect x="0.5" width="24" height="24" fill="white"/>
-                                    </clipPath>
+                                        <linearGradient id="paint0_linear_3682_69601" x1="2.04573" y1="22.4664" x2="24.3512" y2="3.16129" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FFDD55" />
+                                            <stop offset="0.5" stop-color="#FF543E" />
+                                            <stop offset="1" stop-color="#C837AB" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_3682_69601">
+                                            <rect x="0.5" width="24" height="24" fill="white" />
+                                        </clipPath>
                                     </defs>
                                 </svg>
                             </a>
 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="create-link d-flex justify-content-center align-items-center gap-2">

@@ -6,7 +6,7 @@
             processing: true,
             serverSide: true,
 
-            ajax: '{{URL::to("/admin/events")}}',
+            ajax: '{{ URL::to('/admin/events') }}',
             columns: [{
                     data: "number",
                     name: "number"
@@ -14,6 +14,7 @@
                 {
                     data: "event_name",
                     name: "event_name"
+                    // searchable: true,
                 },
                 {
                     data: "event_by",
@@ -43,7 +44,7 @@
                 {
                     data: "action",
                     name: "action",
-                    orderable: false,
+                    orderable: true,
                     searchable: true,
                 }
             ],
@@ -63,6 +64,9 @@
         });
 
         $(document).ready(function() {
+
+            $('select[name="events_table_length"]').val(10);
+
             // Function to validate category names
             $('#cateAdd').click(function(event) {
                 event.preventDefault();
@@ -78,13 +82,14 @@
                         var that = $(this);
                         $.ajax({
                             headers: {
-                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                    "content"
-                                ),
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]')
+                                    .attr(
+                                        "content"
+                                    ),
                             },
                             dataType: 'Json',
                             type: "POST",
-                            url: "{{URL::to('admin/category/check_category_is_exist')}}",
+                            url: "{{ URL::to('admin/category/check_category_is_exist') }}",
                             data: {
                                 category_name: function() {
                                     return thatVal;
@@ -94,7 +99,8 @@
                             success: function(output) {
                                 if (output == false) {
                                     isValid = false;
-                                    that.next('.text-danger').text('category is duplicate');
+                                    that.next('.text-danger').text(
+                                        'category is duplicate');
                                 } else {
                                     $("#categoryForm").submit();
                                 }
@@ -122,7 +128,7 @@
                                 "content"
                             ),
                         },
-                        url: "{{URL::to('admin/category/check_category_is_exist')}}",
+                        url: "{{ URL::to('admin/category/check_category_is_exist') }}",
                         method: "POST",
                         data: {
                             category_name: function() {
@@ -183,8 +189,15 @@
 
         $(document).on('change', '#event_status', function() {
             var eventDate = $("#eventDate").val();
+            var event_type = $("#event_type").val();
+
             var status = $(this).val();
 
+            // if(status=="past_events"){
+            //     if(eventDate!=""){
+            //         $("#eventDate").val("");
+            //     }
+            // }
             var table = $('#events_table').DataTable();
 
             if ($.fn.DataTable.isDataTable('#events_table')) {
@@ -196,10 +209,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ URL::to("/admin/events") }}',
+                    url: '{{ URL::to('/admin/events') }}',
                     data: function(d) {
                         d.filter = eventDate;
                         d.status = status;
+                        d.event_type=event_type;
                     }
                 },
                 columns: [{
@@ -248,6 +262,7 @@
         $(document).on('change', '#eventDate', function() {
             var eventDate = $(this).val();
             var status = $('#event_status option:selected').val();
+            var type = $('#event_type option:selected').val();
 
             var table = $('#events_table').DataTable();
 
@@ -260,10 +275,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ URL::to("/admin/events") }}',
+                    url: '{{ URL::to('/admin/events') }}',
                     data: function(d) {
                         d.filter = eventDate;
                         d.status = status;
+                        d.event_type = type;
                     }
                 },
                 columns: [{
@@ -276,7 +292,7 @@
                     },
                     {
                         data: "event_by",
-                        name: "event_by"
+                        name: "event_by",
                     },
                     {
                         data: "email",
@@ -312,9 +328,14 @@
 
         $(document).on('change', '#event_type', function() {
 
-            var event_type = $('#event_type option:selected').val();
+            var event_type = $(this).val();
+            var status = $('#event_status option:selected').val();
+            var eventDate = $("#eventDate").val();
 
             var table = $('#events_table').DataTable();
+
+
+
 
             if ($.fn.DataTable.isDataTable('#events_table')) {
                 table.destroy();
@@ -325,10 +346,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ URL::to("/admin/events") }}',
+                    url: '{{ URL::to('/admin/events') }}',
                     data: function(d) {
-                        //    d.filter = eventDate;
+                        d.filter = eventDate;
                         d.event_type = event_type;
+                        d.status = status;
                     }
                 },
                 columns: [{
@@ -388,7 +410,7 @@
         },
 
         type: "POST",
-        url: "{{URL::to('admin/events/get_invited_user_data')}}",
+        url: "{{ URL::to('admin/events/get_invited_user_data') }}",
         data: {
             event_id: function() {
                 return thatval;

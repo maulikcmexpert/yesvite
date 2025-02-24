@@ -1,3 +1,6 @@
+@php
+  $check_role=Session::get('admin');
+@endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="{{URL::to('/admin/dashboard')}}" class="brand-link">
@@ -55,7 +58,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-4">
 
-
+      @if($check_role['role']=='admin')
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
@@ -65,9 +68,6 @@
             <p>Dashboard</p>
           </a>
         </li>
-
-
-
         <li class="nav-item">
           <p class="asideTitle">Design Template</p>
           <ul class="pl-0">
@@ -93,35 +93,40 @@
                     <p>Sub Category</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="{{URL::to('/admin/design_style')}}" class="nav-link {{ (Request::segment(2) == 'design_style')? 'active':'' }}">
                     <span class="dot"></span>
                     <p>Design Style</p>
                   </a>
-                </li>
+                </li> -->
+                {{-- <li class="nav-item">
+                  <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
+                    <span class="dot"></span>
+                    <p>Create Template</p>
+                  </a>
+                </li> --}}
 
               </ul>
             </li>
-            <!-- <li class="nav-item">
-              <a href="{{URL::to('/admin/design')}}" class="nav-link {{ (Request::segment(2) == 'design')? 'active':'' }}">
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
-                  Design
+                  Create Design Template
                 </p>
               </a>
-            </li> -->
-
+            </li>
+{{-- 
             <li class="nav-item">
               <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
                 <i class="fas fa-layer-group"></i>
                 <p>
                   Event Type
                 </p>
-              </a>
+              </a> --}}
             </li>
           </ul>
         </li>
-
         <li class="nav-item">
           <p class="asideTitle">User Management</p>
           <ul class="nav">
@@ -138,9 +143,39 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{URL::to('/admin/account_verification')}}" class="nav-link {{ (Request::segment(2) == 'account_verification')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Account Verification</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/user_resend_verification')}}" class="nav-link {{ (Request::segment(2) == 'user_resend_verification')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Expired Verification Emails</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{URL::to('/admin/user_post_report')}}" class="nav-link {{ (Request::segment(2) == 'user_post_report')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Users Post Reports</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/user_chat_report')}}" class="nav-link {{ (Request::segment(2) == 'user_chat_report')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Users Chat Reports</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/sendNotification')}}" class="nav-link {{ (Request::segment(3) == 'sendNotification')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Send Notification</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/login_history')}}" class="nav-link {{ (Request::segment(2) == 'login_history')? 'active':'' }}">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>Login History</p>
               </a>
             </li>
           </ul>
@@ -157,7 +192,98 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item">
+          <p class="asideTitle">Privacy & Terms</p>
+          <ul class="pl-0">
+              <li
+                  class="nav-item {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'menu-open' : '' }}">
+                  <a href="#"
+                      class="nav-link  {{ Request::segment(2) == 'privacy_policy' || Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>
+                          Privacy Setup
+                          <i class="fas fa-angle-right right"></i>
+                          <!-- <span class="badge badge-info right">6</span> -->
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{ URL::to('/admin/privacy_policy') }}"
+                              class="nav-link  {{ Request::segment(2) == 'privacy_policy' ? 'active' : '' }}">
+                              <span class="dot"></span>
+                              <p>Privacy Policy</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{ URL::to('/admin/terms_condition') }}"
+                              class="nav-link {{ Request::segment(2) == 'terms_condition' ? 'active' : '' }}">
+                              <span class="dot"></span>
+                              <p>Terms & Condition </p>
+                          </a>
+                      </li>
 
+
+                  </ul>
+              </li>
+
+
+
+          </ul>
+      </li>  
+
+      
+      <li class="nav-item">
+        <p class="asideTitle">Roles</p>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/roles')}}" class="nav-link {{ (Request::segment(2) == 'roles')? 'active':'' }}">
+              <i class="fas fa-list nav-icon"></i>
+              <p>Roles List</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+      {{-- <li class="nav-item">
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="{{ URL::to('/admin/faq') }}"
+                    class="nav-link {{ Request::segment(2) == 'faq' ? 'active' : '' }}">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>FAQ</p>
+                </a>
+            </li>
+        </ul>F
+    </li> --}}
+
+
+    <li class="nav-item">
+      <p class="asideTitle">FAQ</p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="{{ URL::to('/admin/faq') }}"
+          class="nav-link {{ Request::segment(2) == 'faq' ? 'active' : '' }}">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <p>FAQ</p>
+      </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+      <p class="asideTitle">Social Links
+      </p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="{{ URL::to('/admin/social_link') }}"
+          class="nav-link {{ Request::segment(2) == 'social_link' ? 'active' : '' }}">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <p>Social Links</p>
+      </a>
+        </li>
+      </ul>
+    </li>
         <!-- <li class="nav-item">
             <a href="{{URL::to('/admin/users')}}" class="nav-link {{ (Request::segment(2) == 'users')? 'active':'' }}">
               <i class="fas fa-users nav-icon"></i>
@@ -213,6 +339,70 @@
         </li> -->
 
       </ul>
+      {{-- @elseif ($check_role['role']=="designer"||$check_role['role']=="Designer") --}}
+      @else
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <p class="asideTitle">Design Template</p>
+          <ul class="pl-0">
+            <li class="nav-item {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'create_template' || Request::segment(2) == 'design_style')? 'menu-open':'' }}">
+              <a href="#" class="nav-link  {{ (Request::segment(2) == 'category' || Request::segment(2) == 'subcategory' || Request::segment(2) == 'design_style' || Request::segment(2) == 'create_template')? 'active':'' }}">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>
+                  Category Setup
+                  <i class="fas fa-angle-right right"></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{URL::to('/admin/category')}}" class="nav-link  {{ (Request::segment(2) == 'category')? 'active':'' }}">
+                    <span class="dot"></span>
+                    <p>Category</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{URL::to('/admin/subcategory')}}" class="nav-link {{ (Request::segment(2) == 'subcategory')? 'active':'' }}">
+                    <span class="dot"></span>
+                    <p>Sub Category</p>
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a href="{{URL::to('/admin/design_style')}}" class="nav-link {{ (Request::segment(2) == 'design_style')? 'active':'' }}">
+                    <span class="dot"></span>
+                    <p>Design Style</p>
+                  </a>
+                </li> -->
+                <li class="nav-item">
+                  <a href="{{URL::to('/admin/create_template')}}" class="nav-link {{ (Request::segment(2) == 'create_template')? 'active':'' }}">
+                    <span class="dot"></span>
+                    <p>Create Template</p>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+            <!-- <li class="nav-item">
+              <a href="{{URL::to('/admin/design')}}" class="nav-link {{ (Request::segment(2) == 'design')? 'active':'' }}">
+                <i class="fas fa-layer-group"></i>
+                <p>
+                  Design
+                </p>
+              </a>
+            </li> -->
+{{-- 
+            <li class="nav-item">
+              <a href="{{URL::to('/admin/event_type')}}" class="nav-link {{ (Request::segment(2) == 'event_type')? 'active':'' }}">
+                <i class="fas fa-layer-group"></i>
+                <p>
+                  Event Type
+                </p>
+              </a>
+            </li> --}}
+          </ul>
+        </li>
+        <ul>
+          @endif
     </nav>
     <!-- /.sidebar-menu -->
   </div>

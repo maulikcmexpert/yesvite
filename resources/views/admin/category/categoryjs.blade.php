@@ -33,7 +33,9 @@
         });
 
         $(document).on("click", ".remove", function() {
-            $(this).parent().remove();
+
+            // console.log($(this).parent().parent().parent().html());
+            $(this).parent().parent().remove();
         });
 
         $(document).ready(function() {
@@ -133,39 +135,60 @@
         })
 
 
-        $(document).on("click", ".delete_category", function(event) {
-            var userURL = $(this).data("url");
-            event.preventDefault();
-            swal({
-                title: `Are you sure you want to delete this record?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                        method: "DELETE",
-                        url: userURL,
-                        dataType: "json",
-                        success: function(output) {
-                            if (output == true) {
-                                table.ajax.reload();
-                                toastr.success("Category Deleted successfully !");
-                            } else {
-                                toastr.error("Category don't Deleted !");
-                            }
-                        },
-                    });
-                }
-            });
-        });
+        // $(document).on("click", ".delete_category", function(event) {
+        //     var userURL = $(this).data("url");
+        //     event.preventDefault();
+        //     swal({
+        //         title: `Are you sure you want to delete this record?`,
+        //         text: "If you delete this, it will be gone forever.",
+        //         icon: "warning",
+        //         buttons: true,
+        //         dangerMode: true,
+        //     }).then((willDelete) => {
+        //         if (willDelete) {
+        //             $.ajax({
+        //                 headers: {
+        //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+        //                         "content"
+        //                     ),
+        //                 },
+        //                 method: "DELETE",
+        //                 url: userURL,
+        //                 dataType: "json",
+        //                 success: function(output) {
+        //                     if (output == true) {
+        //                         table.ajax.reload();
+        //                         toastr.success("Category Deleted successfully !");
+        //                     } else {
+        //                         toastr.error("Category don't Deleted !");
+        //                     }
+        //                 },
+        //             });
+        //         }
+        //     });
+        // });
 
 
     });
+
+
+
+    $(document).on('click', '.delete_category', function() {
+        var id=$(this).data('id');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // alert();
+                $('#delete_category_from'+id).submit();
+
+            }
+        });
+    })
 </script>

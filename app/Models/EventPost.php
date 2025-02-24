@@ -60,7 +60,6 @@ class EventPost extends Model
 
     public function user_report_to_posts()
     {
-
         return $this->hasMany(UserReportToPost::class, 'event_post_id', 'id');
     }
 }

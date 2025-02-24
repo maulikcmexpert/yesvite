@@ -60,6 +60,7 @@ class SendReminderRsvp extends Command
                     foreach ($invitedUser as $val) {
                         $eventData = [
                             'event_name' => $value->event_name,
+                            'host_email' => $value->user->email,
                             'rsvpData' => [
                                 'event_id' =>  encrypt($value->id),
                                 'user_id' => encrypt($val->user_id)

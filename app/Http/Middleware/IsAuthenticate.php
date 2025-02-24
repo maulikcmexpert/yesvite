@@ -20,7 +20,7 @@ class IsAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-
+        
         if (!Auth::guard('web')->user()) {
             return $next($request);
         }

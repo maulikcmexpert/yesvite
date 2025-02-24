@@ -36,4 +36,5 @@ class EventPostPoll extends Model
     {
         return $this->hasMany(UserEventPollData::class);
     }
+
 }

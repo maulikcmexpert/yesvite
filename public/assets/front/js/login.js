@@ -3,7 +3,7 @@ console.log(base_url);
 $("#loginForm").validate({
     rules: {
         email: { required: true, email: true },
-        password: { required: true, minlength: 8 },
+        password: { required: true, minlength: 6 },
     },
     messages: {
         email: {
@@ -12,7 +12,7 @@ $("#loginForm").validate({
         },
         password: {
             required: "Please enter Password",
-            minlength: "Password must be at least 8 characters",
+            minlength: "Password must be at least 6 characters",
         },
         submitHandler: function (form) {
             loaderHandle("#loginUser", "Signing..");
@@ -77,5 +77,33 @@ $("#updatePassForm").validate({
     },
 });
 
-$('label[for="email"]').addClass('floatingfocus');
-$('label[for="password"]').addClass('floatingfocus');
+$(".form-control").on("focusout change keyup focus", function () {
+    var text_val = $(this).val();
+    if (text_val === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+$(".form-control").each(function () {
+    var text = $(this).val();
+    if (text === "") {
+        $(this).next().removeClass("floatingfocus");
+    } else {
+        $(this).next().addClass("floatingfocus");
+    }
+});
+
+$('html').mouseover(function() {
+    $(".form-control").each(function () {
+        var text = $(this).val();
+        if (text === "") {
+            $(this).next().removeClass("floatingfocus");
+        } else {
+            $(this).next().addClass("floatingfocus");
+        }
+    });
+});
+$('label[for="email"]').removeClass("floatingfocus");
+$('label[for="password"]').removeClass("floatingfocus");

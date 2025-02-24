@@ -37,14 +37,16 @@ class SubCategoryController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $cryptId = encrypt($row->id);
+                    $sub_category_id = decrypt($cryptId);
+
                     $edit_url = route('subcategory.edit', $cryptId);
                     $delete_url = route('subcategory.destroy', $cryptId);
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_sub_category_form'.$sub_category_id.'" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="submit" class="btn bg-transparent"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" data-id="'.$sub_category_id.'"class="btn bg-transparent delete_sub_category"><i class="fas fa-trash"></i></button></form>
                         </div>';
                     return $actionBtn;
                 })
@@ -168,12 +170,12 @@ class SubCategoryController extends Controller
             DB::commit();
 
             return redirect()->route('subcategory.index')
-                ->with('success', 'Subcategory deleted successfully');
+                ->with('msg', 'Subcategory deleted successfully');
         } catch (QueryException $e) {
 
             DB::rollBack();
             return redirect()->route('subcategory.index')
-                ->with('danger', 'Subcategory not deleted');
+                ->with('msg_error', 'Subcategory not deleted');
         }
     }
 

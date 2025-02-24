@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Privacy;
 use App\Models\LegalAgreement;
 
 class TermsAndConditionController extends Controller
@@ -17,9 +18,11 @@ class TermsAndConditionController extends Controller
 
         $title = 'Terms and Conditions';
         $page = 'front.term_and_condition';
+        $terms = Privacy::where('type', '1')->first();
         return view('layout', compact(
             'title',
             'page',
+            'terms'
         ));
     }
 
