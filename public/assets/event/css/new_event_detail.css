@@ -1573,6 +1573,14 @@
     align-items: center;
 }
 
+.new-event-sidebar-wrp .guest-wrp.side-guest-wrp .invite-pro img{
+    min-width: 24px;
+}
+.new-event-sidebar-wrp .coin-invite-wrp span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
