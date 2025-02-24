@@ -226,6 +226,7 @@ $(document).on("keyup", ".search_phone", function () {
     }
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
+        $('#home_loader').css('display','flex');
 
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
@@ -239,7 +240,7 @@ $(document).on("keyup", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $('#home_loader').css('display','flex');
+                // $('#home_loader').css('display','flex');
             },
             success: function (data) {
                 console.log(data);
@@ -279,7 +280,8 @@ $(document).on("keyup", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                $("#home_loader").hide();
+
             },
         });
     }
