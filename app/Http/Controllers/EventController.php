@@ -2636,6 +2636,7 @@ class EventController extends BaseController
                         'profile' => (isset($userimage) && $userimage != '') ? $userimage : ''
                     ];
 
+                    dd($userIds);
                     $userExists = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] === $id;
                     });
