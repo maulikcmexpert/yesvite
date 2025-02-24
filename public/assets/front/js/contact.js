@@ -227,9 +227,6 @@ $(document).on("input", ".search_phone", function () {
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
         $('#home_loader').css('display','flex');
-        $('input, textarea, select, button').prop('disabled', true); // Disable inputs
-
-
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
             url: base_url + "contacts/loadphones",
@@ -249,8 +246,6 @@ $(document).on("input", ".search_phone", function () {
                 if (data.status == "0" && scroll==1) {
                     $(".no-phone-data").css("display","none");
                     $("#home_loader").hide();
-                    $('input, textarea, select, button').prop('disabled', false); // Disable inputs
-
                     // busy2 = true; 
                     busy2 = false;
                     return;
@@ -259,8 +254,6 @@ $(document).on("input", ".search_phone", function () {
                     $(".no-phone-data").css("display","block");
                     $("#yesvitePhones").html('');
                     $("#home_loader").hide();
-                    $('input, textarea, select, button').prop('disabled', false); // Disable inputs
-
                     // busy2 = true; 
                     busy2 = false;
 
@@ -280,8 +273,6 @@ $(document).on("input", ".search_phone", function () {
 
                 busy2 = false;
                 $("#home_loader").hide();
-                $('input, textarea, select, button').prop('disabled', false); // Disable inputs
-
 
 
             },
@@ -289,8 +280,6 @@ $(document).on("input", ".search_phone", function () {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
                 $("#home_loader").hide();
-                $('input, textarea, select, button').prop('disabled', false); // Disable inputs
-
 
             },
         });
