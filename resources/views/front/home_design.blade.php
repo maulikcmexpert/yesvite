@@ -176,19 +176,15 @@
                 @foreach ($category->subcategory as $subcategory)
                     @php
                         $firstFiveImages = $subcategory->textdatas->take(5);
-
                     @endphp
-
                     @foreach ($firstFiveImages as $image)
-                        <div id="design_category filter_category"
-                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                        <div class="design_category filter_category col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                             data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
                             data-category_name="{{ $category->category_name }}">
                             <a href="#" class="collection-card card-blue">
                                 <div class="card-img">
-                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                        alt="shower-card">
+                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}" alt="shower-card">
                                 </div>
                             </a>
                         </div>
@@ -200,18 +196,14 @@
         <div class="row list_all_design_catgeory filters_category" style="display:none">
             @foreach ($categories as $category)
                 @foreach ($category->subcategory as $subcategory)
-
-
-                    @foreach ( $subcategory->textdatas as $image)
-                        <div id="design_category filter_category_new"
-                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                    @foreach ($subcategory->textdatas as $image)
+                        <div class="design_category filter_category_new col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                             data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
                             data-category_name="{{ $category->category_name }}">
                             <a href="#" class="collection-card card-blue">
                                 <div class="card-img">
-                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                        alt="shower-card">
+                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}" alt="shower-card">
                                 </div>
                             </a>
                         </div>
@@ -219,7 +211,6 @@
                 @endforeach
             @endforeach
         </div>
-
         {{-- <div class="row list_all_design_catgeory_new">
             <div class="d-flex align-items-center" style="gap: 15px">
                 <p id="allchecked" data-categoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
