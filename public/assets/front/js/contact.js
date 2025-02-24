@@ -131,7 +131,10 @@ $(document).on("input", ".search_phone", function () {
             offset1=null;
             limit=null;
         }
-        loadMorePhones(search_phone,type=null,offset1,limit);
+        // loadMorePhones(search_phone,type=null,offset1,limit);
+        searchTimeout = setTimeout(function () {
+            loadMorePhones(search_phone, type = null, offset1, limit);
+        }, 1000);
 });
 
     function loadMoreData(search_name,type,offset,limit,scroll=null) {
