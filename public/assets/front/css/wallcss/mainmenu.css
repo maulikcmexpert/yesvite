@@ -1662,7 +1662,7 @@
 }
 
 .home-upcoming-events-card-right img {
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .home-upcoming-events-card-left-profile {
@@ -3636,7 +3636,7 @@
         max-width: 165px;
     }
     .home-upcoming-events-card-right img {
-        object-fit: contain;
+        object-fit: fill;
     }
 }
 
