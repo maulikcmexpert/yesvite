@@ -1438,7 +1438,7 @@
 }
 
 .coin-invite-main{
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .coin-invite-wrp{
@@ -1571,6 +1571,23 @@
 .coin-invite-wrp .coin-invite-wrp-inner{
     display: flex;
     align-items: center;
+}
+
+.new-event-sidebar-wrp .guest-wrp.side-guest-wrp .invite-pro img{
+    min-width: 24px;
+}
+.new-event-sidebar-wrp .coin-invite-wrp span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.new-event-sidebar-wrp .credit-invite-pro-left{
+    width: 59%;
+    max-width: 59%;
+}
+.new-event-sidebar-wrp .coin-invite-main{
+    width: 41%;
+    max-width: 41%;
 }
 
 /* ======Responsiveness===== */

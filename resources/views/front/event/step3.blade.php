@@ -594,7 +594,7 @@
                    
                 </div> --}}
                 <div class="invite-pro">
-                    <div>
+                    <div class="new-event-sidebar-wrp">
                         <div class="heading">
                             
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
