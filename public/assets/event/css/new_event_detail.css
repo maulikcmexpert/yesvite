@@ -123,6 +123,7 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    padding-bottom: 10px;
 }
 
 .new-event-sidebar-menu{
