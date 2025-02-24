@@ -167,7 +167,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{URL::to('/admin/sendNotification')}}" class="nav-link {{ (Request::segment(3) == 'sendNotification')? 'active':'' }}">
+              <a href="{{URL::to('/admin/sendNotification')}}" class="nav-link {{ (Request::segment(2) == 'sendNotification')? 'active':'' }}">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>Send Notification</p>
               </a>
