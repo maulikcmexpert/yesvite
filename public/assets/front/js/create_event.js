@@ -8456,6 +8456,8 @@ $(document).on("click", "#phone-tab", function () {
 
 var search_contacts = 0;
 $(document).on("keyup", "#search_contacts", function () {
+    $("#loader").css("display", "flex");
+    alert();
     var search_name = $(this).val();
     // console.log(search_name);
 
