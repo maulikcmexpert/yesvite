@@ -7265,6 +7265,7 @@ $(document).on("click", ".invite_group_member", function () {
         },
         error: function (xhr, status, error) {
             console.log("AJAX error: " + error);
+            $("#loader").css("display", "none");
             toastr.error(error);
         },
     });

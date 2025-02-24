@@ -11,6 +11,8 @@ $(document).ready(function () {
     var offset = 0;
     var offset1 = 0;
 
+    let searchTimeout; // Store timeout reference
+
 $("#product-scroll").on("scroll", function () {
     
         if (busy1) return; 
@@ -124,14 +126,21 @@ $(document).on("input", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
         $("#yesvitePhones").html("");
+        clearTimeout(searchTimeout);
+
         if(search_phone==''){
             offset1=null;
             limit=10;
+            loadMorePhones(search_phone,type=null,offset1,limit);
+
         }else{
             offset1=null;
             limit=null;
+            searchTimeout = setTimeout(function () {
+                loadMorePhones(search_phone, type = null, offset1, limit);
+            }, 1000);
         }
-        loadMorePhones(search_phone,type=null,offset1,limit);
+        // loadMorePhones(search_phone,type=null,offset1,limit);
 });
 
     function loadMoreData(search_name,type,offset,limit,scroll=null) {
@@ -227,7 +236,6 @@ $(document).on("input", ".search_phone", function () {
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
         $('#home_loader').css('display','flex');
-
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
             url: base_url + "contacts/loadphones",
