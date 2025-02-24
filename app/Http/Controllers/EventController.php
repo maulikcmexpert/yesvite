@@ -2475,6 +2475,7 @@ class EventController extends BaseController
                 $query->limit($request->limit)
                     ->offset($request->offset);
             })
+            ->whereNull('userId')
             ->orderBy('firstName')  // Sorting by firstName
             ->get();
 
