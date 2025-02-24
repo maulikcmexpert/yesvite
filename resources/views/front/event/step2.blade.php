@@ -268,7 +268,19 @@
 
                 }
             });
+            $('input[name="design_subcategory_new"]').on('change', function () {
+        let subcategoryId = $(this).data('subcategory-id');
 
+        // If checked, check the corresponding checkbox in design_subcategory
+        if ($(this).is(':checked')) {
+            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
+            $('#Allcat').prop('checked', true);
+        } else {
+            // If unchecked, uncheck the corresponding checkbox in design_subcategory
+            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
+            $('#Allcat').prop('checked', false);
+        }
+    });
             $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
                 $(".image-item-new").hide();
                 $("#category_name").hide();
@@ -453,7 +465,7 @@
             // }
 
             $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function () {
-alert();
+
             $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
             .show();
             $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)

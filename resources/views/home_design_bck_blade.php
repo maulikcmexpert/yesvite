@@ -126,7 +126,7 @@
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
-                                    <div class="accordion-item category category_{{$category->id}}">
+                                     <div class="accordion-item category category_{{$category->id}}">
                                              <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"

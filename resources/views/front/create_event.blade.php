@@ -496,7 +496,7 @@
                     <span class="coin-invite-wrp-inner">
                         {{-- {{$setPrice[0]['coins']}}  |  --}}
 
-                      <span class="green-price">Buy &nbsp;&nbsp;&nbsp;
+                      <span class="green-price">Buy Credits &nbsp;&nbsp;
                         {{-- ${{$setPrice[0]['price']}} --}}
                     </span><i class="fa-solid fa-chevron-right"></i>
                     </span>
