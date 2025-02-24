@@ -141,7 +141,7 @@ if ($(this).is(':checked')) {
                 search: search_value
             },
             success: function(response) {
-console.log(response);
+
                 if (response.view) {
                     $('.list_all_design_catgeory').html('');
                     $('.list_all_design_catgeory').html(response.view);
