@@ -8499,6 +8499,8 @@ $("#YesviteContactsAll").on("scroll", function () {
         busycontact = true;
         offsetcontact += limitcontact;
         var type = "phone";
+        $("#loader").css("display", "flex");
+
         // loadMorePhones(search_name=null,type,offset1,limit);
         displayPhoneContacts(
             "all",
