@@ -66,7 +66,7 @@
 
                                     @foreach ($categories as $category)
                                         <div class="accordion-item">
-                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
@@ -87,7 +87,8 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input categoryChecked_{{ $category->id }}"
+                                                                    <input
+                                                                        class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
@@ -126,8 +127,8 @@
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
-                                    <div class="accordion-item category category_{{$category->id}}">
-                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                        <div class="accordion-item category category_{{ $category->id }}">
+                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
@@ -148,7 +149,8 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{$category->id}}"
+                                                                    <input
+                                                                        class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{ $category->id }}"
                                                                         name="design_subcategory_new" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
