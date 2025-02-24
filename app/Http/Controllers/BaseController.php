@@ -38,6 +38,7 @@ class BaseController extends Controller
         return [
             '15' => ['priceId' => 'price_1QrC0dEunmtSe18EOUZgSmuy', 'coins' => 15, 'price' => 14.99],
 
+
             '30' => ['priceId' => 'price_1QrC6BEunmtSe18EmbwOERSM', 'coins' => 30, 'price' => 24.99],
 
             '50' => ['priceId' => 'price_1QrC6BEunmtSe18ErhNVPfNH', 'coins' => 50, 'price' => 34.99],
