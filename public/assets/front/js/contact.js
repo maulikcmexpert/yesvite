@@ -120,10 +120,10 @@ $(document).on("keyup", ".search_group", function () {
         loadMoreGroups(page, search_group);
 });
 
-$(document).on("keyup", ".search_phone", function () {
+$(document).on("input", ".search_phone", function () {
     var search_phone = $(this).val();
         page = 1;
-        $("#yesvitePhones").html("");
+        // $("#yesvitePhones").html("");
         if(search_phone==''){
             offset1=null;
             limit=10;
@@ -227,6 +227,7 @@ $(document).on("keyup", ".search_phone", function () {
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
         $('#home_loader').css('display','flex');
+        $("#yesvitePhones").html("");
 
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
