@@ -10,7 +10,9 @@ $(document).ready(function () {
     $("#Allcat").on("change", function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
-        $(".image-item-new").hide();
+        $(".filter_category_new").show();
+        $(".filter_category").hide();
+
         $("#category_name").hide();
         $("#allchecked").hide();
         if ($(this).is(":checked")) {
@@ -40,9 +42,12 @@ $(document).ready(function () {
         "change",
         'input[name="design_subcategory"]:not(#Allcat)',
         function () {
-            $(".image-item-new").hide();
+            $(".filter_category_new").show();
+            $(".filter_category").hide();
+
             $("#category_name").hide();
             $(".categoryNew").show();
+
             $(".subcategoryNew").hide();
             $("#allchecked").hide();
 
