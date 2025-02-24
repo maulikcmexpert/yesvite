@@ -8465,7 +8465,7 @@ $(document).on("keyup", "#search_contacts", function () {
     limitcontact = 10;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
-        $("#loader").css("display", "flex");
+        // $("#loader").css("display", "flex");
         displayPhoneContacts(
             "all",
             limitcontact,
@@ -8474,6 +8474,8 @@ $(document).on("keyup", "#search_contacts", function () {
             false
         );
     }, 750);
+            $("#loader").css("display", "none");
+
 });
 
 // $("#YesviteContactsAll").html(html.view);
