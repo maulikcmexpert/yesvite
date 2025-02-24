@@ -1438,7 +1438,7 @@
 }
 
 .coin-invite-main{
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .coin-invite-wrp{
@@ -1583,9 +1583,11 @@
 
 .new-event-sidebar-wrp .credit-invite-pro-left{
     width: 59%;
+    max-width: 59%;
 }
 .new-event-sidebar-wrp .coin-invite-main{
     width: 41%;
+    max-width: 41%;
 }
 
 /* ======Responsiveness===== */
