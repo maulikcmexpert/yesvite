@@ -102,16 +102,24 @@ $(document).on("keyup", ".search_name", function () {
         var search_name = $(this).val();
         page = 1;
         $("#yesviteUser").html("");
+        clearTimeout(searchTimeout);
         // loadMoreData(page, search_name);
         if(search_name==''){
             offset=0;
             limit=10;
+            loadMoreData(search_name,type=null,offset,limit);
+
         
         }else{
             offset=null;
             limit=null;
+            searchTimeout = setTimeout(function () {
+            loadMoreData(search_name,type=null,offset,limit);
+        }, 1000);
+
+
         }
-        loadMoreData(search_name,type=null,offset,limit);
+        // loadMoreData(search_name,type=null,offset,limit);
 
 });
 
