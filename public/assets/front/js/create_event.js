@@ -8478,7 +8478,14 @@ $(document).on("keyup", "#search_contacts", function () {
 $("#YesviteContactsAll").on("scroll", function () {
     // clearTimeout(debounceTimer);
     // debounceTimer = setTimeout(() => {
-    if (busycontact || create_event_phone_scroll) return;
+        $("#loader").css("display", "flex");
+
+    if (busycontact || create_event_phone_scroll){
+        $("#loader").css("display", "none");
+
+        return;
+
+    } 
 
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
@@ -8497,10 +8504,14 @@ $("#YesviteContactsAll").on("scroll", function () {
             true
         );
 
+        $("#loader").css("display", "none");
+
         // function loadMoreData(page, search_name)
         // loadMoreGroups(page, search_group);
         // loadMorePhones(page, search_phone);
     }
+    $("#loader").css("display", "none");
+
     // }, 200);
 });
 
@@ -8560,6 +8571,8 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
                 $("#YesviteContactsAll").append(html.view);
             }
             busycontact = false;
+            $("#loader").css("display", "none");
+
             setTimeout(function () {
                 $("#loader").css("display", "none");
             }, 1000);
