@@ -66,7 +66,7 @@
 
                                     @foreach ($categories as $category)
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
@@ -87,8 +87,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input
-                                                                        class="form-check-input categoryChecked_{{ $category->id }}"
+                                                                    <input class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
@@ -127,8 +126,8 @@
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
-                                        <div class="accordion-item category category_{{ $category->id }}">
-                                            <h2 class="accordion-header" id="heading{{ $category->id }}">
+                                    <div class="accordion-item category category_{{$category->id}}">
+                                             <h2 class="accordion-header" id="heading{{ $category->id }}">
                                                 <button class="accordion-button" type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
@@ -149,8 +148,7 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <input
-                                                                        class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{ $category->id }}"
+                                                                    <input class="form-check-input subcategoryChecked_{{ $subcategory->id }} subcategory_{{$category->id}}"
                                                                         name="design_subcategory_new" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
@@ -181,28 +179,27 @@
 
                     @endphp
 
-                    @if ($firstTextData)
+                    @foreach ($firstFiveImages as $image)
                         <div id="design_category"
-                            class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
+                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                             data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $firstSubcategory->id }}"
+                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
                             data-category_name="{{ $category->category_name }}">
-                            <a href="javascript:;" class="collection-card card-blue">
+                            <a href="#" class="collection-card card-blue">
                                 <div class="card-img">
-                                    <img src="{{ asset('storage/canvas/' . $firstTextData->filled_image) }}"
+                                    <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                         alt="shower-card">
                                 </div>
-                                <h4>{{ $category->category_name }}</h4>
                             </a>
                         </div>
-                    @endif
+                    @endforeach
                 @endforeach
-
-
+            @endforeach
         </div>
 
 
-        <div class="row list_all_design_catgeory_new">
+
+        {{-- <div class="row list_all_design_catgeory_new">
             <div class="d-flex align-items-center" style="gap: 15px">
                 <p id="allchecked" data-categoryid="0" style="display:none"><i class="fa-solid fa-arrow-left"
                         style="color: #212529; cursor: pointer;"></i></p>
@@ -212,7 +209,7 @@
                 @foreach ($category->subcategory as $subcategory)
                     @foreach ($subcategory->textdatas as $image)
                         <div style="display: none"
-                            class="col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
+                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
                             data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}">
 
                             <a href="javascript:;" class="collection-card card-blue">
@@ -220,7 +217,7 @@
                                     <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                         alt="shower-card">
                                 </div>
-                                {{-- <h4>{{ $category->category_name }}</h4> --}}
+                                {{-- <h4>{{ $category->category_name }}</h4>
                             </a>
                         </div>
                     @endforeach
@@ -228,7 +225,7 @@
             @endforeach
 
 
-        </div>
+        </div> --}}
 
 
 
@@ -265,9 +262,8 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                            <div class="platform-img">
-                                <img src="{{ asset('assets/front/image/platform-img2.png') }}" alt="platform-img">
-                            </div>
+                            <div class="platform-img"></div>
+                            <img src="{{ asset('assets/front/image/platform-img2.png') }}" alt="platform-img">
                         </div>
                     </div>
                 </div>
