@@ -8456,7 +8456,7 @@ $(document).on("click", "#phone-tab", function () {
 
 var search_contacts = 0;
 $(document).on("keyup", "#search_contacts", function () {
-    $("#loader").css("display", "flex");
+    // $("#loader").css("display", "flex");
     var search_name = $(this).val();
     // console.log(search_name);
 
@@ -8464,7 +8464,7 @@ $(document).on("keyup", "#search_contacts", function () {
     limitcontact = 10;
     clearTimeout(search_contacts);
     search_contacts = setTimeout(function () {
-        // $("#loader").css("display", "flex");
+        $("#loader").css("display", "flex");
         displayPhoneContacts(
             "all",
             limitcontact,
@@ -8482,6 +8482,7 @@ $(document).on("keyup", "#search_contacts", function () {
 $("#YesviteContactsAll").on("scroll", function () {
     // clearTimeout(debounceTimer);
     // debounceTimer = setTimeout(() => {
+        // $("#loader").css("display", "flex");
 
     if (busycontact || create_event_phone_scroll){
         $("#loader").css("display", "none");
@@ -8498,11 +8499,7 @@ $("#YesviteContactsAll").on("scroll", function () {
         busycontact = true;
         offsetcontact += limitcontact;
         var type = "phone";
-        // $("#loader").css("display", "flex");
-
-        clearTimeout(search_contacts);
-        search_contacts = setTimeout(function () {
-            $("#loader").css("display", "flex");
+        $("#loader").css("display", "flex");
 
         // loadMorePhones(search_name=null,type,offset1,limit);
         displayPhoneContacts(
@@ -8512,7 +8509,6 @@ $("#YesviteContactsAll").on("scroll", function () {
             (search_name = ""),
             true
         );
-    }, 750);
 
         $("#loader").css("display", "none");
 
