@@ -446,7 +446,7 @@
                 </a> -->
             </div>
             <div class="sidebar-invite-top-text d-none">
-                <div>
+                <div class="credit-invite-pro-left">
                     <h3>Pro</h3>
                     <button class="">
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"

@@ -1581,6 +1581,13 @@
     font-weight: 700;
 }
 
+.new-event-sidebar-wrp .credit-invite-pro-left{
+    width: 70%;
+}
+.new-event-sidebar-wrp .coin-invite-main{
+    width: 30%;
+}
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 991px) {
