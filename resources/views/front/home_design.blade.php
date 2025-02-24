@@ -173,18 +173,11 @@
         {{-- {{ dd($categories);}} --}}
         <div class="row list_all_design_catgeory">
             @foreach ($categories as $category)
-<<<<<<< HEAD
                 @foreach ($category->subcategory as $subcategory)
                     @php
                         $firstFiveImages = $subcategory->textdatas->take(5);
 
                     @endphp
-=======
-                @php
-                    $firstSubcategory = $category->subcategory->first(); // Get the first subcategory
-                    $firstTextData = $firstSubcategory ? $firstSubcategory->textdatas->first() : null; // Get first textdata
-                @endphp
->>>>>>> d9ffde4140338dab9ce968d8cd06a1e19bf3f8e8
 
                 @if ($firstTextData)
                     <div id="design_category"
