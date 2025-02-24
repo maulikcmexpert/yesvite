@@ -1592,6 +1592,16 @@
 
 /* ======Responsiveness===== */
 
+@media only screen and (max-width: 1399px) {
+    .new-event-sidebar-wrp .credit-invite-pro-left{
+        width: 59%;
+        max-width: 59%;
+    }
+    .new-event-sidebar-wrp .coin-invite-main{
+        width: 50%;
+        max-width: 50%;
+    }
+}
 @media only screen and (max-width: 991px) {
     .main-content-sidebar {
         /* width: 100%;
