@@ -1591,7 +1591,7 @@
 }
 
 #sidebar_thankyou_card, #sidebar_add_thankyou_card, #sidebar_add_co_host, #sidebar_gift_registry, #sidebar_gift_registry_item,#sidebar_addcategory,#sidebar_editcategory,#sidebar_potluck,#sidebar_groups, #sidebar_invite_group_member, #sidebar_add_groups, #sidebar_add_group_member, #sidebar_list_group_member,#sidebar_see_all_invite{
-    z-index: 10001 I !important;
+    z-index: 10001 !important;
 }
 
 /* ======Responsiveness===== */
