@@ -2267,9 +2267,9 @@
                                                 $open_modal="";
                                             }
                     @endphp
-                      @if($is_host == "1" || 
+                      {{-- @if($is_host == "1" || 
                     ($user_id == $guest_data['id']) || 
-                    ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0")))
+                    ($user_id != $guest_data['id'] && ($guest_data['rsvp_status'] == "1" || $guest_data['rsvp_status'] == "0"))) --}}
                         <div class="guest-user-box">
                             <div class="guest-list-data">
                             <div class="guest-img">
@@ -2436,7 +2436,7 @@
                             </div>
                             
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
 
                 {{-- @foreach ($getInvitedusers['invited_guests'] as $guest_data )
