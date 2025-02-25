@@ -422,6 +422,8 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('filterSession');
         session()->forget('seen_emails');
         session()->forget('seen_phone_numbers');
+        session()->forget('yesvite_seen_emails');
+        session()->forget('yesvite_seen_phone_numbers');
         Session::flush(); // removes all session data
 
         return redirect('login');
