@@ -728,7 +728,8 @@
         </div>
     </div>
     <div class="new-event-btn">
-        <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form">Add Thankyou card</a>
+        <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form">+ Add New</a>
+        <a href="#" class="cmn-btn">+ Save</a>
     </div>
 </div>
 </div>
