@@ -729,7 +729,7 @@
     </div>
     <div class="new-event-btn">
         <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form">+ Add New</a>
-        <a href="#" class="cmn-btn">+ Save</a>
+        <a href="#" class="cmn-btn" onclick="toggleSidebar('')">+ Save</a>
     </div>
 </div>
 </div>
