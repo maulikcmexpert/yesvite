@@ -3075,6 +3075,10 @@
     font-weight: 500 !important;
 }
 
+.calendar-wrp h2.accordion-header span{
+    font-weight: 500 !important;
+}
+
 .rsvp_minus_notify:disabled,
 .rsvp_plus_notify:disabled {
     background-color: gray !important;
