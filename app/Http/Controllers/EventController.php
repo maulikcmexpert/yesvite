@@ -2571,6 +2571,10 @@ class EventController extends BaseController
             if (!empty($email) && in_array($email, $seenEmails) && empty($phone_number)) {
                 continue;
             }
+            if (!empty($phone_number) && in_array($phone_number, $seenPhoneNumbers) && empty($email)) {
+                continue;
+            }
+        
         
             $yesvite_user[] = (object)$yesviteUserDetail;
         

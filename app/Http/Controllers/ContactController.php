@@ -313,7 +313,7 @@ class ContactController extends Controller
             $query->limit(10);
         }
         $getAllContacts = $query->get();
-        // $yesvite_phone = [];
+        $yesvite_phone = [];
         // foreach ($getAllContacts as $user) {
         //     $yesviteUserPhoneDetail = [
         //         'id' => $user->id,
@@ -327,55 +327,47 @@ class ContactController extends Controller
         // }
 
         $yesvite_phone = [];
+$seenEmails = [];
+$seenPhoneNumbers = [];
 
-        // Reset session if offset is 0
-        if ($request->offset == "0") {
-            session()->forget('yesvite_seen_emails');
-            session()->forget('yesvite_seen_phone_numbers');
-        }
-        
-        // Retrieve session data or initialize empty arrays
-        $yesviteSeenEmails = session()->get('yesvite_seen_emails', []);
-        $yesviteSeenPhoneNumbers = session()->get('yesvite_seen_phone_numbers', []);
-        
-        foreach ($getAllContacts as $user) {
-            $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
-            $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
-        
-            $yesviteUserPhoneDetail = [
-                'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : $user->profile,
-                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
-                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
-                'email' => $email,
-                'phone_number' => $phone_number,
-            ];
-        
-            // Skip if both email and phone exist in session (complete duplicate)
-            if (!empty($email) && !empty($phone_number) && in_array($email, $yesviteSeenEmails) && in_array($phone_number, $yesviteSeenPhoneNumbers)) {
-                continue;
-            }
-        
-            // Skip if email exists but no phone number (avoid duplicate emails)
-            if (!empty($email) && in_array($email, $yesviteSeenEmails) && empty($phone_number)) {
-                continue;
-            }
-        
-            $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
-        
-            // Store seen emails and phone numbers in session
-            if (!empty($email)) {
-                $yesviteSeenEmails[] = $email;
-            }
-            if (!empty($phone_number)) {
-                $yesviteSeenPhoneNumbers[] = $phone_number;
-            }
-        }
-        
-        // Save updated seen lists in session with unique names
-        session()->put('yesvite_seen_emails', $yesviteSeenEmails);
-        session()->put('yesvite_seen_phone_numbers', $yesviteSeenPhoneNumbers);
-        
+foreach ($getAllContacts as $user) {
+    $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
+    $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
+
+    $yesviteUserPhoneDetail = [
+        'id' => $user->id,
+        'profile' => empty($user->profile) ? "" : $user->profile,
+        'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+        'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+        'email' => $email,
+        'phone_number' => $phone_number,
+    ];
+
+    // Condition 1: If both email and phone number exist and are duplicates, take only one entry
+    if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
+        continue;
+    }
+
+    // Condition 2: If only email is duplicate but phone is different, take only one email entry
+    if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
+        continue;
+    }
+     if (!empty($phone_number) && isset($seenPhoneNumbers[$phone_number]) && empty($email)) {
+        continue;
+    }
+
+
+    // Store entries based on conditions
+    $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
+
+    // Mark email and phone as seen
+    if (!empty($email)) {
+        $seenEmails[$email] = true;
+    }
+    if (!empty($phone_number)) {
+        $seenPhoneNumbers[$phone_number] = true;
+    }
+}
 
 // print_r($yesvite_phone);
 
