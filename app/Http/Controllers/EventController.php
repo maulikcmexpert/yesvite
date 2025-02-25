@@ -2619,25 +2619,40 @@ class EventController extends BaseController
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : $isSelectpreferby;
 
 
-        $getAllContacts = contact_sync::where('contact_id', $id)
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            ->when($search_user != '', function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-                });
-            })->orderBy('firstname')
+        // $getAllContacts = contact_sync::where('contact_id', $id)
+        //     // ->when($type != 'group', function ($query) use ($request) {
+        //     //     $query->where(function ($q) use ($request) {
+        //     //         $q->limit($request->limit)
+        //     //             ->skip($request->offset);
+        //     //     });
+        //     // })
+        //     ->when(!empty($request->limit), function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     ->when($search_user != '', function ($query) use ($search_user) {
+        //         $query->where(function ($q) use ($search_user) {
+        //             $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+        //                 ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+        //         });
+        //     })->orderBy('firstname')
 
-            ->get();
+        //     ->get();
+        
+        $getAllContacts = contact_sync::where('contact_id', $id)
+        ->when(!empty($request->limit), function ($query) use ($request) {
+            $query->limit($request->limit)->offset($request->offset);
+        })
+        ->when($search_user != '', function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->orderBy('firstname')
+        ->groupBy('email', 'phoneWithCode') // Ensures unique email & phone number combinations
+        ->get();
+
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
