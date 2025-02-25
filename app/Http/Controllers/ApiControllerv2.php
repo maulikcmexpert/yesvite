@@ -547,9 +547,10 @@ class ApiControllerv2 extends Controller
 
 
                     $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
-
                         $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id, 'is_co_host' => '0'])->count();
+                    })->where(['event_id' => $value->id, 'is_co_host' => '0'])
+                      ->wherenull('rsvp_status')
+                      ->count();
 
                     $eventDetail['total_invited_user'] = $total_invited_user;
 
