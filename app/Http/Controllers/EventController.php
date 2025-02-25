@@ -2638,7 +2638,7 @@ class EventController extends BaseController
         //     })->orderBy('firstname')
 
         //     ->get();
-        
+
         $getAllContacts = contact_sync::where('contact_id', $id)
         ->when(!empty($request->limit), function ($query) use ($request) {
             $query->limit($request->limit)->offset($request->offset);
@@ -2650,7 +2650,7 @@ class EventController extends BaseController
             });
         })
         ->orderBy('firstname')
-        ->groupBy('email', 'phoneWithCode') // Ensures unique email & phone number combinations
+        ->groupBy('email', 'phone_number') // Ensures unique email & phone number combinations
         ->get();
 
 
