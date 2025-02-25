@@ -25,7 +25,7 @@
                 </button>
             </div>
         </div> -->
-        <div class="edit-image-main-top">
+        <div class="edit-image-main-top" style="padding-right:25px;">
             <div class="edit-image-main-top-icons">
                 <button id="undoButton">
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
                     </svg>
                 </button>
             </div>
-            <button class="cmn-btn saveButton" id="saveButton">Save</button>
+            <button class="cmn-btn saveButton" id="saveButton">Update Template</button>
 
         </div>
         <div class="image-edit-section-wrp">
