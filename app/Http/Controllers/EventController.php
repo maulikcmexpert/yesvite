@@ -2488,7 +2488,6 @@ class EventController extends BaseController
 
     public function getContacts(Request $request)
     {
-        dd($request);
 
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
@@ -2496,7 +2495,7 @@ class EventController extends BaseController
         $emails = [];
         $selected_contact = Session::get('contact_ids');
         $selectedContactId = [];
-        if ($request->offset == 0) {
+        if ($request->offset == "0") {
             session()->forget('seen_emails');
             session()->forget('seen_phones');
         }
