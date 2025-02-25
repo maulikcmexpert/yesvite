@@ -313,18 +313,56 @@ class ContactController extends Controller
             $query->limit(10);
         }
         $getAllContacts = $query->get();
+        // $yesvite_phone = [];
+        // foreach ($getAllContacts as $user) {
+        //     $yesviteUserPhoneDetail = [
+        //         'id' => $user->id,
+        //         'profile' => empty($user->profile) ? "" : $user->profile,
+        //         'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+        //         'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+        //         'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+        //         'phone_number' => (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "",
+        //     ];
+        //     $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
+        // }
+
         $yesvite_phone = [];
+        $seenEmails = [];
+        $seenPhoneNumbers = [];
+
         foreach ($getAllContacts as $user) {
+            $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
+            $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
+
             $yesviteUserPhoneDetail = [
                 'id' => $user->id,
                 'profile' => empty($user->profile) ? "" : $user->profile,
                 'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
                 'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
-                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
-                'phone_number' => (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "",
+                'email' => $email,
+                'phone_number' => $phone_number,
             ];
+
+            if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
+                continue;
+            }
+
+            if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
+                continue;
+            }
+
             $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
+
+            if (!empty($email)) {
+                $seenEmails[$email] = true;
+            }
+            if (!empty($phone_number)) {
+                $seenPhoneNumbers[$phone_number] = true;
+            }
         }
+
+// print_r($yesvite_phone);
+
         if(empty($yesvite_phone)){
             return response()->json(['status' => '0']);
 
