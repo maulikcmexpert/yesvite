@@ -2562,6 +2562,9 @@ class EventWallController extends BaseController
         //     ->orderBy('firstname', 'asc') // Order results by first name
         //     ->get();
 
+
+
+        
         // Query phone contacts
         // $phoneContacts = contact_sync::where('contact_id', $userId)
         //     ->when(!empty($type), function ($query) use ($type) {
@@ -2580,7 +2583,7 @@ class EventWallController extends BaseController
         //     ->orderBy('firstName', 'asc')
         //     ->whereNull('userId') // Order results by first name
         //     ->get();
-        
+
         $phoneContacts = contact_sync::where('contact_id', $userId)
         ->when(!empty($type), function ($query) use ($type) {
             $query->where('type', $type); // Apply type filter
