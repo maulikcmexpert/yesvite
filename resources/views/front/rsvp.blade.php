@@ -2425,6 +2425,10 @@
                                             <div class="sucess-no" sucess-yes data-bs-toggle="modal" data-bs-target="{{$yes_modal}}">
                                                 <h5>NO</h5>
                                             </div>
+                                            @else
+                                            <div class="no-reply">
+                                                <h5>RSVP Not Received</h5>
+                                            </div>
                                     @endif       
                                     @endif           
                                 <div class="rsvp-guest-user-replay">
