@@ -2419,23 +2419,66 @@ class EventController extends BaseController
 
         // dd(DB::getQueryLog());
 
-        $yesvite_user = [];
-        foreach ($yesvite_users as $user) {
-            if ($user->email_verified_at == NULL && $user->app_user == '1') {
-                continue;
-            }
-            $yesviteUserDetail = [
-                'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
-                'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
-                'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
-                'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
-                'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
-                'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
-                'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
-            ];
-            $yesvite_user[] = (object)$yesviteUserDetail;
-        }
+        // $yesvite_user = [];
+        // foreach ($yesvite_users as $user) {
+        //     if ($user->email_verified_at == NULL && $user->app_user == '1') {
+        //         continue;
+        //     }
+        //     $yesviteUserDetail = [
+        //         'id' => $user->id,
+        //         'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+        //         'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+        //         'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+        //         'email' => (!empty($user->email) || $user->email != null) ? $user->email : "",
+        //         'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+        //         'phone_number' => (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "",
+        //         'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+        //     ];
+        //     $yesvite_user[] = (object)$yesviteUserDetail;
+        // }
+
+                $yesvite_user = [];
+                $seenEmails = [];
+                $seenPhoneNumbers = [];
+
+                foreach ($yesvite_users as $user) {
+                    if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                        continue;
+                    }
+
+                    $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
+                    $phone_number = (!empty($user->phone_number) || $user->phone_number != null) ? $user->phone_number : "";
+
+                    $yesviteUserDetail = [
+                        'id' => $user->id,
+                        'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                        'firstname' => (!empty($user->firstname) || $user->firstname != null) ? $user->firstname : "",
+                        'lastname' => (!empty($user->lastname) || $user->lastname != null) ? $user->lastname : "",
+                        'email' => $email,
+                        'country_code' => (!empty($user->country_code) || $user->country_code != null) ? strval($user->country_code) : "",
+                        'phone_number' => $phone_number,
+                        'app_user' => (!empty($user->app_user) || $user->app_user != null) ? $user->app_user : "",
+                    ];
+
+                    if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
+                        continue;
+                    }
+
+                    if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
+                        continue;
+                    }
+
+                    $yesvite_user[] = (object)$yesviteUserDetail;
+
+                    if (!empty($email)) {
+                        $seenEmails[$email] = true;
+                    }
+                    if (!empty($phone_number)) {
+                        $seenPhoneNumbers[$phone_number] = true;
+                    }
+                }
+
+
 
         $selected_user = Session::get('user_ids');
 
