@@ -40,6 +40,8 @@
                     </svg>
                 </button>
             </div>
+            <button class="cmn-btn saveButton" id="saveButton">Save</button>
+
         </div>
         <div class="image-edit-section-wrp">
             <div class="image-edit-section-inner-wrp">
@@ -417,7 +419,7 @@
         </div>
 
            
-            <div class="footer-buttons">
+            <div class="footer-buttons d-none">
                 <button class="cmn-btn reset-btn">Reset</button>
                 <button class="cmn-btn saveButton">Save</button>
             </div>
@@ -473,7 +475,7 @@
                 </div>
             </div>
 
-            <div class="footer-buttons">
+            <div class="footer-buttons d-none">
                 <button class="cmn-btn edit-text-reset reset-btn">Reset</button>
                 <button class="cmn-btn edit-text-save save-btn">Save</button>
             </div>
@@ -512,7 +514,7 @@
             <!-- Color Picker -->
             <input id="color-picker" type="color" value="#276cb8" />
 
-            <div class="footer-buttons">
+            <div class="footer-buttons d-none">
                 <button class="cmn-btn reset-btn color-reset">Reset</button>
                 <button class="cmn-btn color-save color-save">Save</button>
             </div>
@@ -687,7 +689,7 @@
             </div>
 
 
-            <div class="footer-buttons">
+            <div class="footer-buttons d-none">
                 <button class="cmn-btn reset-btn formate-text-reset">Reset</button>
                 <button class="cmn-btn formate-text-save">Save</button>
             </div>
@@ -973,7 +975,7 @@
 
         </div>
 
-        <div class="footer-buttons">
+        <div class="footer-buttons d-none">
             <button class="cmn-btn saveButton" id="saveButton">Save</button>
         </div>
     </div>

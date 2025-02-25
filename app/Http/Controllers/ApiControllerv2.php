@@ -837,6 +837,7 @@ class ApiControllerv2 extends Controller
 
 
 
+
                         $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
                             $query->where('app_user', '1');

@@ -152,7 +152,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="general-wrap privacy-wrap m-0">
+                    {{-- <div class="general-wrap privacy-wrap m-0">
                         <h5 class="border-bottom pt-0">Privacy</h5>
                         <div class="radio-wrapper">
                             <div class="form-check d-flex align-items-center justify-content-between border-bottom">
@@ -174,8 +174,8 @@
                                 <input class="form-check-input visible" type="radio" name="visible" value="2" id="flexRadioDefault3" {{ ($user->visible == '2')?'checked':'' }}>
                             </div>
                         </div>
-                    </div>
-                    <div class="general-wrap mb-0">
+                    </div> --}}
+                    {{-- <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">About</h5>
                         <a href="#" class="d-flex align-items-center public-view border-bottom">
                             <h6>Do not sell my account</h6>
@@ -183,7 +183,7 @@
                                 <path d="M0.939941 12.2802L5.28661 7.93355C5.79994 7.42021 5.79994 6.58021 5.28661 6.06688L0.939941 1.72021" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="general-wrap mb-0">
                         <h5 class="border-bottom pt-0">PROFILE | MESSAGING PRIVACY</h5>
                         <a href="{{ route('profile.privacy')}}" class="d-flex align-items-center public-view border-bottom">

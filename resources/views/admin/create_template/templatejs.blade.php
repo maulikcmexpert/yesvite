@@ -6,6 +6,8 @@
             processing: true,
             serverSide: true,
 
+            pageLength: 25, // Set the initial number of records per page
+            lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
             // ajax: '{{URL::to("/admin/create_template")}}',
             // columns: [{
             //         data: "number",

@@ -2301,18 +2301,32 @@
                     })
                 })
                 .then(response => response.json())
+                // .then(data => {
+                //     console.log('Text data saved successfully', data);
+                //     Swal.fire({
+                //     title: "Save Successful",
+                //     text: "",
+                //     icon: "success",
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         // Redirect after clicking "OK"
+                //         window.location.href = "{{URL::to('/admin/create_template')}}";
+                //     }
+                // });
                 .then(data => {
                     console.log('Text data saved successfully', data);
                     Swal.fire({
-                    title: "Save Successful",
-                    text: "",
-                    icon: "success",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect after clicking "OK"
+                        title: "Save Successful",
+                        text: "",
+                        icon: "success",
+                        showConfirmButton: false, // Hide the OK button
+                        timer: 4000, // Auto-close after 4 seconds
+                        timerProgressBar: true, // Show a progress bar
+                    }).then(() => {
+                        // Redirect after 4 seconds
                         window.location.href = "{{URL::to('/admin/create_template')}}";
-                    }
-                });
+                    });
+
 
 
             // window.location.href = "{{URL::to('/admin/create_template')}}";

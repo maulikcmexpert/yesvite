@@ -105,6 +105,8 @@
 .edit-image-main-top {
     width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 .edit-image-main-top-icons {

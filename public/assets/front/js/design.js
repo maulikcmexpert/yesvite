@@ -580,7 +580,7 @@ $(document).on("click", ".close-btn", function () {
 });
 
 $(document).on("click", ".edit_design_tem", function (e) {
-    $("#close_createEvent").css("display", "none");
+    // $("#close_createEvent").css("display", "none");
     e.preventDefault();
     $("#loader").css("display", "flex");
     var eventID = $("#eventID").val();
