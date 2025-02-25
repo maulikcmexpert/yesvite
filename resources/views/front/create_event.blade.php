@@ -729,7 +729,7 @@
     </div>
     <div class="new-event-btn" style="display: flex;align-items:center;justify-content:center;padding: 0px 24px;gap: 10px;">
         <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form " style="margin: 20px 0px; width: 100%;">+ Add New</a>
-        <a href="#" class="cmn-btn " style="margin: 20px 0px; width: 100%;" onclick="toggleSidebar('')">+ Save</a>
+        <a href="#" class="cmn-btn " style="margin: 20px 0px; width: 100%;background-color: transparent;border: 1px solid var(--borderColor);color: var(--secondryColor);" onclick="toggleSidebar('')">+ Save</a>
     </div>
 </div>
 </div>
