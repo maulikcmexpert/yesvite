@@ -2496,6 +2496,10 @@ class EventController extends BaseController
         $emails = [];
         $selected_contact = Session::get('contact_ids');
         $selectedContactId = [];
+        if ($request->offset == 0) {
+            session()->forget('seen_emails');
+            session()->forget('seen_phones');
+        }
         if ($selected_contact != null &&  count($selected_contact) > 0) {
             $selectedContactId = array_column($selected_contact, 'sync_id');
         }
@@ -2522,6 +2526,7 @@ class EventController extends BaseController
             ->orderBy('firstName')  // Sorting by firstName
             ->get();
 
+
         //     dd(DB::getQueryLog());
         // dd($getAllContacts);
 
@@ -2538,30 +2543,39 @@ class EventController extends BaseController
         //     $yesvite_user[] = (object)$yesviteUserDetail;
         // }
         $yesvite_user = [];
-        $seenEmails = [];
-        $seenPhoneNumbers = [];
-
+        $seenEmails = Session::get('seenEmails', []);
+        $seenPhoneNumbers = Session::get('seenPhoneNumbers', []);
+        
         foreach ($getAllContacts as $user) {
-            $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
-            $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
-
+            if ($user->email_verified_at == NULL && $user->app_user == '1') {
+                continue;
+            }
+        
+            $email = (!empty($user->email)) ? $user->email : "";
+            $phone_number = (!empty($user->phone_number)) ? $user->phone_number : "";
+        
             $yesviteUserDetail = [
                 'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : $user->profile,
-                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
-                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
+                'firstname' => !empty($user->firstname) ? $user->firstname : "",
+                'lastname' => !empty($user->lastname) ? $user->lastname : "",
                 'email' => $email,
                 'phone_number' => $phone_number,
             ];
-
+        
+            // Check against stored session values
             if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
                 continue;
             }
+        
             if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
                 continue;
             }
+        
+            // Add to the result array
             $yesvite_user[] = (object)$yesviteUserDetail;
-
+        
+            // Store globally in session
             if (!empty($email)) {
                 $seenEmails[$email] = true;
             }
@@ -2569,6 +2583,11 @@ class EventController extends BaseController
                 $seenPhoneNumbers[$phone_number] = true;
             }
         }
+        
+        // Store the updated values in the session
+        Session::put('seenEmails', $seenEmails);
+        Session::put('seenPhoneNumbers', $seenPhoneNumbers);
+        
 
         $selected_user = Session::get('contact_ids');
         // dd($yesvite_user);
