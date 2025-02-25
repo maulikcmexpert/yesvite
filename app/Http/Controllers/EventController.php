@@ -2488,7 +2488,7 @@ class EventController extends BaseController
 
     public function getContacts(Request $request)
     {
-
+        dd($request);
 
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
