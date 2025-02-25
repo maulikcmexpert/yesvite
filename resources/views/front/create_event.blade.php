@@ -728,8 +728,8 @@
         </div>
     </div>
     <div class="new-event-btn" style="display: flex;align-items:center;justify-content:center;">
-        <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form ml-0 mr-0">+ Add New</a>
-        <a href="#" class="cmn-btn ml-0 mr-0" onclick="toggleSidebar('')">+ Save</a>
+        <a href="#" class="cmn-btn thankyou_card thankyou_card_add_form " style="margin: 20px 0px; width: 100%;">+ Add New</a>
+        <a href="#" class="cmn-btn " style="margin: 20px 0px; width: 100%;" onclick="toggleSidebar('')">+ Save</a>
     </div>
 </div>
 </div>
