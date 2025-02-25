@@ -3920,7 +3920,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
-        await saveDesignData();
+        await saveDesignData(true);
         design = eventData.desgin_selected;
     }
     $("#loader").css("display", "flex");
