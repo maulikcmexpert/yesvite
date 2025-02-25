@@ -1583,12 +1583,12 @@
 }
 
 .new-event-sidebar-wrp .credit-invite-pro-left{
-    width: 59%;
-    max-width: 59%;
+    width: 74%;
+    max-width: 74%;
 }
 .new-event-sidebar-wrp .coin-invite-main{
-    width: 41%;
-    max-width: 41%;
+    width: 35%;
+    max-width: 35%;
 }
 
 #sidebar_thankyou_card, #sidebar_add_thankyou_card, #sidebar_add_co_host, #sidebar_gift_registry, #sidebar_gift_registry_item,#sidebar_addcategory,#sidebar_editcategory,#sidebar_potluck,#sidebar_groups, #sidebar_invite_group_member, #sidebar_add_groups, #sidebar_add_group_member, #sidebar_list_group_member,#sidebar_see_all_invite{
