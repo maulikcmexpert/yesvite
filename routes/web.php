@@ -420,6 +420,8 @@ Route::controller(AuthController::class)->group(function () {
         Session::forget('notification_event_ids');
         Session::forget('add_guest_user_id');
         Session::forget('filterSession');
+        session()->forget('seen_emails');
+        session()->forget('seen_phone_numbers');
         Session::flush(); // removes all session data
 
         return redirect('login');
