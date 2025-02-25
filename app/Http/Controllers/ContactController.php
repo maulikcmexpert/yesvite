@@ -329,7 +329,7 @@ class ContactController extends Controller
         $yesvite_phone = [];
 
         // Reset session if offset is 0
-        if ($request->offset == 0) {
+        if ($request->offset == "0") {
             session()->forget('yesvite_seen_emails');
             session()->forget('yesvite_seen_phone_numbers');
         }
