@@ -3072,6 +3072,7 @@
     position: absolute;
     top: 10px;
     right: 40px;
+    font-weight: 500 !important;
 }
 
 .rsvp_minus_notify:disabled,
