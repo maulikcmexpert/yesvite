@@ -7519,9 +7519,8 @@ class ApiControllerv2 extends Controller
             $eventDetails['subscription_plan_name'] = $eventDetail->subscription_plan_name;
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
-            // $base_url = url('/');
-            $eventLink = route('rsvp', ['event_invited_user_id' => "8", 'eventId' => encrypt($eventDetails['event_id'])]);
-            dd($eventLink);
+            $base_url = url('/');
+            $eventLink = $base_url+'rsvp';
             $shortLink = createShortUrl($eventLink);
             $eventDetails['copy_link']=$shortLink;
 
