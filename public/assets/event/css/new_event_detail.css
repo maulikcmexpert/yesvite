@@ -118,15 +118,16 @@
     background: var(--white);
     height: 100%;
     position: relative;
+    
+}
+
+.main-content-sidebar .new-event-sidebar-wrp{
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     padding-bottom: 10px;
-}
-
-.main-content-sidebar .new-event-sidebar-wrp{
-    height: 100vh;
 }
 
 .new-event-sidebar-menu{
