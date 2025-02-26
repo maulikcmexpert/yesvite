@@ -59,6 +59,163 @@ $(document).ready(function () {
     $(document).on("click", ".overlay", function () {
         toggleSidebar();
     });
+    function clearError(input = null) {
+        if (input == null) {
+            return;
+        }
+        $("#event-type-error").text("");
+        $("#event-name-error").text("");
+        $("#event-host-error").text("");
+        $("#start_event-date-error").text("");
+        $("#event-rsvpby-error").text("");
+        $("#event-start_time-error").text("");
+        $("#end-time-error").text("");
+        $("#event-address1-error").text("");
+        $("#event-city-error").text("");
+        $("#event-state-error").text("");
+        $("#event-zipcode-error").text("");
+    
+        // var recipient_name = $("#recipient_name").val().trim();
+        // var registry_link = $("#registry_link").val();
+        // if (recipient_name != "") {
+        //     $("#recipient_name_error").text("");
+        // } else {
+        //     $("#recipient_name_error")
+        //         .text("Please add recipients name")
+        //         .css("color", "red");
+        // }
+    
+        const id = input.id;
+    
+        switch (id) {
+            case "thankyou_templatename":
+                var templatename = input.value;
+                if (templatename === "") {
+                    $("#template_name_error")
+                        .text("Please add template name")
+                        .css("color", "red");
+                } else {
+                    $("#template_name_error").text("");
+                }
+                break;
+    
+            case "thankyou_when_to_send":
+                var when_to_send = input.value;
+                if (when_to_send === "") {
+                    $("#when_to_send_error")
+                        .text("Please time when to send message")
+                        .css("color", "red");
+                } else {
+                    $("#when_to_send_error").text("");
+                }
+                break;
+    
+            case "message_for_thankyou":
+                var message_to_send = input.value;
+                if (message_to_send === "") {
+                    $("#thankyou_message_error")
+                        .text("Please add a thankyou message")
+                        .css("color", "red");
+                } else {
+                    $("#thankyou_message_error").text("");
+                }
+                break;
+    
+            case "recipient_name":
+                var recipient_name = input.value;
+                if (recipient_name === "") {
+                    $("#recipient_name_error")
+                        .text("Please add recipients name")
+                        .css("color", "red");
+                    $(".recipient-name-con").text("0/30");
+                } else {
+                    var recipient_length = recipient_name.length;
+                    $("#recipient_name_error").text("");
+                    $(".recipient-name-con").text(recipient_length + "/30");
+                }
+                break;
+    
+            case "new_group_name":
+                var groupname = input.value;
+                if (groupname === "") {
+                    $("#group_name_error")
+                        .text("Please enter group name")
+                        .css("color", "red");
+                } else {
+                    $("#group_name_error").text("");
+                }
+                break;
+    
+            case "categoryName":
+                var groupname = input.value;
+                if (groupname === "") {
+                    $("#categoryNameError")
+                        .text("Please enter category name")
+                        .css("color", "red");
+                    $(".pot-cate-name").text("0/30");
+                } else {
+                    cateLength = groupname.length;
+                    $("#categoryNameError").text("");
+                    $(".pot-cate-name").text(cateLength + "/30");
+                }
+                break;
+    
+            // case "item_name":
+            //     var itemname = input.value;
+            //     if (itemname === "") {
+            //         $("#item_name_error")
+            //             .text("Please enter description.")
+            //             .css("color", "red");
+            //         $('.sub-cat-pot').text('0/30');
+            //     } else {
+            //         itemLength = itemname.length;
+            //         $("#item_name_error").text("");
+            //         // $('.sub-cat-pot').text(itemLength+'/30');
+            //     }
+            //     break;
+    
+            case "item_name":
+                var groupname = input.value;
+                if (groupname === "") {
+                    $("#item_name_error")
+                        .text("Please enter item name")
+                        .css("color", "red");
+                    $(".sub-cat-pot").text("0/30");
+                } else {
+                    cateLength = groupname.length;
+                    $("#item_name_error").text("");
+                    $(".sub-cat-pot").text(cateLength + "/30");
+                }
+                break;
+    
+            // Add cases for other fields as needed
+        }
+    
+        // var templatename=$('#thankyou_templatename').val();
+        // var when_to_send=$('#thankyou_when_to_send').val();
+        // var message_to_send=$('#message_for_thankyou').val();
+    
+        // if (templatename != ""||when_to_send!=""||message_to_send!="") {
+        //     $("#template_name_error").text("");
+        //     $("#when_to_send_error").text("");
+        //     $("#thankyou_message_error").text("");
+        // } else {
+        //     $("#template_name_error").text("Please add template name").css('color','red');
+        //     $("#when_to_send_error").text("Please time when to send message").css('color','red');
+        //     $("#thankyou_message_error").text("Please add a thankyou message").css('color','red');
+        // }
+    
+        // if (registry_link != "") {
+        //     $("#registry_link_error").text("");
+        //     var validurl = validateURL(registry_link);
+        //     if (validurl) {
+        //         $("#registry_link_error").text("");
+        //     } else {
+        //         $("#registry_link_error").text("Please enter an valid url");
+        //     }
+        // }
+    }
+    
     function toggleSidebar(id = null) {
         console.log(id);
         if (id == "sidebar_add_co_host") {
