@@ -909,7 +909,7 @@
             </div>
             <div class="guest-group-name">
                 <div class="user-contacts" id="groupUsers">
-                    {{-- @php
+                    @php
                         $i = 0;
                     @endphp
                     @foreach ($yesvite_user as $user)
@@ -984,7 +984,7 @@
                 @endif
             </div>
         </div>
-        @endforeach --}}
+        @endforeach
                 </div>
             </div>
         </div>
