@@ -700,12 +700,18 @@ async function bindData(current_event_id) {
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-
+                console.log(scaleFactor);
+                console.log(img.width);
+                console.log(img.height);
+                console.log((canvasWidth - img.width * scaleFactor) / 2);
+                console.log((canvasHeight - img.height * scaleFactor) / 2);
                 img.set({
-                    left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
-                    top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
-                    scaleX: scaleFactor,
-                    scaleY: scaleFactor,
+                    // left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
+                    // top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
+                    // scaleX: scaleFactor,
+                    // scaleY: scaleFactor,
+                    scaleX: width / img.width,
+                    scaleY: height / img.height,
                     selectable: false,
                     hasControls: false,
                 });
