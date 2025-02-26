@@ -616,6 +616,10 @@
     max-width: 35%;
 }
 
+.step_3 .coin-invite-wrp .coin-invite-wrp-inner{
+    display: inline-block !important;
+}
+
 /* ============ responsive ============ */
 
 
