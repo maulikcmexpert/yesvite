@@ -1900,6 +1900,9 @@
         height: 900px;
         margin: 0px auto;
     }
+    .main-content-sidebar .new-event-sidebar-wrp, .edit-imag-main-content-wrp {
+        height: calc(100vh - 96px) !important;
+    }
 }
 
 
