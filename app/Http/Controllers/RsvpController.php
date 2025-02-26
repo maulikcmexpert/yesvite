@@ -592,7 +592,8 @@ class RsvpController extends BaseController
                 'user_firstname',
                 'user_lastname',
                 'is_host',
-                'event_invited_user_id'
+                'event_invited_user_id',
+                'isShare'
             ));
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
@@ -641,7 +642,7 @@ class RsvpController extends BaseController
             $sync_id = "";
         }
 
-        dd($sync_id,$userId);
+        // dd($sync_id,$userId);
 
 
 
