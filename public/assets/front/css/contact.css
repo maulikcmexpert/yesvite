@@ -933,6 +933,17 @@ input[type="search"]~span {
     opacity: 1;
     visibility: visible;
 }
+.guest-group-name {
+    border: none;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100%;
+    border-radius: 0;
+}
+
+.new-group-name-wrp {
+    border: none !important;
+}
 
 
 /* ======= Responsive ======= */
