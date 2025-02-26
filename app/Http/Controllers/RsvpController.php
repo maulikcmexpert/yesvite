@@ -620,6 +620,7 @@ class RsvpController extends BaseController
         }
 
 
+        dd($userId,$sync_id);
 
 
         $kids = (isset($request->kids) && $request->kids) ? (int)$request->kids : 0;
