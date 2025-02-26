@@ -7520,9 +7520,9 @@ class ApiControllerv2 extends Controller
             $eventDetails['hosted_by'] = $eventDetail->hosted_by;
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             // $base_url = url('/');
-            // $eventLink = route('rsvp', ['event_invited_user_id' => "", 'eventId' => encrypt($eventDetails['event_id'])]);
-            // $shortLink = createShortUrl($eventLink);
-            // $eventDetails['copy_link']=$shortLink;
+            $eventLink = route('rsvp', ['event_invited_user_id' => "8", 'eventId' => encrypt($eventDetails['event_id'])]);
+            $shortLink = createShortUrl($eventLink);
+            $eventDetails['copy_link']=$shortLink;
 
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
             $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
