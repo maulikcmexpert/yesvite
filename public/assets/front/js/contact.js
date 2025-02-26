@@ -21,6 +21,9 @@ $(document).ready(function () {
         // $("search_user").val("");
         toggleSidebar('');
     });
+    $(document).on("click", ".overlay", function () {
+        toggleSidebar();
+    });
     function toggleSidebar(id = null) {
         console.log(id);
         if (id == "sidebar_add_co_host") {
