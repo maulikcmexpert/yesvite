@@ -8205,7 +8205,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->user)) {
+                    if (!empty($value->user)|| (!empty($value->user->id))) {
                         $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
                         $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                     } else {
@@ -8380,7 +8380,7 @@ class ApiControllerv2 extends Controller
                     
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->user)) {
+                    if (!empty($value->user)|| (!empty($value->user->id))) {
                         $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
                         $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                     } else {
