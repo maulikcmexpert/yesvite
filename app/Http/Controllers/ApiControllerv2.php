@@ -8205,13 +8205,15 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->user)|| (!empty($value->user->id))) {
-                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    if (empty($value->user)|| (empty($value->user->id))) {
+             
+                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
+                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
                     } else {
                         // Handle case where user is still not found
-                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;;
-                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);;
+                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+
                     }
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
@@ -8380,13 +8382,15 @@ class ApiControllerv2 extends Controller
                     
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->user)|| (!empty($value->user->id))) {
-                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
-                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    if (empty($value->user)|| (empty($value->user->id))) {
+             
+                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
+                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
                     } else {
                         // Handle case where user is still not found
-                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;;
-                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);;
+                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+
                     }
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
