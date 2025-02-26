@@ -1739,8 +1739,9 @@
     }
 
     .image-edit-inner-img {
-        width: 800px;
-        height: 1200px;
+        width: 100%;
+        max-width: 1300px;
+        height: 1800px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
