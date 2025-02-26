@@ -950,12 +950,21 @@ class RsvpController extends BaseController
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
+                    if($shared==""){
                     return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
+                    }else{
+                        return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg', 'You are going to this event');
+                    }
                     // return redirect()->to($url)->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
-                    // return redirect()->to($url)->with('msg', 'You are going to this event');
+                    if($shared==""){
 
+                    return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
+                    }else{
+                        return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg', 'You declined to go to this event');
+
+                    }
+                    // return redirect()->to($url)->with('msg', 'You are going to this event');
                 }
             }
             if($shared==""){
