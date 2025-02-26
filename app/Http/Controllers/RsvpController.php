@@ -884,7 +884,7 @@ class RsvpController extends BaseController
                         }
                     }
                 }
-               
+               dd(1);
                 if ($request->rsvp_status == "0") {
                     if($request->isShare==""){
                         if ($sync_id != "" || $sync_id != null) {
