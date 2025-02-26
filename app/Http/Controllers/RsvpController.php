@@ -692,27 +692,31 @@ class RsvpController extends BaseController
                     $newUserId = $user->id;
                     $userType = 'user';
                 } else {
-                    $newContact = contact_sync::create([
-                        'firtsName'=>$request->firstname,
-                        'lastName'=>$request->lastname,
-                        'photo'=>"",
-                        'isAppUser'=>'0',
-                        'visible'=>'0',
-                        'preferBy'=>'email',
-                        'email' => $email,
-                        'app_user' => '0', 
-                        'created_at'=>now(),
-                        'updated_at'=>now()
-                    ]);
+                    $newContact = new contact_sync();
+                    $newContact->firtsName = $request->firstname;
+                    $newContact->lastName = $request->lastname;
+                    $newContact->photo = "";
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = 'email';
+                    $newContact->email = $email;
+                    $newContact->app_user = '0';
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
+
+
+
                     $newUserId = $newContact->id;
                     $userType = 'sync';
                 }
-                $invitedUser = EventInvitedUser::create([
-                    'event_id' => $eventId,
-                    'user_id' => ($userType == 'user') ? $newUserId : null, 
-                    'sync_id' => ($userType == 'sync') ? $newUserId : null, 
-                    'prefer_by' => 'email',
-                ]);
+                $invitedUser = new EventInvitedUser();
+                $invitedUser->event_id = $eventId;
+                $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
+                $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                $invitedUser->prefer_by = 'email';                
+                $invitedUser->save();
+                            
                 
                 $invitedUserId = $invitedUser->id;
 
