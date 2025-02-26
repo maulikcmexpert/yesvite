@@ -2497,6 +2497,22 @@
         let undoStack = [];
         let redoStack = [];
         let isAddingToUndoStack = 0;
+
+        $(document).keydown(function (e) {
+        // Check if Ctrl (or Cmd for Mac) is pressed
+        if (e.ctrlKey || e.metaKey) {
+            if (e.key === "z" || e.keyCode === 90) {
+                // Ctrl + Z -> Undo
+                e.preventDefault();
+                undo(); // Call your undo function
+            } else if (e.key === "y" || e.keyCode === 89) {
+                // Ctrl + Y -> Redo
+                e.preventDefault();
+                redo(); // Call your redo function
+            }
+        }
+    });
+
         function addToUndoStack(canvas) {
             undoStack.push(canvas.toJSON());
             if (undoStack.length > 0) {
