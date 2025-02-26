@@ -8153,7 +8153,7 @@ class ApiControllerv2 extends Controller
                     // }
                     if (empty($value->user) || empty($value->user->id)) {
                         if (!empty($value->sync_id)) {
-                            $syncUser = User::where('sync_id', $value->sync_id)->first();
+                            $syncUser = contact_sync::where('sync_id', $value->sync_id)->first();
                             if ($syncUser) {
                                 $value->user = $syncUser; // Assign the found user
                             } else {
@@ -8311,7 +8311,7 @@ class ApiControllerv2 extends Controller
                     // }
                     if (empty($value->user) || empty($value->user->id)) {
                         if (!empty($value->sync_id)) {
-                            $syncUser = User::where('sync_id', $value->sync_id)->first();
+                            $syncUser = contact_sync::where('sync_id', $value->sync_id)->first();
                             if ($syncUser) {
                                 $value->user = $syncUser; // Assign the found user
                             } else {
