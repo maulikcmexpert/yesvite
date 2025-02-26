@@ -944,6 +944,13 @@ input[type="search"]~span {
 .new-group-name-wrp {
     border: none !important;
 }
+.guest-group-name #groupUsers {
+    max-height: calc(100vh - 200px);
+}
+.user-contacts {
+    /* max-height: 430px; */
+    overflow-y: scroll;
+}
 
 
 /* ======= Responsive ======= */
