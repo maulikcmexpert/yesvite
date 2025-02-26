@@ -802,7 +802,7 @@ class RsvpController extends BaseController
                            
                         })
                         ->where('post_type', '4')->delete();
-                        dd(1);
+                        // dd(1);
                     $postMessage = [];
                     $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
