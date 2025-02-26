@@ -8885,7 +8885,7 @@ class ApiControllerv2 extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-        // try {
+        try {
 
         $eventDetails = EventPost::with('user','contact_sync','post_control')->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
@@ -9200,12 +9200,12 @@ class ApiControllerv2 extends Controller
         } else {
             return response()->json(['status' => 0, 'message' => "No data found"]);
         }
-        // } catch (QueryException $e) {
-        //     DB::rollBack();
-        //     return response()->json(['status' => 0, 'message' => "db error"]);
-        // } catch (\Exception $e) {
-        //     return response()->json(['status' => 0, 'message' => "something went wrong"]);
-        // }
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 0, 'message' => "something went wrong"]);
+        }
     }
 
 
