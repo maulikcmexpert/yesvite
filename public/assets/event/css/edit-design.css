@@ -121,7 +121,7 @@
     border-bottom: 1px solid var(--headerBorder);
     overflow: hidden;
     overflow-y: scroll;
-    max-height: calc(100vh - 174px);
+    max-height: calc(100vh - 100px);
     padding: 0px 24px 0px 24px;
 }
 
