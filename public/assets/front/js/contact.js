@@ -21,6 +21,10 @@ $(document).ready(function () {
         // $("search_user").val("");
         toggleSidebar("sidebar_add_groups");
     });
+    $(document).on("click", ".add_new_group", function () {
+        // $("search_user").val("");
+        toggleSidebar("sidebar_add_group_member");
+    });
 
     $(document).on("click", ".group_toggle_close_btn", function () {
         // $("search_user").val("");
