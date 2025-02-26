@@ -2180,7 +2180,7 @@
         height: 400px;
         margin: 0px auto;
     }
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
