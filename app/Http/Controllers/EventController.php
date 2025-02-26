@@ -3062,6 +3062,10 @@ class EventController extends BaseController
     {
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
+        $isGroup="";
+        if(isset($request->isGroup)&&$request->isGroup){
+            $isGroup=1;
+        }
         $groups = Group::withCount('groupMembers')
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
@@ -3071,7 +3075,7 @@ class EventController extends BaseController
                 });
             })
             ->get();
-        return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups'))->render(), "status" => "1"]);
+        return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups','isGroup'))->render(), "status" => "1"]);
     }
 
     public function delete_sessions(Request $request)

@@ -26,6 +26,9 @@ $(document).ready(function () {
         toggleSidebar("sidebar_add_groups");
 
     });
+    $(document).on("click", ".group_toggle_close_btn", function () {
+        toggleSidebar("sidebar_groups");
+    });
     $(document).on("click", ".add_new_group", function () {
         var group_name = $("#new_group_name").val();
         NogroupData = false;
@@ -39,12 +42,93 @@ $(document).ready(function () {
             $("#group_name_error").css("display", "none");
             toggleSidebar("sidebar_add_group_member");
             var type = "group";
-            get_user(type);
         }
+    });
+    $("#new_group_name").on("input", function (e) {
+        var groupname=$(this).val();
+        if (groupname === "")
+             {
+                  $("#group_name_error")
+                  .text("Please enter group name")
+                  .css("color", "red");
+             } else {
+                   $("#group_name_error").text("");
+            }
     });
     $("#new_group_name").on("keydown", function (e) {
         if (e.key === "Enter" || e.keyCode === 13) {
             e.preventDefault(); // Prevents the default action of submitting the form or adding a new line
+        }
+    });
+
+    $(document).on("click", ".add_new_group_member", function () {
+        var group_name = $("#new_group_name").val();
+        var selectedValues = [];
+        $("#groupUsers .user_group_member:checked").each(function () {
+            selectedValues.push({
+                id: $(this).val(),
+                prefer_by: $(this).data("preferby"),
+            });
+        });
+        if (selectedValues.length > 0) {
+            $.ajax({
+                url: base_url + "event/add_new_group",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    groupmember: selectedValues,
+                    groupname: group_name,
+                },
+                success: function (response) {
+                    if (response.status == "1") {
+                        if (response.status == 401 && response.info == "logout") {
+                            window.location.href = "/"; // Redirect to home page
+                            return;
+                        }
+                        window.location.reload();
+                        // var grplth = $(".group_list .listgroups").length;
+                        // if (grplth == 0) {
+                        //     $(".group_list").html("");
+                        // }
+                        // $(".group_list").append(response.view);
+    
+                        // // var newItem = `
+                        // //     <div class="swiper-slide">
+                        // //         <div class="group-card view_members" data-id="${response.data.group_id}">
+                        // //             <div>
+                        // //                 <h4>${response.data.groupname}</h4>
+                        // //                 <p>${response.data.member_count} Guests</p>
+                        // //             </div>
+                        // //             <span class="ms-auto">
+                        // //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        // //                     <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        // //                 </svg>
+                        // //             </span>
+                        // //         </div>
+                        // //     </div>
+                        // // `;
+    
+                        // // swiper[0].appendSlide(newItem);
+                        // // swiper[0].update(); // Update Swiper after adding the new slide
+                        // // swiper[1].appendSlide(newItem);
+                        // // swiper[1].update(); // Update Swiper after adding the new slide
+                        // // swiper[2].appendSlide(newItem);
+                        // // swiper[2].update(); // Update Swiper after adding the new slide
+    
+                        // $(".user_choice_group .user_choice").prop("checked", false);
+                        // toggleSidebar("sidebar_groups");
+                        // groupToggleSearch("");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX error: " + error);
+                    toastr.error(error);
+                },
+            });
+        } else {
+            toastr.error("Please select Member");
         }
     });
     // $(document).on("click", ".add_new_group", function () {
@@ -59,161 +143,52 @@ $(document).ready(function () {
     $(document).on("click", ".overlay", function () {
         toggleSidebar();
     });
-    function clearError(input = null) {
-        if (input == null) {
-            return;
+    $(document).on("keyup", "#group_toggle_search", function () {
+        var search_name = $(this).val();
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(function () {
+        groupToggleSearch(search_name);
+    }, 1000);
+
+    });
+    function groupToggleSearch(search_name = null) {
+        if (search_name == null) {
+            search_name = "";
         }
-        $("#event-type-error").text("");
-        $("#event-name-error").text("");
-        $("#event-host-error").text("");
-        $("#start_event-date-error").text("");
-        $("#event-rsvpby-error").text("");
-        $("#event-start_time-error").text("");
-        $("#end-time-error").text("");
-        $("#event-address1-error").text("");
-        $("#event-city-error").text("");
-        $("#event-state-error").text("");
-        $("#event-zipcode-error").text("");
-    
-        // var recipient_name = $("#recipient_name").val().trim();
-        // var registry_link = $("#registry_link").val();
-        // if (recipient_name != "") {
-        //     $("#recipient_name_error").text("");
-        // } else {
-        //     $("#recipient_name_error")
-        //         .text("Please add recipients name")
-        //         .css("color", "red");
-        // }
-    
-        const id = input.id;
-    
-        switch (id) {
-            case "thankyou_templatename":
-                var templatename = input.value;
-                if (templatename === "") {
-                    $("#template_name_error")
-                        .text("Please add template name")
-                        .css("color", "red");
-                } else {
-                    $("#template_name_error").text("");
+        $.ajax({
+            url: base_url + "event/group_toggle_search",
+            type: "POST",
+            data: {
+                search_name: search_name,
+                isGroup:1,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+            },
+            beforeSend: function () {
+                $("#home_loader").css("display", "flex");
+            },
+        })
+            .done(function (data) {
+                console.log(data.html);
+                if (data.status == 401 && data.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
+                    return;
                 }
-                break;
-    
-            case "thankyou_when_to_send":
-                var when_to_send = input.value;
-                if (when_to_send === "") {
-                    $("#when_to_send_error")
-                        .text("Please time when to send message")
-                        .css("color", "red");
-                } else {
-                    $("#when_to_send_error").text("");
+                if (data.html == " ") {
+                    $("#loader").html("No more contacts found");
+                    $("#home_loader").hide();
+
+                    return;
                 }
-                break;
-    
-            case "message_for_thankyou":
-                var message_to_send = input.value;
-                if (message_to_send === "") {
-                    $("#thankyou_message_error")
-                        .text("Please add a thankyou message")
-                        .css("color", "red");
-                } else {
-                    $("#thankyou_message_error").text("");
-                }
-                break;
-    
-            case "recipient_name":
-                var recipient_name = input.value;
-                if (recipient_name === "") {
-                    $("#recipient_name_error")
-                        .text("Please add recipients name")
-                        .css("color", "red");
-                    $(".recipient-name-con").text("0/30");
-                } else {
-                    var recipient_length = recipient_name.length;
-                    $("#recipient_name_error").text("");
-                    $(".recipient-name-con").text(recipient_length + "/30");
-                }
-                break;
-    
-            case "new_group_name":
-                var groupname = input.value;
-                if (groupname === "") {
-                    $("#group_name_error")
-                        .text("Please enter group name")
-                        .css("color", "red");
-                } else {
-                    $("#group_name_error").text("");
-                }
-                break;
-    
-            case "categoryName":
-                var groupname = input.value;
-                if (groupname === "") {
-                    $("#categoryNameError")
-                        .text("Please enter category name")
-                        .css("color", "red");
-                    $(".pot-cate-name").text("0/30");
-                } else {
-                    cateLength = groupname.length;
-                    $("#categoryNameError").text("");
-                    $(".pot-cate-name").text(cateLength + "/30");
-                }
-                break;
-    
-            // case "item_name":
-            //     var itemname = input.value;
-            //     if (itemname === "") {
-            //         $("#item_name_error")
-            //             .text("Please enter description.")
-            //             .css("color", "red");
-            //         $('.sub-cat-pot').text('0/30');
-            //     } else {
-            //         itemLength = itemname.length;
-            //         $("#item_name_error").text("");
-            //         // $('.sub-cat-pot').text(itemLength+'/30');
-            //     }
-            //     break;
-    
-            case "item_name":
-                var groupname = input.value;
-                if (groupname === "") {
-                    $("#item_name_error")
-                        .text("Please enter item name")
-                        .css("color", "red");
-                    $(".sub-cat-pot").text("0/30");
-                } else {
-                    cateLength = groupname.length;
-                    $("#item_name_error").text("");
-                    $(".sub-cat-pot").text(cateLength + "/30");
-                }
-                break;
-    
-            // Add cases for other fields as needed
-        }
-    
-        // var templatename=$('#thankyou_templatename').val();
-        // var when_to_send=$('#thankyou_when_to_send').val();
-        // var message_to_send=$('#message_for_thankyou').val();
-    
-        // if (templatename != ""||when_to_send!=""||message_to_send!="") {
-        //     $("#template_name_error").text("");
-        //     $("#when_to_send_error").text("");
-        //     $("#thankyou_message_error").text("");
-        // } else {
-        //     $("#template_name_error").text("Please add template name").css('color','red');
-        //     $("#when_to_send_error").text("Please time when to send message").css('color','red');
-        //     $("#thankyou_message_error").text("Please add a thankyou message").css('color','red');
-        // }
-    
-        // if (registry_link != "") {
-        //     $("#registry_link_error").text("");
-        //     var validurl = validateURL(registry_link);
-        //     if (validurl) {
-        //         $("#registry_link_error").text("");
-        //     } else {
-        //         $("#registry_link_error").text("Please enter an valid url");
-        //     }
-        // }
+                $("#home_loader").hide();
+                $(".group_search_list_toggle").html(data.html);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+                $("#home_loader").hide();
+
+            });
     }
     
     function toggleSidebar(id = null) {

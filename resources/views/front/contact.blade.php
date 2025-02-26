@@ -760,7 +760,7 @@
             </span>
         </div>
         <div class="group_list group_search_list_toggle">
-            @foreach ($groups as $group)
+            @foreach ($allgroups as $group)
                 <div class="group-card added_group{{ $group->id }} listgroups view_members"
                     data-id="{{ $group->id }}">
                     <div class="view_members" data-id="{{ $group->id }}">
@@ -845,7 +845,7 @@
                 <form action="">
                     <div class="input-form">
                         <input class="form-control" type="text" id="new_group_name"
-                            oninput="clearError(this)" name="new_group_name">
+                             name="new_group_name">
                         <label for="email" class="floating-label">Group Name <span>*</span></label>
                     </div>
                     <label for="new_group_name" id="group_name_error"></label>
