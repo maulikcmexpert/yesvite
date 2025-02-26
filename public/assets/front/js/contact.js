@@ -42,6 +42,11 @@ $(document).ready(function () {
             get_user(type);
         }
     });
+    $("#new_group_name").on("keydown", function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+            e.preventDefault(); // Prevents the default action of submitting the form or adding a new line
+        }
+    });
     // $(document).on("click", ".add_new_group", function () {
     //     // $("search_user").val("");
     //     toggleSidebar("sidebar_add_group_member");
