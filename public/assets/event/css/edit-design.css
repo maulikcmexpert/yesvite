@@ -1909,6 +1909,10 @@
     .edit-imag-main-content-wrp .choose-design-sidebar{
         height: calc(100vh - 96px) !important;
     }
+    .common-font-wrp {
+        max-height: calc(100vh - 200px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 
