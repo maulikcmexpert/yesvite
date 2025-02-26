@@ -7521,6 +7521,7 @@ class ApiControllerv2 extends Controller
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
             // $base_url = url('/');
             $eventLink = route('rsvp', ['event_invited_user_id' => "8", 'eventId' => encrypt($eventDetails['event_id'])]);
+            dd($eventLink);
             $shortLink = createShortUrl($eventLink);
             $eventDetails['copy_link']=$shortLink;
 
