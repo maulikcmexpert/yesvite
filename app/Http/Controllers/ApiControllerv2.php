@@ -7523,8 +7523,8 @@ class ApiControllerv2 extends Controller
             $eventLink = url('/rsvp/' . encrypt($eventDetail->user_id) . '/' .encrypt($eventDetail->id));
 
             // $eventLink = $base_url;
-            // $shortLink = createShortUrl($eventLink);
-            $eventDetails['copy_link']=$eventLink;
+            $shortLink = createShortUrl($eventLink);
+            $eventDetails['copy_link']=$shortLink;
 
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
             $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
