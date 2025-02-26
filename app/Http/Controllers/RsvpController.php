@@ -629,7 +629,12 @@ class RsvpController extends BaseController
         }
         $eventId = decrypt($request->event_id);
         $email = $request->email;
-        $event_invited_user_id = decrypt($request->event_invited_user_id);
+        if ($request->event_invited_user_id != ""||$request->event_invited_user_id!=null) {
+            $event_invited_user_id = decrypt($request->event_invited_user_id);
+        } else {
+            $event_invited_user_id = "";
+        }
+        // $event_invited_user_id = decrypt($request->event_invited_user_id);
         if ($request->input('sync_id') != ""||$request->input('sync_id') != null) {
             $sync_id = decrypt($request->input('sync_id'));
         } else {
