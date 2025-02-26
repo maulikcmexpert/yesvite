@@ -919,7 +919,18 @@
                         <div class="users-data">
                             <div class="d-flex align-items-start">
                                 <div class="contact-img">
-                                    <img src="{{ asset('assets/event/image/user-img.svg') }}" alt="contact-img">
+                                    {{-- <img src="{{ asset('assets/event/image/user-img.svg') }}" alt="contact-img"> --}}
+                                    @if ($user->profile != '')
+                                    <img src="{{$user->profile}}" alt="user-img">
+                                    @else
+                                    @php
+                                    $firstInitial = !empty($user->firstname) ? strtoupper($user->firstname[0]) : '';
+                                    $lastInitial = !empty($user->lastname) ? strtoupper($user->lastname[0]) : '';
+                                    $initials = $firstInitial . $lastInitial;
+                                    $fontColor = 'fontcolor' . $firstInitial;
+                                    @endphp
+                                    <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                    @endif
 
                 </div>
                 <div class="text-start">
