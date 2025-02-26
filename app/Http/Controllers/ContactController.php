@@ -211,7 +211,7 @@ class ContactController extends Controller
             }else{
                 if($searchName!=''){
                     return response()->json([
-                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'search' =>'1',
                         'status' => '1',
                     ]);
