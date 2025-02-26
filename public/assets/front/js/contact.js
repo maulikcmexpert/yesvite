@@ -20,6 +20,7 @@ $(document).ready(function () {
     $(document).on("click", ".new_group", function () {
         // $("search_user").val("");
         toggleSidebar("sidebar_add_groups");
+
     });
     $(document).on("click", ".add_new_group", function () {
         // $("search_user").val("");
