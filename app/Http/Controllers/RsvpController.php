@@ -620,9 +620,9 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
-        dd($request);
+        // dd($request);
         // $userId = decrypt($request->user_id);
-        if ($request->input('user_id') != "") {
+        if ($request->input('user_id') != ""||$request->input('user_id')!=null) {
             $userId = decrypt($request->user_id);
         } else {
             $userId = "";
@@ -630,13 +630,13 @@ class RsvpController extends BaseController
         $eventId = decrypt($request->event_id);
         $email = $request->email;
         $event_invited_user_id = decrypt($request->event_invited_user_id);
-        if ($request->input('sync_id') != "") {
+        if ($request->input('sync_id') != ""||$request->input('sync_id') != null) {
             $sync_id = decrypt($request->input('sync_id'));
         } else {
             $sync_id = "";
         }
 
-        // dd($sync_id,$userId);
+        dd($sync_id,$userId);
 
 
 
