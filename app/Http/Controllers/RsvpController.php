@@ -811,7 +811,7 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    if($request->isShare==""){
+                    if($shared==""){
                         if ($request->input('user_id') != "") {
                             $creatEventPost->user_id =  $userId;
                         } else {
@@ -850,38 +850,41 @@ class RsvpController extends BaseController
                 //     }
                 // }
 
-                if ($userId != "" || $userId != null) {
-                    if (!empty($request->input('notifications'))) {
-                        foreach ($request->input('notifications') as $value) {
-                            if ($value == "wall_post") {
-                                $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId]);
-                                if ($updateNotification) {
-                                    $updateNotification->update(['push' => '1']);
-                                    $updateNotifications = UserNotificationType::where('user_id', $userId)->whereNot('type', 'wall_post');
-                                    $updateNotifications->update(['push' => '0']);
-                                }
-                            } elseif ($value == "guest_rsvp") {
-                                $updateNotification = UserNotificationType::where(['type' => 'guest_rsvp', 'user_id' => $userId]);
-                                if ($updateNotification) {
-                                    $updateNotification->update(['push' => '1']);
-                                    $updateNotification = UserNotificationType::where('user_id', $userId)->whereNot('type', 'guest_rsvp');
-                                    $updateNotification->update(['push' => '0']);
-                                }
-                            } elseif ($value == "1") {
-                                $updateNotifications = UserNotificationType::where('user_id', $userId);
-                                if ($updateNotifications) {
-                                    $updateNotifications->update(['push' => '1']);
+                if($shared==""){
+                    if ($userId != "" || $userId != null) {
+                        if (!empty($request->input('notifications'))) {
+                            foreach ($request->input('notifications') as $value) {
+                                if ($value == "wall_post") {
+                                    $updateNotification = UserNotificationType::where(['type' => 'wall_post', 'user_id' => $userId]);
+                                    if ($updateNotification) {
+                                        $updateNotification->update(['push' => '1']);
+                                        $updateNotifications = UserNotificationType::where('user_id', $userId)->whereNot('type', 'wall_post');
+                                        $updateNotifications->update(['push' => '0']);
+                                    }
+                                } elseif ($value == "guest_rsvp") {
+                                    $updateNotification = UserNotificationType::where(['type' => 'guest_rsvp', 'user_id' => $userId]);
+                                    if ($updateNotification) {
+                                        $updateNotification->update(['push' => '1']);
+                                        $updateNotification = UserNotificationType::where('user_id', $userId)->whereNot('type', 'guest_rsvp');
+                                        $updateNotification->update(['push' => '0']);
+                                    }
+                                } elseif ($value == "1") {
+                                    $updateNotifications = UserNotificationType::where('user_id', $userId);
+                                    if ($updateNotifications) {
+                                        $updateNotifications->update(['push' => '1']);
+                                    }
                                 }
                             }
-                        }
-                    } else {
-                        $updateUser = EventInvitedUser::where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-                        if ($updateUser != null) {
-                            $updateUser->notification_on_off = "0";
-                            $updateUser->save();
+                        } else {
+                            $updateUser = EventInvitedUser::where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
+                            if ($updateUser != null) {
+                                $updateUser->notification_on_off = "0";
+                                $updateUser->save();
+                            }
                         }
                     }
                 }
+               
                 if ($request->rsvp_status == "0") {
                     if($request->isShare==""){
                         if ($sync_id != "" || $sync_id != null) {
