@@ -1032,7 +1032,7 @@
                                         let textElement = new fabric.Textbox(element.text, {
                                             left: parseFloat(left),
                                             top: parseFloat(top),
-                                            width: element.width || width, // Default width if not provided
+                                            width: element.width * scaleX|| width, // Default width if not provided
                                             fontSize: fontSize,
                                             fill: element.fill,
                                             fontFamily: element.fontFamily,
