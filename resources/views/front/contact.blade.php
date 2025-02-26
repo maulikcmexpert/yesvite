@@ -835,6 +835,52 @@
     </div>
 </div>
 
+<div id="sidebar_add_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">
+    <div class="sidebar-content guest-sidebar">
+        <div class="groupsidebar">
+            <div class="d-flex align-items-center justify-content-between toggle-wrp">
+                <div class="d-flex align-items-center">
+                    <a href="#" class="me-3 group_toggle_close_btn"
+                        onclick="toggleSidebar('sidebar_groups')">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.57 5.92969L3.5 11.9997L9.57 18.0697" stroke="#64748B" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20.4999 12H3.66992" stroke="#64748B" stroke-width="1.5"
+                                stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                    <h5>Create New Group</h5>
+                </div>
+                <button class="close-btn group_toggle_close_btn" onclick="toggleSidebar()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.00098 5L19 18.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M4.99996 18.9991L18.999 5" stroke="#64748B" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="guest-group-name login-form-wrap new-group-name-wrp">
+                <form action="">
+                    <div class="input-form">
+                        <input class="form-control" type="text" id="new_group_name"
+                            oninput="clearError(this)" name="new_group_name">
+                        <label for="email" class="floating-label">Group Name <span>*</span></label>
+                    </div>
+                    <label for="new_group_name" id="group_name_error"></label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="new-event-btn">
+        <a href="#" class="cmn-btn add_new_group">Add new
+            Group</a>
+    </div>
+</div>
+
 <div id="sidebar_groups_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar_add_groups_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
  
