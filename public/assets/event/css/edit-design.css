@@ -1894,6 +1894,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
+        overflow: unset !important;
     }
     .image-edit-inner-img {
         width: 430px;
