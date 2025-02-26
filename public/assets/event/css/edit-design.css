@@ -128,36 +128,36 @@
 .size-spacing-main-wrp{
     padding: 0px 24px 0px 24px;
     overflow: hidden;
-    max-height: calc(100vh - 174px);
-    height: calc(100vh - 174px);
+    max-height: calc(100vh - 287px);
+    height: calc(100vh - 287px);
 }
 
 .sp-container.sp-flat{
     padding: 0px 24px 0px 24px;
-    max-height: calc(100vh - 174px);
-    height: calc(100vh - 174px);
+    max-height: calc(100vh - 287px);
+    height: calc(100vh - 287px);
     overflow: hidden;
     overflow-y: scroll;
 }
 .format-text-main-wrp{
     padding: 0px 24px 0px 24px;
-    max-height: calc(100vh - 174px);
-    height: calc(100vh - 174px);
+    max-height: calc(100vh - 287px);
+    height: calc(100vh - 287px);
     overflow: hidden;
     overflow-y: scroll;
 }
 
 .upload-image-main-wrp{
     padding: 0px 24px 0px 24px;
-    max-height: calc(100vh - 174px);
-    height: calc(100vh - 174px);
+    max-height: calc(100vh - 287px);
+    height: calc(100vh - 287px);
     overflow: hidden;
     overflow-y: scroll;
 }
 .uploaded-images-wrp{
     padding: 0px 24px 0px 24px;
-    max-height: calc(100vh - 174px);
-    height: calc(100vh - 174px);
+    max-height: calc(100vh - 287px);
+    height: calc(100vh - 287px);
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -2324,11 +2324,13 @@
         overflow: hidden;
         max-height: calc(100vh - 330px);
         max-height: calc(100vh - 330px);
+        height: calc(100vh - 330px);
     }
     .format-text-main-wrp {
         padding: 0px 24px 0px 24px;
         max-height: calc(100vh - 420px);
         max-height: calc(100vh - 420px);
+        height: calc(100vh - 420px);
         overflow: hidden;
         overflow-y: scroll;
     }
