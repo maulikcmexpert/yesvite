@@ -445,7 +445,7 @@ class RsvpController extends BaseController
             }
 
             $is_host = "";
-            if ($user_id == $eventDetail->user_id && $isShare==null) {
+            if ($user_id == $eventDetail->user_id) {
                 $is_host = "1";
             }
 
@@ -562,7 +562,7 @@ class RsvpController extends BaseController
                 // $css1 = 'audio.css';
             }
             // dd($user_id,$sync_contact_user_id);
-            if($share==1){
+            if($isShare==1){
                 $user_id="";
                 $sync_contact_user_id="";
                 $is_host="";
