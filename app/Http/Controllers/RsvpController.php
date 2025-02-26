@@ -635,6 +635,7 @@ class RsvpController extends BaseController
             $sync_id = "";
         }
 
+        dd($sync_id,$userId);
 
 
 
