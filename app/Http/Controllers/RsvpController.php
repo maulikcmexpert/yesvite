@@ -734,7 +734,7 @@ class RsvpController extends BaseController
                 }
             }
           
-            dd(1);
+            dd($rsvpSent);
           
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
