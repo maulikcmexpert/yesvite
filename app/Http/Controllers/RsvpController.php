@@ -700,12 +700,12 @@ class RsvpController extends BaseController
                     $newContact->visible = '0';
                     $newContact->preferBy = 'email';
                     $newContact->email = $email;
-                    $newContact->app_user = '0';
                     $newContact->created_at = now();
                     $newContact->updated_at = now();
                     $newContact->save();
 
 
+                    dd($newContact);
 
                     $newUserId = $newContact->id;
                     $userType = 'sync';
