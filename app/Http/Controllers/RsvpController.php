@@ -651,12 +651,13 @@ class RsvpController extends BaseController
         // dd($kids,$adults);
 
         try {
-            
-            // dd(1);
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
-                    // dd(1);
-                return redirect('rsvp/' . encrypt($event_invited_user_id) . '/' . encrypt($request->event_id).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
+                if($request->isShare==""){
+                    return redirect('rsvp/' . $event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
+                }else{
+                    return redirect('rsvp/' . encrypt("") . '/' . encrypt($eventId).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
+                }
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
@@ -691,27 +692,31 @@ class RsvpController extends BaseController
                     $newUserId = $user->id;
                     $userType = 'user';
                 } else {
-                    $newContact = contact_sync::create([
-                        'firtsName'=>$request->firstname,
-                        'lastName'=>$request->lastname,
-                        'photo'=>"",
-                        'isAppUser'=>'0',
-                        'visible'=>'0',
-                        'preferBy'=>'email',
-                        'email' => $email,
-                        'app_user' => '0', 
-                        'created_at'=>now(),
-                        'updated_at'=>now()
-                    ]);
+                    $newContact = new contact_sync();
+                    $newContact->firstName = $request->firstname;
+                    $newContact->lastName = $request->lastname;
+                    $newContact->photo = "";
+                    $newContact->isAppUser = '0';
+                    $newContact->visible = '0';
+                    $newContact->preferBy = 'email';
+                    $newContact->email = $email;
+                    $newContact->created_at = now();
+                    $newContact->updated_at = now();
+                    $newContact->save();
+
+
+                    dd($newContact);
+
                     $newUserId = $newContact->id;
                     $userType = 'sync';
                 }
-                $invitedUser = EventInvitedUser::create([
-                    'event_id' => $eventId,
-                    'user_id' => ($userType == 'user') ? $newUserId : null, 
-                    'sync_id' => ($userType == 'sync') ? $newUserId : null, 
-                    'prefer_by' => 'email',
-                ]);
+                $invitedUser = new EventInvitedUser();
+                $invitedUser->event_id = $eventId;
+                $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
+                $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                $invitedUser->prefer_by = 'email';                
+                $invitedUser->save();
+                            
                 
                 $invitedUserId = $invitedUser->id;
 
