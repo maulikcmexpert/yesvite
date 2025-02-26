@@ -17,6 +17,10 @@ $(document).ready(function () {
         // $("search_user").val("");
         toggleSidebar("sidebar_groups");
     });
+    $(document).on("click", ".group_toggle_close_btn", function () {
+        // $("search_user").val("");
+        toggleSidebar('');
+    });
     function toggleSidebar(id = null) {
         console.log(id);
         if (id == "sidebar_add_co_host") {
