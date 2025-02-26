@@ -106,7 +106,7 @@
     width: 100%;
     max-width: 350px;
     height: 100%;
-    position: relative;
+    position: relative !important;
     border-radius: 20px;
     margin-left: 16px;
 }
