@@ -216,7 +216,7 @@ class ContactController extends Controller
                         'status' => '1',
                     ]);
                 }else{
-                    dd($isGroup);
+                    // dd($isGroup);
                     return response()->json([
                         'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'status' => '1',
