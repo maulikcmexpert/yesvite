@@ -17,6 +17,11 @@ $(document).ready(function () {
         // $("search_user").val("");
         toggleSidebar("sidebar_groups");
     });
+    $(document).on("click", ".new_group", function () {
+        // $("search_user").val("");
+        toggleSidebar("sidebar_add_groups");
+    });
+
     $(document).on("click", ".group_toggle_close_btn", function () {
         // $("search_user").val("");
         toggleSidebar('');
