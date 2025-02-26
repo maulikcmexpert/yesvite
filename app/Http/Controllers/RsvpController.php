@@ -623,9 +623,9 @@ class RsvpController extends BaseController
         // dd($request->user_id);
         // $userId = decrypt($request->user_id);
         if ($request->user_id != ""||$request->user_id!=null) {
-            dd(1);
             $userId = decrypt($request->user_id);
         } else {
+            dd(1);
             $userId = "";
         }
         $eventId = decrypt($request->event_id);
