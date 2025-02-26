@@ -884,7 +884,6 @@ class RsvpController extends BaseController
                         }
                     }
                 }
-               
                 if ($request->rsvp_status == "0") {
                     if($request->isShare==""){
                         if ($sync_id != "" || $sync_id != null) {
@@ -921,10 +920,12 @@ class RsvpController extends BaseController
                             $updateUser->save();
                         }
                     }
-                }else{
+                    }else{
 
+                    }
                 }
-                }
+                dd(1);
+
 
                 $notificationParam = [
                     'sync_id' => $sync_id,
