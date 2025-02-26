@@ -307,6 +307,7 @@ $(document).on("input", ".search_phone", function () {
                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
                 type:type,
                 offset:offset,
+                isGroup:1,
                 limit:limit
             },
             beforeSend: function () {

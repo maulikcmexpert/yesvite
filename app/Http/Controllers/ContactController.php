@@ -149,6 +149,11 @@ class ContactController extends Controller
         $id = Auth::guard('web')->user()->id;
         $searchName = $request->search_name;
         $type = $request->type;
+        $isGroup="";
+        if(isset($request->isGroup)&&$request->isGroup==1){
+            $isGroup=1;
+
+        }
         if ($request->ajax()) {
             // $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
             // if ($searchName) {
@@ -211,8 +216,9 @@ class ContactController extends Controller
                         'status' => '1',
                     ]);
                 }else{
+                    // dd($isGroup);
                     return response()->json([
-                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'status' => '1',
                     ]);
                 }
