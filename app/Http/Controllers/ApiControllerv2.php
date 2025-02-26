@@ -8144,13 +8144,13 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        dd($results);
+        // dd($results);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
-                    if (empty($value->user) || empty($value->user->id)) {
-                        continue;
-                    }
+                    // if (empty($value->user) || empty($value->user->id)) {
+                    //     continue;
+                    // }
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $ischeckEventOwner = Event::where(['id' => $input['event_id'], 'user_id' => $user->id])->first();
@@ -8294,9 +8294,9 @@ class ApiControllerv2 extends Controller
         } else {
             if (count($results) != 0) {
                 foreach ($results as $value) {
-                    if (empty($value->user) || empty($value->user->id)) {
-                        continue;
-                    }
+                    // if (empty($value->user) || empty($value->user->id)) {
+                    //     continue;
+                    // }
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
                         ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
