@@ -560,7 +560,9 @@ class RsvpController extends BaseController
                 // $css1 = 'audio.css';
             }
             // dd($user_id,$sync_contact_user_id);
-          
+            if($share==1){
+                $user_id="";
+            }
             return view('layout', compact(
                 'title',
                 'page',
