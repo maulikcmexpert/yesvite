@@ -926,6 +926,7 @@ class RsvpController extends BaseController
                 }
                 // dd(1);
 
+                if($request->isShare==""){
 
                 $notificationParam = [
                     'sync_id' => $sync_id,
@@ -939,13 +940,27 @@ class RsvpController extends BaseController
                     'post_id' => "",
                     'rsvp_attempt' => $rsvp_attempt
                 ];
+            }else{
+                $notificationParam = [
+                    'sync_id' => $newUserId,
+                    'sender_id' => $userId,
+                    'event_id' => $eventId,
+                    'rsvp_status' => $request->rsvp_status,
+                    'kids' =>  $kids,
+                    'adults' => $adults,
+                    'rsvp_video' => "",
+                    'rsvp_message' => $request->message_to_host,
+                    'post_id' => "",
+                    'rsvp_attempt' => $rsvp_attempt
+                ];
+            }
 
                 DB::commit();
 
                 // dd($notificationParam);
-                if($request->isShare==""){
+                // if($request->isShare==""){
                     sendNotification('sent_rsvp', $notificationParam);
-                }
+                // }
 
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
