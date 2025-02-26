@@ -1916,7 +1916,7 @@
         height: calc(100vh - 112px) !important;
     }
     .common-font-wrp {
-        max-height: calc(100vh - 200px) !important;
+        max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
     }
 }
