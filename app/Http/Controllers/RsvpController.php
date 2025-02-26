@@ -148,7 +148,7 @@ class RsvpController extends BaseController
         $css = 'message.css';
         
         $event_id =  decrypt($eventId);
-        dd(1);
+        dd($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare = decrypt($share);
 
