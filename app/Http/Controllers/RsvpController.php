@@ -656,7 +656,7 @@ class RsvpController extends BaseController
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
                     // dd(1);
-                return redirect('rsvp/' . encrypt($event_invited_user_id) . '/' . encrypt($request->event_id).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
+                return redirect('rsvp/' . encrypt("") . '/' . encrypt($eventId).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
