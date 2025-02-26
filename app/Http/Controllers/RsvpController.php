@@ -734,7 +734,7 @@ class RsvpController extends BaseController
                 }
             }
           
-            dd(1);
+            // dd($rsvpSent);
           
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
@@ -784,6 +784,7 @@ class RsvpController extends BaseController
                 $rsvpSent->save();
 
                 $shared=$request->isShare;
+                dd($shared);
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $eventId)
                         // ->where('user_id', $userId)
