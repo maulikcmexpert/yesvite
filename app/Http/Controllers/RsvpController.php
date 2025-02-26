@@ -562,20 +562,19 @@ class RsvpController extends BaseController
                 // $css1 = 'audio.css';
             }
             // dd($user_id,$sync_contact_user_id);
-            if($share==1){
+            if($isShare==1){
                 $user_id="";
                 $sync_contact_user_id="";
                 $is_host="";
                 $rsvp_status = "";
                 $email="";
-                $userName="";
+                // $userName="";
                 $user_firstname="";
                 $user_lastname="";
                 $event_invited_user_id="";
 
             }
 
-            dd($user_id, $sync_contact_user_id,$is_host, $rsvp_status,$email,$userName,$user_firstname,$user_lastname, $event_invited_user_id);
             return view('layout', compact(
                 'title',
                 'page',
@@ -621,8 +620,10 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
+        // dd($request);
         // $userId = decrypt($request->user_id);
-        if ($request->input('user_id') != "") {
+        if ($request->input('user_id') != ""||$request->input('user_id')!=null) {
+            dd(1);
             $userId = decrypt($request->user_id);
         } else {
             $userId = "";
@@ -630,12 +631,14 @@ class RsvpController extends BaseController
         $eventId = decrypt($request->event_id);
         $email = $request->email;
         $event_invited_user_id = decrypt($request->event_invited_user_id);
-        if ($request->input('sync_id') != "") {
+        if ($request->input('sync_id') != ""||$request->input('sync_id') != null) {
+            dd(2);
             $sync_id = decrypt($request->input('sync_id'));
         } else {
             $sync_id = "";
         }
 
+        dd($sync_id,$userId);
 
 
 
