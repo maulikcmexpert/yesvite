@@ -89,6 +89,16 @@ $(document).ready(function () {
                             return;
                         }
                         toastr.success('Group Created Successfully');
+                        $('#home_loader').css('display','none');
+                        $('<div id="pageOverlay"></div>').css({
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            background: 'rgba(255, 255, 255, 0)', // Transparent background
+                            zIndex: 9999
+                        }).appendTo('body');
                         window.location.reload();
                         // var grplth = $(".group_list .listgroups").length;
                         // if (grplth == 0) {
