@@ -13,6 +13,10 @@ $(document).ready(function () {
 
     let searchTimeout; // Store timeout reference
 
+    $(document).on("click", ".see_all_group", function () {
+        // $("search_user").val("");
+        toggleSidebar("sidebar_groups");
+    });
 $("#product-scroll").on("scroll", function () {
     
         if (busy1) return; 
