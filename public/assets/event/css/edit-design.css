@@ -1694,38 +1694,6 @@
     } */
 }
 
-@media only screen and (min-width: 1800px) and (max-width: 1999px) {
-    .image-edit-inner-img {
-        width: 590px;
-        height: 880px;
-        /* margin: 0px auto; */
-    }
-
-    .image-edit-inner-img img{
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    .edit-images-button-inner button span {
-        width: 30px;
-        height: 30px;
-    }
-    .edit-images-button-inner button h6 {
-        font-size: 14px;
-    }
-    .edit-images-button-inner button span svg{
-        width: 100% !important;
-        height: 100% !important;
-    }
-    .edit-images-button-wrp{
-        max-width: 500px;
-    }
-    /* .image-edit-inner-img {
-        width: calc(100% - 50%) !important;
-        height: calc(100vh - 0vh) !important;
-        margin: 0px auto !important;
-    } */
-}
 
 @media only screen and (min-width: 2000px) and (max-width: 2399px){
     .main-content-sidebar {
@@ -1831,6 +1799,61 @@
     } */
 }
 
+
+@media only screen and (min-width: 1800px) and (max-width: 1999px) {
+    .image-edit-inner-img {
+        width: 590px;
+        height: 880px;
+        /* margin: 0px auto; */
+    }
+
+    .image-edit-inner-img img{
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .edit-images-button-inner button span {
+        width: 30px;
+        height: 30px;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px;
+    }
+    .edit-images-button-inner button span svg{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .edit-images-button-wrp{
+        max-width: 500px;
+    }
+    .image-edit-inner-img {
+        width: 800px;
+        height: 1200px;
+        margin: 0px auto;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+    }
+}
+
+
+@media only screen and (min-width: 1600px) and (max-width: 1799px){
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+    }
+    .image-edit-inner-img {
+        width: 700px;
+        height: 1000px;
+        margin: 0px auto;
+    }
+}
+
 @media only screen and (min-width: 1400px) and (max-width: 1599px){
     .main-content-sidebar {
         width: 100%;
@@ -1867,11 +1890,11 @@
         padding-right: 0px;
         padding-top: 0px;
     }
-    /* .image-edit-inner-img {
-        width: calc(100% - 20%) !important;
-        height: calc(100vh - 0vh) !important;
-        margin: 0px auto !important;
-    } */
+    .image-edit-inner-img {
+        width: 600px;
+        height: 900px;
+        margin: 0px auto;
+    }
 }
 
 
