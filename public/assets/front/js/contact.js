@@ -71,7 +71,7 @@ $(document).ready(function () {
             });
         });
         if (selectedValues.length > 0) {
-            $('#home_loader').css('display','flex');
+            // $('#home_loader').css('display','flex');
             $.ajax({
                 url: base_url + "event/add_new_group",
                 type: "POST",
@@ -89,7 +89,6 @@ $(document).ready(function () {
                             return;
                         }
                         toastr.success('Group Created Successfully');
-                        $('#home_loader').css('display','none');
                         $('<div id="pageOverlay"></div>').css({
                             position: 'fixed',
                             top: 0,
@@ -99,6 +98,8 @@ $(document).ready(function () {
                             background: 'rgba(255, 255, 255, 0)', // Transparent background
                             zIndex: 9999
                         }).appendTo('body');
+                        // $('#home_loader').css('display','none');
+               
                         window.location.reload();
                         // var grplth = $(".group_list .listgroups").length;
                         // if (grplth == 0) {
