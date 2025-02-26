@@ -693,7 +693,7 @@ class RsvpController extends BaseController
                     $userType = 'user';
                 } else {
                     $newContact = new contact_sync();
-                    $newContact->firtsName = $request->firstname;
+                    $newContact->firstName = $request->firstname;
                     $newContact->lastName = $request->lastname;
                     $newContact->photo = "";
                     $newContact->isAppUser = '0';
