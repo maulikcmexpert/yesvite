@@ -1737,14 +1737,18 @@
         width: 100% !important;
         max-width: calc(100% - 45%) !important;
     }
+
+    .image-edit-inner-img {
+        width: 800px;
+        height: 1200px;
+        margin: 0px auto;
+    }
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
     }
-    /* .image-edit-inner-img {
-        width: calc(100% - 30%) !important;
-        height: calc(100vh - 0vh) !important;
-        margin: 0px auto !important;
-    } */
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
