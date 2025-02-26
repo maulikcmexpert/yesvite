@@ -146,9 +146,9 @@ class RsvpController extends BaseController
         $page = 'front.rsvp';
         $js = ['rsvp'];
         $css = 'message.css';
-        dd(1);
-
+        
         $event_id =  decrypt($eventId);
+        dd(1);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare = decrypt($share);
 
