@@ -23,7 +23,7 @@ class EventPost extends Model
     }
     public function contact_sync()
     {
-        return $this->belongsTo(contact_sync::class);
+        return $this->belongsTo(contact_sync::class,'sync_id','id');
     }
 
     public function post_image()
