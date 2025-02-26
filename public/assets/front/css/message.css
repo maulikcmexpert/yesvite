@@ -424,9 +424,10 @@ ul.chat-list > div:last-child li {
 .msg-body {
     padding: 20px 24px;
     position: relative;
-    max-height: calc(100% - 100px);
+    max-height: calc(100% - 125px);
+    height: calc(100% - 125px);
     overflow-y: scroll;
-    margin-bottom: 65px;
+    /* margin-bottom: 65px; */
 }
 
 .msg-body ul {
@@ -880,7 +881,7 @@ ul.member-lists li:last-child {
     display: flex;
     flex-direction: column;
     /* height: 64px; */
-    position: absolute;
+    position: sticky;
     width: 100%;
     bottom: 0;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
@@ -896,6 +897,8 @@ ul.member-lists li:last-child {
     padding-top: 8px;
     padding-bottom: 8px;
     width: 100% !important;
+    position: sticky;
+    bottom: 0;
 }
 
 #message-box {
