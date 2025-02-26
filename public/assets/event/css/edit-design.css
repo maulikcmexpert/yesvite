@@ -1004,6 +1004,10 @@
     height: 100vh;
 }
 
+.previousImeg h5{
+    line-height: normal !important;
+}
+
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
