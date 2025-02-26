@@ -8203,8 +8203,16 @@ class ApiControllerv2 extends Controller
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     // dd($isCoHost);
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-                    $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    if (!empty($value->user)) {
+                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    } else {
+                        // Handle case where user is still not found
+                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;;
+                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);;
+                    }
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                     // $postsNormalDetail['rsvp_status'] = (isset($value->post_type) && $value->post_type == '4' && $value->post_message != '') ? $value->post_message : $checkUserRsvp;
                     // $postsNormalDetail['rsvp_status'] = $checkUserRsvp;
@@ -8240,6 +8248,8 @@ class ApiControllerv2 extends Controller
                         'comments' => $comments,
                         'message_privacy' => $value->user->message_privacy
                     ];
+
+                    
 
                     if ($value->post_type == '1' && !empty($value->post_image)) {
                         foreach ($value->post_image as $imgVal) {
@@ -8364,13 +8374,20 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
 
-                    $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     // dd($isCoHost);
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
-
-                    $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-
+                    
+                    // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                    // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    if (!empty($value->user)) {
+                        $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                        $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    } else {
+                        // Handle case where user is still not found
+                        $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;;
+                        $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);;
+                    }
                     $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
 
                     $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
