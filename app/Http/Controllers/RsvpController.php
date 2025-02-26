@@ -668,7 +668,7 @@ class RsvpController extends BaseController
             // $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             //     // $query->where('app_user', '1');
             // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
-
+            $newUserId="";
             if($request->isShare==""){
                 if ($sync_id != "" && $userId == null) {
                     contact_sync::where('id', $sync_id)->update(['email' => $email]);
@@ -710,7 +710,7 @@ class RsvpController extends BaseController
                     $newUserId = $newContact->id;
                     $userType = 'sync';
                 }
-                
+
                 $invitedUser = new EventInvitedUser();
                 $invitedUser->event_id = $eventId;
                 $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
