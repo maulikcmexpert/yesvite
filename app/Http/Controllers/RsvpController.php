@@ -575,7 +575,6 @@ class RsvpController extends BaseController
 
             }
 
-            dd($is_host, $rsvp_status,$share);
             return view('layout', compact(
                 'title',
                 'page',
