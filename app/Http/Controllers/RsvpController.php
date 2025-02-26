@@ -721,7 +721,6 @@ class RsvpController extends BaseController
                 $invitedUserId = $invitedUser->id;
 
 
-                dd(1,$invitedUserId);
                 if ($userType=='sync') {
                     // contact_sync::where('id', $newUserId)->update(['email' => $email]);
     
@@ -735,7 +734,7 @@ class RsvpController extends BaseController
                 }
             }
           
-            // dd(1);
+            dd(1);
           
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
