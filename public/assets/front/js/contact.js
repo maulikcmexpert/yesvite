@@ -17,6 +17,57 @@ $(document).ready(function () {
         // $("search_user").val("");
         toggleSidebar("sidebar_groups");
     });
+    function toggleSidebar(id = null) {
+        console.log(id);
+        if (id == "sidebar_add_co_host") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+    
+        if (id == "sidebar_groups") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+        if (id == "sidebar_potluck") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+        const allSidebars = document.querySelectorAll(".sidebar");
+        const allOverlays = document.querySelectorAll(".overlay");
+        // $(".floatingfocus").removeClass("floatingfocus");
+        $("#registry_link_error").text("");
+        $(".common_error").text("");
+    
+        allSidebars.forEach((sidebar) => {
+            if (sidebar.style.right === "0px") {
+                sidebar.style.right = "-200%";
+                sidebar.style.width = "0px";
+            }
+        });
+    
+        allOverlays.forEach((overlay) => {
+            if (overlay.classList.contains("visible")) {
+                overlay.classList.remove("visible");
+            }
+        });
+        if (id == null) {
+            document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+            return;
+        }
+        const sidebar = document.getElementById(id);
+        const overlay = document.getElementById(id + "_overlay");
+    
+        if (sidebar.style.right === "0px") {
+            sidebar.style.right = "-200%";
+            sidebar.style.width = "0px";
+            if (overlay) {
+                overlay.classList.remove("visible");
+            }
+        } else {
+            sidebar.style.right = "0px";
+            sidebar.style.width = "100%";
+            if (overlay) {
+                overlay.classList.add("visible");
+            }
+        }
+    }
 $("#product-scroll").on("scroll", function () {
     
         if (busy1) return; 
