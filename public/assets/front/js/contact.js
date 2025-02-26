@@ -288,7 +288,7 @@ $(document).on("input", ".search_phone", function () {
                 }else{
                     $("#yesviteUser").append(data.view);
                     if(Group==1){
-                        $("#groupUsers").html(data.view);
+                        $("#groupUsers").append(data.view);
                     }
                 }
                 
