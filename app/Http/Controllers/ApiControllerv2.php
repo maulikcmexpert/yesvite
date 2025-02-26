@@ -8144,12 +8144,24 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        dd($results);
+        // dd($results);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
+                    // if (empty($value->user) || empty($value->user->id)) {
+                    //     continue;
+                    // }
                     if (empty($value->user) || empty($value->user->id)) {
-                        continue;
+                        if (!empty($value->sync_id)) {
+                            $syncUser = User::where('sync_id', $value->sync_id)->first();
+                            if ($syncUser) {
+                                $value->user = $syncUser; // Assign the found user
+                            } else {
+                                continue; // Skip if no user found via sync_id
+                            }
+                        } else {
+                            continue; // Skip if no user and no sync_id
+                        }
                     }
 
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
@@ -8294,8 +8306,20 @@ class ApiControllerv2 extends Controller
         } else {
             if (count($results) != 0) {
                 foreach ($results as $value) {
+                    // if (empty($value->user) || empty($value->user->id)) {
+                    //     continue;
+                    // }
                     if (empty($value->user) || empty($value->user->id)) {
-                        continue;
+                        if (!empty($value->sync_id)) {
+                            $syncUser = User::where('sync_id', $value->sync_id)->first();
+                            if ($syncUser) {
+                                $value->user = $syncUser; // Assign the found user
+                            } else {
+                                continue; // Skip if no user found via sync_id
+                            }
+                        } else {
+                            continue; // Skip if no user and no sync_id
+                        }
                     }
                     $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                     $count_kids_adult = EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id])
