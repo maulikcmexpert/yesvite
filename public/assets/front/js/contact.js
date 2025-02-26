@@ -330,7 +330,7 @@ $(document).on("input", ".search_phone", function () {
                         $("#groupUsers").html(data.view);
                     
                 }else{
-                        $("#groupUsers").html(data.view);
+                        $("#groupUsers").append(data.view);
                 }
                 
                 busy1gl = false;
