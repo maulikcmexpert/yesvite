@@ -96,10 +96,10 @@ $(document).ready(function () {
                 offset += limit;
                 
                 var type="yesvite";
-                var search_name = $('.search_name').val();
-                if(search_name!=""){
-                    offset=null;
-                }
+                // var search_name = $('.search_name').val();
+                // if(search_name!=""){
+                //     offset=null;
+                // }
             loadMoreData(search_name,type,offset,limit,1,1);
         }
 });
