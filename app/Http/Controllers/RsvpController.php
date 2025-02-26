@@ -568,7 +568,7 @@ class RsvpController extends BaseController
                 $is_host="";
                 $rsvp_status = "";
                 $email="";
-                $userName="";
+                // $userName="";
                 $user_firstname="";
                 $user_lastname="";
                 $event_invited_user_id="";
