@@ -1711,7 +1711,11 @@
             }
 
             if (activeObject.type == 'textbox') {
-                addToUndoStack(canvas);
+                console.log(activeObject.fill)
+                console.log(selectedColor)
+                if(activeObject.fill !==selectedColor){
+                    addToUndoStack(canvas);
+                }
                 clrcanvas = canvas.toJSON(); // Store the current state of the canvas
                 if (selectedColorType == 'font') {
                     activeObject.set('fill', selectedColor); // Change font color
