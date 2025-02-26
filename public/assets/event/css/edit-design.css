@@ -1975,7 +1975,7 @@
 
     .image-edit-inner-img {
         width: 100%;
-        max-width: 1300px;
+        max-width: 1200px;
         height: 1800px;
         margin: 0px auto;
     }
@@ -1984,6 +1984,9 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
+    }
+    .edit-images-button-wrp {
+        max-width: 800px !important;
     }
 }
 

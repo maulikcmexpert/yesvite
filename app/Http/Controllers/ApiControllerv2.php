@@ -8055,7 +8055,7 @@ class ApiControllerv2 extends Controller
         $selectedFilters = $request->input('filters');
         $eventCreator = Event::where('id', $input['event_id'])->first();
         $eventPostList = EventPost::query();
-        $eventPostList->with(['user', 'post_image'])
+        $eventPostList->with(['user','contact_sync', 'post_image'])
             ->withCount([
                 'event_post_comment' => function ($query) {
                     $query->where('parent_comment_id', NULL);
@@ -8144,7 +8144,7 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        // dd($eventPostList);
+        // dd($results);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
