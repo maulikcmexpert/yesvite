@@ -283,20 +283,24 @@ $(document).on("input", ".search_phone", function () {
                     }else{
                         $("#groupUsers").append(data.view);
                     }
-                }
-                if (data.status == "0") {
-                    $(".no-yesvite-data").css("display","block");
-                    $("#yesviteUser").html('');
-                    $("#home_loader").hide();
-                    return;
-                }
-                $(".no-yesvite-data").css("display","none");
-                
-                if(data.search=='1'){
-                    $("#yesviteUser").html(data.view);
+                   
+                    
                 }else{
-                    $("#yesviteUser").append(data.view);
+                    if (data.status == "0") {
+                        $(".no-yesvite-data").css("display","block");
+                        $("#yesviteUser").html('');
+                        $("#home_loader").hide();
+                        return;
+                    }
+                    $(".no-yesvite-data").css("display","none");
+                    
+                    if(data.search=='1'){
+                        $("#yesviteUser").html(data.view);
+                    }else{
+                        $("#yesviteUser").append(data.view);
+                    }
                 }
+               
                 
                 busy1 = false;
                 $("#home_loader").hide();
