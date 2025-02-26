@@ -8890,13 +8890,13 @@ class ApiControllerv2 extends Controller
         $eventDetails = EventPost::with('user','contact_sync','post_control')->withCount(['event_post_comment' => function ($query) {
             $query->where('parent_comment_id', NULL);
         }, 'event_post_reaction'])->where(['id' => $input['event_post_id']])->first();
-        dd($eventDetails);
+        // dd($eventDetails);
         if ($eventDetails != null) {
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
             if (!empty($value->sync_id)) {
-                $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->contact_sync->id])->first();
+                $ischeckEventOwner = null;
             }else{
-            $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
+                $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
             }
             $count_kids_adult = EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $user->id])
                 ->select('kids', 'adults', 'event_id', 'rsvp_status', 'user_id')
@@ -8907,7 +8907,7 @@ class ApiControllerv2 extends Controller
             $postsDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
             
             if (!empty($value->sync_id)) {
-                $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'user_id' => $eventDetails->contact_sync->id, 'is_co_host' => '1'])->first();
+                $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'sync_id' => $eventDetails->contact_sync->id, 'is_co_host' => '1'])->first();
                 $postsDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsDetail['user_id'] =  $eventDetails->contact_sync->id;
                 $postsDetail['username'] =  $eventDetails->contact_sync->firstName . ' ' . $eventDetails->contact_sync->lastName;
