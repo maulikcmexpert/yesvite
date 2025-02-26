@@ -651,12 +651,13 @@ class RsvpController extends BaseController
         // dd($kids,$adults);
 
         try {
-            
-            // dd(1);
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
-                    // dd(1);
-                return redirect('rsvp/' . encrypt("") . '/' . encrypt($eventId).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
+                if($request->isShare==""){
+                    return redirect('rsvp/' . $event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
+                }else{
+                    return redirect('rsvp/' . encrypt("") . '/' . encrypt($eventId).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
+                }
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
