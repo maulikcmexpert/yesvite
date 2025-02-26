@@ -653,7 +653,7 @@ class RsvpController extends BaseController
         try {
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
-                return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
+                return redirect('rsvp/' . $event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
             }
             // dd($sync_id,$userId);
             DB::beginTransaction();
@@ -665,7 +665,7 @@ class RsvpController extends BaseController
             //     // $query->where('app_user', '1');
             // })->where(['user_id' => $userId, 'is_co_host' => '0', 'event_id' => $eventId])->first();
 
-
+dd(1);
             if($request->isShare==""){
                 if ($sync_id != "" && $userId == null) {
                     contact_sync::where('id', $sync_id)->update(['email' => $email]);
