@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\{Event, User, EventPostImage, EventPostPoll, EventPostComment, EventPostReaction, Notification, EventInvitedUser, PostControl, UserReportToPost,contact_sync};
+use App\Models\{Event, User, EventPostImage, EventPostPoll, EventPostComment, EventPostReaction, Notification, EventInvitedUser, PostControl, UserReportToPost};
 
 class EventPost extends Model
 {
@@ -23,7 +23,7 @@ class EventPost extends Model
     }
     public function contact_sync()
     {
-        return $this->belongsTo(contact_sync::class);
+        return $this->belongsTo(contact_sync::class,'sync_id','id');
     }
 
     public function post_image()

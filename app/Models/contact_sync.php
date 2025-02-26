@@ -23,10 +23,6 @@ class contact_sync extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function event_post()
-    {
-        return $this->hasMany(EventPost::class);
-    }
 
     public function invited_sync_user_event()
     {
