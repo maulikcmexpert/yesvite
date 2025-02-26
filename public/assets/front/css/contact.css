@@ -929,6 +929,10 @@ input[type="search"]~span {
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 500;
 }
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
 
 /* ======= Responsive ======= */
