@@ -784,7 +784,7 @@ class RsvpController extends BaseController
                 $rsvpSent->save();
 
                 $shared=$request->isShare;
-                dd($shared);
+                // dd($shared);
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $eventId)
                         // ->where('user_id', $userId)
@@ -801,8 +801,8 @@ class RsvpController extends BaseController
                             }
                            
                         })
-
                         ->where('post_type', '4')->delete();
+                        dd(1);
                     $postMessage = [];
                     $postMessage = [
                         'status' => ($request->rsvp_status == '0') ? '2' : '1',
