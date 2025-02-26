@@ -703,8 +703,8 @@ async function bindData(current_event_id) {
                 img.set({
                     // left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
                     // top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
-                    scaleX: scaleFactor,
-                    scaleY: scaleFactor,
+                    // scaleX: scaleFactor,
+                    // scaleY: scaleFactor,
                     selectable: false,
                     hasControls: false,
                 });
