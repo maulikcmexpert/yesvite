@@ -139,7 +139,7 @@ class RsvpController extends BaseController
 
 
 
-    public function index($event_invited_user_id, $eventId,$share)
+    public function index($event_invited_user_id, $eventId,$share=null)
     {
         $title = 'RSVP';
         $page = 'front.rsvp';
@@ -560,9 +560,7 @@ class RsvpController extends BaseController
                 // $css1 = 'audio.css';
             }
             // dd($user_id,$sync_contact_user_id);
-            if($share==1){
-                $user_id="";
-            }
+          
             return view('layout', compact(
                 'title',
                 'page',
