@@ -2133,7 +2133,7 @@
                         fontWeight: obj.fontWeight,
                         fontStyle: obj.fontStyle,
                         underline: obj.underline,
-                        width: obj.width,
+                        width: obj.width * scaleX,
                         linethrough: obj.linethrough,
                         date_formate: obj.date_formate,
                         letterSpacing: obj.charSpacing /
