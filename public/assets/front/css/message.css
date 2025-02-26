@@ -878,6 +878,7 @@ ul.member-lists li:last-child {
 
 .msg-footer {
     border-top: 1px solid #F1F5F9;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     /* height: 64px; */
@@ -887,6 +888,7 @@ ul.member-lists li:last-child {
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     background: #fff;
     border-bottom-right-radius: 20px;
+    z-index: 10;
 }
 
 .msg-footer .message-perent {
