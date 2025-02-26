@@ -996,6 +996,6 @@
 
 <div id="sidebar_groups_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_add_groups_overlay" class="overlay" onclick="toggleSidebar()"></div>
-<div id="sidebar_invite_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
+<div id="sidebar_add_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
  
