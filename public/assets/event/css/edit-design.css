@@ -1006,9 +1006,11 @@
 
 .previousImeg h5{
     line-height: normal !important;
-    align-items: center;
 }
 
+.previousImeg{
+    align-items: center;
+}
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
