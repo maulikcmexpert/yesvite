@@ -575,7 +575,7 @@ class RsvpController extends BaseController
 
             }
 
-            dd($user_id, $sync_contact_user_id,$is_host, $rsvp_status,$email,$userName,$user_firstname,$user_lastname, $event_invited_user_id);
+            dd($is_host, $rsvp_status);
             return view('layout', compact(
                 'title',
                 'page',
