@@ -777,7 +777,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width: parseInt(element.width) || width, // Default width if not provided
+                            width: parseInt(element.width) * scaleX || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
@@ -2822,7 +2822,7 @@ function getTextDataFromCanvas() {
                 top: obj.top * scaleY, // Scale back Y position
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                width: parseInt(obj.width),
+                width: parseInt(obj.width) * scaleX,
                 centerX: centerPoint.x * scaleX, // Scale back center position
                 centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
