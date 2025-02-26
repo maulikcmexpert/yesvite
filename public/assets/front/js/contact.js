@@ -460,7 +460,8 @@ $(document).on("input", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
+                toastr.error("server not responding...");
             },
         })
     }
@@ -507,7 +508,9 @@ $(document).on("input", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+
             },
         })
     }
@@ -552,7 +555,9 @@ $(document).on("input", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+
             },
         });
     }
