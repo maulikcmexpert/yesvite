@@ -276,9 +276,6 @@ $(document).on("input", ".search_phone", function () {
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
                     $("#yesviteUser").html('');
-                    if(Group==1){
-                        $("#groupUsers").html('');
-                    }
                     $("#home_loader").hide();
                     return;
                 }
@@ -286,14 +283,8 @@ $(document).on("input", ".search_phone", function () {
                 
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
-                    if(Group==1){
-                        $("#groupUsers").html(data.view);
-                    }
                 }else{
                     $("#yesviteUser").append(data.view);
-                    if(Group==1){
-                        $("#groupUsers").html(data.view);
-                    }
                 }
                 
                 busy1 = false;
