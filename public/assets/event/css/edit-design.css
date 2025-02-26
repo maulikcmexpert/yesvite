@@ -1487,7 +1487,7 @@
 }
 
 
-@media only screen and (min-width: 2801px) and (max-width: 3000px){
+@media only screen and (min-width: 2800px) and (max-width: 3000px){
     .image-edit-inner-img {
         width: 800px;
         height: 1100px;
@@ -1558,15 +1558,41 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
-    /* .image-edit-inner-img {
-        width: calc(100% - 40%) !important;
-        height: calc(100vh - 0vh) !important;
-        margin: 0px auto !important;
-    } */
+    .image-edit-inner-img {
+        width: 600px;
+        height: 730px;
+        margin: 0px auto;
+    }
+    #edit-design-temp .main-content-right {
+        padding-bottom: 50px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        overflow: unset !important;
+    }
+
+    .main-content-sidebar .new-event-sidebar-wrp {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 
 }
 
-@media only screen and (min-width: 2600px) and (max-width: 2800px){
+@media only screen and (min-width: 2600px) and (max-width: 2799px){
     .edit-image-main-wrp .design-seting{
         position: absolute !important;
     }
@@ -1596,8 +1622,8 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: 550px;
-        height: 680px;
+        width: 600px;
+        height: 730px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
