@@ -6,9 +6,13 @@ $(document).ready(function () {
   
     var base_url=$('#base_url').val();
     var busy1 = false;
+    var busy1gl = false;
     var busy2=false;
     var limit = 10;
     var offset = 0;
+    var offsetlg = 0;
+
+    
     var offset1 = 0;
 
     let searchTimeout; // Store timeout reference
@@ -87,21 +91,21 @@ $(document).ready(function () {
     }
     $("#groupUsers").on("scroll", function () {
     
-        if (busy1) return; 
+        if (busy1gl) return; 
         var scrollTop = $(this).scrollTop(); 
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
             if (scrollTop + elementHeight >= scrollHeight-2) {
-                busy1 = true;
-                offset += limit;
+                busy1gl = true;
+                offsetlg += limit;
                 
                 var type="yesvite";
-                var search_name="";
+                var search_name=""
                 // var search_name = $('.search_name').val();
                 // if(search_name!=""){
-                //     offset=null;
+                //     offsetlg=null;
                 // }
-            loadMoreData(search_name,type,offset,limit,1,1);
+            loadMoreDataList(search_name,type,offsetlg,limit,1,1);
         }
 });
 $("#product-scroll").on("scroll", function () {
@@ -269,40 +273,76 @@ $(document).on("input", ".search_phone", function () {
                     $("#home_loader").hide();
                     return;
                 }
-                if(Group==1){
-                    // $("#groupUsers").html('');
-                    if (data.status == "0") {
+                if (data.status == "0") {
+                    $(".no-yesvite-data").css("display","block");
+                    $("#yesviteUser").html('');
+                    if(Group==1){
                         $("#groupUsers").html('');
-                        $("#home_loader").hide();
-                        return;
                     }
-                    // $(".no-yesvite-data").css("display","none");
-                    
-                    if(data.search=='1'){
+                    $("#home_loader").hide();
+                    return;
+                }
+                $(".no-yesvite-data").css("display","none");
+                
+                if(data.search=='1'){
+                    $("#yesviteUser").html(data.view);
+                    if(Group==1){
                         $("#groupUsers").html(data.view);
-                    }else{
-                        $("#groupUsers").append(data.view);
                     }
-                   
-                    
                 }else{
-                    if (data.status == "0") {
-                        $(".no-yesvite-data").css("display","block");
-                        $("#yesviteUser").html('');
-                        $("#home_loader").hide();
-                        return;
-                    }
-                    $(".no-yesvite-data").css("display","none");
-                    
-                    if(data.search=='1'){
-                        $("#yesviteUser").html(data.view);
-                    }else{
-                        $("#yesviteUser").append(data.view);
+                    $("#yesviteUser").append(data.view);
+                    if(Group==1){
+                        $("#groupUsers").html(data.view);
                     }
                 }
-               
                 
                 busy1 = false;
+                $("#home_loader").hide();
+            },
+            error: function (jqXHR, ajaxOptions, thrownError) {
+                console.error("AJAX Error:", thrownError);
+                console.error("Response:", jqXHR.responseText);
+                alert("server not responding...");
+            },
+        })
+    }
+    function loadMoreDataList(search_name,type,offset,limit,scroll=null,Group=null) {
+        console.log({search_name,type,offset,limit,scroll});
+        $.ajax({
+            url: base_url + "contacts/load",
+            type: "POST",
+            data: {
+                search_name: search_name,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+                type:type,
+                offset:offset,
+                limit:limit
+            },
+            beforeSend: function () {
+                $('#home_loader').css('display','flex');
+            },
+            success: function (data) {
+                if (data.status == "0" && scroll==1) {
+                    // $(".no-yesvite-data").css("display","none");
+                    $("#home_loader").hide();
+                    return;
+                }
+                if (data.status == "0") {
+                    // $(".no-yesvite-data").css("display","block");
+                    $("#groupUsers").html('');
+                    $("#home_loader").hide();
+                    return;
+                }
+                $(".no-yesvite-data").css("display","none");
+                
+                if(data.search=='1'){
+                        $("#groupUsers").html(data.view);
+                    
+                }else{
+                        $("#groupUsers").html(data.view);
+                }
+                
+                busy1gl = false;
                 $("#home_loader").hide();
             },
             error: function (jqXHR, ajaxOptions, thrownError) {
