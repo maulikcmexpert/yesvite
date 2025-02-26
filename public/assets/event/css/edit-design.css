@@ -1626,7 +1626,7 @@
         max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
     }
-    
+
 }
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
@@ -1657,6 +1657,10 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+   
+}
+
+@media only screen and (min-width: 2400px) and (max-width: 2599px){
     .image-edit-inner-img {
         width: 550px;
         height: 680px;
@@ -1691,11 +1695,7 @@
 }
 
 @media only screen and (min-width: 2000px) and (max-width: 2800px) {
-    .image-edit-inner-img {
-        width: 690px;
-        height: 980px;
-        /* margin: 0px auto; */
-    }
+   
 
     .image-edit-inner-img img{
         width: 100% !important;
