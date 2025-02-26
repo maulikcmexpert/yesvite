@@ -1834,6 +1834,7 @@ async function bindData(current_event_id) {
                 if (selectedColor != $(".sp-input").val()) {
                     return;
                 }
+                addToUndoStack(canvas);
                 //console.log(activeObject.fill);
                 //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
