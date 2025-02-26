@@ -620,12 +620,11 @@ class RsvpController extends BaseController
     public function store(Request $request)
     {
 
-        // dd($request->user_id);
+        dd($request);
         // $userId = decrypt($request->user_id);
         if ($request->user_id != ""||$request->user_id!=null) {
             $userId = decrypt($request->user_id);
         } else {
-            dd(1);
             $userId = "";
         }
         $eventId = decrypt($request->event_id);
