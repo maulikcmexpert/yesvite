@@ -8893,7 +8893,7 @@ class ApiControllerv2 extends Controller
         // dd($eventDetails);
         if ($eventDetails != null) {
             $checkUserIsReaction = EventPostReaction::where(['event_id' => $eventDetails->event_id, 'event_post_id' => $input['event_post_id'], 'user_id' => $user->id])->first();
-            if (!empty($value->sync_id)) {
+            if (!empty($eventDetails->sync_id)) {
                 $ischeckEventOwner = null;
             }else{
                 $ischeckEventOwner = Event::where(['id' => $eventDetails->event_id, 'user_id' => $eventDetails->user->id])->first();
@@ -8906,7 +8906,7 @@ class ApiControllerv2 extends Controller
 
             $postsDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
             
-            if (!empty($value->sync_id)) {
+            if (!empty($eventDetails->sync_id)) {
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventDetails->event_id, 'sync_id' => $eventDetails->contact_sync->id, 'is_co_host' => '1'])->first();
                 $postsDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsDetail['user_id'] =  $eventDetails->contact_sync->id;
