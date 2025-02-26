@@ -1841,6 +1841,30 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
+        overflow: unset !important;
+    }
+    .image-edit-inner-img {
+        width: 430px;
+        height: 530px;
+        margin: 0px auto;
+    }
+    .main-content-sidebar .new-event-sidebar-wrp {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
     }
 }
 
@@ -1851,11 +1875,30 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
+        overflow: unset !important;
     }
     .image-edit-inner-img {
-        width: 700px;
-        height: 1000px;
+        width: 430px;
+        height: 530px;
         margin: 0px auto;
+    }
+    .main-content-sidebar .new-event-sidebar-wrp {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
     }
 }
 
@@ -1894,6 +1937,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
+        overflow: unset !important;
     }
     .image-edit-inner-img {
         width: 430px;
@@ -1901,20 +1945,21 @@
         margin: 0px auto;
     }
     .main-content-sidebar .new-event-sidebar-wrp {
-        height: calc(100vh - 96px) !important;
+        height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
-        height: calc(100vh - 96px) !important;
-        min-height: calc(100vh - 96px) !important;
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
     }
     .edit-image-main-wrp{
-        height: calc(100vh - 96px) !important;
+        height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp .choose-design-sidebar{
-        height: calc(100vh - 96px) !important;
+        height: calc(100vh - 112px) !important;
     }
     .common-font-wrp {
-        max-height: calc(100vh - 200px) !important;
+        max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
     }
 }
