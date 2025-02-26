@@ -7522,7 +7522,7 @@ class ApiControllerv2 extends Controller
             // $base_url = url('/');
             $eventLink = url('/rsvp', ['event_invited_user_id' => "", 'eventId' => encrypt($eventDetails['event_id'])]);
 
-            $eventLink = $base_url;
+            // $eventLink = $base_url;
             // $shortLink = createShortUrl($eventLink);
             $eventDetails['copy_link']=$eventLink;
 
