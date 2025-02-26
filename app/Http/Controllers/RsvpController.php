@@ -705,6 +705,7 @@ class RsvpController extends BaseController
                     $newContact->save();
 
 
+                    dd($newContact);
 
                     $newUserId = $newContact->id;
                     $userType = 'sync';
