@@ -71,6 +71,7 @@ $(document).ready(function () {
             });
         });
         if (selectedValues.length > 0) {
+            $('#home_loader').css('display','flex');
             $.ajax({
                 url: base_url + "event/add_new_group",
                 type: "POST",
@@ -87,6 +88,7 @@ $(document).ready(function () {
                             window.location.href = "/"; // Redirect to home page
                             return;
                         }
+                        toastr.success('Group Created Successfully');
                         window.location.reload();
                         // var grplth = $(".group_list .listgroups").length;
                         // if (grplth == 0) {
@@ -125,6 +127,7 @@ $(document).ready(function () {
                 error: function (xhr, status, error) {
                     console.log("AJAX error: " + error);
                     toastr.error(error);
+                    $('#home_loader').css('display','none');
                 },
             });
         } else {
