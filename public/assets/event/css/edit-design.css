@@ -1906,6 +1906,7 @@
     .edit-imag-main-content-wrp{
         height: calc(100vh - 96px) !important;
         min-height: calc(100vh - 96px) !important;
+        padding-top: 0px !important;
     }
     .edit-image-main-wrp{
         height: calc(100vh - 96px) !important;
