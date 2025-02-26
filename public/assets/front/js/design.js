@@ -784,8 +784,7 @@ async function bindData(current_event_id) {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width:
-                                parseInt(element.width) * scaleX + 30 || width, // Default width if not provided
+                            width: parseInt(element.width) * scaleX || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
@@ -2740,6 +2739,20 @@ async function bindData(current_event_id) {
         }
         redoStack = [];
     }
+    $(document).keydown(function (e) {
+        // Check if Ctrl (or Cmd for Mac) is pressed
+        if (e.ctrlKey || e.metaKey) {
+            if (e.key === "z" || e.keyCode === 90) {
+                // Ctrl + Z -> Undo
+                e.preventDefault();
+                undo(); // Call your undo function
+            } else if (e.key === "y" || e.keyCode === 89) {
+                // Ctrl + Y -> Redo
+                e.preventDefault();
+                redo(); // Call your redo function
+            }
+        }
+    });
 
     function undo() {
         console.log("undoStack", undoStack.length);
