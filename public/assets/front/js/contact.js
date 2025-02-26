@@ -96,6 +96,7 @@ $(document).ready(function () {
                 offset += limit;
                 
                 var type="yesvite";
+                var search_name="";
                 // var search_name = $('.search_name').val();
                 // if(search_name!=""){
                 //     offset=null;
