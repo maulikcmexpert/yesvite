@@ -913,7 +913,10 @@ input[type="search"]~span {
     z-index: 20;
     background-color: var(--white);
 }
-
+.new-event-btn a {
+    display: block;
+    margin: 20px 24px;
+}
 
 
 /* ======= Responsive ======= */
