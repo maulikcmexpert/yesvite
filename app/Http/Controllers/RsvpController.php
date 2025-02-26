@@ -445,7 +445,7 @@ class RsvpController extends BaseController
             }
 
             $is_host = "";
-            if ($user_id == $eventDetail->user_id) {
+            if ($user_id == $eventDetail->user_id && $isShare==null) {
                 $is_host = "1";
             }
 
