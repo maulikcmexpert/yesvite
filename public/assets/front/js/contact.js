@@ -27,9 +27,25 @@ $(document).ready(function () {
 
     });
     $(document).on("click", ".add_new_group", function () {
-        // $("search_user").val("");
-        toggleSidebar("sidebar_add_group_member");
+        var group_name = $("#new_group_name").val();
+        NogroupData = false;
+        if (group_name == "") {
+            $("#group_name_error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please enter group name");
+            return;
+        } else {
+            $("#group_name_error").css("display", "none");
+            toggleSidebar("sidebar_add_group_member");
+            var type = "group";
+            get_user(type);
+        }
     });
+    // $(document).on("click", ".add_new_group", function () {
+    //     // $("search_user").val("");
+    //     toggleSidebar("sidebar_add_group_member");
+    // });
 
     $(document).on("click", ".group_toggle_close_btn", function () {
         // $("search_user").val("");
