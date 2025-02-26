@@ -118,7 +118,7 @@
                     </span>
                     <input class="form-check-input user_group_member user_choice"
                         type="checkbox" name="add_by_email[]" data-preferby="email"
-                        data-id="user-{{ $value->id }}" data-email="{{ $user->email }}"
+                        data-id="user-{{ $value->id }}" data-email="{{ $value->email }}"
                         value="{{ $value->id }}">
                 </div>
                 @endif
