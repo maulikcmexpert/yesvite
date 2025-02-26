@@ -903,6 +903,16 @@ input[type="search"]~span {
 .group-card span {
     cursor: pointer;
 }
+.new-event-btn {
+    border-top: 1px solid #f1f1f1;
+    padding-bottom: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    background-color: var(--white);
+}
 
 
 
