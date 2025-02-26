@@ -654,8 +654,8 @@ class RsvpController extends BaseController
             
             // dd(1);
             $checkEvent = Event::where(['id' => $eventId])->first();
-            dd(1);
             if ($checkEvent->end_date < date('Y-m-d')) {
+                    dd(1);
                 return redirect('rsvp/' . $event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
             }
             // dd($sync_id,$userId);
