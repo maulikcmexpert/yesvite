@@ -785,7 +785,7 @@ async function bindData(current_event_id) {
                             left: parseFloat(left),
                             top: parseFloat(top),
                             width:
-                                parseInt(element.width) * scaleX + 10 || width, // Default width if not provided
+                                parseInt(element.width) * scaleX + 20 || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
