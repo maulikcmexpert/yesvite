@@ -771,7 +771,7 @@ async function bindData(current_event_id) {
                         console.log(element.width);
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         fontSize = Number(fontSize).toFixed(0);
-                        let width = (textWidth + 25) * scaleX; // Scale text box width
+                        let width = (textWidth + 10) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
@@ -2822,7 +2822,7 @@ function getTextDataFromCanvas() {
                 top: obj.top * scaleY, // Scale back Y position
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                width: parseInt(obj.width),
+                width: parseInt(obj.width) * scaleX,
                 centerX: centerPoint.x * scaleX, // Scale back center position
                 centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
