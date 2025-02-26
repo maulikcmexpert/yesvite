@@ -85,6 +85,25 @@ $(document).ready(function () {
             }
         }
     }
+    $("#groupUsers").on("scroll", function () {
+    
+        if (busy1) return; 
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+            if (scrollTop + elementHeight >= scrollHeight-2) {
+                busy1 = true;
+                offset += limit;
+                
+                var type="yesvite";
+                var search_name="";
+                // var search_name = $('.search_name').val();
+                // if(search_name!=""){
+                //     offset=null;
+                // }
+            loadMoreData(search_name,type,offset,limit,1,1);
+        }
+});
 $("#product-scroll").on("scroll", function () {
     
         if (busy1) return; 
@@ -103,6 +122,7 @@ $("#product-scroll").on("scroll", function () {
             loadMoreData(search_name,type,offset,limit,1);
         }
 });
+
 
 
 let debounceTimer;
@@ -228,7 +248,7 @@ $(document).on("input", ".search_phone", function () {
         // loadMorePhones(search_phone,type=null,offset1,limit);
 });
 
-    function loadMoreData(search_name,type,offset,limit,scroll=null) {
+    function loadMoreData(search_name,type,offset,limit,scroll=null,Group=null) {
         console.log({search_name,type,offset,limit,scroll});
         $.ajax({
             url: base_url + "contacts/load",
@@ -252,6 +272,9 @@ $(document).on("input", ".search_phone", function () {
                 if (data.status == "0") {
                     $(".no-yesvite-data").css("display","block");
                     $("#yesviteUser").html('');
+                    if(Group==1){
+                        $("#groupUsers").html('');
+                    }
                     $("#home_loader").hide();
                     return;
                 }
@@ -259,8 +282,14 @@ $(document).on("input", ".search_phone", function () {
                 
                 if(data.search=='1'){
                     $("#yesviteUser").html(data.view);
+                    if(Group==1){
+                        $("#groupUsers").html(data.view);
+                    }
                 }else{
                     $("#yesviteUser").append(data.view);
+                    if(Group==1){
+                        $("#groupUsers").append(data.view);
+                    }
                 }
                 
                 busy1 = false;
