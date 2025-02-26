@@ -1826,20 +1826,17 @@ async function bindData(current_event_id) {
             return;
         }
 
-        if (activeObject.type == "textbox") {
+        if (
+            activeObject.type == "textbox" &&
+            activeObject.fill !== selectedColor
+        ) {
             clrcanvas = canvas.toJSON();
-            //console.log(activeObject.type);
-            //console.log(activeObject.fill);
             if (selectedColorType == "font") {
                 if (selectedColor != $(".sp-input").val()) {
                     return;
                 }
                 addToUndoStack(canvas);
-                //console.log(activeObject.fill);
-                //console.log(activeObject.backgroundColor);
                 activeObject.set("fill", selectedColor); // Change font color
-                //console.log(activeObject.fill);
-                //console.log(activeObject.backgroundColor);
             } else if (selectedColorType == "background") {
                 //console.log("update background");
                 activeObject.set("backgroundColor", selectedColor); // Change background color
