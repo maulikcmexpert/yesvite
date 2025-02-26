@@ -151,7 +151,7 @@ class RsvpController extends BaseController
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare = decrypt($share);
 
-        // dd($event_id,$event_invited_user_id,$isShare);
+        dd($event_id,$event_invited_user_id,$isShare);
         // dd($event_invited_user_id);
         // $user_id = decrypt($event_invited_user_id);
 
@@ -563,9 +563,9 @@ class RsvpController extends BaseController
                 // $css1 = 'audio.css';
             }
             // dd($user_id,$sync_contact_user_id);
-            if($share==1){
-                $user_id="";
-            }
+            // if($share==1){
+            //     $user_id="";
+            // }
             return view('layout', compact(
                 'title',
                 'page',
