@@ -26,10 +26,129 @@ $(document).ready(function () {
         toggleSidebar("sidebar_add_groups");
 
     });
-    $(document).on("click", ".add_new_group", function () {
-        // $("search_user").val("");
-        toggleSidebar("sidebar_add_group_member");
+    $(document).on("click", ".group_toggle_close_btn", function () {
+        toggleSidebar("sidebar_groups");
     });
+    $(document).on("click", ".add_new_group", function () {
+        var group_name = $("#new_group_name").val();
+        NogroupData = false;
+        if (group_name == "") {
+            $("#group_name_error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please enter group name");
+            return;
+        } else {
+            $("#group_name_error").css("display", "none");
+            toggleSidebar("sidebar_add_group_member");
+            var type = "group";
+        }
+    });
+    $("#new_group_name").on("input", function (e) {
+        var groupname=$(this).val();
+        if (groupname === "")
+             {
+                  $("#group_name_error")
+                  .text("Please enter group name")
+                  .css("color", "red");
+             } else {
+                   $("#group_name_error").text("");
+            }
+    });
+    $("#new_group_name").on("keydown", function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+            e.preventDefault(); // Prevents the default action of submitting the form or adding a new line
+        }
+    });
+
+    $(document).on("click", ".add_new_group_member", function () {
+        var group_name = $("#new_group_name").val();
+        var selectedValues = [];
+        $("#groupUsers .user_group_member:checked").each(function () {
+            selectedValues.push({
+                id: $(this).val(),
+                prefer_by: $(this).data("preferby"),
+            });
+        });
+        if (selectedValues.length > 0) {
+            // $('#home_loader').css('display','flex');
+            $.ajax({
+                url: base_url + "event/add_new_group",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    groupmember: selectedValues,
+                    groupname: group_name,
+                },
+                success: function (response) {
+                    if (response.status == "1") {
+                        if (response.status == 401 && response.info == "logout") {
+                            window.location.href = "/"; // Redirect to home page
+                            return;
+                        }
+                        toastr.success('Group Created Successfully');
+                        $('<div id="pageOverlay"></div>').css({
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            background: 'rgba(255, 255, 255, 0)', // Transparent background
+                            zIndex: 9999
+                        }).appendTo('body');
+                        // $('#home_loader').css('display','none');
+               
+                        window.location.reload();
+                        // var grplth = $(".group_list .listgroups").length;
+                        // if (grplth == 0) {
+                        //     $(".group_list").html("");
+                        // }
+                        // $(".group_list").append(response.view);
+    
+                        // // var newItem = `
+                        // //     <div class="swiper-slide">
+                        // //         <div class="group-card view_members" data-id="${response.data.group_id}">
+                        // //             <div>
+                        // //                 <h4>${response.data.groupname}</h4>
+                        // //                 <p>${response.data.member_count} Guests</p>
+                        // //             </div>
+                        // //             <span class="ms-auto">
+                        // //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        // //                     <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        // //                 </svg>
+                        // //             </span>
+                        // //         </div>
+                        // //     </div>
+                        // // `;
+    
+                        // // swiper[0].appendSlide(newItem);
+                        // // swiper[0].update(); // Update Swiper after adding the new slide
+                        // // swiper[1].appendSlide(newItem);
+                        // // swiper[1].update(); // Update Swiper after adding the new slide
+                        // // swiper[2].appendSlide(newItem);
+                        // // swiper[2].update(); // Update Swiper after adding the new slide
+    
+                        // $(".user_choice_group .user_choice").prop("checked", false);
+                        // toggleSidebar("sidebar_groups");
+                        // groupToggleSearch("");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX error: " + error);
+                    toastr.error(error);
+                    $('#home_loader').css('display','none');
+                },
+            });
+        } else {
+            toastr.error("Please select Member");
+        }
+    });
+    // $(document).on("click", ".add_new_group", function () {
+    //     // $("search_user").val("");
+    //     toggleSidebar("sidebar_add_group_member");
+    // });
 
     $(document).on("click", ".group_toggle_close_btn", function () {
         // $("search_user").val("");
@@ -38,6 +157,54 @@ $(document).ready(function () {
     $(document).on("click", ".overlay", function () {
         toggleSidebar();
     });
+    $(document).on("keyup", "#group_toggle_search", function () {
+        var search_name = $(this).val();
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(function () {
+        groupToggleSearch(search_name);
+    }, 1000);
+
+    });
+    function groupToggleSearch(search_name = null) {
+        if (search_name == null) {
+            search_name = "";
+        }
+        $.ajax({
+            url: base_url + "event/group_toggle_search",
+            type: "POST",
+            data: {
+                search_name: search_name,
+                isGroup:1,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+            },
+            beforeSend: function () {
+                $("#home_loader").css("display", "flex");
+            },
+        })
+            .done(function (data) {
+                console.log(data.html);
+                if (data.status == 401 && data.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
+                    return;
+                }
+                if (data.html == " ") {
+                    $("#loader").html("No more contacts found");
+                    $("#home_loader").hide();
+
+                    return;
+                }
+                $("#home_loader").hide();
+                $(".group_search_list_toggle").html(data.html);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+                $("#home_loader").hide();
+
+            });
+    }
+    
     function toggleSidebar(id = null) {
         console.log(id);
         if (id == "sidebar_add_co_host") {

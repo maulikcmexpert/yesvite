@@ -44,6 +44,7 @@ class ContactController extends Controller
         )->findOrFail($id);
 
         $groups = Group::where('user_id', $user->id)->withCount('groupMembers')->orderBy('id', 'DESC')->limit(2)->get();
+        $allgroups = Group::where('user_id', $user->id)->withCount('groupMembers')->orderBy('id', 'DESC')->get();
 
 
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
@@ -139,7 +140,8 @@ class ContactController extends Controller
             'yesvite_user',
             'yesviteGroups',
             'yesvite_phone',
-            'groups'
+            'groups',
+            'allgroups'
 
         ));
     }
@@ -211,7 +213,7 @@ class ContactController extends Controller
             }else{
                 if($searchName!=''){
                     return response()->json([
-                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'search' =>'1',
                         'status' => '1',
                     ]);
