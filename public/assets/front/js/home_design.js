@@ -109,6 +109,7 @@ $(document).on('input', '#search_design_category', function () {
     $(".categoryNew").show();
     $(".subcategoryNew").hide();
     $(".image-item-new").hide();
+    $(".image-item").show();
     $("#category_name").hide();
     $("#allchecked").hide();
     var search_value = $(this).val();
