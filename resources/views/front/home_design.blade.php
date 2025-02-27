@@ -160,7 +160,7 @@
                         data-category_name="{{ $category->category_name }}">
 
                         <div class="card-img collection-card card-blue">
-                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                            <img src="{{ asset('storage/canvas/' . $image->filled_image) }}" alt="shower-card">
                         </div>
 
                     </div>
