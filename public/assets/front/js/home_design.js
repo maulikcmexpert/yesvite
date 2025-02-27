@@ -172,15 +172,15 @@ $(document).ready(function () {
         $(".image-item-new").hide();
         $(".image-item").hide();
         const categoryId = $(this).data("category-id");
-
+        const subcategoryId = $(this).data("subcategory-id");
 
         $(`.categoryChecked_${categoryId}:checked`).each(function () {
             const subcategoryIds = $(this).data("subcategory-id");
-            $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
                 .show();
             $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
         });
-        const subcategoryId = $(this).data("subcategory-id");
+
 
         // $('.subcategory_' + categoryId).prop('checked', true)
         $(".category_" + categoryId).show()
