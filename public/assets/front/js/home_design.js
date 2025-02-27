@@ -16,6 +16,7 @@ $(document).ready(function () {
     $('#Allcat').prop('checked', false);
 
     $('#Allcat').on('change', function () {
+        $('.image-item').show();
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
@@ -43,6 +44,9 @@ $(document).ready(function () {
 
 
         }
+        var visibleItems = $('.all_designs:visible').length;
+        $('.total_design_count').text(visibleItems + ' Items');
+
     });
     // $('input[name="design_subcategory_new"]').on('change', function () {
     //     let subcategoryId = $(this).data('subcategory-id');
@@ -58,6 +62,7 @@ $(document).ready(function () {
     //     }
     // });
     $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
+
         $(".image-item").hide(); // Hide all images first
 
         $('input[name="design_subcategory"]:checked').each(function () {
