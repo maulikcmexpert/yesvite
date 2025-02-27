@@ -769,7 +769,6 @@ class RsvpController extends BaseController
                     }
                 })
                 ->first();
-                dd($existingInvite);
                 if ($existingInvite) {
                     $existingInvite->invitation_sent = '1';
                     $existingInvite->updated_at = now();
