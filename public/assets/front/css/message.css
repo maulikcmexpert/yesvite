@@ -1871,14 +1871,40 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
         position: relative;
         width: 40% !important;
     }
+    .user-detail h3 {
+        font-size: 16px;
+        color: var(--secondryColor);
+        font-weight: 600;
+        line-height: 24px;
+        margin-bottom: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        max-width: 150px;
+        text-transform: capitalize;
+    }    
 }
-@media only screen and (min-width: 1204px) {
+@media only screen and (min-width: 1201px) {
     .chat-lists {
         max-width: 375px;
         border-right: 1px solid var(--borderColor);
         position: relative;
         width: 50% !important;
     }
+    .user-detail h3 {
+        font-size: 16px;
+        color: var(--secondryColor);
+        font-weight: 600;
+        line-height: 24px;
+        margin-bottom: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        max-width: 150px;
+        text-transform: capitalize;
+    }  
 }
 
 
