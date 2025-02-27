@@ -9,60 +9,69 @@ $(document).ready(function () {
         const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
         window.history.replaceState(null, '', newUrl);
     }
-
-
-    // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+    $(".image-item").show(); // Show all default images
+    $(".image-item-new").hide(); // Hide new images initially
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
-    var visibleItems = $('.all_designs:visible').length;
-    $('.total_design_count').text(visibleItems + ' Items');
+
+    updateTotalCount();
+});
+
+    // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+
     $('#Allcat').on('change', function () {
-        $('.image-item').show();
-        $(".image-item-new").hide();
-
-        $("#category_name").hide();
-        $("#allchecked").hide();
         if ($(this).is(':checked')) {
-            const categoryId = $(this).data('category-id');
-            const subcategoryId = $(this).data('subcategory-id');
-
-            $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
+            // Show all default images and hide new images
             $('.image-item').show();
-            var visibleItems = $('.all_designs:visible').length;
-            $('.total_design_count').text(visibleItems + ' Items');
+            $('.image-item-new').hide();
 
+            // Hide category name and checkbox container
+            $("#category_name").hide();
+            $("#allchecked").hide();
 
-
-
+            // Check all subcategory checkboxes
+            $('input[name="design_subcategory"]').prop('checked', true);
         } else {
-            $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
+            // Uncheck all subcategories
+            $('input[name="design_subcategory"]').prop('checked', false);
+
+            // Hide all images
             $('.image-item').hide();
-            var visibleItems = $('.all_designs:visible').length;
-            $('.total_design_count').text(visibleItems + ' Items');
-
-
-
-
+            $('.image-item-new').hide();
         }
 
-
+        updateTotalCount();
     });
 
+    // Handle individual subcategory checkbox change
     $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
-        $(".image-item").hide(); // Hide all images first
-        $(".image-item-new").hide(); // Hide the new items too
+        $(".image-item").hide(); // Hide all default images
+        $(".image-item-new").hide(); // Hide all new images
+
+        let anyChecked = false;
 
         $('input[name="design_subcategory"]:checked').each(function () {
             const categoryId = $(this).data('category-id');
             const subcategoryId = $(this).data('subcategory-id');
-            $(".image-item").hide();
-            // Show filtered images
+
+            // Show filtered images matching checked categories and subcategories
             $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+            anyChecked = true;
         });
 
-        var visibleItems = $('.image-item-new:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
+        if (!anyChecked) {
+            // If no checkboxes are checked, show default images again
+            $(".image-item").show();
+        }
+
+        updateTotalCount();
     });
+
+    // Function to update total count of visible items
+    function updateTotalCount() {
+        var visibleItems = $('.image-item:visible, .image-item-new:visible').length;
+        $('.total_design_count').text(visibleItems + ' Items');
+    }
 
 
     $('#resetCategories').on('click', function (e) {
@@ -151,7 +160,7 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
 
-});
+
 
 $(document).on('click', '#allchecked', function () {
     const categoryId = $(this).attr('data-categoryid');
