@@ -542,7 +542,7 @@ class ApiControllerv2 extends Controller
 
                     $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1'])->count();
 
-                    $eventDetail['total_accept_event_user'] = "1";
+                    $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
 
 
@@ -815,10 +815,11 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['rsvp_status'] = $rsvp_status;
 
-                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-                            // $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        //     // $query->where('app_user', '1');
+                        // })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
@@ -1095,10 +1096,11 @@ class ApiControllerv2 extends Controller
                             }
                             $eventDetail['event_detail'] = $eventData;
                         }
-                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-                            // $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        //     // $query->where('app_user', '1');
+                        // })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
@@ -1318,10 +1320,11 @@ class ApiControllerv2 extends Controller
 
                         $eventDetail['rsvp_status'] = $rsvp_status;
 
-                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-                            // $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1', 'is_co_host' => '0'])->count();
+                        //     // $query->where('app_user', '1');
+                        // })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'rsvp_d' => '1', 'is_co_host' => '0'])->count();
+                        $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
@@ -1584,11 +1587,12 @@ class ApiControllerv2 extends Controller
                         }
 
 
-                        $eventDetail['rsvp_status'] = $rsvp_status;
-                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        // $eventDetail['rsvp_status'] = $rsvp_status;
+                        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-                            // $query->where('app_user', '1');
-                        })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        //     // $query->where('app_user', '1');
+                        // })->where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+                        $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
@@ -1881,10 +1885,11 @@ class ApiControllerv2 extends Controller
                             }
                             $eventDetail['event_detail'] = $eventData;
                         }
-                        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-                            // $query->where('app_user', '1');
-                        })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+                        //     // $query->where('app_user', '1');
+                        // })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+                        $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
                         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
                         $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
@@ -12805,10 +12810,11 @@ class ApiControllerv2 extends Controller
 
         $eventDetail['rsvp_status'] = $rsvp_status;
 
-        $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+        // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
 
-            // $query->where('app_user', '1');
-        })->where(['event_id' => $getEventData->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+        //     // $query->where('app_user', '1');
+        // })->where(['event_id' => $getEventData->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+        $total_accept_event_user = EventInvitedUser::where(['event_id' => $getEventData->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
 
         $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
