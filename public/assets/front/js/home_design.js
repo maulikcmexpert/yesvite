@@ -111,11 +111,7 @@ $(document).ready(function () {
     });
 
     $(document).on('input', '#search_design_category', function () {
-        $(".categoryNew").show();
-        $(".subcategoryNew").hide();
-        $(".image-item-new").hide();
-        $("#category_name").hide();
-        $("#allchecked").hide();
+
         var search_value = $(this).val();
         $('#home_loader').css('display', 'flex');
         if (search_value == '') {
