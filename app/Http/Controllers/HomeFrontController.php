@@ -147,16 +147,16 @@ class HomeFrontController extends BaseController
     {
         $query = $request->input('search');
 
-        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+        $categories = EventDesignSubCategory::where('subcategory_name', 'LIKE', "%$query%")
             ->whereHas('subcategory', function ($query) {
                 $query->whereHas('textdatas'); // Ensure subcategories have textdatas
             })
-            ->with([
-                'subcategory' => function ($query) {
-                    $query->whereHas('textdatas') // Only subcategories with textdatas
-                        ->with('textdatas'); // Load textdatas
-                }
-            ])
+            // ->with([
+            //     'subcategory' => function ($query) {
+            //         $query->whereHas('textdatas') // Only subcategories with textdatas
+            //             ->with('textdatas'); // Load textdatas
+            //     }
+            // ])
             ->orderBy('id', 'ASC')
             ->get();
 
