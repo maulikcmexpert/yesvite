@@ -886,7 +886,7 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    if($$request->isShare==""){
+                    if($request->isShare==""){
                         if ($request->input('user_id') != "") {
                             $creatEventPost->user_id =  $userId;
                         } else {
