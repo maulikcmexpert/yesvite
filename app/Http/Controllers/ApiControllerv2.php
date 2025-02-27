@@ -8144,7 +8144,7 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        // dd($results);
+        dd($results);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
@@ -8198,11 +8198,9 @@ class ApiControllerv2 extends Controller
                     }
                     $postsNormalDetail['id'] =  $value->id;
                     $postsNormalDetail['user_id'] =  $value->user->id;
-                    if (empty($value->user) || empty($value->user->id)) {
-                        if (!empty($value->sync_id)) {
-                            $postsNormalDetail['is_sync']='1';
-                            }
-                    }else{
+                    if (!empty($value->sync_id)) {
+                        $postsNormalDetail['is_sync']='1';
+                        } else{
                             $postsNormalDetail['is_sync']='0';
                         }
     
@@ -8383,13 +8381,14 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['id'] =  $value->id;
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
-                    if (empty($value->user) || empty($value->user->id)) {
+                    // if (empty($value->user) || empty($value->user->id)) {
                         if (!empty($value->sync_id)) {
                             $postsNormalDetail['is_sync']='1';
+                            } else{
+                                $postsNormalDetail['is_sync']='0';
                             }
-                    }else{
-                            $postsNormalDetail['is_sync']='0';
-                        }
+                    // }
+                   
 
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     // dd($isCoHost);
