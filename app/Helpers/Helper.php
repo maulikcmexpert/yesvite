@@ -1191,7 +1191,7 @@ function sendNotification($notificationType, $postData)
         } elseif ($postData['rsvp_status'] == '0') {
             $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
-        // if ($postData['sync_id'] == "" || $postData['sync_id'] == null) {
+        if ($postData['sync_id'] == "" || $postData['sync_id'] == null) {
             if ($getPostOwnerId->user_id != $postData['sender_id']) {
 
                 Notification::where([
@@ -1216,7 +1216,6 @@ function sendNotification($notificationType, $postData)
 
                 if ($notification->save()) {
                     $deviceData = Device::where('user_id', $getPostOwnerId->user_id)->first();
-                    dd($deviceData);
                     if (!empty($deviceData)) {
                         $notification_image = "";
                         if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {
@@ -1264,7 +1263,7 @@ function sendNotification($notificationType, $postData)
                     }
                 }
             }
-        // }
+        }
     }
 
     if ($notificationType == 'potluck_bring') {
