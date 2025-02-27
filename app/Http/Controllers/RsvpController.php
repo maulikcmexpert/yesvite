@@ -886,7 +886,7 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    if($shared==""){
+                    if($$request->isShare==""){
                         if ($request->input('user_id') != "") {
                             $creatEventPost->user_id =  $userId;
                         } else {
@@ -925,7 +925,7 @@ class RsvpController extends BaseController
                 //     }
                 // }
 
-                if($shared==""){
+                if($request->isShare==""){
                     if ($userId != "" || $userId != null) {
                         if (!empty($request->input('notifications'))) {
                             foreach ($request->input('notifications') as $value) {
@@ -1037,14 +1037,14 @@ class RsvpController extends BaseController
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
-                    if($shared==""){
+                    if($request->isShare==""){
                     return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
                     }else{
                         return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg', 'You are going to this event');
                     }
                     // return redirect()->to($url)->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    if($shared==""){
+                    if($request->isShare==""){
 
                     return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
                     }else{
@@ -1054,21 +1054,20 @@ class RsvpController extends BaseController
                     // return redirect()->to($url)->with('msg', 'You are going to this event');
                 }
             }
-            if($shared==""){
+            if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Rsvp not sent');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Rsvp not sent');
             }
         } catch (QueryException $e) {
-            if($shared==""){
+            if($request->isShare==""){
               return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'DB error');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'DB error');
             }
             DB::rollBack();
         } catch (\Exception $e) {
-            dd($e);
-            if($shared==""){
+            if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Something went wrong');
