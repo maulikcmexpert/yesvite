@@ -870,7 +870,7 @@ $(document).on("click","#copy_link_btn",function(e){
 
     // Use Clipboard API to copy text
     navigator.clipboard.writeText(copyText).then(function() {
-        alert("Copied: " + copyText);
+        // alert("Copied: " + copyText);
     }).catch(function(err) {
         console.error("Failed to copy: ", err);
     });
