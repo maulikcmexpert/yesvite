@@ -9,7 +9,7 @@ $(document).ready(function () {
         const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
         window.history.replaceState(null, '', newUrl);
     }
-    $(".image-item").show(); // Show all default images
+    // $(".image-item").show(); // Show all default images
     $(".image-item-new").hide(); // Hide new images initially
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
