@@ -1332,6 +1332,18 @@ label.error {
     margin-right: 10px !important;
 }
 
+.new_copy_event_Wrp{
+    margin-top: 15px;
+}
+
+.new_copy_event_Wrp h4{
+    font-size: 18px;
+    font-family: var(--SFProDisplay-Semibold);
+    line-height: normal;
+    color: var(--secondary-black);
+    padding: 0px !important;
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
