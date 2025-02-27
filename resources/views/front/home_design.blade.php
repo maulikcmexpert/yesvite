@@ -132,10 +132,10 @@
                         }
                     }
                 }
-                $randomImages = $allImages->shuffle()->take(30);
+                // $randomImages = $allImages->shuffle()->take(30);
             @endphp
 
-            @foreach ($randomImages as $image)
+            @foreach ($allImages as $image)
 
                 <div id="design_category"
                     class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
