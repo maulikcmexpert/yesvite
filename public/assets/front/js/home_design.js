@@ -140,6 +140,7 @@ $(".image-item").hide(); // Show all default images
                     $('.total_design_count').text(response.count + ' Items')
                     $('#home_loader').css('display', 'none');
                 }
+                updateTotalCount();
             },
             error: function (error) {
                 toastr.error('Some thing went wrong');
