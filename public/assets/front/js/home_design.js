@@ -44,6 +44,9 @@ $(document).ready(function () {
 
 
         }
+        var visibleItems = $('.all_designs:visible').length;
+        $('.total_design_count').text(visibleItems + ' Items');
+
     });
     // $('input[name="design_subcategory_new"]').on('change', function () {
     //     let subcategoryId = $(this).data('subcategory-id');
@@ -59,8 +62,7 @@ $(document).ready(function () {
     //     }
     // });
     $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
-        var visibleItems = $('.all_designs:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
+
         $(".image-item").hide(); // Hide all images first
 
         $('input[name="design_subcategory"]:checked').each(function () {
