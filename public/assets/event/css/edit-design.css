@@ -2286,6 +2286,10 @@
         max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
     }
+    .new-event-sidebar-wrp .coin-invite-main {
+        width: 40%;
+        max-width: 40%;
+    }
 }
 
 @media only screen and (max-width: 1399px) {
