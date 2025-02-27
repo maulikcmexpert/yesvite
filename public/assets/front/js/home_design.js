@@ -39,6 +39,7 @@ $(document).ready(function () {
             $('input[name="design_subcategory"]').prop('checked', true);
         }
         else if ($(this).is(':checked') < 0) {
+            $(".image-item").addClass('default_show');
             $(".default_show").show();
         }
          else {
