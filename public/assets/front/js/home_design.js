@@ -104,17 +104,20 @@ $('.close-btn').on('click', function () {
     $cookiesBox.removeClass('active');
     localStorage.setItem('cookiesBoxDismissed', 'true');
 });
+
 $(document).on('input', '#search_design_category', function () {
     let searchText = $(this).val().trim().toLowerCase();
-    let resultsContainer = $('#filtered_results');
-    resultsContainer.empty();
+    let resultsContainer = $('#filtered_results'); // New div for displaying filtered results
+    resultsContainer.empty(); // Clear previous results
 
+    // Hide unnecessary elements
     $(".categoryNew").show();
     $(".subcategoryNew, .image-item-new").hide();
     $("#category_name, #allchecked").hide();
 
     let hasResults = false;
 
+    // Loop through categories and subcategories
     $('.accordion-item').each(function () {
         let categoryName = $(this).find('.accordion-button').text().toLowerCase();
         let matchFound = categoryName.includes(searchText);
@@ -123,28 +126,32 @@ $(document).on('input', '#search_design_category', function () {
             let subcategoryName = $(this).find('label').text().toLowerCase();
             if (subcategoryName.includes(searchText)) {
                 hasResults = true;
-                $(this).show();
-                matchFound = true;
-            } else {
-                $(this).hide();
+                let subcategoryHtml = `<div class="filtered-item">${$(this).html()}</div>`;
+                resultsContainer.append(subcategoryHtml);
             }
         });
 
-        if (matchFound) {
-            $(this).show();
-        } else {
-            $(this).hide();
-        }
+        // Hide the category list, show only filtered results
+        $(this).hide();
     });
 
+    if (!hasResults) {
+        resultsContainer.html('<p class="no-results">No results found</p>');
+    }
+
+    // Show loading icon
     $('#home_loader').css('display', 'flex');
 
+    // Handle empty input case
     if (searchText === '') {
-        $('.accordion-item').show();
+        $('input[name="design_subcategory"]').prop('checked', true);
+        $("#Allcat").prop("checked", true);
+        $('.accordion-item').show(); // Show all categories when search is cleared
         $('#home_loader').css('display', 'none');
         return;
     }
 
+    // Perform AJAX search
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
@@ -155,7 +162,6 @@ $(document).on('input', '#search_design_category', function () {
             if (response.view) {
                 $('.list_all_design_catgeory').html(response.view);
                 $('.total_design_count').text(response.count + ' Items');
-                $(".image-item-new").show(); // Search után images dikhavo
             } else {
                 $('.list_all_design_catgeory').html('<p>No Design Found</p>');
                 $('.total_design_count').text('0 Items');
@@ -167,7 +173,6 @@ $(document).on('input', '#search_design_category', function () {
         }
     });
 });
-
 
 // Show subcategories when clicking a category
 $(document).on('click', '.image-item', function () {
