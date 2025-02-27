@@ -1861,29 +1861,6 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     stroke:#94A3B8;
 } */
 
-
-
-@media only screen and (max-width: 1366px) and (height: 768px) {
-    body {
-      background-color: lightgoldenrodyellow !important;
-    }
-  }
-  
-  /* 1920x1080 (Full HD Screens) */
-  @media only screen and (max-width: 1920px) and (height: 1080px) {
-    body {
-      background-color: lightgray !important;
-    }
-  }
-  
-  /* 2560x1440 (2K Resolution) */
-  @media only screen and (max-width: 2560px) and (height: 1440px) {
-    body {
-      background-color: orange !important;
-    }
-  }
-
-
 /* ======= responsive ======== */
 
 @media only screen and (min-width: 1400px) {
