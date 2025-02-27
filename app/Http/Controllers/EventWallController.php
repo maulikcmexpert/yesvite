@@ -152,7 +152,7 @@ class EventWallController extends BaseController
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
-        $eventPostList = EventPost::with(['user', 'post_image', 'event_post_poll.eventPollOptions'])
+        $eventPostList = EventPost::with(['user','contact_sync','post_image', 'event_post_poll.eventPollOptions'])
             ->withCount([
                 'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
                 'event_post_reaction'
@@ -209,7 +209,20 @@ class EventWallController extends BaseController
             });
         }
 
+        dd($eventPostList);
         foreach ($eventPostList as $value) {
+                 if (empty($value->user) || empty($value->user->id)) {
+                        if (!empty($value->sync_id)) {
+                            $syncUser = contact_sync::where('id', $value->sync_id)->first();
+                            if ($syncUser) {
+                                $value->user = $syncUser; // Assign the found user
+                            } else {
+                                continue; // Skip if no user found via sync_id
+                            }
+                        } else {
+                            continue; // Skip if no user and no sync_id
+                        }
+                    }
             // Check RSVP status and event ownership only once
             $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
             $isEventOwner = $value->user->id === $user->id;
@@ -235,19 +248,45 @@ class EventWallController extends BaseController
                 $adults = $count_kids_adult->adults ?? 0;
             }
 
+            if (!empty($value->sync_id)) {
+             
+                $username =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
+                $profile = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
+                $is_host = ($value->contact_sync->id == $eventCreator->user_id) ? 1 : 0;
+                $user_id=$value->contact_sync->id;
+                $is_sync=1;
+                $location="";
+                $is_co_host= EventInvitedUser::where(['event_id' => $eventCreator->id, 'sync_id' => $value->contact_sync->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
+            } else {
+                // Handle case where user is still not found
+                $username = $value->user->firstname . ' ' . $value->user->lastname;
+                $profile = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                $is_host = ($value->user->id == $eventCreator->user_id) ? 1 : 0;
+                $user_id=  $value->user->id;
+                $is_sync=0;
+                $location=trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : ''));
+                $is_co_host= EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
+
+
+            }
             // Build the post details array
             $postsNormalDetail = [
                 'id' => $value->id,
-                'user_id' => $value->user->id,
-                'is_co_host' => EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0",
-                'is_host' => $value->user->id == $eventCreator->user_id ? 1 : 0,
-                'username' => $value->user->firstname . ' ' . $value->user->lastname,
-                'profile' => asset('storage/profile/' . ($value->user->profile ?? '')),
+                'user_id' => $user_id,
+                // 'is_co_host' => EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0",
+                'is_co_host'=>$is_co_host,
+                'is_host' => $is_host,
+                'username' => $username,
+                'profile' => $profile,
+                'is_sync'=>$is_sync,
+                // 'username' => $value->user->firstname . ' ' . $value->user->lastname,
+                // 'profile' => asset('storage/profile/' . ($value->user->profile ?? '')),
                 'post_message' => $value->post_type == '4' ? '' : $value->post_message,
                 'rsvp_status' => (string)$rsvpstatus,
                 'kids' => (int)$kids,
                 'adults' => (int)$adults,
-                'location' => trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : '')),
+                // 'location' => trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : '')),
+                'location' => $location,
                 'post_type' => $value->post_type,
                 'post_privacy' => $value->post_privacy,
                 'created_at' => $value->created_at,

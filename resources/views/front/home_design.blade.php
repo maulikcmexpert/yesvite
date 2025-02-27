@@ -81,7 +81,6 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         @foreach ($category->subcategory as $subcategory)
-
                                                             <li>
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-between">
@@ -117,10 +116,13 @@
         <div class="row list_all_design_catgeory">
             @php
                 $allImages = collect([]);
+                $randomIds = [];
                 foreach ($categories as $category) {
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
+                            $randomIds[] = $image->id;
                             $allImages->push([
+                                'imageId' => $image->id,
                                 'category_id' => $category->id,
                                 'subcategory_id' => $subcategory->id,
                                 'category_name' => $category->category_name,
@@ -129,44 +131,47 @@
                         }
                     }
                 }
-                $randomImages = $allImages->shuffle()->take(30);
+
+                shuffle($randomIds);
+                $randomIds = array_slice($randomIds, 0, 2);
+                // $randomImages = $allImages->shuffle()->take(30);
             @endphp
 
-            @foreach ($randomImages as $image)
+            @foreach ($allImages as $image)
                 <div id="design_category"
                     class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                    data-category-id="{{ $image['category_id'] }}" data-subcategory-id="{{ $image['subcategory_id'] }}"
-                    data-category_name="{{ $image['category_name'] }}">
+                    data-category-id="{{ $image['category_id'] }}"
+                    data-subcategory-id="{{ $image['subcategory_id'] }}"
+                    data-category_name="{{ $image['category_name'] }}"
+                    style="{{ in_array($image['imageId'], $randomIds) ? 'display: none;' : '' }}">
 
-                        <div class="card-img collection-card card-blue">
-                            <img src="{{ $image['image_path'] }}" alt="shower-card">
-                        </div>
+                    <div class="card-img collection-card card-blue">
+                        <img src="{{ $image['image_path'] }}" alt="shower-card">
+                    </div>
 
                 </div>
             @endforeach
         </div>
 
 
-        <div class="row list_all_design_catgeory search_category" >
+        <div class="row list_all_design_catgeory search_category">
             @foreach ($categories as $category)
-            @foreach ($category->subcategory as $subcategory)
-            @foreach ($subcategory->textdatas as $image)
+                @foreach ($category->subcategory as $subcategory)
+                    @foreach ($subcategory->textdatas as $image)
+                        <div id="design_category" style="display:none"
+                            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
+                            data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                            data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
+                            data-category_name="{{ $category->category_name }}">
 
-                    <div id="design_category" style="display:none"
-                        class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                        data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
-                        data-category_name="{{ $category->category_name }}">
+                            <div class="card-img collection-card card-blue">
+                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}" alt="shower-card">
+                            </div>
 
-                        <div class="card-img collection-card card-blue">
-                            <img src="{{ asset('storage/canvas/' . $image->filled_image) }}" alt="shower-card">
                         </div>
-
-                    </div>
-
-            @endforeach
-            @endforeach
+                    @endforeach
+                @endforeach
             @endforeach
 
 
