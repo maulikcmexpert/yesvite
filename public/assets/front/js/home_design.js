@@ -20,7 +20,7 @@ $(document).ready(function () {
 $('#Allcat').on('change', function () {
     if ($(this).is(':checked')) {
         // Show all default images and hide new images
-        $('.image-item').show();
+        // $('.image-item').show();
         $('.image-item-new').hide();
 
         // Hide category name and checkbox container
