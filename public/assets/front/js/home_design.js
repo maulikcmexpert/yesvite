@@ -51,21 +51,17 @@ $(document).ready(function () {
         $(".image-item").hide(); // Hide all default images
         $(".image-item-new").hide(); // Hide all new images
 
-        let anyChecked = false;
+        $(".image-item").removeClass('d-none');
 
         $('input[name="design_subcategory"]:checked').each(function () {
             const categoryId = $(this).data('category-id');
             const subcategoryId = $(this).data('subcategory-id');
 
             // Show filtered images matching checked categories and subcategories
-            $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-            anyChecked = true;
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+
         });
 
-        if (!anyChecked) {
-            // If no checkboxes are checked, show default images again
-            $(".image-item").show();
-        }
 
         updateTotalCount();
     });
