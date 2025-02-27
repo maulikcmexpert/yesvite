@@ -1,4 +1,4 @@
-@if($categories->count() > 0)
+
     @foreach ($categories as $category)
         @foreach ($category->subcategory as $subcategory)
             @foreach ($subcategory->textdatas as $image)
@@ -12,6 +12,3 @@
             @endforeach
         @endforeach
     @endforeach
-@else
-    <p>No Design Found</p>
-@endif
