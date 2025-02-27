@@ -106,24 +106,52 @@ $('.close-btn').on('click', function () {
 });
 
 $(document).on('input', '#search_design_category', function () {
-    let search_value = $(this).val().trim();
+    let searchText = $(this).val().trim().toLowerCase();
+    let resultsContainer = $('#filtered_results'); // New div for displaying filtered results
+    resultsContainer.empty().show(); // Clear previous results and show the container
+
     $(".categoryNew").show();
-    $(".subcategoryNew").hide();
-    $(".image-item-new").hide();
+    $(".subcategoryNew, .image-item-new").hide();
     $("#category_name, #allchecked").hide();
+
+    let hasResults = false;
+
+    // Loop through categories and subcategories
+    $('.accordion-item').each(function () {
+        let categoryName = $(this).find('.accordion-button').text().toLowerCase();
+        let matchFound = categoryName.includes(searchText);
+
+        $(this).find('li').each(function () {
+            let subcategoryName = $(this).find('label').text().toLowerCase();
+            if (subcategoryName.includes(searchText)) {
+                hasResults = true;
+                let subcategoryHtml = `<div class="filtered-item">${$(this).find('label').text()}</div>`;
+                resultsContainer.append(subcategoryHtml);
+            }
+        });
+
+        $(this).hide();
+    });
+
+    if (!hasResults) {
+        resultsContainer.html('<p class="no-results">No results found</p>');
+    }
 
     $('#home_loader').css('display', 'flex');
 
-    if (search_value === '') {
+    if (searchText === '') {
         $('input[name="design_subcategory"]').prop('checked', true);
         $("#Allcat").prop("checked", true);
+        $('.accordion-item').show();
+        $('#home_loader').css('display', 'none');
+        resultsContainer.hide();
         return;
     }
 
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
-        data: { search: search_value },
+        data: { search: searchText },
         success: function (response) {
             $('#home_loader').css('display', 'none');
 
@@ -141,11 +169,19 @@ $(document).on('input', '#search_design_category', function () {
         }
     });
 });
-$(document).on('click', '.filtered-item', function(){
-    let text = $(this).text().trim();
-    $('#search_design_category').val(text);
-    $('#filtered_results').hide();
- });
+
+// Handle Click on Filtered Item
+$(document).on('click', '.filtered-item', function () {
+    let selectedText = $(this).text().trim();
+    $('#search_design_category').val(selectedText);
+    $('#filtered_results').hide(); // Hide results after selection
+});
+
+$(document).on('click', '.filtered-item', function () {
+    let selectedText = $(this).text().trim();
+    $('#search_design_category').val(selectedText);
+    $('#filtered_results').hide(); // Hide the results after selection
+});
 
 // Show subcategories when clicking a category
 $(document).on('click', '.image-item', function () {
