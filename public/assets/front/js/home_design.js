@@ -39,7 +39,7 @@ $(document).ready(function () {
             $('input[name="design_subcategory"]').prop('checked', true);
         }
 
-         else {
+        else {
             // Uncheck all subcategories
             $('input[name="design_subcategory"]').prop('checked', false);
 
@@ -57,9 +57,10 @@ $(document).ready(function () {
         $(".image-item").hide(); // Hide all default images
         $(".image-item-new").hide(); // Hide all new images
 
-
+        let default_s = 0;
 
         $('input[name="design_subcategory"]:checked').each(function () {
+            default_s++;
             $(".image-item").removeClass('d-none');
             const categoryId = $(this).data('category-id');
             const subcategoryId = $(this).data('subcategory-id');
@@ -69,7 +70,10 @@ $(document).ready(function () {
 
         });
 
-
+        if (default_s == 0) {
+            $(".image-item").removeClass('d-none');
+            $(".default_show").show();
+        }
         updateTotalCount();
     });
 
