@@ -134,7 +134,7 @@
 
                 shuffle($randomIds);
                 $randomIds = array_slice($randomIds, 0, 2);
-                $t = [0=>378,1=>401];
+                $t = [378,401];
                 dd(in_array(378,$t));
                 // $randomImages = $allImages->shuffle()->take(30);
             @endphp
