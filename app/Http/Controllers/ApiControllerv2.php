@@ -8198,9 +8198,11 @@ class ApiControllerv2 extends Controller
                     }
                     $postsNormalDetail['id'] =  $value->id;
                     $postsNormalDetail['user_id'] =  $value->user->id;
-                    if (!empty($value->sync_id)) {
-                        $postsNormalDetail['is_sync']='1';
-                        }else{
+                    if (empty($value->user) || empty($value->user->id)) {
+                        if (!empty($value->sync_id)) {
+                            $postsNormalDetail['is_sync']='1';
+                            }
+                    }else{
                             $postsNormalDetail['is_sync']='0';
                         }
     
@@ -8381,11 +8383,13 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['id'] =  $value->id;
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
-                    if (!empty($value->sync_id)) {
-                    $postsNormalDetail['is_sync']='1';
+                    if (empty($value->user) || empty($value->user->id)) {
+                        if (!empty($value->sync_id)) {
+                            $postsNormalDetail['is_sync']='1';
+                            }
                     }else{
-                        $postsNormalDetail['is_sync']='0';
-                    }
+                            $postsNormalDetail['is_sync']='0';
+                        }
 
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                     // dd($isCoHost);

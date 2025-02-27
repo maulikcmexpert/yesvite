@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventPost;
 use App\Models\Device;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
@@ -209,6 +210,9 @@ class AuthController extends Controller
 
                 EventInvitedUser::where('sync_id', $checkContactSync->id)
                 ->update(['user_id' => $storeUser->id]);
+
+                EventPost::where('sync_id',$checkContactSync->id)
+                ->update(['user_id'=>$storeUser->id]);
             
             }
             
