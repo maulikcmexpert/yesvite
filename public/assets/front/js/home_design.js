@@ -100,6 +100,7 @@ $(document).ready(function () {
                     $('input[name="design_subcategory"]').prop('checked', true)
                     $("#Allcat").prop("checked", true);
                 }
+                updateTotalCount();
                 $.ajax({
                     url: base_url + "search_features",
                     method: 'GET',
@@ -107,7 +108,7 @@ $(document).ready(function () {
                         search: search_value
                     },
                     success: function (response) {
-                        updateTotalCount();
+
                         if (response.view) {
                             $('.search_category').html('');
                             $('.search_category').html(response.view);
