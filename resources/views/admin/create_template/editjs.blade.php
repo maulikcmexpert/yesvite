@@ -2056,6 +2056,31 @@
         canvas.on("mouse:up", function (options) {
             discardIfMultipleObjects(options);
         });
+        let lastEditedObject = null;
+
+        canvas.on("text:editing:entered", function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.type === "textbox") {
+                if (lastEditedObject !== activeObject) {
+                    addToUndoStack(canvas); // Save state before editing starts (only once per object)
+                    lastEditedObject = activeObject; // Mark this object as last edited
+                }
+            }
+        });
+
+        // Capture state after user changes text
+        let typingTimeout; // Store the timeout reference
+
+        canvas.on("text:changed", function () {
+            var activeObject = canvas.getActiveObject();
+            if (activeObject && activeObject.type === "textbox") {
+                clearTimeout(typingTimeout); // 🛑 Clear any previous timeout
+
+                typingTimeout = setTimeout(() => {
+                    addToUndoStack(canvas); // ✅ Add only after user stops typing
+                }, 500); // ⏳ Adjust delay (500ms = half a second after last keypress)
+            }
+        });
 
 
         function getTextDataFromCanvas() {
@@ -2524,49 +2549,106 @@
         }
 
 
-        function undo() {
-        console.log("undoStack", undoStack.length);
+    //     function undo() {
+    //         console.log("undoStack", undoStack.length);
+    //         if (undoStack.length > 0) {
+    //             // Ensure at least one previous state exists
+    //             if (undoStack.length == 1) {
+    //                 $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+    //             }
+    //             redoStack.push(canvas.toJSON()); // Save current state to redo stack
+    //             const lastState = undoStack.pop(); // Get the last state to undo
+    //             canvas.loadFromJSON(lastState, function () {
+    //                 canvas.renderAll(); // Render the canvas after loading state
+    //             });
+    //             if (redoStack.length > 0) {
+    //                 $("#redoButton").find("svg path").attr("fill", "#0F172A");
+    //             }
+    //             setTimeout(function () {
+    //                 setControlVisibilityForAll();
+    //             }, 1000);
+    //         } else {
+    //             $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+    //         }
+    //     }
+
+    // function redo() {
+    //     if (redoStack.length > 0) {
+    //         undoStack.push(canvas.toJSON()); // Save current state to undo stack
+    //         const nextState = redoStack.pop(); // Get the next state to redo
+    //         canvas.loadFromJSON(nextState, function () {
+    //             canvas.renderAll(); // Render the canvas after loading state
+    //         });
+    //         if (redoStack.length == 1) {
+    //             $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+    //         }
+    //         if (undoStack.length > 0) {
+    //             $("#undoButton").find("svg path").attr("fill", "#0F172A");
+    //         }
+    //         $("#redoButton").find("svg path").attr("fill", "#0F172A");
+    //         setTimeout(function () {
+    //             setControlVisibilityForAll();
+    //         }, 1000);
+    //     } else {
+    //         $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+    //     }
+    // }
+
+    let isUndoRedoInProgress = false; // Lock to prevent rapid undo/redo
+
+    function undo() {
+        if (isUndoRedoInProgress) return; // Prevent multiple fast undo actions
         if (undoStack.length > 0) {
-            // Ensure at least one previous state exists
-            if (undoStack.length == 1) {
-                $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
-            }
-            redoStack.push(canvas.toJSON()); // Save current state to redo stack
+            isUndoRedoInProgress = true; // Lock function
+
+            redoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
-            canvas.loadFromJSON(lastState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+
+            loadCanvasState(lastState, () => {
+                isUndoRedoInProgress = false; // Unlock after completion
             });
-            if (redoStack.length > 0) {
-                $("#redoButton").find("svg path").attr("fill", "#0F172A");
-            }
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
-        } else {
-            $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
+
+            updateUndoRedoButtons();
         }
     }
 
     function redo() {
+        if (isUndoRedoInProgress) return; // Prevent multiple fast redo actions
         if (redoStack.length > 0) {
-            undoStack.push(canvas.toJSON()); // Save current state to undo stack
+            isUndoRedoInProgress = true; // Lock function
+
+            undoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
-            canvas.loadFromJSON(nextState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+
+            loadCanvasState(nextState, () => {
+                isUndoRedoInProgress = false; // Unlock after completion
             });
-            if (redoStack.length == 1) {
-                $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
-            }
-            if (undoStack.length > 0) {
-                $("#undoButton").find("svg path").attr("fill", "#0F172A");
-            }
-            $("#redoButton").find("svg path").attr("fill", "#0F172A");
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
-        } else {
-            $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
+
+            updateUndoRedoButtons();
         }
+    }
+
+    // 🛠 Function to load JSON state without blinking
+    function loadCanvasState(state, callback) {
+        canvas.renderOnAddRemove = false; // 🛑 Disable rendering to avoid flickering
+
+        canvas.loadFromJSON(state, function () {
+            canvas.renderOnAddRemove = true; // ✅ Re-enable rendering
+            canvas.requestRenderAll(); // 🖼 Smoothly render changes
+            if (callback) callback();
+        });
+    }
+
+    // 🛠 Function to update button states
+    function updateUndoRedoButtons() {
+        $("#undoButton svg path").attr(
+            "fill",
+            undoStack.length > 0 ? "#0F172A" : "#CBD5E1"
+        );
+        $("#redoButton svg path").attr(
+            "fill",
+            redoStack.length > 0 ? "#0F172A" : "#CBD5E1"
+        );
     }
 
 
