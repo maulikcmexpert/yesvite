@@ -106,99 +106,42 @@ $('.close-btn').on('click', function () {
 });
 
 $(document).on('input', '#search_design_category', function () {
-    let searchText = $(this).val().trim().toLowerCase();
-    let resultsContainer = $('#filtered_results'); // New div for displaying filtered results
-    resultsContainer.empty().show(); // Clear previous results and show the container
-
     $(".categoryNew").show();
-    $(".subcategoryNew, .image-item-new").hide();
-    $("#category_name, #allchecked").hide();
-
-    let hasResults = false;
-
-    // Loop through categories and subcategories
-    $('.accordion-item').each(function () {
-        let categoryName = $(this).find('.accordion-button').text().toLowerCase();
-        let matchFound = categoryName.includes(searchText);
-
-        $(this).find('li').each(function () {
-            let subcategoryName = $(this).find('label').text().toLowerCase();
-            if (subcategoryName.includes(searchText)) {
-                hasResults = true;
-                let subcategoryHtml = `<div class="filtered-item">${$(this).find('label').text()}</div>`;
-                resultsContainer.append(subcategoryHtml);
-            }
-        });
-
-        $(this).hide();
-    });
-
-    if (!hasResults) {
-        resultsContainer.html('<p class="no-results">No results found</p>');
-    }
-
+    $(".subcategoryNew").hide();
+    $(".image-item-new").hide();
+    $("#category_name").hide();
+    $("#allchecked").hide();
+    var search_value = $(this).val();
     $('#home_loader').css('display', 'flex');
-
-    if (searchText === '') {
-        $('input[name="design_subcategory"]').prop('checked', true);
+    if (search_value == '') {
+        $('input[name="design_subcategory"]').prop('checked', true)
         $("#Allcat").prop("checked", true);
-        $('.accordion-item').show();
-        $('#home_loader').css('display', 'none');
-        resultsContainer.hide();
-        return;
     }
-
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
-        data: { search: searchText },
+        data: {
+            search: search_value
+        },
         success: function (response) {
-            $('#home_loader').css('display', 'none');
-console.log(response);
+
             if (response.view) {
+                $('.list_all_design_catgeory').html('');
                 $('.list_all_design_catgeory').html(response.view);
-                $('.total_design_count').text(response.count + ' Items');
+                $('#home_loader').css('display', 'none');
+                $('.total_design_count').text(response.count + ' Items')
+
             } else {
-                $('.list_all_design_catgeory').html('<p>No Design Found</p>');
-                $('.total_design_count').text('0 Items');
+                $('.list_all_design_catgeory').html('No Design Found');
+                $('.total_design_count').text(response.count + ' Items')
+                $('#home_loader').css('display', 'none');
             }
         },
-        error: function () {
-            $('#home_loader').css('display', 'none');
-            toastr.error('Something went wrong');
+        error: function (error) {
+            toastr.error('Some thing went wrong');
         }
     });
 });
-
-// Handle Click on Filtered Item
-$(document).on('click', '.filtered-item', function () {
-    let selectedText = $(this).text().trim();
-    $('#search_design_category').val(selectedText);
-    $('#filtered_results').hide(); // Hide results after selection
-});
-
-$(document).on('click', '.filtered-item', function () {
-    let selectedText = $(this).text().trim();
-    $('#search_design_category').val(selectedText);
-    $('#filtered_results').hide(); // Hide the results after selection
-});
-
-// Show subcategories when clicking a category
-$(document).on('click', '.image-item', function () {
-    let categoryId = $(this).data('category-id');
-
-    $(".subcategoryNew").hide();
-    $(`.subcategoryNew[data-category-id="${categoryId}"]`).show(); // Show relevant subcategories
-});
-
-// Show designs when clicking a subcategory
-$(document).on('click', '.subcategory-item', function () {
-    let subcategoryId = $(this).data('subcategory-id');
-
-    $(".image-item-new").hide();
-    $(`.image-item-new[data-subcategory-id="${subcategoryId}"]`).show(); // Show relevant designs
-});
-
 
 
 $(document).on('click', '#design_category', function () {
