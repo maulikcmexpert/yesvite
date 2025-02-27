@@ -1040,6 +1040,7 @@ class RsvpController extends BaseController
                 } 
             DB::commit();
             
+            // dd($notificationParam);
             sendNotification('sent_rsvp', $notificationParam);
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
