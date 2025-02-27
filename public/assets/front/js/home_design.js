@@ -106,42 +106,28 @@ $('.close-btn').on('click', function () {
 });
 
 $(document).on('input', '#search_design_category', function () {
-    $(".categoryNew").show();
-    $(".subcategoryNew").hide();
-    $(".image-item-new").hide();
-    $("#category_name").hide();
-    $("#allchecked").hide();
-    var search_value = $(this).val();
+    var search_value = $(this).val().trim();
     $('#home_loader').css('display', 'flex');
-    if (search_value == '') {
-        $('input[name="design_subcategory"]').prop('checked', true)
-        $("#Allcat").prop("checked", true);
-    }
+
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
-        data: {
-            search: search_value
-        },
+        data: { search: search_value },
         success: function (response) {
-
-            if (response.view) {
-                $('.list_all_design_catgeory').html('');
+            if (response.count > 0) {
                 $('.list_all_design_catgeory').html(response.view);
-                $('#home_loader').css('display', 'none');
-                $('.total_design_count').text(response.count + ' Items')
-
             } else {
-                $('.list_all_design_catgeory').html('No Design Found');
-                $('.total_design_count').text(response.count + ' Items')
-                $('#home_loader').css('display', 'none');
+                $('.list_all_design_catgeory').html('<p class="text-center">No Images Found</p>');
             }
+            $('#home_loader').css('display', 'none');
         },
-        error: function (error) {
-            toastr.error('Some thing went wrong');
+        error: function () {
+            toastr.error('Something went wrong');
+            $('#home_loader').css('display', 'none');
         }
     });
 });
+
 
 
 $(document).on('click', '#design_category', function () {
