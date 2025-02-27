@@ -693,7 +693,7 @@ class RsvpController extends BaseController
                 
                     if ($contactSync) {
                         $newUserId = $contactSync->id;
-                        $user_sync_id = $contactSync->userId;
+                         $user_sync_id = $contactSync->userId;
                         $userType = 'sync';
                     } else {
                         $newContact = new contact_sync();
@@ -709,6 +709,8 @@ class RsvpController extends BaseController
                         $newContact->save();
                 
                         $newUserId = $newContact->id;
+                        $user_sync_id=null;
+
                         $userType = 'sync';
                     }
                 }
@@ -747,17 +749,25 @@ class RsvpController extends BaseController
                 // $invitedUser->prefer_by = 'email';   
                 // $invitedUser->invitation_sent='1';             
                 // $invitedUser->save();
-                $existingInvite = EventInvitedUser::where('event_id', $eventId)
-                ->where('user_id', $newUserId)
-                ->first();
+                // $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                // ->where('user_id', $newUserId)
+                // ->first();
             
-                // If not found, check using sync_id
-                if (!$existingInvite && $userType == 'sync') {
-                    $existingInvite = EventInvitedUser::where('event_id', $eventId)
-                        ->where('sync_id', $newUserId)
-                        ->first();
-                }
+                // if (!$existingInvite && $userType == 'sync') {
+                //     $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                //         ->where('sync_id', $newUserId)
+                //         ->first();
+                // }
 
+                $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                ->where(function ($query) use ($userType, $newUserId) {
+                    if ($userType == 'user') {
+                        $query->where('user_id', $newUserId);
+                    } else {
+                        $query->where('sync_id', $newUserId);
+                    }
+                })
+                ->first();
                 if ($existingInvite) {
                     // Update the existing invitation
                     $existingInvite->invitation_sent = '1';
@@ -774,6 +784,7 @@ class RsvpController extends BaseController
                     $invitedUser->invitation_sent = '1';
                     $invitedUser->save();
 
+                    // $user_sync_id=null;
                     $invitedUserId = $invitedUser->id;
                 }
                  
