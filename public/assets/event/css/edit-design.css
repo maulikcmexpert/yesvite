@@ -2410,6 +2410,38 @@
         padding-bottom: 20px !important;
     }
 
+    .previousImeg h5{
+        line-height: normal !important;
+        color: #000;
+    }
+    
+    .previousImeg{
+        align-items: center;
+        background-color: transparent;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    .previousImeg svg path{
+        stroke: #000;
+    }
+    
+    .design-seting button.li_event_details{
+        align-items: center;
+        background-color: transparent !important;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    
+    .design-seting button.li_event_details h5{
+        line-height: normal !important;
+        color: #000 !important;
+    }
+    .design-seting button.li_event_details svg path{
+        stroke: #000 !important;
+    }
+
 }
 
 
