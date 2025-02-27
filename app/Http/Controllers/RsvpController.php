@@ -801,11 +801,11 @@ class RsvpController extends BaseController
                 } else {
                     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                         // $query->where('app_user', '1');
-                    })->where(['id' => $invitedUserId])->first();
+                    })->where(['user_id' => $invitedUserId])->first();
                 }
             }
           
-            dd($rsvpSent);
+            // dd($rsvpSent);
           
             $rsvpSentAttempt = $rsvpSent ? $rsvpSent->rsvp_status : "";
 
