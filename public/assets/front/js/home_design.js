@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $('#Allcat').on('change', function () {
         $(".image-item").show(); // Show all default images
-        $(".default_show").show();
+
 
 
         if ($(this).is(':checked')) {
