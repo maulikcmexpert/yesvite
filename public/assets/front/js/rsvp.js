@@ -862,6 +862,18 @@ $(document).on("click", ".direction-btn", function () {
         window.open(googleMapsUrl, "_blank");
     }
 });
+$(document).on("click","#copy_link_btn").click(function(e){
+    e.preventDefault(); 
+    var copyText = $("#copy_link");
+
+    copyText.select();
+    copyText[0].setSelectionRange(0, 99999); 
+
+    document.execCommand("copy");
+
+    // Optionally, alert or show a message
+    alert("Copied: " + copyText.val());
+});
 
 // $('#nav-messaging-tab').on("click", function () {
 //   $('.rsvp-footer-btn-wrp').css('display','none');
