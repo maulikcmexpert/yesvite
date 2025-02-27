@@ -836,7 +836,11 @@ class RsvpController extends BaseController
                     }
     
                 }else{
-                    $rsvpSent->sync_id = $newUserId;
+                    if ($userType=='sync') {
+                        $rsvpSent->sync_id = $newUserId;
+                    }else{
+                        $rsvpSent->user_id = $newUserId;
+                    }
                 }
                 $rsvpSent->rsvp_status = $request->rsvp_status;
 
