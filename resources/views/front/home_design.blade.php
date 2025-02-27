@@ -87,10 +87,10 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <a href="javascript:;">
-                                                                    <input
+                                                                    <a href="javascript:;"
+
                                                                         class="form-check-input categoryChecked_{{ $category->id }}"
-                                                                        name="design_subcategory" type="checkbox"
+                                                                        name="design_subcategory"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
                                                                         data-subcategory-id="{{ $subcategory->id }}"></a>

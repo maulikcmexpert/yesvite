@@ -750,7 +750,7 @@ class RsvpController extends BaseController
                  
                 
                 
-                $invitedUserId = $invitedUser->id;
+                // $invitedUserId = $invitedUser->id;
 
 
                 if ($userType=='sync') {
