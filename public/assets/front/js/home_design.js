@@ -37,7 +37,11 @@ $(document).ready(function () {
 
             // Check all subcategory checkboxes
             $('input[name="design_subcategory"]').prop('checked', true);
-        } else {
+        }
+        else if ($(this).is(':checked') < 0) {
+            $(".default_show").show();
+        }
+         else {
             // Uncheck all subcategories
             $('input[name="design_subcategory"]').prop('checked', false);
 
@@ -55,7 +59,7 @@ $(document).ready(function () {
         $(".image-item").hide(); // Hide all default images
         $(".image-item-new").hide(); // Hide all new images
 
-        $(".image-item").removeClass('d-none');
+        // $(".image-item").removeClass('d-none');
         $(".default_show").show();
         $('input[name="design_subcategory"]:checked').each(function () {
             const categoryId = $(this).data('category-id');
