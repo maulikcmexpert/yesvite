@@ -134,20 +134,18 @@
 
                 shuffle($randomIds);
                 $randomIds = array_slice($randomIds, 0, 2);
-                $t = [378,401];
-                dd(in_array(3,$t));
+
                 // $randomImages = $allImages->shuffle()->take(30);
             @endphp
 
             @foreach ($allImages as $image)
-            {{dd($image,$randomIds)}}
                 <div id="design_category"
                     class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}"
                     data-subcategory-id="{{ $image['subcategory_id'] }}"
-                    data-category_name="{{ $image['category_name'] }}"
-                    style="{{ in_array($image['imageId'], $randomIds) ? 'display: none;' : '' }}">
+                    data-category_name="{{ $image['category_name'] }}" {{in_array($image['imageId'], $randomIds)}}
+                    style="{{ in_array($image['imageId'], $randomIds) ? '' : 'display: none' }}">
 
                     <div class="card-img collection-card card-blue">
                         <img src="{{ $image['image_path'] }}" alt="shower-card">
