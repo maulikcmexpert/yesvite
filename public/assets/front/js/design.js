@@ -2319,7 +2319,19 @@ async function bindData(current_event_id) {
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
     });
+    let lastEditedObject = null;
 
+    canvas.on("text:editing:entered", function () {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            if (lastEditedObject !== activeObject) {
+                addToUndoStack(canvas); // Save state before editing starts (only once per object)
+                lastEditedObject = activeObject; // Mark this object as last edited
+            }
+        }
+    });
+
+    // Capture state after user changes text
     canvas.on("text:changed", function () {
         var activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
@@ -2327,13 +2339,6 @@ async function bindData(current_event_id) {
         }
     });
 
-    // Capture the initial state before the user edits the text
-    canvas.on("text:editing:entered", function () {
-        var activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === "textbox") {
-            addToUndoStack(canvas); // Save state before editing starts
-        }
-    });
     document
         .getElementById("addTextButton")
         .addEventListener("click", function () {
