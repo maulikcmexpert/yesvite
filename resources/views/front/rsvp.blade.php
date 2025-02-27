@@ -231,10 +231,12 @@
 
                                           </div>
                                             
-                                          <div>
+                                          <div class="new_copy_event_Wrp">
                                             <h4 class="title">Share Event Link</h4>
-                                            <input type="text" value="{{$shortLink}}" name="copy_link" id="copy_link"/><button id="copy_link_btn">Copy Link</button>
-
+                                            <div class="new_copy_event_inner">
+                                                <input type="text" value="{{$shortLink}}" name="copy_link" id="copy_link"/>
+                                                <button type="button" id="copy_link_btn">Copy Link</button>
+                                            </div>
                                           </div>
                                             <!-- <a href="javascript:;" id="openGoogle" class="add-calender btn">Add to calendar 
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
