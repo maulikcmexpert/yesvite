@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $('#Allcat').on('change', function () {
         $(".image-item").show(); // Show all default images
-
+        $(".default_show").show();
 
 
         if ($(this).is(':checked')) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
             $('.image-item').show();
             $('.image-item-new').hide();
 
-            $(".image-item").addClass('default_show');
+
             // Hide category name and checkbox container
             $("#category_name").hide();
             $("#allchecked").hide();
@@ -40,7 +40,7 @@ $(document).ready(function () {
         } else {
             // Uncheck all subcategories
             $('input[name="design_subcategory"]').prop('checked', false);
-            $(".image-item").addClass('default_show');
+
             $(".image-item").removeClass('d-none');
             // Hide all images
             $('.image-item').hide();
