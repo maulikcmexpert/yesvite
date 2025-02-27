@@ -2776,21 +2776,25 @@ async function bindData(current_event_id) {
     function undo() {
         console.log("undoStack", undoStack.length);
         if (undoStack.length > 0) {
-            // Ensure at least one previous state exists
             if (undoStack.length == 1) {
                 $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
             }
+
             redoStack.push(canvas.toJSON()); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
+
+            // 🛠 Clear the canvas before applying the undo state
+            canvas.clear();
+
             canvas.loadFromJSON(lastState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+                canvas.renderAll();
             });
+
             if (redoStack.length > 0) {
                 $("#redoButton").find("svg path").attr("fill", "#0F172A");
             }
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
+
+            setTimeout(setControlVisibilityForAll, 1000);
         } else {
             $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
         }
@@ -2800,19 +2804,25 @@ async function bindData(current_event_id) {
         if (redoStack.length > 0) {
             undoStack.push(canvas.toJSON()); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
+
+            // 🛠 Clear the canvas before applying the redo state
+            canvas.clear();
+
             canvas.loadFromJSON(nextState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+                canvas.renderAll();
             });
+
             if (redoStack.length == 1) {
                 $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
             }
+
             if (undoStack.length > 0) {
                 $("#undoButton").find("svg path").attr("fill", "#0F172A");
             }
+
             $("#redoButton").find("svg path").attr("fill", "#0F172A");
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
+
+            setTimeout(setControlVisibilityForAll, 1000);
         } else {
             $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
         }
