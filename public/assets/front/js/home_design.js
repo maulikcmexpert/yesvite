@@ -55,7 +55,7 @@ $(document).ready(function () {
         $(".image-item").hide(); // Hide all default images
         $(".image-item-new").hide(); // Hide all new images
 
-        // $(".image-item").removeClass('d-none');
+        $(".image-item").removeClass('d-none');
         $(".default_show").show();
         $('input[name="design_subcategory"]:checked').each(function () {
             const categoryId = $(this).data('category-id');
