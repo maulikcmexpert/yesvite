@@ -110,7 +110,7 @@ $(document).on('input', '#search_design_category', function () {
     $('#home_loader').css('display', 'flex');
 
     $.ajax({
-        url: base_url + "search_design",
+        url: base_url + "search_features",
         method: 'GET',
         data: { search: search_value },
         success: function (response) {
