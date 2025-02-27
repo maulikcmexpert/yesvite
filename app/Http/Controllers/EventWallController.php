@@ -209,6 +209,7 @@ class EventWallController extends BaseController
             });
         }
 
+        dd($eventPostList);
         foreach ($eventPostList as $value) {
                  if (empty($value->user) || empty($value->user->id)) {
                         if (!empty($value->sync_id)) {
