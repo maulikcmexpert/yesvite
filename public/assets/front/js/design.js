@@ -2319,7 +2319,12 @@ async function bindData(current_event_id) {
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
     });
-
+    canvas.on("text:changed", function () {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            addToUndoStack(canvas);
+        }
+    });
     document
         .getElementById("addTextButton")
         .addEventListener("click", function () {
