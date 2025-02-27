@@ -154,7 +154,7 @@ $(document).on('input', '#search_design_category', function () {
         data: { search: searchText },
         success: function (response) {
             $('#home_loader').css('display', 'none');
-
+console.log(response);
             if (response.view) {
                 $('.list_all_design_catgeory').html(response.view);
                 $('.total_design_count').text(response.count + ' Items');
