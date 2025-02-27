@@ -44,6 +44,7 @@ class ContactController extends Controller
         )->findOrFail($id);
 
         $groups = Group::where('user_id', $user->id)->withCount('groupMembers')->orderBy('id', 'DESC')->limit(2)->get();
+        $allgroups = Group::where('user_id', $user->id)->withCount('groupMembers')->orderBy('id', 'DESC')->get();
 
 
         $user['events'] =   Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
@@ -139,7 +140,8 @@ class ContactController extends Controller
             'yesvite_user',
             'yesviteGroups',
             'yesvite_phone',
-            'groups'
+            'groups',
+            'allgroups'
 
         ));
     }
@@ -149,6 +151,11 @@ class ContactController extends Controller
         $id = Auth::guard('web')->user()->id;
         $searchName = $request->search_name;
         $type = $request->type;
+        $isGroup="";
+        if(isset($request->isGroup)&&$request->isGroup==1){
+            $isGroup=1;
+
+        }
         if ($request->ajax()) {
             // $query = User::where('id', '!=', $id)->where(['is_user_phone_contact' => '0'])->orderBy('firstname');
             // if ($searchName) {
@@ -206,13 +213,14 @@ class ContactController extends Controller
             }else{
                 if($searchName!=''){
                     return response()->json([
-                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'search' =>'1',
                         'status' => '1',
                     ]);
                 }else{
+                    // dd($isGroup);
                     return response()->json([
-                        'view' => view('front.ajax_contacts', compact('yesvite_user'))->render(),
+                        'view' => view('front.ajax_contacts', compact('yesvite_user','isGroup'))->render(),
                         'status' => '1',
                     ]);
                 }
@@ -313,7 +321,7 @@ class ContactController extends Controller
             $query->limit(10);
         }
         $getAllContacts = $query->get();
-        // $yesvite_phone = [];
+        $yesvite_phone = [];
         // foreach ($getAllContacts as $user) {
         //     $yesviteUserPhoneDetail = [
         //         'id' => $user->id,
@@ -326,40 +334,53 @@ class ContactController extends Controller
         //     $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
         // }
 
-        $yesvite_phone = [];
-        $seenEmails = [];
-        $seenPhoneNumbers = [];
+            $yesvite_phone = [];
 
-        foreach ($getAllContacts as $user) {
-            $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
-            $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
-
-            $yesviteUserPhoneDetail = [
-                'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : $user->profile,
-                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
-                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
-                'email' => $email,
-                'phone_number' => $phone_number,
-            ];
-
-            if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
-                continue;
+            if ($request->offset == 0) {
+                session()->forget('yesvite_seen_emails');
+                session()->forget('yesvite_seen_phone_numbers');
             }
 
-            if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
-                continue;
+            $seenEmails = session()->get('yesvite_seen_emails', []);
+            $seenPhoneNumbers = session()->get('yesvite_seen_phone_numbers', []);
+
+            foreach ($getAllContacts as $user) {
+                $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
+                $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
+
+                $yesviteUserPhoneDetail = [
+                    'id' => $user->id,
+                    'profile' => empty($user->profile) ? "" : $user->profile,
+                    'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+                    'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
+                    'email' => $email,
+                    'phone_number' => $phone_number,
+                ];
+
+                if (!empty($email) && !empty($phone_number) && in_array($email, $seenEmails) && in_array($phone_number, $seenPhoneNumbers)) {
+                    continue;
+                }
+
+                if (!empty($email) && in_array($email, $seenEmails) && empty($phone_number)) {
+                    continue;
+                }
+
+                if (!empty($phone_number) && in_array($phone_number, $seenPhoneNumbers) && empty($email)) {
+                    continue;
+                }
+
+                $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
+
+                if (!empty($email)) {
+                    $seenEmails[] = $email;
+                }
+                if (!empty($phone_number)) {
+                    $seenPhoneNumbers[] = $phone_number;
+                }
             }
 
-            $yesvite_phone[] = (object)$yesviteUserPhoneDetail;
-
-            if (!empty($email)) {
-                $seenEmails[$email] = true;
-            }
-            if (!empty($phone_number)) {
-                $seenPhoneNumbers[$phone_number] = true;
-            }
-        }
+            session()->put('yesvite_seen_emails', $seenEmails);
+            session()->put('yesvite_seen_phone_numbers', $seenPhoneNumbers);
 
 // print_r($yesvite_phone);
 

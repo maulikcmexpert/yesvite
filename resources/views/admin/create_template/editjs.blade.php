@@ -1032,7 +1032,7 @@
                                         let textElement = new fabric.Textbox(element.text, {
                                             left: parseFloat(left),
                                             top: parseFloat(top),
-                                            width: element.width || width, // Default width if not provided
+                                            width: element.width * scaleX|| width, // Default width if not provided
                                             fontSize: fontSize,
                                             fill: element.fill,
                                             fontFamily: element.fontFamily,
@@ -1710,7 +1710,8 @@
                 return;
             }
 
-            if (activeObject.type == 'textbox') {
+            if (activeObject.type == 'textbox'&& activeObject.fill !== selectedColor) { 
+                addToUndoStack(canvas);               
                 clrcanvas = canvas.toJSON(); // Store the current state of the canvas
                 if (selectedColorType == 'font') {
                     activeObject.set('fill', selectedColor); // Change font color
@@ -2133,7 +2134,7 @@
                         fontWeight: obj.fontWeight,
                         fontStyle: obj.fontStyle,
                         underline: obj.underline,
-                        width: obj.width,
+                        width: obj.width * scaleX,
                         linethrough: obj.linethrough,
                         date_formate: obj.date_formate,
                         letterSpacing: obj.charSpacing /
@@ -2496,6 +2497,22 @@
         let undoStack = [];
         let redoStack = [];
         let isAddingToUndoStack = 0;
+
+        $(document).keydown(function (e) {
+        // Check if Ctrl (or Cmd for Mac) is pressed
+        if (e.ctrlKey || e.metaKey) {
+            if (e.key === "z" || e.keyCode === 90) {
+                // Ctrl + Z -> Undo
+                e.preventDefault();
+                undo(); // Call your undo function
+            } else if (e.key === "y" || e.keyCode === 89) {
+                // Ctrl + Y -> Redo
+                e.preventDefault();
+                redo(); // Call your redo function
+            }
+        }
+    });
+
         function addToUndoStack(canvas) {
             undoStack.push(canvas.toJSON());
             if (undoStack.length > 0) {

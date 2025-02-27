@@ -532,9 +532,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                            "drag" &&
+                                                "drag" &&
                                             event.transform.actionPerformed ===
-                                            undefined
+                                                undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -693,18 +693,25 @@ async function bindData(current_event_id) {
                 // var canvasHeight = canvas.getHeight();
                 var canvasWidth = width;
                 var canvasHeight = height;
-
+                console.log(canvasWidth);
+                console.log(canvasHeight);
                 // Use Math.max to ensure the image covers the entire canvas
                 var scaleFactor = Math.max(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-
+                console.log(scaleFactor);
+                console.log(img.width);
+                console.log(img.height);
+                console.log((canvasWidth - img.width * scaleFactor) / 2);
+                console.log((canvasHeight - img.height * scaleFactor) / 2);
                 img.set({
-                    left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
-                    top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
-                    scaleX: scaleFactor,
-                    scaleY: scaleFactor,
+                    // left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
+                    // top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
+                    // scaleX: scaleFactor,
+                    // scaleY: scaleFactor,
+                    scaleX: width / img.width,
+                    scaleY: height / img.height,
                     selectable: false,
                     hasControls: false,
                 });
@@ -771,13 +778,13 @@ async function bindData(current_event_id) {
                         console.log(element.width);
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         fontSize = Number(fontSize).toFixed(0);
-                        let width = (textWidth + 25) * scaleX; // Scale text box width
+                        let width = (textWidth + 10) * scaleX; // Scale text box width
 
                         let textElement = new fabric.Textbox(element.text, {
                             // Use Textbox for editable text
                             left: parseFloat(left),
                             top: parseFloat(top),
-                            width: parseInt(element.width) || width, // Default width if not provided
+                            width: parseInt(element.width) * scaleX || width, // Default width if not provided
                             fontSize: fontSize,
                             fill: element.fill,
                             fontFamily: element.fontFamily || "Times New Roman",
@@ -791,8 +798,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                    element.linethrough == "true" ||
-                                    element.linethrough == "True"
+                                element.linethrough == "true" ||
+                                element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -940,7 +947,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                    undefined
+                                        undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1111,12 +1118,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                        defaultShape
+                                                            defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                            currentShapeIndex
+                                                                currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1129,10 +1136,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                "drag" &&
+                                                                    "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                undefined
+                                                                    undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1141,7 +1148,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                        currentShapeIndex
+                                                                            currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1153,7 +1160,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                currentShapeIndex
+                                                                    currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1527,7 +1534,7 @@ async function bindData(current_event_id) {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                        word.slice(1).toLowerCase() ===
+                            word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -1798,10 +1805,8 @@ async function bindData(current_event_id) {
         },
         change: function (color) {
             if (color) {
-
                 changeColor(color.toHexString()); // Use RGB string for color changes
             } else {
-
                 changeColor("#000000"); // Handle transparency by default
             }
         },
@@ -1821,19 +1826,17 @@ async function bindData(current_event_id) {
             return;
         }
 
-        if (activeObject.type == "textbox") {
+        if (
+            activeObject.type == "textbox" &&
+            activeObject.fill !== selectedColor
+        ) {
             clrcanvas = canvas.toJSON();
-            //console.log(activeObject.type);
-            //console.log(activeObject.fill);
             if (selectedColorType == "font") {
                 if (selectedColor != $(".sp-input").val()) {
                     return;
                 }
-                //console.log(activeObject.fill);
-                //console.log(activeObject.backgroundColor);
+                addToUndoStack(canvas);
                 activeObject.set("fill", selectedColor); // Change font color
-                //console.log(activeObject.fill);
-                //console.log(activeObject.backgroundColor);
             } else if (selectedColorType == "background") {
                 //console.log("update background");
                 activeObject.set("backgroundColor", selectedColor); // Change background color
@@ -1903,7 +1906,7 @@ async function bindData(current_event_id) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) { };
+                reader.onload = function (e) {};
                 reader.readAsDataURL(file);
             }
         });
@@ -2259,7 +2262,7 @@ async function bindData(current_event_id) {
             options.target?._objects &&
             options.target?._objects.length > 1
         ) {
-            console.log('Multiple objects selected:', options.target);
+            console.log("Multiple objects selected:", options.target);
             canvas.discardActiveObject();
             canvas.renderAll(); // Ensure the canvas is refreshed
         }
@@ -2267,7 +2270,7 @@ async function bindData(current_event_id) {
         const activeObjects = canvas.getActiveObjects(); // Get all selected objects
         //console.log(activeObjects)
         if (activeObjects.length > 1) {
-            console.log('Multiple objects selected:', activeObjects);
+            console.log("Multiple objects selected:", activeObjects);
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
         }
@@ -2278,8 +2281,8 @@ async function bindData(current_event_id) {
         }
     }
 
-    $(document).on('click', '.main-content-right', function (e) {
-// console.log(e);
+    $(document).on("click", ".main-content-right", function (e) {
+        // console.log(e);
         let target = e.target;
         let tagName = target.tagName.toLowerCase();
         if (
@@ -2292,7 +2295,6 @@ async function bindData(current_event_id) {
         }
         canvas.discardActiveObject();
         canvas.renderAll();
-
     });
 
     canvas.on("mouse:down", function (options) {
@@ -2312,12 +2314,10 @@ async function bindData(current_event_id) {
             canvas.discardActiveObject();
             canvas.renderAll();
         }
-
     });
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
-
     });
 
     document
@@ -2739,6 +2739,20 @@ async function bindData(current_event_id) {
         }
         redoStack = [];
     }
+    $(document).keydown(function (e) {
+        // Check if Ctrl (or Cmd for Mac) is pressed
+        if (e.ctrlKey || e.metaKey) {
+            if (e.key === "z" || e.keyCode === 90) {
+                // Ctrl + Z -> Undo
+                e.preventDefault();
+                undo(); // Call your undo function
+            } else if (e.key === "y" || e.keyCode === 89) {
+                // Ctrl + Y -> Redo
+                e.preventDefault();
+                redo(); // Call your redo function
+            }
+        }
+    });
 
     function undo() {
         console.log("undoStack", undoStack.length);
@@ -2827,7 +2841,7 @@ function getTextDataFromCanvas() {
                 top: obj.top * scaleY, // Scale back Y position
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
-                width: parseInt(obj.width),
+                width: parseInt(obj.width) * scaleX,
                 centerX: centerPoint.x * scaleX, // Scale back center position
                 centerY: centerPoint.y * scaleY,
                 backgroundColor: obj.backgroundColor,
@@ -2950,7 +2964,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) { },
+        error: function (xhr, status, error) {},
     });
 }
 function isJSON(str) {

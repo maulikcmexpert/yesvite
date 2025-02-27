@@ -403,7 +403,7 @@
         </div>
 
 
-            <div class="footer-buttons">
+            <div class="footer-buttons d-none">
                 <button class="cmn-btn font-reset-btn reset-btn">Reset</button>
                 <button class="cmn-btn font-save-btn">Save</button>
             </div>

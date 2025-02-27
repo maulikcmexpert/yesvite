@@ -605,6 +605,21 @@
     margin-bottom: 7px !important;
 }
 
+.step_3 .new-event-sidebar-wrp{
+    width: 65%;
+    max-width: 65%;
+    border: none !important;
+    border-radius: 0 !important;
+}
+.step_3 .coin-invite-main {
+    width: 38%;
+    max-width: 38%;
+}
+
+.step_3 .coin-invite-wrp .coin-invite-wrp-inner{
+    display: inline-block !important;
+}
+
 /* ============ responsive ============ */
 
 

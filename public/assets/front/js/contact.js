@@ -6,13 +6,275 @@ $(document).ready(function () {
   
     var base_url=$('#base_url').val();
     var busy1 = false;
+    var busy1gl = false;
     var busy2=false;
     var limit = 10;
     var offset = 0;
+    var offsetlg = 0;
+
+    
     var offset1 = 0;
 
     let searchTimeout; // Store timeout reference
 
+    $(document).on("click", ".see_all_group", function () {
+        // $("search_user").val("");
+        toggleSidebar("sidebar_groups");
+    });
+    $(document).on("click", ".new_group", function () {
+        // $("search_user").val("");
+        toggleSidebar("sidebar_add_groups");
+
+    });
+    $(document).on("click", ".group_toggle_close_btn", function () {
+        toggleSidebar("sidebar_groups");
+    });
+    $(document).on("click", ".add_new_group", function () {
+        var group_name = $("#new_group_name").val();
+        NogroupData = false;
+        if (group_name == "") {
+            $("#group_name_error")
+                .css("display", "block")
+                .css("color", "red")
+                .text("Please enter group name");
+            return;
+        } else {
+            $("#group_name_error").css("display", "none");
+            toggleSidebar("sidebar_add_group_member");
+            var type = "group";
+        }
+    });
+    $("#new_group_name").on("input", function (e) {
+        var groupname=$(this).val();
+        if (groupname === "")
+             {
+                  $("#group_name_error")
+                  .text("Please enter group name")
+                  .css("color", "red");
+             } else {
+                   $("#group_name_error").text("");
+            }
+    });
+    $("#new_group_name").on("keydown", function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+            e.preventDefault(); // Prevents the default action of submitting the form or adding a new line
+        }
+    });
+
+    $(document).on("click", ".add_new_group_member", function () {
+        var group_name = $("#new_group_name").val();
+        var selectedValues = [];
+        $("#groupUsers .user_group_member:checked").each(function () {
+            selectedValues.push({
+                id: $(this).val(),
+                prefer_by: $(this).data("preferby"),
+            });
+        });
+        if (selectedValues.length > 0) {
+            // $('#home_loader').css('display','flex');
+            $.ajax({
+                url: base_url + "event/add_new_group",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    groupmember: selectedValues,
+                    groupname: group_name,
+                },
+                success: function (response) {
+                    if (response.status == "1") {
+                        if (response.status == 401 && response.info == "logout") {
+                            window.location.href = "/"; // Redirect to home page
+                            return;
+                        }
+                        toastr.success('Group Created Successfully');
+                        $('<div id="pageOverlay"></div>').css({
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            background: 'rgba(255, 255, 255, 0)', // Transparent background
+                            zIndex: 9999
+                        }).appendTo('body');
+                        // $('#home_loader').css('display','none');
+               
+                        window.location.reload();
+                        // var grplth = $(".group_list .listgroups").length;
+                        // if (grplth == 0) {
+                        //     $(".group_list").html("");
+                        // }
+                        // $(".group_list").append(response.view);
+    
+                        // // var newItem = `
+                        // //     <div class="swiper-slide">
+                        // //         <div class="group-card view_members" data-id="${response.data.group_id}">
+                        // //             <div>
+                        // //                 <h4>${response.data.groupname}</h4>
+                        // //                 <p>${response.data.member_count} Guests</p>
+                        // //             </div>
+                        // //             <span class="ms-auto">
+                        // //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        // //                     <path d="M5.93994 13.7797L10.2866 9.43306C10.7999 8.91973 10.7999 8.07973 10.2866 7.56639L5.93994 3.21973" stroke="#E2E8F0" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        // //                 </svg>
+                        // //             </span>
+                        // //         </div>
+                        // //     </div>
+                        // // `;
+    
+                        // // swiper[0].appendSlide(newItem);
+                        // // swiper[0].update(); // Update Swiper after adding the new slide
+                        // // swiper[1].appendSlide(newItem);
+                        // // swiper[1].update(); // Update Swiper after adding the new slide
+                        // // swiper[2].appendSlide(newItem);
+                        // // swiper[2].update(); // Update Swiper after adding the new slide
+    
+                        // $(".user_choice_group .user_choice").prop("checked", false);
+                        // toggleSidebar("sidebar_groups");
+                        // groupToggleSearch("");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX error: " + error);
+                    toastr.error(error);
+                    $('#home_loader').css('display','none');
+                },
+            });
+        } else {
+            toastr.error("Please select Member");
+        }
+    });
+    // $(document).on("click", ".add_new_group", function () {
+    //     // $("search_user").val("");
+    //     toggleSidebar("sidebar_add_group_member");
+    // });
+
+    $(document).on("click", ".group_toggle_close_btn", function () {
+        // $("search_user").val("");
+        toggleSidebar('');
+    });
+    $(document).on("click", ".overlay", function () {
+        toggleSidebar();
+    });
+    $(document).on("keyup", "#group_toggle_search", function () {
+        var search_name = $(this).val();
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(function () {
+        groupToggleSearch(search_name);
+    }, 1000);
+
+    });
+    function groupToggleSearch(search_name = null) {
+        if (search_name == null) {
+            search_name = "";
+        }
+        $.ajax({
+            url: base_url + "event/group_toggle_search",
+            type: "POST",
+            data: {
+                search_name: search_name,
+                isGroup:1,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+            },
+            beforeSend: function () {
+                $("#home_loader").css("display", "flex");
+            },
+        })
+            .done(function (data) {
+                console.log(data.html);
+                if (data.status == 401 && data.info == "logout") {
+                    window.location.href = "/"; // Redirect to home page
+                    return;
+                }
+                if (data.html == " ") {
+                    $("#loader").html("No more contacts found");
+                    $("#home_loader").hide();
+
+                    return;
+                }
+                $("#home_loader").hide();
+                $(".group_search_list_toggle").html(data.html);
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+                $("#home_loader").hide();
+
+            });
+    }
+    
+    function toggleSidebar(id = null) {
+        console.log(id);
+        if (id == "sidebar_add_co_host") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+    
+        if (id == "sidebar_groups") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+        if (id == "sidebar_potluck") {
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+        const allSidebars = document.querySelectorAll(".sidebar");
+        const allOverlays = document.querySelectorAll(".overlay");
+        // $(".floatingfocus").removeClass("floatingfocus");
+        $("#registry_link_error").text("");
+        $(".common_error").text("");
+    
+        allSidebars.forEach((sidebar) => {
+            if (sidebar.style.right === "0px") {
+                sidebar.style.right = "-200%";
+                sidebar.style.width = "0px";
+            }
+        });
+    
+        allOverlays.forEach((overlay) => {
+            if (overlay.classList.contains("visible")) {
+                overlay.classList.remove("visible");
+            }
+        });
+        if (id == null) {
+            document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+            return;
+        }
+        const sidebar = document.getElementById(id);
+        const overlay = document.getElementById(id + "_overlay");
+    
+        if (sidebar.style.right === "0px") {
+            sidebar.style.right = "-200%";
+            sidebar.style.width = "0px";
+            if (overlay) {
+                overlay.classList.remove("visible");
+            }
+        } else {
+            sidebar.style.right = "0px";
+            sidebar.style.width = "100%";
+            if (overlay) {
+                overlay.classList.add("visible");
+            }
+        }
+    }
+    $("#groupUsers").on("scroll", function () {
+    
+        if (busy1gl) return; 
+        var scrollTop = $(this).scrollTop(); 
+        var scrollHeight = $(this)[0].scrollHeight; 
+        var elementHeight = $(this).height();
+            if (scrollTop + elementHeight >= scrollHeight-2) {
+                busy1gl = true;
+                offsetlg += limit;
+                
+                var type="yesvite";
+                var search_name=""
+                // var search_name = $('.search_name').val();
+                // if(search_name!=""){
+                //     offsetlg=null;
+                // }
+            loadMoreDataList(search_name,type,offsetlg,limit,1,1);
+        }
+});
 $("#product-scroll").on("scroll", function () {
     
         if (busy1) return; 
@@ -31,6 +293,7 @@ $("#product-scroll").on("scroll", function () {
             loadMoreData(search_name,type,offset,limit,1);
         }
 });
+
 
 
 let debounceTimer;
@@ -156,7 +419,7 @@ $(document).on("input", ".search_phone", function () {
         // loadMorePhones(search_phone,type=null,offset1,limit);
 });
 
-    function loadMoreData(search_name,type,offset,limit,scroll=null) {
+    function loadMoreData(search_name,type,offset,limit,scroll=null,Group=null) {
         console.log({search_name,type,offset,limit,scroll});
         $.ajax({
             url: base_url + "contacts/load",
@@ -197,7 +460,57 @@ $(document).on("input", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+            },
+        })
+    }
+    function loadMoreDataList(search_name,type,offset,limit,scroll=null,Group=null) {
+        console.log({search_name,type,offset,limit,scroll});
+        $.ajax({
+            url: base_url + "contacts/load",
+            type: "POST",
+            data: {
+                search_name: search_name,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+                type:type,
+                offset:offset,
+                isGroup:1,
+                limit:limit
+            },
+            beforeSend: function () {
+                $('#home_loader').css('display','flex');
+            },
+            success: function (data) {
+                if (data.status == "0" && scroll==1) {
+                    // $(".no-yesvite-data").css("display","none");
+                    $("#home_loader").hide();
+                    return;
+                }
+                if (data.status == "0") {
+                    // $(".no-yesvite-data").css("display","block");
+                    $("#groupUsers").html('');
+                    $("#home_loader").hide();
+                    return;
+                }
+                $(".no-yesvite-data").css("display","none");
+                
+                if(data.search=='1'){
+                        $("#groupUsers").html(data.view);
+                    
+                }else{
+                        $("#groupUsers").append(data.view);
+                }
+                
+                busy1gl = false;
+                $("#home_loader").hide();
+            },
+            error: function (jqXHR, ajaxOptions, thrownError) {
+                console.error("AJAX Error:", thrownError);
+                console.error("Response:", jqXHR.responseText);
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+
             },
         })
     }
@@ -242,7 +555,9 @@ $(document).on("input", ".search_phone", function () {
             error: function (jqXHR, ajaxOptions, thrownError) {
                 console.error("AJAX Error:", thrownError);
                 console.error("Response:", jqXHR.responseText);
-                alert("server not responding...");
+                // alert("server not responding...");
+                toastr.error("server not responding...");
+
             },
         });
     }

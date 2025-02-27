@@ -2489,16 +2489,13 @@ class EventController extends BaseController
     public function getContacts(Request $request)
     {
 
+
         $search_user = $request->search_user;
         $id = Auth::guard('web')->user()->id;
         $type = $request->type;
         $emails = [];
         $selected_contact = Session::get('contact_ids');
         $selectedContactId = [];
-        if ($request->offset == "0") {
-            session()->forget('seen_emails');
-            session()->forget('seen_phones');
-        }
         if ($selected_contact != null &&  count($selected_contact) > 0) {
             $selectedContactId = array_column($selected_contact, 'sync_id');
         }
@@ -2525,7 +2522,6 @@ class EventController extends BaseController
             ->orderBy('firstName')  // Sorting by firstName
             ->get();
 
-
         //     dd(DB::getQueryLog());
         // dd($getAllContacts);
 
@@ -2542,50 +2538,58 @@ class EventController extends BaseController
         //     $yesvite_user[] = (object)$yesviteUserDetail;
         // }
         $yesvite_user = [];
-        $seenEmails = Session::get('seenEmails', []);
-        $seenPhoneNumbers = Session::get('seenPhoneNumbers', []);
+
+        // Reset session if offset is 0 (start fresh)
+        if ($request->offset == 0) {
+            session()->forget('seen_emails');
+            session()->forget('seen_phone_numbers');
+        }
+        
+        // Retrieve session data or initialize empty arrays
+        $seenEmails = session()->get('seen_emails', []);
+        $seenPhoneNumbers = session()->get('seen_phone_numbers', []);
         
         foreach ($getAllContacts as $user) {
-            if ($user->email_verified_at == NULL && $user->app_user == '1') {
-                continue;
-            }
-        
-            $email = (!empty($user->email)) ? $user->email : "";
-            $phone_number = (!empty($user->phone_number)) ? $user->phone_number : "";
+            $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
+            $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
         
             $yesviteUserDetail = [
                 'id' => $user->id,
-                'profile' => empty($user->profile) ? "" : asset('public/storage/profile/' . $user->profile),
-                'firstname' => !empty($user->firstname) ? $user->firstname : "",
-                'lastname' => !empty($user->lastname) ? $user->lastname : "",
+                'profile' => empty($user->profile) ? "" : $user->profile,
+                'firstname' => (!empty($user->firstName) || $user->firstName != null) ? $user->firstName : "",
+                'lastname' => (!empty($user->lastName) || $user->lastName != null) ? $user->lastName : "",
                 'email' => $email,
                 'phone_number' => $phone_number,
             ];
         
-            // Check against stored session values
-            if (!empty($email) && !empty($phone_number) && isset($seenEmails[$email]) && isset($seenPhoneNumbers[$phone_number])) {
+            // Skip if email and phone both exist in session (complete duplicate)
+            if (!empty($email) && !empty($phone_number) && in_array($email, $seenEmails) && in_array($phone_number, $seenPhoneNumbers)) {
                 continue;
             }
         
-            if (!empty($email) && isset($seenEmails[$email]) && empty($phone_number)) {
+            // Skip if email exists but no phone number (avoid duplicate emails)
+            if (!empty($email) && in_array($email, $seenEmails) && empty($phone_number)) {
+                continue;
+            }
+            if (!empty($phone_number) && in_array($phone_number, $seenPhoneNumbers) && empty($email)) {
                 continue;
             }
         
-            // Add to the result array
+        
             $yesvite_user[] = (object)$yesviteUserDetail;
         
-            // Store globally in session
+            // Store seen emails and phone numbers in session
             if (!empty($email)) {
-                $seenEmails[$email] = true;
+                $seenEmails[] = $email;
             }
             if (!empty($phone_number)) {
-                $seenPhoneNumbers[$phone_number] = true;
+                $seenPhoneNumbers[] = $phone_number;
             }
         }
         
-        // Store the updated values in the session
-        Session::put('seenEmails', $seenEmails);
-        Session::put('seenPhoneNumbers', $seenPhoneNumbers);
+        // Save updated seen lists in session
+        session()->put('seen_emails', $seenEmails);
+        session()->put('seen_phone_numbers', $seenPhoneNumbers);
         
 
         $selected_user = Session::get('contact_ids');
@@ -2615,25 +2619,40 @@ class EventController extends BaseController
         $selected_co_host_prefer_by = (isset($request->selected_co_host_prefer_by) && $request->selected_co_host_prefer_by != '') ? $request->selected_co_host_prefer_by : $isSelectpreferby;
 
 
-        $getAllContacts = contact_sync::where('contact_id', $id)
-            // ->when($type != 'group', function ($query) use ($request) {
-            //     $query->where(function ($q) use ($request) {
-            //         $q->limit($request->limit)
-            //             ->skip($request->offset);
-            //     });
-            // })
-            ->when(!empty($request->limit), function ($query) use ($request) {
-                $query->limit($request->limit)
-                    ->offset($request->offset);
-            })
-            ->when($search_user != '', function ($query) use ($search_user) {
-                $query->where(function ($q) use ($search_user) {
-                    $q->where('firstname', 'LIKE', '%' . $search_user . '%')
-                        ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
-                });
-            })->orderBy('firstname')
+        // $getAllContacts = contact_sync::where('contact_id', $id)
+        //     // ->when($type != 'group', function ($query) use ($request) {
+        //     //     $query->where(function ($q) use ($request) {
+        //     //         $q->limit($request->limit)
+        //     //             ->skip($request->offset);
+        //     //     });
+        //     // })
+        //     ->when(!empty($request->limit), function ($query) use ($request) {
+        //         $query->limit($request->limit)
+        //             ->offset($request->offset);
+        //     })
+        //     ->when($search_user != '', function ($query) use ($search_user) {
+        //         $query->where(function ($q) use ($search_user) {
+        //             $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+        //                 ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+        //         });
+        //     })->orderBy('firstname')
 
-            ->get();
+        //     ->get();
+
+        $getAllContacts = contact_sync::where('contact_id', $id)
+        ->when(!empty($request->limit), function ($query) use ($request) {
+            $query->limit($request->limit)->offset($request->offset);
+        })
+        ->when($search_user != '', function ($query) use ($search_user) {
+            $query->where(function ($q) use ($search_user) {
+                $q->where('firstname', 'LIKE', '%' . $search_user . '%')
+                    ->orWhere('lastname', 'LIKE', '%' . $search_user . '%');
+            });
+        })
+        ->orderBy('firstname')
+        ->groupBy('email', 'phoneWithCode') // Ensures unique email & phone number combinations
+        ->get();
+
 
         $yesvite_user = [];
         foreach ($getAllContacts as $user) {
@@ -3043,6 +3062,10 @@ class EventController extends BaseController
     {
         $search_user = $request->search_name;
         $id = Auth::guard('web')->user()->id;
+        $isGroup="";
+        if(isset($request->isGroup)&&$request->isGroup){
+            $isGroup=1;
+        }
         $groups = Group::withCount('groupMembers')
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
@@ -3052,7 +3075,7 @@ class EventController extends BaseController
                 });
             })
             ->get();
-        return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups'))->render(), "status" => "1"]);
+        return response()->json(['html' => view('front.event.guest.group_search_list_toggle', compact('groups','isGroup'))->render(), "status" => "1"]);
     }
 
     public function delete_sessions(Request $request)

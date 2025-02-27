@@ -2562,24 +2562,47 @@ class EventWallController extends BaseController
         //     ->orderBy('firstname', 'asc') // Order results by first name
         //     ->get();
 
+
+
+        
         // Query phone contacts
+        // $phoneContacts = contact_sync::where('contact_id', $userId)
+        //     ->when(!empty($type), function ($query) use ($type) {
+        //         $query->where('type', $type); // Apply type filter
+        //     })
+        //     ->when(!empty($limit), function ($query) use ($limit, $offset) {
+        //         $query->limit($limit)
+        //             ->offset($offset); // Pagination
+        //     })
+        //     ->when(!empty($searchUser), function ($query) use ($searchUser) {
+        //         $query->where(function ($q) use ($searchUser) {
+        //             $q->where('firstName', 'LIKE', "%{$searchUser}%")
+        //                 ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
+        //         });
+        //     })
+        //     ->orderBy('firstName', 'asc')
+        //     ->whereNull('userId') // Order results by first name
+        //     ->get();
+
         $phoneContacts = contact_sync::where('contact_id', $userId)
-            ->when(!empty($type), function ($query) use ($type) {
-                $query->where('type', $type); // Apply type filter
-            })
-            ->when(!empty($limit), function ($query) use ($limit, $offset) {
-                $query->limit($limit)
-                    ->offset($offset); // Pagination
-            })
-            ->when(!empty($searchUser), function ($query) use ($searchUser) {
-                $query->where(function ($q) use ($searchUser) {
-                    $q->where('firstName', 'LIKE', "%{$searchUser}%")
-                        ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
-                });
-            })
-            ->orderBy('firstName', 'asc')
-            ->whereNull('userId') // Order results by first name
-            ->get();
+        ->when(!empty($type), function ($query) use ($type) {
+            $query->where('type', $type); // Apply type filter
+        })
+        ->when(!empty($limit), function ($query) use ($limit, $offset) {
+            $query->limit($limit)
+                ->offset($offset); // Pagination
+        })
+        ->when(!empty($searchUser), function ($query) use ($searchUser) {
+            $query->where(function ($q) use ($searchUser) {
+                $q->where('firstName', 'LIKE', "%{$searchUser}%")
+                    ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
+            });
+        })
+        ->whereNull('userId') // Ensure the user is not linked
+        ->orderBy('firstName', 'asc')
+        ->groupBy('email', 'phoneWithCode') // Group by email and phone number to remove duplicates
+        ->get();
+
         $invitedUsers = [];
         if (!empty($eventId)) {
             $userIds = session()->get('userwall_ids', []);

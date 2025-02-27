@@ -123,11 +123,11 @@ class Auth extends Controller
             $sessionArray = ['id' => $checkOtp->id, 'name' => $checkOtp->name,'role'=>$checkOtp->role];
             Session::put(['admin' => $sessionArray]);
             if (Session::has('admin') && $checkOtp->role=="admin") {
-                return Redirect::to(URL::to('/admin/dashboard'))->with('msg', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/dashboard'))->with('msg', 'Logged in Successfully!');;
             }else if(Session::has('admin') && ($checkOtp->role=="designer"||$checkOtp->role=="Designer")){
-                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Logged in Successfully!');;
             }else{
-                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Loggedin successfully!');;
+                return Redirect::to(URL::to('/admin/create_template'))->with('msg', 'Logged in Successfully!');;
             }
 
             // if (Session::has('admin') && ($checkOtp->role=="designer"||$checkOtp->role=="Designer")) {
