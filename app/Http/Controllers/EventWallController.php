@@ -795,8 +795,20 @@ class EventWallController extends BaseController
         if ($eventPostList != "") {
             //dd($eventPostList);
             foreach ($eventPostList as  $value) {
-                if (!$value->user) {
-                    continue;
+                // if (!$value->user) {
+                //     continue;
+                // }
+                if (empty($value->user) || empty($value->user->id)) {
+                    if (!empty($value->sync_id)) {
+                        $syncUser = contact_sync::where('id', $value->sync_id)->first();
+                        if ($syncUser) {
+                            $value->user = $syncUser; // Assign the found user
+                        } else {
+                            continue; // Skip if no user found via sync_id
+                        }
+                    } else {
+                        continue; // Skip if no user and no sync_id
+                    }
                 }
                 $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
                 $ischeckEventOwner = Event::where(['id' => $event, 'user_id' => $user->id])->first();
@@ -834,11 +846,26 @@ class EventWallController extends BaseController
                 $postsNormalDetail['id'] =  $value->id;
                 $postsNormalDetail['user_id'] =  $value->user->id;
                 // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
+                if (!empty($value->sync_id)&& empty($value->user_id)) {
+                    $postsNormalDetail['is_sync']='1';
+                    } else{
+                        $postsNormalDetail['is_sync']='0';
+                    }
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                 $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsNormalDetail['is_host'] =  ($value->user->id == $eventCreator->user_id) ? 1 : 0;
-                $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
-                $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
+                // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                if (!empty($value->sync_id)) {
+             
+                    $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
+                    $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
+                } else {
+                    // Handle case where user is still not found
+                    $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
+                    $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+
+                }
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                 $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus ?? "";
                 $postsNormalDetail['kids'] = (int)$kids;
