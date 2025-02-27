@@ -207,11 +207,9 @@ class AuthController extends Controller
                 $checkContactSync->updated_at = now();
                 $checkContactSync->save();
 
-                $checkInvitedUser=EventInvitedUser::where('sync_id',$checkContactSync->id)->get();
-                if($checkInvitedUser){
-                        $checkInvitedUser->user_id=$storeUser->id;
-                        $checkInvitedUser->save();
-                }
+                EventInvitedUser::where('sync_id', $checkContactSync->id)
+                ->update(['user_id' => $storeUser->id]);
+            
             }
             
             $userDetails = User::where('id', $storeUser->id)->first();
