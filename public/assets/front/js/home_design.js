@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('#Allcat').prop('checked', false);
 
     updateTotalCount();
-});
+
 
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
 
@@ -92,7 +92,7 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
 
-
+});
     document.querySelectorAll('.collection-menu').forEach((button) => {
         button.addEventListener('click', (event) => {
             event.stopPropagation();
