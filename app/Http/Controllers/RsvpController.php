@@ -709,6 +709,7 @@ class RsvpController extends BaseController
                     // dd($newContact);
 
                     $newUserId = $newContact->id;
+                    $user_sync_id=null;
                     $userType = 'sync';
                 }
 
