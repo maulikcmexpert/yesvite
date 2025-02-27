@@ -137,11 +137,11 @@
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}" data-subcategory-id="{{ $image['subcategory_id'] }}"
                     data-category_name="{{ $image['category_name'] }}">
-                    <a href="#" class="collection-card card-blue">
-                        <div class="card-img">
+
+                        <div class="card-img collection-card card-blue">
                             <img src="{{ $image['image_path'] }}" alt="shower-card">
                         </div>
-                    </a>
+
                 </div>
             @endforeach
         </div>
@@ -152,18 +152,16 @@
             @foreach ($category->subcategory as $subcategory)
             @foreach ($subcategory->textdatas as $image)
 
-                    <div id="design_category_new" style="display: none"
+                    <div id="design_category" style="display: none"
                         class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item-new all_designs"
                         data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                         data-category-id="{{ $category->id }}" data-subcategory-id="{{ $subcategory->id }}"
                         data-category_name="{{ $category->category_name }}">
-                        <a href="#" class="collection-card card-blue">
-                            <div class="card-img">
-                                <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
-                                    alt="shower-card">
-                            </div>
-                            {{-- <h4>{{ $category->category_name }}</h4> --}}
-                        </a>
+
+                        <div class="card-img collection-card card-blue">
+                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                        </div>
+
                     </div>
 
             @endforeach

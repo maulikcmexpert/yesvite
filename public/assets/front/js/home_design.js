@@ -9,172 +9,181 @@ $(document).ready(function () {
         const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
         window.history.replaceState(null, '', newUrl);
     }
-
-
-    // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
+    $(".image-item").show(); // Show all default images
+    $(".image-item-new").hide(); // Hide new images initially
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
-    var visibleItems = $('.all_designs:visible').length;
-    $('.total_design_count').text(visibleItems + ' Items');
-    $('#Allcat').on('change', function () {
-        $('.image-item').show();
-        $(".categoryNew").show();
-        $(".subcategoryNew").hide();
-        $(".image-item-new").hide();
+    updateTotalCount();
+});
 
+// Handle "Allcat" checkbox change event
+$('#Allcat').on('change', function () {
+    if ($(this).is(':checked')) {
+        // Show all default images and hide new images
+        $('.image-item').show();
+        $('.image-item-new').hide();
+
+        // Hide category name and checkbox container
         $("#category_name").hide();
         $("#allchecked").hide();
-        if ($(this).is(':checked')) {
-            const categoryId = $(this).data('category-id');
-            const subcategoryId = $(this).data('subcategory-id');
 
-            $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
-            $('.image-item').show();
-            var visibleItems = $('.all_designs:visible').length;
-            $('.total_design_count').text(visibleItems + ' Items');
+        // Check all subcategory checkboxes
+        $('input[name="design_subcategory"]').prop('checked', true);
+    } else {
+        // Uncheck all subcategories
+        $('input[name="design_subcategory"]').prop('checked', false);
 
+        // Hide all images
+        $('.image-item').hide();
+        $('.image-item-new').hide();
+    }
 
+    updateTotalCount();
+});
 
+// Handle individual subcategory checkbox change
+$(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
+    $(".image-item").hide(); // Hide all default images
+    $(".image-item-new").hide(); // Hide all new images
 
-        } else {
-            $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-            $('.image-item').hide();
-            var visibleItems = $('.all_designs:visible').length;
-            $('.total_design_count').text(visibleItems + ' Items');
-
-
-
-
-        }
-
-
-    });
-    // $('input[name="design_subcategory_new"]').on('change', function () {
-    //     let subcategoryId = $(this).data('subcategory-id');
-
-    //     // If checked, check the corresponding checkbox in design_subcategory
-    //     if ($(this).is(':checked')) {
-    //         $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
-    //         $('#Allcat').prop('checked', true);
-    //     } else {
-    //         // If unchecked, uncheck the corresponding checkbox in design_subcategory
-    //         $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
-    //         $('#Allcat').prop('checked', false);
-    //     }
-    // });
-    $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
-    $(".image-item").hide(); // Hide all images first
-    $(".image-item-new").hide(); // Hide the new items too
+    let anyChecked = false;
 
     $('input[name="design_subcategory"]:checked').each(function () {
         const categoryId = $(this).data('category-id');
         const subcategoryId = $(this).data('subcategory-id');
 
-        // Show filtered images
+        // Show filtered images matching checked categories and subcategories
         $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+        anyChecked = true;
     });
 
-    var visibleItems = $('.image-item-new:visible').length;
+    if (!anyChecked) {
+        // If no checkboxes are checked, show default images again
+        $(".image-item").show();
+    }
+
+    updateTotalCount();
+});
+
+// Function to update total count of visible items
+function updateTotalCount() {
+    var visibleItems = $('.image-item:visible, .image-item-new:visible').length;
+    $('.total_design_count').text(visibleItems + ' Items');
+}
+
+
+$('#resetCategories').on('click', function (e) {
+    $(".categoryNew").show();
+    $(".subcategoryNew").hide();
+    $(".image-item-new").hide();
+    $("#category_name").hide();
+    $("#allchecked").hide();
+    e.preventDefault();
+    $("#Allcat").prop("checked", false);
+    $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
+    $('.image-item').hide();
+    var visibleItems = $('.all_designs:visible').length;
     $('.total_design_count').text(visibleItems + ' Items');
 });
 
-
-    $('#resetCategories').on('click', function (e) {
-        $(".categoryNew").show();
-        $(".subcategoryNew").hide();
-        $(".image-item-new").hide();
-        $("#category_name").hide();
-        $("#allchecked").hide();
-        e.preventDefault();
-        $("#Allcat").prop("checked", false);
-        $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-        $('.image-item').hide();
-        var visibleItems = $('.all_designs:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
-    });
-
-    document.querySelectorAll('.collection-menu').forEach((button) => {
-        button.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
-    });
-
-    const $cookiesBox = $('.cookies-track');
-
-    if (!localStorage.getItem('cookiesBoxDismissed')) {
-        setTimeout(() => {
-            $cookiesBox.addClass('active');
-        }, 500);
-    }
-
-    $('.close-btn').on('click', function () {
-        $cookiesBox.removeClass('active');
-        localStorage.setItem('cookiesBoxDismissed', 'true');
-    });
-
-    $(document).on('input', '#search_design_category', function () {
-        $(".categoryNew").show();
-        $(".subcategoryNew").hide();
-        $(".image-item-new").hide();
-        $("#category_name").hide();
-        $("#allchecked").hide();
-        var search_value = $(this).val();
-        $('#home_loader').css('display', 'flex');
-        if (search_value == '') {
-            $('input[name="design_subcategory"]').prop('checked', true)
-            $("#Allcat").prop("checked", true);
-        }
-        $.ajax({
-            url: base_url + "search_features",
-            method: 'GET',
-            data: {
-                search: search_value
-            },
-            success: function (response) {
-
-                if (response.view) {
-                    $('.list_all_design_catgeory').html('');
-                    $('.list_all_design_catgeory').html(response.view);
-                    $('#home_loader').css('display', 'none');
-                    $('.total_design_count').text(response.count + ' Items')
-
-                } else {
-                    $('.list_all_design_catgeory').html('No Design Found');
-                    $('.total_design_count').text(response.count + ' Items')
-                    $('#home_loader').css('display', 'none');
-                }
-            },
-            error: function (error) {
-                toastr.error('Some thing went wrong');
-            }
-        });
-    });
-
-
-    $(document).on('click', '#design_category', function () {
-
-        const categoryId = $(this).data("category-id");
-        const subcategoryId = $(this).data("subcategory-id");
-
-        $(`.categoryChecked_${categoryId}:checked`).each(function () {
-            const subcategoryIds = $(this).data("subcategory-id");
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
-                .show();
-            $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
-        });
-
-
-        // $('.subcategory_' + categoryId).prop('checked', true)
-
-        $("#allchecked").attr("data-categoryid", categoryId);
-        $("#allchecked").attr("data-subcategoryid", subcategoryId);
-        $("#category_name").text(category_name);
-
-        // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
-        var visibleItems = $(".all_designs:visible").length;
-        $(".total_design_count").text(visibleItems + " Items");
+document.querySelectorAll('.collection-menu').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        event.stopPropagation();
     });
 });
+
+const $cookiesBox = $('.cookies-track');
+
+if (!localStorage.getItem('cookiesBoxDismissed')) {
+    setTimeout(() => {
+        $cookiesBox.addClass('active');
+    }, 500);
+}
+
+$('.close-btn').on('click', function () {
+    $cookiesBox.removeClass('active');
+    localStorage.setItem('cookiesBoxDismissed', 'true');
+});
+
+$(document).on('input', '#search_design_category', function () {
+    let search_value = $(this).val().trim();
+    $(".categoryNew").show();
+    $(".subcategoryNew").hide();
+    $(".image-item-new").hide();
+    $("#category_name, #allchecked").hide();
+
+    $('#home_loader').css('display', 'flex');
+
+    if (search_value === '') {
+        $('input[name="design_subcategory"]').prop('checked', true);
+        $("#Allcat").prop("checked", true);
+        return;
+    }
+
+    $.ajax({
+        url: base_url + "search_features",
+        method: 'GET',
+        data: { search: search_value },
+        success: function (response) {
+            $('#home_loader').css('display', 'none');
+
+            if (response.view) {
+                $('.list_all_design_catgeory').html(response.view);
+                $('.total_design_count').text(response.count + ' Items');
+            } else {
+                $('.list_all_design_catgeory').html('<p>No Design Found</p>');
+                $('.total_design_count').text('0 Items');
+            }
+        },
+        error: function () {
+            $('#home_loader').css('display', 'none');
+            toastr.error('Something went wrong');
+        }
+    });
+});
+
+// Show subcategories when clicking a category
+$(document).on('click', '.image-item', function () {
+    let categoryId = $(this).data('category-id');
+
+    $(".subcategoryNew").hide();
+    $(`.subcategoryNew[data-category-id="${categoryId}"]`).show(); // Show relevant subcategories
+});
+
+// Show designs when clicking a subcategory
+$(document).on('click', '.subcategory-item', function () {
+    let subcategoryId = $(this).data('subcategory-id');
+
+    $(".image-item-new").hide();
+    $(`.image-item-new[data-subcategory-id="${subcategoryId}"]`).show(); // Show relevant designs
+});
+
+
+
+$(document).on('click', '#design_category', function () {
+
+    const categoryId = $(this).data("category-id");
+    const subcategoryId = $(this).data("subcategory-id");
+
+    $(`.categoryChecked_${categoryId}:checked`).each(function () {
+        const subcategoryIds = $(this).data("subcategory-id");
+        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
+            .show();
+        $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
+    });
+
+
+    // $('.subcategory_' + categoryId).prop('checked', true)
+
+    $("#allchecked").attr("data-categoryid", categoryId);
+    $("#allchecked").attr("data-subcategoryid", subcategoryId);
+    $("#category_name").text(category_name);
+
+    // $(`.image-item-new[data-category-id="${categoryId}"]`).show();
+    var visibleItems = $(".all_designs:visible").length;
+    $(".total_design_count").text(visibleItems + " Items");
+});
+
 
 $(document).on('click', '#allchecked', function () {
     const categoryId = $(this).attr('data-categoryid');
@@ -206,7 +215,7 @@ function allCheckFun(categoryIds, subcategoryIds) {
 
             // // Show images matching the selected categories and subcategories
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-            .show();
+                .show();
             var visibleItems = $(".all_designs:visible").length;
             $(".total_design_count").text(visibleItems + " Items");
         }

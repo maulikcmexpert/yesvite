@@ -149,6 +149,8 @@ class RsvpController extends BaseController
         $event_id =  decrypt($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare="";
+
+        // dd($share);
         if($share!=null){
             $isShare = decrypt($share);
         }
