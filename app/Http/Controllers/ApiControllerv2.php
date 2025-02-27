@@ -4049,9 +4049,14 @@ class ApiControllerv2 extends Controller
             // }
             $purchase_status = false;
             $eventCreation->save();
+
+            // $eventDetails['copy_link']=$shortLink;
+
         }
         DB::commit();
-        return response()->json(['status' => 1, 'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id), 'purchase_status' => $purchase_status]);
+        $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($eventCreation->id).'/'.encrypt(1));
+        $shortLink = createShortUrl($eventLink);
+        return response()->json(['status' => 1,'copy_link'=>$shortLink,'event_id' => $eventCreation->id, 'event_name' => $eventData['event_name'], 'message' => "Event Created Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventCreation->id), 'purchase_status' => $purchase_status]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
 
@@ -5338,10 +5343,12 @@ class ApiControllerv2 extends Controller
                     $total_count = count($filteredIds) + count($newInviteGuest);
                     debit_coins($user->id, $eventData['event_id'], $total_count);
                 }
+             
 
                 DB::commit();
-
-                return response()->json(['status' => 1, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventData['event_id'])]);
+                $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($eventData['event_id']).'/'.encrypt(1));
+                $shortLink = createShortUrl($eventLink);
+                return response()->json(['status' => 1,'copy_link'=>$shortLink, 'event_name' => $eventData['event_name'], 'event_id' => (int)$eventData['event_id'], 'message' => "Event updated Successfully", 'guest_pending_count' => getGuestRsvpPendingCount($eventData['event_id'])]);
             } else {
 
                 return response()->json(['status' => 0, 'message' => 'Event is not found']);
