@@ -1872,6 +1872,14 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
         width: 40% !important;
     }
 }
+@media only screen and (min-width: 1204px) {
+    .chat-lists {
+        max-width: 375px;
+        border-right: 1px solid var(--borderColor);
+        position: relative;
+        width: 50% !important;
+    }
+}
 
 
 @media only screen and (max-width:1500px) {
