@@ -157,7 +157,6 @@ function sendNotification($notificationType, $postData)
     } else {
         $senderData = User::where('id',  $postData['sender_id'])->first();
     }
-    dd($senderData);
     // if (isset($postData['newUser']) && count($postData['newUser']) != 0) {
     //     $filteredIds = array_map(
     //         fn($guest) => $guest['id'],
@@ -1192,7 +1191,7 @@ function sendNotification($notificationType, $postData)
         } elseif ($postData['rsvp_status'] == '0') {
             $notification_message = $firstname . ' '  . $lastname . " RSVP'd No for " . $getPostOwnerId->event_name;
         }
-        if ($postData['sync_id'] == "" || $postData['sync_id'] == null) {
+        // if ($postData['sync_id'] == "" || $postData['sync_id'] == null) {
             if ($getPostOwnerId->user_id != $postData['sender_id']) {
 
                 Notification::where([
@@ -1260,10 +1259,11 @@ function sendNotification($notificationType, $postData)
                             $invitation_email = new NewRsvpsEmailNotify($eventData);
                             Mail::to($getPostOwnerId->user->email)->send($invitation_email);
                         }
+                        
                     }
                 }
             }
-        }
+        // }
     }
 
     if ($notificationType == 'potluck_bring') {
