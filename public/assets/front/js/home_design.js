@@ -16,6 +16,7 @@ $(document).ready(function () {
     $('#Allcat').prop('checked', false);
 
     $('#Allcat').on('change', function () {
+        $('.image-item').show();
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
