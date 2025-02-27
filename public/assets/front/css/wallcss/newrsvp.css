@@ -1358,18 +1358,22 @@ label.error {
 
 .new_copy_event_inner button{
     padding: 10px 15px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: var(--SFProDisplay-Semibold);
     line-height: normal;
     color: var(--secondary-black);
     background-color: var(--pink);
     border-radius: 10px;
-    height: 35px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--pink);
     color: var(--white);
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);    
 }
 
 /* ====== responsive ======= */
