@@ -1059,42 +1059,42 @@
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1440px){
     .image-edit-inner-img {
-        width: 700px;
-        height: 1000px;
-        margin: 0px auto;
+        width: 700px !important;
+        height: 1000px !important;
+        margin: 0px auto !important;
     }
 }
 @media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1200px){
     .image-edit-inner-img {
-        width: 600px;
-        height: 800px;
-        margin: 0px auto;
+        width: 600px !important;
+        height: 800px !important;
+        margin: 0px auto !important;
     }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1080px){
     .image-edit-inner-img {
-        width: 550px;
-        height: 700px;
-        margin: 0px auto;
+        width: 550px !important;
+        height: 700px !important;
+        margin: 0px auto !important;
     }
 
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1799px) and (height: 1080px){
     .image-edit-inner-img {
-        width: 550px;
-        height: 700px;
-        margin: 0px auto;
+        width: 550px !important;
+        height: 700px !important;
+        margin: 0px auto !important;
     }
 
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1799px) and (height: 900px){
     .image-edit-inner-img {
-        width: 430px;
-        height: 530px;
-        margin: 0px auto;
+        width: 430px !important;
+        height: 530px !important;
+        margin: 0px auto !important;
     }
 
 }
