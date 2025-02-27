@@ -575,6 +575,8 @@ class RsvpController extends BaseController
                 $event_invited_user_id="";
 
             }
+            $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($event_id).'/'.encrypt(1));
+            $shortLink = createShortUrl($eventLink);
 
             return view('layout', compact(
                 'title',
@@ -583,6 +585,7 @@ class RsvpController extends BaseController
                 'css',
                 'eventInfo',
                 'event_id',
+                'shortLink',
                 'user_id',
                 'sync_contact_user_id',
                 'email',

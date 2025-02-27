@@ -233,7 +233,7 @@
                                             
                                           <div>
                                             <h4 class="title">Share Event Link</h4>
-                                            <input type="text" name="copy_link" id="copy_link"/><button id="copy_link_btn">Copy Link</button>
+                                            <input type="text" value="{{$shortLink}}" name="copy_link" id="copy_link"/><button id="copy_link_btn">Copy Link</button>
 
                                           </div>
                                             <!-- <a href="javascript:;" id="openGoogle" class="add-calender btn">Add to calendar 
