@@ -45,19 +45,19 @@ $(document).ready(function () {
 
         }
     });
-    $('input[name="design_subcategory_new"]').on('change', function () {
-        let subcategoryId = $(this).data('subcategory-id');
+    // $('input[name="design_subcategory_new"]').on('change', function () {
+    //     let subcategoryId = $(this).data('subcategory-id');
 
-        // If checked, check the corresponding checkbox in design_subcategory
-        if ($(this).is(':checked')) {
-            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
-            $('#Allcat').prop('checked', true);
-        } else {
-            // If unchecked, uncheck the corresponding checkbox in design_subcategory
-            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
-            $('#Allcat').prop('checked', false);
-        }
-    });
+    //     // If checked, check the corresponding checkbox in design_subcategory
+    //     if ($(this).is(':checked')) {
+    //         $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
+    //         $('#Allcat').prop('checked', true);
+    //     } else {
+    //         // If unchecked, uncheck the corresponding checkbox in design_subcategory
+    //         $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
+    //         $('#Allcat').prop('checked', false);
+    //     }
+    // });
     $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
         $(".image-item-new").hide();
         $("#category_name").hide();
@@ -223,10 +223,11 @@ function allCheckFun(categoryIds, subcategoryIds) {
 
             const categoryId = $(this).data("category-id");
 
-            // const subcategoryId = $(this).data("subcategory-id");
+            const subcategoryId = $(this).data("subcategory-id");
 
             // // Show images matching the selected categories and subcategories
-            $(`.image-item[data-category-id="${categoryId}"]`).show();
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+            .show();
             var visibleItems = $(".all_designs:visible").length;
             $(".total_design_count").text(visibleItems + " Items");
         }
@@ -280,45 +281,45 @@ function allCheckFun(categoryIds, subcategoryIds) {
 }
 
 
-$(document).on(
-    "change",
-    'input[name="design_subcategory_new"]:not(#Allcat)',
-    function () {
-        $(".image-item-new").hide();
-        $("#category_name").show();
-        $("#allchecked").show();
-        // If all individual checkboxes are checked, check "All Categories"
-        const totalCheckboxes = $(
-            'input[name="design_subcategory_new"]:not(#Allcat)'
-        ).length;
-        const checkedCheckboxes = $(
-            'input[name="design_subcategory_new"]:not(#Allcat):checked'
-        ).length;
+// $(document).on(
+//     "change",
+//     'input[name="design_subcategory_new"]:not(#Allcat)',
+//     function () {
+//         $(".image-item-new").hide();
+//         $("#category_name").show();
+//         $("#allchecked").show();
+//         // If all individual checkboxes are checked, check "All Categories"
+//         const totalCheckboxes = $(
+//             'input[name="design_subcategory_new"]:not(#Allcat)'
+//         ).length;
+//         const checkedCheckboxes = $(
+//             'input[name="design_subcategory_new"]:not(#Allcat):checked'
+//         ).length;
 
 
 
-        // Filter images based on checked categories
-        if (checkedCheckboxes > 0) {
-            $(".image-item").hide(); // Hide all images first
-            $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
-                function () {
-                    const categoryId = $(this).data("category-id");
-                    const subcategoryId = $(this).data("subcategory-id");
+//         // Filter images based on checked categories
+//         if (checkedCheckboxes > 0) {
+//             $(".image-item").hide(); // Hide all images first
+//             $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
+//                 function () {
+//                     const categoryId = $(this).data("category-id");
+//                     const subcategoryId = $(this).data("subcategory-id");
 
-                    $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                        .show();
+//                     $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+//                         .show();
 
-                    var visibleItems = $(".all_designs:visible").length;
-                    $(".total_design_count").text(visibleItems + " Items");
-                }
-            );
-        } else {
-            $(".image-item-new").hide(); // Hide all images if no checkboxes are checked
-            var visibleItems = $(".all_designs:visible").length;
-            $(".total_design_count").text(visibleItems + " Items");
-        }
-    }
-);
+//                     var visibleItems = $(".all_designs:visible").length;
+//                     $(".total_design_count").text(visibleItems + " Items");
+//                 }
+//             );
+//         } else {
+//             $(".image-item-new").hide(); // Hide all images if no checkboxes are checked
+//             var visibleItems = $(".all_designs:visible").length;
+//             $(".total_design_count").text(visibleItems + " Items");
+//         }
+//     }
+// );
 
 $("#resetCategoriesNew").on("click", function (e) {
 
