@@ -20,6 +20,9 @@ $(document).ready(function () {
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
 
     $('#Allcat').on('change', function () {
+        $(".image-item").show(); // Show all default images
+        $(".image-item-new").hide(); // Hide new images initially
+
         if ($(this).is(':checked')) {
             // Show all default images and hide new images
             $('.image-item').show();
