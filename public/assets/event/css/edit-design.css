@@ -2168,7 +2168,7 @@
         overflow: unset !important;
     }
     .image-edit-inner-img {
-        width: 490px;
+        width: 450px;
         height: 560px;
         margin: 0px auto;
     }
@@ -2285,6 +2285,10 @@
     .common-font-wrp {
         max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
+    }
+    .new-event-sidebar-wrp .coin-invite-main {
+        width: 40%;
+        max-width: 40%;
     }
 }
 

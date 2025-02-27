@@ -1216,7 +1216,6 @@ function sendNotification($notificationType, $postData)
 
                 if ($notification->save()) {
                     $deviceData = Device::where('user_id', $getPostOwnerId->user_id)->first();
-                    dd($deviceData);
                     if (!empty($deviceData)) {
                         $notification_image = "";
                         if (!empty($notificationImage->post_image) && $notificationImage->post_image != NULL) {

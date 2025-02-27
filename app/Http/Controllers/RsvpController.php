@@ -1011,7 +1011,7 @@ class RsvpController extends BaseController
 
                 $notificationParam = [
                     'sync_id' => $newUserId,
-                    'sender_id' => $userId,
+                    'sender_id' => null,
                     'event_id' => $eventId,
                     'rsvp_status' => $request->rsvp_status,
                     'kids' =>  $kids,
@@ -1038,9 +1038,9 @@ class RsvpController extends BaseController
                         'rsvp_attempt' => $rsvp_attempt
                     ];
                 } 
+                // dd($notificationParam);
             DB::commit();
             
-            // dd($notificationParam);
             sendNotification('sent_rsvp', $notificationParam);
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
