@@ -155,7 +155,7 @@
         </div>
 
 
-        <div class="row list_all_design_catgeory search_category">
+        {{-- <div class="row list_all_design_catgeory search_category">
             @foreach ($categories as $category)
                 @foreach ($category->subcategory as $subcategory)
                     @foreach ($subcategory->textdatas as $image)
@@ -175,7 +175,7 @@
             @endforeach
 
 
-        </div>
+        </div> --}}
 
 
 
