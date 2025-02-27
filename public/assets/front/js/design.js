@@ -2776,21 +2776,25 @@ async function bindData(current_event_id) {
     function undo() {
         console.log("undoStack", undoStack.length);
         if (undoStack.length > 0) {
-            // Ensure at least one previous state exists
             if (undoStack.length == 1) {
                 $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
             }
-            redoStack.push(canvas.toJSON()); // Save current state to redo stack
+
+            redoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
+
+            // 🛠 Instead of `canvas.clear()`, remove objects safely
+            removeAllObjects(canvas);
+
             canvas.loadFromJSON(lastState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+                canvas.renderAll();
             });
+
             if (redoStack.length > 0) {
                 $("#redoButton").find("svg path").attr("fill", "#0F172A");
             }
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
+
+            setTimeout(setControlVisibilityForAll, 100);
         } else {
             $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
         }
@@ -2798,24 +2802,35 @@ async function bindData(current_event_id) {
 
     function redo() {
         if (redoStack.length > 0) {
-            undoStack.push(canvas.toJSON()); // Save current state to undo stack
+            undoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
+
+            // 🛠 Instead of `canvas.clear()`, remove objects safely
+            removeAllObjects(canvas);
+
             canvas.loadFromJSON(nextState, function () {
-                canvas.renderAll(); // Render the canvas after loading state
+                canvas.renderAll();
             });
+
             if (redoStack.length == 1) {
                 $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
             }
+
             if (undoStack.length > 0) {
                 $("#undoButton").find("svg path").attr("fill", "#0F172A");
             }
+
             $("#redoButton").find("svg path").attr("fill", "#0F172A");
-            setTimeout(function () {
-                setControlVisibilityForAll();
-            }, 1000);
+
+            setTimeout(setControlVisibilityForAll, 100);
         } else {
             $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
         }
+    }
+
+    // 🛠 Function to remove all objects from the canvas safely
+    function removeAllObjects(canvas) {
+        canvas.getObjects().forEach((obj) => canvas.remove(obj));
     }
 
     $("#undoButton").click(function () {
