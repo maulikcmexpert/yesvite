@@ -1004,22 +1004,37 @@
     height: 100vh;
 }
 
-.previousImeg h5{
+.design-seting a h5{
     line-height: normal !important;
     color: #fff;
 }
 
-.previousImeg{
+.design-seting a{
     align-items: center;
     background-color: #000;
     border-radius: 16px !important;
     color: #fff !important;
     padding: 10px 15px;
 }
-.previousImeg svg path{
+.design-seting a svg path{
     stroke: #fff;
 }
 
+.design-seting button{
+    align-items: center;
+    background-color: #000 !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 10px 15px;
+}
+
+.design-seting button h5{
+    line-height: normal !important;
+    color: #fff !important;
+}
+.design-seting button svg path{
+    stroke: #fff !important;
+}
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
@@ -2393,6 +2408,38 @@
     .edit-imag-main-content-wrp{
         padding: 0px !important;
         padding-bottom: 20px !important;
+    }
+
+    .design-seting a h5{
+        line-height: normal !important;
+        color: #000;
+    }
+    
+    .design-seting a{
+        align-items: center;
+        background-color: transparent;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    .design-seting a svg path{
+        stroke: #000;
+    }
+    
+    .design-seting button{
+        align-items: center;
+        background-color: transparent !important;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    
+    .design-seting button h5{
+        line-height: normal !important;
+        color: #000 !important;
+    }
+    .design-seting button svg path{
+        stroke: #000 !important;
     }
 
 }

@@ -80,6 +80,7 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         @foreach ($category->subcategory as $subcategory)
+
                                                             <li>
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-between">
@@ -87,13 +88,12 @@
                                                                         for="subcategory{{ $subcategory->id }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </label>
-                                                                    <a href="javascript:;">
                                                                     <input
                                                                         class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
-                                                                        data-subcategory-id="{{ $subcategory->id }}"></a>
+                                                                        data-subcategory-id="{{ $subcategory->id }}">
                                                                 </div>
                                                             </li>
                                                         @endforeach
