@@ -415,6 +415,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="new_copy_event_Wrp">
+                                            <h4 class="title">Share Event Link</h4>
+                                            <div class="new_copy_event_inner">
+                                                <input type="text" value="{{$shortLink}}" name="copy_link" id="copy_link"/>
+                                                <button type="button" id="copy_link_btn">Copy Link</button>
+                                            </div>
+                                          </div>
                                         {{-- {{      dd($eventDetails)}} --}}
                                         <div class="host-users-detail cmn-card">
                                         @if (!empty($eventDetails['co_hosts']))
