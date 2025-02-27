@@ -1259,6 +1259,7 @@ function sendNotification($notificationType, $postData)
                             $invitation_email = new NewRsvpsEmailNotify($eventData);
                             Mail::to($getPostOwnerId->user->email)->send($invitation_email);
                         }
+                        
                     }
                 }
             }

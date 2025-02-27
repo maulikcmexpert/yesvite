@@ -141,7 +141,6 @@ class RsvpController extends BaseController
 
     public function index($event_invited_user_id, $eventId,$share=null)
     {
-        
         $title = 'RSVP';
         $page = 'front.rsvp';
         $js = ['rsvp'];
@@ -150,6 +149,8 @@ class RsvpController extends BaseController
         $event_id =  decrypt($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare="";
+
+        // dd($share);
         if($share!=null){
             $isShare = decrypt($share);
         }
@@ -599,7 +600,7 @@ class RsvpController extends BaseController
         } catch (QueryException $e) {
 
             DB::rollBack();
-
+            dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
             dd($e);
@@ -682,46 +683,113 @@ class RsvpController extends BaseController
                     })->where(['id' => $event_invited_user_id])->first();
                 }
             }else{
-                $contactSync = contact_sync::where('email', $email)->first();
+                // $contactSync = contact_sync::where('email', $email)->first();
                 $user = User::where('email', $email)->first();
-
-                if ($contactSync) {
-                    $newUserId = $contactSync->id;
-                    $userType = 'sync';
-                } elseif ($user) {
+                if ($user) {
                     $newUserId = $user->id;
                     $userType = 'user';
                 } else {
-                    $newContact = new contact_sync();
-                    $newContact->firstName = $request->firstname;
-                    $newContact->lastName = $request->lastname;
-                    $newContact->photo = "";
-                    $newContact->isAppUser = '0';
-                    $newContact->visible = '0';
-                    $newContact->preferBy = 'email';
-                    $newContact->email = $email;
-                    $newContact->created_at = now();
-                    $newContact->updated_at = now();
-                    $newContact->save();
+                    $contactSync = contact_sync::where('email', $email)->first();
+                
+                    if ($contactSync) {
+                        $newUserId = $contactSync->id;
+                         $user_sync_id = $contactSync->userId;
+                        $userType = 'sync';
+                    } else {
+                        $newContact = new contact_sync();
+                        $newContact->firstName = $request->firstname;
+                        $newContact->lastName = $request->lastname;
+                        $newContact->photo = "";
+                        $newContact->isAppUser = '0';
+                        $newContact->visible = '0';
+                        $newContact->preferBy = 'email';
+                        $newContact->email = $email;
+                        $newContact->created_at = now();
+                        $newContact->updated_at = now();
+                        $newContact->save();
+                
+                        $newUserId = $newContact->id;
+                        $user_sync_id=null;
 
-
-                    // dd($newContact);
-
-                    $newUserId = $newContact->id;
-                    $userType = 'sync';
+                        $userType = 'sync';
+                    }
                 }
+                // if ($contactSync) {
+                //     $newUserId = $contactSync->id;
+                //     $user_sync_id=$contactSync->userId;
+                //     $userType = 'sync';
+                // } elseif ($user) {
+                //     $newUserId = $user->id;
+                //     $userType = 'user';
+                // } else {
+                //     $newContact = new contact_sync();
+                //     $newContact->firstName = $request->firstname;
+                //     $newContact->lastName = $request->lastname;
+                //     $newContact->photo = "";
+                //     $newContact->isAppUser = '0';
+                //     $newContact->visible = '0';
+                //     $newContact->preferBy = 'email';
+                //     $newContact->email = $email;
+                //     $newContact->created_at = now();
+                //     $newContact->updated_at = now();
+                //     $newContact->save();
 
-                $invitedUser = new EventInvitedUser();
-                $invitedUser->event_id = $eventId;
-                $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
-                $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
-                $invitedUser->prefer_by = 'email';   
-                $invitedUser->invitation_sent='1';             
-                $invitedUser->save();
+
+                //     // dd($newContact);
+
+                //     $newUserId = $newContact->id;
+                //     $user_sync_id=null;
+                //     $userType = 'sync';
+                // }
+
+                // $invitedUser = new EventInvitedUser();
+                // $invitedUser->event_id = $eventId;
+                // $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
+                // $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                // $invitedUser->prefer_by = 'email';   
+                // $invitedUser->invitation_sent='1';             
+                // $invitedUser->save();
+                // $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                // ->where('user_id', $newUserId)
+                // ->first();
+            
+                // if (!$existingInvite && $userType == 'sync') {
+                //     $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                //         ->where('sync_id', $newUserId)
+                //         ->first();
+                // }
+
+                // dd($userType);
+                $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                ->where(function ($query) use ($userType, $newUserId) {
+                    if ($userType == 'user') {
+                        $query->where('user_id', $newUserId);
+                    } else {
+                        $query->where('sync_id', $newUserId);
+                    }
+                })
+                ->first();
+                if ($existingInvite) {
+                    $existingInvite->invitation_sent = '1';
+                    $existingInvite->updated_at = now();
+                    $existingInvite->save();
+                    $invitedUserId = $existingInvite->id;
+                } else {
+                    $invitedUser = new EventInvitedUser();
+                    $invitedUser->event_id = $eventId;
+                    $invitedUser->user_id = ($userType == 'user') ? $newUserId : $user_sync_id;
+                    $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                    $invitedUser->prefer_by = 'email';
+                    $invitedUser->invitation_sent = '1';
+                    $invitedUser->save();
+
+                    // $user_sync_id=null;
+                    $invitedUserId = $invitedUser->id;
+                }
                  
                 
                 
-                $invitedUserId = $invitedUser->id;
+                // $invitedUserId = $invitedUser->id;
 
 
                 if ($userType=='sync') {
@@ -768,7 +836,11 @@ class RsvpController extends BaseController
                     }
     
                 }else{
-                    $rsvpSent->sync_id = $newUserId;
+                    if ($userType=='sync') {
+                        $rsvpSent->sync_id = $newUserId;
+                    }else{
+                        $rsvpSent->user_id = $newUserId;
+                    }
                 }
                 $rsvpSent->rsvp_status = $request->rsvp_status;
 
@@ -791,7 +863,7 @@ class RsvpController extends BaseController
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $eventId)
                         // ->where('user_id', $userId)
-                        ->where(function ($query) use ($sync_id, $userId,$shared,$newUserId) {
+                        ->where(function ($query) use ($sync_id, $userId,$shared,$newUserId,$userType) {
                             if($shared==""){
                                 if (!empty($sync_id) && $userId == null) {
                                     $query->where('sync_id', $sync_id);
@@ -799,8 +871,11 @@ class RsvpController extends BaseController
                                     $query->where('user_id', $userId);
                                 }
                             }else{
-                                $query->where('sync_id', $newUserId);
-
+                                if ($userType=='sync') {
+                                    $query->where('sync_id', $newUserId);
+                                }else{
+                                    $query->where('user_id', $newUserId);
+                                }
                             }
                            
                         })
@@ -814,14 +889,18 @@ class RsvpController extends BaseController
                     ];
                     $creatEventPost = new EventPost();
                     $creatEventPost->event_id = $eventId;
-                    if($shared==""){
+                    if($request->isShare==""){
                         if ($request->input('user_id') != "") {
                             $creatEventPost->user_id =  $userId;
                         } else {
                             $creatEventPost->sync_id =  $sync_id;
                         }
                     }else{
-                        $creatEventPost->sync_id =  $newUserId;
+                        if ($userType=='sync') {
+                            $creatEventPost->sync_id =  $newUserId;
+                        }else{
+                            $creatEventPost->user_id =  $newUserId;
+                        }
                     }
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
@@ -853,7 +932,7 @@ class RsvpController extends BaseController
                 //     }
                 // }
 
-                if($shared==""){
+                if($request->isShare==""){
                     if ($userId != "" || $userId != null) {
                         if (!empty($request->input('notifications'))) {
                             foreach ($request->input('notifications') as $value) {
@@ -929,38 +1008,52 @@ class RsvpController extends BaseController
                 }
                 // dd(1);
 
+                if ($userType=='user') {
+                    $notificationParam = [
+                        'sync_id' => "",
+                        'sender_id' => $newUserId,
+                        'event_id' => $eventId,
+                        'rsvp_status' => $request->rsvp_status,
+                        'kids' =>  $kids,
+                        'adults' => $adults,
+                        'rsvp_video' => "",
+                        'rsvp_message' => $request->message_to_host,
+                        'post_id' => "",
+                        'rsvp_attempt' => $rsvp_attempt
+                    ];
+            }
 
-                $notificationParam = [
-                    'sync_id' => $sync_id,
-                    'sender_id' => $userId,
-                    'event_id' => $eventId,
-                    'rsvp_status' => $request->rsvp_status,
-                    'kids' =>  $kids,
-                    'adults' => $adults,
-                    'rsvp_video' => "",
-                    'rsvp_message' => $request->message_to_host,
-                    'post_id' => "",
-                    'rsvp_attempt' => $rsvp_attempt
-                ];
-
-                DB::commit();
 
                 // dd($notificationParam);
                 if($request->isShare==""){
-                    sendNotification('sent_rsvp', $notificationParam);
-                }
-
+                    $notificationParam = [
+                        'sync_id' => $sync_id,
+                        'sender_id' => $userId,
+                        'event_id' => $eventId,
+                        'rsvp_status' => $request->rsvp_status,
+                        'kids' =>  $kids,
+                        'adults' => $adults,
+                        'rsvp_video' => "",
+                        'rsvp_message' => $request->message_to_host,
+                        'post_id' => "",
+                        'rsvp_attempt' => $rsvp_attempt
+                    ];
+                } 
+                // dd($notificationParam);
+            DB::commit();
+            
+            sendNotification('sent_rsvp', $notificationParam);
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
-                    if($shared==""){
+                    if($request->isShare==""){
                     return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You are going to this event');
                     }else{
                         return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg', 'You are going to this event');
                     }
                     // return redirect()->to($url)->with('msg', 'You are going to this event');
                 } elseif ($request->rsvp_status == "0") {
-                    if($shared==""){
+                    if($request->isShare==""){
 
                     return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg', 'You declined to go to this event');
                     }else{
@@ -970,14 +1063,15 @@ class RsvpController extends BaseController
                     // return redirect()->to($url)->with('msg', 'You are going to this event');
                 }
             }
-            if($shared==""){
+            if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Rsvp not sent');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Rsvp not sent');
             }
         } catch (QueryException $e) {
             dd($e);
-            if($shared==""){
+
+            if($request->isShare==""){
               return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'DB error');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'DB error');
@@ -985,7 +1079,7 @@ class RsvpController extends BaseController
             DB::rollBack();
         } catch (\Exception $e) {
             dd($e);
-            if($shared==""){
+            if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Something went wrong');

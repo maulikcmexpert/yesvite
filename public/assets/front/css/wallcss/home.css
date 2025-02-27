@@ -2156,6 +2156,11 @@ main.new-main-content {
   border-bottom: none;
   padding-bottom: 0px;
 }
+.posts-card-wrp .posts-card-like-btn i img{
+  width: 19px;
+  min-width: 19px;
+  height: 19px;
+}
 
 /* ===Responsive===
 @media only screen and (max-width: 1399px) {

@@ -1004,16 +1004,106 @@
     height: 100vh;
 }
 
-.previousImeg h5{
+.design-seting a h5{
     line-height: normal !important;
+    color: #fff;
 }
 
-.previousImeg{
+.design-seting a{
     align-items: center;
-    /* background-color: #000;
+    background-color: #000;
     border-radius: 16px !important;
     color: #fff !important;
-    padding: 10px 15px; */
+    padding: 10px 15px;
+}
+.design-seting a svg path{
+    stroke: #fff;
+}
+
+.design-seting button{
+    align-items: center;
+    background-color: #000 !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 10px 15px;
+}
+
+.design-seting button h5{
+    line-height: normal !important;
+    color: #fff !important;
+}
+.design-seting button svg path{
+    stroke: #fff !important;
+}
+
+.guest-checkout div.d-flex{
+    align-items: center;
+    background-color: #000 !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 10px 15px;
+}
+
+.guest-checkout div.d-flex h5{
+    line-height: normal !important;
+    color: #fff !important;
+}
+.guest-checkout div.d-flex svg path{
+    stroke: #fff !important;
+}
+
+
+/* ====Responsive==== */
+
+@media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
+    .image-edit-inner-img {
+        width: 1200px !important;
+        height: 1700px !important;
+        margin: 0px auto;
+    }
+}
+
+@media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1440px){
+    .image-edit-inner-img {
+        width: 700px !important;
+        height: 1000px !important;
+        margin: 0px auto !important;
+    }
+}
+
+@media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1200px){
+    .image-edit-inner-img {
+        width: 600px !important;
+        height: 800px !important;
+        margin: 0px auto !important;
+    }
+}
+
+@media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1080px){
+    .image-edit-inner-img {
+        width: 550px !important;
+        height: 700px !important;
+        margin: 0px auto !important;
+    }
+
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1799px) and (height: 1080px){
+    .image-edit-inner-img {
+        width: 550px !important;
+        height: 700px !important;
+        margin: 0px auto !important;
+    }
+
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1799px) and (min-height: 900px) and (max-height: 920px){
+    .image-edit-inner-img {
+        width: 430px !important;
+        height: 530px !important;
+        margin: 0px auto !important;
+    }
+
 }
 
 @media only screen and (min-width: 4001px){
@@ -1088,8 +1178,8 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: 700px;
-        height: 850px;
+        width: 900px;
+        height: 1200px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1100,7 +1190,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1119,7 +1209,6 @@
         margin-bottom: 0px !important;
     }
 }
-
 
 @media only screen and (min-width: 3801px) and (max-width: 4000px){
     .image-edit-inner-img {
@@ -1193,8 +1282,8 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: 700px;
-        height: 850px;
+        width: 900px;
+        height: 1200px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1205,7 +1294,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1297,8 +1386,8 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: 700px;
-        height: 850px;
+        width: 900px;
+        height: 1200px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1309,7 +1398,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1401,8 +1490,8 @@
         font-size: 16px;
     }
     .image-edit-inner-img {
-        width: 700px;
-        height: 850px;
+        width: 800px;
+        height: 1100px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1413,7 +1502,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1432,7 +1521,6 @@
         margin-bottom: 0px !important;
     }
 }
-
 
 @media only screen and (min-width: 3201px) and (max-width: 3400px){
     .image-edit-inner-img {
@@ -1507,7 +1595,7 @@
     }
     .image-edit-inner-img {
         width: 700px;
-        height: 850px;
+        height: 1000px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1518,7 +1606,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1611,7 +1699,7 @@
     }
     .image-edit-inner-img {
         width: 700px;
-        height: 850px;
+        height: 950px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1622,7 +1710,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1641,7 +1729,6 @@
         margin-bottom: 0px !important;
     }
 }
-
 
 @media only screen and (min-width: 2800px) and (max-width: 2999px){
     .image-edit-inner-img {
@@ -1716,7 +1803,7 @@
     }
     .image-edit-inner-img {
         width: 600px;
-        height: 730px;
+        height: 850px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1727,7 +1814,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1779,7 +1866,7 @@
     }
     .image-edit-inner-img {
         width: 600px;
-        height: 730px;
+        height: 800px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1790,7 +1877,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1810,6 +1897,7 @@
     }
 
 }
+
 @media only screen and (min-width: 2400px) and (max-width: 2800px){
     .new-event-sidebar-menu ul li h3{
         font-size: 20px !important;
@@ -1844,8 +1932,8 @@
 
 @media only screen and (min-width: 2400px) and (max-width: 2599px){
     .image-edit-inner-img {
-        width: 550px;
-        height: 680px;
+        width: 590px;
+        height: 750px;
         margin: 0px auto;
     }
     #edit-design-temp .main-content-right {
@@ -1856,7 +1944,7 @@
         overflow: unset !important;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -1928,7 +2016,6 @@
         margin: 0px auto !important;
     } */
 }
-
 
 @media only screen and (min-width: 2000px) and (max-width: 2399px){
     .main-content-sidebar {
@@ -2042,7 +2129,6 @@
     } */
 }
 
-
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
     .image-edit-inner-img {
         width: 590px;
@@ -2082,12 +2168,12 @@
         overflow: unset !important;
     }
     .image-edit-inner-img {
-        width: 490px;
-        height: 580px;
+        width: 450px;
+        height: 560px;
         margin: 0px auto;
     }
 
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -2107,7 +2193,6 @@
     }
 }
 
-
 @media only screen and (min-width: 1600px) and (max-width: 1799px){
     #edit-design-temp .main-content-right {
         padding-bottom: 50px;
@@ -2121,7 +2206,7 @@
         height: 430px;
         margin: 0px auto;
     }
-    .main-content-sidebar .new-event-sidebar-wrp {
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
     }
     .edit-imag-main-content-wrp{
@@ -2201,9 +2286,11 @@
         max-height: calc(100vh - 220px) !important;
         margin-bottom: 0px !important;
     }
+    .new-event-sidebar-wrp .coin-invite-main {
+        width: 40%;
+        max-width: 40%;
+    }
 }
-
-
 
 @media only screen and (max-width: 1399px) {
     .guest-wrp.side-guest-wrp .invite-pro{
@@ -2216,6 +2303,7 @@
     }
     
 }
+
 @media only screen and (max-width: 1199px) {
     .image-edit-inner-img {
         width: 400px;
@@ -2390,8 +2478,39 @@
         padding-bottom: 20px !important;
     }
 
-}
+    .design-seting a h5{
+        line-height: normal !important;
+        color: #000;
+    }
+    
+    .design-seting a{
+        align-items: center;
+        background-color: transparent;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    .design-seting a svg path{
+        stroke: #000;
+    }
+    
+    .design-seting button{
+        align-items: center;
+        background-color: transparent !important;
+        border-radius: 0px !important;
+        color: #000 !important;
+        padding: 0px 0px;
+    }
+    
+    .design-seting button h5{
+        line-height: normal !important;
+        color: #000 !important;
+    }
+    .design-seting button svg path{
+        stroke: #000 !important;
+    }
 
+}
 
 @media only screen and (max-width: 370px) {
     .image-edit-inner-img {
