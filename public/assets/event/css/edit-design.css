@@ -1020,6 +1020,21 @@
     stroke: #fff;
 }
 
+.design-seting button.li_event_details{
+    align-items: center;
+    background-color: #000;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 10px 15px;
+}
+
+.design-seting button.li_event_details h5{
+    line-height: normal !important;
+    color: #fff;
+}
+.design-seting button.li_event_details svg path{
+    stroke: #fff;
+}
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
