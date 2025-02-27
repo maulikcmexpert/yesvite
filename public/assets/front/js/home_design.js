@@ -9,9 +9,9 @@ $(document).ready(function () {
         window.history.replaceState(null, '', newUrl);
     }
 
-    $(".image-item").hide(); // Hide all images
+    $(".image-item").show(); // Hide all images
     $(".image-item-new").hide(); // Hide new images initially
-    $(".default_show").show(); // Show only the images with default_show class
+    $(".default_show").show();
 
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
