@@ -1354,6 +1354,7 @@ label.error {
     height: 40px !important;
     padding-left: 10px !important;
     width: 100% !important;
+    padding-right: 100px;
 }
 
 .new_copy_event_inner button{
