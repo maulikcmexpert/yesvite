@@ -153,6 +153,7 @@ class HomeFrontController extends BaseController
                 $q->where('subcategory_name', 'LIKE', "%$query%")
                   ->whereHas('textdatas'); // Ensure subcategories have textdatas
             })
+
             ->with([
                 'subcategory' => function ($q) use ($query) {
                     $q->where('subcategory_name', 'LIKE', "%$query%") // Filter subcategories by search
