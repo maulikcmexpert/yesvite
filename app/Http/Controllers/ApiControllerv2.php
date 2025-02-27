@@ -8246,13 +8246,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['user_profile'] = [
                         'id' => $value->user->id,
                         'profile' => empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile),
-                        'bg_profile' => empty(      if (empty($value->user) || empty($value->user->id)) {
-                            if (!empty($value->sync_id)) {
-                                $postsNormalDetail['is_sync']='1';
-                                }
-                        }else{
-                                $postsNormalDetail['is_sync']='0';
-                            }value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
+                        'bg_profile' => empty($value->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->user->bg_profile),
                         'gender' => ($value->user->gender != NULL) ? $value->user->gender : "",
                         'username' => $value->user->firstname . ' ' . $value->user->lastname,
                         'location' => ($value->user->city != NULL) ? $value->user->city : "",
