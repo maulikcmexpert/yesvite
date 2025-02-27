@@ -864,13 +864,8 @@ $(document).on("click", ".direction-btn", function () {
 });
 $(document).on("click","#copy_link_btn",function(e){
     e.preventDefault(); // Prevents any default button action
-
-    // Get the input value
     var copyText = $("#copy_link").val();
-
-    // Use Clipboard API to copy text
     navigator.clipboard.writeText(copyText).then(function() {
-        // alert("Copied: " + copyText);
     }).catch(function(err) {
         console.error("Failed to copy: ", err);
     });
