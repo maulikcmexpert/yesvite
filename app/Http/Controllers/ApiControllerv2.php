@@ -8377,9 +8377,9 @@ class ApiControllerv2 extends Controller
 
                     $postsNormalDetail['user_id'] =  $value->user->id;
                     if (!empty($value->sync_id)&&empty($value->user)) {
-                    $postsNormalDetail['is_sync']=='1';
+                    $postsNormalDetail['is_sync']='1';
                     }else{
-                        $postsNormalDetail['is_sync']=='0';
+                        $postsNormalDetail['is_sync']='0';
                     }
 
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
