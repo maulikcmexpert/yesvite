@@ -2157,8 +2157,9 @@ main.new-main-content {
   padding-bottom: 0px;
 }
 .posts-card-wrp .posts-card-like-btn i img{
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  min-width: 19px;
+  height: 19px;
 }
 
 /* ===Responsive===
