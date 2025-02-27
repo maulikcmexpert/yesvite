@@ -2773,9 +2773,13 @@ async function bindData(current_event_id) {
         }
     });
 
+    let isUndoRedoInProgress = false; // Lock to prevent fast undo/redo
+
     function undo() {
-        console.log("undoStack", undoStack.length);
+        if (isUndoRedoInProgress) return; // Prevent multiple rapid undo actions
         if (undoStack.length > 0) {
+            isUndoRedoInProgress = true; // Lock the function until complete
+
             if (undoStack.length == 1) {
                 $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
             }
@@ -2783,11 +2787,11 @@ async function bindData(current_event_id) {
             redoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
 
-            // 🛠 Instead of `canvas.clear()`, remove objects safely
-            removeAllObjects(canvas);
+            removeAllObjects(canvas); // Remove existing objects safely
 
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll();
+                isUndoRedoInProgress = false; // Unlock after completion
             });
 
             if (redoStack.length > 0) {
@@ -2801,15 +2805,18 @@ async function bindData(current_event_id) {
     }
 
     function redo() {
+        if (isUndoRedoInProgress) return; // Prevent multiple rapid redo actions
         if (redoStack.length > 0) {
+            isUndoRedoInProgress = true; // Lock the function until complete
+
             undoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
 
-            // 🛠 Instead of `canvas.clear()`, remove objects safely
-            removeAllObjects(canvas);
+            removeAllObjects(canvas); // Remove existing objects safely
 
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll();
+                isUndoRedoInProgress = false; // Unlock after completion
             });
 
             if (redoStack.length == 1) {
