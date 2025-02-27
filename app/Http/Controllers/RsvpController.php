@@ -1008,20 +1008,7 @@ class RsvpController extends BaseController
                 }
                 // dd(1);
 
-                if ($userType=='user') {
-                    $notificationParam = [
-                        'sync_id' => "",
-                        'sender_id' => $newUserId,
-                        'event_id' => $eventId,
-                        'rsvp_status' => $request->rsvp_status,
-                        'kids' =>  $kids,
-                        'adults' => $adults,
-                        'rsvp_video' => "",
-                        'rsvp_message' => $request->message_to_host,
-                        'post_id' => "",
-                        'rsvp_attempt' => $rsvp_attempt
-                    ];
-            }
+            
 
 
                 // dd($notificationParam);
@@ -1038,11 +1025,30 @@ class RsvpController extends BaseController
                         'post_id' => "",
                         'rsvp_attempt' => $rsvp_attempt
                     ];
-                } 
+                    sendNotification('sent_rsvp', $notificationParam);
+
+                }else{
+                    if ($userType=='user') {
+                        $notificationParam = [
+                            'sync_id' => "",
+                            'sender_id' => $newUserId,
+                            'event_id' => $eventId,
+                            'rsvp_status' => $request->rsvp_status,
+                            'kids' =>  $kids,
+                            'adults' => $adults,
+                            'rsvp_video' => "",
+                            'rsvp_message' => $request->message_to_host,
+                            'post_id' => "",
+                            'rsvp_attempt' => $rsvp_attempt
+                        ];
+                        
+                        sendNotification('sent_rsvp', $notificationParam);
+    
+                    }
+                }
                 // dd($notificationParam);
             DB::commit();
             
-            sendNotification('sent_rsvp', $notificationParam);
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
