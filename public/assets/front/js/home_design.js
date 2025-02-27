@@ -129,13 +129,13 @@ $(document).ready(function () {
             success: function (response) {
 
                 if (response.view) {
-                    $('.list_all_design_catgeory').html('');
-                    $('.list_all_design_catgeory').html(response.view);
+                    $('.search_category').html('');
+                    $('.search_category').html(response.view);
                     $('#home_loader').css('display', 'none');
                     $('.total_design_count').text(response.count + ' Items')
 
                 } else {
-                    $('.list_all_design_catgeory').html('No Design Found');
+                    $('.search_category').html('No Design Found');
                     $('.total_design_count').text(response.count + ' Items')
                     $('#home_loader').css('display', 'none');
                 }
