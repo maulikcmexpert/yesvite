@@ -11,7 +11,7 @@
             <div class="card-img">
                 <img src="{{ asset('storage/canvas/' . $firstTextData->filled_image) }}" alt="shower-card">
             </div>
-            <h4>{{ $category->category_name }}</h4>
+            {{-- <h4>{{ $category->category_name }}</h4> --}}
         </a>
     </div>
 
