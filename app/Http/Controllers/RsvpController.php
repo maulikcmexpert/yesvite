@@ -896,7 +896,11 @@ class RsvpController extends BaseController
                             $creatEventPost->sync_id =  $sync_id;
                         }
                     }else{
-                        $creatEventPost->sync_id =  $newUserId;
+                        if ($userType=='sync') {
+                            $creatEventPost->sync_id =  $newUserId;
+                        }else{
+                            $creatEventPost->user_id =  $newUserId;
+                        }
                     }
                     $creatEventPost->post_message = json_encode($postMessage);
                     $creatEventPost->post_privacy = "1";
