@@ -29,7 +29,14 @@ $(document).ready(function () {
     $('input[name="adults"], input[name="kids"]').on('input', function () {
         validateForm();
     });
-
+    $(document).on("click","#copy_link_btn",function(e){
+        e.preventDefault(); // Prevents any default button action
+        var copyText = $("#copy_link").val();
+        navigator.clipboard.writeText(copyText).then(function() {
+        }).catch(function(err) {
+            console.error("Failed to copy: ", err);
+        });
+    });
     // Listen for the click event on the "+" button for adults
     $('.btn-plus').click(function () {
         var rsvpStatus = $('input[name="rsvp_status"]:checked').val();
