@@ -683,36 +683,62 @@ class RsvpController extends BaseController
                     })->where(['id' => $event_invited_user_id])->first();
                 }
             }else{
-                $contactSync = contact_sync::where('email', $email)->first();
+                // $contactSync = contact_sync::where('email', $email)->first();
                 $user = User::where('email', $email)->first();
-
-                if ($contactSync) {
-                    $newUserId = $contactSync->id;
-                    $user_sync_id=$contactSync->userId;
-                    $userType = 'sync';
-                } elseif ($user) {
+                if ($user) {
                     $newUserId = $user->id;
                     $userType = 'user';
                 } else {
-                    $newContact = new contact_sync();
-                    $newContact->firstName = $request->firstname;
-                    $newContact->lastName = $request->lastname;
-                    $newContact->photo = "";
-                    $newContact->isAppUser = '0';
-                    $newContact->visible = '0';
-                    $newContact->preferBy = 'email';
-                    $newContact->email = $email;
-                    $newContact->created_at = now();
-                    $newContact->updated_at = now();
-                    $newContact->save();
-
-
-                    // dd($newContact);
-
-                    $newUserId = $newContact->id;
-                    $user_sync_id=null;
-                    $userType = 'sync';
+                    $contactSync = contact_sync::where('email', $email)->first();
+                
+                    if ($contactSync) {
+                        $newUserId = $contactSync->id;
+                        $user_sync_id = $contactSync->userId;
+                        $userType = 'sync';
+                    } else {
+                        $newContact = new contact_sync();
+                        $newContact->firstName = $request->firstname;
+                        $newContact->lastName = $request->lastname;
+                        $newContact->photo = "";
+                        $newContact->isAppUser = '0';
+                        $newContact->visible = '0';
+                        $newContact->preferBy = 'email';
+                        $newContact->email = $email;
+                        $newContact->created_at = now();
+                        $newContact->updated_at = now();
+                        $newContact->save();
+                
+                        $newUserId = $newContact->id;
+                        $userType = 'sync';
+                    }
                 }
+                // if ($contactSync) {
+                //     $newUserId = $contactSync->id;
+                //     $user_sync_id=$contactSync->userId;
+                //     $userType = 'sync';
+                // } elseif ($user) {
+                //     $newUserId = $user->id;
+                //     $userType = 'user';
+                // } else {
+                //     $newContact = new contact_sync();
+                //     $newContact->firstName = $request->firstname;
+                //     $newContact->lastName = $request->lastname;
+                //     $newContact->photo = "";
+                //     $newContact->isAppUser = '0';
+                //     $newContact->visible = '0';
+                //     $newContact->preferBy = 'email';
+                //     $newContact->email = $email;
+                //     $newContact->created_at = now();
+                //     $newContact->updated_at = now();
+                //     $newContact->save();
+
+
+                //     // dd($newContact);
+
+                //     $newUserId = $newContact->id;
+                //     $user_sync_id=null;
+                //     $userType = 'sync';
+                // }
 
                 // $invitedUser = new EventInvitedUser();
                 // $invitedUser->event_id = $eventId;
@@ -722,14 +748,15 @@ class RsvpController extends BaseController
                 // $invitedUser->invitation_sent='1';             
                 // $invitedUser->save();
                 $existingInvite = EventInvitedUser::where('event_id', $eventId)
-                    ->where(function ($query) use ($userType, $newUserId) {
-                        if ($userType == 'user') {
-                            $query->where('user_id', $newUserId);
-                        } else {
-                            $query->where('sync_id', $newUserId);
-                        }
-                    })
-                    ->first();
+                ->where('user_id', $newUserId)
+                ->first();
+            
+                // If not found, check using sync_id
+                if (!$existingInvite && $userType == 'sync') {
+                    $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                        ->where('sync_id', $newUserId)
+                        ->first();
+                }
 
                 if ($existingInvite) {
                     // Update the existing invitation
