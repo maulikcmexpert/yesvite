@@ -977,9 +977,21 @@ class RsvpController extends BaseController
 
                 // dd($notificationParam);
                 if($request->isShare==""){
-                    sendNotification('sent_rsvp', $notificationParam);
+                    $notificationParam = [
+                        'sync_id' => $newUserId,
+                        'sender_id' => $userId,
+                        'event_id' => $eventId,
+                        'rsvp_status' => $request->rsvp_status,
+                        'kids' =>  $kids,
+                        'adults' => $adults,
+                        'rsvp_video' => "",
+                        'rsvp_message' => $request->message_to_host,
+                        'post_id' => "",
+                        'rsvp_attempt' => $rsvp_attempt
+                    ];
                 }
-
+                
+            sendNotification('sent_rsvp', $notificationParam);
 
                 // return  redirect()->route('front.home')->with('success', 'Rsvp sent Successfully');
                 if ($request->rsvp_status == "1") {
