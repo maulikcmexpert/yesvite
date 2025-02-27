@@ -8155,7 +8155,7 @@ class ApiControllerv2 extends Controller
                         if (!empty($value->sync_id)) {
                             $syncUser = contact_sync::where('id', $value->sync_id)->first();
                             if ($syncUser) {
-                                $value->user = $syncUser; // Assign the found user
+                                // $value->user = $syncUser; // Assign the found user
                             } else {
                                 continue; // Skip if no user found via sync_id
                             }
