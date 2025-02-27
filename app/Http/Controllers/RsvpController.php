@@ -1011,7 +1011,7 @@ class RsvpController extends BaseController
 
                 $notificationParam = [
                     'sync_id' => $newUserId,
-                    'sender_id' => $userId,
+                    'sender_id' => null,
                     'event_id' => $eventId,
                     'rsvp_status' => $request->rsvp_status,
                     'kids' =>  $kids,
