@@ -863,7 +863,7 @@ class RsvpController extends BaseController
                 if ($rsvpSent->save()) {
                     EventPost::where('event_id', $eventId)
                         // ->where('user_id', $userId)
-                        ->where(function ($query) use ($sync_id, $userId,$shared,$newUserId) {
+                        ->where(function ($query) use ($sync_id, $userId,$shared,$newUserId,$userType) {
                             if($shared==""){
                                 if (!empty($sync_id) && $userId == null) {
                                     $query->where('sync_id', $sync_id);
@@ -871,8 +871,11 @@ class RsvpController extends BaseController
                                     $query->where('user_id', $userId);
                                 }
                             }else{
-                                $query->where('sync_id', $newUserId);
-
+                                if ($userType=='sync') {
+                                    $query->where('sync_id', $newUserId);
+                                }else{
+                                    $query->where('user_id', $newUserId);
+                                }
                             }
                            
                         })
