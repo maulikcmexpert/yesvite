@@ -540,7 +540,7 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['rsvp_start_timezone'] = $value->rsvp_start_timezone;
 
-                    $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1'])->count();
+                    $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '1', 'is_co_host' => '0'])->count();
 
                     $eventDetail['total_accept_event_user'] = $total_accept_event_user;
 
