@@ -131,7 +131,7 @@
     border: 1px solid var(--borderColor);
     border-radius: 16px;
     background-color: #fff;
-    padding: 5px;
+    padding: 10px 10px;
     position: sticky;
     bottom: 30px;
     width: 100%;
