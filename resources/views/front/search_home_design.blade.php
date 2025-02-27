@@ -6,7 +6,7 @@
                      data-category-id="{{ $category->id }}"
                      data-subcategory-id="{{ $subcategory->id }}">
                     <div class="card-img collection-card">
-                        <img src="{{$image->filled_image}}" alt="Design Image">
+                        <img src="{{ asset('storage/canvas/' .  $image->filled_image) }}" alt="Design Image">
                     </div>
                 </div>
             @endforeach
