@@ -106,56 +106,24 @@ $('.close-btn').on('click', function () {
 });
 
 $(document).on('input', '#search_design_category', function () {
-    let searchText = $(this).val().trim().toLowerCase();
-    let resultsContainer = $('#filtered_results'); // New div for displaying filtered results
-    resultsContainer.empty(); // Clear previous results
-
-    // Hide unnecessary elements
+    let search_value = $(this).val().trim();
     $(".categoryNew").show();
-    $(".subcategoryNew, .image-item-new").hide();
+    $(".subcategoryNew").hide();
+    $(".image-item-new").hide();
     $("#category_name, #allchecked").hide();
 
-    let hasResults = false;
-
-    // Loop through categories and subcategories
-    $('.accordion-item').each(function () {
-        let categoryName = $(this).find('.accordion-button').text().toLowerCase();
-        let matchFound = categoryName.includes(searchText);
-
-        $(this).find('li').each(function () {
-            let subcategoryName = $(this).find('label').text().toLowerCase();
-            if (subcategoryName.includes(searchText)) {
-                hasResults = true;
-                let subcategoryHtml = `<div class="filtered-item">${$(this).html()}</div>`;
-                resultsContainer.append(subcategoryHtml);
-            }
-        });
-
-        // Hide the category list, show only filtered results
-        $(this).hide();
-    });
-
-    if (!hasResults) {
-        resultsContainer.html('<p class="no-results">No results found</p>');
-    }
-
-    // Show loading icon
     $('#home_loader').css('display', 'flex');
 
-    // Handle empty input case
-    if (searchText === '') {
+    if (search_value === '') {
         $('input[name="design_subcategory"]').prop('checked', true);
         $("#Allcat").prop("checked", true);
-        $('.accordion-item').show(); // Show all categories when search is cleared
-        $('#home_loader').css('display', 'none');
         return;
     }
 
-    // Perform AJAX search
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
-        data: { search: searchText },
+        data: { search: search_value },
         success: function (response) {
             $('#home_loader').css('display', 'none');
 
@@ -173,6 +141,11 @@ $(document).on('input', '#search_design_category', function () {
         }
     });
 });
+$(document).on('click', '.filtered-item', function(){
+    let text = $(this).text().trim();
+    $('#search_design_category').val(text);
+    $('#filtered_results').hide();
+ });
 
 // Show subcategories when clicking a category
 $(document).on('click', '.image-item', function () {
