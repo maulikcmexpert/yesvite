@@ -797,11 +797,11 @@ class RsvpController extends BaseController
     
                     $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
                         // $query->where('app_user', '1');
-                    })->where(['sync_id' => $invitedUserId])->first();
+                    })->where(['id' => $invitedUserId])->first();
                 } else {
                     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                         // $query->where('app_user', '1');
-                    })->where(['user_id' => $invitedUserId])->first();
+                    })->where(['id' => $invitedUserId])->first();
                 }
             }
           
