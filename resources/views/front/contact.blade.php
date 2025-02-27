@@ -26,6 +26,8 @@
                         <div class="d-flex align-content-center gap-3">
                             <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#uploadcsv">Upload CSV</button>
                             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
+                            <button class="cmn-btn see_all_group">+Add New Group</button>
+
                         </div>
                     </div>
                 </div>
@@ -402,7 +404,6 @@
                                     <a href="#" class="btn edit-contact" data-bs-toggle="modal" data-bs-target="#myModal">Edit Contact</a>
                                 </div>
                                 @endforeach -->
-                                <button class="cmn-btn see_all_group">+Add New Group</button>
                             <div class="product-scroll" id="product-scroll-groups">
                                 <div class="users-data no-group-data" style="display: none;">
                                     <div class="md-5">
