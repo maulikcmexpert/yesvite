@@ -863,16 +863,17 @@ $(document).on("click", ".direction-btn", function () {
     }
 });
 $(document).on("click","#copy_link_btn").click(function(e){
-    e.preventDefault(); 
-    var copyText = $("#copy_link");
+    e.preventDefault(); // Prevents any default button action
 
-    copyText.select();
-    copyText[0].setSelectionRange(0, 99999); 
+    // Get the input value
+    var copyText = $("#copy_link").val();
 
-    document.execCommand("copy");
-
-    // Optionally, alert or show a message
-    alert("Copied: " + copyText.val());
+    // Use Clipboard API to copy text
+    navigator.clipboard.writeText(copyText).then(function() {
+        alert("Copied: " + copyText);
+    }).catch(function(err) {
+        console.error("Failed to copy: ", err);
+    });
 });
 
 // $('#nav-messaging-tab').on("click", function () {
