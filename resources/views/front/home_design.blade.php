@@ -133,7 +133,7 @@
                 }
 
                 shuffle($randomIds);
-                $randomIds = array_slice($randomIds, 0, 2);
+                $randomIds = array_slice($randomIds, 0, 30);
 
                 // $randomImages = $allImages->shuffle()->take(30);
             @endphp
