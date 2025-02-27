@@ -2319,10 +2319,19 @@ async function bindData(current_event_id) {
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
     });
+
     canvas.on("text:changed", function () {
         var activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             addToUndoStack(canvas);
+        }
+    });
+
+    // Capture the initial state before the user edits the text
+    canvas.on("text:editing:entered", function () {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === "textbox") {
+            addToUndoStack(canvas); // Save state before editing starts
         }
     });
     document
