@@ -22,6 +22,9 @@ $(document).ready(function () {
         $("#category_name").hide();
         $("#allchecked").hide();
         if ($(this).is(':checked')) {
+            const categoryId = $(this).data('category-id');
+            const subcategoryId = $(this).data('subcategory-id');
+
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
             .show();
