@@ -147,36 +147,36 @@ class HomeFrontController extends BaseController
     {
         $query = $request->input('search');
 
-        $categories = EventDesignSubCategory::where('subcategory_name', 'LIKE', "%$query%")
-            ->whereHas('subcategory', function ($query) {
-                $query->whereHas('textdatas'); // Ensure subcategories have textdatas
+        // Fetch categories where either category_name or subcategory_name matches the search
+        $categories = EventDesignCategory::where('category_name', 'LIKE', "%$query%")
+            ->orWhereHas('subcategory', function ($q) use ($query) {
+                $q->where('subcategory_name', 'LIKE', "%$query%")
+                  ->whereHas('textdatas'); // Ensure subcategories have textdatas
             })
-            // ->with([
-            //     'subcategory' => function ($query) {
-            //         $query->whereHas('textdatas') // Only subcategories with textdatas
-            //             ->with('textdatas'); // Load textdatas
-            //     }
-            // ])
+            ->with([
+                'subcategory' => function ($q) use ($query) {
+                    $q->where('subcategory_name', 'LIKE', "%$query%") // Filter subcategories by search
+                      ->whereHas('textdatas') // Only subcategories with textdatas
+                      ->with('textdatas'); // Load textdatas
+                }
+            ])
             ->orderBy('id', 'ASC')
             ->get();
 
-
         // Calculate total count of textdatas across all subcategories
-        // $totalTextDataCount = $categories->sum(function ($category) {
-        //     return $category->subcategory->sum(function ($subcategory) {
-        //         return $subcategory->textdatas->count();
-        //     });
-        // });
-        // dd($categories);
-        $totalTextDataCount = $categories->count();
+        $totalTextDataCount = $categories->sum(function ($category) {
+            return $category->subcategory->sum(function ($subcategory) {
+                return $subcategory->textdatas->count();
+            });
+        });
 
-        $count = $totalTextDataCount;
         return response()->json([
             'view' => view('front.search_home_design', compact('categories'))->render(),
-            'count' => $totalTextDataCount, // Count of categories
+            'count' => $categories->count(), // Count of categories
             'total_textdatas' => $totalTextDataCount // Total count of textdatas
         ]);
     }
+
 
 
 
