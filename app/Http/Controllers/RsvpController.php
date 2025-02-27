@@ -153,6 +153,7 @@ class RsvpController extends BaseController
             $isShare = decrypt($share);
         }
 
+        dd($event_id,$event_invited_user_id,$isShare);
         if ($event_invited_user_id == "") {
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
@@ -573,7 +574,6 @@ class RsvpController extends BaseController
                 $event_invited_user_id="";
 
             }
-            dd(1);
 
             return view('layout', compact(
                 'title',
@@ -1018,7 +1018,6 @@ class RsvpController extends BaseController
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Rsvp not sent');
             }
         } catch (QueryException $e) {
-            dd($e);
             if($shared==""){
               return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'DB error');
             }else{
@@ -1026,7 +1025,6 @@ class RsvpController extends BaseController
             }
             DB::rollBack();
         } catch (\Exception $e) {
-            dd($e);
             if($shared==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{
