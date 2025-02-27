@@ -1077,6 +1077,7 @@ class RsvpController extends BaseController
             }
             DB::rollBack();
         } catch (\Exception $e) {
+            dd($e);
             if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{
