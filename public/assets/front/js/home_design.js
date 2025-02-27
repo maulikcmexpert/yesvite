@@ -26,8 +26,7 @@ $(document).ready(function () {
             const subcategoryId = $(this).data('subcategory-id');
 
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-            .show();
+            $('.image-item').show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
 
