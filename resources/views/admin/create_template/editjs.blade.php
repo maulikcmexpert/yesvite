@@ -2609,6 +2609,10 @@
             });
 
             updateUndoRedoButtons();
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
+            
         }
     }
 
@@ -2625,6 +2629,9 @@
             });
 
             updateUndoRedoButtons();
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
         }
     }
 
