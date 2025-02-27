@@ -687,6 +687,7 @@ class RsvpController extends BaseController
 
                 if ($contactSync) {
                     $newUserId = $contactSync->id;
+                    $user_sync_id=$contactSync->userId;
                     $userType = 'sync';
                 } elseif ($user) {
                     $newUserId = $user->id;
@@ -711,13 +712,41 @@ class RsvpController extends BaseController
                     $userType = 'sync';
                 }
 
-                $invitedUser = new EventInvitedUser();
-                $invitedUser->event_id = $eventId;
-                $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
-                $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
-                $invitedUser->prefer_by = 'email';   
-                $invitedUser->invitation_sent='1';             
-                $invitedUser->save();
+                // $invitedUser = new EventInvitedUser();
+                // $invitedUser->event_id = $eventId;
+                // $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
+                // $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                // $invitedUser->prefer_by = 'email';   
+                // $invitedUser->invitation_sent='1';             
+                // $invitedUser->save();
+                $existingInvite = EventInvitedUser::where('event_id', $eventId)
+                    ->where(function ($query) use ($userType, $newUserId) {
+                        if ($userType == 'user') {
+                            $query->where('user_id', $newUserId);
+                        } else {
+                            $query->where('sync_id', $newUserId);
+                        }
+                    })
+                    ->first();
+
+                if ($existingInvite) {
+                    // Update the existing invitation
+                    $existingInvite->invitation_sent = '1';
+                    $existingInvite->updated_at = now();
+                    $existingInvite->save();
+                    $invitedUserId = $existingInvite->id;
+                } else {
+                    // Create a new invitation
+                    $invitedUser = new EventInvitedUser();
+                    $invitedUser->event_id = $eventId;
+                    $invitedUser->user_id = ($userType == 'user') ? $newUserId : $user_sync_id;
+                    $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
+                    $invitedUser->prefer_by = 'email';
+                    $invitedUser->invitation_sent = '1';
+                    $invitedUser->save();
+
+                    $invitedUserId = $invitedUser->id;
+                }
                  
                 
                 
