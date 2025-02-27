@@ -601,6 +601,7 @@
     max-height: 530px;
     overflow-y: scroll;
     padding-bottom: 25px;
+    margin-top: 10px;
 }
 
 .step_2 .collection-card h4 {
