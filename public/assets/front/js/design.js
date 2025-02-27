@@ -2179,7 +2179,7 @@ async function bindData(current_event_id) {
             toastr.error("Please select a textbox to clone.");
             return;
         }
-
+        addToUndoStack(canvas);
         // Get canvas center
         let canvasCenter = canvas.getCenter();
         const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
