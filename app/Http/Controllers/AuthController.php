@@ -27,6 +27,8 @@ use Flasher\Prime\FlasherInterface;
 use Google_Client;
 use App\Mail\forgotpasswordMail;
 use App\Models\Coin_transactions;
+use App\Models\contact_sync;
+use App\Models\EventInvitedUser;
 use Laravel\Passport\Token;
 // use GuzzleHttp\Client;
 use Google\Client;
@@ -198,6 +200,18 @@ class AuthController extends Controller
             $storeUser->coins =  config('app.default_coin', 30);
             $storeUser->save();
             DB::commit();
+
+            $checkContactSync=contact_sync::where('email',$request->email)->first();
+            if($checkContactSync){
+                $checkContactSync->userId=$storeUser->id;
+                $checkContactSync->updated_at = now();
+                $checkContactSync->save();
+
+                EventInvitedUser::where('sync_id', $checkContactSync->id)
+                ->update(['user_id' => $storeUser->id]);
+            
+            }
+            
             $userDetails = User::where('id', $storeUser->id)->first();
 
             $coin_transaction = new Coin_transactions();
