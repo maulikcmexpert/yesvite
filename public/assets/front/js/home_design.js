@@ -21,6 +21,7 @@ $(document).ready(function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
+
         $("#category_name").hide();
         $("#allchecked").hide();
         if ($(this).is(':checked')) {
