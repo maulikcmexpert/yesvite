@@ -80,7 +80,7 @@
                                                 <div class="accordion-body">
                                                     <ul>
                                                         @foreach ($category->subcategory as $subcategory)
-                                                        <a href="javascript:;">
+
                                                             <li>
                                                                 <div
                                                                     class="d-flex align-items-center justify-content-between">
@@ -96,7 +96,6 @@
                                                                         data-subcategory-id="{{ $subcategory->id }}">
                                                                 </div>
                                                             </li>
-                                                        </a>
                                                         @endforeach
                                                     </ul>
                                                 </div>
