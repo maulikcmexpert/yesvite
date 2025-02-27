@@ -1332,6 +1332,51 @@ label.error {
     margin-right: 10px !important;
 }
 
+.new_copy_event_Wrp{
+    margin-top: 15px;
+}
+
+.new_copy_event_Wrp h4{
+    font-size: 18px;
+    font-family: var(--SFProDisplay-Semibold);
+    line-height: normal;
+    color: var(--secondary-black);
+    padding: 0px !important;
+    margin-bottom: 15px !important;
+}
+
+.new_copy_event_inner{
+    position: relative;
+}
+
+.new_copy_event_inner input{
+    border-radius: 10px !important;
+    height: 40px !important;
+    padding-left: 10px !important;
+    width: 100% !important;
+    padding-right: 100px;
+}
+
+.new_copy_event_inner button{
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Semibold);
+    line-height: normal;
+    color: var(--secondary-black);
+    background-color: var(--pink);
+    border-radius: 10px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--pink);
+    color: var(--white);
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);    
+}
+
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{

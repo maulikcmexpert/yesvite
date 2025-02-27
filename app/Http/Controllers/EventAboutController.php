@@ -339,8 +339,9 @@ class EventAboutController extends BaseController
             //    {{ dd($eventDetails);}}
 
             // //
-
-            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'selectedFilters', 'eventDetails', 'current_page', 'eventInfo'));
+            $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($event).'/'.encrypt(1));
+            $shortLink = createShortUrl($eventLink);
+            return view('layout', compact('page', 'title','shortLink','js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'selectedFilters', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {

@@ -241,7 +241,9 @@ class HomeController extends BaseController
                     $eventDetail['total_accept_event_user'] = $total_accept_event_user;
                     $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
                         $query->where('app_user', '1');
-                    })->where(['event_id' => $value->id])->count();
+                    })->where(['event_id' => $value->id])
+                    ->wherenull('rsvp_status')
+                    ->count();
                     $eventDetail['total_invited_user'] = $total_invited_user;
                     $total_refuse_event_user = EventInvitedUser::where(['event_id' => $value->id, 'rsvp_status' => '0'])->count();
                     $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
