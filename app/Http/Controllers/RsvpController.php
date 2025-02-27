@@ -960,9 +960,10 @@ class RsvpController extends BaseController
                 }
                 // dd(1);
 
+                DB::commit();
 
                 $notificationParam = [
-                    'sync_id' => $sync_id,
+                    'sync_id' => $newUserId,
                     'sender_id' => $userId,
                     'event_id' => $eventId,
                     'rsvp_status' => $request->rsvp_status,
@@ -974,12 +975,11 @@ class RsvpController extends BaseController
                     'rsvp_attempt' => $rsvp_attempt
                 ];
 
-                DB::commit();
 
                 // dd($notificationParam);
                 if($request->isShare==""){
                     $notificationParam = [
-                        'sync_id' => $newUserId,
+                        'sync_id' => $sync_id,
                         'sender_id' => $userId,
                         'event_id' => $eventId,
                         'rsvp_status' => $request->rsvp_status,
