@@ -1036,6 +1036,22 @@
     stroke: #fff !important;
 }
 
+.guest-checkout div.d-flex{
+    align-items: center;
+    background-color: #000 !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    padding: 10px 15px;
+}
+
+.guest-checkout div.d-flex h5{
+    line-height: normal !important;
+    color: #fff !important;
+}
+.guest-checkout div.d-flex svg path{
+    stroke: #fff !important;
+}
+
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
         width: 1000px;
