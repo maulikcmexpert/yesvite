@@ -1038,7 +1038,7 @@ class RsvpController extends BaseController
                         'rsvp_attempt' => $rsvp_attempt
                     ];
                 } 
-                // dd($notificationParam);
+                dd($notificationParam);
             DB::commit();
             
             sendNotification('sent_rsvp', $notificationParam);
