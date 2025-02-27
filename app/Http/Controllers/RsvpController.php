@@ -141,7 +141,7 @@ class RsvpController extends BaseController
 
     public function index($event_invited_user_id, $eventId,$share=null)
     {
-        
+        dd(1);
         $title = 'RSVP';
         $page = 'front.rsvp';
         $js = ['rsvp'];
