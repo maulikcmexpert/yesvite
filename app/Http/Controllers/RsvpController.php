@@ -599,7 +599,7 @@ class RsvpController extends BaseController
         } catch (QueryException $e) {
 
             DB::rollBack();
-
+            dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
             dd($e);
