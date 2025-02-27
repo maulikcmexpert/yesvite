@@ -759,6 +759,7 @@ class RsvpController extends BaseController
                 //         ->first();
                 // }
 
+                dd($userType);
                 $existingInvite = EventInvitedUser::where('event_id', $eventId)
                 ->where(function ($query) use ($userType, $newUserId) {
                     if ($userType == 'user') {
