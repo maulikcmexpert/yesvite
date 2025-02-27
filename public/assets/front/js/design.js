@@ -2794,6 +2794,9 @@ async function bindData(current_event_id) {
             });
 
             updateUndoRedoButtons();
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
         }
     }
 
@@ -2810,6 +2813,9 @@ async function bindData(current_event_id) {
             });
 
             updateUndoRedoButtons();
+            setTimeout(function () {
+                setControlVisibilityForAll();
+            }, 1000);
         }
     }
 
