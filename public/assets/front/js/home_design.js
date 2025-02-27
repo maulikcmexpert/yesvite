@@ -30,6 +30,7 @@ $(document).ready(function () {
             $('.image-item').show();
             $('.image-item-new').hide();
 
+            $(".image-item").removeClass('d-none');
             // Hide category name and checkbox container
             $("#category_name").hide();
             $("#allchecked").hide();
@@ -40,6 +41,7 @@ $(document).ready(function () {
             // Uncheck all subcategories
             $('input[name="design_subcategory"]').prop('checked', false);
 
+            $(".image-item").removeClass('d-none');
             // Hide all images
             $('.image-item').hide();
             $('.image-item-new').hide();
