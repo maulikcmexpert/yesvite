@@ -23,7 +23,8 @@ $(document).ready(function () {
         $("#allchecked").hide();
         if ($(this).is(':checked')) {
             $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', true);
-            $('.image-item').show();
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+            .show();
             var visibleItems = $('.all_designs:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
 
