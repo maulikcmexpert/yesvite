@@ -106,42 +106,58 @@ $('.close-btn').on('click', function () {
 });
 
 $(document).on('input', '#search_design_category', function () {
+    let search_value = $(this).val().trim();
     $(".categoryNew").show();
     $(".subcategoryNew").hide();
     $(".image-item-new").hide();
-    $("#category_name").hide();
-    $("#allchecked").hide();
-    var search_value = $(this).val();
+    $("#category_name, #allchecked").hide();
+
     $('#home_loader').css('display', 'flex');
-    if (search_value == '') {
-        $('input[name="design_subcategory"]').prop('checked', true)
+
+    if (search_value === '') {
+        $('input[name="design_subcategory"]').prop('checked', true);
         $("#Allcat").prop("checked", true);
+        return;
     }
+
     $.ajax({
         url: base_url + "search_features",
         method: 'GET',
-        data: {
-            search: search_value
-        },
+        data: { search: search_value },
         success: function (response) {
+            $('#home_loader').css('display', 'none');
 
             if (response.view) {
-                $('.list_all_design_catgeory').html('');
                 $('.list_all_design_catgeory').html(response.view);
-                $('#home_loader').css('display', 'none');
-                $('.total_design_count').text(response.count + ' Items')
-
+                $('.total_design_count').text(response.count + ' Items');
             } else {
-                $('.list_all_design_catgeory').html('No Design Found');
-                $('.total_design_count').text(response.count + ' Items')
-                $('#home_loader').css('display', 'none');
+                $('.list_all_design_catgeory').html('<p>No Design Found</p>');
+                $('.total_design_count').text('0 Items');
             }
         },
-        error: function (error) {
-            toastr.error('Some thing went wrong');
+        error: function () {
+            $('#home_loader').css('display', 'none');
+            toastr.error('Something went wrong');
         }
     });
 });
+
+// Show subcategories when clicking a category
+$(document).on('click', '.image-item', function () {
+    let categoryId = $(this).data('category-id');
+
+    $(".subcategoryNew").hide();
+    $(`.subcategoryNew[data-category-id="${categoryId}"]`).show(); // Show relevant subcategories
+});
+
+// Show designs when clicking a subcategory
+$(document).on('click', '.subcategory-item', function () {
+    let subcategoryId = $(this).data('subcategory-id');
+
+    $(".image-item-new").hide();
+    $(`.image-item-new[data-subcategory-id="${subcategoryId}"]`).show(); // Show relevant designs
+});
+
 
 
 $(document).on('click', '#design_category', function () {
