@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('#Allcat').prop('checked', false);
 
     updateTotalCount();
-});
+
 
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
 
@@ -24,12 +24,23 @@ $(document).ready(function () {
         $(".image-item-new").hide(); // Hide new images initially
 
         if ($(this).is(':checked')) {
+            // Show all default images and hide new images
+            $('.image-item').show();
+            $('.image-item-new').hide();
+
+            // Hide category name and checkbox container
+            $("#category_name").hide();
+            $("#allchecked").hide();
+
+            // Check all subcategory checkboxes
             $('input[name="design_subcategory"]').prop('checked', true);
-            $("#category_name, #allchecked").hide();
         } else {
+            // Uncheck all subcategories
             $('input[name="design_subcategory"]').prop('checked', false);
-            $(".image-item").show();
-            $(".image-item-new").hide();
+
+            // Hide all images
+            $('.image-item').hide();
+            $('.image-item-new').hide();
         }
 
         updateTotalCount();
@@ -81,7 +92,7 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
 
-
+});
     document.querySelectorAll('.collection-menu').forEach((button) => {
         button.addEventListener('click', (event) => {
             event.stopPropagation();
