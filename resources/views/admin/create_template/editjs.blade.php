@@ -1195,6 +1195,7 @@
             cursorStyle: 'pointer',
             actionHandler: (eventData, transform, x, y) => {
                 console.log(eventData)
+                addToUndoStack(canvas);
                 const target = transform.target;
                 canvas.remove(target); // Remove object on trash icon click
                 canvas.requestRenderAll();
@@ -1934,6 +1935,7 @@
 
         // Function to clone a textbox
         function cloneTextbox() {
+            addToUndoStack(canvas);
             let originalTextbox = canvas.getActiveObject()
             const clonedTextbox = new fabric.Textbox(originalTextbox.text, {
                 left: originalTextbox.left + 30, // Offset position
