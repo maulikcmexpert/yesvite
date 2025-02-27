@@ -759,7 +759,7 @@ class RsvpController extends BaseController
                 //         ->first();
                 // }
 
-                dd($userType);
+                // dd($userType);
                 $existingInvite = EventInvitedUser::where('event_id', $eventId)
                 ->where(function ($query) use ($userType, $newUserId) {
                     if ($userType == 'user') {
@@ -770,13 +770,11 @@ class RsvpController extends BaseController
                 })
                 ->first();
                 if ($existingInvite) {
-                    // Update the existing invitation
                     $existingInvite->invitation_sent = '1';
                     $existingInvite->updated_at = now();
                     $existingInvite->save();
                     $invitedUserId = $existingInvite->id;
                 } else {
-                    // Create a new invitation
                     $invitedUser = new EventInvitedUser();
                     $invitedUser->event_id = $eventId;
                     $invitedUser->user_id = ($userType == 'user') ? $newUserId : $user_sync_id;
@@ -799,7 +797,7 @@ class RsvpController extends BaseController
     
                     $rsvpSent = EventInvitedUser::whereHas('contact_sync', function ($query) {
                         // $query->where('app_user', '1');
-                    })->where(['id' => $invitedUserId])->first();
+                    })->where(['sync_id' => $invitedUserId])->first();
                 } else {
                     $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
                         // $query->where('app_user', '1');
