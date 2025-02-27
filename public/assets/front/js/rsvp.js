@@ -862,7 +862,7 @@ $(document).on("click", ".direction-btn", function () {
         window.open(googleMapsUrl, "_blank");
     }
 });
-$(document).on("click","#copy_link_btn").click(function(e){
+$(document).on("click","#copy_link_btn",function(e){
     e.preventDefault(); // Prevents any default button action
 
     // Get the input value
