@@ -1006,6 +1006,7 @@
 
 .previousImeg h5{
     line-height: normal !important;
+    color: #fff;
 }
 
 .previousImeg{
@@ -1015,6 +1016,10 @@
     color: #fff !important;
     padding: 10px 15px;
 }
+.previousImeg svg path{
+    stroke: #fff;
+}
+
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
