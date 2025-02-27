@@ -1008,19 +1008,20 @@ class RsvpController extends BaseController
                 }
                 // dd(1);
 
-
-                $notificationParam = [
-                    'sync_id' => $newUserId,
-                    'sender_id' => null,
-                    'event_id' => $eventId,
-                    'rsvp_status' => $request->rsvp_status,
-                    'kids' =>  $kids,
-                    'adults' => $adults,
-                    'rsvp_video' => "",
-                    'rsvp_message' => $request->message_to_host,
-                    'post_id' => "",
-                    'rsvp_attempt' => $rsvp_attempt
-                ];
+                if ($userType=='user') {
+                    $notificationParam = [
+                        'sync_id' => "",
+                        'sender_id' => $newUserId,
+                        'event_id' => $eventId,
+                        'rsvp_status' => $request->rsvp_status,
+                        'kids' =>  $kids,
+                        'adults' => $adults,
+                        'rsvp_video' => "",
+                        'rsvp_message' => $request->message_to_host,
+                        'post_id' => "",
+                        'rsvp_attempt' => $rsvp_attempt
+                    ];
+            }
 
 
                 // dd($notificationParam);
