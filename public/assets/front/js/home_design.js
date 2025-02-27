@@ -57,10 +57,6 @@ $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', functi
         anyChecked = true;
     });
 
-    // if (!anyChecked) {
-    //     // If no checkboxes are checked, show default images again
-    //     $(".image-item").show();
-    // }
 
     updateTotalCount();
 });
