@@ -2780,11 +2780,11 @@ async function bindData(current_event_id) {
                 $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
             }
 
-            redoStack.push(canvas.toJSON()); // Save current state to redo stack
+            redoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to redo stack
             const lastState = undoStack.pop(); // Get the last state to undo
 
-            // 🛠 Clear the canvas before applying the undo state
-            canvas.clear();
+            // 🛠 Instead of `canvas.clear()`, remove objects safely
+            removeAllObjects(canvas);
 
             canvas.loadFromJSON(lastState, function () {
                 canvas.renderAll();
@@ -2794,7 +2794,7 @@ async function bindData(current_event_id) {
                 $("#redoButton").find("svg path").attr("fill", "#0F172A");
             }
 
-            setTimeout(setControlVisibilityForAll, 1000);
+            setTimeout(setControlVisibilityForAll, 100);
         } else {
             $("#undoButton").find("svg path").attr("fill", "#CBD5E1");
         }
@@ -2802,11 +2802,11 @@ async function bindData(current_event_id) {
 
     function redo() {
         if (redoStack.length > 0) {
-            undoStack.push(canvas.toJSON()); // Save current state to undo stack
+            undoStack.push(JSON.stringify(canvas.toJSON())); // Save current state to undo stack
             const nextState = redoStack.pop(); // Get the next state to redo
 
-            // 🛠 Clear the canvas before applying the redo state
-            canvas.clear();
+            // 🛠 Instead of `canvas.clear()`, remove objects safely
+            removeAllObjects(canvas);
 
             canvas.loadFromJSON(nextState, function () {
                 canvas.renderAll();
@@ -2822,10 +2822,15 @@ async function bindData(current_event_id) {
 
             $("#redoButton").find("svg path").attr("fill", "#0F172A");
 
-            setTimeout(setControlVisibilityForAll, 1000);
+            setTimeout(setControlVisibilityForAll, 100);
         } else {
             $("#redoButton").find("svg path").attr("fill", "#CBD5E1");
         }
+    }
+
+    // 🛠 Function to remove all objects from the canvas safely
+    function removeAllObjects(canvas) {
+        canvas.getObjects().forEach((obj) => canvas.remove(obj));
     }
 
     $("#undoButton").click(function () {
