@@ -46,7 +46,7 @@ $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', functi
     $(".image-item").hide(); // Hide all default images
     $(".image-item-new").hide(); // Hide all new images
 
-    let anyChecked = false;
+
 
     $('input[name="design_subcategory"]:checked').each(function () {
         const categoryId = $(this).data('category-id');
@@ -54,13 +54,9 @@ $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', functi
 
         // Show filtered images matching checked categories and subcategories
         $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        anyChecked = true;
+
     });
 
-    if (!anyChecked) {
-        // If no checkboxes are checked, show default images again
-        $(".image-item").show();
-    }
 
     updateTotalCount();
 });
