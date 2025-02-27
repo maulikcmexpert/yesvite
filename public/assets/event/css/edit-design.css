@@ -1055,7 +1055,13 @@
 
 /* ====Responsive==== */
 
-
+@media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
+    .image-edit-inner-img {
+        width: 1200px !important;
+        height: 1700px !important;
+        margin: 0px auto;
+    }
+}
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) and (height: 1440px){
     .image-edit-inner-img {
