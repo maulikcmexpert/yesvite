@@ -144,7 +144,7 @@
                     data-category-id="{{ $image['category_id'] }}"
                     data-subcategory-id="{{ $image['subcategory_id'] }}"
                     data-category_name="{{ $image['category_name'] }}"
-                    style="{{ in_array($image['imageId'], $randomIds) ? '' : 'display: none;' }}">
+                    style="{{ in_array($image['imageId'], $randomIds) ? 'display: none;' : '' }}">
 
                     <div class="card-img collection-card card-blue">
                         <img src="{{ $image['image_path'] }}" alt="shower-card">
