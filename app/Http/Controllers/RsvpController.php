@@ -149,11 +149,11 @@ class RsvpController extends BaseController
         $event_id =  decrypt($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare="";
+        dd($event_id,$event_invited_user_id,$isShare);
         if($share!=null){
             $isShare = decrypt($share);
         }
 
-        dd($event_id,$event_invited_user_id,$isShare);
         if ($event_invited_user_id == "") {
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
