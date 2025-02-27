@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
@@ -15,7 +15,7 @@ $(document).ready(function() {
     $('input[name="design_subcategory"]').prop('checked', true);
     $('#Allcat').prop('checked', true);
 
-    $('#Allcat').on('change', function() {
+    $('#Allcat').on('change', function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
@@ -42,19 +42,19 @@ $(document).ready(function() {
         }
     });
     $('input[name="design_subcategory_new"]').on('change', function () {
-let subcategoryId = $(this).data('subcategory-id');
+        let subcategoryId = $(this).data('subcategory-id');
 
-// If checked, check the corresponding checkbox in design_subcategory
-if ($(this).is(':checked')) {
-    $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
-    $('#Allcat').prop('checked', true);
-} else {
-    // If unchecked, uncheck the corresponding checkbox in design_subcategory
-    $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
-    $('#Allcat').prop('checked', false);
-}
-});
-    $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
+        // If checked, check the corresponding checkbox in design_subcategory
+        if ($(this).is(':checked')) {
+            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', true);
+            $('#Allcat').prop('checked', true);
+        } else {
+            // If unchecked, uncheck the corresponding checkbox in design_subcategory
+            $('input[name="design_subcategory"][data-subcategory-id="' + subcategoryId + '"]').prop('checked', false);
+            $('#Allcat').prop('checked', false);
+        }
+    });
+    $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
         $(".image-item-new").hide();
         $("#category_name").hide();
         $(".categoryNew").show();
@@ -73,13 +73,13 @@ if ($(this).is(':checked')) {
         // Filter images based on checked categories
         if (checkedCheckboxes > 0) {
             $('.image-item').hide(); // Hide all images first
-            $('input[name="design_subcategory"]:not(#Allcat):checked').each(function() {
+            $('input[name="design_subcategory"]:not(#Allcat):checked').each(function () {
                 const categoryId = $(this).data('category-id');
                 const subcategoryId = $(this).data('subcategory-id');
 
                 // Show images matching the selected categories and subcategories
                 $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                .show();
+                    .show();
                 var visibleItems = $('.all_designs:visible').length;
                 $('.total_design_count').text(visibleItems + ' Items');
             });
@@ -89,7 +89,7 @@ if ($(this).is(':checked')) {
             $('.total_design_count').text(visibleItems + ' Items');
         }
     });
-    $('#resetCategories').on('click', function(e) {
+    $('#resetCategories').on('click', function (e) {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
@@ -117,12 +117,12 @@ if ($(this).is(':checked')) {
         }, 500);
     }
 
-    $('.close-btn').on('click', function() {
+    $('.close-btn').on('click', function () {
         $cookiesBox.removeClass('active');
         localStorage.setItem('cookiesBoxDismissed', 'true');
     });
 
-    $(document).on('input', '#search_design_category', function() {
+    $(document).on('input', '#search_design_category', function () {
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
         $(".image-item-new").hide();
@@ -140,7 +140,7 @@ if ($(this).is(':checked')) {
             data: {
                 search: search_value
             },
-            success: function(response) {
+            success: function (response) {
 
                 if (response.view) {
                     $('.list_all_design_catgeory').html('');
@@ -154,14 +154,14 @@ if ($(this).is(':checked')) {
                     $('#home_loader').css('display', 'none');
                 }
             },
-            error: function(error) {
+            error: function (error) {
                 toastr.error('Some thing went wrong');
             }
         });
     });
 
 
-    $(document).on('click', '#design_category', function() {
+    $(document).on('click', '#design_category', function () {
         $(".category").hide();
         $(".categoryNew").hide();
         $(".subcategoryNew").show();
@@ -171,9 +171,9 @@ if ($(this).is(':checked')) {
 
 
         $(`.categoryChecked_${categoryId}:checked`).each(function () {
-            const subcategoryIds= $(this).data("subcategory-id");
+            const subcategoryIds = $(this).data("subcategory-id");
             $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryIds}"]`)
-            .show();
+                .show();
             $('.subcategoryChecked_' + subcategoryIds).prop('checked', true)
         });
         const subcategoryId = $(this).data("subcategory-id");
@@ -193,13 +193,13 @@ if ($(this).is(':checked')) {
     });
 });
 
-$(document).on('click', '#allchecked', function() {
-    const categoryId =  $(this).attr('data-categoryid');
-    const subcategoryId =  $(this).attr('data-subcategoryid');
-    allCheckFun(categoryId,subcategoryId)
+$(document).on('click', '#allchecked', function () {
+    const categoryId = $(this).attr('data-categoryid');
+    const subcategoryId = $(this).attr('data-subcategoryid');
+    allCheckFun(categoryId, subcategoryId)
 })
 
-function allCheckFun(categoryIds,subcategoryIds) {
+function allCheckFun(categoryIds, subcategoryIds) {
     $('input[name="design_subcategory_new"]').prop('checked', false)
     // $('input[name="design_subcategory"]').prop('checked', true)
     $(".categoryNew").show();
@@ -215,17 +215,17 @@ function allCheckFun(categoryIds,subcategoryIds) {
 
 
     $('input[name="design_subcategory"]:not(#Allcat):checked').each(
-            function () {
+        function () {
 
-                const categoryId = $(this).data("category-id");
+            const categoryId = $(this).data("category-id");
 
-                // const subcategoryId = $(this).data("subcategory-id");
+            // const subcategoryId = $(this).data("subcategory-id");
 
-                // // Show images matching the selected categories and subcategories
-                $(`.image-item[data-category-id="${categoryId}"]`).show();
-                var visibleItems = $(".all_designs:visible").length;
-                $(".total_design_count").text(visibleItems + " Items");
-            }
+            // // Show images matching the selected categories and subcategories
+            $(`.image-item[data-category-id="${categoryId}"]`).show();
+            var visibleItems = $(".all_designs:visible").length;
+            $(".total_design_count").text(visibleItems + " Items");
+        }
     );
 
     // let totalCheckboxes = $('input[name="design_subcategory_new"]:not(#Allcat)').length;
@@ -239,10 +239,10 @@ function allCheckFun(categoryIds,subcategoryIds) {
 
     $(`.subcategoryChecked_${subcategoryIds}:checked`).each(function () {
 
-    $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
-    .show();
-    $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
-});
+        $(`.image-item-new[data-category-id="${categoryIds}"][data-subcategory-id="${subcategoryIds}"]`)
+            .show();
+        $('.subcategoryChecked_' + subcategoryIds).prop('checked', false)
+    });
 
     if ($("#search_design_category").val() == "") {
         return
@@ -255,7 +255,7 @@ function allCheckFun(categoryIds,subcategoryIds) {
         data: {
             search: search_value
         },
-        success: function(response) {
+        success: function (response) {
 
             if (response.view) {
                 $('.list_all_design_catgeory').html('');
@@ -269,7 +269,7 @@ function allCheckFun(categoryIds,subcategoryIds) {
                 $('#home_loader').css('display', 'none');
             }
         },
-        error: function(error) {
+        error: function (error) {
             toastr.error('Some thing went wrong');
         }
     });
@@ -279,7 +279,7 @@ function allCheckFun(categoryIds,subcategoryIds) {
 $(document).on(
     "change",
     'input[name="design_subcategory_new"]:not(#Allcat)',
-    function() {
+    function () {
         $(".image-item-new").hide();
         $("#category_name").show();
         $("#allchecked").show();
@@ -297,7 +297,7 @@ $(document).on(
         if (checkedCheckboxes > 0) {
             $(".image-item").hide(); // Hide all images first
             $('input[name="design_subcategory_new"]:not(#Allcat):checked').each(
-                function() {
+                function () {
                     const categoryId = $(this).data("category-id");
                     const subcategoryId = $(this).data("subcategory-id");
 
@@ -316,7 +316,7 @@ $(document).on(
     }
 );
 
-$("#resetCategoriesNew").on("click", function(e) {
+$("#resetCategoriesNew").on("click", function (e) {
 
 
 
