@@ -2069,12 +2069,19 @@
         });
 
         // Capture state after user changes text
+        let typingTimeout; // Store the timeout reference
+
         canvas.on("text:changed", function () {
             var activeObject = canvas.getActiveObject();
             if (activeObject && activeObject.type === "textbox") {
-                addToUndoStack(canvas);
+                clearTimeout(typingTimeout); // 🛑 Clear any previous timeout
+
+                typingTimeout = setTimeout(() => {
+                    addToUndoStack(canvas); // ✅ Add only after user stops typing
+                }, 500); // ⏳ Adjust delay (500ms = half a second after last keypress)
             }
         });
+
 
         function getTextDataFromCanvas() {
             var objects = canvas.getObjects();
