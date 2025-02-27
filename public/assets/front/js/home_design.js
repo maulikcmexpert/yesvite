@@ -10,7 +10,7 @@ $(document).ready(function () {
         window.history.replaceState(null, '', newUrl);
     }
     // $(".image-item").show(); // Show all default images
-    $(".image-item-new").hide(); // Hide new images initially
+    // $(".image-item-new").hide(); // Hide new images initially
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
 
@@ -113,7 +113,8 @@ $(document).ready(function () {
     });
 
     $(document).on('input', '#search_design_category', function () {
-
+$(".image-item").hide(); // Show all default images
+    $(".image-item-new").show(); //
         var search_value = $(this).val();
         $('#home_loader').css('display', 'flex');
         if (search_value == '') {
