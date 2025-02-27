@@ -67,7 +67,7 @@ $(document).ready(function () {
     $('input[name="design_subcategory"]:checked').each(function () {
         const categoryId = $(this).data('category-id');
         const subcategoryId = $(this).data('subcategory-id');
-
+        $(".image-item").hide();
         // Show filtered images
         $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
     });
