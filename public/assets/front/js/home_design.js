@@ -14,7 +14,8 @@ $(document).ready(function () {
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
-
+    var visibleItems = $('.all_designs:visible').length;
+    $('.total_design_count').text(visibleItems + ' Items');
     $('#Allcat').on('change', function () {
         $('.image-item').show();
         $(".categoryNew").show();
@@ -44,8 +45,7 @@ $(document).ready(function () {
 
 
         }
-        var visibleItems = $('.all_designs:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
+
 
     });
     // $('input[name="design_subcategory_new"]').on('change', function () {
@@ -62,20 +62,21 @@ $(document).ready(function () {
     //     }
     // });
     $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
+    $(".image-item").hide(); // Hide all images first
+    $(".image-item-new").hide(); // Hide the new items too
 
-        $(".image-item").hide(); // Hide all images first
+    $('input[name="design_subcategory"]:checked').each(function () {
+        const categoryId = $(this).data('category-id');
+        const subcategoryId = $(this).data('subcategory-id');
 
-        $('input[name="design_subcategory"]:checked').each(function () {
-            const categoryId = $(this).data('category-id');
-            const subcategoryId = $(this).data('subcategory-id');
-
-            // Show images matching the selected category and subcategory
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        });
-
-        var visibleItems = $('.image-item:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
+        // Show filtered images
+        $(`.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
     });
+
+    var visibleItems = $('.image-item-new:visible').length;
+    $('.total_design_count').text(visibleItems + ' Items');
+});
+
 
     $('#resetCategories').on('click', function (e) {
         $(".categoryNew").show();
