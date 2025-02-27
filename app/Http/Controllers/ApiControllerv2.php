@@ -8144,7 +8144,7 @@ class ApiControllerv2 extends Controller
         $results = $eventPostList->paginate($this->perPage, ['*'], 'page', $page);
         $total_page_of_eventPosts = ceil($totalPostWalls / $this->perPage);
         $postList = [];
-        dd($results);
+        // dd($results);
         if (!empty($checkEventOwner)) {
             if (count($results) != 0) {
                 foreach ($results as  $value) {
@@ -8198,6 +8198,7 @@ class ApiControllerv2 extends Controller
                     }
                     $postsNormalDetail['id'] =  $value->id;
                     $postsNormalDetail['user_id'] =  $value->user->id;
+
                     // $postsNormalDetail['is_host'] =  ($ischeckEventOwner != null) ? 1 : 0;
                     $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
                     $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
@@ -8205,7 +8206,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->sync_id)) {
+                    if (!empty($value->sync_id)&&empty($value->user) ) {
              
                         $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                         $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
