@@ -13,7 +13,7 @@ $(document).ready(function () {
     $(".image-item-new").hide(); // Hide new images initially
     $('input[name="design_subcategory"]').prop('checked', false);
     $('#Allcat').prop('checked', false);
-        $(".default_show").show();
+
 
     updateTotalCount();
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $('#Allcat').on('change', function () {
         $(".image-item").show(); // Show all default images
-        $(".default_show").show();
+
 
 
         if ($(this).is(':checked')) {
