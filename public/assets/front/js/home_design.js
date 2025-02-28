@@ -99,6 +99,7 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
 
+
         $('#search_design_category').on('keyup', function () {
             let query = $(this).val().toLowerCase();
             let results = '';
@@ -106,35 +107,47 @@ $(document).ready(function () {
             if (query.length > 0) {
                 designData.forEach(category => {
                     if (category.name.toLowerCase().includes(query)) {
-                        results += `<div class="search-item category" data-id="${category.id}">${category.name}</div>`;
+                        results += `<div class="search-item category" data-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
                     }
                     category.subcategories.forEach(subcategory => {
                         if (subcategory.name.toLowerCase().includes(query)) {
-                            results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}">${subcategory.name}</div>`;
+                            results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                         }
                     });
                 });
             }
+
             $('#filtered_results').html(results);
         });
 
-        // Click Event to Load Subcategory Images
-        $(document).on('click', '.search-item.subcategory', function () {
-            let subcategoryId = $(this).data('id');
+        // Click event for search results
+        $(document).on('click', '.search-item', function () {
+            let selectedText = $(this).data('name');
             let categoryId = $(this).data('category-id');
+            let subcategoryId = $(this).data('id');
 
-            let images = designData.find(c => c.id == categoryId).subcategories.find(s => s.id == subcategoryId).images;
+            // Set search input value to clicked category/subcategory
+            $('#search_design_category').val(selectedText);
+            $('#filtered_results').html(''); // Clear search results
 
-            let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="card-img collection-card card-blue">
-                        <img src="${image.image_path}" alt="design">
+            // If it's a subcategory, show its images
+            if ($(this).hasClass('subcategory')) {
+                let images = designData.find(c => c.id == categoryId)
+                    .subcategories.find(s => s.id == subcategoryId).images;
+
+                let imageHTML = images.map(image => `
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="card-img collection-card card-blue">
+                            <img src="${image.image_path}" alt="design">
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
 
-            $('.list_all_design_catgeory').html(imageHTML);
+                $('.list_all_design_catgeory').html(imageHTML);
+            }
         });
+
+
 
 
     // $(document).on('input', '#search_design_category', function () {
