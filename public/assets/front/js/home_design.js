@@ -100,54 +100,58 @@ $(document).ready(function () {
     });
 
 
-        $('#search_design_category').on('keyup', function () {
-            let query = $(this).val().toLowerCase();
-            let results = '';
+    $('#search_design_category').on('keyup', function () {
+        let query = $(this).val().toLowerCase();
+        let results = '';
 
-            if (query.length > 0) {
-                designData.forEach(category => {
-                    if (category.name.toLowerCase().includes(query)) {
-                        results += `<div class="search-item category" data-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+        if (query.length > 0) {
+            designData.forEach(category => {
+                if (category.name.toLowerCase().includes(query)) {
+                    results += `<div class="search-item category" data-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+                }
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                     }
-                    category.subcategories.forEach(subcategory => {
-                        if (subcategory.name.toLowerCase().includes(query)) {
-                            results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-                        }
-                    });
                 });
-            }
+            });
 
             $('#filtered_results').html(results);
-        });
+        } else {
 
-        // Click event for search results
-        $(document).on('click', '.search-item', function () {
-            let selectedText = $(this).data('name');
-            let categoryId = $(this).data('category-id');
-            let subcategoryId = $(this).data('id');
+            $('#filtered_results').html('');
+            $(".list_all_design_catgeory").html($(".default_show").html());
+            $('.total_design_count').text($('.image-item:visible').length + ' Items');
+        }
+    });
 
-            // Set search input value to clicked category/subcategory
-            $('#search_design_category').val(selectedText);
-            $('#filtered_results').html(''); // Clear search results
+    // Click event for search results
+    $(document).on('click', '.search-item', function () {
+        let selectedText = $(this).data('name');
+        let categoryId = $(this).data('category-id');
+        let subcategoryId = $(this).data('id');
 
-            // If it's a subcategory, show its images
-            if ($(this).hasClass('subcategory')) {
-                let images = designData.find(c => c.id == categoryId)
-                    .subcategories.find(s => s.id == subcategoryId).images;
+        $('#search_design_category').val(selectedText);
+        $('#filtered_results').html(''); // Clear search results
 
-                let imageHTML = images.map(image => `
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs">
-                        <div class="card-img collection-card card-blue">
-                            <img src="${image.image_path}" alt="design">
-                        </div>
+        if ($(this).hasClass('subcategory')) {
+            let images = designData.find(c => c.id == categoryId)
+                .subcategories.find(s => s.id == subcategoryId).images;
+
+            let imageHTML = images.map(image => `
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs">
+                    <div class="card-img collection-card card-blue">
+                        <img src="${image.image_path}" alt="design">
                     </div>
-                `).join('');
+                </div>
+            `).join('');
 
-                $('.list_all_design_catgeory').html(imageHTML);
-                var visibleItems = $('.image-item:visible').length;
-                $('.total_design_count').text(visibleItems + ' Items');
-            }
-        });
+            $('.list_all_design_catgeory').html(imageHTML);
+        }
+
+        $('.total_design_count').text($('.image-item:visible').length + ' Items');
+    });
+
 
 
 
