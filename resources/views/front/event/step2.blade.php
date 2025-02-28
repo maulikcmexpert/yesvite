@@ -113,6 +113,7 @@
                                     'static_information' => json_encode($image->static_information),
                                     'shape_image'=> $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
                                     'image_path' => asset('storage/canvas/' . $image->filled_image),
+                                    'image' => asset('storage/canvas/' . $image->image),
                                 ]);
                             }
                         }
@@ -134,7 +135,7 @@
                         data-category_name="{{ $image['category_name'] }}"  >
 
                         <div class="card-img collection-card card-blue edit_design_tem design-card"
-                        data-image="{{$image['imageId']}}"
+                        data-image="{{$image['image']}}"
                         data-shape_image="{{ $image['shape_image'] }}"
                         data-json="{{ $image['static_information']}}"
                         data-id="{{$image['imageId'] }}"  >
