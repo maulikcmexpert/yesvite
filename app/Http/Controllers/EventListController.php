@@ -357,11 +357,11 @@ class EventListController extends BaseController
         
             if($from_page=="past"){
                 $allPastEvents = $allPastEventsQuery
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->get();
             }else{
                 $allPastEvents = $allPastEventsQuery
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->offset(0)
                 ->limit(10)
                 ->get();
