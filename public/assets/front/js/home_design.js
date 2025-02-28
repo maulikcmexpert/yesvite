@@ -98,6 +98,45 @@ $(document).ready(function () {
         var visibleItems = $('.image-item:visible').length;
         $('.total_design_count').text(visibleItems + ' Items');
     });
+
+        $('#search_design_category').on('keyup', function () {
+            let query = $(this).val().toLowerCase();
+            let results = '';
+
+            if (query.length > 0) {
+                designData.forEach(category => {
+                    if (category.name.toLowerCase().includes(query)) {
+                        results += `<div class="search-item category" data-id="${category.id}">${category.name}</div>`;
+                    }
+                    category.subcategories.forEach(subcategory => {
+                        if (subcategory.name.toLowerCase().includes(query)) {
+                            results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}">${subcategory.name}</div>`;
+                        }
+                    });
+                });
+            }
+            $('#filtered_results').html(results);
+        });
+
+        // Click Event to Load Subcategory Images
+        $(document).on('click', '.search-item.subcategory', function () {
+            let subcategoryId = $(this).data('id');
+            let categoryId = $(this).data('category-id');
+
+            let images = designData.find(c => c.id == categoryId).subcategories.find(s => s.id == subcategoryId).images;
+
+            let imageHTML = images.map(image => `
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="card-img collection-card card-blue">
+                        <img src="${image.image_path}" alt="design">
+                    </div>
+                </div>
+            `).join('');
+
+            $('.list_all_design_catgeory').html(imageHTML);
+        });
+
+
     // $(document).on('input', '#search_design_category', function () {
     //     $(".image-item").hide();
     //     $(".image-item-").show();
