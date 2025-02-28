@@ -535,23 +535,24 @@
 
 
 .collection-wrapper .search-wrapper  .filtered-results-container .search-item.category{
-    margin-bottom: 10px;
+    padding: 5px 10px;
+    padding-left: 5px;
     font-weight: 700;
     cursor: pointer;
 }
 
 .collection-wrapper .search-wrapper  .filtered-results-container .search-item.category:hover{
-    background-color: #f1f5f9;
+    background-color: #e9f8ff;
 }
 
 .collection-wrapper .search-wrapper  .filtered-results-container .search-item.subcategory{
-    padding-left: 10px;
-    margin-bottom: 10px;
+    padding: 5px 10px;
+    padding-left: 15px;
     cursor: pointer;
 }
 
 .collection-wrapper .search-wrapper  .filtered-results-container .search-item.subcategory:hover{
-    background-color: #f1f5f9;
+    background-color: #e9f8ff;
 }
 
 /* ===== Search Option Section end ===== */
