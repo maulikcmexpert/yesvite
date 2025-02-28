@@ -119,7 +119,7 @@ if ($hostView) {
                             <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
                                     <div class="posts-card-head-left guests-listing-left">
-                                        <div class="posts-card-head-left-img guest-users" data-userId="{{$guest['id']}}">
+                                        <div class="posts-card-head-left-img guest-users active_slide_bar" data-userId="{{$guest['id']}}">
                                             @if (!empty($guest['profile']))
                                                 <img src="{{ $guest['profile'] }}"
                                                     alt="">
@@ -285,8 +285,8 @@ if ($hostView) {
                 <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn" data-eventId="{{$eventId}}">See All</a>
                 @if ($eventInfo['guest_view']['is_host'] == 1 ||$eventInfo['guest_view']['is_co_host']=="1")
                     @php
-                        $event_date = $eventInfo['guest_view']['event_date']; 
-                        $current_date = date("Y-m-d"); 
+                        $event_date = $eventInfo['guest_view']['event_date'];
+                        $current_date = date("Y-m-d");
                     @endphp
                     @if($event_date >= $current_date)
                         <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add Guest</button>
