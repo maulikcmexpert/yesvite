@@ -6,7 +6,7 @@
                 <div class="position-relative search-wrapper">
                     <div class="position-relative">
                         <input type="search" id="search_design_category" placeholder="Search design categories"
-                            class="" autocomplete="off" >
+                            class="" autocomplete="off">
                         <span class="">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                             </svg>
                         </span>
                     </div>
-                    <div id="filtered_results" class="filtered-results-container "></div>
+                    <div id="filtered_results" class="filtered-results-container d-none"></div>
 
                 </div>
             </div>
@@ -322,23 +322,19 @@
             });
 
             $('#filtered_results').hide();
-
-            $('#filtered_results').addClass('d-none'); // Ensure it is hidden by default
-
             $('#search_design_category').on('keyup', function() {
-                let query = $(this).val().toLowerCase().trim();
+                let query = $(this).val().toLowerCase();
+                $('#filtered_results').show();
                 let results = '';
 
                 if (query.length > 0) {
-                    $('#filtered_results').removeClass('d-none'); // Show results container
                     designData.forEach(category => {
                         if (category.name.toLowerCase().includes(query)) {
                             results +=
-                                `<div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+                                `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                         }
                         category.subcategories.forEach(subcategory => {
-                            if (subcategory.name.toLowerCase().includes(
-                                    query)) {
+                            if (subcategory.name.toLowerCase().includes(query)) {
                                 results +=
                                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                             }
@@ -347,53 +343,72 @@
 
                     $('#filtered_results').html(results);
                 } else {
-                    $('#filtered_results').html('').addClass('d-none'); // Hide when empty
+                    // When search is cleared, restore the default 30 images
+                    $('#filtered_results').html('');
+                    $('#filtered_results').hide();
                     $('input[name="design_subcategory"]').prop('checked', false);
-                    $('.default_show').show();
-                    updateTotalCount();
+
+                    $('.total_design_count').text($('.default_show:visible').length + ' Items');
                 }
             });
 
-            // Handle item selection from search results
+            // Click event for search results
             $(document).on('click', '.search-item', function() {
                 let selectedText = $(this).data('name');
                 let categoryId = $(this).data('category-id');
                 let subcategoryId = $(this).data('id');
 
                 $('#search_design_category').val(selectedText);
-                $('#filtered_results').html('').addClass(
-                    'd-none'); // Hide results after selection
+                $('#filtered_results').html(''); // Clear search results
                 $('.image-item').hide();
 
                 if (categoryId && subcategoryId) {
+                    // Show only images that match category and subcategory
                     $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
                         .show();
                 } else if (categoryId) {
+
+
                     $(`.image-item[data-category-id="${categoryId}"]`).show();
                 }
 
                 $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
                     .prop('checked', true);
+                // if ($(this).hasClass('subcategory')) {
+
+                //     let images = designData.find(c => c.id == categoryId)
+                //         .subcategories.find(s => s.id == subcategoryId).images;
+
+
+                //     // Auto-check the corresponding subcategory checkbox
+                //
+                // }
 
                 $('.total_design_count').text($('.image-item:visible').length + ' Items');
             });
 
-            // Hide results when input is cleared
+
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
+                $('#filtered_results').hide();
                 if (query === '') {
-                    $('#filtered_results').html('').addClass('d-none'); // Hide when cleared
+                    $('#filtered_results').html('');
+
+                    $('#filtered_results').hide();
+
+                    // Show only default images
                     $(".default_show").show();
+
+                    // Ensure checked subcategories are unchecked
                     $('input[name="design_subcategory"]').prop('checked', false);
+
+
+                    // Update the total count of visible images
                     updateTotalCount();
                 }
             });
 
-
         });
-
-
-
         document.querySelectorAll('.collection-menu').forEach((button) => {
             button.addEventListener('click', (event) => {
                 event.stopPropagation();
