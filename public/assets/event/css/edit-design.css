@@ -1119,8 +1119,8 @@
 
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 1000px) and (max-height: 1049px){
     .image-edit-inner-img {
-        width: 460px !important;
-        height: 640px !important;
+        width: 490px !important;
+        height: 650px !important;
         margin: 0px auto !important;
     }
     .edit-images-button-wrp {
@@ -1137,8 +1137,8 @@
 
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 950px) and (max-height: 999px){
     .image-edit-inner-img {
-        width: 450px !important;
-        height: 560px !important;
+        width: 500px !important;
+        height: 600px !important;
         margin: 0px auto !important;
     }
     .edit-images-button-wrp {
@@ -1156,7 +1156,7 @@
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 900px) and (max-height: 949px){
     .image-edit-inner-img {
         width: 430px !important;
-        height: 530px !important;
+        height: calc(100vh - 350px) !important;
         margin: 0px auto !important;
     }
     .edit-images-button-wrp {
