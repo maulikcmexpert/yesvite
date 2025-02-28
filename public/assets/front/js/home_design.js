@@ -140,7 +140,7 @@ $(document).ready(function () {
             // Show only images that match category and subcategory
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
         } else if (categoryId) {
-alert(categoryId);
+
 
             $(`.image-item[data-category-id="${categoryId}"]`).show();
         }
