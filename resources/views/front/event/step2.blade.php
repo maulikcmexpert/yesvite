@@ -4,7 +4,7 @@
             <div class="content">
 
                 <div class="position-relative search-wrapper">
-                    <input type="search" id="search_design_category" placeholder="Search design categories" class="">
+                    <input type="search" id="search_design_category" placeholder="Search design categories" class="" autocomplete="off" >
                     <div id="filtered_results" class="filtered-results-container"></div>
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
