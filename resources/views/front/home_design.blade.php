@@ -238,11 +238,12 @@
                             'id' => $image->id,
                             'image_path' => asset('storage/canvas/' . $image->filled_image)
                         ];
-                    })
+                    })->toArray() // Convert collection to an array
                 ];
-            })
+            })->toArray() // Convert collection to an array
         ];
-    }));
+    })->toArray()); // Convert top-level collection to an array
 </script>
 @endpush
+
 
