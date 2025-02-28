@@ -1123,9 +1123,19 @@
         height: 530px !important;
         margin: 0px auto !important;
     }
+    .edit-images-button-wrp {
+        max-width: 500px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
 }
 
-@media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
+/* @media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
     .image-edit-inner-img {
         width: 1200px !important;
         height: 1700px !important;
@@ -1174,7 +1184,7 @@
         margin: 0px auto !important;
     }
 
-}
+} */
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
