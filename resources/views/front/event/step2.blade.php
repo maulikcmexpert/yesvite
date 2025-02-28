@@ -329,7 +329,7 @@
 
             $('#search_design_category').on('keyup', function() {
                 let query = $(this).val().toLowerCase();
-                $('#filtered_results').show();
+
                 let results = '';
 
                 if (query.length > 0) {
@@ -350,7 +350,7 @@
                 } else {
                     // When search is cleared, restore the default 30 images
                     $('#filtered_results').html('');
-                    $('#filtered_results').hide();
+
                     $('input[name="design_subcategory"]').prop('checked', false);
 
                     $('.total_design_count').text($('.default_show:visible').length + ' Items');
@@ -399,7 +399,7 @@
                 if (query === '') {
                     $('#filtered_results').html('');
 
-                    $('#filtered_results').hide();
+
 
                     // Show only default images
                     $(".default_show").show();
