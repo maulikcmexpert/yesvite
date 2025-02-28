@@ -10961,7 +10961,7 @@ class ApiControllerv2 extends Controller
 
             if (count($result) != 0) {
                 foreach ($result as $value) {
-                    // dd($value->user_id);
+                    dd($value);
                     $rsvpUserStatus = [];
                     $rsvpUserStatus['id'] = $value->id;
                     if (isset($value->user->id) && isset($value->user->app_user) && $value->user->app_user == '1') {
