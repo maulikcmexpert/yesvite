@@ -168,7 +168,7 @@ $(document).ready(function () {
             $(".image-item").show();
 
             // Show default images only
-            $(".default_show").show();
+            $(".image-item.default_show").show();
 
             // Ensure checked subcategories are unchecked
             $('input[name="design_subcategory"]').prop('checked', false);
