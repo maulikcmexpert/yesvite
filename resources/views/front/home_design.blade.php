@@ -113,46 +113,46 @@
         </div>
 
 
-        <div class="row list_all_design_catgeory">
-            @php
-                $allImages = collect([]);
-                $randomIds = [];
-                foreach ($categories as $category) {
-                    foreach ($category->subcategory as $subcategory) {
-                        foreach ($subcategory->textdatas as $image) {
-                            $randomIds[] = $image->id;
-                            $allImages->push([
-                                'imageId' => $image->id,
-                                'category_id' => $category->id,
-                                'subcategory_id' => $subcategory->id,
-                                'category_name' => $category->category_name,
-                                'image_path' => asset('storage/canvas/' . $image->filled_image),
-                            ]);
+            <div class="row list_all_design_catgeory">
+                @php
+                    $allImages = collect([]);
+                    $randomIds = [];
+                    foreach ($categories as $category) {
+                        foreach ($category->subcategory as $subcategory) {
+                            foreach ($subcategory->textdatas as $image) {
+                                $randomIds[] = $image->id;
+                                $allImages->push([
+                                    'imageId' => $image->id,
+                                    'category_id' => $category->id,
+                                    'subcategory_id' => $subcategory->id,
+                                    'category_name' => $category->category_name,
+                                    'image_path' => asset('storage/canvas/' . $image->filled_image),
+                                ]);
+                            }
                         }
                     }
-                }
 
-                shuffle($randomIds);
-                $randomIds = array_slice($randomIds, 0, 30);
+                    shuffle($randomIds);
+                    $randomIds = array_slice($randomIds, 0, 30);
 
-                // $randomImages = $allImages->shuffle()->take(30);
-            @endphp
+                    // $randomImages = $allImages->shuffle()->take(30);
+                @endphp
 
-            @foreach ($allImages as $image)
-                <div
-                    class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none'}}"
-                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                    data-category-id="{{ $image['category_id'] }}"
-                    data-subcategory-id="{{ $image['subcategory_id'] }}"
-                    data-category_name="{{ $image['category_name'] }}"  >
+                @foreach ($allImages as $image)
+                    <div
+                        class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none'}}"
+                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                        data-category-id="{{ $image['category_id'] }}"
+                        data-subcategory-id="{{ $image['subcategory_id'] }}"
+                        data-category_name="{{ $image['category_name'] }}"  >
 
-                    <div class="card-img collection-card card-blue">
-                        <img src="{{ $image['image_path'] }}" alt="shower-card">
+                        <div class="card-img collection-card card-blue">
+                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                        </div>
+
                     </div>
-
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
 
 
         {{-- <div class="row list_all_design_catgeory search_category">
@@ -223,3 +223,80 @@
 
     </div>
 </section>
+
+@push('scripts')
+{{-- <script>
+    var designData = [];
+    var is_random = @php
+    echo json_encode($randomIds);
+    @endphp
+    alert(is_random)
+        @foreach ($categories as $category)
+        var categoryData = {
+            id: {{ $category->id }},
+            name: "{{ $category->category_name }}",
+            subcategories: []
+        };
+
+        @foreach ($category->subcategory as $subcategory)
+            var subcategoryData = {
+                id: {{ $subcategory->id }},
+                name: "{{ $subcategory->subcategory_name }}",
+                images: []
+            };
+
+            @foreach ($subcategory->textdatas as $image)
+                subcategoryData.images.push({
+                    id: {{ $image->id }},
+                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                });
+            @endforeach
+
+            categoryData.subcategories.push(subcategoryData);
+        @endforeach
+
+        designData.push(categoryData);
+    @endforeach
+
+    console.log(designData); // Check output in browser console
+</script> --}}
+
+<script>
+    var designData = [];
+
+    // Correcting the PHP to JavaScript variable conversion
+    var is_random = {!! json_encode($randomIds) !!};
+
+
+    @foreach ($categories as $category)
+        var categoryData = {
+            id: {{ $category->id }},
+            name: "{{ $category->category_name }}",
+            subcategories: []
+        };
+
+        @foreach ($category->subcategory as $subcategory)
+            var subcategoryData = {
+                id: {{ $subcategory->id }},
+                name: "{{ $subcategory->subcategory_name }}",
+                images: []
+            };
+
+            @foreach ($subcategory->textdatas as $image)
+                subcategoryData.images.push({
+                    id: {{ $image->id }},
+                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                });
+            @endforeach
+
+            categoryData.subcategories.push(subcategoryData);
+        @endforeach
+
+        designData.push(categoryData);
+    @endforeach
+
+    console.log(designData); // Check output in browser console
+</script>
+
+@endpush
+

@@ -4315,7 +4315,7 @@ function savePage1Data(close = null, direct = false) {
         // Check if all fields are not empty
         if (event_name !== "" && start_event_date !== "" && start_time !== "") {
             // When all fields are filled
-            $(".guestBtn").css("color", "black"); // Set text color to black
+            $(".guestBtn").css("color", "white"); // Set text color to black
             $("#guestBtn").removeClass("guestBtn");
             // Add a class to SVG for active state
         }
@@ -8395,7 +8395,7 @@ function getStartEndTimeZone() {
                 start_time !== ""
             ) {
                 // When all fields are filled
-                $(".guestBtn").css("color", "black"); // Set text color to black
+                $(".guestBtn").css("color", "white"); // Set text color to black
                 $("#guestBtn").removeClass("guestBtn");
                 // Add a class to SVG for active state
             }
@@ -9807,7 +9807,7 @@ function colorchange() {
     // Check if all fields are not empty
     if (event_name !== "" && start_event_date !== "" && start_time !== "") {
         // When all fields are filled
-        $(".guestBtn").css("color", "black"); // Set text color to black
+        $(".guestBtn").css("color", "white"); // Set text color to black
         $("#guestBtn").removeClass("guestBtn");
         // Add a class to SVG for active state
     } else {

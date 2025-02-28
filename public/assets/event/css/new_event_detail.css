@@ -1421,10 +1421,10 @@
 .new-event-sidebar-menu > ul > li.menu-success::after {
     border: 1px dashed var(--green);
 }
-
+/* 
 .footer-bottom-btn .guestBtn {
-    stroke: #b5b8bf !important;
-}
+    color: #b5b8bf !important;
+} */
 
 .guest-wrp.side-guest-wrp .invite-pro img{
     max-width: 60px;
