@@ -120,7 +120,7 @@ $(document).ready(function () {
             // When search is cleared, restore the default 30 images
             $('#filtered_results').html('');
 
-            $('.image-item').hide(); // Hide all images
+            // $('.image-item').hide(); // Hide all images
             $('.default_show').removeClass('d-none').show(); // Show only the default images
 
             $('input[name="design_subcategory"]').prop('checked', false);
@@ -164,7 +164,7 @@ $(document).ready(function () {
         if ($(this).val() === '') {
             $('#filtered_results').html('');
 
-            $('.image-item').hide(); // Hide all images
+            // $('.image-item').hide(); // Hide all images
             $('.default_show').removeClass('d-none').show(); // Show only the default images
 
             $('input[name="design_subcategory"]').prop('checked', false);
