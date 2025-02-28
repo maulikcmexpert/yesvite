@@ -99,7 +99,7 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
     $('#filtered_results').hide();
-    $('#search_design_category').on('keyup', function() {
+    $('#search_design_category').on('keyup', function () {
         let query = $(this).val().toLowerCase();
         $('#filtered_results').show();
         let results = '';
@@ -110,26 +110,22 @@ $(document).ready(function () {
                     results +=
                         `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                 }
-               // Check if no subcategory matched and add "No Data Found"
-if (results === '') {
-    results +=
-        `<div class="search-item no-data">No Data Found</div>`;
-}
+                // Check if no subcategory matched and add "No Data Found"
 
                 category.subcategories.forEach(subcategory => {
                     if (subcategory.name.toLowerCase().includes(query)) {
                         results +=
                             `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                     }
-                   // Check if no subcategory matched and add "No Data Found"
-if (results === '') {
-    results +=
-        `<div class="search-item no-data">No Data Found</div>`;
-}
+                    // Check if no subcategory matched and add "No Data Found"
+
 
                 });
             });
-
+            if (results === '') {
+                results +=
+                    `<div class="search-item no-data">No Data Found</div>`;
+            }
             $('#filtered_results').html(results);
         } else {
             // When search is cleared, restore the default 30 images
@@ -142,7 +138,7 @@ if (results === '') {
     });
 
     // Click event for search results
-    $(document).on('click', '.search-item', function() {
+    $(document).on('click', '.search-item', function () {
         let selectedText = $(this).data('name');
         let categoryId = $(this).data('category-id');
         let subcategoryId = $(this).data('id');
@@ -178,7 +174,7 @@ if (results === '') {
     });
 
 
-    $('#search_design_category').on('input', function() {
+    $('#search_design_category').on('input', function () {
         let query = $(this).val().trim();
         $('#filtered_results').hide();
         if (query === '') {
