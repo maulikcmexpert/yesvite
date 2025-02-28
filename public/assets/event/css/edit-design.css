@@ -1063,6 +1063,42 @@
     }
 }
 
+@media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 1050px) and (max-height: 1099px){
+    .image-edit-inner-img {
+        width: 460px !important;
+        height: 640px !important;
+        margin: 0px auto !important;
+    }
+    .edit-images-button-wrp {
+        max-width: 500px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 1000px) and (max-height: 1049px){
+    .image-edit-inner-img {
+        width: 460px !important;
+        height: 640px !important;
+        margin: 0px auto !important;
+    }
+    .edit-images-button-wrp {
+        max-width: 500px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 950px) and (max-height: 999px){
     .image-edit-inner-img {
         width: 450px !important;
@@ -1080,15 +1116,26 @@
         font-size: 14px !important;
     }
 }
+
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 900px) and (max-height: 949px){
     .image-edit-inner-img {
         width: 430px !important;
         height: 530px !important;
         margin: 0px auto !important;
     }
+    .edit-images-button-wrp {
+        max-width: 500px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
 }
 
-@media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
+/* @media only screen and (min-width: 3800px) and (max-width: 3999px) and (height: 2160px){
     .image-edit-inner-img {
         width: 1200px !important;
         height: 1700px !important;
@@ -1137,7 +1184,7 @@
         margin: 0px auto !important;
     }
 
-}
+} */
 
 @media only screen and (min-width: 4001px){
     .image-edit-inner-img {
@@ -2142,7 +2189,7 @@
         padding-top: 0px;
     }
     .edit-images-button-wrp {
-        max-width: 800px !important;
+        max-width: 800px;
     }
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
