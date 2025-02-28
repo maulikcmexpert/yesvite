@@ -110,6 +110,8 @@
                                     'category_id' => $category->id,
                                     'subcategory_id' => $subcategory->id,
                                     'category_name' => $category->category_name,
+                                    'static_information' => json_encode($image->static_information),
+                                    'shape_image'=> $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
                                     'image_path' => asset('storage/canvas/' . $image->filled_image),
                                 ]);
                             }
@@ -132,7 +134,10 @@
                         data-category_name="{{ $image['category_name'] }}"  >
 
                         <div class="card-img collection-card card-blue edit_design_tem design-card"
-                            >
+                        data-image="{{$image['imageId']}}"
+                        data-shape_image="{{ $image['shape_image'] }}"
+                        data-json="{{ $image['static_information']) }}"
+                        data-id="{{ $image->id }}"   >
                             <img src="{{ $image['image_path'] }}" alt="shower-card">
                         </div>
 
