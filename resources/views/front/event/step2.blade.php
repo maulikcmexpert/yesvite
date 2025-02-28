@@ -4,7 +4,7 @@
             <div class="content">
 
                 <div class="position-relative search-wrapper">
-                    <input type="search" id="search_design_category" placeholder="Search design categories" class="">
+                    <input type="search" id="search_design_category" placeholder="Search design categories" class="" autocomplete="off" >
                     <div id="filtered_results" class="filtered-results-container"></div>
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -110,7 +110,10 @@
                                     'category_id' => $category->id,
                                     'subcategory_id' => $subcategory->id,
                                     'category_name' => $category->category_name,
+                                    'static_information' => json_encode($image->static_information),
+                                    'shape_image'=> $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
                                     'image_path' => asset('storage/canvas/' . $image->filled_image),
+                                    'image' => asset('storage/canvas/' . $image->image),
                                 ]);
                             }
                         }
@@ -132,7 +135,10 @@
                         data-category_name="{{ $image['category_name'] }}"  >
 
                         <div class="card-img collection-card card-blue edit_design_tem design-card"
-                            >
+                        data-image="{{$image['image']}}"
+                        data-shape_image="{{ $image['shape_image'] }}"
+                        data-json="{{ $image['static_information']}}"
+                        data-id="{{$image['imageId'] }}"  >
                             <img src="{{ $image['image_path'] }}" alt="shower-card">
                         </div>
 
