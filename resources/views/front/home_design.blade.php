@@ -225,7 +225,7 @@
 </section>
 
 @push('scripts')
-<script>
+{{-- <script>
     var designData = [];
     var is_random = @php
     echo json_encode($randomIds);
@@ -259,6 +259,44 @@
     @endforeach
 
     console.log(designData); // Check output in browser console
+</script> --}}
+
+<script>
+    var designData = [];
+
+    // Correcting the PHP to JavaScript variable conversion
+    var is_random = {!! json_encode($randomIds) !!};
+    alert(is_random);
+
+    @foreach ($categories as $category)
+        var categoryData = {
+            id: {{ $category->id }},
+            name: "{{ $category->category_name }}",
+            subcategories: []
+        };
+
+        @foreach ($category->subcategory as $subcategory)
+            var subcategoryData = {
+                id: {{ $subcategory->id }},
+                name: "{{ $subcategory->subcategory_name }}",
+                images: []
+            };
+
+            @foreach ($subcategory->textdatas as $image)
+                subcategoryData.images.push({
+                    id: {{ $image->id }},
+                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                });
+            @endforeach
+
+            categoryData.subcategories.push(subcategoryData);
+        @endforeach
+
+        designData.push(categoryData);
+    @endforeach
+
+    console.log(designData); // Check output in browser console
 </script>
+
 @endpush
 
