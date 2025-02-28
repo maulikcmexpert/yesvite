@@ -159,7 +159,7 @@
                                     <a href="javascript:;" class="collection-card card-blue">
                                         <div class="card-img edit_design_tem design-card"
                                             data-image="{{ asset('storage/canvas/' . $image->image) }}"
-                                            data-shape_image="{{ $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '' }}"
+
                                             data-json="{{ json_encode($image->static_information) }}"
                                             data-id="{{ $image->id }}">
                                             <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
