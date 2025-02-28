@@ -164,11 +164,10 @@ $(document).ready(function () {
         if (query === '') {
             $('#filtered_results').html('');
 
-            // Hide all images first
-            $(".image-item").hide();
+
 
             // Show only default images
-            $(".image-item.default_show").show();
+            $(".default_show").show();
 
             // Ensure checked subcategories are unchecked
             $('input[name="design_subcategory"]').prop('checked', false);
