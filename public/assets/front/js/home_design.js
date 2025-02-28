@@ -116,19 +116,15 @@ $(document).ready(function () {
             });
 
             $('#filtered_results').html(results);
-        } else {
-            // When search is cleared, restore the default images
-            $('#filtered_results').html('');
-            $(".list_all_design_catgeory").html($(".default_show").html());
-            $('.image-item').show();
-            $('.default_show').show();
-
-
-            $('input[name="design_subcategory"]').prop('checked', false);
-
-
-            $('.total_design_count').text($('.image-item:visible').length + ' Items');
         }
+        // else {
+        //     // When search is cleared, restore the default images
+        //     $('#filtered_results').html('');
+        //     $(".list_all_design_catgeory").html($(".default_show").html());
+        //     $('input[name="design_subcategory"]').prop('checked', false);
+
+        //     $('.total_design_count').text($('.image-item:visible').length + ' Items');
+        // }
     });
 
 
