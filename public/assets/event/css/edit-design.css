@@ -1063,6 +1063,78 @@
     }
 }
 
+@media only screen and (min-width: 2400px) and (max-width: 4000px) and (min-height: 2100px) and (max-height: 2199px){
+    .image-edit-inner-img {
+        width: 1050px !important;
+        height: calc(100vh - 400px) !important;
+        margin: 0px auto !important;
+    }
+
+    .edit-images-button-wrp {
+        max-width: 600px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+@media only screen and (min-width: 2000px) and (max-width: 2399px) and (min-height: 2100px) and (max-height: 2199px){
+    .image-edit-inner-img {
+        width: 900px !important;
+        height: calc(100vh - 400px) !important;
+        margin: 0px auto !important;
+    }
+
+    .edit-images-button-wrp {
+        max-width: 600px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+@media only screen and (min-width: 1800px) and (max-width: 1999px) and (min-height: 2100px) and (max-height: 2199px){
+    .image-edit-inner-img {
+        width: 900px !important;
+        height: calc(100vh - 500px) !important;
+        margin: 0px auto !important;
+    }
+
+    .edit-images-button-wrp {
+        max-width: 600px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+@media only screen and (min-width: 1600px) and (max-width: 1799px) and (min-height: 2100px) and (max-height: 2199px){
+    .image-edit-inner-img {
+        width: 750px !important;
+        height: calc(100vh - 1000px) !important;
+        margin: 0px auto !important;
+    }
+
+    .edit-images-button-wrp {
+        max-width: 600px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
 @media only screen and (min-width: 2400px) and (max-width: 4000px) and (min-height: 2000px) and (max-height: 2099px){
     .image-edit-inner-img {
         width: 1050px !important;
@@ -1084,7 +1156,7 @@
 @media only screen and (min-width: 2000px) and (max-width: 2399px) and (min-height: 2000px) and (max-height: 2099px){
     .image-edit-inner-img {
         width: 900px !important;
-        height: calc(100vh - 500px) !important;
+        height: calc(100vh - 400px) !important;
         margin: 0px auto !important;
     }
 
