@@ -202,19 +202,19 @@ class AuthController extends Controller
             $storeUser->save();
             DB::commit();
 
-            $checkContactSync=contact_sync::where('email',$request->email)->first();
-            if($checkContactSync){
-                $checkContactSync->userId=$storeUser->id;
-                $checkContactSync->updated_at = now();
-                $checkContactSync->save();
+            // $checkContactSync=contact_sync::where('email',$request->email)->first();
+            // if($checkContactSync){
+            //     $checkContactSync->userId=$storeUser->id;
+            //     $checkContactSync->updated_at = now();
+            //     $checkContactSync->save();
 
-                EventInvitedUser::where('sync_id', $checkContactSync->id)
-                ->update(['user_id' => $storeUser->id]);
+            //     EventInvitedUser::where('sync_id', $checkContactSync->id)
+            //     ->update(['user_id' => $storeUser->id]);
 
-                EventPost::where('sync_id',$checkContactSync->id)
-                ->update(['user_id'=>$storeUser->id]);
+            //     EventPost::where('sync_id',$checkContactSync->id)
+            //     ->update(['user_id'=>$storeUser->id]);
             
-            }
+            // }
             
             $userDetails = User::where('id', $storeUser->id)->first();
 
