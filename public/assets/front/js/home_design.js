@@ -99,7 +99,6 @@ $(document).ready(function () {
         $('.total_design_count').text(visibleItems + ' Items');
     });
 
-
     $('#search_design_category').on('keyup', function () {
         let query = $(this).val().toLowerCase();
         let results = '';
@@ -118,9 +117,15 @@ $(document).ready(function () {
 
             $('#filtered_results').html(results);
         } else {
-
+            // When search is cleared, restore the default items
             $('#filtered_results').html('');
             $(".list_all_design_catgeory").html($(".default_show").html());
+
+            // Ensure all default images are shown again
+            $(".image-item").show();
+            $(".image-item-new").hide(); // Hide new images if necessary
+
+            // Reset total count
             $('.total_design_count').text($('.image-item:visible').length + ' Items');
         }
     });
