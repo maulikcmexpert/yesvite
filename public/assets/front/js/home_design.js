@@ -169,7 +169,7 @@ $(document).ready(function () {
 
 
             $(".image-item").each(function () {
-                let imageId = parseInt($(this).data('image-id')); // Ensure numeric comparison
+                let imageId = parseInt($(this).data('image-id')); n
                 if (is_random.includes(imageId)) {
                     $(this).removeClass('d-none').show();
                 }
