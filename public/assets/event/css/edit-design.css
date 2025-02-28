@@ -1063,7 +1063,24 @@
     }
 }
 
-@media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 900px) and (max-height: 999px){
+@media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 950px) and (max-height: 999px){
+    .image-edit-inner-img {
+        width: 450px !important;
+        height: 560px !important;
+        margin: 0px auto !important;
+    }
+    .edit-images-button-wrp {
+        max-width: 500px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+@media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 900px) and (max-height: 949px){
     .image-edit-inner-img {
         width: 430px !important;
         height: 530px !important;
@@ -1943,6 +1960,24 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
    
 }
 
@@ -2031,6 +2066,24 @@
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     } */
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 2000px) and (max-width: 2399px){
@@ -2091,6 +2144,24 @@
     .edit-images-button-wrp {
         max-width: 800px !important;
     }
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
@@ -2143,6 +2214,24 @@
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     } */
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
