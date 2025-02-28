@@ -120,9 +120,6 @@ $(document).ready(function () {
             // When search is cleared, restore the default 30 images
             $('#filtered_results').html('');
 
-            // $('.image-item').hide(); // Hide all images
-            $('.default_show').removeClass('d-none').show(); // Show only the default images
-
             $('input[name="design_subcategory"]').prop('checked', false);
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
@@ -160,27 +157,23 @@ $(document).ready(function () {
         $('.total_design_count').text($('.image-item:visible').length + ' Items');
     });
 
-    $('#search_design_category').on('input', function () {
-        let query = $(this).val().trim();
 
-        if (query === '') {
+    $('#search_design_category').on('input', function () {
+        alert(is_random);
+        let default_s = 0;
+        if ($(this).val() === '') {
+
+            default_s++;
             $('#filtered_results').html('');
 
-            // Hide all images first
-            $('.image-item').hide();
-
-            // Show only images that match the `is_random` array
-            $('.image-item').each(function () {
-                let imageId = $(this).data('image-id'); // Make sure you have `data-image-id` in your HTML
-                if (is_random.includes(imageId)) {
-                    $(this).removeClass('d-none').show();
-                }
-            });
-
+            $(".image-item").removeClass('d-none');
             $('input[name="design_subcategory"]').prop('checked', false);
 
-            // Update the count of visible images
-            $('.total_design_count').text($('.image-item:visible').length + ' Items');
+            $('.total_design_count').text($('.default_show:visible').length + ' Items');
+        }
+        if (default_s == 0) {
+            $(".image-item").removeClass('d-none');
+            $(".default_show").show();
         }
     });
 
