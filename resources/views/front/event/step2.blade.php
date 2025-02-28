@@ -19,7 +19,7 @@
                             </svg>
                         </span>
                     </div>
-                    <div id="filtered_results" class="filtered-results-container d-none"></div>
+                    <div id="filtered_results" class="filtered-results-container"></div>
 
                 </div>
             </div>
