@@ -236,14 +236,15 @@
                     'images' => $subcategory->textdatas->map(function ($image) {
                         return [
                             'id' => $image->id,
-                            'image_path' => asset('storage/canvas/' . $image->filled_image)
+                            'image_path' => asset('storage/canvas/' . $image->filled_image),
                         ];
-                    })->toArray() // Convert collection to an array
+                    })->toArray(), // Convert collection to array
                 ];
-            })->toArray() // Convert collection to an array
+            })->toArray(), // Convert collection to array
         ];
-    })->toArray()); // Convert top-level collection to an array
+    })->toArray()); // Convert collection to array
 </script>
 @endpush
+
 
 
