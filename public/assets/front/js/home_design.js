@@ -120,9 +120,6 @@ $(document).ready(function () {
             // When search is cleared, restore the default 30 images
             $('#filtered_results').html('');
 
-            // $('.image-item').hide(); // Hide all images
-            $('.default_show').removeClass('d-none').show(); // Show only the default images
-
             $('input[name="design_subcategory"]').prop('checked', false);
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
@@ -144,7 +141,7 @@ $(document).ready(function () {
                 .subcategories.find(s => s.id == subcategoryId).images;
 
             let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? '' : 'default_show'} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"  data-image-id="${image.id}">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? 'default_show' : ''} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"  data-image-id="${image.id}">
                     <div class="card-img collection-card card-blue">
                         <img src="${image.image_path}" alt="design">
                     </div>
@@ -162,15 +159,20 @@ $(document).ready(function () {
 
 
     $('#search_design_category').on('input', function () {
-
+        let default_s = 0;
         if ($(this).val() === '') {
+            alert();
+            default_s++;
             $('#filtered_results').html('');
 
-            // $('.image-item').hide(); // Hide all images
-            // $('.default_show').show();
+            $(".image-item").removeClass('d-none');
             $('input[name="design_subcategory"]').prop('checked', false);
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
+        }
+        if (default_s == 0) {
+            $(".image-item").removeClass('d-none');
+            $(".default_show").show();
         }
     });
 
