@@ -699,7 +699,9 @@ class RsvpController extends BaseController
                         return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'RSVP is only available for guests');
                     }
                 } else {
-                    $contactSync = contact_sync::where('email', $email)->first();
+                    $checkhost=Event::where('id',$eventId)->first();
+
+                    $contactSync = contact_sync::where(['email'=> $email,'contact_id'=>$checkhost->user_id])->first();
                 
                     if ($contactSync) {
                         $newUserId = $contactSync->id;
@@ -707,6 +709,7 @@ class RsvpController extends BaseController
                         $userType = 'sync';
                     } else {
                         $newContact = new contact_sync();
+                        $newContact->contact_id=$checkhost->user_id;
                         $newContact->firstName = $request->firstname;
                         $newContact->lastName = $request->lastname;
                         $newContact->photo = "";
