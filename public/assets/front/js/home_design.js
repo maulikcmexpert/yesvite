@@ -167,7 +167,7 @@ alert(is_random)
             $('#filtered_results').html('');
 
             // $('.image-item').hide(); // Hide all images
-            $('.default_show').removeClass('d-none').show();
+            $('.default_show').show();
             $('input[name="design_subcategory"]').prop('checked', false);
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
