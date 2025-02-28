@@ -165,9 +165,9 @@ $(document).ready(function () {
             $('#filtered_results').html('');
 
             // Hide all images first
-            $(".image-item").show();
+            $(".image-item").hide();
 
-            // Show default images only
+            // Show only default images
             $(".image-item.default_show").show();
 
             // Ensure checked subcategories are unchecked
@@ -177,6 +177,7 @@ $(document).ready(function () {
             updateTotalCount();
         }
     });
+
 
 
 
