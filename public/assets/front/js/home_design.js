@@ -137,11 +137,18 @@ $(document).ready(function () {
         $('.image-item').hide();
 
         if (categoryId && subcategoryId) {
+            // Show only images that match category and subcategory
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+        } else if (categoryId) {
 
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        } else {
-            // Show all images under the selected category
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+            let categoryImages = $(`.image-item[data-category-id="${categoryId}"]`);
+
+            if (categoryImages.length > 0) {
+                categoryImages.show();
+            } else {
+
+                $(`.image-item[data-category-id="${categoryId}"]`).show();
+            }
         }
         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         // if ($(this).hasClass('subcategory')) {
