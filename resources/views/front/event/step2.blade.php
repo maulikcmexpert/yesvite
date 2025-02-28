@@ -111,7 +111,7 @@
                                     'subcategory_id' => $subcategory->id,
                                     'category_name' => $category->category_name,
                                     'static_information' => json_encode($image->static_information),
-                                    'shape_image'=> $image['shape_image']!= '' ? asset('storage/canvas/' . $image['shape_image']) : '',
+                                    'shape_image'=> $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
                                     'image_path' => asset('storage/canvas/' . $image->filled_image),
                                 ]);
                             }
