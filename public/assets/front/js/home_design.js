@@ -110,17 +110,23 @@ $(document).ready(function () {
                     results +=
                         `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                 }
-                else{
-                    `<div class="search-item category">No Data Found</div>`;
-                }
+               // Check if no subcategory matched and add "No Data Found"
+if (results === '') {
+    results +=
+        `<div class="search-item no-data">No Data Found</div>`;
+}
+
                 category.subcategories.forEach(subcategory => {
                     if (subcategory.name.toLowerCase().includes(query)) {
                         results +=
                             `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                     }
-                    else{
-                        `<div class="search-item category">No Data Found</div>`;
-                    }
+                   // Check if no subcategory matched and add "No Data Found"
+if (results === '') {
+    results +=
+        `<div class="search-item no-data">No Data Found</div>`;
+}
+
                 });
             });
 

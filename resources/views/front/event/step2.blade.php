@@ -333,11 +333,23 @@
                             results +=
                                 `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                         }
+                        // Check if no subcategory matched and add "No Data Found"
+if (results === '') {
+    results +=
+        `<div class="search-item no-data">No Data Found</div>`;
+}
+
                         category.subcategories.forEach(subcategory => {
                             if (subcategory.name.toLowerCase().includes(query)) {
                                 results +=
                                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                             }
+                            // Check if no subcategory matched and add "No Data Found"
+if (results === '') {
+    results +=
+        `<div class="search-item no-data">No Data Found</div>`;
+}
+
                         });
                     });
 
