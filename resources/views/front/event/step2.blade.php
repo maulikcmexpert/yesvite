@@ -360,6 +360,7 @@
 
                 $('#search_design_category').val(selectedText);
                 $('#filtered_results').html(''); // Clear search results
+                $('#filtered_results').hide();
                 $('.image-item').hide();
 
                 if (categoryId && subcategoryId) {
