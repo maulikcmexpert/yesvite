@@ -725,7 +725,7 @@ class EventListController extends BaseController
 
         // Apply offset and limit
         $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc') // Adjust ordering if needed
+            ->orderBy('start_date', 'desc') // Adjust ordering if needed
             ->offset($offset)
             ->limit($limit)
             ->get();
@@ -1432,7 +1432,7 @@ class EventListController extends BaseController
 
         // Apply offset and limit
         $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc')
+            ->orderBy('start_date', 'desc')
             ->get();
 
         $totalCounts = 0;
