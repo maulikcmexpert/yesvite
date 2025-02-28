@@ -346,9 +346,9 @@
                         });
                     });
                     if (results === '') {
-                                results +=
-                                    `<div class="search-item no-data">No Data Found</div>`;
-                            }
+                        results +=
+                            `<div class="search-item no-data">No Data Found</div>`;
+                    }
                     $('#filtered_results').html(results);
                 } else {
                     // When search is cleared, restore the default 30 images
@@ -397,13 +397,13 @@
             });
 
 
+            let previousSearch = "";
+
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
-                $('#filtered_results').hide();
-                if (query === '') {
-                    $('#filtered_results').html('');
 
-                    $('#filtered_results').hide();
+                if (query === '') {
+                    $('#filtered_results').html('').addClass('d-none');
 
                     // Show only default images
                     $(".default_show").show();
@@ -411,11 +411,21 @@
                     // Ensure checked subcategories are unchecked
                     $('input[name="design_subcategory"]').prop('checked', false);
 
-
                     // Update the total count of visible images
                     updateTotalCount();
+                } else {
+                    $('#filtered_results').removeClass('d-none');
+
+                    // Check if the first character of the previous search is different from the current one
+                    if (previousSearch.length > 0 && previousSearch.charAt(0).toLowerCase() !== query
+                        .charAt(0).toLowerCase()) {
+                        $('input[name="design_subcategory"]').prop('checked', false);
+                    }
                 }
+
+                previousSearch = query; // Store the current search query
             });
+
 
         });
         document.querySelectorAll('.collection-menu').forEach((button) => {
