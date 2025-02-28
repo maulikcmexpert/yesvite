@@ -159,9 +159,10 @@ $(document).ready(function () {
 
 
     $('#search_design_category').on('input', function () {
+        alert(is_random);
         let default_s = 0;
         if ($(this).val() === '') {
-            alert();
+
             default_s++;
             $('#filtered_results').html('');
 
