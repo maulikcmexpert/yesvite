@@ -1960,6 +1960,20 @@
     .coin-invite-wrp span {
         font-size: 16px;
     }
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
    
 }
 
@@ -2048,6 +2062,20 @@
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     } */
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
 }
 
 @media only screen and (min-width: 2000px) and (max-width: 2399px){
@@ -2108,6 +2136,20 @@
     .edit-images-button-wrp {
         max-width: 800px !important;
     }
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
@@ -2160,6 +2202,20 @@
         height: calc(100vh - 0vh) !important;
         margin: 0px auto !important;
     } */
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
