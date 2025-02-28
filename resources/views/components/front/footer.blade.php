@@ -693,6 +693,15 @@
 
                     let userData = await getUser(userid);
                     let statusClass;
+                    if (userId == userid) {
+                        if (userElement.classList.contains("active_slide_bar")) {
+                            i = i + 1;
+                    console.log({userId})
+
+                        }
+
+                        statusClass = "active-dot";
+                    }else
                     if (userData?.userStatus?.toLowerCase() === "online") {
                         if (userElement.classList.contains("active_slide_bar")) {
                             i = i + 1;
@@ -704,15 +713,7 @@
                     } else {
                         statusClass = "inactive-dot";
                     }
-                    if (userId == userid) {
-                        if (userElement.classList.contains("active_slide_bar")) {
-                            i = i + 1;
-                    console.log({userId})
 
-                        }
-
-                        statusClass = "active-dot";
-                    }
                     // Find the span inside the user element and update its class
                     let statusSpan = userElement.querySelector("span");
                     if (statusSpan) {
