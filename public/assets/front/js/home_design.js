@@ -139,9 +139,9 @@ $(document).ready(function () {
         if (categoryId && subcategoryId) {
 
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        } else if (categoryId) {
+        } else {
             // Show all images under the selected category
-            $(`.image-item[data-category-id="${categoryId}"]`).show();
+            $('.image-item').show();
         }
         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         // if ($(this).hasClass('subcategory')) {
