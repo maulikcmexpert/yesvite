@@ -144,7 +144,7 @@ $(document).ready(function () {
                 .subcategories.find(s => s.id == subcategoryId).images;
 
             let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? 'default_show' : ''} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"  data-image-id="${image.id}">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? '' : 'default_show'} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"  data-image-id="${image.id}">
                     <div class="card-img collection-card card-blue">
                         <img src="${image.image_path}" alt="design">
                     </div>
@@ -160,27 +160,17 @@ $(document).ready(function () {
         $('.total_design_count').text($('.image-item:visible').length + ' Items');
     });
 
-    $('#search_design_category').on('input', function () {
-        let query = $(this).val().trim();
 
-        if (query === '') {
+    $('#search_design_category').on('input', function () {
+
+        if ($(this).val() === '') {
             $('#filtered_results').html('');
 
-            // Hide all images first
-            $('.image-item').hide();
-
-            // Show only images that match the `is_random` array
-            $('.image-item').each(function () {
-                let imageId = $(this).data('image-id'); // Make sure you have `data-image-id` in your HTML
-                if (is_random.includes(imageId)) {
-                    $(this).removeClass('d-none').show();
-                }
-            });
-
+            // $('.image-item').hide(); // Hide all images
+            // $('.default_show').show();
             $('input[name="design_subcategory"]').prop('checked', false);
 
-            // Update the count of visible images
-            $('.total_design_count').text($('.image-item:visible').length + ' Items');
+            $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
     });
 
