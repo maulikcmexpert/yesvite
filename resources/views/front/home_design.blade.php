@@ -266,7 +266,7 @@
 
     // Correcting the PHP to JavaScript variable conversion
     var is_random = {!! json_encode($randomIds) !!};
-    alert(is_random);
+
 
     @foreach ($categories as $category)
         var categoryData = {
