@@ -4,8 +4,8 @@
             <div class="content">
 
                 <div class="position-relative search-wrapper">
+                    <div class="position-relative">
                     <input type="search" id="search_design_category" placeholder="Search design categories" class="" autocomplete="off" >
-                    <div id="filtered_results" class="filtered-results-container"></div>
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -17,6 +17,9 @@
                                 stroke-linejoin="round"></path>
                         </svg>
                     </span>
+                </div>
+                    <div id="filtered_results" class="filtered-results-container"></div>
+
                 </div>
             </div>
 
