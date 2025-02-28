@@ -693,7 +693,9 @@ class RsvpController extends BaseController
                     $userType = 'user';
 
                     $checkhost=Event::where('id',$eventId)->first();
-                    dd($newUserId,$checkhost->user_id);
+                    if($newUserId==$checkhost->user_id){
+                        return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'You are already a host');
+                    }
                 } else {
                     $contactSync = contact_sync::where('email', $email)->first();
                 
