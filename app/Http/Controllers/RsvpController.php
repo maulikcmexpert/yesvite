@@ -691,6 +691,8 @@ class RsvpController extends BaseController
                 if ($user) {
                     $newUserId = $user->id;
                     $userType = 'user';
+                    $user_sync_id=null;
+
 
                     $checkhost=Event::where('id',$eventId)->first();
                     if($newUserId==$checkhost->user_id){

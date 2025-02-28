@@ -159,21 +159,26 @@ $(document).ready(function () {
 
 
     $('#search_design_category').on('input', function () {
-        alert(is_random);
-        let default_s = 0;
-        if ($(this).val() === '') {
+        let query = $(this).val().trim();
 
-            default_s++;
+        if (query === '') {
             $('#filtered_results').html('');
 
-            $(".image-item").removeClass('d-none');
+            // Hide all images first
+            $(".image-item").hide();
+
+
+            $(".image-item").each(function () {
+                let imageId = parseInt($(this).data('image-id')); n
+                if (is_random.includes(imageId)) {
+                    $(this).removeClass('d-none').show();
+                }
+            });
+
             $('input[name="design_subcategory"]').prop('checked', false);
 
-            $('.total_design_count').text($('.default_show:visible').length + ' Items');
-        }
-        if (default_s == 0) {
-            $(".image-item").removeClass('d-none');
-            $(".default_show").show();
+            // Update the visible image count
+            $('.total_design_count').text($('.image-item:visible').length + ' Items');
         }
     });
 
