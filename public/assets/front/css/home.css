@@ -523,6 +523,29 @@
     stroke: #fff;
 }
 
+/* ===== Search Option Section start ===== */
+
+.collection-wrapper .search-wrapper  .filtered-results-container{
+    text-align: left;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+
+
+.collection-wrapper .search-wrapper  .filtered-results-container .search-item.category{
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.collection-wrapper .search-wrapper  .filtered-results-container .search-item.subcategory{
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* ===== Search Option Section end ===== */
+
 .collection-wrapper .filter-main-wrp {
     display: flex;
     align-items: center;
