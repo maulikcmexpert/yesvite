@@ -144,7 +144,7 @@ $(document).ready(function () {
                 .subcategories.find(s => s.id == subcategoryId).images;
 alert(is_random)
             let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? 'default_show' : ''} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}">
                     <div class="card-img collection-card card-blue">
                         <img src="${image.image_path}" alt="design">
                     </div>
