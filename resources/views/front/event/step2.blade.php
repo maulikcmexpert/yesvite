@@ -320,9 +320,10 @@
                 var visibleItems = $('.image-item:visible').length;
                 $('.total_design_count').text(visibleItems + ' Items');
             });
-
+            $('#filtered_results').hide();
             $('#search_design_category').on('keyup', function() {
                 let query = $(this).val().toLowerCase();
+                $('#filtered_results').show();
                 let results = '';
 
                 if (query.length > 0) {
@@ -343,7 +344,7 @@
                 } else {
                     // When search is cleared, restore the default 30 images
                     $('#filtered_results').html('');
-
+                    $('#filtered_results').hide();
                     $('input[name="design_subcategory"]').prop('checked', false);
 
                     $('.total_design_count').text($('.default_show:visible').length + ' Items');
@@ -388,7 +389,7 @@
 
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
-                $('#filtered_results').show();
+                $('#filtered_results').hide();
                 if (query === '') {
                     $('#filtered_results').html('');
 
