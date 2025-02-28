@@ -1057,9 +1057,9 @@
 
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (height: 1169px){
     .image-edit-inner-img {
-        width: 600px;
-        height: 800px;
-        margin: 0px auto;
+        width: 600px !important;
+        height: 800px !important;
+        margin: 0px auto !important;
     }
 }
 
