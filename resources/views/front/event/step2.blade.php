@@ -132,7 +132,7 @@
                         data-category_name="{{ $image['category_name'] }}"  >
 
                         <div class="card-img collection-card card-blue edit_design_tem design-card"
-                            data-json="{{ json_encode($image->static_information) }}"  data-id="{{ $image->id }}">
+                            data-id="{{ $image->id }}">
                             <img src="{{ $image['image_path'] }}" alt="shower-card">
                         </div>
 
