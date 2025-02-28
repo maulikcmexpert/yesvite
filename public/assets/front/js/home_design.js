@@ -136,9 +136,14 @@ $(document).ready(function () {
         $('#filtered_results').html(''); // Clear search results
         $('.image-item').hide();
 
-        // Show only matching category and subcategory images
-        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+        if (categoryId && subcategoryId) {
 
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+        } else if (categoryId) {
+            // Show all images under the selected category
+            $(`.image-item[data-category-id="${categoryId}"]`).show();
+        }
+        $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         // if ($(this).hasClass('subcategory')) {
 
         //     let images = designData.find(c => c.id == categoryId)
@@ -146,7 +151,7 @@ $(document).ready(function () {
 
 
         //     // Auto-check the corresponding subcategory checkbox
-        //     $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
+        //
         // }
 
         $('.total_design_count').text($('.image-item:visible').length + ' Items');
