@@ -180,6 +180,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('getUserByName',  [ChatController::class, 'get_user_by_name'])->name('message.getUserByName');
     Route::post('getConversation',  [ChatController::class, 'getConversation'])->name('message.getConversation');
     Route::post('updateUserinFB',  [ChatController::class, 'updateUserinFB'])->name('message.updateUserinFB');
+    Route::post('sendAppLink',  [ChatController::class, 'sendAppLink'])->name('message.sendAppLink');
     Route::get('/autocomplete-users', [ChatController::class, 'autocomplete'])->name('autocomplete.users');
 
     Route::get('search_design', [ControllersEventController::class, 'searchDesign'])->name('search_design');
