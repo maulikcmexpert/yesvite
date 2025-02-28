@@ -238,11 +238,12 @@
                             'id' => $image->id,
                             'image_path' => asset('storage/canvas/' . $image->filled_image)
                         ];
-                    })
+                    })->toArray()
                 ];
-            })
+            })->toArray()
         ];
-    }));
+    })->toArray());
 </script>
 @endpush
+
 
