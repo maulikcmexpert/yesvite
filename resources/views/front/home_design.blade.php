@@ -29,19 +29,23 @@
             <h2>Find the Perfect <br> Design in Our Collection</h2>
             <p>Customizable Designs to Reflect Your Unique Event</p>
             <div class="position-relative search-wrapper">
-                <input type="search" id="search_design_category" placeholder="Search design categories" class="" autocomplete="off" >
+                <div class="position-relative">
+                    <input type="search" id="search_design_category" placeholder="Search design categories" class=""
+                        autocomplete="off">
+                    <span class="">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                            <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                </div>
                 <div id="filtered_results" class="filtered-results-container"></div>
-                <span class="">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                            stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        </path>
-                        <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </svg>
-                </span>
+
             </div>
         </div>
         {{-- {{$getDesignData}} --}}
@@ -113,46 +117,46 @@
         </div>
 
 
-            <div class="row list_all_design_catgeory">
-                @php
-                    $allImages = collect([]);
-                    $randomIds = [];
-                    foreach ($categories as $category) {
-                        foreach ($category->subcategory as $subcategory) {
-                            foreach ($subcategory->textdatas as $image) {
-                                $randomIds[] = $image->id;
-                                $allImages->push([
-                                    'imageId' => $image->id,
-                                    'category_id' => $category->id,
-                                    'subcategory_id' => $subcategory->id,
-                                    'category_name' => $category->category_name,
-                                    'image_path' => asset('storage/canvas/' . $image->filled_image),
-                                ]);
-                            }
+        <div class="row list_all_design_catgeory">
+            @php
+                $allImages = collect([]);
+                $randomIds = [];
+                foreach ($categories as $category) {
+                    foreach ($category->subcategory as $subcategory) {
+                        foreach ($subcategory->textdatas as $image) {
+                            $randomIds[] = $image->id;
+                            $allImages->push([
+                                'imageId' => $image->id,
+                                'category_id' => $category->id,
+                                'subcategory_id' => $subcategory->id,
+                                'category_name' => $category->category_name,
+                                'image_path' => asset('storage/canvas/' . $image->filled_image),
+                            ]);
                         }
                     }
+                }
 
-                    shuffle($randomIds);
-                    $randomIds = array_slice($randomIds, 0, 30);
+                shuffle($randomIds);
+                $randomIds = array_slice($randomIds, 0, 30);
 
-                    // $randomImages = $allImages->shuffle()->take(30);
-                @endphp
+                // $randomImages = $allImages->shuffle()->take(30);
 
-                @foreach ($allImages as $image)
-                    <div
-                        class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none'}}"
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                        data-category-id="{{ $image['category_id'] }}"
-                        data-subcategory-id="{{ $image['subcategory_id'] }}"
-                        data-category_name="{{ $image['category_name'] }}"  >
+            @endphp
 
-                        <div class="card-img collection-card card-blue">
-                            <img src="{{ $image['image_path'] }}" alt="shower-card">
-                        </div>
+            @foreach ($allImages as $image)
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
+                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                    data-category-id="{{ $image['category_id'] }}"
+                    data-subcategory-id="{{ $image['subcategory_id'] }}"
+                    data-category_name="{{ $image['category_name'] }}">
 
+                    <div class="card-img collection-card card-blue">
+                        <img src="{{ $image['image_path'] }}" alt="shower-card">
                     </div>
-                @endforeach
-            </div>
+
+                </div>
+            @endforeach
+        </div>
 
 
         {{-- <div class="row list_all_design_catgeory search_category">
@@ -225,7 +229,7 @@
 </section>
 
 @push('scripts')
-{{-- <script>
+    {{-- <script>
     var designData = [];
     var is_random = @php
     echo json_encode($randomIds);
@@ -261,42 +265,40 @@
     console.log(designData); // Check output in browser console
 </script> --}}
 
-<script>
-    var designData = [];
+    <script>
+        var designData = [];
 
-    // Correcting the PHP to JavaScript variable conversion
-    var is_random = {!! json_encode($randomIds) !!};
+        // Correcting the PHP to JavaScript variable conversion
+        var is_random = {!! json_encode($randomIds) !!};
 
 
-    @foreach ($categories as $category)
-        var categoryData = {
-            id: {{ $category->id }},
-            name: "{{ $category->category_name }}",
-            subcategories: []
-        };
-
-        @foreach ($category->subcategory as $subcategory)
-            var subcategoryData = {
-                id: {{ $subcategory->id }},
-                name: "{{ $subcategory->subcategory_name }}",
-                images: []
+        @foreach ($categories as $category)
+            var categoryData = {
+                id: {{ $category->id }},
+                name: "{{ $category->category_name }}",
+                subcategories: []
             };
 
-            @foreach ($subcategory->textdatas as $image)
-                subcategoryData.images.push({
-                    id: {{ $image->id }},
-                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
-                });
+            @foreach ($category->subcategory as $subcategory)
+                var subcategoryData = {
+                    id: {{ $subcategory->id }},
+                    name: "{{ $subcategory->subcategory_name }}",
+                    images: []
+                };
+
+                @foreach ($subcategory->textdatas as $image)
+                    subcategoryData.images.push({
+                        id: {{ $image->id }},
+                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                    });
+                @endforeach
+
+                categoryData.subcategories.push(subcategoryData);
             @endforeach
 
-            categoryData.subcategories.push(subcategoryData);
+            designData.push(categoryData);
         @endforeach
 
-        designData.push(categoryData);
-    @endforeach
-
-    console.log(designData); // Check output in browser console
-</script>
-
+        console.log(designData); // Check output in browser console
+    </script>
 @endpush
-
