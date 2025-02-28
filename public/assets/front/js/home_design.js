@@ -164,11 +164,10 @@ $(document).ready(function () {
         if (query === '') {
             $('#filtered_results').html('');
 
-            // Hide all images first
-            $(".image-item").show();
 
-            // Show default images only
-            $(".image-item.default_show").show();
+
+            // Show only default images
+            $(".default_show").show();
 
             // Ensure checked subcategories are unchecked
             $('input[name="design_subcategory"]').prop('checked', false);
@@ -177,6 +176,7 @@ $(document).ready(function () {
             updateTotalCount();
         }
     });
+
 
 
 
