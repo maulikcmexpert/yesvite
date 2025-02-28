@@ -134,25 +134,20 @@ $(document).ready(function () {
 
         $('#search_design_category').val(selectedText);
         $('#filtered_results').html(''); // Clear search results
+        $('.image-item').hide();
 
-        if ($(this).hasClass('subcategory')) {
+        // Show only matching category and subcategory images
+        $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
 
-            let images = designData.find(c => c.id == categoryId)
-                .subcategories.find(s => s.id == subcategoryId).images;
+        // if ($(this).hasClass('subcategory')) {
 
-            let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item ${is_random.includes(image.id) ? 'default_show' : ''} all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}"  data-image-id="${image.id}">
-                    <div class="card-img collection-card card-blue">
-                        <img src="${image.image_path}" alt="design">
-                    </div>
-                </div>
-            `).join('');
+        //     let images = designData.find(c => c.id == categoryId)
+        //         .subcategories.find(s => s.id == subcategoryId).images;
 
-            $('.list_all_design_catgeory').html(imageHTML);
 
-            // Auto-check the corresponding subcategory checkbox
-            $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
-        }
+        //     // Auto-check the corresponding subcategory checkbox
+        //     $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
+        // }
 
         $('.total_design_count').text($('.image-item:visible').length + ' Items');
     });
@@ -171,6 +166,7 @@ $(document).ready(function () {
 
             // Ensure checked subcategories are unchecked
             $('input[name="design_subcategory"]').prop('checked', false);
+
 
             // Update the total count of visible images
             updateTotalCount();
