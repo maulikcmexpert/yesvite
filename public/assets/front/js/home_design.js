@@ -144,6 +144,8 @@ $(document).ready(function () {
                 `).join('');
 
                 $('.list_all_design_catgeory').html(imageHTML);
+                var visibleItems = $('.image-item:visible').length;
+                $('.total_design_count').text(visibleItems + ' Items');
             }
         });
 
