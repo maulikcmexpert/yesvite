@@ -121,9 +121,8 @@ $(document).ready(function () {
             $('#filtered_results').html('');
             $(".list_all_design_catgeory").html($(".default_show").html());
 
-            // Ensure all default images are shown again
             $(".image-item").show();
-            $(".image-item-new").hide(); // Hide new images if necessary
+            $(".default_show").show();
 
             // Reset total count
             $('.total_design_count').text($('.image-item:visible').length + ' Items');
