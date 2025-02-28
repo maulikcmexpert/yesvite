@@ -141,7 +141,7 @@
             </div>
 
 
-            <div class="row list_all_design_catgeory_new">
+            {{-- <div class="row list_all_design_catgeory_new">
                 <div class="d-flex align-items-center mb-2" style="gap: 15px">
                     <p id="allchecked" data-categoryid="0" data-subcategoryid="0" style="display:none"><i
                             class="fa-solid fa-arrow-left" style="color: #212529; cursor: pointer;"></i></p>
@@ -165,7 +165,7 @@
                                             <img src="{{ asset('storage/canvas/' . $image->filled_image) }}"
                                                 alt="shower-card">
                                         </div>
-                                        {{-- <h4>{{ $category->category_name }}</h4> --}}
+                                        {{-- <h4>{{ $category->category_name }}</h4>
                                     </a>
                                 </div>
                             @endforeach
@@ -173,7 +173,7 @@
                     @endforeach
                 </div>
 
-            </div>
+            </div> --}}
         </div>
     </section>
 </div>
