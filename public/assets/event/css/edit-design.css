@@ -2142,7 +2142,7 @@
         padding-top: 0px;
     }
     .edit-images-button-wrp {
-        max-width: 800px !important;
+        max-width: 800px;
     }
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
         height: calc(100vh - 112px) !important;
