@@ -2921,7 +2921,7 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_id").val(conversationId);
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
-
+            sendAppLink(contactId);
             const messageData = {
                 data: message,
                 timeStamp: Date.now(),
@@ -4804,15 +4804,14 @@ if (host_id != undefined && host_id != "") {
     await sendMessageHost(host_id, host_name, host_image, "host");
 }
 
-function sendAppLink(email,send_by){
+function sendAppLink(userId) {
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        data: { email: email,send_by:send_by },
+        data: { userId },
         url: base_url + "sendAppLink",
         method: "POST",
-        success: function (response) {
-        },
+        success: function (response) {},
     });
 }
