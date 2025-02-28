@@ -14,7 +14,7 @@ $invite=$all_invited_user['all_invited_users'];
 <li class="guests-listing-info contact contactslist" data-guest-id="{{ $guest['guest_id'] }}" data-is_sync="{{ $guest['is_sync'] }}">
                             <div class="d-flex align-items-center justify-content-between w-100 gap-2">
                                     <div class="posts-card-head-left guests-listing-left">
-                                        <div class="posts-card-head-left-img guest-users"  data-userId="{{$guest['userId']}}">
+                                        <div class="posts-card-head-left-img guest-users active_slide_bar"  data-userId="{{$guest['userId']}}">
                                             @if (!empty($guest['profile']))
                                                 <img src="{{ $guest['profile'] }}"
                                                     alt="">
@@ -84,7 +84,7 @@ $invite=$all_invited_user['all_invited_users'];
                                                         </svg>
                                                     </span>
                                                 @endif
-                                            @endif   
+                                            @endif
                                             </div>
                                             @if ($is_host == 1)
                                             @if($guest['is_sync']=="1")
@@ -126,17 +126,17 @@ $invite=$all_invited_user['all_invited_users'];
                                         @elseif($guest['rsvp_status'] == '0')
                                             <div class="sucess-no">
                                                     <h5>NO</h5>
-                                                
+
                                             </div>
                                         @else
                                             <div class="no-reply">
                                                         <h5>NO REPLY</h5>
-                                                    
+
                                                 </div>
                                             @endif
                             @else
                                             @if ($guest['rsvp_status'] == '1')
-    
+
                                             <div class="sucess-yes">
                                                     <h5 class="green">YES</h5>
                                                     <div class="sucesss-cat ms-auto">
@@ -156,11 +156,11 @@ $invite=$all_invited_user['all_invited_users'];
                                                         </h5>
                                                     </div>
                                             </div>
-    
+
                                             @elseif($guest['rsvp_status'] == '0')
                                                 <div class="sucess-no">
                                                         <h5>NO</h5>
-    
+
                                                 </div>
                                             @endif
                                 @endif
