@@ -137,12 +137,8 @@ $(document).ready(function () {
         $('.image-item').hide();
 
         if (categoryId && subcategoryId) {
-            // Show only images that match category and subcategory
+
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        } else if (categoryId) {
-
-
-            $('.image-item').show();
         }
 
         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
