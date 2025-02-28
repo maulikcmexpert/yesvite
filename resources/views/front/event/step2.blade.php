@@ -395,7 +395,7 @@
 
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
-                $('#filtered_results').hide();
+
                 if (query === '') {
                     $('#filtered_results').html('');
 
