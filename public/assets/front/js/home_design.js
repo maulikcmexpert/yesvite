@@ -159,40 +159,20 @@ $(document).ready(function () {
 
 
     $('#search_design_category').on('input', function () {
-        let query = $(this).val().trim().toLowerCase();
+        let query = $(this).val().trim();
 
         if (query === '') {
-            // Clear search results
             $('#filtered_results').html('');
 
-            // Show all images (default and new)
-            $(".image-item").show();
-            $(".image-item-new").show();
 
-            // Uncheck all subcategory checkboxes
+
+            // Show only default images
+            $(".default_show").show();
+
+            // Ensure checked subcategories are unchecked
             $('input[name="design_subcategory"]').prop('checked', false);
 
             // Update the total count of visible images
-            updateTotalCount();
-        } else {
-            // Hide all images first
-            $(".image-item").hide();
-            $(".image-item-new").hide();
-
-
-            designData.forEach(category => {
-                if (category.name.toLowerCase().includes(query)) {
-                    // Show all images belonging to this category
-                    $(`.image-item[data-category-id="${category.id}"]`).show();
-                }
-                category.subcategories.forEach(subcategory => {
-                    if (subcategory.name.toLowerCase().includes(query)) {
-                        // Show all images belonging to this subcategory
-                        $(`.image-item[data-category-id="${category.id}"][data-subcategory-id="${subcategory.id}"]`).show();
-                    }
-                });
-            });
-
             updateTotalCount();
         }
     });
