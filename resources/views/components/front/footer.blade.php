@@ -689,7 +689,6 @@
                 let i = 0
                 for (const userElement of users) {
                     const userid = userElement.getAttribute("data-userid");
-                    // console.log({userId})
                     if (!userid) continue; // Skip if no userId
 
                     let userData = await getUser(userid);
@@ -697,6 +696,8 @@
                     if (userData?.userStatus?.toLowerCase() === "online") {
                         if (userElement.classList.contains("active_slide_bar")) {
                             i = i + 1;
+                    console.log({userid})
+
                         }
 
                         statusClass = "active-dot";
@@ -706,6 +707,8 @@
                     if (userId == userid) {
                         if (userElement.classList.contains("active_slide_bar")) {
                             i = i + 1;
+                    console.log({userId})
+
                         }
 
                         statusClass = "active-dot";
