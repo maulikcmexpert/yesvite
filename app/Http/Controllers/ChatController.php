@@ -194,6 +194,7 @@ class ChatController extends BaseController
     }
 
 
+
     public function get_user_by_name(Request $request)
     {
         $name = $request->input('username');
@@ -531,6 +532,46 @@ class ChatController extends BaseController
         } catch (\Exception $e) {
 
             return redirect('messages')->with('msg_error', 'Something went wrong!');
+        }
+    }
+
+    public function sendAppLink(Request $request){
+        $userdata = ['send_by' => $request->send_by];
+        $email=$request->email;
+        $send_by=$request->send_by;
+    
+
+        $user = User::where('email', $request->email)->first();
+        if (isset($user->id)) {
+            $user_id = $user->id;
+
+            try {
+                $checkNotificationSetting = checkNotificationSetting($user_id);
+                if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$send_by) {
+                        $message->to($email);
+                        // $message->subject('Yesvite Invite');
+                       $message->subject('Yesvite: You have a new message by ' . $send_by);
+
+                    });
+                    return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
+                } elseif (count($checkNotificationSetting) == 0) {
+
+
+                    add_user_firebase($user_id);    // Add User in Firebase
+
+
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$send_by) {
+                        $message->to($email);
+                        // $message->subject('Yesvite Invite');
+                        $message->subject('Yesvite: You have a new message by ' . $send_by);
+
+                    });
+                    return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
+                }
+            } catch (\Exception $e) {
+                return response()->json(['status' => 0, 'message' => 'Mail not sent', 'error' => $e->getMessage()]);
+            }
         }
     }
 }

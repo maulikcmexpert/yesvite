@@ -4803,3 +4803,16 @@ if (host_id != undefined && host_id != "") {
     let host_name = $("#host_name").val();
     await sendMessageHost(host_id, host_name, host_image, "host");
 }
+
+function sendAppLink(email,send_by){
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: { email: email,send_by:send_by },
+        url: base_url + "sendAppLink",
+        method: "POST",
+        success: function (response) {
+        },
+    });
+}
