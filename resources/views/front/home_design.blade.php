@@ -223,3 +223,25 @@
 
     </div>
 </section>
+@push('scripts')
+<script>
+    var designData = @json($categories->map(function ($category) {
+        return [
+            'id' => $category->id,
+            'name' => $category->category_name,
+            'subcategories' => $category->subcategory->map(function ($subcategory) {
+                return [
+                    'id' => $subcategory->id,
+                    'name' => $subcategory->subcategory_name,
+                    'images' => $subcategory->textdatas->map(function ($image) {
+                        return [
+                            'id' => $image->id,
+                            'image_path' => asset('storage/canvas/' . $image->filled_image)
+                        ];
+                    })
+                ];
+            })
+        ];
+    }));
+</script>
+@endpush
