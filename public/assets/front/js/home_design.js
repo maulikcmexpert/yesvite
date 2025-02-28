@@ -137,7 +137,7 @@ $(document).ready(function () {
 
         $('#search_design_category').val(selectedText);
         $('#filtered_results').html(''); // Clear search results
-
+console.log({designData,is_random})
         if ($(this).hasClass('subcategory')) {
             let images = designData.find(c => c.id == categoryId)
                 .subcategories.find(s => s.id == subcategoryId).images;
@@ -161,20 +161,15 @@ $(document).ready(function () {
 
 
     $('#search_design_category').on('input', function () {
-        let default_s = 0;
+
         if ($(this).val() === '') {
-            default_s++;
             $('#filtered_results').html('');
 
             // $('.image-item').hide(); // Hide all images
-            // $('.default_show').removeClass('d-none').show();
+            $('.default_show').removeClass('d-none').show();
             $('input[name="design_subcategory"]').prop('checked', false);
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
-        }
-        if (default_s == 0) {
-            $(".image-item").removeClass('d-none');
-            $(".default_show").show();
         }
     });
 

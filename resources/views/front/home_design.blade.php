@@ -227,8 +227,8 @@
 @push('scripts')
 <script>
     var designData = [];
-
-    @foreach ($categories as $category)
+var is_random =  $randomIds;
+    @foreach ($categoroies as $category)
         var categoryData = {
             id: {{ $category->id }},
             name: "{{ $category->category_name }}",
