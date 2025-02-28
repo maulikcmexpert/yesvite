@@ -139,6 +139,7 @@ $(document).ready(function () {
         $('#filtered_results').html(''); // Clear search results
 
         if ($(this).hasClass('subcategory')) {
+            alert();
             let images = designData.find(c => c.id == categoryId)
                 .subcategories.find(s => s.id == subcategoryId).images;
 
