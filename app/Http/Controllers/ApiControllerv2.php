@@ -8233,7 +8233,7 @@ class ApiControllerv2 extends Controller
                     $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->sync_id)) {
+                    if (!empty($value->sync_id)&& empty($value->user_id)) {
              
                         $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                         $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
@@ -8418,7 +8418,7 @@ class ApiControllerv2 extends Controller
                     
                     // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                     // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    if (!empty($value->sync_id)) {
+                    if (!empty($value->sync_id)&&empty($value->user_id)) {
              
                         $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                         $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
