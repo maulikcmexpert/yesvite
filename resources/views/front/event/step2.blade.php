@@ -388,11 +388,11 @@
 
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
-
+                $('#filtered_results').show();
                 if (query === '') {
                     $('#filtered_results').html('');
 
-
+                    $('#filtered_results').hide();
 
                     // Show only default images
                     $(".default_show").show();
