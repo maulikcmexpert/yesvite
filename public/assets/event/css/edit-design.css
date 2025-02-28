@@ -1974,6 +1974,10 @@
     .edit-imag-main-content-wrp .choose-design-sidebar{
         height: calc(100vh - 112px) !important;
     }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
    
 }
 
@@ -2076,6 +2080,10 @@
     .edit-imag-main-content-wrp .choose-design-sidebar{
         height: calc(100vh - 112px) !important;
     }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 2000px) and (max-width: 2399px){
@@ -2150,6 +2158,10 @@
     .edit-imag-main-content-wrp .choose-design-sidebar{
         height: calc(100vh - 112px) !important;
     }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (min-width: 1600px) and (max-width: 1999px){
@@ -2215,6 +2227,10 @@
     }
     .edit-imag-main-content-wrp .choose-design-sidebar{
         height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
     }
 }
 
