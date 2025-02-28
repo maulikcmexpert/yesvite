@@ -787,7 +787,8 @@ class RsvpController extends BaseController
                 } else {
                     $invitedUser = new EventInvitedUser();
                     $invitedUser->event_id = $eventId;
-                    $invitedUser->user_id = ($userType == 'user') ? $newUserId : $user_sync_id;
+                    // $invitedUser->user_id = ($userType == 'user') ? $newUserId : $user_sync_id;
+                    $invitedUser->user_id = ($userType == 'user') ? $newUserId : null;
                     $invitedUser->sync_id = ($userType == 'sync') ? $newUserId : null;
                     $invitedUser->prefer_by = 'email';
                     $invitedUser->invitation_sent = '1';
