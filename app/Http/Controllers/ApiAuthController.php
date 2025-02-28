@@ -12,6 +12,9 @@ use App\Mail\forgotpasswordMail;
 use App\Models\Coin_transactions;
 use App\Models\Device;
 use App\Models\LoginHistory;
+use App\Models\contact_sync;
+use App\Models\EventInvitedUser;
+use App\Models\EventPost;
 
 
 use Illuminate\Support\Facades\Validator;
@@ -751,6 +754,19 @@ class ApiAuthController extends Controller
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
                 $verifyUser->save();
+                $checkContactSync=contact_sync::where('email',$verifyUser->email)->first();
+                if($checkContactSync){
+                    $checkContactSync->userId=$verifyUser->id;
+                    $checkContactSync->updated_at = now();
+                    $checkContactSync->save();
+    
+                    EventInvitedUser::where('sync_id', $checkContactSync->id)
+                    ->update(['user_id' => $verifyUser->id]);
+    
+                    EventPost::where('sync_id',$checkContactSync->id)
+                    ->update(['user_id'=>$verifyUser->id]);
+                
+                }
                 $message = "Email Verification Successful\nYou may now log into your Yesvite account here";
                 return view('emailVarification', compact('message', 'faild'));
             } else {
