@@ -357,11 +357,11 @@ class EventListController extends BaseController
         
             if($from_page=="past"){
                 $allPastEvents = $allPastEventsQuery
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->get();
             }else{
                 $allPastEvents = $allPastEventsQuery
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->offset(0)
                 ->limit(10)
                 ->get();
@@ -725,7 +725,7 @@ class EventListController extends BaseController
 
         // Apply offset and limit
         $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc') // Adjust ordering if needed
+            ->orderBy('start_date', 'desc') // Adjust ordering if needed
             ->offset($offset)
             ->limit($limit)
             ->get();
@@ -1432,7 +1432,7 @@ class EventListController extends BaseController
 
         // Apply offset and limit
         $allPastEvents = $allPastEventsQuery
-            ->orderBy('start_date', 'asc')
+            ->orderBy('start_date', 'desc')
             ->get();
 
         $totalCounts = 0;
@@ -1587,9 +1587,13 @@ class EventListController extends BaseController
 
             if ($page == "upcoming") {
                 $allEvent = $allEvent->where('start_date', '>=', date('Y-m-d'));
+                $allEvent = $allEvent->orderBy('start_date', 'ASC')->get();
+
             }
             if ($page == "past") {
                 $allEvent = $allEvent->where('end_date', '<', date('Y-m-d'));
+                $allEvent = $allEvent->orderBy('start_date', 'desc')->get();
+
             }
             // ->where('start_date', '>=', date('Y-m-d'))
             // ->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
@@ -1599,7 +1603,7 @@ class EventListController extends BaseController
             // })->when($month && $year, function ($query) use ($month, $year) {
             //     return   $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
             // })
-            $allEvent = $allEvent->orderBy('start_date', 'ASC')->get();
+            // $allEvent = $allEvent->orderBy('start_date', 'ASC')->get();
             // ->paginate($this->perPage, ['*'], 'page', $page);
             // Make sure to handle the retrieved $userInvitedEventList accordingly
 
@@ -1751,7 +1755,7 @@ class EventListController extends BaseController
                     $query->where('start_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC');
                 }
                 if ($page == "past") {
-                    $query->where('end_date', '<', date('Y-m-d'))->orderBy('start_date', 'asc');
+                    $query->where('end_date', '<', date('Y-m-d'))->orderBy('start_date', 'desc');
                 }
 
                 $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
@@ -1921,7 +1925,7 @@ class EventListController extends BaseController
                 if ($page == "past") {
                     $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'))
                         ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                        ->orderBy('start_date', 'ASC');
+                        ->orderBy('start_date', 'desc');
                 }
 
 
