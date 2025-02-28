@@ -106,7 +106,7 @@ $(document).ready(function () {
         if (query.length > 0) {
             designData.forEach(category => {
                 if (category.name.toLowerCase().includes(query)) {
-                    results += `<div class="search-item category" data-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+                    results += `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                 }
                 category.subcategories.forEach(subcategory => {
                     if (subcategory.name.toLowerCase().includes(query)) {
