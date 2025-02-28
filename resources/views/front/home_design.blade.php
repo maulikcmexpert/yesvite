@@ -226,25 +226,36 @@
 
 @push('scripts')
 <script>
-    var designData = @json($categories->map(function ($category) {
-        return [
-            'id' => $category->id,
-            'name' => $category->category_name,
-            'subcategories' => $category->subcategory->map(function ($subcategory) {
-                return [
-                    'id' => $subcategory->id,
-                    'name' => $subcategory->subcategory_name,
-                    'images' => $subcategory->textdatas->map(function ($image) {
-                        return [
-                            'id' => $image->id,
-                            'image_path' => asset('storage/canvas/' . $image->filled_image)
-                        ];
-                    })->toArray(), // Convert collection to array
-                ];
-            })->toArray(), // Convert collection to array
-        ];
-    })->toArray()); // Convert collection to array
+    var designData = [];
+
+    @foreach ($categories as $category)
+        var categoryData = {
+            id: {{ $category->id }},
+            name: "{{ $category->category_name }}",
+            subcategories: []
+        };
+
+        @foreach ($category->subcategory as $subcategory)
+            var subcategoryData = {
+                id: {{ $subcategory->id }},
+                name: "{{ $subcategory->subcategory_name }}",
+                images: []
+            };
+
+            @foreach ($subcategory->textdatas as $image)
+                subcategoryData.images.push({
+                    id: {{ $image->id }},
+                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                });
+            @endforeach
+
+            categoryData.subcategories.push(subcategoryData);
+        @endforeach
+
+        designData.push(categoryData);
+    @endforeach
+
+    console.log(designData); // Check output in browser console
 </script>
 @endpush
-
 
