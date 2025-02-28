@@ -536,12 +536,17 @@ class ChatController extends BaseController
     }
 
     public function sendAppLink(Request $request){
-        $userdata = ['send_by' => $request->send_by];
-        $email=$request->email;
+        $user_data = Auth::guard('web')->user();
+        $reciever_name=$user_data->firstname.' '.$user_data->lastname;
+        $userdata = ['send_by' => $reciever_name];
+        // dd($user_data,$request->userId);
+        // $email=$request->email;
+
         $send_by=$request->send_by;
     
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('id', $request->userId)->first();
+        $email=$user->email;
         if (isset($user->id)) {
             $user_id = $user->id;
 
