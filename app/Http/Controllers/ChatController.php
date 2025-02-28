@@ -539,7 +539,7 @@ class ChatController extends BaseController
         $user_data = Auth::guard('web')->user();
         $reciever_name=$user_data->firstname.' '.$user_data->lastname;
         $userdata = ['send_by' => $reciever_name];
-        dd($user_data,$request->userId);
+        // dd($user_data,$request->userId);
         // $email=$request->email;
 
         $send_by=$request->send_by;
