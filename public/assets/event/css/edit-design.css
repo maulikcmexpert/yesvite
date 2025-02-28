@@ -1099,7 +1099,25 @@
         font-size: 14px !important;
     }
 }
-@media only screen and (min-width: 1600px) and (max-width: 1999px) and (min-height: 1900px) and (max-height: 1999px){
+@media only screen and (min-width: 1800px) and (max-width: 1999px) and (min-height: 1900px) and (max-height: 1999px){
+    .image-edit-inner-img {
+        width: 900px !important;
+        height: calc(100vh - 500px) !important;
+        margin: 0px auto !important;
+    }
+
+    .edit-images-button-wrp {
+        max-width: 600px !important;
+    }
+    .edit-images-button-inner button span {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .edit-images-button-inner button h6 {
+        font-size: 14px !important;
+    }
+}
+@media only screen and (min-width: 1600px) and (max-width: 1799px) and (min-height: 1900px) and (max-height: 1999px){
     .image-edit-inner-img {
         width: 750px !important;
         height: calc(100vh - 700px) !important;
