@@ -5,19 +5,20 @@
 
                 <div class="position-relative search-wrapper">
                     <div class="position-relative">
-                    <input type="search" id="search_design_category" placeholder="Search design categories" class="" autocomplete="off" >
-                    <span class="">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-                                stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                            <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-                    </span>
-                </div>
+                        <input type="search" id="search_design_category" placeholder="Search design categories"
+                            class="" autocomplete="off">
+                        <span class="">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+                                    stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                                <path d="M22 22L20 20" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    </div>
                     <div id="filtered_results" class="filtered-results-container"></div>
 
                 </div>
@@ -114,7 +115,8 @@
                                     'subcategory_id' => $subcategory->id,
                                     'category_name' => $category->category_name,
                                     'static_information' => json_encode($image->static_information),
-                                    'shape_image'=> $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                                    'shape_image' =>
+                                        $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
                                     'image_path' => asset('storage/canvas/' . $image->filled_image),
                                     'image' => asset('storage/canvas/' . $image->image),
                                 ]);
@@ -126,22 +128,20 @@
                     $randomIds = array_slice($randomIds, 0, 30);
 
                     // $randomImages = $allImages->shuffle()->take(30);
+
                 @endphp
 
                 @foreach ($allImages as $image)
-                    <div
-                        class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
-                         {{in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none'}} "
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
+                         {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }} "
                         data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                         data-category-id="{{ $image['category_id'] }}"
                         data-subcategory-id="{{ $image['subcategory_id'] }}"
-                        data-category_name="{{ $image['category_name'] }}"  >
+                        data-category_name="{{ $image['category_name'] }}">
 
                         <div class="card-img collection-card card-blue edit_design_tem design-card"
-                        data-image="{{$image['image']}}"
-                        data-shape_image="{{ $image['shape_image'] }}"
-                        data-json="{{ $image['static_information']}}"
-                        data-id="{{$image['imageId'] }}"  >
+                            data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
+                            data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}">
                             <img src="{{ $image['image_path'] }}" alt="shower-card">
                         </div>
 
@@ -320,7 +320,13 @@
                 var visibleItems = $('.image-item:visible').length;
                 $('.total_design_count').text(visibleItems + ' Items');
             });
-            $('#filtered_results').hide();
+            if ($('#search_design_category').is(':focus')) {
+                $('#filtered_results').show();
+            } else {
+                $('#filtered_results').hide();
+            }
+
+
             $('#search_design_category').on('keyup', function() {
                 let query = $(this).val().toLowerCase();
                 $('#filtered_results').show();
