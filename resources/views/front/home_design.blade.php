@@ -223,7 +223,7 @@
 
     </div>
 </section>
-@push('scripts')
+
 <script>
     var designData = @json($categories->map(function ($category) {
         return [
@@ -244,7 +244,7 @@
         ];
     })->toArray()); // Convert collection to array
 </script>
-@endpush
+
 
 
 
