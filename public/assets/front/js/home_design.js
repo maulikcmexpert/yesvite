@@ -141,15 +141,10 @@ $(document).ready(function () {
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
         } else if (categoryId) {
 
-            let categoryImages = $(`.image-item[data-category-id="${categoryId}"]`);
 
-            if (categoryImages.length > 0) {
-                categoryImages.show();
-            } else {
-
-                $(`.image-item[data-category-id="${categoryId}"]`).show();
-            }
+            $('.image-item').show();
         }
+
         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         // if ($(this).hasClass('subcategory')) {
 
