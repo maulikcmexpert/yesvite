@@ -143,7 +143,7 @@ $(document).ready(function () {
                 .subcategories.find(s => s.id == subcategoryId).images;
 
             let imageHTML = images.map(image => `
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs" data-category-id="${categoryId}" data-subcategory-id="${subcategoryId}">
                     <div class="card-img collection-card card-blue">
                         <img src="${image.image_path}" alt="design">
                     </div>
@@ -151,6 +151,9 @@ $(document).ready(function () {
             `).join('');
 
             $('.list_all_design_catgeory').html(imageHTML);
+
+            // Auto-check the corresponding subcategory checkbox
+            $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         }
 
         $('.total_design_count').text($('.image-item:visible').length + ' Items');
