@@ -1120,7 +1120,7 @@
 @media only screen and (min-width: 1600px) and (max-width: 1799px) and (min-height: 2000px) and (max-height: 2999px){
     .image-edit-inner-img {
         width: 750px !important;
-        height: calc(100vh - 700px) !important;
+        height: calc(100vh - 800px) !important;
         margin: 0px auto !important;
     }
 
