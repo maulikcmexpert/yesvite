@@ -137,7 +137,7 @@ $(document).ready(function () {
 
         $('#search_design_category').val(selectedText);
         $('#filtered_results').html(''); // Clear search results
-// console.log({designData,is_random})
+
         if ($(this).hasClass('subcategory')) {
             let images = designData.find(c => c.id == categoryId)
                 .subcategories.find(s => s.id == subcategoryId).images;
