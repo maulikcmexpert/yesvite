@@ -106,7 +106,7 @@ $(document).ready(function () {
         if (query.length > 0) {
             designData.forEach(category => {
                 if (category.name.toLowerCase().includes(query)) {
-                    results += `<div class="search-item category" data-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+                    results += `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                 }
                 category.subcategories.forEach(subcategory => {
                     if (subcategory.name.toLowerCase().includes(query)) {
@@ -137,12 +137,14 @@ $(document).ready(function () {
         $('.image-item').hide();
 
         if (categoryId && subcategoryId) {
-
+            // Show only images that match category and subcategory
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
         } else if (categoryId) {
-            // Show all images under the selected category
+
+
             $(`.image-item[data-category-id="${categoryId}"]`).show();
         }
+
         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop('checked', true);
         // if ($(this).hasClass('subcategory')) {
 
