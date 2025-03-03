@@ -3324,6 +3324,9 @@ main.new-main-content {
     .hosted-by-template-slider-img {
       height: 400px;
     }
+    .create-post-modal .modal-body {
+      max-height: calc(100vh - 150px);
+    }
 
   }
 
