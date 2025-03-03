@@ -3041,6 +3041,9 @@ main.new-main-content {
       max-height: calc(100vh - 100px);
       padding-bottom: 50px;
     }
+    .create-post-upload-img-inner {
+      min-height: calc(100vh - 410px);
+    }
   }
 
   @media only screen and (min-width: 1600px) and (max-width: 1799px) {
