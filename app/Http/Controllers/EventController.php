@@ -4268,12 +4268,15 @@ class EventController extends BaseController
             $gift = '1';
         }
         Session::save();
+        $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($eventId).'/'.encrypt(1));
+        $shortLink = createShortUrl($eventLink);
         if ($request->is_update_event == '0' && isset($request->isDraftEdit) && $request->isDraftEdit == "1") {
             return response()->json([
                 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
                 'isupadte' => false,
                 'is_registry' => $gift,
+                'copy_link'=>$shortLink,
                 'event_id' => encrypt($eventId)
             ]);
         } else {
@@ -4281,6 +4284,7 @@ class EventController extends BaseController
                 // 'view' => view('front.event.gift_registry.view_gift_registry', compact('registry'))->render(),
                 'success' => true,
                 'isupadte' => true,
+                'copy_link'=>$shortLink,
                 'is_registry' => $gift
             ]);
         }
