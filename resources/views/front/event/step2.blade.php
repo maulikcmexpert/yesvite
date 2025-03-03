@@ -72,6 +72,7 @@
                                                                         <input
                                                                             class="form-check-input categoryChecked_{{ $category->id }}"
                                                                             name="design_subcategory" type="checkbox"
+                                                                             value="{{ $subcategory->subcategory_name }}"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -93,6 +94,7 @@
 
                     </div>
                 </div>
+                <div class="selected-items"></div>
                 <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
             </div>
 
@@ -274,31 +276,51 @@
             });
 
             // Handle individual subcategory checkbox change
-            $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
-                $(".image-item").hide(); // Hide all default images
-                $(".image-item-new").hide(); // Hide all new images
+            $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
+        $(".image-item").hide(); // Hide all default images
+        $(".image-item-new").hide(); // Hide all new images
 
-                let default_s = 0;
+        let default_s = 0;
+        var value = $(this).val();
 
-                $('input[name="design_subcategory"]:checked').each(function() {
-                    default_s++;
-                    $(".image-item").removeClass('d-none');
-                    const categoryId = $(this).data('category-id');
-                    const subcategoryId = $(this).data('subcategory-id');
+        if ($(this).is(":checked")) {
+            $(".selected-items").append(
+                `<span class="selected-item" data-value="${value}">
+                ${value} <span class="close-btn">x</span>
+            </span>`
+            );
+        } else {
+            $(".selected-items").find(`[data-value='${value}']`).remove();
+        }
 
-                    // Show filtered images matching checked categories and subcategories
-                    $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                        .show();
 
-                });
+        $('input[name="design_subcategory"]:checked').each(function () {
+            default_s++;
+            $(".image-item").removeClass('d-none');
+            const categoryId = $(this).data('category-id');
+            const subcategoryId = $(this).data('subcategory-id');
 
-                if (default_s == 0) {
-                    $(".image-item").removeClass('d-none');
-                    $(".default_show").show();
-                }
-                updateTotalCount();
-            });
+            // Show filtered images matching checked categories and subcategories
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
 
+        });
+
+        if (default_s == 0) {
+            $(".image-item").removeClass('d-none');
+            $(".default_show").show();
+        }
+        updateTotalCount();
+    });
+    $(document).on("click", ".close-btn", function () {
+        var parent = $(this).parent();
+        var value = parent.attr("data-value");
+
+        // Uncheck the corresponding checkbox
+        $('input[name="design_subcategory"][value="' + value + '"]').prop("checked", false).trigger("change");
+
+        // Remove the selected item from the list
+        parent.remove();
+    });
             // Function to update total count of visible items
             function updateTotalCount() {
                 var visibleItems = $('.image-item:visible, .image-item-new:visible').length;
