@@ -1087,7 +1087,8 @@ $(document).ready(function () {
             document.getElementById("pollContent").value = postContent;
 
             // Show the loader inside the button
-            $this.html('<div class="loader_11"></div>')
+            $this.html('<div class="loader_11"><span></span><span></span><span></span><span></span></div>')
+            .css({ "display": "flex", "align-items": "center", "justify-content": "center" }) // Ensure visibility
             .prop("disabled", true);
 
             pollForm.submit();
@@ -1106,7 +1107,9 @@ $(document).ready(function () {
             }
 
             // Show the loader inside the button
-            $this.html('<div class="loader_11"></div>').prop("disabled", true);
+            $this.html('<div class="loader_11"><span></span><span></span><span></span><span></span></div>')
+            .css({ "display": "flex", "align-items": "center", "justify-content": "center" }) // Ensure visibility
+            .prop("disabled", true);
 
             photoForm.submit();
         }
