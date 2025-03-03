@@ -39,7 +39,7 @@ $(document).ready(function () {
                 return;
             }
 
-            $this.prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post

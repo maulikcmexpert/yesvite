@@ -1759,8 +1759,21 @@
         // Update color picker when object selection changes
         canvas.on('selection:created', updateColorPicker);
         canvas.on('selection:updated', updateColorPicker);
+        let hasMoved = false; // 🛑 Prevent multiple undo entries for a single move
 
-        // Update the color picker when the color type (font/background) changes
+        canvas.on("object:moving", function (event) {
+            var activeObject = event.target;
+            if (activeObject && activeObject.type === "textbox" && !hasMoved) {
+                addToUndoStack(canvas); // ✅ Save only the initial position before moving
+                hasMoved = true; // 🚀 Prevent duplicate entries
+            }
+        });
+
+        // 🛠 Reset flag after movement is finished
+        canvas.on("object:modified", function () {
+            hasMoved = false; // 🔄 Allow next movement to be saved in undo
+        });
+                // Update the color picker when the color type (font/background) changes
         $('.colorTypeInp').click(function(e) {
             e.stopPropagation()
             console.log(123)

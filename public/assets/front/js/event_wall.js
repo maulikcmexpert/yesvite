@@ -1085,7 +1085,10 @@ $(document).ready(function () {
 
         if (pollForm.is(":visible") && pollForm.length > 0 ) {
             document.getElementById("pollContent").value = postContent;
-
+            if (pollForm && pollForm.length < 0 && postContent === "") {
+                toastr.error("Please filled the poll form.");
+                return;
+            }
             // Show the loader inside the button
             $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
 
