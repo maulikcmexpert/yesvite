@@ -1129,7 +1129,7 @@ class EventWallController extends BaseController
                 $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
             },
             'event_invited_user' => function ($query) {
-                $query->where('is_co_host', '1')->with('user');
+                $query->where('is_co_host', '0')->with('user');
             }
         ])->where('id', $event)->first();
 
