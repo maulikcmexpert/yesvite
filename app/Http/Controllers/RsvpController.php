@@ -165,7 +165,8 @@ class RsvpController extends BaseController
         if ($event_invited_user_id == "") {
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
-            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->user_id;
+            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first();
+            dd($user_id);
         }
         // dd($user_id);
         $sync_id = "";
