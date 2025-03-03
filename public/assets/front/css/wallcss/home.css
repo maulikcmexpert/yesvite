@@ -2997,9 +2997,25 @@ main.new-main-content {
     border: 1px solidvar(--primaryColor) !important;
   }
 
-  .hosted-by-template-slider-img.disable-class{
+  .loader_11 {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+}
 
-  }
+.loader_11::before {
+    content: "• • • •";
+    font-size: 24px;
+    letter-spacing: 4px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 
   .hosted-by-template-slider-img.disable-class{
       position: relative;

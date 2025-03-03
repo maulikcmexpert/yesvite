@@ -1262,7 +1262,7 @@
                             </button>
                         </div>
                         <div class="">
-                            <button type ="button" class="cmn-btn create_post_btn">
+                            <button type ="button" class="cmn-btn create_post_btn loader_11">
                                 post
                             </button>
                         </div>
