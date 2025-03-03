@@ -367,7 +367,7 @@ class EventController extends BaseController
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
                 if(isset($eventDetail['co_host_list']) && $eventDetail['co_host_list'][0]['id'] ==$id ||  $getEventData->user_id == $id ){
                 }else{
-                    return redirect()->route('front.home')
+                    return redirect()->route('front.home');
                     // dD(1);
                 }
 
