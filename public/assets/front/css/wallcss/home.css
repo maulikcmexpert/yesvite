@@ -3035,13 +3035,14 @@ main.new-main-content {
 
 .loader_11 {
     display: flex;
-    justify-content: space-between;
-    width: 30px; /* Adjust width as needed */
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* Adjust spacing between dots */
 }
 
 .loader_11 span {
-    width: 6px;
-    height: 6px;
+    width: 8px; /* Adjust dot size */
+    height: 8px;
     background-color: #ff4a73;
     border-radius: 50%;
     animation: blink 1.2s infinite ease-in-out;
