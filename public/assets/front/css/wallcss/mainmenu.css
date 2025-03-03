@@ -2764,7 +2764,7 @@
     border-radius: 100%;
 }
 
-.disable-class .home-upcoming-events-card-rsvp-data h6 i {
+.disable-class .home-upcoming-events-card-rsvp-data h6 i, .disable-class .home-upcoming-events-card-rsvp-data h6 {
     color: var(--light-color) !important;
 }
 
