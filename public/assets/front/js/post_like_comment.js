@@ -1440,20 +1440,20 @@ $(document).ready(function () {
         $(".phone-checkbox[data-id='" + user_id + "']").prop("checked", false);
         guestList = guestList.filter((guest) => guest.id !== parseInt(user_id));
 
-        let checkedCount = $(".email-checkbox:not(:disabled):checked, .phone-checkbox:not(:disabled):checked").length;
+        let checkedCount = $(".email-checkbox:not(:disabled):checked, .phone-checkbox:not(:disabled):checked, .phoneContact-checkbox:not(:disabled):checked").length;
+        if (checkedCount == 0) {
+            $('.add_guest').attr('disabled',true)
+        } else {
+            $('.add_guest').attr('disabled',false)
+        }
 
-    if (checkedCount == 0) {
-        $('.add_guest').attr('disabled',true)
-    } else {
-        $('.add_guest').attr('disabled',false)
-    }
+        // let checkedCountphone = $(".phoneContact-checkbox:not(:disabled):checked").length;
+        // if (checkedCountphone == 0) {
+        //     $('.add_guest').attr('disabled',true)
+        // } else {
+        //     $('.add_guest').attr('disabled',false)
+        // }
 
-    let checkedCountphone = $(".phoneContact-checkbox:not(:disabled):checked").length;
-    if (checkedCountphone == 0) {
-        $('.add_guest').attr('disabled',true)
-    } else {
-        $('.add_guest').attr('disabled',false)
-    }
     });
 
     $(document).on("click", ".remove_new_phone_added_user", function () {
