@@ -1,3 +1,4 @@
+{{-- {{dd($eventDetails)}} --}}
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
@@ -37,7 +38,7 @@
            role="tab"
            aria-controls="nav-guests"
            aria-selected="{{ $page == 'guest' ? 'true' : 'false' }}">
-            Guests
+           Guests{{ isset($eventDetails['guest_list_visible_to_guests']) ? '(' . $eventDetails['guest_list_visible_to_guests'] . ')' : '' }}
         </a>
 
 

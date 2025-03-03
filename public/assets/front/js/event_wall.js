@@ -1045,9 +1045,8 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .option-poll").each(function (index) {
-            $(this)
-                .find(".option-number")
-                .text(index + 3);
+            $(this).find(".option-number").text(index + 3);
+            $(this).find(".char-count").text("0/140"); // Reset char count
         });
     }
     $("#postContent").keypress(function (event) {
@@ -1133,6 +1132,14 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
+$("#photos_click").on("click", function () {
+
+        $("#create-photo-btn").trigger("click");
+    });
+    $("#poll_click").on("click", function () {
+
+        $("#create-poll-btn").trigger("click");
+    });
 
 
 $(".posts-card-like-btn").on("click", function () {
@@ -1233,9 +1240,18 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#pollForm")[0].reset(); // Reset poll form
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
-
+    $(".char-count").text("0/140"); // Reset char count
+    $(".option-poll").empty();
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
+});
+
+$(".btn-close").on("click", function () {
+
+    $(".char-count").text("0/140"); // Reset char count
+    $(".option-poll").empty();
+    // Add `d-none` class back to hide the div
+
 });
 
 $(".modal").on("shown.bs.modal", function () {
