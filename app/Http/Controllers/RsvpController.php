@@ -603,10 +603,10 @@ class RsvpController extends BaseController
         } catch (QueryException $e) {
 
             DB::rollBack();
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
@@ -1089,7 +1089,7 @@ class RsvpController extends BaseController
                 return redirect('rsvp/' . encrypt("") . '/' . $request->event_id.'/'.encrypt(1))->with('msg_error', 'Rsvp not sent');
             }
         } catch (QueryException $e) {
-            dd($e);
+            // dd($e);
 
             if($request->isShare==""){
               return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'DB error');
@@ -1098,7 +1098,7 @@ class RsvpController extends BaseController
             }
             DB::rollBack();
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{
