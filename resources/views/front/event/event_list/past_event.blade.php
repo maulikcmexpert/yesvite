@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <a href="{{ route('event.event_wall', encrypt($pastEvent['id']))  }}" class="home-upcoming-events-card-right disable-class">
+        <a href="#" class="home-upcoming-events-card-right zoom_img disable-class">
           <img src="{{$pastEvent['event_images']}}" class="lazy" alt="">
       </a>
     </div>
