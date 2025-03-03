@@ -387,37 +387,39 @@ $(document).ready(function () {
             const fileReader = new FileReader();
             fileReader.onload = function (e) {
                 const previewDiv = document.createElement("div");
-                previewDiv.classList.add(imagePreview.children.length === 0 ? "col-12" : "col-6");
+                previewDiv.classList.add(totalFiles === 1 ? "col-12" : "col-6");
                 previewDiv.style.position = "relative";
 
-                // Delete Icon
+                // Create the delete icon
                 const deleteIcon = document.createElement("span");
                 deleteIcon.innerHTML = `
-                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                `;
-                deleteIcon.classList.add("uploaded-delete-icon");
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          `;
+                deleteIcon.classList.add("uploded-delete-icon");
 
-                // Delete functionality
+                // Delete image functionality
                 deleteIcon.addEventListener("click", function () {
                     imagePreview.removeChild(previewDiv);
 
+                    // Check if there are any images left
                     if (imagePreview.children.length === 0) {
                         uploadImgInner.classList.remove("d-none");
                         uploadHeadButton.classList.add("d-none");
 
-                        // Clear file input value
-                        if (fileInput) fileInput.value = "";
+                        // Clear the value of the current file input
+                        currentFileInput.value = "";
                     }
                 });
 
                 previewDiv.appendChild(deleteIcon);
 
+                // Display image or video based on file type
                 if (file.type.startsWith("image/")) {
                     const img = document.createElement("img");
                     img.src = e.target.result;
