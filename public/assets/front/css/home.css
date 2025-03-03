@@ -586,7 +586,7 @@
 }
 
 
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show + .filters-drp .dropdown::after {
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown:has(.dropdown-toggle.show)::after{
     transform: rotate(180deg);
 }
 
@@ -692,6 +692,7 @@
     pointer-events: none;
     font-size: 14px;
     line-height: 1;
+    transition: all 0.3s ease-in-out;
 }
 
 .collection-wrapper .dropdown-toggle::after {

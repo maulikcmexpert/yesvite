@@ -78,10 +78,16 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Slides -->
+                @php
+                    $disable="";
+                    if($eventDetails['end_date']< date('Y-m-d')){
+                        $disable="disable-class";
+                    }
+                @endphp
                 @if ($eventDetails['event_images'])
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
-                            <div class="hosted-by-template-slider-img disable-class">
+                            <div class="hosted-by-template-slider-img {{$disable}}">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
                             <button class="image-zoom-icon" data-img="{{ $image }}"><img
