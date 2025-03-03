@@ -586,7 +586,7 @@
 }
 
 
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show::after {
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show + .filters-drp .dropdown::after {
     transform: rotate(180deg);
 }
 
