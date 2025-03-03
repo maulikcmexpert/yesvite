@@ -38,7 +38,7 @@
            role="tab"
            aria-controls="nav-guests"
            aria-selected="{{ $page == 'guest' ? 'true' : 'false' }}">
-           Guests({{ $eventDetails['guest_list_visible_to_guests'] ?? '' }})
+           Guests{{ isset($eventDetails['guest_list_visible_to_guests']) ? '(' . $eventDetails['guest_list_visible_to_guests'] . ')' : '' }}
         </a>
 
 
