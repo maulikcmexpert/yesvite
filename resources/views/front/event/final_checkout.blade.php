@@ -930,7 +930,6 @@
                 </h5>
                 <input type="hidden" id="created_event_id" />
 
-                <p>Order Party Supplies</p>
                 <div class="new_copy_event_Wrp">
                     <h4 class="title">Share Event Link</h4>
                     <div class="new_copy_event_inner">
@@ -938,6 +937,8 @@
                         <button type="button" id="event_copy_link_btn">Copy Link</button>
                     </div>
                 </div>
+
+                <p class="gift_heading_main d-none">Order Party Supplies</p>
                 <div class="google-play" id="gift_registry_logo">
                     {{--
                 <div class="d-flex align-items-center">
