@@ -2779,9 +2779,17 @@
 .disable-class.home-upcoming-events-card-right{
     position: relative;
 }
-/* .disable-class.home-upcoming-events-card-right::before{
-    
-} */
+.disable-class.home-upcoming-events-card-right::before{
+    content: "PAST EVENT";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    border: 2px solid red;
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 14px;
+}
 
 .upcoming-events-card-notification-wrp > button svg {
     width: 100%;
