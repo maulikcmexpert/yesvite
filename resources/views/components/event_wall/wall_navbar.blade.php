@@ -30,16 +30,15 @@
            aria-selected="{{ ($page == 'about' ? 'true' : 'false') }}">
             About
         </a>
-@php
-     $guest_count =   $eventDetails['guest_list_visible_to_guests'] ?? '' ;
-     @endphp
+
+
         <a href="{{ route('event.event_guest', ['id' => encrypt($event)]) }}"
            class="nav-link {{ $page == 'guest' ? 'active' : '' }}"
            id="nav-guests-tab"
            role="tab"
            aria-controls="nav-guests"
            aria-selected="{{ $page == 'guest' ? 'true' : 'false' }}">
-           Guests({{ $guest_count }})
+           Guests({{ $eventDetails['guest_list_visible_to_guests'] ?? '' }})
         </a>
 
 

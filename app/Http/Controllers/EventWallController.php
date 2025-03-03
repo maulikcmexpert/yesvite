@@ -249,7 +249,7 @@ class EventWallController extends BaseController
             }
 
             if (!empty($value->sync_id)) {
-             
+
                 $username =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                 $profile = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
                 $is_host = ($value->contact_sync->id == $eventCreator->user_id) ? 1 : 0;
@@ -857,7 +857,7 @@ class EventWallController extends BaseController
                 // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 if (!empty($value->sync_id)&&empty($value->user_id)) {
-             
+
                     $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                     $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
                 } else {
@@ -1152,7 +1152,7 @@ class EventWallController extends BaseController
         $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
         $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-        $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
+        $eventDetails['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
         $rsvp_status = "";
         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');
@@ -2630,7 +2630,7 @@ class EventWallController extends BaseController
 
 
 
-        
+
         // Query phone contacts
         // $phoneContacts = contact_sync::where('contact_id', $userId)
         //     ->when(!empty($type), function ($query) use ($type) {
