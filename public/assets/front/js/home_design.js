@@ -58,6 +58,18 @@ $(document).ready(function () {
         $(".image-item-new").hide(); // Hide all new images
 
         let default_s = 0;
+        var value = $(this).val();
+
+    if ($(this).is(":checked")) {
+        $(".selected-items").append(
+            `<span class="selected-item" data-value="${value}">
+                ${value} <span class="close-btn">x</span>
+            </span>`
+        );
+    } else {
+        $(".selected-items").find(`[data-value='${value}']`).remove();
+    }
+
 
         $('input[name="design_subcategory"]:checked').each(function () {
             default_s++;
@@ -76,7 +88,16 @@ $(document).ready(function () {
         }
         updateTotalCount();
     });
+    $(document).on("click", ".close-btn", function() {
+        var parent = $(this).parent();
+        var value = parent.attr("data-value");
 
+        // Uncheck the corresponding checkbox
+        $('input[name="design_subcategory"][value="' + value + '"]').prop("checked", false).trigger("change");
+
+        // Remove the selected item from the list
+        parent.remove();
+    });
     // Function to update total count of visible items
     function updateTotalCount() {
         var visibleItems = $('.image-item:visible, .image-item-new:visible').length;
