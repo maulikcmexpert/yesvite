@@ -1073,66 +1073,46 @@ $(document).ready(function () {
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
         var $this = $(this); // Cache the button
+        var originalText = $this.html(); // Store original button text
 
-        // Prevent multiple clicks
+        // Add loader and disable button
+        $this.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Posting...');
+        $this.prop("disabled", true);
 
-        // if ($this.prop('disabled')) {
-        //     return;
-        // }
-        // Check if the poll form exists and is valid
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
-
         var postContent = $(".post_message").val().trim();
 
-        // Fallback to empty string if #postContent does not exist
-
-        if (pollForm.is(":visible") && pollForm.length > 0 && pollForm !== "") {
-            console.log("Post Content:", postContent);
+        if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
-            $this.prop("disabled", true);
             pollForm.submit();
-        }
-        // If a photo form exists and is visible, submit it
-        else if (photoForm.is(":visible") && photoForm.length > 0) {
+        } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
-            if (
-                photoInput &&
-                photoInput.files.length === 0 &&
-                postContent === ""
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
+
+            if (photoInput && photoInput.files.length === 0 && postContent === "") {
+                toastr.error("Please upload a photo or enter some content for the photo post.");
+                resetButton();
                 return;
             }
 
-            if (
-                photoInput &&
-                photoInput.files.length === 0 &&
-                postContent !== ""
-            ) {
-
+            if (photoInput && photoInput.files.length === 0 && postContent !== "") {
                 document.getElementById("photoPostType").value = 0;
-
             } else {
-
-
                 document.getElementById("photoPostType").value = 1;
             }
 
-
-
-
             photoForm.submit();
-        }
-        // If neither form exists, check for a plain text post
-
-        // If no valid content is provided, show an alert
-        else {
+        } else {
             toastr.error("Please fill all required fields before submitting.");
+            resetButton();
+        }
+
+        function resetButton() {
+            $this.html(originalText);
+            $this.prop("disabled", false);
         }
     });
+
 });
 
 // Wait for the entire page to load
