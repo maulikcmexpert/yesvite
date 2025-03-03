@@ -435,7 +435,87 @@ $(document).on("change", ".fileInputtype", function (event) {
         fileReader.readAsDataURL(file);
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
+    const imagePreview = document.getElementById("imagePreview");
 
+    // Prevent default behavior for drag events
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(event => {
+        dropZone.addEventListener(event, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+
+    // Highlight drop area on drag over
+    dropZone.addEventListener("dragover", () => dropZone.classList.add("drag-over"));
+
+    // Remove highlight when dragging out
+    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+
+    // Handle file drop
+    dropZone.addEventListener("drop", (event) => {
+        dropZone.classList.remove("drag-over");
+        const files = Array.from(event.dataTransfer.files);
+        handleFiles(files);
+    });
+
+    // Handle file selection from input
+    fileInput.addEventListener("change", (event) => {
+        const files = Array.from(event.target.files);
+        handleFiles(files);
+    });
+
+    function handleFiles(files) {
+        files.forEach((file) => {
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                const previewDiv = document.createElement("div");
+                previewDiv.classList.add("col-6");
+                previewDiv.style.position = "relative";
+
+                // Create delete icon
+                const deleteIcon = document.createElement("span");
+                deleteIcon.innerHTML = `
+                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                deleteIcon.classList.add("uploded-delete-icon");
+
+                // Delete image functionality
+                deleteIcon.addEventListener("click", function () {
+                    imagePreview.removeChild(previewDiv);
+                    if (imagePreview.children.length === 0) {
+                        dropZone.classList.remove("d-none");
+                    }
+                });
+
+                previewDiv.appendChild(deleteIcon);
+
+                if (file.type.startsWith("image/")) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("preview-image");
+                    previewDiv.appendChild(img);
+                } else if (file.type.startsWith("video/")) {
+                    const video = document.createElement("video");
+                    video.src = e.target.result;
+                    video.controls = true;
+                    video.classList.add("preview-video");
+                    previewDiv.appendChild(video);
+                }
+
+                imagePreview.appendChild(previewDiv);
+            };
+
+            fileReader.readAsDataURL(file);
+        });
+    }
+});
 
 // Add new option on click
 // $(".option-add-btn").on("click", function () {
