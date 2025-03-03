@@ -1021,6 +1021,9 @@ main:has(.main-content-wrp){
     min-height: auto;
 }
 
+input:-internal-autofill-selected{
+    background-color: #fff !important;
+}
 
 
 @keyframes bounce {

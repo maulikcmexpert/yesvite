@@ -948,6 +948,9 @@ button:focus{
     40% { transform: translateY(-20px); }
 }
 
+input:-internal-autofill-selected{
+    background-color: #fff !important;
+}
 
 
 
