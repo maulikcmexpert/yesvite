@@ -2997,6 +2997,29 @@ main.new-main-content {
   }
 
   /* ===Responsive=== */
+  @media only screen and (min-width: 1800px) {
+    .create-post-modal .modal-content {
+      width: 100%;
+      max-width: 600px;
+      height: 800px;
+  }
+    .create-post-modal .modal-body {
+      max-height: 700px;
+      padding-bottom: 50px;
+    }
+  }
+
+  @media only screen and (min-width: 1600px) and (max-width: 1799px) {
+    .create-post-modal .modal-content {
+      max-width: 600px;
+      height: 700px;
+    }
+    .create-post-modal .modal-body {
+      max-height: 600px;
+      padding-bottom: 50px;
+    }
+  }
+
   @media only screen and (max-width: 1399px) {
     .hosted-by-template-slider-img {
       width: 100%;
