@@ -772,6 +772,9 @@ main.new-main-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .create-post-setting-main-body .btn-back {
@@ -3025,18 +3028,26 @@ main.new-main-content {
 }
 
 .s-loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 15;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    background-color: var(--primaryColor);
+    gap: 8px;
   }
 
   .s-loader div {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: black;
     border-radius: 50%;
     animation: loader 2s ease-in-out infinite;
+    background-color: var(--white);
   }
 
   .s-loader div:nth-child(1) {
@@ -3110,12 +3121,12 @@ main.new-main-content {
     }
 
     .create-post-modal .modal-body {
-        max-height: calc(100vh - 100px);
+        max-height: 700px;
         padding-bottom: 50px;
     }
 
     .create-post-upload-img-inner {
-        min-height: calc(100vh - 510px);
+        min-height: 400px;
     }
 }
 

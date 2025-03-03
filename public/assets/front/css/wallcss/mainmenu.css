@@ -3688,6 +3688,9 @@
     .disable-class.home-upcoming-events-card-right::before {
         font-size: 10px;
     }
+    .collection-card {
+        height: 300px;
+    }
 }
 
 
@@ -3808,5 +3811,11 @@
     }
     .responsive-calendar .weekdays{
         max-width: 300px;
+    }
+    .collection-card {
+        height: 250px !important;
+    }
+    .collection-card.card-blue{
+        border-radius: 10px !important;
     }
 }
