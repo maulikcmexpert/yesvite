@@ -3055,7 +3055,18 @@ main.new-main-content {
   }
 
   @media only screen and (min-width: 1400px) and (max-width: 1599px){
-
+    .create-post-modal .modal-content {
+      width: 100%;
+      max-width: 600px;
+      height: calc(100% - 20px);
+    }
+    .create-post-upload-img-inner {
+      min-height: calc(100vh - 410px);
+    }
+    .create-post-modal .modal-body {
+      max-height: calc(100% - 200px);
+      padding-bottom: 50px;
+    }
   }
 
   @media only screen and (max-width: 1399px) {
