@@ -96,6 +96,7 @@
                                                                     <input
                                                                         class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
+                                                                         value="{{ $subcategory->subcategory_name }}"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
                                                                         data-subcategory-id="{{ $subcategory->id }}">
