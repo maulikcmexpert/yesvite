@@ -316,7 +316,7 @@
                                                 <span>Co-host</span>
                                                 @if (Auth::guard('web')->check()) 
                                                 {{-- <a href="#" class="msg-btn chost-msg">Message</a> --}}
-                                                <a href="{{route('message.list',['id' => encrypt($co_host['id']), 'is_host' => "0"])}}" class="msg-btn chost-msg">Message</a>
+                                                <a href="{{route('message.list',['id' => encrypt($coHost['id']), 'is_host' => "0"])}}" class="msg-btn chost-msg">Message</a>
 
                                                 @endif
                                             </div>
