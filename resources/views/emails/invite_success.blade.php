@@ -79,6 +79,9 @@
                         <div class="view-btn mt-0" id="view-btn" style="display:inline;width: 100%;">
                             <a href="{{$shortLink}}" style="font-family: 'SF Pro Display', sans-serif; margin-right:10px; font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 24px 10px 24px; text-align:center;text-decoration:none" class="view-btn-link">View Invitation</a>
                         </div>
+                        <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
+                            <a href="{{ route('event', encrypt($eventData['event_id'])) }}" style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 150px;text-transform: capitalize;text-align:center;">Complete Invite</a>
+                        </div>
                     </td>
                 </tr>
                 <!-- -------------- -->
