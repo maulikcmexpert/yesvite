@@ -151,9 +151,17 @@ class RsvpController extends BaseController
         $isShare="";
 
         // dd($share);
-        if($share!=null){
-            $isShare = decrypt($share);
+        // if($share!=null){
+        //     $isShare = decrypt($share);
+        // }
+        if ($share != null) {
+            try {
+                $isShare = decrypt($share);
+            } catch (\Exception $e) {
+                $isShare = null; // Handle the error appropriately
+            }
         }
+        
 
         if ($event_invited_user_id == "") {
             $user_id = Event::where('id', $event_id)->first()->user_id;
