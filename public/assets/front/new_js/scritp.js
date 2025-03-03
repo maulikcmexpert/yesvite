@@ -528,6 +528,7 @@ document.querySelector(".create-post-upload-img-main").addEventListener("click",
 
 // Drag & Drop functionality
 const dropArea = document.querySelector(".create-post-upload-img-main");
+const fileInput = document.querySelector(".fileInputtype");
 
 dropArea.addEventListener("dragover", function (event) {
     event.preventDefault();
@@ -543,7 +544,18 @@ dropArea.addEventListener("drop", function (event) {
     dropArea.classList.remove("dragover");
 
     const files = Array.from(event.dataTransfer.files);
-    handleFiles(files, document.querySelector(".fileInputtype"));
+
+    if (files.length > 0) {
+        // Create a new DataTransfer object to simulate file input selection
+        const dataTransfer = new DataTransfer();
+        files.forEach(file => dataTransfer.items.add(file));
+
+        // Assign files to the file input
+        fileInput.files = dataTransfer.files;
+
+        // Manually trigger the change event
+        fileInput.dispatchEvent(new Event("change"));
+    }
 });
 
 
