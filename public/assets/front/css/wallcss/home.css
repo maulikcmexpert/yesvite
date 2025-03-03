@@ -772,6 +772,8 @@ main.new-main-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .create-post-setting-main-body .btn-back {
@@ -3025,6 +3027,12 @@ main.new-main-content {
 }
 
 .s-loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 15;
     display: flex;
     align-items: center;
     justify-content: center;
