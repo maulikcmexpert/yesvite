@@ -51,7 +51,7 @@ class EventAboutController extends BaseController
             }, 'event_schedule',  'event_settings' => function ($query) {
                 $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
             }, 'event_invited_user' => function ($query) {
-                $query->where('is_co_host', '1')->with('user');
+                $query->where('is_co_host', '0')->with('user');
             }])->where('id', $event)->first();
 
             $guestView = [];
@@ -68,7 +68,11 @@ class EventAboutController extends BaseController
             $eventDetails['is_host'] = ($eventDetail->user_id == $user->id) ? 1 : 0;
 
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
+            $totalAdults = $eventDetail->event_invited_user->sum('adults');
+            $totalKids = $eventDetail->event_invited_user->sum('kids');
+            $totalGuests = $totalAdults + $totalKids;
+
+            $eventDetails['guest_list_visible_to_guests'] = $totalGuests > 0 ? $totalGuests : "";
             $eventDetails['podluck'] = ($eventDetail->event_settings != null && $eventDetail->event_settings->podluck != null) ? $eventDetail->event_settings->podluck : "0";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
