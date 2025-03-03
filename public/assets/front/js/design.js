@@ -671,7 +671,6 @@ async function bindData(current_event_id) {
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
-        console.log("Width:", width, "Height:", height);
     } else {
         console.log("Element not found! Using default values.");
     }
