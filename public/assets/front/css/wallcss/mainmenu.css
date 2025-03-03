@@ -3178,7 +3178,7 @@
 }
 
 #nav-profile-home .step_2 .list_all_design_catgeory{
-    
+    max-height: calc(100vh - 200px) !important;
 }
 
 /* ===Responsive=== */
