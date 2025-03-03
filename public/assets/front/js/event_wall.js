@@ -1134,6 +1134,14 @@ $(document).ready(function () {
 //     openstoryModal(); // Open the modal after the page loads
 // };
 
+    $("#photos_click").click(function () {
+        $(".create-photo-btn").trigger("click");
+    });
+
+    $("#poll_click").click(function () {
+        $(".create-poll-btn").trigger("click");
+    });
+
 
 $(".posts-card-like-btn").on("click", function () {
     const icon = this.querySelector("i");

@@ -37,7 +37,7 @@
             {{-- <input type="text" class="form-control" id="text" placeholder="What’s on your mind?" maxlength="140"> --}}
         </div>
         <div class="wall-creat-photo-poll-wrp">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#creatpostmodal">
+            <button type="button" data-bs-toggle="modal" id="photos_click" data-bs-target="#creatpostmodal">
                 <span><svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -53,7 +53,7 @@
                 </span>
                 Photos/ Videos
             </button>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#creatpostmodal">
+            <button type="button" data-bs-toggle="modal" id="poll_click" data-bs-target="#creatpostmodal">
                 <span>
                     <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
