@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-        if (pollForm.is(":visible") && pollForm.length > 0 && postContent !== "") {
+        if (pollForm.is(":visible") && pollForm.length > 0 ) {
             document.getElementById("pollContent").value = postContent;
 
             // Show the loader inside the button
