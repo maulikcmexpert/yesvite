@@ -56,7 +56,7 @@ class PaymentController extends BaseController
                 'customer_email' => $user->email, // User's email
                 'mode' => 'payment',
                 'success_url' => route('payment.success') . '?paid_id={CHECKOUT_SESSION_ID}', // Include session ID in success URL
-                'cancel_url' => route('payment.failed'),
+                'cancel_url' => route('payment.failed') . '?paid_id={CHECKOUT_SESSION_ID}',
                 'expand' => ['line_items'],
             ]);
 
@@ -112,13 +112,13 @@ class PaymentController extends BaseController
         }
 
         try {
-            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
             // Get the session ID from the query parameter
             $sessionId = $request->query('paid_id');
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
             if (!$sessionId) {
-                echo "invalid1";
+                echo "invalid session";
                 die;
                 //return redirect()->route('checkout')->withErrors(['error' => 'Session ID is missing']);
             }
@@ -135,7 +135,7 @@ class PaymentController extends BaseController
             }
 
             if (!$coins) {
-                echo $coins;
+                echo "No coins found";
                 die;
                 //return redirect()->route('checkout')->withErrors(['error' => 'Invalid price ID']);
             }
@@ -231,8 +231,22 @@ class PaymentController extends BaseController
         }
     }
 
-    public function paymentFailed()
+    public function paymentFailed(Request $request)
     {
+        $user = Auth::guard('web')->user();
+        $sessionId = $request->query('paid_id');
+        $session = \Stripe\Checkout\Session::retrieve($sessionId);
+        $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+        $lineItems = $stripe->checkout->sessions->allLineItems($sessionId, []);
+
+        if (!empty($lineItems->data)) {
+            $priceId = $lineItems->data[0]->price->id; // Get the price ID
+        }
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
+        if (session()->has($sessionKey)) {
+            session()->put($sessionKey . '.status', 'failed');
+        }
         return view('payment-failed');
     }
 }
