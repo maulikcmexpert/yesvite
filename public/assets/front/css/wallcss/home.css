@@ -3120,12 +3120,12 @@ main.new-main-content {
     }
 
     .create-post-modal .modal-body {
-        max-height: calc(100vh - 100px);
+        max-height: 700px;
         padding-bottom: 50px;
     }
 
     .create-post-upload-img-inner {
-        min-height: calc(100vh - 510px);
+        min-height: 700px;
     }
 }
 
