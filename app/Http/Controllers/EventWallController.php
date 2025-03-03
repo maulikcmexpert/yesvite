@@ -1152,7 +1152,11 @@ class EventWallController extends BaseController
         $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
         $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-        $eventDetails['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
+        $totalAdults = $eventDetail->event_invited_user->sum('adults');
+        $totalKids = $eventDetail->event_invited_user->sum('kids');
+        $totalGuests = $totalAdults + $totalKids;
+
+        $eventDetails['guest_list_visible_to_guests'] = $totalGuests > 0 ? $totalGuests : "";
         $rsvp_status = "";
         $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
             // $query->where('app_user', '1');
