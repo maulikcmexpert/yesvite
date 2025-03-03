@@ -21,13 +21,11 @@ let element = document.querySelector(".image-edit-inner-img");
 var { width, height } = { width: 590, height: 880 };
 if (element) {
     ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
-    console.log("Width:", width, "Height:", height);
 } else {
     console.log("Element not found! Using default values.");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded fired");
     preloadAllFonts(); // Load all fonts on page load
 });
 
@@ -51,7 +49,6 @@ async function preloadAllFonts() {
 }
 
 $(document).ready(function () {
-    console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
         dbJson = null;
@@ -116,7 +113,6 @@ $(document).on("click", ".design-cards", function () {
     ) {
         dbJson = eventData.textData;
     } else {
-        console.log(json);
         dbJson = json;
         temp_id = id;
     }
@@ -416,7 +412,6 @@ $(document).on("click", ".design-cards", function () {
                 img.crossOrigin = "anonymous";
 
                 img.on("mouseup", function (event) {
-                    console.log(event);
                     if (
                         event?.transform?.action === "drag" &&
                         event.transform.actionPerformed === undefined
@@ -529,7 +524,6 @@ $(document).on("click", ".design-cards", function () {
                                     newImg.crossOrigin = "anonymous";
 
                                     newImg.on("mouseup", function (event) {
-                                        console.log(event);
                                         if (
                                             event?.transform?.action ===
                                                 "drag" &&
@@ -591,7 +585,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     image = $(this).data("image");
     shapeImageUrl = $(this).data("shape_image");
     var json = $(this).data("json");
-    console.log(json);
+
     var id = $(this).data("id");
     imageId = id;
     $(".design-sidebar-action").attr("data-id", id);
@@ -605,7 +599,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     //     eventData.desgin_selected = "";
     //     console.log({ dbJson });
     // } else {
-    console.log(json);
+
     dbJson = json;
     temp_id = id;
     eventData.slider_images = [];
@@ -645,8 +639,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
             id: id,
         },
         success: async function (response) {
-            console.log(response);
-
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
 
@@ -658,7 +650,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
                     return;
                 }
             }
-            console.log(dbJson);
+
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
             $("#loader").css("display", "none");
@@ -686,25 +678,21 @@ async function bindData(current_event_id) {
 
     function loadTextDataFromDatabase() {
         if (image) {
+            undoStack = [];
+            redoStack = [];
             // console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 img.crossOrigin = "anonymous";
-                // var canvasWidth = canvas.getWidth();
-                // var canvasHeight = canvas.getHeight();
+
                 var canvasWidth = width;
                 var canvasHeight = height;
-                console.log(canvasWidth);
-                console.log(canvasHeight);
+
                 // Use Math.max to ensure the image covers the entire canvas
                 var scaleFactor = Math.max(
                     canvasWidth / img.width,
                     canvasHeight / img.height
                 );
-                console.log(scaleFactor);
-                console.log(img.width);
-                console.log(img.height);
-                console.log((canvasWidth - img.width * scaleFactor) / 2);
-                console.log((canvasHeight - img.height * scaleFactor) / 2);
+
                 img.set({
                     // left: (canvasWidth - img.width * scaleFactor) / 2, // Centering horizontally
                     // top: (canvasHeight - img.height * scaleFactor) / 2, // Centering vertically
@@ -751,9 +739,7 @@ async function bindData(current_event_id) {
                     staticInfo.textElements = jQuery.parseJSON(dbJson).textData;
                 }
                 if (staticInfo.textElements != undefined) {
-                    // console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
-                        // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
                             fontFamily: element.fontFamily,
@@ -775,7 +761,6 @@ async function bindData(current_event_id) {
                             ? parseFloat(element.top) * scaleY
                             : (element.centerY - 10) * scaleY;
 
-                        console.log(element.width);
                         let fontSize = parseFloat(element.fontSize) * scaleY; // Scale font size based on height
                         fontSize = Number(fontSize).toFixed(0);
                         let width = (textWidth + 10) * scaleX; // Scale text box width
@@ -943,7 +928,6 @@ async function bindData(current_event_id) {
                             img.crossOrigin = "anonymous";
 
                             img.on("mouseup", function (event) {
-                                console.log(event);
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
@@ -1132,7 +1116,6 @@ async function bindData(current_event_id) {
                                                     newImg.on(
                                                         "mouseup",
                                                         function (event) {
-                                                            console.log(event);
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
@@ -1298,7 +1281,7 @@ async function bindData(current_event_id) {
             linethrough: element.linethrough,
         });
         const textWidth = textMeasurement.width;
-        //console.log(`Width of '${text}':`, textWidth);
+
         return textWidth;
     }
 
@@ -1308,7 +1291,6 @@ async function bindData(current_event_id) {
             return;
         }
 
-        console.log(dbJson);
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
@@ -1356,9 +1338,8 @@ async function bindData(current_event_id) {
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
                 seted = 1;
-                console.log(element.fill);
+
                 let selectedColor = element.fill || "#000000";
-                console.log("color-picker");
                 $("#color-picker").spectrum("set", selectedColor || "#000000");
 
                 activeObject.set("fill", selectedColor);
@@ -1384,7 +1365,6 @@ async function bindData(current_event_id) {
                 element.text.toLowerCase() === activeObject.text.toLowerCase()
             ) {
                 seted = 1;
-                console.log(element.fill);
 
                 activeObject.set(
                     "fontFamily",
@@ -1524,7 +1504,6 @@ async function bindData(current_event_id) {
         $(".size-btn").removeClass("activated");
 
         const text = target.text.trim();
-        console.log({ text });
         // Helper functions to determine the case
         const isUpperCase = (str) => str === str.toUpperCase();
         const isLowerCase = (str) => str === str.toLowerCase();
@@ -1592,8 +1571,6 @@ async function bindData(current_event_id) {
         // Define a maximum width to avoid large textboxes
         const maxWidth = 400; // Adjust this value based on your layout
         const width = Math.min(calculatedWidth, maxWidth); // Cap the width
-        console.log(width);
-
         // Handle text wrapping for large texts
         textbox.set("width", width);
         textbox.set("textAlign", "left"); // Ensure text wraps within the textbox
@@ -1633,11 +1610,6 @@ async function bindData(current_event_id) {
         )}%</span>`;
 
         // Log the slider value and percentage for debugging
-        // console.log(
-        //     `Slider Value: ${sliderValue}, Percentage: ${percentageValue.toFixed(
-        //         0
-        //     )}%`
-        // );
 
         // Update the canvas object
         const activeObject = canvas.getActiveObject();
@@ -1694,9 +1666,6 @@ async function bindData(current_event_id) {
             if (inputValue >= 100) {
                 letterSpacingInput.value = 100;
             }
-            console.log(
-                "Invalid input: Please enter a value between 0% and 100%"
-            );
         }
     });
 
@@ -1731,34 +1700,6 @@ async function bindData(current_event_id) {
         updateTextboxWidth(object);
     };
     // Reset button functionality
-    // document.querySelector(".reset-btn").addEventListener("click", function () {
-    //     //console.log("Reset button clicked!");
-    //     const activeObject = canvas.getActiveObject();
-    //     if (activeObject && activeObject.type === "textbox") {
-    //         resetTextboxProperties(activeObject); // Use the reset function
-    //         canvas.renderAll(); // Re-render the canvas
-
-    //         // Reset input fields and tooltips to default values
-    //         fontSizeInput.value = defaultSettings.fontSize;
-    //         fontSizeRange.value = defaultSettings.fontSize;
-    //         fontSizeTooltip.innerHTML = `<span>${defaultSettings.fontSize}px</span>`;
-
-    //         letterSpacingInput.value = defaultSettings.letterSpacing;
-    //         letterSpacingRange.value = defaultSettings.letterSpacing;
-    //         letterSpacingTooltip.innerHTML = `<span>${defaultSettings.letterSpacing}</span>`;
-
-    //         lineHeightInput.value = defaultSettings.lineHeight;
-    //         lineHeightRange.value = defaultSettings.lineHeight;
-    //         lineHeightTooltip.innerHTML = `<span>${defaultSettings.lineHeight}</span>`;
-
-    //         updateTextboxWidth(activeObject); // Update the textbox width to fit the default settings
-    //         canvas.renderAll(); // Refresh the canvas to apply changes
-
-    //         alert("Settings have been reset to default.");
-    //     } else {
-    //         alert("Please select a textbox to reset the settings.");
-    //     }
-    // });
 
     // Initialize tooltips and values on page load
     setFontSize();
@@ -1768,11 +1709,9 @@ async function bindData(current_event_id) {
     let clrcanvas = {};
     setTimeout(function () {
         let spchoose = document.getElementsByClassName("sp-choose");
-        console.log({ spchoose });
+
         $(spchoose).click(function () {
-            // alert('clicked')
             setTimeout(function () {
-                console.log({ clrcanvas });
                 undoStack.push(clrcanvas);
                 if ($(".sp-input").val() === "#000000") {
                     changeColor("#000000");
@@ -1787,7 +1726,7 @@ async function bindData(current_event_id) {
 
     $(document).on("change", ".sp-input", function () {
         var color = $(this).val();
-        console.log(color);
+
         changeColor(color);
     });
     // Initialize the color picker
@@ -1818,11 +1757,8 @@ async function bindData(current_event_id) {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        console.log("before update");
 
-        //console.log(activeObject);
         if (!activeObject) {
-            //console.log("No object selected");
             return;
         }
 
@@ -1838,15 +1774,10 @@ async function bindData(current_event_id) {
                 addToUndoStack(canvas);
                 activeObject.set("fill", selectedColor); // Change font color
             } else if (selectedColorType == "background") {
-                //console.log("update background");
                 activeObject.set("backgroundColor", selectedColor); // Change background color
             }
             canvas.renderAll(); // Re-render the canvas after color change
         }
-
-        //console.log("ater update");
-
-        //console.log(activeObjec);
     }
     $(document).on("click", ".color-reset", function (e) {
         updateColorPicker();
@@ -1861,7 +1792,6 @@ async function bindData(current_event_id) {
 
         if (activeObject && activeObject.type === "textbox") {
             if (selectedColorType === "font") {
-                console.log("colorpicker update");
                 $("#color-picker").spectrum(
                     "set",
                     activeObject.fill || "#000000"
@@ -1872,15 +1802,7 @@ async function bindData(current_event_id) {
                 $("#color-picker").spectrum("set", bgColor); // Set current background color in picker
             }
 
-            //console.log(selectedColorType);
-            //console.log(activeObject.type);
-            //console.log(activeObject.fill);
-            //console.log(activeObject.backgroundColor);
-
             const activeObjec = canvas.getActiveObject();
-
-            //console.log(activeObjec.fill);
-            //console.log(activeObjec.backgroundColor);
         }
     }
 
@@ -1905,7 +1827,7 @@ async function bindData(current_event_id) {
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function (e) {
         e.stopPropagation();
-        console.log(123);
+
         const activeObject = canvas.getActiveObject();
         if (activeObject && activeObject.type === "textbox") {
             //console.log(activeObject.type);
@@ -2006,9 +1928,6 @@ async function bindData(current_event_id) {
         // Get the position of the 'mtr' control
         var mtrControl = controlCoords.mtr; // 'mtr' control (rotate)
 
-        // Log the untransformed mtr control position
-        console.log("Rotation control position (mtr):", mtrControl);
-
         // Transform mtr control position to apply rotation and scaling
         var transformedMtr = fabric.util.transformPoint(
             new fabric.Point(mtrControl.x, mtrControl.y),
@@ -2022,9 +1941,7 @@ async function bindData(current_event_id) {
         var centerX = textbox.left + textbox.width / 2;
         var centerY = textbox.top + textbox.height / 2;
         var centerPoint = textbox.getCenterPoint();
-        //console.log(
-        //  `Center of textbox '${textbox.text}' is at (${centerX}, ${centerY})`
-        // );
+
         return {
             x: centerX,
             y: centerY,
@@ -2118,7 +2035,6 @@ async function bindData(current_event_id) {
 
             // Attach delete functionality to trash icon
             trashIcon.on("mousedown", function () {
-                //console.log("Trash icon clicked! Deleting textbox.");
                 deleteTextbox(textbox);
             });
 
@@ -2276,7 +2192,6 @@ async function bindData(current_event_id) {
             options.target?._objects &&
             options.target?._objects.length > 1
         ) {
-            console.log("Multiple objects selected:", options.target);
             canvas.discardActiveObject();
             canvas.renderAll(); // Ensure the canvas is refreshed
         }
@@ -2284,12 +2199,10 @@ async function bindData(current_event_id) {
         const activeObjects = canvas.getActiveObjects(); // Get all selected objects
         //console.log(activeObjects)
         if (activeObjects.length > 1) {
-            console.log("Multiple objects selected:", activeObjects);
             canvas.discardActiveObject(); // Discard active selection
             canvas.renderAll(); // Refresh the canvas
         }
         if (!options.target) {
-            console.log("Clicked outside, unselecting textboxes");
             canvas.discardActiveObject();
             canvas.renderAll();
         }
@@ -2315,7 +2228,6 @@ async function bindData(current_event_id) {
         discardIfMultipleObjects(options);
 
         if (options.target && options.target.type === "textbox") {
-            console.log("clicked on text box");
             eventData.desgin_selected = "";
             canvas.setActiveObject(options.target);
             addIconsToTextbox(options.target);
@@ -2407,7 +2319,7 @@ async function bindData(current_event_id) {
     document.querySelectorAll(".font-input").forEach(function (input) {
         input.addEventListener("click", function () {
             const font = this.getAttribute("data-font");
-            console.log("Selected font:", font);
+
             applyFont(font, true); // Apply preloaded font instantly
         });
     });
@@ -2426,7 +2338,6 @@ async function bindData(current_event_id) {
 
         try {
             await Promise.all(fontLoadPromises);
-            console.log("All fonts loaded successfully!");
         } catch (e) {
             console.error("Font loading error: ", e);
         }
@@ -2442,17 +2353,8 @@ async function bindData(current_event_id) {
             activeObject.initDimensions();
             canvas.requestRenderAll();
         } else {
-            console.log("No object selected");
         }
     }
-
-    // document.querySelectorAll(".form-check-input").forEach(function (input) {
-    //     input.addEventListener("click", function () {
-    //         const font = this.getAttribute("data-font");
-    //         console.log("Selected font:", font);
-    //         loadAndUse(font); // Call loadAndUse function with the selected font
-    //     });
-    // });
 
     canvas.on("object:scaling", function (e) {
         var activeObject = e.target;
@@ -2461,9 +2363,6 @@ async function bindData(current_event_id) {
         if (activeObject && activeObject.type === "textbox") {
             // Get the current font size
             var currentFontSize = Math.round(activeObject.fontSize);
-
-            console.log("Current font size: " + currentFontSize);
-
             // Calculate new font size based on scale factor
             var newFontSize = Math.round(currentFontSize * activeObject.scaleX); // Adjust the font size based on the horizontal scaling factor
             const textMeasurement = new fabric.Text(activeObject.text, {
@@ -2486,8 +2385,6 @@ async function bindData(current_event_id) {
 
             // Re-render the canvas to apply the changes
             canvas.renderAll();
-
-            console.log("Updated font size: " + newFontSize);
         }
     });
     //     textElement.style.fontFamily = 'Allura'; // Change to Allura font
@@ -2501,30 +2398,24 @@ async function bindData(current_event_id) {
             .then(function () {
                 // When font is loaded, use it.
                 var activeObject = canvas.getActiveObject();
-                //console.log(activeObject.type);
                 if (activeObject && activeObject.type === "textbox") {
                     activeObject.set({
                         fontFamily: font,
                     });
                     activeObject.initDimensions();
                     canvas.requestRenderAll();
-                    //console.log("applied font" + font);
-                    //console.log(canvas.getActiveObject());
                 } else {
                     alert("No object selected");
                 }
             })
             .catch(function (e) {
-                console.log(e);
                 console.warn("Font loading failed: " + font);
             });
     }
 
     function setControlVisibilityForAll() {
         canvas.getObjects().forEach((obj) => {
-            console.log(obj);
             var currentFontSize = obj.fontSize;
-            console.log("Current font size: " + currentFontSize);
 
             // Calculate new font size based on scale factor
             var newFontSize = currentFontSize * obj.scaleX; // Adjust the font size based on the horizontal scaling factor
@@ -2579,7 +2470,6 @@ async function bindData(current_event_id) {
         if (!activeObject || activeObject.type !== "textbox") {
             return; // No object or not a textbox, so do nothing
         }
-        console.log("add to undo");
         addToUndoStack(canvas); // Save state for undo/redo functionality
 
         // Commands object to handle various styles and operations
@@ -2610,7 +2500,6 @@ async function bindData(current_event_id) {
             },
             fontName: (font) => {
                 if (font) {
-                    console.log("load and use command");
                     // loadAndUse(font);
                 }
             },
@@ -2729,7 +2618,6 @@ async function bindData(current_event_id) {
                 obj.set("textAlign", "center"); // Set text alignment to center
             }
             if (obj.type === "image") {
-                console.log(obj);
                 let currentShapeIndex = 0;
                 obj.crossOrigin = "anonymous";
 
@@ -2868,12 +2756,8 @@ function getTextDataFromCanvas() {
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
-        console.log("Width:", width, "Height:", height);
     } else {
-        console.log("Element not found! Using default values.");
     }
-
-    console.log("getTextDataFromCanvas");
     var objects = canvas.getObjects();
     var textData = [];
     var shapeImageData = [];
@@ -2890,7 +2774,7 @@ function getTextDataFromCanvas() {
         if (obj.type === "textbox") {
             // alert(obj.text);
             var centerPoint = obj.getCenterPoint();
-            console.log(obj.text, obj.charSpacing);
+
             // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
@@ -2935,8 +2819,6 @@ function getTextDataFromCanvas() {
         textElements: textData,
         shapeImageData: shapeImageData,
     };
-    console.log(dbJson);
-
     return dbJson;
 }
 
@@ -2965,10 +2847,8 @@ function loadAgain() {
         eventData.temp_id != null &&
         eventData.temp_id == id
     ) {
-        dbJson = eventData.textData;
-        console.log({ dbJson });
+        dbJson = eventData.textDat;
     } else {
-        console.log(json);
         dbJson = json;
         temp_id = id;
     }
@@ -3005,7 +2885,6 @@ function loadAgain() {
             image,
         },
         success: function (response) {
-            console.log(response);
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
 
@@ -3017,7 +2896,7 @@ function loadAgain() {
                     return;
                 }
             }
-            console.log(dbJson);
+
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
