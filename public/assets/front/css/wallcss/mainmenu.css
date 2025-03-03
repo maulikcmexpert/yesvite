@@ -2789,6 +2789,7 @@
     border: 2px solid red;
     font-family: var(--SFProDisplay-Bold);
     font-size: 14px;
+    z-index: 10;
 }
 
 .upcoming-events-card-notification-wrp > button svg {
