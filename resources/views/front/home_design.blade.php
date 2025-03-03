@@ -57,6 +57,7 @@
                         <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                             Categories
                         </button>
+
                         <div class="dropdown-menu collection-menu">
                             <div class="filter-head">
                                 <h5>Categories</h5>
@@ -113,6 +114,8 @@
                     </div>
                 </div>
             </div>
+
+            <div class="selected-items"></div>
             <h5 class="total-items ms-auto total_design_count">{{ $count }} Items</h5>
         </div>
 
