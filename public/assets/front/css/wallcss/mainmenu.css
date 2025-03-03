@@ -2776,6 +2776,13 @@
     background-color: var(--light-color) !important;
 }
 
+.disable-class.home-upcoming-events-card-right{
+    position: relative;
+}
+/* .disable-class.home-upcoming-events-card-right::before{
+    
+} */
+
 .upcoming-events-card-notification-wrp > button svg {
     width: 100%;
     height: 100%;
