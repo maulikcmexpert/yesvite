@@ -1096,22 +1096,29 @@ $(document).ready(function () {
         }
         else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
-            if (photoInput && photoInput.files.length === 0 && postContent === "") {
+            var imagePreview = document.getElementById("imagePreview");
+            var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
+
+            // Check if no photo is uploaded AND no content is entered
+            if ((!photoInput || photoInput.files.length === 0) && imagePreview.children.length === 0 && postContent === "") {
                 toastr.error("Please upload a photo or enter some content for the photo post.");
                 return;
             }
 
-            if (photoInput && photoInput.files.length === 0 && postContent !== "") {
-                document.getElementById("photoPostType").value = 0;
-            } else {
+            // Set post type based on presence of an uploaded image or entered content
+            if ((photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0) {
                 document.getElementById("photoPostType").value = 1;
+            } else {
+                document.getElementById("photoPostType").value = 0;
             }
 
-            // Show the loader inside the button
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+            // Show loader inside the button and disable it
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
+                 .prop("disabled", true);
 
             photoForm.submit();
         }
+
         else {
             toastr.error("Please fill all required fields before submitting.");
         }
