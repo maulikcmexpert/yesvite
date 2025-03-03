@@ -3024,24 +3024,16 @@ main.new-main-content {
     border: 1px solidvar(--primaryColor) !important;
 }
 
-.create_post_btn {
-    position: relative;
+.loader_11 {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    height: 40px;
-}
-
-.loader_11 {
-    display: flex;
-    justify-content: space-between;
-    width: 30px; /* Adjust width as needed */
+    gap: 4px; /* Adjust spacing between dots */
 }
 
 .loader_11 span {
-    width: 6px;
-    height: 6px;
+    width: 8px; /* Adjust dot size */
+    height: 8px;
     background-color: #ff4a73;
     border-radius: 50%;
     animation: blink 1.2s infinite ease-in-out;
