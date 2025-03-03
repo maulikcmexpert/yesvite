@@ -1246,6 +1246,14 @@ $(".modal").on("hidden.bs.modal", function () {
     $(".create-post-upload-img-inner").addClass("d-none");
 });
 
+$(".btn-close").on("click", function () {
+
+    $(".char-count").text("0/140"); // Reset char count
+    $(".poll-options").empty();
+    // Add `d-none` class back to hide the div
+
+});
+
 $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
     $(".create-post-upload-img-inner").removeClass("d-none");
