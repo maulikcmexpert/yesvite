@@ -774,6 +774,7 @@ main.new-main-content {
     align-items: center;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
 .create-post-setting-main-body .btn-back {
