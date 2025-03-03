@@ -6,7 +6,7 @@
     $total_invite=$eventInfo['host_view']['total_invite']??0;
     $totalAdults = 0;
     $totalKids = 0;
-    dd( $eventInfo);
+    // dd( $eventInfo);
 
     if ($guestArray) {
         foreach ($guestArray as $guest) {
