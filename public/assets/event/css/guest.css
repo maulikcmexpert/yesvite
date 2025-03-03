@@ -620,6 +620,11 @@
     display: inline-block !important;
 }
 
+.new-guest-content-wrp .contact-tab input[type="search"]:focus, .new-guest-content-wrp .contact-tab input[type="search"]:focus-within, .new-guest-content-wrp .contact-tab input[type="search"]:focus-visible, .new-guest-content-wrp .contact-tab input[type="search"]:target{
+    background: #fff !important;
+    background-color: #fff !important;
+}
+
 /* ============ responsive ============ */
 
 
