@@ -1133,6 +1133,14 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
+$("#photos_click").on("click", function () {
+
+        $("#create-photo-btn").trigger("click");
+    });
+    $("#poll_click").on("click", function () {
+
+        $("#create-poll-btn").trigger("click");
+    });
 
 
 $(".posts-card-like-btn").on("click", function () {
@@ -1158,15 +1166,6 @@ $(".show-comment-reply-btn").click(function () {
 });
 
 $(document).ready(function () {
-    $("#photos_click").on("click", function () {
-
-        $(".create-photo-btn").trigger("click");
-    });
-    $("#poll_click").on("click", function () {
-
-        $(".create-poll-btn").trigger("click");
-    });
-
     // Handle Hide/Mute/Report Button Click
     $(".postControlButton").on("click", function () {
         var muteIcon = $(this).find("#muteIcon");
