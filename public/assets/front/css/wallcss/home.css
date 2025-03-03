@@ -3024,33 +3024,53 @@ main.new-main-content {
     border: 1px solidvar(--primaryColor) !important;
 }
 
-.loader_11 {
-    display: inline-block;
-    width: 40px;
-    text-align: center;
-}
+.s-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primaryColor);
+    gap: 8px;
+  }
 
-.loader_11::before {
-    content: "• • • •";
-    font-size: 24px;
-    letter-spacing: 4px;
-    animation: blink 1.5s infinite;
-}
+  .s-loader div {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+    animation: loader 2s ease-in-out infinite;
+    background-color: var(--white);
+  }
 
-@keyframes blink {
-    0% {
-        opacity: 1;
+  .s-loader div:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .s-loader div:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .s-loader div:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .s-loader div:nth-child(4) {
+    animation-delay: 0.45s;
+  }
+
+  @keyframes loader {
+    0%, 100% {
+      transform: translateY(0);
     }
-
+    20% {
+      transform: translateY(-8px);
+    }
     50% {
-        opacity: 0.5;
+      transform: translateY(4px);
     }
-
-    100% {
-        opacity: 1;
+    80% {
+      transform: translateY(-4px);
     }
-}
-
+  }
 
 .hosted-by-template-slider-img.disable-class {
     position: relative;

@@ -1887,7 +1887,20 @@ async function bindData(current_event_id) {
     // Update color picker when object selection changes
     canvas.on("selection:created", updateColorPicker);
     canvas.on("selection:updated", updateColorPicker);
+    canvas.on("object:moving", function (event) {
+        var activeObject = event.target;
+        if (activeObject && activeObject.type === "textbox") {
+            addToUndoStack(canvas); // ✅ Save position before moving starts
+        }
+    });
 
+    // 🛠 Save after moving is done
+    canvas.on("object:modified", function (event) {
+        var activeObject = event.target;
+        if (activeObject && activeObject.type === "textbox") {
+            addToUndoStack(canvas); // ✅ Save final position after movement
+        }
+    });
     // Update the color picker when the color type (font/background) changes
     $(".colorTypeInp").click(function (e) {
         e.stopPropagation();

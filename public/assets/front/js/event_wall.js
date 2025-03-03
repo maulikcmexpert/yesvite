@@ -1072,24 +1072,22 @@ $(document).ready(function () {
 
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
-        var $this = $(this); // Cache the button
+        var $this = $(this);
 
         // Prevent multiple clicks
         if ($this.prop("disabled")) {
             return;
         }
 
-        // Check if the poll form exists and is valid
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-        if (pollForm.is(":visible") && pollForm.length > 0 && pollForm !== "") {
-            console.log("Post Content:", postContent);
+        if (pollForm.is(":visible") && pollForm.length > 0 ) {
             document.getElementById("pollContent").value = postContent;
 
-            // Add loader
-            $this.html('<span class="loader_11 create_post_btn"></span>').prop("disabled", true);
+            // Show the loader inside the button
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
 
             pollForm.submit();
         }
@@ -1106,8 +1104,8 @@ $(document).ready(function () {
                 document.getElementById("photoPostType").value = 1;
             }
 
-            // Add loader
-            $this.html('<span class="loader_11  create_post_btn"></span>').prop("disabled", true);
+            // Show the loader inside the button
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
             photoForm.submit();
         }
@@ -1115,6 +1113,7 @@ $(document).ready(function () {
             toastr.error("Please fill all required fields before submitting.");
         }
     });
+
 
 
 });
