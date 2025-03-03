@@ -1083,13 +1083,11 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-        if (pollForm.is(":visible") && pollForm.length > 0 && postContent !== "") {
+        if (pollForm.is(":visible") && pollForm.length > 0 ) {
             document.getElementById("pollContent").value = postContent;
 
             // Show the loader inside the button
-            $this.html('<div class="loader_11"><span></span><span></span><span></span><span></span></div>')
-            .css({ "display": "flex", "align-items": "center", "justify-content": "center" }) // Ensure visibility
-            .prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
 
             pollForm.submit();
         }
@@ -1107,9 +1105,7 @@ $(document).ready(function () {
             }
 
             // Show the loader inside the button
-            $this.html('<div class="loader_11"><span></span><span></span><span></span><span></span></div>')
-            .css({ "display": "flex", "align-items": "center", "justify-content": "center" }) // Ensure visibility
-            .prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
             photoForm.submit();
         }
