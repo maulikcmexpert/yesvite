@@ -3024,13 +3024,13 @@ main.new-main-content {
     border: 1px solidvar(--primaryColor) !important;
 }
 
-span.loader_11 {
+.loader_11 {
     display: inline-block;
     width: 40px;
     text-align: center;
 }
 
-span.loader_11::before {
+.loader_11::before {
     content: "• • • •";
     font-size: 24px;
     letter-spacing: 4px;
