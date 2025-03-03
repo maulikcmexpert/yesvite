@@ -96,7 +96,7 @@ $(document).ready(function () {
         $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
 
         var visibleItems = $('.image-item:visible').length;
-        $('.total_design_count').text(visibleItems + ' Items');
+        $('.total_design_count').text($('.default_show:visible').length + ' Items');
     });
     $('#filtered_results').hide();
     $('#search_design_category').on('keyup', function () {
