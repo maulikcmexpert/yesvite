@@ -1260,6 +1260,8 @@ class EventController extends BaseController
             Session::forget('shape_image');
         }
         if ($event_creation && $request->isdraft == "1") {
+            sendNotification('owner_notify', $notificationParam);
+
             return 1;
         }
 
