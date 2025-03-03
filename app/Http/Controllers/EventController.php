@@ -1283,12 +1283,15 @@ class EventController extends BaseController
         if (!empty($registry)) {
             $gift = '1';
         }
+        $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($eventId->id).'/'.encrypt(1));
+        $shortLink = createShortUrl($eventLink);
         Session::save();
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry', 'eventId'))->render(),
             'success' => true,
             'is_registry' => $gift,
-            'event_id' => encrypt($eventId)
+            'event_id' => encrypt($eventId),
+            'copy_link'=>$shortLink
         ]);
     }
 
