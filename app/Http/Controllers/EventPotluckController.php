@@ -265,7 +265,7 @@ class EventPotluckController extends BaseController
                 $eventDetails['host_id'] = $eventDetail->user_id;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
                 $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-                $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
+                $eventDetails['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
                 $rsvp_status = "";
                 $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                     // $query->where('app_user', '1');
