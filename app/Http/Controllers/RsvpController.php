@@ -181,6 +181,7 @@ class RsvpController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event_id)->first();
 
+            dd($eventDetail->user_id,$user_id);
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
