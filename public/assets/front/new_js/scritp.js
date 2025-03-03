@@ -349,123 +349,96 @@ $(".back-btn").on("click", function () {
     $(".create-post-main-body").removeClass("d-none");
 });
 
-$(document).on("change", ".fileInputtype", function (event) {
-    console.log(event);
-
-    const files = Array.from(event.target.files);
+$(document).ready(function () {
     const imagePreview = document.getElementById("imagePreview");
-    const uploadImgInner = document.querySelector(
-        ".create-post-upload-img-inner"
-    );
-    const uploadHeadButton = document.querySelector(
-        ".create-post-head-upload-btn"
-    );
+    const uploadImgInner = document.querySelector(".create-post-upload-img-inner");
+    const uploadHeadButton = document.querySelector(".create-post-head-upload-btn");
 
-    const totalFiles = imagePreview.children.length + files.length;
+    // Drag & Drop Event Listeners
+    uploadImgInner.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        uploadImgInner.classList.add("dragging");
+    });
 
-    // Store reference to the current input element
-    const currentFileInput = event.target;
+    uploadImgInner.addEventListener("dragleave", () => {
+        uploadImgInner.classList.remove("dragging");
+    });
 
-    // Toggle visibility based on file presence
-    if (files.length > 0) {
+    uploadImgInner.addEventListener("drop", (event) => {
+        event.preventDefault();
+        uploadImgInner.classList.remove("dragging");
+
+        const files = Array.from(event.dataTransfer.files);
+        handleFiles(files);
+    });
+
+    $(document).on("change", ".fileInputtype", function (event) {
+        const files = Array.from(event.target.files);
+        handleFiles(files, event.target);
+    });
+
+    function handleFiles(files, fileInput = null) {
+        if (files.length === 0) return;
+
         uploadImgInner.classList.add("d-none");
         uploadHeadButton.classList.remove("d-none");
-    }
 
-    if (totalFiles > 1) {
-        for (const previewItem of imagePreview.children) {
-            previewItem.classList.remove("col-12");
-            previewItem.classList.add("col-6");
-        }
-    }
+        files.forEach((file) => {
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                const previewDiv = document.createElement("div");
+                previewDiv.classList.add(imagePreview.children.length === 0 ? "col-12" : "col-6");
+                previewDiv.style.position = "relative";
 
-    files.forEach((file) => {
-        const fileReader = new FileReader();
-        fileReader.onload = function (e) {
-            const previewDiv = document.createElement("div");
-            previewDiv.classList.add(totalFiles === 1 ? "col-12" : "col-6");
-            previewDiv.style.position = "relative";
+                // Delete Icon
+                const deleteIcon = document.createElement("span");
+                deleteIcon.innerHTML = `
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                `;
+                deleteIcon.classList.add("uploaded-delete-icon");
 
-            // Create the delete icon
-            const deleteIcon = document.createElement("span");
-            deleteIcon.innerHTML = `
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
-            deleteIcon.classList.add("uploded-delete-icon");
+                // Delete functionality
+                deleteIcon.addEventListener("click", function () {
+                    imagePreview.removeChild(previewDiv);
 
-            // Delete image functionality
-            deleteIcon.addEventListener("click", function () {
-                imagePreview.removeChild(previewDiv);
+                    if (imagePreview.children.length === 0) {
+                        uploadImgInner.classList.remove("d-none");
+                        uploadHeadButton.classList.add("d-none");
 
-                // Check if there are any images left
-                if (imagePreview.children.length === 0) {
-                    uploadImgInner.classList.remove("d-none");
-                    uploadHeadButton.classList.add("d-none");
+                        // Clear file input value
+                        if (fileInput) fileInput.value = "";
+                    }
+                });
 
-                    // Clear the value of the current file input
-                    currentFileInput.value = "";
+                previewDiv.appendChild(deleteIcon);
+
+                if (file.type.startsWith("image/")) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("preview-image");
+                    previewDiv.appendChild(img);
+                } else if (file.type.startsWith("video/")) {
+                    const video = document.createElement("video");
+                    video.src = e.target.result;
+                    video.controls = true;
+                    video.classList.add("preview-video");
+                    previewDiv.appendChild(video);
                 }
-            });
 
-            previewDiv.appendChild(deleteIcon);
+                imagePreview.appendChild(previewDiv);
+            };
 
-            // Display image or video based on file type
-            if (file.type.startsWith("image/")) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.classList.add("preview-image");
-                previewDiv.appendChild(img);
-            } else if (file.type.startsWith("video/")) {
-                const video = document.createElement("video");
-                video.src = e.target.result;
-                video.controls = true;
-                video.classList.add("preview-video");
-                previewDiv.appendChild(video);
-            }
-
-            imagePreview.appendChild(previewDiv);
-        };
-
-        fileReader.readAsDataURL(file);
-    });
-});
-// Drag & Drop functionality
-const dropArea = document.querySelector(".create-post-upload-img-main");
-const fileInput = document.querySelector(".fileInputtype");
-
-dropArea.addEventListener("dragover", function (event) {
-    event.preventDefault();
-    dropArea.classList.add("dragover");
-});
-
-dropArea.addEventListener("dragleave", function () {
-    dropArea.classList.remove("dragover");
-});
-
-dropArea.addEventListener("drop", function (event) {
-    event.preventDefault();
-    dropArea.classList.remove("dragover");
-
-    const files = Array.from(event.dataTransfer.files);
-
-    if (files.length > 0) {
-        // Create a new DataTransfer object to simulate file input selection
-        const dataTransfer = new DataTransfer();
-        files.forEach(file => dataTransfer.items.add(file));
-
-        // Assign files to the file input
-        fileInput.files = dataTransfer.files;
-
-        // Manually trigger the change event
-        fileInput.dispatchEvent(new Event("change"));
+            fileReader.readAsDataURL(file);
+        });
     }
 });
+
 
 
 // Add new option on click
