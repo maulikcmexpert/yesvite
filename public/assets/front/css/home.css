@@ -585,6 +585,16 @@
     color: var(--primaryColor);
 }
 
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown::after{
+    line-height: 1;
+}
+
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show ~ .filters-drp .dropdown::after {
+    transform: rotate(180deg);
+}
+
+
+
 /* ===== Search Option Section end ===== */
 
 .collection-wrapper .filter-main-wrp {
