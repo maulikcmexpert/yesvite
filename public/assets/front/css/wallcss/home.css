@@ -2997,6 +2997,39 @@ main.new-main-content {
     border: 1px solid gray !important;
   }
 
+  .hosted-by-template-slider-img.disable-class{
+
+  }
+
+  .hosted-by-template-slider-img.disable-class{
+      position: relative;
+  }
+  .hosted-by-template-slider-img.disable-class::before {
+    content: "PAST EVENT";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(-35deg);
+    color: red;
+    border: 2px solid red;
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 30px;
+    z-index: 10;
+    width: calc(100% - 10px);
+    text-align: center;
+  }
+  .hosted-by-template-slider-img.disable-class::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 8;
+      border-radius: 10px;
+  }
+
   /* ===Responsive=== */
   @media only screen and (min-width: 1800px) {
     .create-post-modal .modal-content {
@@ -3019,6 +3052,10 @@ main.new-main-content {
       max-height: 600px;
       padding-bottom: 50px;
     }
+  }
+
+  @media only screen and (min-width: 1400px) and (max-width: 1599px){
+
   }
 
   @media only screen and (max-width: 1399px) {
@@ -3067,6 +3104,9 @@ main.new-main-content {
 
     .hosted-by-date-time-left{
       width: 100%;
+    }
+    .hosted-by-template-slider-img.disable-class::before {
+      font-size: 26px;
     }
   }
 

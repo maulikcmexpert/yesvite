@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{dd($eventDetails)}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -81,7 +81,7 @@
                 @if ($eventDetails['event_images'])
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
-                            <div class="hosted-by-template-slider-img">
+                            <div class="hosted-by-template-slider-img disable-class">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
                             <button class="image-zoom-icon" data-img="{{ $image }}"><img

@@ -553,10 +553,10 @@ class ChatController extends BaseController
             try {
                 $checkNotificationSetting = checkNotificationSetting($user_id);
                 if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
-                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$send_by) {
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$reciever_name) {
                         $message->to($email);
                         // $message->subject('Yesvite Invite');
-                       $message->subject('Yesvite: You have a new message by ' . $send_by);
+                       $message->subject('Yesvite: You have a new message by ' . $reciever_name);
 
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
@@ -566,10 +566,10 @@ class ChatController extends BaseController
                     add_user_firebase($user_id);    // Add User in Firebase
 
 
-                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$send_by) {
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$reciever_name) {
                         $message->to($email);
                         // $message->subject('Yesvite Invite');
-                        $message->subject('Yesvite: You have a new message by ' . $send_by);
+                        $message->subject('Yesvite: You have a new message by ' . $reciever_name);
 
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
