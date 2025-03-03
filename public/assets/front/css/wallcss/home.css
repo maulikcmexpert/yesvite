@@ -517,10 +517,10 @@ main.new-main-content {
 
 .new-main-content input {
   background-color: transparent;
-  border: 1px solid var(--border);
-  height: 45px;
-  border-radius: 16px;
-  padding-left: 15px;
+  border: 1px solid var(--border) !important;
+  height: 45px !important;
+  border-radius: 16px !important;
+  padding-left: 15px !important;
   font-family: var(--SFProDisplay-Regular);
   font-size: 14px;
   line-height: normal;
@@ -3241,7 +3241,11 @@ main.new-main-content {
       width: 100%;
       max-width: 100%;
       border-radius: 16px 16px 0px 0px;
+      height: calc(100% - 50px);
     }
+    .create-post-upload-img-inner {
+      min-height: 220px;
+  }
 
     .create-post-modal .modal-dialog{
       margin: 0px;
