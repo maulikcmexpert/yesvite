@@ -203,7 +203,9 @@ class EventController extends BaseController
         $eventDetail['alreadyCount'] = 0;
 
         if (isset($request->id) && $request->id != '') {
+
             $title = 'Edit Event';
+
             $eventID = decrypt($request->id);
             $getEventData = Event::with('event_schedule')->where('id', $eventID)->first();
 
@@ -306,7 +308,7 @@ class EventController extends BaseController
             if ($getEventData != null) {
 
                 if ($request->iscopy != null) {
-                    
+
                     $eventDetail['isCopy'] = $getEventData->id;
                 }
                 // dd($getEventData );
@@ -363,14 +365,16 @@ class EventController extends BaseController
                 $eventDetail['guest_co_host_list'] = [];
 
                 $eventDetail['co_host_list'] = getInvitedCohostList($getEventData->id);
-                // if(isset($eventDetail['co_host_list']) && $eventDetail['co_host_list']!=""){
-                //     if($eventDetail['co_host_list'][0] !=$id){
-                //         redirect('front.home');
-                //     }
-                // }
-                // if($getEventData->user_id != $id){
-                //     redirect('front.home');
-                // }
+                if(isset($eventDetail['co_host_list']) && $eventDetail['co_host_list']!=""){
+                    if($eventDetail['co_host_list'][0]['id'] !=$id){
+                        dd($eventDetail['co_host_list'][0]['id'],$id);
+                        redirect('front.home');
+                    }
+                }
+                if($getEventData->user_id != $id){
+                    dd(2);
+                    redirect('front.home');
+                }
 
 
 
@@ -601,7 +605,7 @@ class EventController extends BaseController
                     session()->put('category_item', $categories_item);
                     Session::save();
                     $eventDetail['totalCategoryItem'] =  $totalCategoryItem;
-                   
+
                 }
             }
         } else {
@@ -677,7 +681,7 @@ class EventController extends BaseController
             ->orderBy('name', 'ASC')
             ->where('user_id', $id)
             ->get();
-            
+
         return view('event_layout', compact(
             'title',
             'page',
@@ -1283,12 +1287,15 @@ class EventController extends BaseController
         if (!empty($registry)) {
             $gift = '1';
         }
+        $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($eventId).'/'.encrypt(1));
+        $shortLink = createShortUrl($eventLink);
         Session::save();
         return response()->json([
             'view' => view('front.event.gift_registry.view_gift_registry', compact('registry', 'eventId'))->render(),
             'success' => true,
             'is_registry' => $gift,
-            'event_id' => encrypt($eventId)
+            'event_id' => encrypt($eventId),
+            'copy_link'=>$shortLink
         ]);
     }
 
@@ -2119,7 +2126,7 @@ class EventController extends BaseController
 
     public function saveTempDesign(Request $request)
     {
-      
+
 
         $eventID = $request->eventId;
         if (isset($eventID) && $eventID != "") {
@@ -2544,15 +2551,15 @@ class EventController extends BaseController
             session()->forget('seen_emails');
             session()->forget('seen_phone_numbers');
         }
-        
+
         // Retrieve session data or initialize empty arrays
         $seenEmails = session()->get('seen_emails', []);
         $seenPhoneNumbers = session()->get('seen_phone_numbers', []);
-        
+
         foreach ($getAllContacts as $user) {
             $email = (!empty($user->email) || $user->email != null) ? $user->email : "";
             $phone_number = (!empty($user->phoneWithCode) || $user->phoneWithCode != null) ? $user->phoneWithCode : "";
-        
+
             $yesviteUserDetail = [
                 'id' => $user->id,
                 'profile' => empty($user->profile) ? "" : $user->profile,
@@ -2561,12 +2568,12 @@ class EventController extends BaseController
                 'email' => $email,
                 'phone_number' => $phone_number,
             ];
-        
+
             // Skip if email and phone both exist in session (complete duplicate)
             if (!empty($email) && !empty($phone_number) && in_array($email, $seenEmails) && in_array($phone_number, $seenPhoneNumbers)) {
                 continue;
             }
-        
+
             // Skip if email exists but no phone number (avoid duplicate emails)
             if (!empty($email) && in_array($email, $seenEmails) && empty($phone_number)) {
                 continue;
@@ -2574,10 +2581,10 @@ class EventController extends BaseController
             if (!empty($phone_number) && in_array($phone_number, $seenPhoneNumbers) && empty($email)) {
                 continue;
             }
-        
-        
+
+
             $yesvite_user[] = (object)$yesviteUserDetail;
-        
+
             // Store seen emails and phone numbers in session
             if (!empty($email)) {
                 $seenEmails[] = $email;
@@ -2586,11 +2593,11 @@ class EventController extends BaseController
                 $seenPhoneNumbers[] = $phone_number;
             }
         }
-        
+
         // Save updated seen lists in session
         session()->put('seen_emails', $seenEmails);
         session()->put('seen_phone_numbers', $seenPhoneNumbers);
-        
+
 
         $selected_user = Session::get('contact_ids');
         // dd($yesvite_user);
@@ -2762,11 +2769,11 @@ class EventController extends BaseController
                     $userExists = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] === $id;
                     });
-                    
+
                     $userIds = array_filter($userIds, function ($entry) use ($id) {
                         return $entry['id'] !== $id;
                     });
-                    
+
                     $userIds[] = $userEntry;
 
                     if (!empty($userExists)) {
@@ -4210,7 +4217,7 @@ class EventController extends BaseController
 
                     }
 
-            
+
                 }
                 if (isset($conatctId)) {
                     $filteredIds = array_map(
@@ -4231,7 +4238,7 @@ class EventController extends BaseController
 
                     }
 
-            
+
                 }
             }
             Session::forget('desgin');

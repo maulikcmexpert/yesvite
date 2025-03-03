@@ -63,7 +63,7 @@
     -o-border-radius: 20px;
     display: flex;
     justify-content: stretch;
-    height: 744px;
+    height: 100vh;
     width: 100%;
 }
 
@@ -185,7 +185,7 @@ ul.chat-list {
     padding-left: 0;
     margin-bottom: 0;
     padding: 10px 20px;
-    max-height: 570px;
+    max-height: calc(100% - 120px);
     overflow-y: scroll;
     height: 100%;
 }

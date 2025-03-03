@@ -333,11 +333,7 @@
                             results +=
                                 `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                         }
-                        // Check if no subcategory matched and add "No Data Found"
-if (results === '') {
-    results +=
-        `<div class="search-item no-data">No Data Found</div>`;
-}
+
 
                         category.subcategories.forEach(subcategory => {
                             if (subcategory.name.toLowerCase().includes(query)) {
@@ -345,14 +341,14 @@ if (results === '') {
                                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                             }
                             // Check if no subcategory matched and add "No Data Found"
-if (results === '') {
-    results +=
-        `<div class="search-item no-data">No Data Found</div>`;
-}
+
 
                         });
                     });
-
+                    if (results === '') {
+                        results +=
+                            `<div class="search-item no-data">No Data Found</div>`;
+                    }
                     $('#filtered_results').html(results);
                 } else {
                     // When search is cleared, restore the default 30 images
@@ -401,13 +397,13 @@ if (results === '') {
             });
 
 
+            let previousSearch = "";
+
             $('#search_design_category').on('input', function() {
                 let query = $(this).val().trim();
-                $('#filtered_results').hide();
-                if (query === '') {
-                    $('#filtered_results').html('');
 
-                    $('#filtered_results').hide();
+                if (query === '') {
+                    $('#filtered_results').html('').addClass('d-none');
 
                     // Show only default images
                     $(".default_show").show();
@@ -415,11 +411,21 @@ if (results === '') {
                     // Ensure checked subcategories are unchecked
                     $('input[name="design_subcategory"]').prop('checked', false);
 
-
                     // Update the total count of visible images
                     updateTotalCount();
+                } else {
+                    $('#filtered_results').removeClass('d-none');
+
+                    // Check if the first character of the previous search is different from the current one
+                    if (previousSearch.length > 0 && previousSearch.charAt(0).toLowerCase() !== query
+                        .charAt(0).toLowerCase()) {
+                        $('input[name="design_subcategory"]').prop('checked', false);
+                    }
                 }
+
+                previousSearch = query; // Store the current search query
             });
+
 
         });
         document.querySelectorAll('.collection-menu').forEach((button) => {
