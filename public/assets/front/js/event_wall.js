@@ -1241,7 +1241,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
-    $(".poll-options").empty();
+    $(".option-poll").empty();
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
@@ -1249,7 +1249,7 @@ $(".modal").on("hidden.bs.modal", function () {
 $(".btn-close").on("click", function () {
 
     $(".char-count").text("0/140"); // Reset char count
-    $(".poll-options").empty();
+    $(".option-poll").empty();
     // Add `d-none` class back to hide the div
 
 });
