@@ -29,7 +29,7 @@ $(document).on("click", ".popup-videos", function () {
     return false; // Prevent default behavior
 });
 
-$(document).on("click",'.notification-btn', function () {
+$(document).on("click", '.notification-btn', function () {
     const Onnotification = `<svg viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.5194 2.58331C8.68605 2.58331 5.58188 5.68748 5.58188 9.52081V11.7083C5.58188 12.4166 5.29022 13.4791 4.92563 14.0833L3.60272 16.2916C2.79022 17.6562 3.35272 19.1771 4.85272 19.6771C9.83188 21.3333 15.2173 21.3333 20.1965 19.6771C21.6027 19.2083 22.2069 17.5625 21.4465 16.2916L20.1235 14.0833C19.759 13.4791 19.4673 12.4062 19.4673 11.7083V9.52081C19.4569 5.70831 16.3319 2.58331 12.5194 2.58331Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
                       <path d="M15.9688 20.1042C15.9688 22.0104 14.4063 23.5729 12.5 23.5729C11.5521 23.5729 10.6771 23.1771 10.0521 22.5521C9.42708 21.9271 9.03125 21.0521 9.03125 20.1042" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"></path>
@@ -201,10 +201,10 @@ $(document).on("click", "#detail_calender_view", function () {
     var $iconSpan = $(this).find(".responsive-icon");
     console.log($(this).html());
     // if (text == "Calendar") {
-        $textSpan.text("List View");
-        $iconSpan.html(listSvg);
-        $(".responsive-calendar").css("display", "flex");
-        $(".responsive-calender-month-text").css("display", "inline-block");
+    $textSpan.text("List View");
+    $iconSpan.html(listSvg);
+    $(".responsive-calendar").css("display", "flex");
+    $(".responsive-calender-month-text").css("display", "inline-block");
     // }
 
     // if (text == "List View") {
@@ -215,12 +215,12 @@ $(document).on("click", "#detail_calender_view", function () {
     // }
 });
 
-$(document).on("click",'.get-back-home-calender',function(){
+$(document).on("click", '.get-back-home-calender', function () {
     $('.view-calender-heading').addClass("d-none");
     $('.right-bar-menu-home').removeClass("d-none");
     $('.user-name-title').removeClass("d-none");
-        $(".responsive-calendar").css("display", "none");
-        $(".responsive-calender-month-text").css("display", "none");
+    $(".responsive-calendar").css("display", "none");
+    $(".responsive-calender-month-text").css("display", "none");
 })
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
@@ -255,10 +255,10 @@ $(".notification-toggle-menu").on("click", function (event) {
         $(".mobile-menu-wrp").removeClass("active");
         $(".line").removeClass("active");
     }
-    $('.notification-showall-btn').attr('data-show','0');
-    $('.notification_drp_down_div').each(function(index) {
+    $('.notification-showall-btn').attr('data-show', '0');
+    $('.notification_drp_down_div').each(function (index) {
         let count = index + 1;
-        $('#collapseOne'+count).removeClass('show');
+        $('#collapseOne' + count).removeClass('show');
         $('.main-notification-div-list').addClass('collapsed');
     });
 });
@@ -349,173 +349,93 @@ $(".back-btn").on("click", function () {
     $(".create-post-main-body").removeClass("d-none");
 });
 
-// $(document).on("change", ".fileInputtype", function (event) {
-//     console.log(event);
+$(document).on("change", ".fileInputtype", function (event) {
+    console.log(event);
 
-//     const files = Array.from(event.target.files);
-//     const imagePreview = document.getElementById("imagePreview");
-//     const uploadImgInner = document.querySelector(
-//         ".create-post-upload-img-inner"
-//     );
-//     const uploadHeadButton = document.querySelector(
-//         ".create-post-head-upload-btn"
-//     );
-
-//     const totalFiles = imagePreview.children.length + files.length;
-
-//     // Store reference to the current input element
-//     const currentFileInput = event.target;
-
-//     // Toggle visibility based on file presence
-//     if (files.length > 0) {
-//         uploadImgInner.classList.add("d-none");
-//         uploadHeadButton.classList.remove("d-none");
-//     }
-
-//     if (totalFiles > 1) {
-//         for (const previewItem of imagePreview.children) {
-//             previewItem.classList.remove("col-12");
-//             previewItem.classList.add("col-6");
-//         }
-//     }
-
-//     files.forEach((file) => {
-//         const fileReader = new FileReader();
-//         fileReader.onload = function (e) {
-//             const previewDiv = document.createElement("div");
-//             previewDiv.classList.add(totalFiles === 1 ? "col-12" : "col-6");
-//             previewDiv.style.position = "relative";
-
-//             // Create the delete icon
-//             const deleteIcon = document.createElement("span");
-//             deleteIcon.innerHTML = `
-//         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//           <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-//           <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-//           <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-//           <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-//           <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-//         </svg>
-//       `;
-//             deleteIcon.classList.add("uploded-delete-icon");
-
-//             // Delete image functionality
-//             deleteIcon.addEventListener("click", function () {
-//                 imagePreview.removeChild(previewDiv);
-
-//                 // Check if there are any images left
-//                 if (imagePreview.children.length === 0) {
-//                     uploadImgInner.classList.remove("d-none");
-//                     uploadHeadButton.classList.add("d-none");
-
-//                     // Clear the value of the current file input
-//                     currentFileInput.value = "";
-//                 }
-//             });
-
-//             previewDiv.appendChild(deleteIcon);
-
-//             // Display image or video based on file type
-//             if (file.type.startsWith("image/")) {
-//                 const img = document.createElement("img");
-//                 img.src = e.target.result;
-//                 img.classList.add("preview-image");
-//                 previewDiv.appendChild(img);
-//             } else if (file.type.startsWith("video/")) {
-//                 const video = document.createElement("video");
-//                 video.src = e.target.result;
-//                 video.controls = true;
-//                 video.classList.add("preview-video");
-//                 previewDiv.appendChild(video);
-//             }
-
-//             imagePreview.appendChild(previewDiv);
-//         };
-
-//         fileReader.readAsDataURL(file);
-//     });
-// });
-document.addEventListener("DOMContentLoaded", function () {
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.querySelectorAll(".fileInputtype");
+    const files = Array.from(event.target.files);
     const imagePreview = document.getElementById("imagePreview");
+    const uploadImgInner = document.querySelector(
+        ".create-post-upload-img-inner"
+    );
+    const uploadHeadButton = document.querySelector(
+        ".create-post-head-upload-btn"
+    );
 
-    // Prevent default behavior for drag events
-    ["dragenter", "dragover", "dragleave", "drop"].forEach(event => {
-        dropZone.addEventListener(event, (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-    });
+    const totalFiles = imagePreview.children.length + files.length;
 
-    // Highlight drop area on drag over
-    dropZone.addEventListener("dragover", () => dropZone.classList.add("drag-over"));
+    // Store reference to the current input element
+    const currentFileInput = event.target;
 
-    // Remove highlight when dragging out
-    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
-
-    // Handle file drop
-    dropZone.addEventListener("drop", (event) => {
-        dropZone.classList.remove("drag-over");
-        const files = Array.from(event.dataTransfer.files);
-        handleFiles(files);
-    });
-
-    // Handle file selection from input
-    fileInput.addEventListener("change", (event) => {
-        const files = Array.from(event.target.files);
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        files.forEach((file) => {
-            const fileReader = new FileReader();
-            fileReader.onload = function (e) {
-                const previewDiv = document.createElement("div");
-                previewDiv.classList.add("col-6");
-                previewDiv.style.position = "relative";
-
-                // Create delete icon
-                const deleteIcon = document.createElement("span");
-                deleteIcon.innerHTML = `
-                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                `;
-                deleteIcon.classList.add("uploded-delete-icon");
-
-                // Delete image functionality
-                deleteIcon.addEventListener("click", function () {
-                    imagePreview.removeChild(previewDiv);
-                    if (imagePreview.children.length === 0) {
-                        dropZone.classList.remove("d-none");
-                    }
-                });
-
-                previewDiv.appendChild(deleteIcon);
-
-                if (file.type.startsWith("image/")) {
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.classList.add("preview-image");
-                    previewDiv.appendChild(img);
-                } else if (file.type.startsWith("video/")) {
-                    const video = document.createElement("video");
-                    video.src = e.target.result;
-                    video.controls = true;
-                    video.classList.add("preview-video");
-                    previewDiv.appendChild(video);
-                }
-
-                imagePreview.appendChild(previewDiv);
-            };
-
-            fileReader.readAsDataURL(file);
-        });
+    // Toggle visibility based on file presence
+    if (files.length > 0) {
+        uploadImgInner.classList.add("d-none");
+        uploadHeadButton.classList.remove("d-none");
     }
+
+    if (totalFiles > 1) {
+        for (const previewItem of imagePreview.children) {
+            previewItem.classList.remove("col-12");
+            previewItem.classList.add("col-6");
+        }
+    }
+
+    files.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            const previewDiv = document.createElement("div");
+            previewDiv.classList.add(totalFiles === 1 ? "col-12" : "col-6");
+            previewDiv.style.position = "relative";
+
+            // Create the delete icon
+            const deleteIcon = document.createElement("span");
+            deleteIcon.innerHTML = `
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+            deleteIcon.classList.add("uploded-delete-icon");
+
+            // Delete image functionality
+            deleteIcon.addEventListener("click", function () {
+                imagePreview.removeChild(previewDiv);
+
+                // Check if there are any images left
+                if (imagePreview.children.length === 0) {
+                    uploadImgInner.classList.remove("d-none");
+                    uploadHeadButton.classList.add("d-none");
+
+                    // Clear the value of the current file input
+                    currentFileInput.value = "";
+                }
+            });
+
+            previewDiv.appendChild(deleteIcon);
+
+            // Display image or video based on file type
+            if (file.type.startsWith("image/")) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.classList.add("preview-image");
+                previewDiv.appendChild(img);
+            } else if (file.type.startsWith("video/")) {
+                const video = document.createElement("video");
+                video.src = e.target.result;
+                video.controls = true;
+                video.classList.add("preview-video");
+                previewDiv.appendChild(video);
+            }
+
+            imagePreview.appendChild(previewDiv);
+        };
+
+        fileReader.readAsDataURL(file);
+    });
 });
+
 
 // Add new option on click
 // $(".option-add-btn").on("click", function () {
@@ -564,40 +484,40 @@ $(document).ready(function () {
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
     $(".photo-card-head-right").each(function () {
-      const $container = $(this); // Get the current container
-      const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
-      const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
-      let pressTimer;
+        const $container = $(this); // Get the current container
+        const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+        const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+        let pressTimer;
 
-      // Handle long press to show emoji dropdown (for both desktop and mobile)
-      $likeButton.on("mousedown touchstart", function () {
-        pressTimer = setTimeout(function () {
-          $emojiDropdown.show(); // Show emoji dropdown after long press
-        }, 500); // Trigger long press after 0.5 seconds
-      });
+        // Handle long press to show emoji dropdown (for both desktop and mobile)
+        $likeButton.on("mousedown touchstart", function () {
+            pressTimer = setTimeout(function () {
+                $emojiDropdown.show(); // Show emoji dropdown after long press
+            }, 500); // Trigger long press after 0.5 seconds
+        });
 
-      $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-        clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-      });
+        $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+            clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+        });
 
-      // Handle emoji click
-      $emojiDropdown.on("click", ".emoji", function () {
-        const emoji = $(this).data("emoji");
+        // Handle emoji click
+        $emojiDropdown.on("click", ".emoji", function () {
+            const emoji = $(this).data("emoji");
 
-        // Remove the heart icon and set emoji inside the button
-        $likeButton.html(`<i class="show_Emoji" style="display:flex"><img src='${reactionIcons[emoji]}' class="emoji"/></i>`); // Show selected emoji inside button
+            // Remove the heart icon and set emoji inside the button
+            $likeButton.html(`<i class="show_Emoji" style="display:flex"><img src='${reactionIcons[emoji]}' class="emoji"/></i>`); // Show selected emoji inside button
 
-        $emojiDropdown.hide(); // Hide emoji dropdown after selection
-      });
+            $emojiDropdown.hide(); // Hide emoji dropdown after selection
+        });
 
-      // Optional: Hide the emoji dropdown if you click outside of it
-      $(document).on("click touchstart", function (e) {
-        if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-          $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-        }
-      });
+        // Optional: Hide the emoji dropdown if you click outside of it
+        $(document).on("click touchstart", function (e) {
+            if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+                $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+            }
+        });
     });
-  });
+});
 // ===add-photo-vidoe-div-onclick===
 const createphotobtn = document.getElementById("create-photo-btn");
 const createpollbtn = document.getElementById("create-poll-btn");
@@ -1150,7 +1070,7 @@ $(document).on("click", ".notification_read", function () {
             console.error("Error fetching events:", error);
             // $('.loader').css('display','none');
         },
-        complete: function () {},
+        complete: function () { },
     });
 });
 
@@ -1273,24 +1193,24 @@ if (hiddenData != undefined) {
     });
 }
 
-$(document).on('click', '.notification-showall-btn', function() {
-    var show=$(this).attr('data-show');
+$(document).on('click', '.notification-showall-btn', function () {
+    var show = $(this).attr('data-show');
     $('.main-notification-div-list').removeClass('unseen-notification');
 
-    if(show=="0"){
+    if (show == "0") {
         $(this).text('Minimize All');
-        $(this).attr('data-show','1');
-        $('.notification_drp_down_div').each(function(index) {
+        $(this).attr('data-show', '1');
+        $('.notification_drp_down_div').each(function (index) {
             let count = index + 1;
-            $('#collapseOne'+count).addClass('show');
+            $('#collapseOne' + count).addClass('show');
             $('.main-notification-div-list').removeClass('collapsed');
         });
-    }else{
+    } else {
         $(this).text('Show All');
-        $(this).attr('data-show','0');
-        $('.notification_drp_down_div').each(function(index) {
+        $(this).attr('data-show', '0');
+        $('.notification_drp_down_div').each(function (index) {
             let count = index + 1;
-            $('#collapseOne'+count).removeClass('show');
+            $('#collapseOne' + count).removeClass('show');
             $('.main-notification-div-list').addClass('collapsed');
         });
     }
