@@ -2993,13 +2993,29 @@ main.new-main-content {
   }
 
   .create_post_btn:disabled{
-    background-color: gray !important;
-    border: 1px solid gray !important;
+    background-color: var(--primaryColor) !important;
+    border: 1px solidvar(--primaryColor) !important;
   }
 
-  .hosted-by-template-slider-img.disable-class{
+  .loader {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+}
 
-  }
+.loader::before {
+    content: "• • • •";
+    font-size: 24px;
+    letter-spacing: 4px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 
   .hosted-by-template-slider-img.disable-class{
       position: relative;

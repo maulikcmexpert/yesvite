@@ -145,7 +145,6 @@ class RsvpController extends BaseController
         $page = 'front.rsvp';
         $js = ['rsvp'];
         $css = 'message.css';
-        
         $event_id =  decrypt($eventId);
         $event_invited_user_id = decrypt($event_invited_user_id);
         $isShare="";
@@ -166,7 +165,8 @@ class RsvpController extends BaseController
         if ($event_invited_user_id == "") {
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
-            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->user_id;
+            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first();
+            dd($user_id);
         }
         // dd($user_id);
         $sync_id = "";
@@ -666,7 +666,7 @@ class RsvpController extends BaseController
             $checkEvent = Event::where(['id' => $eventId])->first();
             if ($checkEvent->end_date < date('Y-m-d')) {
                 if($request->isShare==""){
-                    return redirect('rsvp/' . $event_invited_user_id . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
+                    return redirect('rsvp/' . encrypt($request->event_invited_user_id) . '/' . $request->event_id)->with('msg_error', "Event is past , you can't attempt RSVP");
                 }else{
                     return redirect('rsvp/' . encrypt("") . '/' . encrypt($eventId).'/'.encrypt(1))->with('msg_error', "Event is past , you can't attempt RSVP");
                 }
