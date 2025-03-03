@@ -420,6 +420,12 @@
     #sidebar_select_design_category .setting-category-wrp {
         border-radius: 20px 20px 0px 0px !important;
     }
+    .collection-card {
+        height: 250px !important;
+    }
+    .collection-card.card-blue{
+        border-radius: 10px !important;
+    }
 }
 
 @media only screen and (max-width: 424px) {
@@ -430,5 +436,11 @@
 
     .choose-design-cards {
         gap: 10px;
+    }
+    .collection-card {
+        height: 230px !important;
+    }
+    .collection-card.card-blue{
+        border-radius: 10px !important;
     }
 }
