@@ -355,7 +355,7 @@
                                                             data-bs-target="#detail-photo-modal"
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
-                                                            data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
+                                                            data-img-src="{{ $photo['mediaData'][0]['post_media'] }}"
                                                             data-image="{{ json_encode($postMedia) }}">
 
 
@@ -444,7 +444,7 @@
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
-                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
+                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? "" }}">
                                                         </button>
                                                     </div>
 
