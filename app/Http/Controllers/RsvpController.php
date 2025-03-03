@@ -167,7 +167,7 @@ class RsvpController extends BaseController
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
             // dd($event_invited_user_id);
-            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first();
+            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->user_id;
         }
         // dd($user_id);
         $sync_id = "";
@@ -181,7 +181,6 @@ class RsvpController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event_id)->first();
 
-            dd($eventDetail->user_id,$user_id);
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
