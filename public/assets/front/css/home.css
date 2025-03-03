@@ -561,17 +561,14 @@
 }
 
 
-.filter-main-wrp .selected-items{
+.filter-main-wrp .selected-items .selected-item{
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Semibold);
     padding: 9px 20px;
     border: 1px solid var(--borderColor);
     border-radius: 100px;
     margin-left: 10px;
     background-color: #e9f8ff80;
-}
-
-.filter-main-wrp .selected-items .selected-item{
-    font-size: 14px;
-    font-family: var(--SFProDisplay-Semibold);
 }
 
 .filter-main-wrp .selected-items .selected-item .close-btn{
