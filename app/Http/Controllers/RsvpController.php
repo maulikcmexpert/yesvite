@@ -146,8 +146,8 @@ class RsvpController extends BaseController
         $js = ['rsvp'];
         $css = 'message.css';
         $event_id =  decrypt($eventId);
-        // dd($event_invited_user_id);
         $event_invited_user_id = decrypt($event_invited_user_id);
+        dd($event_invited_user_id);
         $isShare="";
 
         // dd($share);
@@ -167,7 +167,7 @@ class RsvpController extends BaseController
             $user_id = Event::where('id', $event_id)->first()->user_id;
         } else {
             dd($event_invited_user_id);
-            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first();
+            $user_id = EventInvitedUser::where('id', $event_invited_user_id)->first()->user_id;
         }
         // dd($user_id);
         $sync_id = "";
@@ -615,7 +615,7 @@ class RsvpController extends BaseController
             // dd($e);
             return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
