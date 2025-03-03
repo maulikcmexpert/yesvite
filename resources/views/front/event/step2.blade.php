@@ -72,7 +72,7 @@
                                                                         <input
                                                                             class="form-check-input categoryChecked_{{ $category->id }}"
                                                                             name="design_subcategory" type="checkbox"
-                                                                             value="{{ $subcategory->subcategory_name }}"
+                                                                            value="{{ $subcategory->subcategory_name }}"
                                                                             id="subcategory{{ $subcategory->id }}"
                                                                             data-category-id="{{ $category->id }}"
                                                                             data-subcategory-id="{{ $subcategory->id }}">
@@ -276,51 +276,53 @@
             });
 
             // Handle individual subcategory checkbox change
-            $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function () {
-        $(".image-item").hide(); // Hide all default images
-        $(".image-item-new").hide(); // Hide all new images
+            $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
+                $(".image-item").hide(); // Hide all default images
+                $(".image-item-new").hide(); // Hide all new images
 
-        let default_s = 0;
-        var value = $(this).val();
+                let default_s = 0;
+                var value = $(this).val();
 
-        if ($(this).is(":checked")) {
-            $(".selected-items").append(
-                `<span class="selected-item" data-value="${value}">
+                if ($(this).is(":checked")) {
+                    $(".selected-items").append(
+                        `<span class="selected-item" data-value="${value}">
                 ${value} <span class="close-btn">x</span>
-            </span>`
-            );
-        } else {
-            $(".selected-items").find(`[data-value='${value}']`).remove();
-        }
+                </span>`
+                    );
+                } else {
+                    $(".selected-items").find(`[data-value='${value}']`).remove();
+                }
 
 
-        $('input[name="design_subcategory"]:checked').each(function () {
-            default_s++;
-            $(".image-item").removeClass('d-none');
-            const categoryId = $(this).data('category-id');
-            const subcategoryId = $(this).data('subcategory-id');
+                $('input[name="design_subcategory"]:checked').each(function() {
+                    default_s++;
+                    $(".image-item").removeClass('d-none');
+                    const categoryId = $(this).data('category-id');
+                    const subcategoryId = $(this).data('subcategory-id');
 
-            // Show filtered images matching checked categories and subcategories
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+                    // Show filtered images matching checked categories and subcategories
+                    $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                        .show();
 
-        });
+                });
 
-        if (default_s == 0) {
-            $(".image-item").removeClass('d-none');
-            $(".default_show").show();
-        }
-        updateTotalCount();
-    });
-    $(document).on("click", ".close-btn", function () {
-        var parent = $(this).parent();
-        var value = parent.attr("data-value");
+                if (default_s == 0) {
+                    $(".image-item").removeClass('d-none');
+                    $(".default_show").show();
+                }
+                updateTotalCount();
+            });
+            $(document).on("click", ".close-btn", function() {
+                var parent = $(this).parent();
+                var value = parent.attr("data-value");
 
-        // Uncheck the corresponding checkbox
-        $('input[name="design_subcategory"][value="' + value + '"]').prop("checked", false).trigger("change");
+                // Uncheck the corresponding checkbox
+                $('input[name="design_subcategory"][value="' + value + '"]').prop("checked", false).trigger(
+                    "change");
 
-        // Remove the selected item from the list
-        parent.remove();
-    });
+                // Remove the selected item from the list
+                parent.remove();
+            });
             // Function to update total count of visible items
             function updateTotalCount() {
                 var visibleItems = $('.image-item:visible, .image-item-new:visible').length;
@@ -338,7 +340,7 @@
                 $("#allchecked").hide();
                 $("#Allcat").prop("checked", false);
                 $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-
+                $(".selected-items").empty();
                 var visibleItems = $('.image-item:visible').length;
                 $('.total_design_count').text($('.default_show:visible').length + ' Items');
             });

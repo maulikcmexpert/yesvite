@@ -84,12 +84,13 @@ main.new-main-content {
 
 .hosted-by-template-slider-img {
   width: 100%;
-  height: 380px;
+  /* height: 380px; */
   border-radius: 10px;
 }
 
 .hosted-by-template-slider-img img {
   border-radius: 10px;
+  aspect-ratio: 5 / 7;
 }
 
 .hosted-by-template-slider .custom-pagination {
