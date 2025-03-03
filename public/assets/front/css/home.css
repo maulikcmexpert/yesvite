@@ -560,6 +560,31 @@
     background-color: #e9f8ff;
 }
 
+
+.filter-main-wrp .selected-items .selected-item{
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Semibold);
+    padding: 9px 20px;
+    border: 1px solid var(--borderColor);
+    border-radius: 100px;
+    margin-left: 10px;
+    background-color: #e9f8ff80;
+}
+
+.filter-main-wrp .selected-items .selected-item .close-btn{
+    margin-left: 10px;
+    font-size: 20px;
+    line-height: 1;
+    font-family: var(--SFProDisplay-Regular);
+    color: var(--lightColor);
+    cursor: pointer;
+    transition:all 0.3s ease-in-out;
+}
+
+.filter-main-wrp .selected-items .selected-item .close-btn:hover{
+    color: var(--primaryColor);
+}
+
 /* ===== Search Option Section end ===== */
 
 .collection-wrapper .filter-main-wrp {

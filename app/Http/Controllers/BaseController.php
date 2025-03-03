@@ -52,16 +52,11 @@ class BaseController extends Controller
 
         return [
             '15' => ['priceId' => 'price_1QySASCHXENZbvVPjTMtay1C', 'coins' => 15, 'price' => 14.99],
-
-            '30' => ['priceId' => 'price_1QySASCHXENZbvVPlN5mjGgn', 'coins' => 30, 'price' => 24.99],
-
-            '50' => ['priceId' => 'price_1QySASCHXENZbvVPtri9qtrY', 'coins' => 50, 'price' => 34.99],
-
-            '100' => ['priceId' => 'price_1QySASCHXENZbvVPrVx7wKCh', 'coins' => 100, 'price' => 59.99],
-
-            '200' => ['priceId' => 'price_1QySASCHXENZbvVPZszQjyMy', 'coins' => 250, 'price' => 99.99],
-
-            '500' => ['priceId' => 'price_1QySASCHXENZbvVPPrYfdyNA', 'coins' => 500, 'price' => 125.99],
+            '30' => ['priceId' => 'price_1QySUxCHXENZbvVPEvWaUEor', 'coins' => 30, 'price' => 24.99],
+            '50' => ['priceId' => 'price_1QySYWCHXENZbvVPEjCfXqCP', 'coins' => 50, 'price' => 34.99],
+            '100' => ['priceId' => 'price_1QySdXCHXENZbvVPLB9A8nOM', 'coins' => 100, 'price' => 59.99],
+            '200' => ['priceId' => 'price_1QySgZCHXENZbvVPrw2hgzpZ', 'coins' => 250, 'price' => 99.99],
+            '500' => ['priceId' => 'price_1QyShqCHXENZbvVP6DuKsMWK', 'coins' => 500, 'price' => 125.99],
         ];
     }
 }
