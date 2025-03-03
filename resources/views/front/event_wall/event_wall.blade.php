@@ -1038,7 +1038,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="" id="photoForm" method="POST"
+                        <form action="{{ route('event_wall.eventPost') }}" id="photoForm" method="POST"
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                             <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
@@ -1262,7 +1262,7 @@
                             </button>
                         </div>
                         <div class="">
-                            <button type ="button" class="cmn-btn create_post_btn">
+                            <button type ="button" class="cmn-btn create_post_btn loader_11">
                                 post
                             </button>
                         </div>
