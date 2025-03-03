@@ -3005,18 +3005,18 @@ main.new-main-content {
       position: relative;
   }
   .hosted-by-template-slider-img.disable-class::before {
-      content: "PAST EVENT";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotateZ(-35deg);
-      color: red;
-      border: 2px solid red;
-      font-family: var(--SFProDisplay-Bold);
-      font-size: 14px;
-      z-index: 10;
-      width: calc(100% - 10px);
-      text-align: center;
+    content: "PAST EVENT";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateZ(-35deg);
+    color: red;
+    border: 2px solid red;
+    font-family: var(--SFProDisplay-Bold);
+    font-size: 30px;
+    z-index: 10;
+    width: calc(100% - 10px);
+    text-align: center;
   }
   .hosted-by-template-slider-img.disable-class::after{
       content: "";
@@ -3104,6 +3104,9 @@ main.new-main-content {
 
     .hosted-by-date-time-left{
       width: 100%;
+    }
+    .hosted-by-template-slider-img.disable-class::before {
+      font-size: 26px;
     }
   }
 
