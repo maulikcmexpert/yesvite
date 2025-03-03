@@ -866,6 +866,7 @@ $(document).on("click","#copy_link_btn",function(e){
     e.preventDefault(); // Prevents any default button action
     var copyText = $("#copy_link").val();
     navigator.clipboard.writeText(copyText).then(function() {
+        toastr.success('Link Copied');
     }).catch(function(err) {
         console.error("Failed to copy: ", err);
     });

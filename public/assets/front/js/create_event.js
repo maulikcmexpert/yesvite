@@ -6809,6 +6809,7 @@ $(document).on("click", ".final_create_event", function (e) {
             $('#event_copy_link').val(response.copy_link);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
+                $('#gift_heading_main').removeClass('d-none');
                 // $('#eventModal').modal('show');
             } else {
                 toastr.success("Event Created Successfully");
@@ -8977,6 +8978,8 @@ function updateEventData() {
                 $('#event_copy_link').val(response.copy_link);
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
+                    $('#gift_heading_main').removeClass('d-none');
+                    
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
@@ -9862,6 +9865,7 @@ $(document).on("click","#event_copy_link_btn",function(e){
     e.preventDefault(); // Prevents any default button action
     var copyText = $("#event_copy_link").val();
     navigator.clipboard.writeText(copyText).then(function() {
+        toastr.success('Link Copied');
     }).catch(function(err) {
         console.error("Failed to copy: ", err);
     });

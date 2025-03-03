@@ -585,6 +585,13 @@
     color: var(--primaryColor);
 }
 
+
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show + .filters-drp .dropdown::after {
+    transform: rotate(180deg);
+}
+
+
+
 /* ===== Search Option Section end ===== */
 
 .collection-wrapper .filter-main-wrp {
@@ -679,11 +686,12 @@
     height: 10px;
     position: absolute;
     right: 18px;
-    top: 35%;
+    top: 50%;
     transform: translateY(-50%);
     color: var(--lightColor);
     pointer-events: none;
     font-size: 14px;
+    line-height: 1;
 }
 
 .collection-wrapper .dropdown-toggle::after {
