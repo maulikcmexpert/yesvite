@@ -3169,6 +3169,18 @@
     text-align: right;
 }
 
+#nav-profile-home .step_2{
+    height: 100vh;
+}
+
+#nav-profile-home .step_2 .collection-wrapper{
+    padding-top: 0px !important;
+}
+
+#nav-profile-home .step_2 .list_all_design_catgeory{
+    
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
