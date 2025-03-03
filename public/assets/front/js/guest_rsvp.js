@@ -247,3 +247,22 @@ $(document).on('click', '.remove-Rsvp-btn', function () {
 $(".modal").on("hidden.bs.modal", function(){
     $("#message_to_host").val('');
 });
+
+$(document).on("change", ".email-checkbox, .phone-checkbox", function () {
+    let totalCheckboxes = $(".email-checkbox:not(:disabled), .phone-checkbox:not(:disabled)").length;
+    let checkedCount = $(".email-checkbox:not(:disabled):checked, .phone-checkbox:not(:disabled):checked").length;
+
+    if (checkedCount == 0) {
+        $('.add_guest').attr('disabled',true)
+    } else {
+        $('.add_guest').attr('disabled',false)
+    }
+});
+
+$(document).on("change", ".phoneContact-checkbox", function () {
+    let checkedCount = $(".phoneContact-checkbox:not(:disabled):checked").length;
+    if (checkedCount == 0) {
+        $('.add_guest').attr('disabled',true)
+    } else {
+        $('.add_guest').attr('disabled',false)
+    }});

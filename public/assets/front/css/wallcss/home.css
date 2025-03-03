@@ -3038,8 +3038,11 @@ main.new-main-content {
       height: 800px;
   }
     .create-post-modal .modal-body {
-      max-height: 700px;
+      max-height: calc(100vh - 100px);
       padding-bottom: 50px;
+    }
+    .create-post-upload-img-inner {
+      min-height: calc(100vh - 510px);
     }
   }
 
@@ -3125,6 +3128,13 @@ main.new-main-content {
     .hosted-by-template-slider-img.disable-class::before {
       font-size: 26px;
     }
+    .create-post-upload-img-inner {
+      min-height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
   }
 
   @media only screen and (max-width: 1199px) {
