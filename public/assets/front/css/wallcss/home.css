@@ -3042,7 +3042,7 @@ main.new-main-content {
       padding-bottom: 50px;
     }
     .create-post-upload-img-inner {
-      min-height: calc(100vh - 410px);
+      min-height: calc(100vh - 510px);
     }
   }
 
