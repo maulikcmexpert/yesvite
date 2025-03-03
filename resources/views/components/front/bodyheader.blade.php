@@ -1842,7 +1842,7 @@ $notification_list=getNotificationList();
                                     <a class="nav-link" href="{{ route('pricing')}}">Pricing</a>
                                 </li>
 
-                                     {{-- @if(Request::segment(1) !== 'rsvp')
+                                     @if(Request::segment(1) !== 'rsvp')
                                          <li class="nav-item d-flex align-items-center gap-3">
                                             <a class="nav-link signIn-btn" href="{{route('auth.login')}}">Sign In</a>
                                             <a class="nav-link signIn-btn" href="{{route('auth.register')}}">
@@ -1854,7 +1854,7 @@ $notification_list=getNotificationList();
                                                 Sign Up
                                             </a>
                                         </li>
-                                     @endif --}}
+                                     @endif
 
                                  </ul>
                              </div>
