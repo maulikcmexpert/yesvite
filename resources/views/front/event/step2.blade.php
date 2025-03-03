@@ -330,20 +330,20 @@
             }
 
 
-            $('#resetCategories').on('click', function(e) {
-                e.preventDefault();
-                $(".categoryNew").show();
-                $(".subcategoryNew").hide();
-                $(".image-item-new").hide(); // Hide filtered items
-                $(".image-item").show(); // Show default images
-                $("#category_name").hide();
-                $("#allchecked").hide();
-                $("#Allcat").prop("checked", false);
-                $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-                $(".selected-items").empty();
-                var visibleItems = $('.image-item:visible').length;
-                $('.total_design_count').text($('.default_show:visible').length + ' Items');
-            });
+            $('#resetCategories').on('click', function (e) {
+        e.preventDefault();
+        $(".categoryNew").show();
+        $(".subcategoryNew").hide();
+        $(".image-item-new").hide(); // Hide filtered items
+        $(".image-item").show(); // Show default images
+        $("#category_name").hide();
+        $("#allchecked").hide();
+        $("#Allcat").prop("checked", false);
+        $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
+        $(".selected-items").empty();
+
+        $('.total_design_count').text($('.default_show:visible').length + ' Items');
+    });
 
             $('#filtered_results').hide();
             $('#search_design_category').on('keyup', function() {
