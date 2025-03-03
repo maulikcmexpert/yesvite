@@ -134,9 +134,9 @@
                 @endphp
 
                 @foreach ($allImages as $image)
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs
                          {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }} "
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                        {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}}
                         data-category-id="{{ $image['category_id'] }}"
                         data-subcategory-id="{{ $image['subcategory_id'] }}"
                         data-category_name="{{ $image['category_name'] }}">
