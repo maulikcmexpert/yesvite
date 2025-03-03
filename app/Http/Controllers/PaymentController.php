@@ -235,6 +235,7 @@ class PaymentController extends BaseController
     {
         $user = Auth::guard('web')->user();
         $sessionId = $request->query('paid_id');
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $session = \Stripe\Checkout\Session::retrieve($sessionId);
         $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
         $lineItems = $stripe->checkout->sessions->allLineItems($sessionId, []);
@@ -242,7 +243,7 @@ class PaymentController extends BaseController
         if (!empty($lineItems->data)) {
             $priceId = $lineItems->data[0]->price->id; // Get the price ID
         }
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
         $sessionKey = 'payment_session_' . $user->id . '_' . $priceId;
         if (session()->has($sessionKey)) {
             session()->put($sessionKey . '.status', 'failed');
