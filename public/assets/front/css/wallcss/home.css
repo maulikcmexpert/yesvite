@@ -3045,12 +3045,17 @@ main.new-main-content {
 
   @media only screen and (min-width: 1600px) and (max-width: 1799px) {
     .create-post-modal .modal-content {
+      width: 100%;
       max-width: 600px;
-      height: 700px;
+      height: calc(100% - 20px);
+    }
+    .create-post-upload-img-inner {
+      min-height: calc(100vh - 410px);
     }
     .create-post-modal .modal-body {
-      max-height: 600px;
+      max-height: calc(100vh - 100px);
       padding-bottom: 50px;
+      height: 100%;
     }
   }
 
@@ -3064,8 +3069,9 @@ main.new-main-content {
       min-height: calc(100vh - 410px);
     }
     .create-post-modal .modal-body {
-      max-height: calc(100% - 200px);
+      max-height: calc(100vh - 100px);
       padding-bottom: 50px;
+      height: 100%;
     }
   }
 
