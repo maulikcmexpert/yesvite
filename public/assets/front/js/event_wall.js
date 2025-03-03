@@ -1045,9 +1045,8 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .option-poll").each(function (index) {
-            $(this)
-                .find(".option-number")
-                .text(index + 3);
+            $(this).find(".option-number").text(index + 3);
+            $(this).find(".char-count").text("0/140"); // Reset char count
         });
     }
     $("#postContent").keypress(function (event) {
