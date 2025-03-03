@@ -1025,6 +1025,9 @@ input:-internal-autofill-selected{
     background-color: #fff !important;
 }
 
+input:-webkit-autofill {
+    background-color: #fff !important; /* Change to your preferred color */;
+}
 
 @keyframes bounce {
     0%,
