@@ -437,7 +437,7 @@ $(".back-btn").on("click", function () {
 // });
 document.addEventListener("DOMContentLoaded", function () {
     const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementsByClassName("fileInputtype");
+    const fileInput = document.querySelectorAll(".fileInputtype");
     const imagePreview = document.getElementById("imagePreview");
 
     // Prevent default behavior for drag events
