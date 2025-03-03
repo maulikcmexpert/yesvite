@@ -8974,6 +8974,7 @@ function updateEventData() {
             } else {
                 $("#loader").css("display", "none");
                 $("#created_event_id").val(response.event_id);
+                $('#event_copy_link').val(response.copy_link);
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
                     // $('#eventModal').modal('show');
