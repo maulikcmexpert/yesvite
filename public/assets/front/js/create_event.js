@@ -9857,9 +9857,9 @@ $(document).on("click", ".previousImeg", async function (e) {
     li_design_click();
     
 });
-$(document).on("click","#copy_link_btn",function(e){
+$(document).on("click","#event_copy_link_btn",function(e){
     e.preventDefault(); // Prevents any default button action
-    var copyText = $("#copy_link").val();
+    var copyText = $("#event_copy_link").val();
     navigator.clipboard.writeText(copyText).then(function() {
     }).catch(function(err) {
         console.error("Failed to copy: ", err);

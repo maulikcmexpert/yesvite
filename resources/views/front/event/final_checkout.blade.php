@@ -935,7 +935,7 @@
                     <h4 class="title">Share Event Link</h4>
                     <div class="new_copy_event_inner">
                         <input type="text" value="" name="event_copy_link" id="event_copy_link"/>
-                        <button type="button" id="copy_link_btn">Copy Link</button>
+                        <button type="button" id="event_copy_link_btn">Copy Link</button>
                     </div>
                 </div>
                 <div class="google-play" id="gift_registry_logo">
