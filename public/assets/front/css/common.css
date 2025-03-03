@@ -1027,7 +1027,7 @@ input:-internal-autofill-selected{
 
 input:-webkit-autofill {
     background-color: #fff !important; /* Change to your preferred color */
-    -webkit-box-shadow: 0 0 0px 1000px #f0f8ff inset, 
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset, 
     0 0 0 0.3rem rgba(247, 60, 113, 0.2) !important;
   }
 
