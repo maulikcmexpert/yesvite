@@ -530,18 +530,12 @@ document.querySelector(".create-post-upload-img-main").addEventListener("click",
 const dropArea = document.querySelector(".create-post-upload-img-main");
 const fileInput = document.querySelector(".fileInputtype");
 
-dropArea.addEventListener("dragover", function (event) {
-    event.preventDefault();
-    dropArea.classList.add("dragover");
-});
 
-dropArea.addEventListener("dragleave", function () {
-    dropArea.classList.remove("dragover");
-});
+
 
 dropArea.addEventListener("drop", function (event) {
     event.preventDefault();
-    dropArea.classList.remove("dragover");
+
 
     const files = Array.from(event.dataTransfer.files);
 
