@@ -1133,12 +1133,12 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
+$("#photos_click").on("click", function () {
 
-    $("#photos_click").click(function () {
         $(".create-photo-btn").trigger("click");
     });
+    $("#poll_click").on("click", function () {
 
-    $("#poll_click").click(function () {
         $(".create-poll-btn").trigger("click");
     });
 
