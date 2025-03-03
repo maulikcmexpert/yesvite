@@ -1389,6 +1389,9 @@
     .home-web-tabs-wrp .nav-tabs .nav-link {
         flex-basis: 50% !important;
     }
+    .collection-card {
+        height: 310px;
+    }
 }
 
 @media only screen and (max-width: 435px) {
@@ -1418,6 +1421,12 @@
 @media only screen and (max-width: 424px) {
     .home-web-tabs-wrp .nav-tabs .nav-link {
         flex-basis: 50% !important;
+    }
+    .collection-card {
+        height: 270px !important;
+    }
+    .collection-card.card-blue{
+        border-radius: 10px !important;
     }
 }
 
