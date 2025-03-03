@@ -353,18 +353,16 @@ $(document).on("change", ".fileInputtype", function (event) {
     console.log(event);
 
     const files = Array.from(event.target.files);
+    handleFiles(files, event.target);
+});
+
+// Function to handle image/video preview
+function handleFiles(files, fileInput) {
     const imagePreview = document.getElementById("imagePreview");
-    const uploadImgInner = document.querySelector(
-        ".create-post-upload-img-inner"
-    );
-    const uploadHeadButton = document.querySelector(
-        ".create-post-head-upload-btn"
-    );
+    const uploadImgInner = document.querySelector(".create-post-upload-img-inner");
+    const uploadHeadButton = document.querySelector(".create-post-head-upload-btn");
 
     const totalFiles = imagePreview.children.length + files.length;
-
-    // Store reference to the current input element
-    const currentFileInput = event.target;
 
     // Toggle visibility based on file presence
     if (files.length > 0) {
@@ -389,27 +387,23 @@ $(document).on("change", ".fileInputtype", function (event) {
             // Create the delete icon
             const deleteIcon = document.createElement("span");
             deleteIcon.innerHTML = `
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331 10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977 14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
             deleteIcon.classList.add("uploded-delete-icon");
 
             // Delete image functionality
             deleteIcon.addEventListener("click", function () {
                 imagePreview.removeChild(previewDiv);
-
-                // Check if there are any images left
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
-
-                    // Clear the value of the current file input
-                    currentFileInput.value = "";
+                    fileInput.value = ""; // Clear input
                 }
             });
 
@@ -434,7 +428,36 @@ $(document).on("change", ".fileInputtype", function (event) {
 
         fileReader.readAsDataURL(file);
     });
+}
+
+// Click anywhere to open file input
+document.querySelector(".create-post-upload-img-main").addEventListener("click", function (e) {
+    // Prevent triggering when clicking delete icon or already uploaded images
+    if (!e.target.closest(".uploded-delete-icon") && !e.target.closest("#imagePreview")) {
+        document.querySelector(".fileInputtype").click();
+    }
 });
+
+// Drag & Drop functionality
+const dropArea = document.querySelector(".create-post-upload-img-main");
+
+dropArea.addEventListener("dragover", function (event) {
+    event.preventDefault();
+    dropArea.classList.add("dragover");
+});
+
+dropArea.addEventListener("dragleave", function () {
+    dropArea.classList.remove("dragover");
+});
+
+dropArea.addEventListener("drop", function (event) {
+    event.preventDefault();
+    dropArea.classList.remove("dragover");
+
+    const files = Array.from(event.dataTransfer.files);
+    handleFiles(files, document.querySelector(".fileInputtype"));
+});
+
 
 
 // Add new option on click
