@@ -1089,7 +1089,7 @@ $(document).ready(function () {
             document.getElementById("pollContent").value = postContent;
 
             // Add loader
-            $this.html('<span class="loader"></span>').prop("disabled", true);
+            $this.html('<span class="loader_11"></span>').prop("disabled", true);
 
             pollForm.submit();
         }
@@ -1107,7 +1107,7 @@ $(document).ready(function () {
             }
 
             // Add loader
-            $this.html('<span class="loader"></span>').prop("disabled", true);
+            $this.html('<span class="loader_11"></span>').prop("disabled", true);
 
             photoForm.submit();
         }
