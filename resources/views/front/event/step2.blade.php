@@ -338,7 +338,7 @@
                 $("#allchecked").hide();
                 $("#Allcat").prop("checked", false);
                 $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-
+                $(".selected-items").find(`[data-value='${value}']`).remove();
                 var visibleItems = $('.image-item:visible').length;
                 $('.total_design_count').text($('.default_show:visible').length + ' Items');
             });
