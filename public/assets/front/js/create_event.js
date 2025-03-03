@@ -6806,6 +6806,7 @@ $(document).on("click", ".final_create_event", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
             $("#created_event_id").val(response.event_id);
+            $('#event_copy_link').val(response.copy_link);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
                 // $('#eventModal').modal('show');
@@ -9855,4 +9856,12 @@ $(document).on("click", ".previousImeg", async function (e) {
     $(".subcategory-section").show();
     li_design_click();
     
+});
+$(document).on("click","#copy_link_btn",function(e){
+    e.preventDefault(); // Prevents any default button action
+    var copyText = $("#copy_link").val();
+    navigator.clipboard.writeText(copyText).then(function() {
+    }).catch(function(err) {
+        console.error("Failed to copy: ", err);
+    });
 });
