@@ -649,11 +649,10 @@ class EventController extends BaseController
                         ->with('textdatas'); // Load the textdatas relationship
                 }
             ])
+            ->orderBy('id', 'ASC')
             ->get();
 
-
-
-
+        // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
         //     fn($category) =>
         //     $category->subcategory->sum(
@@ -662,6 +661,7 @@ class EventController extends BaseController
         //     )
         // );
         $totalTextDataCount = $categories->count();
+
         $imagecount = $totalTextDataCount;
         // $textData = TextData::select('*')
         //     ->orderBy('id', 'desc')

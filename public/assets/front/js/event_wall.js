@@ -1072,26 +1072,29 @@ $(document).ready(function () {
 
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
-        var $this = $(this); // Cache the button
-        var originalText = $this.html(); // Store original button text
+        var $this = $(this);
 
-        // Add loader and disable button
-        $this.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Posting...');
-        $this.prop("disabled", true);
+        // Prevent multiple clicks
+        if ($this.prop("disabled")) {
+            return;
+        }
 
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-        if (pollForm.is(":visible") && pollForm.length > 0) {
+        if (pollForm.is(":visible") && pollForm.length > 0 ) {
             document.getElementById("pollContent").value = postContent;
-            pollForm.submit();
-        } else if (photoForm.is(":visible") && photoForm.length > 0) {
-            var photoInput = document.getElementById("fileInput");
 
+            // Show the loader inside the button
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+
+            pollForm.submit();
+        }
+        else if (photoForm.is(":visible") && photoForm.length > 0) {
+            var photoInput = document.getElementById("fileInput");
             if (photoInput && photoInput.files.length === 0 && postContent === "") {
                 toastr.error("Please upload a photo or enter some content for the photo post.");
-                resetButton();
                 return;
             }
 
@@ -1101,17 +1104,17 @@ $(document).ready(function () {
                 document.getElementById("photoPostType").value = 1;
             }
 
-            photoForm.submit();
-        } else {
-            toastr.error("Please fill all required fields before submitting.");
-            resetButton();
-        }
+            // Show the loader inside the button
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
-        function resetButton() {
-            $this.html(originalText);
-            $this.prop("disabled", false);
+            photoForm.submit();
+        }
+        else {
+            toastr.error("Please fill all required fields before submitting.");
         }
     });
+
+
 
 });
 

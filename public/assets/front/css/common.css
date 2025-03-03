@@ -1021,7 +1021,14 @@ main:has(.main-content-wrp){
     min-height: auto;
 }
 
+input:-internal-autofill-selected{
+    background-color: #fff !important;
+}
 
+input:-webkit-autofill {
+    background-color: #fff !important; /* Change to your preferred color */
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  }
 
 @keyframes bounce {
     0%,

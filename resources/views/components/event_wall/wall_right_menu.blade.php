@@ -403,7 +403,7 @@ if ($hostView) {
             {{-- <input type="hidden" id="event_id" value=""> --}}
             <div class="modal-footer rsvp-button-wrp">
                 <button type="button" class="btn btn-secondary success-btn add_guest"
-                    data-bs-dismiss="modal">Send New Invites</button>
+                    data-bs-dismiss="modal" disabled>Send New Invites</button>
             </div>
         </div>
     </div>

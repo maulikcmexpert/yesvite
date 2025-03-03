@@ -948,6 +948,14 @@ button:focus{
     40% { transform: translateY(-20px); }
 }
 
+input:-internal-autofill-selected{
+    background-color: #fff !important;
+}
+
+input:-webkit-autofill {
+    background-color: #fff !important; /* Change to your preferred color */
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  }
 
 
 
