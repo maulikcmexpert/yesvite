@@ -350,21 +350,19 @@ $(".back-btn").on("click", function () {
 });
 
 $(document).on("change", ".fileInputtype", function (event) {
-    const files = Array.from(event.target.files);
+    handleFiles(event.target.files, event.target);
+});
+
+function handleFiles(files, currentFileInput) {
     const imagePreview = document.getElementById("imagePreview");
     const uploadImgInner = document.querySelector(".create-post-upload-img-inner");
     const uploadHeadButton = document.querySelector(".create-post-head-upload-btn");
 
-    // Store reference to the current input element
-    const currentFileInput = event.target;
-
-    // Toggle visibility based on file presence
     if (files.length > 0) {
         uploadImgInner.classList.add("d-none");
         uploadHeadButton.classList.remove("d-none");
     }
 
-    // Update layout if more than one file is uploaded
     if (imagePreview.children.length + files.length > 1) {
         Array.from(imagePreview.children).forEach((previewItem) => {
             previewItem.classList.remove("col-12");
@@ -372,7 +370,7 @@ $(document).on("change", ".fileInputtype", function (event) {
         });
     }
 
-    files.forEach((file) => {
+    Array.from(files).forEach((file) => {
         const fileReader = new FileReader();
         fileReader.onload = function (e) {
             const previewDiv = document.createElement("div");
@@ -431,21 +429,23 @@ $(document).on("change", ".fileInputtype", function (event) {
 
         fileReader.readAsDataURL(file);
     });
-});
+}
 
 // Drag & Drop Support
-document.querySelector(".create-post-upload-img-inner").addEventListener("dragover", (event) => {
+const dropZone = document.querySelector(".create-post-upload-img-inner");
+
+dropZone.addEventListener("dragover", (event) => {
     event.preventDefault();
-    event.currentTarget.classList.add("dragging");
+    dropZone.classList.add("dragging");
 });
 
-document.querySelector(".create-post-upload-img-inner").addEventListener("dragleave", (event) => {
-    event.currentTarget.classList.remove("dragging");
+dropZone.addEventListener("dragleave", (event) => {
+    dropZone.classList.remove("dragging");
 });
 
-document.querySelector(".create-post-upload-img-inner").addEventListener("drop", (event) => {
+dropZone.addEventListener("drop", (event) => {
     event.preventDefault();
-    event.currentTarget.classList.remove("dragging");
+    dropZone.classList.remove("dragging");
 
     const files = Array.from(event.dataTransfer.files);
     const fileInput = document.querySelector(".fileInputtype");
@@ -453,13 +453,22 @@ document.querySelector(".create-post-upload-img-inner").addEventListener("drop",
     if (files.length > 0) {
         // Append new files to file input
         const dataTransfer = new DataTransfer();
+
+        // Retain previously selected files
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+        }
+
+        // Add new dropped files
         files.forEach((file) => dataTransfer.items.add(file));
+
         fileInput.files = dataTransfer.files;
 
         // Trigger change event manually
         $(fileInput).trigger("change");
     }
 });
+
 
 
 
