@@ -71,7 +71,7 @@ class EventGuestController extends BaseController
             $eventDetails['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
             $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
-            $eventDetails[' guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
+            $eventDetails['guest_list_visible_to_guests'] = $eventDetail->event_settings->guest_list_visible_to_guests ?? "";
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
