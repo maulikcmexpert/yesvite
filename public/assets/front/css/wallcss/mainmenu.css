@@ -3689,7 +3689,7 @@
         font-size: 10px;
     }
     .collection-card {
-        height: 310px;
+        height: 300px;
     }
 }
 
@@ -3813,7 +3813,7 @@
         max-width: 300px;
     }
     .collection-card {
-        height: 270px !important;
+        height: 250px !important;
     }
     .collection-card.card-blue{
         border-radius: 10px !important;
