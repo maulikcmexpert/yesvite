@@ -289,7 +289,7 @@
                                                 @if (Auth::guard('web')->check()) 
                                                     @if($is_host=="")
                                                          {{-- <a href="javascript:;" class="msg-btn host-msg">Message</a> --}}
-                                                         <a href="{{route('message.list',   ['id' => encrypt($eventInfo['guest_view']['host_id']), 'is_host' => "1"])}}" class="msg-btn host-msg">Message</a>
+                                                         <a href="{{route('message.list',   ['id' => encrypt($eventInfo['guest_view']['host_id']), 'is_host' => "1"])}}" class="msg-btn host-msg" target="_blank">Message</a>
 
                                                     @endif
                                                 @endif
@@ -316,7 +316,7 @@
                                                 <span>Co-host</span>
                                                 @if (Auth::guard('web')->check()) 
                                                 {{-- <a href="#" class="msg-btn chost-msg">Message</a> --}}
-                                                <a href="{{route('message.list',['id' => encrypt($coHost['id']), 'is_host' => "0"])}}" class="msg-btn chost-msg">Message</a>
+                                                <a href="{{route('message.list',['id' => encrypt($coHost['id']), 'is_host' => "0"])}}" class="msg-btn chost-msg" target="_blank">Message</a>
 
                                                 @endif
                                             </div>
