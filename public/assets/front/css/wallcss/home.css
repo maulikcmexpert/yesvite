@@ -3045,7 +3045,7 @@ main.new-main-content {
 .loader_11 span:nth-child(4) { animation-delay: 0.6s; }
 
 @keyframes blink {
-    0%, 100% { opacity: 0.3; }
+    0%, 100% { opacity: 0; }
     50% { opacity: 1; }
 }
 
