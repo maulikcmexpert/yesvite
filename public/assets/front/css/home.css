@@ -585,11 +585,8 @@
     color: var(--primaryColor);
 }
 
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown::after{
-    line-height: 1;
-}
 
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show ~ .filters-drp .dropdown::after {
+.collection-wrapper .filter-main-wrp .filters-drp .dropdown .dropdown-toggle.show::after {
     transform: rotate(180deg);
 }
 
@@ -689,11 +686,12 @@
     height: 10px;
     position: absolute;
     right: 18px;
-    top: 35%;
+    top: 50%;
     transform: translateY(-50%);
     color: var(--lightColor);
     pointer-events: none;
     font-size: 14px;
+    line-height: 1;
 }
 
 .collection-wrapper .dropdown-toggle::after {
