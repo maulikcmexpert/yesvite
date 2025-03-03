@@ -2779,17 +2779,29 @@
 .disable-class.home-upcoming-events-card-right{
     position: relative;
 }
-.disable-class.home-upcoming-events-card-right::before{
+.disable-class.home-upcoming-events-card-right::before {
     content: "PAST EVENT";
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotateZ(-35deg);
     color: red;
     border: 2px solid red;
     font-family: var(--SFProDisplay-Bold);
     font-size: 14px;
     z-index: 10;
+    width: calc(100% - 10px);
+    text-align: center;
+}
+.disable-class.home-upcoming-events-card-right::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 8;
 }
 
 .upcoming-events-card-notification-wrp > button svg {
