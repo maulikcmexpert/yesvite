@@ -645,6 +645,11 @@
     color: var(--pink) !important;
 }
 
+.modal.cmn-modal .modal-footer .btn:disabled{
+    background-color: gray;
+    border-color: gray;
+}
+
 .modal.cmn-modal .modal-footer{
     padding: 16px 24px;
 }
