@@ -60,15 +60,15 @@ $(document).ready(function () {
         let default_s = 0;
         var value = $(this).val();
 
-    if ($(this).is(":checked")) {
-        $(".selected-items").append(
-            `<span class="selected-item" data-value="${value}">
+        if ($(this).is(":checked")) {
+            $(".selected-items").append(
+                `<span class="selected-item" data-value="${value}">
                 ${value} <span class="close-btn">x</span>
             </span>`
-        );
-    } else {
-        $(".selected-items").find(`[data-value='${value}']`).remove();
-    }
+            );
+        } else {
+            $(".selected-items").find(`[data-value='${value}']`).remove();
+        }
 
 
         $('input[name="design_subcategory"]:checked').each(function () {
@@ -88,7 +88,7 @@ $(document).ready(function () {
         }
         updateTotalCount();
     });
-    $(document).on("click", ".close-btn", function() {
+    $(document).on("click", ".close-btn", function () {
         var parent = $(this).parent();
         var value = parent.attr("data-value");
 
