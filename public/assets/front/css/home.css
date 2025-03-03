@@ -1390,7 +1390,10 @@
         flex-basis: 50% !important;
     }
     .collection-card {
-        height: 310px;
+        height: 250px;
+    }
+    .collection-card.card-blue{
+        border-radius: 10px !important;
     }
 
     
@@ -1425,7 +1428,7 @@
         flex-basis: 50% !important;
     }
     .collection-card {
-        height: 270px !important;
+        height: 230px !important;
     }
     .collection-card.card-blue{
         border-radius: 10px !important;
