@@ -1240,7 +1240,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#pollForm")[0].reset(); // Reset poll form
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
-
+    $(".char-count").text("0/140"); // Reset char count
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
