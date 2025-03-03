@@ -686,6 +686,8 @@ async function bindData(current_event_id) {
 
     function loadTextDataFromDatabase() {
         if (image) {
+            undoStack = [];
+            redoStack = [];
             // console.log(image);
             fabric.Image.fromURL(image, function (img) {
                 img.crossOrigin = "anonymous";

@@ -444,7 +444,7 @@
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
-                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] }}">
+                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? "" }}">
                                                         </button>
                                                     </div>
 

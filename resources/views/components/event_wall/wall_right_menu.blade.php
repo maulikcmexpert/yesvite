@@ -27,7 +27,7 @@
 <div class="main-content-right">
     <div class="main-right-guests-wrp common-div-wrp">
         <div class="main-right-guests-head">
-            <h3>Guests</h3>
+            <h3>Attending Guests</h3>
             <p>{{$total_invite}} Total</p>
         </div>
         @php

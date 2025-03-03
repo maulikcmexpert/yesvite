@@ -1260,14 +1260,7 @@ class EventController extends BaseController
             Session::forget('shape_image');
         }
         if ($event_creation && $request->isdraft == "1") {
-            // $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
-            $notificationParam = [
-                'sender_id' => $user_id,
-                'event_id' => $eventId,
-                'post_id' => ""
-            ];
-            sendNotification('owner_notify', $notificationParam);
-
+            
             return 1;
         }
 
