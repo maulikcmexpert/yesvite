@@ -1026,8 +1026,9 @@ input:-internal-autofill-selected{
 }
 
 input:-webkit-autofill {
-    background-color: #fff !important; /* Change to your preferred color */;
-}
+    background-color: #fff !important; /* Change to your preferred color */
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  }
 
 @keyframes bounce {
     0%,
