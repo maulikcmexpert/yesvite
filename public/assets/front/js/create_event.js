@@ -7633,7 +7633,7 @@ $(document).on("click", ".see_all_group", function () {
 });
 
 var cohostbusy = false;
-var cohostlimit = 7;
+var cohostlimit = 10;
 var cohostoffset = 0;
 var cohostNoMoreData = false;
 
@@ -7651,7 +7651,7 @@ $(document).on("click", ".add_co_host", function () {
     //    }
     cohostNoMoreData = false;
     cohostoffset = 0;
-    cohostlimit = 7;
+    cohostlimit = 10;
     // cohostphoneOffset=0;
     // cohostphoneLimit=10;
     $("#phone-tab-cantact").removeClass("active");
@@ -7705,7 +7705,7 @@ $(document).on("click", "#phone-tab-cantact", function () {
     $(".phone_co_host_search").css("display", "block");
     isPhonecontact = 1;
     cohostoffset = 0;
-    cohostlimit = 7;
+    cohostlimit = 10;
 
     cohostphoneOffset = 0;
     cohostphoneLimit = 10;
