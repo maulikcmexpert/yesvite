@@ -1227,7 +1227,7 @@
                 </section>
             @if($is_host=="")    
                 @if($rsvp_status==null || $rsvp_status=="")
-                        @if($eventInfo['guest_view']['event_end_date']< date('Y-m-d'))
+                        @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d'))
                             <div class="rsvp-footer-btn-wrp">
                                 <div class="container">
                                     <div class="rsvp-footer-btn">
@@ -1258,7 +1258,7 @@
                                     <p><i class="fa-solid fa-circle-exclamation"></i> To participate in this conversation, you must RSVP.</p>
                                 </div>
                             </div>
-                            @if($eventInfo['guest_view']['event_end_date']< date('Y-m-d'))
+                            @if($eventInfo['guest_view']['event_date']>= date('Y-m-d'))
                                 <div class="rsvp-footer-btn-wrp">
                                     <div class="container">
                                         <div class="rsvp-footer-btn">
