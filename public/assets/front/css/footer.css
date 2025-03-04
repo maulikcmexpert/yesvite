@@ -100,7 +100,7 @@ ul.footer-social-link {
 .app-store .google-app,
 .app-store .mobile-app {
     width: 100%;
-    max-width: max-content;
+    max-width: 100%;
     height: auto;
     transition: 0.5s;
     -webkit-transition: 0.5s;
