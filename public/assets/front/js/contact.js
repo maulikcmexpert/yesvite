@@ -1082,7 +1082,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-let dropArea = $(".uploadcsv-wrp");
+let dropArea = $("#csv_file");
 
 // Prevent default drag behaviors
 $(document).on("dragover dragenter drop", function (e) {
