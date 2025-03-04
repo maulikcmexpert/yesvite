@@ -1078,6 +1078,15 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         toastr.error('Only CSV files are allowed.');
         return;
     }
+    $('<div id="pageOverlay"></div>').css({
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(255, 255, 255, 0)', // Transparent background
+        zIndex: 9999
+    }).appendTo('body');
         $('#home_loader').css('display','none');
         $('#upload_csv_contact').submit();
     // }
@@ -1087,10 +1096,16 @@ $(document).ready(function() {
     const fileInput = $('#csv_file');
 
     // Click to upload
-    uploadWrapper.click(function() {
-        fileInput.click();
-    });
+    // uploadWrapper.click(function() {
+    //     fileInput.click();
+    // });
 
+    
+        // Click to upload - Prevent multiple triggers
+        uploadWrapper.on('click', function (e) {
+            e.stopPropagation(); // Prevent bubbling to avoid double trigger
+            fileInput.trigger('click'); // Manually trigger file input
+        });
     fileInput.change(handleFileSelect);
 
     // Drag and drop
@@ -1106,9 +1121,28 @@ $(document).ready(function() {
     uploadWrapper.on('drop', function(e) {
         e.preventDefault();
         uploadWrapper.removeClass('drag-over');
+        let files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            setFileInput(files[0]); // Assign dropped file
+        }
         handleFileSelect(e.originalEvent); // Access original event for drop
     });
+    function setFileInput(file) {
+        if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
+            // Assign file to input field
+            let dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput[0].files = dataTransfer.files;
+
+            console.log('CSV file selected:', file);
+        } else {
+            toastr.error('Only CSV files are allowed.');
+            fileInput.val('');
+        }
+    }
     function handleFileSelect(e) {
         let files;
         if (e.type === 'drop') {
@@ -1121,6 +1155,8 @@ $(document).ready(function() {
             const file = files[0];
             if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
+                $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
@@ -1140,11 +1176,14 @@ $("#csv_file").on("change", function (e) {
 $(document).on('click','.close_upload_csv',function(){
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
     let fileInput = $("#csv_file");
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
