@@ -1084,47 +1084,41 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 });
 
 let dropArea = $("#csv_file");
-let fileInput = $("#csv_file");
+        let fileInput = $("#csv_file");
 
-// Open file dialog on click
-dropArea.on("click", function () {
-    fileInput.click();
-});
+        // Open file dialog on click
+        dropArea.on("click", function () {
+            fileInput.click();
+        });
 
-// Prevent default drag behaviors on window and drop area
-$(document).on("dragover drop", function (event) {
-    event.preventDefault();
-});
+        // Drag over effect
+        dropArea.on("dragover", function (event) {
+            event.preventDefault();
+            dropArea.addClass("dragover");
+        });
 
-dropArea.on("dragover", function (event) {
-    event.preventDefault();
-    dropArea.addClass("dragover");
-});
+        // Drag leave effect
+        dropArea.on("dragleave", function () {
+            dropArea.removeClass("dragover");
+        });
 
-dropArea.on("dragleave", function () {
-    dropArea.removeClass("dragover");
-});
+        // Drop event
+        dropArea.on("drop", function (event) {
+            event.preventDefault();
+            dropArea.removeClass("dragover");
 
-// Drop event
-dropArea.on("drop", function (event) {
-    event.preventDefault();
-    dropArea.removeClass("dragover");
+            let files = event.originalEvent.dataTransfer.files;
+            if (files.length > 0 && files[0].type === "text/csv") {
+                fileInput.prop("files", files);
+                alert("CSV file uploaded: " + files[0].name);
+            } else {
+                alert("Only CSV files are allowed!");
+            }
+        });
 
-    let files = event.originalEvent.dataTransfer.files;
-    if (files.length > 0 && files[0].type === "text/csv") {
-        let fileList = new DataTransfer();
-        fileList.items.add(files[0]);
-        fileInput[0].files = fileList.files;
-
-        alert("CSV file uploaded: " + files[0].name);
-    } else {
-        alert("Only CSV files are allowed!");
-    }
-});
-
-// Handle file selection via input
-fileInput.on("change", function () {
-    if (fileInput[0].files.length > 0) {
-        alert("CSV file uploaded: " + fileInput[0].files[0].name);
-    }
-});
+        // Handle file selection via input
+        fileInput.on("change", function () {
+            if (fileInput[0].files.length > 0) {
+                alert("CSV file uploaded: " + fileInput[0].files[0].name);
+            }
+        });
