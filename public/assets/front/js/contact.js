@@ -1094,15 +1094,19 @@ dropZone1.addEventListener("click", () => {
 dropZone1.addEventListener("dragover", (event) => {
     event.preventDefault();
     dropZone1.classList.add("dragging");
+    console.log('dragging');
 });
 
 dropZone1.addEventListener("dragleave", () => {
+    console.log('leave');
     dropZone1.classList.remove("dragging");
 });
 
 dropZone1.addEventListener("drop", (event) => {
     event.preventDefault();
     dropZone1.classList.remove("dragging");
+    console.log('drop');
+
 
     const files = Array.from(event.dataTransfer.files);
 
