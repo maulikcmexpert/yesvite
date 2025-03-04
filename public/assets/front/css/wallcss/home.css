@@ -523,7 +523,7 @@ main.new-main-content {
 .new-main-content input {
     background-color: transparent;
     border: 1px solid var(--border) !important;
-
+    height: 45px !important;
     border-radius: 16px !important;
     padding-left: 15px !important;
     font-family: var(--SFProDisplay-Regular);
@@ -2768,9 +2768,8 @@ main.new-main-content {
 .uploadcsv-wrp input {
     position: absolute;
     opacity: 0;
-    width:0;
-    height:0;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
     padding: 0px;
 }
 
