@@ -1122,11 +1122,7 @@ let dropArea = $(".uploadcsv-wrp");
     // When file is selected manually
     $("#csv_file").on("change", function () {
         if (this.files.length > 0) {
-            
-        alert("File Selected: " + this.files[0].name);
-        toastr.success("File uploaded successfully!");
-        // $(".uploadcsv-wrp h3").text(file.name); 
-
+            alert("File Selected: " + this.files[0].name);
         }
     });
 
