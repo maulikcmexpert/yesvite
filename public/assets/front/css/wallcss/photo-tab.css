@@ -613,14 +613,14 @@
     #detail-photo-modal .modal-content {
         max-width: 900px;
         min-width: 900px;
-        height: 1200px;
+        height: 1100px;
     }
     #detail-photo-modal .modal-body {
-        max-height: 1050px;
+        max-height: 950px;
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: 950px;
+        height: 870px;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
