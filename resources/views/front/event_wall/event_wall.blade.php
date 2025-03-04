@@ -482,8 +482,9 @@
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
                                                                 @if ($post['commenting_on_off'] == '1')
-                                                                    <h6 id="comment_{{ $post['id'] }}">
-                                                                        {{ $post['total_comment'] }} Comments</h6>
+                                                                    <button id="comment_{{ $post['id'] }}"  class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
+                                                                    event_p_id="{{ $post['id'] }}">
+                                                                        {{ $post['total_comment'] }} Comments</button>
                                                                 @endif
                                                             </div>
                                                             <div
