@@ -1124,10 +1124,17 @@ $(document).ready(function() {
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
-                alert('Please upload a CSV file.');
+                // alert('Please upload a CSV file.');
                 fileInput.val(''); // Clear the input
             }
         }
+    }
+});
+$("#csv_file").on("change", function (e) {
+    let file = e.target.files[0]; // Get the selected file
+    if (file) {
+        $(".uploadcsv-wrp h3").text(file.name); // Show file name
+        // alert("File uploaded: " + file.name);
     }
 });
 // $(document).ready(function() {
