@@ -580,11 +580,14 @@
     #detail-photo-modal .modal-title{
         font-size: 24px !important;
     }
-    .posts-card-like-comment-left_reaction ul p {
+    #detail-photo-modal .posts-card-like-comment-left_reaction ul p {
         font-size: 18px;
     }
-    .posts-card-like-comment-left_reaction button {
+    #detail-photo-modal .posts-card-like-comment-left_reaction button {
         font-size: 18px;
+    }
+    #detail-photo-modal .posts-card-head-right h5 {
+        font-size: 16px;
     }
     
 }
@@ -611,10 +614,10 @@
     #detail-photo-modal .modal-title{
         font-size: 24px !important;
     }
-    .posts-card-like-comment-left_reaction ul p {
+    #detail-photo-modal .posts-card-like-comment-left_reaction ul p {
         font-size: 16px;
     }
-    .posts-card-like-comment-left_reaction button {
+    #detail-photo-modal .posts-card-like-comment-left_reaction button {
         font-size: 16px;
     }
     
