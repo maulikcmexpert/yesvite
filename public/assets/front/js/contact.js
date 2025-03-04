@@ -1079,7 +1079,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         return;
     }
         $('#home_loader').css('display','none');
-        $('#upload_csv_contact').submit();
+        // $('#upload_csv_contact').submit();
     // }
 });
 
