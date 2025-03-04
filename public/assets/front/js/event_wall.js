@@ -1151,6 +1151,8 @@ $(".posts-card-like-btn").on("click", function () {
 $(".show-btn-comment").click(function () {
     let event_p_id = $(this).attr("event_p_id");
     $(".show_" + event_p_id).toggleClass("d-none");
+    console.log("click");
+
 });
 
 $(".show-comment-reply-btn").click(function () {
