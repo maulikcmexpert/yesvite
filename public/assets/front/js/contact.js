@@ -1082,3 +1082,46 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
+
+let dropArea = $(".uploadcsv-wrp");
+let fileInput = $("#csv_file");
+
+dropArea.on("click", function () {
+    fileInput.click();
+});
+
+$(document).on("dragover drop", function (event) {
+    event.preventDefault();
+});
+
+dropArea.on("dragover", function (event) {
+    event.preventDefault();
+    dropArea.addClass("dragover");
+});
+
+dropArea.on("dragleave", function () {
+    dropArea.removeClass("dragover");
+});
+
+dropArea.on("drop", function (event) {
+    event.preventDefault();
+    dropArea.removeClass("dragover");
+
+    let files = event.originalEvent.dataTransfer.files;
+    if (files.length > 0 && files[0].type === "text/csv") {
+        let fileList = new DataTransfer();
+        fileList.items.add(files[0]);
+        fileInput[0].files = fileList.files;
+
+        alert("CSV file uploaded: " + files[0].name);
+    } else {
+        alert("Only CSV files are allowed!");
+    }
+});
+
+// Handle file selection via input
+fileInput.on("change", function () {
+    if (fileInput[0].files.length > 0) {
+        alert("CSV file uploaded: " + fileInput[0].files[0].name);
+    }
+});
