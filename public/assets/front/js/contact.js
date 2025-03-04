@@ -1082,56 +1082,39 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-document.addEventListener("DOMContentLoaded", function () {
-    const dropZone = document.querySelector(".uploadcsv-wrp");
-    const fileInput = document.querySelector("#csv_file");
+const dropZone = document.querySelector(".uploadcsv-wrp");
 
-    // Open file upload on clicking anywhere inside the div
-    dropZone.addEventListener("click", function (event) {
-        if (!event.target.closest("input")) {
-            fileInput.click();
+dropZone.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    dropZone.classList.add("dragging");
+});
+
+dropZone.addEventListener("dragleave", (event) => {
+    dropZone.classList.remove("dragging");
+});
+
+dropZone.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dropZone.classList.remove("dragging");
+
+    const files = Array.from(event.dataTransfer.files);
+    const fileInput = document.querySelector(".fileInputtype");
+
+    if (files.length > 0) {
+        // Append new files to file input
+        const dataTransfer = new DataTransfer();
+
+        // Retain previously selected files
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
         }
-    });
 
-    dropZone.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dropZone.classList.add("dragging");
-    });
+        // Add new dropped files
+        files.forEach((file) => dataTransfer.items.add(file));
 
-    dropZone.addEventListener("dragleave", (event) => {
-        dropZone.classList.remove("dragging");
-    });
+        fileInput.files = dataTransfer.files;
 
-    dropZone.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone.classList.remove("dragging");
-
-        const files = Array.from(event.dataTransfer.files);
-
-        if (files.length > 0) {
-            // Append new files to file input
-            const dataTransfer = new DataTransfer();
-
-            // Retain previously selected files
-            if (fileInput.files.length > 0) {
-                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
-            }
-
-            // Add new dropped files
-            files.forEach((file) => dataTransfer.items.add(file));
-
-            fileInput.files = dataTransfer.files;
-
-            // Trigger change event manually
-            fileInput.dispatchEvent(new Event("change"));
-        }
-    });
-
-    // File input change event (Handles both click & drop)
-    fileInput.addEventListener("change", function (event) {
-        let file = event.target.files[0];
-        if (file) {
-            document.querySelector(".uploadcsv-wrp h3").textContent = file.name;
-        }
-    });
+        // Trigger change event manually
+        $(fileInput).trigger("change");
+    }
 });
