@@ -1084,10 +1084,12 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-let dropArea = $(".uploadcsv-wrp");
+$(document).ready(function () {
+    let dropArea = $(".uploadcsv-wrp");
+    let fileInput = $("#csv_file");
 
-    // Prevent default behaviors
-    dropArea.on("dragover", function (e) {
+    // Prevent default drag behaviors
+    dropArea.on("dragenter dragover", function (e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).addClass("dragging");
@@ -1106,29 +1108,30 @@ let dropArea = $(".uploadcsv-wrp");
 
         let files = e.originalEvent.dataTransfer.files;
         if (files.length > 0) {
-            let fileInput = $("#csv_file");
-            fileInput.prop("files", files);
-
-            // Optional: Display file name
-            alert("File Selected: " + files[0].name);
+            fileInput.prop("files", files); // Assign the file to the input
+            displayFileName(files[0]);
         }
     });
 
-    // Also handle click event to open file picker
+    // Open file input on click
     dropArea.on("click", function () {
-        $("#csv_file").click();
+        fileInput.click();
     });
 
-    // When file is selected manually
-    $("#csv_file").on("change", function () {
+    // Handle file selection manually
+    fileInput.on("change", function () {
         if (this.files.length > 0) {
-            
-        alert("File Selected: " + this.files[0].name);
-        toastr.success("File uploaded successfully!");
-        // $(".uploadcsv-wrp h3").text(file.name); 
-
+            displayFileName(this.files[0]);
         }
     });
+
+    // Function to display the selected file name
+    function displayFileName(file) {
+        alert(file.name);
+        $(".file-name").text("Selected File: " + file.name).show();
+    }
+});
+
 
 // const dropZone1 = document.querySelector(".uploadcsv-wrp");
 // const fileInput = document.querySelector(".csv_file");
