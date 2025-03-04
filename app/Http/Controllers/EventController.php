@@ -686,7 +686,7 @@ class EventController extends BaseController
             'event_type',
             'yesvite_user',
             'groups',
-            'imagecount',
+           'imagecount',
             // 'textData',
             'categories',
             'eventDetail'
@@ -1260,7 +1260,7 @@ class EventController extends BaseController
             Session::forget('shape_image');
         }
         if ($event_creation && $request->isdraft == "1") {
-            
+
             return 1;
         }
 
