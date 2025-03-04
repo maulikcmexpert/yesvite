@@ -1143,6 +1143,12 @@ $(document).on('click','.close_upload_csv',function(){
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
 })
+$('#uploadcsv').on('hidden.bs.modal', function () {
+    $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    let fileInput = $("#csv_file");
+    fileInput.val('');
+    fileInput.replaceWith(fileInput.clone(true));
+});
 // $(document).ready(function() {
 //     let dropArea = $(".uploadcsv-wrp");
 //     let fileInput = $("#csv_file");
