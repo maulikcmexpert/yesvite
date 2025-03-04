@@ -1099,7 +1099,7 @@ dropZone.addEventListener("drop", (event) => {
     dropZone.classList.remove("dragging");
 
     const files = Array.from(event.dataTransfer.files);
-    const fileInput = document.querySelector(".fileInputtype");
+    const fileInput = document.querySelector(".csv_file");
 
     if (files.length > 0) {
         // Append new files to file input
