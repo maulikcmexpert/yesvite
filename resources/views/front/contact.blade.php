@@ -642,7 +642,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="addguestLabel">Upload CSV</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close close_upload_csv" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
