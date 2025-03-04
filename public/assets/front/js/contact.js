@@ -1124,6 +1124,7 @@ $(document).ready(function() {
     function setFileInput(file) {
         if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
             $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
             // Assign file to input field
             let dataTransfer = new DataTransfer();
@@ -1148,6 +1149,8 @@ $(document).ready(function() {
             const file = files[0];
             if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
+                $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
@@ -1167,11 +1170,14 @@ $("#csv_file").on("change", function (e) {
 $(document).on('click','.close_upload_csv',function(){
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
     let fileInput = $("#csv_file");
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
