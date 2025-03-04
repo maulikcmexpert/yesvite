@@ -1120,10 +1120,7 @@ $(document).ready(function () {
                     if (data.user_id == login_user_id) {
                         $("#report_btn").hide();
                     }
-                    const encryptedUserId = encrypt(data.user_id);
-                    const updatedMessageRoute = messageRoute.replace("__USER_ID__", encryptedUserId);
 
-                    $(".your-message-link").attr("href", updatedMessageRoute);
                     $(".likeModel")
                         .data("event-id", data.event_id)
                         .data("event-post-id", data.id);
