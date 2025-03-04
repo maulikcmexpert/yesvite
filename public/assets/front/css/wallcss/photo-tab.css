@@ -594,14 +594,14 @@
     #detail-photo-modal .modal-content {
         max-width: 850px;
         min-width: 850px;
-        height: calc(100% - 20px);
+        height: calc(100% - 80px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 200px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: calc(100vh - 320px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -628,14 +628,14 @@
     #detail-photo-modal .modal-content {
         max-width: 800px;
         min-width: 800px;
-        height: calc(100% - 20px);
+        height: calc(100% - 80px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 200px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: calc(100vh - 320px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -659,14 +659,14 @@
     #detail-photo-modal .modal-content {
         max-width: 750px;
         min-width: 750px;
-        height: calc(100% - 20px);
+        height: calc(100% - 80px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 200px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: calc(100vh - 320px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -680,14 +680,14 @@
     #detail-photo-modal .modal-content {
         max-width: 750px;
         min-width: 750px;
-        height: calc(100% - 20px);
+        height: calc(100% - 80px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 200px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: calc(100vh - 320px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -701,14 +701,14 @@
     #detail-photo-modal .modal-content {
         max-width: 600px;
         min-width: 600px;
-        height: calc(100% - 20px);
+        height: calc(100% - 80px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 200px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: calc(100vh - 320px);
     }
 }
 
