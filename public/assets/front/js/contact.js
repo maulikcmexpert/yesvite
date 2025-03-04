@@ -1082,7 +1082,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-// $(document).ready(function () {
+$(document).ready(function () {
     let dropArea = $(".uploadcsv-wrp");
     let fileInput = $("#csv_file");
 
@@ -1095,7 +1095,6 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // Drag over event
     dropArea.on("dragover", function (e) {
         e.preventDefault();
-        e.stopPropagation();
         $(this).addClass("drag-over");
     });
 
@@ -1107,12 +1106,14 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // Drop event on entire div
     dropArea.on("drop", function (e) {
         e.preventDefault();
-        e.stopPropagation();
         $(this).removeClass("drag-over");
 
         let files = e.originalEvent.dataTransfer.files;
         if (files.length > 0) {
-            fileInput.prop("files", files);
+            let dataTransfer = new DataTransfer();
+            dataTransfer.items.add(files[0]); // Only take the first file
+            fileInput[0].files = dataTransfer.files;
+
             handleFileUpload(files[0]);
         }
     });
@@ -1136,7 +1137,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
             alert("Please upload a valid CSV file.");
         }
     }
-// });
+});
 
 // $(document).on("shown.bs.modal", "#uploadcsv", function () {
 //     const dropZone1 = document.querySelector(".uploadcsv-wrp");
