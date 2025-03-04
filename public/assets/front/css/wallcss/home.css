@@ -1334,14 +1334,14 @@ main.new-main-content {
 
 .posts-card-show-post-img img {
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .posts-card-show-post-img video {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .video-play-icon {
