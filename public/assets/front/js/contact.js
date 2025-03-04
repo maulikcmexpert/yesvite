@@ -1120,6 +1120,7 @@ $(document).ready(function() {
         if (files.length > 0) {
             const file = files[0];
             if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
