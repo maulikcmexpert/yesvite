@@ -1082,53 +1082,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-$(document).ready(function () {
-    let dropArea = $(".uploadcsv-wrp");
 
-    // Open file input on click
-    dropArea.on("click", function () {
-        $("#csv_file").click();
-    });
-
-    // Handle file selection
-    $("#csv_file").on("change", function (e) {
-        handleFiles(e.target.files);
-    });
-
-    // Drag & Drop Events
-    dropArea.on("dragover", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass("dragover");
-    });
-
-    dropArea.on("dragleave", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass("dragover");
-    });
-
-    dropArea.on("drop", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass("dragover");
-
-        let files = e.originalEvent.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        if (files.length > 0) {
-            let file = files[0];
-            if (file.type === "text/csv" || file.name.endsWith(".csv")) {
-                alert("CSV file uploaded: " + file.name);
-                // You can process the CSV file further here
-            } else {
-                alert("Please upload a valid CSV file.");
-            }
-        }
-    }
-});
 // $(document).on("shown.bs.modal", "#uploadcsv", function () {
 //     const dropZone1 = document.querySelector(".uploadcsv-wrp");
 //     const fileInput = document.querySelector(".csv_file");
