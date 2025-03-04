@@ -191,6 +191,7 @@
 </div>
 @push('scripts')
     <script>
+
         var designData = [];
 
         // Correcting the PHP to JavaScript variable conversion
@@ -225,6 +226,12 @@
         @endforeach
 
         $(document).ready(function() {
+
+            $("#nav-profile-home-tab").click(function(){
+            console.log("clicked");
+
+            updateTotalCount();
+        })
             const urlParams = new URLSearchParams(window.location.search);
             const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
