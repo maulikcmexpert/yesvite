@@ -1082,7 +1082,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-$(document).ready(function () {
+// $(document).ready(function () {
     let dropArea = $(".uploadcsv-wrp");
     let fileInput = $("#csv_file");
 
@@ -1136,7 +1136,7 @@ $(document).ready(function () {
             alert("Please upload a valid CSV file.");
         }
     }
-});
+// });
 
 // $(document).on("shown.bs.modal", "#uploadcsv", function () {
 //     const dropZone1 = document.querySelector(".uploadcsv-wrp");
