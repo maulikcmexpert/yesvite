@@ -557,6 +557,34 @@
 }
 
 /* ===Responsive=== */
+@media only screen and (min-width: 2600px){
+    #detail-photo-modal .modal-content {
+        max-width: 900px;
+        min-width: 900px;
+        height: 1200px;
+    }
+    .photo-detail-slider .posts-card-show-post-img {
+        height: calc(100vh - 250px);
+    }
+    #detail-photo-modal .posts-card-head-left-content h3{
+        font-size: 20px;
+    }
+    #detail-photo-modal .posts-card-head-left-content p{
+        font-size: 20px;
+    }
+    #detail-photo-modal .modal-title{
+        font-size: 24px !important;
+    }
+    #detail-photo-modal .posts-card-like-comment-left_reaction ul p {
+        font-size: 18px;
+    }
+    #detail-photo-modal .posts-card-like-comment-left_reaction button {
+        font-size: 18px;
+    }
+    #detail-photo-modal .posts-card-head-right h5 {
+        font-size: 16px;
+    }
+}
 
 @media only screen and (min-width: 2400px) and (max-width: 2599px){
     #detail-photo-modal .modal-content {
@@ -565,11 +593,11 @@
         height: calc(100% - 20px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 150px);
+        max-height: 1050px;
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 250px);
+        height: 950px;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
