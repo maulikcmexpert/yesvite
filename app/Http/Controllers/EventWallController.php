@@ -1298,6 +1298,7 @@ class EventWallController extends BaseController
             $eventDetails['event_detail'] = $eventData;
         }
         $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit ?? 0;
+        $eventInfo['guest_view'] = $eventDetails;
         $eventattending = EventInvitedUser::
         // whereHas('user', function ($query) {
         //     $query->where('app_user', '1');
