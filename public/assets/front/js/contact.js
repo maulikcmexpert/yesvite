@@ -1191,7 +1191,7 @@ dropZone1.addEventListener("drop", (event) => {
         fileInput.dispatchEvent(new Event("change"));
 
         toastr.success("File uploaded successfully!");
-        $(".uploadcsv-wrp h3").text(file.name); 
+        $(".uploadcsv-wrp h3").text(files.name); 
 
     }
 });
