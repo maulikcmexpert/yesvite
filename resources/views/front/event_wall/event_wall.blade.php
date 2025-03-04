@@ -482,8 +482,9 @@
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
                                                                 @if ($post['commenting_on_off'] == '1')
-                                                                    <h6 id="comment_{{ $post['id'] }}">
-                                                                        {{ $post['total_comment'] }} Comments</h6>
+                                                                    <button id="comment_{{ $post['id'] }}"  class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
+                                                                    event_p_id="{{ $post['id'] }}">
+                                                                        {{ $post['total_comment'] }} Comments</button>
                                                                 @endif
                                                             </div>
                                                             <div
@@ -557,10 +558,10 @@
                                                                         data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                 </div>
 
-                                                                @if ($post['commenting_on_off'] == '1')
-                                                                    <button
-                                                                        class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
-                                                                        event_p_id="{{ $post['id'] }}">
+
+                                                                    <a href=" {{route('message.list',   ['id' => encrypt($eventDetails['user_id'])])}}"
+
+                                                                      >
                                                                         <svg viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -578,8 +579,7 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
-                                                                    </button>
-                                                                @endif
+                                                                    </a>
 
                                                             </div>
                                                         </div>
