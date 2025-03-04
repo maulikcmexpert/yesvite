@@ -564,6 +564,10 @@
         min-width: 600px;
         height: calc(100% - 20px);
     }
+    #detail-photo-modal .modal-body {
+        max-height: calc(100vh - 150px);
+        padding-bottom: 20px !important;
+    }
 }
 
 @media only screen and (max-width: 991px) {
