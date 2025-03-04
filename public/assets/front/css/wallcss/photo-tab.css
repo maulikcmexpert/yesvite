@@ -564,6 +564,13 @@
         min-width: 600px;
         height: calc(100% - 20px);
     }
+    #detail-photo-modal .modal-body {
+        max-height: calc(100vh - 150px);
+        padding-bottom: 20px !important;
+    }
+    .photo-detail-slider .posts-card-show-post-img {
+        height: calc(100vh - 250px);
+    }
 }
 
 @media only screen and (max-width: 991px) {
