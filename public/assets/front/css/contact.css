@@ -952,7 +952,7 @@ input[type="search"]~span {
     overflow-y: scroll;
 }
 
-/* #csv_file{
+#csv_file{
     position: absolute !important;
     width: 100% !important;
     height: 100% !important;
@@ -960,7 +960,7 @@ input[type="search"]~span {
     top: 0 !important;
     left:0  !important;
     z-index: 10 !important;
-} */
+}
 
 
 
