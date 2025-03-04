@@ -107,6 +107,7 @@ ul.footer-social-link {
     -moz-transition: 0.5s;
     -ms-transition: 0.5s;
     -o-transition: 0.5s;
+    aspect-ratio: 7 / 2;
 }
 
 .app-store  img{
@@ -115,6 +116,7 @@ ul.footer-social-link {
     -moz-transition: 0.5s;
     -ms-transition: 0.5s;
     -o-transition: 0.5s;
+    aspect-ratio: 7 / 2;
 }
 
 .app-store .google-app img:hover,
