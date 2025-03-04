@@ -556,6 +556,10 @@
     padding: 0px !important;
 }
 
+#detail-photo-modal .posts-card-show-post-img img{
+    object-fit: contain !important;
+}
+
 /* ===Responsive=== */
 
 /* @media only screen and (min-width: 1600px) and (min-height: 1700px) and (max-height: 1799px){
