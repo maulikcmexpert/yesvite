@@ -1058,6 +1058,45 @@ $(document).on("input", ".search_phone", function () {
 
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dropZone1 = document.querySelector(".uploadcsv-wrp");
+    const fileInput = document.querySelector(".csv_file");
+    
+    dropZone1.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone1.classList.add("dragging");
+    });
+    
+    dropZone1.addEventListener("dragleave", () => {
+        dropZone1.classList.remove("dragging");
+    });
+    
+    dropZone1.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone1.classList.remove("dragging");
+    
+        const files = Array.from(event.dataTransfer.files);
+    
+        if (files.length > 0) {
+            const dataTransfer = new DataTransfer();
+    
+            if (fileInput.files.length > 0) {
+                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+            }
+    
+            files.forEach((file) => dataTransfer.items.add(file));
+    
+            fileInput.files = dataTransfer.files;
+    
+            fileInput.dispatchEvent(new Event("change"));
+    
+            toastr.success("File uploaded successfully!");
+            $(".uploadcsv-wrp h3").text(files.name); 
+    
+        }
+    });
+    });
 $('label[for="email"]').removeClass("floatingfocus");
 
 $(document).on('click','.click-to-upload-btn', function (e) {
@@ -1158,42 +1197,3 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 // });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-
-const dropZone1 = document.querySelector(".uploadcsv-wrp");
-const fileInput = document.querySelector(".csv_file");
-
-dropZone1.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    dropZone1.classList.add("dragging");
-});
-
-dropZone1.addEventListener("dragleave", () => {
-    dropZone1.classList.remove("dragging");
-});
-
-dropZone1.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dropZone1.classList.remove("dragging");
-
-    const files = Array.from(event.dataTransfer.files);
-
-    if (files.length > 0) {
-        const dataTransfer = new DataTransfer();
-
-        if (fileInput.files.length > 0) {
-            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
-        }
-
-        files.forEach((file) => dataTransfer.items.add(file));
-
-        fileInput.files = dataTransfer.files;
-
-        fileInput.dispatchEvent(new Event("change"));
-
-        toastr.success("File uploaded successfully!");
-        $(".uploadcsv-wrp h3").text(files.name); 
-
-    }
-});
-});
