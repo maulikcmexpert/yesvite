@@ -1122,21 +1122,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
                 // File is a CSV, you can process it here
                 console.log('CSV file selected:', file);
-                // You can now access the file object and do what you need with it, such as:
-                // 1. Upload it via AJAX.
-                // 2. Read its contents using FileReader.
-
-                // Example: Upload via AJAX
-                // uploadFile(file);
-
+                // The file is now selected in the file input.
+                // When the form containing this input is submitted, the file will be sent.
             } else {
                 alert('Please upload a CSV file.');
                 fileInput.value = ''; // Clear the input
             }
         }
     }
-
-    
 });
 // $(document).ready(function() {
 //     let dropArea = $(".uploadcsv-wrp");
