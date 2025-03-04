@@ -1083,7 +1083,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-let dropArea = $(".uploadcsv-wrp");
+let dropArea = $("#csv_file");
 let fileInput = $("#csv_file");
 
 // Open file dialog on click
