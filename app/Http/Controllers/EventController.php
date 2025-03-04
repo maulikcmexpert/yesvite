@@ -642,8 +642,7 @@ class EventController extends BaseController
 
         $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
             $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
-        })
-            ->with([
+        })->with([
                 'subcategory' => function ($query) {
                     $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
                         ->with('textdatas'); // Load the textdatas relationship
