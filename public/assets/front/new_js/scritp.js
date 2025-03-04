@@ -470,7 +470,7 @@ function handleFiles(files, currentFileInput) {
 // });
 
 
-$(document).on("shown.bs.modal", "#yourModalId", function () {
+$(document).on("shown.bs.modal", "#uploadcsv", function () {
     const dropZone1 = document.querySelector(".uploadcsv-wrp");
     const fileInput = document.querySelector(".csv_file");
 
