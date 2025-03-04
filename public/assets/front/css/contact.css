@@ -960,6 +960,7 @@ input[type="search"]~span {
     top: 0 !important;
     left:0  !important;
     z-index: 10 !important;
+    display: none !important;
 }
 
 
