@@ -644,14 +644,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="upload_csv_contact" action="{{ route('import.csv') }}" method="POST" enctype="multipart/form-data">
+            <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
             @csrf
-                <div class="modal-body guest-tab upload_csv_body">
+                <div class="modal-body guest-tab">
                     <div class="uploadcsv-wrp">
                         <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                         <h3>Drag CSV Here</h3>
                         <p>Drag file here or click to upload </p>
-                        <input type="file" name="csv_file" class="csv_file" id="csv_file">
+                        <input type="file" name="csv_file" id="csv_file">
                       
                     </div>
                     <!-- <div class="uploadedcvs-file-wrp">
