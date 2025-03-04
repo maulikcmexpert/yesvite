@@ -558,10 +558,10 @@
                                                                         data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                 </div>
 
-                                                                @if ($post['commenting_on_off'] == '1')
+
                                                                     <button
-                                                                        class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
-                                                                        event_p_id="{{ $post['id'] }}">
+
+                                                                      >
                                                                         <svg viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -580,7 +580,6 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </button>
-                                                                @endif
 
                                                             </div>
                                                         </div>
