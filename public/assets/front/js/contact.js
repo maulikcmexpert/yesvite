@@ -1097,19 +1097,16 @@ $(document).ready(function() {
     uploadWrapper.on('dragover', function(e) {
         e.preventDefault();
         uploadWrapper.addClass('drag-over');
-        // console.log('dragover', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
     });
 
     uploadWrapper.on('dragleave', function(e) {
         uploadWrapper.removeClass('drag-over');
-        console.log('dragleave'); // Added console log
     });
 
     uploadWrapper.on('drop', function(e) {
         e.preventDefault();
         uploadWrapper.removeClass('drag-over');
-        handleFileSelect(e.originalEvent);
-        // console.log('drop', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
+        handleFileSelect(e.originalEvent); // Access original event for drop
     });
 
     function handleFileSelect(e) {
@@ -1131,9 +1128,6 @@ $(document).ready(function() {
             }
         }
     }
-    fileInput.change(function(){
-        console.log('file input change');
-    });
 });
 // $(document).ready(function() {
 //     let dropArea = $(".uploadcsv-wrp");
