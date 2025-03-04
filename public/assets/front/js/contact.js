@@ -1084,14 +1084,51 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
+// const dropZone1 = document.querySelector(".uploadcsv-wrp");
+
+// dropZone1.addEventListener("dragover", (event) => {
+//     event.preventDefault();
+//     dropZone1.classList.add("dragging");
+// });
+
+// dropZone1.addEventListener("dragleave", (event) => {
+//     dropZone1.classList.remove("dragging");
+// });
+
+// dropZone1.addEventListener("drop", (event) => {
+//     event.preventDefault();
+//     dropZone1.classList.remove("dragging");
+
+//     const files = Array.from(event.dataTransfer.files);
+//     const fileInput = document.querySelector(".csv_file");
+
+//     if (files.length > 0) {
+//         // Append new files to file input
+//         const dataTransfer = new DataTransfer();
+
+//         // Retain previously selected files
+//         if (fileInput.files.length > 0) {
+//             Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+//         }
+
+//         // Add new dropped files
+//         files.forEach((file) => dataTransfer.items.add(file));
+
+//         fileInput.files = dataTransfer.files;
+
+//         // Trigger change event manually
+//         $(fileInput).trigger("change");
+//     }
+// });
 const dropZone1 = document.querySelector(".uploadcsv-wrp");
+const fileInput = document.querySelector(".csv_file");
 
 dropZone1.addEventListener("dragover", (event) => {
     event.preventDefault();
     dropZone1.classList.add("dragging");
 });
 
-dropZone1.addEventListener("dragleave", (event) => {
+dropZone1.addEventListener("dragleave", () => {
     dropZone1.classList.remove("dragging");
 });
 
@@ -1100,10 +1137,8 @@ dropZone1.addEventListener("drop", (event) => {
     dropZone1.classList.remove("dragging");
 
     const files = Array.from(event.dataTransfer.files);
-    const fileInput = document.querySelector(".csv_file");
 
     if (files.length > 0) {
-        // Append new files to file input
         const dataTransfer = new DataTransfer();
 
         // Retain previously selected files
@@ -1117,6 +1152,9 @@ dropZone1.addEventListener("drop", (event) => {
         fileInput.files = dataTransfer.files;
 
         // Trigger change event manually
-        $(fileInput).trigger("change");
+        fileInput.dispatchEvent(new Event("change"));
+
+        // Show alert on successful file drop
+        toastr.success("File uploaded successfully!");
     }
 });
