@@ -1158,6 +1158,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 // });
 
 
+document.addEventListener("DOMContentLoaded", function () {
 
 const dropZone1 = document.querySelector(".uploadcsv-wrp");
 const fileInput = document.querySelector(".csv_file");
@@ -1194,4 +1195,5 @@ dropZone1.addEventListener("drop", (event) => {
         $(".uploadcsv-wrp h3").text(files.name); 
 
     }
+});
 });
