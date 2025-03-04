@@ -137,8 +137,7 @@
                 @foreach ($allImages as $image)
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs
                          {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }} "
-                        {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}}
-                        data-category-id="{{ $image['category_id'] }}"
+                        {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}} data-category-id="{{ $image['category_id'] }}"
                         data-subcategory-id="{{ $image['subcategory_id'] }}"
                         data-category_name="{{ $image['category_name'] }}">
 
@@ -191,7 +190,6 @@
 </div>
 @push('scripts')
     <script>
-
         var designData = [];
 
         // Correcting the PHP to JavaScript variable conversion
@@ -227,11 +225,9 @@
 
         $(document).ready(function() {
 
-            $("#nav-profile-home-tab").click(function(){
-            console.log("clicked");
-
-            updateTotalCount();
-        })
+            $("#nav-profile-home-tab").click(function() {
+                updateTotalCount();
+            })
             const urlParams = new URLSearchParams(window.location.search);
             const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
@@ -338,20 +334,20 @@
             }
 
 
-            $('#resetCategories').on('click', function (e) {
-        e.preventDefault();
-        $(".categoryNew").show();
-        $(".subcategoryNew").hide();
-        $(".image-item-new").hide(); // Hide filtered items
-        $(".image-item").show(); // Show default images
-        $("#category_name").hide();
-        $("#allchecked").hide();
-        $("#Allcat").prop("checked", false);
-        $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
-        $(".selected-items").empty();
+            $('#resetCategories').on('click', function(e) {
+                e.preventDefault();
+                $(".categoryNew").show();
+                $(".subcategoryNew").hide();
+                $(".image-item-new").hide(); // Hide filtered items
+                $(".image-item").show(); // Show default images
+                $("#category_name").hide();
+                $("#allchecked").hide();
+                $("#Allcat").prop("checked", false);
+                $('input[name="design_subcategory"]:not(#Allcat)').prop('checked', false);
+                $(".selected-items").empty();
 
-        $('.total_design_count').text($('.default_show:visible').length + ' Items');
-    });
+                $('.total_design_count').text($('.default_show:visible').length + ' Items');
+            });
 
             $('#filtered_results').hide();
             $('#search_design_category').on('keyup', function() {
