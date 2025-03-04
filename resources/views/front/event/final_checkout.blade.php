@@ -934,7 +934,13 @@
                     <h4 class="title">Share Event Link</h4>
                     <div class="new_copy_event_inner">
                         <input type="text" value="" name="event_copy_link" id="event_copy_link" readonly/>
-                        <button type="button" id="event_copy_link_btn">Copy Link</button>
+                        <button type="button" id="event_copy_link_btn" style="background: black; border-color:black">Copy Link</button>
+                    </div>
+                    <div class="invite-left">
+                        <h6 class="invite-count">0</h6>
+                        <input type="hidden" id="event_guest_left_count">
+                        <p><strong>Invites |</strong></p><div class="coin-invite"><strong><img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" alt=""></strong></div><strong> <span class="invite-left_d">2933 Left</span></strong><p></p>
+                        <input type="hidden" id="currentInviteCount" value="0">
                     </div>
                 </div>
 
