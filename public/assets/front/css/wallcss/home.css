@@ -523,7 +523,7 @@ main.new-main-content {
 .new-main-content input {
     background-color: transparent;
     border: 1px solid var(--border) !important;
-
+    height: 45px !important;
     border-radius: 16px !important;
     padding-left: 15px !important;
     font-family: var(--SFProDisplay-Regular);
@@ -2768,10 +2768,13 @@ main.new-main-content {
 .uploadcsv-wrp input {
     position: absolute;
     opacity: 0;
-    width:0;
-    height:0;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
     padding: 0px;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
 }
 
 .uploadcsv-wrp img {
@@ -3685,7 +3688,7 @@ main.new-main-content {
     min-width: 43px;
 }
 
-.posts-card-like-comment-left_reaction button {
+.posts-card-like-comment-left_reaction h6 {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     line-height: 23.8px;
@@ -3693,11 +3696,9 @@ main.new-main-content {
     color: var(--lightgreay);
     padding-left: 12px;
     position: relative;
-    border: none;
-    background: transparent;
 }
 
-.posts-card-like-comment-left_reaction button::before {
+.posts-card-like-comment-left_reaction h6::before {
     content: "";
     position: absolute;
     width: 5px;
