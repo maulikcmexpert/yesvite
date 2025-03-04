@@ -1113,7 +1113,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
             dropArea.removeClass("dragover");
 
             let files = event.originalEvent.dataTransfer.files;
-            if (files.length > 0 && files[0].type === "text/csv") {
+            if (files.length > 0) {
                 let fileList = new DataTransfer();
                 fileList.items.add(files[0]);
                 fileInput[0].files = fileList.files;
