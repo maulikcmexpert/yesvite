@@ -646,8 +646,8 @@
 
             <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
             @csrf
-                <div class="modal-body guest-tab upload_csv_contact_body">
-                    <div class="uploadcsv-wrp">
+                <div class="modal-body guest-tab">
+                    <div class="uploadcsv-wrp ">
                         <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                         <h3>Drag CSV Here</h3>
                         <p>Drag file here or click to upload </p>
