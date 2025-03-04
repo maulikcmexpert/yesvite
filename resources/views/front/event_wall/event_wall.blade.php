@@ -496,7 +496,7 @@
                                                                     }
                                                                 @endphp
 
-                                                                <button class="posts-card-like-btn  set_emoji_like"
+                                                                <button class="posts-card-like-btn show-btn-comment set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
                                                                     data-event-post-id="{{ $post['id'] }}"
@@ -559,7 +559,7 @@
 
 
                                                                     <button
-                                                                        class=" show-btn-comment comment_btn"
+                                                                        class="comment_btn"
                                                                         >
                                                                         <svg viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
