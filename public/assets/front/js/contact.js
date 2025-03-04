@@ -1082,57 +1082,113 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-$(document).ready(function() {
-    let dropArea = $(".uploadcsv-wrp");
-    let fileInput = $("#csv_file");
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadWrapper = document.getElementById('uploadCsvWrapper');
+    const fileInput = document.getElementById('csv_file');
 
-    $(document).on("dragover dragenter", function (e) {
+    // Click to upload
+    uploadWrapper.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', handleFileSelect);
+
+    // Drag and drop
+    uploadWrapper.addEventListener('dragover', function(e) {
         e.preventDefault();
-        e.stopPropagation();
+        uploadWrapper.classList.add('drag-over');
     });
 
-    $(document).on("drop", function (e) {
+    uploadWrapper.addEventListener('dragleave', function(e) {
+        uploadWrapper.classList.remove('drag-over');
+    });
+
+    uploadWrapper.addEventListener('drop', function(e) {
         e.preventDefault();
-        e.stopPropagation();
+        uploadWrapper.classList.remove('drag-over');
+        handleFileSelect(e);
     });
 
-    dropArea.on("dragover dragenter", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).addClass("drag-over");
-    });
-
-    dropArea.on("dragleave", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass("drag-over");
-    });
-
-    dropArea.on("drop", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $(this).removeClass("drag-over");
-
-        let files = e.originalEvent.dataTransfer.files;
-        if (files.length > 0) {
-            handleFileUpload(files[0]);
-        }
-    });
-
-    fileInput.on("change", function (e) {
-        let file = e.target.files[0];
-        handleFileUpload(file);
-    });
-
-    function handleFileUpload(file) {
-        if (file && file.type === "text/csv") {
-            $(".uploadcsv-wrp h3").text(file.name);
-            console.log("File uploaded:", file); // Important for debugging
+    function handleFileSelect(e) {
+        let files;
+        if (e.type === 'drop') {
+            files = e.dataTransfer.files;
         } else {
-            alert("Please upload a valid CSV file.");
+            files = e.target.files;
+        }
+
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                // File is a CSV, you can process it here
+                console.log('CSV file selected:', file);
+                // You can now access the file object and do what you need with it, such as:
+                // 1. Upload it via AJAX.
+                // 2. Read its contents using FileReader.
+
+                // Example: Upload via AJAX
+                // uploadFile(file);
+
+            } else {
+                alert('Please upload a CSV file.');
+                fileInput.value = ''; // Clear the input
+            }
         }
     }
+
+    
 });
+// $(document).ready(function() {
+//     let dropArea = $(".uploadcsv-wrp");
+//     let fileInput = $("#csv_file");
+
+//     $(document).on("dragover dragenter", function (e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//     });
+
+//     $(document).on("drop", function (e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//     });
+
+//     dropArea.on("dragover dragenter", function (e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//         $(this).addClass("drag-over");
+//     });
+
+//     dropArea.on("dragleave", function (e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//         $(this).removeClass("drag-over");
+//     });
+
+//     dropArea.on("drop", function (e) {
+//         e.preventDefault();
+//         e.stopPropagation();
+//         $(this).removeClass("drag-over");
+
+//         let files = e.originalEvent.dataTransfer.files;
+//         if (files.length > 0) {
+//             handleFileUpload(files[0]);
+//         }
+//     });
+
+//     fileInput.on("change", function (e) {
+//         let file = e.target.files[0];
+//         handleFileUpload(file);
+//     });
+
+//     function handleFileUpload(file) {
+//         if (file && file.type === "text/csv") {
+//             $(".uploadcsv-wrp h3").text(file.name);
+//             console.log("File uploaded:", file); // Important for debugging
+//         } else {
+//             alert("Please upload a valid CSV file.");
+//         }
+//     }
+// });
 // $(document).on("shown.bs.modal", "#uploadcsv", function () {
 //     const dropZone1 = document.querySelector(".uploadcsv-wrp");
 //     const fileInput = document.querySelector(".csv_file");
