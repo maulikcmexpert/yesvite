@@ -1096,10 +1096,16 @@ $(document).ready(function() {
     const fileInput = $('#csv_file');
 
     // Click to upload
-    uploadWrapper.click(function() {
-        fileInput.click();
-    });
+    // uploadWrapper.click(function() {
+    //     fileInput.click();
+    // });
 
+    
+        // Click to upload - Prevent multiple triggers
+        uploadWrapper.on('click', function (e) {
+            e.stopPropagation(); // Prevent bubbling to avoid double trigger
+            fileInput.trigger('click'); // Manually trigger file input
+        });
     fileInput.change(handleFileSelect);
 
     // Drag and drop
