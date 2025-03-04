@@ -1082,31 +1082,31 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-document.addEventListener('DOMContentLoaded', function() {
-    const uploadWrapper = document.getElementById('uploadCsvWrapper');
-    const fileInput = document.getElementById('csv_file');
+$(document).ready(function() {
+    const uploadWrapper = $('.uploadcsv-wrp');
+    const fileInput = $('#csv_file');
 
     // Click to upload
-    uploadWrapper.addEventListener('click', function() {
+    uploadWrapper.click(function() {
         fileInput.click();
     });
 
-    fileInput.addEventListener('change', handleFileSelect);
+    fileInput.change(handleFileSelect);
 
     // Drag and drop
-    uploadWrapper.addEventListener('dragover', function(e) {
+    uploadWrapper.on('dragover', function(e) {
         e.preventDefault();
-        uploadWrapper.classList.add('drag-over');
+        uploadWrapper.addClass('drag-over');
     });
 
-    uploadWrapper.addEventListener('dragleave', function(e) {
-        uploadWrapper.classList.remove('drag-over');
+    uploadWrapper.on('dragleave', function(e) {
+        uploadWrapper.removeClass('drag-over');
     });
 
-    uploadWrapper.addEventListener('drop', function(e) {
+    uploadWrapper.on('drop', function(e) {
         e.preventDefault();
-        uploadWrapper.classList.remove('drag-over');
-        handleFileSelect(e);
+        uploadWrapper.removeClass('drag-over');
+        handleFileSelect(e.originalEvent); // Access original event for drop
     });
 
     function handleFileSelect(e) {
@@ -1120,13 +1120,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (files.length > 0) {
             const file = files[0];
             if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
-                // File is a CSV, you can process it here
                 console.log('CSV file selected:', file);
-                // The file is now selected in the file input.
-                // When the form containing this input is submitted, the file will be sent.
+                // File is now selected, and will be submitted with the form.
             } else {
                 alert('Please upload a CSV file.');
-                fileInput.value = ''; // Clear the input
+                fileInput.val(''); // Clear the input
             }
         }
     }
