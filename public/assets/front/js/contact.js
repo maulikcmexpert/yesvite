@@ -1106,9 +1106,27 @@ $(document).ready(function() {
     uploadWrapper.on('drop', function(e) {
         e.preventDefault();
         uploadWrapper.removeClass('drag-over');
+        let files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            setFileInput(files[0]); // Assign dropped file
+        }
         handleFileSelect(e.originalEvent); // Access original event for drop
     });
+    function setFileInput(file) {
+        if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
 
+            // Assign file to input field
+            let dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput[0].files = dataTransfer.files;
+
+            console.log('CSV file selected:', file);
+        } else {
+            toastr.error('Only CSV files are allowed.');
+            fileInput.val('');
+        }
+    }
     function handleFileSelect(e) {
         let files;
         if (e.type === 'drop') {
