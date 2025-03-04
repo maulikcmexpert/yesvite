@@ -1141,20 +1141,18 @@ dropZone1.addEventListener("drop", (event) => {
     if (files.length > 0) {
         const dataTransfer = new DataTransfer();
 
-        // Retain previously selected files
         if (fileInput.files.length > 0) {
             Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
         }
 
-        // Add new dropped files
         files.forEach((file) => dataTransfer.items.add(file));
 
         fileInput.files = dataTransfer.files;
 
-        // Trigger change event manually
         fileInput.dispatchEvent(new Event("change"));
 
-        // Show alert on successful file drop
         toastr.success("File uploaded successfully!");
+        $(".uploadcsv-wrp h3").text(file.name); 
+
     }
 });
