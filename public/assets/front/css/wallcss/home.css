@@ -3694,7 +3694,7 @@ main.new-main-content {
     padding-left: 12px;
     position: relative;
     border: none;
-    background-color: transparent;
+    background: transparent;
 }
 
 .posts-card-like-comment-left_reaction button::before {
