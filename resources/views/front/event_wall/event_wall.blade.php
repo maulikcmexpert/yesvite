@@ -478,8 +478,10 @@
                                                                         <li id="reactionImage_{{ $post['id'] }}">
                                                                         </li>
                                                                     @endif
+                                                                    @if ($post['post_type'] == '4')
                                                                     <p id="likeCount_{{ $post['id'] }}">
                                                                         {{ $post['total_likes'] }} Likes</p>
+                                                                        @endif
                                                                 </ul>
                                                                 @if ($post['commenting_on_off'] == '1')
                                                                     <button id="comment_{{ $post['id'] }}"  class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
@@ -496,7 +498,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
-
+@if ($post['post_type'] == '4')
                                                                 <button class="posts-card-like-btn  set_emoji_like"
                                                                     id="likeButton"
                                                                     data-event-id="{{ $event }}"
@@ -557,8 +559,8 @@
                                                                         alt="Clap Emoji" class="emoji"
                                                                         data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                 </div>
-
-
+                                                                @endif
+                                                                @if ($post['post_type'] == '4')
                                                                     <a href="{{route('message.list',   ['id' => encrypt($post['user_id'])])}}"
 
                                                                       >
@@ -580,6 +582,7 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </a>
+                                                                    @endif
 
                                                             </div>
                                                         </div>
