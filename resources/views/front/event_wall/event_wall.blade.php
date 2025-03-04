@@ -482,7 +482,7 @@
                                                                         {{ $post['total_likes'] }} Likes</p>
                                                                 </ul>
                                                                 @if ($post['commenting_on_off'] == '1')
-                                                                    <h6 id="comment_{{ $post['id'] }}">
+                                                                    <h6 class="posts-card-comm show-comments-btn" id="comment_{{ $post['id'] }}" event_p_id="{{ $post['id'] }}">
                                                                         {{ $post['total_comment'] }} Comments</h6>
                                                                 @endif
                                                             </div>
@@ -557,10 +557,10 @@
                                                                         data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                 </div>
 
-                                                                @if ($post['commenting_on_off'] == '1')
+
                                                                     <button
-                                                                        class="posts-card-comm show-comments-btn show-btn-comment comment_btn"
-                                                                        event_p_id="{{ $post['id'] }}">
+                                                                        class=" show-btn-comment comment_btn"
+                                                                        >
                                                                         <svg viewBox="0 0 24 24" fill="none"
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
@@ -579,7 +579,7 @@
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
                                                                     </button>
-                                                                @endif
+
 
                                                             </div>
                                                         </div>
