@@ -1470,6 +1470,7 @@ main.new-main-content {
     padding-left: 12px;
     position: relative;
     background-color: transparent;
+    border: none;
 }
 
 .posts-card-like-comment-left button.show-comments-btn::before {
