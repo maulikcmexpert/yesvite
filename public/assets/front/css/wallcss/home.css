@@ -2763,7 +2763,6 @@ main.new-main-content {
     padding: 30px;
     margin-bottom: 10px;
     position: relative;
-    z-index: 15;
 }
 
 .uploadcsv-wrp input {
