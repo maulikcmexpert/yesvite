@@ -220,6 +220,7 @@
 
 #detail-photo-modal .modal-body {
     max-height: 550px;
+    padding-bottom: 20px !important;
 }
 
 
