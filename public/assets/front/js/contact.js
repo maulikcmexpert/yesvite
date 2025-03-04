@@ -1084,7 +1084,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-const dropZone1 = document.querySelector(".uploadcsv-wrp");
+const dropZone1 = document.querySelector(".upload_csv_contact_body");
 const fileInput = document.querySelector(".csv_file");
 
 dropZone1.addEventListener("click", () => {
