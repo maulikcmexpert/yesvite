@@ -1,6 +1,7 @@
 @php
 $getSocialLink = getSocialLink();
 @endphp
+{{-- {{dd($imagecount)}} --}}
 <x-front.advertise />
 <section class="home-web-tabs-wrp">
     <div class="container">
@@ -17,20 +18,20 @@ $getSocialLink = getSocialLink();
         </nav>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="nav-explore-designs" role="tabpanel" aria-labelledby="explore-designs-tab">
-                
+
                 <!-- ============= contact-details ============ -->
                 <section class="contact-details profile-details supportive-home-wrp">
                     <div class="container">
                         <div class="row">
                             <x-front.sidebar :profileData="[]" />
-                
+
                             <div class="calender-supportive-div col-xl-9 col-lg-9 col-md-8">
                                 <div class="row">
                                     <div class="col-xl-7">
                                         <div class="home-center-main">
                                             <div class="home-center-content">
                                                 <x-main_menu.home.profile :profileData="$profileData" :draftEventArray="$draftEventArray" />
-                
+
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
                                             <button type="button" class="mobile-calender-btn">
@@ -48,7 +49,7 @@ $getSocialLink = getSocialLink();
                                                 <path d="M7.41209 11.4167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                
+
                                                 {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                                                 <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -64,14 +65,14 @@ $getSocialLink = getSocialLink();
                                         <input type="hidden" id="diffmonth" value="{{$diffmonth}}"/>
                                         <input type="hidden" id="calender_json" value="{{$events_calender_json}}"/>
                                         <input type="hidden" id="current_page" value="{{ (Request::segment(1)) }}"/>
-                
-                
-                
+
+
+
                                         <div class="home-main-right right-bar-menu-home">
                                             <x-main_menu.calender :profileData="$profileData" />
                                             <x-main_menu.home.event_drafts :draftEventArray="$draftEventArray" />
                                         </div>
-                
+
                                         <div class="responsive-calender-month-wrp">
                                             <h3 class="responsive-calender-month-text" style="display:none;">{{$startMonthCalender}}</h3>
                                         </div>
