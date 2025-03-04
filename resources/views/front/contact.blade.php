@@ -648,13 +648,13 @@
             @csrf
                 <div class="modal-body guest-tab position-relative">
                     {{-- <input type="file" name="csv_file" id="csv_file"> --}}
-                    <label class="uploadcsv-wrp" for="csv_file">
+                    <div class="uploadcsv-wrp">
                         <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                         <h3>Drag CSV Here</h3>
                         <p>Drag file here or click to upload </p>
                         <input type="file" name="csv_file" id="csv_file">
 
-                    </label>
+                    </div>
                     {{-- <div class="uploadcsv-wrp">
                         <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                         <h3>Drag CSV Here</h3>

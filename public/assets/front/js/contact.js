@@ -1084,53 +1084,49 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 });
 
 let dropArea = $(".uploadcsv-wrp");
-    let fileInput = $("#csv_file");
+        let fileInput = $("#csv_file");
 
-    // Click on div opens file input
-    dropArea.on("click", function () {
-        fileInput.click();
-    });
+        // Click anywhere in the div to open file dialog
+        dropArea.on("click", function () {
+            fileInput.click();
+        });
 
-    // Prevent default drag behaviors
-    $(document).on("dragover dragenter drop", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-    });
+        // Prevent default behavior for drag-and-drop
+        $(document).on("dragover drop", function (event) {
+            event.preventDefault();
+        });
 
-    // Drag over event (Highlight effect)
-    dropArea.on("dragover", function (e) {
-        e.preventDefault();
-        $(this).addClass("drag-over"); // Add a class for styling
-    });
+        // Handle drag over effect
+        dropArea.on("dragover", function (event) {
+            event.preventDefault();
+            dropArea.addClass("dragover");
+        });
 
-    // Drag leave event (Remove highlight effect)
-    dropArea.on("dragleave", function (e) {
-        e.preventDefault();
-        $(this).removeClass("drag-over");
-    });
+        // Remove effect when dragging out
+        dropArea.on("dragleave", function () {
+            dropArea.removeClass("dragover");
+        });
 
-    // Drop event on entire div
-    dropArea.on("drop", function (e) {
-        e.preventDefault();
-        $(this).removeClass("drag-over");
+        // Handle file drop
+        dropArea.on("drop", function (event) {
+            event.preventDefault();
+            dropArea.removeClass("dragover");
 
-        let files = e.originalEvent.dataTransfer.files;
-        if (files.length > 0) {
-            fileInput[0].files = files; // Assign dropped files to input
-            handleFileUpload(files[0]);
-        }
-    });
+            let files = event.originalEvent.dataTransfer.files;
+            if (files.length > 0 && files[0].type === "text/csv") {
+                let fileList = new DataTransfer();
+                fileList.items.add(files[0]);
+                fileInput[0].files = fileList.files;
 
-    // File input change event (Handles both click & drop)
-    fileInput.on("change", function (e) {
-        let file = e.target.files[0];
-        handleFileUpload(file);
-    });
+                alert("CSV file uploaded: " + files[0].name);
+            } else {
+                alert("Only CSV files are allowed!");
+            }
+        });
 
-    function handleFileUpload(file) {
-        if (file && file.type === "text/csv") {
-            $(".uploadcsv-wrp h3").text(file.name); // Display file name
-        } else {
-            alert("Please upload a valid CSV file.");
-        }
-    }
+        // Handle file selection via input
+        fileInput.on("change", function () {
+            if (fileInput[0].files.length > 0) {
+                alert("CSV file uploaded: " + fileInput[0].files[0].name);
+            }
+        });
