@@ -1082,39 +1082,47 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-const dropZone = document.querySelector(".uploadcsv-wrp");
+let dropArea = $(".uploadcsv-wrp");
 
-dropZone.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    dropZone.classList.add("dragging");
+// Prevent default drag behaviors
+$(document).on("dragover dragenter drop", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 });
 
-dropZone.addEventListener("dragleave", (event) => {
-    dropZone.classList.remove("dragging");
+// Drag over event
+dropArea.on("dragover", function (e) {
+    e.preventDefault();
+    $(this).addClass("drag-over");
 });
 
-dropZone.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dropZone.classList.remove("dragging");
+// Drag leave event
+dropArea.on("dragleave", function (e) {
+    e.preventDefault();
+    $(this).removeClass("drag-over");
+});
 
-    const files = Array.from(event.dataTransfer.files);
-    const fileInput = document.querySelector(".fileInputtype");
+// Drop event on entire div
+dropArea.on("drop", function (e) {
+    e.preventDefault();
+    $(this).removeClass("drag-over");
 
+    let files = e.originalEvent.dataTransfer.files;
     if (files.length > 0) {
-        // Append new files to file input
-        const dataTransfer = new DataTransfer();
-
-        // Retain previously selected files
-        if (fileInput.files.length > 0) {
-            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
-        }
-
-        // Add new dropped files
-        files.forEach((file) => dataTransfer.items.add(file));
-
-        fileInput.files = dataTransfer.files;
-
-        // Trigger change event manually
-        $(fileInput).trigger("change");
+        handleFileUpload(files[0]);
     }
 });
+
+// File input change event
+$("#csv_file").on("change", function (e) {
+    let file = e.target.files[0];
+    handleFileUpload(file);
+});
+
+function handleFileUpload(file) {
+    if (file && file.type === "text/csv") {
+        $(".uploadcsv-wrp h3").text(file.name); // Show file name
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
+}
