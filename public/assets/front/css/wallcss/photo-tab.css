@@ -560,27 +560,19 @@
 
 @media only screen and (min-width: 1600px) and (min-height: 1400px) and (max-height: 1499px){
     #detail-photo-modal .modal-content {
-        max-width: 1300px !important;
-        min-width: 1300px !important;
-        height: calc(100% - 80px) !important;
-    }
-}
-@media only screen and (min-width: 1600px) and (min-height: 1300px) and (max-height: 1399px){
-    #detail-photo-modal .modal-content {
         max-width: 1200px !important;
         min-width: 1200px !important;
         height: calc(100% - 80px) !important;
     }
 }
-@media only screen and (min-width: 1600px) and (min-height: 1200px) and (max-height: 1299px){
+@media only screen and (min-width: 1600px) and (min-height: 1300px) and (max-height: 1399px){
     #detail-photo-modal .modal-content {
         max-width: 1100px !important;
         min-width: 1100px !important;
         height: calc(100% - 80px) !important;
     }
 }
-
-@media only screen and (min-width: 1600px) and (min-height: 1100px) and (max-height: 1199px){
+@media only screen and (min-width: 1600px) and (min-height: 1200px) and (max-height: 1299px){
     #detail-photo-modal .modal-content {
         max-width: 1000px !important;
         min-width: 1000px !important;
@@ -588,10 +580,18 @@
     }
 }
 
-@media only screen and (min-width: 1600px) and (min-height: 1000px) and (max-height: 1099px){
+@media only screen and (min-width: 1600px) and (min-height: 1100px) and (max-height: 1199px){
     #detail-photo-modal .modal-content {
         max-width: 900px !important;
         min-width: 900px !important;
+        height: calc(100% - 80px) !important;
+    }
+}
+
+@media only screen and (min-width: 1600px) and (min-height: 1000px) and (max-height: 1099px){
+    #detail-photo-modal .modal-content {
+        max-width: 800px !important;
+        min-width: 800px !important;
         height: calc(100% - 80px) !important;
     }
 }
@@ -633,14 +633,14 @@
     #detail-photo-modal .modal-content {
         max-width: 750px;
         min-width: 750px;
-        height: calc(100% - 80px);
+        height: calc(100% - 150px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 280px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 320px);
+        height: calc(100vh - 380px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -667,14 +667,14 @@
     #detail-photo-modal .modal-content {
         max-width: 700px;
         min-width: 700px;
-        height: calc(100% - 80px);
+        height: calc(100% - 150px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 280px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 320px);
+        height: calc(100vh - 380px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -698,14 +698,14 @@
     #detail-photo-modal .modal-content {
         max-width: 650px;
         min-width: 650px;
-        height: calc(100% - 80px);
+        height: calc(100% - 150px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 280px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 320px);
+        height: calc(100vh - 380px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -719,14 +719,14 @@
     #detail-photo-modal .modal-content {
         max-width: 600px;
         min-width: 600px;
-        height: calc(100% - 80px);
+        height: calc(100% - 150px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 280px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 320px);
+        height: calc(100vh - 380px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -740,14 +740,14 @@
     #detail-photo-modal .modal-content {
         max-width: 550px;
         min-width: 550px;
-        height: calc(100% - 80px);
+        height: calc(100% - 150px);
     }
     #detail-photo-modal .modal-body {
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 280px);
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 320px);
+        height: calc(100vh - 380px);
     }
 }
 
