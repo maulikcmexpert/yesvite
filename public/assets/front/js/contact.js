@@ -1114,7 +1114,7 @@ let dropArea = $(".uploadcsv-wrp");
     });
 
     // File input change event
-    $("#csv_file").on("change", function (e) {
+    $("#drag_csv_file").on("change", function (e) {
         let file = e.target.files[0];
         handleFileUpload(file);
     });
