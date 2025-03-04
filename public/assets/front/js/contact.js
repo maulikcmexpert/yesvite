@@ -1117,7 +1117,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         toastr.error('Only CSV files are allowed.');
         return;
     }
-    toastr.success('done');
+    toastr.success('done'+fileName);
         $('#home_loader').css('display','none');
         // $('#upload_csv_contact').submit();
     // }
