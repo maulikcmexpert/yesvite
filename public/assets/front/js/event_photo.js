@@ -1121,9 +1121,9 @@ $(document).ready(function () {
                         $("#report_btn").hide();
                     }
                     const encryptedUserId = encrypt(data.user_id);
-                    const messageRoute = `{{ route('message.list', ['id' => '__USER_ID__']) }}`.replace("__USER_ID__", encryptedUserId);
+                    const updatedMessageRoute = messageRoute.replace("__USER_ID__", encryptedUserId);
 
-                    $(".your-message-link").attr("href", messageRoute);
+                    $(".your-message-link").attr("href", updatedMessageRoute);
                     $(".likeModel")
                         .data("event-id", data.event_id)
                         .data("event-post-id", data.id);
