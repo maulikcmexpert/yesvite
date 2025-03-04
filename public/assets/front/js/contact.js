@@ -1105,12 +1105,12 @@ dropZone1.addEventListener("dragleave", () => {
 dropZone1.addEventListener("drop", (event) => {
     event.preventDefault();
     dropZone1.classList.remove("dragging");
-    console.log('drop');
 
 
     const files = Array.from(event.dataTransfer.files);
 
     if (files.length > 0) {
+        console.log(files[0].name);
         const allowedExtensions = ["csv"]; // Allow only CSV files
         const dataTransfer = new DataTransfer();
 
@@ -1130,6 +1130,8 @@ dropZone1.addEventListener("drop", (event) => {
             $(".uploadcsv-wrp h3").text(files[0].name); 
         }
     }
+    console.log('drop');
+
 });
 
 // const dropZone1 = document.querySelector(".uploadcsv-wrp");
