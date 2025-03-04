@@ -558,6 +558,14 @@
 
 /* ===Responsive=== */
 
+@media only screen and (min-width: 1600px) and (max-width: 1799px){
+    #detail-photo-modal .modal-content {
+        max-width: 600px;
+        min-width: 600px;
+        height: calc(100% - 20px);
+    }
+}
+
 @media only screen and (max-width: 991px) {
     .photo-card-photos-main-img{
         height: 200px;
