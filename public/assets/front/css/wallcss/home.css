@@ -3685,7 +3685,7 @@ main.new-main-content {
     min-width: 43px;
 }
 
-.posts-card-like-comment-left_reaction h6 {
+.posts-card-like-comment-left_reaction button {
     font-family: var(--SFProDisplay-Regular);
     font-size: 14px;
     line-height: 23.8px;
@@ -3693,9 +3693,11 @@ main.new-main-content {
     color: var(--lightgreay);
     padding-left: 12px;
     position: relative;
+    border: none;
+    background: transparent;
 }
 
-.posts-card-like-comment-left_reaction h6::before {
+.posts-card-like-comment-left_reaction button::before {
     content: "";
     position: absolute;
     width: 5px;
