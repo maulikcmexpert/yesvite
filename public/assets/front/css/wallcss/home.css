@@ -523,7 +523,7 @@ main.new-main-content {
 .new-main-content input {
     background-color: transparent;
     border: 1px solid var(--border) !important;
-    height: 45px !important;
+
     border-radius: 16px !important;
     padding-left: 15px !important;
     font-family: var(--SFProDisplay-Regular);
