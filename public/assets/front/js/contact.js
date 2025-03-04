@@ -1085,37 +1085,45 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 
 let dropArea = $(".uploadcsv-wrp");
 
-// Drag and drop events
-dropArea.on("dragover", function (e) {
-    e.preventDefault();
-    $(this).addClass("drag-over");
-});
+    // Prevent default drag behaviors
+    $(document).on("dragover dragenter drop", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
 
-dropArea.on("dragleave", function (e) {
-    e.preventDefault();
-    $(this).removeClass("drag-over");
-});
+    // Drag over event
+    dropArea.on("dragover", function (e) {
+        e.preventDefault();
+        $(this).addClass("drag-over");
+    });
 
-dropArea.on("drop", function (e) {
-    e.preventDefault();
-    $(this).removeClass("drag-over");
+    // Drag leave event
+    dropArea.on("dragleave", function (e) {
+        e.preventDefault();
+        $(this).removeClass("drag-over");
+    });
 
-    let files = e.originalEvent.dataTransfer.files;
-    if (files.length > 0) {
-        handleFileUpload(files[0]);
+    // Drop event on entire div
+    dropArea.on("drop", function (e) {
+        e.preventDefault();
+        $(this).removeClass("drag-over");
+
+        let files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileUpload(files[0]);
+        }
+    });
+
+    // File input change event
+    $("#csv_file").on("change", function (e) {
+        let file = e.target.files[0];
+        handleFileUpload(file);
+    });
+
+    function handleFileUpload(file) {
+        if (file && file.type === "text/csv") {
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
+        } else {
+            alert("Please upload a valid CSV file.");
+        }
     }
-});
-
-// File input change event
-$("#csv_file").on("change", function (e) {
-    let file = e.target.files[0];
-    handleFileUpload(file);
-});
-
-function handleFileUpload(file) {
-    if (file && file.type === "text/csv") {
-        $(".uploadcsv-wrp h3").text(file.name); // Show file name
-    } else {
-        alert("Please upload a valid CSV file.");
-    }
-}
