@@ -562,21 +562,18 @@
     #detail-photo-modal .modal-content {
         max-width: 1200px !important;
         min-width: 1200px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 @media only screen and (min-width: 1600px) and (min-height: 1300px) and (max-height: 1399px){
     #detail-photo-modal .modal-content {
         max-width: 1100px !important;
         min-width: 1100px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 @media only screen and (min-width: 1600px) and (min-height: 1200px) and (max-height: 1299px){
     #detail-photo-modal .modal-content {
         max-width: 1000px !important;
         min-width: 1000px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 
@@ -584,7 +581,6 @@
     #detail-photo-modal .modal-content {
         max-width: 900px !important;
         min-width: 900px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 
@@ -592,7 +588,6 @@
     #detail-photo-modal .modal-content {
         max-width: 800px !important;
         min-width: 800px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 
