@@ -57,12 +57,12 @@
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
                                     @php
-                                        $hide_image="";
+                                        $hide_image = '';
                                         // $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;
-                                        $hide_image = empty($postPhotoList) ? 'd-none' : "";
+                                        $hide_image = empty($postPhotoList) ? 'd-none' : '';
 
                                     @endphp
-                                    <div class="row {{$hide_image }}" >
+                                    <div class="row {{ $hide_image }}">
                                         {{-- <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                             <div class="photos-card-wrp">
                                                 <div class="photo-card-head">
@@ -444,7 +444,7 @@
                                                         <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
-                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? "" }}">
+                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
                                                         </button>
                                                     </div>
 
@@ -920,7 +920,8 @@
                                     </li>
                                     {{-- <p id="likeCount" >5k Likes</p> --}}
                                 </ul>
-                                <button id="comments"  class="posts-card-comm show-comments-btn">354 Comments</buttton>
+                                <button id="comments" class="posts-card-comm show-comments-btn">354 Comments
+                                    </buttton>
                             </div>
                             <div class="posts-card-like-comment-right emoji_set">
                                 <button class="posts-card-like-btn likeModel " id="likeButtonModel"
@@ -946,7 +947,8 @@
                                 </div>
 
 
-                                <a href="{{ route('message.list', ['id' =>encrypt( $login_user_id)]) }}" class="your-message-link">
+                                <a href="{{ route('message.list', ['id' => encrypt($login_user_id)]) }}"
+                                    class="your-message-link">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"

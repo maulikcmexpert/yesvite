@@ -636,6 +636,7 @@
     </div>
 </div>
 
+</div>
 <div class="modal fade cmn-modal" id="uploadcsv" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

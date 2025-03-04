@@ -1442,9 +1442,9 @@ $(document).ready(function () {
 
         let checkedCount = $(".email-checkbox:not(:disabled):checked, .phone-checkbox:not(:disabled):checked, .phoneContact-checkbox:not(:disabled):checked").length;
         if (checkedCount == 0) {
-            $('.add_guest').attr('disabled',true)
+            $('.add_guest').attr('disabled', true)
         } else {
-            $('.add_guest').attr('disabled',false)
+            $('.add_guest').attr('disabled', false)
         }
 
         // let checkedCountphone = $(".phoneContact-checkbox:not(:disabled):checked").length;
