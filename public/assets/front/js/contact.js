@@ -1097,7 +1097,7 @@ $(document).ready(function() {
     uploadWrapper.on('dragover', function(e) {
         e.preventDefault();
         uploadWrapper.addClass('drag-over');
-        console.log('dragover', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
+        // console.log('dragover', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
     });
 
     uploadWrapper.on('dragleave', function(e) {
@@ -1109,7 +1109,7 @@ $(document).ready(function() {
         e.preventDefault();
         uploadWrapper.removeClass('drag-over');
         handleFileSelect(e.originalEvent);
-        console.log('drop', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
+        // console.log('drop', e.originalEvent.pageX, e.originalEvent.pageY); // Mouse coordinates
     });
 
     function handleFileSelect(e) {
