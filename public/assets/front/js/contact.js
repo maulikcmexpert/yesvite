@@ -1082,3 +1082,40 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
+
+let dropArea = $(".uploadcsv-wrp");
+
+// Drag and drop events
+dropArea.on("dragover", function (e) {
+    e.preventDefault();
+    $(this).addClass("drag-over");
+});
+
+dropArea.on("dragleave", function (e) {
+    e.preventDefault();
+    $(this).removeClass("drag-over");
+});
+
+dropArea.on("drop", function (e) {
+    e.preventDefault();
+    $(this).removeClass("drag-over");
+
+    let files = e.originalEvent.dataTransfer.files;
+    if (files.length > 0) {
+        handleFileUpload(files[0]);
+    }
+});
+
+// File input change event
+$("#csv_file").on("change", function (e) {
+    let file = e.target.files[0];
+    handleFileUpload(file);
+});
+
+function handleFileUpload(file) {
+    if (file && file.type === "text/csv") {
+        $(".uploadcsv-wrp h3").text(file.name); // Show file name
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
+}
