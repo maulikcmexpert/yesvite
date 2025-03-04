@@ -24,7 +24,7 @@
                     <div class="contact-title">
                         <h3>Contacts</h3>
                         <div class="d-flex align-content-center gap-3">
-                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#uploadcsv">Upload CSV</button>
+                            <button class="cmn-btn new-upload-cvs-btn" data-bs-toggle="modal" data-bs-target="#uploadcsv1">Upload CSV</button>
                             <a href="#" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#myModal1">Add New Contact</a>
                             <button class="cmn-btn see_all_group">+Add New Group</button>
 
@@ -635,7 +635,17 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade cmn-modal" id="uploadcsv1" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
+    <div class="modal-body guest-tab">
+        <div class="uploadcsv-wrp">
+            <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
+            <h3>Drag CSV Here</h3>
+            <p>Drag file here or click to upload </p>
+            <input type="file" name="csv_file" id="csv_file">
+          
+        </div>
+    </div>
+</div>
 <div class="modal fade cmn-modal" id="uploadcsv" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
