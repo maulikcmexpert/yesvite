@@ -559,7 +559,7 @@
                                                                 </div>
 
 
-                                                                    <button
+                                                                    <a href=" {{route('message.list',   ['id' => encrypt($eventDetails['user_id']))}}"
 
                                                                       >
                                                                         <svg viewBox="0 0 24 24" fill="none"
@@ -579,7 +579,7 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg>
-                                                                    </button>
+                                                                    </a>
 
                                                             </div>
                                                         </div>
