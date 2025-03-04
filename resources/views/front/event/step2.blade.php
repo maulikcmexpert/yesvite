@@ -1,4 +1,5 @@
 <div class="step_2">
+    {{dd($imagecount)}}
     <section class="collection-wrapper">
         <div class="">
             <div class="content">
