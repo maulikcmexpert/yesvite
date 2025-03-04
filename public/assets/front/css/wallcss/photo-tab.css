@@ -558,6 +558,12 @@
 
 /* ===Responsive=== */
 
+@media only screen and (min-width: 1600px) and (min-height: 1500px) and (max-height: 1599px){
+    #detail-photo-modal .modal-content {
+        max-width: 1300px !important;
+        min-width: 1300px !important;
+    }
+}
 @media only screen and (min-width: 1600px) and (min-height: 1400px) and (max-height: 1499px){
     #detail-photo-modal .modal-content {
         max-width: 1300px !important;
