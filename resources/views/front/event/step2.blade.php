@@ -192,7 +192,7 @@
 @push('scripts')
     <script>
         $("#nav-profile-home-tab").click(function(){
-            console.log(clicked);
+            console.log("clicked");
 
             updateTotalCount();
         })
