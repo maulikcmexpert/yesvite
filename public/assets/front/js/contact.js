@@ -1082,51 +1082,76 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
+$(document).on("shown.bs.modal", "#uploadcsv", function () {
+    const dropZone1 = document.querySelector(".upload_csv_body");
+    const fileInput = document.querySelector(".csv_file");
+    dropZone1.addEventListener("dragleave", (event) => {
+        dropZone1.classList.remove("dragging");
+    });
 
- let dropArea = $(".uploadcsv-wrp");
-        let fileInput = $("#csv_file");
+    if (!dropZone1 || !fileInput) return; // Ensure elements exist
+dropZone1.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dropZone1.classList.remove("dragging");
 
-        // Click anywhere in the div to open file dialog
-        dropArea.on("click", function () {
-            fileInput.click();
-        });
+    dropZone1.addEventListener("click", () => {
+        fileInput.click();
+    });
+    const files = Array.from(event.dataTransfer.files);
+    const fileInput = document.querySelector(".fileInputtype");
 
-        // Prevent default behavior for drag-and-drop
-        $(document).on("dragover drop", function (event) {
-            event.preventDefault();
-        });
+    dropZone1.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dropZone1.classList.add("dragging");
+    });
+    if (files.length > 0) {
+        // Append new files to file input
+        const dataTransfer = new DataTransfer();
 
-        // Handle drag over effect
-        dropArea.on("dragover", function (event) {
-            event.preventDefault();
-            dropArea.addClass("dragover");
-        });
+    dropZone1.addEventListener("dragleave", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dropZone1.classList.remove("dragging");
+    });
+        // Retain previously selected files
+        if (fileInput.files.length > 0) {
+            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+        }
 
-        // Remove effect when dragging out
-        dropArea.on("dragleave", function () {
-            dropArea.removeClass("dragover");
-        });
+    dropZone1.addEventListener("drop", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dropZone1.classList.remove("dragging");
+        // Add new dropped files
+        files.forEach((file) => dataTransfer.items.add(file));
 
-        // Handle file drop
-        dropArea.on("drop", function (event) {
-            event.preventDefault();
-            dropArea.removeClass("dragover");
+        const files = Array.from(event.dataTransfer.files);
+        fileInput.files = dataTransfer.files;
 
-            let files = event.originalEvent.dataTransfer.files;
-            if (files.length > 0) {
-                let fileList = new DataTransfer();
-                fileList.items.add(files[0]);
-                fileInput[0].files = fileList.files;
+        if (files.length > 0) {
+            const allowedExtensions = ["csv"];
+            const dataTransfer = new DataTransfer();
+        // Trigger change event manually
+        $(fileInput).trigger("change");
+    }
+});
 
-                alert("CSV file uploaded: " + files[0].name);
-            } else {
-                alert("Only CSV files are allowed!");
+            files.forEach((file) => {
+                const fileExtension = file.name.split(".").pop().toLowerCase();
+                if (allowedExtensions.includes(fileExtension)) {
+                    dataTransfer.items.add(file);
+                } else {
+                    toastr.error("Only CSV files are allowed!");
+                }
+            });
+
+            if (dataTransfer.files.length > 0) {
+                fileInput.files = dataTransfer.files;
+                fileInput.dispatchEvent(new Event("change"));
+                toastr.success("File uploaded successfully!");
+                $(".uploadcsv-wrp h3").text(files[0].name);
             }
-        });
-
-        // Handle file selection via input
-        fileInput.on("change", function () {
-            if (fileInput[0].files.length > 0) {
-                alert("CSV file uploaded: " + fileInput[0].files[0].name);
-            }
-        });
+        }
+    });
+});
