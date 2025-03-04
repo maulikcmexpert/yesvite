@@ -1082,48 +1082,95 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         $('#upload_csv_contact').submit();
     // }
 });
-$(document).on("shown.bs.modal", "#uploadcsv", function () {
-    const dropZone1 = document.querySelector(".uploadcsv-wrp");
-    const fileInput = document.querySelector(".csv_file");
-    
-    dropZone1.addEventListener("click", () => {
-        fileInput.click(); // Open file dialog on div click
+$(document).ready(function () {
+    let dropArea = $(".uploadcsv-wrp");
+
+    // Open file input on click
+    dropArea.on("click", function () {
+        $("#csv_file").click();
     });
-    
-    dropZone1.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dropZone1.classList.add("dragging");
+
+    // Handle file selection
+    $("#csv_file").on("change", function (e) {
+        handleFiles(e.target.files);
     });
-    
-    dropZone1.addEventListener("dragleave", () => {
-        dropZone1.classList.remove("dragging");
+
+    // Drag & Drop Events
+    dropArea.on("dragover", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).addClass("dragover");
     });
-    
-    dropZone1.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone1.classList.remove("dragging");
-    
-        const files = Array.from(event.dataTransfer.files);
-    
+
+    dropArea.on("dragleave", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass("dragover");
+    });
+
+    dropArea.on("drop", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass("dragover");
+
+        let files = e.originalEvent.dataTransfer.files;
+        handleFiles(files);
+    });
+
+    function handleFiles(files) {
         if (files.length > 0) {
-            const allowedExtensions = ["csv"]; // Allow only CSV files
-            const dataTransfer = new DataTransfer();
-    
-            files.forEach((file) => {
-                const fileExtension = file.name.split('.').pop().toLowerCase();
-                if (allowedExtensions.includes(fileExtension)) {
-                    dataTransfer.items.add(file);
-                } else {
-                    toastr.error("Only CSV files are allowed!");
-                }
-            });
-    
-            if (dataTransfer.files.length > 0) {
-                fileInput.files = dataTransfer.files;
-                fileInput.dispatchEvent(new Event("change"));
-                toastr.success("File uploaded successfully!");
-                $(".uploadcsv-wrp h3").text(files[0].name); 
+            let file = files[0];
+            if (file.type === "text/csv" || file.name.endsWith(".csv")) {
+                alert("CSV file uploaded: " + file.name);
+                // You can process the CSV file further here
+            } else {
+                alert("Please upload a valid CSV file.");
             }
         }
-    });
+    }
 });
+// $(document).on("shown.bs.modal", "#uploadcsv", function () {
+//     const dropZone1 = document.querySelector(".uploadcsv-wrp");
+//     const fileInput = document.querySelector(".csv_file");
+    
+//     dropZone1.addEventListener("click", () => {
+//         fileInput.click(); // Open file dialog on div click
+//     });
+    
+//     dropZone1.addEventListener("dragover", (event) => {
+//         event.preventDefault();
+//         dropZone1.classList.add("dragging");
+//     });
+    
+//     dropZone1.addEventListener("dragleave", () => {
+//         dropZone1.classList.remove("dragging");
+//     });
+    
+//     dropZone1.addEventListener("drop", (event) => {
+//         event.preventDefault();
+//         dropZone1.classList.remove("dragging");
+    
+//         const files = Array.from(event.dataTransfer.files);
+    
+//         if (files.length > 0) {
+//             const allowedExtensions = ["csv"]; // Allow only CSV files
+//             const dataTransfer = new DataTransfer();
+    
+//             files.forEach((file) => {
+//                 const fileExtension = file.name.split('.').pop().toLowerCase();
+//                 if (allowedExtensions.includes(fileExtension)) {
+//                     dataTransfer.items.add(file);
+//                 } else {
+//                     toastr.error("Only CSV files are allowed!");
+//                 }
+//             });
+    
+//             if (dataTransfer.files.length > 0) {
+//                 fileInput.files = dataTransfer.files;
+//                 fileInput.dispatchEvent(new Event("change"));
+//                 toastr.success("File uploaded successfully!");
+//                 $(".uploadcsv-wrp h3").text(files[0].name); 
+//             }
+//         }
+//     });
+// });
