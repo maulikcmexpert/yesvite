@@ -1,7 +1,7 @@
 @php
 $getSocialLink = getSocialLink();
 @endphp
-{{dd($imagecount)}}
+{{-- {{dd($imagecount)}} --}}
 <x-front.advertise />
 <section class="home-web-tabs-wrp">
     <div class="container">
