@@ -1101,7 +1101,7 @@ dropZone1.addEventListener("dragleave", () => {
     console.log('leave');
     dropZone1.classList.remove("dragging");
 });
-
+console.log(dropZone1);
 dropZone1.addEventListener("drop", (event) => {
     event.preventDefault();
     dropZone1.classList.remove("dragging");
