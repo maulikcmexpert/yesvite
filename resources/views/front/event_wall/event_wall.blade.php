@@ -559,7 +559,7 @@
                                                                 </div>
 
 
-                                                                    <a href=" {{route('message.list',   ['id' => encrypt($eventDetails['user_id']))}}"
+                                                                    <a href=" {{route('message.list',   ['id' => encrypt($eventDetails['user_id'])])}}"
 
                                                                       >
                                                                         <svg viewBox="0 0 24 24" fill="none"
