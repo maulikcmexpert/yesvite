@@ -142,7 +142,7 @@ class HomeController extends BaseController
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
-            // ->orderBy('start_date', 'ASC')  
+            // ->orderBy('start_date', 'ASC')
             // ->get();
             $invitedEvents = EventInvitedUser::whereHas('user', function ($query) {
                 $query->where('app_user', '1');
@@ -301,7 +301,7 @@ class HomeController extends BaseController
                 // dd($eventList);
 
                 // $draftEventArray =[];
-           
+
                 // return compact('draftEventArray','profileData');
             }
             $draftEvents = Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->orderBy('id', 'DESC')->limit(3)->get();
@@ -385,7 +385,9 @@ class HomeController extends BaseController
                             ->with('textdatas'); // Load the textdatas relationship
                     }
                 ])
+                ->orderBy('id', 'ASC')
                 ->get();
+
 
             $totalTextDataCount = $categories->count();
             $imagecount = $totalTextDataCount;
