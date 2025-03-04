@@ -572,10 +572,13 @@
         height: calc(100vh - 250px);
     }
     #detail-photo-modal .posts-card-head-left-content h3{
-        font-size: 18px;
+        font-size: 20px;
     }
     #detail-photo-modal .posts-card-head-left-content p{
-        font-size: 18px;
+        font-size: 20px;
+    }
+    #detail-photo-modal .modal-title{
+        font-size: 24px !important;
     }
     
 }
