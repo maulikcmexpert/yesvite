@@ -1087,6 +1087,8 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 $(document).ready(function () {
     let dropArea = $(".uploadcsv-wrp");
     let fileInput = $("#csv_file");
+    let errorMsg = $(".error-message");
+    let fileNameDisplay = $(".file-name");
 
     // Prevent default drag behaviors
     dropArea.on("dragenter dragover", function (e) {
@@ -1107,9 +1109,19 @@ $(document).ready(function () {
         $(this).removeClass("dragging");
 
         let files = e.originalEvent.dataTransfer.files;
+        
         if (files.length > 0) {
-            fileInput.prop("files", files); // Assign the file to the input
-            displayFileName(files[0]);
+            let file = files[0];
+
+            // Validate CSV file
+            if (validateCSV(file)) {
+                fileInput.prop("files", files); // Assign the file to the input field
+                displayFileName(file);
+                errorMsg.hide(); // Hide error message if file is valid
+            } else {
+                errorMsg.text("Only CSV files are allowed!").show();
+                fileNameDisplay.hide();
+            }
         }
     });
 
@@ -1118,19 +1130,33 @@ $(document).ready(function () {
         fileInput.click();
     });
 
-    // Handle file selection manually
+    // Handle manual file selection
     fileInput.on("change", function () {
-        if (this.files.length > 0) {
-            displayFileName(this.files[0]);
+        let file = this.files[0];
+
+        if (file) {
+            if (validateCSV(file)) {
+                displayFileName(file);
+                errorMsg.hide();
+            } else {
+                errorMsg.text("Only CSV files are allowed!").show();
+                fileInput.val(""); // Clear invalid file
+                fileNameDisplay.hide();
+            }
         }
     });
 
+    // Function to validate if the file is a CSV
+    function validateCSV(file) {
+        return file.type === "text/csv" || file.name.endsWith(".csv");
+    }
+
     // Function to display the selected file name
     function displayFileName(file) {
-        alert(file.name);
-        $(".file-name").text("Selected File: " + file.name).show();
+        fileNameDisplay.text("Selected File: " + file.name).show();
     }
 });
+
 
 
 // const dropZone1 = document.querySelector(".uploadcsv-wrp");
