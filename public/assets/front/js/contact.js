@@ -1084,55 +1084,51 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-const dropZone1 = document.querySelector(".upload_csv_contact_body");
-const fileInput = document.querySelector(".csv_file");
+let dropArea = $(".uploadcsv-wrp");
 
-dropZone1.addEventListener("click", () => {
-    fileInput.click(); // Open file dialog on div click
-});
+    // Prevent default behaviors
+    dropArea.on("dragover", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).addClass("dragging");
+    });
 
-dropZone1.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    dropZone1.classList.add("dragging");
-    console.log('dragging');
-});
+    dropArea.on("dragleave", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass("dragging");
+    });
 
-dropZone1.addEventListener("dragleave", () => {
-    console.log('leave');
-    dropZone1.classList.remove("dragging");
-});
-console.log(dropZone1);
-dropZone1.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dropZone1.classList.remove("dragging");
+    dropArea.on("drop", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).removeClass("dragging");
 
+        let files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            let fileInput = $("#csv_file");
+            fileInput.prop("files", files);
 
-    const files = Array.from(event.dataTransfer.files);
-
-    if (files.length > 0) {
-        console.log(files[0].name);
-        const allowedExtensions = ["csv"]; // Allow only CSV files
-        const dataTransfer = new DataTransfer();
-
-        files.forEach((file) => {
-            const fileExtension = file.name.split('.').pop().toLowerCase();
-            if (allowedExtensions.includes(fileExtension)) {
-                dataTransfer.items.add(file);
-            } else {
-                toastr.error("Only CSV files are allowed!");
-            }
-        });
-
-        if (dataTransfer.files.length > 0) {
-            fileInput.files = dataTransfer.files;
-            fileInput.dispatchEvent(new Event("change"));
-            toastr.success("File uploaded successfully!");
-            $(".uploadcsv-wrp h3").text(files[0].name); 
+            // Optional: Display file name
+            alert("File Selected: " + files[0].name);
         }
-    }
-    console.log('drop');
+    });
 
-});
+    // Also handle click event to open file picker
+    dropArea.on("click", function () {
+        $("#csv_file").click();
+    });
+
+    // When file is selected manually
+    $("#csv_file").on("change", function () {
+        if (this.files.length > 0) {
+            
+        toastr.success("File uploaded successfully!");
+        $(".uploadcsv-wrp h3").text(file.name); 
+            // alert("File Selected: " + this.files[0].name);
+
+        }
+    });
 
 // const dropZone1 = document.querySelector(".uploadcsv-wrp");
 // const fileInput = document.querySelector(".csv_file");
