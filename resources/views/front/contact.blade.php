@@ -637,7 +637,7 @@
 </div>
 
 <div class="modal fade cmn-modal" id="uploadcsv" tabindex="-1" aria-labelledby="addguestLabel" aria-hidden="true">
-    {{-- <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="addguestLabel">Upload CSV</h4>
@@ -646,8 +646,8 @@
 
             <form id="upload_csv_contact" action="{{ route('import.csv') }}" id method="POST" enctype="multipart/form-data">
             @csrf
-                <div class="modal-body guest-tab"> --}}
-                    <div class="uploadcsv-wrp ">
+                <div class="modal-body guest-tab upload_csv_body">
+                    <div class="uploadcsv-wrp">
                         <img src="{{asset('assets/uploadcsv-drag-img.png')}}" alt="">
                         <h3>Drag CSV Here</h3>
                         <p>Drag file here or click to upload </p>
@@ -708,8 +708,8 @@
                             </div>
                         </div>
                     </div> -->
-                {{-- </div>   --}}
-                {{-- <div class="modal-footer-wrp">
+                </div>  
+                <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
                     <!-- <a  href="{{ asset('assets/front/csv/demo.xlsx') }}" type="button" class="cmn-btn download-csv-btn download">Download CSV</a> -->
                     <a href="{{ asset('assets/front/csv/yesvite_contacts_csv_template.csv') }}" 
@@ -727,7 +727,7 @@
                 </div>
             </form>
         </div>
-    </div> --}}
+    </div>
   </div>
 
   <div id="sidebar_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">

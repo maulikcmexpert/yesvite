@@ -471,7 +471,7 @@ function handleFiles(files, currentFileInput) {
 
 
 $(document).on("shown.bs.modal", "#uploadcsv", function () {
-    const dropZone1 = document.querySelector(".uploadcsv-wrp");
+    const dropZone1 = document.querySelector(".upload_csv_body");
     const fileInput = document.querySelector(".csv_file");
 
     if (!dropZone1 || !fileInput) return; // Ensure elements exist
