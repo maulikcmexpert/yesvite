@@ -1083,20 +1083,20 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-const dropZone = document.querySelector(".uploadcsv-wrp");
+const dropZone1 = document.querySelector(".uploadcsv-wrp");
 
-dropZone.addEventListener("dragover", (event) => {
+dropZone1.addEventListener("dragover", (event) => {
     event.preventDefault();
-    dropZone.classList.add("dragging");
+    dropZone1.classList.add("dragging");
 });
 
-dropZone.addEventListener("dragleave", (event) => {
-    dropZone.classList.remove("dragging");
+dropZone1.addEventListener("dragleave", (event) => {
+    dropZone1.classList.remove("dragging");
 });
 
-dropZone.addEventListener("drop", (event) => {
+dropZone1.addEventListener("drop", (event) => {
     event.preventDefault();
-    dropZone.classList.remove("dragging");
+    dropZone1.classList.remove("dragging");
 
     const files = Array.from(event.dataTransfer.files);
     const fileInput = document.querySelector(".csv_file");
