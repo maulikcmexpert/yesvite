@@ -1084,7 +1084,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     // }
 });
 
-const dropZone1 = document.querySelector(".uploadcsv-wrp");
+const dropZone1 = document.querySelector(".upload_csv_contact_body");
 const fileInput = document.querySelector(".csv_file");
 
 dropZone1.addEventListener("click", () => {
@@ -1094,19 +1094,23 @@ dropZone1.addEventListener("click", () => {
 dropZone1.addEventListener("dragover", (event) => {
     event.preventDefault();
     dropZone1.classList.add("dragging");
+    console.log('dragging');
 });
 
 dropZone1.addEventListener("dragleave", () => {
+    console.log('leave');
     dropZone1.classList.remove("dragging");
 });
-
+console.log(dropZone1);
 dropZone1.addEventListener("drop", (event) => {
     event.preventDefault();
     dropZone1.classList.remove("dragging");
 
+
     const files = Array.from(event.dataTransfer.files);
 
     if (files.length > 0) {
+        console.log(files[0].name);
         const allowedExtensions = ["csv"]; // Allow only CSV files
         const dataTransfer = new DataTransfer();
 
@@ -1126,6 +1130,8 @@ dropZone1.addEventListener("drop", (event) => {
             $(".uploadcsv-wrp h3").text(files[0].name); 
         }
     }
+    console.log('drop');
+
 });
 
 // const dropZone1 = document.querySelector(".uploadcsv-wrp");
