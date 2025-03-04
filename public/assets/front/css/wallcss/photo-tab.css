@@ -560,8 +560,8 @@
 
 @media only screen and (min-width: 2400px) and (max-width: 2599px){
     #detail-photo-modal .modal-content {
-        max-width: 800px;
-        min-width: 800px;
+        max-width: 850px;
+        min-width: 850px;
         height: calc(100% - 20px);
     }
     #detail-photo-modal .modal-body {
@@ -579,6 +579,12 @@
     }
     #detail-photo-modal .modal-title{
         font-size: 24px !important;
+    }
+    .posts-card-like-comment-left_reaction ul p {
+        font-size: 18px;
+    }
+    .posts-card-like-comment-left_reaction button {
+        font-size: 18px;
     }
     
 }
@@ -604,6 +610,12 @@
     }
     #detail-photo-modal .modal-title{
         font-size: 24px !important;
+    }
+    .posts-card-like-comment-left_reaction ul p {
+        font-size: 16px;
+    }
+    .posts-card-like-comment-left_reaction button {
+        font-size: 16px;
     }
     
 }
