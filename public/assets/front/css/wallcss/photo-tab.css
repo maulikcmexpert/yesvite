@@ -558,7 +558,7 @@
 
 /* ===Responsive=== */
 
-@media only screen and (min-width: 1600px) and (max-width: 1799px){
+@media only screen and (min-width: 1800px) and (max-width: 1999px){
     #detail-photo-modal .modal-content {
         max-width: 600px;
         min-width: 600px;
