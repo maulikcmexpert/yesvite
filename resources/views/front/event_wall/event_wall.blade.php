@@ -98,10 +98,19 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3>
-                                                                         <a href="javascript:void(0);" class="username-link" onclick="openPopup('{{ $post['username'] }}')">
+                                                                    <h3 class="openProfileModal"   data-bs-toggle="modal"
+                                                                    data-bs-target="#wall_profile"
+                                                                    data-username="{{ $post['username'] }}"
+                                                                    data-userid="{{ $post['user_id'] }}"
+                                                                    data-location="{{ $post['location'] }}"
+                                                                      data-is-host="{{ $post['is_host'] }}"
+                                                                     data-is-cohost="{{ $post['is_co_host'] }}"
+                                                                    data-profile="{{ $post['profile'] != '' ? $post['profile'] : '' }}"
+                                                                    >
+
+
                                                                         {{ $post['username'] }}
-                                                                    </a>
+
                                                                         @if ($post['is_host'] == '1')
                                                                             <span class="host">Host</span>
                                                                         @endif
@@ -1062,7 +1071,7 @@
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control post_message" rows="2" name="postContent" placeholder="What's on your mind?"></textarea>
+                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"></textarea>
                             </div>
 
                             <div class="create-post-upload-img-wrp d-none">
@@ -1644,11 +1653,40 @@
             $time - > diffForHumans()
         );
     }
+
 </script>
-<div id="popup" class="popup-container" style="display: none;">
-    <div class="popup-content">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
-        <h3 id="popup-username"></h3>
-        <p>More details about this user...</p>
+<div class="modal fade create-post-modal all-events-filtermodal" id="wall_profile" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Photo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="event-posts-main-wrp common-div-wrp">
+                    <div class="posts-card-wrp">
+                        <div class="posts-card-head">
+                            <div class="posts-card-head-left">
+                                <div class="posts-card-head-left-img">
+                                    <img id="modal-profile-img" src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                        alt="Profile Image" loading="lazy">
+                                    <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
+                                    <span class="active-dot"></span>
+                                </div>
+                                <div class="posts-card-head-left-content">
+                                    <div class="d-flex align-items-start gap-1">
+                                        <h3 id="post_name">User Name</h3>
+                                        <span id="host_display"></span>
+                                    </div>
+                                    <p id="location">Location</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

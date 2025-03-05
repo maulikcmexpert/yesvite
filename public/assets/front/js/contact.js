@@ -307,7 +307,7 @@ $("#product-scroll-phone").on("scroll", function () {
         var scrollHeight = $(this)[0].scrollHeight; 
         var elementHeight = $(this).height();
      
-            if (scrollTop + elementHeight >= scrollHeight-100) {
+            if (scrollTop + elementHeight >= scrollHeight-1) {
                 busy2 = true;
                 offset1 += limit;
                 var type="phone";
@@ -579,6 +579,8 @@ $(document).on("input", ".search_phone", function () {
                 // $('#home_loader').css('display','flex');
             },
             success: function (data) {
+                // busy2 = false;
+
                 console.log(data);
                 if (data.status == "0" && scroll==1) {
                     $(".no-phone-data").css("display","none");
