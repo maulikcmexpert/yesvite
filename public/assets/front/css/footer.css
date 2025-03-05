@@ -99,8 +99,8 @@ ul.footer-social-link {
 
 .google-add .app-store .google-app, .google-add .app-store .mobile-app {
     width: 100% !important;
-    max-width: 180px !important;
-    height: 50px !important;
+    max-width: 140px !important;
+    height: 40px !important;
     object-fit: contain !important;
 }
 
