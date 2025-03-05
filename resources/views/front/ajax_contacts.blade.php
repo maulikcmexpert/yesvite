@@ -71,7 +71,7 @@
     
                         </div>
                 <div class="text-start">
-                    <h5>{{ $value->firstname }}
+                    <h5 class="openProfileModal"  data-userid="{{ $value->id }}">{{ $value->firstname }}
                         {{ $value->lastname }}
                     </h5>
                     @if (isset($value->email) && $value->email != '')
@@ -143,7 +143,7 @@
                     @endif
                 </div>
                 <div class="text-start">
-                    <h5>{{ $value->firstname . ' ' . $value->lastname }}</h5>
+                    <h5 class="openProfileModal"  data-userid="{{ $value->id }}" >{{ $value->firstname . ' ' . $value->lastname }}</h5>
                     @if($value->email !== null && $value->email !== "")
                     <div>
                         <a href="#">
