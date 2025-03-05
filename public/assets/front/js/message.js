@@ -1488,14 +1488,10 @@ $("#message-send").on("click", async function () {
     return await sendMessage(); // Call the same function on button click
 });
 async function sendMessage() {
+    const message = $(".send-message").val();
+
     const conversationId = $(".selected_id").val();
     var isGroup = $(".conversation-" + conversationId).attr("data-group");
-
-    if (e.which === 13 && e.shiftKey) {
-        return;
-    } else if (e.which === 13 && !e.shiftKey) {
-        e.preventDefault();
-    }
 
     if (isGroup == "true" || isGroup == true) {
         // Fetch the group profiles
@@ -1514,299 +1510,291 @@ async function sendMessage() {
     } else {
         await update(userRef, { userTypingStatus: "Typing..." });
     }
-    if (e.which === 13) {
-        loader.css("display", "flex");
-        startButton.style.display = "inline-block";
-        $("#isGroup").val(isGroup);
-        const message = $(".send-message").val();
-        let downloadURL = "";
-        let type = "";
-        let fileName = "";
-        $("#preview").hide();
-        $(".preview_img").hide();
-        let preview = document.getElementsByClassName("preview_img");
-        var previewImg = $(preview);
-        const imageUrl = previewImg.attr("src");
-        const previewAudio = $(".recordedAudio");
-        const audioUrl = previewAudio.attr("src");
-        let imagePath = "";
-        const audio = $("#file_name").text();
-        const file_info = $(".file_info").val();
 
-        if (imageUrl) {
-            // Determine file type and set the storage path
-            let storagePath;
-            if (imageUrl.startsWith("data:image/")) {
-                storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.${file_info}`;
-                fileName = `${Date.now()}_${senderUser}-img.${file_info}`;
-                type = "1";
-                imagePath = storagePath;
-            } else if (
-                imageUrl.startsWith("data:video/mp4") &&
-                audio != "audio"
-            ) {
-                storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
-                fileName = `${Date.now()}_${senderUser}-video.mp4`;
-                type = "2";
-            } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
-                storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
-                fileName = `${Date.now()}_${senderUser}-audio.wav`;
-                type = "3";
-            } else {
-                storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${file_info}`;
-                fileName = `${Date.now()}_${senderUser}-file.${file_info}`;
-                type = "4";
-            }
-            console.log(type);
-            console.log(fileName);
-            console.log(storagePath);
+    loader.css("display", "flex");
+    startButton.style.display = "inline-block";
+    $("#isGroup").val(isGroup);
+    let downloadURL = "";
+    let type = "";
+    let fileName = "";
+    $("#preview").hide();
+    $(".preview_img").hide();
+    let preview = document.getElementsByClassName("preview_img");
+    var previewImg = $(preview);
+    const imageUrl = previewImg.attr("src");
+    const previewAudio = $(".recordedAudio");
+    const audioUrl = previewAudio.attr("src");
+    let imagePath = "";
+    const audio = $("#file_name").text();
+    const file_info = $(".file_info").val();
 
-            // Upload file to Firebase Storage
-            const fileRef = storageRef(storage, storagePath);
-            try {
-                if (imageUrl.startsWith("data:image/")) {
-                    await uploadString(fileRef, imageUrl, "data_url");
-                } else {
-                    const response = await fetch(imageUrl);
-                    const blob = await response.blob();
-                    await uploadBytes(fileRef, blob);
-                }
-                downloadURL = await getDownloadURL(fileRef);
-                console.log({ downloadURL });
-            } catch (e) {
-                console.log(e);
-            }
-        } else if (audioUrl) {
-            $("#playRecording").hide();
-            $("#stopRecording").hide();
-            $("#stopPlayback").hide();
-
-            let storagePath;
-            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
-            fileName = `${Date.now()}_${senderUser}-Audio.wav`;
-            // Upload file to Firebase Storage
-            const fileRef = storageRef(storage, storagePath);
-            try {
-                if (audioUrl.startsWith("blob:http/")) {
-                    await uploadString(fileRef, audioUrl, "data_url");
-                } else {
-                    const response = await fetch(audioUrl);
-                    const blob = await response.blob();
-                    await uploadBytes(fileRef, blob);
-                }
-                downloadURL = await getDownloadURL(fileRef);
-                type = "3";
-            } catch (e) {}
-        }
-
-        if (message.trim() == "" && downloadURL == "" && audioUrl == "") {
-            loader.hide();
-            return;
-        }
-        $(".send-message").val(""); // Clear the input field
-        $(".send-message").css("height", "auto");
-        const messageData = {
-            data: message,
-            url: downloadURL,
-            fileName,
-            type,
-            timeStamp: Date.now(),
-            isDelete: {},
-            isReply: "0",
-            isSeen: false,
-            react: "",
-            senderId: senderUser,
-            senderName: senderUserName,
-            receiverName: senderUserName,
-            status: {},
-            replyData: {
-                replyChatKey: "",
-                replyDocType: "",
-                replyMessage: "",
-                replyTimeStamp: 0,
-                replyUserName: "",
-            },
-        };
-
-        // alert(isGroup);
-        if (isGroup == true || isGroup == "true") {
-            const groupName = $(".selected_name").val();
-            if (replyMessageId) {
-                // Fetch the reply message data
-                const replyMessageRef = ref(
-                    database,
-                    `Groups/${conversationId}/message/${replyMessageId}`
-                );
-                const replyMessageSnapshot = await get(replyMessageRef);
-                const replyMessageData = replyMessageSnapshot.val();
-
-                messageData.replyData = {
-                    replyChatKey: replyMessageId,
-                    replyMessage: replyMessageData ? replyMessageData.data : "",
-                    // replyTimeStamp: Date.now(),
-                    replyTimeStamp: replyMessageData.timeStamp,
-                    replyUserName: replyMessageData.receiverName,
-                    replyDocType: "",
-                };
-                messageData.isReply = "1";
-                // Reset reply message ID after sending
-                replyMessageId = null;
-                $(".set-replay-msg").remove();
-            }
-
-            const groupProfilesRef = ref(
-                database,
-                `Groups/${conversationId}/groupInfo/profiles`
-            );
-            const groupProfilesSnapshot = await get(groupProfilesRef);
-            const newGroupProfiles = groupProfilesSnapshot.val();
-            var userAvailable = [];
-            newGroupProfiles.map(async (profile) => {
-                if (profile.leave == false) {
-                    if (profile.id !== senderUser) {
-                        userAvailable[profile.id] = 0;
-                    }
-                    const receiverSnapshot = await get(
-                        ref(
-                            database,
-                            `overview/${profile.id}/${conversationId}`
-                        )
-                    );
-                    await updateOverview(profile.id, conversationId, {
-                        lastMessage: `${senderUserName}: ${message}`,
-                        unReadCount:
-                            profile.id === senderUser
-                                ? receiverSnapshot.val()
-                                : (receiverSnapshot.val().unReadCount || 0) + 1,
-                        timeStamp: Date.now(),
-                    });
-                    let image = messageData.url;
-
-                    if (
-                        (receiverSnapshot.val().isMute == undefined ||
-                            receiverSnapshot.val().isMute == 0) &&
-                        receiverSnapshot.val().group == true
-                    ) {
-                        await send_push_notification(
-                            profile.id,
-                            message,
-                            conversationId,
-                            image,
-                            senderUserName
-                        );
-                    }
-                }
-            });
-
-            messageData.userAvailable = userAvailable;
-
-            await addMessageToGroup(conversationId, messageData);
-
-            // Update all group members' overview
+    if (imageUrl) {
+        // Determine file type and set the storage path
+        let storagePath;
+        if (imageUrl.startsWith("data:image/")) {
+            storagePath = `Images/${senderUser}/${Date.now()}_${senderUser}-img.${file_info}`;
+            fileName = `${Date.now()}_${senderUser}-img.${file_info}`;
+            type = "1";
+            imagePath = storagePath;
+        } else if (imageUrl.startsWith("data:video/mp4") && audio != "audio") {
+            storagePath = `Video/${senderUser}/${Date.now()}_${senderUser}-video.mp4`;
+            fileName = `${Date.now()}_${senderUser}-video.mp4`;
+            type = "2";
+        } else if (imageUrl.startsWith("blob:http:/") && audio == "audio") {
+            storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-audio.wav`;
+            fileName = `${Date.now()}_${senderUser}-audio.wav`;
+            type = "3";
         } else {
-            const receiverId = $(".selected_message").val();
-            const receiverName = $(".selected_name").val();
+            storagePath = `Files/${senderUser}/${Date.now()}_${senderUser}-file.${file_info}`;
+            fileName = `${Date.now()}_${senderUser}-file.${file_info}`;
+            type = "4";
+        }
+        console.log(type);
+        console.log(fileName);
+        console.log(storagePath);
 
-            messageData.receiverId = receiverId;
-            messageData.receiverName = receiverName;
-            if (replyMessageId) {
-                // Fetch the reply message data
-                const replyMessageRef = ref(
-                    database,
-                    `Messages/${conversationId}/message/${replyMessageId}`
-                );
-                const replyMessageSnapshot = await get(replyMessageRef);
-                const replyMessageData = replyMessageSnapshot.val();
-
-                messageData.replyData = {
-                    replyChatKey: replyMessageId,
-                    replyMessage: replyMessageData ? replyMessageData.data : "",
-                    // replyTimeStamp: Date.now(),
-                    // replyUserName: senderUserName,
-                    replyTimeStamp: replyMessageData.timeStamp,
-                    // replyUserName: receiverName,
-                    replyUserName: senderUserName,
-                    replyDocType: "",
-                };
-                messageData.isReply = "1";
-                // Reset reply message ID after sending
-                replyMessageId = null;
-                $(".set-replay-msg").remove();
+        // Upload file to Firebase Storage
+        const fileRef = storageRef(storage, storagePath);
+        try {
+            if (imageUrl.startsWith("data:image/")) {
+                await uploadString(fileRef, imageUrl, "data_url");
+            } else {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                await uploadBytes(fileRef, blob);
             }
+            downloadURL = await getDownloadURL(fileRef);
+            console.log({ downloadURL });
+        } catch (e) {
+            console.log(e);
+        }
+    } else if (audioUrl) {
+        $("#playRecording").hide();
+        $("#stopRecording").hide();
+        $("#stopPlayback").hide();
 
-            messageData.status = { senderUser: { profile: "", read: "1" } };
+        let storagePath;
+        storagePath = `Audios/${senderUser}/${Date.now()}_${senderUser}-Audio.wav`;
+        fileName = `${Date.now()}_${senderUser}-Audio.wav`;
+        // Upload file to Firebase Storage
+        const fileRef = storageRef(storage, storagePath);
+        try {
+            if (audioUrl.startsWith("blob:http/")) {
+                await uploadString(fileRef, audioUrl, "data_url");
+            } else {
+                const response = await fetch(audioUrl);
+                const blob = await response.blob();
+                await uploadBytes(fileRef, blob);
+            }
+            downloadURL = await getDownloadURL(fileRef);
+            type = "3";
+        } catch (e) {}
+    }
 
-            let image = messageData.url;
+    if (message.trim() == "" && downloadURL == "" && audioUrl == "") {
+        loader.hide();
+        return;
+    }
+    $(".send-message").val(""); // Clear the input field
+    $(".send-message").css("height", "auto");
+    const messageData = {
+        data: message,
+        url: downloadURL,
+        fileName,
+        type,
+        timeStamp: Date.now(),
+        isDelete: {},
+        isReply: "0",
+        isSeen: false,
+        react: "",
+        senderId: senderUser,
+        senderName: senderUserName,
+        receiverName: senderUserName,
+        status: {},
+        replyData: {
+            replyChatKey: "",
+            replyDocType: "",
+            replyMessage: "",
+            replyTimeStamp: 0,
+            replyUserName: "",
+        },
+    };
 
-            await addMessage(conversationId, messageData, receiverId);
-
-            await updateOverview(senderUser, conversationId, {
-                lastMessage: `${senderUserName}: ${message}`,
-                timeStamp: Date.now(),
-            });
-            let receiverSnapshot = await get(
-                ref(database, `overview/${receiverId}/${conversationId}`)
+    // alert(isGroup);
+    if (isGroup == true || isGroup == "true") {
+        const groupName = $(".selected_name").val();
+        if (replyMessageId) {
+            // Fetch the reply message data
+            const replyMessageRef = ref(
+                database,
+                `Groups/${conversationId}/message/${replyMessageId}`
             );
-            if (receiverSnapshot.val() != null) {
-                await updateOverview(receiverId, conversationId, {
+            const replyMessageSnapshot = await get(replyMessageRef);
+            const replyMessageData = replyMessageSnapshot.val();
+
+            messageData.replyData = {
+                replyChatKey: replyMessageId,
+                replyMessage: replyMessageData ? replyMessageData.data : "",
+                // replyTimeStamp: Date.now(),
+                replyTimeStamp: replyMessageData.timeStamp,
+                replyUserName: replyMessageData.receiverName,
+                replyDocType: "",
+            };
+            messageData.isReply = "1";
+            // Reset reply message ID after sending
+            replyMessageId = null;
+            $(".set-replay-msg").remove();
+        }
+
+        const groupProfilesRef = ref(
+            database,
+            `Groups/${conversationId}/groupInfo/profiles`
+        );
+        const groupProfilesSnapshot = await get(groupProfilesRef);
+        const newGroupProfiles = groupProfilesSnapshot.val();
+        var userAvailable = [];
+        newGroupProfiles.map(async (profile) => {
+            if (profile.leave == false) {
+                if (profile.id !== senderUser) {
+                    userAvailable[profile.id] = 0;
+                }
+                const receiverSnapshot = await get(
+                    ref(database, `overview/${profile.id}/${conversationId}`)
+                );
+                await updateOverview(profile.id, conversationId, {
                     lastMessage: `${senderUserName}: ${message}`,
-                    unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                    unReadCount:
+                        profile.id === senderUser
+                            ? receiverSnapshot.val()
+                            : (receiverSnapshot.val().unReadCount || 0) + 1,
                     timeStamp: Date.now(),
                 });
-            } else {
-                const reciverUser = await getUser(receiverId);
-                if (!reciverUser) {
-                    return;
+                let image = messageData.url;
+
+                if (
+                    (receiverSnapshot.val().isMute == undefined ||
+                        receiverSnapshot.val().isMute == 0) &&
+                    receiverSnapshot.val().group == true
+                ) {
+                    await send_push_notification(
+                        profile.id,
+                        message,
+                        conversationId,
+                        image,
+                        senderUserName
+                    );
                 }
-                let userData = await get(userRef);
-                let userSnap = userData.val();
-
-                const receiverConversationData = {
-                    contactId: senderUser,
-                    contactName: senderUserName,
-                    conversationId: conversationId,
-                    group: false,
-                    lastMessage: `${senderUserName}: ${message}`,
-                    lastSenderId: senderUser,
-                    receiverProfile: userSnap?.userProfile,
-                    timeStamp: Date.now(),
-                    unRead: true,
-                    unReadCount: 1,
-                };
-
-                await set(
-                    ref(database, `overview/${receiverId}/${conversationId}`),
-                    receiverConversationData
-                );
             }
+        });
 
-            receiverSnapshot = await get(
-                ref(database, `overview/${receiverId}/${conversationId}`)
+        messageData.userAvailable = userAvailable;
+
+        await addMessageToGroup(conversationId, messageData);
+
+        // Update all group members' overview
+    } else {
+        const receiverId = $(".selected_message").val();
+        const receiverName = $(".selected_name").val();
+
+        messageData.receiverId = receiverId;
+        messageData.receiverName = receiverName;
+        if (replyMessageId) {
+            // Fetch the reply message data
+            const replyMessageRef = ref(
+                database,
+                `Messages/${conversationId}/message/${replyMessageId}`
             );
-            if (
-                receiverSnapshot.val().isMute == undefined ||
-                receiverSnapshot.val().isMute == 0 ||
-                receiverSnapshot.val().isMute == null
-            ) {
-                await send_push_notification(
-                    receiverId,
-                    message,
-                    conversationId,
-                    image,
-                    senderUserName
-                );
-            }
-        }
-        const conversationElement = $(`.conversation-${conversationId}`);
+            const replyMessageSnapshot = await get(replyMessageRef);
+            const replyMessageData = replyMessageSnapshot.val();
 
-        moveToTopOrBelowPinned(conversationElement);
-        console.log("here");
-        $("#file1").val("");
-        $("#file2").val("");
-        $("#file3").val("");
-        closeMedia();
-        loader.hide();
+            messageData.replyData = {
+                replyChatKey: replyMessageId,
+                replyMessage: replyMessageData ? replyMessageData.data : "",
+                // replyTimeStamp: Date.now(),
+                // replyUserName: senderUserName,
+                replyTimeStamp: replyMessageData.timeStamp,
+                // replyUserName: receiverName,
+                replyUserName: senderUserName,
+                replyDocType: "",
+            };
+            messageData.isReply = "1";
+            // Reset reply message ID after sending
+            replyMessageId = null;
+            $(".set-replay-msg").remove();
+        }
+
+        messageData.status = { senderUser: { profile: "", read: "1" } };
+
+        let image = messageData.url;
+
+        await addMessage(conversationId, messageData, receiverId);
+
+        await updateOverview(senderUser, conversationId, {
+            lastMessage: `${senderUserName}: ${message}`,
+            timeStamp: Date.now(),
+        });
+        let receiverSnapshot = await get(
+            ref(database, `overview/${receiverId}/${conversationId}`)
+        );
+        if (receiverSnapshot.val() != null) {
+            await updateOverview(receiverId, conversationId, {
+                lastMessage: `${senderUserName}: ${message}`,
+                unReadCount: (receiverSnapshot.val().unReadCount || 0) + 1,
+                timeStamp: Date.now(),
+            });
+        } else {
+            const reciverUser = await getUser(receiverId);
+            if (!reciverUser) {
+                return;
+            }
+            let userData = await get(userRef);
+            let userSnap = userData.val();
+
+            const receiverConversationData = {
+                contactId: senderUser,
+                contactName: senderUserName,
+                conversationId: conversationId,
+                group: false,
+                lastMessage: `${senderUserName}: ${message}`,
+                lastSenderId: senderUser,
+                receiverProfile: userSnap?.userProfile,
+                timeStamp: Date.now(),
+                unRead: true,
+                unReadCount: 1,
+            };
+
+            await set(
+                ref(database, `overview/${receiverId}/${conversationId}`),
+                receiverConversationData
+            );
+        }
+
+        receiverSnapshot = await get(
+            ref(database, `overview/${receiverId}/${conversationId}`)
+        );
+        if (
+            receiverSnapshot.val().isMute == undefined ||
+            receiverSnapshot.val().isMute == 0 ||
+            receiverSnapshot.val().isMute == null
+        ) {
+            await send_push_notification(
+                receiverId,
+                message,
+                conversationId,
+                image,
+                senderUserName
+            );
+        }
     }
+    const conversationElement = $(`.conversation-${conversationId}`);
+
+    moveToTopOrBelowPinned(conversationElement);
+    console.log("here");
+    $("#file1").val("");
+    $("#file2").val("");
+    $("#file3").val("");
+    closeMedia();
+    loader.hide();
 }
 function closeMedia() {
     let preview = document.getElementsByClassName("preview_img");
