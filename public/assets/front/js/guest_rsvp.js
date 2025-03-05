@@ -340,7 +340,12 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                         $("#show_img").remove('d-none');
                     }
 
-
+                    let messageLink = $(".wall_profile-message-link");
+                    let encrypted_id = profileData.encrypted_id;
+                    if (encrypted_id) {
+                        let messageRoute = `/messages/${userId}`;
+                        messageLink.attr("href", messageRoute);
+                    }
                     // Handle Host and Co-Host labels
                     let hostDisplay = $("#host_display").empty();
                     if ($(this).data("is-host") === 1) {
@@ -357,7 +362,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                 }
             },
             error: function () {
-                alert("Failed to fetch profile data.");
+                // alert("Failed to fetch profile data.");
             }
         });
     });
