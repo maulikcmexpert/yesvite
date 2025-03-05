@@ -1674,7 +1674,7 @@ $(document).on("click", ".openProfileModal", function () {
                 let background_img = $("#modal-background-img");
                if ( profileData.profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
-
+                    $("#show_img").removeClass('d-none');
 
                 }else{
                     background_img.attr("src", profileData.bg_profile).hide();
