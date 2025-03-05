@@ -3119,6 +3119,18 @@ main.new-main-content {
     border-radius: 10px;
 }
 
+.create-post-poll-wrp .create-post-upload-img-head{
+    margin-bottom: 5px !important;
+}
+.create-post-poll-inner label{
+    font-size: 14px !important;
+}
+
+.create-post-poll-inner input, .create-post-poll-inner select{
+    height: 35px !important;
+    border-radius: 12px !important;
+}
+
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
     .create-post-modal .modal-content {
