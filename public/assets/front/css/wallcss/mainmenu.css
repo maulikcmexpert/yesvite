@@ -249,7 +249,7 @@
 }
 
 .home-upcoming-events-card-right {
-    flex-basis: 30%;
+    flex-basis: 40%;
 }
 
 .home-upcoming-events-card-left-profile {
@@ -1051,6 +1051,9 @@
     .main-menu-wrp h3 {
         font-size: 22px;
         line-height: 32px;
+    }
+    .home-upcoming-events-card-right {
+        flex-basis: 50%;
     }
 }
 
@@ -3836,5 +3839,8 @@
     }
     .collection-card.card-blue{
         border-radius: 10px !important;
+    }
+    .home-upcoming-events-card-right {
+        flex-basis: 40%;
     }
 }
