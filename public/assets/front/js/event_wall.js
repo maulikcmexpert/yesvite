@@ -1675,6 +1675,7 @@ $(document).on("click", ".openProfileModal", function () {
                if ( profileData.profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
 
+
                 }else{
                     background_img.attr("src", profileData.bg_profile).hide();
                     $("#show_img").addClass('d-none');
