@@ -1627,7 +1627,16 @@ $(document).on("click", ".openProfileModal", function () {
                 $("#post_name").text(profileData.firstname + " " + profileData.lastname);
 
                 // Set location (if available)
-                $("#location").text(profileData.address || "Location not available");
+
+                if (Array.isArray(profilePrivacy)) {
+                    showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
+                }
+
+                // Set location based on profile privacy settings
+                if (showLocation) {
+                    $("#location").text(location);
+                }
+
                 $("#comments").text(profileData.comments);
 
                 $("#events").text(profileData.total_events);
