@@ -21,6 +21,8 @@ use App\Models\{
     EventUserStory,
     UserSeenStory,
     EventPostPoll,
+    UserNotificationType,
+    UserProfilePrivacy,
     EventPostPollOption,
     contact_sync,
     User,
@@ -3516,5 +3518,96 @@ class EventWallController extends BaseController
         // return response()->json(['view' => 1, 'data' => $faildInviteList, 'message' => "Faild invites"]);
 
 
+    }
+
+    public function myProfile(Request $request)
+
+    {
+
+        try {
+
+
+            $loginuser  = Auth::guard('web')->user();
+
+            $userId = $loginuser->id;
+            $rawData = $request->getContent();
+
+            $input = json_decode($rawData, true);
+
+
+            if (isset($input['user_id']) && $input['user_id'] != "") {
+                $userId = $input['user_id'];
+            }
+
+            $user = User::where('id', $userId)->first();
+
+            $totalEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '0'])->count();
+            $totalDraftEvent =  Event::where(['user_id' => $user->id, 'is_draft_save' => '1'])->count();
+
+
+            $totalEventPhotos = EventPost::where(['user_id' => $user->id, 'post_type' => '1'])->count();
+
+            $postComments =  EventPostComment::where('user_id', $user->id)->count();
+
+            $getUserPrivacyPolicy = UserProfilePrivacy::select('profile_privacy', 'status')->where('user_id', $user->id)->get();
+
+            $checkNotificationSetting =  UserNotificationType::where(['user_id' => $user->id, 'type' => 'private_message'])->first();
+
+            // dd($checkNotificationSetting);
+
+            if (!empty($user)) {
+
+                $profileData = [
+                    'id' =>  empty($user->id) ? "" : $user->id,
+                    'profile' =>  empty($user->profile) ?  "" : asset('storage/profile/' . $user->profile),
+                    'bg_profile' =>  empty($user->bg_profile) ? "" : asset('storage/bg_profile/' . $user->bg_profile),
+                    'firstname' => empty($user->firstname) ? "" : $user->firstname,
+                    'firstname' => empty($user->firstname) ? "" : $user->firstname,
+                    'lastname' => empty($user->lastname) ? "" : $user->lastname,
+                    'birth_date' => empty($user->birth_date) ? "" : $user->birth_date,
+                    'email' => empty($user->email) ? "" : $user->email,
+                    'about_me' => empty($user->about_me) ? "" : $user->about_me,
+                    'created_at' => empty($user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($user->created_at))),
+                    // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
+                    'total_events' => $totalEvent,
+                    'total_draft_events' => $totalDraftEvent,
+                    'total_upcoming_events' => $this->upcomingEventCount,
+                    'pending_rsvp_count' =>  $this->pendingRsvpCount['total_need_rsvp_event_count'],
+                    'Pending_rsvp_event_id' => $this->pendingRsvpCount['PendingRsvpEventId'],
+                    'hosting_count' => $this->hostingCount,
+                    'invitedTo_count' => $this->invitedToCount,
+                    'total_photos' => $totalEventPhotos,
+                    'comments' => $postComments,
+                    'gender' => empty($user->gender) ? "" : $user->gender,
+                    'country_code' => empty($user->country_code) ? "" : strval($user->country_code),
+                    'phone_number' => empty($user->phone_number) ? "" : $user->phone_number,
+                    'visible' =>  $user->visible,
+                    'message_privacy' =>  $user->message_privacy,
+                    'photo_via_wifi' =>  $user->photo_via_wifi,
+                    'enable_face_id_login' =>  $user->enable_face_id_login,
+                    'profile_privacy' =>  $getUserPrivacyPolicy,
+                    'account_type' =>  $user->account_type,
+                    'company_name' => empty($user->company_name) ? "" : $user->company_name,
+                    'address' => empty($user->address) ? "" : $user->address,
+                    'address_2' => empty($user->address_2) ? "" : $user->address_2,
+                    'city' => empty($user->city) ? "" : $user->city,
+                    'state' => empty($user->state) ? "" : $user->state,
+                    'zip_code' => empty($user->zip_code) ? "" : $user->zip_code,
+                    'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
+                    'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
+                    'is_message_notification' => (isset($checkNotificationSetting->push) && $checkNotificationSetting->push != "") ? $checkNotificationSetting->push : ""
+                ];
+
+
+                return response()->json(['status' => 1, 'data' => $profileData, 'message' => "My Profile"]);
+            } else {
+
+                return response()->json(['status' => 0, 'message' => "User profile not found", 'message' => "The requested user profile data does not exist."]);
+            }
+        } catch (QueryException $e) {
+            return response()->json(['status' => 0, 'message' => "db error"]);
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
     }
 }
