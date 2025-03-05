@@ -3530,13 +3530,11 @@ class EventWallController extends BaseController
             $loginuser  = Auth::guard('web')->user();
 
             $userId = $loginuser->id;
-            $rawData = $request->getContent();
-
-            $input = json_decode($rawData, true);
 
 
-            if (isset($input['user_id']) && $input['user_id'] != "") {
-                $userId = $input['user_id'];
+
+            if (isset($request['user_id']) && $request['user_id'] != "") {
+                $userId = $request['user_id'];
             }
 
             $user = User::where('id', $userId)->first();
