@@ -3126,7 +3126,7 @@ main.new-main-content {
     font-size: 14px !important;
 }
 
-.create-post-poll-inner input{
+.create-post-poll-inner input, .create-post-poll-inner select{
     height: 35px !important;
     border-radius: 12px !important;
 }
