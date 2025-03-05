@@ -139,6 +139,7 @@ class HomeController extends BaseController
                 ];
             }
             // dd(date('g:i A'));
+            date_default_timezone_set('Asia/Kolkata'); // Set timezone to India (IST)
 
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->where('rsvp_start_time','>=',date('g:i A'))
                 ->where('user_id', $user->id)
