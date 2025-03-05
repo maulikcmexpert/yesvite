@@ -1305,7 +1305,7 @@ main.new-main-content {
 }
 
 .GuestProfile-modal .modal-body {
-    padding-bottom: 0px !important;
+    padding-bottom: 0px !important  ;
 }
 
 .GuestProfile-modal  .posts-card-head-left-content{
@@ -1372,6 +1372,11 @@ main.new-main-content {
     color: var(--primary-black);
 }
 
+
+.GuestProfile-modal p#location {
+    text-align: center;
+    color: var(--border);
+}
 
 .GuestProfile-modal .memberDate-Section {
     text-align: center;
