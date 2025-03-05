@@ -1672,7 +1672,7 @@ $(document).on("click", ".openProfileModal", function () {
                     profileImgElement.hide();
                 }
                 let background_img = $("#modal-background-img");
-               if ( profileData.profile !== "") {
+               if ( profileData.bg_profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
                     $("#show_img").removeClass('d-none');
 
