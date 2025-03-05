@@ -98,26 +98,26 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3 class="openProfileModal"   data-bs-toggle="modal"
-                                                                    data-bs-target="#wall_profile"
-                                                                    data-username="{{ $post['username'] }}"
-                                                                    data-userid="{{ $post['user_id'] }}"
-                                                                    data-location="{{ $post['location'] }}"
-                                                                      data-is-host="{{ $post['is_host'] }}"
-                                                                     data-is-cohost="{{ $post['is_co_host'] }}"
-                                                                    data-profile="{{ $post['profile'] != '' ? $post['profile'] : '' }}"
-                                                                    >
+                                                                    <h3 class="openProfileModal" data-bs-toggle="modal"
+                                                                        data-bs-target="#wall_profile"
+                                                                        data-username="{{ $post['username'] }}"
+                                                                        data-userid="{{ $post['user_id'] }}"
+                                                                        data-location="{{ $post['location'] }}"
+                                                                        data-is-host="{{ $post['is_host'] }}"
+                                                                        data-is-cohost="{{ $post['is_co_host'] }}"
+                                                                        data-profile="{{ $post['profile'] != '' ? $post['profile'] : '' }}">
 
 
                                                                         {{ $post['username'] }}
 
-                                                                        @if ($post['is_host'] == '1')
-                                                                            <span class="host">Host</span>
-                                                                        @endif
-                                                                        @if ($post['is_co_host'] == '1')
-                                                                            <span class="host">Co Host</span>
-                                                                        @endif
+
                                                                     </h3>
+                                                                    @if ($post['is_host'] == '1')
+                                                                        <span class="host">Host</span>
+                                                                    @endif
+                                                                    @if ($post['is_co_host'] == '1')
+                                                                        <span class="host">Co Host</span>
+                                                                    @endif
 
                                                                     <p>{{ $post['location'] }}</p>
                                                                 </div>
@@ -1653,7 +1653,6 @@
             $time - > diffForHumans()
         );
     }
-
 </script>
 <div class="modal fade create-post-modal all-events-filtermodal" id="wall_profile" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1669,7 +1668,8 @@
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="posts-card-head-left-img">
-                                    <img id="modal-profile-img" src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                    <img id="modal-profile-img"
+                                        src="{{ asset('assets/front/img/header-profile-img.png') }}"
                                         alt="Profile Image" loading="lazy">
                                     <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
 
@@ -1681,11 +1681,11 @@
                                         <span id="host_display"></span>
                                     </div>
                                     <p id="location">Location</p>
-                                    <label>   Events</label>
+                                    <label> Events</label>
                                     <p id="events">0</p>
-                                    <label>   Photos</label>
+                                    <label> Photos</label>
                                     <p id="photos">0</p>
-                                    <label>   Comments</label>
+                                    <label> Comments</label>
                                     <p id="comments">0</p>
 
                                 </div>
@@ -1697,4 +1697,3 @@
         </div>
     </div>
 </div>
-
