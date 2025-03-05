@@ -51,7 +51,7 @@ if(isset($selected_user) && !empty($selected_user)){
             <h5 class="openProfileModal"
                 data-bs-toggle="modal"
                 data-bs-target="#wall_profile"
-            data-userid="{{ $user->id }}">{{ $user->firstname }}
+            data-userid="{{ $user->id }}" style="text-decoration: underline;cursor: pointer;">{{ $user->firstname }}
                 {{ $user->lastname }}
             </h5>
             @if(isset($user->email)&&$user->email!="")
