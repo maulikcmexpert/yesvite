@@ -1628,6 +1628,14 @@ $(document).on("click", ".openProfileModal", function () {
 
                 // Set location (if available)
                 $("#location").text(profileData.address || "Location not available");
+                $("#comments").text(profileData.comments);
+
+                $("#events").text(profileData.total_events);
+
+                $("#photos").text(profileData.total_photos);
+                $("#member_since").text(profileData.created_at);
+
+
 
                 // Handle profile image or initials
                 let profileImgElement = $("#modal-profile-img");
