@@ -622,18 +622,6 @@ $(document).on("input", ".search_phone", function () {
         });
     }
 
-    $(document).on("click", "#phone-tab", function () {
-        $.ajax({
-            url: base_url + "contacts/clear_contact_session",
-            method: "POST",
-            success: function (response) {
-            },
-            error: function (xhr, status, error) {
-
-            },
-        });
-    });
-
     $(".phone_number").intlTelInput({
         initialCountry: "US",
         separateDialCode: true,
