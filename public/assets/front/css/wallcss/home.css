@@ -1304,6 +1304,10 @@ main.new-main-content {
     max-width: 430px;
 }
 
+#wall_profile .modal-body{
+    padding-bottom: 0px;
+}
+
 #wall_profile .posts-card-head .posts-card-head-left {
     width: 100%;
     flex-direction: column;
@@ -1373,6 +1377,8 @@ main.new-main-content {
     margin-bottom: 20px;
 
 }
+
+
 
 #wall_profile .wall_profile-message-link svg{
     width: 100%;
