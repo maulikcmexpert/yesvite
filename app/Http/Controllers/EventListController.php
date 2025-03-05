@@ -1152,7 +1152,7 @@ class EventListController extends BaseController
                 ->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
         } else {
-            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
+            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')])
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
