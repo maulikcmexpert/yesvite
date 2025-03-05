@@ -332,7 +332,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
 
                     }else{
                         background_img.attr("src", profileData.bg_profile).hide();
-                        $("#show_img").remove('d-none');
+                        $("#show_img").removeClass('d-none');
                     }
 
                     let messageLink = $(".wall_profile-message-link");
