@@ -661,6 +661,7 @@ class RsvpController extends BaseController
         $kids = (isset($request->kids) && $request->kids) ? (int)$request->kids : 0;
         $adults = (isset($request->adults) && $request->adults) ? (int)$request->adults : 0;
         // dd($kids,$adults);
+        $userType = '';
 
         try {
             $checkEvent = Event::where(['id' => $eventId])->first();
