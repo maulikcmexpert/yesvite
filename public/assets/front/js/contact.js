@@ -579,6 +579,8 @@ $(document).on("input", ".search_phone", function () {
                 // $('#home_loader').css('display','flex');
             },
             success: function (data) {
+                // busy2 = false;
+
                 console.log(data);
                 if (data.status == "0" && scroll==1) {
                     $(".no-phone-data").css("display","none");
