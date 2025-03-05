@@ -3131,6 +3131,16 @@ main.new-main-content {
     border-radius: 12px !important;
 }
 
+.posts-card-wrp .posts-card-show-post-img{
+    height: 100% !important;
+}
+
+.posts-card-wrp .posts-card-show-post-img img {
+    border-radius: 10px;
+    object-fit: fill;
+    aspect-ratio: 7 / 5;
+}
+
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
     .create-post-modal .modal-content {
