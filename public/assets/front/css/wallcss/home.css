@@ -1278,6 +1278,12 @@ main.new-main-content {
     right: 25px;
 }
 
+.wallProfile-modal-left-side-menu-btn{
+    background:transparent;
+    border: none;
+    outline: none;
+}
+
 #wall_profile .modal-content {
     padding: 20px 10px;
 }
