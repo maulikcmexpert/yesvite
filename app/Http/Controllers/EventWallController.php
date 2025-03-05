@@ -3525,7 +3525,7 @@ class EventWallController extends BaseController
         try {
 
 
-            $loginuser  = Auth::guard('api')->user();
+            $loginuser  = Auth::guard('web')->user();
 
             $userId = $loginuser->id;
             $rawData = $request->getContent();
