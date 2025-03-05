@@ -1261,9 +1261,21 @@ main.new-main-content {
 
 /* ===== wall_profile Modal Section Start ===== */
 
-#wall_profile  .modal-header{
+#wall_profile .modal-header {
     padding-bottom: 0;
     margin-bottom: 12px;
+}
+
+#wall_profile .modal-header h1{
+    font-size: 16px;
+}
+
+#wall_profile .wallProfile-modal-left-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 25px;
 }
 
 #wall_profile .modal-content {
@@ -1280,13 +1292,13 @@ main.new-main-content {
     max-width: 430px;
 }
 
-#wall_profile  .posts-card-head .posts-card-head-left{
+#wall_profile .posts-card-head .posts-card-head-left {
     width: 100%;
     flex-direction: column;
     gap: 65px;
 }
 
-#wall_profile  .modal-body .common-div-wrp {
+#wall_profile .modal-body .common-div-wrp {
     border: none;
     padding: 0;
 }
@@ -1302,7 +1314,7 @@ main.new-main-content {
     object-fit: cover;
 }
 
-#wall_profile .main-modal-background-img  .posts-card-head-left-img{
+#wall_profile .main-modal-background-img .posts-card-head-left-img {
     position: absolute;
     bottom: -20px;
     left: 50%;
