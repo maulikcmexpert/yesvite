@@ -142,18 +142,23 @@ if ($hostView) {
                                             $username = $guest['first_name'] . ' ' . $guest['last_name'];
                                         @endphp
 
+                                            @if ($guest['is_sync'] == '0')
+                                                <h3 class="openProfileModal" data-bs-toggle="modal"
+                                                data-bs-target="#wall_profile"
+                                                data-userid="{{  $guest['id'] }}"
+                                                >
+                                                {{  $username }}
+                                            </h3>
+                                           @else
                                             <h3 class="openProfileModal" data-bs-toggle="modal"
-                                            data-bs-target="#wall_profile"
-
                                             data-userid="{{  $guest['id'] }}"
-                                           >
-
-
+                                            >
                                             {{  $username }}
-
-
-
                                         </h3>
+                                          @endif
+
+
+
 
                                             @if ($guest['prefer_by'] == 'email')
                                                 <p>{{ $guest['email'] }}</p>
