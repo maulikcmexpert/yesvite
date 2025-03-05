@@ -1667,12 +1667,14 @@
                     <div class="posts-card-wrp">
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
-                                <div class="posts-card-head-left-img">
-                                    <img id="modal-profile-img"
-                                        src="{{ asset('assets/front/img/header-profile-img.png') }}"
-                                        alt="Profile Image" loading="lazy">
-                                    <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
-
+                                <div class="main-modal-background-img">
+                                    <img src="" alt="">
+                                    <div class="posts-card-head-left-img">
+                                        <img id="modal-profile-img"
+                                            src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                            alt="Profile Image" loading="lazy">
+                                        <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
+                                    </div>
                                 </div>
                                 <div class="posts-card-head-left-content">
                                     <div class="d-flex align-items-start gap-1">
