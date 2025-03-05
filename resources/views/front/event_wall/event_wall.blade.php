@@ -1713,16 +1713,16 @@
 
                                     <div class="user-gallery">
                                         <div>
-                                            <h4 id="events">0</p>
-                                            <p> Events</p>
+                                            <h4 id="events"></h4>
+                                            <p>Events</p>
                                         </div>
                                         <div>
-                                            <h4 id="photos">0</p>
-                                            <p> Photos</p>
+                                            <h4 id="photos"></h4>
+                                            <p>Photos</p>
                                         </div>
                                         <div>
-                                            <h4 id="comments">0</p>
-                                            <p> Comments</p>
+                                            <h4 id="comments"></h4>
+                                            <p>Comments</p>
                                         </div>
                                     </div>
 
