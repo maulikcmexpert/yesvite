@@ -97,12 +97,23 @@ ul.footer-social-link {
     -o-transform: translateY(-5px);
 }
 
-.google-add .app-store img{
+.google-add .app-store .google-app,
+.google-add .app-store .mobile-app {
     width: 100% !important;
     max-width: 135px !important;
     height: 40px !important;
     object-fit: contain !important;
 }
+
+.google-add .app-store .google-app img,
+.google-add .app-store .mobile-app img{
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+
 
 .app-store .google-app,
 .app-store .mobile-app {
