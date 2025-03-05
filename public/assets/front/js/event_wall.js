@@ -1622,7 +1622,7 @@ $(document).on("click", ".openProfileModal", function () {
         success: function (response) {
             if (response.status === 1) {
                 let profileData = response.data;
-
+                let profilePrivacy = profileData.profile_privacy; // A
                 // Set username
                 $("#post_name").text(profileData.firstname + " " + profileData.lastname);
 
