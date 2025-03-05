@@ -407,7 +407,7 @@ class EventAboutController extends BaseController
         }
 
         // Prevent RSVP for past events
-        if ($checkEvent->end_date < date('Y-m-d')) {
+        if ($checkEvent->end_date <= date('Y-m-d')&& strtotime($checkEvent->end_date . ' ' . $checkEvent->rsvp_start_time) <= strtotime(date('Y-m-d g:i A'))) {
             return redirect()->back()->with('msg_error', 'Event is past, you cannot attempt RSVP!');
         }
 
