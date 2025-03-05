@@ -1475,7 +1475,19 @@ const playButton = document.getElementById("playRecording");
 const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-audio-btn");
+
 $(".send-message").on("keypress", async function (e) {
+    if (e.which === 13 && e.shiftKey) {
+        return;
+    } else if (e.which === 13 && !e.shiftKey) {
+        e.preventDefault();
+    }
+    return await sendMessage();
+});
+$("#message-send").on("click", async function () {
+    return await sendMessage(); // Call the same function on button click
+});
+async function sendMessage() {
     const conversationId = $(".selected_id").val();
     var isGroup = $(".conversation-" + conversationId).attr("data-group");
 
@@ -1506,7 +1518,7 @@ $(".send-message").on("keypress", async function (e) {
         loader.css("display", "flex");
         startButton.style.display = "inline-block";
         $("#isGroup").val(isGroup);
-        const message = $(this).val();
+        const message = $(".send-message").val();
         let downloadURL = "";
         let type = "";
         let fileName = "";
@@ -1591,8 +1603,8 @@ $(".send-message").on("keypress", async function (e) {
             loader.hide();
             return;
         }
-        $(this).val(""); // Clear the input field
-        $(this).css("height", "auto");
+        $(".send-message").val(""); // Clear the input field
+        $(".send-message").css("height", "auto");
         const messageData = {
             data: message,
             url: downloadURL,
@@ -1795,7 +1807,7 @@ $(".send-message").on("keypress", async function (e) {
         closeMedia();
         loader.hide();
     }
-});
+}
 function closeMedia() {
     let preview = document.getElementsByClassName("preview_img");
     var previewImg = $(preview);

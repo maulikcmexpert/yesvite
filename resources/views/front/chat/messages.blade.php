@@ -689,14 +689,16 @@ use Carbon\Carbon;
                                 <textarea type="text" placeholder="Write message here..." id="message-box"  rows="1" style="overflow:hidden; resize:none;" class="send-message"></textarea>
                                 <div class="d-flex ms-auto">
 
-                                    <span class="ms-auto" id="message-send">
+                                    <button id="message-send">
                                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M15.5673 5.51062L7.00733 1.23062C1.25733 -1.64938 -1.10267 0.710623 1.77733 6.46062L2.64733 8.20062C2.89733 8.71062 2.89733 9.30062 2.64733 9.81062L1.77733 11.5406C-1.10267 17.2906 1.24733 19.6506 7.00733 16.7706L15.5673 12.4906C19.4073 10.5706 19.4073 7.43062 15.5673 5.51062ZM12.3373 9.75062H6.93733C6.52733 9.75062 6.18733 9.41062 6.18733 9.00062C6.18733 8.59062 6.52733 8.25062 6.93733 8.25062H12.3373C12.7473 8.25062 13.0873 8.59062 13.0873 9.00062C13.0873 9.41062 12.7473 9.75062 12.3373 9.75062Z" fill="#64748B" />
                                         </svg>
-                                    </span>
+                                    </button>
 
 
                                     <div class="dropdown">
+                                        
+
                                         <button type="button" class="btn btn-primary dropdown-toggle p-0" data-bs-toggle="dropdown">
                                             <svg class="me-3" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12.7028 11.8002L11.2928 13.2102C10.5128 13.9902 10.5128 15.2602 11.2928 16.0402C12.0728 16.8202 13.3428 16.8202 14.1228 16.0402L16.3428 13.8202C17.9028 12.2602 17.9028 9.73023 16.3428 8.16023C14.7828 6.60023 12.2528 6.60023 10.6828 8.16023L8.26281 10.5802C6.92281 11.9202 6.92281 14.0902 8.26281 15.4302" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
