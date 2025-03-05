@@ -466,7 +466,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="input-form">
                                     <input type="email" class="form-control inputText" id="email" name="email" required>
-                                    <label for="email" class="form-label input-field floating-label">Work Email
+                                    <label for="email" class="form-label input-field floating-label">Email
                                         Address<span class="required">*</span></label>
                                 </div>
                             </div>

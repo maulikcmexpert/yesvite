@@ -432,7 +432,7 @@ $(document).on("input", ".search_phone", function () {
                 limit:limit
             },
             beforeSend: function () {
-                $('#home_loader').css('display','flex');
+                // $('#home_loader').css('display','flex');
             },
             success: function (data) {
                 if (data.status == "0" && scroll==1) {
@@ -563,7 +563,7 @@ $(document).on("input", ".search_phone", function () {
     }
 
     function loadMorePhones(search_phone,type,offset1,limit,scroll=null) {
-        $('#home_loader').css('display','flex');
+        // $('#home_loader').css('display','flex');
         console.log({search_phone,type,offset1,limit,scroll});
         $.ajax({
             url: base_url + "contacts/loadphones",
