@@ -1253,6 +1253,9 @@ main.new-main-content {
     color: var(--primary-black);
     margin-bottom: 0px;
     width: max-content;
+    display: inline-block;
+    text-decoration: underline;
+    text-underline-offset:4px;
 }
 
 .posts-card-head-left-content p {
@@ -3137,7 +3140,7 @@ main.new-main-content {
 
 .posts-card-wrp .posts-card-show-post-img img {
     border-radius: 10px;
-    object-fit: fill;
+    object-fit: contain;
     aspect-ratio: 7 / 5;
 }
 

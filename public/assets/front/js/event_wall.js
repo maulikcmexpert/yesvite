@@ -1622,12 +1622,23 @@ $(document).on("click", ".openProfileModal", function () {
         success: function (response) {
             if (response.status === 1) {
                 let profileData = response.data;
-
+                let profilePrivacy = profileData.profile_privacy || [];
                 // Set username
                 $("#post_name").text(profileData.firstname + " " + profileData.lastname);
 
-                // Set location (if available)
-                $("#location").text(profileData.address || "Location not available");
+
+                let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
+
+                if (showLocation) {
+                    let locationText = [profileData.city, profileData.state, profileData.zip_code]
+                        .filter(Boolean)
+                        .join(", ");
+
+                    $("#location").text(locationText );
+                } else {
+                    $("#location").text("Location not available");
+                }
+
                 $("#comments").text(profileData.comments);
 
                 $("#events").text(profileData.total_events);
