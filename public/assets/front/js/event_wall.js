@@ -1674,10 +1674,10 @@ $(document).on("click", ".openProfileModal", function () {
                 let background_img = $("#modal-background-img");
                if ( profileData.profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
-                  (".show_img").hide();
+                  ("#show_img").hide();
                 }else{
                     background_img.attr("src", profileData.bg_profile).hide();
-                    (".show_img").show();
+                    ("#show_img").show();
                 }
 
                 // Handle Host and Co-Host labels
