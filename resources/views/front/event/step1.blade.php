@@ -381,38 +381,40 @@
                             </div>
                             <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
-                        <div class="col-12 mb-4">
-                            <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
-                                <h6>RSVP By Date</h6>
-                                <div class="toggle-button-cover ">
-                                    <div class="button-cover">
-                                        <div class="button r" id="button-1">
-                                            <input type="checkbox" class="checkbox" id="rsvp_by_date"
-                                                {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
-                                            <div class="knobs"></div>
-                                            <div class="layer"></div>
+                        <div class="col-12 mb-3" style="border-bottom: 1px solid var(--borderColor)">
+                            <div class="col-12 mb-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h6>RSVP By Date</h6>
+                                    <div class="toggle-button-cover ">
+                                        <div class="button-cover">
+                                            <div class="button r" id="button-1">
+                                                <input type="checkbox" class="checkbox" id="rsvp_by_date"
+                                                    {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
+                                                <div class="knobs"></div>
+                                                <div class="layer"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @php
-                            $style = 'display:none';
-                            if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
-                                $style = '';
-                            }
-                        @endphp
-                        <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
-                            <div class="input-form">
+                            @php
+                                $style = 'display:none';
+                                if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
+                                    $style = '';
+                                }
+                            @endphp
+                            <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
+                                <div class="input-form">
 
-                                <input type="text" class="form-control inputText " id="rsvp-by-date"
-                                    name="rsvp-by-date" onblur="clearError(this)"
-                                    value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
-                                    readonly autocomplete="off">
-                                <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
-                                    Date</label>
+                                    <input type="text" class="form-control inputText " id="rsvp-by-date"
+                                        name="rsvp-by-date" onblur="clearError(this)"
+                                        value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
+                                        readonly autocomplete="off">
+                                    <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
+                                        Date</label>
+                                </div>
+                                <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                             </div>
-                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-form">
@@ -422,108 +424,111 @@
                                     Location Description</label>
                             </div>
                         </div>
-                        <div class="col-12 mb-4">
-                            <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
-                                <h6 class="mb-0">Add Address</h6>
-                                <div class="toggle-button-cover ">
-                                    <div class="button-cover">
-                                        <div class="button r" id="button-1">
-                                            <input type="checkbox" class="checkbox" id="isCheckAddress"
-                                                {{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? 'checked' : '' }}>
-                                            <div class="knobs"></div>
-                                            <div class="layer"></div>
+                        
+                        <div class="col-12 mb-3" style="border-bottom: 1px solid var(--borderColor)">
+                            <div class="col-12 mb-4">
+                                <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
+                                    <h6 class="mb-0">Add Address</h6>
+                                    <div class="toggle-button-cover ">
+                                        <div class="button-cover">
+                                            <div class="button r" id="button-1">
+                                                <input type="checkbox" class="checkbox" id="isCheckAddress"
+                                                    {{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? 'checked' : '' }}>
+                                                <div class="knobs"></div>
+                                                <div class="layer"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 mb-4 ckeckedAddress"
-                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                            <div class="input-form location-icon">
-                                <input type="text" class="form-control inputText" id="address1" name="address1"
-                                    oninput="clearError(this)"
-                                    value="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? $eventDetail['address_1'] : '' }}"
-                                    required="">
-                                <label for="address1" class="form-label input-field floating-label">Address 1
-                                    *</label>
-                                <input type="hidden" id="latitude"
-                                    value="{{ isset($eventDetail['latitude']) && $eventDetail['latitude'] != '' ? $eventDetail['latitude'] : '' }}" />
-                                <input type="hidden" id="longitude"
-                                    value="{{ isset($eventDetail['longitude']) && $eventDetail['longitude'] != '' ? $eventDetail['longitude'] : '' }}" />
-                                <div id="map"></div>
+                            <div class="col-12 mb-4 ckeckedAddress"
+                                style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                                <div class="input-form location-icon">
+                                    <input type="text" class="form-control inputText" id="address1" name="address1"
+                                        oninput="clearError(this)"
+                                        value="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? $eventDetail['address_1'] : '' }}"
+                                        required="">
+                                    <label for="address1" class="form-label input-field floating-label">Address 1
+                                        *</label>
+                                    <input type="hidden" id="latitude"
+                                        value="{{ isset($eventDetail['latitude']) && $eventDetail['latitude'] != '' ? $eventDetail['latitude'] : '' }}" />
+                                    <input type="hidden" id="longitude"
+                                        value="{{ isset($eventDetail['longitude']) && $eventDetail['longitude'] != '' ? $eventDetail['longitude'] : '' }}" />
+                                    <div id="map"></div>
 
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
-                                        stroke="#64748B" stroke-width="1.5" />
-                                    <path
-                                        d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
-                                        stroke="#64748B" stroke-width="1.5" />
-                                </svg>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
+                                            stroke="#64748B" stroke-width="1.5" />
+                                        <path
+                                            d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
+                                            stroke="#64748B" stroke-width="1.5" />
+                                    </svg>
+                                </div>
+                                <lable for="address1" id="event-address1-error" class="error"></lable>
                             </div>
-                            <lable for="address1" id="event-address1-error" class="error"></lable>
-                        </div>
-                        <div class="col-12 mb-4 ckeckedAddress"
-                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                            <div class="input-form location-icon">
-                                <input type="text" class="form-control inputText" id="address2" name="address2"
-                                    required=""
-                                    value="{{ isset($eventDetail['address_2']) && $eventDetail['address_2'] != '' ? $eventDetail['address_2'] : '' }}">
-                                <label for="address2" class="form-label input-field floating-label">Address
-                                    2</label>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
-                                        stroke="#64748B" stroke-width="1.5" />
-                                    <path
-                                        d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
-                                        stroke="#64748B" stroke-width="1.5" />
-                                </svg>
+                            <div class="col-12 mb-4 ckeckedAddress"
+                                style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                                <div class="input-form location-icon">
+                                    <input type="text" class="form-control inputText" id="address2" name="address2"
+                                        required=""
+                                        value="{{ isset($eventDetail['address_2']) && $eventDetail['address_2'] != '' ? $eventDetail['address_2'] : '' }}">
+                                    <label for="address2" class="form-label input-field floating-label">Address
+                                        2</label>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9.99999 11.1917C11.4359 11.1917 12.6 10.0276 12.6 8.5917C12.6 7.15576 11.4359 5.9917 9.99999 5.9917C8.56405 5.9917 7.39999 7.15576 7.39999 8.5917C7.39999 10.0276 8.56405 11.1917 9.99999 11.1917Z"
+                                            stroke="#64748B" stroke-width="1.5" />
+                                        <path
+                                            d="M3.01666 7.07484C4.65832 -0.141827 15.35 -0.133494 16.9833 7.08317C17.9417 11.3165 15.3083 14.8998 13 17.1165C11.325 18.7332 8.67499 18.7332 6.99166 17.1165C4.69166 14.8998 2.05832 11.3082 3.01666 7.07484Z"
+                                            stroke="#64748B" stroke-width="1.5" />
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 mb-4 ckeckedAddress"
-                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                            <div class="input-form">
-                                <input type="text" class="form-control inputText" id="city" name="city"
-                                    oninput="clearError(this)" required=""
-                                    value="{{ isset($eventDetail['city']) && $eventDetail['city'] != '' ? $eventDetail['city'] : '' }}">
-                                <label for="select-label" class="form-label input-field floating-label select-label">City
-                                    *</label>
+                            <div class="col-12 mb-4 ckeckedAddress"
+                                style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                                <div class="input-form">
+                                    <input type="text" class="form-control inputText" id="city" name="city"
+                                        oninput="clearError(this)" required=""
+                                        value="{{ isset($eventDetail['city']) && $eventDetail['city'] != '' ? $eventDetail['city'] : '' }}">
+                                    <label for="select-label" class="form-label input-field floating-label select-label">City
+                                        *</label>
 
+                                </div>
+                                <lable for="city" id="event-city-error" class="error"></lable>
                             </div>
-                            <lable for="city" id="event-city-error" class="error"></lable>
-                        </div>
-                        <div class="col-6 mb-4 ckeckedAddress"
-                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                            <div class="input-form">
-                                <input type="text" class="form-control inputText" id="state" name="state"
-                                    oninput="clearError(this)"
-                                    value="{{ isset($eventDetail['state']) && $eventDetail['state'] != '' ? $eventDetail['state'] : '' }}"
-                                    required="">
+                            <div class="col-6 mb-4 ckeckedAddress"
+                                style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                                <div class="input-form">
+                                    <input type="text" class="form-control inputText" id="state" name="state"
+                                        oninput="clearError(this)"
+                                        value="{{ isset($eventDetail['state']) && $eventDetail['state'] != '' ? $eventDetail['state'] : '' }}"
+                                        required="">
 
-                                <label for="select-label" class="form-label input-field floating-label select-label">State
-                                    *</label>
+                                    <label for="select-label" class="form-label input-field floating-label select-label">State
+                                        *</label>
 
+                                </div>
+                                <lable for="city" id="event-state-error" class="error"></lable>
                             </div>
-                            <lable for="city" id="event-state-error" class="error"></lable>
-                        </div>
-                        <div class="col-6 mb-4 ckeckedAddress"
-                            style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
-                            <div class="input-form">
-                                {{-- <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
-                                    oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}"> --}}
-                                <input type="text" class="form-control inputText" id="zipcode" name="zipcode"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)"
-                                    required=""
-                                    value="{{ isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '' ? $eventDetail['zip_code'] : '' }}">
+                            <div class="col-6 mb-4 ckeckedAddress"
+                                style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
+                                <div class="input-form">
+                                    {{-- <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
+                                        oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}"> --}}
+                                    <input type="text" class="form-control inputText" id="zipcode" name="zipcode"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)"
+                                        required=""
+                                        value="{{ isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '' ? $eventDetail['zip_code'] : '' }}">
 
-                                <label for="select-label" class="form-label input-field floating-label select-label">Zip
-                                    Code *</label>
+                                    <label for="select-label" class="form-label input-field floating-label select-label">Zip
+                                        Code *</label>
 
+                                </div>
+                                <lable for="city" id="event-zipcode-error" class="error"></lable>
                             </div>
-                            <lable for="city" id="event-zipcode-error" class="error"></lable>
                         </div>
                         <div class="col-lg-12">
                             <div class="input-form">
