@@ -1256,6 +1256,7 @@ main.new-main-content {
     display: inline-block;
     text-decoration: underline;
     text-underline-offset: 4px;
+    cursor: pointer;
 }
 
 
@@ -1283,6 +1284,10 @@ main.new-main-content {
     border: none;
     outline: none;
     margin-right: 12px;
+    width: 100%;
+    max-width: 28px;
+    min-width: 28px;
+    height: 28px;
 }
 
 #wall_profile .modal-content {
@@ -1329,6 +1334,14 @@ main.new-main-content {
     max-width: 50px;
     min-width: 50px;
     height: 50px;
+}
+
+
+
+#wall_profile  h3#post_name{
+    text-decoration: none;
+    font-size: 25px;
+    margin-bottom: 12px;
 }
 
 /* ===== wall_profile Modal Section End ===== */

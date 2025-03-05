@@ -1682,12 +1682,14 @@
                                     </div>
                                 </div>
                                 <div class="posts-card-head-left-content">
-                                    <div class="d-flex align-items-start gap-1">
+                                    <div class="d-flex justify-content-center gap-1">
                                         <h3 id="post_name">User Name</h3>
-                                        <h6 id="member_since"></h6>
-                                        <span id="host_display"></span>
+                                        {{-- <h6 id="member_since"></h6> --}}
+                                        {{-- <span id="host_display"></span> --}}
                                     </div>
-                                    <p id="location">Location</p>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <p id="location">Location</p>
+                                    </div>
                                     <label> Events</label>
                                     <p id="events">0</p>
                                     <label> Photos</label>
