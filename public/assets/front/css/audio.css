@@ -117,10 +117,10 @@
   padding: 0 !important;
 }
 
-.audio-music-player{
+/* .audio-music-player{
   margin: 10px 0;
   padding: 10px 0;
-}
+} */
 
 .audio-music-player #audioContainer{
   width: 100%;
@@ -139,9 +139,9 @@
   height: 42px;
 }
 
-.audio-music-player{
+/* .audio-music-player{
   margin: 10px 23px 0px;
-}
+} */
 
 #audioContainer .wrapper .music-info{
   width: 100%;
