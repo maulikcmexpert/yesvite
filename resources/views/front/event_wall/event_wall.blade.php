@@ -480,7 +480,7 @@
                                                                         <li id="reactionImage_{{ $post['id'] }}">
                                                                         </li>
                                                                     @endif
-                                                                    @if ($post['post_type'] == '4')
+                                                                    @if ($post['post_type'] != '4')
                                                                         <p id="likeCount_{{ $post['id'] }}">
                                                                             {{ $post['total_likes'] }} Likes</p>
                                                                     @endif
@@ -501,7 +501,7 @@
                                                                         $liked = '1';
                                                                     }
                                                                 @endphp
-                                                                @if ($post['post_type'] == '4')
+                                                                @if ($post['post_type'] != '4')
                                                                     <button class="posts-card-like-btn  set_emoji_like"
                                                                         id="likeButton"
                                                                         data-event-id="{{ $event }}"
