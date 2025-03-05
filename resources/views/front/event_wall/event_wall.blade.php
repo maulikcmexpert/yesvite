@@ -1695,6 +1695,12 @@
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita, impedit, a quibusdam similique reprehenderit fugit laudantium adipisci aperiam ipsam sequi dignissimos autem cumque consequatur dicta. Ullam, voluptatibus officia?
                                         </p>
                                     </div>
+
+                                    <div class="memberDate-Section">
+                                        <span>Member Since:</span> &nbsp;
+                                        <span id="member_since"></span>
+                                    </div>
+
                                     <label> Events</label>
                                     <p id="events">0</p>
                                     <label> Photos</label>

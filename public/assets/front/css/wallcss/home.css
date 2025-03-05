@@ -1267,7 +1267,7 @@ main.new-main-content {
     margin-bottom: 12px;
 }
 
-#wall_profile .modal-header h1{
+#wall_profile .modal-header h1 {
     font-size: 16px;
 }
 
@@ -1279,8 +1279,8 @@ main.new-main-content {
     right: 25px;
 }
 
-.wallProfile-modal-left-side-menu-btn{
-    background:transparent;
+.wallProfile-modal-left-side-menu-btn {
+    background: transparent;
     border: none;
     outline: none;
     margin-right: 12px;
@@ -1338,10 +1338,20 @@ main.new-main-content {
 
 
 
-#wall_profile  h3#post_name{
+#wall_profile h3#post_name {
     text-decoration: none;
     font-size: 25px;
     margin-bottom: 12px;
+}
+
+#wall_profile .about-section-text {
+    text-align: center;
+    max-width: 350px;
+    margin: 12px 0 20px;
+}
+
+#wall_profile .about-section-text p {
+    color: var(--primaryColor);
 }
 
 /* ===== wall_profile Modal Section End ===== */
