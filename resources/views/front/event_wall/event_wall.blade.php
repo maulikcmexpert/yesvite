@@ -1713,9 +1713,9 @@
                                             <h4 id="events"></h4>
                                             <p>Events</p>
                                         </div>
-                                        <div>
+                                        <div id="photo_counts">
                                             <h4 id="photos"></h4>
-                                            <p>Photos</p>
+                                            <p id="photo_count">Photos</p>
                                         </div>
                                         <div>
                                             <h4 id="comments"></h4>
