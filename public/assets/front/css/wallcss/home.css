@@ -1275,6 +1275,17 @@ main.new-main-content {
     max-width: 430px;
 }
 
+#wall_profile  .posts-card-head .posts-card-head-left{
+    width: 100%;
+    flex-direction: column;
+    gap: 65px;
+}
+
+#wall_profile  .modal-body .common-div-wrp {
+    border: none;
+    padding: 0;
+}
+
 #wall_profile .main-modal-background-img {
     width: 100%;
     background: black;
@@ -1285,6 +1296,13 @@ main.new-main-content {
     width: 100%;
     max-height: 170px;
     object-fit: cover;
+}
+
+#wall_profile .main-modal-background-img  .posts-card-head-left-img{
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* ===== wall_profile Modal Section End ===== */
