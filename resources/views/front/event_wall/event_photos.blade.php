@@ -2,12 +2,12 @@
     <input type="hidden" id="parent_comment_id" value="">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-4 event-info-left">
+            <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
                 <!-- =============mainleft-====================== -->
 
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
-            <div class="col-xl-9 col-lg-8 event-info-center">
+            <div class="col-xxl-9 col-xl-9 col-lg-8 event-info-center">
                 <div class="main-content-center">
                     <!-- ===event-breadcrumb-wrp-start=== -->
                     <div class="event-breadcrumb-wrp">
