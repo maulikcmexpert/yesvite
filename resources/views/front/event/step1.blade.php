@@ -381,47 +381,50 @@
                             </div>
                             <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
-                        <div class="col-12 mb-4">
-                            <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
-                                <h6>RSVP By Date</h6>
-                                <div class="toggle-button-cover ">
-                                    <div class="button-cover">
-                                        <div class="button r" id="button-1">
-                                            <input type="checkbox" class="checkbox" id="rsvp_by_date"
-                                                {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
-                                            <div class="knobs"></div>
-                                            <div class="layer"></div>
+                        <div class="row pb-3" style="border-bottom: 1px solid var(--borderColor)">
+                            <div class="col-12 mb-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h6>RSVP By Date</h6>
+                                    <div class="toggle-button-cover ">
+                                        <div class="button-cover">
+                                            <div class="button r" id="button-1">
+                                                <input type="checkbox" class="checkbox" id="rsvp_by_date"
+                                                    {{ isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1' ? 'checked' : '' }}>
+                                                <div class="knobs"></div>
+                                                <div class="layer"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @php
-                            $style = 'display:none';
-                            if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
-                                $style = '';
-                            }
-                        @endphp
-                        <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
-                            <div class="input-form">
+                            @php
+                                $style = 'display:none';
+                                if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
+                                    $style = '';
+                                }
+                            @endphp
+                            <div class="col-lg-12 mb-4 rsvp_by_date" style="{{ $style }}">
+                                <div class="input-form">
 
-                                <input type="text" class="form-control inputText " id="rsvp-by-date"
-                                    name="rsvp-by-date" onblur="clearError(this)"
-                                    value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
-                                    readonly autocomplete="off">
-                                <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
-                                    Date</label>
+                                    <input type="text" class="form-control inputText " id="rsvp-by-date"
+                                        name="rsvp-by-date" onblur="clearError(this)"
+                                        value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
+                                        readonly autocomplete="off">
+                                    <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
+                                        Date</label>
+                                </div>
+                                <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                             </div>
-                            <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
-                        </div>
-                        <div class="col-12 mb-4">
-                            <div class="input-form">
-                                <input type="text" class="form-control inputText" id="description" name="description"
-                                    value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
-                                <label for="description" class="form-label input-field floating-label">Event
-                                    Location Description</label>
+                            <div class="col-12 mb-4">
+                                <div class="input-form">
+                                    <input type="text" class="form-control inputText" id="description" name="description"
+                                        value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
+                                    <label for="description" class="form-label input-field floating-label">Event
+                                        Location Description</label>
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
                                 <h6 class="mb-0">Add Address</h6>
