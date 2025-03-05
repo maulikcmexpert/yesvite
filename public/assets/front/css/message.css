@@ -424,10 +424,10 @@ ul.chat-list > div:last-child li {
 .msg-body {
     padding: 20px 24px;
     position: relative;
-    max-height: calc(100% - 125px);
-    height: calc(100% - 125px);
+    max-height: calc(100% - 163px);
+    height: calc(100% - 163px);
     overflow-y: scroll;
-    /* margin-bottom: 65px; */
+     /* margin-bottom: 65px;  */
 }
 
 .msg-body ul {
