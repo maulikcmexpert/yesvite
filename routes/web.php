@@ -165,6 +165,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('contacts/load', [ContactController::class, 'loadMore'])->name('.loadMore');
     Route::post('contacts/loadgroups', [ContactController::class, 'loadMoreGroup'])->name('.loadMoreGroup');
     Route::post('contacts/loadphones', [ContactController::class, 'loadMorePhones'])->name('.loadMorePhones');
+    Route::post('contacts/clear_contact_session', [ContactController::class, 'clear_contact_session'])->name('.clear_contact_session');
 
     Route::post('contacts/check_new_contactemail', [ContactController::class, 'checkNewContactEmail']);
 
