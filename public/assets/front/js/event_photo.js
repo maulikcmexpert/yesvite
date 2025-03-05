@@ -522,7 +522,7 @@ $(document).ready(function () {
     $(document).on("click", ".comment-send-icon", function (e) {
         sendComment.call(this); // Ensure `this` refers to the clicked button
     })
-    $(document).on("keypress", ".post_comment", function (e) {
+    $(document).on("keypress", "#post_comment", function (e) {
         if (e.which === 13) { // 13 is the key code for Enter
             e.preventDefault(); // Prevents newline in the input field
             $(this).next(".comment-send-icon").click(); // Trigger click on send button
