@@ -1,4 +1,4 @@
-{{-- {{dd($postList);}} --}}
+{{dd($eventDetails);}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -1672,7 +1672,7 @@
                                     <img id="modal-profile-img" src="{{ asset('assets/front/img/header-profile-img.png') }}"
                                         alt="Profile Image" loading="lazy">
                                     <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
-                                    <span class="active-dot"></span>
+
                                 </div>
                                 <div class="posts-card-head-left-content">
                                     <div class="d-flex align-items-start gap-1">
