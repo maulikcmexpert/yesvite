@@ -71,7 +71,8 @@
     
                         </div>
                 <div class="text-start">
-                    <h5 class="openProfileModal"  data-userid="{{ $value->id }}" style="text-decoration: underline;cursor: pointer;">{{ $value->firstname }}
+                    <h5 class="openProfileModal"  data-bs-toggle="modal"
+                    data-bs-target="#wall_profile" data-userid="{{ $value->id }}" style="text-decoration: underline;cursor: pointer;">{{ $value->firstname }}
                         {{ $value->lastname }}
                     </h5>
                     @if (isset($value->email) && $value->email != '')
