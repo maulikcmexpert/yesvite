@@ -9926,6 +9926,7 @@ $(document).on("click", ".openProfileModal", function () {
                     $("#show_img").addClass('d-none');
 
                 }else{
+                    background_img.attr("src",'');
                     background_img.hide();
                     $("#show_img").remove('d-none');
                 }
