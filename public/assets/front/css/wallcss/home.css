@@ -3317,6 +3317,15 @@ main.new-main-content {
     }
 }
 
+@media only screen and (min-width: 1400px){
+    .col-xxl-3.event-info-left {
+        width: 28%;
+    }
+    .col-xxl-6.event-info-center{
+        width: 47%; 
+    }
+}
+
 @media only screen and (max-width: 1399px) {
     .hosted-by-template-slider-img {
         width: 100%;
