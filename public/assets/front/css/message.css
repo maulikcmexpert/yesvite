@@ -423,6 +423,15 @@ ul.chat-list > div:last-child li {
     /* margin-bottom: 65px;  */
 }
 
+.chatbox:has(.audio-music-player[style*="display:none"]) .msg-body {
+    padding: 20px 24px;
+    position: relative;
+    max-height: calc(100% - 138px);
+    height: calc(100% - 138px);
+    overflow-y: scroll;
+     /* margin-bottom: 65px;  */
+}
+
 .msg-body ul {
     padding: 0;
 }
