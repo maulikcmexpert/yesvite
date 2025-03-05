@@ -2,12 +2,12 @@
 <main class="new-main-content">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-4 event-info-left">
+            <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
                 <!-- =============mainleft-====================== -->
 
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
-            <div class="col-xl-6 col-lg-8 event-info-center">
+            <div class="col-xxl-6 col-xl-6 col-lg-8 event-info-center">
                 <div class="main-content-center">
                     <!-- ===event-breadcrumb-wrp-start=== -->
                     <div class="event-breadcrumb-wrp">
@@ -1007,7 +1007,7 @@
                     <!-- ===event-center-tabs-main-end=== -->
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-0 event-info-right">
+            <div class="col-xxl-3 col-xl-3 col-lg-0 event-info-right">
                 <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" />
             </div>
         </div>
@@ -1692,7 +1692,7 @@
                                     </div>
                                     <div class="about-section-text">
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita, impedit, a quibusdam similique reprehenderit fugit laudantium adipisci aperiam ipsam sequi dignissimos autem cumque consequatur dicta. Ullam, voluptatibus officia?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita,
                                         </p>
                                     </div>
 

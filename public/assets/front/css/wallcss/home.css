@@ -1351,9 +1351,20 @@ main.new-main-content {
 }
 
 #wall_profile .about-section-text p {
-    color: var(--primaryColor);
+    color: var(--primary-black);
 }
 
+
+#wall_profile .memberDate-Section {
+    text-align: center;
+}
+
+#wall_profile .memberDate-Section span {
+    background: no-repeat;
+    margin: 0;
+    text-align: center;
+    padding: 0px;
+}
 /* ===== wall_profile Modal Section End ===== */
 
 
@@ -3249,6 +3260,8 @@ main.new-main-content {
     object-fit: contain;
     aspect-ratio: 7 / 5;
 }
+
+
 
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
