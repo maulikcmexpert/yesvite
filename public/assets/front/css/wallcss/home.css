@@ -3324,6 +3324,9 @@ main.new-main-content {
     .col-xxl-6.event-info-center{
         width: 47%; 
     }
+    .col-xxl-9.event-info-center{
+        width: 72%;
+    }
 }
 
 @media only screen and (max-width: 1399px) {
