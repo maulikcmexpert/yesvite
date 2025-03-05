@@ -1304,6 +1304,10 @@ main.new-main-content {
     max-width: 430px;
 }
 
+#wall_profile .modal-body{
+    padding-bottom: 0px;
+}
+
 #wall_profile .posts-card-head .posts-card-head-left {
     width: 100%;
     flex-direction: column;
@@ -1365,6 +1369,37 @@ main.new-main-content {
     text-align: center;
     padding: 0px;
 }
+
+#wall_profile .wall_profile-message-link{
+    display: block !important;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
+
+}
+
+
+
+#wall_profile .wall_profile-message-link svg{
+    width: 100%;
+    max-width: 18px;
+    min-width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+#wall_profile .wall_profile-message-link span{
+    color: var(--primary-black);
+    background: no-repeat;
+    margin: 0;
+    text-align: center;
+    padding: 0px;
+}
+
+#wall_profile .wall_profile-message-link svg path{
+    stroke: var(--primary-black);
+}
+
 /* ===== wall_profile Modal Section End ===== */
 
 
@@ -3322,7 +3357,7 @@ main.new-main-content {
         width: 28%;
     }
     .col-xxl-6.event-info-center{
-        width: 47%; 
+        width: 47%;
     }
     .col-xxl-9.event-info-center{
         width: 72%;

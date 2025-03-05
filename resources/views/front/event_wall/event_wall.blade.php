@@ -1661,9 +1661,6 @@
             <div class="modal-header">
                 <h1 class="modal-title" id="exampleModalLabel">Detail Photo</h1>
                 <div class="wallProfile-modal-left-side">
-                    <button class="wallProfile-modal-left-side-menu-btn">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
@@ -1673,7 +1670,12 @@
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="main-modal-background-img">
-                                    <img src="https://images.unsplash.com/photo-1741070487520-907d1359cb95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8" alt="">
+                                    <img src="https://images.unsplash.com/photo-1741070487520-907d1359cb95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8" class="d-none" alt="">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
                                     <div class="posts-card-head-left-img">
                                         <img id="modal-profile-img"
                                             src="{{ asset('assets/front/img/header-profile-img.png') }}"
@@ -1710,12 +1712,21 @@
                                         <span>Message</span>
                                     </a>
 
-                                    <label> Events</label>
-                                    <p id="events">0</p>
-                                    <label> Photos</label>
-                                    <p id="photos">0</p>
-                                    <label> Comments</label>
-                                    <p id="comments">0</p>
+
+                                    <div class="user-gallery">
+                                        <div>
+                                            <h4 id="events"></h4>
+                                            <p>Events</p>
+                                        </div>
+                                        <div>
+                                            <h4 id="photos"></h4>
+                                            <p>Photos</p>
+                                        </div>
+                                        <div>
+                                            <h4 id="comments"></h4>
+                                            <p>Comments</p>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
