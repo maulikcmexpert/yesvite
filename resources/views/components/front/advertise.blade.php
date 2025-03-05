@@ -8,10 +8,10 @@
 
     <div class="app-store ms-auto d-flex gap-2">
         <a href="{{isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : "#"}}" class="google-app"  target="_blank">
-            <img src="{{asset('assets/front/image/play_store1.png')}}" alt="google-app">
+            <img src="{{asset('assets/front/image/play_store.svg')}}" alt="google-app">
         </a>
         <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app"  target="_blank">
-            <img src="{{asset('assets/front/image/app_store1.png')}}" alt="mobile-app">
+            <img src="{{asset('assets/front/image/app_store.svg')}}" alt="mobile-app">
         </a>
     </div>
     {{-- <a href="{{route('get_all_notification')}}">test</a> --}}
