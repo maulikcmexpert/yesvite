@@ -1710,12 +1710,21 @@
                                         <span>Message</span>
                                     </a>
 
-                                    <label> Events</label>
-                                    <p id="events">0</p>
-                                    <label> Photos</label>
-                                    <p id="photos">0</p>
-                                    <label> Comments</label>
-                                    <p id="comments">0</p>
+
+                                    <div class="user-gallery">
+                                        <div>
+                                            <h4 id="events">0</p>
+                                            <label> Events</label>
+                                        </div>
+                                        <div>
+                                            <h4 id="photos">0</p>
+                                            <label> Photos</label>
+                                        </div>
+                                        <div>
+                                            <h4 id="comments">0</p>
+                                            <label> Comments</label>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
