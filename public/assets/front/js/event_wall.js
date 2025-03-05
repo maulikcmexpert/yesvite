@@ -1630,7 +1630,13 @@ $(document).on("click", ".openProfileModal", function () {
                 let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
 
                 if (showLocation) {
-                    $("#location").text(profileData.city ,profileData.state ,profileData.zip_code || "Location not available");
+                    let locationText = [profileData.city, profileData.state, profileData.zip_code]
+                        .filter(Boolean)
+                        .join(", ");
+
+                    $("#location").text(locationText );
+                } else {
+                    $("#location").text("Location not available");
                 }
 
                 $("#comments").text(profileData.comments);
