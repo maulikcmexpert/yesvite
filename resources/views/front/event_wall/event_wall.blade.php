@@ -1677,9 +1677,17 @@
                                 <div class="posts-card-head-left-content">
                                     <div class="d-flex align-items-start gap-1">
                                         <h3 id="post_name">User Name</h3>
+                                        <h6 id="member_since"></h6>
                                         <span id="host_display"></span>
                                     </div>
                                     <p id="location">Location</p>
+                                    <label>   Events</label>
+                                    <p id="events">0</p>
+                                    <label>   Photos</label>
+                                    <p id="photos">0</p>
+                                    <label>   Comments</label>
+                                    <p id="comments">0</p>
+
                                 </div>
                             </div>
                         </div>
