@@ -1369,14 +1369,17 @@ main.new-main-content {
 #wall_profile .wall_profile-message-link{
     display: block !important;
     text-align: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
 
 }
 
 #wall_profile .wall_profile-message-link svg{
     width: 100%;
-    max-width: 20px;
-    min-width: 20px;
-    height: 24px;
+    max-width: 18px;
+    min-width: 18px;
+    height: 18px;
+    margin-right: 5px;
 }
 
 #wall_profile .wall_profile-message-link span{
@@ -1387,6 +1390,9 @@ main.new-main-content {
     padding: 0px;
 }
 
+#wall_profile .wall_profile-message-link svg path{
+    stroke: var(--primary-black);
+}
 
 /* ===== wall_profile Modal Section End ===== */
 
