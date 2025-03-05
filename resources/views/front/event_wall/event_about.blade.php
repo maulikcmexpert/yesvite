@@ -415,7 +415,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if($eventDetails['is_host']==1 || $eventDetails['is_co_host']=="1")
+                                        {{-- @if($eventDetails['is_host']==1 || $eventDetails['is_co_host']=="1") --}}
                                             <div class="new_copy_event_Wrp">
                                                 <h4 class="title">Share Event Link</h4>
                                                 <div class="new_copy_event_inner">
@@ -423,7 +423,7 @@
                                                     <button type="button" id="copy_link_btn">Copy Link</button>
                                                 </div>
                                             </div>
-                                          @endif
+                                          {{-- @endif --}}
                                         {{-- {{      dd($eventDetails)}} --}}
                                         <div class="host-users-detail cmn-card">
                                         @if (!empty($eventDetails['co_hosts']))
