@@ -9870,3 +9870,8 @@ $(document).on("click","#event_copy_link_btn",function(e){
         console.error("Failed to copy: ", err);
     });
 });
+
+$(document).on('click','.openProfileModal',function(){
+    $id=$(this).attr('data-userid');
+    $('.wall_profile-message-link').attr('data-userid',$id);
+})
