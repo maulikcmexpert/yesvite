@@ -1643,6 +1643,7 @@ $(document).on("click", ".openProfileModal", function () {
                 } else {
                     $("#photo_counts").remove(); // Removes the div from the DOM
                 }
+
                 if (profileData.comments > 0) {
                     $("#comments").text(profileData.comments);
 
@@ -1669,6 +1670,12 @@ $(document).on("click", ".openProfileModal", function () {
                     let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
                     initialsElement.text(firstInitial + secondInitial).show();
                     profileImgElement.hide();
+                }
+                let background_img = $("#modal-background-img");
+               if ( profileData.profile !== "") {
+                    profileImgElement.attr("src", profileData.bg_profile).show();
+                }else{
+                    profileImgElement.attr("src", profileData.bg_profile).hide();
                 }
 
                 // Handle Host and Co-Host labels
