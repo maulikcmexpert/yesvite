@@ -1677,7 +1677,7 @@ $(document).on("click", ".openProfileModal", function () {
 
                 }else{
                     background_img.attr("src", profileData.bg_profile).hide();
-                    background_img.removeClass('d-none');
+                    $("#show_img").addClass('d-none');
                 }
 
                 // Handle Host and Co-Host labels
