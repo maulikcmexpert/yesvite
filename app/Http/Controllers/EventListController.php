@@ -1594,6 +1594,8 @@ class EventListController extends BaseController
                 $last_month = $eventPasttList[0]['event_month'];
             }
             $total=Count($eventPasttList);
+        }else{
+            $total=0;
         }
 
         return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), 'last_month' => $last_month, 'page' => 'past','total'=>$total]);
