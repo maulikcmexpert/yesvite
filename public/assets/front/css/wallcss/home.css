@@ -1305,7 +1305,7 @@ main.new-main-content {
 }
 
 .GuestProfile-modal .modal-body {
-    padding-bottom: 0px;
+    padding-bottom: 0px !important;
 }
 
 .GuestProfile-modal  .posts-card-head-left-content{
