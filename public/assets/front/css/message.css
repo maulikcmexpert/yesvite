@@ -1867,7 +1867,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     align-items: center;
     justify-content: center;
     color: #fff !important;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: normal;
 }
 
