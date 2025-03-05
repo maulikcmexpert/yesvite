@@ -3847,6 +3847,6 @@
         border-radius: 10px !important;
     }
     .home-upcoming-events-card-right {
-        flex-basis: 40%;
+        flex-basis: 40% !important;
     }
 }
