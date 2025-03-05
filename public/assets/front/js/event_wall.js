@@ -1671,12 +1671,13 @@ $(document).on("click", ".openProfileModal", function () {
                     initialsElement.text(firstInitial + secondInitial).show();
                     profileImgElement.hide();
                 }
-                let background_img = $("#modal-background-img"); // Select background image
-                let show_img_icon = $("#show_img"); // Select the icon
-
-                if (profileData.profile !== "") {
+                let background_img = $("#modal-background-img");
+               if ( profileData.profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
-                    background_img.removeClass('d-none'); // Hide the icon
+
+                }else{
+                    background_img.attr("src", profileData.bg_profile).hide();
+                    background_img.removeClass('d-none');
                 }
 
                 // Handle Host and Co-Host labels
