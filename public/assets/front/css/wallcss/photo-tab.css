@@ -613,7 +613,7 @@
     }
 }
 
-@media only screen and (min-width: 900px) and (min-height: 900px) and (max-height: 999px){
+@media only screen and (min-width: 1600px) and (min-height: 900px) and (max-height: 999px){
     #detail-photo-modal .modal-content {
         max-width: 750px !important;
         min-width: 750px !important;
@@ -664,7 +664,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 380px);
+        height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -698,7 +698,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 380px);
+        height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -729,7 +729,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 380px);
+        height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -750,7 +750,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 380px);
+        height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -771,7 +771,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 380px);
+        height: calc(100vh - 430px) !important;
     }
 }
 
