@@ -1659,13 +1659,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Photo</h1>
+                <h1 class="modal-title" id="exampleModalLabel">Detail Photo</h1>
                 <div class="wallProfile-modal-left-side">
                     <button class="wallProfile-modal-left-side-menu-btn">
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </button>
-                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
             <div class="modal-body">
                 <div class="event-posts-main-wrp common-div-wrp">
