@@ -9928,7 +9928,7 @@ $(document).on("click", ".openProfileModal", function () {
                 }else{
                     background_img.attr("src",'');
                     background_img.hide();
-                    $("#show_img").remove('d-none');
+                    $("#show_img").removeClass('d-none');
                 }
 
                 let messageLink = $(".wall_profile-message-link");
