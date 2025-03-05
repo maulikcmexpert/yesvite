@@ -9950,6 +9950,8 @@ $(document).on("click", ".openProfileModal", function () {
 
                 // Show the modal
                 $("#profileModal").modal("show");
+                $("#wall_profile").modal("show");
+
             } else {
                 alert(response.message);
             }
