@@ -1482,7 +1482,9 @@ $(".send-message").on("keypress", async function (e) {
     } else if (e.which === 13 && !e.shiftKey) {
         e.preventDefault();
     }
-    return await sendMessage();
+    if (e.which === 13) {
+        return await sendMessage();
+    }
 });
 $("#message-send").on("click", async function () {
     return await sendMessage(); // Call the same function on button click
