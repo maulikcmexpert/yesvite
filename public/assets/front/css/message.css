@@ -417,17 +417,17 @@ ul.chat-list > div:last-child li {
 .msg-body {
     padding: 20px 24px;
     position: relative;
-    max-height: calc(100% - 201px);
-    height: calc(100% - 201px);
+    max-height: calc(100% - 140px);
+    height: calc(100% - 140px);
     overflow-y: scroll;
     /* margin-bottom: 65px;  */
 }
 
-.chatbox:has(.audio-music-player[style*="display:none"]) .msg-body {
+.chatbox:has(.audio-music-player.musicSample) .msg-body {
     padding: 20px 24px;
     position: relative;
-    max-height: calc(100% - 138px);
-    height: calc(100% - 138px);
+    max-height: calc(100% - 202px);
+    height: calc(100% - 202px);
     overflow-y: scroll;
      /* margin-bottom: 65px;  */
 }

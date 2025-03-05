@@ -60,6 +60,7 @@ $(document).ready(function () {
 
     $(".show-comments-btn").click(function () {
         $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+        $("#detail-photo-modal .modal-content").toggleClass("active")
     });
     $(".show-comment-reply-btn").click(function () {
         $(".reply-on-comment").toggleClass("d-none");
