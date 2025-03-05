@@ -3704,6 +3704,12 @@
     .collection-card.card-blue{
         border-radius: 10px !important;
     }
+    .event-center-tabs-main .home-upcoming-events-card-left-detail{
+        padding: 20px 20px 20px 20px !important;
+    }
+    .event-center-tabs-main .home-upcoming-events-card-rsvp-data {
+        padding-left: 5px !important;
+    }
 }
 
 
