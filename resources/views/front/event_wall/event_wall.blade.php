@@ -1692,7 +1692,7 @@
                                     </div>
                                     <div class="about-section-text">
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita, impedit, a quibusdam similique reprehenderit fugit laudantium adipisci aperiam ipsam sequi dignissimos autem cumque consequatur dicta. Ullam, voluptatibus officia?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita,
                                         </p>
                                     </div>
 
