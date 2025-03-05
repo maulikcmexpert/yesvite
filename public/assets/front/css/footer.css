@@ -97,20 +97,22 @@ ul.footer-social-link {
     -o-transform: translateY(-5px);
 }
 
-.google-add .app-store .google-app,
-.google-add .app-store .mobile-app {
+.google-add .app-store .google-app, .google-add .app-store .mobile-app {
     width: 100% !important;
-    max-width: 135px !important;
-    height: 40px !important;
+    max-width: 180px !important;
+    height: 50px !important;
     object-fit: contain !important;
 }
 
 .google-add .app-store .google-app img,
 .google-add .app-store .mobile-app img{
-    width: 100% !important;
+    width: auto !important;
     max-width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     object-fit: contain !important;
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    display: block;
 }
 
 
