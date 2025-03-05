@@ -1375,7 +1375,7 @@ main.new-main-content {
 
 .GuestProfile-modal p#location {
     text-align: center;
-    color: var(--border);
+    color: var(--light-color);
 }
 
 .GuestProfile-modal .memberDate-Section {
