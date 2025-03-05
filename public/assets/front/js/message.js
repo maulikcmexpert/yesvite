@@ -1482,7 +1482,9 @@ $(".send-message").on("keypress", async function (e) {
     } else if (e.which === 13 && !e.shiftKey) {
         e.preventDefault();
     }
-    return await sendMessage();
+    if (e.which === 13) {
+        return await sendMessage();
+    }
 });
 $("#message-send").on("click", async function () {
     return await sendMessage(); // Call the same function on button click
@@ -3698,6 +3700,7 @@ async function stopRecording() {
         stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
+        $("#musicContainer").addClass("musicSample");
         setTimeout(() => {
             const newPlayer = document.querySelector("#audioContainer");
             newPlayer.classList.remove("initialized");
@@ -3724,6 +3727,7 @@ $(".close-audio-btn").on("click", function () {
     $(".file_info").val("");
 
     startButton.style.display = "inline-block";
+    $("#musicContainer").removeClass("musicSample");
 });
 
 $(".preview_img").hide();

@@ -1262,16 +1262,16 @@ main.new-main-content {
 
 /* ===== wall_profile Modal Section Start ===== */
 
-#wall_profile .modal-header {
+.GuestProfile-modal .modal-header {
     padding-bottom: 0;
     margin-bottom: 12px;
 }
 
-#wall_profile .modal-header h1 {
+.GuestProfile-modal .modal-header h1 {
     font-size: 16px;
 }
 
-#wall_profile .wallProfile-modal-left-side {
+.GuestProfile-modal .wallProfile-modal-left-side {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1290,36 +1290,40 @@ main.new-main-content {
     height: 28px;
 }
 
-#wall_profile .modal-content {
+.GuestProfile-modal .modal-content {
     padding: 20px 10px;
 }
 
-#wall_profile .modal-title {
+.GuestProfile-modal .modal-title {
     display: block;
     width: 100%;
     text-align: center;
 }
 
-#wall_profile .modal-content {
+.GuestProfile-modal .modal-content {
     max-width: 430px;
 }
 
-#wall_profile .modal-body {
-    padding-bottom: 0px;
+.GuestProfile-modal .modal-body {
+    padding-bottom: 0px !important  ;
 }
 
-#wall_profile .posts-card-head .posts-card-head-left {
+.GuestProfile-modal  .posts-card-head-left-content{
+    width: 100%;
+}
+
+.GuestProfile-modal .posts-card-head .posts-card-head-left {
     width: 100%;
     flex-direction: column;
     gap: 65px;
 }
 
-#wall_profile .modal-body .common-div-wrp {
+.GuestProfile-modal .modal-body .common-div-wrp {
     border: none;
     padding: 0;
 }
 
-#wall_profile .main-modal-background-img {
+.GuestProfile-modal .main-modal-background-img {
     width: 100%;
     position: relative;
     background: var(--border);
@@ -1329,18 +1333,18 @@ main.new-main-content {
     height: 170px;
 }
 
-#wall_profile .main-modal-background-img  i {
+.GuestProfile-modal .main-modal-background-img  i {
     font-size: 22px;
     color: gray;
 }
 
-#wall_profile .main-modal-background-img img {
+.GuestProfile-modal .main-modal-background-img img {
     width: 100%;
     max-height: 170px;
     object-fit: cover;
 }
 
-#wall_profile .main-modal-background-img .posts-card-head-left-img {
+.GuestProfile-modal .main-modal-background-img .posts-card-head-left-img {
     position: absolute;
     bottom: -20px;
     left: 50%;
@@ -1352,35 +1356,40 @@ main.new-main-content {
 
 
 
-#wall_profile h3#post_name {
+.GuestProfile-modal h3#post_name {
     text-decoration: none;
     font-size: 25px;
     margin-bottom: 12px;
 }
 
-#wall_profile .about-section-text {
+.GuestProfile-modal .about-section-text {
     text-align: center;
     max-width: 350px;
     margin: 12px 0;
 }
 
-#wall_profile .about-section-text p {
+.GuestProfile-modal .about-section-text p {
     color: var(--primary-black);
 }
 
 
-#wall_profile .memberDate-Section {
+.GuestProfile-modal p#location {
+    text-align: center;
+    color: var(--light-color);
+}
+
+.GuestProfile-modal .memberDate-Section {
     text-align: center;
 }
 
-#wall_profile .memberDate-Section span {
+.GuestProfile-modal .memberDate-Section span {
     background: no-repeat;
     margin: 0;
     text-align: center;
     padding: 0px;
 }
 
-#wall_profile .wall_profile-message-link {
+.GuestProfile-modal .wall_profile-message-link {
     display: block !important;
     text-align: center;
     margin-top: 8px;
@@ -1390,7 +1399,7 @@ main.new-main-content {
 
 
 
-#wall_profile .wall_profile-message-link svg {
+.GuestProfile-modal .wall_profile-message-link svg {
     width: 100%;
     max-width: 18px;
     min-width: 18px;
@@ -1398,7 +1407,7 @@ main.new-main-content {
     margin-right: 5px;
 }
 
-#wall_profile .wall_profile-message-link span {
+.GuestProfile-modal .wall_profile-message-link span {
     color: var(--primary-black);
     background: no-repeat;
     margin: 0;
@@ -1406,7 +1415,7 @@ main.new-main-content {
     padding: 0px;
 }
 
-#wall_profile .wall_profile-message-link svg path {
+.GuestProfile-modal .wall_profile-message-link svg path {
     stroke: var(--primary-black);
 }
 
