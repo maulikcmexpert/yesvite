@@ -427,7 +427,7 @@
                         
                         <div class="col-12 mb-3" style="border-bottom: 1px solid var(--borderColor)">
                             <div class="col-12 mb-4">
-                                <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
+                                <div class="d-flex align-items-center justify-content-between" >
                                     <h6 class="mb-0">Add Address</h6>
                                     <div class="toggle-button-cover ">
                                         <div class="button-cover">
