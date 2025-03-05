@@ -297,18 +297,13 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     } else {
                         $("#location").text("");
                     }
-                    if (showPhotos && profileData.total_photos > 0) {
-                        $("#photos").text(profileData.total_photos);
-                    } else {
-                        $("#photo_counts").remove(); // Removes the div from the DOM
-                    }
 
-                    if (profileData.comments > 0) {
+                        $("#photos").text(profileData.total_photos);
+
+
                         $("#comments").text(profileData.comments);
 
-                    } else {
-                        $("#comments_counts").remove(); // Removes the div from the DOM
-                    }
+
 
                     $("#events").text(profileData.total_events);
 
@@ -343,7 +338,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     let messageLink = $(".wall_profile-message-link");
                     let encrypted_id = profileData.encrypted_id;
                     if (encrypted_id) {
-                        let messageRoute = `/messages/${userId}`;
+                        let messageRoute = `/messages/${encrypted_id}`;
                         messageLink.attr("href", messageRoute);
                     }
                     // Handle Host and Co-Host labels
