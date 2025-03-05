@@ -3700,6 +3700,7 @@ async function stopRecording() {
         stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
+        $("#musicContainer").addClass("musicSample");
         setTimeout(() => {
             const newPlayer = document.querySelector("#audioContainer");
             newPlayer.classList.remove("initialized");
@@ -3726,6 +3727,7 @@ $(".close-audio-btn").on("click", function () {
     $(".file_info").val("");
 
     startButton.style.display = "inline-block";
+    $("#musicContainer").removeClass("musicSample");
 });
 
 $(".preview_img").hide();
