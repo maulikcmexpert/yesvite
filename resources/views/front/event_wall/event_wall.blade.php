@@ -1714,15 +1714,15 @@
                                     <div class="user-gallery">
                                         <div>
                                             <h4 id="events">0</p>
-                                            <label> Events</label>
+                                            <p> Events</p>
                                         </div>
                                         <div>
                                             <h4 id="photos">0</p>
-                                            <label> Photos</label>
+                                            <p> Photos</p>
                                         </div>
                                         <div>
                                             <h4 id="comments">0</p>
-                                            <label> Comments</label>
+                                            <p> Comments</p>
                                         </div>
                                     </div>
 
