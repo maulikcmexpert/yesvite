@@ -381,7 +381,7 @@
                             </div>
                             <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
-                        <div class="row pb-3" style="border-bottom: 1px solid var(--borderColor)">
+                        <div class="col-12 pb-3" style="border-bottom: 1px solid var(--borderColor)">
                             <div class="col-12 mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h6>RSVP By Date</h6>
@@ -415,15 +415,16 @@
                                 </div>
                                 <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
                             </div>
-                            <div class="col-12 mb-4">
-                                <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="description" name="description"
-                                        value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
-                                    <label for="description" class="form-label input-field floating-label">Event
-                                        Location Description</label>
-                                </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="input-form">
+                                <input type="text" class="form-control inputText" id="description" name="description"
+                                    value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
+                                <label for="description" class="form-label input-field floating-label">Event
+                                    Location Description</label>
                             </div>
                         </div>
+                        
 
                         <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
