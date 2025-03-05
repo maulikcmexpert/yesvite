@@ -30,7 +30,7 @@
             <input type="hidden" name="post_type" id="textPostType" value="0">
             @csrf
             <div class="create-post-textcontent">
-                <input type="text" class="form-control" rows="3" name="postContent" placeholder="What's on your mind?"
+                <input type="text" class="form-control" rows="2" name="postContent" placeholder="What's on your mind?"
                     id="postContent" maxlength="140" />
             </div>
         </form>
