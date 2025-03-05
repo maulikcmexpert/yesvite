@@ -1628,22 +1628,25 @@ $(document).on("click", ".openProfileModal", function () {
 
 
                 let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
+                let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
+                if (showLocation) {
+                    let locationText =" hi";
 
-                // if (showLocation) {
-                //     let locationText = [profileData.city, profileData.state, profileData.zip_code]
-                //         .filter(Boolean)
-                //         .join(", ");
-
-                //     $("#location").text(locationText );
-                // } else {
-                //     $("#location").text("Location not available");
-                // }
+                    $("#location").text(locationText);
+                } else {
+                    $("#location").text("");
+                }
+                if (showPhotos && profileData.total_photos > 0) {
+                    $("#photos").text(profileData.total_photos);
+                } else {
+                    $("#photo_counts").remove(); // Removes the div from the DOM
+                }
 
                 $("#comments").text(profileData.comments);
 
                 $("#events").text(profileData.total_events);
 
-                $("#photos").text(profileData.total_photos);
+
                 $("#member_since").text(profileData.created_at);
 
 
