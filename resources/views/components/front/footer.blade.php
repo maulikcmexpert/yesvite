@@ -106,6 +106,85 @@
     </div>
 </div>
 
+<div class="modal fade create-post-modal all-events-filtermodal" id="wall_profile" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Guest Profile</h1>
+                <div class="wallProfile-modal-left-side">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="event-posts-main-wrp common-div-wrp">
+                    <div class="posts-card-wrp">
+                        <div class="posts-card-head">
+                            <div class="posts-card-head-left">
+                                <div class="main-modal-background-img">
+                                    <img id="modal-background-img" src="https://images.unsplash.com/photo-1741070487520-907d1359cb95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"  alt="">
+                                    <i id="show_img" class="fa-regular fa-image"></i>
+                                    <div class="posts-card-head-left-img">
+                                        <img id="modal-profile-img"
+                                            src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                            alt="Profile Image" loading="lazy">
+                                        <h5 id="modal-initials" class="fontcolorT" style="display: none;"></h5>
+                                    </div>
+                                </div>
+                                <div class="posts-card-head-left-content">
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <h3 id="post_name">User Name</h3>
+
+                                    </div>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <p id="location">Location</p>
+                                    </div>
+                                    {{-- <div class="about-section-text">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita,
+                                        </p>
+                                    </div> --}}
+
+                                    <div class="memberDate-Section">
+                                        <span>Member Since: </span>
+                                        <span id="member_since"></span>
+                                    </div>
+
+                                    <a href="" class="wall_profile-message-link">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M7 8H17" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M7 13H13" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span>Message</span>
+                                    </a>
+
+
+                                    <div class="user-gallery">
+                                        <div>
+                                            <h4 id="events"></h4>
+                                            <p>Events</p>
+                                        </div>
+                                        <div id="photo_counts">
+                                            <h4 id="photos"></h4>
+                                            <p id="photo_count">Photos</p>
+                                        </div>
+                                        <div id="comments_counts">
+                                            <h4 id="comments"></h4>
+                                            <p>Comments</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--Buy-Credits-Modal -->
 {{-- @dd($prices) --}}
