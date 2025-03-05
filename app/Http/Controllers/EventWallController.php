@@ -3569,11 +3569,7 @@ class EventWallController extends BaseController
                     // 'created_at' => empty($user->created_at) ? "" :   date('F Y', strtotime($user->created_at)),
                     'total_events' => $totalEvent,
                     'total_draft_events' => $totalDraftEvent,
-                    'total_upcoming_events' => $this->upcomingEventCount,
-                    'pending_rsvp_count' =>  $this->pendingRsvpCount['total_need_rsvp_event_count'],
-                    'Pending_rsvp_event_id' => $this->pendingRsvpCount['PendingRsvpEventId'],
-                    'hosting_count' => $this->hostingCount,
-                    'invitedTo_count' => $this->invitedToCount,
+
                     'total_photos' => $totalEventPhotos,
                     'comments' => $postComments,
                     'gender' => empty($user->gender) ? "" : $user->gender,
