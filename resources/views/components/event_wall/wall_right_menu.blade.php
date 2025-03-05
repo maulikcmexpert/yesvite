@@ -340,7 +340,7 @@ if ($hostView) {
                         $event_time = $eventInfo['guest_view']['event_time'];
                         $current_date = date('Y-m-d');
                     @endphp
-                    @if ($event_date >= $current_date && strtotime($event_date . ' ' . $event_time) <= strtotime(date('Y-m-d g:i A')))
+                    @if ($event_date >= $current_date && strtotime($event_date . ' ' . $event_time) >= strtotime(date('Y-m-d g:i A')))
                         <button class="cmn-btn" type="button" id="allcontact"><i class="fa-solid fa-plus"></i> Add
                             Guest</button>
                     @endif
