@@ -1676,10 +1676,7 @@ $(document).on("click", ".openProfileModal", function () {
 
                 if (profileData.profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
-                    show_img_icon.addClass('d-none'); // Hide the icon
-                } else {
-                    background_img.hide(); // Hide the background image
-                    show_img_icon.removeClass('d-none'); // Show the icon
+                    background_img.removeClass('d-none'); // Hide the icon
                 }
 
                 // Handle Host and Co-Host labels
