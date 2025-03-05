@@ -99,7 +99,7 @@
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
                                                                     <h3>
-                                                                        <div class="photo-card-photos-main-img"
+                                                                        <div class="wall_popoup"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#wall_profile">
                                                                         {{ $post['username'] }}
