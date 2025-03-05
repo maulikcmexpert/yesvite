@@ -1659,7 +1659,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title" id="exampleModalLabel">Detail Photo</h1>
+                <h1 class="modal-title" id="exampleModalLabel">Guest Profile</h1>
                 <div class="wallProfile-modal-left-side">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -1671,7 +1671,7 @@
                             <div class="posts-card-head-left">
                                 <div class="main-modal-background-img">
                                     <img id="modal-background-img"src="https://images.unsplash.com/photo-1741070487520-907d1359cb95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"  alt="">
-                                    <i  class="fa-regular fa-image show_img"></i>
+                                    <i id="show_img" class="fa-regular fa-image"></i>
                                     <div class="posts-card-head-left-img">
                                         <img id="modal-profile-img"
                                             src="{{ asset('assets/front/img/header-profile-img.png') }}"
