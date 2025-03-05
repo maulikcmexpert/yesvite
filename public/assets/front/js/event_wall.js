@@ -1608,43 +1608,59 @@ $(document).ready(function () {
     });
 });
 $(document).on("click", ".openProfileModal", function () {
-    let username = $(this).data("username");
-    let userId = $(this).data("userid");
-    let profileImage = $(this).data("profile");
-    let location = $(this).data("location") || "";
-    let isHost = $(this).data("is-host");
-    let isCoHost = $(this).data("is-cohost");
+    let userId = $(this).data("userid"); // Get user_id from clicked element
 
-    // Set username
-    $("#post_name").text(username);
+    $.ajax({
+        url: base_url + "event_wall/myProfile",// Adjust this URL as per your route
+        type: "POST",
+        data: JSON.stringify({ user_id: userId }),
+        contentType: "application/json",
+        headers: {
+            Authorization: "Bearer YOUR_ACCESS_TOKEN",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            if (response.status === 1) {
+                let profileData = response.data;
 
-    // Set location
-    $("#location").text(location);
+                // Set username
+                $("#post_name").text(profileData.firstname + " " + profileData.lastname);
 
-    // Handle profile image or initials
-    let profileImgElement = $("#modal-profile-img");
-    let initialsElement = $("#modal-initials");
+                // Set location (if available)
+                $("#location").text(profileData.address || "Location not available");
 
-    if (profileImage && profileImage !== "") {
-        profileImgElement.attr("src", profileImage).show();
-        initialsElement.hide();
-    } else {
-        // Generate initials
-        let nameParts = username.split(" ");
-        let firstInitial = nameParts[0] ? nameParts[0][0].toUpperCase() : "";
-        let secondInitial = nameParts[1] ? nameParts[1][0].toUpperCase() : "";
-        let initials = firstInitial + secondInitial;
+                // Handle profile image or initials
+                let profileImgElement = $("#modal-profile-img");
+                let initialsElement = $("#modal-initials");
 
-        initialsElement.text(initials).show();
-        profileImgElement.hide();
-    }
+                if (profileData.profile && profileData.profile !== "") {
+                    profileImgElement.attr("src", profileData.profile).show();
+                    initialsElement.hide();
+                } else {
+                    let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
+                    let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
+                    initialsElement.text(firstInitial + secondInitial).show();
+                    profileImgElement.hide();
+                }
 
-    // Handle Host and Co-Host labels
-    let hostDisplay = $("#host_display").empty();
-    if (isHost === 1 || isHost === "1") {
-        hostDisplay.append('<span class="host">Host</span>');
-    }
-    if (isCoHost === 1 || isCoHost === "1") {
-        hostDisplay.append('<span class="host">Co Host</span>');
-    }
+                // Handle Host and Co-Host labels
+                let hostDisplay = $("#host_display").empty();
+                if ($(this).data("is-host") === 1) {
+                    hostDisplay.append('<span class="host">Host</span>');
+                }
+                if ($(this).data("is-cohost") === 1) {
+                    hostDisplay.append('<span class="host">Co Host</span>');
+                }
+
+                // Show the modal
+                $("#profileModal").modal("show");
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function () {
+            alert("Failed to fetch profile data.");
+        }
+    });
 });
+
