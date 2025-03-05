@@ -1629,15 +1629,15 @@ $(document).on("click", ".openProfileModal", function () {
 
                 let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
 
-                if (showLocation) {
-                    let locationText = [profileData.city, profileData.state, profileData.zip_code]
-                        .filter(Boolean)
-                        .join(", ");
+                // if (showLocation) {
+                //     let locationText = [profileData.city, profileData.state, profileData.zip_code]
+                //         .filter(Boolean)
+                //         .join(", ");
 
-                    $("#location").text(locationText );
-                } else {
-                    $("#location").text("Location not available");
-                }
+                //     $("#location").text(locationText );
+                // } else {
+                //     $("#location").text("Location not available");
+                // }
 
                 $("#comments").text(profileData.comments);
 

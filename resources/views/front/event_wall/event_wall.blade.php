@@ -1687,7 +1687,9 @@
                                         {{-- <h6 id="member_since"></h6> --}}
                                         {{-- <span id="host_display"></span> --}}
                                     </div>
-                                    <p id="location">Location</p>
+                                    <div class="d-flex justify-content-center gap-1">
+                                        <p id="location">Location</p>
+                                    </div>
                                     <label> Events</label>
                                     <p id="events">0</p>
                                     <label> Photos</label>
