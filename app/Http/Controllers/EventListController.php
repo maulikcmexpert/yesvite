@@ -1659,7 +1659,7 @@ class EventListController extends BaseController
                     if ($value->user->id == $user->id) {
                         $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
                     } else {
-                        $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
+                        $eventDetail['is_notification_on_off'] =  empty($isCoHost->notification_on_off)?"":$isCoHost->notification_on_off;
                     }
                     $eventDetail['host_firstname'] = $value->user->firstname;
                     $eventDetail['host_lastname'] = $value->user->lastname;
