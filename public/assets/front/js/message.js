@@ -3658,7 +3658,7 @@ async function startRecording() {
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
         // close.style.display = "none";
-
+        $("#musicContainer").addClass("musicSample");
         mediaRecorder.ondataavailable = (event) => {
             recordedChunks.push(event.data);
         };
@@ -3700,6 +3700,7 @@ async function stopRecording() {
         stream.getTracks().forEach((track) => track.stop());
         // Call playRecording() to initiate playback
         playRecording();
+        $("#musicContainer").removeClass("musicSample");
         setTimeout(() => {
             const newPlayer = document.querySelector("#audioContainer");
             newPlayer.classList.remove("initialized");
