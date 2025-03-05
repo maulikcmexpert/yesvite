@@ -320,7 +320,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/get_reaction_post_list', [EventWallController::class, 'get_reaction_post_list']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
 
-    Route::get('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
+    Route::post('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
 });
 
 
