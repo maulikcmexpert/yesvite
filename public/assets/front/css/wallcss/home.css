@@ -1347,7 +1347,7 @@ main.new-main-content {
 #wall_profile .about-section-text {
     text-align: center;
     max-width: 350px;
-    margin: 12px 0 20px;
+    margin: 12px 0 ;
 }
 
 #wall_profile .about-section-text p {
