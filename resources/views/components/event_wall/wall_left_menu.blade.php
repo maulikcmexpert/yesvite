@@ -79,9 +79,9 @@
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 @php
-                dd(strtotime($eventDetails['event_time']),strtotime(date('g:i A')));
+                // dd(strtotime($eventDetails['event_time']),strtotime(date('g:i A')));
                     $disable="";
-                    if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['event_time'])<=strtotime(date('g:i A'))){
+                    if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['end_date'] . ' ' . $eventDetails['event_time']) <= strtotime(date('Y-m-d g:i A'))){
                         $disable="disable-class";
                     }
                 @endphp

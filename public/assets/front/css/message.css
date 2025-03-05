@@ -1857,6 +1857,20 @@ ul.group-list .chat-data:has(.remove-member) .group-admin{
     padding-bottom: 20px !important;
 }
 
+.music-container .action-btn.action-btn-big{
+    width: 100%;
+    max-width: 30px;
+    height: 30px;
+    background: #334155;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    font-size: 14px;
+    line-height: normal;
+}
+
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */
