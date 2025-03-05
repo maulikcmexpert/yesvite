@@ -8,7 +8,7 @@ $(document).ready(function () {
     var busy1 = false;
     var busy1gl = false;
     var busy2=false;
-    var limit = 10;
+    var limit = 50;
     var offset = 0;
     var offsetlg = 0;
 
@@ -369,7 +369,7 @@ $(document).on("keyup", ".search_name", function () {
         // loadMoreData(page, search_name);
         if(search_name==''){
             offset=0;
-            limit=10;
+            limit=50;
             $("#yesviteUser").html("");
             loadMoreData(search_name,type=null,offset,limit);
 
@@ -404,7 +404,7 @@ $(document).on("input", ".search_phone", function () {
 
         if(search_phone==''){
             offset1=null;
-            limit=10;
+            limit=50;
             $("#yesvitePhones").html("");
             loadMorePhones(search_phone,type=null,offset1,limit);
 

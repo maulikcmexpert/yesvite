@@ -23,6 +23,9 @@ class ContactController extends Controller
      */
     public function index()
     {
+        session()->forget('yesvite_seen_emails');
+        session()->forget('yesvite_seen_phone_numbers');
+        
         $title = 'Contact';
         $page = 'front.contact';
         $js = ['contact'];
@@ -73,7 +76,7 @@ class ContactController extends Controller
                 ->where(['app_user' => '1'])
                 ->whereIn('email',$emails)
                 ->orderBy('firstname')
-                ->limit(10)
+                ->limit(50)
                 ->get();
 
             // dd($yesvite_users);
@@ -102,7 +105,7 @@ class ContactController extends Controller
 
 
      
-        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(10)
+        $getAllContacts = contact_sync::where('contact_id',$id)->whereNull('userId')->orderBy('firstName','asc')->limit(50)
             // ->when($type != 'group', function ($query) use ($request) {
             //     $query->where(function ($q) use ($request) {
             //         $q->limit($request->limit)
@@ -181,7 +184,7 @@ class ContactController extends Controller
                 ->limit($request->limit);
             })
             ->when(empty($request->search_name), function ($query) {
-                $query->limit(10);
+                $query->limit(50);
             })
             ->when(!empty($request->search_name), function ($query) use ($searchName) {
                 $query->where(function ($q) use ($searchName) {
@@ -318,7 +321,7 @@ class ContactController extends Controller
         }
         if(empty($searchPhone) && empty($request->offset)){
             // dd(1);
-            $query->limit(10);
+            $query->limit(50);
         }
         $getAllContacts = $query->get();
         $yesvite_phone = [];
@@ -846,6 +849,10 @@ class ContactController extends Controller
     public function create()
     {
         //
+    }
+    public function clear_contact_session(){
+        session()->forget('yesvite_seen_emails');
+        session()->forget('yesvite_seen_phone_numbers');
     }
 
     /**
