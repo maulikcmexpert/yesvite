@@ -23,6 +23,9 @@ class ContactController extends Controller
      */
     public function index()
     {
+        session()->forget('yesvite_seen_emails');
+        session()->forget('yesvite_seen_phone_numbers');
+        
         $title = 'Contact';
         $page = 'front.contact';
         $js = ['contact'];
