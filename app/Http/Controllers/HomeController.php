@@ -138,8 +138,9 @@ class HomeController extends BaseController
                     // 'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                 ];
             }
+            // dd(date('g:i A'));
 
-            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->where('start_time','>=',date('g:i A'))
+            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->where('rsvp_start_time','>=',date('g:i A'))
                 ->where('user_id', $user->id)
                 ->where('is_draft_save', '0');
             // ->orderBy('start_date', 'ASC')
@@ -150,7 +151,7 @@ class HomeController extends BaseController
             $invitedEventsList = Event::with(['event_image' => function ($query) {
                 $query->orderBy('type', 'ASC');
             }, 'user', 'event_settings', 'event_schedule'])
-                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))->where('start_time','>=',date('g:i A'))
+                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))->where('rsvp_start_time','>=',date('g:i A'))
                 ->where('is_draft_save', '0');
             // ->orderBy('start_date', 'ASC')
             // ->get();
