@@ -98,7 +98,10 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3>{{ $post['username'] }}
+                                                                    <h3>
+                                                                         <a href="javascript:void(0);" class="username-link" onclick="openPopup('{{ $post['username'] }}')">
+                                                                        {{ $post['username'] }}
+                                                                    </a>
                                                                         @if ($post['is_host'] == '1')
                                                                             <span class="host">Host</span>
                                                                         @endif
@@ -1642,3 +1645,10 @@
         );
     }
 </script>
+<div id="popup" class="popup-container" style="display: none;">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h3 id="popup-username"></h3>
+        <p>More details about this user...</p>
+    </div>
+</div>
