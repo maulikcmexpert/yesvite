@@ -300,6 +300,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_guest/right_bar_guest_list',  [EventGuestController::class, 'right_bar_guest_list']);
     Route::post('event_guest/update_guest/{id}', [EventGuestController::class, 'updateRsvp'])->name('event.update_guest');
     Route::get('event_wall/{id}',  [EventWallController::class, 'index'])->name('event.event_wall');
+
     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
     Route::post('event_wall/create_poll', [EventWallController::class, 'createPoll'])->name('event_wall.createPoll');
@@ -318,6 +319,8 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/wallFilters', [EventWallController::class, 'wallFilters']);
     Route::post('event_wall/get_reaction_post_list', [EventWallController::class, 'get_reaction_post_list']);
     Route::get('event_detail/{id}',  [EventDetailsController::class, 'index'])->name('event.event_detail');
+
+    Route::post('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
 });
 
 
