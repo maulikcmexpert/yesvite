@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{dd($eventDetails)}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -80,7 +80,7 @@
                 <!-- Slides -->
                 @php
                     $disable="";
-                    if($eventDetails['end_date']<= date('Y-m-d')){
+                    if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['event_time'])<=strtotime(date('g:i A'))){
                         $disable="disable-class";
                     }
                 @endphp
