@@ -1412,7 +1412,8 @@ class EventListController extends BaseController
         } else {
             $usercreatedAllPastEventList = Event::query();
             $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id]);
-            $usercreatedAllPastEventList->where('end_date', '<', date('Y-m-d'));
+            $usercreatedAllPastEventList->where('end_date', '<=', date('Y-m-d'));
+            $usercreatedAllPastEventList->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
             $usercreatedAllPastEventList->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
 
@@ -1423,7 +1424,9 @@ class EventListController extends BaseController
 
             $invitedPastEventsList = Event::query();
             $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0');
-            $invitedPastEventsList->where('end_date', '<', date('Y-m-d'));
+            $invitedPastEventsList->where('end_date', '<=', date('Y-m-d'));
+            $invitedPastEventsList->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
+
             $invitedPastEventsList->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
         }
