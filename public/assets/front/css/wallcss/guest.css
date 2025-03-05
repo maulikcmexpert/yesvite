@@ -148,6 +148,8 @@
     font-size: 16px;
     color: #020202;
     font-family: var(--SFProDisplay-Bold);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .guest-list-data .guest-email{
