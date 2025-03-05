@@ -1866,6 +1866,11 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     margin-left: 0px !important;
 }
 
+#message-send{
+    border: none !important;
+    background-color: transparent !important;
+}
+
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */
