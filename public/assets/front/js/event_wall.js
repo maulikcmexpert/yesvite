@@ -1672,13 +1672,13 @@ $(document).on("click", ".openProfileModal", function () {
                     profileImgElement.hide();
                 }
                 let background_img = $("#modal-background-img");
-               if ( profileData.profile !== "") {
+               if ( profileData.bg_profile !== "") {
                     background_img.attr("src", profileData.bg_profile).show();
-                    $("#show_img").removeClass('d-none');
+                    $("#show_img").addClass('d-none');
 
                 }else{
                     background_img.attr("src", profileData.bg_profile).hide();
-                    $("#show_img").addClass('d-none');
+                    $("#show_img").remove('d-none');
                 }
 
                 // Handle Host and Co-Host labels
