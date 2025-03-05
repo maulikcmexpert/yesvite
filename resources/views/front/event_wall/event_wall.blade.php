@@ -98,12 +98,12 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3>
-                                                                        <div class="wall_popoup"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#wall_profile">
+                                                                    <h3  data-bs-toggle="modal"
+                                                                    data-bs-target="#wall_profile">>
+
+
                                                                         {{ $post['username'] }}
-                                                                      </div>
+
                                                                         @if ($post['is_host'] == '1')
                                                                             <span class="host">Host</span>
                                                                         @endif
