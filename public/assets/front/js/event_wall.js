@@ -1611,7 +1611,7 @@ $(document).on("click", ".openProfileModal", function () {
     let username = $(this).data("username");
     let userId = $(this).data("userid");
     let profileImage = $(this).data("profile");
-    let location = $(this).data("location") || "Not specified";
+    let location = $(this).data("location") || "";
     let isHost = $(this).data("is-host");
     let isCoHost = $(this).data("is-cohost");
 
