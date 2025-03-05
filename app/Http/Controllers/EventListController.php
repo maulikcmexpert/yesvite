@@ -1161,7 +1161,7 @@ class EventListController extends BaseController
                 $query->where('app_user', '1');
             })->where('user_id', $user->id)->get()->pluck('event_id');
             $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
-                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')])
                 ->where('is_draft_save', '0')
                 ->where('event_name', 'LIKE', '%' . $eventName . '%');
         }
