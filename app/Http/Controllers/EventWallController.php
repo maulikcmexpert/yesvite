@@ -21,6 +21,8 @@ use App\Models\{
     EventUserStory,
     UserSeenStory,
     EventPostPoll,
+    UserNotificationType,
+    UserProfilePrivacy,
     EventPostPollOption,
     contact_sync,
     User,
