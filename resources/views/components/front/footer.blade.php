@@ -139,11 +139,11 @@
                                     <div class="d-flex justify-content-center gap-1">
                                         <p id="location">Location</p>
                                     </div>
-                                    <div class="about-section-text">
+                                    {{-- <div class="about-section-text">
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita,
                                         </p>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="memberDate-Section">
                                         <span>Member Since: </span>
