@@ -48,8 +48,9 @@ if(isset($selected_user) && !empty($selected_user)){
 
         </div>
         <div class="text-start">
-            <h5 class="openProfileModal"data-bs-toggle="modal"
-            data-bs-target="#wall_profile"
+            <h5 class="openProfileModal"
+            {{-- data-bs-toggle="modal" --}}
+            {{-- data-bs-target="#wall_profile" --}}
             data-userid="{{ $user->id }}">{{ $user->firstname }}
                 {{ $user->lastname }}
             </h5>
