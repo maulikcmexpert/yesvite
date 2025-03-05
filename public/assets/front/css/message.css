@@ -1608,14 +1608,14 @@ ul.chat-list li.setpink{
     color: #fff;
 }
 
-/* .audio-container {
-    position: absolute;
+.audio-container {
+    /* position: absolute;
     right: 15px;
-    top: 50%;
+    top: 50%; */
     display: flex;
     align-items: center;
-    transform: translateY(-50%);
-} */
+    /* transform: translateY(-50%); */
+}
 
 .audio-container .close-audio-btn {
     border: none;
