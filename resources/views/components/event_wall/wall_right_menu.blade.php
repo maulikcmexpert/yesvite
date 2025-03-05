@@ -494,7 +494,7 @@ if ($hostView) {
 </div>
 
 
-<div class="modal fade create-post-modal all-events-filtermodal" id="wall_profile" tabindex="-1"
+{{-- <div class="modal fade create-post-modal all-events-filtermodal" id="wall_profile" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -571,7 +571,7 @@ if ($hostView) {
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Get the "See All" button and the guest list container
