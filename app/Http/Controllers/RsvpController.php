@@ -661,6 +661,7 @@ class RsvpController extends BaseController
         $kids = (isset($request->kids) && $request->kids) ? (int)$request->kids : 0;
         $adults = (isset($request->adults) && $request->adults) ? (int)$request->adults : 0;
         // dd($kids,$adults);
+        $userType = '';
 
         try {
             $checkEvent = Event::where(['id' => $eventId])->first();
@@ -1106,7 +1107,7 @@ class RsvpController extends BaseController
             }
             DB::rollBack();
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             if($request->isShare==""){
                 return redirect('rsvp/' . $request->event_invited_user_id . '/' . $request->event_id)->with('msg_error', 'Something went wrong');
             }else{

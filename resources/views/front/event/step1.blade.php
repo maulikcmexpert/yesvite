@@ -382,7 +382,7 @@
                             <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
                         <div class="col-12 mb-4">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
                                 <h6>RSVP By Date</h6>
                                 <div class="toggle-button-cover ">
                                     <div class="button-cover">
@@ -423,7 +423,7 @@
                             </div>
                         </div>
                         <div class="col-12 mb-4">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between pb-3" style="border-bottom: 1px solid var(--borderColor)">
                                 <h6 class="mb-0">Add Address</h6>
                                 <div class="toggle-button-cover ">
                                     <div class="button-cover">
