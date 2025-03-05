@@ -1261,6 +1261,11 @@ main.new-main-content {
 
 /* ===== wall_profile Modal Section Start ===== */
 
+#wall_profile  .modal-header{
+    padding-bottom: 0;
+    margin-bottom: 12px;
+}
+
 #wall_profile .modal-content {
     padding: 20px 10px;
 }
@@ -1288,7 +1293,6 @@ main.new-main-content {
 
 #wall_profile .main-modal-background-img {
     width: 100%;
-    background: black;
     position: relative;
 }
 
