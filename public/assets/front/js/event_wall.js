@@ -1628,13 +1628,11 @@ $(document).on("click", ".openProfileModal", function () {
 
 
                 let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
-                let showPhotos = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
+                let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
                 if (showLocation) {
-                    let locationText = [profileData.city, profileData.state, profileData.zip_code]
-                        .filter(Boolean)
-                        .join(", ");
+                    let locationText =" hi";
 
-                    $("#location").text(locationText );
+                    $("#location").text(locationText);
                 } else {
                     $("#location").text("");
                 }
