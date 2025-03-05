@@ -99,7 +99,7 @@
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
                                                                     <h3  data-bs-toggle="modal"
-                                                                    data-bs-target="#wall_profile">>
+                                                                    data-bs-target="#wall_profile">
 
 
                                                                         {{ $post['username'] }}
