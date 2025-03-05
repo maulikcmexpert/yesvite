@@ -3210,6 +3210,13 @@
     max-height: calc(100vh - 200px) !important;
 }
 
+.event-center-tabs-main .home-upcoming-events-card-left-detail{
+    padding: 30px 30px 30px 10px !important;
+}
+.event-center-tabs-main .home-upcoming-events-card-rsvp-data {
+    padding-left: 15px !important;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
