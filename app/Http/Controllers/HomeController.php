@@ -138,6 +138,7 @@ class HomeController extends BaseController
                     // 'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                 ];
             }
+            dd(date('g:i A'));
 
             $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->where('rsvp_start_time','>=',date('g:i A'))
                 ->where('user_id', $user->id)
