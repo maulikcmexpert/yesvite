@@ -1282,6 +1282,7 @@ main.new-main-content {
     background:transparent;
     border: none;
     outline: none;
+    margin-right: 12px;
 }
 
 #wall_profile .modal-content {
@@ -1325,6 +1326,9 @@ main.new-main-content {
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 50px;
+    min-width: 50px;
+    height: 50px;
 }
 
 /* ===== wall_profile Modal Section End ===== */
