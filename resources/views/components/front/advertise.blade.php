@@ -11,7 +11,7 @@
             <img src="{{asset('assets/front/image/play_store.svg')}}" alt="google-app">
         </a>
         <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app"  target="_blank">
-            <img src="{{asset('assets/front/image/app_store.png')}}" alt="mobile-app">
+            <img src="{{asset('assets/front/image/app_store.svg')}}" alt="mobile-app">
         </a>
     </div>
     {{-- <a href="{{route('get_all_notification')}}">test</a> --}}
