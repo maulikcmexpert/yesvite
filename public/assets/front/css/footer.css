@@ -99,7 +99,9 @@ ul.footer-social-link {
 
 .google-add .app-store img{
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 135px !important;
+    height: 40px !important;
+    object-fit: contain !important;
 }
 
 .app-store .google-app,
