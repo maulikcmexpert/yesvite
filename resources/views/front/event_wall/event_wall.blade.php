@@ -1690,6 +1690,11 @@
                                     <div class="d-flex justify-content-center gap-1">
                                         <p id="location">Location</p>
                                     </div>
+                                    <div class="about-section-text">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita, impedit, a quibusdam similique reprehenderit fugit laudantium adipisci aperiam ipsam sequi dignissimos autem cumque consequatur dicta. Ullam, voluptatibus officia?
+                                        </p>
+                                    </div>
                                     <label> Events</label>
                                     <p id="events">0</p>
                                     <label> Photos</label>
