@@ -1673,9 +1673,9 @@ $(document).on("click", ".openProfileModal", function () {
                 }
                 let background_img = $("#modal-background-img");
                if ( profileData.profile !== "") {
-                    profileImgElement.attr("src", profileData.bg_profile).show();
+                    background_img.attr("src", profileData.bg_profile).show();
                 }else{
-                    profileImgElement.attr("src", profileData.bg_profile).hide();
+                    background_img.attr("src", profileData.bg_profile).hide();
                 }
 
                 // Handle Host and Co-Host labels

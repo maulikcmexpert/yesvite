@@ -509,7 +509,7 @@ if ($hostView) {
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="main-modal-background-img">
-                                    <img src="" class="display_img" alt="">
+                                    <img id="modal-background-img"src="https://images.unsplash.com/photo-1741070487520-907d1359cb95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"  alt="">
                                     <i class="fa-regular fa-image"></i>
                                     <div class="posts-card-head-left-img">
                                         <img id="modal-profile-img"
