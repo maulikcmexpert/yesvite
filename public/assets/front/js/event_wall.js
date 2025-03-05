@@ -1607,3 +1607,44 @@ $(document).ready(function () {
         console.log("Saved Settings:", { visibility, allowComments });
     });
 });
+$(document).on("click", ".openProfileModal", function () {
+    let username = $(this).data("username");
+    let userId = $(this).data("userid");
+    let profileImage = $(this).data("profile");
+    let location = $(this).data("location") || "Not specified";
+    let isHost = $(this).data("is-host");
+    let isCoHost = $(this).data("is-cohost");
+
+    // Set username
+    $("#post_name").text(username);
+
+    // Set location
+    $("#location").text(location);
+
+    // Handle profile image or initials
+    let profileImgElement = $("#modal-profile-img");
+    let initialsElement = $("#modal-initials");
+
+    if (profileImage && profileImage !== "") {
+        profileImgElement.attr("src", profileImage).show();
+        initialsElement.hide();
+    } else {
+        // Generate initials
+        let nameParts = username.split(" ");
+        let firstInitial = nameParts[0] ? nameParts[0][0].toUpperCase() : "";
+        let secondInitial = nameParts[1] ? nameParts[1][0].toUpperCase() : "";
+        let initials = firstInitial + secondInitial;
+
+        initialsElement.text(initials).show();
+        profileImgElement.hide();
+    }
+
+    // Handle Host and Co-Host labels
+    let hostDisplay = $("#host_display").empty();
+    if (isHost === 1 || isHost === "1") {
+        hostDisplay.append('<span class="host">Host</span>');
+    }
+    if (isCoHost === 1 || isCoHost === "1") {
+        hostDisplay.append('<span class="host">Co Host</span>');
+    }
+});

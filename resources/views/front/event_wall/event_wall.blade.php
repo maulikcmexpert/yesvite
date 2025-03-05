@@ -98,8 +98,15 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3  data-bs-toggle="modal"
-                                                                    data-bs-target="#wall_profile">
+                                                                    <h3 class="openProfileModal"   data-bs-toggle="modal"
+                                                                    data-bs-target="#wall_profile"
+                                                                    data-username="{{ $post['username'] }}"
+                                                                    data-userid="{{ $post['user_id'] }}"
+                                                                    data-location="{{ $post['location'] }}"
+                                                                      data-is-host="{{ $post['is_host'] }}"
+                                                                     data-is-cohost="{{ $post['is_co_host'] }}"
+                                                                    data-profile="{{ $post['profile'] != '' ? $post['profile'] : '' }}"
+                                                                    >
 
 
                                                                         {{ $post['username'] }}
@@ -1662,28 +1669,24 @@
                         <div class="posts-card-head">
                             <div class="posts-card-head-left">
                                 <div class="posts-card-head-left-img">
-                                    <img src="{{ asset('assets/front/img/header-profile-img.png') }}" alt=""
-                                        loading="lazy">
+                                    <img id="modal-profile-img" src="{{ asset('assets/front/img/header-profile-img.png') }}"
+                                        alt="Profile Image" loading="lazy">
+                                    <h5 id="modal-initials" class="fontcolor" style="display: none;"></h5>
                                     <span class="active-dot"></span>
                                 </div>
                                 <div class="posts-card-head-left-content">
                                     <div class="d-flex align-items-start gap-1">
-                                        <h3 id="post_name">Chance Curtis
-                                        </h3>
+                                        <h3 id="post_name">User Name</h3>
                                         <span id="host_display"></span>
                                     </div>
-                                    <p id="location">New York, NY</p>
+                                    <p id="location">Location</p>
                                 </div>
                             </div>
-
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
