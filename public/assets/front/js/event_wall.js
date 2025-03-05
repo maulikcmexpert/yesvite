@@ -1630,7 +1630,9 @@ $(document).on("click", ".openProfileModal", function () {
                 let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
                 let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
                 if (showLocation) {
-                    let locationText =" hi";
+                    let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
+                        .filter(Boolean)
+                        .join(", ");
 
                     $("#location").text(locationText);
                 } else {
@@ -1641,8 +1643,12 @@ $(document).on("click", ".openProfileModal", function () {
                 } else {
                     $("#photo_counts").remove(); // Removes the div from the DOM
                 }
+                if (profileData.comments > 0) {
+                    $("#comments").text(profileData.comments);
 
-                $("#comments").text(profileData.comments);
+                } else {
+                    $("#comments_counts").remove(); // Removes the div from the DOM
+                }
 
                 $("#events").text(profileData.total_events);
 
