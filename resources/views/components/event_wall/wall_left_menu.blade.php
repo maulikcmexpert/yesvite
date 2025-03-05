@@ -80,7 +80,7 @@
                 <!-- Slides -->
                 @php
                     $disable="";
-                    if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['rsvp_start_time'])<=strtotime(date('g:i A'))){
+                    if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['event_time'])<=strtotime(date('g:i A'))){
                         $disable="disable-class";
                     }
                 @endphp
