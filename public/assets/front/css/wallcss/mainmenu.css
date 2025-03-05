@@ -3263,6 +3263,9 @@
         width: 100%;
         max-width: 116px;
     }
+    .home-upcoming-events-card-right {
+        flex-basis: 55% !important;
+    }
 }
 
 @media only screen and (max-width: 1199px) {
@@ -3712,6 +3715,9 @@
     }
     .event-center-tabs-main .home-upcoming-events-card-rsvp-data {
         padding-left: 5px !important;
+    }
+    .home-upcoming-events-card-right {
+        flex-basis: 30% !important;
     }
 }
 
