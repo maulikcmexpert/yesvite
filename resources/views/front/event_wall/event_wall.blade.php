@@ -1059,7 +1059,7 @@
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
-                                <textarea class="form-control post_message" rows="3" name="postContent" placeholder="What's on your mind?"></textarea>
+                                <textarea class="form-control post_message" rows="2" name="postContent" placeholder="What's on your mind?"></textarea>
                             </div>
 
                             <div class="create-post-upload-img-wrp d-none">
