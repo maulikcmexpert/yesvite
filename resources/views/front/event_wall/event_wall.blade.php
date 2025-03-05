@@ -2,12 +2,12 @@
 <main class="new-main-content">
     <div class="container">
         <div class="row">
-            <div class="col-xl-3 col-lg-4">
+            <div class="col-xl-3 col-lg-4 event-info-left">
                 <!-- =============mainleft-====================== -->
 
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
             </div>
-            <div class="col-xl-6 col-lg-8">
+            <div class="col-xl-6 col-lg-8 event-info-center">
                 <div class="main-content-center">
                     <!-- ===event-breadcrumb-wrp-start=== -->
                     <div class="event-breadcrumb-wrp">
@@ -1007,7 +1007,7 @@
                     <!-- ===event-center-tabs-main-end=== -->
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-0">
+            <div class="col-xl-3 col-lg-0 event-info-right">
                 <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" />
             </div>
         </div>
@@ -1690,6 +1690,17 @@
                                     <div class="d-flex justify-content-center gap-1">
                                         <p id="location">Location</p>
                                     </div>
+                                    <div class="about-section-text">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint excepturi expedita, impedit, a quibusdam similique reprehenderit fugit laudantium adipisci aperiam ipsam sequi dignissimos autem cumque consequatur dicta. Ullam, voluptatibus officia?
+                                        </p>
+                                    </div>
+
+                                    <div class="memberDate-Section">
+                                        <span>Member Since:</span> &nbsp;
+                                        <span id="member_since"></span>
+                                    </div>
+
                                     <label> Events</label>
                                     <p id="events">0</p>
                                     <label> Photos</label>
