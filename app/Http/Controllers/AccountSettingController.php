@@ -78,7 +78,7 @@ class AccountSettingController extends BaseController
     {
         try {
             $user = Auth::guard('web')->user();
-            $user_data=User::find($user->id); 
+            $user_data=User::where('id',$user->id)->first(); 
             if ($request->setting == 'photo_via_wifi') {
                 $user_data->photo_via_wifi = $request->value;
                 if ($user_data->save()) {
