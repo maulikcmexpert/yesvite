@@ -870,7 +870,8 @@ class EventPhotoController extends BaseController
                 'total_media' => ($value->post_image_count > 1) ? "+" . ($value->post_image_count - 1) : "",
                 'reactionList' => $reactions,
                 'total_likes' => $value->event_post_reaction_count,
-                'total_comments' => $value->event_post_comment_count
+                'total_comments' => $value->event_post_comment_count,
+                'encrypted_id'=> encrypt( $value->user->id)
             ];
 
             if (!empty($value->post_image)) {

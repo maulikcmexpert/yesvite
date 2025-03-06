@@ -360,6 +360,17 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                         $("#private_profile").addClass('d-none');
 
                     }
+                    if ( profileData.id == profileData.login_user_id) {
+                        $(".wall_profile-message-link").addClass('d-none');
+
+
+                    }
+                    if ( profileData.id != profileData.login_user_id) {
+                        $(".wall_profile-message-link").removeClass('d-none');
+
+
+                    }
+
 
                     // Show the modal
                     $("#profileModal").modal("show");
