@@ -170,6 +170,11 @@
   z-index: 5;
 }
 
+
+.audio-music-player #audioContainer{
+  border-top: 1px solid #F1F5F9;
+}
+
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
   .audio-music-player #audioContainer {
       width: 100%;
@@ -320,15 +325,15 @@
 @media only screen and (min-width: 320px) and (max-width: 424px){
   .audio-music-player #audioContainer {
       width: 100%;
-      max-width: 385px;
-      min-width: 385px;
+      max-width: 320px;
+      min-width: 320px;
   }
   #audioContainer .progress-container svg {
-      max-width: 330px !important;
+      max-width: 140px !important;
   }
   #audioContainer .progress-container {
-      max-width: 190px !important;
-      min-width: 190px !important;
+      max-width: 140px !important;
+      min-width: 140px !important;
   }
   .grey-bar svg:nth-child(1){
       display: none;
@@ -338,6 +343,11 @@
   }
   #audioContainer .progress-container {
       height: 24px;
+      position: relative;
+      top: 2px;
+  }
+  .time-elapsed{
+      font-size: 12px;
   }
 }
 
