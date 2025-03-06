@@ -17,11 +17,11 @@
                 <div class="app-store d-flex justify-content-center gap-2">
                     <a href="{{ isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : '#' }}"
                         class="google-app">
-                        <img src="{{ asset('assets/front/image/google-app.png') }}" alt="google-app">
+                        <img src="{{ asset('assets/front/image/play_store.svg') }}" alt="google-app">
                     </a>
                     <a href="{{ isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link != null ? $getSocialLink->appstore_link : '#' }}"
                         class="mobile-app">
-                        <img src="{{ asset('assets/front/image/mobile-app.png') }}" alt="mobile-app">
+                        <img src="{{ asset('assets/front/image/app_store.svg') }}" alt="mobile-app">
                     </a>
                 </div>
             </div>
@@ -369,11 +369,11 @@
                             <div class="app-store d-flex gap-2">
                                 <a href="{{ isset($getSocialLink->playstore_link) && $getSocialLink->playstore_link != null ? $getSocialLink->playstore_link : '#' }}"
                                     class="google-app">
-                                    <img src="{{ asset('assets/front/image/google-app.png') }}" alt="google-app">
+                                    <img src="{{ asset('assets/front/image/play_store.svg') }}" alt="google-app">
                                 </a>
                                 <a href="{{ isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link != null ? $getSocialLink->appstore_link : '#' }}"
                                     class="mobile-app">
-                                    <img src="{{ asset('assets/front/image/mobile-app.png') }}" alt="mobile-app">
+                                    <img src="{{ asset('assets/front/image/app_store.svg') }}" alt="mobile-app">
                                 </a>
                             </div>
                         </div>
