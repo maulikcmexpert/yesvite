@@ -969,6 +969,15 @@
     .about-details .about-slider {
         display: block;
     }
+    .birth-details .detail-btn-wrp{
+        flex-direction: column;
+    }
+    .rsvp-calender-accordion{
+        width: 100%;
+    }
+    .birth-details .detail-btn-wrp .btn{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 424px) {
