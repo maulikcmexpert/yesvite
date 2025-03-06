@@ -900,8 +900,8 @@
     color: #fff;
     cursor: pointer;
     text-align: center;
-    font-family: var(--SFProDisplay-Semibold);
-    width: 100%;
+    font-family: var(--SFProDisplay-Semibold) !important;
+    width: 100% !important;
 }
 
 
