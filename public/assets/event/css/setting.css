@@ -1138,6 +1138,29 @@
     margin-bottom: 12px !important;
 }
 
+.step_4 .guest-checkout .final-checkout-guest-btn{
+    min-width: 140px;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 24px !important;
+    justify-content: center;  
+}
+
+.step_4 .guest-checkout .final-checkout-guest-btn h5{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+}
+
+.step_4 .cmn-btn.final_checkout{
+    background-color: #000 !important;
+    border: 1px solid #000 !important;
+    color: #fff !important;
+}
+
 /* ============ responsive ============ */
 
 @media only screen and (max-width: 1399px) {

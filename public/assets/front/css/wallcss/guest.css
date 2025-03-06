@@ -1465,6 +1465,16 @@ foreignObject{
 .failed_inivites_mob h6{
     color: #E03137 !important;
 }
+
+@media only screen and (min-width: 1400px) {
+    .guest-list-data .edit-btn, .guest-list-data .msg-btn {
+        max-width: 25px;
+        min-width: 25px;
+        height: 25px;
+    }
+}
+
+
 /* ======= responsive ====== */
 @media only screen and (max-width:575px){
     .attendence-data h4{

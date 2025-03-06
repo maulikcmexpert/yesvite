@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class AccountSettingController extends BaseController
 {
@@ -77,11 +78,10 @@ class AccountSettingController extends BaseController
     {
         try {
             $user = Auth::guard('web')->user();
-
+            $user_data=User::where('id',$user->id)->first(); 
             if ($request->setting == 'photo_via_wifi') {
-                $user->photo_via_wifi = $request->value;
-                if ($user->save()) {
-
+                $user_data->photo_via_wifi = $request->value;
+                if ($user_data->save()) {
                     return response()->json([
                         'status' => 1,
                         'message' => "Upload photos only via Wi-Fi changed",
@@ -91,9 +91,8 @@ class AccountSettingController extends BaseController
             }
 
             if ($request->setting == 'show_profile_photo_only_frds') {
-                $user->show_profile_photo_only_frds = $request->value;
-                if ($user->save()) {
-
+                $user_data->show_profile_photo_only_frds = $request->value;
+                if ($user_data->save()) {
                     return response()->json([
                         'status' => 1,
                         'message' => "Show profile photo only to friends changed",
@@ -105,7 +104,7 @@ class AccountSettingController extends BaseController
 
             if ($request->setting == 'visible') {
                 $user->visible = $request->value;
-                if ($user->save()) {
+                if ($user_data->save()) {
 
                     return response()->json([
                         'status' => 1,
@@ -115,6 +114,7 @@ class AccountSettingController extends BaseController
                 }
             }
         } catch (QueryException $e) {
+            dd($e);
             DB::Rollback();
 
             return response()->json(['status' => 0, 'message' => "db error"]);
