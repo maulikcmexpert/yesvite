@@ -41,7 +41,7 @@
                                 {{  $username }}
                             </h3>
                         @else
-                                <h3 class="openProfileModal" data-bs-toggle="modal"
+                                <h3 class="openProfileModal text-decoration-none" data-bs-toggle="modal"
                                 data-userid="{{  $guest['id'] }}"
                                 >
                                 {{  $username }}
