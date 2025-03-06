@@ -572,7 +572,7 @@
             </div>  
             @else        
             <div class="guest-checkout">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center final-checkout-guest-btn">
                     <span class="me-2"><svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.00022 12.2797L1.65355 7.93306C1.14022 7.41973 1.14022 6.57973 1.65355 6.06639L6.00022 1.71973" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>

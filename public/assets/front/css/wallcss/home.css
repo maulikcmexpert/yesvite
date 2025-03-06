@@ -87,6 +87,7 @@ main.new-main-content {
     width: 100%;
     /* height: 380px; */
     border-radius: 10px;
+    border: 1px solid var(--border);
 }
 
 .hosted-by-template-slider-img img {
@@ -523,7 +524,7 @@ main.new-main-content {
 .new-main-content input {
     background-color: transparent;
     border: 1px solid var(--border) !important;
-    height: 45px !important;
+    height: 45px ;
     border-radius: 16px !important;
     padding-left: 15px !important;
     font-family: var(--SFProDisplay-Regular);
@@ -1390,7 +1391,7 @@ main.new-main-content {
 }
 
 .GuestProfile-modal .wall_profile-message-link {
-    display: block !important;
+    display: block ;
     text-align: center;
     margin-top: 8px;
     margin-bottom: 20px;
@@ -1417,6 +1418,13 @@ main.new-main-content {
 
 .GuestProfile-modal .wall_profile-message-link svg path {
     stroke: var(--primary-black);
+}
+
+.GuestProfile-modal #private_profile{
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-family: var(--SFProDisplay-Semibold);
 }
 
 /* ===== wall_profile Modal Section End ===== */

@@ -148,7 +148,7 @@
 
 .birth-details .detail-btn-wrp {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 16px;
 }
@@ -174,7 +174,7 @@
 .birth-details .detail-btn-wrp .add-calender {
     border-radius: 8px;
     background-color: transparent !important;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border) !important;
     color: var(--secondary-black);
 }
 
@@ -787,8 +787,8 @@
 .detail-btn-wrp #openGoogle svg {
     width: 16px;
     height: 16px;
-    margin-left: 5px !important;
-    margin-right: 0px !important;
+    /* margin-left: 5px !important;
+    margin-right: 0px !important; */
 }
 
 .new_copy_event_Wrp{
@@ -835,6 +835,81 @@
     right: 5px;
     transform: translateY(-50%);    
 }
+.rsvp-calender-body-head h3{
+    color: var(--secondary-black);
+    transition: 0.5s;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+.rsvp-calender-body-head h3 svg{
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+.rsvp-calender-accordion .accordion-body{
+    border-radius: 20px !important;
+    background-color: var(--white);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp-calender-accordion .accordion-body .add-calender{
+    border: none !important;
+    box-shadow: none !important;
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px !important;
+    padding: 7px 10px !important;
+    width: 100%;
+}
+
+#openOutlook svg, #openApple svg{
+    width: 30px;
+    height: 30px;
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+}
+
+#openGoogle svg{
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+}
+
+.rsvp-calender-accordion{
+    width: 50%;
+
+}
+.rsvp-calender-accordion button{
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    display: block !important;
+    transition: 0.5s;
+    font-size: 15px !important;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--SFProDisplay-Semibold) !important;
+    width: 100% !important;
+}
+
+.rsvp-calender-accordion h2{
+    margin-bottom: 0px !important;
+}
+
+
 /* .potuck-main-wrp .apexcharts-inner {
     transform: translate(0, 0) !important;
 } */
@@ -893,6 +968,15 @@
 
     .about-details .about-slider {
         display: block;
+    }
+    .birth-details .detail-btn-wrp{
+        flex-direction: column;
+    }
+    .rsvp-calender-accordion{
+        width: 100%;
+    }
+    .birth-details .detail-btn-wrp .btn{
+        width: 100%;
     }
 }
 

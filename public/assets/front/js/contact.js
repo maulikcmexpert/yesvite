@@ -1075,11 +1075,17 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     var fileName = fileInput.files[0].name;
     var fileExtension = fileName.split('.').pop().toLowerCase();
 
-    if (fileExtension !== 'csv') {
+    // if (fileExtension !== 'csv') {
+    //     $('#home_loader').css('display', 'none');
+    //     toastr.error('Only CSV files are allowed.');
+    //     return;
+    // }
+    if (!['csv', 'xls', 'xlsx'].includes(fileExtension)) {
         $('#home_loader').css('display', 'none');
-        toastr.error('Only CSV files are allowed.');
+        toastr.error('Only CSV and Excel files are allowed.');
         return;
     }
+    
     $('<div id="pageOverlay"></div>').css({
         position: 'fixed',
         top: 0,
@@ -1130,20 +1136,40 @@ $(document).ready(function() {
         handleFileSelect(e.originalEvent); // Access original event for drop
     });
     function setFileInput(file) {
-        if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
-            $(".uploadcsv-wrp h3").text(file.name); // Show file name
-            $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+        // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+        //     $(".uploadcsv-wrp h3").text(file.name); // Show file name
+        //     $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
+        //     // Assign file to input field
+        //     let dataTransfer = new DataTransfer();
+        //     dataTransfer.items.add(file);
+        //     fileInput[0].files = dataTransfer.files;
+
+        //     console.log('CSV file selected:', file);
+        // } else {
+        //     toastr.error('Only CSV files are allowed.');
+        //     fileInput.val('');
+        // }
+        if (
+            file.type === 'text/csv' || 
+            file.name.endsWith('.csv') || 
+            file.name.endsWith('.xls') || 
+            file.name.endsWith('.xlsx')
+        ) {
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
+        
             // Assign file to input field
             let dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             fileInput[0].files = dataTransfer.files;
-
-            console.log('CSV file selected:', file);
+        
+            console.log('CSV or Excel file selected:', file);
         } else {
-            toastr.error('Only CSV files are allowed.');
+            toastr.error('Only CSV and Excel files are allowed.');
             fileInput.val('');
         }
+        
     }
     function handleFileSelect(e) {
         let files;
@@ -1155,7 +1181,13 @@ $(document).ready(function() {
 
         if (files.length > 0) {
             const file = files[0];
-            if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+            // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                if (
+                    file.type === 'text/csv' || 
+                    file.name.endsWith('.csv') || 
+                    file.name.endsWith('.xls') || 
+                    file.name.endsWith('.xlsx')
+                ) {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
@@ -1191,6 +1223,101 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     fileInput.replaceWith(fileInput.clone(true));
 });
 // $(document).ready(function() {
+    $(document).on("click", ".openProfileModal", function () {
+        let userId = $(this).attr("data-userid"); // Get user_id from clicked element
+        $.ajax({
+            url: base_url + "event_wall/myProfile",// Adjust this URL as per your route
+            type: "POST",
+            data: JSON.stringify({ user_id: userId }),
+            contentType: "application/json",
+            headers: {
+                Authorization: "Bearer YOUR_ACCESS_TOKEN",
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    let profileData = response.data;
+                    let profilePrivacy = profileData.profile_privacy || [];
+                    // Set username
+                    $("#post_name").text(profileData.firstname + " " + profileData.lastname);
+                    let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
+                    let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
+                    if (showLocation) {
+                        let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
+                            .filter(Boolean)
+                            .join(", ");
+    
+                        $("#location").text(locationText);
+                    } else {
+                        $("#location").text("");
+                    }
+                        $("#photos").text(profileData.total_photos);
+                        $("#comments").text(profileData.comments);
+                        $("#events").text(profileData.total_events);
+                        $("#member_since").text(profileData.created_at);
+                    // Handle profile image or initials
+                    let profileImgElement = $("#modal-profile-img");
+                    let initialsElement = $("#modal-initials");
+    
+                    if (profileData.profile && profileData.profile !== "") {
+                        profileImgElement.attr("src", profileData.profile).show();
+                        initialsElement.hide();
+                    } else {
+                        let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
+                        let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
+                        $("#modal-initials").removeClass().addClass("fontcolor"+profileData.firstname[0].toUpperCase());
+    
+                        initialsElement.text(firstInitial + secondInitial).show();
+                        profileImgElement.hide();
+                    }
+                    let background_img = $("#modal-background-img");
+                   if ( profileData.bg_profile != "") {
+                        background_img.attr("src", profileData.bg_profile).show();
+                        $("#show_img").addClass('d-none');
+    
+                    }else{
+                        background_img.attr("src",'');
+                        background_img.hide();
+                        $("#show_img").removeClass('d-none');
+                    }
+    
+                    let messageLink = $(".wall_profile-message-link");
+                    let encrypted_id = profileData.encrypted_id;
+                    if (encrypted_id) {
+                        let messageRoute = `/messages/${encrypted_id}`;
+                        messageLink.attr("href", messageRoute);
+                    }
+                    // Handle Host and Co-Host labels
+                    let hostDisplay = $("#host_display").empty();
+                    if ($(this).data("is-host") === 1) {
+                        hostDisplay.append('<span class="host">Host</span>');
+                    }
+                    if ($(this).data("is-cohost") === 1) {
+                        hostDisplay.append('<span class="host">Co Host</span>');
+                    }
+    
+                    // Show the modal
+                    $("#profileModal").modal("show");
+                    // $("#wall_profile").modal("show");
+    
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function () {
+                // alert("Failed to fetch profile data.");
+            }
+        });
+    });
+    function generateProfileImage(firstname, lastname) {
+        firstname = firstname ? String(firstname).trim() : "";
+        lastname = lastname ? String(lastname).trim() : "";
+        const firstInitial = firstname[0] ? firstname[0].toUpperCase() : "";
+        const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
+        const initials = `${firstInitial}${secondInitial}`;
+        const fontColor = `fontcolor${firstInitial}`;
+        return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"}</h5>`;
+    }
 //     let dropArea = $(".uploadcsv-wrp");
 //     let fileInput = $("#csv_file");
 

@@ -3590,7 +3590,8 @@ class EventWallController extends BaseController
                     'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
                     'is_message_notification' => (isset($checkNotificationSetting->push) && $checkNotificationSetting->push != "") ? $checkNotificationSetting->push : "",
-                    'encrypted_id'=>encrypt($userId)
+                    'encrypted_id'=>encrypt($userId),
+                    'login_user_id'=>$loginuser->id
                 ];
 
 

@@ -9917,6 +9917,8 @@ $(document).on("click", ".openProfileModal", function () {
                 } else {
                     let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
                     let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
+                    $("#modal-initials").removeClass().addClass("fontcolor"+profileData.firstname[0].toUpperCase());
+
                     initialsElement.text(firstInitial + secondInitial).show();
                     profileImgElement.hide();
                 }
@@ -9948,6 +9950,8 @@ $(document).on("click", ".openProfileModal", function () {
 
                 // Show the modal
                 $("#profileModal").modal("show");
+                // $("#wall_profile").modal("show");
+
             } else {
                 alert(response.message);
             }
@@ -9957,3 +9961,12 @@ $(document).on("click", ".openProfileModal", function () {
         }
     });
 });
+function generateProfileImage(firstname, lastname) {
+    firstname = firstname ? String(firstname).trim() : "";
+    lastname = lastname ? String(lastname).trim() : "";
+    const firstInitial = firstname[0] ? firstname[0].toUpperCase() : "";
+    const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
+    const initials = `${firstInitial}${secondInitial}`;
+    const fontColor = `fontcolor${firstInitial}`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"}</h5>`;
+}

@@ -104,7 +104,7 @@
                                                 <h5 class="totalKids">
                                                     {{ $totalKids }} <span>{{ $totalKids == 1 ? 'Kid' : 'Kids' }}</span>
                                                 </h5>
-                                                
+
                                             </div>
                                         </div>
 
@@ -302,9 +302,25 @@
 
                                                                 </a>
                                                                 <div class="d-flex flex-column">
-                                                                    <a href="#"
-                                                                        class="guest-name">{{ $guest['first_name'] }}
-                                                                        {{ $guest['last_name'] }}</a>
+
+                                                                    @php
+                                                                    $username = $guest['first_name'] . ' ' . $guest['last_name'];
+                                                                @endphp
+
+                                                                    @if ($guest['is_sync'] == '0')
+                                                                        <h3 class="openProfileModal guest-name" data-bs-toggle="modal"
+                                                                        data-bs-target="#wall_profile"
+                                                                        data-userid="{{  $guest['id'] }}"
+                                                                        >
+                                                                        {{  $username }}
+                                                                    </h3>
+                                                                   @else
+                                                                    <h3 class="openProfileModal guest-name text-decoration-none" data-bs-toggle="modal"
+                                                                    data-userid="{{  $guest['id'] }}"
+                                                                    >
+                                                                    {{  $username }}
+                                                                </h3>
+                                                                  @endif
 
                                                                      @if($guest['prefer_by']=="email")
                                                                          <span class="guest-email">{{ $guest['email'] }}</span>
@@ -312,7 +328,7 @@
                                                                         <span class="guest-email">{{ $guest['phone_number'] }}</span>
                                                                     @endif
 
-                                                                     
+
                                                                 </div>
                                                                 <div class="d-flex align-items-center ms-auto">
                                                                     @php
@@ -323,7 +339,7 @@
                                                                         // dd($login_user_id);
                                                                     @endphp
                                                                     @if($guest['is_sync']=="1")
-                                                                   
+
                                                                     @else
                                                                     <button
                                                                         class="edit-btn {{ $isDisabled }} edit_guest_rsvp"
@@ -374,7 +390,7 @@
                                                                             </a>
                                                                         @endif
                                                                     @endif
-                                                                  
+
                                                                 </div>
                                                             </div>
                                                             <div class="sucess-rsvp-wrp">
@@ -409,7 +425,7 @@
                                                             </div>
                                                             <div class="check_status">
                                                                 @if($guest['is_sync']=="0")
-                                                                    
+
                                                                 @if ($guest['rsvp_status'] == '1')
                                                                         <div class="sucess-yes"
                                                                             data-guest-id="{{ $guest['guest_id'] }}"   data-is_sync="{{ $guest['is_sync'] }}">
@@ -1685,7 +1701,7 @@
                                     <a href="#" class="invite-user-name">{{ $invite['first_name'] }} {{ $invite['last_name'] }}</a>
                                     <div class="ms-auto">
                                     <!-- data-bs-toggle="modal" data-bs-target="#editguest" -->
-                                        <button class="edit-btn failed_contact_edit" 
+                                        <button class="edit-btn failed_contact_edit"
                                         data-id="{{ $invite['id'] }}"
                                         data-first_name="{{ $invite['first_name'] }}"
                                         data-last_name="{{ $invite['last_name'] }}"
@@ -1765,7 +1781,7 @@
                                         </button>
                                     </div>
                                     @else
-                                    
+
                                         @endif
                                 </div>
                                 @endif

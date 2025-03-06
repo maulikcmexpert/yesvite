@@ -60,6 +60,7 @@ $(document).ready(function () {
 
     $(".show-comments-btn").click(function () {
         $(".posts-card-show-all-comments-wrp").toggleClass("d-none");
+        $("#detail-photo-modal .modal-content").toggleClass("active")
     });
     $(".show-comment-reply-btn").click(function () {
         $(".reply-on-comment").toggleClass("d-none");
@@ -518,7 +519,18 @@ $(document).ready(function () {
             },
         });
     });
-    $(document).on("click", ".comment-send-icon", function () {
+    $(document).on("click", ".comment-send-icon", function (e) {
+        sendComment.call(this); // Ensure `this` refers to the clicked button
+    })
+    $(document).on("keypress", "#post_comment", function (e) {
+        if (e.which === 13) { // 13 is the key code for Enter
+            e.preventDefault(); // Prevents newline in the input field
+            $(this).next(".comment-send-icon").click(); // Trigger click on send button
+        }
+    });
+
+function sendComment(){
+
         const commentInput = $("#post_comment");
         const commentText = commentInput.val().trim();
         const commentId = $("#parent_comment_id").val();
@@ -782,8 +794,8 @@ $(document).ready(function () {
                 alert("An error occurred. Please try again.");
             },
         });
-    });
 
+}
     // $(document).on("click", ".posts-card-like-btn", function () {
     //     const icon = this.querySelector("i");
     //     icon.classList.toggle("fa-regular");
@@ -1120,7 +1132,23 @@ $(document).ready(function () {
                     if (data.user_id == login_user_id) {
                         $("#report_btn").hide();
                     }
+                    let messageLink = $(".message-link");
+                    let encrypted_id = data.encrypted_id;
+                    if (encrypted_id) {
+                        let messageRoute = `/messages/${encrypted_id}`;
+                        messageLink.attr("href", messageRoute);
+                    }
 
+                    if (data.user_id == login_user_id) {
+                        $(".message-link").addClass('d-none');
+
+
+                    }
+                    if (data.user_id != login_user_id) {
+                        $(".message-link").removeClass('d-none');
+
+
+                    }
                     $(".likeModel")
                         .data("event-id", data.event_id)
                         .data("event-post-id", data.id);
