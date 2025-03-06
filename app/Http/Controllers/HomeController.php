@@ -475,7 +475,7 @@ class HomeController extends BaseController
                 $importExcelService->importExcel(storage_path('app/' . $filePath));
             }
     
-            return redirect('profile.contact')->with('msg', 'Contacts imported successfully.');
+            return redirect('contact')->with('msg', 'Contacts imported successfully.');
         }
     }
 
