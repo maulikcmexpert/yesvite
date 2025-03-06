@@ -351,11 +351,11 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     }
 
                     if ( profileData.visible == "2") {
-                        $("#posts-card-head-left").addClass('d-none');
+                        $(".posts-card-head-left").addClass('d-none');
                         $("#private_profile").removeClass('d-none');
 
                     }else{
-                        $("#posts-card-head-left").removeClass('d-none');
+                        $(".posts-card-head-left").removeClass('d-none');
                         $("#private_profile").addClass('d-none');
                     }
 
