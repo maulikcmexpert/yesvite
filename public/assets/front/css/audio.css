@@ -275,15 +275,15 @@
 @media only screen and (min-width: 576px) and (max-width: 767px){
   .audio-music-player #audioContainer {
       width: 100%;
-      max-width: 680px;
-      min-width: 680px;
+      max-width: 510px;
+      min-width: 510px;
   }
   #audioContainer .progress-container svg {
-      max-width: 490px !important;
+      max-width: 430px !important;
   }
   #audioContainer .progress-container {
-      max-width: 490px !important;
-      min-width: 490px !important;
+      max-width: 430px !important;
+      min-width: 430px !important;
   }
 }
 
