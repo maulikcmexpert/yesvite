@@ -119,7 +119,36 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
+            ->addColumn('account_status', function ($row) {
+                // Determine button text and dropdown action based on account status
+                $buttonText = $row->account_status == 'Block' ? 'Inactivate' : 'Active';
+                $dropdownText = $row->account_status == 'Block' ? 'Active' : 'Inactivate';
+                // Set the action class for toggling
+                $actionClass = $row->account_status == 'Block' ? 'unblock-user' : 'block-user';
 
+                return '
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ' . $buttonText . '
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->id . '">
+                                ' . $dropdownText . '
+                            </a>
+                        </div>
+                    </div>
+                ';
+            })
+            ->addColumn('delete', function ($row) {
+
+                $cryptId = encrypt($row->id);
+                $view_url = route('user_post_report.show', $cryptId);
+
+                $actionBtn = '<div class="action-icon">
+                    <a class="" href="#" title="View"><i class="fa-solid fa-trash"></i></a>';
+
+                return $actionBtn;
+            })
             ->addColumn('action', function ($row) {
 
                 $cryptId = encrypt($row->id);
@@ -131,7 +160,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type', 'action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','account_status','delete','action']);
     }
 
     /**
@@ -209,6 +238,8 @@ class UserPostReportDataTable extends DataTable
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
+            Column::make('account_status')->title("Account Status")->orderable(false),
+            Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
     }
