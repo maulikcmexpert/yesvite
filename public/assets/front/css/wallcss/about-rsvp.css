@@ -148,7 +148,7 @@
 
 .birth-details .detail-btn-wrp {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 16px;
 }
@@ -787,8 +787,8 @@
 .detail-btn-wrp #openGoogle svg {
     width: 16px;
     height: 16px;
-    margin-left: 5px !important;
-    margin-right: 0px !important;
+    /* margin-left: 5px !important;
+    margin-right: 0px !important; */
 }
 
 .new_copy_event_Wrp{
@@ -871,6 +871,7 @@
     justify-content: center;
     margin: 0px !important;
     padding: 7px 10px !important;
+    width: 100%;
 }
 
 #openOutlook svg, #openApple svg{
@@ -881,11 +882,33 @@
 }
 
 #openGoogle svg{
-    width: 30px;
-    height: 30px;
+    width: 30px !important;
+    height: 30px !important;
     margin-left: 0px !important;
     margin-right: 10px !important;
 }
+
+.rsvp-calender-accordion{
+    width: 50%;
+
+}
+.rsvp-calender-accordion button{
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    display: block !important;
+    transition: 0.5s;
+    font-size: 15px !important;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--SFProDisplay-Semibold) !important;
+    width: 100% !important;
+}
+
+.rsvp-calender-accordion h2{
+    margin-bottom: 0px !important;
+}
+
 
 /* .potuck-main-wrp .apexcharts-inner {
     transform: translate(0, 0) !important;
