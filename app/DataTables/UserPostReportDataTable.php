@@ -139,6 +139,16 @@ class UserPostReportDataTable extends DataTable
                     </div>
                 ';
             })
+            ->addColumn('delete', function ($row) {
+
+                $cryptId = encrypt($row->id);
+                $view_url = route('user_post_report.show', $cryptId);
+
+                $actionBtn = '<div class="action-icon">
+                    <a class="" href="#" title="View"><i class="fa-solid fa-trash"></i></a>';
+
+                return $actionBtn;
+            })
             ->addColumn('action', function ($row) {
 
                 $cryptId = encrypt($row->id);
