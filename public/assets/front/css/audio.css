@@ -279,21 +279,33 @@
       min-width: 510px;
   }
   #audioContainer .progress-container svg {
-      max-width: 430px !important;
+      max-width: 330px !important;
   }
   #audioContainer .progress-container {
-      max-width: 430px !important;
-      min-width: 430px !important;
+      max-width: 330px !important;
+      min-width: 330px !important;
   }
-  .grey-bar svg path, .pink-bar svg path{
-    stroke-width: 1px !important;
-}
 }
 
 @media only screen and (max-width:575px){
   #audioContainer .progress-container svg {
     max-width: 270px !important;
 }
+}
+
+@media only screen and (min-width: 424px) and (max-width: 575px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 510px;
+      min-width: 510px;
+  }
+  #audioContainer .progress-container svg {
+      max-width: 330px !important;
+  }
+  #audioContainer .progress-container {
+      max-width: 330px !important;
+      min-width: 330px !important;
+  }
 }
 
 @media only screen and (max-width:390px){
