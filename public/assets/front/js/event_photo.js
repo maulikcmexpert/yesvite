@@ -1138,6 +1138,17 @@ function sendComment(){
                         let messageRoute = `/messages/${encrypted_id}`;
                         messageLink.attr("href", messageRoute);
                     }
+
+                    if (data.user_id == login_user_id) {
+                        $(".message-link").addClass('d-none');
+
+
+                    }
+                    if ( data.user_id != login_user_id) {
+                        $(".message-link").removeClass('d-none');
+
+
+                    }
                     $(".likeModel")
                         .data("event-id", data.event_id)
                         .data("event-post-id", data.id);
