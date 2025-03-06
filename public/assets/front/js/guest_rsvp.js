@@ -351,12 +351,14 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     }
 
                     if ( profileData.visible == "2") {
-                        $(".posts-card-head-left").addClass('d-none');
+                        $("#public_profile").addClass('d-none');
                         $("#private_profile").removeClass('d-none');
 
-                    }else{
-                        $(".posts-card-head-left").removeClass('d-none');
+                    }
+                    if ( profileData.visible != "2") {
+                        $("#public_profile").removeClass('d-none');
                         $("#private_profile").addClass('d-none');
+
                     }
 
                     // Show the modal
