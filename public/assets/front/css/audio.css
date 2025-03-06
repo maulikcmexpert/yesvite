@@ -306,6 +306,13 @@
       max-width: 330px !important;
       min-width: 330px !important;
   }
+
+  .grey-bar:nth-child(1) svg{
+    display: none;
+}
+.pink-bar:nth-child(1) svg{
+    display: none;
+}
 }
 
 @media only screen and (max-width:390px){
