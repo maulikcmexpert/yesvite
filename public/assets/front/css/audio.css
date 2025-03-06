@@ -170,6 +170,14 @@
   z-index: 5;
 }
 
+@media only screen and (min-width: 1800px) and (max-width: 1999px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 78%;
+      min-width: 78%;
+  }
+}
+
 @media only screen and (max-width:1399px){
   #audioContainer .progress-container svg {
     max-width: 615px !important;
