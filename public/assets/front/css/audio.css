@@ -229,6 +229,22 @@
 }
 }
 
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 730px;
+      min-width: 730px;
+  }
+  #audioContainer .progress-container svg {
+      max-width: 540px !important;
+  }
+  #audioContainer .progress-container{
+      max-width: 540px !important;
+      min-width: 540px !important;
+  }
+}
+
 @media only screen and (max-width:991px){
   #audioContainer .progress-container svg {
     max-width: 256px !important;
