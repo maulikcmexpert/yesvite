@@ -272,6 +272,21 @@
 }
 }
 
+@media only screen and (min-width: 576px) and (max-width: 767px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 680px;
+      min-width: 680px;
+  }
+  #audioContainer .progress-container svg {
+      max-width: 490px !important;
+  }
+  #audioContainer .progress-container {
+      max-width: 490px !important;
+      min-width: 490px !important;
+  }
+}
+
 @media only screen and (max-width:575px){
   #audioContainer .progress-container svg {
     max-width: 270px !important;
