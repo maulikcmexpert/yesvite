@@ -121,8 +121,8 @@ class UserPostReportDataTable extends DataTable
             })
             ->addColumn('account_status', function ($row) {
                 // Determine button text and dropdown action based on account status
-                $buttonText = $row->account_status == 'Block' ? 'Reactivate' : 'Active';
-                $dropdownText = $row->account_status == 'Block' ? 'Active' : 'Reactivate';
+                $buttonText = $row->account_status == 'Block' ? 'Inactivate' : 'Active';
+                $dropdownText = $row->account_status == 'Block' ? 'Active' : 'Inactivate';
                 // Set the action class for toggling
                 $actionClass = $row->account_status == 'Block' ? 'unblock-user' : 'block-user';
 
