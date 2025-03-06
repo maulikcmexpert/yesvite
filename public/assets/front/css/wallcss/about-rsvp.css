@@ -887,6 +887,24 @@
     margin-right: 10px !important;
 }
 
+.rsvp-calender-accordion{
+    width: 50%;
+
+}
+.rsvp-calender-accordion button{
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    display: inline-block;
+    transition: 0.5s;
+    font-size: 15px !important;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--SFProDisplay-Semibold);
+}
+
+
+
 /* .potuck-main-wrp .apexcharts-inner {
     transform: translate(0, 0) !important;
 } */
