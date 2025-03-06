@@ -219,12 +219,12 @@ ul.footer-social-link {
     gap: 16px;
 }
 
-footer.app-store .google-app, footer.app-store .mobile-app{
-    max-width: 162px;
-    height: 48px;
+footer .app-store .google-app, footer .app-store .mobile-app{
+    max-width: 162px !important;
+    height: 48px !important;
 }
 
-footer.app-store .google-app img, footer.app-store .mobile-app img{
+footer .app-store .google-app img, footer .app-store .mobile-app img{
     object-fit: contain;
 }
 
