@@ -22,6 +22,7 @@ class CSVImportService
 
         $updatedContacts=[];
         $newContacts=[];
+        dd($header,$file);
         while (($row = fgetcsv($file)) !== false) {
 
             $data = array_combine($header, $row);
