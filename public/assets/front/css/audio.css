@@ -127,7 +127,8 @@
 }
 
 #audioContainer .wrapper{
-  width: 68%;
+  width: 100%;
+    max-width: 68%;
 }
 
 #audioContainer .progress-container{
