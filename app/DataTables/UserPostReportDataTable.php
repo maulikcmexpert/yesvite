@@ -62,7 +62,9 @@ class UserPostReportDataTable extends DataTable
                             $q->where('event_name', 'LIKE', "%{$keyword}%");
                         });
 
-                        
+                        $q->whereHas('users', function ($q) use ($keyword) {
+                            $q->where('email', 'LIKE', "%{$keyword}%");
+                        });
                         $q->orWhere('report_type', 'LIKE', "%{$keyword}%")
                         ->orWhere('report_description', 'LIKE', "%{$keyword}%");
                     });
@@ -145,14 +147,18 @@ class UserPostReportDataTable extends DataTable
                     $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_to_posts.user_id');
                 }
+                if ($request->order[0]['column'] == '2') {
+                    $column = User::select('email')
+                    ->whereColumn('users.id', 'user_report_to_posts.user_id');
+                }
 
-                if ($request->order[0]['column'] == '4') {
+                if ($request->order[0]['column'] == '5') {
                     $column = Event::select('event_name')
                     ->whereColumn('events.id', 'user_report_to_posts.event_id');
     
                 }
 
-                if ($request->order[0]['column'] == '2') {
+                if ($request->order[0]['column'] == '3') {
                     $column = 'report_type';
                 }
             }
