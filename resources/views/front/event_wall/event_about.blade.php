@@ -348,6 +348,12 @@
                                                                     stroke-linejoin="round" />
                                                             </svg>
                                                         </a> --}}
+                                                        <input type="hidden" id="eventDate" name="eventDate" value="{{$eventDetails['event_date']}}">
+                                                        <input type="hidden" id="eventEndDate" name="eventDate" value="{{(isset($eventDetails['end_date']) && $eventDetails['end_date']!="")?$eventDetails['end_date']:''}}">
+                                                        <input type="hidden" id="eventTime" name="eventTime" value="{{ $eventDetails['event_time'] }}">
+                                                        <input type="hidden" id="eventName" name="eventName" value="{{$eventDetails['event_name']}}">
+                                                        <input type="hidden" id="eventEndTime" name="eventEndTime" value="{{(isset($eventInfo['end_date']) && $eventInfo['end_date']!=""?$eventInfo['end_date']:'' )}}">
+
                                                         <div class="accordion rsvp-calender-accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                               <h2 class="accordion-header" id="headingOne">
