@@ -1085,7 +1085,6 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         toastr.error('Only CSV and Excel files are allowed.');
         return;
     }
-    toastr.success('done');
     
     $('<div id="pageOverlay"></div>').css({
         position: 'fixed',
