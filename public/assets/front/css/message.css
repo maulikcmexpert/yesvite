@@ -1871,6 +1871,11 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     background-color: transparent !important;
 }
 
+.chatbox{
+    display: flex;
+    flex-direction: column;
+}
+
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */
