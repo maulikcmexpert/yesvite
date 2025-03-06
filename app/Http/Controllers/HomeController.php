@@ -140,7 +140,14 @@ class HomeController extends BaseController
             }
             // dd(date('Y-m-d H:i:s'));
 
-            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d')) // Compare times properly
+            $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
+            ->where(function ($query) {
+                $query->where('start_date', '>', date('Y-m-d')) // Past events
+                    ->orWhere(function ($q) {
+                        $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+            })
+            // ->where('start_date', '>=', date('Y-m-d')) // Compare times properly
             // ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')])
             // $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))->where('rsvp_start_time', '>=', date('h:i A')) // Compare in the same 12-hour format
             // Compare times properly
@@ -155,7 +162,14 @@ class HomeController extends BaseController
             $invitedEventsList = Event::with(['event_image' => function ($query) {
                 $query->orderBy('type', 'ASC');
             }, 'user', 'event_settings', 'event_schedule'])
-                ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))// Compare times properly
+                ->whereIn('id', $invitedEvents)
+                ->where(function ($query) {
+                    $query->where('start_date', '>', date('Y-m-d')) // Past events
+                        ->orWhere(function ($q) {
+                            $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                            ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+                })
+                // ->where('start_date', '>=', date('Y-m-d'))// Compare times properly
 
                 ->where('is_draft_save', '0');
             // ->orderBy('start_date', 'ASC')
