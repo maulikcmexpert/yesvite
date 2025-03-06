@@ -904,6 +904,9 @@
     width: 100% !important;
 }
 
+.rsvp-calender-accordion h2{
+    margin-bottom: 0px !important;
+}
 
 
 /* .potuck-main-wrp .apexcharts-inner {
