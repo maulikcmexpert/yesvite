@@ -434,42 +434,40 @@ function handleFiles(files, currentFileInput) {
 // Drag & Drop Support
 const dropZone = document.querySelector(".create-post-upload-img-inner");
 if (dropZone) {
+    dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("dragging");
+    });
 
-dropZone.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    dropZone.classList.add("dragging");
-});
+    dropZone.addEventListener("dragleave", (event) => {
+        dropZone.classList.remove("dragging");
+    });
 
-dropZone.addEventListener("dragleave", (event) => {
-    dropZone.classList.remove("dragging");
-});
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("dragging");
 
-dropZone.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dropZone.classList.remove("dragging");
+        const files = Array.from(event.dataTransfer.files);
+        const fileInput = document.querySelector(".fileInputtype");
 
-    const files = Array.from(event.dataTransfer.files);
-    const fileInput = document.querySelector(".fileInputtype");
+        if (files.length > 0) {
+            // Append new files to file input
+            const dataTransfer = new DataTransfer();
 
-    if (files.length > 0) {
-        // Append new files to file input
-        const dataTransfer = new DataTransfer();
+            // Retain previously selected files
+            if (fileInput.files.length > 0) {
+                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+            }
 
-        // Retain previously selected files
-        if (fileInput.files.length > 0) {
-            Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+            // Add new dropped files
+            files.forEach((file) => dataTransfer.items.add(file));
+
+            fileInput.files = dataTransfer.files;
+
+            // Trigger change event manually
+            $(fileInput).trigger("change");
         }
-
-        // Add new dropped files
-        files.forEach((file) => dataTransfer.items.add(file));
-
-        fileInput.files = dataTransfer.files;
-
-        // Trigger change event manually
-        $(fileInput).trigger("change");
-    }
-});
-
+    });
 }
 
 
