@@ -1085,6 +1085,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         toastr.error('Only CSV and Excel files are allowed.');
         return;
     }
+    toastr.success('done');
     
     $('<div id="pageOverlay"></div>').css({
         position: 'fixed',
@@ -1097,7 +1098,7 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     }).appendTo('body');
         $('#home_loader').css('display','none');
         $('#upload_csv_contact').submit();
-    }
+    // }
 });
 $(document).ready(function() {
     const uploadWrapper = $('.uploadcsv-wrp');
