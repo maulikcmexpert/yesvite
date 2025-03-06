@@ -312,11 +312,11 @@
       min-width: 385px;
   }
   #audioContainer .progress-container svg {
-      max-width: 157px !important;
+      max-width: 200px !important;
   }
   #audioContainer .progress-container {
-      max-width: 157px !important;
-      min-width: 157px !important;
+      max-width: 200px !important;
+      min-width: 200px !important;
   }
   .grey-bar svg:nth-child(1){
       display: none;
@@ -326,17 +326,12 @@
   }
   #audioContainer .progress-container {
       height: 37px;
+      position: relative;
+      top: 2px;
   }
-  .grey-bar svg:nth-child(2){
-    display: block;
+  .time-elapsed{
+      font-size: 12px;
   }
-  .pink-bar svg:nth-child(2){
-    display: block;
-  }
-  #audioContainer .wrapper .pink-bar {
-    top: 1px;
-}
-  
 }
 
 @media only screen and (min-width: 320px) and (max-width: 424px){
@@ -359,22 +354,13 @@
       display: none;
   }
   #audioContainer .progress-container {
-      height: 37px;
+      height: 24px;
       position: relative;
       top: 2px;
   }
   .time-elapsed{
       font-size: 12px;
   }
-  .grey-bar svg:nth-child(2){
-    display: block;
-  }
-  .pink-bar svg:nth-child(2){
-    display: block;
-  }
-  #audioContainer .wrapper .pink-bar {
-    top: 1px;
-}
 }
 
 @media only screen and (max-width:390px){
