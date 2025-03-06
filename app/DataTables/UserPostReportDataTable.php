@@ -119,7 +119,7 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
-            ->addColumn('status', function ($row) {
+            ->addColumn('account_status', function ($row) {
                 // Determine button text and dropdown action based on account status
                 $buttonText = $row->account_status == 'Block' ? 'Suspend' : 'Reactivate';
                 $dropdownText = $row->account_status == 'Block' ? 'Reactivate' : 'Suspend';
@@ -150,7 +150,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type', 'action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','account_status','action']);
     }
 
     /**
@@ -228,6 +228,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
+            Column::make('account_status')->title("Account Status")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
     }
