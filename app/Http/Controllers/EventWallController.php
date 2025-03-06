@@ -3591,7 +3591,7 @@ class EventWallController extends BaseController
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
                     'is_message_notification' => (isset($checkNotificationSetting->push) && $checkNotificationSetting->push != "") ? $checkNotificationSetting->push : "",
                     'encrypted_id'=>encrypt($userId),
-                    'login_user_id'=>$loginuser
+                    'login_user_id'=>$loginuser->id
                 ];
 
 
