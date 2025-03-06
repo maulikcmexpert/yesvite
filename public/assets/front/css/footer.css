@@ -219,6 +219,15 @@ ul.footer-social-link {
     gap: 16px;
 }
 
+footer .app-store .google-app, footer .app-store .mobile-app{
+    max-width: 162px !important;
+    height: 48px !important;
+}
+
+footer .app-store .google-app img, footer .app-store .mobile-app img{
+    object-fit: contain;
+}
+
 @media only screen and (max-width:767px){
     footer{
         padding: 24px 0px 24px;

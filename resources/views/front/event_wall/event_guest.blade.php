@@ -315,7 +315,7 @@
                                                                         {{  $username }}
                                                                     </h3>
                                                                    @else
-                                                                    <h3 class="openProfileModal guest-name" data-bs-toggle="modal"
+                                                                    <h3 class="openProfileModal guest-name text-decoration-none" data-bs-toggle="modal"
                                                                     data-userid="{{  $guest['id'] }}"
                                                                     >
                                                                     {{  $username }}

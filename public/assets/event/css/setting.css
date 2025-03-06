@@ -1138,6 +1138,15 @@
     margin-bottom: 12px !important;
 }
 
+.step_4 .guest-checkout .final-checkout-guest-btn{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 24px !important;    
+}
+
 /* ============ responsive ============ */
 
 @media only screen and (max-width: 1399px) {
