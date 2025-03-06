@@ -676,7 +676,7 @@ class EventListController extends BaseController
 
         $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
 
-        // dd($eventList);
+        dd($filter);
         // return compact('filter','eventList','eventPasttList','eventDraftdata');
         // $js = ['event'];
         $title = 'Events';
