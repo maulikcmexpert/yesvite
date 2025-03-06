@@ -195,6 +195,26 @@
   #audioContainer .progress-container svg {
       max-width: 650px !important;
   }
+  #audioContainer .progress-container{
+    max-width: 651px !important;
+    min-width: 651px !important;
+}
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 850px;
+      min-width: 850px;
+  }
+  #audioContainer .progress-container svg {
+      max-width: 650px !important;
+  }
+  #audioContainer .progress-container{
+      max-width: 651px !important;
+      min-width: 651px !important;
+  }
+
 }
 
 @media only screen and (max-width:1399px){
