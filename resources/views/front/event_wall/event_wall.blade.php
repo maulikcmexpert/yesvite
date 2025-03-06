@@ -125,7 +125,7 @@
                                                                     @else
                                                                         <h3 class="openProfileModal text-decoration-none"
                                                                             data-bs-toggle="modal"
-                                                                            data-userid="{{ $guest['id'] }}">
+                                                                            data-userid="{{ $post['user_id'] }}">
                                                                             {{ $post['username'] }}
                                                                         </h3>
                                                                     @endif
