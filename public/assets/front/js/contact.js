@@ -1063,7 +1063,7 @@ $(document).on("input", ".search_phone", function () {
 $('label[for="email"]').removeClass("floatingfocus");
 
 $(document).on('click','.click-to-upload-btn', function (e) {
-    $('#home_loader').css('display','flex');
+    // $('#home_loader').css('display','flex');
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
