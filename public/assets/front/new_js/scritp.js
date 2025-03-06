@@ -433,7 +433,7 @@ function handleFiles(files, currentFileInput) {
 
 // Drag & Drop Support
 const dropZone = document.querySelector(".create-post-upload-img-inner");
-if (dropZone) {
+// if (dropZone) {
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
         dropZone.classList.add("dragging");
@@ -468,7 +468,7 @@ if (dropZone) {
             $(fileInput).trigger("change");
         }
     });
-}
+// }
 
 
 // Add new option on click
