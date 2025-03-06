@@ -1075,11 +1075,17 @@ $(document).on('click','.click-to-upload-btn', function (e) {
     var fileName = fileInput.files[0].name;
     var fileExtension = fileName.split('.').pop().toLowerCase();
 
-    if (fileExtension !== 'csv') {
+    // if (fileExtension !== 'csv') {
+    //     $('#home_loader').css('display', 'none');
+    //     toastr.error('Only CSV files are allowed.');
+    //     return;
+    // }
+    if (!['csv', 'xls', 'xlsx'].includes(fileExtension)) {
         $('#home_loader').css('display', 'none');
-        toastr.error('Only CSV files are allowed.');
+        toastr.error('Only CSV and Excel files are allowed.');
         return;
     }
+    
     $('<div id="pageOverlay"></div>').css({
         position: 'fixed',
         top: 0,
