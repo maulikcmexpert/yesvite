@@ -332,6 +332,12 @@
   .time-elapsed{
       font-size: 12px;
   }
+  .grey-bar svg:nth-child(2){
+    display: block;
+  }
+  .pink-bar svg:nth-child(2){
+    display: block;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 424px){
@@ -360,6 +366,12 @@
   }
   .time-elapsed{
       font-size: 12px;
+  }
+  .grey-bar svg:nth-child(2){
+    display: block;
+  }
+  .pink-bar svg:nth-child(2){
+    display: block;
   }
 }
 
