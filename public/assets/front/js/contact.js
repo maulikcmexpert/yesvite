@@ -1063,7 +1063,7 @@ $(document).on("input", ".search_phone", function () {
 $('label[for="email"]').removeClass("floatingfocus");
 
 $(document).on('click','.click-to-upload-btn', function (e) {
-    // $('#home_loader').css('display','flex');
+    $('#home_loader').css('display','flex');
     var fileInput = $('#csv_file')[0];
 
     if (fileInput.files.length === 0) {
@@ -1085,20 +1085,19 @@ $(document).on('click','.click-to-upload-btn', function (e) {
         toastr.error('Only CSV and Excel files are allowed.');
         return;
     }
-    toastr.success('done');
     
-    // $('<div id="pageOverlay"></div>').css({
-    //     position: 'fixed',
-    //     top: 0,
-    //     left: 0,
-    //     width: '100%',
-    //     height: '100%',
-    //     background: 'rgba(255, 255, 255, 0)', // Transparent background
-    //     zIndex: 9999
-    // }).appendTo('body');
-    //     $('#home_loader').css('display','none');
-    //     $('#upload_csv_contact').submit();
-    // }
+    $('<div id="pageOverlay"></div>').css({
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(255, 255, 255, 0)', // Transparent background
+        zIndex: 9999
+    }).appendTo('body');
+        $('#home_loader').css('display','none');
+        $('#upload_csv_contact').submit();
+    }
 });
 $(document).ready(function() {
     const uploadWrapper = $('.uploadcsv-wrp');
