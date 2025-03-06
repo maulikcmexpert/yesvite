@@ -1132,7 +1132,12 @@ function sendComment(){
                     if (data.user_id == login_user_id) {
                         $("#report_btn").hide();
                     }
-
+                    let messageLink = $(".message-link");
+                    let encrypted_id = data.encrypted_id;
+                    if (encrypted_id) {
+                        let messageRoute = `/messages/${encrypted_id}`;
+                        messageLink.attr("href", messageRoute);
+                    }
                     $(".likeModel")
                         .data("event-id", data.event_id)
                         .data("event-post-id", data.id);
