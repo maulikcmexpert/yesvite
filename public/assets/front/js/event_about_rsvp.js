@@ -448,3 +448,55 @@ function convertTo24Hour(time) {
     }
     return `${String(hours).padStart(2, "0")}:${minute}:00`;
 }
+
+function getEventDetails() {
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
+    const eventName = $("#eventName").val() || "Meeting with Team";
+
+    if (!eventDate || !eventTime) {
+        toastr.error("Please provide both date and time for the event.");
+        return { startDateTime: null, endDateTime: null, eventName, eventDate, eventEndDate };
+    }
+
+    const convertTo24HourFormat = (time) => {
+        const [hour, minuteWithPeriod] = time.split(":");
+        let minute = minuteWithPeriod.replace(/(am|pm)/i, "").trim();
+        const period = minuteWithPeriod.match(/(am|pm)/i)?.[0];
+
+        let newHour = parseInt(hour);
+        if (period?.toLowerCase() === "pm" && newHour !== 12) {
+            newHour += 12;
+        }
+        if (period?.toLowerCase() === "am" && newHour === 12) {
+            newHour = 0;
+        }
+
+        return `${newHour}:${minute}`;
+    };
+
+    const formattedTime = convertTo24HourFormat(eventTime);
+    const formattedEndTime = convertTo24HourFormat(eventEndTime);
+    const startDateTime = new Date(`${eventDate}T${formattedTime}:00`);
+
+    if (isNaN(startDateTime)) {
+        toastr.error("Invalid start date or time value. Please check the input.");
+        return { startDateTime: null, endDateTime: null, eventName, eventDate, eventEndDate };
+    }
+
+    let endDateTime;
+    if (eventEndDate) {
+        endDateTime = new Date(`${eventEndDate}T${formattedEndTime}:00`);
+        if (isNaN(endDateTime)) {
+            toastr.error("Invalid end date or time value. Please check the input.");
+            return { startDateTime: null, endDateTime: null, eventName, eventDate, eventEndDate };
+        }
+    } else {
+        endDateTime = new Date(startDateTime);
+        endDateTime.setHours(endDateTime.getHours() + 1);
+    }
+
+    return { eventName, eventDate, eventEndDate, startDateTime, endDateTime };
+}
