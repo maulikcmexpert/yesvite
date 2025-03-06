@@ -362,6 +362,12 @@
   .time-elapsed{
       font-size: 12px;
   }
+  .grey-bar svg:nth-child(2){
+    display: block;
+  }
+  .pink-bar svg:nth-child(2){
+    display: block;
+  }
 }
 
 @media only screen and (max-width:390px){
