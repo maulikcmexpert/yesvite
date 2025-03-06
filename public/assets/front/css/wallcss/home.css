@@ -1419,6 +1419,13 @@ main.new-main-content {
     stroke: var(--primary-black);
 }
 
+.GuestProfile-modal #private_profile{
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-family: var(--SFProDisplay-Semibold);
+}
+
 /* ===== wall_profile Modal Section End ===== */
 
 
