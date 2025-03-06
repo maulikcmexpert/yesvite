@@ -1144,7 +1144,7 @@ function sendComment(){
 
 
                     }
-                    if ( data.user_id != login_user_id) {
+                    if (data.user_id != login_user_id) {
                         $(".message-link").removeClass('d-none');
 
 
