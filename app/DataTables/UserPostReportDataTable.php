@@ -119,7 +119,26 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
+            ->addColumn('status', function ($row) {
+                // Determine button text and dropdown action based on account status
+                $buttonText = $row->account_status == 'Block' ? 'Suspend' : 'Reactivate';
+                $dropdownText = $row->account_status == 'Block' ? 'Reactivate' : 'Suspend';
+                // Set the action class for toggling
+                $actionClass = $row->account_status == 'Block' ? 'unblock-user' : 'block-user';
 
+                return '
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ' . $buttonText . '
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->id . '">
+                                ' . $dropdownText . '
+                            </a>
+                        </div>
+                    </div>
+                ';
+            })
             ->addColumn('action', function ($row) {
 
                 $cryptId = encrypt($row->id);
