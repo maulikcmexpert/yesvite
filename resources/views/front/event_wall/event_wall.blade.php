@@ -111,7 +111,8 @@
                                                                         {{ $post['username'] }}
 
 
-                                                                    </h3> --}} @if ($post['is_sync'] == '0')
+                                                                    </h3> --}}
+                                                                     @if ($post['is_sync'] == '0')
                                                                         <h3 class="openProfileModal"  data-bs-toggle="modal"
                                                                         data-bs-target="#wall_profile"
                                                                         data-username="{{ $post['username'] }}"
