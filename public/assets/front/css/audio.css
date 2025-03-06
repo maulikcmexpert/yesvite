@@ -285,6 +285,9 @@
       max-width: 430px !important;
       min-width: 430px !important;
   }
+  .grey-bar svg path, .pink-bar svg path{
+    stroke-width: 1px !important;
+}
 }
 
 @media only screen and (max-width:575px){
