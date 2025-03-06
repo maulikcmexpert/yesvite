@@ -2497,15 +2497,38 @@ class EventListController extends BaseController
         // })->where('user_id', $user->id)->count();
 
         if ($page == "upcoming") {
-            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
+                ->where('start_date', '>', date('Y-m-d'))
+                ->orWhere(function ($q) {
+                        $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+                     })->count();
         } else {
-            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'))->count();
+            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
+            ->where(function ($query) {
+                $query->where('end_date', '<', date('Y-m-d')) // Past events
+                    ->orWhere(function ($q) {
+                        $q->where('end_date', '=', date('Y-m-d')) // If event ends today
+                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+            })->count();
         }
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) use ($page) {
             if ($page == "upcoming") {
-                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                $query->where('is_draft_save', '0')
+                ->where('start_date', '>=', date('Y-m-d'))
+                ->orWhere(function ($q) {
+                    $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+                 });
             } else {
-                $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'));
+                $query->where('is_draft_save', '0')
+                ->where(function ($query) {
+                    $query->where('end_date', '<', date('Y-m-d')) // Past events
+                        ->orWhere(function ($q) {
+                            $q->where('end_date', '=', date('Y-m-d')) // If event ends today
+                            ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+                });
+                // ->where('end_date', '<', date('Y-m-d'));
             }
         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
 
