@@ -170,11 +170,11 @@
   z-index: 5;
 }
 
-@media only screen and (min-width: 1800px) and (max-width: 1999px){
+@media only screen and (min-width: 1800px) and (max-width: 1999px) {
   .audio-music-player #audioContainer {
       width: 100%;
-      max-width: 78%;
-      min-width: 78%;
+      max-width: 950px;
+      min-width: 950px;
   }
 }
 
