@@ -437,7 +437,7 @@ class HomeController extends BaseController
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
     }
-    public function importCSV(Request $request, CSVImportService $importService,ExcelImport $excelImport)
+    public function importCSV(Request $request, CSVImportService $importService,ExcelImport $importExcelService)
     {
         // $validator = Validator::make($request->all(), [
         //     'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
@@ -456,24 +456,27 @@ class HomeController extends BaseController
         // }
         // $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
         // $importService->import($filePath);
+
+        // return  redirect('home')->with('msg', 'Contact imported successfully.');
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt,xlsx,xls|max:2048',
+        ]);
+    
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
             $extension = $file->getClientOriginalExtension();
     
             // Store the file temporarily
-            $filePath = $file->storeAs('temp', $file->getClientOriginalName());
+            $filePath = public_path('temp/', $file->getClientOriginalName());
     
             if (in_array($extension, ['csv', 'txt'])) {
                 $importService->import(storage_path('app/' . $filePath));
             } elseif (in_array($extension, ['xls', 'xlsx'])) {
-                $excelImport->importExcel(storage_path('app/' . $filePath));
+                $importExcelService->importExcel(storage_path('app/' . $filePath));
             }
     
             return redirect('home')->with('msg', 'Contacts imported successfully.');
         }
-    
-
-        return  redirect('home')->with('msg', 'Contact imported successfully.');
     }
 
 

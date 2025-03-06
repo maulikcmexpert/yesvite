@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Services;
-
 use App\Models\contact_sync;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;

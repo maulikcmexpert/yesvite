@@ -176,8 +176,6 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         App\Providers\FirebaseServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
         // ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ])->toArray(),
@@ -201,7 +199,6 @@ return [
         'Location' => 'Stevebauman\Location\Facades\Location',
         // 'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         // 'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ])->toArray(),
 
