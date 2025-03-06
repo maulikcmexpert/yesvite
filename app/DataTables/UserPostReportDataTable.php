@@ -160,7 +160,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','account_status','action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','account_status','delete','action']);
     }
 
     /**
@@ -239,6 +239,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
             Column::make('account_status')->title("Account Status")->orderable(false),
+            Column::make('delete')->title("Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
     }
