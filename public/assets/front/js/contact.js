@@ -1136,20 +1136,40 @@ $(document).ready(function() {
         handleFileSelect(e.originalEvent); // Access original event for drop
     });
     function setFileInput(file) {
-        if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
-            $(".uploadcsv-wrp h3").text(file.name); // Show file name
-            $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+        // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+        //     $(".uploadcsv-wrp h3").text(file.name); // Show file name
+        //     $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
+        //     // Assign file to input field
+        //     let dataTransfer = new DataTransfer();
+        //     dataTransfer.items.add(file);
+        //     fileInput[0].files = dataTransfer.files;
+
+        //     console.log('CSV file selected:', file);
+        // } else {
+        //     toastr.error('Only CSV files are allowed.');
+        //     fileInput.val('');
+        // }
+        if (
+            file.type === 'text/csv' || 
+            file.name.endsWith('.csv') || 
+            file.name.endsWith('.xls') || 
+            file.name.endsWith('.xlsx')
+        ) {
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
+        
             // Assign file to input field
             let dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             fileInput[0].files = dataTransfer.files;
-
-            console.log('CSV file selected:', file);
+        
+            console.log('CSV or Excel file selected:', file);
         } else {
-            toastr.error('Only CSV files are allowed.');
+            toastr.error('Only CSV and Excel files are allowed.');
             fileInput.val('');
         }
+        
     }
     function handleFileSelect(e) {
         let files;
@@ -1161,7 +1181,13 @@ $(document).ready(function() {
 
         if (files.length > 0) {
             const file = files[0];
-            if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+            // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                if (
+                    file.type === 'text/csv' || 
+                    file.name.endsWith('.csv') || 
+                    file.name.endsWith('.xls') || 
+                    file.name.endsWith('.xlsx')
+                ) {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
