@@ -562,7 +562,51 @@ use Carbon\Carbon;
                                                             <path d="M987.967 16.5494C987.967 15.1414 986.832 14 985.433 14C984.033 14 982.898 15.1414 982.898 16.5494V35.4506C982.898 36.8586 984.033 38 985.433 38C986.832 38 987.967 36.8586 987.967 35.4506V16.5494Z" fill="#94A3B8" />
                                                             <path d="M999.011 19.5494C999.011 18.1414 997.876 17 996.477 17C995.077 17 993.942 18.1414 993.942 19.5494V32.4506C993.942 33.8586 995.077 35 996.477 35C997.876 35 999.011 33.8586 999.011 32.4506V19.5494Z" fill="#94A3B8" />
                                                         </svg>
-
+                                                        <svg class="subgray" width="169" height="26" viewBox="0 0 169 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="4" y="10" width="1" height="6" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="8" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="12" y="6" width="1" height="14" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="16" y="5" width="1" height="16" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="20" y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="24" y="8.5" width="1" height="9" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="28" y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="32" y="10" width="1" height="6" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="36" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="40" y="8.5" width="1" height="9" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="44" y="8.5" width="1" height="9" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="48" y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="52" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="56" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="60" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="64" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="68" y="0.5" width="1" height="25" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="72" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="76" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="80" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="84" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="88" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="92" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="96" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="100" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="104" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="108" y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="112" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="116" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="120" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="124" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="128" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="132" y="0.5" width="1" height="25" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="136" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="140" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="144" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="148" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="152" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="156" y="7" width="1" height="12" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="160" y="0.5" width="1" height="25" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="164" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            <rect x="168" y="4" width="1" height="18" rx="0.5" fill="#94A3B8"/>
+                                                            </svg>
 
                                                     </div>
                                                     <div class="pink-bar progress progress-bar" id="progress">
@@ -661,6 +705,51 @@ use Carbon\Carbon;
                                                         </svg>
 
 
+                                                        <svg class="subpink" width="169" height="26" viewBox="0 0 169 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="4" y="10" width="1" height="6" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="8" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="12" y="6" width="1" height="14" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="16" y="5" width="1" height="16" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="20" y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="24" y="8.5" width="1" height="9" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="28" y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="32" y="10" width="1" height="6" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="36" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="40" y="8.5" width="1" height="9" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="44" y="8.5" width="1" height="9" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="48" y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="52" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="56" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="60" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="64" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="68" y="0.5" width="1" height="25" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="72" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="76" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="80" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="84" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="88" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="92" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="96" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="100" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="104" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="108" y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="112" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="116" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="120" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="124" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="128" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="132" y="0.5" width="1" height="25" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="136" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="140" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="144" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="148" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="152" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="156" y="7" width="1" height="12" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="160" y="0.5" width="1" height="25" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="164" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            <rect x="168" y="4" width="1" height="18" rx="0.5" fill="#F73C71"/>
+                                                            </svg>
 
 
                                                     </div>
@@ -771,6 +860,7 @@ use Carbon\Carbon;
                                                     <path d="M11.7031 8.55031C12.2331 8.41031 12.7831 8.41031 13.3131 8.55031" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
+                                                
                                             </span>
                                         </div>
                                     </div>
