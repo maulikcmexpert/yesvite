@@ -301,3 +301,150 @@ function clearModalALLValues() {
     $("#rsvp_status_kids").val(0);
 
 }
+
+document.getElementById("openGoogle").addEventListener("click", function () {
+    addToGoogleCalendar();
+});
+
+document.getElementById("openOutlook").addEventListener("click", function () {
+    addToOutlookCalendar();
+});
+
+document.getElementById("openApple").addEventListener("click", function () {
+    addToAppleCalendar();
+});
+
+function addToGoogleCalendar() {
+    const { eventName, startDateTime, endDateTime } = getEventDetails();
+    if (!startDateTime) return;
+
+    const formatToGoogleCalendar = (date) => {
+        return date.toISOString().replace(/[-:.]/g, "").slice(0, -4) + "Z";
+    };
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+        eventName
+    )}&dates=${formatToGoogleCalendar(startDateTime)}/${formatToGoogleCalendar(endDateTime)}&sf=true&output=xml`;
+
+    window.open(googleCalendarUrl);
+}
+
+function addToOutlookCalendar() {
+    // function createOutlookEvent() {
+
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || $("#eventTime").val();
+    const eventName = $("#eventName").val() || "Meeting with Team";
+
+    console.log(eventDate);
+    console.log(eventEndDate);
+    console.log(convertTo24Hour(eventTime));
+    console.log(convertTo24Hour(eventEndTime));
+    console.log(eventName);
+    
+         let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+         let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+        let subject = eventName;
+        let details = eventName;
+        // let location = "Online";
+        
+        // 1. Convert to ISO String (and remove milliseconds)
+        let startISO = startDateTime.toISOString().replace(/\.000Z$/, 'Z');
+        let endISO = endDateTime.toISOString().replace(/\.000Z$/, 'Z');
+        
+        let outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(subject)}
+            &body=${encodeURIComponent(details)}`;
+            // &location=${encodeURIComponent(location)}`;
+        
+        // 2. Check if start and end times are the same
+        if (startISO === endISO) {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}`; // Only start time
+        } else {
+            outlookLink += `&startdt=${encodeURIComponent(startISO)}&enddt=${encodeURIComponent(endISO)}`; // Both start and end times
+        }
+        
+        window.open(outlookLink, "_blank");
+    // }
+    // const { eventName, startDateTime, endDateTime, eventDate, eventEndDate } = getEventDetails();
+    // if (!startDateTime) return;
+
+    // // Format to remove any unwanted characters for ICS compatibility
+    // const formatToICSDate = (date) => {
+    //     return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z"; // ISO 8601 format in UTC
+    // };
+
+    // // Format date for the date picker in Outlook (YYYY-MM-DD)
+    // const formatToDatePickerDate = (date) => {
+    //     return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    // };
+
+    // console.log(formatToICSDate(startDateTime));
+    //     console.log(formatToICSDate(endDateTime));
+
+    // const outlookCalendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent
+    // &startdt=${formatToICSDate(startDateTime)}
+    // &enddt=${formatToICSDate(endDateTime)}
+    // &subject=${eventName}
+    // &body=${'Event on ' + eventDate + ' - ' + eventEndDate}
+    // &allday=false
+    // &start=${formatToDatePickerDate(startDateTime)}
+    // &end=${formatToDatePickerDate(endDateTime)}`;
+
+    // window.open(outlookCalendarUrl);
+}
+
+
+function addToAppleCalendar() {
+    const eventDate = $("#eventDate").val();
+    const eventEndDate = $("#eventEndDate").val() || eventDate;
+    const eventTime = $("#eventTime").val();
+    const eventEndTime = $("#eventEndTime").val() || eventTime;
+    const eventName = $("#eventName").val() || "Meeting with Team";
+
+    if (!eventDate || !eventTime) {
+        alert("Please enter a valid event date and time.");
+        return;
+    }
+
+    console.log("Event Date:", eventDate);
+    console.log("Event End Date:", eventEndDate);
+    console.log("Start Time:", convertTo24Hour(eventTime));
+    console.log("End Time:", convertTo24Hour(eventEndTime));
+    console.log("Event Name:", eventName);
+
+    let startDateTime = new Date(`${eventDate}T${convertTo24Hour(eventTime)}`);
+    let endDateTime = new Date(`${eventEndDate}T${convertTo24Hour(eventEndTime)}`);
+
+    // Format dates for iCalendar (YYYYMMDDTHHmmSSZ)
+    const formatToICSDate = (date) => {
+        return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    };
+
+    let startFormatted = formatToICSDate(startDateTime);
+    let endFormatted = formatToICSDate(endDateTime);
+
+    // Create iCalendar (.ics) content
+    let icsContent = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Apple Inc.//Mac OS X//EN\r\nBEGIN:VEVENT\r\nSUMMARY:${eventName}\r\nDESCRIPTION:${eventName}\r\nDTSTART:${startFormatted}\r\nDTEND:${endFormatted}\r\nLOCATION:Online\r\nSTATUS:TENTATIVE\r\nSEQUENCE:0\r\nBEGIN:VALARM\r\nTRIGGER:-PT15M\r\nDESCRIPTION:Reminder\r\nACTION:DISPLAY\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+
+    // Create a Blob and download the .ics file
+    let blob = new Blob([icsContent], { type: "text/calendar" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${eventName.replace(/\s+/g, "_")}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Convert time to 24-hour format if needed
+function convertTo24Hour(time) {
+    const [hour, minute, period] = time.match(/(\d+):(\d+)\s*(AM|PM)?/i).slice(1);
+    let hours = parseInt(hour);
+    if (period) {
+        if (period.toUpperCase() === "PM" && hours < 12) hours += 12;
+        if (period.toUpperCase() === "AM" && hours === 12) hours = 0;
+    }
+    return `${String(hours).padStart(2, "0")}:${minute}:00`;
+}
