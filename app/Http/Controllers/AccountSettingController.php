@@ -104,7 +104,7 @@ class AccountSettingController extends BaseController
 
             if ($request->setting == 'visible') {
                 $user->visible = $request->value;
-                if ($user->save()) {
+                if ($user_data->save()) {
 
                     return response()->json([
                         'status' => 1,
@@ -114,6 +114,7 @@ class AccountSettingController extends BaseController
                 }
             }
         } catch (QueryException $e) {
+            dd($e);
             DB::Rollback();
 
             return response()->json(['status' => 0, 'message' => "db error"]);
