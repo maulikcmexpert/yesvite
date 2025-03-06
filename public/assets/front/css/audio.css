@@ -333,6 +333,9 @@
   .pink-bar svg:nth-child(2){
     display: block;
   }
+  #audioContainer .wrapper .pink-bar {
+    top: 1px;
+}
   
 }
 
