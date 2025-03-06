@@ -338,6 +338,10 @@
   .pink-bar svg:nth-child(2){
     display: block;
   }
+
+  #audioContainer .wrapper .pink-bar {
+    top: 0px !important;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 424px){
@@ -372,6 +376,9 @@
   }
   .pink-bar svg:nth-child(2){
     display: block;
+  }
+  #audioContainer .wrapper .pink-bar {
+    top: 0px !important;
   }
 }
 
