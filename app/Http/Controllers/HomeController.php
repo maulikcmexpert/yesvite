@@ -467,7 +467,7 @@ class HomeController extends BaseController
             $extension = $file->getClientOriginalExtension();
     
             // Store the file temporarily
-            $filePath = public_path('temp/', $file->getClientOriginalName());
+            $filePath = $file->storeAs('temp', $file->getClientOriginalName());
     
             if (in_array($extension, ['csv', 'txt'])) {
                 $importService->import(storage_path('app/' . $filePath));

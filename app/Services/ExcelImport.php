@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\contact_sync;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
+
 use Maatwebsite\Excel\Facades\Excel;
+
+
 class ExcelImport {
     public function importExcel($filePath)
     {
@@ -19,7 +23,7 @@ class ExcelImport {
 
         if (!empty($rows[0])) {
             $header = array_shift($rows[0]);
-            // dd($header);
+
             foreach ($rows[0] as $row) {
                 $data = array_combine($header, $row);
                 $data['isAppUser'] =  '0';
