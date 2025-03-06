@@ -124,11 +124,12 @@
 
 .audio-music-player #audioContainer{
   width: 100%;
+  max-width: 71%;
 }
 
 #audioContainer .wrapper{
   width: 100%;
-    max-width: 68%;
+    max-width: 100%;
 }
 
 #audioContainer .progress-container{
