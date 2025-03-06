@@ -293,7 +293,7 @@
 }
 }
 
-@media only screen and (min-width: 424px) and (max-width: 575px){
+@media only screen and (min-width: 425px) and (max-width: 575px){
   .audio-music-player #audioContainer {
       width: 100%;
       max-width: 510px;
@@ -307,12 +307,12 @@
       min-width: 330px !important;
   }
 
-  .grey-bar:nth-child(1) svg{
+  .grey-bar svg:nth-child(1){
     display: none;
-}
-.pink-bar:nth-child(1) svg{
-    display: none;
-}
+  }
+  .pink-bar svg:nth-child(1){
+      display: none;
+  }
 }
 
 @media only screen and (max-width:390px){
