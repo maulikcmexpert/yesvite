@@ -1182,7 +1182,13 @@ $(document).ready(function() {
 
         if (files.length > 0) {
             const file = files[0];
-            if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+            // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                if (
+                    file.type === 'text/csv' || 
+                    file.name.endsWith('.csv') || 
+                    file.name.endsWith('.xls') || 
+                    file.name.endsWith('.xlsx')
+                ) {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
