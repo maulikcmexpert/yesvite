@@ -350,6 +350,15 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                         hostDisplay.append('<span class="host">Co Host</span>');
                     }
 
+                    if ( profileData.visible == "2") {
+                        $("#posts-card-head-left").addClass('d-none');
+                        $("#private_profile").removeClass('d-none');
+
+                    }else{
+                        $("#posts-card-head-left").removeClass('d-none');
+                        $("#private_profile").addClass('d-none');
+                    }
+
                     // Show the modal
                     $("#profileModal").modal("show");
                 } else {
