@@ -894,7 +894,6 @@
 .rsvp-calender-accordion button{
     padding: 12px 24px !important;
     border-radius: 8px !important;
-    display: inline-block;
     transition: 0.5s;
     font-size: 15px !important;
     color: #fff;
