@@ -605,8 +605,13 @@ function getGuestRsvpPendingCount($eventId)
 }
 function upcomingEventsCount($userId)
 {
-    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>=', date('Y-m-d'))
-
+    $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])
+    // ->where('start_date', '>=', date('Y-m-d'))
+    ->where('start_date', '>', date('Y-m-d')) // Past events
+    ->orWhere(function ($q) {
+        $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+     })
         ->where('user_id', $userId)
         ->where('is_draft_save', '0')
         ->orderBy('start_date', 'ASC')
@@ -622,7 +627,13 @@ function upcomingEventsCount($userId)
 
     $invitedEventsList = Event::with(['event_image', 'user', 'event_settings', 'event_schedule'])
 
-        ->whereIn('id', $invitedEvents)->where('start_date', '>=', date('Y-m-d'))
+        ->whereIn('id', $invitedEvents)
+        // ->where('start_date', '>=', date('Y-m-d'))
+        ->where('start_date', '>', date('Y-m-d'))
+        ->orWhere(function ($q) {
+            $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+            ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+         })
         ->where('is_draft_save', '0')
         ->orderBy('start_date', 'ASC')
         ->get();
