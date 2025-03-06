@@ -177,7 +177,7 @@
 
                                 </div>
                             </div>
-                            <div class="d-none" id="private_profile"> this is private</div>
+                            <div class="d-none" id="private_profile">This Profile was marked as private </div>
                         </div>
                     </div>
                 </div>
