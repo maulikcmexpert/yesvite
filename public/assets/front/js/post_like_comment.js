@@ -755,7 +755,7 @@ $(document).on("keyup", ".search-phone", function () {
 
     // phoneSearchTimeout = setTimeout(function () {
         var searchQuery = inputField.val().toLowerCase().trim(); 
-
+        $(".phone-contact").show()
         $(".phone-contact").each(function () {
             var contactName = $(this).find(".phone-search").attr("data-search");
 
@@ -771,9 +771,9 @@ $(document).on("keyup", ".search-phone", function () {
             // console.log("Index Found:", contactName.indexOf(searchQuery));
 
             // Perform case-insensitive search
-            if (contactName.includes(searchQuery)) {
-                $(this).show();
-            } else {
+            if (!contactName.includes(searchQuery)) {
+            //     $(this).show();
+            // } else {
                 $(this).hide(); 
             }
         });
