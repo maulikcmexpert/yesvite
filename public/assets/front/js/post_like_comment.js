@@ -759,11 +759,11 @@ $(document).on("keyup", ".search-phone", function () {
         var searchQuery = inputField.val().toLowerCase().trim();
 
         if (searchQuery === "") {
-            $(".phone-contact").show();
+            $(".phone-contact").removeClass('d-none');
             return;
         }
 
-        $(".phone-contact").hide();
+        $(".phone-contact").addClass('d-none');
 
         $(".phone-contact").filter(function () {
             var contactName = $(this).find(".phone-search").attr("data-search");
@@ -775,9 +775,9 @@ $(document).on("keyup", ".search-phone", function () {
             }
 
             return contactName.includes(searchQuery); 
-        }).show();
+        }).removeClass('d-none');
 
-    }, 1000);
+    }, 600);
 });
 
 
