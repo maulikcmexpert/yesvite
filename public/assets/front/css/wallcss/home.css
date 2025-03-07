@@ -1395,6 +1395,8 @@ main.new-main-content {
     text-align: center;
     margin-top: 8px;
     margin-bottom: 20px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
 
 }
 
@@ -1414,6 +1416,7 @@ main.new-main-content {
     margin: 0;
     text-align: center;
     padding: 0px;
+    font-size: 14px;
 }
 
 .GuestProfile-modal .wall_profile-message-link svg path {
