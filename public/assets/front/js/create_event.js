@@ -5128,6 +5128,7 @@ async function saveDesignData(direct = false) {
         console.log("Capturing image...");
         const blob = await captureImage(downloadImage);
         if (!direct) {
+            $("#loader").css("display", "none");
             updateUIAfterSave();
         }
         console.log("Uploading image...");
