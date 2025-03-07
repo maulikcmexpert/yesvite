@@ -1069,9 +1069,7 @@ $(document).ready(function () {
         }
     });
 
-    window.addEventListener("focus", function() {
-        console.log("User is active (window is focused)");
-    });
+
 
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
@@ -1613,3 +1611,32 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function(){
+    let userActive = true;
+    let inactivityTimeout;
+
+    // Function to mark user as active
+    function userIsActive() {
+        userActive = true;
+        console.log("User is active");
+
+        // Reset timer
+        clearTimeout(inactivityTimeout);
+        inactivityTimeout = setTimeout(userIsInactive, 5000); // 5 seconds inactivity
+    }
+
+    // Function to mark user as inactive
+    function userIsInactive() {
+        userActive = false;
+        console.log("User is inactive");
+    }
+
+    // Events to detect activity
+    document.addEventListener("mousemove", userIsActive);
+    document.addEventListener("keydown", userIsActive);
+    document.addEventListener("touchstart", userIsActive); // For mobile devices
+
+    // Start inactivity timeout
+    inactivityTimeout = setTimeout(userIsInactive, 5000);
+
+});
