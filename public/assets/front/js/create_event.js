@@ -9299,7 +9299,7 @@ async function step3open() {
     // }else{
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
-        await saveDesignData();
+        await saveDesignData(true);
         design = eventData.desgin_selected;
     }
     var event_name = $("#event-name").val();
@@ -9410,7 +9410,7 @@ async function step3open() {
 async function step4open() {
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
-        await saveDesignData();
+        await saveDesignData(true);
         design = eventData.desgin_selected;
     }
     if (isCohost != "0") {
