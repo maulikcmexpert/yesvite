@@ -655,6 +655,9 @@
                         <input type="file" name="csv_file" id="csv_file">
                       
                     </div>
+                    <h3>Tips:</h3>
+                    <p>- Save or export the file as a csv,xlsx, or xls file before uploading it to yesvite</p>
+                    <p>- Columns are First Name,Last Name,Email,Phone Number</p>
                     <!-- <div class="uploadedcvs-file-wrp">
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
@@ -724,7 +727,8 @@
                 </div>
 
                                     
-                <p>Support text/csv, maximum file size of 10Mb</p>
+                {{-- <p>Support text/csv, maximum file size of 10Mb</p> --}}
+            
                 </div>
             </form>
         </div>
