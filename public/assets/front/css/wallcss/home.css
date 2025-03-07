@@ -3328,7 +3328,7 @@ main.new-main-content {
     background-color: #E03137;
     border-radius: 50%;
     padding: 6px 6px;
-    display:flex;
+    display:inline-flex;
     justify-content: center;
     align-items: center;
     font-family: var(--SFProDisplay-Semibold);
@@ -3336,6 +3336,7 @@ main.new-main-content {
     line-height: normal;
     color: var(--white);
     margin-left: 5px;
+    width: max-content;
 }
 
 
