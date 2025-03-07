@@ -786,12 +786,14 @@ $(document).on("keyup", ".search-phone", function () {
 var allContactsSuccess = false;
 let selectedContacts = [];
 let selectedPhoneContacts = [];
+var addcontactAjax=0;
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
     const event_id = $("#event_id").val();
 
     $("#allcontact").on("click", function () {
+        
         $("#home_loader").css("display", "flex");
 
         guestList = [];
@@ -808,6 +810,11 @@ $(document).ready(function () {
         // if (allContactsSuccess) {
         //     return;
         // }
+        if(addcontactAjax==1){
+            $("#addguest").modal("show");
+            $("#home_loader").css("display", "none");
+            return;
+        }
         $.ajax({
             url: yesviteUrl,
             type: "POST",
@@ -826,7 +833,7 @@ $(document).ready(function () {
                 $("#addguest").modal("show");
                 const invitedUsers = response.invited_users;
                 $("#home_loader").css("display", "none");
-
+                addcontactAjax =1;
                 // selectedContacts = response.selected_yesvite_user;
                 // selectedPhoneContacts = response.selected_phone_user;
                 // console.log({selectedContacts,selectedPhoneContacts})
