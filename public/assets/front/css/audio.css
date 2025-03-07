@@ -170,6 +170,18 @@
   z-index: 5;
 }
 
+
+.audio-music-player #audioContainer{
+  border-top: 1px solid #F1F5F9;
+}
+
+.grey-bar svg:nth-child(2){
+  display: none;
+}
+.pink-bar svg:nth-child(2){
+  display: none;
+}
+
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
   .audio-music-player #audioContainer {
       width: 100%;
@@ -293,18 +305,80 @@
 }
 }
 
-@media only screen and (min-width: 424px) and (max-width: 575px){
+@media only screen and (min-width: 425px) and (max-width: 575px){
   .audio-music-player #audioContainer {
       width: 100%;
-      max-width: 510px;
-      min-width: 510px;
+      max-width: 385px;
+      min-width: 385px;
   }
   #audioContainer .progress-container svg {
-      max-width: 330px !important;
+      max-width: 200px !important;
   }
   #audioContainer .progress-container {
-      max-width: 330px !important;
-      min-width: 330px !important;
+      max-width: 200px !important;
+      min-width: 200px !important;
+  }
+  .grey-bar svg:nth-child(1){
+      display: none;
+  }
+  .pink-bar svg:nth-child(1){
+      display: none;
+  }
+  #audioContainer .progress-container {
+      height: 37px;
+      position: relative;
+      top: 2px;
+  }
+  .time-elapsed{
+      font-size: 12px;
+  }
+  .grey-bar svg:nth-child(2){
+    display: block;
+  }
+  .pink-bar svg:nth-child(2){
+    display: block;
+  }
+
+  #audioContainer .wrapper .pink-bar {
+    top: 0px !important;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 424px){
+  .audio-music-player #audioContainer {
+      width: 100%;
+      max-width: 320px;
+      min-width: 320px;
+  }
+  #audioContainer .progress-container svg {
+      max-width: 150px !important;
+  }
+  #audioContainer .progress-container {
+      max-width: 150px !important;
+      min-width: 150px !important;
+  }
+  .grey-bar svg:nth-child(1){
+      display: none;
+  }
+  .pink-bar svg:nth-child(1){
+      display: none;
+  }
+  #audioContainer .progress-container {
+      height: 37px;
+      position: relative;
+      top: 2px;
+  }
+  .time-elapsed{
+      font-size: 12px;
+  }
+  .grey-bar svg:nth-child(2){
+    display: block;
+  }
+  .pink-bar svg:nth-child(2){
+    display: block;
+  }
+  #audioContainer .wrapper .pink-bar {
+    top: 0px !important;
   }
 }
 
@@ -313,3 +387,4 @@
     max-width: 135px !important;
 }
 }
+

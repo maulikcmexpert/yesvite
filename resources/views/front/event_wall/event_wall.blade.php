@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails);}} --}}
+{{-- {{dd($postList);}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -98,7 +98,7 @@
                                                                     <span class="inactive-dot"></span>
                                                                 </div>
                                                                 <div class="posts-card-head-left-content">
-                                                                    <h3 class="openProfileModal" data-bs-toggle="modal"
+                                                                    {{-- <h3 class="openProfileModal" data-bs-toggle="modal"
                                                                         data-bs-target="#wall_profile"
                                                                         data-username="{{ $post['username'] }}"
                                                                         data-userid="{{ $post['user_id'] }}"
@@ -111,7 +111,25 @@
                                                                         {{ $post['username'] }}
 
 
-                                                                    </h3>
+                                                                    </h3> --}}
+                                                                     @if ($post['is_sync'] == '0')
+                                                                        <h3 class="openProfileModal"  data-bs-toggle="modal"
+                                                                        data-bs-target="#wall_profile"
+                                                                        data-username="{{ $post['username'] }}"
+                                                                        data-userid="{{ $post['user_id'] }}"
+                                                                        data-location="{{ $post['location'] }}"
+                                                                        data-is-host="{{ $post['is_host'] }}"
+                                                                        data-is-cohost="{{ $post['is_co_host'] }}"
+                                                                        data-profile="{{ $post['profile'] != '' ? $post['profile'] : '' }}">
+                                                                        {{ $post['username'] }}
+                                                                        </h3>
+                                                                    @else
+                                                                        <h3 class="openProfileModal text-decoration-none"
+                                                                            data-bs-toggle="modal"
+                                                                            data-userid="{{ $post['user_id'] }}">
+                                                                            {{ $post['username'] }}
+                                                                        </h3>
+                                                                    @endif
                                                                     @if ($post['is_host'] == '1')
                                                                         <span class="host">Host</span>
                                                                     @endif
@@ -579,7 +597,7 @@
                                                                             data-emoji="👏" data-unicode="\\u{1F44F}">
                                                                     </div>
                                                                 @endif
-                                                                @if ($post['post_type'] != '4' &&  $post['user_id'] != $login_user_id)
+                                                                @if ($post['post_type'] != '4' && $post['user_id'] != $login_user_id)
                                                                     <a
                                                                         href="{{ route('message.list', ['id' => encrypt($post['user_id'])]) }}">
                                                                         <svg viewBox="0 0 24 24" fill="none"

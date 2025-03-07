@@ -20,6 +20,7 @@ use App\Models\{
 use Illuminate\Support\Facades\Session;
 use App\Services\CSVImportService;
 use Illuminate\Support\Facades\Validator;
+use App\Services\ExcelImport;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
@@ -436,7 +437,7 @@ class HomeController extends BaseController
             return response()->json(['status' => 0, 'message' => 'Something went wrong']);
         }
     }
-    public function importCSV(Request $request, CSVImportService $importService)
+    public function importCSV(Request $request, CSVImportService $importService,ExcelImport $importExcelService)
     {
         // $validator = Validator::make($request->all(), [
         //     'csv_file' => 'required|mimes:csv,txt|max:2048', // Validate file type and size
@@ -449,14 +450,33 @@ class HomeController extends BaseController
         //     return  redirect()->route('profile')->with('error', $errors);
         // }
 
+        // if ($request->hasFile('csv_file')) {
+        //     $file = $request->file('csv_file');
+        //     $filePath =  $file->move(public_path('temp'),  $file->getClientOriginalName());
+        // }
+        // $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
+        // $importService->import($filePath);
+
+        // return  redirect('home')->with('msg', 'Contact imported successfully.');
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt,xlsx,xls|max:2048',
+        ]);
+    
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
-            $filePath =  $file->move(public_path('temp'),  $file->getClientOriginalName());
+            $extension = $file->getClientOriginalExtension();
+    
+            // Store the file temporarily
+            $filePath = $file->storeAs('temp', $file->getClientOriginalName());
+    
+            if (in_array($extension, ['csv', 'txt'])) {
+                $importService->import(storage_path('app/' . $filePath));
+            } elseif (in_array($extension, ['xls', 'xlsx'])) {
+                $importExcelService->importExcel(storage_path('app/' . $filePath));
+            }
+    
+            return redirect('contact')->with('msg', 'Contacts imported successfully.');
         }
-        $filePath = public_path('temp/' . $file->getClientOriginalName()); // Adjust path to your CSV file
-        $importService->import($filePath);
-
-        return  redirect('home')->with('msg', 'Contact imported successfully.');
     }
 
 

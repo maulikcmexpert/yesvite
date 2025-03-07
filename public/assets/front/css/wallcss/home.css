@@ -1316,7 +1316,7 @@ main.new-main-content {
 .GuestProfile-modal .posts-card-head .posts-card-head-left {
     width: 100%;
     flex-direction: column;
-    gap: 65px;
+    gap: 80px;
 }
 
 .GuestProfile-modal .modal-body .common-div-wrp {
@@ -1331,7 +1331,7 @@ main.new-main-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 170px;
+    height: 180px;
 }
 
 .GuestProfile-modal .main-modal-background-img  i {
@@ -1347,14 +1347,18 @@ main.new-main-content {
 
 .GuestProfile-modal .main-modal-background-img .posts-card-head-left-img {
     position: absolute;
-    bottom: -20px;
+    bottom: -30px;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 50px;
-    min-width: 50px;
-    height: 50px;
+    max-width: 60px;
+    min-width: 60px;
+    height: 60px;
 }
 
+.GuestProfile-modal .main-modal-background-img .posts-card-head-left-img h5{
+    font-size: 20px !important;
+    line-height: normal !important;
+}
 
 
 .GuestProfile-modal h3#post_name {
@@ -1395,6 +1399,9 @@ main.new-main-content {
     text-align: center;
     margin-top: 8px;
     margin-bottom: 20px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
 
 }
 
@@ -1414,6 +1421,7 @@ main.new-main-content {
     margin: 0;
     text-align: center;
     padding: 0px;
+    font-size: 14px !important;
 }
 
 .GuestProfile-modal .wall_profile-message-link svg path {
@@ -3324,6 +3332,34 @@ main.new-main-content {
 }
 
 
+#nav-guests-tab span {
+    background-color: #E03137;
+    border-radius: 50%;
+    padding: 3px 3px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 11px;
+    line-height: normal;
+    color: var(--white);
+    margin-left: 5px;
+    width: max-content;
+    min-width: 19px;
+}
+
+#wall_profile .modal-content {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    overflow: hidden;
+    height: 650px !important;
+}
+
+#wall_profile .modal-content:has(.private_P){
+    height: auto !important;
+}
+
 
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
@@ -3796,13 +3832,19 @@ main.new-main-content {
     .create-post-modal .modal-body {
         max-height: calc(100vh - 150px);
     }
+    .event-center-tabs-main .nav-tabs .nav-link{
+        padding: 10px 5px !important;
+    }
+    #nav-guests-tab span {
+        margin-left: 2px;
+    }
 
 }
 
 @media only screen and (max-width: 424px) {
     .event-center-tabs-main .nav-tabs .nav-link {
         font-size: 14px !important;
-        padding: 10px 10px !important;
+        padding: 10px 5px !important;
     }
 
     .event-center-title button {

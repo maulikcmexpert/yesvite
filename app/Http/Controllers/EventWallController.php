@@ -862,10 +862,12 @@ class EventWallController extends BaseController
 
                     $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                     $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
+                    $postsNormalDetail['is_sync']='1';
                 } else {
                     // Handle case where user is still not found
                     $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
+                    $postsNormalDetail['is_sync']='0';
 
                 }
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;

@@ -1,4 +1,4 @@
-{
+{ 
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
@@ -18,6 +18,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.72",
         "owen-oj/laravel-getid3": "^2.2",
         "pbmedia/laravel-ffmpeg": "^8.6",

@@ -40,7 +40,9 @@
            aria-selected="{{ $page == 'guest' ? 'true' : 'false' }}">
            Guests
            @if (isset($eventDetails['guest_list_visible_to_guests']) && $eventDetails['guest_list_visible_to_guests'] != "")
-           {{ isset($eventDetails['guest_list_visible_to_guests']) ? '(' . $eventDetails['guest_list_visible_to_guests'] . ')' : '' }}
+           <span>
+                {{ isset($eventDetails['guest_list_visible_to_guests']) ? '' . $eventDetails['guest_list_visible_to_guests'] . '' : '' }}
+           </span>
            @endif
         </a>
 
