@@ -750,10 +750,12 @@ $(document).on("keyup", ".search-yesvite", function () {
 var phoneSearchTimeout; 
 
 $(document).on("keyup", ".search-phone", function () {
-    var inputField = $(this);
+   
     clearTimeout(phoneSearchTimeout);
-
+    var inputField = $(this);
     phoneSearchTimeout = setTimeout(function () {
+        console.log('here');
+        
         var searchQuery = inputField.val().toLowerCase().trim();
 
         if (searchQuery === "") {
