@@ -748,6 +748,9 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 $(document).on("keyup", ".search-phone", function () {
+    clearTimeout(phoneSearchTimeout); // Clear previous timeout if user keeps typing
+    phoneSearchTimeout = setTimeout(function () {
+
     var searchQuery = $(this).val().toLowerCase();
 
     if (searchQuery === "") {
@@ -779,6 +782,7 @@ $(document).on("keyup", ".search-phone", function () {
             }
         });
     }
+}, 1000);
 });
 
 var allContactsSuccess = false;
