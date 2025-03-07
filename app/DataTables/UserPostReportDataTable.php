@@ -196,8 +196,16 @@ class UserPostReportDataTable extends DataTable
                 if ($request->order[0]['column'] == '5') {
                     $column = Event::select('event_name')
                     ->whereColumn('events.id', 'user_report_to_posts.event_id');
-    
                 }
+
+                if ($request->order[0]['column'] == '7') {
+                    $column = User::select('firstname')
+                    ->whereColumn('users.id', function ($query) {
+                        $query->select('posts.user_id')
+                            ->from('posts')
+                            ->whereColumn('posts.id', 'user_report_to_posts.post_id');
+                    });
+               }
 
                 if ($request->order[0]['column'] == '3') {
                     $column = 'report_type';
@@ -250,8 +258,8 @@ class UserPostReportDataTable extends DataTable
             Column::make('report_description')->title("Report Description")->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
-            Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(false),
-            Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(false),
+            Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(true),
+            Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(true),
             Column::make('account_status')->title("Account Status")->orderable(false),
             // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
