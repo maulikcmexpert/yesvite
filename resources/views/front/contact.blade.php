@@ -656,7 +656,7 @@
                       
                     </div>
                     <p>- Save or export the file as a csv,xlsx,or xls file before uploading it to yesvite</p>
-                    <p>- Columns are Firstname,Last Name,Email,Phone Number</p>
+                    <p>- Columns are First Name,Last Name,Email,Phone Number</p>
                     <!-- <div class="uploadedcvs-file-wrp">
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
