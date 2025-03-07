@@ -139,7 +139,7 @@ class UserPostReportDataTable extends DataTable
                             ' . $buttonText . '
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->users->id . '"data-status="' . $actionData . '">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->event_posts->user_id . '"data-status="' . $actionData . '">
                                 ' . $dropdownText . '
                             </a>
                         </div>
@@ -246,7 +246,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
             Column::make('post_owner')->title("Post Onwner")->orderable(false),
-            // Column::make('account_status')->title("Account Status")->orderable(false),
+            Column::make('account_status')->title("Account Status")->orderable(false),
             // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
