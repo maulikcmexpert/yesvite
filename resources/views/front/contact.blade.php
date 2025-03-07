@@ -724,7 +724,9 @@
                 </div>
 
                                     
-                <p>Support text/csv, maximum file size of 10Mb</p>
+                {{-- <p>Support text/csv, maximum file size of 10Mb</p> --}}
+                <p>Save or export the file as a csv,xlsx,or xls file before uploading it to yesvite</p>
+                <p>Columns are Firstname,Last Name,Email,Phone Number</p>
                 </div>
             </form>
         </div>
