@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="yesvite-user-list-div" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="guest-users-wrp selected-contacts-list " id="selected-contacts">
         {{-- <a href="#" class="guest-user d-block">
          <div class="guest-user-img guest-total">
@@ -244,7 +244,7 @@
         @endforeach
     </div>
 </div>
-<div class="tab-pane fade" id="phone-contact-list-div" role="tabpanel" aria-labelledby="profile-tab">
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <div class="guest-users-wrp selected-phone-list">
         {{-- <a href="#" class="guest-user d-block">
          <div class="guest-user-img guest-total">
