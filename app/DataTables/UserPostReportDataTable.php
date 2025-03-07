@@ -122,7 +122,7 @@ class UserPostReportDataTable extends DataTable
             })
             ->addColumn('post_owner', function ($row) {
 
-                return $row->event_posts->users->firstname . ' ' . $row->event_posts->users->lastname;
+                return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
                 // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
             })
             ->addColumn('account_status', function ($row) {
