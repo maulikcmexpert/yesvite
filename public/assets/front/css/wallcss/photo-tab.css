@@ -263,13 +263,7 @@
 }
 
 .photo-detail-slider .posts-card-show-post-img{
-    height: 100%;
-    min-height: 200px;
-    max-height: 100%;
-}
-
-.photo-detail-slider .posts-card-show-post-img img{
-    aspect-ratio: unset !important;
+    height: 420px;
 }
 
 .selected-photo-btn{
@@ -786,6 +780,18 @@
     }
     .photo-detail-slider .posts-card-show-post-img {
         height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        object-fit: contain !important;
+        height: calc(100vh - 430px);
+    }
+    .photo-detail-slider .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+    }
+    .photo-detail-slider .posts-card-show-post-img {
+        height: 100%;
+        min-height: 200px;
+        max-height: calc(100vh - 430px);
     }
 }
 
