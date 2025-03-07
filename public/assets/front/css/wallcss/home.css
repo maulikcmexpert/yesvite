@@ -3340,7 +3340,7 @@ main.new-main-content {
     min-width: 19px;
 }
 
-#wall_profile .all-events-filtermodal .modal-content {
+#wall_profile .modal-content {
     width: 100%;
     max-width: 500px;
     height: auto;
