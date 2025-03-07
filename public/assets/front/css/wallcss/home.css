@@ -3324,20 +3324,20 @@ main.new-main-content {
 }
 
 
-#nav-guests-tab span{
+#nav-guests-tab span {
     background-color: #E03137;
     border-radius: 50%;
-    padding: 6px 6px;
-    display:inline-flex;
+    padding: 3px 3px;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     font-family: var(--SFProDisplay-Semibold);
-    font-size: 12px;
+    font-size: 11px;
     line-height: normal;
     color: var(--white);
     margin-left: 5px;
     width: max-content;
-    min-width: 25px;
+    min-width: 19px;
 }
 
 
@@ -3811,6 +3811,12 @@ main.new-main-content {
 
     .create-post-modal .modal-body {
         max-height: calc(100vh - 150px);
+    }
+    .event-center-tabs-main .nav-tabs .nav-link{
+        padding: 10px 5px !important;
+    }
+    #nav-guests-tab span {
+        margin-left: 2px;
     }
 
 }
