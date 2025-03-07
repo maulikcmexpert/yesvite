@@ -1069,6 +1069,10 @@ $(document).ready(function () {
         }
     });
 
+    window.addEventListener("focus", function() {
+        console.log("User is active (window is focused)");
+    });
+
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
         var $this = $(this);
