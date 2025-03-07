@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\{
     EventPost,
     EventPostImage,
-    UserReportToPost
+    UserReportToPost,
+    User
 };
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
@@ -189,5 +190,19 @@ class UserPostReportController extends Controller
             UserReportToPost::where('event_post_id', $event_report['event_post_id'])->delete();
         }
         return true;
+    }
+    public function updateStatus(Request $request)
+    {
+        $user = User::find($request->id); // Assuming 'id' is sent from the frontend
+
+        if ($user) {
+            // Toggle the status between 'Ban' and 'Unban'
+            $user->account_status = $user->account_status == 'Block' ? 'Unblock' : 'Block';
+            $user->save();
+
+            return response()->json(['status' => 'success', 'message' => 'User status updated successfully.']);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'User not found.']);
     }
 }

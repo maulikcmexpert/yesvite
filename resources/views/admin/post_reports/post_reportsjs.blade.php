@@ -98,7 +98,32 @@
 
 
     });
-    $(document).on('click','.block-user',function(){
-        alert();
-    });
+    $(document).on('click', '.dropdown-item.block-user, .dropdown-item.unblock-user', function(e) {
+            e.preventDefault();
+
+            var userId = $(this).data('id'); // Get user ID
+            var $button = $(this).closest('.dropdown').find(
+            '.dropdown-toggle'); // The button to update text
+            var isBlockAction = $(this).hasClass('block-user'); // Check if the action is to block
+
+            $.ajax({
+                url: "{{ route('update.suspend') }}", // Your route for updating the status
+                type: "POST",
+                data: {
+                    id: userId,
+                    _token: "{{ csrf_token() }}" // Ensure you send the CSRF token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success('Status Updated');
+                        window.location.reload();
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }.bind(this), // Bind 'this' to ensure the correct context
+                error: function() {
+                    toastr.error('An error occurred while updating the status.');
+                }
+            });
+        });
 </script>
