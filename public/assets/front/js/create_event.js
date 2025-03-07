@@ -5119,7 +5119,7 @@ async function saveDesignData(direct = false) {
 
     try {
         const downloadImage = document.getElementById("imageEditor1");
-        const dbJson = getTextDataFromCanvas();
+        dbJson = getTextDataFromCanvas();
         console.log("getTextDataFromCanvas");
 
         eventData.textData = dbJson;
