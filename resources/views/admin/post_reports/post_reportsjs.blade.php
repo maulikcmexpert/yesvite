@@ -101,7 +101,7 @@
     $(document).on('click', '.dropdown-item.block-user, .dropdown-item.unblock-user', function(e) {
             e.preventDefault();
 
-            var userId = $(this).data('id'); // Get user ID
+            var userId = $(this).attr('data-id'); // Get user ID
             var $button = $(this).closest('.dropdown').find(
             '.dropdown-toggle'); // The button to update text
             var isBlockAction = $(this).hasClass('block-user'); // Check if the action is to block
