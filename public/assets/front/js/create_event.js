@@ -16,7 +16,6 @@ var final_step = $("#step").val() != "" ? $("#step").val() : 1;
 var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
 var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 
-
 eventData.isCopy = isCopy;
 var Alreadyguest = $("#alreadyCount").val();
 var isStartTime = 0;
@@ -3983,7 +3982,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 }
                 if (response == 1) {
                     console.log(eventData);
-                    
+
                     toastr.success("Event Saved as Draft");
                     window.location.href = "home";
                 }
@@ -4469,7 +4468,6 @@ function savePage1Data(close = null, direct = false) {
         eventData.hosted_by = hostedby;
         eventData.start_event_date = start_event_date;
         eventData.end_event_date = end_event_date;
-
     }
 
     // eventData.page1 = {
@@ -4897,7 +4895,7 @@ $(document).on("click", ".li_design .edit-design", function (e) {
     }
 });
 
-$(document).on("click", ".li_design .pick-card",async function (e) {
+$(document).on("click", ".li_design .pick-card", async function (e) {
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData(true);
@@ -4911,7 +4909,6 @@ $(document).on("click", ".li_design .pick-card",async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-   
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -5159,7 +5156,7 @@ async function captureImage(element) {
     // });
 
     try {
-        const canvas = await html2canvas(element, { scale: 1 }); // Set scale to avoid large images
+        const canvas = await html2canvas(element, { scale: 3, useCORS: true }); // Set scale to avoid large images
         return new Promise((resolve) => {
             canvas.toBlob((blob) => resolve(blob), "image/png", 1);
         });
@@ -6806,10 +6803,10 @@ $(document).on("click", ".final_create_event", function (e) {
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
             $("#created_event_id").val(response.event_id);
-            $('#event_copy_link').val(response.copy_link);
+            $("#event_copy_link").val(response.copy_link);
             if (response.is_registry == "1") {
                 $("#gift_registry_logo").html(response.view);
-                $('#gift_heading_main').removeClass('d-none');
+                $("#gift_heading_main").removeClass("d-none");
                 // $('#eventModal').modal('show');
             } else {
                 toastr.success("Event Created Successfully");
@@ -8475,8 +8472,7 @@ $(document).on("keyup", "#search_contacts", function () {
             false
         );
     }, 750);
-            $("#loader").css("display", "none");
-
+    $("#loader").css("display", "none");
 });
 
 // $("#YesviteContactsAll").html(html.view);
@@ -8484,14 +8480,13 @@ $(document).on("keyup", "#search_contacts", function () {
 $("#YesviteContactsAll").on("scroll", function () {
     // clearTimeout(debounceTimer);
     // debounceTimer = setTimeout(() => {
-        // $("#loader").css("display", "flex");
+    // $("#loader").css("display", "flex");
 
-    if (busycontact || create_event_phone_scroll){
+    if (busycontact || create_event_phone_scroll) {
         $("#loader").css("display", "none");
 
         return;
-
-    } 
+    }
 
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(this)[0].scrollHeight;
@@ -8975,11 +8970,11 @@ function updateEventData() {
             } else {
                 $("#loader").css("display", "none");
                 $("#created_event_id").val(response.event_id);
-                $('#event_copy_link').val(response.copy_link);
+                $("#event_copy_link").val(response.copy_link);
                 if (response.is_registry == "1") {
                     $("#gift_registry_logo").html(response.view);
-                    $('#gift_heading_main').removeClass('d-none');
-                    
+                    $("#gift_heading_main").removeClass("d-none");
+
                     // $('#eventModal').modal('show');
                 } else {
                     toastr.success("Event Created Successfully");
@@ -9385,7 +9380,6 @@ async function step3open() {
         if (stepVal == "0") {
             get_user(type);
         }
-        
     }
 }
 
@@ -9768,7 +9762,7 @@ function getcoins() {
     var max_guest = $("#coins").val();
 
     var AllCoins = max_guest - Alreadyguest;
-    
+
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
@@ -9825,7 +9819,6 @@ function colorchange() {
     }
 }
 if (final_step == "1" && isCohost == "1") {
-   
     var dbJson = $("#static_information").val() || null;
     $(".li_design").find(".side-bar-list").removeClass("menu-success");
     $(".li_design").addClass("active");
@@ -9859,16 +9852,18 @@ $(document).on("click", ".previousImeg", async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-    
 });
-$(document).on("click","#event_copy_link_btn",function(e){
+$(document).on("click", "#event_copy_link_btn", function (e) {
     e.preventDefault(); // Prevents any default button action
     var copyText = $("#event_copy_link").val();
-    navigator.clipboard.writeText(copyText).then(function() {
-        toastr.success('Link Copied');
-    }).catch(function(err) {
-        console.error("Failed to copy: ", err);
-    });
+    navigator.clipboard
+        .writeText(copyText)
+        .then(function () {
+            toastr.success("Link Copied");
+        })
+        .catch(function (err) {
+            console.error("Failed to copy: ", err);
+        });
 });
 
 // $(document).on('click','.openProfileModal',function(){
@@ -9878,7 +9873,7 @@ $(document).on("click","#event_copy_link_btn",function(e){
 $(document).on("click", ".openProfileModal", function () {
     let userId = $(this).attr("data-userid"); // Get user_id from clicked element
     $.ajax({
-        url: base_url + "event_wall/myProfile",// Adjust this URL as per your route
+        url: base_url + "event_wall/myProfile", // Adjust this URL as per your route
         type: "POST",
         data: JSON.stringify({ user_id: userId }),
         contentType: "application/json",
@@ -9891,11 +9886,25 @@ $(document).on("click", ".openProfileModal", function () {
                 let profileData = response.data;
                 let profilePrivacy = profileData.profile_privacy || [];
                 // Set username
-                $("#post_name").text(profileData.firstname + " " + profileData.lastname);
-                let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
-                let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
+                $("#post_name").text(
+                    profileData.firstname + " " + profileData.lastname
+                );
+                let showLocation = profilePrivacy.some(
+                    (item) =>
+                        item.profile_privacy === "location" &&
+                        item.status === "1"
+                );
+                let showPhotos = profilePrivacy.some(
+                    (item) =>
+                        item.profile_privacy === "photo" && item.status === "1"
+                );
                 if (showLocation) {
-                    let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
+                    let locationText = [
+                        profileData.address,
+                        profileData.city,
+                        profileData.state,
+                        profileData.zip_code,
+                    ]
                         .filter(Boolean)
                         .join(", ");
 
@@ -9903,10 +9912,10 @@ $(document).on("click", ".openProfileModal", function () {
                 } else {
                     $("#location").text("");
                 }
-                    $("#photos").text(profileData.total_photos);
-                    $("#comments").text(profileData.comments);
-                    $("#events").text(profileData.total_events);
-                    $("#member_since").text(profileData.created_at);
+                $("#photos").text(profileData.total_photos);
+                $("#comments").text(profileData.comments);
+                $("#events").text(profileData.total_events);
+                $("#member_since").text(profileData.created_at);
                 // Handle profile image or initials
                 let profileImgElement = $("#modal-profile-img");
                 let initialsElement = $("#modal-initials");
@@ -9915,22 +9924,29 @@ $(document).on("click", ".openProfileModal", function () {
                     profileImgElement.attr("src", profileData.profile).show();
                     initialsElement.hide();
                 } else {
-                    let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
-                    let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
-                    $("#modal-initials").removeClass().addClass("fontcolor"+profileData.firstname[0].toUpperCase());
+                    let firstInitial = profileData.firstname
+                        ? profileData.firstname[0].toUpperCase()
+                        : "";
+                    let secondInitial = profileData.lastname
+                        ? profileData.lastname[0].toUpperCase()
+                        : "";
+                    $("#modal-initials")
+                        .removeClass()
+                        .addClass(
+                            "fontcolor" + profileData.firstname[0].toUpperCase()
+                        );
 
                     initialsElement.text(firstInitial + secondInitial).show();
                     profileImgElement.hide();
                 }
                 let background_img = $("#modal-background-img");
-               if ( profileData.bg_profile != "") {
+                if (profileData.bg_profile != "") {
                     background_img.attr("src", profileData.bg_profile).show();
-                    $("#show_img").addClass('d-none');
-
-                }else{
-                    background_img.attr("src",'');
+                    $("#show_img").addClass("d-none");
+                } else {
+                    background_img.attr("src", "");
                     background_img.hide();
-                    $("#show_img").removeClass('d-none');
+                    $("#show_img").removeClass("d-none");
                 }
 
                 let messageLink = $(".wall_profile-message-link");
@@ -9951,14 +9967,13 @@ $(document).on("click", ".openProfileModal", function () {
                 // Show the modal
                 $("#profileModal").modal("show");
                 // $("#wall_profile").modal("show");
-
             } else {
                 alert(response.message);
             }
         },
         error: function () {
             // alert("Failed to fetch profile data.");
-        }
+        },
     });
 });
 function generateProfileImage(firstname, lastname) {
@@ -9968,5 +9983,7 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"}</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${
+        initials || "NA"
+    }</h5>`;
 }
