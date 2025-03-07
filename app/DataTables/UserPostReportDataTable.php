@@ -120,7 +120,12 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
-            ->addColumn('post_owner', function ($row) {
+            ->addColumn('post_owner_username', function ($row) {
+
+                // return $row->event_posts->user->email;
+                return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
+            })
+            ->addColumn('post_owner_email', function ($row) {
 
                 return $row->event_posts->user->email;
                 // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
@@ -167,7 +172,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner','account_status','delete','action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner_username','post_owner_email','account_status','delete','action']);
     }
 
     /**
@@ -242,10 +247,11 @@ class UserPostReportDataTable extends DataTable
             Column::make('username')->title('Username(Reported By)')->orderable(true),
             Column::make('email')->title('Email(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(true),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('report_description')->title("Report Description")->width('150px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
-            Column::make('post_owner')->title("Post Onwner")->orderable(false),
+            Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(false),
+            Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(false),
             Column::make('account_status')->title("Account Status")->orderable(false),
             // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
