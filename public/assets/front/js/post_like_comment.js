@@ -760,19 +760,17 @@ $(document).on("keyup", ".search-phone", function () {
             $(".phone-contact").show();
         } else {
             $(".phone-contact").each(function () {
-                var contactName = $(this).find(".phone-search").attr("data-search");
-
-                if (contactName) {
-                    contactName = contactName.toLowerCase();
-                } else {
-                    contactName = "";
-                }
-
+                var contactName = $(this)
+                    .find(".phone-search")
+                    .attr("data-search")
+                    .toLowerCase();
+    
                 if (contactName.indexOf(searchQuery) !== -1) {
-                    $(this).show();
+                    $(this).show(); // Show this contact
                 } else {
-                    $(this).hide();
+                    $(this).hide(); // Hide this contact
                 }
+    
             });
         }
     }, 1000); // Delay search by 1 second
