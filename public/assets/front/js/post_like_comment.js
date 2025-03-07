@@ -747,24 +747,22 @@ $(document).on("keyup", ".search-yesvite", function () {
     }
 });
 
-var phoneSearchTimeout; // Declare globally
+var phoneSearchTimeout; 
 
 $(document).on("keyup", ".search-phone", function () {
-    var inputField = $(this); // Store reference to input field
+    var inputField = $(this); 
+    clearTimeout(phoneSearchTimeout); 
 
-    clearTimeout(phoneSearchTimeout); // Clear previous timeout
-
-    phoneSearchTimeout = setTimeout(function () {
-        var searchQuery = inputField.val().toLowerCase().trim(); // Ensure trimmed, lowercase search
+    // phoneSearchTimeout = setTimeout(function () {
+        var searchQuery = inputField.val().toLowerCase().trim(); 
 
         $(".phone-contact").each(function () {
             var contactName = $(this).find(".phone-search").attr("data-search");
 
-            // Ensure contactName is valid and convert to lowercase
             if (contactName) {
                 contactName = contactName.toString().toLowerCase().trim();
             } else {
-                contactName = ""; // Set empty string if undefined
+                contactName = ""; 
             }
 
             // // Debugging output
@@ -774,12 +772,12 @@ $(document).on("keyup", ".search-phone", function () {
 
             // Perform case-insensitive search
             if (contactName.includes(searchQuery)) {
-                $(this).show(); // Show this contact
+                $(this).show();
             } else {
-                $(this).hide(); // Hide this contact
+                $(this).hide(); 
             }
         });
-    }, 1000); // Delay search by 1 second
+    // }, 1000);
 });
 
 
