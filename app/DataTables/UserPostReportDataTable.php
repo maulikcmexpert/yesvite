@@ -82,6 +82,7 @@ class UserPostReportDataTable extends DataTable
             ->addColumn('username', function ($row) {
 
                 return $row->users->firstname . ' ' . $row->users->lastname;
+                // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
             })
             ->addColumn('email', function ($row) {
 
@@ -119,6 +120,11 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
+            ->addColumn('post_owner', function ($row) {
+
+                return $row->event_posts->user->email;
+                // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
+            })
             ->addColumn('account_status', function ($row) {
                 // Determine button text and dropdown action based on account status
                 $buttonText = $row->account_status == 'Block' ? 'Inactivate' : 'Active';
@@ -133,7 +139,7 @@ class UserPostReportDataTable extends DataTable
                             ' . $buttonText . '
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->users->id . '"data-status="' . $actionData . '">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->event_posts->user_id . '"data-status="' . $actionData . '">
                                 ' . $dropdownText . '
                             </a>
                         </div>
@@ -161,7 +167,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','account_status','delete','action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner','account_status','delete','action']);
     }
 
     /**
@@ -239,7 +245,8 @@ class UserPostReportDataTable extends DataTable
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
-            // Column::make('account_status')->title("Account Status")->orderable(false),
+            Column::make('post_owner')->title("Post Onwner")->orderable(false),
+            Column::make('account_status')->title("Account Status")->orderable(false),
             // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
