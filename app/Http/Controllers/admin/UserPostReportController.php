@@ -193,12 +193,11 @@ class UserPostReportController extends Controller
     }
     public function updateStatus(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = User::find($request->id); // Assuming 'id' is sent from the frontend
 
         if ($user) {
-            // Toggle the status between 'Ban' and 'Unban'
-            $user->account_status = $user->account_status == 'Block' ? 'Unblock' : 'Block';
+            $user->account_status = ($user->account_status == 'Block') ? 'Unblock' : 'Block';
             $user->save();
 
             return response()->json(['status' => 'success', 'message' => 'User status updated successfully.']);
