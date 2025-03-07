@@ -754,11 +754,24 @@ $(document).on("keyup", ".search-phone", function () {
         $(".phone-contact").show();
     } else {
         $(".phone-contact").each(function () {
-            var contactName = $(this)
-                .find(".phone-search")
-                .data("search")
-                .toLowerCase();
+            // var contactName = $(this)
+            //     .find(".phone-search")
+            //     .data("search")
+            //     .toLowerCase();
 
+            // if (contactName.indexOf(searchQuery) !== -1) {
+            //     $(this).show(); // Show this contact
+            // } else {
+            //     $(this).hide(); // Hide this contact
+            // }
+            var contactName = $(this).find(".phone-search").attr("data-search"); // Use .attr() instead of .data()
+    
+            if (contactName) { // Ensure it's not undefined or null
+                contactName = contactName.toLowerCase(); // Convert to lowercase
+            } else {
+                contactName = ""; // Default empty string to avoid errors
+            }
+        
             if (contactName.indexOf(searchQuery) !== -1) {
                 $(this).show(); // Show this contact
             } else {
