@@ -1493,6 +1493,11 @@ table#userpostreport-table{
     table-layout: fixed;
 }
 
+table#userpostreport-table th,
+table#userpostreport-table td{
+    width: auto !important;
+}
+
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
