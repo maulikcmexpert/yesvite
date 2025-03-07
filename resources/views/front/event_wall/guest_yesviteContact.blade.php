@@ -189,7 +189,7 @@
                 </a>
                 <div class="w-100">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="javascript:;" class="invite-user-name yesvite-search" 
+                        <a href="javascript:;" class="invite-user-name yesvite-search openProfileModal" 
                             data-profile="{{$contact->profile}}"
                             data-bs-toggle="modal" data-bs-target="#wall_profile" data-userid="{{$contact->id}}"
                             data-search = "{{ $contact->firstname }} {{ $contact->lastname }}">
