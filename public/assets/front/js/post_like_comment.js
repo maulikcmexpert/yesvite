@@ -749,29 +749,35 @@ $(document).on("keyup", ".search-yesvite", function () {
 var phoneSearchTimeout;
 
 $(document).on("keyup", ".search-phone", function () {
-    clearTimeout(phoneSearchTimeout); // Clear previous timeout if user keeps typing
+    var inputField = $(this); // Store reference to the input field
+
+    clearTimeout(phoneSearchTimeout); // Clear previous timeout
+
     phoneSearchTimeout = setTimeout(function () {
+        var searchQuery = inputField.val().toLowerCase(); // Use stored reference
 
-    var searchQuery = $(this).val().toLowerCase();
+        if (searchQuery === "") {
+            $(".phone-contact").show();
+        } else {
+            $(".phone-contact").each(function () {
+                var contactName = $(this).find(".phone-search").attr("data-search");
 
-    if (searchQuery === "") {
-        $(".phone-contact").show();
-    } else {
-        $(".phone-contact").each(function () {
-            var contactName = $(this)
-                .find(".phone-search")
-                .attr("data-search")
-                .toLowerCase();
+                if (contactName) {
+                    contactName = contactName.toLowerCase();
+                } else {
+                    contactName = "";
+                }
 
-            if (contactName.indexOf(searchQuery) !== -1) {
-                $(this).show(); // Show this contact
-            } else {
-                $(this).hide(); // Hide this contact
-            }
-        });
-    }
-}, 1000);
+                if (contactName.indexOf(searchQuery) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    }, 1000); // Delay search by 1 second
 });
+
 
 var allContactsSuccess = false;
 let selectedContacts = [];
