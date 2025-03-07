@@ -5157,7 +5157,7 @@ async function captureImage(element) {
 
     try {
         const canvas = await html2canvas(element, {
-            scale: 1.5,
+            scale: 1,
             useCORS: true,
         }); // Set scale to avoid large images
         return new Promise((resolve) => {
