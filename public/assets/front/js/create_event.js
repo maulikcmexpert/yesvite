@@ -5156,7 +5156,7 @@ async function captureImage(element) {
     // });
     try {
         return new Promise((resolve) => {
-            const imgData = fabricCanvas.toDataURL({
+            const imgData = canvas.toDataURL({
                 format: "png", // 'jpeg' if you need compressed format
                 quality: 1.0, // Maximum quality
                 multiplier: 3, // Increases resolution (default is 1)
