@@ -747,39 +747,44 @@ $(document).on("keyup", ".search-yesvite", function () {
     }
 });
 
+var phoneSearchTimeout; // Declare globally
+
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase();
+    var inputField = $(this); // Store reference to input field
 
-    if (searchQuery === "") {
-        $(".phone-contact").show();
-    } else {
-        $(".phone-contact").each(function () {
-            // var contactName = $(this)
-            //     .find(".phone-search")
-            //     .data("search")
-            //     .toLowerCase();
+    clearTimeout(phoneSearchTimeout); // Clear previous timeout
 
-            // if (contactName.indexOf(searchQuery) !== -1) {
-            //     $(this).show(); // Show this contact
-            // } else {
-            //     $(this).hide(); // Hide this contact
-            // }
-            var contactName = $(this).find(".phone-search").attr("data-search"); // Use .attr() instead of .data()
-    
-            if (contactName) { // Ensure it's not undefined or null
-                contactName = contactName.toLowerCase(); // Convert to lowercase
-            } else {
-                contactName = ""; // Default empty string to avoid errors
-            }
-        
-            if (contactName.indexOf(searchQuery) !== -1) {
-                $(this).show(); // Show this contact
-            } else {
-                $(this).hide(); // Hide this contact
-            }
-        });
-    }
+    phoneSearchTimeout = setTimeout(function () {
+        var searchQuery = inputField.val().toLowerCase(); // Use stored reference
+
+        if (searchQuery === "") {
+            $(".phone-contact").show();
+        } else {
+            $(".phone-contact").each(function () {
+                var contactName = $(this).find(".phone-search").attr("data-search");
+
+                if (contactName) {
+                    contactName = contactName.toLowerCase(); // Ensure it's not undefined before calling toLowerCase
+                } else {
+                    contactName = "";
+                }
+
+                // Debugging
+                console.log("Search Query:", searchQuery);
+                console.log("Contact Name:", contactName);
+                console.log("Index Found:", contactName.indexOf(searchQuery));
+
+                if (contactName.indexOf(searchQuery) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    }, 1000); // Delay search by 1 second
 });
+
+
 
 var allContactsSuccess = false;
 let selectedContacts = [];
