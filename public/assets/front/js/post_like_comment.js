@@ -802,7 +802,7 @@ $(document).ready(function () {
         $(".see_invite_nav_yesvite").addClass("active");
         $('#home').addClass('show active');
         $(".see_invite_nav_phone").removeClass("active");
-        $('#home').removeClass('show active');;
+        $('#profile').removeClass('show active');;
         $(".phoneContact-checkbox:not(:disabled)").prop("checked", false);
         $(".contact-checkbox:not(:disabled)").prop("checked", false);
         $(".phone-checkbox:not(:disabled)").prop("checked", false);
