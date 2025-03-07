@@ -203,7 +203,7 @@ class UserPostReportDataTable extends DataTable
                     ->whereColumn('users.id', function ($query) {
                         $query->select('event_posts.user_id')
                             ->from('event_posts')
-                            ->whereColumn('event_posts.id', 'user_report_to_posts.post_id');
+                            ->whereColumn('event_posts.id', 'user_report_to_posts.event_post_id');
                     });
                }
 
