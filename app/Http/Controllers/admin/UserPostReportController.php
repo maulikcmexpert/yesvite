@@ -193,7 +193,7 @@ class UserPostReportController extends Controller
     }
     public function updateStatus(Request $request)
     {
-        dd($request);
+        // dd($request);
         $user = User::find($request->id); // Assuming 'id' is sent from the frontend
         // dd($user->account_status);
         if ($user) {
