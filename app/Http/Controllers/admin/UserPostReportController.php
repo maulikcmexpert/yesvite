@@ -195,7 +195,7 @@ class UserPostReportController extends Controller
     {
         // dd($request);
         $user = User::find($request->id); // Assuming 'id' is sent from the frontend
-        dd($user->account_status);
+        // dd($user->account_status);
         if ($user) {
             $user->account_status = ($user->account_status == 'Block') ? 'Unblock' : 'Block';
             $user->save();
