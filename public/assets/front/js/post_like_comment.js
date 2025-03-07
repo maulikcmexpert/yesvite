@@ -756,16 +756,13 @@ $(document).on("keyup", ".search-phone", function () {
     phoneSearchTimeout = setTimeout(function () {
         var searchQuery = inputField.val().toLowerCase().trim();
 
-        // Show all if search is empty
         if (searchQuery === "") {
             $(".phone-contact").show();
             return;
         }
 
-        // Hide all first
         $(".phone-contact").hide();
 
-        // Filter and show only matching elements
         $(".phone-contact").filter(function () {
             var contactName = $(this).find(".phone-search").attr("data-search");
 
@@ -775,7 +772,7 @@ $(document).on("keyup", ".search-phone", function () {
                 contactName = "";
             }
 
-            return contactName.includes(searchQuery); // Return true to keep, false to remove
+            return contactName.includes(searchQuery); 
         }).show();
 
     }, 1000);
