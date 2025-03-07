@@ -5154,20 +5154,23 @@ async function captureImage(element) {
     //         .then((blob) => resolve(blob))
     //         .catch((error) => reject(error));
     // });
-    let imgData = canvas.toDataURL({
-        format: "png", // Use 'jpeg' if needed
-        quality: 1.0, // Maximum quality
-        multiplier: 3, // Increases resolution (default is 1)
-    });
+    try {
+        return new Promise((resolve) => {
+            const imgData = canvas.toDataURL({
+                format: "png", // 'jpeg' if you need compressed format
+                quality: 1.0, // Maximum quality
+                multiplier: 3, // Increases resolution (default is 1)
+            });
 
-    // Create a temporary link to download the image
-    let link = document.createElement("a");
-    link.href = imgData;
-    link.download = "edited-image.png";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    return;
+            // Convert DataURL to Blob
+            fetch(imgData)
+                .then((res) => res.blob())
+                .then((blob) => resolve(blob));
+        });
+    } catch (error) {
+        console.error("Capture error:", error);
+        return null;
+    }
     try {
         const canvas = await html2canvas(element, {
             scale: 1,
