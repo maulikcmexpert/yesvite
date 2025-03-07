@@ -746,10 +746,11 @@ $(document).on("keyup", ".search-yesvite", function () {
         });
     }
 });
-var phoneSearchTimeout;
+
+var phoneSearchTimeout; // Declare globally
 
 $(document).on("keyup", ".search-phone", function () {
-    var inputField = $(this); // Store reference to the input field
+    var inputField = $(this); // Store reference to input field
 
     clearTimeout(phoneSearchTimeout); // Clear previous timeout
 
@@ -760,22 +761,29 @@ $(document).on("keyup", ".search-phone", function () {
             $(".phone-contact").show();
         } else {
             $(".phone-contact").each(function () {
-                var contactName = $(this)
-                    .find(".phone-search")
-                    .attr("data-search")
-                    .toLowerCase();
-                console.log(contactName.indexOf(searchQuery));
-                
-                if (contactName.indexOf(searchQuery) !== -1) {
-                    $(this).show(); // Show this contact
+                var contactName = $(this).find(".phone-search").attr("data-search");
+
+                if (contactName) {
+                    contactName = contactName.toLowerCase(); // Ensure it's not undefined before calling toLowerCase
                 } else {
-                    $(this).hide(); // Hide this contact
+                    contactName = "";
                 }
-    
+
+                // Debugging
+                console.log("Search Query:", searchQuery);
+                console.log("Contact Name:", contactName);
+                console.log("Index Found:", contactName.indexOf(searchQuery));
+
+                if (contactName.indexOf(searchQuery) !== -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
             });
         }
     }, 1000); // Delay search by 1 second
 });
+
 
 
 var allContactsSuccess = false;
