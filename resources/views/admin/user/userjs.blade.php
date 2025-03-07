@@ -402,11 +402,13 @@
                                 .addClass('block-user');
                         }
                     } else {
-                        alert(response.message);
+                        // alert(response.message);
+                        toastr.error(response.message);
                     }
                 }.bind(this), // Bind 'this' to ensure the correct context
                 error: function() {
-                    alert('An error occurred while updating the status.');
+                    toastr.error('An error occurred while updating the status.');
+                    // alert('An error occurred while updating the status.');
                 }
             });
         });
