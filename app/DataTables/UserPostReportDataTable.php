@@ -139,7 +139,7 @@ class UserPostReportDataTable extends DataTable
                             ' . $buttonText . '
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $$row->event_posts->id . '"data-status="' . $actionData . '">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->event_posts->user_id . '"data-status="' . $actionData . '">
                                 ' . $dropdownText . '
                             </a>
                         </div>
