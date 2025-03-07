@@ -5154,9 +5154,28 @@ async function captureImage(element) {
     //         .then((blob) => resolve(blob))
     //         .catch((error) => reject(error));
     // });
-
     try {
-        const canvas = await html2canvas(element, { scale: 2, useCORS: true }); // Set scale to avoid large images
+        return new Promise((resolve) => {
+            const imgData = canvas.toDataURL({
+                format: "png", // 'jpeg' if you need compressed format
+                quality: 1.0, // Maximum quality
+                multiplier: 3, // Increases resolution (default is 1)
+            });
+
+            // Convert DataURL to Blob
+            fetch(imgData)
+                .then((res) => res.blob())
+                .then((blob) => resolve(blob));
+        });
+    } catch (error) {
+        console.error("Capture error:", error);
+        return null;
+    }
+    try {
+        const canvas = await html2canvas(element, {
+            scale: 1,
+            useCORS: true,
+        }); // Set scale to avoid large images
         return new Promise((resolve) => {
             canvas.toBlob((blob) => resolve(blob), "image/png", 1);
         });

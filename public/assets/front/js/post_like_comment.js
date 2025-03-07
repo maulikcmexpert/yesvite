@@ -756,8 +756,14 @@ $(document).on("keyup", ".search-phone", function () {
         $(".phone-contact").each(function () {
             var contactName = $(this)
                 .find(".phone-search")
-                .data("search")
+                .attr("data-search")
                 .toLowerCase();
+
+                if (typeof contactName === "string") {
+                    contactName = contactName.toLowerCase();
+                } else {
+                    contactName = ""; // Set a default empty string if the value is missing
+                }
 
             if (contactName.indexOf(searchQuery) !== -1) {
                 $(this).show(); // Show this contact

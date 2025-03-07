@@ -1478,13 +1478,22 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
 #toast-container>.toast-success {
     background-image: url('../../../toater_success_icon.png') !important;
     
-
-    ('../../../assets/toater_success_icon.png')
 }
 
 #toast-container>div{
     opacity: 1 !important;
 }
+
+#userpostreport-table_wrapper{
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+
+table#userpostreport-table .report-description-td {
+    width: auto !important;
+}
+
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {

@@ -120,18 +120,23 @@ class UserPostReportDataTable extends DataTable
                     return "<span class='text-info'>Recording</span>";
                 }
             })
-            ->addColumn('post_owner', function ($row) {
+            ->addColumn('post_owner_username', function ($row) {
+
+                // return $row->event_posts->user->email;
+                return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
+            })
+            ->addColumn('post_owner_email', function ($row) {
 
                 return $row->event_posts->user->email;
                 // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
             })
             ->addColumn('account_status', function ($row) {
                 // Determine button text and dropdown action based on account status
-                $buttonText = $row->account_status == 'Block' ? 'Inactivate' : 'Active';
-                $dropdownText = $row->account_status == 'Block' ? 'Active' : 'Inactivate';
+                $buttonText = $row->event_posts->user->account_status == 'Block' ? 'Inactivate' : 'Active';
+                $dropdownText = $row->event_posts->user->account_status == 'Block' ? 'Active' : 'Inactivate';
                 // Set the action class for toggling
-                $actionClass = $row->account_status == 'Block' ? 'unblock-user' : 'block-user';
-                $actionData = $row->account_status == 'Block' ? '0' : '1';
+                $actionClass = $row->event_posts->user->account_status == 'Block' ? 'unblock-user' : 'block-user';
+                $actionData = $row->event_posts->user->account_status == 'Block' ? '0' : '1';
 
                 return '
                     <div class="dropdown">
@@ -167,7 +172,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner','account_status','delete','action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner_username','post_owner_email','account_status','delete','action']);
     }
 
     /**
@@ -191,8 +196,16 @@ class UserPostReportDataTable extends DataTable
                 if ($request->order[0]['column'] == '5') {
                     $column = Event::select('event_name')
                     ->whereColumn('events.id', 'user_report_to_posts.event_id');
-    
                 }
+
+                if ($request->order[0]['column'] == '7') {
+                    $column = User::select('firstname')
+                    ->whereColumn('users.id', function ($query) {
+                        $query->select('event_posts.user_id')
+                            ->from('event_posts')
+                            ->whereColumn('event_posts.id', 'user_report_to_posts.post_id');
+                    });
+               }
 
                 if ($request->order[0]['column'] == '3') {
                     $column = 'report_type';
@@ -239,13 +252,14 @@ class UserPostReportDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
-            Column::make('username')->title('Username(Reported By)')->orderable(true),
+            Column::make('username')->title('Username<br><span>(Reported By)</span>')->className('username_By')->orderable(true),
             Column::make('email')->title('Email(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(true),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('report_description')->title("Report Description")->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
-            Column::make('post_owner')->title("Post Onwner")->orderable(false),
+            Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(true),
+            Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(true),
             Column::make('account_status')->title("Account Status")->orderable(false),
             // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
