@@ -746,6 +746,7 @@ $(document).on("keyup", ".search-yesvite", function () {
         });
     }
 });
+var phoneSearchTimeout;
 
 $(document).on("keyup", ".search-phone", function () {
     clearTimeout(phoneSearchTimeout); // Clear previous timeout if user keeps typing
