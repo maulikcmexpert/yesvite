@@ -3324,6 +3324,22 @@ main.new-main-content {
 }
 
 
+#nav-guests-tab span {
+    background-color: #E03137;
+    border-radius: 50%;
+    padding: 3px 3px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 11px;
+    line-height: normal;
+    color: var(--white);
+    margin-left: 5px;
+    width: max-content;
+    min-width: 19px;
+}
+
 
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
@@ -3796,13 +3812,19 @@ main.new-main-content {
     .create-post-modal .modal-body {
         max-height: calc(100vh - 150px);
     }
+    .event-center-tabs-main .nav-tabs .nav-link{
+        padding: 10px 5px !important;
+    }
+    #nav-guests-tab span {
+        margin-left: 2px;
+    }
 
 }
 
 @media only screen and (max-width: 424px) {
     .event-center-tabs-main .nav-tabs .nav-link {
         font-size: 14px !important;
-        padding: 10px 10px !important;
+        padding: 10px 5px !important;
     }
 
     .event-center-title button {
