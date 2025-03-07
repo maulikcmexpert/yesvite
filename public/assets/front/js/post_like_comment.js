@@ -748,53 +748,38 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 var phoneSearchTimeout; 
+
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase().trim();
-    var contacts = $(".phone-contact");
+    var inputField = $(this);
+    clearTimeout(phoneSearchTimeout);
 
-    // Instantly show all contacts when input is empty
-    if (searchQuery === "") {
-        contacts.show();
-        return;
-    }
+    phoneSearchTimeout = setTimeout(function () {
+        var searchQuery = inputField.val().toLowerCase().trim();
 
-    // Hide all contacts first
-    contacts.hide();
+        // Show all if search is empty
+        if (searchQuery === "") {
+            $(".phone-contact").show();
+            return;
+        }
 
-    // Show only matching elements using an optimized selector
-    $(".phone-search[data-search*='" + searchQuery + "']").closest(".phone-contact").show();
+        // Hide all first
+        $(".phone-contact").hide();
+
+        // Filter and show only matching elements
+        $(".phone-contact").filter(function () {
+            var contactName = $(this).find(".phone-search").attr("data-search");
+
+            if (contactName) {
+                contactName = contactName.toString().toLowerCase().trim();
+            } else {
+                contactName = "";
+            }
+
+            return contactName.includes(searchQuery); // Return true to keep, false to remove
+        }).show();
+
+    }, 1000);
 });
-
-
-// $(document).on("keyup", ".search-phone", function () {
-//     var inputField = $(this);
-//     clearTimeout(phoneSearchTimeout);
-
-//         var searchQuery = inputField.val().toLowerCase().trim();
-
-//         // Show all if search is empty
-//         if (searchQuery === "") {
-//             $(".phone-contact").show();
-//             return;
-//         }
-
-//         // Hide all first
-//         $(".phone-contact").hide();
-
-//         // Filter and show only matching elements
-//         $(".phone-contact").filter(function () {
-//             var contactName = $(this).find(".phone-search").attr("data-search");
-
-//             if (contactName) {
-//                 contactName = contactName.toString().toLowerCase().trim();
-//             } else {
-//                 contactName = "";
-//             }
-
-//             return contactName.includes(searchQuery); // Return true to keep, false to remove
-//         }).show();
-
-// });
 
 
 
