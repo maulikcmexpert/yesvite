@@ -764,7 +764,8 @@ $(document).on("keyup", ".search-phone", function () {
                     .find(".phone-search")
                     .attr("data-search")
                     .toLowerCase();
-    
+                console.log(contactName.indexOf(searchQuery));
+                
                 if (contactName.indexOf(searchQuery) !== -1) {
                     $(this).show(); // Show this contact
                 } else {
