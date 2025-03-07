@@ -239,8 +239,8 @@ class UserPostReportDataTable extends DataTable
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
-            Column::make('account_status')->title("Account Status")->orderable(false),
-            Column::make('delete')->title("Account Delete")->orderable(false),
+            // Column::make('account_status')->title("Account Status")->orderable(false),
+            // Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
     }
