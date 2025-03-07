@@ -1331,7 +1331,7 @@ main.new-main-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 170px;
+    height: 180px;
 }
 
 .GuestProfile-modal .main-modal-background-img  i {
@@ -1350,9 +1350,9 @@ main.new-main-content {
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 50px;
-    min-width: 50px;
-    height: 50px;
+    max-width: 60px;
+    min-width: 60px;
+    height: 60px;
 }
 
 
@@ -1397,6 +1397,7 @@ main.new-main-content {
     margin-bottom: 20px;
     padding: 10px 20px;
     border: 1px solid var(--border);
+    border-radius: 8px;
 
 }
 
