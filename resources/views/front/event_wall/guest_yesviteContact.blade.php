@@ -428,7 +428,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                     <!-- data-bs-toggle="modal"
                     data-bs-target="#editguest" -->
-                        <a href="javascript:;" class="invite-user-name phone-search"
+                        <a href="javascript:;" class="invite-user-name phone-search phone-contacts-only"
                             data-search="{{ $contact->firstName }}{{ $contact->lastName }}">
                             {{ $contact->firstName }} {{ $contact->lastName }}</a>
                     </div>
