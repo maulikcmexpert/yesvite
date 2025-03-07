@@ -1610,33 +1610,34 @@ $(document).ready(function () {
     });
 });
 
-
-$(document).ready(function(){
+$(document).ready(function () {
     let userActive = true;
     let inactivityTimeout;
+    let activeTime = null;
+    let inactiveTime = null;
 
-    // Function to mark user as active
     function userIsActive() {
-        userActive = true;
-        console.log("User is active");
+        if (!userActive) {
+            activeTime = new Date().toLocaleTimeString(); // Get active time
+            console.log("User became active at:", activeTime);
+        }
 
-        // Reset timer
+        userActive = true;
         clearTimeout(inactivityTimeout);
         inactivityTimeout = setTimeout(userIsInactive, 5000); // 5 seconds inactivity
     }
 
-    // Function to mark user as inactive
     function userIsInactive() {
         userActive = false;
-        console.log("User is inactive");
+        inactiveTime = new Date().toLocaleTimeString(); // Get inactive time
+        console.log("User became inactive at:", inactiveTime);
     }
 
-    // Events to detect activity
     document.addEventListener("mousemove", userIsActive);
     document.addEventListener("keydown", userIsActive);
     document.addEventListener("touchstart", userIsActive); // For mobile devices
 
     // Start inactivity timeout
     inactivityTimeout = setTimeout(userIsInactive, 5000);
-
 });
+
