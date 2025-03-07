@@ -5148,12 +5148,12 @@ async function saveDesignData(direct = false) {
     }
 }
 async function captureImage(element) {
-    // return new Promise((resolve, reject) => {
-    //     domtoimage
-    //         .toBlob(element)
-    //         .then((blob) => resolve(blob))
-    //         .catch((error) => reject(error));
-    // });
+    return new Promise((resolve, reject) => {
+        domtoimage
+            .toBlob(element)
+            .then((blob) => resolve(blob))
+            .catch((error) => reject(error));
+    });
 
     try {
         const canvas = await html2canvas(element, {
