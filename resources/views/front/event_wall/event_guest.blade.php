@@ -226,7 +226,7 @@
                                     </div>
                                     <div class="guest-user-list cmn-card">
                                         <div>
-                                            <h5 class="heading">Guest List</h5>
+                                            <h5 class="heading">All Invites Sent</h5>
 
                                         </div>
                                         <div>
