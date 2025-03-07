@@ -322,7 +322,11 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     } else {
                         let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
                         let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
+
+                        $("#modal-initials").removeClass().addClass("fontcolor"+profileData.firstname[0].toUpperCase());
                         initialsElement.text(firstInitial + secondInitial).show();
+
+
                         profileImgElement.hide();
                     }
                     let background_img = $("#modal-background-img");
