@@ -247,7 +247,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('username')->title('Username(Reported By)')->orderable(true),
             Column::make('email')->title('Email(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(true),
-            Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
+            Column::make('report_description')->title("Report Description")->width('150px')->className('report-description-td')->orderable(false),
             Column::make('event_name')->title("Event Name")->orderable(true),
             Column::make('post_type')->title("Post Type")->orderable(false),
             Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(false),
