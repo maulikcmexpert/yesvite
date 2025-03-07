@@ -3356,6 +3356,10 @@ main.new-main-content {
     height: 650px !important;
 }
 
+#wall_profile .modal-content:has(.private_P){
+    height: auto !important;
+}
+
 
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
