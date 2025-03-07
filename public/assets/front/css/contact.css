@@ -972,6 +972,10 @@ input[type="search"]~span {
     margin-bottom: 4px;
 }
 
+.guest-tab-list{
+    margin-bottom: 0;
+}
+
 .guest-tab-list,
 .guest-tab-item{
     list-style-type: disc;
