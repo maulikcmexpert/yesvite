@@ -263,13 +263,7 @@
 }
 
 .photo-detail-slider .posts-card-show-post-img{
-    height: 100%;
-    min-height: 200px;
-    max-height: 100%;
-}
-
-.photo-detail-slider .posts-card-show-post-img img{
-    aspect-ratio: unset !important;
+    height: 420px;
 }
 
 .selected-photo-btn{
@@ -678,7 +672,13 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 430px) !important;
+        min-height: auto !important;
+        max-height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+        object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -712,7 +712,13 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 430px) !important;
+        min-height: auto !important;
+        max-height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+        object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 20px;
@@ -743,7 +749,13 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 430px) !important;
+        min-height: auto !important;
+        max-height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+        object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -764,7 +776,13 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 430px) !important;
+        min-height: auto !important;
+        max-height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+        object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-head-left-content h3{
         font-size: 18px;
@@ -785,7 +803,13 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        height: calc(100vh - 430px) !important;
+        min-height: auto !important;
+        max-height: calc(100vh - 430px) !important;
+    }
+    #detail-photo-modal .posts-card-show-post-img img {
+        aspect-ratio: unset !important;
+        object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
 }
 
