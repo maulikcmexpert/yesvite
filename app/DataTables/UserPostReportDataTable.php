@@ -201,9 +201,9 @@ class UserPostReportDataTable extends DataTable
                 if ($request->order[0]['column'] == '7') {
                     $column = User::select('firstname')
                     ->whereColumn('users.id', function ($query) {
-                        $query->select('posts.user_id')
-                            ->from('posts')
-                            ->whereColumn('posts.id', 'user_report_to_posts.post_id');
+                        $query->select('event_posts.user_id')
+                            ->from('event_posts')
+                            ->whereColumn('event_posts.id', 'user_report_to_posts.post_id');
                     });
                }
 
