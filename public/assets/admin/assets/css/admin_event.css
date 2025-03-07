@@ -1493,8 +1493,7 @@ table#userpostreport-table{
     table-layout: fixed;
 }
 
-table#userpostreport-table th,
-table#userpostreport-table td{
+table#userpostreport-table .report-description-td {
     width: auto !important;
 }
 
