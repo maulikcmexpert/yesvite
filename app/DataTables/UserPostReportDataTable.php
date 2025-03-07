@@ -244,7 +244,7 @@ class UserPostReportDataTable extends DataTable
     {
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
-            Column::make('username')->title('Username<br><span>(Reported By)</span>')->orderable(true),
+            Column::make('username')->title('Username<br><span>(Reported By)</span>')->width('120px')->orderable(true),
             Column::make('email')->title('Email(Reported By)')->orderable(true),
             Column::make('report_type')->title('Report Type')->orderable(true),
             Column::make('report_description')->title("Report Description")->className('report-description-td')->orderable(false),
