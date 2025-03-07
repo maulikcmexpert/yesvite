@@ -3824,7 +3824,7 @@ main.new-main-content {
 @media only screen and (max-width: 424px) {
     .event-center-tabs-main .nav-tabs .nav-link {
         font-size: 14px !important;
-        padding: 10px 10px !important;
+        padding: 10px 5px !important;
     }
 
     .event-center-title button {
