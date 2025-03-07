@@ -3361,6 +3361,8 @@ main.new-main-content {
 }
 
 
+
+
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {
     .create-post-modal .modal-content {
@@ -3376,6 +3378,56 @@ main.new-main-content {
 
     .create-post-upload-img-inner {
         min-height: 400px;
+    }
+    .GuestProfile-modal .modal-header h1 {
+        font-size: 20px;
+    }
+    #wall_profile .modal-content {
+        width: 100%;
+        max-width: 600px;
+        height: 700px !important;
+    }
+    .GuestProfile-modal .main-modal-background-img {
+        height: 200px;
+    }
+    .GuestProfile-modal .main-modal-background-img .posts-card-head-left-img {
+        position: absolute;
+        bottom: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 70px;
+        min-width: 70px;
+        height: 70px;
+    }
+    .GuestProfile-modal .main-modal-background-img .posts-card-head-left-img h5 {
+        font-size: 24px !important;
+        line-height: normal !important;
+    }
+    .GuestProfile-modal h3#post_name {
+        text-decoration: none;
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    .GuestProfile-modal .memberDate-Section span {
+        font-size: 14px !important;
+    }
+    .GuestProfile-modal .wall_profile-message-link span {
+        font-size: 18px !important;
+    }
+    .GuestProfile-modal .wall_profile-message-link svg {
+        width: 100%;
+        max-width: 22px;
+        min-width: 22px;
+        height: 22px;
+        margin-right: 5px;
+    }
+    .user-gallery h4 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .GuestProfile-modal .wall_profile-message-link {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
 

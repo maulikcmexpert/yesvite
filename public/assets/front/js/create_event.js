@@ -5156,7 +5156,10 @@ async function captureImage(element) {
     // });
 
     try {
-        const canvas = await html2canvas(element, { scale: 10, useCORS: true }); // Set scale to avoid large images
+        const canvas = await html2canvas(element, {
+            scale: 1,
+            useCORS: true,
+        }); // Set scale to avoid large images
         return new Promise((resolve) => {
             canvas.toBlob((blob) => resolve(blob), "image/png", 1);
         });
