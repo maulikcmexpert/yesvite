@@ -750,21 +750,21 @@ $(document).on("keyup", ".search-yesvite", function () {
 var phoneSearchTimeout; 
 $(document).on("keyup", ".search-phone", function () {
     var searchQuery = $(this).val().toLowerCase().trim();
+    var contacts = $(".phone-contact");
 
-    // If the search query is empty, show all contacts instantly
+    // Instantly show all contacts when input is empty
     if (searchQuery === "") {
-        $(".phone-contact").show();
+        contacts.show();
         return;
     }
 
-    // Otherwise, only toggle relevant contacts
-    $(".phone-contact").each(function () {
-        var contactName = $(this).find(".phone-search").attr("data-search") || "";
-        contactName = contactName.toLowerCase().trim();
+    // Hide all contacts first
+    contacts.hide();
 
-        $(this).toggle(contactName.includes(searchQuery));
-    });
+    // Show only matching elements using an optimized selector
+    $(".phone-search[data-search*='" + searchQuery + "']").closest(".phone-contact").show();
 });
+
 
 // $(document).on("keyup", ".search-phone", function () {
 //     var inputField = $(this);
