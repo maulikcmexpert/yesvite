@@ -767,10 +767,10 @@ $(document).on("keyup", ".search-phone", function () {
                 contactName = ""; // Set empty string if undefined
             }
 
-            // Debugging output
-            console.log("Search Query:", searchQuery);
-            console.log("Contact Name:", contactName);
-            console.log("Index Found:", contactName.indexOf(searchQuery));
+            // // Debugging output
+            // console.log("Search Query:", searchQuery);
+            // console.log("Contact Name:", contactName);
+            // console.log("Index Found:", contactName.indexOf(searchQuery));
 
             // Perform case-insensitive search
             if (contactName.includes(searchQuery)) {
