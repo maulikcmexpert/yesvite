@@ -331,7 +331,7 @@
 
                                                 </div>
                                                 <div class="detail-btn-wrp">
-                                                    @if (($eventDetails['host_id'] != $login_user_id  && $eventDetails['is_co_host']=="0"))
+
                                                         {{-- <a href="#" class="add-calender btn" id="openGoogle">Add to
                                                             calendar
                                                             <svg width="16" height="16" viewBox="0 0 16 16"
@@ -358,7 +358,7 @@
                                                             <div class="accordion-item">
                                                               <h2 class="accordion-header" id="headingOne">
                                                                 <button class="accordion-button add-calender btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                    Add to calendar 
+                                                                    Add to calendar
                                                                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                                     <path d="M5.33203 8H10.6654" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -378,7 +378,7 @@
                                                                             ADD To
                                                                         </h3>
                                                                     </div> --}}
-                                                                 
+
                                                                     <a href="javascript:;" id="openOutlook" class="add-calender btn">
                                                                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                             <path d="M30.4453 12.4023V20.9602L33.4391 22.843C33.5471 22.8667 33.6591 22.8667 33.7672 22.843L46.6391 14.1648C46.6297 13.7437 46.4756 13.3386 46.2027 13.0176C45.9298 12.6966 45.5548 12.4794 45.1406 12.4023H30.4453Z" fill="#0072C6"/>
@@ -401,14 +401,14 @@
                                                                         <path d="M12.7479 29.3266C12.2767 27.9655 12.004 26.5071 12.004 25.0002C12.004 23.4932 12.2767 22.0349 12.7231 20.6738L12.7106 20.3838L5.73414 15.0742L5.50589 15.1806C3.99306 18.146 3.125 21.4758 3.125 25.0002C3.125 28.5244 3.99306 31.8543 5.50589 34.8196L12.7479 29.3266Z" fill="#FBBC05"/>
                                                                         <path d="M25.4484 11.5833C29.6398 11.5833 32.4672 13.3576 34.0794 14.8403L40.3789 8.8125C36.51 5.2882 31.4751 3.125 25.4484 3.125C16.7181 3.125 9.17842 8.03469 5.50781 15.1805L12.7251 20.6736C14.5357 15.3993 19.5456 11.5833 25.4484 11.5833Z" fill="#EB4335"/>
                                                                     </svg>
-                                                                       Google Calendar 
+                                                                       Google Calendar
                                                                 </a>
                                                                 </div>
                                                               </div>
                                                             </div>
-                
+
                                                           </div>
-                                                    @endif
+
 
                                                     <input type="hidden" id="eventDate"
                                                         value="{{ $eventDetails['event_date'] }}">
