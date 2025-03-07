@@ -98,4 +98,7 @@
 
 
     });
+    $(document).on('click','.block-user',function(){
+        alert();
+    });
 </script>
