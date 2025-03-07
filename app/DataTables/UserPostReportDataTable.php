@@ -125,6 +125,7 @@ class UserPostReportDataTable extends DataTable
                 $dropdownText = $row->account_status == 'Block' ? 'Active' : 'Inactivate';
                 // Set the action class for toggling
                 $actionClass = $row->account_status == 'Block' ? 'unblock-user' : 'block-user';
+                $actionData = $row->account_status == 'Block' ? '0' : '1';
 
                 return '
                     <div class="dropdown">
@@ -132,7 +133,7 @@ class UserPostReportDataTable extends DataTable
                             ' . $buttonText . '
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->id . '">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->id . '"data-status="' . $actionData . '">
                                 ' . $dropdownText . '
                             </a>
                         </div>
