@@ -1499,9 +1499,8 @@ table#userpostreport-table .report-description-td {
 
 
 table#userpostreport-table th.username_By{
-    width: 100% !important;
-    max-width: 130px !important;
-    min-width: 120px !important;
+    width: 120px !important;
+    
 }
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
