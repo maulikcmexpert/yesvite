@@ -5092,7 +5092,8 @@ async function saveDesignData(direct = false) {
             return true;
         } else {
             if (eventData.desgin_selected) {
-                updateUIAfterSave(eventData.desgin_selected);
+                afterImageUpload(eventData.desgin_selected);
+                updateUIAfterSave();
                 return;
             }
         }
@@ -5126,7 +5127,9 @@ async function saveDesignData(direct = false) {
 
         console.log("Capturing image...");
         const blob = await captureImage(downloadImage);
-
+        if (!direct) {
+            updateUIAfterSave();
+        }
         console.log("Uploading image...");
         const imageResponse = await uploadImage(blob);
         $("#loader").css("display", "none");
@@ -5135,10 +5138,9 @@ async function saveDesignData(direct = false) {
         }
         if (direct) {
             return true;
-        } else {
-            if (imageResponse && imageResponse.image) {
-                updateUIAfterSave(imageResponse.image);
-            }
+        }
+        if (imageResponse && imageResponse.image) {
+            afterImageUpload(imageResponse.image);
         }
     } catch (error) {
         console.error("Error in saveDesignData:", error);
@@ -5218,14 +5220,16 @@ function uploadImage(blob) {
         });
     });
 }
-function updateUIAfterSave(image) {
+
+function afterImageUpload(image) {
     console.log("Image uploaded successfully:", image);
 
     $("#eventImage, #eventTempImage").attr(
         "src",
         base_url + "public/storage/event_images/" + image
     );
-
+}
+function updateUIAfterSave() {
     final_step = final_step === 1 ? 2 : final_step;
     eventData.step = final_step;
 
