@@ -655,9 +655,16 @@
                         <input type="file" name="csv_file" id="csv_file">
                       
                     </div>
-                    <h6>Tips:</h6>
-                    <p>- Save or export the file as a csv,xlsx, or xls file before uploading it to yesvite</p>
-                    <p>- Columns are First Name,Last Name,Email,Phone Number</p>
+                    <h6 class="guestTab-tipsTitle">Tips:</h6>
+                    <ul class="guest-tab-list">
+                        <li class="guest-tab-item">
+                            <p>Save or export the file as a csv,xlsx, or xls file before uploading it to yesvite</p>
+                        </li>
+                        <li class="guest-tab-item">
+                            <p>Columns are First Name,Last Name,Email,Phone Number</p>
+                        </li>
+                    </ul>
+                    
                     <!-- <div class="uploadedcvs-file-wrp">
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
