@@ -3337,6 +3337,7 @@ main.new-main-content {
     color: var(--white);
     margin-left: 5px;
     width: max-content;
+    min-width: 25px;
 }
 
 
