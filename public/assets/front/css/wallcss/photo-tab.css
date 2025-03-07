@@ -785,6 +785,7 @@
     #detail-photo-modal .posts-card-show-post-img img {
         aspect-ratio: unset !important;
         object-fit: contain !important;
+        max-height: calc(100vh - 430px) !important;
     }
 }
 
