@@ -779,7 +779,7 @@
         padding-bottom: 20px !important;
     }
     .photo-detail-slider .posts-card-show-post-img {
-        min-height: 200px !important;
+        min-height: auto !important;
         max-height: calc(100vh - 430px) !important;
     }
     #detail-photo-modal .posts-card-show-post-img img {
