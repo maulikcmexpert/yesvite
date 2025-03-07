@@ -1355,6 +1355,11 @@ main.new-main-content {
     height: 60px;
 }
 
+.GuestProfile-modal .main-modal-background-img .posts-card-head-left-img h5{
+    font-size: 20px !important;
+    line-height: normal !important;
+}
+
 
 .GuestProfile-modal h3#post_name {
     text-decoration: none;
@@ -3349,6 +3354,10 @@ main.new-main-content {
     height: auto;
     overflow: hidden;
     height: 650px !important;
+}
+
+#wall_profile .modal-content:has(.private_P){
+    height: auto !important;
 }
 
 
