@@ -748,37 +748,53 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 var phoneSearchTimeout; 
-
 $(document).on("keyup", ".search-phone", function () {
-    var inputField = $(this); 
-    clearTimeout(phoneSearchTimeout); 
+    var searchQuery = $(this).val().toLowerCase().trim();
 
-    // phoneSearchTimeout = setTimeout(function () {
-        var searchQuery = inputField.val().toLowerCase().trim(); 
+    // If the search query is empty, show all contacts instantly
+    if (searchQuery === "") {
+        $(".phone-contact").show();
+        return;
+    }
 
-        $(".phone-contact").each(function () {
-            var contactName = $(this).find(".phone-search").attr("data-search");
+    // Otherwise, only toggle relevant contacts
+    $(".phone-contact").each(function () {
+        var contactName = $(this).find(".phone-search").attr("data-search") || "";
+        contactName = contactName.toLowerCase().trim();
 
-            if (contactName) {
-                contactName = contactName.toString().toLowerCase().trim();
-            } else {
-                contactName = ""; 
-            }
-
-            // // Debugging output
-            // console.log("Search Query:", searchQuery);
-            // console.log("Contact Name:", contactName);
-            // console.log("Index Found:", contactName.indexOf(searchQuery));
-
-            // Perform case-insensitive search
-            if (contactName.includes(searchQuery)) {
-                $(this).show();
-            } else {
-                $(this).hide(); 
-            }
-        });
-    // }, 1000);
+        $(this).toggle(contactName.includes(searchQuery));
+    });
 });
+
+// $(document).on("keyup", ".search-phone", function () {
+//     var inputField = $(this);
+//     clearTimeout(phoneSearchTimeout);
+
+//         var searchQuery = inputField.val().toLowerCase().trim();
+
+//         // Show all if search is empty
+//         if (searchQuery === "") {
+//             $(".phone-contact").show();
+//             return;
+//         }
+
+//         // Hide all first
+//         $(".phone-contact").hide();
+
+//         // Filter and show only matching elements
+//         $(".phone-contact").filter(function () {
+//             var contactName = $(this).find(".phone-search").attr("data-search");
+
+//             if (contactName) {
+//                 contactName = contactName.toString().toLowerCase().trim();
+//             } else {
+//                 contactName = "";
+//             }
+
+//             return contactName.includes(searchQuery); // Return true to keep, false to remove
+//         }).show();
+
+// });
 
 
 
