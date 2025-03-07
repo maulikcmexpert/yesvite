@@ -353,11 +353,14 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     if ( profileData.visible == "2") {
                         $("#public_profile").addClass('d-none');
                         $("#private_profile").removeClass('d-none');
+                        $("#private_profile").addClass('private_P');
+
 
                     }
                     if ( profileData.visible != "2") {
                         $("#public_profile").removeClass('d-none');
                         $("#private_profile").addClass('d-none');
+                        $("#private_profile").removeClass('private_P')
 
                     }
                     if ( profileData.id == profileData.login_user_id) {
