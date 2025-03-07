@@ -81,7 +81,8 @@ class UserPostReportDataTable extends DataTable
 
             ->addColumn('username', function ($row) {
 
-                return $row->users->firstname . ' ' . $row->users->lastname;
+                // return $row->users->firstname . ' ' . $row->users->lastname;
+                return $row->event_postsusers->firstname . ' ' . $row->event_posts->users->lastname;
             })
             ->addColumn('email', function ($row) {
 
