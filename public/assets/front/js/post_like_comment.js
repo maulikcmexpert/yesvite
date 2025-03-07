@@ -756,7 +756,7 @@ $(document).on("keyup", ".search-phone", function () {
         $(".phone-contact").each(function () {
             var contactName = $(this)
                 .find(".phone-search")
-                .attr("data-search")
+                .data("search")
                 .toLowerCase();
 
             if (contactName.indexOf(searchQuery) !== -1) {
