@@ -1222,8 +1222,8 @@ $(document).ready(function() {
                         progressBar.val(0);
 
                     } else {
-                        uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
-                        progressBar.val((uploadedKB / fileSizeKB) * 100);
+                        uploadedSize = Math.min(uploadedKB + fileSize / 100, fileSize);
+                        progressBar.val((uploadedKB / fileSize) * 100);
                         // $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                         $(".file_upload_rate").text(`${formattedUploaded} of ${formattedSize}`);
 
