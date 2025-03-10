@@ -3040,6 +3040,13 @@ main.new-main-content {
     margin-bottom: 3px;
 }
 
+.uploadedcvs-file-card-content .uploadedcvs-file-icon-text{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
 .uploadedcvs-file-card-content p {
     font-family: var(--SFProDisplay-Regular);
     font-size: 13px;

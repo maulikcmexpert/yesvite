@@ -673,6 +673,8 @@
                             </div>
                             <div class="uploadedcvs-file-card-content">
                                 <h4>contact.csv</h4>
+                                <div class="uploadedcvs-file-icon-text">
+
                                 <p>0 KB of 0 KB </p>
                                 <span>
                                     <svg class="uploading-progress-icon" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -680,6 +682,7 @@
                                     </svg>
                                     Uploading...
                                 </span>
+                                </div>
                             </div>
                             <button class="cancel-uploading-btn"><svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.66797 4.41669L16.3339 16.0826" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -700,13 +703,16 @@
                             </div>
                             <div class="uploadedcvs-file-card-content">
                                 <h4>contact.csv</h4>
-                                <p>60 KB of 120 KB 
-                                    <span>
+                                <div class="uploadedcvs-file-icon-text">
+                                <p>60 KB of 120 KB </p>
+                                <span>
                                     <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.5 12.25C3.1862 12.25 0.5 9.5638 0.5 6.25C0.5 2.9362 3.1862 0.25 6.5 0.25C9.8138 0.25 12.5 2.9362 12.5 6.25C12.5 9.5638 9.8138 12.25 6.5 12.25ZM5.9018 8.65L10.1438 4.4074L9.2954 3.559L5.9018 6.9532L4.2044 5.2558L3.356 6.1042L5.9018 8.65Z" fill="#23AA26"/>
                                     </svg>
-                                    Completed</span>
-                                </p>
+                                    Completed
+                                </span>
+                            </div>
+
                             </div>
                             <button class="cancel-uploading-btn"><svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18 5.23307C15.225 4.95807 12.4333 4.81641 9.65 4.81641C8 4.81641 6.35 4.89974 4.7 5.06641L3 5.23307" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
