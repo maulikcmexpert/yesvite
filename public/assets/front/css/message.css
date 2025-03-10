@@ -1880,6 +1880,8 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     flex-direction: column;
 }
 
+
+
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */
@@ -1905,6 +1907,13 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
         width: 100%;
         max-width: 150px;
         text-transform: capitalize;
+    }
+    #message-send svg{
+        width: 24px;
+        height: 24px;
+    }
+    #message-send svg path{
+        fill: #000;
     }
 }
 @media only screen and (min-width: 1201px) {
