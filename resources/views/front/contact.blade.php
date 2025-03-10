@@ -687,7 +687,7 @@
                                 </svg></button>
                             </div>
                             <div class="progress-bar__wrapper">
-                        <progress id="progress-bar" max="100"  value="25"></progress>
+                            <progress id="progress-bar" max="100"  value="25"></progress>
                             </div>
                             {{-- <div class="progress-bar__wrapper">
                                 <progress id="progress-bar" value="75" max="100"></progress>

@@ -1104,8 +1104,12 @@ $(document).ready(function() {
     const fileInput = $('#csv_file');
     const uploadProgress = $('.uploading_csv_file'); // Uploading bar
     const uploadComplete = $('.uploading_csv_complete');
+    const progressBar = $('#progress-bar'); // Progress bar
+
     uploadProgress.hide();
     uploadComplete.hide();
+    progressBar.val(0); // Reset progress bar
+
     // Click to upload
     // uploadWrapper.click(function() {
     //     fileInput.click();
@@ -1196,11 +1200,20 @@ $(document).ready(function() {
 
                 uploadProgress.show();
                 uploadComplete.hide();
-                setTimeout(function () {
-                    uploadProgress.hide();
-                    uploadComplete.show();
-                    console.log("File uploaded successfully!");
-                }, 2000); 
+                progressBar.val(0); // Reset progress bar
+
+                let progress = 0;
+                let interval = setInterval(function () {
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        uploadProgress.hide();
+                        uploadComplete.show();
+                        console.log("File uploaded successfully!");
+                    } else {
+                        progress += 10; // Increment progress
+                        progressBar.val(progress);
+                    }
+                }, 300); 
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
