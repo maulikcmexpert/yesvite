@@ -1225,7 +1225,7 @@ $(document).ready(function() {
                 fileInput.val(''); // Clear the input
             }
         }
-    }
+    
 });
 $("#csv_file").on("change", function (e) {
     let file = e.target.files[0]; // Get the selected file
