@@ -748,53 +748,37 @@ $(document).on("keyup", ".search-yesvite", function () {
 });
 
 var phoneSearchTimeout; 
+
 $(document).on("keyup", ".search-phone", function () {
-    var searchQuery = $(this).val().toLowerCase().trim();
+   
+    clearTimeout(phoneSearchTimeout);
+    var inputField = $(this);
+    phoneSearchTimeout = setTimeout(function () {
+        console.log('here');
+        
+        var searchQuery = inputField.val().toLowerCase().trim();
 
-    // If the search query is empty, show all contacts instantly
-    if (searchQuery === "") {
-        $(".phone-contact").show();
-        return;
-    }
+        if (searchQuery === "") {
+            $(".phone-contact").removeClass('d-none');
+            return;
+        }
 
-    // Otherwise, only toggle relevant contacts
-    $(".phone-contact").each(function () {
-        var contactName = $(this).find(".phone-search").attr("data-search") || "";
-        contactName = contactName.toLowerCase().trim();
+        $(".phone-contact").addClass('d-none');
 
-        $(this).toggle(contactName.includes(searchQuery));
-    });
+        $(".phone-contact").filter(function () {
+            var contactName = $(this).find(".phone-search").attr("data-search");
+
+            if (contactName) {
+                contactName = contactName.toString().toLowerCase().trim();
+            } else {
+                contactName = "";
+            }
+
+            return contactName.includes(searchQuery); 
+        }).removeClass('d-none');
+
+    }, 600);
 });
-
-// $(document).on("keyup", ".search-phone", function () {
-//     var inputField = $(this);
-//     clearTimeout(phoneSearchTimeout);
-
-//         var searchQuery = inputField.val().toLowerCase().trim();
-
-//         // Show all if search is empty
-//         if (searchQuery === "") {
-//             $(".phone-contact").show();
-//             return;
-//         }
-
-//         // Hide all first
-//         $(".phone-contact").hide();
-
-//         // Filter and show only matching elements
-//         $(".phone-contact").filter(function () {
-//             var contactName = $(this).find(".phone-search").attr("data-search");
-
-//             if (contactName) {
-//                 contactName = contactName.toString().toLowerCase().trim();
-//             } else {
-//                 contactName = "";
-//             }
-
-//             return contactName.includes(searchQuery); // Return true to keep, false to remove
-//         }).show();
-
-// });
 
 
 
@@ -802,19 +786,23 @@ $(document).on("keyup", ".search-phone", function () {
 var allContactsSuccess = false;
 let selectedContacts = [];
 let selectedPhoneContacts = [];
+var addcontactAjax=0;
 $(document).ready(function () {
     const yesviteUrl = base_url + "event_wall/get_yesviteContact"; // URL for yesvite contacts
     //const phoneUrl = base_url + "event_wall/get_phoneContact"; // URL for phone contacts
     const event_id = $("#event_id").val();
 
     $("#allcontact").on("click", function () {
+        
         $("#home_loader").css("display", "flex");
 
         guestList = [];
         $(".guest_yesvite").remove();
         $(".phone_yesvite").remove();
         $(".see_invite_nav_yesvite").addClass("active");
+        $('#home').addClass('show active');
         $(".see_invite_nav_phone").removeClass("active");
+        $('#profile').removeClass('show active');;
         $(".phoneContact-checkbox:not(:disabled)").prop("checked", false);
         $(".contact-checkbox:not(:disabled)").prop("checked", false);
         $(".phone-checkbox:not(:disabled)").prop("checked", false);
@@ -824,6 +812,11 @@ $(document).ready(function () {
         // if (allContactsSuccess) {
         //     return;
         // }
+        if(addcontactAjax==1){
+            $("#addguest").modal("show");
+            $("#home_loader").css("display", "none");
+            return;
+        }
         $.ajax({
             url: yesviteUrl,
             type: "POST",
@@ -842,7 +835,7 @@ $(document).ready(function () {
                 $("#addguest").modal("show");
                 const invitedUsers = response.invited_users;
                 $("#home_loader").css("display", "none");
-
+                addcontactAjax =1;
                 // selectedContacts = response.selected_yesvite_user;
                 // selectedPhoneContacts = response.selected_phone_user;
                 // console.log({selectedContacts,selectedPhoneContacts})

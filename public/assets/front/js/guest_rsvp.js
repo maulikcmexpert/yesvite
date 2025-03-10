@@ -289,11 +289,16 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
                     let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
                     if (showLocation) {
-                        let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
-                            .filter(Boolean)
+                        let locationText = [profileData.address, profileData.city, profileData.state, profileData.zip_code]
+                            .filter(value => value !== null && value !== undefined && value !== "")
                             .join(", ");
 
-                        $("#location").text(locationText);
+
+                        if (locationText.split(", ").length >= 3) {
+                            $("#location").text(locationText);
+                        } else {
+                            $("#location").text("");
+                        }
                     } else {
                         $("#location").text("");
                     }
@@ -309,7 +314,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
 
 
                     $("#member_since").text(profileData.created_at);
-
+                    $("#about-section-text").text(profileData.about_me);
 
 
                     // Handle profile image or initials
@@ -322,7 +327,11 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     } else {
                         let firstInitial = profileData.firstname ? profileData.firstname[0].toUpperCase() : "";
                         let secondInitial = profileData.lastname ? profileData.lastname[0].toUpperCase() : "";
+
+                        $("#modal-initials").removeClass().addClass("fontcolor"+profileData.firstname[0].toUpperCase());
                         initialsElement.text(firstInitial + secondInitial).show();
+
+
                         profileImgElement.hide();
                     }
                     let background_img = $("#modal-background-img");

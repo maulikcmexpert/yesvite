@@ -55,9 +55,21 @@ class UserPostReportDataTable extends DataTable
                                 $q->where('firstname', 'LIKE', "%{$keyword}%")
                                   ->orWhere('lastname', 'LIKE', "%{$keyword}%");
                             });
+
+                                $q->orWhereHas('event_posts.user', function ($q) use ($keyword) {
+                                    $q->where('firstname', 'LIKE', "%{$keyword}%")
+                                    ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                                });
                         }
+                        // $q->orwhereHas('event_posts.user', function ($q) use ($keyword) {
+                        //     $q->where('firstname', 'LIKE', "%{$keyword}%")
+                        //       ->orWhere('lastname', 'LIKE', "%{$keyword}%");
+                        // });
                         $q->orWhereHas('users', function ($q) use ($keyword) {
                             $q->where('email', 'LIKE', "%{$keyword}%");
+                        });
+                        $q->orWhereHas('event_posts.user', function ($q) use ($keyword) {
+                           $q->where('email', 'LIKE', "%{$keyword}%");
                         });
                         // Search in 'events' as well
                         $q->orWhereHas('events', function ($q) use ($keyword) {
@@ -198,14 +210,14 @@ class UserPostReportDataTable extends DataTable
                     ->whereColumn('events.id', 'user_report_to_posts.event_id');
                 }
 
-                if ($request->order[0]['column'] == '7') {
-                    $column = User::select('firstname')
-                    ->whereColumn('users.id', function ($query) {
-                        $query->select('event_posts.user_id')
-                            ->from('event_posts')
-                            ->whereColumn('event_posts.id', 'user_report_to_posts.post_id');
-                    });
-               }
+            //     if ($request->order[0]['column'] == '7') {
+            //         $column = User::select('firstname')
+            //         ->whereColumn('users.id', function ($query) {
+            //             $query->select('event_posts.user_id')
+            //                 ->from('event_posts')
+            //                 ->whereColumn('event_posts.id', 'user_report_to_posts.event_post_id');
+            //         });
+            //    }
 
                 if ($request->order[0]['column'] == '3') {
                     $column = 'report_type';
