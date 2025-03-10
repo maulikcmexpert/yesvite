@@ -309,7 +309,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
 
 
                     $("#member_since").text(profileData.created_at);
-
+                    $("#about-section-text").text(profileData.about_me);
 
 
                     // Handle profile image or initials
