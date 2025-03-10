@@ -1197,8 +1197,8 @@ $(document).ready(function() {
                 // $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 // $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
                 $(".click-to-upload-btn").prop("disabled", true);
-                uploadProgress.show();
-                uploadComplete.hide();
+                // uploadProgress.show();
+                // uploadComplete.hide();
                 progressBar.val(0);
 
                 let progress = 0;
