@@ -1118,17 +1118,10 @@ $(document).ready(function() {
 
     
         // Click to upload - Prevent multiple triggers
-        // uploadWrapper.on('click', function (e) {
-        //     e.stopPropagation(); // Prevent bubbling to avoid double trigger
-        //     fileInput.trigger('click'); // Manually trigger file input
-        // });
-        uploadWrapper.off('click').on('click', function (e) {
-            e.stopPropagation(); 
-            if (!fileInput.prop('disabled')) {  // Ensure input is not disabled before triggering
-                fileInput.trigger('click');  
-            }
+        uploadWrapper.on('click', function (e) {
+            e.stopPropagation(); // Prevent bubbling to avoid double trigger
+            fileInput.trigger('click'); // Manually trigger file input
         });
-        
     fileInput.change(handleFileSelect);
 
     // Drag and drop
@@ -1158,35 +1151,9 @@ $(document).ready(function() {
             file.name.endsWith('.xls') || 
             file.name.endsWith('.xlsx')
         ) {
-            $(".click-to-upload-btn").prop("disabled", true);
-
-            uploadProgress.show();
-            uploadComplete.hide();
-            progressBar.val(0); // Reset progress bar
-            let fileSizeKB = (file.size / 1024).toFixed(2); // Convert size to KB
-            let uploadedKB = 0; // Start from 0 KB
-    
-            let progress = 0;
-            let interval = setInterval(function () {
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    uploadProgress.hide();
-                    uploadComplete.show();
-                    console.log("File uploaded successfully!");
-                    $(".uploadcsv-wrp h3").text(file.name); // Show file name
-                    $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
-                    $(".click-to-upload-btn").prop("disabled", false);
-    
-                } else {
-                    // progress += 1; // Smaller increments for smoothness
-                    // progressBar.val(progress);
-                    uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB); // Simulate progress
-                    progressBar.val((uploadedKB / fileSizeKB) * 100);
-                    $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
-                }
-            }, 30);
-            // $(".uploadcsv-wrp h3").text(file.name); // Show file name
-            // $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
+            
+            $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
         
             // Assign file to input field
             let dataTransfer = new DataTransfer();
@@ -1224,8 +1191,6 @@ $(document).ready(function() {
                 uploadProgress.show();
                 uploadComplete.hide();
                 progressBar.val(0); // Reset progress bar
-                let fileSizeKB = (file.size / 1024).toFixed(2); // Convert size to KB
-                let uploadedKB = 0;
 
                 let progress = 0;
                 let interval = setInterval(function () {
@@ -1239,11 +1204,8 @@ $(document).ready(function() {
                         $(".click-to-upload-btn").prop("disabled", false);
         
                     } else {
-                        // progress += 1; // Smaller increments for smoothness
-                        // progressBar.val(progress);
-                        uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB); // Simulate progress
-                        progressBar.val((uploadedKB / fileSizeKB) * 100);
-                        $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        progress += 1; // Smaller increments for smoothness
+                        progressBar.val(progress);
                     }
                 }, 30);
                 console.log('CSV file selected:', file);
@@ -1275,9 +1237,6 @@ $(document).on('click','.close_upload_csv',function(){
 
     uploadProgress.hide();
     uploadComplete.hide();
-    progressBar.val(0); // Reset progress bar
-    $(".uploadedcvs-file-card-content p").text('');
-
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
@@ -1292,8 +1251,6 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0); // Reset progress bar
-    $(".uploadedcvs-file-card-content p").text('');
-
 
 });
 // $(document).ready(function() {
