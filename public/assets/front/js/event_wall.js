@@ -1648,8 +1648,8 @@ $(document).ready(function () {
     inactivityTimeout = setTimeout(userIsInactive, 5000);
     refreshTimeout = setTimeout(() => {
         console.log("User inactive for 5+ minutes, refreshing page...");
-        location.reload(); // Refresh page after 5 minutes of inactivity
-    }, 300000); // 5 minutes = 300,000 ms
+        location.reload();
+    }, 300000);
 });
 
 
