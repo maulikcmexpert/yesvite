@@ -1613,18 +1613,25 @@ $(document).ready(function () {
 $(document).ready(function () {
     let userActive = true;
     let inactivityTimeout;
+    let refreshTimeout;
     let activeTime = null;
     let inactiveTime = null;
 
     function userIsActive() {
         if (!userActive) {
-            activeTime = new Date().toLocaleTimeString(); // Get active time
+            activeTime = new Date().toLocaleTimeString();
             console.log("User became active at:", activeTime);
         }
 
         userActive = true;
         clearTimeout(inactivityTimeout);
-        inactivityTimeout = setTimeout(userIsInactive, 5000); // 5 seconds inactivity
+        clearTimeout(refreshTimeout);
+
+        inactivityTimeout = setTimeout(userIsInactive, 5000);
+        refreshTimeout = setTimeout(() => {
+            console.log("User inactive for 5+ minutes, refreshing page...");
+            location.reload();
+        }, 300000);
     }
 
     function userIsInactive() {
@@ -1639,5 +1646,10 @@ $(document).ready(function () {
 
     // Start inactivity timeout
     inactivityTimeout = setTimeout(userIsInactive, 5000);
+    refreshTimeout = setTimeout(() => {
+        console.log("User inactive for 5+ minutes, refreshing page...");
+        location.reload(); // Refresh page after 5 minutes of inactivity
+    }, 300000); // 5 minutes = 300,000 ms
 });
+
 
