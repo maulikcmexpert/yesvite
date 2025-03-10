@@ -1227,24 +1227,44 @@ $("#csv_file").on("change", function (e) {
     }
 });
 $(document).on('click','.close_upload_csv',function(){
-    $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
-    let fileInput = $("#csv_file");
-    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+    // $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    // let fileInput = $("#csv_file");
+    // $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
 
-    fileInput.val('');
-    fileInput.replaceWith(fileInput.clone(true));
-    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
-    const uploadComplete = $('.uploading_csv_complete');
-    const progressBar = $('#progress-bar'); // Progress bar
+    // fileInput.val('');
+    // fileInput.replaceWith(fileInput.clone(true));
+    // const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    // const uploadComplete = $('.uploading_csv_complete');
+    // const progressBar = $('#progress-bar'); // Progress bar
 
-    uploadProgress.hide();
-    uploadComplete.hide();
-    progressBar.val(0); // Reset progress bar
+    // uploadProgress.hide();
+    // uploadComplete.hide();
+    // progressBar.val(0); // Reset progress bar
+    resetUploadState();
+
 
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
-    $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
-    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+    // $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    // $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+    // let fileInput = $("#csv_file");
+    // fileInput.val('');
+    // fileInput.replaceWith(fileInput.clone(true));
+    // const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    // const uploadComplete = $('.uploading_csv_complete');
+    // const progressBar = $('#progress-bar'); // Progress bar
+
+    // uploadProgress.hide();
+    // uploadComplete.hide();
+    // progressBar.val(0); // Reset progress bar
+
+    resetUploadState();
+
+});
+function resetUploadState() {
+    $(".uploadcsv-wrp h3").text('Drag CSV Here');
+    $(".uploadcsv-wrp p").removeClass('d-none');
+    
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
@@ -1254,9 +1274,8 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
 
     uploadProgress.hide();
     uploadComplete.hide();
-    progressBar.val(0); // Reset progress bar
-
-});
+    progressBar.val(0);
+}
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
         let userId = $(this).attr("data-userid"); // Get user_id from clicked element
