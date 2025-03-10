@@ -1118,10 +1118,17 @@ $(document).ready(function() {
 
     
         // Click to upload - Prevent multiple triggers
-        uploadWrapper.on('click', function (e) {
-            e.stopPropagation(); // Prevent bubbling to avoid double trigger
-            fileInput.trigger('click'); // Manually trigger file input
+        // uploadWrapper.on('click', function (e) {
+        //     e.stopPropagation(); // Prevent bubbling to avoid double trigger
+        //     fileInput.trigger('click'); // Manually trigger file input
+        // });
+        uploadWrapper.off('click').on('click', function (e) {
+            e.stopPropagation(); 
+            if (!fileInput.prop('disabled')) {  // Ensure input is not disabled before triggering
+                fileInput.trigger('click');  
+            }
         });
+        
     fileInput.change(handleFileSelect);
 
     // Drag and drop
