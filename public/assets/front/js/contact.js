@@ -1216,11 +1216,14 @@ $(document).ready(function() {
                         $('.contact_file_name').text(file.name);
                         $(".uploadcsv-wrp p").addClass('d-none');
                         $(".click-to-upload-btn").prop("disabled", false);
+                        progressBar.val(0);
+
                     } else {
                         uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
                         progressBar.val((uploadedKB / fileSizeKB) * 100);
                         $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                         $('.contact_file_name').text(file.name);
+
                     }
                 }, 25);
             } else {
