@@ -1210,10 +1210,10 @@ $(document).ready(function() {
                         uploadComplete.show();
                         console.log("File uploaded successfully!");
                     } else {
-                        progress += 10; // Increment progress
+                        progress += 1; // Smaller increments for smoothness
                         progressBar.val(progress);
                     }
-                }, 300); 
+                }, 30);
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
