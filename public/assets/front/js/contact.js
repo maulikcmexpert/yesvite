@@ -1217,7 +1217,7 @@ $(document).ready(function() {
                     } else {
                         uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
                         progressBar.val((uploadedKB / fileSizeKB) * 100);
-                        $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        // $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                     }
                 }, 30);
             } else {
@@ -1267,7 +1267,7 @@ function resetUploadState() {
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0);
-    $(".uploadedcvs-file-card-content p").text('');
+    // $(".uploadedcvs-file-card-content p").text('');
 
 }
 
