@@ -1224,6 +1224,10 @@ $(document).on('click','.close_upload_csv',function(){
 
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
+    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    const uploadComplete = $('.uploading_csv_complete');
+    uploadProgress.hide();
+    uploadComplete.hide();
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
@@ -1231,6 +1235,10 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
+    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    const uploadComplete = $('.uploading_csv_complete');
+    uploadProgress.hide();
+    uploadComplete.hide();
 });
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
