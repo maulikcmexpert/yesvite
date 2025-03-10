@@ -990,9 +990,6 @@ input[type="search"]~span {
 
 
 
-.setting-side-wrp{
-    width: 100% !important;
-}
 
 
 /* ======= Responsive ======= */
@@ -1114,6 +1111,11 @@ input[type="search"]~span {
         width: 100%;
         max-width: 100%;
     }
+
+
+.setting-side-wrp{
+    width: 100% !important;
+}
 
 }
 
