@@ -1219,6 +1219,7 @@ $(document).ready(function() {
                         uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
                         progressBar.val((uploadedKB / fileSizeKB) * 100);
                         $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        $('.contact_file_name').text(file.name);
                     }
                 }, 30);
             } else {
@@ -1269,6 +1270,8 @@ function resetUploadState() {
     uploadComplete.hide();
     progressBar.val(0);
     $(".file_upload_rate").text('');
+    $('.contact_file_name').text('');
+
 
     // $(".uploadedcvs-file-card-content p").text('');
 
