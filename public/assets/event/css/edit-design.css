@@ -3478,7 +3478,7 @@
 
     .design-seting a h5{
         line-height: normal !important;
-        color: #000;
+        color: #fff;
     }
     
     .design-seting a{
@@ -3486,26 +3486,26 @@
         background-color: #000 !important;
         border-radius: 16px !important;
         color: #fff!important;
-        padding: 10px 15px;
+        padding: 10px 10px;
     }
     .design-seting a svg path{
-        stroke: #000;
+        stroke: #fff;
     }
     
     .design-seting button{
         align-items: center;
-        background-color: transparent !important;
-        border-radius: 0px !important;
-        color: #000 !important;
-        padding: 0px 0px;
+        background-color: #000 !important;
+        border-radius: 16px !important;
+        color: #fff!important;
+        padding: 10px 10px;
     }
     
     .design-seting button h5{
         line-height: normal !important;
-        color: #000 !important;
+        color: #fff !important;
     }
     .design-seting button svg path{
-        stroke: #000 !important;
+        stroke: #fff !important;
     }
 
 }
