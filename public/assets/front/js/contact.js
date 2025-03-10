@@ -1234,7 +1234,6 @@ $(document).ready(function() {
             }
         }
     
-});
 // $("#csv_file").on("change", function (e) {
 //     let file = e.target.files[0]; // Get the selected file
 //     if (file) {
@@ -1283,6 +1282,7 @@ function resetUploadState() {
     // $(".uploadedcvs-file-card-content p").text('');
 
 }
+});
 
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
