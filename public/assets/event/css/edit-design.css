@@ -1054,7 +1054,7 @@
 }
 
 
-.step_1 .col-lg-12:has(.design-seting) {
+.step_1 .col-lg-12:has(.guest-checkout) {
     position: sticky;
     bottom: 10px;
     z-index: 10;
