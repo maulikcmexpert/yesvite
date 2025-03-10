@@ -714,7 +714,7 @@
                             </div>
 
                             </div>
-                            <button class="delete-uploading-btn"><svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <button class="cancel-uploading-btn"><svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18 5.23307C15.225 4.95807 12.4333 4.81641 9.65 4.81641C8 4.81641 6.35 4.89974 4.7 5.06641L3 5.23307" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M7.58203 4.39102L7.76536 3.29935C7.8987 2.50768 7.9987 1.91602 9.40703 1.91602H11.5904C12.9987 1.91602 13.107 2.54102 13.232 3.30768L13.4154 4.39102" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M16.2096 7.86719L15.668 16.2589C15.5763 17.5672 15.5013 18.5839 13.1763 18.5839H7.8263C5.5013 18.5839 5.4263 17.5672 5.33464 16.2589L4.79297 7.86719" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
