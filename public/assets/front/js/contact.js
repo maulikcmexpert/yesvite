@@ -1156,7 +1156,9 @@ $(document).ready(function() {
             uploadProgress.show();
             uploadComplete.hide();
             progressBar.val(0); // Reset progress bar
-
+            let fileSizeKB = (file.size / 1024).toFixed(2); // Convert size to KB
+            let uploadedKB = 0; // Start from 0 KB
+    
             let progress = 0;
             let interval = setInterval(function () {
                 if (progress >= 100) {
@@ -1169,8 +1171,11 @@ $(document).ready(function() {
                     $(".click-to-upload-btn").prop("disabled", false);
     
                 } else {
-                    progress += 1; // Smaller increments for smoothness
-                    progressBar.val(progress);
+                    // progress += 1; // Smaller increments for smoothness
+                    // progressBar.val(progress);
+                    uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB); // Simulate progress
+                    progressBar.val((uploadedKB / fileSizeKB) * 100);
+                    $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                 }
             }, 30);
             // $(".uploadcsv-wrp h3").text(file.name); // Show file name
@@ -1264,6 +1269,7 @@ $(document).on('click','.close_upload_csv',function(){
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0); // Reset progress bar
+    $(".uploadedcvs-file-card-content p").text('');
 
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
@@ -1279,6 +1285,8 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0); // Reset progress bar
+    $(".uploadedcvs-file-card-content p").text('');
+
 
 });
 // $(document).ready(function() {
