@@ -1123,7 +1123,8 @@ $(document).ready(function() {
             fileInput.trigger('click'); // Manually trigger file input
         });
     // fileInput.change(handleFileSelect);
-    fileInput.off('change').on('change', handleFileSelect);
+    // fileInput.off('change').on('change', handleFileSelect);
+    fileInput.off('change').one('change', handleFileSelect); // Use `.one()` to prevent double triggers
 
 
     // Drag and drop
