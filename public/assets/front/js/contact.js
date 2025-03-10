@@ -1256,7 +1256,9 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     // fileInput.val('');
     resetUploadState();
 });
-
+$(document).on('click','.cancel-uploading-btn',function(){
+    resetUploadState();
+});
 function resetUploadState() {
     $(".uploadcsv-wrp h3").text('Drag CSV Here');
     $(".uploadcsv-wrp p").removeClass('d-none');
