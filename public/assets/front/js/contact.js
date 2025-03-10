@@ -1203,11 +1203,14 @@ $(document).ready(function() {
                 progressBar.val(0);
 
                 let progress = 0;
-                let fileSizeKB = (file.size / 1024).toFixed(2);
-                let uploadedKB = 0;
-    
+                let fileSize = file.size;
+                let uploadedSize = 0;
+                // let fileSizeKB = (file.size / 1024).toFixed(2);
+                // let uploadedKB = 0;
+                let formattedSize = formatFileSize(fileSize);
+
                 interval = setInterval(function () {
-                    if (uploadedKB >= fileSizeKB) {
+                    if (uploadedKB >= fileSize) {
                         clearInterval(interval);
                         uploadProgress.hide();
                         uploadComplete.show();
@@ -1221,7 +1224,9 @@ $(document).ready(function() {
                     } else {
                         uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
                         progressBar.val((uploadedKB / fileSizeKB) * 100);
-                        $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        // $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        $(".file_upload_rate").text(`${formattedUploaded} of ${formattedSize}`);
+
                         $('.contact_file_name').text(file.name);
 
                     }
@@ -1262,6 +1267,15 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
 $(document).on('click','.cancel-uploading-btn',function(){
     resetUploadState();
 });
+function formatFileSize(size) {
+    if (size >= 1024 * 1024) {
+        return (size / (1024 * 1024)).toFixed(2) + " MB";
+    } else if (size >= 1024) {
+        return (size / 1024).toFixed(2) + " KB";
+    } else {
+        return size + " Bytes";
+    }
+}
 function resetUploadState() {
     if (interval) {
         clearInterval(interval); // Stop the progress simulation
