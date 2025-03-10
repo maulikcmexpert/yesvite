@@ -1210,7 +1210,7 @@ $(document).ready(function() {
                 let formattedSize = formatFileSize(fileSize);
 
                 interval = setInterval(function () {
-                    if (uploadedKB >= fileSize) {
+                    if (uploadedSize >= fileSize) {
                         clearInterval(interval);
                         uploadProgress.hide();
                         uploadComplete.show();
