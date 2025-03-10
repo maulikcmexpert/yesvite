@@ -3000,6 +3000,17 @@ main.new-main-content {
     text-align: center;
 }
 
+
+.uploadedcvs-file-wrp{
+    margin-top: 25px;
+}
+
+.uploadedcvs-file-wrp .uploadedcvs-file-card.home-latest-draf-card{
+    padding: 20px 10px;
+    margin-bottom: 0px;
+}
+
+
 .uploadedcvs-file-card-head {
     display: flex;
     align-items: center;
@@ -3078,7 +3089,8 @@ main.new-main-content {
     background-color: transparent;
     border: transparent;
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     right: 0;
 }
 

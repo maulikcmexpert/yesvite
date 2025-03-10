@@ -1102,6 +1102,13 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 $(document).ready(function() {
     const uploadWrapper = $('.uploadcsv-wrp');
     const fileInput = $('#csv_file');
+    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    const uploadComplete = $('.uploading_csv_complete');
+    const progressBar = $('#progress-bar'); // Progress bar
+
+    uploadProgress.hide();
+    uploadComplete.hide();
+    progressBar.val(0); // Reset progress bar
 
     // Click to upload
     // uploadWrapper.click(function() {
@@ -1191,6 +1198,22 @@ $(document).ready(function() {
                 $(".uploadcsv-wrp h3").text(file.name); // Show file name
                 $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
+                uploadProgress.show();
+                uploadComplete.hide();
+                progressBar.val(0); // Reset progress bar
+
+                let progress = 0;
+                let interval = setInterval(function () {
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        uploadProgress.hide();
+                        uploadComplete.show();
+                        console.log("File uploaded successfully!");
+                    } else {
+                        progress += 1; // Smaller increments for smoothness
+                        progressBar.val(progress);
+                    }
+                }, 30);
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
@@ -1214,6 +1237,10 @@ $(document).on('click','.close_upload_csv',function(){
 
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
+    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    const uploadComplete = $('.uploading_csv_complete');
+    uploadProgress.hide();
+    uploadComplete.hide();
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
@@ -1221,6 +1248,10 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
+    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
+    const uploadComplete = $('.uploading_csv_complete');
+    uploadProgress.hide();
+    uploadComplete.hide();
 });
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
