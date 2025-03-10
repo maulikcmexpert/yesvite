@@ -1102,14 +1102,6 @@ $(document).on('click','.click-to-upload-btn', function (e) {
 $(document).ready(function() {
     const uploadWrapper = $('.uploadcsv-wrp');
     const fileInput = $('#csv_file');
-    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
-    const uploadComplete = $('.uploading_csv_complete');
-    const progressBar = $('#progress-bar'); // Progress bar
-
-
-    uploadProgress.hide();
-    uploadComplete.hide();
-    progressBar.val(0); // Reset progress bar
 
     // Click to upload
     // uploadWrapper.click(function() {
@@ -1122,10 +1114,7 @@ $(document).ready(function() {
             e.stopPropagation(); // Prevent bubbling to avoid double trigger
             fileInput.trigger('click'); // Manually trigger file input
         });
-    // fileInput.change(handleFileSelect);
-    // fileInput.off('change').on('change', handleFileSelect);
-    fileInput.off('change').one('change', handleFileSelect); // Use `.one()` to prevent double triggers
-
+    fileInput.change(handleFileSelect);
 
     // Drag and drop
     uploadWrapper.on('dragover', function(e) {
@@ -1147,14 +1136,26 @@ $(document).ready(function() {
         handleFileSelect(e.originalEvent); // Access original event for drop
     });
     function setFileInput(file) {
- 
+        // if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+        //     $(".uploadcsv-wrp h3").text(file.name); // Show file name
+        //     $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+
+        //     // Assign file to input field
+        //     let dataTransfer = new DataTransfer();
+        //     dataTransfer.items.add(file);
+        //     fileInput[0].files = dataTransfer.files;
+
+        //     console.log('CSV file selected:', file);
+        // } else {
+        //     toastr.error('Only CSV files are allowed.');
+        //     fileInput.val('');
+        // }
         if (
             file.type === 'text/csv' || 
             file.name.endsWith('.csv') || 
             file.name.endsWith('.xls') || 
             file.name.endsWith('.xlsx')
         ) {
-            
             $(".uploadcsv-wrp h3").text(file.name); // Show file name
             $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
         
@@ -1171,7 +1172,6 @@ $(document).ready(function() {
         
     }
     function handleFileSelect(e) {
-
         let files;
         if (e.type === 'drop') {
             files = e.dataTransfer.files;
@@ -1188,29 +1188,9 @@ $(document).ready(function() {
                     file.name.endsWith('.xls') || 
                     file.name.endsWith('.xlsx')
                 ) {
-                    $(".click-to-upload-btn").prop("disabled", true);
+                $(".uploadcsv-wrp h3").text(file.name); // Show file name
+                $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
 
-
-                uploadProgress.show();
-                uploadComplete.hide();
-                progressBar.val(0); // Reset progress bar
-
-                let progress = 0;
-                let interval = setInterval(function () {
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        uploadProgress.hide();
-                        uploadComplete.show();
-                        console.log("File uploaded successfully!");
-                        $(".uploadcsv-wrp h3").text(file.name); // Show file name
-                        $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
-                        $(".click-to-upload-btn").prop("disabled", false);
-        
-                    } else {
-                        progress += 1; // Smaller increments for smoothness
-                        progressBar.val(progress);
-                    }
-                }, 30);
                 console.log('CSV file selected:', file);
                 // File is now selected, and will be submitted with the form.
             } else {
@@ -1228,55 +1208,20 @@ $("#csv_file").on("change", function (e) {
     }
 });
 $(document).on('click','.close_upload_csv',function(){
-    // $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
-    // let fileInput = $("#csv_file");
-    // $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
+    $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    let fileInput = $("#csv_file");
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
 
-    // fileInput.val('');
-    // fileInput.replaceWith(fileInput.clone(true));
-    // const uploadProgress = $('.uploading_csv_file'); // Uploading bar
-    // const uploadComplete = $('.uploading_csv_complete');
-    // const progressBar = $('#progress-bar'); // Progress bar
-
-    // uploadProgress.hide();
-    // uploadComplete.hide();
-    // progressBar.val(0); // Reset progress bar
-    resetUploadState();
-
-
+    fileInput.val('');
+    fileInput.replaceWith(fileInput.clone(true));
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
-    // $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
-    // $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
-    // let fileInput = $("#csv_file");
-    // fileInput.val('');
-    // fileInput.replaceWith(fileInput.clone(true));
-    // const uploadProgress = $('.uploading_csv_file'); // Uploading bar
-    // const uploadComplete = $('.uploading_csv_complete');
-    // const progressBar = $('#progress-bar'); // Progress bar
-
-    // uploadProgress.hide();
-    // uploadComplete.hide();
-    // progressBar.val(0); // Reset progress bar
-
-    resetUploadState();
-
-});
-function resetUploadState() {
-    $(".uploadcsv-wrp h3").text('Drag CSV Here');
-    $(".uploadcsv-wrp p").removeClass('d-none');
-    
+    $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
+    $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
     let fileInput = $("#csv_file");
     fileInput.val('');
     fileInput.replaceWith(fileInput.clone(true));
-    const uploadProgress = $('.uploading_csv_file'); // Uploading bar
-    const uploadComplete = $('.uploading_csv_complete');
-    const progressBar = $('#progress-bar'); // Progress bar
-
-    uploadProgress.hide();
-    uploadComplete.hide();
-    progressBar.val(0);
-}
+});
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
         let userId = $(this).attr("data-userid"); // Get user_id from clicked element
