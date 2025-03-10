@@ -1631,12 +1631,12 @@ $(document).ready(function () {
         refreshTimeout = setTimeout(() => {
             console.log("User inactive for 5+ minutes, refreshing page...");
             location.reload();
-        }, 300000);
+        },300000);
     }
 
     function userIsInactive() {
         userActive = false;
-        inactiveTime = new Date().toLocaleTimeString(); // Get inactive time
+        inactiveTime = new Date().toLocaleTimeString();
         console.log("User became inactive at:", inactiveTime);
     }
 
@@ -1644,7 +1644,7 @@ $(document).ready(function () {
     document.addEventListener("keydown", userIsActive);
     document.addEventListener("touchstart", userIsActive); // For mobile devices
 
-    // Start inactivity timeout
+
     inactivityTimeout = setTimeout(userIsInactive, 5000);
     refreshTimeout = setTimeout(() => {
         console.log("User inactive for 5+ minutes, refreshing page...");
