@@ -1221,7 +1221,7 @@ $(document).ready(function() {
                         $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                         $('.contact_file_name').text(file.name);
                     }
-                }, 30);
+                }, 25);
             } else {
                 fileInput.val('');
             }
