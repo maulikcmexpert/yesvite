@@ -1261,9 +1261,9 @@ $(document).on('click','.cancel-uploading-btn',function(){
     resetUploadState();
 });
 function resetUploadState() {
-    if (uploadInterval) {
-        clearInterval(uploadInterval); // Stop the progress simulation
-        uploadInterval = null;
+    if (interval) {
+        clearInterval(interval); // Stop the progress simulation
+        interval = null;
     }
     $(".uploadcsv-wrp h3").text('Drag CSV Here');
     $(".uploadcsv-wrp p").removeClass('d-none');
