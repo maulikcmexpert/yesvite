@@ -687,8 +687,11 @@
                                 </svg></button>
                             </div>
                             <div class="progress-bar__wrapper">
-                            <progress id="progress-bar" max="100" style="width: 0%;"></progress>
+                            <progress id="progress-bar" max="100"  value="25"></progress>
                             </div>
+                            {{-- <div class="progress-bar__wrapper">
+                                <progress id="progress-bar" value="75" max="100"></progress>
+                            </div> --}}
                         </div>
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
@@ -714,9 +717,9 @@
                                 </svg>
                             </button>
                             </div>
-                            <div class="progress-bar__wrapper">
+                            {{-- <div class="progress-bar__wrapper">
                             <progress id="progress-bar" value="75" max="100"></progress>
-                            </div>
+                            </div> --}}
                         </div>
                     </div> 
                 </div>  
