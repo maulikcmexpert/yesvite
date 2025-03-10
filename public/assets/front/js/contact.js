@@ -1122,7 +1122,9 @@ $(document).ready(function() {
             e.stopPropagation(); // Prevent bubbling to avoid double trigger
             fileInput.trigger('click'); // Manually trigger file input
         });
-    fileInput.change(handleFileSelect);
+    // fileInput.change(handleFileSelect);
+    fileInput.off('change').on('change', handleFileSelect);
+
 
     // Drag and drop
     uploadWrapper.on('dragover', function(e) {
@@ -1237,6 +1239,8 @@ $(document).on('click','.close_upload_csv',function(){
 
     uploadProgress.hide();
     uploadComplete.hide();
+    progressBar.val(0); // Reset progress bar
+
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
