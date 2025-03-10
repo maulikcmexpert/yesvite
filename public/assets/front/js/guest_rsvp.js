@@ -290,7 +290,7 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
                     if (showLocation) {
                         let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
-                            .filter(Boolean)
+                        .filter(value => value !== null && value !== undefined && value !== "")
                             .join(", ");
 
                         $("#location").text(locationText);
