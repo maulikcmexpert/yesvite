@@ -665,7 +665,7 @@
                         </li>
                     </ul>
                     
-                    <!-- <div class="uploadedcvs-file-wrp">
+                    <div class="uploadedcvs-file-wrp">
                         <div class="uploadedcvs-file-card home-latest-draf-card">
                             <div class="uploadedcvs-file-card-head">
                             <div class="uploadedcvs-file-card-icon">
@@ -718,7 +718,7 @@
                             <progress id="progress-bar" value="75" max="100"></progress>
                             </div>
                         </div>
-                    </div> -->
+                    </div> 
                 </div>  
                 <div class="modal-footer-wrp">
                 <div class="modal-footer rsvp-button-wrp">
