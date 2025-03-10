@@ -848,5 +848,45 @@
             };
             toastr.error("{{ session('error') }}");
         @endif
-    });
+
+    let userActive = true;
+    let inactivityTimeout;
+    let refreshTimeout;
+    let activeTime = null;
+    let inactiveTime = null;
+
+    function userIsActive() {
+        if (!userActive) {
+            activeTime = new Date().toLocaleTimeString();
+            console.log("User became active at:", activeTime);
+        }
+
+        userActive = true;
+        clearTimeout(inactivityTimeout);
+        clearTimeout(refreshTimeout);
+
+        inactivityTimeout = setTimeout(userIsInactive, 5000);
+        refreshTimeout = setTimeout(() => {
+            console.log("User inactive for 5+ minutes, refreshing page...");
+            location.reload();
+        },300000);
+    }
+
+    function userIsInactive() {
+        userActive = false;
+        inactiveTime = new Date().toLocaleTimeString();
+        console.log("User became inactive at:", inactiveTime);
+    }
+
+    document.addEventListener("mousemove", userIsActive);
+    document.addEventListener("keydown", userIsActive);
+    document.addEventListener("touchstart", userIsActive); // For mobile devices
+
+
+    inactivityTimeout = setTimeout(userIsInactive, 5000);
+    refreshTimeout = setTimeout(() => {
+        console.log("User inactive for 5+ minutes, refreshing page...");
+        location.reload();
+    }, 300000);
+});
 </script>
