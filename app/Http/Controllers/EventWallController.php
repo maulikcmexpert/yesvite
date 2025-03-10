@@ -154,7 +154,7 @@ class EventWallController extends BaseController
         $eventCreatorId = Event::where('id', $event)->pluck('user_id')->first();
         $eventCreator = Event::where('id', $event)->first();
         $title = $eventCreator->event_name . ' wall';
-        $eventPostList = EventPost::with(['user','contact_sync','post_image', 'event_post_poll.eventPollOptions'])
+        $eventPostList = EventPost::with(['user', 'contact_sync', 'post_image', 'event_post_poll.eventPollOptions'])
             ->withCount([
                 'event_post_comment' => fn($query) => $query->whereNull('parent_comment_id'),
                 'event_post_reaction'
@@ -213,18 +213,18 @@ class EventWallController extends BaseController
 
         dd($eventPostList);
         foreach ($eventPostList as $value) {
-                 if (empty($value->user) || empty($value->user->id)) {
-                        if (!empty($value->sync_id)) {
-                            $syncUser = contact_sync::where('id', $value->sync_id)->first();
-                            if ($syncUser) {
-                                $value->user = $syncUser; // Assign the found user
-                            } else {
-                                continue; // Skip if no user found via sync_id
-                            }
-                        } else {
-                            continue; // Skip if no user and no sync_id
-                        }
+            if (empty($value->user) || empty($value->user->id)) {
+                if (!empty($value->sync_id)) {
+                    $syncUser = contact_sync::where('id', $value->sync_id)->first();
+                    if ($syncUser) {
+                        $value->user = $syncUser; // Assign the found user
+                    } else {
+                        continue; // Skip if no user found via sync_id
                     }
+                } else {
+                    continue; // Skip if no user and no sync_id
+                }
+            }
             // Check RSVP status and event ownership only once
             $checkUserRsvp = checkUserAttendOrNot($value->event_id, $value->user->id);
             $isEventOwner = $value->user->id === $user->id;
@@ -255,32 +255,30 @@ class EventWallController extends BaseController
                 $username =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                 $profile = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
                 $is_host = ($value->contact_sync->id == $eventCreator->user_id) ? 1 : 0;
-                $user_id=$value->contact_sync->id;
-                $is_sync=1;
-                $location="";
-                $is_co_host= EventInvitedUser::where(['event_id' => $eventCreator->id, 'sync_id' => $value->contact_sync->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
+                $user_id = $value->contact_sync->id;
+                $is_sync = 1;
+                $location = "";
+                $is_co_host = EventInvitedUser::where(['event_id' => $eventCreator->id, 'sync_id' => $value->contact_sync->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
             } else {
                 // Handle case where user is still not found
                 $username = $value->user->firstname . ' ' . $value->user->lastname;
                 $profile = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
                 $is_host = ($value->user->id == $eventCreator->user_id) ? 1 : 0;
-                $user_id=  $value->user->id;
-                $is_sync=0;
-                $location=trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : ''));
-                $is_co_host= EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
-
-
+                $user_id =  $value->user->id;
+                $is_sync = 0;
+                $location = trim($value->user->city . ($value->user->state ? ', ' . $value->user->state : ''));
+                $is_co_host = EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0";
             }
             // Build the post details array
             $postsNormalDetail = [
                 'id' => $value->id,
                 'user_id' => $user_id,
                 // 'is_co_host' => EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->exists() ? "1" : "0",
-                'is_co_host'=>$is_co_host,
+                'is_co_host' => $is_co_host,
                 'is_host' => $is_host,
                 'username' => $username,
                 'profile' => $profile,
-                'is_sync'=>$is_sync,
+                'is_sync' => $is_sync,
                 // 'username' => $value->user->firstname . ' ' . $value->user->lastname,
                 // 'profile' => asset('storage/profile/' . ($value->user->profile ?? '')),
                 'post_message' => $value->post_type == '4' ? '' : $value->post_message,
@@ -848,27 +846,26 @@ class EventWallController extends BaseController
                 $postsNormalDetail['id'] =  $value->id;
                 $postsNormalDetail['user_id'] =  $value->user->id;
                 // $postsNormalDetail['is_host'] =  ($value->user->id == $user->id) ? 1 : 0;
-                if (!empty($value->sync_id)&& empty($value->user_id)) {
-                    $postsNormalDetail['is_sync']='1';
-                    } else{
-                        $postsNormalDetail['is_sync']='0';
-                    }
+                if (!empty($value->sync_id) && empty($value->user_id)) {
+                    $postsNormalDetail['is_sync'] = '1';
+                } else {
+                    $postsNormalDetail['is_sync'] = '0';
+                }
                 $isCoHost =  EventInvitedUser::where(['event_id' => $eventCreator->id, 'user_id' => $value->user->id, 'is_co_host' => '1'])->first();
                 $postsNormalDetail['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
                 $postsNormalDetail['is_host'] =  ($value->user->id == $eventCreator->user_id) ? 1 : 0;
                 // $postsNormalDetail['username'] =  $value->user->firstname . ' ' . $value->user->lastname;
                 // $postsNormalDetail['profile'] =  empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                if (!empty($value->sync_id)&&empty($value->user_id)) {
+                if (!empty($value->sync_id) && empty($value->user_id)) {
 
                     $postsNormalDetail['username'] =  $value->contact_sync->firstName . ' ' . $value->contact_sync->lastName;
                     $postsNormalDetail['profile'] = empty($value->contact_sync->photo) ? "" : asset('storage/profile/' . $value->contact_sync->photo);
-                    $postsNormalDetail['is_sync']='1';
+                    $postsNormalDetail['is_sync'] = '1';
                 } else {
                     // Handle case where user is still not found
                     $postsNormalDetail['username'] = $value->user->firstname . ' ' . $value->user->lastname;
                     $postsNormalDetail['profile'] = empty($value->user->profile) ? "" : asset('storage/profile/' . $value->user->profile);
-                    $postsNormalDetail['is_sync']='0';
-
+                    $postsNormalDetail['is_sync'] = '0';
                 }
                 $postsNormalDetail['post_message'] = (empty($value->post_message) || $value->post_type == '4') ? "" :  $value->post_message;
                 $postsNormalDetail['rsvp_status'] = (string)$rsvpstatus ?? "";
@@ -1304,143 +1301,143 @@ class EventWallController extends BaseController
         $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit ?? 0;
         $eventInfo['guest_view'] = $eventDetails;
         $eventattending = EventInvitedUser::
-        // whereHas('user', function ($query) {
-        //     $query->where('app_user', '1');
-        // })->
-        where(['rsvp_status' => '1', 'event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['rsvp_status' => '1', 'event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
-    $totalEnvitedUser = EventInvitedUser::
-        // whereHas('user', function ($query) {
-
-        //     // $query->where('app_user', '1');
-        // })->
-        where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
-
-    // $eventattending = EventInvitedUser::whereHas('user', function ($query) {
-
-    //     $query->where('app_user', '1');
-    // })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
-
-    // $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
-
-    //     $query->where('app_user', '1');
-    // })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
-
-
-
-    $eventNotComing = EventInvitedUser::
-        // whereHas('user', function ($query) {
-        //     $query->where('app_user', '1');
-        // })->
-        where(['rsvp_d' => '1', 'is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
-
-
-
-    $todayrsvprate = EventInvitedUser::
-        // whereHas('user', function ($query) {
-
-        //     // $query->where('app_user', '1');
-        // })->
-        where(['rsvp_status' => '1', 'is_co_host' => '0', 'event_id' => $eventDetail->id])
-
-        ->whereDate('created_at', '=', date('Y-m-d'))
-
-        ->count();
-
-
-
-    // $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
-
-    //     // $query->where('app_user', '1');
-    // })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
-    // // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
-
-    $pendingUser = EventInvitedUser::
-        // whereHas('user', function ($query) {
-        //     $query->where('app_user', '1');
-        // })->
-        where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
-
-
-
-    $adults = EventInvitedUser::
-        // whereHas('user', function ($query) {
-
-        //     // $query->where('app_user', '1');
-        // })->
-        where(['event_id' => $eventDetail->id, 'is_co_host' => '0', 'rsvp_status' => '1'])->sum('adults');
-
-    $kids = EventInvitedUser::
-        // whereHas('user', function ($query) {
-
-        //     // $query->where('app_user', '1');
-        // })->
-        where(['event_id' => $eventDetail->id, 'is_co_host' => '0', 'rsvp_status' => '1'])->sum('kids');
-
-
-    $eventAboutHost['attending'] = $adults + $kids;
-
-
-
-    $eventAboutHost['adults'] = (int)$adults;
-
-    $eventAboutHost['kids'] = (int)$kids;
-
-
-
-    $eventAboutHost['not_attending'] = $eventNotComing;
-
-    $eventAboutHost['pending'] = $pendingUser;
-
-    $eventAboutHost['comment'] = EventPostComment::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->count();
-    $total_photos = EventPostImage::where(['event_id' => $eventDetail->id])->count();
-
-    $eventAboutHost['photo_uploaded'] = $total_photos;
-
-    $eventAboutHost['total_invite'] =  count(getEventInvitedUser($eventDetail->id));
-
-    $eventAboutHost['invite_view_rate'] = EventInvitedUser::where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count();
-
-    $invite_view_percent = 0;
-    if ($totalEnvitedUser != 0) {
-
-        $invite_view_percent = EventInvitedUser::
+        $totalEnvitedUser = EventInvitedUser::
             // whereHas('user', function ($query) {
 
             //     // $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
-    }
+            where(['event_id' => $eventDetail->id, 'is_co_host' => '0'])->count();
 
-    $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
+        // $eventattending = EventInvitedUser::whereHas('user', function ($query) {
 
-    $today_invite_view_percent = 0;
-    if ($totalEnvitedUser != 0) {
-        $today_invite_view_percent =   EventInvitedUser::
+        //     $query->where('app_user', '1');
+        // })->where(['rsvp_status' => '1', 'event_id' => $eventDetail->id])->count();
+
+        // $eventNotComing = EventInvitedUser::whereHas('user', function ($query) {
+
+        //     $query->where('app_user', '1');
+        // })->where(['rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+
+
+
+        $eventNotComing = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['rsvp_d' => '1', 'is_co_host' => '0', 'rsvp_status' => '0', 'event_id' => $eventDetail->id])->count();
+
+
+
+        $todayrsvprate = EventInvitedUser::
             // whereHas('user', function ($query) {
 
             //     // $query->where('app_user', '1');
             // })->
-            where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
-    }
+            where(['rsvp_status' => '1', 'is_co_host' => '0', 'event_id' => $eventDetail->id])
 
-    $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
+            ->whereDate('created_at', '=', date('Y-m-d'))
 
-    $eventAboutHost['rsvp_rate'] = $eventattending;
+            ->count();
 
-    // $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
-    // $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
-    $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
-        ? round(($eventattending / $totalEnvitedUser) * 100) . "%"
-        : "0%";
+        // $pendingUser = EventInvitedUser::whereHas('user', function ($query) {
 
-    $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
-        ? round(($todayrsvprate / $totalEnvitedUser) * 100) . "%"
-        : "0%";
+        //     // $query->where('app_user', '1');
+        // })->where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+        // // where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
 
-    $eventInfo['host_view'] = $eventAboutHost;
+        $pendingUser = EventInvitedUser::
+            // whereHas('user', function ($query) {
+            //     $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'rsvp_d' => '0', 'is_co_host' => '0'])->count();
+
+
+
+        $adults = EventInvitedUser::
+            // whereHas('user', function ($query) {
+
+            //     // $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'is_co_host' => '0', 'rsvp_status' => '1'])->sum('adults');
+
+        $kids = EventInvitedUser::
+            // whereHas('user', function ($query) {
+
+            //     // $query->where('app_user', '1');
+            // })->
+            where(['event_id' => $eventDetail->id, 'is_co_host' => '0', 'rsvp_status' => '1'])->sum('kids');
+
+
+        $eventAboutHost['attending'] = $adults + $kids;
+
+
+
+        $eventAboutHost['adults'] = (int)$adults;
+
+        $eventAboutHost['kids'] = (int)$kids;
+
+
+
+        $eventAboutHost['not_attending'] = $eventNotComing;
+
+        $eventAboutHost['pending'] = $pendingUser;
+
+        $eventAboutHost['comment'] = EventPostComment::where(['event_id' => $eventDetail->id, 'user_id' => $user->id])->count();
+        $total_photos = EventPostImage::where(['event_id' => $eventDetail->id])->count();
+
+        $eventAboutHost['photo_uploaded'] = $total_photos;
+
+        $eventAboutHost['total_invite'] =  count(getEventInvitedUser($eventDetail->id));
+
+        $eventAboutHost['invite_view_rate'] = EventInvitedUser::where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count();
+
+        $invite_view_percent = 0;
+        if ($totalEnvitedUser != 0) {
+
+            $invite_view_percent = EventInvitedUser::
+                // whereHas('user', function ($query) {
+
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0'])->count() / $totalEnvitedUser * 100;
+        }
+
+        $eventAboutHost['invite_view_percent'] = round($invite_view_percent, 2) . "%";
+
+        $today_invite_view_percent = 0;
+        if ($totalEnvitedUser != 0) {
+            $today_invite_view_percent =   EventInvitedUser::
+                // whereHas('user', function ($query) {
+
+                //     // $query->where('app_user', '1');
+                // })->
+                where(['event_id' => $eventDetail->id, 'read' => '1', 'is_co_host' => '0', 'event_view_date' => date('Y-m-d')])->count() / $totalEnvitedUser * 100;
+        }
+
+        $eventAboutHost['today_invite_view_percent'] = round($today_invite_view_percent, 2)  . "%";
+
+        $eventAboutHost['rsvp_rate'] = $eventattending;
+
+        // $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
+
+        // $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
+
+        $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0)
+            ? round(($eventattending / $totalEnvitedUser) * 100) . "%"
+            : "0%";
+
+        $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0)
+            ? round(($todayrsvprate / $totalEnvitedUser) * 100) . "%"
+            : "0%";
+
+        $eventInfo['host_view'] = $eventAboutHost;
         $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
             $query->where('app_user', '1');
         })->where(['user_id' => $user->id, 'event_id' => $event])->first();
@@ -2697,23 +2694,23 @@ class EventWallController extends BaseController
         //     ->get();
 
         $phoneContacts = contact_sync::where('contact_id', $userId)
-        ->when(!empty($type), function ($query) use ($type) {
-            $query->where('type', $type); // Apply type filter
-        })
-        ->when(!empty($limit), function ($query) use ($limit, $offset) {
-            $query->limit($limit)
-                ->offset($offset); // Pagination
-        })
-        ->when(!empty($searchUser), function ($query) use ($searchUser) {
-            $query->where(function ($q) use ($searchUser) {
-                $q->where('firstName', 'LIKE', "%{$searchUser}%")
-                    ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
-            });
-        })
-        ->whereNull('userId') // Ensure the user is not linked
-        ->orderBy('firstName', 'asc')
-        ->groupBy('email', 'phoneWithCode') // Group by email and phone number to remove duplicates
-        ->get();
+            ->when(!empty($type), function ($query) use ($type) {
+                $query->where('type', $type); // Apply type filter
+            })
+            ->when(!empty($limit), function ($query) use ($limit, $offset) {
+                $query->limit($limit)
+                    ->offset($offset); // Pagination
+            })
+            ->when(!empty($searchUser), function ($query) use ($searchUser) {
+                $query->where(function ($q) use ($searchUser) {
+                    $q->where('firstName', 'LIKE', "%{$searchUser}%")
+                        ->orWhere('lastName', 'LIKE', "%{$searchUser}%"); // Search by name
+                });
+            })
+            ->whereNull('userId') // Ensure the user is not linked
+            ->orderBy('firstName', 'asc')
+            ->groupBy('email', 'phoneWithCode') // Group by email and phone number to remove duplicates
+            ->get();
 
         $invitedUsers = [];
         if (!empty($eventId)) {
@@ -3592,8 +3589,8 @@ class EventWallController extends BaseController
                     'password_updated_date' => empty($user->password_updated_date) ? "" : $user->password_updated_date,
                     'total_notification' => Notification::where(['user_id' => $user->id, 'read' => '0'])->count(),
                     'is_message_notification' => (isset($checkNotificationSetting->push) && $checkNotificationSetting->push != "") ? $checkNotificationSetting->push : "",
-                    'encrypted_id'=>encrypt($userId),
-                    'login_user_id'=>$loginuser->id
+                    'encrypted_id' => encrypt($userId),
+                    'login_user_id' => $loginuser->id
                 ];
 
 

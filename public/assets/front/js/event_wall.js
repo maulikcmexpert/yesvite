@@ -1069,6 +1069,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
         var $this = $(this);
@@ -1608,4 +1610,34 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    let userActive = true;
+    let inactivityTimeout;
+    let activeTime = null;
+    let inactiveTime = null;
+
+    function userIsActive() {
+        if (!userActive) {
+            activeTime = new Date().toLocaleTimeString(); // Get active time
+            console.log("User became active at:", activeTime);
+        }
+
+        userActive = true;
+        clearTimeout(inactivityTimeout);
+        inactivityTimeout = setTimeout(userIsInactive, 5000); // 5 seconds inactivity
+    }
+
+    function userIsInactive() {
+        userActive = false;
+        inactiveTime = new Date().toLocaleTimeString(); // Get inactive time
+        console.log("User became inactive at:", inactiveTime);
+    }
+
+    document.addEventListener("mousemove", userIsActive);
+    document.addEventListener("keydown", userIsActive);
+    document.addEventListener("touchstart", userIsActive); // For mobile devices
+
+    // Start inactivity timeout
+    inactivityTimeout = setTimeout(userIsInactive, 5000);
+});
 

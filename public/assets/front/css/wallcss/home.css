@@ -3323,12 +3323,13 @@ main.new-main-content {
 
 .posts-card-wrp .posts-card-show-post-img {
     height: 100% !important;
+    max-height: 400px;
 }
 
 .posts-card-wrp .posts-card-show-post-img img {
     border-radius: 10px;
-    object-fit: contain;
-    aspect-ratio: 7 / 5;
+    /* object-fit: contain; */
+    /* aspect-ratio: 7 / 5; */
 }
 
 
