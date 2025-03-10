@@ -1105,6 +1105,7 @@ $(document).ready(function() {
     const uploadProgress = $('.uploading_csv_file'); 
     const uploadComplete = $('.uploading_csv_complete');
     const progressBar = $('#progress-bar'); 
+    let interval = null; // Store the interval globally
 
     uploadProgress.hide();
     uploadComplete.hide();
@@ -1205,7 +1206,7 @@ $(document).ready(function() {
                 let fileSizeKB = (file.size / 1024).toFixed(2);
                 let uploadedKB = 0;
     
-                let interval = setInterval(function () {
+                interval = setInterval(function () {
                     if (uploadedKB >= fileSizeKB) {
                         clearInterval(interval);
                         uploadProgress.hide();
@@ -1260,6 +1261,10 @@ $(document).on('click','.cancel-uploading-btn',function(){
     resetUploadState();
 });
 function resetUploadState() {
+    if (uploadInterval) {
+        clearInterval(uploadInterval); // Stop the progress simulation
+        uploadInterval = null;
+    }
     $(".uploadcsv-wrp h3").text('Drag CSV Here');
     $(".uploadcsv-wrp p").removeClass('d-none');
     
