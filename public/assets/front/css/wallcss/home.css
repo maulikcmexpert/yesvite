@@ -3064,6 +3064,9 @@ main.new-main-content {
     align-items: center;
     gap: 5px;
     position: relative;
+    font-size: 13px;
+    line-height: normal;
+    color: #525866;
 }
 
 .uploadedcvs-file-card-content  span::before {
