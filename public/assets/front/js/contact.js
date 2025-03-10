@@ -1213,14 +1213,12 @@ $(document).on('click','.close_upload_csv',function(){
     $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
 
     fileInput.val('');
-    fileInput.replaceWith(fileInput.clone(true));
 })
 $('#uploadcsv').on('hidden.bs.modal', function () {
     $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
     $(".uploadcsv-wrp p").removeClass('d-none'); // Show file name
     let fileInput = $("#csv_file");
     fileInput.val('');
-    fileInput.replaceWith(fileInput.clone(true));
 });
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
