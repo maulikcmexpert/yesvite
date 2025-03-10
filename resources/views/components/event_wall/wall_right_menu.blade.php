@@ -157,9 +157,6 @@ if ($hostView) {
                                         </h3>
                                           @endif
 
-
-
-
                                             @if ($guest['prefer_by'] == 'email')
                                                 <p>{{ $guest['email'] }}</p>
                                             @else
