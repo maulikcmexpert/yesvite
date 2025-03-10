@@ -3042,6 +3042,8 @@ main.new-main-content {
     line-height: 22.4px;
     color: var(--secondary-black);
     margin-bottom: 3px;
+    word-break: break-all;
+    max-width: 150px;
 }
 
 .uploadedcvs-file-card-content .uploadedcvs-file-icon-text{
