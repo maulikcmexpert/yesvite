@@ -3131,7 +3131,7 @@ main.new-main-content {
 }
 
 #uploadcsv .modal-body {
-    max-height: 470px;
+    max-height: 570px;
     overflow: hidden;
     overflow-y: scroll;
 }
