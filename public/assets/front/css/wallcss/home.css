@@ -3046,12 +3046,12 @@ main.new-main-content {
     line-height: normal;
     color: #525866;
     margin-bottom: 0px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 20px;
 }
 
-.uploadedcvs-file-card-content p span {
+.uploadedcvs-file-card-content  span {
     color: var(--secondary-black);
     display: flex;
     align-items: center;
@@ -3059,7 +3059,7 @@ main.new-main-content {
     position: relative;
 }
 
-.uploadedcvs-file-card-content p span::before {
+.uploadedcvs-file-card-content  span::before {
     content: "";
     position: absolute;
     width: 3px;
@@ -3072,7 +3072,7 @@ main.new-main-content {
 
 }
 
-.uploadedcvs-file-card-content p span svg {
+.uploadedcvs-file-card-content  span svg {
     width: 100%;
     max-width: 15px;
     height: 15px;
