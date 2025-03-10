@@ -1301,6 +1301,8 @@ function resetUploadState() {
     progressBar.val(0);
     $(".file_upload_rate").text('');
     $('.contact_file_name').text('');
+    $(".click-to-upload-btn").prop("disabled", false);
+
 
 
     // $(".uploadedcvs-file-card-content p").text('');
