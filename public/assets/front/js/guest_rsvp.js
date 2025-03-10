@@ -289,11 +289,16 @@ $(document).on("change", ".phoneContact-checkbox", function () {
                     let showLocation = profilePrivacy.some(item => item.profile_privacy === "location" && item.status === "1");
                     let showPhotos = profilePrivacy.some(item => item.profile_privacy === "photo" && item.status === "1");
                     if (showLocation) {
-                        let locationText = [profileData.address,profileData.city, profileData.state, profileData.zip_code]
-                        .filter(value => value != "" && value !== "" && value !== "")
+                        let locationText = [profileData.address, profileData.city, profileData.state, profileData.zip_code]
+                            .filter(value => value !== null && value !== undefined && value !== "")
                             .join(", ");
 
-                        $("#location").text(locationText);
+
+                        if (locationText.split(", ").length >= 3) {
+                            $("#location").text(locationText);
+                        } else {
+                            $("#location").text("");
+                        }
                     } else {
                         $("#location").text("");
                     }
