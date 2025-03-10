@@ -1279,7 +1279,7 @@ function formatFileSize(size) {
     } else if (size >= 1024) {
         return (size / 1024).toFixed(2) + " KB";
     } else {
-        return size.toLocaleString() + " Bytes"; // Ensures up to 4 digits with proper formatting
+        return size.toLocaleString() + " Bytes"; 
     }
 }
 
