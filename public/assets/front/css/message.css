@@ -1913,7 +1913,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
         height: 24px;
     }
     #message-send svg path{
-        fill: #000;
+        stroke: #000;
     }
 }
 @media only screen and (min-width: 1201px) {
