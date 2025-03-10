@@ -1106,8 +1106,8 @@ $(document).ready(function() {
     const uploadComplete = $('.uploading_csv_complete');
     const progressBar = $('#progress-bar'); 
 
-    uploadProgress.hide();
-    uploadComplete.hide();
+    // uploadProgress.hide();
+    // uploadComplete.hide();
     progressBar.val(0);
     // Click to upload
     // uploadWrapper.click(function() {
@@ -1208,8 +1208,8 @@ $(document).ready(function() {
                 let interval = setInterval(function () {
                     if (uploadedKB >= fileSizeKB) {
                         clearInterval(interval);
-                        uploadProgress.hide();
-                        uploadComplete.show();
+                        // uploadProgress.hide();
+                        // uploadComplete.show();
                         console.log("File uploaded successfully!");
                         $(".uploadcsv-wrp h3").text(file.name);
                         $('.contact_file_name').text(file.name);
