@@ -1370,7 +1370,7 @@ main.new-main-content {
 .GuestProfile-modal .about-section-text {
     text-align: center;
     max-width: 350px;
-    margin: 12px 0;
+    margin: 12px auto;
 }
 
 .GuestProfile-modal .about-section-text p {
@@ -3031,6 +3031,10 @@ main.new-main-content {
     height: 40px;
     object-fit: contain;
 }
+.uploadedcvs-file-card-content{
+    display: flex;
+    gap: 20px;
+}
 
 .uploadedcvs-file-card-content h4 {
     font-family: var(--SFProDisplay-Medium);
@@ -3038,6 +3042,15 @@ main.new-main-content {
     line-height: 22.4px;
     color: var(--secondary-black);
     margin-bottom: 3px;
+    word-break: break-all;
+    max-width: 150px;
+}
+
+.uploadedcvs-file-card-content .uploadedcvs-file-icon-text{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
 }
 
 .uploadedcvs-file-card-content p {
@@ -3046,20 +3059,23 @@ main.new-main-content {
     line-height: normal;
     color: #525866;
     margin-bottom: 0px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 20px;
 }
 
-.uploadedcvs-file-card-content p span {
+.uploadedcvs-file-card-content  span {
     color: var(--secondary-black);
     display: flex;
     align-items: center;
     gap: 5px;
     position: relative;
+    font-size: 13px;
+    line-height: normal;
+    color: #525866;
 }
 
-.uploadedcvs-file-card-content p span::before {
+.uploadedcvs-file-card-content  span::before {
     content: "";
     position: absolute;
     width: 3px;
@@ -3072,7 +3088,7 @@ main.new-main-content {
 
 }
 
-.uploadedcvs-file-card-content p span svg {
+.uploadedcvs-file-card-content  span svg {
     width: 100%;
     max-width: 15px;
     height: 15px;

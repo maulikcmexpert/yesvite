@@ -1610,46 +1610,47 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    let userActive = true;
-    let inactivityTimeout;
-    let refreshTimeout;
-    let activeTime = null;
-    let inactiveTime = null;
 
-    function userIsActive() {
-        if (!userActive) {
-            activeTime = new Date().toLocaleTimeString();
-            console.log("User became active at:", activeTime);
-        }
+// $(document).ready(function () {
+//     let userActive = true;
+//     let inactivityTimeout;
+//     let refreshTimeout;
+//     let activeTime = null;
+//     let inactiveTime = null;
 
-        userActive = true;
-        clearTimeout(inactivityTimeout);
-        clearTimeout(refreshTimeout);
+//     function userIsActive() {
+//         if (!userActive) {
+//             activeTime = new Date().toLocaleTimeString();
+//             console.log("User became active at:", activeTime);
+//         }
 
-        inactivityTimeout = setTimeout(userIsInactive, 5000);
-        refreshTimeout = setTimeout(() => {
-            console.log("User inactive for 5+ minutes, refreshing page...");
-            location.reload();
-        }, 300000);
-    }
+//         userActive = true;
+//         clearTimeout(inactivityTimeout);
+//         clearTimeout(refreshTimeout);
 
-    function userIsInactive() {
-        userActive = false;
-        inactiveTime = new Date().toLocaleTimeString(); // Get inactive time
-        console.log("User became inactive at:", inactiveTime);
-    }
+//         inactivityTimeout = setTimeout(userIsInactive, 5000);
+//         refreshTimeout = setTimeout(() => {
+//             console.log("User inactive for 5+ minutes, refreshing page...");
+//             location.reload();
+//         },300000);
+//     }
 
-    document.addEventListener("mousemove", userIsActive);
-    document.addEventListener("keydown", userIsActive);
-    document.addEventListener("touchstart", userIsActive); // For mobile devices
+//     function userIsInactive() {
+//         userActive = false;
+//         inactiveTime = new Date().toLocaleTimeString();
+//         console.log("User became inactive at:", inactiveTime);
+//     }
 
-    // Start inactivity timeout
-    inactivityTimeout = setTimeout(userIsInactive, 5000);
-    refreshTimeout = setTimeout(() => {
-        console.log("User inactive for 5+ minutes, refreshing page...");
-        location.reload();
-    }, 300000);
-});
+//     document.addEventListener("mousemove", userIsActive);
+//     document.addEventListener("keydown", userIsActive);
+//     document.addEventListener("touchstart", userIsActive); // For mobile devices
+
+
+//     inactivityTimeout = setTimeout(userIsInactive, 5000);
+//     refreshTimeout = setTimeout(() => {
+//         console.log("User inactive for 5+ minutes, refreshing page...");
+//         location.reload();
+//     }, 300000);
+// });
 
 
