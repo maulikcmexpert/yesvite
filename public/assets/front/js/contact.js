@@ -1202,17 +1202,22 @@ $(document).ready(function() {
                 progressBar.val(0);
 
                 let progress = 0;
+                let fileSizeKB = (file.size / 1024).toFixed(2);
+                let uploadedKB = 0;
+    
                 let interval = setInterval(function () {
-                    if (progress >= 100) {
+                    if (uploadedKB >= fileSizeKB) {
                         clearInterval(interval);
                         uploadProgress.hide();
                         uploadComplete.show();
+                        console.log("File uploaded successfully!");
                         $(".uploadcsv-wrp h3").text(file.name);
                         $(".uploadcsv-wrp p").addClass('d-none');
                         $(".click-to-upload-btn").prop("disabled", false);
                     } else {
-                        progress += 1;
-                        progressBar.val(progress);
+                        uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
+                        progressBar.val((uploadedKB / fileSizeKB) * 100);
+                        $(".uploadedcvs-file-card-content p").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
                     }
                 }, 30);
             } else {
@@ -1262,6 +1267,8 @@ function resetUploadState() {
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0);
+    $(".uploadedcvs-file-card-content p").text('');
+
 }
 
 // $(document).ready(function() {
