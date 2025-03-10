@@ -1106,6 +1106,7 @@ $(document).ready(function() {
     const uploadComplete = $('.uploading_csv_complete');
     const progressBar = $('#progress-bar'); // Progress bar
 
+
     uploadProgress.hide();
     uploadComplete.hide();
     progressBar.val(0); // Reset progress bar
@@ -1163,8 +1164,30 @@ $(document).ready(function() {
             file.name.endsWith('.xls') || 
             file.name.endsWith('.xlsx')
         ) {
-            $(".uploadcsv-wrp h3").text(file.name); // Show file name
-            $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
+            $(".click-to-upload-btn").prop("disabled", true);
+
+            uploadProgress.show();
+            uploadComplete.hide();
+            progressBar.val(0); // Reset progress bar
+
+            let progress = 0;
+            let interval = setInterval(function () {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    uploadProgress.hide();
+                    uploadComplete.show();
+                    console.log("File uploaded successfully!");
+                    $(".uploadcsv-wrp h3").text(file.name); // Show file name
+                    $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+                    $(".click-to-upload-btn").prop("disabled", false);
+    
+                } else {
+                    progress += 1; // Smaller increments for smoothness
+                    progressBar.val(progress);
+                }
+            }, 30);
+            // $(".uploadcsv-wrp h3").text(file.name); // Show file name
+            // $(".uploadcsv-wrp p").addClass('d-none'); // Hide placeholder text
         
             // Assign file to input field
             let dataTransfer = new DataTransfer();
@@ -1179,6 +1202,7 @@ $(document).ready(function() {
         
     }
     function handleFileSelect(e) {
+
         let files;
         if (e.type === 'drop') {
             files = e.dataTransfer.files;
@@ -1195,8 +1219,8 @@ $(document).ready(function() {
                     file.name.endsWith('.xls') || 
                     file.name.endsWith('.xlsx')
                 ) {
-                $(".uploadcsv-wrp h3").text(file.name); // Show file name
-                $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+                    $(".click-to-upload-btn").prop("disabled", true);
+
 
                 uploadProgress.show();
                 uploadComplete.hide();
@@ -1209,6 +1233,10 @@ $(document).ready(function() {
                         uploadProgress.hide();
                         uploadComplete.show();
                         console.log("File uploaded successfully!");
+                        $(".uploadcsv-wrp h3").text(file.name); // Show file name
+                        $(".uploadcsv-wrp p").addClass('d-none'); // Show file name
+                        $(".click-to-upload-btn").prop("disabled", false);
+        
                     } else {
                         progress += 1; // Smaller increments for smoothness
                         progressBar.val(progress);
