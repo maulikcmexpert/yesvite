@@ -1234,13 +1234,13 @@ $(document).ready(function() {
         }
     
 });
-$("#csv_file").on("change", function (e) {
-    let file = e.target.files[0]; // Get the selected file
-    if (file) {
-        $(".uploadcsv-wrp h3").text(file.name); // Show file name
-        // alert("File uploaded: " + file.name);
-    }
-});
+// $("#csv_file").on("change", function (e) {
+//     let file = e.target.files[0]; // Get the selected file
+//     if (file) {
+//         $(".uploadcsv-wrp h3").text(file.name); // Show file name
+//         // alert("File uploaded: " + file.name);
+//     }
+// });
 $(document).on('click','.close_upload_csv',function(){
     // $(".uploadcsv-wrp h3").text('Drag CSV Here'); // Show file name
     // let fileInput = $("#csv_file");
