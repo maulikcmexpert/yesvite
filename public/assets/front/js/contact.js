@@ -1106,8 +1106,8 @@ $(document).ready(function() {
     const uploadComplete = $('.uploading_csv_complete');
     const progressBar = $('#progress-bar'); 
 
-    uploadProgress.hide();
-    uploadComplete.hide();
+    // uploadProgress.hide();
+    // uploadComplete.hide();
     progressBar.val(0);
     // Click to upload
     // uploadWrapper.click(function() {
