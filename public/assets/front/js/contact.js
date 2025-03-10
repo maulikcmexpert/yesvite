@@ -1270,6 +1270,9 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
 $(document).on('click','.cancel-uploading-btn',function(){
     resetUploadState();
 });
+$(document).on('click','.delete-uploading-btn',function(){
+    resetUploadState();
+});
 function formatFileSize(size) {
     if (size >= 1024 * 1024) {
         return (size / (1024 * 1024)).toFixed(2) + " MB";
