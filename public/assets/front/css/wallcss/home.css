@@ -3031,6 +3031,10 @@ main.new-main-content {
     height: 40px;
     object-fit: contain;
 }
+.uploadedcvs-file-card-content{
+    display: flex;
+    gap: 20px;
+}
 
 .uploadedcvs-file-card-content h4 {
     font-family: var(--SFProDisplay-Medium);
