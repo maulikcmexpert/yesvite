@@ -1222,9 +1222,12 @@ $(document).ready(function() {
                         progressBar.val(0);
 
                     } else {
-                        uploadedSize = Math.min(uploadedKB + fileSize / 100, fileSize);
-                        progressBar.val((uploadedKB / fileSize) * 100);
+                        // uploadedSize = Math.min(uploadedKB + fileSize / 100, fileSize);
+                        // progressBar.val((uploadedKB / fileSize) * 100);
                         // $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        uploadedSize = Math.min(uploadedSize + fileSize / 100, fileSize);
+                        let formattedUploaded = formatFileSize(uploadedSize);
+                        progressBar.val((uploadedSize / fileSize) * 100);
                         $(".file_upload_rate").text(`${formattedUploaded} of ${formattedSize}`);
 
                         $('.contact_file_name').text(file.name);
