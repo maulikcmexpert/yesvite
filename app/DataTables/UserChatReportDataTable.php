@@ -78,6 +78,14 @@ class UserChatReportDataTable extends DataTable
                         }
                         $q->orWhere('report_type', 'LIKE', "%{$keyword}%")
                           ->orWhere('report_description', 'LIKE', "%{$keyword}%");
+
+                          $q->orWhereHas('reporter_user.users', function ($q) use ($keyword) {
+                            $q->where('email', 'LIKE', "%{$keyword}%");
+                        });
+                        $q->orWhereHas('to_reporter_user.users', function ($q) use ($keyword) {
+                           $q->where('email', 'LIKE', "%{$keyword}%");
+                        });
+                         
                     });
                 }
                 
@@ -170,11 +178,19 @@ class UserChatReportDataTable extends DataTable
                 // Sorting by the reporter user's firstname from the users table
                 $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_chats.reporter_user_id');
-            } elseif ($request->order[0]['column'] == '2') {
+            }elseif($request->order[0]['column'] == '2'){
+                $column = User::select('email')
+                ->whereColumn('users.id', 'user_report_chats.reporter_user_id');
+            } 
+            elseif ($request->order[0]['column'] == '6') {
                 // Sorting by the 'to' reporter user's firstname (assuming another user field)
                 $column = User::select('firstname')
                     ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
-            }else if($request->order[0]['column'] == '3'){
+            }elseif($request->order[0]['column'] == '7'){
+                $column = User::select('email')
+                ->whereColumn('users.id', 'user_report_chats.to_be_reported_user_id');
+            } 
+            else if($request->order[0]['column'] == '3'){
                 $column="report_type";
             }else if($request->order[0]['column'] == '5'){
                 $column="created_at";
