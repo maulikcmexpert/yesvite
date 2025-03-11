@@ -134,7 +134,7 @@ class UserPostReportController extends Controller
         $reportDetail->report_posttime = $this->setpostTime($reportDetail->created_at);
         // $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
 
-        dd($reportDetail->post_image);
+        // dd($reportDetail->post_image);
         return view('admin.includes.layout', compact('title', 'page', 'reportDetail', 'js'));
     }
 
