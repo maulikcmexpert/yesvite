@@ -2525,7 +2525,7 @@ class EventWallController extends BaseController
             $reportCreate->post_media_id = $request['post_media_id'];
             $reportCreate->report_type = $request['report_type'];
             $reportCreate->report_description = $request['report_description'];
-            $reportCreate->specific_report = '1';
+            // $reportCreate->specific_report = '1';
             $reportCreate->save();
             $savedReportId =  $reportCreate->id;
             $createdAt = $reportCreate->created_at;
