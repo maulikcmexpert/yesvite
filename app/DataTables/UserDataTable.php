@@ -181,8 +181,14 @@ class UserDataTable extends DataTable
                     </div>
                 ';
             })
+            ->addColumn('delete_user', function ($row) {
+                
+                return '
+                   <button type="button" data-id="'.$row->id.'" class="btn bg-transparent delete_user"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                ';
+            })
 
-            ->rawColumns(['profile', 'app_user', 'setpassword', 'action','transaction', 'status', 'credit_balance']);
+            ->rawColumns(['profile', 'app_user', 'setpassword', 'action','transaction', 'status', 'credit_balance','delete_user']);
     }
 
     /**
@@ -279,7 +285,8 @@ class UserDataTable extends DataTable
             Column::make('credit_balance')->title('Credit Balance')->orderable(false),
             Column::make('action')->orderable(false),
             Column::make('transaction')->title('Transaction')->orderable(false),
-            Column::make('status')->orderable(false)
+            Column::make('status')->orderable(false),
+            Column::make('delete_user')->title('Delete User')->orderable(false)
 
         ];
     }
