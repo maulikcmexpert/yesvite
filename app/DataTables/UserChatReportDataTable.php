@@ -111,11 +111,11 @@ class UserChatReportDataTable extends DataTable
                 // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
 
             })
-            ->addColumn('post_owner_email', function ($row) {
+            // ->addColumn('post_owner_email', function ($row) {
 
-                return $row->to_reporter_user->user->email;
-                // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
-            })
+            //     return $row->to_reporter_user->user->email;
+            //     // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
+            // })
             ->addColumn('report_time', function ($row) {
                 return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
             })
