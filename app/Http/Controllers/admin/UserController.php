@@ -424,8 +424,24 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
+
+    public function deleteUser(Request $request)
+    {
+        $user_id = $request->input('user_id');
+    
+        $user = User::find($user_id);
+    
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    
+        $user->delete();
+    
+        return true;
+    }
+    
     public function updateStatus(Request $request)
     {
         $user = User::find($request->id); // Assuming 'id' is sent from the frontend

@@ -134,6 +134,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::post('category/check_category_is_exist', [CategoryController::class, 'checkCategoryIsExist'])->name('category_check_exist');
     Route::get('delete_post_report', [UserPostReportController::class, 'deletePostReport'])->name('delete_post_report');
+    Route::get('delete_user', [UserController::class, 'deleteUser'])->name('delete_user');
     Route::get('re_send_email/{id}', [UserResendEmailVerify::class, 're_send_email'])->name('re_send_email');
 
     Route::get('account_verify/{id}', [AccountVerification::class, 'verify'])->name('account_verify');

@@ -434,9 +434,9 @@
                             },
                             // dataType: 'Json',
                             type: "GET",
-                            url: "{{ route('delete_post_report') }}",
+                            url: "{{ route('delete_user') }}",
                             data: {
-                                event_report_id: event_report_id
+                                user_id: user_id
                             },
                             success: function(output) {
                                 if (output == true) {
@@ -446,7 +446,7 @@
                                         icon: "success"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.location.href = "{{URL::to('/admin/user_post_report')}}";
+                                            window.location.href = "{{URL::to('/admin/users')}}";
                                         }
                                     });
                                 }
