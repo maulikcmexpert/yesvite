@@ -360,7 +360,7 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-
+                    dd(Auth::user());
                     return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
             }
