@@ -200,11 +200,11 @@ class UserChatReportDataTable extends DataTable
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('reporter_username')->title('Reporter Username (Reported By)')->orderable(true),
             Column::make('reporter_email')->title('Reporter Email (Reported By)')->orderable(true),
-            Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
-            Column::make('reported_email')->title("Reported Email (Reported To)")->orderable(true),
             Column::make('report_type')->title("Report Type")->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('report_time')->title("Report Time")->orderable(true),
+            Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
+            Column::make('reported_email')->title("Reported Email (Reported To)")->orderable(true),
             // Column::make('action')->title("Action"),
         ];
     }
