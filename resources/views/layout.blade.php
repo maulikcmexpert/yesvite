@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
+
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
@@ -29,12 +29,15 @@
     <x-front.bodyheader title={{$title}} />
 
     @include($page)
-{{--   
+{{--
     <x-front.bodyfooter page={{$page}} />
 
     <x-front.footer :js="$js ?? []" /> --}}
 </main>
-    <x-front.bodyfooter page="{{ $page }}" />
+@if($page != 'front.event_wall.event_wall' &&  $page != 'front.event_wall.event_potluck' && $page != 'front.event_wall.event_about' &&
+$page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_photos')
+<x-front.bodyfooter page="{{ $page }}" />
+@endif
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
 
 
