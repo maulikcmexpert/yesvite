@@ -234,7 +234,7 @@
                                                                                     data-event-post-id="{{ $post['id'] }}"
                                                                                     data-user-id="{{ $login_user_id }}"
                                                                                     data-post-control="report"
-                                                                                    data-bs-toggle="modal" data-bs-target="#submitreport">
+                                                                                  >
                                                                                     <svg viewBox="0 0 20 20"
                                                                                         fill="none"
                                                                                         xmlns="http://www.w3.org/2000/svg">
