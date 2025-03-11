@@ -335,7 +335,7 @@ class AuthController extends Controller
                         if ($user->isTemporary_password == "1") {
                             return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
                         } else {
-                            return redirect()->route('home');
+                            return redirect()->route('home')->with('msg', 'Please changer your temparory password.');
                         }
                     } else {
                         return redirect()->back()->withErrors([
