@@ -111,6 +111,12 @@ class UserChatReportDataTable extends DataTable
                 // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
 
             })
+
+            ->addColumn('reported_email', function ($row) {
+                return (isset($row->to_reporter_user->email) && $row->to_reporter_user->email != "") ? $row->to_reporter_user->email : "";
+                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
+
+            })
             // ->addColumn('post_owner_email', function ($row) {
 
             //     return $row->to_reporter_user->user->email;
@@ -127,7 +133,7 @@ class UserChatReportDataTable extends DataTable
             //         <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
             //     return $actionBtn;
             // })
-            ->rawColumns(['number', 'reporter_username','reporter_email','reported_username', 'report_type', 'report_description', 'report_time']);
+            ->rawColumns(['number', 'reporter_username','reporter_email','reported_username','reported_email', 'report_type', 'report_description', 'report_time']);
     }
 
     /**
@@ -195,6 +201,7 @@ class UserChatReportDataTable extends DataTable
             Column::make('reporter_username')->title('Reporter Username (Reported By)')->orderable(true),
             Column::make('reporter_email')->title('Reporter Email (Reported By)')->orderable(true),
             Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
+            Column::make('reported_email')->title("Reported Email (Reported To)")->orderable(true),
             Column::make('report_type')->title("Report Type")->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
             Column::make('report_time')->title("Report Time")->orderable(true),
