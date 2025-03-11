@@ -296,7 +296,7 @@
                                                                             @foreach ($post['post_image'] as $image)
 
                                                                                 @if ($image['type'] == 'video')
-                                                                                <input type="hidden" value={{ $image['id']}} id="media_id">
+
                                                                                     <div class="swiper-slide">
                                                                                         <div
                                                                                             class="posts-card-show-post-img">
@@ -308,7 +308,7 @@
                                                                                                 muted />
                                                                                         </div>
                                                                                     </div>
-                                                                                @else
+                                                                                @else <input type="" value={{ $image['id']}} id="media_id">
                                                                                     <div class="swiper-slide">
                                                                                         <div
                                                                                             class="posts-card-show-post-img">
