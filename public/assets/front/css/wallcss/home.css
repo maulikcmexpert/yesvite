@@ -3399,7 +3399,7 @@ main.new-main-content {
     .create-post-modal .modal-content {
         width: 100%;
         max-width: 600px;
-        height: 800px;
+        height: auto !important;
     }
 
     #creatpostmodal .modal-content{
@@ -3470,7 +3470,7 @@ main.new-main-content {
     .create-post-modal .modal-content {
         width: 100%;
         max-width: 600px;
-        height: calc(100% - 20px);
+        height: auto !important;
     }
     #creatpostmodal .modal-content{
         height: auto !important;
@@ -3491,7 +3491,7 @@ main.new-main-content {
     .create-post-modal .modal-content {
         width: 100%;
         max-width: 600px;
-        height: calc(100% - 20px);
+        height: auto !important;
     }
     #creatpostmodal .modal-content{
         height: auto !important;
