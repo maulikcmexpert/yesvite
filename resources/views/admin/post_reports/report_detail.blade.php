@@ -945,7 +945,6 @@
                                                     {{$reportDetail->event_posts->event_post_poll->poll_question }} • Ends in
                                                     {{$reportDetail->event_posts->event_post_poll->poll_duration}}
                                                 </p>
-                                                {{dd($reportDetail->event_posts->event_post_poll->event_poll_option)}}
                                                 <ul class="poll-choices p-0">
                                                     @foreach($reportDetail->event_posts->event_post_poll->event_poll_option as $optionVal)
                                                     <li class="poll-choice choice-1">
