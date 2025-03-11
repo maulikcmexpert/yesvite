@@ -89,8 +89,8 @@ class UserChatReportDataTable extends DataTable
                 return $count++;
             })
             ->addColumn('reporter_username', function ($row) {
-                return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
-                // return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
+                // return (isset($row->reporter_user->firstname) && $row->reporter_user->firstname != "") ? $row->reporter_user->firstname : "";
+                return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
 
             })
             ->addColumn('reporter_email', function ($row) {
@@ -107,23 +107,45 @@ class UserChatReportDataTable extends DataTable
             })
 
             ->addColumn('reported_username', function ($row) {
-                return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
-                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
+                // return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
+                return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
 
             })
 
             ->addColumn('reported_email', function ($row) {
                 return (isset($row->to_reporter_user->email) && $row->to_reporter_user->email != "") ? $row->to_reporter_user->email : "";
-                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
 
             })
-            // ->addColumn('post_owner_email', function ($row) {
 
-            //     return $row->to_reporter_user->user->email;
-            //     // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
-            // })
             ->addColumn('report_time', function ($row) {
                 return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
+            })
+            ->addColumn('account_status', function ($row) {
+                // Determine button text and dropdown action based on account status
+                $buttonText = $row->to_reporter_user->account_status == 'Block' ? 'Inactivate' : 'Active';
+                $dropdownText = $row->to_reporter_user->account_status == 'Block' ? 'Active' : 'Inactivate';
+                // Set the action class for toggling
+                $actionClass = $row->to_reporter_user->account_status == 'Block' ? 'unblock-user' : 'block-user';
+                $actionData = $row->to_reporter_user->account_status == 'Block' ? '0' : '1';
+
+                return '
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ' . $buttonText . '
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item ' . $actionClass . '" data-id="' . $row->to_reporter_user->id . '"data-status="' . $actionData . '">
+                                ' . $dropdownText . '
+                            </a>
+                        </div>
+                    </div>
+                ';
+            })
+            ->addColumn('delete', function ($row) {
+
+                return '
+                <button type="button" data-id="'.$row->to_reporter_user->id.'" class="btn bg-transparent delete_user"><i class="fas fa-trash" aria-hidden="true"></i></button>
+             ';
             })
 
             // ->addColumn('action', function ($row) {
@@ -133,7 +155,7 @@ class UserChatReportDataTable extends DataTable
             //         <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
             //     return $actionBtn;
             // })
-            ->rawColumns(['number', 'reporter_username','reporter_email','reported_username','reported_email', 'report_type', 'report_description', 'report_time']);
+            ->rawColumns(['number', 'reporter_username','reporter_email','reported_username','reported_email', 'report_type', 'report_description', 'report_time','account_status','delete']);
     }
 
     /**
@@ -205,6 +227,8 @@ class UserChatReportDataTable extends DataTable
             Column::make('report_time')->title("Report Time")->orderable(true),
             Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
             Column::make('reported_email')->title("Reported Email (Reported To)")->orderable(true),
+            Column::make('account_status')->title("Account Status")->orderable(false),
+            Column::make('delete')->title("Account Delete")->orderable(false),
             // Column::make('action')->title("Action"),
         ];
     }
