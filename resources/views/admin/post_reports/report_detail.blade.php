@@ -959,11 +959,20 @@
                                                             </div>
                                                             <div class="progress">
                                                                 @php
-                                                                    getOptionTotalVote($optionVal->id);
-                                                                @endphp
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100); ?>%">
+                                                                     $option=getOptionTotalVote($optionVal->id);
+                                                                     $vote=getOptionAllTotalVote($optionVal->event_post_poll_id);
+                                                                    
+                                                                    @endphp
+                                                                 @if($option==0)
+                                                                 <div class="progress-bar" style="width: 0%">
+                                                                    <?= '0' . "%"; ?>
+                                                                </div>
+                                                                 @else
+                                                                 <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100); ?>%">
                                                                     <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100) . "%"; ?>
                                                                 </div>
+                                                                 @endif   
+                                                              
                                                             </div>
                                                         </label>
                                                     </li>
