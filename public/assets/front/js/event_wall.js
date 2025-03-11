@@ -1251,7 +1251,7 @@ $(document).ready(function () {
             $(".report-option").removeClass("active");
             selectedReportType = "";
             $("#violation-textbox").val("");
-            $(".btn-submit-report").prop("disabled", true);
+            $(".btn-submit-report").prop("disabled", true).html("Submit Report"); // Reset button text
 
             // Show the modal
             $("#submitreport").modal("show");
@@ -1274,9 +1274,12 @@ $(document).ready(function () {
             var violationDetails = $("#violation-textbox").val();
 
             if (!selectedReportType) {
-                alert("Please select a report type.");
+                toastr.error("Please select a report type.");
                 return;
             }
+
+            var $btn = $(this);
+            $btn.prop("disabled", true).html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>');
 
             $.ajax({
                 url: base_url + "event_wall/postMediaReport", // Adjust endpoint
@@ -1302,6 +1305,10 @@ $(document).ready(function () {
                     console.error("Error:", error);
                     alert("Failed to submit the report. Please try again later.");
                 },
+                complete: function () {
+                    // Reset button text and enable after request completion
+                    $btn.prop("disabled", false).html("Submit Report");
+                }
             });
         });
 
