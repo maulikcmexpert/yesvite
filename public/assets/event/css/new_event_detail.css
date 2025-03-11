@@ -1614,6 +1614,17 @@
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1) !important;
 }
 
+.daterangepicker.single .drp-calendar.left{
+    width: 500px !important;
+    height: 300px !important;
+}
+
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td{
+    height: 35px !important;
+    font-size: 14px !important;
+}
+
+
 /* ======Responsiveness===== */
 
 @media only screen and (max-width: 1399px) {
