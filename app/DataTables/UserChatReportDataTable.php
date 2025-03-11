@@ -93,11 +93,12 @@ class UserChatReportDataTable extends DataTable
                 // return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
 
             })
-            ->addColumn('reported_username', function ($row) {
-                return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
-                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
+            ->addColumn('reporter_email', function ($row) {
+                return (isset($row->reporter_user->email) && $row->reporter_user->email != "") ? $row->reporter_user->email : "";
+                // return isset($row->reporter_user->firstname) && $row->reporter_user->firstname != ""? $row->reporter_user->firstname . (isset($row->reporter_user->lastname) && $row->reporter_user->lastname != "" ? " " . $row->reporter_user->lastname  : ""): "";
 
             })
+           
             ->addColumn('report_type', function ($row) {
                 return $row->report_type;
             })
@@ -105,9 +106,20 @@ class UserChatReportDataTable extends DataTable
                 return $row->report_description;
             })
 
+            ->addColumn('reported_username', function ($row) {
+                return (isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != "") ? $row->to_reporter_user->firstname : "";
+                // return isset($row->to_reporter_user->firstname) && $row->to_reporter_user->firstname != ""? $row->to_reporter_user->firstname . (isset($row->to_reporter_user->lastname) && $row->to_reporter_user->lastname != "" ? " " . $row->to_reporter_user->lastname  : ""): "";
+
+            })
+            ->addColumn('post_owner_email', function ($row) {
+
+                return $row->to_reporter_user->user->email;
+                // return $row->event_posts->user->firstname . ' ' . $row->event_posts->user->lastname;
+            })
             ->addColumn('report_time', function ($row) {
                 return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
             })
+
             // ->addColumn('action', function ($row) {
             //     $cryptId = encrypt($row->id);
             //     $view_url = route('user_chat_report.destroy', $cryptId);
@@ -115,7 +127,7 @@ class UserChatReportDataTable extends DataTable
             //         <a class="" href="' . $view_url . '" title="View"><i class="fa fa-eye"></i></a>';
             //     return $actionBtn;
             // })
-            ->rawColumns(['number', 'reporter_username', 'reported_username', 'report_type', 'report_description', 'report_time']);
+            ->rawColumns(['number', 'reporter_username','reporter_email','reported_username', 'report_type', 'report_description', 'report_time']);
     }
 
     /**
@@ -181,6 +193,7 @@ class UserChatReportDataTable extends DataTable
         return [
             Column::make('no')->title('No')->render('meta.row + meta.settings._iDisplayStart + 1;')->orderable(false),
             Column::make('reporter_username')->title('Reporter Username (Reported By)')->orderable(true),
+            Column::make('reporter_email')->title('Reporter Email (Reported By)')->orderable(true),
             Column::make('reported_username')->title("Reported Username (Reported To)")->orderable(true),
             Column::make('report_type')->title("Report Type")->orderable(true),
             Column::make('report_description')->title("Report Description")->width('250px')->className('report-description-td')->orderable(false),
