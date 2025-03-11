@@ -1296,7 +1296,9 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response.status == 1) {
                         toastr.success(response.message);
-                        $("#submitreport").modal("hide");
+                        setTimeout(function () {
+                            $("#submitreport").modal("hide");
+                        }, 500);
                     } else {
                         alert("Something went wrong. Please try again.");
                     }
