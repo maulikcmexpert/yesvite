@@ -138,7 +138,9 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('profile/check-phonenumber', [ProfileController::class, 'checkPhoneNumberExistence']);
 
     Route::post('profile/check_new_contactnumber', [ProfileController::class, 'checkNewContactNumber']);
-
+    Route::get('/check-login-status', function (Request $request) {
+        return response()->json(['is_logged_in' => Auth::guard('web')->check()]);
+    });
 
 
     Route::post('profile/update_password',  [ProfileController::class, 'updatePassword'])->name('profile.update_password');
