@@ -335,7 +335,7 @@ class AuthController extends Controller
                         if ($user->isTemporary_password == "1") {
                             return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
                         } else {
-                            // return redirect()->route('home');    
+                            return redirect()->route('home');
                         }
                     } else {
                         return redirect()->back()->withErrors([
@@ -361,7 +361,7 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-                    // dd(2);
+                    dd(2);
                     return redirect()->back()->with('msg', 'Please check and verify your email address.');
 
                 }
