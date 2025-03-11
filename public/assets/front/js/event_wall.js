@@ -1277,7 +1277,7 @@ $(document).ready(function () {
                 toastr.error("Please select a report type.");
                 return;
             }
-
+            $("#submitreport").modal("show");
             var $btn = $(this);
             $btn.prop("disabled", true).html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>');
 
@@ -1294,7 +1294,7 @@ $(document).ready(function () {
                     report_description: violationDetails,
                 },
                 success: function (response) {
-                    if (response.status === 1) {
+                    if (response.status == 1) {
                         toastr.success(response.message);
                         $("#submitreport").modal("hide");
                     } else {
