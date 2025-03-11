@@ -955,7 +955,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="poll-label">
-                                                                <div class="answer">{{$optionVal->option}}</div>
+                                                                <div class="answer">{{$optionVal['option']}}</div>
                                                             </div>
                                                             <div class="progress">
 
