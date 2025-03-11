@@ -882,7 +882,11 @@
 
                                 <!-- image -->
                                 @if($reportDetail->post_image->type == 'image')
-                                <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}">
+                                {{-- <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}"> --}}
+
+                                <a data-fancybox="gallery" href="{{ asset('public/storage/post_image/'.$postImg->post_image) }}">
+                                    <img src="{{ asset('public/storage/post_image/'.$postImg->post_image) }}" />
+                                </a>
                                 @endif
                                 <!-- image -->
 
