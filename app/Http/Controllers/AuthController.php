@@ -276,7 +276,7 @@ class AuthController extends Controller
                     'msg_error' => 'Ban User: Temporarily or permanently suspend user, Contact to admin.',
                 ])->withInput();
             }
-            if (Auth::attempt($credentials, $remember)) {
+            // if (Auth::attempt($credentials, $remember)) {
                 $userIpAddress = request()->ip();
 
                 $user = Auth::guard('web')->user();
@@ -387,7 +387,7 @@ class AuthController extends Controller
 //                     return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
 
 //                 }
-            }
+            // }
         }
         return redirect()->back()->withErrors([
             'email' => 'Email or Password invalid!',
