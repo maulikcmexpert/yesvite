@@ -890,7 +890,7 @@
             inactivityTimeout = setTimeout(() => {
                 console.log("User inactive for 10 seconds, checking login...");
                 checkUserLogin();
-            }, 10000); // 10 seconds
+            }, 300000); // 10 seconds
 
 
         }
@@ -904,7 +904,7 @@
         resetInactivityTimer();
 
         // **Check login status every 10 seconds**
-        setInterval(checkUserLogin, 10000);
+        setInterval(checkUserLogin, 600000);
 
 
     });
