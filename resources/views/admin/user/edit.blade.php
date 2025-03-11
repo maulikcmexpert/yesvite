@@ -83,6 +83,18 @@
                             <span class="text-danger">{{ $errors->first('state') }}</span>
                         </div>
                     </div>
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="about_me">About Me</label>
+                            <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
+                                value="{{ $getTemData->state }}">
+                                <textarea class="form-control" name="about_me" placeholder="Enter About Me">{{ $getTemData->about_me }}</textarea>
+                                {{-- <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
+                                value="{{ $getTemData->state }}"> --}}
+                            <span class="text-danger">{{ $errors->first('about_me') }}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-footer">
