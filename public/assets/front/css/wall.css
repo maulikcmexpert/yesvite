@@ -655,6 +655,11 @@
     text-transform: uppercase;
 }
 
+#submitreport .submit-blocks{
+    padding-top: 20px;
+}
+
+
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {

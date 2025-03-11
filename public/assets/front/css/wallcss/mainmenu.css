@@ -772,6 +772,7 @@
     padding-left: 50px;
     /* max-height: 800px; */
     max-height: calc(100% - 100px);
+    height: calc(100% - 100px);
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -2825,7 +2826,9 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     bottom: 0px;
