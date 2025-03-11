@@ -945,7 +945,6 @@
                                                     {{$reportDetail->event_posts->event_post_poll->poll_question }} • Ends in
                                                     {{$reportDetail->event_posts->event_post_poll->poll_duration}}
                                                 </p>
-                                                {{dd($reportDetail->event_posts->event_post_poll->event_poll_option)}}
                                                 <ul class="poll-choices p-0">
                                                     @foreach($reportDetail->event_posts->event_post_poll->event_poll_option as $optionVal)
                                                     <li class="poll-choice choice-1">
@@ -960,9 +959,7 @@
                                                             </div>
                                                             <div class="progress">
 
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100); ?>%">
-                                                                    <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($reportDetail->event_posts->event_post_poll->id) * 100) . "%"; ?>
-                                                                </div>
+                                                               
                                                             </div>
                                                         </label>
                                                     </li>
