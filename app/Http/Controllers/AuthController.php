@@ -361,7 +361,7 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-                    // dd(2);
+                    dd(2);
                     return redirect()->back()->withErrors([
                         'email' => 'Email or Password invalid!',
                     ])->withInput();
