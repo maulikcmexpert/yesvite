@@ -84,7 +84,7 @@
                         </div>
                     </div>
                   
-                    <div class="col-lg-6 col-md-6 mb-3">
+                    <div class="col-lg-8 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="about_me">About Me</label>
     
@@ -94,19 +94,19 @@
                             <span class="text-danger">{{ $errors->first('about_me') }}</span>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label>Gender</label>
                             <div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" value="male" 
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" 
                                         {{ $getTemData->gender == 'male' ? 'checked' : '' }}>
-                                    <label class="form-check-label">Male</label>
+                                    <label class="form-check-label" for="male">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" value="female" 
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" 
                                         {{ $getTemData->gender == 'female' ? 'checked' : '' }}>
-                                    <label class="form-check-label">Female</label>
+                                    <label class="form-check-label" for="female">Female</label>
                                 </div>
                             </div>
                             <span class="text-danger">{{ $errors->first('gender') }}</span>
