@@ -294,7 +294,7 @@
                                                                         <!-- Slides -->
                                                                         @if (!empty($post['post_image']))
                                                                             @foreach ($post['post_image'] as $image)
-
+                                                                            <input type="hidden" value={{ $image['id']}} id="media_id">
                                                                                 @if ($image['type'] == 'video')
 
                                                                                     <div class="swiper-slide">
@@ -309,7 +309,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 @else
-                                                                                 <input type="hidden" value={{ $image['id']}} id="media_id">
+
                                                                                     <div class="swiper-slide">
                                                                                         <div
                                                                                             class="posts-card-show-post-img">
