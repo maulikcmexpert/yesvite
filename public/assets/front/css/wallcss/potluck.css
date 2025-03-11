@@ -239,6 +239,7 @@
     font-family: var(--SFProDisplay-Bold);
     color: #020202;
     margin-bottom: 0;
+    width: max-content;
 }
 
 .post-potluck-category .list-header p {
