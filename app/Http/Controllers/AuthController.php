@@ -348,7 +348,7 @@ class AuthController extends Controller
                     $randomString = Str::random(30);
                     $user->remember_token = $randomString;
                     $user->save();
-dd(1);
+// dd(1);
                     $userData = [
                         'username' => $user->firstname,
                         'email' => $user->email,
@@ -361,7 +361,7 @@ dd(1);
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-
+                    dd(2);
                     return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
             }
