@@ -886,12 +886,14 @@
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <div class="event_posts_left">
                                         <div class="product-images demo-gallery">
-                                <div class="main-img-slider">
-                                    <a data-fancybox="gallery" href="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image) }}">
-                                        <img src="{{asset('storage/post_image/'.$reportDetail->post_image->post_image) }}" />
-                                    </a>
+                                            <div class="main-img-slider">
+                                                <a data-fancybox="gallery" href="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image) }}">
+                                                    <img src="{{asset('storage/post_image/'.$reportDetail->post_image->post_image) }}" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                        </div></div></div>
                                 @endif
                                 <!-- image -->
 
