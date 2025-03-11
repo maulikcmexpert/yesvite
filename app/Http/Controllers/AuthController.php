@@ -344,7 +344,7 @@ class AuthController extends Controller
                         // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
                 } else {
-                    dd(0);
+                    // dd(0);
                     $randomString = Str::random(30);
                     $user->remember_token = $randomString;
                     $user->save();
