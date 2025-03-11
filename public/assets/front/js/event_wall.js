@@ -1279,7 +1279,7 @@ $(document).ready(function () {
             }
 
             $.ajax({
-                url: base_url + "event_wall/submitReport", // Adjust endpoint
+                url: base_url + "event_wall/postMediaReport", // Adjust endpoint
                 type: "POST",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
