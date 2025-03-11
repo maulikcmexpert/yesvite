@@ -883,10 +883,11 @@
                                 <!-- image -->
                                 @if($reportDetail->post_image->type == 'image')
                                 {{-- <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}"> --}}
-
-                                <a data-fancybox="gallery" href="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image) }}">
-                                    <img src="{{asset('storage/post_image/'.$reportDetail->post_image->post_image) }}" />
-                                </a>
+                                <div class="main-img-slider">
+                                    <a data-fancybox="gallery" href="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image) }}">
+                                        <img src="{{asset('storage/post_image/'.$reportDetail->post_image->post_image) }}" />
+                                    </a>
+                                </div>
                                 @endif
                                 <!-- image -->
 
