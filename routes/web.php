@@ -315,7 +315,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/get_phoneContact', [EventWallController::class, 'get_PhoneContact'])->name('event_wall.get_phoneContact');
     Route::post('event_wall/get_yesviteContact', [EventWallController::class, 'get_yesviteContact'])->name('event_wall.get_yesviteContact');
     Route::post('event_wall/postControl', [EventWallController::class, 'postControl'])->name('event_wall.postControl');
-    Route::post('event_photo/postMediaReport', [EventWallController::class, 'postMediaReport'])->name('event_wall.postMediaReport');
+    Route::post('event_wall/postMediaReport', [EventWallController::class, 'postMediaReport'])->name('event_wall.postMediaReport');
     Route::post('event_wall/send-invitation', [EventWallController::class, 'sendInvitation']);
     Route::post('event_wall/fetch_all_invited_user', [EventWallController::class, 'fetch_all_invited_user']);
     Route::post('event_wall/wallFilters', [EventWallController::class, 'wallFilters']);

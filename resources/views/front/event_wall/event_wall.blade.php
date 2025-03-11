@@ -1781,7 +1781,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" disabled>Submit Report</button>
+
               <button type="button" class="btn btn-secondary btn-submit-report" data-bs-dismiss="modal" >Submit Report</button>
           </div>
         </div>
