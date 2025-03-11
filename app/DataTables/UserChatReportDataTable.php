@@ -79,10 +79,10 @@ class UserChatReportDataTable extends DataTable
                         $q->orWhere('report_type', 'LIKE', "%{$keyword}%")
                           ->orWhere('report_description', 'LIKE', "%{$keyword}%");
 
-                          $q->orWhereHas('reporter_user.users', function ($q) use ($keyword) {
+                          $q->orWhereHas('reporter_user', function ($q) use ($keyword) {
                             $q->where('email', 'LIKE', "%{$keyword}%");
                         });
-                        $q->orWhereHas('to_reporter_user.users', function ($q) use ($keyword) {
+                        $q->orWhereHas('to_reporter_user', function ($q) use ($keyword) {
                            $q->where('email', 'LIKE', "%{$keyword}%");
                         });
                          
