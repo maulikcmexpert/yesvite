@@ -24,6 +24,11 @@ class IsAuthenticate
         if (!Auth::guard('web')->user()) {
             return $next($request);
         }
-        // return Redirect::to(URL::to('home'));
+        $secondUser = Auth::guard('web')->user();
+        if ($secondUser->email_verified_at == NULL) {
+            return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
+            // return Redirect::to(URL::to('home'));
+        
+        }
     }
 }
