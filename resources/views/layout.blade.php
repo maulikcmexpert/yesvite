@@ -35,7 +35,7 @@
     <x-front.footer :js="$js ?? []" /> --}}
 </main>
 @if($page != 'front.event_wall.event_wall' &&  $page != 'front.event_wall.front.event_wall.event_potluck' && $page != 'front.event_wall.event_about' &&
-$page != 'front.event_wall.event_guest')
+$page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_photos')
 <x-front.bodyfooter page="{{ $page }}" />
 @endif
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
