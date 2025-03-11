@@ -344,10 +344,11 @@ class AuthController extends Controller
                         // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
                 } else {
+                    // dd(0);
                     $randomString = Str::random(30);
                     $user->remember_token = $randomString;
                     $user->save();
-
+// dd(1);
                     $userData = [
                         'username' => $user->firstname,
                         'email' => $user->email,
@@ -360,8 +361,9 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
+                    // dd(2);
+                    return redirect()->back()->with('msg', 'Please check and verify your email address.');
 
-                    return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
             }
         }

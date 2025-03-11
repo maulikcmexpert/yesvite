@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Models\{
     UserReportToPost,
@@ -107,6 +108,9 @@ class UserPostReportDataTable extends DataTable
 
                 return $row->report_description;
             })
+            ->addColumn('report_time', function ($row) {
+                return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
+            })
             ->addColumn('event_name', function ($row) {
 
                 return (isset($row->events->event_name)&&$row->events->event_name!="")?$row->events->event_name:"";
@@ -180,7 +184,7 @@ class UserPostReportDataTable extends DataTable
                 return $actionBtn;
             })
 
-            ->rawColumns(['number', 'username','email','report_type','report_description','event_name', 'post_type','post_owner_username','post_owner_email','account_status','delete','action']);
+            ->rawColumns(['number', 'username','email','report_type','report_description','event_name','report_time', 'post_type','post_owner_username','post_owner_email','account_status','delete','action']);
     }
 
     /**
@@ -268,6 +272,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('post_type')->title("Post Type")->orderable(false),
             Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(true),
             Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(true),
+            Column::make('report_time')->title("Report Time")->orderable(false),
             Column::make('account_status')->title("Account Status")->orderable(false),
             Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
