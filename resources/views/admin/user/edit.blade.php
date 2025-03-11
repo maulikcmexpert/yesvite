@@ -83,7 +83,7 @@
                             <span class="text-danger">{{ $errors->first('state') }}</span>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-6 col-md-6 mb-3">
                         <div class="form-group">
                             <label>Gender</label>
                             <div>
