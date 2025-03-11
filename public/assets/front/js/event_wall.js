@@ -1237,7 +1237,7 @@ $(document).ready(function () {
     });
 
         var selectedReportType = ""; // Store selected report type
-var media_id = $('#media_id').val();
+
         // Open modal when clicking the report button
         $(".reportbtn").on("click", function () {
             var eventId = $(this).data("event-id");
@@ -1270,6 +1270,8 @@ var media_id = $('#media_id').val();
 
         // Submit report via AJAX
         $(".btn-submit-report").on("click", function () {
+            var media_id = $('#media_id').val();
+alert(media_id)
             var eventId = $("#submitreport").data("event-id");
             var postId = $("#submitreport").data("post-id");
             var violationDetails = $("#violation-textbox").val();
