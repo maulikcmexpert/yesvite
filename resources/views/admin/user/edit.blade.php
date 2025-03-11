@@ -28,7 +28,7 @@
 
                 <div class="card-body row" id="appendHtml">
                     <!-- First Name -->
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="firstname">First Name</label>
                             <input type="text" class="form-control" name="firstname" placeholder="Enter First Name"
@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Last Name -->
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="lastname">Last Name</label>
                             <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name"
@@ -48,7 +48,7 @@
                     </div>
                     <input type="hidden" id="user-id" value="{{$getTemData->id}}"/>
                     <!-- Email -->
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address"
@@ -58,7 +58,7 @@
                     </div>
 
                     <!-- Phone Number -->
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone_number">Phone Number</label>
                             <input type="text" class="form-control" name="phone_number"
@@ -66,7 +66,7 @@
                             <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="city">City</label>
                             <input type="text" class="form-control" name="city" placeholder="Enter City"
@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-4 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="state">State</label>
                             <input type="text" class="form-control" name="state" placeholder="Enter State"
@@ -83,6 +83,7 @@
                             <span class="text-danger">{{ $errors->first('state') }}</span>
                         </div>
                     </div>
+                  
                     <div class="col-lg-6 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="about_me">About Me</label>
