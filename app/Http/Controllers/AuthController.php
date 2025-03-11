@@ -280,7 +280,6 @@ class AuthController extends Controller
                 $userIpAddress = request()->ip();
 
                 $user = Auth::guard('web')->user();
-                dd($user->email_verified_at);
                 if ($user->email_verified_at != NULL) {
 
                     Session::regenerate();
@@ -345,10 +344,11 @@ class AuthController extends Controller
                         // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
                 } else {
+                    dd(0);
                     $randomString = Str::random(30);
                     $user->remember_token = $randomString;
                     $user->save();
-
+dd(1);
                     $userData = [
                         'username' => $user->firstname,
                         'email' => $user->email,
