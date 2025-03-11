@@ -39,7 +39,7 @@ $(document).ready(function () {
                 return;
             }
 
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
             photoForm.submit();
         }
         // If neither form exists, check for a plain text post
@@ -529,7 +529,7 @@ $(document).ready(function () {
         }
     });
 
-function sendComment(){
+    function sendComment() {
 
         const commentInput = $("#post_comment");
         const commentText = commentInput.val().trim();
@@ -610,9 +610,8 @@ function sendComment(){
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${data.posttime}</p>
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                        data.id
-                    }" data-user-id="1">
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="1">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
                                 </div>
@@ -622,18 +621,16 @@ function sendComment(){
                                 </div>
                                 <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                        data.id
-                    }" data-user-id="1">
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="1">
                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                     </button>
                                     <p id="commentTotalLike_${data.id}">
                                   1
                                     </p>
                                 </div>
-                                <button data-comment-id="${
-                                    data.id
-                                }" class="commented-user-reply-btn">Reply</button>
+                                <button data-comment-id="${data.id
+                        }" class="commented-user-reply-btn">Reply</button>
                                 </div>
 
                 `;
@@ -739,15 +736,13 @@ function sendComment(){
                     ) {
                         data.comment_replies.forEach(function (reply) {
                             const replyHTML = `
-                        <li class="reply-on-comment" data-comment-id="${
-                            reply.id
-                        }">
+                        <li class="reply-on-comment" data-comment-id="${reply.id
+                                }">
                             <div class="commented-user-head">
                                 <div class="commented-user-profile">
                                     <div class="commented-user-profile-img">
-                                        <img src="${
-                                            reply.profile || "default-image.png"
-                                        }" alt="">
+                                        <img src="${reply.profile || "default-image.png"
+                                }" alt="">
                                     </div>
                                     <div class="commented-user-profile-content">
                                         <h3>${reply.username}</h3>
@@ -795,7 +790,7 @@ function sendComment(){
             },
         });
 
-}
+    }
     // $(document).on("click", ".posts-card-like-btn", function () {
     //     const icon = this.querySelector("i");
     //     icon.classList.toggle("fa-regular");
@@ -1165,7 +1160,7 @@ function sendComment(){
                     $("#post_message").text(data.post_message);
                     $("#post_time_details").text(data.post_time);
 
-                    const reactionVal = data.reactionList.forEach((that) => {});
+                    const reactionVal = data.reactionList.forEach((that) => { });
 
                     // $("#likeCount").text(data.total_likes + " Likes");
                     // Add 'Likes' after the number
@@ -1262,9 +1257,8 @@ function sendComment(){
                                 : generatePlaceholderName(comment.username);
 
                             commentsWrapper.append(`
-                            <li class="commented-user-wrp" data-comment-id="${
-                                comment.id
-                            }">
+                            <li class="commented-user-wrp" data-comment-id="${comment.id
+                                }">
 
                                 <div class="commented-user-head">
                                     <div class="commented-user-profile">
@@ -1288,20 +1282,16 @@ function sendComment(){
                                 </div>
                                 <div class="commented-user-reply-wrp">
                                     <div class="position-relative d-flex align-items-center gap-2">
-                                         <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${
-                                comment.id
-                            }" data-user-id="${login_user_id}">
+                                         <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+                                }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
-                                        <p id="commentTotalLike_${
-                                            comment.id
-                                        }">${
-                                comment.comment_total_likes || 0
-                            }</p>
+                                        <p id="commentTotalLike_${comment.id
+                                }">${comment.comment_total_likes || 0
+                                }</p>
                                     </div>
-                                    <button class="commented-user-reply-btn" data-comment-id="${
-                                        comment.id
-                                    }">Reply</button>
+                                    <button class="commented-user-reply-btn" data-comment-id="${comment.id
+                                }">Reply</button>
                                 </div>
  <ul class="primary-comment-replies"></ul>
                             </li>
@@ -1318,8 +1308,8 @@ function sendComment(){
                                     let displayName = reply.profile
                                         ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
                                         : generatePlaceholderName(
-                                              reply.username
-                                          );
+                                            reply.username
+                                        );
                                     const replyHTML = `
 
                             <div class="commented-user-head">
@@ -1345,9 +1335,8 @@ function sendComment(){
                                     <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
                                     <p>${reply.comment_total_likes || 0}</p>
                                 </div>
-                                <button class="commented-user-reply-btn" data-comment-id="${
-                                    reply.id
-                                }">Reply</button>
+                                <button class="commented-user-reply-btn" data-comment-id="${reply.id
+                                        }">Reply</button>
                             </div>
                         `;
 
@@ -1535,11 +1524,9 @@ function sendComment(){
                 const profileContent =
                     profile && profile !== ""
                         ? `<img src="${profile}" alt="">`
-                        : `<h5 class="fontcolor${
-                              firstname ? firstname[0].toUpperCase() : ""
-                          }">${firstname ? firstname[0].toUpperCase() : ""}${
-                              lastname ? lastname[0].toUpperCase() : ""
-                          }</h5>`;
+                        : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
+                        }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
+                        }</h5>`;
                 // Create reaction list item
                 const reactionItem = `<li class="reaction-info-wrp">
                                     <div class="commented-user-head">
@@ -1773,11 +1760,9 @@ function sendComment(){
                 const profileContent =
                     profile && profile !== ""
                         ? `<img src="${profile}" alt="">`
-                        : `<h5 class="fontcolor${
-                              firstname ? firstname[0].toUpperCase() : ""
-                          }">${firstname ? firstname[0].toUpperCase() : ""}${
-                              lastname ? lastname[0].toUpperCase() : ""
-                          }</h5>`;
+                        : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
+                        }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
+                        }</h5>`;
                 // Create reaction list item
                 const reactionItem = `<li class="reaction-info-wrp">
                                     <div class="commented-user-head">
@@ -2050,9 +2035,9 @@ $(document).ready(function () {
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
         let savedVisibility =
-        "1";
-     let savedAllowComments =
-         "1";
+            "1";
+        let savedAllowComments =
+            "1";
 
 
         $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop(
@@ -2095,4 +2080,79 @@ $(document).ready(function () {
 
         console.log("Saved Settings:", { visibility, allowComments });
     });
+
+
+
+            var selectedReportType = ""; // Store selected report type
+
+            // Open modal when clicking the report button
+            $(".reportbtn").on("click", function () {
+                var eventId = $(this).data("event-id");
+                var postId = $(this).data("event-post-id");
+
+                // Store event ID and post ID in the modal's data attributes
+                $("#submitreport").data("event-id", eventId);
+                $("#submitreport").data("post-id", postId);
+
+                // Reset previous selections
+                $(".report-option").removeClass("active");
+                selectedReportType = "";
+                $("#violation-textbox").val("");
+                $(".btn-submit-report").prop("disabled", true);
+                $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+
+                // Show the modal
+                $("#submitreport").modal("show");
+            });
+
+            // Handle report type selection
+            $(".report-option").on("click", function () {
+                $(".report-option").removeClass("active");
+                $(this).addClass("active");
+                selectedReportType = $(this).data("report-type");
+
+                // Enable submit button when a report type is selected
+                $(".btn-submit-report").prop("disabled", false);
+            });
+
+            // Submit report via AJAX
+            $(".btn-submit-report").on("click", function () {
+                var eventId = $("#submitreport").data("event-id");
+                var postId = $("#submitreport").data("post-id");
+                var violationDetails = $("#violation-textbox").val();
+
+                if (!selectedReportType) {
+                    toastr.error("Please select a report type.");
+                    return;
+                }
+
+                $.ajax({
+                    url: base_url + "event_wall/postMediaReport", // Adjust endpoint
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        event_id: eventId,
+                        event_post_id: postId,
+                        report_type: selectedReportType,
+                        report_description: violationDetails,
+                    },
+                    success: function (response) {
+                        if (response.status === 1) {
+                            toastr.success(response.message);
+                            setTimeout(function () {
+                                $("#submitreport").modal("hide");
+                            }, 2000);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                        // alert("Failed to submit the report. Please try again later.");
+                    },
+                });
+            });
+
+
+
 });
