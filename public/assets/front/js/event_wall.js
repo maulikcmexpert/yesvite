@@ -1271,7 +1271,7 @@ $(document).ready(function () {
         // Submit report via AJAX
         $(".btn-submit-report").on("click", function () {
             var media_id = $('#media_id').val();
-alert(media_id)
+alert(media_id);
             var eventId = $("#submitreport").data("event-id");
             var postId = $("#submitreport").data("post-id");
             var violationDetails = $("#violation-textbox").val();
