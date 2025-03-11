@@ -1495,6 +1495,11 @@ table#userpostreport-table .report-description-td {
 }
 
 
+div:where(.swal2-icon) .swal2-icon-content{
+    font-size: smaller !important;
+}
+
+
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;

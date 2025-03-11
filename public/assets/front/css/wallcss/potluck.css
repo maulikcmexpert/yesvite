@@ -239,6 +239,7 @@
     font-family: var(--SFProDisplay-Bold);
     color: #020202;
     margin-bottom: 0;
+    width: max-content;
 }
 
 .post-potluck-category .list-header p {
@@ -959,6 +960,10 @@
     display: flex; /* Ensure it's explicitly flex */
     -webkit-justify-content: flex-end; /* Safari prefix */
     justify-content: flex-end;
+}
+
+#nav-potluck .list-header .dropdown-menu .d-flex.align-items-center{
+    justify-content: start !important;
 }
 
 /* ======== responsive ======= */

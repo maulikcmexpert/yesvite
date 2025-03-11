@@ -165,13 +165,9 @@ class UserPostReportDataTable extends DataTable
             })
             ->addColumn('delete', function ($row) {
 
-                $cryptId = encrypt($row->id);
-                $view_url = route('user_post_report.show', $cryptId);
-
-                $actionBtn = '<div class="action-icon">
-                    <a class="" href="#" title="View"><i class="fa-solid fa-trash"></i></a>';
-
-                return $actionBtn;
+                return '
+                <button type="button" data-id="'.$row->event_posts->user_id.'" class="btn bg-transparent delete_user"><i class="fas fa-trash" aria-hidden="true"></i></button>
+             ';
             })
             ->addColumn('action', function ($row) {
 
@@ -273,7 +269,7 @@ class UserPostReportDataTable extends DataTable
             Column::make('post_owner_username')->title("UserName(Post Onwner)")->orderable(true),
             Column::make('post_owner_email')->title("Email(Post Onwner)")->orderable(true),
             Column::make('account_status')->title("Account Status")->orderable(false),
-            // Column::make('delete')->title("Account Delete")->orderable(false),
+            Column::make('delete')->title("Account Delete")->orderable(false),
             Column::make('action')->title("Action")->orderable(false),
         ];
     }
