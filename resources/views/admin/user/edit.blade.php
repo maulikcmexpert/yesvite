@@ -84,11 +84,10 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="col-lg-6 col-md-6 mb-3">
                         <div class="form-group">
                             <label for="about_me">About Me</label>
-                            <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
-                                value="{{ $getTemData->state }}">
+    
                                 <textarea class="form-control" name="about_me" placeholder="Enter About Me">{{ $getTemData->about_me }}</textarea>
                                 {{-- <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
                                 value="{{ $getTemData->state }}"> --}}
