@@ -24,6 +24,6 @@ class IsAuthenticate
         if (!Auth::guard('web')->user()) {
             return $next($request);
         }
-        return Redirect::to(URL::to('home'));
+        // return Redirect::to(URL::to('home'));
     }
 }
