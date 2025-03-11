@@ -1750,3 +1750,40 @@
         </div>
     </div>
 </div> --}}
+<div class="modal fade cmn-modal" id="submitreport" tabindex="-1" aria-labelledby="submitreportLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+              <div class="submit-blocks">
+                  <span class="active">Harassment</span>
+                  <span>Hate</span>
+                  <span>Threatening Violence</span>
+                  <span>Spam</span>
+                  <span>Inappropriate Content</span>
+                  <span>Violating Platform Policies</span>
+              </div>
+
+              <div class="textbox-container">
+                <textarea id="violation-textbox" placeholder="Details of Violation (Optional)"></textarea>
+                <div class="resize-icon" role="button"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 7L8 1.41421C8 0.523308 6.92286 0.0771395 6.29289 0.707104L0.707107 6.29289C0.0771418 6.92286 0.523309 8 1.41421 8L7 8C7.55229 8 8 7.55228 8 7Z" fill="#CBD5E1"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="review-text">
+                 <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" disabled>Submit Report</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
+          </div>
+        </div>
+    </div>
+  </div>
