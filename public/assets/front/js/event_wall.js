@@ -1174,10 +1174,6 @@ $(document).ready(function () {
         var muteIcon = $(this).find("#muteIcon");
         var unmuteIcon = $(this).find("#unmuteIcon");
 
-        if (postControl === "report") {
-            $("#submitreport").modal("show");
-            return;
-        }
 
         // Retrieve necessary data attributes
         var $button = $(this);
