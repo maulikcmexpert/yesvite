@@ -1251,7 +1251,8 @@ $(document).ready(function () {
             $(".report-option").removeClass("active");
             selectedReportType = "";
             $("#violation-textbox").val("");
-            $(".btn-submit-report").prop("disabled", true).html("Submit Report"); // Reset button text
+            $(".btn-submit-report").prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
 
             // Show the modal
             $("#submitreport").modal("show");
@@ -1277,9 +1278,6 @@ $(document).ready(function () {
                 toastr.error("Please select a report type.");
                 return;
             }
-            $("#submitreport").modal("show");
-            var $btn = $(this);
-            $btn.prop("disabled", true).html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>');
 
             $.ajax({
                 url: base_url + "event_wall/postMediaReport", // Adjust endpoint
@@ -1294,21 +1292,15 @@ $(document).ready(function () {
                     report_description: violationDetails,
                 },
                 success: function (response) {
-                    if (response.status == 1) {
+                    if (response.status === 1) {
                         toastr.success(response.message);
                         $("#submitreport").modal("hide");
-                    } else {
-                        alert("Something went wrong. Please try again.");
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error:", error);
-                    alert("Failed to submit the report. Please try again later.");
+                    // alert("Failed to submit the report. Please try again later.");
                 },
-                complete: function () {
-                    // Reset button text and enable after request completion
-                    $btn.prop("disabled", false).html("Submit Report");
-                }
             });
         });
 
