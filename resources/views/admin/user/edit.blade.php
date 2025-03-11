@@ -85,6 +85,16 @@
                     </div>
                     <div class="col-lg-6 col-md-6 mb-3">
                         <div class="form-group">
+                            <label for="about_me">About Me</label>
+    
+                                <textarea class="form-control" name="about_me" placeholder="Enter About Me">{{ $getTemData->about_me }}</textarea>
+                                {{-- <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
+                                value="{{ $getTemData->state }}"> --}}
+                            <span class="text-danger">{{ $errors->first('about_me') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-3">
+                        <div class="form-group">
                             <label>Gender</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -99,16 +109,6 @@
                                 </div>
                             </div>
                             <span class="text-danger">{{ $errors->first('gender') }}</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="about_me">About Me</label>
-    
-                                <textarea class="form-control" name="about_me" placeholder="Enter About Me">{{ $getTemData->about_me }}</textarea>
-                                {{-- <input type="text" class="form-control" name="about_me" placeholder="Enter About Me"
-                                value="{{ $getTemData->state }}"> --}}
-                            <span class="text-danger">{{ $errors->first('about_me') }}</span>
                         </div>
                     </div>
              
