@@ -326,7 +326,7 @@
                                                                             class="dropdown-item reportbtn"
                                                                             href="#"
                                                                             data-event-id="{{ $event }}"
-                                                                            data-event-post-id="{{ $post['id'] }}"
+                                                                            data-event-post-id="{{ $photo['id'] }}"
                                                                             data-user-id="{{ $login_user_id }}"
                                                                             data-post-control="report"
                                                                             data-bs-toggle="modal" data-bs-target="#submitreport">
