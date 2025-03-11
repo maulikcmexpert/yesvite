@@ -232,6 +232,7 @@
                                                                                     href="#"
                                                                                     data-event-id="{{ $event }}"
                                                                                     data-event-post-id="{{ $post['id'] }}"
+
                                                                                     data-user-id="{{ $login_user_id }}"
                                                                                     data-post-control="report"
                                                                                     data-bs-toggle="modal" data-bs-target="#submitreport">
@@ -293,7 +294,9 @@
                                                                         <!-- Slides -->
                                                                         @if (!empty($post['post_image']))
                                                                             @foreach ($post['post_image'] as $image)
+
                                                                                 @if ($image['type'] == 'video')
+                                                                                <input type="hidden" value={{ $image['id']}} id="media_id">
                                                                                     <div class="swiper-slide">
                                                                                         <div
                                                                                             class="posts-card-show-post-img">
