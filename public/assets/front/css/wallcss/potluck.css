@@ -961,6 +961,10 @@
     justify-content: flex-end;
 }
 
+#nav-potluck .list-header .dropdown-menu .d-flex.align-items-center{
+    justify-content: start !important;
+}
+
 /* ======== responsive ======= */
 @media only screen and (max-width:575px){
     .cmn-modal.show .modal-dialog-centered{
