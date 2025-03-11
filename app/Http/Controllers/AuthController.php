@@ -362,7 +362,7 @@ class AuthController extends Controller
                         $message->subject('Verify your Yesvite email address');
                     });
                     // dd(2);
-                    return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
+                    return redirect()->route('auth.login')->with('msg', 'Please changer your temparory password.');
 
                     // return redirect()->back()->with('msg', 'Please check and verify your email address.');
 
