@@ -308,7 +308,8 @@
                                                                                                 muted />
                                                                                         </div>
                                                                                     </div>
-                                                                                @else <input type="" value={{ $image['id']}} id="media_id">
+                                                                                @else
+                                                                                 <input type="hidden" value={{ $image['id']}} id="media_id">
                                                                                     <div class="swiper-slide">
                                                                                         <div
                                                                                             class="posts-card-show-post-img">
