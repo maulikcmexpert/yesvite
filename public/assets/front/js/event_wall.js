@@ -1174,9 +1174,6 @@ $(document).ready(function () {
         var muteIcon = $(this).find("#muteIcon");
         var unmuteIcon = $(this).find("#unmuteIcon");
 
-        // Toggle visibility of icons:
-        // If muteIcon is visible, hide it and show unmuteIcon
-        // If unmuteIcon is visible, hide it and show muteIcon
 
         // Retrieve necessary data attributes
         var $button = $(this);
@@ -1198,7 +1195,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.status === 1) {
-                    console.log(response.type);
+
                     if (response.type == "hide_post") {
                         // Find and hide the post using the postId
                         $('.hidden_post[data-post-id="' + postId + '"]').hide();
