@@ -2350,6 +2350,7 @@
 .all-events-month-wise-inner {
     padding-left: 50px;
     max-height: calc(100vh - 100px);
+    height:  calc(100vh - 100px);
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -2827,11 +2828,11 @@
     justify-content: center;
     gap: 10px;
     position: sticky;
-    top: 0;
+    /* top: 0; */
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0px;
+    /* bottom: 0px; */
     z-index: 20;
     border: none;
     pointer-events: auto;
