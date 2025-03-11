@@ -1237,7 +1237,7 @@ $(document).ready(function () {
     });
 
         var selectedReportType = ""; // Store selected report type
-
+var media_id = $('#media_id').val();
         // Open modal when clicking the report button
         $(".reportbtn").on("click", function () {
             var eventId = $(this).data("event-id");
@@ -1290,6 +1290,7 @@ $(document).ready(function () {
                     event_post_id: postId,
                     report_type: selectedReportType,
                     report_description: violationDetails,
+                    post_media_id:media_id
                 },
                 success: function (response) {
                     if (response.status === 1) {
