@@ -892,10 +892,7 @@
                 checkUserLogin();
             }, 10000); // 10 seconds
 
-            refreshTimeout = setTimeout(() => {
-                console.log("User inactive for 5+ minutes, refreshing page...");
-                location.reload();
-            }, 300000); // 5 minutes
+
         }
 
         // Attach event listeners to detect activity
