@@ -228,7 +228,7 @@
                                                                         @if ($post['user_id'] != $login_user_id)
                                                                             <li>
                                                                                 <button
-                                                                                    class="dropdown-item postControlButton"
+                                                                                    class="dropdown-item reportbtn"
                                                                                     href="#"
                                                                                     data-event-id="{{ $event }}"
                                                                                     data-event-post-id="{{ $post['id'] }}"
@@ -1761,14 +1761,13 @@
             <div class="modal-body">
               <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
               <div class="submit-blocks">
-                  <span class="active">Harassment</span>
-                  <span>Hate</span>
-                  <span>Threatening Violence</span>
-                  <span>Spam</span>
-                  <span>Inappropriate Content</span>
-                  <span>Violating Platform Policies</span>
-              </div>
-
+                <span class="report-option " data-report-type="Harassment">Harassment</span>
+                <span class="report-option" data-report-type="Hate">Hate</span>
+                <span class="report-option" data-report-type="Threatening Violence">Threatening Violence</span>
+                <span class="report-option" data-report-type="Spam">Spam</span>
+                <span class="report-option" data-report-type="Inappropriate Content">Inappropriate Content</span>
+                <span class="report-option" data-report-type="Violating Platform Policies">Violating Platform Policies</span>
+            </div>
               <div class="textbox-container">
                 <textarea id="violation-textbox" placeholder="Details of Violation (Optional)"></textarea>
                 <div class="resize-icon" role="button"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1783,7 +1782,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" disabled>Submit Report</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Submit Report</button>
+              <button type="button" class="btn btn-secondary btn-submit-report" data-bs-dismiss="modal" >Submit Report</button>
           </div>
         </div>
     </div>

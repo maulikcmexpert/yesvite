@@ -1235,6 +1235,77 @@ $(document).ready(function () {
             },
         });
     });
+
+        var selectedReportType = ""; // Store selected report type
+
+        // Open modal when clicking the report button
+        $(".reportbtn").on("click", function () {
+            var eventId = $(this).data("event-id");
+            var postId = $(this).data("event-post-id");
+
+            // Store event ID and post ID in the modal's data attributes
+            $("#submitreport").data("event-id", eventId);
+            $("#submitreport").data("post-id", postId);
+
+            // Reset previous selections
+            $(".report-option").removeClass("active");
+            selectedReportType = "";
+            $("#violation-textbox").val("");
+            $(".btn-submit-report").prop("disabled", true);
+
+            // Show the modal
+            $("#submitreport").modal("show");
+        });
+
+        // Handle report type selection
+        $(".report-option").on("click", function () {
+            $(".report-option").removeClass("active");
+            $(this).addClass("active");
+            selectedReportType = $(this).data("report-type");
+
+            // Enable submit button when a report type is selected
+            $(".btn-submit-report").prop("disabled", false);
+        });
+
+        // Submit report via AJAX
+        $(".btn-submit-report").on("click", function () {
+            var eventId = $("#submitreport").data("event-id");
+            var postId = $("#submitreport").data("post-id");
+            var violationDetails = $("#violation-textbox").val();
+
+            if (!selectedReportType) {
+                alert("Please select a report type.");
+                return;
+            }
+
+            $.ajax({
+                url: base_url + "event_wall/submitReport", // Adjust endpoint
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: {
+                    event_id: eventId,
+                    event_post_id: postId,
+                    report_type: selectedReportType,
+                    report_description: violationDetails,
+                },
+                success: function (response) {
+                    if (response.status === 1) {
+                        toastr.success(response.message);
+                        $("#submitreport").modal("hide");
+                    } else {
+                        alert("Something went wrong. Please try again.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                    alert("Failed to submit the report. Please try again later.");
+                },
+            });
+        });
+
+
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
