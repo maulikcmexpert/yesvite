@@ -369,7 +369,8 @@ class UserController extends Controller
         // $user->address_2 = $request->input('address_2');
         $user->city = $request->input('city');
         $user->state = $request->input('state');
-
+        $user->about_me = $request->input('about_me');
+        $user->gender = ($request->gender != "" || $request->gender != NULL) ? $request->gender : $user->gender;
 
 
         // Save the updated user details
