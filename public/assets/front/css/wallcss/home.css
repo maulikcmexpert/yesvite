@@ -947,6 +947,7 @@ main.new-main-content {
     border: 1px solid #F1F5F9;
     padding: 15px;
     border-radius: 16px;
+    margin-bottom: 30px;
 }
 
 .create-post-upload-img-head {
@@ -3401,6 +3402,10 @@ main.new-main-content {
         height: 800px;
     }
 
+    #creatpostmodal .modal-content{
+        height: auto !important;
+    }
+
     .create-post-modal .modal-body {
         max-height: 700px;
         padding-bottom: 50px;
@@ -3467,6 +3472,9 @@ main.new-main-content {
         max-width: 600px;
         height: calc(100% - 20px);
     }
+    #creatpostmodal .modal-content{
+        height: auto !important;
+    }
 
     .create-post-upload-img-inner {
         min-height: calc(100vh - 410px);
@@ -3484,6 +3492,13 @@ main.new-main-content {
         width: 100%;
         max-width: 600px;
         height: calc(100% - 20px);
+    }
+    #creatpostmodal .modal-content{
+        height: auto !important;
+    }
+
+    #creatpostmodal .modal-content{
+        height: auto !important;
     }
 
     .create-post-upload-img-inner {

@@ -882,7 +882,18 @@
 
                                 <!-- image -->
                                 @if($reportDetail->post_image->type == 'image')
-                                <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}">
+                                {{-- <img src="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image)}}"> --}}
+                                <div class="col-xl-6 col-lg-12 col-md-12">
+                                    <div class="event_posts_left">
+                                        <div class="product-images demo-gallery">
+                                            <div class="main-img-slider">
+                                                <a data-fancybox="gallery" href="{{ asset('storage/post_image/'.$reportDetail->post_image->post_image) }}">
+                                                    <img src="{{asset('storage/post_image/'.$reportDetail->post_image->post_image) }}" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endif
                                 <!-- image -->
 
@@ -958,10 +969,21 @@
                                                                 <div class="answer">{{$optionVal->option}}</div>
                                                             </div>
                                                             <div class="progress">
-
-                                                                <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100); ?>%">
+                                                                @php
+                                                                     $option=getOptionTotalVote($optionVal->id);
+                                                                     $vote=getOptionAllTotalVote($optionVal->event_post_poll_id);
+                                                                    
+                                                                    @endphp
+                                                                 @if($option==0)
+                                                                 <div class="progress-bar" style="width: 0%">
+                                                                    <?= '0' . "%"; ?>
+                                                                </div>
+                                                                 @else
+                                                                 <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100); ?>%">
                                                                     <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100) . "%"; ?>
                                                                 </div>
+                                                                 @endif   
+                                                              
                                                             </div>
                                                         </label>
                                                     </li>
