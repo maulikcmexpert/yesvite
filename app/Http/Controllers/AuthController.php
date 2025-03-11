@@ -361,8 +361,8 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-                    dd(2);
-                    return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
+                    // dd(2);
+                    return redirect()->back()->with('msg', 'Please check and verify your email address.');
 
                 }
             }
