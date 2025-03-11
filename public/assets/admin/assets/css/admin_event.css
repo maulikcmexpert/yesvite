@@ -1480,6 +1480,8 @@ table.dataTable thead>tr>th:nth-child(1).sorting_desc:before {
     
 }
 
+
+
 #toast-container>div{
     opacity: 1 !important;
 }
@@ -1499,6 +1501,14 @@ div:where(.swal2-icon) .swal2-icon-content{
     font-size: smaller !important;
 }
 
+
+.form-check-inline .form-check-input{
+    width: 100%;
+    max-width: 18px;
+    min-width: 18px;
+    height: 18px;
+    accent-color: var(--ButtonColor);
+}
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
