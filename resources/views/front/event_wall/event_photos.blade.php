@@ -826,7 +826,7 @@
                                 </div>
                             </div>
                             <div class="posts-card-head-right">
-                                <div class="dropdown post-card-dropdown upcoming-card-dropdown">
+                                {{-- <div class="dropdown post-card-dropdown upcoming-card-dropdown">
                                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                         aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button>
                                     <ul class="dropdown-menu">
@@ -887,7 +887,7 @@
                                         </li>
 
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <h5 id="post_time_details"> 10m
                                 </h5>
                             </div>
