@@ -34,7 +34,7 @@
 
     <x-front.footer :js="$js ?? []" /> --}}
 </main>
-@if($page !== 'wall')
+@if($page != 'wall')
 <x-front.bodyfooter page="{{ $page }}" />
 @endif
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
