@@ -959,7 +959,7 @@
                                                             </div>
                                                             <div class="progress">
                                                                 @php
-                                                                    dd(getOptionTotalVote($optionVal->id),getOptionAllTotalVote($optionVal->event_post_poll_id));
+                                                                    getOptionTotalVote($optionVal->id);
                                                                 @endphp
                                                                 <div class="progress-bar" style="width: <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100); ?>%">
                                                                     <?= round(getOptionTotalVote($optionVal->id) / getOptionAllTotalVote($optionVal->event_post_poll_id) * 100) . "%"; ?>

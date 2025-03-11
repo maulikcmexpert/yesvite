@@ -926,6 +926,7 @@ function checkUserPhotoIsLike($event_photo_comment_id, $user_id)
 }
 function getOptionTotalVote($event_poll_option_id)
 {
+    dd($event_poll_option_id);
     return UserEventPollData::where('event_poll_option_id', $event_poll_option_id)->count();
 }
 function getOptionAllTotalVote($id)
