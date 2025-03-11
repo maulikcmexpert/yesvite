@@ -280,6 +280,7 @@ class AuthController extends Controller
                 $userIpAddress = request()->ip();
 
                 $user = Auth::guard('web')->user();
+                dd($user->email_verified_at);
                 if ($user->email_verified_at != NULL) {
 
                     Session::regenerate();
