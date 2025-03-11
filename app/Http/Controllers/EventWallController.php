@@ -2517,7 +2517,6 @@ class EventWallController extends BaseController
     public function postMediaReport(Request $request)
     {
         $user  = Auth::guard('web')->user();
-
             $reportCreate = new UserReportToPost;
             $reportCreate->event_id = $request['event_id'];
             $reportCreate->user_id =  $user->id;

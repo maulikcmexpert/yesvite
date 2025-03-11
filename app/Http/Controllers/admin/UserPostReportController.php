@@ -132,6 +132,7 @@ class UserPostReportController extends Controller
         }, 'users'])->where('id', $reportId)->first();
         $reportDetail->posttime = $this->setpostTime($reportDetail->event_posts->created_at);
         $reportDetail->report_posttime = $this->setpostTime($reportDetail->created_at);
+        
         // $reportDetail->created_at = Carbon::parse($reportDetail->created_at)->format('Y-m-d');
 
         // dd($reportDetail->post_image);
