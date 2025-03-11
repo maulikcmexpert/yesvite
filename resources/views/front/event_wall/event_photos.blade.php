@@ -322,19 +322,29 @@
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Delete </button></li>
                                                                     @if ($photo['user_id'] != $login_user_id)
-                                                                        <li><button class="dropdown-item"><svg
-                                                                                    viewBox="0 0 20 20" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M10.0013 18.9587C5.05964 18.9587 1.04297 14.942 1.04297 10.0003C1.04297 5.05866 5.05964 1.04199 10.0013 1.04199C14.943 1.04199 18.9596 5.05866 18.9596 10.0003C18.9596 14.942 14.943 18.9587 10.0013 18.9587ZM10.0013 2.29199C5.7513 2.29199 2.29297 5.75033 2.29297 10.0003C2.29297 14.2503 5.7513 17.7087 10.0013 17.7087C14.2513 17.7087 17.7096 14.2503 17.7096 10.0003C17.7096 5.75033 14.2513 2.29199 10.0013 2.29199Z"
-                                                                                        fill="#94A3B8" />
-                                                                                    <path
-                                                                                        d="M10 11.4587C9.65833 11.4587 9.375 11.1753 9.375 10.8337V6.66699C9.375 6.32533 9.65833 6.04199 10 6.04199C10.3417 6.04199 10.625 6.32533 10.625 6.66699V10.8337C10.625 11.1753 10.3417 11.4587 10 11.4587Z"
-                                                                                        fill="#94A3B8" />
-                                                                                    <path
-                                                                                        d="M10.0013 14.1664C9.89297 14.1664 9.78464 14.1414 9.68464 14.0997C9.58464 14.0581 9.49297 13.9997 9.40964 13.9247C9.33464 13.8414 9.2763 13.7581 9.23464 13.6497C9.19297 13.5497 9.16797 13.4414 9.16797 13.3331C9.16797 13.2247 9.19297 13.1164 9.23464 13.0164C9.2763 12.9164 9.33464 12.8247 9.40964 12.7414C9.49297 12.6664 9.58464 12.6081 9.68464 12.5664C9.88464 12.4831 10.118 12.4831 10.318 12.5664C10.418 12.6081 10.5096 12.6664 10.593 12.7414C10.668 12.8247 10.7263 12.9164 10.768 13.0164C10.8096 13.1164 10.8346 13.2247 10.8346 13.3331C10.8346 13.4414 10.8096 13.5497 10.768 13.6497C10.7263 13.7581 10.668 13.8414 10.593 13.9247C10.5096 13.9997 10.418 14.0581 10.318 14.0997C10.218 14.1414 10.1096 14.1664 10.0013 14.1664Z"
-                                                                                        fill="#94A3B8" />
-                                                                                </svg> Report</button></li>
+                                                                        <li>  <button
+                                                                            class="dropdown-item reportbtn"
+                                                                            href="#"
+                                                                            data-event-id="{{ $event }}"
+                                                                            data-event-post-id="{{ $post['id'] }}"
+                                                                            data-user-id="{{ $login_user_id }}"
+                                                                            data-post-control="report"
+                                                                            data-bs-toggle="modal" data-bs-target="#submitreport">
+                                                                            <svg viewBox="0 0 20 20"
+                                                                                fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M10.0013 18.9583C5.05964 18.9583 1.04297 14.9416 1.04297 9.99996C1.04297 5.05829 5.05964 1.04163 10.0013 1.04163C14.943 1.04163 18.9596 5.05829 18.9596 9.99996C18.9596 14.9416 14.943 18.9583 10.0013 18.9583ZM10.0013 2.29163C5.7513 2.29163 2.29297 5.74996 2.29297 9.99996C2.29297 14.25 5.7513 17.7083 10.0013 17.7083C14.2513 17.7083 17.7096 14.25 17.7096 9.99996C17.7096 5.74996 14.2513 2.29163 10.0013 2.29163Z"
+                                                                                    fill="#94A3B8" />
+                                                                                <path
+                                                                                    d="M10 11.4583C9.65833 11.4583 9.375 11.175 9.375 10.8333V6.66663C9.375 6.32496 9.65833 6.04163 10 6.04163C10.3417 6.04163 10.625 6.32496 10.625 6.66663V10.8333C10.625 11.175 10.3417 11.4583 10 11.4583Z"
+                                                                                    fill="#94A3B8" />
+                                                                                <path
+                                                                                    d="M10.0013 14.1667C9.89297 14.1667 9.78464 14.1417 9.68464 14.1C9.58464 14.0583 9.49297 14 9.40964 13.925C9.33464 13.8417 9.2763 13.7583 9.23464 13.65C9.19297 13.55 9.16797 13.4417 9.16797 13.3333C9.16797 13.225 9.19297 13.1167 9.23464 13.0167C9.2763 12.9167 9.33464 12.825 9.40964 12.7417C9.49297 12.6667 9.58464 12.6083 9.68464 12.5667C9.88464 12.4833 10.118 12.4833 10.318 12.5667C10.418 12.6083 10.5096 12.6667 10.593 12.7417C10.668 12.825 10.7263 12.9167 10.768 13.0167C10.8096 13.1167 10.8346 13.225 10.8346 13.3333C10.8346 13.4417 10.8096 13.55 10.768 13.65C10.7263 13.7583 10.668 13.8417 10.593 13.925C10.5096 14 10.418 14.0583 10.318 14.1C10.218 14.1417 10.1096 14.1667 10.0013 14.1667Z"
+                                                                                    fill="#94A3B8" />
+                                                                            </svg>
+                                                                            Report
+                                                                        </button></li>
                                                                     @endif
                                                                 </ul>
                                                             </div>
@@ -1236,7 +1246,42 @@
         </div>
     </div>
 </div>
+<div class="modal fade cmn-modal" id="submitreport" tabindex="-1" aria-labelledby="submitreportLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="submitreportLabel">Submit a Report</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
+              <div class="submit-blocks">
+                <span class="report-option " data-report-type="Harassment">Harassment</span>
+                <span class="report-option" data-report-type="Hate">Hate</span>
+                <span class="report-option" data-report-type="Threatening Violence">Threatening Violence</span>
+                <span class="report-option" data-report-type="Spam">Spam</span>
+                <span class="report-option" data-report-type="Inappropriate Content">Inappropriate Content</span>
+                <span class="report-option" data-report-type="Violating Platform Policies">Violating Platform Policies</span>
+            </div>
+              <div class="textbox-container">
+                <textarea id="violation-textbox" placeholder="Details of Violation (Optional)"></textarea>
+                <div class="resize-icon" role="button"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 7L8 1.41421C8 0.523308 6.92286 0.0771395 6.29289 0.707104L0.707107 6.29289C0.0771418 6.92286 0.523309 8 1.41421 8L7 8C7.55229 8 8 7.55228 8 7Z" fill="#CBD5E1"/>
+                  </svg>
+                </div>
+              </div>
 
+              <div class="review-text">
+                 <p>Not sure if they broke the rules?  Review our rules <a href="#">here</a>.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-secondary btn-submit-report" data-bs-dismiss="modal" >Submit Report</button>
+          </div>
+        </div>
+    </div>
+  </div>
 <script>
     use Carbon\ Carbon;
 
