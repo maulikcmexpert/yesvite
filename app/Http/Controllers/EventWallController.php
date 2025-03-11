@@ -2508,20 +2508,31 @@ class EventWallController extends BaseController
             $message = "Mute every post from this user will post";
         } else if ($request['post_control'] == 'unmute') {
             $message = "Unmuted every post from this user will post";
-        } else if ($request['post_control'] == 'report') {
+        }
+
+        return response()->json(['status' => 1, 'type' => $request['post_control'], 'message' => $message]);
+    }
+
+
+    public function postMediaReport(Request $request)
+    {
+        $user  = Auth::guard('web')->user();
+
             $reportCreate = new UserReportToPost;
             $reportCreate->event_id = $request['event_id'];
             $reportCreate->user_id =  $user->id;
+            $reportCreate->event_post_id = $request['event_post_id'];
+            $reportCreate->post_media_id = $request['post_media_id'];
             $reportCreate->report_type = $request['report_type'];
             $reportCreate->report_description = $request['report_description'];
-            $reportCreate->event_post_id = $request['event_post_id'];
+            $reportCreate->specific_report = '1';
             $reportCreate->save();
-
             $savedReportId =  $reportCreate->id;
             $createdAt = $reportCreate->created_at;
-            $message = "Reported to admin for this post";
 
-            $support_email = env('SUPPORT_MAIL');
+            $message = "Reported to admin for this media";
+
+            $support_email = 'prakash.m.cmexpertise@gmail.com';
 
             $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
             $data = [
@@ -2535,10 +2546,13 @@ class EventWallController extends BaseController
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
-                    ->subject('Post Report Mail');
+                    ->subject('Email Verification Mail');
             });
-        }
-        return response()->json(['status' => 1, 'type' => $request['post_control'], 'message' => $message]);
+
+
+
+            return response()->json(['status' => 1, 'message' => $message]);
+
     }
     public function get_phoneContact(Request $request)
     {
