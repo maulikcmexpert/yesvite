@@ -273,7 +273,7 @@ class AuthController extends Controller
         if ($userData != NULL) {
             if ($userData->account_status != 'Unblock') {
                 return redirect()->back()->withErrors([
-                    'email' => 'Ban User: Temporarily or permanently suspend user.',
+                    'msg_error' => 'Ban User: Temporarily or permanently suspend user, Contact to admin.',
                 ])->withInput();
             }
             if (Auth::attempt($credentials, $remember)) {

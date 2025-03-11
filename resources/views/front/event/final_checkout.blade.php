@@ -1,4 +1,4 @@
-<div class="step_final_checkout" style="display: none;width: 100%;">
+<div class="step_final_checkout position-relative" style="display: none;width: 100%;">
     <div class="container-fluid">
         <div class="main-content-wrp setting-main-content">
             <div class="final-checkout-wrp position-relative">

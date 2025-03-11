@@ -1105,6 +1105,7 @@ $(document).ready(function() {
     const uploadProgress = $('.uploading_csv_file'); 
     const uploadComplete = $('.uploading_csv_complete');
     const progressBar = $('#progress-bar'); 
+    let interval = null; // Store the interval globally
 
     uploadProgress.hide();
     uploadComplete.hide();
@@ -1202,11 +1203,14 @@ $(document).ready(function() {
                 progressBar.val(0);
 
                 let progress = 0;
-                let fileSizeKB = (file.size / 1024).toFixed(2);
-                let uploadedKB = 0;
-    
-                let interval = setInterval(function () {
-                    if (uploadedKB >= fileSizeKB) {
+                let fileSize = file.size;
+                let uploadedSize = 0;
+                // let fileSizeKB = (file.size / 1024).toFixed(2);
+                // let uploadedKB = 0;
+                let formattedSize = formatFileSize(fileSize);
+
+                interval = setInterval(function () {
+                    if (uploadedSize >= fileSize) {
                         clearInterval(interval);
                         uploadProgress.hide();
                         uploadComplete.show();
@@ -1215,11 +1219,19 @@ $(document).ready(function() {
                         $('.contact_file_name').text(file.name);
                         $(".uploadcsv-wrp p").addClass('d-none');
                         $(".click-to-upload-btn").prop("disabled", false);
+                        progressBar.val(0);
+
                     } else {
-                        uploadedKB = Math.min(uploadedKB + fileSizeKB / 100, fileSizeKB);
-                        progressBar.val((uploadedKB / fileSizeKB) * 100);
-                        $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        // uploadedSize = Math.min(uploadedKB + fileSize / 100, fileSize);
+                        // progressBar.val((uploadedKB / fileSize) * 100);
+                        // $(".file_upload_rate").text(`${uploadedKB.toFixed(2)} KB of ${fileSizeKB} KB`);
+                        uploadedSize = Math.min(uploadedSize + fileSize / 100, fileSize);
+                        let formattedUploaded = formatFileSize(uploadedSize);
+                        progressBar.val((uploadedSize / fileSize) * 100);
+                        $(".file_upload_rate").text(`${formattedUploaded} of ${formattedSize}`);
+
                         $('.contact_file_name').text(file.name);
+
                     }
                 }, 25);
             } else {
@@ -1233,7 +1245,6 @@ $(document).ready(function() {
             }
         }
     
-});
 // $("#csv_file").on("change", function (e) {
 //     let file = e.target.files[0]; // Get the selected file
 //     if (file) {
@@ -1259,7 +1270,24 @@ $('#uploadcsv').on('hidden.bs.modal', function () {
 $(document).on('click','.cancel-uploading-btn',function(){
     resetUploadState();
 });
+$(document).on('click','.delete-uploading-btn',function(){
+    resetUploadState();
+});
+function formatFileSize(size) {
+    if (size >= 1024 * 1024) {
+        return (size / (1024 * 1024)).toFixed(2) + " MB";
+    } else if (size >= 1024) {
+        return (size / 1024).toFixed(2) + " KB";
+    } else {
+        return size.toLocaleString() + " Bytes"; 
+    }
+}
+
 function resetUploadState() {
+    if (interval) {
+        clearInterval(interval); // Stop the progress simulation
+        interval = null;
+    }
     $(".uploadcsv-wrp h3").text('Drag CSV Here');
     $(".uploadcsv-wrp p").removeClass('d-none');
     
@@ -1273,11 +1301,14 @@ function resetUploadState() {
     progressBar.val(0);
     $(".file_upload_rate").text('');
     $('.contact_file_name').text('');
+    $(".click-to-upload-btn").prop("disabled", false);
+
 
 
     // $(".uploadedcvs-file-card-content p").text('');
 
 }
+});
 
 // $(document).ready(function() {
     $(document).on("click", ".openProfileModal", function () {
