@@ -269,9 +269,9 @@ class AuthController extends Controller
 
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
-        $userData = User::where('email', $request->email)->first();
-        if ($userData != NULL) {
-            if ($userData->account_status != 'Unblock') {
+        $user = User::where('email', $request->email)->first();
+        if ($user != NULL) {
+            if ($user->account_status != 'Unblock') {
                 return redirect()->back()->withErrors([
                     'msg_error' => 'Ban User: Temporarily or permanently suspend user, Contact to admin.',
                 ])->withInput();
@@ -280,7 +280,7 @@ class AuthController extends Controller
                 $userIpAddress = request()->ip();
 
                 $user = Auth::guard('web')->user();
-                if ($userData->email_verified_at != NULL) {
+                if ($user->email_verified_at != NULL) {
 
                     Session::regenerate();
                     $user->current_session_id = Session::getId();
@@ -357,7 +357,7 @@ class AuthController extends Controller
                     ];
 
 
-                    Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+                    Mail::send('emails.emailVerificationEmail', ['userData' => $user], function ($message) use ($user) {
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
