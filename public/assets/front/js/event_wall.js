@@ -1298,7 +1298,7 @@ $(document).ready(function () {
                         toastr.success(response.message);
                         setTimeout(function () {
                             $("#submitreport").modal("hide");
-                        }, 500);
+                        }, 2000);
                     } else {
                         alert("Something went wrong. Please try again.");
                     }
