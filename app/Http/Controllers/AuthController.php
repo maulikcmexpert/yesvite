@@ -270,6 +270,26 @@ class AuthController extends Controller
 
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
         $userData = User::where('email', $request->email)->first();
+        if(isset($userData)&&$userData->email_verified_at==null){
+            $randomString = Str::random(30);
+            $userData->remember_token = $randomString;
+            $userData->save();
+
+            $userData = [
+                'username' => $userData->firstname,
+                'email' => $userData->email,
+                'token' => $randomString,
+                'is_first_login' => $userData->is_first_login
+            ];
+
+
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Verify your Yesvite email address');
+            });
+
+            return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
+        }
         if ($userData != NULL) {
             if ($userData->account_status != 'Unblock') {
                 return redirect()->back()->withErrors([
