@@ -888,9 +888,9 @@
 
             // Restart timers
             inactivityTimeout = setTimeout(() => {
-                console.log("User inactive for 10 seconds, checking login...");
+                console.log("User inactive for 5 minutes, checking login...");
                 checkUserLogin();
-            }, 300000); // 10 seconds
+            },300000);
 
 
         }
