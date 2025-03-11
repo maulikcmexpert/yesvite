@@ -1292,7 +1292,7 @@ $(document).ready(function () {
                     event_post_id: postId,
                     report_type: selectedReportType,
                     report_description: violationDetails,
-                    post_media_id:media_id
+
                 },
                 success: function (response) {
                     if (response.status === 1) {

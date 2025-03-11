@@ -2120,7 +2120,7 @@ $(document).ready(function () {
                 var eventId = $("#submitreport").data("event-id");
                 var postId = $("#submitreport").data("post-id");
                 var violationDetails = $("#violation-textbox").val();
-
+                var media_id = $("#media_id").val();
                 if (!selectedReportType) {
                     toastr.error("Please select a report type.");
                     return;
@@ -2137,6 +2137,7 @@ $(document).ready(function () {
                         event_post_id: postId,
                         report_type: selectedReportType,
                         report_description: violationDetails,
+                        post_media_id:media_id
                     },
                     success: function (response) {
                         if (response.status === 1) {

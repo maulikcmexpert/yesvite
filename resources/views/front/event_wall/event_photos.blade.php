@@ -370,6 +370,7 @@
 
 
                                                             @if (!empty($photo['mediaData']) && isset($photo['mediaData'][0]['type']))
+                                                            <input type="hidden" value={{ $photo['mediaData'][0]['id']}} id="media_id">
                                                                 @if ($photo['mediaData'][0]['type'] === 'image')
                                                                     <img src="{{ $photo['mediaData'][0]['post_media'] }}"
                                                                         loading="lazy" alt="Post Image">
