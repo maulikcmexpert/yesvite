@@ -343,30 +343,50 @@ class AuthController extends Controller
                         ])->withInput();
                         // return  Redirect::to('login')->with('error', 'Invalid credentials!');
                     }
-                } else {
-                    // dd(0);
+                } 
+                if ($user->email_verified_at == NULL) {
                     $randomString = Str::random(30);
                     $user->remember_token = $randomString;
                     $user->save();
-// dd(1);
+            
                     $userData = [
                         'username' => $user->firstname,
                         'email' => $user->email,
                         'token' => $randomString,
                         'is_first_login' => $user->is_first_login
                     ];
-
-
+            
                     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
+            
+                    return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
+                }
+//                 else {
+//                     // dd(0);
+//                     $randomString = Str::random(30);
+//                     $user->remember_token = $randomString;
+//                     $user->save();
+// // dd(1);
+//                     $userData = [
+//                         'username' => $user->firstname,
+//                         'email' => $user->email,
+//                         'token' => $randomString,
+//                         'is_first_login' => $user->is_first_login
+//                     ];
+
+
+//                     Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($user) {
+//                         $message->to($user->email);
+//                         $message->subject('Verify your Yesvite email address');
+//                     });
                 
 
-                    // return redirect()->back()->with('msg', 'Please check and verify your email address.');
-                    return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
+//                     // return redirect()->back()->with('msg', 'Please check and verify your email address.');
+//                     return redirect()->route('auth.login')->with('msg', 'Please check and verify your email address.');
 
-                }
+//                 }
             }
         }
         return redirect()->back()->withErrors([
