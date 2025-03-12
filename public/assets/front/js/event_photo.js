@@ -856,8 +856,10 @@ $(document).ready(function () {
     // Function to handle the long press action
     function handleLongPress(element) {
 
-        console.log("Long press detected - Bulk Select Mode Activated");
+        console.log("Long press detected ");
         bulkSelectActive = true; // Enable bulk selection mode
+        console.log("Bulk Select :", bulkSelectActive);
+
         const photoCard = element.closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
@@ -881,11 +883,9 @@ $(document).ready(function () {
                 .text(`${selectedCount} Photos Selected`); // Update the count
         } else if (selectedCount <= 1) {
             bulkSelectWrapper.addClass("d-none");
-            bulkSelectActive = false; // Disa
+
         }
-        if ($(".selected_image:checked").length === 0) {
-            bulkSelectActive = false;
-        }
+
 
     }
     $(document).on("change", ".selected_image", function () {
@@ -915,16 +915,16 @@ $(document).ready(function () {
     });
     $("#bulk_select").on("click", function (e) {
         e.preventDefault();
-        console.log("Bulk Select Button Clicked - Bulk Select Mode Activated");
 
         bulkSelectActive = true; // Bulk selection mode ON
+        console.log("Bulk Select Mode Active:", bulkSelectActive);
 
         const photoCard = $(this).closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
 
 
-        toggleBulkSelectWrapper();
+
     });
 
     // On checkbox change event, toggle the visibility of the bulk select wrapper
