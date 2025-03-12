@@ -9599,10 +9599,10 @@ class ApiControllerv2 extends Controller
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
                 $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.wav';
 
-                dd($inputPath);
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
+                dd($audio);
 
                 // Set format to WAV
                 $format = new \FFMpeg\Format\Audio\Wav();
