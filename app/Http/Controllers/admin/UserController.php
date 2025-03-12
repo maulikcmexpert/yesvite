@@ -396,8 +396,8 @@ class UserController extends Controller
             $update_password->password = Hash::make($request->password); // Use bcrypt for password hashing
 
             if ($requireNewPassword==true) {
-                dd(1);
-                $update_password->isTemporary_password = 1; // Save as temporary
+                // dd(1);
+                $update_password->isTemporary_password = '1'; // Save as temporary
             }
             $update_password->save();
             $userData = [
