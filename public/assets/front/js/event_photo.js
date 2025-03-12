@@ -1057,7 +1057,7 @@ $(document).ready(function () {
                     });
 
                     response.post_id.forEach(function (postId) {
-                        $(".bulk_delete_id_"+postId).remove();
+                        $(".bulk_delete_id_" + postId).remove();
 
                     });
                     bulkSelectActive = false;
