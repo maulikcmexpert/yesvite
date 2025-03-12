@@ -566,7 +566,7 @@
                                             </svg> Download</button>
                                     </div>
 
-                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp d-none">
+                                    <div class="phototab-add-new-photos-wrp  d-none">
                                         <div class="phototab-add-new-photos-img bulk_delete_selected" >
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>

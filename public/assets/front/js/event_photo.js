@@ -872,7 +872,7 @@ $(document).ready(function () {
     function toggleBulkSelectWrapper() {
         const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
         const bulkSelectWrapper = $(
-            ".phototab-add-new-photos-wrp.bulk-select-photo-wrp"
+            ".phototab-add-new-photos-wrp"
         );
         const bulkDeleteBtn = $(".bulk_delete_selected"); // Div for delete option
         console.log(selectedCount);
