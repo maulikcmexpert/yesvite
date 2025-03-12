@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 
 use Location;
 use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
 use FFMpeg\Format\Audio\Mp3;
 use FFMpeg\Exception\RuntimeException;
 
