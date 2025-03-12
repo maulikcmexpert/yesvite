@@ -913,26 +913,29 @@ $(document).ready(function () {
 
             // }
 
-            if (selected_bulk_image >= 1) {
-                console.log('bulk'+1);
+            if(selected_bulk_image!=0){
+                if (selected_bulk_image >= 1) {
+                    console.log('bulk'+1);
 
-                bulkDeleteBtn.removeClass("d-none"); // Show the div
-                bulkDeleteBtn
-                    .find(".bulk_delete_selected p")
-                    .text(`${selected_bulk_image} Photos Selected`); // Update the count
-                    bulkSelectWrapper.addClass("d-none"); // Show the div
-
-
-            } else if (selected_bulk_image <= 1) {
-                console.log('bulk'+2);
-
-                // bulkDeleteBtn.addClass("d-none");
-                bulkSelectWrapper.addClass("d-none");
-                bulkDeleteBtn.addClass("d-none");
+                    bulkDeleteBtn.removeClass("d-none"); // Show the div
+                    bulkDeleteBtn
+                        .find(".bulk_delete_selected p")
+                        .text(`${selected_bulk_image} Photos Selected`); // Update the count
+                        bulkSelectWrapper.addClass("d-none"); // Show the div
 
 
+                } else if (selected_bulk_image <= 1) {
+                    console.log('bulk'+2);
 
+                    // bulkDeleteBtn.addClass("d-none");
+                    bulkSelectWrapper.addClass("d-none");
+                    bulkDeleteBtn.addClass("d-none");
+
+
+
+                }
             }
+
 
 
 
