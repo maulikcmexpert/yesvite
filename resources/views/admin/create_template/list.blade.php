@@ -1,5 +1,5 @@
 <div class="container-fluid">
-{{dd($request->session()->get('admin');)}}
+{{dd($request->session()->get('admin'));}}
   <h1 class="m-0 ProductTitle">{{$title}}</h1>
   <!-- <h1>Category List</h1> -->
   <div class="content-header">
