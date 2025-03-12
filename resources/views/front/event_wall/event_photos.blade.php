@@ -402,6 +402,7 @@
 
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
+                                                            data-user_id="{{ $photo['user_id'] }}"
                                                             data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
                                                             data-image="{{ json_encode($postMedia) }}">
 
