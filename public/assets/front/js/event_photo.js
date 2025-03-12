@@ -917,9 +917,14 @@ $(document).ready(function () {
         e.preventDefault();
         console.log("Bulk Select Button Clicked - Bulk Select Mode Activated");
 
-        bulkSelectActive = true; // Enable bulk selection mode
-        $(".selected_image").prop("checked", true); // Check all images
-        $(".selected-photo-btn").show(); // Show selection UI
+        bulkSelectActive = true; // Bulk selection mode ON
+
+        // Select all images
+        $(".selected_image").each(function () {
+            $(this).prop("checked", true).trigger("change");
+        });
+
+        $(".selected-photo-btn").show(); // Show UI for selected items
         toggleBulkSelectWrapper();
     });
 
