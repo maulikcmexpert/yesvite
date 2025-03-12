@@ -967,7 +967,7 @@ $(document).ready(function () {
                 toggleBulkSelectWrapper();
             } else {
                 // Allow modal to open if bulk selection is NOT active
-                return true;
+                $("#detail-photo-modal").modal("show"); // Manually trigger modal
             }
         });
 
