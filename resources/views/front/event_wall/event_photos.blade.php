@@ -523,7 +523,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="phototab-add-new-photos-wrp">
+                                        <div class="phototab-add-new-photos-wrp add_new_photo_btn">
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photos != '')
                                                     <img src="{{ asset('storage/profile/' . $photos) }}"

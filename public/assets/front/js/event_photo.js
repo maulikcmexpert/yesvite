@@ -890,11 +890,17 @@ $(document).ready(function () {
                     .find(".phototab-add-new-photos-img p")
                     .text(`${selectedCount} Photos Selected`);
                     bulkDeleteBtn.addClass("d-none");
+
+                    $('.add_new_photo_btn').addClass('d-none');
             } else if (selectedCount <= 1) {
                 console.log('downloads'+2);
 
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
+
+
+
+                $('.add_new_photo_btn').removeClass('d-none');
 
             }
 
@@ -923,6 +929,7 @@ $(document).ready(function () {
                         .text(`${selected_bulk_image} Photos Selected`); // Update the count
                         bulkSelectWrapper.addClass("d-none"); // Show the div
 
+                        $('.add_new_photo_btn').addClass('d-none');
 
                 } else if (selected_bulk_image <= 1) {
                     console.log('bulk'+2);
@@ -931,6 +938,7 @@ $(document).ready(function () {
                     bulkSelectWrapper.addClass("d-none");
                     bulkDeleteBtn.addClass("d-none");
 
+                    $('.add_new_photo_btn').removeClass('d-none');
 
 
                 }
