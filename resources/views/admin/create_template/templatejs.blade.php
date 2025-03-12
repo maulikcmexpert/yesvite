@@ -49,6 +49,14 @@
                     name: "created_by"
 
                 },
+
+                {
+
+                    data: "created_by_email",
+
+                    name: "created_by_email"
+
+                },
                 {
 
                     data: "category_name",
