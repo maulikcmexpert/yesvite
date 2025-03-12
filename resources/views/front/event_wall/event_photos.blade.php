@@ -151,7 +151,7 @@
                                             </div>
                                         </div> --}}
                                         @foreach ($postPhotoList as $photo)
-                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 delete_post_container">
+                                            <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 delete_post_container bulk_delete_id_{{$photo['id']}}" >
                                                 <div class="photos-card-wrp">
                                                     <div class="photo-card-head">
                                                         <div class="photo-card-head-left">
