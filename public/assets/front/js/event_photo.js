@@ -887,13 +887,6 @@ $(document).ready(function () {
 
         }
 
-        if (bulkSelectActive) {
-            bulkSelectWrapper.removeClass("d-none");
-            bulkDeleteBtn.show();
-        } else {
-            bulkSelectWrapper.addClass("d-none"); // Hide bulk selection wrapper
-            bulkDeleteBtn.hide(); // Hide delete button
-        }
 
 
     }
@@ -922,16 +915,32 @@ $(document).ready(function () {
             handleLongPress(that); // Execute the long press action
         }, longPressDelay);
     });
+
+    $(document).on("click", ".img_click", function (e) {
+
+
+        const checkbox = $(this).closest(".photo-card-photos-wrp").find(".form-check-input");
+        checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
+
+        if (checkbox.prop("checked")) {
+            $(this).closest(".photo-card-photos-wrp").find(".selected-photo-btn").show();
+        } else {
+            $(this).closest(".photo-card-photos-wrp").find(".selected-photo-btn").hide();
+        }
+
+        toggleBulkSelectWrapper();
+    });
+
     $(".bulk_select").on("click", function (e) {
         e.preventDefault();
         const button = $(this);
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
-        if (!bulkSelectActive) {
+
             bulkSelectActive = true;
-            console.log("Bulk Select  Active:", bulkSelectActive);
-        }
-        bulkSelectActive = !bulkSelectActive; // Toggle between true and false
+
+
+
         console.log("Bulk Select Mode Active:", bulkSelectActive);
         if (bulkSelectActive) {
             photoCard.find(".selected-photo-btn").show(); // Show selection UI
@@ -1019,6 +1028,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".open_photo_model", function () {
+
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
         const commentInput = $("#post_comment");
