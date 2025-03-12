@@ -881,7 +881,7 @@ $(document).ready(function () {
 
             if (selectedCount >= 2) {
 
-
+                alert();
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
