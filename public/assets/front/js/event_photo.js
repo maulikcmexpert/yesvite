@@ -1091,7 +1091,7 @@ $(document).ready(function () {
         });
 
     $(document).on("click", ".open_photo_model", function () {
-
+        if (bulkSelectActive) {
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
         const commentInput = $("#post_comment");
@@ -1721,6 +1721,7 @@ $(document).ready(function () {
                 `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
             );
         }
+    }
     });
 
     let longPressTimers;
