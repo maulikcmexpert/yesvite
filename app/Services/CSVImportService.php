@@ -165,7 +165,7 @@ class CSVImportService
 
         fclose($file);
       
-        return count($newContacts) + count($updatedContacts);
+        return count($newContacts);
 
         // $newCount = count($newContacts);
         // $updatedCount = count($updatedContacts);
