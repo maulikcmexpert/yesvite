@@ -288,7 +288,6 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg> Bulk select </button></li>
-
                                                                     <li><button
                                                                             class="dropdown-item download_img_single"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
