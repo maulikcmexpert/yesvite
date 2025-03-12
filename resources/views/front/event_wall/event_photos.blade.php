@@ -486,12 +486,12 @@
                                                             </svg>
                                                             {{ $photo['total_comments'] }}
                                                         </h5>
-                                                        <button class="selected-photo-btn d-none" >
+                                                        <button class="selected-photo-btn" style="display:none;">
                                                             <input class="form-check-input selected_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
                                                         </button>
-                                                        <button class="selected-bulk-btn d-none" >
+                                                        <button class="selected-bulk-btn " style="display:none;">
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
