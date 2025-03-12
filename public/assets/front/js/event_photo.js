@@ -857,14 +857,14 @@ $(document).ready(function () {
     function handleLongPress(element) {
 
         console.log("Long press detected ");
-        bulkSelectActive = true; // Enable bulk selection mode
+        bulkSelectActive = true;
         console.log("Bulk Select :", bulkSelectActive);
 
         const photoCard = element.closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
 
-        // Check if any checkboxes are selected and toggle the visibility of the bulk select wrapper
+
         toggleBulkSelectWrapper();
     }
 
@@ -885,6 +885,7 @@ $(document).ready(function () {
             bulkSelectWrapper.addClass("d-none");
 
         }
+
 
 
     }
@@ -921,36 +922,36 @@ $(document).ready(function () {
         bulkSelectActive = !bulkSelectActive;
         console.log("Bulk Select Mode Active:", bulkSelectActive);
 
-        if (bulkSelectActive) {
-            $.ajax({
-                url: base_url + "event_photo/deletePost", // Adjust base_url as necessary
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
-                },
-                contentType: "application/json", // Send as JSON
-                data: JSON.stringify({
-                    event_id: eventId,
-                    event_post_id: eventPostId,
-                }),
-                success: function (response) {
-                    if (response.success) {
-                        // Remove the deleted post from the DOM
-                        button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
-                        // setTimeout(function () {
-                        //     location.reload();
-                        // }, 2000);
-                        toastr.success("Event Post Deleted Successfully");
-                    } else {
-                        toastr.error("Event Post  Not Deleted");
-                    }
-                },
-                error: function (xhr) {
-                    console.error(xhr.responseText);
-                    alert("An error occurred. Please try again.");
-                },
-            });
-        }
+        // if (bulkSelectActive) {
+        //     $.ajax({
+        //         url: base_url + "event_photo/deletePost", // Adjust base_url as necessary
+        //         method: "POST",
+        //         headers: {
+        //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+        //         },
+        //         contentType: "application/json", // Send as JSON
+        //         data: JSON.stringify({
+        //             event_id: eventId,
+        //             event_post_id: eventPostId,
+        //         }),
+        //         success: function (response) {
+        //             if (response.success) {
+        //                 // Remove the deleted post from the DOM
+        //                 button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
+        //                 // setTimeout(function () {
+        //                 //     location.reload();
+        //                 // }, 2000);
+        //                 toastr.success("Event Post Deleted Successfully");
+        //             } else {
+        //                 toastr.error("Event Post  Not Deleted");
+        //             }
+        //         },
+        //         error: function (xhr) {
+        //             console.error(xhr.responseText);
+        //             alert("An error occurred. Please try again.");
+        //         },
+        //     });
+        // }
 
 
 
