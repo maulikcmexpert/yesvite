@@ -397,7 +397,7 @@ class UserController extends Controller
 
             if ($requireNewPassword==true) {
                 // dd(1);
-                $update_password->isTemporary_password = 1; // Save as temporary
+                $update_password->isTemporary_password = '1'; // Save as temporary
             }
             $update_password->save();
             $userData = [
