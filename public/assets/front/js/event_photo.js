@@ -931,6 +931,10 @@ $(document).ready(function () {
             bulkSelectActive = true;
             console.log("Bulk Select  Active:", bulkSelectActive);
         }
+        if (bulkSelectActive) {
+            bulkSelectActive = false;
+            console.log("Bulk Select  Active:", bulkSelectActive);
+        }
         console.log("Bulk Select Mode Active:", bulkSelectActive);
 
         // if (bulkSelectActive) {
