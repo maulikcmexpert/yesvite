@@ -862,7 +862,7 @@ $(document).ready(function () {
 
             const photoCard = element.closest(".photo-card-photos-wrp");
             photoCard.find(".selected-photo-btn").show();
-            photoCard.find(".form-check-input").prop("checked", true);
+            photoCard.find(".selected_image").prop("checked", true);
 
 
             toggleBulkSelectWrapper();
@@ -942,10 +942,8 @@ $(document).ready(function () {
 
             if ($(this).is(":checked")) {
                 photoCard.find(".selected-photo-btn").show();
-                photoCard.find(".selected-photo-btn").addClass('select_download_img');
             } else {
                 photoCard.find(".selected-photo-btn").hide();
-                photoCard.find(".selected-photo-btn").removeClass('select_download_img');
 
 
             }
