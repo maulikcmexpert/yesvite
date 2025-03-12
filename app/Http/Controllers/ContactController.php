@@ -486,7 +486,7 @@ class ContactController extends Controller
             }
 
             if ($email != "") {
-                $existingContact = contact_sync::where('email', $email)->first();
+                $existingContact = contact_sync::where(['email'=> $email,'contact_id'=>$user->id])->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
