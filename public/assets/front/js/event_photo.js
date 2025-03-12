@@ -1096,6 +1096,11 @@ $(document).ready(function () {
             $("#detail-photo-modal").modal("hide");
             return;
         }
+        if (isLongPress) {
+            e.preventDefault();
+            $("#detail-photo-modal").modal("hide");
+            return;
+        }
         $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
