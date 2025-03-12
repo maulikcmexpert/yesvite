@@ -276,6 +276,7 @@ $(document).ready(function () {
                 console.log("AJAX error: " + error);
             },
         });
+
     }
     var current_step = $("#current_step").val();
     var event_id = $("#event_id").val();
