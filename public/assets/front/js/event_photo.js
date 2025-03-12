@@ -879,14 +879,17 @@ $(document).ready(function () {
             const bulkDeleteBtn = $(".select_bulk_btn"); // Div for delete option
             console.log('selectded',selectedCount);
 
+            console.log(selectedCount);
+            console.log(selected_bulk_image);
+
             if (selectedCount >= 2) {
 
-                alert();
+                // alert();
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
-                bulkSelectWrapper
-                    .find(".phototab-add-new-photos-img p")
-                    .text(`${selectedCount} Photos Selected`);
-                    bulkDeleteBtn.addClass("d-none");
+                // bulkSelectWrapper
+                //     .find(".phototab-add-new-photos-img p")
+                //     .text(`${selectedCount} Photos Selected`);
+                //     bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
 
                 bulkSelectWrapper.addClass("d-none");
