@@ -1090,7 +1090,7 @@ $(document).ready(function () {
             });
         });
 
-    $(document).on("click", ".open_photo_model", function () {
+    $(document).on("click", ".open_photo_model", function (e) {
 
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
