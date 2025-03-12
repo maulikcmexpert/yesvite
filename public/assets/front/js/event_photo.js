@@ -1088,7 +1088,7 @@ $(document).ready(function () {
         console.log("Mouse up or leave detected");
         if (bulkSelectActive) {
             e.preventDefault();
-
+            $("#detail-photo-modal").modal("hide");
             return;
         }
         $("#detail-photo-modal").modal("show");
