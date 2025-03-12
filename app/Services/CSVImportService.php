@@ -22,6 +22,7 @@ class CSVImportService
 
         $updatedContacts=[];
         $newContacts=[];
+
         $newContactsCount = 0;
 
         while (($row = fgetcsv($file)) !== false) {
@@ -30,6 +31,9 @@ class CSVImportService
             $data['isAppUser'] =  '0';
             $data['visible'] =  '0';
             $data['contact_id'] =  $parent_userid;
+
+            $isNewContact = false; // Flag to count only once per row
+
             // $user_exist = contact_sync::where('email',$data['email'])
             // ->orWhere('phone', $data['phone'])
             // ->first();
@@ -68,6 +72,8 @@ class CSVImportService
 
                     $newContact->sync_id = $newContact->id;
                     $newContacts[] = $newContact;
+                    $isNewContact = true; // Mark row as new
+
                 }
             }
 
@@ -106,8 +112,12 @@ class CSVImportService
 
                     $newContact->sync_id = $newContact->id;
                     $newContacts[] = $newContact;
+
+                    $isNewContact = true; // Mark row as new
+
                 }
             }
+        
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
 
@@ -166,8 +176,10 @@ class CSVImportService
         }
 
         fclose($file);
-      
-        return count($newContacts);
+        if ($isNewContact) {
+            $newContactsCount++; // Count only once per row
+        }
+        return $newContactsCount;
 
         // $newCount = count($newContacts);
         // $updatedCount = count($updatedContacts);
