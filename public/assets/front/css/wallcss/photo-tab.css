@@ -568,6 +568,10 @@
     background: transparent !important;
 }
 
+#detail-photo-modal .posts-card-like-comment-right button img{
+    object-fit: contain !important;
+}
+
 
 /* ===Responsive=== */
 
