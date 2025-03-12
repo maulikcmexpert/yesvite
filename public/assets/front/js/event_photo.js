@@ -856,8 +856,7 @@ $(document).ready(function () {
     // Function to handle the long press action
     function handleLongPress(element) {
         console.log("Long press detected");
-        // $('#detail-photo-modal').hide();
-        // Show the button and check the checkbox
+
         const photoCard = element.closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
@@ -883,10 +882,6 @@ $(document).ready(function () {
             bulkSelectWrapper.addClass("d-none");
         }
 
-        // Remove the div if more than 1 image is selected
-        // if (selectedCount > 1) {
-        //     bulkSelectWrapper.addClass('d-none'); // Hide the div when more than 1 image is selected
-        // }
     }
     $(document).on("change", ".selected_image", function () {
         const photoCard = $(this).closest(".photo-card-photos-wrp");
