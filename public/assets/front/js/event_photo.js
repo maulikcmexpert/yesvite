@@ -882,14 +882,16 @@ $(document).ready(function () {
             if (selectedCount >= 2) {
 
 
-                bulkSelectWrapper.removeClass("d-none"); // Show the div
+                // bulkSelectWrapper.removeClass("d-none"); // Show the div
+                bulkSelectWrapper.css("display","block"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
                     .text(`${selectedCount} Photos Selected`);
                     bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
 
-                bulkSelectWrapper.addClass("d-none");
+                // bulkSelectWrapper.addClass("d-none");
+                bulkSelectWrapper.css("display","none"); // Show the div
                 bulkDeleteBtn.addClass("d-none");
 
             }
