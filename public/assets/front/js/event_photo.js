@@ -877,20 +877,24 @@ $(document).ready(function () {
                 ".selecte_delete_photos"
             );
             const bulkDeleteBtn = $(".select_bulk_btn"); // Div for delete option
-            console.log(selectedCount);
+            console.log('selectded',selectedCount);
 
             if (selectedCount >= 2) {
+                console.log(1);
+
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
                     .text(`${selectedCount} Photos Selected`);
                     bulkDeleteBtn.addClass("d-none"); // Update the count
             } else if (selectedCount <= 1) {
+                console.log(2);
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
 
             }
             if (selected_bulk_image >= 1) {
+                console.log(3);
                 bulkDeleteBtn.removeClass("d-none"); // Show the div
                 bulkDeleteBtn
                     .find(".bulk_delete_selected p")
@@ -1096,11 +1100,11 @@ $(document).ready(function () {
             $("#detail-photo-modal").modal("hide");
             return;
         }
-        if (isLongPress) {
-            e.preventDefault();
-            $("#detail-photo-modal").modal("hide");
-            return;
-        }
+            if (isLongPress) {
+                e.preventDefault();
+                $("#detail-photo-modal").modal("hide");
+                return;
+            }
         $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
