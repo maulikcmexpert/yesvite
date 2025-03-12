@@ -882,27 +882,27 @@ $(document).ready(function () {
             console.log(selectedCount);
             console.log(selected_bulk_image);
 
-            // if (selectedCount >= 2) {
+            if (selectedCount >= 2) {
 
-            //     console.log('downloads'+1);
-            //     bulkSelectWrapper.removeClass("d-none"); // Show the div
-            //     bulkSelectWrapper
-            //         .find(".phototab-add-new-photos-img p")
-            //         .text(`${selectedCount} Photos Selected`);
-            //         bulkDeleteBtn.addClass("d-none");
+                console.log('downloads'+1);
+                bulkSelectWrapper.removeClass("d-none"); // Show the div
+                bulkSelectWrapper
+                    .find(".phototab-add-new-photos-img p")
+                    .text(`${selectedCount} Photos Selected`);
+                    bulkDeleteBtn.addClass("d-none");
 
-            //         $('.add_new_photo_btn').addClass('d-none');
-            // } else if (selectedCount <= 1) {
-            //     console.log('downloads'+2);
+                    $('.add_new_photo_btn').addClass('d-none');
+            } else if (selectedCount <= 1) {
+                console.log('downloads'+2);
 
-            //     bulkSelectWrapper.addClass("d-none");
-            //     bulkDeleteBtn.addClass("d-none");
+                bulkSelectWrapper.addClass("d-none");
+                bulkDeleteBtn.addClass("d-none");
 
 
 
-            //     $('.add_new_photo_btn').removeClass('d-none');
+                $('.add_new_photo_btn').removeClass('d-none');
 
-            // }
+            }
 
             // if (selected_bulk_image >= 1) {
 
