@@ -1096,12 +1096,6 @@ $(document).ready(function () {
         console.log("Mouse up or leave detected");
         if (!bulkSelectActive) {
             $("#detail-photo-modal").modal("show");
-        } else {
-            // Reset bulk select if the user intended to open the modal
-            bulkSelectActive = false;
-            $(".selected_bulk_image").prop("checked", false);
-            $(".selected-bulk-btn").hide();
-            toggleBulkSelectWrapper();
         }
         const commentInput = $("#post_comment");
         commentInput.val("");
