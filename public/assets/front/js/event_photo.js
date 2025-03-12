@@ -1090,8 +1090,10 @@ $(document).ready(function () {
             });
         });
 
-    $(document).on("click", ".open_photo_model", function () {
-        if (bulkSelectActive) {
+    $(document).on("click", ".open_photo_model", function (e) {
+        if (!bulkSelectActive) {
+            e.preventDefault();
+            e.stopPropagation();
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
         const commentInput = $("#post_comment");
