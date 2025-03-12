@@ -919,12 +919,11 @@ $(document).ready(function () {
 
         bulkSelectActive = true; // Bulk selection mode ON
 
-        // Select all images
-        $(".selected_image").each(function () {
-            $(this).prop("checked", true).trigger("change");
-        });
+        const photoCard = e.closest(".photo-card-photos-wrp");
+        photoCard.find(".selected-photo-btn").show();
+        photoCard.find(".form-check-input").prop("checked", true);
 
-        $(".selected-photo-btn").show(); // Show UI for selected items
+
         toggleBulkSelectWrapper();
     });
 
