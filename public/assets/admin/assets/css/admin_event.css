@@ -1496,7 +1496,7 @@ table#userpostreport-table .report-description-td {
     width: auto !important;
 }
 
-table#userpostreport-table thead th[aria-label = "Report Time"]{
+table#userpostreport-table thead th[title = "Report Time"]{
     width: 100% !important;
     min-width: 100px !important;
 }
