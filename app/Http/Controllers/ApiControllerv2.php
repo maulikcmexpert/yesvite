@@ -9586,6 +9586,7 @@ class ApiControllerv2 extends Controller
             // }
 
             try {
+
                 $record = $request->file('post_recording');
 
                 // Generate a unique file name
@@ -9598,6 +9599,7 @@ class ApiControllerv2 extends Controller
                 $inputPath = public_path('storage/event_post_recording') . '/' . $recordingName;
                 $outputPath = public_path('storage/event_post_recording/new/') . '/' . pathinfo($recordingName . 'new_', PATHINFO_FILENAME) . '.wav';
 
+                dd($inputPath);
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
