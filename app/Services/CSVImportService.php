@@ -164,5 +164,16 @@ class CSVImportService
         }
 
         fclose($file);
+      
+        return count($newContacts) + count($updatedContacts);
+
+        // $newCount = count($newContacts);
+        // $updatedCount = count($updatedContacts);
+
+        // return [
+        //     'new_contacts' => $newCount,
+        //     'updated_contacts' => $updatedCount,
+        //     'total_imported' => $newCount + $updatedCount
+        // ];
     }
 }

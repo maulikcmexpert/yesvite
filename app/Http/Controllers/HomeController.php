@@ -470,12 +470,12 @@ class HomeController extends BaseController
             $filePath = $file->storeAs('temp', $file->getClientOriginalName());
     
             if (in_array($extension, ['csv', 'txt'])) {
-                $importService->import(storage_path('app/' . $filePath));
+                $data=$importService->import(storage_path('app/' . $filePath));
             } elseif (in_array($extension, ['xls', 'xlsx'])) {
                 $importExcelService->importExcel(storage_path('app/' . $filePath));
             }
-    
-            return redirect('contact')->with('msg', 'Contacts imported successfully.');
+         return redirect('contact')->with('msg', "$data contacts imported successfully.");
+
         }
     }
 
