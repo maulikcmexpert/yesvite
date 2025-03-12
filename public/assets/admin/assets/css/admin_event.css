@@ -1496,6 +1496,13 @@ table#userpostreport-table .report-description-td {
     width: auto !important;
 }
 
+table#userpostreport-table thead th[aria-label = "Report Time"]{
+    width: 100% !important;
+    min-width: 100px !important;
+}
+
+Report Time
+
 
 div:where(.swal2-icon) .swal2-icon-content{
     font-size: smaller !important;
