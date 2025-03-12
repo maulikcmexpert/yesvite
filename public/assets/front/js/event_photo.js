@@ -1094,7 +1094,11 @@ $(document).ready(function () {
 
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
-
+        if (bulkSelectActive) {
+            e.preventDefault();
+            console.log("Modal prevented due to bulk selection mode.");
+            return;
+        }
         const commentInput = $("#post_comment");
         commentInput.val("");
         if (!isLongPress) {
