@@ -876,7 +876,7 @@ $(document).ready(function () {
         const bulkSelectWrapper = $(
             ".selecte_delete_photos"
         );
-        const bulkDeleteBtn = $(".bulk_delete_selected"); // Div for delete option
+        const bulkDeleteBtn = $(".select_bulk_btn"); // Div for delete option
         console.log(selectedCount);
 
         if (selectedCount >= 2) {
