@@ -1283,6 +1283,10 @@ function formatFileSize(size) {
     }
 }
 
+$('#myModal').on('hidden.bs.modal', function () {
+    $('#email-error').remove();
+    $("label[for='email']").removeClass("floatingfocus");
+});
 function resetUploadState() {
     if (interval) {
         clearInterval(interval); // Stop the progress simulation
