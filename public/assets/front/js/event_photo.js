@@ -857,8 +857,9 @@ $(document).ready(function () {
         function handleLongPress(element) {
 
             console.log("Long press detected ");
-
-
+            alert(element);
+            bulkSelectActive = false;
+            console.log("Bulk Select :", bulkSelectActive);
 
             const photoCard = element.closest(".photo-card-photos-wrp");
             photoCard.find(".selected-photo-btn").show();
@@ -886,10 +887,10 @@ $(document).ready(function () {
 
                 console.log('downloads'+1);
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
-                bulkSelectWrapper
-                    .find(".phototab-add-new-photos-img p")
-                    .text(`${selectedCount} Photos Selected`);
-                    bulkDeleteBtn.addClass("d-none");
+                // bulkSelectWrapper
+                //     .find(".phototab-add-new-photos-img p")
+                //     .text(`${selectedCount} Photos Selected`);
+                //     bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
                 console.log('downloads'+2);
 
