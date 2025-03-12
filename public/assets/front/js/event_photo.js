@@ -910,11 +910,11 @@ $(document).ready(function () {
         }, longPressDelay);
     });
     $("#bulk_select").on("click", function (e) {
-        e.preventDefault();
-        console.log("Mouse down detected");
+
+        console.log("seleceted");
          bulkSelectActive = true;
 
-        // Start the timer for a long press
+
 
     });
 
