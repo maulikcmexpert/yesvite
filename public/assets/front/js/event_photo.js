@@ -902,6 +902,19 @@ $(document).ready(function () {
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
 
+    $(document).on("change", ".selected_bulk_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-bulk-btn").show();
+        } else {
+            photoCard.find(".selected-bulk-btn").hide();
+        }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
+
+
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
         e.preventDefault();
@@ -923,9 +936,9 @@ $(document).ready(function () {
         checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
 
         if (checkbox.prop("checked")) {
-            $(this).closest(".photo-card-photos-wrp").find(".selected-photo-btn").show();
+            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").show();
         } else {
-            $(this).closest(".photo-card-photos-wrp").find(".selected-photo-btn").hide();
+            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").hide();
         }
 
         toggleBulkSelectWrapper();
