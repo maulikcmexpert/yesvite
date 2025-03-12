@@ -931,11 +931,15 @@ $(document).ready(function () {
             bulkSelectActive = true;
             console.log("Bulk Select  Active:", bulkSelectActive);
         }
-        if (bulkSelectActive) {
-            bulkSelectActive = false;
-            console.log("Bulk Select  Active:", bulkSelectActive);
-        }
+        bulkSelectActive = !bulkSelectActive; // Toggle between true and false
         console.log("Bulk Select Mode Active:", bulkSelectActive);
+        if (bulkSelectActive) {
+            photoCard.find(".selected-photo-btn").show(); // Show selection UI
+            photoCard.find(".form-check-input").prop("checked", true); // Check the box
+        } else {
+            $(".selected-photo-btn").hide();
+            $(".form-check-input").prop("checked", false);
+        }
 
         // if (bulkSelectActive) {
         //     $.ajax({
