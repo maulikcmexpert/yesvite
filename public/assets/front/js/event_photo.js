@@ -1003,7 +1003,7 @@ $(document).ready(function () {
                 console.log(login_user);
                 console.log(post_user_id);
 
-                if(login_user==post_user_id){
+                if(login_user!=post_user_id){
                     toastr.success('You can bulk delete your own photos only');
                     return;
                 }
