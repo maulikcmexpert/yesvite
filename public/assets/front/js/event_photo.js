@@ -1078,6 +1078,7 @@ $(document).ready(function () {
 
                     $(".selected_bulk_image:checked").each(function () {
                         $(this).closest(".photo-card-photos-wrp").remove();
+                        $(this).closest(".delete_post_container").remove();
                     });
 
                     toastr.success("Selected posts deleted successfully.");
