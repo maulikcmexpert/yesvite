@@ -848,7 +848,129 @@ $(document).ready(function () {
     //     // Optionally, you can make an AJAX request here to update the server
     //     console.log('Heart button clicked');
     // });
+    const longPressDelay = 2000; // 3 seconds for long press
 
+    let pressTimer;
+    let isLongPress = false;
+    let bulkSelectActive = false;
+    // Function to handle the long press action
+    function handleLongPress(element) {
+
+        console.log("Long press detected ");
+        bulkSelectActive = true;
+        console.log("Bulk Select :", bulkSelectActive);
+
+        const photoCard = element.closest(".photo-card-photos-wrp");
+        photoCard.find(".selected-photo-btn").show();
+        photoCard.find(".form-check-input").prop("checked", true);
+
+
+        toggleBulkSelectWrapper();
+    }
+
+    // Function to toggle visibility of the bulk-select-photo-wrp
+    function toggleBulkSelectWrapper() {
+        const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
+        const bulkSelectWrapper = $(
+            ".phototab-add-new-photos-wrp.bulk-select-photo-wrp"
+        );
+        const bulkDeleteBtn = $(".bulk_delete_selected"); // Div for delete option
+        console.log(selectedCount);
+
+        if (selectedCount >= 2) {
+            bulkSelectWrapper.removeClass("d-none"); // Show the div
+            bulkSelectWrapper
+                .find(".phototab-add-new-photos-img p")
+                .text(`${selectedCount} Photos Selected`); // Update the count
+        } else if (selectedCount <= 1) {
+            bulkSelectWrapper.addClass("d-none");
+
+        }
+
+        if (bulkSelectActive) {
+            bulkSelectWrapper.removeClass("d-none");
+            bulkDeleteBtn.show();
+        } else {
+            bulkSelectWrapper.addClass("d-none"); // Hide bulk selection wrapper
+            bulkDeleteBtn.hide(); // Hide delete button
+        }
+
+
+    }
+    $(document).on("change", ".selected_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-photo-btn").show();
+        } else {
+            photoCard.find(".selected-photo-btn").hide();
+        }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
+
+    // Mouse down event
+    $(".img_click").on("mousedown", function (e) {
+        e.preventDefault();
+        console.log("Mouse down detected");
+        isLongPress = false;
+        const that = $(this);
+
+        // Start the timer for a long press
+        pressTimer = setTimeout(() => {
+            isLongPress = true; // Set the flag for a long press
+            handleLongPress(that); // Execute the long press action
+        }, longPressDelay);
+    });
+    $(".bulk_select").on("click", function (e) {
+        e.preventDefault();
+        const button = $(this);
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+        if (!bulkSelectActive) {
+            bulkSelectActive = true;
+            console.log("Bulk Select  Active:", bulkSelectActive);
+        }
+        if (bulkSelectActive) {
+            bulkSelectActive = false;
+            console.log("Bulk Select  Active:", bulkSelectActive);
+        }
+        console.log("Bulk Select Mode Active:", bulkSelectActive);
+
+        // if (bulkSelectActive) {
+        //     $.ajax({
+        //         url: base_url + "event_photo/deletePost", // Adjust base_url as necessary
+        //         method: "POST",
+        //         headers: {
+        //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+        //         },
+        //         contentType: "application/json", // Send as JSON
+        //         data: JSON.stringify({
+        //             event_id: eventId,
+        //             event_post_id: eventPostId,
+        //         }),
+        //         success: function (response) {
+        //             if (response.success) {
+        //                 // Remove the deleted post from the DOM
+        //                 button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
+        //                 // setTimeout(function () {
+        //                 //     location.reload();
+        //                 // }, 2000);
+        //                 toastr.success("Event Post Deleted Successfully");
+        //             } else {
+        //                 toastr.error("Event Post  Not Deleted");
+        //             }
+        //         },
+        //         error: function (xhr) {
+        //             console.error(xhr.responseText);
+        //             alert("An error occurred. Please try again.");
+        //         },
+        //     });
+        // }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+
+    });
 
     // On checkbox change event, toggle the visibility of the bulk select wrapper
     $(".form-check-input").on("change", function () {
