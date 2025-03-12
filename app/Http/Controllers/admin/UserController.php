@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\contact_sync;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
@@ -434,8 +435,13 @@ class UserController extends Controller
     
         $user = User::find($user_id);
     
+        
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
+        }
+        $contact_sync = contact_sync::where('contact_id', $user_id);
+        if ($contact_sync->exists()) {
+            $contact_sync->delete();
         }
     
         $user->delete();
