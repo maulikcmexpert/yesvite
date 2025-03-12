@@ -945,6 +945,7 @@ $(document).ready(function () {
             }, longPressDelay);
         });
 
+
         $(document).on("click", ".img_click", function (e) {
             if (bulkSelectActive) {
                 e.preventDefault(); // Stop default modal behavior
