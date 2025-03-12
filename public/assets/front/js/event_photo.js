@@ -874,6 +874,7 @@ $(document).ready(function () {
         const bulkSelectWrapper = $(
             ".phototab-add-new-photos-wrp.bulk-select-photo-wrp"
         );
+        const bulkDeleteBtn = $(".bulk_delete_selected"); // Div for delete option
         console.log(selectedCount);
 
         if (selectedCount >= 2) {
@@ -884,6 +885,14 @@ $(document).ready(function () {
         } else if (selectedCount <= 1) {
             bulkSelectWrapper.addClass("d-none");
 
+        }
+
+        if (bulkSelectActive) {
+            bulkSelectWrapper.removeClass("d-none");
+            bulkDeleteBtn.show();
+        } else {
+            bulkSelectWrapper.addClass("d-none"); // Hide bulk selection wrapper
+            bulkDeleteBtn.hide(); // Hide delete button
         }
 
 
