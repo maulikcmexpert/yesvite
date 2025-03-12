@@ -894,7 +894,7 @@ $(document).ready(function () {
                 .find(".bulk_delete_selected p")
                 .text(`${selected_bulk_image} Photos Selected`); // Update the count
 
-        } else if (selectedCount <= 1) {
+        } else if (selected_bulk_image <= 1) {
             bulkDeleteBtn.addClass("d-none");
 
         }
