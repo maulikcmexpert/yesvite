@@ -553,7 +553,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="phototab-add-new-photos-wrp  selecte_delete_photos d-none">
+                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp  selecte_delete_photos d-none">
                                         <div class="phototab-add-new-photos-img">
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
