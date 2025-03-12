@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
   <h1 class="m-0 ProductTitle">{{$title}}</h1>
   <!-- <h1>Category List</h1> -->
   <div class="content-header">
@@ -30,6 +29,7 @@
 
       <tr>
         <th>No</th>
+        <th>Created By</th>
         <th>Category Name</th>
         <th>SubCategory Name</th>
         <th>Image</th>
