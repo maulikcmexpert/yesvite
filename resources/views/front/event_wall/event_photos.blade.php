@@ -290,7 +290,7 @@
                                                                         </svg> Bulk select </button></li>
                                                                         @endif
                                                                     <li><button
-                                                                            class="dropdown-item download_img_single"><svg
+                                                                            class="dropdown-item download_img_single" data-src="{{ @$photo['mediaData'][0]['post_media'] }}"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path

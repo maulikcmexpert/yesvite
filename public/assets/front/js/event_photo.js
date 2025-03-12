@@ -1076,7 +1076,7 @@ $(document).ready(function () {
         });
         $(document).on("click", ".download_img_single", function () {
             // Find the image source stored in the data attribute
-            const imgSrc = $(".downloadImg").data("img-src");
+            const imgSrc = $(this).attr("data-src");
             console.log(imgSrc);
 
             if (imgSrc) {
