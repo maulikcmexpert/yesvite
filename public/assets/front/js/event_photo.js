@@ -871,6 +871,7 @@ $(document).ready(function () {
     // Function to toggle visibility of the bulk-select-photo-wrp
     function toggleBulkSelectWrapper() {
         const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
+        const selected_bulk_image = $(".selected_bulk_image:checked").length;
         const bulkSelectWrapper = $(
             ".selecte_delete_photos"
         );
@@ -886,6 +887,13 @@ $(document).ready(function () {
             bulkSelectWrapper.addClass("d-none");
 
         }
+        if (selected_bulk_image >=1) {
+            bulkDeleteBtn.removeClass("d-none"); // Show the div
+            bulkDeleteBtn
+                .find(".bulk_delete_selected p")
+                .text(`${selected_bulk_image} Photos Selected`); // Update the count
+
+            }
 
 
 
@@ -961,6 +969,7 @@ $(document).ready(function () {
         if (bulkSelectActive) {
             photoCard.find(".selected-photo-btn").show(); // Show selection UI
             photoCard.find(".form-check-input").prop("checked", true); // Check the box
+
         } else {
             $(".selected-photo-btn").hide();
             $(".form-check-input").prop("checked", false);
