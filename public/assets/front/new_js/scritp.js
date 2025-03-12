@@ -348,7 +348,6 @@ $(".back-btn").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
-
 $(document).on("change", ".fileInputtype", function (event) {
     handleFiles(event.target.files, event.target);
 });
@@ -363,6 +362,7 @@ function handleFiles(files, currentFileInput) {
         uploadHeadButton.classList.remove("d-none");
     }
 
+    // Ensure proper column adjustment
     if (imagePreview.children.length + files.length > 1) {
         Array.from(imagePreview.children).forEach((previewItem) => {
             previewItem.classList.remove("col-12");
@@ -377,7 +377,7 @@ function handleFiles(files, currentFileInput) {
             previewDiv.classList.add(imagePreview.children.length === 0 ? "col-12" : "col-6");
             previewDiv.style.position = "relative";
 
-            // Create the delete icon
+            // Create delete icon
             const deleteIcon = document.createElement("span");
             deleteIcon.innerHTML = `
             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -403,14 +403,14 @@ function handleFiles(files, currentFileInput) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
 
-                    // Clear the value of the current file input
+                    // Clear file input value
                     currentFileInput.value = "";
                 }
             });
 
             previewDiv.appendChild(deleteIcon);
 
-            // Display image or video based on file type
+            // Display image or video
             if (file.type.startsWith("image/")) {
                 const img = document.createElement("img");
                 img.src = e.target.result;
@@ -451,20 +451,18 @@ if (dropZone) {
         const fileInput = document.querySelector(".fileInputtype");
 
         if (files.length > 0) {
-            // Append new files to file input
+            // Retain previous files and add new ones
             const dataTransfer = new DataTransfer();
 
-            // Retain previously selected files
             if (fileInput.files.length > 0) {
                 Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
             }
 
-            // Add new dropped files
             files.forEach((file) => dataTransfer.items.add(file));
 
             fileInput.files = dataTransfer.files;
 
-            // Trigger change event manually
+            // Trigger change event
             $(fileInput).trigger("change");
         }
     });
