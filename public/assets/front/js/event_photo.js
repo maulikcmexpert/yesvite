@@ -1077,8 +1077,8 @@ $(document).ready(function () {
                 if (response.success) {
 
                     $(".selected_bulk_image:checked").each(function () {
-                        $(this).closest(".photo-card-photos-wrp").remove();
-                        $(".bulk_select").closest(".delete_post_container").remove();
+                        $(this).closest(".delete_post_container").remove();
+
                     });
 
                     toastr.success("Selected posts deleted successfully.");
