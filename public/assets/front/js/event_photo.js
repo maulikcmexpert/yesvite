@@ -931,6 +931,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".img_click", function (e) {
         e.stopPropagation();
+        e.preventDefault();
         if (!bulkSelectActive) {
             return; }
 
