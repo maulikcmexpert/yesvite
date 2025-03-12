@@ -942,8 +942,11 @@ $(document).ready(function () {
 
             if ($(this).is(":checked")) {
                 photoCard.find(".selected-photo-btn").show();
+                photoCard.find(".selected-photo-btn").addClass('select_download_img');
             } else {
                 photoCard.find(".selected-photo-btn").hide();
+                photoCard.find(".selected-photo-btn").removeClass('select_download_img');
+
 
             }
 
