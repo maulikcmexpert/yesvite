@@ -1499,12 +1499,10 @@ table#userpostreport-table .report-description-td {
 table#userpostreport-table thead th[title = "Report Time"]{
     width: 100% !important;
     min-width: 100px !important;
-    max-width: 100px !important;
 }
 table#userchatreport-table thead th[title = "Report Time"]{
     width: 100% !important;
-    min-width: 100px !important;
-    max-width: 100px !important;
+    min-width: 90px !important;
 }
 
 
