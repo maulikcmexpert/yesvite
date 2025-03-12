@@ -389,6 +389,7 @@ class UserController extends Controller
     {
         try {
             DB::beginTransaction();
+            dd($request);
             $requireNewPassword = $request->has('require_new_password') ? true : false;
             $user_id = decrypt($id);
             $update_password = User::where('id', $user_id)->first();
