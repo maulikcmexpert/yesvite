@@ -983,14 +983,6 @@ $(document).ready(function () {
 
 
             console.log("Bulk Select Mode Active:", bulkSelectActive);
-            if (bulkSelectActive) {
-                photoCard.find(".selected-photo-btn").show(); // Show selection UI
-                photoCard.find(".form-check-input").prop("checked", true); // Check the box
-
-            } else {
-                $(".selected-photo-btn").hide();
-                $(".form-check-input").prop("checked", false);
-            }
 
 
 
