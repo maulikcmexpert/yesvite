@@ -872,7 +872,7 @@ $(document).ready(function () {
     function toggleBulkSelectWrapper() {
         const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
         const bulkSelectWrapper = $(
-            ".phototab-add-new-photos-wrp.bulk-select-photo-wrp"
+            ".selecte_delete_photos"
         );
         const bulkDeleteBtn = $(".bulk_delete_selected"); // Div for delete option
         console.log(selectedCount);
@@ -887,13 +887,6 @@ $(document).ready(function () {
 
         }
 
-        if (bulkSelectActive) {
-            bulkSelectWrapper.removeClass("d-none");
-            bulkDeleteBtn.show();
-        } else {
-            bulkSelectWrapper.addClass("d-none"); // Hide bulk selection wrapper
-            bulkDeleteBtn.hide(); // Hide delete button
-        }
 
 
     }
@@ -909,6 +902,19 @@ $(document).ready(function () {
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
 
+    $(document).on("change", ".selected_bulk_image", function () {
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
+
+        if ($(this).is(":checked")) {
+            photoCard.find(".selected-bulk-btn").show();
+        } else {
+            photoCard.find(".selected-bulk-btn").hide();
+        }
+
+        toggleBulkSelectWrapper(); // Update bulk selection UI
+    });
+
+
     // Mouse down event
     $(".img_click").on("mousedown", function (e) {
         e.preventDefault();
@@ -922,16 +928,32 @@ $(document).ready(function () {
             handleLongPress(that); // Execute the long press action
         }, longPressDelay);
     });
+
+    $(document).on("click", ".img_click", function (e) {
+
+
+        const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
+        checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
+
+        if (checkbox.prop("checked")) {
+            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").show();
+        } else {
+            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").hide();
+        }
+
+        toggleBulkSelectWrapper();
+    });
+
     $(".bulk_select").on("click", function (e) {
         e.preventDefault();
         const button = $(this);
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
-        if (!bulkSelectActive) {
+
             bulkSelectActive = true;
-            console.log("Bulk Select  Active:", bulkSelectActive);
-        }
-        bulkSelectActive = !bulkSelectActive; // Toggle between true and false
+
+
+
         console.log("Bulk Select Mode Active:", bulkSelectActive);
         if (bulkSelectActive) {
             photoCard.find(".selected-photo-btn").show(); // Show selection UI
@@ -1019,6 +1041,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".open_photo_model", function () {
+
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
         const commentInput = $("#post_comment");

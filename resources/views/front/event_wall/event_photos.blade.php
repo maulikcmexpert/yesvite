@@ -492,6 +492,11 @@
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
                                                         </button>
+                                                        <button class="selected-bulk-btn" style="display:none;">
+                                                            <input class="form-check-input selected_bulk_image"
+                                                                type="checkbox" value="" id="flexCheckDefault"
+                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
+                                                        </button>
                                                     </div>
 
 
@@ -547,7 +552,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp d-none">
+                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp  selecte_delete_photos d-none">
                                         <div class="phototab-add-new-photos-img">
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
@@ -561,7 +566,7 @@
                                             </svg> Download</button>
                                     </div>
 
-                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp d-none">
+                                    <div class="phototab-add-new-photos-wrp bulk-select-photo-wrp  d-none">
                                         <div class="phototab-add-new-photos-img bulk_delete_selected" >
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
