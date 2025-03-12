@@ -871,7 +871,7 @@ class EventPhotoController extends BaseController
                 'reactionList' => $reactions,
                 'total_likes' => $value->event_post_reaction_count,
                 'total_comments' => $value->event_post_comment_count,
-                'encrypted_id'=> encrypt( $value->user->id)
+                'encrypted_id' => encrypt($value->user->id)
             ];
 
             if (!empty($value->post_image)) {
@@ -1190,6 +1190,40 @@ class EventPhotoController extends BaseController
             ]);
         }
     }
+    public function Bulk_deletePost(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+
+        // Retrieve array of event_post_ids
+        $postIds = $request->input('posts');
+
+        if (!is_array($postIds) || empty($postIds)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No posts selected for deletion.'
+            ]);
+        }
+
+        // Extract event_post_id values
+        $postIdsArray = array_column($postIds, 'event_post_id');
+
+        // Delete posts in bulk
+        $deleted = EventPost::whereIn('id', $postIdsArray)->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Selected posts deleted successfully!',
+                'deleted_count' => $deleted
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No matching posts found or could not be deleted.'
+            ]);
+        }
+    }
+
 
     public function userPostComment(Request $request)
 

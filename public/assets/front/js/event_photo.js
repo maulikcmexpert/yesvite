@@ -888,13 +888,13 @@ $(document).ready(function () {
             bulkSelectWrapper.addClass("d-none");
 
         }
-        if (selected_bulk_image >=1) {
+        if (selected_bulk_image >= 1) {
             bulkDeleteBtn.removeClass("d-none"); // Show the div
             bulkDeleteBtn
                 .find(".bulk_delete_selected p")
                 .text(`${selected_bulk_image} Photos Selected`); // Update the count
 
-            }
+        }
 
 
 
@@ -942,7 +942,8 @@ $(document).ready(function () {
 
         e.preventDefault();
         if (!bulkSelectActive) {
-            return; }
+            return;
+        }
 
         const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
         checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
@@ -962,7 +963,7 @@ $(document).ready(function () {
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
 
-            bulkSelectActive = true;
+        bulkSelectActive = true;
 
 
 
@@ -1051,6 +1052,44 @@ $(document).ready(function () {
         } else {
             alert("Image source not found.");
         }
+    });
+    $(document).on("click", ".bulk_delete", function () {
+        const selectedPosts = $(".selected_bulk_image:checked").map(function () {
+            return { event_post_id: $(this).data("event-post-id") };
+        }).get();
+
+        if (selectedPosts.length === 0) {
+            toastr.error("No posts selected for deletion.");
+            return;
+        }
+
+        $.ajax({
+            url: base_url + "event_photo/Bulk_deletePost", // Adjust base_url as necessary
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            contentType: "application/json",
+            data: JSON.stringify({
+                posts: selectedPosts, // Send array of event_post_id objects
+            }),
+            success: function (response) {
+                if (response.success) {
+
+                    $(".selected_bulk_image:checked").each(function () {
+                        $(this).closest(".photo-card-photos-wrp").remove();
+                    });
+
+                    toastr.success("Selected posts deleted successfully.");
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
+            },
+        });
     });
 
     $(document).on("click", ".open_photo_model", function () {
@@ -2181,76 +2220,76 @@ $(document).ready(function () {
 
 
 
-            var selectedReportType = ""; // Store selected report type
+    var selectedReportType = ""; // Store selected report type
 
-            // Open modal when clicking the report button
-            $(".reportbtn").on("click", function () {
-                var eventId = $(this).data("event-id");
-                var postId = $(this).data("event-post-id");
+    // Open modal when clicking the report button
+    $(".reportbtn").on("click", function () {
+        var eventId = $(this).data("event-id");
+        var postId = $(this).data("event-post-id");
 
-                // Store event ID and post ID in the modal's data attributes
-                $("#submitreport").data("event-id", eventId);
-                $("#submitreport").data("post-id", postId);
+        // Store event ID and post ID in the modal's data attributes
+        $("#submitreport").data("event-id", eventId);
+        $("#submitreport").data("post-id", postId);
 
-                // Reset previous selections
-                $(".report-option").removeClass("active");
-                selectedReportType = "";
-                $("#violation-textbox").val("");
-                $(".btn-submit-report").prop("disabled", true);
-                $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+        // Reset previous selections
+        $(".report-option").removeClass("active");
+        selectedReportType = "";
+        $("#violation-textbox").val("");
+        $(".btn-submit-report").prop("disabled", true);
+        $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
-                // Show the modal
-                $("#submitreport").modal("show");
-            });
+        // Show the modal
+        $("#submitreport").modal("show");
+    });
 
-            // Handle report type selection
-            $(".report-option").on("click", function () {
-                $(".report-option").removeClass("active");
-                $(this).addClass("active");
-                selectedReportType = $(this).data("report-type");
+    // Handle report type selection
+    $(".report-option").on("click", function () {
+        $(".report-option").removeClass("active");
+        $(this).addClass("active");
+        selectedReportType = $(this).data("report-type");
 
-                // Enable submit button when a report type is selected
-                $(".btn-submit-report").prop("disabled", false);
-            });
+        // Enable submit button when a report type is selected
+        $(".btn-submit-report").prop("disabled", false);
+    });
 
-            // Submit report via AJAX
-            $(".btn-submit-report").on("click", function () {
-                var eventId = $("#submitreport").data("event-id");
-                var postId = $("#submitreport").data("post-id");
-                var violationDetails = $("#violation-textbox").val();
-                var media_id = $("#media_id").val();
-                if (!selectedReportType) {
-                    toastr.error("Please select a report type.");
-                    return;
+    // Submit report via AJAX
+    $(".btn-submit-report").on("click", function () {
+        var eventId = $("#submitreport").data("event-id");
+        var postId = $("#submitreport").data("post-id");
+        var violationDetails = $("#violation-textbox").val();
+        var media_id = $("#media_id").val();
+        if (!selectedReportType) {
+            toastr.error("Please select a report type.");
+            return;
+        }
+
+        $.ajax({
+            url: base_url + "event_wall/postMediaReport", // Adjust endpoint
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                event_id: eventId,
+                event_post_id: postId,
+                report_type: selectedReportType,
+                report_description: violationDetails,
+                post_media_id: media_id
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    toastr.success(response.message);
+                    setTimeout(function () {
+                        $("#submitreport").modal("hide");
+                    }, 2000);
                 }
-
-                $.ajax({
-                    url: base_url + "event_wall/postMediaReport", // Adjust endpoint
-                    type: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    data: {
-                        event_id: eventId,
-                        event_post_id: postId,
-                        report_type: selectedReportType,
-                        report_description: violationDetails,
-                        post_media_id:media_id
-                    },
-                    success: function (response) {
-                        if (response.status === 1) {
-                            toastr.success(response.message);
-                            setTimeout(function () {
-                                $("#submitreport").modal("hide");
-                            }, 2000);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error:", error);
-                        // alert("Failed to submit the report. Please try again later.");
-                    },
-                });
-            });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                // alert("Failed to submit the report. Please try again later.");
+            },
+        });
+    });
 
 
 
