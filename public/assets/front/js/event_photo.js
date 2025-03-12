@@ -967,7 +967,7 @@ $(document).ready(function () {
                 toggleBulkSelectWrapper();
             } else {
                 // Allow modal to open if bulk selection is NOT active
-                $("#detail-photo-modal").modal("show"); // Manually trigger modal
+                return true;
             }
         });
 
@@ -983,14 +983,6 @@ $(document).ready(function () {
 
 
             console.log("Bulk Select Mode Active:", bulkSelectActive);
-            if (bulkSelectActive) {
-                photoCard.find(".selected-photo-btn").show(); // Show selection UI
-                photoCard.find(".form-check-input").prop("checked", true); // Check the box
-
-            } else {
-                $(".selected-photo-btn").hide();
-                $(".form-check-input").prop("checked", false);
-            }
 
 
 
@@ -1090,19 +1082,16 @@ $(document).ready(function () {
             });
         });
 
-    $(document).on("click", ".open_photo_model", function () {
+    $(document).on("click", ".open_photo_model", function (e) {
 
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
-        if (!bulkSelectActive) {
-            $("#detail-photo-modal").modal("show");
-        } else {
-            // Reset bulk select if the user intended to open the modal
-            bulkSelectActive = false;
-            $(".selected_bulk_image").prop("checked", false);
-            $(".selected-bulk-btn").hide();
-            toggleBulkSelectWrapper();
+        if (bulkSelectActive) {
+            e.preventDefault();
+            $("#detail-photo-modal").modal("hide");
+            return;
         }
+        $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
         if (!isLongPress) {

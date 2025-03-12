@@ -396,8 +396,7 @@
 
                                                     <div class="photo-card-photos-wrp imagePress">
                                                         <div class="photo-card-photos-main-img open_photo_model img_click downloadImg "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#detail-photo-modal"
+
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
                                                             data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
