@@ -852,11 +852,12 @@ $(document).ready(function () {
 
     let pressTimer;
     let isLongPress = false;
-
+    let bulkSelectActive = false;
     // Function to handle the long press action
     function handleLongPress(element) {
-        console.log("Long press detected");
 
+        console.log("Long press detected - Bulk Select Mode Activated");
+        bulkSelectActive = true; // Enable bulk selection mode
         const photoCard = element.closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
@@ -907,6 +908,14 @@ $(document).ready(function () {
             isLongPress = true; // Set the flag for a long press
             handleLongPress(that); // Execute the long press action
         }, longPressDelay);
+    });
+    $("#bulk_select").on("click", function (e) {
+        e.preventDefault();
+        console.log("Mouse down detected");
+         bulkSelectActive = true;
+
+        // Start the timer for a long press
+
     });
 
     // On checkbox change event, toggle the visibility of the bulk select wrapper

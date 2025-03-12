@@ -254,7 +254,7 @@
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
 
-                                                                    <li><button class="dropdown-item" id="delete_post"
+                                                                    <li><button class="dropdown-item" id="bulk_select"
                                                                         data-event-post-id="{{ $photo['id'] }}"
                                                                         data-event-id="{{ $event }}">
                                                                         <svg viewBox="0 0 20 20" fill="none"
