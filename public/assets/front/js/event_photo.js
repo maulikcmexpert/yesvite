@@ -909,6 +909,7 @@ $(document).ready(function () {
             photoCard.find(".selected-photo-btn").show();
         } else {
             photoCard.find(".selected-photo-btn").hide();
+
         }
 
         toggleBulkSelectWrapper(); // Update bulk selection UI
@@ -921,8 +922,11 @@ $(document).ready(function () {
             photoCard.find(".selected-bulk-btn").show();
         } else {
             photoCard.find(".selected-bulk-btn").hide();
-        }
 
+        }
+        if ($(".selected_bulk_image:checked").length === 0) {
+            bulkSelectActive = false;
+        }
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
 
@@ -957,6 +961,7 @@ $(document).ready(function () {
             $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").show();
         } else {
             $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").hide();
+            bulkSelectActive = false;
         }
 
         toggleBulkSelectWrapper();
@@ -1063,8 +1068,11 @@ $(document).ready(function () {
                         $(".bulk_delete_id_" + postId).remove();
 
                     });
-                    bulkSelectActive = false;
-                    toggleBulkSelectWrapper(); // Call function to update UI
+                   // Reset bulk selection mode
+                bulkSelectActive = false;
+                $(".selected_bulk_image").prop("checked", false);
+                $(".selected-bulk-btn").hide();
+                toggleBulkSelectWrapper(); // Update U
                     toastr.success("Selected posts deleted successfully.");
                 } else {
                     toastr.error(response.message);
