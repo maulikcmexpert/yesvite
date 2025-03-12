@@ -883,9 +883,11 @@ $(document).ready(function () {
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
-                    .text(`${selectedCount} Photos Selected`); // Update the count
+                    .text(`${selectedCount} Photos Selected`);
+                    bulkDeleteBtn.addClass("d-none"); // Update the count
             } else if (selectedCount <= 1) {
                 bulkSelectWrapper.addClass("d-none");
+                bulkDeleteBtn.addClass("d-none");
 
             }
             if (selected_bulk_image >= 1) {
@@ -893,9 +895,12 @@ $(document).ready(function () {
                 bulkDeleteBtn
                     .find(".bulk_delete_selected p")
                     .text(`${selected_bulk_image} Photos Selected`); // Update the count
+                    bulkSelectWrapper.addClass("d-none");
 
             } else if (selected_bulk_image <= 1) {
                 bulkDeleteBtn.addClass("d-none");
+                bulkSelectWrapper.addClass("d-none");
+
 
             }
 
