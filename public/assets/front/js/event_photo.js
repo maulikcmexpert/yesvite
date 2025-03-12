@@ -1083,6 +1083,11 @@ $(document).ready(function () {
 
                     });
 
+                    response.post_id.forEach(function (postId) {
+                        $(".bulk_delete_id_"+postId).remove();
+
+                    });
+
                     toastr.success("Selected posts deleted successfully.");
                 } else {
                     toastr.error(response.message);
