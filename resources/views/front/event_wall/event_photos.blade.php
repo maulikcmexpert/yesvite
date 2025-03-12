@@ -253,7 +253,7 @@
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-                                                                    @if ($photo['user_id'] != $login_user_id)
+                                                                    @if ($photo['user_id'] == $login_user_id)
                                                                     <li><button class="dropdown-item bulk_select" id="bulk_select"
                                                                         data-event-post-id="{{ $photo['id'] }}"
                                                                         data-event-id="{{ $event }}">
