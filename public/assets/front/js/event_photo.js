@@ -880,21 +880,20 @@ $(document).ready(function () {
             console.log('selectded',selectedCount);
 
             if (selectedCount >= 2) {
-                console.log(1);
+
 
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
                     .text(`${selectedCount} Photos Selected`);
-                    bulkDeleteBtn.addClass("d-none"); // Update the count
+                    bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
-                console.log(2);
+
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
 
             }
             if (selected_bulk_image >= 1) {
-                console.log(3);
                 bulkDeleteBtn.removeClass("d-none"); // Show the div
                 bulkDeleteBtn
                     .find(".bulk_delete_selected p")
