@@ -918,6 +918,10 @@ $(document).ready(function () {
             //     bulkDeleteBtn.addClass("d-none");
 
             // }
+            if ($(".selected_bulk_image:checked").length === 0) {
+                $('.add_new_photo_btn').removeClass('d-none');
+                bulkDeleteBtn.addClass("d-none");
+            }
 
             if(selected_bulk_image!=0){
                 if (selected_bulk_image >= 1) {
