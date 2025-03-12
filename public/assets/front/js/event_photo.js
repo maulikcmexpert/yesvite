@@ -914,7 +914,7 @@ $(document).ready(function () {
                 bulkDeleteBtn
                     .find(".bulk_delete_selected p")
                     .text(`${selected_bulk_image} Photos Selected`); // Update the count
-                    bulkSelectWrapper.removeClass("d-none"); // Show the div
+                    bulkSelectWrapper.addClass("d-none"); // Show the div
 
 
             } else if (selected_bulk_image <= 1) {
