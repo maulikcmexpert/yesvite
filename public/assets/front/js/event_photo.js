@@ -927,7 +927,10 @@ $(document).ready(function () {
         const button = $(this);
         const eventId = button.data("event-id");
         const eventPostId = button.data("event-post-id");
-        bulkSelectActive = true;
+        if (!bulkSelectActive) {
+            bulkSelectActive = true;
+            console.log("Bulk Select  Active:", bulkSelectActive);
+        }
         console.log("Bulk Select Mode Active:", bulkSelectActive);
 
         // if (bulkSelectActive) {
