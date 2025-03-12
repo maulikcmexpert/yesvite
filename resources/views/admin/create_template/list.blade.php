@@ -1,8 +1,4 @@
 <div class="container-fluid">
-@php
-  $data=session()->get('admin');
-  dd($data['id']);
-@endphp
   <h1 class="m-0 ProductTitle">{{$title}}</h1>
   <!-- <h1>Category List</h1> -->
   <div class="content-header">

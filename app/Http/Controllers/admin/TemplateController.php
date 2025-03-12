@@ -128,6 +128,8 @@ class TemplateController extends Controller
             $textData = TextData::create([
                 'image' => $imageName,
             ]);
+            $creator_id=session()->get('admin');
+            $textData->creator_id=$creator_id['id'];
             $textData->filled_image = $filledImage;
             $textData->event_design_category_id = $request->event_design_category_id;
             $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
