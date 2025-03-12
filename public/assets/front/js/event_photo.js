@@ -916,12 +916,10 @@ $(document).ready(function () {
     $(".bulk_select").on("click", function (e) {
         e.preventDefault();
 
-        bulkSelectActive = true; // Bulk selection mode ON
+        bulkSelectActive = !bulkSelectActive;
         console.log("Bulk Select Mode Active:", bulkSelectActive);
 
-        const photoCard = $(this).closest(".photo-card-photos-wrp");
-        photoCard.find(".selected-photo-btn").show();
-        photoCard.find(".form-check-input").prop("checked", true);
+
 
 
 
