@@ -352,6 +352,7 @@ class AuthController extends Controller
                             $loginHistory->login_count = 1;
                             $loginHistory->save();
                         }
+                        // dd($user->isTemporary_password); 
                         if ($user->isTemporary_password == "1") {
                             return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
                         } else {
