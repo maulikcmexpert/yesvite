@@ -39,6 +39,9 @@ class TemplateController extends Controller
                     return $count++;
                 })
                 ->addColumn('created_by', function ($row) {
+                    return $row->admins->name;
+                })
+                ->addColumn('created_by_email', function ($row) {
                     return $row->admins->email;
                 })
                 ->addColumn('category_name', function ($row) {
@@ -77,7 +80,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number','created_by', 'category_name', 'subcategory_name', 'image', 'filled_image', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image', 'action'])
                 ->make(true);
         }
 

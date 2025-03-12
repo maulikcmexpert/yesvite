@@ -30,6 +30,7 @@
       <tr>
         <th>No</th>
         <th>Created By</th>
+        <th>Created By(email)</th>
         <th>Category Name</th>
         <th>SubCategory Name</th>
         <th>Image</th>
