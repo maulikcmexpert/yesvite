@@ -442,7 +442,7 @@
                                 if (output == true) {
                                     Swal.fire({
                                         title: "Deleted!",
-                                        text: "Your Reported Post has been deleted",
+                                        text: "User has been deleted",
                                         icon: "success"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
