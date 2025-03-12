@@ -881,6 +881,10 @@ $(document).ready(function () {
                 .text(`${selectedCount} Photos Selected`); // Update the count
         } else if (selectedCount <= 1) {
             bulkSelectWrapper.addClass("d-none");
+            bulkSelectActive = false; // Disa
+        }
+        if ($(".selected_image:checked").length === 0) {
+            bulkSelectActive = false;
         }
 
     }
@@ -910,12 +914,13 @@ $(document).ready(function () {
         }, longPressDelay);
     });
     $("#bulk_select").on("click", function (e) {
+        e.preventDefault();
+        console.log("Bulk Select Button Clicked - Bulk Select Mode Activated");
 
-        console.log("seleceted");
-         bulkSelectActive = true;
-
-
-
+        bulkSelectActive = true; // Enable bulk selection mode
+        $(".selected_image").prop("checked", true); // Check all images
+        $(".selected-photo-btn").show(); // Show selection UI
+        toggleBulkSelectWrapper();
     });
 
     // On checkbox change event, toggle the visibility of the bulk select wrapper
