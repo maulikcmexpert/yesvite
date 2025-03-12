@@ -268,9 +268,9 @@ $(document).ready(function () {
                 if (response.success) {
                     // Remove the deleted post from the DOM
                     button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
-                    // setTimeout(function () {
-                    //     location.reload();
-                    // }, 2000);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                     toastr.success("Event Post Deleted Successfully");
                 } else {
                     toastr.error("Event Post  Not Deleted");
