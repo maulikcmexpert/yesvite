@@ -348,6 +348,7 @@ $(".back-btn").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
+// File input change event
 $(document).on("change", ".fileInputtype", function (event) {
     handleFiles(event.target.files, event.target);
 });
@@ -362,7 +363,6 @@ function handleFiles(files, currentFileInput) {
         uploadHeadButton.classList.remove("d-none");
     }
 
-    // Ensure proper column adjustment
     if (imagePreview.children.length + files.length > 1) {
         Array.from(imagePreview.children).forEach((previewItem) => {
             previewItem.classList.remove("col-12");
@@ -398,13 +398,13 @@ function handleFiles(files, currentFileInput) {
             deleteIcon.addEventListener("click", function () {
                 imagePreview.removeChild(previewDiv);
 
-                // Check if there are any images left
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
 
-                    // Clear file input value
-                    currentFileInput.value = "";
+                    if (currentFileInput) {
+                        currentFileInput.value = "";
+                    }
                 }
             });
 
@@ -447,23 +447,10 @@ if (dropZone) {
         event.preventDefault();
         dropZone.classList.remove("dragging");
 
-        const files = Array.from(event.dataTransfer.files);
-        const fileInput = document.querySelector(".fileInputtype");
+        const files = event.dataTransfer.files;
 
         if (files.length > 0) {
-            // Retain previous files and add new ones
-            const dataTransfer = new DataTransfer();
-
-            if (fileInput.files.length > 0) {
-                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
-            }
-
-            files.forEach((file) => dataTransfer.items.add(file));
-
-            fileInput.files = dataTransfer.files;
-
-            // Trigger change event
-            $(fileInput).trigger("change");
+            handleFiles(files, null);
         }
     });
 }
