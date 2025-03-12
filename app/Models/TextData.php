@@ -30,4 +30,9 @@ class TextData extends Model
     {
         return $this->belongsTo(EventDesignCategory::class, 'event_design_category_id', 'id');
     }
+
+    public function admins()
+    {
+        return $this->hasMany(Admin::class,'creator_id','id');
+    }
 }

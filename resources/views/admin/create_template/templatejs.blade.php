@@ -44,6 +44,13 @@
 
                 {
 
+                    data: "created_by",
+
+                    name: "created_by"
+
+                },
+                {
+
                     data: "category_name",
 
                     name: "category_name"
