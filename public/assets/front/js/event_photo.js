@@ -857,8 +857,8 @@ $(document).ready(function () {
         function handleLongPress(element) {
 
             console.log("Long press detected ");
-            bulkSelectActive = true;
-            console.log("Bulk Select :", bulkSelectActive);
+
+
 
             const photoCard = element.closest(".photo-card-photos-wrp");
             photoCard.find(".selected-photo-btn").show();
