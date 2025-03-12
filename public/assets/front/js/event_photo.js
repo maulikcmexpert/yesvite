@@ -940,10 +940,12 @@ $(document).ready(function () {
 
     $(document).on("click", ".img_click", function (e) {
 
-        e.preventDefault();
         if (!bulkSelectActive) {
-            return;
+            return; // Allow default modal behavior if bulk selection is not active
         }
+
+        e.preventDefault();
+
 
         const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
         checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
@@ -977,36 +979,7 @@ $(document).ready(function () {
             $(".form-check-input").prop("checked", false);
         }
 
-        // if (bulkSelectActive) {
-        //     $.ajax({
-        //         url: base_url + "event_photo/deletePost", // Adjust base_url as necessary
-        //         method: "POST",
-        //         headers: {
-        //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
-        //         },
-        //         contentType: "application/json", // Send as JSON
-        //         data: JSON.stringify({
-        //             event_id: eventId,
-        //             event_post_id: eventPostId,
-        //         }),
-        //         success: function (response) {
-        //             if (response.success) {
-        //                 // Remove the deleted post from the DOM
-        //                 button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
-        //                 // setTimeout(function () {
-        //                 //     location.reload();
-        //                 // }, 2000);
-        //                 toastr.success("Event Post Deleted Successfully");
-        //             } else {
-        //                 toastr.error("Event Post  Not Deleted");
-        //             }
-        //         },
-        //         error: function (xhr) {
-        //             console.error(xhr.responseText);
-        //             alert("An error occurred. Please try again.");
-        //         },
-        //     });
-        // }
+
 
         toggleBulkSelectWrapper(); // Update bulk selection UI
 
@@ -1084,10 +1057,11 @@ $(document).ready(function () {
                     });
 
                     response.post_id.forEach(function (postId) {
-                        $(".bulk_delete_id_"+postId).remove();
+                        $(".bulk_delete_id_" + postId).remove();
 
                     });
-
+                    bulkSelectActive = false;
+                    toggleBulkSelectWrapper(); // Call function to update UI
                     toastr.success("Selected posts deleted successfully.");
                 } else {
                     toastr.error(response.message);
@@ -1101,9 +1075,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".open_photo_model", function () {
-if(bulkSelectActive){
-    return;
-}
+
         clearTimeout(pressTimer); // Clear the timer
         console.log("Mouse up or leave detected");
         const commentInput = $("#post_comment");
