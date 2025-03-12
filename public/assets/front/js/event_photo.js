@@ -913,7 +913,7 @@ $(document).ready(function () {
             handleLongPress(that); // Execute the long press action
         }, longPressDelay);
     });
-    $("#bulk_select").on("click", function (e) {
+    $(".bulk_select").on("click", function (e) {
         e.preventDefault();
 
         bulkSelectActive = true; // Bulk selection mode ON
