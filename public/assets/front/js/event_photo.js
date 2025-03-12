@@ -961,7 +961,7 @@ $(document).ready(function () {
         //     });
         // }
 
-
+        toggleBulkSelectWrapper(); // Update bulk selection UI
 
     });
 
