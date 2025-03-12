@@ -1521,6 +1521,12 @@ div:where(.swal2-icon) .swal2-icon-content{
     accent-color: var(--ButtonColor);
 }
 
+
+#userchatreport-table_wrapper.dataTables_wrapper{
+    overflow: hidden;
+    overflow-x: auto;
+}
+
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
         width: 690px;
