@@ -3,7 +3,13 @@ header{
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    z-index: 999999;
 }
+
+
 .header-wrp{
     display: flex;
     align-items: center;
