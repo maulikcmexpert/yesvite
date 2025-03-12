@@ -224,7 +224,7 @@
 
 #detail-photo-modal .modal-body {
     max-height: 550px;
-    padding-bottom: 20px !important;
+    padding-bottom: 50px !important;
 }
 
 
@@ -567,6 +567,7 @@
 #detail-photo-modal .swiper-wrapper{
     background: transparent !important;
 }
+
 
 /* ===Responsive=== */
 
