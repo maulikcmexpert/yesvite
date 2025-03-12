@@ -9603,7 +9603,6 @@ class ApiControllerv2 extends Controller
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
                 $audio = $ffmpeg->open($inputPath);
-                dd($audio);
 
                 // Set format to WAV
                 $format = new \FFMpeg\Format\Audio\Wav();
