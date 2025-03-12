@@ -1075,6 +1075,8 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.success) {
+                    console.log(response);
+
 
                     $(".selected_bulk_image:checked").each(function () {
                         $(this).closest(".delete_post_container").remove();
