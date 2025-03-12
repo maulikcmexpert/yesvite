@@ -289,6 +289,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_photo/event_post', [EventPhotoController::class, 'createEventPost'])->name('event_photo.eventPost');
     Route::post('event_photo/fetch-photo-details', [EventPhotoController::class, 'fetchPost']);
     Route::post('event_photo/deletePost', [EventPhotoController::class, 'deletePost']);
+    Route::post('event_photo/Bulk_deletePost', [EventPhotoController::class, 'Bulk_deletePost']);
     Route::post('event_photo/userPostComment', [EventPhotoController::class, 'userPostComment']);
     Route::post('event_photo/postControl', [EventPhotoController::class, 'postControl']);
 
