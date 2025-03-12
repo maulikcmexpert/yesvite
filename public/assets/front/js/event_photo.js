@@ -930,7 +930,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".img_click", function (e) {
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         if (!bulkSelectActive) {
             return; }
 
