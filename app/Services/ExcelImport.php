@@ -21,6 +21,8 @@ class ExcelImport {
         $updatedContacts = [];
         $newContacts = [];
 
+        $totalNewContacts = 0;
+
         if (!empty($rows[0])) {
             $header = array_shift($rows[0]);
 
@@ -29,6 +31,9 @@ class ExcelImport {
                 $data['isAppUser'] =  '0';
                 $data['visible'] =  '0';
                 $data['contact_id'] =  $parent_userid;
+
+                $isNewContactAdded = false; // Track if a new contact is created in this row
+
                 // $user_exist = contact_sync::where('email',$data['email'])
                 // ->orWhere('phone', $data['phone'])
                 // ->first();
@@ -67,6 +72,8 @@ class ExcelImport {
     
                         $newContact->sync_id = $newContact->id;
                         $newContacts[] = $newContact;
+                        $isNewContactAdded = true;
+
                     }
                 }
     
@@ -105,6 +112,9 @@ class ExcelImport {
     
                         $newContact->sync_id = $newContact->id;
                         $newContacts[] = $newContact;
+
+                        $isNewContactAdded = true;
+
                     }
                 }
                 DB::commit();
@@ -162,7 +172,12 @@ class ExcelImport {
                 // if($user_exist == null){
                 //     contact_sync::create($data);
                 // }
+                if ($isNewContactAdded) {
+                    $totalNewContacts++;
+                }
             }
+            return $totalNewContacts;
+
         }
     }
 }
