@@ -886,10 +886,10 @@ $(document).ready(function () {
 
                 console.log('downloads'+1);
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
-                // bulkSelectWrapper
-                //     .find(".phototab-add-new-photos-img p")
-                //     .text(`${selectedCount} Photos Selected`);
-                //     bulkDeleteBtn.addClass("d-none");
+                bulkSelectWrapper
+                    .find(".phototab-add-new-photos-img p")
+                    .text(`${selectedCount} Photos Selected`);
+                    bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
                 console.log('downloads'+2);
 
