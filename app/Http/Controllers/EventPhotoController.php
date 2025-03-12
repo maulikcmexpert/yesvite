@@ -1215,7 +1215,7 @@ class EventPhotoController extends BaseController
                 'success' => true,
                 'message' => 'Selected posts deleted successfully!',
                 'deleted_count' => $deleted,
-                'post_id'=>$postIds
+                'post_id'=>$postIdsArray
             ]);
         } else {
             return response()->json([
