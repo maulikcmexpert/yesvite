@@ -947,24 +947,29 @@ $(document).ready(function () {
 
     $(document).on("click", ".img_click", function (e) {
 
-        if (!bulkSelectActive) {
-            return; // Allow default modal behavior if bulk selection is not active
-        }
 
-        e.preventDefault();
+            if (bulkSelectActive) {
+                // Prevent modal from opening
+                e.preventDefault();
+
+                const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
+                checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
+
+                if (checkbox.prop("checked")) {
+                    $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").show();
+                } else {
+                    $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").hide();
+
+                    // Check if no checkboxes are selected, then disable bulk select mode
+                    if ($(".selected_bulk_image:checked").length === 0) {
+                        bulkSelectActive = false;
+                    }
+                }
+
+                toggleBulkSelectWrapper();
+            }
 
 
-        const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
-        checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
-
-        if (checkbox.prop("checked")) {
-            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").show();
-        } else {
-            $(this).closest(".photo-card-photos-wrp").find(".selected-bulk-btn").hide();
-            bulkSelectActive = false;
-        }
-
-        toggleBulkSelectWrapper();
     });
 
     $(".bulk_select").on("click", function (e) {
