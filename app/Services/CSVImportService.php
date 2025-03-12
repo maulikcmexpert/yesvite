@@ -59,7 +59,7 @@ class CSVImportService
                     $newContact->phoneWithCode = '';
                     $newContact->isAppUser = '0';
                     $newContact->visible = '0';
-                    $newContact->preferBy = $data['prefer_by'] ?? '';
+                    $newContact->preferBy = 'email';
                     $newContact->created_at = now();
                     $newContact->updated_at = now();
                     $newContact->save();
@@ -97,7 +97,7 @@ class CSVImportService
                     $newContact->phoneWithCode = $data['phone'] ?? '';
                     $newContact->isAppUser = '0';
                     $newContact->visible = '0';
-                    $newContact->preferBy = $data['prefer_by'] ?? '';
+                    $newContact->preferBy = 'phone';
                     $newContact->created_at = now();
                     $newContact->updated_at = now();
                     $newContact->save();
