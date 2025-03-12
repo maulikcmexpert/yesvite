@@ -884,13 +884,14 @@ $(document).ready(function () {
 
             if (selectedCount >= 2) {
 
-                // alert();
+                console.log('downloads'+1);
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 // bulkSelectWrapper
                 //     .find(".phototab-add-new-photos-img p")
                 //     .text(`${selectedCount} Photos Selected`);
                 //     bulkDeleteBtn.addClass("d-none");
             } else if (selectedCount <= 1) {
+                console.log('downloads'+2);
 
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
@@ -913,6 +914,8 @@ $(document).ready(function () {
             // }
 
             if (selected_bulk_image >= 1) {
+                console.log('bulk'+1);
+
                 bulkDeleteBtn.removeClass("d-none"); // Show the div
                 bulkDeleteBtn
                     .find(".bulk_delete_selected p")
@@ -921,6 +924,8 @@ $(document).ready(function () {
 
 
             } else if (selected_bulk_image <= 1) {
+                console.log('bulk'+2);
+
                 // bulkDeleteBtn.addClass("d-none");
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
