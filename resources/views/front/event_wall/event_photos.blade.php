@@ -253,7 +253,7 @@
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-
+                                                                    @if ($photo['user_id'] == $login_user_id)
                                                                     <li><button class="dropdown-item bulk_select" id="bulk_select"
                                                                         data-event-post-id="{{ $photo['id'] }}"
                                                                         data-event-id="{{ $event }}">
@@ -288,8 +288,9 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg> Bulk select </button></li>
+                                                                        @endif
                                                                     <li><button
-                                                                            class="dropdown-item download_img_single"><svg
+                                                                            class="dropdown-item download_img_single" data-src="{{ @$photo['mediaData'][0]['post_media'] }}"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
                                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                                 <path
@@ -322,6 +323,7 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Download </button></li>
+                                                                            @if ($photo['user_id'] == $login_user_id)
                                                                     <li><button class="dropdown-item" id="delete_post"
                                                                             data-event-post-id="{{ $photo['id'] }}"
                                                                             data-event-id="{{ $event }}">
@@ -356,6 +358,7 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Delete </button></li>
+                                                                            @endif
                                                                     @if ($photo['user_id'] != $login_user_id)
                                                                         <li>  <button
                                                                             class="dropdown-item reportbtn"
@@ -399,6 +402,7 @@
 
                                                             data-post-id="{{ $photo['id'] }}"
                                                             data-event-id="{{ $photo['event_id'] }}"
+                                                            data-user_id="{{ $photo['user_id'] }}"
                                                             data-img-src="{{ @$photo['mediaData'][0]['post_media'] }}"
                                                             data-image="{{ json_encode($postMedia) }}">
 
@@ -491,7 +495,7 @@
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
                                                         </button>
-                                                        <button class="selected-bulk-btn" style="display:none;">
+                                                        <button class="selected-bulk-btn " style="display:none;">
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
@@ -521,7 +525,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="phototab-add-new-photos-wrp">
+                                        <div class="phototab-add-new-photos-wrp add_new_photo_btn">
                                             <div class="phototab-add-new-photos-img">
                                                 @if ($photos != '')
                                                     <img src="{{ asset('storage/profile/' . $photos) }}"

@@ -857,12 +857,12 @@ $(document).ready(function () {
         function handleLongPress(element) {
 
             console.log("Long press detected ");
-            bulkSelectActive = true;
+            bulkSelectActive = false;
             console.log("Bulk Select :", bulkSelectActive);
 
             const photoCard = element.closest(".photo-card-photos-wrp");
             photoCard.find(".selected-photo-btn").show();
-            photoCard.find(".form-check-input").prop("checked", true);
+            photoCard.find(".selected_image").prop("checked", true);
 
 
             toggleBulkSelectWrapper();
@@ -877,48 +877,94 @@ $(document).ready(function () {
                 ".selecte_delete_photos"
             );
             const bulkDeleteBtn = $(".select_bulk_btn"); // Div for delete option
+            console.log('selectded',selectedCount);
+
             console.log(selectedCount);
+            console.log(selected_bulk_image);
 
             if (selectedCount >= 2) {
+
+                console.log('downloads'+1);
                 bulkSelectWrapper.removeClass("d-none"); // Show the div
                 bulkSelectWrapper
                     .find(".phototab-add-new-photos-img p")
                     .text(`${selectedCount} Photos Selected`);
-                    bulkDeleteBtn.addClass("d-none"); // Update the count
+                    bulkDeleteBtn.addClass("d-none");
+
+                    $('.add_new_photo_btn').addClass('d-none');
             } else if (selectedCount <= 1) {
+                console.log('downloads'+2);
+
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
 
+
+
+                $('.add_new_photo_btn').removeClass('d-none');
+
             }
-            if (selected_bulk_image >= 1) {
-                bulkDeleteBtn.removeClass("d-none"); // Show the div
-                bulkDeleteBtn
-                    .find(".bulk_delete_selected p")
-                    .text(`${selected_bulk_image} Photos Selected`); // Update the count
+
+            // if (selected_bulk_image >= 1) {
 
 
-            } else if (selected_bulk_image <= 1) {
+            //     bulkSelectWrapper.removeClass("d-none"); // Show the div
+            //     bulkSelectWrapper
+            //         .find(".phototab-add-new-photos-img p")
+            //         .text(`${selectedCount} Photos Selected`);
+            //         bulkDeleteBtn.addClass("d-none");
+            // } else if (selected_bulk_image <= 1) {
+
+            //     bulkSelectWrapper.addClass("d-none");
+            //     bulkDeleteBtn.addClass("d-none");
+
+            // }
+            if ($(".selected_bulk_image:checked").length === 0) {
+                $('.add_new_photo_btn').removeClass('d-none');
                 bulkDeleteBtn.addClass("d-none");
-
-
-
             }
+
+            if(selected_bulk_image!=0){
+                if (selected_bulk_image >= 1) {
+                    console.log('bulk'+1);
+
+                    bulkDeleteBtn.removeClass("d-none"); // Show the div
+                    bulkDeleteBtn
+                        .find(".bulk_delete_selected p")
+                        .text(`${selected_bulk_image} Photos Selected`); // Update the count
+                        bulkSelectWrapper.addClass("d-none"); // Show the div
+
+                        $('.add_new_photo_btn').addClass('d-none');
+
+                } else if (selected_bulk_image <= 1) {
+                    console.log('bulk'+2);
+
+                    // bulkDeleteBtn.addClass("d-none");
+                    bulkSelectWrapper.addClass("d-none");
+                    bulkDeleteBtn.addClass("d-none");
+
+                    $('.add_new_photo_btn').removeClass('d-none');
+
+
+                }
+            }
+
 
 
 
         }
-        $(document).on("change", ".selected_image", function () {
-            const photoCard = $(this).closest(".photo-card-photos-wrp");
+        // $(document).on("change", ".selected_image", function () {
+        //     const photoCard = $(this).closest(".photo-card-photos-wrp");
 
-            if ($(this).is(":checked")) {
-                photoCard.find(".selected-photo-btn").show();
-            } else {
-                photoCard.find(".selected-photo-btn").hide();
+        //     if ($(this).is(":checked")) {
+        //         photoCard.find(".selected-photo-btn").show();
+        //     } else {
+        //         photoCard.find(".selected-photo-btn").hide();
 
-            }
 
-            toggleBulkSelectWrapper(); // Update bulk selection UI
-        });
+        //     }
+
+        //     toggleBulkSelectWrapper(); // Update bulk selection UI
+        // });
 
         $(document).on("change", ".selected_bulk_image", function () {
             const photoCard = $(this).closest(".photo-card-photos-wrp");
@@ -936,24 +982,35 @@ $(document).ready(function () {
         });
 
 
-        // Mouse down event
-        $(".img_click").on("mousedown", function (e) {
-            e.preventDefault();
-            console.log("Mouse down detected");
-            isLongPress = false;
-            const that = $(this);
+        // // Mouse down event
+        // $(".img_click").on("mousedown", function (e) {
+        //     e.preventDefault();
+        //     console.log("Mouse down detected");
+        //     isLongPress = false;
+        //     const that = $(this);
 
-            // Start the timer for a long press
-            pressTimer = setTimeout(() => {
-                isLongPress = true; // Set the flag for a long press
-                handleLongPress(that); // Execute the long press action
-            }, longPressDelay);
-        });
+        //     // Start the timer for a long press
+        //     pressTimer = setTimeout(() => {
+        //         isLongPress = true; // Set the flag for a long press
+        //         handleLongPress(that); // Execute the long press action
+        //     }, longPressDelay);
+        // });
 
 
         $(document).on("click", ".img_click", function (e) {
             if (bulkSelectActive) {
                 e.preventDefault(); // Stop default modal behavior
+
+                var login_user=$('#login_user_id').val();
+                var post_user_id=$(this).attr('data-user_id');
+
+                console.log(login_user);
+                console.log(post_user_id);
+
+                if(login_user!=post_user_id){
+                    toastr.success('You can bulk delete your own photos only');
+                    return;
+                }
 
                 const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
                 checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox
@@ -1023,7 +1080,7 @@ $(document).ready(function () {
         });
         $(document).on("click", ".download_img_single", function () {
             // Find the image source stored in the data attribute
-            const imgSrc = $(".downloadImg").data("img-src");
+            const imgSrc = $(this).attr("data-src");
             console.log(imgSrc);
 
             if (imgSrc) {
@@ -1096,11 +1153,7 @@ $(document).ready(function () {
             $("#detail-photo-modal").modal("hide");
             return;
         }
-        if (isLongPress) {
-            e.preventDefault();
-            $("#detail-photo-modal").modal("hide");
-            return;
-        }
+
         $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
