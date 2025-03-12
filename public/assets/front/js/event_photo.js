@@ -919,7 +919,7 @@ $(document).ready(function () {
 
         bulkSelectActive = true; // Bulk selection mode ON
 
-        const photoCard = e.closest(".photo-card-photos-wrp");
+        const photoCard = $(this).closest(".photo-card-photos-wrp");
         photoCard.find(".selected-photo-btn").show();
         photoCard.find(".form-check-input").prop("checked", true);
 
