@@ -9586,6 +9586,8 @@ class ApiControllerv2 extends Controller
             // }
 
             try {
+                dd(1);
+
                 $record = $request->file('post_recording');
 
                 // Generate a unique file name
@@ -9600,7 +9602,6 @@ class ApiControllerv2 extends Controller
 
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
-                dd($ffmpeg);
                 $audio = $ffmpeg->open($inputPath);
 
                 // Set format to WAV
