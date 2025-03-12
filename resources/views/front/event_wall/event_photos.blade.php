@@ -253,7 +253,7 @@
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-
+                                                                    @if ($photo['user_id'] != $login_user_id)
                                                                     <li><button class="dropdown-item bulk_select" id="bulk_select"
                                                                         data-event-post-id="{{ $photo['id'] }}"
                                                                         data-event-id="{{ $event }}">
@@ -288,6 +288,7 @@
                                                                                 stroke-linecap="round"
                                                                                 stroke-linejoin="round" />
                                                                         </svg> Bulk select </button></li>
+                                                                        @endif
                                                                     <li><button
                                                                             class="dropdown-item download_img_single"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
@@ -486,12 +487,12 @@
                                                             </svg>
                                                             {{ $photo['total_comments'] }}
                                                         </h5>
-                                                        <button class="selected-photo-btn" style="display:none;">
+                                                        <button class="selected-photo-btn d-none" >
                                                             <input class="form-check-input selected_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}">
                                                         </button>
-                                                        <button class="selected-bulk-btn" style="display:none;">
+                                                        <button class="selected-bulk-btn d-none" >
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
