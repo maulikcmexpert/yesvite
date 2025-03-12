@@ -932,7 +932,7 @@ $(document).ready(function () {
     $(document).on("click", ".img_click", function (e) {
 
 
-        const checkbox = $(this).closest(".photo-card-photos-wrp").find(".form-check-input");
+        const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
         checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
 
         if (checkbox.prop("checked")) {
