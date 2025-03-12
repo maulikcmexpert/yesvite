@@ -39,7 +39,7 @@ class TemplateController extends Controller
                     return $count++;
                 })
                 ->addColumn('created_by', function ($row) {
-                    return $row->creator_id;
+                    return $row->admins->name;
                 })
                 ->addColumn('category_name', function ($row) {
                     return $row->categories->category_name;
