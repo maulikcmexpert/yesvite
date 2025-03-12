@@ -9600,6 +9600,7 @@ class ApiControllerv2 extends Controller
 
                 // Initialize FFmpeg
                 $ffmpeg = FFMpeg::create();
+                dd($ffmpeg);
                 $audio = $ffmpeg->open($inputPath);
 
                 // Set format to WAV
