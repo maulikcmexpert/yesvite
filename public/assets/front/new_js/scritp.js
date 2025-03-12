@@ -363,13 +363,6 @@ function handleFiles(files, currentFileInput) {
         uploadHeadButton.classList.remove("d-none");
     }
 
-    if (imagePreview.children.length + files.length > 1) {
-        Array.from(imagePreview.children).forEach((previewItem) => {
-            previewItem.classList.remove("col-12");
-            previewItem.classList.add("col-6");
-        });
-    }
-
     Array.from(files).forEach((file) => {
         const fileReader = new FileReader();
         fileReader.onload = function (e) {
@@ -377,10 +370,9 @@ function handleFiles(files, currentFileInput) {
             previewDiv.classList.add(imagePreview.children.length === 0 ? "col-12" : "col-6");
             previewDiv.style.position = "relative";
 
-            // Create the delete icon
+            // Delete Icon
             const deleteIcon = document.createElement("span");
-            deleteIcon.innerHTML = `
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            deleteIcon.innerHTML = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665"
                     stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
@@ -394,23 +386,18 @@ function handleFiles(files, currentFileInput) {
             </svg>`;
             deleteIcon.classList.add("uploded-delete-icon");
 
-            // Delete image functionality
             deleteIcon.addEventListener("click", function () {
                 imagePreview.removeChild(previewDiv);
 
-                // Check if there are any images left
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
-
-                    // Clear the value of the current file input
                     currentFileInput.value = "";
                 }
             });
 
             previewDiv.appendChild(deleteIcon);
 
-            // Display image or video based on file type
             if (file.type.startsWith("image/")) {
                 const img = document.createElement("img");
                 img.src = e.target.result;
@@ -447,28 +434,28 @@ if (dropZone) {
         event.preventDefault();
         dropZone.classList.remove("dragging");
 
-        const files = Array.from(event.dataTransfer.files);
+        const droppedFiles = Array.from(event.dataTransfer.files);
         const fileInput = document.querySelector(".fileInputtype");
 
-        if (files.length > 0) {
-            // Append new files to file input
+        if (droppedFiles.length > 0) {
             const dataTransfer = new DataTransfer();
 
-            // Retain previously selected files
+            // Retain old files
             if (fileInput.files.length > 0) {
                 Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
             }
 
             // Add new dropped files
-            files.forEach((file) => dataTransfer.items.add(file));
+            droppedFiles.forEach((file) => dataTransfer.items.add(file));
 
             fileInput.files = dataTransfer.files;
 
-            // Trigger change event manually
-            $(fileInput).trigger("change");
+            // Call handleFiles() to display all images
+            handleFiles(dataTransfer.files, fileInput);
         }
     });
 }
+
 
 
 // Add new option on click
