@@ -34,6 +34,6 @@ class TextData extends Model
 
     public function admins()
     {
-        return $this->belongsTo(Admin::class,'creator_id','id');
+        return $this->hasMany(Admin::class,'creator_id','id');
     }
 }
