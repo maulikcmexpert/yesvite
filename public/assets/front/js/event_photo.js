@@ -930,7 +930,10 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".img_click", function (e) {
-
+        e.stopPropagation();
+        e.preventDefault();
+        if (!bulkSelectActive) {
+            return; }
 
         const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
         checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox state
