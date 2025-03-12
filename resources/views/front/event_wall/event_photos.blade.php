@@ -322,6 +322,7 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Download </button></li>
+                                                                            @if ($photo['user_id'] == $login_user_id)
                                                                     <li><button class="dropdown-item" id="delete_post"
                                                                             data-event-post-id="{{ $photo['id'] }}"
                                                                             data-event-id="{{ $event }}">
@@ -356,6 +357,7 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round" />
                                                                             </svg> Delete </button></li>
+                                                                            @endif
                                                                     @if ($photo['user_id'] != $login_user_id)
                                                                         <li>  <button
                                                                             class="dropdown-item reportbtn"
