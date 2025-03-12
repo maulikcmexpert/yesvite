@@ -857,7 +857,6 @@ $(document).ready(function () {
         function handleLongPress(element) {
 
             console.log("Long press detected ");
-            alert(element);
             bulkSelectActive = false;
             console.log("Bulk Select :", bulkSelectActive);
 
