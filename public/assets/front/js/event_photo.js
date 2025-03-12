@@ -872,6 +872,7 @@ $(document).ready(function () {
     function toggleBulkSelectWrapper() {
         const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
         const selected_bulk_image = $(".selected_bulk_image:checked").length;
+        console.log(selected_bulk_image);
         const bulkSelectWrapper = $(
             ".selecte_delete_photos"
         );
@@ -938,7 +939,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".img_click", function (e) {
-        e.stopPropagation();
+
         e.preventDefault();
         if (!bulkSelectActive) {
             return; }
