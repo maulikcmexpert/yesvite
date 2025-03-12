@@ -997,6 +997,17 @@ $(document).ready(function () {
             if (bulkSelectActive) {
                 e.preventDefault(); // Stop default modal behavior
 
+                var login_user=$('#login_user_id').val();
+                var post_user_id=$(this).attr('data-user_id');
+
+                console.log(login_user);
+                console.log(post_user_id);
+
+                if(login_user==post_user_id){
+                    toastr.success('You can bulk delete your own photos only');
+                    return;
+                }
+
                 const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
                 checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox
 
