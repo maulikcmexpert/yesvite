@@ -1088,9 +1088,10 @@ $(document).ready(function () {
         console.log("Mouse up or leave detected");
         if (bulkSelectActive) {
             e.preventDefault();
-            console.log("Modal prevented due to bulk selection mode.");
+
             return;
         }
+        $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
         if (!isLongPress) {
