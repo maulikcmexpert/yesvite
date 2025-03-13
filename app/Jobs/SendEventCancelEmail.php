@@ -48,9 +48,9 @@ class SendEventCancelEmail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct($data)
+    public function __construct($data,$templateData)
     {
-        dd($data[1]);
+        dd($templateData);
         $this->data = $data;
         $this->email = $this->data[0];
         $this->templateData = $this->data[1];
