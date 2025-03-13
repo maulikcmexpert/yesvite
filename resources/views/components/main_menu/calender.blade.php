@@ -124,12 +124,3 @@ use Carbon\Carbon;
     </h5>
      <h3 class="text-center">{{$profileData['total_events_of_year']}}</h3>
   </div>
-
-  @push('scripts')
-  <script>
-  $(document).ready(function () {
-    let today = new Date().toISOString().split('T')[0]; 
-    $(".calender_current_month").attr("data-date", today).text(today);
-  });
-  <script>
-@endpush

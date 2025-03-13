@@ -146,12 +146,5 @@ use Carbon\Carbon;
           </div> --}}
     </div>
 </div>
-@push('scripts')
-  <script>
-  $(document).ready(function () {
-    let today = new Date().toISOString().split('T')[0]; 
-    $(".calender_current_month").attr("data-date", today).text(today);
-  });
-  <script>
-@endpush
+
 
