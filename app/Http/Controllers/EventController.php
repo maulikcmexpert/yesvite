@@ -3373,8 +3373,9 @@ class EventController extends BaseController
         $user  = Auth::guard('web')->user();
         $event_id = $request->input('event_id');
         $reason = $request->input('reason');
-        CancelEventMailsend($event_id);
+        $data=CancelEventMailsend($event_id);
 
+        dd($data);
         // $rawData = $request->getContent();
 
         // $input = json_decode($rawData, true);

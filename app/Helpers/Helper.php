@@ -1563,7 +1563,6 @@ function CancelEventMailsend($event_id){
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
 
-        dd(1);
 }
 function send_notification_FCM($deviceToken, $notifyData)
 {
