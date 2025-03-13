@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Mail\CancelEventMail;
-use App\Mail\CancelEventMaill;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -101,8 +100,7 @@ class SendEventCancelEmail implements ShouldQueue
     // }
     public function handle(): void
     {
-        dd($this->email);
-        $invitation_email = new CancelEventMail($this->templateData);
-        Mail::to($this->email)->send($invitation_email); 
+        $cancel_email = new CancelEventMail($this->templateData);
+        Mail::to($this->email)->send($cancel_email); 
     }
 }
