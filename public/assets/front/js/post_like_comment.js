@@ -369,6 +369,7 @@ $(document).ready(function () {
                 // Disable the input field
                 commentInput.prop("disabled", true);
 
+
                 // Find and remove the button inside the same parent wrapper
                 parentWrapper.find(".posts-card-comm").remove();
 
@@ -747,15 +748,15 @@ $(document).on("keyup", ".search-yesvite", function () {
     }
 });
 
-var phoneSearchTimeout; 
+var phoneSearchTimeout;
 
 $(document).on("keyup", ".search-phone", function () {
-   
+
     clearTimeout(phoneSearchTimeout);
     var inputField = $(this);
     phoneSearchTimeout = setTimeout(function () {
         console.log('here');
-        
+
         var searchQuery = inputField.val().toLowerCase().trim();
 
         if (searchQuery === "") {
@@ -774,7 +775,7 @@ $(document).on("keyup", ".search-phone", function () {
                 contactName = "";
             }
 
-            return contactName.includes(searchQuery); 
+            return contactName.includes(searchQuery);
         }).removeClass('d-none');
 
     }, 600);
@@ -793,7 +794,7 @@ $(document).ready(function () {
     const event_id = $("#event_id").val();
 
     $("#allcontact").on("click", function () {
-        
+
         $("#home_loader").css("display", "flex");
 
         guestList = [];
