@@ -1881,6 +1881,12 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
 }
 
 
+.message-perent #message-send svg path:first-child{
+    fill: var(--secondary-black);
+    stroke: var(--secondary-black);
+
+}
+
 
 /* .unmute-self-icn path{
     stroke:#94A3B8;
