@@ -1084,14 +1084,14 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-        if (pollForm.is(":visible") && pollForm.length > 0 ) {
+        if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
                 toastr.error("Please filled the poll form.");
                 return;
             }
             // Show the loader inside the button
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
             pollForm.submit();
         }
@@ -1115,7 +1115,7 @@ $(document).ready(function () {
 
             // Show loader inside the button and disable it
             $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
-                 .prop("disabled", true);
+                .prop("disabled", true);
 
             photoForm.submit();
         }
@@ -1128,22 +1128,22 @@ $(document).ready(function () {
     $(document).on("click", "#send_post_msg", function (e) {
         e.preventDefault(); // Prevents new line in textarea
 
-            var postContent = $("#postContent").val().trim(); // Get content and remove spaces
-            if (postContent === "") {
-                toastr.error("Please enter a text");
-                return;
-            }
-            if (postContent.length > 0) {
-                // Check if content exists
-                if ($("#textform").length) {
-                    // Check if form exists
-                    $("#textform").submit(); // Submit the form
-                } else {
-                    console.log("Form not found!"); // Debugging purpose
-                }
+        var postContent = $("#postContent").val().trim(); // Get content and remove spaces
+        if (postContent === "") {
+            toastr.error("Please enter a text");
+            return;
+        }
+        if (postContent.length > 0) {
+            // Check if content exists
+            if ($("#textform").length) {
+                // Check if form exists
+                $("#textform").submit(); // Submit the form
             } else {
-                console.log("Post content is empty! Form not submitted.");
+                console.log("Form not found!"); // Debugging purpose
             }
+        } else {
+            console.log("Post content is empty! Form not submitted.");
+        }
 
     });
 
@@ -1156,12 +1156,12 @@ $(document).ready(function () {
 // };
 $("#photos_click").on("click", function () {
 
-        $("#create-photo-btn").trigger("click");
-    });
-    $("#poll_click").on("click", function () {
+    $("#create-photo-btn").trigger("click");
+});
+$("#poll_click").on("click", function () {
 
-        $("#create-poll-btn").trigger("click");
-    });
+    $("#create-poll-btn").trigger("click");
+});
 
 
 $(".posts-card-like-btn").on("click", function () {
@@ -1256,78 +1256,78 @@ $(document).ready(function () {
         });
     });
 
-        var selectedReportType = ""; // Store selected report type
+    var selectedReportType = ""; // Store selected report type
 
-        // Open modal when clicking the report button
-        $(".reportbtn").on("click", function () {
-            var eventId = $(this).data("event-id");
-            var postId = $(this).data("event-post-id");
+    // Open modal when clicking the report button
+    $(".reportbtn").on("click", function () {
+        var eventId = $(this).data("event-id");
+        var postId = $(this).data("event-post-id");
 
-            // Store event ID and post ID in the modal's data attributes
-            $("#submitreport").data("event-id", eventId);
-            $("#submitreport").data("post-id", postId);
+        // Store event ID and post ID in the modal's data attributes
+        $("#submitreport").data("event-id", eventId);
+        $("#submitreport").data("post-id", postId);
 
-            // Reset previous selections
-            $(".report-option").removeClass("active");
-            selectedReportType = "";
-            $("#violation-textbox").val("");
-            $(".btn-submit-report").prop("disabled", true);
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>') .prop("disabled", true);
+        // Reset previous selections
+        $(".report-option").removeClass("active");
+        selectedReportType = "";
+        $("#violation-textbox").val("");
+        $(".btn-submit-report").prop("disabled", true);
+        $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
 
-            // Show the modal
-            $("#submitreport").modal("show");
+        // Show the modal
+        $("#submitreport").modal("show");
+    });
+
+    // Handle report type selection
+    $(".report-option").on("click", function () {
+        $(".report-option").removeClass("active");
+        $(this).addClass("active");
+        selectedReportType = $(this).data("report-type");
+
+        // Enable submit button when a report type is selected
+        $(".btn-submit-report").prop("disabled", false);
+    });
+
+    // Submit report via AJAX
+    $(".btn-submit-report").on("click", function () {
+        var media_id = $("#media_id").val();
+
+        var eventId = $("#submitreport").data("event-id");
+        var postId = $("#submitreport").data("post-id");
+        var violationDetails = $("#violation-textbox").val();
+
+        if (!selectedReportType) {
+            toastr.error("Please select a report type.");
+            return;
+        }
+
+        $.ajax({
+            url: base_url + "event_wall/postMediaReport", // Adjust endpoint
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                event_id: eventId,
+                event_post_id: postId,
+                report_type: selectedReportType,
+                report_description: violationDetails,
+
+            },
+            success: function (response) {
+                if (response.status === 1) {
+                    toastr.success(response.message);
+                    setTimeout(function () {
+                        $("#submitreport").modal("hide");
+                    }, 2000);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                // alert("Failed to submit the report. Please try again later.");
+            },
         });
-
-        // Handle report type selection
-        $(".report-option").on("click", function () {
-            $(".report-option").removeClass("active");
-            $(this).addClass("active");
-            selectedReportType = $(this).data("report-type");
-
-            // Enable submit button when a report type is selected
-            $(".btn-submit-report").prop("disabled", false);
-        });
-
-        // Submit report via AJAX
-        $(".btn-submit-report").on("click", function () {
-            var media_id = $("#media_id").val();
-
-            var eventId = $("#submitreport").data("event-id");
-            var postId = $("#submitreport").data("post-id");
-            var violationDetails = $("#violation-textbox").val();
-
-            if (!selectedReportType) {
-                toastr.error("Please select a report type.");
-                return;
-            }
-
-            $.ajax({
-                url: base_url + "event_wall/postMediaReport", // Adjust endpoint
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: {
-                    event_id: eventId,
-                    event_post_id: postId,
-                    report_type: selectedReportType,
-                    report_description: violationDetails,
-
-                },
-                success: function (response) {
-                    if (response.status === 1) {
-                        toastr.success(response.message);
-                        setTimeout(function () {
-                            $("#submitreport").modal("hide");
-                        }, 2000);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error:", error);
-                    // alert("Failed to submit the report. Please try again later.");
-                },
-            });
-        });
+    });
 
 
 });
@@ -1656,7 +1656,7 @@ $(document).ready(function () {
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
         let savedVisibility =
-           "1";
+            "1";
         let savedAllowComments =
             "1";
 
