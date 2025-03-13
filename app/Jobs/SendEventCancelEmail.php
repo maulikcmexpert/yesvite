@@ -64,7 +64,7 @@ class SendEventCancelEmail implements ShouldQueue
 
     public function handle()
     {
-        dd($email);
+        dd($this->email);
 
         foreach ($this->email as $emails) {
             try {
