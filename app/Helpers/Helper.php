@@ -300,7 +300,7 @@ function sendNotification($notificationType, $postData)
                             ];
 
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
-                            dd($emailCheck);
+                            // dd($emailCheck);
                             // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->orderBy('id','DESC')->first();
                             $updateinvitation = EventInvitedUser::where('id', $value->id)->first();
 
