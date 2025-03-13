@@ -37,6 +37,7 @@
         <th>Filled Template</th>
         <th>Create Time</th>
         <th>Last Edited</th>
+        <th>Show Template</th>
         <th width="100px">Action</th>
 
       </tr>
