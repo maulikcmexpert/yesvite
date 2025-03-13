@@ -1125,30 +1125,30 @@ $(document).ready(function () {
         }
     });
 
+    $("#send_post_msg").onclick(function (event) {
+        event.preventDefault(); // Prevents new line in textarea
 
-
-});
-$("#send_post_msg").onclick(function (event) {
-    event.preventDefault(); // Prevents new line in textarea
-
-        var postContent = $("#postContent").val().trim(); // Get content and remove spaces
-        if (postContent === "") {
-            toastr.error("Please enter a text");
-            return;
-        }
-        if (postContent.length > 0) {
-            // Check if content exists
-            if ($("#textform").length) {
-                // Check if form exists
-                $("#textform").submit(); // Submit the form
-            } else {
-                console.log("Form not found!"); // Debugging purpose
+            var postContent = $("#postContent").val().trim(); // Get content and remove spaces
+            if (postContent === "") {
+                toastr.error("Please enter a text");
+                return;
             }
-        } else {
-            console.log("Post content is empty! Form not submitted.");
-        }
+            if (postContent.length > 0) {
+                // Check if content exists
+                if ($("#textform").length) {
+                    // Check if form exists
+                    $("#textform").submit(); // Submit the form
+                } else {
+                    console.log("Form not found!"); // Debugging purpose
+                }
+            } else {
+                console.log("Post content is empty! Form not submitted.");
+            }
+
+    });
 
 });
+
 // Wait for the entire page to load
 // window.onload = function () {
 //     // Hide the loader
