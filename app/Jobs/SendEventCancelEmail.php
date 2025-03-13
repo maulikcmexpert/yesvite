@@ -50,7 +50,7 @@ class SendEventCancelEmail implements ShouldQueue
      */
     public function __construct($data)
     {
-        dd($data);
+        dd($data[1]);
         $this->data = $data;
         $this->email = $this->data[0];
         $this->templateData = $this->data[1];
