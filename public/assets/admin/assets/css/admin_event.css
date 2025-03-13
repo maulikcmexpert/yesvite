@@ -1583,7 +1583,7 @@ div:where(.swal2-icon) .swal2-icon-content{
 .layer {
     width: 100%;
     /* background-color: #ca8585; */
-    background-color: #dde1e3;
+    /* background-color: #dde1e3; */
     transition: 0.3s ease all;
     z-index: 1;
 }
