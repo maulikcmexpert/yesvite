@@ -1543,6 +1543,19 @@ function adminNotification($notificationType, $postData)
         }
     }
 }
+
+function CancelEventMailsend($event_id){
+
+    $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
+
+    $emails = User::whereIn('id', $emailData)
+                  ->pluck('email')
+                  ->toArray();
+    
+   
+                  dd($emails);
+    $message = 'Your Event have been cancelled';
+}
 function send_notification_FCM($deviceToken, $notifyData)
 {
 
