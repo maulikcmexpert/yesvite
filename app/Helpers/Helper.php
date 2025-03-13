@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\SendBroadcastEmailJob;
+use App\Jobs\SendEventCancelEmail;
 use App\Jobs\SendEmailJob;
 use App\Models\contact_sync;
 use App\Models\EventPost;
@@ -300,6 +301,7 @@ function sendNotification($notificationType, $postData)
                             ];
 
                             $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+                            // dd($emailCheck);
                             // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->orderBy('id','DESC')->first();
                             $updateinvitation = EventInvitedUser::where('id', $value->id)->first();
 
@@ -1543,6 +1545,51 @@ function adminNotification($notificationType, $postData)
         }
     }
 }
+function CancelEventMailsend($event_id)
+{
+    $userEmails = User::whereIn('id', function ($query) use ($event_id) {
+        $query->select('user_id')
+              ->from('event_invited_users')
+              ->where(['event_id' => $event_id, 'prefer_by' => 'email']);
+    })->pluck('email')->toArray();
+
+    $event = Event::where('id', $event_id)->with('event_image')->first();
+
+    if (!$event) {
+        return response()->json(['error' => 'Event not found.'], 404);
+    }
+
+    // Send email to host
+    $hostEmail = User::where('id', $event->user_id)->value('email');
+    if ($hostEmail) {
+        $eventData = [
+            'event_id' => (int) $event_id,
+            'event_name' => $event->event_name,
+            'event_image' => $event->event_image->isNotEmpty() ? $event->event_image[0]->image : "no_image.png",
+            'date' => date('l - M jS, Y', strtotime($event->start_date)),
+            'time' => $event->rsvp_start_time,
+            'is_host' => '1',
+        ];
+        dispatch(new SendEventCancelEmail($hostEmail, $eventData));
+    }
+
+    if ($userEmails) {
+        foreach ($userEmails as $email) {
+            try {
+                $guestData = $eventData; // Reuse event data
+                $guestData['is_host'] = '0'; // Set to guest
+
+                dispatch(new SendEventCancelEmail(array($email, $eventData)));
+            } catch (\Exception $e) {
+                // \Log::error("Failed to send email to $email: " . $e->getMessage());
+                return response()->json(['error' => 'Failed to send emails.'], 500);
+            }
+        }
+    }
+
+    return response()->json(['message' => 'Event was successfully canceled.'], 200);
+}
+
 function send_notification_FCM($deviceToken, $notifyData)
 {
 

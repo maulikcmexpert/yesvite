@@ -125,7 +125,10 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <h4 style="font-size: 32px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">Event Have been Cancelled</h4>
+                        @if($eventData['is_host']=='1')
+                        <h4 style="font-size: 32px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">The event was canceled successfully</h4>
+                        @else
+                        <h4 style="font-size: 32px;line-height: 28px;font-weight: 700;color: #0F172A;margin: 0px 0px;">The event was unfortunately canceled</h4>
                     </td>
                 </tr>
                 <!-- -------------- -->
