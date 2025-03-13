@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\SendBroadcastEmailJob;
+use App\Jobs\SendEventCancelEmail;
 use App\Jobs\SendEmailJob;
 use App\Models\contact_sync;
 use App\Models\EventPost;
@@ -1539,6 +1540,32 @@ function adminNotification($notificationType, $postData)
                 // dd($e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send emails.'], 500);
+        }
+    }
+}
+function CancelEventMailsend($event_id){
+    $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
+    $event=Event::where('id',$event_id)->first();
+    $emails = User::whereIn('id', $emailData)
+                  ->pluck('email')
+                  ->toArray();
+                  $eventData = [
+                    // 'event_invited_user_id' => (int)$value->id,
+                    'event_id' => (int)$event_id,
+                    'event_name' => $event->event_name,
+                    'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+                    'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
+                    'time' => $event->rsvp_start_time,
+                ];
+   
+    $message = 'Your Event have been cancelled';
+
+    foreach($emails as $mail){
+        try {
+            dispatch(new SendEventCancelEmail(array($mail, $eventData)));
+            $emailsSent = true;
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
