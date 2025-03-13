@@ -1528,6 +1528,13 @@ div:where(.swal2-icon) .swal2-icon-content{
     overflow-x: auto;
 }
 
+
+.toggle-button-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .knobs,
 .layer {
     position: absolute;
