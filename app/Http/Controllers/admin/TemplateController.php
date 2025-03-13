@@ -64,11 +64,9 @@ class TemplateController extends Controller
                 ->addColumn('show_template', function ($row) {
                   
                     $cryptId = encrypt($row->id);
-                    $template_delete=decrypt($cryptId);
-                    $category_id = encrypt($row->categories->category_name);
-
+                   
                     $actionBtn = '<label class="switch">
-                                    <input type="checkbox" id="imageToggle">
+                                    <input type="checkbox" id="templateToggle" data-id="'.$row->id.'">
                                     <span class="slider round"></span>
                                  </label>
                                     ';
@@ -295,6 +293,18 @@ class TemplateController extends Controller
             return redirect()->route('create_template.index')
                 ->with('msg_error', 'Template not deleted');
         }
+    }
+    public function show_template(Request $request){
+        $template_id=$request->template_id;
+        $is_visible=$request->isVisible;
+        $template = TextData::find($template_id);
+        if($template){
+            $template->is_visible=$is_visible;
+            $template->save();
+
+            return true;
+        }
+        return false;
     }
     public function View_template($id)
     {
