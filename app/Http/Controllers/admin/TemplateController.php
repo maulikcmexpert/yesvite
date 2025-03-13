@@ -68,11 +68,23 @@ class TemplateController extends Controller
                     if($row->is_visible=='1'){
                         $checked="checked";
                     }
-                    $actionBtn = '<label class="switch">
-                                    <input type="checkbox" id="templateToggle" data-id="'.$row->id.'" '.$checked.'>
-                                    <span class="slider round"></span>
-                                 </label>
-                                    ';
+                    // $actionBtn = '<label class="switch">
+                    //                 <input type="checkbox" id="templateToggle" data-id="'.$row->id.'" '.$checked.'>
+                    //                 <span class="slider round"></span>
+                    //              </label>
+                    //                 ';
+                    $actionBtn='
+                    <div class="toggle-button-cover ">
+                                <div class="button-cover">
+                                    <div class="button r" id="button-1">
+
+                                        <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    ';
                     return $actionBtn;
                 })
                 ->addColumn('action', function ($row) {
