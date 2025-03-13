@@ -1549,7 +1549,7 @@ function CancelEventMailsend($event_id){
     $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
     $event=Event::where('id',$event_id)->first();
     if($event){
-        $emails = User::where('id', $event->user_id)->first();
+        $emails = User::where('id', $event->user_id)->first()->email;
         dd($emails);
     }
     $emails = User::whereIn('id', $emailData)
