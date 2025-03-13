@@ -1548,6 +1548,12 @@ function adminNotification($notificationType, $postData)
 function CancelEventMailsend($event_id){
     $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
     $event=Event::where('id',$event_id)->first();
+    if($event){
+        $emails = User::whereIn('id', $event->user_id)
+        ->pluck('email')
+        ->toArray();  
+        dd($emails);
+    }
     $emails = User::whereIn('id', $emailData)
                   ->pluck('email')
                   ->toArray();
@@ -1558,6 +1564,7 @@ function CancelEventMailsend($event_id){
                     'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
                     'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
                     'time' => $event->rsvp_start_time,
+                    'is_host'=>'0'
                 ];
    
     $message = 'Your Event have been cancelled';
