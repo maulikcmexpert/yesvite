@@ -75,28 +75,50 @@ class SendEventCancelEmail implements ShouldQueue
     //     $this->templateData = $this->data[1];
 
     // }
-
     public function handle(): void
     {
-
-        dd($this->email);
+        dd(1);
+        $cance_mail = new CancelEventMail($this->templateData);
         foreach ($this->email as $emails) {
-            try {
-                // Send the email using the BulkEmail Mailable
-                if($emails!=""){
-                    Mail::to($emails)->send(new CancelEventMail($this->templateData));
+                    try {
+                        // Send the email using the BulkEmail Mailable
+                        if($emails!=""){
+                            Mail::to($this->email)->send($cance_mail); 
+                        }
+        
+                        // Mail::to('prakashmanat24@gmail.com')
+                        // ->bcc($emails) // Send to each batch of 30 via BCC
+                        // ->send(new BulkEmail($this->message));
+                    } catch (\Exception $e) {
+                        // dd($e->getMessage());
+                        // Log the error for troubleshooting (don't use dd() in jobs)
+                        Log::error("Failed to send email to $emails: " . $e->getMessage());
+        
+                        // Optionally, you can store failed emails or implement a retry mechanism
+                    }
                 }
-
-                // Mail::to('prakashmanat24@gmail.com')
-                // ->bcc($emails) // Send to each batch of 30 via BCC
-                // ->send(new BulkEmail($this->message));
-            } catch (\Exception $e) {
-                // dd($e->getMessage());
-                // Log the error for troubleshooting (don't use dd() in jobs)
-                Log::error("Failed to send email to $emails: " . $e->getMessage());
-
-                // Optionally, you can store failed emails or implement a retry mechanism
-            }
-        }
     }
+    // public function handle(): void
+    // {
+
+    //     dd($this->email);
+    //     foreach ($this->email as $emails) {
+    //         try {
+    //             // Send the email using the BulkEmail Mailable
+    //             if($emails!=""){
+    //                 Mail::to($emails)->send(new CancelEventMail($this->templateData));
+    //             }
+
+    //             // Mail::to('prakashmanat24@gmail.com')
+    //             // ->bcc($emails) // Send to each batch of 30 via BCC
+    //             // ->send(new BulkEmail($this->message));
+    //         } catch (\Exception $e) {
+    //             // dd($e->getMessage());
+    //             // Log the error for troubleshooting (don't use dd() in jobs)
+    //             Log::error("Failed to send email to $emails: " . $e->getMessage());
+
+    //             // Optionally, you can store failed emails or implement a retry mechanism
+    //         }
+    //     }
+    // }
 }
