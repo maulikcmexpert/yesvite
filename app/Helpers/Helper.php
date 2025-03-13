@@ -1561,6 +1561,7 @@ function CancelEventMailsend($event_id)
 
     // Send email to host
     $hostEmail = User::where('id', $event->user_id)->value('email');
+    // dd($hostEmail);
     if ($hostEmail) {
         $eventData = [
             'event_id' => (int) $event_id,
@@ -1570,7 +1571,7 @@ function CancelEventMailsend($event_id)
             'time' => $event->rsvp_start_time,
             'is_host' => '1',
         ];
-        dispatch(new SendEventCancelEmail($hostEmail, $eventData));
+        dispatch(new SendEventCancelEmail(array($hostEmail, $eventData)));
     }
 
     if ($userEmails) {
