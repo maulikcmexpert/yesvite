@@ -16,10 +16,10 @@ class CancelEventMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public $message;
-    public function __construct($message)
+    public $eventData;
+    public function __construct(array $eventData)
     {
-        $this->message = $message;
+        $this->eventData = $eventData;
     }
 
     /**
@@ -42,8 +42,9 @@ class CancelEventMail extends Mailable
         // );
         return new Content(
             view: 'emails.cancelEvent',
-            with: ['details' => $this->message]
-        );
+            with: [
+                'eventData' => $this->eventData
+            ]        );
     }
 
     /**

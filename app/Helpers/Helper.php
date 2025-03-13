@@ -1549,20 +1549,28 @@ function adminNotification($notificationType, $postData)
 function CancelEventMailsend($event_id){
 
     $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
-
+    $event=Event::where('id',$event_id)->first();
     $emails = User::whereIn('id', $emailData)
                   ->pluck('email')
                   ->toArray();
-    
+                  $eventData = [
+                    // 'event_invited_user_id' => (int)$value->id,
+                    'event_id' => (int)$event_id,
+                    'event_name' => $event->event_name,
+                    'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+                    'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
+                    'time' => $event->rsvp_start_time,
+                ];
    
     $message = 'Your Event have been cancelled';
     // dd($emails);
+    $emailCheck = dispatch(new sendInvitation($emails, $eventData));
+
         try {
-            SendEventCancelEmail::dispatch($emails, $message);
+            SendEventCancelEmail::dispatch($emails, $eventData);
             $emailsSent = true;
             dd(2);
         } catch (\Exception $e) {
-            dd(1);
             dd($e->getMessage());
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }

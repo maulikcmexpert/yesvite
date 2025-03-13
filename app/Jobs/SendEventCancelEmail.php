@@ -43,34 +43,38 @@ class SendEventCancelEmail implements ShouldQueue
     public $timeout = 600; // Set timeout in seconds (10 minutes)
 
     protected $email;
-    protected $message;
+    protected $templateData;
     
+    protected $data;
+
     // protected $batchSize = 3 0; // Adjust the batch size as needed
 
-    public function __construct($email, $message)
+    public function __construct($data)
     {
-        $this->email = array_filter((array) $email, function ($e) {
-            return filter_var($e, FILTER_VALIDATE_EMAIL) && !empty($e);
-        });
+        dd($data);
+        // $this->email = array_filter((array) $email, function ($e) {
+        //     return filter_var($e, FILTER_VALIDATE_EMAIL) && !empty($e);
+        // });
 
-        if (empty($this->email)) {
-            throw new \Exception("Invalid email: No valid email addresses provided.");
-        }
+        // if (empty($this->email)) {
+        //     throw new \Exception("Invalid email: No valid email addresses provided.");
+        // }
 
-        $this->message = $message;
+        // $this->message = $message;
         // dd($message);
+        $this->email = $this->data[0];
+        $this->templateData = $this->data[1];
 
     }
 
     public function handle()
     {
-        dd($this->email);
 
         foreach ($this->email as $emails) {
             try {
                 // Send the email using the BulkEmail Mailable
                 if($emails!=""){
-                    Mail::to($emails)->send(new CancelEventMail($this->message));
+                    Mail::to($emails)->send(new CancelEventMail($this->templateData));
                 }
 
                 // Mail::to('prakashmanat24@gmail.com')
