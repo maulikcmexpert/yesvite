@@ -689,9 +689,9 @@
 
 .create-post-textcontent #send_post_msg svg{
     width: 100%;
-    max-width: 25px;
-    min-width: 25px;
-    height: 25px;
+    max-width: 20px;
+    min-width: 20px;
+    height: 20px;
 }
 
 .create-post-textcontent #send_post_msg svg path:first-child{
