@@ -38,6 +38,7 @@ use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
+use App\Mail\CancelEventMail;
 use App\Models\Coin_transactions;
 use App\Models\Url;
 use App\Models\UserOpt;
@@ -1553,8 +1554,16 @@ function CancelEventMailsend($event_id){
                   ->toArray();
     
    
-                  dd($emails);
     $message = 'Your Event have been cancelled';
+        try {
+            CancelEventMail::dispatch($emails, $message);
+            $emailsSent = true;
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            return response()->json(['error' => 'Failed to send emails.'], 500);
+        }
+
+        dd(1);
 }
 function send_notification_FCM($deviceToken, $notifyData)
 {
