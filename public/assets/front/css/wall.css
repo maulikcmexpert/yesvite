@@ -670,7 +670,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 20px;
+    right: 15px;
     left: auto;
     background-color: transparent;
     border: none;
@@ -685,6 +685,7 @@
 
 .create-post-textcontent #send_post_msg.floatingfocus{
    padding: 0;
+   font-size: unset;
 }
 
 .create-post-textcontent #send_post_msg svg{

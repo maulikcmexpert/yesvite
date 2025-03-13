@@ -776,7 +776,7 @@ use Carbon\Carbon;
                             </div>
                             <div class="message-perent">
                                 <textarea type="text" placeholder="Write message here..." id="message-box"  rows="1" style="overflow:hidden; resize:none;" class="send-message"></textarea>
-                                <div class="d-flex ms-auto">
+                                <div class="d-flex ms-auto message-icons">
 
                                     <button id="message-send">
                                     <svg class="me-3" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -787,7 +787,7 @@ use Carbon\Carbon;
 
 
                                     <div class="dropdown">
-                                        
+
 
                                         <button type="button" class="btn btn-primary dropdown-toggle p-0" data-bs-toggle="dropdown">
                                             <svg class="me-3" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -861,7 +861,7 @@ use Carbon\Carbon;
                                                     <path d="M11.7031 8.55031C12.2331 8.41031 12.7831 8.41031 13.3131 8.55031" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                                
+
                                             </span>
                                         </div>
                                     </div>
@@ -1051,7 +1051,7 @@ use Carbon\Carbon;
                     <p class="report-pr">Thank you for helping to keep our Yesvite community safe by reporting any rule violations.</p>
                 </div>
                 <div class="modal-body">
-                    
+
                     <div class="submit-blocks">
                         <div class="report-input-wrp">
                             <span class="">Harassment</span> <input type="radio" name="report_type" value="Harassment"/>
