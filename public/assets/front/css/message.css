@@ -1887,6 +1887,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
 
 }
 
+.message-perent #message-send svg path:last-child{
+    stroke: var(--white);
+}
+
 
 /* .unmute-self-icn path{
     stroke:#94A3B8;
