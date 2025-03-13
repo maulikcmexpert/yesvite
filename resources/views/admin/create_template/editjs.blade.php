@@ -1004,11 +1004,11 @@
                             staticInfo.textElements.forEach(element => {
 
                                 const textMeasurement = new fabric.Text(element.text, {
-                                    fontSize: element.fontSize,
-                                    fontFamily: element.fontFamily,
-                                    fontWeight: element.fontWeight,
-                                    fontStyle: element.fontStyle,
-                                    underline: element.underline,
+                                    fontSize: element?.fontSize,
+                                    fontFamily: element?.fontFamily||"",
+                                    fontWeight: element?.fontWeight||"",
+                                    fontStyle: element?.fontStyle||"",
+                                    underline: element?.underline||"",
                                     linethrough: ["true", "True", true].includes(
                                         element.linethrough
                                     ),
@@ -1035,10 +1035,10 @@
                                             width: element.width * scaleX|| width, // Default width if not provided
                                             fontSize: fontSize,
                                             fill: element.fill,
-                                            fontFamily: element.fontFamily,
-                                            fontWeight: element.fontWeight,
-                                            fontStyle: element.fontStyle,
-                                            underline: element.underline,
+                                            fontFamily: element.fontFamily||"",
+                                            fontWeight: element.fontWeight||"",
+                                            fontStyle: element.fontStyle||"",
+                                            underline: element.underline||"",
                                             lineHeight: element.lineHeight || 2,
                                             letterSpacing: 0,
                                             linethrough:
