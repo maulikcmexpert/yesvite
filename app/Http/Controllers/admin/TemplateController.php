@@ -12,10 +12,7 @@ use App\Models\EventDesignStyle;
 use App\Models\EventDesignSubCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
-
-
-
+use Carbon\Carbon;
 use App\Models\TextData;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -58,7 +55,8 @@ class TemplateController extends Controller
                     return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
                 })
                 ->addColumn('create_time', function ($row) {
-                    return $row->created_at;
+                    return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
+
                 })
                 ->addColumn('action', function ($row) {
                   
