@@ -2069,7 +2069,7 @@ function createMessageElement(
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                    
+
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2092,7 +2092,7 @@ function createMessageElement(
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                   
+
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2113,13 +2113,13 @@ function createMessageElement(
                         ? ` <iframe src="${messageData?.url}" style="width:100%;height:400px;"></iframe>`
                         : ` <a href="${messageData?.url}" class="file_link">${messageData?.fileName}</a>`
                 }
-                   
+
                     <span class="media-text"> ${
                         messageData?.data != ""
                             ? messageData.data.replace(/\n/g, "<br>")
                             : ""
                     }</span>
-                   
+
                     ${reaction}
                 </div>
                     ${emoji}
@@ -2140,10 +2140,10 @@ function createMessageElement(
                         ? messageData.data.replace(/\n/g, "<br>")
                         : ""
                 }</span>
-                
+
                 ${reaction}
                 </div>
-                
+
                 ${emojiAndReplay}
             </div>`
             : `
@@ -2155,15 +2155,15 @@ function createMessageElement(
                         : ""
                     : ""
             }
-             
-                <div class="simple-msg-wrap"> 
-                    <span class="senderName">${senderName}</span>                   
+
+                <div class="simple-msg-wrap">
+                    <span class="senderName">${senderName}</span>
                      ${
                          messageData?.data != ""
                              ? messageData.data.replace(/\n/g, "<br>")
                              : ""
                      }
-                    
+
                     ${reaction}
                 </div>
                 ${emojiAndReplay}
@@ -2182,7 +2182,7 @@ function createMessageElement(
                         : ""
                 }
             <div class="reply-section">
-                <span class="senderName">${senderName}</span>            
+                <span class="senderName">${senderName}</span>
                 <div>
                     <span> ${messageData.replyData.replyMessage}</span>
                     <div class="reply-info">
@@ -2199,8 +2199,8 @@ function createMessageElement(
                     </div>
                 </div>
                 <hr>
-                <div class="reply-massage"> 
-               
+                <div class="reply-massage">
+
 
                     ${
                         messageData?.type == "1"
@@ -2216,7 +2216,7 @@ function createMessageElement(
                                               )
                                             : ""
                                     }</span>
-                                   
+
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2236,7 +2236,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                   
+
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2254,7 +2254,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                    
+
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2274,7 +2274,7 @@ function createMessageElement(
                                             : ""
                                     }
                                     }</span>
-                                    
+
                                     ${reaction}
                                 </div>
                             </div>`
@@ -2282,16 +2282,16 @@ function createMessageElement(
                             <span> ${
                                 messageData?.data != "" ? messageData.data : ""
                             }</span>
-                            
+
                                     ${reaction}
                              `
                     }
 
 
-              
-                   
-                       
-                
+
+
+
+
                 </div>
             </div>
             ${emojiAndReplay}
@@ -2388,14 +2388,14 @@ function createMessageElement(
     ${daychange}
         <li class="chat-box ${
             isSender ? "receiver" : "sender"
-        }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >        
-            ${replySection == "" ? dataWithMedia : replySection}        
-            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>            
+        }" id="message-${key}" data-loop="${Dataloop}"  data-Rloop="${DataRloop}" >
+            ${replySection == "" ? dataWithMedia : replySection}
+            <span data-loop="${Dataloop}"  data-Rloop="${DataRloop}" data-time="${msgTime}" class="time ${timeClass}" style="display: none;">${msgTime}</span>
             ${
                 isSender
                     ? `<span class="seenStatus ${seenStatus}"  style="display: none;"></span>`
                     : ""
-            } 
+            }
             </li>
     </div>
     `;
@@ -3544,7 +3544,7 @@ function generateReactionsAndReply() {
                                         replyMessageData.data
                                     }</span>
                                 </div>
-                                
+
                             <span class='close-replay'>&times</span>
                             </div>
                     </div>`;
@@ -3566,9 +3566,9 @@ function generateReactionsAndReply() {
                         <span class='replay-msg' data-time='${
                             replyMessageData.timeStamp
                         }'>${replyMessageData.data}</span>
-                        
+
                            </div>
-                                
+
                             <span class='close-replay'>&times</span>
                             </div>
                     </div>`;
@@ -4819,3 +4819,24 @@ function sendAppLink(userId) {
         success: function (response) {},
     });
 }
+//vrushali message box
+
+$(document).ready(function () {
+    let messageBox = $("#message-box");
+    let messageSend = $("#message-send");
+    let messageIcons = $(".message-icons");
+
+    // Initially hide the send button
+    messageSend.hide();
+
+    messageBox.on("input", function () {
+        if ($.trim(messageBox.val()) !== "") {
+            messageIcons.addClass("hide")  // Show when there's text
+        } else {
+            messageSend.removeClass("hide");  // Hide when empty
+        }
+    });
+});
+
+
+//vrushali message box
