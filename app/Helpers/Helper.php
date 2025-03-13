@@ -1549,8 +1549,18 @@ function CancelEventMailsend($event_id){
     $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
     $event=Event::where('id',$event_id)->first();
     if($event){
-        $emails = User::where('id', $event->user_id)->first()->email;
-        dd($emails);
+        $host_email = User::where('id', $event->user_id)->first()->email;
+        // dd($emails);
+        $eventData = [
+            // 'event_invited_user_id' => (int)$value->id,
+            'event_id' => (int)$event_id,
+            'event_name' => $event->event_name,
+            'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+            'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
+            'time' => $event->rsvp_start_time,
+            'is_host'=>'1'
+        ];
+        dispatch(new SendEventCancelEmail(array($host_email, $eventData)));
     }
     $emails = User::whereIn('id', $emailData)
                   ->pluck('email')
