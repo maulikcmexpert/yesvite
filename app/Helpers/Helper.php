@@ -1560,6 +1560,7 @@ function CancelEventMailsend($event_id){
         try {
             SendEventCancelEmail::dispatch($emails, $message);
             $emailsSent = true;
+            dd(2);
         } catch (\Exception $e) {
             dd(1);
             dd($e->getMessage());
