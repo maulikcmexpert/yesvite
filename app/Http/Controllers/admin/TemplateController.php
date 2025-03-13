@@ -12,10 +12,7 @@ use App\Models\EventDesignStyle;
 use App\Models\EventDesignSubCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
-
-
-
+use Carbon\Carbon;
 use App\Models\TextData;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +54,13 @@ class TemplateController extends Controller
                 ->addColumn('filled_image', function ($template) {
                     return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
                 })
+                ->addColumn('create_time', function ($row) {
+                    return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
+                })
+                ->addColumn('last_edited', function ($row) {
+                    return Carbon::parse($row->updated_at)->format('Y-m-d h:i A');
+
+                })
                 ->addColumn('action', function ($row) {
                   
                     $cryptId = encrypt($row->id);
@@ -80,7 +84,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'action'])
                 ->make(true);
         }
 
