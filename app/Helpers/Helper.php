@@ -2,6 +2,7 @@
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
+use App\Jobs\SendEventCancelEmail;
 use App\Models\contact_sync;
 use App\Models\EventPost;
 use App\Models\Event;
@@ -1556,7 +1557,7 @@ function CancelEventMailsend($event_id){
    
     $message = 'Your Event have been cancelled';
         try {
-            CancelEventMail::dispatch($emails, $message);
+            SendEventCancelEmail::dispatch($emails, $message);
             $emailsSent = true;
         } catch (\Exception $e) {
             dd($e->getMessage());
