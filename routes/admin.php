@@ -102,6 +102,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
     Route::put('/update_temp_password/{id}', [UserController::class, 'update_temp_password'])->name('update_temp_password');
 
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
+    Route::get('show_template', [TemplateController::class, 'show_template'])->name('show_template');
 
     Route::get('/sendNotification', [sendNotificationController::class, 'index']);
     Route::post('/sendNotification/send', [sendNotificationController::class, 'send'])->name('send.notification');

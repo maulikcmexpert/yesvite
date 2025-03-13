@@ -61,6 +61,20 @@ class TemplateController extends Controller
                     return Carbon::parse($row->updated_at)->format('Y-m-d h:i A');
 
                 })
+                ->addColumn('show_template', function ($row) {
+                  
+                    $cryptId = encrypt($row->id);
+                    $checked="";
+                    if($row->is_visible=='1'){
+                        $checked="checked";
+                    }
+                    $actionBtn = '<label class="switch">
+                                    <input type="checkbox" id="templateToggle" data-id="'.$row->id.'" '.$checked.'>
+                                    <span class="slider round"></span>
+                                 </label>
+                                    ';
+                    return $actionBtn;
+                })
                 ->addColumn('action', function ($row) {
                   
                     $cryptId = encrypt($row->id);
@@ -83,8 +97,9 @@ class TemplateController extends Controller
                         </div>';
                     return $actionBtn;
                 })
+          
 
-                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'show_template','action'])
                 ->make(true);
         }
 
@@ -281,6 +296,18 @@ class TemplateController extends Controller
             return redirect()->route('create_template.index')
                 ->with('msg_error', 'Template not deleted');
         }
+    }
+    public function show_template(Request $request){
+        $template_id=$request->template_id;
+        $is_visible=$request->isVisible;
+        $template = TextData::find($template_id);
+        if($template){
+            $template->is_visible=$is_visible;
+            $template->save();
+
+            return true;
+        }
+        return false;
     }
     public function View_template($id)
     {

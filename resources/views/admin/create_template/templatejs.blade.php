@@ -6,8 +6,8 @@
             processing: true,
             serverSide: true,
 
-            pageLength: 25, // Set the initial number of records per page
-            lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],
+            pageLength: 50, // Set the initial number of records per page
+            lengthMenu: [[50,100, -1], [50, 100, "All"]],
             // ajax: '{{URL::to("/admin/create_template")}}',
             // columns: [{
             //         data: "number",
@@ -99,6 +99,17 @@
 
                 },
 
+                {
+
+                    data: "show_template",
+
+                    name: "show_template",
+
+                    orderable: false,
+
+                    searchable: true,
+
+                },
                 {
 
                     data: "action",
@@ -218,53 +229,6 @@
                     e.preventDefault();
                 }
 
-                // var promises = [];
-
-                // $('.image').each(function() {
-                //     var that = $(this);
-                //     var thatVal = that.val().trim();
-
-                //     if (thatVal == '') {
-                //         that.next('.text-danger').text('Please enter subcategory');
-                //     } else {
-                //         var promise = new Promise(function(resolve, reject) {
-                //             $.ajax({
-                //                 headers: {
-                //                     "X-CSRF-TOKEN": $(
-                //                             'meta[name="csrf-token"]')
-                //                         .attr("content"),
-                //                 },
-                //                 dataType: 'Json',
-                //                 type: "POST",
-                //                 url: "{{ URL::to('admin/subcategory/check_subcategory_is_exist') }}",
-
-                //                 data: {
-                //                     subcategory_name: thatVal
-                //                 },
-                //                 success: function(output) {
-                //                     if (output == false) {
-                //                         that.next('.text-danger')
-                //                             .text(
-                //                                 'Subcategory is duplicate'
-                //                             );
-                //                         resolve(false);
-                //                     } else {
-                //                         that.next('.text-danger')
-                //                             .text('');
-                //                         resolve(true);
-                //                     }
-                //                 },
-                //                 error: function() {
-                //                     reject("Error occurred");
-                //                 }
-                //             });
-                //         });
-                //         promises.push(promise);
-                //     }
-                // });
-
-
-
             });
 
 
@@ -273,77 +237,6 @@
 
         });
 
-
-
-        // $("#updateSubCatForm").validate({
-
-        //     rules: {
-
-        //         event_design_category_id: {
-
-        //             required: true,
-
-        //         },
-
-        //         subcategory_name: {
-
-        //             required: true,
-        //             remote: {
-
-        //                 headers: {
-
-        //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-
-        //                         "content"
-
-        //                     ),
-
-        //                 },
-
-        //                 url: "{{ URL::to('admin/subcategory/check_subcategory_is_exist') }}",
-
-        //                 method: "POST",
-
-        //                 data: {
-
-        //                     subcategory_name: function() {
-
-        //                         return $("input[name='subcategory_name']").val();
-
-        //                     },
-
-        //                     id: function() {
-
-        //                         return $("input[name='id']").val();
-
-        //                     },
-
-        //                 },
-
-        //             }
-
-        //         }
-
-
-
-        //     },
-
-        //     messages: {
-
-        //         event_design_category_id: {
-        //             required: "Please select category",
-        //         },
-        //         subcategory_name: {
-
-        //             required: "Please enter subcategory name",
-
-        //             remote: "Subcategory name is duplicate"
-
-        //         },
-
-
-
-        //     },
 
 
         $('#image').on('change', function() {
@@ -378,72 +271,6 @@
             }
         }
 
-
-        // $(document).on("click", ".delete_template", function(event) {
-
-        //     var userURL = $(this).data("url");
-
-        //     event.preventDefault();
-
-        //     swal({
-
-        //         title: `Are you sure you want to delete this record?`,
-
-        //         text: "If you delete this, it will be gone forever.",
-
-        //         icon: "warning",
-
-        //         buttons: true,
-
-        //         dangerMode: true,
-
-        //     }).then((willDelete) => {
-
-        //         if (willDelete) {
-
-        //             $.ajax({
-
-        //                 headers: {
-
-        //                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-
-        //                         "content"
-
-        //                     ),
-
-        //                 },
-
-        //                 method: "DELETE",
-
-        //                 url: userURL,
-
-        //                 dataType: "json",
-
-        //                 success: function(output) {
-
-        //                     if (output == true) {
-
-        //                         table.ajax.reload();
-
-        //                         toastr.success("template Deleted successfully !");
-
-        //                     } else {
-
-        //                         toastr.error("template don't Deleted !");
-
-        //                     }
-
-        //                 },
-
-        //             });
-
-        //         }
-
-        //     });
-
-        // });
-
-
         $(document).on('click', '.delete_template', function() {
             var id=$(this).data('id');
             Swal.fire({
@@ -463,6 +290,27 @@
             });
         })
 
-
     });
+$(document).on("change", "#templateToggle", function () {
+    let isVisible = $(this).is(":checked") ? 1 : 0;
+    let template_id =$(this).attr('data-id');
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            type: "GET",
+            url: "{{ route('show_template') }}",
+            data: {
+                isVisible: isVisible,
+                template_id:template_id
+            },
+            success: function (response) {
+                console.log("Success:", response);
+            },
+            error: function (xhr) {
+                console.error("Error updating visibility:", xhr.responseText);
+            }
+        });
+});
+
 </script>

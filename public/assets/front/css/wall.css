@@ -670,12 +670,32 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 15px;
+    right: 20px;
+    left: auto;
     background-color: transparent;
     border: none;
     outline: none;
     width: 100%;
     max-width: 25px;
+    min-width: 25px;
+    height: 25px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.create-post-textcontent #send_post_msg.floatingfocus{
+    visibility: visible;
+    opacity: 1;
+    right: 15px;
+}
+
+.create-post-textcontent #send_post_msg svg{
+    width: 100%;
+    max-width: 20px;
+    min-width: 20px;
+    height: 20px;
 }
 
 .create-post-textcontent #send_post_msg svg path:first-child{
