@@ -1070,9 +1070,12 @@ $(document).ready(function () {
     });
     $("#send_post_msg").onclick(function (event) {
 
-        event.preventDefault(); // Prevent default action
-            let postContent = $("#postContent").val().trim(); // Get content and remove spaces
 
+            let postContent = $("#postContent").val().trim(); // Get content and remove spaces
+            if (postContent === "") {
+                toastr.error("Please enter a text");
+                return;
+            }
             if (postContent.length > 0) {
                 // Check if content exists
                 if ($("#textform").length) {
