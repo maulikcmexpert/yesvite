@@ -1125,8 +1125,8 @@ $(document).ready(function () {
         }
     });
 
-    $("#send_post_msg").onclick(function (event) {
-        event.preventDefault(); // Prevents new line in textarea
+    $(document).on("click", "#send_post_msg", function (e) {
+        e.preventDefault(); // Prevents new line in textarea
 
             var postContent = $("#postContent").val().trim(); // Get content and remove spaces
             if (postContent === "") {
