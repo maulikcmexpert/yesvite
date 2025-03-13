@@ -63,6 +63,7 @@ class SendEventCancelEmail implements ShouldQueue
 
     public function handle()
     {
+        dd($this->email);
         foreach ($this->email as $emails) {
             try {
                 // Send the email using the BulkEmail Mailable
