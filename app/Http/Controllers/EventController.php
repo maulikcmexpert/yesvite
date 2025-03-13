@@ -3375,6 +3375,7 @@ class EventController extends BaseController
         $reason = $request->input('reason');
         $data = CancelEventMailsend($event_id);
 
+        dd(1);
         // dd($data);
         // $rawData = $request->getContent();
 
