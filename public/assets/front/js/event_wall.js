@@ -1069,7 +1069,7 @@ $(document).ready(function () {
         }
     });
     $("#send_post_msg").onclick(function (event) {
-
+        event.preventDefault(); // Prevents new line in textarea
 
             let postContent = $("#postContent").val().trim(); // Get content and remove spaces
             if (postContent === "") {
