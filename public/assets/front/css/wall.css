@@ -671,11 +671,27 @@
     top: 50%;
     transform: translateY(-50%);
     right: 15px;
+    left: auto;
     background-color: transparent;
     border: none;
     outline: none;
     width: 100%;
     max-width: 25px;
+    min-width: 25px;
+    height: 25px;
+    display: none;
+
+}
+
+.create-post-textcontent #send_post_msg.floatingfocus{
+    display: block;
+}
+
+.create-post-textcontent #send_post_msg svg{
+    width: 100%;
+    max-width: 25px;
+    min-width: 25px;
+    height: 25px;
 }
 
 .create-post-textcontent #send_post_msg svg path:first-child{
