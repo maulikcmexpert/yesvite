@@ -3375,7 +3375,6 @@ class EventController extends BaseController
         $reason = $request->input('reason');
         // $rawData = $request->getContent();
 
-        CancelEventMailsend($event_id);
         // dd(1);
         // $input = json_decode($rawData, true);
         // if ($input == null) {
@@ -3463,7 +3462,9 @@ class EventController extends BaseController
                     EventPostPoll::where('event_id', $event_id)->delete();
                     EventUserStory::where('event_id', $event_id)->delete();
                 }
+
                 $deleteEvent->delete();
+                CancelEventMailsend($event_id);
 
                 DB::commit();
                 return response()->json(['status' => 1, 'event_id' => $event_id, 'message' => "Event deleted successfully"]);
