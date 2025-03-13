@@ -64,9 +64,12 @@ class TemplateController extends Controller
                 ->addColumn('show_template', function ($row) {
                   
                     $cryptId = encrypt($row->id);
-                   
+                    $checked="";
+                    if($row->is_visible=='1'){
+                        $checked="checked";
+                    }
                     $actionBtn = '<label class="switch">
-                                    <input type="checkbox" id="templateToggle" data-id="'.$row->id.'">
+                                    <input type="checkbox" id="templateToggle" data-id="'.$row->id.'" '.$checked.'>
                                     <span class="slider round"></span>
                                  </label>
                                     ';
