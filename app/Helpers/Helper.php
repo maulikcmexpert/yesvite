@@ -1565,15 +1565,28 @@ function CancelEventMailsend($event_id){
     $message = 'Your Event have been cancelled';
     // dd($emails);
     // $emailCheck = dispatch(new sendInvitation($emails, $eventData));
-
+    foreach($emails as $mail){
+        // dispatch(new SendEventCancelEmail(array($mail, $eventData)));
         try {
-            SendEventCancelEmail::dispatch($emails, $eventData);
+            dispatch(new SendEventCancelEmail(array($mail, $eventData)));
             $emailsSent = true;
             dd(2);
         } catch (\Exception $e) {
             dd($e->getMessage());
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
+        // SendEventCancelEmail::dispatch(array($emails, $eventData));
+
+    }
+
+        // try {
+        //     SendEventCancelEmail::dispatch($emails, $eventData);
+        //     $emailsSent = true;
+        //     dd(2);
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage());
+        //     return response()->json(['error' => 'Failed to send emails.'], 500);
+        // }
 
 }
 function send_notification_FCM($deviceToken, $notifyData)
