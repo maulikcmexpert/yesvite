@@ -33,7 +33,6 @@ class SendInvitationMailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        dd(1);
         $invitation_email = new InvitationEmail($this->templateData);
         Mail::to($this->email)->send($invitation_email); 
     }
