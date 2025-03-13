@@ -685,6 +685,7 @@
 
 .create-post-textcontent #send_post_msg.floatingfocus{
    padding: 0;
+   font-size: unset;
 }
 
 .create-post-textcontent #send_post_msg svg{
