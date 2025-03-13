@@ -10,7 +10,7 @@ use Carbon\Carbon;
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsecalender" aria-expanded="true" aria-controls="collapsecalender">
                       Calendar
                     </button>
-                    <span class="calender_current_month" style="display:none;" data-date={{date('Y-m-d');}}>Today</span>
+                    <span class="calender_current_month day" style="display:none;" data-date={{date('Y-m-d');}}>Today</span>
                   </h2>
                   <div id="collapsecalender" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
