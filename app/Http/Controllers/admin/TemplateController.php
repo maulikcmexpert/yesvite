@@ -56,6 +56,9 @@ class TemplateController extends Controller
                 })
                 ->addColumn('create_time', function ($row) {
                     return Carbon::parse($row->created_at)->format('Y-m-d h:i A');
+                })
+                ->addColumn('last_edited', function ($row) {
+                    return Carbon::parse($row->updated_at)->format('Y-m-d h:i A');
 
                 })
                 ->addColumn('action', function ($row) {
@@ -81,7 +84,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'action'])
                 ->make(true);
         }
 

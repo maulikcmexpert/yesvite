@@ -92,6 +92,12 @@
                     name: "create_time"
 
                 },
+                {
+
+                    data: "last_edited",
+                    name: "last_edited"
+
+                },
 
                 {
 
