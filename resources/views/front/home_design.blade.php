@@ -131,6 +131,7 @@
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
+                                'is_visible' => $image->is_visible,
                                 'category_id' => $category->id,
                                 'subcategory_id' => $subcategory->id,
                                 'category_name' => $category->category_name,
