@@ -1566,7 +1566,7 @@ function CancelEventMailsend($event_id){
 
     foreach($emails as $mail){
         try {
-            dispatch(new SendEventCancelEmail(array($mail, $eventData)));
+            $inivted_user_email=dispatch(new SendEventCancelEmail(array($mail, $eventData)));
             $emailsSent = true;
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send emails.'], 500);
@@ -1584,8 +1584,21 @@ function CancelEventMailsend($event_id){
             'time' => $event->rsvp_start_time,
             'is_host'=>'1'
         ];
-        dispatch(new SendEventCancelEmail(array($hostemail->email, $hosteventData)));
+        $host_email_send=dispatch(new SendEventCancelEmail(array($hostemail->email, $hosteventData)));
 
+    }
+
+    if($inivted_user_email&&$host_email_send){
+        $event_images = EventImage::where('event_id', $event_id)->get();
+        if (isset($event_images) && !empty($event_images)) {
+            foreach ($event_images as $eventImage) {
+                if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
+                    $imagePath = public_path('storage/event_images/') . $eventImage->image;
+                    unlink($imagePath);
+                }
+            }
+            // EventImage::where('event_id', $event_id)->delete();
+        }
     }
 }
 function send_notification_FCM($deviceToken, $notifyData)
