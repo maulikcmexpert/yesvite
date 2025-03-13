@@ -1545,52 +1545,48 @@ function adminNotification($notificationType, $postData)
         }
     }
 }
-function CancelEventMailsend($event_id)
-{
-    $userEmails = User::whereIn('id', function ($query) use ($event_id) {
-        $query->select('user_id')
-              ->from('event_invited_users')
-              ->where(['event_id' => $event_id, 'prefer_by' => 'email']);
-    })->pluck('email')->toArray();
-
-    $event = Event::where('id', $event_id)->with('event_image')->first();
-
-    if (!$event) {
-        return response()->json(['error' => 'Event not found.'], 404);
-    }
-
-    // Send email to host
-    $hostEmail = User::where('id', $event->user_id)->value('email');
-    // dd($hostEmail);
-    if ($hostEmail) {
+function CancelEventMailsend($event_id){
+    $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
+    $event=Event::where('id',$event_id)->first();
+    if($event){
+        $host_email = User::where('id', $event->user_id)->first()->email;
+        // dd($emails);
         $eventData = [
-            'event_id' => (int) $event_id,
+            // 'event_invited_user_id' => (int)$value->id,
+            'event_id' => (int)$event_id,
             'event_name' => $event->event_name,
-            'event_image' => $event->event_image->isNotEmpty() ? $event->event_image[0]->image : "no_image.png",
-            'date' => date('l - M jS, Y', strtotime($event->start_date)),
+            'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+            'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
             'time' => $event->rsvp_start_time,
-            'is_host' => '1',
+            'is_host'=>'1'
         ];
-        dispatch(new SendEventCancelEmail(array($hostEmail, $eventData)));
+        dispatch(new SendEventCancelEmail(array($host_email, $eventData)));
+
     }
+    $emails = User::whereIn('id', $emailData)
+                  ->pluck('email')
+                  ->toArray();
+                  $eventData = [
+                    // 'event_invited_user_id' => (int)$value->id,
+                    'event_id' => (int)$event_id,
+                    'event_name' => $event->event_name,
+                    'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+                    'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
+                    'time' => $event->rsvp_start_time,
+                    'is_host'=>'0'
+                ];
+   
+    $message = 'Your Event have been cancelled';
 
-    if ($userEmails) {
-        foreach ($userEmails as $email) {
-            try {
-                $guestData = $eventData; // Reuse event data
-                $guestData['is_host'] = '0'; // Set to guest
-
-                dispatch(new SendEventCancelEmail(array($email, $eventData)));
-            } catch (\Exception $e) {
-                // \Log::error("Failed to send email to $email: " . $e->getMessage());
-                return response()->json(['error' => 'Failed to send emails.'], 500);
-            }
+    foreach($emails as $mail){
+        try {
+            dispatch(new SendEventCancelEmail(array($mail, $eventData)));
+            $emailsSent = true;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send emails.'], 500);
         }
     }
-
-    return response()->json(['message' => 'Event was successfully canceled.'], 200);
 }
-
 function send_notification_FCM($deviceToken, $notifyData)
 {
 
