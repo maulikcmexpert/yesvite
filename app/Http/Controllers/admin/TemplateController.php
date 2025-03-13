@@ -76,7 +76,7 @@ class TemplateController extends Controller
                     $actionBtn='
                     <div class="toggle-button-cover ">
                                 <div class="button-cover">
-                                    <div class="button r" id="button-1">
+                                    <div class="button r" id="button-3">
 
                                         <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox" data-id="'.$row->id.'" '.$checked.' />
                                         <div class="knobs"></div>
