@@ -78,7 +78,7 @@ class TemplateController extends Controller
                                 <div class="button-cover">
                                     <div class="button r" id="button-3">
 
-                                        <input type="checkbox" name="photo_via_wifi" value="1" id="photo_via_wifi" class="checkbox" data-id="'.$row->id.'" '.$checked.' />
+                                        <input type="checkbox" name="templateToggle" value="1" id="templateToggle" class="checkbox" data-id="'.$row->id.'" '.$checked.' />
                                         <div class="knobs"></div>
                                         <div class="layer"></div>
                                     </div>
