@@ -3376,6 +3376,7 @@ class EventController extends BaseController
         // $rawData = $request->getContent();
 
         CancelEventMailsend($event_id);
+        dd(1);
         // $input = json_decode($rawData, true);
         // if ($input == null) {
         //     return response()->json(['status' => 0, 'message' => "Json invalid"]);
