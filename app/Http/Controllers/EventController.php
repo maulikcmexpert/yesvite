@@ -640,17 +640,32 @@ class EventController extends BaseController
         //     }]);
         // }])->orderBy('id', 'DESC')->get();
 
+        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        // })->with([
+        //         'subcategory' => function ($query) {
+        //             $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+        //                 ->with('textdatas'); // Load the textdatas relationship
+        //         }
+        //     ])
+        //     ->orderBy('id', 'ASC')
+        //     ->get();
         $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+            });
         })->with([
-                'subcategory' => function ($query) {
-                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
-                        ->with('textdatas'); // Load the textdatas relationship
-                }
-            ])
-            ->orderBy('id', 'ASC')
-            ->get();
-
+            'subcategory' => function ($query) {
+                $query->whereHas('textdatas', function ($q) {
+                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+                })->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', '1'); // Load only visible textdatas
+                }]);
+            }
+        ])
+        ->orderBy('id', 'ASC')
+        ->get();
+        
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
         //     fn($category) =>
