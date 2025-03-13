@@ -1573,7 +1573,7 @@ function CancelEventMailsend($event_id)
         dispatch(new SendEventCancelEmail($hostEmail, $eventData));
     }
 
-    if ($userEmails->isNotEmpty()) {
+    if ($userEmails) {
         foreach ($userEmails as $email) {
             try {
                 $guestData = $eventData; // Reuse event data
