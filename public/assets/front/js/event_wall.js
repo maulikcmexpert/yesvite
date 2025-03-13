@@ -1070,7 +1070,7 @@ $(document).ready(function () {
     });
     $("#send_post_msg").onclick(function (event) {
 
-
+        event.preventDefault(); // Prevent default action
             let postContent = $("#postContent").val().trim(); // Get content and remove spaces
 
             if (postContent.length > 0) {
