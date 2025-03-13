@@ -677,6 +677,7 @@
                                     <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                         value="1">
                                     <span>
+
                                         <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M9 10.5C10.1046 10.5 11 9.60457 11 8.5C11 7.39543 10.1046 6.5 9 6.5C7.89543 6.5 7 7.39543 7 8.5C7 9.60457 7.89543 10.5 9 10.5Z"
