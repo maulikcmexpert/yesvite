@@ -1561,6 +1561,7 @@ function CancelEventMailsend($event_id)
 
     // Send email to host
     $hostEmail = User::where('id', $event->user_id)->value('email');
+    dd($hostEmail);
     if ($hostEmail) {
         $eventData = [
             'event_id' => (int) $event_id,
