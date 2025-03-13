@@ -59,7 +59,7 @@ class SendEventCancelEmail implements ShouldQueue
 
         $this->message = $message;
         // dd($message);
-        dd($emaill);
+        dd($email);
 
     }
 
