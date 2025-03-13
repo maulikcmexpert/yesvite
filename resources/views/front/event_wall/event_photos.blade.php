@@ -664,12 +664,9 @@
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">
-
-
-
                                 <div class="create-post-upload-img-inner">
                                     <input type="hidden" name="event_id" id="event_id"
-                                        value="{{ $event }}">
+                                    value="{{ $event }}">
                                     <input type="hidden" name="content" id="photoContent">
                                     <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                         value="1">
