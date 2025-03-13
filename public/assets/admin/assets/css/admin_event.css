@@ -1528,18 +1528,6 @@ div:where(.swal2-icon) .swal2-icon-content{
     overflow-x: auto;
 }
 
-.button-cover {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.button-cover h3 {
-    margin: 0px;
-}
-
 .knobs,
 .layer {
     position: absolute;
@@ -1583,7 +1571,7 @@ div:where(.swal2-icon) .swal2-icon-content{
 .layer {
     width: 100%;
     /* background-color: #ca8585; */
-    /* background-color: #dde1e3; */
+    background-color: #dde1e3;
     transition: 0.3s ease all;
     z-index: 1;
 }
@@ -1636,64 +1624,6 @@ div:where(.swal2-icon) .swal2-icon-content{
     transition: 0.3s ease all;
 }
 
-.button-cover:before {
-    counter-increment: button-counter;
-    content: counter(button-counter);
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    color: #d7e3e3;
-    font-size: 12px;
-    line-height: 1;
-    padding: 5px;
-}
-
-.knobs,
-.layer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.button-cover .button {
-    position: relative;
-    width: 50px;
-    height: 25px;
-    overflow: hidden;
-}
-
-.button-cover .button.r,
-.button-cover .button.r .layer {
-    border-radius: 100px;
-}
-
-.button-cover .button.b2 {
-    border-radius: 2px;
-}
-
-.button-cover .checkbox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 3;
-}
-
-.knobs {
-    z-index: 2;
-}
-
-.layer {
-    width: 100%;
-    background-color: #03a9f4;
-    transition: 0.3s ease all;
-    z-index: 1;
-}
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
