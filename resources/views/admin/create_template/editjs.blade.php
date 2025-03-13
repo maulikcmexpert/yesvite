@@ -999,16 +999,16 @@
                         if (data.static_information) {
                             // hideStaticTextElements(); // Hide static text elements if static information is present
                             const staticInfo = JSON.parse(data.static_information);
-
+                            console.log(staticInfo)
                             // Render text elements or shapes on canvas
                             staticInfo.textElements.forEach(element => {
 
                                 const textMeasurement = new fabric.Text(element.text, {
-                                    fontSize: element.fontSize,
-                                    fontFamily: element.fontFamily,
-                                    fontWeight: element.fontWeight,
-                                    fontStyle: element.fontStyle,
-                                    underline: element.underline,
+                                    fontSize: element?.fontSize,
+                                    fontFamily: element?.fontFamily||"",
+                                    fontWeight: element?.fontWeight||"",
+                                    fontStyle: element?.fontStyle||"",
+                                    underline: element?.underline||"",
                                     linethrough: ["true", "True", true].includes(
                                         element.linethrough
                                     ),
@@ -1035,10 +1035,10 @@
                                             width: element.width * scaleX|| width, // Default width if not provided
                                             fontSize: fontSize,
                                             fill: element.fill,
-                                            fontFamily: element.fontFamily,
-                                            fontWeight: element.fontWeight,
-                                            fontStyle: element.fontStyle,
-                                            underline: element.underline,
+                                            fontFamily: element.fontFamily||"",
+                                            fontWeight: element.fontWeight||"",
+                                            fontStyle: element.fontStyle||"",
+                                            underline: element.underline||"",
                                             lineHeight: element.lineHeight || 2,
                                             letterSpacing: 0,
                                             linethrough:
@@ -2459,14 +2459,14 @@
                     activeObject.set("textCase", "uppercase"); // Add custom property
                 },
                 lowercase: () => {
-                    activeObject.set("text", activeObject.text.toLowerCase());
+                    activeObject.set("text", activeObject.text?.toLowerCase());
                     activeObject.set("textCase", "lowercase"); // Add custom property
                 },
                 capitalize: () => {
-                    const capitalizedText = activeObject.text
-                    .toLowerCase() // Convert everything to lowercase first
+                    const capitalizedText = activeObject?.text
+                    ?.toLowerCase() // Convert everything to lowercase first
                     .replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize first letter of each word
-                    .replace(/'\w/g, (match) => match.toLowerCase()); // Ensure letters after apostrophe stay lowercase
+                    .replace(/'\w/g, (match) => match?.toLowerCase()); // Ensure letters after apostrophe stay lowercase
 
                     activeObject.set("text", capitalizedText);
                     activeObject.set("textCase", "capitalize"); // Add custom property
@@ -2979,7 +2979,7 @@
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
-                element.text.toLowerCase() === activeObject.text.toLowerCase()
+                element?.text?.toLowerCase() === activeObject?.text?.toLowerCase()
             ) {
                 seted = 1;
                 console.log(element.fill);
@@ -3005,7 +3005,7 @@
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
-                element.text.toLowerCase() === activeObject.text.toLowerCase()
+                element?.text?.toLowerCase() === activeObject?.text?.toLowerCase()
             ) {
                 seted = 1;
 
@@ -3125,15 +3125,15 @@
         const text = target.text.trim();
         console.log({ text });
         // Helper functions to determine the case
-        const isUpperCase = (str) => str === str.toUpperCase();
-        const isLowerCase = (str) => str === str.toLowerCase();
+        const isUpperCase = (str) => str === str?.toUpperCase();
+        const isLowerCase = (str) => str === str?.toLowerCase();
         const isCapitalized = (str) =>
             str
                 .split(" ")
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase() ===
+                            word.slice(1)?.toLowerCase() ===
                         word
                 );
 
@@ -3156,7 +3156,7 @@
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
-                element.text.toLowerCase() === activeObject.text.toLowerCase()
+                element?.text?.toLowerCase() === activeObject?.text?.toLowerCase()
             ) {
                 seted = 1;
                 activeObject.set({
@@ -3182,7 +3182,7 @@
                 fontSize: 20,
                 textAlign: "left",
                 lineHeight: 1,
-                text: activeObject.text.toLowerCase(),
+                text: activeObject?.text?.toLowerCase(),
             });
         }
         canvas.renderAll();
@@ -3197,7 +3197,7 @@
         let seted = 0;
         dbJson.textElements.forEach(function (element) {
             if (
-                element.text.toLowerCase() === activeObject.text.toLowerCase()
+                element?.text?.toLowerCase() === activeObject?.text?.toLowerCase()
             ) {
                 seted = 1;
                 console.log(element.fill);
