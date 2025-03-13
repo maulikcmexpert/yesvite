@@ -4831,9 +4831,7 @@ $(document).ready(function () {
 
     messageBox.on("input", function () {
         if ($.trim(messageBox.val()) !== "") {
-            messageIcons.addClass("hide")  // Show when there's text
-        } else {
-            messageSend.removeClass("hide");  // Hide when empty
+            messageIcons.toggleClass("hide")  // Show when there's text
         }
     });
 });
