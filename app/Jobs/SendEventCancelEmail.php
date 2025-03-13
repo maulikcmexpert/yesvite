@@ -24,6 +24,7 @@ class SendEventCancelEmail implements ShouldQueue
      */
     public function __construct($user, $details)
     {
+        dd(1);
         $this->user = $user;
         $this->details = $details;
     }
