@@ -1556,7 +1556,7 @@ function CancelEventMailsend($event_id){
     
    
     $message = 'Your Event have been cancelled';
-    dd($emails);
+    // dd($emails);
         try {
             SendEventCancelEmail::dispatch($emails, $message);
             $emailsSent = true;
