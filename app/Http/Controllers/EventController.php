@@ -3373,10 +3373,6 @@ class EventController extends BaseController
         $user  = Auth::guard('web')->user();
         $event_id = $request->input('event_id');
         $reason = $request->input('reason');
-        $data = CancelEventMailsend($event_id);
-
-        dd(1);
-        // dd($data);
         // $rawData = $request->getContent();
 
         // $input = json_decode($rawData, true);
@@ -3466,6 +3462,7 @@ class EventController extends BaseController
                     EventUserStory::where('event_id', $event_id)->delete();
                 }
                 $deleteEvent->delete();
+
                 DB::commit();
                 return response()->json(['status' => 1, 'event_id' => $event_id, 'message' => "Event deleted successfully"]);
             } else {
