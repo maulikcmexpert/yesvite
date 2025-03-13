@@ -32,6 +32,12 @@
             <div class="create-post-textcontent">
                 <input type="text" class="form-control" rows="2" name="postContent" placeholder="What's on your mind?"
                     id="postContent" maxlength="140" />
+                    <button id="message-send">
+                        <svg class="me-3" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.92278 3.52584L15.0561 7.09251C18.2561 8.69251 18.2561 11.3092 15.0561 12.9092L7.92278 16.4758C3.12278 18.8758 1.16445 16.9092 3.56445 12.1175L4.28944 10.6758C4.47278 10.3092 4.47278 9.70084 4.28944 9.33418L3.56445 7.88418C1.16445 3.09251 3.13111 1.12584 7.92278 3.52584Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M4.53125 10H9.03125" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
             </div>
         </form>
             {{-- <input type="text" class="form-control" id="text" placeholder="What’s on your mind?" maxlength="140"> --}}
