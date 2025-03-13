@@ -1892,6 +1892,20 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
 }
 
 
+.message-icons #message-send{
+    display: none;
+}
+
+.message-icons.hide #message-send{
+    display: block;
+}
+
+.message-icons.hide .dropdown,
+.message-icons.hide .audio-controls{
+    display: none;
+}
+
+
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */

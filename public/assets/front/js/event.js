@@ -1,6 +1,10 @@
 var date_upcoming=false;
 var date_past=false;
 var date_draft=false;
+$(document).ready(function () {
+    let today = new Date().toISOString().split('T')[0]; 
+    $(".calender_current_month").attr("data-date", today);
+  });
 $('.rsvp_minus_notify').prop('disabled',false);
 $('.rsvp_plus_notify').prop('disabled',false);
 function getActiveTabPage() {

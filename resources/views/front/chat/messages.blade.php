@@ -837,7 +837,7 @@ use Carbon\Carbon;
                                         </ul>
                                         </form>
                                     </div>
-                                    <div>
+                                    <div class="audio-controls">
                                         <div id="audioControls">
                                             <button type="button" class="close-song" style="display: none;">
                                                 <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
