@@ -1561,7 +1561,7 @@ function CancelEventMailsend($event_id)
 
     // Send email to host
     $hostEmail = User::where('id', $event->user_id)->value('email');
-    if ($host_email) {
+    if ($hostEmail) {
         $eventData = [
             'event_id' => (int) $event_id,
             'event_name' => $event->event_name,
@@ -1570,18 +1570,18 @@ function CancelEventMailsend($event_id)
             'time' => $event->rsvp_start_time,
             'is_host' => '1',
         ];
-        dispatch(new SendEventCancelEmail($host_email, $eventData));
+        dispatch(new SendEventCancelEmail($hostEmail, $eventData));
     }
 
-    if ($emailData->isNotEmpty()) {
-        foreach ($emailData as $email) {
+    if ($userEmails->isNotEmpty()) {
+        foreach ($userEmails as $email) {
             try {
                 $guestData = $eventData; // Reuse event data
                 $guestData['is_host'] = '0'; // Set to guest
 
-                dispatch(new SendEventCancelEmail(User::find($email), $guest_eventData));
+                dispatch(new SendEventCancelEmail(array($email, $eventData)));
             } catch (\Exception $e) {
-                \Log::error("Failed to send email to $email: " . $e->getMessage());
+                // \Log::error("Failed to send email to $email: " . $e->getMessage());
                 return response()->json(['error' => 'Failed to send emails.'], 500);
             }
         }
