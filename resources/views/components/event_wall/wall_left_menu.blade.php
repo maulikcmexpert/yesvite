@@ -1,4 +1,4 @@
-{{dd($eventDetails)}}
+{{-- {{dd($eventDetails)}} --}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -133,7 +133,7 @@
                         <li>Multiple Day Event</li>
                     @endif
 
-                    @if ($eventDetails['is_co_host'] == "1")
+                    @if (!empty($eventDetails['co_hosts'] ))
                         <li>Co-Host</li>
                     @endif
                     @if (!empty($eventDetails['gift_registry']))
