@@ -33,8 +33,8 @@
         <th>Created By(email)</th>
         <th>Category Name</th>
         <th>SubCategory Name</th>
-        <th>Image</th>
-        <th>Filled Image</th>
+        <th>Template</th>
+        <th>Filled Template</th>
         <th>Create Time</th>
         <th>Last Edited</th>
         <th width="100px">Action</th>
