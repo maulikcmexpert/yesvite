@@ -61,6 +61,19 @@ class TemplateController extends Controller
                     return Carbon::parse($row->updated_at)->format('Y-m-d h:i A');
 
                 })
+                ->addColumn('show_template', function ($row) {
+                  
+                    $cryptId = encrypt($row->id);
+                    $template_delete=decrypt($cryptId);
+                    $category_id = encrypt($row->categories->category_name);
+
+                    $actionBtn = '<label class="switch">
+                                    <input type="checkbox" id="imageToggle">
+                                    <span class="slider round"></span>
+                                 </label>
+                                    ';
+                    return $actionBtn;
+                })
                 ->addColumn('action', function ($row) {
                   
                     $cryptId = encrypt($row->id);
@@ -83,8 +96,9 @@ class TemplateController extends Controller
                         </div>';
                     return $actionBtn;
                 })
+          
 
-                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time','last_edited', 'show_template','action'])
                 ->make(true);
         }
 

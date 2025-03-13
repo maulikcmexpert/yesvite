@@ -101,6 +101,17 @@
 
                 {
 
+                    data: "show_template",
+
+                    name: "show_template",
+
+                    orderable: false,
+
+                    searchable: true,
+
+                },
+                {
+
                     data: "action",
 
                     name: "action",
