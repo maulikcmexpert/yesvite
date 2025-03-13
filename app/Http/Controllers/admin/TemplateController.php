@@ -57,6 +57,9 @@ class TemplateController extends Controller
                 ->addColumn('filled_image', function ($template) {
                     return '<img src="' . asset('storage/canvas/' . $template->filled_image) . '" width="50" height="50" />';
                 })
+                ->addColumn('create_time', function ($row) {
+                    return $row->created_at;
+                })
                 ->addColumn('action', function ($row) {
                   
                     $cryptId = encrypt($row->id);
@@ -80,7 +83,7 @@ class TemplateController extends Controller
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image', 'action'])
+                ->rawColumns(['number','created_by','created_by_email', 'category_name', 'subcategory_name', 'image', 'filled_image','create_time', 'action'])
                 ->make(true);
         }
 
