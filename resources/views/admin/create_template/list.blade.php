@@ -35,8 +35,8 @@
         <th>SubCategory Name</th>
         <th>Template</th>
         <th>Filled Template</th>
-        <th>Create Time</th>
-        <th>Last Edited</th>
+        <th style="width:70px;">Create Time</th>
+        <th style="width:70px;">Last Edited</th>
         <th>Show Template</th>
         <th width="100px">Action</th>
 

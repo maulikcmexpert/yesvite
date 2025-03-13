@@ -1582,7 +1582,7 @@ div:where(.swal2-icon) .swal2-icon-content{
     content: "\f068";
     position: absolute;
     top: 50%;
-    right: 26px;
+    right: 21px;
     width: 20px;
     height: 20px;
     /* color: red; */
@@ -1611,11 +1611,11 @@ div:where(.swal2-icon) .swal2-icon-content{
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
     font-family: "Font Awesome 5 Free";
     transform: translateY(-50%);
-    color: #2da9fc;
+    color: var(--primaryColor);
 }
 
 #button-1 .checkbox:checked ~ .layer {
-    background-color: #2da9fc;
+    background-color: var(--primaryColor);
 }
 
 #button-1 .knobs,
