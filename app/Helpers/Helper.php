@@ -1561,6 +1561,7 @@ function CancelEventMailsend($event_id){
             SendEventCancelEmail::dispatch($emails, $message);
             $emailsSent = true;
         } catch (\Exception $e) {
+            dd(1);
             dd($e->getMessage());
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
