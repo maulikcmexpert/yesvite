@@ -306,6 +306,7 @@ $(document).on("change", "#templateToggle", function () {
             },
             success: function (response) {
                 console.log("Success:", response);
+                toastr.success('Status Updated Successfully');
             },
             error: function (xhr) {
                 console.error("Error updating visibility:", xhr.responseText);
