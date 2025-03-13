@@ -1790,6 +1790,7 @@ async function sendMessage() {
     }
     const conversationElement = $(`.conversation-${conversationId}`);
 
+    let messageIcons = $(".message-icons");
     moveToTopOrBelowPinned(conversationElement);
     console.log("here");
     $("#file1").val("");
@@ -1797,6 +1798,8 @@ async function sendMessage() {
     $("#file3").val("");
     closeMedia();
     loader.hide();
+    messageIcons.addClass("hide");
+    messageIcons.removeClass("hide");
 }
 function closeMedia() {
     let preview = document.getElementsByClassName("preview_img");

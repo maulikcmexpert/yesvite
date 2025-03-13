@@ -2,6 +2,7 @@
 
 use App\Jobs\SendBroadcastEmailJob;
 use App\Jobs\SendEmailJob;
+use App\Jobs\SendEventCancelEmail;
 use App\Models\contact_sync;
 use App\Models\EventPost;
 use App\Models\Event;
@@ -38,6 +39,7 @@ use libphonenumber\NumberParseException;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use App\Mail\BulkEmail;
+use App\Mail\CancelEventMail;
 use App\Models\Coin_transactions;
 use App\Models\Url;
 use App\Models\UserOpt;
@@ -1542,6 +1544,26 @@ function adminNotification($notificationType, $postData)
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
     }
+}
+
+function CancelEventMailsend($event_id){
+
+    $emailData = EventInvitedUser::where(['event_id'=> $event_id,'prefer_by'=>'email'])->pluck('user_id'); // Make sure the column name is correct
+
+    $emails = User::whereIn('id', $emailData)
+                  ->pluck('email')
+                  ->toArray();
+    
+   
+    $message = 'Your Event have been cancelled';
+        try {
+            SendEventCancelEmail::dispatch($emails, $message);
+            $emailsSent = true;
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return response()->json(['error' => 'Failed to send emails.'], 500);
+        }
+
 }
 function send_notification_FCM($deviceToken, $notifyData)
 {
