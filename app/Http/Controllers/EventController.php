@@ -3374,6 +3374,7 @@ class EventController extends BaseController
         $event_id = $request->input('event_id');
         $reason = $request->input('reason');
         // $rawData = $request->getContent();
+        CancelEventMailsend($event_id);
 
         // dd(1);
         // $input = json_decode($rawData, true);
@@ -3464,7 +3465,6 @@ class EventController extends BaseController
                 }
 
                 $deleteEvent->delete();
-                CancelEventMailsend($event_id);
 
                 DB::commit();
                 return response()->json(['status' => 1, 'event_id' => $event_id, 'message' => "Event deleted successfully"]);
