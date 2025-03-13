@@ -3373,8 +3373,9 @@ class EventController extends BaseController
         $user  = Auth::guard('web')->user();
         $event_id = $request->input('event_id');
         $reason = $request->input('reason');
-        // $rawData = $request->getContent();
         CancelEventMailsend($event_id);
+
+        // $rawData = $request->getContent();
 
         // dd(1);
         // $input = json_decode($rawData, true);
@@ -3419,12 +3420,12 @@ class EventController extends BaseController
 
                     $event_images = EventImage::where('event_id', $event_id)->get();
                     if (isset($event_images) && !empty($event_images)) {
-                        foreach ($event_images as $eventImage) {
-                            if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
-                                $imagePath = public_path('storage/event_images/') . $eventImage->image;
-                                unlink($imagePath);
-                            }
-                        }
+                        // foreach ($event_images as $eventImage) {
+                        //     if (file_exists(public_path('storage/event_images/') . $eventImage->image)) {
+                        //         $imagePath = public_path('storage/event_images/') . $eventImage->image;
+                        //         unlink($imagePath);
+                        //     }
+                        // }
                         EventImage::where('event_id', $event_id)->delete();
                     }
                     $event_post_image = EventPostImage::where('event_id', $event_id)->get();
