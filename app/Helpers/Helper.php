@@ -1572,6 +1572,21 @@ function CancelEventMailsend($event_id){
             return response()->json(['error' => 'Failed to send emails.'], 500);
         }
     }
+
+    $hostemail= User::where('id',$event->user_id)->first();
+    if($hostemail){
+        $hosteventData = [
+            // 'event_invited_user_id' => (int)$value->id,
+            'event_id' => (int)$event_id,
+            'event_name' => $event->event_name,
+            'event_image' => ($event->event_image->isNotEmpty()) ? $event->event_image[0]->image : "no_image.png",
+            'date' =>   date('l - M jS, Y', strtotime($event->start_date)),
+            'time' => $event->rsvp_start_time,
+            'is_host'=>'1'
+        ];
+        dispatch(new SendEventCancelEmail(array($hostemail->email, $hosteventData)));
+
+    }
 }
 function send_notification_FCM($deviceToken, $notifyData)
 {
