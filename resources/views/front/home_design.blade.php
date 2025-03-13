@@ -131,6 +131,7 @@
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
+                                'is_visible' => $image->is_visible,
                                 'category_id' => $category->id,
                                 'subcategory_id' => $subcategory->id,
                                 'category_name' => $category->category_name,
@@ -148,6 +149,7 @@
             @endphp
 
             @foreach ($allImages as $image)
+            @if($image['is_visible']=='1')
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}"
@@ -159,6 +161,7 @@
                     </div>
 
                 </div>
+            @endif
             @endforeach
         </div>
 
