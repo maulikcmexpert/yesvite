@@ -4823,18 +4823,17 @@ function sendAppLink(userId) {
 
 $(document).ready(function () {
     let messageBox = $("#message-box");
-    let messageSend = $("#message-send");
     let messageIcons = $(".message-icons");
-
-    // Initially hide the send button
-    messageSend.hide();
 
     messageBox.on("input", function () {
         if ($.trim(messageBox.val()) !== "") {
-            messageIcons.toggleClass("hide")  // Show when there's text
+            messageIcons.addClass("hide");  // Add hide class when input has value
+        } else {
+            messageIcons.removeClass("hide");  // Remove hide class when input is empty
         }
     });
 });
+
 
 
 //vrushali message box

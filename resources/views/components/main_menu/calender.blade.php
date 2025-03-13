@@ -8,7 +8,7 @@ use Carbon\Carbon;
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsecalender" aria-expanded="true" aria-controls="collapsecalender">
               Calendar
             </button>
-            <span class="calender_current_month day" style="display:none;" data-date={{date('Y-m-d');}}>Today</span>
+            <span class="calender_current_month day" style="display:none;" data-date=''>Today</span>
             </h2>
           <div id="collapsecalender" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
             <div class="accordion-body">
@@ -124,3 +124,12 @@ use Carbon\Carbon;
     </h5>
      <h3 class="text-center">{{$profileData['total_events_of_year']}}</h3>
   </div>
+
+  @push('scripts')
+  <script>
+  $(document).ready(function () {
+    let today = new Date().toISOString().split('T')[0]; 
+    $(".calender_current_month").attr("data-date", today).text(today);
+  });
+  <script>
+@endpush
