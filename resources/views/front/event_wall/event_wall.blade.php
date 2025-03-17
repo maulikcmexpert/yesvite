@@ -1303,7 +1303,7 @@
                                             class="form-label d-flex align-items-center justify-content-between">Your
                                             Question *
                                             <span class="char-count">0/140</span></label>
-                                        <input type="text" name="question" class="form-control" id="yourquestion"
+                                        <input type="text" name="question" class="form-control poll_qus" id="yourquestion"
                                             placeholder="How is everyone doing this evening?" required>
                                     </div>
                                     <div class="mb-3">
