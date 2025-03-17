@@ -1981,6 +1981,7 @@ class EventWallController extends BaseController
 
             // Delete old poll options before adding new ones
             EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
+            $msg = 'Poll update successfully!';
         } else {
             // Create a new poll
             $eventPostPoll = new EventPostPoll;
@@ -1989,6 +1990,7 @@ class EventWallController extends BaseController
             $eventPostPoll->poll_question = $request->question;
             $eventPostPoll->poll_duration = $request->duration;
             $eventPostPoll->save();
+            $msg = 'Poll create successfully!';
         }
 
         // Save new poll options
@@ -1999,7 +2001,7 @@ class EventWallController extends BaseController
             ]);
         }
 
-        return redirect()->back()->with('msg', 'Poll updated successfully!');
+        return redirect()->back()->with('msg', $msg);
     }
 
 
