@@ -230,7 +230,7 @@
       </div> -->
 
 
-      <div class="modal fade cmn-modal buycreditsmodal show" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block; padding-left: 0px;">
+      <div class="modal fade cmn-modal buycreditsmodal" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block; padding-left: 0px;">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
