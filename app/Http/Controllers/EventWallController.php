@@ -3924,7 +3924,7 @@ class EventWallController extends BaseController
                 $postPhotoDetail['mediaData'] = $photoVideoData;
             }
             if ($value->post_type == '2') {
-                $polls = EventPostPoll::with('eventPollOptions')
+                $polls = EventPostPoll::with('event_post_poll.eventPollOptions')
                     ->where([
                         'event_id' => $eventId,
                         'event_post_id' => $value->id
