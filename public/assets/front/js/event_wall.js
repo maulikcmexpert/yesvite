@@ -1156,7 +1156,7 @@ $(document).ready(function () {
 //     openstoryModal(); // Open the modal after the page loads
 // };
 $("#photos_click").on("click", function () {
-    $(".create-post-upload-img-inner").removeClass("d-none");
+    (".create-post-upload-img-inner").show()
     $("#create-photo-btn").trigger("click");
 });
 $("#poll_click").on("click", function () {
@@ -1440,7 +1440,7 @@ $(document).ready(function () {
                                 console.log({uploadImgInner});
 
                                 // uploadImgInner.addClass("d-none");
-                                uploadImgInner.addClass('d-none');
+                                uploadImgInner.hide();
                             } else {
                                 console.error("Element not found: .create-post-upload-img-inner");
                             }
@@ -1512,7 +1512,7 @@ $(".btn-close").on("click", function () {
 
 $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
-    $(".create-post-upload-img-inner").removeClass("d-none");
+    // $(".create-post-upload-img-inner").removeClass("d-none");
 });
 
 $(document).on("click", ".select_all_post", function () {
