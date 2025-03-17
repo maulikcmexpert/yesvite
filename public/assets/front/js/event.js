@@ -1507,12 +1507,17 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 response.forEach((event, index) => {
                     let imgHtml = `
                         <div class="item">
-                            <div class="setting-img" data-event_id="${event.event_id}">
+                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname} data-lastname="${event.lastname}" data-profile="${event.profile}">
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
                         if (index === 0) {
                             $(".pending-rsvp-btn").attr("data-event_id", event.event_id);
+                            $(".pending-rsvp-btn").attr("data-user_id", event.user_id);
+                            $(".pending-rsvp-btn").attr("data-event_name", event.event_name);
+                            $(".pending-rsvp-btn").attr("data-firstname", event.firstname);
+                            $(".pending-rsvp-btn").attr("data-lastname", event.lastname);
+                            $(".pending-rsvp-btn").attr("data-profile", event.profile);
                         }
                     slider.append(imgHtml);
                 });
@@ -1557,9 +1562,20 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
 });
 
 $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
-    let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
+    let event_id = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
+    let event_name = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_name"); 
+    let user_id = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-user_id"); 
+    let firstname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-firstname"); 
+    let lastname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-lastname"); 
+    let profile = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-profile"); 
+  
     // alert(currentImg);
-    $(".pending-rsvp-btn").attr("data-event_id",currentImg);
+    $(".pending-rsvp-btn").attr("data-event_id",event_id);
+    $(".pending-rsvp-btn").attr("data-user_id",user_id);
+    $(".pending-rsvp-btn").attr("data-firstname",firstname);
+    $(".pending-rsvp-btn").attr("data-lastname",lastname);
+    $(".pending-rsvp-btn").attr("data-profile",profile);
+    $(".pending-rsvp-btn").attr("data-event_name",event_name); ;
 });
 $(document).on('click','.pending-rsvp-btn',function(){
    var event_id= $(".pending-rsvp-btn").attr("data-event_id");
