@@ -1507,7 +1507,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 response.forEach((event, index) => {
                     let imgHtml = `
                         <div class="item">
-                            <div class="setting-img">
+                            <div class="setting-img" data-event_id="${event.event_id}">
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
@@ -1552,7 +1552,8 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
 });
 
 $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
-    alert("You changed the image!");
+    let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
+    alert(currentImg);
 });
 
 $(".pending_rsvp_slider").owlCarousel({
