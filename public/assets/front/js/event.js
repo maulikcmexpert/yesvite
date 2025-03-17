@@ -1671,7 +1671,7 @@ $(document).on('click','.pending-rsvp-btn',function(){
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
 
-            $('#rsvp_by_notification').modal('show');
+            // $('#rsvp_by_notification').modal('show');
 
 });
 $(".pending_rsvp_slider").owlCarousel({
@@ -1693,9 +1693,13 @@ $(".pending_rsvp_slider").owlCarousel({
 });
 
 $(document).ready(function () {
-    var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
-    modal.show(); 
+    var pendingModal = document.getElementById('pending-rsvp-modal');
+    if (pendingModal) {
+        var modal = new bootstrap.Modal(pendingModal);
+        modal.show();
+    }
 });
+
 $(document).on('click', '.close_rsvp_pending', function () {
     $('#pending-rsvp-modal').modal('hide');
 });
