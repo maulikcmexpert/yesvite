@@ -1636,34 +1636,8 @@ class EventWallController extends BaseController
         }
 
         // Handle poll post
-       // Handle poll post
-if ($request->post_type == '2') {
+        // Handle poll post
 
-    $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
-
-    if ($eventPostPoll) {
-
-        $msg = 'Event Post poll updated successfully!';
-
-    } else {
-        // Create a new poll
-        $eventPostPoll = new EventPostPoll;
-        $eventPostPoll->event_id = $request->event_id;
-        $eventPostPoll->event_post_id = $creatEventPost->id;
-        $eventPostPoll->poll_question = $request->poll_question;
-        $eventPostPoll->poll_duration = $request->poll_duration;
-        $eventPostPoll->save();
-    }
-
-    // Save new poll options
-    $options = json_decode($request->option);
-    foreach ($options as $value) {
-        $pollOption = new EventPostPollOption;
-        $pollOption->event_post_poll_id = $eventPostPoll->id;
-        $pollOption->option = $value;
-        $pollOption->save();
-    }
-}
 
 
         return redirect()->back()->with('msg', $msg);
@@ -1916,9 +1890,57 @@ if ($request->post_type == '2') {
         }
     }
 
+    // public function createPoll(Request $request)
+    // {
+
+    //     // Validate the request
+    //     $request->validate([
+    //         'question' => 'required|string|max:255',
+    //         'duration' => 'required|string',
+    //         'options' => 'required|array|min:2', // Ensure at least two options are provided
+    //         'options.*' => 'required|string|max:100', // Validate each option
+    //     ]);
+
+    //     $user = Auth::guard('web')->user()->id;
+    //     $creatEventPost = new EventPost;
+    //     $creatEventPost->event_id = $request->event_id;
+    //     $creatEventPost->user_id = $user;
+    //     $creatEventPost->post_message = $request->input('content');
+
+    //     if ($request->hasFile('post_recording')) {
+    //         $record = $request->post_recording;
+    //         $recordingName = time() . '_' . $record->getClientOriginalName();
+    //         $record->move(public_path('storage/event_post_recording'), $recordingName);
+    //         $creatEventPost->post_recording = $recordingName;
+    //     }
+    //     $creatEventPost->post_privacy = $request->post_privacys;
+    //     $creatEventPost->post_type = "2";
+    //     $creatEventPost->commenting_on_off = $request->commenting_on_off;
+    //     $creatEventPost->is_in_photo_moudle = "0";
+    //     $creatEventPost->save();
+    //     // Create the poll
+    //     $eventPostPoll = new EventPostPoll;
+    //     $eventPostPoll->event_id = $request->event_id; // Example event ID
+    //     $eventPostPoll->event_post_id =  $creatEventPost->id; // Example post ID
+    //     $eventPostPoll->poll_question = $request->question;
+    //     $eventPostPoll->poll_duration = $request->duration;
+
+    //     if ($eventPostPoll->save()) {
+    //         // Save poll options
+    //         foreach ($request->options as $value) {
+    //             $pollOption = new EventPostPollOption();
+    //             $pollOption->event_post_poll_id = $eventPostPoll->id;
+    //             $pollOption->option = $value;
+    //             $pollOption->save();
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('msg', 'Poll created successfully!');
+    // }
+
+
     public function createPoll(Request $request)
     {
-
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
@@ -1928,9 +1950,11 @@ if ($request->post_type == '2') {
         ]);
 
         $user = Auth::guard('web')->user()->id;
-        $creatEventPost = new EventPost;
-        $creatEventPost->event_id = $request->event_id;
-        $creatEventPost->user_id = $user;
+
+        // Find or create the event post
+        $creatEventPost = EventPost::firstOrNew(
+            ['event_id' => $request->event_id, 'user_id' => $user]
+        );
         $creatEventPost->post_message = $request->input('content');
 
         if ($request->hasFile('post_recording')) {
@@ -1939,30 +1963,47 @@ if ($request->post_type == '2') {
             $record->move(public_path('storage/event_post_recording'), $recordingName);
             $creatEventPost->post_recording = $recordingName;
         }
+
         $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->post_type = "2";
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
-        // Create the poll
-        $eventPostPoll = new EventPostPoll;
-        $eventPostPoll->event_id = $request->event_id; // Example event ID
-        $eventPostPoll->event_post_id =  $creatEventPost->id; // Example post ID
-        $eventPostPoll->poll_question = $request->question;
-        $eventPostPoll->poll_duration = $request->duration;
 
-        if ($eventPostPoll->save()) {
-            // Save poll options
-            foreach ($request->options as $value) {
-                $pollOption = new EventPostPollOption();
-                $pollOption->event_post_poll_id = $eventPostPoll->id;
-                $pollOption->option = $value;
-                $pollOption->save();
-            }
+        // Check if a poll already exists for this event post
+        $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
+
+        if ($eventPostPoll) {
+            // Update existing poll
+            $eventPostPoll->poll_question = $request->question;
+            $eventPostPoll->poll_duration = $request->duration;
+            $eventPostPoll->save();
+
+            // Delete old poll options before adding new ones
+            EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
+            $msg = 'Poll update successfully!';
+        } else {
+            // Create a new poll
+            $eventPostPoll = new EventPostPoll;
+            $eventPostPoll->event_id = $request->event_id;
+            $eventPostPoll->event_post_id = $creatEventPost->id;
+            $eventPostPoll->poll_question = $request->question;
+            $eventPostPoll->poll_duration = $request->duration;
+            $eventPostPoll->save();
+            $msg = 'Poll create successfully!';
         }
 
-        return redirect()->back()->with('msg', 'Poll created successfully!');
+        // Save new poll options
+        foreach ($request->options as $value) {
+            EventPostPollOption::create([
+                'event_post_poll_id' => $eventPostPoll->id,
+                'option' => $value,
+            ]);
+        }
+
+        return redirect()->back()->with('msg', $msg);
     }
+
 
     public function get_reaction_post_list(Request $request)
     {
