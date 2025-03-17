@@ -2553,10 +2553,10 @@ class EventWallController extends BaseController
                 'report_from' => "post"
             ];
             $support_email=env('SUPPORT_MAIL');
-            
+
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
-                        ->subject('Chat Report Mail');
+                        ->subject('User has been reported');
             });
 
 
