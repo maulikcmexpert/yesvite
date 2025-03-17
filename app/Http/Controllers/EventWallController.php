@@ -3641,7 +3641,7 @@ class EventWallController extends BaseController
         $user  = Auth::guard('web')->user();
 
         DB::beginTransaction();
-        $creatEventPost = EventPost::where('id', $request->post_id)->first();
+        $creatEventPost = EventPost::where('id', $request->event_post_id)->first();
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user->id;
         $creatEventPost->post_message = $request->post_message;
