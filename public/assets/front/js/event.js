@@ -1426,6 +1426,21 @@ $(document).on('input','#search_filter_event',function(){
 $(document).on('click','event-notification-icon',function(e){
     e.stopPropagation();
 });
+$(document).on('click','#get_pendding_rsvp_btn',function(e){
+    // e.stopPropagation();
+    $.ajax({
+        url: `${base_url}pending_rsvp_list`,
+        type: 'GET',        
+        data: {},          
+        success: function (response) { 
+        
+        },
+        error: function (error) {
+          toastr.error('Something went wrong. Please try again!');
+        },
+      });
+});
+
 $(".pending_rsvp_slider").owlCarousel({
     loop: true,
     items:1,
