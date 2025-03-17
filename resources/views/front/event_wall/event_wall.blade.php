@@ -1,4 +1,4 @@
-{{dd($postList);}}
+{{-- {{dd($postList);}} --}}
 <main class="new-main-content">
     <div class="container">
         <div class="row">
@@ -161,7 +161,9 @@
 
                                                                                 data-post-content="{{$post['post_message'] }}"
                                                                                 data-post-type="{{$post['post_type']  }}"
+                                                                                data-is-in-photo-moudle="{{$post['is_in_photo_moudle']  }}"
                                                                                  data-post-privacy="{{$post['post_privacy']  }}"
+                                                                                  data-comment-on-off="{{$post['commenting_on_off']  }}"
                                                                                 data-post-control="edit_post">
 
                                                                                     <svg width="20" height="20"

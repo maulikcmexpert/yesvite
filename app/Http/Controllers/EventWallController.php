@@ -290,6 +290,7 @@ class EventWallController extends BaseController
                 'post_type' => $value->post_type,
                 'post_privacy' => $value->post_privacy,
                 'created_at' => $value->created_at,
+                'is_in_photo_moudle'=>$value->is_in_photo_moudle,
                 'posttime' => setpostTime($value->created_at),
                 'commenting_on_off' => $value->commenting_on_off,
                 'post_image' => [],
