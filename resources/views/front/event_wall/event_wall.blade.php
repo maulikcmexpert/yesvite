@@ -157,6 +157,10 @@
                                                                                 data-event-id="{{ $event }}"
                                                                                 data-event-post-id="{{ $post['id'] }}"
                                                                                 data-user-id="{{ $login_user_id }}"
+                                                                                data-bs-toggle="modal" data-bs-target="#creatpostmodal"
+
+                                                                                data-post-content="{{$post['post_message'] }}"
+                                                                                data-post-type="{{$post['post_type']  }}"
                                                                                 data-post-control="hide_post">
 
                                                                                     <svg width="20" height="20"
