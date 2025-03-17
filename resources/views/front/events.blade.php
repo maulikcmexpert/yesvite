@@ -241,8 +241,8 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary purchase-button" data-price-id="" data-price="0" disabled="">
-                        Purchase - $0.00
+                    <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
+                        RSVP
                     </button>
                 </div>
             </div>
