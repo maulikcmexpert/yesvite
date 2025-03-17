@@ -1588,7 +1588,8 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-rsvp",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
-    
+    var modal = new bootstrap.Modal(document.getElementById('rsvp_by_notification'));
+    modal.show();
     const eventId = $(this).attr('data-event_id');
     const userId = $(this).attr('data-user_id');
     const profile = $(this).attr('data-profile');
@@ -1672,7 +1673,7 @@ $(document).on('click','.pending-rsvp-btn',function(){
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
 
-            $('#rsvp_by_notification').modal('show');
+            // $('#rsvp_by_notification').modal('show');
 
 });
 $(".pending_rsvp_slider").owlCarousel({
@@ -1716,11 +1717,7 @@ $(".pending_rsvp_slider").owlCarousel({
 // });
 
 $(document).ready(function () {
-    var modalElement = document.getElementById('pending-rsvp-modal');
-    if (!modalElement.classList.contains("show")) {  // Prevent reopening
-        var modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    }
+    
     var modalElement = document.getElementById('pending-rsvp-modal');
     var modal = new bootstrap.Modal(modalElement);
     var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
