@@ -230,18 +230,15 @@
       </div> -->
 
 
-      <div class="modal fade cmn-modal buycreditsmodal" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block; padding-left: 0px;">
+      <div class="modal fade cmn-modal buycreditsmodal" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex align-items-center justify-content-between w-100">
                         <div>
-                            <h4 class="modal-title" id="aboutsuccessLabel">Buy Credits</h4>
+                            <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
                         </div>
-                        <div class="totle_credit_buy_wrp">
-                            <img src="https://yesvite.cmexpertiseinfotech.in/assets/coin.svg" alt="">
-                            <span class="available-coins">16</span>
-                        </div>
+                        
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
