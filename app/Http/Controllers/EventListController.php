@@ -3064,13 +3064,10 @@ class EventListController extends BaseController
             ->where(['user_id' => $user_id, 'rsvp_status' => NULL])
             ->get();
     
-        $eventData = $total_need_rsvp_event->map(function ($eventInvite) {
-            return [
-                'event_id' => $eventInvite->event->id,
-                'event_name' => $eventInvite->event->event_name,
-                'event_image' => $eventInvite->event->event_image
-            ];
-        });
+        $eventData = ['event_id' => $total_need_rsvp_event->event->id,
+                'event_name' => $total_need_rsvp_event->event->event_name,
+                'event_image' => $total_need_rsvp_event->event->event_image];
+                
     
         dd($eventData);
     }
