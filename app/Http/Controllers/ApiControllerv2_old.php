@@ -888,7 +888,7 @@ class ApiControllerv2 extends Controller
                 $query->where('is_draft_save', '0')
                 ->when($input['past_event'] == '1', function($que) {
                     $que->where('end_date', '<', date('Y-m-d'));
-                })    
+                })
                 ->when($input['past_event'] == '0', function($que) {
                     $que->where('start_date', '>=', date('Y-m-d'));
                 });
@@ -916,7 +916,7 @@ class ApiControllerv2 extends Controller
                     $query->with(['event_image', 'event_settings', 'user', 'event_schedule'])
                         ->when($input['past_event'] == '1', function($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
-                        })    
+                        })
                         ->when($input['past_event'] == '0', function($que) {
                             $que->where('start_date', '>=', date('Y-m-d'));
                         })
@@ -944,7 +944,7 @@ class ApiControllerv2 extends Controller
                         // ->where('start_date', '>=', date('Y-m-d'))
                         ->when($input['past_event'] == '1', function($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
-                        })    
+                        })
                         ->when($input['past_event'] == '0', function($que) {
                             $que->where('start_date', '>=', date('Y-m-d'));
                         })
@@ -1154,7 +1154,7 @@ class ApiControllerv2 extends Controller
                 $totalCounts += Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
                 ->when($input['past_event'] == '1', function($query) {
                     $query->where('end_date', '<', date('Y-m-d'));
-                })    
+                })
                 ->when($input['past_event'] == '0', function($query) {
                     $query->where('start_date', '>=', date('Y-m-d'));
                 })
@@ -1175,7 +1175,7 @@ class ApiControllerv2 extends Controller
                 $hostingEvents =  Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id])
                     ->when($input['past_event'] == '1', function($query) {
                         $query->where('end_date', '<', date('Y-m-d'));
-                    })    
+                    })
                     ->when($input['past_event'] == '0', function($query) {
                         $query->where('start_date', '>=', date('Y-m-d'));
                     })
@@ -1371,7 +1371,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            // Past Event // 
+            // Past Event //
 
             $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
 
@@ -1629,9 +1629,9 @@ class ApiControllerv2 extends Controller
                     }
                 }
             }
-            
 
-            // Past Event // 
+
+            // Past Event //
 
 
 
@@ -1640,7 +1640,7 @@ class ApiControllerv2 extends Controller
                 $query->where('is_draft_save', '0')
                 ->when($input['past_event'] == '1', function($que) {
                     $que->where('end_date', '<', date('Y-m-d'));
-                })    
+                })
                 ->when($input['past_event'] == '0', function($que) {
                     $que->where('start_date', '>=', date('Y-m-d'));
                 });
@@ -1669,7 +1669,7 @@ class ApiControllerv2 extends Controller
                     $query->where('is_draft_save', '0')
                         ->when($input['past_event'] == '1', function($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
-                        })    
+                        })
                         ->when($input['past_event'] == '0', function($que) {
                             $que->where('start_date', '>=', date('Y-m-d'));
                         })
@@ -1700,7 +1700,7 @@ class ApiControllerv2 extends Controller
                     $query->where('is_draft_save', '0')
                         ->when($input['past_event'] == '1', function($que) {
                             $que->where('end_date', '<', date('Y-m-d'));
-                        })    
+                        })
                         ->when($input['past_event'] == '0', function($que) {
                             $que->where('start_date', '>=', date('Y-m-d'));
                         })
@@ -2894,7 +2894,7 @@ class ApiControllerv2 extends Controller
                         'preferBy' => $contact['prefer_by'] ?? $existingContact->preferBy,
                     ]);
                     $existingContact->sync_id = $existingContact->id;
-                    
+
                     $updatedContacts[] = $existingContact;
                 } else {
                     // dd($contact);
@@ -2922,8 +2922,8 @@ class ApiControllerv2 extends Controller
                 // dd($newContacts);
                 contact_sync::insert($newContacts);
                 $insertedIds = contact_sync::latest('id')
-                    ->take(count($newContacts))     
-                    ->pluck('id')                        
+                    ->take(count($newContacts))
+                    ->pluck('id')
                     ->toArray();
                 foreach ($newContacts as $index => &$contacts) {
                     $contacts['sync_id'] = $insertedIds[$index] ?? null;
@@ -2932,7 +2932,7 @@ class ApiControllerv2 extends Controller
             }
             DB::commit();
             $allSyncedContacts = array_merge($newContacts, $updatedContacts);
-            
+
             $emails = array_filter(array_column($input, 'email'));
             $phoneNumbers = array_filter(array_column($input, 'phone_number'));
 
@@ -2953,7 +2953,7 @@ class ApiControllerv2 extends Controller
                         'lastName' => $userDetail->lastname
                     ]);
                     $index = array_search(true, array_map(function ($allSyncedContact) use ($userDetail) {
-                   
+
                     // return $updatedContacts['email'] === $userDetail->email || $updatedContacts['phone'] === $userDetail->phone_number;
                     if($allSyncedContact['email'] == $userDetail->email || $allSyncedContact['phone'] == $userDetail->phone_number){
                         if($allSyncedContact['email'] == $userDetail->email){
@@ -2967,7 +2967,7 @@ class ApiControllerv2 extends Controller
                     }
                 }, $allSyncedContacts));
                 if ($index !== false) {
-                    
+
                     // Update the matching contact
                     $allSyncedContacts[$index]['userId'] = $userDetail->id;
                     $allSyncedContacts[$index]['isAppUser'] = (int)$userDetail->app_user;
@@ -2978,7 +2978,7 @@ class ApiControllerv2 extends Controller
                     $allSyncedContacts[$index]['phone'] = $userDetail->phone_number;
                     $allSyncedContacts[$index]['preferBy'] = $userDetail->prefer_by;
                     $allSyncedContacts[$index]['photo'] = $userDetail->profile ? asset('storage/contact_profile/' . $userDetail->profile) : '';
-                    
+
                 }
             }
             // Fetch all updated contacts from the request payload
@@ -3253,7 +3253,7 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    //  event create // 
+    //  event create //
 
     // public function  getDesignList(Request $request)
     // {
@@ -3491,7 +3491,7 @@ class ApiControllerv2 extends Controller
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
                     ->whereHas('textdatas', function ($ques){
                         $ques->whereNotNull('static_information');
-                    }) 
+                    })
                     ->withCount(['subcategory', 'textdatas'])
                     ->where('category_name', 'like', "%$catSearch%")
                     ->get();
@@ -3499,7 +3499,7 @@ class ApiControllerv2 extends Controller
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
                     ->whereHas('textdatas', function ($ques){
                         $ques->whereNotNull('static_information');
-                    }) 
+                    })
                     ->withCount(['subcategory', 'textdatas'])
                     ->get();
             }
@@ -5098,7 +5098,7 @@ class ApiControllerv2 extends Controller
                     if ($eventData['event_setting']['events_schedule'] == '1') {
                         EventSchedule::where('event_id', $eventData['event_id'])->delete();
                         if (isset($eventData['events_schedule_list']) && !empty($eventData['events_schedule_list'])) {
-                            
+
                             $eventsScheduleList = $eventData['events_schedule_list'];
 
                             $addStartschedule =  new EventSchedule();
@@ -5898,7 +5898,7 @@ class ApiControllerv2 extends Controller
             if (!empty($deleteEvent)) {
                 Notification::where('event_id', $input['event_id'])->delete();
                 $deleteEvent->reason = $input['reason'];
-                if ($deleteEvent->save()) {  
+                if ($deleteEvent->save()) {
                     if(isset($deleteEvent->design_image)&& $deleteEvent->design_image!=""){
                         if (file_exists(public_path('storage/canvas') . $deleteEvent->design_image)) {
                             $design_imagedesign_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_image;
@@ -5910,7 +5910,7 @@ class ApiControllerv2 extends Controller
                     //     $design_inner_image_imagePath = public_path('storage/canvas') . $deleteEvent->design_inner_image;
                     //     unlink($design_inner_image_imagePath);
                     // }
-                    
+
                     $deleteEvent->delete();
 
                     UserReportToPost::where('event_id', $input['event_id'])->delete();
@@ -5948,7 +5948,7 @@ class ApiControllerv2 extends Controller
                                         if (file_exists(public_path('storage/post_image') . $postImage->post_image)) {
                                             $postImagePath = public_path('storage/post_image/') . $postImage->post_image;
                                             unlink($postImagePath);
-                                        } 
+                                        }
                                     }
                             }
                             EventPostImage::where('event_id', $input['event_id'])->delete();
@@ -6801,7 +6801,7 @@ class ApiControllerv2 extends Controller
 
 
         try {
-            // 
+            //
             DB::beginTransaction();
 
             $acceptReject = EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->first();
@@ -6812,7 +6812,7 @@ class ApiControllerv2 extends Controller
                 if($input['status'] == '1'){
                     $acceptReject->accept_as_co_host = '1';
                 }
-                
+
                 if ($input['status'] == '2') {
                     // EventInvitedUser::where(['user_id' => $user->id, 'event_id' => $input['event_id']])->delete();
                     $acceptReject->accept_as_co_host = '2';
@@ -6941,7 +6941,7 @@ class ApiControllerv2 extends Controller
                 $rsvpSent->event_view_date = date('Y-m-d');
 
                 $rsvpSent->save();
-                //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes 
+                //if rsvp_status is 0 then No, and rsvp_status is 1 then Yes
                 if ($rsvpSent->save()) {
                     $postMessage = [];
                     $postMessage = [
@@ -7442,9 +7442,9 @@ class ApiControllerv2 extends Controller
             $eventDetails['co_hosts'] = $coHostDetail;
 
             $coHosts = NULL;
-            
+
             foreach ($eventDetail->event_invited_user as $hostValues) {
-                
+
                 $coHostDetail1['id'] = $hostValues->user_id;
 
                 $coHostDetail1['profile'] = (empty($hostValues->user->profile) || $hostValues->user->profile == NULL) ? "" : asset('storage/profile/' . $hostValues->user->profile);
@@ -7454,9 +7454,9 @@ class ApiControllerv2 extends Controller
                 $coHostDetail1['email'] = (empty($hostValues->user->email) || $hostValues->user->email == NULL) ? "" : $hostValues->user->email;
 
                 $coHostDetail1['phone_number'] = (empty($hostValues->user->phone_number) || $hostValues->user->phone_number == NULL) ? "" : $hostValues->user->phone_number;
-               
+
                 $coHostDetail1['message_privacy'] =  $hostValues->user->message_privacy;
-               
+
                 $coHostDetail1['visible'] = (empty($hostValues->user->visible) || $hostValues->user->visible == NULL) ? "" : $hostValues->user->visible;
 
                 $coHosts = $coHostDetail1;
@@ -8788,9 +8788,9 @@ class ApiControllerv2 extends Controller
             if($eventDetails->post_message != null){
                 $rsvp = json_decode($eventDetails->post_message);
                 if($rsvp){
-                    $rsvp_status = (isset($rsvp->status) && $rsvp->status != '')?$rsvp->status:'0'; 
-                    $kids = (isset($rsvp->kids) && $rsvp->kids != '')?$rsvp->kids:0; 
-                    $adults = (isset($rsvp->adults) && $rsvp->adults != '')?$rsvp->adults:0; 
+                    $rsvp_status = (isset($rsvp->status) && $rsvp->status != '')?$rsvp->status:'0';
+                    $kids = (isset($rsvp->kids) && $rsvp->kids != '')?$rsvp->kids:0;
+                    $adults = (isset($rsvp->adults) && $rsvp->adults != '')?$rsvp->adults:0;
                 }
             }
             $postsDetail['rsvp_status'] = (string) $rsvp_status;
@@ -9824,7 +9824,7 @@ class ApiControllerv2 extends Controller
             }
             return response()->json(['status' => 1, 'is_reaction' => $isReaction, 'message' => $message,  "count" => $counts, "post_reaction" =>  $postReaction, "reactionList" => $total_counts]);
         }
-        // } 
+        // }
 
         // catch (QueryException $e) {
 
@@ -10417,7 +10417,7 @@ class ApiControllerv2 extends Controller
 
 
 
-            // postDetail // 
+            // postDetail //
 
 
 
@@ -10647,7 +10647,7 @@ class ApiControllerv2 extends Controller
 
                     if ($value->rsvp_d == '0' && ($value->read == '1' || $value->read == '0') || $value->rsvp_status == null) {
 
-                        $rsvpUserStatus['rsvp_status'] = 2; // no reply 
+                        $rsvpUserStatus['rsvp_status'] = 2; // no reply
                     }
 
                     $rsvpUserStatus['read'] = $value->read;
@@ -10969,7 +10969,7 @@ class ApiControllerv2 extends Controller
 
 
         return response()->json(['status' => 1, 'message' => "invites sent sucessfully"]);
-        // } 
+        // }
         // catch (QueryException $e) {
 
         //     DB::rollBack();
@@ -11156,7 +11156,7 @@ class ApiControllerv2 extends Controller
         } catch (QueryException $e) {
 
             DB::rollBack();
-            
+
             return response()->json(['status' => 0, 'message' => 'db error']);
         } catch (Exception $e) {
 
@@ -11702,7 +11702,7 @@ class ApiControllerv2 extends Controller
         //     DB::rollBack();
 
         //     return response()->json(['status' => 0, 'message' => 'db error']);
-        // } 
+        // }
         catch (Exception $e) {
 
 
@@ -12905,7 +12905,7 @@ class ApiControllerv2 extends Controller
         $result = json_decode($result, true);
 
         // if (!$result || !$result["access_token"]) {
-        //     //error  
+        //     //error
         //     // return;
         // }
         if (isset($result['access_token']) && $result['access_token'] != null) {
@@ -13587,13 +13587,13 @@ class ApiControllerv2 extends Controller
 
             $udpated = $resp['textElements'];
             foreach ($udpated as $k => $value) {
-      
+
                 $udpated[$k]['fontWeight'] = (isset($value['fontWeight'])&&$value['fontWeight']!='')?$value['fontWeight']:'normal';
                 $udpated[$k]['fontFamily'] = (isset($value['fontFamily'])&&$value['fontFamily']!='')?$value['fontFamily']:'Times New Roman';
                 $udpated[$k]['textAlign'] = (isset($value['textAlign'])&&$value['textAlign']!='')?$value['textAlign']:'center';
                 $udpated[$k]['fontStyle'] = (isset($value['fontStyle'])&&$value['fontStyle']!='')?$value['fontStyle']:'normal';
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing'])&&$value['letterSpacing']!='')?(int)$value['letterSpacing']:0;
-                   
+
                 foreach ($value as $key => $val) {
                     $val = strtolower($val);
                     switch ($val) {
@@ -13631,7 +13631,7 @@ class ApiControllerv2 extends Controller
                         case 'end_time':
                             if (!empty($request->rsvp_end_time)) {
                                 $inputString = $request->rsvp_end_time;
-                                
+
                                 $udpated[$k][$key] = $inputString[0] === '0' ? substr($inputString, 1) : $inputString;
                             } else {
                                 unset($udpated[$k]); // Remove entry if rsvp_end_time is empty
