@@ -263,7 +263,7 @@
                         RSVP
                     </button> --}}
                     {{-- {{dd($firstEvent['firstname']);}} --}}
-                    <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification"
+                    <button type="button" class="btn btn-secondary pending-rsvp-btn" 
                             data-event_id="{{ $firstEvent['event_id'] ?? '' }}"
                             data-user_id="{{ $firstEvent['user_id'] ?? '' }}"
                             data-event_name="{{ $firstEvent['event_name'] ?? '' }}"
