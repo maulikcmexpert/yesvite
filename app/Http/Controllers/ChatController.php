@@ -491,7 +491,6 @@ class ChatController extends BaseController
         
         try {
             DB::beginTransaction();
-            dd(1);
 
             // ✅ Create Report
             $reportCreate = new UserReportChat();
@@ -528,15 +527,15 @@ class ChatController extends BaseController
                     ->subject('Chat Report Mail');
             });
 
-            // dd(1);
+            dd(1);
             return redirect('messages')->with('msg', 'Report submitted successfully!');
         } catch (QueryException $e) {
 
-            // dd(2);
+            dd(2);
             DB::rollBack();
             return redirect('messages')->with('msg_error', 'Database error occurred!');
         } catch (\Exception $e) {
-            // dd(3);
+            dd(3);
             return redirect('messages')->with('msg_error', 'Something went wrong!');
         }
     }
