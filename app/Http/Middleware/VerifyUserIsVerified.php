@@ -48,7 +48,7 @@ class VerifyUserIsVerified
             ]);
         }
         // return redirect('/')->with('msg_error', 'Unauthorised');
-        return redirect('/');
+        return redirect('/login');
 
     }
 }
