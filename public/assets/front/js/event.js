@@ -1507,7 +1507,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 response.forEach((event, index) => {
                     let imgHtml = `
                         <div class="item">
-                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname} data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
+                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname}" data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
