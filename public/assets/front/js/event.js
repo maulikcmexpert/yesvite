@@ -1693,17 +1693,17 @@ $(".pending_rsvp_slider").owlCarousel({
     
 });
 
-$(document).ready(function () {
-    var pendingModal = $('#pending-rsvp-modal');
+// $(document).ready(function () {
+//     var pendingModal = $('#pending-rsvp-modal');
 
-    // Check if the modal has the 'show' class and remove it
-    if (pendingModal.hasClass('show')) {
-        pendingModal.removeClass('show');
-        pendingModal.css('display', 'none'); // Hide it properly
-        $('body').removeClass('modal-open'); // Remove Bootstrap modal-open class
-        $('.modal-backdrop').remove(); // Remove any leftover backdrop
-    }
-});
+//     // Check if the modal has the 'show' class and remove it
+//     if (pendingModal.hasClass('show')) {
+//         pendingModal.removeClass('show');
+//         pendingModal.css('display', 'none'); // Hide it properly
+//         $('body').removeClass('modal-open'); // Remove Bootstrap modal-open class
+//         $('.modal-backdrop').remove(); // Remove any leftover backdrop
+//     }
+// });
 
 
 $(document).on('click', '.close_rsvp_pending', function () {
