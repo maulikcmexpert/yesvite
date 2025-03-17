@@ -1016,9 +1016,9 @@
         height: calc(100vh - 37.125vh);
     }
     .new-guest-content-wrp .user-contacts {
-        max-height: calc(100vh - 28vh);
-        height: calc(100vh - 28vh);
-        padding-bottom: 50p;
+        max-height: calc(100vh - 150px);
+        height: calc(100vh - 150px);
+        padding-bottom: 50px;
     }
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
         max-height: calc(100vh - 37.75vh);
