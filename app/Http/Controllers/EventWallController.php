@@ -2536,8 +2536,6 @@ class EventWallController extends BaseController
 
             $message = "Reported to admin for this media";
 
-            $support_email = 'prakash.m.cmexpertise@gmail.com';
-
             $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
 
             $getReportedData = EventPost::with('user')
@@ -2554,7 +2552,8 @@ class EventWallController extends BaseController
                 'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
                 'report_from' => "post"
             ];
-dd(env('SUPPORT_MAIL'));
+            $support_email=env('SUPPORT_MAIL');
+            
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
                         ->subject('Chat Report Mail');
