@@ -2542,7 +2542,7 @@ class EventWallController extends BaseController
             $getReportedData = EventPost::with('user')
             ->where('id', $request['event_post_id'])
             ->first();
-                    dd($getReportedData->users->email);
+                    dd($getReportedData->user->email);
             $data = [
                 'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                 'event_name' => $getName->events->event_name,
