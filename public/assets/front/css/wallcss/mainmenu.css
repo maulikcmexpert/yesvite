@@ -3270,8 +3270,27 @@ padding: 12px 24px;
 }
 
 
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .item
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img{
     width: 390px;
+}
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-prev {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    background-color: var(--swiper-theme-color);
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 
 
