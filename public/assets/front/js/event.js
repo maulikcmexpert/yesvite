@@ -1489,10 +1489,10 @@ $(document).on('click','event-notification-icon',function(e){
 let rsvp_ajax_call = 0; 
 // $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
     // $('#loader').css('display', 'flex');
-    if (rsvp_ajax_call === 1) {
-        $('#loader').css('display', 'none'); 
-        return;
-    }
+    // if (rsvp_ajax_call === 1) {
+    //     $('#loader').css('display', 'none'); 
+    //     return;
+    // }
 
     $.ajax({
         url: `${base_url}pending_rsvp_list`,
