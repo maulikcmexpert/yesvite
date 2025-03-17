@@ -1429,6 +1429,8 @@ $(document).ready(function () {
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
+                                console.log({uploadImgInner});
+
                                 uploadImgInner.addClass("d-none");
                             } else {
                                 console.error("Element not found: .create-post-upload-img-inner");
