@@ -1292,6 +1292,7 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
+                                        <input type="hidden" name="post_id" id="postId" class="poll_post_id" value="">
                                     <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                         value="1">
                                     <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"

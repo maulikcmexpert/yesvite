@@ -1952,9 +1952,11 @@ class EventWallController extends BaseController
         $user = Auth::guard('web')->user()->id;
 
         // Find or create the event post
-        $creatEventPost = EventPost::firstOrNew(
-            ['event_id' => $request->event_id, 'user_id' => $user]
-        );
+
+
+        $creatEventPost = EventPost::where('id', $request->post_id)
+        ->where('event_id', $request->event_id)
+        ->first();
         $creatEventPost->post_message = $request->input('content');
 
         if ($request->hasFile('post_recording')) {
