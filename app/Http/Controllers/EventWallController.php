@@ -2554,10 +2554,10 @@ class EventWallController extends BaseController
                 'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
                 'report_from' => "post"
             ];
-
+dd(env('SUPPORT_MAIL'));
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
-                    ->subject('Email Verification Mail');
+                        ->subject('Chat Report Mail');
             });
 
 
