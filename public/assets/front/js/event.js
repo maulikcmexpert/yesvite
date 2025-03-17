@@ -1710,10 +1710,10 @@ $(document).on('click', '.close_rsvp_pending', function () {
     $('#pending-rsvp-modal').modal('hide');
 });
 
-$(document).ready(function () {
-    var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
-    modal.show(); // Ensure Bootstrap handles modal visibility properly
-});
+// $(document).ready(function () {
+//     var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
+//     modal.show(); // Ensure Bootstrap handles modal visibility properly
+// });
 
 $(document).ready(function () {
     var modalElement = document.getElementById('pending-rsvp-modal');
