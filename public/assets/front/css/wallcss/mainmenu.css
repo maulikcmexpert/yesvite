@@ -3285,14 +3285,32 @@ padding: 12px 24px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 20px;
-    background-color: var(--swiper-theme-color);
+    left: 10px;
+    background-color:#2DA9FC;
     max-width: 35px;
     min-width: 35px;
     height: 35px;
     border-radius: 50%;
 }
 
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-next{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    background-color:#2DA9FC;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+} 
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-prev  svg path,
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-next  svg path
+{
+    stroke: var(--white);
+}
 
 /* ===Responsive=== */
 
