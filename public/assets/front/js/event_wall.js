@@ -1385,7 +1385,7 @@ $(document).ready(function () {
                 event_id: eventId,
                 event_post_id: eventPostId,
                 post_privacy:post_privacy,
-                post_content:post_content,
+                post_message:post_content,
                 post_type:post_type
 
             }),

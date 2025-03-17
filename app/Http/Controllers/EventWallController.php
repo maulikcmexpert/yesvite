@@ -3635,23 +3635,7 @@ class EventWallController extends BaseController
     public function updatePost(Request $request)
     {
         $user  = Auth::guard('web')->user();
-        $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'event_id' => ['required', 'exists:events,id'],
-            'post_privacy' => ['required', 'in:1,2,3,4'],
-            'post_type' => ['required', 'in:0,1,2,3'],
-            'commenting_on_off' => ['required', 'in:0,1'],
-            'post_id' => ['required', 'exists:event_posts,id'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'message' => $validator->errors()->first(),
-            ]);
-        }
-        // try {
         DB::beginTransaction();
         $creatEventPost = EventPost::where('id', $request->post_id)->first();
         $creatEventPost->event_id = $request->event_id;
