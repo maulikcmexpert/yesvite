@@ -3841,7 +3841,7 @@ class EventWallController extends BaseController
         $eventId = $request->event_id;
 
         // Fetch photo details from the database
-        $getPhotoList = EventPost::with(['user', 'post_image'])
+        $getPhotoList = EventPost::with(['user', 'post_image','event_post_poll.eventPollOptions'])
         ->where('event_id', $eventId)
         ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
         ->orderBy('id', 'desc')
@@ -3906,7 +3906,7 @@ class EventWallController extends BaseController
 
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
-
+                'pollData' => [],
                 'encrypted_id' => encrypt($value->user->id)
             ];
 
@@ -3923,7 +3923,35 @@ class EventWallController extends BaseController
                 }
                 $postPhotoDetail['mediaData'] = $photoVideoData;
             }
+            if ($value->post_type == '2') {
+                $polls = EventPostPoll::with('eventPollOptions')
+                    ->where([
+                        'event_id' => $eventId,
+                        'event_post_id' => $value->id
+                    ])
+                    ->first();
 
+                if ($polls) {
+                    $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
+
+                    $pollData = [
+                        'poll_id' => $polls->id,
+                        'poll_question' => $polls->poll_question,
+                        'total_poll_duration' => $polls->poll_duration,
+                        'remaining_poll_time' => $pollDura,
+                        'poll_options' => []
+                    ];
+
+                    foreach ($polls->eventPollOptions as $option) {
+                        $pollData['poll_options'][] = [
+                            'id' => $option->id,
+                            'option' => $option->option
+                        ];
+                    }
+
+                    $postPhotoDetail['pollData'] = $pollData;
+                }
+            }
 
             $postPhotoList[] = $postPhotoDetail;
         }
