@@ -1393,14 +1393,12 @@ $(document).ready(function () {
 
 
                     // Set existing images if available
-                    let mediaWrapper = $(".create-post-upload-img-wrp");
+                    let mediaWrapper = $(".imagePreview");
                     mediaWrapper.empty(); // Clear old images
                     if (postData.mediaData.length > 0) {
                         postData.mediaData.forEach((media) => {
-                            let mediaElement = `<div class="uploaded-image">
-                                <img src="${media.post_media}" alt="Uploaded Image">
-                            </div>`;
-                            mediaWrapper.append(mediaElement);
+
+                            mediaWrapper.append(media.post_media);
                         });
                     }
 
