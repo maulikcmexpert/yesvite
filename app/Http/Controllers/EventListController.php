@@ -3076,7 +3076,7 @@ class EventListController extends BaseController
                         'event_id' => $eventdetail->event->id,
                         'firstname' => $eventdetail->user->firstname,
                         'lastname' => $eventdetail->user->lastname,
-                        'profile' => $eventdetail->user->profile,
+                        'profile' => ($eventdetail->user->profile!=null)?$eventdetail->user->profile:"",
                         'event_name' => $eventdetail->event->event_name,
                         'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
                         'user_id'=>$user_id,
