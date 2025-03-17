@@ -226,7 +226,7 @@
                                                                                     class="unmuteClass">Unmute</span>
                                                                             </button>
                                                                         </li>
-
+                                                                        @if ($post['user_id'] == $login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item hide-post-btn postControlButton"
@@ -272,6 +272,7 @@
                                                                                 Delete Post
                                                                             </button>
                                                                         </li>
+                                                                        @endif
                                                                         @if ($post['user_id'] != $login_user_id)
                                                                             <li>
                                                                                 <button
