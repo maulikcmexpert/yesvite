@@ -1588,28 +1588,7 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
-    var pendingModalEl = document.getElementById('pending-rsvp-modal');
-
-    // Check if the modal exists in the DOM
-    if (pendingModalEl) {
-        var pendingModal = bootstrap.Modal.getInstance(pendingModalEl);
-
-        // If modal is not initialized, initialize it
-        if (!pendingModal) {
-            pendingModal = new bootstrap.Modal(pendingModalEl);
-        }
-
-        pendingModal.hide(); // Safely hide the modal
-    }
-
-    // Now, open the new RSVP modal
-    var rsvpModalEl = document.getElementById('rsvp_by_notification');
-    if (rsvpModalEl) {
-        var rsvpModal = new bootstrap.Modal(rsvpModalEl);
-        setTimeout(function () {
-            rsvpModal.show();
-        }, 300);
-    }
+    
     const eventId = $(this).attr('data-event_id');
     const userId = $(this).attr('data-user_id');
     const profile = $(this).attr('data-profile');
@@ -1714,13 +1693,18 @@ $(".pending_rsvp_slider").owlCarousel({
     
 });
 
-$(document).ready(function () {
-    var pendingModal = document.getElementById('pending-rsvp-modal');
-    if (pendingModal) {
-        var modal = new bootstrap.Modal(pendingModal);
-        modal.show();
-    }
-});
+// $(document).ready(function () {
+//     var pendingModal = $('#pending-rsvp-modal');
+
+//     // Check if the modal has the 'show' class and remove it
+//     if (pendingModal.hasClass('show')) {
+//         pendingModal.removeClass('show');
+//         pendingModal.css('display', 'none'); // Hide it properly
+//         $('body').removeClass('modal-open'); // Remove Bootstrap modal-open class
+//         $('.modal-backdrop').remove(); // Remove any leftover backdrop
+//     }
+// });
+
 
 $(document).on('click', '.close_rsvp_pending', function () {
     $('#pending-rsvp-modal').modal('hide');
