@@ -1365,6 +1365,46 @@ $(document).ready(function () {
         });
     });
 
+
+    $('.editPostBtn').on('click', function() {
+        var eventPostId = $(this).data('event-post-id');
+        var eventId = $(this).data('event-id');
+        var post_privacy = $(this).data('post-privacy');
+        var post_type = $(this).data('post-type');
+        var post_content = $(this).data('post-content');
+
+
+        $.ajax({
+            url: base_url + "event_wall/updatePost", // Adjust base_url as necessary
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+            },
+            contentType: "application/json", // Send as JSON
+            data: JSON.stringify({
+                event_id: eventId,
+                event_post_id: eventPostId,
+                post_privacy:post_privacy,
+                post_content:post_content,
+                post_type:post_type
+
+            }),
+            success: function (response) {
+                if (response) {
+                   console.log(response);
+
+                    toastr.success("Event Post edit Successfully");
+                } else {
+                    toastr.error("Event Post  Not Deleted");
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
+            },
+        });
+    });
+
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
