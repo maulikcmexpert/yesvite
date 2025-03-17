@@ -3769,17 +3769,15 @@ class EventWallController extends BaseController
         $user = Auth::guard('web')->user();
         $event_post_id = $request->event_post_id;
         $eventId = $request->event_id;
-        $postCommentList = [];
+
         // Fetch photo details from the database
-        $getPhotoList = EventPost::query();
-        $getPhotoList->with(['user','post_image'])
+        $getPhotoList = EventPost::with(['user', 'post_image'])
+        ->where('event_id', $eventId)
+        ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
+        ->orderBy('id', 'desc')
+        ->get();
 
-            ->where(['event_id' => $eventId, 'event_post_id' => $event_post_id])
-            ->orderBy('id', 'desc');
-
-        $results = $getPhotoList->get();
-
-        if ($results->isEmpty()) {
+        if ($getPhotoList->isEmpty()) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Photo details not found.'
@@ -3789,7 +3787,7 @@ class EventWallController extends BaseController
         $postPhotoList = [];
         $ischeckEventOwner = Event::where(['id' => $eventId])->first();
         $checkeventCohost =  EventInvitedUser::where(['event_id' => $eventId, 'is_co_host' => '1'])->first();
-        foreach ($results as $value) {
+        foreach ($getPhotoList as $value) {
 
             $is_host = "0";
             $is_co_host = "0";
