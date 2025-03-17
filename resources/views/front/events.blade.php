@@ -228,7 +228,6 @@
             </div>
         </div>
       </div> -->
-
       @if(!empty($eventData))
       <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" style="display: block" data-bs-backdrop="true">
         <div class="modal-dialog modal-dialog-centered">
