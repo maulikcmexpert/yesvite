@@ -238,7 +238,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                   <div class="modal-body">
-                      {{-- <div class="pending-rsvp-slider-main-section">
+                      <div class="pending-rsvp-slider-main-section">
 
                         <div class="owl-carousel owl-theme pending_rsvp_slider">
                           <div class="item">
@@ -262,10 +262,10 @@
                                   </div>
                           </div>
                     
-                      </div> --}}
-                      <div class="pending-rsvp-slider-main-section">
+                      </div>
+                      {{-- <div class="pending-rsvp-slider-main-section">
                         <div class="owl-carousel owl-theme pending_rsvp_slider"></div> 
-                    </div>
+                    </div> --}}
                       <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
                         RSVP
                     </button>
