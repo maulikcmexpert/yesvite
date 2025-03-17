@@ -9037,6 +9037,7 @@ function updateEventData() {
     });
 }
 $(document).on("click", ".edit_checkout", async function (e) {
+    $(".dropdown-menu").removeClass("show");
     var isDraftEdit = $(this).attr("data-isDraftEdit");
     if (isDraftEdit) {
         eventData.is_update_event = "0";
