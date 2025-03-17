@@ -3064,9 +3064,18 @@ class EventListController extends BaseController
             ->where(['user_id' => $user_id, 'rsvp_status' => NULL])
             ->get();
     
-        $eventData = ['event_id' => $total_need_rsvp_event->event->id,
-                'event_name' => $total_need_rsvp_event->event->event_name,
-                'event_image' => $total_need_rsvp_event->event->event_image];
+            $eventData = []; 
+
+            foreach ($total_need_rsvp_event as $eventdetail) {
+                if ($eventdetail->event) { 
+                    $eventData[] = [
+                        'event_id' => $eventdetail->event->id,
+                        'event_name' => $eventdetail->event->event_name,
+                        'event_image' => $eventdetail->event->event_image
+                    ];
+                }
+            }
+
                 
     
         dd($eventData);
