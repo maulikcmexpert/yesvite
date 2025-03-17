@@ -1157,6 +1157,7 @@ $(document).ready(function () {
 // };
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass('d-none')
+    $("#photoForm")[0].reset();
     $(".create-post-head-upload-btn").addClass('d-none')
     $("#create-photo-btn").trigger("click");
 });
