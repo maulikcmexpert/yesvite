@@ -1156,7 +1156,7 @@ $(document).ready(function () {
 //     openstoryModal(); // Open the modal after the page loads
 // };
 $("#photos_click").on("click", function () {
-
+    $(".create-post-upload-img-inner").removeClass("d-none");
     $("#create-photo-btn").trigger("click");
 });
 $("#poll_click").on("click", function () {
@@ -1440,7 +1440,7 @@ $(document).ready(function () {
                                 console.log({uploadImgInner});
 
                                 // uploadImgInner.addClass("d-none");
-                                uploadImgInner.hide();
+                                uploadImgInner.addClass('d-none');
                             } else {
                                 console.error("Element not found: .create-post-upload-img-inner");
                             }
@@ -1450,59 +1450,25 @@ $(document).ready(function () {
                             uploadImgInner.removeClass("d-none");
                         }
                     }
-
                     if (postData.post_type == "2") {
                         $("#create-poll-btn").trigger("click"); // Open poll form modal
 
                         let pollData = postData.pollData;
 
                         if (pollData) {
-                            $(".poll_qus").val(pollData.poll_question);
+                            $("#yourquestion").val(pollData.poll_question);
                             $("select[name='duration']").val(pollData.total_poll_duration);
 
                             let options = pollData.poll_options || []; // Get poll options
-                            // let optionContainer = $(".poll-options"); // Target poll options container
 
-                            optionContainer.empty(); // Clear existing options
-
-                            // Ensure at least 2 options are present
-                            while (options.length < 2) {
-                                options.push({ option: "" });
-                            }
-
-                            options.forEach((option, index) => {
-                                let newOption = $(`
-                                    <div class="mb-3 option-poll">
-                                        <label class="form-label d-flex align-items-center justify-content-between">
-                                            <p>Option <span class="option-number">${index + 1}</span>*</p>
-                                            <span class="char-count">0/140</span>
-                                        </label>
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control poll-option-input" name="options[]" value="${option.option}" required>
-                                            <span class="input-option-delete">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                `);
-
-                                optionContainer.append(newOption);
-                            });
-
-                            // Bind delete functionality
-                            $(".input-option-delete").on("click", function () {
-                                if ($(".poll-options .option-poll").length > 2) {
-                                    $(this).closest(".option-poll").remove();
+                            $(".poll-options input[name='options[]']").each((index, element) => {
+                                if (options[index]) {
+                                    $(element).val(options[index].option); // Set existing options
                                 }
                             });
                         }
                     }
+
 
 
 

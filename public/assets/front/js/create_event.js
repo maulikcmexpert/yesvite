@@ -9062,6 +9062,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
     if (save1 == 8 && save2 == 8) {
         updateEventData();
     }
+    let isEditBtn = $(this).attr("data-isEditBtn");
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
