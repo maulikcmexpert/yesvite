@@ -230,7 +230,7 @@
       </div> -->
 
       @if(!empty($eventData))
-      <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block">
+      <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" style="display: block">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
