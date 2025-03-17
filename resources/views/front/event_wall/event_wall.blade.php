@@ -487,6 +487,7 @@
                                                                     </h3>
                                                                 </div>
                                                             @endif
+                                                            <input type="hidden" class="isNewPost" name="isNewPost" value="1">
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
