@@ -1431,7 +1431,8 @@ $(document).ready(function () {
                             if (uploadImgInner.length > 0) {
                                 console.log({uploadImgInner});
 
-                                uploadImgInner.addClass("d-none");
+                                // uploadImgInner.addClass("d-none");
+                                uploadImgInner.hide();
                             } else {
                                 console.error("Element not found: .create-post-upload-img-inner");
                             }
