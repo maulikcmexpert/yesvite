@@ -1511,6 +1511,9 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
+                        if (index === 0) {
+                            $(".pending-rsvp-btn").attr("data-event_id", event.event_id);
+                        }
                     slider.append(imgHtml);
                 });
 
@@ -1539,6 +1542,8 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 });
                 rsvp_ajax_call = 1;
                 $('#loader').css('display', 'none');
+                let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
+
             } else {
                 toastr.info('No events found.');
                 $('#loader').css('display', 'none');
@@ -1556,7 +1561,11 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     // alert(currentImg);
     $(".pending-rsvp-btn").attr("data-event_id",currentImg);
 });
+$(document).on('click','.pending-rsvp-btn',function(){
+   var event_id= $(".pending-rsvp-btn").attr("data-event_id");
+   alert(event_id);
 
+});
 $(".pending_rsvp_slider").owlCarousel({
     loop: true,
     items:1,
