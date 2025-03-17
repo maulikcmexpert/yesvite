@@ -2539,7 +2539,7 @@ class EventWallController extends BaseController
             $support_email = 'prakash.m.cmexpertise@gmail.com';
 
             $getName = UserReportToPost::with(['users', 'events','event_posts.users'])->where('id', $savedReportId)->first();
-            dd($getName->event_posts->email);
+            dd($getName->event_posts);
             $data = [
                 'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                 'event_name' => $getName->events->event_name,
