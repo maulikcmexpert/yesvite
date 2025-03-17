@@ -238,13 +238,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
+                    <div class="pending-rsvp-slider-main-section">
+                      <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
                         RSVP
                     </button>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
