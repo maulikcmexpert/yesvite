@@ -3277,6 +3277,15 @@ padding: 12px 24px;
     }
 }
 
+@media only screen and (min-width: 1400px){
+    #calendar .weekdays .day{
+        font-size: 16px !important;
+    }
+    #calendar .day .active-day{
+        font-size: 15px !important;
+    }
+}
+
 @media only screen and (max-width: 1399px) {
     .home-center-content-head h1 {
         font-size: 32px;

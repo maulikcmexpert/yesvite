@@ -247,6 +247,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('search_past_event',  [EventListController::class, 'SearchPastEvent'])->name('search_past_event');
     Route::get('event_filter',  [EventListController::class, 'EventFilter'])->name('event_filter');
     Route::get('get_total_month_data',  [EventListController::class, 'TotalMonthData'])->name('get_total_month_data');
+    Route::get('pending_rsvp_list',  [EventListController::class, 'pending_rsvp_list'])->name('pending_rsvp_list');
 
     Route::get('event_filter_data',  [EventListController::class, 'EventFilterData'])->name('event_filter_data');
     Route::get('get_event_list_data',  [EventListController::class, 'getEventDateList'])->name('get_event_list_data');
