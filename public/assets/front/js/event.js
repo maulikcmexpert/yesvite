@@ -1689,6 +1689,12 @@ $(".pending_rsvp_slider").owlCarousel({
     ],
     
 });
+
+$(document).on('click', function (event) {
+    var modal = $("#pending-rsvp-modal");
+    modal.css('display','none');
+});
+
 // $(document).on('click','.notification-toggle-menu',function(){
 
 //     var search_event=$(this).val();
