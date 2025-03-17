@@ -1427,7 +1427,11 @@ $(document).ready(function () {
                             });
 
                             // Hide the upload section when images are uploaded
-                            uploadImgInner.addClass("d-none");
+                            if (uploadImgInner.length > 0) {
+                                uploadImgInner.addClass("d-none");
+                            } else {
+                                console.error("Element not found: .create-post-upload-img-inner");
+                            }
                             uploadHeadButton.removeClass("d-none");
                         } else {
                             // Show the upload section when no images are present
