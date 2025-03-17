@@ -290,7 +290,7 @@ class EventWallController extends BaseController
                 'post_type' => $value->post_type,
                 'post_privacy' => $value->post_privacy,
                 'created_at' => $value->created_at,
-                'is_in_photo_moudle'=>$value->is_in_photo_moudle,
+                'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'posttime' => setpostTime($value->created_at),
                 'commenting_on_off' => $value->commenting_on_off,
                 'post_image' => [],
@@ -1591,8 +1591,8 @@ class EventWallController extends BaseController
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
-        ->where('event_id', $request->event_id)
-        ->first();
+            ->where('event_id', $request->event_id)
+            ->first();
         if ($creatEventPost) {
             // Delete old images
 
@@ -1636,22 +1636,35 @@ class EventWallController extends BaseController
         }
 
         // Handle poll post
-        if ($request->post_type == '2') {
-                        $eventPostPoll = new EventPostPoll;
-                        $eventPostPoll->event_id = $request->event_id;
-                        $eventPostPoll->event_post_id = $creatEventPost->id;
-                        $eventPostPoll->poll_question = $request->poll_question;
-                        $eventPostPoll->poll_duration = $request->poll_duration;
-                        if ($eventPostPoll->save()) {
-                            $option = json_decode($request->option);
-                            foreach ($option as $value) {
-                                $pollOption = new EventPostPollOption;
-                                $pollOption->event_post_poll_id = $eventPostPoll->id;
-                                $pollOption->option = $value;
-                                $pollOption->save();
-                            }
-                        }
-                    }
+       // Handle poll post
+if ($request->post_type == '2') {
+
+    $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
+
+    if ($eventPostPoll) {
+
+        $msg = 'Event Post poll updated successfully!';
+
+    } else {
+        // Create a new poll
+        $eventPostPoll = new EventPostPoll;
+        $eventPostPoll->event_id = $request->event_id;
+        $eventPostPoll->event_post_id = $creatEventPost->id;
+        $eventPostPoll->poll_question = $request->poll_question;
+        $eventPostPoll->poll_duration = $request->poll_duration;
+        $eventPostPoll->save();
+    }
+
+    // Save new poll options
+    $options = json_decode($request->option);
+    foreach ($options as $value) {
+        $pollOption = new EventPostPollOption;
+        $pollOption->event_post_poll_id = $eventPostPoll->id;
+        $pollOption->option = $value;
+        $pollOption->save();
+    }
+}
+
 
         return redirect()->back()->with('msg', $msg);
     }
@@ -2582,52 +2595,51 @@ class EventWallController extends BaseController
     public function postMediaReport(Request $request)
     {
         $user  = Auth::guard('web')->user();
-            $reportCreate = new UserReportToPost;
-            $reportCreate->event_id = $request['event_id'];
-            $reportCreate->user_id =  $user->id;
-            $reportCreate->event_post_id = $request['event_post_id'];
-            $reportCreate->post_media_id = $request['post_media_id'];
-            $reportCreate->report_type = $request['report_type'];
-            $reportCreate->report_description = $request['report_description'];
-            // $reportCreate->specific_report = '1';
-            $reportCreate->save();
+        $reportCreate = new UserReportToPost;
+        $reportCreate->event_id = $request['event_id'];
+        $reportCreate->user_id =  $user->id;
+        $reportCreate->event_post_id = $request['event_post_id'];
+        $reportCreate->post_media_id = $request['post_media_id'];
+        $reportCreate->report_type = $request['report_type'];
+        $reportCreate->report_description = $request['report_description'];
+        // $reportCreate->specific_report = '1';
+        $reportCreate->save();
 
-            // $getName = UserReportToPost::with(['reporter_user', 'to_reporter_user'])
-            // ->where('id', $reportCreate->id)
-            // ->first();
+        // $getName = UserReportToPost::with(['reporter_user', 'to_reporter_user'])
+        // ->where('id', $reportCreate->id)
+        // ->first();
 
-            $savedReportId =  $reportCreate->id;
-            $createdAt = $reportCreate->created_at;
+        $savedReportId =  $reportCreate->id;
+        $createdAt = $reportCreate->created_at;
 
-            $message = "Reported to admin for this media";
+        $message = "Reported to admin for this media";
 
-            $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+        $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
 
-            $getReportedData = EventPost::with('user')
+        $getReportedData = EventPost::with('user')
             ->where('id', $request['event_post_id'])
             ->first();
 
-            $data = [
-                'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
-                'event_name' => $getName->events->event_name,
-                'reported_username' => $getReportedData->user->firstname. ' '. $getReportedData->user->lastname,
-                'reported_email' => $getReportedData->user->email,
-                'report_type' => $getName->report_type,
-                'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
-                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
-                'report_from' => "post"
-            ];
-            $support_email=env('SUPPORT_MAIL');
+        $data = [
+            'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
+            'event_name' => $getName->events->event_name,
+            'reported_username' => $getReportedData->user->firstname . ' ' . $getReportedData->user->lastname,
+            'reported_email' => $getReportedData->user->email,
+            'report_type' => $getName->report_type,
+            'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
+            'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+            'report_from' => "post"
+        ];
+        $support_email = env('SUPPORT_MAIL');
 
-            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
-                $messages->to($support_email)
-                        ->subject('User has been reported');
-            });
+        Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+            $messages->to($support_email)
+                ->subject('User has been reported');
+        });
 
 
 
-            return response()->json(['status' => 1, 'message' => $message]);
-
+        return response()->json(['status' => 1, 'message' => $message]);
     }
     public function get_phoneContact(Request $request)
     {
@@ -3824,7 +3836,6 @@ class EventWallController extends BaseController
             if ($request->hasFile('post_recording') || $request->post_type == '2') {
                 delete_event_post_images($request->post_id);
             }
-
         }
 
         DB::commit();
@@ -3842,10 +3853,10 @@ class EventWallController extends BaseController
 
         // Fetch photo details from the database
         $getPhotoList = EventPost::with(['user', 'post_image'])
-        ->where('event_id', $eventId)
-        ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
-        ->orderBy('id', 'desc')
-        ->get();
+            ->where('event_id', $eventId)
+            ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
+            ->orderBy('id', 'desc')
+            ->get();
 
         if ($getPhotoList->isEmpty()) {
             return response()->json([
@@ -3898,11 +3909,11 @@ class EventWallController extends BaseController
                 'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
 
                 'event_id' => $value->event_id,
-                'post_type'=>$value->post_type,
-                'post_privacy'=>$value->post_privacy,
+                'post_type' => $value->post_type,
+                'post_privacy' => $value->post_privacy,
                 'id' => $value->id,
                 'post_message' => $value->post_message ?? "",
-                'comment_on_off'=>$value->commenting_on_off,
+                'comment_on_off' => $value->commenting_on_off,
 
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
