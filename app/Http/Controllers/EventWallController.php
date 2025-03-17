@@ -3841,7 +3841,7 @@ class EventWallController extends BaseController
         $eventId = $request->event_id;
 
         // Fetch photo details from the database
-        $getPhotoList = EventPost::with(['user', 'post_image','event_post_poll.eventPollOptions'])
+        $getPhotoList = EventPost::with(['user', 'post_image','event_poll_option'])
         ->where('event_id', $eventId)
         ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
         ->orderBy('id', 'desc')
@@ -3924,7 +3924,7 @@ class EventWallController extends BaseController
                 $postPhotoDetail['mediaData'] = $photoVideoData;
             }
             if ($value->post_type == '2') {
-                $polls = EventPostPoll::with('event_post_poll.event_poll_option')
+                $polls = EventPostPoll::with('event_poll_option')
                     ->where([
                         'event_id' => $eventId,
                         'event_post_id' => $value->id
