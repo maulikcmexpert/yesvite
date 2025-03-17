@@ -239,6 +239,31 @@
                 </div>
                 <div class="modal-body">
                     <div class="pending-rsvp-slider-main-section">
+
+                      <div class="owl-carousel owl-theme pending_rsvp_slider">
+                        <div class="item">
+                            <div class="setting-img">
+                                    <img id="eventImage" src="" />
+                                </div>
+                            </div>
+                        <div class="item sliderImages-1" style="display:none;">  
+                                <div class="setting-img">
+                                    <img id="sliderImages-1" src="" />
+                                </div>
+                            </div>
+                        <div class="item sliderImages-2" style="display:none;">
+                        <div class="setting-img">
+                                    <img id="sliderImages-2" src="" />
+                                </div>
+                        </div>
+                        <div class="item sliderImages-3" style="display:none;">
+                        <div class="setting-img">
+                                    <img id="sliderImages-3" src="" />
+                                </div>
+                        </div>
+                  
+                    </div>
+
                       <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
                         RSVP
                     </button>
