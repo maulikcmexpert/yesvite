@@ -1585,7 +1585,7 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-event_name",event_name);
     $(".pending-rsvp-btn").attr("data-rsvp_kids",kids);
     $(".pending-rsvp-btn").attr("data-rsvp_adults",adults);
-    $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
+    $(".pending-rsvp-btn").attr("data-rsvp",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
     
@@ -1672,7 +1672,7 @@ $(document).on('click','.pending-rsvp-btn',function(){
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
 
-            // $('#rsvp_by_notification').modal('show');
+            $('#rsvp_by_notification').modal('show');
 
 });
 $(".pending_rsvp_slider").owlCarousel({
@@ -1708,6 +1708,11 @@ $(".pending_rsvp_slider").owlCarousel({
 
 $(document).on('click', '.close_rsvp_pending', function () {
     $('#pending-rsvp-modal').modal('hide');
+});
+
+$(document).ready(function () {
+    var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
+    modal.show(); // Ensure Bootstrap handles modal visibility properly
 });
 
 

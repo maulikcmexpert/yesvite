@@ -230,7 +230,7 @@
       </div> -->
       @if(!empty($eventData))
       {{-- <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" style="display: block"> --}}
-        <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" style="display: block;" data-bs-backdrop="false" aria-modal="true" role="dialog">
+        <div class="modal fade cmn-modal" id="pending-rsvp-modal" tabindex="-1" aria-modal="true" role="dialog">
 
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -263,7 +263,7 @@
                         RSVP
                     </button> --}}
                     {{-- {{dd($firstEvent['firstname']);}} --}}
-                    <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification"
+                    <button type="button" class="btn btn-secondary pending-rsvp-btn" 
                             data-event_id="{{ $firstEvent['event_id'] ?? '' }}"
                             data-user_id="{{ $firstEvent['user_id'] ?? '' }}"
                             data-event_name="{{ $firstEvent['event_name'] ?? '' }}"

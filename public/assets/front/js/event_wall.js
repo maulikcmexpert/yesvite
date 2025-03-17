@@ -1391,8 +1391,14 @@ $(document).ready(function () {
                     $('.poll_post_id').val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
-                    $('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
+                    let privacyValue = String(postData.post_privacy);
 
+                    // Uncheck all radio buttons first
+                    $('input[name="post_privacy"]').prop("checked", false);
+
+                    // Check the correct one
+                    $('input[name="post_privacy"][value="' + privacyValue + '"]').prop("checked", true);
+                    $('.hiddenVisibility').val(privacyValue);
                     // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
                     $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
 
