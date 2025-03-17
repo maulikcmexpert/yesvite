@@ -1430,15 +1430,54 @@ $(document).on('click','#get_pendding_rsvp_btn',function(e){
     // e.stopPropagation();
     $.ajax({
         url: `${base_url}pending_rsvp_list`,
-        type: 'GET',        
-        data: {},          
-        success: function (response) { 
-        
+        type: 'GET',
+        data: {},
+        success: function (response) {
+            if (response.length > 0) {
+                console.log(response);
+                let slider = $(".pending_rsvp_slider");
+                slider.trigger('destroy.owl.carousel').html(''); // Remove old items
+    
+                // Loop through the image array and append new items
+                response.forEach((event, index) => {
+                    let imgHtml = `
+                        <div class="item sliderImages-${index}">
+                            <div class="setting-img">
+                                <img id="sliderImages-${index}" src="${event.event_image}" />
+                            </div>
+                        </div>`;
+                    slider.append(imgHtml);
+                });
+    
+                // Reinitialize Owl Carousel
+                slider.owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        }
+                    }
+                });
+            } else {
+                toastr.info('No events found.');
+            }
         },
         error: function (error) {
-          toastr.error('Something went wrong. Please try again!');
+            toastr.error('Something went wrong. Please try again!');
         },
-      });
+    });
+    
 });
 
 $(".pending_rsvp_slider").owlCarousel({

@@ -3081,9 +3081,9 @@ class EventListController extends BaseController
             }
             
 
-                
+            return $eventData;
     
-        dd($eventData);
+        // dd($eventData);
     }
     
 }
