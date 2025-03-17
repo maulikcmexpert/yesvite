@@ -3067,18 +3067,19 @@ class EventListController extends BaseController
             $eventData = []; 
 
             foreach ($total_need_rsvp_event as $eventdetail) {
-                if ($eventdetail->event) { 
-                    $images = EventImage::where('event_id', $eventdetail->id)->orderBy('type', 'ASC')->first();
-
+                $images = EventImage::where('event_id', $eventdetail->event->id ?? null)
+                    ->orderBy('type', 'ASC')
+                    ->first();
+            
+                if ($eventdetail->event) {
                     $eventData[] = [
                         'event_id' => $eventdetail->event->id,
                         'event_name' => $eventdetail->event->event_name,
-                        // 'event_image' => $eventdetail->event->design_image,home-upcoming-events-card-right zoom_img
-                        // $eventDetail['event_images'] = ($images != null) ? asset('storage/event_images/' . $images->image) : "";
-                        'event_image' => asset('storage/event_images/' . $images->image),
+                        'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
                     ];
                 }
             }
+            
 
                 
     
