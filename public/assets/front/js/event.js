@@ -1553,7 +1553,8 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
 
 $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
-    alert(currentImg);
+    // alert(currentImg);
+    $(".pending-rsvp-btn").attr("data-event_id",currentImg);
 });
 
 $(".pending_rsvp_slider").owlCarousel({
