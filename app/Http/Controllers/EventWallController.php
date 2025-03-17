@@ -1958,7 +1958,7 @@ class EventWallController extends BaseController
         ->where('event_id', $request->event_id)
         ->first();
 
-        $creatEventPost->post_message = $request->input('content') ?? "";
+        $creatEventPost->post_message = $request->input('content') ;
 
         if ($request->hasFile('post_recording')) {
             $record = $request->post_recording;
