@@ -1578,8 +1578,88 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-event_name",event_name); ;
 });
 $(document).on('click','.pending-rsvp-btn',function(){
-   var event_id= $(".pending-rsvp-btn").attr("data-event_id");
-   alert(event_id);
+    const eventId = $(this).data('event_id');
+    const userId = $(this).data('user_id');
+    const profile = $(this).data('profile');
+    const firstName = $(this).data('firstname');
+    const lastName = $(this).data('lastname');
+    const hosted_by = firstName + ' ' + lastName; 
+    const event_name = $(this).data('event_name');
+    const rsvp_status=$(this).attr('data-rsvp');
+    const kids=$(this).attr('data-rsvp_kids');
+    const adults=$(this).attr('data-rsvp_adults');
+
+    console.log(rsvp_status);
+    console.log(kids);
+    console.log(adults);
+
+
+    
+    $('#rsvp_notification_adult').val("0");
+     $('#rsvp_notification_kids').val("0");
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_yes').prop('checked',false);
+     $('.rsvp_minus_notify').prop('disabled',false);
+     $('.rsvp_plus_notify').prop('disabled',false);
+
+    $('#notification_rsvp_profile').attr('src', "").show();
+    $('#notification_rsvp_eventName').text("");
+    $('#notification_rsvp_host').text("");
+    $('#rsvp_user_id').val("");
+    $('#rsvp_event_id').val("");
+    $('.rsvp_initials').remove(); // Remove any previously added initials
+    $('#rsvp_yes').prop('checked',false);
+    $('#rsvp_no').prop('checked',false);
+
+    // $.ajax({
+    //     url: `${base_url}get_user_info_rsvp`,
+    //     type: 'GET',
+    //     data: {eventId:eventId,userId:userId},
+    //     success: function (response) {
+    //         console.log(response);
+    //         const profile = response.event_data.profile;
+    //         const firstName = response.event_data.firstname;
+    //         const lastName = response.event_data.lastname;
+    //         const hosted_by = response.event_data.host;
+    //         const event_name = response.event_data.name;
+
+
+            if (profile) {
+                $('#notification_rsvp_profile').attr('src', profile).show();
+            } else {
+                const firstInitial = firstName && firstName[0] ? firstName[0].toUpperCase() : '';
+                const secondInitial = lastName && lastName[0] ? lastName[0].toUpperCase() : '';
+                const initials = firstInitial + secondInitial;
+                const fontColor = `fontcolor${firstInitial}`;
+            
+                $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
+                $('#notification_rsvp_profile').after(
+                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;color: white">
+                        ${initials}
+                    </h4>`
+                );
+            }
+
+            if(rsvp_status!=""){
+                if(rsvp_status=="1"){
+                    $('#rsvp_yes').prop('checked',true);
+                }else{
+                    $('#rsvp_no').prop('checked',true);
+                    $('.rsvp_minus_notify').prop('disabled',true);
+                    $('.rsvp_plus_notify').prop('disabled',true);
+                }
+            }
+            if(kids!=""){
+                $('#rsvp_notification_kids').val(kids);
+            }
+            if(adults!=""){
+                $('#rsvp_notification_adult').val(adults);
+            }
+            $('#notification_rsvp_eventName').text(event_name);
+            $('#notification_rsvp_host').text(hosted_by);
+            $('#rsvp_user_id').val(userId);
+            $('#rsvp_event_id').val(eventId);
 
 });
 $(".pending_rsvp_slider").owlCarousel({
