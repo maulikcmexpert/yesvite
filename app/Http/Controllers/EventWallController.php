@@ -3627,4 +3627,159 @@ class EventWallController extends BaseController
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+
+
+    public function updatePost(Request $request)
+    {
+        $user  = Auth::guard('web')->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'event_id' => ['required', 'exists:events,id'],
+            'post_privacy' => ['required', 'in:1,2,3,4'],
+            'post_type' => ['required', 'in:0,1,2,3'],
+            'commenting_on_off' => ['required', 'in:0,1'],
+            'post_id' => ['required', 'exists:event_posts,id'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 0,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+        // try {
+        DB::beginTransaction();
+        $creatEventPost = EventPost::where('id', $request->post_id)->first();
+        $creatEventPost->event_id = $request->event_id;
+        $creatEventPost->user_id = $user->id;
+        $creatEventPost->post_message = $request->post_message;
+
+        if ($request->hasFile('post_recording')) {
+
+
+            $record = $request->post_recording;
+            $recordingName = time() . '_' . $record->getClientOriginalName();
+            $record->move(public_path('storage/event_post_recording'), $recordingName);
+            $creatEventPost->post_recording = $recordingName;
+        }
+
+        $creatEventPost->post_privacy = $request->post_privacy;
+        $creatEventPost->post_type = $request->post_type;
+        $creatEventPost->commenting_on_off = $request->commenting_on_off;
+        $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
+        $creatEventPost->save();
+        $video = 0;
+        $image = 0;
+        if ($creatEventPost->id) {
+            if ($request->post_type == '1') {
+                if (!empty($request->post_image)) {
+                    $postimages = $request->post_image;
+
+                    foreach ($postimages as $key => $postImgValue) {
+                        $postImage = $postImgValue;
+                        $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
+                        $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
+                        $duration = "";
+                        $thumbName = "";
+                        if ($checkIsimageOrVideo == 'video') {
+                            $duration = getVideoDuration($postImage);
+                            if (isset($request->thumbnail) && $request->thumbnail != Null) {
+                                $thumbimage = $request->thumbnail[$key];
+                                $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
+                                // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
+                                $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
+                            }
+                            if (file_exists(public_path('storage/post_image/') . $imageName)) {
+                                $imagePath = public_path('storage/post_image/') . $imageName;
+                                unlink($imagePath);
+                            }
+                            $postImage->move(public_path('storage/post_image'), $imageName);
+                        } else {
+
+                            $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+                            Image::load($postImgValue->getRealPath())
+                                ->width(500)
+                                ->optimize()
+                                ->save($temporaryThumbnailPath);
+                            $destinationPath = public_path('storage/post_image/');
+                            if (!file_exists($destinationPath)) {
+                                mkdir($destinationPath, 0755, true);
+                            }
+                            rename($temporaryThumbnailPath, $destinationPath . $imageName);
+                        }
+                        if ($checkIsimageOrVideo == 'video') {
+                            $video++;
+                        } else {
+                            $image++;
+                        }
+                        $eventPostImage = new EventPostImage();
+                        $eventPostImage->event_id = $request->event_id;
+                        $eventPostImage->event_post_id = $creatEventPost->id;
+                        $eventPostImage->post_image = $imageName;
+                        $eventPostImage->duration = $duration;
+                        $eventPostImage->type = $checkIsimageOrVideo;
+                        $eventPostImage->thumbnail = $thumbName;
+                        $eventPostImage->save();
+                    }
+                }
+            }
+
+            if (isset($request->delete_image) && !empty(json_decode($request->delete_image))) {
+                $delete_images = json_decode($request->delete_image);
+                foreach ($delete_images as $key => $delete_image) {
+                    $deleteImage = EventPostImage::where('id', $delete_image)->first();
+                    if ($deleteImage != null) {
+                        if ($deleteImage->type == 'image') {
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        } elseif ($deleteImage->type == 'video') {
+                            if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
+                                $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
+                                unlink($imagePath);
+                            }
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        }
+                        $deleteImage->delete();
+                    }
+                }
+            }
+
+            if ($request->post_type == '2') {
+                EventPostPoll::where('event_post_id', $request->post_id)->delete();
+
+                $eventPostPoll = new EventPostPoll;
+                $eventPostPoll->event_id = $request->event_id;
+                $eventPostPoll->event_post_id = $creatEventPost->id;
+                $eventPostPoll->poll_question = $request->poll_question;
+                $eventPostPoll->poll_duration = $request->poll_duration;
+                if ($eventPostPoll->save()) {
+                    $option = json_decode($request->option);
+                    foreach ($option as $value) {
+                        $pollOption = new EventPostPollOption;
+                        $pollOption->event_post_poll_id = $eventPostPoll->id;
+                        $pollOption->option = $value;
+                        $pollOption->save();
+                    }
+                }
+            }
+
+            if ($request->hasFile('post_recording') || $request->post_type == '2') {
+                delete_event_post_images($request->post_id);
+            }
+
+        }
+
+        DB::commit();
+
+
+
+        return response()->json(['status' => 1, 'message' => "Post is Updated sucessfully"]);
+    }
 }
