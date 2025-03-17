@@ -1,28 +1,4 @@
-{{-- {{dd(session()->get('user_ids'))}} --}}
-
-{{-- {{dd($inviteduser)}} --}}
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>New Event Detail</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- custom-style -->
-    <link href="./assets/css/style.css" rel="stylesheet">
-
-    <!-- font-awesome-cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-
-</head>
-
-<body>
-    <!-- ============ header ========= -->
-    --}}
+{{ dd($eventDetail['isCopy']) }}
 @php
     $userS = Auth::guard('web')->user();
     $isCopyNew = $eventDetail['isCopy'];
