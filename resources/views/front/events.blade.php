@@ -234,12 +234,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="d-flex align-items-center justify-content-between w-100">
-                        <div>
-                            <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
-                        </div>
-                        
-                    </div>
+                    <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
