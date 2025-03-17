@@ -625,6 +625,10 @@
     background-color: #fff !important;
 }
 
+.users-data a svg{
+    min-width: 14px;
+}
+
 /* ============ responsive ============ */
 
 
@@ -930,6 +934,7 @@
 
     #YesviteUserAll .users-data .text-start a {
         word-break: break-all;
+        min-width: 150px;
     }
 
     #sidebar_add_co_host .list_all_invited_user {
@@ -1013,6 +1018,7 @@
     .new-guest-content-wrp .user-contacts {
         max-height: calc(100vh - 28vh);
         height: calc(100vh - 28vh);
+        padding-bottom: 50p;
     }
     .new-guest-content-wrp:has(.group-card.view_members) .user-contacts {
         max-height: calc(100vh - 37.75vh);
@@ -1085,5 +1091,9 @@
 
     #YesviteUserAll .users-data .text-start {
         max-width: 100px;
+    }
+    #YesviteUserAll .users-data .text-start a {
+        word-break: break-all;
+        min-width: 120px;
     }
 }
