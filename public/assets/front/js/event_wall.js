@@ -1450,6 +1450,8 @@ $(document).ready(function () {
                             $("select[name='duration']").val(pollData.total_poll_duration);
 
                             let options = pollData.poll_options || []; // Get poll options
+                            let optionContainer = $(".poll-options"); // Target poll options container
+
 
 
                             if (options.length >= 2) { // Ensure there are at least 2 options
