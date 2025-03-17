@@ -1298,7 +1298,7 @@
                                     <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                         value="1">
                                     {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
-                                    <input type="hidden" name="content" id="pollContent">
+                                    <input type="hidden" name="content" id="pollContent" value="">
                                     <div class="mb-3">
                                         <label for="yourquestion"
                                             class="form-label d-flex align-items-center justify-content-between">Your
