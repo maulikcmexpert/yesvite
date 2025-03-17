@@ -1745,17 +1745,17 @@ $(document).ready(function () {
     });
 });
 
-// $(document).ready(function () {
-//     var modalElement = $('#pending-rsvp-modal');
+$(document).ready(function () {
+    var modalElement = $('#pending-rsvp-modal');
 
-//     modalElement.on('show.bs.modal', function () {
-//         $('body').css('overflow', 'hidden');
-//     });
+    modalElement.on('show.bs.modal', function () {
+        document.body.classList.add("no-scroll"); // Disable background scrolling
+    });
 
-//     modalElement.on('hidden.bs.modal', function () {
-//         $('body').css('overflow', 'auto');
-//     });
-// });
+    modalElement.on('hidden.bs.modal', function () {
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+    });
+});
 
 // $(document).on('click','.notification-toggle-menu',function(){
 
