@@ -3942,7 +3942,7 @@ class EventWallController extends BaseController
                         'poll_options' => []
                     ];
 
-                    foreach ($polls->eventPollOptions as $option) {
+                    foreach ($polls->event_poll_option as $option) {
                         $pollData['poll_options'][] = [
                             'id' => $option->id,
                             'option' => $option->option
