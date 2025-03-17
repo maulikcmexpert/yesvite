@@ -235,7 +235,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close_rsvp_pending" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                   <div class="modal-body">
                       <div class="pending-rsvp-slider-main-section">
@@ -261,16 +261,17 @@
                       {{-- <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
                         RSVP
                     </button> --}}
+                    {{-- {{dd($firstEvent['firstname']);}} --}}
                     <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification"
-                            data-event_id="{{ $firstEvent->event_id ?? '' }}"
-                            data-user_id="{{ $firstEvent->user_id ?? '' }}"
-                            data-event_name="{{ $firstEvent->event_name ?? '' }}"
-                            data-firstname="{{ $firstEvent->firstname ?? '' }}"
-                            data-lastname="{{ $firstEvent->lastname ?? '' }}"
-                            data-profile="{{ $firstEvent->profile ?? '' }}"
-                            data-rsvp_kids="{{ $firstEvent->kids ?? '' }}"
-                            data-rsvp_adults="{{ $firstEvent->adults ?? '' }}"
-                            data-rsvp="{{ $firstEvent->rsvp_status ?? '' }}">
+                            data-event_id="{{ $firstEvent['event_id'] ?? '' }}"
+                            data-user_id="{{ $firstEvent['user_id'] ?? '' }}"
+                            data-event_name="{{ $firstEvent['event_name'] ?? '' }}"
+                            data-firstname="{{ $firstEvent['firstname'] ?? '' }}"
+                            data-lastname="{{ $firstEvent['lastname'] ?? '' }}"
+                            data-profile="{{ $firstEvent['profile'] ?? '' }}"
+                            data-rsvp_kids="{{ $firstEvent['kids'] ?? '' }}"
+                            data-rsvp_adults="{{ $firstEvent['adults'] ?? '' }}"
+                            data-rsvp="{{ $firstEvent['rsvp_status'] ?? '' }}">
                             RSVP
                         </button>
                     </div>
