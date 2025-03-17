@@ -1157,7 +1157,12 @@ $(document).ready(function () {
 // };
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass('d-none')
-    $("#photoForm")[0].reset();
+    $("#postContent").val("");
+    $("#pollForm")[0].reset(); // Reset poll form
+    $("#photoForm")[0].reset(); // Reset photo form
+    $("#imagePreview").empty(); // Clear image preview
+    $(".char-count").text("0/140"); // Reset char count
+    $(".option-poll").empty();
     $(".create-post-head-upload-btn").addClass('d-none')
     $("#create-photo-btn").trigger("click");
 });
