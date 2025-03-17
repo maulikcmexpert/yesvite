@@ -237,33 +237,35 @@
                     <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="pending-rsvp-slider-main-section">
+                  <div class="modal-body">
+                      <div class="pending-rsvp-slider-main-section">
 
-                      <div class="owl-carousel owl-theme pending_rsvp_slider">
-                        <div class="item">
-                            <div class="setting-img">
-                                    <img id="eventImage" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                </div>
-                            </div>
-                        <div class="item sliderImages-1">  
-                                <div class="setting-img">
-                                    <img id="sliderImages-1" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                </div>
-                            </div>
-                        <div class="item sliderImages-2">
-                        <div class="setting-img">
-                                    <img id="sliderImages-2" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                </div>
-                        </div>
-                        <div class="item sliderImages-3">
-                        <div class="setting-img">
-                                    <img id="sliderImages-3" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                </div>
-                        </div>
-                  
-                    </div>
-
+                        <div class="owl-carousel owl-theme pending_rsvp_slider">
+                          <div class="item">
+                              <div class="setting-img">
+                                      <img id="eventImage" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
+                                  </div>
+                              </div>
+                          <div class="item sliderImages-1">  
+                                  <div class="setting-img">
+                                      <img id="sliderImages-1" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
+                                  </div>
+                              </div>
+                          <div class="item sliderImages-2">
+                          <div class="setting-img">
+                                      <img id="sliderImages-2" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
+                                  </div>
+                          </div>
+                          <div class="item sliderImages-3">
+                          <div class="setting-img">
+                                      <img id="sliderImages-3" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
+                                  </div>
+                          </div>
+                    
+                      </div>
+                      {{-- <div class="pending-rsvp-slider-main-section">
+                        <div class="owl-carousel owl-theme pending_rsvp_slider"></div> 
+                    </div> --}}
                       <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">
                         RSVP
                     </button>
