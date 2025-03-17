@@ -1372,6 +1372,8 @@ $(document).ready(function () {
         var post_privacy = $(this).data('post-privacy');
         var post_type = $(this).data('post-type');
         var post_content = $(this).data('post-content');
+        var commenting_on_off = $(this).data('comment-on-off');
+        var is_in_photo_moudle = $(this).data('is-in-photo-moudle');
 
 
         $.ajax({
@@ -1386,7 +1388,9 @@ $(document).ready(function () {
                 event_post_id: eventPostId,
                 post_privacy:post_privacy,
                 post_message:post_content,
-                post_type:post_type
+                post_type:post_type,
+                commenting_on_off:commenting_on_off,
+            is_in_photo_moudle:is_in_photo_moudle
 
             }),
             success: function (response) {

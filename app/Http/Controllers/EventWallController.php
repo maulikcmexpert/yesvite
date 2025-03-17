@@ -290,6 +290,7 @@ class EventWallController extends BaseController
                 'post_type' => $value->post_type,
                 'post_privacy' => $value->post_privacy,
                 'created_at' => $value->created_at,
+                'is_in_photo_moudle'=>$value->is_in_photo_moudle,
                 'posttime' => setpostTime($value->created_at),
                 'commenting_on_off' => $value->commenting_on_off,
                 'post_image' => [],
@@ -877,6 +878,8 @@ class EventWallController extends BaseController
                 $postsNormalDetail['created_at'] = $value->created_at;
                 $postsNormalDetail['posttime'] = setpostTime($value->created_at);
                 $postsNormalDetail['commenting_on_off'] = $value->commenting_on_off;
+                $postsNormalDetail['is_in_photo_moudle'] = $value->is_in_photo_moudle;
+
                 $postsNormalDetail['post_image'] = [];
                 $totalEvent =  Event::where('user_id', $value->user->id)->count();
                 $totalEventPhotos =  EventPost::where(['user_id' => $value->user->id, 'post_type' => '1'])->count();
@@ -893,6 +896,7 @@ class EventWallController extends BaseController
                     'total_events' => $totalEvent,
                     'visible' => $value->user->visible,
                     'total_photos' => $totalEventPhotos,
+
                     'comments' => $comments,
                     'message_privacy' => $value->user->message_privacy
                 ];
