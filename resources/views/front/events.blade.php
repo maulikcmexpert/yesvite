@@ -1,4 +1,4 @@
-{{dd($eventData);}}
+{{dd($eventData['event_id']);}}
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details supportive-event-wrp">
