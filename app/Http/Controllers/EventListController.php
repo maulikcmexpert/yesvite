@@ -3071,7 +3071,7 @@ class EventListController extends BaseController
                     $eventData[] = [
                         'event_id' => $eventdetail->event->id,
                         'event_name' => $eventdetail->event->event_name,
-                        'event_image' => $eventdetail->event->event_image
+                        'event_image' => $eventdetail->event->design_image
                     ];
                 }
             }
