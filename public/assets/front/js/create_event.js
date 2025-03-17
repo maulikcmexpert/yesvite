@@ -2052,7 +2052,9 @@ function loadMoreData(page, search_name) {
             $("#yesviteUser").html(data);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 }
 
@@ -7135,7 +7137,9 @@ function loadSearchUser(search_name) {
             $("#YesviteUserAll").html(data);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 }
 
@@ -7599,7 +7603,9 @@ $(document).on("keyup", "#group_search_ajax", function () {
             $(".group_search_list").html(data.html);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 });
 
@@ -7637,7 +7643,9 @@ function groupToggleSearch(search_name = null) {
             $(".group_search_list_toggle").html(data.html);
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 }
 
@@ -8009,7 +8017,9 @@ function get_co_host_list(
             cohostbusy = false;
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 }
 function get_phone_host_list(search_name = null, limit, offset, scroll) {
@@ -8189,7 +8199,9 @@ function get_phone_host_list(search_name = null, limit, offset, scroll) {
             cohostphonebusy = false;
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
 }
 let previousScrollTop = 0;
@@ -8336,7 +8348,9 @@ $(document).on("click", ".thank_you_card_toggle", function () {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
     toggleSidebar("sidebar_thankyou_card");
 });
@@ -8379,7 +8393,9 @@ $(document).on("click", ".add_gift_registry", function () {
             }
         })
         .fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert("server not responding...");
+            // alert("server not responding...");
+            $("#loader").hide();
+
         });
     toggleSidebar("sidebar_gift_registry");
 });
