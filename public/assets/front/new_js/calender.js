@@ -93,15 +93,62 @@ let calender_json = $("#calender_json").val();
             week.appendChild(emptyDay);
         }
 
+        // for (let day = 1; day <= totalDays; day++) {
+        //     const currentDay = month.clone().date(day);
+        //     const dayDiv = document.createElement("div");
+        //     dayDiv.className = `day ${
+        //         today.isSame(currentDay, "day") ? "today" : ""
+        //     }`;
+        //     dayDiv.setAttribute("data-date", currentDay.format("YYYY-MM-DD"));
+        //     dayDiv.innerHTML = `<span class="active-day">${day}</span>`;
+
+        //     // Highlight events
+        //     const eventsForDay = this.events.filter((event) =>
+        //         moment(event.date).isSame(currentDay, "day")
+        //     );
+        //     if (eventsForDay.length) {
+        //         const spansContainer = document.createElement("div");
+        //         spansContainer.className = "day-events";
+        //         const maxToShow = Math.min(4, eventsForDay.length);
+
+        //         eventsForDay.slice(0, maxToShow).forEach((event) => {
+        //             const span = document.createElement("span");
+        //             span.className = event.color;
+        //             span.title = event.title;
+        //             spansContainer.appendChild(span);
+        //         });
+
+        //         dayDiv.appendChild(spansContainer);
+        //     }
+
+        //     week.appendChild(dayDiv);
+
+        //     // Handle week break
+        //     if (currentDay.day() === 6 || day === totalDays) {
+        //         monthContainer.appendChild(week);
+        //         week = document.createElement("div");
+        //         week.className = "week";
+        //     }
+        // }
         for (let day = 1; day <= totalDays; day++) {
             const currentDay = month.clone().date(day);
+            let dayClass = "day";
+    
+            // Highlight today
+            if (today.isSame(currentDay, "day")) {
+                dayClass += " today";
+            }
+    
+            // Highlight past dates
+            if (currentDay.isBefore(today, "day")) {
+                dayClass += " past_date_calender";
+            }
+    
             const dayDiv = document.createElement("div");
-            dayDiv.className = `day ${
-                today.isSame(currentDay, "day") ? "today" : ""
-            }`;
+            dayDiv.className = dayClass;
             dayDiv.setAttribute("data-date", currentDay.format("YYYY-MM-DD"));
             dayDiv.innerHTML = `<span class="active-day">${day}</span>`;
-
+    
             // Highlight events
             const eventsForDay = this.events.filter((event) =>
                 moment(event.date).isSame(currentDay, "day")
@@ -110,19 +157,19 @@ let calender_json = $("#calender_json").val();
                 const spansContainer = document.createElement("div");
                 spansContainer.className = "day-events";
                 const maxToShow = Math.min(4, eventsForDay.length);
-
+    
                 eventsForDay.slice(0, maxToShow).forEach((event) => {
                     const span = document.createElement("span");
                     span.className = event.color;
                     span.title = event.title;
                     spansContainer.appendChild(span);
                 });
-
+    
                 dayDiv.appendChild(spansContainer);
             }
-
+    
             week.appendChild(dayDiv);
-
+    
             // Handle week break
             if (currentDay.day() === 6 || day === totalDays) {
                 monthContainer.appendChild(week);
@@ -130,6 +177,7 @@ let calender_json = $("#calender_json").val();
                 week.className = "week";
             }
         }
+    
 
         this.el.appendChild(monthContainer);
     };
