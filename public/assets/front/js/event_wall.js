@@ -1393,7 +1393,7 @@ $(document).ready(function () {
 
 
                     // Set existing images if available
-                    let mediaWrapper = $(".imagePreview");
+                    let mediaWrapper = $("#imagePreview");
                     mediaWrapper.empty(); // Clear old images
                     if (postData.mediaData.length > 0) {
                         postData.mediaData.forEach((media) => {
