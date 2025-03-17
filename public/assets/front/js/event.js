@@ -1588,6 +1588,23 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
+    // $(document).on('click', '.pending-rsvp-btn', function () {
+        var pendingModalEl = document.getElementById('pending-rsvp-modal');
+        var pendingModal = bootstrap.Modal.getInstance(pendingModalEl);
+        
+        if (pendingModal) {
+            pendingModal.hide(); // Hide the current modal safely
+        }
+    
+        // Open the RSVP modal after ensuring the first one is closed
+        var rsvpModalEl = document.getElementById('rsvp_by_notification');
+        var rsvpModal = new bootstrap.Modal(rsvpModalEl);
+        
+        setTimeout(function () {
+            rsvpModal.show();
+        }, 300); // Short delay to ensure smooth transition
+    // });
+    
     const eventId = $(this).attr('data-event_id');
     const userId = $(this).attr('data-user_id');
     const profile = $(this).attr('data-profile');
