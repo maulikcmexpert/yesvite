@@ -1736,7 +1736,7 @@ $(document).ready(function () {
     $(document).on('click', '.close_rsvp_pending', function () {
         modal.hide();
         localStorage.setItem('modalClosedAt', new Date().getTime());
-                document.body.classList.add("no-scroll"); // Disable background scrolling
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
 
     });
     $(document).on('click', '.close_notification_rsvp', function () {
