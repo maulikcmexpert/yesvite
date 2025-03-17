@@ -1435,7 +1435,7 @@ $(document).on('click','#get_pendding_rsvp_btn',function(e){
         type: 'GET',
         data: {},
         success: function (response) {
-            if (response.length > 0 && rsvp_ajax_call==0) {
+            if (response.length > 0) {
                 console.log(response);
                 let slider = $(".pending_rsvp_slider");
                 slider.trigger('destroy.owl.carousel').html(''); // Remove old items
