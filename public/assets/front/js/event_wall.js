@@ -1400,6 +1400,9 @@ $(document).ready(function () {
                         let mediaWrapper = $("#imagePreview");
                         let uploadImgInner = $(".create-post-upload-img-inner");
 
+                        const uploadHeadButton = $(".create-post-head-upload-btn");
+
+
                         mediaWrapper.empty(); // Clear old images
 
                         if (postData.mediaData.length > 0) {
@@ -1425,6 +1428,7 @@ $(document).ready(function () {
 
                             // Hide the upload section when images are uploaded
                             uploadImgInner.addClass("d-none");
+                            uploadHeadButton.removeClass("d-none");
                         } else {
                             // Show the upload section when no images are present
                             uploadImgInner.removeClass("d-none");
