@@ -1336,6 +1336,10 @@ $('#notification_rsvp_btn').on('click', function (e) {
         if(response.status==1){
             // if (!$('.toast').length) {
                 toastr.success(response.text);
+                var modalElement = document.getElementById('pending-rsvp-modal');
+                if (modalElement.classList.contains('show')) {
+                    localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+                }
                 window.location.reload();
                 $('#home_loader').css('display','none');
                 $('<div id="pageOverlay"></div>').css({
@@ -1730,6 +1734,10 @@ $(document).ready(function () {
     $(document).on('click', '.close_rsvp_pending', function () {
         modal.hide();
         localStorage.setItem('modalClosedAt', new Date().getTime());
+    });
+    $(document).on('click', '.close_notification_rsvp', function () {
+        $('#rsvp_by_notification').hide();
+        // localStorage.setItem('modalClosedAt', new Date().getTime());
     });
 
     $(modalElement).on('hidden.bs.modal', function () {

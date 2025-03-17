@@ -15,7 +15,7 @@
                             <input type="hidden" name="rsvp_event_id" id="rsvp_event_id" />
                         </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close_notification_rsvp" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="rsvp-custom-radio guest-rsvp-attend">
