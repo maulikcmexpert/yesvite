@@ -1430,15 +1430,51 @@ $(document).on('click','#get_pendding_rsvp_btn',function(e){
     // e.stopPropagation();
     $.ajax({
         url: `${base_url}pending_rsvp_list`,
-        type: 'GET',        
-        data: {},          
-        success: function (response) { 
-        
+        type: 'GET',
+        data: {},
+        success: function (response) {
+            if (response.length > 0) {
+                console.log(response);
+                let slider = $(".pending_rsvp_slider");
+                slider.trigger('destroy.owl.carousel').html(''); // Remove old items
+    
+                // Loop through the image array and append new items
+                response.forEach((event, index) => {
+                    let imgHtml = `
+                        <div class="item sliderImages-${index}">
+                            <div class="setting-img">
+                                <img id="sliderImages-${index}" src="${event.event_image}" />
+                            </div>
+                        </div>`;
+                    slider.append(imgHtml);
+                });
+    
+                // Reinitialize Owl Carousel
+                slider.owlCarousel({
+                    loop: true,
+                    items:1,
+                    margin: 10,
+                    nav: true,
+                    dots:false,
+                    navText: [
+                        `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                `,
+                        `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>`,
+                    ],
+                });
+            } else {
+                toastr.info('No events found.');
+            }
         },
         error: function (error) {
-          toastr.error('Something went wrong. Please try again!');
+            toastr.error('Something went wrong. Please try again!');
         },
-      });
+    });
+    
 });
 
 $(".pending_rsvp_slider").owlCarousel({
