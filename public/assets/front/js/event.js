@@ -1486,8 +1486,13 @@ $(document).on('click','event-notification-icon',function(e){
     
 // });
 
+let rsvp_ajax_call = 0; 
 $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
     $('#loader').css('display', 'flex');
+    if (rsvp_ajax_call === 1) {
+        $('#loader').css('display', 'none'); 
+        return;
+    }
 
     $.ajax({
         url: `${base_url}pending_rsvp_list`,
@@ -1496,7 +1501,6 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
         success: function (response) {
             let slider = $(".pending_rsvp_slider");
 
-            // Destroy existing Owl Carousel and empty the container
             slider.trigger('destroy.owl.carousel').html('').removeClass('owl-loaded owl-drag');
 
             if (response.length > 0) {
@@ -1533,7 +1537,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                     //     1000: { items: 3 }
                     // }
                 });
-
+                rsvp_ajax_call = 1;
                 $('#loader').css('display', 'none');
             } else {
                 toastr.info('No events found.');
@@ -1545,6 +1549,10 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
             $('#loader').css('display', 'none');
         }
     });
+});
+
+$(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
+    alert("You changed the image!");
 });
 
 $(".pending_rsvp_slider").owlCarousel({
