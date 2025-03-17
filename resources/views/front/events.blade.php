@@ -22,7 +22,7 @@
                                         <path d="M14 21.5C15.933 21.5 17.5 19.933 17.5 18C17.5 16.067 15.933 14.5 14 14.5C12.067 14.5 10.5 16.067 10.5 18C10.5 19.933 12.067 21.5 14 21.5Z" stroke="black" stroke-opacity="0.8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </span>
-                                <button id="get_pendding_rsvp_btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">open rsvp modal</button>
+                                {{-- <button id="get_pendding_rsvp_btn" data-bs-toggle="modal" data-bs-target="#pending-rsvp-modal">open rsvp modal</button> --}}
                             </div>
                             <input type="hidden" value="{{$from_page}}" id="already_selected_date"/>
                             @php
@@ -230,7 +230,7 @@
       </div> -->
 
 
-      <div class="modal fade cmn-modal" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" aria-hidden="true" role="dialog">
+      <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
