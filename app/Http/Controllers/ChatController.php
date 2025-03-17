@@ -8,7 +8,9 @@ use App\Models\UserReportChat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-use DB;
+// use DB;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
@@ -479,7 +481,7 @@ class ChatController extends BaseController
     public function chatReport(Request $request)
     {
         $user = Auth::guard('web')->user();
-
+        dd(1);
         // ✅ Correct Validation Rules
         $request->validate([
             'to_be_reported_user_id' => 'required|integer|exists:users,id',
@@ -510,27 +512,31 @@ class ChatController extends BaseController
             // ✅ Prepare Email Data
             $data = [
                 'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
+                'reporter_email' => $getName->reporter_user->email,
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
+                'reported_email' => $getName->to_reporter_user->email,
                 'report_type' => $request->report_type,
                 'report_description' => $request->report_description,
                 'report_time' => $reportCreate->created_at->format('Y-m-d h:i A'),
                 'report_from' => "chat"
             ];
 
+            dd($data);
             // ✅ Send Email
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) {
                 $messages->to(env('SUPPORT_MAIL'))
                     ->subject('Chat Report Mail');
             });
 
+            // dd(1);
             return redirect('messages')->with('msg', 'Report submitted successfully!');
         } catch (QueryException $e) {
 
-
+            // dd(2);
             DB::rollBack();
             return redirect('messages')->with('msg_error', 'Database error occurred!');
         } catch (\Exception $e) {
-
+            // dd(3);
             return redirect('messages')->with('msg_error', 'Something went wrong!');
         }
     }
