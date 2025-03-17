@@ -266,7 +266,7 @@
                       {{-- <div class="pending-rsvp-slider-main-section">
                         <div class="owl-carousel owl-theme pending_rsvp_slider"></div> 
                     </div> --}}
-                      <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
+                      <button type="button" class="btn btn-secondary pending-rsvp-btn notification-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
                         RSVP
                     </button>
                     </div>
