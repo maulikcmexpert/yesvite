@@ -1573,16 +1573,7 @@ class EventWallController extends BaseController
                     }
                 }
             }
-            $notificationParam = [
-                'sender_id' => $user->id,
-                'event_id' => $request->event_id,
-                'post_id' => $creatEventPost->id,
-                'is_in_photo_moudle' => $request->is_in_photo_moudle,
-                'post_type' => $request->post_type,
-                'post_privacy' => $request->post_privacy,
-                'video' => $video,
-                'image' => $image
-            ];
+
         }
 
 
@@ -3771,5 +3762,106 @@ class EventWallController extends BaseController
 
 
         return response()->json(['status' => 1, 'message' => "Post is Updated sucessfully"]);
+    }
+
+    public function fetchPostWall(Request $request)
+    {
+        $user = Auth::guard('web')->user();
+        $event_post_id = $request->event_post_id;
+        $eventId = $request->event_id;
+        $postCommentList = [];
+        // Fetch photo details from the database
+        $getPhotoList = EventPost::query();
+        $getPhotoList->with(['user','post_image'])
+
+            ->where(['event_id' => $eventId, 'event_post_id' => $event_post_id])
+            ->orderBy('id', 'desc');
+
+        $results = $getPhotoList->get();
+
+        if ($results->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Photo details not found.'
+            ]);
+        }
+
+        $postPhotoList = [];
+        $ischeckEventOwner = Event::where(['id' => $eventId])->first();
+        $checkeventCohost =  EventInvitedUser::where(['event_id' => $eventId, 'is_co_host' => '1'])->first();
+        foreach ($results as $value) {
+
+            $is_host = "0";
+            $is_co_host = "0";
+            if ($ischeckEventOwner) {
+                $ischeckEventOwner = $ischeckEventOwner->user_id;
+                if ($ischeckEventOwner == $value->user->id) {
+                    $is_host = "1";
+                }
+            }
+
+            if ($checkeventCohost) {
+                $checkeventCohost = $checkeventCohost->user_id;
+                if ($checkeventCohost == $value->user->id) {
+                    $is_co_host = "1";
+                }
+            }
+            $postControl = PostControl::where([
+                'user_id' => $user->id,
+                'event_id' => $eventId,
+                'event_post_id' => $value->id
+            ])->first();
+
+            // Skip hidden posts
+            if ($postControl && $postControl->post_control === 'hide_post') {
+                continue;
+            }
+
+
+            $postPhotoDetail = [
+                'user_id' => $value->user->id,
+                'is_own_post' => ($value->user->id == $user->id) ? "1" : "0",
+                'is_host' => $is_host,
+                'firstname' => $value->user->firstname,
+                'lastname' => $value->user->lastname,
+                'location' => $value->user->city . ', ' . $value->user->state,
+                // 'is_co_host'=>(isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0",
+                'is_co_host' => $is_co_host,
+                'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
+
+                'event_id' => $value->event_id,
+                'post_type'=>$value->post_type,
+                'post_privacy'=>$value->post_privacy,
+                'id' => $value->id,
+                'post_message' => $value->post_message ?? "",
+
+                'is_in_photo_moudle' => $value->is_in_photo_moudle,
+                'mediaData' => [],
+
+                'encrypted_id' => encrypt($value->user->id)
+            ];
+
+            if (!empty($value->post_image)) {
+                $photoVideoData = [];
+                foreach ($value->post_image as $val) {
+                    $photoVideoData[] = [
+                        'id' => $val->id,
+                        'event_post_id' => $val->event_post_id,
+                        'post_media' => (!empty($val->post_image)) ? asset('storage/post_image/' . $val->post_image) : "",
+                        'thumbnail' => (!empty($val->thumbnail)) ? asset('storage/thumbnails/' . $val->thumbnail) : "",
+                        'type' => $val->type
+                    ];
+                }
+                $postPhotoDetail['mediaData'] = $photoVideoData;
+            }
+
+
+            $postPhotoList[] = $postPhotoDetail;
+        }
+        // dd($postPhotoList);
+        return response()->json([
+            'status' => 'success',
+            'data' => $postPhotoList
+        ]);
     }
 }
