@@ -1590,10 +1590,9 @@ class EventWallController extends BaseController
         $user = Auth::guard('web')->user();
 
         // Find existing post by event_id and user_id
-        $creatEventPost = EventPost::where('event_id', $request->event_id)
-                                   ->where('user_id', $user->id)
-                                   ->first();
-
+        $creatEventPost = EventPost::where('id', $request->post_id)
+        ->where('event_id', $request->event_id)
+        ->first();
         if ($creatEventPost) {
             // Delete old images
 
