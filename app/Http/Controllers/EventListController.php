@@ -3053,13 +3053,26 @@ class EventListController extends BaseController
         return session()->get('add_guest_user_id');
     }
 
-    public function pending_rsvp_list(Request $request){
-        $user_id  = Auth::guard('web')->user()->id;
-
-        $total_need_rsvp_event= EventInvitedUser::whereHas('event', function ($query) {
-            $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
-        })->where(['user_id' => $user_id, 'rsvp_status' => NULL])->get();
-
-        dd($total_need_rsvp_event);
+    public function pending_rsvp_list(Request $request)
+    {
+        $user_id = Auth::guard('web')->user()->id;
+    
+        $total_need_rsvp_event = EventInvitedUser::with('event') 
+            ->whereHas('event', function ($query) {
+                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            })
+            ->where(['user_id' => $user_id, 'rsvp_status' => NULL])
+            ->get();
+    
+        $eventData = $total_need_rsvp_event->map(function ($eventInvite) {
+            return [
+                'event_id' => $eventInvite->event->id,
+                'event_name' => $eventInvite->event->event_name,
+                'event_image' => $eventInvite->event->event_image
+            ];
+        });
+    
+        dd($eventData);
     }
+    
 }
