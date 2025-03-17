@@ -1386,6 +1386,7 @@ $(document).ready(function () {
 
                     // Set the post content
                     $('.post_message').val(postData.post_message);
+                    $('.PostId').val(postData.id);
 
                     // Set hidden input values
                   // Set the radio button selection

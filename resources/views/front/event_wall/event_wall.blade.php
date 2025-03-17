@@ -1170,7 +1170,7 @@
                             enctype="multipart/form-data">
                             <input type="hidden" name="event_id" id="event_id" value="{{ $event }}">
                             <input type="hidden" class="hiddenVisibility" name="post_privacys" value="">
-
+                            <input type="hidden" name="post_id" id="postId" class="PostId" value="">
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
 
