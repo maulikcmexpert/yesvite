@@ -481,7 +481,6 @@ class ChatController extends BaseController
     public function chatReport(Request $request)
     {
         $user = Auth::guard('web')->user();
-        dd(1);
         // ✅ Correct Validation Rules
         $request->validate([
             'to_be_reported_user_id' => 'required|integer|exists:users,id',
@@ -489,9 +488,10 @@ class ChatController extends BaseController
             'report_type' => 'required|string',
             'report_description' => 'nullable|string',
         ]);
-
+        
         try {
             DB::beginTransaction();
+            dd(1);
 
             // ✅ Create Report
             $reportCreate = new UserReportChat();
