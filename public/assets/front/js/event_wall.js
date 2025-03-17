@@ -1084,6 +1084,7 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
+
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1364,8 +1365,8 @@ $(document).ready(function () {
             },
         });
     });
+    $(document).on("click", ".editPostBtn", function () {
 
-    $('.editPostBtn').on('click', function () {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
 
@@ -1387,7 +1388,7 @@ $(document).ready(function () {
                     // Set the post content
                     $('.post_message').val(postData.post_message);
                     $('.PostId').val(postData.id);
-
+                    $('.poll_post_id').val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
                     $('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
@@ -1396,34 +1397,114 @@ $(document).ready(function () {
                     $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
 
                     if (postData.post_type == "1") {
-
-                        const uploadImgInner = $(".create-post-upload-img-inner");
+                        $("#create-photo-btn").trigger("click");
+                        let mediaWrapper = $("#imagePreview");
+                        let uploadImgInner = $(".create-post-upload-img-inner");
+                        console.log(uploadImgInner);
                         const uploadHeadButton = $(".create-post-head-upload-btn");
 
 
-                        uploadImgInner.addClass("d-none");
-                        uploadHeadButton.removeClass("d-none");
-
-
-                        let mediaWrapper = $("#imagePreview");
                         mediaWrapper.empty(); // Clear old images
+
                         if (postData.mediaData.length > 0) {
+                            let colClass = postData.mediaData.length === 1 ? 'col-12' : 'col-6';
                             postData.mediaData.forEach((media) => {
-                                let mediaElement = `<div class="col-12" style="position: relative;"><span class="uploded-delete-icon">
-<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
-    10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
-    14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-<path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-</svg></span><img src="${media.post_media}"  class="preview-image"></div>
-            `;
+                                let mediaElement = `
+                                    <div class="${colClass}" style="position: relative;">
+                                        <span class="uploded-delete-icon">
+                                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
+                                                    10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
+                                                    14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </span>
+                                        <img src="${media.post_media}" class="preview-image">
+                                    </div>
+                                `;
                                 mediaWrapper.append(mediaElement);
                             });
+
+                            // Hide the upload section when images are uploaded
+                            if (uploadImgInner.length > 0) {
+                                console.log({uploadImgInner});
+
+                                // uploadImgInner.addClass("d-none");
+                                uploadImgInner.hide();
+                            } else {
+                                console.error("Element not found: .create-post-upload-img-inner");
+                            }
+                            uploadHeadButton.removeClass("d-none");
+                        } else {
+                            // Show the upload section when no images are present
+                            uploadImgInner.removeClass("d-none");
                         }
                     }
+
+                    if (postData.post_type == "2") {
+                        $("#create-poll-btn").trigger("click"); // Open poll form modal
+
+                        let pollData = postData.pollData;
+
+                        if (pollData) {
+                            $(".poll_qus").val(pollData.poll_question);
+                            $("select[name='duration']").val(pollData.total_poll_duration);
+
+                            let options = pollData.poll_options || []; // Get poll options
+                            let optionContainer = $(".poll-options"); // Target poll options container
+
+
+
+                            if (options.length >= 2) { // Ensure there are at least 2 options
+                                options.forEach((option, index) => {
+                                    let optionHTML = `
+                                        <div class="mb-3 option-poll">
+                                            <label class="form-label d-flex align-items-center justify-content-between">
+                                                <p>Option <span class="option-number">${index + 1}</span>*</p>
+                                                <span class="char-count">${option.option.length}/140</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control poll-option-input" name="options[]" value="${option.option}" required>
+                                                <span class="input-option-delete">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    `;
+                                    optionContainer.append(optionHTML);
+                                });
+                            } else {
+
+                                for (let i = 0; i < 2; i++) {
+                                    let optionText = options[i] ? options[i].option : "";
+                                    let optionHTML = `
+                                        <div class="mb-3 option-poll">
+                                            <label class="form-label d-flex align-items-center justify-content-between">
+                                                <p>Option <span class="option-number">${i + 1}</span>*</p>
+                                                <span class="char-count">${optionText.length}/140</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control poll-option-input" name="options[]" value="${optionText}" required>
+
+                                            </div>
+                                        </div>
+                                    `;
+                                    optionContainer.append(optionHTML);
+                                }
+                            }
+                        }
+                    }
+
+
                     // Set existing images if available
 
 

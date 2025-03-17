@@ -3252,7 +3252,7 @@ padding: 12px 24px;
     -o-border-radius: 16px;
     background-color: var(--pink);
     border: 1px solid var(--pink);
-    display: inline-block;
+    display: block;
     transition: 0.5s;
     font-size: 15px;
     font-weight: 600;
@@ -3260,6 +3260,8 @@ padding: 12px 24px;
     cursor: pointer;
     text-align: center;
     width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
     font-family: var(--SFProDisplay-Semibold);
 }
 
@@ -3268,6 +3270,54 @@ padding: 12px 24px;
     border: 1px solid var(--pink) !important;
     color: var(--pink) !important;
 }
+
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .item
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img{
+    width: 390px;
+}
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-prev {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    background-color:#2DA9FC;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-next{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    background-color:#2DA9FC;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+} 
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-prev  svg path,
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-next  svg path
+{
+    stroke: var(--white);
+}
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider  .owl-dots{
+    display: none;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){

@@ -1,3 +1,4 @@
+
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
 let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
@@ -9037,6 +9038,7 @@ function updateEventData() {
     });
 }
 $(document).on("click", ".edit_checkout", async function (e) {
+    $(".dropdown-menu").removeClass("show");
     var isDraftEdit = $(this).attr("data-isDraftEdit");
     if (isDraftEdit) {
         eventData.is_update_event = "0";
@@ -9063,10 +9065,12 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-    $(".step_1").css("display", "none");
-    $(".step_2").css("display", "none");
-    $(".step_3").css("display", "none");
-    $(".step_4").css("display", "none");
+    if(!isEditBtn){
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $(".step_3").css("display", "none");
+        $(".step_4").css("display", "none");
+    }
     //$(".step_final_checkout").show();
 
     // handleActiveClass(this);

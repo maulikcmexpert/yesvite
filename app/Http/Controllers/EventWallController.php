@@ -290,7 +290,7 @@ class EventWallController extends BaseController
                 'post_type' => $value->post_type,
                 'post_privacy' => $value->post_privacy,
                 'created_at' => $value->created_at,
-                'is_in_photo_moudle'=>$value->is_in_photo_moudle,
+                'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'posttime' => setpostTime($value->created_at),
                 'commenting_on_off' => $value->commenting_on_off,
                 'post_image' => [],
@@ -1591,8 +1591,8 @@ class EventWallController extends BaseController
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
-        ->where('event_id', $request->event_id)
-        ->first();
+            ->where('event_id', $request->event_id)
+            ->first();
         if ($creatEventPost) {
             // Delete old images
 
@@ -1636,22 +1636,9 @@ class EventWallController extends BaseController
         }
 
         // Handle poll post
-        if ($request->post_type == '2') {
-                        $eventPostPoll = new EventPostPoll;
-                        $eventPostPoll->event_id = $request->event_id;
-                        $eventPostPoll->event_post_id = $creatEventPost->id;
-                        $eventPostPoll->poll_question = $request->poll_question;
-                        $eventPostPoll->poll_duration = $request->poll_duration;
-                        if ($eventPostPoll->save()) {
-                            $option = json_decode($request->option);
-                            foreach ($option as $value) {
-                                $pollOption = new EventPostPollOption;
-                                $pollOption->event_post_poll_id = $eventPostPoll->id;
-                                $pollOption->option = $value;
-                                $pollOption->save();
-                            }
-                        }
-                    }
+        // Handle poll post
+
+
 
         return redirect()->back()->with('msg', $msg);
     }
@@ -1903,9 +1890,57 @@ class EventWallController extends BaseController
         }
     }
 
+    // public function createPoll(Request $request)
+    // {
+
+    //     // Validate the request
+    //     $request->validate([
+    //         'question' => 'required|string|max:255',
+    //         'duration' => 'required|string',
+    //         'options' => 'required|array|min:2', // Ensure at least two options are provided
+    //         'options.*' => 'required|string|max:100', // Validate each option
+    //     ]);
+
+    //     $user = Auth::guard('web')->user()->id;
+    //     $creatEventPost = new EventPost;
+    //     $creatEventPost->event_id = $request->event_id;
+    //     $creatEventPost->user_id = $user;
+    //     $creatEventPost->post_message = $request->input('content');
+
+    //     if ($request->hasFile('post_recording')) {
+    //         $record = $request->post_recording;
+    //         $recordingName = time() . '_' . $record->getClientOriginalName();
+    //         $record->move(public_path('storage/event_post_recording'), $recordingName);
+    //         $creatEventPost->post_recording = $recordingName;
+    //     }
+    //     $creatEventPost->post_privacy = $request->post_privacys;
+    //     $creatEventPost->post_type = "2";
+    //     $creatEventPost->commenting_on_off = $request->commenting_on_off;
+    //     $creatEventPost->is_in_photo_moudle = "0";
+    //     $creatEventPost->save();
+    //     // Create the poll
+    //     $eventPostPoll = new EventPostPoll;
+    //     $eventPostPoll->event_id = $request->event_id; // Example event ID
+    //     $eventPostPoll->event_post_id =  $creatEventPost->id; // Example post ID
+    //     $eventPostPoll->poll_question = $request->question;
+    //     $eventPostPoll->poll_duration = $request->duration;
+
+    //     if ($eventPostPoll->save()) {
+    //         // Save poll options
+    //         foreach ($request->options as $value) {
+    //             $pollOption = new EventPostPollOption();
+    //             $pollOption->event_post_poll_id = $eventPostPoll->id;
+    //             $pollOption->option = $value;
+    //             $pollOption->save();
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('msg', 'Poll created successfully!');
+    // }
+
+
     public function createPoll(Request $request)
     {
-
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
@@ -1915,9 +1950,20 @@ class EventWallController extends BaseController
         ]);
 
         $user = Auth::guard('web')->user()->id;
-        $creatEventPost = new EventPost;
-        $creatEventPost->event_id = $request->event_id;
-        $creatEventPost->user_id = $user;
+
+        // Find existing event post
+        $creatEventPost = EventPost::where('id', $request->post_id)
+            ->where('event_id', $request->event_id)
+            ->first();
+
+        if (!$creatEventPost) {
+            // Create new event post if it doesn't exist
+            $creatEventPost = new EventPost();
+            $creatEventPost->event_id = $request->event_id;
+            $creatEventPost->user_id = $user;
+        }
+
+        // Now, it's safe to update properties
         $creatEventPost->post_message = $request->input('content');
 
         if ($request->hasFile('post_recording')) {
@@ -1926,30 +1972,47 @@ class EventWallController extends BaseController
             $record->move(public_path('storage/event_post_recording'), $recordingName);
             $creatEventPost->post_recording = $recordingName;
         }
+
         $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->post_type = "2";
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
-        // Create the poll
-        $eventPostPoll = new EventPostPoll;
-        $eventPostPoll->event_id = $request->event_id; // Example event ID
-        $eventPostPoll->event_post_id =  $creatEventPost->id; // Example post ID
-        $eventPostPoll->poll_question = $request->question;
-        $eventPostPoll->poll_duration = $request->duration;
 
-        if ($eventPostPoll->save()) {
-            // Save poll options
-            foreach ($request->options as $value) {
-                $pollOption = new EventPostPollOption();
-                $pollOption->event_post_poll_id = $eventPostPoll->id;
-                $pollOption->option = $value;
-                $pollOption->save();
-            }
+        // Check if poll exists
+        $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
+
+        if ($eventPostPoll) {
+            // Update existing poll
+            $eventPostPoll->poll_question = $request->question;
+            $eventPostPoll->poll_duration = $request->duration;
+            $eventPostPoll->save();
+
+            // Delete old poll options before adding new ones
+            EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
+            $msg = 'Poll updated successfully!';
+        } else {
+            // Create new poll
+            $eventPostPoll = new EventPostPoll();
+            $eventPostPoll->event_id = $request->event_id;
+            $eventPostPoll->event_post_id = $creatEventPost->id;
+            $eventPostPoll->poll_question = $request->question;
+            $eventPostPoll->poll_duration = $request->duration;
+            $eventPostPoll->save();
+            $msg = 'Poll created successfully!';
         }
 
-        return redirect()->back()->with('msg', 'Poll created successfully!');
+        // Save new poll options
+        foreach ($request->options as $value) {
+                        $pollOption = new EventPostPollOption();
+                        $pollOption->event_post_poll_id = $eventPostPoll->id;
+                        $pollOption->option = $value;
+                        $pollOption->save();
+                    }
+
+        return redirect()->back()->with('msg', $msg);
     }
+
 
     public function get_reaction_post_list(Request $request)
     {
@@ -2582,52 +2645,51 @@ class EventWallController extends BaseController
     public function postMediaReport(Request $request)
     {
         $user  = Auth::guard('web')->user();
-            $reportCreate = new UserReportToPost;
-            $reportCreate->event_id = $request['event_id'];
-            $reportCreate->user_id =  $user->id;
-            $reportCreate->event_post_id = $request['event_post_id'];
-            $reportCreate->post_media_id = $request['post_media_id'];
-            $reportCreate->report_type = $request['report_type'];
-            $reportCreate->report_description = $request['report_description'];
-            // $reportCreate->specific_report = '1';
-            $reportCreate->save();
+        $reportCreate = new UserReportToPost;
+        $reportCreate->event_id = $request['event_id'];
+        $reportCreate->user_id =  $user->id;
+        $reportCreate->event_post_id = $request['event_post_id'];
+        $reportCreate->post_media_id = $request['post_media_id'];
+        $reportCreate->report_type = $request['report_type'];
+        $reportCreate->report_description = $request['report_description'];
+        // $reportCreate->specific_report = '1';
+        $reportCreate->save();
 
-            // $getName = UserReportToPost::with(['reporter_user', 'to_reporter_user'])
-            // ->where('id', $reportCreate->id)
-            // ->first();
+        // $getName = UserReportToPost::with(['reporter_user', 'to_reporter_user'])
+        // ->where('id', $reportCreate->id)
+        // ->first();
 
-            $savedReportId =  $reportCreate->id;
-            $createdAt = $reportCreate->created_at;
+        $savedReportId =  $reportCreate->id;
+        $createdAt = $reportCreate->created_at;
 
-            $message = "Reported to admin for this media";
+        $message = "Reported to admin for this media";
 
-            $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+        $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
 
-            $getReportedData = EventPost::with('user')
+        $getReportedData = EventPost::with('user')
             ->where('id', $request['event_post_id'])
             ->first();
 
-            $data = [
-                'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
-                'event_name' => $getName->events->event_name,
-                'reported_username' => $getReportedData->user->firstname. ' '. $getReportedData->user->lastname,
-                'reported_email' => $getReportedData->user->email,
-                'report_type' => $getName->report_type,
-                'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
-                'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
-                'report_from' => "post"
-            ];
-            $support_email=env('SUPPORT_MAIL');
+        $data = [
+            'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
+            'event_name' => $getName->events->event_name,
+            'reported_username' => $getReportedData->user->firstname . ' ' . $getReportedData->user->lastname,
+            'reported_email' => $getReportedData->user->email,
+            'report_type' => $getName->report_type,
+            'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
+            'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
+            'report_from' => "post"
+        ];
+        $support_email = env('SUPPORT_MAIL');
 
-            Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
-                $messages->to($support_email)
-                        ->subject('User has been reported');
-            });
+        Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
+            $messages->to($support_email)
+                ->subject('User has been reported');
+        });
 
 
 
-            return response()->json(['status' => 1, 'message' => $message]);
-
+        return response()->json(['status' => 1, 'message' => $message]);
     }
     public function get_phoneContact(Request $request)
     {
@@ -3824,7 +3886,6 @@ class EventWallController extends BaseController
             if ($request->hasFile('post_recording') || $request->post_type == '2') {
                 delete_event_post_images($request->post_id);
             }
-
         }
 
         DB::commit();
@@ -3842,10 +3903,10 @@ class EventWallController extends BaseController
 
         // Fetch photo details from the database
         $getPhotoList = EventPost::with(['user', 'post_image'])
-        ->where('event_id', $eventId)
-        ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
-        ->orderBy('id', 'desc')
-        ->get();
+            ->where('event_id', $eventId)
+            ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
+            ->orderBy('id', 'desc')
+            ->get();
 
         if ($getPhotoList->isEmpty()) {
             return response()->json([
@@ -3898,15 +3959,15 @@ class EventWallController extends BaseController
                 'profile' => (!empty($value->user->profile)) ? asset('storage/profile/' . $value->user->profile) : "",
 
                 'event_id' => $value->event_id,
-                'post_type'=>$value->post_type,
-                'post_privacy'=>$value->post_privacy,
+                'post_type' => $value->post_type,
+                'post_privacy' => $value->post_privacy,
                 'id' => $value->id,
                 'post_message' => $value->post_message ?? "",
-                'comment_on_off'=>$value->commenting_on_off,
+                'comment_on_off' => $value->commenting_on_off,
 
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
-
+                'pollData' => [],
                 'encrypted_id' => encrypt($value->user->id)
             ];
 
@@ -3923,7 +3984,35 @@ class EventWallController extends BaseController
                 }
                 $postPhotoDetail['mediaData'] = $photoVideoData;
             }
+            if ($value->post_type == '2') {
+                $polls = EventPostPoll::with('event_poll_option')
+                    ->where([
+                        'event_id' => $eventId,
+                        'event_post_id' => $value->id
+                    ])
+                    ->first();
 
+                if ($polls) {
+                    $pollDura = getLeftPollTime($polls->updated_at, $polls->poll_duration);
+
+                    $pollData = [
+                        'poll_id' => $polls->id,
+                        'poll_question' => $polls->poll_question,
+                        'total_poll_duration' => $polls->poll_duration,
+                        'remaining_poll_time' => $pollDura,
+                        'poll_options' => []
+                    ];
+
+                    foreach ($polls->event_poll_option as $option) {
+                        $pollData['poll_options'][] = [
+                            'id' => $option->id,
+                            'option' => $option->option
+                        ];
+                    }
+
+                    $postPhotoDetail['pollData'] = $pollData;
+                }
+            }
 
             $postPhotoList[] = $postPhotoDetail;
         }

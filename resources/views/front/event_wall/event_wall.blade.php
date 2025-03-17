@@ -1292,18 +1292,19 @@
                                     @csrf
                                     <input type="hidden" name="event_id" id="event_id"
                                         value="{{ $event }}">
+                                        <input type="hidden" name="post_id" id="postId" class="poll_post_id" value="">
                                     <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                         value="1">
                                     <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                         value="1">
                                     {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
-                                    <input type="hidden" name="content" id="pollContent">
+                                    <input type="hidden" name="content" id="pollContent" value="">
                                     <div class="mb-3">
                                         <label for="yourquestion"
                                             class="form-label d-flex align-items-center justify-content-between">Your
                                             Question *
                                             <span class="char-count">0/140</span></label>
-                                        <input type="text" name="question" class="form-control" id="yourquestion"
+                                        <input type="text" name="question" class="form-control poll_qus" id="yourquestion"
                                             placeholder="How is everyone doing this evening?" required>
                                     </div>
                                     <div class="mb-3">
