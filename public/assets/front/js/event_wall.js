@@ -1438,6 +1438,28 @@ $(document).ready(function () {
                             uploadImgInner.removeClass("d-none");
                         }
                     }
+
+                    if (postData.post_type == "2") {
+                        $("#create-poll-btn").trigger("click"); // Open poll form modal
+
+                        // Populate the poll fields with the retrieved poll data
+                        let pollData = postData.pollData;
+
+                        if (pollData) {
+                            $(".poll_qus").val(pollData.poll_question);
+                            $("select[name='duration']").val(pollData.total_poll_duration);
+
+                            // Populate poll options dynamically
+                            let options = pollData.poll_options || []; // Get poll options
+
+                            $(".poll-options input[name='options[]']").each((index, element) => {
+                                if (options[index]) {
+                                    $(element).val(options[index].option); // Set existing options
+                                }
+                            });
+                        }
+                    }
+
                     // Set existing images if available
 
 
