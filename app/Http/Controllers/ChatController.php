@@ -524,7 +524,7 @@ class ChatController extends BaseController
             // ✅ Send Email
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) {
                 $messages->to(env('SUPPORT_MAIL'))
-                    ->subject('Chat Report Mail');
+                  ->subject('User has been reported');
             });
 
             // dd(1);

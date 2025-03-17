@@ -2536,25 +2536,27 @@ class EventWallController extends BaseController
 
             $message = "Reported to admin for this media";
 
-            $support_email = 'prakash.m.cmexpertise@gmail.com';
-
             $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+
             $getReportedData = EventPost::with('user')
             ->where('id', $request['event_post_id'])
             ->first();
-                    dd($getReportedData->user->email);
+
             $data = [
                 'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                 'event_name' => $getName->events->event_name,
+                'reported_username' => $getReportedData->user->firstname. ' '. $getReportedData->user->lastname,
+                'reported_email' => $getReportedData->user->email,
                 'report_type' => $getName->report_type,
                 'report_description' => ($getName->report_description != "") ? $getName->report_description : "",
                 'report_time' => Carbon::parse($createdAt)->format('Y-m-d h:i A'),
                 'report_from' => "post"
             ];
+            $support_email=env('SUPPORT_MAIL');
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
                 $messages->to($support_email)
-                    ->subject('Email Verification Mail');
+                        ->subject('User has been reported');
             });
 
 
