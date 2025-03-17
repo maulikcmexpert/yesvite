@@ -1376,6 +1376,7 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", ".editPostBtn", function () {
+        $(".isNewPost").val('1');
         var eventPostId = $(this).data("event-post-id");
         var eventId = $(this).data("event-id");
 
