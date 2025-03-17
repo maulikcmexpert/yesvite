@@ -1715,6 +1715,21 @@ $(document).ready(function () {
     modal.show(); // Ensure Bootstrap handles modal visibility properly
 });
 
+$(document).ready(function () {
+    var modalElement = document.getElementById('pending-rsvp-modal');
+    var modal = new bootstrap.Modal(modalElement);
+    var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
+    var currentTime = new Date().getTime();
+    var oneMinute = 60 * 1000; // 1 minute in milliseconds
+
+    if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
+        modal.show();
+    }
+
+    $(modalElement).on('hidden.bs.modal', function () {
+        localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+    });
+});
 
 
 // $(document).on('click','.notification-toggle-menu',function(){
