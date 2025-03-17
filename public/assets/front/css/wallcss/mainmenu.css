@@ -3314,6 +3314,10 @@ padding: 12px 24px;
     stroke: var(--white);
 }
 
+#pending-rsvp-modal .modal-body .pending_rsvp_slider  .owl-dots{
+    display: none;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
