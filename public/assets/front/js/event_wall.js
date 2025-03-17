@@ -1387,7 +1387,7 @@ $(document).ready(function () {
                     // Set the post content
                     $('.post_message').val(postData.post_message);
                     $('.PostId').val(postData.id);
-
+                    $('.poll_post_id').val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
                     $('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
