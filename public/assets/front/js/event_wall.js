@@ -1057,9 +1057,9 @@ $(document).ready(function () {
 
             if (postContent.length > 0) {
                 // Check if content exists
-                if ($("#photoForm").length) {
+                if ($("#textform").length) {
                     // Check if form exists
-                    $("#photoForm").submit(); // Submit the form
+                    $("#textform").submit(); // Submit the form
                 } else {
                     console.log("Form not found!"); // Debugging purpose
                 }
@@ -1135,9 +1135,9 @@ $(document).ready(function () {
         }
         if (postContent.length > 0) {
             // Check if content exists
-            if ($("#photoForm").length) {
+            if ($("#textform").length) {
                 // Check if form exists
-                $("#photoForm").submit(); // Submit the form
+                $("#textform").submit(); // Submit the form
             } else {
                 console.log("Form not found!"); // Debugging purpose
             }
