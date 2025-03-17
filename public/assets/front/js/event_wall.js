@@ -1365,7 +1365,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.editPostBtn').on('click', function() {
+    $('.editPostBtn').on('click', function () {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
 
@@ -1380,7 +1380,7 @@ $(document).ready(function () {
                 event_id: eventId,
                 event_post_id: eventPostId,
             }),
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success' && response.data.length > 0) {
                     let postData = response.data[0]; // Get the first post data
 
@@ -1389,27 +1389,27 @@ $(document).ready(function () {
                     $('.PostId').val(postData.id);
 
                     // Set hidden input values
-                  // Set the radio button selection
-$('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
+                    // Set the radio button selection
+                    $('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
 
-// Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
-$('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
+                    // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
+                    $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
 
-if(postData.post_type =="1"){
+                    if (postData.post_type == "1") {
 
-    const uploadImgInner = document.querySelector(".create-post-upload-img-inner");
-    const uploadHeadButton = document.querySelector(".create-post-head-upload-btn");
-
-
-        uploadImgInner.classList.add("d-none");
-        uploadHeadButton.classList.remove("d-none");
+                        const uploadImgInner = $(".create-post-upload-img-inner");
+                        const uploadHeadButton = $(".create-post-head-upload-btn");
 
 
-    let mediaWrapper = $("#imagePreview");
-    mediaWrapper.empty(); // Clear old images
-    if (postData.mediaData.length > 0) {
-        postData.mediaData.forEach((media) => {
-            let mediaElement = `<div class="col-12" style="position: relative;"><span class="uploded-delete-icon">
+                        uploadImgInner.addClass("d-none");
+                        uploadHeadButton.removeClass("d-none");
+
+
+                        let mediaWrapper = $("#imagePreview");
+                        mediaWrapper.empty(); // Clear old images
+                        if (postData.mediaData.length > 0) {
+                            postData.mediaData.forEach((media) => {
+                                let mediaElement = `<div class="col-12" style="position: relative;"><span class="uploded-delete-icon">
 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
@@ -1420,10 +1420,10 @@ if(postData.post_type =="1"){
 <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg></span><img src="${media.post_media}"  class="preview-image"></div>
             `;
-            mediaWrapper.append(mediaElement);
-        });
-    }
-}
+                                mediaWrapper.append(mediaElement);
+                            });
+                        }
+                    }
                     // Set existing images if available
 
 
@@ -1434,7 +1434,7 @@ if(postData.post_type =="1"){
                     toastr.error("Post data not found.");
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.error(xhr.responseText);
                 alert("An error occurred. Please try again.");
             },
