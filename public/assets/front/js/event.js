@@ -1584,7 +1584,7 @@ $(document).on('click','.pending-rsvp-btn',function(){
     const firstName = $(this).attr('data-firstname');
     const lastName = $(this).attr('data-lastname');
     const hosted_by = firstName + ' ' + lastName; 
-    const event_name = $(this).attr('event_name');
+    const event_name = $(this).attr('data-event_name');
     const rsvp_status=$(this).attr('data-rsvp');
     const kids=$(this).attr('data-rsvp_kids');
     const adults=$(this).attr('data-rsvp_adults');
