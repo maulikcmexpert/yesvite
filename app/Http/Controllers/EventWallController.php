@@ -3841,7 +3841,7 @@ class EventWallController extends BaseController
         $eventId = $request->event_id;
 
         // Fetch photo details from the database
-        $getPhotoList = EventPost::with(['user', 'post_image','event_poll_option'])
+        $getPhotoList = EventPost::with(['user', 'post_image'])
         ->where('event_id', $eventId)
         ->where('id', $event_post_id) // Assuming you meant 'id' instead of 'event_post_id'
         ->orderBy('id', 'desc')
