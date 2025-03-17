@@ -1221,7 +1221,7 @@
                                             value="{{ $event }}">
                                         <input type="hidden" class="hiddenVisibility" name="post_privacys"
                                             value="1">
-                                        <input type="hidden" name="post_type" id="photoPostType" value="1">
+                                        <input type="hidden" name="post_type" id="photoPostType" value="">
                                         <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                             value="">
 
