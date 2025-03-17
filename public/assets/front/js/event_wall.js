@@ -1388,8 +1388,11 @@ $(document).ready(function () {
                     $('.post_message').val(postData.post_message);
 
                     // Set hidden input values
-                    $('input[name="post_privacy"]').val(postData.post_privacy);
-                    $('input[name="commenton"]').val(postData.comment_on_off);
+                  // Set the radio button selection
+$('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
+
+// Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
+$('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
 
 
                     // Set existing images if available
