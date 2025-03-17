@@ -243,22 +243,22 @@
                       <div class="owl-carousel owl-theme pending_rsvp_slider">
                         <div class="item">
                             <div class="setting-img">
-                                    <img id="eventImage" src="" />
+                                    <img id="eventImage" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                 </div>
                             </div>
                         <div class="item sliderImages-1" style="display:none;">  
                                 <div class="setting-img">
-                                    <img id="sliderImages-1" src="" />
+                                    <img id="sliderImages-1" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                 </div>
                             </div>
                         <div class="item sliderImages-2" style="display:none;">
                         <div class="setting-img">
-                                    <img id="sliderImages-2" src="" />
+                                    <img id="sliderImages-2" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                 </div>
                         </div>
                         <div class="item sliderImages-3" style="display:none;">
                         <div class="setting-img">
-                                    <img id="sliderImages-3" src="" />
+                                    <img id="sliderImages-3" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                 </div>
                         </div>
                   

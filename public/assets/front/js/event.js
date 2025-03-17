@@ -1431,6 +1431,7 @@ $(".pending_rsvp_slider").owlCarousel({
     items:1,
     margin: 10,
     nav: true,
+    dots:false,
     navText: [
         `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
