@@ -3057,7 +3057,7 @@ class EventListController extends BaseController
     {
         $user_id = Auth::guard('web')->user()->id;
     
-        $total_need_rsvp_event = EventInvitedUser::with('event') 
+        $total_need_rsvp_event = EventInvitedUser::with('event','user') 
             ->whereHas('event', function ($query) {
                 $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
             })
@@ -3074,8 +3074,12 @@ class EventListController extends BaseController
                 if ($eventdetail->event) {
                     $eventData[] = [
                         'event_id' => $eventdetail->event->id,
+                        'firstname' => $eventdetail->user->firstname,
+                        'lastname' => $eventdetail->user->lastname,
+                        'profile' => $eventdetail->user->profile,
                         'event_name' => $eventdetail->event->event_name,
                         'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
+                        'user_id'=>$user_id,
                     ];
                 }
             }
