@@ -1365,46 +1365,59 @@ $(document).ready(function () {
         });
     });
 
-
     $('.editPostBtn').on('click', function() {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
 
-        // var post_privacy = $(this).data('post-privacy');
-        // var post_type = $(this).data('post-type');
-        // var post_content = $(this).data('post-content');
-        // var commenting_on_off = $(this).data('comment-on-off');
-        // var is_in_photo_moudle = $(this).data('is-in-photo-moudle');
-
-
         $.ajax({
-            url: base_url + "event_wall/fetchPostWall", // Adjust base_url as necessary
+            url: base_url + "event_wall/fetchPostWall",
             method: "POST",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            contentType: "application/json", // Send as JSON
+            contentType: "application/json",
             data: JSON.stringify({
-                event_id:eventId,
-                event_post_id:eventPostId,
-
-
+                event_id: eventId,
+                event_post_id: eventPostId,
             }),
-            success: function (response) {
-                if (response) {
-                   console.log(response);
+            success: function(response) {
+                if (response.status === 'success' && response.data.length > 0) {
+                    let postData = response.data[0]; // Get the first post data
 
-                    // toastr.success("Event Post edit Successfully");
+                    // Set the post content
+                    $('.post_message').val(postData.post_message);
+
+                    // Set hidden input values
+                    $('input[name="post_privacy"]').val(postData.post_privacy);
+                    $('input[name="commenton"]').val(postData.comment_on_off);
+
+
+                    // Set existing images if available
+                    let mediaWrapper = $(".create-post-upload-img-wrp");
+                    mediaWrapper.empty(); // Clear old images
+                    if (postData.mediaData.length > 0) {
+                        postData.mediaData.forEach((media) => {
+                            let mediaElement = `<div class="uploaded-image">
+                                <img src="${media.post_media}" alt="Uploaded Image">
+                            </div>`;
+                            mediaWrapper.append(mediaElement);
+                        });
+                    }
+
+                    // Show the modal after setting the values
+                    $("#creatpostmodal").modal("show");
+
                 } else {
-                    toastr.error("Event Post  Not Deleted");
+                    toastr.error("Post data not found.");
                 }
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 console.error(xhr.responseText);
                 alert("An error occurred. Please try again.");
             },
         });
     });
+
 
 });
 $(".modal").on("hidden.bs.modal", function () {

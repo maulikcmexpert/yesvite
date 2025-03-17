@@ -3832,6 +3832,7 @@ class EventWallController extends BaseController
                 'post_privacy'=>$value->post_privacy,
                 'id' => $value->id,
                 'post_message' => $value->post_message ?? "",
+                'comment_on_off'=>$value->comment_on_off,
 
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
