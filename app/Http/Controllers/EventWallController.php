@@ -1638,17 +1638,13 @@ class EventWallController extends BaseController
         // Handle poll post
        // Handle poll post
 if ($request->post_type == '2') {
-    // Check if poll already exists for this event post
+
     $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
 
     if ($eventPostPoll) {
-        // Update existing poll
-        $eventPostPoll->poll_question = $request->poll_question;
-        $eventPostPoll->poll_duration = $request->poll_duration;
-        $eventPostPoll->save();
 
-        // Delete old poll options
-        EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
+        $msg = 'Event Post poll updated successfully!';
+
     } else {
         // Create a new poll
         $eventPostPoll = new EventPostPoll;
