@@ -1507,7 +1507,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 response.forEach((event, index) => {
                     let imgHtml = `
                         <div class="item">
-                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname} data-lastname="${event.lastname}" data-profile="${event.profile}">
+                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname}" data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
@@ -1518,6 +1518,9 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                             $(".pending-rsvp-btn").attr("data-firstname", event.firstname);
                             $(".pending-rsvp-btn").attr("data-lastname", event.lastname);
                             $(".pending-rsvp-btn").attr("data-profile", event.profile);
+                            $(".pending-rsvp-btn").attr("data-rsvp_kids", event.kids);
+                            $(".pending-rsvp-btn").attr("data-rsvp_adults", event.adults);
+                            $(".pending-rsvp-btn").attr("data-rsvp", event.rsvp_status);
                         }
                     slider.append(imgHtml);
                 });
@@ -1568,6 +1571,9 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     let firstname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-firstname"); 
     let lastname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-lastname"); 
     let profile = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-profile"); 
+    let kids = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp_kids"); 
+    let adults = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp_adults"); 
+    let rsvp = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp"); 
   
     // alert(currentImg);
     $(".pending-rsvp-btn").attr("data-event_id",event_id);
@@ -1575,16 +1581,19 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-firstname",firstname);
     $(".pending-rsvp-btn").attr("data-lastname",lastname);
     $(".pending-rsvp-btn").attr("data-profile",profile);
-    $(".pending-rsvp-btn").attr("data-event_name",event_name); ;
+    $(".pending-rsvp-btn").attr("data-event_name",event_name);
+    $(".pending-rsvp-btn").attr("data-rsvp_kids",kids);
+    $(".pending-rsvp-btn").attr("data-rsvp_adults",adults);
+    $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
-    const eventId = $(this).data('event_id');
-    const userId = $(this).data('user_id');
-    const profile = $(this).data('profile');
-    const firstName = $(this).data('firstname');
-    const lastName = $(this).data('lastname');
+    const eventId = $(this).attr('data-event_id');
+    const userId = $(this).attr('data-user_id');
+    const profile = $(this).attr('data-profile');
+    const firstName = $(this).attr('data-firstname');
+    const lastName = $(this).attr('data-lastname');
     const hosted_by = firstName + ' ' + lastName; 
-    const event_name = $(this).data('event_name');
+    const event_name = $(this).attr('data-event_name');
     const rsvp_status=$(this).attr('data-rsvp');
     const kids=$(this).attr('data-rsvp_kids');
     const adults=$(this).attr('data-rsvp_adults');
