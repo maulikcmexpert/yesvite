@@ -2556,8 +2556,7 @@ class EventWallController extends BaseController
             ];
 
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) use ($support_email) {
-                // $messages->to($support_email)
-                $messages->to(env('SUPPORT_MAIL'))
+                $messages->to($support_email)
                     ->subject('Email Verification Mail');
             });
 
