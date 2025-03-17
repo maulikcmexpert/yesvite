@@ -235,7 +235,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending (5)</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close_rsvp_pending" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                   <div class="modal-body">
                       <div class="pending-rsvp-slider-main-section">
