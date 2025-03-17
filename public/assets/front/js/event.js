@@ -1717,6 +1717,11 @@ $(".pending_rsvp_slider").owlCarousel({
 
 $(document).ready(function () {
     var modalElement = document.getElementById('pending-rsvp-modal');
+    if (!modalElement.classList.contains("show")) {  // Prevent reopening
+        var modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    }
+    var modalElement = document.getElementById('pending-rsvp-modal');
     var modal = new bootstrap.Modal(modalElement);
     var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
     var currentTime = new Date().getTime();
