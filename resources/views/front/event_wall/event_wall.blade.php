@@ -152,8 +152,8 @@
                                                                         @if ($post['user_id'] == $login_user_id)
                                                                         <li>
                                                                             <button
-                                                                                class="dropdown-item hide-post-btn postControlButton"
-                                                                                id="hidePostButton "
+                                                                                class="dropdown-item"
+
                                                                                 data-event-id="{{ $event }}"
                                                                                 data-event-post-id="{{ $post['id'] }}"
                                                                                 data-user-id="{{ $login_user_id }}"
