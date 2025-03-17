@@ -1365,46 +1365,71 @@ $(document).ready(function () {
         });
     });
 
-
     $('.editPostBtn').on('click', function() {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
 
-        // var post_privacy = $(this).data('post-privacy');
-        // var post_type = $(this).data('post-type');
-        // var post_content = $(this).data('post-content');
-        // var commenting_on_off = $(this).data('comment-on-off');
-        // var is_in_photo_moudle = $(this).data('is-in-photo-moudle');
-
-
         $.ajax({
-            url: base_url + "event_wall/fetchPostWall", // Adjust base_url as necessary
+            url: base_url + "event_wall/fetchPostWall",
             method: "POST",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            contentType: "application/json", // Send as JSON
+            contentType: "application/json",
             data: JSON.stringify({
-                event_id:eventId,
-                event_post_id:eventPostId,
-
-
+                event_id: eventId,
+                event_post_id: eventPostId,
             }),
-            success: function (response) {
-                if (response) {
-                   console.log(response);
+            success: function(response) {
+                if (response.status === 'success' && response.data.length > 0) {
+                    let postData = response.data[0]; // Get the first post data
 
-                    // toastr.success("Event Post edit Successfully");
+                    // Set the post content
+                    $('.post_message').val(postData.post_message);
+                    $('.PostId').val(postData.id);
+
+                    // Set hidden input values
+                  // Set the radio button selection
+$('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
+
+// Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
+$('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
+
+
+                    // Set existing images if available
+                    let mediaWrapper = $("#imagePreview");
+                    mediaWrapper.empty(); // Clear old images
+                    if (postData.mediaData.length > 0) {
+                        postData.mediaData.forEach((media) => {
+                            let mediaElement = `<div class="col-12" style="position: relative;"><span class="uploded-delete-icon">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
+                    10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
+                    14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg></span><img src="${media.post_media}"  class="preview-image"></div>
+                            `;
+                            mediaWrapper.append(mediaElement);
+                        });
+                    }
+
+                    // Show the modal after setting the values
+                    $("#creatpostmodal").modal("show");
+
                 } else {
-                    toastr.error("Event Post  Not Deleted");
+                    toastr.error("Post data not found.");
                 }
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 console.error(xhr.responseText);
                 alert("An error occurred. Please try again.");
             },
         });
     });
+
 
 });
 $(".modal").on("hidden.bs.modal", function () {

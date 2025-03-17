@@ -1472,118 +1472,188 @@ class EventWallController extends BaseController
         ));
     }
 
+    // public function createPost(Request $request)
+    // {
+    //     // dd($request->all());
+    //     $user  = Auth::guard('web')->user();
+
+    //     $creatEventPost = new EventPost;
+    //     $creatEventPost->event_id = $request->event_id;
+    //     $creatEventPost->user_id = $user->id;
+    //     $creatEventPost->post_message = $request->postContent;
+    //     $creatEventPost->post_type = $request->post_type;
+    //     // if ($request->hasFile('post_recording')) {
+    //     //     $record = $request->post_recording;
+    //     //     $recordingName = time() . '_' . $record->getClientOriginalName();
+    //     //     $record->move(public_path('storage/event_post_recording'), $recordingName);
+    //     //     $creatEventPost->post_recording = $recordingName;
+    //     // }
+    //     $creatEventPost->post_privacy = $request->post_privacys;
+    //     // $creatEventPost->post_message = $request->input('content');
+    //     $creatEventPost->commenting_on_off = $request->commenting_on_off;
+    //     $creatEventPost->is_in_photo_moudle = "0";
+    //     $creatEventPost->save();
+
+    //     if ($creatEventPost->id  && $request->file('files')) {
+    //         $postimages = $request->file('files');
+
+    //         $video = 0;
+    //         $image = 0;
+
+    //         // dd($postimages);
+    //         foreach ($postimages as $key => $postImage) {
+
+    //             $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
+
+
+    //             $postImage->move(public_path('storage/post_image'), $imageName);
+
+    //             $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
+    //             $duration = "";
+    //             $thumbName = "";
+
+    //             if ($checkIsimageOrVideo == 'video') {
+    //                 $duration = getVideoDuration($postImage);
+    //                 $thumbName = generate_thumbnail($imageName);
+    //                 // if (isset($request->thumbnail) && $request->thumbnail != Null) {
+    //                 //     $thumbimage = $request->thumbnail[$key];
+    //                 //     $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
+    //                 //     // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
+    //                 //     $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
+    //                 // }
+    //                 // if (file_exists(public_path('storage/post_image/') . $imageName)) {
+    //                 //     $imagePath = public_path('storage/post_image/') . $imageName;
+    //                 //     unlink($imagePath);
+    //                 // }
+    //                 // $postImage->move(public_path('storage/post_image'), $imageName);
+    //             }
+    //             // else {
+
+    //             //     $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
+    //             //     Image::load($postImgValue->getRealPath())
+    //             //         ->width(500)
+    //             //         ->optimize()
+    //             //         ->save($temporaryThumbnailPath);
+    //             //     $destinationPath = public_path('storage/post_image/');
+    //             //     if (!file_exists($destinationPath)) {
+    //             //         mkdir($destinationPath, 0755, true);
+    //             //     }
+    //             //     rename($temporaryThumbnailPath,$destinationPath);
+    //             // }
+    //             if ($checkIsimageOrVideo == 'video') {
+    //                 $video++;
+    //             } else {
+    //                 $image++;
+    //             }
+    //             $eventPostImage = new EventPostImage();
+    //             $eventPostImage->event_id = $request->event_id;
+    //             $eventPostImage->event_post_id = $creatEventPost->id;
+    //             $eventPostImage->post_image = $imageName;
+    //             $eventPostImage->duration = $duration;
+    //             $eventPostImage->type = $checkIsimageOrVideo;
+    //             $eventPostImage->thumbnail = $thumbName;
+    //             $eventPostImage->save();
+    //         }
+
+
+
+    //         if ($request->post_type == '2') {
+    //             $eventPostPoll = new EventPostPoll;
+    //             $eventPostPoll->event_id = $request->event_id;
+    //             $eventPostPoll->event_post_id = $creatEventPost->id;
+    //             $eventPostPoll->poll_question = $request->poll_question;
+    //             $eventPostPoll->poll_duration = $request->poll_duration;
+    //             if ($eventPostPoll->save()) {
+    //                 $option = json_decode($request->option);
+    //                 foreach ($option as $value) {
+    //                     $pollOption = new EventPostPollOption;
+    //                     $pollOption->event_post_poll_id = $eventPostPoll->id;
+    //                     $pollOption->option = $value;
+    //                     $pollOption->save();
+    //                 }
+    //             }
+    //         }
+
+    //     }
+
+
+
+    //     // if ($request->is_in_photo_moudle == '1') {
+    //     //     sendNotification('photos', $notificationParam);
+    //     // } else {
+    //     //     sendNotification('upload_post', $notificationParam);
+    //     // }
+    //     return redirect()->back()->with('msg', 'Event Post created successfully!');
+    // }
     public function createPost(Request $request)
     {
-        // dd($request->all());
-        $user  = Auth::guard('web')->user();
+        $user = Auth::guard('web')->user();
 
-        $creatEventPost = new EventPost;
-        $creatEventPost->event_id = $request->event_id;
-        $creatEventPost->user_id = $user->id;
+        // Find existing post by event_id and user_id
+        $creatEventPost = EventPost::where('id', $request->post_id)
+        ->where('event_id', $request->event_id)
+        ->first();
+        if ($creatEventPost) {
+            // Delete old images
+
+
+            $msg = 'Event Post updated successfully!';
+        } else {
+            // Create new post if it doesn't exist
+            $creatEventPost = new EventPost;
+            $creatEventPost->event_id = $request->event_id;
+            $creatEventPost->user_id = $user->id;
+            $msg = 'Event Post created successfully!';
+        }
+
+
         $creatEventPost->post_message = $request->postContent;
         $creatEventPost->post_type = $request->post_type;
-        // if ($request->hasFile('post_recording')) {
-        //     $record = $request->post_recording;
-        //     $recordingName = time() . '_' . $record->getClientOriginalName();
-        //     $record->move(public_path('storage/event_post_recording'), $recordingName);
-        //     $creatEventPost->post_recording = $recordingName;
-        // }
         $creatEventPost->post_privacy = $request->post_privacys;
-        // $creatEventPost->post_message = $request->input('content');
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        if ($creatEventPost->id  && $request->file('files')) {
-            $postimages = $request->file('files');
-
-            $video = 0;
-            $image = 0;
-
-            // dd($postimages);
-            foreach ($postimages as $key => $postImage) {
-
+        // Handle images & videos
+        if ($request->file('files')) {
+            foreach ($request->file('files') as $key => $postImage) {
                 $imageName = time() . $key . '_' . $postImage->getClientOriginalName();
-
-
                 $postImage->move(public_path('storage/post_image'), $imageName);
-
                 $checkIsimageOrVideo = checkIsimageOrVideo($postImage);
-                $duration = "";
-                $thumbName = "";
+                $duration = ($checkIsimageOrVideo == 'video') ? getVideoDuration($postImage) : "";
+                $thumbName = ($checkIsimageOrVideo == 'video') ? generate_thumbnail($imageName) : "";
 
-                if ($checkIsimageOrVideo == 'video') {
-                    $duration = getVideoDuration($postImage);
-                    $thumbName = generate_thumbnail($imageName);
-                    // if (isset($request->thumbnail) && $request->thumbnail != Null) {
-                    //     $thumbimage = $request->thumbnail[$key];
-                    //     $thumbName = time() . $key . '_' . $thumbimage->getClientOriginalName();
-                    //     // $checkIsimageOrVideo = checkIsimageOrVideo($thumbimage);
-                    //     $thumbimage->move(public_path('storage/thumbnails'), $thumbName);
-                    // }
-                    // if (file_exists(public_path('storage/post_image/') . $imageName)) {
-                    //     $imagePath = public_path('storage/post_image/') . $imageName;
-                    //     unlink($imagePath);
-                    // }
-                    // $postImage->move(public_path('storage/post_image'), $imageName);
-                }
-                // else {
-
-                //     $temporaryThumbnailPath = public_path('storage/post_image/') . 'tmp_' . $imageName;
-                //     Image::load($postImgValue->getRealPath())
-                //         ->width(500)
-                //         ->optimize()
-                //         ->save($temporaryThumbnailPath);
-                //     $destinationPath = public_path('storage/post_image/');
-                //     if (!file_exists($destinationPath)) {
-                //         mkdir($destinationPath, 0755, true);
-                //     }
-                //     rename($temporaryThumbnailPath,$destinationPath);
-                // }
-                if ($checkIsimageOrVideo == 'video') {
-                    $video++;
-                } else {
-                    $image++;
-                }
-                $eventPostImage = new EventPostImage();
-                $eventPostImage->event_id = $request->event_id;
-                $eventPostImage->event_post_id = $creatEventPost->id;
-                $eventPostImage->post_image = $imageName;
-                $eventPostImage->duration = $duration;
-                $eventPostImage->type = $checkIsimageOrVideo;
-                $eventPostImage->thumbnail = $thumbName;
-                $eventPostImage->save();
+                // Save event post images
+                EventPostImage::create([
+                    'event_id' => $request->event_id,
+                    'event_post_id' => $creatEventPost->id,
+                    'post_image' => $imageName,
+                    'duration' => $duration,
+                    'type' => $checkIsimageOrVideo,
+                    'thumbnail' => $thumbName
+                ]);
             }
-
-
-
-            if ($request->post_type == '2') {
-                $eventPostPoll = new EventPostPoll;
-                $eventPostPoll->event_id = $request->event_id;
-                $eventPostPoll->event_post_id = $creatEventPost->id;
-                $eventPostPoll->poll_question = $request->poll_question;
-                $eventPostPoll->poll_duration = $request->poll_duration;
-                if ($eventPostPoll->save()) {
-                    $option = json_decode($request->option);
-                    foreach ($option as $value) {
-                        $pollOption = new EventPostPollOption;
-                        $pollOption->event_post_poll_id = $eventPostPoll->id;
-                        $pollOption->option = $value;
-                        $pollOption->save();
-                    }
-                }
-            }
-
         }
 
+        // Handle poll post
+        if ($request->post_type == '2') {
+                        $eventPostPoll = new EventPostPoll;
+                        $eventPostPoll->event_id = $request->event_id;
+                        $eventPostPoll->event_post_id = $creatEventPost->id;
+                        $eventPostPoll->poll_question = $request->poll_question;
+                        $eventPostPoll->poll_duration = $request->poll_duration;
+                        if ($eventPostPoll->save()) {
+                            $option = json_decode($request->option);
+                            foreach ($option as $value) {
+                                $pollOption = new EventPostPollOption;
+                                $pollOption->event_post_poll_id = $eventPostPoll->id;
+                                $pollOption->option = $value;
+                                $pollOption->save();
+                            }
+                        }
+                    }
 
-
-        // if ($request->is_in_photo_moudle == '1') {
-        //     sendNotification('photos', $notificationParam);
-        // } else {
-        //     sendNotification('upload_post', $notificationParam);
-        // }
-        return redirect()->back()->with('msg', 'Event Post created successfully!');
+        return redirect()->back()->with('msg', $msg);
     }
 
     public function eventViewUser($user_id, $event_id)
@@ -3832,6 +3902,7 @@ class EventWallController extends BaseController
                 'post_privacy'=>$value->post_privacy,
                 'id' => $value->id,
                 'post_message' => $value->post_message ?? "",
+                'comment_on_off'=>$value->commenting_on_off,
 
                 'is_in_photo_moudle' => $value->is_in_photo_moudle,
                 'mediaData' => [],
