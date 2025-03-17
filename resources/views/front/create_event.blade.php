@@ -1,4 +1,4 @@
-{{ dd($eventDetail['isCopy']) }}
+{{ dd($eventDetail) }}
 @php
     $userS = Auth::guard('web')->user();
     $isCopyNew = $eventDetail['isCopy'];
