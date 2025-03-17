@@ -1940,74 +1940,78 @@ class EventWallController extends BaseController
 
 
     public function createPoll(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'question' => 'required|string|max:255',
-            'duration' => 'required|string',
-            'options' => 'required|array|min:2', // Ensure at least two options are provided
-            'options.*' => 'required|string|max:100', // Validate each option
-        ]);
+{
+    // Validate the request
+    $request->validate([
+        'question' => 'required|string|max:255',
+        'duration' => 'required|string',
+        'options' => 'required|array|min:2', // Ensure at least two options are provided
+        'options.*' => 'required|string|max:100', // Validate each option
+    ]);
 
-        $user = Auth::guard('web')->user()->id;
+    $user = Auth::guard('web')->user()->id;
 
-        // Find or create the event post
-
-
-        $creatEventPost = EventPost::where('id', $request->post_id)
+    // Find existing event post
+    $creatEventPost = EventPost::where('id', $request->post_id)
         ->where('event_id', $request->event_id)
         ->first();
 
-        $creatEventPost->post_message = $request->input('content') ;
-
-        if ($request->hasFile('post_recording')) {
-            $record = $request->post_recording;
-            $recordingName = time() . '_' . $record->getClientOriginalName();
-            $record->move(public_path('storage/event_post_recording'), $recordingName);
-            $creatEventPost->post_recording = $recordingName;
-        }
-
-        $creatEventPost->post_privacy = $request->post_privacys;
-        $creatEventPost->post_type = "2";
-        $creatEventPost->commenting_on_off = $request->commenting_on_off;
-        $creatEventPost->is_in_photo_moudle = "0";
-        $creatEventPost->save();
-
-        // Check if a poll already exists for this event post
-        $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
-
-        if ($eventPostPoll) {
-            // Update existing poll
-            $eventPostPoll->poll_question = $request->question;
-            $eventPostPoll->poll_duration = $request->duration;
-            $eventPostPoll->save();
-
-            // Delete old poll options before adding new ones
-            EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
-            $msg = 'Poll update successfully!';
-        } else {
-            // Create a new poll
-            $eventPostPoll = new EventPostPoll;
-            $eventPostPoll->event_id = $request->event_id;
-            $eventPostPoll->event_post_id = $creatEventPost->id;
-            $eventPostPoll->poll_question = $request->question;
-            $eventPostPoll->poll_duration = $request->duration;
-            $eventPostPoll->save();
-            $msg = 'Poll create successfully!';
-        }
-
-        // Save new poll options
-
-            foreach ($request->options as $value) {
-                            $pollOption = new EventPostPollOption();
-                            $pollOption->event_post_poll_id = $eventPostPoll->id;
-                            $pollOption->option = $value;
-                            $pollOption->save();
-                        }
-
-
-        return redirect()->back()->with('msg', $msg);
+    if (!$creatEventPost) {
+        // Create new event post if it doesn't exist
+        $creatEventPost = new EventPost();
+        $creatEventPost->event_id = $request->event_id;
+        $creatEventPost->user_id = $user;
     }
+
+    // Now, it's safe to update properties
+    $creatEventPost->post_message = $request->input('content');
+
+    if ($request->hasFile('post_recording')) {
+        $record = $request->post_recording;
+        $recordingName = time() . '_' . $record->getClientOriginalName();
+        $record->move(public_path('storage/event_post_recording'), $recordingName);
+        $creatEventPost->post_recording = $recordingName;
+    }
+
+    $creatEventPost->post_privacy = $request->post_privacys;
+    $creatEventPost->post_type = "2";
+    $creatEventPost->commenting_on_off = $request->commenting_on_off;
+    $creatEventPost->is_in_photo_moudle = "0";
+    $creatEventPost->save();
+
+    // Check if poll exists
+    $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
+
+    if ($eventPostPoll) {
+        // Update existing poll
+        $eventPostPoll->poll_question = $request->question;
+        $eventPostPoll->poll_duration = $request->duration;
+        $eventPostPoll->save();
+
+        // Delete old poll options before adding new ones
+        EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
+        $msg = 'Poll updated successfully!';
+    } else {
+        // Create new poll
+        $eventPostPoll = new EventPostPoll();
+        $eventPostPoll->event_id = $request->event_id;
+        $eventPostPoll->event_post_id = $creatEventPost->id;
+        $eventPostPoll->poll_question = $request->question;
+        $eventPostPoll->poll_duration = $request->duration;
+        $eventPostPoll->save();
+        $msg = 'Poll created successfully!';
+    }
+
+    // Save new poll options
+    foreach ($request->options as $value) {
+        EventPostPollOption::create([
+            'event_post_poll_id' => $eventPostPoll->id,
+            'option' => $value,
+        ]);
+    }
+
+    return redirect()->back()->with('msg', $msg);
+}
 
 
     public function get_reaction_post_list(Request $request)
