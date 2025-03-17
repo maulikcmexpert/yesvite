@@ -1364,8 +1364,8 @@ $(document).ready(function () {
             },
         });
     });
+    $(document).on("click", ".editPostBtn", function () {
 
-    $('.editPostBtn').on('click', function () {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
 
