@@ -3584,6 +3584,9 @@
     .design-seting button svg path{
         stroke: #fff !important;
     }
+    .edit-images-button-wrp{
+        height: 75px !important;
+    }
 
 }
 
