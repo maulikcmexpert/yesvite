@@ -510,7 +510,9 @@ class ChatController extends BaseController
             // ✅ Prepare Email Data
             $data = [
                 'reporter_username' => $getName->reporter_user->firstname . ' ' . $getName->reporter_user->lastname,
+                'reporter_email' => $getName->reporter_user->email,
                 'reported_username' => $getName->to_reporter_user->firstname . ' ' . $getName->to_reporter_user->lastname,
+                'reported_email' => $getName->to_reporter_user->email,
                 'report_type' => $request->report_type,
                 'report_description' => $request->report_description,
                 'report_time' => $reportCreate->created_at->format('Y-m-d h:i A'),
