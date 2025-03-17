@@ -1951,14 +1951,20 @@ class EventWallController extends BaseController
 
         $user = Auth::guard('web')->user()->id;
 
-        // Find or create the event post
-
-
+        // Find existing event post
         $creatEventPost = EventPost::where('id', $request->post_id)
-        ->where('event_id', $request->event_id)
-        ->first();
+            ->where('event_id', $request->event_id)
+            ->first();
 
-        $creatEventPost->post_message = $request->input('content') ;
+        if (!$creatEventPost) {
+            // Create new event post if it doesn't exist
+            $creatEventPost = new EventPost();
+            $creatEventPost->event_id = $request->event_id;
+            $creatEventPost->user_id = $user;
+        }
+
+        // Now, it's safe to update properties
+        $creatEventPost->post_message = $request->input('content');
 
         if ($request->hasFile('post_recording')) {
             $record = $request->post_recording;
@@ -1973,7 +1979,7 @@ class EventWallController extends BaseController
         $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
 
-        // Check if a poll already exists for this event post
+        // Check if poll exists
         $eventPostPoll = EventPostPoll::where('event_post_id', $creatEventPost->id)->first();
 
         if ($eventPostPoll) {
@@ -1984,27 +1990,25 @@ class EventWallController extends BaseController
 
             // Delete old poll options before adding new ones
             EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
-            $msg = 'Poll update successfully!';
+            $msg = 'Poll updated successfully!';
         } else {
-            // Create a new poll
-            $eventPostPoll = new EventPostPoll;
+            // Create new poll
+            $eventPostPoll = new EventPostPoll();
             $eventPostPoll->event_id = $request->event_id;
             $eventPostPoll->event_post_id = $creatEventPost->id;
             $eventPostPoll->poll_question = $request->question;
             $eventPostPoll->poll_duration = $request->duration;
             $eventPostPoll->save();
-            $msg = 'Poll create successfully!';
+            $msg = 'Poll created successfully!';
         }
 
         // Save new poll options
-
-            foreach ($request->options as $value) {
-                            $pollOption = new EventPostPollOption();
-                            $pollOption->event_post_poll_id = $eventPostPoll->id;
-                            $pollOption->option = $value;
-                            $pollOption->save();
-                        }
-
+        foreach ($request->options as $value) {
+                        $pollOption = new EventPostPollOption();
+                        $pollOption->event_post_poll_id = $eventPostPoll->id;
+                        $pollOption->option = $value;
+                        $pollOption->save();
+                    }
 
         return redirect()->back()->with('msg', $msg);
     }

@@ -1585,9 +1585,11 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-event_name",event_name);
     $(".pending-rsvp-btn").attr("data-rsvp_kids",kids);
     $(".pending-rsvp-btn").attr("data-rsvp_adults",adults);
-    $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
+    $(".pending-rsvp-btn").attr("data-rsvp",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
+    var modal = new bootstrap.Modal(document.getElementById('rsvp_by_notification'));
+    modal.show();
     const eventId = $(this).attr('data-event_id');
     const userId = $(this).attr('data-user_id');
     const profile = $(this).attr('data-profile');
@@ -1671,6 +1673,8 @@ $(document).on('click','.pending-rsvp-btn',function(){
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
 
+            // $('#rsvp_by_notification').modal('show');
+
 });
 $(".pending_rsvp_slider").owlCarousel({
     loop: true,
@@ -1690,10 +1694,48 @@ $(".pending_rsvp_slider").owlCarousel({
     
 });
 
-var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'), {
-    backdrop: true
-});
+// $(document).ready(function () {
+//     var pendingModal = $('#pending-rsvp-modal');
 
+//     // Check if the modal has the 'show' class and remove it
+//     if (pendingModal.hasClass('show')) {
+//         pendingModal.removeClass('show');
+//         pendingModal.css('display', 'none'); // Hide it properly
+//         $('body').removeClass('modal-open'); // Remove Bootstrap modal-open class
+//         $('.modal-backdrop').remove(); // Remove any leftover backdrop
+//     }
+// });
+
+
+// $(document).on('click', '.close_rsvp_pending', function () {
+//     $('#pending-rsvp-modal').modal('hide');
+// });
+
+// $(document).ready(function () {
+//     var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
+//     modal.show(); // Ensure Bootstrap handles modal visibility properly
+// });
+
+$(document).ready(function () {
+    
+    var modalElement = document.getElementById('pending-rsvp-modal');
+    var modal = new bootstrap.Modal(modalElement);
+    var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
+    var currentTime = new Date().getTime();
+    var oneMinute = 60 * 1000; // 1 minute in milliseconds
+
+    if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
+        modal.show();
+    }
+    $(document).on('click', '.close_rsvp_pending', function () {
+        modal.hide();
+        localStorage.setItem('modalClosedAt', new Date().getTime());
+    });
+
+    $(modalElement).on('hidden.bs.modal', function () {
+        localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+    });
+});
 
 
 // $(document).on('click','.notification-toggle-menu',function(){

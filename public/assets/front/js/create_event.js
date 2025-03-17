@@ -1,3 +1,4 @@
+
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
 let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";

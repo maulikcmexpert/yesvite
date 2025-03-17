@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-alert(postContent);
+
 
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
@@ -1391,7 +1391,14 @@ $(document).ready(function () {
                     $('.poll_post_id').val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
-                    $('input[name="post_privacy"][value="' + postData.post_privacy + '"]').prop("checked", true);
+                    let savedVisibility = localStorage.getItem("post_privacys") || "1";
+                    let savedAllowComments = localStorage.getItem("commenting_on_off") || "1";
+
+
+                    // Uncheck all radio buttons first
+                    $('input[name="post_privacy"]').prop("checked", false); // Reset
+                    $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true).trigger("change");
+
 
                     // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
                     $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
@@ -1407,9 +1414,10 @@ $(document).ready(function () {
                         mediaWrapper.empty(); // Clear old images
 
                         if (postData.mediaData.length > 0) {
+                            let colClass = postData.mediaData.length === 1 ? 'col-12' : 'col-6';
                             postData.mediaData.forEach((media) => {
                                 let mediaElement = `
-                                    <div class="col-12" style="position: relative;">
+                                    <div class="${colClass}" style="position: relative;">
                                         <span class="uploded-delete-icon">
                                             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1429,7 +1437,10 @@ $(document).ready(function () {
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
-                                uploadImgInner.addClass("d-none");
+                                console.log({uploadImgInner});
+
+                                // uploadImgInner.addClass("d-none");
+                                uploadImgInner.hide();
                             } else {
                                 console.error("Element not found: .create-post-upload-img-inner");
                             }
@@ -1439,18 +1450,15 @@ $(document).ready(function () {
                             uploadImgInner.removeClass("d-none");
                         }
                     }
-
                     if (postData.post_type == "2") {
                         $("#create-poll-btn").trigger("click"); // Open poll form modal
 
-                        // Populate the poll fields with the retrieved poll data
                         let pollData = postData.pollData;
 
                         if (pollData) {
-                            $(".poll_qus").val(pollData.poll_question);
+                            $("#yourquestion").val(pollData.poll_question);
                             $("select[name='duration']").val(pollData.total_poll_duration);
 
-                            // Populate poll options dynamically
                             let options = pollData.poll_options || []; // Get poll options
 
                             $(".poll-options input[name='options[]']").each((index, element) => {
@@ -1460,6 +1468,9 @@ $(document).ready(function () {
                             });
                         }
                     }
+
+
+
 
                     // Set existing images if available
 

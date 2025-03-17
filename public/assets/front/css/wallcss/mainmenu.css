@@ -3317,6 +3317,9 @@ padding: 12px 24px;
 #pending-rsvp-modal .modal-body .pending_rsvp_slider  .owl-dots{
     display: none;
 }
+#pending-rsvp-modal .modal-body .pending_rsvp_slider  .owl-dot{
+    display: none;
+}
 
 /* ===Responsive=== */
 
