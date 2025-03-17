@@ -1730,32 +1730,42 @@ $(document).ready(function () {
 
     if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
         modal.show();
+        document.body.classList.add("no-scroll"); // Disable background scrolling
+
     }
     $(document).on('click', '.close_rsvp_pending', function () {
         modal.hide();
         localStorage.setItem('modalClosedAt', new Date().getTime());
+                document.body.classList.add("no-scroll"); // Disable background scrolling
+
     });
     $(document).on('click', '.close_notification_rsvp', function () {
         $('#rsvp_by_notification').hide();
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+
+        
+
         // localStorage.setItem('modalClosedAt', new Date().getTime());
     });
 
     $(modalElement).on('hidden.bs.modal', function () {
         localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
-    });
-});
-
-$(document).ready(function () {
-    var modalElement = $('#pending-rsvp-modal');
-
-    modalElement.on('show.bs.modal', function () {
-        document.body.classList.add("no-scroll"); // Disable background scrolling
-    });
-
-    modalElement.on('hidden.bs.modal', function () {
         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+
     });
 });
+
+// $(document).ready(function () {
+//     var modalElement = $('#pending-rsvp-modal');
+
+//     modalElement.on('show.bs.modal', function () {
+//         document.body.classList.add("no-scroll"); // Disable background scrolling
+//     });
+
+//     modalElement.on('hidden.bs.modal', function () {
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     });
+// });
 
 // $(document).on('click','.notification-toggle-menu',function(){
 
