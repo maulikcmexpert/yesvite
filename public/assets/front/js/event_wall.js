@@ -1330,6 +1330,41 @@ $(document).ready(function () {
     });
 
 
+    $(document).on("click", "#deletePostButton", function () {
+        const button = $(this);
+        const eventId = button.data("event-id");
+        const eventPostId = button.data("event-post-id");
+
+        $.ajax({
+            url: base_url + "event_photo/deletePost", // Adjust base_url as necessary
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Include CSRF token for security
+            },
+            contentType: "application/json", // Send as JSON
+            data: JSON.stringify({
+                event_id: eventId,
+                event_post_id: eventPostId,
+            }),
+            success: function (response) {
+                if (response.success) {
+                    // Remove the deleted post from the DOM
+                    button.closest(".delete_post_container").remove(); // Adjust the selector as per your HTML structure
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                    toastr.success("Event Post Deleted Successfully");
+                } else {
+                    toastr.error("Event Post  Not Deleted");
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
+            },
+        });
+    });
+
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
