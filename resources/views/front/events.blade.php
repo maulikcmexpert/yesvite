@@ -1,4 +1,4 @@
-{{dd($eventData['event_id']);}}
+{{-- {{dd($eventData[0]['event_id']);}} --}}
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details supportive-event-wrp">
@@ -243,8 +243,8 @@
                         <div class="owl-carousel owl-theme pending_rsvp_slider">
                           @foreach ($eventData as $pending )
                             <div class="item">
-                              <div class="setting-img" data-event_id="{{$pending->event_id}}" data-user_id="{{$pending->user_id}}" data-event_name="{{$pending->event_name}}" data-firstname="{{$pending->firstname}}" data-lastname="{{$pending->lastname}}" data-profile="{{$pending->profile}}" data-rsvp_kids="{{$pending->kids}}"  data-rsvp_adults="{{$pending->adults}}" data-rsvp="{{$pending->rsvp_status}}">
-                                  <img src="{{$pending->event_image}}" />
+                              <div class="setting-img" data-event_id="{{$pending['event_id']}}" data-user_id="{{$pending['user_id']}}" data-event_name="{{$pending['event_name']}}" data-firstname="{{$pending['firstname']}}" data-lastname="{{$pending['lastname']}}" data-profile="{{$pending['profile']}}" data-rsvp_kids="{{$pending['kids']}}"  data-rsvp_adults="{{$pending['adults']}}" data-rsvp="{{$pending['rsvp_status}}">
+                                  <img src="{{$pending['event_image']}}" />
                               </div>
                           </div>
                           @php
