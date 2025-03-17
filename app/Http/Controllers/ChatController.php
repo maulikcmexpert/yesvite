@@ -8,7 +8,9 @@ use App\Models\UserReportChat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-use DB;
+// use DB;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
