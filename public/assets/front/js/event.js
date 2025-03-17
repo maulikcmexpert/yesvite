@@ -1735,6 +1735,10 @@ $(document).ready(function () {
         modal.hide();
         localStorage.setItem('modalClosedAt', new Date().getTime());
     });
+    $(document).on('click', '.close_notification_rsvp', function () {
+        $('#rsvp_by_notification').hide();
+        // localStorage.setItem('modalClosedAt', new Date().getTime());
+    });
 
     $(modalElement).on('hidden.bs.modal', function () {
         localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
