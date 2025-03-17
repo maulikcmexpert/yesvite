@@ -3268,6 +3268,13 @@ padding: 12px 24px;
     border: 1px solid var(--pink) !important;
     color: var(--pink) !important;
 }
+
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img{
+    width: 390px;
+}
+
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){

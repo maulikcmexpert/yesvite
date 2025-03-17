@@ -1531,6 +1531,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                     margin: 10,
                     nav: true,
                     dots: false,
+                    // autoWidth:true,
                     // autoplay: true,
                     // autoplayTimeout: 3000,
                     items:1,
