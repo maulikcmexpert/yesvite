@@ -1396,10 +1396,10 @@ $(document).ready(function () {
                     $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
 
                     if (postData.post_type == "1") {
-
+                        $("#create-photo-btn").trigger("click");
                         let mediaWrapper = $("#imagePreview");
                         let uploadImgInner = $(".create-post-upload-img-inner");
-
+                        console.log(uploadImgInner);
                         const uploadHeadButton = $(".create-post-head-upload-btn");
 
 
