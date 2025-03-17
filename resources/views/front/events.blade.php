@@ -241,7 +241,7 @@
                       <div class="pending-rsvp-slider-main-section">
 
                         <div class="owl-carousel owl-theme pending_rsvp_slider">
-                          <div class="item">
+                          {{-- <div class="item">
                               <div class="setting-img">
                                       <img id="eventImage" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                   </div>
@@ -260,7 +260,7 @@
                           <div class="setting-img">
                                       <img id="sliderImages-3" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
                                   </div>
-                          </div>
+                          </div> --}}
                     
                       </div>
                       {{-- <div class="pending-rsvp-slider-main-section">

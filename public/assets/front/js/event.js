@@ -1438,7 +1438,7 @@ $(document).on('click','#get_pendding_rsvp_btn',function(e){
             if (response.length > 0) {
                 console.log(response);
                 let slider = $(".pending_rsvp_slider");
-                slider.trigger('destroy.owl.carousel').html(''); // Remove old items
+                // slider.trigger('destroy.owl.carousel').html(''); // Remove old items
     
                 // Loop through the image array and append new items
                 response.forEach((event, index) => {
