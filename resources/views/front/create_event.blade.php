@@ -208,7 +208,7 @@
                     @elseif ($eventDetail['isCohost'] == '1')
                         <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
                     @elseif($eventDetail['id'] !="" && $eventDetail['is_draft_save']=="0")
-                    <span class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
+                    <span data-isEditBtn="1" class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
                     @endif
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
