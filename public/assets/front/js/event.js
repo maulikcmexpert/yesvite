@@ -1551,6 +1551,10 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
     });
 });
 
+$(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
+    alert("You changed the image!");
+});
+
 $(".pending_rsvp_slider").owlCarousel({
     loop: true,
     items:1,
