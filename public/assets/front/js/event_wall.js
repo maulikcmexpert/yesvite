@@ -1156,7 +1156,8 @@ $(document).ready(function () {
 //     openstoryModal(); // Open the modal after the page loads
 // };
 $("#photos_click").on("click", function () {
-    (".create-post-upload-img-inner").removeClass('d-none')
+    $(".create-post-upload-img-inner").removeClass('d-none')
+    $(".create-post-head-upload-btn").addClass('d-none')
     $("#create-photo-btn").trigger("click");
 });
 $("#poll_click").on("click", function () {
