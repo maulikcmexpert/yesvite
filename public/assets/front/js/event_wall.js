@@ -1450,10 +1450,7 @@ $(document).ready(function () {
                             $("select[name='duration']").val(pollData.total_poll_duration);
 
                             let options = pollData.poll_options || []; // Get poll options
-                            let optionContainer = $(".poll-options"); // Target poll options container
 
-                            // Clear existing options to avoid duplication
-                            optionContainer.html("");
 
                             if (options.length >= 2) { // Ensure there are at least 2 options
                                 options.forEach((option, index) => {
@@ -1480,7 +1477,7 @@ $(document).ready(function () {
                                     optionContainer.append(optionHTML);
                                 });
                             } else {
-                                // Default 2 options if less than 2 exist
+
                                 for (let i = 0; i < 2; i++) {
                                     let optionText = options[i] ? options[i].option : "";
                                     let optionHTML = `
