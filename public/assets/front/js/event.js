@@ -1494,75 +1494,75 @@ let rsvp_ajax_call = 0;
     //     return;
     // }
 
-    $.ajax({
-        url: `${base_url}pending_rsvp_list`,
-        type: 'GET',
-        data: {},
-        success: function (response) {
-            let slider = $(".pending_rsvp_slider");
+    // $.ajax({
+    //     url: `${base_url}pending_rsvp_list`,
+    //     type: 'GET',
+    //     data: {},
+    //     success: function (response) {
+    //         let slider = $(".pending_rsvp_slider");
 
-            slider.trigger('destroy.owl.carousel').html('').removeClass('owl-loaded owl-drag');
+    //         slider.trigger('destroy.owl.carousel').html('').removeClass('owl-loaded owl-drag');
 
-            if (response.length > 0) {
-                response.forEach((event, index) => {
-                    let imgHtml = `
-                        <div class="item">
-                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname}" data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
-                                <img src="${event.event_image}" />
-                            </div>
-                        </div>`;
-                        if (index === 0) {
-                            $(".pending-rsvp-btn").attr("data-event_id", event.event_id);
-                            $(".pending-rsvp-btn").attr("data-user_id", event.user_id);
-                            $(".pending-rsvp-btn").attr("data-event_name", event.event_name);
-                            $(".pending-rsvp-btn").attr("data-firstname", event.firstname);
-                            $(".pending-rsvp-btn").attr("data-lastname", event.lastname);
-                            $(".pending-rsvp-btn").attr("data-profile", event.profile);
-                            $(".pending-rsvp-btn").attr("data-rsvp_kids", event.kids);
-                            $(".pending-rsvp-btn").attr("data-rsvp_adults", event.adults);
-                            $(".pending-rsvp-btn").attr("data-rsvp", event.rsvp_status);
-                        }
-                    slider.append(imgHtml);
-                });
+    //         if (response.length > 0) {
+    //             response.forEach((event, index) => {
+    //                 let imgHtml = `
+    //                     <div class="item">
+    //                         <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname}" data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
+    //                             <img src="${event.event_image}" />
+    //                         </div>
+    //                     </div>`;
+    //                     if (index === 0) {
+    //                         $(".pending-rsvp-btn").attr("data-event_id", event.event_id);
+    //                         $(".pending-rsvp-btn").attr("data-user_id", event.user_id);
+    //                         $(".pending-rsvp-btn").attr("data-event_name", event.event_name);
+    //                         $(".pending-rsvp-btn").attr("data-firstname", event.firstname);
+    //                         $(".pending-rsvp-btn").attr("data-lastname", event.lastname);
+    //                         $(".pending-rsvp-btn").attr("data-profile", event.profile);
+    //                         $(".pending-rsvp-btn").attr("data-rsvp_kids", event.kids);
+    //                         $(".pending-rsvp-btn").attr("data-rsvp_adults", event.adults);
+    //                         $(".pending-rsvp-btn").attr("data-rsvp", event.rsvp_status);
+    //                     }
+    //                 slider.append(imgHtml);
+    //             });
 
-                // Reinitialize Owl Carousel
-                slider.owlCarousel({
-                    loop: true,
-                    margin: 10,
-                    nav: true,
-                    dots: false,
-                    // autoWidth:true,
-                    // autoplay: true,
-                    // autoplayTimeout: 3000,
-                    items:1,
-                    navText: [
-                        `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>`,
-                        `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>`
-                    ],
-                    // responsive: {
-                    //     0: { items: 1 },
-                    //     600: { items: 2 },
-                    //     1000: { items: 3 }
-                    // }
-                });
-                rsvp_ajax_call = 1;
-                $('#loader').css('display', 'none');
-                let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
+    //             // Reinitialize Owl Carousel
+    //             slider.owlCarousel({
+    //                 loop: true,
+    //                 margin: 10,
+    //                 nav: true,
+    //                 dots: false,
+    //                 // autoWidth:true,
+    //                 // autoplay: true,
+    //                 // autoplayTimeout: 3000,
+    //                 items:1,
+    //                 navText: [
+    //                     `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                         <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    //                     </svg>`,
+    //                     `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                         <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    //                     </svg>`
+    //                 ],
+    //                 // responsive: {
+    //                 //     0: { items: 1 },
+    //                 //     600: { items: 2 },
+    //                 //     1000: { items: 3 }
+    //                 // }
+    //             });
+    //             rsvp_ajax_call = 1;
+    //             $('#loader').css('display', 'none');
+    //             let currentImg = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-event_id"); 
 
-            } else {
-                toastr.info('No events found.');
-                $('#loader').css('display', 'none');
-            }
-        },
-        error: function (error) {
-            toastr.error('Something went wrong. Please try again!');
-            $('#loader').css('display', 'none');
-        }
-    });
+    //         } else {
+    //             toastr.info('No events found.');
+    //             $('#loader').css('display', 'none');
+    //         }
+    //     },
+    //     error: function (error) {
+    //         toastr.error('Something went wrong. Please try again!');
+    //         $('#loader').css('display', 'none');
+    //     }
+    // });
 // });
 
 $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {

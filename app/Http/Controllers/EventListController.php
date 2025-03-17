@@ -700,9 +700,39 @@ class EventListController extends BaseController
         // dd($filter);
         // return compact('filter','eventList','eventPasttList','eventDraftdata');
         // $js = ['event'];
+        $user_id = Auth::guard('web')->user()->id;
+        $total_need_rsvp_event = EventInvitedUser::with('event','user') 
+            ->whereHas('event', function ($query) {
+                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+            })
+            ->where(['user_id' => $user_id, 'rsvp_status' => NULL])
+            ->get();
+    
+            $eventData = []; 
+
+            foreach ($total_need_rsvp_event as $eventdetail) {
+                $images = EventImage::where('event_id', $eventdetail->event->id ?? null)
+                    ->orderBy('type', 'ASC')
+                    ->first();
+            
+                if ($eventdetail->event) {
+                    $eventData[] = [
+                        'event_id' => $eventdetail->event->id,
+                        'firstname' => $eventdetail->user->firstname,
+                        'lastname' => $eventdetail->user->lastname,
+                        'profile' => ($eventdetail->user->profile!=null)?$eventdetail->user->profile:"",
+                        'event_name' => $eventdetail->event->event_name,
+                        'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
+                        'user_id'=>$user_id,
+                        'kids'=>$eventdetail->kids,
+                        'adults'=>$eventdetail->adults,
+                        'rsvp_status'=>$eventdetail->rsvp_status,
+                    ];
+                }
+            }
         $title = 'Events';
         $page = 'front.events';
-        return view('layout', compact('title', 'page', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json'));
+        return view('layout', compact('title', 'page', 'from_page','filter', 'eventList', 'eventPasttList', 'startMonthCalender', 'eventDraftdata', 'profileData', 'startMonth', 'numMonths', 'diffmonth', 'events_calender_json','eventData'));
     }
 
     public function evenGoneTime($enddate)

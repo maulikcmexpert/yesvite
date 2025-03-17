@@ -1,4 +1,4 @@
-
+{{dd($eventData['event_id']);}}
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details supportive-event-wrp">
@@ -229,7 +229,7 @@
         </div>
       </div> -->
 
-
+      @if(!empty($eventData))
       <div class="modal fade cmn-modal show" id="pending-rsvp-modal" tabindex="-1" aria-labelledby="pending-rsvp-modal" aria-modal="true" role="dialog" style="display: block">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -241,37 +241,42 @@
                       <div class="pending-rsvp-slider-main-section">
 
                         <div class="owl-carousel owl-theme pending_rsvp_slider">
-                          {{-- <div class="item">
-                              <div class="setting-img">
-                                      <img id="eventImage" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                  </div>
+                          @foreach ($eventData as $pending )
+                            <div class="item">
+                              <div class="setting-img" data-event_id="{{$pending->event_id}}" data-user_id="{{$pending->user_id}}" data-event_name="{{$pending->event_name}}" data-firstname="{{$pending->firstname}}" data-lastname="{{$pending->lastname}}" data-profile="{{$pending->profile}}" data-rsvp_kids="{{$pending->kids}}"  data-rsvp_adults="{{$pending->adults}}" data-rsvp="{{$pending->rsvp_status}}">
+                                  <img src="{{$pending->event_image}}" />
                               </div>
-                          <div class="item sliderImages-1">  
-                                  <div class="setting-img">
-                                      <img id="sliderImages-1" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                  </div>
-                              </div>
-                          <div class="item sliderImages-2">
-                          <div class="setting-img">
-                                      <img id="sliderImages-2" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                  </div>
                           </div>
-                          <div class="item sliderImages-3">
-                          <div class="setting-img">
-                                      <img id="sliderImages-3" src="https://yesvite.cmexpertiseinfotech.in/storage/event_images/1741858378-design.png" />
-                                  </div>
-                          </div> --}}
+                          @php
+                              if ($loop->first){
+                                $firstEvent = $pending;
+                              }
+                          @endphp
+
+                          @endforeach
+                          
                     
                       </div>
-                      {{-- <div class="pending-rsvp-slider-main-section">
-                        <div class="owl-carousel owl-theme pending_rsvp_slider"></div> 
-                    </div> --}}
-                      <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
+                     
+                      {{-- <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
                         RSVP
-                    </button>
+                    </button> --}}
+                    <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification"
+                            data-event_id="{{ $firstEvent->event_id ?? '' }}"
+                            data-user_id="{{ $firstEvent->user_id ?? '' }}"
+                            data-event_name="{{ $firstEvent->event_name ?? '' }}"
+                            data-firstname="{{ $firstEvent->firstname ?? '' }}"
+                            data-lastname="{{ $firstEvent->lastname ?? '' }}"
+                            data-profile="{{ $firstEvent->profile ?? '' }}"
+                            data-rsvp_kids="{{ $firstEvent->kids ?? '' }}"
+                            data-rsvp_adults="{{ $firstEvent->adults ?? '' }}"
+                            data-rsvp="{{ $firstEvent->rsvp_status ?? '' }}">
+                            RSVP
+                        </button>
                     </div>
                 </div>
                 
             </div>
         </div>
-    </div>
+       </div>
+      @endif
