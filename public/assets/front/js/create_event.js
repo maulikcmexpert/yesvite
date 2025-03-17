@@ -9064,10 +9064,12 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-    $(".step_1").css("display", "none");
-    $(".step_2").css("display", "none");
-    $(".step_3").css("display", "none");
-    $(".step_4").css("display", "none");
+    if(!isEditBtn){
+        $(".step_1").css("display", "none");
+        $(".step_2").css("display", "none");
+        $(".step_3").css("display", "none");
+        $(".step_4").css("display", "none");
+    }
     //$(".step_final_checkout").show();
 
     // handleActiveClass(this);
