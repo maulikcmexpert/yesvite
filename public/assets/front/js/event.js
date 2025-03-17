@@ -1507,7 +1507,7 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                 response.forEach((event, index) => {
                     let imgHtml = `
                         <div class="item">
-                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname} data-lastname="${event.lastname}" data-profile="${event.profile}">
+                            <div class="setting-img" data-event_id="${event.event_id}" data-user_id="${event.user_id}" data-event_name="${event.event_name}" data-firstname="${event.firstname} data-lastname="${event.lastname}" data-profile="${event.profile}" data-rsvp_kids="${event.kids}"  data-rsvp_adults="${event.adults}" data-rsvp="${event.rsvp_status}">
                                 <img src="${event.event_image}" />
                             </div>
                         </div>`;
@@ -1518,6 +1518,9 @@ $(document).on('click', '#get_pendding_rsvp_btn', function (e) {
                             $(".pending-rsvp-btn").attr("data-firstname", event.firstname);
                             $(".pending-rsvp-btn").attr("data-lastname", event.lastname);
                             $(".pending-rsvp-btn").attr("data-profile", event.profile);
+                            $(".pending-rsvp-btn").attr("data-rsvp_kids", event.kids);
+                            $(".pending-rsvp-btn").attr("data-rsvp_adults", event.adults);
+                            $(".pending-rsvp-btn").attr("data-rsvp", event.rsvp_status);
                         }
                     slider.append(imgHtml);
                 });
@@ -1568,6 +1571,9 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     let firstname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-firstname"); 
     let lastname = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-lastname"); 
     let profile = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-profile"); 
+    let kids = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp_kids"); 
+    let adults = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp_adults"); 
+    let rsvp = $(".pending_rsvp_slider .owl-item.active .setting-img").attr("data-rsvp"); 
   
     // alert(currentImg);
     $(".pending-rsvp-btn").attr("data-event_id",event_id);
@@ -1575,7 +1581,10 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-firstname",firstname);
     $(".pending-rsvp-btn").attr("data-lastname",lastname);
     $(".pending-rsvp-btn").attr("data-profile",profile);
-    $(".pending-rsvp-btn").attr("data-event_name",event_name); ;
+    $(".pending-rsvp-btn").attr("data-event_name",event_name);
+    $(".pending-rsvp-btn").attr("data-rsvp_kids",kids);
+    $(".pending-rsvp-btn").attr("data-rsvp_adults",adults);
+    $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
     const eventId = $(this).attr('data-event_id');
@@ -1592,75 +1601,74 @@ $(document).on('click','.pending-rsvp-btn',function(){
     console.log(rsvp_status);
     console.log(kids);
     console.log(adults);
-    alert(event_name);
 
 
     
-    // $('#rsvp_notification_adult').val("0");
-    //  $('#rsvp_notification_kids').val("0");
-    //  $('#rsvp_notification_message').val('');
-    //  $('#rsvp_notification_message').val('');
-    //  $('#rsvp_yes').prop('checked',false);
-    //  $('.rsvp_minus_notify').prop('disabled',false);
-    //  $('.rsvp_plus_notify').prop('disabled',false);
+    $('#rsvp_notification_adult').val("0");
+     $('#rsvp_notification_kids').val("0");
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_notification_message').val('');
+     $('#rsvp_yes').prop('checked',false);
+     $('.rsvp_minus_notify').prop('disabled',false);
+     $('.rsvp_plus_notify').prop('disabled',false);
 
-    // $('#notification_rsvp_profile').attr('src', "").show();
-    // $('#notification_rsvp_eventName').text("");
-    // $('#notification_rsvp_host').text("");
-    // $('#rsvp_user_id').val("");
-    // $('#rsvp_event_id').val("");
-    // $('.rsvp_initials').remove(); // Remove any previously added initials
-    // $('#rsvp_yes').prop('checked',false);
-    // $('#rsvp_no').prop('checked',false);
+    $('#notification_rsvp_profile').attr('src', "").show();
+    $('#notification_rsvp_eventName').text("");
+    $('#notification_rsvp_host').text("");
+    $('#rsvp_user_id').val("");
+    $('#rsvp_event_id').val("");
+    $('.rsvp_initials').remove(); // Remove any previously added initials
+    $('#rsvp_yes').prop('checked',false);
+    $('#rsvp_no').prop('checked',false);
 
-    // // $.ajax({
-    // //     url: `${base_url}get_user_info_rsvp`,
-    // //     type: 'GET',
-    // //     data: {eventId:eventId,userId:userId},
-    // //     success: function (response) {
-    // //         console.log(response);
-    // //         const profile = response.event_data.profile;
-    // //         const firstName = response.event_data.firstname;
-    // //         const lastName = response.event_data.lastname;
-    // //         const hosted_by = response.event_data.host;
-    // //         const event_name = response.event_data.name;
+    // $.ajax({
+    //     url: `${base_url}get_user_info_rsvp`,
+    //     type: 'GET',
+    //     data: {eventId:eventId,userId:userId},
+    //     success: function (response) {
+    //         console.log(response);
+    //         const profile = response.event_data.profile;
+    //         const firstName = response.event_data.firstname;
+    //         const lastName = response.event_data.lastname;
+    //         const hosted_by = response.event_data.host;
+    //         const event_name = response.event_data.name;
 
 
-    //         if (profile) {
-    //             $('#notification_rsvp_profile').attr('src', profile).show();
-    //         } else {
-    //             const firstInitial = firstName && firstName[0] ? firstName[0].toUpperCase() : '';
-    //             const secondInitial = lastName && lastName[0] ? lastName[0].toUpperCase() : '';
-    //             const initials = firstInitial + secondInitial;
-    //             const fontColor = `fontcolor${firstInitial}`;
+            if (profile) {
+                $('#notification_rsvp_profile').attr('src', profile).show();
+            } else {
+                const firstInitial = firstName && firstName[0] ? firstName[0].toUpperCase() : '';
+                const secondInitial = lastName && lastName[0] ? lastName[0].toUpperCase() : '';
+                const initials = firstInitial + secondInitial;
+                const fontColor = `fontcolor${firstInitial}`;
             
-    //             $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
-    //             $('#notification_rsvp_profile').after(
-    //                 `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;color: white">
-    //                     ${initials}
-    //                 </h4>`
-    //             );
-    //         }
+                $('#notification_rsvp_profile').hide(); // Hide the image if no profile exists
+                $('#notification_rsvp_profile').after(
+                    `<h5 class="modal-title text-uppercase font-weight-bold text-center ${fontColor} rsvp_initials" style="width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;color: white">
+                        ${initials}
+                    </h4>`
+                );
+            }
 
-    //         if(rsvp_status!=""){
-    //             if(rsvp_status=="1"){
-    //                 $('#rsvp_yes').prop('checked',true);
-    //             }else{
-    //                 $('#rsvp_no').prop('checked',true);
-    //                 $('.rsvp_minus_notify').prop('disabled',true);
-    //                 $('.rsvp_plus_notify').prop('disabled',true);
-    //             }
-    //         }
-    //         if(kids!=""){
-    //             $('#rsvp_notification_kids').val(kids);
-    //         }
-    //         if(adults!=""){
-    //             $('#rsvp_notification_adult').val(adults);
-    //         }
-    //         $('#notification_rsvp_eventName').text(event_name);
-    //         $('#notification_rsvp_host').text(hosted_by);
-    //         $('#rsvp_user_id').val(userId);
-    //         $('#rsvp_event_id').val(eventId);
+            if(rsvp_status!=""){
+                if(rsvp_status=="1"){
+                    $('#rsvp_yes').prop('checked',true);
+                }else{
+                    $('#rsvp_no').prop('checked',true);
+                    $('.rsvp_minus_notify').prop('disabled',true);
+                    $('.rsvp_plus_notify').prop('disabled',true);
+                }
+            }
+            if(kids!=""){
+                $('#rsvp_notification_kids').val(kids);
+            }
+            if(adults!=""){
+                $('#rsvp_notification_adult').val(adults);
+            }
+            $('#notification_rsvp_eventName').text(event_name);
+            $('#notification_rsvp_host').text(hosted_by);
+            $('#rsvp_user_id').val(userId);
+            $('#rsvp_event_id').val(eventId);
 
 });
 $(".pending_rsvp_slider").owlCarousel({

@@ -3080,6 +3080,9 @@ class EventListController extends BaseController
                         'event_name' => $eventdetail->event->event_name,
                         'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
                         'user_id'=>$user_id,
+                        'kids'=>$eventdetail->kids,
+                        'adults'=>$eventdetail->adults,
+                        'rsvp_status'=>$eventdetail->rsvp_status,
                     ];
                 }
             }
