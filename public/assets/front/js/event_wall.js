@@ -1397,8 +1397,8 @@ $(document).ready(function () {
 
                     if (postData.post_type == "1") {
 
-                        const uploadImgInner = document.querySelector(".create-post-upload-img-inner");
-                        const uploadHeadButton = document.querySelector(".create-post-head-upload-btn");
+                        const uploadImgInner = $(".create-post-upload-img-inner");
+                        const uploadHeadButton = $(".create-post-head-upload-btn");
 
 
                         uploadImgInner.addClass("d-none");
