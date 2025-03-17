@@ -1369,6 +1369,7 @@ $(document).ready(function () {
     $('.editPostBtn').on('click', function() {
         var eventPostId = $(this).data('event-post-id');
         var eventId = $(this).data('event-id');
+        alert(eventId);
         var post_privacy = $(this).data('post-privacy');
         var post_type = $(this).data('post-type');
         var post_content = $(this).data('post-content');
