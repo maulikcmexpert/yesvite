@@ -1710,6 +1710,14 @@ $(document).on('click', '.close_rsvp_pending', function () {
     $('#pending-rsvp-modal').modal('hide');
 });
 
+$(document).on('click', '#pending-rsvp-modal', function (e) {
+    var modalDialog = $('.modal-dialog');
+
+    // Check if the click target is outside the modal dialog
+    if (!modalDialog.is(e.target) && modalDialog.has(e.target).length === 0) {
+        $('#pending-rsvp-modal').modal('hide'); // Hide the modal
+    }
+});
 
 
 // $(document).on('click','.notification-toggle-menu',function(){
