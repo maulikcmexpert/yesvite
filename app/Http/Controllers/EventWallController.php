@@ -2526,6 +2526,11 @@ class EventWallController extends BaseController
             $reportCreate->report_description = $request['report_description'];
             // $reportCreate->specific_report = '1';
             $reportCreate->save();
+
+            // $getName = UserReportToPost::with(['reporter_user', 'to_reporter_user'])
+            // ->where('id', $reportCreate->id)
+            // ->first();
+
             $savedReportId =  $reportCreate->id;
             $createdAt = $reportCreate->created_at;
 
@@ -2533,7 +2538,8 @@ class EventWallController extends BaseController
 
             $support_email = 'prakash.m.cmexpertise@gmail.com';
 
-            $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
+            $getName = UserReportToPost::with(['users', 'events','event_posts.users'])->where('id', $savedReportId)->first();
+            dd($getName->event_posts->email);
             $data = [
                 'reporter_username' => $getName->users->firstname . ' ' . $getName->users->lastname,
                 'event_name' => $getName->events->event_name,
