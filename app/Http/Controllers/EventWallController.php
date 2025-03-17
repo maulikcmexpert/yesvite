@@ -1994,12 +1994,14 @@ class EventWallController extends BaseController
         }
 
         // Save new poll options
-        foreach ($request->options as $value) {
-            EventPostPollOption::create([
-                'event_post_poll_id' => $eventPostPoll->id,
-                'option' => $value,
-            ]);
-        }
+
+            foreach ($request->options as $value) {
+                            $pollOption = new EventPostPollOption();
+                            $pollOption->event_post_poll_id = $eventPostPoll->id;
+                            $pollOption->option = $value;
+                            $pollOption->save();
+                        }
+
 
         return redirect()->back()->with('msg', $msg);
     }
