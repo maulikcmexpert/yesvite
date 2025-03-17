@@ -481,7 +481,6 @@ class ChatController extends BaseController
     public function chatReport(Request $request)
     {
         $user = Auth::guard('web')->user();
-        dd(1);
         // ✅ Correct Validation Rules
         $request->validate([
             'to_be_reported_user_id' => 'required|integer|exists:users,id',
@@ -489,7 +488,7 @@ class ChatController extends BaseController
             'report_type' => 'required|string',
             'report_description' => 'nullable|string',
         ]);
-
+        
         try {
             DB::beginTransaction();
 
@@ -528,15 +527,15 @@ class ChatController extends BaseController
                     ->subject('Chat Report Mail');
             });
 
-            // dd(1);
+            dd(1);
             return redirect('messages')->with('msg', 'Report submitted successfully!');
         } catch (QueryException $e) {
 
-            // dd(2);
+            dd(2);
             DB::rollBack();
             return redirect('messages')->with('msg_error', 'Database error occurred!');
         } catch (\Exception $e) {
-            // dd(3);
+            dd(3);
             return redirect('messages')->with('msg_error', 'Something went wrong!');
         }
     }
