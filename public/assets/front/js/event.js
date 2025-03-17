@@ -1428,15 +1428,17 @@ $(document).on('click','event-notification-icon',function(e){
 });
 $(document).on('click','#get_pendding_rsvp_btn',function(e){
     // e.stopPropagation();
+    $('#loader').css('display','flex');
+    var rsvp_ajax_call=0;
     $.ajax({
         url: `${base_url}pending_rsvp_list`,
         type: 'GET',
         data: {},
         success: function (response) {
-            if (response.length > 0) {
+            if (response.length > 0 && rsvp_ajax_call==0) {
                 console.log(response);
                 let slider = $(".pending_rsvp_slider");
-                slider.trigger('destroy.owl.carousel').html(''); // Remove old items
+                // slider.trigger('destroy.owl.carousel').html(''); // Remove old items
     
                 // Loop through the image array and append new items
                 response.forEach((event, index) => {
@@ -1466,12 +1468,19 @@ $(document).on('click','#get_pendding_rsvp_btn',function(e){
                 </svg>`,
                     ],
                 });
+
+                $('#loader').css('display','none');
+                rsvp_ajax_call=1;
             } else {
                 toastr.info('No events found.');
+                $('#loader').css('display','none');
+
             }
         },
         error: function (error) {
             toastr.error('Something went wrong. Please try again!');
+            $('#loader').css('display','none');
+
         },
     });
     
