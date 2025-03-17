@@ -1585,7 +1585,7 @@ $(".pending_rsvp_slider").on("translated.owl.carousel", function (event) {
     $(".pending-rsvp-btn").attr("data-event_name",event_name);
     $(".pending-rsvp-btn").attr("data-rsvp_kids",kids);
     $(".pending-rsvp-btn").attr("data-rsvp_adults",adults);
-    $(".pending-rsvp-btn").attr("data-rsv[",rsvp);
+    $(".pending-rsvp-btn").attr("data-rsvp",rsvp);
 });
 $(document).on('click','.pending-rsvp-btn',function(){
     
