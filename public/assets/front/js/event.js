@@ -1690,10 +1690,10 @@ $(".pending_rsvp_slider").owlCarousel({
     
 });
 
-var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'), {
-    backdrop: true
+$(document).ready(function () {
+    var modal = new bootstrap.Modal(document.getElementById('pending-rsvp-modal'));
+    modal.show(); 
 });
-
 
 
 // $(document).on('click','.notification-toggle-menu',function(){
