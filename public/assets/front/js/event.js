@@ -1671,6 +1671,8 @@ $(document).on('click','.pending-rsvp-btn',function(){
             $('#rsvp_user_id').val(userId);
             $('#rsvp_event_id').val(eventId);
 
+            $('#rsvp_by_notification').modal('show');
+
 });
 $(".pending_rsvp_slider").owlCarousel({
     loop: true,
