@@ -1173,6 +1173,7 @@ $("#photos_click").on("click", function () {
     $("#create-photo-btn").trigger("click");
 });
 $("#poll_click").on("click", function () {
+    $(".isNewPost").val('0');
     $("#create-poll-btn").trigger("click");
 });
 
