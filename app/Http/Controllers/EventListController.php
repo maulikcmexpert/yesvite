@@ -330,13 +330,19 @@ class EventListController extends BaseController
                 })
                     ->where('user_id', $user->id)->count();
 
-                $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
-                ->where('start_date', '>=', date('Y-m-d'))
-                ->orWhere(function ($q) {
-                    $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
-                 })
-                ->count();
+                $totalHosting = Event::where('user_id', $user->id)
+                    ->where(function ($query) {
+                        $query->where(function ($q) {
+                            $q->where('is_draft_save', '0')
+                              ->where('start_date', '>', date('Y-m-d'));
+                        })
+                        ->orWhere(function ($q) {
+                            $q->where('start_date', '=', date('Y-m-d'))
+                              ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
+                        });
+                    })
+                    ->count();
+                
 
                 $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
                 $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
