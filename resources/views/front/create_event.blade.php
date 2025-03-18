@@ -1,5 +1,7 @@
 
 @php
+    //    $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
+    //    dd($start_time_zone);
     $userS = Auth::guard('web')->user();
     $isCopyNew = $eventDetail['isCopy'];
 
