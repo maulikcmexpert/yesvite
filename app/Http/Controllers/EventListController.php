@@ -2622,7 +2622,7 @@ class EventListController extends BaseController
                              );
                 });
             } else {
-                $query->where(function ($q) {  // Grouping to fix the issue
+                $query->where(function ($q) {  
                     $q->where('is_draft_save', '0')
                       ->where(function ($subQuery) {
                           $subQuery->where('end_date', '<', date('Y-m-d'))  
@@ -2634,7 +2634,8 @@ class EventListController extends BaseController
                                                  );
                                    });
                       });
-                });
+                })->distinct()    
+                ;
 
             }
         })->where('user_id', $user->id)->count();
