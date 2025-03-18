@@ -2621,19 +2621,19 @@ class EventListController extends BaseController
                              );
                 });
             } else {
-                $query->where(function ($q) {  // Grouping to fix the issue
-                    $q->where('is_draft_save', '0')
-                      ->where(function ($subQuery) {
-                          $subQuery->where('end_date', '<', date('Y-m-d'))  
-                                   ->orWhere(function ($subQuery2) {
-                                       $subQuery2->where('end_date', '=', date('Y-m-d'))
-                                                 ->whereRaw(
-                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
-                                                     [date('g:i A')]
-                                                 );
-                                   });
-                      });
-                });
+                // $query->where(function ($q) {  // Grouping to fix the issue
+                //     $q->where('is_draft_save', '0')
+                //       ->where(function ($subQuery) {
+                //           $subQuery->where('end_date', '<', date('Y-m-d'))  
+                //                    ->orWhere(function ($subQuery2) {
+                //                        $subQuery2->where('end_date', '=', date('Y-m-d'))
+                //                                  ->whereRaw(
+                //                                      "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                //                                      [date('g:i A')]
+                //                                  );
+                //                    });
+                //       });
+                // });
 
             }
         })->where('user_id', $user->id)->count();
