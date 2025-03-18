@@ -291,11 +291,45 @@
             </button>
         </div>
         @else
-        <div class="guest-checkout new-edit-save-btn">
+        <!-- <div class="guest-checkout new-edit-save-btn">
             <div>
                 <a href="#" class="cmn-btn saveDesignOnly">Save Changes</a>
             </div>
+        </div> -->
+
+
+        <div class="design-seting">
+            <a href="#" class="d-flex previousImeg">
+                <span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.0002 13.2797L5.65355 8.93306C5.14022 8.41973 5.14022 7.57973 5.65355 7.06639L10.0002 2.71973" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+                <h5 class="ms-2">Choose Design</h5>
+            </a>
+            {{-- <a href="#" class="d-flex"> --}}
+                {{-- <span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.0002 13.2797L5.65355 8.93306C5.14022 8.41973 5.14022 7.57973 5.65355 7.06639L10.0002 2.71973" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+                <h5 class="ms-2">Edit Design</h5> --}}
+            {{-- </a> --}}
+            {{-- <button type="button" class="d-flex footer-bottom-btn li_event_detail" id="next_design"> --}}
+            <button type="button" class="d-flex footer-bottom-btn li_event_details">
+                <h5 class="me-2">Next: Event Details</h5>
+                <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
+                            stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </button>
         </div>
+
+
         @endif
     </div>
 
