@@ -200,13 +200,13 @@
                             <div class="user-contacts" id="YesviteUserAll">
 
                             </div>
-                            <!-- @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
+                            @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
                             <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
                             </div>
-                            @else -->
+                            @else
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
                                     <span>
@@ -233,7 +233,7 @@
                                 </a>
                             </div>
                                 
-                            <!-- @endif -->
+                            @endif
                         </div>
                         <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="phone-tab">
 
@@ -413,13 +413,13 @@
 
                             </div>
 
-                            <!-- @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
+                            @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
                             <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
                             </div> 
-                            @else       -->
+                            @else      
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
                                     <span>
@@ -445,7 +445,7 @@
                                     </span>
                                 </a>
                             </div>
-                            <!-- @endif -->
+                            @endif
                         </div>
                         <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
 
@@ -546,13 +546,13 @@
                                 @endforeach
                             @endif
                             </div>
-                            <!-- @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
+                            @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
                             <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
                             </div>
-                            @else -->
+                            @else
                              
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
@@ -579,7 +579,7 @@
                                     </span>
                                 </a>
                             </div>
-                            <!-- @endif -->
+                            @endif
                         </div>
                     </div>
                 </div>
