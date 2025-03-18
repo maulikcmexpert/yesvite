@@ -213,7 +213,7 @@
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
-                                            <h5 class="title">Potluck Categories</h5>
+                                            <h5 class="title">Potluck List</h5>
                                             <button type="button" class="ms-auto border-0" data-bs-toggle="modal"
                                                 data-bs-target="#editmodal"
                                                 style="background-color: transparent; box-shadow: none;">
@@ -1019,7 +1019,7 @@
                     <input type="hidden" id="hiddenCategoryId" name="event_potluck_category_id" value="">
                     <div class="input-form">
                         <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"
-                            id="text1" name="description" placeholder="ie, Appetizers, Salads, Main Dishes">
+                            id="text1" name="description" placeholder="ie, brand or name of item under this category…">
                         <span id="text-sub-con" class="sub-con">0/30</span>
                     </div>
             </form>
