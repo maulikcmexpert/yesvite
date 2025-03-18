@@ -734,6 +734,11 @@
     margin-bottom: 0px;
   }
 
+
+  .day.past_date_calender{
+    background-color: #F8F9FD;
+  }
+
   /* Animations are cool!  */
   @-webkit-keyframes moveFromTopFade {
     from { opacity: .3; height:0px; margin-top:0px; -webkit-transform: translateY(-100%); }
