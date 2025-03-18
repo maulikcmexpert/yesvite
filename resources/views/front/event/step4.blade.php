@@ -579,7 +579,7 @@
                     <h5 class="li_guest">Guests</h5>
                 </div>
                 <div>
-                    <a href="#" class="cmn-btn edit_checkout">Save Changes</a>
+                    <a href="#" data-isEditBtn="1" class="cmn-btn edit_checkout">Save Changes</a>
                 </div>
             </div>
             @else        
