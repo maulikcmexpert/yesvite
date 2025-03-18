@@ -384,6 +384,9 @@ class AuthController extends Controller
 
                     return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
+
+                return redirect()->intended(session('url.intended', route('home')));
+
             }
         }
         return redirect()->back()->withErrors([

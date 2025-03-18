@@ -38,8 +38,10 @@ class VerifyUserIsVerified
 
             $user->current_session_id = $currentSessionId;
             $user->save();
-            return $next($request);
+            return redirect()->intended(route('login')); // Redirect to intended page or home
+
         }
+
         elseif($request->ajax()){
             return response()->json([
                 'info' => 'logout',
@@ -47,8 +49,14 @@ class VerifyUserIsVerified
                 'message' => 'Unauthenticated. Please log in.'
             ]);
         }
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('url.intended', $request->url());
+        }
         // return redirect('/')->with('msg_error', 'Unauthorised');
-        return redirect('/login');
+        // return redirect('/login');
+        return $next($request);
+
 
     }
 }
