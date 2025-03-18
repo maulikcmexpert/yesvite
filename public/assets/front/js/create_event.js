@@ -236,7 +236,7 @@ $(document).ready(function () {
             $("#end-time-zone option").each(function () {
                 if ($(this).val() === currentTimeZone) {
                     $(this).prop("selected", true);
-                    isOptionExists = true;
+                    isOptionExistsend = true;
                     return false;
                 }
             });
