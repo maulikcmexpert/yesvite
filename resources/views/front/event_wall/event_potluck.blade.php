@@ -213,7 +213,7 @@
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
-                                            <h5 class="title">Potluck Categories</h5>
+                                            <h5 class="title">Potluck List</h5>
                                             <button type="button" class="ms-auto border-0" data-bs-toggle="modal"
                                                 data-bs-target="#editmodal"
                                                 style="background-color: transparent; box-shadow: none;">
