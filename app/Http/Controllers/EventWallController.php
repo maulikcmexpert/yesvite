@@ -1942,7 +1942,7 @@ class EventWallController extends BaseController
 
     public function createPoll(Request $request)
     {
-        dd($request);
+       
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
