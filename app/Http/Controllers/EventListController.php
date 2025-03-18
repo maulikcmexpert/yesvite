@@ -2181,7 +2181,9 @@ class EventListController extends BaseController
                                 });
                           })
                           ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                          ->orderBy('id', 'DESC');
+                          ->orderBy('id', 'DESC')
+                          ->where('rsvp_status',NULL);
+
                 }
                 
                 if ($page == "past") {
@@ -2197,7 +2199,8 @@ class EventListController extends BaseController
                                 });
                           })
                           ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                          ->orderBy('start_date', 'desc');
+                          ->orderBy('start_date', 'desc')
+                          ->where('rsvp_status',NULL);
                 }
                 
 
@@ -2572,7 +2575,7 @@ class EventListController extends BaseController
             $uniqueCollection = $collection->unique('id');
             $eventPasttList = $uniqueCollection->values()->all();
 
-            dd($eventPasttList);
+            // dd($eventPasttList);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
