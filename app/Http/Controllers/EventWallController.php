@@ -1942,6 +1942,7 @@ class EventWallController extends BaseController
 
     public function createPoll(Request $request)
     {
+       
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
@@ -1952,12 +1953,13 @@ class EventWallController extends BaseController
 
         $user = Auth::guard('web')->user()->id;
 
+        // dd($request);
         // Find existing event post
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
 
-        if (!$creatEventPost || $request->isNewPost="0") {
+        if ($request->isNewPost=="0" || !$creatEventPost) {
             // Create new event post if it doesn't exist
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $request->event_id;
