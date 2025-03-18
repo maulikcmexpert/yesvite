@@ -344,7 +344,7 @@ class EventListController extends BaseController
                      })
                     ;
                 })
-                    ->where('user_id', $user->id)->count();
+                    ->where('user_id', $user->id)->distinct('event_id')->count();
 
                 $totalHosting = Event::where('user_id', $user->id)
                     ->where(function ($query) {
