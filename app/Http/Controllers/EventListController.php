@@ -2622,7 +2622,7 @@ class EventListController extends BaseController
                 });
             } else {
                 // $query->where(function ($q) {  // Grouping to fix the issue
-                    $q->where('is_draft_save', '0')
+                    ->where('is_draft_save', '0')
                       -where('end_date', '<', date('Y-m-d'))        ;
 
                                 //    ->orWhere(function ($subQuery2) {
