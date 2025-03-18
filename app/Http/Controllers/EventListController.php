@@ -1602,10 +1602,23 @@ class EventListController extends BaseController
             $usercreatedAllPastEventList = Event::query();
             $usercreatedAllPastEventList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['user_id' => $user->id])
             ->where(function ($query) {
-                $query->where('end_date', '<', date('Y-m-d')) // Past events
-                    ->orWhere(function ($q) {
-                        $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+                $query->where(function ($q) {  // Grouping to fix the issue
+                    $q->where('is_draft_save', '0')
+                      ->where(function ($subQuery) {
+                          $subQuery->where('end_date', '<', date('Y-m-d'))  
+                                   ->orWhere(function ($subQuery2) {
+                                       $subQuery2->where('end_date', '=', date('Y-m-d'))
+                                                 ->whereRaw(
+                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                                     [date('g:i A')]
+                                                 );
+                                   });
+                      });
+                });
+                // $query->where('end_date', '<', date('Y-m-d')) // Past events
+                //     ->orWhere(function ($q) {
+                //         $q->where('end_date', '=', date('Y-m-d')) // If event ends today
+                //         ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
             });
             // $usercreatedAllPastEventList->where('end_date', '<=', date('Y-m-d'));
             // $usercreatedAllPastEventList->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
@@ -1620,11 +1633,27 @@ class EventListController extends BaseController
             $invitedPastEventsList = Event::query();
             $invitedPastEventsList->with(['event_image', 'event_settings', 'user', 'event_schedule'])->whereIn('id', $invitedPastEvents)->where('is_draft_save', '0')
             ->where(function ($query) {
-                $query->where('end_date', '<', date('Y-m-d')) // Past events
-                    ->orWhere(function ($q) {
-                        $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+                $query->where(function ($q) {  // Grouping to fix the issue
+                    $q->where('is_draft_save', '0')
+                      ->where(function ($subQuery) {
+                          $subQuery->where('end_date', '<', date('Y-m-d'))  
+                                   ->orWhere(function ($subQuery2) {
+                                       $subQuery2->where('end_date', '=', date('Y-m-d'))
+                                                 ->whereRaw(
+                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                                     [date('g:i A')]
+                                                 );
+                                   });
+                      });
+                });
+           
             });
+            // ->where(function ($query) {
+            //     $query->where('end_date', '<', date('Y-m-d')) // Past events
+            //         ->orWhere(function ($q) {
+            //             $q->where('end_date', '=', date('Y-m-d')) // If event ends today
+            //             ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+            // });
             // $invitedPastEventsList->where('end_date', '<=', date('Y-m-d'));
             // $invitedPastEventsList->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
 
@@ -2621,18 +2650,19 @@ class EventListController extends BaseController
                              );
                 });
             } else {
-                // $query->where(function ($q) {  // Grouping to fix the issue
-                    ->where('is_draft_save', '0')
-                      -where('end_date', '<', date('Y-m-d'))        ;
-
-                                //    ->orWhere(function ($subQuery2) {
-                                //        $subQuery2->where('end_date', '=', date('Y-m-d'))
-                                //                  ->whereRaw(
-                                //                      "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
-                                //                      [date('g:i A')]
-                                //                  );
-                                //    });
-                    //   });
+                $query->where(function ($q) {  // Grouping to fix the issue
+                    $q->where('is_draft_save', '0')
+                      ->where(function ($subQuery) {
+                          $subQuery->where('end_date', '<', date('Y-m-d'))  
+                                   ->orWhere(function ($subQuery2) {
+                                       $subQuery2->where('end_date', '=', date('Y-m-d'))
+                                                 ->whereRaw(
+                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                                     [date('g:i A')]
+                                                 );
+                                   });
+                      });
+                });
 
             }
         })->where('user_id', $user->id)->count();
