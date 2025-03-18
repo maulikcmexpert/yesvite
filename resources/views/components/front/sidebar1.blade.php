@@ -1,4 +1,4 @@
-<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4">
+<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-5 mb-md-0 mb-4 d-md-block d-none">
     <div class="contact-user">
         <div class="user position-relative">
 
