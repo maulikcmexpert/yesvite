@@ -38,7 +38,9 @@ class VerifyUserIsVerified
 
             $user->current_session_id = $currentSessionId;
             $user->save();
-            return redirect()->intended(route('login')); // Redirect to intended page or home
+            return $next($request);
+
+            // return redirect()->intended(route('login')); // Redirect to intended page or home
 
         }
 
@@ -55,7 +57,6 @@ class VerifyUserIsVerified
         }
         // return redirect('/')->with('msg_error', 'Unauthorised');
         // return redirect('/login');
-        return $next($request);
 
 
     }
