@@ -419,6 +419,7 @@ $(document).on('click','.filter_apply_btn',function(e){
                     $('#tabbtn2').text(response.last_month);
                     $('#all-event-filter-modal').modal('hide');
                     $('.loader_filter').css('display','none');
+                    $('.count_of_upcoming').text(response.total);
 
                 }else{
                     $('#scrollStatus').html('');
@@ -426,7 +427,9 @@ $(document).on('click','.filter_apply_btn',function(e){
                     $('.all-events-month-show-wrp').css('display','none');
                     $('#all-event-filter-modal').modal('hide');
                     $('.loader_filter').css('display','none');
-
+                    $('.count_of_upcoming').text(response.total);
+                    
+                    
                 }
             }
             if(response.page=="past"){
@@ -437,14 +440,15 @@ $(document).on('click','.filter_apply_btn',function(e){
                     $('#tabbtn3').text(response.last_month);
                     $('#all-event-filter-modal').modal('hide');
                     $('.loader_filter').css('display','none');
-
+                    $('.count_of_past').text(response.total);
+                    
                 }else{
                     $('#scrollStatus3').html('');
                     $('#scrollStatus3').html('No Data Found');
                     $('.all-events-month-show-wrp').css('display','none');
                     $('#all-event-filter-modal').modal('hide');
                     $('.loader_filter').css('display','none');
-
+                    $('.count_of_past').text(response.total);
                 }
             }
             // hasMore = response.has_more; // Update the `hasMore` flag

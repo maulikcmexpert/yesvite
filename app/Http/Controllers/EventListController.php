@@ -2461,7 +2461,7 @@ class EventListController extends BaseController
 
             // dd($eventList);
 
-            return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), "page" => $page, "last_month" => $last_month]);
+            return response()->json(['view' => view('front.event.event_list.upcoming_event', compact('eventList', 'get_current_month'))->render(), "page" => $page, "last_month" => $last_month,"total"=>count($eventList)]);
         }
 
         if ($page == "past") {
@@ -2472,7 +2472,7 @@ class EventListController extends BaseController
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
-            return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), "page" => $page, "last_month" => $last_month]);
+            return response()->json(['view' => view('front.event.event_list.past_event', compact('eventPasttList', 'get_current_month'))->render(), "page" => $page, "last_month" => $last_month ,"total"=>count($eventPasttList)]);
         }
     }
 
