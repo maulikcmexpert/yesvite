@@ -1203,28 +1203,6 @@ $(document).ready(function () {
 // }
 
 //only rsvp_date by prakash
-// function rsvp_by_date(start_time) {
-//     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
-//         .subtract(1, "days")
-//         .format("MM-DD-YYYY");
-
-//     $("#rsvp-by-date").daterangepicker({
-//         singleDatePicker: true,
-//         autoUpdateInput: false,
-//         minYear: 2024,
-//         minDate: moment().format("MM-DD-YYYY"), // Ensure format
-//         maxDate: adjustedStartTime, // Use formatted date
-//         locale: {
-//             format: "MM-DD-YYYY",
-//         },
-//         maxYear: parseInt(moment().format("YYYY"), 10),
-//     });
-
-//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
-//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         $("#rsvp-by-date").next().addClass("floatingfocus");
-//     });
-// }
 function rsvp_by_date(start_time) {
     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
         .subtract(1, "days")
@@ -1232,22 +1210,21 @@ function rsvp_by_date(start_time) {
 
     $("#rsvp-by-date").daterangepicker({
         singleDatePicker: true,
-        autoApply: true,  // Automatically apply the date on click
-        autoUpdateInput: true,  // Update the input field instantly
+        autoUpdateInput: false,
         minYear: 2024,
-        minDate: moment().format("MM-DD-YYYY"),  // Ensure format
-        maxDate: adjustedStartTime,  // Use formatted date
+        minDate: moment().format("MM-DD-YYYY"), // Ensure format
+        maxDate: adjustedStartTime, // Use formatted date
         locale: {
             format: "MM-DD-YYYY",
         },
         maxYear: parseInt(moment().format("YYYY"), 10),
-    }, function (start) {
-        // Automatically set the date on selection
-        $("#rsvp-by-date").val(start.format("MM-DD-YYYY"));
+    });
+
+    $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+        $(this).val(picker.startDate.format("MM-DD-YYYY"));
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
 }
-
 
 //only rsvp_date by prakash
 $(function () {
