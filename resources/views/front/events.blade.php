@@ -1,4 +1,4 @@
-{{dd($filter);}}
+{{-- {{dd($filter);}} --}}
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details supportive-event-wrp">
