@@ -398,6 +398,16 @@
   #audioContainer .wrapper .pink-bar {
     top: 0px !important;
   }
+
+  .msg-body .grey-bar svg:nth-child(1), .msg-body .pink-bar svg:nth-child(1){
+    display: block !important;
+  }
+  .msg-body .music-info {
+    top: 58% !important;
+  }
+  .msg-body .pink-bar {
+    top: -1px !important;
+  }
 }
 
 @media only screen and (max-width:390px){
