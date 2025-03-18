@@ -1516,59 +1516,27 @@ function updateEventDate() {
 
 let selectedDates = new Set();
 
-// initializeDatePicker(
-//     "#start-event-date",
-//     { minDate: moment() },
-//     function (selectedDate) {
-//         let formattedDate = selectedDate.format("MM-DD-YYYY");
-//         $("#start-event-date").val(formattedDate); // Show date after selection
-//         $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
-//         $("#rsvp-by-date").val("");
-//         let endPicker = $("#end-event-date").data("daterangepicker");
-//         endPicker.setStartDate(moment(selectedDate).add(0, "days"));
-//         endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
-//         endPicker.maxDate = moment(selectedDate).add(2, "days"); // Restrict to +4 days from start date
-
-//         // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
-//         selectedDates.clear();
-//         selectedDates.add(formattedDate);
-//         rsvp_by_date(formattedDate);
-//         updateEventDate();
-//     }
-// );
-
-// initializeDatePicker(
-//     "#end-event-date",
-//     { minDate: moment() },
-//     function (selectedDate) {
-//         eventData.activity = {};
-//         let formattedDate = selectedDate.format("MM-DD-YYYY");
-//         $("#end-event-date").val(formattedDate); // Show date after selection
-//         selectedDates.add(formattedDate);
-//         updateEventDate();
-//     }
-// );
-
 initializeDatePicker(
     "#start-event-date",
     { minDate: moment() },
     function (selectedDate) {
         let formattedDate = selectedDate.format("MM-DD-YYYY");
-        $("#start-event-date").val(formattedDate); 
-        $("#end-event-date").val(formattedDate); 
+        $("#start-event-date").val(formattedDate); // Show date after selection
+        $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
         $("#rsvp-by-date").val("");
+        // let endPicker = $("#end-event-date").data("daterangepicker");
+        // endPicker.setStartDate(moment(selectedDate).add(0, "days"));
+        // endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
+        // endPicker.maxDate = moment(selectedDate).add(2, "days"); // Restrict to +4 days from start date
 
-        // Use setTimeout to ensure the endPicker is properly initialized
-        setTimeout(() => {
-            let endPicker = $("#end-event-date").data("daterangepicker");
-            
-            if (endPicker) {
-                endPicker.setStartDate(moment(selectedDate).add(0, "days"));
-                endPicker.minDate = moment(selectedDate).add(0, "days"); 
-                endPicker.maxDate = moment(selectedDate).add(2, "days"); 
-            }
-        }, 100); // Slight delay to ensure proper initialization
-
+        $("#end-event-date").daterangepicker({
+            singleDatePicker: true,
+            autoApply: true,
+            minDate: moment(selectedDate).add(0, "days"),
+            maxDate: moment(selectedDate).add(2, "days"),
+            locale: { format: "MM-DD-YYYY" }
+        });
+        // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
         selectedDates.clear();
         selectedDates.add(formattedDate);
         rsvp_by_date(formattedDate);
@@ -1582,12 +1550,11 @@ initializeDatePicker(
     function (selectedDate) {
         eventData.activity = {};
         let formattedDate = selectedDate.format("MM-DD-YYYY");
-        $("#end-event-date").val(formattedDate);
+        $("#end-event-date").val(formattedDate); // Show date after selection
         selectedDates.add(formattedDate);
         updateEventDate();
     }
 );
-
 
 //new date logic prakash
 $(document).on("change", "#schedule", function () {
