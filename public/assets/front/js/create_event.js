@@ -181,10 +181,12 @@ eventData.allow_limit_count = $("#allow_limit_count").val();
 // $("#activity-start-time").val("");
 $("#activity-end-time").val("");
 $(document).ready(function () {
-    const selectedTimeZone = $("#start-time-zone").val();
 
     // If database timezone is set, don't change it
-    if (selectedTimeZone) {
+    const selectedTimeZone = $("#start-time-zone").val();
+
+    // If a database timezone is set, do nothing
+    if (selectedTimeZone && selectedTimeZone !== "") {
         return;
     }
     
