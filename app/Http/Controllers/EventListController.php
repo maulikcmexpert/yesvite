@@ -324,7 +324,13 @@ class EventListController extends BaseController
                     $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
                 })
                     ->where('user_id', $user->id)->count();
-                $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('start_date', '>=', date('Y-m-d'))->count();
+                $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
+                ->where('start_date', '>', date('Y-m-d'))
+                ->orWhere(function ($q) {
+                    $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+                 })
+                ->count();
 
                 $usercreatedAllPastEventCount = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])->where('end_date', '<', date('Y-m-d'));
                 $invitedPastEvents = EventInvitedUser::whereHas('user', function ($query) {
@@ -1728,11 +1734,11 @@ class EventListController extends BaseController
             $allEvent =  Event::with(['event_image', 'event_settings', 'user', 'event_schedule'])->where(['is_draft_save' => '0', 'user_id' => $user->id]);
 
             if ($page == "upcoming") {
-                $allEvent = $allEvent->where('start_date', '>=', date('Y-m-d'));
-                // ->orWhere(function ($q) {
-                //     $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-                //     ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
-                // });
+                $allEvent = $allEvent->where('start_date', '>', date('Y-m-d'))
+                ->orWhere(function ($q) {
+                    $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
+                });
                 $allEvent = $allEvent->orderBy('start_date', 'ASC')->get();
 
             }
