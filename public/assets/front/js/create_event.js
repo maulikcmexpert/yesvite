@@ -1114,6 +1114,8 @@ function startTimePicker() {
                 : moment().hours(12).minutes(0).seconds(0);
             const endTimePicker = $(".end_timepicker").data("DateTimePicker");
             endTimePicker.date(selectedStartTime.clone().add(1, "hours"));
+            $(this).data("DateTimePicker").show();
+
         });
 }
 function endTimePicker() {
