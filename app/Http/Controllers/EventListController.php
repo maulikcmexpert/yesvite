@@ -2187,7 +2187,7 @@ class EventListController extends BaseController
                 }
                 
                 if ($page == "past") {
-                    $query->where(['is_draft_save'=> '0', 'rsvp_status' => NULL])
+                    $query->where('is_draft_save', '0')
                           ->where(function ($q) {
                               $q->where('end_date', '<', date('Y-m-d')) 
                                 ->orWhere(function ($subQuery) {
@@ -2363,62 +2363,7 @@ class EventListController extends BaseController
             }
         }
 
-        // if ($need_rsvp_to == 1) {
-        //     $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])
-        //         ->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
-        //             if ($page == "upcoming") {
-        //                 $query->where('is_draft_save', '0')
-        //                       ->where(function ($q) {
-        //                           $q->where('start_date', '>', date('Y-m-d'))
-        //                             ->orWhere(function ($subQuery) {
-        //                                 $subQuery->where('start_date', '=', date('Y-m-d'))
-        //                                          ->whereRaw(
-        //                                              "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
-        //                                              [date('g:i A')]
-        //                                          );
-        //                             });
-        //                       })
-        //                       ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-        //                       ->orderBy('id', 'DESC');
-        //             }
-        
-        //             if ($page == "past") {
-        //                 $query->where('is_draft_save', '0')
-        //                       ->where(function ($q) {
-        //                           $q->where('end_date', '<', date('Y-m-d'))
-        //                             ->orWhere(function ($subQuery) {
-        //                                 $subQuery->where('end_date', '=', date('Y-m-d'))
-        //                                          ->whereRaw(
-        //                                              "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
-        //                                              [date('g:i A')]
-        //                                          );
-        //                             });
-        //                       })
-        //                       ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-        //                       ->orderBy('start_date', 'desc');
-        //             }
-        
-        //             // Filter by date range
-        //             $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
-        //                 return $query->whereBetween('start_date', [$event_date, $end_event_date]);
-        //             });
-        
-        //             // Search by event name
-        //             $query->when($search != "", function ($query) use ($search) {
-        //                 return $query->where('event_name', 'like', "%$search%");
-        //             });
-        
-        //             // Filter by month and year
-        //             $query->when($month && $year, function ($query) use ($month, $year) {
-        //                 return $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
-        //             });
-        //         })
-        //         ->whereHas('user', function ($query) {
-        //             $query->where('app_user', '1');
-        //         })
-        //         ->get();
-        // }
-        
+
         if ($is_hosting == 0 && $invited_to == 0 && $need_rsvp_to == 0) {
             if ($page == "upcoming") {
                 $usercreatedList = Event::with(['user', 'event_settings', 'event_schedule'])->where('start_date', '>', date('Y-m-d'))
