@@ -1210,6 +1210,9 @@ function rsvp_by_date(start_time) {
 
     $("#rsvp-by-date").daterangepicker({
         singleDatePicker: true,
+        // autoUpdateInput: false,
+        // singleDatePicker: true,
+        autoApply: true,
         autoUpdateInput: false,
         minYear: 2024,
         minDate: moment().format("MM-DD-YYYY"), // Ensure format
