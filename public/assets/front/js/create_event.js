@@ -181,6 +181,12 @@ eventData.allow_limit_count = $("#allow_limit_count").val();
 // $("#activity-start-time").val("");
 $("#activity-end-time").val("");
 $(document).ready(function () {
+
+    // If database timezone is set, don't change it
+
+    // If a database timezone is set, do nothing
+ 
+    
     function getTimeZoneAbbreviation() {
         const date = new Date();
         const offset = -date.getTimezoneOffset();
@@ -203,6 +209,10 @@ $(document).ready(function () {
     const currentTimeZone = getTimeZoneAbbreviation();
     let isOptionExists = false;
 
+
+    const selectedTimeZone = $("#selected_start_time_zone").val().trim();
+
+    if (!selectedTimeZone) {
     $("#start-time-zone option").each(function () {
         if ($(this).val() === currentTimeZone) {
             $(this).prop("selected", true);
@@ -218,23 +228,28 @@ $(document).ready(function () {
             .prop("selected", true);
         $("#start-time-zone").append(newOption);
     }
-
-    let isOptionExistsend = false;
-    $("#end-time-zone option").each(function () {
-        if ($(this).val() === currentTimeZone) {
-            $(this).prop("selected", true);
-            isOptionExists = true;
-            return false;
-        }
-    });
-
-    if (!isOptionExistsend) {
-        const newEndOption = $("<option></option>")
-            .val(currentTimeZone)
-            .text(currentTimeZone)
-            .prop("selected", true);
-        $("#end-time-zone").append(newEndOption);
     }
+
+    const selectedEndTimeZone = $("#selected_end_time_zone").val().trim();
+    let isOptionExistsend = false;
+    if(!selectedEndTimeZone){
+            $("#end-time-zone option").each(function () {
+                if ($(this).val() === currentTimeZone) {
+                    $(this).prop("selected", true);
+                    isOptionExistsend = true;
+                    return false;
+                }
+            });
+        
+            if (!isOptionExistsend) {
+                const newEndOption = $("<option></option>")
+                    .val(currentTimeZone)
+                    .text(currentTimeZone)
+                    .prop("selected", true);
+                $("#end-time-zone").append(newEndOption);
+            }
+    }
+   
 
     console.log(getTimeZoneAbbreviation());
 
@@ -1210,6 +1225,9 @@ function rsvp_by_date(start_time) {
 
     $("#rsvp-by-date").daterangepicker({
         singleDatePicker: true,
+        // autoUpdateInput: false,
+        // singleDatePicker: true,
+        autoApply: true,
         autoUpdateInput: false,
         minYear: 2024,
         minDate: moment().format("MM-DD-YYYY"), // Ensure format
@@ -1227,45 +1245,45 @@ function rsvp_by_date(start_time) {
 }
 
 //only rsvp_date by prakash
-// $(function () {
-//     var current_event_date = $("#event-date").val();
+$(function () {
+    var current_event_date = $("#event-date").val();
 
-//     $("#rsvp-by-date").daterangepicker(
-//         {
-//             singleDatePicker: true,
-//             autoUpdateInput: false,
-//             //   showDropdowns: true,
-//             minYear: 1901,
-//             //   maxDate: current_event_date,
-//             //   minDate: moment().add(0, 'days'),
-//             minDate: moment().startOf("month"),
-//             // endDate: moment().endOf("month"),
-//             // minDate: moment().add(1, 'days'),
-//             minDate: moment(),
-//             locale: {
-//                 // format: 'YYYY-MM-DD'  // Set the desired format
-//                 format: "MM-DD-YYYY", // Set the desired format
-//             },
-//             maxYear: parseInt(moment().format("YYYY"), 10),
-//         },
-//         function (start, end, label) {
-//             //   var years = moment().diff(start, 'years');
-//             //   alert("You are " + years + " years old!");
-//         }
-//     );
-//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
-//         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         $("#rsvp-by-date").next().addClass("floatingfocus");
-//     });
-//     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-//         // if (picker.startDate.isValid()) {
-//         //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-//         //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         //     $("#rsvp-by-date").next().addClass("floatingfocus");
-//         // }
-//     });
-// });
+    $("#rsvp-by-date").daterangepicker(
+        {
+            singleDatePicker: true,
+            autoUpdateInput: false,
+            //   showDropdowns: true,
+            minYear: 1901,
+            //   maxDate: current_event_date,
+            //   minDate: moment().add(0, 'days'),
+            minDate: moment().startOf("month"),
+            // endDate: moment().endOf("month"),
+            // minDate: moment().add(1, 'days'),
+            minDate: moment(),
+            locale: {
+                // format: 'YYYY-MM-DD'  // Set the desired format
+                format: "MM-DD-YYYY", // Set the desired format
+            },
+            maxYear: parseInt(moment().format("YYYY"), 10),
+        },
+        function (start, end, label) {
+            //   var years = moment().diff(start, 'years');
+            //   alert("You are " + years + " years old!");
+        }
+    );
+    $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+        // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        $("#rsvp-by-date").next().addClass("floatingfocus");
+    });
+    $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
+        // if (picker.startDate.isValid()) {
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
+    });
+});
 
 // $(function () {
 //     var selectedDates = new Set();

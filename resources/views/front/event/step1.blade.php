@@ -236,10 +236,13 @@
                         </div>
                         <div class="col-6 mb-4">
                             <div class="input-form">
+                                <input type="hidden" value="{{$getLastTimeZone->rsvp_start_timezone ?? ''}}" id="selected_start_time_zone"/>
+                                <input type="hidden" value="{{$getLastTimeZone->rsvp_end_timezone ?? ''}}" id="selected_end_time_zone"/>
                                 <select class="form-select" name="start_time_zone" id="start-time-zone"
                                     onchange="getStartEndTimeZone()">
                                     @php
-                                        $start_time_zone = '';
+                                        $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
+                                        
                                         if (
                                             isset($eventDetail['rsvp_start_timezone']) &&
                                             $eventDetail['rsvp_start_timezone'] != ''
@@ -354,7 +357,9 @@
                                 <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()"
                                     id="end-time-zone">
                                     @php
-                                        $end_time_zone = '';
+                                        $end_time_zone = $getLastTimeZone->rsvp_end_timezone ?? '';
+
+
                                         if (
                                             isset($eventDetail['rsvp_end_time_set']) &&
                                             $eventDetail['rsvp_end_time_set'] != ''
@@ -367,7 +372,7 @@
                                     <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
                                     <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
                                     <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                    {{-- <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30 --}}
+                                    <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30</option>
                                     </option>
 
                                     {{-- <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>

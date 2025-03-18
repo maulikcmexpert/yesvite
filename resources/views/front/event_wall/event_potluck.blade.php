@@ -324,7 +324,7 @@
                                                             {{-- new code --}}
                                                             @if ($category['totalMissing'] > 0)
                                                                 <span
-                                                                    class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
+                                                                    class="me-1 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                     style="color: rgb(192, 52, 52);">
                                                                     <svg width="14" height="14" style="width: 15px;height:15px;"
                                                                         viewBox="0 0 14 14" fill="none"
@@ -334,7 +334,7 @@
                                                                             fill="#F73C71"></path>
                                                                     </svg>
                                                                 </span>
-                                                                <h6 class="me-2 missing-category-h6-{{ $key }}"
+                                                                <h6 class="me-3 missing-category-h6-{{ $key }}"
                                                                     style="color: rgb(192, 52, 52);"><span
                                                                         id="missing-category-{{ $key }}">{{ $category['totalMissing'] }}</span>
                                                                     Missing</h6>
@@ -374,7 +374,7 @@
                                                             @else
                                                                 @if ($category['totalMissing'] == 0)
                                                                     <span
-                                                                        class="me-2 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
+                                                                        class="me-1 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                         style="color: rgb(52, 192, 92);">
                                                                         <svg width="14" height="14"
                                                                             viewBox="0 0 14 14" fill="none"
@@ -384,7 +384,7 @@
                                                                                 fill="#23AA26"></path>
                                                                         </svg>
                                                                     </span>
-                                                                    <h6 class="me-2 missing-category-h6-{{ $key }}"
+                                                                    <h6 class="me-3 missing-category-h6-{{ $key }}"
                                                                         style="color: rgb(52, 192, 92);"><span
                                                                             id="missing-category-{{ $key }}">0</span>
                                                                         Missing</h6>
