@@ -1588,6 +1588,7 @@ class EventWallController extends BaseController
     public function createPost(Request $request)
     {
         $user = Auth::guard('web')->user();
+        dd($request);
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
