@@ -667,9 +667,10 @@
     box-shadow: none;
     margin: 10px 0 0 0;
     padding: 0;
-    min-width: 300px;
+    min-width: 300px !important;
     max-width: 100%;
-    width: auto;
+    width: 100%;
+    height: 120px !important;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
@@ -680,6 +681,7 @@
 .bootstrap-datetimepicker-widget.dropdown-menu table td,
 .bootstrap-datetimepicker-widget.dropdown-menu table th {
     border-radius: 0;
+    height: 35px !important;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu table td.old,

@@ -507,7 +507,7 @@
     position: relative;
     z-index: 100;
     /* border: 1px solid #F8F9FD; */
-    height: 55px;
+    height: 63px;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -534,6 +534,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 15px;
 
   }
 
@@ -551,15 +552,19 @@
     color: var(--secondary-black);
     border: 1px solid #E03137;
     position: relative;
+    gap: 0px;
   }
 
   #calendar .day.today::before{
     position: absolute;
     content: "Today";
     left: 50%;
-    transform: translateX(-50%
-    );
+    transform: translateX(-50%);
     top: 5px;
+    font-size: 12px;
+    font-family: var(--SFProDisplay-Regular);
+    color: var(--secondary-black);
+
   }
 
   #calendar .day-name {
