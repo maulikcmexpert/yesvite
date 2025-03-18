@@ -1594,7 +1594,7 @@ class EventWallController extends BaseController
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
-        if ($creatEventPost && $request->isNewPost="1") {
+        if ($creatEventPost && $request->isNewPost=="1") {
             // Delete old images
 
 
