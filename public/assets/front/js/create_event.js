@@ -1521,21 +1521,22 @@ initializeDatePicker(
     { minDate: moment() },
     function (selectedDate) {
         let formattedDate = selectedDate.format("MM-DD-YYYY");
-        $("#start-event-date").val(formattedDate); // Show date after selection
-        $("#end-event-date").val(formattedDate); // Clear end date when selecting a new start date
+        console.log(formattedDate);
+        
+        $("#start-event-date").val(formattedDate); 
+        console.log(  $("#start-event-date").val());
+        
+        $("#end-event-date").val(formattedDate); 
+        console.log(  $("#end-event-date").val());
+    
+        
         $("#rsvp-by-date").val("");
-        // let endPicker = $("#end-event-date").data("daterangepicker");
-        // endPicker.setStartDate(moment(selectedDate).add(0, "days"));
-        // endPicker.minDate = moment(selectedDate).add(0, "days"); // Disable past dates in end date
-        // endPicker.maxDate = moment(selectedDate).add(2, "days"); // Restrict to +4 days from start date
+        let endPicker = $("#end-event-date").data("daterangepicker");
+        endPicker.setStartDate(moment(selectedDate).add(0, "days"));
+        endPicker.minDate = moment(selectedDate).add(0, "days"); 
+        endPicker.maxDate = moment(selectedDate).add(2, "days"); 
 
-        $("#end-event-date").daterangepicker({
-            singleDatePicker: true,
-            autoApply: true,
-            minDate: moment(selectedDate).add(0, "days"),
-            maxDate: moment(selectedDate).add(2, "days"),
-            locale: { format: "MM-DD-YYYY" }
-        });
+        
         // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
         selectedDates.clear();
         selectedDates.add(formattedDate);
