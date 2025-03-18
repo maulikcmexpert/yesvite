@@ -681,6 +681,12 @@ class EventController extends BaseController
         //     ->orderBy('id', 'desc')
         //     ->get();
 
+        $getLastTimeZone = Event::where('user_id', $id)
+        ->orderBy('id', 'desc')
+        ->select('rsvp_start_timezone','rsvp_end_timezone')
+        ->first();
+
+        dd($getLastTimeZone->rsvp_start_timezone);
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
