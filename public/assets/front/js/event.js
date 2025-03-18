@@ -420,6 +420,8 @@ $(document).on('click','.filter_apply_btn',function(e){
                     $('#all-event-filter-modal').modal('hide');
                     $('.loader_filter').css('display','none');
                     $('.count_of_upcoming').text(response.total);
+                    date_upcoming=true;
+
 
                 }else{
                     $('#scrollStatus').html('');
