@@ -823,6 +823,7 @@
     font-weight: bold;
     font-size: 1.2em;
     border-radius: 5px;
+    height: 100%;
 }
 
 /* .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button:hover {
