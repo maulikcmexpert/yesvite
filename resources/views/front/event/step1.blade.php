@@ -543,7 +543,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 mt-3">
-                    @if (isset($eventDetail['is_draft_save']) &&
+                    <!-- @if (isset($eventDetail['is_draft_save']) &&
                             $eventDetail['is_draft_save'] == '0' &&
                             (isset($eventDetail['id']) && $eventDetail['id'] != ''))
                         <div class="guest-checkout new-edit-save-btn">
@@ -551,7 +551,7 @@
                                 <a href="#" class="cmn-btn saveDetailOnly">Save Changes</a>
                             </div>
                         </div>
-                    @else
+                    @else -->
                         <div class="design-seting">
                             <a href="#" class="d-flex" id="next_design">
                                 <span>
@@ -577,7 +577,7 @@
                                 </span>
                             </button>
                         </div>
-                    @endif
+                    <!-- @endif -->
                 </div>
             </form>
         </div>

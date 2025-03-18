@@ -259,7 +259,7 @@
         </div>
 
 
-        @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" )
+        <!-- @if ($eventID =="" || $eventID ==null || $isDraft ==null || $isDraft =="1" ) -->
         <div class="design-seting">
             <a href="#" class="d-flex previousImeg">
                 <span>
@@ -290,13 +290,13 @@
                 </span>
             </button>
         </div>
-        @else
+        <!-- @else
         <div class="guest-checkout new-edit-save-btn">
             <div>
                 <a href="#" class="cmn-btn saveDesignOnly">Save Changes</a>
             </div>
-        </div>
-        @endif
+        </div> -->
+        <!-- @endif -->
     </div>
 
     <div id="sidebar" class="sidebar choose-design-sidebar ds" style="right: 0px; width: 100%;">
