@@ -1979,20 +1979,32 @@ class EventListController extends BaseController
                 $query->where('is_draft_save', '0');
                 $query->with(['event_image', 'event_settings', 'user', 'event_schedule']);
                 if ($page == "upcoming") {
-                    $query->where('start_date', '>', date('Y-m-d'))
-                    ->orWhere(function ($q) {
-                        $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
+                    $query->where(function ($q) {
+                        $q->where('start_date', '>', date('Y-m-d'))  
+                          ->orWhere(function ($subQuery) {
+                              $subQuery->where('start_date', '=', date('Y-m-d'))  
+                                       ->whereRaw(
+                                           "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
+                                           [date('g:i A')]
+                                       );
+                          });
                     })
                     ->orderBy('id', 'DESC');
+              
                 }
                 if ($page == "past") {
-
-                    $query->where('end_date', '<', date('Y-m-d')) // Past events
-                    ->orWhere(function ($q) {
-                        $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
-                    })->orderBy('start_date', 'desc');
+                    $query->where(function ($q) {
+                        $q->where('end_date', '<', date('Y-m-d'))  
+                          ->orWhere(function ($subQuery) {
+                              $subQuery->where('end_date', '=', date('Y-m-d'))  
+                                       ->whereRaw(
+                                           "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                           [date('g:i A')]
+                                       );
+                          });
+                    })
+                    ->orderBy('start_date', 'desc');
+              
                     // $query->where('end_date', '<', date('Y-m-d'))->orderBy('start_date', 'desc');
                 }
 
@@ -2156,23 +2168,37 @@ class EventListController extends BaseController
 
 
                 if ($page == "upcoming") {
-                    $query->where('is_draft_save', '0')->where('start_date', '>', date('Y-m-d'))
-                            ->orWhere(function ($q) {
-                                $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-                                ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
-                            })
-                        ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                        ->orderBy('id', 'DESC');
+                    $query->where('is_draft_save', '0')
+                          ->where(function ($q) {
+                              $q->where('start_date', '>', date('Y-m-d')) 
+                                ->orWhere(function ($subQuery) {
+                                    $subQuery->where('start_date', '=', date('Y-m-d'))  
+                                             ->whereRaw(
+                                                 "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
+                                                 [date('g:i A')]
+                                             );
+                                });
+                          })
+                          ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                          ->orderBy('id', 'DESC');
                 }
+                
                 if ($page == "past") {
-                    $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'))
-                        ->orWhere(function ($q) {
-                            $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                            ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);  
-                        })
-                        ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                        ->orderBy('start_date', 'desc');
+                    $query->where('is_draft_save', '0')
+                          ->where(function ($q) {
+                              $q->where('end_date', '<', date('Y-m-d')) 
+                                ->orWhere(function ($subQuery) {
+                                    $subQuery->where('end_date', '=', date('Y-m-d'))  
+                                             ->whereRaw(
+                                                 "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                                 [date('g:i A')]
+                                             );
+                                });
+                          })
+                          ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                          ->orderBy('start_date', 'desc');
                 }
+                
 
 
                 $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
