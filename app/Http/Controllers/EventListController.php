@@ -125,18 +125,34 @@ class EventListController extends BaseController
         // $paginatedEvents =  collect($allEvent)->sortBy('start_date')->forPage($page, $this->perPage);
         // $paginatedEvents =  collect($allEvent)->sortBy('start_date');
         $totalEvent =  Event::where('user_id', $user->id)->count();
-        $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+        // $totalInvited = EventInvitedUser::whereHas('event', function ($query) {
+        //     $query->where('is_draft_save', '0')
+        //     // ->where('start_date', '>=', date('Y-m-d'))->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
+        //     // ->where(function ($query) {
+        //             ->where('start_date', '>', date('Y-m-d')) // Past events
+        //             ->orWhere(function ($q) {
+        //                 $q->where('start_date', '=', date('Y-m-d')) // If event ends today
+        //                 ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+        //              });
+        //     // })
+        // })
+        //     ->where('user_id', $user->id)->count();
+        $totalInvited = EventInvitedUser::where('user_id', $user->id)  // Filter by user_id first
+        ->whereHas('event', function ($query) {
             $query->where('is_draft_save', '0')
-            // ->where('start_date', '>=', date('Y-m-d'))->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
-            // ->where(function ($query) {
-                    ->where('start_date', '>', date('Y-m-d')) // Past events
-                    ->orWhere(function ($q) {
-                        $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
-                     });
-            // })
+                ->where(function ($q) {
+                    $q->where('start_date', '>', date('Y-m-d'))  // Future events
+                        ->orWhere(function ($subQuery) {
+                            $subQuery->where('start_date', '=', date('Y-m-d'))  // Today's events
+                                    ->whereRaw(
+                                        "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", 
+                                        [date('g:i A')]
+                                    );
+                        });
+                });
         })
-            ->where('user_id', $user->id)->count();
+        ->count();
+
         $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
         ->where('start_date', '>', date('Y-m-d'))
         ->orWhere(function ($q) {
