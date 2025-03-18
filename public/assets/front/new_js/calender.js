@@ -336,9 +336,12 @@ if (calender_json != undefined) {
             for (let day = 1; day <= totalDays; day++) {
                 const currentDay = month.clone().date(day);
                 const dayDiv = document.createElement("div");
-                dayDiv.className = `day ${
-                    today.isSame(currentDay, "day") ? "today" : ""
-                }`;
+                // dayDiv.className = `day ${
+                //     today.isSame(currentDay, "day") ? "today" : ""
+                // }`;
+                dayDiv.className = `day ${today.isSame(currentDay, "day") ? "today" : ""}
+                ${currentDay.isBefore(today, "day") ? "past_date_calender" : ""}`;
+
                 dayDiv.setAttribute(
                     "data-date",
                     currentDay.format("YYYY-MM-DD")
