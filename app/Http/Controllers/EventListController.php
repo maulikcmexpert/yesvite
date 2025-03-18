@@ -2638,7 +2638,8 @@ class EventListController extends BaseController
                 ;
 
             }
-        })->where('user_id', $user->id)->groupBy('event_id')->count();
+        })->where('user_id', $user->id)->distinct('event_id') 
+        ->count();
 
         // $totalInvited = EventInvitedUser::whereHas('event', function ($query) use($input){
         //     $query->where('is_draft_save', '0')
