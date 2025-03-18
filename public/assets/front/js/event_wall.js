@@ -102,7 +102,7 @@ function closePreviewModal(userId) {
 
         // Revoke object URLs to free memory
         const mediaElements = previewContainer.querySelectorAll("img, video");
-        mediaElements.forEach(media => {
+        mediaElements.forEach((media) => {
             URL.revokeObjectURL(media.src); // Revoke object URL
         });
 
@@ -113,8 +113,6 @@ function closePreviewModal(userId) {
         fileInput.value = "";
     }
 }
-
-
 
 // Step 2: Upload the selected files on button click
 function uploadStoryImage(eventId, userId) {
@@ -540,7 +538,9 @@ function displayStoriesWithProgressBars(
                 console.log("window index" + index);
             };
         }
-        let listItem = document.getElementById(`profile-pic-${userId}`)?.closest(".wall-main-story-item");
+        let listItem = document
+            .getElementById(`profile-pic-${userId}`)
+            ?.closest(".wall-main-story-item");
         if (listItem) {
             listItem.classList.remove("new-story");
         }
@@ -1045,7 +1045,9 @@ $(document).ready(function () {
     // Function to renumber options correctly after deletion
     function renumberOptions() {
         $(".poll-options .option-poll").each(function (index) {
-            $(this).find(".option-number").text(index + 3);
+            $(this)
+                .find(".option-number")
+                .text(index + 3);
             $(this).find(".char-count").text("0/140"); // Reset char count
         });
     }
@@ -1069,8 +1071,6 @@ $(document).ready(function () {
         }
     });
 
-
-
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
         var $this = $(this);
@@ -1084,7 +1084,6 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
-
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1092,36 +1091,49 @@ $(document).ready(function () {
                 return;
             }
             // Show the loader inside the button
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+            $this
+                .html(
+                    '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
+                )
+                .prop("disabled", true);
 
             pollForm.submit();
-        }
-        else if (photoForm.is(":visible") && photoForm.length > 0) {
+        } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
             var imagePreview = document.getElementById("imagePreview");
             var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
 
             // Check if no photo is uploaded AND no content is entered
-            if ((!photoInput || photoInput.files.length === 0) && imagePreview.children.length === 0 && postContent === "") {
-                toastr.error("Please upload a photo or enter some content for the photo post.");
+            if (
+                (!photoInput || photoInput.files.length === 0) &&
+                imagePreview.children.length === 0 &&
+                postContent === ""
+            ) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
                 return;
             }
 
             // Set post type based on presence of an uploaded image or entered content
-            if ((photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0) {
+            if (
+                (photoInput && photoInput.files.length > 0) ||
+                imagePreview.children.length > 0
+            ) {
                 document.getElementById("photoPostType").value = 1;
             } else {
                 document.getElementById("photoPostType").value = 0;
             }
 
             // Show loader inside the button and disable it
-            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
+            $this
+                .html(
+                    '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
+                )
                 .prop("disabled", true);
 
             photoForm.submit();
-        }
-
-        else {
+        } else {
             toastr.error("Please fill all required fields before submitting.");
         }
     });
@@ -1145,9 +1157,7 @@ $(document).ready(function () {
         } else {
             console.log("Post content is empty! Form not submitted.");
         }
-
     });
-
 });
 
 // Wait for the entire page to load
@@ -1157,13 +1167,14 @@ $(document).ready(function () {
 // };
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
+    $(".isNewPost").val('0');
+
+    $(".create-post-head-upload-btn").addClass("d-none");
     $("#create-photo-btn").trigger("click");
 });
 $("#poll_click").on("click", function () {
-
     $("#create-poll-btn").trigger("click");
 });
-
 
 $(".posts-card-like-btn").on("click", function () {
     const icon = this.querySelector("i");
@@ -1175,7 +1186,6 @@ $(".show-btn-comment").click(function () {
     let event_p_id = $(this).attr("event_p_id");
     $(".show_" + event_p_id).toggleClass("d-none");
     console.log("click");
-
 });
 
 $(".show-comment-reply-btn").click(function () {
@@ -1194,7 +1204,6 @@ $(document).ready(function () {
     $(".postControlButton").on("click", function () {
         var muteIcon = $(this).find("#muteIcon");
         var unmuteIcon = $(this).find("#unmuteIcon");
-
 
         // Retrieve necessary data attributes
         var $button = $(this);
@@ -1216,7 +1225,6 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.status === 1) {
-
                     if (response.type == "hide_post") {
                         // Find and hide the post using the postId
                         $('.hidden_post[data-post-id="' + postId + '"]').hide();
@@ -1273,7 +1281,11 @@ $(document).ready(function () {
         selectedReportType = "";
         $("#violation-textbox").val("");
         $(".btn-submit-report").prop("disabled", true);
-        $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+        $this
+            .html(
+                '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
+            )
+            .prop("disabled", true);
 
         // Show the modal
         $("#submitreport").modal("show");
@@ -1313,7 +1325,6 @@ $(document).ready(function () {
                 event_post_id: postId,
                 report_type: selectedReportType,
                 report_description: violationDetails,
-
             },
             success: function (response) {
                 if (response.status === 1) {
@@ -1329,7 +1340,6 @@ $(document).ready(function () {
             },
         });
     });
-
 
     $(document).on("click", "#deletePostButton", function () {
         const button = $(this);
@@ -1366,9 +1376,9 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", ".editPostBtn", function () {
-
-        var eventPostId = $(this).data('event-post-id');
-        var eventId = $(this).data('event-id');
+        $(".isNewPost").val('1');
+        var eventPostId = $(this).data("event-post-id");
+        var eventId = $(this).data("event-id");
 
         $.ajax({
             url: base_url + "event_wall/fetchPostWall",
@@ -1382,39 +1392,52 @@ $(document).ready(function () {
                 event_post_id: eventPostId,
             }),
             success: function (response) {
-                if (response.status === 'success' && response.data.length > 0) {
+                if (response.status === "success" && response.data.length > 0) {
                     let postData = response.data[0]; // Get the first post data
 
                     // Set the post content
-                    $('.post_message').val(postData.post_message);
-                    $('.PostId').val(postData.id);
-                    $('.poll_post_id').val(postData.id);
+                    $(".post_message").val(postData.post_message);
+                    $(".PostId").val(postData.id);
+                    $(".poll_post_id").val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
-                    let savedVisibility = localStorage.getItem("post_privacys") || "1";
-                    let savedAllowComments = localStorage.getItem("commenting_on_off") || "1";
-
+                    let savedVisibility =
+                        localStorage.getItem("post_privacys") || "1";
+                    let savedAllowComments =
+                        localStorage.getItem("commenting_on_off") || "1";
 
                     // Uncheck all radio buttons first
                     $('input[name="post_privacy"]').prop("checked", false); // Reset
-                    $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop("checked", true).trigger("change");
-
+                    $(
+                        'input[name="post_privacy"][value="' +
+                            savedVisibility +
+                            '"]'
+                    )
+                        .prop("checked", true)
+                        .trigger("change");
 
                     // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
-                    $('input[name="commenton"]').prop("checked", postData.comment_on_off == 1);
+                    $('input[name="commenton"]').prop(
+                        "checked",
+                        postData.comment_on_off == 1
+                    );
 
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
                         let mediaWrapper = $("#imagePreview");
                         let uploadImgInner = $(".create-post-upload-img-inner");
                         console.log(uploadImgInner);
-                        const uploadHeadButton = $(".create-post-head-upload-btn");
-
+                        const uploadHeadButton = $(
+                            ".create-post-head-upload-btn"
+                        );
 
                         mediaWrapper.empty(); // Clear old images
 
                         if (postData.mediaData.length > 0) {
-                            let colClass = postData.mediaData.length === 1 ? 'col-12' : 'col-6';
+                            let colClass =
+                                postData.mediaData.length === 1
+                                    ? "col-12"
+                                    : "col-6";
                             postData.mediaData.forEach((media) => {
                                 let mediaElement = `
                                     <div class="${colClass}" style="position: relative;">
@@ -1437,12 +1460,14 @@ $(document).ready(function () {
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
-                                console.log({uploadImgInner});
+                                console.log({ uploadImgInner });
 
-                                // uploadImgInner.addClass("d-none");
-                                uploadImgInner.addClass('d-none');
+                                uploadImgInner.addClass("d-none");
+                                // uploadImgInner.hide();
                             } else {
-                                console.error("Element not found: .create-post-upload-img-inner");
+                                console.error(
+                                    "Element not found: .create-post-upload-img-inner"
+                                );
                             }
                             uploadHeadButton.removeClass("d-none");
                         } else {
@@ -1457,27 +1482,26 @@ $(document).ready(function () {
 
                         if (pollData) {
                             $("#yourquestion").val(pollData.poll_question);
-                            $("select[name='duration']").val(pollData.total_poll_duration);
+                            $("select[name='duration']").val(
+                                pollData.total_poll_duration
+                            );
 
                             let options = pollData.poll_options || []; // Get poll options
 
-                            $(".poll-options input[name='options[]']").each((index, element) => {
-                                if (options[index]) {
-                                    $(element).val(options[index].option); // Set existing options
+                            $(".poll-options input[name='options[]']").each(
+                                (index, element) => {
+                                    if (options[index]) {
+                                        $(element).val(options[index].option); // Set existing options
+                                    }
                                 }
-                            });
+                            );
                         }
                     }
 
-
-
-
                     // Set existing images if available
-
 
                     // Show the modal after setting the values
                     $("#creatpostmodal").modal("show");
-
                 } else {
                     toastr.error("Post data not found.");
                 }
@@ -1488,8 +1512,6 @@ $(document).ready(function () {
             },
         });
     });
-
-
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
@@ -1503,16 +1525,14 @@ $(".modal").on("hidden.bs.modal", function () {
 });
 
 $(".btn-close").on("click", function () {
-
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
     // Add `d-none` class back to hide the div
-
 });
 
 $(".modal").on("shown.bs.modal", function () {
     // Remove `d-none` class to show the div
-    $(".create-post-upload-img-inner").removeClass("d-none");
+    // $(".create-post-upload-img-inner").removeClass("d-none");
 });
 
 $(document).on("click", ".select_all_post", function () {
@@ -1534,7 +1554,7 @@ $(document).on("click", ".wall_filter_reset", function () {
         data: JSON.stringify({
             event_id: event_id,
             filters: selectedPostTypes,
-            is_delete: "1"
+            is_delete: "1",
         }),
         contentType: "application/json",
         headers: {
@@ -1558,7 +1578,7 @@ $(document).on("click", ".wall_filter_reset", function () {
     });
 });
 $(document).on("click", ".view_wall_filter", function () {
-    var applied = $('#is_filter_applied').val();
+    var applied = $("#is_filter_applied").val();
     console.log(applied);
     if (applied == "0") {
         $(".select_all_post").prop("checked", true);
@@ -1578,7 +1598,7 @@ $(document).on("click", ".wall_apply_filter", function () {
         selectedPostTypes.push($(this).data("post_type"));
     });
     if (selectedPostTypes.length === 0) {
-        toastr.error('Please select atleast one filter');
+        toastr.error("Please select atleast one filter");
         return;
     }
     console.log(selectedPostTypes);
@@ -1588,7 +1608,7 @@ $(document).on("click", ".wall_apply_filter", function () {
         data: JSON.stringify({
             event_id: event_id,
             filters: selectedPostTypes,
-            is_delete: "0"
+            is_delete: "0",
         }),
         contentType: "application/json",
         headers: {
@@ -1646,38 +1666,37 @@ function generateProfileImage(firstname, lastname) {
     const fontColor = `fontcolor${firstInitial}`;
     return `<h5 class="${fontColor} font_name">${initials || "NA"}</h5>`;
 }
-$(document).on('click', '.get_post_emoji_list', function () {
-    var post_id = $(this).data('post');
-
+$(document).on("click", ".get_post_emoji_list", function () {
+    var post_id = $(this).data("post");
 
     $("#nav-all-reaction ul").html("");
 
-    $('#nav-all-reaction-tab').html("All 0");
+    $("#nav-all-reaction-tab").html("All 0");
     $(`#nav-heart-reaction ul`).html("");
-    $('#heart-count').text('0');
+    $("#heart-count").text("0");
 
     $(`#nav-thumb-reaction ul`).html("");
-    $('#thumb-count').text('0');
+    $("#thumb-count").text("0");
 
     $(`#nav-smily-reaction ul`).html("");
-    $('#smily-count').text('0');
+    $("#smily-count").text("0");
 
     $(`#nav-eye-heart-reaction ul`).html("");
-    $('#eye-heart-count').text('0');
+    $("#eye-heart-count").text("0");
 
     $(`#nav-clap-reaction ul`).html("");
-    $('#clap-count').text('0');
-    $('#nav-heart-reaction-tab').removeClass('active');
-    $('#nav-thumb-reaction-tab').removeClass('active');
-    $('#nav-smily-reaction-tab').removeClass('active');
-    $('#nav-eye-heart-reaction-tab').removeClass('active');
-    $('#nav-clap-reaction-tab').removeClass('active');
+    $("#clap-count").text("0");
+    $("#nav-heart-reaction-tab").removeClass("active");
+    $("#nav-thumb-reaction-tab").removeClass("active");
+    $("#nav-smily-reaction-tab").removeClass("active");
+    $("#nav-eye-heart-reaction-tab").removeClass("active");
+    $("#nav-clap-reaction-tab").removeClass("active");
 
-    $('#nav-heart-reaction').removeClass('active show');
-    $('#nav-smily-reaction').removeClass('active show');
-    $('#nav-thumb-reaction').removeClass('active show');
-    $('#nav-eye-heart-reaction').removeClass('active show');
-    $('#nav-clap-reaction-tab').removeClass('active show');
+    $("#nav-heart-reaction").removeClass("active show");
+    $("#nav-smily-reaction").removeClass("active show");
+    $("#nav-thumb-reaction").removeClass("active show");
+    $("#nav-eye-heart-reaction").removeClass("active show");
+    $("#nav-clap-reaction-tab").removeClass("active show");
 
     $.ajax({
         url: base_url + "event_wall/get_reaction_post_list",
@@ -1695,7 +1714,9 @@ $(document).on('click', '.get_post_emoji_list', function () {
             if (response.status === 1) {
                 let reactionDetail = response.reaction_detail;
                 let reactionList = response.reaction_list;
-                $("#nav-all-reaction-tab").html(`All  ${reactionDetail.total_count}`);
+                $("#nav-all-reaction-tab").html(
+                    `All  ${reactionDetail.total_count}`
+                );
                 $.each(reactionList, function (reaction, users) {
                     let tabId = "";
                     let emoji_name = "";
@@ -1704,37 +1725,32 @@ $(document).on('click', '.get_post_emoji_list', function () {
                         tabId = "nav-heart-reaction";
                         emoji_name = "heart-emoji";
                         count = "heart-count";
-                    }
-
-                    else if (reaction == "\\u{1F44D}") {
+                    } else if (reaction == "\\u{1F44D}") {
                         tabId = "nav-thumb-reaction";
                         emoji_name = "thumb-icon";
                         count = "thumb-count";
-
-                    }
-                    else if (reaction == "\\u{1F60A}") {
+                    } else if (reaction == "\\u{1F60A}") {
                         tabId = "nav-smily-reaction";
                         emoji_name = "smily-emoji";
                         count = "smily-count";
-
-                    }
-                    else if (reaction == "\\u{1F60D}") {
-                        tabId = "nav-eye-heart-reaction"
+                    } else if (reaction == "\\u{1F60D}") {
+                        tabId = "nav-eye-heart-reaction";
                         emoji_name = "eye-heart-emoji";
                         count = "eye-heart-count";
-
-                    }
-                    else if (reaction == "\\u{1F44F}") {
-                        tabId = "nav-clap-reaction"
+                    } else if (reaction == "\\u{1F44F}") {
+                        tabId = "nav-clap-reaction";
                         emoji_name = "clap-icon";
                         count = "clap-count";
                     }
 
                     let reactionHtml = "";
                     let profile = "";
-                    users.forEach(user => {
+                    users.forEach((user) => {
                         if (user.profile == "") {
-                            profile = generateProfileImage(user.firstname, user.lastname);
+                            profile = generateProfileImage(
+                                user.firstname,
+                                user.lastname
+                            );
                         } else {
                             profile = ` <img src="${user.profile}" alt="">`;
                         }
@@ -1764,11 +1780,14 @@ $(document).on('click', '.get_post_emoji_list', function () {
 
                     $("#nav-all-reaction ul").append(reactionHtml);
 
-                    let reactionCount = reactionDetail.reaction_count[reaction] || 0;
-                    $(`#${tabId}-tab`).html(`<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`);
+                    let reactionCount =
+                        reactionDetail.reaction_count[reaction] || 0;
+                    $(`#${tabId}-tab`).html(
+                        `<img src="${base_url}assets/front/img/${emoji_name}.png" alt=""> <span id="${count}">${reactionCount}</span>`
+                    );
                 });
-                $("#nav-all-reaction-tab").addClass('active');
-                $("#nav-all-reaction").addClass('active show');
+                $("#nav-all-reaction-tab").addClass("active");
+                $("#nav-all-reaction").addClass("active show");
                 $("#reaction-modal").modal("show");
             }
         },
@@ -1815,10 +1834,8 @@ $(document).ready(function () {
 
     function loadSettings() {
         console.log("Loading settings..."); // Debugging
-        let savedVisibility =
-            "1";
-        let savedAllowComments =
-            "1";
+        let savedVisibility = "1";
+        let savedAllowComments = "1";
 
         $('input[name="post_privacy"][value="' + savedVisibility + '"]').prop(
             "checked",
@@ -1862,7 +1879,6 @@ $(document).ready(function () {
     });
 });
 
-
 // $(document).ready(function () {
 //     let userActive = true;
 //     let inactivityTimeout;
@@ -1897,12 +1913,9 @@ $(document).ready(function () {
 //     document.addEventListener("keydown", userIsActive);
 //     document.addEventListener("touchstart", userIsActive); // For mobile devices
 
-
 //     inactivityTimeout = setTimeout(userIsInactive, 5000);
 //     refreshTimeout = setTimeout(() => {
 //         console.log("User inactive for 5+ minutes, refreshing page...");
 //         location.reload();
 //     }, 300000);
 // });
-
-

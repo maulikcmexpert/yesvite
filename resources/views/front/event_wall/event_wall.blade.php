@@ -487,6 +487,7 @@
                                                                     </h3>
                                                                 </div>
                                                             @endif
+                                                            
                                                             <input type="hidden" name="event_post_id"
                                                                 id="event_post_id" value="{{ $post['id'] }}">
                                                             <div class="post-card-poll-wrp">
@@ -1174,7 +1175,7 @@
                             <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                 value="">
 
-
+                                <input type="hidden" class="isNewPost" name="isNewPost" value="1">
                             <input type="hidden" name="post_type" id="textPostType" value="0">
                             @csrf
                             <div class="create-post-textcontent">
@@ -1297,6 +1298,7 @@
                                         value="1">
                                     <input type="hidden" class="hiddenAllowComments" name="commenting_on_off"
                                         value="1">
+                                    <input type="hidden" class="isNewPost" name="isNewPost" value="1">
                                     {{-- <input type="hidden" name="post_type" id="pollPostType" value="2"> --}}
                                     <input type="hidden" name="content" id="pollContent" value="">
                                     <div class="mb-3">

@@ -528,8 +528,9 @@
     height: 30px;
     min-height: 30px;
     border-radius: 10px;
-    background-color: var(--pink);
-    color: var(--white);
+    /* background-color: var(--pink);
+    color: var(--white); */
+    color: var(--secondary-black);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -547,7 +548,18 @@
   }
 
   #calendar .day.today {
-    color: rgba(156, 202, 235, 1);
+    color: var(--secondary-black);
+    border: 1px solid #E03137;
+    position: relative;
+  }
+
+  #calendar .day.today::before{
+    position: absolute;
+    content: "Today";
+    left: 50%;
+    transform: translateX(-50%
+    );
+    top: 5px;
   }
 
   #calendar .day-name {
@@ -732,6 +744,11 @@
     line-height: normal;
     color: var(--secondary-black);
     margin-bottom: 0px;
+  }
+
+
+  .day.past_date_calender{
+    background-color: #F8F9FD;
   }
 
   /* Animations are cool!  */

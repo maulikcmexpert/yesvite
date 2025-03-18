@@ -3321,6 +3321,12 @@ padding: 12px 24px;
     display: none;
 }
 
+.no-scroll {
+    overflow: hidden; /* Prevent scrolling */
+    position: fixed; /* Lock the body in place */
+    width: 100%; /* Prevent layout shifts */
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
