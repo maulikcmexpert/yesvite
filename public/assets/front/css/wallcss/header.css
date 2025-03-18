@@ -893,9 +893,9 @@ header{
         display: block;
     }
 
-    .header-profile-wrp{
+    /* .header-profile-wrp{
         display: none;
-    }
+    } */
     .moblie-menu-bar{
         display: block;
         width: 100%;
@@ -994,6 +994,18 @@ header{
     }
     .active.mobile-menu-overlay {
         display: block;
+    }
+    .header-profile-wrp .profile-drop-down-menu h5{
+        width: 35px;
+        max-width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .header-profile-wrp button.profile-drop-down-menu{
+        width: 35px;
+        max-width: 35px;
+        height: 35px;
     }
 }
 
