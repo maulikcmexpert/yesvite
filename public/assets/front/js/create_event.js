@@ -183,12 +183,9 @@ $("#activity-end-time").val("");
 $(document).ready(function () {
 
     // If database timezone is set, don't change it
-    const selectedTimeZone = $("#start-time-zone").val();
 
     // If a database timezone is set, do nothing
-    // if (selectedTimeZone && selectedTimeZone !== "") {
-    //     return;
-    // }
+ 
     
     function getTimeZoneAbbreviation() {
         const date = new Date();
@@ -212,6 +209,10 @@ $(document).ready(function () {
     const currentTimeZone = getTimeZoneAbbreviation();
     let isOptionExists = false;
 
+
+    const selectedTimeZone = $("#selected_start_time_zone").val().trim();
+
+    if (!selectedTimeZone) {
     $("#start-time-zone option").each(function () {
         if ($(this).val() === currentTimeZone) {
             $(this).prop("selected", true);
@@ -227,23 +228,28 @@ $(document).ready(function () {
             .prop("selected", true);
         $("#start-time-zone").append(newOption);
     }
-
-    let isOptionExistsend = false;
-    $("#end-time-zone option").each(function () {
-        if ($(this).val() === currentTimeZone) {
-            $(this).prop("selected", true);
-            isOptionExists = true;
-            return false;
-        }
-    });
-
-    if (!isOptionExistsend) {
-        const newEndOption = $("<option></option>")
-            .val(currentTimeZone)
-            .text(currentTimeZone)
-            .prop("selected", true);
-        $("#end-time-zone").append(newEndOption);
     }
+
+    const selectedEndTimeZone = $("#selected_end_time_zone").val().trim();
+    let isOptionExistsend = false;
+    if(!selectedEndTimeZone){
+            $("#end-time-zone option").each(function () {
+                if ($(this).val() === currentTimeZone) {
+                    $(this).prop("selected", true);
+                    isOptionExists = true;
+                    return false;
+                }
+            });
+        
+            if (!isOptionExistsend) {
+                const newEndOption = $("<option></option>")
+                    .val(currentTimeZone)
+                    .text(currentTimeZone)
+                    .prop("selected", true);
+                $("#end-time-zone").append(newEndOption);
+            }
+    }
+   
 
     console.log(getTimeZoneAbbreviation());
 
