@@ -1910,6 +1910,18 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     stroke:#94A3B8;
 } */
 
+.msg-body ul li.sender .media-msg-inline:has(.music-container) .reaction-icon{
+    position: static !important;
+    right: unset !important;
+    top: unset !important;
+    transform: unset !important;
+    z-index: 1;
+}
+
+.msg-body ul li.sender .media-msg-inline:has(.music-container){
+    align-items: center !important;
+}
+
 /* ======= responsive ======== */
 
 @media only screen and (min-width: 1400px) {
