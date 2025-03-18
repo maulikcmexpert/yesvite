@@ -550,6 +550,16 @@
   #calendar .day.today {
     color: var(--secondary-black);
     border: 1px solid #E03137;
+    position: relative;
+  }
+
+  #calendar .day.today::before{
+    position: absolute;
+    content: "Today";
+    left: 50%;
+    transform: translateX(-50%
+    );
+    top: 5px;
   }
 
   #calendar .day-name {
