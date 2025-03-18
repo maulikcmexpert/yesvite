@@ -123,6 +123,10 @@ header{
     color: #fff;
 }
 
+.header-profile-wrp .profile-drop-down-menu h5{
+    font-size: 16px;
+}
+
 .header-profile-wrp a img{
     border-radius: 50%;
 }
