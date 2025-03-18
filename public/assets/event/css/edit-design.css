@@ -2168,7 +2168,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2274,7 +2274,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2380,7 +2380,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2486,7 +2486,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2592,7 +2592,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2698,7 +2698,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2804,7 +2804,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2868,7 +2868,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -2954,7 +2954,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
 
     .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
@@ -3235,7 +3235,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
     .image-edit-inner-img {
         width: 450px;
@@ -3270,7 +3270,7 @@
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        overflow: unset !important;
+        /* overflow: unset !important; */
     }
     .image-edit-inner-img {
         width: 350px;
