@@ -240,7 +240,7 @@
                                     onchange="getStartEndTimeZone()">
                                     @php
                                         $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
-
+                                        dd($start_time_zone);
                                         if (
                                             isset($eventDetail['rsvp_start_timezone']) &&
                                             $eventDetail['rsvp_start_timezone'] != ''
