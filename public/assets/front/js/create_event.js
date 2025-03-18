@@ -1528,7 +1528,13 @@ initializeDatePicker(
         
         $("#end-event-date").val(formattedDate); 
         console.log(  $("#end-event-date").val());
-    
+         let endDateInput = $('#end-event-date');
+        let nextLabel = endDateInput.next('label');
+
+    if (!nextLabel.hasClass('floatingfocus')) {
+        nextLabel.addClass('floatingfocus');
+    }
+        // alert($("#end-event-date").val());
         
         $("#rsvp-by-date").val("");
         let endPicker = $("#end-event-date").data("daterangepicker");
