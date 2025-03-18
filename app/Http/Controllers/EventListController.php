@@ -2588,18 +2588,24 @@ class EventListController extends BaseController
                 $query->where('is_draft_save', '0')
                 ->where('start_date', '>', date('Y-m-d'))
                 ->orWhere(function ($subQuery) {
-                    $subQuery->where('start_date', '=', date('Y-m-d'))  // Today's events
+                    $subQuery->where('start_date', '=', date('Y-m-d'))  
                              ->whereRaw(
                                  "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
                                  [date('g:i A')]
                              );
                 });
             } else {
-                $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'))
-                ->orWhere(function ($q) {
-                    $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                   
-                 });
+                $query->where('is_draft_save', '0')
+                    ->where(function ($q) {
+                        $q->where('end_date', '<', date('Y-m-d'))  
+                            ->orWhere(function ($subQuery) {
+                                $subQuery->where('end_date', '=', date('Y-m-d')) 
+                                        ->whereRaw(
+                                            "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                            [date('g:i A')]
+                                        );
+                            });
+                    });
 
             }
         })->where('user_id', $user->id)->count();
@@ -2616,12 +2622,12 @@ class EventListController extends BaseController
         // })->where('user_id', $user->id)->count();
 
         if ($page == "upcoming") {
-            $totalHosting = Event::where('user_id', $user->id)  // Ensure user filter applies to both conditions
+            $totalHosting = Event::where('user_id', $user->id)  
                 ->where('is_draft_save', '0')
                 ->where(function ($query) {
-                    $query->where('start_date', '>', date('Y-m-d'))  // Future events
+                    $query->where('start_date', '>', date('Y-m-d')) 
                         ->orWhere(function ($q) {
-                            $q->where('start_date', '=', date('Y-m-d'))  // Today's events
+                            $q->where('start_date', '=', date('Y-m-d')) 
                                 ->whereRaw(
                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", 
                                     [date('g:i A')]
@@ -2631,21 +2637,28 @@ class EventListController extends BaseController
                 ->count();
 
         } else {
-            $totalHosting = Event::where(['is_draft_save' => '0', 'user_id' => $user->id])
+            $totalHosting = Event::where('user_id', $user->id)  
+            ->where('is_draft_save', '0')
             ->where(function ($query) {
-                $query->where('end_date', '<', date('Y-m-d')) // Past events
-                    ->orWhere(function ($q) {
-                        $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                        ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
-            })->count();
+                $query->where('end_date', '<', date('Y-m-d'))  
+                      ->orWhere(function ($q) {
+                          $q->where('end_date', '=', date('Y-m-d')) 
+                            ->whereRaw(
+                                "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", 
+                                [date('g:i A')]
+                            );
+                      });
+            })
+            ->count();
+        
         }
         $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) use ($page) {
             if ($page == "upcoming") {
                  $query->where('is_draft_save', '0')
                  ->where(function ($q) {
-                     $q->where('start_date', '>', date('Y-m-d'))  // Future events
+                     $q->where('start_date', '>', date('Y-m-d'))  
                        ->orWhere(function ($subQuery) {
-                           $subQuery->where('start_date', '=', date('Y-m-d'))  // Today's events
+                           $subQuery->where('start_date', '=', date('Y-m-d')) 
                                     ->whereRaw(
                                         "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
                                         [date('g:i A')]
@@ -2654,12 +2667,17 @@ class EventListController extends BaseController
                  });
             } else {
                 $query->where('is_draft_save', '0')
-                ->where(function ($query) {
-                    $query->where('end_date', '<', date('Y-m-d')) // Past events
-                        ->orWhere(function ($q) {
-                            $q->where('end_date', '=', date('Y-m-d')) // If event ends today
-                            ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                    });
+                ->where(function ($q) {
+                    $q->where('end_date', '<', date('Y-m-d'))  
+                      ->orWhere(function ($subQuery) {
+                          $subQuery->where('end_date', '=', date('Y-m-d'))  
+                                   ->whereRaw(
+                                       "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                       [date('g:i A')]
+                                   );
+                      });
                 });
+          
                 // ->where('end_date', '<', date('Y-m-d'));
             }
         })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->count();
