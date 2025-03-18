@@ -186,9 +186,9 @@ $(document).ready(function () {
     const selectedTimeZone = $("#start-time-zone").val();
 
     // If a database timezone is set, do nothing
-    if (selectedTimeZone && selectedTimeZone !== "") {
-        return;
-    }
+    // if (selectedTimeZone && selectedTimeZone !== "") {
+    //     return;
+    // }
     
     function getTimeZoneAbbreviation() {
         const date = new Date();
