@@ -686,7 +686,7 @@ class EventController extends BaseController
         ->select('rsvp_start_timezone','rsvp_end_timezone')
         ->first();
 
-        dd($getLastTimeZone->rsvp_start_timezone);
+        // dd($getLastTimeZone->rsvp_start_timezone);
         $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
         $user['bg_profile'] = ($user->bg_profile != null) ? asset('storage/bg_profile/' . $user->bg_profile) : asset('assets/front/image/Frame 1000005835.png');
         $date = Carbon::parse($user->created_at);
@@ -707,6 +707,7 @@ class EventController extends BaseController
             'yesvite_user',
             'groups',
            'imagecount',
+           'getLastTimeZone',
             // 'textData',
             'categories',
             'eventDetail'
