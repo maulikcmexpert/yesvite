@@ -1958,7 +1958,8 @@ class EventWallController extends BaseController
             ->where('event_id', $request->event_id)
             ->first();
 
-        if (!$creatEventPost || $request->isNewPost="0") {
+        if ($request->isNewPost="0" || !$creatEventPost) {
+            dd(1);
             // Create new event post if it doesn't exist
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $request->event_id;
