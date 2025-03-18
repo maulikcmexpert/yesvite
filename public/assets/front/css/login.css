@@ -96,6 +96,7 @@
     -ms-border-radius: 5px !important;
     -o-border-radius: 5px !important;
     margin-right: 8px;
+    padding-left: 0px !important;
 }
 
 .form-check-input:checked {
