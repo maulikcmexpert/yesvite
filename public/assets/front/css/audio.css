@@ -342,6 +342,10 @@
   #audioContainer .wrapper .pink-bar {
     top: 0px !important;
   }
+
+  .msg-body .grey-bar svg:nth-child(1), .msg-body .pink-bar svg:nth-child(1){
+    display: block !important;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 424px){
