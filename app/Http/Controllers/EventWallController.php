@@ -1953,13 +1953,13 @@ class EventWallController extends BaseController
 
         $user = Auth::guard('web')->user()->id;
 
-        dd($request);
+        // dd($request);
         // Find existing event post
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
 
-        if ($request->isNewPost="0" || !$creatEventPost) {
+        if ($request->isNewPost=="0" || !$creatEventPost) {
             // Create new event post if it doesn't exist
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $request->event_id;
