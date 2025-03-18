@@ -51,7 +51,7 @@ class VerifyUserIsVerified
         }
 
         if (!Auth::check()) {
-            return redirect()->route('login')->with('url.intended', $request->url());
+            return redirect()->route('/login')->with('url.intended', $request->url());
         }
         // return redirect('/')->with('msg_error', 'Unauthorised');
         // return redirect('/login');
