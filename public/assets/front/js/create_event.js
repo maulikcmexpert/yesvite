@@ -1203,6 +1203,28 @@ $(document).ready(function () {
 // }
 
 //only rsvp_date by prakash
+// function rsvp_by_date(start_time) {
+//     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
+//         .subtract(1, "days")
+//         .format("MM-DD-YYYY");
+
+//     $("#rsvp-by-date").daterangepicker({
+//         singleDatePicker: true,
+//         autoUpdateInput: false,
+//         minYear: 2024,
+//         minDate: moment().format("MM-DD-YYYY"), // Ensure format
+//         maxDate: adjustedStartTime, // Use formatted date
+//         locale: {
+//             format: "MM-DD-YYYY",
+//         },
+//         maxYear: parseInt(moment().format("YYYY"), 10),
+//     });
+
+//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
+//         $("#rsvp-by-date").next().addClass("floatingfocus");
+//     });
+// }
 function rsvp_by_date(start_time) {
     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
         .subtract(1, "days")
@@ -1210,84 +1232,62 @@ function rsvp_by_date(start_time) {
 
     $("#rsvp-by-date").daterangepicker({
         singleDatePicker: true,
-        autoUpdateInput: false,
+        autoApply: true,  // Automatically apply the date on click
+        autoUpdateInput: true,  // Update the input field instantly
         minYear: 2024,
-        minDate: moment().format("MM-DD-YYYY"), // Ensure format
-        maxDate: adjustedStartTime, // Use formatted date
+        minDate: moment().format("MM-DD-YYYY"),  // Ensure format
+        maxDate: adjustedStartTime,  // Use formatted date
         locale: {
             format: "MM-DD-YYYY",
         },
         maxYear: parseInt(moment().format("YYYY"), 10),
-    });
-
-    $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
-        $(this).val(picker.startDate.format("MM-DD-YYYY"));
+    }, function (start) {
+        // Automatically set the date on selection
+        $("#rsvp-by-date").val(start.format("MM-DD-YYYY"));
         $("#rsvp-by-date").next().addClass("floatingfocus");
     });
 }
 
-//only rsvp_date by prakash
-// $(function () {
-//     var current_event_date = $("#event-date").val();
 
-//     $("#rsvp-by-date").daterangepicker(
-//         {
-//             singleDatePicker: true,
-//             autoUpdateInput: false,
-//             //   showDropdowns: true,
-//             minYear: 1901,
-//             //   maxDate: current_event_date,
-//             //   minDate: moment().add(0, 'days'),
-//             minDate: moment().startOf("month"),
-//             // endDate: moment().endOf("month"),
-//             // minDate: moment().add(1, 'days'),
-//             minDate: moment(),
-//             locale: {
-//                 // format: 'YYYY-MM-DD'  // Set the desired format
-//                 format: "MM-DD-YYYY", // Set the desired format
-//             },
-//             maxYear: parseInt(moment().format("YYYY"), 10),
-//         },
-//         function (start, end, label) {
-//             //   var years = moment().diff(start, 'years');
-//             //   alert("You are " + years + " years old!");
-//         }
-//     );
-//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
-//         // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         $("#rsvp-by-date").next().addClass("floatingfocus");
-//     });
-//     $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
-//         // if (picker.startDate.isValid()) {
-//         //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
-//         //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         //     $("#rsvp-by-date").next().addClass("floatingfocus");
-//         // }
-//     });
-// });
+//only rsvp_date by prakash
 $(function () {
     var current_event_date = $("#event-date").val();
 
     $("#rsvp-by-date").daterangepicker(
         {
             singleDatePicker: true,
-            autoApply: true,  // Automatically applies the date on selection
-            autoUpdateInput: true,  // Automatically updates the input field
+            autoUpdateInput: false,
+            //   showDropdowns: true,
             minYear: 1901,
+            //   maxDate: current_event_date,
+            //   minDate: moment().add(0, 'days'),
             minDate: moment().startOf("month"),
+            // endDate: moment().endOf("month"),
+            // minDate: moment().add(1, 'days'),
             minDate: moment(),
             locale: {
+                // format: 'YYYY-MM-DD'  // Set the desired format
                 format: "MM-DD-YYYY", // Set the desired format
             },
             maxYear: parseInt(moment().format("YYYY"), 10),
         },
-        function (start) {
-            // Update the input field immediately after selecting the date
-            $("#rsvp-by-date").val(start.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
+        function (start, end, label) {
+            //   var years = moment().diff(start, 'years');
+            //   alert("You are " + years + " years old!");
         }
     );
+    $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+        // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        $("#rsvp-by-date").next().addClass("floatingfocus");
+    });
+    $("#rsvp-by-date").on("hide.daterangepicker", function (ev, picker) {
+        // if (picker.startDate.isValid()) {
+        //     // $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        //     $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        //     $("#rsvp-by-date").next().addClass("floatingfocus");
+        // }
+    });
 });
 
 // $(function () {
