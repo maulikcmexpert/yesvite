@@ -742,7 +742,18 @@ class EventListController extends BaseController
         $user_id = Auth::guard('web')->user()->id;
         $total_need_rsvp_event = EventInvitedUser::with('event','user') 
             ->whereHas('event', function ($query) {
-                $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
+                $query->where('is_draft_save', '0')
+                ->where(function ($q) {
+                    $q->where('start_date', '>', date('Y-m-d'))  // Future events
+                      ->orWhere(function ($subQuery) {
+                          $subQuery->where('start_date', '=', date('Y-m-d'))  // Today's events
+                                   ->whereRaw(
+                                       "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
+                                       [date('g:i A')]
+                                   );
+                      });
+                });
+                // ->where('start_date', '>=', date('Y-m-d'));
             })
             ->where(['user_id' => $user_id, 'rsvp_status' => NULL])
             ->get();
