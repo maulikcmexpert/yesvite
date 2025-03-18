@@ -30,7 +30,6 @@ class VerifyUserIsVerified
 
             $user = Auth::user();
             $currentSessionId = Session::getId();
-            $url="";
             
             // if ($user->current_session_id && $user->current_session_id !== $currentSessionId) {
             //     Auth::guard('web')->logout();
@@ -39,10 +38,7 @@ class VerifyUserIsVerified
 
             $user->current_session_id = $currentSessionId;
             $user->save();
-            // return $next($request);
-
-            return redirect()->intended(); // Redirect to intended page or home
-
+            return $next($request);
         }
 
         elseif($request->ajax()){
@@ -53,12 +49,12 @@ class VerifyUserIsVerified
             ]);
         }
 
-        if (!Auth::check()) {
-            $url=$request->url();
-            return redirect('/login')->with('url.intended', $request->url());
+        if (!$request->is('login') && !$request->is('register')) {
+            session(['url.intended' => $request->fullUrl()]);
         }
+
         // return redirect('/')->with('msg_error', 'Unauthorised');
-        // return redirect('/login');
+        return redirect('/login');
 
 
     }
