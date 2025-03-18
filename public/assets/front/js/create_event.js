@@ -1266,29 +1266,6 @@ function rsvp_by_date(start_time) {
 //         // }
 //     });
 // });
-$(function () {
-    var current_event_date = $("#event-date").val();
-
-    $("#rsvp-by-date").daterangepicker(
-        {
-            singleDatePicker: true,
-            autoApply: true,  // Automatically applies the date on selection
-            autoUpdateInput: true,  // Automatically updates the input field
-            minYear: 1901,
-            minDate: moment().startOf("month"),
-            minDate: moment(),
-            locale: {
-                format: "MM-DD-YYYY", // Set the desired format
-            },
-            maxYear: parseInt(moment().format("YYYY"), 10),
-        },
-        function (start) {
-            // Update the input field immediately after selecting the date
-            $("#rsvp-by-date").val(start.format("MM-DD-YYYY"));
-            $("#rsvp-by-date").next().addClass("floatingfocus");
-        }
-    );
-});
 
 // $(function () {
 //     var selectedDates = new Set();
