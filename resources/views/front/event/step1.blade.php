@@ -239,7 +239,8 @@
                                 <select class="form-select" name="start_time_zone" id="start-time-zone"
                                     onchange="getStartEndTimeZone()">
                                     @php
-                                        $start_time_zone = $getLastTimeZone->rsvp_start_timezone;
+                                        $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
+
                                         if (
                                             isset($eventDetail['rsvp_start_timezone']) &&
                                             $eventDetail['rsvp_start_timezone'] != ''
@@ -354,7 +355,8 @@
                                 <select class="form-select" name="end-time-zone" onchange="getStartEndTimeZone()"
                                     id="end-time-zone">
                                     @php
-                                        $end_time_zone = $getLastTimeZone->rsvp_end_timezone;
+                                        $end_time_zone = $getLastTimeZone->rsvp_end_timezone ?? '';
+
 
                                         if (
                                             isset($eventDetail['rsvp_end_time_set']) &&
