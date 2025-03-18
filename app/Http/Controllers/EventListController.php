@@ -2572,6 +2572,7 @@ class EventListController extends BaseController
             $uniqueCollection = $collection->unique('id');
             $eventPasttList = $uniqueCollection->values()->all();
 
+            dd($eventPasttList);
             usort($eventList, function ($a, $b) {
                 return strtotime($a['event_date']) - strtotime($b['event_date']);
             });
