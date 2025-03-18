@@ -301,8 +301,8 @@
 
 @media only screen and (max-width:575px){
   #audioContainer .progress-container svg {
-    max-width: 270px !important;
-}
+      max-width: 270px !important;
+  }
 }
 
 @media only screen and (min-width: 425px) and (max-width: 575px){
@@ -311,30 +311,38 @@
       max-width: 385px;
       min-width: 385px;
   }
+
   #audioContainer .progress-container svg {
       max-width: 200px !important;
   }
+
   #audioContainer .progress-container {
       max-width: 200px !important;
       min-width: 200px !important;
   }
+
   .grey-bar svg:nth-child(1){
       display: none;
   }
+
   .pink-bar svg:nth-child(1){
       display: none;
   }
+
   #audioContainer .progress-container {
       height: 37px;
       position: relative;
       top: 2px;
   }
+
   .time-elapsed{
       font-size: 12px;
   }
+
   .grey-bar svg:nth-child(2){
     display: block;
   }
+
   .pink-bar svg:nth-child(2){
     display: block;
   }
@@ -345,6 +353,12 @@
 
   .msg-body .grey-bar svg:nth-child(1), .msg-body .pink-bar svg:nth-child(1){
     display: block !important;
+  }
+  .msg-body .music-info {
+    top: 58% !important;
+  }
+  .msg-body .pink-bar {
+    top: -1px !important;
   }
 }
 
@@ -383,6 +397,16 @@
   }
   #audioContainer .wrapper .pink-bar {
     top: 0px !important;
+  }
+
+  .msg-body .grey-bar svg:nth-child(1), .msg-body .pink-bar svg:nth-child(1){
+    display: block !important;
+  }
+  .msg-body .music-info {
+    top: 58% !important;
+  }
+  .msg-body .pink-bar {
+    top: -1px !important;
   }
 }
 
