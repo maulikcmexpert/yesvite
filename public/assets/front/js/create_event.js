@@ -1070,6 +1070,7 @@ function startTimePicker() {
             format: "LT",
             useCurrent: false,
             ignoreReadonly: true,
+            keepOpen: true,  // Prevents closing on click
             stepping: 15,
             icons: {
                 up: "fa fa-chevron-up",
