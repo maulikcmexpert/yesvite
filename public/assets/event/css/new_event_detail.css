@@ -671,6 +671,7 @@
     max-width: 100%;
     width: 100%;
     height: 120px !important;
+    z-index: 99999;
 }
 
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
