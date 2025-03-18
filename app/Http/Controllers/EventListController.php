@@ -2164,260 +2164,260 @@ class EventListController extends BaseController
             }
         }
 
-        // if ($need_rsvp_to == 1) {
-        //     $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
-
-
-        //         if ($page == "upcoming") {
-        //             $query->where('is_draft_save', '0')
-        //                   ->where(function ($q) {
-        //                       $q->where('start_date', '>', date('Y-m-d')) 
-        //                         ->orWhere(function ($subQuery) {
-        //                             $subQuery->where('start_date', '=', date('Y-m-d'))  
-        //                                      ->whereRaw(
-        //                                          "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
-        //                                          [date('g:i A')]
-        //                                      );
-        //                         });
-        //                   })
-        //                   ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-        //                   ->orderBy('id', 'DESC');
-        //                 //   ->where('rsvp_status',NULL);
-
-        //         }
-                
-        //         if ($page == "past") {
-        //             $query->where('is_draft_save', '0')
-        //                   ->where(function ($q) {
-        //                       $q->where('end_date', '<', date('Y-m-d')) 
-        //                         ->orWhere(function ($subQuery) {
-        //                             $subQuery->where('end_date', '=', date('Y-m-d'))  
-        //                                      ->whereRaw(
-        //                                          "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
-        //                                          [date('g:i A')]
-        //                                      );
-        //                         });
-        //                   })
-        //                   ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-        //                   ->orderBy('start_date', 'desc');
-        //                 //   ->where('rsvp_status',NULL);
-        //         }
-                
-
-
-        //         $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
-        //             return $query->whereBetween('start_date', [$event_date, $end_event_date]);
-        //         });
-        //         $query->when($search != "", function ($query) use ($search) {
-        //             return $query->where('event_name', 'like', "%$search%");
-        //         });
-        //         $query->when($month && $year, function ($query) use ($month, $year) {
-        //             return   $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
-        //         });
-        //     })->whereHas('user', function ($query) {
-        //         $query->where('app_user', '1');
-        //     })->get();
-        //     // })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->get();
-        //     // ->paginate($this->perPage, ['*'], 'page', $page);
-        //     // Make sure to handle the retrieved $userNeedRsvpEventList accordingly
-        //     if (count($userNeedRsvpEventList) != 0) {
-        //         foreach ($userNeedRsvpEventList as $value) {
-        //             $eventDetail['id'] = $value->event->id;
-        //             $eventDetail['user_id'] = $value->event->user->id;
-        //             $eventDetail['event_name'] = $value->event->event_name;
-        //             $eventDetail['is_event_owner'] = ($value->event->user->id == $user->id) ? 1 : 0;
-        //             $isCoHost =     EventInvitedUser::where(['event_id' =>  $value->event->id, 'user_id' => $user->id])->first();
-        //             $cohost =  EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
-        //             $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
-        //             $eventDetail['is_notification_on_off']  = "";
-        //             if ($value->user->id == $user->id) {
-        //                 $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
-        //             } else {
-        //                 $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
-        //             }
-        //             $eventDetail['message_to_guests'] = $value->event->message_to_guests;
-        //             $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
-        //             $eventDetail['event_wall'] = (isset($value->event->event_settings->event_wall) && $value->event->event_settings->event_wall != "") ? $value->event->event_settings->event_wall : "";
-        //             $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
-        //             $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
-        //             $eventDetail['event_potluck'] = (isset($value->event->event_settings->podluck) && $value->event->event_settings->podluck != "") ? $value->event->event_settings->podluck : "";
-        //             $eventDetail['adult_only_party'] = (isset($value->event->event_settings->adult_only_party) && $value->event->event_settings->adult_only_party != "") ? $value->event->event_settings->adult_only_party : "";
-        //             $eventDetail['host_name'] = $value->event->hosted_by;
-        //             $eventDetail['host_firstname'] = $value->event->user->firstname;
-        //             $eventDetail['host_lastname'] = $value->event->user->lastname;
-        //             $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
-        //             $eventDetail['post_time'] =  $this->setupcomingpostTime($value->event->updated_at);
-        //             $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
-        //             $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit) && $value->event->event_settings->allow_limit != "") ? $value->event->event_settings->allow_limit : "";
-        //             $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
-
-        //             $eventDetail['event_images'] = "";
-        //             if (!empty($images)) {
-        //                 $eventDetail['event_images'] = asset('storage/event_images/' . $images->image);
-        //             }
-        //             $eventDetail['kids'] = 0;
-        //             $eventDetail['adults'] = 0;
-        //             $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id])->first();
-        //             if ($checkRsvpDone != null) {
-        //                 $eventDetail['kids'] = $checkRsvpDone->kids;
-        //                 $eventDetail['adults'] = $checkRsvpDone->adults;
-        //             }
-        //             $eventDetail['event_date'] = $value->event->start_date;
-        //             $eventDetail['event_date_only'] = Carbon::parse($value->event->start_date)->format('d');
-        //             $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('M d,Y'); // "21 Nov"
-        //             $eventDetail['event_month'] = Carbon::parse($value->event->start_date)->format('M'); // "21 Nov"
-        //             $eventDetail['event_day'] = Carbon::parse($value->event->start_date)->format('l'); // "Monday"
-        //             // $event_time = "-";
-        //             $event_time = "-";
-        //             if ($value->event->event_schedule->isNotEmpty()) {
-        //                 $event_time =  $value->event->event_schedule->first()->start_time;
-        //             }
-        //             $eventDetail['start_time'] =  $value->event->rsvp_start_time;
-        //             $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
-        //             $rsvp_status = "";
-        //             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
-        //                 $query->where('app_user', '1');
-        //             })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
-        //             if ($checkUserrsvp != null) {
-        //                 if ($checkUserrsvp->rsvp_status == '1') {
-        //                     $rsvp_status = '1'; // rsvp you'r going
-        //                 } else if ($checkUserrsvp->rsvp_status == '0') {
-        //                     $rsvp_status = '2'; // rsvp you'r not going
-        //                 }
-        //                 if ($checkUserrsvp->rsvp_status == NULL) {
-        //                     $rsvp_status = '0'; // rsvp button//
-        //                 }
-        //             }
-        //             $eventDetail['rsvp_status'] = $rsvp_status;
-        //             $total_notification = Notification::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'read' => '0'])->count();
-        //             $eventDetail['total_notification'] = $total_notification;
-        //             $eventDetail['event_detail'] = [];
-        //             if ($value->event_settings) {
-        //                 $eventData = [];
-        //                 if ($value->event->event_settings->allow_for_1_more == '1') {
-        //                     $eventData[] = "Can Bring Guests ( limit " . $value->event->event_settings->allow_limit . ")";
-        //                 }
-        //                 if ($value->event->event_settings->adult_only_party == '1') {
-        //                     $eventData[] = "Adults Only";
-        //                 }
-        //                 if ($value->event->rsvp_by_date_sets == '1') {
-        //                     $eventData[] = date('F d, Y', strtotime($value->event->rsvp_by_date));
-        //                 }
-        //                 if ($value->event->event_settings->podluck == '1') {
-        //                     $eventData[] = "Event Potluck";
-        //                 }
-        //                 if ($value->event->event_settings->gift_registry == '1') {
-        //                     $eventData[] = "Gift Registry";
-        //                 }
-        //                 if (empty($eventData)) {
-        //                     $eventData[] = date('F d, Y', strtotime($value->event->start_date));
-        //                     $numberOfGuest = EventInvitedUser::where('event_id', $value->event->id)->count();
-        //                     $eventData[] = "Number of guests : " . $numberOfGuest;
-        //                 }
-        //                 $eventDetail['event_detail'] = $eventData;
-        //             }
-        //             // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
-
-        //             //     $query->where('app_user', '1');
-        //             // })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
-        //             $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
-
-        //             $eventDetail['total_accept_event_user'] = $total_accept_event_user;
-        //             $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
-        //                 $query->where('app_user', '1');
-        //             })->where(['event_id' => $value->event->id])
-        //             ->wherenull('rsvp_status')
-
-        //             ->count();
-        //             $eventDetail['total_invited_user'] = $total_invited_user;
-
-        //             $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
-        //                 $query->where('app_user', '1');
-        //             })->where(['event_id' => $value->event->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
-        //             $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
-        //             $totalEvent =  Event::where('user_id', $value->event->user->id)->count();
-        //             $totalEventPhotos =  EventPost::where(['user_id' => $value->event->user->id, 'post_type' => '1'])->count();
-        //             $comments =  EventPostComment::where('user_id', $value->event->user->id)->count();
-
-        //             $eventDetail['user_profile'] = [
-        //                 'id' => $value->event->user->id,
-        //                 'profile' => empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile),
-        //                 'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->event->user->bg_profile),
-        //                 'gender' => ($value->event->user->gender != NULL) ? $value->event->user->gender : "",
-        //                 'username' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
-        //                 'location' => ($value->event->user->city != NULL) ? $value->event->user->city : "",
-        //                 'about_me' => ($value->event->user->about_me != NULL) ? $value->event->user->about_me : "",
-        //                 'created_at' => empty($value->event->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->event->user->created_at))),
-        //                 'total_events' => $totalEvent,
-        //                 'total_photos' => $totalEventPhotos,
-        //                 'visible' =>  $value->event->user->visible,
-        //                 'comments' => $comments
-        //             ];
-
-        //             $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
-        //             $eventList[] = $eventDetail;
-        //         }
-        //         if (!empty($eventList)) {
-        //             $last_month = $eventList[0]['event_month'];
-        //         }
-        //     }
-        // }
-
         if ($need_rsvp_to == 1) {
-            $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])
-                ->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
-                    if ($page == "upcoming") {
-                        $query->where('is_draft_save', '0')
-                              ->where(function ($q) {
-                                  $q->where('start_date', '>', date('Y-m-d'))
-                                    ->orWhere(function ($subQuery) {
-                                        $subQuery->where('start_date', '=', date('Y-m-d'))
-                                                 ->whereRaw(
-                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
-                                                     [date('g:i A')]
-                                                 );
-                                    });
-                              })
-                              ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                              ->orderBy('id', 'DESC');
+            $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
+
+
+                if ($page == "upcoming") {
+                    $query->where('is_draft_save', '0')
+                          ->where(function ($q) {
+                              $q->where('start_date', '>', date('Y-m-d')) 
+                                ->orWhere(function ($subQuery) {
+                                    $subQuery->where('start_date', '=', date('Y-m-d'))  
+                                             ->whereRaw(
+                                                 "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
+                                                 [date('g:i A')]
+                                             );
+                                });
+                          })
+                          ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                          ->orderBy('id', 'DESC');
+                        //   ->where('rsvp_status',NULL);
+
+                }
+                
+                if ($page == "past") {
+                    $query->where(['is_draft_save'=> '0', 'rsvp_status' => NULL])
+                          ->where(function ($q) {
+                              $q->where('end_date', '<', date('Y-m-d')) 
+                                ->orWhere(function ($subQuery) {
+                                    $subQuery->where('end_date', '=', date('Y-m-d'))  
+                                             ->whereRaw(
+                                                 "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+                                                 [date('g:i A')]
+                                             );
+                                });
+                          })
+                          ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+                          ->orderBy('start_date', 'desc');
+                        //   ->where('rsvp_status',NULL);
+                }
+                
+
+
+                $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
+                    return $query->whereBetween('start_date', [$event_date, $end_event_date]);
+                });
+                $query->when($search != "", function ($query) use ($search) {
+                    return $query->where('event_name', 'like', "%$search%");
+                });
+                $query->when($month && $year, function ($query) use ($month, $year) {
+                    return   $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
+                });
+            })->whereHas('user', function ($query) {
+                $query->where('app_user', '1');
+            })->get();
+            // })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->get();
+            // ->paginate($this->perPage, ['*'], 'page', $page);
+            // Make sure to handle the retrieved $userNeedRsvpEventList accordingly
+            if (count($userNeedRsvpEventList) != 0) {
+                foreach ($userNeedRsvpEventList as $value) {
+                    $eventDetail['id'] = $value->event->id;
+                    $eventDetail['user_id'] = $value->event->user->id;
+                    $eventDetail['event_name'] = $value->event->event_name;
+                    $eventDetail['is_event_owner'] = ($value->event->user->id == $user->id) ? 1 : 0;
+                    $isCoHost =     EventInvitedUser::where(['event_id' =>  $value->event->id, 'user_id' => $user->id])->first();
+                    $cohost =  EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
+                    $eventDetail['is_co_host'] = (isset($cohost) && $cohost->is_co_host != "") ? $cohost->is_co_host : "0";
+                    $eventDetail['is_notification_on_off']  = "";
+                    if ($value->user->id == $user->id) {
+                        $eventDetail['is_notification_on_off'] =  $value->notification_on_off;
+                    } else {
+                        $eventDetail['is_notification_on_off'] =  $isCoHost->notification_on_off;
                     }
-        
-                    if ($page == "past") {
-                        $query->where('is_draft_save', '0')
-                              ->where(function ($q) {
-                                  $q->where('end_date', '<', date('Y-m-d'))
-                                    ->orWhere(function ($subQuery) {
-                                        $subQuery->where('end_date', '=', date('Y-m-d'))
-                                                 ->whereRaw(
-                                                     "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
-                                                     [date('g:i A')]
-                                                 );
-                                    });
-                              })
-                              ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                              ->orderBy('start_date', 'desc');
+                    $eventDetail['message_to_guests'] = $value->event->message_to_guests;
+                    $eventDetail['host_profile'] = empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile);
+                    $eventDetail['event_wall'] = (isset($value->event->event_settings->event_wall) && $value->event->event_settings->event_wall != "") ? $value->event->event_settings->event_wall : "";
+                    $eventDetail["guest_list_visible_to_guests"] = $value->event->event_settings->guest_list_visible_to_guests;
+                    $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->event->id);
+                    $eventDetail['event_potluck'] = (isset($value->event->event_settings->podluck) && $value->event->event_settings->podluck != "") ? $value->event->event_settings->podluck : "";
+                    $eventDetail['adult_only_party'] = (isset($value->event->event_settings->adult_only_party) && $value->event->event_settings->adult_only_party != "") ? $value->event->event_settings->adult_only_party : "";
+                    $eventDetail['host_name'] = $value->event->hosted_by;
+                    $eventDetail['host_firstname'] = $value->event->user->firstname;
+                    $eventDetail['host_lastname'] = $value->event->user->lastname;
+                    $eventDetail['is_past'] = ($value->event->end_date < date('Y-m-d')) ? true : false;
+                    $eventDetail['post_time'] =  $this->setupcomingpostTime($value->event->updated_at);
+                    $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
+                    $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit) && $value->event->event_settings->allow_limit != "") ? $value->event->event_settings->allow_limit : "";
+                    $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
+
+                    $eventDetail['event_images'] = "";
+                    if (!empty($images)) {
+                        $eventDetail['event_images'] = asset('storage/event_images/' . $images->image);
                     }
-        
-                    // Filter by date range
-                    $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
-                        return $query->whereBetween('start_date', [$event_date, $end_event_date]);
-                    });
-        
-                    // Search by event name
-                    $query->when($search != "", function ($query) use ($search) {
-                        return $query->where('event_name', 'like', "%$search%");
-                    });
-        
-                    // Filter by month and year
-                    $query->when($month && $year, function ($query) use ($month, $year) {
-                        return $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
-                    });
-                })
-                ->whereHas('user', function ($query) {
-                    $query->where('app_user', '1');
-                })
-                ->get();
+                    $eventDetail['kids'] = 0;
+                    $eventDetail['adults'] = 0;
+                    $checkRsvpDone = EventInvitedUser::where(['event_id' => $value->event->id, 'user_id' => $user->id])->first();
+                    if ($checkRsvpDone != null) {
+                        $eventDetail['kids'] = $checkRsvpDone->kids;
+                        $eventDetail['adults'] = $checkRsvpDone->adults;
+                    }
+                    $eventDetail['event_date'] = $value->event->start_date;
+                    $eventDetail['event_date_only'] = Carbon::parse($value->event->start_date)->format('d');
+                    $eventDetail['event_date_mon'] = Carbon::parse($value->event->start_date)->format('M d,Y'); // "21 Nov"
+                    $eventDetail['event_month'] = Carbon::parse($value->event->start_date)->format('M'); // "21 Nov"
+                    $eventDetail['event_day'] = Carbon::parse($value->event->start_date)->format('l'); // "Monday"
+                    // $event_time = "-";
+                    $event_time = "-";
+                    if ($value->event->event_schedule->isNotEmpty()) {
+                        $event_time =  $value->event->event_schedule->first()->start_time;
+                    }
+                    $eventDetail['start_time'] =  $value->event->rsvp_start_time;
+                    $eventDetail['rsvp_start_timezone'] = $value->event->rsvp_start_timezone;
+                    $rsvp_status = "";
+                    $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
+                        $query->where('app_user', '1');
+                    })->where(['user_id' => $user->id, 'event_id' => $value->event->id])->first();
+                    if ($checkUserrsvp != null) {
+                        if ($checkUserrsvp->rsvp_status == '1') {
+                            $rsvp_status = '1'; // rsvp you'r going
+                        } else if ($checkUserrsvp->rsvp_status == '0') {
+                            $rsvp_status = '2'; // rsvp you'r not going
+                        }
+                        if ($checkUserrsvp->rsvp_status == NULL) {
+                            $rsvp_status = '0'; // rsvp button//
+                        }
+                    }
+                    $eventDetail['rsvp_status'] = $rsvp_status;
+                    $total_notification = Notification::where(['event_id' => $value->event->id, 'user_id' => $user->id, 'read' => '0'])->count();
+                    $eventDetail['total_notification'] = $total_notification;
+                    $eventDetail['event_detail'] = [];
+                    if ($value->event_settings) {
+                        $eventData = [];
+                        if ($value->event->event_settings->allow_for_1_more == '1') {
+                            $eventData[] = "Can Bring Guests ( limit " . $value->event->event_settings->allow_limit . ")";
+                        }
+                        if ($value->event->event_settings->adult_only_party == '1') {
+                            $eventData[] = "Adults Only";
+                        }
+                        if ($value->event->rsvp_by_date_sets == '1') {
+                            $eventData[] = date('F d, Y', strtotime($value->event->rsvp_by_date));
+                        }
+                        if ($value->event->event_settings->podluck == '1') {
+                            $eventData[] = "Event Potluck";
+                        }
+                        if ($value->event->event_settings->gift_registry == '1') {
+                            $eventData[] = "Gift Registry";
+                        }
+                        if (empty($eventData)) {
+                            $eventData[] = date('F d, Y', strtotime($value->event->start_date));
+                            $numberOfGuest = EventInvitedUser::where('event_id', $value->event->id)->count();
+                            $eventData[] = "Number of guests : " . $numberOfGuest;
+                        }
+                        $eventDetail['event_detail'] = $eventData;
+                    }
+                    // $total_accept_event_user = EventInvitedUser::whereHas('user', function ($query) {
+
+                    //     $query->where('app_user', '1');
+                    // })->where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'rsvp_d' => '1'])->count();
+                    $total_accept_event_user = EventInvitedUser::where(['event_id' => $value->event->id, 'rsvp_status' => '1', 'is_co_host' => '0', 'rsvp_d' => '1'])->count();
+
+                    $eventDetail['total_accept_event_user'] = $total_accept_event_user;
+                    $total_invited_user = EventInvitedUser::whereHas('user', function ($query) {
+                        $query->where('app_user', '1');
+                    })->where(['event_id' => $value->event->id])
+                    ->wherenull('rsvp_status')
+
+                    ->count();
+                    $eventDetail['total_invited_user'] = $total_invited_user;
+
+                    $total_refuse_event_user = EventInvitedUser::whereHas('user', function ($query) {
+                        $query->where('app_user', '1');
+                    })->where(['event_id' => $value->event->id, 'rsvp_status' => '0', 'rsvp_d' => '1'])->count();
+                    $eventDetail['total_refuse_event_user'] = $total_refuse_event_user;
+                    $totalEvent =  Event::where('user_id', $value->event->user->id)->count();
+                    $totalEventPhotos =  EventPost::where(['user_id' => $value->event->user->id, 'post_type' => '1'])->count();
+                    $comments =  EventPostComment::where('user_id', $value->event->user->id)->count();
+
+                    $eventDetail['user_profile'] = [
+                        'id' => $value->event->user->id,
+                        'profile' => empty($value->event->user->profile) ? "" : asset('storage/profile/' . $value->event->user->profile),
+                        'bg_profile' => empty($value->event->user->bg_profile) ? "" : asset('storage/bg_profile/' . $value->event->user->bg_profile),
+                        'gender' => ($value->event->user->gender != NULL) ? $value->event->user->gender : "",
+                        'username' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
+                        'location' => ($value->event->user->city != NULL) ? $value->event->user->city : "",
+                        'about_me' => ($value->event->user->about_me != NULL) ? $value->event->user->about_me : "",
+                        'created_at' => empty($value->event->user->created_at) ? "" :   str_replace(' ', ', ', date('F Y', strtotime($value->event->user->created_at))),
+                        'total_events' => $totalEvent,
+                        'total_photos' => $totalEventPhotos,
+                        'visible' =>  $value->event->user->visible,
+                        'comments' => $comments
+                    ];
+
+                    $eventDetail['event_plan_name'] = $value->event->subscription_plan_name;
+                    $eventList[] = $eventDetail;
+                }
+                if (!empty($eventList)) {
+                    $last_month = $eventList[0]['event_month'];
+                }
+            }
         }
+
+        // if ($need_rsvp_to == 1) {
+        //     $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])
+        //         ->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
+        //             if ($page == "upcoming") {
+        //                 $query->where('is_draft_save', '0')
+        //                       ->where(function ($q) {
+        //                           $q->where('start_date', '>', date('Y-m-d'))
+        //                             ->orWhere(function ($subQuery) {
+        //                                 $subQuery->where('start_date', '=', date('Y-m-d'))
+        //                                          ->whereRaw(
+        //                                              "STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')",
+        //                                              [date('g:i A')]
+        //                                          );
+        //                             });
+        //                       })
+        //                       ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+        //                       ->orderBy('id', 'DESC');
+        //             }
+        
+        //             if ($page == "past") {
+        //                 $query->where('is_draft_save', '0')
+        //                       ->where(function ($q) {
+        //                           $q->where('end_date', '<', date('Y-m-d'))
+        //                             ->orWhere(function ($subQuery) {
+        //                                 $subQuery->where('end_date', '=', date('Y-m-d'))
+        //                                          ->whereRaw(
+        //                                              "STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')",
+        //                                              [date('g:i A')]
+        //                                          );
+        //                             });
+        //                       })
+        //                       ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
+        //                       ->orderBy('start_date', 'desc');
+        //             }
+        
+        //             // Filter by date range
+        //             $query->when($event_date || $end_event_date, function ($query) use ($event_date, $end_event_date) {
+        //                 return $query->whereBetween('start_date', [$event_date, $end_event_date]);
+        //             });
+        
+        //             // Search by event name
+        //             $query->when($search != "", function ($query) use ($search) {
+        //                 return $query->where('event_name', 'like', "%$search%");
+        //             });
+        
+        //             // Filter by month and year
+        //             $query->when($month && $year, function ($query) use ($month, $year) {
+        //                 return $query->whereMonth('start_date', $month)->whereYear('start_date', $year);
+        //             });
+        //         })
+        //         ->whereHas('user', function ($query) {
+        //             $query->where('app_user', '1');
+        //         })
+        //         ->get();
+        // }
         
         if ($is_hosting == 0 && $invited_to == 0 && $need_rsvp_to == 0) {
             if ($page == "upcoming") {
