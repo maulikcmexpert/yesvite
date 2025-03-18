@@ -70,7 +70,7 @@
            role="tab"
            aria-controls="nav-potluck"
            aria-selected="{{ $page == 'potluck' ? 'true' : 'false' }}">
-            Potluck
+            Potluck List
         </a>
         @endif
     </div>
