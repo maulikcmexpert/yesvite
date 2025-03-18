@@ -123,6 +123,10 @@ header{
     color: #fff;
 }
 
+.header-profile-wrp .profile-drop-down-menu h5{
+    font-size: 16px;
+}
+
 .header-profile-wrp a img{
     border-radius: 50%;
 }
@@ -889,9 +893,9 @@ header{
         display: block;
     }
 
-    .header-profile-wrp{
+    /* .header-profile-wrp{
         display: none;
-    }
+    } */
     .moblie-menu-bar{
         display: block;
         width: 100%;
@@ -991,6 +995,18 @@ header{
     .active.mobile-menu-overlay {
         display: block;
     }
+    .header-profile-wrp .profile-drop-down-menu h5{
+        width: 35px;
+        max-width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .header-profile-wrp button.profile-drop-down-menu{
+        width: 35px;
+        max-width: 35px;
+        height: 35px;
+    }
 }
 
 @media only screen and (max-width: 575px) {
@@ -1035,6 +1051,15 @@ header{
     }
     .notification-drodown-body-inner{
         padding-right: 5px !important;
+    }
+    .header-profile-dropdown {
+        top: 30px !important;
+        left: auto !important;
+        right: -40px !important;
+        transform: translate3d(0px, 37px, 0px) !important;
+    }
+    .header-profile-dropdown .credits_balance_amout_wrp{
+        flex-direction: row !important;
     }
 
 }
