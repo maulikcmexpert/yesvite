@@ -2511,7 +2511,12 @@ class EventListController extends BaseController
             if ($page == "upcoming") {
                 $query->where('is_draft_save', '0')->where('start_date', '>=', date('Y-m-d'));
             } else {
-                $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'));
+                $query->where('is_draft_save', '0')->where('end_date', '<', date('Y-m-d'))
+                ->orWhere(function ($q) {
+                    $q->where('end_date', '=', date('Y-m-d')) // If event ends today
+                    ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') <= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);                   
+                 });
+
             }
         })->where('user_id', $user->id)->count();
 
