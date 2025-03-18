@@ -1203,28 +1203,28 @@ $(document).ready(function () {
 // }
 
 //only rsvp_date by prakash
-// function rsvp_by_date(start_time) {
-//     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
-//         .subtract(1, "days")
-//         .format("MM-DD-YYYY");
+function rsvp_by_date(start_time) {
+    var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
+        .subtract(1, "days")
+        .format("MM-DD-YYYY");
 
-//     $("#rsvp-by-date").daterangepicker({
-//         singleDatePicker: true,
-//         autoUpdateInput: false,
-//         minYear: 2024,
-//         minDate: moment().format("MM-DD-YYYY"), // Ensure format
-//         maxDate: adjustedStartTime, // Use formatted date
-//         locale: {
-//             format: "MM-DD-YYYY",
-//         },
-//         maxYear: parseInt(moment().format("YYYY"), 10),
-//     });
+    $("#rsvp-by-date").daterangepicker({
+        singleDatePicker: true,
+        autoUpdateInput: false,
+        minYear: 2024,
+        minDate: moment().format("MM-DD-YYYY"), // Ensure format
+        maxDate: adjustedStartTime, // Use formatted date
+        locale: {
+            format: "MM-DD-YYYY",
+        },
+        maxYear: parseInt(moment().format("YYYY"), 10),
+    });
 
-//     $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
-//         $(this).val(picker.startDate.format("MM-DD-YYYY"));
-//         $("#rsvp-by-date").next().addClass("floatingfocus");
-//     });
-// }
+    $("#rsvp-by-date").on("apply.daterangepicker", function (ev, picker) {
+        $(this).val(picker.startDate.format("MM-DD-YYYY"));
+        $("#rsvp-by-date").next().addClass("floatingfocus");
+    });
+}
 
 //only rsvp_date by prakash
 // $(function () {
