@@ -1111,6 +1111,7 @@
 
 .edit_checkout {
     width: calc(100% - 5%);
+    min-width: max-content;
     text-align: center;
 }
 
