@@ -2165,7 +2165,7 @@ class EventListController extends BaseController
         }
 
         if ($need_rsvp_to == 1) {
-            $userNeedRsvpEventList = EventInvitedUser::whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
+            $userNeedRsvpEventList = EventInvitedUser::where(['user_id' => $user->id, 'rsvp_status' => NULL])->whereHas('event', function ($query) use ($event_date, $end_event_date, $search, $month, $year, $page) {
 
 
                 if ($page == "upcoming") {
@@ -2181,8 +2181,8 @@ class EventListController extends BaseController
                                 });
                           })
                           ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                          ->orderBy('id', 'DESC')
-                          ->where('rsvp_status',NULL);
+                          ->orderBy('id', 'DESC');
+                        //   ->where('rsvp_status',NULL);
 
                 }
                 
@@ -2199,8 +2199,8 @@ class EventListController extends BaseController
                                 });
                           })
                           ->with(['event_image', 'event_settings', 'user', 'event_schedule'])
-                          ->orderBy('start_date', 'desc')
-                          ->where('rsvp_status',NULL);
+                          ->orderBy('start_date', 'desc');
+                        //   ->where('rsvp_status',NULL);
                 }
                 
 
@@ -2216,7 +2216,8 @@ class EventListController extends BaseController
                 });
             })->whereHas('user', function ($query) {
                 $query->where('app_user', '1');
-            })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->get();
+            })->get();
+            // })->where(['user_id' => $user->id, 'rsvp_status' => NULL])->get();
             // ->paginate($this->perPage, ['*'], 'page', $page);
             // Make sure to handle the retrieved $userNeedRsvpEventList accordingly
             if (count($userNeedRsvpEventList) != 0) {
