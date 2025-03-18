@@ -1052,5 +1052,10 @@ header{
     .notification-drodown-body-inner{
         padding-right: 5px !important;
     }
+    .header-profile-dropdown {
+        top: 30px !important;
+        left: auto !important;
+        right: -40px !important;
+    }
 
 }
