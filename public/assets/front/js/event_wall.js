@@ -1512,13 +1512,27 @@ $(document).ready(function () {
 
                             let options = pollData.poll_options || []; // Get poll options
 
-                            $(".poll-options input[name='options[]']").each(
-                                (index, element) => {
-                                    if (options[index]) {
-                                        $(element).val(options[index].option); // Set existing options
-                                    }
+                            // $(".poll-options input[name='options[]']").each(
+                            //     (index, element) => {
+                            //         if (options[index]) {
+                            //             $(element).val(options[index].option); // Set existing options
+                            //         }
+                            //     }
+                            // );
+                            $(".poll-options input[name='options[]']").each((index, element) => {
+                                if (options[index]) {
+                                    $(element).val(options[index].option); // Update existing inputs
                                 }
-                            );
+                            });
+
+                            // Append only the missing options
+                            if (options.length > $(".poll-options input[name='options[]']").length) {
+                                options.slice($(".poll-options input[name='options[]']").length).forEach(option => {
+                                    $(".poll-options").append(`<input type="text" name="options[]" value="${option.option}" />`);
+                                });
+                            }
+
+
                         }
                     }
 
