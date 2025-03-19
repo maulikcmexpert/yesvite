@@ -1118,10 +1118,14 @@ $(document).ready(function () {
             // }
 
             // Set post type based on presence of an uploaded image or entered content
-            if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
-                photoPostType.value = 1;
+            if (photoPostType) {
+                if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
+                    photoPostType.value = 1;
+                } else {
+                    photoPostType.value = 0;
+                }
             } else {
-                photoPostType.value = 0;
+                console.error("photoPostType element not found!");
             }
 
 
