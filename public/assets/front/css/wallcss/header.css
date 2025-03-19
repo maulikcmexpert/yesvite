@@ -1041,6 +1041,18 @@ header{
     .google-add .app-store.ms-auto{
         margin-left: 0px !important;
     }
+    .google-add{
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+    }
+    .close_advertise{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        z-index: 10;
+    }
 }
 
 @media only screen and (max-width: 424px) {
