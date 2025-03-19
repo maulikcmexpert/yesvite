@@ -11,7 +11,7 @@
             <img src="{{asset('assets/front/image/play_store.svg')}}" alt="google-app">
         </a>
         {{-- <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app"  target="_blank"> --}}
-        <a href="{{ route('open-app')}}" class="mobile-app"  target="_blank">
+        <a href="#" class="mobile-app"  target="_blank">
             <img src="{{asset('assets/front/image/app_store.svg')}}" alt="mobile-app">
         </a>
     </div>
@@ -24,3 +24,38 @@
     </a>
 </div>
 @endif
+<script>
+    $(document).on('click','.mobile-app',function(){
+        openApp();
+    });
+    function openApp() {
+        const appLink = "comappyesvite://somepage";
+        const appStoreLink = "https://apps.apple.com/app/6736650042";
+        
+        let appOpened = false;
+
+        // Use `pagehide` to detect if the app opened successfully
+        const onPageHide = () => {
+            appOpened = true;
+        };
+
+        window.addEventListener('pagehide', onPageHide);
+
+        // Open the app
+        const now = Date.now();
+        // alert(now);
+
+        window.location.href = appLink;
+
+  
+        setTimeout(() => {
+            const elapsed = Date.now() - now;
+            if (!appOpened && elapsed<1500) {
+                window.location.href = appStoreLink;  // App Store redirect
+            }
+
+            // Clean up event listener
+            window.removeEventListener('pagehide', onPageHide);
+        }, 1500);
+    }
+</script>
