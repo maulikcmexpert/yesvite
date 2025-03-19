@@ -64,6 +64,18 @@ Route::get('/', [HomeFrontController::class, 'homeDesign'])->name('front.home')-
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
+
+Route::get('open-app', function () {
+    // Static deep link to open the mobile app
+    $deepLink = "comappyesvite://open"; 
+
+    // Fallback URL in case the app is not installed
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";
+
+    return view('deep-link', compact('deepLink', 'fallbackUrl'));
+});
+
+
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
 Route::get('features', [HomeFrontController::class, 'index'])->name('features');
@@ -275,16 +287,7 @@ Route::middleware('checkUserExist')->group(function () {
     
     //     return view('deep-link', compact('deepLink', 'fallbackUrl'));
     // });
-    Route::get('open-app', function () {
-        // Static deep link to open the mobile app
-        $deepLink = "comappyesvite://open"; 
-    
-        // Fallback URL in case the app is not installed
-        $fallbackUrl = "https://apps.apple.com/app/6736650042";
-    
-        return view('deep-link', compact('deepLink', 'fallbackUrl'));
-    });
-    
+ 
     
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
