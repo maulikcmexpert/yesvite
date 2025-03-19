@@ -4,71 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
-   
     <script>
-      
-            function openApp() {
-            const appLink = "comappyesvite://somepage";
-            const appStoreLink = "https://apps.apple.com/app/6736650042";
-
+        document.addEventListener('DOMContentLoaded', () => {
+            const appLink = "{{ $deepLink }}";
+            const fallbackUrl = "{{ $fallbackUrl }}";
+            
             let hasFocus = true;
-
-            // Listen for visibility change
+    
+            // Detect if the page becomes hidden (app opened)
             const onVisibilityChange = () => {
                 if (document.visibilityState === 'hidden') {
-                    hasFocus = false;  // App opened successfully
+                    hasFocus = false;  // The app opened successfully
                 }
             };
-
+    
             document.addEventListener('visibilitychange', onVisibilityChange);
-
+    
             // Open the app
             const now = Date.now();
             window.location.href = appLink;
-
+    
+            // Fallback to App Store if app is not opened
             setTimeout(() => {
                 document.removeEventListener('visibilitychange', onVisibilityChange);
-
-                const elapsed = Date.now() - now;
                 
-                // If the app did not open (still has focus), go to the App Store
+                const elapsed = Date.now() - now;
+    
+                // If still visible, redirect to the App Store
                 if (hasFocus || elapsed < 1200) {
-                    window.location.href = appStoreLink;
+                    window.location.href = fallbackUrl;
                 }
             }, 1500);
-        }
-
-        // function openApp() {
-        //     const appLink = "comappyesvite://somepage";
-        //     const appStoreLink = "https://apps.apple.com/app/6736650042";
+        });
+    </script>
+    {{-- <script>
+      
+   
+        function openApp() {
+            const appLink = "comappyesvite://somepage";
+            const appStoreLink = "https://apps.apple.com/app/6736650042";
             
-        //     let appOpened = false;
+            let appOpened = false;
 
-        //     // Use `pagehide` to detect if the app opened successfully
-        //     const onPageHide = () => {
-        //         appOpened = true;
-        //     };
+            // Use `pagehide` to detect if the app opened successfully
+            const onPageHide = () => {
+                appOpened = true;
+            };
 
-        //     window.addEventListener('pagehide', onPageHide);
+            window.addEventListener('pagehide', onPageHide);
 
-        //     // Open the app
-        //     const now = Date.now();
-        //     // alert(now);
+            // Open the app
+            const now = Date.now();
+            // alert(now);
 
-        //     window.location.href = appLink;
+            window.location.href = appLink;
 
       
-        //     setTimeout(() => {
-        //         const elapsed = Date.now() - now;
-        //         if (!appOpened) {
-        //             window.location.href = appStoreLink;  // App Store redirect
-        //         }
+            setTimeout(() => {
+                const elapsed = Date.now() - now;
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // App Store redirect
+                }
 
-        //         // Clean up event listener
-        //         window.removeEventListener('pagehide', onPageHide);
-        //     }, 1500);
-        // }
-    </script>
+                // Clean up event listener
+                window.removeEventListener('pagehide', onPageHide);
+            }, 1500);
+        }
+    </script> --}}
     {{-- <script>
         function openApp() {
             // Try opening the Yesvite app
