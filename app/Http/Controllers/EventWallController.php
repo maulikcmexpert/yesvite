@@ -1588,14 +1588,14 @@ class EventWallController extends BaseController
     public function createPost(Request $request)
     {
         $user = Auth::guard('web')->user();
-        
+
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
         if ($creatEventPost && $request->isNewPost=="1") {
-            // Delete old images
+
 
 
             $msg = 'Event Post updated successfully!';
@@ -1942,7 +1942,7 @@ class EventWallController extends BaseController
 
     public function createPoll(Request $request)
     {
-       
+
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
