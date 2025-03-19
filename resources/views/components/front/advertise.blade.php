@@ -36,32 +36,34 @@
         
         let appOpened = false;
 
-        // Track whether the page loses focus (app opened)
-        const handleBlur = () => {
-            appOpened = true;  // App opened
+        // Detect app open with pagehide (works better on iOS Safari)
+        const onPageHide = () => {
+            appOpened = true;  // App opened successfully
         };
+        
+        window.addEventListener('pagehide', onPageHide);
 
-        window.addEventListener('blur', handleBlur);
-
-        // Open the app using iframe navigation
+        // Use iframe navigation to bypass Safari restrictions
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.src = appLink;
         document.body.appendChild(iframe);
 
-        // Fallback to App Store if the app doesn't open
+        // Fallback to App Store if the app is not installed
         const fallbackTimeout = 1500;  
         const timer = setTimeout(() => {
             if (!appOpened) {
                 window.location.href = appStoreLink;  // Redirect to App Store
             }
             
-            // Cleanup
+            // Clean up
             document.body.removeChild(iframe);
-            window.removeEventListener('blur', handleBlur);
+            window.removeEventListener('pagehide', onPageHide);
+            clearTimeout(timer);
         }, fallbackTimeout);
     }
 </script>
+
 
 
 {{-- <script>
