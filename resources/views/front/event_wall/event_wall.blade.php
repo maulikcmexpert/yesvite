@@ -149,7 +149,7 @@
                                                                             class="fa-solid fa-ellipsis"></i></button>
                                                                     <ul class="dropdown-menu">
 
-                                                                        @if ($post['user_id'] == $login_user_id)
+                                                                        @if ($post['user_id'] != $login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item editPostBtn"
@@ -205,7 +205,7 @@
                                                                             </button>
                                                                         </li>
                                                                         @endif
-                                                                        @if ($post['user_id'] != $login_user_id)
+                                                                        @if ($post['user_id'] !== $login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item hide-post-btn postControlButton"
