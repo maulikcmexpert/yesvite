@@ -1520,6 +1520,7 @@ $(document).ready(function () {
                                     return;
                                 }
                                 if (imagePreview.children.length === 0) {
+                                    alert();
                                     uploadImgInner.removeClass("d-none");
 
 
