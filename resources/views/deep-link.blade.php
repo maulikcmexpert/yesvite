@@ -23,6 +23,7 @@
     //     if (document.hidden) {
     //         appOpened = true;
             window.location.href = appLink;
+            return;
 
               // Redirect to App Store
 
