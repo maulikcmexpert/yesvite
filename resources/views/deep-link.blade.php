@@ -7,29 +7,30 @@
     
     
     <script>
-        let appOpened = false;
-
         function openApp() {
             const now = Date.now();
+            let timeout;
 
-            // Listen for visibility change
-            document.addEventListener("visibilitychange", () => {
-                if (document.hidden) {
-                    appOpened = true;  // The app is opened
-                }
-            });
+            // Create an iframe to trigger the app launch
+            const iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            iframe.src = "comappyesvite://somepage";
+            document.body.appendChild(iframe);
 
-            // Try to open the app
-            window.location.href = "comappyesvite://somepage";
-
-            // Wait for 2 seconds and check if the app opened
-            setTimeout(() => {
+            // Use a timer to detect if the app opened
+            timeout = setTimeout(() => {
                 const elapsed = Date.now() - now;
-                if (!appOpened && elapsed < 2000) {
-                    // If app didn't open, redirect to the App Store
+                if (elapsed < 1500) {
+                    // App did not open, redirect to App Store
                     window.location.href = "https://apps.apple.com/app/6736650042";
                 }
-            }, 1500);
+            }, 1200);
+
+            // Cleanup iframe after 2 seconds
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+                clearTimeout(timeout);
+            }, 2000);
         }
     </script>
     {{-- <script>
