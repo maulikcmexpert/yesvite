@@ -22,6 +22,8 @@
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true;
+            window.location.href = appLink;  // Redirect to App Store
+
         }
     };
     
@@ -29,6 +31,7 @@
 
     // Open the app using the iframe
     iframe.src = appLink;
+    alert(appOpened);
 
     // Fallback to App Store after timeout
     setTimeout(() => {
