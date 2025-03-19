@@ -1403,17 +1403,8 @@ $(document).ready(function () {
                     // Set hidden input values
                     // Set the radio button selection
 
-                    // Uncheck all radio buttons first
-                    $('input[name="post_privacy"]').prop("checked", false); // Reset
-                    $(
-                        'input[name="post_privacy"][value="' +
-                        savedVisibility +
-                        '"]'
-                    )
-                        .prop("checked", true)
-                        .trigger("change");
-                    // Ensure savedVisibility is defined
-                    let savedVisibility = postData.post_privacy || "1"; // Default to "1" if undefined
+
+                    let savedVisibility = postData.post_privacy  // Default to "1" if undefined
 
                     // Uncheck all radio buttons first
                     $('input[name="post_privacy"]').prop("checked", false);
