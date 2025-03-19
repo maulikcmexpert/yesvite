@@ -1519,7 +1519,7 @@ $(document).ready(function () {
                                     console.error("Media ID not found. Check if data-id is correctly set.");
                                     return;
                                 }
-                                if ($("#imagePreview").children().length === 0) {
+                                if ($("#imagePreview").length == 0) {
                                     console.log($("#imagePreview").children().length === 0);
 
                                     uploadImgInner.removeClass("d-none"); // Hide the container
