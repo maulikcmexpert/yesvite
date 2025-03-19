@@ -291,14 +291,14 @@
             </button>
         </div>
         @else
-        <!-- <div class="guest-checkout new-edit-save-btn">
+        <div class="guest-checkout new-edit-save-btn">
             <div>
                 <a href="#" class="cmn-btn saveDesignOnly">Save Changes</a>
             </div>
-        </div> -->
+        </div>
 
 
-        <div class="design-seting">
+        {{-- <div class="design-seting">
             <a href="#" class="d-flex previousImeg">
                 <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +306,7 @@
                     </svg>
                 </span>
                 <h5 class="ms-2">Choose Design</h5>
-            </a>
+            </a> --}}
             {{-- <a href="#" class="d-flex"> --}}
                 {{-- <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -316,7 +316,7 @@
                 <h5 class="ms-2">Edit Design</h5> --}}
             {{-- </a> --}}
             {{-- <button type="button" class="d-flex footer-bottom-btn li_event_detail" id="next_design"> --}}
-            <button type="button" class="d-flex footer-bottom-btn li_event_details">
+            {{-- <button type="button" class="d-flex footer-bottom-btn li_event_details">
                 <h5 class="me-2">Next: Event Details</h5>
                 <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -326,7 +326,7 @@
                             stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </span>
-            </button>
+            </button> --}}
         </div>
 
 

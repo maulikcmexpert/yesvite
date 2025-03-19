@@ -25,59 +25,47 @@
 </div>
 @endif
 @push('scripts')
-{{-- <script>
+<script>
     $(document).on('click', '.mobile-app', function () {
         openApp();
     });
 
     function openApp() {
-        const universalLink = "https://apps.apple.com/app/6736650042";  // Universal Link
-        const appLink = "comappyesvite://somepage";               // Deep Link
+        const appLink = "comappyesvite://somepage";
         const appStoreLink = "https://apps.apple.com/app/6736650042";
-
+        
         let appOpened = false;
-        const timeout = 1500;
 
-        // Use Universal Link for iOS Safari (reliable)
-        if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
-            window.location.href = universalLink;
-        } else {
-            // Use hidden iframe for unsupported browsers (Chrome)
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = appLink;
-            document.body.appendChild(iframe);
+        // Detect app open with pagehide (works better on iOS Safari)
+        const onPageHide = () => {
+            appOpened = true;  // App opened successfully
+        };
+        
+        window.addEventListener('pagehide', onPageHide);
 
-            const timer = setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = appStoreLink;  // Fallback to App Store
-                }
-                document.body.removeChild(iframe);
-                clearTimeout(timer);
-            }, timeout);
-        }
+        // Use iframe navigation to bypass Safari restrictions
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appLink;
+        document.body.appendChild(iframe);
+
+        // Fallback to App Store if the app is not installed
+        const fallbackTimeout = 1500;  
+        const timer = setTimeout(() => {
+            if (!appOpened) {
+                window.location.href = appStoreLink;  // Redirect to App Store
+            }
+            
+            // Clean up
+            document.body.removeChild(iframe);
+            window.removeEventListener('pagehide', onPageHide);
+            clearTimeout(timer);
+        }, fallbackTimeout);
     }
-</script> --}}
+</script>
 
-<script>
-$(document).ready(function() {
-  const appURL = 'comappyesvite://somepage';
-  const appStoreURL = 'https://apps.apple.com/app/6736650042';
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (isMobile) {
-    const startTime = new Date().getTime();
-    window.location = appURL;
 
-    setTimeout(function() {
-      const now = new Date().getTime();
-      if (now - startTime < 2000) {
-        window.location = appStoreURL;
-      }
-    }, 1500);
-  }
-});
-<script/>
 {{-- <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
