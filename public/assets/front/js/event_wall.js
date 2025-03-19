@@ -1115,7 +1115,7 @@ $(document).ready(function () {
 
     // Case 2: If photo upload is NOT triggered and no image is uploaded, but content is present, allow form submission
     if (!isPhotoUploadTriggered && !isPhotoUploaded && postContent !== "") {
-        $("#yourForm").submit();
+        $("#photoForm").submit();
         return;
     }
 
