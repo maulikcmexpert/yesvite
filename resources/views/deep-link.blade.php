@@ -8,29 +8,36 @@
     
     <script>
         function openApp() {
-            const now = Date.now();
-            let timeout;
+            const appLink = "comappyesvite://somepage";
+            const appStoreLink = "https://apps.apple.com/app/6736650042";
+            
+            let appOpened = false;
 
-            // Create an iframe to trigger the app launch
-            const iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = "comappyesvite://somepage";
-            document.body.appendChild(iframe);
-
-            // Use a timer to detect if the app opened
-            timeout = setTimeout(() => {
-                const elapsed = Date.now() - now;
-                if (elapsed < 1500) {
-                    // App did not open, redirect to App Store
-                    window.location.href = "https://apps.apple.com/app/6736650042";
+            // Detect visibility change to confirm app open event
+            const onVisibilityChange = () => {
+                if (document.hidden) {
+                    appOpened = true;
                 }
-            }, 1200);
+            };
+            
+            document.addEventListener('visibilitychange', onVisibilityChange);
 
-            // Cleanup iframe after 2 seconds
+            // Open the app
+            const now = Date.now();
+            window.location.href = appLink;
+
+            // Check after 1.5 seconds if the app opened
             setTimeout(() => {
-                document.body.removeChild(iframe);
-                clearTimeout(timeout);
-            }, 2000);
+                const elapsed = Date.now() - now;
+
+                // If app did NOT open, redirect to App Store
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;
+                }
+
+                // Clean up event listener
+                document.removeEventListener('visibilitychange', onVisibilityChange);
+            }, 1500);
         }
     </script>
     {{-- <script>
