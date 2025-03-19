@@ -33,33 +33,33 @@
     function openApp() {
         const appLink = "comappyesvite://somepage";
         const appStoreLink = "https://apps.apple.com/app/6736650042";
-
+        
         let appOpened = false;
-        const timeout = 1500;
 
-        // Create an invisible iframe to attempt app opening
+        // Track whether the page loses focus (app opened)
+        const handleBlur = () => {
+            appOpened = true;  // App opened
+        };
+
+        window.addEventListener('blur', handleBlur);
+
+        // Open the app using iframe navigation
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.src = appLink;
         document.body.appendChild(iframe);
 
-        // Fallback to App Store if app doesn't open
+        // Fallback to App Store if the app doesn't open
+        const fallbackTimeout = 1500;  
         const timer = setTimeout(() => {
             if (!appOpened) {
                 window.location.href = appStoreLink;  // Redirect to App Store
             }
-            document.body.removeChild(iframe);  // Clean up
-        }, timeout);
-
-        // Detect if the app opens successfully
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === 'hidden') {
-                appOpened = true;  // App opened successfully
-                clearTimeout(timer);
-            }
-        };
-
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+            
+            // Cleanup
+            document.body.removeChild(iframe);
+            window.removeEventListener('blur', handleBlur);
+        }, fallbackTimeout);
     }
 </script>
 
