@@ -1101,8 +1101,7 @@ $(document).ready(function () {
         } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
             var imagePreview = document.getElementById("imagePreview");
-            var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
-            console.log(postContent);
+
 
 
             // Check if no photo is uploaded AND no content is entered
