@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-
+        let postType = postData.post_type; // Get post type from the existing post data
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1104,16 +1104,34 @@ $(document).ready(function () {
             var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
 
             // Check if no photo is uploaded AND no content is entered
-            if (
-                (!photoInput || photoInput.files.length === 0) &&
-                imagePreview.children.length === 0 ||
-                postContent === ""
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
-                return;
-            }
+            let isPhotoUploaded =
+        (photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0;
+
+    // If post_type is "0", allow form submission without a photo
+    if (postType == "0") {
+        $(".create-post-upload-img-wrp").addClass("d-none");
+        $("#yourForm").submit();
+        return;
+    }
+
+    // Case 1: If photo upload is triggered but no content, show error
+    if (isPhotoUploadTriggered && postContent === "") {
+        toastr.error("Please enter some content for the photo post.");
+        return;
+    }
+
+    // Case 2: If photo upload is NOT triggered and no image is uploaded, but content is present, allow form submission
+    if (!isPhotoUploadTriggered && !isPhotoUploaded && postContent !== "") {
+        $("#yourForm").submit();
+        return;
+    }
+
+    // Case 3: If neither content nor image is present, show an error
+    if (!isPhotoUploaded && postContent === "") {
+        toastr.error("Please upload a photo or enter some content for the post.");
+        return;
+    }
+
 
             // Set post type based on presence of an uploaded image or entered content
             if (
@@ -1166,7 +1184,9 @@ $(document).ready(function () {
 //     openstoryModal(); // Open the modal after the page loads
 // };
 
+let isPhotoUploadTriggered = false;
 
+// Track if the photo upload button was clicked
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
     $(".isNewPost").val('0');
@@ -1174,6 +1194,7 @@ $("#photos_click").on("click", function () {
     $(".create-post-head-upload-btn").addClass("d-none");
     $("#create-photo-btn").trigger("click");
 
+    isPhotoUploadTriggered = true; // Set the flag to true
 });
 $("#poll_click").on("click", function () {
     $(".isNewPost").val('0');
