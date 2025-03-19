@@ -1596,7 +1596,7 @@ class EventWallController extends BaseController
         ->pluck('id')
         ->toArray();
 
-    dd($get_all_image_post); // Output: [474, 475, 476, 479]
+    dd($mediaIds,$get_all_image_post); // Output: [474, 475, 476, 479]
             // dd($get_all_image_post);
 
         // Find existing post by event_id and user_id
