@@ -1520,7 +1520,7 @@ $(document).ready(function () {
                                     return;
                                 }
                                 if ($(this).length == 0) {
-alert();
+
 
                                     uploadImgInner.removeClass("d-none"); // Hide the container
                                 }
@@ -1535,7 +1535,11 @@ alert();
 
                             });
 
+                            if ($("#imagePreview").length == 0) {
 
+
+                                uploadImgInner.removeClass("d-none"); // Hide the container
+                            }
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
