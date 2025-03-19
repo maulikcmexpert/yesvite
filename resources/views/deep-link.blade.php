@@ -9,7 +9,7 @@
         function openApp() {
             const appLink = "comappyesvite://somepage";
             const appStoreLink = "https://apps.apple.com/app/6736650042";
-            const isNot;
+            
             let appOpened = false;
 
             // Use `pagehide` to detect if the app opened successfully
@@ -30,10 +30,8 @@
             // alert(appOpened);
             // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
-                isNot=1;
                 const elapsed = Date.now() - now;
-                alert(elapsed);
-                if (!appOpened &&  isNot==1) {
+                if (!appOpened && elapsed < 1500) {
                     window.location.href = appStoreLink;  // App Store redirect
                 }
 
