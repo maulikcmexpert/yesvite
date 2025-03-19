@@ -33,35 +33,74 @@
         openApp();
     });
     function openApp() {
-        const appLink = "comappyesvite://somepage";
-        const appStoreLink = "https://apps.apple.com/app/6736650042";
-        
-        let appOpened = false;
+    const appLink = "comappyesvite://somepage";
+    const appStoreLink = "https://apps.apple.com/app/6736650042";
+    
+    let appOpened = false;
 
-        // Use `pagehide` to detect if the app opened successfully
-        const onPageHide = () => {
+    // Create an iframe to attempt to open the app (prevents accidental redirections)
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+
+    // Capture `visibilitychange` to detect if the app opened
+    const onVisibilityChange = () => {
+        if (document.hidden) {
             appOpened = true;
-        };
+        }
+    };
 
-        window.addEventListener('pagehide', onPageHide);
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
-        // Open the app
-        const now = Date.now();
-        // alert(now);
+    const now = Date.now();
 
-        window.location.href = appLink;
+    // Try opening the app via iframe (for better reliability)
+    iframe.src = appLink;
+    window.location.href = appLink; // Fallback to direct URL attempt
+
+    setTimeout(() => {
+        const elapsed = Date.now() - now;
+
+        if (!appOpened && elapsed < 1502) {
+            window.location.href = appStoreLink;  // Redirect to App Store
+        }
+
+        // Clean up event listener and remove iframe
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+        document.body.removeChild(iframe);
+    }, 1500);
+}
+
+    // function openApp() {
+    //     const appLink = "comappyesvite://somepage";
+    //     const appStoreLink = "https://apps.apple.com/app/6736650042";
+        
+    //     let appOpened = false;
+
+    //     // Use `pagehide` to detect if the app opened successfully
+    //     const onPageHide = () => {
+    //         appOpened = true;
+    //     };
+
+    //     window.addEventListener('pagehide', onPageHide);
+
+    //     // Open the app
+    //     const now = Date.now();
+    //     // alert(now);
+
+    //     window.location.href = appLink;
 
   
-        setTimeout(() => {
-            const elapsed = Date.now() - now;
-            // alert(elapsed);
-            if (!appOpened && elapsed<1502) {
-                window.location.href = appStoreLink;  // App Store redirect
-            }
+    //     setTimeout(() => {
+    //         const elapsed = Date.now() - now;
+    //         // alert(elapsed);
+    //         if (!appOpened && elapsed<1502) {
+    //             window.location.href = appStoreLink;  // App Store redirect
+    //         }
 
-            // Clean up event listener
-            window.removeEventListener('pagehide', onPageHide);
-        }, 1500);
-    }
+    //         // Clean up event listener
+    //         window.removeEventListener('pagehide', onPageHide);
+    //     }, 1500);
+    // }
 </script>    
 @endpush
