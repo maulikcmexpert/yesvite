@@ -1105,9 +1105,9 @@ $(document).ready(function () {
 
             // Check if no photo is uploaded AND no content is entered
             if (
-                (!photoInput || photoInput.files.length === 0) ||
-                imagePreview.children.length === 0
-
+                (!photoInput || photoInput.files.length === 0) &&
+                imagePreview.children.length === 0 ||
+                postContent === ""
             ) {
                 toastr.error(
                     "Please upload a photo or enter some content for the photo post."
@@ -1121,7 +1121,7 @@ $(document).ready(function () {
 
         // If post_type is "0", allow form submission without a photo
         if (postType == "0") {
-            $(".create-post-upload-img-wrp").remove();
+            $(".create-post-upload-img-wrp").addClass("d-none");
 
 
             return;
@@ -1472,7 +1472,7 @@ $(document).ready(function () {
                         postData.comment_on_off == 1
                     );
                     if (postData.post_type == "0") {
-                        $(".create-post-upload-img-wrp").addClass("d-none");
+                        $(".create-post-upload-img-wrp").remove();
 
                     }
 
