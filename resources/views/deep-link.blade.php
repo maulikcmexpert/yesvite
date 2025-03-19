@@ -25,6 +25,7 @@
 
             alert(appLink);
             alert(elapsed);
+            alert(appOpened);
             // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
                 const elapsed = Date.now() - now;
