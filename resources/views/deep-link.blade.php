@@ -21,7 +21,7 @@
 
             // Open the app
             const now = Date.now();
-            alert(now);
+            // alert(now);
 
             window.location.href = appLink;
 
