@@ -1035,6 +1035,28 @@ header{
     .decline-btn {
         font-size: 13px;
     }
+    .google-add .app-store{
+        padding-top: 0px !important;
+    }
+    .google-add .app-store.ms-auto{
+        margin-left: 0px !important;
+    }
+    .google-add{
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        padding-left: 20px !important;
+    }
+    .close_advertise{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        z-index: 10;
+    }
+    .google-add p{
+        text-align: center;
+    }
 }
 
 @media only screen and (max-width: 424px) {

@@ -1922,6 +1922,13 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     align-items: center !important;
 }
 
+.bulk-check .form-check-input {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+     padding-left: 0px !important;
+}
+
 /* ======= responsive ======== */
 
 @media only screen and (min-width: 1400px) {

@@ -607,7 +607,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="create-post-profile">
-                        <div class="create-post-profile-wrp">
+                        <div class="create-post-profile-wrp"   style="display: none">
 
                             @if ($photos != '')
                                 <img src="{{ asset('storage/profile/' . $photos) }} " alt="" loading="lazy">
@@ -625,8 +625,8 @@
                                 </h5>
                             @endif
 
-                            <div id="savedSettingsDisplay">
-                                <h4> <i class="fa-solid fa-angle-down"></i></h4>
+                            <div id="savedSettingsDisplay"  style="display: none">
+                                <h4><i class="fa-solid fa-angle-down"></i></h4>
                             </div>
                         </div>
                     </div>

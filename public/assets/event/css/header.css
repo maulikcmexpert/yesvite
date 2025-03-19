@@ -263,6 +263,8 @@ header.login-header {
 
 
 
+
+
 @media only screen and (max-width:767px){
     .navbar-collapse.collapse.show,
     .navbar-collapse.collapsing
@@ -322,4 +324,14 @@ header.login-header {
     .header-right {
         gap: 20px;
     }
+}
+
+@media only screen and (max-width:575px){
+    .google-add .app-store{
+        padding-top: 0px !important;
+    }
+    .google-add .app-store.ms-auto{
+        margin-left: 0px !important;
+    }
+    
 }

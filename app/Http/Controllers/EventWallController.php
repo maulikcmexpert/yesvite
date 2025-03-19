@@ -1587,16 +1587,60 @@ class EventWallController extends BaseController
     // }
     public function createPost(Request $request)
     {
+
+        // dd($mediaIds);
         $user = Auth::guard('web')->user();
 
+
+
+        // dd($mediaIds,$get_all_image_post,$missingMediaIds);
+
+
+    // dd($mediaIds,$get_all_image_post); // Output: [474, 475, 476, 479]
+            // dd($get_all_image_post);
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
-        if ($creatEventPost && $request->isNewPost=="1") {
+        if ($creatEventPost && $request->isNewPost == "1") {
+
+            $mediaIds = $request->input('media-ids', []);
+
+            $get_all_image_post = EventPostImage::where('event_post_id', $request->post_id)
+            ->pluck('id')
+            ->toArray();
 
 
+            $mediaIds = array_map('intval', $mediaIds);
+            $get_all_image_post = array_map('intval', $get_all_image_post);
+
+            $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
+
+            if (isset($missingMediaIds) && !empty($missingMediaIds)) {
+                // $delete_images = json_decode($request->delete_image);
+                foreach ($missingMediaIds as $key => $delete_image) {
+                    $deleteImage = EventPostImage::where('id', $delete_image)->first();
+                    if ($deleteImage != null) {
+                        if ($deleteImage->type == 'image') {
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        } elseif ($deleteImage->type == 'video') {
+                            if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
+                                $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
+                                unlink($imagePath);
+                            }
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        }
+                        $deleteImage->delete();
+                    }
+                }
+            }
 
             $msg = 'Event Post updated successfully!';
         } else {
@@ -1959,7 +2003,7 @@ class EventWallController extends BaseController
             ->where('event_id', $request->event_id)
             ->first();
 
-        if ($request->isNewPost=="0" || !$creatEventPost) {
+        if ($request->isNewPost == "0" || !$creatEventPost) {
             // Create new event post if it doesn't exist
             $creatEventPost = new EventPost();
             $creatEventPost->event_id = $request->event_id;
@@ -1994,6 +2038,19 @@ class EventWallController extends BaseController
             // Delete old poll options before adding new ones
             EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
             $msg = 'Poll updated successfully!';
+
+
+            $mediaIds = $request->input('option-ids', []);
+
+            $get_all_image_post = EventPostPollOption::where('event_post_poll_id', $request->post_id)
+            ->pluck('id')
+            ->toArray();
+
+
+            $mediaIds = array_map('intval', $mediaIds);
+            $get_all_image_post = array_map('intval', $get_all_image_post);
+
+            $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
         } else {
             // Create new poll
             $eventPostPoll = new EventPostPoll();
@@ -2007,11 +2064,11 @@ class EventWallController extends BaseController
 
         // Save new poll options
         foreach ($request->options as $value) {
-                        $pollOption = new EventPostPollOption();
-                        $pollOption->event_post_poll_id = $eventPostPoll->id;
-                        $pollOption->option = $value;
-                        $pollOption->save();
-                    }
+            $pollOption = new EventPostPollOption();
+            $pollOption->event_post_poll_id = $eventPostPoll->id;
+            $pollOption->option = $value;
+            $pollOption->save();
+        }
 
         return redirect()->back()->with('msg', $msg);
     }
@@ -3766,26 +3823,16 @@ class EventWallController extends BaseController
     {
         $user  = Auth::guard('web')->user();
 
-        DB::beginTransaction();
+
         $creatEventPost = EventPost::where('id', $request->event_post_id)->first();
         $creatEventPost->event_id = $request->event_id;
         $creatEventPost->user_id = $user->id;
-        $creatEventPost->post_message = $request->post_message;
-
-        if ($request->hasFile('post_recording')) {
 
 
-            $record = $request->post_recording;
-            $recordingName = time() . '_' . $record->getClientOriginalName();
-            $record->move(public_path('storage/event_post_recording'), $recordingName);
-            $creatEventPost->post_recording = $recordingName;
-        }
 
-        $creatEventPost->post_privacy = $request->post_privacy;
-        $creatEventPost->post_type = $request->post_type;
-        $creatEventPost->commenting_on_off = $request->commenting_on_off;
-        $creatEventPost->is_in_photo_moudle = $request->is_in_photo_moudle;
-        $creatEventPost->save();
+
+
+
         $video = 0;
         $image = 0;
         if ($creatEventPost->id) {
