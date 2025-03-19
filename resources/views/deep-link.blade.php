@@ -19,19 +19,18 @@
                 }
             }, fallbackTimeout);
         };
+        window.location.href ="comappyesvite://open";
     </script> --}}
     <script>
         window.onload = function () {
             var now = new Date().getTime();
-            var fallbackTimeout = 2500; // Increased timeout
+            var fallbackTimeout = 3000; // Increased timeout to 3 seconds
 
-            // Attempt to open the app using the Universal Link
             window.location.href ="comappyesvite://open";
 
-            // Fallback to the App Store if the app is not installed
             setTimeout(function () {
                 if (new Date().getTime() - now < fallbackTimeout + 100) {
-                    window.location.href = "{{ $fallbackUrl }}"; // Replace with your App Store link
+                    window.location.href = "{{ $fallbackUrl }}"; // Your App Store link
                 }
             }, fallbackTimeout);
         };
