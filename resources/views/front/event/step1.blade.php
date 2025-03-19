@@ -270,22 +270,20 @@
                             </div>
 
                         </div>
-                        <div class="col-12 mb-4">
+                        {{-- <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h6>This event is rsvp compulsory </h6>
                                 <div class="toggle-button-cover ">
                                     <div class="button-cover">
                                         <div class="button r" id="button-1">
-                                            <input type="checkbox" class="checkbox" id="complasory_rsvp"
-                                                {{-- {{ isset($eventDetail['event_setting']['events_schedule']) && $eventDetail['event_setting']['events_schedule'] == '1' ? 'checked' : '' }} --}}
-                                                >
+                                            <input type="checkbox" class="checkbox" id="complasory_rsvp">
                                             <div class="knobs"></div>
                                             <div class="layer"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h6>Add activity schedule to event </h6>
