@@ -1402,10 +1402,6 @@ $(document).ready(function () {
                     $(".poll_post_id").val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
-                    let savedVisibility =
-                        localStorage.getItem("post_privacys") || "1";
-                    let savedAllowComments =
-                        localStorage.getItem("commenting_on_off") || "1";
 
                     // Uncheck all radio buttons first
                     $('input[name="post_privacy"]').prop("checked", false); // Reset
@@ -1416,15 +1412,47 @@ $(document).ready(function () {
                     )
                         .prop("checked", true)
                         .trigger("change");
+                    // Ensure savedVisibility is defined
+                    let savedVisibility = postData.post_privacy || "1"; // Default to "1" if undefined
+
+                    // Uncheck all radio buttons first
+                    $('input[name="post_privacy"]').prop("checked", false);
+
+                    // Check the saved visibility radio button and trigger change event
+                    $('input[name="post_privacy"][value="' + savedVisibility + '"]')
+                        .prop("checked", true)
+                        .trigger("change");
+
+                    // Update the saved settings display based on post_privacy
+                    let privacyText = "";
+                    switch (postData.post_privacy) {
+                        case "1":
+                            privacyText = "Everyone";
+                            break;
+                        case "2":
+                            privacyText = "RSVP’d - Yes";
+                            break;
+                        case "3":
+                            privacyText = "RSVP’d - No";
+                            break;
+                        case "4":
+                            privacyText = "RSVP’d - No Reply";
+                            break;
+
+                    }
+
+                    // Update the display with the selected option
+                    $("#savedSettingsDisplay").html(`
+    <h4>${privacyText} <i class="fa-solid fa-angle-down"></i></h4>
+`);
+
 
                     // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
                     $('input[name="commenton"]').prop(
                         "checked",
                         postData.comment_on_off == 1
                     );
-                    $(".poll-option-input, #yourquestion").each(function () {
-                        updateCharCount(this);
-                    });
+
 
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
