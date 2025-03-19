@@ -1603,7 +1603,7 @@ class EventWallController extends BaseController
         $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
 
 
-        dd($mediaIds,$get_all_image_post,$missingMediaIds);
+        // dd($mediaIds,$get_all_image_post,$missingMediaIds);
 
 
     // dd($mediaIds,$get_all_image_post); // Output: [474, 475, 476, 479]
@@ -1613,9 +1613,32 @@ class EventWallController extends BaseController
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
-        if ($creatEventPost && $request->isNewPost == "1") {
+        if ($creatEventPost) {
 
-
+            if (isset($missingMediaIds) && !empty($missingMediaIds)) {
+                // $delete_images = json_decode($request->delete_image);
+                foreach ($missingMediaIds as $key => $delete_image) {
+                    $deleteImage = EventPostImage::where('id', $delete_image)->first();
+                    if ($deleteImage != null) {
+                        if ($deleteImage->type == 'image') {
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        } elseif ($deleteImage->type == 'video') {
+                            if (file_exists(public_path('storage/thumbnails/') . $deleteImage->thumbnail)) {
+                                $imagePath = public_path('storage/thumbnails/') . $deleteImage->thumbnail;
+                                unlink($imagePath);
+                            }
+                            if (file_exists(public_path('storage/post_image/') . $deleteImage->post_image)) {
+                                $imagePath = public_path('storage/post_image/') . $deleteImage->post_image;
+                                unlink($imagePath);
+                            }
+                        }
+                        $deleteImage->delete();
+                    }
+                }
+            }
 
             $msg = 'Event Post updated successfully!';
         } else {
