@@ -23,17 +23,20 @@
     <script>
         window.onload = function () {
             var now = new Date().getTime();
-            var fallbackTimeout = 2000;
-    
+            var fallbackTimeout = 2500; // Increased timeout
+
+            // Attempt to open the app using the Universal Link
             window.location.href ="comappyesvite://open";
-    
+
+            // Fallback to the App Store if the app is not installed
             setTimeout(function () {
                 if (new Date().getTime() - now < fallbackTimeout + 100) {
-                    window.location.href = "https://apps.apple.com/app/6736650042";
+                    window.location.href = "{{ $fallbackUrl }}"; // Replace with your App Store link
                 }
             }, fallbackTimeout);
         };
     </script>
+    
 </head>
 <body>
     <p>Redirecting...</p>
