@@ -1539,7 +1539,8 @@ $(document).ready(function () {
                                             </label>
                                             <div class="position-relative">
                                                 <input type="text" class="form-control poll-option-input" name="options[]" required value="${option.option}">
-                                                <span class="input-option-delete">
+                                                  <input type="hidden" name="option-ids[]" value="${option.id}" id="option-ids" />
+                                                <span class="input-option-delete delete-polll">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1552,8 +1553,11 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                            }
 
+                            }
+$(document).on("click", ".delete-polll", function () {
+    $(this).closest(".option-poll").remove(); // Remove the closest parent .option-poll div
+});
 
 
                         }
