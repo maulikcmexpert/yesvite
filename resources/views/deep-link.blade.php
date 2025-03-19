@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,52 @@
     
 </head>
 <body  onload="openApp()">
+    <p>Redirecting...</p>
+</body>
+</html> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open in App</title>
+    <script>
+        window.onload = function () {
+            const appDeepLink = "comappyesvite://open";
+            const fallbackUrl = "https://apps.apple.com/app/6736650042";
+            const firstTimeKey = "yesviteFirstVisit";
+            const fallbackTimeout = localStorage.getItem(firstTimeKey) ? 2000 : 3000;  // Longer timeout on first visit
+            let appOpened = false;
+
+            // Detect if the app opens (user leaves the page)
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    appOpened = true;
+                }
+            });
+
+            const openApp = () => {
+                if (!localStorage.getItem(firstTimeKey)) {
+                    // First-time visit: Add slight delay before fallback
+                    localStorage.setItem(firstTimeKey, "true");
+                }
+
+                // Open the app via deep link
+                window.location.href = appDeepLink;
+
+                // Fallback to the App Store if the app is not installed
+                setTimeout(() => {
+                    if (!appOpened) {
+                        window.location.href = fallbackUrl;
+                    }
+                }, fallbackTimeout);
+            };
+
+            openApp();
+        };
+    </script>
+</head>
+<body>
     <p>Redirecting...</p>
 </body>
 </html>
