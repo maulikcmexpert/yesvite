@@ -257,7 +257,7 @@
                                                                                 </button>
                                                                             </li>
                                                                         @endif
-                                                                            @if($eventDetails['host_id'] == $login_user_id)
+                                                                            @if($eventDetails['is_host'] == 1)
                                                                             <li>
                                                                                 <button
                                                                                     class="dropdown-item editPostBtn"
