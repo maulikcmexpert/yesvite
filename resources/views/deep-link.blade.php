@@ -13,30 +13,27 @@
             
             let appOpened = false;
 
-            // Detect visibility change to confirm app open event
-            const onVisibilityChange = () => {
-                if (document.hidden) {
-                    appOpened = true;
-                }
+            // Use `pagehide` to detect if the app opened successfully
+            const onPageHide = () => {
+                appOpened = true;
             };
-            
-            document.addEventListener('visibilitychange', onVisibilityChange);
+
+            window.addEventListener('pagehide', onPageHide);
 
             // Open the app
             const now = Date.now();
             window.location.href = appLink;
 
-            // Check after 1.5 seconds if the app opened
+            // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
                 const elapsed = Date.now() - now;
 
-                // If app did NOT open, redirect to App Store
                 if (!appOpened && elapsed < 1500) {
-                    window.location.href = appStoreLink;
+                    window.location.href = appStoreLink;  // App Store redirect
                 }
 
                 // Clean up event listener
-                document.removeEventListener('visibilitychange', onVisibilityChange);
+                window.removeEventListener('pagehide', onPageHide);
             }, 1500);
         }
     </script>
