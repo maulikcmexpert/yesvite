@@ -1104,20 +1104,28 @@ $(document).ready(function () {
             var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
 
             // Check if no photo is uploaded AND no content is entered
-            if (
-                (!photoInput || photoInput.files.length === 0) &&
-                imagePreview.children.length === 0 &&
-                postContent === ""
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
-                return;
-            }
-            if (postContent === "" && !isPhotoUploadTriggered) {
-                toastr.error("Please upload a photo before submitting.");
-                return;
-            }
+            let isPhotoUploaded =
+        (photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0;
+
+    // Case 1: If photo upload is triggered but no content, show error
+    if (isPhotoUploadTriggered && postContent === "") {
+        toastr.error("Please enter some content for the photo post.");
+        return;
+    }
+
+    // Case 2: If photo upload is NOT triggered and no image is uploaded, but content is present, allow form submission
+    if (!isPhotoUploadTriggered && !isPhotoUploaded && postContent !== "") {
+        $("#yourForm").submit();
+        return;
+    }
+
+    // Case 3: If neither content nor image is present, show an error
+    if (!isPhotoUploaded ) {
+        toastr.error("Please  enter some content for the post.");
+        return;
+    }
+
+
             // Set post type based on presence of an uploaded image or entered content
             if (
                 (photoInput && photoInput.files.length > 0) ||
@@ -1168,16 +1176,21 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
+
+
 let isPhotoUploadTriggered = false;
 
+// Track if the photo upload button was clicked
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
     $(".isNewPost").val('0');
 
     $(".create-post-head-upload-btn").addClass("d-none");
     $("#create-photo-btn").trigger("click");
+
     isPhotoUploadTriggered = true; // Set the flag to true
 });
+
 $("#poll_click").on("click", function () {
     $(".isNewPost").val('0');
     $("#create-poll-btn").trigger("click");
