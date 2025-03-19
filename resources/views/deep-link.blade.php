@@ -31,10 +31,18 @@
     <script>
         window.onload = function () {
             const appDeepLink = "comappyesvite://open";
+            const universalLink = "https://yesvite.cmexpertiseinfotech.in/redirect";   // For Safari reliability
             const fallbackUrl = "https://apps.apple.com/app/6736650042";
+            
+            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
             const firstTimeKey = "yesviteFirstVisit";
             const fallbackTimeout = localStorage.getItem(firstTimeKey) ? 2000 : 3000;  // Longer timeout on first visit
             let appOpened = false;
+
+            // Mark first-time visit
+            if (!localStorage.getItem(firstTimeKey)) {
+                localStorage.setItem(firstTimeKey, "true");
+            }
 
             // Detect if the app opens (user leaves the page)
             document.addEventListener('visibilitychange', () => {
@@ -44,15 +52,18 @@
             });
 
             const openApp = () => {
-                if (!localStorage.getItem(firstTimeKey)) {
-                    // First-time visit: Add slight delay before fallback
-                    localStorage.setItem(firstTimeKey, "true");
+                if (isIOS) {
+                    // Use Universal Link for iOS
+                    window.location.href = universalLink;
+                } else {
+                    // Use Deep Link for Android
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = appDeepLink;
+                    document.body.appendChild(iframe);
                 }
 
-                // Open the app via deep link
-                window.location.href = appDeepLink;
-
-                // Fallback to the App Store if the app is not installed
+                // Fallback after timeout
                 setTimeout(() => {
                     if (!appOpened) {
                         window.location.href = fallbackUrl;
