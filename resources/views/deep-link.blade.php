@@ -22,21 +22,20 @@
             
             document.addEventListener('visibilitychange', onVisibilityChange);
 
-            // Attempt to open the app
+            // Open the app
             const now = Date.now();
             window.location.href = appLink;
 
-            // Fallback: Redirect to App Store after 1.5s if app doesn't open
-            const fallbackTimer = setTimeout(() => {
-                if (!appOpened && (Date.now() - now) < 1500) {
-                    window.location.href = appStoreLink;   // Auto-redirect to App Store
+            // Automatically redirect to App Store if the app is not installed
+            setTimeout(() => {
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // App Store fallback
                 }
             }, 1500);
 
-            // Clean up
+            // Clean up the event listener
             setTimeout(() => {
                 document.removeEventListener('visibilitychange', onVisibilityChange);
-                clearTimeout(fallbackTimer);  // Clear fallback timer after cleanup
             }, 2000);
         }
     </script>
