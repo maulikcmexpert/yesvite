@@ -1112,6 +1112,7 @@ $(document).ready(function () {
     // If post_type is "0", allow form submission without a photo
     if (postType == "0") {
         $(".create-post-upload-img-wrp").addClass("d-none");
+
         $("#photoForm").submit();
         return;
     }
@@ -1472,6 +1473,7 @@ $(document).ready(function () {
                     );
                     if (postData.post_type == "0") {
                         $(".create-post-upload-img-wrp").addClass("d-none");
+
 
                     }
 
