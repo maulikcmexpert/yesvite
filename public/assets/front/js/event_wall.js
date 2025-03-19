@@ -1520,7 +1520,7 @@ $(document).ready(function () {
                                     return;
                                 }
                                 if ($(this).length == 0) {
-
+alert();
 
                                     uploadImgInner.removeClass("d-none"); // Hide the container
                                 }
