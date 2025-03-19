@@ -36,7 +36,7 @@
 
                 // Clean up event listener
                 window.removeEventListener('pagehide', onPageHide);
-            }, 4000);
+            }, 1500);
         }
     </script>
     {{-- <script>
