@@ -31,7 +31,7 @@
             // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
                 const elapsed = Date.now() - now;
-                if (!appOpened && elapsed < 1500) {
+                if (!appOpened && elapsed < 6000) {
                     window.location.href = appStoreLink;  // App Store redirect
                 }
 
