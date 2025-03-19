@@ -310,7 +310,7 @@
                                                                                     Report
                                                                                 </button>
                                                                             </li>
-                                                                            @if( $post['is_host'] == 1)
+
                                                                             <li>
                                                                                 <button
                                                                                     class="dropdown-item editPostBtn"
@@ -365,7 +365,7 @@
                                                                                     Delete
                                                                                 </button>
                                                                             </li>
-                                                                            @endif
+
                                                                         @endif
                                                                     </ul>
                                                                 </div>
