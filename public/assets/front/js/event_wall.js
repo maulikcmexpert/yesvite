@@ -1519,10 +1519,12 @@ $(document).ready(function () {
                                     console.error("Media ID not found. Check if data-id is correctly set.");
                                     return;
                                 }
-                                if ($(this).length == 0) {
+                                if (imagePreview.children.length === 0) {
+                                    uploadImgInner.removeClass("d-none");
 
 
-                                    uploadImgInner.removeClass("d-none"); // Hide the container
+                                    // Clear file input value
+                                    currentFileInput.value = "";
                                 }
                                 let targetDiv = $("#media-" + mediaId);
                                 console.log("Target Div:", targetDiv); // Check if the div exists
@@ -1535,11 +1537,7 @@ $(document).ready(function () {
 
                             });
 
-                            if ($("#imagePreview").length == 0) {
 
-
-                                uploadImgInner.removeClass("d-none"); // Hide the container
-                            }
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
