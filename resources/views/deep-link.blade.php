@@ -11,28 +11,27 @@
             
             let appOpened = false;
 
-            // Detect if the app opened successfully
+            // Detect if the app opens
             const onPageHide = () => {
-                appOpened = true;  // App successfully opened
+                appOpened = true;  // App opened successfully
             };
 
             window.addEventListener('pagehide', onPageHide);
 
-            // Create a hidden iframe to open the app silently
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            iframe.src = appLink;
+            // Open the app
+            const now = Date.now();
+            window.location.href = appLink;
 
-            // Fallback: Redirect to App Store automatically
-            const fallbackTimer = setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = appStoreLink;  // Auto redirect to App Store
+            // Fallback: If the app doesn't open, go to the App Store
+            setTimeout(() => {
+                const elapsed = Date.now() - now;
+
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // Redirect to App Store
                 }
 
-                // Clean up
+                // Clean up the event listener
                 window.removeEventListener('pagehide', onPageHide);
-                document.body.removeChild(iframe);
             }, 1500);
         }
     </script>
