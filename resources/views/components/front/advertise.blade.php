@@ -26,6 +26,48 @@
 @endif
 @push('scripts')
 <script>
+    $(document).on('click', '.mobile-app', function () {
+        openApp();
+    });
+
+    function openApp() {
+        const appLink = "comappyesvite://somepage";
+        const appStoreLink = "https://apps.apple.com/app/6736650042";
+        
+        let appOpened = false;
+
+        // Use visibilitychange and blur to detect if the app opens
+        const onVisibilityChange = () => {
+            if (document.hidden) {
+                appOpened = true;  // App opened successfully
+            }
+        };
+
+        const onBlur = () => {
+            appOpened = true;  // App opened successfully
+        };
+
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('blur', onBlur);
+
+        // Open the app
+        window.location.href = appLink;
+
+        // Fallback to App Store only if the app didn't open
+        const fallbackTimeout = 1500;  
+        setTimeout(() => {
+            if (!appOpened) {
+                window.location.href = appStoreLink;  // Redirect to App Store
+            }
+
+            // Clean up event listeners
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            window.removeEventListener('blur', onBlur);
+        }, fallbackTimeout);
+    }
+</script>
+
+{{-- <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
     });
@@ -60,5 +102,5 @@
             window.removeEventListener('pagehide', onPageHide);
         }, 1500);
     }
-</script>    
+</script>     --}}
 @endpush
