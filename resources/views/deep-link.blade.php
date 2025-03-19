@@ -5,8 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
     
-    
     <script>
+        function openApp() {
+            const appLink = "comappyesvite://somepage";
+            const appStoreLink = "https://apps.apple.com/app/6736650042";
+            
+            let appOpened = false;
+
+            // Detect if the app opens successfully
+            const onPageHide = () => {
+                appOpened = true;
+            };
+
+            window.addEventListener('pagehide', onPageHide);
+
+            // Open the app
+            const now = Date.now();
+            window.location.href = appLink;
+
+            // Ensure the App Store opens only if the app doesn't launch
+            const checkIfAppOpened = () => {
+                const elapsed = Date.now() - now;
+
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // Redirect to App Store
+                }
+
+                // Clean up event listener
+                window.removeEventListener('pagehide', onPageHide);
+            };
+
+            // Use requestAnimationFrame for more precise timing
+            requestAnimationFrame(() => {
+                setTimeout(checkIfAppOpened, 1500);
+            });
+        }
+    </script>
+    {{-- <script>
         function openApp() {
             const appLink = "comappyesvite://somepage";
             const appStoreLink = "https://apps.apple.com/app/6736650042";
@@ -28,7 +63,7 @@
             setTimeout(() => {
                 const elapsed = Date.now() - now;
 
-                if (!appOpened) {
+                if (!appOpened && elapsed < 1500) {
                     window.location.href = appStoreLink;  // App Store redirect
                 }
 
@@ -36,7 +71,7 @@
                 window.removeEventListener('pagehide', onPageHide);
             }, 1500);
         }
-    </script>
+    </script> --}}
     {{-- <script>
         function openApp() {
             // Try opening the Yesvite app
