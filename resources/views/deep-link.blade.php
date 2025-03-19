@@ -7,47 +7,32 @@
    
     <script>
         function openApp() {
-    const appLink = "comappyesvite://somepage";
-    const appStoreLink = "https://apps.apple.com/app/6736650042";
-    
-    let appOpened = true;
-    const timeout = 1500;  // Fallback timeout
+            const appLink = "comappyesvite://somepage";
+            const appStoreLink = "https://apps.apple.com/app/6736650042";
+            
+            let appOpened = false;
+            const timeout = 1500;  
 
-    // Create an invisible iframe for app opening
-    // const iframe = document.createElement('iframe');
-    // iframe.style.display = 'none';
-    // document.body.appendChild(iframe);
+            // Use `pagehide` to detect app opening
+            const onPageHide = () => {
+                appOpened = true;  // App opened successfully
+            };
 
-    // // Use page visibility API to detect if the app opened
-    // const onVisibilityChange = () => {
-    //     if (document.hidden) {
-    //         appOpened = true;
+            window.addEventListener('pagehide', onPageHide);
+
+            // Attempt to open the app
             window.location.href = appLink;
-            return;
 
-              // Redirect to App Store
+            // Fallback to the App Store if the app doesn't open
+            setTimeout(() => {
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // Redirect to App Store
+                }
 
-    //     }
-    // };
-    
-    // document.addEventListener('visibilitychange', onVisibilityChange);
-
-    // Open the app using the iframe
-    // iframe.src = appLink;
-    // alert(appOpened);
-
-    // Fallback to App Store after timeout
-    setTimeout(() => {
-        appOpened=false;
-        if (!appOpened) {
-            window.location.href = appStoreLink;  // Redirect to App Store
+                // Clean up the event listener
+                window.removeEventListener('pagehide', onPageHide);
+            }, timeout);
         }
-
-        // Cleanup
-        // document.removeEventListener('visibilitychange', onVisibilityChange);
-        // document.body.removeChild(iframe);
-    }, timeout);
-}
         // function openApp() {
         //     const appLink = "comappyesvite://somepage";
         //     const appStoreLink = "https://apps.apple.com/app/6736650042";
