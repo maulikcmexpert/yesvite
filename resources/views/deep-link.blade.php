@@ -9,10 +9,10 @@
             var now = new Date().getTime();
             var fallbackTimeout = 2000;  // Fallback after 2 seconds
 
-            // Attempt to open the mobile app using the deep link
+            // Attempt to open the mobile app
             window.location.href = "{{ $deepLink }}";
 
-            // If the app is not installed, redirect to the fallback URL
+            // Fallback to App Store if the app is not installed
             setTimeout(function () {
                 if (new Date().getTime() - now < fallbackTimeout + 100) {
                     window.location.href = "{{ $fallbackUrl }}";
