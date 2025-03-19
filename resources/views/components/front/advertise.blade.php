@@ -24,101 +24,77 @@
     </a>
 </div>
 @endif
-<?php
-// iOS deep link & App Store fallback bridge
+@push('scripts')
+<script>
+    $(document).on('click', '.mobile-app', function () {
+        openApp();
+    });
 
-$appLink = "comappyesvite://somepage";  
-$appStoreLink = "https://apps.apple.com/app/6736650042";  
+    function openApp() {
+        const universalLink = "https://apps.apple.com/app/6736650042";  // Universal Link
+        const appLink = "comappyesvite://somepage";               // Deep Link
+        const appStoreLink = "https://apps.apple.com/app/6736650042";
 
-// Check if on iOS Safari
-$userAgent = $_SERVER['HTTP_USER_AGENT'];
-$isIOS = stripos($userAgent, "iPhone") !== false || stripos($userAgent, "iPad") !== false;
+        let appOpened = false;
+        const timeout = 1500;
 
-if ($isIOS) {
-    // Use deep link
-    echo "<script>
-            window.location = '$appLink';
-            setTimeout(() => {
-                window.location = '$appStoreLink';
-            }, 1500);
-          </script>";
-} else {
-    // For other platforms, fallback directly
-    header("Location: $appStoreLink");
-    exit();
-}
+        // Use Universal Link for iOS Safari (reliable)
+        if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+            window.location.href = universalLink;
+        } else {
+            // Use hidden iframe for unsupported browsers (Chrome)
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appLink;
+            document.body.appendChild(iframe);
 
-// @push('scripts')
-// {{-- <script>
-//     $(document).on('click', '.mobile-app', function () {
-//         openApp();
-//     });
-
-//     function openApp() {
-//         const universalLink = "https://apps.apple.com/app/6736650042";  // Universal Link
-//         const appLink = "comappyesvite://somepage";               // Deep Link
-//         const appStoreLink = "https://apps.apple.com/app/6736650042";
-
-//         let appOpened = false;
-//         const timeout = 1500;
-
-//         // Use Universal Link for iOS Safari (reliable)
-//         if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
-//             window.location.href = universalLink;
-//         } else {
-//             // Use hidden iframe for unsupported browsers (Chrome)
-//             const iframe = document.createElement('iframe');
-//             iframe.style.display = 'none';
-//             iframe.src = appLink;
-//             document.body.appendChild(iframe);
-
-//             const timer = setTimeout(() => {
-//                 if (!appOpened) {
-//                     window.location.href = appStoreLink;  // Fallback to App Store
-//                 }
-//                 document.body.removeChild(iframe);
-//                 clearTimeout(timer);
-//             }, timeout);
-//         }
-//     }
-// </script> --}}
+            const timer = setTimeout(() => {
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // Fallback to App Store
+                }
+                document.body.removeChild(iframe);
+                clearTimeout(timer);
+            }, timeout);
+        }
+    }
+</script>
 
 
 
-// {{-- <script>
-//     $(document).on('click','.mobile-app',function(){
-//         openApp();
-//     });
-//     function openApp() {
-//         const appLink = "comappyesvite://somepage";
-//         const appStoreLink = "https://apps.apple.com/app/6736650042";
+{{-- <script>
+    $(document).on('click','.mobile-app',function(){
+        openApp();
+    });
+    function openApp() {
+        const appLink = "comappyesvite://somepage";
+        const appStoreLink = "https://apps.apple.com/app/6736650042";
         
-//         let appOpened = false;
+        let appOpened = false;
 
-//         // Use `pagehide` to detect if the app opened successfully
-//         const onPageHide = () => {
-//             appOpened = true;
-//         };
+        // Use `pagehide` to detect if the app opened successfully
+        const onPageHide = () => {
+            appOpened = true;
+        };
 
-//         window.addEventListener('pagehide', onPageHide);
+        window.addEventListener('pagehide', onPageHide);
 
-//         // Open the app
-//         const now = Date.now();
-//         // alert(now);
+        // Open the app
+        const now = Date.now();
+        // alert(now);
 
-//         window.location.href = appLink;
+        window.location.href = appLink;
 
   
-//         setTimeout(() => {
-//             const elapsed = Date.now() - now;
-//             // alert(elapsed);
-//             if (!appOpened && elapsed<1502) {
-//                 window.location.href = appStoreLink;  // App Store redirect
-//             }
+        setTimeout(() => {
+            const elapsed = Date.now() - now;
+            // alert(elapsed);
+            if (!appOpened && elapsed<1502) {
+                window.location.href = appStoreLink;  // App Store redirect
+            }
 
-//             // Clean up event listener
-//             window.removeEventListener('pagehide', onPageHide);
-//         }, 1500);
-//     }
-// </script>     --}}
-// @endpush
+            // Clean up event listener
+            window.removeEventListener('pagehide', onPageHide);
+        }, 1500);
+    }
+</script>     --}}
+@endpush
