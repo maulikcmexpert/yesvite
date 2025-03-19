@@ -1121,7 +1121,7 @@ $(document).ready(function () {
 
     // Case 3: If neither content nor image is present, show an error
     if (!isPhotoUploaded ) {
-        toastr.error("Please upload a photo or enter some content for the post.");
+        toastr.error("Please  enter some content for the post.");
         return;
     }
 
