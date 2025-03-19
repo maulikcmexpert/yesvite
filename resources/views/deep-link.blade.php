@@ -6,26 +6,17 @@
     <title>Open in App</title>
     <script>
         window.onload = function () {
-            let opened = false;  
-            const fallbackTimeout = 1500;  // 1.5 seconds
+            var now = new Date().getTime();
+            var fallbackTimeout = 2000;  // Fallback after 2 seconds
 
-            // Detect app opening (blur triggers if app opens)
-            window.addEventListener('blur', () => {
-                opened = true;  // App opened successfully
-            });
+            // Attempt to open the mobile app using the deep link
+            window.location.href = "{{ $deepLink }}";
 
-            // Attempt to open the app using hidden iframe
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = "{{ $deepLink }}";  // Deep link to your app
-            document.body.appendChild(iframe);
-
-            // Fallback to App Store if the app doesn't open
-            setTimeout(() => {
-                if (!opened) {
-                    window.location.href = "{{ $fallbackUrl }}";  // App Store URL
+            // If the app is not installed, redirect to the fallback URL
+            setTimeout(function () {
+                if (new Date().getTime() - now < fallbackTimeout + 100) {
+                    window.location.href = "{{ $fallbackUrl }}";
                 }
-                document.body.removeChild(iframe);  // Clean up iframe
             }, fallbackTimeout);
         };
     </script>
