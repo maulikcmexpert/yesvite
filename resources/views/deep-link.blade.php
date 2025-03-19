@@ -6,42 +6,71 @@
     <title>Open Yesvite App</title>
    
     <script>
- function openApp() {
+        function openApp() {
     const appLink = "comappyesvite://somepage";
     const appStoreLink = "https://apps.apple.com/app/6736650042";
-
+    
     let appOpened = false;
-    let fallbackTriggered = false;  // Fallback flag
+    const timeout = 1500;  // Fallback timeout
 
-    // Use `pagehide` to detect if the app opened successfully
-    const onPageHide = () => {
-        appOpened = true;
+    // Create an invisible iframe for app opening
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Use page visibility API to detect if the app opened
+    const onVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true;
+        }
     };
+    
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
-    window.addEventListener('pagehide', onPageHide);
+    // Open the app using the iframe
+    iframe.src = appLink;
 
-    // Open the app
-    const now = Date.now();
-    window.location.href = appLink;
-
-    // Force fallback if app doesn't open
-    const fallbackTimeout = setTimeout(() => {
-        if (!appOpened && !fallbackTriggered) {
-            fallbackTriggered = true;  // Mark fallback as triggered
+    // Fallback to App Store after timeout
+    setTimeout(() => {
+        if (!appOpened) {
             window.location.href = appStoreLink;  // Redirect to App Store
         }
 
-        // Clean up event listener
-        window.removeEventListener('pagehide', onPageHide);
-    }, 1500);
-
-    // Ensure cleanup in case of browser inconsistencies
-    window.addEventListener('blur', () => {
-        clearTimeout(fallbackTimeout);
-        window.removeEventListener('pagehide', onPageHide);
-    });
+        // Cleanup
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        document.body.removeChild(iframe);
+    }, timeout);
 }
+        // function openApp() {
+        //     const appLink = "comappyesvite://somepage";
+        //     const appStoreLink = "https://apps.apple.com/app/6736650042";
+            
+        //     let appOpened = false;
 
+        //     // Use `pagehide` to detect if the app opened successfully
+        //     const onPageHide = () => {
+        //         appOpened = true;
+        //     };
+
+        //     window.addEventListener('pagehide', onPageHide);
+
+        //     // Open the app
+        //     const now = Date.now();
+        //     // alert(now);
+
+        //     window.location.href = appLink;
+
+      
+        //     setTimeout(() => {
+        //         const elapsed = Date.now() - now;
+        //         if (!appOpened && elapsed < 1500) {
+        //             window.location.href = appStoreLink;  // App Store redirect
+        //         }
+
+        //         // Clean up event listener
+        //         window.removeEventListener('pagehide', onPageHide);
+        //     }, 1500);
+        // }
     </script>
     {{-- <script>
         function openApp() {
