@@ -1553,7 +1553,10 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                                $("#pollForm").on("input", "input.form-control", function () {
+                                $(".poll-option-input, #yourquestion").each(function () {
+                                    updateCharCount(this);
+                                });
+                                $("input.form-control").each(function () {
                                     updateCharCount(this);
                                 });
 
