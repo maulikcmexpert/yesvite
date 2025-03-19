@@ -1112,7 +1112,7 @@ $(document).ready(function () {
     // If post_type is "0", allow form submission without a photo
     if (postType == "0") {
         $(".create-post-upload-img-wrp").addClass("d-none");
-        $("#yourForm").submit();
+        $("#photoForm").submit();
         return;
     }
 
@@ -1124,7 +1124,7 @@ $(document).ready(function () {
 
     // Case 2: If photo upload is NOT triggered and no image is uploaded, but content is present, allow form submission
     if (!isPhotoUploadTriggered && !isPhotoUploaded && postContent !== "") {
-        $("#yourForm").submit();
+        $("#photoForm").submit();
         return;
     }
 
