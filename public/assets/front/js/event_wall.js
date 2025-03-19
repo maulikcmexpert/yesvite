@@ -1482,10 +1482,7 @@ $(document).ready(function () {
                                 let uploadHeadButton = $(".create-post-head-upload-btn");
 
                                 // Check if there are any images left
-                                if (mediaWrapper.children().length === 0) {
-                                    uploadImgInner.removeClass("d-none"); // Show upload area
-                                    uploadHeadButton.addClass("d-none"); // Hide header upload button
-                                }
+
                             });
 
 
