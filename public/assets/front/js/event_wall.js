@@ -1450,7 +1450,7 @@ $(document).ready(function () {
                     if (postData.post_type == "0") {
                         $(".create-post-upload-img-wrp").remove();
 
-$("#photoForm").submit();
+
 
                     }
                     if (postData.post_type == "1") {
