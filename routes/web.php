@@ -53,6 +53,12 @@ use Illuminate\Http\Request;
 // });
 
 
+Route::get('/open-app', function () {
+    $deepLink = "comappyesvite://open";  
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";  
+
+    return view('deep-link', compact('deepLink', 'fallbackUrl'));
+})->name('open-app'); 
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -65,15 +71,6 @@ Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
 
 
-Route::get('open-app', function () {
-    // Static deep link to open the mobile app
-    $deepLink = "comappyesvite://open"; 
-
-    // Fallback URL in case the app is not installed
-    $fallbackUrl = "https://apps.apple.com/app/6736650042";
-
-    return view('deep-link', compact('deepLink', 'fallbackUrl'));
-});
 
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
@@ -431,6 +428,8 @@ Route::controller(AuthController::class)->group(function () {
         return view('admin.auth.main', $data);
     });
 
+    
+    
     Route::post('/forgotpassword', 'forgotpassword');
 
     Route::get('/updatePassword/{id}', 'checkToken');
@@ -475,6 +474,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 });
+
 
 Route::fallback(function () {
     $title = "No Found";
