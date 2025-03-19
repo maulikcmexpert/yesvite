@@ -151,7 +151,7 @@
 
 
 
-
+                                                                        @if($post['user_id']==$login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item hide-post-btn postControlButton"
@@ -256,7 +256,7 @@
                                                                                     Report
                                                                                 </button>
                                                                             </li>
-
+                                                                        @endif
                                                                             <li>
                                                                                 <button
                                                                                     class="dropdown-item editPostBtn"
