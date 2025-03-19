@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-        let postType = $("#textPostType").val().trim();; // Get post type from the existing post data
+
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1114,27 +1114,6 @@ $(document).ready(function () {
                 );
                 return;
             }
-            let isPhotoUploaded =
-            (photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0;
-
-
-
-        // If post_type is "0", allow form submission without a photo
-        if (postType == "0") {
-            $(".create-post-upload-img-wrp").addClass("d-none");
-
-
-            return;
-        }
-
-        // Case 1: If photo upload is triggered but no content, show error
-        if (isPhotoUploadTriggered && postContent === "") {
-            toastr.error("Please enter some content for the photo post.");
-            return;
-        }
-
-
-
 
             // Set post type based on presence of an uploaded image or entered content
             if (
@@ -1186,18 +1165,12 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
-
-let isPhotoUploadTriggered = false;
-
-// Track if the photo upload button was clicked
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
     $(".isNewPost").val('0');
 
     $(".create-post-head-upload-btn").addClass("d-none");
     $("#create-photo-btn").trigger("click");
-
-    isPhotoUploadTriggered = true; // Set the flag to true
 });
 $("#poll_click").on("click", function () {
     $(".isNewPost").val('0');
@@ -1471,10 +1444,7 @@ $(document).ready(function () {
                         "checked",
                         postData.comment_on_off == 1
                     );
-                    if (postData.post_type == "0") {
-                        $(".create-post-upload-img-wrp").remove();
 
-                    }
 
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
