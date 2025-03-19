@@ -25,48 +25,10 @@
 </div>
 @endif
 @push('scripts')
+
+
+
 <script>
-    $(document).on('click', '.mobile-app', function () {
-        openApp();
-    });
-
-    function openApp() {
-        const appLink = "comappyesvite://somepage";
-        const appStoreLink = "https://apps.apple.com/app/6736650042";
-        
-        let appOpened = false;
-
-        // Detect app open with pagehide (works better on iOS Safari)
-        const onPageHide = () => {
-            appOpened = true;  // App opened successfully
-        };
-        
-        window.addEventListener('pagehide', onPageHide);
-
-        // Use iframe navigation to bypass Safari restrictions
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appLink;
-        document.body.appendChild(iframe);
-
-        // Fallback to App Store if the app is not installed
-        const fallbackTimeout = 1500;  
-        const timer = setTimeout(() => {
-            if (!appOpened) {
-                window.location.href = appStoreLink;  // Redirect to App Store
-            }
-            
-            // Clean up
-            document.body.removeChild(iframe);
-            window.removeEventListener('pagehide', onPageHide);
-            clearTimeout(timer);
-        }, fallbackTimeout);
-    }
-</script>
-
-
-
-{{-- <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
     });
@@ -101,5 +63,5 @@
             window.removeEventListener('pagehide', onPageHide);
         }, 1500);
     }
-</script>     --}}
+</script>    
 @endpush
