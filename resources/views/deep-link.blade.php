@@ -5,46 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const appLink = "{{ $deepLink }}";
-            const fallbackUrl = "{{ $fallbackUrl }}";
+        document.getElementById('open-app-btn').addEventListener('click', () => {
+            const appLink = "comappyesvite://open";
+            const fallbackUrl = "https://apps.apple.com/app/6736650042";
     
             let appOpened = false;
+            const startTime = Date.now();
     
-            // Create a hidden iframe for reliable app opening
-            const openApp = () => {
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-                iframe.src = appLink;
+            // Open the app using window.location (more reliable on iOS)
+            window.location.href = appLink;
     
-                // Listen for visibility change and pagehide
-                const onAppOpen = () => {
-                    appOpened = true;  // App opened successfully
-                };
-    
-                window.addEventListener('pagehide', onAppOpen);
-                document.addEventListener('visibilitychange', () => {
-                    if (document.visibilityState === 'hidden') {
-                        appOpened = true;  
-                    }
-                });
-    
-                // Remove iframe after some time
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                }, 1000);
-            };
-    
-            // Attempt to open the app
-            openApp();
-    
-            // Fallback to App Store only if the app did not open
+            // Check if the app opened by measuring elapsed time
             setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = fallbackUrl;  
+                const elapsed = Date.now() - startTime;
+    
+                // If the app didn't open, redirect to the App Store
+                if (elapsed < 1500) { 
+                    // If the page is still in focus, assume app didn't open
+                    window.location.href = fallbackUrl;
                 }
-            }, 2500);  // Extended delay for reliability (2.5 seconds)
+            }, 2000);  // 2-second delay to give the app time to open
         });
     </script>
     {{-- <script>
