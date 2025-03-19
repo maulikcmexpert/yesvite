@@ -1553,13 +1553,18 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
+                                $(".poll-option-input, #yourquestion").each(function () {
+                                    updateCharCount(this);
+                                });
 
+                                // Delete option functionality
+                                $(document).on("click", ".delete-polll", function () {
+                                    $(this).closest(".option-poll").remove();
+                                    renumberOptions();
+                                });
 
                             }
-                            $(document).on("click", ".delete-polll", function () {
-                                $(this).closest(".option-poll").remove();
 
-                            });
 
 
                         }
@@ -1580,7 +1585,33 @@ $(document).ready(function () {
         });
     });
 
+    function renumberOptions() {
+        $(".poll-options .option-poll").each(function (index) {
+            $(this)
+                .find(".option-number")
+                .text(index + 3);
+            $(this).find(".char-count").text("0/140"); // Reset char count
+        });
+    }
+    function updateCharCount(inputField) {
+        const maxLength = 140;
+        const charCount = $(inputField).val().length;
 
+        // Update the span element with current character count
+        $(inputField)
+            .closest(".mb-3")
+            .find(".char-count")
+            .text(`${charCount}/${maxLength}`);
+
+        // Disable the input field if the maximum length is reached
+        if (charCount >= maxLength) {
+            $(inputField).val($(inputField).val().substring(0, maxLength));
+            charCount = maxLength; // Adjust count after trimming
+        }
+        // } else {
+        //     $(inputField).prop('disabled', false);
+        // }
+    }
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
