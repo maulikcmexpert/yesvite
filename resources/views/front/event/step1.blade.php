@@ -1,5 +1,4 @@
 @php
-
     use Carbon\Carbon;
 @endphp
 
@@ -122,13 +121,15 @@
                                     }
                                 @endphp
                                 <div class="position-relative z-2">
-                                    <input type="text" class="form-control inputText" style="background: transparent"
-                                        id="start-event-date" data-isDate="{{ $start_date }}" name="event-date"
-                                        onblur="clearError(this)" value="{{ $start_date }}" readonly>
-                                    <label for="birthday" class="form-label input-field floating-label select-label">Start Date of
+                                    <input type="text" class="form-control inputText"
+                                        style="background: transparent" id="start-event-date"
+                                        data-isDate="{{ $start_date }}" name="event-date" onblur="clearError(this)"
+                                        value="{{ $start_date }}" readonly>
+                                    <label for="birthday"
+                                        class="form-label input-field floating-label select-label">Start Date of
                                         event * </label>
-                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="21" class="input-calender-icon" height="20"
+                                        viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
                                             stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
@@ -156,8 +157,8 @@
 
                             </div>
                             <lable for="start_event-date" id="start_event-date-error" class="error"></lable>
-                        </div> 
-                        
+                        </div>
+
                         <div class="col-lg-6 mb-4">
                             <div class="input-form">
                                 @php
@@ -176,13 +177,15 @@
                                     }
                                 @endphp
                                 <div class="position-relative z-2">
-                                    <input type="text" class="form-control inputText" style="background: transparent"
-                                        id="end-event-date" data-isDate="{{ $end_date }}" name="event-date"
-                                        onblur="clearError(this)" value="{{ $end_date }}" readonly>
-                                    <label for="birthday" class="form-label input-field floating-label select-label">End Date of
+                                    <input type="text" class="form-control inputText"
+                                        style="background: transparent" id="end-event-date"
+                                        data-isDate="{{ $end_date }}" name="event-date" onblur="clearError(this)"
+                                        value="{{ $end_date }}" readonly>
+                                    <label for="birthday"
+                                        class="form-label input-field floating-label select-label">End Date of
                                         event * </label>
-                                    <svg width="21" class="input-calender-icon" height="20" viewBox="0 0 21 20"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="21" class="input-calender-icon" height="20"
+                                        viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.16797 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
                                             stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M13.832 1.66602V4.16602" stroke="#64748B" stroke-width="1.5"
@@ -215,11 +218,13 @@
                             <div class="form-group">
                                 <label>Start Time *</label>
                                 <div class="input-group time start-time timepicker start-time-create">
-                                    <input type="text" class="form-control start_timepicker" placeholder="HH:MM AM/PM"
-                                        id="start-time" name="start-time" onblur="clearError(this)" readonly
+                                    <input type="text" class="form-control start_timepicker"
+                                        placeholder="HH:MM AM/PM" id="start-time" name="start-time"
+                                        onblur="clearError(this)" readonly
                                         value="{{ isset($eventDetail['rsvp_start_time']) && $eventDetail['rsvp_start_time'] != '' ? $eventDetail['rsvp_start_time'] : '' }}" /><span
-                                        class="input-group-append input-group-addon"><span class="input-group-text"><svg
-                                                width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                        class="input-group-append input-group-addon"><span
+                                            class="input-group-text"><svg width="21" height="20"
+                                                viewBox="0 0 21 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
@@ -236,13 +241,15 @@
                         </div>
                         <div class="col-6 mb-4">
                             <div class="input-form">
-                                <input type="hidden" value="{{$getLastTimeZone->rsvp_start_timezone ?? ''}}" id="selected_start_time_zone"/>
-                                <input type="hidden" value="{{$getLastTimeZone->rsvp_end_timezone ?? ''}}" id="selected_end_time_zone"/>
+                                <input type="hidden" value="{{ $getLastTimeZone->rsvp_start_timezone ?? '' }}"
+                                    id="selected_start_time_zone" />
+                                <input type="hidden" value="{{ $getLastTimeZone->rsvp_end_timezone ?? '' }}"
+                                    id="selected_end_time_zone" />
                                 <select class="form-select" name="start_time_zone" id="start-time-zone"
                                     onchange="getStartEndTimeZone()">
                                     @php
                                         $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
-                                        
+
                                         if (
                                             isset($eventDetail['rsvp_start_timezone']) &&
                                             $eventDetail['rsvp_start_timezone'] != ''
@@ -251,11 +258,16 @@
                                         }
                                     @endphp
                                     {{-- <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option> --}}
-                                    <option value="PST" {{ $start_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
-                                    <option value="MST" {{ $start_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
-                                    <option value="CST" {{ $start_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
-                                    <option value="EST" {{ $start_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                    <option value="GMT+5:30" {{ $start_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30
+                                    <option value="PST" {{ $start_time_zone == 'PST' ? 'selected' : '' }}>PST
+                                    </option>
+                                    <option value="MST" {{ $start_time_zone == 'MST' ? 'selected' : '' }}>MST
+                                    </option>
+                                    <option value="CST" {{ $start_time_zone == 'CST' ? 'selected' : '' }}>CST
+                                    </option>
+                                    <option value="EST" {{ $start_time_zone == 'EST' ? 'selected' : '' }}>EST
+                                    </option>
+                                    <option value="GMT+5:30" {{ $start_time_zone == 'GMT+5:30' ? 'selected' : '' }}>
+                                        GMT+5:30
                                     </option>
 
                                     {{-- <option value="PST">PST</option>
@@ -310,7 +322,8 @@
                             <div class="add-activity-schedule" style="{{ $style }}">
                                 <h5 class="step_1_activity">
                                     @if (isset($eventDetail['events_schedule_list']->data) && count($eventDetail['events_schedule_list']->data) > 0)
-                                <input type="hidden" id="TotalSedulare" value="{{ count($eventDetail['events_schedule_list']->data) }}">
+                                        <input type="hidden" id="TotalSedulare"
+                                            value="{{ count($eventDetail['events_schedule_list']->data) }}">
                                         <p id="isolddata"> {{ count($eventDetail['events_schedule_list']->data) }}
                                             Activity </p>
                                     @else
@@ -318,7 +331,8 @@
                                         schedule
                                     @endif
                                     <p id="isnewdata" style="display: none"> <span><i
-                                                class="fa-solid fa-triangle-exclamation"></i></span>Setup activity schedule
+                                                class="fa-solid fa-triangle-exclamation"></i></span>Setup activity
+                                        schedule
                                     </p>
                                 </h5>
                                 <i class="fa-solid fa-angle-right"></i>
@@ -349,8 +363,9 @@
                                         placeholder="HH:MM AM/PM" id="end-time"
                                         value="{{ isset($eventDetail['rsvp_end_time']) && $eventDetail['rsvp_end_time'] != '' ? $eventDetail['rsvp_end_time'] : '' }}"
                                         name="end-time" onblur="clearError(this)" readonly /><span
-                                        class="input-group-append input-group-addon"><span class="input-group-text"><svg
-                                                width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                        class="input-group-append input-group-addon"><span
+                                            class="input-group-text"><svg width="21" height="20"
+                                                viewBox="0 0 21 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
@@ -373,7 +388,6 @@
                                     @php
                                         $end_time_zone = $getLastTimeZone->rsvp_end_timezone ?? '';
 
-
                                         if (
                                             isset($eventDetail['rsvp_end_time_set']) &&
                                             $eventDetail['rsvp_end_time_set'] != ''
@@ -382,11 +396,16 @@
                                         }
                                     @endphp
 
-                                    <option value="PST" {{ $end_time_zone == 'PST' ? 'selected' : '' }}>PST</option>
-                                    <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST</option>
-                                    <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST</option>
-                                    <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST</option>
-                                    <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>GMT+5:30</option>
+                                    <option value="PST" {{ $end_time_zone == 'PST' ? 'selected' : '' }}>PST
+                                    </option>
+                                    <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST
+                                    </option>
+                                    <option value="CST" {{ $end_time_zone == 'CST' ? 'selected' : '' }}>CST
+                                    </option>
+                                    <option value="EST" {{ $end_time_zone == 'EST' ? 'selected' : '' }}>EST
+                                    </option>
+                                    <option value="GMT+5:30" {{ $end_time_zone == 'GMT+5:30' ? 'selected' : '' }}>
+                                        GMT+5:30</option>
                                     </option>
 
                                     {{-- <option value="PST" {{($end_time_zone =='' || $end_time_zone == 'PST')?'selected':''}}>PST</option>
@@ -418,7 +437,10 @@
                             </div>
                             @php
                                 $style = 'display:none';
-                                if (isset($eventDetail['rsvp_by_date_set']) && $eventDetail['rsvp_by_date_set'] == '1') {
+                                if (
+                                    isset($eventDetail['rsvp_by_date_set']) &&
+                                    $eventDetail['rsvp_by_date_set'] == '1'
+                                ) {
                                     $style = '';
                                 }
                             @endphp
@@ -429,7 +451,8 @@
                                         name="rsvp-by-date" onblur="clearError(this)"
                                         value="{{ isset($eventDetail['rsvp_by_date']) && $eventDetail['rsvp_by_date'] != '' ? Carbon::parse($eventDetail['rsvp_by_date'])->format('m-d-Y') : '' }}"
                                         readonly autocomplete="off">
-                                    <label for="birthday" class="form-label input-field floating-label select-label">RSVP By
+                                    <label for="birthday"
+                                        class="form-label input-field floating-label select-label">RSVP By
                                         Date</label>
                                 </div>
                                 <lable for="event-rsvpby" id="event-rsvpby-error" class="error"></lable>
@@ -437,16 +460,17 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-form">
-                                <input type="text" class="form-control inputText" id="description" name="description"
+                                <input type="text" class="form-control inputText" id="description"
+                                    name="description"
                                     value="{{ isset($eventDetail['event_location_name']) && $eventDetail['event_location_name'] != '' ? $eventDetail['event_location_name'] : '' }}">
                                 <label for="description" class="form-label input-field floating-label">Event
                                     Location Description</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-12 mb-3" style="border-bottom: 1px solid var(--borderColor)">
                             <div class="col-12 mb-4">
-                                <div class="d-flex align-items-center justify-content-between" >
+                                <div class="d-flex align-items-center justify-content-between">
                                     <h6 class="mb-0">Add Address</h6>
                                     <div class="toggle-button-cover ">
                                         <div class="button-cover">
@@ -463,8 +487,8 @@
                             <div class="col-12 mb-4 ckeckedAddress"
                                 style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
                                 <div class="input-form location-icon">
-                                    <input type="text" class="form-control inputText" id="address1" name="address1"
-                                        oninput="clearError(this)"
+                                    <input type="text" class="form-control inputText" id="address1"
+                                        name="address1" oninput="clearError(this)"
                                         value="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? $eventDetail['address_1'] : '' }}"
                                         required="">
                                     <label for="address1" class="form-label input-field floating-label">Address 1
@@ -490,8 +514,8 @@
                             <div class="col-12 mb-4 ckeckedAddress"
                                 style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
                                 <div class="input-form location-icon">
-                                    <input type="text" class="form-control inputText" id="address2" name="address2"
-                                        required=""
+                                    <input type="text" class="form-control inputText" id="address2"
+                                        name="address2" required=""
                                         value="{{ isset($eventDetail['address_2']) && $eventDetail['address_2'] != '' ? $eventDetail['address_2'] : '' }}">
                                     <label for="address2" class="form-label input-field floating-label">Address
                                         2</label>
@@ -509,10 +533,11 @@
                             <div class="col-12 mb-4 ckeckedAddress"
                                 style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="city" name="city"
-                                        oninput="clearError(this)" required=""
+                                    <input type="text" class="form-control inputText" id="city"
+                                        name="city" oninput="clearError(this)" required=""
                                         value="{{ isset($eventDetail['city']) && $eventDetail['city'] != '' ? $eventDetail['city'] : '' }}">
-                                    <label for="select-label" class="form-label input-field floating-label select-label">City
+                                    <label for="select-label"
+                                        class="form-label input-field floating-label select-label">City
                                         *</label>
 
                                 </div>
@@ -521,12 +546,13 @@
                             <div class="col-6 mb-4 ckeckedAddress"
                                 style="{{ isset($eventDetail['address_1']) && $eventDetail['address_1'] != '' ? '' : 'display:none' }}">
                                 <div class="input-form">
-                                    <input type="text" class="form-control inputText" id="state" name="state"
-                                        oninput="clearError(this)"
+                                    <input type="text" class="form-control inputText" id="state"
+                                        name="state" oninput="clearError(this)"
                                         value="{{ isset($eventDetail['state']) && $eventDetail['state'] != '' ? $eventDetail['state'] : '' }}"
                                         required="">
 
-                                    <label for="select-label" class="form-label input-field floating-label select-label">State
+                                    <label for="select-label"
+                                        class="form-label input-field floating-label select-label">State
                                         *</label>
 
                                 </div>
@@ -537,12 +563,14 @@
                                 <div class="input-form">
                                     {{-- <input type="number" class="form-control inputText" id="zipcode" name="zipcode"
                                         oninput="clearError(this)" required="" value="{{(isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '')?$eventDetail['zip_code']:''}}"> --}}
-                                    <input type="text" class="form-control inputText" id="zipcode" name="zipcode"
+                                    <input type="text" class="form-control inputText" id="zipcode"
+                                        name="zipcode"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, ''); clearError(this)"
                                         required=""
                                         value="{{ isset($eventDetail['zip_code']) && $eventDetail['zip_code'] != '' ? $eventDetail['zip_code'] : '' }}">
 
-                                    <label for="select-label" class="form-label input-field floating-label select-label">Zip
+                                    <label for="select-label"
+                                        class="form-label input-field floating-label select-label">Zip
                                         Code *</label>
 
                                 </div>
@@ -552,13 +580,14 @@
                         <div class="col-lg-12">
                             <div class="input-form">
                                 <textarea name="message_to_guests" class="form-control inputText" id="message_to_guests" style="resize:none;">{{ isset($eventDetail['message_to_guests']) && $eventDetail['message_to_guests'] != '' ? $eventDetail['message_to_guests'] : '' }}</textarea>
-                                <label for="code" class="form-label input-field floating-label textarea-label">Message
+                                <label for="code"
+                                    class="form-label input-field floating-label textarea-label">Message
                                     to Guests</label>
                             </div>
                         </div>
                         <!-- Modal -->
 
-                        
+
                     </div>
                 </div>
                 <div class="col-lg-12 mt-3">
@@ -584,9 +613,9 @@
                                 <h5 class="ms-2">Edit Design</h5>
                             </a>
                             <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
-                                <h5 class="me-2 guestBtn"  style="color: #b5b8bf !important;">Next: Guests</h5>
-                                <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                <h5 class="me-2 guestBtn" style="color: #b5b8bf !important;">Next: Guests</h5>
+                                <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path id='guestBtn' class="guestBtn"
                                             d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
                                             stroke="#b5b8bf !important;" stroke-width="1.5" stroke-miterlimit="10"
@@ -610,9 +639,9 @@
                                 <h5 class="ms-2">Edit Design</h5>
                             </a>
                             <button type="button" class="d-flex footer-bottom-btn" id="next_guest_step">
-                                <h5 class="me-2 guestBtn"  style="color: #b5b8bf !important;">Next: Guests</h5>
-                                <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                <h5 class="me-2 guestBtn" style="color: #b5b8bf !important;">Next: Guests</h5>
+                                <span><svg class="guestBtn" width="16" height="16" viewBox="0 0 16 16"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path id='guestBtn' class="guestBtn"
                                             d="M5.93994 13.2797L10.2866 8.93306C10.7999 8.41973 10.7999 7.57973 10.2866 7.06639L5.93994 2.71973"
                                             stroke="#b5b8bf !important;" stroke-width="1.5" stroke-miterlimit="10"
@@ -649,14 +678,14 @@
         <div class="supportive-div activity_bar">
             @if (isset($eventDetail['events_schedule_list']) && !empty($eventDetail['events_schedule_list']))
                 @php
-                $totalActivityByDate  = $eventDetail['totalActivityByDate'];
-                   
-                    $localdate=[];
+                    $totalActivityByDate = $eventDetail['totalActivityByDate'];
+
+                    $localdate = [];
                     foreach ($totalActivityByDate as $key => $value) {
                         $localdate[] = $key;
                     }
-                        $j=0;
-                
+                    $j = 0;
+
                     $currentDate = $eventDetail['events_schedule_list']->event_start_date;
                     $i = 0;
                 @endphp
@@ -671,7 +700,7 @@
                                 $endDate = new DateTime($eventDetail['end_date']);
                                 $formattedDate = $endDate->format('Ymd');
                                 $i++;
-                                
+
                             @endphp
                             <h3>{{ $date->format('l - F j, Y') }}</h3>
                         </div>
@@ -715,8 +744,8 @@
                                                 data-bs-target="#collapse{{ Carbon::parse($currentDate)->format('Ymd') }}">
                                                 <div>
                                                     Activities <span
-                                                        class="activity_total_count total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]]  }})</span>
-                                                        {{-- class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span> --}}
+                                                        class="activity_total_count total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ $totalActivityByDate[$localdate[$j]] }})</span>
+                                                    {{-- class="total_activity-{{ Carbon::parse($currentDate)->format('Ymd') }}">({{ count($eventDetail['events_schedule_list']->data) }})</span> --}}
                                                 </div>
                                                 <i class="fa-solid fa-angle-down"></i>
                                             </button>
@@ -799,21 +828,19 @@
                                                                             <div class="input-group time ">
                                                                                 <input
                                                                                     class="form-control timepicker activity_start_time"
-                                                                                   
                                                                                     name="activity-start-time[]"
                                                                                     placeholder="HH:MM AM/PM"
-                                                                                    required="" 
+                                                                                    required=""
                                                                                     id="activity-start-time"
-                                                                                    value="{{$data['start_time']}}" />
+                                                                                    value="{{ $data['start_time'] }}" />
 
-                                                                                    
-                                                                                    <span
+
+                                                                                <span
                                                                                     class="input-group-append input-group-addon">
 
-                                                                                   
-                                                                                    
-                                                                                    <span
-                                                                                        class="input-group-text">
+
+
+                                                                                    <span class="input-group-text">
                                                                                         <svg width="21"
                                                                                             height="20"
                                                                                             viewBox="0 0 21 20"
@@ -899,8 +926,8 @@
                                 </div>
                             </div>
 
-                            
-                            
+
+
 
                             <div class="activity-schedule-inner-btn">
                                 <button class="cmn-btn" id="save_activity_schedule">
@@ -916,41 +943,39 @@
                     @endphp
                 @endwhile
 
-                @if ($eventDetail['rsvp_end_time_set'] == '1')     
-                            <div class="ac-end-time" style="display: block;">
-                                <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
-                                <h4 class="mt-3 ">Event Ends</h4>
-                                <div class="col-12 ac-end-time new_event_detail_form" style="display: block;">
-                                    <div class="form-group">
-                                        <label>End Time</label>
-                                        <div class="input-group time ">
-                                            <input class="form-control end_timepicker"
-                                                placeholder="HH:MM AM/PM" id="ac-end-time" name="ac-end-time"
-                                                oninput="clearError()"
-                                                value="{{ $schedule_end_time->format('g:i A') }}"
-                                                required="" readonly=""><span
-                                                class="input-group-append input-group-addon"><span
-                                                    class="input-group-text"><svg width="21"
-                                                        height="20" viewBox="0 0 21 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
-                                                            stroke="#64748B" stroke-width="1.5"
-                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                        </path>
-                                                        <path
-                                                            d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
-                                                            stroke="#64748B" stroke-width="1.5"
-                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                        </path>
-                                                    </svg></span></span>
-                                        </div>
-                                    </div>
-
-
+                @if ($eventDetail['rsvp_end_time_set'] == '1')
+                    <div class="ac-end-time" style="display: block;">
+                        <input type="hidden" id="LastEndTime" value="{{ $formattedDate }}">
+                        <h4 class="mt-3 ">Event Ends</h4>
+                        <div class="col-12 ac-end-time new_event_detail_form" style="display: block;">
+                            <div class="form-group">
+                                <label>End Time</label>
+                                <div class="input-group time ">
+                                    <input class="form-control end_timepicker" placeholder="HH:MM AM/PM"
+                                        id="ac-end-time" name="ac-end-time" oninput="clearError()"
+                                        value="{{ $schedule_end_time->format('g:i A') }}" required=""
+                                        readonly=""><span class="input-group-append input-group-addon"><span
+                                            class="input-group-text"><svg width="21" height="20"
+                                                viewBox="0 0 21 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M18.8334 9.99984C18.8334 14.5998 15.1 18.3332 10.5 18.3332C5.90002 18.3332 2.16669 14.5998 2.16669 9.99984C2.16669 5.39984 5.90002 1.6665 10.5 1.6665C15.1 1.6665 18.8334 5.39984 18.8334 9.99984Z"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </path>
+                                                <path
+                                                    d="M13.5917 12.65L11.0083 11.1083C10.5583 10.8416 10.1917 10.2 10.1917 9.67497V6.2583"
+                                                    stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </path>
+                                            </svg></span></span>
                                 </div>
                             </div>
-                            @endif
+
+
+                        </div>
+                    </div>
+                @endif
             @else
                 @php
                     $start_date = '';
@@ -980,7 +1005,7 @@
                                 @php
                                     $date = Carbon::parse($currentDate);
                                     $schedule_start_time = Carbon::parse($eventDetail['rsvp_start_time']);
-                                  
+
                                     $i++;
                                 @endphp
                                 <h3>{{ $date->format('l - F j, Y') }}</h3>
@@ -1049,7 +1074,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                 
+
                                 </div>
                                 <div class="activity-schedule-inner-btn">
                                     <button class="cmn-btn" id="save_activity_schedule">
