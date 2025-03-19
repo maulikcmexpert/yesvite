@@ -1447,7 +1447,11 @@ $(document).ready(function () {
                         postData.comment_on_off == 1
                     );
 
+                    if (postData.post_type == "0") {
+                        $(".create-post-upload-img-wrp").remove();
+                         $("#textform").submit();
 
+                    }
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
                         let mediaWrapper = $("#imagePreview");
