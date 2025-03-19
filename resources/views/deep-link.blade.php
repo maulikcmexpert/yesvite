@@ -6,16 +6,31 @@
     <title>Open in App</title>
     <script>
         window.onload = function () {
-            var now = new Date().getTime();
-            var fallbackTimeout = 2000;  // Fallback after 2 seconds
+            const deepLink = "{{ $deepLink }}";
+            const fallbackUrl = "{{ $fallbackUrl }}";
+            const fallbackTimeout = 2000;  // 2 seconds fallback delay
 
-            // Attempt to open the mobile app using the deep link
-            window.location.href = "{{ $deepLink }}";
+            let opened = false;
 
-            // If the app is not installed, redirect to the fallback URL
-            setTimeout(function () {
-                if (new Date().getTime() - now < fallbackTimeout + 100) {
-                    window.location.href = "{{ $fallbackUrl }}";
+            // Detect visibility change (if user switches to the app, the page becomes hidden)
+            const handleVisibilityChange = () => {
+                if (document.hidden) {
+                    opened = true;  // App opened successfully
+                }
+            };
+
+            document.addEventListener("visibilitychange", handleVisibilityChange);
+
+            // Try opening the app in an iframe (invisible)
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = deepLink;
+            document.body.appendChild(iframe);
+
+            // Fallback to store if the app doesn't open
+            setTimeout(() => {
+                if (!opened) {
+                    window.location.href = fallbackUrl;
                 }
             }, fallbackTimeout);
         };
