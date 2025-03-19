@@ -22,14 +22,14 @@
                 appOpened = true;  // App opened successfully
             };
 
-            document.addEventListener('visibilitychange', onVisibilityChange);
-            window.addEventListener('blur', onBlur);
+            // document.addEventListener('visibilitychange', onVisibilityChange);
+            // window.addEventListener('blur', onBlur);
 
-            // Open the app using iframe for better compatibility
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = appLink;
-            document.body.appendChild(iframe);
+            // // Open the app using iframe for better compatibility
+            // const iframe = document.createElement('iframe');
+            // iframe.style.display = 'none';
+            // iframe.src = appLink;
+            // document.body.appendChild(iframe);
 
             const startTime = Date.now();
 
@@ -42,9 +42,9 @@
                 }
 
                 // Cleanup
-                document.removeEventListener('visibilitychange', onVisibilityChange);
-                window.removeEventListener('blur', onBlur);
-                document.body.removeChild(iframe);
+                // document.removeEventListener('visibilitychange', onVisibilityChange);
+                // window.removeEventListener('blur', onBlur);
+                // document.body.removeChild(iframe);
             }, 1500);
         }
     </script>
