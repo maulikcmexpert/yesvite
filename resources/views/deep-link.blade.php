@@ -6,10 +6,9 @@
     <title>Open in App</title>
     <script>
         window.onload = function () {
-            const deepLink = "{{ $deepLink }}";         // Deep link for your app (myapp://)
-            const universalLink = "{{ $universalLink }}"; // Use universal link for iOS (https://myapp.com/redirect)
-            const fallbackUrl = "{{ $fallbackUrl }}";    // App Store or Play Store
-            const fallbackTimeout = 2000;                // Fallback delay
+            const deepLink = "{{ $deepLink }}";
+            const fallbackUrl = "{{ $fallbackUrl }}";
+            const fallbackTimeout = 2000;  // Fallback after 2 seconds
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             let appOpened = false;
@@ -18,13 +17,25 @@
             const isIOS = /iPhone|iPad|iPod/.test(userAgent);
             const isAndroid = /Android/.test(userAgent);
 
-            // Function to try opening the app
+            // Add hidden image trick to detect app launch
+            const img = new Image();
+            img.src = deepLink;
+            
+            img.onerror = () => {
+                // If image fails to load, app is likely not installed
+                appOpened = false;
+            };
+
+            img.onload = () => {
+                appOpened = true;  // App opened successfully
+            };
+
             const tryOpenApp = () => {
                 if (isIOS) {
-                    // iOS: Use Universal Link first to avoid the invalid URL alert
-                    window.location.href = universalLink;
+                    // iOS uses window.location for reliable deep linking
+                    window.location.href = deepLink;
                 } else if (isAndroid) {
-                    // Android: Use iframe deep link
+                    // Android uses iframe for better compatibility
                     const iframe = document.createElement('iframe');
                     iframe.style.display = 'none';
                     iframe.src = deepLink;
@@ -36,23 +47,23 @@
             const handleFallback = () => {
                 const elapsed = Date.now() - start;
 
-                // If the app didn't open, redirect to fallback
+                // If app is not opened, redirect to fallback
                 if (!appOpened && elapsed >= fallbackTimeout) {
                     window.location.href = fallbackUrl;
                 }
             };
 
-            // Detect app opening via visibility change
+            // Visibility change listener
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
                     appOpened = true;  // App opened successfully
                 }
             });
 
-            // Open the app and fallback if not installed
+            // Attempt to open the app
             tryOpenApp();
 
-            // Fallback logic
+            // Trigger fallback if the app doesn't open
             setTimeout(() => {
                 handleFallback();
             }, fallbackTimeout);
