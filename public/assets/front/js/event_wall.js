@@ -1525,7 +1525,7 @@ $(document).ready(function () {
                         $("#create-poll-btn").trigger("click"); // Open poll form modal
 
                         let pollData = postData.pollData;
-
+                        const maxLength = 140;
                         if (pollData) {
                             $("#yourquestion").val(pollData.poll_question);
                             $("select[name='duration']").val(
@@ -1561,7 +1561,14 @@ $(document).ready(function () {
                             // );
                             $(".poll-options input[name='options[]']").each((index, element) => {
                                 if (options[index]) {
-                                    $(element).val(options[index].option); // Update existing inputs
+                                    $(element).val(options[index].option);
+                                    const charCount = $(element).val().length;
+
+                                    // Update the character count display
+                                    $(element)
+                                        .closest(".mb-3")
+                                        .find(".char-count")
+                                        .text(`${charCount}/${maxLength}`); // Update existing inputs
                                 }
                             });
 
