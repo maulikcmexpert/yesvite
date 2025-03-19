@@ -607,7 +607,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="create-post-profile">
-                        <div class="create-post-profile-wrp">
+                        <div class="create-post-profile-wrp"   style="display: none">
 
                             @if ($photos != '')
                                 <img src="{{ asset('storage/profile/' . $photos) }} " alt="" loading="lazy">
