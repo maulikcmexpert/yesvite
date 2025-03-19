@@ -1103,7 +1103,7 @@ $(document).ready(function () {
             var photoInput = document.getElementById("fileInput");
             let imagePreview = document.getElementById("imagePreview");
 
-
+            let photoPostType = document.getElementById("photoPostType");
 
             // Check if no photo is uploaded AND no content is entered
             // if (
@@ -1118,13 +1118,10 @@ $(document).ready(function () {
             // }
 
             // Set post type based on presence of an uploaded image or entered content
-            if (
-                (photoInput && photoInput.files.length > 0) ||
-                (imagePreview && imagePreview.children.length > 0) // ✅ Ensure imagePreview exists
-            ) {
-                document.getElementById("photoPostType").value = 1;
+            if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
+                photoPostType.value = 1;
             } else {
-                document.getElementById("photoPostType").value = 0;
+                photoPostType.value = 0;
             }
 
 
