@@ -31,6 +31,7 @@
 
     // Open the app using the iframe
     iframe.src = appLink;
+    alert(appOpened);
 
     // Fallback to App Store after timeout
     setTimeout(() => {
