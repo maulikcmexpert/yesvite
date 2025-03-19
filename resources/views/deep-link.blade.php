@@ -24,7 +24,7 @@
     <script>
         window.onload = function () {
             var now = new Date().getTime();
-            var fallbackTimeout = 5000; // Increased timeout to 3 seconds
+            var fallbackTimeout = 1000; // Increased timeout to 3 seconds
 
             window.location.href ="comappyesvite://open";
 
