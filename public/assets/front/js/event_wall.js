@@ -1105,7 +1105,7 @@ $(document).ready(function () {
 
             let photoPostType = document.getElementById("photoPostType");
 
-            // Check if no photo is uploaded AND no content is entered
+            // // Check if no photo is uploaded AND no content is entered
             // if (
             //     (!photoInput || photoInput.files.length === 0) &&
             //     imagePreview.children.length === 0
@@ -1116,6 +1116,19 @@ $(document).ready(function () {
             //     );
             //     return;
             // }
+
+
+// ✅ Ensure imagePreview exists before accessing children
+let hasImages = imagePreview && imagePreview.children ? imagePreview.children.length > 0 : false;
+
+// ✅ Ensure photoInput exists and has files
+let hasUploadedPhotos = photoInput && photoInput.files ? photoInput.files.length > 0 : false;
+
+// ✅ Condition: If no image is uploaded AND no content is entered
+if (!hasUploadedPhotos && !hasImages && postContent === "") {
+    toastr.error("Please upload a photo or enter some content for the post.");
+    return; // Prevent form submission
+}
 
             // Set post type based on presence of an uploaded image or entered content
             if (photoPostType) {
