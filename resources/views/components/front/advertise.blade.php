@@ -33,33 +33,37 @@
         openApp();
     });
     function openApp() {
-    const appLink = "comappyesvite://somepage"; // Deep link
-    const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store link
+    const appLink = "comappyesvite://somepage"; // Deep link to open the app
+    const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store fallback
 
+    let appOpened = false;
     const now = Date.now();
-    let hasFocus = false;
 
-    // Add event listener to detect if the user leaves the page (app opened)
-    const handleFocus = () => {
-        hasFocus = true;
+    // Event listener for visibility change (detects if app opened)
+    const handleVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true;
+        }
     };
 
-    window.addEventListener("focus", handleFocus);
+    // Attach visibility change event
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    // Attempt to open the app
+    // Try to open the app
     window.location.href = appLink;
 
     // Set timeout to check if the app opened
     setTimeout(() => {
         const elapsed = Date.now() - now;
 
-        if (!hasFocus && elapsed < 1500) {
-            window.location.href = appStoreLink; // Redirect to App Store
+        // Redirect to App Store only if the app did NOT open
+        if (!appOpened && elapsed < 1500) {
+            window.location.href = appStoreLink;
         }
 
-        // Clean up event listener
-        window.removeEventListener("focus", handleFocus);
-    }, 1200); // Reduced delay slightly for better user experience
+        // Cleanup event listener
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }, 1200);
 }
 
 
