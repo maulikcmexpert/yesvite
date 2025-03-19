@@ -23,8 +23,8 @@
             const now = Date.now();
             window.location.href = appLink;
 
-            alert(appLink);
             alert(elapsed);
+            alert(appLink);
             alert(appOpened);
             // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
