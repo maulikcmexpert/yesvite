@@ -1587,9 +1587,9 @@ class EventWallController extends BaseController
     // }
     public function createPost(Request $request)
     {
-        $mediaIds = $request->input('media_ids', []);
+        $mediaIds = $request->input('media-ids', []);
 
-        dd($request);
+        dd($mediaIds);
         $user = Auth::guard('web')->user();
 
 
