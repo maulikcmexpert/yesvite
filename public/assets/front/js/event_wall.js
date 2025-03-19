@@ -1553,10 +1553,12 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
+updateCharCount(this);
 
                             }
                             $(document).on("click", ".delete-polll", function () {
-                                $(this).closest(".option-poll").remove(); // Remove the closest parent .option-poll div
+                                $(this).closest(".option-poll").remove();
+                                renumberOptions();// Remove the closest parent .option-poll div
                             });
 
 
