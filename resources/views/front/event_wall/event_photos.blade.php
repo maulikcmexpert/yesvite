@@ -602,7 +602,7 @@
         <div class="modal-content">
             <div class="create-post-main-body">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel">Upload Photos/Videos</h1>
+                    <h1 class="modal-title" id="exampleModalLabel" >Upload Photos/Videos</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -625,8 +625,8 @@
                                 </h5>
                             @endif
 
-                            <div id="savedSettingsDisplay">
-                                <h4> <i class="fa-solid fa-angle-down"></i></h4>
+                            <div id="savedSettingsDisplay"  >
+                                <h4><i class="fa-solid fa-angle-down"></i></h4>
                             </div>
                         </div>
                     </div>
