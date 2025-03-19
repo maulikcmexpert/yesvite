@@ -1525,7 +1525,7 @@ $(document).ready(function () {
                         $("#create-poll-btn").trigger("click"); // Open poll form modal
 
                         let pollData = postData.pollData;
-
+                        const maxLength = 140;
                         if (pollData) {
                             $("#yourquestion").val(pollData.poll_question);
                             $("select[name='duration']").val(
