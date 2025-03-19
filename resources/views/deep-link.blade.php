@@ -6,8 +6,8 @@
     <title>Open Yesvite App</title>
     <script>
         document.getElementById('open-app-btn').addEventListener('click', () => {
-            const appLink = "{{ $deepLink }}";
-            const fallbackUrl = "{{ $fallbackUrl }}";
+            const appLink = "comappyesvite://open";
+            const fallbackUrl = "https://apps.apple.com/app/6736650042";
     
             let appOpened = false;
             const startTime = Date.now();
