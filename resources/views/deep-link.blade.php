@@ -7,35 +7,33 @@
     
     
     <script>
-        function openApp() {
+           function openApp() {
             const appLink = "comappyesvite://somepage";
             const appStoreLink = "https://apps.apple.com/app/6736650042";
 
             let appOpened = false;
 
-            // Detect if the page is hidden (app opened successfully)
-            const handleVisibilityChange = () => {
-                if (document.hidden) {
-                    appOpened = true;
-                    clearTimeout(fallbackTimer);  // Cancel App Store redirect
-                }
+            // Detect if the app opens successfully
+            const onPageHide = () => {
+                appOpened = true;  
+                clearTimeout(fallbackTimer);  // Prevent App Store redirect
             };
-            
-            document.addEventListener('visibilitychange', handleVisibilityChange);
+
+            window.addEventListener('pagehide', onPageHide);
 
             // Attempt to open the app
             window.location.href = appLink;
 
-            // Fallback: Redirect to App Store after 1.5s if app does not open
+            // Fallback to the App Store if the app doesn't open
             const fallbackTimer = setTimeout(() => {
                 if (!appOpened) {
                     window.location.href = appStoreLink;
                 }
             }, 1500);
 
-            // Cleanup
+            // Clean up after 2 seconds
             setTimeout(() => {
-                document.removeEventListener('visibilitychange', handleVisibilityChange);
+                window.removeEventListener('pagehide', onPageHide);
             }, 2000);
         }
     </script>
