@@ -1555,9 +1555,9 @@ $(document).ready(function () {
                                 });
 
                             }
-$(document).on("click", ".delete-polll", function () {
-    $(this).closest(".option-poll").remove(); // Remove the closest parent .option-poll div
-});
+                            $(document).on("click", ".delete-polll", function () {
+                                $(this).closest(".option-poll").remove(); // Remove the closest parent .option-poll div
+                            });
 
 
                         }

@@ -2038,6 +2038,19 @@ class EventWallController extends BaseController
             // Delete old poll options before adding new ones
             EventPostPollOption::where('event_post_poll_id', $eventPostPoll->id)->delete();
             $msg = 'Poll updated successfully!';
+
+
+            $mediaIds = $request->input('option-ids', []);
+
+            $get_all_image_post = EventPostPollOption::where('event_post_poll_id', $request->post_id)
+            ->pluck('id')
+            ->toArray();
+
+
+            $mediaIds = array_map('intval', $mediaIds);
+            $get_all_image_post = array_map('intval', $get_all_image_post);
+
+            $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
         } else {
             // Create new poll
             $eventPostPoll = new EventPostPoll();
