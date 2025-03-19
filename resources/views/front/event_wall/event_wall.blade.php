@@ -193,40 +193,14 @@
                                                                                 data-event-post-id="{{ $post['id'] }}"
                                                                                 data-user-id="{{ $login_user_id }}"
                                                                                 data-post-control="delete_post">
-                                                                                <svg width="16" height="16"
-                                                                                viewBox="0 0 16 16"
-                                                                                fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path
-                                                                                    d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                                <path
-                                                                                    d="M5.66602 3.31398L5.81268 2.44065C5.91935 1.80732 5.99935 1.33398 7.12602 1.33398H8.87268C9.99935 1.33398 10.086 1.83398 10.186 2.44732L10.3327 3.31398"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                                <path
-                                                                                    d="M12.5669 6.09375L12.1336 12.8071C12.0603 13.8537 12.0003 14.6671 10.1403 14.6671H5.86026C4.00026 14.6671 3.94026 13.8537 3.86693 12.8071L3.43359 6.09375"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                                <path d="M6.88672 11H9.10672"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                                <path
-                                                                                    d="M6.33398 8.33398H9.66732"
-                                                                                    stroke="#94A3B8"
-                                                                                    stroke-width="1.5"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round" />
-                                                                            </svg>
+                                                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    <path d="M5.66406 3.31301L5.81073 2.43967C5.9174 1.80634 5.9974 1.33301 7.12406 1.33301H8.87073C9.9974 1.33301 10.0841 1.83301 10.1841 2.44634L10.3307 3.31301" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    <path d="M12.563 6.09375L12.1297 12.8071C12.0564 13.8537 11.9964 14.6671 10.1364 14.6671H5.85635C3.99635 14.6671 3.93635 13.8537 3.86302 12.8071L3.42969 6.09375" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    <path d="M6.88281 11H9.10281" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    <path d="M6.33594 8.33301H9.66927" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    </svg>
+
                                                                                 Delete
                                                                             </button>
                                                                         </li>
@@ -379,40 +353,14 @@
                                                                                     data-event-post-id="{{ $post['id'] }}"
                                                                                     data-user-id="{{ $login_user_id }}"
                                                                                     data-post-control="delete_post">
-                                                                                    <svg width="16" height="16"
-                                                                                    viewBox="0 0 16 16"
-                                                                                    fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <path
-                                                                                        d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
-                                                                                        stroke="#94A3B8"
-                                                                                        stroke-width="1.5"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
-                                                                                    <path
-                                                                                        d="M5.66602 3.31398L5.81268 2.44065C5.91935 1.80732 5.99935 1.33398 7.12602 1.33398H8.87268C9.99935 1.33398 10.086 1.83398 10.186 2.44732L10.3327 3.31398"
-                                                                                        stroke="#94A3B8"
-                                                                                        stroke-width="1.5"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
-                                                                                    <path
-                                                                                        d="M12.5669 6.09375L12.1336 12.8071C12.0603 13.8537 12.0003 14.6671 10.1403 14.6671H5.86026C4.00026 14.6671 3.94026 13.8537 3.86693 12.8071L3.43359 6.09375"
-                                                                                        stroke="#94A3B8"
-                                                                                        stroke-width="1.5"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
-                                                                                    <path d="M6.88672 11H9.10672"
-                                                                                        stroke="#94A3B8"
-                                                                                        stroke-width="1.5"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
-                                                                                    <path
-                                                                                        d="M6.33398 8.33398H9.66732"
-                                                                                        stroke="#94A3B8"
-                                                                                        stroke-width="1.5"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round" />
-                                                                                </svg>
+                                                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        <path d="M5.66406 3.31301L5.81073 2.43967C5.9174 1.80634 5.9974 1.33301 7.12406 1.33301H8.87073C9.9974 1.33301 10.0841 1.83301 10.1841 2.44634L10.3307 3.31301" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        <path d="M12.563 6.09375L12.1297 12.8071C12.0564 13.8537 11.9964 14.6671 10.1364 14.6671H5.85635C3.99635 14.6671 3.93635 13.8537 3.86302 12.8071L3.42969 6.09375" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        <path d="M6.88281 11H9.10281" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        <path d="M6.33594 8.33301H9.66927" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        </svg>
+
                                                                                     Delete
                                                                                 </button>
                                                                             </li>
