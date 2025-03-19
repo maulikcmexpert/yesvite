@@ -57,7 +57,7 @@
         const elapsed = Date.now() - now;
 
         // Redirect to App Store only if the app did NOT open
-        if (!appOpened && elapsed < 1500) {
+        if (!appOpened && elapsed < 1502) {
             window.location.href = appStoreLink;
         }
 
