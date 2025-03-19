@@ -22,6 +22,8 @@
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true;
+            window.location.href = appLink;  // Redirect to App Store
+
         }
     };
     
