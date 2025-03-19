@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
-    
     <script>
         function openApp() {
             const appLink = "comappyesvite://somepage";
@@ -12,33 +11,29 @@
             
             let appOpened = false;
 
-            // Detect if the app opens successfully
+            // Detect if the app opened successfully
             const onPageHide = () => {
-                appOpened = true;
+                appOpened = true;  // App successfully opened
             };
 
             window.addEventListener('pagehide', onPageHide);
 
-            // Open the app
-            const now = Date.now();
-            window.location.href = appLink;
+            // Create a hidden iframe to open the app silently
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            iframe.src = appLink;
 
-            // Ensure the App Store opens only if the app doesn't launch
-            const checkIfAppOpened = () => {
-                const elapsed = Date.now() - now;
-
-                if (!appOpened && elapsed < 1500) {
-                    window.location.href = appStoreLink;  // Redirect to App Store
+            // Fallback: Redirect to App Store automatically
+            const fallbackTimer = setTimeout(() => {
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // Auto redirect to App Store
                 }
 
-                // Clean up event listener
+                // Clean up
                 window.removeEventListener('pagehide', onPageHide);
-            };
-
-            // Use requestAnimationFrame for more precise timing
-            requestAnimationFrame(() => {
-                setTimeout(checkIfAppOpened, 1500);
-            });
+                document.body.removeChild(iframe);
+            }, 1500);
         }
     </script>
     {{-- <script>
