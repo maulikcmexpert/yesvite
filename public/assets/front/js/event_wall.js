@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-        alert(postContent);
+
 
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
@@ -1101,9 +1101,9 @@ $(document).ready(function () {
             pollForm.submit();
         } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
-            var imagePreview = document.getElementById("imagePreview");
+            let imagePreview = document.getElementById("imagePreview");
 
-
+            let photoPostType = document.getElementById("photoPostType");
 
             // Check if no photo is uploaded AND no content is entered
             // if (
@@ -1118,14 +1118,16 @@ $(document).ready(function () {
             // }
 
             // Set post type based on presence of an uploaded image or entered content
-            if (
-                (photoInput && photoInput.files.length > 0) ||
-                imagePreview.children.length > 0
-            ) {
-                document.getElementById("photoPostType").value = 1;
+            if (photoPostType) {
+                if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
+                    photoPostType.value = 1;
+                } else {
+                    photoPostType.value = 0;
+                }
             } else {
-                document.getElementById("photoPostType").value = 0;
+                console.error("photoPostType element not found!");
             }
+
 
             // Show loader inside the button and disable it
             $this
@@ -1450,7 +1452,7 @@ $(document).ready(function () {
                     if (postData.post_type == "0") {
                         $(".create-post-upload-img-wrp").remove();
 
-$("#photoForm").submit();
+
 
                     }
                     if (postData.post_type == "1") {
