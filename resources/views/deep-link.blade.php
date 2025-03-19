@@ -11,36 +11,40 @@
     
             let appOpened = false;
     
-            // Listen for page becoming hidden (when app opens)
-            const onBlur = () => {
-                appOpened = true;  // The app opened successfully
+            // Create a hidden iframe for reliable app opening
+            const openApp = () => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                iframe.src = appLink;
+    
+                // Listen for visibility change and pagehide
+                const onAppOpen = () => {
+                    appOpened = true;  // App opened successfully
+                };
+    
+                window.addEventListener('pagehide', onAppOpen);
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') {
+                        appOpened = true;  
+                    }
+                });
+    
+                // Remove iframe after some time
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                }, 1000);
             };
     
-            // Use blur or visibility change detection
-            window.addEventListener('blur', onBlur);  
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'hidden') {
-                    appOpened = true;  // App opened successfully
-                }
-            });
-    
-            // Try to open the app using a hidden iframe (more reliable)
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-    
             // Attempt to open the app
-            iframe.src = appLink;
+            openApp();
     
-            // Fallback to the App Store if the app doesn't open
+            // Fallback to App Store only if the app did not open
             setTimeout(() => {
-                window.removeEventListener('blur', onBlur);
-                document.removeEventListener('visibilitychange', onBlur);
-    
                 if (!appOpened) {
-                    window.location.href = fallbackUrl;  // Redirect to App Store
+                    window.location.href = fallbackUrl;  
                 }
-            }, 1500);  // Give it 1.5 seconds to detect if the app opened
+            }, 2500);  // Extended delay for reliability (2.5 seconds)
         });
     </script>
     {{-- <script>
