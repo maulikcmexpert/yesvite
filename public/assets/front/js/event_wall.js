@@ -1432,6 +1432,7 @@ $(document).ready(function () {
 
                     }
 
+                    $(".upload-photo-poll").removeClass('photos');
                     // Update the display with the selected option
                     $("#savedSettingsDisplay").html(`
     <h4>${privacyText} <i class="fa-solid fa-angle-down"></i></h4>
