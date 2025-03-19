@@ -6,35 +6,42 @@
     <title>Open Yesvite App</title>
    
     <script>
-        function openApp() {
-            const now = Date.now();
-            let appOpened = false;  // Flag to track if the app was opened
+ function openApp() {
+    const appLink = "comappyesvite://somepage";
+    const appStoreLink = "https://apps.apple.com/app/6736650042";
 
-            const appLink = "your-app-scheme://somepage";   // Deep link to open the app
-            const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
+    let appOpened = false;
+    let fallbackTriggered = false;  // Fallback flag
 
-            // Attempt to open the app
-            window.location.href = appLink;
+    // Use `pagehide` to detect if the app opened successfully
+    const onPageHide = () => {
+        appOpened = true;
+    };
 
-            // Event listener to detect if the app is opened
-            const onPageHide = () => {
-                appOpened = true;
-            };
-            window.addEventListener('pagehide', onPageHide);
+    window.addEventListener('pagehide', onPageHide);
 
-            // Fallback: Redirect to App Store if the app doesn't open
-            setTimeout(() => {
-                const elapsed = Date.now() - now;
+    // Open the app
+    const now = Date.now();
+    window.location.href = appLink;
 
-                if (!appOpened && elapsed < 1500) {
-                    window.location.href = appStoreLink;  // Redirect to App Store
-                }
-
-                // Clean up event listener
-                window.removeEventListener('pagehide', onPageHide);
-            }, 1500);
-
+    // Force fallback if app doesn't open
+    const fallbackTimeout = setTimeout(() => {
+        if (!appOpened && !fallbackTriggered) {
+            fallbackTriggered = true;  // Mark fallback as triggered
+            window.location.href = appStoreLink;  // Redirect to App Store
         }
+
+        // Clean up event listener
+        window.removeEventListener('pagehide', onPageHide);
+    }, 1500);
+
+    // Ensure cleanup in case of browser inconsistencies
+    window.addEventListener('blur', () => {
+        clearTimeout(fallbackTimeout);
+        window.removeEventListener('pagehide', onPageHide);
+    });
+}
+
     </script>
     {{-- <script>
         function openApp() {
