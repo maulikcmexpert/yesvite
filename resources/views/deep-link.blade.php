@@ -14,28 +14,16 @@
             let appOpened = false;
             const start = Date.now();
 
+            // Handle iOS separately due to Safari's quirks
             const isIOS = /iPhone|iPad|iPod/.test(userAgent);
             const isAndroid = /Android/.test(userAgent);
 
-            // Add hidden image trick to detect app launch
-            const img = new Image();
-            img.src = deepLink;
-            
-            img.onerror = () => {
-                // If image fails to load, app is likely not installed
-                appOpened = false;
-            };
-
-            img.onload = () => {
-                appOpened = true;  // App opened successfully
-            };
-
             const tryOpenApp = () => {
                 if (isIOS) {
-                    // iOS uses window.location for reliable deep linking
+                    // Open app using a new window for better reliability on iOS
                     window.location.href = deepLink;
                 } else if (isAndroid) {
-                    // Android uses iframe for better compatibility
+                    // Use an iframe on Android
                     const iframe = document.createElement('iframe');
                     iframe.style.display = 'none';
                     iframe.src = deepLink;
@@ -43,29 +31,31 @@
                 }
             };
 
-            // Fallback handler
+            // Fallback to store if the app doesn't open
             const handleFallback = () => {
                 const elapsed = Date.now() - start;
 
-                // If app is not opened, redirect to fallback
-                if (!appOpened && elapsed >= fallbackTimeout) {
+                // If the app is not opened (user did not leave the page)
+                if (elapsed < fallbackTimeout + 100) {
                     window.location.href = fallbackUrl;
                 }
             };
 
-            // Visibility change listener
+            // Check if user left the page (app opened)
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
-                    appOpened = true;  // App opened successfully
+                    appOpened = true;
                 }
             });
 
-            // Attempt to open the app
+            // Try opening the app
             tryOpenApp();
 
-            // Trigger fallback if the app doesn't open
+            // Trigger fallback only if app is not opened
             setTimeout(() => {
-                handleFallback();
+                if (!appOpened) {
+                    handleFallback();
+                }
             }, fallbackTimeout);
         };
     </script>
