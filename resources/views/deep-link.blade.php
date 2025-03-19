@@ -6,23 +6,30 @@
     <title>Open in App</title>
     <script>
         window.onload = function () {
-            var now = new Date().getTime();
+            var clicked = false;
             var fallbackTimeout = 1500; // 1.5 seconds
 
-            // Create an iframe to attempt deep linking
+            // Detect if the page is hidden (app opened)
+            document.addEventListener("visibilitychange", function () {
+                if (document.hidden) {
+                    clicked = true;  // App opened
+                }
+            });
+
+            // Try to open the app using hidden iframe
             var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = "{{ $deepLink }}";  // Deep link
+            iframe.src = "{{ $deepLink }}";  // Your deep link
             document.body.appendChild(iframe);
 
-            // Fallback to App Store if app is not installed
+            // Fallback to App Store if the app doesn't open
             setTimeout(function () {
-                if (new Date().getTime() - now < fallbackTimeout + 100) {
+                if (!clicked) {
                     window.location.href = "{{ $fallbackUrl }}";  // App Store URL
                 }
             }, fallbackTimeout);
 
-            // Clean up the iframe after the timeout
+            // Cleanup the iframe
             setTimeout(() => {
                 document.body.removeChild(iframe);
             }, fallbackTimeout + 500);
