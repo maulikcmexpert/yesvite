@@ -7,80 +7,37 @@
    
     <script>
       
-      function openApp() {
-    const appLink = "comappyesvite://somepage";
-    const appStoreLink = "https://apps.apple.com/app/6736650042";
-    
-    let appOpened = false;
-    const timeout = 1500;
-
-    // Detect app open using both visibility and blur events
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;  // App opened successfully
-        }
-    };
-
-    const onBlur = () => {
-        appOpened = true;  // App opened successfully
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onBlur);
-
-    // Create an iframe for better handling in Safari
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appLink;
-    document.body.appendChild(iframe);
-
-    // Fallback to App Store if the app doesn't open
-    const startTime = Date.now();
-    setTimeout(() => {
-        const elapsed = Date.now() - startTime;
-
-        if (!appOpened && elapsed < timeout + 100) {
-            window.location.href = appStoreLink;  // Redirect to App Store
-        }
-
-        // Cleanup
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
-        document.body.removeChild(iframe);
-
-    }, timeout);
-}
-
-        // function openApp() {
-        //     const appLink = "comappyesvite://somepage";
-        //     const appStoreLink = "https://apps.apple.com/app/6736650042";
+   
+        function openApp() {
+            const appLink = "comappyesvite://somepage";
+            const appStoreLink = "https://apps.apple.com/app/6736650042";
             
-        //     let appOpened = false;
+            let appOpened = false;
 
-        //     // Use `pagehide` to detect if the app opened successfully
-        //     const onPageHide = () => {
-        //         appOpened = true;
-        //     };
+            // Use `pagehide` to detect if the app opened successfully
+            const onPageHide = () => {
+                appOpened = true;
+            };
 
-        //     window.addEventListener('pagehide', onPageHide);
+            window.addEventListener('pagehide', onPageHide);
 
-        //     // Open the app
-        //     const now = Date.now();
-        //     // alert(now);
+            // Open the app
+            const now = Date.now();
+            // alert(now);
 
-        //     window.location.href = appLink;
+            window.location.href = appLink;
 
       
-        //     setTimeout(() => {
-        //         const elapsed = Date.now() - now;
-        //         if (!appOpened && elapsed < 1500) {
-        //             window.location.href = appStoreLink;  // App Store redirect
-        //         }
+            setTimeout(() => {
+                const elapsed = Date.now() - now;
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // App Store redirect
+                }
 
-        //         // Clean up event listener
-        //         window.removeEventListener('pagehide', onPageHide);
-        //     }, 1500);
-        // }
+                // Clean up event listener
+                window.removeEventListener('pagehide', onPageHide);
+            }, 1500);
+        }
     </script>
     {{-- <script>
         function openApp() {
