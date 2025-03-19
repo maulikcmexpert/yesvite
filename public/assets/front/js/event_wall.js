@@ -1106,11 +1106,20 @@ $(document).ready(function () {
 
 
             // Check if no photo is uploaded AND no content is entered
+            // if (
+            //     (!photoInput || photoInput.files.length === 0) &&
+            //     imagePreview.children.length === 0
+
+            // ) {
+            //     toastr.error(
+            //         "Please upload a photo or enter some content for the photo post."
+            //     );
+            //     return;
+            // }
 
             // Set post type based on presence of an uploaded image or entered content
             if (
-                (photoInput && photoInput.files.length > 0) ||
-                imagePreview.children.length > 0
+                (photoInput && photoInput.files.length > 0)
             ) {
                 document.getElementById("photoPostType").value = 1;
             } else {
