@@ -1102,6 +1102,8 @@ $(document).ready(function () {
             var photoInput = document.getElementById("fileInput");
             var imagePreview = document.getElementById("imagePreview");
             var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
+            console.log(postContent);
+
 
             // Check if no photo is uploaded AND no content is entered
             if (
