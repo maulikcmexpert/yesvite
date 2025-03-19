@@ -6,63 +6,38 @@
     <title>Open Yesvite App</title>
    
     <script>
+      
+   
         function openApp() {
             const appLink = "comappyesvite://somepage";
             const appStoreLink = "https://apps.apple.com/app/6736650042";
             
             let appOpened = false;
-            const timeout = 1500;  
 
-            // Use `pagehide` to detect app opening
+            // Use `pagehide` to detect if the app opened successfully
             const onPageHide = () => {
-                appOpened = true;  // App opened successfully
+                appOpened = true;
             };
 
             window.addEventListener('pagehide', onPageHide);
 
-            // Attempt to open the app
+            // Open the app
+            const now = Date.now();
+            // alert(now);
+
             window.location.href = appLink;
 
-            // Fallback to the App Store if the app doesn't open
+      
             setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = appStoreLink;  // Redirect to App Store
+                const elapsed = Date.now() - now;
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // App Store redirect
                 }
 
-                // Clean up the event listener
+                // Clean up event listener
                 window.removeEventListener('pagehide', onPageHide);
-            }, timeout);
+            }, 1500);
         }
-        // function openApp() {
-        //     const appLink = "comappyesvite://somepage";
-        //     const appStoreLink = "https://apps.apple.com/app/6736650042";
-            
-        //     let appOpened = false;
-
-        //     // Use `pagehide` to detect if the app opened successfully
-        //     const onPageHide = () => {
-        //         appOpened = true;
-        //     };
-
-        //     window.addEventListener('pagehide', onPageHide);
-
-        //     // Open the app
-        //     const now = Date.now();
-        //     // alert(now);
-
-        //     window.location.href = appLink;
-
-      
-        //     setTimeout(() => {
-        //         const elapsed = Date.now() - now;
-        //         if (!appOpened && elapsed < 1500) {
-        //             window.location.href = appStoreLink;  // App Store redirect
-        //         }
-
-        //         // Clean up event listener
-        //         window.removeEventListener('pagehide', onPageHide);
-        //     }, 1500);
-        // }
     </script>
     {{-- <script>
         function openApp() {
