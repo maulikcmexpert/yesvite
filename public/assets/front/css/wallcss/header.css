@@ -1035,6 +1035,12 @@ header{
     .decline-btn {
         font-size: 13px;
     }
+    .google-add .app-store{
+        padding-top: 0px !important;
+    }
+    .google-add .app-store.ms-auto{
+        margin-left: 0px !important;
+    }
 }
 
 @media only screen and (max-width: 424px) {
