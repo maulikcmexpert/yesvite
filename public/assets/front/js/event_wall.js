@@ -1119,7 +1119,8 @@ $(document).ready(function () {
 
             // Set post type based on presence of an uploaded image or entered content
             if (
-                (photoInput && photoInput.files.length > 0)
+                (photoInput && photoInput.files.length > 0) ||
+                imagePreview.children.length > 0
             ) {
                 document.getElementById("photoPostType").value = 1;
             } else {
@@ -1449,7 +1450,7 @@ $(document).ready(function () {
                     if (postData.post_type == "0") {
                         $(".create-post-upload-img-wrp").remove();
 
-
+$("#photoForm").submit();
 
                     }
                     if (postData.post_type == "1") {
