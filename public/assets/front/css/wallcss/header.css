@@ -1045,6 +1045,7 @@ header{
         justify-content: center;
         gap: 10px;
         position: relative;
+        padding-left: 20px !important;
     }
     .close_advertise{
         position: absolute;
@@ -1052,6 +1053,9 @@ header{
         transform: translateY(-50%);
         right: 20px;
         z-index: 10;
+    }
+    .google-add p{
+        text-align: center;
     }
 }
 
