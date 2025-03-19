@@ -6,7 +6,7 @@
     <title>Open Yesvite App</title>
     
     
-   <script>
+    <script>
         function openApp() {
             const appLink = "comappyesvite://somepage";
             const appStoreLink = "https://apps.apple.com/app/6736650042";
@@ -26,17 +26,18 @@
             const now = Date.now();
             window.location.href = appLink;
 
-            // Automatically redirect to App Store if the app is not installed
+            // Check after 1.5 seconds if the app opened
             setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = appStoreLink;  // App Store fallback
-                }
-            }, 1500);
+                const elapsed = Date.now() - now;
 
-            // Clean up the event listener
-            setTimeout(() => {
+                // If app did NOT open, redirect to App Store
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;
+                }
+
+                // Clean up event listener
                 document.removeEventListener('visibilitychange', onVisibilityChange);
-            }, 2000);
+            }, 1500);
         }
     </script>
     {{-- <script>
