@@ -61,7 +61,7 @@
     setTimeout(() => {
         const elapsed = Date.now() - now;
 
-        if (!appOpened && elapsed < 1502) {
+        if (!appOpened && elapsed < 1500) {
             window.location.href = appStoreLink;  // Redirect to App Store
         }
 
