@@ -1592,8 +1592,12 @@ class EventWallController extends BaseController
         // dd($mediaIds);
         $user = Auth::guard('web')->user();
 
-        $get_all_image_post=EventPostImage::where('event_post_id',$request->post_id)->select('id')->get();
-        dd($get_all_image_post);
+        $get_all_image_post = EventPostImage::where('event_post_id', $request->post_id)
+        ->pluck('id')
+        ->toArray();
+
+    dd($get_all_image_post); // Output: [474, 475, 476, 479]
+            // dd($get_all_image_post);
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
