@@ -1600,7 +1600,8 @@ class EventWallController extends BaseController
         $mediaIds = array_map('intval', $mediaIds);
         $get_all_image_post = array_map('intval', $get_all_image_post);
 
-        $missingMediaIds = array_diff($get_all_image_post, $mediaIds);
+        $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
+
 
         dd($mediaIds,$get_all_image_post,$missingMediaIds);
 
