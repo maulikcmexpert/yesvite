@@ -1613,7 +1613,8 @@ class EventWallController extends BaseController
         $creatEventPost = EventPost::where('id', $request->post_id)
             ->where('event_id', $request->event_id)
             ->first();
-        if ($creatEventPost) {
+        if ($creatEventPost && $request->isNewPost == "1") {
+
 
             if (isset($missingMediaIds) && !empty($missingMediaIds)) {
                 // $delete_images = json_decode($request->delete_image);
