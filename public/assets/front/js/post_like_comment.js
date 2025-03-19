@@ -656,8 +656,7 @@ $(document).ready(function () {
                         commentInput.val("");
                         $(".parent_comment_id").val(""); // Reset parent comment ID
                     }
-                    commentInput.val("");
-                    $("#parent_comment_id").val(""); // Reset parent comment ID
+
                 },
                 error: function (xhr) {
                     console.error(xhr.responseText);
@@ -1605,4 +1604,7 @@ $(document).on("keyup", ".post_comment", function () {
     if (commentVal == "") {
         $(".parent_comment_id").val("");
     }
+});
+$(".post_comment").on("click", function () {
+    $(".parent_comment_id").val("");
 });
