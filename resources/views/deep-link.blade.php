@@ -8,33 +8,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             const appLink = "{{ $deepLink }}";
             const fallbackUrl = "{{ $fallbackUrl }}";
-            
-            let hasFocus = true;
     
-            // Detect if the page becomes hidden (app opened)
-            const onVisibilityChange = () => {
-                if (document.visibilityState === 'hidden') {
-                    hasFocus = false;  // The app opened successfully
-                }
+            let appOpened = false;
+    
+            // Create a hidden iframe for reliable app opening
+            const openApp = () => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                iframe.src = appLink;
+    
+                // Listen for visibility change and pagehide
+                const onAppOpen = () => {
+                    appOpened = true;  // App opened successfully
+                };
+    
+                window.addEventListener('pagehide', onAppOpen);
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'hidden') {
+                        appOpened = true;  
+                    }
+                });
+    
+                // Remove iframe after some time
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                }, 1000);
             };
     
-            document.addEventListener('visibilitychange', onVisibilityChange);
+            // Attempt to open the app
+            openApp();
     
-            // Open the app
-            const now = Date.now();
-            window.location.href = appLink;
-    
-            // Fallback to App Store if app is not opened
+            // Fallback to App Store only if the app did not open
             setTimeout(() => {
-                document.removeEventListener('visibilitychange', onVisibilityChange);
-                
-                const elapsed = Date.now() - now;
-    
-                // If still visible, redirect to the App Store
-                if (hasFocus || elapsed < 1200) {
-                    window.location.href = fallbackUrl;
+                if (!appOpened) {
+                    window.location.href = fallbackUrl;  
                 }
-            }, 1500);
+            }, 2500);  // Extended delay for reliability (2.5 seconds)
         });
     </script>
     {{-- <script>
@@ -83,7 +93,8 @@
         }
     </script> --}}
 </head>
-<body onload="openApp()">
+{{-- <body onload="openApp()"> --}}
+<body>
     <p>If the app does not open, <a href="https://apps.apple.com/app/6736650042">click here to download it</a>.</p>
 </body>
 </html>
