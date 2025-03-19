@@ -33,6 +33,7 @@ use App\Http\Controllers\{
 use App\Http\Controllers\admin\EventController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,18 @@ Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
 Route::get('/', [HomeFrontController::class, 'homeDesign'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
+
+
+Route::get('open-app', function () {
+    // Static deep link to open the mobile app
+    $deepLink = "comappyesvite://open"; 
+
+    // Fallback URL in case the app is not installed
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";
+
+    return view('deep-link', compact('deepLink', 'fallbackUrl'));
+});
+
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
@@ -260,7 +273,22 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('reset_notification_eventId',  [EventListController::class, 'reset_notification_eventId'])->name('reset_notification_eventId');
     Route::get('store_add_new_guest',  [EventListController::class, 'store_add_new_guest']);
 
+    // use Illuminate\Http\Request;
 
+    // Route::get('/open-app', function (Request $request) {
+    //     $userId = $request->get('user_id');
+    //     $eventId = $request->get('event_id');
+    
+    //     // Deep link schema for your mobile app
+    //     $deepLink = "yourapp://open?user_id={$userId}&event_id={$eventId}";
+    
+    //     // Fallback URL (in case the app is not installed)
+    //     $fallbackUrl = url('/event/' . $eventId);
+    
+    //     return view('deep-link', compact('deepLink', 'fallbackUrl'));
+    // });
+ 
+    
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
     //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
