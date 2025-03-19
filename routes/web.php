@@ -60,7 +60,7 @@ Route::get('/open-app', function () {
     return view('deep-link', compact('deepLink', 'fallbackUrl'));
 })->name('open-app'); 
 Route::get('/redirect', function () {
-    return view('redirect', compact('deepLink', 'fallbackUrl'));
+    return view('redirect');
 })->name('redirect'); 
 
 Route::post('/run-queue-work', function () {
