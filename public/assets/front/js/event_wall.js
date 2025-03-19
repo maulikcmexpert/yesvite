@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-        let postType = postData.post_type; // Get post type from the existing post data
+        let postType = $("#textPostType").val(); // Get post type from the existing post data
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1106,6 +1106,8 @@ $(document).ready(function () {
             // Check if no photo is uploaded AND no content is entered
             let isPhotoUploaded =
         (photoInput && photoInput.files.length > 0) || imagePreview.children.length > 0;
+
+
 
     // If post_type is "0", allow form submission without a photo
     if (postType == "0") {
