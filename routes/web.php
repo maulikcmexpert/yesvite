@@ -61,7 +61,7 @@ Route::get('/open-app', function () {
 })->name('open-app'); 
 Route::get('/redirect', function () {
     return view('redirect', compact('deepLink', 'fallbackUrl'));
-})->name('open-app'); 
+})->name('redirect'); 
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
