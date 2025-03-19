@@ -3398,7 +3398,7 @@ main.new-main-content {
 }
 
 #creatpostmodal .modal-content{
-    height: 420px;
+    min-height: 420px !important;
 }
 
 
