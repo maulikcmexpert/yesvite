@@ -1520,6 +1520,8 @@ $(document).ready(function () {
                                     return;
                                 }
                                 if ($("#imagePreview").children().length === 0) {
+                                    console.log($("#imagePreview").children().length === 0);
+
                                     uploadImgInner.removeClass("d-none"); // Hide the container
                                 }
                                 let targetDiv = $("#media-" + mediaId);
