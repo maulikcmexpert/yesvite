@@ -1596,8 +1596,8 @@ class EventWallController extends BaseController
         // dd($mediaIds,$get_all_image_post,$missingMediaIds);
 
 
-    // dd($mediaIds,$get_all_image_post); // Output: [474, 475, 476, 479]
-            // dd($get_all_image_post);
+        // dd($mediaIds,$get_all_image_post); // Output: [474, 475, 476, 479]
+        // dd($get_all_image_post);
 
         // Find existing post by event_id and user_id
         $creatEventPost = EventPost::where('id', $request->post_id)
@@ -1608,8 +1608,8 @@ class EventWallController extends BaseController
             $mediaIds = $request->input('media-ids', []);
 
             $get_all_image_post = EventPostImage::where('event_post_id', $request->post_id)
-            ->pluck('id')
-            ->toArray();
+                ->pluck('id')
+                ->toArray();
 
 
             $mediaIds = array_map('intval', $mediaIds);
@@ -2043,8 +2043,8 @@ class EventWallController extends BaseController
             $mediaIds = $request->input('option-ids', []);
 
             $get_all_image_post = EventPostPollOption::where('event_post_poll_id', $request->post_id)
-            ->pluck('id')
-            ->toArray();
+                ->pluck('id')
+                ->toArray();
 
 
             $mediaIds = array_map('intval', $mediaIds);
