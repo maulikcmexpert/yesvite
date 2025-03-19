@@ -1553,7 +1553,7 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                                $(".poll-option-input, #yourquestion").each(function () {
+                                $("#pollForm").on("input", "input.form-control", function () {
                                     updateCharCount(this);
                                 });
 
