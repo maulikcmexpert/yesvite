@@ -1442,7 +1442,8 @@ $(document).ready(function () {
                             postData.mediaData.forEach((media) => {
                                 let mediaElement = `
                                     <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
-                                        <span class="uploded-delete-icon" data-id="${media.id}">
+                                    <input type="hidden" name="media-ids" value="${media.id}" id="media-ids" />
+                                        <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
                                             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
@@ -1476,12 +1477,6 @@ $(document).ready(function () {
                                 } else {
                                     console.error("Target div not found for ID:", mediaId);
                                 }
-
-                                let mediaWrapper = $("#imagePreview");
-                                let uploadImgInner = $(".create-post-upload-img-inner");
-                                let uploadHeadButton = $(".create-post-head-upload-btn");
-
-                                // Check if there are any images left
 
                             });
 
