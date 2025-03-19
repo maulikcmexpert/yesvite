@@ -1403,7 +1403,19 @@ $(document).ready(function () {
                     // Set hidden input values
                     // Set the radio button selection
 
+                    $(".poll_qus").on("input", function () {
+                        updateCharCount(this);
+                    });
 
+                    // Attach event listener for poll options input fields
+                    $(".poll-options").on("input", "input[name='options[]']", function () {
+                        updateCharCount(this);
+                    });
+
+                    // Trigger on page load to reflect any existing values
+                    $(".poll_qus,.poll-options input[name='options[]']").each(function () {
+                        updateCharCount(this);
+                    });
                     let savedVisibility = postData.post_privacy  // Default to "1" if undefined
 
                     // Uncheck all radio buttons first
