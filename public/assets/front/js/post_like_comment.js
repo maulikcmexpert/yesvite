@@ -584,11 +584,12 @@ $(document).ready(function () {
                             //     // replyList.append(newCommentHTML);
                             // }
                             // }
+
                         } else {
                             const li = `<li class="commented-user-wrp" data-comment-id="${data.id}">
                             ${newCommentHTML}
                             <ul class="primary-comment-replies"></ul>
-                    </li>`;
+                          </li>`;
                             // Append as a new top-level comment
                             const commentList = $(
                                 `.posts-card-show-all-comments-wrp.show_${eventPostId}`
@@ -655,8 +656,8 @@ $(document).ready(function () {
                         commentInput.val("");
                         $(".parent_comment_id").val(""); // Reset parent comment ID
                     }
-                    // commentInput.val("");
-                    // $("#parent_comment_id").val(""); // Reset parent comment ID
+                    commentInput.val("");
+                    $("#parent_comment_id").val(""); // Reset parent comment ID
                 },
                 error: function (xhr) {
                     console.error(xhr.responseText);
