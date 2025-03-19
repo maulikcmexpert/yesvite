@@ -1083,7 +1083,7 @@ $(document).ready(function () {
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
-        alert(postContent);
+
 
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
@@ -1101,7 +1101,7 @@ $(document).ready(function () {
             pollForm.submit();
         } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
-            var imagePreview = document.getElementById("imagePreview");
+            let imagePreview = document.getElementById("imagePreview");
 
 
 
@@ -1120,12 +1120,13 @@ $(document).ready(function () {
             // Set post type based on presence of an uploaded image or entered content
             if (
                 (photoInput && photoInput.files.length > 0) ||
-                imagePreview.children.length > 0
+                (imagePreview && imagePreview.children.length > 0) // ✅ Ensure imagePreview exists
             ) {
                 document.getElementById("photoPostType").value = 1;
             } else {
                 document.getElementById("photoPostType").value = 0;
             }
+
 
             // Show loader inside the button and disable it
             $this
