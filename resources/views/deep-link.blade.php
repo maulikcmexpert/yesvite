@@ -13,29 +13,27 @@
             
             let appOpened = false;
 
-            // Create a hidden iframe to open the app silently
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-
-            // Use `pagehide` to detect if the app opened
+            // Use `pagehide` to detect if the app opened successfully
             const onPageHide = () => {
                 appOpened = true;
             };
+
             window.addEventListener('pagehide', onPageHide);
 
-            // Attempt to open the app through the iframe
-            iframe.src = appLink;
+            // Open the app
+            const now = Date.now();
+            window.location.href = appLink;
 
-            // Fallback: Redirect to App Store automatically
+            // Fallback: Redirect to App Store if app doesn't open
             setTimeout(() => {
-                if (!appOpened) {
-                    window.location.href = appStoreLink;  // Automatic redirect
+                const elapsed = Date.now() - now;
+
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // App Store redirect
                 }
 
-                // Cleanup
+                // Clean up event listener
                 window.removeEventListener('pagehide', onPageHide);
-                document.body.removeChild(iframe);
             }, 1500);
         }
     </script>
