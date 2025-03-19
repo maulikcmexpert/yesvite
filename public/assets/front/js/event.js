@@ -1732,7 +1732,8 @@ $(document).ready(function () {
     var modal = new bootstrap.Modal(modalElement);
     var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
     var currentTime = new Date().getTime();
-    var oneMinute = 60 * 1000; // 1 minute in milliseconds
+    // var oneMinute = 60 * 1000; // 1 minute in milliseconds
+    var twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
     if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
         modal.show();
