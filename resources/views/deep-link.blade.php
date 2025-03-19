@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,4 +54,4 @@
 {{-- <body> --}}
     <p>If the app does not open, <a href="https://apps.apple.com/app/6736650042">click here to download it</a>.</p>
 </body>
-</html>
+</html> --}}
