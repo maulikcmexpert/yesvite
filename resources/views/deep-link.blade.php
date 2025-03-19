@@ -4,47 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
-  
-<script>
-    document.getElementById('open-app-btn').addEventListener('click', () => {
-        const appLink = "comappyesvite://open";
-        const fallbackUrl = "https://apps.apple.com/app/6736650042";
-
-        let appOpened = false;
-        const startTime = Date.now();
-
-        // Create a hidden iframe to open the app
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appLink;
-        document.body.appendChild(iframe);
-
-        // Detect app opening by checking elapsed time
-        setTimeout(() => {
-            const elapsed = Date.now() - startTime;
-
-            // If the app didn't open, redirect to the App Store
-            if (!appOpened && elapsed < 2500) {  
-                window.location.href = fallbackUrl;
-            }
-
-            // Clean up
-            document.body.removeChild(iframe);
-        }, 2500);
-
-        // Listen for page visibility changes
-        const onVisibilityChange = () => {
-            if (document.hidden) {
-                appOpened = true;  // App successfully opened
-            }
-        };
-
-        document.addEventListener('visibilitychange', onVisibilityChange);
-        window.addEventListener('pagehide', onVisibilityChange);
-    });
-</script>
-
-    {{-- <script>
+    <script>
       
    
         function openApp() {
@@ -77,7 +37,7 @@
                 window.removeEventListener('pagehide', onPageHide);
             }, 1500);
         }
-    </script> --}}
+    </script>
     {{-- <script>
         function openApp() {
             // Try opening the Yesvite app
