@@ -1449,7 +1449,7 @@ $(document).ready(function () {
                     );
                     if (postData.post_type == "0") {
                         $(".create-post-upload-img-wrp").addClass("d-none");
-                        $("#textform").submit();
+
                     }
 
                     if (postData.post_type == "1") {
