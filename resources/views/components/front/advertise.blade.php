@@ -33,43 +33,35 @@
         openApp();
     });
     function openApp() {
-    const appLink = "comappyesvite://somepage";
-    const appStoreLink = "https://apps.apple.com/app/6736650042";
-    
-    let appOpened = false;
-
-    // Create an iframe to attempt to open the app (prevents accidental redirections)
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-
-    // Capture `visibilitychange` to detect if the app opened
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;
-        }
-    };
-
-    document.addEventListener("visibilitychange", onVisibilityChange);
+    const appLink = "comappyesvite://somepage"; // Deep link
+    const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store link
 
     const now = Date.now();
+    let hasFocus = false;
 
-    // Try opening the app via iframe (for better reliability)
-    iframe.src = appLink;
-    window.location.href = appLink; // Fallback to direct URL attempt
+    // Add event listener to detect if the user leaves the page (app opened)
+    const handleFocus = () => {
+        hasFocus = true;
+    };
 
+    window.addEventListener("focus", handleFocus);
+
+    // Attempt to open the app
+    window.location.href = appLink;
+
+    // Set timeout to check if the app opened
     setTimeout(() => {
         const elapsed = Date.now() - now;
 
-        if (!appOpened && elapsed < 1500) {
-            window.location.href = appStoreLink;  // Redirect to App Store
+        if (!hasFocus && elapsed < 1500) {
+            window.location.href = appStoreLink; // Redirect to App Store
         }
 
-        // Clean up event listener and remove iframe
-        document.removeEventListener("visibilitychange", onVisibilityChange);
-        document.body.removeChild(iframe);
-    }, 1500);
+        // Clean up event listener
+        window.removeEventListener("focus", handleFocus);
+    }, 1200); // Reduced delay slightly for better user experience
 }
+
 
     // function openApp() {
     //     const appLink = "comappyesvite://somepage";
