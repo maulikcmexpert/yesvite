@@ -33,39 +33,36 @@
     function openApp() {
         const appLink = "comappyesvite://somepage";
         const appStoreLink = "https://apps.apple.com/app/6736650042";
-        
+
         let appOpened = false;
+        const timeout = 1500;
 
-        // Use visibilitychange and blur to detect if the app opens
-        const onVisibilityChange = () => {
-            if (document.hidden) {
-                appOpened = true;  // App opened successfully
-            }
-        };
+        // Create an invisible iframe to attempt app opening
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appLink;
+        document.body.appendChild(iframe);
 
-        const onBlur = () => {
-            appOpened = true;  // App opened successfully
-        };
-
-        document.addEventListener('visibilitychange', onVisibilityChange);
-        window.addEventListener('blur', onBlur);
-
-        // Open the app
-        window.location.href = appLink;
-
-        // Fallback to App Store only if the app didn't open
-        const fallbackTimeout = 1500;  
-        setTimeout(() => {
+        // Fallback to App Store if app doesn't open
+        const timer = setTimeout(() => {
             if (!appOpened) {
                 window.location.href = appStoreLink;  // Redirect to App Store
             }
+            document.body.removeChild(iframe);  // Clean up
+        }, timeout);
 
-            // Clean up event listeners
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-            window.removeEventListener('blur', onBlur);
-        }, fallbackTimeout);
+        // Detect if the app opens successfully
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                appOpened = true;  // App opened successfully
+                clearTimeout(timer);
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
     }
 </script>
+
 
 {{-- <script>
     $(document).on('click','.mobile-app',function(){
