@@ -25,7 +25,7 @@
 </div>
 @endif
 @push('scripts')
-<script>
+{{-- <script>
     $(document).on('click', '.mobile-app', function () {
         openApp();
     });
@@ -57,10 +57,27 @@
             }, timeout);
         }
     }
-</script>
+</script> --}}
 
+<script>
+$(document).ready(function() {
+  const appURL = 'comappyesvite://somepage';
+  const appStoreURL = 'https://apps.apple.com/app/6736650042';
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+  if (isMobile) {
+    const startTime = new Date().getTime();
+    window.location = appURL;
 
+    setTimeout(function() {
+      const now = new Date().getTime();
+      if (now - startTime < 2000) {
+        window.location = appStoreURL;
+      }
+    }, 1500);
+  }
+});
+<script/>
 {{-- <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
