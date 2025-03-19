@@ -1114,7 +1114,10 @@ $(document).ready(function () {
                 );
                 return;
             }
-
+            if (postContent === "" && !isPhotoUploadTriggered) {
+                toastr.error("Please upload a photo before submitting.");
+                return;
+            }
             // Set post type based on presence of an uploaded image or entered content
             if (
                 (photoInput && photoInput.files.length > 0) ||
@@ -1165,12 +1168,15 @@ $(document).ready(function () {
 //     // Hide the loader
 //     openstoryModal(); // Open the modal after the page loads
 // };
+let isPhotoUploadTriggered = false;
+
 $("#photos_click").on("click", function () {
     $(".create-post-upload-img-inner").removeClass("d-none");
     $(".isNewPost").val('0');
 
     $(".create-post-head-upload-btn").addClass("d-none");
     $("#create-photo-btn").trigger("click");
+    isPhotoUploadTriggered = true; // Set the flag to true
 });
 $("#poll_click").on("click", function () {
     $(".isNewPost").val('0');
@@ -1432,7 +1438,7 @@ $(document).ready(function () {
 
                     }
 
-                    $(".upload-photo-poll").removeClass('photos');
+
                     // Update the display with the selected option
                     $("#savedSettingsDisplay").html(`
     <h4>${privacyText} <i class="fa-solid fa-angle-down"></i></h4>
