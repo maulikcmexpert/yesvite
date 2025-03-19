@@ -1106,8 +1106,8 @@ $(document).ready(function () {
             // Check if no photo is uploaded AND no content is entered
             if (
                 (!photoInput || photoInput.files.length === 0) &&
-                imagePreview.children.length === 0 ||
-                postContent === ""
+                imagePreview.children.length === 0
+
             ) {
                 toastr.error(
                     "Please upload a photo or enter some content for the photo post."
