@@ -24,6 +24,7 @@
     </a>
 </div>
 @endif
+@push('scripts')
 <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
@@ -58,4 +59,5 @@
             window.removeEventListener('pagehide', onPageHide);
         }, 1500);
     }
-</script>
+</script>    
+@endpush
