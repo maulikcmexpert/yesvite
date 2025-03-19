@@ -5,29 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
     <script>
-        document.getElementById('open-app-btn').addEventListener('click', () => {
-            const appLink = "comappyesvite://open";
-            const fallbackUrl = "https://apps.apple.com/app/6736650042";
-    
-            let appOpened = false;
-            const startTime = Date.now();
-    
-            // Open the app using window.location (more reliable on iOS)
-            window.location.href = appLink;
-    
-            // Check if the app opened by measuring elapsed time
-            setTimeout(() => {
-                const elapsed = Date.now() - startTime;
-    
-                // If the app didn't open, redirect to the App Store
-                if (elapsed < 1500) { 
-                    // If the page is still in focus, assume app didn't open
-                    window.location.href = fallbackUrl;
-                }
-            }, 2000);  // 2-second delay to give the app time to open
-        });
-    </script>
-    {{-- <script>
       
    
         function openApp() {
@@ -52,7 +29,7 @@
       
             setTimeout(() => {
                 const elapsed = Date.now() - now;
-                if (!appOpened) {
+                if (!appOpened && elapsed<1500) {
                     window.location.href = appStoreLink;  // App Store redirect
                 }
 
@@ -60,7 +37,7 @@
                 window.removeEventListener('pagehide', onPageHide);
             }, 1500);
         }
-    </script> --}}
+    </script>
     {{-- <script>
         function openApp() {
             // Try opening the Yesvite app
@@ -73,8 +50,8 @@
         }
     </script> --}}
 </head>
-{{-- <body onload="openApp()"> --}}
-<body>
+<body onload="openApp()">
+{{-- <body> --}}
     <p>If the app does not open, <a href="https://apps.apple.com/app/6736650042">click here to download it</a>.</p>
 </body>
 </html>
