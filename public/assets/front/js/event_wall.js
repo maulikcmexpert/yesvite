@@ -1461,12 +1461,12 @@ $(document).ready(function () {
                                 postData.mediaData.length === 1
                                     ? "col-12"
                                     : "col-6";
-                                    postData.mediaData.forEach((media) => {
-                                        let mediaElement = ""; // Initialize an empty variable
+                            postData.mediaData.forEach((media) => {
+                                let mediaElement = ""; // Initialize an empty variable
 
-                                        if (media.type === "image") {
-                                            // If it's an image
-                                            mediaElement = `
+                                if (media.type === "image") {
+                                    // If it's an image
+                                    mediaElement = `
                                                 <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
                                                     <input type="hidden" name="media-ids[]" value="${media.id}" id="media-ids" />
                                                     <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
@@ -1483,9 +1483,9 @@ $(document).ready(function () {
                                                     <img src="${media.post_media}" class="preview-image">
                                                 </div>
                                             `;
-                                        } else if (media.type === "video") {
-                                            // If it's a video
-                                            mediaElement = `
+                                } else if (media.type === "video") {
+                                    // If it's a video
+                                    mediaElement = `
                                                 <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
                                                     <input type="hidden" name="media-ids[]" value="${media.id}" id="media-ids" />
                                                     <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
@@ -1505,10 +1505,10 @@ $(document).ready(function () {
                                                     </video>
                                                 </div>
                                             `;
-                                        }
+                                }
 
-                                        mediaWrapper.append(mediaElement);
-                                    });
+                                mediaWrapper.append(mediaElement);
+                            });
 
                             // Use event delegation to handle dynamic elements
                             $("#imagePreview").on("click", ".uploded-delete-icon", function () {
@@ -1545,7 +1545,7 @@ $(document).ready(function () {
                                 );
                             }
                             uploadHeadButton.removeClass("d-none");
-                        } else {
+                        } else if (uploadImgInner.length < 0)  {
                             // Show the upload section when no images are present
                             uploadImgInner.removeClass("d-none");
                         }
