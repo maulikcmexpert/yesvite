@@ -1575,13 +1575,19 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                                $(".poll-option-input, #yourquestion").each(function () {
-                                    updateCharCount(this);
-                                });
-                                $("input.form-control").each(function () {
+                                (".poll_qus").on("input", function () {
                                     updateCharCount(this);
                                 });
 
+                                // Attach event listener for poll options input fields
+                                $(".poll-options").on("input", "input[name='options[]']", function () {
+                                    updateCharCount(this);
+                                });
+
+                                // Trigger on page load to reflect any existing values
+                                $(".poll_qus, .poll-options input[name='options[]']").each(function () {
+                                    updateCharCount(this);
+                                });
                                 // Delete option functionality
                                 $(document).on("click", ".delete-polll", function () {
                                     $(this).closest(".option-poll").remove();
@@ -1633,9 +1639,7 @@ $(document).ready(function () {
             $(inputField).val($(inputField).val().substring(0, maxLength));
             charCount = maxLength; // Adjust count after trimming
         }
-        // } else {
-        //     $(inputField).prop('disabled', false);
-        // }
+
     }
 });
 $(".modal").on("hidden.bs.modal", function () {
