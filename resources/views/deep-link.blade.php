@@ -7,33 +7,33 @@
    
     <script>
         function openApp() {
-            const appLink = "comappyesvite://somepage";
-            const appStoreLink = "https://apps.apple.com/app/6736650042";
-            
-            let appOpened = false;
+            const now = Date.now();
+            let appOpened = false;  // Flag to track if the app was opened
 
-            // Use `pagehide` to detect if the app opened successfully
+            const appLink = "your-app-scheme://somepage";   // Deep link to open the app
+            const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
+
+            // Attempt to open the app
+            window.location.href = appLink;
+
+            // Event listener to detect if the app is opened
             const onPageHide = () => {
                 appOpened = true;
             };
-
             window.addEventListener('pagehide', onPageHide);
 
-            // Open the app
-            const now = Date.now();
-            window.location.href = appLink;
-
-            // Fallback: Redirect to App Store if app doesn't open
+            // Fallback: Redirect to App Store if the app doesn't open
             setTimeout(() => {
                 const elapsed = Date.now() - now;
 
-                if (!appOpened && elapsed < 1510) {
-                    window.location.href = appStoreLink;  // App Store redirect
+                if (!appOpened && elapsed < 1500) {
+                    window.location.href = appStoreLink;  // Redirect to App Store
                 }
 
                 // Clean up event listener
                 window.removeEventListener('pagehide', onPageHide);
             }, 1500);
+
         }
     </script>
     {{-- <script>
