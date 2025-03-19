@@ -1534,6 +1534,24 @@ $(document).ready(function () {
 
                             let options = pollData.poll_options || []; // Get poll options
 
+                            $("#yourquestion").on("input", function () {
+                                const charCount = $(this).val().length;
+                                $(this)
+                                    .closest(".mb-3")
+                                    .find(".char-count")
+                                    .text(`${charCount}/${maxLength}`);
+                            });
+
+
+                            // Attach event listener for poll options input fields
+                            $(".poll-options").on("input", "input[name='options[]']", function () {
+                                updateCharCount(this);
+                            });
+
+                            // Trigger on page load to reflect any existing values
+                            $(".poll_qus,.poll-options input[name='options[]']").each(function () {
+                                updateCharCount(this);
+                            });
                             // $(".poll-options input[name='options[]']").each(
                             //     (index, element) => {
                             //         if (options[index]) {
@@ -1575,13 +1593,19 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                                $(".poll-option-input, #yourquestion").each(function () {
-                                    updateCharCount(this);
-                                });
-                                $("input.form-control").each(function () {
+                                $(".poll_qus").on("input", function () {
                                     updateCharCount(this);
                                 });
 
+                                // Attach event listener for poll options input fields
+                                $(".poll-options").on("input", "input[name='options[]']", function () {
+                                    updateCharCount(this);
+                                });
+
+                                // Trigger on page load to reflect any existing values
+                                $(".poll_qus,.poll-options input[name='options[]']").each(function () {
+                                    updateCharCount(this);
+                                });
                                 // Delete option functionality
                                 $(document).on("click", ".delete-polll", function () {
                                     $(this).closest(".option-poll").remove();
@@ -1633,9 +1657,7 @@ $(document).ready(function () {
             $(inputField).val($(inputField).val().substring(0, maxLength));
             charCount = maxLength; // Adjust count after trimming
         }
-        // } else {
-        //     $(inputField).prop('disabled', false);
-        // }
+
     }
 });
 $(".modal").on("hidden.bs.modal", function () {
