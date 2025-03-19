@@ -1575,7 +1575,7 @@ $(document).ready(function () {
                                         </div>
                                     `);
                                 });
-                                (".poll_qus").on("input", function () {
+                                $(".poll_qus").on("input", function () {
                                     updateCharCount(this);
                                 });
 
@@ -1585,7 +1585,7 @@ $(document).ready(function () {
                                 });
 
                                 // Trigger on page load to reflect any existing values
-                                $(".poll_qus, .poll-options input[name='options[]']").each(function () {
+                                $(".poll_qus,.poll-options input[name='options[]']").each(function () {
                                     updateCharCount(this);
                                 });
                                 // Delete option functionality
