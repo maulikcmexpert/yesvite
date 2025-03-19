@@ -576,6 +576,11 @@ input::-webkit-slider-thumb{
     
 }
 
+.profile-img .user-img img{
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+}
+
 @keyframes rotate360 { 
     100% {
         transform: rotate(360deg);
