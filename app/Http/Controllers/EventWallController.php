@@ -1587,20 +1587,10 @@ class EventWallController extends BaseController
     // }
     public function createPost(Request $request)
     {
-        $mediaIds = $request->input('media-ids', []);
 
         // dd($mediaIds);
         $user = Auth::guard('web')->user();
 
-        $get_all_image_post = EventPostImage::where('event_post_id', $request->post_id)
-        ->pluck('id')
-        ->toArray();
-
-
-        $mediaIds = array_map('intval', $mediaIds);
-        $get_all_image_post = array_map('intval', $get_all_image_post);
-
-        $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
 
 
         // dd($mediaIds,$get_all_image_post,$missingMediaIds);
@@ -1615,6 +1605,17 @@ class EventWallController extends BaseController
             ->first();
         if ($creatEventPost && $request->isNewPost == "1") {
 
+            $mediaIds = $request->input('media-ids', []);
+
+            $get_all_image_post = EventPostImage::where('event_post_id', $request->post_id)
+            ->pluck('id')
+            ->toArray();
+
+
+            $mediaIds = array_map('intval', $mediaIds);
+            $get_all_image_post = array_map('intval', $get_all_image_post);
+
+            $missingMediaIds = array_values(array_diff($get_all_image_post, $mediaIds));
 
             if (isset($missingMediaIds) && !empty($missingMediaIds)) {
                 // $delete_images = json_decode($request->delete_image);
