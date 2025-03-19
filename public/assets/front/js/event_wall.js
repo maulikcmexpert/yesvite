@@ -1562,8 +1562,10 @@ $(document).ready(function () {
                             $(".poll-options input[name='options[]']").each((index, element) => {
                                 if (options[index]) {
                                     $(element).val(options[index].option);
-                                    const charCount = $(this).val().length;
-                                    $(this)
+                                    const charCount = $(element).val().length;
+
+                                    // Update the character count display
+                                    $(element)
                                         .closest(".mb-3")
                                         .find(".char-count")
                                         .text(`${charCount}/${maxLength}`); // Update existing inputs
