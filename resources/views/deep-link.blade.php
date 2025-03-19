@@ -4,29 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Yesvite App</title>
-    <script>
-        document.getElementById('open-app-btn').addEventListener('click', () => {
-            const appLink = "comappyesvite://open";
-            const fallbackUrl = "https://apps.apple.com/app/6736650042";
-    
-            let appOpened = false;
-            const startTime = Date.now();
-    
-            // Open the app using window.location (more reliable on iOS)
-            window.location.href = appLink;
-    
-            // Check if the app opened by measuring elapsed time
-            setTimeout(() => {
-                const elapsed = Date.now() - startTime;
-    
-                // If the app didn't open, redirect to the App Store
-                if (elapsed < 1500) { 
-                    // If the page is still in focus, assume app didn't open
-                    window.location.href = fallbackUrl;
-                }
-            }, 2000);  // 2-second delay to give the app time to open
-        });
-    </script>
+  
+<script>
+    document.getElementById('open-app-btn').addEventListener('click', () => {
+        const appLink = "comappyesvite://open";
+        const fallbackUrl = "https://apps.apple.com/app/6736650042";
+
+        let appOpened = false;
+        const startTime = Date.now();
+
+        // Create a hidden iframe to open the app
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appLink;
+        document.body.appendChild(iframe);
+
+        // Detect app opening by checking elapsed time
+        setTimeout(() => {
+            const elapsed = Date.now() - startTime;
+
+            // If the app didn't open, redirect to the App Store
+            if (!appOpened && elapsed < 2500) {  
+                window.location.href = fallbackUrl;
+            }
+
+            // Clean up
+            document.body.removeChild(iframe);
+        }, 2500);
+
+        // Listen for page visibility changes
+        const onVisibilityChange = () => {
+            if (document.hidden) {
+                appOpened = true;  // App successfully opened
+            }
+        };
+
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('pagehide', onVisibilityChange);
+    });
+</script>
+
     {{-- <script>
       
    
