@@ -1422,6 +1422,9 @@ $(document).ready(function () {
                         "checked",
                         postData.comment_on_off == 1
                     );
+                    $(".poll-option-input, #yourquestion").each(function () {
+                        updateCharCount(this);
+                    });
 
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
