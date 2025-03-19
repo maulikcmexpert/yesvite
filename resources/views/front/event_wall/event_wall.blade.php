@@ -205,7 +205,7 @@
                                                                             </button>
                                                                         </li>
                                                                         @endif
-                                                                        @if ($post['user_id'] !== $login_user_id)
+                                                                        @if ($post['user_id'] != $login_user_id)
                                                                         <li>
                                                                             <button
                                                                                 class="dropdown-item hide-post-btn postControlButton"
