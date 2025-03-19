@@ -31,36 +31,31 @@
     });
 
     function openApp() {
-        const appLink = "comappyesvite://somepage";
+        const universalLink = "https://apps.apple.com/app/6736650042";  // Universal Link
+        const appLink = "comappyesvite://somepage";               // Deep Link
         const appStoreLink = "https://apps.apple.com/app/6736650042";
-        
+
         let appOpened = false;
+        const timeout = 1500;
 
-        // Detect app open with pagehide (works better on iOS Safari)
-        const onPageHide = () => {
-            appOpened = true;  // App opened successfully
-        };
-        
-        window.addEventListener('pagehide', onPageHide);
+        // Use Universal Link for iOS Safari (reliable)
+        if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+            window.location.href = universalLink;
+        } else {
+            // Use hidden iframe for unsupported browsers (Chrome)
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appLink;
+            document.body.appendChild(iframe);
 
-        // Use iframe navigation to bypass Safari restrictions
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appLink;
-        document.body.appendChild(iframe);
-
-        // Fallback to App Store if the app is not installed
-        const fallbackTimeout = 1500;  
-        const timer = setTimeout(() => {
-            if (!appOpened) {
-                window.location.href = appStoreLink;  // Redirect to App Store
-            }
-            
-            // Clean up
-            document.body.removeChild(iframe);
-            window.removeEventListener('pagehide', onPageHide);
-            clearTimeout(timer);
-        }, fallbackTimeout);
+            const timer = setTimeout(() => {
+                if (!appOpened) {
+                    window.location.href = appStoreLink;  // Fallback to App Store
+                }
+                document.body.removeChild(iframe);
+                clearTimeout(timer);
+            }, timeout);
+        }
     }
 </script>
 
