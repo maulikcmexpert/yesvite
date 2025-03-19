@@ -1458,6 +1458,22 @@ $(document).ready(function () {
                                 `;
                                 mediaWrapper.append(mediaElement);
                             });
+                           // Use event delegation to handle dynamic elements
+$("#imagePreview").on("click", ".uploded-delete-icon", function () {
+    let parentDiv = $(this).closest("div"); // Get the parent div containing the image
+    parentDiv.remove(); // Remove the selected image div
+
+    let mediaWrapper = $("#imagePreview");
+    let uploadImgInner = $(".create-post-upload-img-inner");
+    let uploadHeadButton = $(".create-post-head-upload-btn");
+
+    // Check if there are any images left
+    if (mediaWrapper.children().length === 0) {
+        uploadImgInner.removeClass("d-none"); // Show upload area
+        uploadHeadButton.addClass("d-none"); // Hide header upload button
+    }
+});
+
 
                             // Hide the upload section when images are uploaded
                             if (uploadImgInner.length > 0) {
