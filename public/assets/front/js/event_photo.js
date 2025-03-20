@@ -988,29 +988,40 @@ $(document).ready(function () {
         });
 
         $(".download_img").on("click", function () {
-            // $('.form-check-input:checked').each(function () {
-            //     console.log('Checkbox selected: ', $(this).data('image-src')); // Check if data-image-src exists
-            // });
-
-            // Get selected image URLs from the checkboxes
             const selectedImages = $(".selected_bulk_image:checked")
                 .map(function () {
                     return $(this).data("image-src"); // Get image URLs
                 })
                 .get();
 
-            selectedImages.forEach((imgSrc, index) => {
-                const link = document.createElement("a");
-                link.href = imgSrc;
-                link.download = `image_${index + 1}.jpg`; // Customize filename
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+            if (selectedImages.length > 0) {
+                downloadImagesSequentially(selectedImages, 0);
+            }
+
+            // Uncheck all selected images and update UI
             $(".selected_bulk_image").prop("checked", false);
             $(".selected-bulk-btn").hide();
-            toggleBulkSelectWrapper(); // Update UI
+            toggleBulkSelectWrapper();
         });
+
+        // Function to download images one by one
+        function downloadImagesSequentially(images, index) {
+            if (index >= images.length) return; // Stop if all images are downloaded
+
+            const imgSrc = images[index];
+            const link = document.createElement("a");
+            link.href = imgSrc;
+            link.download = `image_${index + 1}.jpg`; // Customize filename
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Delay next download to prevent browser blocking
+            setTimeout(() => {
+                downloadImagesSequentially(images, index + 1);
+            }, 500); // Adjust delay if necessary
+        }
+
         $(document).on("click", ".download_img_single", function () {
             // Find the image source stored in the data attribute
             const imgSrc = $(this).attr("data-src");
