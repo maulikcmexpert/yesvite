@@ -988,11 +988,27 @@ $(document).ready(function () {
         });
 
         $(".download_img").on("click", function () {
-            const selectedImages = $(".selected_bulk_image:checked")
-                .map(function () {
-                    return $(this).data("image-src"); // Get image URLs
-                })
-                .get();
+            let selectedImages = [];
+
+            $(".selected_bulk_image:checked").each(function () {
+                let imgSrc = $(this).data("image-src");
+
+                // If imgSrc is a JSON string, parse it into an array
+                if (typeof imgSrc === "string") {
+                    try {
+                        imgSrc = JSON.parse(imgSrc);
+                    } catch (e) {
+                        console.error("Invalid JSON format in data-image-src:", imgSrc);
+                        return;
+                    }
+                }
+
+                if (Array.isArray(imgSrc)) {
+                    selectedImages = selectedImages.concat(imgSrc); // Merge arrays
+                } else {
+                    selectedImages.push(imgSrc);
+                }
+            });
 
             if (selectedImages.length > 0) {
                 downloadImagesSequentially(selectedImages, 0);
@@ -1021,6 +1037,7 @@ $(document).ready(function () {
                 downloadImagesSequentially(images, index + 1);
             }, 500); // Adjust delay if necessary
         }
+
 
         $(document).on("click", ".download_img_single", function () {
             // Find the image source stored in the data attribute
