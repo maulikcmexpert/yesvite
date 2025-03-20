@@ -908,9 +908,26 @@
 
 
     });
-    function openApp() {
-    const appLink = "comappyesvite://somepage"; 
-    window.location.href = appLink;
-}
+//     function openApp() {
+//     const appLink = "comappyesvite://somepage"; 
+//     window.location.href = appLink;
+// }
+function openApp() {
+    const appLink = "comappyesvite://somepage";
+    const fallbackTimeout = 2000; // Adjust the timeout as needed (in milliseconds)
 
+    // Try to open the app using an iframe
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appLink;
+    document.body.appendChild(iframe);
+
+    // After a short delay, remove the iframe.
+    // If the app didn't open, the user will stay on the current page,
+    // and the iframe will be removed, preventing the direct alert from
+    // the main window navigation.
+    setTimeout(() => {
+        document.body.removeChild(iframe);
+    }, fallbackTimeout);
+}
 </script>
