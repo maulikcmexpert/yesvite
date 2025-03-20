@@ -915,6 +915,9 @@
 
 
 function openApp() {
+    preventDefault();
+    
+
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
     
