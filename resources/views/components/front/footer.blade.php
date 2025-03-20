@@ -947,21 +947,60 @@
 //     // }, 1500);  // Adjust the timeout based on app launch speed
 // }
 
+// (function() {
+//   var app = {
+//     launchApp: function() {
+//       window.location.replace("comappyesvite://");
+//       this.timer = setTimeout(this.openWebApp, 1000);
+//     },
+
+//     openWebApp: function() {
+//     //   window.location.replace("http://itunesstorelink/");
+//     console.log('not found');
+//     }
+//   };
+
+//   app.launchApp();
+// })();
 (function() {
-  var app = {
-    launchApp: function() {
-      window.location.replace("comappyesvite://");
-      this.timer = setTimeout(this.openWebApp, 1000);
-    },
+    var app = {
+        launchApp: function() {
+            let appOpened = false;
 
-    openWebApp: function() {
-    //   window.location.replace("http://itunesstorelink/");
-    console.log('not found');
-    }
-  };
+            // ✅ Detect if the app is opened successfully
+            const onVisibilityChange = () => {
+                if (document.hidden) {
+                    appOpened = true;  // App opened successfully
+                }
+            };
 
-  app.launchApp();
+            const onBlur = () => {
+                appOpened = true;  // App opened successfully
+            };
+
+            document.addEventListener('visibilitychange', onVisibilityChange);
+            window.addEventListener('blur', onBlur);
+
+            // ✅ Open the app using location.replace (prevents alert)
+            window.location.replace("comappyesvite://");
+
+            // ✅ Check if the app opened or not
+            this.timer = setTimeout(() => {
+                if (!appOpened) {
+                    console.log('App not installed, no alert shown.');
+                }
+
+                // ✅ Cleanup
+                document.removeEventListener('visibilitychange', onVisibilityChange);
+                window.removeEventListener('blur', onBlur);
+
+            }, 1500);  // Adjust timeout based on app launch speed
+        }
+    };
+
+    app.launchApp();
 })();
+
 // function openApp() {
     
 
