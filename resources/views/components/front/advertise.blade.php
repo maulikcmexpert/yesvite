@@ -25,40 +25,121 @@
 </div>
 @endif
 @push('scripts')
+
+
+
 <script>
     $(document).on('click','.mobile-app',function(){
         openApp();
     });
-    function openApp() {
-        const appLink = "comappyesvite://somepage";
-        const appStoreLink = "https://apps.apple.com/app/6736650042";
+  function openApp() {
+    const appLink = "comappyesvite://somepage";         // App deep link
+    const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
+
+    let appOpened = false;  
+    const fallbackTimeout = 1500;  // Timeout for fallback
+
+    // ✅ Listen for visibility change (Safari-compatible)
+    const onVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true;  // App opened successfully
+        }
+    };
+    
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    // ✅ Start tracking time
+    const now = Date.now();
+
+    // ✅ Try to open the app
+    window.location.href = appLink;
+
+    // ✅ Check if the app opened
+    const interval = setInterval(() => {
+        const elapsed = Date.now() - now;
+
+        if (appOpened || elapsed > fallbackTimeout) {
+            clearInterval(interval);  // Stop checking
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+
+            // ✅ Fallback: Redirect to App Store if the app didn't open
+            if (!appOpened) {
+                window.location.replace(appStoreLink);
+            }
+        }
+    }, 200);  // Check every 200ms
+}
+
+
+
+
+
+//     function openApp() {
+//         const appLink = "comappyesvite://somepage"; // Deep link to open the app
+//         const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store fallback
+
+//         let appOpened = false;
+//         const now = Date.now();
+
+//         // Event listener for visibility change (detects if app opened)
+//         const handleVisibilityChange = () => {
+//             if (document.hidden) {
+//                 appOpened = true;
+//             }
+//         };
+
+//         // Attach visibility change event
+//         document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//         // Try to open the app
+//         window.location.href = appLink;
+
+//         // Set timeout to check if the app opened
+//         setTimeout(() => {
+//             const elapsed = Date.now() - now;
+
+//             // Redirect to App Store only if the app did NOT open
+//             // alert(elapsed);
+//             if (!appOpened && elapsed < 1200) {
+//                 window.location.href = appStoreLink;
+//             }
+
+//             // Cleanup event listener
+//             document.removeEventListener("visibilitychange", handleVisibilityChange);
+//         }, 1200);
+// }
+
+
+    // function openApp() {
+    //     const appLink = "comappyesvite://somepage";
+    //     const appStoreLink = "https://apps.apple.com/app/6736650042";
         
-        let appOpened = false;
+    //     let appOpened = false;
 
-        // Use `pagehide` to detect if the app opened successfully
-        const onPageHide = () => {
-            appOpened = true;
-        };
+    //     // Use `pagehide` to detect if the app opened successfully
+    //     const onPageHide = () => {
+    //         appOpened = true;
+    //     };
 
-        window.addEventListener('pagehide', onPageHide);
+    //     window.addEventListener('pagehide', onPageHide);
 
-        // Open the app
-        const now = Date.now();
-        // alert(now);
+    //     // Open the app
+    //     const now = Date.now();
+    //     // alert(now);
 
-        window.location.href = appLink;
+    //     window.location.href = appLink;
 
   
-        setTimeout(() => {
-            const elapsed = Date.now() - now;
-            // alert(elapsed);
-            if (!appOpened && elapsed<1502) {
-                window.location.href = appStoreLink;  // App Store redirect
-            }
+    //     setTimeout(() => {
+    //         const elapsed = Date.now() - now;
+    //         // alert(elapsed);
+    //         if (!appOpened && elapsed<1502) {
+    //             window.location.href = appStoreLink;  // App Store redirect
+    //         }
 
-            // Clean up event listener
-            window.removeEventListener('pagehide', onPageHide);
-        }, 1500);
-    }
+    //         // Clean up event listener
+    //         window.removeEventListener('pagehide', onPageHide);
+    //     }, 1500);
+    // }
 </script>    
 @endpush
