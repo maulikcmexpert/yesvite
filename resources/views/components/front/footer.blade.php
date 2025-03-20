@@ -948,18 +948,8 @@ function openApp() {
         }, 100);
     } else {
         // Safari & other browsers
-        const startTime = Date.now();
-        window.location.href = appLink;
-
-        // Remove invalid alert in Safari
-        const checkAppOpened = setInterval(() => {
-            if (appOpened || (Date.now() - startTime > 1500)) {
-                clearInterval(checkAppOpened);
-                return;
-            }
-            // If the app did not open, replace the state to avoid alert
-            history.replaceState(null, '', window.location.href);
-        }, 100);
+        const urlScheme = new URLScheme(appLink);
+        urlScheme.open();
     }
 
     // Cleanup event listeners after 2 seconds
@@ -968,5 +958,27 @@ function openApp() {
         window.removeEventListener('blur', onBlur);
     }, 2000);
 }
+
+class URLScheme {
+    constructor(scheme) {
+        this.scheme = scheme;
+    }
+
+    open() {
+        const iframe = document.createElement('iframe');
+        iframe.src = this.scheme;
+        iframe.style.display = 'none';
+        iframe.frameBorder = '0';
+        iframe.width = '0';
+        iframe.height = '0';
+        document.body.appendChild(iframe);
+
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+        }, 100);
+    }
+}
+
+
 
 </script>
