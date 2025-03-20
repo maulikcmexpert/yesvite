@@ -962,51 +962,47 @@
 
 //   app.launchApp();
 // })();
-(function() {
-    var app = {
-        launchApp: function() {
-            let appOpened = false;
+function openApp() {
+    const appUrl = "comappyesvite://";         // Your app's custom scheme
+    // const appStoreUrl = "https://apps.apple.com/app/your-app-id";  // Fallback URL
+    let appOpened = false;
 
-            // ✅ Detect if the app is opened successfully
-            const onVisibilityChange = () => {
-                if (document.hidden) {
-                    appOpened = true;  // App opened successfully
-                }
-            };
+    try {
+        // ✅ Try opening the app using the custom scheme
+        window.location.replace(appUrl);
 
-            const onBlur = () => {
+        // ✅ Detect app open
+        const onVisibilityChange = () => {
+            if (document.hidden) {
                 appOpened = true;  // App opened successfully
-            };
-
-            document.addEventListener('visibilitychange', onVisibilityChange);
-            window.addEventListener('blur', onBlur);
-                // preventDefault();   
-
-            // ✅ Open the app using location.replace (prevents alert)
-            // window.location.replace("comappyesvite://");
-            try {
-                window.location.replace("comappyesvite://");
-                preventDefault();
-            } catch (error) {
-            console.error("Error replacing location:", error);
-            // Handle the error, e.g., redirect to a default page or display an error message
             }
-            // ✅ Check if the app opened or not
-            this.timer = setTimeout(() => {
-                if (!appOpened) {
-                    console.log('App not installed, no alert shown.');
-                }
+        };
 
-                // ✅ Cleanup
-                document.removeEventListener('visibilitychange', onVisibilityChange);
-                window.removeEventListener('blur', onBlur);
+        document.addEventListener('visibilitychange', onVisibilityChange);
 
-            }, 1500);  // Adjust timeout based on app launch speed
+        // ✅ Fallback to App Store if the app doesn't open
+        setTimeout(() => {
+            if (!appOpened) {
+                // window.location.href = appStoreUrl;  // Redirect to App Store
+            }
+
+            // ✅ Cleanup
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+
+        }, 1500);
+
+    } catch (error) {
+        console.error("Error replacing location:", error);
+
+        // ✅ Handle unexpected errors gracefully
+        if (error.message !== "OK") {  
+            // Show alert only if it's not the default "OK" message
+            alert("Failed to open the app. Redirecting to the App Store...");
+            // window.location.href = appStoreUrl;  // Redirect to App Store
         }
-    };
+    }
+}
 
-    app.launchApp();
-})();
 
 // function openApp() {
     
