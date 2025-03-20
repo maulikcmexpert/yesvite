@@ -908,10 +908,20 @@
 
 
     });
-//     function openApp() {
-//     const appLink = "comappyesvite://"; 
-//     window.location.href = appLink;
-// }
+    function openApp() {
+    const appLink = "comappyesvite://";
+    const fallbackURL = "https://yesvite.cmexpertiseinfotech.in/"; // Fallback URL if app is not installed
+    const now = new Date().getTime();
+
+    window.location.href = appLink;
+
+    setTimeout(() => {
+        if (new Date().getTime() - now < 2000) {
+            window.location.href = fallbackURL;
+        }
+    }, 1500);
+}
+
 
 // ;
 
