@@ -1017,6 +1017,8 @@ $(document).ready(function () {
             // Uncheck all selected images and update UI
             $(".selected_bulk_image").prop("checked", false);
             $(".selected-bulk-btn").hide();
+            bulkSelectActive = false;
+
             toggleBulkSelectWrapper();
         });
 
