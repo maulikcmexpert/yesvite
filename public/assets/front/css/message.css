@@ -1042,6 +1042,7 @@ ul.member-lists li:last-child {
 
 .chat-data .form-check-input {
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     border: 1px solid var(--borderColor) !important;
     margin: 0 !important;
@@ -1924,6 +1925,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
 
 .bulk-check .form-check-input {
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     max-width: 20px !important;
      padding-left: 0px !important;

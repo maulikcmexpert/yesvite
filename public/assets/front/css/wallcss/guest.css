@@ -602,6 +602,7 @@ display:none;}
 /* ========= filter ========== */
 #filter input.form-check-input{
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     border-radius: 8px !important;
     border: 1px solid var(--border);
@@ -737,6 +738,7 @@ display:none;}
 
 .invite-contact-wrp .invite-contact .form-check-input.failed-checkout{
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     border-radius: 8px !important;
     border: 1px solid var(--border);
@@ -829,6 +831,7 @@ display:none;}
 
 #failed .success-checkout.form-check-input{
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     border-radius: 8px !important;
     border: 1px solid var(--border);
