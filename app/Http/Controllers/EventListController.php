@@ -782,9 +782,9 @@ class EventListController extends BaseController
                 if ($eventdetail->event) {
                     $eventData[] = [
                         'event_id' => $eventdetail->event->id,
-                        'firstname' => $eventdetail->user->firstname,
-                        'lastname' => $eventdetail->user->lastname,
-                        'profile' => ($eventdetail->user->profile!=null)?$eventdetail->user->profile:"",
+                        'firstname' => $eventdetail->event->user->firstname,
+                        'lastname' => $eventdetail->event->user->lastname,
+                        'profile' => ($eventdetail->event->user->profile!=null)?$eventdetail->event->user->profile:"",
                         'event_name' => $eventdetail->event->event_name,
                         'event_image' => $images ? asset('storage/event_images/' . $images->image) : "",
                         'user_id'=>$user_id,
