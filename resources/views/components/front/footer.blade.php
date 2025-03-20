@@ -999,17 +999,17 @@
     //     }
     // };
 
-
     const app = {
     launchApp: function () {
         let appOpened = false;
 
-        // ✅ Detect if the app is opened successfully
+        // ✅ Detect if the app opens successfully
         const onVisibilityChange = () => {
             if (document.hidden) {
                 appOpened = true;  // App opened successfully
             }
         };
+
         const onBlur = () => {
             appOpened = true;  // App opened successfully
         };
@@ -1017,28 +1017,34 @@
         document.addEventListener('visibilitychange', onVisibilityChange);
         window.addEventListener('blur', onBlur);
 
-        const appLink = "comappyesvite://";
+        const appLink = "comappyesvite://";  
         
-        // ✅ Open the app
-        const now = Date.now();
-        window.location.href = appLink;
+        // ✅ Use an iframe to prevent invalid address error
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
 
-        // ✅ Check if the app opened or not
-        this.timer = setTimeout(() => {
-            const elapsed = Date.now() - now;
+        try {
+            iframe.src = appLink;  // Open the app
+        } catch (error) {
+            console.error("Error opening the app:", error);
+        }
 
-            if (appOpened && elapsed < 1500) {
-                // ❗ Show alert only if the app is installed
+        // ✅ Check if the app opened
+        setTimeout(() => {
+            if (appOpened) {
                 alert('App is installed and opened successfully!');
             }
 
             // ✅ Cleanup
+            document.body.removeChild(iframe);
             document.removeEventListener('visibilitychange', onVisibilityChange);
             window.removeEventListener('blur', onBlur);
 
-        }, 1500);  // Timeout for app launch detection
+        }, 1500);  // Timeout to detect app opening
     }
 };
+
 
 
     app.launchApp();
