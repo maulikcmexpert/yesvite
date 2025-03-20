@@ -912,18 +912,14 @@
 //     const appLink = "comappyesvite://"; 
 //     window.location.href = appLink;
 // }
-
-
 function openApp() {
-    const appLink = "comappyesvite://";
-    const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-    
+    const appUrl = "comappyesvite://";  // Your app's custom scheme
     let appOpened = false;
 
-    // Detect app open using visibility and blur events
+    // ✅ Detect if the app opens
     const onVisibilityChange = () => {
         if (document.hidden) {
-            appOpened = true; // App opened successfully
+            appOpened = true;  // App opened successfully
         }
     };
 
@@ -934,51 +930,76 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    if (isChrome) {
-        // Chrome on iOS: Use <a> element click
-        const link = document.createElement('a');
-        link.href = appLink;
-        link.style.display = 'none';
-        document.body.appendChild(link);
+    // ✅ Use direct location.href for guaranteed opening
+    window.location.href = appUrl;
 
-        link.click();
+    // ✅ Silent failure handling (no alert)
+    const fallbackTimeout = setTimeout(() => {
+        if (!appOpened) {
+            console.log('App not installed or failed to open. No alert shown.');
+        }
 
-        setTimeout(() => {
-            document.body.removeChild(link);
-        }, 100);
-    } else {
-        // Safari & other browsers
-        const urlScheme = new URLScheme(appLink);
-        urlScheme.open();
-    }
-
-    // Cleanup event listeners after 2 seconds
-    setTimeout(() => {
+        // ✅ Cleanup
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
-    }, 2000);
+
+    }, 1500);  // Adjust timeout as needed
 }
 
-class URLScheme {
-    constructor(scheme) {
-        this.scheme = scheme;
-    }
 
-    open() {
-        const iframe = document.createElement('iframe');
-        iframe.src = this.scheme;
-        iframe.style.display = 'none';
-        iframe.frameBorder = '0';
-        iframe.width = '0';
-        iframe.height = '0';
-        document.body.appendChild(iframe);
+// function openApp() {
+    
 
-        setTimeout(() => {
-            document.body.removeChild(iframe);
-        }, 100);
-    }
-}
+//     const appLink = "comappyesvite://";
+//     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
+    
+//     let appOpened = false;
 
+//     // ✅ Detect app open using visibility and blur events
+//     const onVisibilityChange = () => {
+//         if (document.hidden) {
+//             appOpened = true; // App opened successfully
+//         }
+//     };
+
+//     const onBlur = () => {
+//         appOpened = true;  // App opened successfully
+//     };
+
+//     document.addEventListener('visibilitychange', onVisibilityChange);
+//     window.addEventListener('blur', onBlur);
+
+//     if (isChrome) {
+//         // ✅ Chrome on iOS: Use <a> element click
+//         const link = document.createElement('a');
+//         link.href = appLink;
+//         link.style.display = 'none';
+//         document.body.appendChild(link);
+
+//         link.click();
+
+//         setTimeout(() => {
+//             document.body.removeChild(link);
+//         }, 100);
+//     } else {
+//         // ✅ Safari & other browsers
+//         window.location.href = appLink;
+
+//         // ✅ Remove invalid alert in Safari
+//         setTimeout(() => {
+//             if (!appOpened) {
+
+//                 history.replaceState(null, '', window.location.href);
+//             }
+//         }, 1500);
+//     }
+
+//     // ✅ Cleanup event listeners after 2 seconds
+//     setTimeout(() => {
+//         document.removeEventListener('visibilitychange', onVisibilityChange);
+//         window.removeEventListener('blur', onBlur);
+//     }, 2000);
+// }
 
 
 </script>
