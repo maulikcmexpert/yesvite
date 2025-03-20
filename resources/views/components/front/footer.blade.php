@@ -908,59 +908,11 @@
 
 
     });
-//     function openApp() {
-    // const appLink = "comappyesvite://"; 
-    // window.location.href = appLink;
-// }
-
-function openApp() {
-    let appOpened = false;
-
-    // ✅ Detect if the app opens successfully
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;  // App opened successfully
-        }
-    };
-
-    const onBlur = () => {
-        
-        appOpened = true;  // App opened successfully
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onBlur);
-
-    const appLink = "comappyesvite://";  
-
-    // ✅ Use iframe to prevent invalid address error
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    try {
-        alert(2)
-        iframe.src = appLink;  // Try to open the app
-    } catch (error) {
-        console.error("Error opening the app:", error);
-    }
-
-    // ✅ Check if the app opened successfully
-    setTimeout(() => {
-        if (appOpened) {
-            alert(3)
-            // ❗ Show alert only if the app is installed
-            alert('App is installed and opened successfully!');
-        }
-        alert(4)
-        // ✅ Cleanup
-        document.body.removeChild(iframe);
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
-
-    }, 1500); 
-    alert(5) // Timeout to detect app opening
+    function openApp() {
+    const appLink = "comappyesvite://"; 
+    window.location.href = appLink;
 }
+
 
 
 
