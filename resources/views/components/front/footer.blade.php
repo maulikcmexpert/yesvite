@@ -917,18 +917,38 @@
 function openApp() {
     const appLink = "comappyesvite://";
 
-    try {
-        // Attempt to open the app
-        window.location.href = appLink;
+    // Check if running in Chrome iOS
+    const isChrome = navigator.userAgent.toLowerCase().includes('crios');
 
-        // Use history.replaceState to suppress the invalid alert
+    if (isChrome) {
+        // Chrome on iOS requires programmatic click on <a> element
+        const link = document.createElement('a');
+        link.href = appLink;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+
+        // Trigger click programmatically
+        link.click();
+
+        // Clean up
         setTimeout(() => {
-            history.replaceState(null, '', window.location.href);
+            document.body.removeChild(link);
         }, 100);
-        
-    } catch (e) {
-        console.log('App not installed or invalid link');
+    } else {
+        // Safari and other browsers
+        try {
+            window.location.href = appLink;
+
+            // Prevent invalid alert in Safari
+            setTimeout(() => {
+                history.replaceState(null, '', window.location.href);
+            }, 100);
+
+        } catch (e) {
+            console.log('App not installed or invalid link');
+        }
     }
 }
+
 
 </script>
