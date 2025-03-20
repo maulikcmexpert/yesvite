@@ -1016,6 +1016,8 @@ $(document).ready(function () {
         toggleBulkSelectWrapper();
     });
 
+
+
     // Function to download images and videos as files
     function downloadMediaSequentially(media, index) {
         if (index >= media.length) return; // Stop when all are processed
