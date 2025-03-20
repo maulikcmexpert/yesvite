@@ -1856,6 +1856,11 @@
     .new_event_detail_form .input-group.time input::placeholder {
         font-size: 12px !important;
     }
+
+    .coin-invite-wrp i{
+        margin-left: 7px;
+    }
+
 }
 
 @media only screen and (max-width: 360px) {
