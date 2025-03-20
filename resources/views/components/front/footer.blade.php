@@ -909,29 +909,9 @@
 
     });
     function openApp() {
-    const appLink = "comappyesvite://";
-    const fallbackURL = "https://yesvite.cmexpertiseinfotech.in/";
-    
-    // Check if the page is refreshed
-    if (sessionStorage.getItem("appOpened")) {
-        sessionStorage.removeItem("appOpened"); // Remove flag after first use
-        return; // Stop execution if it's a refresh
-    }
-
-    // Set session flag to prevent auto execution on refresh
-    sessionStorage.setItem("appOpened", "true");
-
-    const now = new Date().getTime();
+    const appLink = "comappyesvite://"; 
     window.location.href = appLink;
-
-    setTimeout(() => {
-        if (new Date().getTime() - now < 2000) {
-            window.location.href = fallbackURL;
-        }
-    }, 1500);
 }
-
-
 
 // ;
 
