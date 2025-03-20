@@ -912,16 +912,8 @@
 //     const appLink = "comappyesvite://"; 
 //     window.location.href = appLink;
 // }
-let timeout;
-
-function preventPopup() {
-    clearTimeout(timeout);
-    timeout = null;
-    window.removeEventListener('pagehide', preventPopup);
-}
-
 function openApp() {
-    const appUrl = "comappyesvite://";   // Your app URL scheme
+    const appUrl = "comappyesvite://";  // Your app's custom scheme
 
     let appOpened = false;
 
@@ -939,27 +931,24 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    // ✅ Use iframe for silent app opening
+    // ✅ Use iframe to silently open the app
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = appUrl;
     document.body.appendChild(iframe);
 
-    // ✅ Set timeout to do nothing if the app is not installed
-    timeout = setTimeout(() => {
+    // ✅ Set timeout to clean up
+    setTimeout(() => {
         if (!appOpened) {
-            console.log('App not installed, but no alert shown.');
+            console.log('App not installed or failed to open.');
         }
-        
+
         // Cleanup
         document.body.removeChild(iframe);
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);   // Adjust timeout based on the app launch speed
-
-    // ✅ Prevent alert if the app opens successfully
-    window.addEventListener('pagehide', preventPopup);
+    }, 1500);  // Adjust the timeout based on app launch speed
 }
 
 
