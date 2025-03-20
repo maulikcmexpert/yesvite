@@ -909,13 +909,29 @@
 
     });
 
-    function openApp() {
-            // Try opening the Yesvite app
-            window.location.href = "comappyesvite://somepage";
+    // function openApp() {
+    //         // Try opening the Yesvite app
+    //         window.location.href = "comappyesvite://somepage";
 
-            // If the app is not installed, redirect to the App Store after 2 seconds
-            // setTimeout(function() {
-            //     window.location.href = "https://apps.apple.com/app/your-app-id";
-            // }, 2000);
-        }
+    //         // If the app is not installed, redirect to the App Store after 2 seconds
+    //         // setTimeout(function() {
+    //         //     window.location.href = "https://apps.apple.com/app/your-app-id";
+    //         // }, 2000);
+    //     }
+    function openApp() {
+    const appLink = "comappyesvite://somepage";  // Deep link
+
+    // ✅ Use iframe to bypass Safari's "invalid address" alert
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appLink;
+
+    document.body.appendChild(iframe);
+
+    // ✅ Clean up after 1.5 seconds
+    setTimeout(() => {
+        document.body.removeChild(iframe);
+    }, 1500);
+}
+
 </script>
