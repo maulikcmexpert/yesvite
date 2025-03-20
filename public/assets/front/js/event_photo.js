@@ -991,6 +991,8 @@ $(document).ready(function () {
 
             $(".selected_bulk_image:checked").each(function () {
                 let mediaSrc = $(this).data("image-src");
+                console.log(mediaSrc);
+
 
                 // Parse JSON if necessary
                 if (typeof mediaSrc === "string") {
