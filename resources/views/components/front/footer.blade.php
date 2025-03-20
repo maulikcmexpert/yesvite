@@ -999,6 +999,7 @@
     //     }
     // };
 
+
     const app = {
     launchApp: function () {
         let appOpened = false;
@@ -1037,8 +1038,6 @@
 
         }, 1500);  // Timeout for app launch detection
     }
-};
-
 };
 
 
