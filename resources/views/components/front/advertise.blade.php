@@ -58,7 +58,7 @@
 
         // Redirect to App Store only if the app did NOT open
         // alert(elapsed);
-        if (!appOpened && elapsed < 1202) {
+        if (!appOpened && elapsed < 1200) {
             window.location.href = appStoreLink;
         }
 
