@@ -32,18 +32,25 @@
     $(document).on('click','.mobile-app',function(){
         openApp();
     });
-    function openApp() {
-    const appLink = "comappyesvite://somepage";         // 1st link (app link)
+   function openApp() {
+    const appLink = "comappyesvite://somepage";         // 1st link (App deep link)
     const appStoreLink = "https://apps.apple.com/app/6736650042";  // 2nd link (App Store)
-
+    
     let appOpened = false;  
+
+    // Fallback using an iframe (Safari fix)
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+
+    // Try opening the app using iframe (better compatibility)
+    iframe.src = appLink;  
+    document.body.appendChild(iframe);
 
     // Detect if the app opened successfully
     const onPageHide = () => {
-        appOpened = true;  
+        appOpened = true;
     };
 
-    // Listen for pagehide or visibilitychange events
     window.addEventListener('pagehide', onPageHide);
     window.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -51,23 +58,23 @@
         }
     });
 
-    // Open the first link
+    // Set timeout for fallback
     const now = Date.now();
-    window.location.href = appLink;
 
-    // Fallback to the second link if the first one fails
     setTimeout(() => {
         const elapsed = Date.now() - now;
-        
-        // If the app did not open and the elapsed time is small, redirect to the second link
+
+        // If the app did not open, redirect to App Store
         if (!appOpened && elapsed < 1500) {
-            window.location.href = appStoreLink;  
+            window.location.href = appStoreLink;
         }
 
-        // Clean up event listener
+        // Cleanup iframe and event listeners
+        document.body.removeChild(iframe);
         window.removeEventListener('pagehide', onPageHide);
-    }, 1500);  // Wait 1.5 seconds to confirm if the first one opened
+    }, 1500);  // 1.5 seconds timeout
 }
+
 
 //     function openApp() {
 //         const appLink = "comappyesvite://somepage"; // Deep link to open the app
