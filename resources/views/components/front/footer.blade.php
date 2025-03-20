@@ -916,7 +916,7 @@ function openApp() {
     const appUrl = "comappyesvite://";  // Your app's custom scheme
     let appOpened = false;
 
-    // ✅ Detect app opening
+    // ✅ Detect if the app opens successfully
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true;  // App opened successfully
@@ -930,25 +930,22 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    // ✅ Open app directly
+    // ✅ Open the app directly
     window.location.href = appUrl;
 
     // ✅ Check if the app opened successfully
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
         if (appOpened) {
             // ✅ Show success popup only if the app opened
-            alert('App opened successfully!');
-        } else {
-            console.log('App not installed, no popup shown.');
+            alert('App opened successfully! 🎉');
         }
 
         // ✅ Cleanup
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Adjust timeout based on app launch speed
+    }, 1500);  // Adjust the timeout based on app launch speed
 }
-
 
 // function openApp() {
     
