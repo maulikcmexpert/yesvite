@@ -908,9 +908,24 @@
 
 
     });
-    function openApp() {
-    const appLink = "comappyesvite://somepage"; 
+//     function openApp() {
+//     const appLink = "comappyesvite://somepage"; 
+//     window.location.href = appLink;
+// }
+function openApp() {
+    const appLink = "comappyesvite://somepage";
+
+    // Try opening the app
+    const now = Date.now();
     window.location.href = appLink;
+
+    // Use a timeout to prevent alerts or errors
+    setTimeout(() => {
+        const elapsed = Date.now() - now;
+        if (elapsed < 1500) {
+            console.log("App not installed or did not open.");
+        }
+    }, 1000);
 }
 
 </script>
