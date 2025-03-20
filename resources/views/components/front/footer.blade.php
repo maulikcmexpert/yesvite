@@ -963,60 +963,83 @@
 //   app.launchApp();
 // })();
 (function() {
-    var app = {
-        launchApp: function() {
-            let appOpened = false;
+    // var app = {
+    //     launchApp: function() {
+    //         let appOpened = false;
+    //         // ✅ Detect if the app is opened successfully
+    //         const onVisibilityChange = () => {
+    //             if (document.hidden) {
+    //                 appOpened = true;  // App opened successfully
+    //             }
+    //         };
+    //         const onBlur = () => {
+    //             appOpened = true;  // App opened successfully
+    //         };
+    //         document.addEventListener('visibilitychange', onVisibilityChange);
+    //         window.addEventListener('blur', onBlur);
+    //             // preventDefault();   
+    //         // ✅ Open the app using location.replace (prevents alert)
+    //         // window.location.replace("comappyesvite://");
+    //         try {
+    //             window.location.replace("comappyesvite://");
+    //         } catch (error) {
+    //         console.error("Error replacing location:", error);
+    //         // Handle the error, e.g., redirect to a default page or display an error message
+    //         }
+    //         // ✅ Check if the app opened or not
+    //         this.timer = setTimeout(() => {
+    //             if (!appOpened) {
+    //                 console.log('App not installed, no alert shown.');
+    //             }
+    //             // ✅ Cleanup
+    //             document.removeEventListener('visibilitychange', onVisibilityChange);
+    //             window.removeEventListener('blur', onBlur);
 
-            // ✅ Detect if the app is opened successfully
-            const onVisibilityChange = () => {
-                if (document.hidden) {
-                    appOpened = true;  // App opened successfully
-                }
-            };
+    //         }, 1500);  // Adjust timeout based on app launch speed
+    //     }
+    // };
 
-            const onBlur = () => {
+
+    const app = {
+    launchApp: function () {
+        let appOpened = false;
+
+        // ✅ Detect if the app is opened successfully
+        const onVisibilityChange = () => {
+            if (document.hidden) {
                 appOpened = true;  // App opened successfully
-            };
+            }
+        };
+        const onBlur = () => {
+            appOpened = true;  // App opened successfully
+        };
 
-            document.addEventListener('visibilitychange', onVisibilityChange);
-            window.addEventListener('blur', onBlur);
-                // preventDefault();   
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('blur', onBlur);
 
-            // ✅ Open the app using location.replace (prevents alert)
-            // window.location.replace("comappyesvite://");
-            // try {
-            //     window.location.replace("comappyesvite://");
-            // } catch (error) {
-            // console.error("Error replacing location:", error);
-            // // Handle the error, e.g., redirect to a default page or display an error message
-            // }
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-         // Only attempt on iOS devices
-         try {
-             window.location.replace("comappyesvite://");
-         } catch (error) {
-             console.error("Error replacing location:", error);
-             // Handle iOS specific error (e.g., redirect to App Store)
-             window.location.href = "/app-not-found-ios";
-         }
-     } else {
-         // Handle non-iOS devices (e.g., display a message)
-         alert("This feature is only available on iOS devices.");
-     }
- 
-            // ✅ Check if the app opened or not
-            this.timer = setTimeout(() => {
-                if (!appOpened) {
-                    console.log('App not installed, no alert shown.');
-                }
+        const appLink = "comappyesvite://";
+        
+        // ✅ Open the app
+        const now = Date.now();
+        window.location.href = appLink;
 
-                // ✅ Cleanup
-                document.removeEventListener('visibilitychange', onVisibilityChange);
-                window.removeEventListener('blur', onBlur);
+        // ✅ Check if the app opened or not
+        this.timer = setTimeout(() => {
+            const elapsed = Date.now() - now;
 
-            }, 1500);  // Adjust timeout based on app launch speed
-        }
-    };
+            if (appOpened && elapsed < 1500) {
+                // ❗ Show alert only if the app is installed
+                alert('App is installed and opened successfully!');
+            }
+
+            // ✅ Cleanup
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            window.removeEventListener('blur', onBlur);
+
+        }, 1500);  // Timeout for app launch detection
+    }
+};
+
 
     app.launchApp();
 })();
