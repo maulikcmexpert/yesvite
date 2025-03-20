@@ -53,6 +53,10 @@
     align-items: center;
     gap: 16px;
     cursor: pointer;
+    border: 1px solid var(--headerBorder);
+    background: var(--tabBg);
+    padding: 8px 10px 8px 10px;
+    border-radius: 8px;
 }
 
 .new_event_detail_header-right-wrp h4 {
@@ -68,7 +72,7 @@
     font-size: 18px;
     margin-left: -10px;
     /* display: none; */
-    
+
 }
 
 .navbar h5 {
