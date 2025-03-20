@@ -914,37 +914,38 @@
 // }
 function openApp() {
     const appUrl = "comappyesvite://";  // Your app's custom scheme
-    // const appStoreUrl = "https://apps.apple.com/app/your-app-id";  // Fallback URL
     let appOpened = false;
 
-    // ✅ Create an iframe to prevent Safari invalid URL popup
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appUrl;
-    document.body.appendChild(iframe);
-
-    // ✅ Detect if the app opened successfully
+    // ✅ Detect if the app opens successfully
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true;  // App opened successfully
         }
     };
 
-    document.addEventListener('visibilitychange', onVisibilityChange);
+    const onBlur = () => {
+        appOpened = true;  // App opened successfully
+    };
 
-    // ✅ Fallback to App Store if the app doesn’t open
-    setTimeout(() => {
-        if (!appOpened) {
-            // window.location.href = appStoreUrl;  // Redirect to App Store
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', onBlur);
+
+    // ✅ Open the app directly
+    window.location.href = appUrl;
+
+    // ✅ Check if the app opened successfully
+    // setTimeout(() => {
+        if (appOpened) {
+            // ✅ Show success popup only if the app opened
+            // alert('App opened successfully! 🎉');
         }
 
         // ✅ Cleanup
         document.removeEventListener('visibilitychange', onVisibilityChange);
-        document.body.removeChild(iframe);
+        window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Adjust the timeout as needed
+    // }, 1500);  // Adjust the timeout based on app launch speed
 }
-
 
 // function openApp() {
     
