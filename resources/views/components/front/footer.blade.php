@@ -914,7 +914,7 @@
 // }
 function openApp() {
     const appUrl = "comappyesvite://";  // Your app's custom scheme
-    const appStoreUrl = "https://apps.apple.com/app/your-app-id";  // Fallback URL
+    // const appStoreUrl = "https://apps.apple.com/app/your-app-id";  // Fallback URL
     let appOpened = false;
 
     // ✅ Create an iframe to prevent Safari invalid URL popup
@@ -935,7 +935,7 @@ function openApp() {
     // ✅ Fallback to App Store if the app doesn’t open
     setTimeout(() => {
         if (!appOpened) {
-            window.location.href = appStoreUrl;  // Redirect to App Store
+            // window.location.href = appStoreUrl;  // Redirect to App Store
         }
 
         // ✅ Cleanup
