@@ -33,18 +33,10 @@
         openApp();
     });
    function openApp() {
-    const appLink = "comappyesvite://somepage";         // 1st link (App deep link)
-    const appStoreLink = "https://apps.apple.com/app/6736650042";  // 2nd link (App Store)
-    
+    const appLink = "comappyesvite://somepage";         // Your deep link
+    const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
+
     let appOpened = false;  
-
-    // Fallback using an iframe (Safari fix)
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-
-    // Try opening the app using iframe (better compatibility)
-    iframe.src = appLink;  
-    document.body.appendChild(iframe);
 
     // Detect if the app opened successfully
     const onPageHide = () => {
@@ -58,22 +50,41 @@
         }
     });
 
-    // Set timeout for fallback
+    // Try opening the app using window.location (for most browsers)
     const now = Date.now();
+    window.location.href = appLink;
 
-    setTimeout(() => {
-        const elapsed = Date.now() - now;
+    // Fallback handling with a hidden iframe (Safari-specific fix)
+    const fallbackTimeout = 1500;  // 1.5 seconds
+    let fallbackTriggered = false;
 
-        // If the app did not open, redirect to App Store
-        if (!appOpened && elapsed < 1500) {
-            window.location.href = appStoreLink;
+    const timer = setTimeout(() => {
+        if (!appOpened && !fallbackTriggered) {
+            fallbackTriggered = true;
+            
+            // For Safari, use a small iframe to bypass blocking issues
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appLink; 
+            document.body.appendChild(iframe);
+
+            setTimeout(() => {
+                // If still not opened, redirect to App Store
+                if (!appOpened) {
+                    window.location.href = appStoreLink;
+                }
+                document.body.removeChild(iframe);  // Clean up
+            }, 1500);
         }
+    }, fallbackTimeout);
 
-        // Cleanup iframe and event listeners
-        document.body.removeChild(iframe);
-        window.removeEventListener('pagehide', onPageHide);
-    }, 1500);  // 1.5 seconds timeout
+    // Cleanup event listeners
+    window.addEventListener('blur', () => {
+        appOpened = true;  // Mark as opened on blur
+        clearTimeout(timer);  // Cancel the fallback
+    });
 }
+
 
 
 //     function openApp() {
