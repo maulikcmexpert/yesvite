@@ -919,19 +919,22 @@
     //         // }, 2000);
     //     }
     function openApp() {
-    const appLink = "comappyesvite://somepage";  // Deep link
+    const appLink = "comappyesvite://somepage";  // Your deep link
 
-    // ✅ Use iframe to bypass Safari's "invalid address" alert
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appLink;
+    // ✅ Use an anchor element to bypass Safari alert
+    const link = document.createElement('a');
+    link.href = appLink;
+    link.style.display = 'none';
 
-    document.body.appendChild(iframe);
+    // ✅ Trigger the app opening
+    document.body.appendChild(link);
+    link.click();
 
-    // ✅ Clean up after 1.5 seconds
+    // ✅ Clean up the anchor element after a short delay
     setTimeout(() => {
-        document.body.removeChild(iframe);
-    }, 1500);
+        document.body.removeChild(link);
+    }, 1000);  // Clean up after 1 second
 }
+
 
 </script>
