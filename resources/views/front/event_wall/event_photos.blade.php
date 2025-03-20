@@ -472,7 +472,7 @@
                                                         <button class="selected-bulk-btn " style="display:none;">
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
-                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
+                                                                data-image-src="{{ $photo['mediaData']['post_media'] ?? '' }}"
                                                                 data-event-post-id="{{ $photo['id'] }}"
                                                                  data-user_id="{{  $photo['user_id'] }}"
                                                                 data-event-id="{{ $event }}">
