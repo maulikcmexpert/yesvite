@@ -1064,7 +1064,7 @@ $(document).ready(function () {
             // });
 
             // Get selected image URLs from the checkboxes
-            const selectedImages = $(".selected_image:checked")
+            const selectedImages = $(".selected_bulk_image:checked")
                 .map(function () {
                     return $(this).data("image-src"); // Get image URLs
                 })
