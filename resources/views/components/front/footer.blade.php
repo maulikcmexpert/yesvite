@@ -1016,32 +1016,29 @@
         document.addEventListener('visibilitychange', onVisibilityChange);
         window.addEventListener('blur', onBlur);
 
-        // ✅ Open the app silently without alerts
         const appLink = "comappyesvite://";
         
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
+        // ✅ Open the app
+        const now = Date.now();
+        window.location.href = appLink;
 
-        try {
-            iframe.src = appLink;  // Attempt to open the app
-        } catch (error) {
-            console.error("Error opening the app:", error);
-        }
-
-        // ✅ Fallback logic after timeout
+        // ✅ Check if the app opened or not
         this.timer = setTimeout(() => {
-            if (!appOpened) {
-                console.log('App not installed, no alert shown.');
+            const elapsed = Date.now() - now;
+
+            if (appOpened && elapsed < 1500) {
+                // ❗ Show alert only if the app is installed
+                alert('App is installed and opened successfully!');
             }
-            
+
             // ✅ Cleanup
             document.removeEventListener('visibilitychange', onVisibilityChange);
             window.removeEventListener('blur', onBlur);
-            document.body.removeChild(iframe);
 
-        }, 1500);  // Timeout for app detection
+        }, 1500);  // Timeout for app launch detection
     }
+};
+
 };
 
 
