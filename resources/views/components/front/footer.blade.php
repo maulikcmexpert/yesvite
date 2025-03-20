@@ -917,17 +917,13 @@
 function openApp() {
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-
+    
     let appOpened = false;
 
-    // ✅ Create a hidden iframe to avoid browser alerts
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
+    // ✅ Detect app open using visibility and blur events
     const onVisibilityChange = () => {
         if (document.hidden) {
-            appOpened = true;  // App opened successfully
+            appOpened = true; // App opened successfully
         }
     };
 
@@ -938,23 +934,43 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    // ✅ Open the app silently using iframe
-    iframe.src = appLink;
+    if (isChrome) {
+        // ✅ Chrome on iOS: Use <a> element click
+        const link = document.createElement('a');
+        link.href = appLink;
+        link.style.display = 'none';
+        document.body.appendChild(link);
 
-    // ✅ Fallback timeout to detect if the app didn't open
+        // Attempt to open the app
+        link.click();
+
+        // Clean up the link element afterward
+        setTimeout(() => {
+            document.body.removeChild(link);
+        }, 100);
+    } else {
+        // ✅ Safari & other browsers
+        const startTime = Date.now();
+        window.location.href = appLink;
+
+        // ✅ Remove invalid alert in Safari
+        // If the app doesn't open, we replace the URL without triggering an alert
+        setTimeout(() => {
+            // Check if the app was not opened within 1.5 seconds
+            if (!appOpened) {
+                const elapsed = Date.now() - startTime;
+                if (elapsed < 1500) { // Only replace if the delay is shorter than 1.5 seconds
+                    history.replaceState(null, '', window.location.href);
+                }
+            }
+        }, 1500);
+    }
+
+    // ✅ Cleanup event listeners after 2 seconds
     setTimeout(() => {
-        if (!appOpened) {
-            // Do nothing if the app is not installed (no alert)
-            console.log('App not opened, but no alert shown.');
-        }
-
-        // Cleanup
-        document.body.removeChild(iframe);
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
-
-    }, 1500);
+    }, 2000);
 }
-
 
 </script>
