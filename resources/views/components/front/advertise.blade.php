@@ -33,39 +33,76 @@
         openApp();
     });
     function openApp() {
-    const appLink = "comappyesvite://somepage"; // Deep link to open the app
-    const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store fallback
+    const appLink = "comappyesvite://somepage";         // 1st link (app link)
+    const appStoreLink = "https://apps.apple.com/app/6736650042";  // 2nd link (App Store)
 
-    let appOpened = false;
-    const now = Date.now();
+    let appOpened = false;  
 
-    // Event listener for visibility change (detects if app opened)
-    const handleVisibilityChange = () => {
+    // Detect if the app opened successfully
+    const onPageHide = () => {
+        appOpened = true;  
+    };
+
+    // Listen for pagehide or visibilitychange events
+    window.addEventListener('pagehide', onPageHide);
+    window.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             appOpened = true;
         }
-    };
+    });
 
-    // Attach visibility change event
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    // Try to open the app
+    // Open the first link
+    const now = Date.now();
     window.location.href = appLink;
 
-    // Set timeout to check if the app opened
+    // Fallback to the second link if the first one fails
     setTimeout(() => {
         const elapsed = Date.now() - now;
-
-        // Redirect to App Store only if the app did NOT open
-        // alert(elapsed);
-        if (!appOpened && elapsed < 1200) {
-            window.location.href = appStoreLink;
+        
+        // If the app did not open and the elapsed time is small, redirect to the second link
+        if (!appOpened && elapsed < 1500) {
+            window.location.href = appStoreLink;  
         }
 
-        // Cleanup event listener
-        document.removeEventListener("visibilitychange", handleVisibilityChange);
-    }, 1200);
+        // Clean up event listener
+        window.removeEventListener('pagehide', onPageHide);
+    }, 1500);  // Wait 1.5 seconds to confirm if the first one opened
 }
+
+//     function openApp() {
+//         const appLink = "comappyesvite://somepage"; // Deep link to open the app
+//         const appStoreLink = "https://apps.apple.com/app/6736650042"; // App Store fallback
+
+//         let appOpened = false;
+//         const now = Date.now();
+
+//         // Event listener for visibility change (detects if app opened)
+//         const handleVisibilityChange = () => {
+//             if (document.hidden) {
+//                 appOpened = true;
+//             }
+//         };
+
+//         // Attach visibility change event
+//         document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//         // Try to open the app
+//         window.location.href = appLink;
+
+//         // Set timeout to check if the app opened
+//         setTimeout(() => {
+//             const elapsed = Date.now() - now;
+
+//             // Redirect to App Store only if the app did NOT open
+//             // alert(elapsed);
+//             if (!appOpened && elapsed < 1200) {
+//                 window.location.href = appStoreLink;
+//             }
+
+//             // Cleanup event listener
+//             document.removeEventListener("visibilitychange", handleVisibilityChange);
+//         }, 1200);
+// }
 
 
     // function openApp() {
