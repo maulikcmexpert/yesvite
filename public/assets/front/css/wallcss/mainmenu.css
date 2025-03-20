@@ -3282,10 +3282,11 @@ padding: 12px 24px;
     width: 100%;
     max-width: 390px;
     max-height: 550px;
+    aspect-ratio: 5/7;
 }
 
 #pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img img {
-    object-fit: fill;
+    aspect-ratio: 5/7;
 }
 
 
