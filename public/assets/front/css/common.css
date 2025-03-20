@@ -219,6 +219,7 @@ ul.nav-tabs .nav-link:focus {
     -ms-border-radius: 50% !important;
     -o-border-radius: 50% !important;
     width: 24px !important;
+    max-width: 24px !important;
     height: 24px !important;
 }
 
@@ -1116,6 +1117,7 @@ input:-webkit-autofill {
 
     .radio-wrapper .form-check .form-check-input {
         width: 20px !important;
+        max-width: 20px !important;
         height: 20px !important;
         padding-left: 0px !important;
     }

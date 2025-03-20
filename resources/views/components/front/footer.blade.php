@@ -908,24 +908,9 @@
 
 
     });
-//     function openApp() {
-//     const appLink = "comappyesvite://somepage"; 
-//     window.location.href = appLink;
-// }
-ffunction openApp() {
-    const appLink = "comappyesvite://somepage";
-
-    // Open the app link in a hidden popup window
-    const newWindow = window.open(appLink, "_blank");
-
-    // Use setTimeout to close the popup after a short delay
-    setTimeout(() => {
-        if (newWindow) {
-            newWindow.close(); // Close the popup if it failed to open the app
-        }
-        window.focus();  // Bring the current tab back into focus
-    }, 1000);
+    function openApp() {
+    const appLink = "comappyesvite://"; 
+    window.location.href = appLink;
 }
-
 
 </script>
