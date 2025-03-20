@@ -33,44 +33,41 @@
         openApp();
     });
   function openApp() {
-    const appLink = "comappyesvite://somepage";         // Deep link
+    const appLink = "comappyesvite://somepage";         // App deep link
     const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
 
     let appOpened = false;  
     const fallbackTimeout = 1500;  // Timeout for fallback
 
-    // ✅ Detect if the app opened successfully
+    // ✅ Listen for visibility change (Safari-compatible)
     const onVisibilityChange = () => {
         if (document.hidden) {
-            appOpened = true;  // App opened
+            appOpened = true;  // App opened successfully
         }
     };
-
-    // ✅ Add event listeners
+    
     document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', () => appOpened = true);
 
-    // ✅ Use hidden iframe to attempt opening the app
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appLink;  
-    document.body.appendChild(iframe);
-
-    // ✅ Fallback logic
+    // ✅ Start tracking time
     const now = Date.now();
 
-    setTimeout(() => {
+    // ✅ Try to open the app
+    window.location.href = appLink;
+
+    // ✅ Check if the app opened
+    const interval = setInterval(() => {
         const elapsed = Date.now() - now;
 
-        // ✅ If app didn't open, redirect to App Store
-        if (!appOpened && elapsed < fallbackTimeout + 200) {
-            window.location.replace(appStoreLink);
-        }
+        if (appOpened || elapsed > fallbackTimeout) {
+            clearInterval(interval);  // Stop checking
+            document.removeEventListener('visibilitychange', onVisibilityChange);
 
-        // ✅ Cleanup
-        document.body.removeChild(iframe);
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-    }, fallbackTimeout);
+            // ✅ Fallback: Redirect to App Store if the app didn't open
+            if (!appOpened) {
+                window.location.replace(appStoreLink);
+            }
+        }
+    }, 200);  // Check every 200ms
 }
 
 
