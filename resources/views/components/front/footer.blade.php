@@ -916,39 +916,57 @@
 
 function openApp() {
     const appLink = "comappyesvite://";
-
-    // Check if running in Chrome iOS
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
+    
+    let appOpened = false;
+
+    // Detect app open using visibility and blur events
+    const onVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true; // App opened successfully
+        }
+    };
+
+    const onBlur = () => {
+        appOpened = true;  // App opened successfully
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', onBlur);
 
     if (isChrome) {
-        // Chrome on iOS requires programmatic click on <a> element
+        // Chrome on iOS: Use <a> element click
         const link = document.createElement('a');
         link.href = appLink;
         link.style.display = 'none';
         document.body.appendChild(link);
 
-        // Trigger click programmatically
         link.click();
 
-        // Clean up
         setTimeout(() => {
             document.body.removeChild(link);
         }, 100);
     } else {
-        // Safari and other browsers
-        try {
-            window.location.href = appLink;
+        // Safari & other browsers
+        const startTime = Date.now();
+        window.location.href = appLink;
 
-            // Prevent invalid alert in Safari
-            setTimeout(() => {
-                history.replaceState(null, '', window.location.href);
-            }, 100);
-
-        } catch (e) {
-            console.log('App not installed or invalid link');
-        }
+        // Remove invalid alert in Safari
+        const checkAppOpened = setInterval(() => {
+            if (appOpened || (Date.now() - startTime > 1500)) {
+                clearInterval(checkAppOpened);
+                return;
+            }
+            // If the app did not open, replace the state to avoid alert
+            history.replaceState(null, '', window.location.href);
+        }, 100);
     }
-}
 
+    // Cleanup event listeners after 2 seconds
+    setTimeout(() => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onBlur);
+    }, 2000);
+}
 
 </script>
