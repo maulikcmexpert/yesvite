@@ -924,7 +924,7 @@ function openApp() {
     };
 
     const onBlur = () => {
-        alert(1);
+        
         appOpened = true;  // App opened successfully
     };
 
