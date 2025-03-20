@@ -872,7 +872,9 @@ $(document).ready(function () {
         // Function to toggle visibility of the bulk-select-photo-wrp
         function toggleBulkSelectWrapper() {
             const selected_bulk_image = $(".selected_bulk_image:checked").length;
-            const bulkDeleteBtn = $(".select_bulk_btn"); // Delete button wrapper
+            const bulkDeleteBtn = $(".select_bulk_btn"); // Wrapper for delete button
+            const deleteBtn = $(".bulk_delete"); // Actual delete button
+            const downloadBtn = $(".downloadBtn"); // Download button
             const bulkSelectWrapper = $(".selecte_delete_photos");
             const login_user = $('#login_user_id').val(); // Get logged-in user ID
             let allOwnPosts = true; // Flag to check if all selected posts belong to user
@@ -885,20 +887,26 @@ $(document).ready(function () {
             });
 
             if (selected_bulk_image > 0) {
-                if (allOwnPosts) {
-                    bulkDeleteBtn.removeClass("d-none"); // Show delete button if all are user’s posts
-                } else {
-                    bulkDeleteBtn.addClass("d-none"); // Hide delete button if any post is not user’s
-                }
+                bulkDeleteBtn.removeClass("d-none"); // Show bulk select wrapper
                 bulkDeleteBtn.find(".bulk_delete_selected p").text(`${selected_bulk_image} Photos Selected`);
-                bulkSelectWrapper.addClass("d-none");
-                $('.add_new_photo_btn').addClass('d-none');
+
+                if (allOwnPosts) {
+                    deleteBtn.removeClass("d-none"); // Show delete button only for user's own photos
+                } else {
+                    deleteBtn.addClass("d-none"); // Hide delete button if mixed selection
+                }
+
+                downloadBtn.removeClass("d-none"); // Always show download button when images are selected
+                $('.add_new_photo_btn').addClass('d-none'); // Hide 'add new photo' button when selecting
             } else {
-                bulkSelectWrapper.addClass("d-none");
-                bulkDeleteBtn.addClass("d-none");
-                $('.add_new_photo_btn').removeClass('d-none');
+                bulkSelectWrapper.addClass("d-none"); // Hide bulk select wrapper
+                bulkDeleteBtn.addClass("d-none"); // Hide bulk delete button
+                deleteBtn.addClass("d-none"); // Hide delete button
+                downloadBtn.addClass("d-none"); // Hide download button
+                $('.add_new_photo_btn').removeClass('d-none'); // Show 'add new photo' button
             }
         }
+
 
 
         $(document).on("change", ".selected_bulk_image", function () {
