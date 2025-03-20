@@ -952,7 +952,6 @@ function openApp() {
         // ✅ Safari & other browsers
         window.location.href = appLink;
 
-        preventDefault();
         // ✅ Remove invalid alert in Safari
         setTimeout(() => {
             if (!appOpened) {
