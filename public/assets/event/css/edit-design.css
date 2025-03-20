@@ -34,7 +34,7 @@
 .edit-image-main-top-icons {
     width: 100%;
     max-width: 112px;
-    height: 48px;
+    height: 25px;
     border-radius: 100px;
     padding: 10px 20px;
     background-color: var(--white);
@@ -52,7 +52,7 @@
 .edit-image-main-top-icons::before {
     content: "";
     width: 2px;
-    height: 28px;
+    height: 22px;
     background: var(--headerBorder);
     position: absolute;
     top: 50%;
