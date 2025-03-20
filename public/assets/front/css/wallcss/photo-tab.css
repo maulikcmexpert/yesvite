@@ -607,6 +607,12 @@
     box-shadow: none;
 }
 
+.phototab-add-new-btns-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
 
 /* ===Responsive=== */
 

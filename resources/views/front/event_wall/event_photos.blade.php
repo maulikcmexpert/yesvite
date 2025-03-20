@@ -253,42 +253,16 @@
                                                                     aria-expanded="false"><i
                                                                         class="fa-solid fa-ellipsis-vertical"></i></button>
                                                                 <ul class="dropdown-menu">
-                                                                    @if ($photo['user_id'] == $login_user_id)
+
                                                                     <li><button class="dropdown-item bulk_select" id="bulk_select"
                                                                         data-event-post-id="{{ $photo['id'] }}"
                                                                         data-event-id="{{ $event }}">
-                                                                        <svg viewBox="0 0 20 20" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M17.5 4.98332C14.725 4.70832 11.9333 4.56665 9.15 4.56665C7.5 4.56665 5.85 4.64998 4.2 4.81665L2.5 4.98332"
-                                                                                stroke="#64748B"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" />
-                                                                            <path
-                                                                                d="M7.08203 4.14169L7.26536 3.05002C7.3987 2.25835 7.4987 1.66669 8.90703 1.66669H11.0904C12.4987 1.66669 12.607 2.29169 12.732 3.05835L12.9154 4.14169"
-                                                                                stroke="#64748B"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" />
-                                                                            <path
-                                                                                d="M15.7096 7.61658L15.168 16.0082C15.0763 17.3166 15.0013 18.3332 12.6763 18.3332H7.3263C5.0013 18.3332 4.9263 17.3166 4.83464 16.0082L4.29297 7.61658"
-                                                                                stroke="#64748B"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" />
-                                                                            <path d="M8.60938 13.75H11.3844"
-                                                                                stroke="#64748B"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" />
-                                                                            <path d="M7.91797 10.4167H12.0846"
-                                                                                stroke="#64748B"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" />
-                                                                        </svg> Bulk select </button></li>
-                                                                        @endif
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 52 52" fill="none" stroke="black" stroke-width="3">
+                                                                            <path d="M44,2.5H19c-2.6,0-4.7,2.1-4.7,4.7V8c0,0.5,0.3,0.8,0.8,0.8h22.7c2.6,0,4.7,2.1,4.7,4.7v24.3c0,0.5,0.3,0.8,0.8,0.8H44c2.6,0,4.7-2.1,4.7-4.7V7.2C48.7,4.6,46.6,2.5,44,2.5z"/>
+                                                                            <path d="M33,13.5H8c-2.6,0-4.7,2.1-4.7,4.7v26.6c0,2.6,2.1,4.7,4.7,4.7H33c2.6,0,4.7-2.1,4.7-4.7V18.2C37.8,15.6,35.6,13.5,33,13.5z M31,26.8l-12,12c-0.5,0.5-1,0.7-1.6,0.7c-0.5,0-1.2-0.2-1.6-0.7l-5.8-5.8c-0.5-0.5-0.5-1.2,0-1.6l1.6-1.6c0.5-0.5,1.2-0.5,1.6,0l4.2,4.2l10.3-10.3c0.5-0.5,1.2-0.5,1.6,0l1.6,1.6C31.4,25.6,31.4,26.4,31,26.8z"/>
+                                                                          </svg>
+                                                                           Bulk select </button></li>
+
                                                                     <li><button
                                                                             class="dropdown-item download_img_single" data-src="{{ @$photo['mediaData'][0]['post_media'] }}"><svg
                                                                                 viewBox="0 0 20 20" fill="none"
@@ -498,7 +472,7 @@
                                                         <button class="selected-bulk-btn " style="display:none;">
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
-                                                                data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
+                                                                data-image-src="{{ json_encode($postMedia)}}"
                                                                 data-event-post-id="{{ $photo['id'] }}"
                                                                  data-user_id="{{  $photo['user_id'] }}"
                                                                 data-event-id="{{ $event }}">
@@ -577,15 +551,17 @@
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
                                         </div>
-                                        <button class="add-new-photos-btn cmn-btn download_img" type="button"><svg
-                                            viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.0013 10.667L4.66797 7.33366L5.6013 6.36699L7.33464 8.10033V2.66699H8.66797V8.10033L10.4013 6.36699L11.3346 7.33366L8.0013 10.667ZM4.0013 13.3337C3.63464 13.3337 3.32075 13.2031 3.05964 12.942C2.79852 12.6809 2.66797 12.367 2.66797 12.0003V10.0003H4.0013V12.0003H12.0013V10.0003H13.3346V12.0003C13.3346 12.367 13.2041 12.6809 12.943 12.942C12.6819 13.2031 12.368 13.3337 12.0013 13.3337H4.0013Z"
-                                                fill="white" />
-                                        </svg> Download</button>
-                                        <button class="add-new-photos-btn cmn-btn bulk_delete" type="button">
-                                            Delete</button>
+                                        <div class="phototab-add-new-btns-section">
+                                            <button class="add-new-photos-btn cmn-btn download_img downloadBtn d-none" type="button"><svg
+                                                viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.0013 10.667L4.66797 7.33366L5.6013 6.36699L7.33464 8.10033V2.66699H8.66797V8.10033L10.4013 6.36699L11.3346 7.33366L8.0013 10.667ZM4.0013 13.3337C3.63464 13.3337 3.32075 13.2031 3.05964 12.942C2.79852 12.6809 2.66797 12.367 2.66797 12.0003V10.0003H4.0013V12.0003H12.0013V10.0003H13.3346V12.0003C13.3346 12.367 13.2041 12.6809 12.943 12.942C12.6819 13.2031 12.368 13.3337 12.0013 13.3337H4.0013Z"
+                                                    fill="white" />
+                                            </svg> Download</button>
+                                            <button class="add-new-photos-btn cmn-btn bulk_delete d-none" type="button" style="height: 42.38px">
+                                                Delete</button>
+                                        </div>
                                     </div>
                                     {{-- @endif --}}
                                 </div>
