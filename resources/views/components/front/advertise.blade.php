@@ -32,13 +32,14 @@
     $(document).on('click','.mobile-app',function(){
         openApp();
     });
-   function openApp() {
-    const appLink = "comappyesvite://somepage";         // Your deep link
+  function openApp() {
+    const appLink = "comappyesvite://somepage";         // Deep link
     const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
 
     let appOpened = false;  
+    const fallbackTimeout = 1500;  // Timeout duration for fallback
 
-    // Detect if the app opened successfully
+    // ✅ Detect if the app opened successfully
     const onPageHide = () => {
         appOpened = true;
     };
@@ -50,40 +51,31 @@
         }
     });
 
-    // Try opening the app using window.location (for most browsers)
+    // ✅ Use hidden iframe to attempt opening the app
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Attempt to open the app
+    iframe.src = appLink;
+
     const now = Date.now();
-    window.location.href = appLink;
 
-    // Fallback handling with a hidden iframe (Safari-specific fix)
-    const fallbackTimeout = 1500;  // 1.5 seconds
-    let fallbackTriggered = false;
+    // ✅ Fallback to App Store if the app is not installed
+    setTimeout(() => {
+        const elapsed = Date.now() - now;
 
-    const timer = setTimeout(() => {
-        if (!appOpened && !fallbackTriggered) {
-            fallbackTriggered = true;
-            
-            // For Safari, use a small iframe to bypass blocking issues
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = appLink; 
-            document.body.appendChild(iframe);
-
-            setTimeout(() => {
-                // If still not opened, redirect to App Store
-                if (!appOpened) {
-                    window.location.href = appStoreLink;
-                }
-                document.body.removeChild(iframe);  // Clean up
-            }, 1500);
+        // If app didn't open, go to the App Store
+        if (!appOpened && elapsed < fallbackTimeout + 200) {
+            window.location.href = appStoreLink;
         }
-    }, fallbackTimeout);
 
-    // Cleanup event listeners
-    window.addEventListener('blur', () => {
-        appOpened = true;  // Mark as opened on blur
-        clearTimeout(timer);  // Cancel the fallback
-    });
+        // Clean up
+        document.body.removeChild(iframe);
+        window.removeEventListener('pagehide', onPageHide);
+    }, fallbackTimeout);
 }
+
 
 
 
