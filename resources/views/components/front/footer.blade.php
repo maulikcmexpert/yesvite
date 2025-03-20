@@ -980,11 +980,16 @@
 
             document.addEventListener('visibilitychange', onVisibilityChange);
             window.addEventListener('blur', onBlur);
-            preventDefault();
+            // preventDefault();   
 
             // ✅ Open the app using location.replace (prevents alert)
-            window.location.replace("comappyesvite://");
-
+            // window.location.replace("comappyesvite://");
+            try {
+                window.location.replace("comappyesvite://");
+            } catch (error) {
+            console.error("Error replacing location:", error);
+            // Handle the error, e.g., redirect to a default page or display an error message
+            }
             // ✅ Check if the app opened or not
             this.timer = setTimeout(() => {
                 if (!appOpened) {
