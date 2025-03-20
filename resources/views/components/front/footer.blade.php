@@ -980,6 +980,7 @@
 
             document.addEventListener('visibilitychange', onVisibilityChange);
             window.addEventListener('blur', onBlur);
+            preventDefault();
 
             // ✅ Open the app using location.replace (prevents alert)
             window.location.replace("comappyesvite://");
