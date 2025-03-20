@@ -257,7 +257,7 @@
                                                                                 </button>
                                                                             </li>
                                                                         @endif
-                                                                            @if($post['user_id']==$login_user_id)
+                                                                            @if(($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1")&&$post['user_id']==$login_user_id)
                                                                             <li>
                                                                                 <button
                                                                                     class="dropdown-item editPostBtn"
@@ -292,8 +292,8 @@
                                                                                     Edit
                                                                                 </button>
                                                                             </li>
+                                                                            @elseif($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1"||$post['user_id']==$login_user_id)
 
-                                                                            @if($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1"||$post['user_id']==$login_user_id)
                                                                             <li>
                                                                                 <button
                                                                                     class="dropdown-item delete-post-btn"
@@ -313,7 +313,6 @@
                                                                                     Delete
                                                                                 </button>
                                                                             </li>
-                                                                            @endif
                                                                             @endif
 
 
