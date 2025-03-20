@@ -54,14 +54,14 @@ use Illuminate\Http\Request;
 
 
 Route::get('/open-app', function () {
-    $deepLink = "comappyesvite://open";  
-    $fallbackUrl = "https://apps.apple.com/app/6736650042";  
+    $deepLink = "comappyesvite://open";
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";
 
     return view('deep-link', compact('deepLink', 'fallbackUrl'));
-})->name('open-app'); 
+})->name('open-app');
 Route::get('/redirect', function () {
     return view('redirect');
-})->name('redirect'); 
+})->name('redirect');
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -201,7 +201,7 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::get('search_design', [ControllersEventController::class, 'searchDesign'])->name('search_design');
 
-    Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
+    // Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
     // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
     Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
     Route::post('event/editStore',  [ControllersEventController::class, 'editStore'])->name('event.event_edit');
@@ -278,17 +278,17 @@ Route::middleware('checkUserExist')->group(function () {
     // Route::get('/open-app', function (Request $request) {
     //     $userId = $request->get('user_id');
     //     $eventId = $request->get('event_id');
-    
+
     //     // Deep link schema for your mobile app
     //     $deepLink = "yourapp://open?user_id={$userId}&event_id={$eventId}";
-    
+
     //     // Fallback URL (in case the app is not installed)
     //     $fallbackUrl = url('/event/' . $eventId);
-    
+
     //     return view('deep-link', compact('deepLink', 'fallbackUrl'));
     // });
- 
-    
+
+
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
     //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
@@ -358,7 +358,7 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
 });
-
+Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
 
 
 Route::get('event/editd', [DesignController::class, 'index']);
@@ -431,8 +431,8 @@ Route::controller(AuthController::class)->group(function () {
         return view('admin.auth.main', $data);
     });
 
-    
-    
+
+
     Route::post('/forgotpassword', 'forgotpassword');
 
     Route::get('/updatePassword/{id}', 'checkToken');
