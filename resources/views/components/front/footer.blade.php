@@ -917,7 +917,7 @@
 function openApp() {
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-    
+
     let appOpened = false;
 
     // ✅ Detect app open using visibility and blur events
@@ -928,7 +928,7 @@ function openApp() {
     };
 
     const onBlur = () => {
-        appOpened = true;  // App opened successfully
+        appOpened = true; // App opened successfully
     };
 
     document.addEventListener('visibilitychange', onVisibilityChange);
@@ -964,6 +964,7 @@ function openApp() {
         window.removeEventListener('blur', onBlur);
     }, 2000);
 }
+
 
 
 </script>
