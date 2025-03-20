@@ -194,6 +194,7 @@
 .common-font-wrp .form-check .form-check-input {
     border-radius: 50% !important;
     width: 18px !important;
+    max-width: 18px !important;
     height: 18px !important;
     margin: 0px !important;
     padding: 0px !important;

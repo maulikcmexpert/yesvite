@@ -247,6 +247,7 @@
 
 .thank-you-card .form-check-input {
     width: 20px !important;
+    max-width: 20px !important;
     height: 20px !important;
     border-radius: 7px !important;
 }

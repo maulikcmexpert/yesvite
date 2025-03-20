@@ -686,9 +686,9 @@ main {
 }
 
 .create-post-setting-inner .form-check-input[type="radio"] {
-  width: 100%;
-  max-width: 24px;
-  height: 24px;
+  width: 100% !important;
+  max-width: 24px !important;
+  height: 24px !important;
 }
 .create-post-setting-inner .form-check-label {
   font-family: var(--SFProDisplay-Regular);
