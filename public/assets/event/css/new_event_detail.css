@@ -67,7 +67,8 @@
     color: var(--lightColor);
     font-size: 18px;
     margin-left: -10px;
-    display: none;
+    /* display: none; */
+    
 }
 
 .navbar h5 {
