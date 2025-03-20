@@ -921,19 +921,19 @@
     function openApp() {
     const appLink = "comappyesvite://somepage";  // Your deep link
 
-    // ✅ Use an anchor element to bypass Safari alert
-    const link = document.createElement('a');
-    link.href = appLink;
-    link.style.display = 'none';
+    // ✅ Use `setTimeout()` and `location.assign()` for better handling
+    const now = Date.now();
 
-    // ✅ Trigger the app opening
-    document.body.appendChild(link);
-    link.click();
+    // Attempt to open the app
+    const hiddenFrame = document.createElement('iframe');
+    hiddenFrame.style.display = 'none';
+    hiddenFrame.src = appLink;  
+    document.body.appendChild(hiddenFrame);
 
-    // ✅ Clean up the anchor element after a short delay
+    // ✅ Fallback cleanup (prevent alert)
     setTimeout(() => {
-        document.body.removeChild(link);
-    }, 1000);  // Clean up after 1 second
+        document.body.removeChild(hiddenFrame);
+    }, 1500);  // Clean up after 1.5 seconds
 }
 
 
