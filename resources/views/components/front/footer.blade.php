@@ -914,7 +914,6 @@
 // }
 function openApp() {
     const appUrl = "comappyesvite://";  // Your app's custom scheme
-
     let appOpened = false;
 
     // ✅ Detect app opening
@@ -924,7 +923,6 @@ function openApp() {
         }
     };
 
-    // ✅ Listen for blur event (app switch detection)
     const onBlur = () => {
         appOpened = true;  // App opened successfully
     };
@@ -932,20 +930,24 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    // ✅ Use location.href for reliable app opening
-    window.location.href = appUrl;
+    // ✅ Use iframe method to bypass browser alerts
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appUrl;
+    document.body.appendChild(iframe);
 
-    // ✅ Fallback to no action if app is not installed (no alert)
+    // ✅ Silent failure handling (no alert)
     setTimeout(() => {
         if (!appOpened) {
             console.log('App not installed or failed to open. No alert shown.');
         }
 
         // ✅ Cleanup
+        document.body.removeChild(iframe);
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Adjust delay based on app launch speed
+    }, 1500);  // Adjust the delay if needed
 }
 
 
