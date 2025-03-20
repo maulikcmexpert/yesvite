@@ -244,7 +244,7 @@
                         <div class="owl-carousel owl-theme pending_rsvp_slider">
                           @foreach ($eventData as $pending )
                             <div class="item">
-                              <div class="setting-img" data-event_id="{{$pending['event_id']}}" data-user_id="{{$pending['user_id']}}" data-event_name="{{$pending['event_name']}}" data-firstname="{{$pending['firstname']}}" data-lastname="{{$pending['lastname']}}" data-profile="{{$pending['profile']}}" data-rsvp_kids="{{$pending['kids']}}"  data-rsvp_adults="{{$pending['adults']}}" data-rsvp="{{$pending['rsvp_status']}}">
+                              <div class="setting-img" data-event_id="{{$pending['event_id']}}" data-user_id="{{$pending['user_id']}}" data-event_name="{{$pending['event_name']}}" data-firstname="{{$pending['firstname']}}" data-lastname="{{$pending['lastname']}}" data-profile="{{asset('storage/profile/' . $pending['profile'])}}" data-rsvp_kids="{{$pending['kids']}}"  data-rsvp_adults="{{$pending['adults']}}" data-rsvp="{{$pending['rsvp_status']}}">
                                   <img src="{{$pending['event_image']}}" />
                               </div>
                           </div>
@@ -269,7 +269,8 @@
                             data-event_name="{{ $firstEvent['event_name'] ?? '' }}"
                             data-firstname="{{ $firstEvent['firstname'] ?? '' }}"
                             data-lastname="{{ $firstEvent['lastname'] ?? '' }}"
-                            data-profile="{{ $firstEvent['profile'] ?? '' }}"
+                            {{-- data-profile="{{ $firstEvent['profile'] ?? '' }}" --}}
+                            data-profile="{{asset('storage/profile/' . $firstEvent['profile'])}}"
                             data-rsvp_kids="{{ $firstEvent['kids'] ?? '' }}"
                             data-rsvp_adults="{{ $firstEvent['adults'] ?? '' }}"
                             data-rsvp="{{ $firstEvent['rsvp_status'] ?? '' }}">
