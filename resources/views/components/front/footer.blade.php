@@ -912,48 +912,8 @@
 //     const appLink = "comappyesvite://"; 
 //     window.location.href = appLink;
 // }
-function openApp() {
-    let appOpened = false;
 
-    // ✅ Detect if the app is opened successfully
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;  // App opened successfully
-        }
-    };
-
-    const onBlur = () => {
-        appOpened = true;  // App opened successfully
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onBlur);
-
-    const appLink = "comappyesvite://";
-
-    // ✅ Use iframe to prevent Safari "invalid address" error
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    // ✅ Attempt to open the app silently
-    iframe.src = appLink;
-
-    // ✅ Check if the app opened or not
-    setTimeout(() => {
-        if (appOpened) {
-            // ✅ Show alert ONLY if the app is installed
-            alert('App is installed and opened successfully!');
-        }
-
-        // ✅ Cleanup
-        document.body.removeChild(iframe);
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
-
-    }, 1);  // Timeout for app detection
-}
-
+// ;
 
 
 
