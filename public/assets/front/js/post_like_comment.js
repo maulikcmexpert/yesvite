@@ -350,7 +350,8 @@ $(document).ready(function () {
     $(document).on("keypress", ".post_comment", function (e) {
         if (e.which === 13) { // 13 is the key code for Enter
             e.preventDefault(); // Prevents newline in the input field
-            $(this).next(".comment-send-icon").click(); // Trigger click on send button
+            $(this).next(".comment-send-icon").click();
+            $(".parent_comment_id").val("");
         }
     });
 
@@ -584,11 +585,12 @@ $(document).ready(function () {
                             //     // replyList.append(newCommentHTML);
                             // }
                             // }
+
                         } else {
                             const li = `<li class="commented-user-wrp" data-comment-id="${data.id}">
                             ${newCommentHTML}
                             <ul class="primary-comment-replies"></ul>
-                    </li>`;
+                          </li>`;
                             // Append as a new top-level comment
                             const commentList = $(
                                 `.posts-card-show-all-comments-wrp.show_${eventPostId}`
@@ -655,8 +657,7 @@ $(document).ready(function () {
                         commentInput.val("");
                         $(".parent_comment_id").val(""); // Reset parent comment ID
                     }
-                    // commentInput.val("");
-                    // $("#parent_comment_id").val(""); // Reset parent comment ID
+
                 },
                 error: function (xhr) {
                     console.error(xhr.responseText);
@@ -1604,4 +1605,7 @@ $(document).on("keyup", ".post_comment", function () {
     if (commentVal == "") {
         $(".parent_comment_id").val("");
     }
+});
+$(".post_comment").on("click", function () {
+    $(".parent_comment_id").val("");
 });

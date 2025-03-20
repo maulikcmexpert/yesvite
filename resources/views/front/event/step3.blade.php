@@ -201,12 +201,12 @@
 
                             </div>
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <!-- <div class="guest-checkout new-edit-save-btn">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
-                            </div> -->
-                            <div class="design-seting">
+                            </div>
+                            {{-- <div class="design-seting">
                                 <a href="#" class="d-flex">
                                     <span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -230,7 +230,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                            </div>
+                            </div> --}}
                             @else
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
@@ -439,13 +439,13 @@
                             </div>
 
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <!-- <div class="guest-checkout new-edit-save-btn">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
-                            </div>  -->
+                            </div>
 
-                            <div class="design-seting">
+                            {{-- <div class="design-seting">
                                 <a href="#" class="d-flex">
                                     <span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -469,7 +469,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                            </div>
+                            </div> --}}
                             @else      
                             <div class="design-seting">
                                 <a href="#" class="d-flex">
@@ -598,12 +598,12 @@
                             @endif
                             </div>
                             @if ((isset($eventDetail['is_draft_save']) && $eventDetail['is_draft_save']=="0") && (isset($eventDetail['id']) && $eventDetail['id']!="") )
-                            <!-- <div class="guest-checkout new-edit-save-btn">
+                            <div class="guest-checkout new-edit-save-btn">
                                 <div>
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div>
-                            </div> -->
-                            <div class="design-seting">
+                            </div> 
+                            {{-- <div class="design-seting">
                                 <a href="#" class="d-flex">
                                     <span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -627,7 +627,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                            </div>
+                            </div> --}}
                             @else
                              
                             <div class="design-seting">

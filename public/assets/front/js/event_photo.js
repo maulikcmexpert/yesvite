@@ -526,6 +526,7 @@ $(document).ready(function () {
         if (e.which === 13) { // 13 is the key code for Enter
             e.preventDefault(); // Prevents newline in the input field
             $(this).next(".comment-send-icon").click(); // Trigger click on send button
+            $(".parent_comment_id").val("");
         }
     });
 
@@ -1007,10 +1008,10 @@ $(document).ready(function () {
                 console.log(login_user);
                 console.log(post_user_id);
 
-                if(login_user!=post_user_id){
-                    toastr.success('You can bulk delete your own photos only');
-                    return;
-                }
+                // if(login_user!=post_user_id){
+                //     toastr.success('You can bulk delete your own photos only');
+                //     return;
+                // }
 
                 const checkbox = $(this).closest(".photo-card-photos-wrp").find(".selected_bulk_image");
                 checkbox.prop("checked", !checkbox.prop("checked")); // Toggle checkbox
@@ -1094,12 +1095,22 @@ $(document).ready(function () {
             }
         });
         $(document).on("click", ".bulk_delete", function () {
+            const login_user = $('#login_user_id').val(); // Get logged-in user ID
+
             const selectedPosts = $(".selected_bulk_image:checked").map(function () {
-                return { event_post_id: $(this).data("event-post-id") };
+                const postUserId = $(this).data("user_id"); // Fetch the user ID of the post
+                const postId = $(this).data("event-post-id"); // Fetch the post ID
+
+
+                if (postUserId == login_user) {
+                    return { event_post_id: postId };
+                } else {
+                    return null; // Exclude non-owner posts
+                }
             }).get();
 
             if (selectedPosts.length === 0) {
-                toastr.error("No posts selected for deletion.");
+                toastr.error("You can only delete your own posts.");
                 return;
             }
 
@@ -1110,28 +1121,22 @@ $(document).ready(function () {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 contentType: "application/json",
-                data: JSON.stringify({
-                    posts: selectedPosts, // Send array of event_post_id objects
-                }),
+                data: JSON.stringify({ posts: selectedPosts }), // Send array of event_post_id objects
                 success: function (response) {
                     if (response.success) {
                         console.log(response);
 
-
-                        $(".selected_bulk_image:checked").each(function () {
-                            $(this).closest(".delete_post_container").remove();
-
-                        });
-
+                        // Remove deleted posts from the UI
                         response.post_id.forEach(function (postId) {
                             $(".bulk_delete_id_" + postId).remove();
-
                         });
-                    // Reset bulk selection mode
-                    bulkSelectActive = false;
-                    $(".selected_bulk_image").prop("checked", false);
-                    $(".selected-bulk-btn").hide();
-                    toggleBulkSelectWrapper(); // Update U
+
+                        // Reset bulk selection mode
+                        bulkSelectActive = false;
+                        $(".selected_bulk_image").prop("checked", false);
+                        $(".selected-bulk-btn").hide();
+                        toggleBulkSelectWrapper(); // Update UI
+
                         toastr.success("Selected posts deleted successfully.");
                     } else {
                         toastr.error(response.message);
@@ -1143,6 +1148,7 @@ $(document).ready(function () {
                 },
             });
         });
+
 
     $(document).on("click", ".open_photo_model", function (e) {
 

@@ -500,6 +500,7 @@
                                                                 type="checkbox" value="" id="flexCheckDefault"
                                                                 data-image-src="{{ $photo['mediaData'][0]['post_media'] ?? '' }}"
                                                                 data-event-post-id="{{ $photo['id'] }}"
+                                                                 data-user_id="{{  $photo['user_id'] }}"
                                                                 data-event-id="{{ $event }}">
                                                         </button>
                                                     </div>
@@ -576,6 +577,13 @@
                                             <i class="fa-solid fa-angle-left"></i>
                                             <p>3 Photos Selected</p>
                                         </div>
+                                        <button class="add-new-photos-btn cmn-btn download_img" type="button"><svg
+                                            viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.0013 10.667L4.66797 7.33366L5.6013 6.36699L7.33464 8.10033V2.66699H8.66797V8.10033L10.4013 6.36699L11.3346 7.33366L8.0013 10.667ZM4.0013 13.3337C3.63464 13.3337 3.32075 13.2031 3.05964 12.942C2.79852 12.6809 2.66797 12.367 2.66797 12.0003V10.0003H4.0013V12.0003H12.0013V10.0003H13.3346V12.0003C13.3346 12.367 13.2041 12.6809 12.943 12.942C12.6819 13.2031 12.368 13.3337 12.0013 13.3337H4.0013Z"
+                                                fill="white" />
+                                        </svg> Download</button>
                                         <button class="add-new-photos-btn cmn-btn bulk_delete" type="button">
                                             Delete</button>
                                     </div>
@@ -607,7 +615,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="create-post-profile">
-                        <div class="create-post-profile-wrp">
+                        <div class="create-post-profile-wrp"   style="display: none">
 
                             @if ($photos != '')
                                 <img src="{{ asset('storage/profile/' . $photos) }} " alt="" loading="lazy">
@@ -625,8 +633,8 @@
                                 </h5>
                             @endif
 
-                            <div id="savedSettingsDisplay">
-                                <h4> <i class="fa-solid fa-angle-down"></i></h4>
+                            <div id="savedSettingsDisplay"  style="display: none">
+                                <h4><i class="fa-solid fa-angle-down"></i></h4>
                             </div>
                         </div>
                     </div>

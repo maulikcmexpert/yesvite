@@ -1084,6 +1084,7 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var postContent = $(".post_message").val().trim();
 
+
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
@@ -1100,30 +1101,46 @@ $(document).ready(function () {
             pollForm.submit();
         } else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
-            var imagePreview = document.getElementById("imagePreview");
-            var postContent = $("#postContent").val().trim(); // Ensure postContent is retrieved correctly
+            let imagePreview = document.getElementById("imagePreview");
 
-            // Check if no photo is uploaded AND no content is entered
-            if (
-                (!photoInput || photoInput.files.length === 0) &&
-                imagePreview.children.length === 0 &&
-                postContent === ""
-            ) {
-                toastr.error(
-                    "Please upload a photo or enter some content for the photo post."
-                );
-                return;
-            }
+            let photoPostType = document.getElementById("photoPostType");
+
+            // // Check if no photo is uploaded AND no content is entered
+            // if (
+            //     (!photoInput || photoInput.files.length === 0) &&
+            //     imagePreview.children.length === 0
+
+            // ) {
+            //     toastr.error(
+            //         "Please upload a photo or enter some content for the photo post."
+            //     );
+            //     return;
+            // }
+
+
+// ✅ Ensure imagePreview exists before accessing children
+let hasImages = imagePreview && imagePreview.children ? imagePreview.children.length > 0 : false;
+
+// ✅ Ensure photoInput exists and has files
+let hasUploadedPhotos = photoInput && photoInput.files ? photoInput.files.length > 0 : false;
+
+// ✅ Condition: If no image is uploaded AND no content is entered
+if (!hasUploadedPhotos && !hasImages && postContent === "") {
+    toastr.error("Please upload a photo or enter some content for the post.");
+    return; // Prevent form submission
+}
 
             // Set post type based on presence of an uploaded image or entered content
-            if (
-                (photoInput && photoInput.files.length > 0) ||
-                imagePreview.children.length > 0
-            ) {
-                document.getElementById("photoPostType").value = 1;
+            if (photoPostType) {
+                if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
+                    photoPostType.value = 1;
+                } else {
+                    photoPostType.value = 0;
+                }
             } else {
-                document.getElementById("photoPostType").value = 0;
+                console.error("photoPostType element not found!");
             }
+
 
             // Show loader inside the button and disable it
             $this
@@ -1402,20 +1419,42 @@ $(document).ready(function () {
                     $(".poll_post_id").val(postData.id);
                     // Set hidden input values
                     // Set the radio button selection
-                    let savedVisibility =
-                        localStorage.getItem("post_privacys") || "1";
-                    let savedAllowComments =
-                        localStorage.getItem("commenting_on_off") || "1";
+
+
+                    let savedVisibility = postData.post_privacy  // Default to "1" if undefined
 
                     // Uncheck all radio buttons first
-                    $('input[name="post_privacy"]').prop("checked", false); // Reset
-                    $(
-                        'input[name="post_privacy"][value="' +
-                        savedVisibility +
-                        '"]'
-                    )
+                    $('input[name="post_privacy"]').prop("checked", false);
+
+                    // Check the saved visibility radio button and trigger change event
+                    $('input[name="post_privacy"][value="' + savedVisibility + '"]')
                         .prop("checked", true)
                         .trigger("change");
+
+                    // Update the saved settings display based on post_privacy
+                    let privacyText = "";
+                    switch (postData.post_privacy) {
+                        case "1":
+                            privacyText = "Everyone";
+                            break;
+                        case "2":
+                            privacyText = "RSVP’d - Yes";
+                            break;
+                        case "3":
+                            privacyText = "RSVP’d - No";
+                            break;
+                        case "4":
+                            privacyText = "RSVP’d - No Reply";
+                            break;
+
+                    }
+
+
+                    // Update the display with the selected option
+                    $("#savedSettingsDisplay").html(`
+    <h4>${privacyText} <i class="fa-solid fa-angle-down"></i></h4>
+`);
+
 
                     // Set the checkbox based on the value (assuming 1 = checked, 0 = unchecked)
                     $('input[name="commenton"]').prop(
@@ -1423,6 +1462,12 @@ $(document).ready(function () {
                         postData.comment_on_off == 1
                     );
 
+                    if (postData.post_type == "0") {
+                        $(".create-post-upload-img-wrp").remove();
+
+
+
+                    }
                     if (postData.post_type == "1") {
                         $("#create-photo-btn").trigger("click");
                         let mediaWrapper = $("#imagePreview");
@@ -1440,25 +1485,54 @@ $(document).ready(function () {
                                     ? "col-12"
                                     : "col-6";
                             postData.mediaData.forEach((media) => {
-                                let mediaElement = `
-                                    <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
-                                    <input type="hidden" name="media-ids[]" value="${media.id}" id="media-ids" />
-                                        <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
-                                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
-                                                    10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
-                                                    14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
-                                        <img src="${media.post_media}" class="preview-image">
-                                    </div>
-                                `;
+                                let mediaElement = ""; // Initialize an empty variable
+
+                                if (media.type === "image") {
+                                    // If it's an image
+                                    mediaElement = `
+                                                <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
+                                                    <input type="hidden" name="media-ids[]" value="${media.id}" id="media-ids" />
+                                                    <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
+                                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
+                                                                10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
+                                                                14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <img src="${media.post_media}" class="preview-image">
+                                                </div>
+                                            `;
+                                } else if (media.type === "video") {
+                                    // If it's a video
+                                    mediaElement = `
+                                                <div class="${colClass}" style="position: relative;" id="media-${media.id}" >
+                                                    <input type="hidden" name="media-ids[]" value="${media.id}" id="media-ids" />
+                                                    <span class="uploded-delete-icon delete_img_edit" data-id="${media.id}">
+                                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M5.6665 3.31331L5.81317 2.43998C5.91984 1.80665 5.99984 1.33331 7.1265 1.33331H8.87317C9.99984 1.33331
+                                                                10.0865 1.83331 10.1865 2.44665L10.3332 3.31331" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M12.5664 6.09332L12.1331 12.8067C12.0598 13.8533 11.9998 14.6667 10.1398 14.6667H5.85977C3.99977
+                                                                14.6667 3.93977 13.8533 3.86644 12.8067L3.43311 6.09332" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M6.88672 11H9.10672" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M6.3335 8.33331H9.66683" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <video controls class="preview-video">
+                                                        <source src="${media.post_media}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            `;
+                                }
+
                                 mediaWrapper.append(mediaElement);
                             });
+
                             // Use event delegation to handle dynamic elements
                             $("#imagePreview").on("click", ".uploded-delete-icon", function () {
                                 let mediaId = $(this).data("id"); // Get media ID
@@ -1468,7 +1542,14 @@ $(document).ready(function () {
                                     console.error("Media ID not found. Check if data-id is correctly set.");
                                     return;
                                 }
+                                if (imagePreview.children.length === 0) {
+                                    alert();
+                                    uploadImgInner.removeClass("d-none");
 
+
+                                    // Clear file input value
+                                    currentFileInput.value = "";
+                                }
                                 let targetDiv = $("#media-" + mediaId);
                                 console.log("Target Div:", targetDiv); // Check if the div exists
 
@@ -1503,7 +1584,7 @@ $(document).ready(function () {
                         $("#create-poll-btn").trigger("click"); // Open poll form modal
 
                         let pollData = postData.pollData;
-
+                        const maxLength = 140;
                         if (pollData) {
                             $("#yourquestion").val(pollData.poll_question);
                             $("select[name='duration']").val(
@@ -1512,13 +1593,95 @@ $(document).ready(function () {
 
                             let options = pollData.poll_options || []; // Get poll options
 
-                            $(".poll-options input[name='options[]']").each(
-                                (index, element) => {
-                                    if (options[index]) {
-                                        $(element).val(options[index].option); // Set existing options
-                                    }
+                            $("#yourquestion").on("input", function () {
+                                const charCount = $(this).val().length;
+                                $(this)
+                                    .closest(".mb-3")
+                                    .find(".char-count")
+                                    .text(`${charCount}/${maxLength}`);
+                            });
+
+
+                            // Attach event listener for poll options input fields
+                            $(".poll-options").on("input", "input[name='options[]']", function () {
+                                updateCharCount(this);
+                            });
+
+                            // Trigger on page load to reflect any existing values
+                            $(".poll_qus,.poll-options input[name='options[]']").each(function () {
+                                updateCharCount(this);
+                            });
+                            // $(".poll-options input[name='options[]']").each(
+                            //     (index, element) => {
+                            //         if (options[index]) {
+                            //             $(element).val(options[index].option); // Set existing options
+                            //         }
+                            //     }
+                            // );
+                            $(".poll-options input[name='options[]']").each((index, element) => {
+                                if (options[index]) {
+                                    $(element).val(options[index].option);
+                                    const charCount = $(element).val().length;
+
+                                    // Update the character count display
+                                    $(element)
+                                        .closest(".mb-3")
+                                        .find(".char-count")
+                                        .text(`${charCount}/${maxLength}`); // Update existing inputs
                                 }
-                            );
+                            });
+
+                            // Append only the missing options
+                            let existingInputs = $(".poll-options input[name='options[]']").length;
+                            if (options.length > existingInputs) {
+                                options.slice(existingInputs).forEach((option, index) => {
+                                    let optionNumber = existingInputs + index + 1; // Ensure numbering is sequential
+
+                                    $(".poll-options").append(`
+                                        <div class="mb-3 option-poll">
+                                            <label class="form-label d-flex align-items-center justify-content-between">
+                                                <p>Option <span class="option-number">${optionNumber}</span>*</p>
+                                                <span class="char-count">0/140</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control poll-option-input" name="options[]" required value="${option.option}">
+                                                  <input type="hidden" name="option-ids[]" value="${option.id}" id="option-ids" />
+                                                <span class="input-option-delete delete-polll">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M5.66699 3.31334L5.81366 2.44001C5.92033 1.80668 6.00033 1.33334 7.12699 1.33334H8.87366C10.0003 1.33334 10.087 1.83334 10.187 2.44668L10.3337 3.31334" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M12.5669 6.09332L12.1336 12.8067C12.0603 13.8533 12.0003 14.6667 10.1403 14.6667H5.86026C4.00026 14.6667 3.94026 13.8533 3.86693 12.8067L3.43359 6.09332" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M6.88672 11H9.10672" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M6.33301 8.33334H9.66634" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    `);
+                                });
+                                $(".poll_qus").on("input", function () {
+                                    updateCharCount(this);
+                                });
+
+                                // Attach event listener for poll options input fields
+                                $(".poll-options").on("input", "input[name='options[]']", function () {
+                                    updateCharCount(this);
+                                });
+
+                                // Trigger on page load to reflect any existing values
+                                $(".poll_qus,.poll-options input[name='options[]']").each(function () {
+                                    updateCharCount(this);
+                                });
+                                // Delete option functionality
+                                $(document).on("click", ".delete-polll", function () {
+                                    $(this).closest(".option-poll").remove();
+                                    renumberOptions();
+                                });
+
+                            }
+
+
+
                         }
                     }
 
@@ -1536,6 +1699,32 @@ $(document).ready(function () {
             },
         });
     });
+
+    function renumberOptions() {
+        $(".poll-options .option-poll").each(function (index) {
+            $(this)
+                .find(".option-number")
+                .text(index + 3);
+            $(this).find(".char-count").text("0/140"); // Reset char count
+        });
+    }
+    function updateCharCount(inputField) {
+        const maxLength = 140;
+        const charCount = $(inputField).val().length;
+
+        // Update the span element with current character count
+        $(inputField)
+            .closest(".mb-3")
+            .find(".char-count")
+            .text(`${charCount}/${maxLength}`);
+
+        // Disable the input field if the maximum length is reached
+        if (charCount >= maxLength) {
+            $(inputField).val($(inputField).val().substring(0, maxLength));
+            charCount = maxLength; // Adjust count after trimming
+        }
+
+    }
 });
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");

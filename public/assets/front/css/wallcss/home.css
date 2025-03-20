@@ -3393,6 +3393,16 @@ main.new-main-content {
 
 
 
+#deletePostButton svg path{
+    fill: none;
+}
+
+#creatpostmodal .modal-content{
+    min-height: 420px !important;
+}
+
+
+
 
 /* ===Responsive=== */
 @media only screen and (min-width: 1800px) {

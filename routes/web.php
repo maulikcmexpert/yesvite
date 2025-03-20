@@ -33,6 +33,7 @@ use App\Http\Controllers\{
 use App\Http\Controllers\admin\EventController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,15 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 
+Route::get('/open-app', function () {
+    $deepLink = "comappyesvite://open";  
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";  
+
+    return view('deep-link', compact('deepLink', 'fallbackUrl'));
+})->name('open-app'); 
+Route::get('/redirect', function () {
+    return view('redirect');
+})->name('redirect'); 
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -62,6 +72,9 @@ Route::get('/invite/{shortUrlKey}', [UrlController::class, 'handleShortUrl'])
 Route::get('/', [HomeFrontController::class, 'homeDesign'])->name('front.home')->middleware('isAuthenticate');
 Route::post('/viewAllImages', [HomeFrontController::class, 'viewAllImages']);
 Route::get('/trigger-queue', [HomeFrontController::class, 'triggerQueueWork']);
+
+
+
 
 Route::get('/ResendVerificationMail/{id}', [HomeFrontController::class, 'ResendVerificationMail'])->name('ResendVerificationMail')->middleware('isAuthenticate');
 Route::get('about-us', [AboutController::class, 'index'])->name('about');
@@ -260,7 +273,22 @@ Route::middleware('checkUserExist')->group(function () {
     Route::get('reset_notification_eventId',  [EventListController::class, 'reset_notification_eventId'])->name('reset_notification_eventId');
     Route::get('store_add_new_guest',  [EventListController::class, 'store_add_new_guest']);
 
+    // use Illuminate\Http\Request;
 
+    // Route::get('/open-app', function (Request $request) {
+    //     $userId = $request->get('user_id');
+    //     $eventId = $request->get('event_id');
+    
+    //     // Deep link schema for your mobile app
+    //     $deepLink = "yourapp://open?user_id={$userId}&event_id={$eventId}";
+    
+    //     // Fallback URL (in case the app is not installed)
+    //     $fallbackUrl = url('/event/' . $eventId);
+    
+    //     return view('deep-link', compact('deepLink', 'fallbackUrl'));
+    // });
+ 
+    
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
     //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
@@ -403,6 +431,8 @@ Route::controller(AuthController::class)->group(function () {
         return view('admin.auth.main', $data);
     });
 
+    
+    
     Route::post('/forgotpassword', 'forgotpassword');
 
     Route::get('/updatePassword/{id}', 'checkToken');
@@ -447,6 +477,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 });
+
 
 Route::fallback(function () {
     $title = "No Found";
