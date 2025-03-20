@@ -3279,8 +3279,15 @@ padding: 12px 24px;
     justify-content: center;
 }
 #pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img{
-    width: 390px;
+    width: 100%;
+    max-width: 390px;
+    max-height: 550px;
 }
+
+#pending-rsvp-modal .modal-body .pending_rsvp_slider .setting-img img {
+    object-fit: fill;
+}
+
 
 #pending-rsvp-modal .modal-body .pending_rsvp_slider .owl-prev {
     width: 100%;
