@@ -1007,6 +1007,9 @@ $(document).ready(function () {
                 link.click();
                 document.body.removeChild(link);
             });
+            $(".selected_bulk_image").prop("checked", false);
+            $(".selected-bulk-btn").hide();
+            toggleBulkSelectWrapper(); // Update UI
         });
         $(document).on("click", ".download_img_single", function () {
             // Find the image source stored in the data attribute
