@@ -2068,7 +2068,7 @@
 
 @media only screen and (min-width: 1400px) and (max-width: 4000px) and (min-height: 900px) and (max-height: 949px){
     .image-edit-inner-img {
-        width: 430px !important;
+        width: 410px !important;
         height: max-content;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
@@ -3504,9 +3504,10 @@
 
 @media only screen and (max-width: 575px) {
     .image-edit-inner-img {
-        width: 327px;
-        height: 460px;
+        width: 300px;
+        height: 100%;
         margin: 0px auto;
+        aspect-ratio: 5/7;
     }
 
     .edit-images-button-more {
