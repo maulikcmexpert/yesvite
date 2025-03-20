@@ -917,11 +917,10 @@
 function openApp() {
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-    const isSafari = navigator.userAgent.toLowerCase().includes('safari');
     
     let appOpened = false;
 
-    // Detect app open using visibility and blur events
+    // ✅ Detect app open using visibility and blur events
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true; // App opened successfully
@@ -936,7 +935,7 @@ function openApp() {
     window.addEventListener('blur', onBlur);
 
     if (isChrome) {
-        // Chrome on iOS: Use <a> element click
+        // ✅ Chrome on iOS: Use <a> element click
         const link = document.createElement('a');
         link.href = appLink;
         link.style.display = 'none';
@@ -947,31 +946,24 @@ function openApp() {
         setTimeout(() => {
             document.body.removeChild(link);
         }, 100);
-    } else if (isSafari) {
-        // Safari on iOS: Use iframe with timeout
-        const iframe = document.createElement('iframe');
-        iframe.src = appLink;
-        iframe.style.display = 'none';
-        iframe.frameBorder = '0';
-        iframe.width = '0';
-        iframe.height = '0';
-        document.body.appendChild(iframe);
-
-        setTimeout(() => {
-            document.body.removeChild(iframe);
-        }, 100);
     } else {
-        // Other browsers: Use window.location.href
+        // ✅ Safari & other browsers
         window.location.href = appLink;
+
+        // ✅ Remove invalid alert in Safari
+        setTimeout(() => {
+            if (!appOpened) {
+                history.replaceState(null, '', window.location.href);
+            }
+        }, 1500);
     }
 
-    // Cleanup event listeners after 2 seconds
+    // ✅ Cleanup event listeners after 2 seconds
     setTimeout(() => {
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
     }, 2000);
 }
-
 
 
 </script>
