@@ -908,4 +908,9 @@
 
 
     });
+    function openApp() {
+    const appLink = "comappyesvite://somepage"; 
+    window.location.href = appLink;
+}
+
 </script>
