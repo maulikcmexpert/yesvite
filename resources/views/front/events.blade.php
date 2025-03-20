@@ -269,7 +269,7 @@
                             data-event_name="{{ $firstEvent['event_name'] ?? '' }}"
                             data-firstname="{{ $firstEvent['firstname'] ?? '' }}"
                             data-lastname="{{ $firstEvent['lastname'] ?? '' }}"
-                            data-profile="{{ $firstEvent['profile'] ?? '' }}"
+                            {{-- data-profile="{{ $firstEvent['profile'] ?? '' }}" --}}
                             data-profile="{{ !empty($firstEvent['profile']) ? asset('storage/profile/' . $firstEvent['profile']) : '' }}"
                             data-rsvp_kids="{{ $firstEvent['kids'] ?? '' }}"
                             data-rsvp_adults="{{ $firstEvent['adults'] ?? '' }}"
