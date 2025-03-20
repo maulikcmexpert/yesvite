@@ -1858,7 +1858,7 @@
     }
 
     .coin-invite-wrp i{
-        margin-left: 7px;
+        margin-left: 15px;
     }
 
     .step_3 .coin-invite-wrp .coin-invite-wrp-inner{
@@ -1889,4 +1889,9 @@
     .timepicker {
         padding-left: 10px !important;
     }
+
+    .coin-invite-wrp i{
+        margin-left: 4px;
+    }
+
 }
