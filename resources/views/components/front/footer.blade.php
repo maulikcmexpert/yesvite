@@ -912,24 +912,20 @@
 //     const appLink = "comappyesvite://somepage"; 
 //     window.location.href = appLink;
 // }
-function openApp() {
+ffunction openApp() {
     const appLink = "comappyesvite://somepage";
 
-    // Create a hidden iframe to open the app silently
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appLink;
+    // Open the app link in a hidden popup window
+    const newWindow = window.open(appLink, "_blank");
 
-    // Append the iframe to the DOM
-    document.body.appendChild(iframe);
-
-    // Remove the iframe after 2 seconds to prevent DOM clutter
+    // Use setTimeout to close the popup after a short delay
     setTimeout(() => {
-        document.body.removeChild(iframe);
-    }, 2000);
-
-    // Prevent Safari from showing the invalid alert
-    window.location.href = "about:blank";
+        if (newWindow) {
+            newWindow.close(); // Close the popup if it failed to open the app
+        }
+        window.focus();  // Bring the current tab back into focus
+    }, 1000);
 }
+
 
 </script>
