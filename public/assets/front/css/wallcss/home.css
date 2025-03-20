@@ -2371,6 +2371,7 @@ main.new-main-content {
     width: 19px;
     min-width: 19px;
     height: 19px;
+    object-fit: contain;
 }
 
 /* ===Responsive===
