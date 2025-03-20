@@ -912,41 +912,56 @@
 //     const appLink = "comappyesvite://"; 
 //     window.location.href = appLink;
 // }
-function openApp() {
-    const appUrl = "comappyesvite://";  // Your app's custom scheme
-    let appOpened = false;
+// function openApp() {
+//     const appUrl = "comappyesvite://";  // Your app's custom scheme
+//     let appOpened = false;
 
-    // ✅ Detect if the app opens successfully
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;  // App opened successfully
-        }
-    };
+//     // ✅ Detect if the app opens successfully
+//     const onVisibilityChange = () => {
+//         if (document.hidden) {
+//             appOpened = true;  // App opened successfully
+//         }
+//     };
 
-    const onBlur = () => {
-        appOpened = true;  // App opened successfully
-    };
+//     const onBlur = () => {
+//         appOpened = true;  // App opened successfully
+//     };
 
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onBlur);
+//     document.addEventListener('visibilitychange', onVisibilityChange);
+//     window.addEventListener('blur', onBlur);
 
-    // ✅ Open the app directly
-    window.location.href = appUrl;
+//     // ✅ Open the app directly
+//     window.location.href = appUrl;
 
-    // ✅ Check if the app opened successfully
-    // setTimeout(() => {
-        if (appOpened) {
-            // ✅ Show success popup only if the app opened
-            // alert('App opened successfully! 🎉');
-        }
+//     // ✅ Check if the app opened successfully
+//     // setTimeout(() => {
+//         if (appOpened) {
+//             // ✅ Show success popup only if the app opened
+//             // alert('App opened successfully! 🎉');
+//         }
 
-        // ✅ Cleanup
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
+//         // ✅ Cleanup
+//         document.removeEventListener('visibilitychange', onVisibilityChange);
+//         window.removeEventListener('blur', onBlur);
 
-    // }, 1500);  // Adjust the timeout based on app launch speed
-}
+//     // }, 1500);  // Adjust the timeout based on app launch speed
+// }
 
+(function() {
+  var app = {
+    launchApp: function() {
+      window.location.replace("comappyesvite://");
+      this.timer = setTimeout(this.openWebApp, 1000);
+    },
+
+    openWebApp: function() {
+    //   window.location.replace("http://itunesstorelink/");
+    console.log('not found');
+    }
+  };
+
+  app.launchApp();
+})();
 // function openApp() {
     
 
