@@ -915,17 +915,21 @@
 function openApp() {
     const appLink = "comappyesvite://somepage";
 
-    // Try opening the app
-    const now = Date.now();
-    window.location.href = appLink;
+    // Create a hidden iframe to open the app silently
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appLink;
 
-    // Use a timeout to prevent alerts or errors
+    // Append the iframe to the DOM
+    document.body.appendChild(iframe);
+
+    // Remove the iframe after 2 seconds to prevent DOM clutter
     setTimeout(() => {
-        const elapsed = Date.now() - now;
-        if (elapsed < 1500) {
-            console.log("App not installed or did not open.");
-        }
-    }, 1000);
+        document.body.removeChild(iframe);
+    }, 2000);
+
+    // Prevent Safari from showing the invalid alert
+    window.location.href = "about:blank";
 }
 
 </script>
