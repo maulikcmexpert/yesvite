@@ -952,12 +952,12 @@ function openApp() {
         // ✅ Safari & other browsers
         window.location.href = appLink;
 
+        preventDefault();
         // ✅ Remove invalid alert in Safari
         setTimeout(() => {
             if (!appOpened) {
-                preventDefault();
 
-                // history.replaceState(null, '', window.location.href);
+                history.replaceState(null, '', window.location.href);
             }
         }, 1500);
     }
