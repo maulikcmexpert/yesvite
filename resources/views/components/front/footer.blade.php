@@ -909,13 +909,13 @@
 
     });
   // Define the function
-function openApp() {
-    const appLink = "comappyesvite://"; 
-    window.location.href = appLink;
-}
+// function openApp() {
+//     const appLink = "comappyesvite://"; 
+//     window.location.href = appLink;
+// }
 
-// Automatically call the function on page load
-window.onload = openApp;
+// // Automatically call the function on page load
+// window.onload = openApp;
 
 
 // ;
