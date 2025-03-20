@@ -909,8 +909,8 @@
 
     });
 //     function openApp() {
-//     const appLink = "comappyesvite://"; 
-//     window.location.href = appLink;
+    // const appLink = "comappyesvite://"; 
+    // window.location.href = appLink;
 // }
 
 function openApp() {
@@ -924,6 +924,7 @@ function openApp() {
     };
 
     const onBlur = () => {
+        alert(1);
         appOpened = true;  // App opened successfully
     };
 
@@ -938,6 +939,7 @@ function openApp() {
     document.body.appendChild(iframe);
 
     try {
+        alert(2)
         iframe.src = appLink;  // Try to open the app
     } catch (error) {
         console.error("Error opening the app:", error);
@@ -946,16 +948,18 @@ function openApp() {
     // ✅ Check if the app opened successfully
     setTimeout(() => {
         if (appOpened) {
+            alert(3)
             // ❗ Show alert only if the app is installed
             alert('App is installed and opened successfully!');
         }
-
+        alert(4)
         // ✅ Cleanup
         document.body.removeChild(iframe);
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Timeout to detect app opening
+    }, 1500); 
+    alert(5) // Timeout to detect app opening
 }
 
 
