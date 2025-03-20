@@ -908,33 +908,9 @@
 
 
     });
-
-    // function openApp() {
-    //         // Try opening the Yesvite app
-    //         window.location.href = "comappyesvite://somepage";
-
-    //         // If the app is not installed, redirect to the App Store after 2 seconds
-    //         // setTimeout(function() {
-    //         //     window.location.href = "https://apps.apple.com/app/your-app-id";
-    //         // }, 2000);
-    //     }
     function openApp() {
-    const appLink = "comappyesvite://somepage";  // Your deep link
-
-    // ✅ Use `setTimeout()` and `location.assign()` for better handling
-    const now = Date.now();
-
-    // Attempt to open the app
-    const hiddenFrame = document.createElement('iframe');
-    hiddenFrame.style.display = 'none';
-    hiddenFrame.src = appLink;  
-    document.body.appendChild(hiddenFrame);
-
-    // ✅ Fallback cleanup (prevent alert)
-    setTimeout(() => {
-        document.body.removeChild(hiddenFrame);
-    }, 1500);  // Clean up after 1.5 seconds
+    const appLink = "comappyesvite://somepage"; 
+    window.location.href = appLink;
 }
-
 
 </script>
