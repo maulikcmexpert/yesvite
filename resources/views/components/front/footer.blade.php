@@ -923,19 +923,42 @@ function preventPopup() {
 function openApp() {
     const appUrl = "comappyesvite://";   // Your app URL scheme
 
-    // ✅ Use iframe to prevent browser alert
-    $('<iframe />')
-        .attr('src', appUrl)
-        .attr('style', 'display:none;')
-        .appendTo('body');
+    let appOpened = false;
+
+    // ✅ Detect if the app opens successfully
+    const onVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true;  // App opened successfully
+        }
+    };
+
+    const onBlur = () => {
+        appOpened = true;  // App opened successfully
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', onBlur);
+
+    // ✅ Use iframe for silent app opening
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = appUrl;
+    document.body.appendChild(iframe);
 
     // ✅ Set timeout to do nothing if the app is not installed
-    timeout = setTimeout(function () {
-        // Do nothing on failure (no fallback, no alert)
-        console.log('App not installed, but no alert shown.');
-    }, 1500);   // Adjust timeout if needed
+    timeout = setTimeout(() => {
+        if (!appOpened) {
+            console.log('App not installed, but no alert shown.');
+        }
+        
+        // Cleanup
+        document.body.removeChild(iframe);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onBlur);
 
-    // ✅ Prevent browser alert if the app opens successfully
+    }, 1500);   // Adjust timeout based on the app launch speed
+
+    // ✅ Prevent alert if the app opens successfully
     window.addEventListener('pagehide', preventPopup);
 }
 
