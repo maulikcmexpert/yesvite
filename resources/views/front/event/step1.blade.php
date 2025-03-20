@@ -260,6 +260,8 @@
                                     {{-- <option value="PST" {{($start_time_zone =='' || $start_time_zone == 'PST')?'selected':''}}>PST</option> --}}
                                     <option value="PST" {{ $start_time_zone == 'PST' ? 'selected' : '' }}>PST
                                     </option>
+                                    <option value="PDT" {{ $start_time_zone == 'PDT' ? 'selected' : '' }}>PDT
+                                    </option>
                                     <option value="MST" {{ $start_time_zone == 'MST' ? 'selected' : '' }}>MST
                                     </option>
                                     <option value="CST" {{ $start_time_zone == 'CST' ? 'selected' : '' }}>CST
@@ -397,6 +399,8 @@
                                     @endphp
 
                                     <option value="PST" {{ $end_time_zone == 'PST' ? 'selected' : '' }}>PST
+                                    </option>
+                                    <option value="PDT" {{ $end_time_zone == 'PDT' ? 'selected' : '' }}>PDT
                                     </option>
                                     <option value="MST" {{ $end_time_zone == 'MST' ? 'selected' : '' }}>MST
                                     </option>
