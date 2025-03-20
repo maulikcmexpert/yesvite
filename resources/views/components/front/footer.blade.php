@@ -915,7 +915,6 @@
 
 
 function openApp() {
-    preventDefault();
     
 
     const appLink = "comappyesvite://";
@@ -956,7 +955,9 @@ function openApp() {
         // ✅ Remove invalid alert in Safari
         setTimeout(() => {
             if (!appOpened) {
-                history.replaceState(null, '', window.location.href);
+                preventDefault();
+
+                // history.replaceState(null, '', window.location.href);
             }
         }, 1500);
     }
