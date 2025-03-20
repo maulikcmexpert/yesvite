@@ -1102,10 +1102,10 @@ $(document).ready(function () {
                 const postId = $(this).data("event-post-id"); // Fetch the post ID
 
 
-                if (postUserId != login_user) {
-                    return null;
-                } else {
+                if (postUserId == login_user) {
                     return { event_post_id: postId };
+                } else {
+                    return null; // Exclude non-owner posts
                 }
             }).get();
 
