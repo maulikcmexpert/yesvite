@@ -984,26 +984,12 @@
 
             // ✅ Open the app using location.replace (prevents alert)
             // window.location.replace("comappyesvite://");
-            // try {
-            //     window.location.replace("comappyesvite://");
-            // } catch (error) {
-            // console.error("Error replacing location:", error);
-            // // Handle the error, e.g., redirect to a default page or display an error message
-            // }
-            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-         // Only attempt on iOS devices
-         try {
-             window.location.replace("comappyesvite://");
-         } catch (error) {
-             console.error("Error replacing location:", error);
-             // Handle iOS specific error (e.g., redirect to App Store)
-             window.location.href = "/app-not-found-ios";
-         }
-     } else {
-         // Handle non-iOS devices (e.g., display a message)
-         alert("This feature is only available on iOS devices.");
-     }
- 
+            try {
+                window.location.replace("comappyesvite://");
+            } catch (error) {
+            console.error("Error replacing location:", error);
+            // Handle the error, e.g., redirect to a default page or display an error message
+            }
             // ✅ Check if the app opened or not
             this.timer = setTimeout(() => {
                 if (!appOpened) {
