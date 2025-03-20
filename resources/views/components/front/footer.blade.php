@@ -917,13 +917,17 @@
 function openApp() {
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-    
+
     let appOpened = false;
 
-    // ✅ Detect app open using visibility and blur events
+    // ✅ Create a hidden iframe to avoid browser alerts
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
     const onVisibilityChange = () => {
         if (document.hidden) {
-            appOpened = true; // App opened successfully
+            appOpened = true;  // App opened successfully
         }
     };
 
@@ -934,35 +938,22 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    if (isChrome) {
-        // ✅ Chrome on iOS: Use <a> element click
-        const link = document.createElement('a');
-        link.href = appLink;
-        link.style.display = 'none';
-        document.body.appendChild(link);
+    // ✅ Open the app silently using iframe
+    iframe.src = appLink;
 
-        link.click();
-
-        setTimeout(() => {
-            document.body.removeChild(link);
-        }, 100);
-    } else {
-        // ✅ Safari & other browsers
-        window.location.href = appLink;
-
-        // ✅ Remove invalid alert in Safari
-        setTimeout(() => {
-            if (!appOpened) {
-                history.replaceState(null, '', window.location.href);
-            }
-        }, 1500);
-    }
-
-    // ✅ Cleanup event listeners after 2 seconds
+    // ✅ Fallback timeout to detect if the app didn't open
     setTimeout(() => {
+        if (!appOpened) {
+            // Do nothing if the app is not installed (no alert)
+            console.log('App not opened, but no alert shown.');
+        }
+
+        // Cleanup
+        document.body.removeChild(iframe);
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
-    }, 2000);
+
+    }, 1500);
 }
 
 
