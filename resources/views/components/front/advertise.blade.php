@@ -37,44 +37,42 @@
     const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
 
     let appOpened = false;  
-    const fallbackTimeout = 1500;  // Timeout duration for fallback
+    const fallbackTimeout = 1500;  // Timeout for fallback
 
     // ✅ Detect if the app opened successfully
-    const onPageHide = () => {
-        appOpened = true;
+    const onVisibilityChange = () => {
+        if (document.hidden) {
+            appOpened = true;  // App opened
+        }
     };
 
-    window.addEventListener('pagehide', onPageHide);
-    window.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            appOpened = true;
-        }
-    });
+    // ✅ Add event listeners
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', () => appOpened = true);
 
     // ✅ Use hidden iframe to attempt opening the app
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
+    iframe.src = appLink;  
     document.body.appendChild(iframe);
 
-    // Attempt to open the app
-    iframe.src = appLink;
-
+    // ✅ Fallback logic
     const now = Date.now();
 
-    // ✅ Fallback to App Store if the app is not installed
     setTimeout(() => {
         const elapsed = Date.now() - now;
 
-        // If app didn't open, go to the App Store
+        // ✅ If app didn't open, redirect to App Store
         if (!appOpened && elapsed < fallbackTimeout + 200) {
-            window.location.href = appStoreLink;
+            window.location.replace(appStoreLink);
         }
 
-        // Clean up
+        // ✅ Cleanup
         document.body.removeChild(iframe);
-        window.removeEventListener('pagehide', onPageHide);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
     }, fallbackTimeout);
 }
+
 
 
 
