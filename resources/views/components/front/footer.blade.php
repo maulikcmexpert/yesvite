@@ -966,22 +966,18 @@
     var app = {
         launchApp: function() {
             let appOpened = false;
-
             // ✅ Detect if the app is opened successfully
             const onVisibilityChange = () => {
                 if (document.hidden) {
                     appOpened = true;  // App opened successfully
                 }
             };
-
             const onBlur = () => {
                 appOpened = true;  // App opened successfully
             };
-
             document.addEventListener('visibilitychange', onVisibilityChange);
             window.addEventListener('blur', onBlur);
                 // preventDefault();   
-
             // ✅ Open the app using location.replace (prevents alert)
             // window.location.replace("comappyesvite://");
             try {
@@ -995,7 +991,6 @@
                 if (!appOpened) {
                     console.log('App not installed, no alert shown.');
                 }
-
                 // ✅ Cleanup
                 document.removeEventListener('visibilitychange', onVisibilityChange);
                 window.removeEventListener('blur', onBlur);
