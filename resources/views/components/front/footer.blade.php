@@ -908,9 +908,27 @@
 
 
     });
-    function openApp() {
-    const appLink = "comappyesvite://"; 
-    window.location.href = appLink;
+//     function openApp() {
+//     const appLink = "comappyesvite://"; 
+//     window.location.href = appLink;
+// }
+
+
+function openApp() {
+    const appLink = "comappyesvite://";
+
+    try {
+        // Attempt to open the app
+        window.location.href = appLink;
+
+        // Use history.replaceState to suppress the invalid alert
+        setTimeout(() => {
+            history.replaceState(null, '', window.location.href);
+        }, 100);
+        
+    } catch (e) {
+        console.log('App not installed or invalid link');
+    }
 }
 
 </script>
