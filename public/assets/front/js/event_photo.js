@@ -1103,9 +1103,9 @@ $(document).ready(function () {
 
 
                 if (postUserId == login_user) {
-                    return { event_post_id: postId };
+                    return null;
                 } else {
-                    return null; // Exclude non-owner posts
+                    return  { event_post_id: postId };;
                 }
             }).get();
 
