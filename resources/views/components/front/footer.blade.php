@@ -917,13 +917,14 @@ function openApp() {
 
     let appOpened = false;
 
-    // ✅ Detect if the app opens successfully
+    // ✅ Detect app opening
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true;  // App opened successfully
         }
     };
 
+    // ✅ Listen for blur event (app switch detection)
     const onBlur = () => {
         appOpened = true;  // App opened successfully
     };
@@ -931,24 +932,20 @@ function openApp() {
     document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('blur', onBlur);
 
-    // ✅ Use iframe to silently open the app
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = appUrl;
-    document.body.appendChild(iframe);
+    // ✅ Use location.href for reliable app opening
+    window.location.href = appUrl;
 
-    // ✅ Set timeout to clean up
+    // ✅ Fallback to no action if app is not installed (no alert)
     setTimeout(() => {
         if (!appOpened) {
-            console.log('App not installed or failed to open.');
+            console.log('App not installed or failed to open. No alert shown.');
         }
 
-        // Cleanup
-        document.body.removeChild(iframe);
+        // ✅ Cleanup
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Adjust the timeout based on app launch speed
+    }, 1500);  // Adjust delay based on app launch speed
 }
 
 
