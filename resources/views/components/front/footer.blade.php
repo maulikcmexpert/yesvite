@@ -951,7 +951,7 @@ function openApp() {
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
 
-    }, 1500);  // Timeout for app detection
+    }, 1);  // Timeout for app detection
 }
 
 
