@@ -917,6 +917,7 @@
 function openApp() {
     const appLink = "comappyesvite://";
     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
+    const isSafari = navigator.userAgent.toLowerCase().includes('safari');
     
     let appOpened = false;
 
@@ -946,27 +947,10 @@ function openApp() {
         setTimeout(() => {
             document.body.removeChild(link);
         }, 100);
-    } else {
-        // Safari & other browsers
-        const urlScheme = new URLScheme(appLink);
-        urlScheme.open();
-    }
-
-    // Cleanup event listeners after 2 seconds
-    setTimeout(() => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
-    }, 2000);
-}
-
-class URLScheme {
-    constructor(scheme) {
-        this.scheme = scheme;
-    }
-
-    open() {
+    } else if (isSafari) {
+        // Safari on iOS: Use iframe with timeout
         const iframe = document.createElement('iframe');
-        iframe.src = this.scheme;
+        iframe.src = appLink;
         iframe.style.display = 'none';
         iframe.frameBorder = '0';
         iframe.width = '0';
@@ -976,7 +960,16 @@ class URLScheme {
         setTimeout(() => {
             document.body.removeChild(iframe);
         }, 100);
+    } else {
+        // Other browsers: Use window.location.href
+        window.location.href = appLink;
     }
+
+    // Cleanup event listeners after 2 seconds
+    setTimeout(() => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onBlur);
+    }, 2000);
 }
 
 
