@@ -292,7 +292,7 @@
                                                                                     Edit
                                                                                 </button>
                                                                             </li>
-                                                                            {{-- @elseif($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1"||$post['user_id']==$login_user_id) --}}
+                                                                            @elseif(($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1"||$post['user_id']==$login_user_id)&&$post['user_id']==$login_user_id)
 
                                                                             <li>
                                                                                 <button
