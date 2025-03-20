@@ -986,59 +986,68 @@ $(document).ready(function () {
         $(".form-check-input").on("change", function () {
             toggleBulkSelectWrapper();
         });
-
         $(".download_img").on("click", function () {
-            let selectedImages = [];
+            let selectedMedia = [];
 
             $(".selected_bulk_image:checked").each(function () {
-                let imgSrc = $(this).data("image-src");
+                let mediaSrc = $(this).data("image-src");
 
-                // If imgSrc is a JSON string, parse it into an array
-                if (typeof imgSrc === "string") {
+                // Parse JSON if necessary
+                if (typeof mediaSrc === "string") {
                     try {
-                        imgSrc = JSON.parse(imgSrc);
+                        mediaSrc = JSON.parse(mediaSrc);
                     } catch (e) {
-                        console.error("Invalid JSON format in data-image-src:", imgSrc);
+                        console.error("Invalid JSON format in data-image-src:", mediaSrc);
                         return;
                     }
                 }
 
-                if (Array.isArray(imgSrc)) {
-                    selectedImages = selectedImages.concat(imgSrc); // Merge arrays
+                if (Array.isArray(mediaSrc)) {
+                    selectedMedia = selectedMedia.concat(mediaSrc);
                 } else {
-                    selectedImages.push(imgSrc);
+                    selectedMedia.push(mediaSrc);
                 }
             });
 
-            if (selectedImages.length > 0) {
-                downloadImagesSequentially(selectedImages, 0);
+            if (selectedMedia.length > 0) {
+                downloadMediaSequentially(selectedMedia, 0);
             }
 
-            // Uncheck all selected images and update UI
+            // Uncheck all selected items and update UI
             $(".selected_bulk_image").prop("checked", false);
             $(".selected-bulk-btn").hide();
             bulkSelectActive = false;
-
             toggleBulkSelectWrapper();
         });
 
-        // Function to download images one by one
-        function downloadImagesSequentially(images, index) {
-            if (index >= images.length) return; // Stop if all images are downloaded
+        // Function to download images and videos as files
+        function downloadMediaSequentially(media, index) {
+            if (index >= media.length) return; // Stop when all are processed
 
-            const imgSrc = images[index];
-            const link = document.createElement("a");
-            link.href = imgSrc;
-            link.download = `image_${index + 1}.jpg`; // Customize filename
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const mediaSrc = media[index];
+            const extension = mediaSrc.split(".").pop().toLowerCase(); // Get file extension
+            const filename = `media_${index + 1}.${extension}`; // Dynamic filename
 
-            // Delay next download to prevent browser blocking
-            setTimeout(() => {
-                downloadImagesSequentially(images, index + 1);
-            }, 500); // Adjust delay if necessary
+            fetch(mediaSrc)
+                .then(response => response.blob())
+                .then(blob => {
+                    const link = document.createElement("a");
+                    const url = URL.createObjectURL(blob);
+                    link.href = url;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url); // Free memory
+
+                    // Delay next download to prevent browser blocking
+                    setTimeout(() => {
+                        downloadMediaSequentially(media, index + 1);
+                    }, 500);
+                })
+                .catch(error => console.error("Download error:", error));
         }
+
 
 
         $(document).on("click", ".download_img_single", function () {
