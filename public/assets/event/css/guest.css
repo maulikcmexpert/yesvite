@@ -1088,7 +1088,7 @@
 
     .guest-main-content .guest-wrapper .invite-pro{
         max-width: calc(100% - 5%);
-        min-width: calc(100% - 16%);
+        min-width: calc(100% - 7%);
     }
 
     #YesviteUserAll .users-data .text-start {
