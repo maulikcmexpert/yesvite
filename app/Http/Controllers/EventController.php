@@ -627,11 +627,13 @@ class EventController extends BaseController
         $inviteduser = "";
 
         $event_type =   EventType::get();
-        $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
-            ->where('app_user', '1')
-            ->orderBy('firstname')
-            ->limit(1)
-            ->get();
+
+        // $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
+        //     ->where('app_user', '1')
+        //     ->orderBy('firstname')
+        //     ->limit(1)
+        //     ->get();
+
         $textData = [];
         $design_category = [];
         // $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
@@ -704,7 +706,7 @@ class EventController extends BaseController
             'js',
             'user',
             'event_type',
-            'yesvite_user',
+            // 'yesvite_user',
             'groups',
            'imagecount',
            'getLastTimeZone',
