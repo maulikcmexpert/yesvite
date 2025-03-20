@@ -770,7 +770,7 @@
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
-                                            @if ($guest_user['profile'] != '')
+                                            {{-- @if ($guest_user['profile'] != '')
                                                 <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}"
                                                     alt="user-img">
                                             @else
@@ -785,7 +785,32 @@
                                                     $fontColor = 'fontcolor' . $firstInitial;
                                                 @endphp
                                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                            @endif
+                                            @endif --}}
+                                            @php
+                                            // Check if the profile image exists and has a valid extension
+                                            $validExtensions = ['jpg', 'jpeg', 'png'];
+                                            $profile = $guest_user['profile'] ?? '';
+                                            $extension = pathinfo($profile, PATHINFO_EXTENSION);
+
+                                            $isValidImage = !empty($profile) && in_array(strtolower($extension), $validExtensions);
+                                        @endphp
+
+                                        @if ($isValidImage)
+                                            <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                        @else
+                                            @php
+                                                $firstInitial = !empty($guest_user['firstname'])
+                                                    ? strtoupper($guest_user['firstname'][0])
+                                                    : '';
+                                                $lastInitial = !empty($guest_user['lastname'])
+                                                    ? strtoupper($guest_user['lastname'][0])
+                                                    : '';
+                                                $initials = $firstInitial . $lastInitial;
+                                                $fontColor = 'fontcolor' . $firstInitial;
+                                            @endphp
+                                            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                        @endif
+
                                         </div>
                                         <div class="text-start">
                                             <h5>{{ $guest_user['firstname'] }} {{ $guest_user['lastname'] }}</h5>
@@ -830,7 +855,31 @@
                                     {{-- <input type="hidden" class="duplicate" value="{{$is_duplicate}}"/> --}}
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
-                                            @if ($guest_user['profile'] != '')
+                                            @php
+                                            // Check if the profile image exists and has a valid extension
+                                            $validExtensions = ['jpg', 'jpeg', 'png'];
+                                            $profile = $guest_user['profile'] ?? '';
+                                            $extension = pathinfo($profile, PATHINFO_EXTENSION);
+
+                                            $isValidImage = !empty($profile) && in_array(strtolower($extension), $validExtensions);
+                                        @endphp
+
+                                        @if ($isValidImage)
+                                            <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                        @else
+                                            @php
+                                                $firstInitial = !empty($guest_user['firstname'])
+                                                    ? strtoupper($guest_user['firstname'][0])
+                                                    : '';
+                                                $lastInitial = !empty($guest_user['lastname'])
+                                                    ? strtoupper($guest_user['lastname'][0])
+                                                    : '';
+                                                $initials = $firstInitial . $lastInitial;
+                                                $fontColor = 'fontcolor' . $firstInitial;
+                                            @endphp
+                                            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                        @endif
+                                            {{-- @if ($guest_user['profile'] != '')
                                                 <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}"
                                                     alt="user-img">
                                             @else
@@ -845,7 +894,7 @@
                                                     $fontColor = 'fontcolor' . $firstInitial;
                                                 @endphp
                                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="text-start">
                                             <h5>{{ $guest_user['firstname'] }} {{ $guest_user['lastname'] }}</h5>
@@ -892,7 +941,31 @@
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
-                                            @if ($guest_user['profile'] != '')
+                                            @php
+                                            // Check if the profile image exists and has a valid extension
+                                            $validExtensions = ['jpg', 'jpeg', 'png'];
+                                            $profile = $guest_user['profile'] ?? '';
+                                            $extension = pathinfo($profile, PATHINFO_EXTENSION);
+
+                                            $isValidImage = !empty($profile) && in_array(strtolower($extension), $validExtensions);
+                                        @endphp
+
+                                        @if ($isValidImage)
+                                            <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                        @else
+                                            @php
+                                                $firstInitial = !empty($guest_user['firstname'])
+                                                    ? strtoupper($guest_user['firstname'][0])
+                                                    : '';
+                                                $lastInitial = !empty($guest_user['lastname'])
+                                                    ? strtoupper($guest_user['lastname'][0])
+                                                    : '';
+                                                $initials = $firstInitial . $lastInitial;
+                                                $fontColor = 'fontcolor' . $firstInitial;
+                                            @endphp
+                                            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                        @endif
+                                            {{-- @if ($guest_user['profile'] != '')
                                                 <img src="{{ $guest_user['profile'] }}" alt="user-img">
                                             @else
                                                 @php
@@ -906,7 +979,7 @@
                                                     $fontColor = 'fontcolor' . $firstInitial;
                                                 @endphp
                                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="text-start">
                                             <h5>{{ $guest_user['firstname'] }}
@@ -951,7 +1024,31 @@
                                     id="contact_tel-{{ $guest_user['sync_id'] }}">
                                     <div class="d-flex align-items-start">
                                         <div class="contact-img">
-                                            @if ($guest_user['profile'] != '')
+                                            @php
+                                            // Check if the profile image exists and has a valid extension
+                                            $validExtensions = ['jpg', 'jpeg', 'png'];
+                                            $profile = $guest_user['profile'] ?? '';
+                                            $extension = pathinfo($profile, PATHINFO_EXTENSION);
+
+                                            $isValidImage = !empty($profile) && in_array(strtolower($extension), $validExtensions);
+                                        @endphp
+
+                                        @if ($isValidImage)
+                                            <img src="{{ asset('storage/profile/' . $guest_user['profile']) }}" alt="user-img">
+                                        @else
+                                            @php
+                                                $firstInitial = !empty($guest_user['firstname'])
+                                                    ? strtoupper($guest_user['firstname'][0])
+                                                    : '';
+                                                $lastInitial = !empty($guest_user['lastname'])
+                                                    ? strtoupper($guest_user['lastname'][0])
+                                                    : '';
+                                                $initials = $firstInitial . $lastInitial;
+                                                $fontColor = 'fontcolor' . $firstInitial;
+                                            @endphp
+                                            <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
+                                        @endif
+                                            {{-- @if ($guest_user['profile'] != '')
                                                 <img src="{{ $guest_user['profile'] }}" alt="user-img">
                                             @else
                                                 @php
@@ -965,7 +1062,7 @@
                                                     $fontColor = 'fontcolor' . $firstInitial;
                                                 @endphp
                                                 <h5 class="{{ $fontColor }}"> {{ $initials }}</h5>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="text-start">
                                             <h5>{{ $guest_user['firstname'] }}
