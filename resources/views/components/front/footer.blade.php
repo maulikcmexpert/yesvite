@@ -908,4 +908,14 @@
 
 
     });
+
+    function openApp() {
+            // Try opening the Yesvite app
+            window.location.href = "comappyesvite://somepage";
+
+            // If the app is not installed, redirect to the App Store after 2 seconds
+            // setTimeout(function() {
+            //     window.location.href = "https://apps.apple.com/app/your-app-id";
+            // }, 2000);
+        }
 </script>

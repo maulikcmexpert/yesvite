@@ -11,7 +11,7 @@
             <img src="{{asset('assets/front/image/play_store.svg')}}" alt="google-app">
         </a>
         {{-- <a href="{{isset($getSocialLink->appstore_link) && $getSocialLink->appstore_link !=null ? $getSocialLink->appstore_link : "#"}}" class="mobile-app"  target="_blank"> --}}
-        <a href="#" class="mobile-app"  target="_blank">
+        <a href="https://apps.apple.com/app/6736650042" class="mobile-app"  target="_blank">
             <img src="{{asset('assets/front/image/app_store.svg')}}" alt="mobile-app">
         </a>
     </div>
@@ -29,46 +29,46 @@
 
 
 <script>
-    $(document).on('click','.mobile-app',function(){
-        openApp();
-    });
-  function openApp() {
-    const appLink = "comappyesvite://somepage";         // App deep link
-    const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
+    // $(document).on('click','.mobile-app',function(){
+        // openApp();
+    // });
+//   function openApp() {
+//     const appLink = "comappyesvite://somepage";         // App deep link
+//     // const appStoreLink = "https://apps.apple.com/app/6736650042";  // App Store link
 
-    let appOpened = false;  
-    const fallbackTimeout = 1500;  // Timeout for fallback
+//     let appOpened = false;  
+//     const fallbackTimeout = 1500;  // Timeout for fallback
 
-    // ✅ Listen for visibility change (Safari-compatible)
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true;  // App opened successfully
-        }
-    };
+//     // ✅ Listen for visibility change (Safari-compatible)
+//     const onVisibilityChange = () => {
+//         if (document.hidden) {
+//             appOpened = true;  // App opened successfully
+//         }
+//     };
     
-    document.addEventListener('visibilitychange', onVisibilityChange);
+//     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    // ✅ Start tracking time
-    const now = Date.now();
+//     // ✅ Start tracking time
+//     const now = Date.now();
 
-    // ✅ Try to open the app
-    window.location.href = appLink;
+//     // ✅ Try to open the app
+//     window.location.href = appLink;
 
-    // ✅ Check if the app opened
-    const interval = setInterval(() => {
-        const elapsed = Date.now() - now;
+//     // ✅ Check if the app opened
+//     const interval = setInterval(() => {
+//         const elapsed = Date.now() - now;
 
-        if (appOpened || elapsed > fallbackTimeout) {
-            clearInterval(interval);  // Stop checking
-            document.removeEventListener('visibilitychange', onVisibilityChange);
+//         if (appOpened || elapsed > fallbackTimeout) {
+//             clearInterval(interval);  // Stop checking
+//             document.removeEventListener('visibilitychange', onVisibilityChange);
 
-            // ✅ Fallback: Redirect to App Store if the app didn't open
-            if (!appOpened) {
-                window.location.replace(appStoreLink);
-            }
-        }
-    }, 200);  // Check every 200ms
-}
+//             // ✅ Fallback: Redirect to App Store if the app didn't open
+//             if (!appOpened) {
+//                 window.location.replace(appStoreLink);
+//             }
+//         }
+//     }, 200);  // Check every 200ms
+// }
 
 
 
@@ -130,16 +130,16 @@
     //     window.location.href = appLink;
 
   
-    //     setTimeout(() => {
-    //         const elapsed = Date.now() - now;
-    //         // alert(elapsed);
-    //         if (!appOpened && elapsed<1502) {
-    //             window.location.href = appStoreLink;  // App Store redirect
-    //         }
+    //     // setTimeout(() => {
+    //     //     const elapsed = Date.now() - now;
+    //     //     // alert(elapsed);
+    //     //     if (!appOpened && elapsed<1502) {
+    //     //         window.location.href = appStoreLink;  // App Store redirect
+    //     //     }
 
     //         // Clean up event listener
     //         window.removeEventListener('pagehide', onPageHide);
-    //     }, 1500);
+    //     // }, 1500);
     // }
 </script>    
 @endpush
