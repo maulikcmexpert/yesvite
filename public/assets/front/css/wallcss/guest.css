@@ -1476,7 +1476,7 @@ foreignObject{
 }
 
 
-#addguest .invite-contact-wrp .invite-contact .form-check-input.failed-checkout:checked{
+#addguest .invite-contact-wrp .invite-contact .form-check-input:checked{
     background-color: #2DA9FC !important;
     border-color: #2DA9FC !important;
 }
