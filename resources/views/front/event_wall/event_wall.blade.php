@@ -292,7 +292,7 @@
                                                                                     Edit
                                                                                 </button>
                                                                             </li>
-                                                                            @endif
+
                                                                             @if($eventDetails['is_host'] == 1 || $eventDetails['is_co_host'] == "1"||$post['user_id']==$login_user_id)
                                                                             <li>
                                                                                 <button
@@ -313,6 +313,7 @@
                                                                                     Delete
                                                                                 </button>
                                                                             </li>
+                                                                            @endif
                                                                             @endif
 
 
