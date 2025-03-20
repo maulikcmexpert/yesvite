@@ -912,61 +912,87 @@
 //     const appLink = "comappyesvite://"; 
 //     window.location.href = appLink;
 // }
+let timeout;
 
+function preventPopup() {
+    clearTimeout(timeout);
+    timeout = null;
+    window.removeEventListener('pagehide', preventPopup);
+}
 
 function openApp() {
-    
+    const appUrl = "comappyesvite://";   // Your app URL scheme
 
-    const appLink = "comappyesvite://";
-    const isChrome = navigator.userAgent.toLowerCase().includes('crios');
-    
-    let appOpened = false;
+    // ✅ Use iframe to prevent browser alert
+    $('<iframe />')
+        .attr('src', appUrl)
+        .attr('style', 'display:none;')
+        .appendTo('body');
 
-    // ✅ Detect app open using visibility and blur events
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            appOpened = true; // App opened successfully
-        }
-    };
+    // ✅ Set timeout to do nothing if the app is not installed
+    timeout = setTimeout(function () {
+        // Do nothing on failure (no fallback, no alert)
+        console.log('App not installed, but no alert shown.');
+    }, 1500);   // Adjust timeout if needed
 
-    const onBlur = () => {
-        appOpened = true;  // App opened successfully
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onBlur);
-
-    if (isChrome) {
-        // ✅ Chrome on iOS: Use <a> element click
-        const link = document.createElement('a');
-        link.href = appLink;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-
-        link.click();
-
-        setTimeout(() => {
-            document.body.removeChild(link);
-        }, 100);
-    } else {
-        // ✅ Safari & other browsers
-        window.location.href = appLink;
-
-        // ✅ Remove invalid alert in Safari
-        setTimeout(() => {
-            if (!appOpened) {
-
-                history.replaceState(null, '', window.location.href);
-            }
-        }, 1500);
-    }
-
-    // ✅ Cleanup event listeners after 2 seconds
-    setTimeout(() => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onBlur);
-    }, 2000);
+    // ✅ Prevent browser alert if the app opens successfully
+    window.addEventListener('pagehide', preventPopup);
 }
+
+
+// function openApp() {
+    
+
+//     const appLink = "comappyesvite://";
+//     const isChrome = navigator.userAgent.toLowerCase().includes('crios');
+    
+//     let appOpened = false;
+
+//     // ✅ Detect app open using visibility and blur events
+//     const onVisibilityChange = () => {
+//         if (document.hidden) {
+//             appOpened = true; // App opened successfully
+//         }
+//     };
+
+//     const onBlur = () => {
+//         appOpened = true;  // App opened successfully
+//     };
+
+//     document.addEventListener('visibilitychange', onVisibilityChange);
+//     window.addEventListener('blur', onBlur);
+
+//     if (isChrome) {
+//         // ✅ Chrome on iOS: Use <a> element click
+//         const link = document.createElement('a');
+//         link.href = appLink;
+//         link.style.display = 'none';
+//         document.body.appendChild(link);
+
+//         link.click();
+
+//         setTimeout(() => {
+//             document.body.removeChild(link);
+//         }, 100);
+//     } else {
+//         // ✅ Safari & other browsers
+//         window.location.href = appLink;
+
+//         // ✅ Remove invalid alert in Safari
+//         setTimeout(() => {
+//             if (!appOpened) {
+
+//                 history.replaceState(null, '', window.location.href);
+//             }
+//         }, 1500);
+//     }
+
+//     // ✅ Cleanup event listeners after 2 seconds
+//     setTimeout(() => {
+//         document.removeEventListener('visibilitychange', onVisibilityChange);
+//         window.removeEventListener('blur', onBlur);
+//     }, 2000);
+// }
 
 
 </script>
