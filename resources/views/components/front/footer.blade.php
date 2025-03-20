@@ -920,7 +920,7 @@ function openApp() {
     
     let appOpened = false;
 
-    // ✅ Detect app open using visibility and blur events
+    // Detect app open using visibility and blur events
     const onVisibilityChange = () => {
         if (document.hidden) {
             appOpened = true; // App opened successfully
@@ -935,38 +935,34 @@ function openApp() {
     window.addEventListener('blur', onBlur);
 
     if (isChrome) {
-        // ✅ Chrome on iOS: Use <a> element click
+        // Chrome on iOS: Use <a> element click
         const link = document.createElement('a');
         link.href = appLink;
         link.style.display = 'none';
         document.body.appendChild(link);
 
-        // Attempt to open the app
         link.click();
 
-        // Clean up the link element afterward
         setTimeout(() => {
             document.body.removeChild(link);
         }, 100);
     } else {
-        // ✅ Safari & other browsers
+        // Safari & other browsers
         const startTime = Date.now();
         window.location.href = appLink;
 
-        // ✅ Remove invalid alert in Safari
-        // If the app doesn't open, we replace the URL without triggering an alert
-        setTimeout(() => {
-            // Check if the app was not opened within 1.5 seconds
-            if (!appOpened) {
-                const elapsed = Date.now() - startTime;
-                if (elapsed < 1500) { // Only replace if the delay is shorter than 1.5 seconds
-                    history.replaceState(null, '', window.location.href);
-                }
+        // Remove invalid alert in Safari
+        const checkAppOpened = setInterval(() => {
+            if (appOpened || (Date.now() - startTime > 1500)) {
+                clearInterval(checkAppOpened);
+                return;
             }
-        }, 1500);
+            // If the app did not open, replace the state to avoid alert
+            history.replaceState(null, '', window.location.href);
+        }, 100);
     }
 
-    // ✅ Cleanup event listeners after 2 seconds
+    // Cleanup event listeners after 2 seconds
     setTimeout(() => {
         document.removeEventListener('visibilitychange', onVisibilityChange);
         window.removeEventListener('blur', onBlur);
