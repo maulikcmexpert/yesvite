@@ -871,101 +871,35 @@ $(document).ready(function () {
 
         // Function to toggle visibility of the bulk-select-photo-wrp
         function toggleBulkSelectWrapper() {
-            const selectedCount = $(".selected_image:checked").length; // Count selected checkboxes
             const selected_bulk_image = $(".selected_bulk_image:checked").length;
-            console.log(selected_bulk_image);
-            const bulkSelectWrapper = $(
-                ".selecte_delete_photos"
-            );
-            const bulkDeleteBtn = $(".select_bulk_btn"); // Div for delete option
-            console.log('selectded',selectedCount);
+            const bulkDeleteBtn = $(".select_bulk_btn"); // Delete button wrapper
+            const bulkSelectWrapper = $(".selecte_delete_photos");
+            const login_user = $('#login_user_id').val(); // Get logged-in user ID
+            let allOwnPosts = true; // Flag to check if all selected posts belong to user
 
-            console.log(selectedCount);
-            console.log(selected_bulk_image);
+            $(".selected_bulk_image:checked").each(function () {
+                const post_user_id = $(this).attr('data-user_id');
+                if (post_user_id !== login_user) {
+                    allOwnPosts = false;
+                }
+            });
 
-            if (selectedCount >= 2) {
-
-                console.log('downloads'+1);
-                bulkSelectWrapper.removeClass("d-none"); // Show the div
-                bulkSelectWrapper
-                    .find(".phototab-add-new-photos-img p")
-                    .text(`${selectedCount} Photos Selected`);
-                    bulkDeleteBtn.addClass("d-none");
-
-                    $('.add_new_photo_btn').addClass('d-none');
-            } else if (selectedCount <= 1) {
-                console.log('downloads'+2);
-
+            if (selected_bulk_image > 0) {
+                if (allOwnPosts) {
+                    bulkDeleteBtn.removeClass("d-none"); // Show delete button if all are user’s posts
+                } else {
+                    bulkDeleteBtn.addClass("d-none"); // Hide delete button if any post is not user’s
+                }
+                bulkDeleteBtn.find(".bulk_delete_selected p").text(`${selected_bulk_image} Photos Selected`);
+                bulkSelectWrapper.addClass("d-none");
+                $('.add_new_photo_btn').addClass('d-none');
+            } else {
                 bulkSelectWrapper.addClass("d-none");
                 bulkDeleteBtn.addClass("d-none");
-
-
-
                 $('.add_new_photo_btn').removeClass('d-none');
-
             }
-
-            // if (selected_bulk_image >= 1) {
-
-
-            //     bulkSelectWrapper.removeClass("d-none"); // Show the div
-            //     bulkSelectWrapper
-            //         .find(".phototab-add-new-photos-img p")
-            //         .text(`${selectedCount} Photos Selected`);
-            //         bulkDeleteBtn.addClass("d-none");
-            // } else if (selected_bulk_image <= 1) {
-
-            //     bulkSelectWrapper.addClass("d-none");
-            //     bulkDeleteBtn.addClass("d-none");
-
-            // }
-            if ($(".selected_bulk_image:checked").length === 0) {
-                $('.add_new_photo_btn').removeClass('d-none');
-                bulkDeleteBtn.addClass("d-none");
-            }
-
-            if(selected_bulk_image!=0){
-                if (selected_bulk_image >= 1) {
-                    console.log('bulk'+1);
-
-                    bulkDeleteBtn.removeClass("d-none"); // Show the div
-                    bulkDeleteBtn
-                        .find(".bulk_delete_selected p")
-                        .text(`${selected_bulk_image} Photos Selected`); // Update the count
-                        bulkSelectWrapper.addClass("d-none"); // Show the div
-
-                        $('.add_new_photo_btn').addClass('d-none');
-
-                } else if (selected_bulk_image <= 1) {
-                    console.log('bulk'+2);
-
-                    // bulkDeleteBtn.addClass("d-none");
-                    bulkSelectWrapper.addClass("d-none");
-                    bulkDeleteBtn.addClass("d-none");
-
-                    $('.add_new_photo_btn').removeClass('d-none');
-
-
-                }
-            }
-
-
-
-
         }
-        // $(document).on("change", ".selected_image", function () {
-        //     const photoCard = $(this).closest(".photo-card-photos-wrp");
 
-        //     if ($(this).is(":checked")) {
-        //         photoCard.find(".selected-photo-btn").show();
-        //     } else {
-        //         photoCard.find(".selected-photo-btn").hide();
-
-
-        //     }
-
-        //     toggleBulkSelectWrapper(); // Update bulk selection UI
-        // });
 
         $(document).on("change", ".selected_bulk_image", function () {
             const photoCard = $(this).closest(".photo-card-photos-wrp");
@@ -983,19 +917,6 @@ $(document).ready(function () {
         });
 
 
-        // // Mouse down event
-        // $(".img_click").on("mousedown", function (e) {
-        //     e.preventDefault();
-        //     console.log("Mouse down detected");
-        //     isLongPress = false;
-        //     const that = $(this);
-
-        //     // Start the timer for a long press
-        //     pressTimer = setTimeout(() => {
-        //         isLongPress = true; // Set the flag for a long press
-        //         handleLongPress(that); // Execute the long press action
-        //     }, longPressDelay);
-        // });
 
 
         $(document).on("click", ".img_click", function (e) {
