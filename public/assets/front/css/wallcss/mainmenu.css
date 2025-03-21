@@ -3529,7 +3529,7 @@ padding: 12px 24px;
     }
 
     .newEvent-btns-section .add_new_event_btn{
-        display: inline-flex !important;
+        display: inline-flex;
         background-color: var(--primary-black);
     }
 
