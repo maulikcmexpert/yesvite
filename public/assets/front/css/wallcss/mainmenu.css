@@ -3535,6 +3535,11 @@ padding: 12px 24px;
         z-index: 999;
     }
 
+    .newEvent-btns-section .add_new_event_btn{
+        display: inline-flex !important;
+        background-color: var(--secondary-black);
+    }
+
    
 
     .responsive-calendar .weekdays {
