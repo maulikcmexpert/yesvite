@@ -1024,13 +1024,19 @@ header{
     }
     .notification-dropdown-header h3 span {
         font-size: 9px;
-        padding: 4px 6px;
+        padding: 4px;
         letter-spacing: normal;
+        min-width: 20px;
+        height: 20px;
+        text-align: center;
+        border-radius: 50%;
     }
 
     .g-badge, .n-badge{
         top: -8px;
         right: -10px;
+        height: 20px;
+        border-radius: 50%;
     }
 
     .notification-dropdown-header h5 {
