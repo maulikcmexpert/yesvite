@@ -9002,11 +9002,9 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
 $(document).on("click", ".saveGuestOnly", async function (e) {
     var send_invites=$(this).attr('data-sendIvites');
     alert(send_invites);
-    if(send_invites=="1"){
-        if ($(this).prop("disabled")) {
+    if(send_invites=="1" && $(this).attr('aria-disabled') === "true"){
             alert(2);
             return;  // Exit the function
-        }
    
     }
     // e.preventDefault();
