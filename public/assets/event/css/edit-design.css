@@ -77,8 +77,8 @@
 }
 
 .edit-images-button-wrp {
-    width: 100%;
-    max-width: 480px;
+    width: max-content;
+    max-width: max-content;
     margin: 0px auto;
     height: 100px;
     padding: 10px 16px;
@@ -98,6 +98,7 @@
 .edit-images-button-inner button {
     border: none !important;
     background: none !important;
+    min-width: 70px;
 }
 
 .edit-images-button-inner button span {
