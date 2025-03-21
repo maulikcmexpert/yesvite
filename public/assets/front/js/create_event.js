@@ -10082,7 +10082,7 @@ $(document).on('click', 'input[name="email_invite[]"]', function () {
     });
 
    
-    if (anyChecked) {
+    if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
