@@ -919,7 +919,9 @@
 
 function openApp() {
     const appPackage = "com.yesvite.android";   // Your Android app package name
+    // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
     const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
+
     const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
 
     // Try opening the app
