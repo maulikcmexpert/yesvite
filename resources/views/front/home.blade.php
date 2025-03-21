@@ -50,11 +50,11 @@ $getSocialLink = getSocialLink();
                                                 <path d="M7.41209 13.9167H7.41957" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
 
-                                                {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                                                 <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                                                 <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                                                </svg> --}}
+                                                </svg>
                                             </span>
                                             </button>
                                         </div>
