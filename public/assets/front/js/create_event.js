@@ -10072,12 +10072,15 @@ function generateProfileImage(firstname, lastname) {
 }
 
 $(document).on('click', 'input[name="email_invite[]"]', function () {
-    alert();
+    // alert();
+    let checkedCount = 0;
+
     let anyCheckedNotDisabled = false;
 
     $('input[name="email_invite[]"]').each(function () {
         if ($(this).is(':checked') && !$(this).prop('disabled')) {
             anyCheckedNotDisabled = true;
+            checkedCount++;
         }
     });
 
@@ -10087,4 +10090,6 @@ $(document).on('click', 'input[name="email_invite[]"]', function () {
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
+    console.log(checkedCount);
+    
 });
