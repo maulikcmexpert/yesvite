@@ -57,17 +57,7 @@ $getSocialLink = getSocialLink();
                                                 </svg> --}}
                                             </span>
                                             </button>
-                                            <button type="button" class="add_new_event_btn">
-                                                <span class="responsive-text">Create Event</span>
-                                                <span class="responsive-icon">
-                                                    <i class="fa-solid fa-plus">
-                                                    {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                                                    <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                                                    <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                                                    </svg> --}}
-                                                </span>
-                                                </button>
+                                       
                                         </div>
                                     </div>
                                     <div class="col-xl-5">
