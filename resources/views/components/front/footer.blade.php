@@ -919,7 +919,7 @@
 
 function openApp() {
     const appPackage = "com.yesvite.test";  // Android App Scheme
-    const appLink = "intent://scheme=https;package=" + appPackage + ";end;";
+    $appScheme = "https://open"; // Define your app scheme
     // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
 
     const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
