@@ -442,7 +442,7 @@
                                                                 </svg>
                                                             </button> --}}
 
-                                                            <button type="button" class="add_new_event_btn me-3 "
+                                                            <button type="button" class="add_potluck_cat_btn me-3 "
                                                                 data-bs-toggle="modal" data-bs-target="#maindishes"  data-category-id="{{ $category['id'] }}"
                                                                 data-category-name="{{ $category['category'] }}"
                                                         ><i class="fa-solid fa-plus"></i> Item</button>
