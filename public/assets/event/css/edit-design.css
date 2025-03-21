@@ -1593,17 +1593,17 @@
 
 @media only screen and (min-width: 576px) and (max-width:4000px){
     .image-edit-inner-img {
-        /* width: max-content !important;
+        width: max-content !important;
         max-width: max-content !important;
         height: calc(100dvh - 330px) !important;
         max-height: 2160px !important;
         margin: 0px auto;
-        aspect-ratio: 5 / 7; */
-        max-width: 800px;
+        aspect-ratio: 5 / 7;
+        /* max-width: 800px;
         height: calc(100vh - 68px - 80px - 100px);
         max-height: 67.25rem;
         width: auto;
-        margin: 0px auto;
+        margin: 0px auto; */
     }
     .image-edit-inner-img canvas{
         object-fit: contain;
@@ -1611,16 +1611,16 @@
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
     .image-edit-inner-img {
-        /* width: max-content !important;
+        width: max-content !important;
         max-width: max-content !important;
         height: calc(100dvh - 290px) !important;
         margin: 0px auto;
-        aspect-ratio: 5 / 7; */
-        max-width: 800px;
+        aspect-ratio: 5 / 7;
+        /* max-width: 800px;
         height: calc(100vh - 68px - 80px - 100px);
         max-height: 67.25rem;
         width: auto;
-        margin: 0px auto; 
+        margin: 0px auto;  */
     }
     .image-edit-inner-img canvas{
         object-fit: contain;
