@@ -1598,7 +1598,7 @@
         margin: 0px auto;
         aspect-ratio: 5 / 7; */
         max-width: unset;
-        height: calc(100vh - 68px - 80px);
+        height: calc(100vh - 68px - 80px - 100px);
         max-height: 43.25rem;
         width: auto;
     }
@@ -1611,7 +1611,7 @@
         margin: 0px auto;
         aspect-ratio: 5 / 7; */
         max-width: unset;
-        height: calc(100vh - 68px - 80px);
+        height: calc(100vh - 68px - 80px - 100px);
         max-height: 43.25rem;
         width: auto;
         
