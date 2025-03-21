@@ -917,6 +917,24 @@
 // // Automatically call the function on page load
 // window.onload = openApp;
 
+function openApp() {
+    const appPackage = "com.yesvite.android";   // Your Android app package name
+    // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
+    const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
+
+    const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+
+    // Try opening the app
+    window.location.href = appLink;
+
+    // Fallback: Redirect to the Play Store if the app doesn't open
+    // setTimeout(() => {
+    //     window.location.href = playStoreLink;
+    // }, 2000);  // Redirect after 2 seconds
+}
+
+// Automatically call the function on page load
+window.onload = openApp;
 
 // ;
 
