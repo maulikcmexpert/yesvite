@@ -3508,7 +3508,7 @@ padding: 12px 24px;
     }
 
     .mobile-calender-btn {
-        display: flex;
+        display: none;
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 340px;
@@ -3537,7 +3537,7 @@ padding: 12px 24px;
 
     .newEvent-btns-section .add_new_event_btn{
         display: inline-flex !important;
-        background-color: var(--secondary-black);
+        background-color: var(--primary-black);
     }
 
    
