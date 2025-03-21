@@ -932,13 +932,13 @@ function openApp() {
     // // Try opening the app
     // window.location.href = appLink;
 
-    document.addEventListener('DOMContentLoaded', openApp);  // Faster execution
 
     // Fallback: Redirect to the Play Store if the app doesn't open
     // setTimeout(() => {
     //     window.location.href = playStoreLink;
     // }, 2000);  // Redirect after 2 seconds
 }
+document.addEventListener('DOMContentLoaded', openApp);  // Faster execution
 
 // Automatically call the function on page load
 // window.onload = openApp;
