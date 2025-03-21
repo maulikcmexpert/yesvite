@@ -34,7 +34,7 @@ $getSocialLink = getSocialLink();
 
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
-                                            <button type="button" class="mobile-calender-btn d-none">
+                                            <button type="button" class="mobile-calender-btn">
                                             <span class="responsive-text">Calendar</span>
                                             <span class="responsive-icon">
                                                 <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,10 +57,18 @@ $getSocialLink = getSocialLink();
                                                 </svg> --}}
                                             </span>
                                             </button>
-                                            <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan"
-                                            ><i class="fa-solid fa-plus"></i> New Event</a
-                                          >
-                                                                                </div>
+                                            <button type="button" class="add_new_event_btn">
+                                                <span class="responsive-text">Create Event</span>
+                                                <span class="responsive-icon">
+                                                    <i class="fa-solid fa-plus">
+                                                    {{-- <svg class="d-none" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                                                    <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                                                    <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                                                    </svg> --}}
+                                                </span>
+                                                </button>
+                                        </div>
                                     </div>
                                     <div class="col-xl-5">
                                         <input type="hidden" id="totalmonths" value="{{$numMonths}}"/>
