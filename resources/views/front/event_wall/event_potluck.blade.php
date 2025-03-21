@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if ($eventDetails['hosted_by'])
+                                    {{-- @if ($eventDetails['hosted_by'])
                                         <div class="host-users-detail cmn-card">
                                             @if (!empty($eventDetails['co_hosts']))
                                             <h4 class="title">Your hosts</h4>
@@ -208,7 +208,7 @@
                                                 “{{ $eventDetails['message_to_guests'] }}”
                                             </p>
                                         </div>
-                                    @endif
+                                    @endif --}}
 
                                     {{-- {{   dd(  $potluckDetail['podluck_category_list'])}} --}}
                                     <div class="post-potluck-category cmn-card">
