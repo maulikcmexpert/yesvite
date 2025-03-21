@@ -224,7 +224,7 @@
                                                         fill="#F73C71" />
                                                 </svg>
                                             </button> --}}
-                                            <button type="button" class="add_new_event_btn ms-auto border-0" data-bs-toggle="modal"
+                                            <button type="button" class="add_potluck_cat_btn ms-auto border-0" data-bs-toggle="modal"
                                                 data-bs-target="#editmodal" 
                                             ><i class="fa-solid fa-plus"></i> Category</button>
                                         </div>

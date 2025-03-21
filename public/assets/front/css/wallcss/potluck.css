@@ -21,6 +21,19 @@
     height: 100%;
 }
 
+.add_potluck_cat_btn{
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    line-height: normal;
+    background-color: var(--secondary-black);
+    border-radius: 16px;
+    color: var(--white);
+    padding: 12px 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .total-item-cat .col-lg-6{
     padding-left: 8px;
     padding-right: 8px;
