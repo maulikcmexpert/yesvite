@@ -61,7 +61,7 @@
     -o-border-radius: 20px;
     display: flex;
     justify-content: stretch;
-    height: 100vh;
+    height: calc(100dvh - 200px);
     width: 100%;
 }
 
