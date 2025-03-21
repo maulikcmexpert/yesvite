@@ -3066,8 +3066,8 @@
     }
 
     .edit-images-button-wrp {
-        width: 100%;
-        max-width: 327px;
+        width: max-content;
+        max-width: max-content;
     }
 
     .edit-image-main-wrp {
@@ -3132,7 +3132,20 @@
     .edit-images-button-wrp{
         height: 75px !important;
     }
+    .edit-images-button-inner button {
+        border: none !important;
+        background: none !important;
+        min-width: 50px;
+    }
 
+}
+
+@media only screen and (max-width: 424px){
+    .edit-images-button-inner button {
+        border: none !important;
+        background: none !important;
+        min-width: 50px;
+    }
 }
 
 @media only screen and (max-width: 370px) {
