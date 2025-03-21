@@ -206,7 +206,7 @@
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div> --}}
                                 <div>
-                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled" data-sendIvites="1"  aria-disabled="true">Send Invites</a>
+                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled" data-sendIvites="1"  aria-disabled="true">Send Invites(0)</a>
                                 </div>
                             </div>
                             {{-- <div class="design-seting">

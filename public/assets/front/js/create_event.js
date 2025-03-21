@@ -10084,12 +10084,16 @@ $(document).on('click', '.user_choice', function () {
         }
     });
 
-   
+    let buttonText = `Send Invites`;   
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
+        buttonText += ` (${checkedCount})`;
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
     console.log(checkedCount);
+
+    $('a.saveGuestOnly.isdisabled').text(buttonText);
+
     
 });
