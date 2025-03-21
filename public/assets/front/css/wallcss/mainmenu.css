@@ -3335,6 +3335,11 @@ padding: 12px 24px;
     width: 100%; /* Prevent layout shifts */
 }
 
+.newEvent-btns-section{
+    display: none;
+}
+
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 10000px){
@@ -3530,10 +3535,7 @@ padding: 12px 24px;
         z-index: 999;
     }
 
-    .newEvent-btns-section{
-        display: none;
-    }
-
+   
 
     .responsive-calendar .weekdays {
         justify-content: center;
