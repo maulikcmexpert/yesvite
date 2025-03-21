@@ -882,7 +882,7 @@ ul.member-lists li:last-child {
     /* height: 64px; */
     position: sticky;
     width: 100%;
-    bottom: 0;
+    bottom: 15px;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     background: #fff;
     border-bottom-right-radius: 20px;
