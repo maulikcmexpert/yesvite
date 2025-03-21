@@ -2827,16 +2827,16 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    position: sticky;
+    /* position: sticky; */
     /* top: 0; */
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%;
+    transform: translateX(-50%); */
     /* bottom: 0px; */
     z-index: 20;
     border: none;
     pointer-events: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .mobile-calender-btn span {
@@ -3509,14 +3509,20 @@ padding: 12px 24px;
         max-width: 340px;
     }
 
-    .mobile-calender-btn {
+    /* .mobile-calender-btn {
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
         bottom: 15px;
         z-index: 20;
         margin-top: 0px;
+    } */
+
+    .newEvent-btns-section{
+        display: none;
     }
+
+
     .responsive-calendar .weekdays {
         justify-content: center;
     }
@@ -3543,6 +3549,21 @@ padding: 12px 24px;
         display: none !important;
     }
 }
+
+@media screen and (max-width:1199px) {
+    .newEvent-btns-section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 15px;
+        z-index: 999;
+    }
+    
+}
+
 
 @media only screen and (max-width: 991px) {
     .home-main-right {
