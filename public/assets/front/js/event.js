@@ -670,9 +670,6 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
-    if($(this).hasClass('past_date_calender')){
-        return;
-    }
     $('#home_loader').css('display','flex');    
 
     var current_page=$('#current_page').val();
