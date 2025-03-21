@@ -15,7 +15,8 @@
                             <input type="hidden" name="rsvp_event_id" id="rsvp_event_id" />
                         </div>
                     </div>
-                    <button type="button" class="btn-close close_notification_rsvp" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close close_notification_rsvp" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="rsvp-custom-radio guest-rsvp-attend">
@@ -890,7 +891,7 @@
             inactivityTimeout = setTimeout(() => {
                 console.log("User inactive for 5 minutes, checking login...");
                 checkUserLogin();
-            },300000);
+            }, 300000);
 
 
         }
@@ -908,51 +909,29 @@
 
 
     });
-  // Define the function
-// function openApp() {
-//     const appLink = "comappyesvite://"; 
-//     window.location.href = appLink;
-// }
 
-// // Automatically call the function on page load
-// window.onload = openApp;
+    // Define the function
+    // function openApp() {
+    //     const appLink = "comappyesvite://"; 
+    //     window.location.href = appLink;
+    // }
 
-function openApp() {
-    const appPackage = "com.yesvite.test";  // Android App Scheme
-    const appLink = `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    // // Automatically call the function on page load
+    // window.onload = openApp;
 
-    window.location.replace(appLink);  // Faster and doesn't add to history
-
-    // // const appLink = "intent://scheme=https;package=" + appPackage + ";end;";
-    // // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
-
-    // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-
-    // // alert(appLink);
-    // // Try opening the app
-    // window.location.href = appLink;
-
-
-    // Fallback: Redirect to the Play Store if the app doesn't open
-    // setTimeout(() => {
-    //     window.location.href = playStoreLink;
-    // }, 2000);  // Redirect after 2 seconds
-}
-// document.addEventListener('DOMContentLoaded', openApp);  // Faster execution
-
-document.addEventListener('DOMContentLoaded', () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    if (/android/i.test(userAgent)) {
-        openApp();  // Only for Android devices
+    function openApp() {
+        const appPackage = "com.yesvite.test";
+        const appLink =
+            `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+        window.location.replace(appLink);
+        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
     }
-});
-// Automatically call the function on page load
-// window.onload = openApp;
 
-// ;
+    document.addEventListener('DOMContentLoaded', () => {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-
-
-
+        if (/android/i.test(userAgent)) {
+            openApp(); // Only for Android devices
+        }
+    });
 </script>
