@@ -1343,8 +1343,10 @@ $('#notification_rsvp_btn').on('click', function (e) {
             // if (!$('.toast').length) {
                 toastr.success(response.text);
                 var modalElement = document.getElementById('pending-rsvp-modal');
+                var userId = $('#login_user_id').val();  // Get the user ID from hidden input
+
                 if (modalElement.classList.contains('show')) {
-                    localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+                    localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());
                 }
                 window.location.reload();
                 $('#home_loader').css('display','none');
@@ -1726,40 +1728,73 @@ $(".pending_rsvp_slider").owlCarousel({
 //     modal.show(); // Ensure Bootstrap handles modal visibility properly
 // });
 
-$(document).ready(function () {
+// $(document).ready(function () {
     
-    var modalElement = document.getElementById('pending-rsvp-modal');
-    var modal = new bootstrap.Modal(modalElement);
-    var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
-    var currentTime = new Date().getTime();
-    // var oneMinute = 60 * 1000; // 1 minute in milliseconds
-    var oneMinute = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+//     var modalElement = document.getElementById('pending-rsvp-modal');
+//     var modal = new bootstrap.Modal(modalElement);
+//     var lastClosedTime = localStorage.getItem('pending_modal_ClosedAt');
+//     var currentTime = new Date().getTime();
+//     // var oneMinute = 60 * 1000; // 1 minute in milliseconds
+//     var oneMinute = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-    if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
-        modal.show();
-        document.body.classList.add("no-scroll"); // Disable background scrolling
+//     if (!lastClosedTime || (currentTime - lastClosedTime) > oneMinute) {
+//         modal.show();
+//         document.body.classList.add("no-scroll"); // Disable background scrolling
 
-    }
-    $(document).on('click', '.close_rsvp_pending', function () {
-        modal.hide();
-        localStorage.setItem('modalClosedAt', new Date().getTime());
-        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     }
+//     $(document).on('click', '.close_rsvp_pending', function () {
+//         modal.hide();
+//         localStorage.setItem('modalClosedAt', new Date().getTime());
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
 
-    });
-    $(document).on('click', '.close_notification_rsvp', function () {
-        $('#rsvp_by_notification').hide();
-        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     });
+//     $(document).on('click', '.close_notification_rsvp', function () {
+//         $('#rsvp_by_notification').hide();
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
 
         
 
-        // localStorage.setItem('modalClosedAt', new Date().getTime());
+//         // localStorage.setItem('modalClosedAt', new Date().getTime());
+//     });
+
+//     $(modalElement).on('hidden.bs.modal', function () {
+//         localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+
+//     });
+// });
+
+$(document).ready(function () {
+
+    var userId = $('#login_user_id').val();  // Get the user ID from hidden input
+    var modalElement = document.getElementById('pending-rsvp-modal');
+    var modal = new bootstrap.Modal(modalElement);
+
+    var lastClosedTime = localStorage.getItem(`pending_modal_ClosedAt_${userId}`); // User-specific key
+    var currentTime = new Date().getTime();
+    var oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+    if (!lastClosedTime || (currentTime - lastClosedTime) > oneDay) {
+        modal.show();
+        document.body.classList.add("no-scroll"); // Disable background scrolling
+    }
+
+    $(document).on('click', '.close_rsvp_pending', function () {
+        modal.hide();
+        localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+    });
+
+    $(document).on('click', '.close_notification_rsvp', function () {
+        $('#rsvp_by_notification').hide();
+        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
     });
 
     $(modalElement).on('hidden.bs.modal', function () {
-        localStorage.setItem('pending_modal_ClosedAt', new Date().getTime());
+        localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
-
     });
+
 });
 
 // $(document).ready(function () {

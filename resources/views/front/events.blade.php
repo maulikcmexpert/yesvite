@@ -1,4 +1,6 @@
-{{-- {{dd($filter);}} --}}
+@php
+          $login_user_id = Auth::guard('web')->user()->id;
+@endphp
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
 <section class="contact-details profile-details supportive-event-wrp">
@@ -6,7 +8,8 @@
         <div class="row">
             <x-front.sidebar :profileData="[]" />
             <div class="calender-supportive-div col-xl-9 col-lg-9 col-md-8">
-                <div class="row">
+              <input type="hidden" id="login_user_id" value="{{$login_user_id}}"/>
+              <div class="row">
                     <div class="col-xl-7">
                         <div class="home-center-main events-center-main">
                             <div class="home-center-content">
