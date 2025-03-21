@@ -10084,10 +10084,10 @@ $(document).on('click', '.user_choice', function () {
         }
     });
 
-    let buttonText = `Send Invites`;   
+    let buttonText = `Send Invites(0)`;   
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
-        buttonText += ` (${checkedCount})`;
+        buttonText = ` Send Invites(${checkedCount})`;
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
