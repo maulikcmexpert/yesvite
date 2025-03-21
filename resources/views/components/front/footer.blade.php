@@ -926,9 +926,9 @@ function openApp() {
     window.location.href = appLink;
 
     // Fallback: Redirect to the Play Store if the app doesn't open
-    setTimeout(() => {
-        window.location.href = playStoreLink;
-    }, 2000);  // Redirect after 2 seconds
+    // setTimeout(() => {
+    //     window.location.href = playStoreLink;
+    // }, 2000);  // Redirect after 2 seconds
 }
 
 // Automatically call the function on page load
