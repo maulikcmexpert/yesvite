@@ -445,7 +445,7 @@
                                                             <button type="button" class="add_new_event_btn me-3 "
                                                                 data-bs-toggle="modal" data-bs-target="#maindishes"  data-category-id="{{ $category['id'] }}"
                                                                 data-category-name="{{ $category['category'] }}"
-                                                        ><i class="fa-solid fa-plus"></i> SubCategory</button>
+                                                        ><i class="fa-solid fa-plus"></i> Item</button>
                                                             <div class="dropdown">
                                                                 <a href="#" class="dropdown-toggle"
                                                                     type="button" id="dropdownMenuButton1"
