@@ -369,7 +369,7 @@ ul.chat-list li:last-child{
     height: 64px;
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 15px;
 }
 
 .msg-footer input{
