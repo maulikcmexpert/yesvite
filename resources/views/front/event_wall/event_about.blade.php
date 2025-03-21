@@ -354,16 +354,22 @@
                                                         <input type="hidden" id="eventName" name="eventName" value="{{$eventDetails['event_name']}}">
                                                         <input type="hidden" id="eventEndTime" name="eventEndTime" value="{{(isset($eventInfo['end_date']) && $eventInfo['end_date']!=""?$eventInfo['end_date']:'' )}}">
 
+                                                        @php
+                                                            $acc_disable="";
+                                                              if($eventDetails['end_date']<= date('Y-m-d')&&strtotime($eventDetails['end_date'] . ' ' . $eventDetails['event_time']) <= strtotime(date('Y-m-d g:i A'))){
+                                                                        $acc_disable="disabled";
+                                                                    }
+                                                        @endphp     
                                                         <div class="accordion rsvp-calender-accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                               <h2 class="accordion-header" id="headingOne">
-                                                                <button class="accordion-button add-calender btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <button class="accordion-button add-calender btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" {{$acc_disable}}>
                                                                     Add to calendar
                                                                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M7.9987 14.6668C11.6654 14.6668 14.6654 11.6668 14.6654 8.00016C14.6654 4.3335 11.6654 1.3335 7.9987 1.3335C4.33203 1.3335 1.33203 4.3335 1.33203 8.00016C1.33203 11.6668 4.33203 14.6668 7.9987 14.6668Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                                     <path d="M5.33203 8H10.6654" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                                     <path d="M8 10.6668V5.3335" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                    </svg>
+                                                                  </svg>
                                                                 </button>
                                                               </h2>
                                                               <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
