@@ -3705,9 +3705,9 @@ padding: 12px 24px;
         justify-content: center;
     }
 
-    .home-center-content-head span {
+    /* .home-center-content-head span {
         display: none !important;
-    }
+    } */
     #nav-upcoming-tab span,
     #nav-drafts-tab span,
     #nav-past-tab span {
