@@ -1012,7 +1012,7 @@ header{
 @media only screen and (max-width: 575px) {
     .notification-dropdown-menu{
         border-radius: 16px;
-        right: -55px;
+        right: -80px;
         top: 60px;
     }
     .notification-dropdown-header{
