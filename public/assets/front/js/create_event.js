@@ -10071,25 +10071,29 @@ function generateProfileImage(firstname, lastname) {
     }</h5>`;
 }
 
-$(document).on('click', 'input[name="email_invite[]"]', function () {
+$(document).on('click', '.user_choice', function () {
     // alert();
     let checkedCount = 0;
 
     let anyCheckedNotDisabled = false;
 
-    $('input[name="email_invite[]"]').each(function () {
+    $('.user_choice').each(function () {
         if ($(this).is(':checked') && !$(this).prop('disabled')) {
             anyCheckedNotDisabled = true;
             checkedCount++;
         }
     });
 
-   
+    let buttonText = `Send Invites(0)`;   
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
+        buttonText = ` Send Invites(${checkedCount})`;
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
-    // console.log(checkedCount);
+    console.log(checkedCount);
+
+    $('a.saveGuestOnly.isdisabled').text(buttonText);
+
     
 });
