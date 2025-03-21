@@ -1083,5 +1083,10 @@ header{
     .header-profile-dropdown .credits_balance_amout_wrp{
         flex-direction: row !important;
     }
+    .notification-dropdown-menu {
+        border-radius: 16px;
+        right: -110px;
+        top: 60px;
+    }
 
 }
