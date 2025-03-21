@@ -10070,3 +10070,21 @@ function generateProfileImage(firstname, lastname) {
         initials || "NA"
     }</h5>`;
 }
+
+$(document).on('click', 'input[name="email_invite[]"]', function () {
+    alert();
+    let anyCheckedNotDisabled = false;
+
+    $('input[name="email_invite[]"]').each(function () {
+        if ($(this).is(':checked') && !$(this).prop('disabled')) {
+            anyCheckedNotDisabled = true;
+        }
+    });
+
+   
+    if (anyCheckedNotDisabled) {
+        $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
+    } else {
+        $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
+    }
+});
