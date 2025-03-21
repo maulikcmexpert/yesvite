@@ -1644,6 +1644,13 @@
 }
 
 
+.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"]{
+    background: #f1f5f9 !important;
+    color: var(--secondryColor) !important;
+    border-color: var(--border) !important;
+}
+
+
 /* ======Responsiveness===== */
 
 @media screen and (min-width:1400px) {
