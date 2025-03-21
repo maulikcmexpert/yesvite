@@ -924,7 +924,7 @@ function openApp() {
 
     const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
 
-    alert(appLink);
+    // alert(appLink);
     // Try opening the app
     window.location.href = appLink;
 
