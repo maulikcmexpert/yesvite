@@ -2107,6 +2107,10 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     .chat-area .chatbox {
         display: none;
     }
+    .message-area ul.chat-list {
+        max-height: 600px;
+        margin-bottom: 0px !important;
+    }
 }
 
 @media only screen and (max-width: 763px) {
