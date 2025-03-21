@@ -10084,7 +10084,7 @@ $(document).on('click', '.user_choice', function () {
         }
     });
 
-    let buttonText = `Send Invites(0)`;   
+    let buttonText = `Send Invites (0)`;   
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
         buttonText = ` Send Invites(${checkedCount})`;
