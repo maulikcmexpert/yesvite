@@ -214,6 +214,8 @@
                                     <div class="post-potluck-category cmn-card">
                                         <div class="d-flex align-items-center">
                                             <h5 class="title">Potluck List</h5>
+                                            <a href="#" class="add_new_event_btn"
+                                            ><i class="fa-solid fa-plus"></i> New Event</a>
                                             <button type="button" class="ms-auto border-0" data-bs-toggle="modal"
                                                 data-bs-target="#editmodal"
                                                 style="background-color: transparent; box-shadow: none;">
