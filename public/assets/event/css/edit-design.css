@@ -1594,6 +1594,7 @@
         width: max-content !important;
         max-width: max-content !important;
         height: calc(100dvh - 330px) !important;
+        max-height: 2160px !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
     }
