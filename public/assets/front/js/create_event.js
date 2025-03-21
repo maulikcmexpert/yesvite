@@ -10090,6 +10090,6 @@ $(document).on('click', '.user_choice', function () {
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
-    // console.log(checkedCount);
+    console.log(checkedCount);
     
 });
