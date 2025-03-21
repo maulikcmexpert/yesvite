@@ -700,7 +700,7 @@
 
 .toggle-custom .layer {
   width: 100%;
-  background-color: var(--light-color);
+  background-color: #E2E8F0;
   transition: 0.3s ease all;
   z-index: 1;
 }
