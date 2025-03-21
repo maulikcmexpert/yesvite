@@ -2918,6 +2918,14 @@
     .guest-wrp.side-guest-wrp .coin-invite-main{
         margin-left: 0px !important;
     }
+    .edit-images-button-inner button {
+        border: none !important;
+        background: none !important;
+        min-width: 50px;
+    }
+    .edit-images-button-wrp {
+        padding: 10px 0px;
+    }
     
 }
 
@@ -3142,7 +3150,9 @@
         background: none !important;
         min-width: 65px;
     }
-
+    .edit-images-button-wrp {
+        padding: 10px 10px;
+    }
 }
 
 @media only screen and (max-width: 424px){
