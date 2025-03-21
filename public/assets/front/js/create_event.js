@@ -10072,7 +10072,7 @@ function generateProfileImage(firstname, lastname) {
 }
 
 $(document).on('click', 'input[name="email_invite[]"]', function () {
-
+    alert();
     let anyCheckedNotDisabled = false;
 
     $('input[name="email_invite[]"]').each(function () {
