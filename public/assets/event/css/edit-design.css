@@ -1603,6 +1603,9 @@
         width: auto;
         margin: 0px auto;
     }
+    .image-edit-inner-img canvas{
+        object-fit: contain;
+    }
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
     .image-edit-inner-img {
@@ -1615,8 +1618,10 @@
         height: calc(100vh - 68px - 80px - 100px);
         max-height: 43.25rem;
         width: auto;
-        margin: 0px auto;
-        
+        margin: 0px auto;   
+    }
+    .image-edit-inner-img canvas{
+        object-fit: contain;
     }
 }
 
