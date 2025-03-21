@@ -9001,18 +9001,20 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     var send_invites=$(this).attr('data-sendIvites');
+    alert(send_invites);
     if(send_invites=="1" && $(this).prop("disabled")){
+        alert(2);
         return;
     }
-    e.preventDefault();
-    eventData.is_update_event = "1";
-    await saveDesignData(true);
-    let save1 = savePage1Data(null, true);
-    let save2 = savePage3Data(null, true);
-    savePage4Data();
-    if (save1 == 8 && save2 == 8) {
-        updateEventData();
-    }
+    // e.preventDefault();
+    // eventData.is_update_event = "1";
+    // await saveDesignData(true);
+    // let save1 = savePage1Data(null, true);
+    // let save2 = savePage3Data(null, true);
+    // savePage4Data();
+    // if (save1 == 8 && save2 == 8) {
+    //     updateEventData();
+    // }
 });
 
 function updateEventData() {
