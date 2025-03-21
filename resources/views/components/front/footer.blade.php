@@ -918,7 +918,7 @@
 // window.onload = openApp;
 
 function openApp() {
-    const appLink = "com.yesvite.test";  // Android App Scheme
+    const appPackage = "com.yesvite.test";  // Android App Scheme
     const appLink = "intent://scheme=https;package=" + appPackage + ";end;";
     // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
 
