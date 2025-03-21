@@ -918,8 +918,8 @@
 // window.onload = openApp;
 
 function openApp() {
-    const appLink = "comappyesvite://";  // Android App Scheme
-    // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
+    const appLink = "com.yesvite.test";  // Android App Scheme
+    const appLink = "intent://scheme=https;package=" + appPackage + ";end;";
     // const appLink = "intent://somepage#Intent;scheme=https;package=" + appPackage + ";end;";
 
     const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
