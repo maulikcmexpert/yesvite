@@ -1012,7 +1012,7 @@ header{
 @media only screen and (max-width: 575px) {
     .notification-dropdown-menu{
         border-radius: 16px;
-        right: -80px;
+        right: -100px;
         top: 60px;
     }
     .notification-dropdown-header{
@@ -1024,7 +1024,15 @@ header{
     }
     .notification-dropdown-header h3 span {
         font-size: 9px;
+        padding: 4px 6px;
+        letter-spacing: normal;
     }
+
+    .g-badge, .n-badge{
+        top: -8px;
+        right: -10px;
+    }
+
     .notification-dropdown-header h5 {
         font-size: 14px;
     }
