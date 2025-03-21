@@ -1597,11 +1597,10 @@
         max-height: 2160px !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7; */
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        aspect-ratio: 5 / 7;
-        margin: 0px auto;
+        max-width: unset;
+        height: calc(90vh - 68px - 80px);
+        max-height: 43.25rem;
+        width: auto;
     }
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
@@ -1611,11 +1610,10 @@
         height: calc(100dvh - 290px) !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7; */
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        aspect-ratio: 5 / 7;
-        margin: 0px auto;
+        max-width: unset;
+        height: calc(90vh - 68px - 80px);
+        max-height: 43.25rem;
+        width: auto;
         
     }
 }
