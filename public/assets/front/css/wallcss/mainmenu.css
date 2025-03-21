@@ -3146,9 +3146,6 @@
     position: relative;
 }
 
-.supportive-home-wrp .mobile-calender-btn{
-    display: none !important;
-}
 
 #detail_calender_view{
     border: 1px solid var(--border);
@@ -3452,10 +3449,6 @@ padding: 12px 24px;
         padding: 50px;
         gap: 20px;
         overflow: hidden;
-    }
-
-    .supportive-home-wrp .mobile-calender-btn{
-        display: block !important;
     }
 
     .responsive-calender-months {
