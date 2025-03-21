@@ -153,7 +153,7 @@ $(document).on("click", ".mobile-calender-btn", function () {
         $iconSpan.html(calendarSvg);
         $(".responsive-calendar").css("display", "none");
         $(".responsive-calender-month-text").css("display", "none");
-        $(".add_new_event_respo").css('display','inline-flex');
+        $("#add_new_event_respo").css('display','inline-flex');
         $(".mobile-calender-btn").css('display','none');
     }
 });
