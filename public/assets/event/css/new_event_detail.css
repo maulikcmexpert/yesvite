@@ -1648,6 +1648,16 @@
     background: #f1f5f9 !important;
     color: var(--secondryColor) !important;
     border-color: var(--border) !important;
+    cursor: not-allowed;
+}
+
+.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"]:hover{
+
+transform: unset;
+    -webkit-transform: unset;
+    -moz-transform: unset;
+    -ms-transform: unset;
+    -o-transform: unset;
 }
 
 
