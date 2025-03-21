@@ -442,7 +442,7 @@
                                                                 </svg>
                                                             </button> --}}
 
-                                                           <a href="#" class="add_new_event_btn me-3 "
+                                                           <a href="#" class="me-3 "
                                                                 data-bs-toggle="modal" data-bs-target="#maindishes"
                                                                 style="background-color: transparent; box-shadow: none;"
                                                                 data-category-id="{{ $category['id'] }}"
