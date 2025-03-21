@@ -60,7 +60,7 @@ $getSocialLink = getSocialLink();
                                                             </svg> --}}
                                                         </span>
                                                 </button>
-                                                <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan add_new_event_respo"
+                                                <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan" id="add_new_event_respo"
                                                 ><i class="fa-solid fa-plus"></i> New Event</a
                                             >
                                             </div>
