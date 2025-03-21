@@ -9000,6 +9000,10 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     }
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
+    var send_invites=$(this).attr('data-sendIvites');
+    if(send_invites=="1" && $(this).prop("disabled")){
+        return;
+    }
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
