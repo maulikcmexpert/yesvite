@@ -442,7 +442,8 @@
                                                                 </svg>
                                                             </button> --}}
 
-                                                            <a href="#" class="add_new_event_btn me-3" d data-bs-toggle="modal" data-bs-target="#maindishes"
+                                                            <a href="#" class="add_new_event_btn me-3" d data-bs-toggle="modal" data-bs-target="#maindishes" data-category-id="{{ $category['id'] }}"
+                                                                data-category-name="{{ $category['category'] }}"
                                                         ><i class="fa-solid fa-plus"></i>Subcategory</a>
                                                             <div class="dropdown">
                                                                 <a href="#" class="dropdown-toggle"
