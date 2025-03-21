@@ -10072,18 +10072,14 @@ function generateProfileImage(firstname, lastname) {
 }
 
 $(document).on('click', '.user_choice', function () {
-    // alert();
     let checkedCount = 0;
-
     let anyCheckedNotDisabled = false;
-
     $('.user_choice').each(function () {
         if ($(this).is(':checked') && !$(this).prop('disabled')) {
             anyCheckedNotDisabled = true;
             checkedCount++;
         }
     });
-
     let buttonText = `Send Invites (0)`;   
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
@@ -10091,8 +10087,7 @@ $(document).on('click', '.user_choice', function () {
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
-    console.log(checkedCount);
-
+    
     $('a.saveGuestOnly.isdisabled').text(buttonText);
 
     
