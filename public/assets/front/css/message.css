@@ -2111,6 +2111,9 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
         max-height: 600px;
         margin-bottom: 0px !important;
     }
+    .msg-footer{
+        bottom: 0px;
+    }
 }
 
 @media only screen and (max-width: 763px) {
