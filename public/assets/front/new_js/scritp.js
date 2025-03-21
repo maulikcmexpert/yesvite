@@ -140,11 +140,13 @@ $(document).on("click", ".mobile-calender-btn", function () {
     var $textSpan = $(this).find(".responsive-text");
     var $iconSpan = $(this).find(".responsive-icon");
     console.log($(this).html());
-    if (text == "Create Event") {
+    if (text == "Calendar") {
         $textSpan.text("List View");
         $iconSpan.html(listSvg);
         $(".responsive-calendar").css("display", "flex");
         $(".responsive-calender-month-text").css("display", "inline-block");
+        $(".add_new_event_respo").css('display','none');
+        $(".mobile-calender-btn").css('display','block');
     }
 
     if (text == "List View") {
@@ -152,6 +154,8 @@ $(document).on("click", ".mobile-calender-btn", function () {
         $iconSpan.html(calendarSvg);
         $(".responsive-calendar").css("display", "none");
         $(".responsive-calender-month-text").css("display", "none");
+        $(".add_new_event_respo").css('display','block');
+        $(".mobile-calender-btn").css('display','none');
     }
 });
 
