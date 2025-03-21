@@ -880,6 +880,10 @@
         max-width: 150px;
     }
 
+    #eventModal .invite-left{
+        max-width: 100%;
+    }
+
     .invite-right span {
         font-size: 14px;
         color: var(--secondryColor);
