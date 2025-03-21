@@ -78,7 +78,7 @@
 
 .edit-images-button-wrp {
     width: 100%;
-    max-width: 440px;
+    max-width: 480px;
     margin: 0px auto;
     height: 100px;
     padding: 10px 16px;
@@ -114,6 +114,7 @@
     text-align: center;
     text-transform: capitalize;
     color: var(--secondryColor);
+    margin-bottom: 0px;
 }
 
 .common-font-wrp {
