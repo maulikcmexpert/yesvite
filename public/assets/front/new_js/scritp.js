@@ -145,8 +145,7 @@ $(document).on("click", ".mobile-calender-btn", function () {
         $iconSpan.html(listSvg);
         $(".responsive-calendar").css("display", "flex");
         $(".responsive-calender-month-text").css("display", "inline-block");
-        $(".add_new_event_respo").css('display','none');
-        $(".mobile-calender-btn").css('display','block');
+    
     }
 
     if (text == "List View") {
@@ -173,6 +172,8 @@ $(document).on("click", ".profile-calender-view", function () {
 
     $(".responsive-calendar").css("display", "flex");
     $(".responsive-calender-month-text").css("display", "inline-block");
+    $(".add_new_event_respo").css('display','none');
+    $(".mobile-calender-btn").css('display','block');
 });
 
 $(document).on("click", "#detail_calender_view", function () {
