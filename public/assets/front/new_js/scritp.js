@@ -140,7 +140,7 @@ $(document).on("click", ".mobile-calender-btn", function () {
     var $textSpan = $(this).find(".responsive-text");
     var $iconSpan = $(this).find(".responsive-icon");
     console.log($(this).html());
-    if (text == "Calendar") {
+    if (text == "Create Event") {
         $textSpan.text("List View");
         $iconSpan.html(listSvg);
         $(".responsive-calendar").css("display", "flex");

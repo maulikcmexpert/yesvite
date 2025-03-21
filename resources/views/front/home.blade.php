@@ -34,7 +34,7 @@ $getSocialLink = getSocialLink();
 
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
-                                            <button type="button" class="mobile-calender-btn">
+                                            <button type="button" class="mobile-calender-btn d-none">
                                             <span class="responsive-text">Calendar</span>
                                             <span class="responsive-icon">
                                                 <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,10 @@ $getSocialLink = getSocialLink();
                                                 </svg> --}}
                                             </span>
                                             </button>
-                                        </div>
+                                            <a href="{{route('event')}}" class="add_new_event_btn create_event_with_plan"
+                                            ><i class="fa-solid fa-plus"></i> New Event</a
+                                          >
+                                                                                </div>
                                     </div>
                                     <div class="col-xl-5">
                                         <input type="hidden" id="totalmonths" value="{{$numMonths}}"/>
