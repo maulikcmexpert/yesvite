@@ -10071,11 +10071,11 @@ function generateProfileImage(firstname, lastname) {
     }</h5>`;
 }
 
-$(document).on('change', 'input[name="email_invite[]"]', function () {
+$(document).on('click', 'input[name="email_invite[]"]', function () {
 
     let anyCheckedNotDisabled = false;
 
-    $('input[type="checkbox"]').each(function () {
+    $('input[name="email_invite[]"]').each(function () {
         if ($(this).is(':checked') && !$(this).prop('disabled')) {
             anyCheckedNotDisabled = true;
         }
