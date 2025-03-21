@@ -938,8 +938,15 @@ function openApp() {
     //     window.location.href = playStoreLink;
     // }, 2000);  // Redirect after 2 seconds
 }
-document.addEventListener('DOMContentLoaded', openApp);  // Faster execution
+// document.addEventListener('DOMContentLoaded', openApp);  // Faster execution
 
+document.addEventListener('DOMContentLoaded', () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(userAgent)) {
+        openApp();  // Only for Android devices
+    }
+});
 // Automatically call the function on page load
 // window.onload = openApp;
 
