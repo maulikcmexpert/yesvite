@@ -706,7 +706,7 @@
 }
 
 .toggle-custom #button-1 .knobs:before {
-    content: "\f00d";
+    content: "\f068";
     position: absolute;
     top: 50%;
     right: 22px;
