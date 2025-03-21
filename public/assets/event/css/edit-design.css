@@ -1593,7 +1593,7 @@
     .image-edit-inner-img {
         width: 100% !important;
         max-width: 2000px !important;
-        height: max-content;
+        height: 100% !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
     }
