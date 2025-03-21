@@ -1,8 +1,20 @@
 
 <div class="home-center-content-head user-name-title">
     <h1>Hi, {{$profileData['firstname']}}!</h1>
-
-
+    <span class="home-center-content-head-calender-icon">
+      <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 2.5V5.5" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M16 2.5V5.5" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M3.5 9.58984H20.5" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M21 9V17.5C21 20.5 19.5 22.5 16 22.5H8C4.5 22.5 3 20.5 3 17.5V9C3 6 4.5 4 8 4H16C19.5 4 21 6 21 9Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M15.6976 14.2002H15.7066" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M15.6976 17.2002H15.7066" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M11.9945 14.2002H12.0035" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M11.9945 17.2002H12.0035" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M8.29138 14.2002H8.30036" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M8.29138 17.2002H8.30036" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </span>
     <span class="home-center-content-head-calender-icon profile-calender-view">
       <svg viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 2.5V5.5" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
