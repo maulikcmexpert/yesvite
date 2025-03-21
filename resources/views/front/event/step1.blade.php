@@ -18,7 +18,7 @@
                                     @php
                                         $event_type_id = '';
                                         if(isset($eventDetail['event_type_id']) && $eventDetail['event_type_id']!=''){
-                                            $event_type_id = $eventDetail['event_type_id']; 
+                                            $event_type_id = $eventDetail['event_type_id'];
                                         }
                                     @endphp
                                     <option value="{{ $type->id }}" {{($event_type_id == $type->id)?'selected':''}}>{{ $type->event_type }}</option>
@@ -42,9 +42,16 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-form">
+                               @if (Auth::guard('web')->check())
                                 <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
                                     oninput="clearError(this)" required=""
                                     value="{{ isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != null ? $eventDetail['hosted_by'] : $user->firstname . ' ' . $user->lastname }}">
+                                    @else
+
+                                    <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
+                                    oninput="clearError(this)" required=""
+                                    value="">
+                                    @endif
                                 <label for="hostedby" class="form-label input-field floating-label">Hosted By
                                     *</label>
                             </div>

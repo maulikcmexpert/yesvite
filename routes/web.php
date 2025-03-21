@@ -242,7 +242,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
-    Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
+    // Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
     Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
     Route::post('event/cancel_event', [ControllersEventController::class, 'CancelEvent']);
@@ -358,8 +358,11 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::post('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
 });
-Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
-
+Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name('event');
+Route::get('/check-login', function (Request $request) {
+    return response()->json(['is_logged_in' => Auth::guard('web')->check()]);
+});
+Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
 
 Route::get('event/editd', [DesignController::class, 'index']);
 Route::post('/saveTextData', [DesignController::class, 'saveTextData'])->name('saveTextData');

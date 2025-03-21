@@ -28,6 +28,7 @@ class HomeFrontController extends BaseController
         return view('layout', compact(
             'title',
             'page',
+
             'images',
             'getDesignData',
             'categories'
@@ -135,7 +136,7 @@ class HomeFrontController extends BaseController
         ])
         ->orderBy('id', 'ASC')
         ->get();
-        
+
 
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(

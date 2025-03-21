@@ -1,4 +1,4 @@
-
+// alert();
 let eventData = {};
 let isCohost = $("#isCohost").val() || "";
 let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
@@ -185,8 +185,8 @@ $(document).ready(function () {
     // If database timezone is set, don't change it
 
     // If a database timezone is set, do nothing
- 
-    
+
+
     function getTimeZoneAbbreviation() {
         const date = new Date();
         const offset = -date.getTimezoneOffset();
@@ -240,7 +240,7 @@ $(document).ready(function () {
                     return false;
                 }
             });
-        
+
             if (!isOptionExistsend) {
                 const newEndOption = $("<option></option>")
                     .val(currentTimeZone)
@@ -249,7 +249,7 @@ $(document).ready(function () {
                 $("#end-time-zone").append(newEndOption);
             }
     }
-   
+
 
     console.log(getTimeZoneAbbreviation());
 
@@ -1522,11 +1522,11 @@ initializeDatePicker(
     function (selectedDate) {
         let formattedDate = selectedDate.format("MM-DD-YYYY");
         console.log(formattedDate);
-        
-        $("#start-event-date").val(formattedDate); 
+
+        $("#start-event-date").val(formattedDate);
         console.log(  $("#start-event-date").val());
-        
-        $("#end-event-date").val(formattedDate); 
+
+        $("#end-event-date").val(formattedDate);
         console.log(  $("#end-event-date").val());
          let endDateInput = $('#end-event-date');
         let nextLabel = endDateInput.next('label');
@@ -1535,14 +1535,14 @@ initializeDatePicker(
         nextLabel.addClass('floatingfocus');
     }
         // alert($("#end-event-date").val());
-        
+
         $("#rsvp-by-date").val("");
         let endPicker = $("#end-event-date").data("daterangepicker");
         endPicker.setStartDate(moment(selectedDate).add(0, "days"));
-        endPicker.minDate = moment(selectedDate).add(0, "days"); 
-        endPicker.maxDate = moment(selectedDate).add(2, "days"); 
+        endPicker.minDate = moment(selectedDate).add(0, "days");
+        endPicker.maxDate = moment(selectedDate).add(2, "days");
 
-        
+
         // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
         selectedDates.clear();
         selectedDates.add(formattedDate);
@@ -4895,7 +4895,9 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
     window.location.href = url;
 });
 
-function handleActiveClass(target) {
+ function handleActiveClass(target) {
+
+
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
     $(".edit-design-sidebar").removeClass("active");
@@ -5381,14 +5383,41 @@ function save_image_design(downloadImage, textData) {
             console.error("Error capturing image:", error);
         });
 }
+// $(document).on("click", ".li_event_details", async function () {
+//     $("#loader").css("display", "flex");
+//     setTimeout(async function () {
+//         await saveDesignData();
+//         $("#loader").css("display", "none");
+//     }, 1000);
+// });
+
 $(document).on("click", ".li_event_details", async function () {
+
+    let isLoggedIn = await checkUserLogin(); // Function to check login status
+
+    if (!isLoggedIn) {
+        window.location.href = "/login"; // Redirect to login page
+        return;
+    }
+
     $("#loader").css("display", "flex");
     setTimeout(async function () {
         await saveDesignData();
         $("#loader").css("display", "none");
     }, 1000);
 });
+async function checkUserLogin() {
+    try {
+        let response = await $.ajax({
+            url: "/check-login",
+            method: "GET",
+        });
 
+        return response.is_logged_in; // Return true or false
+    } catch (error) {
+        return false;
+    }
+}
 $(document).on("click", ".li_event_detail", function () {
     step2Open();
 });

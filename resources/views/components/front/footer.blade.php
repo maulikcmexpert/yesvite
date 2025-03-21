@@ -910,7 +910,7 @@
     });
   // Define the function
 function openApp() {
-    const appLink = "comappyesvite://"; 
+    const appLink = "comappyesvite://";
     window.location.href = appLink;
 }
 

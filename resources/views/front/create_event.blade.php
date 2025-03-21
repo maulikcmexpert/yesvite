@@ -1,8 +1,8 @@
 
 @php
-    //    $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
-    //    dd($start_time_zone);
+ if (Auth::guard('web')->check()) {
     $userS = Auth::guard('web')->user();
+
     $isCopyNew = $eventDetail['isCopy'];
 
     // Get the authenticated user
@@ -12,6 +12,7 @@
 
     // This will set the font color class based on the first initial of the user
     $fontColorUser = 'fontcolor' . $firstInitialUser;
+ }
 @endphp
 <header class="login-header new_event_detail_header">
     <div class="container-fluid">
@@ -205,13 +206,23 @@
                         <h4 class="event_create_percent">25%</h4>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
-                    @if ($eventDetail['id'] == '')
+                    {{-- @if ($eventDetail['id'] == '')
                         <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
                     @elseif ($eventDetail['isCohost'] == '1')
                         <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
                     @elseif($eventDetail['id'] !="" && $eventDetail['is_draft_save']=="0")
                     <span data-isEditBtn="1" class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
-                    @endif
+                    @endif --}}
+                    @auth
+    @if (!empty($eventDetail) && isset($eventDetail['id']) && $eventDetail['id'] == '')
+        <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
+    @elseif (!empty($eventDetail) && isset($eventDetail['isCohost']) && $eventDetail['isCohost'] == '1')
+        <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
+    @elseif (!empty($eventDetail) && isset($eventDetail['id']) && isset($eventDetail['is_draft_save']) && $eventDetail['id'] != "" && $eventDetail['is_draft_save'] == "0")
+        <span data-isEditBtn="1" class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
+    @endif
+@endauth
+
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
@@ -476,7 +487,7 @@
                     <span class="coin-invite-wrp-inner">
                         {{-- {{$setPrice[0]['coins']}}  |  --}}
 
-                      <span class="green-price">Buy Credits 
+                      <span class="green-price">Buy Credits
                         {{-- ${{$setPrice[0]['price']}} --}}
                     </span><i class="fa-solid fa-chevron-right"></i>
                     </span>
@@ -494,7 +505,7 @@
         </div>
 
     </div>
-    <input type="hidden" value="{{ $user->id }}" id="user_id">
+    <input type="hidden" value="{{  isset($user->id)&& $user->id != null ? $user->id : '' }}" id="user_id">
     <input type="hidden" id="CheckCuurentStep" value="0">
     <input type="hidden" value="{{ $coins }}" id="coins" class="hidden-coins">
     <input type="hidden"
@@ -511,13 +522,13 @@
     <div id="edit-design-temp" style="display: none">
         {{-- @include('front.event.design.edit_design') --}}
     </div>
-
+    @if (Auth::guard('web')->check())
     @include('front.event.step3')
 
     @include('front.event.step4')
 
     @include('front.event.final_checkout')
-
+@endif
     </div>
 
     <div id="sidebar_select_design_category" class="setting-side-wrp" style="display: none;">
@@ -834,6 +845,7 @@
                     Contacts</button>
             </li>
         </ul>
+        @if (Auth::guard('web')->check())
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <div class="guest-contacts-wrp contactData" style="display: none">
@@ -842,7 +854,7 @@
                             <img class="selected-co-host-image" src="./assets/image/user-img.svg" alt="guest-img">
                             <h5 class="add-item-under-text selected-host-h5"></h5>
                             @if ($eventDetail['isCohost'] == '0' && isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0 )
-                            @if(!empty($eventDetail['isCopy']))
+                            @if(!empty($eventDetail['isCopy']) && isset($eventDetail['isCopy']))
                             <a href="#" class="close remove_co_host">
                                 <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1124,6 +1136,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     <div class="new-event-btn">
         <a href="#" class="cmn-btn save_event_co_host">Save</a>
@@ -2792,7 +2805,7 @@
             category</a>
     </div>
 </div>
-
+@if (Auth::guard('web')->check())
 
 <div id="sidebar_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">
 
@@ -3201,6 +3214,7 @@
     </div> -->
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="myCustomModal" tabindex="-1" aria-labelledby="myCustomModalLabel"
     aria-hidden="true">
@@ -3320,7 +3334,7 @@
 <input type="hidden" id="alreadyCount" value="{{ $eventDetail['alreadyCount'] }}">
 <input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 
-
+@endif
 
 
 

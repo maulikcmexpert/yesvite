@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    var base_url = $("#base_url").val()
+    $(document).on("click",".edit_design_tem",function(){
+        var id=$(this).attr('data-id');
+        window.location.href=base_url+"events?design_id="+id;
+    })
     const urlParams = new URLSearchParams(window.location.search);
     const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
@@ -16,7 +22,6 @@ $(document).ready(function () {
 
 
     updateTotalCount();
-
 
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
 
