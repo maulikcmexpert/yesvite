@@ -206,7 +206,7 @@
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div> --}}
                                 <div>
-                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled">Send Invites</a>
+                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled" disabled>Send Invites</a>
                                 </div>
                             </div>
                             {{-- <div class="design-seting">
@@ -447,7 +447,7 @@
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div> --}}
                                 <div>
-                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled">Send Invites</a>
+                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled" disabled>Send Invites</a>
                                 </div>
                             </div>
 
@@ -609,7 +609,7 @@
                                     <a href="#" class="cmn-btn saveGuestOnly">Save Changes</a>
                                 </div> --}}
                                 <div>
-                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled">Send Invites</a>
+                                    <a href="#" class="cmn-btn saveGuestOnly isdisabled" disabled>Send Invites</a>
                                 </div>
                             </div> 
                             {{-- <div class="design-seting">
