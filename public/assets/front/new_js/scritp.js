@@ -172,7 +172,7 @@ $(document).on("click", ".profile-calender-view", function () {
 
     $(".responsive-calendar").css("display", "flex");
     $(".responsive-calender-month-text").css("display", "inline-block");
-    $("#add_new_event_respo").hide();
+    $("#add_new_event_respo").css('display','none');
     $(".mobile-calender-btn").css('display','block');
 });
 
