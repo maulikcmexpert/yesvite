@@ -1710,7 +1710,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 325px;
+    max-width: 265px;
 }
 
 .home-upcoming-events-card-left-profile-content p {
@@ -3425,7 +3425,7 @@ padding: 12px 24px;
         width: 34px !important;
     }
     .home-upcoming-events-card-left-profile-content h3 {
-        max-width: 250px;
+        max-width: 190px;
     }
     .responsive-calendar .day {
         width: 100%;
