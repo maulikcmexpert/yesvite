@@ -162,6 +162,7 @@ export function initializeAudioPlayer(player) {
         const audioUrl = $(this).data("audio-url");
         addAudioFromChat(audioUrl);
     });
+    
 }
 
 // Initialize all audio players
@@ -254,25 +255,3 @@ export function musicPlayer(url) {
         </div>
     `;
 }
-
-
-// const closeBtn = player.querySelector(".close-audio-btn");
-
-// if (closeBtn) {
-    $(".close-audio-btn").on("click", () => {
-        audio.pause();
-        audio.currentTime = 0;
-    
-        // Reset progress bar
-        $(".progress-bar").css("width", "0%");
-    
-        // Reset time display
-        $(".current-time").text("0:00");
-        $(".duration").text("- 0:00");
-    
-        // Reset play button icon
-        $(".player").removeClass("play");
-        $(".play-btn i.fas").addClass("fa-play").removeClass("fa-pause");
-    });
-    
-// }
