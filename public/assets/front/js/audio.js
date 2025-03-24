@@ -28,13 +28,33 @@ export function initializeAudioPlayer(player) {
     }
 
     // Play the audio
-    function playSong() {
-        player.classList.add("play");
-        playBtn.querySelector("i.fas").classList.remove("fa-play");
-        playBtn.querySelector("i.fas").classList.add("fa-pause");
+    // function playSong() {
+    //     player.classList.add("play");
+    //     playBtn.querySelector("i.fas").classList.remove("fa-play");
+    //     playBtn.querySelector("i.fas").classList.add("fa-pause");
 
+    //     audio.play();
+    // }
+    // Play the audio
+function playSong() {
+    // Reset progress bar width to 0 immediately before playback
+    progressBar.style.width = "0%";
+    currentTime.textContent = "0:00";
+
+    player.classList.add("play");
+    playBtn.querySelector("i.fas").classList.remove("fa-play");
+    playBtn.querySelector("i.fas").classList.add("fa-pause");
+
+    // Ensure metadata is loaded before playing
+    if (audio.readyState >= 2) {
         audio.play();
+    } else {
+        audio.addEventListener("loadedmetadata", () => {
+            audio.play();
+        }, { once: true });  // Ensure the event listener runs only once
     }
+}
+
 
     // Pause the audio
     function pauseSong() {
