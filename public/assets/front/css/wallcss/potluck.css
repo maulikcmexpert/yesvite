@@ -253,6 +253,7 @@
     color: #020202;
     margin-bottom: 0;
     width: max-content;
+    max-width: 200px;
 }
 
 .post-potluck-category .list-header p {
