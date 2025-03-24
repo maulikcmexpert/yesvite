@@ -25,6 +25,7 @@ export function initializeAudioPlayer(player) {
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
+
     }
 
     // Play the audio
@@ -32,8 +33,8 @@ export function initializeAudioPlayer(player) {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-
         audio.play();
+        updateProgress();
     }
 
     // Pause the audio
