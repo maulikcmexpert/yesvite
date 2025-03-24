@@ -15,7 +15,7 @@ export function initializeAudioPlayer(player) {
 
     const audio = player.querySelector(".audio");
 
-    console.log(audio);
+    console.log(audio.duration);
 
     const playBtn = player.querySelector(".play");
 
