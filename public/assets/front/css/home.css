@@ -740,6 +740,7 @@
 
 .collection-wrapper .dropdown-menu .filter-categories input[type="checkbox"] {
     width: 24px !important;
+    max-width: 24px !important;
     height: 24px !important;
     border-radius: 8px !important;
     -webkit-border-radius: 8px !important;
