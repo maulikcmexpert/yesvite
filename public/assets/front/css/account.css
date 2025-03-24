@@ -12,6 +12,7 @@
 
 .account-data .user-img {
     width: 56px;
+    min-width: 56px;
     height: 56px;
 }
 
@@ -214,7 +215,8 @@
     margin-left: 0px !important;
     background-color: #fff !important;
     font-size:16px !important;
-    min-width: 92px;
+    padding-right: 15px;
+    /* min-width: 92px; */
 }
 
 .account-setting-credit-wrp .credits_balance_amout_wrp h6{
