@@ -1007,6 +1007,21 @@
     .post-potluck-category{
         padding: 15px 10px;
     }
+    .add_potluck_cat_btn {
+        font-family: var(--SFProDisplay-Medium);
+        font-size: 12px;
+        line-height: normal;
+        background-color: var(--secondary-black);
+        border-radius: 10px;
+        color: var(--white);
+        padding: 10px 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .add_potluck_cat_btn.me-2{
+        margin-right: 5px !important;
+    }
 }
 
 @media only screen and (max-width:375px){
