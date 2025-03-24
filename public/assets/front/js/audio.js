@@ -22,7 +22,7 @@ export function initializeAudioPlayer(player) {
 
     const volInput = player.querySelector('input[name="volume"]');
 
-    // Function to dynamically load an audio file
+        // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
     }
@@ -50,8 +50,6 @@ export function initializeAudioPlayer(player) {
         const minutes = Math.floor(time / 60);
         let seconds = Math.floor(time % 60);
         seconds = seconds > 9 ? seconds : `0${seconds}`;
-        console.log(`${minutes}:${seconds}`);
-        
         return `${minutes}:${seconds}`;
     }
 
@@ -83,7 +81,7 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
-           duration.textContent = displayTime(audio.duration);
+        //    duration.textContent = displayTime(audio.duration);
     }
     
 
