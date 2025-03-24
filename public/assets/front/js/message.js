@@ -3734,7 +3734,7 @@ $(".close-audio-btn").on("click", function () {
     $(".file_info").val("");
     const newPlayer = document.querySelector("#audioContainer");
     newPlayer.classList.remove("initialized");
-    newPlayer.classList.remove("play");
+    // newPlayer.classList.remove("play");
     // $('#musicContainer').removeClass('.musicSample');
     // const player = document.querySelector("#audioContainer");
 
