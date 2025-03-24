@@ -3734,18 +3734,13 @@ $(".close-audio-btn").on("click", function () {
     $(".file_info").val("");
     const newPlayer = document.querySelector("#audioContainer");
     newPlayer.classList.remove("initialized");
-    newPlayer.classList.remove("play");
+    // newPlayer.classList.remove("play");
     // $('#musicContainer').removeClass('.musicSample');
     // const player = document.querySelector("#audioContainer");
 
     const progressBar = newPlayer.querySelector(".progress-bar");
 
     progressBar.style.width = `0%`;
-
-    const playBtn = player.querySelector(".play");
-    // player.classList.remove("play");
-    // playBtn.querySelector("i.fas").classList.add("fa-play");
-    // playBtn.querySelector("i.fas").classList.remove("fa-pause");
 
     startButton.style.display = "inline-block";
     $('.time-elapsed').text('00:00');
