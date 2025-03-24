@@ -3688,46 +3688,6 @@ function playRecording() {
     //     alert("Failed to play recorded audio.");
     // });
 }
-async function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state === "recording") {
-        mediaRecorder.stop();
-        $("#send_audio").show();
-        $("#musicContainer").show();
-
-        stopButton.style.display = "none";
-
-        // Wait for the MediaRecorder to finish saving data
-        await new Promise((resolve) => {
-            mediaRecorder.onstop = resolve;
-        });
-        stream.getTracks().forEach((track) => track.stop());
-
-        // Call playRecording() to initiate playback and get duration
-        playRecording().then((duration) => {
-            console.log("Recorded audio duration:", duration, "seconds");
-            // Format the duration for display
-            const minutes = Math.floor(duration / 60);
-            const seconds = Math.floor(duration % 60);
-            const formattedDuration = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-
-            // Show the duration in an alert
-            alert("Recorded audio duration: " + formattedDuration);
-        });
-
-        $("#musicContainer").addClass("musicSample");
-        setTimeout(() => {
-            const newPlayer = document.querySelector("#audioContainer");
-            newPlayer.classList.remove("initialized");
-            initializeAudioPlayer(newPlayer);
-        }, 500);
-
-        let messageIcons = $(".message-icons");
-        messageIcons.addClass("hide");
-
-    } else {
-        console.error("MediaRecorder is not recording.");
-    }
-}
 // async function stopRecording() {
 //     if (mediaRecorder && mediaRecorder.state === "recording") {
 //         mediaRecorder.stop();
@@ -3757,6 +3717,58 @@ async function stopRecording() {
 //         console.error("MediaRecorder is not recording.");
 //     }
 // }
+
+async function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        $("#send_audio").show();
+        $("#musicContainer").show();
+        stopButton.style.display = "none";
+
+        // Wait for the MediaRecorder to finish saving data
+        const audioBlob = await new Promise((resolve) => {
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(chunks, { type: "audio/wav" });
+                resolve(audioBlob);
+            };
+        });
+
+        // Get the duration of the recorded audio
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const tempAudio = new Audio(audioUrl);
+
+        tempAudio.addEventListener("loadedmetadata", () => {
+            console.log(`Duration: ${tempAudio.duration} seconds`);
+            
+            // Display duration in a readable format
+            const minutes = Math.floor(tempAudio.duration / 60);
+            const seconds = Math.floor(tempAudio.duration % 60);
+            console.log(`Formatted Duration: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+
+            // Optionally, you can display it in the UI
+            $("#audio_duration").text(`Duration: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+        });
+
+        // Stop all tracks to release resources
+        stream.getTracks().forEach((track) => track.stop());
+
+        // Call playRecording() to initiate playback
+        playRecording();
+        $("#musicContainer").addClass("musicSample");
+
+        setTimeout(() => {
+            const newPlayer = document.querySelector("#audioContainer");
+            newPlayer.classList.remove("initialized");
+            initializeAudioPlayer(newPlayer);
+        }, 500);
+
+        let messageIcons = $(".message-icons");
+        messageIcons.addClass("hide"); 
+
+    } else {
+        console.error("MediaRecorder is not recording.");
+    }
+}
 
 startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
