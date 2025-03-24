@@ -256,10 +256,10 @@ export function musicPlayer(url) {
 }
 
 
-const closeBtn = player.querySelector(".close-audio-btn");
+// const closeBtn = player.querySelector(".close-audio-btn");
 
-if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
+// if (closeBtn) {
+    $(".close-audio-btn").addEventListener("click", () => {
         audio.pause();
         audio.currentTime = 0;
 
@@ -275,4 +275,4 @@ if (closeBtn) {
         playBtn.querySelector("i.fas").classList.add("fa-play");
         playBtn.querySelector("i.fas").classList.remove("fa-pause");
     });
-}
+// }
