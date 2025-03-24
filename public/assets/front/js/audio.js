@@ -182,17 +182,21 @@ export function initializeAudioPlayer(player) {
 
     let isMetadataLoaded = false;
 
+    // Load and play audio properly
     function loadSong(songUrl) {
         audio.src = songUrl;
         audio.load();
-        isMetadataLoaded = false;
+
+        audio.addEventListener("loadedmetadata", () => {
+            isMetadataLoaded = true;
+            duration.textContent = " - " + displayTime(audio.duration);
+            playSong();
+        }, { once: true });
     }
 
     function playSong() {
-        if (!isMetadataLoaded) {
-            audio.addEventListener("loadedmetadata", () => {
-                isMetadataLoaded = true;
-                duration.textContent = " - " + displayTime(audio.duration);
+        if (!isMetadataLoaded && audio.readyState < 2) {
+            audio.addEventListener("canplay", () => {
                 audio.play();
             }, { once: true });
         } else {
@@ -213,12 +217,12 @@ export function initializeAudioPlayer(player) {
 
     function displayTime(time) {
         const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+        const seconds = Math.floor(time % 60).toString().padStart(2, "0");
         return `${minutes}:${seconds}`;
     }
 
     function updateProgress() {
-        if (!isMetadataLoaded) return;
+        if (!isMetadataLoaded || isNaN(audio.duration)) return;
 
         const progressPercent = (audio.currentTime / audio.duration) * 100;
         progressBar.style.width = `${progressPercent}%`;
@@ -262,9 +266,10 @@ export function initializeAudioPlayer(player) {
 
         const newTime = e.offsetX / progressRange.offsetWidth;
         progressBar.style.width = `${newTime * 100}%`;
-        audioPlayer.currentTime = newTime * audioPlayer.duration;
+        audio.currentTime = newTime * audio.duration;
     }
 
+    // Event Listeners
     audio.addEventListener("timeupdate", updateProgress);
     progressRange.addEventListener("click", setProgress);
 
@@ -282,10 +287,10 @@ export function initializeAudioPlayer(player) {
         playBtn.querySelector("i.fas").classList.add("fa-play");
     });
 
+    // Load audio dynamically and play
     $(document).on("click", ".chat-audio", function () {
         const audioUrl = $(this).data("audio-url");
         loadSong(audioUrl);
-        playSong();
     });
 
     playBtn.addEventListener("click", () => {
@@ -298,6 +303,7 @@ export function initializeAudioPlayer(player) {
         }
     });
 }
+
 
 // Initialize all audio players
 export function musicPlayer(url) {
