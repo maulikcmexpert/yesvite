@@ -17,16 +17,19 @@ export function initializeAudioPlayer(player) {
 
     console.log(audio.duration);
     const recordedAudio = document.getElementById('recordedAudio');
+    recordedAudio.addEventListener('canplaythrough', () => {
+      const durationInSeconds = recordedAudio.duration;
+      console.log('Duration of the audio (canplaythrough):', durationInSeconds, 'seconds');
+    
+      const minutes = Math.floor(durationInSeconds / 60);
+      const seconds = Math.floor(durationInSeconds % 60);
+      const formattedDuration = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+      console.log('Formatted duration (canplaythrough):', formattedDuration);
+    });
+    
     recordedAudio.addEventListener('loadedmetadata', () => {
-    const durationInSeconds = recordedAudio.duration;
-    console.log('Duration of the audio:', durationInSeconds, 'seconds');
-
-  // You can also format it into minutes and seconds if needed
-  const minutes = Math.floor(durationInSeconds / 60);
-  const seconds = Math.floor(durationInSeconds % 60);
-  const formattedDuration = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-  console.log('Formatted duration:', formattedDuration);
-});
+        console.log('loadedmetadata fired, but duration might not be ready yet.');
+    });
 
     const playBtn = player.querySelector(".play");
 
