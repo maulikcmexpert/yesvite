@@ -3730,7 +3730,6 @@ $(".close-audio-btn").on("click", function () {
     $(".preview_img").attr("src", "");
     $(".recordedAudio").attr("src", "");
     $(".message-icons").removeClass("hide"); 
-
     $(".upload-box").val("");
     $(".file_info").val("");
 
