@@ -55,22 +55,52 @@ export function initializeAudioPlayer(player) {
 
     // Update the progress bar as the audio plays
     function updateProgress() {
-        console.log(1);
-        if (audio.duration) {
-            console.log(2);
-            console.log(audio.currentTime);
-            console.log( audio.duration);
-
-            const progressPercent = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-            console.log(progressPercent);
-
-            currentTime.textContent = displayTime(audio.currentTime);
-
-            if (audio.duration != NaN && audio.duration != Infinity)
-                duration.textContent = " - " + displayTime(audio.duration);
+        if (!audio.duration || isNaN(audio.duration) || audio.duration === Infinity) {
+            console.log("Waiting for valid duration...");
+            duration.textContent = " - --:--";  // Display placeholder
+            return;  // Skip updating if duration is invalid
+        }
+    
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+        currentTime.textContent = displayTime(audio.currentTime);
+    
+        if (!isNaN(audio.duration) && audio.duration !== Infinity) {
+            duration.textContent = " - " + displayTime(audio.duration);
         }
     }
+    
+    // Ensure metadata is loaded before updating progress
+    function ensureMetadataLoaded() {
+        if (audio.readyState >= 2 && !isNaN(audio.duration) && audio.duration !== Infinity) {
+            console.log("✅ Metadata loaded successfully!");
+            updateProgress();
+        } else {
+            audio.addEventListener("loadedmetadata", () => {
+                console.log("🟢 Loaded metadata event triggered.");
+                updateProgress();
+            });
+    
+            audio.addEventListener("canplaythrough", () => {
+                console.log("🟢 Can play through event triggered.");
+                updateProgress();
+            });
+    
+            // Fallback: Force reload metadata if not loaded within 2 seconds
+            setTimeout(() => {
+                if (audio.duration === Infinity || isNaN(audio.duration)) {
+                    console.log("⚠️ Forcing metadata reload...");
+                    audio.load();
+                }
+            }, 2000);
+        }
+    }
+    
+    // Initialize the player and add event listeners
+    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("loadedmetadata", ensureMetadataLoaded);
+    audio.addEventListener("canplaythrough", ensureMetadataLoaded);
+    
 
     // Scrub through the audio
     function scrub(event) {
@@ -131,6 +161,10 @@ export function initializeAudioPlayer(player) {
     }
     // Update progress bar as the audio plays
     audio.addEventListener("timeupdate", updateProgress);
+    
+    audio.addEventListener("loadedmetadata", ensureMetadataLoaded);
+audio.addEventListener("canplaythrough", ensureMetadataLoaded);
+
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
