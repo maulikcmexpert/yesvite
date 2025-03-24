@@ -998,6 +998,12 @@
         border: none;
         margin: 0;
     }
+    .post-potluck-category .list-header h5 {
+        font-size: 14px;
+        width: max-content;
+        max-width: 120px;
+        word-break: break-all;
+    }
 }
 
 @media only screen and (max-width:375px){
