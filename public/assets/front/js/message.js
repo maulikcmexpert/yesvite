@@ -3718,6 +3718,7 @@ function playRecording() {
 //     }
 // }
 
+// let chunks = [];  // Global variable to store audio data
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -3728,7 +3729,7 @@ async function stopRecording() {
         // Wait for the MediaRecorder to finish saving data
         const audioBlob = await new Promise((resolve) => {
             mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(chunks, { type: "audio/wav" });
+                const audioBlob = new Blob(recordedChunks, { type: "audio/wav" });
                 resolve(audioBlob);
             };
         });
