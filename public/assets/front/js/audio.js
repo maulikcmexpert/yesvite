@@ -174,7 +174,7 @@
 // }
 export function initializeAudioPlayer(player) {
     if (player.classList.contains("initialized")) {
-        return; 
+        return;
     }
     player.classList.add("initialized");
 
@@ -194,15 +194,34 @@ export function initializeAudioPlayer(player) {
     const volInput = player.querySelector('input[name="volume"]');
 
     let muted = false;
+    let durationLoaded = false;
 
-    // Function to dynamically load an audio file
+    // ✅ Force audio metadata to load before playing
     function loadSong(songUrl) {
         audio.src = songUrl;
-        audio.load();
+        audio.load();  // Force reload to fetch metadata
+        durationLoaded = false;
+        pollDuration();  // Start polling for duration
+    }
+
+    // ✅ Poll for valid duration until it is no longer Infinity or NaN
+    function pollDuration() {
+        const pollInterval = setInterval(() => {
+            if (!isNaN(audio.duration) && audio.duration !== Infinity && audio.duration > 0) {
+                displayDuration();
+                clearInterval(pollInterval);
+                durationLoaded = true;
+            }
+        }, 200);  // Poll every 200ms until duration is valid
     }
 
     // Play the audio
     function playSong() {
+        if (!durationLoaded) {
+            audio.load();  // Ensure metadata is loaded before playing
+            pollDuration();
+        }
+        
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
@@ -237,13 +256,12 @@ export function initializeAudioPlayer(player) {
         }
     }
 
-    // Force duration display after metadata loads
+    // Display duration when valid
     function displayDuration() {
         if (!isNaN(audio.duration) && audio.duration !== Infinity) {
             duration.textContent = ` - ${displayTime(audio.duration)}`;
         } else {
             duration.textContent = " - Loading...";
-            setTimeout(displayDuration, 500);  // Retry duration display every 500ms until valid
         }
     }
 
@@ -280,9 +298,10 @@ export function initializeAudioPlayer(player) {
         audio.currentTime = newTime * audio.duration;
     }
 
-    // Metadata event listener for proper duration handling
+    // ✅ Metadata and timeupdate event listeners
     audio.addEventListener("loadedmetadata", displayDuration);
     audio.addEventListener("timeupdate", updateProgress);
+
     progressRange.addEventListener("click", setProgress);
 
     // Progress bar scrubbing
