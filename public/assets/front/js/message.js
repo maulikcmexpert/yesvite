@@ -3709,7 +3709,7 @@ async function stopRecording() {
             newPlayer.classList.remove("initialized");
             initializeAudioPlayer(newPlayer);
         }, 500);
-        
+
         let messageIcons = $(".message-icons");
         messageIcons.addClass("hide"); 
               
@@ -3729,6 +3729,7 @@ $(".close-audio-btn").on("click", function () {
     $("#send_audio").hide();
     $(".preview_img").attr("src", "");
     $(".recordedAudio").attr("src", "");
+    $(".message-icons").removeClass("hide"); 
 
     $(".upload-box").val("");
     $(".file_info").val("");
