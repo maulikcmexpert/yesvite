@@ -24,13 +24,14 @@ export function initializeAudioPlayer(player) {
 
     const audios = document.getElementById('recordedAudio');
 
-// Force the audio to load metadata
+    // Ensure the audio is loaded
     audios.load();
-
-    // Wait for the metadata to be available
-    audios.addEventListener('loadedmetadata', () => {
-        console.log(`Duration: ${audio.duration} seconds`);
+    
+    // Listen for the 'canplaythrough' event to ensure audio is fully loaded
+    audios.addEventListener('canplaythrough', () => {
+        console.log(`Duration: ${audios.duration} seconds`);
     });
+    
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
