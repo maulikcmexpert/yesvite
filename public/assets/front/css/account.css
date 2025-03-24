@@ -306,4 +306,11 @@
         flex-direction: row !important;
         align-items: center !important;
     }
+    .pro-account {
+        padding: 16px 10px;
+    }
+    .account-setting-credit-button-wrp {
+        gap: 10px !important;
+        flex-direction: column;
+    }
 }
