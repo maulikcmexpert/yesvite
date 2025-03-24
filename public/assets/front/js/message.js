@@ -3688,6 +3688,36 @@ function playRecording() {
     //     alert("Failed to play recorded audio.");
     // });
 }
+// async function stopRecording() {
+//     if (mediaRecorder && mediaRecorder.state === "recording") {
+//         mediaRecorder.stop();
+//         $("#send_audio").show();
+//         $("#musicContainer").show();
+
+//         stopButton.style.display = "none";
+
+//         // Wait for the MediaRecorder to finish saving data
+//         await new Promise((resolve) => {
+//             mediaRecorder.onstop = resolve;
+//         });
+//         stream.getTracks().forEach((track) => track.stop());
+//         // Call playRecording() to initiate playback
+//         playRecording();
+//         $("#musicContainer").addClass("musicSample");
+//         setTimeout(() => {
+//             const newPlayer = document.querySelector("#audioContainer");
+//             newPlayer.classList.remove("initialized");
+//             initializeAudioPlayer(newPlayer);
+//         }, 500);
+
+//         let messageIcons = $(".message-icons");
+//         messageIcons.addClass("hide"); 
+              
+//     } else {
+//         console.error("MediaRecorder is not recording.");
+//     }
+// }
+
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -3696,26 +3726,65 @@ async function stopRecording() {
 
         stopButton.style.display = "none";
 
-        // Wait for the MediaRecorder to finish saving data
+        // Wait for MediaRecorder to finish saving data
         await new Promise((resolve) => {
             mediaRecorder.onstop = resolve;
         });
+
         stream.getTracks().forEach((track) => track.stop());
-        // Call playRecording() to initiate playback
-        playRecording();
-        $("#musicContainer").addClass("musicSample");
-        setTimeout(() => {
-            const newPlayer = document.querySelector("#audioContainer");
-            newPlayer.classList.remove("initialized");
-            initializeAudioPlayer(newPlayer);
-        }, 500);
+
+        // Convert recorded chunks to audio blob
+        const audioBlob = new Blob(recordedChunks, { type: "audio/webm" });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        // Display the audio player with duration
+        displayAudioWithDuration(audioUrl);
 
         let messageIcons = $(".message-icons");
         messageIcons.addClass("hide"); 
-              
+
     } else {
         console.error("MediaRecorder is not recording.");
     }
+}
+
+function displayAudioWithDuration(audioUrl) {
+    const container = document.getElementById("musicContainer");
+    
+    // Clear previous audio (if any)
+    container.innerHTML = "";
+
+    // Create audio player
+    const audioElement = document.createElement("audio");
+    audioElement.src = audioUrl;
+    audioElement.controls = true;
+    container.appendChild(audioElement);
+
+    // Display duration once available
+    const durationElement = document.createElement("p");
+    durationElement.textContent = "Loading duration...";
+    container.appendChild(durationElement);
+
+    // Use a separate Audio object to get the duration accurately
+    const tempAudio = new Audio(audioUrl);
+    tempAudio.load();
+
+    const checkDuration = setInterval(() => {
+        if (!isNaN(tempAudio.duration) && tempAudio.duration !== Infinity) {
+            clearInterval(checkDuration);
+
+            // Format duration to MM:SS
+            const minutes = Math.floor(tempAudio.duration / 60);
+            const seconds = Math.floor(tempAudio.duration % 60);
+            durationElement.textContent = `Duration: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+    }, 100);
+
+    // Error handling
+    tempAudio.onerror = () => {
+        clearInterval(checkDuration);
+        durationElement.textContent = "Failed to load duration.";
+    };
 }
 
 startButton.addEventListener("click", startRecording);
