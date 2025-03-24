@@ -188,6 +188,7 @@ export function initializeAudioPlayer(player) {
     const audio = player.querySelector(".audio");
 
     const playBtn = player.querySelector(".play");
+    const stopBtn = player.querySelector(".stopRecording");  // ⬅️ Stop recording button
 
     const speaker = player.querySelector(".speaker");
     const speakerIcon = player.querySelector("#speaker_icon");
@@ -196,15 +197,15 @@ export function initializeAudioPlayer(player) {
 
     let muted = false;
 
-    // ✅ Load song and wait for metadata before playing
+    // ✅ Load song and wait for metadata before displaying duration
     function loadSong(songUrl) {
         audio.src = songUrl;
 
-        // Ensure metadata is fully loaded before playing
+        // Ensure metadata is loaded before displaying duration
         audio.addEventListener('loadedmetadata', () => {
             displayDuration();
-            playSong();  // Play only after metadata is loaded
-        }, { once: true }); // `once` ensures the event listener is removed after first trigger
+            playSong();  // Optionally start playing immediately
+        }, { once: true });  // Remove listener after first trigger
     }
 
     function playSong() {
@@ -248,10 +249,20 @@ export function initializeAudioPlayer(player) {
     function displayDuration() {
         if (!isNaN(audio.duration) && isFinite(audio.duration)) {
             duration.textContent = " - " + displayTime(audio.duration);
+            console.log(`Duration: ${displayTime(audio.duration)}`);  // Log for debugging
         }
     }
 
-    // Ensure duration is displayed after metadata is loaded
+    // ✅ Load duration on stopRecording button click
+    stopBtn.addEventListener("click", () => {
+        if (audio.src) {
+            audio.load();  // Reload the audio to ensure metadata is loaded
+            audio.addEventListener('loadedmetadata', () => {
+                displayDuration();
+            }, { once: true });
+        }
+    });
+
     if (audio.readyState > 0) {
         displayDuration();
     } else {
@@ -321,6 +332,7 @@ export function initializeAudioPlayer(player) {
         addAudioFromChat(audioUrl);
     });
 }
+
 
 // Initialize all audio players
 export function musicPlayer(url) {
