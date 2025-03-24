@@ -63,7 +63,6 @@
                                     role="tabpanel" aria-labelledby="nav-about-tab">
                                     <div class="about-main-wrp">
                                         <div class="about-details cmn-card">
-                                            <h4 class="title">Details</h4>
                                             <div class="hosted-by-template-slider about-slider">
                                                 <div class="swiper mySwiper">
                                                     <div class="swiper-wrapper">
@@ -128,6 +127,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="host-detail">
+                                                    <h4 class="title">Details</h4>
                                                     <ul>
                                                         @if (!empty($eventDetails['rsvp_by']))
                                                             <li>RSVP By:
