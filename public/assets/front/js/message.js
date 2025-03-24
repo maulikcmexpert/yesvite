@@ -3723,12 +3723,11 @@ stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", playRecording);
 stopPlaybackButton.addEventListener("click", stopPlayback);
 $("#musicContainer").hide();
-$(document).on('click', '.play', function () {
-    if (!$('#audioContainer').hasClass('play')) {
-        $('#audioContainer').addClass('play');
-    }
-});
-
+// $(document).on('click','.play',function(){
+//     if(('#audioContainer').hasClass('play')){
+        
+//     }
+// })
 $(".close-audio-btn").on("click", function () {
     $("#musicContainer").hide();
     $("#send_audio").hide();
