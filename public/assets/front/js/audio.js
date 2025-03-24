@@ -24,15 +24,18 @@ export function initializeAudioPlayer(player) {
 
     const audios = document.getElementById('recordedAudio');
 
-    // Ensure the audio is loaded
+// Ensure the audio is loaded
     audios.load();
-    
-    // Listen for the 'canplaythrough' event to ensure audio is fully loaded
-    audios.addEventListener('canplaythrough', () => {
-        console.log(`Duration: ${audios.duration} seconds`);
-    });
-    
-    // Function to dynamically load an audio file
+
+    // Use a setInterval to repeatedly check for the duration until it’s valid
+    const checkDuration = setInterval(() => {
+        if (!isNaN(audios.duration) && audios.duration !== Infinity) {
+            console.log(`Duration: ${audios.duration} seconds`);
+            clearInterval(checkDuration);  // Stop checking once duration is valid
+        }
+    }, 100);  // Check every 100 milliseconds
+
+        // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
     }
