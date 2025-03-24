@@ -25,17 +25,36 @@ export function initializeAudioPlayer(player) {
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
-
     }
 
     // Play the audio
-    function playSong() {
-        player.classList.add("play");
-        playBtn.querySelector("i.fas").classList.remove("fa-play");
-        playBtn.querySelector("i.fas").classList.add("fa-pause");
+    // function playSong() {
+    //     player.classList.add("play");
+    //     playBtn.querySelector("i.fas").classList.remove("fa-play");
+    //     playBtn.querySelector("i.fas").classList.add("fa-pause");
+
+    //     audio.play();
+    // }
+    // Play the audio
+function playSong() {
+    // Reset progress bar width to 0 immediately before playback
+    progressBar.style.width = "0%";
+    currentTime.textContent = "0:00";
+
+    player.classList.add("play");
+    playBtn.querySelector("i.fas").classList.remove("fa-play");
+    playBtn.querySelector("i.fas").classList.add("fa-pause");
+
+    // Ensure metadata is loaded before playing
+    if (audio.readyState >= 2) {
         audio.play();
-        updateProgress();
+    } else {
+        audio.addEventListener("loadedmetadata", () => {
+            audio.play();
+        }, { once: true });  // Ensure the event listener runs only once
     }
+}
+
 
     // Pause the audio
     function pauseSong() {
@@ -125,15 +144,6 @@ export function initializeAudioPlayer(player) {
     }
     // Update progress bar as the audio plays
     audio.addEventListener("timeupdate", updateProgress);
-    audio.addEventListener("ended", () => {
-        progressBar.style.width = "0%";
-        currentTime.textContent = "0:00";
-        
-        player.classList.remove("play");
-        playBtn.querySelector("i.fas").classList.remove("fa-pause");
-        playBtn.querySelector("i.fas").classList.add("fa-play");
-    });
-
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
@@ -158,12 +168,20 @@ export function initializeAudioPlayer(player) {
         playSong();
     }
 
+    audio.addEventListener("ended", () => {
+        progressBar.style.width = "0%";
+        currentTime.textContent = "0:00";
+        
+        player.classList.remove("play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+    });
+
     // Example usage: Adding an audio file from a chat message
     $(document).on("click", ".chat-audio", function () {
         const audioUrl = $(this).data("audio-url");
         addAudioFromChat(audioUrl);
     });
-    
 }
 
 // Initialize all audio players
@@ -256,3 +274,5 @@ export function musicPlayer(url) {
         </div>
     `;
 }
+
+
