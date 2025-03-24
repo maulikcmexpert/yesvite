@@ -1003,6 +1003,7 @@
         width: max-content;
         max-width: 120px;
         word-break: break-all;
+        line-height: 18px;
     }
     .post-potluck-category{
         padding: 15px 10px;
