@@ -1003,6 +1003,7 @@
         width: max-content;
         max-width: 120px;
         word-break: break-all;
+        line-height: 18px;
     }
     .post-potluck-category{
         padding: 15px 10px;
@@ -1019,8 +1020,21 @@
         align-items: center;
         gap: 10px;
     }
-    .add_potluck_cat_btn.me-2{
+    .add_potluck_cat_btn.me-3{
         margin-right: 5px !important;
+    }
+
+    .post-potluck-category .list-header h6{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 424px){
+    .post-potluck-category .list-header h5 {
+        font-size: 13px;
+        width: max-content;
+        max-width: 90px;
+        word-break: break-all;
     }
 }
 
