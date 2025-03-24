@@ -25,6 +25,7 @@ export function initializeAudioPlayer(player) {
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
+
     }
 
     // Play the audio
@@ -32,8 +33,10 @@ export function initializeAudioPlayer(player) {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-
-        audio.play();
+        audio.play().then(() => {
+            updateProgress(); // ✅ Trigger progress update immediately after audio starts
+        }).catch(error => console.error("Audio playback failed:", error));
+        // audio.play();
     }
 
     // Pause the audio
@@ -74,11 +77,6 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
-        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
-            duration.textContent = " - " + displayTime(audio.duration);
-        }
-        // Call updateProgress here to set the initial state of the progress bar
-        updateProgress();
         //    duration.textContent = displayTime(audio.duration);
     }
     if (audio.readyState > 0) {
