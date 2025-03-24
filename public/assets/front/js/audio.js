@@ -55,11 +55,11 @@ export function initializeAudioPlayer(player) {
 
     // Update the progress bar as the audio plays
     function updateProgress() {
-        console.log(1);
+        // console.log(1);
         if (audio.duration) {
-            console.log(2);
-            console.log(audio.currentTime);
-            console.log( audio.duration);
+            // console.log(2);
+            // console.log(audio.currentTime);
+            // console.log( audio.duration);
 
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
