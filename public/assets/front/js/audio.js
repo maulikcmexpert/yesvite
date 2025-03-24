@@ -28,13 +28,23 @@ export function initializeAudioPlayer(player) {
     }
 
     // Play the audio
+    // function playSong() {
+    //     player.classList.add("play");
+    //     playBtn.querySelector("i.fas").classList.remove("fa-play");
+    //     playBtn.querySelector("i.fas").classList.add("fa-pause");
+
+    //     audio.play();
+    // }
     function playSong() {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-
-        audio.play();
+    
+        audio.addEventListener("canplaythrough", () => {
+            audio.play();
+        }, { once: true }); // Play once the audio is ready
     }
+    
 
     // Pause the audio
     function pauseSong() {
