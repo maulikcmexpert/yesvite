@@ -2910,7 +2910,9 @@
 }
 
 @media only screen and (min-width: 1800px) and (max-width: 10000px){
-
+    .edit-images-button-inner button {
+        min-width: 90px;
+    }
 }
 
 @media only screen and (max-width: 1399px) {
