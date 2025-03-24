@@ -995,7 +995,9 @@ input[type="search"]~span {
     min-width: 14px;
 }
 
-
+#edit_contact{
+    width: max-content;
+}
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
