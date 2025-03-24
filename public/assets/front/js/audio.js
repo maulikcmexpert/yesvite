@@ -15,22 +15,6 @@ export function initializeAudioPlayer(player) {
 
     const audio = player.querySelector(".audio");
 
-    console.log(audio.duration);
-    const recordedAudio = document.getElementById('recordedAudio');
-    recordedAudio.addEventListener('canplaythrough', () => {
-      const durationInSeconds = recordedAudio.duration;
-      console.log('Duration of the audio (canplaythrough):', durationInSeconds, 'seconds');
-    
-      const minutes = Math.floor(durationInSeconds / 60);
-      const seconds = Math.floor(durationInSeconds % 60);
-      const formattedDuration = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-      console.log('Formatted duration (canplaythrough):', formattedDuration);
-    });
-    
-    recordedAudio.addEventListener('loadedmetadata', () => {
-        console.log('loadedmetadata fired, but duration might not be ready yet.');
-    });
-
     const playBtn = player.querySelector(".play");
 
     const speaker = player.querySelector(".speaker");
@@ -96,14 +80,25 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display the duration of the audio
+    // function displayDuration() {
+    //     //    duration.textContent = displayTime(audio.duration);
+    // }
+    // Display the duration of the audio
     function displayDuration() {
-        //    duration.textContent = displayTime(audio.duration);
+        if (audio.duration != NaN && audio.duration != Infinity) {
+            duration.textContent = " - " + displayTime(audio.duration);
+        }
     }
-    if (audio.readyState > 0) {
-        displayDuration();
-    } else {
-        audio.addEventListener("loadedmetadata", displayDuration);
-    }
+    
+
+    // Call displayDuration when metadata is loaded
+    audio.addEventListener("loadedmetadata", displayDuration);
+
+    // if (audio.readyState > 0) {
+    //     displayDuration();
+    // } else {
+    //     audio.addEventListener("loadedmetadata", displayDuration);
+    // }
 
     // Handle volume changes
     function handleRangeUpdate() {
