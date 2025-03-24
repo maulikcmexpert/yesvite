@@ -2805,6 +2805,8 @@ main.new-main-content {
 
 .guests-listing-left .posts-card-head-left-content h3 {
     font-size: 14px;
+    word-break: break-all;
+    width: auto !important;
 }
 
 .guests-listing-left .posts-card-head-left-content p {
