@@ -988,7 +988,9 @@ input[type="search"]~span {
 
 /* Tabs Tips Section */
 
-
+#sidebar_add_group_member .users-data a svg{
+    min-width: 14px;
+}
 
 
 
