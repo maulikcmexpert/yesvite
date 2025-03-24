@@ -118,7 +118,8 @@ export function initializeAudioPlayer(player) {
     // Event Listeners
     playBtn.addEventListener("click", () => {
         const isPlaying = player.classList.contains("play");
-
+        console.log(isPlaying);
+        
         if (isPlaying) {
             pauseSong();
         } else {
