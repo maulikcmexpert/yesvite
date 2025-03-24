@@ -3737,6 +3737,8 @@ $(".close-audio-btn").on("click", function () {
     newPlayer.classList.remove("play");
     // $('#musicContainer').removeClass('.musicSample');
     document.querySelector('.pink-bar.progress').style.width = "0%";
+    console.log(document.querySelectorAll('.pink-bar.progress'));
+
     startButton.style.display = "inline-block";
     $('.time-elapsed').text('00:00');
     $('.time-duration').text('');
