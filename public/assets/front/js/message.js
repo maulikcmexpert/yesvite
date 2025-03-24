@@ -3742,6 +3742,9 @@ $(".close-audio-btn").on("click", function () {
 
     progressBar.style.width = `0%`;
 
+    const playBtn = player.querySelector(".play");
+    playBtn.querySelector("i.fas").classList.add("fa-play");
+    
     startButton.style.display = "inline-block";
     $('.time-elapsed').text('00:00');
     $('.time-duration').text('');
