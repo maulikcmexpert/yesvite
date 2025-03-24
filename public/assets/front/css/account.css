@@ -12,6 +12,7 @@
 
 .account-data .user-img {
     width: 56px;
+    min-width: 56px;
     height: 56px;
 }
 
