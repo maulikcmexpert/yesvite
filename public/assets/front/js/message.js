@@ -3740,6 +3740,9 @@ $(".close-audio-btn").on("click", function () {
 
     const progressBar = newPlayer.querySelector(".progress-bar");
 
+    const playBtn1=newPlayer.classList.remove("play");
+    playBtn1.querySelector("i.fas").classList.add("fa-play");
+    playBtn1.querySelector("i.fas").classList.remove("fa-pause");
     progressBar.style.width = `0%`;
 
     startButton.style.display = "inline-block";
