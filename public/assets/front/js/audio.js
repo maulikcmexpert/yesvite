@@ -33,8 +33,18 @@ export function initializeAudioPlayer(player) {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-        audio.play();
-        updateProgress();
+       
+        console.log(audio.readyState);
+        
+        if (audio.readyState >= 2) {
+            audio.play();
+            updateProgress();  // Update the progress immediately on first play
+        } else {
+            audio.addEventListener("loadedmetadata", () => {
+                audio.play();
+                updateProgress();
+            }, { once: true });
+        }
     }
 
     // Pause the audio
