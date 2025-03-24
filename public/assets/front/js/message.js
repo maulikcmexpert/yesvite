@@ -3732,7 +3732,9 @@ $(".close-audio-btn").on("click", function () {
     $(".message-icons").removeClass("hide"); 
     $(".upload-box").val("");
     $(".file_info").val("");
-
+    const newPlayer = document.querySelector("#audioContainer");
+    newPlayer.classList.remove("initialized");
+    newPlayer.classList.remove("play");
     startButton.style.display = "inline-block";
     $("#musicContainer").removeClass("musicSample");
 });
