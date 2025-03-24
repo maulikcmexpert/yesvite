@@ -3756,7 +3756,7 @@ $("#musicContainer").hide();
 //     $("#musicContainer").removeClass("musicSample");
 // });
 // Add this event listener to reset the player when clicking the close button
-$(document).on('click', '.close-btn', function () {
+$(document).on('click', '.close-audio-btn', function () {
     const player = document.querySelector('.music-container');
 
     if (player) {
