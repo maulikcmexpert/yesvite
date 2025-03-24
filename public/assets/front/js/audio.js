@@ -25,26 +25,18 @@ export function initializeAudioPlayer(player) {
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
+        audio.load();   // Preload the audio immediately
+
     }
 
     // Play the audio
-    // function playSong() {
-    //     player.classList.add("play");
-    //     playBtn.querySelector("i.fas").classList.remove("fa-play");
-    //     playBtn.querySelector("i.fas").classList.add("fa-pause");
-
-    //     audio.play();
-    // }
     function playSong() {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-    
-        audio.addEventListener("canplaythrough", () => {
-            audio.play();
-        }, { once: true }); // Play once the audio is ready
+
+        audio.play();
     }
-    
 
     // Pause the audio
     function pauseSong() {
