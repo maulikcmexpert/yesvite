@@ -1019,8 +1019,12 @@
         align-items: center;
         gap: 10px;
     }
-    .add_potluck_cat_btn.me-2{
+    .add_potluck_cat_btn.me-3{
         margin-right: 5px !important;
+    }
+
+    .post-potluck-category .list-header h6{
+        font-size: 12px;
     }
 }
 
