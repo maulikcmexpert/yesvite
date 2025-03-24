@@ -997,6 +997,8 @@ input[type="search"]~span {
 
 #edit_contact{
     width: max-content;
+    min-width: 100px;
+    max-width: 100px;
 }
 
 /* ======= Responsive ======= */
