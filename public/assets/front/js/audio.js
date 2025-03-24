@@ -22,6 +22,15 @@ export function initializeAudioPlayer(player) {
 
     const volInput = player.querySelector('input[name="volume"]');
 
+    const audios = document.getElementById('recordedAudio');
+
+// Force the audio to load metadata
+    audio.load();
+
+    // Wait for the metadata to be available
+    audios.addEventListener('loadedmetadata', () => {
+        console.log(`Duration: ${audio.duration} seconds`);
+    });
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
@@ -50,8 +59,6 @@ export function initializeAudioPlayer(player) {
         const minutes = Math.floor(time / 60);
         let seconds = Math.floor(time % 60);
         seconds = seconds > 9 ? seconds : `0${seconds}`;
-        console.log(`${minutes}:${seconds}`);
-        
         return `${minutes}:${seconds}`;
     }
 
@@ -83,7 +90,7 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
-           duration.textContent = displayTime(audio.duration);
+        //    duration.textContent = displayTime(audio.duration);
     }
     
 
