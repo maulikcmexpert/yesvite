@@ -25,7 +25,7 @@ export function initializeAudioPlayer(player) {
     const audios = document.getElementById('recordedAudio');
 
 // Force the audio to load metadata
-    audio.load();
+    audios.load();
 
     // Wait for the metadata to be available
     audios.addEventListener('loadedmetadata', () => {
