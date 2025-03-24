@@ -55,9 +55,14 @@ export function initializeAudioPlayer(player) {
 
     // Update the progress bar as the audio plays
     function updateProgress() {
+        console.log(1);
         if (audio.duration) {
+            console.log(2);
+
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
+            console.log(progressPercent);
+
             currentTime.textContent = displayTime(audio.currentTime);
 
             if (audio.duration != NaN && audio.duration != Infinity)
@@ -163,8 +168,6 @@ export function initializeAudioPlayer(player) {
         addAudioFromChat(audioUrl);
     });
 }
-
-
 // Initialize all audio players
 export function musicPlayer(url) {
     setTimeout(() => {
