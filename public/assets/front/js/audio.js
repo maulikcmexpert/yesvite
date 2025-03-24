@@ -259,20 +259,20 @@ export function musicPlayer(url) {
 // const closeBtn = player.querySelector(".close-audio-btn");
 
 // if (closeBtn) {
-    $(".close-audio-btn").addEventListener("click", () => {
+    $(".close-audio-btn").on("click", () => {
         audio.pause();
         audio.currentTime = 0;
-
+    
         // Reset progress bar
-        progressBar.style.width = `0%`;
-        
+        $(".progress-bar").css("width", "0%");
+    
         // Reset time display
-        currentTime.textContent = "0:00";
-        duration.textContent = "- 0:00";
-
+        $(".current-time").text("0:00");
+        $(".duration").text("- 0:00");
+    
         // Reset play button icon
-        player.classList.remove("play");
-        playBtn.querySelector("i.fas").classList.add("fa-play");
-        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+        $(".player").removeClass("play");
+        $(".play-btn i.fas").addClass("fa-play").removeClass("fa-pause");
     });
+    
 // }
