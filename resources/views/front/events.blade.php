@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="mobile-calender-btn">
+                        <button type="button" class="mobile-calender-btn-events">
                         <span class="responsive-text">Calendar</span>
                         <span class="responsive-icon">
                             <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
