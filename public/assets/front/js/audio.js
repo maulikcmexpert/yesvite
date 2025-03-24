@@ -23,49 +23,19 @@ export function initializeAudioPlayer(player) {
     const volInput = player.querySelector('input[name="volume"]');
 
     // Function to dynamically load an audio file
-    // function loadSong(songUrl) {
-    //     audio.src = songUrl;
-    // }
     function loadSong(songUrl) {
         audio.src = songUrl;
-        audio.load(); // Force browser to fetch metadata
-    
-        audio.addEventListener("loadedmetadata", () => {
-            if (audio.duration && audio.duration !== Infinity) {
-                duration.textContent = " - " + displayTime(audio.duration);
-            }
-        });
     }
+
     // Play the audio
-    // function playSong() {
-    //     player.classList.add("play");
-    //     playBtn.querySelector("i.fas").classList.remove("fa-play");
-    //     playBtn.querySelector("i.fas").classList.add("fa-pause");
-
-    //     audio.play();
-    // }
-
     function playSong() {
-        if (audio.readyState < 2) { // Ensure metadata is loaded
-            audio.addEventListener("loadedmetadata", () => {
-                startPlayback();
-            }, { once: true }); // Runs only once
-        } else {
-            startPlayback();
-        }
-    }
-    
-    function startPlayback() {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-    
+
         audio.play();
-        updateProgress(); // Ensure progress updates after metadata is available
     }
-   
-    
-    
+
     // Pause the audio
     function pauseSong() {
         player.classList.remove("play");
@@ -84,34 +54,23 @@ export function initializeAudioPlayer(player) {
     }
 
     // Update the progress bar as the audio plays
-    // function updateProgress() {
-    //     console.log(1);
-    //     if (audio.duration) {
-    //         console.log(2);
-    //         console.log(audio.currentTime);
-    //         console.log( audio.duration);
-
-    //         const progressPercent = (audio.currentTime / audio.duration) * 100;
-    //         progressBar.style.width = `${progressPercent}%`;
-    //         console.log(progressPercent);
-
-    //         currentTime.textContent = displayTime(audio.currentTime);
-
-    //         if (audio.duration != NaN && audio.duration != Infinity)
-    //             duration.textContent = " - " + displayTime(audio.duration);
-    //     }
-    // }
     function updateProgress() {
-        if (audio.duration && audio.duration !== Infinity) {
+        console.log(1);
+        if (audio.duration) {
+            console.log(2);
+            console.log(audio.currentTime);
+            console.log( audio.duration);
+
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
+            console.log(progressPercent);
+
             currentTime.textContent = displayTime(audio.currentTime);
-            duration.textContent = " - " + displayTime(audio.duration);
-        } else {
-            console.log("Waiting for duration...");
+
+            if (audio.duration != NaN && audio.duration != Infinity)
+                duration.textContent = " - " + displayTime(audio.duration);
         }
     }
-    
 
     // Scrub through the audio
     function scrub(event) {
