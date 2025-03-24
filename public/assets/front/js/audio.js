@@ -132,7 +132,7 @@ export function initializeAudioPlayer(player) {
         playBtn.querySelector("i.fas").classList.remove("fa-pause");
         playBtn.querySelector("i.fas").classList.add("fa-play");
     });
-    
+
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
@@ -253,4 +253,26 @@ export function musicPlayer(url) {
         </div>
         </div>
     `;
+}
+
+
+const closeBtn = player.querySelector(".close-audio-btn");
+
+if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+        audio.pause();
+        audio.currentTime = 0;
+
+        // Reset progress bar
+        progressBar.style.width = `0%`;
+        
+        // Reset time display
+        currentTime.textContent = "0:00";
+        duration.textContent = "- 0:00";
+
+        // Reset play button icon
+        player.classList.remove("play");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+    });
 }
