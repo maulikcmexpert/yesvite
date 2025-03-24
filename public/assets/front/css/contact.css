@@ -568,6 +568,7 @@ ul.listing li span {
 
 .users-data .contact-img {
     width: 36px;
+    min-width: 36px;
     height: 36px;
     margin-right: 10px;
 }
@@ -581,7 +582,9 @@ ul.listing li span {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
     margin-bottom: 0;
     border: 1px solid transparent;
     background: linear-gradient(135deg, rgb(255, 247, 240), rgb(255, 200, 163)) rgb(14, 114, 207);
