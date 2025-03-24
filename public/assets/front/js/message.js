@@ -3728,68 +3728,32 @@ $("#musicContainer").hide();
         
 //     }
 // })
-// $(".close-audio-btn").on("click", function () {
-//     $("#musicContainer").hide();
-//     $("#send_audio").hide();
-//     $(".preview_img").attr("src", "");
-//     $(".recordedAudio").attr("src", "");
-//     $(".message-icons").removeClass("hide"); 
-//     $(".upload-box").val("");
-//     $(".file_info").val("");
-//     const newPlayer = document.querySelector("#audioContainer");
-//     newPlayer.classList.remove("initialized");
-//     // newPlayer.classList.remove("play");
-//     // $('#musicContainer').removeClass('.musicSample');
-//     // const player = document.querySelector("#audioContainer");
+$(".close-audio-btn").on("click", function () {
+    $("#musicContainer").hide();
+    $("#send_audio").hide();
+    $(".preview_img").attr("src", "");
+    $(".recordedAudio").attr("src", "");
+    $(".message-icons").removeClass("hide"); 
+    $(".upload-box").val("");
+    $(".file_info").val("");
+    const newPlayer = document.querySelector("#audioContainer");
+    newPlayer.classList.remove("initialized");
+    // newPlayer.classList.remove("play");
+    // $('#musicContainer').removeClass('.musicSample');
+    // const player = document.querySelector("#audioContainer");
 
-//     const progressBar = newPlayer.querySelector(".progress-bar");
+    const progressBar = newPlayer.querySelector(".progress-bar");
 
-//     // newPlayer.classList.remove("play");
-//     const playBtn1 = newPlayer.querySelector(".play");
-//     playBtn1.querySelector("i.fas").classList.add("fa-play");
-//     playBtn1.querySelector("i.fas").classList.remove("fa-pause");
-//     progressBar.style.width = `0%`;
+    // newPlayer.classList.remove("play");
+    const playBtn1 = newPlayer.querySelector(".play");
+    playBtn1.querySelector("i.fas").classList.add("fa-play");
+    playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+    progressBar.style.width = `0%`;
 
-//     startButton.style.display = "inline-block";
-//     $('.time-elapsed').text('00:00');
-//     $('.time-duration').text('');
-//     $("#musicContainer").removeClass("musicSample");
-// });
-// Add this event listener to reset the player when clicking the close button
-$(document).on('click', '.close-audio-btn', function () {
-    const player = document.querySelector('.music-container');
-
-    if (player) {
-        const audio = player.querySelector('.audio');
-        const playBtn = player.querySelector('.play i.fas');
-        const progressBar = player.querySelector('.progress-bar');
-        const currentTime = player.querySelector('.time-elapsed');
-        $("#musicContainer").hide();
-            $("#send_audio").hide();
-            $(".preview_img").attr("src", "");
-            $(".recordedAudio").attr("src", "");
-            $(".message-icons").removeClass("hide"); 
-            $(".upload-box").val("");
-            $(".file_info").val("");
-        // Stop the audio
-        audio.pause();
-        audio.currentTime = 0;
-
-        // Reset UI
-        progressBar.style.width = '0%';
-        currentTime.textContent = '0:00';
-        startButton.style.display = "inline-block";
-
-        // Change icon to play
-        playBtn.classList.remove('fa-pause');
-        playBtn.classList.add('fa-play');
-
-        // Remove the play class
-        player.classList.remove('play');
+    startButton.style.display = "inline-block";
+    $('.time-elapsed').text('00:00');
+    $('.time-duration').text('');
     $("#musicContainer").removeClass("musicSample");
-
-        console.log('Player reset to default state');
-    }
 });
 
 $(".preview_img").hide();
