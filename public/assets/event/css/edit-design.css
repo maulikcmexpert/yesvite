@@ -1603,7 +1603,7 @@
         width: max-content !important;
         max-width: max-content !important;
         height: calc(100dvh - 330px) !important;
-        max-height: 2160px !important;
+        max-height: 2000px !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
         /* max-width: 800px;
@@ -1620,7 +1620,7 @@
     .image-edit-inner-img {
         width: max-content !important;
         max-width: max-content !important;
-        height: calc(100dvh - 290px) !important;
+        height: calc(100dvh - 350px) !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
         /* max-width: 800px;
