@@ -3736,8 +3736,10 @@ $(".close-audio-btn").on("click", function () {
     newPlayer.classList.remove("initialized");
     newPlayer.classList.remove("play");
     // $('#musicContainer').removeClass('.musicSample');
-    const progressBar = player.querySelector(".progress-bar");
-    
+    // const player = document.querySelector("#audioContainer");
+
+    const progressBar = newPlayer.querySelector(".progress-bar");
+
     progressBar.style.width = `0%`;
 
     startButton.style.display = "inline-block";
