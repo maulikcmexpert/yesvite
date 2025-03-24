@@ -1063,6 +1063,13 @@
     z-index: 10;
 }
 
+.collection-card.card-blue.edit_design_tem{
+    aspect-ratio: 5/7;
+    height: max-content !important;
+}
+
+
+
 /* ====Responsive==== */
 
 /* @media only screen and (min-width: 1400px) and (max-width: 4000px) and (height: 1169px){
