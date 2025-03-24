@@ -742,11 +742,11 @@
     width: 20px !important;
     max-width: 20px !important;
     height: 20px !important;
-    border-radius: 8px !important;
-    -webkit-border-radius: 8px !important;
-    -moz-border-radius: 8px !important;
-    -ms-border-radius: 8px !important;
-    -o-border-radius: 8px !important;
+    border-radius: 5px !important;
+    -webkit-border-radius: 5px !important;
+    -moz-border-radius: 5px !important;
+    -ms-border-radius: 5px !important;
+    -o-border-radius: 5px !important;
     box-shadow: none !important;
     border: 1px solid var(--borderColor) !important;
     margin: 0 !important;
