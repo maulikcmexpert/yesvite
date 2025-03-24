@@ -995,7 +995,17 @@ input[type="search"]~span {
     min-width: 14px;
 }
 
+#edit_contact{
+    width: max-content;
+    min-width: 100px;
+    max-width: 100px;
+}
 
+.contact-tab.contact-user .users-data a svg{
+    width: 14px;
+    min-width: 14px;
+    height: 14px;
+}
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
@@ -1016,7 +1026,7 @@ input[type="search"]~span {
     }
 
     .contact-details .col-xxl-9 {
-        width: 52%;
+        width: 66%;
     }
 }
 
