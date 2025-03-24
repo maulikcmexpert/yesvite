@@ -2856,6 +2856,45 @@
     stroke: var(--white);
 }
 
+
+.mobile-calender-btn-events {
+    background-color: var(--primary-black);
+    font-family: var(--SFProDisplay-Semibold);
+    font-size: 16px;
+    line-height: normal;
+    border-radius: 100px;
+    padding: 10px 20px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: sticky;
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    z-index: 20;
+    border: none;
+    pointer-events: auto;
+    /* margin-top: 20px; */
+}
+
+.mobile-calender-btn-events span {
+    display: inline-block;
+}
+
+.mobile-calender-btn-events span svg {
+    width: 100%;
+    max-width: 20px;
+    height: 20px;
+}
+
+.mobile-calender-btn-events span svg path {
+    stroke: var(--white);
+}
+
 .responsive-calendar .month {
     opacity: 1;
     margin-bottom: 20px;
