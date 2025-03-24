@@ -77,8 +77,8 @@
 }
 
 .edit-images-button-wrp {
-    width: max-content;
-    max-width: max-content;
+    width: max-content !important;
+    max-width: max-content !important;
     margin: 0px auto;
     height: 100px;
     padding: 10px 16px;
@@ -2909,6 +2909,10 @@
     }
 }
 
+@media only screen and (min-width: 1800px) and (max-width: 10000px){
+
+}
+
 @media only screen and (max-width: 1399px) {
     .guest-wrp.side-guest-wrp .invite-pro{
         flex-direction: column;
@@ -2921,7 +2925,7 @@
     .edit-images-button-inner button {
         border: none !important;
         background: none !important;
-        min-width: 50px;
+        min-width: 65px;
     }
     .edit-images-button-wrp {
         padding: 10px 0px;
@@ -2929,6 +2933,9 @@
     #edit-design-temp .main-content-wrp{
         padding-top: 0px;
         padding-left: 0px;
+    }
+    #edit-design-temp .main-content-right{
+        padding: 0px;
     }
     
 }
@@ -3153,7 +3160,7 @@
         border: none !important;
         background: none !important;
         min-width: 65px;
-    }
+    }   
     .edit-images-button-wrp {
         padding: 10px 10px;
     }
