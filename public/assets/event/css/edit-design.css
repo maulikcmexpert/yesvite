@@ -2909,6 +2909,10 @@
     }
 }
 
+@media only screen and (min-width: 1800px) and (max-width: 10000px){
+
+}
+
 @media only screen and (max-width: 1399px) {
     .guest-wrp.side-guest-wrp .invite-pro{
         flex-direction: column;
