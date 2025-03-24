@@ -181,40 +181,49 @@ export function initializeAudioPlayer(player) {
     const audioPlayer = player.querySelector(".audio_player");
     const progressRange = player.querySelector(".progress-range");
     const progressBar = player.querySelector(".progress-bar");
+
     const currentTime = player.querySelector(".time-elapsed");
     const duration = player.querySelector(".time-duration");
+
     const audio = player.querySelector(".audio");
+
     const playBtn = player.querySelector(".play");
+    const stopBtn = player.querySelector(".stopRecording");  // ⬅️ Stop recording button
+
     const speaker = player.querySelector(".speaker");
     const speakerIcon = player.querySelector("#speaker_icon");
+
     const volInput = player.querySelector('input[name="volume"]');
 
-    // Function to dynamically load an audio file
+    let muted = false;
+
+    // ✅ Load song and wait for metadata before displaying duration
     function loadSong(songUrl) {
         audio.src = songUrl;
-        audio.load(); // Explicitly load the audio to trigger metadata fetching
-        progressBar.style.width = "0%"; // Reset progress bar
-        currentTime.textContent = "0:00"; // Reset current time
-        duration.textContent = ""; // Reset duration until loaded
+
+        // Ensure metadata is loaded before displaying duration
+        audio.addEventListener('loadedmetadata', () => {
+            displayDuration();
+            playSong();  // Optionally start playing immediately
+        }, { once: true });  // Remove listener after first trigger
     }
 
-    // Play the audio
     function playSong() {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
+
         audio.play();
     }
 
-    // Pause the audio
     function pauseSong() {
         player.classList.remove("play");
         playBtn.querySelector("i.fas").classList.add("fa-play");
         playBtn.querySelector("i.fas").classList.remove("fa-pause");
+
         audio.pause();
     }
 
-    // Display time in minutes and seconds
     function displayTime(time) {
         const minutes = Math.floor(time / 60);
         let seconds = Math.floor(time % 60);
@@ -222,42 +231,49 @@ export function initializeAudioPlayer(player) {
         return `${minutes}:${seconds}`;
     }
 
-    // Update the progress bar as the audio plays
     function updateProgress() {
-        if (!isNaN(audio.duration) && audio.duration > 0) { // Check if duration is valid
+        if (!isNaN(audio.duration) && isFinite(audio.duration)) {
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
+
             currentTime.textContent = displayTime(audio.currentTime);
             duration.textContent = " - " + displayTime(audio.duration);
         }
     }
 
-    // Scrub through the audio
     function scrub(event) {
-        if (!isNaN(audio.duration) && audio.duration > 0) {
-            const scrubTime = (event.offsetX / progressRange.offsetWidth) * audio.duration;
-            audio.currentTime = scrubTime;
+        const scrubTime = (event.offsetX / progressRange.offsetWidth) * audio.duration;
+        audio.currentTime = scrubTime;
+    }
+
+    function displayDuration() {
+        if (!isNaN(audio.duration) && isFinite(audio.duration)) {
+            duration.textContent = " - " + displayTime(audio.duration);
+            console.log(`Duration: ${displayTime(audio.duration)}`);  // Log for debugging
         }
     }
 
-    // Set progress bar when clicking
-    function setProgress(e) {
-        if (!isNaN(audio.duration) && audio.duration > 0) {
-            const newTime = e.offsetX / progressRange.offsetWidth;
-            progressBar.style.width = `${newTime * 100}%`;
-            audio.currentTime = newTime * audio.duration;
+    // ✅ Load duration on stopRecording button click
+    stopBtn.addEventListener("click", () => {
+        if (audio.src) {
+            audio.load();  // Reload the audio to ensure metadata is loaded
+            audio.addEventListener('loadedmetadata', () => {
+                displayDuration();
+            }, { once: true });
         }
+    });
+
+    if (audio.readyState > 0) {
+        displayDuration();
+    } else {
+        audio.addEventListener("loadedmetadata", displayDuration);
     }
 
-    // Handle volume changes
     function handleRangeUpdate() {
         audio.volume = this.value;
         speakerIcon.className = audio.volume === 0 ? "fa fa-volume-off" : "fa fa-volume-up";
     }
 
-    let muted = false;
-
-    // Mute or unmute the audio
     function mute() {
         if (!muted) {
             audio.volume = 0;
@@ -272,9 +288,9 @@ export function initializeAudioPlayer(player) {
         }
     }
 
-    // Event Listeners
     playBtn.addEventListener("click", () => {
         const isPlaying = player.classList.contains("play");
+
         if (isPlaying) {
             pauseSong();
         } else {
@@ -282,51 +298,42 @@ export function initializeAudioPlayer(player) {
         }
     });
 
-    // Update progress bar as the audio plays
+    function setProgress(e) {
+        const newTime = e.offsetX / progressRange.offsetWidth;
+        progressBar.style.width = `${newTime * 100}%`;
+        audio.currentTime = newTime * audio.duration;
+    }
+
+    // Event Listeners
     audio.addEventListener("timeupdate", updateProgress);
-
-    // Ensure duration is available before updating UI
-    audio.addEventListener("loadedmetadata", () => {
-        if (!isNaN(audio.duration) && audio.duration > 0) {
-            duration.textContent = " - " + displayTime(audio.duration);
-        }
-    });
-
-    // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
-    // Volume controls (uncomment if needed)
-    // volInput.addEventListener("change", handleRangeUpdate);
-    // volInput.addEventListener("mousemove", handleRangeUpdate);
-    // speaker.addEventListener("click", mute);
-
-    // Progress bar scrubbing
     let mouseDown = false;
     progressRange.addEventListener("click", scrub);
     progressRange.addEventListener("mousemove", (event) => mouseDown && scrub(event));
     progressRange.addEventListener("mousedown", () => (mouseDown = true));
     progressRange.addEventListener("mouseup", () => (mouseDown = false));
 
-    // Function to dynamically add audio from chat
     function addAudioFromChat(audioUrl) {
         loadSong(audioUrl);
-        playSong();
     }
 
     audio.addEventListener("ended", () => {
         progressBar.style.width = "0%";
         currentTime.textContent = "0:00";
+
         player.classList.remove("play");
         playBtn.querySelector("i.fas").classList.remove("fa-pause");
         playBtn.querySelector("i.fas").classList.add("fa-play");
     });
 
-    // Example usage: Adding an audio file from a chat message
     $(document).on("click", ".chat-audio", function () {
         const audioUrl = $(this).data("audio-url");
         addAudioFromChat(audioUrl);
     });
 }
+
+
 // Initialize all audio players
 export function musicPlayer(url) {
     setTimeout(() => {
