@@ -124,7 +124,15 @@ export function initializeAudioPlayer(player) {
     }
     // Update progress bar as the audio plays
     audio.addEventListener("timeupdate", updateProgress);
-
+    audio.addEventListener("ended", () => {
+        progressBar.style.width = "0%";
+        currentTime.textContent = "0:00";
+        
+        player.classList.remove("play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+    });
+    
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
