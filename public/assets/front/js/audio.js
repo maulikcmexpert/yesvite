@@ -74,6 +74,11 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
+        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+            duration.textContent = " - " + displayTime(audio.duration);
+        }
+        // Call updateProgress here to set the initial state of the progress bar
+        updateProgress();
         //    duration.textContent = displayTime(audio.duration);
     }
     if (audio.readyState > 0) {
@@ -114,7 +119,6 @@ export function initializeAudioPlayer(player) {
             pauseSong();
         } else {
             playSong();
-            updateProgress();
         }
     });
     function setProgress(e) {
