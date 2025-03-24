@@ -3709,16 +3709,10 @@ async function stopRecording() {
             newPlayer.classList.remove("initialized");
             initializeAudioPlayer(newPlayer);
         }, 500);
-        let messageBox = $("#message-box");
+        
         let messageIcons = $(".message-icons");
-    
-        // messageBox.on("input", function () {
-        //     if ($.trim(messageBox.val()) !== "") {
-                messageIcons.addClass("hide");  // Add hide class when input has value
-            // } else {
-                // messageIcons.removeClass("hide");  // Remove hide class when input is empty
-            // }
-        // });        
+        messageIcons.addClass("hide"); 
+              
     } else {
         console.error("MediaRecorder is not recording.");
     }
