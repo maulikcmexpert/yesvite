@@ -93,6 +93,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    word-break: break-all;
 }
 
 .home-center-profile-content h3 span {
@@ -4054,5 +4055,8 @@ padding: 12px 24px;
     }
     .home-upcoming-events-card-right {
         flex-basis: 40% !important;
+    }
+    .upcoming-events-card-notification-info {
+        right: -50px !important;
     }
 }
