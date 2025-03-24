@@ -162,7 +162,7 @@ export function initializeAudioPlayer(player) {
         const audioUrl = $(this).data("audio-url");
         addAudioFromChat(audioUrl);
     });
-    $(document).on("click", "..close-audio-btn", function () {
+    $(document).on("click", ".close-audio-btn", function () {
         audio.pause();
         audio.currentTime = 0;
     
@@ -177,6 +177,7 @@ export function initializeAudioPlayer(player) {
         $(".player").removeClass("play");
         $(".play-btn i.fas").addClass("fa-play").removeClass("fa-pause");
     });
+    
 }
 
 // Initialize all audio players
