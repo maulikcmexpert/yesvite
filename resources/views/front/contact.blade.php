@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <x-front.sidebar :profileData="$user" />
-            <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-8">
+            <div class="col-xxl-9 col-xl-8 col-lg-8 col-md-7">
                 <div class="contact-list">
                     <nav class="breadcrumb-nav" aria-label="breadcrumb">
                         <ol class="breadcrumb">

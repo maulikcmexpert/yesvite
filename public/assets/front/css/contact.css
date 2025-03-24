@@ -1003,15 +1003,15 @@ input[type="search"]~span {
 
 /* ======= Responsive ======= */
 @media only screen and (max-width:1399px) {
-    .contact-details .col-xxl-9 {
+    /* .contact-details .col-xxl-9 {
         width: 69%;
-    }
+    } */
 }
 
 @media only screen and (max-width:1199px) {
-    .contact-details .col-xxl-9 {
+    /* .contact-details .col-xxl-9 {
         width: 63%;
-    }
+    } */
 }
 
 @media only screen and (max-width:991px) {
@@ -1019,9 +1019,9 @@ input[type="search"]~span {
         width: 330px;
     }
 
-    .contact-details .col-xxl-9 {
+    /* .contact-details .col-xxl-9 {
         width: 52%;
-    }
+    } */
 }
 
 @media only screen and (max-width:767px) {
