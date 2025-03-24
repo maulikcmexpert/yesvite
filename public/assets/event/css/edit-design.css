@@ -1618,8 +1618,8 @@
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
     .image-edit-inner-img {
-        width: calc(100% - 50%) !important;
-        max-width: calc(100% - 50%) !important;
+        width: max-content !important;
+        max-width: max-content !important;
         height: calc(100dvh - 390px) !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
