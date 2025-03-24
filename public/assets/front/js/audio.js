@@ -25,8 +25,6 @@ export function initializeAudioPlayer(player) {
     // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
-        audio.load();   // Preload the audio immediately
-
     }
 
     // Play the audio
@@ -116,6 +114,7 @@ export function initializeAudioPlayer(player) {
             pauseSong();
         } else {
             playSong();
+            updateProgress();
         }
     });
     function setProgress(e) {
