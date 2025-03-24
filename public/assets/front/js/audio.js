@@ -33,10 +33,8 @@ export function initializeAudioPlayer(player) {
         player.classList.add("play");
         playBtn.querySelector("i.fas").classList.remove("fa-play");
         playBtn.querySelector("i.fas").classList.add("fa-pause");
-        audio.play().then(() => {
-            updateProgress(); // ✅ Trigger progress update immediately after audio starts
-        }).catch(error => console.error("Audio playback failed:", error));
-        // audio.play();
+        audio.play();
+        updateProgress();
     }
 
     // Pause the audio
