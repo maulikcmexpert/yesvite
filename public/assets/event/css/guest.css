@@ -702,7 +702,7 @@
     }
 
     .guest-wrapper .invite-pro {
-        display: flex;
+        display: none;
         bottom: 65px;
         left: 50%;
         transform: translateX(-50%);
@@ -1080,6 +1080,10 @@
 
     .guest-main-content .guest-wrapper .invite-pro{
         bottom: 75px !important; 
+    }
+
+    .guest-wrapper .invite-pro{
+        display: flex;
     }
 }
 
