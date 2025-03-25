@@ -73,22 +73,22 @@ export function initializeAudioPlayer(player) {
     // }
     function updateProgress() {
         if (audio.duration) {
+            // Calculate the progress percentage
             const progressPercent = (audio.currentTime / audio.duration) * 100;
+    
+            // 🌟 Increase the width of the progress bar dynamically
             progressBar.style.width = `${progressPercent}%`;
     
-            // Display current time
+            // Display the current playback time
             currentTime.textContent = displayTime(audio.currentTime);
     
-            // Display total duration
+            // Display the total duration only if it's valid
             if (!isNaN(audio.duration) && isFinite(audio.duration)) {
                 duration.textContent = " - " + displayTime(audio.duration);
             }
-    
-            // 🌟 Set the width of `.time-elapsed` dynamically
-            const elapsedWidth = (audio.currentTime / audio.duration) * 100;
-            currentTime.style.width = `${elapsedWidth}%`;
         }
     }
+    
     
 
     // Scrub through the audio
