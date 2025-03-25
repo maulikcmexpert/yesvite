@@ -324,9 +324,9 @@ export function initializeAudioPlayer(player) {
     const durationDisplay = player.querySelector(".time-duration");
     const audio = player.querySelector(".audio");
     const playBtn = player.querySelector(".play");
-    const audioDuration = $('.current_duration').val();
+    const audioDurationInput = $('.current_duration');
 
-    // let audioDuration = parseFloat(audioDurationInput.val()); // Initialize with current stored value
+    let audioDuration = parseFloat(audioDurationInput.val()); // Initialize with current stored value
     let isPlaying = false; // Track the play state locally
 
     // // Update audio duration when the hidden input changes
@@ -347,7 +347,7 @@ export function initializeAudioPlayer(player) {
         // Stop and reset the audio
         audio.pause();
         audio.currentTime = 0;
-        audioDuration.val('');
+        audioDurationInput.val('');
         durationDisplay.textContent = '';
         isPlaying = false;
         updatePlayButtonUI();
@@ -430,7 +430,7 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
-        const durationValue = parseFloat(audioDuration.val());
+        const durationValue = parseFloat(audioDurationInput.val());
         if (!isNaN(durationValue) && durationValue !== Infinity) {
             audioDuration = durationValue; // Update local duration
             durationDisplay.textContent = " - " + displayTime(durationValue);
@@ -445,7 +445,7 @@ export function initializeAudioPlayer(player) {
         audio.addEventListener("loadedmetadata", () => {
             // Ensure audioDuration is updated when metadata loads
             audioDuration = audio.duration;
-            audioDuration.val(audioDuration); // Update the hidden input as well
+            audioDurationInput.val(audioDuration); // Update the hidden input as well
             displayDuration();
         });
     }
@@ -506,7 +506,7 @@ export function initializeAudioPlayer(player) {
         // Ensure metadata is loaded for the new song
         audio.addEventListener("loadedmetadata", () => {
             audioDuration = audio.duration;
-            audioDuration.val(audioDuration);
+            audioDurationInput.val(audioDuration);
             displayDuration();
         }, { once: true }); // Only run once for the new source
 
