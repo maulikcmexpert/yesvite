@@ -3266,7 +3266,7 @@ class EventController extends BaseController
 
         $imageSources = $request->imageSources;
         // dd($imageSources);
-        dd($savedFiles);
+        // dd($savedFiles);
 
         $i = 0;
 
@@ -3305,7 +3305,7 @@ class EventController extends BaseController
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-        // dd($savedFiles);
+        dd($savedFiles);
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
