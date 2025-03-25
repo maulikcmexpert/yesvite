@@ -442,7 +442,9 @@ export function initializeAudioPlayer(player) {
     } else {
         audio.addEventListener("loadedmetadata", () => {
             // Ensure audioDuration is updated when metadata loads
-            audioDuration = audio.duration;
+            const durationValue = parseFloat(audioDurationInput.val());
+
+            audioDuration = durationValue;
             audioDurationInput.val(audioDuration); // Update the hidden input as well
             displayDuration();
         });
