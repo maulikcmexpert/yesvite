@@ -821,7 +821,8 @@ ul.member-lists li:last-child {
 }
 
 .msg-body ul li.sender .media-msg-inline div.media-msg {
-    display: inherit;
+    display: flex;
+    flex-direction: column;
 }
 
 .msg-body ul li.sender .media-msg-inline {
