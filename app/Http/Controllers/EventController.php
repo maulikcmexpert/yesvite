@@ -3266,7 +3266,7 @@ class EventController extends BaseController
 
         $imageSources = $request->imageSources;
         // dd($imageSources);
-        dd($existingImages);
+        // dd($existingImages);
 
         $i = 0;
 
