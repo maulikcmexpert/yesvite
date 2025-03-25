@@ -1628,8 +1628,8 @@
         max-height: 67.25rem;
         width: auto;
         margin: 0px auto;  */
-        width: max-content !important;
-        max-width: max-content !important;
+        width: 100% !important;
+        max-width: 100% !important;
         /* padding-top: 140%; */
         position: relative;
         aspect-ratio: 5 / 7;
