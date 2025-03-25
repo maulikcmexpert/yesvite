@@ -175,11 +175,11 @@ export function initializeAudioPlayer(player) {
     });
 
     // Add event listener for close button
-    player.querySelector(".close-audio-btn").addEventListener("click", () => {
-        // player.remove();
-        audio.pause();  // Pause the audio if playing
-        audio.currentTime = 0;
-    });
+    // player.querySelector(".close-audio-btn").addEventListener("click", () => {
+    //     // player.remove();
+    //     audio.pause();  // Pause the audio if playing
+    //     audio.currentTime = 0;
+    // });
 
 
     // Example usage: Adding an audio file from a chat message
