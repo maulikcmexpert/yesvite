@@ -1646,6 +1646,9 @@
     }
     #edit-design-temp .main-content-wrp{
         min-height: auto !important;
+        padding-bottom: 0px !important;
+        overflow: unset !important;
+        overflow-y: unset !important;
     }
 }
 
