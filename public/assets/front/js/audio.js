@@ -324,6 +324,8 @@ export function initializeAudioPlayer(player) {
     const currentTimeDisplay = player.querySelector(".time-elapsed");
     const durationDisplay = player.querySelector(".time-duration");
     const audio = player.querySelector(".audio");
+
+    alert(audio.duration);
     const playBtn = player.querySelector(".play");
     const audioDurationInput = $('.current_duration');
 
