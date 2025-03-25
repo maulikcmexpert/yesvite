@@ -1644,6 +1644,9 @@
     .image-edit-inner-img canvas{
         object-fit: contain;
     }
+    #edit-design-temp .main-content-wrp{
+        min-height: auto !important;
+    }
 }
 
 
