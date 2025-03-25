@@ -132,12 +132,6 @@
 //     }
 
 //     // Display time in minutes and seconds
-//     function displayTime(time) {
-//         const minutes = Math.floor(time / 60);
-//         let seconds = Math.floor(time % 60);
-//         seconds = seconds > 9 ? seconds : `0${seconds}`;
-//         return `${minutes}:${seconds}`;
-//     }
 
 //     // Update the progress bar as the audio plays
 //     function updateProgress() {
@@ -310,6 +304,13 @@
     
 // }
 
+//   function displayTime(time) {
+//         const minutes = Math.floor(time / 60);
+//         let seconds = Math.floor(time % 60);
+//         seconds = seconds > 9 ? seconds : `0${seconds}`;
+//         return `${minutes}:${seconds}`;
+//     }
+
 export function initializeAudioPlayer(player) {
     if (player.classList.contains("initialized")) {
         return; // If it does, return early and do nothing
@@ -400,12 +401,13 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display time in minutes and seconds
+
     function displayTime(time) {
-        const minutes = Math.floor(time / 60);
-        let seconds = Math.floor(time % 60);
-        seconds = seconds < 10 ? `0${seconds}` : seconds;
-        return `<span class="math-inline">\{minutes\}\:</span>{seconds}`;
-    }
+                const minutes = Math.floor(time / 60);
+                let seconds = Math.floor(time % 60);
+                seconds = seconds > 9 ? seconds : `0${seconds}`;
+                return `${minutes}:${seconds}`;
+            }
 
     // Update the progress bar as the audio plays
     function updateProgress() {
@@ -509,6 +511,7 @@ export function initializeAudioPlayer(player) {
         playSong();
     }
 }
+
 // Initialize all audio players
 export function musicPlayer(url) {
     setTimeout(() => {
