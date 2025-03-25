@@ -3771,35 +3771,48 @@ $("#musicContainer").hide();
 //     }
 // })
 $(".close-audio-btn").on("click", function () {
+    // ✅ Hide UI elements
     $("#musicContainer").hide();
     $("#send_audio").hide();
+    
+    // ✅ Clear audio and image preview
     $(".preview_img").attr("src", "");
     $(".recordedAudio").attr("src", "");
+    
+    // ✅ Reset message icons and input fields
     $(".message-icons").removeClass("hide"); 
     $(".upload-box").val("");
     $(".file_info").val("");
+
+    // ✅ Reset audio player
     const newPlayer = document.querySelector("#audioContainer");
     newPlayer.classList.remove("initialized");
-    // newPlayer.classList.remove("play");
-    // $('#musicContainer').removeClass('.musicSample');
-    // const player = document.querySelector("#audioContainer");
 
     const progressBar = newPlayer.querySelector(".progress-bar");
-
-    // newPlayer.classList.remove("play");
-    // newPlayer.classList.remove("play");
-    const playBtn1 = newPlayer.querySelector(".play");
-    playBtn1.querySelector("i.fas").classList.add("fa-play");
-    playBtn1.querySelector("i.fas").classList.remove("fa-pause");
     progressBar.style.width = `0%`;
 
+    const playBtn = newPlayer.querySelector(".play");
+    if (playBtn) {
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+    }
+
+    // ✅ Reset timer and durations
     startButton.style.display = "inline-block";
     $('.time-elapsed').text('00:00');
     $('.time-duration').text('');
     $('.current_duration').val('');
+    
+    // ✅ Clear recorded chunks and stop any active stream
+    recordedChunks = [];  // Clear recorded audio data
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());  // Stop all tracks
+    }
 
+    // ✅ Reset container styles
     $("#musicContainer").removeClass("musicSample");
 });
+
 
 $(".preview_img").hide();
 $("#preview_file").hide();
