@@ -1620,7 +1620,7 @@
     .image-edit-inner-img {
         width: max-content !important;
         max-width: max-content !important;
-        height: calc(100dvh - 440px) !important;
+        height: calc(100dvh - 290px) !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7;
         /* max-width: 800px;
