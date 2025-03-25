@@ -3200,7 +3200,7 @@
     .edit-images-button-inner button {
         border: none !important;
         background: none !important;
-        min-width: 43px;
+        min-width: 50px;
     }
     .edit-images-button-inner button h6 {
         font-size: 10px;
