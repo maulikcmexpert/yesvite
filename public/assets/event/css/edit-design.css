@@ -1606,11 +1606,22 @@
         max-height: 2000px !important;
         margin: 0px auto;
         aspect-ratio: 5 / 7; */
-        max-width: 800px;
+        /* max-width: 800px;
         height: calc(100vh - 68px - 80px - 100px);
         max-height: 67.25rem;
         width: auto;
-        margin: 0px auto;
+        margin: 0px auto; */
+        max-height: 70vh !important;
+        min-height: 70vh !important;
+        width: auto !important;
+        height: 100% !important;
+    }
+
+    .canvas-container{
+        max-height: 70vh !important;
+        min-height: 70vh !important;
+        width: auto !important;
+        height: 100% !important;
     }
     .image-edit-inner-img canvas{
         object-fit: contain;
