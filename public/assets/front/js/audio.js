@@ -134,7 +134,7 @@ export function initializeAudioPlayer(player) {
         audioPlayer.currentTime = newTime * audioPlayer.duration;
     }
     // Update progress bar as the audio plays
-    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("play", updateProgress);
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
