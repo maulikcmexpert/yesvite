@@ -9154,6 +9154,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                     i = i + 1;
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.setAttribute('data-image', sliderImages[index].fileName); 
                         sliderElement.style.display = "block";
 
                         $(".photo-edit-delete-" + i).show();
