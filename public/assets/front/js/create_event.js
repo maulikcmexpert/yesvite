@@ -8870,6 +8870,7 @@ function getLengthofSliderImage() {
 
 $(document).on("click", ".save-slider-image", function () {
     var imageSources = [];
+    var imagenames=[];
     // $(".slider_img").each(function () {
     //     imageSources.push($(this).attr("src"));
     // });
@@ -8880,6 +8881,9 @@ $(document).on("click", ".save-slider-image", function () {
             imageSources.push({
                 src: $(this).attr("src"),
                 deleteId: $(this).data("delete"),
+            });
+            imagenames.push({
+                name: $(this).attr("data-image"),
             });
         }
     });
@@ -8892,6 +8896,7 @@ $(document).on("click", ".save-slider-image", function () {
             data: {
                 eventId: eventId,
                 imageSources: imageSources,
+                imagenames: imagenames,
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
