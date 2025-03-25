@@ -54,57 +54,23 @@ export function initializeAudioPlayer(player) {
     }
 
     // Update the progress bar as the audio plays
-    // function updateProgress() {
-    //     // console.log(1);
-    //     if (audio.duration) {
-    //         // console.log(2);
-    //         // console.log(audio.currentTime);
-    //         // console.log( audio.duration);
-
-    //         const progressPercent = (audio.currentTime / audio.duration) * 100;
-    //         progressBar.style.width = `${progressPercent}%`;
-    //         console.log(progressPercent);
-
-    //         currentTime.textContent = displayTime(audio.currentTime);
-
-    //         if (audio.duration != NaN && audio.duration != Infinity)
-    //             duration.textContent = " - " + displayTime(audio.duration);
-    //     }
-    // }
-    let interval;  // Interval reference
-    let elapsedSeconds = 0;  // Track elapsed seconds
-    let estimatedDuration = 0;  // Store estimated duration dynamically
-    
     function updateProgress() {
-        // Reset elapsed seconds and progress bar
-        elapsedSeconds = 0;
-        progressBar.style.width = "0%";
-    
-        // 🌟 Dynamically estimate the duration
-        estimatedDuration = Math.ceil(audio.duration) || 30;  // Fallback to 30s if unknown
-    
-        // Start interval
-        interval = setInterval(() => {
-            elapsedSeconds++;
-    
-            // 🌟 Increase progress width per second
-            const progressWidth = (elapsedSeconds / estimatedDuration) * 100;
-            progressBar.style.width = `${Math.min(progressWidth, 100)}%`;  // Max 100%
-    
-            // Display current time
-            currentTime.textContent = displayTime(elapsedSeconds);
-    
-            // Stop when it reaches the estimated duration or audio ends
-            if (elapsedSeconds >= estimatedDuration || audio.ended) {
-                clearInterval(interval);
-                progressBar.style.width = "100%";  // Ensure it reaches 100%
-                currentTime.textContent = displayTime(audio.duration);
-            }
-        }, 1000);  // Increase every second
+        // console.log(1);
+        if (audio.duration) {
+            // console.log(2);
+            // console.log(audio.currentTime);
+            // console.log( audio.duration);
+
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            console.log(progressPercent);
+
+            currentTime.textContent = displayTime(audio.currentTime);
+
+            if (audio.duration != NaN && audio.duration != Infinity)
+                duration.textContent = " - " + displayTime(audio.duration);
+        }
     }
-    
-    
-    
     
 
     // Scrub through the audio
