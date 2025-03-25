@@ -75,7 +75,7 @@ export function initializeAudioPlayer(player) {
 
     const volInput = player.querySelector('input[name="volume"]');
 
-    loadNewAudio(audio.src);
+    // loadNewAudio(audio.src);
     
     $(".close-audio-btn").on("click", function () {
         $("#musicContainer").hide();
@@ -207,7 +207,7 @@ export function initializeAudioPlayer(player) {
         audio.addEventListener("timeupdate", updateProgress);
         audio.addEventListener("loadedmetadata", displayDuration);
     
-        audio.play();
+        // audio.play();
     }
     
     
@@ -236,10 +236,10 @@ export function initializeAudioPlayer(player) {
     
         if (isPlaying) {
             pauseSong();
-            player.classList.remove("play");  // ✅ Ensure it resets to false
+            // player.classList.remove("play");  // ✅ Ensure it resets to false
         } else {
             playSong();
-            player.classList.add("play");     // ✅ Ensure it becomes true
+            // player.classList.add("play");     // ✅ Ensure it becomes true
         }
     });
     
