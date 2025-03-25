@@ -5,6 +5,54 @@ export function initializeAudioPlayer(player) {
     }
     player.classList.add("initialized");
 
+    // $(".close-audio-btn").on("click", function () {
+    //     $("#musicContainer").hide();
+    //     $("#send_audio").hide();
+    //     $(".preview_img").attr("src", "");
+    //     $(".recordedAudio").attr("src", "");
+    //     $(".message-icons").removeClass("hide"); 
+    //     $(".upload-box").val("");
+    //     $(".file_info").val("");
+    
+    //     const player = document.querySelector("#audioContainer");
+    //     player.classList.remove("initialized");
+    
+    
+    //     // const play = player.querySelector(".play");
+    //     // if(play){
+    //     //     play.pause();
+    //     //     play.load(); 
+    
+    //     // }
+    //     audio.pause();
+    //     audio.currentTime = 0;
+    //     $('.current_duration').val('');  // Reset stored duration
+    //     duration.textContent = '';       // Clear displayed duration
+
+    //     const newPlayer = document.querySelector("#audioContainer");
+    //     newPlayer.classList.remove("initialized");
+    //     // newPlayer.classList.remove("play");
+    //     // $('#musicContainer').removeClass('.musicSample');
+    //     // const player = document.querySelector("#audioContainer");
+    
+    //     const progressBar = newPlayer.querySelector(".progress-bar");
+    //     const startButton = document.getElementById("startRecording");
+
+    //     // newPlayer.classList.remove("play");
+    //     // newPlayer.classList.remove("play");
+    //     const playBtn1 = newPlayer.querySelector(".play");
+    //     playBtn1.querySelector("i.fas").classList.add("fa-play");
+    //     playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+    //     progressBar.style.width = `0%`;
+    
+    //     startButton.style.display = "inline-block";
+    //     $('.time-elapsed').text('00:00');
+    //     $('.time-duration').text('');
+    //     $('.current_duration').val('');
+    
+    //     $("#musicContainer").removeClass("musicSample");
+    // });
+    
     $(".close-audio-btn").on("click", function () {
         $("#musicContainer").hide();
         $("#send_audio").hide();
@@ -14,43 +62,27 @@ export function initializeAudioPlayer(player) {
         $(".upload-box").val("");
         $(".file_info").val("");
     
-        const player = document.querySelector("#audioContainer");
-        player.classList.remove("initialized");
-    
-    
-        // const play = player.querySelector(".play");
-        // if(play){
-        //     play.pause();
-        //     play.load(); 
-    
-        // }
+        // Stop and reset the audio
         audio.pause();
         audio.currentTime = 0;
-        $('.current_duration').val('');  // Reset stored duration
-        duration.textContent = '';       // Clear displayed duration
-        
-        const newPlayer = document.querySelector("#audioContainer");
-        newPlayer.classList.remove("initialized");
-        // newPlayer.classList.remove("play");
-        // $('#musicContainer').removeClass('.musicSample');
-        // const player = document.querySelector("#audioContainer");
+        $('.current_duration').val('');
+        duration.textContent = '';    
     
-        const progressBar = newPlayer.querySelector(".progress-bar");
-        const startButton = document.getElementById("startRecording");
+        // Remove old event listeners
+        audio.removeEventListener("timeupdate", updateProgress);
+        audio.removeEventListener("loadedmetadata", displayDuration);
+    
+        player.classList.remove("play");
 
-        // newPlayer.classList.remove("play");
-        // newPlayer.classList.remove("play");
-        const playBtn1 = newPlayer.querySelector(".play");
-        playBtn1.querySelector("i.fas").classList.add("fa-play");
-        playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+        const player1 = document.querySelector("#audioContainer");
+        player1.classList.remove("initialized");
+    
+        const progressBar = player1.querySelector(".progress-bar");
         progressBar.style.width = `0%`;
     
+        const startButton = document.getElementById("startRecording");
         startButton.style.display = "inline-block";
         $('.time-elapsed').text('00:00');
-        $('.time-duration').text('');
-        $('.current_duration').val('');
-    
-        $("#musicContainer").removeClass("musicSample");
     });
     
     const audioPlayer = player.querySelector(".audio_player");
@@ -163,6 +195,17 @@ export function initializeAudioPlayer(player) {
             audio.volume === 0 ? "fa fa-volume-off" : "fa fa-volume-up";
     }
 
+    function loadNewAudio(newAudioUrl) {
+        // Set new audio source
+        audio.src = newAudioUrl;
+    
+        // Reset and attach fresh event listeners
+        audio.addEventListener("timeupdate", updateProgress);
+        audio.addEventListener("loadedmetadata", displayDuration);
+    
+        audio.play();
+    }
+    
     let muted = false;
 
     // Mute or unmute the audio
