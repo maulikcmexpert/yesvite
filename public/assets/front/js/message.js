@@ -3736,7 +3736,7 @@ async function stopRecording() {
         endTime = performance.now();
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
-        alert(durationInSeconds);
+        // alert(durationInSeconds);
         $('.current_duration').val(durationInSeconds);
 
 
