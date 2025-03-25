@@ -3784,7 +3784,7 @@ $(".close-audio-btn").on("click", function () {
     // $('#musicContainer').removeClass('.musicSample');
     // const player = document.querySelector("#audioContainer");
 
-    const progressBar = newPlayer.querySelector(".progress-bar");
+    // const progressBar = newPlayer.querySelector(".progress-bar");
 
     // newPlayer.classList.remove("play");
     // newPlayer.classList.remove("play");
@@ -3798,7 +3798,7 @@ $(".close-audio-btn").on("click", function () {
     $('.time-duration').text('');
     $('.current_duration').val('');
 
-    $("#musicContainer").removeClass("musicSample");
+    // $("#musicContainer").removeClass("musicSample");
 });
 
 $(".preview_img").hide();
