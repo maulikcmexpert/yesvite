@@ -3748,11 +3748,11 @@ async function stopRecording() {
         // Call playRecording() to initiate playback
         playRecording();
         $("#musicContainer").addClass("musicSample");
-        // setTimeout(() => {
-        //     const newPlayer = document.querySelector("#audioContainer");
-        //     newPlayer.classList.remove("initialized");
-        //     initializeAudioPlayer(newPlayer);
-        // }, 500);
+        setTimeout(() => {
+            const newPlayer = document.querySelector("#audioContainer");
+            newPlayer.classList.remove("initialized");
+            initializeAudioPlayer(newPlayer);
+        }, 500);
 
         let messageIcons = $(".message-icons");
         messageIcons.addClass("hide");
