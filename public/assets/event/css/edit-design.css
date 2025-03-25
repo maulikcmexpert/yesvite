@@ -1618,16 +1618,19 @@
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
     .image-edit-inner-img {
-        width: max-content !important;
+        /* width: max-content !important;
         max-width: max-content !important;
-        height: calc(100dvh - 440px) !important;
+        height: calc(100dvh - 290px) !important;
         margin: 0px auto;
-        aspect-ratio: 5 / 7;
+        aspect-ratio: 5 / 7; */
         /* max-width: 800px;
         height: calc(100vh - 68px - 80px - 100px);
         max-height: 67.25rem;
         width: auto;
         margin: 0px auto;  */
+        padding-top: 140%;
+        position: relative;
+        width: 100%;
     }
     /* .image-edit-inner-img canvas{
         object-fit: contain;
@@ -3207,7 +3210,7 @@
 }
 
 
-@media only screen and (min-width: 320px) and (max-width: 575px) and (min-height: 600px) and (max-height: 649px){
+/* @media only screen and (min-width: 320px) and (max-width: 575px) and (min-height: 600px) and (max-height: 649px){
     .image-edit-inner-img {
         height: calc(100dvh - 290px) !important;
     }        
@@ -3221,4 +3224,4 @@
     .image-edit-inner-img {
         height: calc(100dvh - 300px) !important;
     }        
-}
+} */
