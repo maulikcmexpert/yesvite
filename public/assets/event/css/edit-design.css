@@ -1611,10 +1611,10 @@
         max-height: 67.25rem;
         width: auto;
         margin: 0px auto; */
-        max-height: 70vh !important;
+        /* max-height: 70vh !important;
         min-height: 70vh !important;
         width: auto !important;
-        height: 100% !important;
+        height: 100% !important; */
     }
 
     .canvas-container{
@@ -1624,7 +1624,10 @@
         height: 100% !important;
     }
     .image-edit-inner-img canvas{
-        object-fit: contain;
+        max-height: 70vh !important;
+        min-height: 70vh !important;
+        width: auto !important;
+        height: 100% !important;
     }
 }
 @media only screen and (min-width: 320px) and (max-width:575px){
