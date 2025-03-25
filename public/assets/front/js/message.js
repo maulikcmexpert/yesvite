@@ -3738,7 +3738,6 @@ async function stopRecording() {
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
 
 
-        console.log(`Total Recording Duration: ${formattedDuration}`);
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
             mediaRecorder.onstop = resolve;
