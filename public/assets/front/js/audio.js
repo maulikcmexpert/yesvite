@@ -326,10 +326,10 @@ export function initializeAudioPlayer(player) {
     const playBtn = player.querySelector(".play");
     const audioDurationInput = $('.current_duration');
 
-    let audioDuration = audioDurationInput.val(); // Initialize with current stored value
+    let audioDuration = parseFloat(audioDurationInput.val()); // Initialize with current stored value
     let isPlaying = false; // Track the play state locally
 
-    // // Update audio duration when the hidden input changes
+    // Update audio duration when the hidden input changes
     audioDurationInput.on('input', function() {
         audioDuration = parseFloat(this.value);
         // displayDuration(); // Re-display duration if it changed
