@@ -369,6 +369,8 @@ export function initializeAudioPlayer(player) {
         if (startButton) {
             startButton.style.display = "inline-block";
         }
+            $("#musicContainer").removeClass("musicSample");
+
         $('.time-elapsed').text('00:00');
     });
 
