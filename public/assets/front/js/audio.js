@@ -326,10 +326,10 @@ export function initializeAudioPlayer(player) {
     const playBtn = player.querySelector(".play");
     const audioDurationInput = $('.current_duration');
 
-    let audioDuration = parseFloat(audioDurationInput.val()); // Initialize with current stored value
+    let audioDuration = audioDurationInput.val(); // Initialize with current stored value
     let isPlaying = false; // Track the play state locally
 
-    // Update audio duration when the hidden input changes
+    // // Update audio duration when the hidden input changes
     audioDurationInput.on('input', function() {
         audioDuration = parseFloat(this.value);
         displayDuration(); // Re-display duration if it changed
@@ -411,6 +411,8 @@ export function initializeAudioPlayer(player) {
 
     // Update the progress bar as the audio plays
     function updateProgress() {
+        console.log(audioDuration);
+        
         if (!isNaN(audioDuration) && audioDuration !== Infinity) {
             const progressPercent = (audio.currentTime / audioDuration) * 100;
             progressBar.style.width = `${progressPercent}%`;
@@ -450,6 +452,7 @@ export function initializeAudioPlayer(player) {
 
     // Event Listener for Play/Pause button
     playBtn.addEventListener("click", () => {
+        // alert()
         if (isPlaying) {
             pauseSong();
         } else {

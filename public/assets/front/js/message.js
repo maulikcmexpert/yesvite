@@ -3770,6 +3770,7 @@ $("#musicContainer").hide();
         
 //     }
 // })
+
 // $(".close-audio-btn").on("click", function () {
 //     $("#musicContainer").hide();
 //     $("#send_audio").hide();
