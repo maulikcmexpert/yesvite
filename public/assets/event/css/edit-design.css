@@ -1612,6 +1612,7 @@
         max-height: 67.25rem;
         /* width: auto; */
         margin: 0px auto;
+        aspect-ratio: 5 / 7;
     }
     .image-edit-inner-img canvas{
         object-fit: contain;
