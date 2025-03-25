@@ -332,7 +332,7 @@ export function initializeAudioPlayer(player) {
     // // Update audio duration when the hidden input changes
     audioDurationInput.on('input', function() {
         audioDuration = parseFloat(this.value);
-        displayDuration(); // Re-display duration if it changed
+        // displayDuration(); // Re-display duration if it changed
     });
 
     $(".close-audio-btn").on("click", function () {
