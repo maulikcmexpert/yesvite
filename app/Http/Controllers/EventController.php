@@ -3267,8 +3267,14 @@ class EventController extends BaseController
         $imageSources = $request->imageSources;
         $imagenames = $request->imagenames;
         // dd($imageSources);
-        $validNames = array_filter(array_column($imagenames, 'name'));  // Removes null values
-        dd($savedFiles,$imagenames,$validNames);
+        $validNames = array_filter(array_column($imagenames, 'name'));
+
+        // Extract the file names from $savedFiles
+        $savedFileNames = array_column($savedFiles, 'fileName');
+        
+        // Find the missing names (in savedFiles but not in validNames)
+        $missingNames = array_diff($savedFileNames, $validNames);        
+        dd($savedFiles,$imagenames,$missingNames);
 
         // Loop through saved files and delete the ones not in validNames
         foreach ($savedFiles as $file) {
