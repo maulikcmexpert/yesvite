@@ -3246,17 +3246,8 @@ class EventController extends BaseController
         $event_id = $request->eventId;
 
         $savedFiles = [];
-        $imageSources = $request->imageSources;
-        $imagenames = $request->imagenames;
-        $validNames = array_filter(array_column($imagenames, 'name'));
-        $savedFileNames = array_column($savedFiles, 'fileName');
-        $missingNames = array_diff($savedFileNames, $validNames);   
         
-        dd($missingNames);
-        foreach ($missingNames as $file) {
-            $getEventImages = EventImage::where(['event_id'=> $event_id,'image'=>$file])->delete();
-        
-         }
+       
         if (isset($event_id) && $event_id != '') {
             $getEventImages = EventImage::where('event_id', $event_id)->get();
 
@@ -3275,7 +3266,29 @@ class EventController extends BaseController
         }
         $existingImages = session('desgin_slider');
 
-    
+        $imageSources = $request->imageSources;
+        $imagenames = $request->imagenames;
+        $validNames = array_filter(array_column($imagenames, 'name'));
+        $savedFileNames = array_column($savedFiles, 'fileName');
+        $missingNames = array_diff($savedFileNames, $validNames); 
+        foreach ($missingNames as $file) {
+            $getEventImages = EventImage::where(['event_id'=> $event_id,'image'=>$file])->delete();
+        
+         }       
+         $getEventImages = EventImage::where('event_id', $event_id)->get();
+
+            if (!empty($getEventImages)) {
+                foreach ($getEventImages as $key => $imgVal) {
+                    if ($key == 0) {
+                        continue;
+                    }
+                    $fileName =   $imgVal->image;
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => $imgVal->id,
+                    ];
+                }
+            }
         // dd($savedFiles,$imagenames,$missingNames);
 
         // Loop through saved files and delete the ones not in validNames
