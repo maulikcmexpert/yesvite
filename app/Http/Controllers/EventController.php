@@ -3250,7 +3250,9 @@ class EventController extends BaseController
         $imagenames = $request->imagenames;
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
-        $missingNames = array_diff($savedFileNames, $validNames);     
+        $missingNames = array_diff($savedFileNames, $validNames);   
+        
+        dd($missingNames);
         foreach ($missingNames as $file) {
             $getEventImages = EventImage::where(['event_id'=> $event_id,'image'=>$file])->delete();
         
