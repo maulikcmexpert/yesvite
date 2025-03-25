@@ -1629,9 +1629,9 @@
         width: auto;
         margin: 0px auto;  */
     }
-    .image-edit-inner-img canvas{
+    /* .image-edit-inner-img canvas{
         object-fit: contain;
-    }
+    } */
 }
 
 
