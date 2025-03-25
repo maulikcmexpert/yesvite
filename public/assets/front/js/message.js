@@ -3688,6 +3688,36 @@ function playRecording() {
     //     alert("Failed to play recorded audio.");
     // });
 }
+// async function stopRecording() {
+//     if (mediaRecorder && mediaRecorder.state === "recording") {
+//         mediaRecorder.stop();
+//         $("#send_audio").show();
+//         $("#musicContainer").show();
+
+//         stopButton.style.display = "none";
+
+//         // Wait for the MediaRecorder to finish saving data
+//         await new Promise((resolve) => {
+//             mediaRecorder.onstop = resolve;
+//         });
+//         stream.getTracks().forEach((track) => track.stop());
+//         // Call playRecording() to initiate playback
+//         playRecording();
+//         $("#musicContainer").addClass("musicSample");
+//         setTimeout(() => {
+//             const newPlayer = document.querySelector("#audioContainer");
+//             newPlayer.classList.remove("initialized");
+//             initializeAudioPlayer(newPlayer);
+//         }, 500);
+
+//         let messageIcons = $(".message-icons");
+//         messageIcons.addClass("hide"); 
+              
+//     } else {
+//         console.error("MediaRecorder is not recording.");
+//     }
+// }
+
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -3711,13 +3741,12 @@ async function stopRecording() {
         }, 500);
 
         let messageIcons = $(".message-icons");
-        messageIcons.addClass("hide"); 
-              
+        messageIcons.addClass("hide");
+
     } else {
         console.error("MediaRecorder is not recording.");
     }
 }
-
 startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", playRecording);
