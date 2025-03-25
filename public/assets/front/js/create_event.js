@@ -8812,6 +8812,7 @@ $(document).on("change", ".slider_photo", function (event) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-1").attr("src", e.target.result).show();
+            $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
         $(".photo-edit-delete-1").show();
@@ -8833,6 +8834,8 @@ $(document).on("change", ".slider_photo_2", function (event) {
         $(".photo-edit-delete-2").show();
         reader.onload = function (e) {
             $(".photo-slider-2").attr("src", e.target.result).show();
+            $(".photo-slider-2").attr("data-image", "");
+
         };
         reader.readAsDataURL(file);
     }
@@ -8848,6 +8851,8 @@ $(document).on("change", ".slider_photo_3", function (event) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-3").attr("src", e.target.result).show();
+            $(".photo-slider-3").attr("data-image", "");
+
         };
         reader.readAsDataURL(file);
     }
