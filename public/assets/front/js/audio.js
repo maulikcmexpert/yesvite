@@ -401,13 +401,13 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display time in minutes and seconds
-
     function displayTime(time) {
-                const minutes = Math.floor(time / 60);
-                let seconds = Math.floor(time % 60);
-                seconds = seconds > 9 ? seconds : `0${seconds}`;
-                return `${minutes}:${seconds}`;
-            }
+        const minutes = Math.floor(time / 60);
+        let seconds = Math.floor(time % 60);
+        seconds = seconds < 10 ? `0${seconds}` : seconds;
+        return `<span class="math-inline">\{minutes\}\:</span>{seconds}`;
+    }
+    
 
     // Update the progress bar as the audio plays
     function updateProgress() {
