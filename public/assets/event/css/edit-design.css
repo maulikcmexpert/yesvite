@@ -1630,9 +1630,11 @@
         margin: 0px auto;  */
         padding-top: 140%;
         position: relative;
-        width: 90vw !important;
-        max-width: 90vw !important;
+        width: 100vw;
+        max-width: 70vh;
+        max-height: 98vh;
         aspect-ratio: 5 / 7;
+        /* height: calc(100dvh - 290px) !important; */
     }
     .canvas-container{
         position: absolute !important;
