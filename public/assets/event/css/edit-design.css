@@ -1650,6 +1650,9 @@
         overflow: unset !important;
         overflow-y: unset !important;
     }
+    .edit-images-button-wrp{
+        margin-bottom: 0px !important;
+    }
 }
 
 
