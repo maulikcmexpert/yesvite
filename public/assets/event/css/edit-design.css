@@ -1633,6 +1633,7 @@
         width: 90vw !important;
         max-width: 90vw !important;
         aspect-ratio: 5 / 7;
+        height: calc(100dvh - 290px) !important;
     }
     .canvas-container{
         position: absolute !important;
