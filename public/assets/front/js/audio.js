@@ -207,9 +207,9 @@ export function initializeAudioPlayer(player) {
             audio.src = "";
         }
 
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-        }
+        // if (stream) {
+        //     stream.getTracks().forEach(track => track.stop());
+        // }
 
         // 🛑 Reset recorded chunks
         recordedChunks = [];
