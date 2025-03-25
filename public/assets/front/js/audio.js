@@ -173,6 +173,12 @@ export function initializeAudioPlayer(player) {
         playBtn.querySelector("i.fas").classList.add("fa-play");
     });
 
+    // Add event listener for close button
+    player.querySelector(".close-audio-btn").addEventListener("click", () => {
+        player.remove();
+    });
+
+
     // Example usage: Adding an audio file from a chat message
     $(document).on("click", ".chat-audio", function () {
         const audioUrl = $(this).data("audio-url");
