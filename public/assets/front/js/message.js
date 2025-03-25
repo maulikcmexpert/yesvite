@@ -3779,6 +3779,10 @@ $(".close-audio-btn").on("click", function () {
     $(".upload-box").val("");
     $(".file_info").val("");
 
+    const player = document.querySelector("#audioContainer");
+    player.classList.remove("initialized");
+
+
     const play = player.querySelector(".play");
     if(play){
         play.pause();
