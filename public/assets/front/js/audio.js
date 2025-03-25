@@ -5,6 +5,51 @@ export function initializeAudioPlayer(player) {
     }
     player.classList.add("initialized");
 
+    $(".close-audio-btn").on("click", function () {
+        $("#musicContainer").hide();
+        $("#send_audio").hide();
+        $(".preview_img").attr("src", "");
+        $(".recordedAudio").attr("src", "");
+        $(".message-icons").removeClass("hide"); 
+        $(".upload-box").val("");
+        $(".file_info").val("");
+    
+        const player = document.querySelector("#audioContainer");
+        player.classList.remove("initialized");
+    
+    
+        // const play = player.querySelector(".play");
+        // if(play){
+        //     play.pause();
+        //     play.load(); 
+    
+        // }
+        audio.pause();  
+        audio.currentTime = 0;  
+        const newPlayer = document.querySelector("#audioContainer");
+        newPlayer.classList.remove("initialized");
+        // newPlayer.classList.remove("play");
+        // $('#musicContainer').removeClass('.musicSample');
+        // const player = document.querySelector("#audioContainer");
+    
+        const progressBar = newPlayer.querySelector(".progress-bar");
+        const startButton = document.getElementById("startRecording");
+
+        // newPlayer.classList.remove("play");
+        // newPlayer.classList.remove("play");
+        const playBtn1 = newPlayer.querySelector(".play");
+        playBtn1.querySelector("i.fas").classList.add("fa-play");
+        playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+        progressBar.style.width = `0%`;
+    
+        startButton.style.display = "inline-block";
+        $('.time-elapsed').text('00:00');
+        $('.time-duration').text('');
+        $('.current_duration').val('');
+    
+        $("#musicContainer").removeClass("musicSample");
+    });
+    
     const audioPlayer = player.querySelector(".audio_player");
 
     const progressRange = player.querySelector(".progress-range");
