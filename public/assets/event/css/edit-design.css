@@ -1628,22 +1628,21 @@
         max-height: 67.25rem;
         width: auto;
         margin: 0px auto;  */
-        padding-top: 140%;
+        width: max-content !important;
+        max-width: max-content !important;
+        /* padding-top: 140%; */
         position: relative;
-        width: 100vw;
-        max-width: 70vh;
-        max-height: 98vh;
         aspect-ratio: 5 / 7;
-        /* height: calc(100dvh - 290px) !important; */
+        height: calc(100dvh - 290px) !important;
     }
-    .canvas-container{
+    /* .canvas-container{
         position: absolute !important;
         top: 0;
         left: 0;
-    }
-    /* .image-edit-inner-img canvas{
-        object-fit: contain;
     } */
+    .image-edit-inner-img canvas{
+        object-fit: contain;
+    }
 }
 
 
