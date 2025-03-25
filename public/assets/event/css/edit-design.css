@@ -1629,11 +1629,12 @@
         width: auto;
         margin: 0px auto;  */
         width: 100% !important;
-        max-width: 100% !important;
+        max-width: 360px !important;
         /* padding-top: 140%; */
         position: relative;
         aspect-ratio: 5 / 7;
         height: calc(100dvh - 290px) !important;
+        margin: 0px auto;
     }
     /* .canvas-container{
         position: absolute !important;
