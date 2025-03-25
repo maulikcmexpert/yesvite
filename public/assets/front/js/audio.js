@@ -1,315 +1,179 @@
-// Function to initialize audio player
-// export function initializeAudioPlayer(player) {
-//     if (player.classList.contains("initialized")) {
-//         return; // If it does, return early and do nothing
-//     }
-//     player.classList.add("initialized");
-//     // $(".close-audio-btn").on("click", function () {
-//     //     $("#musicContainer").hide();
-//     //     $("#send_audio").hide();
-//     //     $(".preview_img").attr("src", "");
-//     //     $(".recordedAudio").attr("src", "");
-//     //     $(".message-icons").removeClass("hide"); 
-//     //     $(".upload-box").val("");
-//     //     $(".file_info").val("");
-    
-//     //     const player = document.querySelector("#audioContainer");
-//     //     player.classList.remove("initialized");
-    
-    
-//     //     // const play = player.querySelector(".play");
-//     //     // if(play){
-//     //     //     play.pause();
-//     //     //     play.load(); 
-    
-//     //     // }
-//     //     audio.pause();
-//     //     audio.currentTime = 0;
-//     //     $('.current_duration').val('');  // Reset stored duration
-//     //     duration.textContent = '';       // Clear displayed duration
 
-//     //     const newPlayer = document.querySelector("#audioContainer");
-//     //     newPlayer.classList.remove("initialized");
-//     //     // newPlayer.classList.remove("play");
-//     //     // $('#musicContainer').removeClass('.musicSample');
-//     //     // const player = document.querySelector("#audioContainer");
-    
-//     //     const progressBar = newPlayer.querySelector(".progress-bar");
-//     //     const startButton = document.getElementById("startRecording");
+export function initializeAudioPlayeralready(player) {
+    if (player.classList.contains("initialized")) {
+        return; // If it does, return early and do nothing
+    }
+    player.classList.add("initialized");
 
-//     //     // newPlayer.classList.remove("play");
-//     //     // newPlayer.classList.remove("play");
-//     //     const playBtn1 = newPlayer.querySelector(".play");
-//     //     playBtn1.querySelector("i.fas").classList.add("fa-play");
-//     //     playBtn1.querySelector("i.fas").classList.remove("fa-pause");
-//     //     progressBar.style.width = `0%`;
-    
-//     //     startButton.style.display = "inline-block";
-//     //     $('.time-elapsed').text('00:00');
-//     //     $('.time-duration').text('');
-//     //     $('.current_duration').val('');
-    
-//     //     $("#musicContainer").removeClass("musicSample");
-//     // });
-    
-  
-    
-//     const audioPlayer = player.querySelector(".audio_player");
+    const audioPlayer = player.querySelector(".audio_player");
 
-//     const progressRange = player.querySelector(".progress-range");
-//     const progressBar = player.querySelector(".progress-bar");
+    const progressRange = player.querySelector(".progress-range");
+    const progressBar = player.querySelector(".progress-bar");
 
-//     const currentTime = player.querySelector(".time-elapsed");
-//     const duration = player.querySelector(".time-duration");
+    const currentTime = player.querySelector(".time-elapsed");
+    const duration = player.querySelector(".time-duration");
 
-//     const audio = player.querySelector(".audio");
-//     const audioDuration = $('.current_duration').val();
+    const audio = player.querySelector(".audio");
 
-//     console.log(audioDuration);
-    
+    const playBtn = player.querySelector(".play");
 
-//     const playBtn = player.querySelector(".play");
+    const speaker = player.querySelector(".speaker");
+    const speakerIcon = player.querySelector("#speaker_icon");
 
-//     const speaker = player.querySelector(".speaker");
-//     const speakerIcon = player.querySelector("#speaker_icon");
+    const volInput = player.querySelector('input[name="volume"]');
 
-//     const volInput = player.querySelector('input[name="volume"]');
+        // Function to dynamically load an audio file
+    function loadSong(songUrl) {
+        audio.src = songUrl;
+    }
 
-//     // loadNewAudio(audio.src);
-    
-//     $(".close-audio-btn").on("click", function () {
-//         $("#musicContainer").hide();
-//         $("#send_audio").hide();
-//         $(".preview_img").attr("src", "");
-//         $(".recordedAudio").attr("src", "");
-//         $(".message-icons").removeClass("hide"); 
-//         $(".upload-box").val("");
-//         $(".file_info").val("");
-    
-//         // Stop and reset the audio
-//         audio.pause();
-//         audio.currentTime = 0;
-//         $('.current_duration').val('');
-//         duration.textContent = '';    
-    
-//         // Remove old event listeners
-//         audio.removeEventListener("timeupdate", updateProgress);
-//         audio.removeEventListener("loadedmetadata", displayDuration);
-    
-//         player.classList.remove("play");
+    // Play the audio
+    function playSong() {
+        player.classList.add("play");
+        playBtn.querySelector("i.fas").classList.remove("fa-play");
+        playBtn.querySelector("i.fas").classList.add("fa-pause");
 
-//         const player1 = document.querySelector("#audioContainer");
-//         player1.classList.remove("initialized");
-    
-//         const progressBar = player1.querySelector(".progress-bar");
-//         progressBar.style.width = `0%`;
-    
-//         const startButton = document.getElementById("startRecording");
-//         startButton.style.display = "inline-block";
-//         $('.time-elapsed').text('00:00');
-//     });
-//         // Function to dynamically load an audio file
-//     function loadSong(songUrl) {
-//         audio.src = songUrl;
-//     }
+        audio.play();
+    }
 
-//     // Play the audio
-//     function playSong() {
-//         player.classList.add("play");
-//         playBtn.querySelector("i.fas").classList.remove("fa-play");
-//         playBtn.querySelector("i.fas").classList.add("fa-pause");
+    // Pause the audio
+    function pauseSong() {
+        player.classList.remove("play");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
 
-//         audio.play();
-//     }
+        audio.pause();
+    }
 
-//     // Pause the audio
-//     function pauseSong() {
-//         player.classList.remove("play");
-//         playBtn.querySelector("i.fas").classList.add("fa-play");
-//         playBtn.querySelector("i.fas").classList.remove("fa-pause");
+    // Display time in minutes and seconds
+    function displayTime(time) {
+        const minutes = Math.floor(time / 60);
+        let seconds = Math.floor(time % 60);
+        seconds = seconds > 9 ? seconds : `0${seconds}`;
+        return `${minutes}:${seconds}`;
+    }
 
-//         audio.pause();
-//     }
+    // Update the progress bar as the audio plays
+    function updateProgress() {
+        // console.log(1);
+        if (audio.duration) {
+            // console.log(2);
+            // console.log(audio.currentTime);
+            // console.log( audio.duration);
 
-//     // Display time in minutes and seconds
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            console.log(progressPercent);z
 
-//     // Update the progress bar as the audio plays
-//     function updateProgress() {
-//         // console.log(1);
-//         // if (audioDuration) {
-//         if (audioDuration) {
-//             // console.log(2);
-//             // console.log(audio.currentTime);
-//             console.log( audioDuration);
+            currentTime.textContent = displayTime(audio.currentTime);
 
-//             const progressPercent = (audio.currentTime / audioDuration) * 100;
-//             progressBar.style.width = `${progressPercent}%`;
-//             console.log(progressPercent);
+            if (audio.duration != NaN && audio.duration != Infinity)
+                duration.textContent = " - " + displayTime(audio.duration);
+        }
+    }
 
-//             currentTime.textContent = displayTime(audio.currentTime);
+    // Scrub through the audio
+    function scrub(event) {
+        const scrubTime =
+            (event.offsetX / progressRange.offsetWidth) * audio.duration;
+        audio.currentTime = scrubTime;
+    }
 
-//             if (audioDuration != NaN && audioDuration != Infinity)
-//                 duration.textContent = " - " + displayTime(audioDuration);
-//         }
-//     }
+    // Display the duration of the audio
+    function displayDuration() {
+        //    duration.textContent = displayTime(audio.duration);
+    }
     
 
-//     // Scrub through the audio
-//     function scrub(event) {
-//         const scrubTime =
-//             (event.offsetX / progressRange.offsetWidth) * audioDuration;
-//         audio.currentTime = scrubTime;
-//     }
+    if (audio.readyState > 0) {
+        displayDuration();
+    } else {
+        audio.addEventListener("loadedmetadata", displayDuration);
+    }
 
-//     // Display the duration of the audio
-//     // function displayDuration() {
-//     //     //    duration.textContent = displayTime(audioDuration);
-//     // }
-//     function displayDuration() {
-//         const newDuration = audioDuration;
-//         if (!isNaN(newDuration) && newDuration !== Infinity) {
-//             $('.current_duration').val(newDuration);  // Store the latest duration
-//             duration.textContent = " - " + displayTime(newDuration);
-//         } else {
-//             $('.current_duration').val('');  // Reset if duration is invalid
-//         }
-//     }
-    
-    
+    // Handle volume changes
+    function handleRangeUpdate() {
+        audio.volume = this.value;
+        speakerIcon.className =
+            audio.volume === 0 ? "fa fa-volume-off" : "fa fa-volume-up";
+    }
 
-//     if (audio.readyState > 0) {
-//         displayDuration();
-//     } else {
-//         audio.addEventListener("loadedmetadata", displayDuration);
-//     }
+    let muted = false;
 
-//     // Handle volume changes
-//     function handleRangeUpdate() {
-//         audio.volume = this.value;
-//         speakerIcon.className =
-//             audio.volume === 0 ? "fa fa-volume-off" : "fa fa-volume-up";
-//     }
+    // Mute or unmute the audio
+    function mute() {
+        if (!muted) {
+            audio.volume = 0;
+            volInput.value = 0;
+            speakerIcon.className = "fa fa-volume-off";
+            muted = true;
+        } else {
+            audio.volume = 1;
+            volInput.value = 1;
+            muted = false;
+            speakerIcon.className = "fa fa-volume-up";
+        }
+    }
 
-//     function loadNewAudio(newAudioUrl) {
-//         // Reset the player state before loading new audio
-//         const player = document.querySelector("#audioContainer");
-//         player.classList.remove("play");  // ✅ Reset to prevent false play state
-    
-//         audio.src = newAudioUrl;
-    
-//         // Reset and attach fresh event listeners
-//         audio.addEventListener("timeupdate", updateProgress);
-//         audio.addEventListener("loadedmetadata", displayDuration);
-    
-//         // audio.play();
-//     }
-    
-    
-//     let muted = false;
-
-//     // Mute or unmute the audio
-//     function mute() {
-//         if (!muted) {
-//             audio.volume = 0;
-//             volInput.value = 0;
-//             speakerIcon.className = "fa fa-volume-off";
-//             muted = true;
-//         } else {
-//             audio.volume = 1;
-//             volInput.value = 1;
-//             muted = false;
-//             speakerIcon.className = "fa fa-volume-up";
-//         }
-//     }
-
-//     // Event Listeners.
-//     playBtn.addEventListener("click", () => {
-//         const isPlaying = player.classList.contains("play");
-    
-//         console.log('Is Playing:', isPlaying); 
-    
-//         if (isPlaying) {
-//             pauseSong();
-//             // player.classList.remove("play");  // ✅ Ensure it resets to false
-//         } else {
-//             playSong();
-//             // player.classList.add("play");     // ✅ Ensure it becomes true
-//         }
-//     });
-    
-//     // playBtn.addEventListener("click", () => {
-//     //     const isPlaying = player.classList.contains("play");
-//     //     console.log(isPlaying);
+    // Event Listeners
+    playBtn.addEventListener("click", () => {
+        const isPlaying = player.classList.contains("play");
+        console.log(isPlaying);
         
-//     //     if (isPlaying) {
-//     //         pauseSong();
-//     //     } else {
-//     //         playSong();
-//     //     }
-//     // });
-//     function setProgress(e) {
-//         console.log(audioPlayer);
-//         const newTime = e.offsetX / progressRange.offsetWidth;
-//         progressBar.style.width = `${newTime * 100}%`;
-//         audioPlayer.currentTime = newTime * audioPlayer.duration;
-//     }
-//     // Update progress bar as the audio plays
-//     audio.addEventListener("timeupdate", updateProgress);
-//     // Click on progress bar to seek
-//     progressRange.addEventListener("click", setProgress);
+        if (isPlaying) {
+            pauseSong();
+        } else {
+            playSong();
+        }
+    });
+    function setProgress(e) {
+        console.log(audioPlayer);
+        const newTime = e.offsetX / progressRange.offsetWidth;
+        progressBar.style.width = `${newTime * 100}%`;
+        audioPlayer.currentTime = newTime * audioPlayer.duration;
+    }
+    // Update progress bar as the audio plays
+    audio.addEventListener("timeupdate", updateProgress);
+    // Click on progress bar to seek
+    progressRange.addEventListener("click", setProgress);
 
-//     // Volume controls
-//     // volInput.addEventListener("change", handleRangeUpdate);
-//     // volInput.addEventListener("mousemove", handleRangeUpdate);
-//     // speaker.addEventListener("click", mute);
+    // Volume controls
+    // volInput.addEventListener("change", handleRangeUpdate);
+    // volInput.addEventListener("mousemove", handleRangeUpdate);
+    // speaker.addEventListener("click", mute);
 
-//     // Progress bar scrubbing
-//     let mouseDown = false;
-//     progressRange.addEventListener("click", scrub);
-//     progressRange.addEventListener(
-//         "mousemove",
-//         (event) => mouseDown && scrub(event)
-//     );
-//     progressRange.addEventListener("mousedown", () => (mouseDown = true));
-//     progressRange.addEventListener("mouseup", () => (mouseDown = false));
+    // Progress bar scrubbing
+    let mouseDown = false;
+    progressRange.addEventListener("click", scrub);
+    progressRange.addEventListener(
+        "mousemove",
+        (event) => mouseDown && scrub(event)
+    );
+    progressRange.addEventListener("mousedown", () => (mouseDown = true));
+    progressRange.addEventListener("mouseup", () => (mouseDown = false));
 
-//     // Function to dynamically add audio from chat
-//     function addAudioFromChat(audioUrl) {
-//         loadSong(audioUrl);
-//         playSong();
-//     }
+    // Function to dynamically add audio from chat
+    function addAudioFromChat(audioUrl) {
+        loadSong(audioUrl);
+        playSong();
+    }
 
-//     audio.addEventListener("ended", () => {
-//         progressBar.style.width = "0%";
-//         currentTime.textContent = "0:00";
+    audio.addEventListener("ended", () => {
+        progressBar.style.width = "0%";
+        currentTime.textContent = "0:00";
         
-//         player.classList.remove("play");
-//         playBtn.querySelector("i.fas").classList.remove("fa-pause");
-//         playBtn.querySelector("i.fas").classList.add("fa-play");
-//     });
+        player.classList.remove("play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+    });
 
-//     // Add event listener for close button
-//     // player.querySelector(".close-audio-btn").addEventListener("click", () => {
-//     //     // player.remove();
-//     //     audio.pause();  // Pause the audio if playing
-//     //     audio.currentTime = 0;
-//     // });
+    // Example usage: Adding an audio file from a chat message
+    $(document).on("click", ".chat-audio", function () {
+        const audioUrl = $(this).data("audio-url");
+        addAudioFromChat(audioUrl);
+    });
+}
 
-
-//     // Example usage: Adding an audio file from a chat message
-//     $(document).on("click", ".chat-audio", function () {
-//         const audioUrl = $(this).data("audio-url");
-//         addAudioFromChat(audioUrl);
-//     });
-    
-// }
-
-//   function displayTime(time) {
-//         const minutes = Math.floor(time / 60);
-//         let seconds = Math.floor(time % 60);
-//         seconds = seconds > 9 ? seconds : `0${seconds}`;
-//         return `${minutes}:${seconds}`;
-//     }
 
 
 export function initializeAudioPlayer(player) {
@@ -529,7 +393,7 @@ export function musicPlayer(url) {
     setTimeout(() => {
         document
             .querySelectorAll(".music-container")
-            .forEach(initializeAudioPlayer);
+            .forEach(initializeAudioPlayeralready);
     }, 2000);
 
     // HTML structure of the music player
