@@ -192,9 +192,12 @@ export function initializeAudioPlayer(player) {
         progressBar.style.width = `0%`;
 
         const playBtn = player.querySelector(".play");
-        if (playBtn) {
-            playBtn.querySelector("i.fas").classList.replace("fa-pause", "fa-play");
-        }
+        // const playBtn1 = newPlayer.querySelector(".play");
+        playBtn.querySelector("i.fas").classList.add("fa-play");
+        playBtn.querySelector("i.fas").classList.remove("fa-pause");
+        
+        const startButton = document.getElementById("startRecording");
+        startButton.style.display = "inline-block";
 
         // 🛑 Reset timer and duration
         $('.time-elapsed').text('00:00');
@@ -212,7 +215,7 @@ export function initializeAudioPlayer(player) {
         // }
 
         // 🛑 Reset recorded chunks
-        recordedChunks = [];
+        // recordedChunks = [];
 
         console.log("Audio player reset and cleared.");
     });
