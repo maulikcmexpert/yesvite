@@ -3282,7 +3282,6 @@ class EventController extends BaseController
             }
         }
 
-        dd($e)
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
                 $parts = explode(';', $imageSource['src']);
