@@ -3783,12 +3783,12 @@ $(".close-audio-btn").on("click", function () {
     player.classList.remove("initialized");
 
 
-    const play = player.querySelector(".play");
-    if(play){
-        play.pause();
-        play.load(); 
+    // const play = player.querySelector(".play");
+    // if(play){
+    //     play.pause();
+    //     play.load(); 
 
-    }
+    // }
     const newPlayer = document.querySelector("#audioContainer");
     newPlayer.classList.remove("initialized");
     // newPlayer.classList.remove("play");
