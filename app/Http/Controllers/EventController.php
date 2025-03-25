@@ -3267,8 +3267,13 @@ class EventController extends BaseController
         $imageSources = $request->imageSources;
         $imagenames = $request->imagenames;
         // dd($imageSources);
-        dd($savedFiles,$imagenames);
+        $validNames = array_filter(array_column($imagenames, 'name'));  // Removes null values
+        dd($savedFiles,$imagenames,$validNames);
 
+        // Loop through saved files and delete the ones not in validNames
+        foreach ($savedFiles as $file) {
+           $getEventImages = EventImage::where('event_id', $event_id)->get();
+        }
         $i = 0;
 
         // Check if there are existing images in the session and unlink them
