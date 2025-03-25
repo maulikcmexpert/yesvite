@@ -178,47 +178,7 @@ export function initializeAudioPlayer(player) {
         const audioUrl = $(this).data("audio-url");
         addAudioFromChat(audioUrl);
     });
-
-    $(".close-audio-btn").on("click", function () {
-        // 🛑 Hide and clear all audio data
-        $("#musicContainer").hide();
-        $("#send_audio").hide();
-        $(".preview_img, .recordedAudio").attr("src", "");
-        $(".message-icons").removeClass("hide");
-        $(".upload-box, .file_info").val("");
-
-        // 🛑 Reset audio player
-        player.classList.remove("initialized", "play");
-        progressBar.style.width = `0%`;
-
-        const playBtn = player.querySelector(".play");
-        // const playBtn1 = newPlayer.querySelector(".play");
-        playBtn.querySelector("i.fas").classList.add("fa-play");
-        playBtn.querySelector("i.fas").classList.remove("fa-pause");
-        
-        const startButton = document.getElementById("startRecording");
-        startButton.style.display = "inline-block";
-
-        // 🛑 Reset timer and duration
-        $('.time-elapsed').text('00:00');
-        $('.time-duration').text('');
-        $('.current_duration').val('');
-
-        // 🛑 Stop and clear audio stream
-        if (audio) {
-            audio.pause();
-            audio.src = "";
-        }
-
-        // if (stream) {
-        //     stream.getTracks().forEach(track => track.stop());
-        // }
-
-        // 🛑 Reset recorded chunks
-        // recordedChunks = [];
-
-        console.log("Audio player reset and cleared.");
-    });
+    
 }
 
 
