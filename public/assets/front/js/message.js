@@ -3649,8 +3649,8 @@ $("#choose-file").on("change", async function () {
     }, 800);
 });
 
-let seconds = 0; 
-let recordingTimer;    // Timer interval
+// let stream, mediaRecorder;
+let startTime, endTime;  //    // Timer interval
        // Track total seconds
 async function startRecording() {
     recordedChunks = [];
@@ -3661,9 +3661,8 @@ async function startRecording() {
         mediaRecorder = new MediaRecorder(stream);
 
         mediaRecorder.start();
-        recordingTimer = setInterval(() => {
-            seconds++;
-        }, 1000);
+        startTime = performance.now();
+
         startButton.style.display = "none";
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
@@ -3733,12 +3732,10 @@ async function stopRecording() {
         $("#musicContainer").show();
 
         stopButton.style.display = "none";
-        clearInterval(recordingTimer);
+        endTime = performance.now();
+        const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
+        console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
 
-        // 🌟 Convert seconds to `mm:ss` format
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        const formattedDuration = `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 
         console.log(`Total Recording Duration: ${formattedDuration}`);
         // Wait for the MediaRecorder to finish saving data
