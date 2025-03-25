@@ -14,6 +14,10 @@ export function initializeAudioPlayer(player) {
     const duration = player.querySelector(".time-duration");
 
     const audio = player.querySelector(".audio");
+    const audioDuration = $('.current_duration').val();
+
+    console.log(audioDuration);
+    
 
     const playBtn = player.querySelector(".play");
 
@@ -56,19 +60,20 @@ export function initializeAudioPlayer(player) {
     // Update the progress bar as the audio plays
     function updateProgress() {
         // console.log(1);
-        if (audio.duration) {
+        // if (audioDuration) {
+        if (audioDuration) {
             // console.log(2);
             // console.log(audio.currentTime);
-            console.log( audio.duration);
+            console.log( audioDuration);
 
-            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            const progressPercent = (audio.currentTime / audioDuration) * 100;
             progressBar.style.width = `${progressPercent}%`;
             console.log(progressPercent);
 
             currentTime.textContent = displayTime(audio.currentTime);
 
-            if (audio.duration != NaN && audio.duration != Infinity)
-                duration.textContent = " - " + displayTime(audio.duration);
+            if (audioDuration != NaN && audioDuration != Infinity)
+                duration.textContent = " - " + displayTime(audioDuration);
         }
     }
     
@@ -76,13 +81,13 @@ export function initializeAudioPlayer(player) {
     // Scrub through the audio
     function scrub(event) {
         const scrubTime =
-            (event.offsetX / progressRange.offsetWidth) * audio.duration;
+            (event.offsetX / progressRange.offsetWidth) * audioDuration;
         audio.currentTime = scrubTime;
     }
 
     // Display the duration of the audio
     function displayDuration() {
-        //    duration.textContent = displayTime(audio.duration);
+        //    duration.textContent = displayTime(audioDuration);
     }
     
 
