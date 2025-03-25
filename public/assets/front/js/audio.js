@@ -311,6 +311,7 @@
 //         return `${minutes}:${seconds}`;
 //     }
 
+
 export function initializeAudioPlayer(player) {
     if (player.classList.contains("initialized")) {
         return; // If it does, return early and do nothing
@@ -326,15 +327,12 @@ export function initializeAudioPlayer(player) {
     const playBtn = player.querySelector(".play");
     const audioDurationInput = $('.current_duration');
 
-    let audioDuration =audioDurationInput.val(); // Initialize with current stored value
-    // console.log(audioDuration);
-    // return;
-    
+    let audioDuration = parseFloat(audioDurationInput.val()); // Initialize with current stored value
     let isPlaying = false; // Track the play state locally
 
     // Update audio duration when the hidden input changes
     audioDurationInput.on('input', function() {
-        audioDuration = this.value;
+        audioDuration = parseFloat(this.value);
         displayDuration(); // Re-display duration if it changed
     });
 
@@ -404,18 +402,15 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display time in minutes and seconds
-
     function displayTime(time) {
-                const minutes = Math.floor(time / 60);
-                let seconds = Math.floor(time % 60);
-                seconds = seconds > 9 ? seconds : `0${seconds}`;
-                return `${minutes}:${seconds}`;
-            }
+        const minutes = Math.floor(time / 60);
+        let seconds = Math.floor(time % 60);
+        seconds = seconds < 10 ? `0${seconds}` : seconds;
+        return `<span class="math-inline">\{minutes\}\:</span>{seconds}`;
+    }
 
     // Update the progress bar as the audio plays
     function updateProgress() {
-        console.log(audioDuration);
-        
         if (!isNaN(audioDuration) && audioDuration !== Infinity) {
             const progressPercent = (audio.currentTime / audioDuration) * 100;
             progressBar.style.width = `${progressPercent}%`;
@@ -447,7 +442,7 @@ export function initializeAudioPlayer(player) {
     } else {
         audio.addEventListener("loadedmetadata", () => {
             // Ensure audioDuration is updated when metadata loads
-            audioDuration = audioDuration;
+            audioDuration = audio.duration;
             audioDurationInput.val(audioDuration); // Update the hidden input as well
             displayDuration();
         });
@@ -455,7 +450,6 @@ export function initializeAudioPlayer(player) {
 
     // Event Listener for Play/Pause button
     playBtn.addEventListener("click", () => {
-        // alert()
         if (isPlaying) {
             pauseSong();
         } else {
@@ -517,6 +511,8 @@ export function initializeAudioPlayer(player) {
         playSong();
     }
 }
+
+
 
 // Initialize all audio players
 export function musicPlayer(url) {
