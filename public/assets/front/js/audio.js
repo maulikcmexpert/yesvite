@@ -71,25 +71,38 @@ export function initializeAudioPlayer(player) {
     //             duration.textContent = " - " + displayTime(audio.duration);
     //     }
     // }
+    let interval;  // Interval reference
+    let elapsedSeconds = 0;  // Track elapsed seconds
+    let estimatedDuration = 0;  // Store estimated duration dynamically
+    
     function updateProgress() {
-        const elapsedSeconds = audio.currentTime;      // Elapsed time in seconds
-        const totalSeconds = audio.duration;           // Total duration
+        // Reset elapsed seconds and progress bar
+        elapsedSeconds = 0;
+        progressBar.style.width = "0%";
     
-        if (totalSeconds) {
-            // 🌟 Smoothly increase width till 100%
-            const progressWidth = (elapsedSeconds / totalSeconds) * 100;
+        // 🌟 Dynamically estimate the duration
+        estimatedDuration = Math.ceil(audio.duration) || 30;  // Fallback to 30s if unknown
     
-            // Apply width with smooth transition
-            progressBar.style.width = `${progressWidth}%`;
+        // Start interval
+        interval = setInterval(() => {
+            elapsedSeconds++;
+    
+            // 🌟 Increase progress width per second
+            const progressWidth = (elapsedSeconds / estimatedDuration) * 100;
+            progressBar.style.width = `${Math.min(progressWidth, 100)}%`;  // Max 100%
     
             // Display current time
             currentTime.textContent = displayTime(elapsedSeconds);
-            duration.textContent = " - " + displayTime(totalSeconds);
     
-            // Use requestAnimationFrame for smoothness
-            requestAnimationFrame(updateProgress);
-        }
+            // Stop when it reaches the estimated duration or audio ends
+            if (elapsedSeconds >= estimatedDuration || audio.ended) {
+                clearInterval(interval);
+                progressBar.style.width = "100%";  // Ensure it reaches 100%
+                currentTime.textContent = displayTime(audio.duration);
+            }
+        }, 1000);  // Increase every second
     }
+    
     
     
     
