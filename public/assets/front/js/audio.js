@@ -189,7 +189,8 @@ export function initializeAudioPlayer(player) {
         // $('#musicContainer').removeClass('.musicSample');
         // const player = document.querySelector("#audioContainer");
     
-        const progressBar = newPlayer.querySelector(".progress-bar");
+        // const progressBar = newPlayer.querySelector(".progress-bar");
+        // progressBar
     
         // newPlayer.classList.remove("play");
         // newPlayer.classList.remove("play");
