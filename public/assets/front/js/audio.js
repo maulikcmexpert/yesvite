@@ -26,6 +26,40 @@ export function initializeAudioPlayer(player) {
 
     const volInput = player.querySelector('input[name="volume"]');
 
+    closeAudioBtn.addEventListener("click", function () {
+        // Stop and reset the audio
+        if (audio) {
+            audio.pause();
+            audio.src = ""; // Clear audio source
+            audio.load(); // Reset audio
+            audio.style.display = "none"; // Hide audio controls
+        }
+
+        // Reset progress bar
+        if (progressBar) {
+            progressBar.style.width = "0%";
+        }
+
+        // Reset time display
+        if (currentTime) {
+            currentTime.textContent = "00:00";
+        }
+        if (duration) {
+            duration.classList.add("d-none"); // Hide duration
+        }
+
+        // Reset play button icon to initial state (play icon)
+        if (playBtn) {
+            playBtn.classList.remove("fa-pause");
+            playBtn.classList.add("fa-play");
+        }
+
+        // Reset container state
+        player.classList.add("initialized");
+        player.classList.remove("play"); // Remove playing state if applied
+        
+        console.log("Audio container fully reset!");
+    });
         // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
