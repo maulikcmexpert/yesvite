@@ -439,7 +439,9 @@ export function initializeAudioPlayer(player) {
 
     if (audio.readyState > 0) {
         displayDuration();
+        console.log(100);
     } else {
+        console.log(50);
         audio.addEventListener("loadedmetadata", () => {
             // Ensure audioDuration is updated when metadata loads
             const durationValue = parseFloat(audioDurationInput.val());
