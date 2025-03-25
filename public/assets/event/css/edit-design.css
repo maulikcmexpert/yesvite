@@ -1631,6 +1631,7 @@
         padding-top: 140%;
         position: relative;
         width: 100%;
+        max-height: calc(100dvh - 290px) !important;
     }
     /* .image-edit-inner-img canvas{
         object-fit: contain;
