@@ -3649,13 +3649,21 @@ $("#choose-file").on("change", async function () {
     }, 800);
 });
 
+let seconds = 0; 
+let recordingTimer;    // Timer interval
+       // Track total seconds
 async function startRecording() {
     recordedChunks = [];
+    seconds = 0;  // Reset seconds when starting
+
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
 
         mediaRecorder.start();
+        recordingTimer = setInterval(() => {
+            seconds++;
+        }, 1000);
         startButton.style.display = "none";
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
@@ -3725,7 +3733,14 @@ async function stopRecording() {
         $("#musicContainer").show();
 
         stopButton.style.display = "none";
+        clearInterval(recordingTimer);
 
+        // 🌟 Convert seconds to `mm:ss` format
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedDuration = `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+
+        console.log(`Total Recording Duration: ${formattedDuration}`);
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
             mediaRecorder.onstop = resolve;
