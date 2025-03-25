@@ -3739,6 +3739,7 @@ async function stopRecording() {
         // alert(durationInSeconds);
         $('.current_duration').val(durationInSeconds);
 
+        return;
 
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
