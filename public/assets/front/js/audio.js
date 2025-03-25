@@ -72,12 +72,12 @@ export function initializeAudioPlayer(player) {
         audio.removeEventListener("timeupdate", updateProgress);
         audio.removeEventListener("loadedmetadata", displayDuration);
     
-        player.classList.removeClass("play");
+        player.classList.remove("play");
 
-        const player = document.querySelector("#audioContainer");
-        player.classList.remove("initialized");
+        const player1 = document.querySelector("#audioContainer");
+        player1.classList.remove("initialized");
     
-        const progressBar = player.querySelector(".progress-bar");
+        const progressBar = player1.querySelector(".progress-bar");
         progressBar.style.width = `0%`;
     
         const startButton = document.getElementById("startRecording");
