@@ -331,10 +331,10 @@ export function initializeAudioPlayer(player) {
     let isPlaying = false; // Track the play state locally
 
     // Update audio duration when the hidden input changes
-    // audioDurationInput.on('input', function() {
-    //     audioDuration = parseFloat(this.value);
-    //     displayDuration(); // Re-display duration if it changed
-    // });
+    audioDurationInput.on('input', function() {
+        audioDuration = parseFloat(this.value);
+        displayDuration(); // Re-display duration if it changed
+    });
 
     $(".close-audio-btn").on("click", function () {
         $("#musicContainer").hide();
