@@ -337,7 +337,6 @@ export function initializeAudioPlayer(player) {
 
     $(".close-audio-btn").on("click", function () {
         $("#musicContainer").hide();
-        $("#musicContainer").removeClass("musicSample");   
         $("#send_audio").hide();
         $(".preview_img").attr("src", "");
         $(".recordedAudio").attr("src", "");
