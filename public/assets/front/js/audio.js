@@ -15,6 +15,7 @@ export function initializeAudioPlayer(player) {
 
     const audio = player.querySelector(".audio");
     const audioDuration = $('.current_duration').val();
+    const closeAudioBtn = document.querySelector(".close-audio-btn");
 
     console.log(audioDuration);
     
@@ -33,8 +34,17 @@ export function initializeAudioPlayer(player) {
             audio.src = ""; // Clear audio source
             audio.load(); // Reset audio
             audio.style.display = "none"; // Hide audio controls
+
         }
 
+        $("#musicContainer").hide();
+    $("#send_audio").hide();
+    $(".preview_img").attr("src", "");
+    $(".recordedAudio").attr("src", "");
+    $(".message-icons").removeClass("hide"); 
+    $(".upload-box").val("");
+        $('.current_duration').val('');
+    $(".file_info").val("");
         // Reset progress bar
         if (progressBar) {
             progressBar.style.width = "0%";
