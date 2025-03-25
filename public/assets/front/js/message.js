@@ -3649,7 +3649,9 @@ $("#choose-file").on("change", async function () {
     }, 800);
 });
 
-let seconds = 0;        // Track total seconds
+let seconds = 0; 
+let recordingTimer;    // Timer interval
+       // Track total seconds
 async function startRecording() {
     recordedChunks = [];
     seconds = 0;  // Reset seconds when starting
