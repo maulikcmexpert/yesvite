@@ -31,9 +31,9 @@ export function initializeAudioPlayer(player) {
         // Stop and reset the audio
         if (audio) {
             audio.pause();
-            audio.src = ""; // Clear audio source
-            audio.load(); // Reset audio
-            audio.style.display = "none"; // Hide audio controls
+            // audio.src = ""; // Clear audio source
+            // audio.load(); // Reset audio
+            // audio.style.display = "none"; // Hide audio controls
 
         }
 
@@ -43,7 +43,11 @@ export function initializeAudioPlayer(player) {
     $(".recordedAudio").attr("src", "");
     $(".message-icons").removeClass("hide"); 
     $(".upload-box").val("");
-        $('.current_duration').val('');
+        $('.current_duration').val(''); 
+        const startButton = document.getElementById("startRecording");
+
+            startButton.style.display = "inline-block";
+
     $(".file_info").val("");
         // Reset progress bar
         if (progressBar) {
@@ -59,10 +63,10 @@ export function initializeAudioPlayer(player) {
         }
 
         // Reset play button icon to initial state (play icon)
-        if (playBtn) {
-            playBtn.classList.remove("fa-pause");
-            playBtn.classList.add("fa-play");
-        }
+        // if (playBtn) {
+        //     playBtn.classList.remove("fa-pause");
+        //     playBtn.classList.add("fa-play");
+        // }
 
         // Reset container state
         player.classList.add("initialized");
