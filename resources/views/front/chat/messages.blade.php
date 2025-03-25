@@ -455,6 +455,7 @@ use Carbon\Carbon;
 
                             </div>
                             <input type="hidden" class="file_info">
+                            <input type="hidden" class="current_duration" value="">
 
                             <div class="position-relative audio-music-player" id="musicContainer" style="display: none;">
                                 <div class="audio-container" id="audioContainer">

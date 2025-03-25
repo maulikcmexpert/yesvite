@@ -3736,6 +3736,7 @@ async function stopRecording() {
         endTime = performance.now();
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
+        $('.current_duration').val(durationInSeconds);
 
 
         // Wait for the MediaRecorder to finish saving data
