@@ -1490,6 +1490,8 @@ $("#message-send").on("click", async function () {
     return await sendMessage(); // Call the same function on button click
 });
 async function sendMessage() {
+        $("#musicContainer").removeClass("musicSample");
+
     const message = $(".send-message").val();
 
     const conversationId = $(".selected_id").val();
