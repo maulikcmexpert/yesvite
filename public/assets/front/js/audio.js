@@ -72,6 +72,8 @@ export function initializeAudioPlayer(player) {
         audio.removeEventListener("timeupdate", updateProgress);
         audio.removeEventListener("loadedmetadata", displayDuration);
     
+        player.classList.removeClass("play");
+
         const player = document.querySelector("#audioContainer");
         player.classList.remove("initialized");
     
