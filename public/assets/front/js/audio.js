@@ -27,7 +27,7 @@ export function initializeAudioPlayer(player) {
 
     const volInput = player.querySelector('input[name="volume"]');
 
-    $(closeAudioBtn).addEventListener("click", function () {
+    closeAudioBtn.addEventListener("click", function () {
         // Stop and reset the audio
         if (audio) {
             audio.pause();
