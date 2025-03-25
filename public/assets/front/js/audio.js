@@ -401,16 +401,18 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display time in minutes and seconds
+
     function displayTime(time) {
-        const minutes = Math.floor(time / 60);
-        let seconds = Math.floor(time % 60);
-        seconds = seconds < 10 ? `0${seconds}` : seconds;
-        return `<span class="math-inline">\{minutes\}\:</span>{seconds}`;
-    }
-    
+                const minutes = Math.floor(time / 60);
+                let seconds = Math.floor(time % 60);
+                seconds = seconds > 9 ? seconds : `0${seconds}`;
+                return `${minutes}:${seconds}`;
+            }
 
     // Update the progress bar as the audio plays
     function updateProgress() {
+        console.log(audioDuration);
+        
         if (!isNaN(audioDuration) && audioDuration !== Infinity) {
             const progressPercent = (audio.currentTime / audioDuration) * 100;
             progressBar.style.width = `${progressPercent}%`;
@@ -450,6 +452,7 @@ export function initializeAudioPlayer(player) {
 
     // Event Listener for Play/Pause button
     playBtn.addEventListener("click", () => {
+        // alert()
         if (isPlaying) {
             pauseSong();
         } else {
