@@ -4,7 +4,6 @@ export function initializeAudioPlayer(player) {
         return; // If it does, return early and do nothing
     }
     player.classList.add("initialized");
-
     // $(".close-audio-btn").on("click", function () {
     //     $("#musicContainer").hide();
     //     $("#send_audio").hide();
@@ -53,6 +52,31 @@ export function initializeAudioPlayer(player) {
     //     $("#musicContainer").removeClass("musicSample");
     // });
     
+  
+    
+    const audioPlayer = player.querySelector(".audio_player");
+
+    const progressRange = player.querySelector(".progress-range");
+    const progressBar = player.querySelector(".progress-bar");
+
+    const currentTime = player.querySelector(".time-elapsed");
+    const duration = player.querySelector(".time-duration");
+
+    const audio = player.querySelector(".audio");
+    const audioDuration = $('.current_duration').val();
+
+    console.log(audioDuration);
+    
+
+    const playBtn = player.querySelector(".play");
+
+    const speaker = player.querySelector(".speaker");
+    const speakerIcon = player.querySelector("#speaker_icon");
+
+    const volInput = player.querySelector('input[name="volume"]');
+
+    loadNewAudio(audio.src);
+    
     $(".close-audio-btn").on("click", function () {
         $("#musicContainer").hide();
         $("#send_audio").hide();
@@ -84,29 +108,6 @@ export function initializeAudioPlayer(player) {
         startButton.style.display = "inline-block";
         $('.time-elapsed').text('00:00');
     });
-    
-    const audioPlayer = player.querySelector(".audio_player");
-
-    const progressRange = player.querySelector(".progress-range");
-    const progressBar = player.querySelector(".progress-bar");
-
-    const currentTime = player.querySelector(".time-elapsed");
-    const duration = player.querySelector(".time-duration");
-
-    const audio = player.querySelector(".audio");
-    const audioDuration = $('.current_duration').val();
-
-    console.log(audioDuration);
-    
-
-    const playBtn = player.querySelector(".play");
-
-    const speaker = player.querySelector(".speaker");
-    const speakerIcon = player.querySelector("#speaker_icon");
-
-    const volInput = player.querySelector('input[name="volume"]');
-
-    
         // Function to dynamically load an audio file
     function loadSong(songUrl) {
         audio.src = songUrl;
@@ -196,7 +197,10 @@ export function initializeAudioPlayer(player) {
     }
 
     function loadNewAudio(newAudioUrl) {
-        // Set new audio source
+        // Reset the player state before loading new audio
+        const player = document.querySelector("#audioContainer");
+        player.classList.remove("play");  // ✅ Reset to prevent false play state
+    
         audio.src = newAudioUrl;
     
         // Reset and attach fresh event listeners
@@ -205,6 +209,7 @@ export function initializeAudioPlayer(player) {
     
         audio.play();
     }
+    
     
     let muted = false;
 
@@ -223,17 +228,31 @@ export function initializeAudioPlayer(player) {
         }
     }
 
-    // Event Listeners
+    // Event Listeners.
     playBtn.addEventListener("click", () => {
         const isPlaying = player.classList.contains("play");
-        console.log(isPlaying);
-        
+    
+        console.log('Is Playing:', isPlaying); 
+    
         if (isPlaying) {
             pauseSong();
+            player.classList.remove("play");  // ✅ Ensure it resets to false
         } else {
             playSong();
+            player.classList.add("play");     // ✅ Ensure it becomes true
         }
     });
+    
+    // playBtn.addEventListener("click", () => {
+    //     const isPlaying = player.classList.contains("play");
+    //     console.log(isPlaying);
+        
+    //     if (isPlaying) {
+    //         pauseSong();
+    //     } else {
+    //         playSong();
+    //     }
+    // });
     function setProgress(e) {
         console.log(audioPlayer);
         const newTime = e.offsetX / progressRange.offsetWidth;
