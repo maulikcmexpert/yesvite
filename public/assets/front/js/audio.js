@@ -24,8 +24,11 @@ export function initializeAudioPlayer(player) {
         //     play.load(); 
     
         // }
-        audio.pause();  
-        audio.currentTime = 0;  
+        audio.pause();
+        audio.currentTime = 0;
+        $('.current_duration').val('');  // Reset stored duration
+        duration.textContent = '';       // Clear displayed duration
+        
         const newPlayer = document.querySelector("#audioContainer");
         newPlayer.classList.remove("initialized");
         // newPlayer.classList.remove("play");
@@ -132,9 +135,19 @@ export function initializeAudioPlayer(player) {
     }
 
     // Display the duration of the audio
+    // function displayDuration() {
+    //     //    duration.textContent = displayTime(audioDuration);
+    // }
     function displayDuration() {
-        //    duration.textContent = displayTime(audioDuration);
+        const newDuration = audioDuration;
+        if (!isNaN(newDuration) && newDuration !== Infinity) {
+            $('.current_duration').val(newDuration);  // Store the latest duration
+            duration.textContent = " - " + displayTime(newDuration);
+        } else {
+            $('.current_duration').val('');  // Reset if duration is invalid
+        }
     }
+    
     
 
     if (audio.readyState > 0) {
