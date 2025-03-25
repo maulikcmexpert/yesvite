@@ -3770,36 +3770,43 @@ $("#musicContainer").hide();
         
 //     }
 // })
-// $(".close-audio-btn").on("click", function () {
-//     $("#musicContainer").hide();
-//     $("#send_audio").hide();
-//     $(".preview_img").attr("src", "");
-//     $(".recordedAudio").attr("src", "");
-//     $(".message-icons").removeClass("hide"); 
-//     $(".upload-box").val("");
-//     $(".file_info").val("");
-//     const newPlayer = document.querySelector("#audioContainer");
-//     newPlayer.classList.remove("initialized");
-//     // newPlayer.classList.remove("play");
-//     // $('#musicContainer').removeClass('.musicSample');
-//     // const player = document.querySelector("#audioContainer");
+$(".close-audio-btn").on("click", function () {
+    $("#musicContainer").hide();
+    $("#send_audio").hide();
+    $(".preview_img").attr("src", "");
+    $(".recordedAudio").attr("src", "");
+    $(".message-icons").removeClass("hide"); 
+    $(".upload-box").val("");
+    $(".file_info").val("");
 
-//     const progressBar = newPlayer.querySelector(".progress-bar");
+    const play = player.querySelector(".play");
+    if(play){
+        play.pause();
+        play.load(); 
 
-//     // newPlayer.classList.remove("play");
-//     // newPlayer.classList.remove("play");
-//     const playBtn1 = newPlayer.querySelector(".play");
-//     playBtn1.querySelector("i.fas").classList.add("fa-play");
-//     playBtn1.querySelector("i.fas").classList.remove("fa-pause");
-//     progressBar.style.width = `0%`;
+    }
+    const newPlayer = document.querySelector("#audioContainer");
+    newPlayer.classList.remove("initialized");
+    // newPlayer.classList.remove("play");
+    // $('#musicContainer').removeClass('.musicSample');
+    // const player = document.querySelector("#audioContainer");
 
-//     startButton.style.display = "inline-block";
-//     $('.time-elapsed').text('00:00');
-//     $('.time-duration').text('');
-//     $('.current_duration').val('');
+    const progressBar = newPlayer.querySelector(".progress-bar");
 
-//     $("#musicContainer").removeClass("musicSample");
-// });
+    // newPlayer.classList.remove("play");
+    // newPlayer.classList.remove("play");
+    const playBtn1 = newPlayer.querySelector(".play");
+    playBtn1.querySelector("i.fas").classList.add("fa-play");
+    playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+    progressBar.style.width = `0%`;
+
+    startButton.style.display = "inline-block";
+    $('.time-elapsed').text('00:00');
+    $('.time-duration').text('');
+    $('.current_duration').val('');
+
+    $("#musicContainer").removeClass("musicSample");
+});
 
 $(".preview_img").hide();
 $("#preview_file").hide();
