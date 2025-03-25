@@ -54,23 +54,42 @@ export function initializeAudioPlayer(player) {
     }
 
     // Update the progress bar as the audio plays
-    function updateProgress() {
-        // console.log(1);
-        if (audio.duration) {
-            // console.log(2);
-            // console.log(audio.currentTime);
-            // console.log( audio.duration);
+    // function updateProgress() {
+    //     // console.log(1);
+    //     if (audio.duration) {
+    //         // console.log(2);
+    //         // console.log(audio.currentTime);
+    //         // console.log( audio.duration);
 
+    //         const progressPercent = (audio.currentTime / audio.duration) * 100;
+    //         progressBar.style.width = `${progressPercent}%`;
+    //         console.log(progressPercent);
+
+    //         currentTime.textContent = displayTime(audio.currentTime);
+
+    //         if (audio.duration != NaN && audio.duration != Infinity)
+    //             duration.textContent = " - " + displayTime(audio.duration);
+    //     }
+    // }
+    function updateProgress() {
+        if (audio.duration) {
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
-            console.log(progressPercent);
-
+    
+            // Display current time
             currentTime.textContent = displayTime(audio.currentTime);
-
-            if (audio.duration != NaN && audio.duration != Infinity)
+    
+            // Display total duration
+            if (!isNaN(audio.duration) && isFinite(audio.duration)) {
                 duration.textContent = " - " + displayTime(audio.duration);
+            }
+    
+            // 🌟 Set the width of `.time-elapsed` dynamically
+            const elapsedWidth = (audio.currentTime / audio.duration) * 100;
+            currentTime.style.width = `${elapsedWidth}%`;
         }
     }
+    
 
     // Scrub through the audio
     function scrub(event) {
