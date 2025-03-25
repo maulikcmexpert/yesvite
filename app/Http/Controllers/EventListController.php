@@ -385,6 +385,8 @@ class EventListController extends BaseController
                 $allPastEventC = $usercreatedAllPastEventCount->union($total_past_event)->orderByDesc('id')->get();
                 $totalPastEventCount = count($allPastEventC);
 
+                dd($totalPastEventCount);
+
                 // $total_need_rsvp_event_count = EventInvitedUser::whereHas('event', function ($query) {
                 //     $query->where('is_draft_save', '0')
                 //     ->where('start_date', '>', date('Y-m-d'))
@@ -681,6 +683,7 @@ class EventListController extends BaseController
 
         ];
 
+        dd($totalPastEventCount);
         $filter = [
             'invited_to' => $totalInvited,
             'invitedTo_count_upcoming' => $totalInvitedUpcoming,
