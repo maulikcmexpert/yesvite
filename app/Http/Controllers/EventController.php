@@ -3262,8 +3262,11 @@ class EventController extends BaseController
                 }
             }
         }
+        $existingImages = session('desgin_slider');
 
         $imageSources = $request->imageSources;
+        dd($imageSources);
+        // dd($existingImages);
 
         $i = 0;
 
