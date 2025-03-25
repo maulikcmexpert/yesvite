@@ -3688,6 +3688,36 @@ function playRecording() {
     //     alert("Failed to play recorded audio.");
     // });
 }
+// async function stopRecording() {
+//     if (mediaRecorder && mediaRecorder.state === "recording") {
+//         mediaRecorder.stop();
+//         $("#send_audio").show();
+//         $("#musicContainer").show();
+
+//         stopButton.style.display = "none";
+
+//         // Wait for the MediaRecorder to finish saving data
+//         await new Promise((resolve) => {
+//             mediaRecorder.onstop = resolve;
+//         });
+//         stream.getTracks().forEach((track) => track.stop());
+//         // Call playRecording() to initiate playback
+//         playRecording();
+//         $("#musicContainer").addClass("musicSample");
+//         setTimeout(() => {
+//             const newPlayer = document.querySelector("#audioContainer");
+//             newPlayer.classList.remove("initialized");
+//             initializeAudioPlayer(newPlayer);
+//         }, 500);
+
+//         let messageIcons = $(".message-icons");
+//         messageIcons.addClass("hide"); 
+              
+//     } else {
+//         console.error("MediaRecorder is not recording.");
+//     }
+// }
+
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         mediaRecorder.stop();
@@ -3711,19 +3741,22 @@ async function stopRecording() {
         }, 500);
 
         let messageIcons = $(".message-icons");
-        messageIcons.addClass("hide"); 
-              
+        messageIcons.addClass("hide");
+
     } else {
         console.error("MediaRecorder is not recording.");
     }
 }
-
 startButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 playButton.addEventListener("click", playRecording);
 stopPlaybackButton.addEventListener("click", stopPlayback);
 $("#musicContainer").hide();
-
+// $(document).on('click','.play',function(){
+//     if(('#audioContainer').hasClass('play')){
+        
+//     }
+// })
 $(".close-audio-btn").on("click", function () {
     $("#musicContainer").hide();
     $("#send_audio").hide();
@@ -3734,9 +3767,22 @@ $(".close-audio-btn").on("click", function () {
     $(".file_info").val("");
     const newPlayer = document.querySelector("#audioContainer");
     newPlayer.classList.remove("initialized");
-    newPlayer.classList.remove("play");
+    // newPlayer.classList.remove("play");
     // $('#musicContainer').removeClass('.musicSample');
+    // const player = document.querySelector("#audioContainer");
+
+    const progressBar = newPlayer.querySelector(".progress-bar");
+
+    // newPlayer.classList.remove("play");
+    newPlayer.classList.remove("play");
+    const playBtn1 = newPlayer.querySelector(".play");
+    playBtn1.querySelector("i.fas").classList.add("fa-play");
+    playBtn1.querySelector("i.fas").classList.remove("fa-pause");
+    progressBar.style.width = `0%`;
+
     startButton.style.display = "inline-block";
+    $('.time-elapsed').text('00:00');
+    $('.time-duration').text('');
     $("#musicContainer").removeClass("musicSample");
 });
 
