@@ -31,9 +31,9 @@ export function initializeAudioPlayer(player) {
         // Stop and reset the audio
         if (audio) {
             audio.pause();
-            audio.src = ""; // Clear audio source
-            audio.load(); // Reset audio
-            audio.style.display = "none"; // Hide audio controls
+            // audio.src = ""; // Clear audio source
+            // audio.load(); // Reset audio
+            // audio.style.display = "none"; // Hide audio controls
 
         }
 
@@ -63,10 +63,10 @@ export function initializeAudioPlayer(player) {
         }
 
         // Reset play button icon to initial state (play icon)
-        if (playBtn) {
-            playBtn.classList.remove("fa-pause");
-            playBtn.classList.add("fa-play");
-        }
+        // if (playBtn) {
+        //     playBtn.classList.remove("fa-pause");
+        //     playBtn.classList.add("fa-play");
+        // }
 
         // Reset container state
         player.classList.add("initialized");
