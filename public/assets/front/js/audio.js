@@ -175,34 +175,9 @@ export function initializeAudioPlayer(player) {
 
     // Add event listener for close button
     player.querySelector(".close-audio-btn").addEventListener("click", () => {
-        player.remove();
-        $("#musicContainer").hide();
-        $("#send_audio").hide();
-        $(".preview_img").attr("src", "");
-        $(".recordedAudio").attr("src", "");
-        $(".message-icons").removeClass("hide"); 
-        $(".upload-box").val("");
-        $(".file_info").val("");
-        // const newPlayer = document.querySelector("#audioContainer");
-        // newPlayer.classList.remove("initialized");
-        // newPlayer.classList.remove("play");
-        // $('#musicContainer').removeClass('.musicSample');
-        // const player = document.querySelector("#audioContainer");
-    
-        const progressBar = newPlayer.querySelector(".progress-bar");
-    
-        // newPlayer.classList.remove("play");
-        // newPlayer.classList.remove("play");
-        // const playBtn1 = newPlayer.querySelector(".play");
-        // playBtn1.querySelector("i.fas").classList.add("fa-play");
-        // playBtn1.querySelector("i.fas").classList.remove("fa-pause");
-        progressBar.style.width = `0%`;
-        const startButton = document.getElementById("startRecording");
-
-        startButton.style.display = "inline-block";
-        $('.time-elapsed').text('00:00');
-        $('.time-duration').text('');
-        $('.current_duration').val('');
+        // player.remove();
+        audio.pause();  // Pause the audio if playing
+        audio.currentTime = 0;
     });
 
 
