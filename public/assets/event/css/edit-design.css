@@ -92,7 +92,7 @@
     justify-content: space-between;
     gap: 5px;
     margin-top: 10px;
-    margin-bottom: 50px !important;
+    margin-bottom: 10px !important;
 }
 
 .edit-images-button-inner button {
@@ -2966,6 +2966,27 @@
     }
     #edit-design-temp .main-content-right{
         padding: 0px;
+    }
+
+
+
+    .main-content-sidebar .new-event-sidebar-wrp:has(.edit-design-sidebar.active) {
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp{
+        height: calc(100vh - 112px) !important;
+        min-height: calc(100vh - 112px) !important;
+        padding-top: 0px !important;
+    }
+    .edit-image-main-wrp{
+        height: calc(100vh - 112px) !important;
+    }
+    .edit-imag-main-content-wrp .choose-design-sidebar{
+        height: calc(100vh - 112px) !important;
+    }
+    .common-font-wrp {
+        max-height: calc(100vh - 220px) !important;
+        margin-bottom: 0px !important;
     }
     
 }
