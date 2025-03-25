@@ -347,7 +347,7 @@ export function initializeAudioPlayer(player) {
         // Stop and reset the audio
         audio.pause();
         audio.currentTime = 0;
-        audioDurationInput.val('');
+        audioDuration.val('');
         durationDisplay.textContent = '';
         isPlaying = false;
         updatePlayButtonUI();
@@ -430,7 +430,7 @@ export function initializeAudioPlayer(player) {
 
     // Display the duration of the audio
     function displayDuration() {
-        const durationValue = parseFloat(audioDurationInput.val());
+        const durationValue = parseFloat(audioDuration.val());
         if (!isNaN(durationValue) && durationValue !== Infinity) {
             audioDuration = durationValue; // Update local duration
             durationDisplay.textContent = " - " + displayTime(durationValue);
@@ -445,7 +445,7 @@ export function initializeAudioPlayer(player) {
         audio.addEventListener("loadedmetadata", () => {
             // Ensure audioDuration is updated when metadata loads
             audioDuration = audio.duration;
-            audioDurationInput.val(audioDuration); // Update the hidden input as well
+            audioDuration.val(audioDuration); // Update the hidden input as well
             displayDuration();
         });
     }
@@ -506,7 +506,7 @@ export function initializeAudioPlayer(player) {
         // Ensure metadata is loaded for the new song
         audio.addEventListener("loadedmetadata", () => {
             audioDuration = audio.duration;
-            audioDurationInput.val(audioDuration);
+            audioDuration.val(audioDuration);
             displayDuration();
         }, { once: true }); // Only run once for the new source
 
