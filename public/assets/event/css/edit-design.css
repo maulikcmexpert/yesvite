@@ -1634,6 +1634,7 @@
         position: relative;
         aspect-ratio: 5 / 7;
         height: calc(100dvh - 290px) !important;
+        margin: 0px auto;
     }
     /* .canvas-container{
         position: absolute !important;
