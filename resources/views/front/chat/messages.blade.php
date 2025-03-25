@@ -852,9 +852,9 @@ use Carbon\Carbon;
                                                     <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <path d="M9.09961 12V10.52C9.09961 8.60999 10.4496 7.83999 12.0996 8.78999L13.3796 9.52999L14.6596 10.27C16.3096 11.22 16.3096 12.78 14.6596 13.73L13.3796 14.47L12.0996 15.21C10.4496 16.16 9.09961 15.38 9.09961 13.48V12Z" stroke="#94A3B8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg> --}}
-                                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect width="30" height="30" rx="15" fill="#334155"/>
-                                                    <path d="M13.2 21H16.8C19.8 21 21 19.8 21 16.8V13.2C21 10.2 19.8 9 16.8 9H13.2C10.2 9 9 10.2 9 13.2V16.8C9 19.8 10.2 21 13.2 21Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M13.2 21H16.8C19.8 21 21 19.8 21 16.8V13.2C21 10.2 19.8 9 16.8 9H13.2C10.2 9 9 10.2 9 13.2V16.8C9 19.8 10.2 21 13.2 21Z" fill="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                     
                                                 </button>
