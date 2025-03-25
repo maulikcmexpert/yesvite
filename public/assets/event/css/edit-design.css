@@ -1631,7 +1631,8 @@
         padding-top: 140%;
         position: relative;
         width: 100%;
-        max-height: calc(100dvh - 290px) !important;
+        max-width: 350px;
+        max-height: 490px;
     }
     .canvas-container{
         position: absolute !important;
