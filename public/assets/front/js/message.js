@@ -3651,6 +3651,7 @@ $("#choose-file").on("change", async function () {
 
 // let stream, mediaRecorder;
 let startTime, endTime;  //    // Timer interval
+let seconds;  //    // Timer interval
        // Track total seconds
 async function startRecording() {
     recordedChunks = [];
