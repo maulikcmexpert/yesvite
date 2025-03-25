@@ -3796,6 +3796,8 @@ $(".close-audio-btn").on("click", function () {
     startButton.style.display = "inline-block";
     $('.time-elapsed').text('00:00');
     $('.time-duration').text('');
+    $('.current_duration').val('');
+
     $("#musicContainer").removeClass("musicSample");
 });
 
