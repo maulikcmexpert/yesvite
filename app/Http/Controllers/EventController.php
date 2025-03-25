@@ -3265,8 +3265,9 @@ class EventController extends BaseController
         $existingImages = session('desgin_slider');
 
         $imageSources = $request->imageSources;
+        $imagenames = $request->imagenames;
         // dd($imageSources);
-        // dd($savedFiles);
+        dd($savedFiles,$imagenames);
 
         $i = 0;
 
@@ -3280,6 +3281,8 @@ class EventController extends BaseController
                 }
             }
         }
+
+        dd($e)
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
                 $parts = explode(';', $imageSource['src']);
