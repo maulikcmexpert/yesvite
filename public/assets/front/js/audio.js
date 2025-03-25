@@ -72,20 +72,25 @@ export function initializeAudioPlayer(player) {
     //     }
     // }
     function updateProgress() {
-        const elapsedSeconds = Math.floor(audio.currentTime);  // Get elapsed seconds
+        const elapsedSeconds = audio.currentTime;      // Elapsed time in seconds
+        const totalSeconds = audio.duration;           // Total duration
     
-        // 🌟 Set the width based on the seconds elapsed
-        const progressWidth = elapsedSeconds * 5;  // Increase width by 5% per second (adjustable)
+        if (totalSeconds) {
+            // 🌟 Smoothly increase width till 100%
+            const progressWidth = (elapsedSeconds / totalSeconds) * 100;
     
-        // Apply the width to the progress bar
-        progressBar.style.width = `${progressWidth}%`;
+            // Apply width with smooth transition
+            progressBar.style.width = `${progressWidth}%`;
     
-        // Display the current time
-        currentTime.textContent = displayTime(audio.currentTime);
+            // Display current time
+            currentTime.textContent = displayTime(elapsedSeconds);
+            duration.textContent = " - " + displayTime(totalSeconds);
     
-        // Display total duration
-        duration.textContent = " - " + displayTime(audio.duration);
+            // Use requestAnimationFrame for smoothness
+            requestAnimationFrame(updateProgress);
+        }
     }
+    
     
     
 
