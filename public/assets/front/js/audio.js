@@ -43,7 +43,11 @@ export function initializeAudioPlayer(player) {
     $(".recordedAudio").attr("src", "");
     $(".message-icons").removeClass("hide"); 
     $(".upload-box").val("");
-        $('.current_duration').val('');
+        $('.current_duration').val(''); 
+        const startButton = document.getElementById("startRecording");
+
+            startButton.style.display = "inline-block";
+
     $(".file_info").val("");
         // Reset progress bar
         if (progressBar) {
