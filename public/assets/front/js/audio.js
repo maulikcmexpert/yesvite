@@ -175,7 +175,9 @@ export function initializeAudioPlayer(player) {
 
     // Add event listener for close button
     player.querySelector(".close-audio-btn").addEventListener("click", () => {
-        player.remove();
+        // player.remove();
+        audio.pause();  // Pause the audio if playing
+        audio.currentTime = 0;
         $("#musicContainer").hide();
         $("#send_audio").hide();
         $(".preview_img").attr("src", "");
