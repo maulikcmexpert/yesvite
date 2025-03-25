@@ -54,39 +54,23 @@ export function initializeAudioPlayer(player) {
     }
 
     // Update the progress bar as the audio plays
-    // function updateProgress() {
-    //     // console.log(1);
-    //     if (audio.duration) {
-    //         // console.log(2);
-    //         // console.log(audio.currentTime);
-    //         // console.log( audio.duration);
-
-    //         const progressPercent = (audio.currentTime / audio.duration) * 100;
-    //         progressBar.style.width = `${progressPercent}%`;
-    //         console.log(progressPercent);
-
-    //         currentTime.textContent = displayTime(audio.currentTime);
-
-    //         if (audio.duration != NaN && audio.duration != Infinity)
-    //             duration.textContent = " - " + displayTime(audio.duration);
-    //     }
-    // }
     function updateProgress() {
-        const elapsedSeconds = Math.floor(audio.currentTime);  // Get elapsed seconds
-    
-        // 🌟 Set the width based on the seconds elapsed
-        const progressWidth = elapsedSeconds * 5;  // Increase width by 5% per second (adjustable)
-    
-        // Apply the width to the progress bar
-        progressBar.style.width = `${progressWidth}%`;
-    
-        // Display the current time
-        currentTime.textContent = displayTime(audio.currentTime);
-    
-        // Display total duration
-        duration.textContent = " - " + displayTime(audio.duration);
+        // console.log(1);
+        if (audio.duration) {
+            // console.log(2);
+            // console.log(audio.currentTime);
+            // console.log( audio.duration);
+
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            console.log(progressPercent);
+
+            currentTime.textContent = displayTime(audio.currentTime);
+
+            if (audio.duration != NaN && audio.duration != Infinity)
+                duration.textContent = " - " + displayTime(audio.duration);
+        }
     }
-    
     
 
     // Scrub through the audio
@@ -150,7 +134,7 @@ export function initializeAudioPlayer(player) {
         audioPlayer.currentTime = newTime * audioPlayer.duration;
     }
     // Update progress bar as the audio plays
-    audio.addEventListener("timeupdate", updateProgress);
+    audio.addEventListener("play", updateProgress);
     // Click on progress bar to seek
     progressRange.addEventListener("click", setProgress);
 
