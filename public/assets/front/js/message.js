@@ -1475,6 +1475,7 @@ const playButton = document.getElementById("playRecording");
 const stopPlaybackButton = document.getElementById("stopPlayback");
 const audioElement = document.getElementById("recordedAudio");
 const close = document.getElementsByClassName("close-audio-btn");
+const recordtimediv = document.getElementById("racording-time-wrp");
 
 $(".send-message").on("keypress", async function (e) {
     if (e.which === 13 && e.shiftKey) {
@@ -1490,7 +1491,7 @@ $("#message-send").on("click", async function () {
     return await sendMessage(); // Call the same function on button click
 });
 async function sendMessage() {
-        $("#musicContainer").removeClass("musicSample");
+    $("#musicContainer").removeClass("musicSample");
 
     const message = $(".send-message").val();
 
@@ -1517,6 +1518,8 @@ async function sendMessage() {
 
     loader.css("display", "flex");
     startButton.style.display = "inline-block";
+    startButton.style.display = "none";
+
     $("#isGroup").val(isGroup);
     let downloadURL = "";
     let type = "";
@@ -3652,12 +3655,12 @@ $("#choose-file").on("change", async function () {
 });
 
 // let stream, mediaRecorder;
-let startTime, endTime;  //    // Timer interval
-let seconds;  //    // Timer interval
-       // Track total seconds
+let startTime, endTime; //    // Timer interval
+let seconds; //    // Timer interval
+// Track total seconds
 async function startRecording() {
     recordedChunks = [];
-    seconds = 0;  // Reset seconds when starting
+    seconds = 0; // Reset seconds when starting
 
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -3667,6 +3670,7 @@ async function startRecording() {
         startTime = performance.now();
 
         startButton.style.display = "none";
+        recordtimediv.style.display = "block";
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
@@ -3721,8 +3725,8 @@ function playRecording() {
 //         }, 500);
 
 //         let messageIcons = $(".message-icons");
-//         messageIcons.addClass("hide"); 
-              
+//         messageIcons.addClass("hide");
+
 //     } else {
 //         console.error("MediaRecorder is not recording.");
 //     }
@@ -3739,8 +3743,7 @@ async function stopRecording() {
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
         // alert(durationInSeconds);
-        $('.current_duration').val(durationInSeconds);
-
+        $(".current_duration").val(durationInSeconds);
 
         // Wait for the MediaRecorder to finish saving data
         await new Promise((resolve) => {
@@ -3758,7 +3761,6 @@ async function stopRecording() {
 
         let messageIcons = $(".message-icons");
         messageIcons.addClass("hide");
-
     } else {
         console.error("MediaRecorder is not recording.");
     }
@@ -3770,7 +3772,7 @@ stopPlaybackButton.addEventListener("click", stopPlayback);
 $("#musicContainer").hide();
 // $(document).on('click','.play',function(){
 //     if(('#audioContainer').hasClass('play')){
-        
+
 //     }
 // })
 
@@ -3779,18 +3781,17 @@ $("#musicContainer").hide();
 //     $("#send_audio").hide();
 //     $(".preview_img").attr("src", "");
 //     $(".recordedAudio").attr("src", "");
-//     $(".message-icons").removeClass("hide"); 
+//     $(".message-icons").removeClass("hide");
 //     $(".upload-box").val("");
 //     $(".file_info").val("");
 
 //     const player = document.querySelector("#audioContainer");
 //     player.classList.remove("initialized");
 
-
 //     // const play = player.querySelector(".play");
 //     // if(play){
 //     //     play.pause();
-//     //     play.load(); 
+//     //     play.load();
 
 //     // }
 //     const newPlayer = document.querySelector("#audioContainer");
@@ -4913,13 +4914,11 @@ $(document).ready(function () {
 
     messageBox.on("input", function () {
         if ($.trim(messageBox.val()) !== "") {
-            messageIcons.addClass("hide");  // Add hide class when input has value
+            messageIcons.addClass("hide"); // Add hide class when input has value
         } else {
-            messageIcons.removeClass("hide");  // Remove hide class when input is empty
+            messageIcons.removeClass("hide"); // Remove hide class when input is empty
         }
     });
 });
-
-
 
 //vrushali message box

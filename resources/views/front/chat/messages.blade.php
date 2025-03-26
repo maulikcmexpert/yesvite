@@ -1512,7 +1512,7 @@ use Carbon\Carbon;
                             <div class="message-perent">
                                 <textarea type="text" placeholder="Write message here..." id="message-box" rows="1"
                                     style="overflow:hidden; resize:none;" class="send-message"></textarea>
-                                <div class="time racording-time-wrp d-none">
+                                <div class="time racording-time-wrp" id="racording-time-wrp">
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
