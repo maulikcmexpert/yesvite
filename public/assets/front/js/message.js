@@ -3657,7 +3657,7 @@ $("#choose-file").on("change", async function () {
 // let stream, mediaRecorder;
 let startTime, endTime; //    // Timer interval
 let seconds; //
-let counter = 1;  
+// let counter = 1;  
 let timer = null;     // To store the interval reference
 
 function formatTime(seconds) {
@@ -3670,19 +3670,22 @@ function formatTime(seconds) {
 async function startRecording() {
     recordedChunks = [];
     seconds = 0; // Reset seconds when starting
-    counter = 1;  // Reset counter on every recording start
+    // counter = 1;  // Reset counter on every recording start
 
     try {
+
+        seconds++;  // Start at 00:01 immediately
+            $('.timer').text(formatTime(seconds)); 
+
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
         $('.time-elapsed-timer').text(formatTime(counter));
 
         timer = setInterval(function() {
             $('.time-elapsed-timer').text(formatTime(counter));
-            counter++;  
+            seconds++;  
             console.log(counter);
         }, 1000);
-        
         mediaRecorder.start();
         startTime = performance.now();
 
@@ -3772,7 +3775,7 @@ function playRecording() {
 
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
-        counter = 0;
+        seconds = 0;
         clearInterval(timer); 
         timer = null;
         $('.time-elapsed-timer').text('00:00');
