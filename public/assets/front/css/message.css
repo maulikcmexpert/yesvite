@@ -429,7 +429,7 @@ ul.chat-list > div:last-child li {
     max-height: calc(100% - 202px);
     height: calc(100% - 202px);
     overflow-y: scroll;
-     /* margin-bottom: 65px;  */
+    /* margin-bottom: 65px;  */
 }
 
 .msg-body ul {
@@ -1638,8 +1638,8 @@ ul.chat-list li.setpink {
     /* border: 1px solid #94A3B8; */
 }
 
-#stopRecording i{
-    color:#94A3B8
+#stopRecording i {
+    color: #94a3b8;
 }
 
 .day-line {
@@ -1873,47 +1873,43 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     margin-left: 0px !important;
 }
 
-#message-send{
+#message-send {
     border: none !important;
     background-color: transparent !important;
 }
 
-.chatbox{
+.chatbox {
     display: flex;
     flex-direction: column;
 }
 
-
-.message-perent #message-send svg path:first-child{
+.message-perent #message-send svg path:first-child {
     fill: var(--secondary-black);
     stroke: var(--secondary-black);
-
 }
 
-.message-perent #message-send svg path:last-child{
+.message-perent #message-send svg path:last-child {
     stroke: var(--white);
 }
 
-
-.message-icons #message-send{
+.message-icons #message-send {
     display: none;
 }
 
-.message-icons.hide #message-send{
+.message-icons.hide #message-send {
     display: block;
 }
 
 .message-icons.hide .dropdown,
-.message-icons.hide .audio-controls{
+.message-icons.hide .audio-controls {
     display: none;
 }
-
 
 /* .unmute-self-icn path{
     stroke:#94A3B8;
 } */
 
-.msg-body ul li.sender .media-msg-inline:has(.music-container) .reaction-icon{
+.msg-body ul li.sender .media-msg-inline:has(.music-container) .reaction-icon {
     position: static !important;
     right: unset !important;
     top: unset !important;
@@ -1921,7 +1917,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     z-index: 1;
 }
 
-.msg-body ul li.sender .media-msg-inline:has(.music-container){
+.msg-body ul li.sender .media-msg-inline:has(.music-container) {
     align-items: center !important;
 }
 
@@ -1930,7 +1926,17 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     max-width: 20px !important;
     height: 20px !important;
     max-width: 20px !important;
-     padding-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+.racording-time-wrp {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    height: 100%;
+    width: calc(100% - 90px);
+    background: #fff;
 }
 
 /* ======= responsive ======== */
@@ -1955,11 +1961,11 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
         max-width: 150px;
         text-transform: capitalize;
     }
-    #message-send svg{
+    #message-send svg {
         width: 24px;
         height: 24px;
     }
-    #message-send svg path{
+    #message-send svg path {
         stroke: #000;
     }
 }
@@ -2113,7 +2119,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
         max-height: 600px;
         margin-bottom: 0px !important;
     }
-    .msg-footer{
+    .msg-footer {
         bottom: 0px;
     }
 }
