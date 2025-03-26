@@ -3670,7 +3670,7 @@ async function startRecording() {
         startTime = performance.now();
 
         startButton.style.display = "none";
-        recordtimediv.classList.remove("d-none");
+        startButton.classList.remove("d-none");
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
@@ -3739,7 +3739,6 @@ async function stopRecording() {
         $("#musicContainer").show();
 
         stopButton.style.display = "none";
-        recordtimediv.classList.addClass("d-none");
         endTime = performance.now();
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
