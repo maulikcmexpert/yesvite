@@ -3346,11 +3346,9 @@ class EventController extends BaseController
         // dd($eventImage);
 
         if ($eventImage) {
-            // dd(1);
             // Delete database entry
-            $eventImage->delete();
+            $eventImage->forceDelete();
 
-            return true;
             // Unlink the image file
             $imagePath = public_path('storage/event_images/') . $imageFilename;
             if (file_exists($imagePath)) {
