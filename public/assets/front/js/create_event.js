@@ -5196,14 +5196,7 @@ async function saveDesignData(direct = false) {
         if (imageResponse && imageResponse.image) {
          //    const image1 =  localStorage.getItem('final_upload_image');
             eventData.desgin_selected = imageResponse.image;
-            let imageUrls =   localStorage.getItem('final_upload_image');
 
-            if(imageUrls){
-
-                eventData.desgin_selected = imageUrls;
-
-
-            }
 
         }
         if (direct) {
@@ -5512,7 +5505,14 @@ $(document).on("click", ".li_event_details", async function () {
                         }
 
                     });
+                    let imageUrls =   localStorage.getItem('final_upload_image');
 
+                    if(imageUrls){
+
+                        eventData.desgin_selected = imageUrls;
+
+
+                    }
                     console.log("Captured & Stored Image:", base64Image);
                 };
             }
