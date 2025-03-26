@@ -3670,16 +3670,11 @@ function formatTime(seconds) {
 async function startRecording() {
     recordedChunks = [];
     seconds = 0; // Reset seconds when starting
-    counter = 1;  // Reset counter on every recording start
 
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        timer = setInterval(function() {
-            $('.time-elapsed-timer').text(formatTime(counter));
-            counter++;  
-            console.log(counter);
-        }, 1000);  
+       
         mediaRecorder.start();
         startTime = performance.now();
 
@@ -3707,7 +3702,7 @@ async function startRecording() {
 
 function playRecording() {
     $(".close-audio-btn").show();
-
+    counter = 1;  // Reset counter on every recording start
     const blob = new Blob(recordedChunks, { type: "audio/wav" });
     const audioURL = URL.createObjectURL(blob);
 
@@ -3716,6 +3711,12 @@ function playRecording() {
 
     playButton.style.display = "none";
 
+
+    timer = setInterval(function() {
+        $('.time-elapsed-timer').text(formatTime(counter));
+        counter++;  
+        console.log(counter);
+    }, 1000);  
     // counter = 1;  
     // console.log(counter);
     // $('.time-elapsed-timer').text(formatTime(counter));
