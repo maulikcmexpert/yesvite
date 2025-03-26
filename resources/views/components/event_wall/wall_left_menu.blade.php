@@ -91,7 +91,7 @@
                             <div class="hosted-by-template-slider-img {{$disable}}">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
-                            <button class="image-zoom-icon" data-img="{{ $image }}"><img
+                            <button class="image-zoom-icon" data-img="{{ $image }}" data-bs-toggle="modal" data-bs-target="#event-slider-rsvp-modal"><img
                                     src="{{ asset('assets/front/img/image-zoom-icon.png') }}" alt=""></button>
                         </div>
                     @endforeach
@@ -285,3 +285,42 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade cmn-modal" id="event-slider-rsvp-modal" tabindex="-1" aria-modal="true" role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending ({{count($eventData)}})</h4>
+                <button type="button" class="btn-close close_silder_pending" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-body">
+                  <div class="pending-rsvp-slider-main-section">
+
+                    <div class="owl-carousel owl-theme event_photo_slider">
+                        @foreach ($eventDetails['event_images'] as $image)
+                            <div class="item">
+                            <div class="setting-img">
+                                <img src="{{$image}}" />
+                            </div>
+                            </div>
+                  
+
+                      @endforeach
+                      
+                
+                  </div>
+                 
+                  {{-- <button type="button" class="btn btn-secondary pending-rsvp-btn" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification">
+                    RSVP
+                </button> --}}
+                {{-- {{dd($firstEvent['firstname']);}} --}}
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+   </div>
