@@ -5069,7 +5069,7 @@ class ApiControllerv2 extends Controller
                         EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
                     }
                     if ($eventData['event_setting']['podluck'] == '1') {
-
+dd(1);
                         $podluckCategoryList = $eventData['podluck_category_list'];
                         if (!empty($podluckCategoryList)) {
                             // EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
@@ -5227,7 +5227,7 @@ class ApiControllerv2 extends Controller
                             //     }
                             // }
                             $eventID=$eventData['event_id'];
-                            
+
                             EventPotluckCategory::where('event_id', $eventID)->delete();
                             EventPotluckCategoryItem::where('event_id', $eventID)->delete();
                             UserPotluckItem::where('event_id', $eventID)->delete();
