@@ -3336,7 +3336,7 @@ class EventController extends BaseController
         // Extract filename from URL
         $imageFilename = $image_name;
 
-        dd($imageFilename);
+        // dd($imageFilename);
         // Check if the image exists in the EventImage table
         $eventImage = EventImage::where([
             'event_id' => $eventId,
