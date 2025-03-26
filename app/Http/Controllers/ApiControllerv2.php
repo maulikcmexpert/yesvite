@@ -5228,9 +5228,9 @@ class ApiControllerv2 extends Controller
                             // }
                             $eventID=$eventData['event_id'];
                           
-                            EventPotluckCategory::where('event_id', $eventID)->delete();
-                            EventPotluckCategoryItem::where('event_id', $eventID)->delete();
-                            UserPotluckItem::where('event_id', $eventID)->delete();
+                            EventPotluckCategory::where('event_id', $eventData['event_id'])->delete();
+                            EventPotluckCategoryItem::where('event_id', $eventData['event_id'])->delete();
+                            UserPotluckItem::where('event_id', $eventData['event_id'])->delete();
 
                             
                             foreach ($podluckCategoryList as $value) {
@@ -5278,7 +5278,7 @@ class ApiControllerv2 extends Controller
                             }
 
 
-                            dd($eventID);
+                           
 
 
 
