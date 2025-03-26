@@ -1,6 +1,28 @@
-var dbJson = $("#static_information").val() || null;
+var storedData = localStorage.getItem("storedTextData");
+var parsedData = storedData ? JSON.parse(storedData) : null; // Safe parsing
+var dbJson = $("#static_information").val() || parsedData || null;
 var temp_id = null;
-var image = $("#design_image").val() || null;
+
+var image = $("#design_image").val() || localStorage.getItem("image") || null;
+console.log(image)
+console.log(localStorage.getItem("image"))
+// ✅ Remove local storage data after setting values in variables
+setTimeout(function(){
+    localStorage.removeItem("image");
+    localStorage.removeItem("storedTextData");
+},5000)
+
+//localStorage.removeItem("storedTempId");
+
+console.log("dbJson:", dbJson);
+console.log("image:", image);
+console.log(localStorage.getItem("image"))
+
+console.log("LocalStorage data cleared.");
+
+
+
+console.log("Final Image:", image);
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
@@ -24,7 +46,7 @@ if (element) {
     console.log("Width:", width, "Height:", height);
 } else {
     console.log("Element not found! Using default values.");
-}
+}$(".step_1").hide();
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded fired");
@@ -120,6 +142,7 @@ $(document).on("click", ".design-cards", function () {
         dbJson = json;
         temp_id = id;
     }
+
 
     // Set the image URL in the modal's image tag
     $("#modalImage").attr("src", imageUrl);
@@ -618,6 +641,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
+    $(".new_login").hide();
     $(".pick-card").removeClass("active");
     $(".pick-card").addClass("menu-success");
     $(".edit-design").removeClass("menu-success");
@@ -650,13 +674,13 @@ $(document).on("click", ".edit_design_tem", function (e) {
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
 
-                if (
-                    jsonResponse.status == 401 &&
-                    jsonResponse.info == "logout"
-                ) {
-                    window.location.href = "/"; // Redirect to home page
-                    return;
-                }
+                // if (
+                //     jsonResponse.status == 401 &&
+                //     jsonResponse.info == "logout"
+                // ) {
+                //     window.location.href = "/"; // Redirect to home page
+                //     return;
+                // }
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
@@ -755,6 +779,8 @@ async function bindData(current_event_id) {
                 if (staticInfo.textElements != undefined) {
                     // console.log(staticInfo);
                     staticInfo.textElements.forEach((element) => {
+                        console.log(element);
+
                         // applyFont(element.fontFamily);
                         const textMeasurement = new fabric.Text(element.text, {
                             fontSize: element.fontSize,
@@ -2961,6 +2987,7 @@ function loadAgain() {
     //console.log(json);
     var id = imageId;
 
+
     $(".design-sidebar-action").attr("data-id", id);
     if (
         eventData.textData != null &&
@@ -2979,6 +3006,7 @@ function loadAgain() {
     $(".step_1").hide();
     $(".step_2").hide();
     $(".step_3").hide();
+    $(".new_login").hide();
     $(".pick-card").removeClass("active");
     $(".pick-card").addClass("menu-success");
     $(".edit-design").removeClass("menu-success");

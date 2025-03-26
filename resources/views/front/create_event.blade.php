@@ -326,7 +326,9 @@
         </nav>
     </div>
 </header>
-
+<div class="new_login" style="display: none">
+    @include('front.event.newLogin')
+</div>
 <main class="main-content-wrp">
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
@@ -522,6 +524,9 @@
     <div id="edit-design-temp" style="display: none">
         {{-- @include('front.event.design.edit_design') --}}
     </div>
+
+
+
     @if (Auth::guard('web')->check())
     @include('front.event.step3')
 
@@ -641,7 +646,7 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" id="isUserLoggedIn" value="{{ auth()->check() ? '1' : '0' }}">
 
 <div id="sidebar_allow_limit" class="sidebar setting-side-wrp">
     <div class="sidebar-content setting-sidebar">
@@ -2805,6 +2810,7 @@
             category</a>
     </div>
 </div>
+
 @if (Auth::guard('web')->check())
 
 <div id="sidebar_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">
@@ -3317,7 +3323,7 @@
 <input type="hidden" id="app_user" value="{{ $app_user }}">
 <input type="hidden" id="thankuCardId" value="{{ $thankuCardId }}">
 <input type="hidden" id="inviteTotalCount" value="{{ $eventDetail['inviteCount'] }}">
-<input type="hidden" id="isCohost" value="{{ $eventDetail['isCohost'] }}">
+
 <input type="hidden" id="design_image" value="{{ $design_image }}">
 <input type="hidden" id="static_information" value="{{ $static_information }}">
 <input type="hidden" id="step" value="{{ $step }}">
@@ -3335,6 +3341,8 @@
 <input type="hidden" id="totalCategoryItem" value="{{ $totalCategoryItem }}">
 
 @endif
+
+<input type="hidden" id="isCohost" value="">
 
 
 

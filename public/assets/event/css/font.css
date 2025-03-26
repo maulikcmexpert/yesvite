@@ -17,3 +17,68 @@
     font-family: 'SF Pro Display', sans-serif;
     src: url("/assets/font/SF-Pro-Display-Semibold.woff");
 }
+
+@font-face {
+    font-family: 'SFProDisplay-HeavyItalic';
+    src: url('/assets/font/SFProDisplay-HeavyItalic.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-HeavyItalic.woff2') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'SFProDisplay-Bold';
+    src: url('/assets/font/SFProDisplay-Bold.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SFProDisplay-SemiboldItalic';
+    src: url('/assets/font/SFProDisplay-SemiboldItalic.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-SemiboldItalic.woff2') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SFProDisplay-Medium';
+    src: url('/assets/font/SFProDisplay-Medium.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-Medium.woff2') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SFProDisplay-Regular';
+    src: url('/assets/font/SFProDisplay-Regular.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SFProDisplay-Semibold';
+    src: url('/assets/font/SFProDisplay-Semibold.woff2') format('woff2'),
+        url('/assets/font/SFProDisplay-Semibold.woff2') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'SFProDisplay-Italic';
+    src: url('/assets/font/SF-Pro-Display-RegularItalic.woff') format('woff2'),
+        url('/assets/font/SF-Pro-Display-RegularItalic.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}

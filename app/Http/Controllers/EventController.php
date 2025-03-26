@@ -133,10 +133,38 @@ class EventController extends BaseController
         ]);
     }
 
+    public function fetchEventDetails(Request $request)
+    {
+        $id = Auth::guard('web')->check() ? Auth::guard('web')->user()->id : null;
 
+        if (!$id) {
+            return response()->json(['success' => false, 'message' => 'User not logged in']);
+        }
+
+        $thankyou_card_count = EventGreeting::where('user_id', $id)->count();
+        $gift_registry_count = EventGiftRegistry::where('user_id', $id)->count();
+
+        return response()->json([
+            'success' => true,
+            'eventDetail' => [
+                'user_id' => $id,
+                'id' => '',
+                'thankyou_card_count' => $thankyou_card_count,
+                'gift_registry_count' => $gift_registry_count,
+                'eventeditId' => $request->id ?? '',
+                'inviteCount' => 0,
+                'isCohost' => "1",
+                'isCopy' => "",
+                'alreadyCount' => 0
+            ]
+        ]);
+    }
 
     public function index(Request $request)
     {
+
+    //   dd(Auth::guard('web')->check());
+        if (Auth::guard('web')->check()) {
 
         // dd(config('app.url'));
         // dd(Session::get('shape_image'));
@@ -154,7 +182,7 @@ class EventController extends BaseController
         $custom_image = Session::forget('custom_image');
         $shape = Session::get('shape_image');
 
-        // $useremail = Auth::user()->email;
+        $useremail = Auth::user()->email;
         // if (isset($shape) && $shape != "" || $shape != NULL) {
         //     if (file_exists(public_path('storage/canvas/') . $shape)) {
         //         $shapePath = public_path('storage/canvas/') . $shape;
@@ -187,8 +215,6 @@ class EventController extends BaseController
         Session::forget('greetingCardData');
         Session::forget('giftRegistryData');
         Session::save();
-
-        if (Auth::guard('web')->check()) {
             $id = Auth::guard('web')->user()->id;
 
             $thankyou_card_count = EventGreeting::where('user_id', $id)->count();

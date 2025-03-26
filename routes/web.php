@@ -124,7 +124,7 @@ Route::get('faq', [FaqController::class, 'index'])->name('faq');
 Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact');
 Route::post('contact-submit', [ContactUsController::class, 'submit'])->name('contact.submit');
 
-
+// Route::get('/fetch-event-details', [EventController::class, 'fetchEventDetails']);
 Route::middleware('checkUserExist')->group(function () {
 
     Route::post('/chatReport', [ChatController::class, 'chatReport'])->name('chatReport');
@@ -218,7 +218,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/add_new_thankyou_card', [ControllersEventController::class, 'addNewThankyouCard'])->name('add.thankyou_card');
     Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
     Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
-    Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    // Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
     Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
     Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
@@ -362,7 +362,9 @@ Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name(
 Route::get('/check-login', function (Request $request) {
     return response()->json(['is_logged_in' => Auth::guard('web')->check()]);
 });
+Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
 Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
+Route::post('event/get_login_page', [ControllersEventController::class, 'get_login_page']);
 
 Route::get('event/editd', [DesignController::class, 'index']);
 Route::post('/saveTextData', [DesignController::class, 'saveTextData'])->name('saveTextData');

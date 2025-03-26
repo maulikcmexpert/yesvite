@@ -213,9 +213,9 @@ class AuthController extends Controller
 
             //     EventPost::where('sync_id',$checkContactSync->id)
             //     ->update(['user_id'=>$storeUser->id]);
-            
+
             // }
-            
+
             $userDetails = User::where('id', $storeUser->id)->first();
 
             $coin_transaction = new Coin_transactions();
@@ -257,6 +257,7 @@ class AuthController extends Controller
      */
     public function checkLogin(Request $request)
     {
+//   dd($request->all());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6'],
@@ -267,7 +268,7 @@ class AuthController extends Controller
             'password.min' => 'Password must be at least 6 characters',
         ]);
 
-
+        $isLogin = $request->has('is_login');
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
         $userData = User::where('email', $request->email)->first();
         if(isset($userData)&&$userData->email_verified_at==null){
@@ -287,6 +288,10 @@ class AuthController extends Controller
                 $message->to($request->email);
                 $message->subject('Verify your Yesvite email address');
             });
+            if ($isLogin) {
+                return response()->json(['message' => 'Please check and verify your email address.'], 400);
+            }
+
 
             return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
         }
@@ -352,12 +357,25 @@ class AuthController extends Controller
                             $loginHistory->login_count = 1;
                             $loginHistory->save();
                         }
-                        // dd($user->isTemporary_password); 
+                        // dd($user->isTemporary_password);
                         if ($user->isTemporary_password == "1") {
+                            if ($isLogin) {
+                                return response()->json(['message' => 'Please change your temporary password.', 'redirect' => route('profile.change_password')]);
+                            }
                             return redirect()->route('profile.change_password')->with('msg', 'Please changer your temparory password.');
                         } else {
                             // return redirect()->route('home');
-                            return redirect()->intended(route('home'));
+                            if ($isLogin) {
+                                return response()->json([
+                                    'success' => true,
+                                    'message' => 'Login successful',
+                                    'redirect' => route('home') // Redirect URL if needed
+                                ]);
+                            }else{
+
+                                return redirect()->intended(route('home'));
+                            }
+
 
                         }
                     } else {
@@ -383,7 +401,9 @@ class AuthController extends Controller
                         $message->to($user->email);
                         $message->subject('Verify your Yesvite email address');
                     });
-
+                    if ($isLogin) {
+                        return response()->json(['message' => 'Please check and verify your email address.'], 400);
+                    }
                     return  Redirect::to('login')->with('msg', 'Please check and verify your email address.');
                 }
 

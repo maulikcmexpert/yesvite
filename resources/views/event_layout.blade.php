@@ -53,9 +53,9 @@
     <link rel="stylesheet" href="{{ asset('assets/event/css/variable.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/event/css/edit-design.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('assets/event/css/newlogin.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/event/style1.css') }}"> --}}
-    
+
     <link rel="stylesheet" href="{{ asset('assets/event/css/swiper-bundle.min.css') }}">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> --}}
 
@@ -87,7 +87,7 @@
         <div></div>
     </div>
     @include($page)
-   
+
 
 </main>
     {{-- <x-front.footer :js="$js ?? []" /> --}}
@@ -96,7 +96,7 @@
     <script src="{{ asset('assets/event/js/script.js') }}"></script>
     <script src="{{ asset('assets/event/js/common.js') }}"></script>
     <script src="{{ asset('assets/event/js/wow.min.js') }}"></script>
-    
+
 </body>
 
 </html>

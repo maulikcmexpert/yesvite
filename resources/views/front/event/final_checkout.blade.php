@@ -54,7 +54,7 @@
                                 <img id="sliderImages-3" src="" />
                             </div>
                         </div>
-                       
+
                 </div> -->
 
                 <!-- <div class="swiper mySwiper event_images_slider">
@@ -77,9 +77,9 @@
                     <div class="swiper-slide sliderImages-3" style="display:none;">
                     <div class="setting-img">
                             <img id="sliderImages-3" src="" />
-                        </div>    
+                        </div>
                     </div>
-                 
+
                     </div>
                 </div> -->
                 <div class="owl-carousel owl-theme event_images_slider">
@@ -88,7 +88,7 @@
                                 <img id="eventImage" src="" />
                             </div>
                         </div>
-                    <div class="item sliderImages-1" style="display:none;">  
+                    <div class="item sliderImages-1" style="display:none;">
                             <div class="setting-img">
                                 <img id="sliderImages-1" src="" />
                             </div>
@@ -103,15 +103,15 @@
                                 <img id="sliderImages-3" src="" />
                             </div>
                     </div>
-              
+
                 </div>
                 <div class="event_images_template" style="display:none;">
                     <!-- <div class="item"> -->
                         <div class="setting-img">
-                                <img id="eventTempImage" src="" />
+                                <img id="eventTempImage" class="eventTempImage" src="" />
                             </div>
                         <!-- </div> -->
-                    <!-- <div class="item sliderImages-1" style="display:none;">  
+                    <!-- <div class="item sliderImages-1" style="display:none;">
                             <div class="setting-img">
                                 <img id="sliderImages-1" src="" />
                             </div>
@@ -124,9 +124,9 @@
                     <div class="item sliderImages-3" style="display:none;">
                     <div class="setting-img">
                                 <img id="sliderImages-3" src="" />
-                            </div> 
+                            </div>
                     </div>-->
-              
+
                 </div>
                     <!-- <div class="setting-img">
                         <img id="eventImage" src="" />
@@ -178,7 +178,7 @@
                             <div class="invite-left">
                                 <h6 class="invite-count"></h6>
                                 <p class="invite-left_d"><strong>Invites |  <span class="available-coins">{{$coins}}</span></strong> Left</p>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                     <div class="order-desc order-desc-respo">
@@ -226,8 +226,8 @@
                         <a href="#" class="cmn-btn final_create_event">Send Invites</a>
                         {{-- <a href="#" class="cmn-btn final_create_event">Purchase & Send Invites</a> --}}
                     </div>
-                    
-                    @else    
+
+                    @else
                     <div class="new-event-btn text-center">
                         {{-- <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Purchase & Send Invites</button> --}}
                         <button  data-isDraftEdit="1" class="cmn-btn edit_checkout new-edit-save-btn">Send Invites</button>
@@ -235,7 +235,7 @@
                     @endif
 
                 </div>
-                
+
             </div>
         </div>
         @if ($eventDetail['id'] == '')
@@ -243,7 +243,7 @@
             <a href="#" class="cmn-btn final_create_event" data-bs-toggle="modal" data-bs-target="#eventModal">Send Invites</a>
             {{-- <a href="#" class="cmn-btn final_create_event" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a> --}}
         </div>
-        @else    
+        @else
         <div class="new-event-btn new-event-respo text-center">
             <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Send Invites</a>
             {{-- <a href="#" data-isDraftEdit="1" class="cmn-btn edit_checkout" data-bs-toggle="modal" data-bs-target="#eventModal">Purchase & Send Invites</a> --}}
@@ -658,7 +658,7 @@
                                     <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                     </svg>
                                     </span>
-                                    500 Invites limit per event 
+                                    500 Invites limit per event
                             </li>
                             <li>
                                 <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -679,7 +679,7 @@
                                     <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                     </svg>
                                     </span>
-                                    Unlimited guest polls 
+                                    Unlimited guest polls
                             </li>
                             <li>
                                 <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -778,7 +778,7 @@
                                 <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 </span>
-                                Set schedule for activities 
+                                Set schedule for activities
                         </li>
                         <li>
                             <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -857,7 +857,7 @@
                                 <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                 </svg>
                                 </span>
-                                Unlimited Events 
+                                Unlimited Events
                         </li>
                         <li>
                             <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -959,7 +959,7 @@
                     </span>
                 </div> --}}
             </div>
-          
+
         </div>
         <div class="modal-footer">
             <a href="{{route('home')}}" class="btn cancel-btn">Done</a>
@@ -1388,7 +1388,7 @@
                                     <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                     </svg>
                                     </span>
-                                    500 Invites limit per event 
+                                    500 Invites limit per event
                             </li>
                             <li>
                                 <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1409,7 +1409,7 @@
                                     <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                     </svg>
                                     </span>
-                                    Unlimited guest polls 
+                                    Unlimited guest polls
                             </li>
                             <li>
                                 <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1508,7 +1508,7 @@
                                 <path d="M10.3866 9.88661L6.61328 6.11328" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 </span>
-                                Set schedule for activities 
+                                Set schedule for activities
                         </li>
                         <li>
                             <span ><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1587,7 +1587,7 @@
                                 <path d="M8.49992 1.3335C4.82659 1.3335 1.83325 4.32683 1.83325 8.00016C1.83325 11.6735 4.82659 14.6668 8.49992 14.6668C12.1733 14.6668 15.1666 11.6735 15.1666 8.00016C15.1666 4.32683 12.1733 1.3335 8.49992 1.3335ZM11.6866 6.46683L7.90659 10.2468C7.81325 10.3402 7.68659 10.3935 7.55325 10.3935C7.41992 10.3935 7.29325 10.3402 7.19992 10.2468L5.31325 8.36016C5.11992 8.16683 5.11992 7.84683 5.31325 7.6535C5.50659 7.46016 5.82659 7.46016 6.01992 7.6535L7.55325 9.18683L10.9799 5.76016C11.1733 5.56683 11.4933 5.56683 11.6866 5.76016C11.8799 5.9535 11.8799 6.26683 11.6866 6.46683Z" fill="#23AA26"/>
                                 </svg>
                                 </span>
-                                Unlimited Events 
+                                Unlimited Events
                         </li>
                         <li>
                             <span><svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

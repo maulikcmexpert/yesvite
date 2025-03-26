@@ -498,7 +498,7 @@
                 <button class="cmn-btn edit-text-save save-btn">Save</button>
             </div>
         </div>
-
+        <input type="hidden" id="isUserLoggedIn" value="{{ auth()->check() ? '1' : '0' }}">
 
         <!-- ===color-picker== -->
         <div class="design-sidebar design-sidebar_4 setting-category-wrp choose-design-form activity-schedule-inner d-none">
