@@ -3665,15 +3665,16 @@ let timer = null;     // To store the interval reference
 async function startRecording() {
     recordedChunks = [];
     seconds = 0; // Reset seconds when starting
-    timer = setInterval(function() {
-        console.log(counter);
-        $('.time-elapsed-timer').text(formatTime(counter));
-        counter++;  
-    }, 1000); 
+    counter = 1;  // Reset counter on every recording start
+
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-      
+        timer = setInterval(function() {
+            counter++;  
+            console.log(counter);
+            $('.time-elapsed-timer').text(formatTime(counter));
+        }, 1000);  
         mediaRecorder.start();
         startTime = performance.now();
 
@@ -3713,6 +3714,21 @@ function playRecording() {
     // audioElement.style.display = "block";
 
     playButton.style.display = "none";
+
+    counter = 1;  
+    console.log(counter);
+    $('.time-elapsed-timer').text(formatTime(counter));
+
+    // Clear existing interval if any
+    clearInterval(timer);
+
+    // Start the timer during playback
+    timer = setInterval(() => {
+        counter++;
+        console.log(counter);
+        $('.time-elapsed-timer').text(formatTime(counter));
+    }, 1000);
+
     // stopPlaybackButton.style.display = "inline-block";
 
     // audioElement.play().catch((err) => {
