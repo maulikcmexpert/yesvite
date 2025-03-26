@@ -1944,7 +1944,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
 }
 
 .racording-time-wrp svg {
-    animation: smoothBlink 1s infinite ease-in-out;
+    animation: smoothBlink 1.2s infinite ease-in-out;
 }
 
 .racording-time-wrp svg path {
