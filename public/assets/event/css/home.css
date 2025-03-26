@@ -354,10 +354,12 @@
     margin: 0 auto;
     text-align: center;
     display: block;
+    cursor: pointer;
 }
 
 .collection-card.card-blue {
     background-color: #e9f8ff;
+    cur
 }
 
 .collection-card.card-green {
