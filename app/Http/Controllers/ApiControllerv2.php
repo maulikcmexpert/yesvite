@@ -5375,7 +5375,7 @@ class ApiControllerv2 extends Controller
                             array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                         );
 
-                        dd($eventID,$user->id);
+                        dd(1);
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $eventData['event_id'],
