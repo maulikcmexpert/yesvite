@@ -3665,15 +3665,15 @@ let timer = null;     // To store the interval reference
 async function startRecording() {
     recordedChunks = [];
     seconds = 0; // Reset seconds when starting
-
+    timer = setInterval(function() {
+        console.log(counter);
+        $('.time-elapsed-timer').text(formatTime(counter));
+        counter++;  
+    }, 1000); 
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        timer = setInterval(function() {
-            console.log(counter);
-            $('.time-elapsed-timer').text(formatTime(counter));
-            counter++;  
-        }, 1000); 
+      
         mediaRecorder.start();
         startTime = performance.now();
 
