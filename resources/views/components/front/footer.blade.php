@@ -938,7 +938,8 @@
 
     //newwwww
     function openAppAndroid() {
-    const appPackage = "com.yesvite.test";
+    // const appPackage = "com.yesvite.test";
+    const appPackage = "com.yesvite.android";
     const appLink =
         `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
