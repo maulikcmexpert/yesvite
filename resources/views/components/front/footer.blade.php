@@ -970,11 +970,18 @@ function openAppIos() {
 document.addEventListener('DOMContentLoaded', () => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
+    // if (/android/i.test(userAgent)) {
+    //     openAppAndroid();
+    // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    //     openAppIos();
+    // }
+    if (/android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream) {
     if (/android/i.test(userAgent)) {
         openAppAndroid();
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    } else if (/iphone|ipad|ipod/i.test(userAgent)) {
         openAppIos();
     }
+}
 });
 
 // Optional: Clear sessionStorage flags on session end
