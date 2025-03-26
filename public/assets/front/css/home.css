@@ -370,13 +370,14 @@
     text-align: center;
     display: block;
     height: 315px;
+    cursor: pointer;
 }
 
 .collection-card.card-blue {
     background-color: #e9f8ff;
     max-width: 215px;
     margin: 0px auto;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .collection-card.card-green {
@@ -539,30 +540,40 @@
     z-index: 999;
 }
 
-
-.collection-wrapper .search-wrapper .filtered-results-container .search-item.category {
+.collection-wrapper
+    .search-wrapper
+    .filtered-results-container
+    .search-item.category {
     padding: 5px 10px;
     padding-left: 5px;
     font-weight: 700;
     cursor: pointer;
 }
 
-.collection-wrapper .search-wrapper .filtered-results-container .search-item.category:hover {
+.collection-wrapper
+    .search-wrapper
+    .filtered-results-container
+    .search-item.category:hover {
     background-color: #e9f8ff;
 }
 
-.collection-wrapper .search-wrapper .filtered-results-container .search-item.subcategory {
+.collection-wrapper
+    .search-wrapper
+    .filtered-results-container
+    .search-item.subcategory {
     padding: 5px 10px;
     padding-left: 15px;
     cursor: pointer;
 }
 
-.collection-wrapper .search-wrapper .filtered-results-container .search-item.subcategory:hover {
+.collection-wrapper
+    .search-wrapper
+    .filtered-results-container
+    .search-item.subcategory:hover {
     background-color: #e9f8ff;
 }
 
-
-.filter-main-wrp .selected-items .selected-item{
+.filter-main-wrp .selected-items .selected-item {
     font-size: 14px;
     font-family: var(--SFProDisplay-Semibold);
     padding: 9px 20px;
@@ -572,26 +583,26 @@
     background-color: #e9f8ff80;
 }
 
-.filter-main-wrp .selected-items .selected-item .close-btn{
+.filter-main-wrp .selected-items .selected-item .close-btn {
     margin-left: 10px;
     font-size: 20px;
     line-height: 1;
     font-family: var(--SFProDisplay-Regular);
     color: var(--lightColor);
     cursor: pointer;
-    transition:all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
-.filter-main-wrp .selected-items .selected-item .close-btn:hover{
+.filter-main-wrp .selected-items .selected-item .close-btn:hover {
     color: var(--primaryColor);
 }
 
-
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown:has(.dropdown-toggle.show)::after{
+.collection-wrapper
+    .filter-main-wrp
+    .filters-drp
+    .dropdown:has(.dropdown-toggle.show)::after {
     transform: rotate(180deg);
 }
-
-
 
 /* ===== Search Option Section end ===== */
 
@@ -639,7 +650,11 @@
     width: 200px;
 }
 
-.collection-wrapper .filter-main-wrp .filters-drp .dropdown button.dropdown-toggle {
+.collection-wrapper
+    .filter-main-wrp
+    .filters-drp
+    .dropdown
+    button.dropdown-toggle {
     background-color: transparent;
     border: 1px solid var(--borderColor) !important;
     border-radius: 100px;
@@ -754,7 +769,6 @@
     margin: 0 !important;
 }
 
-
 .collection-wrapper .dropdown-menu .filter-categories label {
     color: var(--secondryColor);
     font-size: 15px;
@@ -762,7 +776,10 @@
     margin-bottom: 0;
 }
 
-.collection-wrapper .dropdown-menu .filter-categories .form-check-input:checked {
+.collection-wrapper
+    .dropdown-menu
+    .filter-categories
+    .form-check-input:checked {
     background-color: #2da9fc !important;
     border-color: #2da9fc !important;
 }
@@ -1019,13 +1036,8 @@
     margin: 30px 0px;
 }
 
-
-
-
-
 /* ============ responsive ============ */
 @media only screen and (min-width: 1401px) {
-
     .image-item.all_designs,
     .image-item-new.all_designs {
         min-width: 250px;
@@ -1396,11 +1408,9 @@
     .collection-card {
         height: 250px;
     }
-    .collection-card.card-blue{
+    .collection-card.card-blue {
         border-radius: 10px !important;
     }
-
-    
 }
 
 @media only screen and (max-width: 435px) {
@@ -1426,7 +1436,6 @@
     }
 }
 
-
 @media only screen and (max-width: 424px) {
     .home-web-tabs-wrp .nav-tabs .nav-link {
         flex-basis: 50% !important;
@@ -1434,7 +1443,7 @@
     .collection-card {
         height: 230px !important;
     }
-    .collection-card.card-blue{
+    .collection-card.card-blue {
         border-radius: 10px !important;
     }
 }
