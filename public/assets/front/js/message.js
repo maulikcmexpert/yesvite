@@ -3755,6 +3755,8 @@ async function stopRecording() {
         counter = 0;
         clearInterval(timer); 
         timer = null;
+        $('.time-elapsed-timer').text('00:00');
+
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
