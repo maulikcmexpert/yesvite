@@ -5382,7 +5382,7 @@ class ApiControllerv2 extends Controller
                             'to_time' => $eventData['to_time'],
                             'newUser' => $filteredIds
                         ];
-
+                        dd($eventID,$notificationParam);
                         sendNotification('update_potluck', $notificationParam);
                     }
                 }
