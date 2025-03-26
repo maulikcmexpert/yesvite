@@ -3270,7 +3270,7 @@ class EventController extends BaseController
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
         $missingNames = array_diff($savedFileNames, $validNames);        
-        // dd($savedFiles,$imagenames,$missingNames);
+        dd($savedFiles,$imagenames,$missingNames);
 
         // Loop through saved files and delete the ones not in validNames
         // foreach ($savedFiles as $file) {
@@ -3314,7 +3314,7 @@ class EventController extends BaseController
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-        dd($savedFiles);
+        dd($savedFiles);    
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
