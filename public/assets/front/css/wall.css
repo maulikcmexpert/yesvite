@@ -772,6 +772,19 @@
     display: none;
 }
 
+.hosted-by-template-slider .swiper-button-next, .swiper-button-prev{
+    width: 100%;
+    max-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    background-color: var(--white);
+}
+
+.hosted-by-template-slider .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after{
+    font-size: 20px;
+}
+
 
 /* For mobile responsiveness, adjust button position */
 @media (max-width: 768px) {
