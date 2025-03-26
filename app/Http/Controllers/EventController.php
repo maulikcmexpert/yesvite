@@ -3270,12 +3270,19 @@ class EventController extends BaseController
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
         $missingNames = array_diff($savedFileNames, $validNames);        
-        dd($savedFiles,$imagenames,$missingNames);
+
+        $savedFiles = array_filter($savedFiles, function ($file) use ($missingNames) {
+            return !in_array($file["fileName"], $missingNames);
+        });
+        
+        // Reset array keys
+        $savedFiles = array_values($savedFiles);
+        
 
         // Loop through saved files and delete the ones not in validNames
-        // foreach ($savedFiles as $file) {
-        //    $getEventImages = EventImage::where('event_id', $event_id)->get();
-        // }
+        foreach ($missingNames as $file) {
+           $getEventImages = EventImage::where(['event_id'=> $event_id,'image'=>$file])->delete();
+        }
         $i = 0;
 
         // Check if there are existing images in the session and unlink them
