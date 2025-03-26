@@ -3739,6 +3739,7 @@ async function stopRecording() {
         $("#musicContainer").show();
 
         stopButton.style.display = "none";
+        recordtimediv.classList.addClass("d-none");
         endTime = performance.now();
         const durationInSeconds = ((endTime - startTime) / 1000).toFixed(3);
         console.log(`Total Recording Duration: ${durationInSeconds} seconds`);
