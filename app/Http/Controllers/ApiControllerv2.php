@@ -5375,6 +5375,7 @@ class ApiControllerv2 extends Controller
                             array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                         );
 
+                        dd($eventID,$user->id);
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $eventData['event_id'],
@@ -5382,7 +5383,6 @@ class ApiControllerv2 extends Controller
                             'to_time' => $eventData['to_time'],
                             'newUser' => $filteredIds
                         ];
-                        dd($eventID,$notificationParam);
                         sendNotification('update_potluck', $notificationParam);
                     }
                 }
