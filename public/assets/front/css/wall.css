@@ -700,6 +700,62 @@
     stroke: var(--secondary-black);
 }
 
+#event-slider-rsvp-modal .modal-body .event_photo_slider .item
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#event-slider-rsvp-modal .modal-body .event_photo_slider .setting-img{
+    width: 100%;
+    max-width: 390px;
+    max-height: 550px;
+    aspect-ratio: 5/7;
+}
+
+#event-slider-rsvp-modal .modal-body .event_photo_slider .setting-img img {
+    aspect-ratio: 5/7;
+}
+
+
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-prev {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    background-color:#2DA9FC;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-next{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    background-color:#2DA9FC;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+} 
+
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-prev  svg path,
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-next  svg path
+{
+    stroke: var(--white);
+}
+
+#event-slider-rsvp-modal .modal-body .event_photo_slider  .owl-dots{
+    display: none;
+}
+#event-slider-rsvp-modal .modal-body .event_photo_slider  .owl-dot{
+    display: none;
+}
 
 
 /* For mobile responsiveness, adjust button position */
