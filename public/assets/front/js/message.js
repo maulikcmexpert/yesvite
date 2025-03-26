@@ -3673,9 +3673,16 @@ async function startRecording() {
         mediaRecorder.start();
         startTime = performance.now();
 
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
         timer = setInterval(function() {
             console.log(counter);
-            $('.time-elapsed-timer').text(counter);
+            $('.time-elapsed-timer').text(formatTime(counter));
             counter++;  
         }, 1000);  
 
