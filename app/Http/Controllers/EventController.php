@@ -3343,7 +3343,7 @@ class EventController extends BaseController
             'image' => $imageFilename
         ])->first();
 
-        dd($eventImage);
+        // dd($eventImage);
 
         if ($eventImage) {
             // Delete database entry
