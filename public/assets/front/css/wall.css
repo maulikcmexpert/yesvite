@@ -711,6 +711,8 @@
     max-width: 390px;
     max-height: 550px;
     aspect-ratio: 5/7;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 #event-slider-rsvp-modal .modal-body .event_photo_slider .setting-img img {
