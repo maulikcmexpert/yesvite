@@ -3660,6 +3660,11 @@ let seconds; //
 let counter = 1;  
 let timer = null;     // To store the interval reference
 
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
 // Timer interval
 // Track total seconds
 async function startRecording() {
@@ -3711,19 +3716,19 @@ function playRecording() {
 
     playButton.style.display = "none";
 
-    // counter = 1;  
-    // console.log(counter);
-    // $('.time-elapsed-timer').text(formatTime(counter));
+    counter = 1;  
+    console.log(counter);
+    $('.time-elapsed-timer').text(formatTime(counter));
 
-    // // Clear existing interval if any
-    // clearInterval(timer);
+    // Clear existing interval if any
+    clearInterval(timer);
 
-    // // Start the timer during playback
-    // timer = setInterval(() => {
-    //     counter++;
-    //     console.log(counter);
-    //     $('.time-elapsed-timer').text(formatTime(counter));
-    // }, 1000);
+    // Start the timer during playback
+    timer = setInterval(() => {
+        counter++;
+        console.log(counter);
+        $('.time-elapsed-timer').text(formatTime(counter));
+    }, 1000);
 
     // stopPlaybackButton.style.display = "inline-block";
 
