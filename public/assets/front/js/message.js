@@ -3758,6 +3758,7 @@ async function stopRecording() {
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
+        recordtimediv.classList.add("d-none");
 
         stopButton.style.display = "none";
         endTime = performance.now();
