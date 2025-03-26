@@ -138,7 +138,7 @@ main.new-main-content {
     font-size: 13px;
     line-height: normal;
     color: var(--secondary-black);
-    flex-basis: 48%;
+    flex-basis: 47%;
     position: relative;
 }
 
