@@ -910,43 +910,24 @@
 
     });
 
-    // let isAppOpenedIos = false;  // Flag to prevent multiple calls
-    // let isAppOpenedAnd = false;  // Flag to prevent multiple calls
 
     // Define the function
-    function openAppIos() {
-        if (!localStorage.getItem('appOpened')) {
-         localStorage.setItem('isAppOpenedIos', 'true');  // Set the flag to prevent re-opening
-            const appLink = "comappyesvite://"; 
-            isAppOpenedIos=true;
-            window.location.href = appLink;
-        }
-    }
+    // function openAppIos() {
+    //     const appLink = "comappyesvite://"; 
+    //     window.location.href = appLink;
+    // }
 
-    // // Automatically call the function on page load
-    window.onload = openAppIos;
+    // // // Automatically call the function on page load
+    // window.onload = openAppIos;
 
-    function openApp() {
-        if (!localStorage.getItem('isAppOpenedAnd')) {
-            localStorage.setItem('isAppOpenedAnd', 'true'); 
-        const appPackage = "com.yesvite.test";
-        const appLink =
-            `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
-    let isAppOpenedAnd = true;  // Flag to prevent multiple calls
+    // function openApp() {
+    //     const appPackage = "com.yesvite.test";
+    //     const appLink =
+    //         `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    //     window.location.replace(appLink);
+    //     // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+    // }
 
-        window.location.replace(appLink);
-        }
-        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    if (/android/i.test(userAgent)) {
-        openApp();  // Only for Android devices
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        openAppIos();  // Only for iOS devices
-    }
-});
     // document.addEventListener('DOMContentLoaded', () => {
     //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -955,5 +936,51 @@
     //     }
     // });
 
+    //newwwww
+    function openAppAndroid() {
+    const appPackage = "com.yesvite.test";
+    const appLink =
+        `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
+    // Check if Android redirection has already happened in this session
+    if (!sessionStorage.getItem('androidAppRedirectionDone')) {
+        window.location.replace(appLink);
+        // Set a flag in sessionStorage
+        sessionStorage.setItem('androidAppRedirectionDone', 'true');
+    }
+    // Optional: Play Store fallback
+    // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+    // window.location.href = playStoreLink;
+}
+
+function openAppIos() {
+    const appLink = "comappyesvite://";
+
+    // Check if iOS redirection has already happened in this session
+    if (!sessionStorage.getItem('iosAppRedirectionDone')) {
+        window.location.href = appLink;
+        // Set a flag in sessionStorage
+        sessionStorage.setItem('iosAppRedirectionDone', 'true');
+    }
+    // Optional: App Store fallback (you'll need the app store URL)
+    // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
+    // window.location.href = appStoreLink;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(userAgent)) {
+        openAppAndroid();
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        openAppIos();
+    }
+});
+
+// Optional: Clear sessionStorage flags on session end
+// window.addEventListener('beforeunload', () => {
+//     sessionStorage.removeItem('androidAppRedirectionDone');
+//     sessionStorage.removeItem('iosAppRedirectionDone');
+// });
+    //newwww
 </script>
