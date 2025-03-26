@@ -3658,6 +3658,8 @@ $("#choose-file").on("change", async function () {
 let startTime, endTime; //    // Timer interval
 let seconds; //
 let counter = 1;  
+let timer = null;     // To store the interval reference
+
 // Timer interval
 // Track total seconds
 async function startRecording() {
@@ -3671,7 +3673,7 @@ async function startRecording() {
         mediaRecorder.start();
         startTime = performance.now();
 
-        setInterval(function() {
+        timer = setInterval(function() {
             console.log(counter);
             $('.time-elapsed-timer').text(counter);
             counter++;  
@@ -3744,6 +3746,8 @@ function playRecording() {
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         counter = 0;
+        clearInterval(intervalId); 
+        intervalId = null;
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
