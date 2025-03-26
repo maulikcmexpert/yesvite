@@ -3656,7 +3656,9 @@ $("#choose-file").on("change", async function () {
 
 // let stream, mediaRecorder;
 let startTime, endTime; //    // Timer interval
-let seconds; //    // Timer interval
+let seconds; //
+let counter = 1;  
+// Timer interval
 // Track total seconds
 async function startRecording() {
     recordedChunks = [];
@@ -3674,6 +3676,12 @@ async function startRecording() {
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
+        setInterval(function() {
+            console.log(counter);
+            $('.time-elapsed-timer').val(counter);
+            counter++;  
+        }, 1000);  
+
         // close.style.display = "none";
 
         mediaRecorder.ondataavailable = (event) => {
@@ -3734,6 +3742,7 @@ function playRecording() {
 
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
+        counter = 0;
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
