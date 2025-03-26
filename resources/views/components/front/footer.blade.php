@@ -911,27 +911,27 @@
     });
 
     // Define the function
-    // function openApp() {
-    //     const appLink = "comappyesvite://"; 
-    //     window.location.href = appLink;
-    // }
+    function openApp() {
+        const appLink = "comappyesvite://"; 
+        window.location.href = appLink;
+    }
 
     // // Automatically call the function on page load
-    // window.onload = openApp;
+    window.onload = openApp;
 
-    // function openApp() {
-    //     const appPackage = "com.yesvite.test";
-    //     const appLink =
-    //         `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
-    //     window.location.replace(appLink);
-    //     // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-    // }
+    function openApp() {
+        const appPackage = "com.yesvite.test";
+        const appLink =
+            `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+        window.location.replace(appLink);
+        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+    }
 
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    document.addEventListener('DOMContentLoaded', () => {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    //     if (/android/i.test(userAgent)) {
-    //         openApp(); // Only for Android devices
-    //     }
-    // });
+        if (/android/i.test(userAgent)) {
+            openApp(); // Only for Android devices
+        }
+    });
 </script>
