@@ -3659,11 +3659,7 @@ let startTime, endTime; //    // Timer interval
 let seconds; //
 let counter = 1;  
 let timer = null;     // To store the interval reference
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-}
+
 // Timer interval
 // Track total seconds
 async function startRecording() {
