@@ -3679,7 +3679,7 @@ async function startRecording() {
 
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        $('.time-elapsed-timer').text(formatTime(counter));
+        $('.time-elapsed-timer').text(formatTime(seconds));
 
         timer = setInterval(function() {
             $('.time-elapsed-timer').text(formatTime(seconds));
