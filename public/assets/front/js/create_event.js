@@ -8991,6 +8991,7 @@ $(document).on("click", ".delete_silder", function (e) {
 
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
+    return;
     
     e.preventDefault();
     eventData.is_update_event = "1";
