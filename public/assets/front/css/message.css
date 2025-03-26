@@ -1939,14 +1939,27 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     background: #fff;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     padding-left: 20px;
+}
+
+.racording-time-wrp svg {
+    animation: smoothBlink 1.5s infinite ease-in-out;
 }
 
 .racording-time-wrp svg path {
     stroke: var(--pink);
 }
 
+@keyframes smoothBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
 /* ======= responsive ======== */
 
 @media only screen and (min-width: 1400px) {
