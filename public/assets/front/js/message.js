@@ -3671,17 +3671,18 @@ async function startRecording() {
         mediaRecorder.start();
         startTime = performance.now();
 
+        setInterval(function() {
+            console.log(counter);
+            $('.time-elapsed-timer').text(counter);
+            counter++;  
+        }, 1000);  
+
         startButton.style.display = "none";
         recordtimediv.classList.remove("d-none");
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
-        setInterval(function() {
-            console.log(counter);
-            $('.time-elapsed-timer').val(counter);
-            counter++;  
-        }, 1000);  
-
+       
         // close.style.display = "none";
 
         mediaRecorder.ondataavailable = (event) => {
