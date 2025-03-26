@@ -1518,7 +1518,7 @@ async function sendMessage() {
 
     loader.css("display", "flex");
     startButton.style.display = "inline-block";
-    recordtimediv.classList.addClass("d-none");
+    recordtimediv.classList.add("d-none");
 
     $("#isGroup").val(isGroup);
     let downloadURL = "";
@@ -3656,24 +3656,50 @@ $("#choose-file").on("change", async function () {
 
 // let stream, mediaRecorder;
 let startTime, endTime; //    // Timer interval
-let seconds; //    // Timer interval
+let seconds; //
+// let counter = 1;  
+let timer = null;     // To store the interval reference
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+// Timer interval
 // Track total seconds
 async function startRecording() {
     recordedChunks = [];
     seconds = 0; // Reset seconds when starting
+    // counter = 1;  // Reset counter on every recording start
 
     try {
+
+        // seconds++;  // Start at 00:01 immediately
+            // $('.timer').text(formatTime(seconds)); 
+
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
+        // $('.time-elapsed-timer').text(formatTime(seconds));
 
+        timer = setInterval(function() {
+            seconds++;  
+            $('.time-elapsed-timer').text(formatTime(seconds));
+            console.log(seconds);
+        }, 1000);
         mediaRecorder.start();
         startTime = performance.now();
+
+        
+   
+
+       
 
         startButton.style.display = "none";
         recordtimediv.classList.remove("d-none");
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
+       
         // close.style.display = "none";
 
         mediaRecorder.ondataavailable = (event) => {
@@ -3695,6 +3721,21 @@ function playRecording() {
     // audioElement.style.display = "block";
 
     playButton.style.display = "none";
+
+    // counter = 1;  
+    // console.log(counter);
+    // $('.time-elapsed-timer').text(formatTime(counter));
+
+    // // Clear existing interval if any
+    // clearInterval(timer);
+
+    // // Start the timer during playback
+    // timer = setInterval(() => {
+    //     counter++;
+    //     console.log(counter);
+    //     $('.time-elapsed-timer').text(formatTime(counter));
+    // }, 1000);
+
     // stopPlaybackButton.style.display = "inline-block";
 
     // audioElement.play().catch((err) => {
@@ -3734,9 +3775,15 @@ function playRecording() {
 
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
+        seconds = 0;
+        clearInterval(timer); 
+        timer = null;
+        $('.time-elapsed-timer').text('00:00');
+
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
+        recordtimediv.classList.add("d-none");
 
         stopButton.style.display = "none";
         endTime = performance.now();
