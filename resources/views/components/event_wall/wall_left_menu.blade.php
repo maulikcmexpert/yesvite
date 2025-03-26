@@ -297,11 +297,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="aboutsuccessLabel">Event Name</h4>
+                <h4 class="modal-title" id="aboutsuccessLabel">{{$eventDetails['event_name']}}</h4>
                 <button type="button" class="btn-close close_silder_pending" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
               <div class="modal-body">
-                  <div class="pending-rsvp-slider-main-section">
+                  <div class="event-photo-slider-main-section">
 
                     <div class="owl-carousel owl-theme event_photo_slider">
                         @foreach ($eventDetails['event_images'] as $image)
