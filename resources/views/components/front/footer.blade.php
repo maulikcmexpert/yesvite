@@ -911,13 +911,13 @@
     });
 
     // Define the function
-    function openApp() {
+    function openAppIos() {
         const appLink = "comappyesvite://"; 
         window.location.href = appLink;
     }
 
     // // Automatically call the function on page load
-    window.onload = openApp;
+    window.onload = openAppIos;
 
     function openApp() {
         const appPackage = "com.yesvite.test";
