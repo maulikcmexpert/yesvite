@@ -8928,6 +8928,7 @@ $(document).on("click", ".delete_silder", function (e) {
     var delete_id = $(this).parent().find(".slider_img").data("delete");
     var src = $(this).parent().find(".slider_img").attr("src");
     if (src != "") {
+       $(this).parent().find(".slider_img").attr("data-image",'');
         $("#loader").css("display", "flex");
         var $this = $(this);
         var check_slider_img = eventData.slider_images;
