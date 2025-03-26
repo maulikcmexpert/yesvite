@@ -3675,7 +3675,7 @@ async function startRecording() {
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        $('.time-elapsed-timer').text(formatTime(counter));
+        // $('.time-elapsed-timer').text(formatTime(counter));
 
         timer = setInterval(function() {
             $('.time-elapsed-timer').text(formatTime(counter));
@@ -3693,7 +3693,9 @@ async function startRecording() {
 
         startButton.style.display = "none";
         recordtimediv.classList.remove("d-none");
-        stopButton.style.display = "inline-block";
+        setInterval(() => {
+            stopButton.style.display = "inline-block";
+        }, 1000);
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
        
