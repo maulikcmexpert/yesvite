@@ -105,9 +105,9 @@
             </div>
 
 
-            {{-- @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 1)
+            @if (!empty($eventDetails['event_images']) && count($eventDetails['event_images']) > 1)
             <div class="custom-pagination"></div>
-        @endif --}}
+        @endif
 
         </div>
     </div>
@@ -293,7 +293,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="aboutsuccessLabel">RSVP Pending ({{count($eventData)}})</h4>
+                <h4 class="modal-title" id="aboutsuccessLabel">Event Name</h4>
                 <button type="button" class="btn-close close_silder_pending" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
               <div class="modal-body">
