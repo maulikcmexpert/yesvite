@@ -3677,15 +3677,16 @@ async function startRecording() {
         mediaRecorder = new MediaRecorder(stream);
         $('.time-elapsed-timer').text(formatTime(counter));
 
-      
-        mediaRecorder.start();
-        startTime = performance.now();
-
         timer = setInterval(function() {
             $('.time-elapsed-timer').text(formatTime(counter));
             counter++;  
             console.log(counter);
-        }, 1000);  
+        }, 1000);
+        
+        mediaRecorder.start();
+        startTime = performance.now();
+
+        
    
 
        
