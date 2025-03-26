@@ -8932,14 +8932,26 @@ $(document).on("click", ".delete_silder", function (e) {
        $(this).parent().find(".slider_img").attr("data-image",'');
         $("#loader").css("display", "flex");
         var $this = $(this);
+
         var check_slider_img = eventData.slider_images;
         var matchFound = false;
-        $.each(check_slider_img, function (index, slider) {
+
+        // Find and remove the image from slider_images array
+        eventData.slider_images = check_slider_img.filter(function (slider) {
             if (slider.deleteId == delete_id) {
                 matchFound = true;
-                return false;
+                return false; // Remove this item
             }
+            return true; // Keep other items
         });
+        // var check_slider_img = eventData.slider_images;
+        // var matchFound = false;
+        // $.each(check_slider_img, function (index, slider) {
+        //     if (slider.deleteId == delete_id) {
+        //         matchFound = true;
+        //         return false;
+        //     }
+        // });
         if (matchFound) {
             $.ajax({
                 url: base_url + "event/delete_slider_img",
