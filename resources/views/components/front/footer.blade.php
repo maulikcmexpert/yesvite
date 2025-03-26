@@ -910,28 +910,50 @@
 
     });
 
+    // let isAppOpenedIos = false;  // Flag to prevent multiple calls
+    // let isAppOpenedAnd = false;  // Flag to prevent multiple calls
+
     // Define the function
     function openAppIos() {
-        const appLink = "comappyesvite://"; 
-        window.location.href = appLink;
+        if (!localStorage.getItem('appOpened')) {
+         localStorage.setItem('isAppOpenedIos', 'true');  // Set the flag to prevent re-opening
+            const appLink = "comappyesvite://"; 
+            isAppOpenedIos=true;
+            window.location.href = appLink;
+        }
     }
 
     // // Automatically call the function on page load
     window.onload = openAppIos;
 
     function openApp() {
+        if (!localStorage.getItem('isAppOpenedAnd')) {
+            localStorage.setItem('isAppOpenedAnd', 'true'); 
         const appPackage = "com.yesvite.test";
         const appLink =
             `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    let isAppOpenedAnd = true;  // Flag to prevent multiple calls
+
         window.location.replace(appLink);
+        }
         // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
     }
-
     document.addEventListener('DOMContentLoaded', () => {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        if (/android/i.test(userAgent)) {
-            openApp(); // Only for Android devices
-        }
-    });
+    if (/android/i.test(userAgent)) {
+        openApp();  // Only for Android devices
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        openAppIos();  // Only for iOS devices
+    }
+});
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    //     if (/android/i.test(userAgent)) {
+    //         openApp(); // Only for Android devices
+    //     }
+    // });
+
+
 </script>
