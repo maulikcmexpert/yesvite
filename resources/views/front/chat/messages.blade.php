@@ -1532,7 +1532,7 @@ use Carbon\Carbon;
                                         <path d="M12.5 19V22" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
                                             stroke-linejoin="round"></path>
                                     </svg>
-                                    <span class="time-elapsed">00:00</span>
+                                    <span class="time-elapsed-timer">00:00</span>
                                     <span class="time-duration d-none"> - 0:07</span>
                                 </div>
                                 <div class="d-flex ms-auto message-icons">
