@@ -744,6 +744,12 @@
     border-radius: 50%;
 } 
 
+#event-slider-rsvp-modal .modal-body .pending-rsvp-slider-main-section{
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 20px 20px 40px;
+}
+
 #event-slider-rsvp-modal .modal-body .event_photo_slider .owl-prev  svg path,
 #event-slider-rsvp-modal .modal-body .event_photo_slider .owl-next  svg path
 {
