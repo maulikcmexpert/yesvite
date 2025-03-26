@@ -169,19 +169,19 @@ if($('.all_inforamtion_conform').is(':checked')){
 })
 
 $(document).ready(function () {
-    $(".image-zoom-icon").click(function () {
-        var imgSrc = $(this).data("img");
+    // $(".image-zoom-icon").click(function () {
+    //     var imgSrc = $(this).data("img");
 
-        $.magnificPopup.open({
-            items: {
-                src: imgSrc,
-                type: "image"
-            },
-            gallery: {
-                enabled: false
-            }
-        });
-    });
+    //     $.magnificPopup.open({
+    //         items: {
+    //             src: imgSrc,
+    //             type: "image"
+    //         },
+    //         gallery: {
+    //             enabled: false
+    //         }
+    //     });
+    // });
 });
 //   $(document).ready(function () {
 //     $(".expand-icon").on("click", function () {
