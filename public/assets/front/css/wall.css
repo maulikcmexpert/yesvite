@@ -783,7 +783,7 @@
 }
 
 .hosted-by-template-slider .swiper-button-next:after, 
-.hosted-by-template-slider .swiper-rtl .swiper-button-prev:after{
+.hosted-by-template-slider .swiper-button-prev:after{
     font-size: 20px;
     color: #000;
 }
