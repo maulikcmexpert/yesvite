@@ -772,6 +772,13 @@
     display: none;
 }
 
+#event-slider-rsvp-modal .modal-header .modal-title{
+    width: 100%;
+    text-align: center;
+    word-break: break-all;
+    margin-right: 10px;
+}
+
 .hosted-by-template-slider .swiper-button-next, 
 .hosted-by-template-slider .swiper-button-prev{
     width: 100%;
