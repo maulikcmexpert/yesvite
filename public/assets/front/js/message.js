@@ -1518,7 +1518,7 @@ async function sendMessage() {
 
     loader.css("display", "flex");
     startButton.style.display = "inline-block";
-    startButton.style.display = "none";
+    startButton.classList.add("d-none");
 
     $("#isGroup").val(isGroup);
     let downloadURL = "";
@@ -3670,7 +3670,7 @@ async function startRecording() {
         startTime = performance.now();
 
         startButton.style.display = "none";
-        recordtimediv.style.display = "block";
+        startButton.classList.remove("d-none");
         stopButton.style.display = "inline-block";
         playButton.style.display = "none";
         stopPlaybackButton.style.display = "none";
