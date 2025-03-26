@@ -63,7 +63,7 @@ export function initializeAudioPlayeralready(player) {
 
             const progressPercent = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
-            console.log(progressPercent);z
+            console.log(progressPercent);
 
             currentTime.textContent = displayTime(audio.currentTime);
 
