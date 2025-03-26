@@ -1937,6 +1937,14 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     height: 100%;
     width: calc(100% - 90px);
     background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+}
+
+.racording-time-wrp svg path {
+    stroke: var(--pink);
 }
 
 /* ======= responsive ======== */
