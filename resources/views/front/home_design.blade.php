@@ -321,3 +321,9 @@
 
 @endpush
 
+
+        {{-- @endforeach
+
+        console.log(designData); // Check output in browser console
+    </script>
+@endpush --}}

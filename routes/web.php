@@ -218,7 +218,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/add_new_thankyou_card', [ControllersEventController::class, 'addNewThankyouCard'])->name('add.thankyou_card');
     Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
     Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
-    // Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
     Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
     Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
@@ -425,8 +425,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/checkAdminEmail', 'checkAdminEmail');
 
     Route::post('/register', 'registerAdmin');
-
-
     Route::get('/forgotpassword', function () {
 
         $data['js'] = ['login'];
@@ -435,8 +433,6 @@ Route::controller(AuthController::class)->group(function () {
 
         return view('admin.auth.main', $data);
     });
-
-
 
     Route::post('/forgotpassword', 'forgotpassword');
 

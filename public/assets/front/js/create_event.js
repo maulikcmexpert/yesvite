@@ -5196,12 +5196,14 @@ async function saveDesignData(direct = false) {
         if (imageResponse && imageResponse.image) {
          //    const image1 =  localStorage.getItem('final_upload_image');
             eventData.desgin_selected = imageResponse.image;
-            let imageUrls =   localStorage.getItem('final_upload_image');
-            if(imageUrls){
-                eventData.desgin_selected = imageUrls;
+            // let imageUrls =   localStorage.getItem('final_upload_image');
+
+            // if(imageUrls){
+
+            //     eventData.desgin_selected = imageUrls;
 
 
-            }
+            // }
 
         }
         if (direct) {
@@ -5292,13 +5294,13 @@ function uploadImage(blob) {
 function afterImageUpload(image) {
     console.log("Image uploaded successfully:", image);
 
-    // $("#eventImage, #eventTempImage").attr(
-    //     "src",
-    //     base_url + "public/storage/event_images/" + image
-    // );
+    $("#eventImage, #eventTempImage").attr(
+        "src",
+        base_url + "public/storage/event_images/" + image
+    );
     let imageUrl = base_url + "public/storage/event_images/" + image;
 
-    // Set the uploaded image to display
+
     $("#eventImage, #eventTempImage").attr("src", imageUrl);
 
     localStorage.setItem("uploadedImageUrl", imageUrl);
