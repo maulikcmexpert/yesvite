@@ -3359,21 +3359,39 @@ class EventController extends BaseController
         // Remove from session if exists
         $get_slider_data = Session::get('desgin_slider');
         if ($get_slider_data) {
-            $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($imageFilename) {
+            $filtered_slider_data = [];
+
+            foreach ($get_slider_data as $slider) {
                 if ($slider['fileName'] === $imageFilename) {
+                    // Delete the file if it exists
                     $imagePath = public_path('storage/event_images/') . $slider['fileName'];
                     if (file_exists($imagePath)) {
                         @unlink($imagePath);
                     }
-                    return false; // Remove from session
+                    continue; // Skip adding this entry to the filtered list
                 }
-                return true;
-            });
-
-            dd($filtered_slider_data,$imageFilename);
-            // Update session data
-            Session::put('desgin_slider', array_values($filtered_slider_data));
+        
+                $filtered_slider_data[] = $slider;
+            }
+        
+            // Update session data before returning
+            Session::put('desgin_slider', $filtered_slider_data);
             Session::save();
+        //     $filtered_slider_data = array_filter($get_slider_data, function ($slider) use ($imageFilename) {
+        //         if ($slider['fileName'] === $imageFilename) {
+        //             $imagePath = public_path('storage/event_images/') . $slider['fileName'];
+        //             if (file_exists($imagePath)) {
+        //                 @unlink($imagePath);
+        //             }
+        //             return false; // Remove from session
+        //         }
+        //         return true;
+        //     });
+
+        //     dd($filtered_slider_data,$imageFilename);
+        //     // Update session data
+        //     Session::put('desgin_slider', array_values($filtered_slider_data));
+        //     Session::save();
         }
 
         return response()->json(['success' => true, 'message' => 'Slider image deleted successfully.']);
