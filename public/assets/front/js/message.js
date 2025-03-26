@@ -3671,9 +3671,9 @@ async function startRecording() {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
         timer = setInterval(function() {
+            $('.time-elapsed-timer').text(formatTime(counter));
             counter++;  
             console.log(counter);
-            $('.time-elapsed-timer').text(formatTime(counter));
         }, 1000);  
         mediaRecorder.start();
         startTime = performance.now();
