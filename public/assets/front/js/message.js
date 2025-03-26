@@ -3753,8 +3753,8 @@ function playRecording() {
 async function stopRecording() {
     if (mediaRecorder && mediaRecorder.state === "recording") {
         counter = 0;
-        clearInterval(intervalId); 
-        intervalId = null;
+        clearInterval(timer); 
+        timer = null;
         mediaRecorder.stop();
         $("#send_audio").show();
         $("#musicContainer").show();
