@@ -8927,6 +8927,7 @@ $(document).on("click", ".delete_silder", function (e) {
     e.preventDefault();
     var delete_id = $(this).parent().find(".slider_img").data("delete");
     var src = $(this).parent().find(".slider_img").attr("src");
+    var image = $(this).parent().find(".slider_img").attr("data-image");
     if (src != "") {
        $(this).parent().find(".slider_img").attr("data-image",'');
         $("#loader").css("display", "flex");
@@ -8947,6 +8948,7 @@ $(document).on("click", ".delete_silder", function (e) {
                     delete_id: delete_id,
                     eventId: eventId,
                     src: src,
+                    image:image,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {

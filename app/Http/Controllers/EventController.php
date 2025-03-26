@@ -3321,7 +3321,7 @@ class EventController extends BaseController
         if (empty($savedFiles)) {
             return response()->json(['status' => 'No valid images to save'], 400);
         }
-        dd($savedFiles);    
+        // dd($savedFiles);    
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
@@ -3331,10 +3331,12 @@ class EventController extends BaseController
         $delete_id = $request->delete_id;
         $eventId = $request->eventId;
         $src = $request->src;
+        $image_name = $request->image;
 
         // Extract filename from URL
-        $imageFilename = basename(parse_url($src, PHP_URL_PATH));
+        $imageFilename = $image_name;
 
+        dd($imageFilename);
         // Check if the image exists in the EventImage table
         $eventImage = EventImage::where([
             'event_id' => $eventId,
