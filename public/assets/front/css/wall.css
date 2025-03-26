@@ -750,6 +750,13 @@
     padding: 20px 20px 40px;
 }
 
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-prev  svg,
+#event-slider-rsvp-modal .modal-body .event_photo_slider .owl-next  svg{
+    width: auto;
+    height: auto;
+}
+
+
 #event-slider-rsvp-modal .modal-body .event_photo_slider .owl-prev  svg path,
 #event-slider-rsvp-modal .modal-body .event_photo_slider .owl-next  svg path
 {
