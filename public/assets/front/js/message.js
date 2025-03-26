@@ -3669,7 +3669,11 @@ async function startRecording() {
     try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-
+        timer = setInterval(function() {
+            console.log(counter);
+            $('.time-elapsed-timer').text(formatTime(counter));
+            counter++;  
+        }, 1000); 
         mediaRecorder.start();
         startTime = performance.now();
 
@@ -3680,11 +3684,7 @@ async function startRecording() {
             return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
         }
 
-        timer = setInterval(function() {
-            console.log(counter);
-            $('.time-elapsed-timer').text(formatTime(counter));
-            counter++;  
-        }, 1000);  
+       
 
         startButton.style.display = "none";
         recordtimediv.classList.remove("d-none");
