@@ -1518,7 +1518,7 @@ async function sendMessage() {
 
     loader.css("display", "flex");
     startButton.style.display = "inline-block";
-    startButton.classList.add("d-none");
+    startButton.classList.addClass("d-none");
 
     $("#isGroup").val(isGroup);
     let downloadURL = "";
