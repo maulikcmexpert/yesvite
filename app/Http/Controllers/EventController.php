@@ -3343,11 +3343,11 @@ class EventController extends BaseController
             'image' => $imageFilename
         ])->first();
 
-        dd($eventImage);
+        // dd($eventImage);
 
         if ($eventImage) {
             // Delete database entry
-            $eventImage->delete();
+            $eventImage->forceDelete();
 
             // Unlink the image file
             $imagePath = public_path('storage/event_images/') . $imageFilename;
@@ -3365,9 +3365,9 @@ class EventController extends BaseController
                     if (file_exists($imagePath)) {
                         @unlink($imagePath);
                     }
-                    return false; // Remove from session
+                    // return false; // Remove from session
                 }
-                return true;
+                // return true;
             });
 
             // Update session data
