@@ -772,7 +772,8 @@
     display: none;
 }
 
-.hosted-by-template-slider .swiper-button-next, .swiper-button-prev{
+.hosted-by-template-slider .swiper-button-next, 
+.hosted-by-template-slider .swiper-button-prev{
     width: 100%;
     max-width: 45px;
     height: 45px;
@@ -781,7 +782,8 @@
     background-color: var(--white);
 }
 
-.hosted-by-template-slider .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after{
+.hosted-by-template-slider .swiper-button-next:after, 
+.hosted-by-template-slider .swiper-rtl .swiper-button-prev:after{
     font-size: 20px;
     color: #000;
 }
