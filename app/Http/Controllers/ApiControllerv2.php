@@ -4685,7 +4685,7 @@ class ApiControllerv2 extends Controller
     public function editEvent(Request $request)
     {
         $user  = Auth::guard('api')->user();
-        dd($user);
+
         $rawData = $request->getContent();
 
         $eventData = json_decode($rawData, true);
@@ -5251,13 +5251,13 @@ class ApiControllerv2 extends Controller
                                             'quantity' => $item['quantity'],
                                         ]);
                                         if (isset($item['item_carry_users'])) {
-                                            foreach ($item['item_carry_users'] as $user) {
+                                            foreach ($item['item_carry_users'] as $itemUser) {
                                                 UserPotluckItem::Create([
                                                     'event_id' => $eventID,
-                                                    'user_id' => $user['user_id'],
+                                                    'user_id' =>$itemUser['user_id'],
                                                     'event_potluck_category_id' => $eventPodluck->id,
                                                     'event_potluck_item_id' => $eventPodluckitem->id,
-                                                    'quantity' => $user['quantity']
+                                                    'quantity' => $itemUser['quantity']
                                                 ]);
                                             }
                                         }
@@ -5375,7 +5375,6 @@ class ApiControllerv2 extends Controller
                             array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                         );
 
-                       
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $eventData['event_id'],
@@ -5383,6 +5382,7 @@ class ApiControllerv2 extends Controller
                             'to_time' => $eventData['to_time'],
                             'newUser' => $filteredIds
                         ];
+
                         sendNotification('update_potluck', $notificationParam);
                     }
                 }
