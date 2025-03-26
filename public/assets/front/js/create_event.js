@@ -5196,14 +5196,14 @@ async function saveDesignData(direct = false) {
         if (imageResponse && imageResponse.image) {
          //    const image1 =  localStorage.getItem('final_upload_image');
             eventData.desgin_selected = imageResponse.image;
-            // let imageUrls =   localStorage.getItem('final_upload_image');
+            let imageUrls =   localStorage.getItem('final_upload_image');
 
-            // if(imageUrls){
+            if(imageUrls){
 
-            //     eventData.desgin_selected = imageUrls;
+                eventData.desgin_selected = imageUrls;
 
 
-            // }
+            }
 
         }
         if (direct) {
