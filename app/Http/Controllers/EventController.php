@@ -3370,6 +3370,7 @@ class EventController extends BaseController
                 return true;
             });
 
+            dd($filtered_slider_data,$imageFilename);
             // Update session data
             Session::put('desgin_slider', array_values($filtered_slider_data));
             Session::save();
