@@ -3674,12 +3674,12 @@ async function startRecording() {
 
     try {
 
-        seconds++;  // Start at 00:01 immediately
-            $('.timer').text(formatTime(seconds)); 
+        // seconds++;  // Start at 00:01 immediately
+            // $('.timer').text(formatTime(seconds)); 
 
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        $('.time-elapsed-timer').text(formatTime(seconds));
+        // $('.time-elapsed-timer').text(formatTime(seconds));
 
         timer = setInterval(function() {
             $('.time-elapsed-timer').text(formatTime(seconds));
