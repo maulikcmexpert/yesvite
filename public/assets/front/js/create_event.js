@@ -3972,7 +3972,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_date = $("#event-date").val();
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
-    var design = eventData.desgin_selected;
+    var design = eventData.desgin_selected ;
     if (design == undefined || design == "") {
         await saveDesignData(true);
         design = eventData.desgin_selected;
@@ -5196,7 +5196,14 @@ async function saveDesignData(direct = false) {
         if (imageResponse && imageResponse.image) {
          //    const image1 =  localStorage.getItem('final_upload_image');
             eventData.desgin_selected = imageResponse.image;
+            // let imageUrls =   localStorage.getItem('final_upload_image');
 
+            // if(imageUrls){
+
+            //     eventData.desgin_selected = imageUrls;
+
+
+            // }
 
         }
         if (direct) {
@@ -5505,14 +5512,7 @@ $(document).on("click", ".li_event_details", async function () {
                         }
 
                     });
-                    let imageUrls =   localStorage.getItem('final_upload_image');
 
-                    if(imageUrls){
-
-                        eventData.desgin_selected = imageUrls;
-
-
-                    }
                     console.log("Captured & Stored Image:", base64Image);
                 };
             }
@@ -6935,13 +6935,30 @@ $(document).on("click", ".final_checkout", function () {
         eventData.desgin_selected +
         ""
     );
+    // $("#eventTempImage").attr(
+    //     "src",
+    //     base_url +
+    //     "public/storage/event_images/" +
+    //     eventData.desgin_selected +
+    //     ""
+    // );
+
+    let imageUrls = localStorage.getItem('final_upload_image');
+
+if (imageUrls) {
+    eventData.desgin_selected = imageUrls;
+    localStorage.removeItem('final_upload_image'); // Remo
+     // If localStorage has an image, use it
+}
+
+
+if (eventData.desgin_selected) {
     $("#eventTempImage").attr(
         "src",
-        base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
+        base_url + "public/storage/event_images/" + eventData.desgin_selected
     );
+}
+
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
