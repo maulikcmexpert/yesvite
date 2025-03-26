@@ -4685,7 +4685,7 @@ class ApiControllerv2 extends Controller
     public function editEvent(Request $request)
     {
         $user  = Auth::guard('api')->user();
-
+        dd($user);
         $rawData = $request->getContent();
 
         $eventData = json_decode($rawData, true);
@@ -5375,7 +5375,7 @@ class ApiControllerv2 extends Controller
                             array_filter($eventData['invited_new_guest'], fn($guest) => $guest['app_user'] === 1)
                         );
 
-                        dd($user);
+                       
                         $notificationParam = [
                             'sender_id' => $user->id,
                             'event_id' => $eventData['event_id'],
