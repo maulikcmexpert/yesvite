@@ -825,7 +825,6 @@ class EventController extends BaseController
 
     public function store(Request $request)
     {
-
         $potluck = session('category');
         // dd($request);
         // dd($request);
@@ -950,76 +949,76 @@ class EventController extends BaseController
             $event_creation->design_inner_image = $request->shape_image;
         }
 
-        // if ($request->temp_id != '' && $request->temp_id != null) {
-        //     // dd($request->temp_id);
-        //     $tempData = TextData::where('id', $request->temp_id)->first();
-        //     if ($tempData) {
-        //         $sourceImagePath = asset('storage/canvas/' . $tempData->image);
-        //         $destinationDirectory = public_path('storage/event_images/');
-        //         $destinationImagePath = $destinationDirectory . $tempData->image;
-        //         if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
-        //             $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
-        //             $destinationImagePath = $destinationDirectory . $newImageName;
-        //             @File::copy($sourceImagePath, $destinationImagePath);
-        //             $event_creation->design_image = $tempData->image;
-        //         }
-        //     }
-        // } else if (isset($request->cutome_image)) {
+        if ($request->temp_id != '' && $request->temp_id != null) {
+            // dd($request->temp_id);
+            $tempData = TextData::where('id', $request->temp_id)->first();
+            if ($tempData) {
+                $sourceImagePath = asset('storage/canvas/' . $tempData->image);
+                $destinationDirectory = public_path('storage/event_images/');
+                $destinationImagePath = $destinationDirectory . $tempData->image;
+                if (file_exists(public_path('storage/canvas/') . $tempData->image)) {
+                    $newImageName = time() . '_' . uniqid() . '.' . pathinfo($tempData->image, PATHINFO_EXTENSION);
+                    $destinationImagePath = $destinationDirectory . $newImageName;
+                    @File::copy($sourceImagePath, $destinationImagePath);
+                    $event_creation->design_image = $tempData->image;
+                }
+            }
+        } else if (isset($request->cutome_image)) {
 
 
-        //     if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
-        //         $pathParts = explode('/', $request->cutome_image);
-        //         $event_creation->design_image = end($pathParts);
-        //     } else {
-        //         $event_creation->design_image = $request->cutome_image;
-        //     }
-        //     $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
-        // }
+            if (filter_var($request->cutome_image, FILTER_VALIDATE_URL)) {
+                $pathParts = explode('/', $request->cutome_image);
+                $event_creation->design_image = end($pathParts);
+            } else {
+                $event_creation->design_image = $request->cutome_image;
+            }
+            $sourceImagePath = asset('storage/canvas/' . $request->cutome_image);
+        }
 
-        // if (isset($request->textData) && json_encode($request->textData) != '') {
-        //     $textElemtents = $request->textData['textElements'];
+        if (isset($request->textData) && json_encode($request->textData) != '') {
+            $textElemtents = $request->textData['textElements'];
 
-        //     foreach ($textElemtents as $key => $textJson) {
-        //         if ($textJson['fontSize'] != '') {
-        //             $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
-        //             $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
-        //             $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
-        //         }
-        //         if (isset($textJson['letterSpacing'])) {
-        //             $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
-        //         }
-        //         if (isset($textJson['lineHeight'])) {
-        //             $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
-        //         }
-        //         if (isset($textJson['underline'])) {
-        //             $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
-        //         }
-        //     }
+            foreach ($textElemtents as $key => $textJson) {
+                if ($textJson['fontSize'] != '') {
+                    $textElemtents[$key]['fontSize'] = (int)$textJson['fontSize'];
+                    $textElemtents[$key]['centerX'] = (float)$textJson['centerX'];
+                    $textElemtents[$key]['centerY'] = (float)$textJson['centerY'];
+                }
+                if (isset($textJson['letterSpacing'])) {
+                    $textElemtents[$key]['letterSpacing'] = (int)$textJson['letterSpacing'];
+                }
+                if (isset($textJson['lineHeight'])) {
+                    $textElemtents[$key]['lineHeight'] = (float)$textJson['lineHeight'];
+                }
+                if (isset($textJson['underline'])) {
+                    $textElemtents[$key]['underline'] = ($textJson['underline'] === "true" || $textJson['underline'] === true) ? true : false;
+                }
+            }
 
 
-        //     $static_data = [];
-        //     $static_data['textData'] = $textElemtents;
-        //     $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
-        //     $static_data['height'] = (int)490;
-        //     $static_data['width'] = (int)345;
-        //     $static_data['image'] = $event_creation->design_image;
-        //     $static_data['template_url'] = $sourceImagePath;
-        //     $static_data['is_contain_image'] = false;
-        //     if (isset($request->textData['shapeImageData'])) {
-        //         $shapeImageData = [];
-        //         $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
-        //         $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
-        //         $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
-        //         $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
-        //         $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
-        //         $static_data['shapeImageData'] = $shapeImageData;
-        //         $static_data['is_contain_image'] = true;
-        //     }
+            $static_data = [];
+            $static_data['textData'] = $textElemtents;
+            $static_data['event_design_sub_category_id'] = (int)$request->temp_id;
+            $static_data['height'] = (int)490;
+            $static_data['width'] = (int)345;
+            $static_data['image'] = $event_creation->design_image;
+            $static_data['template_url'] = $sourceImagePath;
+            $static_data['is_contain_image'] = false;
+            if (isset($request->textData['shapeImageData'])) {
+                $shapeImageData = [];
+                $shapeImageData['shape'] = $request->textData['shapeImageData']['shape'];
+                $shapeImageData['centerX'] = (float)$request->textData['shapeImageData']['centerX'];
+                $shapeImageData['centerY'] = (float)$request->textData['shapeImageData']['centerY'];
+                $shapeImageData['width'] = (float)$request->textData['shapeImageData']['width'];
+                $shapeImageData['height'] = (float)$request->textData['shapeImageData']['height'];
+                $static_data['shapeImageData'] = $shapeImageData;
+                $static_data['is_contain_image'] = true;
+            }
 
-        //     $event_creation->static_information = json_encode($static_data);
-        // } else {
-        //     $event_creation->static_information = null;
-        // }
+            $event_creation->static_information = json_encode($static_data);
+        } else {
+            $event_creation->static_information = null;
+        }
         $event_creation->save();
         if ($eventId != "") {
             $invitedUsers = $request->email_invite;
@@ -1341,35 +1340,34 @@ class EventController extends BaseController
 
 
             $checkUserInvited = Event::withCount('event_invited_user')->where('id', $eventId)->first();
+            if ($request->is_update_event == '0') {
+                if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'post_id' => ""
+                    ];
 
-            // if ($request->is_update_event == '0') {
-            //     if ($checkUserInvited->event_invited_user_count != '0' && $checkUserInvited->is_draft_save == '0') {
-            //         $notificationParam = [
-            //             'sender_id' => $user_id,
-            //             'event_id' => $eventId,
-            //             'post_id' => ""
-            //         ];
-
-            //         sendNotification('invite', $notificationParam);
-            //         sendNotificationGuest('invite', $notificationParam);
-            //     }
-            //     if ($checkUserInvited->is_draft_save == '0') {
-            //         $notificationParam = [
-            //             'sender_id' => $user_id,
-            //             'event_id' => $eventId,
-            //             'post_id' => ""
-            //         ];
-            //         sendNotification('owner_notify', $notificationParam);
-            //         $get_count_invited_user = 0;
-            //         $conatctId = session('contact_ids');
-            //         $invitedCount = session('user_ids');
-            //         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
-            //         if ($request->isCopy != "") {
-            //             $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
-            //         }
-            //         debit_coins($user_id, $eventId, $get_count_invited_user);
-            //     }
-            // }
+                    sendNotification('invite', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
+                }
+                if ($checkUserInvited->is_draft_save == '0') {
+                    $notificationParam = [
+                        'sender_id' => $user_id,
+                        'event_id' => $eventId,
+                        'post_id' => ""
+                    ];
+                    sendNotification('owner_notify', $notificationParam);
+                    $get_count_invited_user = 0;
+                    $conatctId = session('contact_ids');
+                    $invitedCount = session('user_ids');
+                    $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);
+                    if ($request->isCopy != "") {
+                        $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
+                    }
+                    debit_coins($user_id, $eventId, $get_count_invited_user);
+                }
+            }
 
 
 
@@ -2301,7 +2299,7 @@ class EventController extends BaseController
                 if (file_exists($oldDesignImagePath)) {
                     unlink($oldDesignImagePath);
                 }
-                session()->forget('desgin');
+                // session()->forget('desgin');
             }
             $file = $request->file('image');
             $fileName = time() . '-' . $file->getClientOriginalName();
