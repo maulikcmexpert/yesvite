@@ -3682,8 +3682,8 @@ async function startRecording() {
         // $('.time-elapsed-timer').text(formatTime(seconds));
 
         timer = setInterval(function() {
-            $('.time-elapsed-timer').text(formatTime(seconds));
             seconds++;  
+            $('.time-elapsed-timer').text(formatTime(seconds));
             console.log(seconds);
         }, 1000);
         mediaRecorder.start();
