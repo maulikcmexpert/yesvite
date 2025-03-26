@@ -1933,7 +1933,7 @@ ul.group-list .chat-data:has(.remove-member) .group-admin {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 20px;
+    left: 0px;
     height: 100%;
     width: calc(100% - 90px);
     background: #fff;
