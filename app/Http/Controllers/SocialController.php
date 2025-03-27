@@ -12,7 +12,7 @@ use Exception;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-
+use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
@@ -22,9 +22,12 @@ class SocialController extends Controller
      * @param string $provider
      * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider($provider)
+    public function redirectToProvider($provider,Request $request)
     {
 
+        if ($request->has('event_login')) {
+            session(['event_login' => $request->query('event_login')]);
+        }
 
         return Socialite::driver($provider)->redirect();
     }
@@ -38,9 +41,9 @@ class SocialController extends Controller
     public function handleProviderCallback($provider)
     {
         try {
-            
+
             $user = Socialite::driver($provider)->user();
-            
+
         } catch (Exception $e) {
             return redirect('/login');
         }
@@ -48,11 +51,23 @@ class SocialController extends Controller
         // Check if the user already exists
         $authUser = $this->findOrCreateUser($user, $provider);
         // dd($user);
-        if($authUser){
+        if ($authUser) {
             Auth::login($authUser, true);
-            return redirect()->intended('/home')->with('msg', 'Logged in successfully!');
+
+
+            $eventLogin = session('event_login', null);
+
+
+            session()->forget('event_login');
+
+
+            if ($eventLogin) {
+                return redirect('/events')->with('msg', 'Logged in successfully!');
+            } else {
+                return redirect('/home')->with('msg', 'Logged in successfully!');
+            }
         }
-     
+
 
     }
 
@@ -84,7 +99,7 @@ class SocialController extends Controller
             } elseif ($provider == 'apple') {
                 $user->apple_token_id = $socialUser->getId();
             }
-            
+
             if($user->account_status == 'Unblock'){
                 $user->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'0';
                 $sessionArray = [

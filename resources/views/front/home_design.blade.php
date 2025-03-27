@@ -131,11 +131,16 @@
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
-                                'is_visible' => $image->is_visible,
-                                'category_id' => $category->id,
-                                'subcategory_id' => $subcategory->id,
-                                'category_name' => $category->category_name,
-                                'image_path' => asset('storage/canvas/' . $image->filled_image),
+                                    'is_visible' => $image->is_visible,
+                                    'category_id' => $category->id,
+                                    'subcategory_id' => $subcategory->id,
+                                    'subcategory_name' =>$subcategory->subcategory_name,
+                                    'category_name' => $category->category_name,
+                                    'static_information' => json_encode($image->static_information),
+                                    'shape_image' =>
+                                        $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                                    'image_path' => asset('storage/canvas/' . $image->filled_image),
+                                    'image' => asset('storage/canvas/' . $image->image),
                             ]);
                         }
                     }
@@ -151,13 +156,17 @@
 
             @foreach ($allImages as $image)
             @if($image['is_visible']=='1')
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs  {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
+                 {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}"
                     data-subcategory-id="{{ $image['subcategory_id'] }}"
-                    data-category_name="{{ $image['category_name'] }}">
+                    data-category_name="{{ $image['category_name'] }}"
+                    data-subcategory_name="{{ $image['subcategory_name'] }}">
 
-                    <div class="card-img collection-card card-blue">
+                    <div class="card-img collection-card card-blue edit_design_tem design-card"
+                    data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
+                    data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"  data-subcategory_name="{{ $image['subcategory_name'] }}">
                         <img src="{{ $image['image_path'] }}" alt="shower-card">
                     </div>
 
@@ -309,4 +318,8 @@
 
         console.log(designData); // Check output in browser console
     </script>
+
 @endpush
+
+
+

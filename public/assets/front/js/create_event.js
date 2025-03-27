@@ -1,192 +1,202 @@
 
 let eventData = {};
-let isCohost = $("#isCohost").val() || "";
-let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
-// alert(isCheckOldcoHost);
-eventData.isCheckOldcoHost = isCheckOldcoHost;
-var total_activities = $("#TotalSedulare").val();
-var isEditCohost = $("#cohostId").val() !== "" ? "1" : "0";
-var category = $("#category_count").val() || 0;
-var items = $("#totalCategoryItem").val() || 0;
-var eventId = $("#eventID").val();
-var activities = {};
-var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
-var selected_co_host_prefer_by =
-    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
-var final_step = $("#step").val() != "" ? $("#step").val() : 1;
-var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
-var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
+// ===================vrushali=======
+if ($("#isUserLoggedIn").val() === "1") {
+    let isCohost = $("#isCohost").val() || "";
+    let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
+    // alert(isCheckOldcoHost);
+    eventData.isCheckOldcoHost = isCheckOldcoHost;
+    var total_activities = $("#TotalSedulare").val();
+    var isEditCohost = $("#cohostId").val() !== "" ? "1" : "0";
+    var category = $("#category_count").val() || 0;
+    var items = $("#totalCategoryItem").val() || 0;
+    var eventId = $("#eventID").val();
+    var activities = {};
+    var selected_co_host = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
+    var selected_co_host_prefer_by =
+        $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+    var final_step = $("#step").val() != "" ? $("#step").val() : 1;
+    var isDraftEvent = $("#isDraft").val() != "" ? $("#isDraft").val() : "";
+    var isCopy = $("#isCopy").val() != "" ? $("#isCopy").val() : "";
 
-eventData.isCopy = isCopy;
-var Alreadyguest = $("#alreadyCount").val();
-var isStartTime = 0;
-eventData.Alreadyguest = Alreadyguest;
-var swiper;
-var isPhonecontact = 0;
-var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
-var selected_gift = [];
-var selected_user_name =
-    $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
-        ? $("#cohostFname").val() + " " + $("#cohostLname").val()
-        : "";
-var IsPotluck = 0;
-eventData.IsPotluck = 0;
-var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+    eventData.isCopy = isCopy;
+    var Alreadyguest = $("#alreadyCount").val();
+    var isStartTime = 0;
+    eventData.Alreadyguest = Alreadyguest;
+    var swiper;
+    var isPhonecontact = 0;
+    var lengtUSer = $("#cohostId").val() !== "" ? 1 : 0;
+    var selected_gift = [];
+    var selected_user_name =
+        $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
+            ? $("#cohostFname").val() + " " + $("#cohostLname").val()
+            : "";
+    var IsPotluck = 0;
+    eventData.IsPotluck = 0;
+    var selected_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
 
-var selected_prefer_by =
-    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
-var selected_profilePhoto =
-    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
-var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
-var co_host_is_selected_close = false;
-var get_contact_status = "";
+    var selected_prefer_by =
+        $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+    var selected_profilePhoto =
+        $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+    var selected_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
+    var co_host_is_selected_close = false;
+    var get_contact_status = "";
 
-var final_profilePhoto =
-    $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
-var final_user_name =
-    $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
-        ? $("#cohostFname").val() + " " + $("#cohostLname").val()
-        : "";
-var final_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
-var final_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
-var final_prefer_by =
-    $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
-var final_initial =
-    final_user_name != ""
-        ? (
-              $("#cohostFname").val().charAt(0) +
-              $("#cohostLname").val().charAt(0)
-          ).toUpperCase()
-        : "";
-var create_event_phone_scroll = false;
-var create_event_yesvite_scroll = false;
-var create_co_event_phone_scroll = false;
-var create_co_event_yesvite_scroll = false;
-var apiCalled = false;
-var base_url = $("#base_url").val();
-if (final_profile_or_text == "1") {
-    $(".guest-img .selected-co-host-image").show();
-    $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
-    $(".guest-img .selected-host-h5").css("display", "none");
-} else {
-    $(".selected-co-host-image").css("display", "none");
-    $(".guest-img .selected-host-h5").text(final_initial);
-    var firstinitial = final_initial.charAt(0);
-    $(".guest-img .selected-host-h5").removeClass(function (index, className) {
-        return (className.match(/\bfontcolor\S+/g) || []).join(" ");
-    });
-
-    // Add the new class
-    $(".guest-img .selected-host-h5").addClass("fontcolor" + firstinitial);
-}
-if (selected_dataId != "") {
-    var profilePhoto = selected_profilePhoto;
-    var user_name = selected_user_name;
-    var dataId = selected_dataId;
-    var profile_or_text = selected_profile_or_text;
-    var prefer_by = selected_prefer_by;
-    // console.log(prefer_by);
-    eventData.co_host = dataId;
-    selected_co_host = dataId;
-    selected_co_host_prefer_by = prefer_by;
-    var initial = final_initial;
-
-    if (profile_or_text == "1") {
-        $(".selected-co-host-image").show();
-        $(".selected-co-host-image").attr("src", profilePhoto);
-        $(".selected-host-h5").css("display", "none");
+    var final_profilePhoto =
+        $("#cohostprofile").val() !== "" ? $("#cohostprofile").val() : "";
+    var final_user_name =
+        $("#cohostFname").val() !== "" && $("#cohostLname").val() !== ""
+            ? $("#cohostFname").val() + " " + $("#cohostLname").val()
+            : "";
+    var final_dataId = $("#cohostId").val() !== "" ? $("#cohostId").val() : "";
+    var final_profile_or_text = $("#cohostprofile").val() !== "" ? "1" : "0";
+    var final_prefer_by =
+        $("#cohostpreferby").val() !== "" ? $("#cohostpreferby").val() : "";
+    var final_initial =
+        final_user_name != ""
+            ? (
+                $("#cohostFname").val().charAt(0) +
+                $("#cohostLname").val().charAt(0)
+            ).toUpperCase()
+            : "";
+    var create_event_phone_scroll = false;
+    var create_event_yesvite_scroll = false;
+    var create_co_event_phone_scroll = false;
+    var create_co_event_yesvite_scroll = false;
+    var apiCalled = false;
+    var base_url = $("#base_url").val();
+    if (final_profile_or_text == "1") {
+        $(".guest-img .selected-co-host-image").show();
+        $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
+        $(".guest-img .selected-host-h5").css("display", "none");
     } else {
-        // $(".selected-host-h5").show();
         $(".selected-co-host-image").css("display", "none");
-        $(".selected-host-h5").text(initial);
-    }
-    $(".remove_co_host").attr("data-id", selected_co_host);
-    $("#remove_co_host_id").val("user-" + selected_co_host);
-    $(".selected-host-name").text(user_name);
-    // $(".contactData").css("display", "flex");
-    $(".guest-contacts-wrp").addClass("guest-contacts-test");
+        $(".guest-img .selected-host-h5").text(final_initial);
+        var firstinitial = final_initial.charAt(0);
+        $(".guest-img .selected-host-h5").removeClass(function (index, className) {
+            return (className.match(/\bfontcolor\S+/g) || []).join(" ");
+        });
 
-    eventData.co_host_prefer_by = prefer_by;
-    if (profile_or_text == "1") {
-        $(".add_new_co_host")
-            .html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
+        // Add the new class
+        $(".guest-img .selected-host-h5").addClass("fontcolor" + firstinitial);
+    }
+    if (selected_dataId != "") {
+        var profilePhoto = selected_profilePhoto;
+        var user_name = selected_user_name;
+        var dataId = selected_dataId;
+        var profile_or_text = selected_profile_or_text;
+        var prefer_by = selected_prefer_by;
+        // console.log(prefer_by);
+        eventData.co_host = dataId;
+        selected_co_host = dataId;
+        selected_co_host_prefer_by = prefer_by;
+        var initial = final_initial;
+
+        if (profile_or_text == "1") {
+            $(".selected-co-host-image").show();
+            $(".selected-co-host-image").attr("src", profilePhoto);
+            $(".selected-host-h5").css("display", "none");
+        } else {
+            // $(".selected-host-h5").show();
+            $(".selected-co-host-image").css("display", "none");
+            $(".selected-host-h5").text(initial);
+        }
+        $(".remove_co_host").attr("data-id", selected_co_host);
+        $("#remove_co_host_id").val("user-" + selected_co_host);
+        $(".selected-host-name").text(user_name);
+        // $(".contactData").css("display", "flex");
+        $(".guest-contacts-wrp").addClass("guest-contacts-test");
+
+        eventData.co_host_prefer_by = prefer_by;
+        if (profile_or_text == "1") {
+            $(".add_new_co_host")
+                .html(`<span class="mx-3"><div class="contact-img co-host-profile-photo">
                 <img src="${final_profilePhoto}"
                     alt="logo">
             </div></span>
             <h5>${user_name}</h5>`);
-    } else {
-        $(".add_new_co_host").html(`<span class="mx-3"><div class="contact-img">
+        } else {
+            $(".add_new_co_host").html(`<span class="mx-3"><div class="contact-img">
                <h5 class="fontcolor${firstinitial} add-item-under-text">${initial}</h5>
             </div></span>
             <h5>${user_name}</h5>`);
+        }
+        toggleSidebar();
     }
-    toggleSidebar();
-}
 
-var limityesvitesc = 10;
-var offsetyesvitec = 0;
+    var limityesvitesc = 10;
+    var offsetyesvitec = 0;
 
-eventData.cutome_image = $("#design_image").val() || undefined;
-eventData.textData = $("#static_information").val() || undefined;
+    eventData.cutome_image = $("#design_image").val() || undefined;
+    eventData.textData = $("#static_information").val() || undefined;
 
-// Ensure eventData.textData is parsed into an object before accessing properties
-if (eventData.textData) {
-    try {
-        eventData.textData = JSON.parse(eventData.textData); // Convert string to object
-    } catch (error) {
-        console.error("Error parsing textData:", error);
-        eventData.textData = {}; // Fallback to empty object if parsing fails
+    // Ensure eventData.textData is parsed into an object before accessing properties
+    if (eventData.textData) {
+        try {
+            eventData.textData = JSON.parse(eventData.textData); // Convert string to object
+        } catch (error) {
+            console.error("Error parsing textData:", error);
+            eventData.textData = {}; // Fallback to empty object if parsing fails
+        }
     }
-}
 
-// Now safely check if textElements exists
-if (eventData.textData != undefined && !eventData?.textData?.textElements) {
-    // alert("updated");
-    eventData.textData.textElements = eventData?.textData?.textData; // Correct assignment
+    // Now safely check if textElements exists
+    if (eventData.textData != undefined && !eventData?.textData?.textElements) {
+        // alert("updated");
+        eventData.textData.textElements = eventData?.textData?.textData; // Correct assignment
 
-    console.log(eventData.textData.textElements); // Should now log correct data
-    console.log(eventData.textData); // Should log parsed object
-}
-eventData.step = $("#step").val();
-eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
+        console.log(eventData.textData.textElements); // Should now log correct data
+        console.log(eventData.textData); // Should log parsed object
+    }
+    eventData.step = $("#step").val();
+    eventData.thank_you_card_id = $("#thankuCardId").val() || undefined;
 
-var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
-    .map(function () {
-        return $(this).val();
-    })
-    .get();
+    var giftRegestryDataRaw = $('input[name="giftRegestryData[]"]')
+        .map(function () {
+            return $(this).val();
+        })
+        .get();
 
-if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
-    try {
-        var giftRegestryData = JSON.parse(giftRegestryDataRaw);
-        giftRegestryData?.forEach(function (item) {
-            selected_gift.push({
-                gr_id: item,
+    if (giftRegestryDataRaw != null && giftRegestryDataRaw?.length > 0) {
+        try {
+            var giftRegestryData = JSON.parse(giftRegestryDataRaw);
+            giftRegestryData?.forEach(function (item) {
+                selected_gift.push({
+                    gr_id: item,
+                });
             });
-        });
-        eventData.gift_registry_data = selected_gift;
-    } catch (e) {
-        console.error("Invalid JSON data:", e);
+            eventData.gift_registry_data = selected_gift;
+        } catch (e) {
+            console.error("Invalid JSON data:", e);
+        }
     }
-}
 
-// var selected_profile_or_text = "";
-// var selected_prefer_by = "";
-var eventEditId = $("#eventEditId").val();
-var inviteTotalCount = $("#inviteTotalCount").val();
-$(".invite-count").text(inviteTotalCount);
-$("#event_guest_count").text(inviteTotalCount + " Guests");
-var isSetSession = 0;
-eventData.allow_limit_count = $("#allow_limit_count").val();
-// $("#activity-start-time").val("");
-$("#activity-end-time").val("");
+    // var selected_profile_or_text = "";
+    // var selected_prefer_by = "";
+    var eventEditId = $("#eventEditId").val();
+    var inviteTotalCount = $("#inviteTotalCount").val();
+    $(".invite-count").text(inviteTotalCount);
+    $("#event_guest_count").text(inviteTotalCount + " Guests");
+    var isSetSession = 0;
+    eventData.allow_limit_count = $("#allow_limit_count").val();
+    // $("#activity-start-time").val("");
+    $("#activity-end-time").val("");
+
+} else {
+
+    console.log("User is not logged in, but the page will not redirect.");
+
+
+    $("#close_editEvent, #close_createEvent").hide();
+}
 $(document).ready(function () {
 
     // If database timezone is set, don't change it
 
     // If a database timezone is set, do nothing
- 
-    
+
+
     function getTimeZoneAbbreviation() {
         const date = new Date();
         const offset = -date.getTimezoneOffset();
@@ -213,43 +223,43 @@ $(document).ready(function () {
     const selectedTimeZone = $("#selected_start_time_zone").val().trim();
 
     if (!selectedTimeZone) {
-    $("#start-time-zone option").each(function () {
-        if ($(this).val() === currentTimeZone) {
-            $(this).prop("selected", true);
-            isOptionExists = true;
-            return false;
-        }
-    });
+        $("#start-time-zone option").each(function () {
+            if ($(this).val() === currentTimeZone) {
+                $(this).prop("selected", true);
+                isOptionExists = true;
+                return false;
+            }
+        });
 
-    if (!isOptionExists) {
-        const newOption = $("<option></option>")
-            .val(currentTimeZone)
-            .text(currentTimeZone)
-            .prop("selected", true);
-        $("#start-time-zone").append(newOption);
-    }
+        if (!isOptionExists) {
+            const newOption = $("<option></option>")
+                .val(currentTimeZone)
+                .text(currentTimeZone)
+                .prop("selected", true);
+            $("#start-time-zone").append(newOption);
+        }
     }
 
     const selectedEndTimeZone = $("#selected_end_time_zone").val().trim();
     let isOptionExistsend = false;
-    if(!selectedEndTimeZone){
-            $("#end-time-zone option").each(function () {
-                if ($(this).val() === currentTimeZone) {
-                    $(this).prop("selected", true);
-                    isOptionExistsend = true;
-                    return false;
-                }
-            });
-        
-            if (!isOptionExistsend) {
-                const newEndOption = $("<option></option>")
-                    .val(currentTimeZone)
-                    .text(currentTimeZone)
-                    .prop("selected", true);
-                $("#end-time-zone").append(newEndOption);
+    if (!selectedEndTimeZone) {
+        $("#end-time-zone option").each(function () {
+            if ($(this).val() === currentTimeZone) {
+                $(this).prop("selected", true);
+                isOptionExistsend = true;
+                return false;
             }
+        });
+
+        if (!isOptionExistsend) {
+            const newEndOption = $("<option></option>")
+                .val(currentTimeZone)
+                .text(currentTimeZone)
+                .prop("selected", true);
+            $("#end-time-zone").append(newEndOption);
+        }
     }
-   
+
 
     console.log(getTimeZoneAbbreviation());
 
@@ -1522,27 +1532,27 @@ initializeDatePicker(
     function (selectedDate) {
         let formattedDate = selectedDate.format("MM-DD-YYYY");
         console.log(formattedDate);
-        
-        $("#start-event-date").val(formattedDate); 
-        console.log(  $("#start-event-date").val());
-        
-        $("#end-event-date").val(formattedDate); 
-        console.log(  $("#end-event-date").val());
-         let endDateInput = $('#end-event-date');
+
+        $("#start-event-date").val(formattedDate);
+        console.log($("#start-event-date").val());
+
+        $("#end-event-date").val(formattedDate);
+        console.log($("#end-event-date").val());
+        let endDateInput = $('#end-event-date');
         let nextLabel = endDateInput.next('label');
 
-    if (!nextLabel.hasClass('floatingfocus')) {
-        nextLabel.addClass('floatingfocus');
-    }
+        if (!nextLabel.hasClass('floatingfocus')) {
+            nextLabel.addClass('floatingfocus');
+        }
         // alert($("#end-event-date").val());
-        
+
         $("#rsvp-by-date").val("");
         let endPicker = $("#end-event-date").data("daterangepicker");
         endPicker.setStartDate(moment(selectedDate).add(0, "days"));
-        endPicker.minDate = moment(selectedDate).add(0, "days"); 
-        endPicker.maxDate = moment(selectedDate).add(2, "days"); 
+        endPicker.minDate = moment(selectedDate).add(0, "days");
+        endPicker.maxDate = moment(selectedDate).add(2, "days");
 
-        
+
         // endPicker.setEndDate(moment(selectedDate).add(1, 'days')); // Reset selected end date
         selectedDates.clear();
         selectedDates.add(formattedDate);
@@ -1659,14 +1669,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    // startDate.isSame(moment(sortedDates[0]), "day")
-                    startDate
-                        .startOf("day")
-                        .isSame(
-                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                            "day"
-                        )
-                        ? `
+            // startDate.isSame(moment(sortedDates[0]), "day")
+            startDate
+                .startOf("day")
+                .isSame(
+                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                    "day"
+                )
+                ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1681,8 +1691,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                        : ""
-                }
+                : ""
+            }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1703,18 +1713,17 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-            "YYYY-MM-DD"
-        )}">
+                "YYYY-MM-DD"
+            )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${
-                    startDate.isSame(
-                        moment(sortedDates[sortedDates.length - 1]),
-                        "day"
-                    )
-                        ? `
+                ${startDate.isSame(
+                moment(sortedDates[sortedDates.length - 1]),
+                "day"
+            )
+                ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1729,8 +1738,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                        : ""
-                }
+                : ""
+            }
             </form>
         </div>
     </div>
@@ -2849,14 +2858,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                        quantity +
-                        '</p><li class="list-group-item" data-quantity="' +
-                        quantity +
-                        '" data-selfbring="' +
-                        selfbring +
-                        '">' +
-                        subItemName +
-                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                    quantity +
+                    '</p><li class="list-group-item" data-quantity="' +
+                    quantity +
+                    '" data-selfbring="' +
+                    selfbring +
+                    '">' +
+                    subItemName +
+                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3263,7 +3272,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
+            convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3478,7 +3487,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newstartTime)
+            convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3718,7 +3727,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     if (
                         previousEndTime &&
                         convertTo24Hour(previousEndTime) >
-                            convertTo24Hour(startTime) &&
+                        convertTo24Hour(startTime) &&
                         !showAlert
                     ) {
                         toastr.error("Please enter proper time");
@@ -3921,17 +3930,22 @@ $(document).on("click", "#next_design", function () {
     // eventData.step = final_step;
 });
 
-if ($(".edit-design").hasClass("active")) {
-    if (isCohost != "0") {
-        // $("#close_editEvent").css("display", "none");
+if ($("#isUserLoggedIn").val() === "1") {  // Check if user is logged in
+    if ($(".edit-design").hasClass("active")) {
+        if (isCohost != "0") {
+            // $("#close_editEvent").css("display", "none");
+        }
+        // $("#close_createEvent").css("display", "none");
+    } else {
+        if (isCohost != "0") {
+            $("#close_editEvent").css("display", "block");
+        }
+        $("#close_createEvent").css("display", "block");
     }
-    // $("#close_createEvent").css("display", "none");
 } else {
-    if (isCohost != "0") {
-        $("#close_editEvent").css("display", "block");
-    }
-    $("#close_createEvent").css("display", "block");
+    console.log("User is not logged in, restricting access.");
 }
+
 // $(document).on("click",'.edit-design',function(){
 //     $('#close_createEvent').css('display','none');
 // });
@@ -3975,6 +3989,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
     // }
 
     // $('#loader').css('display','block');
+    /////vrushali////////////
+    let restoredTempId = localStorage.getItem("storedTempId");
+
 
     if (start_event_date != "") {
         // if (event_name != "" && event_date != "") {
@@ -4005,6 +4022,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
         }
         console.log(eventData);
 
+        if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+            eventData.temp_id = restoredTempId;
+        }
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -4013,6 +4033,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                localStorage.removeItem("storedTempId");
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -4034,7 +4055,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
         // eventData.step = "1";
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
-
+        eventData.temp_id = temp_id;
+        if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+            eventData.temp_id = restoredTempId;
+        }
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -4061,6 +4085,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                localStorage.removeItem("storedTempId");
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -5381,13 +5406,142 @@ function save_image_design(downloadImage, textData) {
             console.error("Error capturing image:", error);
         });
 }
+
+///vrushali============
 $(document).on("click", ".li_event_details", async function () {
-    $("#loader").css("display", "flex");
-    setTimeout(async function () {
-        await saveDesignData();
-        $("#loader").css("display", "none");
-    }, 1000);
+    let isLoggedIn = await checkUserLogin(); // Function to check login status
+
+
+
+
+    if ($("#isUserLoggedIn").val() === "1") {
+        $("#loader").css("display", "flex");
+        setTimeout(async function () {
+            await saveDesignData();
+            $("#loader").css("display", "none");
+        }, 1000);
+    }
+    else {
+
+        let storedTextData = getTextDataFromCanvas();
+        let storedTempId = temp_id;
+        let desin_img = $("#design_image").val();
+        console.log(storedTempId, storedTextData, desin_img);
+
+
+        localStorage.setItem("designImage", desin_img); // Save to local storage
+
+        localStorage.setItem("storedTextData", JSON.stringify(storedTextData));
+        console.log(dbJson);
+
+
+        localStorage.setItem("storedTempId", storedTempId);
+        localStorage.setItem("pageRefresh", "true");
+        localStorage.setItem("image", image);
+
+        $("#edit-design-temp").hide();
+
+
+        $(".new_login_page").show();
+        $(".new_login").show();
+        $(".new-event-sidebar-wrp").hide();
+        let element = document.getElementById("imageEditor1"); // Target element to capture
+        if (element) {
+            let capturedBlob = await captureImage(element);
+            const imageResponse = await uploadImage(capturedBlob);
+
+
+            localStorage.setItem("final_upload_image", imageResponse.image);
+
+
+            if (capturedBlob) {
+                let reader = new FileReader();
+                reader.readAsDataURL(capturedBlob);
+                reader.onloadend = function () {
+                    let base64Image = reader.result;
+                    localStorage.setItem("capturedImage", base64Image);
+                    $(".login_img img").attr("src", base64Image);
+                    $(".slider_img").each(function () {
+                        var slide_image = $(this).attr("src");
+                        console.log(slide_image);
+                        if (slide_image && slide_image.trim() !== "") {
+                            console.log("Appending image:", slide_image);
+                            let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+                            // Create new item HTML
+                            let newItem = `
+                                <div class="item">
+                                    <div class="rsvp-img login_img" >
+                                        <img src="${slide_image}" alt="birth-card">
+                                    </div>
+                                    <button class="image-zoom-icon silder_zoom" data-image="${slide_image}">
+                                        <img src="${zoomIconPath}" alt="">
+                                    </button>
+                                </div>
+                            `;
+
+                            // Append the new item inside .create-account-slider.slider_login
+                            // $(".create-account-slider.slider_login").append(newItem);
+                            let slider = $(".create-account-slider.slider_login");
+                            slider.trigger("add.owl.carousel", [$(newItem)]).trigger("refresh.owl.carousel");
+
+                        }
+                        if ($(".create-account-slider.slider_login .owl-item").length <= 1) {
+                            let slider = $(".create-account-slider.slider_login");
+                            slider.trigger("refresh.owl.carousel");
+                            $(".create-account-slider.slider_login .owl-nav").hide();
+                        }
+
+                    });
+
+                    console.log("Captured & Stored Image:", base64Image);
+                };
+            }
+        }
+
+        var savedCategory = localStorage.getItem("category_name");
+
+        if (savedCategory) {
+            $(".new-create-account-head h2").text(savedCategory);
+            localStorage.removeItem("category_name");
+        }
+
+
+    }
 });
+//
+
+
+$(document).on("click", ".silder_zoom", function () {
+    let image_src = $(this).data('image'); // Retrieve image
+
+    $.magnificPopup.open({
+        items: {
+            src: image_src,
+            type: "image"
+        },
+        gallery: {
+            enabled: false
+        }
+    });
+
+});
+
+$(document).on("click", ".zoom", function () {
+    let savedImage = localStorage.getItem("capturedImage"); // Retrieve image
+    var imgSrc = savedImage
+
+    $.magnificPopup.open({
+        items: {
+            src: imgSrc,
+            type: "image"
+        },
+        gallery: {
+            enabled: false
+        }
+    });
+
+});
+
 
 $(document).on("click", ".li_event_detail", function () {
     step2Open();
@@ -5912,9 +6066,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -5934,10 +6088,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5946,10 +6100,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5968,10 +6122,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -5979,10 +6133,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6689,16 +6843,16 @@ $(document).on("click", ".final_checkout", function () {
     $("#eventImage").attr(
         "src",
         base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
+        "public/storage/event_images/" +
+        eventData.desgin_selected +
+        ""
     );
     $("#eventTempImage").attr(
         "src",
         base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
+        "public/storage/event_images/" +
+        eventData.desgin_selected +
+        ""
     );
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
@@ -6848,7 +7002,10 @@ $(document).on("click", ".final_create_event", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-
+    let restoredTempId = localStorage.getItem("storedTempId");
+    if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+        eventData.temp_id = restoredTempId;
+    }
     $.ajax({
         url: base_url + "event/store",
         type: "POST",
@@ -6857,6 +7014,7 @@ $(document).on("click", ".final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
+            localStorage.removeItem("storedTempId");
             if (response.status == 401 && response.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
                 return;
@@ -7064,7 +7222,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -8614,7 +8772,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -8875,7 +9033,7 @@ function getLengthofSliderImage() {
 
 $(document).on("click", ".save-slider-image", function () {
     var imageSources = [];
-    var imagenames=[];
+    var imagenames = [];
     // $(".slider_img").each(function () {
     //     imageSources.push($(this).attr("src"));
     // });
@@ -8929,7 +9087,7 @@ $(document).on("click", ".delete_silder", function (e) {
     var src = $(this).parent().find(".slider_img").attr("src");
     var image = $(this).parent().find(".slider_img").attr("data-image");
     if (src != "") {
-       $(this).parent().find(".slider_img").attr("data-image",'');
+        $(this).parent().find(".slider_img").attr("data-image", '');
         $("#loader").css("display", "flex");
         var $this = $(this);
 
@@ -8960,7 +9118,7 @@ $(document).on("click", ".delete_silder", function (e) {
                     delete_id: delete_id,
                     eventId: eventId,
                     src: src,
-                    image:image,
+                    image: image,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
@@ -9004,7 +9162,7 @@ $(document).on("click", ".delete_silder", function (e) {
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
     // return;
-    
+
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
@@ -9028,9 +9186,9 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     }
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
-    var send_invites=$(this).attr('data-sendIvites');
-    if(send_invites=="1" && $(this).attr('aria-disabled') === "true"){
-            return;  
+    var send_invites = $(this).attr('data-sendIvites');
+    if (send_invites == "1" && $(this).attr('aria-disabled') === "true") {
+        return;
     }
     e.preventDefault();
     eventData.is_update_event = "1";
@@ -9131,7 +9289,7 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
-    if(!isEditBtn){
+    if (!isEditBtn) {
         $(".step_1").css("display", "none");
         $(".step_2").css("display", "none");
         $(".step_3").css("display", "none");
@@ -9182,7 +9340,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                     i = i + 1;
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.setAttribute('data-image', sliderImages[index].fileName); 
+                        sliderElement.setAttribute('data-image', sliderImages[index].fileName);
                         sliderElement.style.display = "block";
 
                         $(".photo-edit-delete-" + i).show();
@@ -9700,9 +9858,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                        parseInt(quantity) +
-                        "/" +
-                        categoryItemQuantity
+                    parseInt(quantity) +
+                    "/" +
+                    categoryItemQuantity
                 );
             }
 
@@ -9728,9 +9886,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -9751,10 +9909,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9763,10 +9921,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9785,10 +9943,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -9796,10 +9954,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10095,9 +10253,8 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${
-        initials || "NA"
-    }</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
+        }</h5>`;
 }
 
 $(document).on('click', '.user_choice', function () {
@@ -10109,15 +10266,54 @@ $(document).on('click', '.user_choice', function () {
             checkedCount++;
         }
     });
-    let buttonText = `Send Invites (0)`;   
+    let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
         $('a.saveGuestOnly.isdisabled').removeAttr('aria-disabled');
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
         $('a.saveGuestOnly.isdisabled').attr('aria-disabled', 'true');
     }
-    
+
     $('a.saveGuestOnly.isdisabled').text(buttonText);
 
-    
+
 });
+
+// ========vrushali===============
+let pageRefresh = localStorage.getItem("pageRefresh");
+//let storedImageUrl = localStorage.getItem("uploadedImageUrl");
+// let savedDesignImage = localStorage.getItem("image");
+
+if ($('#isUserLoggedIn').val() == "1" && pageRefresh === "true") {
+    // eventData.textData = restoredTextData;
+    // eventData.temp_id = restoredTempId;
+
+
+    // console.log("Restored Data After Refresh:", { restoredTextData, restoredTempId ,storedImageUrl,savedDesignImage});
+
+    $("#loader").css("display", "flex");
+
+    setTimeout(function () {
+        $(".li_guest, .li_setting, .li_event_detail")
+            .find(".menu-circle-wrp")
+            .removeClass("menu-success");
+
+        $(".li_event_detail").removeClass("menu-success");
+        $(".pick-card").removeClass("active");
+
+        $(".li_design").addClass("menu-success");
+        $(".li_design").find(".side-bar-list").addClass("menu-success");
+        $(".li_event_detail").find(".side-bar-list").addClass("active");
+
+        $("#loader").css("display", "none");
+        $(".step_1").show();
+        $(".step_2").hide();
+        $(".new-event-sidebar-wrp").show();
+
+
+        // Remove refresh flag after applying changes
+        localStorage.removeItem("pageRefresh");
+        localStorage.removeItem("uploadedImageUrl");
+        // localStorage.removeItem('final_upload_image');
+    }, 3000);
+}

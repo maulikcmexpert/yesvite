@@ -54,14 +54,14 @@ use Illuminate\Http\Request;
 
 
 Route::get('/open-app', function () {
-    $deepLink = "comappyesvite://open";  
-    $fallbackUrl = "https://apps.apple.com/app/6736650042";  
+    $deepLink = "comappyesvite://open";
+    $fallbackUrl = "https://apps.apple.com/app/6736650042";
 
     return view('deep-link', compact('deepLink', 'fallbackUrl'));
-})->name('open-app'); 
+})->name('open-app');
 Route::get('/redirect', function () {
     return view('redirect');
-})->name('redirect'); 
+})->name('redirect');
 
 Route::post('/run-queue-work', function () {
     Artisan::call('queue:work');
@@ -201,7 +201,7 @@ Route::middleware('checkUserExist')->group(function () {
 
     Route::get('search_design', [ControllersEventController::class, 'searchDesign'])->name('search_design');
 
-    Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
+    // Route::get('events/{id?}/{iscopy?}',  [ControllersEventController::class, 'index'])->name('event');
     // Route::get('event',  [ControllersEventController::class, 'index'])->name('event');
     Route::post('event/store',  [ControllersEventController::class, 'store'])->name('event.event_store');
     Route::post('event/editStore',  [ControllersEventController::class, 'editStore'])->name('event.event_edit');
@@ -218,7 +218,7 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/add_new_thankyou_card', [ControllersEventController::class, 'addNewThankyouCard'])->name('add.thankyou_card');
     Route::post('event/remove_thankyou_card', [ControllersEventController::class, 'removeThankyouCard'])->name('remove.thankyou_card');
     Route::post('event/update_self_bring', [ControllersEventController::class, 'updateSelfBring']);
-    Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+    // Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
     Route::post('event/store_custom_design', [ControllersEventController::class, 'saveCustomDesign']);
     Route::post('event/add_new_group', [ControllersEventController::class, 'addNewGroup']);
     Route::post('event/delete_group', [ControllersEventController::class, 'deleteGroup']);
@@ -231,18 +231,18 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_all_group_member_list', [ControllersEventController::class, 'getAllGroupMember']);
     Route::post('event/invite_user_by_group', [ControllersEventController::class, 'inviteByGroup']);
     Route::post('event/edit_event', [ControllersEventController::class, 'editEvent']);
-    Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
+    // Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
     Route::post('event/group_search_ajax', [ControllersEventController::class, 'groupSearchAjax']);
     Route::post('event/group_toggle_search', [ControllersEventController::class, 'group_toggle_search']);
     Route::post('event/delete_sessions', [ControllersEventController::class, 'delete_sessions']);
     Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
-    Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+    // Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
     Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
-    Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
+    // Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
     Route::post('event/shape_image', [ControllersEventController::class, 'shape_image']);
     Route::post('event/see_all', [ControllersEventController::class, 'see_all']);
     Route::post('event/cancel_event', [ControllersEventController::class, 'CancelEvent']);
@@ -278,17 +278,17 @@ Route::middleware('checkUserExist')->group(function () {
     // Route::get('/open-app', function (Request $request) {
     //     $userId = $request->get('user_id');
     //     $eventId = $request->get('event_id');
-    
+
     //     // Deep link schema for your mobile app
     //     $deepLink = "yourapp://open?user_id={$userId}&event_id={$eventId}";
-    
+
     //     // Fallback URL (in case the app is not installed)
     //     $fallbackUrl = url('/event/' . $eventId);
-    
+
     //     return view('deep-link', compact('deepLink', 'fallbackUrl'));
     // });
- 
-    
+
+
     // //vrushali
     //     Route::post('event_wall/createStory', [EventWallController::class, 'createStory'])->name('event_wall.createStory');
     //     Route::get('event_wall/fetch-user-stories/{eventId}', [EventWallController::class, 'fetchUserStories'])->name('event_wall.fetchStories');
@@ -359,8 +359,21 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event_wall/myProfile',  [EventWallController::class, 'myProfile'])->name('event.myProfile');
 });
 
+////vrushai===========
+
+Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name('event');
+Route::get('/check-login', function (Request $request) {
+    return response()->json(['is_logged_in' => Auth::guard('web')->check()]);
+});
+Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
+Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
+Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
+Route::post('event/get_login_page', [ControllersEventController::class, 'get_login_page']);
 
 
+
+////////////////
 Route::get('event/editd', [DesignController::class, 'index']);
 Route::post('/saveTextData', [DesignController::class, 'saveTextData'])->name('saveTextData');
 // Route::post('/saveCanvasImage', [DesignController::class, 'saveCanvasImage'])->name('saveCanvasImage');
@@ -431,8 +444,8 @@ Route::controller(AuthController::class)->group(function () {
         return view('admin.auth.main', $data);
     });
 
-    
-    
+
+
     Route::post('/forgotpassword', 'forgotpassword');
 
     Route::get('/updatePassword/{id}', 'checkToken');
