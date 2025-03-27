@@ -2580,6 +2580,7 @@ class EventWallController extends BaseController
             'comment_id' => $event_post_comment->id
         ];
 
+        dd($notificationParam);
         sendNotification('comment_post', $notificationParam);
 
         return response()->json(['success' => true, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
