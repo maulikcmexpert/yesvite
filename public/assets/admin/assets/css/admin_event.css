@@ -328,9 +328,19 @@
 }
 
 
+#templateForm .bootstrap-tagsinput{
+    padding: .375rem .75rem;
+}
 
-
-
+#templateForm .bootstrap-tagsinput .label-info {
+    display: inline-block;
+    font-size: 14px;
+    font-family: var(--SFProDisplay-Medium );
+    padding: 2px 4px;
+    border-radius: 15px;
+    background-color: var(--ck-color-base-border);
+    color: #000000;
+}
 
 
 
