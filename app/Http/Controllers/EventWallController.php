@@ -2089,7 +2089,7 @@ class EventWallController extends BaseController
         }
 
         $notificationParam = [
-            'sender_id' => $user->id,
+            'sender_id' => $user,
             'event_id' => $request->event_id,
             'post_id' => $creatEventPost->id,
             'is_in_photo_moudle' => 0,
