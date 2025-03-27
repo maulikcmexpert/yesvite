@@ -903,8 +903,8 @@ $(document).ready(function () {
             bulkDeleteBtn.addClass("d-none"); // Hide bulk delete button
 
 
-            $('.selected-bulk-btn').css('display','none');
-            $('.set_emoji_like').css('display','block');
+            // $('.selected-bulk-btn').css('display','none');
+            // $('.set_emoji_like').css('display','flex');
             deleteBtn.addClass("d-none"); // Hide delete button
             downloadBtn.addClass("d-none"); // Hide download button
             $('.add_new_photo_btn').removeClass('d-none'); // Show 'add new photo' button
