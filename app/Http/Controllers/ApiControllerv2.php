@@ -14622,7 +14622,7 @@ class ApiControllerv2 extends Controller
 
                 return response()->json(data: ['status' => 1, 'message' => "Event Design Data", 'data' => $templates]);
             } else {
-                return response()->json(data: ['status' => 1, 'message' => "No Data Found"]);
+                return response()->json(data: ['status' => 1, 'message' => "No Data Found",'data'=>$templates]);
             }
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
