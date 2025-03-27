@@ -334,25 +334,55 @@
 }
 
 #templateForm .bootstrap-tagsinput .label-info {
-    display: inline-block;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium );
-    padding: 2px 4px;
+    padding: 2px 8px;
     border-radius: 15px;
     background-color: var(--ck-color-base-border);
     color: #000000;
     margin-bottom: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
+
+
+#templateForm .bootstrap-tagsinput .label-info span[data-role="remove"]{
+    margin-left: 8px;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--ButtonColor);
+    position: relative;
+}
+
+#templateForm .bootstrap-tagsinput .label-info span[data-role="remove"]::after{
+    content: "x";
+    padding: 0px 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    font-size: 12px;
+    text-align: center;
+}
+
+
 #templateEditForm .bootstrap-tagsinput{
     padding: .375rem .75rem;
     display: block;
 }
 
 #templateEditForm .bootstrap-tagsinput .label-info {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium );
-    padding: 2px 4px;
+    padding: 2px 8px;
     border-radius: 15px;
     background-color: var(--ck-color-base-border);
     color: #000000;
@@ -360,7 +390,28 @@
 }
 
 
+#templateEditForm .bootstrap-tagsinput .label-info span[data-role="remove"]{
+    margin-left: 8px;
+    cursor: pointer;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--ButtonColor);
+    position: relative;
+}
 
+#templateEditForm .bootstrap-tagsinput .label-info span[data-role="remove"]::after{
+    content: "x";
+    padding: 0px 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    font-size: 12px;
+    text-align: center;
+}
 
 
 
