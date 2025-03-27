@@ -1,17 +1,17 @@
 // ===hostby-slider===
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    pagination: {
-          el: '.custom-pagination',
-          type: 'custom',
-          renderCustom: (swiper, current, total) => `${current} of ${total}`,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-  },
-  });
+// var swiper = new Swiper(".mySwiper", {
+//     slidesPerView: 1,
+//     spaceBetween: 30,
+//     pagination: {
+//           el: '.custom-pagination',
+//           type: 'custom',
+//           renderCustom: (swiper, current, total) => `${current} of ${total}`,
+//     },
+//     navigation: {
+//       nextEl: ".swiper-button-next",
+//       prevEl: ".swiper-button-prev",
+//   },
+//   });
 
 
 // //   ===story-slider===
