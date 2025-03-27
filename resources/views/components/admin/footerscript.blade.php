@@ -59,6 +59,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/2.6.1/jquery.mockjax.min.js" integrity="sha512-LbhUoRYSZ3tFp6RrcQOwGL2P/SlbfF9B+2yiJAMcJhuxJQTgvzWaG6W+XxX9t8+aQ8z+zUxx/XQ0fOo1/ft4tA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
 @if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
 <script src="{{ asset('assets/event/js/fontLoder.js') }}"></script>
 @else

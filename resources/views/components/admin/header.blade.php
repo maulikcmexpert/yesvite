@@ -45,6 +45,8 @@
   <link>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+
   <input type="hidden" id="base_url" value="{{url('/')}}/" />
   {{-- <link rel="stylesheet" href="https://fabricjs.com/css/googlefonts.css"> --}}
   @if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
