@@ -938,57 +938,46 @@
 
     //newwwww
     function openAppAndroid() {
-    // const appPackage = "com.yesvite.test";
-    const appPackage = "com.yesvite.android";
-    const appLink =
-        `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+        // const appPackage = "com.yesvite.test";
+        const appPackage = "com.yesvite.android";
+        const appLink =
+            `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
-    // Check if Android redirection has already happened in this session
-    if (!sessionStorage.getItem('androidAppRedirectionDone')) {
-        window.location.replace(appLink);
-        // Set a flag in sessionStorage
-        sessionStorage.setItem('androidAppRedirectionDone', 'true');
+        if (!sessionStorage.getItem('androidAppRedirectionDone')) {
+            window.location.replace(appLink);
+            sessionStorage.setItem('androidAppRedirectionDone', 'true');
+        }
+        // Optional: Play Store fallback
+        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+        // window.location.href = playStoreLink;
     }
-    // Optional: Play Store fallback
-    // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-    // window.location.href = playStoreLink;
-}
 
-function openAppIos() {
-    const appLink = "comappyesvite://";
+    function openAppIos() {
+        const appLink = "comappyesvite://";
 
-    // Check if iOS redirection has already happened in this session
-    if (!sessionStorage.getItem('iosAppRedirectionDone')) {
-        window.location.href = appLink;
-        // Set a flag in sessionStorage
-        sessionStorage.setItem('iosAppRedirectionDone', 'true');
+        if (!sessionStorage.getItem('iosAppRedirectionDone')) {
+            window.location.href = appLink;
+            sessionStorage.setItem('iosAppRedirectionDone', 'true');
+        }
+        // Optional: App Store fallback (you'll need the app store URL)
+        // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
+        // window.location.href = appStoreLink;
     }
-    // Optional: App Store fallback (you'll need the app store URL)
-    // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
-    // window.location.href = appStoreLink;
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    document.addEventListener('DOMContentLoaded', () => {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream) {
+            if (/android/i.test(userAgent)) {
+                openAppAndroid();
+            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+                openAppIos();
+            }
+        }
+    });
 
-    // if (/android/i.test(userAgent)) {
-    //     openAppAndroid();
-    // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    //     openAppIos();
-    // }
-    if (/android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream) {
-    if (/android/i.test(userAgent)) {
-        openAppAndroid();
-    } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-        openAppIos();
-    }
-}
-});
-
-// Optional: Clear sessionStorage flags on session end
-// window.addEventListener('beforeunload', () => {
-//     sessionStorage.removeItem('androidAppRedirectionDone');
-//     sessionStorage.removeItem('iosAppRedirectionDone');
-// });
+    // window.addEventListener('beforeunload', () => {
+    //     sessionStorage.removeItem('androidAppRedirectionDone');
+    //     sessionStorage.removeItem('iosAppRedirectionDone');
+    // });
     //newwww
 </script>
