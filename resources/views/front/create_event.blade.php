@@ -206,13 +206,15 @@
                         <h4 class="event_create_percent">25%</h4>
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
-                    @if ($eventDetail['id'] == '')
+                    @auth
+                    @if (!empty($eventDetail) && isset($eventDetail['id']) && $eventDetail['id'] == '')
                         <span id="close_createEvent"><i class="fa-solid fa-xmark"></i></span>
-                    @elseif ($eventDetail['isCohost'] == '1')
+                    @elseif (!empty($eventDetail) && isset($eventDetail['isCohost']) && $eventDetail['isCohost'] == '1')
                         <span id="close_editEvent"><i class="fa-solid fa-xmark"></i></span>
-                    @elseif($eventDetail['id'] !="" && $eventDetail['is_draft_save']=="0")
-                    <span data-isEditBtn="1" class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
+                    @elseif (!empty($eventDetail) && isset($eventDetail['id']) && isset($eventDetail['is_draft_save']) && $eventDetail['id'] != "" && $eventDetail['is_draft_save'] == "0")
+                        <span data-isEditBtn="1" class="edit_checkout"><i class="fa-solid fa-xmark"></i></span>
                     @endif
+                @endauth
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
@@ -498,7 +500,7 @@
         </div>
 
     </div>
-    <input type="hidden" value="{{ $user->id }}" id="user_id">
+    <input type="hidden" value="{{  isset($user->id)&& $user->id != null ? $user->id : '' }}" id="user_id">
     <input type="hidden" id="CheckCuurentStep" value="0">
     <input type="hidden" value="{{ $coins }}" id="coins" class="hidden-coins">
     <input type="hidden"
@@ -516,12 +518,13 @@
         {{-- @include('front.event.design.edit_design') --}}
     </div>
 
+    @if (Auth::guard('web')->check())
     @include('front.event.step3')
 
     @include('front.event.step4')
 
     @include('front.event.final_checkout')
-
+@endif
     </div>
 
     <div id="sidebar_select_design_category" class="setting-side-wrp" style="display: none;">
