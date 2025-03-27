@@ -5409,7 +5409,7 @@ function save_image_design(downloadImage, textData) {
 
 ///vrushali============
 $(document).on("click", ".li_event_details", async function () {
-    let isLoggedIn = await checkUserLogin(); // Function to check login status
+    // let isLoggedIn = await checkUserLogin(); // Function to check login status
 
 
 
@@ -9991,10 +9991,10 @@ function sliderImages(id) {
             _token: $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            if (response.status == 401 && response.info == "logout") {
-                window.location.href = "/login"; // Redirect to home page
-                return;
-            }
+            // if (response.status == 401 && response.info == "logout") {
+            //     window.location.href = "/login"; // Redirect to home page
+            //     return;
+            // }
             var savedImages = response.images;
             eventData.slider_images = savedImages;
             eventData.desgin_selected = response.designImg;
