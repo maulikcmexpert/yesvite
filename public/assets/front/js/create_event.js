@@ -4014,8 +4014,12 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 return; // Exit if savePage3Data returns a stopping condition
             }
         }
+        let restoredTempId = localStorage.getItem("storedTempId");
+
+        temp_id = restoredTempId;
         eventData.temp_id = temp_id;
         eventData.step = final_step;
+        localStorage.removeItem("storedTempId");
         eventData.isdraft = "1";
         savePage4Data();
         var schedule = $("#schedule").is(":checked");
@@ -10425,7 +10429,7 @@ function generateProfileImage(firstname, lastname) {
 
 
 // let restoredTextData = JSON.parse(localStorage.getItem("storedTextData"));
-let restoredTempId = localStorage.getItem("storedTempId");
+
 let pageRefresh = localStorage.getItem("pageRefresh");
 //let storedImageUrl = localStorage.getItem("uploadedImageUrl");
 // let savedDesignImage = localStorage.getItem("image");

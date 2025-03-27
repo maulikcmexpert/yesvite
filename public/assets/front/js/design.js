@@ -12,7 +12,7 @@ setTimeout(function(){
     localStorage.removeItem("storedTextData");
 },5000)
 
-//localStorage.removeItem("storedTempId");
+
 
 console.log("dbJson:", dbJson);
 console.log("image:", image);
