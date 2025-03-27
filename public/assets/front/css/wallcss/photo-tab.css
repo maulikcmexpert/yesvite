@@ -628,11 +628,7 @@
     box-shadow: none;
 } 
 
-/* .selected-bulk-btn:has(input:checked){
-    background-color: var(--pink);
-} */
-
-.selected-bulk-btn input ~ .selected-bulk-btn{
+.selected-bulk-btn:has(input:checked){
     background-color: var(--pink);
 }
 
