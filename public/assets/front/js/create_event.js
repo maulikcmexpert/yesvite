@@ -3955,7 +3955,7 @@ if ($("#isUserLoggedIn").val() === "1") {  // Check if user is logged in
 // });
 $(document).on("click", "#close_createEvent", async function (e) {
     if (apiCalled == true) {
-        return;
+        // return;
     }
     apiCalled = true;
 
@@ -3995,9 +3995,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
     let restoredTempId = localStorage.getItem("storedTempId");
-
-    temp_id = restoredTempId;
-    eventData.temp_id = temp_id;
+alert(restoredTempId);
+    // temp_id = restoredTempId;
+    // eventData.temp_id = temp_id;
     eventData.step = final_step;
 
     if (start_event_date != "") {
