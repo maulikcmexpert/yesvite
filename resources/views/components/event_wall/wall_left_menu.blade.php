@@ -88,7 +88,7 @@
                 @if ($eventDetails['event_images'])
                     @foreach ($eventDetails['event_images'] as $image)
                         <div class="swiper-slide">
-                            <div class="hosted-by-template-slider-img {{$disable}} image-zoom-icon">
+                            <div class="hosted-by-template-slider-img {{$disable}}">
                                 <img src="{{ $image }}" alt="Event Image" />
                             </div>
                             <button class="image-zoom-icon" data-img="{{ $image }}" data-bs-toggle="modal" data-bs-target="#event-slider-rsvp-modal"><img
