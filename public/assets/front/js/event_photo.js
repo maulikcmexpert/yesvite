@@ -905,7 +905,7 @@ $(document).ready(function () {
 
             // $('.selected-bulk-btn').css('display','none');
             // $('.set_emoji_like').css('display','flex');
-            
+
             deleteBtn.addClass("d-none"); // Hide delete button
             downloadBtn.addClass("d-none"); // Hide download button
             $('.add_new_photo_btn').removeClass('d-none'); // Show 'add new photo' button
@@ -925,6 +925,11 @@ $(document).ready(function () {
         }
         if ($(".selected_bulk_image:checked").length === 0) {
             bulkSelectActive = false;
+        }
+
+        if ($(".selected_bulk_image:checked").length === 0) {
+              $('.selected-bulk-btn').css('display','none');
+            $('.set_emoji_like').css('display','flex');
         }
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
