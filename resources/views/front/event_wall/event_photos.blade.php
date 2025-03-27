@@ -361,6 +361,12 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        @php
+                                                        $postMedia = [];
+                                                        foreach ($photo['mediaData'] as $k => $v) {
+                                                            $postMedia[] = $photo['mediaData'][$k]['post_media'];
+                                                        }
+                                                    @endphp
                                                         <button class="selected-bulk-btn" style="display:none;">
                                                             <input class="form-check-input selected_bulk_image"
                                                                 type="checkbox" value="" id="flexCheckDefault"
