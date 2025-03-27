@@ -1143,6 +1143,8 @@ class EventPhotoController extends BaseController
         $postReactions = getReaction($request['event_post_id']);
         $postReaction = [];
 
+        
+
         foreach ($postReactions as $reactionVal) {
             $reactionInfo = [
                 'id' => $reactionVal->id,
@@ -1156,6 +1158,16 @@ class EventPhotoController extends BaseController
 
             $postReaction[] = $reactionInfo;
         }
+
+        $eventModule = EventPost::where('id', $request['event_post_id'])->first();
+
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request['event_id'],
+            'post_id' => $request['event_post_id'],
+            'is_in_photo_moudle' => $eventModule->is_in_photo_moudle
+        ];
+        sendNotification('like_post', $notificationParam);
 
         return response()->json([
             'status' => 1,
