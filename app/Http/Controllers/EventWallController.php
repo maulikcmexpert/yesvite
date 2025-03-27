@@ -2573,15 +2573,7 @@ class EventWallController extends BaseController
             'posttime' => setpostTime($letestComment->created_at),
             'comment_replies' => []
         ];
-        $notificationParam = [
-            'sender_id' => $user->id,
-            'event_id' => $request['event_id'],
-            'post_id' =>  $request['event_post_id'],
-            'comment_id' => $event_post_comment->id
-        ];
-
-        dd($notificationParam);
-        sendNotification('comment_post', $notificationParam);
+       
 
         return response()->json(['success' => true, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
     }
