@@ -109,7 +109,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <textarea class="form-control" name="tags" placeholder="Enter Tags like: birthday,wedding,etc">{{$getTemData->tags}}</textarea>
+                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" value="{{$getTemData->tags}}" />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 

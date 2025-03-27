@@ -105,7 +105,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" value="{{$getTemData->tags}}" />
+                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput"  />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 
