@@ -147,6 +147,8 @@ class TemplateController extends Controller
             DB::beginTransaction();
             $imageName = null;
             $filledImage = null;
+            $tags = $request->input('tags');  // "test,value,bulk"
+            dd($tags);
             $i = 0;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
