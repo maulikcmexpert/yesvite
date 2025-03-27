@@ -655,7 +655,7 @@
     width: 100% !important;
     height: 100% !important;
     max-width: 100% !important;
-    /* border-radius: 10px !important; */
+    border-radius: 10px !important;
     outline: none !important;
 }
 
