@@ -10256,6 +10256,62 @@ function generateProfileImage(firstname, lastname) {
     return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
         }</h5>`;
 }
+$(".create_event_login_btn").on("click", function (e) {
+    console.log($('#crateEventLogin').attr('action'));
+    let formData = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+        remember: $("input[name='remember']").prop("checked") ? 1 : 0,
+        is_login: false
+    };
+    $.ajax({
+        url: $('#crateEventLogin').attr('action'), // Get form action URL
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        data: formData,
+        dataType: "json",
+        beforeSend: function () {
+            $("#loginUser").prop("disabled", true).text("Signing In...");
+            $("#loader").css("display", "flex");
+        },
+        success: async function (response) {
+
+            await handleLoginSuccess(response);
+        },
+        error: function (xhr) {
+            $("#loginUser").prop("disabled", false).text("Sign In");
+
+
+        },
+
+    });
+});
+
+async function handleLoginSuccess(response) {
+    if (response.success) {
+
+
+
+        setTimeout(() => {
+            window.location.href = base_url + "events";
+            // window.location.href=base_url+"events?design_id="+storedTempId;
+        }, 1000);
+        $('#isUserLoggedIn').val("1");
+        $(".new_login_page").hide();
+        $(".new_login").hide();
+        // await saveDesignData();
+        // $("#edit-design-temp").hide();
+        //  $(".step_1").show();
+        //  $(".new-event-sidebar-wrp").show();
+        // $("#loader").css("display", "none");
+
+
+    }
+}
 
 $(document).on('click', '.user_choice', function () {
     let checkedCount = 0;
