@@ -2242,6 +2242,7 @@ async function bindData(current_event_id) {
             hasBorders: true,
             lockScalingFlip: true,
             editable: true,
+
             fontWeight: originalTextbox.fontWeight,
             fontStyle: originalTextbox.fontStyle,
             underline: originalTextbox.underline,

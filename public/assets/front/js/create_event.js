@@ -3972,7 +3972,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_date = $("#event-date").val();
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
-    var design = eventData.desgin_selected ;
+    var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData(true);
         design = eventData.desgin_selected;
@@ -5194,7 +5194,7 @@ async function saveDesignData(direct = false) {
         const imageResponse = await uploadImage(blob);
         $("#loader").css("display", "none");
         if (imageResponse && imageResponse.image) {
-         //    const image1 =  localStorage.getItem('final_upload_image');
+            //    const image1 =  localStorage.getItem('final_upload_image');
             eventData.desgin_selected = imageResponse.image;
             // let imageUrls =   localStorage.getItem('final_upload_image');
 
@@ -5209,7 +5209,7 @@ async function saveDesignData(direct = false) {
         if (direct) {
             return true;
         }
-        if (imageResponse && imageResponse.image || imageUrls ) {
+        if (imageResponse && imageResponse.image || imageUrls) {
             afterImageUpload(imageResponse.image);
         }
     } catch (error) {
@@ -5471,7 +5471,7 @@ $(document).on("click", ".li_event_details", async function () {
             const imageResponse = await uploadImage(capturedBlob);
 
 
-            localStorage.setItem("final_upload_image",imageResponse.image);
+            localStorage.setItem("final_upload_image", imageResponse.image);
 
 
             if (capturedBlob) {
@@ -5548,7 +5548,7 @@ $(document).on("click", ".silder_zoom", function () {
 
 $(document).on("click", ".zoom", function () {
     let savedImage = localStorage.getItem("capturedImage"); // Retrieve image
-    var imgSrc =savedImage
+    var imgSrc = savedImage
 
     $.magnificPopup.open({
         items: {
@@ -6945,19 +6945,19 @@ $(document).on("click", ".final_checkout", function () {
 
     let imageUrls = localStorage.getItem('final_upload_image');
 
-if (imageUrls) {
-    eventData.desgin_selected = imageUrls;
-    localStorage.removeItem('final_upload_image'); // Remo
-     // If localStorage has an image, use it
-}
+    if (imageUrls) {
+        eventData.desgin_selected = imageUrls;
+        localStorage.removeItem('final_upload_image'); // Remo
+        // If localStorage has an image, use it
+    }
 
 
-if (eventData.desgin_selected) {
-    $("#eventTempImage").attr(
-        "src",
-        base_url + "public/storage/event_images/" + eventData.desgin_selected
-    );
-}
+    if (eventData.desgin_selected) {
+        $("#eventTempImage").attr(
+            "src",
+            base_url + "public/storage/event_images/" + eventData.desgin_selected
+        );
+    }
 
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
@@ -9164,6 +9164,9 @@ $(document).on("click", ".save-slider-image", function () {
                     return;
                 }
                 var savedImages = response.images;
+                if ($("#isUserLoggedIn").val() === "0") {
+                    localStorage.setItem("save-slider-image", JSON.stringify(savedImages));
+                }
                 eventData.slider_images = savedImages;
                 console.log(eventData);
                 $("#loader").css("display", "none");
@@ -9374,67 +9377,152 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // handleActiveClass(this);
 });
 
-$(document).on("click", ".design-sidebar-action", function () {
+// $(document).on("click", ".design-sidebar-action", function () {
 
+//     let designId = $(this).attr("design-id");
+//     if (designId) {
+//         if (designId == "6") {
+//             var imgSrc1 = $(".photo-slider-1").attr("src");
+//             var imgSrc2 = $(".photo-slider-2").attr("src");
+//             var imgSrc3 = $(".photo-slider-3").attr("src");
+//             if (imgSrc1 != "") {
+//                 $(".photo-edit-delete-1").show();
+//             }
+//             if (imgSrc2 != "") {
+//                 $(".photo-edit-delete-2").show();
+//             }
+//             if (imgSrc3 != "") {
+//                 $(".photo-edit-delete-3").show();
+//             }
+//             // console.log(eventData.slider_images);
+//              const slide_image_get = localStorage.getItem('save-slider-image');
+//              console.log(slide_image_get);
+
+//             if (
+//                 (eventData.slider_images != undefined &&
+//                 eventData.slider_images != "") || ( slide_image_get !== "" && slide_image_get !== "undefined" )
+//             ) {
+//                 $(".design-sidebar").addClass("d-none");
+//                 $(".design-sidebar_7").removeClass("d-none");
+//                 $("#sidebar").addClass("design-sidebar_7");
+//                 $(".close-btn").attr("data-id", "design-sidebar_7");
+//                 const photoSliders = [
+//                     "photo-slider-1",
+//                     "photo-slider-2",
+//                     "photo-slider-3",
+//                 ];
+
+//                 console.log(slide_image_get);
+
+//                 const sliderImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined"
+//                 ? JSON.parse(slide_image_get)
+//                 : (eventData.slider_images && eventData.slider_images.length > 0 ? eventData.slider_images : []);
+
+//                 console.log(sliderImages);
+
+//                 let i = 0;
+//                 photoSliders.forEach((sliderClass, index) => {
+//                     const sliderElement = document.querySelector(
+//                         `.${sliderClass}`
+//                     );
+
+//                     i = i + 1;
+//                     if (sliderElement && sliderImages[index]) {
+//                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+//                         sliderElement.style.display = "block";
+
+//                         $(".photo-edit-delete-" + i).show();
+//                         if (i == 1) {
+//                             //  $(".slider_photo").hide();
+//                         } else {
+//                             //  $(".slider_photo_" + i).hide();
+//                         }
+//                         console.log(
+//                             `Set src for ${sliderClass}: ${sliderElement.src}`
+//                         );
+//                     } else {
+//                         console.log(
+//                             `No element found for class: ${sliderClass} or missing image data.`
+//                         );
+
+
+
+
+//                     }
+//                 });
+//                 localStorage.removeItem("save-slider-image");
+
+//             } else {
+//                 $(".design-sidebar").addClass("d-none");
+//                 if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
+//                     $(".design-sidebar_7").removeClass("d-none");
+//                 } else {
+//                     $(".design-sidebar_" + designId).removeClass("d-none");
+//                 }
+
+//                 $("#sidebar").addClass("design-sidebar_" + designId);
+//                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//             }
+//         } else {
+//             $(".design-sidebar").addClass("d-none");
+//             $(".design-sidebar_" + designId).removeClass("d-none");
+//             $("#sidebar").addClass("design-sidebar_" + designId);
+//             $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//         }
+//     }
+// });
+
+
+$(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
+
     if (designId) {
         if (designId == "6") {
-            var imgSrc1 = $(".photo-slider-1").attr("src");
-            var imgSrc2 = $(".photo-slider-2").attr("src");
-            var imgSrc3 = $(".photo-slider-3").attr("src");
-            if (imgSrc1 != "") {
-                $(".photo-edit-delete-1").show();
-            }
-            if (imgSrc2 != "") {
-                $(".photo-edit-delete-2").show();
-            }
-            if (imgSrc3 != "") {
-                $(".photo-edit-delete-3").show();
-            }
-            console.log(eventData.slider_images);
-            if (
-                eventData.slider_images != undefined &&
-                eventData.slider_images != ""
-            ) {
+            let imgSrc1 = $(".photo-slider-1").attr("src");
+            let imgSrc2 = $(".photo-slider-2").attr("src");
+            let imgSrc3 = $(".photo-slider-3").attr("src");
+
+            if (imgSrc1) $(".photo-edit-delete-1").show();
+            if (imgSrc2) $(".photo-edit-delete-2").show();
+            if (imgSrc3) $(".photo-edit-delete-3").show();
+
+            const slide_image_get = localStorage.getItem("save-slider-image");
+            console.log(slide_image_get);
+
+            // Check if either eventData.slider_images or slide_image_get has valid data
+            let hasEventDataImages = eventData.slider_images && eventData.slider_images.length > 0;
+            let hasStoredImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined" && slide_image_get !== "";
+
+            if (hasEventDataImages || hasStoredImages) {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
-                const photoSliders = [
-                    "photo-slider-1",
-                    "photo-slider-2",
-                    "photo-slider-3",
-                ];
 
-                const sliderImages = eventData.slider_images;
-                let i = 0;
+                const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
+
+                const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+                console.log(sliderImages);
+
                 photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = document.querySelector(
-                        `.${sliderClass}`
-                    );
-                    i = i + 1;
+                    const sliderElement = document.querySelector(`.${sliderClass}`);
+
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
-
-                        $(".photo-edit-delete-" + i).show();
-                        if (i == 1) {
-                            //  $(".slider_photo").hide();
-                        } else {
-                            //  $(".slider_photo_" + i).hide();
-                        }
-                        console.log(
-                            `Set src for ${sliderClass}: ${sliderElement.src}`
-                        );
+                        $(".photo-edit-delete-" + (index + 1)).show();
+                        console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
                     } else {
-                        console.log(
-                            `No element found for class: ${sliderClass} or missing image data.`
-                        );
+                        console.log(`No element found for class: ${sliderClass} or missing image data.`);
                     }
                 });
+
+                localStorage.removeItem("save-slider-image");
             } else {
+                // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
-                if (imgSrc1 != "" || imgSrc2 != "" || imgSrc3 != "") {
+
+                if (imgSrc1 || imgSrc2 || imgSrc3) {
                     $(".design-sidebar_7").removeClass("d-none");
                 } else {
                     $(".design-sidebar_" + designId).removeClass("d-none");

@@ -231,14 +231,14 @@ Route::middleware('checkUserExist')->group(function () {
     Route::post('event/get_all_group_member_list', [ControllersEventController::class, 'getAllGroupMember']);
     Route::post('event/invite_user_by_group', [ControllersEventController::class, 'inviteByGroup']);
     Route::post('event/edit_event', [ControllersEventController::class, 'editEvent']);
-    Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
+    // Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
     Route::post('event/group_search_ajax', [ControllersEventController::class, 'groupSearchAjax']);
     Route::post('event/group_toggle_search', [ControllersEventController::class, 'group_toggle_search']);
     Route::post('event/delete_sessions', [ControllersEventController::class, 'delete_sessions']);
     Route::post('event/get_co_host_list', [ControllersEventController::class, 'get_co_host_list']);
     Route::post('event/get_gift_registry', [ControllersEventController::class, 'get_gift_registry']);
     Route::post('event/get_thank_you_card', [ControllersEventController::class, 'get_thank_you_card']);
-    Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
+    // Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
     Route::post('event/getSliderImage', [ControllersEventController::class, 'getSliderImage']);
     Route::post('event/delete_slider_img', [ControllersEventController::class, 'deleteSliderImg']);
 
@@ -362,6 +362,8 @@ Route::get('events/{id?}',  [ControllersEventController::class, 'index'])->name(
 Route::get('/check-login', function (Request $request) {
     return response()->json(['is_logged_in' => Auth::guard('web')->check()]);
 });
+Route::post('event/close_tip', [ControllersEventController::class, 'closeTip']);
+Route::post('event/save_slider_img', [ControllersEventController::class, 'saveSliderImg']);
 Route::post('event/store_temp_design', [ControllersEventController::class, 'saveTempDesign']);
 Route::post('event/get_design_edit_page', [ControllersEventController::class, 'get_design_edit_page']);
 Route::post('event/get_login_page', [ControllersEventController::class, 'get_login_page']);
