@@ -14579,24 +14579,49 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
 
-        try {
-            $search=$input['search'];
-            $results = TextData::where('tags', 'LIKE', "%$search%")->get(['tags']);
+        $search=$input['search'];
+
+        // try {
+        //     $search=$input['search'];
+        //     $results = TextData::where('tags', 'LIKE', "%$search%")->get(['tags']);
     
-            $matchingTags = [];
+        //     $matchingTags = [];
         
-            foreach ($results as $row) {
-                $tagsArray = explode(',', $row->tags);
-                foreach ($tagsArray as $tag) {
-                    $tag = trim($tag);
-                    if (stripos($tag, $search) !== false) {
-                        $matchingTags[] = $tag;
-                    }
-                }
-            }
+        //     foreach ($results as $row) {
+        //         $tagsArray = explode(',', $row->tags);
+        //         foreach ($tagsArray as $tag) {
+        //             $tag = trim($tag);
+        //             if (stripos($tag, $search) !== false) {
+        //                 $matchingTags[] = $tag;
+        //             }
+        //         }
+        //     }
+
+            
     
-        return response()->json(['status' => 0, 'data' => array_values(array_unique($matchingTags))]);
-           
+        try {
+            $get_data = TextData::where('tags', 'LIKE', "%$search%")->where('static_information', '!=', '')->get();
+            $templates = [];
+
+            if ($get_data->isNotEmpty()) {
+
+                foreach ($get_data as $data) {
+                    $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['event_type_id'] = (isset($data->event_type_id) && $data->event_type_id != null) ? $data->event_type_id : '';
+                    $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
+                    $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    $url = asset('assets/canvas/' . $data->image);
+                    $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
+                    $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
+                    $templates[] = $template_data;
+                }
+
+
+                return response()->json(data: ['status' => 1, 'message' => "Template List", 'data' => $templates]);
+            } else {
+                return response()->json(data: ['status' => 1, 'message' => "No Data Found"]);
+            }
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
