@@ -9068,6 +9068,9 @@ $(document).on("click", ".save-slider-image", function () {
                     return;
                 }
                 var savedImages = response.images;
+                if ($("#isUserLoggedIn").val() === "0") {
+                    localStorage.setItem("save-slider-image", JSON.stringify(savedImages));
+                }
                 eventData.slider_images = savedImages;
                 console.log(eventData);
                 $("#loader").css("display", "none");
