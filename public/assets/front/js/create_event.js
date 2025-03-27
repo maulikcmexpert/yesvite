@@ -10275,10 +10275,10 @@ $(".create_event_login_btn").on("click", function (e) {
         },
         data: formData,
         dataType: "json",
-        beforeSend: function () {
-            $("#loginUser").prop("disabled", true).text("Signing In...");
-            $("#loader").css("display", "flex");
-        },
+        // beforeSend: function () {
+        //     $("#loginUser").prop("disabled", true).text("Signing In...");
+        //     $("#loader").css("display", "flex");
+        // },
         success: async function (response) {
             if (response.success) {
                 await handleLoginSuccess(response);
