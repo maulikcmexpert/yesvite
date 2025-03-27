@@ -334,16 +334,17 @@
 }
 
 #templateForm .bootstrap-tagsinput .label-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium );
     padding: 2px 8px;
     border-radius: 6px;
     background-color: var(--ck-color-base-border);
     color: #000000;
-    margin-bottom: 2px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 5px;
+    
 }
 
 
@@ -386,7 +387,7 @@
     border-radius: 6px;
     background-color: var(--ck-color-base-border);
     color: #000000;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 
