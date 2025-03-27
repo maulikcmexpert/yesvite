@@ -14595,7 +14595,7 @@ class ApiControllerv2 extends Controller
                 }
             }
     
-        return response()->json(['status' => 0, 'message' => array_values(array_unique($matchingTags))]);
+        return response()->json(['status' => 0, 'data' => array_values(array_unique($matchingTags))]);
            
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
