@@ -971,6 +971,8 @@ $(document).ready(function () {
         const eventPostId = button.data("event-post-id");
 
         bulkSelectActive = true;
+        $('.selected_bulk_image').css('display','flex');
+        $('.set_emoji_like').css('display','none');
         console.log("Bulk Select Mode Active:", bulkSelectActive);
         toggleBulkSelectWrapper(); // Update bulk selection UI
 
