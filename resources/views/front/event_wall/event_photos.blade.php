@@ -188,7 +188,7 @@
                                                                 </p>
                                                             </div>
                                                         </div>
-                                                        <div class="photo-card-head-right set_emoji_like">
+                                                        <div class="photo-card-head-right set_emoji_like d-none">
                                                             <button class="posts-card-like-btn like-btn"
                                                                 id="likeButton_{{ $photo['id'] }}"
                                                                 data-event-id="{{ $event }}"
