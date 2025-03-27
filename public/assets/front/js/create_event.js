@@ -4026,8 +4026,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
             eventData.events_schedule = "1";
         }
         console.log(eventData);
-        if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
-            eventData.temp_id=restoredTempId;
+        if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+            eventData.temp_id = restoredTempId;
         }
         $.ajax({
             url: base_url + "event/store",
@@ -4073,8 +4073,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
             }
         }
         eventData.temp_id = temp_id;
-        if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
-            eventData.temp_id=restoredTempId;
+        if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+            eventData.temp_id = restoredTempId;
         }
         eventData.step = final_step;
         eventData.isdraft = "1";
@@ -7122,8 +7122,8 @@ $(document).on("click", ".final_create_event", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-    if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
-        eventData.temp_id=restoredTempId;
+    if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+        eventData.temp_id = restoredTempId;
     }
     $.ajax({
         url: base_url + "event/store",
@@ -7134,7 +7134,7 @@ $(document).on("click", ".final_create_event", function (e) {
         data: data,
         success: function (response) {
 
-    localStorage.removeItem("storedTempId");
+            localStorage.removeItem("storedTempId");
             if (response.status == 401 && response.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
                 return;
