@@ -147,8 +147,6 @@ class TemplateController extends Controller
             DB::beginTransaction();
             $imageName = null;
             $filledImage = null;
-            $tags = $request->input('tags');  // "test,value,bulk"
-            dd($tags);
             $i = 0;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -170,7 +168,7 @@ class TemplateController extends Controller
             $textData->filled_image = $filledImage;
             $textData->event_design_category_id = $request->event_design_category_id;
             $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
-            $textData->tags = $request->tags;
+            $textData->tags = $request->input('tags');
             $textData->save();
             DB::commit();
 
