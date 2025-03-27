@@ -2003,6 +2003,8 @@ class EventWallController extends BaseController
     public function createPoll(Request $request)
     {
 
+        $video = 0;
+        $image = 0;
         // Validate the request
         $request->validate([
             'question' => 'required|string|max:255',
@@ -2085,6 +2087,19 @@ class EventWallController extends BaseController
             $pollOption->option = $value;
             $pollOption->save();
         }
+
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request->event_id,
+            'post_id' => $creatEventPost->id,
+            'is_in_photo_moudle' => 0,
+            'post_type' => $request->post_type,
+            'post_privacy' => $request->post_privacys,
+            'video' => $video,
+            'image' => $image
+        ];
+
+        sendNotification('upload_post', $notificationParam);
 
         return redirect()->back()->with('msg', $msg);
     }
