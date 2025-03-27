@@ -14571,6 +14571,7 @@ class ApiControllerv2 extends Controller
     }
 
     public function searchTags(Request $request){
+        dd(1);
         $input = $request->getContent();
 
         $input = json_decode($input, true);
@@ -14579,6 +14580,24 @@ class ApiControllerv2 extends Controller
         }
 
         try {
+            $search=$input['search'];
+
+            $results = TextData::whereRaw("FIND_IN_SET(?, tags)", [$search])
+            ->get(['tags']);
+    
+            $matchingTags = [];
+        
+            foreach ($results as $row) {
+                $tagsArray = explode(',', $row->tags);
+                foreach ($tagsArray as $tag) {
+                    $tag = trim($tag);
+                    if (stripos($tag, $search) !== false) {
+                        $matchingTags[] = $tag;
+                    }
+                }
+            }
+    
+        return response()->json(['status' => 0, 'message' => array_values(array_unique($matchingTags))]);
            
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
