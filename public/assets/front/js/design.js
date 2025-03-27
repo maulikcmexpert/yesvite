@@ -1,6 +1,18 @@
-var dbJson = $("#static_information").val() || null;
+// ============vrushali=============
+var storedData = localStorage.getItem("storedTextData");
+var parsedData = storedData ? JSON.parse(storedData) : null; // Safe parsing
+
+var dbJson = $("#static_information").val() || parsedData || null;
 var temp_id = null;
-var image = $("#design_image").val() || null;
+var image = $("#design_image").val() || localStorage.getItem("image") || null;
+console.log(image)
+console.log(localStorage.getItem("image"))
+// ✅ Remove local storage data after setting values in variables
+setTimeout(function(){
+    localStorage.removeItem("image");
+    localStorage.removeItem("storedTextData");
+},5000)
+
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
@@ -13,7 +25,7 @@ var current_shape;
 let undoStack = [];
 let redoStack = [];
 let event_id = null;
-
+// ==
 // Original static size
 const originalWidth = 345;
 const originalHeight = 490;

@@ -1,8 +1,8 @@
-
+{{-- //////vrushali///// --}}
 @php
-    //    $start_time_zone = $getLastTimeZone->rsvp_start_timezone ?? '';
-    //    dd($start_time_zone);
+ if (Auth::guard('web')->check()) {
     $userS = Auth::guard('web')->user();
+
     $isCopyNew = $eventDetail['isCopy'];
 
     // Get the authenticated user
@@ -12,6 +12,7 @@
 
     // This will set the font color class based on the first initial of the user
     $fontColorUser = 'fontcolor' . $firstInitialUser;
+ }
 @endphp
 <header class="login-header new_event_detail_header">
     <div class="container-fluid">
@@ -315,7 +316,10 @@
         </nav>
     </div>
 </header>
-
+{{-- ///vrushali= --}}
+<div class="new_login" style="display: none">
+    @include('front.event.newLogin')
+</div>
 <main class="main-content-wrp">
     <div class="main-content-sidebar">
         <div class="new-event-sidebar-wrp">
@@ -476,7 +480,7 @@
                     <span class="coin-invite-wrp-inner">
                         {{-- {{$setPrice[0]['coins']}}  |  --}}
 
-                      <span class="green-price">Buy Credits 
+                      <span class="green-price">Buy Credits
                         {{-- ${{$setPrice[0]['price']}} --}}
                     </span><i class="fa-solid fa-chevron-right"></i>
                     </span>
@@ -630,7 +634,7 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" id="isUserLoggedIn" value="{{ auth()->check() ? '1' : '0' }}">
 
 <div id="sidebar_allow_limit" class="sidebar setting-side-wrp">
     <div class="sidebar-content setting-sidebar">
@@ -2793,6 +2797,8 @@
     </div>
 </div>
 
+{{-- ////vrushali////////// --}}
+@if (Auth::guard('web')->check())
 
 <div id="sidebar_groups" class="sidebar setting-side-wrp new-sidebar-group-wrp">
 
@@ -3322,6 +3328,10 @@
 
 
 
+@endif
+
+
+<input type="hidden" id="isCohost" value="">
 
 
 {{-- <!-- Latest compiled JavaScript -->
