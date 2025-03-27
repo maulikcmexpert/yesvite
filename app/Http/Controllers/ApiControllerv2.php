@@ -14613,7 +14613,6 @@ class ApiControllerv2 extends Controller
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $url = asset('assets/canvas/' . $data->image);
                     $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
-                    $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $templates[] = $template_data;
                 }
 
