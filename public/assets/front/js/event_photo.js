@@ -986,6 +986,12 @@ $(document).ready(function () {
         $('.set_emoji_like').css('display','none');
 
         console.log("Bulk Select Mode Active:", bulkSelectActive);
+
+        const closestCheckbox = $(this).closest(".photo-card-head").find(".selected_bulk_image");
+        if (closestCheckbox.length) {
+            closestCheckbox.prop("checked", true).trigger("change");
+        }
+        
         toggleBulkSelectWrapper(); // Update bulk selection UI
 
     });
