@@ -1,6 +1,6 @@
 // ============vrushali=============
 var storedData = localStorage.getItem("storedTextData");
-var parsedData = storedData ? JSON.parse(storedData) : null; // Safe parsing
+var parsedData = storedData ? JSON.parse(storedData) : null;
 
 var dbJson = $("#static_information").val() || parsedData || null;
 var temp_id = null;

@@ -72,7 +72,7 @@
                                 <h6>Each new account gets 30 free credits</h6>
                                 <h6>1 Credit = 1 invite</h6>
                             </div>
-                            <form method="POST" id="crateEventLogin" action="{{ route('auth.checkLogin') }}"
+                            <form method="POST" id="crateEventLogin"  action="{{ route('auth.checkLogin') }}"
                                 autocomplete="off">
                                 @csrf
                                 <input type="hidden" name="is_login" value="false">
@@ -860,9 +860,104 @@
                                 </ul>
 
                             </form>
+
+                            <form method="POST"  class="d-none"action="{{route('store.register')}}" id="register" autocomplete="off">
+                                @csrf
+                                <input type="hidden" id="account_type" name="account_type" value="0">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="input-form">
+                                            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}">
+                                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                            <div class="label-error">
+                                                <label id="firstname-error" class="error" for="firstname" style="color: red;"></label>
+                                                @error('firstname')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="input-form">
+                                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname')}}">
+                                            <label for="lastname" class="floating-label">Last Name <span>*</span></label>
+                                            <div class="label-error">
+                                                <label id="lastname-error" class="error" for="lastname" style="color: red;"></label>
+                                                @error('lastname')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="input-form">
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" autocomplete="off">
+                                            <label for="email" class="floating-label">Email Address <span>*</span></label>
+
+                                            <div class="label-error">
+                                                <label id="email-error" class="error" for="email" style="color: red;"></label>
+                                                @error('email')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="input-form">
+                                            <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                            <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
+                                            <div class="label-error">
+                                                <label id="zip_code-error" class="error" for="zip_code" style="color: red;"></label>
+                                                @error('zip_code')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="input-form">
+                                            <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" autocomplete="new-password">
+                                            <label for="password" class="floating-label">Password <span>*</span></label>
+                                            <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                            <div class="label-error">
+                                                <label id="password-error" class="error" for="password" style="color: red;"></label>
+                                                @error('password')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="input-form mb-0">
+                                            <input type="password" class="form-control" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
+                                            <label for="password" class="floating-label">Confirm Password <span>*</span></label>
+                                            <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                            <div class="label-error">
+                                                <label id="cpassword-error" class="error" for="cpassword" style="color: red;"></label>
+                                                @error('cpassword')
+                                                <label class="error">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="text-start mt-1" id="passValidation">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
+                                        <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                        <script src="https://www.google.com/recaptcha/api.js"></script>
+
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-primary loaderbtn" id="createUser">Create account</button>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="new-create-account-form-foot">
-                                <p>Already in Yesvite? <a href="">Sign in</a></p>
-                                <p>By signing up you agree to Yesvite's <span><a href="">Terms & Conditions </a>
+
+                                <p>Already in Yesvite? <a href="#" id="login_event">Sign in</a></p>
+                                <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
                                         and <a href=""> Privacy Policy</a></span></p>
                             </div>
                         </div>

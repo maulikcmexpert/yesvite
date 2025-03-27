@@ -10275,11 +10275,75 @@ $(".create_event_login_btn").on("click", function (e) {
         },
         data: formData,
         dataType: "json",
-        // beforeSend: function () {
-        //     $("#loginUser").prop("disabled", true).text("Signing In...");
-        //     $("#loader").css("display", "flex");
-        // },
+        beforeSend: function () {
+            $("#loginUser").prop("disabled", true).text("Signing In...");
+            $("#loader").css("display", "flex");
+            loaderTimeout = setTimeout(function () {
+                $("#loader").css("display", "none");
+                $("#loginUser").prop("disabled", false).text("Sign In");
+
+            }, 3000); // 2 minutes
+        },
         success: async function (response) {
+            clearTimeout(loaderTimeout);
+
+            if (response.success) {
+                await handleLoginSuccess(response);
+            } else {
+                $("#login_user").prop("disabled", false).text("Sign In");
+                $("#loader").css("display", "none");
+                toastr.error(response.message); // Show error message
+            }
+        },
+        error: function (xhr) {
+
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                if (errors.email) {
+                    $("#email-error").text(errors.email[0]);
+                }
+                if (errors.password) {
+                    $("#password-error").text(errors.password[0]);
+                }
+            } else {
+                toastr.error("Login failed! Please try again.");
+            }
+
+        },
+
+    });
+});
+$("#login_event").on("click", function (e) {
+    console.log($('#crateEventLogin').attr('action'));
+    let formData = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+        remember: $("input[name='remember']").prop("checked") ? 1 : 0,
+        is_login: false
+    };
+    $.ajax({
+        url: $('#crateEventLogin').attr('action'), // Get form action URL
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+        data: formData,
+        dataType: "json",
+        beforeSend: function () {
+            $("#loginUser").prop("disabled", true).text("Signing In...");
+            $("#loader").css("display", "flex");
+
+
+            loaderTimeout = setTimeout(function () {
+                $("#loader").css("display", "none");
+                $("#loginUser").prop("disabled", false).text("Sign In");
+                toastr.error("Request timeout! Please try again.");
+            }, 12000); // 2 minutes
+        },
+        success: async function (response) {
+            clearTimeout(loaderTimeout);
             if (response.success) {
                 await handleLoginSuccess(response);
             } else {
@@ -10306,7 +10370,6 @@ $(".create_event_login_btn").on("click", function (e) {
 
     });
 });
-
 async function handleLoginSuccess(response) {
     if (response.success) {
 
