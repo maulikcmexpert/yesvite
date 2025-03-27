@@ -3973,6 +3973,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
+
     if (design == undefined || design == "") {
         await saveDesignData(true);
         design = eventData.desgin_selected;
@@ -4013,7 +4014,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 return; // Exit if savePage3Data returns a stopping condition
             }
         }
-
+        eventData.temp_id = temp_id;
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
@@ -4065,7 +4066,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 return; // Exit if savePage3Data returns a stopping condition
             }
         }
-
+        eventData.temp_id = temp_id;
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();

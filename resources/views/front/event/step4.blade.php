@@ -37,23 +37,17 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        @php
-    $eventSetting = isset($eventDetail['event_setting'])
-        ? json_decode($eventDetail['event_setting'], true)
-        : [];
-@endphp
-                                                        <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox general_setting_checkbox" {{ isset($eventSetting['allow_for_1_more']) && $eventSetting['allow_for_1_more'] == "1" ? 'checked' : '' }}/>
+                                                        <input type="checkbox" id="allow_for_1_more" name="allow_for_1_more" onchange="savePage4Data()" value="1" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1")?'checked':''}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                               <a href="#" class="add-limit allow_limit_toggle"  style="{{ isset($eventSetting['allow_for_1_more']) && $eventSetting['allow_for_1_more'] == "1" ? '' : 'display:none' }}">
-                                Content here...
+                                        <a href="#" class="add-limit allow_limit_toggle"  style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1") ? "":"display:none"}}>
                                             <div class="d-flex align-items-center justify-content-between w-100 allow_for_limit_count" >
 
-                                                @if (isset($eventSetting['allow_for_1_more']) && $eventSetting['allow_for_1_more'] == "1" )
+                                                @if (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['allow_for_1_more']=="1")
                                                 <div class="d-flex align-items-center add_new_limit">
                                                     <span class="me-3">
                                                     </span>
@@ -101,7 +95,7 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox general_setting_checkbox" {{ isset($eventSetting['adult_only_party']) && $eventSetting['adult_only_party'] == "1" ? "checked" : "" }} />
+                                                        <input type="checkbox" id="only_adults" name="only_adults" value="1" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['adult_only_party']=="1") ? "checked":""}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -190,7 +184,7 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{ isset($eventSetting['thank_you_cards']) && $eventSetting['thank_you_cards'] == "1" ? "checked" : "" }} />
+                                                        <input type="checkbox" id="thankyou_message" name="thankyou_message" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1") ? "checked":""}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -198,9 +192,9 @@
                                             </div>
                                         </div>
 
-                                        <a href="#" class="add-limit thankyou_card thank_you_card_toggle"  style="{{ isset($eventSetting['thank_you_cards']) && $eventSetting['thank_you_cards'] == '1' ? '' : 'display:none' }}">
+                                        <a href="#" class="add-limit thankyou_card thank_you_card_toggle"  style={{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1") ? "":"display:none"}}>
                                             <div class="d-flex align-items-center justify-content-between w-100">
-                                                @if (isset($eventSetting['thank_you_cards']) && $eventSetting['thank_you_cards'] == "1" )
+                                                @if (isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['thank_you_cards']=="1")
                                                 <div class="d-flex align-items-center add_new_thankyou_card"><span class="me-3"></span>
                                                     <h5>{{$eventDetail['thankyou_card_count']}} Template available</h5></div>
                                                 @else
@@ -241,7 +235,7 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['add_co_host'])&&$eventDetail['add_co_host']=="1") ? "checked":""}} />
+                                                        <input type="checkbox" id="add_co_host" onchange="savePage4Data()" class="checkbox general_setting_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['add_co_host']=="1") ? "checked":""}} />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>

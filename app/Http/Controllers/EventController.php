@@ -950,6 +950,7 @@ class EventController extends BaseController
         }
 
         if ($request->temp_id != '' && $request->temp_id != null) {
+
             // dd($request->temp_id);
             $tempData = TextData::where('id', $request->temp_id)->first();
             if ($tempData) {
