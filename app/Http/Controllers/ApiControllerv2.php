@@ -14581,9 +14581,7 @@ class ApiControllerv2 extends Controller
 
         try {
             $search=$input['search'];
-
-            $results = TextData::whereRaw("FIND_IN_SET(?, tags)", [$search])
-            ->get(['tags']);
+            $results = TextData::where('tags', 'LIKE', "%$search%")->get(['tags']);
     
             $matchingTags = [];
         
