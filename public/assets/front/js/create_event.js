@@ -10285,7 +10285,7 @@ $(".create_event_login_btn").on("click", function (e) {
         },
         error: function (xhr) {
             $("#loginUser").prop("disabled", false).text("Sign In");
-
+            $("#loader").css("display", "flex");
 
         },
 
