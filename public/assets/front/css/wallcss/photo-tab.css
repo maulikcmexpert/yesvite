@@ -581,7 +581,7 @@
 
 
 
-.selected-bulk-btn{
+/* .selected-bulk-btn{
     width: 100%;
     max-width: 30px;
     height: 30px;
@@ -605,6 +605,31 @@
     background-color: transparent !important;
     border: none !important;
     box-shadow: none;
+} */
+
+.selected-bulk-btn{
+    width: 100%;
+    max-width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.selected-bulk-btn input {
+    margin: 0;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none;
+} 
+
+.selected-bulk-btn:has(input:checked){
+    background-color: var(--pink);
 }
 
 .phototab-add-new-btns-section{
