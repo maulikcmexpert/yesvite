@@ -14571,7 +14571,7 @@ class ApiControllerv2 extends Controller
     }
 
     public function searchTags(Request $request){
-        dd(1);
+        // dd(1);
         $input = $request->getContent();
 
         $input = json_decode($input, true);
