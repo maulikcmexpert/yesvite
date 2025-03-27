@@ -246,6 +246,7 @@ class TemplateController extends Controller
             // Update the template fields
             $template->event_design_category_id = $request->event_design_category_id;
             $template->event_design_sub_category_id = $request->event_design_sub_category_id;
+            $template->tags = $request->tags;
             $i = 0;
             // Handle image upload (if a new image is uploaded)
             if ($request->hasFile('image')) {
