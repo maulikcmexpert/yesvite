@@ -362,7 +362,7 @@
                                                             </div>
                                                         </div>
                                                         <button class="selected-bulk-btn " style="">
-                                                            <input class="form-check-input selected_bulk_image" type="checkbox" value="" id="flexCheckDefault" data-image-src="[&quot;https:\/\/yesvite.cmexpertiseinfotech.in\/storage\/post_image\/17430501411_17292115280.png&quot;]" data-event-post-id="993" data-user_id="1" data-event-id="537">
+                                                            <input class="form-check-input selected_bulk_image" type="checkbox" value="" id="flexCheckDefault">
                                                         </button>
 
                                                     </div>
