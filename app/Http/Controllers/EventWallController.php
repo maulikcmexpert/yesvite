@@ -1657,9 +1657,10 @@ class EventWallController extends BaseController
         $creatEventPost->post_type = $request->post_type;
         $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
-        $creatEventPost->is_in_photo_moudle = "0";
+        $creatEventPost->is_in_photo_moudle = "0";  
         $creatEventPost->save();
-
+        $video = 0;
+        $image = 0;
         // Handle images & videos
         if ($request->file('files')) {
             foreach ($request->file('files') as $key => $postImage) {
@@ -1669,6 +1670,11 @@ class EventWallController extends BaseController
                 $duration = ($checkIsimageOrVideo == 'video') ? getVideoDuration($postImage) : "";
                 $thumbName = ($checkIsimageOrVideo == 'video') ? generate_thumbnail($imageName) : "";
 
+                if ($checkIsimageOrVideo == 'video') {
+                    $video++;
+                } else {
+                    $image++;
+                }
                 // Save event post images
                 EventPostImage::create([
                     'event_id' => $request->event_id,
@@ -1681,9 +1687,18 @@ class EventWallController extends BaseController
             }
         }
 
-        // Handle poll post
-        // Handle poll post
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request->event_id,
+            'post_id' => $creatEventPost->id,
+            'is_in_photo_moudle' => $request->is_in_photo_moudle,
+            'post_type' => $request->post_type,
+            'post_privacy' => $request->post_privacy,
+            'video' => $video,
+            'image' => $image
+        ];
 
+        sendNotification('upload_post', $notificationParam);
 
 
         return redirect()->back()->with('msg', $msg);
