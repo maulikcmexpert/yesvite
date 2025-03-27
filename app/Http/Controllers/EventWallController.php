@@ -1691,14 +1691,14 @@ class EventWallController extends BaseController
             'sender_id' => $user->id,
             'event_id' => $request->event_id,
             'post_id' => $creatEventPost->id,
-            'is_in_photo_moudle' => '0',
+            'is_in_photo_moudle' => 0,
             'post_type' => $request->post_type,
             'post_privacy' => $request->post_privacys,
             'video' => $video,
             'image' => $image
         ];
 
-        // dd($notificationParam);
+        dd($notificationParam);
         sendNotification('upload_post', $notificationParam);
 
 
