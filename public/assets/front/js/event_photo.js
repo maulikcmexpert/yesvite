@@ -901,6 +901,10 @@ $(document).ready(function () {
         } else {
             bulkSelectWrapper.addClass("d-none"); // Hide bulk select wrapper
             bulkDeleteBtn.addClass("d-none"); // Hide bulk delete button
+
+
+            $('.selected-bulk-btn').css('display','none');
+            $('.set_emoji_like').css('display','block');
             deleteBtn.addClass("d-none"); // Hide delete button
             downloadBtn.addClass("d-none"); // Hide download button
             $('.add_new_photo_btn').removeClass('d-none'); // Show 'add new photo' button
