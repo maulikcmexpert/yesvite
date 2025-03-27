@@ -266,7 +266,7 @@
     height: 420px;
 }
 
-.selected-photo-btn{
+/* .selected-photo-btn{
     width: 100%;
     max-width: 30px;
     height: 30px;
@@ -289,7 +289,7 @@
     background-color: transparent !important;
     border: none !important;
     box-shadow: none;
-}
+} */
 
 .no-photos-screen-img{
     width: 100%;
