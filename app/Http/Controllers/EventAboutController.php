@@ -482,6 +482,7 @@ class EventAboutController extends BaseController
         $notificationParam = [
 
             'sender_id' => $user,
+            'sync_id' => "",
             'event_id' => $request->event_id,
             'rsvp_status' => $request->rsvp_status,
             'kids' => $request->kids,
