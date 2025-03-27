@@ -6847,13 +6847,21 @@ $(document).on("click", ".final_checkout", function () {
         eventData.desgin_selected +
         ""
     );
-    $("#eventTempImage").attr(
-        "src",
-        base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
-    );
+    let imageUrls = localStorage.getItem('final_upload_image');
+
+    if (imageUrls) {
+        eventData.desgin_selected = imageUrls;
+        localStorage.removeItem('final_upload_image'); // Remo
+        // If localStorage has an image, use it
+    }
+
+
+    if (eventData.desgin_selected) {
+        $("#eventTempImage").attr(
+            "src",
+            base_url + "public/storage/event_images/" + eventData.desgin_selected
+        );
+    }
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
