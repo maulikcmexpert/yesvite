@@ -3995,7 +3995,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
     let restoredTempId = localStorage.getItem("storedTempId");
-
+alert(storedTempId);
     temp_id = restoredTempId;
     eventData.temp_id = temp_id;
     eventData.step = final_step;
