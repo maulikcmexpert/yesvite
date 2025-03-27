@@ -3960,7 +3960,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     apiCalled = true;
 
     $(".dropdown-menu").removeClass("show");
-    var temp_id = eventData.temp_id;
+
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#deleteModal").modal("show");
@@ -3995,11 +3995,11 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
     let restoredTempId = localStorage.getItem("storedTempId");
-alert(storedTempId);
+
     temp_id = restoredTempId;
     eventData.temp_id = temp_id;
     eventData.step = final_step;
-    localStorage.removeItem("storedTempId");
+
     if (start_event_date != "") {
         // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
@@ -4104,6 +4104,7 @@ alert(storedTempId);
             },
         });
     }
+    localStorage.removeItem("storedTempId");
 });
 
 function focus_timeOut(type) {
