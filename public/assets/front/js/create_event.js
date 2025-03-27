@@ -6847,13 +6847,21 @@ $(document).on("click", ".final_checkout", function () {
         eventData.desgin_selected +
         ""
     );
-    $("#eventTempImage").attr(
-        "src",
-        base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
-    );
+    let imageUrls = localStorage.getItem('final_upload_image');
+
+    if (imageUrls) {
+        eventData.desgin_selected = imageUrls;
+        localStorage.removeItem('final_upload_image'); // Remo
+        // If localStorage has an image, use it
+    }
+
+
+    if (eventData.desgin_selected) {
+        $("#eventTempImage").attr(
+            "src",
+            base_url + "public/storage/event_images/" + eventData.desgin_selected
+        );
+    }
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
@@ -10272,12 +10280,27 @@ $(".create_event_login_btn").on("click", function (e) {
             $("#loader").css("display", "flex");
         },
         success: async function (response) {
-
-            await handleLoginSuccess(response);
+            if (response.success) {
+                await handleLoginSuccess(response);
+            } else {
+                $("#login_user").prop("disabled", false).text("Sign In");
+                $("#loader").css("display", "none");
+                toastr.error(response.message); // Show error message
+            }
         },
         error: function (xhr) {
-            $("#loginUser").prop("disabled", false).text("Sign In");
 
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                if (errors.email) {
+                    $("#email-error").text(errors.email[0]); // Show email error
+                }
+                if (errors.password) {
+                    $("#password-error").text(errors.password[0]); // Show password error
+                }
+            } else {
+                toastr.error("Login failed! Please try again.");
+            }
 
         },
 
