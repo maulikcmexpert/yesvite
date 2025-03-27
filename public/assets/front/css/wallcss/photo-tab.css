@@ -657,6 +657,7 @@
     max-width: 100% !important;
     border-radius: 10px !important;
     outline: none !important;
+    cursor: pointer;
 }
 
 .selected-bulk-btn input:focus {
@@ -667,6 +668,7 @@
 
 .selected-bulk-btn .form-check-input:checked[type="checkbox"] {
     background-size: 20px 20px;
+    cursor: pointer;
 }
 
 /* ===Responsive=== */
