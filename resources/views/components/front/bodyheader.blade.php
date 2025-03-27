@@ -174,7 +174,6 @@ $notification_list=getNotificationList();
               <div class="accordion notification_div" id="accordionExample">
               @php
                   $notification_list=getNotificationList();
-                  dd($notification_list);
                   $i=0;
               @endphp
               @foreach ($notification_list as $key=>$value)
