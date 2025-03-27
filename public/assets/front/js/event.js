@@ -1285,6 +1285,9 @@ $('#notification_rsvp_btn').on('click', function (e) {
     const selectedValue = $('input[name="rsvp_status"]:checked').val();
     const adults = $('#rsvp_notification_adult').val();
     const kids = $('#rsvp_notification_kids').val();
+
+    console.log(selectedValue);
+    
     if (selectedValue) {
        
     } else {
