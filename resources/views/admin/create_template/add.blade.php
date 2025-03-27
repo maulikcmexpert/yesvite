@@ -105,22 +105,8 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <div class="wrapper">
-                                <div class="title">
-                                  <img src="tag.svg" alt="icon">
-                                  <h2>Tags</h2>
-                                </div>
-                                <div class="content">
-                                  <p>Press enter or add a comma after each tag</p>
-                                  <ul><input type="text" name="tags" id="tags" spellcheck="false"></ul>
-                                </div>
-                                <div class="details">
-                                  <p><span>10</span> tags are remaining</p>
-                                  <button>Remove All</button>
-                                </div>
-                              </div>
-                            {{-- <textarea class="form-control" name="tags" placeholder="Enter Tags like: birthday,wedding,etc"></textarea>
-                            <span class="text-danger">{{ $errors->first('tags.*') }}</span> --}}
+                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" />
+                            <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 
                     </div>
