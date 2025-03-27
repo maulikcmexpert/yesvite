@@ -964,9 +964,24 @@
         // window.location.href = appStoreLink;
     }
 
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    //     if (/android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream) {
+    //         if (/android/i.test(userAgent)) {
+    //             openAppAndroid();
+    //         } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+    //             openAppIos();
+    //         }
+    //     }
+    // });
     document.addEventListener('DOMContentLoaded', () => {
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        if (/android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream) {
+        const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream;
+
+        // Additional check for desktop OS
+        const isDesktop = /windows|macintosh|linux|ubuntu/i.test(userAgent);
+
+        if (isMobile && !isDesktop) {
             if (/android/i.test(userAgent)) {
                 openAppAndroid();
             } else if (/iphone|ipad|ipod/i.test(userAgent)) {
