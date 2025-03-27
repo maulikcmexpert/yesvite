@@ -479,6 +479,22 @@ class EventAboutController extends BaseController
             }
         }
 
+        $notificationParam = [
+
+            'sender_id' => $user,
+            'event_id' => $request->event_id,
+            'rsvp_status' => $request->rsvp_status,
+            'kids' => $request->kids,
+            'adults' => $request->adults,
+            'rsvp_video' => "",
+            'rsvp_message' => $request->message_to_host,
+            'post_id' => "",
+            'rsvp_attempt' => $rsvp_attempt
+        ];
+
+        sendNotification('sent_rsvp', $notificationParam);
+
+
         return redirect()->back()->with('msg', 'RSVP updated successfully!');
     }
 }
