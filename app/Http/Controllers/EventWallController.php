@@ -2489,7 +2489,6 @@ class EventWallController extends BaseController
             return response()->json(['status' => 1, 'message' => "Post comment like by you", "self_reaction" => $request['reaction'], "count" => $totalCount]);
         } else {
 
-            dd(2);
             $checkcommentReaction = EventPostCommentReaction::where(['event_post_comment_id' => $request['event_post_comment_id'], 'user_id' => $user->id]);
 
             $checkcommentReaction->delete();
