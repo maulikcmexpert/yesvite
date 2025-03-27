@@ -1143,6 +1143,8 @@ class EventPhotoController extends BaseController
         $postReactions = getReaction($request['event_post_id']);
         $postReaction = [];
 
+        
+
         foreach ($postReactions as $reactionVal) {
             $reactionInfo = [
                 'id' => $reactionVal->id,
@@ -1156,6 +1158,16 @@ class EventPhotoController extends BaseController
 
             $postReaction[] = $reactionInfo;
         }
+
+        $eventModule = EventPost::where('id', $request['event_post_id'])->first();
+
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request['event_id'],
+            'post_id' => $request['event_post_id'],
+            'is_in_photo_moudle' => $eventModule->is_in_photo_moudle
+        ];
+        sendNotification('like_post', $notificationParam);
 
         return response()->json([
             'status' => 1,
@@ -1460,13 +1472,13 @@ class EventPhotoController extends BaseController
         //     }
         // }
 
-        $notificationParam = [
-            'sender_id' => $user->id,
-            'event_id' => $request['event_id'],
-            'post_id' => $request['event_post_id'],
-            'comment_id' => $event_post_comment->id
-        ];
-        sendNotification('reply_on_comment_post', $notificationParam);
+        // $notificationParam = [
+        //     'sender_id' => $user->id,
+        //     'event_id' => $request['event_id'],
+        //     'post_id' => $request['event_post_id'],
+        //     'comment_id' => $event_post_comment->id
+        // ];
+        // sendNotification('reply_on_comment_post', $notificationParam);
 
         return response()->json(['success' => true, 'total_comments' => 0, 'data' => $postCommentList, 'message' => "Post comment replied by you"]);
     }

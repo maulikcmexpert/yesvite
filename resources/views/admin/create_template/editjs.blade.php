@@ -3216,4 +3216,21 @@
         canvas.renderAll();
         addIconsToTextbox(canvas.getActiveObject());
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const tagsInput = document.getElementById('tags');
+
+    tagsInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();  // Prevent form submission
+            const tagValue = tagsInput.value.trim();
+
+            if (tagValue) {
+                // Add the tag or handle the input logic here
+                console.log('Tag added:', tagValue);
+                tagsInput.value = '';  // Clear the input after adding the tag
+            }
+        }
+    });
+});
 </script>
