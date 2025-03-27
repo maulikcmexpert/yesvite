@@ -10280,12 +10280,27 @@ $(".create_event_login_btn").on("click", function (e) {
             $("#loader").css("display", "flex");
         },
         success: async function (response) {
-
-            await handleLoginSuccess(response);
+            if (response.success) {
+                await handleLoginSuccess(response);
+            } else {
+                $("#login_user").prop("disabled", false).text("Sign In");
+                $("#loader").css("display", "none");
+                toastr.error(response.message); // Show error message
+            }
         },
         error: function (xhr) {
-            $("#loginUser").prop("disabled", false).text("Sign In");
-            $("#loader").css("display", "flex");
+
+            if (xhr.status === 422) {
+                let errors = xhr.responseJSON.errors;
+                if (errors.email) {
+                    $("#email-error").text(errors.email[0]); // Show email error
+                }
+                if (errors.password) {
+                    $("#password-error").text(errors.password[0]); // Show password error
+                }
+            } else {
+                toastr.error("Login failed! Please try again.");
+            }
 
         },
 
