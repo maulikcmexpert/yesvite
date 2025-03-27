@@ -1698,7 +1698,7 @@ class EventWallController extends BaseController
             'image' => $image
         ];
 
-        dd($notificationParam);
+        // dd($notificationParam);
         sendNotification('upload_post', $notificationParam);
 
 
