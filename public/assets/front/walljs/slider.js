@@ -7,10 +7,10 @@ var swiper = new Swiper(".mySwiper", {
           type: 'custom',
           renderCustom: (swiper, current, total) => `${current} of ${total}`,
     },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-  },
+  //   navigation: {
+  //     nextEl: ".swiper-button-next",
+  //     prevEl: ".swiper-button-prev",
+  // },
   });
 
 
