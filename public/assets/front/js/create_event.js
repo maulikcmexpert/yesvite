@@ -3994,7 +3994,12 @@ $(document).on("click", "#close_createEvent", async function (e) {
     // }
 
     // $('#loader').css('display','block');
+    let restoredTempId = localStorage.getItem("storedTempId");
 
+    temp_id = restoredTempId;
+    eventData.temp_id = temp_id;
+    eventData.step = final_step;
+    localStorage.removeItem("storedTempId");
     if (start_event_date != "") {
         // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
@@ -4014,12 +4019,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                 return; // Exit if savePage3Data returns a stopping condition
             }
         }
-        let restoredTempId = localStorage.getItem("storedTempId");
 
-        temp_id = restoredTempId;
-        eventData.temp_id = temp_id;
-        eventData.step = final_step;
-        localStorage.removeItem("storedTempId");
         eventData.isdraft = "1";
         savePage4Data();
         var schedule = $("#schedule").is(":checked");
