@@ -1345,9 +1345,9 @@ $('#notification_rsvp_btn').on('click', function (e) {
                 var modalElement = document.getElementById('pending-rsvp-modal');
                 var userId = $('#login_user_id').val();  // Get the user ID from hidden input
 
-                if (modalElement.classList.contains('show')) {
-                    localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());
-                }
+                // if (modalElement.classList.contains('show')) {
+                //     localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());
+                // }
                 window.location.reload();
                 $('#home_loader').css('display','none');
                 $('<div id="pageOverlay"></div>').css({
