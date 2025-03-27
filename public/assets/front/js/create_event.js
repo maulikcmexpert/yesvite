@@ -4026,7 +4026,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
             eventData.events_schedule = "1";
         }
         console.log(eventData);
-        eventData.temp_id=restoredTempId;
+        if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
+            eventData.temp_id=restoredTempId;
+        }
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -4035,6 +4037,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                localStorage.removeItem("storedTempId");
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -4070,6 +4073,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
             }
         }
         eventData.temp_id = temp_id;
+        if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
+            eventData.temp_id=restoredTempId;
+        }
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
@@ -4083,6 +4089,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
+                localStorage.removeItem("storedTempId");
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -4103,7 +4110,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
         });
     }
-    localStorage.removeItem("storedTempId");
+
 });
 
 function focus_timeOut(type) {
@@ -7102,6 +7109,9 @@ $(document).on("click", ".final_create_event", function (e) {
     savePage3Data(null, true);
     savePage4Data(null, true);
     // }
+
+    let restoredTempId = localStorage.getItem("storedTempId");
+
     // var imagePath = '';
 
     // $('#eventImage').attr('src',base_url+'public/storage/event_images/'+eventData.desgin_selected+'');
@@ -7112,7 +7122,9 @@ $(document).on("click", ".final_create_event", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-
+    if(restoredTempId && restoredTempId!="" && restoredTempId !=undefined){
+        eventData.temp_id=restoredTempId;
+    }
     $.ajax({
         url: base_url + "event/store",
         type: "POST",
@@ -7121,6 +7133,8 @@ $(document).on("click", ".final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
+
+    localStorage.removeItem("storedTempId");
             if (response.status == 401 && response.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
                 return;
