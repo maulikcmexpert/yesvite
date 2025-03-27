@@ -14607,7 +14607,8 @@ class ApiControllerv2 extends Controller
 
                 foreach ($get_data as $data) {
                     $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $template_data['event_type_id'] = (isset($data->event_type_id) && $data->event_type_id != null) ? $data->event_type_id : '';
+                    $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id != null) ? $data->event_design_sub_category_id : '';
+                    $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
                     $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
                     $template_data['height'] = (isset($data->id) && $data->id != null) ? $data->id : '';
                     $template_data['width'] = (isset($data->id) && $data->id != null) ? $data->id : '';
@@ -14617,7 +14618,7 @@ class ApiControllerv2 extends Controller
                 }
 
 
-                return response()->json(data: ['status' => 1, 'message' => "Template List", 'data' => $templates]);
+                return response()->json(data: ['status' => 1, 'message' => "Event Design Data", 'data' => $templates]);
             } else {
                 return response()->json(data: ['status' => 1, 'message' => "No Data Found"]);
             }
