@@ -337,7 +337,7 @@
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium );
     padding: 2px 8px;
-    border-radius: 15px;
+    border-radius: 6px;
     background-color: var(--ck-color-base-border);
     color: #000000;
     margin-bottom: 2px;
@@ -383,7 +383,7 @@
     font-size: 14px;
     font-family: var(--SFProDisplay-Medium );
     padding: 2px 8px;
-    border-radius: 15px;
+    border-radius: 6px;
     background-color: var(--ck-color-base-border);
     color: #000000;
     margin-bottom: 2px;
