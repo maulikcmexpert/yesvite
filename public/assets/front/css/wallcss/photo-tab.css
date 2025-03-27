@@ -659,6 +659,11 @@
     outline: none !important;
 }
 
+.selected-bulk-btn input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
 /* ===Responsive=== */
 
 /* @media only screen and (min-width: 1600px) and (min-height: 1700px) and (max-height: 1799px){
