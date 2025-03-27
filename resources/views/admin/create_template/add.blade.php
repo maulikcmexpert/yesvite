@@ -99,6 +99,17 @@
                         </div>
 
                     </div>
+
+                    <div class="col-lg-3 mb-3">
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tags</label>
+                            <textarea class="form-control" name="tags" placeholder="Enter Tags like: birthday,wedding,etc"></textarea>
+                            <span class="text-danger">{{ $errors->first('tags.*') }}</span>
+                        </div>
+
+                    </div>
                 </div>
 
 
