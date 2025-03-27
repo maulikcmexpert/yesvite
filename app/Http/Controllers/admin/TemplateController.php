@@ -168,6 +168,7 @@ class TemplateController extends Controller
             $textData->filled_image = $filledImage;
             $textData->event_design_category_id = $request->event_design_category_id;
             $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
+            $textData->tags = $request->tags;
             $textData->save();
             DB::commit();
 
