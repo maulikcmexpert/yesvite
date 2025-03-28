@@ -137,7 +137,7 @@ class EventController extends BaseController
     ///vrushali/////////
     public function index(Request $request)
     {
-
+        $title = 'Create Event';
         //   dd(Auth::guard('web')->check());
         if (Auth::guard('web')->check()) {
 
@@ -743,7 +743,7 @@ class EventController extends BaseController
                     ->get();
             }
         } else {
-            $title = 'Create Event';
+
             $js = ['design', 'create_event'];
             $page = 'front.create_event';
             $user = User::withCount(
