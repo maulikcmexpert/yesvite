@@ -3673,6 +3673,7 @@ class ApiControllerv2 extends Controller
 
     public function createEvent(Request $request)
     {
+        dd($request);
         //mail & notification send in store event image do not find in this function
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
@@ -4703,6 +4704,8 @@ class ApiControllerv2 extends Controller
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
+
+        $isRsvpEvent=$eventData['isRsvpEvent'];
 
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
