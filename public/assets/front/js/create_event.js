@@ -1,5 +1,6 @@
 
-let eventData = {};
+var eventData = {};
+
 // ===================vrushali=======
 if ($("#isUserLoggedIn").val() === "1") {
     let isCohost = $("#isCohost").val() || "";
@@ -3953,15 +3954,19 @@ $(document).on("click", "#close_createEvent", async function (e) {
     if (apiCalled == true) {
         return;
     }
+    console.log(10)
+
     apiCalled = true;
 
     $(".dropdown-menu").removeClass("show");
+
     var temp_id = eventData.temp_id;
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#deleteModal").modal("show");
         return;
     }
+    console.log(11)
 
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
@@ -3969,7 +3974,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var start_event_date = $("#start-event-date").val();
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
+    console.log(design);
+
     if (design == undefined || design == "") {
+        // alert(1);
         await saveDesignData(true);
         design = eventData.desgin_selected;
     }
@@ -3990,10 +3998,11 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     // $('#loader').css('display','block');
     /////vrushali////////////
-    let restoredTempId = localStorage.getItem("storedTempId");
+
 
 
     if (start_event_date != "") {
+        console.log("if");
         // if (event_name != "" && event_date != "") {
         // if (event_type != "" && event_name != "" && event_date != "") {
         let text = $(".current_step").text();
@@ -4033,7 +4042,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
-                localStorage.removeItem("storedTempId");
+
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -4042,7 +4051,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
                     console.log(eventData);
 
                     toastr.success("Event Saved as Draft");
-                    window.location.href = "home";
+                    // window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
@@ -4052,6 +4061,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
         });
     } else {
+        console.log("else");
+
         // eventData.step = "1";
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
@@ -4085,7 +4096,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             },
             data: eventData,
             success: function (response) {
-                localStorage.removeItem("storedTempId");
+
                 if (response.status == 401 && response.info == "logout") {
                     window.location.href = "/login"; // Redirect to home page
                     return;
@@ -4141,6 +4152,7 @@ $('input[type="text"],textarea').on("paste", function (e) {
 });
 
 function savePage1Data(close = null, direct = false) {
+    alert(1);
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
@@ -4169,7 +4181,7 @@ function savePage1Data(close = null, direct = false) {
 
     var events_schedule = "0";
     var rsvp_end_time_set = "0";
-
+    console.log(1)
     // if(rsvp_by_date_set){
     //     rsvp_by_date_set = '1';
     // }else{
@@ -4200,6 +4212,8 @@ function savePage1Data(close = null, direct = false) {
                 return;
             }
         }
+    console.log(2)
+
 
         if (schedule) {
             events_schedule = "1";
@@ -4238,6 +4252,7 @@ function savePage1Data(close = null, direct = false) {
         } else {
             rsvp_by_date_set = "0";
         }
+        console.log(4)
 
         if ($("#rsvp_by_date").is(":checked")) {
             rsvp_by_date = $("#rsvp-by-date").val();
@@ -4283,6 +4298,8 @@ function savePage1Data(close = null, direct = false) {
         } else {
             $("#event-host-error").css("display", "none");
         }
+    console.log(5)
+
         // if (event_date == "") {
         //     $("#event-date-error")
         //         .css("display", "block")
@@ -4357,6 +4374,8 @@ function savePage1Data(close = null, direct = false) {
             }
         }
     }
+    console.log(6)
+
     if (
         // event_type != "" &&
         event_name != "" &&
@@ -4375,6 +4394,8 @@ function savePage1Data(close = null, direct = false) {
         var start_time = $("#start-time").val();
         // Check if all fields are not empty
         if (event_name !== "" && start_event_date !== "" && start_time !== "") {
+    console.log(8)
+
             // When all fields are filled
             $(".guestBtn").css("color", "white"); // Set text color to black
             $("#guestBtn").removeClass("guestBtn");
@@ -4406,6 +4427,8 @@ function savePage1Data(close = null, direct = false) {
                 .css("color", "red");
             return;
         }
+    console.log(9)
+
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
         eventData.event_name = event_name;
@@ -4431,6 +4454,10 @@ function savePage1Data(close = null, direct = false) {
         eventData.events_schedule = events_schedule;
         eventData.longitude = longitude;
         eventData.latitude = latitude;
+
+        console.log("========================")
+        console.log({eventData})
+        console.log("========================")
         // activity: activities,
         // };
         // alert();
@@ -6847,14 +6874,13 @@ $(document).on("click", ".final_checkout", function () {
         eventData.desgin_selected +
         ""
     );
-    let imageUrls = localStorage.getItem('final_upload_image');
 
-    if (imageUrls) {
-        eventData.desgin_selected = imageUrls;
-        localStorage.removeItem('final_upload_image'); // Remo
-        // If localStorage has an image, use it
-    }
+    // let imageUrls = localStorage.getItem('final_upload_image');
+    // if (imageUrls) {
+    //     eventData.desgin_selected = imageUrls;
+    //     localStorage.removeItem('final_upload_image'); // Remo
 
+    // }
 
     if (eventData.desgin_selected) {
         $("#eventTempImage").attr(
@@ -7010,10 +7036,7 @@ $(document).on("click", ".final_create_event", function (e) {
     //     $(".step_final_checkout").show();
 
     // handleActiveClass(this);
-    let restoredTempId = localStorage.getItem("storedTempId");
-    if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
-        eventData.temp_id = restoredTempId;
-    }
+
     $.ajax({
         url: base_url + "event/store",
         type: "POST",
@@ -7022,7 +7045,7 @@ $(document).on("click", ".final_create_event", function (e) {
         },
         data: data,
         success: function (response) {
-            localStorage.removeItem("storedTempId");
+
             if (response.status == 401 && response.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
                 return;
@@ -9390,6 +9413,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
     // }
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
+
         await saveDesignData();
         design = eventData.desgin_selected;
     }
@@ -10462,12 +10486,50 @@ if ($('#isUserLoggedIn').val() == "1" && pageRefresh === "true") {
 
         $("#loader").css("display", "none");
         $(".step_1").show();
-        $(".step_2").hide();
         $(".new-event-sidebar-wrp").show();
 
 
+
+        final_step = final_step === 1 ? 2 : final_step;
+        eventData.step = final_step;
+
+        $("#myCustomModal, #exampleModal").modal("hide");
+        $(".main-content-wrp").removeClass("blurred");
+
+        $(".step_2, .step_3, .step_4, #edit-design-temp").hide();
+
+        active_responsive_dropdown("drop-down-event-detail");
+        handleActiveClass(".li_event_details");
+
+    $(".pick-card, .edit-design").addClass("menu-success");
+    var storedData = localStorage.getItem("storedTextData");
+    var parsedData = storedData ? JSON.parse(storedData) : null;
+
+    var dbJson = $("#static_information").val() || parsedData || null;
+    var image = $("#design_image").val() || localStorage.getItem("image") || null;
+
+    let imageUrls = localStorage.getItem('final_upload_image');
+    if (imageUrls) {
+        eventData.desgin_selected = imageUrls;
+
+        $("#eventImage, #eventTempImage").attr(
+            "src",
+            base_url + "public/storage/event_images/" + imageUrls
+        );
+        localStorage.removeItem('final_upload_image'); // Remo
+
+    }
+    let restoredTempId = localStorage.getItem("storedTempId");
+    if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
+        eventData.temp_id = restoredTempId;
+        localStorage.removeItem("storedTempId");
+    }
+
+    eventData.textData = dbJson;
+    localStorage.removeItem("image");
         // Remove refresh flag after applying changes
         localStorage.removeItem("pageRefresh");
+        localStorage.removeItem("storedTextData");
         localStorage.removeItem("uploadedImageUrl");
         // localStorage.removeItem('final_upload_image');
     }, 3000);

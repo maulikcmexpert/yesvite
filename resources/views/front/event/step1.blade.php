@@ -33,7 +33,7 @@
                         <div class="col-12 mb-4">
                             <div class="input-form">
                                 <input type="text" class="form-control inputText"
-                                    value="{{ isset($eventDetail['event_name']) && $eventDetail['event_name'] != null ? $eventDetail['event_name'] : '' }}"
+                                    value="{{ isset($eventDetail['event_name'])}}"
                                     id="event-name" name="event-name" oninput="clearError(this)" required="">
                                 <label for="event-name" class="form-label input-field floating-label">Event Name
                                     *</label>
@@ -42,16 +42,14 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="input-form">
-                               @if (Auth::guard('web')->check())
-                                <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
-                                    oninput="clearError(this)" required=""
-                                    value="{{ isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != null ? $eventDetail['hosted_by'] : $user->firstname . ' ' . $user->lastname }}">
-                                    @else
-
+                                @if (Auth::guard('web')->check())
                                     <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
-                                    oninput="clearError(this)" required=""
-                                    value="">
-                                    @endif
+                                        oninput="clearError(this)" required=""
+                                        value="{{ isset($eventDetail['hosted_by']) && $eventDetail['hosted_by'] != null ? $eventDetail['hosted_by'] : $user->firstname . ' ' . $user->lastname }}">
+                                @else
+                                    <input type="text" class="form-control inputText" id="hostedby" name="hostedby"
+                                        oninput="clearError(this)" required="" value="">
+                                @endif
                                 <label for="hostedby" class="form-label input-field floating-label">Hosted By
                                     *</label>
                             </div>

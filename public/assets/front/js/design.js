@@ -8,10 +8,7 @@ var image = $("#design_image").val() || localStorage.getItem("image") || null;
 console.log(image)
 console.log(localStorage.getItem("image"))
 // ✅ Remove local storage data after setting values in variables
-setTimeout(function(){
-    localStorage.removeItem("image");
-    localStorage.removeItem("storedTextData");
-},5000)
+
 
 var base_url = $("#base_url").text();
 var canvas;
