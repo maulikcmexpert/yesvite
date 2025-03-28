@@ -1254,7 +1254,7 @@
                             <div class="container">
                                 <div class="rsvp-footer-btn">
                                     <div class="d-flex align-items-center justify-content-center gap-3 w-100">
-                                        <h3>Event Has Passed2</h3>
+                                        <h3>Event Has Passed</h3>
                                         {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
                                         <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
                                     </div>
@@ -1304,7 +1304,7 @@
                                     <div class="container">
                                         <div class="rsvp-footer-btn">
                                             <div class="d-flex align-items-center justify-content-center gap-3 w-100">
-                                                <h3>Event Has Passed1</h3>
+                                                <h3>Event Has Passed</h3>
                                                 {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
                                                 <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
                                             </div>
