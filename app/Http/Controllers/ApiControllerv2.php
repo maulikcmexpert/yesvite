@@ -3682,8 +3682,8 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         } 
         
-        // $eventData['isRsvpEvent']=1;
-        $isRsvpEvent=1;
+        $isRsvpEvent='1';
+        // $isRsvpEvent=$eventData['isRsvpEvent'];
 
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
@@ -3868,7 +3868,7 @@ class ApiControllerv2 extends Controller
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
                         $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
-                        if($isRsvpEvent==1){
+                        if($isRsvpEvent=='1'){
                             $eventInvite->rsvp_status='1';
                             $eventInvite->read='1';
                             $eventInvite->rsvp_d='1';
