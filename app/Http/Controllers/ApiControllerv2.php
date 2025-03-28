@@ -3800,6 +3800,7 @@ class ApiControllerv2 extends Controller
             'longitude' => (!empty($eventData['longitude'])) ? $eventData['longitude'] : "",
             'start_date' => (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL,
             'end_date' => (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL,
+            'isRsvpEvent' => (!empty($eventData['isRsvpEvent'])) ? $eventData['isRsvpEvent'] : NULL,
             //'rsvp_by_date_set' => $eventData['rsvp_by_date_set'],
             'rsvp_by_date_set' => $rsvp_by_date_set,
             // 'rsvp_by_date' => (!empty($eventData['rsvp_by_date'])) ? $eventData['rsvp_by_date'] : NULL,
@@ -3843,7 +3844,7 @@ class ApiControllerv2 extends Controller
                     }
                     $alreadyselectedCohost =  collect($eventData['co_host_list'])->pluck('id')->toArray();
                     // if (!in_array($value['id'], $alreadyselectedCohost)) {
-                 
+                   
                     if($isRsvpEvent=='1'){
                         EventInvitedUser::create([
                             'event_id' => $eventId,
@@ -4832,6 +4833,7 @@ class ApiControllerv2 extends Controller
                 $updateEvent->rsvp_start_timezone = (!empty($eventData['rsvp_start_timezone'])) ? $eventData['rsvp_start_timezone'] : "";
                 $updateEvent->greeting_card_id = $greeting_card_id;
                 $updateEvent->gift_registry_id = $gift_registry_id;
+                $updateEvent->isRsvpEvent = $eventData['isRsvpEvent'];
                 $updateEvent->rsvp_end_time_set = (!empty($eventData['rsvp_end_time_set'])) ? $eventData['rsvp_end_time_set'] : "0";
                 $updateEvent->rsvp_end_time = $eventData['rsvp_end_time'];;
                 $updateEvent->rsvp_end_timezone = ($eventData['rsvp_end_time_set'] == '1') ? $eventData['rsvp_end_timezone'] : "";
@@ -4872,11 +4874,28 @@ class ApiControllerv2 extends Controller
                                 continue;
                             }
                             // if (!in_array($value['id'], $alreadyselectedasCoHost)) {
-                            EventInvitedUser::create([
-                                'event_id' => $eventData['event_id'],
-                                'prefer_by' => $value['prefer_by'],
-                                'user_id' => $value['id']
-                            ]);
+                            // EventInvitedUser::create([
+                            //     'event_id' => $eventData['event_id'],
+                            //     'prefer_by' => $value['prefer_by'],
+                            //     'user_id' => $value['id']
+                            // ]);
+                            if($isRsvpEvent=='1'){
+                                EventInvitedUser::create([
+                                    'event_id' => $eventData['event_id'],
+                                    'prefer_by' => $value['prefer_by'],
+                                    'user_id' => $value['id'],
+                                    'rsvp_status' => '1',
+                                    'read' => '1',
+                                    'rsvp_d' =>'1',
+                                    'adults' => 1,
+                                ]);
+                            }else{
+                                EventInvitedUser::create([
+                                    'event_id' => $eventData['event_id'],
+                                    'prefer_by' => $value['prefer_by'],
+                                    'user_id' => $value['id']
+                                ]);
+                            }
                             // }
                         }
                         $userSelectedGuest =  collect($eventData['invited_user_id'])->pluck('id')->toArray();
@@ -4932,6 +4951,12 @@ class ApiControllerv2 extends Controller
                                     $eventInvite->event_id = $eventData['event_id'];
                                     $eventInvite->sync_id = $checkUserExist->id;
                                     $eventInvite->user_id = $newUserId;
+                                    if($isRsvpEvent=='1'){
+                                        $eventInvite->rsvp_status='1';
+                                        $eventInvite->read='1';
+                                        $eventInvite->rsvp_d='1';
+                                        $eventInvite->adults=1;
+                                    }
                                     $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
                                     $eventInvite->save();
                                 }
