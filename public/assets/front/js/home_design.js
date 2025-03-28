@@ -125,104 +125,39 @@ $(document).ready(function () {
         $('#filtered_results').show();
         let results = '';
 
-        // if (query.length > 0) {
-        //     designData.forEach(category => {
-        //         if (category.name.toLowerCase().includes(query)) {
-        //             results +=
-        //                 `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
-        //         }
-        //         // Check if no subcategory matched and add "No Data Found"
-
-        //         category.subcategories.forEach(subcategory => {
-        //             if (subcategory.name.toLowerCase().includes(query)) {
-        //                 results +=
-        //                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-        //             }
-        //             // Check if no subcategory matched and add "No Data Found"
-
-
-        //         });
-        //     });
-        //     if (results === '') {
-        //         results +=
-        //             `<div class="search-item no-data">No Data Found</div>`;
-        //     }
-        //     $('#filtered_results').html(results);
-        // } else {
-        //     // When search is cleared, restore the default 30 images
-        //     $('#filtered_results').html('');
-        //     $('#filtered_results').hide();
-        //     $('input[name="design_subcategory"]').prop('checked', false);
-
-        //     $('.total_design_count').text($('.default_show:visible').length + ' Items');
-        // }
-
-        //byprakash
         if (query.length > 0) {
-            let results = '';
-        
             designData.forEach(category => {
-                const categoryTags = category.tags || [];
-                let categoryMatched = false;
-                let subcategoryResults = '';
-        
-                // Check if category tags or name match
-                if (
-                    category.name.toLowerCase().includes(query) || 
-                    categoryTags.some(tag => tag.toLowerCase().includes(query))
-                ) {
-                    categoryMatched = true;
+                if (category.name.toLowerCase().includes(query)) {
+                    results +=
+                        `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                 }
-        
-                // Check subcategories
+                // Check if no subcategory matched and add "No Data Found"
+
                 category.subcategories.forEach(subcategory => {
-                    const subTags = subcategory.tags || [];
-        
-                    if (
-                        subcategory.name.toLowerCase().includes(query) || 
-                        subTags.some(tag => tag.toLowerCase().includes(query))
-                    ) {
-                        categoryMatched = true;  // Mark category as matched if any subcategory matches
-                        subcategoryResults += `
-                            <div class="search-item subcategory" 
-                                 data-id="${subcategory.id}" 
-                                 data-category-id="${category.id}" 
-                                 data-name="${subcategory.name}" 
-                                 data-tags="${subTags.join(',')}">
-                                 ${subcategory.name}
-                            </div>`;
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results +=
+                            `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                     }
+                    // Check if no subcategory matched and add "No Data Found"
+
+
                 });
-        
-                // Display the category if it or any of its subcategories match
-                if (categoryMatched) {
-                    results += `
-                        <div class="search-item category"  
-                             data-category-id="${category.id}"  
-                             data-name="${category.name}" 
-                             data-tags="${categoryTags.join(',')}">
-                             <strong>Category:</strong> ${category.name}
-                        </div>
-                        ${subcategoryResults}`;
-                }
             });
-        
-            // Display "No Data Found" if no results
             if (results === '') {
-                results = `<div class="search-item no-data">No Data Found</div>`;
+                results +=
+                    `<div class="search-item no-data">No Data Found</div>`;
             }
-        
             $('#filtered_results').html(results);
-        
         } else {
-            // Restore default images on empty query
+            // When search is cleared, restore the default 30 images
             $('#filtered_results').html('');
             $('#filtered_results').hide();
             $('input[name="design_subcategory"]').prop('checked', false);
+
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
-        
 
+        //byprakash
         //byprakash
     });
 
