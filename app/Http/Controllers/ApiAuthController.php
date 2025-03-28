@@ -761,7 +761,7 @@ class ApiAuthController extends Controller
                     $checkContactSync->save();
     
                     EventInvitedUser::where('sync_id', $checkContactSync->id)
-                    ->update(['user_id' => $verifyUser->id]);
+                    ->update(['user_id' => $verifyUser->id,'sync_id'=>null]);
     
                     EventPost::where('sync_id',$checkContactSync->id)
                     ->update(['user_id'=>$verifyUser->id]);

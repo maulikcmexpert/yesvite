@@ -1231,7 +1231,13 @@
                 </section>
             @if($is_host=="")    
                 @if($rsvp_status==null || $rsvp_status=="")
-                        @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A')))
+                @php
+                    // Combine date and time into a single timestamp
+                    $eventDateTime = strtotime($eventInfo['guest_view']['event_date'] . ' ' . $eventInfo['guest_view']['event_time']);
+                    $currentDateTime = strtotime(date('Y-m-d g:i A'));
+                @endphp
+                        {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
+                        @if($eventDateTime >= $currentDateTime)
                             <div class="rsvp-footer-btn-wrp">
                                 <div class="container">
                                     <div class="rsvp-footer-btn">
@@ -1275,7 +1281,13 @@
                                 </div>
                             </div>
                             {{-- @if($eventInfo['guest_view']['event_date']>= date('Y-m-d')) --}}
-                            @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A')))
+                            @php
+                            // Combine date and time into a single timestamp
+                            $eventDateTime = strtotime($eventInfo['guest_view']['event_date'] . ' ' . $eventInfo['guest_view']['event_time']);
+                            $currentDateTime = strtotime(date('Y-m-d g:i A'));
+                        @endphp
+                                {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
+                                @if($eventDateTime >= $currentDateTime)
                                 <div class="rsvp-footer-btn-wrp">
                                     <div class="container">
                                         <div class="rsvp-footer-btn">

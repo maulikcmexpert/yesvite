@@ -41,328 +41,328 @@ $i++;
     
         <div class="accordion-body">
           @if($inner_data['notification_type']=="invite")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                  @php
-                  $f = isset($inner_data['first_name']) && !empty($inner_data['first_name'])
-                      ? strtoupper($inner_data['first_name'][0])
-                      : '';
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+                @php
+                $f = isset($inner_data['first_name']) && !empty($inner_data['first_name'])
+                    ? strtoupper($inner_data['first_name'][0])
+                    : '';
 
-                  $l = isset($inner_data['last_name']) && !empty($inner_data['last_name'])
-                      ? strtoupper($inner_data['last_name'][0])
-                      : '';
+                $l = isset($inner_data['last_name']) && !empty($inner_data['last_name'])
+                     ? strtoupper($inner_data['last_name'][0])
+                    : '';
 
-                  $initials = $f . $l;
+                $initials = $f . $l;
 
-                  $fontColor = !empty($f) ? "fontcolor" . $f : 'defaultFontColor';
-                  $userProfile = "<h5 class='" . $fontColor . "'>" . $initials . "</h5>";
+                $fontColor = !empty($f) ? "fontcolor" . $f : 'defaultFontColor';
+                $userProfile = "<h5 class='" . $fontColor . "'>" . $initials . "</h5>";
+            @endphp
+
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+              <span class="active-dot"></span>
+
+             @else
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+            </div>
+            <div class="notification-drodown-body-inner-content">
+              <div>
+
+              @if($inner_data['co_host_notification']=="1")
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  <span>You have been made a co-host for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}" style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
+               @else
+                <h3>
+                    {{-- {{$inner_data['notification_message']}} --}}
+                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                    <span> has invited you to <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"  style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                  </h3>
+               @endif
+
+                <div>
+                  <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                  @if($inner_data['read']=="0")
+                      <h6 class="notification-read-dot mt-1 text-right"></h6>
+                  @endif
+                </div>
+
+
+              </div>
+                @if($inner_data['co_host_notification']!="1")
+                  <div>
+                      <button class="notification-rsvp-btn" data-rsvp="{{$inner_data['rsvp_status']}}" data-rsvp_adults={{$inner_data['rsvp_adults']}} data-rsvp_kids={{$inner_data['rsvp_kids']}} type="button" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
+                  </div>
+                @endif
+             <div>
+                <!-- <p>{{$inner_data['event_name']}}</p>
+                  @if($inner_data['read']=="0")
+                    <h6 class="notification-read-dot"></h6>
+                  @endif -->
+              </div>
+              {{--  <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
+            </div>
+          </div>
+    @elseif($inner_data['notification_type']=="update_event")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
               @endphp
-
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+              <span class="active-dot"></span>
 
               @else
-                {!! $userProfile !!}
-              <span class="active-dot"></span>
-              @endif
-              </div>
-              <div class="notification-drodown-body-inner-content">
-                <div>
-
-                @if($inner_data['co_host_notification']=="1")
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    <span>You have been made a co-host for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}" style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
-                @else
-                  <h3>
-                      {{-- {{$inner_data['notification_message']}} --}}
-                      {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                      <span> has invited you to <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"  style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                    </h3>
-                @endif
-
-                  <div>
-                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                    @if($inner_data['read']=="0")
-                        <h6 class="notification-read-dot mt-1 text-right"></h6>
-                    @endif
-                  </div>
-
-
-                </div>
-                  @if($inner_data['co_host_notification']!="1")
-                    <div>
-                        <button class="notification-rsvp-btn" type="button" data-bs-toggle="modal" data-bs-target="#rsvp_by_notification" data-profile="{{$inner_data['profile']}}" data-firstname="{{$inner_data['first_name']}}" data-lastname="{{$inner_data['last_name']}}" data-event_name="{{$inner_data['event_name']}}" data-event_id="{{$inner_data['event_id']}}" data-user_id="{{$inner_data['user_id']}}">RSVP</button>
-                    </div>
-                  @endif
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+              {{-- <span class="active-dot"></span> --}}
+            </div>
+            <div class="notification-drodown-body-inner-content">
               <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p>
-                    @if($inner_data['read']=="0")
-                      <h6 class="notification-read-dot"></h6>
-                    @endif -->
-                </div>
-                {{--  <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                  <span> Has updated the event details for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
+                <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
               </div>
+              <div>
+                <!-- <p>{{$inner_data['event_name']}}</p> -->
+                @if($inner_data['read']=="0")
+                    <h6 class="notification-read-dot"></h6>
+                  @endif
+                                                      </div>
+              {{-- <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
             </div>
-          @elseif($inner_data['notification_type']=="update_event")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                @php
-                            $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                            $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                @endphp
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
-
-                @else
-                {!! $userProfile !!}
+          </div>
+    @elseif($inner_data['notification_type']=="update_date")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+              @endphp
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
               <span class="active-dot"></span>
-              @endif
-                {{-- <span class="active-dot"></span> --}}
-              </div>
-              <div class="notification-drodown-body-inner-content">
+
+              @else
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+              {{-- <span class="active-dot"></span> --}}
+            </div>
+            <div class="notification-drodown-body-inner-content">
+              <div>
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                  <span> Has updated the event date for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
                 <div>
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                    <span> Has updated the event details for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
                   <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                </div>
-                <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p> -->
                   @if($inner_data['read']=="0")
-                      <h6 class="notification-read-dot"></h6>
-                    @endif
-                                                        </div>
-                {{-- <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
+                  <h6 class="notification-read-dot mt-1 text-right"></h6>
+                  @endif
+                </div>
               </div>
+              <div>
+                <!-- <p>{{$inner_data['event_name']}}</p> -->
+              </div>
+              <div class="d-block">
+                <h3 class="mb-1">Date from : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['old_start_end_date']}}</span></h3>
+                <h3>Date To : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['new_start_end_date']}}</span></h3>
+              </div>
+              {{-- <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
             </div>
-          @elseif($inner_data['notification_type']=="update_date")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                @php
-                            $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                            $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                @endphp
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
-
-                @else
-                {!! $userProfile !!}
+          </div>
+    @elseif($inner_data['notification_type']=="update_potluck")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+              @endphp
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
               <span class="active-dot"></span>
-              @endif
-                {{-- <span class="active-dot"></span> --}}
-              </div>
-              <div class="notification-drodown-body-inner-content">
-                <div>
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                    <span> Has updated the event date for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
-                  <div>
-                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                    @if($inner_data['read']=="0")
-                    <h6 class="notification-read-dot mt-1 text-right"></h6>
-                    @endif
-                  </div>
-                </div>
-                <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p> -->
-                </div>
-                <div class="d-block">
-                  <h3 class="mb-1">Date from : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['old_start_end_date']}}</span></h3>
-                  <h3>Date To : <span style="font-family: var(--SFProDisplay-Regular);"> {{$inner_data['new_start_end_date']}}</span></h3>
-                </div>
-                {{-- <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
-              </div>
-            </div>
-          @elseif($inner_data['notification_type']=="update_potluck")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                @php
-                            $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                            $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                @endphp
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
 
-                @else
-                {!! $userProfile !!}
+              @else
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+              {{-- <span class="active-dot"></span> --}}
+            </div>
+            <div class="notification-drodown-body-inner-content">
+              <div>
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                  <span> Has updated the event potluck for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
+                <div>
+                  <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                  @if($inner_data=="0")
+                  <h6 class="notification-read-dot mt-1 text-right"></h6>
+                  @endif
+                </div>
+              </div>
+              <div>
+                <!-- <p>{{$inner_data['event_name']}}</p> -->
+              </div>
+
+              {{-- <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
+            </div>
+          </div>
+    @elseif($inner_data['notification_type']=="update_time")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+              @endphp
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
               <span class="active-dot"></span>
-              @endif
-                {{-- <span class="active-dot"></span> --}}
-              </div>
-              <div class="notification-drodown-body-inner-content">
-                <div>
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                    <span> Has updated the event potluck for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
-                  <div>
-                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                    @if($inner_data=="0")
-                    <h6 class="notification-read-dot mt-1 text-right"></h6>
-                    @endif
-                  </div>
-                </div>
-                <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p> -->
-                </div>
 
-                {{-- <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
-              </div>
+              @else
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+              {{-- <span class="active-dot"></span> --}}
             </div>
-          @elseif($inner_data['notification_type']=="update_time")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                @php
-                            $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                            $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                @endphp
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
+            <div class="notification-drodown-body-inner-content">
+              <div>
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                  <span> has updated the event time for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
+                <div>
+                  <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                  @if($inner_data=="0")
+                  <h6 class="notification-read-dot mt-1 text-right"></h6>
+                  @endif
+                </div>
+              </div>
+              <div>
+                <!-- <p>{{$inner_data['event_name']}}</p> -->
+              </div>
+              <div class="d-block">
+                <h3 class="mb-1">Time : <span style="font-family: var(--SFProDisplay-Regular);">From {{$inner_data['from_time']}} To {{$inner_data['to_time']}}</span></h3>
+              </div>
 
-                @else
-                {!! $userProfile !!}
+              {{-- <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
+            </div>
+          </div>
+    @elseif($inner_data['notification_type']=="update_address")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                          $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                          $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                          $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+              @endphp
+              @if($inner_data['profile']!="")
+              <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
               <span class="active-dot"></span>
-              @endif
-                {{-- <span class="active-dot"></span> --}}
-              </div>
-              <div class="notification-drodown-body-inner-content">
-                <div>
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                    <span> has updated the event time for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
-                  <div>
-                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                    @if($inner_data=="0")
-                    <h6 class="notification-read-dot mt-1 text-right"></h6>
-                    @endif
-                  </div>
-                </div>
-                <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p> -->
-                </div>
-                <div class="d-block">
-                  <h3 class="mb-1">Time : <span style="font-family: var(--SFProDisplay-Regular);">From {{$inner_data['from_time']}} To {{$inner_data['to_time']}}</span></h3>
-                </div>
 
-                {{-- <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
-              </div>
+              @else
+               {!! $userProfile !!}
+            <span class="active-dot"></span>
+            @endif
+              {{-- <span class="active-dot"></span> --}}
             </div>
-          @elseif($inner_data['notification_type']=="update_address")
-            <div class="notification-drodown-body-inner">
-              <div class="notification-drodown-body-inner-img">
-                @php
-                            $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
-                            $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
-                            $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
-                @endphp
-                @if($inner_data['profile']!="")
-                <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
-                <span class="active-dot"></span>
-
-                @else
-                {!! $userProfile !!}
-              <span class="active-dot"></span>
-              @endif
-                {{-- <span class="active-dot"></span> --}}
-              </div>
-              <div class="notification-drodown-body-inner-content">
+            <div class="notification-drodown-body-inner-content">
+              <div>
+                <h3>
+                  {{-- {{$inner_data['notification_message']}} --}}
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                  <span> has updated the event address for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
                 <div>
-                  <h3>
-                    {{-- {{$inner_data['notification_message']}} --}}
-                    {{$inner_data['first_name']}} {{$inner_data['last_name']}}
-                    <span> has updated the event address for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
-                  </h3>
-                  <div>
-                    <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
-                    @if($inner_data=="0")
-                    <h6 class="notification-read-dot mt-1 text-right"></h6>
-                    @endif
-                  </div>
+                  <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+                  @if($inner_data=="0")
+                  <h6 class="notification-read-dot mt-1 text-right"></h6>
+                  @endif
                 </div>
-                <div>
-                  <!-- <p>{{$inner_data['event_name']}}</p> -->
-                </div>
-                <div class="d-block">
-                  <h3 class="mb-1">Location</h3>
-                  <h3 class="mb-1">From : <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['from_addr']}}</span></h3>
-                  <h3 class="mb-1">To: <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['to_addr']}}</span></h3>
-                </div>
-
-                {{-- <div class="notification-accept-invite-btn-wrp">
-                  <button class="accept-btn">
-                    <i class="fa-regular fa-circle-check"></i>
-                    Accept
-                  </button>
-                  <button class="decline-btn">
-                    <i class="fa-regular fa-circle-xmark"></i>
-                    Decline
-                  </button>
-                </div> --}}
               </div>
+              <div>
+                <!-- <p>{{$inner_data['event_name']}}</p> -->
+              </div>
+              <div class="d-block">
+                <h3 class="mb-1">Location</h3>
+                <h3 class="mb-1">From : <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['from_addr']}}</span></h3>
+                <h3 class="mb-1">To: <span style="font-family: var(--SFProDisplay-Regular);">{{$inner_data['to_addr']}}</span></h3>
+              </div>
+
+              {{-- <div class="notification-accept-invite-btn-wrp">
+                <button class="accept-btn">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Accept
+                </button>
+                <button class="decline-btn">
+                  <i class="fa-regular fa-circle-xmark"></i>
+                  Decline
+                </button>
+              </div> --}}
             </div>
+          </div>
     @elseif($inner_data['notification_type']=="potluck_bring")
           <div class="notification-drodown-body-inner">
             <div class="notification-drodown-body-inner-img">
@@ -1039,7 +1039,73 @@ $i++;
               </div> --}}
             </div>
           </div> 
-@endif
+    @elseif($inner_data['notification_type']=="reply_comment_reaction")
+          <div class="notification-drodown-body-inner">
+            <div class="notification-drodown-body-inner-img">
+              @php
+                  $initials = strtoupper($inner_data['first_name'][0]) . strtoupper($inner_data['last_name'][0]);
+                  $fontColor = "fontcolor" . strtoupper($inner_data['first_name'][0]);
+                  $userProfile = "<h5 class='<?= $fontColor ?>' >" . $initials . "</h5>";
+              @endphp
+              @if($inner_data['profile']!="")
+                  <img src="{{$inner_data['profile']}}" alt=""loading="lazy" />
+                  <span class="active-dot"></span>
+
+              @else
+                  {!! $userProfile !!}
+                <span class="active-dot"></span>
+              @endif
+            </div>
+            <div
+              class="notification-drodown-body-inner-content"
+            >
+              <div>
+                <h3>
+                  {{$inner_data['first_name']}} {{$inner_data['last_name']}}
+                    <span> Liked your posted comment <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a></span>
+                </h3>
+                <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>
+              </div>
+              <div>
+                <p>
+                  <!-- {{$inner_data['event_name']}} -->
+                  <!-- <span><strong>Wall</strong></span> -->
+                </p>
+                @if($inner_data['read']=="0")
+                    <h6 class="notification-read-dot"></h6>
+                  @endif
+              </div>
+              <div class="noification-simple-text-wrp" style="flex-direction: column;align-items: start;">
+                      <p>{{$inner_data['comment_reply']}}</p>
+                      <p>{{$inner_data['comment']}}</p>
+                    </div>
+              {{-- <div class="notification-video-comment-wrp">
+                <h6>That’s was great! love it ❤️</h6>
+                <div class="notification-video-wrp">
+                  <a href="./assets/img/sample-video.mp4" class="notification-video popup-videos">
+                    <video>
+                      <source src="./assets/img/sample-video.mp4" type="video/mp4" />
+                    </video>
+                    <span class="notification-video_play-icon"
+                      ><img
+                        src="./assets/img/notification-video_play-icon.png"
+                        alt=""
+                        loading="lazy"
+
+                    /></span>
+                  </a>
+                  <div class="notification-video-content">
+                    <p>
+                      Thanks everyone for RSVP'ing on time. I
+                      hope everyone can make it to this special
+                      day of ours”
+                    </p>
+                  </div>
+                </div>
+              </div> --}}
+            </div>
+          </div>   
+  @endif
 
         
         </div>
