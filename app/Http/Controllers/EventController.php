@@ -138,6 +138,8 @@ class EventController extends BaseController
     public function index(Request $request)
     {
         $title = 'Create Event';
+        $js = ['design', 'create_event'];
+        $page = 'front.create_event';
         //   dd(Auth::guard('web')->check());
         if (Auth::guard('web')->check()) {
 
@@ -744,8 +746,7 @@ class EventController extends BaseController
             }
         } else {
 
-            $js = ['design', 'create_event'];
-            $page = 'front.create_event';
+
             $user = User::withCount(
                 [
                     'event' => function ($query) {
