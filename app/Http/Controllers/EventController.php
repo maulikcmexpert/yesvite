@@ -140,6 +140,7 @@ class EventController extends BaseController
         $title = 'Create Event';
         $js = ['design', 'create_event'];
         $page = 'front.create_event';
+        $user = [];
         //   dd(Auth::guard('web')->check());
         if (Auth::guard('web')->check()) {
 
