@@ -3800,7 +3800,7 @@ class ApiControllerv2 extends Controller
             'longitude' => (!empty($eventData['longitude'])) ? $eventData['longitude'] : "",
             'start_date' => (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL,
             'end_date' => (!empty($eventData['end_date'])) ? $eventData['end_date'] : NULL,
-            'isRsvpEvent' => (!empty($eventData['isRsvpEvent'])) ? $eventData['isRsvpEvent'] : NULL,
+            'isRsvpEvent' =>$eventData['isRsvpEvent'],
             //'rsvp_by_date_set' => $eventData['rsvp_by_date_set'],
             'rsvp_by_date_set' => $rsvp_by_date_set,
             // 'rsvp_by_date' => (!empty($eventData['rsvp_by_date'])) ? $eventData['rsvp_by_date'] : NULL,
