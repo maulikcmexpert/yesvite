@@ -162,31 +162,28 @@ $(document).ready(function () {
             let results = '';
         
             designData.forEach(category => {
-                const categoryTags = category.tags || [];  // Tags as an array
+                const categoryTags = category.tags || [];
+                let categoryMatched = false;
+                let subcategoryResults = '';
         
-                // Check if category name or tags contain the query
+                // Check if category tags or name match
                 if (
                     category.name.toLowerCase().includes(query) || 
                     categoryTags.some(tag => tag.toLowerCase().includes(query))
                 ) {
-                    results += `
-                        <div class="search-item category"  
-                             data-category-id="${category.id}"  
-                             data-name="${category.name}" 
-                             data-tags="${categoryTags.join(',')}">
-                             ${category.name}
-                        </div>`;
+                    categoryMatched = true;
                 }
         
-                // Iterate over subcategories
+                // Check subcategories
                 category.subcategories.forEach(subcategory => {
-                    const subTags = subcategory.tags || [];  // Tags as an array
+                    const subTags = subcategory.tags || [];
         
                     if (
                         subcategory.name.toLowerCase().includes(query) || 
                         subTags.some(tag => tag.toLowerCase().includes(query))
                     ) {
-                        results += `
+                        categoryMatched = true;  // Mark category as matched if any subcategory matches
+                        subcategoryResults += `
                             <div class="search-item subcategory" 
                                  data-id="${subcategory.id}" 
                                  data-category-id="${category.id}" 
@@ -196,6 +193,18 @@ $(document).ready(function () {
                             </div>`;
                     }
                 });
+        
+                // Display the category if it or any of its subcategories match
+                if (categoryMatched) {
+                    results += `
+                        <div class="search-item category"  
+                             data-category-id="${category.id}"  
+                             data-name="${category.name}" 
+                             data-tags="${categoryTags.join(',')}">
+                             <strong>Category:</strong> ${category.name}
+                        </div>
+                        ${subcategoryResults}`;
+                }
             });
         
             // Display "No Data Found" if no results
@@ -212,7 +221,8 @@ $(document).ready(function () {
             $('input[name="design_subcategory"]').prop('checked', false);
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
-                
+        
+
         //byprakash
     });
 
