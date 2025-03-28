@@ -793,6 +793,7 @@ class EventController extends BaseController
         } else {
             $event_creation = new Event();
         }
+        $isRsvpEvent=$request->isRsvpEvent;
         // $event_creation->event_type_id = (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "";
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
@@ -800,6 +801,7 @@ class EventController extends BaseController
         $event_creation->start_date = (isset($startDateFormat) && $endDateFormat != "") ? $startDateFormat : null;
         $event_creation->end_date = (isset($endDateFormat) && $endDateFormat != "") ? $endDateFormat : null;
         $event_creation->rsvp_by_date_set =  $rsvp_by_date_set;
+        $event_creation->isRsvpEvent =  $isRsvpEvent;
         // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
         $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
@@ -924,12 +926,31 @@ class EventController extends BaseController
                     $invited_user = $value['id'];
                     $prefer_by =  $value['prefer_by'];
 
-                    EventInvitedUser::create([
-                        'event_id' => $eventId,
-                        'prefer_by' => $prefer_by,
-                        'user_id' => $invited_user,
-                        'is_co_host' => $is_cohost,
-                    ]);
+                    // EventInvitedUser::create([
+                    //     'event_id' => $eventId,
+                    //     'prefer_by' => $prefer_by,
+                    //     'user_id' => $invited_user,
+                    //     'is_co_host' => $is_cohost,
+                    // ]);
+
+                    if($isRsvpEvent=='1'){
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id'],
+                            'rsvp_status' => '1',
+                            'read' => '1',
+                            'rsvp_d' =>'1',
+                            'adults' => 1,
+                        ]);
+                    }else{
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id']
+                        ]);
+                    }
+
                     $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('user_id', $user_id)->where('id', $eventId)->get();
                     foreach ($invitedusers as $event_detail) {
                         $eventData = [
@@ -970,6 +991,12 @@ class EventController extends BaseController
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
                         $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        if($isRsvpEvent=='1'){
+                            $eventInvite->rsvp_status='1';
+                            $eventInvite->read='1';
+                            $eventInvite->rsvp_d='1';
+                            $eventInvite->adults=1;
+                        }
                         $eventInvite->save();
                     }
                     // }
@@ -3585,7 +3612,7 @@ class EventController extends BaseController
         $startDate = (isset($request->start_event_date)) ? $request->start_event_date : "";
         $endDate = (isset($request->end_event_date)) ? $request->end_event_date : "";
 
-
+        $isRsvpEvent=$request->isRsvpEvent;
         // if (strpos($dateString, ' To ') !== false) {
         //     list($startDate, $endDate) = explode(' To ', $dateString);
         // } else {
@@ -3698,6 +3725,7 @@ class EventController extends BaseController
         $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
         $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
         $event_creation->rsvp_by_date_set =  $rsvp_by_date_set;
+        $event_creation->isRsvpEvent =  $isRsvpEvent;
         // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         // dd($request->rsvp_by_date_set,$event_creation->rsvp_by_date_set);
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
@@ -3837,12 +3865,30 @@ class EventController extends BaseController
                     if (isset($value['isAlready']) && $value['isAlready'] == "1") {
                         continue;
                     }
-                    EventInvitedUser::create([
-                        'event_id' => $eventId,
-                        'prefer_by' => $prefer_by,
-                        'user_id' => $invited_user,
-                        'is_co_host' => $is_cohost,
-                    ]);
+                    // EventInvitedUser::create([
+                    //     'event_id' => $eventId,
+                    //     'prefer_by' => $prefer_by,
+                    //     'user_id' => $invited_user,
+                    //     'is_co_host' => $is_cohost,
+                    // ]);
+                    if($isRsvpEvent=='1'){
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id'],
+                            'rsvp_status' => '1',
+                            'read' => '1',
+                            'rsvp_d' =>'1',
+                            'adults' => 1,
+                        ]);
+                    }else{
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id']
+                        ]);
+                    }
+
                     $invitedusers = Event::with(['user'])->whereHas('user', function ($query) {})->where('user_id', $user_id)->where('id', $eventId)->get();
                     foreach ($invitedusers as $event_detail) {
                         $eventData = [
@@ -3877,6 +3923,12 @@ class EventController extends BaseController
                         $eventInvite->sync_id = $checkContactExist->id;
                         $eventInvite->user_id = $newUserId;
                         $eventInvite->prefer_by = (isset($value['prefer_by'])) ? $value['prefer_by'] : "email";
+                        if($isRsvpEvent=='1'){
+                            $eventInvite->rsvp_status='1';
+                            $eventInvite->read='1';
+                            $eventInvite->rsvp_d='1';
+                            $eventInvite->adults=1;
+                        }
                         $eventInvite->save();
                     }
                     // }
