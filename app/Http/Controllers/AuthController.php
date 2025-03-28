@@ -115,6 +115,7 @@ class AuthController extends Controller
     {
 
 
+
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
@@ -158,23 +159,24 @@ class AuthController extends Controller
             ]);
         }
 
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response')
-        ]);
+        $isLogin = $request->has('is_login');
+        // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        //     'secret' => env('RECAPTCHA_SECRET_KEY'),
+        //     'response' => $request->input('g-recaptcha-response')
+        // ]);
 
-        $responseBody = $response->json();
+        // $responseBody = $response->json();
 
-        if (!$responseBody['success']) {
-            toastr('reCAPTCHA verification failed. Please try again.', 'error');
-            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
-        }
+        // if (!$responseBody['success']) {
+        //     toastr('reCAPTCHA verification failed. Please try again.', 'error');
+        //     return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        // }
 
-        if ($validator->fails()) {
-            toastr($validator->errors()->first(), 'error');
-            return redirect()->back()->withErrors(['captcha' => $validator->errors()->first()]);
-            // Redirect::to('register')->with('error', $validator->errors()->first());
-        }
+        // if ($validator->fails()) {
+        //     toastr($validator->errors()->first(), 'error');
+        //     return redirect()->back()->withErrors(['captcha' => $validator->errors()->first()]);
+        //     // Redirect::to('register')->with('error', $validator->errors()->first());
+        // }
 
         try {
             $randomString = Str::random(30);
@@ -235,13 +237,23 @@ class AuthController extends Controller
                 'token' => $randomString
             ];
             $this->addInFirebase($storeUser->id);
-            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Verify your Yesvite email address');
-            });
+            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+            //     $message->to($request->email);
+            //     $message->subject('Verify your Yesvite email address');
+            // });
+
+            if ($isLogin) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'register successful',
+
+                ]);
+            }else{
 
 
-            return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
+                    return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
+                }
+
         } catch (QueryException $e) {
             DB::Rollback();
 

@@ -72,7 +72,7 @@
                                 <h6>Each new account gets 30 free credits</h6>
                                 <h6>1 Credit = 1 invite</h6>
                             </div>
-                            <form method="POST" id="crateEventLogin"  action="{{ route('auth.checkLogin') }}"
+                            <form method="POST" id="crateEventLogin" class="d-none"  action="{{ route('auth.checkLogin') }}"
                                 autocomplete="off">
                                 @csrf
                                 <input type="hidden" name="is_login" value="false">
@@ -858,11 +858,16 @@
                                         </a>
                                     </li> --}}
                                 </ul>
+                                <div class="new-create-account-form-foot">
 
+                                    <p>New to Yesvite?</p>
+                                    <a href="#" id="create_event_register">Create an account</a>
+                                </div>
                             </form>
 
-                            <form method="POST"  class="d-none"action="{{route('store.register')}}" id="register" autocomplete="off">
+                            <form method="POST" action="{{route('store.register')}}" id="registerEvent" autocomplete="off">
                                 @csrf
+                                <input type="hidden" name="is_login" value="false">
                                 <input type="hidden" id="account_type" name="account_type" value="0">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -891,7 +896,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form">
-                                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" autocomplete="off">
+                                            <input type="email" class="form-control" id="email_c" name="email" value="{{ old('email')}}" autocomplete="off">
                                             <label for="email" class="floating-label">Email Address <span>*</span></label>
 
                                             <div class="label-error">
@@ -916,7 +921,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form">
-                                            <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" autocomplete="new-password">
+                                            <input type="password" class="form-control" id="password_c" name="password" value="{{ old('password')}}" autocomplete="new-password">
                                             <label for="password" class="floating-label">Password <span>*</span></label>
                                             <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                             <div class="label-error">
@@ -944,22 +949,24 @@
                                         <div class="text-start mt-1" id="passValidation">
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
+                                    {{-- <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
                                         <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                                         <script src="https://www.google.com/recaptcha/api.js"></script>
 
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary loaderbtn" id="createUser">Create account</button>
+                                        <button type="button" class="btn btn-primary createEventUser" id="createEventUser">Create account</button>
                                     </div>
                                 </div>
-                            </form>
-                            <div class="new-create-account-form-foot">
 
-                                <p>Already in Yesvite? <a href="#" id="login_event">Sign in</a></p>
-                                <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
-                                        and <a href=""> Privacy Policy</a></span></p>
-                            </div>
+                                <div class="new-create-account-form-foot">
+
+                                    <p>Already in Yesvite? <a href="#" id="login_event">Sign in</a></p>
+                                    <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
+                                            and <a href="{{route('privacy_policy')}}"> Privacy Policy</a></span></p>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -970,3 +977,137 @@
     <input type="hidden" id="cohostFname" value="" />
     <input type="hidden" id="cohostLname" value="" />
 </section>
+
+@push('scripts')
+<script>
+
+$(document).ready(function () {
+    $.validator.addMethod(
+        "passwordCheck",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
+            );
+        },
+        "At least 6 characters with letters, numbers, and a special character"
+    );
+
+    $("#registerEvent").validate({
+        rules: {
+            firstname: { required: true },
+            lastname: { required: true },
+            email: {
+                required: true,
+                email: true,
+                remote: {
+                    url: base_url + "check-email",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        email: function () {
+                            return $("#email_c").val();
+                        },
+                    },
+                },
+            },
+            zip_code: { required: true },
+            password: {
+                required: true,
+                passwordCheck: true, // Custom password validation
+            },
+            cpassword: {
+                required: true,
+                equalTo: "#password_c",
+            },
+        },
+        messages: {
+            firstname: { required: "Please enter your first name" },
+            lastname: { required: "Please enter your last name" },
+            email: {
+                required: "Please enter your email",
+                email: "Enter a valid email",
+                remote: "Email already exists",
+            },
+            zip_code: { required: "Please enter your zip code" },
+            password: {
+                required: "Enter your password",
+                passwordCheck: "Must contain letters, numbers, and a special character",
+            },
+            cpassword: {
+                required: "Confirm your password",
+                equalTo: "Passwords do not match",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element).css("color", "red");
+        },
+        submitHandler: function (form) {
+            registerUser(); // Call the AJAX function on submit
+        },
+    });
+
+    $(".createEventUser").on("click", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        if ($("#registerEvent").valid()) {
+            registerUser();
+        }
+    });
+
+    function registerUser() {
+        let formData = {
+            firstname: $("#firstname").val(),
+            lastname: $("#lastname").val(),
+            email: $("#email_c").val(),
+            zip_code: $("#zip_code").val(),
+            password: $("#password_c").val(),
+            cpassword: $("#cpassword").val(),
+            account_type: $("#account_type").val(),
+            is_login: false,
+        };
+
+        $.ajax({
+            url: base_url + "store_register",
+            type: "POST",
+            data: formData,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            beforeSend: function () {
+                $(".createEventUser").prop("disabled", true).text("Registering...");
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    toastr.success("Registration successful!");
+                    $("#registerEvent").addClass("d-none");
+                    $("#crateEventLogin").removeClass("d-none");
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                $(".createEventUser").prop("disabled", false).text("Create Account");
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    $("#firstname-error").text(errors.firstname?.[0] || "");
+                    $("#lastname-error").text(errors.lastname?.[0] || "");
+                    $("#email-error").text(errors.email?.[0] || "");
+                    $("#zip_code-error").text(errors.zip_code?.[0] || "");
+                    $("#password-error").text(errors.password?.[0] || "");
+                    $("#cpassword-error").text(errors.cpassword?.[0] || "");
+                } else {
+                    toastr.error("Registration failed! Please try again.");
+                }
+            },
+        });
+    }
+
+
+});
+
+</script>
+@endpush

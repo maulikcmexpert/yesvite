@@ -286,10 +286,10 @@ $(document).ready(function () {
             },
 
             success: function (response) {
-                if (response.status == 401 && response.info == "logout") {
-                    window.location.href = "/login"; // Redirect to home page
-                    return;
-                }
+                // if (response.status == 401 && response.info == "logout") {
+                //     window.location.href = "/login"; // Redirect to home page
+                //     return;
+                // }
                 if (response.success) {
                     console.log(response.message);
                 } else {
@@ -10313,62 +10313,82 @@ $(".create_event_login_btn").on("click", function (e) {
 
     });
 });
+// $(".createEventUser").on("click", function (e) {
+// console.log($("#registerEvent").attr("action"));
+
+// // let formDatae = $("#registerEvent").serialize(); // Serialize form data
+
+//     let formData = {
+//         firstname: $("#firstname").val(),
+//         lastname: $("#lastname").val(),
+//         email: $("#email_c").val(),
+//         zip_code: $("#zip_code").val(),
+//         password: $("#password_c").val(),
+//         cpassword: $("#cpassword").val(),
+//         account_type: $("#account_type").val(),
+//         is_login: false
+//         // _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
+//         // "g-recaptcha-response": grecaptcha.getResponse() // Get reCAPTCHA response
+//     };
+
+//     $.ajax({
+//         url: base_url+'store_register',
+//         type: "POST",
+//         // url: $("#registerEvent").attr("action"),
+//         data: formData,
+//         // dataType: "json",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+//                 "content"
+//             ),
+//         },
+//         beforeSend: function () {
+//             // $("#createUser").prop("disabled", true).text("Registering...");
+//         },
+//         success: function (response) {
+//             console.log(response);
+
+//             if (response.success) {
+//                 toastr.success("Registration successful! ");
+//                 $("#registerEvent").addClass('d-none');
+//                 $("#crateEventLogin").removeClass('d-none');
+
+//             } else {
+//                 toastr.error(response.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             // $("#createUser").prop("disabled", false).text("Create Account");
+//             if (xhr.status === 422) {
+//                 let errors = xhr.responseJSON.errors;
+//                 if (errors.firstname) $("#firstname-error").text(errors.firstname[0]);
+//                 if (errors.lastname) $("#lastname-error").text(errors.lastname[0]);
+//                 if (errors.email) $("#email-error").text(errors.email[0]);
+//                 if (errors.zip_code) $("#zip_code-error").text(errors.zip_code[0]);
+//                 if (errors.password) $("#password-error").text(errors.password[0]);
+//                 if (errors.cpassword) $("#cpassword-error").text(errors.cpassword[0]);
+//             } else {
+//                 toastr.error("Registration failed! Please try again.");
+//             }
+//         }
+//     });
+// });
 $("#login_event").on("click", function (e) {
-    console.log($('#crateEventLogin').attr('action'));
-    let formData = {
-        email: $("#email").val(),
-        password: $("#password").val(),
-        remember: $("input[name='remember']").prop("checked") ? 1 : 0,
-        is_login: false
-    };
-    $.ajax({
-        url: $('#crateEventLogin').attr('action'), // Get form action URL
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                "content"
-            ),
-        },
-        data: formData,
-        dataType: "json",
-        beforeSend: function () {
-            $("#loginUser").prop("disabled", true).text("Signing In...");
-            $("#loader").css("display", "flex");
 
+    $("#registerEvent").addClass("d-none"); // Hide registration form
+    $("#crateEventLogin").removeClass("d-none"); // Show login form
+});
+$("#create_event_register").on("click", function (e) {
 
-            loaderTimeout = setTimeout(function () {
-                $("#loader").css("display", "none");
-                $("#loginUser").prop("disabled", false).text("Sign In");
-                toastr.error("Request timeout! Please try again.");
-            }, 12000); // 2 minutes
-        },
-        success: async function (response) {
-            clearTimeout(loaderTimeout);
-            if (response.success) {
-                await handleLoginSuccess(response);
-            } else {
-                $("#login_user").prop("disabled", false).text("Sign In");
-                $("#loader").css("display", "none");
-                toastr.error(response.message); // Show error message
-            }
-        },
-        error: function (xhr) {
+    $("#registerEvent").removeClass("d-none"); // Hide registration form
+    $("#crateEventLogin").addClass("d-none"); // Show login form
+});
+$(".new-create-account-close-btn").on("click", function (e) {
 
-            if (xhr.status === 422) {
-                let errors = xhr.responseJSON.errors;
-                if (errors.email) {
-                    $("#email-error").text(errors.email[0]); // Show email error
-                }
-                if (errors.password) {
-                    $("#password-error").text(errors.password[0]); // Show password error
-                }
-            } else {
-                toastr.error("Login failed! Please try again.");
-            }
+    $(".new_login_page, .new_login").hide(); // Hide both elements
+    $("#edit-design-temp").show();
 
-        },
-
-    });
+    $(".new-event-sidebar-wrp").show();
 });
 async function handleLoginSuccess(response) {
     if (response.success) {
@@ -10413,7 +10433,7 @@ $(document).on('click', '.user_choice', function () {
 
 
 });
-
+;
 // ========vrushali===============
 let pageRefresh = localStorage.getItem("pageRefresh");
 //let storedImageUrl = localStorage.getItem("uploadedImageUrl");
@@ -10452,3 +10472,4 @@ if ($('#isUserLoggedIn').val() == "1" && pageRefresh === "true") {
         // localStorage.removeItem('final_upload_image');
     }, 3000);
 }
+

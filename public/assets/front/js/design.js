@@ -662,13 +662,13 @@ $(document).on("click", ".edit_design_tem", function (e) {
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
 
-                if (
-                    jsonResponse.status == 401 &&
-                    jsonResponse.info == "logout"
-                ) {
-                    window.location.href = "/"; // Redirect to home page
-                    return;
-                }
+                // if (
+                //     jsonResponse.status == 401 &&
+                //     jsonResponse.info == "logout"
+                // ) {
+                //     window.location.href = "/"; // Redirect to home page
+                //     return;
+                // }
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
@@ -3023,13 +3023,13 @@ function loadAgain() {
             if (isJSON(response)) {
                 let jsonResponse = JSON.parse(response);
 
-                if (
-                    jsonResponse.status == 401 &&
-                    jsonResponse.info == "logout"
-                ) {
-                    window.location.href = "/"; // Redirect to home page
-                    return;
-                }
+                // if (
+                //     jsonResponse.status == 401 &&
+                //     jsonResponse.info == "logout"
+                // ) {
+                //     window.location.href = "/"; // Redirect to home page
+                //     return;
+                // }
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
