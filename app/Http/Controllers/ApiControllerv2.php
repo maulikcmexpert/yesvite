@@ -11354,6 +11354,9 @@ class ApiControllerv2 extends Controller
             $ids = [];
             $newInvite = [];
             $newInviteGuest = [];
+
+            $isRsvpEvent=Event::where('id',$input['event_id'])->first()->isRsvpEvent;
+
             foreach ($input['guest_list'] as $value) {
 
                 if ($value['app_user'] == "0") {
@@ -11367,12 +11370,25 @@ class ApiControllerv2 extends Controller
                                 $newUserId = checkUserEmailExist($checkUserExist);
                             }
                         }
-                        EventInvitedUser::create([
-                            'event_id' => $input['event_id'],
-                            'prefer_by' => $value['prefer_by'],
-                            'sync_id' => $value['id'],
-                            'user_id' => $newUserId
-                        ]);
+                                    if($isRsvpEvent=="1"){
+                                        EventInvitedUser::create([
+                                            'event_id' => $input['event_id'],
+                                            'prefer_by' => $value['prefer_by'],
+                                            'sync_id' => $value['id'],
+                                            'user_id' => $newUserId,
+                                            'rsvp_status' => '1',
+                                            'read' => '1',
+                                            'rsvp_d' =>'1',
+                                            'adults' => 1,
+                                        ]);
+                                    }else{
+                                        EventInvitedUser::create([
+                                            'event_id' => $input['event_id'],
+                                            'prefer_by' => $value['prefer_by'],
+                                            'sync_id' => $value['id'],
+                                            'user_id' => $newUserId
+                                        ]);
+                                    }
                     } else {
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $input['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
@@ -11383,11 +11399,25 @@ class ApiControllerv2 extends Controller
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $input['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
+                        if($isRsvpEvent=="1"){
+
                         EventInvitedUser::create([
                             'event_id' => $input['event_id'],
                             'prefer_by' => $value['prefer_by'],
-                            'user_id' => $value['id']
+                            'user_id' => $value['id'],
+                            'rsvp_status' => '1',
+                            'read' => '1',
+                            'rsvp_d' =>'1',
+                            'adults' => 1,
                         ]);
+                    }else{
+                        EventInvitedUser::create([
+                            'event_id' => $input['event_id'],
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id'],
+                    
+                        ]);
+                    }
                     } else {
                         $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $input['event_id'], 'user_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
