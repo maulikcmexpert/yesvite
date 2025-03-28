@@ -208,6 +208,17 @@ class EventController extends BaseController
             $eventDetail['isCohost'] = "1";
             $eventDetail['isCopy'] = "";
             $eventDetail['alreadyCount'] = 0;
+            $user = User::withCount(
+                [
+                    'event' => function ($query) {
+                        $query->where('is_draft_save', '0');
+                    },
+                    'event_post' => function ($query) {
+                        $query->where('post_type', '1');
+                    },
+                    'event_post_comment',
+                ]
+            )->findOrFail($id);
 
             if (isset($request->id) && $request->id != '') {
 
@@ -745,86 +756,63 @@ class EventController extends BaseController
                     ->where('user_id', $id)
                     ->get();
             }
-        } else {
-
-
-            $user = User::withCount(
-                [
-                    'event' => function ($query) {
-                        $query->where('is_draft_save', '0');
-                    },
-                    'event_post' => function ($query) {
-                        $query->where('post_type', '1');
-                    },
-                    'event_post_comment',
-                ]
-            );
-            $inviteduser = "";
-
-            $event_type =   EventType::get();
-            $yesvite_user = User::select('id', 'firstname', 'lastname', 'phone_number', 'email', 'profile')
-                ->where('app_user', '1')
-                ->orderBy('firstname')
-                ->limit(1)
-                ->get();
-            $textData = [];
-            $design_category = [];
-            $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
-                $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
-                    $que->select('*');
-                }]);
-            }])->orderBy('id', 'DESC')->get();
-
-            $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-                $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
-            })->with([
-                'subcategory' => function ($query) {
-                    $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
-                        ->with('textdatas'); // Load the textdatas relationship
-                }
-            ])
-                ->orderBy('id', 'ASC')
-                ->get();
-
-            $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-                $query->whereHas('textdatas', function ($q) {
-                    $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
-                });
-            })->with([
-                'subcategory' => function ($query) {
-                    $query->whereHas('textdatas', function ($q) {
-                        $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-                    })->with(['textdatas' => function ($q) {
-                        $q->where('is_visible', '1'); // Load only visible textdatas
-                    }]);
-                }
-            ])
-                ->orderBy('id', 'ASC')
-                ->get();
-
-            //Calculate total count of textdatas across all subcategories
-            $totalTextDataCount = $categories->sum(
-                fn($category) =>
-                $category->subcategory->sum(
-                    fn($subcategory) =>
-                    $subcategory->textdatas->count()
-                )
-            );
-            $totalTextDataCount = $categories->count();
-
-            $imagecount = $totalTextDataCount;
-            // $textData = TextData::select('*')
-            //     ->orderBy('id', 'desc')
-            //     ->get();
-
-
         }
+        $inviteduser = "";
+
+        $event_type =   EventType::get();
+
+        $textData = [];
+        $design_category = [];
+        $design_category = EventDesignCategory::with(['subcategory' => function ($query) {
+            $query->select('*')->whereHas('textdatas', function ($ques) {})->with(['textdatas' => function ($que) {
+                $que->select('*');
+            }]);
+        }])->orderBy('id', 'DESC')->get();
+
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+        })->with([
+            'subcategory' => function ($query) {
+                $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+                    ->with('textdatas'); // Load the textdatas relationship
+            }
+        ])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+            });
+        })->with([
+            'subcategory' => function ($query) {
+                $query->whereHas('textdatas', function ($q) {
+                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+                })->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', '1'); // Load only visible textdatas
+                }]);
+            }
+        ])
+            ->orderBy('id', 'ASC')
+            ->get();
+
+        //Calculate total count of textdatas across all subcategories
+        $totalTextDataCount = $categories->sum(
+            fn($category) =>
+            $category->subcategory->sum(
+                fn($subcategory) =>
+                $subcategory->textdatas->count()
+            )
+        );
+        $totalTextDataCount = $categories->count();
+
+        $imagecount = $totalTextDataCount;
         return view('event_layout', auth()->check() ? compact(
             'title',
             'page',
             'js',
             'user',
-            'yesvite_user',
+
             'event_type',
             'groups',
             'imagecount',
