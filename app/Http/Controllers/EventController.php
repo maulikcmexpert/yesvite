@@ -220,6 +220,10 @@ class EventController extends BaseController
                 ]
             )->findOrFail($id);
 
+            $groups = Group::withCount('groupMembers')
+                ->orderBy('name', 'ASC')
+                ->where('user_id', $id)
+                ->get();
             if (isset($request->id) && $request->id != '') {
 
                 $title = 'Edit Event';
@@ -751,10 +755,6 @@ class EventController extends BaseController
                 $formatted_date = $date->format('F, Y');
                 $user['join_date'] = $formatted_date;
                 $user['coins'] = $user->coins;
-                $groups = Group::withCount('groupMembers')
-                    ->orderBy('name', 'ASC')
-                    ->where('user_id', $id)
-                    ->get();
             }
         }
         $inviteduser = "";
