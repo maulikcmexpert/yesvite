@@ -3673,6 +3673,7 @@ class ApiControllerv2 extends Controller
 
     public function createEvent(Request $request)
     {
+        dd($request);
         //mail & notification send in store event image do not find in this function
         $user  = Auth::guard('api')->user();
         $rawData = $request->getContent();
