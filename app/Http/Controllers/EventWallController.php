@@ -3076,6 +3076,8 @@ class EventWallController extends BaseController
             $ids = [];
             $newInvite = [];
             $newInviteGuest = [];
+            $isRsvpEvent=Event::where('id',$request['event_id'])->first()->isRsvpEvent;
+
             foreach ($request['guest_list'] as $value) {
 
                 if ($value['app_user'] == "0") {
@@ -3091,12 +3093,31 @@ class EventWallController extends BaseController
                                 $newUserId = checkUserEmailExist($checkUserExist);
                             }
                         }
-                        EventInvitedUser::create([
-                            'event_id' => $request['event_id'],
-                            'prefer_by' => $value['prefer_by'],
-                            'sync_id' => $value['id'],
-                            'user_id' => $newUserId
-                        ]);
+                        // EventInvitedUser::create([
+                        //     'event_id' => $request['event_id'],
+                        //     'prefer_by' => $value['prefer_by'],
+                        //     'sync_id' => $value['id'],
+                        //     'user_id' => $newUserId
+                        // ]);
+                        if($isRsvpEvent=="1"){
+                            EventInvitedUser::create([
+                                'event_id' => $request['event_id'],
+                                'prefer_by' => $value['prefer_by'],
+                                'sync_id' => $value['id'],
+                                'user_id' => $newUserId,
+                                'rsvp_status' => '1',
+                                'read' => '1',
+                                'rsvp_d' =>'1',
+                                'adults' => 1,
+                            ]);
+                        }else{
+                            EventInvitedUser::create([
+                                'event_id' => $request['event_id'],
+                                'prefer_by' => $value['prefer_by'],
+                                'sync_id' => $value['id'],
+                                'user_id' => $newUserId
+                            ]);
+                        }
                     } else {
                         $updateUser =  EventInvitedUser::with('contact_sync')->where(['event_id' => $request['event_id'], 'sync_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];
@@ -3108,11 +3129,30 @@ class EventWallController extends BaseController
                     $checkUserInvitation = EventInvitedUser::with(['user'])->where(['event_id' => $request['event_id'], 'is_co_host' => '0'])->get()->pluck('user_id')->toArray();
                     $id = $value['id'];
                     if (!in_array($value['id'], $checkUserInvitation)) {
-                        EventInvitedUser::create([
-                            'event_id' => $request['event_id'],
-                            'prefer_by' => $value['prefer_by'],
-                            'user_id' => $value['id']
-                        ]);
+                        // EventInvitedUser::create([
+                        //     'event_id' => $request['event_id'],
+                        //     'prefer_by' => $value['prefer_by'],
+                        //     'user_id' => $value['id']
+                        // ]);
+
+                        if($isRsvpEvent=="1"){
+
+                            EventInvitedUser::create([
+                                'event_id' => $request['event_id'],
+                                'prefer_by' => $value['prefer_by'],
+                                'user_id' => $value['id'],
+                                'rsvp_status' => '1',
+                                'read' => '1',
+                                'rsvp_d' =>'1',
+                                'adults' => 1,
+                            ]);
+                        }else{
+                            EventInvitedUser::create([
+                                'event_id' => $request['event_id'],
+                                'prefer_by' => $value['prefer_by'],
+                                'user_id' => $value['id'],
+                            ]);
+                        }
                     } else {
                         $updateUser =  EventInvitedUser::with('user')->where(['event_id' => $request['event_id'], 'user_id' => $id])->first();
                         $updateUser->prefer_by = $value['prefer_by'];

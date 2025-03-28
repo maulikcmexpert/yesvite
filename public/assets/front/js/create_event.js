@@ -2,7 +2,7 @@ var eventData = {};
 
 // ===================vrushali=======
 if ($("#isUserLoggedIn").val() === "1") {
-    let isCohost = $("#isCohost").val() || "";
+    var isCohost = $("#isCohost").val() || "";
     let isCheckOldcoHost = $("#cohostId").val() ? "1" : "0";
     // alert(isCheckOldcoHost);
     eventData.isCheckOldcoHost = isCheckOldcoHost;
