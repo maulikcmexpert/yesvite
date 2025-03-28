@@ -342,7 +342,7 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h6>RSVP Not Needed(No need to RSVP)</h6>
+                                <h6>RSVP Not Needed (No need to RSVP)</h6>
                                 <div class="toggle-button-cover ">
                                     <div class="button-cover">
                                         <div class="button r" id="button-1">
