@@ -323,7 +323,7 @@
 
         console.log(designData); // Check output in browser console
     </script> --}}
-    {{-- <script>
+    <script>
         var designData = [];
     
         var is_random = {!! json_encode($randomIds) !!};
@@ -361,9 +361,9 @@
         @endforeach
     
         console.log(designData); // Check the output in the browser console
-    </script> --}}
+    </script>
 
-    <script>
+    {{-- <script>
         var designData = [];
     
         var is_random = {!! json_encode($randomIds) !!};
@@ -417,7 +417,7 @@
     
         console.log(designData);  // Check the final structure
     </script>
-    
+     --}}
     
 @endpush
 
