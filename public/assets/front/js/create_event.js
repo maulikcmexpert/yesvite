@@ -10475,15 +10475,15 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         final_step = final_step === 1 ? 2 : final_step;
         eventData.step = final_step;
 
-        // $("#myCustomModal, #exampleModal").modal("hide");
-        // $(".main-content-wrp").removeClass("blurred");
+        $("#myCustomModal, #exampleModal").modal("hide");
+        $(".main-content-wrp").removeClass("blurred");
 
-        // $(".step_2, .step_3, .step_4, #edit-design-temp").hide();
+        $(".step_2, .step_3, .step_4, #edit-design-temp").hide();
 
-        // active_responsive_dropdown("drop-down-event-detail");
-        // handleActiveClass(".li_event_details");
+        active_responsive_dropdown("drop-down-event-detail");
+        handleActiveClass(".li_event_details");
 
-        // $(".pick-card, .edit-design").addClass("menu-success");
+        $(".pick-card, .edit-design").addClass("menu-success");
         var storedData = localStorage.getItem("storedTextData");
         var parsedData = storedData ? JSON.parse(storedData) : null;
 
