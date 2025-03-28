@@ -10089,6 +10089,7 @@ if (isDraftEvent == "0" && eventId != "") {
     $(".li_event_detail").addClass("menu-success");
     $(".li_guest").addClass("menu-success");
     $(".li_setting").addClass("menu-success");
+    alert("pelli var ma")
     loadAgain();
 }
 checkbox_count();

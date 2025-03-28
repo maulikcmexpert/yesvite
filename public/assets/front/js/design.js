@@ -5,10 +5,9 @@ var parsedData = storedData ? JSON.parse(storedData) : null;
 var dbJson = $("#static_information").val() || parsedData || null;
 var temp_id = null;
 var image = $("#design_image").val() || localStorage.getItem("image") || null;
-console.log(image)
-console.log(localStorage.getItem("image"))
+console.log(image);
+console.log(localStorage.getItem("image"));
 // ✅ Remove local storage data after setting values in variables
-
 
 var base_url = $("#base_url").text();
 var canvas;
@@ -2959,6 +2958,7 @@ $(".edit-design-sidebar").on("click", function () {
     }
 });
 function loadAgain() {
+    console("load");
     //  $(".side-bar-list").removeClass("active");
     $(".edit-design-sidebar").addClass("active");
 
@@ -2983,6 +2983,7 @@ function loadAgain() {
         dbJson = json;
         temp_id = id;
     }
+    console.log({ temp_id });
 
     var current_event_id = current_event_id;
     $(".step_1").hide();
