@@ -252,7 +252,7 @@
         };
 
         @foreach ($category->subcategory as $subcategory)
-            var subcategoryData = {
+            var subcategoryDatasubcategory = {
                 id: {{ $subcategory->id }},
                 name: "{{ $subcategory->subcategory_name }}",
                 images: []
@@ -319,7 +319,6 @@
             var categoryData = {
                 id: {{ $category->id }},
                 name: "{{ $category->category_name }}",
-                tags: "{{ $category->tags ?? '' }}".split(',').map(tag => tag.trim()),  // Add category tags
                 subcategories: []
             };
     
@@ -327,14 +326,14 @@
                 var subcategoryData = {
                     id: {{ $subcategory->id }},
                     name: "{{ $subcategory->subcategory_name }}",
-                    tags: [],   // Store tags at subcategory level
+                    tags: [],   // Store unique tags at subcategory level
                     images: []
                 };
     
                 @foreach ($subcategory->textdatas as $image)
                     let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());  // Extract tags from textdata
                     subcategoryData.tags = [...new Set([...subcategoryData.tags, ...imageTags])];  // Merge unique tags
-                    
+    
                     subcategoryData.images.push({
                         id: {{ $image->id }},
                         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
