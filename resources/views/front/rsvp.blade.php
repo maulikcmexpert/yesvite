@@ -1231,6 +1231,7 @@
                 </section>
             @if($is_host=="")    
                 @if($rsvp_status==null || $rsvp_status=="")
+                {{dd($eventInfo['guest_view'])}}
                         @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A')))
                             <div class="rsvp-footer-btn-wrp">
                                 <div class="container">
