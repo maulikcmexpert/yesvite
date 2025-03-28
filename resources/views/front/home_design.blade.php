@@ -373,7 +373,10 @@
                 };
     
                 @foreach ($subcategory->textdatas as $image)
-                    let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+                    // let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+                    // Inside the loop
+                    const imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+
     
                     // Store image with its tags
                     subcategoryData.images.push({
