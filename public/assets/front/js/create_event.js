@@ -4031,9 +4031,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         }
         console.log(eventData);
 
-        if (restoredTempId && restoredTempId != "" && restoredTempId != undefined) {
-            eventData.temp_id = restoredTempId;
-        }
+
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -10505,7 +10503,9 @@ if ($('#isUserLoggedIn').val() == "1" && pageRefresh === "true") {
     var storedData = localStorage.getItem("storedTextData");
     var parsedData = storedData ? JSON.parse(storedData) : null;
 
-    var dbJson = $("#static_information").val() || parsedData || null;
+    dbJson = $("#static_information").val() || parsedData || null;
+
+    console.log({dbJson})
     var image = $("#design_image").val() || localStorage.getItem("image") || null;
 
     let imageUrls = localStorage.getItem('final_upload_image');
