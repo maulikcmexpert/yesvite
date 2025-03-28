@@ -3843,11 +3843,24 @@ class ApiControllerv2 extends Controller
                     }
                     $alreadyselectedCohost =  collect($eventData['co_host_list'])->pluck('id')->toArray();
                     // if (!in_array($value['id'], $alreadyselectedCohost)) {
-                    EventInvitedUser::create([
-                        'event_id' => $eventId,
-                        'prefer_by' => $value['prefer_by'],
-                        'user_id' => $value['id']
-                    ]);
+                 
+                    if($isRsvpEvent=='1'){
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id'],
+                            'rsvp_status' => '1',
+                            'read' => '1',
+                            'rsvp_d' =>'1',
+                            'adults' => 1,
+                        ]);
+                    }else{
+                        EventInvitedUser::create([
+                            'event_id' => $eventId,
+                            'prefer_by' => $value['prefer_by'],
+                            'user_id' => $value['id']
+                        ]);
+                    }
                     // }
                 }
             }
