@@ -125,37 +125,94 @@ $(document).ready(function () {
         $('#filtered_results').show();
         let results = '';
 
+        // if (query.length > 0) {
+        //     designData.forEach(category => {
+        //         if (category.name.toLowerCase().includes(query)) {
+        //             results +=
+        //                 `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+        //         }
+        //         // Check if no subcategory matched and add "No Data Found"
+
+        //         category.subcategories.forEach(subcategory => {
+        //             if (subcategory.name.toLowerCase().includes(query)) {
+        //                 results +=
+        //                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+        //             }
+        //             // Check if no subcategory matched and add "No Data Found"
+
+
+        //         });
+        //     });
+        //     if (results === '') {
+        //         results +=
+        //             `<div class="search-item no-data">No Data Found</div>`;
+        //     }
+        //     $('#filtered_results').html(results);
+        // } else {
+        //     // When search is cleared, restore the default 30 images
+        //     $('#filtered_results').html('');
+        //     $('#filtered_results').hide();
+        //     $('input[name="design_subcategory"]').prop('checked', false);
+
+        //     $('.total_design_count').text($('.default_show:visible').length + ' Items');
+        // }
+
+        //byprakash
         if (query.length > 0) {
+            let results = '';
+        
             designData.forEach(category => {
-                if (category.name.toLowerCase().includes(query)) {
-                    results +=
-                        `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+                const categoryTags = category.tags ? category.tags.toLowerCase().split(',') : [];
+        
+                // Check if category name or tags contain the query
+                if (
+                    category.name.toLowerCase().includes(query) || 
+                    categoryTags.some(tag => tag.includes(query))
+                ) {
+                    results += `
+                        <div class="search-item category" 
+                             data-category-id="${category.id}"  
+                             data-name="${category.name}" 
+                             data-tags="${category.tags || ''}">
+                             ${category.name}
+                        </div>`;
                 }
-                // Check if no subcategory matched and add "No Data Found"
-
+        
+                // Check subcategories
                 category.subcategories.forEach(subcategory => {
-                    if (subcategory.name.toLowerCase().includes(query)) {
-                        results +=
-                            `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                    const subTags = subcategory.tags ? subcategory.tags.toLowerCase().split(',') : [];
+        
+                    if (
+                        subcategory.name.toLowerCase().includes(query) || 
+                        subTags.some(tag => tag.includes(query))
+                    ) {
+                        results += `
+                            <div class="search-item subcategory" 
+                                 data-id="${subcategory.id}" 
+                                 data-category-id="${category.id}" 
+                                 data-name="${subcategory.name}" 
+                                 data-tags="${subcategory.tags || ''}">
+                                 ${subcategory.name}
+                            </div>`;
                     }
-                    // Check if no subcategory matched and add "No Data Found"
-
-
                 });
             });
+        
+            // Display "No Data Found" if no results
             if (results === '') {
-                results +=
-                    `<div class="search-item no-data">No Data Found</div>`;
+                results = `<div class="search-item no-data">No Data Found</div>`;
             }
+        
             $('#filtered_results').html(results);
         } else {
-            // When search is cleared, restore the default 30 images
+            // Restore default 30 images on empty query
             $('#filtered_results').html('');
             $('#filtered_results').hide();
             $('input[name="design_subcategory"]').prop('checked', false);
-
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
+        
+        //byprakash
     });
 
     // Click event for search results

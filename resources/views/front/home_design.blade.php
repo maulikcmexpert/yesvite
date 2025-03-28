@@ -274,7 +274,7 @@
     console.log(designData); // Check output in browser console
 </script> --}}
 
-    <script>
+    {{-- <script>
         var designData = [];
 
         // Correcting the PHP to JavaScript variable conversion
@@ -309,5 +309,45 @@
         @endforeach
 
         console.log(designData); // Check output in browser console
+    </script> --}}
+
+    {{-- prakash 28/3/25 --}}
+    <script>
+        var designData = [];
+    
+        var is_random = {!! json_encode($randomIds) !!};
+    
+        @foreach ($categories as $category)
+            var categoryData = {
+                id: {{ $category->id }},
+                name: "{{ $category->category_name }}",
+                tags: "{{ $category->tags ?? '' }}",  // Add tags here
+                subcategories: []
+            };
+    
+            @foreach ($category->subcategory as $subcategory)
+                var subcategoryData = {
+                    id: {{ $subcategory->id }},
+                    name: "{{ $subcategory->subcategory_name }}",
+                    tags: "{{ $subcategory->tags ?? '' }}",  // Add tags here
+                    images: []
+                };
+    
+                @foreach ($subcategory->textdatas as $image)
+                    subcategoryData.images.push({
+                        id: {{ $image->id }},
+                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+                    });
+                @endforeach
+    
+                categoryData.subcategories.push(subcategoryData);
+            @endforeach
+    
+            designData.push(categoryData);
+        @endforeach
+    
+        console.log(designData); // Check output in browser console
     </script>
+    
+    {{-- prakash 28/3/25 --}}
 @endpush
