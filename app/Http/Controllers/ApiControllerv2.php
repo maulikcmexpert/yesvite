@@ -2939,7 +2939,7 @@ class ApiControllerv2 extends Controller
             }
 
             if ($email != "") {
-                $existingContact = contact_sync::where('email', $email)->first();
+                $existingContact = contact_sync::where('email', $email)->where('contact_id',$user->id)->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
@@ -2977,7 +2977,7 @@ class ApiControllerv2 extends Controller
             }
 
             if ($phone != "" && strlen($phone) > 5) {
-                $existingContact = contact_sync::where('phoneWithCode', $phone)->first();
+                $existingContact = contact_sync::where('phoneWithCode', $phone)->where('contact_id',$user->id)->first();
                 if (isset($existingContact)) {
                     $existingContact->update([
                         'isAppUser' => $existingContact->isAppUser,
