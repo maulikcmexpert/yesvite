@@ -310,10 +310,4 @@
 
         console.log(designData); // Check output in browser console
     </script>
-
-    {{-- prakash 28/3/25 --}}
-  
-    
-    
-    {{-- prakash 28/3/25 --}}
 @endpush

@@ -156,9 +156,6 @@ $(document).ready(function () {
 
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
-
-        //byprakash
-        //byprakash
     });
 
     // Click event for search results
