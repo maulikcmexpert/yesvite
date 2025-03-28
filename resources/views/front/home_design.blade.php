@@ -155,7 +155,7 @@
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}"
                     data-subcategory-id="{{ $image['subcategory_id'] }}"
-                    data-category_name="{{ $image['category_name'] }}">
+                    data-category_name="{{ $image['category_name'] }}" data-tags="{{$image['tags']}}">
 
                     <div class="card-img collection-card card-blue">
                         <img src="{{ $image['image_path'] }}" alt="shower-card">
