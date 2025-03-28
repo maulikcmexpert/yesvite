@@ -274,7 +274,7 @@
     console.log(designData); // Check output in browser console
 </script> --}}
 
-    <script>
+    {{-- <script>
         var designData = [];
 
         // Correcting the PHP to JavaScript variable conversion
@@ -309,5 +309,46 @@
         @endforeach
 
         console.log(designData); // Check output in browser console
+    </script> --}}
+    <script>
+        var designData = [];
+    
+        var is_random = {!! json_encode($randomIds) !!};
+    
+        @foreach ($categories as $category)
+            var categoryData = {
+                id: {{ $category->id }},
+                name: "{{ $category->category_name }}",
+                tags: "{{ $category->tags ?? '' }}".split(',').map(tag => tag.trim()),  // Add category tags
+                subcategories: []
+            };
+    
+            @foreach ($category->subcategory as $subcategory)
+                var subcategoryData = {
+                    id: {{ $subcategory->id }},
+                    name: "{{ $subcategory->subcategory_name }}",
+                    tags: [],   // Store tags at subcategory level
+                    images: []
+                };
+    
+                @foreach ($subcategory->textdatas as $image)
+                    let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());  // Extract tags from textdata
+                    subcategoryData.tags = [...new Set([...subcategoryData.tags, ...imageTags])];  // Merge unique tags
+                    
+                    subcategoryData.images.push({
+                        id: {{ $image->id }},
+                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+                        tags: imageTags   // Add tags for each image
+                    });
+                @endforeach
+    
+                categoryData.subcategories.push(subcategoryData);
+            @endforeach
+    
+            designData.push(categoryData);
+        @endforeach
+    
+        console.log(designData); // Check the output in the browser console
     </script>
+    
 @endpush
