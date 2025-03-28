@@ -2958,7 +2958,6 @@ $(".edit-design-sidebar").on("click", function () {
     }
 });
 function loadAgain() {
-    console("load");
     //  $(".side-bar-list").removeClass("active");
     $(".edit-design-sidebar").addClass("active");
 
@@ -2983,7 +2982,6 @@ function loadAgain() {
         dbJson = json;
         temp_id = id;
     }
-    console.log({ temp_id });
 
     var current_event_id = current_event_id;
     $(".step_1").hide();
