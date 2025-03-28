@@ -3683,7 +3683,7 @@ class ApiControllerv2 extends Controller
         } 
         
         // $eventData['isRsvpEvent']=1;
-        $isRsvpEvent=$eventData['isRsvpEvent'];
+        $isRsvpEvent=1;
 
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
