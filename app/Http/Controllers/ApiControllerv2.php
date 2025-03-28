@@ -3682,8 +3682,8 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         } 
         
-        $isRsvpEvent='1';
-        // $isRsvpEvent=$eventData['isRsvpEvent'];
+        // $isRsvpEvent='1';
+        $isRsvpEvent=$eventData['isRsvpEvent'];
 
         if ($eventData['is_draft_save'] == '0') {
             $validator = Validator::make($eventData, [
@@ -3872,6 +3872,7 @@ class ApiControllerv2 extends Controller
                             $eventInvite->rsvp_status='1';
                             $eventInvite->read='1';
                             $eventInvite->rsvp_d='1';
+                            $eventInvite->adults=1;
                         }
                         $eventInvite->save();
                     }
