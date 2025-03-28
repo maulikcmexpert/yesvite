@@ -1409,13 +1409,14 @@ function checkUserEmailExist($checkContactExist)
 {
     $checkUserExist = User::where('email', $checkContactExist->email)->first();
     if ($checkUserExist == NULL) {
-        $addUser = new User();
-        $addUser->firstname = $checkContactExist->firstName;
-        $addUser->lastname = $checkContactExist->lastName;
-        $addUser->email = $checkContactExist->email;
-        $addUser->app_user = '0';
-        $addUser->save();
-        $newUserId = $addUser->id;
+        // $addUser = new User();
+        // $addUser->firstname = $checkContactExist->firstName;
+        // $addUser->lastname = $checkContactExist->lastName;
+        // $addUser->email = $checkContactExist->email;
+        // $addUser->app_user = '0';
+        // $addUser->save();
+        // $newUserId = $addUser->id;
+        $newUserId = null;
     } else {
         $newUserId = $checkUserExist->id;
     }

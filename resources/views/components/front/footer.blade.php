@@ -401,6 +401,17 @@
         </div>
     </div>
 </div>
+
+<div class="cookies-track">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center gap-3 align-items-start">
+            <p>We use third-party cookies and tracking technologies that collect information about your use of the
+                site. These third parties may use your information for their own purpose, as described in our <a
+                    href="#">Privacy Policy</a></p>
+            <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+</div>
 <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/jquery-validate.js') }}"></script>
 
@@ -529,6 +540,20 @@
 @stack('scripts')
 
 <script>
+    $(document).ready(function() {
+        const $cookiesBox = $('.cookies-track');
+
+        if (!localStorage.getItem('cookiesBoxDismissed')) {
+            setTimeout(() => {
+                $cookiesBox.addClass('active');
+            }, 500);
+        }
+
+        $('.close-btn').on('click', function() {
+            $cookiesBox.removeClass('active');
+            localStorage.setItem('cookiesBoxDismissed', 'true');
+        });
+    });
     $(document).on("click", ".buycredits", function() {
         console.log("hello", )
         $("#buycreditsmodal").modal("show");

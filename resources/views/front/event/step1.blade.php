@@ -33,7 +33,7 @@
                         <div class="col-12 mb-4">
                             <div class="input-form">
                                 <input type="text" class="form-control inputText"
-                                    value="{{ isset($eventDetail['event_name'])}}"
+                                value="{{ isset($eventDetail['event_name']) && $eventDetail['event_name'] != null ? $eventDetail['event_name'] : '' }}"
                                     id="event-name" name="event-name" oninput="clearError(this)" required="">
                                 <label for="event-name" class="form-label input-field floating-label">Event Name
                                     *</label>
@@ -341,6 +341,21 @@
                                     </p>
                                 </h5>
                                 <i class="fa-solid fa-angle-right"></i>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6>RSVP Not Needed (No need to RSVP)</h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="isRsvpEvent"
+                                                {{ isset($eventDetail['isRsvpEvent']) && $eventDetail['isRsvpEvent'] == '1' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 mb-4">

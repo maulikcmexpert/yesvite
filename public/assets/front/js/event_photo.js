@@ -991,7 +991,7 @@ $(document).ready(function () {
         if (closestCheckbox.length) {
             closestCheckbox.prop("checked", true).trigger("change");
         }
-        
+
         toggleBulkSelectWrapper(); // Update bulk selection UI
 
     });
@@ -1033,6 +1033,8 @@ $(document).ready(function () {
         $(".selected_bulk_image").prop("checked", false);
         $(".selected-bulk-btn").hide();
         bulkSelectActive = false;
+        $('.set_emoji_like').css('display','flex');
+
         toggleBulkSelectWrapper();
     });
 
@@ -1080,6 +1082,8 @@ $(document).ready(function () {
         } else {
             alert("Image source not found.");
         }
+        $('.set_emoji_like').css('display','flex');
+
     });
     $(document).on("click", ".bulk_delete", function () {
         const login_user = $('#login_user_id').val(); // Get logged-in user ID
@@ -1122,6 +1126,7 @@ $(document).ready(function () {
                     bulkSelectActive = false;
                     $(".selected_bulk_image").prop("checked", false);
                     $(".selected-bulk-btn").hide();
+                    $('.set_emoji_like').css('display','flex');
                     toggleBulkSelectWrapper(); // Update UI
 
                     toastr.success("Selected posts deleted successfully.");
