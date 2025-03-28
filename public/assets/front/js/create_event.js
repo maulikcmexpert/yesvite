@@ -9463,7 +9463,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
         },
     });
 });
-
+alert(final_step);
 if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
 
