@@ -224,6 +224,12 @@ class EventController extends BaseController
                 ->orderBy('name', 'ASC')
                 ->where('user_id', $id)
                 ->get();
+
+            $getLastTimeZone = Event::where('user_id', $id)
+                ->orderBy('id', 'desc')
+                ->select('rsvp_start_timezone', 'rsvp_end_timezone')
+                ->first();
+
             if (isset($request->id) && $request->id != '') {
 
                 $title = 'Edit Event';
@@ -743,10 +749,6 @@ class EventController extends BaseController
                 //     ->orderBy('id', 'desc')
                 //     ->get();
 
-                $getLastTimeZone = Event::where('user_id', $id)
-                    ->orderBy('id', 'desc')
-                    ->select('rsvp_start_timezone', 'rsvp_end_timezone')
-                    ->first();
 
                 // dd($getLastTimeZone->rsvp_start_timezone);
                 $user['profile'] = ($user->profile != null) ? asset('storage/profile/' . $user->profile) : "";
