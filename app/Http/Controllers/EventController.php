@@ -809,7 +809,7 @@ class EventController extends BaseController
         $totalTextDataCount = $categories->count();
 
         $imagecount = $totalTextDataCount;
-        dd($eventDetail);
+        // dd($eventDetail);
         return view('event_layout', auth()->check() ? compact(
             'title',
             'page',
