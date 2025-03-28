@@ -162,36 +162,36 @@ $(document).ready(function () {
             let results = '';
         
             designData.forEach(category => {
-                const categoryTags = category.tags ? category.tags.toLowerCase().split(',') : [];
+                const categoryTags = category.tags || [];  // Tags as an array
         
                 // Check if category name or tags contain the query
                 if (
                     category.name.toLowerCase().includes(query) || 
-                    categoryTags.some(tag => tag.includes(query))
+                    categoryTags.some(tag => tag.toLowerCase().includes(query))
                 ) {
                     results += `
-                        <div class="search-item category" 
+                        <div class="search-item category"  
                              data-category-id="${category.id}"  
                              data-name="${category.name}" 
-                             data-tags="${category.tags || ''}">
+                             data-tags="${categoryTags.join(',')}">
                              ${category.name}
                         </div>`;
                 }
         
-                // Check subcategories
+                // Iterate over subcategories
                 category.subcategories.forEach(subcategory => {
-                    const subTags = subcategory.tags ? subcategory.tags.toLowerCase().split(',') : [];
+                    const subTags = subcategory.tags || [];  // Tags as an array
         
                     if (
                         subcategory.name.toLowerCase().includes(query) || 
-                        subTags.some(tag => tag.includes(query))
+                        subTags.some(tag => tag.toLowerCase().includes(query))
                     ) {
                         results += `
                             <div class="search-item subcategory" 
                                  data-id="${subcategory.id}" 
                                  data-category-id="${category.id}" 
                                  data-name="${subcategory.name}" 
-                                 data-tags="${subcategory.tags || ''}">
+                                 data-tags="${subTags.join(',')}">
                                  ${subcategory.name}
                             </div>`;
                     }
@@ -204,14 +204,15 @@ $(document).ready(function () {
             }
         
             $('#filtered_results').html(results);
+        
         } else {
-            // Restore default 30 images on empty query
+            // Restore default images on empty query
             $('#filtered_results').html('');
             $('#filtered_results').hide();
             $('input[name="design_subcategory"]').prop('checked', false);
             $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
-        
+                
         //byprakash
     });
 
