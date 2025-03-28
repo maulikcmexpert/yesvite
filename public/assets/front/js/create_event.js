@@ -4145,7 +4145,7 @@ $('input[type="text"],textarea').on("paste", function (e) {
 });
 
 function savePage1Data(close = null, direct = false) {
-    alert(1);
+    // alert(1);
     var event_type = $("#event-type").val();
     var event_name = $("#event-name").val();
     var hostedby = $("#hostedby").val();
