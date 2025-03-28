@@ -321,7 +321,7 @@
             var categoryData = {
                 id: {{ $category->id }},
                 name: "{{ $category->category_name }}",
-                tags: "{{ $category->tags ?? '' }}",  // Add tags here
+                tags: "{{ $category->tags ?? '' }}".split(',').map(tag => tag.trim()),  // Split tags into array
                 subcategories: []
             };
     
@@ -329,7 +329,7 @@
                 var subcategoryData = {
                     id: {{ $subcategory->id }},
                     name: "{{ $subcategory->subcategory_name }}",
-                    tags: "{{ $subcategory->tags ?? '' }}",  // Add tags here
+                    tags: "{{ $subcategory->tags ?? '' }}".split(',').map(tag => tag.trim()),  // Split tags into array
                     images: []
                 };
     
@@ -348,6 +348,7 @@
     
         console.log(designData); // Check output in browser console
     </script>
+    
     
     {{-- prakash 28/3/25 --}}
 @endpush
