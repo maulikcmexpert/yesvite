@@ -1377,7 +1377,8 @@ function selectAllTextBoxes() {
             hasBorders: false,
             borderColor: 'transparent', // Optional: Hides the border when object is active
             cornerColor: 'transparent', // Optional: Hides the corners when object is active
-            lockRotation: true // Optional: Prevents rotation via other means
+            lockRotation: true ,
+            selectable:true// Optional: Prevents rotation via other means
     });
     selection.setControlsVisibility({
             mt: false, // Middle top
