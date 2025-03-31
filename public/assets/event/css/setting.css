@@ -1006,6 +1006,9 @@
 .owl-carousel.event_images_slider .owl-dots.disabled {
     display: none !important;
 }
+.owl-carousel.event_images_slider .owl-dots {
+    display: none !important;
+}
 .event_images_slider .owl-nav {
     position: absolute;
     top: 50%;
