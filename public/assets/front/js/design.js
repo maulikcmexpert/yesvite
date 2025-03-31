@@ -846,12 +846,13 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        // canvas.on('object:added', function (e) {
-                        //     if (e.target && e.target.type === 'textbox') {
-                        //         setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
-                        //     }
-                        // });
-                        // selectAllTextBoxes()
+                        canvas.on('object:added', function (e) {
+                            if (e.target && e.target.type === 'textbox') {
+                                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                            }
+                        });
+
+
                     });
                 }
 
@@ -1347,29 +1348,29 @@ async function bindData(current_event_id) {
 
 
 //     // Function to select all textboxes on the canvas
-// function selectAllTextboxes() {
-//     if (!canvas) {
-//         console.error("Canvas is not initialized.");
-//         return;
-//     }
+function selectAllTextBoxes() {
+    if (!canvas) {
+        console.error("Canvas is not initialized.");
+        return;
+    }
 
-//     // Retrieve all textboxes on the canvas
-//     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
+    // Get all textboxes
+    let textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
-//     if (textboxes.length === 0) {
-//         console.warn("No textboxes found.");
-//         return;
-//     }
+    if (textObjects.length === 0) {
+        console.warn("No textboxes found.");
+        return;
+    }
 
-//     // Create an ActiveSelection from the textboxes
-//     const activeSelection = new fabric.ActiveSelection(textboxes, {
-//         canvas: canvas,
-//     });
+    // Deselect any existing active object
+    canvas.discardActiveObject();
 
-//     // Set the active selection on the canvas
-//     canvas.setActiveObject(activeSelection);
-//     canvas.requestRenderAll();
-// }
+
+    let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+
+    canvas.setActiveObject(selection);
+    canvas.requestRenderAll();
+}
 
 
 
