@@ -6897,21 +6897,21 @@ $(document).on("click", ".final_checkout", function () {
         var p=0;
         if (eventData.slider_images && eventData.slider_images.length > 0) {
 
-        // eventData.slider_images.forEach((image) => {
-        //     p++;
-        //      imageHtml = `
-        //         <div class="item">
-        //             <div class="setting-img">
-        //                 <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
-        //             </div>
-        //         </div>
-        //     `;
-        //     // $('.event_images_slider').append(imageHtml);
+        eventData.slider_images.forEach((image) => {
+            p++;
+             imageHtml = `
+                <div class="item">
+                    <div class="setting-img">
+                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+                    </div>
+                </div>
+            `;
+            // $('.event_images_slider').append(imageHtml);
 
-        //     $(".event_images_slider")
-        //     .trigger("add.owl.carousel", [$(imageHtml)])
-        //     .trigger("refresh.owl.carousel");
-        // });
+            $(".event_images_slider")
+            .trigger("add.owl.carousel", [$(imageHtml)])
+            .trigger("refresh.owl.carousel");
+        });
     }
 
         $('.slider_image_count').text(p+'/3 Photos');
