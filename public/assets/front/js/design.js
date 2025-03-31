@@ -621,7 +621,10 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // }
     // //console.log(dbJson);
     // //console.log(image);
-    $(".slider_img, .login_img img").attr("src", "");
+    if(temp_id ==  eventData.temp_id){
+alert();
+        $(".slider_img, .login_img img").attr("src", "");
+    }
 
 
 
