@@ -115,7 +115,7 @@
                                     src="{{ asset('public/storage/google-play.png')}}" width="120" height="40" alt=""
                                     style="width: max-content;height: max-conten;"></a>
                             <a href="#"
-                                style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
+                                style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;margin-left: 10px"><img
                                     src="{{ asset('public/storage/app-store.png')}}" width="120" height="40" alt=""
                                     style=" width: max-conten;height: max-conten;"></a>
                         </div>
