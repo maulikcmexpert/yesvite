@@ -847,10 +847,9 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        setTimeout(function () {
+                        canvas.on('object:added', function () {
                             selectAllTextBoxes();
-                        }, 500); // Waits 500ms before selecting textboxes
-
+                        });
                     });
                 }
 
@@ -1316,26 +1315,27 @@ async function bindData(current_event_id) {
             return;
         }
 
+        // Get only textboxes (ignoring images and other objects)
         var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
-
-        console.log(textObjects);
 
         if (textObjects.length === 0) {
             console.warn("No textboxes found.");
             return;
         }
 
-        // If only one textbox exists, select it directly
-        // if (textObjects.length === 1) {
-        //     canvas.setActiveObject(textObjects[0]);
-        // } else {
-        //     // Create a selection of all textboxes
-        //     var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-        //     canvas.setActiveObject(activeSelection);
-        // }
+        // **Ensure selection does not shift objects**
+        canvas.discardActiveObject();
 
-        // canvas.renderAll();
+        if (textObjects.length === 1) {
+            canvas.setActiveObject(textObjects[0]); // Select single textbox
+        } else {
+            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+            canvas.setActiveObject(activeSelection);
+        }
+
+        canvas.requestRenderAll(); // Ensure changes are applied
     }
+
 
     // canvas.loadFromJSON(yourSavedData, function () {
     //     canvas.renderAll();
