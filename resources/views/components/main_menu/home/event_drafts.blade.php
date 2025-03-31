@@ -129,34 +129,40 @@
             return;
         }
 
-        // Convert to LA timezone (Assume savedDate is in Los Angeles time)
-        const losAngelesTime = new Date(savedDate + 'T00:00:00-08:00'); // PST timezone
-        if (isNaN(losAngelesTime.getTime())) {
-            console.error('Invalid date format:', savedDate);
-            return;
-        }
+        try {
+            // Convert 'YYYY-MM-DD HH:MM:SS' to ISO format (YYYY-MM-DDTHH:MM:SSZ) for UTC interpretation
+            const isoDateString = savedDate.replace(' ', 'T') + 'Z';
+            const utcDate = new Date(isoDateString);
 
-        // Convert to local timezone
-        const localTime = new Date(losAngelesTime.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+            if (isNaN(utcDate.getTime())) {
+                console.error('Invalid date format:', savedDate);
+                return;
+            }
 
-        // Format date for display
-        const options = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric',
-            hour12: true
-        };
+            // Convert to local timezone
+            const localTime = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
 
-        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localTime);
+            // Format the date for display
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true
+            };
 
-        if (formattedDate) {
-            const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
-            saveDateElement.innerHTML = `Last Save: ${finalDate}`;
-        } else {
-            console.error('Date formatting failed:', savedDate);
+            const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localTime);
+
+            if (formattedDate) {
+                const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+                saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+            } else {
+                console.error('Date formatting failed:', savedDate);
+            }
+        } catch (error) {
+            console.error('Error parsing date:', error);
         }
     });
 });
