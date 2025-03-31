@@ -286,3 +286,55 @@
         </div>
        </div>
       @endif
+
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const saveDates = document.querySelectorAll('.last-save');
+        
+            saveDates.forEach(function (saveDateElement) {
+                const savedDate = saveDateElement.getAttribute('data-save-date');
+        
+                if (!savedDate) {
+                    console.error('Missing date attribute');
+                    return;
+                }
+        
+                try {
+                    // Manually append the LA timezone offset for March 30, 2025 (DST)
+                    const laTimeString = `${savedDate}-07:00`; 
+        
+                    // Convert the date string to an ISO format date
+                    const laDate = new Date(laTimeString);
+        
+                    if (isNaN(laDate.getTime())) {
+                        console.error('Invalid date format:', savedDate);
+                        return;
+                    }
+        
+                    // Convert and display the date in the user's local timezone
+                    const localOptions = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        hour12: true
+                    };
+        
+                    const localFormatted = new Intl.DateTimeFormat(navigator.language, localOptions).format(laDate);
+        
+                    if (localFormatted) {
+                        const finalDate = localFormatted.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+                        saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+                    } else {
+                        console.error('Date formatting failed:', savedDate);
+                    }
+                } catch (error) {
+                    console.error('Error parsing date:', error);
+                }
+            });
+        });
+        </script>
