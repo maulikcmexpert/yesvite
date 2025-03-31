@@ -7893,7 +7893,6 @@ class ApiControllerv2 extends Controller
                 }
                 $eventDetails['event_detail'] = $eventData;
 
-                dd($eventDetails);
             }
            
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
