@@ -1914,7 +1914,28 @@ $("#end_time").on("change", function () {
     }
 });
 
+$("#isRsvpEvent").on("change", function () {
+    if ($(this).is(":checked")) {
+        $("#rsvp_by_date").attr('disabled',true);
+    } else {
+        $("#rsvp_by_date").attr('disabled',false);
+    }
+});
+// $(document).on("click","#rsvp_by_date", function () {
+//     // alert();
+//     if ($(this).prop("disabled")) {
+//         alert("Checkbox is already disabled!");
+//         return; 
+//     }
+// });
 $("#rsvp_by_date").on("change", function () {
+    if($("#isRsvpEvent").is('checked')){
+        alert("Checkbox is already disabled!");
+        $("#rsvp_by_date").attr('disabled',true);
+        return; 
+    }else{
+        $("#rsvp_by_date").attr('disabled',false);
+    }
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
     } else {
