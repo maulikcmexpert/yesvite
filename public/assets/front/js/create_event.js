@@ -9319,8 +9319,6 @@ $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
 
     if (designId) {
-
-
         if (designId == "6") {
             let imgSrc1 = $(".photo-slider-1").attr("src");
             let imgSrc2 = $(".photo-slider-2").attr("src");
@@ -9334,13 +9332,8 @@ $(document).on("click", ".design-sidebar-action", function () {
             console.log(slide_image_get);
 
             // Check if either eventData.slider_images or slide_image_get has valid data
-            let hasEventDataImages =
-                eventData.slider_images;
-            let hasStoredImages =
-                slide_image_get &&
-                slide_image_get !== "null" &&
-                slide_image_get !== "undefined" &&
-                slide_image_get !== "";
+            let hasEventDataImages = eventData.slider_images && eventData.slider_images.length > 0;
+            let hasStoredImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined" && slide_image_get !== "";
 
             if (hasEventDataImages || hasStoredImages) {
                 $(".design-sidebar").addClass("d-none");
@@ -9348,35 +9341,22 @@ $(document).on("click", ".design-sidebar-action", function () {
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
 
-                const photoSliders = [
-                    "photo-slider-1",
-                    "photo-slider-2",
-                    "photo-slider-3",
-                ];
+                const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
 
-                const sliderImages = hasStoredImages
-                    ? JSON.parse(slide_image_get)
-                    : eventData.slider_images;
+                const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
                 console.log(sliderImages);
 
                 photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = document.querySelector(
-                        `.${sliderClass}`
-                    );
+                    const sliderElement = document.querySelector(`.${sliderClass}`);
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
                         sliderElement.style.display = "block";
                         $(".photo-edit-delete-" + (index + 1)).show();
-                        console.log(
-                            `Set src for ${sliderClass}: ${sliderElement.src}`
-                        );
+                        console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
                     } else {
-                        console.log(
-                            `No element found for class: ${sliderClass} or missing image data.`
-                        );
+                        console.log(`No element found for class: ${sliderClass} or missing image data.`);
                     }
-
                 });
 
                 localStorage.removeItem("save-slider-image");
