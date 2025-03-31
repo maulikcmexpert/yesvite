@@ -58,7 +58,7 @@ $notification_list=getNotificationList();
 
             {{-- <span class="g-badge" style="display: {{$count>0 ? 'block':'none'}}">{{$count}}</span> --}}
             {{-- <span class="g-badge">{{$count}}</span> --}}
-
+            <input type="hidden" value={{$count}} id="user_msg_unread_count" />
             <span class="g-badge">10</span>
           </a>
         </div>
