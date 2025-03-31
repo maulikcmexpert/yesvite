@@ -57,9 +57,9 @@ $notification_list=getNotificationList();
             @endphp
 
             {{-- <span class="g-badge" style="display: {{$count>0 ? 'block':'none'}}">{{$count}}</span> --}}
-            <span class="g-badge">{{$count}}</span>
+            {{-- <span class="g-badge">{{$count}}</span> --}}
 
-            {{-- <span class="g-badge">10</span> --}}
+            <span class="g-badge">10</span>
           </a>
         </div>
 
