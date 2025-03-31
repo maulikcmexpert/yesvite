@@ -9380,9 +9380,10 @@ $(document).on("click", ".design-sidebar-action", function () {
                             `No element found for class: ${sliderClass} or missing image data.`
                         );
                     }
+                    localStorage.removeItem("save-slider-image");
                 });
 
-                localStorage.removeItem("save-slider-image");
+
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
