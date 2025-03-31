@@ -9149,6 +9149,9 @@ $(document).on("click", ".delete_silder", function (e) {
             }
             return true; // Keep other items
         });
+        var eventDatacount=eventData.slider_images;
+
+        $('.slider_image_count').text(eventDatacount.length+"/3 Photos");
         // var check_slider_img = eventData.slider_images;
         // var matchFound = false;
         // $.each(check_slider_img, function (index, slider) {
