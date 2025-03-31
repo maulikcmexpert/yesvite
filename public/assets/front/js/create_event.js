@@ -9358,7 +9358,8 @@ $(document).on("click", ".design-sidebar-action", function () {
                         console.log(`No element found for class: ${sliderClass} or missing image data.`);
                     }
                 });
-
+                $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
+                .attr("src", "");          // Hide the image elements
                 localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
