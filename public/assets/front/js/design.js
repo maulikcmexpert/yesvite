@@ -1313,7 +1313,7 @@ async function bindData(current_event_id) {
             } else {
                 console.log('multiple textboxes');
                 // Select multiple textboxes
-                var activeSelection = new fabric.ActiveSelection(textObjects);
+                var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
                 canvas.setActiveObject(activeSelection);
             }
             canvas.requestRenderAll();
