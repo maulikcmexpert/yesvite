@@ -1915,10 +1915,10 @@ $("#end_time").on("change", function () {
 
 $("#rsvp_by_date").on("change", function () {
     if ($('#isRsvpEvent').is(":checked")) {
-        alert(1);
+        toastr.error('RSVP date is not required for this event');
         $(this).prop("checked", false); 
         $("#rsvp_by_date").attr("disabled",true);
-        
+
     }
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
