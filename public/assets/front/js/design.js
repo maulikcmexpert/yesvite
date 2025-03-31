@@ -312,6 +312,11 @@ $(document).on("click", ".design-cards", function () {
         //     width: textWidth
         // });
         canvas.add(textElement);
+        canvas.on('object:added', function (e) {
+            if (e.target && e.target.type === 'textbox') {
+                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+            }
+        });
     });
     var shape = "";
     if (dbJson) {
