@@ -1380,6 +1380,7 @@ function selectAllTextBoxes() {
             lockRotation: true ,
             selectable:true// Optional: Prevents rotation via other means
     });
+
     selection.setControlsVisibility({
             mt: false, // Middle top
             mb: false, // Middle bottom
@@ -1390,7 +1391,11 @@ function selectAllTextBoxes() {
             tl: false, // Top left
             tr: false  // Top right
         });
-
+canvas.getObjects().forEach(obj => {
+    if (obj.type === 'textbox') {
+        obj.selectable = true;
+    }
+});
     canvas.setActiveObject(selection);
     canvas.requestRenderAll();
 }
