@@ -2489,7 +2489,7 @@ canvas.getObjects().forEach(obj => {
             setTimeout(() => {
                 simulateMouseEvents(x, y);
                 console.log('Simulated mouse events at:', x, y);
-            }, 1000);
+            }, 200);
         }
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
