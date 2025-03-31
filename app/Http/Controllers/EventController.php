@@ -3420,7 +3420,7 @@ class EventController extends BaseController
 
         $imageSources = $request->imageSources;
         $imagenames = $request->imagenames;
-        // dd($imageSources);
+        dd($request);
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
         $missingNames = array_diff($savedFileNames, $validNames);
