@@ -1916,7 +1916,7 @@ $("#end_time").on("change", function () {
 $("#rsvp_by_date").on("change", function () {
     if ($('#isRsvpEvent').is(":checked")) {
         toastr.error('RSVP date is not required for this event');
-        $(this).prop("checked", false); 
+        $(this).prop("checked", false);
         $("#rsvp_by_date").attr("disabled",true);
 
     }
@@ -1931,9 +1931,9 @@ $("#isRsvpEvent").on("change", function () {
     if ($(this).is(":checked")) {
         $('.rsvp_by_date_toggle').hide();
         $(".rsvp_by_date").hide();
-        $("#rsvp_by_date").prop("checked", false); 
+        $("#rsvp_by_date").prop("checked", false);
         // $("#rsvp_by_date").attr("disabled",true);
-    } else {    
+    } else {
         $('.rsvp_by_date_toggle').show();
 
         $("#rsvp_by_date").attr("disabled",false);
@@ -6891,6 +6891,7 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected
         );
     }
+      const slide_image_get = localStorage.getItem("save-slider-image");
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
@@ -9105,7 +9106,7 @@ $(document).on("click", ".save-slider-image", function () {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
-                // toastr.error(error);
+                toastr.error(error);
             },
         });
     }
@@ -9366,7 +9367,6 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.setAttribute('data-image', sliderImages[index].fileName); 
                         sliderElement.style.display = "block";
                         $(".photo-edit-delete-" + (index + 1)).show();
                         console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
@@ -10507,6 +10507,11 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         }
 
         eventData.textData = dbJson;
+
+        const slide_image_get = localStorage.getItem("save-slider-image");
+        eventData.slider_images = JSON.parse(slide_image_get);
+
+
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes
         localStorage.removeItem("pageRefresh");

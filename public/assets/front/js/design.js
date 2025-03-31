@@ -847,9 +847,12 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        canvas.on('object:added', function () {
-                            selectAllTextBoxes();
-                        });
+                        // canvas.on('object:added', function (e) {
+                        //     if (e.target && e.target.type === 'textbox') {
+                        //         setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                        //     }
+                        // });
+                        // selectAllTextBoxes()
                     });
                 }
 
@@ -1309,40 +1312,70 @@ async function bindData(current_event_id) {
             canvas.renderAll(); // Ensure all elements are rendered
         }
     }
-    function selectAllTextBoxes() {
-        if (!canvas) {
-            console.error("Canvas is not initialized.");
-            return;
-        }
+//     // Function to apply selection styling to all textboxes individually
+// function highlightAllTextboxes() {
+//     if (!canvas) {
+//         console.error("Canvas is not initialized.");
+//         return;
+//     }
 
-        // Get all textboxes
-        var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
+//     // Retrieve all textboxes on the canvas
+//     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
-        if (textObjects.length === 0) {
-            console.warn("No textboxes found.");
-            return;
-        }
+//     if (textboxes.length === 0) {
+//         console.warn("No textboxes found.");
+//         return;
+//     }
 
-        // Clear previous selection
-        canvas.discardActiveObject();
+//     // Apply selection styling to each textbox
+//     textboxes.forEach(textbox => {
+//         textbox.set({
+//             borderColor: "#2DA9FC",   // Blue border to indicate selection
+//             cornerSize: 10,
+//             cornerColor: "#fff",
+//             cornerStyle: "circle",
+//             transparentCorners: false,
+//             hasBorders: true,
+//             selectable: true  // Ensure the textbox remains selectable
+//         });
+//         textbox.setCoords(); // Update the textbox's coordinates
+//     });
 
-        // Apply selection styles to each textbox
-        textObjects.forEach(textbox => {
-            textbox.set({
-                borderColor: "#2DA9FC", // Blue border for selection
-                cornerSize: 10,
-                cornerColor: "#fff",
-                cornerStyle: "circle",
-                transparentCorners: false,
-                hasBorders: true,
-                selectable: true // Ensure they remain selectable
-            });
+//     canvas.requestRenderAll(); // Refresh the canvas to apply changes
+// }
 
-            textbox.setCoords(); // Ensure updated styles take effect
-        });
 
-        canvas.requestRenderAll(); // Refresh canvas
-    }
+
+
+//     // Function to select all textboxes on the canvas
+// function selectAllTextboxes() {
+//     if (!canvas) {
+//         console.error("Canvas is not initialized.");
+//         return;
+//     }
+
+//     // Retrieve all textboxes on the canvas
+//     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
+
+//     if (textboxes.length === 0) {
+//         console.warn("No textboxes found.");
+//         return;
+//     }
+
+//     // Create an ActiveSelection from the textboxes
+//     const activeSelection = new fabric.ActiveSelection(textboxes, {
+//         canvas: canvas,
+//     });
+
+//     // Set the active selection on the canvas
+//     canvas.setActiveObject(activeSelection);
+//     canvas.requestRenderAll();
+// }
+
+
+
+
+
 
 
 
