@@ -621,7 +621,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // }
     console.log(temp_id);
     console.log(eventData.temp_id);
-    if(temp_id ==  eventData.temp_id){
+    let restoredTempId = localStorage.getItem("storedTempId");
+    if(temp_id == restoredTempId ){
 alert();
         $(".slider_img, .login_img img").attr("src", "");
     }
