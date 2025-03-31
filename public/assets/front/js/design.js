@@ -1363,10 +1363,12 @@ function selectAllTextBoxes() {
     }
 
     // Deselect any existing active object
-   // દરેક ટેક્સ્ટબોક્સ માટે, તેને સક્રિય ઑબ્જેક્ટ તરીકે સેટ કરો
-   textboxes.forEach(textbox => {
-    canvas.setActiveObject(textbox);
-});
+    canvas.discardActiveObject();
+
+
+    let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+
+    canvas.setActiveObject(selection);
     canvas.requestRenderAll();
 }
 
