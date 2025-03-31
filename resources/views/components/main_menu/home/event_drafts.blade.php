@@ -118,26 +118,28 @@
 </script> --}}
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const saveDates = document.querySelectorAll('.last-save'); 
+ document.addEventListener("DOMContentLoaded", function () {
+    const saveDates = document.querySelectorAll('.last-save');
 
     saveDates.forEach(function (saveDateElement) {
-        const savedDate = saveDateElement.getAttribute('data-save-date'); 
+        const savedDate = saveDateElement.getAttribute('data-save-date');
 
         if (!savedDate) {
             console.error('Missing date attribute');
             return;
         }
 
-        // Parse the saved date (ISO 8601 format: YYYY-MM-DDTHH:mm:ss)
-        const losAngelesDate = new Date(savedDate); 
-
-        if (isNaN(losAngelesDate.getTime())) {
+        // Convert to LA timezone (Assume savedDate is in Los Angeles time)
+        const losAngelesTime = new Date(savedDate + 'T00:00:00-08:00'); // PST timezone
+        if (isNaN(losAngelesTime.getTime())) {
             console.error('Invalid date format:', savedDate);
             return;
         }
 
-        // Format to local timezone
+        // Convert to local timezone
+        const localTime = new Date(losAngelesTime.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+
+        // Format date for display
         const options = {
             year: 'numeric',
             month: 'long',
@@ -148,7 +150,7 @@
             hour12: true
         };
 
-        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesDate);
+        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localTime);
 
         if (formattedDate) {
             const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
