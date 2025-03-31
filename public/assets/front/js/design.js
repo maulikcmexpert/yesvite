@@ -838,7 +838,7 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        // selectAllTextBoxes();
+                        selectAllTextBoxes();
                     });
                 }
 
@@ -1314,10 +1314,10 @@ async function bindData(current_event_id) {
         }
     }
 
-    // Wait for the canvas to be ready, then apply selection
-    canvas.on('after:render', function () {
-        selectAllTextBoxes(); // Automatically select all textboxes when canvas loads
-    });
+    // // Wait for the canvas to be ready, then apply selection
+    // canvas.on('after:render', function () {
+    //     selectAllTextBoxes(); // Automatically select all textboxes when canvas loads
+    // });
 
 
     function getWidth(element, text) {
