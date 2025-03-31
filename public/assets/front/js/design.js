@@ -847,9 +847,7 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        canvas.on('object:added', function () {
-                            selectAllTextBoxes();
-                        });
+                        canvas.on("after:render", selectAllTextBoxes);
                     });
                 }
 
@@ -1315,7 +1313,7 @@ async function bindData(current_event_id) {
             return;
         }
 
-        // Get only textboxes (ignoring images and other objects)
+        // Get all textboxes
         var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
         if (textObjects.length === 0) {
@@ -1323,18 +1321,28 @@ async function bindData(current_event_id) {
             return;
         }
 
-        // **Ensure selection does not shift objects**
+        // Clear previous selection
         canvas.discardActiveObject();
 
-        if (textObjects.length === 1) {
-            canvas.setActiveObject(textObjects[0]); // Select single textbox
-        } else {
-            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-            canvas.setActiveObject(activeSelection);
-        }
+        // Apply selection styles to each textbox
+        textObjects.forEach(textbox => {
+            textbox.set({
+                borderColor: "#2DA9FC", // Blue border for selection
+                cornerSize: 10,
+                cornerColor: "#fff",
+                cornerStyle: "circle",
+                transparentCorners: false,
+                hasBorders: true,
+                selectable: true // Ensure they remain selectable
+            });
 
-        canvas.requestRenderAll(); // Ensure changes are applied
+            textbox.setCoords(); // Ensure updated styles take effect
+        });
+
+        canvas.requestRenderAll(); // Refresh canvas
     }
+
+
 
 
     // canvas.loadFromJSON(yourSavedData, function () {
