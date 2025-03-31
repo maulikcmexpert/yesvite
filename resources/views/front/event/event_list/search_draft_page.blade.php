@@ -18,7 +18,7 @@
         </div>
         <div class="home-latest-draf-card-head-content">
           <h3>{{$draft['event_name']}}</h3>
-          <p >Last Save:  {{$draft['saved_date']}}</p>
+          <p class="last-save" data-save-date="{{$draftEvent['saved_date']}}"></p>
         </div>
         
     </div>
@@ -62,3 +62,6 @@
   </a>
 </div>                                    
 @endforeach
+
+
+
