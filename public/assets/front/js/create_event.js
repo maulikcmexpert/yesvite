@@ -9368,7 +9368,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                 const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
                 console.log(sliderImages);
 
-                const imagecount=0;
+                var imagecount=0;
                 photoSliders.forEach((sliderClass, index) => {
                     imagecount++;
                     const sliderElement = document.querySelector(`.${sliderClass}`);
