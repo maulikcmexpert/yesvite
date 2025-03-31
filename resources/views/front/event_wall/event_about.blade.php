@@ -155,6 +155,9 @@
                                                         @if (!empty($eventDetails['allow_limit']))
                                                             <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                                                         @endif
+                                                        @if (!empty($eventDetails['isRsvpEvent'] && $eventDetails['isRsvpEvent']=='1'))
+                                                        <li>No RSVP Needed</li>
+                                                    @endif
                                                     </ul>
                                                 </div>
                                                 <div class="hosted-by-date-time">
@@ -2225,6 +2228,9 @@
                                     @if (!empty($eventDetails['allow_limit']))
                                         <li>Can Bring Gursts ({{ $eventDetails['allow_limit'] }})</li>
                                     @endif
+                                    @if (!empty($eventDetails['isRsvpEvent'] && $eventDetails['isRsvpEvent']=='1'))
+                                    <li>No RSVP Needed</li>
+                                @endif
                                 </ul>
                             </div>
                             <input type ="hidden" id="event_id" name="event_id"

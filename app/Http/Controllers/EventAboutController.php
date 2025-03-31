@@ -91,6 +91,7 @@ class EventAboutController extends BaseController
             }
             $eventDetails['rsvp_status'] = $rsvp_status;
             $eventDetails['allow_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventDetails['isRsvpEvent'] = $eventDetail->isRsvpEvent ?? "";
             $eventDetails['adult_only_party'] = $eventDetail->event_settings->adult_only_party;
             $eventDetails['host_id'] = $eventDetail->user_id;
             $eventDetails['event_date'] = $eventDetail->start_date;
