@@ -618,8 +618,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     dbJson = json;
     temp_id = id;
     eventData.slider_images = [];
-   $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
-    .attr("src", "");   // Clear the src attribute
+
     eventData.desgin_selected = "";
     // }
     console.log(temp_id);
