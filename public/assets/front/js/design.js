@@ -1302,23 +1302,39 @@ async function bindData(current_event_id) {
         }
     }
     function selectAllTextBoxes() {
+        if (!canvas) {
+            console.error("Canvas is not initialized.");
+            return;
+        }
+
         var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
-        if (textObjects.length > 0) {
-            if (textObjects.length === 1) {
-                console.log('textnox active');
-
-                // If only one textbox exists, select it directly
-                canvas.setActiveObject(textObjects[0]);
-            } else {
-                console.log('multiple textboxes');
-                // Select multiple textboxes
-                var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-                canvas.setActiveObject(activeSelection);
-            }
-            canvas.requestRenderAll();
+        if (textObjects.length === 0) {
+            console.warn("No textboxes found.");
+            return;
         }
+
+        // Loop through each textbox and mark as selected
+        textObjects.forEach(textbox => {
+            textbox.set({
+                borderColor: 'blue',
+                cornerColor: 'blue',
+                cornerStyle: 'circle',
+                hasControls: true, // Keep resizing enabled
+                selectable: true // Ensure it's selectable
+            });
+            canvas.setActiveObject(textbox);
+        });
+
+        canvas.renderAll();
     }
+
+
+    // Call function after objects are loaded
+    // canvas.on('after:render', function () {
+    //     setTimeout(selectAllTextBoxes, 500);
+    // });
+
 
     // // Wait for the canvas to be ready, then apply selection
     // canvas.on('after:render', function () {
