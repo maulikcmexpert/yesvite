@@ -6899,31 +6899,36 @@ $(document).on("click", ".final_checkout", function () {
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
-        // eventData.slider_images.forEach((image) => {
-        //     const imageHtml = `
-        //         <div class="item">
-        //             <div class="setting-img">
-        //                 <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
-        //             </div>
-        //         </div>
-        //     `;
-        //     $('.event_images_slider').append(imageHtml);
-        // });
-
-        photoSliders.forEach((sliderClass, index) => {
-            const sliderElement = $(`#${sliderClass}`);
-            if (sliderElement.length) {
-                if (sliderImages[index]) {
-                    sliderElement.attr(
-                        "src",
-                        `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
-                    );
-                    $(`.${sliderClass}`).css("display", "block");
-                } else {
-                    sliderElement.css("display", "none");
-                }
-            }
+        eventData.slider_images.forEach((image) => {
+            const imageHtml = `
+                <div class="item">
+                    <div class="setting-img">
+                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+                    </div>
+                </div>
+            `;
+            $('.event_images_slider').append(imageHtml);
         });
+        
+        $(".event_images_slider")
+        .trigger("add.owl.carousel", [$(newItem)])
+        .trigger("refresh.owl.carousel");
+
+
+        // photoSliders.forEach((sliderClass, index) => {
+        //     const sliderElement = $(`#${sliderClass}`);
+        //     if (sliderElement.length) {
+        //         if (sliderImages[index]) {
+        //             sliderElement.attr(
+        //                 "src",
+        //                 `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
+        //             );
+        //             $(`.${sliderClass}`).css("display", "block");
+        //         } else {
+        //             sliderElement.css("display", "none");
+        //         }
+        //     }
+        // });
 
         $(".event_images_slider").owlCarousel({
             loop: true,
@@ -6950,12 +6955,13 @@ $(document).on("click", ".final_checkout", function () {
                 },
             },
         });
-    } else {
-        $(".event_images_slider").css("display", "none");
-        $(".event_images_template").css("display", "block");
-        // $('.event_images_slider').removeClass('owl-carousel');
-        // $('.event_images_slider').removeClass('owl-theme');
-    }
+    } 
+    // else {
+    //     $(".event_images_slider").css("display", "none");
+    //     $(".event_images_template").css("display", "block");
+    //     // $('.event_images_slider').removeClass('owl-carousel');
+    //     // $('.event_images_slider').removeClass('owl-theme');
+    // }
 
     // var swiper = new Swiper(".event_images_slider", {
     //     slidesPerView: 1,

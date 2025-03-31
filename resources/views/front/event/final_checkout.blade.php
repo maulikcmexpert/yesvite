@@ -88,7 +88,7 @@
                                 <img id="eventImage" src="" />
                             </div>
                         </div>
-                    <div class="item sliderImages-1" style="display:none;">  
+                    {{-- <div class="item sliderImages-1" style="display:none;">  
                             <div class="setting-img">
                                 <img id="sliderImages-1" src="" />
                             </div>
@@ -102,7 +102,7 @@
                     <div class="setting-img">
                                 <img id="sliderImages-3" src="" />
                             </div>
-                    </div>
+                    </div> --}}
               
                 </div>
                 <div class="event_images_template" style="display:none;">
