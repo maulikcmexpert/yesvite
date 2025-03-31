@@ -1327,9 +1327,9 @@ async function bindData(current_event_id) {
     }
 
     // Call function after objects are loaded
-    canvas.on('after:render', function () {
-        setTimeout(selectAllTextBoxes, 500);
-    });
+    // canvas.on('after:render', function () {
+    //     setTimeout(selectAllTextBoxes, 500);
+    // });
 
 
     // // Wait for the canvas to be ready, then apply selection
