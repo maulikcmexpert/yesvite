@@ -1307,32 +1307,31 @@ async function bindData(current_event_id) {
             return;
         }
 
-        var textObjects = canvas.getObjects();
-        console.log(textObjects);
+        var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
+        console.log(textObjects);
 
         if (textObjects.length === 0) {
             console.warn("No textboxes found.");
             return;
         }
 
-        // Loop through each textbox and mark as selected
-        canvas.getObjects().forEach((obj) => {
-            obj.set({
-                borderColor: '#2DA9FC',
-                cornerColor: 'b#ffflue',
-                cornerStyle: 'circle',
-                hasControls: true,
-                selectable: true ,
-                transparentCorners :false,
-            });
-
-            canvas.setActiveObject(obj);
-        });
+        // If only one textbox exists, select it directly
+        if (textObjects.length === 1) {
+            canvas.setActiveObject(textObjects[0]);
+        } else {
+            // Create a selection of all textboxes
+            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+            canvas.setActiveObject(activeSelection);
+        }
 
         canvas.renderAll();
     }
 
+    canvas.loadFromJSON(yourSavedData, function () {
+        canvas.renderAll();
+        selectAllTextBoxes();
+    });
 
     // Call function after objects are loaded
     // canvas.on('after:render', function () {
