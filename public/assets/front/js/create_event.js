@@ -2866,7 +2866,7 @@ $("#saveSubItemButton").click(function () {
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
         } else {
-            alert("Sub-item name cannot be empty.");
+            toastr.error("Sub-item name cannot be empty.");
         }
     }
 });
