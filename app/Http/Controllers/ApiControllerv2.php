@@ -7851,7 +7851,6 @@ class ApiControllerv2 extends Controller
                 }
             }
             $eventDetails['event_detail'] = "";
-            dd($eventDetail);
             if ($eventDetail->event_settings) {
                 $eventData = [];
 
@@ -7881,16 +7880,20 @@ class ApiControllerv2 extends Controller
                 if ($coHosts != NULL) {
                     $eventData[] = "Co-Host";
                 }
-                if ($eventDetail->isRsvpEvent == "1") {
-                    $eventData[] = "No RSVP Needed";
-                }
+               
                 // if (empty($eventData)) {
                 //     $eventData[] = date('F d, Y', strtotime($eventDetail->start_date));
                 //     $numberOfGuest = EventInvitedUser::where('event_id', $eventDetail->id)->count();
                 //     $eventData[] = "Number of guests : " . $numberOfGuest;
                 // }
+                dd($eventDetail->isRsvpEvent);
+
+                if ($eventDetail->isRsvpEvent == "1") {
+                    $eventData[] = "No RSVP Needed";
+                }
                 $eventDetails['event_detail'] = $eventData;
             }
+           
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
             $rsvp_status = 'rsvp';
 
