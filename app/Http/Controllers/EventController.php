@@ -3495,11 +3495,13 @@ class EventController extends BaseController
                     file_put_contents($path, $imageData);
                 } else {
                     // URL image (just copy the image)
-                    $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                    $src = $imageSource['src'];
+                    $imageName = basename($src); 
+                    $fileName = $imageName;
                     $i++;
         
-                    $path = public_path('storage/event_images/') . $fileName;
-                    file_put_contents($path, file_get_contents($imageSource['src']));
+                    // $path = public_path('storage/event_images/') . $fileName;
+                    // file_put_contents($path, file_get_contents($imageSource['src']));
                 }
         
                 $savedFiles[] = [
@@ -3512,7 +3514,7 @@ class EventController extends BaseController
         if (empty($savedFiles)) {
             // return response()->json(['status' => 'No valid images to save'], 400);
         }
-        // dd($savedFiles);
+        dd($savedFiles);
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
