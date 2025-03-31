@@ -1929,6 +1929,7 @@ $("#rsvp_by_date").on("change", function () {
 });
 $("#isRsvpEvent").on("change", function () {
     if ($(this).is(":checked")) {
+        $("#rsvp_by_date").prop("checked", false); 
         // $("#rsvp_by_date").attr("disabled",true);
     } else {
         $("#rsvp_by_date").attr("disabled",false);
