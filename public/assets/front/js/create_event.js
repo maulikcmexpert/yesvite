@@ -9100,10 +9100,15 @@ $(document).on("click", ".save-slider-image", function () {
                 }
                 var savedImages = response.images;
                 if ($("#isUserLoggedIn").val() === "0") {
-                    localStorage.setItem(
-                        "save-slider-image",
-                        JSON.stringify(savedImages)
-                    );
+                    let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+
+                    // Append new images to the existing array
+                    newImages.forEach(image => {
+                        savedImages.push(image);
+                    });
+
+                    // Update localStorage with the combined array
+                    localStorage.setItem('save-slider-image', JSON.stringify(savedImages));
                 }
                 eventData.slider_images = savedImages;
                 console.log(eventData);
