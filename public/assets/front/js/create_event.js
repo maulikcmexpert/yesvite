@@ -1916,7 +1916,7 @@ $("#end_time").on("change", function () {
 $("#rsvp_by_date").on("change", function () {
     if ($('#isRsvpEvent').is(":checked")) {
         toastr.error('RSVP date is not required for this event');
-        $(this).prop("checked", false); 
+        $(this).prop("checked", false);
         $("#rsvp_by_date").attr("disabled",true);
 
     }
@@ -1931,9 +1931,9 @@ $("#isRsvpEvent").on("change", function () {
     if ($(this).is(":checked")) {
         $('.rsvp_by_date_toggle').hide();
         $(".rsvp_by_date").hide();
-        $("#rsvp_by_date").prop("checked", false); 
+        $("#rsvp_by_date").prop("checked", false);
         // $("#rsvp_by_date").attr("disabled",true);
-    } else {    
+    } else {
         $('.rsvp_by_date_toggle').show();
 
         $("#rsvp_by_date").attr("disabled",false);
@@ -6891,9 +6891,11 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected
         );
     }
+    const slide_image_get = localStorage.getItem("save-slider-image");
+    let hasStoredImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined" && slide_image_get !== "";
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
-    const sliderImages = eventData.slider_images;
+    const sliderImages =  hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         $(".event_images_slider").css("display", "block");
