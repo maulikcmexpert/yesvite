@@ -6893,7 +6893,10 @@ $(document).on("click", ".final_checkout", function () {
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
+
+        var p=0;
         eventData.slider_images.forEach((image) => {
+            p++;
              imageHtml = `
                 <div class="item">
                     <div class="setting-img">
@@ -6907,6 +6910,8 @@ $(document).on("click", ".final_checkout", function () {
             .trigger("add.owl.carousel", [$(imageHtml)])
             .trigger("refresh.owl.carousel");
         });
+
+        $('.slider_image_count').text(p+'/3 Photos');
 
 
 
