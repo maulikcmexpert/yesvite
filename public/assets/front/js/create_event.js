@@ -1921,6 +1921,14 @@ $("#rsvp_by_date").on("change", function () {
         $(".rsvp_by_date").hide();
     }
 });
+$("#isRsvpEvent").on("change", function () {
+    if ($(this).is(":checked")) {
+        $("#rsvp_by_date").attr("disabled",true);
+    } else {
+        $("#rsvp_by_date").attr("disabled",false);
+
+    }
+});
 
 $("#allow_for_1_more").on("change", function () {
     // alert()
