@@ -619,8 +619,12 @@ $(document).on("click", ".edit_design_tem", function (e) {
     eventData.slider_images = [];
     eventData.desgin_selected = "";
     // }
-    // //console.log(dbJson);
-    // //console.log(image);
+    console.log(temp_id);
+    console.log(eventData.temp_id);
+    if(temp_id ==  eventData.temp_id){
+alert();
+        $(".slider_img, .login_img img").attr("src", "");
+    }
 
 
 
