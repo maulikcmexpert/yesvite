@@ -1328,10 +1328,10 @@ async function bindData(current_event_id) {
         canvas.renderAll();
     }
 
-    canvas.loadFromJSON(yourSavedData, function () {
-        canvas.renderAll();
-        selectAllTextBoxes();
-    });
+    // canvas.loadFromJSON(yourSavedData, function () {
+    //     canvas.renderAll();
+    //     selectAllTextBoxes();
+    // });
 
     // Call function after objects are loaded
     // canvas.on('after:render', function () {
