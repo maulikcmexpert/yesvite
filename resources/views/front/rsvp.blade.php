@@ -1,6 +1,4 @@
    @php
-   dd($user_firstname,$user_lastname,$email);
-//    dd($user_firstname);
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
             $host_name=$eventInfo['guest_view']['hosted_by'];
