@@ -309,6 +309,8 @@ $(document).on('input','#search_draft_event',function(){
                 $('#tabbtn2').text(response.last_month);
                 $('.count_of_draft').text(response.total);
 
+                formatSaveDates();
+
             }else{
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html('No Data Found');
@@ -519,7 +521,8 @@ $(document).on('input','#search_draft_event_page',function () {
   })
 
   function formatSaveDates() {
-    document.addEventListener("DOMContentLoaded", function () {
+    // alert();
+    // document.addEventListener("DOMContentLoaded", function () {
         const saveDates = document.querySelectorAll('.last-save');
     
         saveDates.forEach(function (saveDateElement) {
@@ -566,7 +569,7 @@ $(document).on('input','#search_draft_event_page',function () {
                 console.error('Error parsing date:', error);
             }
         });
-    });
+    // });
     }
 
 $(document).on('click','.prev',function(){
@@ -1011,6 +1014,7 @@ today.setHours(0, 0, 0, 0);
                 $('#tabbtn2').text(response.last_month);
                 $('.count_of_draft').text(response.total);
 
+                formatSaveDates();
 
             }else{
                 $('#scrollStatus2').html('');
