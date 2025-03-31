@@ -9106,7 +9106,7 @@ $(document).on("click", ".save-slider-image", function () {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
-                // toastr.error(error);
+                toastr.error(error);
             },
         });
     }
@@ -9367,7 +9367,6 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.setAttribute('data-image', sliderImages[index].fileName); 
                         sliderElement.style.display = "block";
                         $(".photo-edit-delete-" + (index + 1)).show();
                         console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
