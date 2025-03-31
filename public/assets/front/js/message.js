@@ -4028,11 +4028,14 @@ async function updateUnreadMessageBadge(conversationId = null) {
     const totalUnreadCount = await getTotalUnreadMessageCount();
     console.log(totalUnreadCount);
     if (parseInt(totalUnreadCount) > 0) {
+        alert(1);
         $(".badge").show();
         $(".g-badge").show();
         $(".g-badge").html(parseInt(totalUnreadCount));
         $(".badge").html(parseInt(totalUnreadCount));
     } else {
+        alert(0);
+
         $(".g-badge").hide();
         $(".badge").hide();
         $(".g-badge").html("");
