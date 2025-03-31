@@ -3416,7 +3416,7 @@ class EventController extends BaseController
                 }
             }
 
-            dd($savedFiles);
+            // dd($savedFiles);
         }
         $existingImages = session('desgin_slider');
 
