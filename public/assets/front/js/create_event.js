@@ -1914,45 +1914,7 @@ $("#end_time").on("change", function () {
     }
 });
 
-<<<<<<< HEAD
-$("#rsvp_by_date").on("change", function () {
-=======
-// $("#isRsvpEvent").on("change", function () {
-//     if ($(this).is(":checked")) {
-//         $("#rsvp_by_date").attr('disabled',true);
-//     } else {
-//         $("#rsvp_by_date").attr('disabled',false);
-//     }
-// });
-$(document).on("click","#rsvp_by_date", function () {
-    // alert();
-    if($("#isRsvpEvent").is(':checked')){
-        alert("Checkbox is already disabled!");
-        $(this).prop("checked", false);  // Uncheck it if disabled
-        $("#rsvp_by_date").attr('disabled',true);
-        return; 
-    }else{
-        $("#rsvp_by_date").attr('disabled',false);
-    }
-});
-$("#rsvp_by_date").on("change", function () {
 
->>>>>>> 18809113458e15b449eedfe2985510c9ae523ea1
-    if ($(this).is(":checked")) {
-        $(".rsvp_by_date").show();
-    } else {
-        $("#rsvp-by-date").val("");
-        $(".rsvp_by_date").hide();
-    }
-});
-
-$(document).ready(function () {
-    $(".design-category").click(function () {
-        var selectedSubcategory = $(this).data("subcategory");
-        $(".subcategory-section").hide();
-        $("#subcategory_" + selectedSubcategory).show();
-    });
-});
 
 $("#allow_for_1_more").on("change", function () {
     // alert()
@@ -1962,7 +1924,18 @@ $("#allow_for_1_more").on("change", function () {
             .html(`<div class="d-flex align-items-center add_new_limit">
         <span class="me-3">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137" />
+                <path d="M17.1336 12.267L11.8002 2.66699C11.0836 1.37533 10.0919 0.666992 9.00023 0.666992C7.90856 0.666992 6.91689 1.37533 6.20023 2.66699L0.866892 12.267C0.191892 13.492 0.116892 14.667 0.658559 15.592C1.20023 16.517 2.26689 17.0253 3.66689 17.0253H14.3336C15.7336 17.0253 16.8002 16.517 17.3419 15.592C17.8836 14.667 17.8086 13.4837 17.1336 12.267ZM8.37523 6.50033C8.37523 6.15866 8.65856 5.87533 9.00023 5.87533C9.34189 5.87533 9.62523 6.15866 9.62523 6.50033V10.667C9.62523 11.0087 9.34189 11.292 9.00023 11.292C8.65856 11.292 8.37523 11.0087 8.37523 10.667V6.50033ZM9.59189 13.7587C9.55023 13.792 9.50856 13.8253 9.46689 13.8587C9.41689 13.892 9.36689 13.917 9.31689 13.9337C9.26689 13.9587 9.21689 13.9753 9.15856 13.9837C9.10856 13.992 9.05023 14.0003 9.00023 14.0003C8.95023 14.0003 8.89189 13.992 8.83356 13.9837C8.78356 13.9753 8.73356 13.9587 8.68356 13.9337C8.63356 13.917 8.58356 13.892 8.53356 13.8587C8.49189 13.8253 8.45023 13.792 8.40856 13.7587C8.25856 13.6003 8.16689 13.3837 8.16689 13.167C8.16689 12.9503 8.25856 12.7337 8.40856 12.5753C8.45023 12.542 8.49189 12.5087 8.53356 12.4753C<<<<<<< HEAD
+=======
+    if($("#isRsvpEvent").is(':checked')){
+        alert("Checkbox is already disabled!");
+        $(this).prop("checked", false);  // Uncheck it if disabled
+        $("#rsvp_by_date").attr('disabled',true);
+        return;
+    }else{
+        $("#rsvp_by_date").attr('disabled',false);
+    }
+>>>>>>> 96a24221732fa6566e9fd14e11b990c6c2324c0c
+8.58356 12.442 8.63356 12.417 8.68356 12.4003C8.73356 12.3753 8.78356 12.3587 8.83356 12.3503C8.94189 12.3253 9.05856 12.3253 9.15856 12.3503C9.21689 12.3587 9.26689 12.3753 9.31689 12.4003C9.36689 12.417 9.41689 12.442 9.46689 12.4753C9.50856 12.5087 9.55023 12.542 9.59189 12.5753C9.74189 12.7337 9.83356 12.9503 9.83356 13.167C9.83356 13.3837 9.74189 13.6003 9.59189 13.7587Z" fill="#E03137" />
             </svg>
         </span>
         <h5>Add +1 limit</h5>
@@ -2889,7 +2862,7 @@ $("#saveSubItemButton").click(function () {
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
         } else {
-            toastr.error("Sub-item name cannot be empty.");
+            alert("Sub-item name cannot be empty.");
         }
     }
 });
@@ -5497,7 +5470,6 @@ $(document).on("click", ".li_event_details", async function () {
                     let base64Image = reader.result;
                     localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
-                    $(".create-account-slider.slider_login").trigger("remove.owl.carousel").html("").trigger("refresh.owl.carousel");
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);
@@ -9344,93 +9316,178 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // handleActiveClass(this);
 });
 
+// $(document).on("click", ".design-sidebar-action", function () {
+//     let designId = $(this).attr("design-id");
+
+//     if (designId)
+
+//         if (designId == "6") {
+//             let imgSrc1 = $(".photo-slider-1").attr("src");
+//             let imgSrc2 = $(".photo-slider-2").attr("src");
+//             let imgSrc3 = $(".photo-slider-3").attr("src");
+
+//             if (imgSrc1) $(".photo-edit-delete-1").show();
+//             if (imgSrc2) $(".photo-edit-delete-2").show();
+//             if (imgSrc3) $(".photo-edit-delete-3").show();
+
+//             const slide_image_get = localStorage.getItem("save-slider-image");
+//             console.log(slide_image_get);
+
+//             // Check if either eventData.slider_images or slide_image_get has valid data
+//             let hasEventDataImages =
+//                 eventData.slider_image && eventData.slider_images.length > 0;
+//             let hasStoredImages =
+//                 slide_image_get &&
+//                 slide_image_get !== "null" &&
+//                 slide_image_get !== "undefined" &&
+//                 slide_image_get !== "";
+
+//             if (hasEventDataImages || hasStoredImages) {
+//                 $(".design-sidebar").addClass("d-none");
+//                 $(".design-sidebar_7").removeClass("d-none");
+//                 $("#sidebar").addClass("design-sidebar_7");
+//                 $(".close-btn").attr("data-id", "design-sidebar_7");
+
+//                 const photoSliders = [
+//                     "photo-slider-1",
+//                     "photo-slider-2",
+//                     "photo-slider-3",
+//                 ];
+
+//                 const sliderImages = hasStoredImages
+//                     ? JSON.parse(slide_image_get)
+//                     : eventData.slider_images;
+//                 console.log(sliderImages);
+
+//                 photoSliders.forEach((sliderClass, index) => {
+//                     const sliderElement = document.querySelector(
+//                         `.${sliderClass}`
+//                     );
+
+//                     if (sliderElement && sliderImages[index]) {
+//                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+//                         sliderElement.style.display = "block";
+//                         $(".photo-edit-delete-" + (index + 1)).show();
+//                         console.log(
+//                             `Set src for ${sliderClass}: ${sliderElement.src}`
+//                         );
+//                     } else {
+//                         console.log(
+//                             `No element found for class: ${sliderClass} or missing image data.`
+//                         );
+//                     }
+
+//                 });
+//                 localStorage.removeItem("save-slider-image");;
+//             } else {
+//                 // If both eventData.slider_images and slide_image_get are empty
+//                 $(".design-sidebar").addClass("d-none");
+
+//                 if (imgSrc1 || imgSrc2 || imgSrc3) {
+//                     $(".design-sidebar_7").removeClass("d-none");
+//                 } else {
+//                     $(".design-sidebar_" + designId).removeClass("d-none");
+//                 }
+
+//                 $("#sidebar").addClass("design-sidebar_" + designId);
+//                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//             }
+//         } else {
+//             $(".design-sidebar").addClass("d-none");
+//             $(".design-sidebar_" + designId).removeClass("d-none");
+//             $("#sidebar").addClass("design-sidebar_" + designId);
+//             $(".close-btn").attr("data-id", "design-sidebar_" + designId);
+//         }
+//     }
+// });
+
+
 $(document).on("click", ".design-sidebar-action", function () {
-    let designId = $(this).attr("design-id");
+        let designId = $(this).attr("design-id");
 
-    if (designId) {
+        if (designId) {
 
 
-        if (designId == "6") {
-            let imgSrc1 = $(".photo-slider-1").attr("src");
-            let imgSrc2 = $(".photo-slider-2").attr("src");
-            let imgSrc3 = $(".photo-slider-3").attr("src");
+            if (designId == "6") {
+                let imgSrc1 = $(".photo-slider-1").attr("src");
+                let imgSrc2 = $(".photo-slider-2").attr("src");
+                let imgSrc3 = $(".photo-slider-3").attr("src");
 
-            if (imgSrc1) $(".photo-edit-delete-1").show();
-            if (imgSrc2) $(".photo-edit-delete-2").show();
-            if (imgSrc3) $(".photo-edit-delete-3").show();
+                if (imgSrc1) $(".photo-edit-delete-1").show();
+                if (imgSrc2) $(".photo-edit-delete-2").show();
+                if (imgSrc3) $(".photo-edit-delete-3").show();
 
-            const slide_image_get = localStorage.getItem("save-slider-image");
-            console.log(slide_image_get);
+                const slide_image_get = localStorage.getItem("save-slider-image");
+                console.log(slide_image_get);
 
-            // Check if either eventData.slider_images or slide_image_get has valid data
-            let hasEventDataImages =
-                eventData.slider_images;
-            let hasStoredImages =
-                slide_image_get &&
-                slide_image_get !== "null" &&
-                slide_image_get !== "undefined" &&
-                slide_image_get !== "";
+                // Check if either eventData.slider_images or slide_image_get has valid data
+                let hasEventDataImages =
+                    eventData.slider_images;
+                let hasStoredImages =
+                    slide_image_get &&
+                    slide_image_get !== "null" &&
+                    slide_image_get !== "undefined" &&
+                    slide_image_get !== "";
 
-            if (hasEventDataImages || hasStoredImages) {
-                $(".design-sidebar").addClass("d-none");
-                $(".design-sidebar_7").removeClass("d-none");
-                $("#sidebar").addClass("design-sidebar_7");
-                $(".close-btn").attr("data-id", "design-sidebar_7");
+                if (hasEventDataImages || hasStoredImages) {
+                    $(".design-sidebar").addClass("d-none");
+                    $(".design-sidebar_7").removeClass("d-none");
+                    $("#sidebar").addClass("design-sidebar_7");
+                    $(".close-btn").attr("data-id", "design-sidebar_7");
 
-                const photoSliders = [
-                    "photo-slider-1",
-                    "photo-slider-2",
-                    "photo-slider-3",
-                ];
+                    const photoSliders = [
+                        "photo-slider-1",
+                        "photo-slider-2",
+                        "photo-slider-3",
+                    ];
 
-                const sliderImages = hasStoredImages
-                    ? JSON.parse(slide_image_get)
-                    : eventData.slider_images;
-                console.log(sliderImages);
+                    const sliderImages = hasStoredImages
+                        ? JSON.parse(slide_image_get)
+                        : eventData.slider_images;
+                    console.log(sliderImages);
 
-                photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = document.querySelector(
-                        `.${sliderClass}`
-                    );
-
-                    if (sliderElement && sliderImages[index]) {
-                        sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.style.display = "block";
-                        $(".photo-edit-delete-" + (index + 1)).show();
-                        console.log(
-                            `Set src for ${sliderClass}: ${sliderElement.src}`
+                    photoSliders.forEach((sliderClass, index) => {
+                        const sliderElement = document.querySelector(
+                            `.${sliderClass}`
                         );
+
+                        if (sliderElement && sliderImages[index]) {
+                            sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                            sliderElement.style.display = "block";
+                            $(".photo-edit-delete-" + (index + 1)).show();
+                            console.log(
+                                `Set src for ${sliderClass}: ${sliderElement.src}`
+                            );
+                        } else {
+                            console.log(
+                                `No element found for class: ${sliderClass} or missing image data.`
+                            );
+                        }
+
+                    });
+
+                    localStorage.removeItem("save-slider-image");
+                } else {
+                    // If both eventData.slider_images and slide_image_get are empty
+                    $(".design-sidebar").addClass("d-none");
+
+                    if (imgSrc1 || imgSrc2 || imgSrc3) {
+                        $(".design-sidebar_7").removeClass("d-none");
                     } else {
-                        console.log(
-                            `No element found for class: ${sliderClass} or missing image data.`
-                        );
+                        $(".design-sidebar_" + designId).removeClass("d-none");
                     }
 
-                });
-
-                localStorage.removeItem("save-slider-image");
-            } else {
-                // If both eventData.slider_images and slide_image_get are empty
-                $(".design-sidebar").addClass("d-none");
-
-                if (imgSrc1 || imgSrc2 || imgSrc3) {
-                    $(".design-sidebar_7").removeClass("d-none");
-                } else {
-                    $(".design-sidebar_" + designId).removeClass("d-none");
+                    $("#sidebar").addClass("design-sidebar_" + designId);
+                    $(".close-btn").attr("data-id", "design-sidebar_" + designId);
                 }
-
+            } else {
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_" + designId).removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_" + designId);
                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
             }
-        } else {
-            $(".design-sidebar").addClass("d-none");
-            $(".design-sidebar_" + designId).removeClass("d-none");
-            $("#sidebar").addClass("design-sidebar_" + designId);
-            $(".close-btn").attr("data-id", "design-sidebar_" + designId);
         }
-    }
-});
-
+    });
 $(document).on("click", "#close_editEvent", async function (e) {
     if (apiCalled == true) {
         return;
