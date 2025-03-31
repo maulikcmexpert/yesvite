@@ -3487,7 +3487,7 @@ class EventController extends BaseController
         $src = $request->src;
         $image_name = $request->image;
 
-        dd($request);
+        // dd($request);    
         // Extract filename from URL
         $imageFilename = $image_name;
 
