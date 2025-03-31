@@ -5474,6 +5474,7 @@ $(document).on("click", ".li_event_details", async function () {
                     let base64Image = reader.result;
                     localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
+                    $(".create-account-slider.slider_login").trigger("remove.owl.carousel").html("").trigger("refresh.owl.carousel");
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);

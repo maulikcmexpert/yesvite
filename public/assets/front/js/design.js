@@ -838,6 +838,7 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
+                        selectAllTextBoxes();
                     });
                 }
 
@@ -1295,6 +1296,18 @@ async function bindData(current_event_id) {
             canvasElement.setAttribute("data-canvas-id", temp_id);
 
             canvas.renderAll(); // Ensure all elements are rendered
+        }
+    }
+    function selectAllTextBoxes() {
+        var canvasObjects = canvas.getObjects();
+        var textObjects = canvasObjects.filter(obj => obj.type === 'textbox' );
+
+        if (textObjects.length > 0) {
+            var activeSelection = new fabric.ActiveSelection(textObjects, {
+                canvas: canvas
+            });
+            canvas.setActiveObject(activeSelection);
+            canvas.requestRenderAll();
         }
     }
 
