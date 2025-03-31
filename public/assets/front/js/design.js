@@ -1303,11 +1303,14 @@ async function bindData(current_event_id) {
 
         if (textObjects.length > 0) {
             if (textObjects.length === 1) {
+                console.log('textnox active');
+
                 // If only one textbox exists, select it directly
                 canvas.setActiveObject(textObjects[0]);
             } else {
+                console.log('multiple textboxes');
                 // Select multiple textboxes
-                var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+                var activeSelection = new fabric.ActiveSelection(textObjects);
                 canvas.setActiveObject(activeSelection);
             }
             canvas.requestRenderAll();
