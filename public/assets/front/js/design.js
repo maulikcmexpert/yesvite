@@ -1308,6 +1308,8 @@ async function bindData(current_event_id) {
         }
 
         var textObjects = canvas.getObjects();
+        console.log(textObjects);
+
 
         if (textObjects.length === 0) {
             console.warn("No textboxes found.");
@@ -1317,12 +1319,14 @@ async function bindData(current_event_id) {
         // Loop through each textbox and mark as selected
         canvas.getObjects().forEach((obj) => {
             obj.set({
-                borderColor: 'blue',
-                cornerColor: 'blue',
+                borderColor: '#2DA9FC',
+                cornerColor: 'b#ffflue',
                 cornerStyle: 'circle',
-                hasControls: true, // Keep resizing enabled
-                selectable: true // Ensure it's selectable
+                hasControls: true,
+                selectable: true ,
+                transparentCorners :false,
             });
+
             canvas.setActiveObject(obj);
         });
 
