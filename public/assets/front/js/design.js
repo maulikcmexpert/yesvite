@@ -1325,16 +1325,16 @@ async function bindData(current_event_id) {
             return;
         }
 
-        // If only one textbox exists, select it directly
-        // if (textObjects.length === 1) {
-        //     canvas.setActiveObject(textObjects[0]);
-        // } else {
-        //     // Create a selection of all textboxes
-        //     var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-        //     canvas.setActiveObject(activeSelection);
-        // }
+      //  If only one textbox exists, select it directly
+        if (textObjects.length === 1) {
+            canvas.setActiveObject(textObjects[0]);
+        } else {
+            // Create a selection of all textboxes
+            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+            canvas.setActiveObject(activeSelection);
+        }
 
-        // canvas.renderAll();
+        canvas.renderAll();
     }
 
     // canvas.loadFromJSON(yourSavedData, function () {
