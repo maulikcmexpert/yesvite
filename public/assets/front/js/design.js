@@ -1299,17 +1299,25 @@ async function bindData(current_event_id) {
         }
     }
     function selectAllTextBoxes() {
-        var canvasObjects = canvas.getObjects();
-        var textObjects = canvasObjects.filter(obj => obj.type === 'textbox' );
+        var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
         if (textObjects.length > 0) {
-            var activeSelection = new fabric.ActiveSelection(textObjects, {
-                canvas: canvas
+            textObjects.forEach(textbox => {
+                textbox.set({
+                    selectable: true, // Ensures the textbox can be selected
+                    hasControls: true, // Shows resize controls
+                    borderColor: 'blue', // Highlights selected textboxes
+                    cornerColor: 'blue', // Changes corner color
+                    cornerSize: 8 // Adjusts selection handle size
+                });
             });
-            canvas.setActiveObject(activeSelection);
-            canvas.requestRenderAll();
+
+            // Refresh the canvas to show the selection effect
+            canvas.renderAll();
         }
     }
+
+
 
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
