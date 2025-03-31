@@ -1660,9 +1660,7 @@ transform: unset;
     -o-transform: unset;
 }
 
-.event_images_slider .owl-dots{
-    display: none !important;
-}
+
 
 
 /* ======Responsiveness===== */
