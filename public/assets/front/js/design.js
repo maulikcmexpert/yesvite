@@ -620,6 +620,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
     eventData.desgin_selected = "";
     // }
     console.log(temp_id);
+    console.log(eventData.slider_images);
 
 
 
