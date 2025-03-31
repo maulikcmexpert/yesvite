@@ -312,6 +312,11 @@ $(document).on("click", ".design-cards", function () {
         //     width: textWidth
         // });
         canvas.add(textElement);
+        canvas.on('object:added', function (e) {
+            if (e.target && e.target.type === 'textbox') {
+                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+            }
+        });
     });
     var shape = "";
     if (dbJson) {
@@ -846,12 +851,13 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        // canvas.on('object:added', function (e) {
-                        //     if (e.target && e.target.type === 'textbox') {
-                        //         setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
-                        //     }
-                        // });
-                        // selectAllTextBoxes()
+                        canvas.on('object:added', function (e) {
+                            if (e.target && e.target.type === 'textbox') {
+                                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                            }
+                        });
+
+
                     });
                 }
 
@@ -1347,29 +1353,52 @@ async function bindData(current_event_id) {
 
 
 //     // Function to select all textboxes on the canvas
-// function selectAllTextboxes() {
-//     if (!canvas) {
-//         console.error("Canvas is not initialized.");
-//         return;
-//     }
+function selectAllTextBoxes() {
+    if (!canvas) {
+        console.error("Canvas is not initialized.");
+        return;
+    }
 
-//     // Retrieve all textboxes on the canvas
-//     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
+    // Get all textboxes
+    let textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
-//     if (textboxes.length === 0) {
-//         console.warn("No textboxes found.");
-//         return;
-//     }
+    if (textObjects.length === 0) {
+        console.warn("No textboxes found.");
+        return;
+    }
 
-//     // Create an ActiveSelection from the textboxes
-//     const activeSelection = new fabric.ActiveSelection(textboxes, {
-//         canvas: canvas,
-//     });
+    // Deselect any existing active object
+    canvas.discardActiveObject();
 
-//     // Set the active selection on the canvas
-//     canvas.setActiveObject(activeSelection);
-//     canvas.requestRenderAll();
-// }
+
+    let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+    selection.set({
+        hasRotatingPoint: false,
+            hasBorders: false,
+            borderColor: 'transparent', // Optional: Hides the border when object is active
+            cornerColor: 'transparent', // Optional: Hides the corners when object is active
+            lockRotation: true ,
+            selectable:true// Optional: Prevents rotation via other means
+    });
+
+    selection.setControlsVisibility({
+            mt: false, // Middle top
+            mb: false, // Middle bottom
+            ml: false, // Middle left
+            mr: false, // Middle right
+            bl: false, // Bottom left
+            br: false, // Bottom right
+            tl: false, // Top left
+            tr: false  // Top right
+        });
+canvas.getObjects().forEach(obj => {
+    if (obj.type === 'textbox') {
+        obj.selectable = true;
+    }
+});
+    canvas.setActiveObject(selection);
+    canvas.requestRenderAll();
+}
 
 
 
