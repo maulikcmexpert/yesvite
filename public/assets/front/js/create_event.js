@@ -1931,11 +1931,9 @@ $("#isRsvpEvent").on("change", function () {
     if ($(this).is(":checked")) {
         $('.rsvp_by_date_toggle').hide();
         $(".rsvp_by_date").hide();
-
-
         $("#rsvp_by_date").prop("checked", false); 
         // $("#rsvp_by_date").attr("disabled",true);
-    } else {
+    } else {    
         $('.rsvp_by_date_toggle').show();
 
         $("#rsvp_by_date").attr("disabled",false);
