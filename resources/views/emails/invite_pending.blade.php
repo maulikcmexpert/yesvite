@@ -119,6 +119,7 @@
                                     src="{{ asset('public/storage/app-store.png')}}" width="120" height="40" alt=""
                                     style="width: 120px;max-width: 120px;height: 40px;"></a>
                         </div>
+
                     </td>
                 </tr>
                 <!-- -------------- -->
