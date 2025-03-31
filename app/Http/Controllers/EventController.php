@@ -3420,7 +3420,7 @@ class EventController extends BaseController
 
         $imageSources = $request->imageSources;
         $imagenames = $request->imagenames;
-
+        // dd($imagenames);
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
         $missingNames = array_diff($savedFileNames, $validNames);
@@ -3473,7 +3473,7 @@ class EventController extends BaseController
             }
         }
         if (empty($savedFiles)) {
-            return response()->json(['status' => 'No valid images to save'], 400);
+            // return response()->json(['status' => 'No valid images to save'], 400);
         }
         // dd($savedFiles);
         session(['desgin_slider' => $savedFiles]);
@@ -3487,6 +3487,7 @@ class EventController extends BaseController
         $src = $request->src;
         $image_name = $request->image;
 
+        // dd($request);
         // Extract filename from URL
         $imageFilename = $image_name;
 
