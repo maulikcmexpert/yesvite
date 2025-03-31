@@ -768,7 +768,9 @@
                                 if (conversation.unReadCount && conversation.contactName) {
                                         totalUnreadCount += parseInt(conversation.unReadCount, 10);
                                     } else {
-                                        console.log('conversation.unReadCount or conversation.contactName is undefined');
+                                        totalUnreadCount = $('#user_msg_unread_count').val();
+                                        console.log(`Value: ${totalUnreadCount}, Type: ${typeof totalUnreadCount}`);
+
                                     }   
 
                             }
