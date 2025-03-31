@@ -1003,7 +1003,10 @@
     object-fit: contain;
 }
 
-.event_images_slider .owl-dots {
+.owl-carousel.event_images_slider .owl-dots.disabled {
+    display: none !important;
+}
+.owl-carousel.event_images_slider .owl-dots {
     display: none !important;
 }
 .event_images_slider .owl-nav {
