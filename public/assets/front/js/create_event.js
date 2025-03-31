@@ -9332,6 +9332,8 @@ $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
 
     if (designId) {
+
+
         if (designId == "6") {
             let imgSrc1 = $(".photo-slider-1").attr("src");
             let imgSrc2 = $(".photo-slider-2").attr("src");
@@ -9387,10 +9389,10 @@ $(document).on("click", ".design-sidebar-action", function () {
                             `No element found for class: ${sliderClass} or missing image data.`
                         );
                     }
-                    localStorage.removeItem("save-slider-image");
+
                 });
 
-
+                localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
