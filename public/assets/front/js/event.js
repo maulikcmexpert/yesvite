@@ -519,12 +519,13 @@ $(document).on('input','#search_draft_event_page',function () {
   })
 
   function formatSaveDates() {
-    alert();
+    // alert();
     document.addEventListener("DOMContentLoaded", function () {
         const saveDates = document.querySelectorAll('.last-save');
     
         saveDates.forEach(function (saveDateElement) {
             const savedDate = saveDateElement.getAttribute('data-save-date');
+            alert(savedDate);
     
             if (!savedDate) {
                 console.error('Missing date attribute');
