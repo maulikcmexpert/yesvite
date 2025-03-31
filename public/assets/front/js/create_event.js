@@ -6891,8 +6891,7 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected
         );
     }
-      const slide_image_get = localStorage.getItem("save-slider-image");
-    console.log(eventData.slider_images);
+
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
