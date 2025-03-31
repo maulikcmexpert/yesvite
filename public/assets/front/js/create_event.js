@@ -1913,7 +1913,14 @@ $("#end_time").on("change", function () {
     }
 });
 
-
+$("#rsvp_by_date").on("change", function () {
+    if ($(this).is(":checked")) {
+        $(".rsvp_by_date").show();
+    } else {
+        $("#rsvp-by-date").val("");
+        $(".rsvp_by_date").hide();
+    }
+});
 
 $("#allow_for_1_more").on("change", function () {
     // alert()
