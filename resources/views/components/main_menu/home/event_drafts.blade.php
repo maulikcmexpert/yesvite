@@ -129,43 +129,30 @@
           }
   
           try {
-              // Extract the datetime and the timezone
-              const [datetime, timezone] = savedDate.split('-');
+              // Manually append the LA timezone offset for March 30, 2025 (DST)
+              const laTimeString = `${savedDate}-07:00`; 
   
-              if (!datetime || !timezone) {
+              // Convert the date string to an ISO format date
+              const laDate = new Date(laTimeString);
+  
+              if (isNaN(laDate.getTime())) {
                   console.error('Invalid date format:', savedDate);
                   return;
               }
   
-              // Convert the timezone to a valid format
-              const timezoneMap = {
-                  "los angeles": "America/Los_Angeles"
-              };
-  
-              const timezoneId = timezoneMap[timezone.toLowerCase()];
-              
-              if (!timezoneId) {
-                  console.error('Unknown timezone:', timezone);
-                  return;
-              }
-  
-              // Create date in the provided timezone
-              const zonedDate = new Date(`${datetime.replace(' ', 'T')}Z`);
-              
-              // Convert to local timezone
-              const options = {
+              // Convert and display the date in the user's local timezone
+              const localOptions = {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric',
                   second: 'numeric',
-                  timeZone: timezoneId,
-                  timeZoneName: 'short',
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                   hour12: true
               };
   
-              const localFormatted = new Intl.DateTimeFormat(navigator.language, options).format(zonedDate);
+              const localFormatted = new Intl.DateTimeFormat(navigator.language, localOptions).format(laDate);
   
               if (localFormatted) {
                   const finalDate = localFormatted.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
@@ -178,5 +165,6 @@
           }
       });
   });
-  </script>
+</script>
+  
   
