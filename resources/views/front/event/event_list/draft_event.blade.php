@@ -25,7 +25,7 @@
         </div>
         <div class="home-latest-draf-card-head-content">
           <h3>{{$draftEvent['event_name']}}</h3>
-          <p>Last Save:  {{$draftEvent['saved_date']}}</p>
+          <p class="last-save" data-save-date="{{$draft['update_date']}}">Last Save:  {{$draftEvent['saved_date']}}</p>
         </div>
         
     </div>
