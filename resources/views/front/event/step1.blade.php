@@ -342,6 +342,21 @@
                         </div>
                         <div class="col-12 mb-4">
                             <div class="d-flex align-items-center justify-content-between">
+                                <h6>RSVP Not Needed (No need to RSVP)</h6>
+                                <div class="toggle-button-cover ">
+                                    <div class="button-cover">
+                                        <div class="button r" id="button-1">
+                                            <input type="checkbox" class="checkbox" id="isRsvpEvent"
+                                                {{ isset($eventDetail['isRsvpEvent']) && $eventDetail['isRsvpEvent'] == '1' ? 'checked' : '' }}>
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
                                 <h6>Add end time?</h6>
                                 <div class="toggle-button-cover ">
                                     <div class="button-cover">

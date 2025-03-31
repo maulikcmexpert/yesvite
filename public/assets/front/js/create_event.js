@@ -4141,6 +4141,7 @@ function savePage1Data(close = null, direct = false) {
     var message_to_guests = $("#message_to_guests").val();
     var latitude = $("#latitude").val();
     var longitude = $("#longitude").val();
+    // var longitude = $("#isRsvpEvent").val();
 
     var events_schedule = "0";
     var rsvp_end_time_set = "0";
@@ -4381,6 +4382,7 @@ function savePage1Data(close = null, direct = false) {
                 .css("color", "red");
             return;
         }
+       
         eventData.event_id = $("#event_id").val();
         eventData.event_type = event_type;
         eventData.event_name = event_name;
@@ -4406,7 +4408,15 @@ function savePage1Data(close = null, direct = false) {
         eventData.events_schedule = events_schedule;
         eventData.longitude = longitude;
         eventData.latitude = latitude;
+        var isRsvpEvent = $("#isRsvpEvent").is(":checked");
+        if (isRsvpEvent) {
+            eventData.isRsvpEvent = '1';
+        }else{
+            eventData.isRsvpEvent = '0';
+
+        }
         // activity: activities,
+
         // };
         // alert();
         let text = $(".current_step").text();

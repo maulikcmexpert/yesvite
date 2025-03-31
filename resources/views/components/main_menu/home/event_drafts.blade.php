@@ -68,7 +68,7 @@
   @endif
 
 
-  <script>
+  {{-- <script>
  document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
@@ -115,6 +115,56 @@
   });
 });
   
+</script> --}}
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+    const saveDates = document.querySelectorAll('.last-save');
+
+    saveDates.forEach(function (saveDateElement) {
+        const savedDate = saveDateElement.getAttribute('data-save-date');
+
+        if (!savedDate) {
+            console.error('Missing date attribute');
+            return;
+        }
+
+        try {
+            // Convert 'YYYY-MM-DD HH:MM:SS' to ISO format (YYYY-MM-DDTHH:MM:SSZ) for UTC interpretation
+            const isoDateString = savedDate.replace(' ', 'T') + 'Z';
+            const utcDate = new Date(isoDateString);
+
+            if (isNaN(utcDate.getTime())) {
+                console.error('Invalid date format:', savedDate);
+                return;
+            }
+
+            // Convert to local timezone
+            const localTime = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
+
+            // Format the date for display
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true
+            };
+
+            const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localTime);
+
+            if (formattedDate) {
+                const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+                saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+            } else {
+                console.error('Date formatting failed:', savedDate);
+            }
+        } catch (error) {
+            console.error('Error parsing date:', error);
+        }
+    });
+});
+
 </script>
-
-
