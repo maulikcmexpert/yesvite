@@ -759,15 +759,22 @@
                         if (snapshot.exists()) {
                             const conversations = snapshot.val();
                             for (let conversationId in conversations) {
-                                console.log(conversations[conversationId]);
                                 const conversation = conversations[conversationId];
+                                console.log(conversation.unReadCount);
 
+                                // if (conversation.unReadCount && conversation.contactName) {
+                                //     totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                // }
                                 if (conversation.unReadCount && conversation.contactName) {
-                                    totalUnreadCount += parseInt(conversation.unReadCount, 10);
-                                }
+                                        totalUnreadCount += parseInt(conversation.unReadCount, 10);
+                                    } else {
+                                        totalUnreadCount = parseInt($('#user_msg_unread_count').val(), 10) || 0;
+
+                                    }   
+
                             }
                         }
-                        alert(totalUnreadCount);
+                        // alert(totalUnreadCount);
 
                         // Update badge display
                         document.querySelectorAll(".badge, .g-badge").forEach(el => {
