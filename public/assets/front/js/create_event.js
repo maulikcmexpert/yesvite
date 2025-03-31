@@ -1921,6 +1921,12 @@ $("#isRsvpEvent").on("change", function () {
         $("#rsvp_by_date").attr('disabled',false);
     }
 });
+$(document).on("#rsvp_by_date","click", function () {
+    if ($(this).prop("disabled")) {
+        alert("Checkbox is already disabled!");
+        return; 
+    }
+});
 $("#rsvp_by_date").on("change", function () {
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
