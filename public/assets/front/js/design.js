@@ -590,6 +590,7 @@ $(document).on("click", ".close-btn", function () {
 $(document).on("click", ".edit_design_tem", function (e) {
     // $("#close_createEvent").css("display", "none");
     e.preventDefault();
+    localStorage.removeItem("save-slider-image");
     $("#loader").css("display", "flex");
     var eventID = $("#eventID").val();
     var isDraft = $("#isDraft").val();
@@ -617,8 +618,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
     dbJson = json;
     temp_id = id;
     eventData.slider_images = [];
-    $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
-    .attr("src", "");  // Clear the src attribute
+   $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
+    .attr("src", "");   // Clear the src attribute
     eventData.desgin_selected = "";
     // }
     console.log(temp_id);
