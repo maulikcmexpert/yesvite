@@ -847,7 +847,9 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        canvas.on("after:render", selectAllTextBoxes);
+                        canvas.on('object:added', function () {
+                            selectAllTextBoxes();
+                        });
                     });
                 }
 
