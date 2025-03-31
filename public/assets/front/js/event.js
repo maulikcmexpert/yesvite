@@ -519,6 +519,7 @@ $(document).on('input','#search_draft_event_page',function () {
   })
 
   function formatSaveDates() {
+    alert();
     document.addEventListener("DOMContentLoaded", function () {
         const saveDates = document.querySelectorAll('.last-save');
     
