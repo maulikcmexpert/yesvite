@@ -110,13 +110,11 @@
                 <tr>
                     <td>
                         <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
-                            <a href="#"
-                                style="width: 100%;max-width: 50px;height: 40px;border-radius: 5px;display: block;"><img
-                                    src="{{ asset('public/storage/google-play.png')}}" width="120" height="40" alt=""
+                            <a href="#" style="border-radius: 5px;display: block;"><img
+                                    src="{{ asset('public/storage/google-play.png')}}" alt=""
                                     style="width: auto;height: auto;"></a>
-                            <a href="#"
-                                style="width: 100%;max-width: 50px;height: 40px;border-radius: 5px;display: block;"><img
-                                    src="{{ asset('public/storage/app-store.png')}}" width="120" height="40" alt=""
+                            <a href="#" style="border-radius: 5px;display: block;"><img
+                                    src="{{ asset('public/storage/app-store.png')}}" alt=""
                                     style=" width: auto;height: auto;"></a>
                         </div>
                     </td>
