@@ -954,7 +954,7 @@
                                         <script src="https://www.google.com/recaptcha/api.js"></script>
 
                                     </div> --}}
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 mt-2">
                                         <button type="button" class="btn btn-primary createEventUser" id="createEventUser">Create account</button>
                                     </div>
                                 </div>
