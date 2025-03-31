@@ -9368,7 +9368,9 @@ $(document).on("click", ".design-sidebar-action", function () {
                 const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
                 console.log(sliderImages);
 
+                const imagecount=0;
                 photoSliders.forEach((sliderClass, index) => {
+                    imagecount++;
                     const sliderElement = document.querySelector(`.${sliderClass}`);
 
                     if (sliderElement && sliderImages[index]) {
@@ -9382,6 +9384,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                     }
                 });
 
+                $('.slider_image_count').text(imagecount+'/3 photos');
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
