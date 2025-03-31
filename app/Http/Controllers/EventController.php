@@ -1386,8 +1386,8 @@ class EventController extends BaseController
                         'post_id' => ""
                     ];
 
-                    // sendNotification('invite', $notificationParam);
-                    // sendNotificationGuest('invite', $notificationParam);
+                    sendNotification('invite', $notificationParam);
+                    sendNotificationGuest('invite', $notificationParam);
                 }
                 if ($checkUserInvited->is_draft_save == '0') {
                     $notificationParam = [
@@ -1395,7 +1395,7 @@ class EventController extends BaseController
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
-                    // sendNotification('owner_notify', $notificationParam);
+                    sendNotification('owner_notify', $notificationParam);
                     $get_count_invited_user = 0;
                     $conatctId = session('contact_ids');
                     $invitedCount = session('user_ids');
