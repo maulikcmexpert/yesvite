@@ -9371,7 +9371,8 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                 const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
 
-                const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+                // const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+                const sliderImages = eventData.slider_images;
                 console.log(sliderImages.length);
 
                 var imagecount=0;
