@@ -176,6 +176,7 @@ $('#scrollStatus2').scroll(function () {
             success: function (response) {
                 if (response.view && response.view!="") {
                     $('#scrollStatus2').append(response.view);
+                    formatSaveDates();
                     busy2 = false; // Allow further AJAX calls
 
                 }else{
