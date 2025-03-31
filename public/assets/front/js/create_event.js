@@ -9325,6 +9325,12 @@ $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
 
     if (designId) {
+        $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
+        .attr("src", "")
+        .hide();
+
+    $(".photo-edit-delete-1, .photo-edit-delete-2, .photo-edit-delete-3").hide();
+
         if (designId == "6") {
             let imgSrc1 = $(".photo-slider-1").attr("src");
             let imgSrc2 = $(".photo-slider-2").attr("src");
