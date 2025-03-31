@@ -114,12 +114,10 @@
                         <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
-                                    src="./google-play.png" alt=""
-                                    style="width: 100%;height: 100%;object-fit: contain;"></a>
+                                    src="./google-play.png" alt="" style="width: 100%;height: 100%;"></a>
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
-                                    src="./app-store.png" alt=""
-                                    style="width: 100%;height: 100%;object-fit: contain;"></a>
+                                    src="./app-store.png" alt="" style="width: 100%;height: 100%;"></a>
                         </div>
                     </td>
                 </tr>

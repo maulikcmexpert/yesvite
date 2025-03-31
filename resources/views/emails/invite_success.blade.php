@@ -132,12 +132,10 @@
             <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
                 <a href="https://play.google.com/store/apps/details?id=com.yesvite.android"
                     style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
-                        src="{{ asset('public/storage/google-play.png')}}" alt=""
-                        style="width: 100%;height: 100%;object-fit: contain;"></a>
+                        src="{{ asset('public/storage/google-play.png')}}" alt="" style="width: 100%;height: 100%;"></a>
                 <a href="https://apps.apple.com/us/app/yesvite/id6736650042"
                     style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
-                        src="{{ asset('public/storage/app-store.png')}}" alt=""
-                        style="width: 100%;height: 100%;object-fit: contain;"></a>
+                        src="{{ asset('public/storage/app-store.png')}}" alt="" style="width: 100%;height: 100%;"></a>
             </div>
         </td>
     </tr>

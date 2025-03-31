@@ -113,11 +113,11 @@
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
                                     src="{{ asset('public/storage/google-play.png')}}" width="120" height="40" alt=""
-                                    style="width: 100%;height: 100%;object-fit: contain;"></a>
+                                    style="width: 100%;height: 100%;"></a>
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
                                     src="{{ asset('public/storage/app-store.png')}}" width="120" height="40" alt=""
-                                    style=" width: 100%;height: 100%;object-fit: contain;"></a>
+                                    style=" width: 100%;height: 100%;"></a>
                         </div>
                     </td>
                 </tr>
