@@ -9359,6 +9359,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                     }
                 });
 
+;          // Hide the image elements
                 localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
