@@ -6910,7 +6910,7 @@ $(document).on("click", ".final_checkout", function () {
         });
         
         $(".event_images_slider")
-        .trigger("add.owl.carousel", [$(newItem)])
+        .trigger("add.owl.carousel", [$(imageHtml)])
         .trigger("refresh.owl.carousel");
 
 
