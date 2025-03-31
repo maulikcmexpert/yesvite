@@ -129,16 +129,12 @@
           }
   
           try {
-              // Parse the date string to a Date object
-              const date = new Date(savedDate.replace(' ', 'T') + 'Z');
-  
-              if (isNaN(date.getTime())) {
-                  console.error('Invalid date format:', savedDate);
-                  return;
-              }
-  
-              // Convert to Los Angeles time zone
-              const laOptions = {
+              // Parse the date as Los Angeles time using Date object
+              const [datePart, timePart] = savedDate.split(' ');
+              const laTime = new Date(`${datePart}T${timePart}`);
+              
+              // Convert to Los Angeles timezone explicitly
+              const laFormatted = new Intl.DateTimeFormat('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -146,14 +142,11 @@
                   minute: 'numeric',
                   second: 'numeric',
                   timeZone: 'America/Los_Angeles',
-                  timeZoneName: 'short',
                   hour12: true
-              };
+              }).format(laTime);
   
-              const laFormatted = new Intl.DateTimeFormat('en-US', laOptions).format(date);
-  
-              // Convert to the user's local timezone
-              const localOptions = {
+              // Convert to local timezone
+              const localFormatted = new Intl.DateTimeFormat(navigator.language, {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
@@ -162,10 +155,9 @@
                   second: 'numeric',
                   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                   hour12: true
-              };
+              }).format(laTime);
   
-              const localFormatted = new Intl.DateTimeFormat(navigator.language, localOptions).format(date);
-  
+              // Display the final date in local time
               if (localFormatted) {
                   const finalDate = localFormatted.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
                   saveDateElement.innerHTML = `Last Save: ${finalDate}`;
@@ -178,5 +170,6 @@
       });
   });
   </script>
+  
   
   
