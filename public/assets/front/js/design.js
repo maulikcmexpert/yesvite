@@ -620,13 +620,10 @@ $(document).on("click", ".edit_design_tem", function (e) {
     eventData.desgin_selected = "";
     // }
     console.log(temp_id);
-    console.log(eventData.temp_id);
 
 
 
-    // Clear the carousel content and refresh it
-    let slider = $(".create-account-slider.slider_login");
-    slider.trigger("remove.owl.carousel").html("").trigger("refresh.owl.carousel");
+
 
     console.log("Template changed, images cleared.");
     var current_event_id = $(this).data("event_id");
