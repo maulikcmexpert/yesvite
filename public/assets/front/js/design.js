@@ -838,7 +838,10 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        selectAllTextBoxes();
+                        setTimeout(function () {
+                            selectAllTextBoxes();
+                        }, 500); // Waits 500ms before selecting textboxes
+
                     });
                 }
 
