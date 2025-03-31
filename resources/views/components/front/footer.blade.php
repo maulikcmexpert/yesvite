@@ -755,11 +755,11 @@
                     function updateUnreadCountG(snapshot) {
                         let totalUnreadCount = 0;
 
-                        console.log(snapshot.val());
                         
                         if (snapshot.exists()) {
                             const conversations = snapshot.val();
                             for (let conversationId in conversations) {
+                                console.log(conversations[conversationId]);
                                 const conversation = conversations[conversationId];
 
                                 if (conversation.unReadCount && conversation.contactName) {
