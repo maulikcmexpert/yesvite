@@ -4067,13 +4067,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
         eventData.temp_id = temp_id;
-        if (
-            restoredTempId &&
-            restoredTempId != "" &&
-            restoredTempId != undefined
-        ) {
-            eventData.temp_id = restoredTempId;
-        }
+
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -6908,7 +6902,7 @@ $(document).on("click", ".final_checkout", function () {
                 </div>
             `;
             // $('.event_images_slider').append(imageHtml);
-                    
+
             $(".event_images_slider")
             .trigger("add.owl.carousel", [$(imageHtml)])
             .trigger("refresh.owl.carousel");
@@ -6956,7 +6950,7 @@ $(document).on("click", ".final_checkout", function () {
         //         },
         //     },
         // });
-    } 
+    }
     // else {
     //     $(".event_images_slider").css("display", "none");
     //     $(".event_images_template").css("display", "block");
@@ -9374,7 +9368,7 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.setAttribute('data-image', sliderImages[index].fileName); 
+                        sliderElement.setAttribute('data-image', sliderImages[index].fileName);
                         sliderElement.style.display = "block";
                         $(".photo-edit-delete-" + (index + 1)).show();
                         console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
