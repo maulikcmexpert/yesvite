@@ -309,6 +309,8 @@ $(document).on('input','#search_draft_event',function(){
                 $('#tabbtn2').text(response.last_month);
                 $('.count_of_draft').text(response.total);
 
+                formatSaveDates();
+
             }else{
                 $('#scrollStatus2').html('');
                 $('#scrollStatus2').html('No Data Found');
