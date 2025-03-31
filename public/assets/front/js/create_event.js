@@ -6893,22 +6893,22 @@ $(document).on("click", ".final_checkout", function () {
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
-        eventData.slider_images.forEach((image) => {
-             imageHtml = `
-                <div class="item">
-                    <div class="setting-img">
-                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
-                    </div>
-                </div>
-            `;
-            // $('.event_images_slider').append(imageHtml);
-
-            $(".event_images_slider")
-            .trigger("add.owl.carousel", [$(imageHtml)])
-            .trigger("refresh.owl.carousel");
+        photoSliders.forEach((sliderClass, index) => {
+            const sliderElement = $(`#${sliderClass}`);
+            if (sliderElement.length) {
+                if (sliderImages[index]) {
+                    sliderElement.attr(
+                        "src",
+                        `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
+                    );
+                }
+            }
         });
 
+        const owlCarousel = $(".event_images_slider");
 
+        // Add the new item to the carousel
+        owlCarousel.trigger("add.owl.carousel", [newItem]).trigger("refresh.owl.carousel");
 
         // photoSliders.forEach((sliderClass, index) => {
         //     const sliderElement = $(`#${sliderClass}`);
@@ -9377,6 +9377,8 @@ $(document).on("click", ".design-sidebar-action", function () {
                     }
                 });
 
+
+                localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
