@@ -1929,8 +1929,9 @@ $("#end_time").on("change", function () {
 //     }
 // });
 $("#rsvp_by_date").on("change", function () {
-    if($("#isRsvpEvent").is('checked')){
+    if($("#isRsvpEvent").is(':checked')){
         alert("Checkbox is already disabled!");
+        $(this).prop("checked", false);  // Uncheck it if disabled
         $("#rsvp_by_date").attr('disabled',true);
         return; 
     }else{
