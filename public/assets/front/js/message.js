@@ -4021,7 +4021,7 @@ async function getTotalUnreadMessageCount() {
 
     return totalUnreadCount;
 }
-
+alert(1);
 // Function to update badge with unread message count
 async function updateUnreadMessageBadge(conversationId = null) {
     console.log("updateUnreadMessageBadge");
@@ -4033,6 +4033,7 @@ async function updateUnreadMessageBadge(conversationId = null) {
         $(".g-badge").html(parseInt(totalUnreadCount));
         $(".badge").html(parseInt(totalUnreadCount));
     } else {
+        alert(0)
         $(".g-badge").hide();
         $(".badge").hide();
         $(".g-badge").html("");
