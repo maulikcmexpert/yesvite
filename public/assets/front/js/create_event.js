@@ -6890,7 +6890,7 @@ $(document).on("click", ".final_checkout", function () {
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
-        alert(1);
+        // alert(1);
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
