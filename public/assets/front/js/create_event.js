@@ -6895,6 +6895,8 @@ $(document).on("click", ".final_checkout", function () {
         var imageHtml;
 
         var p=0;
+        if (eventData.slider_images && eventData.slider_images.length > 0) {
+
         eventData.slider_images.forEach((image) => {
             p++;
              imageHtml = `
@@ -6910,6 +6912,7 @@ $(document).on("click", ".final_checkout", function () {
             .trigger("add.owl.carousel", [$(imageHtml)])
             .trigger("refresh.owl.carousel");
         });
+    }
 
         $('.slider_image_count').text(p+'/3 Photos');
 
