@@ -52,6 +52,7 @@ $notification_list=getNotificationList();
             </svg>
             @php
             $count = getTotalUnreadMessageCount();
+            dd($count);
             @endphp
 
             <span class="g-badge" style="display: {{$count>0 ? 'block':'none'}}">{{$count}}</span>
