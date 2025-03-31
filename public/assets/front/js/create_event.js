@@ -9098,7 +9098,7 @@ $(document).on("click", ".save-slider-image", function () {
                     window.location.href = "/login"; // Redirect to home page
                     return;
                 }
-                var savedImages = response.images;
+                // var savedImages = response.images;
                 var newImages = response.images;
                 if ($("#isUserLoggedIn").val() === "0") {
                     let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
@@ -9371,7 +9371,8 @@ $(document).on("click", ".design-sidebar-action", function () {
 
                 const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
 
-                const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+                // const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+                const sliderImages = eventData.slider_images;
                 console.log(sliderImages.length);
 
                 var imagecount=0;
