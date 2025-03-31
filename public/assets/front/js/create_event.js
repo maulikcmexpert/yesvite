@@ -6898,8 +6898,9 @@ $(document).on("click", ".final_checkout", function () {
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
+        var imageHtml;
         eventData.slider_images.forEach((image) => {
-            const imageHtml = `
+             imageHtml = `
                 <div class="item">
                     <div class="setting-img">
                         <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
