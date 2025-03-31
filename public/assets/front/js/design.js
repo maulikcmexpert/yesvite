@@ -1314,17 +1314,21 @@ async function bindData(current_event_id) {
             return;
         }
 
-        if (textObjects.length === 1) {
-            console.log('Single textbox active');
-            canvas.setActiveObject(textObjects[0]);
-        } else {
-            console.log('Multiple textboxes selected');
-            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-            canvas.setActiveObject(activeSelection);
-        }
+        // Loop through each textbox and mark as selected
+        textObjects.forEach(textbox => {
+            textbox.set({
+                borderColor: 'blue',
+                cornerColor: 'blue',
+                cornerStyle: 'circle',
+                hasControls: true, // Keep resizing enabled
+                selectable: true // Ensure it's selectable
+            });
+            canvas.setActiveObject(textbox);
+        });
 
         canvas.renderAll();
     }
+
 
     // Call function after objects are loaded
     // canvas.on('after:render', function () {
