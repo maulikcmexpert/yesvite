@@ -185,6 +185,8 @@ class EventPhotoController extends BaseController
             $eventDetails['is_co_host'] =  EventInvitedUser::where(['event_id' => $eventDetail->id, 'user_id' => $user->id, 'is_co_host' => '1'])->exists() ? 1 : 0;
 
             $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
+            $eventDetails['isRsvpEvent'] = $eventDetail->isRsvpEvent ?? "";
+
             $rsvp_status = "";
             $checkUserrsvp = EventInvitedUser::whereHas('user', function ($query) {
                 // $query->where('app_user', '1');
