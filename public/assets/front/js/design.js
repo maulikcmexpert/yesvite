@@ -838,7 +838,7 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        selectAllTextBoxes();
+                        // selectAllTextBoxes();
                     });
                 }
 
@@ -1302,21 +1302,22 @@ async function bindData(current_event_id) {
         var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
         if (textObjects.length > 0) {
-            textObjects.forEach(textbox => {
-                textbox.set({
-                    selectable: true, // Ensures the textbox can be selected
-                    hasControls: true, // Shows resize controls
-                    borderColor: 'blue', // Highlights selected textboxes
-                    cornerColor: 'blue', // Changes corner color
-                    cornerSize: 8 // Adjusts selection handle size
-                });
-            });
-
-            // Refresh the canvas to show the selection effect
-            canvas.renderAll();
+            if (textObjects.length === 1) {
+                // If only one textbox exists, select it directly
+                canvas.setActiveObject(textObjects[0]);
+            } else {
+                // Select multiple textboxes
+                var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+                canvas.setActiveObject(activeSelection);
+            }
+            canvas.requestRenderAll();
         }
     }
 
+    // Wait for the canvas to be ready, then apply selection
+    canvas.on('after:render', function () {
+        selectAllTextBoxes(); // Automatically select all textboxes when canvas loads
+    });
 
 
     function getWidth(element, text) {
