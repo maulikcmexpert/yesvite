@@ -68,7 +68,8 @@ use stdClass;
 use Illuminate\Foundation\Exceptions\Handler as Exception;
 use function PHPUnit\Framework\isFalse;
 use Illuminate\Support\Facades\File;
-
+use App\Mail\NotifyPendingInvitation;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends BaseController
 {
@@ -1385,7 +1386,17 @@ class EventController extends BaseController
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
+                    $eventData = [
+                        'id'=>$eventId,
+                        'host_email' => 'vllen@yopmail.com',
+                        'event_name' => 'ddnfdjkbjdbffddf',
+                        'event_image' =>  "no_image.png",
+                        'date' =>   "2025-02-4001",
+                        'time' => "55:14 am",
+                    ];
 
+                    $invitation_email = new NotifyPendingInvitation($eventData);
+                    Mail::to('biren.b.cmexpertise@gmail.com')->send($invitation_email);
                     sendNotification('invite', $notificationParam);
                     sendNotificationGuest('invite', $notificationParam);
                 }
