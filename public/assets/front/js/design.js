@@ -621,6 +621,19 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // }
     // //console.log(dbJson);
     // //console.log(image);
+    if(temp_id ==  eventData.temp_id){
+alert();
+        $(".slider_img, .login_img img").attr("src", "");
+    }
+
+
+
+
+    // Clear the carousel content and refresh it
+    let slider = $(".create-account-slider.slider_login");
+    slider.trigger("remove.owl.carousel").html("").trigger("refresh.owl.carousel");
+
+    console.log("Template changed, images cleared.");
     var current_event_id = $(this).data("event_id");
     event_id = current_event_id;
     $(".step_1").hide();
