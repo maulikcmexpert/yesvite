@@ -3419,7 +3419,7 @@ class EventController extends BaseController
         $existingImages = session('desgin_slider');
 
         $imageSources = $request->imageSources;
-        $imagenames = $request->imagenames ?? [];
+        $imagenames = $request->imagenames;
         // dd($imagenames);
         $validNames = array_filter(array_column($imagenames, 'name'));
         $savedFileNames = array_column($savedFiles, 'fileName');
