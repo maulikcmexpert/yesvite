@@ -2447,10 +2447,50 @@ canvas.getObjects().forEach(obj => {
         canvas.discardActiveObject();
         canvas.renderAll();
     });
+    let isFirstClick = true;
 
+    function simulateMouseEvents(x, y) {
+        const canvasEl = canvas.upperCanvasEl;
+        const rect = canvasEl.getBoundingClientRect();
+
+        // Create and dispatch the mousedown event
+        const mouseDownEvent = new MouseEvent('mousedown', {
+            clientX: rect.left + x,
+            clientY: rect.top + y,
+            bubbles: true,
+            cancelable: true,
+            view: window
+        });
+        canvasEl.dispatchEvent(mouseDownEvent);
+
+        // Create and dispatch the mouseup event
+        const mouseUpEvent = new MouseEvent('mouseup', {
+            clientX: rect.left + x,
+            clientY: rect.top + y,
+            bubbles: true,
+            cancelable: true,
+            view: window
+        });
+        canvasEl.dispatchEvent(mouseUpEvent);
+    }
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
+        if (isFirstClick) {
+            isFirstClick = false; // Reset the flag
 
+            // Get the click position relative to the canvas
+            const pointer = canvas.getPointer(options.e);
+            const { x, y } = pointer;
+
+            // Log the initial click position
+            console.log('Initial click at:', x, y);
+
+            // Set a timeout to simulate mouse events at the same position after 1 second
+            setTimeout(() => {
+                simulateMouseEvents(x, y);
+                console.log('Simulated mouse events at:', x, y);
+            }, 200);
+        }
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
