@@ -6891,11 +6891,10 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected
         );
     }
-    const slide_image_get = localStorage.getItem("save-slider-image");
-    let hasStoredImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined" && slide_image_get !== "";
+      const slide_image_get = localStorage.getItem("save-slider-image");
     console.log(eventData.slider_images);
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
-    const sliderImages =  hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
+    const sliderImages = eventData.slider_images;
     console.log(sliderImages);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         $(".event_images_slider").css("display", "block");
@@ -10508,6 +10507,11 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         }
 
         eventData.textData = dbJson;
+
+        const slide_image_get = localStorage.getItem("save-slider-image");
+        eventData.slider_images = JSON.parse(slide_image_get);
+
+
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes
         localStorage.removeItem("pageRefresh");
