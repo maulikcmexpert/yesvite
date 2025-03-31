@@ -1372,6 +1372,23 @@ function selectAllTextBoxes() {
 
 
     let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+    selection.set({
+        hasRotatingPoint: false,
+            hasBorders: false,
+            borderColor: 'transparent', // Optional: Hides the border when object is active
+            cornerColor: 'transparent', // Optional: Hides the corners when object is active
+            lockRotation: true // Optional: Prevents rotation via other means
+    });
+    selection.setControlsVisibility({
+            mt: false, // Middle top
+            mb: false, // Middle bottom
+            ml: false, // Middle left
+            mr: false, // Middle right
+            bl: false, // Bottom left
+            br: false, // Bottom right
+            tl: false, // Top left
+            tr: false  // Top right
+        });
 
     canvas.setActiveObject(selection);
     canvas.requestRenderAll();
