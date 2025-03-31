@@ -759,8 +759,8 @@
                         if (snapshot.exists()) {
                             const conversations = snapshot.val();
                             for (let conversationId in conversations) {
-                                console.log(conversations[conversationId]);
                                 const conversation = conversations[conversationId];
+                                console.log(conversation.unReadCount);
 
                                 if (conversation.unReadCount && conversation.contactName) {
                                     totalUnreadCount += parseInt(conversation.unReadCount, 10);
