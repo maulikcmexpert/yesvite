@@ -9325,7 +9325,7 @@ $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
 
     if (designId) {
-        $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
+        $(".slider_img")
         .attr("src", "")
         .hide();
 
