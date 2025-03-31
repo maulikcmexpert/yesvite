@@ -1307,7 +1307,7 @@ async function bindData(current_event_id) {
             return;
         }
 
-        var textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
+        var textObjects = canvas.getObjects();
 
         if (textObjects.length === 0) {
             console.warn("No textboxes found.");
@@ -1315,15 +1315,15 @@ async function bindData(current_event_id) {
         }
 
         // Loop through each textbox and mark as selected
-        textObjects.forEach(textbox => {
-            textbox.set({
+        canvas.getObjects().forEach((obj) => {
+            obj.set({
                 borderColor: 'blue',
                 cornerColor: 'blue',
                 cornerStyle: 'circle',
                 hasControls: true, // Keep resizing enabled
                 selectable: true // Ensure it's selectable
             });
-            canvas.setActiveObject(textbox);
+            canvas.setActiveObject(obj);
         });
 
         canvas.renderAll();
