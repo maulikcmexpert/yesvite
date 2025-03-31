@@ -129,10 +129,12 @@
                                                 <div class="host-detail">
                                                     <h4 class="title">Details</h4>
                                                     <ul>
-                                                        @if (!empty($eventDetails['rsvp_by']))
-                                                            <li>RSVP By:
-                                                                {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
-                                                            </li>
+                                                        @if (!empty($eventDetails['isRsvpEvent'] && $eventDetails['isRsvpEvent']=='0'))
+                                                            @if (!empty($eventDetails['rsvp_by']))
+                                                                <li>RSVP By:
+                                                                    {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                                                                </li>
+                                                            @endif
                                                         @endif
                                                         @if ($eventDetails['podluck'] == 1)
                                                             <li>Potluck Event</li>
@@ -2202,11 +2204,14 @@
                             <div class="host-detail">
                                 <h5>Event Details</h5>
                                 <ul>
-                                    @if (!empty($eventDetails['rsvp_by']))
-                                        <li>RSVP By:
-                                            {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
-                                        </li>
-                                    @endif
+                                    @if (!empty($eventDetails['isRsvpEvent'] && $eventDetails['isRsvpEvent']=='0'))
+
+                                        @if (!empty($eventDetails['rsvp_by']))
+                                            <li>RSVP By:
+                                                {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                                            </li>
+                                        @endif
+                                    @endif    
                                     @if ($eventDetails['podluck'] == 1)
                                         <li>Potluck Event</li>
                                     @endif

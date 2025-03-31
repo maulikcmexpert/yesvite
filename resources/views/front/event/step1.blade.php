@@ -439,7 +439,7 @@
                             </div>
                             <label for="end-time-zone" id="end-time-zone-error" class="error"></label>
                         </div>
-                        <div class="col-12 mb-3" style="border-bottom: 1px solid var(--borderColor)">
+                        <div class="col-12 mb-3 rsvp_by_date_toggle" style="border-bottom: 1px solid var(--borderColor)">
                             <div class="col-12 mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h6>RSVP By Date</h6>

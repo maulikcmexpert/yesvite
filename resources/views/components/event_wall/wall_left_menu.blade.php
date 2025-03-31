@@ -122,11 +122,13 @@
             <div class="hosted-by-detail-inner">
                 <h3>Details</h3>
                 <ul>
-                    @if (!empty($eventDetails['rsvp_by']))
-                        <li>RSVP By:
-                            {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
-                        </li>
-                    @endif
+                    @if (!empty($eventDetails['isRsvpEvent'] && $eventDetails['isRsvpEvent']=='0'))
+                            @if (!empty($eventDetails['rsvp_by']))
+                                <li>RSVP By:
+                                    {{ \Carbon\Carbon::parse($eventDetails['rsvp_by'])->format('F d, Y') }}
+                                </li>
+                            @endif
+                    @endif        
                     @if ($eventDetails['podluck'] == 1)
                         <li>Potluck Event</li>
                     @endif
