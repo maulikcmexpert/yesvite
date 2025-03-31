@@ -9105,7 +9105,7 @@ $(document).on("click", ".save-slider-image", function () {
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
-                toastr.error(error);
+                // toastr.error(error);
             },
         });
     }

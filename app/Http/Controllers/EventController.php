@@ -3473,7 +3473,7 @@ class EventController extends BaseController
             }
         }
         if (empty($savedFiles)) {
-            return response()->json(['status' => 'No valid images to save'], 400);
+            // return response()->json(['status' => 'No valid images to save'], 400);
         }
         // dd($savedFiles);
         session(['desgin_slider' => $savedFiles]);
