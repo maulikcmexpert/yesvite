@@ -129,43 +129,42 @@
           }
   
           try {
-              // Extract the datetime and the timezone
-              const [datetime, timezone] = savedDate.split('-');
+              // Parse the date string to a Date object
+              const date = new Date(savedDate.replace(' ', 'T') + 'Z');
   
-              if (!datetime || !timezone) {
+              if (isNaN(date.getTime())) {
                   console.error('Invalid date format:', savedDate);
                   return;
               }
   
-              // Convert the timezone to a valid format
-              const timezoneMap = {
-                  "los angeles": "America/Los_Angeles"
-              };
-  
-              const timezoneId = timezoneMap[timezone.toLowerCase()];
-              
-              if (!timezoneId) {
-                  console.error('Unknown timezone:', timezone);
-                  return;
-              }
-  
-              // Create date in the provided timezone
-              const zonedDate = new Date(`${datetime.replace(' ', 'T')}Z`);
-              
-              // Convert to local timezone
-              const options = {
+              // Convert to Los Angeles time zone
+              const laOptions = {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                   hour: 'numeric',
                   minute: 'numeric',
                   second: 'numeric',
-                  timeZone: timezoneId,
+                  timeZone: 'America/Los_Angeles',
                   timeZoneName: 'short',
                   hour12: true
               };
   
-              const localFormatted = new Intl.DateTimeFormat(navigator.language, options).format(zonedDate);
+              const laFormatted = new Intl.DateTimeFormat('en-US', laOptions).format(date);
+  
+              // Convert to the user's local timezone
+              const localOptions = {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                  hour12: true
+              };
+  
+              const localFormatted = new Intl.DateTimeFormat(navigator.language, localOptions).format(date);
   
               if (localFormatted) {
                   const finalDate = localFormatted.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
@@ -179,4 +178,5 @@
       });
   });
   </script>
+  
   
