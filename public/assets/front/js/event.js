@@ -1014,6 +1014,7 @@ today.setHours(0, 0, 0, 0);
                 $('#tabbtn2').text(response.last_month);
                 $('.count_of_draft').text(response.total);
 
+                formatSaveDates();
 
             }else{
                 $('#scrollStatus2').html('');
