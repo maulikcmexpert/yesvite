@@ -9098,7 +9098,7 @@ $(document).on("click", ".save-slider-image", function () {
                     window.location.href = "/login"; // Redirect to home page
                     return;
                 }
-                // var savedImages = response.images;
+                var savedImages = response.images;
                 var newImages = response.images;
                 if ($("#isUserLoggedIn").val() === "0") {
                     let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
