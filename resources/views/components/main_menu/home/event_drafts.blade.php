@@ -68,7 +68,7 @@
   @endif
 
 
-  <script>
+  {{-- <script>
  document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
@@ -115,6 +115,68 @@
   });
 });
   
-</script>
-
-
+</script> --}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const saveDates = document.querySelectorAll('.last-save');
+  
+      saveDates.forEach(function (saveDateElement) {
+          const savedDate = saveDateElement.getAttribute('data-save-date');
+  
+          if (!savedDate) {
+              console.error('Missing date attribute');
+              return;
+          }
+  
+          try {
+              // Extract the datetime and the timezone
+              const [datetime, timezone] = savedDate.split('-');
+  
+              if (!datetime || !timezone) {
+                  console.error('Invalid date format:', savedDate);
+                  return;
+              }
+  
+              // Convert the timezone to a valid format
+              const timezoneMap = {
+                  "los angeles": "America/Los_Angeles"
+              };
+  
+              const timezoneId = timezoneMap[timezone.toLowerCase()];
+              
+              if (!timezoneId) {
+                  console.error('Unknown timezone:', timezone);
+                  return;
+              }
+  
+              // Create date in the provided timezone
+              const zonedDate = new Date(`${datetime.replace(' ', 'T')}Z`);
+              
+              // Convert to local timezone
+              const options = {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  timeZone: timezoneId,
+                  timeZoneName: 'short',
+                  hour12: true
+              };
+  
+              const localFormatted = new Intl.DateTimeFormat(navigator.language, options).format(zonedDate);
+  
+              if (localFormatted) {
+                  const finalDate = localFormatted.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+                  saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+              } else {
+                  console.error('Date formatting failed:', savedDate);
+              }
+          } catch (error) {
+              console.error('Error parsing date:', error);
+          }
+      });
+  });
+  </script>
+  

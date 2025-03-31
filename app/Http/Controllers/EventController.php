@@ -917,7 +917,7 @@ class EventController extends BaseController
         $event_creation->start_date = (isset($startDateFormat) && $endDateFormat != "") ? $startDateFormat : null;
         $event_creation->end_date = (isset($endDateFormat) && $endDateFormat != "") ? $endDateFormat : null;
         $event_creation->rsvp_by_date_set =  $rsvp_by_date_set;
-        $event_creation->isRsvpEvent =  $isRsvpEvent;
+        $event_creation->isRsvpEvent = (isset($isRsvpEvent) && $isRsvpEvent != "") ? $isRsvpEvent : '0';
         // $event_creation->rsvp_by_date_set = (isset($request->rsvp_by_date_set) && $request->rsvp_by_date_set != "" && $request->rsvp_by_date_set != 'false') ? "1" : "0";
         $event_creation->rsvp_by_date = (isset($rsvp_by_date) && $rsvp_by_date != "") ? $rsvp_by_date : null;
         $event_creation->rsvp_start_time = (isset($request->start_time) && $request->start_time != "") ? $request->start_time : "";
