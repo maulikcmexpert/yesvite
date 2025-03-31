@@ -2,7 +2,7 @@
 <div class="home-latest-draf-wrp">
     <div class="home-center-upcoming-events-title">
       <h3>Latest Drafts</h3>
-      <a href="{{route('event.event_drafts')}}">All Drafts</a>
+      <a href="{{route('event.event_drafts')}}">All Draftss</a>
     </div>
     @foreach ($draftEventArray as $draft )
     <a href="{{ route('event', encrypt($draft['id'])) }}" class="home-latest-draf-card">

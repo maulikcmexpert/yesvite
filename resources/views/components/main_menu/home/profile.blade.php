@@ -96,7 +96,7 @@
 <div class="home-latest-draf-wrp mobile-latest-draf">
                       <div class="home-center-upcoming-events-title">
                         <h3>Latest Drafts</h3>
-                        <a href="{{route('event.event_drafts')}}">All Draftss</a>
+                        <a href="{{route('event.event_drafts')}}">All Drafts</a>
                       </div>
                       <div class="mobile-draf-slider">
                         <div class="swiper latest-draf-slider">
