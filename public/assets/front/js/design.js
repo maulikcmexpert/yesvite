@@ -621,12 +621,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
     // }
     console.log(temp_id);
     console.log(eventData.temp_id);
-    let restoredTempId = localStorage.getItem("storedTempId");
-    if(temp_id == restoredTempId ){
-alert();
-        $(".slider_img, .login_img img").attr("src", "");
-    }
-
 
 
 
@@ -1331,15 +1325,15 @@ async function bindData(current_event_id) {
         }
 
         // If only one textbox exists, select it directly
-        if (textObjects.length === 1) {
-            canvas.setActiveObject(textObjects[0]);
-        } else {
-            // Create a selection of all textboxes
-            var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-            canvas.setActiveObject(activeSelection);
-        }
+        // if (textObjects.length === 1) {
+        //     canvas.setActiveObject(textObjects[0]);
+        // } else {
+        //     // Create a selection of all textboxes
+        //     var activeSelection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+        //     canvas.setActiveObject(activeSelection);
+        // }
 
-        canvas.renderAll();
+        // canvas.renderAll();
     }
 
     // canvas.loadFromJSON(yourSavedData, function () {
