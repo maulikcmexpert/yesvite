@@ -1565,6 +1565,7 @@ class EventListController extends BaseController
                 // $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y');
                 $formattedDate = Carbon::createFromFormat('Y-m-d H:i:s', $value->updated_at)->format('F j, Y - g:i A');
                 $eventDraftDetail['saved_date'] = $formattedDate;
+                $eventDraftDetail['update_date'] = $value->updated_at;
                 $eventDraftDetail['step'] = ($value->step != NULL) ? $value->step : 0;
                 $eventDraftDetail['event_plan_name'] = $value->subscription_plan_name;
 
