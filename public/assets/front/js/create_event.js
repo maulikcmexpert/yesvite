@@ -1914,28 +1914,7 @@ $("#end_time").on("change", function () {
     }
 });
 
-// $("#isRsvpEvent").on("change", function () {
-//     if ($(this).is(":checked")) {
-//         $("#rsvp_by_date").attr('disabled',true);
-//     } else {
-//         $("#rsvp_by_date").attr('disabled',false);
-//     }
-// });
-// $(document).on("click","#rsvp_by_date", function () {
-//     // alert();
-//     if ($(this).prop("disabled")) {
-//         alert("Checkbox is already disabled!");
-//         return; 
-//     }
-// });
 $("#rsvp_by_date").on("change", function () {
-    if($("#isRsvpEvent").is('checked')){
-        alert("Checkbox is already disabled!");
-        $("#rsvp_by_date").attr('disabled',true);
-        return; 
-    }else{
-        $("#rsvp_by_date").attr('disabled',false);
-    }
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
     } else {
@@ -9342,145 +9321,89 @@ $(document).on("click", ".edit_checkout", async function (e) {
     // handleActiveClass(this);
 });
 
-// $(document).on("click", ".design-sidebar-action", function () {
-//     let designId = $(this).attr("design-id");
-
-//     if (designId) {
-
-
-//         if (designId == "6") {
-//             let imgSrc1 = $(".photo-slider-1").attr("src");
-//             let imgSrc2 = $(".photo-slider-2").attr("src");
-//             let imgSrc3 = $(".photo-slider-3").attr("src");
-
-//             if (imgSrc1) $(".photo-edit-delete-1").show();
-//             if (imgSrc2) $(".photo-edit-delete-2").show();
-//             if (imgSrc3) $(".photo-edit-delete-3").show();
-
-//             const slide_image_get = localStorage.getItem("save-slider-image");
-//             console.log(slide_image_get);
-
-//             // Check if either eventData.slider_images or slide_image_get has valid data
-//             let hasEventDataImages =
-//                 eventData.slider_images;
-//             let hasStoredImages =
-//                 slide_image_get &&
-//                 slide_image_get !== "null" &&
-//                 slide_image_get !== "undefined" &&
-//                 slide_image_get !== "";
-
-//             if (hasEventDataImages || hasStoredImages) {
-//                 $(".design-sidebar").addClass("d-none");
-//                 $(".design-sidebar_7").removeClass("d-none");
-//                 $("#sidebar").addClass("design-sidebar_7");
-//                 $(".close-btn").attr("data-id", "design-sidebar_7");
-
-//                 const photoSliders = [
-//                     "photo-slider-1",
-//                     "photo-slider-2",
-//                     "photo-slider-3",
-//                 ];
-
-//                 const sliderImages = hasStoredImages
-//                     ? JSON.parse(slide_image_get)
-//                     : eventData.slider_images;
-//                 console.log(sliderImages);
-
-//                 photoSliders.forEach((sliderClass, index) => {
-//                     const sliderElement = document.querySelector(
-//                         `.${sliderClass}`
-//                     );
-
-//                     if (sliderElement && sliderImages[index]) {
-//                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-//                         sliderElement.style.display = "block";
-//                         $(".photo-edit-delete-" + (index + 1)).show();
-//                         console.log(
-//                             `Set src for ${sliderClass}: ${sliderElement.src}`
-//                         );
-//                     } else {
-//                         console.log(
-//                             `No element found for class: ${sliderClass} or missing image data.`
-//                         );
-//                     }
-
-//                 });
-
-//                 localStorage.removeItem("save-slider-image");
-//             } else {
-//                 // If both eventData.slider_images and slide_image_get are empty
-//                 $(".design-sidebar").addClass("d-none");
-
-//                 if (imgSrc1 || imgSrc2 || imgSrc3) {
-//                     $(".design-sidebar_7").removeClass("d-none");
-//                 } else {
-//                     $(".design-sidebar_" + designId).removeClass("d-none");
-//                 }
-
-//                 $("#sidebar").addClass("design-sidebar_" + designId);
-//                 $(".close-btn").attr("data-id", "design-sidebar_" + designId);
-//             }
-//         } else {
-//             $(".design-sidebar").addClass("d-none");
-//             $(".design-sidebar_" + designId).removeClass("d-none");
-//             $("#sidebar").addClass("design-sidebar_" + designId);
-//             $(".close-btn").attr("data-id", "design-sidebar_" + designId);
-//         }
-//     }
-// });
-
-
-
 $(document).on("click", ".design-sidebar-action", function () {
     let designId = $(this).attr("design-id");
 
     if (designId) {
-        // Clear and hide all photo sliders before loading new images
-        $(".photo-slider-1, .photo-slider-2, .photo-slider-3")
-            .attr("src", "")  // Clear the src attribute
-            .hide();          // Hide the image elements
 
-        $(".photo-edit-delete-1, .photo-edit-delete-2, .photo-edit-delete-3").hide();
 
         if (designId == "6") {
-            const slideImageData = localStorage.getItem("save-slider-image");
-            const hasStoredImages = slideImageData && slideImageData !== "null" && slideImageData !== "undefined" && slideImageData !== "";
+            let imgSrc1 = $(".photo-slider-1").attr("src");
+            let imgSrc2 = $(".photo-slider-2").attr("src");
+            let imgSrc3 = $(".photo-slider-3").attr("src");
 
-            if (eventData.slider_images || hasStoredImages) {
+            if (imgSrc1) $(".photo-edit-delete-1").show();
+            if (imgSrc2) $(".photo-edit-delete-2").show();
+            if (imgSrc3) $(".photo-edit-delete-3").show();
+
+            const slide_image_get = localStorage.getItem("save-slider-image");
+            console.log(slide_image_get);
+
+            // Check if either eventData.slider_images or slide_image_get has valid data
+            let hasEventDataImages =
+                eventData.slider_images;
+            let hasStoredImages =
+                slide_image_get &&
+                slide_image_get !== "null" &&
+                slide_image_get !== "undefined" &&
+                slide_image_get !== "";
+
+            if (hasEventDataImages || hasStoredImages) {
                 $(".design-sidebar").addClass("d-none");
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
 
-                const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
-                const sliderImages = hasStoredImages ? JSON.parse(slideImageData) : eventData.slider_images;
+                const photoSliders = [
+                    "photo-slider-1",
+                    "photo-slider-2",
+                    "photo-slider-3",
+                ];
+
+                const sliderImages = hasStoredImages
+                    ? JSON.parse(slide_image_get)
+                    : eventData.slider_images;
+                console.log(sliderImages);
 
                 photoSliders.forEach((sliderClass, index) => {
-                    const sliderElement = $(`.${sliderClass}`);
-                    if (sliderElement.length && sliderImages[index]) {
-                        const newSrc = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.attr("src", newSrc).show();
-                        $(`.photo-edit-delete-${index + 1}`).show();
+                    const sliderElement = document.querySelector(
+                        `.${sliderClass}`
+                    );
+
+                    if (sliderElement && sliderImages[index]) {
+                        sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
+                        sliderElement.style.display = "block";
+                        $(".photo-edit-delete-" + (index + 1)).show();
+                        console.log(
+                            `Set src for ${sliderClass}: ${sliderElement.src}`
+                        );
+                    } else {
+                        console.log(
+                            `No element found for class: ${sliderClass} or missing image data.`
+                        );
                     }
+
                 });
 
-                // Remove the stored images from localStorage to prevent old images from persisting
                 localStorage.removeItem("save-slider-image");
             } else {
+                // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
-                if ($(".photo-slider-1").attr("src") || $(".photo-slider-2").attr("src") || $(".photo-slider-3").attr("src")) {
+
+                if (imgSrc1 || imgSrc2 || imgSrc3) {
                     $(".design-sidebar_7").removeClass("d-none");
                 } else {
-                    $(`.design-sidebar_${designId}`).removeClass("d-none");
+                    $(".design-sidebar_" + designId).removeClass("d-none");
                 }
-                $("#sidebar").addClass(`design-sidebar_${designId}`);
-                $(".close-btn").attr("data-id", `design-sidebar_${designId}`);
+
+                $("#sidebar").addClass("design-sidebar_" + designId);
+                $(".close-btn").attr("data-id", "design-sidebar_" + designId);
             }
         } else {
             $(".design-sidebar").addClass("d-none");
-            $(`.design-sidebar_${designId}`).removeClass("d-none");
-            $("#sidebar").addClass(`design-sidebar_${designId}`);
-            $(".close-btn").attr("data-id", `design-sidebar_${designId}`);
+            $(".design-sidebar_" + designId).removeClass("d-none");
+            $("#sidebar").addClass("design-sidebar_" + designId);
+            $(".close-btn").attr("data-id", "design-sidebar_" + designId);
         }
     }
 });
