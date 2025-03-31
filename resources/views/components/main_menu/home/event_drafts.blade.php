@@ -2,7 +2,7 @@
 <div class="home-latest-draf-wrp">
     <div class="home-center-upcoming-events-title">
       <h3>Latest Drafts</h3>
-      <a href="{{route('event.event_drafts')}}">All Draftss</a>
+      <a href="{{route('event.event_drafts')}}">All Drafts</a>
     </div>
     @foreach ($draftEventArray as $draft )
     <a href="{{ route('event', encrypt($draft['id'])) }}" class="home-latest-draf-card">
@@ -68,7 +68,7 @@
   @endif
 
 
-  <script>
+  {{-- <script>
  document.addEventListener("DOMContentLoaded", function () {
   const saveDates = document.querySelectorAll('.last-save'); // Assuming you have elements with this class
 
@@ -115,6 +115,48 @@
   });
 });
   
+</script> --}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const saveDates = document.querySelectorAll('.last-save'); 
+
+    saveDates.forEach(function (saveDateElement) {
+        const savedDate = saveDateElement.getAttribute('data-save-date'); 
+
+        if (!savedDate) {
+            console.error('Missing date attribute');
+            return;
+        }
+
+        // Parse the saved date (ISO 8601 format: YYYY-MM-DDTHH:mm:ss)
+        const losAngelesDate = new Date(savedDate); 
+
+        if (isNaN(losAngelesDate.getTime())) {
+            console.error('Invalid date format:', savedDate);
+            return;
+        }
+
+        // Format to local timezone
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+
+        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(losAngelesDate);
+
+        if (formattedDate) {
+            const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
+            saveDateElement.innerHTML = `Last Save: ${finalDate}`;
+        } else {
+            console.error('Date formatting failed:', savedDate);
+        }
+    });
+});
+
 </script>
-
-
