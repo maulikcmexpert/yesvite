@@ -130,19 +130,15 @@
         }
 
         try {
-            // Convert 'YYYY-MM-DD HH:MM:SS' to ISO format (YYYY-MM-DDTHH:MM:SSZ) for UTC interpretation
-            const isoDateString = savedDate.replace(' ', 'T') + 'Z';
-            const utcDate = new Date(isoDateString);
+            // Parse the date as local time by replacing space with 'T'
+            const localDate = new Date(savedDate.replace(' ', 'T'));
 
-            if (isNaN(utcDate.getTime())) {
+            if (isNaN(localDate.getTime())) {
                 console.error('Invalid date format:', savedDate);
                 return;
             }
 
-            // Convert to local timezone
-            const localTime = new Date(utcDate.toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
-
-            // Format the date for display
+            // Format date to display in PC's local timezone
             const options = {
                 year: 'numeric',
                 month: 'long',
@@ -153,7 +149,7 @@
                 hour12: true
             };
 
-            const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localTime);
+            const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(localDate);
 
             if (formattedDate) {
                 const finalDate = formattedDate.replace(' at ', ' - ').replace(/\b(am|pm)\b/i, match => match.toUpperCase());
