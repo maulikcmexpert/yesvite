@@ -765,6 +765,7 @@
                                 }
                             }
                         }
+                        alert(totalUnreadCount);
 
                         // Update badge display
                         document.querySelectorAll(".badge, .g-badge").forEach(el => {
