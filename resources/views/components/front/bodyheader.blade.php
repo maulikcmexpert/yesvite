@@ -1,5 +1,7 @@
 
 @php
+    $count = getTotalUnreadMessageCount();
+    dd($count);
 $notification_list=getNotificationList();
 
 @endphp
