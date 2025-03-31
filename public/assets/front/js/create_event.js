@@ -6908,11 +6908,12 @@ $(document).on("click", ".final_checkout", function () {
                 </div>
             `;
             $('.event_images_slider').append(imageHtml);
+                    
+            $(".event_images_slider")
+            .trigger("add.owl.carousel", [$(imageHtml)])
+            .trigger("refresh.owl.carousel");
         });
-        
-        $(".event_images_slider")
-        .trigger("add.owl.carousel", [$(imageHtml)])
-        .trigger("refresh.owl.carousel");
+
 
 
         // photoSliders.forEach((sliderClass, index) => {
