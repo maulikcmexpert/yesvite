@@ -6913,7 +6913,7 @@ $(document).on("click", ".final_checkout", function () {
 
         var p=0;
         if (eventData.slider_images && eventData.slider_images.length > 0) {
-            $(".event_images_slider").css("display", "block").html(""); //
+           //
 
         eventData.slider_images.forEach((image) => {
             p++;
