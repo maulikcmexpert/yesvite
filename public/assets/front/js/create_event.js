@@ -5385,6 +5385,7 @@ function save_image_design(downloadImage, textData) {
                     }
                     console.log(response);
                     let image = response.image;
+                    eventData.desgin_selected = "";
                     eventData.desgin_selected = image;
 
                     if (response.status == 401 && response.info == "logout") {
