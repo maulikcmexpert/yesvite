@@ -115,61 +115,76 @@ $notification_list=getNotificationList();
                 {{-- <span type="button" data-bs-toggle="modal" data-bs-target="#"> --}}
                   <span id="notification-filter-modal" type="button" data-bs-toggle="modal" data-bs-target="#all-notification-filter-modal">
 
-                  <svg
-                    viewBox="0 0 20 21"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M18.3359 5.91669H13.3359"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M4.9974 5.91669H1.66406"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M8.33073 8.83333C9.94156 8.83333 11.2474 7.5275 11.2474 5.91667C11.2474 4.30584 9.94156 3 8.33073 3C6.7199 3 5.41406 4.30584 5.41406 5.91667C5.41406 7.5275 6.7199 8.83333 8.33073 8.83333Z"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M18.3333 15.0833H15"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M6.66406 15.0833H1.66406"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M11.6667 18C13.2775 18 14.5833 16.6942 14.5833 15.0834C14.5833 13.4725 13.2775 12.1667 11.6667 12.1667C10.0558 12.1667 8.75 13.4725 8.75 15.0834C8.75 16.6942 10.0558 18 11.6667 18Z"
-                      stroke="#F73C71"
-                      stroke-width="1.5"
-                      stroke-miterlimit="10"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+                    <svg
+                      viewBox="0 0 20 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18.3359 5.91669H13.3359"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M4.9974 5.91669H1.66406"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M8.33073 8.83333C9.94156 8.83333 11.2474 7.5275 11.2474 5.91667C11.2474 4.30584 9.94156 3 8.33073 3C6.7199 3 5.41406 4.30584 5.41406 5.91667C5.41406 7.5275 6.7199 8.83333 8.33073 8.83333Z"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M18.3333 15.0833H15"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M6.66406 15.0833H1.66406"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M11.6667 18C13.2775 18 14.5833 16.6942 14.5833 15.0834C14.5833 13.4725 13.2775 12.1667 11.6667 12.1667C10.0558 12.1667 8.75 13.4725 8.75 15.0834C8.75 16.6942 10.0558 18 11.6667 18Z"
+                        stroke="#F73C71"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                 </span>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="dropdownNotification-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+
+                  <ul class="dropdown-menu dropdownNotification-menu" aria-labelledby="dropdownNotification-menu">
+                    <li><a href="{{route('account_settings.notificationSetting')}}" target="_blank"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15.8335 6.66699C17.2142 6.66699 18.3335 5.5477 18.3335 4.16699C18.3335 2.78628 17.2142 1.66699 15.8335 1.66699C14.4528 1.66699 13.3335 2.78628 13.3335 4.16699C13.3335 5.5477 14.4528 6.66699 15.8335 6.66699Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M5.8335 10.833H10.0002" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M5.8335 14.167H13.3335" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M11.6665 1.66699H7.49984C3.33317 1.66699 1.6665 3.33366 1.6665 7.50033V12.5003C1.6665 16.667 3.33317 18.3337 7.49984 18.3337H12.4998C16.6665 18.3337 18.3332 16.667 18.3332 12.5003V8.33366" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                       Notification Settings</a></li>
+                  </ul>
+                </div>
               </h5>
             </div>
             <div class="notification-dropdown-content">

@@ -185,7 +185,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 10px;
+    gap: 20px;
     flex-basis: 50%;
     margin-bottom: 0px;
 }
@@ -864,6 +864,34 @@ header{
 .header-profile-dropdown .credits_balance_amout_wrp{
     display: flex !important;
     justify-content: space-between !important;
+}
+#dropdownNotification-menu{
+     border: none !important;
+     background-color: transparent !important;
+}
+
+.dropdownNotification-menu{
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 0px 0px 100px 0px #0F0F0F14;
+    min-width: 250px;
+    max-width: 250px;
+    right: 0;
+    top: 12px !important;
+    padding: 15px 15px !important;
+}
+
+.dropdownNotification-menu li a{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdownNotification-menu li a{
+    color: var(--secondary-black) !important;
+    font-size: 15px !important;
+    font-family: var(--SFProDisplay-Medium);
 }
 
 /* ===Responsive=== */

@@ -685,9 +685,12 @@ class EventPhotoController extends BaseController
                 }
                 // dd($postList);
             }
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
             $current_page = "photos";
             $login_user_id  = $user->id;
-            return view('layout', compact('page', 'js', 'postList', 'selectedFilters', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            return view('layout', compact('page', 'js','rsvpSent', 'postList', 'selectedFilters', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             dd($e);

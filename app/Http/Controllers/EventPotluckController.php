@@ -339,6 +339,7 @@ class EventPotluckController extends BaseController
                     $coHosts[] = $coHostDetail;
                 }
                 $eventDetails['co_hosts'] = $coHosts;
+                $eventDetails['isRsvpEvent'] = $eventDetail->isRsvpEvent;
                 $eventDetails['event_location_name'] = $eventDetail->event_location_name;
                 $eventDetails['address_1'] = $eventDetail->address_1;
                 $eventDetails['address_2'] = $eventDetail->address_2;
@@ -559,7 +560,12 @@ class EventPotluckController extends BaseController
             $eventInfo['host_view'] = $eventAboutHost;
                 $current_page = "potluck";
                 $login_user_id  = $user->id;
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page')); // return compact('eventInfo');
+
+                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                    $query->where('app_user', '1');
+                })->where(['user_id' => $user->id, 'event_id' => $eventDetail->id])->first();
+
+                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page','rsvpSent')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {
@@ -743,6 +749,16 @@ class EventPotluckController extends BaseController
 
             "last_name" =>  $getUserItemData->users->lastname
         ];
+
+        $notificationParam = [
+
+            'sender_id' => $user->id,
+            'event_id' => $checkIsExist->event_id,
+            'user_potluck_item_id' => $checkIsExist->id,
+            'user_potluck_item_count' => $request['quantity']
+        ];
+        sendNotification('potluck_bring', $notificationParam);
+
 
         return response()->json(['status' => 1, "spoken_for" => $spoken_for, 'data' => $getCarryUser, 'message' => "Potluck item updated"]);
     }

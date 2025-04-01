@@ -517,6 +517,8 @@ class EventWallController extends BaseController
             'guest_view' => $eventDetails,
             'host_view' => $eventAboutHost
         ];
+        
+
         Session::forget('filterSession');
         return view('layout', compact(
             'title',
