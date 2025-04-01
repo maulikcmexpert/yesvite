@@ -9135,7 +9135,8 @@ $(document).on("click", ".save-slider-image", function () {
                 eventData.slider_images = savedImages; // Assign new values
 
                 // eventData.slider_images = savedImages;
-                console.log(eventData);
+                console.log(savedImages);
+                console.log(  eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
             },
