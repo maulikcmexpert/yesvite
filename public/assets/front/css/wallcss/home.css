@@ -2433,9 +2433,10 @@ main.new-main-content {
     font-size: 14px;
     color: var(--primary-black);
     display: inline-block;
-    width: 100%;
+    width: 77%;
     border-right: 1px solid var(--border);
-    margin-right: 5px;
+    margin-right: 20px;
+    text-align: center;
 }
 
 .main-right-guests-top-rsvp-card  .main-right-guests-top-rvsp-icon-text{
