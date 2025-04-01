@@ -78,7 +78,7 @@
     width: max-content !important;
     max-width: max-content !important;
     margin: 0px auto;
-    height: 100px;
+    height: 80px;
     padding: 10px 16px;
     background-color: var(--white);
     border-radius: 16px;
@@ -2935,6 +2935,9 @@
 @media only screen and (min-width: 1800px) and (max-width: 10000px) {
     .edit-images-button-inner button {
         min-width: 90px;
+    }
+    .edit-images-button-wrp {
+        height: auto !important;
     }
 }
 

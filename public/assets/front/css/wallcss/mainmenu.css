@@ -3383,15 +3383,30 @@
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 450px;
     }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 450px;
+    }
 }
 @media only screen and (min-width: 1800px) and (max-width: 1999px) {
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 380px;
     }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 370px;
+    }
 }
 @media only screen and (min-width: 1600px) and (max-width: 1799px) {
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 320px;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 290px;
     }
 }
 
@@ -3447,6 +3462,11 @@
     }
     .home-upcoming-events-card-right {
         flex-basis: 55% !important;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 170px;
     }
 }
 
@@ -3613,6 +3633,16 @@
     .today-btn-home {
         display: none !important;
     }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 170px;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 350px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
@@ -3666,6 +3696,11 @@
     }
     #nav-profile-home .step_2 .list_all_design_catgeory {
         max-height: calc(100vh - 240px) !important;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 150px;
     }
 }
 
@@ -3726,6 +3761,11 @@
     }
     .home-upcoming-events-card-left-profile-content h3 {
         max-width: 230px;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 200px;
     }
 }
 
@@ -3915,6 +3955,11 @@
     .home-upcoming-events-card-right {
         flex-basis: 30% !important;
     }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 150px;
+    }
 }
 
 @media only screen and (max-width: 424px) {
@@ -4047,5 +4092,10 @@
     }
     .upcoming-events-card-notification-info {
         right: -50px !important;
+    }
+    .all-events-month-wise-support
+        .home-upcoming-events-card-left-profile-content
+        h3 {
+        max-width: 120px;
     }
 }
