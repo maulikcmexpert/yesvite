@@ -20,7 +20,7 @@
                             </svg>
                         </span>
                     </div>
-                    {{-- <div id="filtered_results" class="filtered-results-container"></div> --}}
+                    <div id="filtered_results" class="filtered-results-container" style="display: none;"></div>
 
                 </div>
             </div>
