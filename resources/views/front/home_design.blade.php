@@ -171,7 +171,7 @@
 
                     <div class="card-img collection-card card-blue edit_design_tem design-card"
                     data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
-                    data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"  data-subcategory_name="{{ $image['subcategory_name'] }}">
+                    data-id="{{ $image['imageId'] }}"  data-subcategory_name="{{ $image['subcategory_name'] }}">
                         <img src="{{ $image['image_path'] }}" alt="shower-card">
                     </div>
 
