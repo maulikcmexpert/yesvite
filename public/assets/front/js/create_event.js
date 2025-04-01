@@ -3972,7 +3972,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
         $("#designModel").modal("show");
         return;
     }
+    let text1 = $(".current_step").text();
+    let firstLetter1 = text1.split(" ")[0];
 
+    console.log("firstLetter1", firstLetter1);
 
       if(final_step == 1){
         apiCalled = false;
