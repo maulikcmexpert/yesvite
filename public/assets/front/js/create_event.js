@@ -10549,7 +10549,7 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         const slide_image_get = localStorage.getItem("save-slider-image");
         eventData.slider_images = JSON.parse(slide_image_get);
 
-
+        localStorage.removeItem("save-slider-image");
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes
         localStorage.removeItem("pageRefresh");
