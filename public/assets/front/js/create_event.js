@@ -6874,66 +6874,169 @@ $(document).on("click", ".save_event_co_host", function () {
 
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
-
+    // console.log(data);
+    // $('#loader').css('display','flex');
+    // $(".main-content-wrp").addClass("blurred");
+    // var imagePath = '';
     $("#eventImage").attr(
         "src",
-        base_url + "public/storage/event_images/" + eventData.desgin_selected
+        base_url +
+        "public/storage/event_images/" +
+        eventData.desgin_selected +
+        ""
     );
+
+    // let imageUrls = localStorage.getItem('final_upload_image');
+    // if (imageUrls) {
+    //     eventData.desgin_selected = imageUrls;
+    //     localStorage.removeItem('final_upload_image'); // Remo
+
+    // }
 
     if (eventData.desgin_selected) {
         $("#eventTempImage").attr(
             "src",
-            base_url + "public/storage/event_images/" + eventData.desgin_selected
+            base_url +
+            "public/storage/event_images/" +
+            eventData.desgin_selected
         );
     }
-
     $(".event_images_slider").empty(); // Clear previous images
-
-    if (eventData.slider_images && eventData.slider_images.length > 0) {
+    const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
+    const sliderImages = eventData.slider_images;
+    console.log(sliderImages);
+    if (eventData.slider_images != undefined && eventData.slider_images != "") {
+        // alert(1);
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
-        var p = 0;
+        var imageHtml;
+
+        var p=0;
+        if (eventData.slider_images && eventData.slider_images.length > 0) {
+           //
 
         eventData.slider_images.forEach((image) => {
             p++;
-            var imageHtml = `
+             imageHtml = `
                 <div class="item">
                     <div class="setting-img">
-                        <img src="${base_url}public/storage/event_images/${image.fileName}" />
+                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
                     </div>
-                </div>`;
-            $(".event_images_slider").append(imageHtml);
-        });
+                </div>
+            `;
+            // $('.event_images_slider').append(imageHtml);
 
-        $(".slider_image_count").text(`${p}/3 Photos`);
-
-        $(".event_images_slider").owlCarousel("destroy"); // Destroy existing instance
-        $(".event_images_slider").owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            dots: true,
-            items: 1,
-            navText: [
-                "<span class='prev'>&#10094;</span>",
-                "<span class='next'>&#10095;</span>"
-            ],
-            responsive: {
-                0: { items: 1 },
-                600: { items: 3 },
-                1000: { items: 5 }
-            }
+            $(".event_images_slider")
+            .trigger("add.owl.carousel", [$(imageHtml)])
+            .trigger("refresh.owl.carousel");
         });
-    } else {
-        $(".event_images_slider").css("display", "none");
-        $(".event_images_template").css("display", "block");
     }
 
-    $(".step_1, .step_2, .step_3, .step_4").hide();
+        $('.slider_image_count').text(p+'/3 Photos');
+
+
+
+        // photoSliders.forEach((sliderClass, index) => {
+        //     const sliderElement = $(`#${sliderClass}`);
+        //     if (sliderElement.length) {
+        //         if (sliderImages[index]) {
+        //             sliderElement.attr(
+        //                 "src",
+        //                 `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
+        //             );
+        //             $(`.${sliderClass}`).css("display", "block");
+        //         } else {
+        //             sliderElement.css("display", "none");
+        //         }
+        //     }
+        // });
+
+        // $(".event_images_slider").owlCarousel({
+        //     loop: true,
+        //     margin: 10,
+        //     nav: true,
+        //     navText: [
+        //         `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        // <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        // </svg>
+        // `,
+        //         `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        // <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        // </svg>`,
+        //     ],
+        //     responsive: {
+        //         0: {
+        //             items: 1,
+        //         },
+        //         600: {
+        //             items: 3,
+        //         },
+        //         1000: {
+        //             items: 5,
+        //         },
+        //     },
+        // });
+    }
+    // else {
+    //     $(".event_images_slider").css("display", "none");
+    //     $(".event_images_template").css("display", "block");
+    //     // $('.event_images_slider').removeClass('owl-carousel');
+    //     // $('.event_images_slider').removeClass('owl-theme');
+    // }
+
+    // var swiper = new Swiper(".event_images_slider", {
+    //     slidesPerView: 1,
+    //     loop: false,
+    // });
+
+    // if (!$('.event_images_slider').data('owl.carousel')) {
+
+    //     $('.event_images_slider').owlCarousel({
+    //         loop: false,
+    //         margin: 10,
+    //         nav: true,
+    //         dots: false,
+    //         items: 1,
+    //         responsive: {
+    //           0: {
+    //             items: 1
+    //           },
+    //           600: {
+    //             items: 1
+    //           },
+    //           1000: {
+    //             items: 1
+    //           }
+    //         }
+    //       });
+    //     };
+
+    $(".step_1").css("display", "none");
+    $(".step_2").css("display", "none");
+    $(".step_3").css("display", "none");
+    $(".step_4").css("display", "none");
     $(".step_final_checkout").show();
     final_step = 4;
     eventData.step = "4";
-    $(".li_setting .side-bar-list").addClass("menu-success");
+    $(".li_setting").find(".side-bar-list").addClass("menu-success");
+
+    // handleActiveClass(this);
+
+    // $.ajax({
+    //     url: base_url + "event/store",
+    //     type: "POST",
+    //     headers: {
+    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //     },
+    //     data: data,
+    //     success: function (response) {
+    //         $("#loader").css('display','none');
+    //         $(".main-content-wrp").removeClass("blurred");
+    //     },
+    //     error: function (xhr, status, error) {
+    //         console.log("AJAX error: " + error);
+    //     },
+    // });
 });
 
 $(document).on("click", ".final_create_event", function (e) {
