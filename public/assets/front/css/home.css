@@ -1464,6 +1464,12 @@
         font-weight: 600;
         margin-bottom: 20px;
     }
+
+.close-btn-privacy-cookie {
+    position: absolute;
+    top: 3px;
+    right: 0;
+}
     
 }
 
