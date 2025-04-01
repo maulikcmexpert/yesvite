@@ -58,7 +58,9 @@
                                 </span>
                         </div>
                     </div>
-                @else
+                 @endif   
+             @if ((empty($rsvpSent)))
+
                     <div class="main-right-guests-top-rsvp-card gray">
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                         <div class="main-right-guests-top-rvsp-icon-text">
