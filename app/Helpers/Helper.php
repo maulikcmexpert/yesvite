@@ -270,7 +270,7 @@ function sendNotification($notificationType, $postData)
                             'is_co_host' => $is_co_host
                         ];
 
-                        $checkNotificationSetting = checkNotificationSetting($value->user_id);
+                        // $checkNotificationSetting = checkNotificationSetting($value->user_id);
                         if ((count($checkNotificationSetting) && $checkNotificationSetting['invitations']['push'] == '1') &&  $value->notification_on_off == '1') {
                             send_notification_FCM_and($deviceData->device_token, $notificationData);
                         }
@@ -320,31 +320,32 @@ function sendNotification($notificationType, $postData)
                             // $event_time = $value->event->event_schedule->first()->start_time;
                             // $event_time = $value->event->rsvp_start_time;
                             // }
+                            if ($checkNotificationSetting['invitations']['email'] == '1') {
+                                $eventData = [
+                                    'event_invited_user_id' => (int)$value->id,
+                                    'event_id' => (int)$postData['event_id'],
+                                    'user_id' => $value->user->id,
+                                    'event_name' => $value->event->event_name,
+                                    'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
+                                    'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
+                                    'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
+                                    'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
+                                    'time' => $value->event->rsvp_start_time,
+                                    'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
+                                ];
 
-                            $eventData = [
-                                'event_invited_user_id' => (int)$value->id,
-                                'event_id' => (int)$postData['event_id'],
-                                'user_id' => $value->user->id,
-                                'event_name' => $value->event->event_name,
-                                'hosted_by' => $value->event->user->firstname . ' ' . $value->event->user->lastname,
-                                'profileUser' => ($value->event->user->profile != NULL || $value->event->user->profile != "") ? $value->event->user->profile : "no_profile.png",
-                                'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
-                                'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
-                                'time' => $value->event->rsvp_start_time,
-                                'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
-                            ];
+                                $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
+                                // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
+                                $updateinvitation = EventInvitedUser::where('id', $value->id)->first();
 
-                            $emailCheck = dispatch(new sendInvitation(array($value->user->email, $eventData)));
-                            // $updateinvitation = EventInvitedUser::where(['event_id' => $postData['event_id'], 'user_id' => $value->user_id, 'prefer_by' => 'email'])->first();
-                            $updateinvitation = EventInvitedUser::where('id', $value->id)->first();
-
-                            if (!empty($emailCheck)) {
-                                $updateinvitation->invitation_sent = '1';
-                                $updateinvitation->save();
-                            } else {
-                                $updateinvitation->invitation_sent = '9';
-                                $updateinvitation->save();
-                            }
+                                if (!empty($emailCheck)) {
+                                    $updateinvitation->invitation_sent = '1';
+                                    $updateinvitation->save();
+                                } else {
+                                    $updateinvitation->invitation_sent = '9';
+                                    $updateinvitation->save();
+                                }
+                         }
                         }
                     }
 
