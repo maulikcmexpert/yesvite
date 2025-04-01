@@ -130,37 +130,6 @@ $(document).ready(function () {
         $('.total_design_count').text($('.default_show:visible').length + ' Items');
     });
     $('#filtered_results').hide();
-    // $('#search_design_category').on('keyup', function () {
-    //     let query = $(this).val().toLowerCase().trim();
-    //     $('#filtered_results').show();
-    //     let results = '';
-    
-    //     if (query.length > 0) {
-    //         designData.forEach(category => {
-    //             category.subcategories.forEach(subcategory => {
-    //                 subcategory.images.forEach(image => {
-    //                     if (image.tags) {
-    //                         let tagsArray = image.tags.toLowerCase().split(','); // Split tags into array
-    //                         if (tagsArray.includes(query)) { // Check if query matches any tag
-    //                             results += `<div class="search-item tag-match" data-id="${image.id}" data-name="${image.image_path}">
-    //                                             <img src="${image.image_path}" alt="Image">
-    //                                         </div>`;
-    //                         }
-    //                     }
-    //                 });
-    //             });
-    //         });
-    
-    //         if (results === '') {
-    //             results = `<div class="search-item no-data">No Data Found</div>`;
-    //         }
-    //         $('#filtered_results').html(results);
-    //     } else {
-    //         $('#filtered_results').html('');
-    //         $('#filtered_results').hide();
-    //     }
-    // });
-    
     $('#search_design_category').on('keyup', function () {
         let query = $(this).val().toLowerCase();
         $('#filtered_results').show();
