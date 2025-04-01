@@ -131,42 +131,73 @@ $(document).ready(function () {
     });
     $('#filtered_results').hide();
     $('#search_design_category').on('keyup', function () {
-        let query = $(this).val().toLowerCase();
+        let query = $(this).val().toLowerCase().trim();
         $('#filtered_results').show();
         let results = '';
-
+    
         if (query.length > 0) {
             designData.forEach(category => {
-                if (category.name.toLowerCase().includes(query)) {
-                    results +=
-                        `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
-                }
-                // Check if no subcategory matched and add "No Data Found"
-
                 category.subcategories.forEach(subcategory => {
-                    if (subcategory.name.toLowerCase().includes(query)) {
-                        results +=
-                            `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-                    }
-                    // Check if no subcategory matched and add "No Data Found"
-
-
+                    subcategory.images.forEach(image => {
+                        if (image.tags) {
+                            let tagsArray = image.tags.toLowerCase().split(','); // Split tags into array
+                            if (tagsArray.includes(query)) { // Check if query matches any tag
+                                results += `<div class="search-item tag-match" data-id="${image.id}" data-name="${image.image_path}">
+                                                <img src="${image.image_path}" alt="Image">
+                                            </div>`;
+                            }
+                        }
+                    });
                 });
             });
+    
             if (results === '') {
-                results +=
-                    `<div class="search-item no-data">No Data Found</div>`;
+                results = `<div class="search-item no-data">No Data Found</div>`;
             }
             $('#filtered_results').html(results);
         } else {
-            // When search is cleared, restore the default 30 images
             $('#filtered_results').html('');
             $('#filtered_results').hide();
-            $('input[name="design_subcategory"]').prop('checked', false);
-
-            $('.total_design_count').text($('.default_show:visible').length + ' Items');
         }
     });
+    
+    // $('#search_design_category').on('keyup', function () {
+    //     let query = $(this).val().toLowerCase();
+    //     $('#filtered_results').show();
+    //     let results = '';
+
+    //     if (query.length > 0) {
+    //         designData.forEach(category => {
+    //             if (category.name.toLowerCase().includes(query)) {
+    //                 results +=
+    //                     `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+    //             }
+    //             // Check if no subcategory matched and add "No Data Found"
+
+    //             category.subcategories.forEach(subcategory => {
+    //                 if (subcategory.name.toLowerCase().includes(query)) {
+    //                     results +=
+    //                         `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+    //                 }
+    //                 // Check if no subcategory matched and add "No Data Found"
+
+
+    //             });
+    //         });
+    //         if (results === '') {
+    //             results +=
+    //                 `<div class="search-item no-data">No Data Found</div>`;
+    //         }
+    //         $('#filtered_results').html(results);
+    //     } else {
+    //         // When search is cleared, restore the default 30 images
+    //         $('#filtered_results').html('');
+    //         $('#filtered_results').hide();
+    //         $('input[name="design_subcategory"]').prop('checked', false);
+
+    //         $('.total_design_count').text($('.default_show:visible').length + ' Items');
+    //     }
+    // });
 
     // Click event for search results
     $(document).on('click', '.search-item', function () {
