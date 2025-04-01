@@ -3196,6 +3196,11 @@ function loadAgain() {
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
+            canvas.on('object:added', function (e) {
+                if (e.target && e.target.type === 'textbox') {
+                    setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                }
+            });
             bindData(current_event_id);
         },
         error: function (xhr, status, error) { },
