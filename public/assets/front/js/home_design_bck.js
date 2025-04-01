@@ -119,13 +119,13 @@ $(document).ready(function () {
     //         $cookiesBox.addClass("active");
     //     }, 500);
     // }
-    if (!localStorage.getItem('cookiesBoxDismissed')) {
-        setTimeout(() => {
-            // $cookiesBox.addClass('active');
-            $('.cookies-track').css('display','block');
+    // if (!localStorage.getItem('cookiesBoxDismissed')) {
+    //     setTimeout(() => {
+    //         // $cookiesBox.addClass('active');
+    //         $('.cookies-track').css('display','block');
     
-        }, 500);
-    }
+    //     }, 500);
+    // }
 
     $(document).on("click",".close-btn-privacy-cookie", function () {
         // $cookiesBox.removeClass("active");

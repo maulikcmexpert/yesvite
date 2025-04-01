@@ -331,13 +331,13 @@ document.querySelectorAll('.collection-menu').forEach((button) => {
 
 const $cookiesBox = $('.cookies-track');
 
-if (!localStorage.getItem('cookiesBoxDismissed')) {
-    setTimeout(() => {
-        // $cookiesBox.addClass('active');
-        $('.cookies-track').css('display','block');
+// if (!localStorage.getItem('cookiesBoxDismissed')) {
+//     setTimeout(() => {
+//         // $cookiesBox.addClass('active');
+//         $('.cookies-track').css('display','block');
 
-    }, 500);
-}
+//     }, 500);
+// }
 
 $('.close-btn-privacy-cookie').on('click', function () {
     // $cookiesBox.removeClass('active');

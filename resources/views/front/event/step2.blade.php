@@ -523,13 +523,13 @@
     // If dismissed, hide the cookies box by default
     $('.cookies-track').css('display', 'none');
   }
-        if (!localStorage.getItem('cookiesBoxDismissed')) {
-            setTimeout(() => {
-                // $cookiesBox.addClass('active');
-                $('.cookies-track').css('display','block');
+//         if (!localStorage.getItem('cookiesBoxDismissed')) {
+//             setTimeout(() => {
+//                 // $cookiesBox.addClass('active');
+//                 $('.cookies-track').css('display','block');
 
-            }, 500);
-}
+//             }, 500);
+// }
         $(document).on("click",".close-btn-privacy-cookie", function () {
             // $cookiesBox.removeClass('active');
           $('.cookies-track').css('display','none');

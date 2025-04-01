@@ -557,11 +557,11 @@
             // If dismissed, hide the cookies box by default
             $('.cookies-track').css('display', 'none');
         }
-        if (!localStorage.getItem('cookiesBoxDismissed')) {
-            setTimeout(() => {
-                $cookiesBox.addClass('active');
-            }, 500);
-        }
+        // if (!localStorage.getItem('cookiesBoxDismissed')) {
+        //     setTimeout(() => {
+        //         $cookiesBox.addClass('active');
+        //     }, 500);
+        // }
 
         $(document).on("click",".close-btn-privacy-cookie", function () {
             // $cookiesBox.removeClass('active');
