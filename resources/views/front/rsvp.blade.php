@@ -29,7 +29,7 @@
              
             }
 
-            dd($eventInfo,$loggedInUser);
+            // dd($eventInfo,$loggedInUser);
     @endphp
 <x-front.advertise />
 <section class="rsvp-wrp new-main-content">
@@ -1242,33 +1242,47 @@
                     $currentDateTime = strtotime(date('Y-m-d g:i A'));
                 @endphp
                         {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
-                       {{-- @if($eventInfo['guest_view']['host_id']==$user->id) --}}
-                       
-                        @if($eventDateTime >= $currentDateTime)
-                            <div class="rsvp-footer-btn-wrp">
-                                <div class="container">
-                                    <div class="rsvp-footer-btn">
-                                        <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                                            <h3>RSVP To This Event</h3>
-                                            <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                                            <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                       @if($eventInfo['guest_view']['host_id']==$loggedInUser)
+                                    <div class="rsvp-footer-btn-wrp">
+                                        <div class="container">
+                                            <div class="rsvp-footer-btn">
+                                                <div class="d-flex align-items-center justify-content-center gap-3 w-100">
+                                                    <h3>You are hosting this event</h3>
+                                                    {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @else
-                        <div class="rsvp-footer-btn-wrp">
-                            <div class="container">
-                                <div class="rsvp-footer-btn">
-                                    <div class="d-flex align-items-center justify-content-center gap-3 w-100">
-                                        <h3>Event Has Passed</h3>
-                                        {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                                        <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                       @else
+                     
+                                    @if($eventDateTime >= $currentDateTime)
+                                        <div class="rsvp-footer-btn-wrp">
+                                            <div class="container">
+                                                <div class="rsvp-footer-btn">
+                                                    <div class="d-flex align-items-center justify-content-end gap-3 w-100">
+                                                        <h3>RSVP To This Event</h3>
+                                                        <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                        <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                    <div class="rsvp-footer-btn-wrp">
+                                        <div class="container">
+                                            <div class="rsvp-footer-btn">
+                                                <div class="d-flex align-items-center justify-content-center gap-3 w-100">
+                                                    <h3>Event Has Passed</h3>
+                                                    {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                    <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                    @endif
                         @endif
+
                 @endif
             @endif        
             </div>
@@ -1294,32 +1308,46 @@
                             $currentDateTime = strtotime(date('Y-m-d g:i A'));
                         @endphp
                                 {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
-                                @if($eventDateTime >= $currentDateTime)
-                                <div class="rsvp-footer-btn-wrp">
-                                    <div class="container">
-                                        <div class="rsvp-footer-btn">
-                                            <div class="d-flex align-items-center justify-content-end gap-3 w-100">
-                                                <h3>RSVP To This Event</h3>
-                                                <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                                                <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                                @if($eventInfo['guest_view']['host_id']==$loggedInUser)
+                                        <div class="rsvp-footer-btn-wrp">
+                                            <div class="container">
+                                                <div class="rsvp-footer-btn">
+                                                    <div class="d-flex align-items-center justify-content-center gap-3 w-100">
+                                                        <h3>You are hosting this event</h3>
+                                                        {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                        <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                @else
-                                <div class="rsvp-footer-btn-wrp">
-                                    <div class="container">
-                                        <div class="rsvp-footer-btn">
-                                            <div class="d-flex align-items-center justify-content-center gap-3 w-100">
-                                                <h3>Event Has Passed</h3>
-                                                {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
-                                                <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                              @else
+                                            @if($eventDateTime >= $currentDateTime)
+                                            <div class="rsvp-footer-btn-wrp">
+                                                <div class="container">
+                                                    <div class="rsvp-footer-btn">
+                                                        <div class="d-flex align-items-center justify-content-end gap-3 w-100">
+                                                            <h3>RSVP To This Event</h3>
+                                                            <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                            <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- @endif --}}
-                            @endif
+                                            @else
+                                            <div class="rsvp-footer-btn-wrp">
+                                                <div class="container">
+                                                    <div class="rsvp-footer-btn">
+                                                        <div class="d-flex align-items-center justify-content-center gap-3 w-100">
+                                                            <h3>Event Has Passed</h3>
+                                                            {{-- <button class="cmn-btn check_rsvp_yes" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}" data-bs-toggle="modal" data-bs-target="#rsvp-yes-modal">Yes</button>
+                                                            <button class="cmn-btn cmn-no-btn check_rsvp_no" data-sync_id="{{($sync_contact_user_id!="")?encrypt($sync_contact_user_id):""}}" data-event_id="{{encrypt($event_id)}}" data-user_id="{{encrypt($user_id)}}"  data-bs-toggle="modal" data-bs-target="#rsvp-no-modal">No</button> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- @endif --}}
+                                @endif
+                                 @endif       
                 @else
                     <div class="row">
                         <div class="col-lg-12">
