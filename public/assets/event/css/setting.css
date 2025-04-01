@@ -1249,7 +1249,7 @@
 
 
 /* ============= modal ============ */ */
-.draftModel .modal-header .delete-img {
+#draftModel .modal-header .delete-img {
     width: 56px;
     height: 56px;
     border-radius: 100%;
@@ -1259,17 +1259,17 @@
     justify-content: center;
 }
 
-.draftModel .modal-header {
+#draftModel .modal-header {
     margin-bottom: 5px;
     border: none !important;
 }
 
-.draftModel .modal-body {
+#draftModel .modal-body {
     padding-top: 0;
     padding-bottom: 20px;
 }
 
-.draftModel .modal-body h5 {
+#draftModel .modal-body h5 {
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
@@ -1278,30 +1278,30 @@
     text-align: center;
 }
 
-.draftModel .modal-body p {
+#draftModel .modal-body p {
     font-size: 14px;
     line-height: 24px;
     text-align: center;
 }
 
-.draftModel .modal-footer {
+#draftModel .modal-footer {
     padding: 0 24px 24px;
     justify-content: space-between;
     border: none;
 }
 
-.draftModel .modal-footer button {
+#draftModel .modal-footer button {
     width: 100%;
     max-width: 47%;
     transition: 0.5s;
 }
 
-.draftModel .modal-content {
+#draftModel .modal-content {
     max-width: 400px;
     border-radius: 30px;
 }
 
-.draftModel .cancel-btn {
+#draftModel .cancel-createEvent-draft {
     background-color: transparent;
     border: 1px solid var(--borderColor);
     border-radius: 10px;
@@ -1310,12 +1310,12 @@
     font-weight: 500;
 }
 
-.draftModel .cancel-btn:hover {
+#draftModel .cancel-createEvent-draft:hover {
     background-color: var(--secondryColor);
     color: #fff;
 }
 
-.draftModel .continue-btn {
+#draftModel .continue-btn {
     background-color: var(--primaryColor);
     color: #fff;
     border-radius: 10px;
@@ -1323,7 +1323,7 @@
     font-weight: 500;
 }
 
-.draftModel .continue-btn:hover {
+#draftModel .continue-btn:hover {
     background-color: transparent;
     border: 1px solid var(--primaryColor);
     color: var(--primaryColor);
