@@ -170,7 +170,7 @@ $notification_list=getNotificationList();
                       />
                     </svg>
                 </span>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <a href="{{route('account_settings.notificationSetting')}}" target="_blank"><i class="fa-solid fa-ellipsis-vertical"></i></a>
               </h5>
             </div>
             <div class="notification-dropdown-content">
