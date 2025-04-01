@@ -402,7 +402,7 @@
     </div>
 </div>
 
-<div class="cookies-track">
+<div class="cookies-track" style="display: none;">
     <div class="container-fluid">
         <div class="d-flex justify-content-center gap-3 align-items-start">
             <div>
@@ -548,20 +548,20 @@
 
 <script>
     $(document).ready(function() {
-        if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
-    // If dismissed, hide the cookies box by default
-    $('.cookies-track').css('display', 'none');
-  }
+//         if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
+//     // If dismissed, hide the cookies box by default
+//     $('.cookies-track').css('display', 'none');
+//   }
         const $cookiesBox = $('.cookies-track');
-                if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
-            // If dismissed, hide the cookies box by default
-            $('.cookies-track').css('display', 'none');
-        }
-        // if (!localStorage.getItem('cookiesBoxDismissed')) {
-        //     setTimeout(() => {
-        //         $cookiesBox.addClass('active');
-        //     }, 500);
+        //         if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
+        //     // If dismissed, hide the cookies box by default
+        //     $('.cookies-track').css('display', 'none');
         // }
+        if (!localStorage.getItem('cookiesBoxDismissed')) {
+            setTimeout(() => {
+                $cookiesBox.addClass('active');
+            }, 500);
+        }
 
         $(document).on("click",".close-btn-privacy-cookie", function () {
             // $cookiesBox.removeClass('active');
