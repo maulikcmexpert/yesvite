@@ -1233,6 +1233,21 @@
     color: #fff;
 }
 
+
+.designModel .cancel-createEvent-draft {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .cancel-createEvent-draft:hover {
+    background-color: var(--secondryColor);
+    color: #fff;
+}
+
 .designModel .continue-btn {
     background-color: var(--primaryColor);
     color: #fff;
@@ -1248,86 +1263,9 @@
 }
 
 
-/* ============= modal ============ */ */
-#draftModel .modal-header .delete-img {
-    width: 56px;
-    height: 56px;
-    border-radius: 100%;
-    background-color: #e03137;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-#draftModel .modal-header {
-    margin-bottom: 5px;
-    border: none !important;
-}
 
-#draftModel .modal-body {
-    padding-top: 0;
-    padding-bottom: 20px;
-}
 
-#draftModel .modal-body h5 {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    color: var(--secondryColor);
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-#draftModel .modal-body p {
-    font-size: 14px;
-    line-height: 24px;
-    text-align: center;
-}
-
-#draftModel .modal-footer {
-    padding: 0 24px 24px;
-    justify-content: space-between;
-    border: none;
-}
-
-#draftModel .modal-footer button {
-    width: 100%;
-    max-width: 47%;
-    transition: 0.5s;
-}
-
-#draftModel .modal-content {
-    max-width: 400px;
-    border-radius: 30px;
-}
-
-#draftModel .cancel-createEvent-draft {
-    background-color: transparent;
-    border: 1px solid var(--borderColor);
-    border-radius: 10px;
-    color: var(--secondryColor);
-    font-size: 12px;
-    font-weight: 500;
-}
-
-#draftModel .cancel-createEvent-draft:hover {
-    background-color: var(--secondryColor);
-    color: #fff;
-}
-
-#draftModel .continue-btn {
-    background-color: var(--primaryColor);
-    color: #fff;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-#draftModel .continue-btn:hover {
-    background-color: transparent;
-    border: 1px solid var(--primaryColor);
-    color: var(--primaryColor);
-}
 /* ============ responsive ============ */
 
 @media only screen and (max-width: 1399px) {

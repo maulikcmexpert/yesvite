@@ -3361,7 +3361,7 @@
     </div>
 </div>
 {{-- =================draftModel=============== --}}
-<div class="modal fade draftModel" id="draftModel" tabindex="-1" aria-labelledby="draftModel"
+<div class="modal fade designModel" id="draftModel" tabindex="-1" aria-labelledby="draftModel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
