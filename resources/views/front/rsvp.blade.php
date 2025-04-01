@@ -1,4 +1,5 @@
    @php
+//    {{dd($eventInfo);}}
         use Carbon\Carbon;
             $host_id=$eventInfo['guest_view']['host_id'];
             $host_name=$eventInfo['guest_view']['hosted_by'];
@@ -18,13 +19,17 @@
 
             $firstname="";
             $lastname="";
+            $loggedInUser="";
             if(Auth::guard('web')->check()){
                     $user = Auth::guard('web')->user();
                     // dd($userId);
                     $firstname= $user->firstname;   
                     $lastname= $user->lastname;                
+                    $loggedInUser= $user->id;                
              
             }
+
+            dd($eventInfo,$loggedInUser);
     @endphp
 <x-front.advertise />
 <section class="rsvp-wrp new-main-content">
@@ -1237,6 +1242,8 @@
                     $currentDateTime = strtotime(date('Y-m-d g:i A'));
                 @endphp
                         {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
+                       {{-- @if($eventInfo['guest_view']['host_id']==$user->id) --}}
+                       
                         @if($eventDateTime >= $currentDateTime)
                             <div class="rsvp-footer-btn-wrp">
                                 <div class="container">
