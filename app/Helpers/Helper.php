@@ -278,7 +278,7 @@ function sendNotification($notificationType, $postData)
 
                     if ($value->prefer_by == 'email') {
 
-                        dd($checkNotificationSetting);
+                        // dd($checkNotificationSetting);
                         if ($value->user->app_user == '1' &&  count($checkNotificationSetting) != 0 && $checkNotificationSetting['invitations']['email'] == '1') {
 
                             // $event_time = "";
