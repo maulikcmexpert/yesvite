@@ -3972,6 +3972,19 @@ $(document).on("click", "#close_createEvent", async function (e) {
         $("#deleteModal").modal("show");
         return;
     }
+
+
+      if(final_step == 1){
+        apiCalled = false;
+        $("#designModel").modal("show");
+        return;
+      }
+
+      if(final_step == 2){
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+      }
     console.log(11);
 
     var event_type = $("#event-type").val();
@@ -4946,7 +4959,10 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
     // console.log(url);
     window.location.href = url;
 });
-
+$(document).on("click", ".cancel-createEvent-draft", function () {
+    $("#loader").css("display", "flex");
+    $("#close_createEvent").trigger("click");
+});
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");

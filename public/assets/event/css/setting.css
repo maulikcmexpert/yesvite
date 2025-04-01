@@ -1151,7 +1151,7 @@
     cursor: pointer;
     text-align: center;
     padding: 12px 24px !important;
-    justify-content: center;  
+    justify-content: center;
 }
 
 .step_4 .guest-checkout .final-checkout-guest-btn h5{
@@ -1165,6 +1165,106 @@
     border: 1px solid #000 !important;
     color: #fff !important;
 }
+
+/* ============= modal ============ */
+.designModel  .delete-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    background-color: #e03137;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.designModel .modal-header {
+    margin-bottom: 10px !important;
+    border: none !important;
+}
+
+.designModel .modal-body {
+    padding-top: 0;
+    padding-bottom: 20px;
+}
+
+.designModel .modal-body h5 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--secondryColor);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.designModel .modal-body p {
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.designModel .modal-footer {
+    padding: 0 24px 24px;
+    justify-content: space-between;
+    border: none;
+}
+
+.designModel .modal-footer button {
+    width: 100%;
+    max-width: 47%;
+    transition: 0.5s;
+}
+
+.designModel .modal-content {
+    max-width: 400px;
+    border-radius: 30px;
+}
+
+.designModel .cancel-btn {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .cancel-btn:hover {
+    background-color: var(--secondryColor);
+    color: #fff;
+}
+
+
+.designModel .cancel-createEvent-draft {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .cancel-createEvent-draft:hover {
+    background-color: var(--secondryColor);
+    color: #fff;
+}
+
+.designModel .continue-btn {
+    background-color: #23aa26;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .continue-btn:hover {
+    background-color: transparent;
+    border: 1px solid #23aa26;
+    color: #23aa26;
+}
+
+
+
+
 
 /* ============ responsive ============ */
 
