@@ -191,10 +191,14 @@ $(document).ready(function () {
             if ($('.image-item:visible').length === 0) {
                 results += `<div class="search-item no-data">No Data Found</div>`;
             }
+
+            $('.total_design_count').text($('.image-item:visible').length + ' Items');
         } else {
             // Show all items when the search box is cleared
             $('.image-item').show();
             $('#filtered_results').hide();
+            $('.total_design_count').text($('.image-item:visible').length + ' Items');
+
         }
     
         $('#filtered_results').html(results);
