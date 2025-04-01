@@ -5385,7 +5385,6 @@ function save_image_design(downloadImage, textData) {
                     }
                     console.log(response);
                     let image = response.image;
-                    eventData.desgin_selected = "";
                     eventData.desgin_selected = image;
 
                     if (response.status == 401 && response.info == "logout") {
@@ -6875,8 +6874,7 @@ $(document).on("click", ".save_event_co_host", function () {
 
 $(document).on("click", ".final_checkout", function () {
     var data = eventData;
-    console.log("selected"+eventData.desgin_selected);
-    console.log("slide"+eventData.slider_images);
+    // console.log(data);
     // $('#loader').css('display','flex');
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
@@ -10532,18 +10530,16 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
             $("#design_image").val() || localStorage.getItem("image") || null;
 
         let imageUrls = localStorage.getItem("final_upload_image");
-        console.log(imageUrls);
         if (imageUrls) {
 
             eventData.desgin_selected = imageUrls;
 
-            // $("#eventImage, #eventTempImage").attr(
-            //     "src",
-            //     base_url + "public/storage/event_images/" + imageUrls
-            // );
+            $("#eventImage, #eventTempImage").attr(
+                "src",
+                base_url + "public/storage/event_images/" + imageUrls
+            );
             localStorage.removeItem("final_upload_image");
         }
-
         let restoredTempId = localStorage.getItem("storedTempId");
         if (
             restoredTempId &&
@@ -10558,7 +10554,7 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 
             const slide_image_get = localStorage.getItem("save-slider-image");
             eventData.slider_images = JSON.parse(slide_image_get);
-            console.log(slide_image_get);
+
 
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes
