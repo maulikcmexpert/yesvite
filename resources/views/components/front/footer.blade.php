@@ -405,10 +405,12 @@
 <div class="cookies-track">
     <div class="container-fluid">
         <div class="d-flex justify-content-center gap-3 align-items-start">
-            <h3>We value your privacy</h3>
-            <p>We use third-party cookies and tracking technologies that collect information about your use of the
-                site. These third parties may use your information for their own purpose, as described in our <a
-                    href="#">Privacy Policy</a></p>
+            <div>
+                <h3>We value your privacy</h3>
+                <p>We use third-party cookies and tracking technologies that collect information about your use of the
+                    site. These third parties may use your information for their own purpose, as described in our <a
+                        href="#">Privacy Policy</a></p>
+            </div>
             <button class="close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="cookies-track-btn">
