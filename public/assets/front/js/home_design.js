@@ -185,6 +185,8 @@ $(document).ready(function () {
                     $(this).removeClass('fadeInDown');
                     $(this).css('visibility','visible');
                     $(this).removeClass('wow');
+                    $('.total_design_count').text($('.image-item:visible').length + ' Items');
+
                 } else {
                     $(this).hide();
                 }
