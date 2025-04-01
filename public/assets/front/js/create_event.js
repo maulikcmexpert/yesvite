@@ -10531,12 +10531,13 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 
         let imageUrls = localStorage.getItem("final_upload_image");
         if (imageUrls) {
+
             eventData.desgin_selected = imageUrls;
 
-            $("#eventImage, #eventTempImage").attr(
-                "src",
-                base_url + "public/storage/event_images/" + imageUrls
-            );
+            // $("#eventImage, #eventTempImage").attr(
+            //     "src",
+            //     base_url + "public/storage/event_images/" + imageUrls
+            // );
             localStorage.removeItem("final_upload_image");
         }
         let restoredTempId = localStorage.getItem("storedTempId");
