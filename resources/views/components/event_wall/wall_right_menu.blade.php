@@ -38,16 +38,16 @@
                 </div>
             </div>
             <div class="main-right-guests-top-rsvp-card red">
-                <span>Guest</span>
+                <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                 <div class="main-right-guests-top-rvsp-icon-text">
-                    <span>Attending</span>
+                    <span> Not Attending</span>
                     <span>i</span>
                 </div>
             </div>
             <div class="main-right-guests-top-rsvp-card gray">
-                <span>Guest</span>
+                <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                 <div class="main-right-guests-top-rvsp-icon-text">
-                    <span>Attending</span>
+                    <span>Need to RSVP</span>
                     <span>i</span>
                 </div>
             </div>

@@ -2401,6 +2401,32 @@ main.new-main-content {
     border-radius: 10px;
     border: 1px solid transparent;
     font-family: var(--SFProDisplay-Medium);
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.main-right-guests-top-rsvp-card.green{
+    border-color: #23AA26;
+}
+
+.main-right-guests-top-rsvp-card.green div span{
+    color: #23AA26;
+}
+
+.main-right-guests-top-rsvp-card.red{
+    border-color: red;
+}
+
+.main-right-guests-top-rsvp-card.red div span{
+    color: red;
+}
+
+.main-right-guests-top-rsvp-card.gray{
+    border-color: gray;
+}
+
+.main-right-guests-top-rsvp-card.gray div span{
+    color: gray;
 }
 
 .main-right-guests-top-rsvp-card span.main-right-guests-top-rsvp-card-text{
@@ -2408,7 +2434,8 @@ main.new-main-content {
     color: var(--primary-black);
     display: inline-block;
     width: 100%;
-    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    margin-right: 5px;
 }
 
 .main-right-guests-top-rsvp-card  .main-right-guests-top-rvsp-icon-text{
