@@ -3380,9 +3380,8 @@
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body">
-                <h5>Draft Not Saved</h5>
-                <p>Please fill in data all the way to " Date of Event " for draft to be
-                    saved. exit will delete event</p>
+                <h5>Are you sure you want to leave?</h5>
+                <p>Your event draf save</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-createEvent-draft" data-bs-dismiss="modal"
