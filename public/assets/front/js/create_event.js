@@ -3974,15 +3974,15 @@ $(document).on("click", "#close_createEvent", async function (e) {
     }
 
     let current_step = $(".current_step").text();
-    //   alert(current_step);
+      alert(current_step);
 
-      if(current_step == "1 of 4"){
+      if(final_step == 1){
         apiCalled = false;
         $("#designModel").modal("show");
         return;
       }
 
-      if(current_step == "2 of 4"){
+      if(final_step == 2){
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
