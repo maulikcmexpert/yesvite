@@ -170,50 +170,60 @@ $(document).ready(function () {
 
     // Click event for search results
    
-   
-     $('#search_design_category').on('keyup', function () {
-            let query = $(this).val().toLowerCase().trim();
-            // $('#filtered_results').show();
-            
-            let results = '';
-            
-            if (query.length > 0) {
-                $('.image-item').each(function () {
-                    let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
-                    
-                    // Check if any tag matches the query
-                    if (tags.some(tag => tag.includes(query))) {
-                        $(this).show();
-                        $(this).removeClass('fadeInDown');
-                        $(this).css('visibility','visible');
-                        $(this).removeClass('wow');
-                        $('.total_design_count').text($('.image-item:visible').length + ' Items');
-                        $('#filtered_results').hide();
+    $('#search_design_category').on('keyup', function () {
+        let query = $(this).val().toLowerCase().trim();
+        let results = '';
     
-                    } else {
-                        $(this).hide();
+        $('#filtered_results').show();
+        
+        // Reset visibility
+        $('.image-item').hide();
+        
+        if (query.length > 0) {
+            let foundCategory = false;
+            let foundImages = false;
+    
+            // Search in categories and subcategories
+            designData.forEach(category => {
+                if (category.name.toLowerCase().includes(query)) {
+                    results += `<div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">${category.name}</div>`;
+                    foundCategory = true;
+                }
+    
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                        foundCategory = true;
                     }
                 });
-        
-                // Check if no matching items are found
-                if ($('.image-item:visible').length === 0) {
-                    $('.total_design_count').text($('.image-item:visible').length +
-                    ' Items');
-             
-                    results +=`<div class="search-item no-data">No Data Found</div>`;
-                    $('#filtered_results').show();
-                     $('#filtered_results').html(results);
+            });
+    
+            // Search in .image-item tags
+            $('.image-item').each(function () {
+                let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
+                if (tags.some(tag => tag.includes(query))) {
+                    $(this).show();
+                    $(this).removeClass('fadeInDown wow').css('visibility', 'visible');
+                    foundImages = true;
                 }
-            } else {
-                // Show all items when the search box is cleared
-                $('.image-item').addClass('fadeInDown');
-                $('.image-item').addClass('wow');
-                $('.image-item').show();
-                $('#filtered_results').hide();
+            });
+    
+            // Update total count
+            $('.total_design_count').text($('.image-item:visible').length + ' Items');
+    
+            // If no category, subcategory, or image matches, show "No Data Found"
+            if (!foundCategory && !foundImages) {
+                results = `<div class="search-item no-data">No Data Found</div>`;
             }
-        
-            // $('#filtered_results').html(results);
-        });
+    
+            $('#filtered_results').html(results);
+        } else {
+            // Restore default state when search is cleared
+            $('.image-item').addClass('fadeInDown wow').show();
+            $('#filtered_results').hide();
+        }
+    });
+    
     $(document).on('click', '.search-item', function () {
         let selectedText = $(this).data('name');
         let categoryId = $(this).data('category-id');
