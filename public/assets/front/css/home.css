@@ -1064,6 +1064,16 @@
     min-width: 200px;
 }
 
+.cookies-track .container-fluid{
+    position: relative !important   ;
+}
+
+.close-btn-privacy-cookie{
+    position: absolute;
+    top: 6px;
+    right: 0;
+}
+
 /* ============ responsive ============ */
 @media only screen and (min-width: 1401px) {
     .image-item.all_designs,
