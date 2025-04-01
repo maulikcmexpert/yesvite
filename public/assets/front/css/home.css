@@ -1042,15 +1042,25 @@
     font-weight: 600;
 }
 
-.cookies-track-btn button{
+.cookies-track-btn{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.cookies-track-btn button {
     background-color: var(--primaryColor);
     color: #fff;
     border: 1px solid var(--primaryColor);
     font-size: 18px;
-    font-weight: 500;
-    padding: 15px 30px;
+    font-weight: 600;
+    padding: 12px 30px;
     text-align: center;
     border-radius: 20px;
+    min-width: 200px;
 }
 
 /* ============ responsive ============ */
