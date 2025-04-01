@@ -114,9 +114,16 @@ $(document).ready(function () {
 
     const $cookiesBox = $(".cookies-track");
 
-    if (!localStorage.getItem("cookiesBoxDismissed")) {
+    // if (!localStorage.getItem("cookiesBoxDismissed")) {
+    //     setTimeout(() => {
+    //         $cookiesBox.addClass("active");
+    //     }, 500);
+    // }
+    if (!localStorage.getItem('cookiesBoxDismissed')) {
         setTimeout(() => {
-            $cookiesBox.addClass("active");
+            // $cookiesBox.addClass('active');
+            $('.cookies-track').css('display','block');
+    
         }, 500);
     }
 
