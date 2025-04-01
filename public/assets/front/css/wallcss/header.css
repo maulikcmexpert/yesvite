@@ -865,6 +865,10 @@ header{
     display: flex !important;
     justify-content: space-between !important;
 }
+#dropdownNotification-menu{
+     border: none !important;
+     background-color: transparent !important;
+}
 
 /* ===Responsive=== */
 
