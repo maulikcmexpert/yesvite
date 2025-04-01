@@ -884,7 +884,9 @@ $(document).on("click","#copy_link_btn",function(e){
 //   alert();
 //   $('.rsvp-footer-btn-wrp').css('display','block');
 // });
-
+$(document).on('click','.close_rsvp_footer',function(){
+  $('.rsvp-footer-btn-wrp').css('display','none');
+})
 //   initMap();
 $(document).ready(function () {
     $(".guest-list-data").each(async function (index, element) {
