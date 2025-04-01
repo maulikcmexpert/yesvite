@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
     const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
     // if (designId) {
@@ -18,7 +18,7 @@ $(document).ready(function () {
         localStorage.setItem("category_name", category_name);
         window.location.href = base_url + "events?design_id=" + id;
     })
-    const urlParams = new URLSearchParams(window.location.search);
+    // const urlParams = new URLSearchParams(window.location.search);
     $(".default_show").show();
 
     $('input[name="design_subcategory"]').prop('checked', false);
