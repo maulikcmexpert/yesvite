@@ -1,5 +1,5 @@
 <main class="new-main-content">
-
+{{dd($rsvpSent);}}
     <div class="container">
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
