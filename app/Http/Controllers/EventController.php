@@ -3476,7 +3476,7 @@ class EventController extends BaseController
         // }
 
         //new
-        $i = 0;
+
 
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
@@ -3484,26 +3484,26 @@ class EventController extends BaseController
                     // Base64 image
                     $parts = explode(',', $imageSource['src']);
                     if (count($parts) < 2) {
-                        continue; 
+                        continue;
                     }
-        
+
                     $imageData = base64_decode($parts[1]);
                     $fileName = time() . $i . '-' . uniqid() . '.jpg';
                     $i++;
-        
+
                     $path = public_path('storage/event_images/') . $fileName;
                     file_put_contents($path, $imageData);
                 } else {
                     // URL image (just copy the image)
                     $src = $imageSource['src'];
-                    $imageName = basename($src); 
+                    $imageName = basename($src);
                     $fileName = $imageName;
                     $i++;
-        
+
                     // $path = public_path('storage/event_images/') . $fileName;
                     // file_put_contents($path, file_get_contents($imageSource['src']));
                 }
-        
+
                 $savedFiles[] = [
                     'fileName' => $fileName,
                     'deleteId' => $imageSource['deleteId']
