@@ -750,6 +750,16 @@ class EventPotluckController extends BaseController
             "last_name" =>  $getUserItemData->users->lastname
         ];
 
+        $notificationParam = [
+
+            'sender_id' => $user->id,
+            'event_id' => $checkIsExist->event_id,
+            'user_potluck_item_id' => $checkIsExist->id,
+            'user_potluck_item_count' => $request['quantity']
+        ];
+        sendNotification('potluck_bring', $notificationParam);
+
+
         return response()->json(['status' => 1, "spoken_for" => $spoken_for, 'data' => $getCarryUser, 'message' => "Potluck item updated"]);
     }
     public function fetchUserDetails(Request $request)
