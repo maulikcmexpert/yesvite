@@ -1378,10 +1378,9 @@ label.error {
     transform: translateY(-50%);    
 }
 
-.close_rsvp_footer{
-    color:var(--secondary-black) !important;
+.close_rsvp_footer svg path {
+    stroke: black;
 }
-
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
