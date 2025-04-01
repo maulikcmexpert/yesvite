@@ -336,7 +336,7 @@ if (!localStorage.getItem('cookiesBoxDismissed')) {
     }, 500);
 }
 
-$('.close-btn-privacy-cookie').on('click', function () {
+$('.remove_privacy_cookie').on('click', function () {
     // $cookiesBox.removeClass('active');
     // $('.cookies-track').css('display','none');
     $('.cookies-track').addBack('d-none');

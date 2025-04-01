@@ -411,10 +411,10 @@
                     site. These third parties may use your information for their own purpose, as described in our <a
                         href="#">Privacy Policy</a></p>
             </div>
-            <button class="close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
+            <button class="remove_privacy_cookie close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="cookies-track-btn">
-            <button>Accept All</button>
+        <div class="cookies-track-btn ">
+            <button class="remove_privacy_cookie">Accept All</button>
             {{-- <button>Reject All</button> --}}
         </div>
     </div>
@@ -565,7 +565,7 @@
             }, 500);
         }
 
-        $(document).on("click",".close-btn-privacy-cookie", function () {
+        $(document).on("click",".remove_privacy_cookie", function () {
             // $cookiesBox.removeClass('active');
             // $('.cookies-track').css('display','none');
             $('.cookies-track').addClass('d-none');
