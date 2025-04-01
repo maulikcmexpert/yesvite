@@ -1,5 +1,8 @@
 $(document).ready(function () {
-
+    if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
+        // If dismissed, hide the cookies box by default
+        $('.cookies-track').css('display', 'none');
+      }
     var base_url = $("#base_url").val()
     $(document).on("click", ".edit_design_tem", function () {
         var id = $(this).attr('data-id');

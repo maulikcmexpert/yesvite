@@ -548,8 +548,15 @@
 
 <script>
     $(document).ready(function() {
+        if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
+    // If dismissed, hide the cookies box by default
+    $('.cookies-track').css('display', 'none');
+  }
         const $cookiesBox = $('.cookies-track');
-
+                if (localStorage.getItem('cookiesBoxDismissed') === 'true') {
+            // If dismissed, hide the cookies box by default
+            $('.cookies-track').css('display', 'none');
+        }
         if (!localStorage.getItem('cookiesBoxDismissed')) {
             setTimeout(() => {
                 $cookiesBox.addClass('active');
