@@ -6907,42 +6907,33 @@ $(document).on("click", ".final_checkout", function () {
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
-    if (eventData.slider_images && eventData.slider_images.length > 0) {
+    if (eventData.slider_images != undefined && eventData.slider_images != "") {
+        // alert(1);
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
+        var imageHtml;
 
-        // Destroy existing Owl Carousel instance
-        $(".event_images_slider").trigger("destroy.owl.carousel").html('').removeClass('owl-loaded');
+        var p=0;
+        if (eventData.slider_images && eventData.slider_images.length > 0) {
 
-        // Append new images
-        let imageHtml = "";
         eventData.slider_images.forEach((image) => {
-            imageHtml += `
+            p++;
+             imageHtml = `
                 <div class="item">
                     <div class="setting-img">
-                        <img src="${base_url}public/storage/event_images/${image.fileName}" />
+                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
                     </div>
                 </div>
             `;
+            // $('.event_images_slider').append(imageHtml);
+
+            $(".event_images_slider")
+            .trigger("add.owl.carousel", [$(imageHtml)])
+            .trigger("refresh.owl.carousel");
         });
+    }
 
-        $(".event_images_slider").html(imageHtml);
-
-        // Reinitialize Owl Carousel
-        $(".event_images_slider").owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            dots: true,
-            items: 1,
-            responsive: {
-                0: { items: 1 },
-                600: { items: 3 },
-                1000: { items: 5 }
-            }
-        });
-
-        $(".slider_image_count").text(eventData.slider_images.length + "/3 Photos");
+        $('.slider_image_count').text(p+'/3 Photos');
 
 
 
