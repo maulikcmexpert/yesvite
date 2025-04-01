@@ -2374,6 +2374,26 @@ main.new-main-content {
     object-fit: contain;
 }
 
+
+/* === RSVP TO HEAD === */
+
+.main-right-guests-top-rsvp{
+    margin-bottom: 10px;
+}
+
+.main-right-guests-top-rsvp-card.green{
+    padding: 10px;
+    border: 1px solid green;
+    color: green;
+    background-color: #b7f1b8;
+    border-radius: 15px;
+    font-family: var(--SFProDisplay-Medium);
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
 /* ===Responsive===
 @media only screen and (max-width: 1399px) {
   .hosted-by-template-slider-img {

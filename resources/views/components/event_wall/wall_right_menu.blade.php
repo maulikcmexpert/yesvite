@@ -26,6 +26,11 @@
 
 <div class="main-content-right">
     <div class="main-right-guests-wrp common-div-wrp">
+        <div class="main-right-guests-top-rsvp">
+            <div class="main-right-guests-top-rsvp-card green">
+                <span>Hosting</span>
+            </div>
+        </div>
         <div class="main-right-guests-head">
             <h3>Attending Guests</h3>
             <p>{{ $total_invite }} Total</p>
