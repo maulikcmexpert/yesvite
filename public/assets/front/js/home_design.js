@@ -171,7 +171,7 @@ $(document).ready(function () {
     
     $('#search_design_category').on('keyup', function () {
         let query = $(this).val().toLowerCase().trim();
-        $('#filtered_results').show();
+        // $('#filtered_results').show();
         
         let results = '';
         
@@ -203,7 +203,7 @@ $(document).ready(function () {
             $('#filtered_results').hide();
         }
     
-        $('#filtered_results').html(results);
+        // $('#filtered_results').html(results);
     });
     
     $(document).on('click', '.search-item', function () {
