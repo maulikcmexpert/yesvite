@@ -732,10 +732,14 @@ class EventGuestController extends BaseController
                 // dd($postList);
             }
 
+            $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                $query->where('app_user', '1');
+            })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+
             $login_user_id  = $user->id;
             $current_page = "guest";
 
-            return view('layout', compact('page', 'title', 'event', 'postList', 'js', 'selectedFilters', 'eventDetails', 'postList', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
+            return view('layout', compact('page', 'title', 'event', 'postList', 'js', 'selectedFilters', 'eventDetails', 'postList','rsvpSent', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
 
         } catch (QueryException $e) {
 

@@ -31,28 +31,31 @@
                 <div class="main-right-host-top-rsvp-card green">
                     <span>Hosting</span>
                 </div>
-            @else    
-                <div class="main-right-guests-top-rsvp-card green">
-                    <span class="main-right-guests-top-rsvp-card-text">Guest</span>
-                    <div class="main-right-guests-top-rvsp-icon-text">
-                        <span>Attending</span>
-                        <span>i</span>
+            @endif    
+                @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0'))
+                    <div class="main-right-guests-top-rsvp-card red">
+                        <span class="main-right-guests-top-rsvp-card-text">Guest</span>
+                        <div class="main-right-guests-top-rvsp-icon-text">
+                            <span> Not Attending</span>
+                            <span>i</span>
+                        </div>
                     </div>
-                </div>
-                <div class="main-right-guests-top-rsvp-card red">
-                    <span class="main-right-guests-top-rsvp-card-text">Guest</span>
-                    <div class="main-right-guests-top-rvsp-icon-text">
-                        <span> Not Attending</span>
-                        <span>i</span>
+                @elseif ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1'))    
+                    <div class="main-right-guests-top-rsvp-card green">
+                        <span class="main-right-guests-top-rsvp-card-text">Guest</span>
+                        <div class="main-right-guests-top-rvsp-icon-text">
+                            <span>Attending</span>
+                            <span>i</span>
+                        </div>
                     </div>
-                </div>
-                <div class="main-right-guests-top-rsvp-card gray">
-                    <span class="main-right-guests-top-rsvp-card-text">Guest</span>
-                    <div class="main-right-guests-top-rvsp-icon-text">
-                        <span>Need to RSVP</span>
-                        <span>i</span>
+                @else
+                    <div class="main-right-guests-top-rsvp-card gray">
+                        <span class="main-right-guests-top-rsvp-card-text">Guest</span>
+                        <div class="main-right-guests-top-rvsp-icon-text">
+                            <span>Need to RSVP</span>
+                            <span>i</span>
+                        </div>
                     </div>
-                </div>
             @endif
         </div>
         <div class="main-right-guests-head">
