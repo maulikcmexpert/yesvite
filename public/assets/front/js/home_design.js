@@ -183,6 +183,7 @@ $(document).ready(function () {
                 if (tags.some(tag => tag.includes(query))) {
                     $(this).show();
                     $(this).removeClass('fadeInDown');
+                    $(this).removeClass('wow');
                 } else {
                     $(this).hide();
                 }
@@ -196,6 +197,7 @@ $(document).ready(function () {
         } else {
             // Show all items when the search box is cleared
             $('.image-item').addClass('fadeInDown');
+            $('.image-item').addClass('wow');
             $('.image-item').show();
             $('#filtered_results').hide();
         }
