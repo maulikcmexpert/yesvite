@@ -182,6 +182,8 @@ $(document).ready(function () {
                 // Check if any tag matches the query
                 if (tags.some(tag => tag.includes(query))) {
                     $(this).show();
+                    $(this).removeClass('fadeInDown');
+                    $(this).removeClass('wow');
                 } else {
                     $(this).hide();
                 }
@@ -190,9 +192,12 @@ $(document).ready(function () {
             // Check if no matching items are found
             if ($('.image-item:visible').length === 0) {
                 results += `<div class="search-item no-data">No Data Found</div>`;
+
             }
         } else {
             // Show all items when the search box is cleared
+            $('.image-item').addClass('fadeInDown');
+            $('.image-item').addClass('wow');
             $('.image-item').show();
             $('#filtered_results').hide();
         }
