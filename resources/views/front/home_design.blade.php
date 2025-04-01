@@ -312,7 +312,7 @@
                     subcategoryData.images.push({
                         id: {{ $image->id }},
                         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-                        tags:{{$image->tags}}
+                        tags:{{$image->tags}},
                     });
                 @endforeach
 
