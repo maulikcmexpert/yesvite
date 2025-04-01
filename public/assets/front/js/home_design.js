@@ -186,6 +186,7 @@ $(document).ready(function () {
                     $(this).css('visibility','visible');
                     $(this).removeClass('wow');
                     $('.total_design_count').text($('.image-item:visible').length + ' Items');
+                    $('#filtered_results').hide();
 
                 } else {
                     $(this).hide();
