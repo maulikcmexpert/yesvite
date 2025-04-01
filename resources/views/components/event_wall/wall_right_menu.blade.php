@@ -27,8 +27,29 @@
 <div class="main-content-right">
     <div class="main-right-guests-wrp common-div-wrp">
         <div class="main-right-guests-top-rsvp">
-            <div class="main-right-guests-top-rsvp-card green">
+            <div class="main-right-host-top-rsvp-card green">
                 <span>Hosting</span>
+            </div>
+            <div class="main-right-guests-top-rsvp-card green">
+                <span class="main-right-guests-top-rsvp-card-text">Guest</span>
+                <div class="main-right-guests-top-rvsp-icon-text">
+                    <span>Attending</span>
+                    <span>i</span>
+                </div>
+            </div>
+            <div class="main-right-guests-top-rsvp-card red">
+                <span>Guest</span>
+                <div class="main-right-guests-top-rvsp-icon-text">
+                    <span>Attending</span>
+                    <span>i</span>
+                </div>
+            </div>
+            <div class="main-right-guests-top-rsvp-card gray">
+                <span>Guest</span>
+                <div class="main-right-guests-top-rvsp-icon-text">
+                    <span>Attending</span>
+                    <span>i</span>
+                </div>
             </div>
         </div>
         <div class="main-right-guests-head">
