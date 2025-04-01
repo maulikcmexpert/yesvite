@@ -2430,12 +2430,12 @@ main.new-main-content {
 }
 
 .main-right-guests-top-rsvp-card span.main-right-guests-top-rsvp-card-text{
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-black);
     display: inline-block;
     width: 77%;
     border-right: 1px solid var(--border);
-    margin-right: 20px;
+    margin-right: 30px;
     text-align: center;
 }
 
