@@ -9121,8 +9121,8 @@ $(document).on("click", ".save-slider-image", function () {
                 var savedImages = response.images;
                 var newImages = response.images;
                 if ($("#isUserLoggedIn").val() === "0") {
-                    let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                    localStorage.removeItem("save-slider-image");
+                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+                    // localStorage.removeItem("save-slider-image");
                     // Append new images to the existing array
                     // newImages.forEach(image => {
                     //     savedImages.push(image);
