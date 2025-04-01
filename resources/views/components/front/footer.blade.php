@@ -557,7 +557,9 @@
         }
 
         $(document).on("click",".close-btn-privacy-cookie", function () {
-            $cookiesBox.removeClass('active');
+            // $cookiesBox.removeClass('active');
+            $('.cookies-track').css('display','none');
+
             localStorage.setItem('cookiesBoxDismissed', 'true');
         });
     });
