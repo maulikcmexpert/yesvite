@@ -2414,11 +2414,11 @@ main.new-main-content {
 }
 
 .main-right-guests-top-rsvp-card.red{
-    border-color: red;
+    border-color: #e03137;
 }
 
 .main-right-guests-top-rsvp-card.red div span{
-    color: red;
+    color: #e03137;
 }
 
 .main-right-guests-top-rsvp-card.gray{
