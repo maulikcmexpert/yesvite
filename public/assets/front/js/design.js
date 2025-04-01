@@ -545,9 +545,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                                "drag" &&
+                                            "drag" &&
                                             event.transform.actionPerformed ===
-                                                undefined
+                                            undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -821,8 +821,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
+                                    element.linethrough == "true" ||
+                                    element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -977,7 +977,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                        undefined
+                                    undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1148,12 +1148,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                            defaultShape
+                                                        defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                                currentShapeIndex
+                                                            currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1166,10 +1166,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                    "drag" &&
+                                                                "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                    undefined
+                                                                undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1178,7 +1178,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                            currentShapeIndex
+                                                                        currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1190,7 +1190,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                    currentShapeIndex
+                                                                currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1317,71 +1317,71 @@ async function bindData(current_event_id) {
             canvas.renderAll(); // Ensure all elements are rendered
         }
     }
-//     // Function to apply selection styling to all textboxes individually
-// function highlightAllTextboxes() {
-//     if (!canvas) {
-//         console.error("Canvas is not initialized.");
-//         return;
-//     }
+    //     // Function to apply selection styling to all textboxes individually
+    // function highlightAllTextboxes() {
+    //     if (!canvas) {
+    //         console.error("Canvas is not initialized.");
+    //         return;
+    //     }
 
-//     // Retrieve all textboxes on the canvas
-//     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
+    //     // Retrieve all textboxes on the canvas
+    //     const textboxes = canvas.getObjects().filter(obj => obj.type === 'textbox');
 
-//     if (textboxes.length === 0) {
-//         console.warn("No textboxes found.");
-//         return;
-//     }
+    //     if (textboxes.length === 0) {
+    //         console.warn("No textboxes found.");
+    //         return;
+    //     }
 
-//     // Apply selection styling to each textbox
-//     textboxes.forEach(textbox => {
-//         textbox.set({
-//             borderColor: "#2DA9FC",   // Blue border to indicate selection
-//             cornerSize: 10,
-//             cornerColor: "#fff",
-//             cornerStyle: "circle",
-//             transparentCorners: false,
-//             hasBorders: true,
-//             selectable: true  // Ensure the textbox remains selectable
-//         });
-//         textbox.setCoords(); // Update the textbox's coordinates
-//     });
+    //     // Apply selection styling to each textbox
+    //     textboxes.forEach(textbox => {
+    //         textbox.set({
+    //             borderColor: "#2DA9FC",   // Blue border to indicate selection
+    //             cornerSize: 10,
+    //             cornerColor: "#fff",
+    //             cornerStyle: "circle",
+    //             transparentCorners: false,
+    //             hasBorders: true,
+    //             selectable: true  // Ensure the textbox remains selectable
+    //         });
+    //         textbox.setCoords(); // Update the textbox's coordinates
+    //     });
 
-//     canvas.requestRenderAll(); // Refresh the canvas to apply changes
-// }
-
-
+    //     canvas.requestRenderAll(); // Refresh the canvas to apply changes
+    // }
 
 
-//     // Function to select all textboxes on the canvas
-function selectAllTextBoxes() {
-    if (!canvas) {
-        console.error("Canvas is not initialized.");
-        return;
-    }
-
-    // Get all textboxes
-    let textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
-
-    if (textObjects.length === 0) {
-        console.warn("No textboxes found.");
-        return;
-    }
-
-    // Deselect any existing active object
-    canvas.discardActiveObject();
 
 
-    let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
-    selection.set({
-        hasRotatingPoint: false,
+    //     // Function to select all textboxes on the canvas
+    function selectAllTextBoxes() {
+        if (!canvas) {
+            console.error("Canvas is not initialized.");
+            return;
+        }
+
+        // Get all textboxes
+        let textObjects = canvas.getObjects().filter(obj => obj.type === 'textbox');
+
+        if (textObjects.length === 0) {
+            console.warn("No textboxes found.");
+            return;
+        }
+
+        // Deselect any existing active object
+        canvas.discardActiveObject();
+
+
+        let selection = new fabric.ActiveSelection(textObjects, { canvas: canvas });
+        selection.set({
+            hasRotatingPoint: false,
             hasBorders: false,
             borderColor: 'transparent', // Optional: Hides the border when object is active
             cornerColor: 'transparent', // Optional: Hides the corners when object is active
-            lockRotation: true ,
-            selectable:true// Optional: Prevents rotation via other means
-    });
+            lockRotation: true,
+            selectable: true// Optional: Prevents rotation via other means
+        });
 
-    selection.setControlsVisibility({
+        selection.setControlsVisibility({
             mt: false, // Middle top
             mb: false, // Middle bottom
             ml: false, // Middle left
@@ -1391,14 +1391,14 @@ function selectAllTextBoxes() {
             tl: false, // Top left
             tr: false  // Top right
         });
-canvas.getObjects().forEach(obj => {
-    if (obj.type === 'textbox') {
-        obj.selectable = true;
+        canvas.getObjects().forEach(obj => {
+            if (obj.type === 'textbox') {
+                obj.selectable = true;
+            }
+        });
+        canvas.setActiveObject(selection);
+        canvas.requestRenderAll();
     }
-});
-    canvas.setActiveObject(selection);
-    canvas.requestRenderAll();
-}
 
 
 
@@ -1671,7 +1671,7 @@ canvas.getObjects().forEach(obj => {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase() ===
+                        word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -2057,7 +2057,7 @@ canvas.getObjects().forEach(obj => {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) {};
+                reader.onload = function (e) { };
                 reader.readAsDataURL(file);
             }
         });
@@ -3198,7 +3198,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) { },
     });
 }
 function isJSON(str) {
