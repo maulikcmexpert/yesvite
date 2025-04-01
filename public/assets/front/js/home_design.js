@@ -168,7 +168,7 @@ $(document).ready(function () {
     // });
 
     // Click event for search results
-  
+    
     $('#search_design_category').on('keyup', function () {
         let query = $(this).val().toLowerCase().trim();
         $('#filtered_results').show();
