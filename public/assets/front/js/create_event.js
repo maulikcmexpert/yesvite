@@ -9131,7 +9131,10 @@ $(document).on("click", ".save-slider-image", function () {
                     // Update localStorage with the combined array
                     localStorage.setItem('save-slider-image', JSON.stringify(savedImages));
                 }
-                eventData.slider_images = savedImages;
+                eventData.slider_images = []; // Empty the array
+                eventData.slider_images = savedImages; // Assign new values
+
+                // eventData.slider_images = savedImages;
                 console.log(eventData);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
