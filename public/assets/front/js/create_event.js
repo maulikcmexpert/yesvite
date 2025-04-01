@@ -6901,7 +6901,7 @@ $(document).on("click", ".final_checkout", function () {
             eventData.desgin_selected
         );
     }
-    $(".event_images_slider").empty(); // Clear previous images
+
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
