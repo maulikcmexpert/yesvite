@@ -31,7 +31,7 @@
                 <div class="main-right-host-top-rsvp-card green">
                     <span>Hosting</span>
                 </div>
-            @endif    
+            @else    
                 @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0'))
                     <div class="main-right-guests-top-rsvp-card red">
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
@@ -58,9 +58,7 @@
                                 </span>
                         </div>
                     </div>
-                 @endif   
-             @if ((empty($rsvpSent)))
-
+                @else
                     <div class="main-right-guests-top-rsvp-card gray">
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                         <div class="main-right-guests-top-rvsp-icon-text">
@@ -79,6 +77,8 @@
                         </div>
                     </div>
             @endif
+          @endif    
+  
         </div>
         <div class="main-right-guests-head">
             <h3>Attending Guests</h3>
