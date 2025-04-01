@@ -1242,7 +1242,7 @@
                     $currentDateTime = strtotime(date('Y-m-d g:i A'));
                 @endphp
                         {{-- @if($eventInfo['guest_view']['event_date'] >= date('Y-m-d')&&strtotime($eventInfo['guest_view']['event_time'])>=strtotime(date('g:i A'))) --}}
-                       @if($eventInfo['guest_view']['host_id']==$user->id)
+                       {{-- @if($eventInfo['guest_view']['host_id']==$user->id) --}}
                        
                         @if($eventDateTime >= $currentDateTime)
                             <div class="rsvp-footer-btn-wrp">
