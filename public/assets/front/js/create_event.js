@@ -6942,7 +6942,7 @@ $(document).on("click", ".final_checkout", function () {
             }
         });
 
-        $('.slider_image_count').text(p+'/3 Photos');
+        $(".slider_image_count").text(eventData.slider_images.length + "/3 Photos");
 
 
 
