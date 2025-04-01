@@ -3963,7 +3963,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     console.log(10);
 
     apiCalled = true;
-    $("#deleteModal").modal("show");
+
     $(".dropdown-menu").removeClass("show");
 
     var temp_id = eventData.temp_id;
