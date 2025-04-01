@@ -196,8 +196,10 @@ $(document).ready(function () {
             if ($('.image-item:visible').length === 0) {
                 $('.total_design_count').text($('.image-item:visible').length +
                 ' Items');
-                results += `<div class="search-item no-data">No Data Found</div>`;
-
+         
+                results +=`<div class="search-item no-data">No Data Found</div>`;
+                $('#filtered_results').show();
+                 $('#filtered_results').html(results);
             }
         } else {
             // Show all items when the search box is cleared
