@@ -170,16 +170,13 @@ $notification_list=getNotificationList();
                       />
                     </svg>
                 </span>
-                <span><a href="{{route('account_settings.notificationSetting')}}" target="_blank"><i class="fa-solid fa-ellipsis-vertical"></i></a></span>
                 <div class="dropdown">
                     <button class="dropdown-toggle" type="button" id="dropdownNotification-menu" data-bs-toggle="dropdown" aria-expanded="false">
-                  <a href="{{route('account_settings.notificationSetting')}}" target="_blank"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
                   </button>
 
                   <ul class="dropdown-menu" aria-labelledby="dropdownNotification-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a href="{{route('account_settings.notificationSetting')}}" target="_blank">Action</a></li>
                   </ul>
                 </div>
               </h5>
