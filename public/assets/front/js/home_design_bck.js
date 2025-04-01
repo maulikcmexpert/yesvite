@@ -114,13 +114,20 @@ $(document).ready(function () {
 
     const $cookiesBox = $(".cookies-track");
 
-    if (!localStorage.getItem("cookiesBoxDismissed")) {
-        setTimeout(() => {
-            $cookiesBox.addClass("active");
-        }, 500);
-    }
+    // if (!localStorage.getItem("cookiesBoxDismissed")) {
+    //     setTimeout(() => {
+    //         $cookiesBox.addClass("active");
+    //     }, 500);
+    // }
+    // if (!localStorage.getItem('cookiesBoxDismissed')) {
+    //     setTimeout(() => {
+    //         // $cookiesBox.addClass('active');
+    //         $('.cookies-track').css('display','block');
+    
+    //     }, 500);
+    // }
 
-    $(document).on("click",".close-btn-privacy-cookie", function () {
+    $(document).on("click",".remove_privacy_cookie", function () {
         // $cookiesBox.removeClass("active");
         $('.cookies-track').css('display','none');
 
