@@ -882,10 +882,9 @@ header{
     padding: 15px 15px !important;
 }
 
-.dropdownNotification-menu li{
+.dropdownNotification-menu li a{
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 10px;
 }
 
