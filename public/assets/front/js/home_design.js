@@ -180,13 +180,12 @@ $(document).ready(function () {
             designData.forEach(category => {
                 category.subcategories.forEach(subcategory => {
                     subcategory.images.forEach(image => {
-                        if (image.tags) {
-                            let tagsArray = image.tags.toLowerCase().split(','); // Split tags into array
-                            if (tagsArray.includes(query)) { // Check if query matches any tag
-                                results += `<div class="search-item tag-match" data-id="${image.id}" data-name="${image.image_path}">
-                                                <img src="${image.image_path}" alt="Image">
-                                            </div>`;
-                            }
+                        let tagsArray = image.tags ? image.tags.toLowerCase().split(',') : []; // Convert tags into array
+    
+                        if (tagsArray.includes(query)) { // Check if query exists in tags
+                            results += `<div class="search-item tag-match" data-id="${image.id}" data-name="${image.image_path}">
+                                            <img src="${image.image_path}" alt="Image">
+                                        </div>`;
                         }
                     });
                 });
@@ -201,6 +200,7 @@ $(document).ready(function () {
             $('#filtered_results').hide();
         }
     });
+    
     
     $(document).on('click', '.search-item', function () {
         let selectedText = $(this).data('name');
