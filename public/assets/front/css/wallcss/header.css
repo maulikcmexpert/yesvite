@@ -870,6 +870,17 @@ header{
      background-color: transparent !important;
 }
 
+.dropdownNotification-menu{
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background-color: var(--white);
+    box-shadow: 0px 0px 100px 0px #0F0F0F14;
+    min-width: 400px;
+    max-width: 400px;
+    right: 0;
+    top: 50px;
+}
+
 /* ===Responsive=== */
 
 @media only screen and (max-width: 1399px) {

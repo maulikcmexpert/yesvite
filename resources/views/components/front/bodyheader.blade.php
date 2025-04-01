@@ -175,7 +175,7 @@ $notification_list=getNotificationList();
                       <i class="fa-solid fa-ellipsis-vertical"></i>
                   </button>
 
-                  <ul class="dropdown-menu" aria-labelledby="dropdownNotification-menu">
+                  <ul class="dropdown-menu dropdownNotification-menu" aria-labelledby="dropdownNotification-menu">
                     <li><a href="{{route('account_settings.notificationSetting')}}" target="_blank">Action</a></li>
                   </ul>
                 </div>
