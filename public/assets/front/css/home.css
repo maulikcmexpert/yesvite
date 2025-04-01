@@ -1040,6 +1040,7 @@
     font-size: 28px;
     color: #000;
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .cookies-track-btn{
@@ -1410,7 +1411,8 @@
     }
 
     .cookies-track {
-        padding: 15px;
+        padding: 30px 15px 15px 15px;
+        border-radius: 20px 20px 0px 0px;
     }
 
     .cookies-track p {
@@ -1438,6 +1440,21 @@
     .collection-card.card-blue {
         border-radius: 10px !important;
     }
+    .cookies-track-btn button {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px 30px;
+        text-align: center;
+        border-radius: 20px;
+        min-width: 170px;
+    }
+    .cookies-track h3 {
+        font-size: 24px;
+        color: #000;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    
 }
 
 @media only screen and (max-width: 435px) {
@@ -1461,6 +1478,7 @@
         font-size: 15px;
         line-height: 17px;
     }
+    
 }
 
 @media only screen and (max-width: 424px) {
@@ -1472,6 +1490,21 @@
     }
     .collection-card.card-blue {
         border-radius: 10px !important;
+    }
+    .cookies-track-btn{
+        flex-direction: column;
+    }
+    .cookies-track-btn button {
+        background-color: var(--primaryColor);
+        color: #fff;
+        border: 1px solid var(--primaryColor);
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px 30px;
+        text-align: center;
+        border-radius: 15px;
+        min-width: 100%;
+        width: 100%;
     }
 }
 
