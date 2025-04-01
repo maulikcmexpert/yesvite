@@ -168,51 +168,6 @@ $(document).ready(function () {
     });
 
     // Click event for search results
-    
-    // $('#search_design_category').on('keyup', function () {
-    //     let query = $(this).val().toLowerCase().trim();
-    //     // $('#filtered_results').show();
-        
-    //     let results = '';
-        
-    //     if (query.length > 0) {
-    //         $('.image-item').each(function () {
-    //             let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
-                
-    //             // Check if any tag matches the query
-    //             if (tags.some(tag => tag.includes(query))) {
-    //                 $(this).show();
-    //                 $(this).removeClass('fadeInDown');
-    //                 $(this).css('visibility','visible');
-    //                 $(this).removeClass('wow');
-    //                 $('.total_design_count').text($('.image-item:visible').length + ' Items');
-    //                 $('#filtered_results').hide();
-
-    //             } else {
-    //                 $(this).hide();
-    //             }
-    //         });
-    
-    //         // Check if no matching items are found
-    //         if ($('.image-item:visible').length === 0) {
-    //             $('.total_design_count').text($('.image-item:visible').length +
-    //             ' Items');
-         
-    //             results +=`<div class="search-item no-data">No Data Found</div>`;
-    //             $('#filtered_results').show();
-    //              $('#filtered_results').html(results);
-    //         }
-    //     } else {
-    //         // Show all items when the search box is cleared
-    //         $('.image-item').addClass('fadeInDown');
-    //         $('.image-item').addClass('wow');
-    //         $('.image-item').show();
-    //         $('#filtered_results').hide();
-    //     }
-    
-    //     // $('#filtered_results').html(results);
-    // });
-    
     $(document).on('click', '.search-item', function () {
         let selectedText = $(this).data('name');
         let categoryId = $(this).data('category-id');
@@ -330,20 +285,12 @@ const $cookiesBox = $('.cookies-track');
 
 if (!localStorage.getItem('cookiesBoxDismissed')) {
     setTimeout(() => {
-        // $cookiesBox.addClass('active');
-        $('.cookies-track').removeClass('d-none');
-
+        $cookiesBox.addClass('active');
     }, 500);
 }
 
-$('.remove_privacy_cookie').on('click', function () {
-    // $cookiesBox.removeClass('active');
-    // $('.cookies-track').css('display','none');
-    $('.cookies-track').addBack('d-none');
-
-    
-
-
+$('.close-btn').on('click', function () {
+    $cookiesBox.removeClass('active');
     localStorage.setItem('cookiesBoxDismissed', 'true');
 });
 
