@@ -6933,7 +6933,7 @@ $(document).on("click", ".final_checkout", function () {
     }
 
         $('.slider_image_count').text(p+'/3 Photos');
-        $(".event_images_slider").empty(); // Clear previous images
+
 
 
         // photoSliders.forEach((sliderClass, index) => {
