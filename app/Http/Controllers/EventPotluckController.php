@@ -559,7 +559,11 @@ class EventPotluckController extends BaseController
             $eventInfo['host_view'] = $eventAboutHost;
                 $current_page = "potluck";
                 $login_user_id  = $user->id;
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page')); // return compact('eventInfo');
+
+                $rsvpSent = EventInvitedUser::whereHas('user', function ($query) {
+                    $query->where('app_user', '1');
+                })->where(['user_id' => $user->id, 'event_id' => $event])->first();
+                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page','rsvpSent')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {
