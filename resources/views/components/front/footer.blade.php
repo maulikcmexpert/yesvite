@@ -549,7 +549,7 @@
             }, 500);
         }
 
-        $('.close-btn').on('click', function() {
+        $('.close-btn-privacy-cookie').on('click', function() {
             $cookiesBox.removeClass('active');
             localStorage.setItem('cookiesBoxDismissed', 'true');
         });
