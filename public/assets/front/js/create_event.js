@@ -4961,7 +4961,10 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
     // console.log(url);
     window.location.href = url;
 });
-
+$(document).on("click", ".cancel-createEvent-draft", function () {
+    $("#loader").css("display", "flex");
+    $("#close_createEvent").trigger("click");
+});
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
