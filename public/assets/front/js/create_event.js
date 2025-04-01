@@ -9122,7 +9122,7 @@ $(document).on("click", ".save-slider-image", function () {
                 var newImages = response.images;
                 if ($("#isUserLoggedIn").val() === "0") {
                     let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-
+                    localStorage.removeItem("save-slider-image");
                     // Append new images to the existing array
                     // newImages.forEach(image => {
                     //     savedImages.push(image);
@@ -10532,7 +10532,7 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
                 "src",
                 base_url + "public/storage/event_images/" + imageUrls
             );
-            localStorage.removeItem("final_upload_image"); // Remo
+            localStorage.removeItem("final_upload_image");
         }
         let restoredTempId = localStorage.getItem("storedTempId");
         if (
@@ -10549,7 +10549,7 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         const slide_image_get = localStorage.getItem("save-slider-image");
         eventData.slider_images = JSON.parse(slide_image_get);
 
-        localStorage.removeItem("save-slider-image");
+
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes
         localStorage.removeItem("pageRefresh");
