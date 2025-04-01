@@ -3973,8 +3973,6 @@ $(document).on("click", "#close_createEvent", async function (e) {
         return;
     }
 
-    let current_step = $(".current_step").text();
-      alert(current_step);
 
       if(final_step == 1){
         apiCalled = false;
