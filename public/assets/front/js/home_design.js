@@ -183,6 +183,7 @@ $(document).ready(function () {
                 if (tags.some(tag => tag.includes(query))) {
                     $(this).show();
                     $(this).removeClass('fadeInDown');
+                    $(this).css('visibility','visible');
                     $(this).removeClass('wow');
                 } else {
                     $(this).hide();
