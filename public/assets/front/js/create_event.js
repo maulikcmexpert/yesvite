@@ -10546,8 +10546,8 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 
         eventData.textData = dbJson;
 
-            const slide_image_get = localStorage.getItem("save-slider-image");
-            eventData.slider_images = JSON.parse(slide_image_get);
+            // const slide_image_get = localStorage.getItem("save-slider-image");
+            // eventData.slider_images = JSON.parse(slide_image_get);
 
 
         localStorage.removeItem("image");
