@@ -967,7 +967,7 @@
 
 .cookies-track p {
     font-size: 20px;
-    color: #000;
+    color: #64748B;
 }
 
 .cookies-track p a {
@@ -1037,9 +1037,19 @@
 }
 
 .cookies-track h3 {
-    font-size: 24px;
+    font-size: 28px;
     color: #000;
     font-weight: 600;
+}
+
+.cookies-track-btn button{
+    background-color: var(--primaryColor);
+    color: #fff;
+    border: 1px solid var(--primaryColor);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 15px 30px;
+    text-align: center;
 }
 
 /* ============ responsive ============ */
