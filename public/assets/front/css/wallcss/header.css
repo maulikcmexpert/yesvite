@@ -879,6 +879,13 @@ header{
     max-width: 300px;
     right: 0;
     top: 50px;
+    padding: 15px 15px !important;
+}
+
+.dropdownNotification-menu li a{
+    color: var(--secondary-black) !important;
+    font-size: 15px !important;
+    font-family: var(--SFProDisplay-Medium);
 }
 
 /* ===Responsive=== */
