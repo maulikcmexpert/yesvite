@@ -415,7 +415,7 @@
         </div>
         <div class="cookies-track-btn">
             <button>Accept All</button>
-            <button>Reject All</button>
+            {{-- <button>Reject All</button> --}}
         </div>
     </div>
 </div>
@@ -556,7 +556,7 @@
             }, 500);
         }
 
-        $('.close-btn-privacy-cookie').on('click', function() {
+        $(document).on("click",".close-btn-privacy-cookie", function () {
             $cookiesBox.removeClass('active');
             localStorage.setItem('cookiesBoxDismissed', 'true');
         });

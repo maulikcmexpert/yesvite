@@ -950,7 +950,7 @@
 
 .cookies-track {
     position: fixed;
-    bottom: -130px;
+    bottom: 0;
     left: 0;
     width: 100%;
     background-color: #f9f9f9;
@@ -1062,6 +1062,16 @@
     text-align: center;
     border-radius: 20px;
     min-width: 200px;
+}
+
+.cookies-track .container-fluid{
+    position: relative !important   ;
+}
+
+.close-btn-privacy-cookie{
+    position: absolute;
+    top: 6px;
+    right: 0;
 }
 
 /* ============ responsive ============ */
@@ -1454,6 +1464,12 @@
         font-weight: 600;
         margin-bottom: 20px;
     }
+
+.close-btn-privacy-cookie {
+    position: absolute;
+    top: 3px;
+    right: 0;
+}
     
 }
 
