@@ -2406,11 +2406,11 @@ main.new-main-content {
 }
 
 .main-right-guests-top-rsvp-card.green{
-    border-color: #23AA26;
+    border-color: var(--green);
 }
 
 .main-right-guests-top-rsvp-card.green div span{
-    color: #23AA26;
+    color: var(--green);
 }
 
 .main-right-guests-top-rsvp-card.red{
