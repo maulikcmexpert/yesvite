@@ -419,6 +419,8 @@
 
                     // Check if no matching items are found
                     if ($('.image-item:visible').length === 0) {
+                        $('.total_design_count').text($('.image-item:visible').length +
+                        ' Items');
                         results += `<div class="search-item no-data">No Data Found</div>`;
 
                     }
