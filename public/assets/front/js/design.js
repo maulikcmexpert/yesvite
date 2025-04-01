@@ -4,7 +4,7 @@ var parsedData = storedData ? JSON.parse(storedData) : null;
 
 var dbJson = $("#static_information").val() || parsedData || null;
 var temp_id = null;
-var image = $("#design_image").val() || localStorage.getItem("image") || null;
+var image = $("#design_image").val() ;
 console.log(image);
 console.log(localStorage.getItem("image"));
 // ✅ Remove local storage data after setting values in variables
