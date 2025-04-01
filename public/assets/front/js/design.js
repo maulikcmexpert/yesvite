@@ -853,12 +853,13 @@ async function bindData(current_event_id) {
                         canvas.add(textElement);
 
 
-                                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+
 
 
 
 
                     });
+                    setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
 
                 let currentImage = null;
@@ -1397,7 +1398,9 @@ async function bindData(current_event_id) {
             }
         });
         canvas.setActiveObject(selection);
+
         canvas.requestRenderAll();
+
     }
 
 
@@ -3042,12 +3045,16 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
+    $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
-        ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
+        // Update width & height if element exists
+        ({ width, height } = element.getBoundingClientRect());
         console.log("Width:", width, "Height:", height);
     } else {
         console.log("Element not found! Using default values.");
+        width = canvas.width;
+        height = canvas.height;
     }
 
     console.log("getTextDataFromCanvas");
@@ -3063,16 +3070,18 @@ function getTextDataFromCanvas() {
     const scaleX = originalWidth / canvasWidth;
     const scaleY = originalHeight / canvasHeight;
 
+
     objects.forEach(function (obj) {
         if (obj.type === "textbox") {
-            // alert(obj.text);
+
+            console.log("Object Type:", obj.type);
             var centerPoint = obj.getCenterPoint();
             console.log(obj.text, obj.charSpacing);
             // **Convert positions back to original 345×490**
             textData.push({
                 text: obj.text,
-                left: obj.left * scaleX, // Scale back X position
-                top: obj.top * scaleY, // Scale back Y position
+                left: obj.left * scaleX,
+                top: obj.top * scaleY,
                 fontSize: parseInt(obj.fontSize * scaleY), // Scale font size
                 fill: obj.fill,
                 width: parseInt(obj.width) * scaleX,

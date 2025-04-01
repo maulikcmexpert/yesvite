@@ -3963,7 +3963,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     console.log(10);
 
     apiCalled = true;
-
+    $("#deleteModal").modal("show");
     $(".dropdown-menu").removeClass("show");
 
     var temp_id = eventData.temp_id;
@@ -3972,6 +3972,21 @@ $(document).on("click", "#close_createEvent", async function (e) {
         $("#deleteModal").modal("show");
         return;
     }
+
+    let current_step = $(".current_step").text();
+    //   alert(current_step);
+
+      if(current_step == "1 of 4"){
+        apiCalled = false;
+        $("#designModel").modal("show");
+        return;
+      }
+
+      if(current_step == "2 of 4"){
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+      }
     console.log(11);
 
     var event_type = $("#event-type").val();
