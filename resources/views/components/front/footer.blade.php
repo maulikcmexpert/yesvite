@@ -408,7 +408,7 @@
             <p>We use third-party cookies and tracking technologies that collect information about your use of the
                 site. These third parties may use your information for their own purpose, as described in our <a
                     href="#">Privacy Policy</a></p>
-            <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <button class="close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 </div>
@@ -549,7 +549,7 @@
             }, 500);
         }
 
-        $('.close-btn').on('click', function() {
+        $('.close-btn-privacy-cookie').on('click', function() {
             $cookiesBox.removeClass('active');
             localStorage.setItem('cookiesBoxDismissed', 'true');
         });
