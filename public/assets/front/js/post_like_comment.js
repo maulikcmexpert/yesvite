@@ -1531,7 +1531,8 @@ $(document).on("click", ".add_guest", function (e) {
             }
         },
         error: function (xhr) {
-            alert("Something went wrong. Please try again."); // Handle AJAX errors
+            toastr.error('Something went wrong');
+            // alert("Something went wrong. Please try again."); // Handle AJAX errors
         },
     });
 });
