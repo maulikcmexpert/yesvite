@@ -120,7 +120,7 @@ $(document).ready(function () {
         }, 500);
     }
 
-    $(".close-btn-privacy-cookie").on("click", function () {
+    $(document).on("click",".close-btn-privacy-cookie", function () {
         $cookiesBox.removeClass("active");
         localStorage.setItem("cookiesBoxDismissed", "true");
     });
