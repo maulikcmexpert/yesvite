@@ -331,7 +331,7 @@ const $cookiesBox = $('.cookies-track');
 if (!localStorage.getItem('cookiesBoxDismissed')) {
     setTimeout(() => {
         // $cookiesBox.addClass('active');
-        $('.cookies-track').css('display','none');
+        $('.cookies-track').css('display','block');
 
     }, 500);
 }
