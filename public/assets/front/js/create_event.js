@@ -9418,6 +9418,7 @@ $(document).on("click", ".design-sidebar-action", function () {
                 });
 
                 $('.slider_image_count').text(sliderImages.length+'/3 photos');
+                localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
                 $(".design-sidebar").addClass("d-none");
