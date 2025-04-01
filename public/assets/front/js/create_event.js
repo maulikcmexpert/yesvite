@@ -3976,18 +3976,15 @@ $(document).on("click", "#close_createEvent", async function (e) {
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
-
-      if(final_step == 1){
+    if (firstLetter1 == "1") {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-      }
-
-      if(final_step == 2){
+    } else {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
-      }
+    }
     console.log(11);
 
     var event_type = $("#event-type").val();
