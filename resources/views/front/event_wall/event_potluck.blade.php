@@ -951,6 +951,7 @@
                 </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-0 event-info-right">
+                {{dd($rsvpSent)}}
                 <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" :rsvpSent="$rsvpSent" />
             </div>
         </div>
