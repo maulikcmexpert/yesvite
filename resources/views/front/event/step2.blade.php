@@ -114,6 +114,7 @@
                                 $randomIds[] = $image->id;
                                 $allImages->push([
                                     'imageId' => $image->id,
+                                    'tags' => $image->tags,
                                     'is_visible' => $image->is_visible,
                                     'category_id' => $category->id,
                                     'subcategory_id' => $subcategory->id,
@@ -136,22 +137,21 @@
                 @endphp
 
                 @foreach ($allImages as $image)
-                    
-                @if($image['is_visible']=='1')
-                    <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs
+                    @if ($image['is_visible'] == '1')
+                        <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4  image-item all_designs
                          {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }} "
-                        {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}} data-category-id="{{ $image['category_id'] }}"
-                        data-subcategory-id="{{ $image['subcategory_id'] }}"
-                        data-category_name="{{ $image['category_name'] }}">
+                            {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}} data-category-id="{{ $image['category_id'] }}"
+                            data-subcategory-id="{{ $image['subcategory_id'] }}"
+                            data-category_name="{{ $image['category_name'] }}" data-tags="{{ $image['tags'] }}">
 
-                        <div class="card-img collection-card card-blue edit_design_tem design-card"
-                            data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
-                            data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}">
-                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                            <div class="card-img collection-card card-blue edit_design_tem design-card"
+                                data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
+                                data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}">
+                                <img src="{{ $image['image_path'] }}" alt="shower-card">
+                            </div>
+
                         </div>
-
-                    </div>
-                 @endif   
+                    @endif
                 @endforeach
             </div>
 
@@ -354,42 +354,83 @@
             });
 
             $('#filtered_results').hide();
+            // $('#search_design_category').on('keyup', function() {
+            //     let query = $(this).val().toLowerCase();
+            //     $('#filtered_results').show();
+            //     let results = '';
+
+            //     if (query.length > 0) {
+            //         designData.forEach(category => {
+            //             if (category.name.toLowerCase().includes(query)) {
+            //                 results +=
+            //                     `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+            //             }
+
+
+            //             category.subcategories.forEach(subcategory => {
+            //                 if (subcategory.name.toLowerCase().includes(query)) {
+            //                     results +=
+            //                         `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+            //                 }
+            //                 // Check if no subcategory matched and add "No Data Found"
+
+
+            //             });
+            //         });
+            //         if (results === '') {
+            //             results +=
+            //                 `<div class="search-item no-data">No Data Found</div>`;
+            //         }
+            //         $('#filtered_results').html(results);
+            //     } else {
+            //         // When search is cleared, restore the default 30 images
+            //         $('#filtered_results').html('');
+            //         $('#filtered_results').hide();
+            //         $('input[name="design_subcategory"]').prop('checked', false);
+
+            //         $('.total_design_count').text($('.default_show:visible').length + ' Items');
+            //     }
+            // });
+
             $('#search_design_category').on('keyup', function() {
-                let query = $(this).val().toLowerCase();
-                $('#filtered_results').show();
+                let query = $(this).val().toLowerCase().trim();
+                // $('#filtered_results').show();
+
                 let results = '';
 
                 if (query.length > 0) {
-                    designData.forEach(category => {
-                        if (category.name.toLowerCase().includes(query)) {
-                            results +=
-                                `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+                    $('.image-item').each(function() {
+                        let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(
+                            ',') : [];
+
+                        // Check if any tag matches the query
+                        if (tags.some(tag => tag.includes(query))) {
+                            $(this).show();
+                            $(this).removeClass('fadeInDown');
+                            $(this).css('visibility', 'visible');
+                            $(this).removeClass('wow');
+                            $('.total_design_count').text($('.image-item:visible').length +
+                                ' Items');
+
+                        } else {
+                            $(this).hide();
                         }
-
-
-                        category.subcategories.forEach(subcategory => {
-                            if (subcategory.name.toLowerCase().includes(query)) {
-                                results +=
-                                    `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-                            }
-                            // Check if no subcategory matched and add "No Data Found"
-
-
-                        });
                     });
-                    if (results === '') {
-                        results +=
-                            `<div class="search-item no-data">No Data Found</div>`;
-                    }
-                    $('#filtered_results').html(results);
-                } else {
-                    // When search is cleared, restore the default 30 images
-                    $('#filtered_results').html('');
-                    $('#filtered_results').hide();
-                    $('input[name="design_subcategory"]').prop('checked', false);
 
-                    $('.total_design_count').text($('.default_show:visible').length + ' Items');
+                    // Check if no matching items are found
+                    if ($('.image-item:visible').length === 0) {
+                        results += `<div class="search-item no-data">No Data Found</div>`;
+
+                    }
+                } else {
+                    // Show all items when the search box is cleared
+                    $('.image-item').addClass('fadeInDown');
+                    $('.image-item').addClass('wow');
+                    $('.image-item').show();
+                    $('#filtered_results').hide();
                 }
+
+                // $('#filtered_results').html(results);
             });
 
             // Click event for search results
