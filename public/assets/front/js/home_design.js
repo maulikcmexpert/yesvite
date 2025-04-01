@@ -330,12 +330,16 @@ const $cookiesBox = $('.cookies-track');
 
 if (!localStorage.getItem('cookiesBoxDismissed')) {
     setTimeout(() => {
-        $cookiesBox.addClass('active');
+        // $cookiesBox.addClass('active');
+        $('.cookies-track').css('display','block');
+
     }, 500);
 }
 
 $('.close-btn-privacy-cookie').on('click', function () {
-    $cookiesBox.removeClass('active');
+    // $cookiesBox.removeClass('active');
+    $('.cookies-track').css('display','none');
+
     localStorage.setItem('cookiesBoxDismissed', 'true');
 });
 
