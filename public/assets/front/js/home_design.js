@@ -1,14 +1,24 @@
 $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
+    // const urlParams = new URLSearchParams(window.location.search);
     const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
-    if (designId) {
-        // Find the element with class 'edit_design_tem' and matching data-id, then trigger click
-        $('.edit_design_tem[data-id="' + designId + '"]').trigger('click');
-        urlParams.delete('design_id');
-        const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
-        window.history.replaceState(null, '', newUrl);
-    }
+    // if (designId) {
+    //     // Find the element with class 'edit_design_tem' and matching data-id, then trigger click
+    //     $('.edit_design_tem[data-id="' + designId + '"]').trigger('click');
+    //     urlParams.delete('design_id');
+    //     const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+    //     window.history.replaceState(null, '', newUrl);
+    // }
+    var base_url = $("#base_url").val()
+    $(document).on("click", ".edit_design_tem", function () {
+        var id = $(this).attr('data-id');
+        var image = $(this).attr('data-image');
+        var category_name = $(this).attr('data-subcategory_name');
+        localStorage.setItem("image", image);
+        localStorage.setItem("category_name", category_name);
+        window.location.href = base_url + "events?design_id=" + id;
+    })
+    const urlParams = new URLSearchParams(window.location.search);
     $(".default_show").show();
 
     $('input[name="design_subcategory"]').prop('checked', false);
