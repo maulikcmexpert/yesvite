@@ -9519,7 +9519,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
 
 
 $(document).on("click", ".cancel-Edit-draft", async function () {
-    $(document).on("click", "#close_editEvent", async function (e) {
+
         if (apiCalled == true) {
             return;
         }
@@ -9583,7 +9583,7 @@ $(document).on("click", ".cancel-Edit-draft", async function () {
                 toastr.error(error);
             },
         });
-    });
+
     });
 
 
