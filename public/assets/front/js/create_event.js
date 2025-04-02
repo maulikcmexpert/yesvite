@@ -6978,7 +6978,7 @@ $(document).on("click", ".final_checkout", function () {
             //     }
             // }
 
-            if (sliderImages[index].fileName) {
+            if (sliderImages[index]) {
                 const slideHtml = `
                     <div class="item">
                         <div class="setting-img">
