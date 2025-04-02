@@ -6953,7 +6953,7 @@ $(document).on("click", ".final_checkout", function () {
                     );
                     $(`.${sliderClass}`).css("display", "block");
                 } else {
-                    sliderElement.css("display", "none");
+                    $(`.${sliderClass}`).css("display", "none");
                 }
             }
         });
