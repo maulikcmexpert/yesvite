@@ -72,7 +72,7 @@
                       <a class="nav-link" href="{{ route('faq')}}">FAQ</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="https://support.yesvite.com">Help Center</a>
+                      <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdj1Jt0MmugCJ5OCh8j6ITod6o_ERI5vm4kJup0PWtDeAemTA/viewform?usp=dialog">Help Center</a>
                   </li>
                   {{-- <li class="nav-item">
                       <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
