@@ -5464,9 +5464,8 @@ $(document).on("click", ".li_event_details", async function () {
             await saveDesignData();
             $("#loader").css("display", "none");
         }, 1000);
+        $(".current_step").text("2 of 4");
     } else {
-        console.log("2");
-
         let storedTextData = await getTextDataFromCanvas();
         let storedTempId = temp_id;
         let desin_img = $("#design_image").val();
@@ -5482,20 +5481,19 @@ $(document).on("click", ".li_event_details", async function () {
         localStorage.setItem("image", image);
 
         $("#edit-design-temp").hide();
-        console.log("3");
 
         $(".new_login_page").show();
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
+        $(".current_step").text("2 of 4");
+
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
-            console.log("4");
-
             let capturedBlob = await captureImage(element);
             const imageResponse = await uploadImage(capturedBlob);
 
             localStorage.setItem("final_upload_image", imageResponse.image);
-            $(".current_step").text("2 of 4");
+
             if (capturedBlob) {
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
@@ -5551,7 +5549,6 @@ $(document).on("click", ".li_event_details", async function () {
                 };
             }
         }
-        console.log("6");
 
         var savedCategory = localStorage.getItem("category_name");
 
@@ -5560,7 +5557,6 @@ $(document).on("click", ".li_event_details", async function () {
             localStorage.removeItem("category_name");
         }
     }
-    console.log("7");
 });
 //
 
