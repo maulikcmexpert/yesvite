@@ -573,13 +573,22 @@
     background-color: #e9f8ff;
 }
 
+.filter-main-wrp .selected-items{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    max-width: 600px;
+}
+
 .filter-main-wrp .selected-items .selected-item {
     font-size: 14px;
     font-family: var(--SFProDisplay-Semibold);
     padding: 9px 20px;
     border: 1px solid var(--borderColor);
     border-radius: 100px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     background-color: #e9f8ff80;
 }
 
@@ -1470,7 +1479,7 @@
     top: 3px;
     right: 0;
 }
-    
+
 }
 
 @media only screen and (max-width: 435px) {
@@ -1494,7 +1503,7 @@
         font-size: 15px;
         line-height: 17px;
     }
-    
+
 }
 
 @media only screen and (max-width: 424px) {
