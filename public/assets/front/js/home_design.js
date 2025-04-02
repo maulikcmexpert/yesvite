@@ -188,6 +188,9 @@ $(document).ready(function () {
                         $(this).removeClass('fadeInDown');
                         $(this).css('visibility','visible');
                         $(this).removeClass('wow');
+
+                        console.log('sasasa'+('image-item:visible').length);
+                        
                         $('.total_design_count').text($('.image-item:visible').length + ' Items');
                         $('#filtered_results').hide();
     
