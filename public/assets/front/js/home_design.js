@@ -177,7 +177,7 @@ $(document).ready(function () {
             
             let results = '';
             
-            if (query.length > 0) {
+            if (query.length > 3) {
                 $('.image-item').each(function () {
                     let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
                     
