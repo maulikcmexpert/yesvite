@@ -3381,7 +3381,7 @@
             </div>
             <div class="modal-body">
                 <h5>Are you sure you want to leave?</h5>
-                <p>Your event draf save</p>
+                <p>Your event is auto saved</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-createEvent-draft" data-bs-dismiss="modal"
@@ -3411,7 +3411,7 @@
             </div>
             <div class="modal-body">
                 <h5>Are you sure you want to leave?</h5>
-                <p>Your event draf save</p>
+                <p>Your event is auto saved</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-Edit-draft" data-bs-dismiss="modal"

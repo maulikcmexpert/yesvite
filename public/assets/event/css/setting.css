@@ -1219,7 +1219,7 @@
     border-radius: 30px;
 }
 
-.designModel .cancel-btn {
+.designModel .cancel-btn-createEvent {
     background-color: transparent;
     border: 1px solid var(--borderColor);
     border-radius: 10px;
@@ -1228,8 +1228,8 @@
     font-weight: 500;
 }
 
-.designModel .cancel-btn:hover {
-    background-color: var(--secondryColor);
+.designModel .cancel-btn-createEvent:hover {
+    background-color: var(--primaryColor);
     color: #fff;
 }
 
@@ -1242,9 +1242,22 @@
     font-size: 12px;
     font-weight: 500;
 }
+.designModel .cancel-Edit-draft {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .cancel-Edit-draft:hover {
+    background-color: var(--primaryColor);
+    color: #fff;
+}
 
 .designModel .cancel-createEvent-draft:hover {
-    background-color: var(--secondryColor);
+    background-color: var(--primaryColor);
     color: #fff;
 }
 
