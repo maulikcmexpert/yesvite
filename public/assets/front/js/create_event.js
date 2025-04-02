@@ -5206,7 +5206,6 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
-    $(".current_step").text("2 of 4");
 
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
@@ -5456,14 +5455,18 @@ function save_image_design(downloadImage, textData) {
 ///vrushali============
 $(document).on("click", ".li_event_details", async function () {
     // let isLoggedIn = await checkUserLogin(); // Function to check login status
-
+    console.log("li_event_details");
     if ($("#isUserLoggedIn").val() === "1") {
+        console.log("1");
+
         $("#loader").css("display", "flex");
         setTimeout(async function () {
             await saveDesignData();
             $("#loader").css("display", "none");
         }, 1000);
     } else {
+        console.log("2");
+
         let storedTextData = await getTextDataFromCanvas();
         let storedTempId = temp_id;
         let desin_img = $("#design_image").val();
@@ -5479,12 +5482,15 @@ $(document).on("click", ".li_event_details", async function () {
         localStorage.setItem("image", image);
 
         $("#edit-design-temp").hide();
+        console.log("3");
 
         $(".new_login_page").show();
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
+            console.log("4");
+
             let capturedBlob = await captureImage(element);
             const imageResponse = await uploadImage(capturedBlob);
 
@@ -5516,6 +5522,7 @@ $(document).on("click", ".li_event_details", async function () {
                                     </button>
                                 </div>
                             `;
+                            console.log("5");
 
                             // Append the new item inside .create-account-slider.slider_login
                             // $(".create-account-slider.slider_login").append(newItem);
@@ -5544,6 +5551,7 @@ $(document).on("click", ".li_event_details", async function () {
                 };
             }
         }
+        console.log("6");
 
         var savedCategory = localStorage.getItem("category_name");
 
@@ -5552,6 +5560,7 @@ $(document).on("click", ".li_event_details", async function () {
             localStorage.removeItem("category_name");
         }
     }
+    console.log("7");
 });
 //
 
