@@ -833,9 +833,10 @@ async function bindData(current_event_id) {
                             hasBorders: true,
                             centeredRotation: true,
                             angle: element?.rotation ? element?.rotation : 0,
-                            stroke: "blue", // Blue border
-                            strokeWidth: 2, // Border thickness
-                            strokeDashArray: [5, 5], // Dotted effect
+                            hasBorders: true, // Ensure it has borders
+                            borderColor: "blue", // Border color
+                            cornerColor: "blue", // Control corners color
+                            borderDashArray: [5, 5], // Dotted border effect
                         });
 
                         textElement.setControlsVisibility({
