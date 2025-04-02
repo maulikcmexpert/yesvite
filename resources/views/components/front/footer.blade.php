@@ -995,7 +995,8 @@
         // const appPackage = "com.yesvite.test";
         const appPackage = "com.yesvite.android";
         const appLink =
-            `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+            // `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+            `intent://yesvite.com/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
         if (!sessionStorage.getItem('androidAppRedirectionDone')) {
             window.location.replace(appLink);
