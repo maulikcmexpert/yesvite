@@ -9463,7 +9463,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
         $("#EditdraftModel").modal("show");
       return;}
     // if (final_step == 2) {
-    $(".dropdown-menu").removeClass("show");
+
     savePage1Data(1);
     // }
     var design = eventData.desgin_selected;
@@ -9531,7 +9531,7 @@ $(document).on("click", ".cancel-Edit-draft", async function (e) {
         console.log("firstLetter1", firstLetter1);
 
         // if (final_step == 2) {
-        $(".dropdown-menu").removeClass("show");
+
         savePage1Data(1);
         // }
         var design = eventData.desgin_selected;
