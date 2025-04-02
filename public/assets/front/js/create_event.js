@@ -5205,6 +5205,7 @@ async function saveDesignData(direct = false) {
     console.log("here for save image");
     $("#loader").css("display", "flex");
     $(".current_step").text("2 of 4");
+    lo
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
