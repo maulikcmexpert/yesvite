@@ -2475,7 +2475,7 @@ async function bindData(current_event_id) {
         canvas.renderAll();
     });
     let isFirstClick = true;
-
+    let isSelectionTriggered = false;
     function simulateMouseEvents(x, y) {
         const canvasEl = canvas.upperCanvasEl;
         const rect = canvasEl.getBoundingClientRect();
@@ -2539,14 +2539,16 @@ async function bindData(current_event_id) {
         discardIfMultipleObjects(options);
         var activeObject = canvas.getActiveObject();
         console.log("mouse:up", activeObject);
-        if (!activeObject) {
-            if (isFirstClick) {
-                isFirstClick = true;
-                setTimeout(() => {
-                    // Reset after execution
+        if (!activeObject && !isSelectionTriggered) {
+            isSelectionTriggered = true; // Prevent re-triggering
+
+            setTimeout(() => {
+                if (!canvas.getActiveObject()) {
+                    // Ensure no object is selected
                     selectAllTextBoxes();
-                }, 500); // Delay to ensure proper selection
-            }
+                }
+                isSelectionTriggered = false; // Reset after execution
+            }, 500); // Delay for proper selection
         }
     });
     let lastEditedObject = null;
