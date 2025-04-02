@@ -2540,7 +2540,7 @@ async function bindData(current_event_id) {
         console.log("mouse:up", activeObject);
         if (!activeObject) {
             isFirstClick = true;
-            selectAllTextBoxes(); // Delay to ensure proper selection
+            setTimeout(() => selectAllTextBoxes(), 500); // Delay to ensure proper selection
             canvas.renderAll();
         }
     });
