@@ -1242,6 +1242,14 @@
     font-size: 12px;
     font-weight: 500;
 }
+.designModel .cancel-Edit-draft {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
 
 .designModel .cancel-createEvent-draft:hover {
     background-color: var(--secondryColor);
