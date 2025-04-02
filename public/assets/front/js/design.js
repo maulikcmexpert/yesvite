@@ -859,9 +859,15 @@ async function bindData(current_event_id) {
                         canvas.forEachObject(function (object) {
                             if (object.type === "textbox") {
                                 if (canvas.getActiveObject() === object) {
-                                    ctx.strokeStyle = "white"; // White for selected
+                                    ctx.strokeStyle = "#2DA9FC"; // White for selected
+                                    ctx.cornerColor = "#fff"; // White for selected
+                                    ctx.cornerSize = 10; // White for selected
                                     ctx.lineWidth = 2;
                                     ctx.setLineDash([]); // Solid line
+
+                                    // obj.set("borderColor", "#2DA9FC");
+                                    // obj.set("cornerSize", 10);
+                                    // obj.set("cornerColor", "#fff");
                                 } else {
                                     ctx.strokeStyle = "blue"; // Blue for unselected
                                     ctx.lineWidth = 2;
