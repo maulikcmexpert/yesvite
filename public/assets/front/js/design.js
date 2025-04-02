@@ -2529,8 +2529,6 @@ async function bindData(current_event_id) {
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
             canvas.discardActiveObject();
-            isFirstClick = true;
-            selectAllTextBoxes(); // Delay to ensure proper selection
 
             canvas.renderAll();
         }
@@ -2538,6 +2536,13 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
+        var activeObject = canvas.getActiveObject();
+        console.log("mouse:up", activeObject);
+        if (!activeObject) {
+            isFirstClick = true;
+            selectAllTextBoxes(); // Delay to ensure proper selection
+            canvas.renderAll();
+        }
     });
     let lastEditedObject = null;
 
