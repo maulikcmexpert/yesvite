@@ -6913,7 +6913,15 @@ $(document).on("click", ".final_checkout", function () {
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
+        const $carousel = $(".event_images_slider");
 
+        // Destroy existing carousel if it exists
+        if ($carousel.hasClass("owl-loaded")) {
+            $carousel.trigger("destroy.owl.carousel");
+        }
+
+        // Clear existing slides
+        $carousel.empty();
         var p = 0;
         // if (eventData.slider_images && eventData.slider_images.length > 0) {
         //     //
@@ -6945,16 +6953,27 @@ $(document).on("click", ".final_checkout", function () {
 
         photoSliders.forEach((sliderClass, index) => {
             const sliderElement = $(`#${sliderClass}`);
-            if (sliderElement.length) {
-                if (sliderImages[index]) {
-                    sliderElement.attr(
-                        "src",
-                        `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
-                    );
-                    $(`.${sliderClass}`).css("display", "block");
-                } else {
-                    $(`.${sliderClass}`).css("display", "none");
-                }
+            // if (sliderElement.length) {
+            //     if (sliderImages[index]) {
+            //         sliderElement.attr(
+            //             "src",
+            //             `${base_url}public/storage/event_images/${sliderImages[index].fileName}`
+            //         );
+            //         $(`.${sliderClass}`).css("display", "block");
+            //     } else {
+            //         $(`.${sliderClass}`).css("display", "none");
+            //     }
+            // }
+
+            if (sliderImages[index].fileName) {
+                const slideHtml = `
+                    <div class="item">
+                        <div class="setting-img">
+                            <img src="${base_url}public/storage/event_images/${sliderImages[index].fileName}" />
+                        </div>
+                    </div>
+                `;
+                $carousel.append(slideHtml);
             }
         });
 
