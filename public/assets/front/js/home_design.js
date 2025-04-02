@@ -183,8 +183,8 @@ $(document).ready(function () {
                     
                     // Check if any tag matches the query
                     if (tags.some(tag => tag.includes(query))) {
-                        $(this).removeClass('d-none');
                         $(this).show();
+                        $(this).removeClass('d-none');
                         $(this).removeClass('fadeInDown');
                         $(this).css('visibility','visible');
                         $(this).removeClass('wow');
@@ -192,13 +192,15 @@ $(document).ready(function () {
                         $('#filtered_results').hide();
     
                     } else {
-                        $(this).hide();
+                        // $(this).hide();
+                        $(this).addClass('d-none').hide(); // Add 'd-none' when hiding
+
                     }
                 });
         
                 // Check if no matching items are found
-                if ($('.image-item').length === 0) {
-                    $('.total_design_count').text($('.image-item').length +
+                if ($('.image-item:visible').length === 0) {
+                    $('.total_design_count').text($('.image-item:visible').length +
                     ' Items');
              
                     results +=`<div class="search-item no-data">No Data Found</div>`;
