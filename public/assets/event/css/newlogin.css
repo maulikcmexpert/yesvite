@@ -213,7 +213,7 @@
     height: 28px;
 }
 
-.create-account-slider .owl-prev.disabled , .create-account-slider .owl-next.disabled {
+.create-account-slider.rsvp-slider .owl-prev.disabled , .create-account-slider.rsvp-slider .owl-next.disabled {
     display: flex !important;
 }
 
