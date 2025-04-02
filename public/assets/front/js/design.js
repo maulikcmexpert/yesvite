@@ -830,7 +830,7 @@ async function bindData(current_event_id) {
                             cornerStyle: "circle",
                             transparentCorners: false,
                             lockScalingFlip: true,
-                            hasBorders: false,
+                            hasBorders: true,
                             centeredRotation: true,
                             angle: element?.rotation ? element?.rotation : 0,
                         });
