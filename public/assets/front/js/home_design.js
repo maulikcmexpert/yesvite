@@ -181,6 +181,8 @@ $(document).ready(function () {
                 $('.image-item').each(function () {
                     let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
                     
+                    console.log(tags);
+                    
                     // Check if any tag matches the query
                     if (tags.some(tag => tag.includes(query))) {
                         $(this).show();
