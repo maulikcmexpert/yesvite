@@ -1381,6 +1381,9 @@ label.error {
 .close_rsvp_footer svg path {
     stroke: black;
 }
+.rsvp-slider .owl-next.disabled{
+    display: none !important;
+}
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
