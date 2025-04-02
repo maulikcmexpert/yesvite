@@ -181,22 +181,49 @@ $(document).ready(function () {
             let visibleCount = 0;
 
             $(".image-item").each(function () {
-                let tags = $(this).data("tags")
-                    ? $(this).data("tags").toLowerCase().split(",")
-                    : [];
+                // let tags = $(this).data("tags")
+                //     ? $(this).data("tags").toLowerCase().split(",")
+                //     : [];
 
-                if (tags.some((tag) => tag.includes(query))) {
-                    $(this).show();
-                    $(this).removeClass("d-none");
-                    $(this).removeClass("fadeInDown");
-                    $(this).css("visibility", "visible");
-                    $(this).removeClass("wow");
-                    $(this).removeClass("d-none").fadeIn(); 
-                    visibleCount++; 
-                } else {
-                    $(this).hide();
-                    $(this).fadeOut().addClass("d-none"); 
-                }
+                let tags = $(this).data("tags")
+                ? $(this).data("tags").toLowerCase().split(",")
+                : [];
+                let subcategory = $(this).data("subcategory_name")
+                    ? $(this).data("subcategory_name").toLowerCase()
+                    : "";
+                let category = $(this).data("category_name")
+                    ? $(this).data("category_name").toLowerCase()
+                    : "";
+
+
+                    let matches = tags.some((tag) => tag.includes(query)) ||
+                    subcategory.includes(query) ||
+                    category.includes(query);
+    
+                    if (matches) {
+                        $(this).show();
+                            $(this).removeClass("d-none");
+                            $(this).removeClass("fadeInDown");
+                            $(this).css("visibility", "visible");
+                            $(this).removeClass("wow");
+                            $(this).removeClass("d-none").fadeIn(); 
+                            visibleCount++; 
+                    } else {
+                        $(this).hide();
+                        $(this).fadeOut().addClass("d-none");
+                    }
+                // if (tags.some((tag) => tag.includes(query))) {
+                //     $(this).show();
+                //     $(this).removeClass("d-none");
+                //     $(this).removeClass("fadeInDown");
+                //     $(this).css("visibility", "visible");
+                //     $(this).removeClass("wow");
+                //     $(this).removeClass("d-none").fadeIn(); 
+                //     visibleCount++; 
+                // } else {
+                //     $(this).hide();
+                //     $(this).fadeOut().addClass("d-none"); 
+                // }
             });
 
             console.log("Total Visible Items:", visibleCount);
