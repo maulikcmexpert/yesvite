@@ -178,7 +178,7 @@ $(document).ready(function () {
         let query = $(this).val().toLowerCase().trim();
         let results = "";
         if (query.length > 0) {
-            let visibleCount = 0; // Counter to track visible items
+            let visibleCount = 0;
 
             $(".image-item").each(function () {
                 let tags = $(this).data("tags")
@@ -191,11 +191,11 @@ $(document).ready(function () {
                     $(this).removeClass("fadeInDown");
                     $(this).css("visibility", "visible");
                     $(this).removeClass("wow");
-                    $(this).removeClass("d-none").fadeIn(); // Use fadeIn for better visibility
-                    visibleCount++; // Increase counter for visible items
+                    $(this).removeClass("d-none").fadeIn(); 
+                    visibleCount++; 
                 } else {
                     $(this).hide();
-                    $(this).fadeOut().addClass("d-none"); // Hide properly
+                    $(this).fadeOut().addClass("d-none"); 
                 }
             });
 
