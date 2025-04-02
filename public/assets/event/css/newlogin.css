@@ -213,6 +213,10 @@
     height: 28px;
 }
 
+.create-account-slider .owl-prev.disabled , .create-account-slider .owl-next.disabled {
+    display: flex !important;
+}
+
 @media only screen and (max-width: 1399px) {
     .new-create-account-left .rsvp-slider img {
         max-width: 400px;
