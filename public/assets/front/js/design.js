@@ -865,9 +865,8 @@ async function bindData(current_event_id) {
                                     ctx.lineWidth = 2;
                                     ctx.setLineDash([]); // Solid line
 
-                                    // obj.set("borderColor", "#2DA9FC");
-                                    // obj.set("cornerSize", 10);
-                                    // obj.set("cornerColor", "#fff");
+                                    // Apply control visibility and styling
+                                    setControlVisibilityForObject(object);
                                 } else {
                                     ctx.strokeStyle = "blue"; // Blue for unselected
                                     ctx.lineWidth = 2;
@@ -890,7 +889,27 @@ async function bindData(current_event_id) {
 
                     canvas.renderAll();
                 }
+                function setControlVisibilityForObject(obj) {
+                    obj.setControlsVisibility({
+                        mt: false,
+                        mb: false,
+                        bl: true,
+                        br: true,
+                        tl: true,
+                        tr: true,
+                        ml: true,
+                        mr: true,
+                    });
 
+                    obj.set({
+                        transparentCorners: false,
+                        borderColor: "#2DA9FC", // Light blue border when selected
+                        cornerSize: 10,
+                        cornerColor: "#fff",
+                    });
+
+                    obj.setCoords();
+                }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
                 let isimageoncanvas = false;
