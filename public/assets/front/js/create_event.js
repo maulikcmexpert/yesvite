@@ -3980,7 +3980,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-    } else {
+    } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
         apiCalled = false;
         $("#draftModel").modal("show");
       return;}
@@ -4981,8 +4981,16 @@ $(document).on("click", ".cancel-createEvent-draft", async function () {
         let firstLetter1 = text1.split(" ")[0];
 
         console.log("firstLetter1", firstLetter1);
+        if (firstLetter1 == "1") {
+            apiCalled = false;
+            $("#designModel").modal("show");
+            return;
+        }
+        if (firstLetter1 == "2"){
+            apiCalled = false;
+            $("#draftModel").modal("show");
+          return;}
 
-        console.log(11);
 
         var event_type = $("#event-type").val();
         var event_name = $("#event-name").val();
