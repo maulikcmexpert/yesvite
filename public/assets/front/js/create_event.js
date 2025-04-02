@@ -6926,7 +6926,11 @@ $(document).on("click", ".final_checkout", function () {
             `;
             // $('.event_images_slider').append(imageHtml);
 
-            $(".event_images_slider")
+                let slider = $(
+                    ".event_images_slider"
+                );
+
+            slider
             .trigger("add.owl.carousel", [$(imageHtml)])
             .trigger("refresh.owl.carousel");
         });
