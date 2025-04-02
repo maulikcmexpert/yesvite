@@ -192,9 +192,8 @@ $(document).ready(function () {
                         $('#filtered_results').hide();
     
                     } else {
-                        // $(this).hide();
-                        $(this).addClass('d-none').hide(); // Add 'd-none' when hiding
-
+                        $(this).hide();
+                        
                     }
                 });
         
