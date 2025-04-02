@@ -55,11 +55,12 @@ class EventAboutController extends BaseController
             }])->where('id', $event)->first();
 
 
-            if ($eventDetail->user_id != $login_user_id && !$eventDetail->event_invited_user->contains(function($invitedUser) use ($login_user_id) {
-                return $invitedUser->user_id == $login_user_id;
-            })) {
+            $eventUserscheck = EventInvitedUser::where('event_id', $event)->pluck('user_id');
+
+            if ($eventDetail->user_id != $login_user_id && !$eventUserscheck->contains($login_user_id)) {
                 return redirect()->route('home'); // redirect to home route if unauthorized
             }
+            
 
 
             $guestView = [];
