@@ -906,6 +906,7 @@ async function bindData(current_event_id) {
                         borderColor: "#2DA9FC", // Light blue border when selected
                         cornerSize: 10,
                         cornerColor: "#fff",
+                        cornerStyle: "circle",
                     });
 
                     obj.setCoords();
