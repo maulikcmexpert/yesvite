@@ -190,11 +190,12 @@ $(document).ready(function () {
                         $(this).removeClass('fadeInDown');
                         $(this).css('visibility','visible');
                         $(this).removeClass('wow');
+                        $(this).addClass('searched');
 
                         var lengts= $('.image-item:visible').length;
                         console.log('sasasa'+ lengts);
                         
-                        $('.total_design_count').text($('.image-item:visible').length + ' Items');
+                        $('.total_design_count').text($('.searched').length + ' Items');
                         $('#filtered_results').hide();
     
                     } else {
@@ -225,6 +226,7 @@ $(document).ready(function () {
                 if (allItems.length > 30) {
                     allItems.slice(30).addClass('d-none').hide();
                 }
+                $('.image-item').removeClass('searched');
 
                 $('.total_design_count').text($('.image-item:visible').length + ' Items');
                 $('#filtered_results').hide();
