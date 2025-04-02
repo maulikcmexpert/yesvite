@@ -6937,12 +6937,7 @@ $(document).on("click", ".final_checkout", function () {
     }
 
         $('.slider_image_count').text(p+'/3 Photos');
-        const sliderContainer = $(".event_images_slider");
 
-        if (sliderContainer.hasClass("owl-carousel")) {
-            sliderContainer.trigger("destroy.owl.carousel").removeClass("owl-carousel owl-loaded");
-            sliderContainer.find(".owl-stage-outer").children().unwrap();
-        }
         // photoSliders.forEach((sliderClass, index) => {
         //     const sliderElement = $(`#${sliderClass}`);
         //     if (sliderElement.length) {
