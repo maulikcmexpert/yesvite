@@ -181,6 +181,8 @@ $(document).ready(function () {
                 $('.image-item').each(function () {
                     let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
                     
+                    // console.log(tags);
+                    
                     // Check if any tag matches the query
                     if (tags.some(tag => tag.includes(query))) {
                         $(this).show();
@@ -188,6 +190,10 @@ $(document).ready(function () {
                         $(this).removeClass('fadeInDown');
                         $(this).css('visibility','visible');
                         $(this).removeClass('wow');
+
+                        var lengts= $('.image-item:visible').length;
+                        console.log('sasasa'+ lengts);
+                        
                         $('.total_design_count').text($('.image-item:visible').length + ' Items');
                         $('#filtered_results').hide();
     
