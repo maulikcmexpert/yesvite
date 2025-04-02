@@ -4986,11 +4986,11 @@ $(document).on("click", ".cancel-createEvent-draft", async function () {
             $("#designModel").modal("show");
             return;
         }
-        if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
+        if (firstLetter1 == "2"){
             apiCalled = false;
             $("#draftModel").modal("show");
           return;}
-        console.log(11);
+
 
         var event_type = $("#event-type").val();
         var event_name = $("#event-name").val();
