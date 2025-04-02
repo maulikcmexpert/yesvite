@@ -9,7 +9,7 @@ var image = $("#design_image").val() || localStorage.getItem("image") || null;
 console.log(image);
 console.log(localStorage.getItem("image"));
 // ✅ Remove local storage data after setting values in variables
-
+var getTextData = false;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
@@ -2460,7 +2460,7 @@ async function bindData(current_event_id) {
     }
     let isFirstClick = true;
     let isSelectionTriggered = false;
-    let getTextData = false;
+
     $(document).on("click", ".main-content-right", function (e) {
         if (getTextData) {
             return;
