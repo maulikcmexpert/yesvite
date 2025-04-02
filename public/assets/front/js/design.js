@@ -2530,7 +2530,7 @@ async function bindData(current_event_id) {
             });
             canvas.discardActiveObject();
             isFirstClick = true;
-            setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+            selectAllTextBoxes(); // Delay to ensure proper selection
 
             canvas.renderAll();
         }
