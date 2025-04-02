@@ -216,6 +216,11 @@ $(document).ready(function () {
                     let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
             
                     if (tags.some(tag => tag.includes(query))) {
+                        $(this).show();
+                                    $(this).removeClass('d-none');
+                                    $(this).removeClass('fadeInDown');
+                        //             $(this).css('visibility','visible');
+                                    $(this).removeClass('wow');
                         $(this).removeClass('d-none').fadeIn(); // Use fadeIn for better visibility
                         visibleCount++; // Increase counter for visible items
                     } else {
