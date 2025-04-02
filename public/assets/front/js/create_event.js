@@ -6881,13 +6881,13 @@ $(document).on("click", ".final_checkout", function () {
     // $('#loader').css('display','flex');
     // $(".main-content-wrp").addClass("blurred");
     // var imagePath = '';
-    $("#eventImage").attr(
-        "src",
-        base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected +
-            ""
-    );
+    // $("#eventImage").attr(
+    //     "src",
+    //     base_url +
+    //         "public/storage/event_images/" +
+    //         eventData.desgin_selected +
+    //         ""
+    // );
 
     // let imageUrls = localStorage.getItem('final_upload_image');
     // if (imageUrls) {
@@ -6951,6 +6951,19 @@ $(document).on("click", ".final_checkout", function () {
 
         // $(".slider_image_count").text(p + "/3 Photos");
 
+        const mainImage = `
+                <div class="item">
+                    <div class="setting-img">
+                        <img src="${
+                            base_url +
+                            "public/storage/event_images/" +
+                            eventData.desgin_selected
+                        }" />
+                    </div>
+                </div>
+            `;
+        $carousel.append(mainImage);
+
         photoSliders.forEach((sliderClass, index) => {
             const sliderElement = $(`#${sliderClass}`);
             // if (sliderElement.length) {
@@ -6977,7 +6990,7 @@ $(document).on("click", ".final_checkout", function () {
             }
         });
 
-        $(".event_images_slider").owlCarousel({
+        $carousel.owlCarousel({
             loop: false,
             margin: 10,
             nav: true,
@@ -6991,15 +7004,9 @@ $(document).on("click", ".final_checkout", function () {
         </svg>`,
             ],
             responsive: {
-                0: {
-                    items: 1,
-                },
-                600: {
-                    items: 3,
-                },
-                1000: {
-                    items: 5,
-                },
+                0: { items: 1 },
+                600: { items: 1 },
+                1000: { items: 1 },
             },
         });
     }
