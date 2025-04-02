@@ -54,6 +54,15 @@ class EventAboutController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
 
+
+            $eventUserscheck = EventInvitedUser::where('event_id', $event)->pluck('user_id');
+
+            if ($eventDetail->user_id != $login_user_id && !$eventUserscheck->contains($login_user_id)) {
+                return redirect()->route('home'); // redirect to home route if unauthorized
+            }
+            
+
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
