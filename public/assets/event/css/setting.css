@@ -1251,6 +1251,11 @@
     font-weight: 500;
 }
 
+.designModel .cancel-Edit-draft:hover {
+    background-color: var(--secondryColor);
+    color: #fff;
+}
+
 .designModel .cancel-createEvent-draft:hover {
     background-color: var(--secondryColor);
     color: #fff;
