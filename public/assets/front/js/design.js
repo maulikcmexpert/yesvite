@@ -1,4 +1,5 @@
 // ============vrushali=============
+
 var storedData = localStorage.getItem("storedTextData");
 var parsedData = storedData ? JSON.parse(storedData) : null;
 
@@ -313,9 +314,9 @@ $(document).on("click", ".design-cards", function () {
         // });
         canvas.add(textElement);
         canvas.on("object:added", function (e) {
-            // if (e.target && e.target.type === 'textbox') {
-            //     setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
-            // }
+            if (e.target && e.target.type === "textbox") {
+                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+            }
         });
     });
     var shape = "";
@@ -830,7 +831,7 @@ async function bindData(current_event_id) {
                             cornerStyle: "circle",
                             transparentCorners: false,
                             lockScalingFlip: true,
-                            hasBorders: false,
+                            hasBorders: true,
                             centeredRotation: true,
                             angle: element?.rotation ? element?.rotation : 0,
                         });
@@ -847,9 +848,9 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        drawCustomBorder(textElement);
+                        // drawCustomBorder(textElement);
                     });
-                    // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                    setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
                 function drawCustomBorder(object) {
                     canvas.on("after:render", function () {
@@ -865,9 +866,8 @@ async function bindData(current_event_id) {
                                     ctx.lineWidth = 2;
                                     ctx.setLineDash([]); // Solid line
 
-                                    // obj.set("borderColor", "#2DA9FC");
-                                    // obj.set("cornerSize", 10);
-                                    // obj.set("cornerColor", "#fff");
+                                    // Apply control visibility and styling
+                                    setControlVisibilityForObject(object);
                                 } else {
                                     ctx.strokeStyle = "blue"; // Blue for unselected
                                     ctx.lineWidth = 2;
@@ -890,7 +890,28 @@ async function bindData(current_event_id) {
 
                     canvas.renderAll();
                 }
+                function setControlVisibilityForObject(obj) {
+                    obj.setControlsVisibility({
+                        mt: false,
+                        mb: false,
+                        bl: true,
+                        br: true,
+                        tl: true,
+                        tr: true,
+                        ml: true,
+                        mr: true,
+                    });
 
+                    obj.set({
+                        transparentCorners: false,
+                        borderColor: "#2DA9FC", // Light blue border when selected
+                        cornerSize: 10,
+                        cornerColor: "#fff",
+                        cornerStyle: "circle",
+                    });
+
+                    obj.setCoords();
+                }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
                 let isimageoncanvas = false;
@@ -2437,7 +2458,8 @@ async function bindData(current_event_id) {
             canvas.renderAll();
         }
     }
-
+    let isFirstClick = true;
+    let isSelectionTriggered = false;
     $(document).on("click", ".main-content-right", function (e) {
         // console.log(e);
         let target = e.target;
@@ -2451,9 +2473,19 @@ async function bindData(current_event_id) {
             return; // Do nothing
         }
         canvas.discardActiveObject();
+        var activeObject = canvas.getActiveObject();
+        console.log("mouse:up", activeObject);
+        if (!activeObject && !isSelectionTriggered) {
+            isSelectionTriggered = true; // Prevent re-triggering
+
+            if (!canvas.getActiveObject()) {
+                isFirstClick = true; // Reset the flag
+                selectAllTextBoxes();
+            }
+            isSelectionTriggered = false; // Reset after execution
+        }
         canvas.renderAll();
     });
-    let isFirstClick = true;
 
     function simulateMouseEvents(x, y) {
         const canvasEl = canvas.upperCanvasEl;
@@ -2509,12 +2541,26 @@ async function bindData(current_event_id) {
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
             canvas.discardActiveObject();
+
             canvas.renderAll();
         }
     });
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
+        var activeObject = canvas.getActiveObject();
+        console.log("mouse:up", activeObject);
+        if (!activeObject && !isSelectionTriggered) {
+            isSelectionTriggered = true; // Prevent re-triggering
+
+            setTimeout(() => {
+                if (!canvas.getActiveObject()) {
+                    isFirstClick = true; // Reset the flag
+                    selectAllTextBoxes();
+                }
+                isSelectionTriggered = false; // Reset after execution
+            }, 300); // Delay for proper selection
+        }
     });
     let lastEditedObject = null;
 
@@ -3046,9 +3092,36 @@ async function bindData(current_event_id) {
         redo();
     });
 }
+function deselectAllTextBoxes() {
+    if (!canvas) {
+        console.error("Canvas is not initialized.");
+        return;
+    }
 
-function getTextDataFromCanvas() {
-    $("#imageEditor1").trigger("click");
+    // Deselect any active object
+    canvas.discardActiveObject();
+
+    // Ensure all textboxes remain selectable after deselection
+    canvas.getObjects().forEach((obj) => {
+        if (obj.type === "textbox") {
+            obj.selectable = true; // Ensure they can still be interacted with
+        }
+    });
+
+    canvas.requestRenderAll();
+}
+
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+async function getTextDataFromCanvas() {
+    console.log("Before delay");
+
+    deselectAllTextBoxes();
+
+    await delay(1000); // Wait for 1 second
+    console.log("Executed after 1 second");
+    // $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         // Update width & height if element exists

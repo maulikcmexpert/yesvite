@@ -3396,7 +3396,7 @@ class EventController extends BaseController
 
     public function saveSliderImg(Request $request)
     {
-
+        // dd($request->all());
         $event_id = $request->eventId;
 
         $savedFiles = [];
@@ -3442,15 +3442,15 @@ class EventController extends BaseController
         $i = 0;
 
         // Check if there are existing images in the session and unlink them
-        if (session()->has('desgin_slider')) {
-            $existingImages = session('desgin_slider');
-            foreach ($existingImages as $file) {
-                $filePath = public_path('storage/event_images/') . $file['fileName'];
-                if (file_exists($filePath)) {
-                    unlink($filePath);
-                }
-            }
-        }
+        // if (session()->has('desgin_slider')) {
+        //     $existingImages = session('desgin_slider');
+        //     foreach ($existingImages as $file) {
+        //         $filePath = public_path('storage/event_images/') . $file['fileName'];
+        //         if (file_exists($filePath)) {
+        //             unlink($filePath);
+        //         }
+        //     }
+        // }
 
         // foreach ($imageSources as $imageSource) {
         //     if (!empty($imageSource['src'])) {
