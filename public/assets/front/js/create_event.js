@@ -10657,7 +10657,7 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         $("#loader").css("display", "none");
         $(".step_1").show();
         $(".new-event-sidebar-wrp").show();
-
+        $(".current_step").text("2 of 4");
         final_step = final_step === 1 ? 2 : final_step;
         eventData.step = final_step;
 
