@@ -2458,7 +2458,8 @@ async function bindData(current_event_id) {
             canvas.renderAll();
         }
     }
-
+    let isFirstClick = true;
+    let isSelectionTriggered = false;
     $(document).on("click", ".main-content-right", function (e) {
         // console.log(e);
         let target = e.target;
@@ -2487,8 +2488,7 @@ async function bindData(current_event_id) {
         }
         canvas.renderAll();
     });
-    let isFirstClick = true;
-    let isSelectionTriggered = false;
+
     function simulateMouseEvents(x, y) {
         const canvasEl = canvas.upperCanvasEl;
         const rect = canvasEl.getBoundingClientRect();
