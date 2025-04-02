@@ -5499,7 +5499,7 @@ $(document).on("click", ".li_event_details", async function () {
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
                     let base64Image = reader.result;
-                    localStorage.setItem("capturedImage", base64Image);
+                    // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
@@ -5575,8 +5575,8 @@ $(document).on("click", ".silder_zoom", function () {
 });
 
 $(document).on("click", ".zoom", function () {
-    let savedImage = localStorage.getItem("capturedImage"); // Retrieve image
-    var imgSrc = savedImage;
+    let savedImage = localStorage.getItem("final_upload_image"); // Retrieve image
+    var imgSrc = base_url + "public/storage/event_images/" + savedImage;
 
     $.magnificPopup.open({
         items: {
