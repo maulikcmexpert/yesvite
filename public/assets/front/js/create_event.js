@@ -5489,7 +5489,7 @@ $(document).on("click", ".li_event_details", async function () {
             const imageResponse = await uploadImage(capturedBlob);
 
             localStorage.setItem("final_upload_image", imageResponse.image);
-
+            $(".current_step").text("2 of 4");
             if (capturedBlob) {
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
