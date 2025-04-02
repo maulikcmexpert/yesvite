@@ -183,6 +183,7 @@ $(document).ready(function () {
                     
                     // Check if any tag matches the query
                     if (tags.some(tag => tag.includes(query))) {
+                        $(this).removeClass('d-none');
                         $(this).show();
                         $(this).removeClass('fadeInDown');
                         $(this).css('visibility','visible');
@@ -196,8 +197,8 @@ $(document).ready(function () {
                 });
         
                 // Check if no matching items are found
-                if ($('.image-item:visible').length === 0) {
-                    $('.total_design_count').text($('.image-item:visible').length +
+                if ($('.image-item').length === 0) {
+                    $('.total_design_count').text($('.image-item').length +
                     ' Items');
              
                     results +=`<div class="search-item no-data">No Data Found</div>`;
