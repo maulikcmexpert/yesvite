@@ -10608,7 +10608,21 @@ function generateProfileImage(firstname, lastname) {
         initials || "NA"
     }</h5>`;
 }
+
 $(".create_event_login_btn").on("click", function (e) {
+    e.preventDefault();
+    handleLogin();
+});
+
+// Trigger click on Enter key press
+$("#crateEventLogin input").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault(); // Prevent default form submission
+        $(".create_event_login_btn").click();
+    }
+});
+
+function handleLogin() {
     console.log($("#crateEventLogin").attr("action"));
     let formData = {
         email: $("#email").val(),
@@ -10616,8 +10630,9 @@ $(".create_event_login_btn").on("click", function (e) {
         remember: $("input[name='remember']").prop("checked") ? 1 : 0,
         is_login: false,
     };
+
     $.ajax({
-        url: $("#crateEventLogin").attr("action"), // Get form action URL
+        url: $("#crateEventLogin").attr("action"),
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -10630,17 +10645,16 @@ $(".create_event_login_btn").on("click", function (e) {
             loaderTimeout = setTimeout(function () {
                 $("#loader").css("display", "none");
                 $("#loginUser").prop("disabled", false).text("Sign In");
-            }, 3000); // 2 minutes
+            }, 3000); // 3 seconds
         },
         success: async function (response) {
             clearTimeout(loaderTimeout);
-
             if (response.success) {
                 await handleLoginSuccess(response);
             } else {
                 $("#login_user").prop("disabled", false).text("Sign In");
                 $("#loader").css("display", "none");
-                toastr.error(response.message); // Show error message
+                toastr.error(response.message);
             }
         },
         error: function (xhr) {
@@ -10657,7 +10671,57 @@ $(".create_event_login_btn").on("click", function (e) {
             }
         },
     });
-});
+}
+// $(".create_event_login_btn").on("click", function (e) {
+//     console.log($("#crateEventLogin").attr("action"));
+//     let formData = {
+//         email: $("#email").val(),
+//         password: $("#password").val(),
+//         remember: $("input[name='remember']").prop("checked") ? 1 : 0,
+//         is_login: false,
+//     };
+//     $.ajax({
+//         url: $("#crateEventLogin").attr("action"), // Get form action URL
+//         type: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: formData,
+//         dataType: "json",
+//         beforeSend: function () {
+//             $("#loginUser").prop("disabled", true).text("Signing In...");
+//             $("#loader").css("display", "flex");
+//             loaderTimeout = setTimeout(function () {
+//                 $("#loader").css("display", "none");
+//                 $("#loginUser").prop("disabled", false).text("Sign In");
+//             }, 3000); // 2 minutes
+//         },
+//         success: async function (response) {
+//             clearTimeout(loaderTimeout);
+
+//             if (response.success) {
+//                 await handleLoginSuccess(response);
+//             } else {
+//                 $("#login_user").prop("disabled", false).text("Sign In");
+//                 $("#loader").css("display", "none");
+//                 toastr.error(response.message); // Show error message
+//             }
+//         },
+//         error: function (xhr) {
+//             if (xhr.status === 422) {
+//                 let errors = xhr.responseJSON.errors;
+//                 if (errors.email) {
+//                     $("#email-error").text(errors.email[0]);
+//                 }
+//                 if (errors.password) {
+//                     $("#password-error").text(errors.password[0]);
+//                 }
+//             } else {
+//                 toastr.error("Login failed! Please try again.");
+//             }
+//         },
+//     });
+// });
 // $(".createEventUser").on("click", function (e) {
 // console.log($("#registerEvent").attr("action"));
 
