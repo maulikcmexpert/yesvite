@@ -2460,13 +2460,18 @@ async function bindData(current_event_id) {
     }
     let isFirstClick = true;
     let isSelectionTriggered = false;
+    let getTextData = false;
     $(document).on("click", ".main-content-right", function (e) {
+        if (getTextData) {
+            return;
+        }
         // console.log(e);
         let target = e.target;
         let tagName = target.tagName.toLowerCase();
         if (
             target.id === "addTextButton" || // Ignore "Add Text" button
             target.classList.contains("design-sidebar-action") || // Ignore sidebar buttons
+            target.classList.contains("li_event_details") || // Ignore sidebar buttons
             target.classList.contains("upper-canvas") || // Ignore Fabric.js canvas interactions
             ["svg", "path", "h6", "button"].includes(tagName) // Ignore SVGs, paths, text elements, and buttons
         ) {
@@ -3124,7 +3129,7 @@ function delay(ms) {
 }
 async function getTextDataFromCanvas() {
     console.log("Before delay");
-
+    getTextData = true;
     deselectAllTextBoxes();
 
     await delay(1000); // Wait for 1 second
@@ -3204,6 +3209,7 @@ async function getTextDataFromCanvas() {
         shapeImageData: shapeImageData,
     };
     console.log(dbJson);
+    getTextData = false;
 
     return dbJson;
 }
