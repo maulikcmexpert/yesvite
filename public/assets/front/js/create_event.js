@@ -9518,7 +9518,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
 });
 
 
-$(document).on("click", ".cancel-Edit-draft", async function () {
+$(document).on("click", ".cancel-Edit-draft", async function (e) {
 
         if (apiCalled == true) {
             return;
