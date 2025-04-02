@@ -1229,7 +1229,7 @@
 }
 
 .designModel .cancel-btn-createEvent:hover {
-    background-color: var(--secondryColor);
+    background-color: var(--primaryColor);
     color: #fff;
 }
 
