@@ -194,11 +194,18 @@ $(document).ready(function () {
                         var lengts= $('.image-item:visible').length;
                         console.log('sasasa'+ lengts);
                         
-                        $('.total_design_count').text($('.image-item:visible').length + ' Items');
+                        // $('.total_design_count').text($('.image-item:visible').length + ' Items');
+                        $('.total_design_count').text($('.image-item:visible').not('.d-none').length + ' Items');
+
                         $('#filtered_results').hide();
     
                     } else {
+
                         $(this).hide();
+                        $(this).addClass('d-none');
+                        $(this).addClass('fadeInDown');
+                        $(this).css('visibility', 'hidden');
+                        $(this).addClass('wow');
                         
                     }
                 });
