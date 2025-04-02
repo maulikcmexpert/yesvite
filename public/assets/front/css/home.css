@@ -579,7 +579,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 8px;
-    max-width: 600px;
+    margin: 0 8px;
 }
 
 .filter-main-wrp .selected-items .selected-item {
@@ -639,6 +639,7 @@
     margin-bottom: 0;
     font-weight: 500;
     margin-right: 12px;
+    min-width: max-content;
 }
 
 .collection-wrapper .filter-main-wrp h5.total-items {
@@ -646,6 +647,7 @@
     color: #1d1d1d;
     font-weight: 500;
     margin-bottom: 0;
+    min-width: max-content;
 }
 
 .collection-wrapper .filter-dropdowns {
