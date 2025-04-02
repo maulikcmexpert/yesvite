@@ -2544,7 +2544,7 @@ async function bindData(current_event_id) {
 
             setTimeout(() => {
                 if (!canvas.getActiveObject()) {
-                    // Ensure no object is selected
+                    isFirstClick = true; // Reset the flag
                     selectAllTextBoxes();
                 }
                 isSelectionTriggered = false; // Reset after execution
