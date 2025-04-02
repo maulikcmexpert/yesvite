@@ -3396,7 +3396,7 @@ class EventController extends BaseController
 
     public function saveSliderImg(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $event_id = $request->eventId;
 
         $savedFiles = [];
