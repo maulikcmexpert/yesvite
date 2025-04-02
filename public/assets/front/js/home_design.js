@@ -209,6 +209,7 @@ $(document).ready(function () {
             } else {
                 // Show all items when the search box is cleared
                 $('.image-item').addClass('fadeInDown');
+                $('.image-item').addClass('d-none');
                 $('.image-item').addClass('wow');
                 $('.image-item').show();
                 $('#filtered_results').hide();
