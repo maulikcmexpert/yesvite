@@ -7889,9 +7889,9 @@ class ApiControllerv2 extends Controller
                 // dd($eventDetail->isRsvpEvent);
 
                 //new change 31-3
-                        // if ($eventDetail->isRsvpEvent == "1") {
-                        //     $eventData[] = "No RSVP Needed";
-                        // }
+                        if ($eventDetail->isRsvpEvent == "1") {
+                            $eventData[] = "No RSVP Needed";
+                        }
                 //new change 31-3
                 
                 $eventDetails['event_detail'] = $eventData;
