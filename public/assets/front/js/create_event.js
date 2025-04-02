@@ -9456,11 +9456,11 @@ $(document).on("click", "#close_editEvent", async function (e) {
     console.log("firstLetter1", firstLetter1);
     if (firstLetter1 == "1") {
         apiCalled = false;
-        $("#designModel").modal("show");
+        $("#EditdesignModel").modal("show");
         return;
     } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
         apiCalled = false;
-        $("#draftModel").modal("show");
+        $("#EditdraftModel").modal("show");
       return;}
     // if (final_step == 2) {
     $(".dropdown-menu").removeClass("show");
