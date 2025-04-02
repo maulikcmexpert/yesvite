@@ -1,5 +1,5 @@
 // ============vrushali=============
-
+var eventData = {};
 var storedData = localStorage.getItem("storedTextData");
 var parsedData = storedData ? JSON.parse(storedData) : null;
 
@@ -9,7 +9,7 @@ var image = $("#design_image").val() || localStorage.getItem("image") || null;
 console.log(image);
 console.log(localStorage.getItem("image"));
 // ✅ Remove local storage data after setting values in variables
-
+var getTextData = false;
 var base_url = $("#base_url").text();
 var canvas;
 var shapeImageUrl;
@@ -2460,13 +2460,18 @@ async function bindData(current_event_id) {
     }
     let isFirstClick = true;
     let isSelectionTriggered = false;
+
     $(document).on("click", ".main-content-right", function (e) {
+        if (getTextData) {
+            return;
+        }
         // console.log(e);
         let target = e.target;
         let tagName = target.tagName.toLowerCase();
         if (
             target.id === "addTextButton" || // Ignore "Add Text" button
             target.classList.contains("design-sidebar-action") || // Ignore sidebar buttons
+            target.classList.contains("li_event_details") || // Ignore sidebar buttons
             target.classList.contains("upper-canvas") || // Ignore Fabric.js canvas interactions
             ["svg", "path", "h6", "button"].includes(tagName) // Ignore SVGs, paths, text elements, and buttons
         ) {
@@ -3097,6 +3102,13 @@ function deselectAllTextBoxes() {
         console.error("Canvas is not initialized.");
         return;
     }
+    const activeObjects = canvas.getActiveObjects(); // Get all selected objects
+    //console.log(activeObjects)
+    if (activeObjects.length > 1) {
+        console.log("Multiple objects selected:", activeObjects);
+        canvas.discardActiveObject(); // Discard active selection
+        canvas.renderAll(); // Refresh the canvas
+    }
 
     // Deselect any active object
     canvas.discardActiveObject();
@@ -3107,6 +3119,7 @@ function deselectAllTextBoxes() {
             obj.selectable = true; // Ensure they can still be interacted with
         }
     });
+    canvas.renderAll(); // Refresh the canvas
 
     canvas.requestRenderAll();
 }
@@ -3116,7 +3129,7 @@ function delay(ms) {
 }
 async function getTextDataFromCanvas() {
     console.log("Before delay");
-
+    getTextData = true;
     deselectAllTextBoxes();
 
     await delay(1000); // Wait for 1 second
@@ -3196,6 +3209,7 @@ async function getTextDataFromCanvas() {
         shapeImageData: shapeImageData,
     };
     console.log(dbJson);
+    getTextData = false;
 
     return dbJson;
 }

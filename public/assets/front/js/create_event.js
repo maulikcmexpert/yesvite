@@ -1,5 +1,3 @@
-var eventData = {};
-
 // ===================vrushali=======
 if ($("#isUserLoggedIn").val() === "1") {
     var isCohost = $("#isCohost").val() || "";
@@ -5206,7 +5204,6 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
-    $(".current_step").text("2 of 4");
 
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
@@ -5456,13 +5453,16 @@ function save_image_design(downloadImage, textData) {
 ///vrushali============
 $(document).on("click", ".li_event_details", async function () {
     // let isLoggedIn = await checkUserLogin(); // Function to check login status
-
+    console.log("li_event_details");
     if ($("#isUserLoggedIn").val() === "1") {
+        console.log("1");
+
         $("#loader").css("display", "flex");
         setTimeout(async function () {
             await saveDesignData();
             $("#loader").css("display", "none");
         }, 1000);
+        $(".current_step").text("2 of 4");
     } else {
         let storedTextData = await getTextDataFromCanvas();
         let storedTempId = temp_id;
@@ -5483,6 +5483,8 @@ $(document).on("click", ".li_event_details", async function () {
         $(".new_login_page").show();
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
+        $(".current_step").text("2 of 4");
+
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
             let capturedBlob = await captureImage(element);
@@ -5495,7 +5497,7 @@ $(document).on("click", ".li_event_details", async function () {
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
                     let base64Image = reader.result;
-                    localStorage.setItem("capturedImage", base64Image);
+                    // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
@@ -5516,6 +5518,7 @@ $(document).on("click", ".li_event_details", async function () {
                                     </button>
                                 </div>
                             `;
+                            console.log("5");
 
                             // Append the new item inside .create-account-slider.slider_login
                             // $(".create-account-slider.slider_login").append(newItem);
@@ -5570,8 +5573,8 @@ $(document).on("click", ".silder_zoom", function () {
 });
 
 $(document).on("click", ".zoom", function () {
-    let savedImage = localStorage.getItem("capturedImage"); // Retrieve image
-    var imgSrc = savedImage;
+    let savedImage = localStorage.getItem("final_upload_image"); // Retrieve image
+    var imgSrc = base_url + "public/storage/event_images/" + savedImage;
 
     $.magnificPopup.open({
         items: {
@@ -6908,20 +6911,35 @@ $(document).on("click", ".final_checkout", function () {
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
+
+    const $carousel = $(".event_images_slider");
+
+    // Destroy existing carousel if it exists
+    if ($carousel.hasClass("owl-loaded")) {
+        $carousel.trigger("destroy.owl.carousel");
+    }
+
+    // Clear existing slides
+    $carousel.empty();
+
+    const mainImage = `
+            <div class="item">
+                <div class="setting-img">
+                    <img src="${
+                        base_url +
+                        "public/storage/event_images/" +
+                        eventData.desgin_selected
+                    }" />
+                </div>
+            </div>
+        `;
+    $carousel.append(mainImage);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         // alert(1);
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
-        const $carousel = $(".event_images_slider");
 
-        // Destroy existing carousel if it exists
-        if ($carousel.hasClass("owl-loaded")) {
-            $carousel.trigger("destroy.owl.carousel");
-        }
-
-        // Clear existing slides
-        $carousel.empty();
         var p = 0;
         // if (eventData.slider_images && eventData.slider_images.length > 0) {
         //     //
@@ -6951,19 +6969,6 @@ $(document).on("click", ".final_checkout", function () {
 
         // $(".slider_image_count").text(p + "/3 Photos");
 
-        const mainImage = `
-                <div class="item">
-                    <div class="setting-img">
-                        <img src="${
-                            base_url +
-                            "public/storage/event_images/" +
-                            eventData.desgin_selected
-                        }" />
-                    </div>
-                </div>
-            `;
-        $carousel.append(mainImage);
-
         photoSliders.forEach((sliderClass, index) => {
             const sliderElement = $(`#${sliderClass}`);
             // if (sliderElement.length) {
@@ -6989,27 +6994,27 @@ $(document).on("click", ".final_checkout", function () {
                 $carousel.append(slideHtml);
             }
         });
-
-        $carousel.owlCarousel({
-            loop: false,
-            margin: 10,
-            nav: true,
-            navText: [
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        `,
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`,
-            ],
-            responsive: {
-                0: { items: 1 },
-                600: { items: 1 },
-                1000: { items: 1 },
-            },
-        });
     }
+
+    $carousel.owlCarousel({
+        loop: false,
+        margin: 10,
+        nav: true,
+        navText: [
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `,
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+        ],
+        responsive: {
+            0: { items: 1 },
+            600: { items: 1 },
+            1000: { items: 1 },
+        },
+    });
     // else {
     //     $(".event_images_slider").css("display", "none");
     //     $(".event_images_template").css("display", "block");
@@ -10608,7 +10613,21 @@ function generateProfileImage(firstname, lastname) {
         initials || "NA"
     }</h5>`;
 }
+
 $(".create_event_login_btn").on("click", function (e) {
+    e.preventDefault();
+    handleLogin();
+});
+
+// Trigger click on Enter key press
+$("#crateEventLogin input").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault(); // Prevent default form submission
+        $(".create_event_login_btn").click();
+    }
+});
+
+function handleLogin() {
     console.log($("#crateEventLogin").attr("action"));
     let formData = {
         email: $("#email").val(),
@@ -10616,8 +10635,9 @@ $(".create_event_login_btn").on("click", function (e) {
         remember: $("input[name='remember']").prop("checked") ? 1 : 0,
         is_login: false,
     };
+
     $.ajax({
-        url: $("#crateEventLogin").attr("action"), // Get form action URL
+        url: $("#crateEventLogin").attr("action"),
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -10630,17 +10650,16 @@ $(".create_event_login_btn").on("click", function (e) {
             loaderTimeout = setTimeout(function () {
                 $("#loader").css("display", "none");
                 $("#loginUser").prop("disabled", false).text("Sign In");
-            }, 3000); // 2 minutes
+            }, 3000); // 3 seconds
         },
         success: async function (response) {
             clearTimeout(loaderTimeout);
-
             if (response.success) {
                 await handleLoginSuccess(response);
             } else {
                 $("#login_user").prop("disabled", false).text("Sign In");
                 $("#loader").css("display", "none");
-                toastr.error(response.message); // Show error message
+                toastr.error(response.message);
             }
         },
         error: function (xhr) {
@@ -10657,7 +10676,57 @@ $(".create_event_login_btn").on("click", function (e) {
             }
         },
     });
-});
+}
+// $(".create_event_login_btn").on("click", function (e) {
+//     console.log($("#crateEventLogin").attr("action"));
+//     let formData = {
+//         email: $("#email").val(),
+//         password: $("#password").val(),
+//         remember: $("input[name='remember']").prop("checked") ? 1 : 0,
+//         is_login: false,
+//     };
+//     $.ajax({
+//         url: $("#crateEventLogin").attr("action"), // Get form action URL
+//         type: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: formData,
+//         dataType: "json",
+//         beforeSend: function () {
+//             $("#loginUser").prop("disabled", true).text("Signing In...");
+//             $("#loader").css("display", "flex");
+//             loaderTimeout = setTimeout(function () {
+//                 $("#loader").css("display", "none");
+//                 $("#loginUser").prop("disabled", false).text("Sign In");
+//             }, 3000); // 2 minutes
+//         },
+//         success: async function (response) {
+//             clearTimeout(loaderTimeout);
+
+//             if (response.success) {
+//                 await handleLoginSuccess(response);
+//             } else {
+//                 $("#login_user").prop("disabled", false).text("Sign In");
+//                 $("#loader").css("display", "none");
+//                 toastr.error(response.message); // Show error message
+//             }
+//         },
+//         error: function (xhr) {
+//             if (xhr.status === 422) {
+//                 let errors = xhr.responseJSON.errors;
+//                 if (errors.email) {
+//                     $("#email-error").text(errors.email[0]);
+//                 }
+//                 if (errors.password) {
+//                     $("#password-error").text(errors.password[0]);
+//                 }
+//             } else {
+//                 toastr.error("Login failed! Please try again.");
+//             }
+//         },
+//     });
+// });
 // $(".createEventUser").on("click", function (e) {
 // console.log($("#registerEvent").attr("action"));
 
