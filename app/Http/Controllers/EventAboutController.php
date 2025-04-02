@@ -54,6 +54,15 @@ class EventAboutController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
 
+
+            if ($eventDetail->user_id != $login_user_id && !$eventDetail->event_invited_user->contains(function($invitedUser) use ($login_user_id) {
+                return $invitedUser->user_id == $login_user_id;
+            })) {
+                dd(1);
+                // abort(403, 'Unauthorized access');
+            }
+
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
