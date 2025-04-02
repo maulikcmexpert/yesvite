@@ -58,8 +58,7 @@ class EventAboutController extends BaseController
             if ($eventDetail->user_id != $login_user_id && !$eventDetail->event_invited_user->contains(function($invitedUser) use ($login_user_id) {
                 return $invitedUser->user_id == $login_user_id;
             })) {
-                dd(1);
-                // abort(403, 'Unauthorized access');
+                return redirect()->route('home'); // redirect to home route if unauthorized
             }
 
 
