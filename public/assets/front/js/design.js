@@ -1451,7 +1451,24 @@ async function bindData(current_event_id) {
 
         canvas.requestRenderAll();
     }
+    function deselectAllTextBoxes() {
+        if (!canvas) {
+            console.error("Canvas is not initialized.");
+            return;
+        }
 
+        // Deselect any active object
+        canvas.discardActiveObject();
+
+        // Ensure all textboxes remain selectable after deselection
+        canvas.getObjects().forEach((obj) => {
+            if (obj.type === "textbox") {
+                obj.selectable = true; // Ensure they can still be interacted with
+            }
+        });
+
+        canvas.requestRenderAll();
+    }
     function getWidth(element, text) {
         const textMeasurement = new fabric.Text(text, {
             fontSize: element.fontSize,
@@ -3094,7 +3111,7 @@ async function bindData(current_event_id) {
 }
 
 function getTextDataFromCanvas() {
-    $("#imageEditor1").trigger("click");
+    deselectAllTextBoxes();
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         // Update width & height if element exists
