@@ -208,11 +208,17 @@ $(document).ready(function () {
                 }
             } else {
                 // Show all items when the search box is cleared
-                $('.image-item').addClass('fadeInDown');
-                $('.image-item').addClass('fadeInDown');
-                $('.image-item').addClass('wow');
-                $('.image-item').show();
-                $('#filtered_results').hide();
+                // $('.image-item').addClass('fadeInDown');
+                // $('.image-item').addClass('fadeInDown');
+                // $('.image-item').addClass('wow');
+                // $('.image-item').show();
+                // $('#filtered_results').hide();
+                $('.image-item').addClass('fadeInDown wow').show();
+    
+                let allItems = $('.image-item');
+                if (allItems.length > 30) {
+                    allItems.slice(30).addClass('d-none').hide();
+                }
             }
         
             // $('#filtered_results').html(results);
