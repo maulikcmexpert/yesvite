@@ -4986,11 +4986,11 @@ $(document).on("click", ".cancel-createEvent-draft", async function () {
             $("#designModel").modal("show");
             return;
         }
-        if (firstLetter1 == "2"){
+        if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
             apiCalled = false;
             $("#draftModel").modal("show");
           return;}
-
+        console.log(11);
 
         var event_type = $("#event-type").val();
         var event_name = $("#event-name").val();
@@ -5378,6 +5378,7 @@ async function saveDesignData(direct = false) {
     console.log({ eventData });
     console.log("here for save image");
     $("#loader").css("display", "flex");
+    $(".current_step").text("2 of 4");
     if (isCohost != "0") {
         $("#close_editEvent").css("display", "block");
     }
@@ -5573,6 +5574,7 @@ function save_image_design(downloadImage, textData) {
                     }
                     console.log(eventData);
                     eventData.step = final_step;
+                    console.log(eventData.step );
                     console.log("Image uploaded and saved successfully");
                     $("#myCustomModal").modal("hide");
                     $("#exampleModal").modal("hide");
