@@ -9449,6 +9449,19 @@ $(document).on("click", "#close_editEvent", async function (e) {
         return;
     }
     apiCalled = true;
+
+     let text1 = $(".current_step").text();
+    let firstLetter1 = text1.split(" ")[0];
+
+    console.log("firstLetter1", firstLetter1);
+    if (firstLetter1 == "1") {
+        apiCalled = false;
+        $("#designModel").modal("show");
+        return;
+    } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
+        apiCalled = false;
+        $("#draftModel").modal("show");
+      return;}
     // if (final_step == 2) {
     $(".dropdown-menu").removeClass("show");
     savePage1Data(1);
@@ -9503,6 +9516,79 @@ $(document).on("click", "#close_editEvent", async function (e) {
         },
     });
 });
+
+
+$(document).on("click", ".cancel-Edit-draft", async function () {
+    $(document).on("click", "#close_editEvent", async function (e) {
+        if (apiCalled == true) {
+            return;
+        }
+        apiCalled = true;
+
+         let text1 = $(".current_step").text();
+        let firstLetter1 = text1.split(" ")[0];
+
+        console.log("firstLetter1", firstLetter1);
+
+        // if (final_step == 2) {
+        $(".dropdown-menu").removeClass("show");
+        savePage1Data(1);
+        // }
+        var design = eventData.desgin_selected;
+        if (design == undefined || design == "") {
+            await saveDesignData();
+            design = eventData.desgin_selected;
+        }
+        $("#loader").css("display", "flex");
+        // if (final_step == 3) {
+        var savePage3Result = savePage3Data(1);
+        if (savePage3Result === false) {
+            $("#loader").css("display", "none");
+            return;
+        }
+        // }
+        $("#loader").css("display", "flex");
+        eventData.step = final_step;
+        eventData.isdraft = "1";
+        savePage4Data();
+        var schedule = $("#schedule").is(":checked");
+        if (schedule) {
+            eventData.events_schedule = "1";
+        }
+        $(".main-content-wrp").addClass("blurred");
+        e.stopPropagation();
+        e.preventDefault();
+        $.ajax({
+            url: base_url + "event/editStore",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/login"; // Redirect to home page
+                    return;
+                }
+                if (response == 1) {
+                    window.location.href = base_url + "home";
+                    toastr.success("Event Saved as Draft");
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 1000000);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX error: " + error);
+                toastr.error(error);
+            },
+        });
+    });
+    });
+
+
+
+
 $(document).on("click", ".cancel-createEvent-draft", async function () {
     $("#loader").css("display", "flex");
     // $("#close_createEvent").trigger("click");
