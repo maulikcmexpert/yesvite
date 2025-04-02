@@ -6913,20 +6913,35 @@ $(document).on("click", ".final_checkout", function () {
     const photoSliders = ["sliderImages-1", "sliderImages-2", "sliderImages-3"];
     const sliderImages = eventData.slider_images;
     console.log(sliderImages);
+
+    const $carousel = $(".event_images_slider");
+
+    // Destroy existing carousel if it exists
+    if ($carousel.hasClass("owl-loaded")) {
+        $carousel.trigger("destroy.owl.carousel");
+    }
+
+    // Clear existing slides
+    $carousel.empty();
+
+    const mainImage = `
+            <div class="item">
+                <div class="setting-img">
+                    <img src="${
+                        base_url +
+                        "public/storage/event_images/" +
+                        eventData.desgin_selected
+                    }" />
+                </div>
+            </div>
+        `;
+    $carousel.append(mainImage);
     if (eventData.slider_images != undefined && eventData.slider_images != "") {
         // alert(1);
         $(".event_images_slider").css("display", "block");
         $(".event_images_template").css("display", "none");
         var imageHtml;
-        const $carousel = $(".event_images_slider");
 
-        // Destroy existing carousel if it exists
-        if ($carousel.hasClass("owl-loaded")) {
-            $carousel.trigger("destroy.owl.carousel");
-        }
-
-        // Clear existing slides
-        $carousel.empty();
         var p = 0;
         // if (eventData.slider_images && eventData.slider_images.length > 0) {
         //     //
@@ -6956,19 +6971,6 @@ $(document).on("click", ".final_checkout", function () {
 
         // $(".slider_image_count").text(p + "/3 Photos");
 
-        const mainImage = `
-                <div class="item">
-                    <div class="setting-img">
-                        <img src="${
-                            base_url +
-                            "public/storage/event_images/" +
-                            eventData.desgin_selected
-                        }" />
-                    </div>
-                </div>
-            `;
-        $carousel.append(mainImage);
-
         photoSliders.forEach((sliderClass, index) => {
             const sliderElement = $(`#${sliderClass}`);
             // if (sliderElement.length) {
@@ -6994,27 +6996,27 @@ $(document).on("click", ".final_checkout", function () {
                 $carousel.append(slideHtml);
             }
         });
-
-        $carousel.owlCarousel({
-            loop: false,
-            margin: 10,
-            nav: true,
-            navText: [
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        `,
-                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`,
-            ],
-            responsive: {
-                0: { items: 1 },
-                600: { items: 1 },
-                1000: { items: 1 },
-            },
-        });
     }
+
+    $carousel.owlCarousel({
+        loop: false,
+        margin: 10,
+        nav: true,
+        navText: [
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    `,
+            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+        ],
+        responsive: {
+            0: { items: 1 },
+            600: { items: 1 },
+            1000: { items: 1 },
+        },
+    });
     // else {
     //     $(".event_images_slider").css("display", "none");
     //     $(".event_images_template").css("display", "block");

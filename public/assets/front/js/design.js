@@ -3097,6 +3097,13 @@ function deselectAllTextBoxes() {
         console.error("Canvas is not initialized.");
         return;
     }
+    const activeObjects = canvas.getActiveObjects(); // Get all selected objects
+    //console.log(activeObjects)
+    if (activeObjects.length > 1) {
+        console.log("Multiple objects selected:", activeObjects);
+        canvas.discardActiveObject(); // Discard active selection
+        canvas.renderAll(); // Refresh the canvas
+    }
 
     // Deselect any active object
     canvas.discardActiveObject();
@@ -3107,6 +3114,7 @@ function deselectAllTextBoxes() {
             obj.selectable = true; // Ensure they can still be interacted with
         }
     });
+    canvas.renderAll(); // Refresh the canvas
 
     canvas.requestRenderAll();
 }
