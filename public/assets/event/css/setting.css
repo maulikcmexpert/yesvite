@@ -1246,13 +1246,13 @@
     background-color: transparent;
     border: 1px solid var(--borderColor);
     border-radius: 10px;
-    color: var(--secondryColor) !important;
+    color: var(--secondryColor);
     font-size: 12px;
     font-weight: 500;
 }
 
 .designModel .cancel-Edit-draft:hover {
-    background-color: var(--secondryColor) !important;
+    background-color: var(--secondryColor);
     color: #fff;
 }
 
