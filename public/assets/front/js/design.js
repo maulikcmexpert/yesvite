@@ -3110,9 +3110,18 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-function getTextDataFromCanvas() {
+
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+async function getTextDataFromCanvas() {
+    console.log("Before delay");
+
     deselectAllTextBoxes();
-    $("#imageEditor1").trigger("click");
+
+    await delay(10000); // Wait for 1 second
+    console.log("Executed after 1 second");
+    // $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         // Update width & height if element exists
