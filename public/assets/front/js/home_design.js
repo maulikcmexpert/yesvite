@@ -177,38 +177,63 @@ $(document).ready(function () {
             
             let results = '';
             
-            if (query.length >= 2) {
+            // if (query.length > 0) {
+            //     $('.image-item').each(function () {
+            //         let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
+                    
+            //         // console.log(tags);
+                    
+            //         // Check if any tag matches the query
+            //         if (tags.some(tag => tag.includes(query))) {
+            //             $(this).show();
+            //             $(this).removeClass('d-none');
+            //             $(this).removeClass('fadeInDown');
+            //             $(this).css('visibility','visible');
+            //             $(this).removeClass('wow');
+
+            //             var lengts= $('.image-item:visible').length;
+            //             console.log('sasasa'+ lengts);
+                        
+            //             $('.total_design_count').text($('.image-item:visible').length + ' Items');
+            //             // $('.total_design_count').text($('.image-item:visible').not('.d-none').length + ' Items');
+
+            //             $('#filtered_results').hide();
+    
+            //         } else {
+
+            //             $(this).hide();
+            //             // $(this).addClass('d-none');
+            //             // $(this).addClass('fadeInDown');
+            //             // $(this).css('visibility', 'hidden');
+            //             // $(this).addClass('wow');
+                        
+            //         }
+            //     });
+            if (query.length > 0) {
+                let visibleCount = 0; // Counter to track visible items
+            
                 $('.image-item').each(function () {
                     let tags = $(this).data('tags') ? $(this).data('tags').toLowerCase().split(',') : [];
-                    
-                    // console.log(tags);
-                    
-                    // Check if any tag matches the query
+            
                     if (tags.some(tag => tag.includes(query))) {
-                        $(this).show();
-                        $(this).removeClass('d-none');
-                        $(this).removeClass('fadeInDown');
-                        $(this).css('visibility','visible');
-                        $(this).removeClass('wow');
-
-                        var lengts= $('.image-item:visible').length;
-                        console.log('sasasa'+ lengts);
-                        
-                        $('.total_design_count').text($('.image-item:visible').length + ' Items');
-                        // $('.total_design_count').text($('.image-item:visible').not('.d-none').length + ' Items');
-
-                        $('#filtered_results').hide();
-    
+                        $(this).removeClass('d-none').fadeIn(); // Use fadeIn for better visibility
+                        visibleCount++; // Increase counter for visible items
                     } else {
-
-                        $(this).hide();
-                        // $(this).addClass('d-none');
-                        // $(this).addClass('fadeInDown');
-                        // $(this).css('visibility', 'hidden');
-                        // $(this).addClass('wow');
-                        
+                        $(this).fadeOut().addClass('d-none'); // Hide properly
                     }
                 });
+            
+                // Update total visible items
+                console.log('Total Visible Items:', visibleCount);
+                $('.total_design_count').text(visibleCount + ' Items');
+            
+                // Hide filtered_results if at least one result is found
+                if (visibleCount > 0) {
+                    $('#filtered_results').hide();
+                } else {
+                    $('#filtered_results').show();
+                }
+            
         
                 // Check if no matching items are found
                 if ($('.image-item:visible').length === 0) {
