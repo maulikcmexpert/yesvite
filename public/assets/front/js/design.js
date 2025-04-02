@@ -830,10 +830,9 @@ async function bindData(current_event_id) {
                             cornerStyle: "circle",
                             transparentCorners: false,
                             lockScalingFlip: true,
-                            hasBorders: true,
+                            hasBorders: false,
                             centeredRotation: true,
                             angle: element?.rotation ? element?.rotation : 0,
-                            hasBorders: false, // Disable default borders
                         });
 
                         textElement.setControlsVisibility({
@@ -856,18 +855,27 @@ async function bindData(current_event_id) {
                     canvas.on("after:render", function () {
                         var ctx = canvas.getContext("2d");
                         ctx.save();
-                        ctx.strokeStyle = "blue"; // Border color
-                        ctx.lineWidth = 2; // Border thickness
-                        ctx.setLineDash([5, 5]); // Dotted effect
 
-                        // Get object bounding box
-                        var bbox = object.getBoundingRect();
-                        ctx.strokeRect(
-                            bbox.left,
-                            bbox.top,
-                            bbox.width,
-                            bbox.height
-                        );
+                        canvas.forEachObject(function (object) {
+                            if (object.type === "textbox") {
+                                ctx.strokeStyle =
+                                    canvas.getActiveObject() === object
+                                        ? "white"
+                                        : "blue"; // White for selected, blue for others
+                                ctx.lineWidth = 2;
+                                ctx.setLineDash([5, 5]);
+
+                                // Get object bounding box
+                                var bbox = object.getBoundingRect();
+                                ctx.strokeRect(
+                                    bbox.left,
+                                    bbox.top,
+                                    bbox.width,
+                                    bbox.height
+                                );
+                            }
+                        });
+
                         ctx.restore();
                     });
 
