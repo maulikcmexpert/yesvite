@@ -202,10 +202,10 @@ $(document).ready(function () {
                     } else {
 
                         $(this).hide();
-                        $(this).addClass('d-none');
-                        $(this).addClass('fadeInDown');
-                        $(this).css('visibility', 'hidden');
-                        $(this).addClass('wow');
+                        // $(this).addClass('d-none');
+                        // $(this).addClass('fadeInDown');
+                        // $(this).css('visibility', 'hidden');
+                        // $(this).addClass('wow');
                         
                     }
                 });
