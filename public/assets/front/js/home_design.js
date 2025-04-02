@@ -219,11 +219,12 @@ $(document).ready(function () {
                         $(this).show();
                                     $(this).removeClass('d-none');
                                     $(this).removeClass('fadeInDown');
-                        //             $(this).css('visibility','visible');
+                                    $(this).css('visibility','visible');
                                     $(this).removeClass('wow');
                         $(this).removeClass('d-none').fadeIn(); // Use fadeIn for better visibility
                         visibleCount++; // Increase counter for visible items
                     } else {
+                        $(this).hide();
                         $(this).fadeOut().addClass('d-none'); // Hide properly
                     }
                 });
