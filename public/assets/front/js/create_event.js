@@ -58,9 +58,9 @@ if ($("#isUserLoggedIn").val() === "1") {
     var final_initial =
         final_user_name != ""
             ? (
-                $("#cohostFname").val().charAt(0) +
-                $("#cohostLname").val().charAt(0)
-            ).toUpperCase()
+                  $("#cohostFname").val().charAt(0) +
+                  $("#cohostLname").val().charAt(0)
+              ).toUpperCase()
             : "";
     var create_event_phone_scroll = false;
     var create_event_yesvite_scroll = false;
@@ -1665,14 +1665,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-            // startDate.isSame(moment(sortedDates[0]), "day")
-            startDate
-                .startOf("day")
-                .isSame(
-                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                    "day"
-                )
-                ? `
+                    // startDate.isSame(moment(sortedDates[0]), "day")
+                    startDate
+                        .startOf("day")
+                        .isSame(
+                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                            "day"
+                        )
+                        ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1687,8 +1687,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                : ""
-            }
+                        : ""
+                }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1709,17 +1709,18 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-                "YYYY-MM-DD"
-            )}">
+            "YYYY-MM-DD"
+        )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${startDate.isSame(
-                moment(sortedDates[sortedDates.length - 1]),
-                "day"
-            )
-                ? `
+                ${
+                    startDate.isSame(
+                        moment(sortedDates[sortedDates.length - 1]),
+                        "day"
+                    )
+                        ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1734,8 +1735,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                : ""
-            }
+                        : ""
+                }
             </form>
         </div>
     </div>
@@ -1914,11 +1915,10 @@ $("#end_time").on("change", function () {
 });
 
 $("#rsvp_by_date").on("change", function () {
-    if ($('#isRsvpEvent').is(":checked")) {
-        toastr.error('RSVP date is not required for this event');
+    if ($("#isRsvpEvent").is(":checked")) {
+        toastr.error("RSVP date is not required for this event");
         $(this).prop("checked", false);
-        $("#rsvp_by_date").attr("disabled",true);
-
+        $("#rsvp_by_date").attr("disabled", true);
     }
     if ($(this).is(":checked")) {
         $(".rsvp_by_date").show();
@@ -1929,15 +1929,14 @@ $("#rsvp_by_date").on("change", function () {
 });
 $("#isRsvpEvent").on("change", function () {
     if ($(this).is(":checked")) {
-        $('.rsvp_by_date_toggle').hide();
+        $(".rsvp_by_date_toggle").hide();
         $(".rsvp_by_date").hide();
         $("#rsvp_by_date").prop("checked", false);
         // $("#rsvp_by_date").attr("disabled",true);
     } else {
-        $('.rsvp_by_date_toggle').show();
+        $(".rsvp_by_date_toggle").show();
 
-        $("#rsvp_by_date").attr("disabled",false);
-
+        $("#rsvp_by_date").attr("disabled", false);
     }
 });
 
@@ -2864,14 +2863,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                    quantity +
-                    '</p><li class="list-group-item" data-quantity="' +
-                    quantity +
-                    '" data-selfbring="' +
-                    selfbring +
-                    '">' +
-                    subItemName +
-                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                        quantity +
+                        '</p><li class="list-group-item" data-quantity="' +
+                        quantity +
+                        '" data-selfbring="' +
+                        selfbring +
+                        '">' +
+                        subItemName +
+                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3278,7 +3277,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newStartTime)
+                convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3493,7 +3492,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newstartTime)
+                convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3733,7 +3732,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     if (
                         previousEndTime &&
                         convertTo24Hour(previousEndTime) >
-                        convertTo24Hour(startTime) &&
+                            convertTo24Hour(startTime) &&
                         !showAlert
                     ) {
                         toastr.error("Please enter proper time");
@@ -3980,10 +3979,15 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-    } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
+    } else if (
+        firstLetter1 == "2" ||
+        firstLetter1 == "3" ||
+        firstLetter1 == "4"
+    ) {
         apiCalled = false;
         $("#draftModel").modal("show");
-      return;}
+        return;
+    }
     console.log(11);
 
     var event_type = $("#event-type").val();
@@ -4959,8 +4963,6 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
     window.location.href = url;
 });
 
-
-
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
@@ -5224,7 +5226,7 @@ async function saveDesignData(direct = false) {
 
     try {
         const downloadImage = document.getElementById("imageEditor1");
-        dbJson = getTextDataFromCanvas();
+        dbJson = await getTextDataFromCanvas();
         console.log("getTextDataFromCanvas");
 
         eventData.textData = dbJson;
@@ -5401,7 +5403,7 @@ function save_image_design(downloadImage, textData) {
                     }
                     console.log(eventData);
                     eventData.step = final_step;
-                    console.log(eventData.step );
+                    console.log(eventData.step);
                     console.log("Image uploaded and saved successfully");
                     $("#myCustomModal").modal("hide");
                     $("#exampleModal").modal("hide");
@@ -5462,7 +5464,7 @@ $(document).on("click", ".li_event_details", async function () {
             $("#loader").css("display", "none");
         }, 1000);
     } else {
-        let storedTextData = getTextDataFromCanvas();
+        let storedTextData = await getTextDataFromCanvas();
         let storedTempId = temp_id;
         let desin_img = $("#design_image").val();
         console.log(storedTempId, storedTextData, desin_img);
@@ -6105,9 +6107,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -6127,10 +6129,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6139,10 +6141,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6161,10 +6163,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6172,10 +6174,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6882,9 +6884,9 @@ $(document).on("click", ".final_checkout", function () {
     $("#eventImage").attr(
         "src",
         base_url +
-        "public/storage/event_images/" +
-        eventData.desgin_selected +
-        ""
+            "public/storage/event_images/" +
+            eventData.desgin_selected +
+            ""
     );
 
     // let imageUrls = localStorage.getItem('final_upload_image');
@@ -6898,8 +6900,8 @@ $(document).on("click", ".final_checkout", function () {
         $("#eventTempImage").attr(
             "src",
             base_url +
-            "public/storage/event_images/" +
-            eventData.desgin_selected
+                "public/storage/event_images/" +
+                eventData.desgin_selected
         );
     }
 
@@ -6912,32 +6914,34 @@ $(document).on("click", ".final_checkout", function () {
         $(".event_images_template").css("display", "none");
         var imageHtml;
 
-        var p=0;
+        var p = 0;
         if (eventData.slider_images && eventData.slider_images.length > 0) {
-           //
+            //
 
-        eventData.slider_images.forEach((image) => {
-            p++;
-             imageHtml = `
+            eventData.slider_images.forEach((image) => {
+                p++;
+                imageHtml = `
                 <div class="item">
                     <div class="setting-img">
-                        <img id="sliderImages" src="${base_url+'public/storage/event_images/'+image.fileName}"  />
+                        <img id="sliderImages" src="${
+                            base_url +
+                            "public/storage/event_images/" +
+                            image.fileName
+                        }"  />
                     </div>
                 </div>
             `;
-            // $('.event_images_slider').append(imageHtml);
+                // $('.event_images_slider').append(imageHtml);
 
-                let slider = $(
-                    ".event_images_slider"
-                );
+                let slider = $(".event_images_slider");
 
-            slider
-            .trigger("add.owl.carousel", [$(imageHtml)])
-            .trigger("refresh.owl.carousel");
-        });
-    }
+                slider
+                    .trigger("add.owl.carousel", [$(imageHtml)])
+                    .trigger("refresh.owl.carousel");
+            });
+        }
 
-        $('.slider_image_count').text(p+'/3 Photos');
+        $(".slider_image_count").text(p + "/3 Photos");
 
         // photoSliders.forEach((sliderClass, index) => {
         //     const sliderElement = $(`#${sliderClass}`);
@@ -7114,7 +7118,7 @@ var limit = 50;
 var offset = 0;
 var page = "";
 
-$(document).on("click", ".store_desgin_temp", function () {
+$(document).on("click", ".store_desgin_temp", async function () {
     $("#sidebar_select_design_category").css("display", "none");
     canvas.discardActiveObject();
     canvas.getObjects().forEach((obj) => {
@@ -7124,12 +7128,12 @@ $(document).on("click", ".store_desgin_temp", function () {
     });
     canvas.renderAll();
 
-    setTimeout(() => {
+    setTimeout(async () => {
         var downloadImage = document.getElementById("download_image");
         $("#loader").css("display", "flex");
         $(this).prop("disabled", true);
         $(".btn-close").prop("disabled", true);
-        dbJson = getTextDataFromCanvas();
+        dbJson = await getTextDataFromCanvas();
         console.log("getTextDataFromCanvas");
 
         console.log(dbJson);
@@ -7286,7 +7290,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -8829,7 +8833,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -9133,14 +9137,17 @@ $(document).on("click", ".save-slider-image", function () {
                     // });
 
                     // Update localStorage with the combined array
-                    localStorage.setItem('save-slider-image', JSON.stringify(savedImages));
+                    localStorage.setItem(
+                        "save-slider-image",
+                        JSON.stringify(savedImages)
+                    );
                 }
                 eventData.slider_images = []; // Empty the array
                 eventData.slider_images = savedImages; // Assign new values
 
                 // eventData.slider_images = savedImages;
                 console.log(savedImages);
-                console.log(  eventData.slider_images);
+                console.log(eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
             },
@@ -9173,9 +9180,9 @@ $(document).on("click", ".delete_silder", function (e) {
             }
             return true; // Keep other items
         });
-        var eventDatacount=eventData.slider_images;
+        var eventDatacount = eventData.slider_images;
 
-        $('.slider_image_count').text(eventDatacount.length+"/3 Photos");
+        $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
         // var check_slider_img = eventData.slider_images;
         // var matchFound = false;
         // $.each(check_slider_img, function (index, slider) {
@@ -9391,8 +9398,13 @@ $(document).on("click", ".design-sidebar-action", function () {
             console.log(slide_image_get);
 
             // Check if either eventData.slider_images or slide_image_get has valid data
-            let hasEventDataImages = eventData.slider_images && eventData.slider_images.length > 0;
-            let hasStoredImages = slide_image_get && slide_image_get !== "null" && slide_image_get !== "undefined" && slide_image_get !== "";
+            let hasEventDataImages =
+                eventData.slider_images && eventData.slider_images.length > 0;
+            let hasStoredImages =
+                slide_image_get &&
+                slide_image_get !== "null" &&
+                slide_image_get !== "undefined" &&
+                slide_image_get !== "";
 
             if (hasEventDataImages || hasStoredImages) {
                 $(".design-sidebar").addClass("d-none");
@@ -9400,29 +9412,44 @@ $(document).on("click", ".design-sidebar-action", function () {
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
 
-                const photoSliders = ["photo-slider-1", "photo-slider-2", "photo-slider-3"];
+                const photoSliders = [
+                    "photo-slider-1",
+                    "photo-slider-2",
+                    "photo-slider-3",
+                ];
 
                 // const sliderImages = hasStoredImages ? JSON.parse(slide_image_get) : eventData.slider_images;
                 const sliderImages = eventData.slider_images;
                 console.log(sliderImages.length);
 
-                var imagecount=0;
+                var imagecount = 0;
                 photoSliders.forEach((sliderClass, index) => {
                     imagecount++;
-                    const sliderElement = document.querySelector(`.${sliderClass}`);
+                    const sliderElement = document.querySelector(
+                        `.${sliderClass}`
+                    );
 
                     if (sliderElement && sliderImages[index]) {
                         sliderElement.src = `${base_url}storage/event_images/${sliderImages[index].fileName}`;
-                        sliderElement.setAttribute('data-image', sliderImages[index].fileName);
+                        sliderElement.setAttribute(
+                            "data-image",
+                            sliderImages[index].fileName
+                        );
                         sliderElement.style.display = "block";
                         $(".photo-edit-delete-" + (index + 1)).show();
-                        console.log(`Set src for ${sliderClass}: ${sliderElement.src}`);
+                        console.log(
+                            `Set src for ${sliderClass}: ${sliderElement.src}`
+                        );
                     } else {
-                        console.log(`No element found for class: ${sliderClass} or missing image data.`);
+                        console.log(
+                            `No element found for class: ${sliderClass} or missing image data.`
+                        );
                     }
                 });
 
-                $('.slider_image_count').text(sliderImages.length+'/3 photos');
+                $(".slider_image_count").text(
+                    sliderImages.length + "/3 photos"
+                );
                 localStorage.removeItem("save-slider-image");
             } else {
                 // If both eventData.slider_images and slide_image_get are empty
@@ -9451,7 +9478,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
     }
     apiCalled = true;
     $(".dropdown-menu").removeClass("show");
-     let text1 = $(".current_step").text();
+    let text1 = $(".current_step").text();
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
@@ -9459,10 +9486,15 @@ $(document).on("click", "#close_editEvent", async function (e) {
         apiCalled = false;
         $("#EditdesignModel").modal("show");
         return;
-    } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
+    } else if (
+        firstLetter1 == "2" ||
+        firstLetter1 == "3" ||
+        firstLetter1 == "4"
+    ) {
         apiCalled = false;
         $("#EditdraftModel").modal("show");
-      return;}
+        return;
+    }
     // if (final_step == 2) {
 
     savePage1Data(1);
@@ -9518,37 +9550,130 @@ $(document).on("click", "#close_editEvent", async function (e) {
     });
 });
 
-
 $(document).on("click", ".cancel-Edit-draft", async function (e) {
+    if (apiCalled == true) {
+        return;
+    }
+    apiCalled = true;
 
-        if (apiCalled == true) {
-            return;
+    let text1 = $(".current_step").text();
+    let firstLetter1 = text1.split(" ")[0];
+
+    console.log("firstLetter1", firstLetter1);
+
+    // if (final_step == 2) {
+    $(".dropdown-menu").removeClass("show");
+    savePage1Data(1);
+    // }
+    var design = eventData.desgin_selected;
+    if (design == undefined || design == "") {
+        await saveDesignData();
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
+    // if (final_step == 3) {
+    var savePage3Result = savePage3Data(1);
+    if (savePage3Result === false) {
+        $("#loader").css("display", "none");
+        return;
+    }
+    // }
+    $("#loader").css("display", "flex");
+    eventData.step = final_step;
+    eventData.isdraft = "1";
+    savePage4Data();
+    var schedule = $("#schedule").is(":checked");
+    if (schedule) {
+        eventData.events_schedule = "1";
+    }
+    $(".main-content-wrp").addClass("blurred");
+    e.stopPropagation();
+    e.preventDefault();
+    $.ajax({
+        url: base_url + "event/editStore",
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: eventData,
+        success: function (response) {
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/login"; // Redirect to home page
+                return;
+            }
+            if (response == 1) {
+                window.location.href = base_url + "home";
+                toastr.success("Event Saved as Draft");
+                setTimeout(function () {
+                    $("#loader").css("display", "none");
+                }, 1000000);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+            toastr.error(error);
+        },
+    });
+});
+
+$(document).on("click", ".cancel-createEvent-draft", async function () {
+    $("#loader").css("display", "flex");
+    // $("#close_createEvent").trigger("click");
+
+    if (apiCalled == true) {
+        return;
+    }
+    console.log(10);
+
+    apiCalled = true;
+
+    $(".dropdown-menu").removeClass("show");
+
+    var temp_id = eventData.temp_id;
+
+    let text1 = $(".current_step").text();
+    let firstLetter1 = text1.split(" ")[0];
+
+    console.log("firstLetter1", firstLetter1);
+
+    console.log(11);
+
+    var event_type = $("#event-type").val();
+    var event_name = $("#event-name").val();
+    var event_date = $("#event-date").val();
+    var start_event_date = $("#start-event-date").val();
+    var end_event_date = $("#end-event-date").val();
+    var design = eventData.desgin_selected;
+    console.log(design);
+
+    if (design == undefined || design == "") {
+        // alert(1);
+        await saveDesignData(true);
+        design = eventData.desgin_selected;
+    }
+    $("#loader").css("display", "flex");
+
+    if (start_event_date != "") {
+        console.log("if");
+        // if (event_name != "" && event_date != "") {
+        // if (event_type != "" && event_name != "" && event_date != "") {
+        let text = $(".current_step").text();
+        let firstLetter = text.split(" ")[0];
+
+        if (final_step == 2) {
+            savePage1Data(1);
         }
-        apiCalled = true;
+        if (final_step == 3) {
+            savePage1Data(1);
+            var savePage3Result = savePage3Data(1);
+            console.log(savePage3Result);
 
-         let text1 = $(".current_step").text();
-        let firstLetter1 = text1.split(" ")[0];
-
-        console.log("firstLetter1", firstLetter1);
-
-        // if (final_step == 2) {
-        $(".dropdown-menu").removeClass("show");
-        savePage1Data(1);
-        // }
-        var design = eventData.desgin_selected;
-        if (design == undefined || design == "") {
-            await saveDesignData();
-            design = eventData.desgin_selected;
+            if (savePage3Result === false) {
+                $("#loader").css("display", "none");
+                return; // Exit if savePage3Data returns a stopping condition
+            }
         }
-        $("#loader").css("display", "flex");
-        // if (final_step == 3) {
-        var savePage3Result = savePage3Data(1);
-        if (savePage3Result === false) {
-            $("#loader").css("display", "none");
-            return;
-        }
-        // }
-        $("#loader").css("display", "flex");
+
         eventData.step = final_step;
         eventData.isdraft = "1";
         savePage4Data();
@@ -9556,11 +9681,10 @@ $(document).on("click", ".cancel-Edit-draft", async function (e) {
         if (schedule) {
             eventData.events_schedule = "1";
         }
-        $(".main-content-wrp").addClass("blurred");
-        e.stopPropagation();
-        e.preventDefault();
+        console.log(eventData);
+
         $.ajax({
-            url: base_url + "event/editStore",
+            url: base_url + "event/store",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -9572,172 +9696,73 @@ $(document).on("click", ".cancel-Edit-draft", async function (e) {
                     return;
                 }
                 if (response == 1) {
-                    window.location.href = base_url + "home";
+                    console.log(eventData);
+
                     toastr.success("Event Saved as Draft");
-                    setTimeout(function () {
-                        $("#loader").css("display", "none");
-                    }, 1000000);
+                    window.location.href = "home";
                 }
             },
             error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+                toastr.error("Error in Saved as Draft");
                 console.log("AJAX error: " + error);
-                toastr.error(error);
             },
         });
+    } else {
+        console.log("else");
 
-    });
+        // eventData.step = "1";
+        let text = $(".current_step").text();
+        let firstLetter = text.split(" ")[0];
+        eventData.temp_id = temp_id;
 
-
-
-
-$(document).on("click", ".cancel-createEvent-draft", async function () {
-    $("#loader").css("display", "flex");
-    // $("#close_createEvent").trigger("click");
-
-        if (apiCalled == true) {
-            return;
+        if (final_step == 2) {
+            savePage1Data(1);
         }
-        console.log(10);
+        if (final_step == 3) {
+            var savePage3Result = savePage3Data(1);
+            console.log(savePage3Result);
 
-        apiCalled = true;
-
-        $(".dropdown-menu").removeClass("show");
-
-        var temp_id = eventData.temp_id;
-
-        let text1 = $(".current_step").text();
-        let firstLetter1 = text1.split(" ")[0];
-
-        console.log("firstLetter1", firstLetter1);
-
-        console.log(11);
-
-        var event_type = $("#event-type").val();
-        var event_name = $("#event-name").val();
-        var event_date = $("#event-date").val();
-        var start_event_date = $("#start-event-date").val();
-        var end_event_date = $("#end-event-date").val();
-        var design = eventData.desgin_selected;
-        console.log(design);
-
-        if (design == undefined || design == "") {
-            // alert(1);
-            await saveDesignData(true);
-            design = eventData.desgin_selected;
-        }
-        $("#loader").css("display", "flex");
-
-
-        if (start_event_date != "") {
-            console.log("if");
-            // if (event_name != "" && event_date != "") {
-            // if (event_type != "" && event_name != "" && event_date != "") {
-            let text = $(".current_step").text();
-            let firstLetter = text.split(" ")[0];
-
-            if (final_step == 2) {
-                savePage1Data(1);
+            if (savePage3Result === false) {
+                $("#loader").css("display", "none");
+                return; // Exit if savePage3Data returns a stopping condition
             }
-            if (final_step == 3) {
-                savePage1Data(1);
-                var savePage3Result = savePage3Data(1);
-                console.log(savePage3Result);
+        }
 
-                if (savePage3Result === false) {
-                    $("#loader").css("display", "none");
-                    return; // Exit if savePage3Data returns a stopping condition
+        eventData.step = final_step;
+        eventData.isdraft = "1";
+        savePage4Data();
+
+        console.log(eventData);
+        $.ajax({
+            url: base_url + "event/store",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: eventData,
+            success: function (response) {
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/login"; // Redirect to home page
+                    return;
                 }
-            }
-
-            eventData.step = final_step;
-            eventData.isdraft = "1";
-            savePage4Data();
-            var schedule = $("#schedule").is(":checked");
-            if (schedule) {
-                eventData.events_schedule = "1";
-            }
-            console.log(eventData);
-
-            $.ajax({
-                url: base_url + "event/store",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: eventData,
-                success: function (response) {
-                    if (response.status == 401 && response.info == "logout") {
-                        window.location.href = "/login"; // Redirect to home page
-                        return;
-                    }
-                    if (response == 1) {
-                        console.log(eventData);
-
-                        toastr.success("Event Saved as Draft");
-                        window.location.href = "home";
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $("#loader").css("display", "none");
-                    toastr.error("Error in Saved as Draft");
-                    console.log("AJAX error: " + error);
-                },
-            });
-        } else {
-            console.log("else");
-
-            // eventData.step = "1";
-            let text = $(".current_step").text();
-            let firstLetter = text.split(" ")[0];
-            eventData.temp_id = temp_id;
-
-            if (final_step == 2) {
-                savePage1Data(1);
-            }
-            if (final_step == 3) {
-                var savePage3Result = savePage3Data(1);
-                console.log(savePage3Result);
-
-                if (savePage3Result === false) {
-                    $("#loader").css("display", "none");
-                    return; // Exit if savePage3Data returns a stopping condition
+                if (response == 1) {
+                    console.log(eventData);
+                    window.location.href = "home";
+                    toastr.success("Event Saved as Draft");
+                    setTimeout(function () {
+                        $("#loader").css("display", "none");
+                    }, 100000);
                 }
-            }
-
-            eventData.step = final_step;
-            eventData.isdraft = "1";
-            savePage4Data();
-
-            console.log(eventData);
-            $.ajax({
-                url: base_url + "event/store",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                data: eventData,
-                success: function (response) {
-                    if (response.status == 401 && response.info == "logout") {
-                        window.location.href = "/login"; // Redirect to home page
-                        return;
-                    }
-                    if (response == 1) {
-                        console.log(eventData);
-                        window.location.href = "home";
-                        toastr.success("Event Saved as Draft");
-                        setTimeout(function () {
-                            $("#loader").css("display", "none");
-                        }, 100000);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $("#loader").css("display", "none");
-                    toastr.error(error);
-                    console.log("AJAX error: " + error);
-                },
-            });
-        }
-    });
+            },
+            error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+                toastr.error(error);
+                console.log("AJAX error: " + error);
+            },
+        });
+    }
+});
 if (final_step == "2" && isCohost == "1") {
     $("#loader").css("display", "flex");
 
@@ -10158,9 +10183,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                    parseInt(quantity) +
-                    "/" +
-                    categoryItemQuantity
+                        parseInt(quantity) +
+                        "/" +
+                        categoryItemQuantity
                 );
             }
 
@@ -10186,9 +10211,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -10209,10 +10234,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10221,10 +10246,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10243,10 +10268,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10254,10 +10279,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10553,8 +10578,9 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
-        }</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${
+        initials || "NA"
+    }</h5>`;
 }
 $(".create_event_login_btn").on("click", function (e) {
     console.log($("#crateEventLogin").attr("action"));
@@ -10768,7 +10794,6 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 
         let imageUrls = localStorage.getItem("final_upload_image");
         if (imageUrls) {
-
             eventData.desgin_selected = imageUrls;
 
             $("#eventImage, #eventTempImage").attr(
@@ -10789,9 +10814,8 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 
         eventData.textData = dbJson;
 
-            const slide_image_get = localStorage.getItem("save-slider-image");
-            eventData.slider_images = JSON.parse(slide_image_get);
-
+        const slide_image_get = localStorage.getItem("save-slider-image");
+        eventData.slider_images = JSON.parse(slide_image_get);
 
         localStorage.removeItem("image");
         // Remove refresh flag after applying changes

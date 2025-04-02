@@ -3119,7 +3119,7 @@ async function getTextDataFromCanvas() {
 
     deselectAllTextBoxes();
 
-    await delay(10000); // Wait for 1 second
+    await delay(1000); // Wait for 1 second
     console.log("Executed after 1 second");
     // $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
