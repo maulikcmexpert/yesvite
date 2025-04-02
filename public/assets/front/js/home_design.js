@@ -213,12 +213,15 @@ $(document).ready(function () {
                 // $('.image-item').addClass('wow');
                 // $('.image-item').show();
                 // $('#filtered_results').hide();
-                $('.image-item').addClass('fadeInDown wow').show();
-    
+                $('.image-item').removeClass('d-none fadeInDown wow').show();
+                
                 let allItems = $('.image-item');
                 if (allItems.length > 30) {
                     allItems.slice(30).addClass('d-none').hide();
                 }
+
+                $('.total_design_count').text($('.image-item:visible').length + ' Items');
+                $('#filtered_results').hide();
             }
         
             // $('#filtered_results').html(results);
