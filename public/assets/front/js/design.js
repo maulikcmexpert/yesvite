@@ -858,12 +858,15 @@ async function bindData(current_event_id) {
 
                         canvas.forEachObject(function (object) {
                             if (object.type === "textbox") {
-                                ctx.strokeStyle =
-                                    canvas.getActiveObject() === object
-                                        ? "white"
-                                        : "blue"; // White for selected, blue for others
-                                ctx.lineWidth = 2;
-                                ctx.setLineDash([5, 5]);
+                                if (canvas.getActiveObject() === object) {
+                                    ctx.strokeStyle = "white"; // White for selected
+                                    ctx.lineWidth = 2;
+                                    ctx.setLineDash([]); // Solid line
+                                } else {
+                                    ctx.strokeStyle = "blue"; // Blue for unselected
+                                    ctx.lineWidth = 2;
+                                    ctx.setLineDash([5, 5]); // Dotted line
+                                }
 
                                 // Get object bounding box
                                 var bbox = object.getBoundingRect();
