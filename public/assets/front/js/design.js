@@ -2529,6 +2529,8 @@ async function bindData(current_event_id) {
                 if (tb.copyIcon) tb.copyIcon.set("visible", false);
             });
             canvas.discardActiveObject();
+            setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+
             canvas.renderAll();
         }
     });
