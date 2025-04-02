@@ -2478,13 +2478,11 @@ async function bindData(current_event_id) {
         if (!activeObject && !isSelectionTriggered) {
             isSelectionTriggered = true; // Prevent re-triggering
 
-            setTimeout(() => {
-                if (!canvas.getActiveObject()) {
-                    isFirstClick = true; // Reset the flag
-                    selectAllTextBoxes();
-                }
-                isSelectionTriggered = false; // Reset after execution
-            }, 500); // Delay for proper selection
+            if (!canvas.getActiveObject()) {
+                isFirstClick = true; // Reset the flag
+                selectAllTextBoxes();
+            }
+            isSelectionTriggered = false; // Reset after execution
         }
         canvas.renderAll();
     });
