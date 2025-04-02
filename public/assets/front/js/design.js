@@ -1,4 +1,5 @@
 // ============vrushali=============
+
 var storedData = localStorage.getItem("storedTextData");
 var parsedData = storedData ? JSON.parse(storedData) : null;
 
@@ -2539,9 +2540,13 @@ async function bindData(current_event_id) {
         var activeObject = canvas.getActiveObject();
         console.log("mouse:up", activeObject);
         if (!activeObject) {
-            isFirstClick = true;
-            setTimeout(() => selectAllTextBoxes(), 500); // Delay to ensure proper selection
-            canvas.renderAll();
+            if (isFirstClick) {
+                isFirstClick = false; // Prevent re-triggering
+                setTimeout(() => {
+                    selectAllTextBoxes();
+                    isFirstClick = true; // Reset after execution
+                }, 500); // Delay to ensure proper selection
+            }
         }
     });
     let lastEditedObject = null;
