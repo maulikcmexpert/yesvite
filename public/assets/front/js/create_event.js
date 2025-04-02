@@ -3980,7 +3980,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-    } else if (firstLetter1 == "2" ||firstLetter1 == "3" || firstLetter1 == "4"  ){
+    } else {
         apiCalled = false;
         $("#draftModel").modal("show");
       return;}
