@@ -1,5 +1,5 @@
 // ============vrushali=============
-
+var eventData = {};
 var storedData = localStorage.getItem("storedTextData");
 var parsedData = storedData ? JSON.parse(storedData) : null;
 

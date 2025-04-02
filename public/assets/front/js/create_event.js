@@ -1,5 +1,3 @@
-var eventData = {};
-
 // ===================vrushali=======
 if ($("#isUserLoggedIn").val() === "1") {
     var isCohost = $("#isCohost").val() || "";
