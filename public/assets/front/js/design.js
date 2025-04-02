@@ -833,10 +833,7 @@ async function bindData(current_event_id) {
                             hasBorders: true,
                             centeredRotation: true,
                             angle: element?.rotation ? element?.rotation : 0,
-                            hasBorders: true, // Ensure it has borders
-                            borderColor: "blue", // Border color
-                            cornerColor: "blue", // Control corners color
-                            borderDashArray: [5, 5], // Dotted border effect
+                            hasBorders: false, // Disable default borders
                         });
 
                         textElement.setControlsVisibility({
@@ -851,8 +848,30 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
+                        drawCustomBorder(textElement);
                     });
                     // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                }
+                function drawCustomBorder(object) {
+                    canvas.on("after:render", function () {
+                        var ctx = canvas.getContext("2d");
+                        ctx.save();
+                        ctx.strokeStyle = "blue"; // Border color
+                        ctx.lineWidth = 2; // Border thickness
+                        ctx.setLineDash([5, 5]); // Dotted effect
+
+                        // Get object bounding box
+                        var bbox = object.getBoundingRect();
+                        ctx.strokeRect(
+                            bbox.left,
+                            bbox.top,
+                            bbox.width,
+                            bbox.height
+                        );
+                        ctx.restore();
+                    });
+
+                    canvas.renderAll();
                 }
 
                 let currentImage = null;
