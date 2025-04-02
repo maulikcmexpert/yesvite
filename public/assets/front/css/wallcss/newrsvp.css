@@ -1384,6 +1384,9 @@ label.error {
 .rsvp-slider .owl-next.disabled{
     display: none !important;
 }
+.rsvp-slider .owl-prev.disabled{
+    display: none !important;
+}
 /* ====== responsive ======= */
 @media only screen and (max-width:1400px){
     .qty-container input{
