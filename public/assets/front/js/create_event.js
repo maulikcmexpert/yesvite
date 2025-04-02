@@ -4958,10 +4958,175 @@ $(document).on("click", ".cancel-btn-createEvent", function () {
     // console.log(url);
     window.location.href = url;
 });
-$(document).on("click", ".cancel-createEvent-draft", function () {
+$(document).on("click", ".cancel-createEvent-draft", async function () {
     $("#loader").css("display", "flex");
-    $("#close_createEvent").trigger("click");
-});
+    // $("#close_createEvent").trigger("click");
+
+        if (apiCalled == true) {
+            return;
+        }
+        console.log(10);
+
+        apiCalled = true;
+
+        $(".dropdown-menu").removeClass("show");
+
+        var temp_id = eventData.temp_id;
+        if (dbJson == "" || dbJson == null || dbJson == undefined) {
+            apiCalled = false;
+            $("#designModel").modal("show");
+            return;
+        }
+        let text1 = $(".current_step").text();
+        let firstLetter1 = text1.split(" ")[0];
+
+        console.log("firstLetter1", firstLetter1);
+
+        console.log(11);
+
+        var event_type = $("#event-type").val();
+        var event_name = $("#event-name").val();
+        var event_date = $("#event-date").val();
+        var start_event_date = $("#start-event-date").val();
+        var end_event_date = $("#end-event-date").val();
+        var design = eventData.desgin_selected;
+        console.log(design);
+
+        if (design == undefined || design == "") {
+            // alert(1);
+            await saveDesignData(true);
+            design = eventData.desgin_selected;
+        }
+        $("#loader").css("display", "flex");
+        // if (event_type == "") {
+        //     $("#deleteModal").modal("show");
+        //     // confirm('Event type is empty. Are you sure you want to proceed?')
+        //     return;
+        // }
+        // // // if (event_name == "") {
+        // // //     $("#deleteModal").modal("show");
+        // // //     return;
+        // // // }
+        // if (event_date == "") {
+        //     $("#deleteModal").modal("show");
+        //     return;
+        // }
+
+        // $('#loader').css('display','block');
+        /////vrushali////////////
+
+        if (start_event_date != "") {
+            console.log("if");
+            // if (event_name != "" && event_date != "") {
+            // if (event_type != "" && event_name != "" && event_date != "") {
+            let text = $(".current_step").text();
+            let firstLetter = text.split(" ")[0];
+
+            if (final_step == 2) {
+                savePage1Data(1);
+            }
+            if (final_step == 3) {
+                savePage1Data(1);
+                var savePage3Result = savePage3Data(1);
+                console.log(savePage3Result);
+
+                if (savePage3Result === false) {
+                    $("#loader").css("display", "none");
+                    return; // Exit if savePage3Data returns a stopping condition
+                }
+            }
+
+            eventData.step = final_step;
+            eventData.isdraft = "1";
+            savePage4Data();
+            var schedule = $("#schedule").is(":checked");
+            if (schedule) {
+                eventData.events_schedule = "1";
+            }
+            console.log(eventData);
+
+            $.ajax({
+                url: base_url + "event/store",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: eventData,
+                success: function (response) {
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/login"; // Redirect to home page
+                        return;
+                    }
+                    if (response == 1) {
+                        console.log(eventData);
+
+                        toastr.success("Event Saved as Draft");
+                        window.location.href = "home";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    toastr.error("Error in Saved as Draft");
+                    console.log("AJAX error: " + error);
+                },
+            });
+        } else {
+            console.log("else");
+
+            // eventData.step = "1";
+            let text = $(".current_step").text();
+            let firstLetter = text.split(" ")[0];
+            eventData.temp_id = temp_id;
+
+            if (final_step == 2) {
+                savePage1Data(1);
+            }
+            if (final_step == 3) {
+                var savePage3Result = savePage3Data(1);
+                console.log(savePage3Result);
+
+                if (savePage3Result === false) {
+                    $("#loader").css("display", "none");
+                    return; // Exit if savePage3Data returns a stopping condition
+                }
+            }
+
+            eventData.step = final_step;
+            eventData.isdraft = "1";
+            savePage4Data();
+
+            console.log(eventData);
+            $.ajax({
+                url: base_url + "event/store",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: eventData,
+                success: function (response) {
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/login"; // Redirect to home page
+                        return;
+                    }
+                    if (response == 1) {
+                        console.log(eventData);
+                        window.location.href = "home";
+                        toastr.success("Event Saved as Draft");
+                        setTimeout(function () {
+                            $("#loader").css("display", "none");
+                        }, 100000);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    toastr.error(error);
+                    console.log("AJAX error: " + error);
+                },
+            });
+        }
+    });
+
+
 function handleActiveClass(target) {
     $(".side-bar-list").removeClass("active");
     $(".pick-card").removeClass("active");
