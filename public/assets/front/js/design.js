@@ -313,9 +313,9 @@ $(document).on("click", ".design-cards", function () {
         // });
         canvas.add(textElement);
         canvas.on("object:added", function (e) {
-            // if (e.target && e.target.type === 'textbox') {
-            //     setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
-            // }
+            if (e.target && e.target.type === "textbox") {
+                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+            }
         });
     });
     var shape = "";
@@ -847,9 +847,9 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        drawCustomBorder(textElement);
+                        // drawCustomBorder(textElement);
                     });
-                    // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                    setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
                 function drawCustomBorder(object) {
                     canvas.on("after:render", function () {
