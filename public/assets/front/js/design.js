@@ -2472,6 +2472,19 @@ async function bindData(current_event_id) {
             return; // Do nothing
         }
         canvas.discardActiveObject();
+        var activeObject = canvas.getActiveObject();
+        console.log("mouse:up", activeObject);
+        if (!activeObject && !isSelectionTriggered) {
+            isSelectionTriggered = true; // Prevent re-triggering
+
+            setTimeout(() => {
+                if (!canvas.getActiveObject()) {
+                    isFirstClick = true; // Reset the flag
+                    selectAllTextBoxes();
+                }
+                isSelectionTriggered = false; // Reset after execution
+            }, 500); // Delay for proper selection
+        }
         canvas.renderAll();
     });
     let isFirstClick = true;
