@@ -9134,6 +9134,7 @@ $(document).on("click", ".save-slider-image", function () {
             imageSources.push({
                 src: $(this).attr("src"),
                 deleteId: $(this).data("delete"),
+                image_position: $(this).data("delete"),
             });
             imagenames.push({
                 name: $(this).attr("data-image"),
