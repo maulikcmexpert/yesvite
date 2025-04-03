@@ -9300,6 +9300,7 @@ function savePhotoSlider(){
                 console.log(eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
+                return true;
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
@@ -9468,15 +9469,17 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
     e.preventDefault();
 
-    await savePhotoSlider(); // Ensure this completes first
+    var a= savePhotoSlider(); // Ensure this completes first
 
-    eventData.is_update_event = "1";
-    await saveDesignData(true);
-    let save1 = savePage1Data(null, true);
-    let save2 = savePage3Data(null, true);
-    savePage4Data();
-    if (save1 == 8 && save2 == 8) {
-        updateEventData();
+    if(a==true){
+        eventData.is_update_event = "1";
+        await saveDesignData(true);
+        let save1 = savePage1Data(null, true);
+        let save2 = savePage3Data(null, true);
+        savePage4Data();
+        if (save1 == 8 && save2 == 8) {
+            updateEventData();
+        }
     }
 });
 
