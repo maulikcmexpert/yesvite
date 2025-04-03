@@ -3120,26 +3120,6 @@ function setCustomControls(obj) {
     canvas.requestRenderAll();
 }
 
-// Event listeners to update border when selection changes
-canvas.on("selection:created", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setCustomControls(e.target);
-    }
-    drawCustomBorder(); // Ensure unselected objects get a dashed border
-});
-
-canvas.on("selection:updated", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setCustomControls(e.target);
-    }
-    drawCustomBorder();
-});
-
-canvas.on("selection:cleared", function () {
-    drawCustomBorder(); // Restore dashed border for all textboxes when selection is cleared
-});
-;
-
 
 
 function delay(ms) {
