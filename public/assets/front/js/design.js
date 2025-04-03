@@ -2477,6 +2477,7 @@ async function bindData(current_event_id) {
             // Set a timeout to simulate mouse events at the same position after 1 second
             setTimeout(() => {
                 simulateMouseEvents(x, y);
+                drawCustomBorder();
                 console.log("Simulated mouse events at:", x, y);
             }, 200);
         }
@@ -3071,81 +3072,74 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-     function drawCustomBorder(object) {
-                    canvas.on("after:render", function () {
-                        var ctx = canvas.getContext("2d");
-                        ctx.save();
+function drawCustomBorder(object) {
+    canvas.on("after:render", function () {
+        var ctx = canvas.getContext("2d");
+        ctx.save();
 
-                        canvas.forEachObject(function (obj) {
-                            if (obj.type === "textbox") {
-                                if (canvas.getActiveObject() === obj) {
-                                    // Selected: Solid blue border
-                                    ctx.strokeStyle = "#2DA9FC";
-                                    ctx.lineWidth = 2;
-                                    // ctx.cornerSize = 10,
-                                    // ctx.cornerColor ="#fff",
-                                    // ctx.cornerStyle ="circle",
-                                    ctx.setLineDash([]);
+        canvas.forEachObject(function (obj) {
+            if (obj.type === "textbox") {
 
-                                    obj.set({
-                                        borderColor: "#2DA9FC",
-                                        cornerSize: 10,
-                                        cornerColor: "#fff",
-                                        cornerStyle: "circle",
-                                    });
-                                    obj.setControlsVisibility({
-                                        mt: false, // Hide middle top control
-                                        mb: false, // Hide middle bottom control
-                                        bl: true,
-                                        br: true,
-                                        tl: true,
-                                        tr: true,
-                                        ml: true,
-                                        mr: true,
-                                    });
+                if (canvas.getActiveObject() === obj) {
+                    console.log("object");
+                    // Selected: Solid blue border
+                    ctx.borderColor = "#2DA9FC";
+                    ctx.lineWidth = 2;
+                    ctx.cornerSize = 10,
 
-                                    setControlVisibilityForObject(obj);
-                                } else {
-                                    // Unselected: Dotted blue border
-                                    ctx.strokeStyle = "blue";
-                                    ctx.lineWidth = 2;
-                                    ctx.setLineDash([5, 5]);
-                                }
+                    ctx.cornerColor ="#fff",
+                    ctx.cornerStyle ="circle",
 
-                                // Draw border around text object
-                                let bbox = obj.getBoundingRect();
-                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
-                            }
-                        });
+                    ctx.setLineDash([]);
 
-                        ctx.restore();
-                    });
 
-                    canvas.renderAll();
+
+
+                    setControlVisibilityForObject(obj);
+                } else {
+                    console.log("object not");
+                    // Unselected: Dotted blue border
+                    ctx.strokeStyle = "blue";
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
                 }
-                function setControlVisibilityForObject(obj) {
-                    obj.setControlsVisibility({
-                        mt: false,
-                        mb: false,
-                        bl: true,
-                        br: true,
-                        tl: true,
-                        tr: true,
-                        ml: true,
-                        mr: true,
-                    });
 
-                    obj.set({
-                        transparentCorners: false,
-                        borderColor: "#2DA9FC", // Light blue border when selected
-                        cornerSize: 10,
-                        cornerColor: "#fff",
-                        cornerStyle: "circle",
-                    });
+                // Draw border around text object
+                let bbox = obj.getBoundingRect();
+                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+            }
+        });
 
-                    obj.setCoords();
+        ctx.restore();
+    });
 
-                }
+    canvas.renderAll();
+}
+function setControlVisibilityForObject(obj) {
+    obj.setControlsVisibility({
+        mt: false,
+        mb: false,
+        bl: true,
+        br: true,
+        tl: true,
+        tr: true,
+        ml: true,
+        mr: true,
+    });
+console.log("hfdshjsnjsd");
+    obj.set({
+        transparentCorners: false,
+        borderColor: "#2DA9FC", // Light blue border when selected
+        cornerSize: 10,
+        cornerColor: "#fff",
+        cornerStyle: "circle",
+        transparentCorners: false, // Ensure corners are visible
+        hasControls: true, // Ensure controls are enabled
+    });
+
+    obj.setCoords();
+
+}
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
