@@ -9091,7 +9091,7 @@ $(document).on("change", ".slider_photo", function (event) {
                 src: $(".photo-slider-1").attr("src"),
                 deleteId: $(".photo-slider-1").data("delete"),
                 image_position: $(".photo-slider-1").data("delete"),
-                image_name: $(".photo-slider-1").data("image"),
+                image_name: $(".photo-slider-1").attr("data-image"),
             });
         }
         savePhotoSlider();
