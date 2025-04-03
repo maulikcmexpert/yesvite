@@ -3075,7 +3075,7 @@ function deselectAllTextBoxes() {
 function drawCustomBorder(object) {
     canvas.on("after:render", function () {
         var ctx = canvas.getContext("2d");
-        // ctx.save();
+        ctx.save();
 
         canvas.forEachObject(function (obj) {
             if (obj.type === "textbox") {
@@ -3083,18 +3083,10 @@ function drawCustomBorder(object) {
                 if (canvas.getActiveObject() === obj) {
                     console.log("object");
                     // Selected: Solid blue border
-                    obj.set({
-                        borderColor: "#2DA9FC", // Light blue when selected
-                        cornerSize: 10,
-                        cornerColor: "#fff", // White resize controls
-                        cornerStyle: "circle",
-                        transparentCorners: false,
-                        hasControls: true,
-                        strokeWidth: 2,
-                        strokeUniform: true,
-                        stroke: "#2DA9FC", // Solid border
-                    });
+                    ctx.strokeStyle = "#2DA9FC";
+                    ctx.lineWidth = 2;
                     ctx.setLineDash([]);
+                    setControlVisibilityForObject(obj);
                     obj.setCoords();
                 } else {
                     console.log("object not");
@@ -3119,36 +3111,37 @@ function setControlVisibilityForObject(obj) {
     obj.setControlsVisibility({
         mt: false,
         mb: false,
+        ml: true,
+        mr: true,
         bl: true,
         br: true,
         tl: true,
         tr: true,
-        ml: true,
-        mr: true,
     });
-console.log("hfdshjsnjsd");
+
     obj.set({
         transparentCorners: false,
         borderColor: "#2DA9FC", // Light blue border when selected
         cornerSize: 10,
         cornerColor: "#fff",
         cornerStyle: "circle",
-        transparentCorners: false, // Ensure corners are visible
         hasControls: true, // Ensure controls are enabled
+        lockScalingFlip: true,
     });
 
     obj.setCoords();
-
+    canvas.renderAll();
 }
 
-canvas.on("selection:updated", updateTextboxBorders);
-canvas.on("selection:created", updateTextboxBorders);
-canvas.on("selection:cleared", updateTextboxBorders);
+canvas.on("selection:created", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setControlVisibilityForObject(e.target);
+    }
+});
 
-// Ensure every textbox gets the blue dotted border on load
-canvas.on("object:added", function (e) {
-    if (e.target.type === "textbox") {
-        updateTextboxBorders();
+canvas.on("selection:updated", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setControlVisibilityForObject(e.target);
     }
 });
 function delay(ms) {
