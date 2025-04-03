@@ -3079,27 +3079,25 @@ function drawCustomBorder() {
 
     canvas.forEachObject(function (obj) {
         if (obj.type === "textbox") {
-            let activeObj = canvas.getActiveObject();
+            let bbox = obj.getBoundingRect();
 
-            if (activeObj === obj) {
+            // Always show dashed blue border (even if selected)
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+
+            if (canvas.getActiveObject() === obj) {
                 console.log("Object selected");
-                // Fabric.js default selection border (solid)
+                // Apply Fabric.js selection controls (solid blue + white circular corners)
                 setCustomControls(obj);
-            } else {
-                console.log("Object not selected");
-                // Draw dashed blue border for unselected objects
-                ctx.strokeStyle = "blue";
-                ctx.lineWidth = 2;
-                ctx.setLineDash([5, 5]);
-
-                let bbox = obj.getBoundingRect();
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
             }
         }
     });
 
     ctx.restore();
 }
+
 
 // Function to apply control styling (only when selected)
 function setCustomControls(obj) {
