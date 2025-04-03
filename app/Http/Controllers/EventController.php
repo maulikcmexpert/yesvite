@@ -3394,7 +3394,7 @@ class EventController extends BaseController
     // }
 
 
-    public function saveSliderImg(Request $request)
+    public function saveSliderImg1(Request $request)
     {
         dd($request->all());
         $event_id = $request->eventId;
@@ -3518,6 +3518,53 @@ class EventController extends BaseController
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
+    public function saveSliderImg(Request $request)
+    {
+        $imageSources = $request->imageSources;
+        $i = 0;
+        foreach ($imageSources as $imageSource) {
+            if (!empty($imageSource['src'])) {
+                if (strpos($imageSource['src'], 'data:image') === 0) {
+                    // Base64 image
+                    $parts = explode(',', $imageSource['src']);
+                    if (count($parts) < 2) {
+                        continue;
+                    }
+
+                    $imageData = base64_decode($parts[1]);
+                    $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                    $i++;
+
+                    $path = public_path('storage/event_images/') . $fileName;
+                    file_put_contents($path, $imageData);
+                } else {
+                    // URL image (just copy the image)
+                    $src = $imageSource['src'];
+                    $imageName = basename($src);
+                    $fileName = $imageName;
+                    $i++;
+
+                    // $path = public_path('storage/event_images/') . $fileName;
+                    // file_put_contents($path, file_get_contents($imageSource['src']));
+                }
+
+                $savedFiles[] = [
+                    'fileName' => $fileName,
+                    'deleteId' => $imageSource['deleteId']
+                ];
+            }
+        }
+        //new
+        if (empty($savedFiles)) {
+            // return response()->json(['status' => 'No valid images to save'], 400);
+        }
+        // dd($savedFiles);
+        session(['desgin_slider' => $savedFiles]);
+        return response()->json(['success' => true, 'images' => $savedFiles]);
+    }
+
+
+
 
     public function deleteSliderImg(Request $request)
     {
