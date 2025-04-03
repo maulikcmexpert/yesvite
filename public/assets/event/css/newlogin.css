@@ -334,4 +334,14 @@
         max-width: 300px;
         margin: 0px auto;
     }
+    .new-create-account-form-title h2 {
+        font-family: var(--SFProDisplay-Bold) !important;
+        font-size: 24px !important;
+        line-height: normal !important;
+        color: var(--secondary-black) !important;
+        margin-bottom: 15px !important;
+    }
+    .new-create-account-form h5 {
+        font-size: 17px;
+    }
 }
