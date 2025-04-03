@@ -2,10 +2,10 @@
     position: relative;
 }
 .new-create-account-head h2 {
-    font-family: var(--SFProDisplay-Medium);
-    font-size: 20px;
-    line-height: normal;
-    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 20px !important;
+    line-height: normal !important;
+    color: var(--secondary-black) !important;
     text-align: center;
 }
 
@@ -29,7 +29,8 @@
     padding: 24px;
     position: relative;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
-    max-width: 100%;
+    max-width: 600px;
+    margin-left: auto;
 }
 
 .new-create-account-left .rsvp-slider img {
@@ -37,7 +38,7 @@
     height: auto;
     object-fit: cover;
     aspect-ratio: 5/7;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0px auto;
 }
 
@@ -107,8 +108,15 @@
     -o-border-radius: 20px;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
     padding-top: 30px;
+    max-width: 600px;
 }
 
+.new-create-account-form {
+    max-width: 100% !important;
+    padding: 0px !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
 .new-create-account-form h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 20px;
@@ -126,11 +134,11 @@
 }
 
 .new-create-account-form-title h2 {
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 30px;
-    line-height: normal;
-    color: var(--secondary-black);
-    margin-bottom: 15px;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 30px !important;
+    line-height: normal !important;
+    color: var(--secondary-black) !important;
+    margin-bottom: 15px !important;
 }
 
 .new-create-account-form-title h6 {
@@ -213,8 +221,23 @@
     height: 28px;
 }
 
-.create-account-slider.rsvp-slider .owl-prev.disabled , .create-account-slider.rsvp-slider .owl-next.disabled {
+.create-account-slider.rsvp-slider .owl-prev.disabled,
+.create-account-slider.rsvp-slider .owl-next.disabled {
     display: flex !important;
+}
+
+@media only screen and (min-width: 1400px) {
+    .new-create-account-section .col-lg-6 {
+        width: 49%;
+    }
+
+    .new-create-account-section .row {
+        justify-content: space-between;
+    }
+    .new-create-account-section .container {
+        max-width: 1300px !important;
+        margin: 0px auto;
+    }
 }
 
 @media only screen and (max-width: 1399px) {
@@ -242,12 +265,19 @@
 }
 
 @media only screen and (max-width: 991px) {
-    .new-create-account-right {
-        margin-top: 30px;
-    }
     .new-create-account-left .owl-item .image-zoom-icon {
         top: 10px !important;
         right: 130px !important;
+    }
+    .new-create-account-left .rsvp-slider {
+        margin: 0px auto !important;
+    }
+    .new-create-account-right {
+        margin: 0px auto;
+        margin-top: 30px !important;
+    }
+    .create-account-slider.rsvp-slider .rsvp-img {
+        height: max-content !important;
     }
 }
 
