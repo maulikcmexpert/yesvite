@@ -9252,8 +9252,9 @@ function savePhotoSlider(){
                         JSON.stringify(savedImages)
                     );
                 }
+
                 savedImages.forEach((image, index) => {
-                    var selector = `.slider_photo${index === 0 ? "" : index}`; 
+                    var selector = `.slider_photo${index+1}`; 
                     $(selector).attr("data-image", image.fileName);
                 });
                 eventData.slider_images = []; // Empty the array
