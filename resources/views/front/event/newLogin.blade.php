@@ -1,3 +1,5 @@
+
+<x-front.advertise />
 <section class="new-create-account-section new_login">
     <div class="container">
         <div class="col-12 mb-5 mt-3">
@@ -66,9 +68,10 @@
                 <div class="col-lg-6">
                     <div class="new-create-account-right">
                         <div class="new-create-account-form login-form-wrap">
-                            <h5>Create an account/login to continue event creation</h5>
+
                             <div class="new-create-account-form-title">
                                 <h2>Welcome to Yesvite</h2>
+                                <h5>Create an account/login to continue event creation</h5>
                                 <h6>Each new account gets 30 free credits</h6>
                                 <h6>1 Credit = 1 invite</h6>
                             </div>
@@ -961,7 +964,7 @@
 
                                 <div class="new-create-account-form-foot">
 
-                                    <p>Already in Yesvite? <a href="#" id="login_event">Sign in</a></p>
+                                    <p>Already have an account? <a href="#" id="login_event">Sign in</a></p>
                                     <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
                                             and <a href="{{route('privacy_policy')}}"> Privacy Policy</a></span></p>
                                 </div>
