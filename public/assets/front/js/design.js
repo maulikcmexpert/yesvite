@@ -2487,7 +2487,7 @@ async function bindData(current_event_id) {
 
             if (!canvas.getActiveObject()) {
                 isFirstClick = true; // Reset the flag
-               selectAllTextBoxes();
+              drawCustomBorder();
             }
             isSelectionTriggered = false; // Reset after execution
         }
