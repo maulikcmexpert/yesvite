@@ -3099,14 +3099,25 @@ function drawCustomBorder() {
 
     canvas.forEachObject(function (obj) {
         if (obj.type === "textbox") {
-            let bbox = obj.getBoundingRect();
+            let isSelected = canvas.getActiveObjects().includes(obj);
 
             // Show the border only if the textbox is NOT selected
-            if (!canvas.getActiveObjects().includes(obj)) {
+            if (!isSelected) {
                 ctx.strokeStyle = "#2DA9FC";
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5, 5]);
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+
+                // Get the rotated bounding box points
+                let points = getRotatedBoundingBox(obj);
+
+                // Draw the rotated border
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i].x, points[i].y);
+                }
+                ctx.closePath();
+                ctx.stroke();
             }
         }
     });
