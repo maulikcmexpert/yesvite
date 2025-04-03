@@ -3550,7 +3550,8 @@ class EventController extends BaseController
 
                 $savedFiles[] = [
                     'fileName' => $fileName,
-                    'deleteId' => $imageSource['deleteId']
+                    'deleteId' => $imageSource['deleteId'],
+                    'image_position'=>$imageSource['deleteId']
                 ];
             }
         }
