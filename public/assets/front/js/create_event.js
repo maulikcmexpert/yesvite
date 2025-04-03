@@ -9085,13 +9085,14 @@ $(document).on("change", ".slider_photo", function (event) {
         if (existingIndex !== -1) {
             // Update the existing entry
             imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
+            imageSources[existingIndex].image_name = $(".photo-slider-1").attr("image");
         } else {
             // Add a new entry if it does not exist
             imageSources.push({
                 src: $(".photo-slider-1").attr("src"),
                 deleteId: $(".photo-slider-1").data("delete"),
                 image_position: $(".photo-slider-1").data("delete"),
-                image_name: $(".photo-slider-1").data("image"),
+                image_name: $(".photo-slider-1").attr("data-image"),
             });
         }
         savePhotoSlider();
