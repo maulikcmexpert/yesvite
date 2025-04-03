@@ -546,9 +546,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                                "drag" &&
+                                            "drag" &&
                                             event.transform.actionPerformed ===
-                                                undefined
+                                            undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -818,8 +818,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
+                                    element.linethrough == "true" ||
+                                    element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -857,33 +857,24 @@ async function bindData(current_event_id) {
                         var ctx = canvas.getContext("2d");
                         ctx.save();
 
-                        canvas.forEachObject(function (object) {
-                            if (object.type === "textbox") {
-                                if (canvas.getActiveObject() === object) {
-                                    ctx.strokeStyle = "#2DA9FC"; // White for selected
-                                    ctx.cornerColor = "#fff"; // White for selected
-                                    ctx.cornerSize = 10;
-                                    ctx.cornerStyle= "circle",// White for selected
+                        canvas.forEachObject(function (obj) {
+                            if (obj.type === "textbox") {
+                                if (canvas.getActiveObject() === obj) {
+                                    // Selected: Solid blue border
+                                    ctx.strokeStyle = "#2DA9FC";
                                     ctx.lineWidth = 2;
-                                    ctx.setLineDash([]); // Solid line
-
-                                    // Apply control visibility and styling
-                                    setControlVisibilityForObject(object);
+                                    ctx.setLineDash([]);
+                                    setControlVisibilityForObject(obj);
                                 } else {
-                                    ctx.strokeStyle = "blue"; // Blue for unselected
+                                    // Unselected: Dotted blue border
+                                    ctx.strokeStyle = "blue";
                                     ctx.lineWidth = 2;
-                                    ctx.setLineDash([5, 5]); // Dotted line
+                                    ctx.setLineDash([5, 5]);
                                 }
 
-                                // Get object bounding box
-                                var bbox = object.getBoundingRect();
-
-                                ctx.strokeRect(
-                                    bbox.left,
-                                    bbox.top,
-                                    bbox.width,
-                                    bbox.height
-                                );
+                                // Draw border around text object
+                                let bbox = obj.getBoundingRect();
+                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
                             }
                         });
 
@@ -892,6 +883,7 @@ async function bindData(current_event_id) {
 
                     canvas.renderAll();
                 }
+
                 function setControlVisibilityForObject(obj) {
                     obj.setControlsVisibility({
                         mt: false,
@@ -913,6 +905,7 @@ async function bindData(current_event_id) {
                     });
 
                     obj.setCoords();
+                    canvas.renderAll(); //
                 }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
@@ -1030,7 +1023,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                        undefined
+                                    undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1201,12 +1194,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                            defaultShape
+                                                        defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                                currentShapeIndex
+                                                            currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1219,10 +1212,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                    "drag" &&
+                                                                "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                    undefined
+                                                                undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1231,7 +1224,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                            currentShapeIndex
+                                                                        currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1243,7 +1236,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                    currentShapeIndex
+                                                                currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1700,7 +1693,7 @@ async function bindData(current_event_id) {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase() ===
+                        word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -2086,7 +2079,7 @@ async function bindData(current_event_id) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) {};
+                reader.onload = function (e) { };
                 reader.readAsDataURL(file);
             }
         });
@@ -2487,8 +2480,8 @@ async function bindData(current_event_id) {
 
             if (!canvas.getActiveObject()) {
                 isFirstClick = true; // Reset the flag
-            //    selectAllTextBoxes();
-            // drawCustomBorder();
+                //    selectAllTextBoxes();
+                // drawCustomBorder();
             }
             isSelectionTriggered = false; // Reset after execution
         }
@@ -2564,7 +2557,7 @@ async function bindData(current_event_id) {
             setTimeout(() => {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
-                //    selectAllTextBoxes();
+                    //    selectAllTextBoxes();
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
@@ -3298,7 +3291,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) { },
     });
 }
 function isJSON(str) {
