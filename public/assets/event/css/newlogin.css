@@ -265,12 +265,16 @@
 }
 
 @media only screen and (max-width: 991px) {
-    .new-create-account-right {
-        margin-top: 30px;
-    }
     .new-create-account-left .owl-item .image-zoom-icon {
         top: 10px !important;
         right: 130px !important;
+    }
+    .new-create-account-left .rsvp-slider {
+        margin: 0px auto !important;
+    }
+    .new-create-account-right {
+        margin: 0px auto;
+        margin-top: 30px !important;
     }
 }
 
