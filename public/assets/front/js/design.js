@@ -3072,31 +3072,31 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-function drawCustomBorder(object) {
+function drawCustomBorder() {
     canvas.on("after:render", function () {
         var ctx = canvas.getContext("2d");
         ctx.save();
 
         canvas.forEachObject(function (obj) {
             if (obj.type === "textbox") {
+                let activeObj = canvas.getActiveObject();
 
-                if (canvas.getActiveObject() === obj) {
-                    console.log("object");
+                if (activeObj === obj) {
+                    console.log("Object selected");
                     // Selected: Solid blue border
                     ctx.strokeStyle = "#2DA9FC";
                     ctx.lineWidth = 2;
                     ctx.setLineDash([]);
                     setControlVisibilityForObject(obj);
-                    obj.setCoords();
                 } else {
-                    console.log("object not");
+                    console.log("Object not selected");
                     // Unselected: Dotted blue border
                     ctx.strokeStyle = "blue";
                     ctx.lineWidth = 2;
                     ctx.setLineDash([5, 5]);
                 }
 
-                // Draw border around text object
+                // Draw custom border
                 let bbox = obj.getBoundingRect();
                 ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
             }
@@ -3107,10 +3107,12 @@ function drawCustomBorder(object) {
 
     canvas.renderAll();
 }
+
+// Function to enable controls and styling
 function setControlVisibilityForObject(obj) {
     obj.setControlsVisibility({
-        mt: false,
-        mb: false,
+        mt: false, // Hide top-center control
+        mb: false, // Hide bottom-center control
         ml: true,
         mr: true,
         bl: true,
@@ -3120,19 +3122,32 @@ function setControlVisibilityForObject(obj) {
     });
 
     obj.set({
-        transparentCorners: false,
-        borderColor: "#2DA9FC", // Light blue border when selected
-        cornerSize: 10,
-        cornerColor: "#fff",
+        transparentCorners: false, // Make corners visible
+        borderColor: "#2DA9FC", // Light blue selection border
+        cornerSize: 12, // Increase corner size
+        cornerColor: "#fff", // White corner fill
+        cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
-        hasControls: true, // Ensure controls are enabled
+        hasControls: true, // Ensure object is resizable
         lockScalingFlip: true,
     });
 
     obj.setCoords();
-
+    canvas.renderAll();
 }
 
+// Ensure controls are updated when selection changes
+canvas.on("selection:created", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setControlVisibilityForObject(e.target);
+    }
+});
+
+canvas.on("selection:updated", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setControlVisibilityForObject(e.target);
+    }
+});
 
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
