@@ -14392,7 +14392,7 @@ class ApiControllerv2 extends Controller
             }
 
             $udpated = $resp['textElements'];
-            dd($udpated);
+          
             foreach ($udpated as $k => $value) {
                 
                 $udpated[$k]['fontWeight'] = (isset($value['fontWeight']) && $value['fontWeight'] != '') ? $value['fontWeight'] : 'normal';
@@ -14401,7 +14401,8 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['fontStyle'] = (isset($value['fontStyle']) && $value['fontStyle'] != '') ? $value['fontStyle'] : 'normal';
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing']) && $value['letterSpacing'] != '') ? (int)$value['letterSpacing'] : 0;
                 $udpated[$k]['underline'] = (isset($value['underline']) && ($value['underline'] == null ||$value['underline'] == "null") ) ? false : $value['underline'];
-
+                echo (isset($value['underline']) && ($value['underline'] == null ||$value['underline'] == "null") );
+                dd($udpated[$k]['underline']);
                 if ($udpated[$k]['text'] == null || $udpated[$k]['text'] == "") {
                     $udpated[$k]['text'] = "";
                     unset($udpated[$k]);
