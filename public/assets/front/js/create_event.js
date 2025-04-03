@@ -9095,7 +9095,9 @@ $(document).on("change", ".slider_photo", function (event) {
                 image_name: $(".photo-slider-1").attr("data-image"),
             });
         }
-        savePhotoSlider();
+        if(eventId==""){
+            savePhotoSlider();
+        }
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
@@ -9131,7 +9133,10 @@ $(document).on("change", ".slider_photo_2", function (event) {
 
             });
         }
-        savePhotoSlider();
+        if(eventId==""){
+            savePhotoSlider();
+        }
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
@@ -9164,7 +9169,10 @@ $(document).on("change", ".slider_photo_3", function (event) {
                 image_name: $(".photo-slider-3").data("image"),
             });
         }
-        savePhotoSlider();
+        if(eventId==""){
+            savePhotoSlider();
+        }
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
@@ -9442,6 +9450,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
     let save2 = savePage3Data(null, true);
+    savePhotoSlider();
     savePage4Data();
     if (save1 == 8 && save2 == 8) {
         updateEventData();

@@ -3523,7 +3523,7 @@ class EventController extends BaseController
         // dd($request);
         $imageSources = $request->imageSources;
         $i = 0;
-        if($request->eventId==null){
+        // if($request->eventId==null){
             foreach ($imageSources as $imageSource) {
                 if (!empty($imageSource['src'])) {
                     if (strpos($imageSource['src'], 'data:image') === 0) {
@@ -3563,7 +3563,7 @@ class EventController extends BaseController
                     ];
                 }
             }
-        }
+        // }
        
         //new
         if (empty($savedFiles)) {
