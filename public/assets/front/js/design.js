@@ -546,9 +546,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                            "drag" &&
+                                                "drag" &&
                                             event.transform.actionPerformed ===
-                                            undefined
+                                                undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -818,8 +818,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                    element.linethrough == "true" ||
-                                    element.linethrough == "True"
+                                element.linethrough == "true" ||
+                                element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -852,7 +852,6 @@ async function bindData(current_event_id) {
                     });
                     // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
-
 
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
@@ -970,7 +969,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                    undefined
+                                        undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1141,12 +1140,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                        defaultShape
+                                                            defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                            currentShapeIndex
+                                                                currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1159,10 +1158,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                "drag" &&
+                                                                    "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                undefined
+                                                                    undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1171,7 +1170,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                        currentShapeIndex
+                                                                            currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1183,7 +1182,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                currentShapeIndex
+                                                                    currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1343,8 +1342,6 @@ async function bindData(current_event_id) {
     // }
 
     //     // Function to select all textboxes on the canvas
-
-
 
     function selectAllTextBoxes() {
         if (!canvas) {
@@ -1643,7 +1640,7 @@ async function bindData(current_event_id) {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                        word.slice(1).toLowerCase() ===
+                            word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -1993,26 +1990,30 @@ async function bindData(current_event_id) {
         }
     }
 
-
     canvas.on("selection:created", function (e) {
         if (e.target && e.target.type === "textbox") {
-            updateColorPicker()
+            updateColorPicker();
             setCustomControls(e.target);
         }
         canvas.renderAll();
     });
+
+    // Re-draw the custom border only when deselected
     canvas.on("selection:cleared", function () {
         canvas.renderAll();
     });
-    canvas.on("after:render", drawCustomBorder);
 
+    // Ensure border is removed when selection changes
     canvas.on("selection:updated", function (e) {
         if (e.target && e.target.type === "textbox") {
-            updateColorPicker()
+            updateColorPicker();
             setCustomControls(e.target);
         }
         canvas.renderAll();
     });
+
+    // Reapply the border logic on render
+    canvas.on("after:render", drawCustomBorder);
     // Update color picker when object selection changes
     // canvas.on("selection:created", updateColorPicker);
     // canvas.on("selection:updated", updateColorPicker);
@@ -2049,7 +2050,7 @@ async function bindData(current_event_id) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) { };
+                reader.onload = function (e) {};
                 reader.readAsDataURL(file);
             }
         });
@@ -2443,18 +2444,18 @@ async function bindData(current_event_id) {
             return; // Do nothing
         }
         canvas.discardActiveObject();
-        var activeObject = canvas.getActiveObject();
-        console.log("mouse:up", activeObject);
-        if (!activeObject && !isSelectionTriggered) {
-            isSelectionTriggered = true; // Prevent re-triggering
+        // var activeObject = canvas.getActiveObject();
+        // console.log("mouse:up", activeObject);
+        // if (!activeObject && !isSelectionTriggered) {
+        //     isSelectionTriggered = true; // Prevent re-triggering
 
-            if (!canvas.getActiveObject()) {
-                isFirstClick = true; // Reset the flag
-                //    selectAllTextBoxes();
-                // drawCustomBorder();
-            }
-            isSelectionTriggered = false; // Reset after execution
-        }
+        //     if (!canvas.getActiveObject()) {
+        //         isFirstClick = true; // Reset the flag
+        //         //    selectAllTextBoxes();
+        //         // drawCustomBorder();
+        //     }
+        //     isSelectionTriggered = false; // Reset after execution
+        // }
         canvas.renderAll();
     });
 
@@ -2484,23 +2485,23 @@ async function bindData(current_event_id) {
     }
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
-        if (isFirstClick) {
-            isFirstClick = false; // Reset the flag
+        // if (isFirstClick) {
+        //     isFirstClick = false; // Reset the flag
 
-            // Get the click position relative to the canvas
-            const pointer = canvas.getPointer(options.e);
-            const { x, y } = pointer;
+        //     // Get the click position relative to the canvas
+        //     const pointer = canvas.getPointer(options.e);
+        //     const { x, y } = pointer;
 
-            // Log the initial click position
-            console.log("Initial click at:", x, y);
+        //     // Log the initial click position
+        //     console.log("Initial click at:", x, y);
 
-            // Set a timeout to simulate mouse events at the same position after 1 second
-            setTimeout(() => {
-                simulateMouseEvents(x, y);
-                // drawCustomBorder();
-                console.log("Simulated mouse events at:", x, y);
-            }, 200);
-        }
+        //     // Set a timeout to simulate mouse events at the same position after 1 second
+        //     setTimeout(() => {
+        //         simulateMouseEvents(x, y);
+        //         // drawCustomBorder();
+        //         console.log("Simulated mouse events at:", x, y);
+        //     }, 200);
+        // }
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
@@ -2520,21 +2521,20 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
-        var activeObject = canvas.getActiveObject();
-        console.log("mouse:up", activeObject);
-        // drawCustomBorder();
-        if (!activeObject && !isSelectionTriggered) {
-            isSelectionTriggered = true; // Prevent re-triggering
+        // var activeObject = canvas.getActiveObject();
+        // console.log("mouse:up", activeObject);
+        // // drawCustomBorder();
+        // if (!activeObject && !isSelectionTriggered) {
+        //     isSelectionTriggered = true; // Prevent re-triggering
 
-            setTimeout(() => {
-                if (!canvas.getActiveObject()) {
-                    isFirstClick = true; // Reset the flag
-                    //    selectAllTextBoxes();
-
-                }
-                isSelectionTriggered = false; // Reset after execution
-            }, 300); // Delay for proper selection
-        }
+        //     setTimeout(() => {
+        //         if (!canvas.getActiveObject()) {
+        //             isFirstClick = true; // Reset the flag
+        //             //    selectAllTextBoxes();
+        //         }
+        //         isSelectionTriggered = false; // Reset after execution
+        //     }, 300); // Delay for proper selection
+        // }
     });
     let lastEditedObject = null;
 
@@ -3101,30 +3101,37 @@ function drawCustomBorder() {
         if (obj.type === "textbox") {
             let bbox = obj.getBoundingRect();
 
-            // Default: Always show a dashed blue border
-            ctx.strokeStyle = "blue";
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+            // Show the border only if the textbox is NOT selected
+            if (!canvas.getActiveObjects().includes(obj)) {
+                ctx.strokeStyle = "#2DA9FC";
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+            }
         }
     });
 
     ctx.restore();
 }
-
-
 // Function to apply control styling (only when selected)
 function setCustomControls(obj) {
     obj.setControlsVisibility({
-        mt: false, mb: false, ml: true, mr: true, bl: true, br: true, tl: true, tr: true,
+        mt: false,
+        mb: false,
+        ml: true,
+        mr: true,
+        bl: true,
+        br: true,
+        tl: true,
+        tr: true,
     });
 
     obj.set({
-        transparentCorners: false, // Ensure corners are visible
-        borderColor: "#2DA9FC", // Light blue solid border for selected
-        cornerSize: 10, // Larger corners
-        cornerColor: "#fff", // White fill for corners
-        cornerStrokeColor: "#2DA9FC", // Blue outline for corners
+        transparentCorners: false,
+        borderColor: "#2DA9FC", // Solid blue border for selected
+        cornerSize: 10,
+        cornerColor: "#fff",
+        cornerStrokeColor: "#2DA9FC",
         cornerStyle: "circle",
         hasControls: true,
         lockScalingFlip: true,
@@ -3134,16 +3141,15 @@ function setCustomControls(obj) {
     canvas.requestRenderAll();
 }
 
-
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 async function getTextDataFromCanvas() {
     console.log("Before delay");
     getTextData = true;
-    deselectAllTextBoxes();
+    // deselectAllTextBoxes();
 
-    await delay(1000); // Wait for 1 second
+    // await delay(1000); // Wait for 1 second
     console.log("Executed after 1 second");
     // $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
@@ -3306,7 +3312,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) { },
+        error: function (xhr, status, error) {},
     });
 }
 function isJSON(str) {
