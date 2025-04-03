@@ -3979,22 +3979,13 @@ $(document).on("click", "#close_createEvent", async function (e) {
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
-    if (firstLetter1 == "1") {
+    if (firstLetter1 === "1") {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-
-
     }
-    else if (firstLetter1 === "1" && event_name && start_time && start_event_date) {
-        apiCalled = false;
-        $("#draftModel").modal("show");
-        return;
-    }else if (
-        firstLetter1 == "2" ||
-        firstLetter1 == "3" ||
-        firstLetter1 == "4"
-    ) {
+
+    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
