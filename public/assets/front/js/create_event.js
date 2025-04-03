@@ -9091,6 +9091,7 @@ $(document).on("change", ".slider_photo", function (event) {
                 src: $(".photo-slider-1").attr("src"),
                 deleteId: $(".photo-slider-1").data("delete"),
                 image_position: $(".photo-slider-1").data("delete"),
+                image_name: $(".photo-slider-1").data("image"),
             });
         }
         savePhotoSlider();
@@ -9125,6 +9126,8 @@ $(document).on("change", ".slider_photo_2", function (event) {
                 src: $(".photo-slider-2").attr("src"),
                 deleteId: $(".photo-slider-2").data("delete"),
                 image_position: $(".photo-slider-2").data("delete"),
+                image_name: $(".photo-slider-2").data("image"),
+
             });
         }
         savePhotoSlider();
@@ -9157,6 +9160,7 @@ $(document).on("change", ".slider_photo_3", function (event) {
                 src: $(".photo-slider-3").attr("src"),
                 deleteId: $(".photo-slider-3").data("delete"),
                 image_position: $(".photo-slider-3").data("delete"),
+                image_name: $(".photo-slider-3").data("image"),
             });
         }
         savePhotoSlider();
@@ -9218,6 +9222,7 @@ function getLengthofSliderImage() {
     $(".slider_image_count").text(i + "/3 Photos");
 }
 function savePhotoSlider(){
+
     if (imageSources.length > 0) {
         $("#loader").css("display", "flex");
         var event = $("#eventID").val();
@@ -9273,6 +9278,9 @@ function savePhotoSlider(){
         });
     }
 }
+// $(document).on("click",'.save-slider-image',function(){
+//     savePhotoSlider();
+// }); 
 // $(document).on("click", ".save-slider-image", function () {
 //     var imageSources = [];
 //     var imagenames = [];
