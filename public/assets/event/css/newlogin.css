@@ -109,6 +109,9 @@
     padding-top: 30px;
 }
 
+.new-create-account-form {
+    max-width: 100% !important;
+}
 .new-create-account-form h5 {
     font-family: var(--SFProDisplay-Semibold);
     font-size: 20px;
