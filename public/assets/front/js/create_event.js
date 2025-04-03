@@ -9060,98 +9060,100 @@ function searchRecords(lim, off, type, search = null) {
 
 
 //old_slider_image
-        // $(document).on("change", ".slider_photo", function (event) {
-        //     var file = event.target.files[0]; // Get the first file (the selected image)
-        //     if (file) {
-        //         var reader = new FileReader();
-        //         reader.onload = function (e) {
-        //             $(".photo-slider-1").attr("src", e.target.result).show();
-        //             $(".photo-slider-1").attr("data-image", "");
-        //         };
-        //         reader.readAsDataURL(file);
-        //         $(".photo-edit-delete-1").show();
-        //         $(".design-sidebar").addClass("d-none");
-        //         $(".design-sidebar_7").removeClass("d-none");
-        //         $("#sidebar").addClass("design-sidebar_7");
-        //         $(".close-btn").attr("data-id", "design-sidebar_7");
-        //     }
-        //     setTimeout(() => {
+        $(document).on("change", ".slider_photo", function (event) {
+            var file = event.target.files[0]; // Get the first file (the selected image)
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(".photo-slider-1").attr("src", e.target.result).show();
+                    $(".photo-slider-1").attr("data-image", "");
+                };
+                reader.readAsDataURL(file);
+                $(".photo-edit-delete-1").show();
+                $(".design-sidebar").addClass("d-none");
+                $(".design-sidebar_7").removeClass("d-none");
+                $("#sidebar").addClass("design-sidebar_7");
+                $(".close-btn").attr("data-id", "design-sidebar_7");
+            }
+            setTimeout(() => {
 
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
+                getLengthofSliderImage();
+            }, 500);
+        });
 
-        // $(document).on("change", ".slider_photo_2", function (event) {
-        //     var file = event.target.files[0];
-        //     if (file) {
-        //         $(".photo-slider-2").show();
-        //         var reader = new FileReader();
-        //         $(".photo-edit-delete-2").show();
-        //         reader.onload = function (e) {
-        //             $(".photo-slider-2").attr("src", e.target.result).show();
-        //             $(".photo-slider-2").attr("data-image", "");
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
-        // $(document).on("change", ".slider_photo_3", function (event) {
-        //     var file = event.target.files[0];
-        //     if (file) {
-        //         $(".photo-slider-3").show();
-        //         $(".photo-edit-delete-3").show();
-        //         var reader = new FileReader();
-        //         reader.onload = function (e) {
-        //             $(".photo-slider-3").attr("src", e.target.result).show();
-        //             $(".photo-slider-3").attr("data-image", "");
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        //     setTimeout(() => {
-        //         getLengthofSliderImage();
-        //     }, 500);
-        // });
+        $(document).on("change", ".slider_photo_2", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                $(".photo-slider-2").show();
+                var reader = new FileReader();
+                $(".photo-edit-delete-2").show();
+                reader.onload = function (e) {
+                    $(".photo-slider-2").attr("src", e.target.result).show();
+                    $(".photo-slider-2").attr("data-image", "");
+                };
+                reader.readAsDataURL(file);
+            }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
+        });
+        $(document).on("change", ".slider_photo_3", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                $(".photo-slider-3").show();
+                $(".photo-edit-delete-3").show();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(".photo-slider-3").attr("src", e.target.result).show();
+                    $(".photo-slider-3").attr("data-image", "");
+                };
+                reader.readAsDataURL(file);
+            }
+            setTimeout(() => {
+                getLengthofSliderImage();
+            }, 500);
+        });
 //old_slider_image
 
 
 //new_slider_image
 
-$(document).on("change", ".slider_photo, .slider_photo_2, .slider_photo_3", function (event) {
-    var file = event.target.files[0];
-    var inputClass = $(this).attr("class"); // Get the input class
-    var imageClass = "";
-    var deleteClass = "";
+// $(document).on("change", ".slider_photo, .slider_photo_2, .slider_photo_3", function (event) {
+//     var file = event.target.files[0];
+//     var inputClass = $(this).attr("class"); // Get the input class
+//     var imageClass = "";
+//     var deleteClass = "";
 
-    if (inputClass.includes("slider_photo")) {
-        imageClass = ".photo-slider-1";
-        deleteClass = ".photo-edit-delete-1";
-    }
-    if (inputClass.includes("slider_photo_2")) {
-        imageClass = ".photo-slider-2";
-        deleteClass = ".photo-edit-delete-2";
-    }
-    if (inputClass.includes("slider_photo_3")) {
-        imageClass = ".photo-slider-3";
-        deleteClass = ".photo-edit-delete-3";
-    }
+//     if (inputClass.includes("slider_photo")) {
+//         imageClass = ".photo-slider-1";
+//         deleteClass = ".photo-edit-delete-1";
+//         sidebarClass = "design-sidebar_7";
 
-    if (file) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(imageClass).attr("src", e.target.result).show();
-            $(imageClass).attr("data-image", file.name);
-            $(deleteClass).show();
-            uploadSliderImage(file, imageClass);
-        };
-        reader.readAsDataURL(file);
-    }
+//     }
+//     if (inputClass.includes("slider_photo_2")) {
+//         imageClass = ".photo-slider-2";
+//         deleteClass = ".photo-edit-delete-2";
+//     }
+//     if (inputClass.includes("slider_photo_3")) {
+//         imageClass = ".photo-slider-3";
+//         deleteClass = ".photo-edit-delete-3";
+//     }
 
-    setTimeout(() => {
-        getLengthofSliderImage();
-    }, 500);
-});
+//     if (file) {
+//         var reader = new FileReader();
+//         reader.onload = function (e) {
+//             $(imageClass).attr("src", e.target.result).show();
+//             $(imageClass).attr("data-image", file.name);
+//             $(deleteClass).show();
+//             uploadSliderImage(file, imageClass);
+//         };
+//         reader.readAsDataURL(file);
+//     }
+
+//     setTimeout(() => {
+//         getLengthofSliderImage();
+//     }, 500);
+// });
 
 //new_slider_image
 
