@@ -14399,6 +14399,8 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['textAlign'] = (isset($value['textAlign']) && $value['textAlign'] != '') ? $value['textAlign'] : 'center';
                 $udpated[$k]['fontStyle'] = (isset($value['fontStyle']) && $value['fontStyle'] != '') ? $value['fontStyle'] : 'normal';
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing']) && $value['letterSpacing'] != '') ? (int)$value['letterSpacing'] : 0;
+                $udpated[$k]['underline'] = (isset($value['underline']) && $value['underline'] == null) ? false : $value['underline'];
+
                 if ($udpated[$k]['text'] == null || $udpated[$k]['text'] == "") {
                     $udpated[$k]['text'] = "";
                     unset($udpated[$k]);
