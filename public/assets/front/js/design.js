@@ -3074,30 +3074,37 @@ function deselectAllTextBoxes() {
 }
 // Function to set border and controls when object is selected
 function drawCustomBorder() {
-    let ctx = canvas.getContext("2d");
-    ctx.save();
+    canvas.on("after:render", function () {
+        var ctx = canvas.getContext("2d");
+        ctx.save();
 
-    canvas.forEachObject(function (obj) {
-        if (obj.type === "textbox") {
-            let bbox = obj.getBoundingRect();
+        canvas.forEachObject(function (obj) {
+            if (obj.type === "textbox") {
+                let activeObj = canvas.getActiveObject();
 
-            // Always show dashed blue border (even if selected)
-            ctx.strokeStyle = "blue";
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+                if (canvas.getActiveObject() === obj) {
+                    console.log("Object selected");
+                    ctx.setLineDash([]);
+                    setCustomControls(obj);
+                } else {
+                    console.log("Object not selected");
+                    // Unselected: Dotted blue border
+                    ctx.strokeStyle = "blue";
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                }
 
-            if (canvas.getActiveObject() === obj) {
-                console.log("Object selected");
-                // Apply Fabric.js selection controls (solid blue + white circular corners)
-                setCustomControls(obj);
+                // Draw custom border
+                let bbox = obj.getBoundingRect();
+                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
             }
-        }
+        });
+
+        ctx.restore();
     });
 
-    ctx.restore();
+    canvas.renderAll();
 }
-
 
 // Function to apply control styling (only when selected)
 function setCustomControls(obj) {
@@ -3108,7 +3115,7 @@ function setCustomControls(obj) {
     obj.set({
         transparentCorners: false, // Ensure corners are visible
         borderColor: "#2DA9FC", // Light blue solid border for selected
-        cornerSize: 12, // Larger corners
+        cornerSize: 10, // Larger corners
         cornerColor: "#fff", // White fill for corners
         cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
@@ -3120,7 +3127,24 @@ function setCustomControls(obj) {
     canvas.requestRenderAll();
 }
 
+// Event listener when an object is selected
+canvas.on("selection:created", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setCustomControls(e.target);
+    }
+});
 
+// When selection is updated (e.g., switching objects)
+canvas.on("selection:updated", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setCustomControls(e.target);
+    }
+});
+
+// When selection is cleared (deselecting all objects)
+canvas.on("selection:cleared", function () {
+    canvas.requestRenderAll(); // Ensures the dashed border remains
+});
 
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
