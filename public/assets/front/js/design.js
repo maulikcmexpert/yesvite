@@ -3075,7 +3075,7 @@ function deselectAllTextBoxes() {
 function drawCustomBorder(object) {
     canvas.on("after:render", function () {
         var ctx = canvas.getContext("2d");
-        ctx.save();
+        // ctx.save();
 
         canvas.forEachObject(function (obj) {
             if (obj.type === "textbox") {
@@ -3094,6 +3094,7 @@ function drawCustomBorder(object) {
                         strokeUniform: true,
                         stroke: "#2DA9FC", // Solid border
                     });
+                    ctx.setLineDash([]);
                     obj.setCoords();
                 } else {
                     console.log("object not");
