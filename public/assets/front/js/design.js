@@ -2477,7 +2477,7 @@ async function bindData(current_event_id) {
             // Set a timeout to simulate mouse events at the same position after 1 second
             setTimeout(() => {
                 simulateMouseEvents(x, y);
-                drawCustomBorder();
+                // drawCustomBorder();
                 console.log("Simulated mouse events at:", x, y);
             }, 200);
         }
@@ -2502,7 +2502,7 @@ async function bindData(current_event_id) {
         discardIfMultipleObjects(options);
         var activeObject = canvas.getActiveObject();
         console.log("mouse:up", activeObject);
-        drawCustomBorder();
+        // drawCustomBorder();
         if (!activeObject && !isSelectionTriggered) {
             isSelectionTriggered = true; // Prevent re-triggering
 
