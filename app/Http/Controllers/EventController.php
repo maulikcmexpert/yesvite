@@ -3522,6 +3522,7 @@ class EventController extends BaseController
     {
         // dd($request);
         $imageSources = $request->imageSources;
+        $event_id = $request->eventId;
         $i = 0;
         // if($request->eventId==null){
             foreach ($imageSources as $imageSource) {
@@ -3531,6 +3532,10 @@ class EventController extends BaseController
                             $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
                             if (file_exists($filePath)) {
                                 unlink($filePath);
+                            }
+
+                            if($event_id!=""){
+                                $getEventImages = EventImage::where(['event_id' => $event_id, 'image' => $imageSource['image_name']])->delete();
                             }
                         }
                         // Base64 image
