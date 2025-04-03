@@ -3115,9 +3115,9 @@ function setCustomControls(obj) {
     obj.set({
         transparentCorners: false, // Ensure corners are visible
         borderColor: "#2DA9FC", // Light blue solid border for selected
-        cornerSize: 12, // Larger corners
+        cornerSize: 10, // Larger corners
         cornerColor: "#fff", // White fill for corners
-        cornerStrokeColor: "#2DA9FC", // Blue outline for corners
+
         cornerStyle: "circle",
         hasControls: true,
         lockScalingFlip: true,
