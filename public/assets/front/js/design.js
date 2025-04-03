@@ -894,14 +894,14 @@ async function bindData(current_event_id) {
                 }
                 function setControlVisibilityForObject(obj) {
                     obj.setControlsVisibility({
-                        mt: false,
-                        mb: false,
-                        bl: true,
-                        br: true,
-                        tl: true,
-                        tr: true,
-                        ml: true,
-                        mr: true,
+                        mt: false, // Hide middle top
+                        mb: false, // Hide middle bottom
+                        bl: true,  // Show bottom left
+                        br: true,  // Show bottom right
+                        tl: true,  // Show top left
+                        tr: true,  // Show top right
+                        ml: true,  // Show middle left
+                        mr: true,  // Show middle right
                     });
 
                     obj.set({
@@ -913,6 +913,7 @@ async function bindData(current_event_id) {
                     });
 
                     obj.setCoords();
+                    canvas.renderAll(); // 🔹 Ensure changes are applied
                 }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
