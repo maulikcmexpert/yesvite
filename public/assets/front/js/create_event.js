@@ -9060,6 +9060,8 @@ function searchRecords(lim, off, type, search = null) {
 
 
 //old_slider_image
+var imageSources = [];
+var imagenames = [];
         $(document).on("change", ".slider_photo", function (event) {
             var file = event.target.files[0]; // Get the first file (the selected image)
             if (file) {
@@ -9074,6 +9076,15 @@ function searchRecords(lim, off, type, search = null) {
                 $(".design-sidebar_7").removeClass("d-none");
                 $("#sidebar").addClass("design-sidebar_7");
                 $(".close-btn").attr("data-id", "design-sidebar_7");
+
+                // var image1;
+                imageSources.push({
+                    src: $('.photo-slider-1').attr("src"),
+                    deleteId: $('.photo-slider-1').data("delete"),
+                    image_position: $('.photo-slider-1').data("delete"),
+                });   
+                
+                console.log(imageSources);
             }
             setTimeout(() => {
 
