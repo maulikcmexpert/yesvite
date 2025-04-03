@@ -861,12 +861,12 @@ async function bindData(current_event_id) {
                             if (obj.type === "textbox") {
                                 if (canvas.getActiveObject() === obj) {
                                     // Selected: Solid blue border
-                                    ctx.strokeStyle = "#2DA9FC";
-                                    ctx.lineWidth = 2;
-                                    // ctx.cornerSize = 10,
-                                    // ctx.cornerColor ="#fff",
-                                    // ctx.cornerStyle ="circle",
-                                    ctx.setLineDash([]);
+                                    // ctx.strokeStyle = "#2DA9FC";
+                                    // ctx.lineWidth = 2;
+                                    // // ctx.cornerSize = 10,
+                                    // // ctx.cornerColor ="#fff",
+                                    // // ctx.cornerStyle ="circle",
+                                    // ctx.setLineDash([]);
 
                                     obj.set({
                                         borderColor: "#2DA9FC",
