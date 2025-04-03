@@ -3072,77 +3072,78 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-function drawCustomBorder() {
-    canvas.on("after:render", function () {
-        var ctx = canvas.getContext("2d");
-        ctx.save();
+// Function to set border and controls when object is selected
+function setCustomBorder(obj) {
+    if (!obj) return;
 
-        canvas.forEachObject(function (obj) {
-            if (obj.type === "textbox") {
-                let activeObj = canvas.getActiveObject();
-
-                if (activeObj === obj) {
-                    console.log("Object selected");
-                    // Selected: Solid blue border
-                    ctx.strokeStyle = "#2DA9FC";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([]);
-                    setControlVisibilityForObject(obj);
-                } else {
-                    console.log("Object not selected");
-                    // Unselected: Dotted blue border
-                    ctx.strokeStyle = "blue";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]);
-                }
-
-                // Draw custom border
-                let bbox = obj.getBoundingRect();
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
-            }
-        });
-
-        ctx.restore();
-    });
-
-    canvas.renderAll();
-}
-
-// Function to enable controls and styling
-function setControlVisibilityForObject(obj) {
+    // Apply custom control styles
     obj.setControlsVisibility({
-        mt: false, // Hide top-center control
-        mb: false, // Hide bottom-center control
-        ml: true,
-        mr: true,
-        bl: true,
-        br: true,
-        tl: true,
-        tr: true,
+        mt: false, mb: false, ml: true, mr: true, bl: true, br: true, tl: true, tr: true,
     });
 
     obj.set({
         transparentCorners: false, // Make corners visible
         borderColor: "#2DA9FC", // Light blue selection border
-        cornerSize: 12, // Increase corner size
-        cornerColor: "#fff", // White corner fill
+        cornerSize: 12, // Larger corners for visibility
+        cornerColor: "#fff", // White fill for corners
         cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
-        hasControls: true, // Ensure object is resizable
+        hasControls: true,
         lockScalingFlip: true,
     });
 
     obj.setCoords();
-    canvas.renderAll();
+    canvas.requestRenderAll(); // Prevent infinite loop by only rendering once
 }
 
-// Ensure controls are updated when selection changes
+// Function to draw border when selection changes
+function drawCustomBorder() {
+    let activeObj = canvas.getActiveObject();
+    let ctx = canvas.getContext("2d");
+
+    ctx.save();
+    canvas.forEachObject(function (obj) {
+        if (obj.type === "textbox") {
+            if (activeObj === obj) {
+                console.log("Object selected");
+                ctx.strokeStyle = "#2DA9FC"; // Solid border for selected object
+                ctx.lineWidth = 2;
+                ctx.setLineDash([]);
+                setCustomBorder(obj); // Apply control styles instantly
+            } else {
+                console.log("Object not selected");
+                ctx.strokeStyle = "blue"; // Dotted border for unselected objects
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+            }
+
+            let bbox = obj.getBoundingRect();
+            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+        }
+    });
+
+    ctx.restore();
+}
+
+// Apply custom border when selection changes
 canvas.on("selection:created", function (e) {
     if (e.target && e.target.type === "textbox") {
-        setControlVisibilityForObject(e.target);
+        setCustomBorder(e.target);
+        drawCustomBorder();
     }
 });
 
+canvas.on("selection:updated", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setCustomBorder(e.target);
+        drawCustomBorder();
+    }
+});
+
+// Ensure border updates when selection is cleared
+canvas.on("selection:cleared", function () {
+    canvas.renderAll();
+});
 
 
 
