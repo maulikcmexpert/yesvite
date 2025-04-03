@@ -3964,6 +3964,10 @@ $(document).on("click", "#close_createEvent", async function (e) {
     $(".dropdown-menu").removeClass("show");
 
     var temp_id = eventData.temp_id;
+
+    var event_name = $("#event-name").val();
+    var start_time = $("#start-time").val();
+    var start_event_date = $("#start-event-date").val();
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#designModel").modal("show");
@@ -3977,7 +3981,14 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-    } else if (
+
+
+    }
+    else if (firstLetter1 === "1" && event_name && start_time && start_event_date) {
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+    }else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
@@ -3989,9 +4000,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
     console.log(11);
 
     var event_type = $("#event-type").val();
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_event_date = $("#start-event-date").val();
+
+
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
     console.log(design);
@@ -9260,7 +9270,7 @@ function savePhotoSlider(){
                 }
 
                 savedImages.forEach((image, index) => {
-                    var selector = `.photo-slider-${index+1}`; 
+                    var selector = `.photo-slider-${index+1}`;
                     $(selector).attr("data-image", image.fileName);
                 });
                 eventData.slider_images = []; // Empty the array
@@ -9281,7 +9291,7 @@ function savePhotoSlider(){
 }
 // $(document).on("click",'.save-slider-image',function(){
 //     savePhotoSlider();
-// }); 
+// });
 // $(document).on("click", ".save-slider-image", function () {
 //     var imageSources = [];
 //     var imagenames = [];
