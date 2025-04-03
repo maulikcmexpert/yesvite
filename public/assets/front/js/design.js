@@ -1993,9 +1993,29 @@ async function bindData(current_event_id) {
         }
     }
 
+
+    canvas.on("selection:created", function (e) {
+        if (e.target && e.target.type === "textbox") {
+            updateColorPicker()
+            setCustomControls(e.target);
+        }
+        canvas.renderAll();
+    });
+    canvas.on("selection:cleared", function () {
+        canvas.renderAll();
+    });
+    canvas.on("after:render", drawCustomBorder);
+
+    canvas.on("selection:updated", function (e) {
+        if (e.target && e.target.type === "textbox") {
+            updateColorPicker()
+            setCustomControls(e.target);
+        }
+        canvas.renderAll();
+    });
     // Update color picker when object selection changes
-    canvas.on("selection:created", updateColorPicker);
-    canvas.on("selection:updated", updateColorPicker);
+    // canvas.on("selection:created", updateColorPicker);
+    // canvas.on("selection:updated", updateColorPicker);
 
     let hasMoved = false; // 🛑 Prevent multiple undo entries for a single move
 
@@ -3074,37 +3094,24 @@ function deselectAllTextBoxes() {
 }
 // Function to set border and controls when object is selected
 function drawCustomBorder() {
-    canvas.on("after:render", function () {
-        var ctx = canvas.getContext("2d");
-        ctx.save();
+    let ctx = canvas.getContext("2d");
+    ctx.save();
 
-        canvas.forEachObject(function (obj) {
-            if (obj.type === "textbox") {
-                let activeObj = canvas.getActiveObject();
+    canvas.forEachObject(function (obj) {
+        if (obj.type === "textbox") {
+            let bbox = obj.getBoundingRect();
 
-                if (canvas.getActiveObject() === obj) {
-                    console.log("Object selected");
-                    ctx.setLineDash([]);
-                    setCustomControls(obj);
-                } else {
-                    console.log("Object not selected");
-                    // Unselected: Dotted blue border
-                    ctx.strokeStyle = "blue";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]);
-                }
-
-                // Draw custom border
-                let bbox = obj.getBoundingRect();
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
-            }
-        });
-
-        ctx.restore();
+            // Default: Always show a dashed blue border
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+        }
     });
 
-    canvas.renderAll();
+    ctx.restore();
 }
+
 
 // Function to apply control styling (only when selected)
 function setCustomControls(obj) {
