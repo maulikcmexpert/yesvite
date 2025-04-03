@@ -3073,18 +3073,44 @@ function deselectAllTextBoxes() {
     canvas.requestRenderAll();
 }
 // Function to set border and controls when object is selected
-function setCustomBorder(obj) {
-    if (!obj) return;
+function drawCustomBorder() {
+    let ctx = canvas.getContext("2d");
+    ctx.save();
 
-    // Apply custom control styles
+    canvas.forEachObject(function (obj) {
+        if (obj.type === "textbox") {
+            let activeObj = canvas.getActiveObject();
+
+            if (activeObj === obj) {
+                console.log("Object selected");
+                // Fabric.js default selection border (solid)
+                setCustomControls(obj);
+            } else {
+                console.log("Object not selected");
+                // Draw dashed blue border for unselected objects
+                ctx.strokeStyle = "blue";
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+
+                let bbox = obj.getBoundingRect();
+                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+            }
+        }
+    });
+
+    ctx.restore();
+}
+
+// Function to apply control styling (only when selected)
+function setCustomControls(obj) {
     obj.setControlsVisibility({
         mt: false, mb: false, ml: true, mr: true, bl: true, br: true, tl: true, tr: true,
     });
 
     obj.set({
-        transparentCorners: false, // Make corners visible
-        borderColor: "#2DA9FC", // Light blue selection border
-        cornerSize: 12, // Larger corners for visibility
+        transparentCorners: false, // Ensure corners are visible
+        borderColor: "#2DA9FC", // Light blue solid border for selected
+        cornerSize: 12, // Larger corners
         cornerColor: "#fff", // White fill for corners
         cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
@@ -3093,57 +3119,28 @@ function setCustomBorder(obj) {
     });
 
     obj.setCoords();
-    canvas.requestRenderAll(); // Prevent infinite loop by only rendering once
+    canvas.requestRenderAll();
 }
 
-// Function to draw border when selection changes
-function drawCustomBorder() {
-    let activeObj = canvas.getActiveObject();
-    let ctx = canvas.getContext("2d");
-
-    ctx.save();
-    canvas.forEachObject(function (obj) {
-        if (obj.type === "textbox") {
-            if (activeObj === obj) {
-                console.log("Object selected");
-                ctx.strokeStyle = "#2DA9FC"; // Solid border for selected object
-                ctx.lineWidth = 2;
-                ctx.setLineDash([]);
-                setCustomBorder(obj); // Apply control styles instantly
-            } else {
-                console.log("Object not selected");
-                ctx.strokeStyle = "blue"; // Dotted border for unselected objects
-                ctx.lineWidth = 2;
-                ctx.setLineDash([5, 5]);
-            }
-
-            let bbox = obj.getBoundingRect();
-            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
-        }
-    });
-
-    ctx.restore();
-}
-
-// Apply custom border when selection changes
-// canvas.on("selection:created", function (e) {
-//     if (e.target && e.target.type === "textbox") {
-//         setCustomBorder(e.target);
-//         drawCustomBorder();
-//     }
-// });
-
-// canvas.on("selection:updated", function (e) {
-//     if (e.target && e.target.type === "textbox") {
-//         setCustomBorder(e.target);
-//         drawCustomBorder();
-//     }
-// });
-
-// Ensure border updates when selection is cleared
-canvas.on("selection:cleared", function () {
-    canvas.renderAll();
+// Event listeners to update border when selection changes
+canvas.on("selection:created", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setCustomControls(e.target);
+    }
+    drawCustomBorder(); // Ensure unselected objects get a dashed border
 });
+
+canvas.on("selection:updated", function (e) {
+    if (e.target && e.target.type === "textbox") {
+        setCustomControls(e.target);
+    }
+    drawCustomBorder();
+});
+
+canvas.on("selection:cleared", function () {
+    drawCustomBorder(); // Restore dashed border for all textboxes when selection is cleared
+});
+;
 
 
 
