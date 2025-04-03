@@ -9112,6 +9112,22 @@ $(document).on("change", ".slider_photo_2", function (event) {
         reader.readAsDataURL(file);
     }
     setTimeout(() => {
+        var imagePosition2 = 2;
+        var existingIndex2 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition2
+        );
+        if (existingIndex2 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-2").attr("src"),
+                deleteId: $(".photo-slider-2").data("delete"),
+                image_position: $(".photo-slider-2").data("delete"),
+            });
+        }
+        savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
@@ -9128,6 +9144,22 @@ $(document).on("change", ".slider_photo_3", function (event) {
         reader.readAsDataURL(file);
     }
     setTimeout(() => {
+        var imagePosition3 = 3;
+        var existingIndex3 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition3
+        );
+        if (existingIndex3 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-3").attr("src"),
+                deleteId: $(".photo-slider-3").data("delete"),
+                image_position: $(".photo-slider-3").data("delete"),
+            });
+        }
+        savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
