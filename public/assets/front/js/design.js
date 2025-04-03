@@ -3127,27 +3127,24 @@ function setCustomControls(obj) {
     canvas.requestRenderAll();
 }
 
-// Event listeners to update border when selection changes
+// Event listener when an object is selected
 canvas.on("selection:created", function (e) {
     if (e.target && e.target.type === "textbox") {
         setCustomControls(e.target);
     }
-    drawCustomBorder(); // Ensure unselected objects get a dashed border
 });
 
+// When selection is updated (e.g., switching objects)
 canvas.on("selection:updated", function (e) {
     if (e.target && e.target.type === "textbox") {
         setCustomControls(e.target);
     }
-    drawCustomBorder();
 });
 
+// When selection is cleared (deselecting all objects)
 canvas.on("selection:cleared", function () {
-    drawCustomBorder(); // Restore dashed border for all textboxes when selection is cleared
+    canvas.requestRenderAll(); // Ensures the dashed border remains
 });
-;
-
-
 
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
