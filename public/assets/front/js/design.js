@@ -3101,8 +3101,8 @@ function drawCustomBorder() {
         if (obj.type === "textbox") {
             let bbox = obj.getBoundingRect();
 
-            // If the object is NOT selected, show the dashed blue border
-            if (!obj.active) {
+            // Show the border only if the textbox is NOT selected
+            if (!canvas.getActiveObjects().includes(obj)) {
                 ctx.strokeStyle = "blue";
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5, 5]);
@@ -3128,7 +3128,7 @@ function setCustomControls(obj) {
 
     obj.set({
         transparentCorners: false,
-        borderColor: "#2DA9FC", // Light blue solid border for selected
+        borderColor: "#2DA9FC", // Solid blue border for selected
         cornerSize: 10,
         cornerColor: "#fff",
         cornerStrokeColor: "#2DA9FC",
