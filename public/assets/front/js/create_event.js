@@ -3968,6 +3968,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_name = $("#event-name").val();
     var start_time = $("#start-time").val();
     var start_event_date = $("#start-event-date").val();
+    console.log(event_name,start_time,start_event_date);
+
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#designModel").modal("show");
