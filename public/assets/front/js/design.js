@@ -876,6 +876,7 @@ async function bindData(current_event_id) {
 
                                 // Get object bounding box
                                 var bbox = object.getBoundingRect();
+                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
                                 ctx.strokeRect(
                                     bbox.left,
                                     bbox.top,
@@ -906,7 +907,7 @@ async function bindData(current_event_id) {
                         transparentCorners: false,
                         borderColor: "#2DA9FC", // Light blue border when selected
                         cornerSize: 10,
-                        cornerColor: "#fff",
+                        cornerColor: "#fff", // White circular corners
                         cornerStyle: "circle",
                     });
 
@@ -2485,7 +2486,7 @@ async function bindData(current_event_id) {
 
             if (!canvas.getActiveObject()) {
                 isFirstClick = true; // Reset the flag
-               // selectAllTextBoxes();
+               selectAllTextBoxes();
             }
             isSelectionTriggered = false; // Reset after execution
         }
@@ -2561,7 +2562,7 @@ async function bindData(current_event_id) {
             setTimeout(() => {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
-                 //   selectAllTextBoxes();
+                   selectAllTextBoxes();
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
