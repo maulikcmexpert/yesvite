@@ -3126,19 +3126,19 @@ function drawCustomBorder() {
 }
 
 // Apply custom border when selection changes
-canvas.on("selection:created", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setCustomBorder(e.target);
-        drawCustomBorder();
-    }
-});
+// canvas.on("selection:created", function (e) {
+//     if (e.target && e.target.type === "textbox") {
+//         setCustomBorder(e.target);
+//         drawCustomBorder();
+//     }
+// });
 
-canvas.on("selection:updated", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setCustomBorder(e.target);
-        drawCustomBorder();
-    }
-});
+// canvas.on("selection:updated", function (e) {
+//     if (e.target && e.target.type === "textbox") {
+//         setCustomBorder(e.target);
+//         drawCustomBorder();
+//     }
+// });
 
 // Ensure border updates when selection is cleared
 canvas.on("selection:cleared", function () {
