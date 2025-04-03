@@ -3103,7 +3103,7 @@ function drawCustomBorder() {
 
             // Show the border only if the textbox is NOT selected
             if (!canvas.getActiveObjects().includes(obj)) {
-                ctx.strokeStyle = "blue";
+                ctx.strokeStyle = "#2DA9FC";
                 ctx.lineWidth = 1;
                 ctx.setLineDash([5, 5]);
                 ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
