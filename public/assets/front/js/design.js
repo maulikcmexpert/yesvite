@@ -3083,15 +3083,17 @@ function drawCustomBorder(object) {
                 if (canvas.getActiveObject() === obj) {
                     console.log("object");
                     // Selected: Solid blue border
-                    ctx.strokeStyle = "#2DA9FC";
-                    ctx.lineWidth = 2;
-
-                    ctx.setLineDash([]);
-
-
-
-
-                    setControlVisibilityForObject(obj);
+                    obj.set({
+                        borderColor: "#2DA9FC", // Light blue when selected
+                        cornerSize: 10,
+                        cornerColor: "#fff", // White resize controls
+                        cornerStyle: "circle",
+                        transparentCorners: false,
+                        hasControls: true,
+                        strokeWidth: 2,
+                        strokeUniform: true,
+                        stroke: "#2DA9FC", // Solid border
+                    });
                     obj.setCoords();
                 } else {
                     console.log("object not");
