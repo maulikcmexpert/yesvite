@@ -862,7 +862,8 @@ async function bindData(current_event_id) {
                                 if (canvas.getActiveObject() === object) {
                                     ctx.strokeStyle = "#2DA9FC"; // White for selected
                                     ctx.cornerColor = "#fff"; // White for selected
-                                    ctx.cornerSize = 10; // White for selected
+                                    ctx.cornerSize = 10;
+                                    ctx.cornerStyle= "circle",// White for selected
                                     ctx.lineWidth = 2;
                                     ctx.setLineDash([]); // Solid line
 
@@ -876,7 +877,7 @@ async function bindData(current_event_id) {
 
                                 // Get object bounding box
                                 var bbox = object.getBoundingRect();
-                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+
                                 ctx.strokeRect(
                                     bbox.left,
                                     bbox.top,
@@ -907,7 +908,7 @@ async function bindData(current_event_id) {
                         transparentCorners: false,
                         borderColor: "#2DA9FC", // Light blue border when selected
                         cornerSize: 10,
-                        cornerColor: "#fff", // White circular corners
+                        cornerColor: "#fff",
                         cornerStyle: "circle",
                     });
 
