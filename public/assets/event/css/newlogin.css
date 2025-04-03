@@ -29,7 +29,8 @@
     padding: 24px;
     position: relative;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
-    max-width: 100%;
+    max-width: 600px;
+    margin-left: auto;
 }
 
 .new-create-account-left .rsvp-slider img {
@@ -107,6 +108,7 @@
     -o-border-radius: 20px;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
     padding-top: 30px;
+    max-width: 600px;
 }
 
 .new-create-account-form {
