@@ -3088,7 +3088,7 @@ function drawCustomBorder(object) {
                     ctx.cornerSize = 10,
                     ctx.cornerColor ="#fff",
                     ctx.cornerStyle ="circle",
-                    ctx.setLineDash([]);
+                    // ctx.setLineDash([]);
 
 
 
