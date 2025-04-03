@@ -874,6 +874,17 @@ async function bindData(current_event_id) {
                                         cornerColor: "#fff",
                                         cornerStyle: "circle",
                                     });
+                                    obj.setControlsVisibility({
+                                        mt: false, // Hide middle top control
+                                        mb: false, // Hide middle bottom control
+                                        bl: true,
+                                        br: true,
+                                        tl: true,
+                                        tr: true,
+                                        ml: true,
+                                        mr: true,
+                                    });
+
                                     setControlVisibilityForObject(obj);
                                 } else {
                                     // Unselected: Dotted blue border
