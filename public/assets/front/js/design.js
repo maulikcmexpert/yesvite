@@ -2444,18 +2444,18 @@ async function bindData(current_event_id) {
             return; // Do nothing
         }
         canvas.discardActiveObject();
-        var activeObject = canvas.getActiveObject();
-        console.log("mouse:up", activeObject);
-        if (!activeObject && !isSelectionTriggered) {
-            isSelectionTriggered = true; // Prevent re-triggering
+        // var activeObject = canvas.getActiveObject();
+        // console.log("mouse:up", activeObject);
+        // if (!activeObject && !isSelectionTriggered) {
+        //     isSelectionTriggered = true; // Prevent re-triggering
 
-            if (!canvas.getActiveObject()) {
-                isFirstClick = true; // Reset the flag
-                //    selectAllTextBoxes();
-                // drawCustomBorder();
-            }
-            isSelectionTriggered = false; // Reset after execution
-        }
+        //     if (!canvas.getActiveObject()) {
+        //         isFirstClick = true; // Reset the flag
+        //         //    selectAllTextBoxes();
+        //         // drawCustomBorder();
+        //     }
+        //     isSelectionTriggered = false; // Reset after execution
+        // }
         canvas.renderAll();
     });
 
@@ -2521,20 +2521,20 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:up", function (options) {
         discardIfMultipleObjects(options);
-        var activeObject = canvas.getActiveObject();
-        console.log("mouse:up", activeObject);
-        // drawCustomBorder();
-        if (!activeObject && !isSelectionTriggered) {
-            isSelectionTriggered = true; // Prevent re-triggering
+        // var activeObject = canvas.getActiveObject();
+        // console.log("mouse:up", activeObject);
+        // // drawCustomBorder();
+        // if (!activeObject && !isSelectionTriggered) {
+        //     isSelectionTriggered = true; // Prevent re-triggering
 
-            setTimeout(() => {
-                if (!canvas.getActiveObject()) {
-                    isFirstClick = true; // Reset the flag
-                    //    selectAllTextBoxes();
-                }
-                isSelectionTriggered = false; // Reset after execution
-            }, 300); // Delay for proper selection
-        }
+        //     setTimeout(() => {
+        //         if (!canvas.getActiveObject()) {
+        //             isFirstClick = true; // Reset the flag
+        //             //    selectAllTextBoxes();
+        //         }
+        //         isSelectionTriggered = false; // Reset after execution
+        //     }, 300); // Delay for proper selection
+        // }
     });
     let lastEditedObject = null;
 
@@ -3147,9 +3147,9 @@ function delay(ms) {
 async function getTextDataFromCanvas() {
     console.log("Before delay");
     getTextData = true;
-    deselectAllTextBoxes();
+    // deselectAllTextBoxes();
 
-    await delay(1000); // Wait for 1 second
+    // await delay(1000); // Wait for 1 second
     console.log("Executed after 1 second");
     // $("#imageEditor1").trigger("click");
     let element = document.querySelector(".image-edit-inner-img");
