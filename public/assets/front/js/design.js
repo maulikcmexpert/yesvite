@@ -3092,6 +3092,29 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
+function getRotatedBoundingBox(obj) {
+    let matrix = obj.calcTransformMatrix();
+    let bbox = obj._getTransformedDimensions();
+
+    // Get the object's center
+    let center = obj.getCenterPoint();
+
+    // Define the corner points relative to the center
+    let halfWidth = bbox.x / 2;
+    let halfHeight = bbox.y / 2;
+
+    let corners = [
+        new fabric.Point(-halfWidth, -halfHeight), // Top-left
+        new fabric.Point(halfWidth, -halfHeight), // Top-right
+        new fabric.Point(halfWidth, halfHeight), // Bottom-right
+        new fabric.Point(-halfWidth, halfHeight), // Bottom-left
+    ];
+
+    // Transform each corner using the object's matrix
+    return corners.map((corner) => {
+        return fabric.util.transformPoint(corner, matrix);
+    });
+}
 // Function to set border and controls when object is selected
 function drawCustomBorder() {
     let ctx = canvas.getContext("2d");
