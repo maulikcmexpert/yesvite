@@ -3117,7 +3117,7 @@ function setCustomControls(obj) {
         borderColor: "#2DA9FC", // Light blue solid border for selected
         cornerSize: 10, // Larger corners
         cornerColor: "#fff", // White fill for corners
-
+        cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
         hasControls: true,
         lockScalingFlip: true,
