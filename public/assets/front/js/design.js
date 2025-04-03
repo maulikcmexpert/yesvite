@@ -315,7 +315,7 @@ $(document).on("click", ".design-cards", function () {
         canvas.add(textElement);
         canvas.on("object:added", function (e) {
             if (e.target && e.target.type === "textbox") {
-                setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
             }
         });
     });
@@ -848,9 +848,9 @@ async function bindData(current_event_id) {
                         });
 
                         canvas.add(textElement);
-                        // drawCustomBorder(textElement);
+                        drawCustomBorder(textElement);
                     });
-                    setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
+                    // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
                 function drawCustomBorder(object) {
                     canvas.on("after:render", function () {
@@ -2485,7 +2485,7 @@ async function bindData(current_event_id) {
 
             if (!canvas.getActiveObject()) {
                 isFirstClick = true; // Reset the flag
-                selectAllTextBoxes();
+               // selectAllTextBoxes();
             }
             isSelectionTriggered = false; // Reset after execution
         }
@@ -2561,7 +2561,7 @@ async function bindData(current_event_id) {
             setTimeout(() => {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
-                    selectAllTextBoxes();
+                 //   selectAllTextBoxes();
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
