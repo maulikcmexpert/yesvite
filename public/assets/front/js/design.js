@@ -3130,7 +3130,7 @@ function setControlVisibilityForObject(obj) {
     });
 
     obj.setCoords();
-    canvas.renderAll();
+
 }
 
 
