@@ -3522,40 +3522,48 @@ class EventController extends BaseController
     {
         $imageSources = $request->imageSources;
         $i = 0;
-        
-        foreach ($imageSources as $imageSource) {
-            if (!empty($imageSource['src'])) {
-                if (strpos($imageSource['src'], 'data:image') === 0) {
-                    // Base64 image
-                    $parts = explode(',', $imageSource['src']);
-                    if (count($parts) < 2) {
-                        continue;
+        if($request->eventId==null){
+            foreach ($imageSources as $imageSource) {
+                if (!empty($imageSource['src'])) {
+                    if (strpos($imageSource['src'], 'data:image') === 0) {
+                        if($imageSource['image_name']!=""){
+                            $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
+                            if (file_exists($filePath)) {
+                                unlink($filePath);
+                            }
+                        }
+                        // Base64 image
+                        $parts = explode(',', $imageSource['src']);
+                        if (count($parts) < 2) {
+                            continue;
+                        }
+    
+                        $imageData = base64_decode($parts[1]);
+                        $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                        $i++;
+    
+                        $path = public_path('storage/event_images/') . $fileName;
+                        file_put_contents($path, $imageData);
+                    } else {
+                        // URL image (just copy the image)
+                        $src = $imageSource['src'];
+                        $imageName = basename($src);
+                        $fileName = $imageName;
+                        $i++;
+    
+                        // $path = public_path('storage/event_images/') . $fileName;
+                        // file_put_contents($path, file_get_contents($imageSource['src']));
                     }
-
-                    $imageData = base64_decode($parts[1]);
-                    $fileName = time() . $i . '-' . uniqid() . '.jpg';
-                    $i++;
-
-                    $path = public_path('storage/event_images/') . $fileName;
-                    file_put_contents($path, $imageData);
-                } else {
-                    // URL image (just copy the image)
-                    $src = $imageSource['src'];
-                    $imageName = basename($src);
-                    $fileName = $imageName;
-                    $i++;
-
-                    // $path = public_path('storage/event_images/') . $fileName;
-                    // file_put_contents($path, file_get_contents($imageSource['src']));
+    
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => $imageSource['deleteId'],
+                        'image_position'=>$imageSource['deleteId']
+                    ];
                 }
-
-                $savedFiles[] = [
-                    'fileName' => $fileName,
-                    'deleteId' => $imageSource['deleteId'],
-                    'image_position'=>$imageSource['deleteId']
-                ];
             }
         }
+       
         //new
         if (empty($savedFiles)) {
             // return response()->json(['status' => 'No valid images to save'], 400);
