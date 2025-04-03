@@ -3980,17 +3980,20 @@ $(document).on("click", "#close_createEvent", async function (e) {
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
+
+
+    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+    }  console.log("firstLetter1", firstLetter1);
+
     if (firstLetter1 === "1") {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
     }
 
-    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
-        apiCalled = false;
-        $("#draftModel").modal("show");
-        return;
-    }
     console.log(11);
 
     var event_type = $("#event-type").val();
