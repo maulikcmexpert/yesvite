@@ -3073,8 +3073,11 @@ function deselectAllTextBoxes() {
     canvas.requestRenderAll();
 }
 function drawCustomBorder(object) {
+    var ctx = canvas.getContext("2d");
+    ctx.save();
     canvas.forEachObject(function (obj) {
         if (obj.type === "textbox") {
+
             if (canvas.getActiveObject() === obj) {
                 console.log("Object Selected");
 
@@ -3088,7 +3091,7 @@ function drawCustomBorder(object) {
                     hasControls: true,
                     strokeWidth: 2,
                     strokeUniform: true,
-                    stroke: "#2DA9FC", // Solid border
+
                 });
 
                 obj.setCoords();
@@ -3096,18 +3099,9 @@ function drawCustomBorder(object) {
                 console.log("Object Not Selected");
 
                 // Apply unselected styling (dotted blue border)
-                obj.set({
-                    borderColor: "blue", // Blue border
-                    cornerSize: 10,
-                    cornerColor: "#fff",
-                    cornerStyle: "circle",
-                    transparentCorners: false,
-                    hasControls: true,
-                    strokeWidth: 2,
-                    strokeUniform: true,
-                    stroke: "blue", // Border color
-                    strokeDashArray: [5, 5], // Dotted border
-                });
+                ctx.strokeStyle = "blue";
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
 
                 obj.setCoords();
             }
@@ -3144,9 +3138,7 @@ console.log("hfdshjsnjsd");
 
 }
 // Call this function whenever selection changes
-canvas.on("selection:updated", updateTextboxBorders);
-canvas.on("selection:created", updateTextboxBorders);
-canvas.on("selection:cleared", updateTextboxBorders);
+
 canvas.on("object:added", function (e) {
     if (e.target.type === "textbox") {
         drawCustomBorder();
