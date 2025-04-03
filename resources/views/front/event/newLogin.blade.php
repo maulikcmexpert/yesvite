@@ -1,3 +1,5 @@
+
+<x-front.advertise />
 <section class="new-create-account-section new_login">
     <div class="container">
         <div class="col-12 mb-5 mt-3">
