@@ -9093,7 +9093,7 @@ $(document).on("change", ".slider_photo", function (event) {
                 image_position: $(".photo-slider-1").data("delete"),
             });
         }
-
+        savePhotoSlider();
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
