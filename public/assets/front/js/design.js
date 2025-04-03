@@ -905,7 +905,7 @@ async function bindData(current_event_id) {
                     });
 
                     obj.setCoords();
-                    canvas.renderAll(); //
+
                 }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
