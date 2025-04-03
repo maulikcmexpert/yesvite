@@ -14402,6 +14402,8 @@ class ApiControllerv2 extends Controller
                 $udpated[$k]['letterSpacing'] = (isset($value['letterSpacing']) && $value['letterSpacing'] != '') ? (int)$value['letterSpacing'] : 0;
                 $udpated[$k]['underline'] = (isset($value['underline']) && ($value['underline'] == null ||$value['underline'] == "null") ) ? false : $value['underline'];
                 echo (isset($value['underline']) && ($value['underline'] == null ||$value['underline'] == "null") );
+                print_r($value['underline']);
+                print_r($value['underline'] == null);
                 dd($udpated[$k]['underline']);
                 if ($udpated[$k]['text'] == null || $udpated[$k]['text'] == "") {
                     $udpated[$k]['text'] = "";
