@@ -3522,6 +3522,7 @@ class EventController extends BaseController
     {
         $imageSources = $request->imageSources;
         $i = 0;
+        
         foreach ($imageSources as $imageSource) {
             if (!empty($imageSource['src'])) {
                 if (strpos($imageSource['src'], 'data:image') === 0) {
