@@ -2501,6 +2501,7 @@ async function bindData(current_event_id) {
         discardIfMultipleObjects(options);
         var activeObject = canvas.getActiveObject();
         console.log("mouse:up", activeObject);
+        drawCustomBorder();
         if (!activeObject && !isSelectionTriggered) {
             isSelectionTriggered = true; // Prevent re-triggering
 
@@ -2508,7 +2509,7 @@ async function bindData(current_event_id) {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
                     //    selectAllTextBoxes();
-                    drawCustomBorder();
+
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
