@@ -852,82 +852,8 @@ async function bindData(current_event_id) {
                     });
                     // setTimeout(() => selectAllTextBoxes(), 100); // Delay to ensure proper selection
                 }
-                function drawCustomBorder(object) {
-                    canvas.on("after:render", function () {
-                        var ctx = canvas.getContext("2d");
-                        ctx.save();
 
-                        canvas.forEachObject(function (obj) {
-                            if (obj.type === "textbox") {
-                                if (canvas.getActiveObject() === obj) {
-                                    // Selected: Solid blue border
-                                    ctx.strokeStyle = "#2DA9FC";
-                                    ctx.lineWidth = 2;
-                                    // ctx.cornerSize = 10,
-                                    // ctx.cornerColor ="#fff",
-                                    // ctx.cornerStyle ="circle",
-                                    ctx.setLineDash([]);
 
-                                    obj.set({
-                                        borderColor: "#2DA9FC",
-                                        cornerSize: 10,
-                                        cornerColor: "#fff",
-                                        cornerStyle: "circle",
-                                    });
-                                    obj.setControlsVisibility({
-                                        mt: false, // Hide middle top control
-                                        mb: false, // Hide middle bottom control
-                                        bl: true,
-                                        br: true,
-                                        tl: true,
-                                        tr: true,
-                                        ml: true,
-                                        mr: true,
-                                    });
-
-                                    setControlVisibilityForObject(obj);
-                                } else {
-                                    // Unselected: Dotted blue border
-                                    ctx.strokeStyle = "blue";
-                                    ctx.lineWidth = 2;
-                                    ctx.setLineDash([5, 5]);
-                                }
-
-                                // Draw border around text object
-                                let bbox = obj.getBoundingRect();
-                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
-                            }
-                        });
-
-                        ctx.restore();
-                    });
-
-                    canvas.renderAll();
-                }
-
-                function setControlVisibilityForObject(obj) {
-                    obj.setControlsVisibility({
-                        mt: false,
-                        mb: false,
-                        bl: true,
-                        br: true,
-                        tl: true,
-                        tr: true,
-                        ml: true,
-                        mr: true,
-                    });
-
-                    obj.set({
-                        transparentCorners: false,
-                        borderColor: "#2DA9FC", // Light blue border when selected
-                        cornerSize: 10,
-                        cornerColor: "#fff",
-                        cornerStyle: "circle",
-                    });
-
-                    obj.setCoords();
-
-                }
                 let currentImage = null;
                 let isImageDragging = false; // Track if the image is being dragged
                 let isimageoncanvas = false;
@@ -1417,6 +1343,9 @@ async function bindData(current_event_id) {
     // }
 
     //     // Function to select all textboxes on the canvas
+
+
+
     function selectAllTextBoxes() {
         if (!canvas) {
             console.error("Canvas is not initialized.");
@@ -2579,6 +2508,7 @@ async function bindData(current_event_id) {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
                     //    selectAllTextBoxes();
+                    drawCustomBorder();
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
@@ -3140,7 +3070,81 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
+     function drawCustomBorder(object) {
+                    canvas.on("after:render", function () {
+                        var ctx = canvas.getContext("2d");
+                        ctx.save();
 
+                        canvas.forEachObject(function (obj) {
+                            if (obj.type === "textbox") {
+                                if (canvas.getActiveObject() === obj) {
+                                    // Selected: Solid blue border
+                                    ctx.strokeStyle = "#2DA9FC";
+                                    ctx.lineWidth = 2;
+                                    // ctx.cornerSize = 10,
+                                    // ctx.cornerColor ="#fff",
+                                    // ctx.cornerStyle ="circle",
+                                    ctx.setLineDash([]);
+
+                                    obj.set({
+                                        borderColor: "#2DA9FC",
+                                        cornerSize: 10,
+                                        cornerColor: "#fff",
+                                        cornerStyle: "circle",
+                                    });
+                                    obj.setControlsVisibility({
+                                        mt: false, // Hide middle top control
+                                        mb: false, // Hide middle bottom control
+                                        bl: true,
+                                        br: true,
+                                        tl: true,
+                                        tr: true,
+                                        ml: true,
+                                        mr: true,
+                                    });
+
+                                    setControlVisibilityForObject(obj);
+                                } else {
+                                    // Unselected: Dotted blue border
+                                    ctx.strokeStyle = "blue";
+                                    ctx.lineWidth = 2;
+                                    ctx.setLineDash([5, 5]);
+                                }
+
+                                // Draw border around text object
+                                let bbox = obj.getBoundingRect();
+                                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+                            }
+                        });
+
+                        ctx.restore();
+                    });
+
+                    canvas.renderAll();
+                }
+                function setControlVisibilityForObject(obj) {
+                    obj.setControlsVisibility({
+                        mt: false,
+                        mb: false,
+                        bl: true,
+                        br: true,
+                        tl: true,
+                        tr: true,
+                        ml: true,
+                        mr: true,
+                    });
+
+                    obj.set({
+                        transparentCorners: false,
+                        borderColor: "#2DA9FC", // Light blue border when selected
+                        cornerSize: 10,
+                        cornerColor: "#fff",
+                        cornerStyle: "circle",
+                    });
+
+                    obj.setCoords();
+
+                }
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
