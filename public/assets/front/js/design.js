@@ -3073,42 +3073,42 @@ function deselectAllTextBoxes() {
     canvas.requestRenderAll();
 }
 function drawCustomBorder(object) {
-    var ctx = canvas.getContext("2d");
-    ctx.save();
-    canvas.forEachObject(function (obj) {
-        if (obj.type === "textbox") {
+    canvas.on("after:render", function () {
+        var ctx = canvas.getContext("2d");
+        ctx.save();
 
-            if (canvas.getActiveObject() === obj) {
-                console.log("Object Selected");
+        canvas.forEachObject(function (obj) {
+            if (obj.type === "textbox") {
 
-                // Apply selected styling (solid blue border)
-                obj.set({
-                    borderColor: "#2DA9FC", // Light blue when selected
-                    cornerSize: 10,
-                    cornerColor: "#fff", // White resize controls
-                    cornerStyle: "circle",
-                    transparentCorners: false,
-                    hasControls: true,
-                    strokeWidth: 2,
-                    strokeUniform: true,
+                if (canvas.getActiveObject() === obj) {
+                    console.log("object");
+                    // Selected: Solid blue border
+                    ctx.strokeStyle = "#2DA9FC";
+                    ctx.lineWidth = 2;
 
-                });
+                    ctx.setLineDash([]);
 
-                obj.setCoords();
-            } else {
-                console.log("Object Not Selected");
 
-                // Apply unselected styling (dotted blue border)
-                ctx.strokeStyle = "blue";
-                ctx.lineWidth = 2;
-                ctx.setLineDash([5, 5]);
 
-                obj.setCoords();
+
+                    setControlVisibilityForObject(obj);
+                    obj.setCoords();
+                } else {
+                    console.log("object not");
+                    // Unselected: Dotted blue border
+                    ctx.strokeStyle = "blue";
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                }
+
+                // Draw border around text object
+                let bbox = obj.getBoundingRect();
+                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
             }
-        }
-    });
+        });
 
-    canvas.renderAll(); // Render changes
+        ctx.restore();
+    });
 
     canvas.renderAll();
 }
@@ -3137,11 +3137,15 @@ console.log("hfdshjsnjsd");
     obj.setCoords();
 
 }
-// Call this function whenever selection changes
 
+canvas.on("selection:updated", updateTextboxBorders);
+canvas.on("selection:created", updateTextboxBorders);
+canvas.on("selection:cleared", updateTextboxBorders);
+
+// Ensure every textbox gets the blue dotted border on load
 canvas.on("object:added", function (e) {
     if (e.target.type === "textbox") {
-        drawCustomBorder();
+        updateTextboxBorders();
     }
 });
 function delay(ms) {
