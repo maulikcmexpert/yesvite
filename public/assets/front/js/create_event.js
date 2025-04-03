@@ -9078,6 +9078,7 @@ $(document).on("change", ".slider_photo", function (event) {
         // var image1;
     }
     setTimeout(() => {
+        var imagePosition = 1;
         var existingIndex = imageSources.findIndex(
             (img) => img.image_position === imagePosition
         );
