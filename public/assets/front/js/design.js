@@ -3072,82 +3072,75 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
+// Function to set border and controls when object is selected
 function drawCustomBorder() {
-    canvas.on("after:render", function () {
-        var ctx = canvas.getContext("2d");
-        ctx.save();
+    let ctx = canvas.getContext("2d");
+    ctx.save();
 
-        canvas.forEachObject(function (obj) {
-            if (obj.type === "textbox") {
-                let activeObj = canvas.getActiveObject();
+    canvas.forEachObject(function (obj) {
+        if (obj.type === "textbox") {
+            let bbox = obj.getBoundingRect();
 
-                if (activeObj === obj) {
-                    console.log("Object selected");
-                    // Selected: Solid blue border
-                    ctx.strokeStyle = "#2DA9FC";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([]);
-                    setControlVisibilityForObject(obj);
-                } else {
-                    console.log("Object not selected");
-                    // Unselected: Dotted blue border
-                    ctx.strokeStyle = "blue";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]);
-                }
+            // Always show dashed blue border (even if selected)
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
 
-                // Draw custom border
-                let bbox = obj.getBoundingRect();
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+            if (canvas.getActiveObject() === obj) {
+                console.log("Object selected");
+                // Apply Fabric.js selection controls (solid blue + white circular corners)
+                setCustomControls(obj);
             }
-        });
-
-        ctx.restore();
+        }
     });
 
-    canvas.renderAll();
+    ctx.restore();
 }
 
-// Function to enable controls and styling
-function setControlVisibilityForObject(obj) {
+
+// Function to apply control styling (only when selected)
+function setCustomControls(obj) {
     obj.setControlsVisibility({
-        mt: false, // Hide top-center control
-        mb: false, // Hide bottom-center control
-        ml: true,
-        mr: true,
-        bl: true,
-        br: true,
-        tl: true,
-        tr: true,
+        mt: false, mb: false, ml: true, mr: true, bl: true, br: true, tl: true, tr: true,
     });
 
     obj.set({
-        transparentCorners: false, // Make corners visible
-        borderColor: "#2DA9FC", // Light blue selection border
-        cornerSize: 12, // Increase corner size
-        cornerColor: "#fff", // White corner fill
+        transparentCorners: false, // Ensure corners are visible
+        borderColor: "#2DA9FC", // Light blue solid border for selected
+        cornerSize: 12, // Larger corners
+        cornerColor: "#fff", // White fill for corners
         cornerStrokeColor: "#2DA9FC", // Blue outline for corners
         cornerStyle: "circle",
-        hasControls: true, // Ensure object is resizable
+        hasControls: true,
         lockScalingFlip: true,
     });
 
     obj.setCoords();
-    canvas.renderAll();
+    canvas.requestRenderAll();
 }
 
-// Ensure controls are updated when selection changes
+// Event listeners to update border when selection changes
 canvas.on("selection:created", function (e) {
     if (e.target && e.target.type === "textbox") {
-        setControlVisibilityForObject(e.target);
+        setCustomControls(e.target);
     }
+    drawCustomBorder(); // Ensure unselected objects get a dashed border
 });
 
 canvas.on("selection:updated", function (e) {
     if (e.target && e.target.type === "textbox") {
-        setControlVisibilityForObject(e.target);
+        setCustomControls(e.target);
     }
+    drawCustomBorder();
 });
+
+canvas.on("selection:cleared", function () {
+    drawCustomBorder(); // Restore dashed border for all textboxes when selection is cleared
+});
+;
+
+
 
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
