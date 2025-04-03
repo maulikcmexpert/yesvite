@@ -3131,6 +3131,7 @@ function setCustomControls(obj) {
 canvas.on("selection:created", function (e) {
     if (e.target && e.target.type === "textbox") {
         setCustomControls(e.target);
+        canvas.requestRenderAll(); // Update only once
     }
 });
 
@@ -3138,6 +3139,7 @@ canvas.on("selection:created", function (e) {
 canvas.on("selection:updated", function (e) {
     if (e.target && e.target.type === "textbox") {
         setCustomControls(e.target);
+        canvas.requestRenderAll(); // Update only once
     }
 });
 
