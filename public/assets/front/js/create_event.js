@@ -9188,11 +9188,13 @@ function getLengthofSliderImage() {
 function savePhotoSlider(){
     if (imageSources.length > 0) {
         $("#loader").css("display", "flex");
+        var event = $("#eventID").val();
+
         $.ajax({
             url: base_url + "event/save_slider_img",
             method: "POST",
             data: {
-                eventId: eventId,
+                eventId: event,
                 imageSources: imageSources,
                 // imagenames: imagenames,
                 _token: $('meta[name="csrf-token"]').attr("content"),
