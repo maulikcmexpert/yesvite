@@ -9467,7 +9467,9 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     // return;
 
     e.preventDefault();
-    savePhotoSlider();
+    // savePhotoSlider();
+    await savePhotoSlider(); // Ensure this completes first
+
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
