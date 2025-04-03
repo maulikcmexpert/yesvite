@@ -3968,6 +3968,9 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var event_name = $("#event-name").val();
     var start_time = $("#start-time").val();
     var start_event_date = $("#start-event-date").val();
+
+    console.log(event_name,start_time,start_event_date);
+
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#designModel").modal("show");
@@ -3977,7 +3980,15 @@ $(document).on("click", "#close_createEvent", async function (e) {
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
-    if (firstLetter1 == "1") {
+
+
+    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+    }  console.log("firstLetter1", firstLetter1);
+
+    if (firstLetter1 === "1") {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
@@ -9696,9 +9707,11 @@ $(document).on("click", "#close_editEvent", async function (e) {
     console.log("firstLetter1", firstLetter1);
     if (firstLetter1 == "1") {
         apiCalled = false;
-        $("#EditdesignModel").modal("show");
+        $("#EditdraftModel").modal("show");
         return;
-    } else if (
+    }
+
+    else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
