@@ -2485,23 +2485,23 @@ async function bindData(current_event_id) {
     }
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
-        if (isFirstClick) {
-            isFirstClick = false; // Reset the flag
+        // if (isFirstClick) {
+        //     isFirstClick = false; // Reset the flag
 
-            // Get the click position relative to the canvas
-            const pointer = canvas.getPointer(options.e);
-            const { x, y } = pointer;
+        //     // Get the click position relative to the canvas
+        //     const pointer = canvas.getPointer(options.e);
+        //     const { x, y } = pointer;
 
-            // Log the initial click position
-            console.log("Initial click at:", x, y);
+        //     // Log the initial click position
+        //     console.log("Initial click at:", x, y);
 
-            // Set a timeout to simulate mouse events at the same position after 1 second
-            setTimeout(() => {
-                simulateMouseEvents(x, y);
-                // drawCustomBorder();
-                console.log("Simulated mouse events at:", x, y);
-            }, 200);
-        }
+        //     // Set a timeout to simulate mouse events at the same position after 1 second
+        //     setTimeout(() => {
+        //         simulateMouseEvents(x, y);
+        //         // drawCustomBorder();
+        //         console.log("Simulated mouse events at:", x, y);
+        //     }, 200);
+        // }
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
