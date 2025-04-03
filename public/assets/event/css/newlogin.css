@@ -1,6 +1,12 @@
+.new-create-account-section {
+    margin-bottom: 50px;
+    height: 100vh;
+}
+
 .new-create-account-head {
     position: relative;
 }
+
 .new-create-account-head h2 {
     font-family: var(--SFProDisplay-Medium) !important;
     font-size: 20px !important;
