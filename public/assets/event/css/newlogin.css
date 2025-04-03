@@ -2,10 +2,10 @@
     position: relative;
 }
 .new-create-account-head h2 {
-    font-family: var(--SFProDisplay-Medium);
-    font-size: 20px;
-    line-height: normal;
-    color: var(--secondary-black);
+    font-family: var(--SFProDisplay-Medium) !important;
+    font-size: 20px !important;
+    line-height: normal !important;
+    color: var(--secondary-black) !important;
     text-align: center;
 }
 
@@ -126,11 +126,11 @@
 }
 
 .new-create-account-form-title h2 {
-    font-family: var(--SFProDisplay-Bold);
-    font-size: 30px;
-    line-height: normal;
-    color: var(--secondary-black);
-    margin-bottom: 15px;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-size: 30px !important;
+    line-height: normal !important;
+    color: var(--secondary-black) !important;
+    margin-bottom: 15px !important;
 }
 
 .new-create-account-form-title h6 {
@@ -213,7 +213,8 @@
     height: 28px;
 }
 
-.create-account-slider.rsvp-slider .owl-prev.disabled , .create-account-slider.rsvp-slider .owl-next.disabled {
+.create-account-slider.rsvp-slider .owl-prev.disabled,
+.create-account-slider.rsvp-slider .owl-next.disabled {
     display: flex !important;
 }
 
