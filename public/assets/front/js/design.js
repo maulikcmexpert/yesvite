@@ -3072,74 +3072,66 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-function drawCustomBorder(object) {
-    canvas.on("after:render", function () {
-        var ctx = canvas.getContext("2d");
-        ctx.save();
+function drawCustomBorder() {
+    canvas.forEachObject(function (obj) {
+        if (obj.type === "textbox") {
+            if (canvas.getActiveObject() === obj) {
+                console.log("object selected");
 
-        canvas.forEachObject(function (obj) {
-            if (obj.type === "textbox") {
+                // Apply selected styling
+                obj.set({
+                    borderColor: "#2DA9FC", // Blue border when selected
+                    cornerSize: 10,
+                    cornerColor: "#fff", // White control points
+                    cornerStyle: "circle",
+                    transparentCorners: false,
+                    hasControls: true
+                });
 
-                if (canvas.getActiveObject() === obj) {
-                    console.log("object");
-                    // Selected: Solid blue border
-                    ctx.borderColor = "#2DA9FC";
-                    ctx.lineWidth = 2;
-                    ctx.cornerSize = 10,
+                setControlVisibilityForObject(obj);
+            } else {
+                console.log("object not selected");
 
-                    ctx.cornerColor ="#fff",
-                    ctx.cornerStyle ="circle",
-
-                    ctx.setLineDash([]);
-
-
-
-
-                    setControlVisibilityForObject(obj);
-                } else {
-                    console.log("object not");
-                    // Unselected: Dotted blue border
-                    ctx.strokeStyle = "blue";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]);
-                }
-
-                // Draw border around text object
-                let bbox = obj.getBoundingRect();
-                ctx.strokeRect(bbox.left, bbox.top, bbox.width, bbox.height);
+                // Apply unselected styling
+                obj.set({
+                    borderColor: "blue", // Blue border when unselected
+                    cornerSize: 10,
+                    cornerColor: "#fff",
+                    cornerStyle: "circle",
+                    transparentCorners: false,
+                    hasControls: true
+                });
             }
-        });
 
-        ctx.restore();
+            obj.setCoords();
+        }
     });
 
-    canvas.renderAll();
+    canvas.renderAll(); // Render after applying changes
 }
+
+// Function to set controls visibility
 function setControlVisibilityForObject(obj) {
     obj.setControlsVisibility({
-        mt: false,
-        mb: false,
-        bl: true,
-        br: true,
-        tl: true,
-        tr: true,
-        ml: true,
-        mr: true,
-    });
-console.log("hfdshjsnjsd");
-    obj.set({
-        transparentCorners: false,
-        borderColor: "#2DA9FC", // Light blue border when selected
-        cornerSize: 10,
-        cornerColor: "#fff",
-        cornerStyle: "circle",
-        transparentCorners: false, // Ensure corners are visible
-        hasControls: true, // Ensure controls are enabled
+        mt: false, // Hide top middle control
+        mb: false, // Hide bottom middle control
+        bl: true,  // Show bottom left control
+        br: true,  // Show bottom right control
+        tl: true,  // Show top left control
+        tr: true,  // Show top right control
+        ml: true,  // Show middle left control
+        mr: true   // Show middle right control
     });
 
     obj.setCoords();
-
+    canvas.renderAll(); // Ensure updates take effect
 }
+
+// Call this function when selection changes
+canvas.on("selection:updated", drawCustomBorder);
+canvas.on("selection:created", drawCustomBorder);
+canvas.on("selection:cleared", drawCustomBorder);
+
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
