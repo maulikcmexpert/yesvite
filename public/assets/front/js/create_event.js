@@ -9693,9 +9693,11 @@ $(document).on("click", "#close_editEvent", async function (e) {
     console.log("firstLetter1", firstLetter1);
     if (firstLetter1 == "1") {
         apiCalled = false;
-        $("#EditdesignModel").modal("show");
+        $("#EditdraftModel").modal("show");
         return;
-    } else if (
+    }
+
+    else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
