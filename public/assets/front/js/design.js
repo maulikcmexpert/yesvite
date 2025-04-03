@@ -3084,7 +3084,7 @@ function drawCustomBorder() {
 
                 if (canvas.getActiveObject() === obj) {
                     console.log("Object selected");
-
+                    ctx.setLineDash([]);
                     setCustomControls(obj);
                 } else {
                     console.log("Object not selected");
