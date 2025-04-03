@@ -111,6 +111,9 @@
 
 .new-create-account-form {
     max-width: 100% !important;
+    padding: 0px !important;
+    border: none !important;
+    border-radius: 0px !important;
 }
 .new-create-account-form h5 {
     font-family: var(--SFProDisplay-Semibold);
