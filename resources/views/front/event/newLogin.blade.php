@@ -961,7 +961,7 @@
 
                                 <div class="new-create-account-form-foot">
 
-                                    <p>Already in Yesvite? <a href="#" id="login_event">Sign in</a></p>
+                                    <p>Already have an account? <a href="#" id="login_event">Sign in</a></p>
                                     <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
                                             and <a href="{{route('privacy_policy')}}"> Privacy Policy</a></span></p>
                                 </div>
