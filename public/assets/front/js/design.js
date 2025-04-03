@@ -2485,7 +2485,7 @@ async function bindData(current_event_id) {
 
             if (!canvas.getActiveObject()) {
                 isFirstClick = true; // Reset the flag
-               // selectAllTextBoxes();
+               selectAllTextBoxes();
             }
             isSelectionTriggered = false; // Reset after execution
         }
@@ -2561,7 +2561,7 @@ async function bindData(current_event_id) {
             setTimeout(() => {
                 if (!canvas.getActiveObject()) {
                     isFirstClick = true; // Reset the flag
-                 //   selectAllTextBoxes();
+                   selectAllTextBoxes();
                 }
                 isSelectionTriggered = false; // Reset after execution
             }, 300); // Delay for proper selection
