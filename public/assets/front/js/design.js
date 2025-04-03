@@ -3133,17 +3133,7 @@ function setControlVisibilityForObject(obj) {
     canvas.renderAll();
 }
 
-canvas.on("selection:created", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setControlVisibilityForObject(e.target);
-    }
-});
 
-canvas.on("selection:updated", function (e) {
-    if (e.target && e.target.type === "textbox") {
-        setControlVisibilityForObject(e.target);
-    }
-});
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
