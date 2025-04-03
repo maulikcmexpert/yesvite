@@ -9094,7 +9094,7 @@ $(document).on("change", ".slider_photo", function (event) {
                 image_name: $(".photo-slider-1").data("image"),
             });
         }
-        savePhotoSlider();
+        // savePhotoSlider();
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
@@ -9130,7 +9130,7 @@ $(document).on("change", ".slider_photo_2", function (event) {
 
             });
         }
-        savePhotoSlider();
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
@@ -9163,52 +9163,13 @@ $(document).on("change", ".slider_photo_3", function (event) {
                 image_name: $(".photo-slider-3").data("image"),
             });
         }
-        savePhotoSlider();
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 });
 //old_slider_image
 
-//new_slider_image
 
-// $(document).on("change", ".slider_photo, .slider_photo_2, .slider_photo_3", function (event) {
-//     var file = event.target.files[0];
-//     var inputClass = $(this).attr("class"); // Get the input class
-//     var imageClass = "";
-//     var deleteClass = "";
-
-//     if (inputClass.includes("slider_photo")) {
-//         imageClass = ".photo-slider-1";
-//         deleteClass = ".photo-edit-delete-1";
-//         sidebarClass = "design-sidebar_7";
-
-//     }
-//     if (inputClass.includes("slider_photo_2")) {
-//         imageClass = ".photo-slider-2";
-//         deleteClass = ".photo-edit-delete-2";
-//     }
-//     if (inputClass.includes("slider_photo_3")) {
-//         imageClass = ".photo-slider-3";
-//         deleteClass = ".photo-edit-delete-3";
-//     }
-
-//     if (file) {
-//         var reader = new FileReader();
-//         reader.onload = function (e) {
-//             $(imageClass).attr("src", e.target.result).show();
-//             $(imageClass).attr("data-image", file.name);
-//             $(deleteClass).show();
-//             uploadSliderImage(file, imageClass);
-//         };
-//         reader.readAsDataURL(file);
-//     }
-
-//     setTimeout(() => {
-//         getLengthofSliderImage();
-//     }, 500);
-// });
-
-//new_slider_image
 
 function getLengthofSliderImage() {
     var i = 0;
