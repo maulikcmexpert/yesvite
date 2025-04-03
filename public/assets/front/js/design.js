@@ -3072,66 +3072,86 @@ function deselectAllTextBoxes() {
 
     canvas.requestRenderAll();
 }
-function drawCustomBorder() {
+function drawCustomBorder(object) {
     canvas.forEachObject(function (obj) {
         if (obj.type === "textbox") {
             if (canvas.getActiveObject() === obj) {
-                console.log("object selected");
+                console.log("Object Selected");
 
-                // Apply selected styling
+                // Apply selected styling (solid blue border)
                 obj.set({
-                    borderColor: "#2DA9FC", // Blue border when selected
+                    borderColor: "#2DA9FC", // Light blue when selected
                     cornerSize: 10,
-                    cornerColor: "#fff", // White control points
+                    cornerColor: "#fff", // White resize controls
                     cornerStyle: "circle",
                     transparentCorners: false,
-                    hasControls: true
+                    hasControls: true,
+                    strokeWidth: 2,
+                    strokeUniform: true,
+                    stroke: "#2DA9FC", // Solid border
                 });
 
-                setControlVisibilityForObject(obj);
+                obj.setCoords();
             } else {
-                console.log("object not selected");
+                console.log("Object Not Selected");
 
-                // Apply unselected styling
+                // Apply unselected styling (dotted blue border)
                 obj.set({
-                    borderColor: "blue", // Blue border when unselected
+                    borderColor: "blue", // Blue border
                     cornerSize: 10,
                     cornerColor: "#fff",
                     cornerStyle: "circle",
                     transparentCorners: false,
-                    hasControls: true
+                    hasControls: true,
+                    strokeWidth: 2,
+                    strokeUniform: true,
+                    stroke: "blue", // Border color
+                    strokeDashArray: [5, 5], // Dotted border
                 });
-            }
 
-            obj.setCoords();
+                obj.setCoords();
+            }
         }
     });
 
-    canvas.renderAll(); // Render after applying changes
-}
+    canvas.renderAll(); // Render changes
 
-// Function to set controls visibility
+    canvas.renderAll();
+}
 function setControlVisibilityForObject(obj) {
     obj.setControlsVisibility({
-        mt: false, // Hide top middle control
-        mb: false, // Hide bottom middle control
-        bl: true,  // Show bottom left control
-        br: true,  // Show bottom right control
-        tl: true,  // Show top left control
-        tr: true,  // Show top right control
-        ml: true,  // Show middle left control
-        mr: true   // Show middle right control
+        mt: false,
+        mb: false,
+        bl: true,
+        br: true,
+        tl: true,
+        tr: true,
+        ml: true,
+        mr: true,
+    });
+console.log("hfdshjsnjsd");
+    obj.set({
+        transparentCorners: false,
+        borderColor: "#2DA9FC", // Light blue border when selected
+        cornerSize: 10,
+        cornerColor: "#fff",
+        cornerStyle: "circle",
+        transparentCorners: false, // Ensure corners are visible
+        hasControls: true, // Ensure controls are enabled
     });
 
     obj.setCoords();
-    canvas.renderAll(); // Ensure updates take effect
+
 }
-
-// Call this function when selection changes
-canvas.on("selection:updated", drawCustomBorder);
-canvas.on("selection:created", drawCustomBorder);
-canvas.on("selection:cleared", drawCustomBorder);
-
+// Call this function whenever selection changes
+canvas.on("selection:updated", updateTextboxBorders);
+canvas.on("selection:created", updateTextboxBorders);
+canvas.on("selection:cleared", updateTextboxBorders);
+canvas.on("object:added", function (e) {
+    if (e.target.type === "textbox") {
+        drawCustomBorder();
+    }
+});
 function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
