@@ -234,6 +234,10 @@
     .new-create-account-section .row {
         justify-content: space-between;
     }
+    .new-create-account-section .container {
+        max-width: 1300px !important;
+        margin: 0px auto;
+    }
 }
 
 @media only screen and (max-width: 1399px) {
