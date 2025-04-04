@@ -28,7 +28,7 @@ class TemplateController extends Controller
     {
         // dd($request->ajax());
         if ($request->ajax()) {
-            $data = TextData::with('categories')->orderBy('id', 'desc')->get();
+            $data = TextData::with(['categories', 'subcategories'])->orderBy('id', 'desc')->get();
             // $data = TextData::with('categories')->whereNotNull("event_design_sub_category_id")->orderBy('id', 'desc')->get();
             // dd($data);
             return Datatables::of($data)
@@ -46,9 +46,18 @@ class TemplateController extends Controller
                 ->addColumn('category_name', function ($row) {
                     return $row->categories->category_name;
                 })
+                // ->addColumn('subcategory_name', function ($row) {
+                //     return $row->subcategories->subcategory_name;
+                // })
                 ->addColumn('subcategory_name', function ($row) {
-                    return $row->subcategories->subcategory_name;
+                    if ($row->subcategories->count()) {
+                        return $row->subcategories->pluck('subcategory_name')->implode(', ');
+                    } elseif ($row->event_design_sub_category_id && $row->singleSubcategory) {
+                        return $row->singleSubcategory->subcategory_name;
+                    }
+                    return '-';
                 })
+                
                 ->addColumn('image', function ($template) {
                     return '<img src="' . asset('storage/canvas/' . $template->image) . '" width="50" height="50" />';
                 })
