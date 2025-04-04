@@ -9251,7 +9251,7 @@ function updateAllPhotoSliders() {
             await savePhotoSlider();
         }
 
-        if ($("#isUserLoggedIn").val() === "0") {
+        if ($("#isUserLoggedIn").val() === "0" || eventId==undefined) {
             await savePhotoSlider();
         }
 
