@@ -163,32 +163,30 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
         
-        $textdatas = TextData::whereHas('categories', function ($query) {
-            // Ensure the TextData belongs to a valid category
-        })
-        ->with([
-            'categories',
-            'subcategories' => function ($query) {
-                // Only include subcategories that are linked via the relation table
-                $query->whereIn('id', function ($subQuery) {
-                    $subQuery->select('subcategory_id')
-                        ->from('textdata_subcategories')
-                        ->groupBy('textdata_id')
-                        ->havingRaw('COUNT(subcategory_id) > 1'); // Ensures multiple subcategories
-                });
-            }
-        ])
-        ->whereHas('subcategories', function ($query) {
-            $query->whereIn('id', function ($subQuery) {
-                $subQuery->select('subcategory_id')
+        $textdatas = TextData::whereHas('categories')
+    ->with([
+        'categories',
+        'subcategories' => function ($query) {
+            $query->whereIn('event_design_sub_categories.id', function ($subQuery) {
+                $subQuery->select('textdata_subcategories.subcategory_id')
                     ->from('textdata_subcategories')
-                    ->groupBy('textdata_id')
-                    ->havingRaw('COUNT(subcategory_id) > 1'); // Ensures multiple subcategories
+                    ->groupBy('textdata_subcategories.textdata_id')
+                    ->havingRaw('COUNT(textdata_subcategories.subcategory_id) > 1');
             });
-        })
-        ->where('is_visible', 1) // Ensuring only visible records
-        ->orderBy('id', 'ASC')
-        ->get();
+        }
+    ])
+    ->whereHas('subcategories', function ($query) {
+        $query->whereIn('event_design_sub_categories.id', function ($subQuery) {
+            $subQuery->select('textdata_subcategories.subcategory_id')
+                ->from('textdata_subcategories')
+                ->groupBy('textdata_subcategories.textdata_id')
+                ->havingRaw('COUNT(textdata_subcategories.subcategory_id) > 1');
+        });
+    })
+    ->where('is_visible', 1)
+    ->orderBy('id', 'ASC')
+    ->get();
+
     
 
         dd($textdatas);
