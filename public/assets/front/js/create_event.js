@@ -9098,35 +9098,37 @@ $(document).on("change", ".slider_photo", async function (event) {
 
         // var image1;
     }
-    setTimeout(async() => {
-        var imagePosition = 1;
-        var existingIndex = imageSources.findIndex(
-            (img) => img.image_position === imagePosition
-        );
-        if (existingIndex !== -1) {
-            // Update the existing entry
-            imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
-            imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
-        } else {
-            // Add a new entry if it does not exist
-            imageSources.push({
-                src: $(".photo-slider-1").attr("src"),
-                deleteId: $(".photo-slider-1").data("delete"),
-                image_position: $(".photo-slider-1").data("delete"),
-                image_name: $(".photo-slider-1").attr("data-image"),
-            });
-        }
+    updateAllPhotoSliders();
 
-        if(eventId==""){
-            await savePhotoSlider();
-        }
-        if ($("#isUserLoggedIn").val() === "0") {
-            await savePhotoSlider();
-        }
+    // setTimeout(async() => {
+    //     var imagePosition = 1;
+    //     var existingIndex = imageSources.findIndex(
+    //         (img) => img.image_position === imagePosition
+    //     );
+    //     if (existingIndex !== -1) {
+    //         // Update the existing entry
+    //         imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
+    //         imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
+    //     } else {
+    //         // Add a new entry if it does not exist
+    //         imageSources.push({
+    //             src: $(".photo-slider-1").attr("src"),
+    //             deleteId: $(".photo-slider-1").data("delete"),
+    //             image_position: $(".photo-slider-1").data("delete"),
+    //             image_name: $(".photo-slider-1").attr("data-image"),
+    //         });
+    //     }
 
-        // console.log(imageSources);
-        getLengthofSliderImage();
-    }, 500);
+    //     if(eventId==""){
+    //         await savePhotoSlider();
+    //     }
+    //     if ($("#isUserLoggedIn").val() === "0") {
+    //         await savePhotoSlider();
+    //     }
+
+    //     // console.log(imageSources);
+    //     getLengthofSliderImage();
+    // }, 500);
 
     // if(eventId==""){
     //     await savePhotoSlider();
@@ -9145,34 +9147,35 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(async() => {
-        var imagePosition2 = 2;
-        var existingIndex2 = imageSources.findIndex(
-            (img) => img.image_position === imagePosition2
-        );
-        if (existingIndex2 !== -1) {
-            // Update the existing entry
-            imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
-        } else {
-            // Add a new entry if it does not exist
-            imageSources.push({
-                src: $(".photo-slider-2").attr("src"),
-                deleteId: $(".photo-slider-2").data("delete"),
-                image_position: $(".photo-slider-2").data("delete"),
-                image_name: $(".photo-slider-2").data("image"),
+    // setTimeout(async() => {
+    //     var imagePosition2 = 2;
+    //     var existingIndex2 = imageSources.findIndex(
+    //         (img) => img.image_position === imagePosition2
+    //     );
+    //     if (existingIndex2 !== -1) {
+    //         // Update the existing entry
+    //         imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
+    //     } else {
+    //         // Add a new entry if it does not exist
+    //         imageSources.push({
+    //             src: $(".photo-slider-2").attr("src"),
+    //             deleteId: $(".photo-slider-2").data("delete"),
+    //             image_position: $(".photo-slider-2").data("delete"),
+    //             image_name: $(".photo-slider-2").data("image"),
 
-            });
-        }
-        if(eventId==""){
-            await savePhotoSlider();
-        }
-        if ($("#isUserLoggedIn").val() === "0") {
-            await savePhotoSlider();
-        }
+    //         });
+    //     }
+    //     if(eventId==""){
+    //         await savePhotoSlider();
+    //     }
+    //     if ($("#isUserLoggedIn").val() === "0") {
+    //         await savePhotoSlider();
+    //     }
 
-        // savePhotoSlider();
-        getLengthofSliderImage();
-    }, 500);
+    //     // savePhotoSlider();
+    //     getLengthofSliderImage();
+    // }, 500);
+    updateAllPhotoSliders();
 
 });
 $(document).on("change", ".slider_photo_3", async function (event) {
@@ -9187,34 +9190,72 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(async() => {
-        var imagePosition3 = 3;
-        var existingIndex3 = imageSources.findIndex(
-            (img) => img.image_position === imagePosition3
-        );
-        if (existingIndex3 !== -1) {
-            // Update the existing entry
-            imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
-        } else {
-            // Add a new entry if it does not exist
-            imageSources.push({
-                src: $(".photo-slider-3").attr("src"),
-                deleteId: $(".photo-slider-3").data("delete"),
-                image_position: $(".photo-slider-3").data("delete"),
-                image_name: $(".photo-slider-3").data("image"),
-            });
-        }
-        if(eventId==""){
+    // setTimeout(async() => {
+    //     var imagePosition3 = 3;
+    //     var existingIndex3 = imageSources.findIndex(
+    //         (img) => img.image_position === imagePosition3
+    //     );
+    //     if (existingIndex3 !== -1) {
+    //         // Update the existing entry
+    //         imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
+    //     } else {
+    //         // Add a new entry if it does not exist
+    //         imageSources.push({
+    //             src: $(".photo-slider-3").attr("src"),
+    //             deleteId: $(".photo-slider-3").data("delete"),
+    //             image_position: $(".photo-slider-3").data("delete"),
+    //             image_name: $(".photo-slider-3").data("image"),
+    //         });
+    //     }
+    //     if(eventId==""){
+    //         await savePhotoSlider();
+    //     }
+    //     if ($("#isUserLoggedIn").val() === "0") {
+    //         await savePhotoSlider();
+    //     }
+    //     // savePhotoSlider();
+    //     getLengthofSliderImage();
+    // }, 500);
+    updateAllPhotoSliders();
+});
+
+function updateAllPhotoSliders() {
+    setTimeout(async () => {
+        $(".slider-img").each(function () {
+            const $this = $(this);
+            const position = $this.data("delete"); // assumes `data-delete="1"` etc.
+            const imageSrc = $this.attr("src");
+            const imageName = $this.attr("data-image");
+
+            const existingIndex = imageSources.findIndex(
+                (img) => img.image_position === position
+            );
+
+            if (existingIndex !== -1) {
+                imageSources[existingIndex].src = imageSrc;
+                imageSources[existingIndex].image_name = imageName;
+            } else {
+                imageSources.push({
+                    src: imageSrc,
+                    deleteId: position,
+                    image_position: position,
+                    image_name: imageName,
+                });
+            }
+        });
+
+        if (eventId === "") {
             await savePhotoSlider();
         }
+
         if ($("#isUserLoggedIn").val() === "0") {
             await savePhotoSlider();
         }
-        // savePhotoSlider();
+
         getLengthofSliderImage();
     }, 500);
+}
 
-});
 //old_slider_image
 
 //new_slider_image
