@@ -127,6 +127,7 @@
                 $randomIds = [];
                 foreach ($categories as $category) {
                     // dd($category);
+                    $subcategoryNames= [];
                     foreach ($category->subcategory as $subcategory) {
             $subcategoryNames[] = $subcategory->subcategory_name;
         }
