@@ -163,7 +163,20 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
         
+        $textdatas = TextData::where('is_visible', 1)
+        ->whereHas('textdataSubcategories') // Ensures only textdatas with subcategories
+        ->withCount('textdataSubcategories') // Get how many subcategories each textdata has
+        ->with([
+            'textdataSubcategories' => function ($q) {
+                $q->select('event_design_sub_categories.id', 'subcategory_name');
+            },
+            'textdataSubcategories.category' => function ($q) {
+                $q->select('id', 'category_name');
+            }
+        ])
+        ->get();
 
+        dd($textdatas);
 $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
     $query->whereIn('id', function ($subQuery) {
         $subQuery->select('subcategory_id')
