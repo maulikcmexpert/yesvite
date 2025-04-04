@@ -343,22 +343,23 @@ class TemplateController extends Controller
 
             // Save the updated template data
             $template->save();
-
-            // Commit the transaction
-            DB::commit();
-
-
-            TextdataSubcategory::where('textdata_id', (int)$id)->delete();
+            TextdataSubcategory::where('textdata_id', $template->id)->delete();
 
             // dd($id,$request->subcategory);
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
+                    dd($template->id);
                     TextdataSubcategory::create([
-                        'textdata_id' => (int)$id,
+                        'textdata_id' => $template->id,
                         'subcategory_id' => (int)$subcatId,
                     ]);
                 }
             }
+            // Commit the transaction
+            DB::commit();
+
+
+        
             // Redirect with a success message
             return redirect()->route('create_template.index')->with('msg', 'Template updated successfully!');
         } catch (\Exception $e) {
