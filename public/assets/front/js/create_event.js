@@ -460,6 +460,8 @@ if ($("#isUserLoggedIn").val() === "0") {
 
 
     $(".li_event_details").trigger('click');
+    $(".step_1").addClass("d-none");
+
     // $(".step_1").css("display","none");
 
 
