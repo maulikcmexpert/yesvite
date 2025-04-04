@@ -57,16 +57,54 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sub Category</label>
                             {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id"> --}}
-                                <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
+                                {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
 
-                                <option value="">Select subcategory</option>
+                                <option value="">Select subcategory</option> --}}
 
-                                <!-- @foreach($getsubcatData as $cat) -->
+                            {{-- </select> --}}
 
-                                <!-- <option value="{{$cat->id}}">{{$cat->subcategory_name}}</option> -->
-
-                                <!-- @endforeach -->
-                            </select>
+                            <div class="col-md-4">
+                                <div class="wrapper">
+                                  <button class="form-control toggle-next ellipsis" type="button">Select subbcategory</button>
+                                  <div class="checkboxes" id="Lorems">
+                               
+                                    
+                                    <div class="inner-wrap">
+                                     
+                            
+                                      <label>
+                                        <input type="checkbox" value="dolor" class="ckkBox val" />
+                                        <span>Dolor (34) </span>
+                                      </label><br>
+                            
+                                      <label>
+                                        <input type="checkbox" value="lorem" class="ckkBox val" />
+                                        <span>Lorem (234)</span>
+                                      </label><br>
+                            
+                                      <label>
+                                        <input type="checkbox" value="ipsum" class="ckkBox val" />
+                                        <span>Ipsum (12)</span>
+                                      </label><br>
+                                      
+                                      <label>
+                                        <input type="checkbox" value="dolor" class="ckkBox val" />
+                                        <span>Dolor 2 (34) </span>
+                                      </label><br>
+                            
+                                      <label>
+                                        <input type="checkbox" value="lorem" class="ckkBox val" />
+                                        <span>Lorem 2 (234)</span>
+                                      </label><br>
+                            
+                                      <label>
+                                        <input type="checkbox" value="ipsum" class="ckkBox val" />
+                                        <span>Ipsum 2 (12)</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
