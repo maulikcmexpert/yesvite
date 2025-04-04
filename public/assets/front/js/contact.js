@@ -1347,6 +1347,8 @@ function resetUploadState() {
                         $("#comments").text(profileData.comments);
                         $("#events").text(profileData.total_events);
                         $("#member_since").text(profileData.created_at);
+                        $("#about-section-text").text(profileData.about_me);
+
                     // Handle profile image or initials
                     let profileImgElement = $("#modal-profile-img");
                     let initialsElement = $("#modal-initials");
