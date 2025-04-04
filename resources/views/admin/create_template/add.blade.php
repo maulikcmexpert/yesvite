@@ -66,10 +66,10 @@
 
                             {{-- </select> --}}
 
-                            <div class="wrapper">
+                            <div class="wrapper new-wrp">
                                 <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
                                     subbcategory <i class="fa-solid fa-angle-down"></i></button>
-                                <div class="checkboxes" id="Lorems">
+                                <div class="checkboxes select-subcat-inner" id="Lorems">
 
 
                                     <div class="inner-wrap" id="event_design_sub_category_id">
