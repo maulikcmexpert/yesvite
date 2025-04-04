@@ -294,6 +294,14 @@ console.log(count);
 $('.total_design_count').text(count + ' Items');
 
 });
+$(document).on("click", ".side-bar-sub-list", async function (e) {
+
+let count = $(".default_show").length;
+
+console.log(count);
+$('.total_design_count').text(count + ' Items');
+
+});
 
 
             // Handle individual subcategory checkbox change
