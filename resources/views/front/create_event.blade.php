@@ -459,7 +459,7 @@
                             </ul>
                         </li>
                         <li class="li_event_detail active">
-                            <div class="menu-circle-wrp side-bar-list menu-success ">
+                            <div class="menu-circle-wrp side-bar-list menu-success eventDetails_menu ">
                                 <span></span>
                                 <h3>Event Details</h3>
                             </div>

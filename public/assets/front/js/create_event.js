@@ -455,7 +455,13 @@ var swiper = new Swiper(".mySwiper2", {
 $(document).on("click", ".create-event-btn", function () {
     toggleSidebar("sidebar_create_event");
 });
+$(document).on("click", ".eventDetails_menu", function () {
+if ($("#isUserLoggedIn").val() === "0") {
 
+        window.location.href = "/";
+
+}
+});
 // Delete Group functionality
 $(document).on("click", "#delete_group", function (e) {
     e.stopPropagation();
@@ -4101,7 +4107,13 @@ $(document).on("click", "#close_createEvent", async function (e) {
         let text = $(".current_step").text();
         let firstLetter = text.split(" ")[0];
         eventData.temp_id = temp_id;
-
+        // if (
+        //     restoredTempId &&
+        //     restoredTempId != "" &&
+        //     restoredTempId != undefined
+        // ) {
+        //     eventData.temp_id = restoredTempId;
+        // }
         if (final_step == 2) {
             savePage1Data(1);
         }
@@ -9201,7 +9213,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         };
         reader.readAsDataURL(file);
         // updateAllPhotoSliders();
-       
+
     }
     setTimeout(() => {
         // var imagePosition3 = 3;
