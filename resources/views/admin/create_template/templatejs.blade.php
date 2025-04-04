@@ -1,5 +1,20 @@
 <script type="text/javascript">
     var base_url = "{{ url('/') }}/";
+    $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
+        alert();
+            e.preventDefault(); // prevent default selection behavior
+            var self = $(this);
+            var select = self.parent();
+
+            // deselect all other options
+            select.find('option').prop('selected', false);
+
+            // select only the clicked one
+            self.prop('selected', true);
+
+            return false;
+        });
+    // });
     $(function() {
 
         var table = $("#template_table").DataTable({
