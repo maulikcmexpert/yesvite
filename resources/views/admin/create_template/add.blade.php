@@ -69,10 +69,10 @@
                                   <div class="checkboxes" id="Lorems">
                                
                                     
-                                    <div class="inner-wrap">
+                                    <div class="inner-wrap" id="event_design_sub_category_id">
                                      
                             
-                                      <label>
+                                      {{-- <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor (34) </span>
                                       </label><br>
@@ -100,7 +100,7 @@
                                       <label>
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
                                         <span>Ipsum 2 (12)</span>
-                                      </label>
+                                      </label> --}}
                                     </div>
                                   </div>
                                 </div>

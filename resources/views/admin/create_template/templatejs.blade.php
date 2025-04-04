@@ -13,7 +13,7 @@
 
     //         return false;
     //     });
-    $(function() {
+$(function() {
   
   setCheckboxSelectLabels();
   
@@ -237,8 +237,13 @@ function toggleCheckedAll(checkbox) {
                         $('#event_design_sub_category_id').empty();
                         $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
                         output.forEach(function(subcategory) {
+                            // $('#event_design_sub_category_id').append(
+                            //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
+                                
+                            // );
                             $('#event_design_sub_category_id').append(
-                                '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
+                                '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
+
                             );
                         });
                     },
