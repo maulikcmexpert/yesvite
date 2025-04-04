@@ -464,6 +464,9 @@ if ($("#isUserLoggedIn").val() === "0") {
     $(".new_login").show();
     $(".new-event-sidebar-wrp").hide();
 
+    $(".li_event_details").trigger('click');
+
+
 }
 });
 // Delete Group functionality
