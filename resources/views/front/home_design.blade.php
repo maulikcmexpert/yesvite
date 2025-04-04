@@ -128,11 +128,12 @@
                 foreach ($categories as $category) {
                     // dd($category);
                     foreach ($category->subcategory as $subcategory) {
-
-                        foreach ($category->subcategory as $subcategory) {
             $subcategoryNames[] = $subcategory->subcategory_name;
         }
         $subcategoryNameString = implode(',', $subcategoryNames);
+                  
+
+                        
 
                         foreach ($subcategory->textdatas as $image) {
                            
@@ -156,7 +157,7 @@
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
                         }
-                    }
+                    
                 }
 
                 shuffle($randomIds);
