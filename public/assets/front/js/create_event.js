@@ -9314,7 +9314,7 @@ function savePhotoSlider(){
                 console.log(eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
-                return 1;
+                if (callback) callback(savedImages); // 🔥 Call the callback here
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
@@ -9477,26 +9477,35 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
+function compaytest() {
+    savePhotoSlider(function (sliderssss, error) {
+        if (error) {
+            console.error("Error saving slider:", error);
+        } else {
+            alert("Slider saved successfully!");
+            console.log(sliderssss);
+        }
+    });
+}
+
+
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
     // return;
 
     e.preventDefault();
-    
-    savePhotoSlider().then(function(sliderssss) {
-        alert(sliderssss);
-        console.log(sliderssss);
-    });
-    
+
+    compaytest(); // Ensure this completes first
+
 
     eventData.is_update_event = "1";
-    // await saveDesignData(true);
-    // let save1 = savePage1Data(null, true);
-    // let save2 = savePage3Data(null, true);
-    // savePage4Data();
-    // if (save1 == 8 && save2 == 8) {
-    //     updateEventData();
-    // }
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
