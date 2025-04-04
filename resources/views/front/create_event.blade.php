@@ -500,7 +500,7 @@
                             </ul>
                         </li>
                         <li class="li_event_detail">
-                            <div class="menu-circle-wrp side-bar-list  ">
+                            <div class="menu-circle-wrp side-bar-list  eventDetails_menu">
                                 <span></span>
                                 <h3>Event Details</h3>
                             </div>
