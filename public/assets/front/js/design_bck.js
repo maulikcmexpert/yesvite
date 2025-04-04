@@ -1722,7 +1722,7 @@ async function bindData(current_event_id) {
         let spchoose = document.getElementsByClassName("sp-choose");
         console.log({ spchoose });
         $(spchoose).click(function () {
-            // alert('clicked')
+            // alert('clicked')\
             setTimeout(function () {
                 console.log({ clrcanvas });
                 undoStack.push(clrcanvas);
@@ -1761,8 +1761,8 @@ async function bindData(current_event_id) {
         const selectedColorType = document.querySelector(
             'input[name="colorType"]:checked'
         ).value;
-        const activeObject  = canvas.getObjects('textbox');;
-        //console.log("before update");
+        const activeObject = canvas.getActiveObject();
+        console.log( activeObject);
 
         //console.log(activeObject);
         if (!activeObject) {
