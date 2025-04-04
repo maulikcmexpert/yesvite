@@ -459,7 +459,7 @@ $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
 
 
-
+    $(".step_1").hide();
     $(".li_event_details").trigger('click');
 
 
