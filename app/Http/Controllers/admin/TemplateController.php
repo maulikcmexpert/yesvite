@@ -28,7 +28,7 @@ class TemplateController extends Controller
     {
         // dd($request->ajax());
         if ($request->ajax()) {
-            $data = TextData::with('categories')->orderBy('id', 'desc')->get();
+            $data = TextData::with('categories','subcategories')->orderBy('id', 'desc')->get();
             // $data = TextData::with('categories')->whereNotNull("event_design_sub_category_id")->orderBy('id', 'desc')->get();
             // dd($data);
             return Datatables::of($data)
