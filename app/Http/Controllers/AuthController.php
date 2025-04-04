@@ -237,10 +237,10 @@ class AuthController extends Controller
                 'token' => $randomString
             ];
             $this->addInFirebase($storeUser->id);
-            // Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
-            //     $message->to($request->email);
-            //     $message->subject('Verify your Yesvite email address');
-            // });
+            Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Verify your Yesvite email address');
+            });
 
             if ($isLogin) {
                 return response()->json([
