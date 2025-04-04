@@ -142,7 +142,7 @@ class HomeFrontController extends BaseController
                 $subQuery->select(DB::raw(1))
                     ->from('textdata_subcategories as tds')
                     ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
-                    ->whereColumn('tds.subcategory_id', 'subcategories.id')
+                    ->whereColumn('tds.subcategory_id', 'event_design_sub_categories.id')
                     ->where('td.is_visible', 1);
             });
         })
@@ -152,7 +152,7 @@ class HomeFrontController extends BaseController
                     $subQuery->select(DB::raw(1))
                         ->from('textdata_subcategories as tds')
                         ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
-                        ->whereColumn('tds.subcategory_id', 'subcategories.id')
+                        ->whereColumn('tds.subcategory_id', 'event_design_sub_categories.id')
                         ->where('td.is_visible', 1);
                 })
                 ->with(['textdatas' => function ($q) {
