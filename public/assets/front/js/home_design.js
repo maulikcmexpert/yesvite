@@ -23,7 +23,12 @@ $(document).ready(function () {
 
     $('input[name="design_subcategory"]').prop("checked", false);
     $("#Allcat").prop("checked", false);
-
+    $(".side-bar-sub-list").click(function() {
+        updateTotalCount();
+    })
+    $(".imag_c").click(function() {
+        updateTotalCount();
+    })
     updateTotalCount();
 
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
@@ -199,15 +204,15 @@ $(document).ready(function () {
                     let matches = tags.some((tag) => tag.includes(query)) ||
                     subcategory.includes(query) ||
                     category.includes(query);
-    
+
                     if (matches) {
                         $(this).show();
                             $(this).removeClass("d-none");
                             $(this).removeClass("fadeInDown");
                             $(this).css("visibility", "visible");
                             $(this).removeClass("wow");
-                            $(this).removeClass("d-none").fadeIn(); 
-                            visibleCount++; 
+                            $(this).removeClass("d-none").fadeIn();
+                            visibleCount++;
                     } else {
                         $(this).hide();
                         $(this).fadeOut().addClass("d-none");
@@ -218,11 +223,11 @@ $(document).ready(function () {
                 //     $(this).removeClass("fadeInDown");
                 //     $(this).css("visibility", "visible");
                 //     $(this).removeClass("wow");
-                //     $(this).removeClass("d-none").fadeIn(); 
-                //     visibleCount++; 
+                //     $(this).removeClass("d-none").fadeIn();
+                //     visibleCount++;
                 // } else {
                 //     $(this).hide();
-                //     $(this).fadeOut().addClass("d-none"); 
+                //     $(this).fadeOut().addClass("d-none");
                 // }
             });
 
