@@ -56,7 +56,7 @@
                             <span class="text-danger">{{ $errors->first('event_design_category_id.*') }}</span>
                         </div>
                     </div>
-                    <div class="col-lg-12 mb-3">
+                    <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sub Category</label>
                             {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id"> --}}
@@ -66,7 +66,7 @@
 
                             {{-- </select> --}}
 
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="wrapper">
                                     <button class="form-control toggle-next ellipsis" type="button">Select
                                         subbcategory</button>
