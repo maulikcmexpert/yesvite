@@ -481,7 +481,14 @@
 
         // $('#filtered_results').html(results);
     });
+    $(document).on("click", ".previousImeg", async function (e) {
 
+console.log( $(
+    ".image-item:visible, .image-item-new:visible"
+).length);
+updateTotalCount();
+
+});
 
             // $('#search_design_category').on('keyup', function() {
             //     let query = $(this).val().toLowerCase().trim();
@@ -790,13 +797,6 @@
             $(".total_design_count").text(visibleItems + " Items");
         });
 
-        $(document).on("click", ".previousImeg", async function (e) {
 
-console.log( $(
-    ".image-item:visible, .image-item-new:visible"
-).length);
-updateTotalCount();
-
-});
     </script>
 @endpush
