@@ -233,6 +233,10 @@
             $("#nav-profile-home-tab").click(function() {
                 updateTotalCount();
             })
+
+            $(".side-bar-sub-list").click(function() {
+                updateTotalCount();
+            })
             const urlParams = new URLSearchParams(window.location.search);
             const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
@@ -419,15 +423,15 @@
                     let matches = tags.some((tag) => tag.includes(query)) ||
                     subcategory.includes(query) ||
                     category.includes(query);
-    
+
                     if (matches) {
                         $(this).show();
                             $(this).removeClass("d-none");
                             $(this).removeClass("fadeInDown");
                             $(this).css("visibility", "visible");
                             $(this).removeClass("wow");
-                            $(this).removeClass("d-none").fadeIn(); 
-                            visibleCount++; 
+                            $(this).removeClass("d-none").fadeIn();
+                            visibleCount++;
                     } else {
                         $(this).hide();
                         $(this).fadeOut().addClass("d-none");
@@ -438,11 +442,11 @@
                 //     $(this).removeClass("fadeInDown");
                 //     $(this).css("visibility", "visible");
                 //     $(this).removeClass("wow");
-                //     $(this).removeClass("d-none").fadeIn(); 
-                //     visibleCount++; 
+                //     $(this).removeClass("d-none").fadeIn();
+                //     visibleCount++;
                 // } else {
                 //     $(this).hide();
-                //     $(this).fadeOut().addClass("d-none"); 
+                //     $(this).fadeOut().addClass("d-none");
                 // }
             });
 
@@ -478,7 +482,7 @@
 
         // $('#filtered_results').html(results);
     });
-            
+
 
             // $('#search_design_category').on('keyup', function() {
             //     let query = $(this).val().toLowerCase().trim();
@@ -607,7 +611,7 @@
         //     }, 500);
         // }
 
-   
+
         if (!localStorage.getItem('cookiesBoxDismissed')) {
             setTimeout(() => {
                 // $cookiesBox.addClass('active');

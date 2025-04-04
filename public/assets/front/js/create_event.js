@@ -5032,6 +5032,7 @@ $(document).on("click", ".li_design .pick-card", async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
+
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -5098,6 +5099,7 @@ function li_design_click() {
     var subclass = ".side-bar-sub-list";
     console.log("handleActiveClass");
     handleActiveClass(".li_design .pick-card");
+
     // }
 }
 

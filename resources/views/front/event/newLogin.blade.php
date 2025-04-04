@@ -1,11 +1,11 @@
-
 <x-front.advertise />
 <section class="new-create-account-section new_login">
     <div class="container">
         <div class="col-12 mb-5 mt-3">
             <div class="new-create-account-head">
                 <h2>Kids Birthday</h2>
-                <button type="button" class="new-create-account-close-btn" onclick="window.location.href='{{ route('front.home') }}'">
+                <button type="button" class="new-create-account-close-btn"
+                    onclick="window.location.href='{{ route('front.home') }}'">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.00098 1L15 14.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
@@ -75,8 +75,8 @@
                                 <h6>Each new account gets 30 free credits</h6>
                                 <h6>1 Credit = 1 invite</h6>
                             </div>
-                            <form method="POST" id="crateEventLogin" class="d-none"  action="{{ route('auth.checkLogin') }}"
-                                autocomplete="off">
+                            <form method="POST" id="crateEventLogin" class="d-none"
+                                action="{{ route('auth.checkLogin') }}" autocomplete="off">
                                 @csrf
                                 <input type="hidden" name="is_login" value="false">
 
@@ -868,82 +868,105 @@
                                 </div>
                             </form>
 
-                            <form method="POST" action="{{route('store.register')}}" id="registerEvent" autocomplete="off">
+                            <form method="POST" action="{{ route('store.register') }}" id="registerEvent"
+                                autocomplete="off">
                                 @csrf
                                 <input type="hidden" name="is_login" value="false">
                                 <input type="hidden" id="account_type" name="account_type" value="0">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                         <div class="input-form">
-                                            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}">
-                                            <label for="firstname" class="floating-label">First Name <span>*</span></label>
+                                            <input type="text" class="form-control" id="firstname"
+                                                name="firstname" value="{{ old('firstname') }}">
+                                            <label for="firstname" class="floating-label">First Name
+                                                <span>*</span></label>
                                             <div class="label-error">
-                                                <label id="firstname-error" class="error" for="firstname" style="color: red;"></label>
+                                                <label id="firstname-error" class="error" for="firstname"
+                                                    style="color: red;"></label>
                                                 @error('firstname')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                         <div class="input-form">
-                                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname')}}">
-                                            <label for="lastname" class="floating-label">Last Name <span>*</span></label>
+                                            <input type="text" class="form-control" id="lastname"
+                                                name="lastname" value="{{ old('lastname') }}">
+                                            <label for="lastname" class="floating-label">Last Name
+                                                <span>*</span></label>
                                             <div class="label-error">
-                                                <label id="lastname-error" class="error" for="lastname" style="color: red;"></label>
+                                                <label id="lastname-error" class="error" for="lastname"
+                                                    style="color: red;"></label>
                                                 @error('lastname')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form">
-                                            <input type="email" class="form-control" id="email_c" name="email" value="{{ old('email')}}" autocomplete="off">
-                                            <label for="email" class="floating-label">Email Address <span>*</span></label>
+                                            <input type="email" class="form-control" id="email_c" name="email"
+                                                value="{{ old('email') }}" autocomplete="off">
+                                            <label for="email" class="floating-label">Email Address
+                                                <span>*</span></label>
 
                                             <div class="label-error">
-                                                <label id="email-error" class="error" for="email" style="color: red;"></label>
+                                                <label id="email-error" class="error" for="email"
+                                                    style="color: red;"></label>
                                                 @error('email')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form">
-                                            <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                                            <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
+                                            <input type="text" class="form-control" id="zip_code"
+                                                name="zip_code" value="{{ old('zip_code') }}"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                            <label for="Zcode" class="floating-label">Zip Code
+                                                <span>*</span></label>
                                             <div class="label-error">
-                                                <label id="zip_code-error" class="error" for="zip_code" style="color: red;"></label>
+                                                <label id="zip_code-error" class="error" for="zip_code"
+                                                    style="color: red;"></label>
                                                 @error('zip_code')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form">
-                                            <input type="password" class="form-control" id="password_c" name="password" value="{{ old('password')}}" autocomplete="new-password">
-                                            <label for="password" class="floating-label">Password <span>*</span></label>
-                                            <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                            <input type="password" class="form-control" id="password_c"
+                                                name="password" value="{{ old('password') }}"
+                                                autocomplete="new-password">
+                                            <label for="password" class="floating-label">Password
+                                                <span>*</span></label>
+                                            <span toggle="#password-field"
+                                                class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                             <div class="label-error">
-                                                <label id="password-error" class="error" for="password" style="color: red;"></label>
+                                                <label id="password-error" class="error" for="password"
+                                                    style="color: red;"></label>
                                                 @error('password')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="input-form mb-0">
-                                            <input type="password" class="form-control" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
-                                            <label for="password" class="floating-label">Confirm Password <span>*</span></label>
-                                            <span toggle="#password-field" class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                            <input type="password" class="form-control" id="cpassword"
+                                                name="cpassword" value="{{ old('cpassword') }}">
+                                            <label for="password" class="floating-label">Confirm Password
+                                                <span>*</span></label>
+                                            <span toggle="#password-field"
+                                                class="fa-regular fa-fw fa-eye-slash field-icon toggle-password"></span>
                                             <div class="label-error">
-                                                <label id="cpassword-error" class="error" for="cpassword" style="color: red;"></label>
+                                                <label id="cpassword-error" class="error" for="cpassword"
+                                                    style="color: red;"></label>
                                                 @error('cpassword')
-                                                <label class="error">{{ $message }}</label>
+                                                    <label class="error">{{ $message }}</label>
                                                 @enderror
                                             </div>
                                         </div>
@@ -958,7 +981,8 @@
 
                                     </div> --}}
                                     <div class="col-lg-12 mt-2">
-                                        <button type="button" class="btn btn-primary createEventUser" id="createEventUser">Create account</button>
+                                        <button type="button" class="btn btn-primary createEventUser"
+                                            id="createEventUser">Create account</button>
                                     </div>
                                 </div>
                                 <ul class="new-create-account-social">
@@ -1699,8 +1723,9 @@
                                 <div class="new-create-account-form-foot">
 
                                     <p>Already have an account? <a href="#" id="login_event">Sign in</a></p>
-                                    <p>By signing up you agree to Yesvite's <span><a href="{{route('term_and_condition')}}">Terms & Conditions </a>
-                                            and <a href="{{route('privacy_policy')}}"> Privacy Policy</a></span></p>
+                                    <p>By signing up you agree to Yesvite's <span><a
+                                                href="{{ route('term_and_condition') }}">Terms & Conditions </a>
+                                            and <a href="{{ route('privacy_policy') }}"> Privacy Policy</a></span></p>
                                 </div>
                             </form>
 
@@ -1716,135 +1741,145 @@
 </section>
 
 @push('scripts')
-<script>
-
-$(document).ready(function () {
-    $.validator.addMethod(
-        "passwordCheck",
-        function (value, element) {
-            return (
-                this.optional(element) ||
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
+    <script>
+        $(document).ready(function() {
+            $.validator.addMethod(
+                "passwordCheck",
+                function(value, element) {
+                    return (
+                        this.optional(element) ||
+                        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
+                    );
+                },
+                "At least 6 characters with letters, numbers, and a special character"
             );
-        },
-        "At least 6 characters with letters, numbers, and a special character"
-    );
 
-    $("#registerEvent").validate({
-        rules: {
-            firstname: { required: true },
-            lastname: { required: true },
-            email: {
-                required: true,
-                email: true,
-                remote: {
-                    url: base_url + "check-email",
+            $("#registerEvent").validate({
+                rules: {
+                    firstname: {
+                        required: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: base_url + "check-email",
+                            type: "POST",
+                            headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                            },
+                            data: {
+                                email: function() {
+                                    return $("#email_c").val();
+                                },
+                            },
+                        },
+                    },
+                    zip_code: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        passwordCheck: true, // Custom password validation
+                    },
+                    cpassword: {
+                        required: true,
+                        equalTo: "#password_c",
+                    },
+                },
+                messages: {
+                    firstname: {
+                        required: "Please enter your first name"
+                    },
+                    lastname: {
+                        required: "Please enter your last name"
+                    },
+                    email: {
+                        required: "Please enter your email",
+                        email: "Enter a valid email",
+                        remote: "Email already exists",
+                    },
+                    zip_code: {
+                        required: "Please enter your zip code"
+                    },
+                    password: {
+                        required: "Enter your password",
+                        passwordCheck: "Must contain letters, numbers, and a special character",
+                    },
+                    cpassword: {
+                        required: "Confirm your password",
+                        equalTo: "Passwords do not match",
+                    },
+                },
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element).css("color", "red");
+                },
+                submitHandler: function(form) {
+                    registerUser(); // Call the AJAX function on submit
+                },
+            });
+
+            $(".createEventUser").on("click", function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                if ($("#registerEvent").valid()) {
+                    registerUser();
+                }
+            });
+
+            function registerUser() {
+                let formData = {
+                    firstname: $("#firstname").val(),
+                    lastname: $("#lastname").val(),
+                    email: $("#email_c").val(),
+                    zip_code: $("#zip_code").val(),
+                    password: $("#password_c").val(),
+                    cpassword: $("#cpassword").val(),
+                    account_type: $("#account_type").val(),
+                    is_login: false,
+                };
+
+                $.ajax({
+                    url: base_url + "store_register",
                     type: "POST",
+                    data: formData,
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                     },
-                    data: {
-                        email: function () {
-                            return $("#email_c").val();
-                        },
+                    beforeSend: function() {
+                        $(".createEventUser").prop("disabled", true).text("Registering...");
                     },
-                },
-            },
-            zip_code: { required: true },
-            password: {
-                required: true,
-                passwordCheck: true, // Custom password validation
-            },
-            cpassword: {
-                required: true,
-                equalTo: "#password_c",
-            },
-        },
-        messages: {
-            firstname: { required: "Please enter your first name" },
-            lastname: { required: "Please enter your last name" },
-            email: {
-                required: "Please enter your email",
-                email: "Enter a valid email",
-                remote: "Email already exists",
-            },
-            zip_code: { required: "Please enter your zip code" },
-            password: {
-                required: "Enter your password",
-                passwordCheck: "Must contain letters, numbers, and a special character",
-            },
-            cpassword: {
-                required: "Confirm your password",
-                equalTo: "Passwords do not match",
-            },
-        },
-        errorPlacement: function (error, element) {
-            error.insertAfter(element).css("color", "red");
-        },
-        submitHandler: function (form) {
-            registerUser(); // Call the AJAX function on submit
-        },
-    });
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success) {
+                            toastr.success("Registration successful!");
+                            $("#registerEvent").addClass("d-none");
+                            $("#crateEventLogin").removeClass("d-none");
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        $(".createEventUser").prop("disabled", false).text("Create Account");
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            $("#firstname-error").text(errors.firstname?.[0] || "");
+                            $("#lastname-error").text(errors.lastname?.[0] || "");
+                            $("#email-error").text(errors.email?.[0] || "");
+                            $("#zip_code-error").text(errors.zip_code?.[0] || "");
+                            $("#password-error").text(errors.password?.[0] || "");
+                            $("#cpassword-error").text(errors.cpassword?.[0] || "");
+                        } else {
+                            toastr.error("Registration failed! Please try again.");
+                        }
+                    },
+                });
+            }
 
-    $(".createEventUser").on("click", function (e) {
-        e.preventDefault(); // Prevent default form submission
 
-        if ($("#registerEvent").valid()) {
-            registerUser();
-        }
-    });
-
-    function registerUser() {
-        let formData = {
-            firstname: $("#firstname").val(),
-            lastname: $("#lastname").val(),
-            email: $("#email_c").val(),
-            zip_code: $("#zip_code").val(),
-            password: $("#password_c").val(),
-            cpassword: $("#cpassword").val(),
-            account_type: $("#account_type").val(),
-            is_login: false,
-        };
-
-        $.ajax({
-            url: base_url + "store_register",
-            type: "POST",
-            data: formData,
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            beforeSend: function () {
-                $(".createEventUser").prop("disabled", true).text("Registering...");
-            },
-            success: function (response) {
-                console.log(response);
-                if (response.success) {
-                    toastr.success("Registration successful!");
-                    $("#registerEvent").addClass("d-none");
-                    $("#crateEventLogin").removeClass("d-none");
-                } else {
-                    toastr.error(response.message);
-                }
-            },
-            error: function (xhr) {
-                $(".createEventUser").prop("disabled", false).text("Create Account");
-                if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
-                    $("#firstname-error").text(errors.firstname?.[0] || "");
-                    $("#lastname-error").text(errors.lastname?.[0] || "");
-                    $("#email-error").text(errors.email?.[0] || "");
-                    $("#zip_code-error").text(errors.zip_code?.[0] || "");
-                    $("#password-error").text(errors.password?.[0] || "");
-                    $("#cpassword-error").text(errors.cpassword?.[0] || "");
-                } else {
-                    toastr.error("Registration failed! Please try again.");
-                }
-            },
         });
-    }
-
-
-});
-
-</script>
+    </script>
 @endpush
