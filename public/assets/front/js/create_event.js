@@ -6899,6 +6899,8 @@ $(document).on("click", ".save_event_co_host", function () {
 // });
 
 $(document).on("click", ".final_checkout", function () {
+    console.log(eventData);
+
     var data = eventData;
     // console.log(data);
     // $('#loader').css('display','flex');
@@ -9079,13 +9081,13 @@ function searchRecords(lim, off, type, search = null) {
 //old_slider_image
 var imageSources = [];
 var imagenames = [];
-$(document).on("change", ".slider_photo", function (event) {
+$(document).on("change", ".slider_photo", async function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-1").attr("src", e.target.result).show();
-            $(".photo-slider-1").attr("data-image", "");
+            // $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
         $(".photo-edit-delete-1").show();
@@ -9096,33 +9098,38 @@ $(document).on("change", ".slider_photo", function (event) {
 
         // var image1;
     }
-    setTimeout(() => {
-        // var imagePosition = 1;
-        // var existingIndex = imageSources.findIndex(
-        //     (img) => img.image_position === imagePosition
-        // );
-        // if (existingIndex !== -1) {
-        //     // Update the existing entry
-        //     imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
-        //     imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
-        // } else {
-        //     // Add a new entry if it does not exist
-        //     imageSources.push({
-        //         src: $(".photo-slider-1").attr("src"),
-        //         deleteId: $(".photo-slider-1").data("delete"),
-        //         image_position: $(".photo-slider-1").data("delete"),
-        //         image_name: $(".photo-slider-1").attr("data-image"),
-        //     });
-        // }
-        // if(eventId==""){
-        //     savePhotoSlider();
-        // }
+    setTimeout(async() => {
+        var imagePosition = 1;
+        var existingIndex = imageSources.findIndex(
+            (img) => img.image_position === imagePosition
+        );
+        if (existingIndex !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
+            imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-1").attr("src"),
+                deleteId: $(".photo-slider-1").data("delete"),
+                image_position: $(".photo-slider-1").data("delete"),
+                image_name: $(".photo-slider-1").attr("data-image"),
+            });
+        }
+
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
+
+    // if(eventId==""){
+    //     await savePhotoSlider();
+    // }
 });
 
-$(document).on("change", ".slider_photo_2", function (event) {
+$(document).on("change", ".slider_photo_2", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-2").show();
@@ -9130,36 +9137,37 @@ $(document).on("change", ".slider_photo_2", function (event) {
         $(".photo-edit-delete-2").show();
         reader.onload = function (e) {
             $(".photo-slider-2").attr("src", e.target.result).show();
-            $(".photo-slider-2").attr("data-image", "");
+            // $(".photo-slider-2").attr("data-image", "");
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
-        // var imagePosition2 = 2;
-        // var existingIndex2 = imageSources.findIndex(
-        //     (img) => img.image_position === imagePosition2
-        // );
-        // if (existingIndex2 !== -1) {
-        //     // Update the existing entry
-        //     imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
-        // } else {
-        //     // Add a new entry if it does not exist
-        //     imageSources.push({
-        //         src: $(".photo-slider-2").attr("src"),
-        //         deleteId: $(".photo-slider-2").data("delete"),
-        //         image_position: $(".photo-slider-2").data("delete"),
-        //         image_name: $(".photo-slider-2").data("image"),
+    setTimeout(async() => {
+        var imagePosition2 = 2;
+        var existingIndex2 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition2
+        );
+        if (existingIndex2 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-2").attr("src"),
+                deleteId: $(".photo-slider-2").data("delete"),
+                image_position: $(".photo-slider-2").data("delete"),
+                image_name: $(".photo-slider-2").data("image"),
 
-        //     });
-        // }
-        // if(eventId==""){
-        //     savePhotoSlider();
-        // }
+            });
+        }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+
 });
-$(document).on("change", ".slider_photo_3", function (event) {
+$(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();
@@ -9167,33 +9175,34 @@ $(document).on("change", ".slider_photo_3", function (event) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-3").attr("src", e.target.result).show();
-            $(".photo-slider-3").attr("data-image", "");
+            // $(".photo-slider-3").attr("data-image", "");
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
-        // var imagePosition3 = 3;
-        // var existingIndex3 = imageSources.findIndex(
-        //     (img) => img.image_position === imagePosition3
-        // );
-        // if (existingIndex3 !== -1) {
-        //     // Update the existing entry
-        //     imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
-        // } else {
-        //     // Add a new entry if it does not exist
-        //     imageSources.push({
-        //         src: $(".photo-slider-3").attr("src"),
-        //         deleteId: $(".photo-slider-3").data("delete"),
-        //         image_position: $(".photo-slider-3").data("delete"),
-        //         image_name: $(".photo-slider-3").data("image"),
-        //     });
-        // }
-        // if(eventId==""){
-        //     savePhotoSlider();
-        // }
+    setTimeout(async() => {
+        var imagePosition3 = 3;
+        var existingIndex3 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition3
+        );
+        if (existingIndex3 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-3").attr("src"),
+                deleteId: $(".photo-slider-3").data("delete"),
+                image_position: $(".photo-slider-3").data("delete"),
+                image_name: $(".photo-slider-3").data("image"),
+            });
+        }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+
 });
 //old_slider_image
 
@@ -9249,136 +9258,219 @@ function getLengthofSliderImage() {
     });
     $(".slider_image_count").text(i + "/3 Photos");
 }
-function savePhotoSlider() {
+// function savePhotoSlider(){
+//     if(eventId!=""){
+//         imageSources = [];
+//         $(".slider_img").each(function () {
+//             var src = $(this).attr("src");
+//             if (src !== "") {
+//                 imageSources.push({
+//                     src: $(this).attr("src"),
+//                     deleteId: $(this).data("delete"),
+//                     image_position: $(this).data("delete"),
+//                     image_name: $(this).data('image')
+//                 });
 
-    if (imageSources.length > 0) {
-        $("#loader").css("display", "flex");
-        var event = $("#eventID").val();
+//             }
+//         });
+//     }
+//     if (imageSources.length > 0) {
+//         $("#loader").css("display", "flex");
+//         var event = $("#eventID").val();
 
-        $.ajax({
-            url: base_url + "event/save_slider_img",
-            method: "POST",
-            data: {
-                eventId: event,
-                imageSources: imageSources,
-                // imagenames: imagenames,
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                if (response.status == 401 && response.info == "logout") {
-                    window.location.href = "/login"; // Redirect to home page
-                    return;
-                }
-                var savedImages = response.images;
-                var newImages = response.images;
-                if ($("#isUserLoggedIn").val() === "0") {
-                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                    // localStorage.removeItem("save-slider-image");
-                    // Append new images to the existing array
-                    // newImages.forEach(image => {
-                    //     savedImages.push(image);
-                    // });
+//         $.ajax({
+//             url: base_url + "event/save_slider_img",
+//             method: "POST",
+//             data: {
+//                 eventId: event,
+//                 imageSources: imageSources,
+//                 // imagenames: imagenames,
+//                 _token: $('meta[name="csrf-token"]').attr("content"),
+//             },
+//             success: function (response) {
+//                 if (response.status == 401 && response.info == "logout") {
+//                     window.location.href = "/login"; // Redirect to home page
+//                     return;
+//                 }
+//                 var savedImages = response.images;
+//                 var newImages = response.images;
+//                 if ($("#isUserLoggedIn").val() === "0") {
+//                     // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+//                     // localStorage.removeItem("save-slider-image");
+//                     // Append new images to the existing array
+//                     // newImages.forEach(image => {
+//                     //     savedImages.push(image);
+//                     // });
 
-                    // Update localStorage with the combined array
-                    localStorage.setItem(
-                        "save-slider-image",
-                        JSON.stringify(savedImages)
-                    );
-                }
+//                     // Update localStorage with the combined array
+//                     localStorage.setItem(
+//                         "save-slider-image",
+//                         JSON.stringify(savedImages)
+//                     );
+//                 }
 
-                savedImages.forEach((image, index) => {
-                    var selector = `.photo-slider-${index + 1}`;
-                    $(selector).attr("data-image", image.fileName);
-                });
-                eventData.slider_images = []; // Empty the array
-                eventData.slider_images = savedImages; // Assign new values
+//                 savedImages.forEach((image, index) => {
+//                     var selector = `.photo-slider-${index+1}`;
+//                     $(selector).attr("data-image", image.fileName);
+//                 });
+//                 eventData.slider_images = []; // Empty the array
+//                 eventData.slider_images = savedImages; // Assign new values
 
-                // eventData.slider_images = savedImages;
-                console.log(savedImages);
-                console.log(eventData.slider_images);
-                $("#loader").css("display", "none");
-                toastr.success("Slider Image saved Successfully");
-                return true;
-            },
-            error: function (xhr, status, error) {
-                $("#loader").css("display", "none");
-                toastr.error(error);
-            },
-        });
-    }
-}
+//                 // eventData.slider_images = savedImages;
+//                 console.log(savedImages);
+//                 console.log(eventData.slider_images);
+//                 $("#loader").css("display", "none");
+//                 toastr.success("Slider Image saved Successfully");
+//                 return 1;
+//             },
+//             error: function (xhr, status, error) {
+//                 $("#loader").css("display", "none");
+//                 toastr.error(error);
+//             },
+//         });
+//     }
+// }
 // $(document).on("click",'.save-slider-image',function(){
 //     savePhotoSlider();
 // });
-$(document).on("click", ".save-slider-image", function () {
-    var imageSources = [];
-    var imagenames = [];
-    // $(".slider_img").each(function () {
-    //     imageSources.push($(this).attr("src"));
-    // });
+// $(document).on("click", ".save-slider-image", function () {
+//     var imageSources = [];
+//     var imagenames = [];
+//     // $(".slider_img").each(function () {
+//     //     imageSources.push($(this).attr("src"));
+//     // });
 
-    $(".slider_img").each(function () {
-        var src = $(this).attr("src");
-        if (src !== "") {
-            imageSources.push({
-                src: $(this).attr("src"),
-                deleteId: $(this).data("delete"),
-                image_position: $(this).data("delete"),
-            });
-            imagenames.push({
-                name: $(this).attr("data-image"),
-            });
-        }
-    });
-    //console.log(imageSources);
-    if (imageSources.length > 0) {
-        $("#loader").css("display", "flex");
-        $.ajax({
-            url: base_url + "event/save_slider_img",
-            method: "POST",
-            data: {
-                eventId: eventId,
-                imageSources: imageSources,
-                imagenames: imagenames,
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                if (response.status == 401 && response.info == "logout") {
-                    window.location.href = "/login"; // Redirect to home page
-                    return;
-                }
-                var savedImages = response.images;
-                var newImages = response.images;
-                if ($("#isUserLoggedIn").val() === "0") {
-                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                    // localStorage.removeItem("save-slider-image");
-                    // Append new images to the existing array
-                    // newImages.forEach(image => {
-                    //     savedImages.push(image);
-                    // });
+//     $(".slider_img").each(function () {
+//         var src = $(this).attr("src");
+//         if (src !== "") {
+//             imageSources.push({
+//                 src: $(this).attr("src"),
+//                 deleteId: $(this).data("delete"),
+//                 image_position: $(this).data("delete"),
+//             });
+//             imagenames.push({
+//                 name: $(this).attr("data-image"),
+//             });
+//         }
+//     });
+//     //console.log(imageSources);
+//     if (imageSources.length > 0) {
+//         $("#loader").css("display", "flex");
+//        $.ajax({
+//             url: base_url + "event/save_slider_img",
+//             method: "POST",
+//             data: {
+//                 eventId: eventId,
+//                 imageSources: imageSources,
+//                 imagenames: imagenames,
+//                 _token: $('meta[name="csrf-token"]').attr("content"),
+//             },
+//             success: function (response) {
+//                 if (response.status == 401 && response.info == "logout") {
+//                     window.location.href = "/login"; // Redirect to home page
+//                     return;
+//                 }
+//                 var savedImages = response.images;
+//                 var newImages = response.images;
+//                 if ($("#isUserLoggedIn").val() === "0") {
+//                     // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+//                     // localStorage.removeItem("save-slider-image");
+//                     // Append new images to the existing array
+//                     // newImages.forEach(image => {
+//                     //     savedImages.push(image);
+//                     // });
 
-                    // Update localStorage with the combined array
-                    localStorage.setItem(
-                        "save-slider-image",
-                        JSON.stringify(savedImages)
-                    );
-                }
-                eventData.slider_images = []; // Empty the array
-                eventData.slider_images = savedImages; // Assign new values
+//                     // Update localStorage with the combined array
+//                     localStorage.setItem(
+//                         "save-slider-image",
+//                         JSON.stringify(savedImages)
+//                     );
+//                 }
+//                 eventData.slider_images = []; // Empty the array
+//                 eventData.slider_images = savedImages; // Assign new values
 
-                // eventData.slider_images = savedImages;
-                console.log(savedImages);
-                console.log(eventData.slider_images);
-                $("#loader").css("display", "none");
-                toastr.success("Slider Image saved Successfully");
-            },
-            error: function (xhr, status, error) {
-                $("#loader").css("display", "none");
-                toastr.error(error);
-            },
+//                 // eventData.slider_images = savedImages;
+//                 console.log(savedImages);
+//                 console.log(eventData.slider_images);
+//                 $("#loader").css("display", "none");
+//                 toastr.success("Slider Image saved Successfully");
+//             },
+//             error: function (xhr, status, error) {
+//                 $("#loader").css("display", "none");
+//                 toastr.error(error);
+//             },
+//         });
+//     }
+// });
+
+
+async function savePhotoSlider() {
+    if (eventId != "") {
+        imageSources = [];
+        $(".slider_img").each(function () {
+            let src = $(this).attr("src");
+            if (src !== "") {
+                imageSources.push({
+                    src: $(this).attr("src"),
+                    deleteId: $(this).data("delete"),
+                    image_position: $(this).data("delete"),
+                    image_name: $(this).data("image")
+                });
+            }
         });
     }
-});
+
+    if (imageSources.length > 0) {
+        $("#loader").css("display", "flex");
+        let event = $("#eventID").val();
+
+        // try {
+            let response = await $.ajax({
+                url: base_url + "event/save_slider_img",
+                method: "POST",
+                data: {
+                    eventId: event,
+                    imageSources: imageSources,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function (response) {
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/login"; // Redirect to home page
+                        return;
+                    }
+                    var savedImages = response.images;
+                    var newImages = response.images;
+                    if ($("#isUserLoggedIn").val() === "0") {
+                        // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+                        // localStorage.removeItem("save-slider-image");
+                        // Append new images to the existing array
+                        // newImages.forEach(image => {
+                        //     savedImages.push(image);
+                        // });
+
+                        // Update localStorage with the combined array
+                        localStorage.setItem(
+                            "save-slider-image",
+                            JSON.stringify(savedImages)
+                        );
+                    }
+                    eventData.slider_images = []; // Empty the array
+                    eventData.slider_images = savedImages; // Assign new values
+
+                    // eventData.slider_images = savedImages;
+                    console.log(savedImages);
+                    console.log(eventData.slider_images);
+                    $("#loader").css("display", "none");
+                    toastr.success("Slider Image saved Successfully");
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    toastr.error(error);
+                },
+
+            });
+    }
+}
 
 $(document).on("click", ".delete_silder", function (e) {
     e.preventDefault();
@@ -9461,14 +9553,14 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
+
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
     // return;
 
     e.preventDefault();
 
-    // await savePhotoSlider(); // Ensure this completes first
-
+    await savePhotoSlider();
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
@@ -10989,12 +11081,12 @@ $("#create_event_register").on("click", function (e) {
     $("#registerEvent").removeClass("d-none"); // Hide registration form
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
-$(".new-create-account-close-btn").on("click", function (e) {
-    $(".new_login_page, .new_login").hide(); // Hide both elements
-    $("#edit-design-temp").show();
+// $(".new-create-account-close-btn").on("click", function (e) {
+//     $(".new_login_page, .new_login").hide(); // Hide both elements
+//     $("#edit-design-temp").show();
 
-    $(".new-event-sidebar-wrp").show();
-});
+//     $(".new-event-sidebar-wrp").show();
+// });
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
