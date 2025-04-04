@@ -9420,6 +9420,7 @@ async function savePhotoSlider() {
         imageSources = [];
         $(".slider_img").each(function () {
             let src = $(this).attr("src");
+            let image_name = $(this).attr("data-image");
             if (src !== "") {
                 imageSources.push({
                     src: $(this).attr("src"),
