@@ -1,20 +1,19 @@
 <script type="text/javascript">
-alert();
+// alert();
     var base_url = "{{ url('/') }}/";
-    $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
-        alert();
-            e.preventDefault(); // prevent default selection behavior
-            var self = $(this);
-            var select = self.parent();
+    
+      $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
+            e.preventDefault(); // Stop default Ctrl behavior
 
-            // deselect all other options
-            select.find('option').prop('selected', false);
+            const $option = $(this);
+            const selected = $option.prop('selected');
 
-            // select only the clicked one
-            self.prop('selected', true);
+            // Toggle selection manually
+            $option.prop('selected', !selected);
 
             return false;
         });
+
     // });
     $(function() {
 
