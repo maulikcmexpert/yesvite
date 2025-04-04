@@ -9300,7 +9300,7 @@ function savePhotoSlider(){
                 console.log(eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
-                return true;
+                return 1;
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
