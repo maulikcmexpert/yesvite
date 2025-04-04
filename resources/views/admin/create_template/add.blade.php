@@ -6,8 +6,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/create_template')}}">Template List</a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/create_template')}}">Template List</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,7 +19,7 @@
 
 
 
-        <div class="card card-primary categoryCard add-template-wrp">
+        <div class="card card-primary categoryCard">
 
             <div class="card-header">
 
@@ -32,8 +31,7 @@
 
 
 
-            <form method="post" action="{{ route('create_template.store')}}" id="templateForm"
-                enctype="multipart/form-data">
+            <form method="post" action="{{ route('create_template.store')}}" id="templateForm" enctype="multipart/form-data">
 
                 @csrf
 
@@ -42,8 +40,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Category</label>
 
-                            <select class="form-control design_id" id="event_design_category_id"
-                                name="event_design_category_id">
+                            <select class="form-control design_id" id="event_design_category_id" name="event_design_category_id">
 
                                 <option value="">Select Category</option>
 
@@ -59,54 +56,16 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sub Category</label>
-                            {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id"> --}}
-                            {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
+                            <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
 
-                                <option value="">Select subcategory</option> --}}
+                                <option value="">Select subcategory</option>
 
-                            {{-- </select> --}}
+                                <!-- @foreach($getsubcatData as $cat) -->
 
-                            <div class="wrapper new-wrp">
-                                <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
-                                    subbcategory <i class="fa-solid fa-angle-down"></i></button>
-                                <div class="checkboxes select-subcat-inner" id="Lorems">
+                                <!-- <option value="{{$cat->id}}">{{$cat->subcategory_name}}</option> -->
 
-
-                                    <div class="inner-wrap" id="event_design_sub_category_id">
-
-
-                                        {{-- <label>
-                                        <input type="checkbox" value="dolor" class="ckkBox val" />
-                                        <span>Dolor (34) </span>
-                                      </label>
-                            
-                                      <label>
-                                        <input type="checkbox" value="lorem" class="ckkBox val" />
-                                        <span>Lorem (234)</span>
-                                      </label>
-                            
-                                      <label>
-                                        <input type="checkbox" value="ipsum" class="ckkBox val" />
-                                        <span>Ipsum (12)</span>
-                                      </label>
-                                      
-                                      <label>
-                                        <input type="checkbox" value="dolor" class="ckkBox val" />
-                                        <span>Dolor 2 (34) </span>
-                                      </label>
-                            
-                                      <label>
-                                        <input type="checkbox" value="lorem" class="ckkBox val" />
-                                        <span>Lorem 2 (234)</span>
-                                      </label>
-                            
-                                      <label>
-                                        <input type="checkbox" value="ipsum" class="ckkBox val" />
-                                        <span>Ipsum 2 (12)</span>
-                                      </label> --}}
-                                    </div>
-                                </div>
-                            </div>
+                                <!-- @endforeach -->
+                            </select>
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
@@ -116,11 +75,9 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Image</label>
-                            <input type="file" class="form-control image" name="image" placeholder="choose image"
-                                id="image" value="">
+                            <input type="file" class="form-control image" name="image" placeholder="choose image" id="image" value="">
                             <span class="text-danger">{{ $errors->first('image.*') }}</span>
-                            <img id="add_preview_image" src="" alt="Template Image" width="100" class="mt-2"
-                                style="display: none;">
+                            <img id="add_preview_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
 
 
 
@@ -133,11 +90,9 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Filled Image</label>
-                            <input type="file" class="form-control image" name="filled_image" placeholder="choose image"
-                                id="filled_image" value="">
+                            <input type="file" class="form-control image" name="filled_image" placeholder="choose image" id="filled_image" value="">
                             <span class="text-danger">{{ $errors->first('filled_image.*') }}</span>
-                            <img id="add_preview_filled_image" src="" alt="Template Image" width="100" class="mt-2"
-                                style="display: none;">
+                            <img id="add_preview_filled_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
 
 
 
@@ -150,7 +105,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" />
+                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput"  />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 

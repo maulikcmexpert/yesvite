@@ -187,6 +187,8 @@ class HomeFrontController extends BaseController
     ->orderBy('id', 'ASC')
     ->get();
 
+
+    
     
 
         dd($textdatas);

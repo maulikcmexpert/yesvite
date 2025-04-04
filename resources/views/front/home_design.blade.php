@@ -126,24 +126,13 @@
                 $allImages = collect([]);
                 $randomIds = [];
                 foreach ($categories as $category) {
-                    // dd($category);
-                    $subcategoryNames= [];
                     foreach ($category->subcategory as $subcategory) {
-            $subcategoryNames[] = $subcategory->subcategory_name;
-        }
-        $subcategoryNameString = implode(',', $subcategoryNames);
-                  
-
-                        
-
                         foreach ($subcategory->textdatas as $image) {
-                           
-
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
 
-                                'subcategory_name' =>$subcategoryNameString,
+                                'subcategory_name' =>$subcategory->subcategory_name,
 
                                 'static_information' => json_encode($image->static_information),
                                 'shape_image' =>
@@ -158,7 +147,7 @@
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
                         }
-                    
+                    }
                 }
 
                 shuffle($randomIds);
