@@ -2782,6 +2782,7 @@ async function bindData(current_event_id) {
         var activeObject = canvas.getActiveObject();
 
         if (!activeObject || activeObject.type !== "textbox") {
+            updateUndoRedoButtons()
             return; // No object or not a textbox, so do nothing
         }
         console.log("add to undo");
