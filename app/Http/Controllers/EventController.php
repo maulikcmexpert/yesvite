@@ -3528,7 +3528,7 @@ class EventController extends BaseController
             foreach ($imageSources as $imageSource) {
                 if (!empty($imageSource['src'])) {
                     if (strpos($imageSource['src'], 'data:image') === 0) {
-                        if($imageSource['image_name']!=""||$imageSource['image_name']=null){
+                        if($imageSource['image_name']!=""||$imageSource['image_name']!=null){
                             $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
                             if (file_exists($filePath)) {
                                 unlink($filePath);

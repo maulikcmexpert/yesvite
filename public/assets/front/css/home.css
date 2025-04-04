@@ -378,6 +378,8 @@
     max-width: 215px;
     margin: 0px auto;
     cursor: pointer;
+    aspect-ratio: 5/7;
+    height: 100% !important;
 }
 
 .collection-card.card-green {
@@ -979,7 +981,7 @@
 
 .cookies-track p {
     font-size: 20px;
-    color: #64748B;
+    color: #64748b;
 }
 
 .cookies-track p a {
@@ -1055,7 +1057,7 @@
     margin-bottom: 20px;
 }
 
-.cookies-track-btn{
+.cookies-track-btn {
     width: 100%;
     margin-top: 20px;
     display: flex;
@@ -1076,11 +1078,11 @@
     min-width: 200px;
 }
 
-.cookies-track .container-fluid{
+.cookies-track .container-fluid {
     position: relative !important   ;
 }
 
-.close-btn-privacy-cookie{
+.close-btn-privacy-cookie {
     position: absolute;
     top: 6px;
     right: 0;
@@ -1477,12 +1479,11 @@
         margin-bottom: 20px;
     }
 
-.close-btn-privacy-cookie {
-    position: absolute;
-    top: 3px;
-    right: 0;
-}
-
+    .close-btn-privacy-cookie {
+        position: absolute;
+        top: 3px;
+        right: 0;
+    }
 }
 
 @media only screen and (max-width: 435px) {
@@ -1506,7 +1507,6 @@
         font-size: 15px;
         line-height: 17px;
     }
-
 }
 
 @media only screen and (max-width: 424px) {
@@ -1519,7 +1519,7 @@
     .collection-card.card-blue {
         border-radius: 10px !important;
     }
-    .cookies-track-btn{
+    .cookies-track-btn {
         flex-direction: column;
     }
     .cookies-track-btn button {

@@ -1052,8 +1052,8 @@
 
 .collection-card.card-blue.edit_design_tem {
     aspect-ratio: 5/7;
-    height: max-content !important;
-    cursor: pointer;
+    height: 100% !important;
+    cursor: pointer !important;
 }
 
 /* ====Responsive==== */
