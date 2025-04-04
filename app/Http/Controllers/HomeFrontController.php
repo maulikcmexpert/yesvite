@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\TextData;
 use App\Models\EventDesignCategory;
 use App\Models\EventDesignSubCategory;
+use Illuminate\Support\Facades\DB;
 
 class HomeFrontController extends BaseController
 {
@@ -119,22 +120,49 @@ class HomeFrontController extends BaseController
         //     ->orderBy('id', 'ASC')
         //     ->get();
 
+        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas', function ($q) {
+        //         $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+        //     });
+        // })
+        // ->with([
+        //     'subcategory' => function ($query) {
+        //         $query->whereHas('textdatas', function ($q) {
+        //             $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+        //         })->with(['textdatas' => function ($q) {
+        //             $q->where('is_visible', '1'); // Load only visible textdatas
+        //         }]);
+        //     }
+        // ])
+        // ->orderBy('id', 'ASC')
+        // ->get();
+
         $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+            $query->whereExists(function ($subQuery) {
+                $subQuery->select(DB::raw(1))
+                    ->from('textdata_subcategories as tds')
+                    ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
+                    ->whereColumn('tds.subcategory_id', 'subcategories.id')
+                    ->where('td.is_visible', 1);
             });
         })
         ->with([
             'subcategory' => function ($query) {
-                $query->whereHas('textdatas', function ($q) {
-                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-                })->with(['textdatas' => function ($q) {
-                    $q->where('is_visible', '1'); // Load only visible textdatas
+                $query->whereExists(function ($subQuery) {
+                    $subQuery->select(DB::raw(1))
+                        ->from('textdata_subcategories as tds')
+                        ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
+                        ->whereColumn('tds.subcategory_id', 'subcategories.id')
+                        ->where('td.is_visible', 1);
+                })
+                ->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', 1);
                 }]);
             }
         ])
         ->orderBy('id', 'ASC')
         ->get();
+        
         
 
         // Calculate total count of textdatas across all subcategories

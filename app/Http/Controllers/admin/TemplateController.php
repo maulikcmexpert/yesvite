@@ -348,8 +348,7 @@ class TemplateController extends Controller
             // dd($id,$request->subcategory);
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
-                   
-
+                
                     $text =new TextdataSubcategory();
                     $text->textdata_id= $template->id;
                     $text->subcategory_id= (int)$subcatId;
