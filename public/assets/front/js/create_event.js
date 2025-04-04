@@ -9455,6 +9455,7 @@ async function savePhotoSlider() {
                             "save-slider-image",
                             JSON.stringify(savedImages)
                         );
+                        return;
                     }
                     eventData.slider_images = []; // Empty the array
                     eventData.slider_images = savedImages; // Assign new values
