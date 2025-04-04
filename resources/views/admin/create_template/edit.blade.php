@@ -1,4 +1,9 @@
-{{dd($getTemData->subcategories);}}
+{{-- {{dd($getTemData->subcategories);}} --}}
+@php
+    $pivotSubcategoryIds = $getTemData->subcategories->pluck('pivot_subcategory_id')->toArray();
+dd($pivotSubcategoryIds);
+
+@endphp
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
