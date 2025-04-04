@@ -182,7 +182,7 @@ class TemplateController extends Controller
     // }
     public function store(Request $request)
     {
-        dd($request->event_design_sub_category_id);
+        dd($request);
         try {
             DB::beginTransaction();
             $imageName = null;
