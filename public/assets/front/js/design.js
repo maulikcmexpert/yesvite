@@ -2639,14 +2639,21 @@ async function bindData(current_event_id) {
 
     // Function to apply the font (since fonts are already preloaded)
     function applyFont(font) {
-        addToUndoStack(canvas);
+
 
         var activeObject = canvas.getActiveObject();
+
+        if (!activeObject || activeObject.type !== "textbox") {
+            updateUndoRedoButtons()
+            return; // No object or not a textbox, so do nothing
+        }
+        addToUndoStack(canvas);
         if (activeObject && activeObject.type === "textbox") {
             activeObject.set({ fontFamily: font });
             activeObject.initDimensions();
             canvas.requestRenderAll();
         } else {
+
             console.log("No object selected");
         }
     }
