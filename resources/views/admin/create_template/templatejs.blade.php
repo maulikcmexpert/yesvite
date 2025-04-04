@@ -276,44 +276,44 @@ function toggleCheckedAll(checkbox) {
                 }
             });
 
-            $(document).on('click', '#templateAdd', function(e) {
-                var selectedValue = $("#event_design_category_id").val();
-                var selectedSubCategory = $("#event_design_sub_category_id").val();
-                var image = $("#image").val();
-                var filledimage = $("#filled_image").val();
+            // $(document).on('click', '#templateAdd', function(e) {
+            //     var selectedValue = $("#event_design_category_id").val();
+            //     var selectedSubCategory = $("#event_design_sub_category_id").val();
+            //     var image = $("#image").val();
+            //     var filledimage = $("#filled_image").val();
 
-                var hasError = false;
-                if (selectedValue === '') {
-                    $("#event_design_category_id").next('.text-danger').text('Please select design category');
-                    hasError = true;
-                }
-                if (selectedSubCategory === '') {
-                    $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
-                    hasError = true;
-                }
-                if (image === '') {
-                    $("#image").next('.text-danger').text('Please upload Template');
-                    hasError = true;
-                } else {
-                    $("#image").next('.text-danger').text("");
-                }
-
-
-                if (filledimage === '') {
-                    $("#filled_image").next('.text-danger').text('Please upload Filled Template');
-                    hasError = true;
-                } else {
-                    $("#filled_image").next('.text-danger').text("");
-                }
+            //     var hasError = false;
+            //     if (selectedValue === '') {
+            //         $("#event_design_category_id").next('.text-danger').text('Please select design category');
+            //         hasError = true;
+            //     }
+            //     if (selectedSubCategory === '') {
+            //         $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
+            //         hasError = true;
+            //     }
+            //     if (image === '') {
+            //         $("#image").next('.text-danger').text('Please upload Template');
+            //         hasError = true;
+            //     } else {
+            //         $("#image").next('.text-danger').text("");
+            //     }
 
 
-                if (!hasError) {
-                    $("#templateForm").submit();
-                } else {
-                    e.preventDefault();
-                }
+            //     if (filledimage === '') {
+            //         $("#filled_image").next('.text-danger').text('Please upload Filled Template');
+            //         hasError = true;
+            //     } else {
+            //         $("#filled_image").next('.text-danger').text("");
+            //     }
 
-            });
+
+            //     if (!hasError) {
+            //         $("#templateForm").submit();
+            //     } else {
+            //         e.preventDefault();
+            //     }
+
+            // });
 
 
 
