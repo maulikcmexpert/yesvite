@@ -9120,6 +9120,10 @@ $(document).on("change", ".slider_photo", async function (event) {
         if(eventId==""){
             await savePhotoSlider();
         }
+        if ($("#isUserLoggedIn").val() === "0") {
+            await savePhotoSlider();
+        }
+
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
@@ -9162,6 +9166,10 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         if(eventId==""){
             await savePhotoSlider();
         }
+        if ($("#isUserLoggedIn").val() === "0") {
+            await savePhotoSlider();
+        }
+
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
@@ -9197,6 +9205,9 @@ $(document).on("change", ".slider_photo_3", async function (event) {
             });
         }
         if(eventId==""){
+            await savePhotoSlider();
+        }
+        if ($("#isUserLoggedIn").val() === "0") {
             await savePhotoSlider();
         }
         // savePhotoSlider();
