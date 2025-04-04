@@ -3520,7 +3520,7 @@ class EventController extends BaseController
     // }
     public function saveSliderImg(Request $request)
     {
-        dd($request);
+        // dd($request);
         $imageSources = $request->imageSources;
         $event_id = $request->eventId;
         $i = 0;
@@ -3566,6 +3566,9 @@ class EventController extends BaseController
                         'deleteId' => $imageSource['deleteId'],
                         'image_position'=>$imageSource['deleteId']
                     ];
+
+                            session(['desgin_slider' => $savedFiles]);
+
                 }
             }
         // }
