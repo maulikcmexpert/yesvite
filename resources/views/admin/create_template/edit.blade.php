@@ -1,7 +1,7 @@
 {{-- {{dd($getTemData->subcategories);}} --}}
 @php
     $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
-    dd($pivotSubcategoryIds);
+    // dd($pivotSubcategoryIds);
 @endphp
 
 <div class="container-fluid">
@@ -61,7 +61,7 @@
                                     
                                     <div class="inner-wrap" id="event_design_subcategory_id">
                                         @foreach($getSubCatDetail as $subcategory)
-                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->subcategories->pivot_subcategory_id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
+                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == in_array($pivotSubcategoryIds) ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
                                         @endforeach
                                     </div>
                                   </div>
