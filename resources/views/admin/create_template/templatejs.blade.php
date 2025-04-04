@@ -2,7 +2,7 @@
 // alert();
     var base_url = "{{ url('/') }}/";
     $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
-        alert();
+        // alert();
             e.preventDefault(); // prevent default selection behavior
             var self = $(this);
             var select = self.parent();
