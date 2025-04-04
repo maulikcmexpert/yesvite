@@ -9092,6 +9092,8 @@ $(document).on("change", ".slider_photo", async function (event) {
             // $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
+        updateAllPhotoSliders();
+
         $(".photo-edit-delete-1").show();
         $(".design-sidebar").addClass("d-none");
         $(".design-sidebar_7").removeClass("d-none");
@@ -9099,7 +9101,6 @@ $(document).on("change", ".slider_photo", async function (event) {
         $(".close-btn").attr("data-id", "design-sidebar_7");
 
         // var image1;
-        updateAllPhotoSliders();
 
     }
     // updateAllPhotoSliders();
