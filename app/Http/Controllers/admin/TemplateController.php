@@ -301,6 +301,7 @@ class TemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
         try {
             // Begin the transaction
             DB::beginTransaction();
