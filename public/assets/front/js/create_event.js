@@ -9466,6 +9466,8 @@ async function savePhotoSlider() {
                             "save-slider-image",
                             JSON.stringify(savedImages)
                         );
+                        $("#loader").css("display", "none");
+                        toastr.success("Slider Image saved Successfully");
                         return;
                     }
                     eventData.slider_images = []; // Empty the array
