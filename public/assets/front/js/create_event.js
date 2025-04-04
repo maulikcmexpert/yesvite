@@ -455,7 +455,11 @@ var swiper = new Swiper(".mySwiper2", {
 $(document).on("click", ".create-event-btn", function () {
     toggleSidebar("sidebar_create_event");
 });
-
+if ($("#isUserLoggedIn").val() === "0") {
+    $(document).on("click", ". eventDetails_menu", function () {
+        window.location.href = "{{ route('front.home') }}";
+    });
+}
 // Delete Group functionality
 $(document).on("click", "#delete_group", function (e) {
     e.stopPropagation();
@@ -9201,7 +9205,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         };
         reader.readAsDataURL(file);
         // updateAllPhotoSliders();
-       
+
     }
     setTimeout(() => {
         // var imagePosition3 = 3;
