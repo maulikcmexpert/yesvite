@@ -30,7 +30,7 @@ class TextData extends Model
     return $this->belongsToMany(
         EventDesignSubCategory::class,
         'textdata_subcategories',
-        'template_id',       // Foreign key on pivot table for this (TextData) model
+        'textdata_id',       // Foreign key on pivot table for this (TextData) model
         'subcategory_id'     // Foreign key on pivot table for the related model
     );
 }

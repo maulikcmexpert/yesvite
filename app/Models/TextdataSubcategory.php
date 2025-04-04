@@ -20,7 +20,7 @@ class TextdataSubcategory extends Model
     }
     public function template()
     {
-        return $this->belongsTo(TextData::class, 'template_id', 'id');
+        return $this->belongsTo(TextData::class, 'textdata_id', 'id');
     }
 
 
