@@ -10823,7 +10823,7 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", async function (e) {
-    updateTotalCount();
+
 console.log( $(
     ".image-item:visible, .image-item-new:visible"
 ).length);

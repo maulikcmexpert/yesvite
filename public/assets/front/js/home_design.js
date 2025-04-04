@@ -26,11 +26,7 @@ $(document).ready(function () {
     $(".side-bar-sub-list").click(function() {
         updateTotalCount();
     })
-    $(".imag_c").click(function() {
-        console.log( "updated cunt",updateTotalCount());
 
-        updateTotalCount();
-    })
     updateTotalCount();
 
     // $('input[type="checkbox"]:not(#Allcat)').prop('checked', true);
