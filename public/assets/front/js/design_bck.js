@@ -1761,7 +1761,7 @@ async function bindData(current_event_id) {
         const selectedColorType = document.querySelector(
             'input[name="colorType"]:checked'
         ).value;
-        const activeObject = canvas.getActiveObject();
+        const activeObject  = canvas.getObjects('textbox');;
         //console.log("before update");
 
         //console.log(activeObject);
