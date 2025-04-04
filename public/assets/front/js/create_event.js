@@ -455,12 +455,13 @@ var swiper = new Swiper(".mySwiper2", {
 $(document).on("click", ".create-event-btn", function () {
     toggleSidebar("sidebar_create_event");
 });
+$(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
-    $(document).on("click", ".eventDetails_menu", function () {
-        window.location.href = "{{ route('front.home') }}";
-    });
-}
 
+        window.location.href = "/";
+
+}
+});
 // Delete Group functionality
 $(document).on("click", "#delete_group", function (e) {
     e.stopPropagation();
