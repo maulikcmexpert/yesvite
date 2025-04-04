@@ -67,12 +67,10 @@
                                 <div class="wrapper">
                                   <button class="form-control toggle-next ellipsis" type="button">Select subbcategory</button>
                                   <div class="checkboxes" id="Lorems">
+                               
                                     
                                     <div class="inner-wrap">
-                                      <label>
-                                        <input type="checkbox" value="all_lorems" class="ckkBox all" checked />
-                                        <span>All Lorems (422)</span>
-                                      </label><br>
+                                     
                             
                                       <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
