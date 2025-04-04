@@ -182,7 +182,7 @@ class TemplateController extends Controller
     // }
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         try {
             DB::beginTransaction();
             $imageName = null;
@@ -208,15 +208,14 @@ class TemplateController extends Controller
                 $creator_id = session()->get('admin');
                 $textData->creator_id = $creator_id['id'];
                 $textData->filled_image = $filledImage;
-                $textData->event_design_category_id = $request->event_design_category_id;
+                // $textData->event_design_category_id = "";
                 $textData->tags = $request->input('tags');
                 $textData->save();
                 
                 // Save multiple subcategories into pivot/child table
             
-                if (is_array($request->event_design_sub_category_id)) {
-                    foreach ($request->event_design_sub_category_id as $subcatId) {
-                        
+                if (is_array($request->subcategory)) {
+                    foreach ($request->subcategory as $subcatId) {
                         $subcate = TextdataSubcategory::create([
                             'template_id' => $textData->id,
                             'subcategory_id' => $subcatId,            
