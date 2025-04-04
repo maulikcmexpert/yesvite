@@ -1,4 +1,4 @@
-{{dd($getTemData->subcategories);}}
+{{-- {{dd($getTemData->subcategories);}} --}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -56,7 +56,7 @@
                                     
                                     <div class="inner-wrap" id="event_design_subcategory_id">
                                         @foreach($getSubCatDetail as $subcategory)
-                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->subcategories->id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
+                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->subcategories->pivot_subcategory_id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
                                         @endforeach
                                     </div>
                                   </div>
