@@ -291,7 +291,7 @@
 console.log( $(
     ".list_all_design_catgeory"
 ).length);
-$('.total_design_count').text(visibleItems + ' Items');
+// $('.total_design_count').text( + ' Items');
 
 });
 
