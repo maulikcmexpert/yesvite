@@ -9407,7 +9407,7 @@ function getLengthofSliderImage() {
 
 async function savePhotoSlider() {
     if (eventId != "") {
-        let imageSources = [];
+        imageSources = [];
         $(".slider_img").each(function () {
             let src = $(this).attr("src");
             if (src !== "") {
