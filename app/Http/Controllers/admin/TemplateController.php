@@ -271,7 +271,7 @@ class TemplateController extends Controller
         // $category_id= decrypt($category);
 
         // Get the template data by ID
-        $getTemData = TextData::findOrFail($template_id);
+        $getTemData = TextData::with('categories','subcategories')->findOrFail($template_id);
 
         $title = 'Edit template';
         $page = 'admin.create_template.edit';
