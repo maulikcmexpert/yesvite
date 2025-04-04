@@ -457,9 +457,12 @@ $(document).on("click", ".create-event-btn", function () {
 });
 $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
-    alert();
+
     const frontHomeUrl = base_url + "/";
+    $("#loader").css("display", "flex");
+    setTimeout(function () {
         window.location.href = frontHomeUrl;
+    }, 500); // 500ms delay
 
 }
 });
