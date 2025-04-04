@@ -5517,6 +5517,7 @@ $(document).on("click", ".li_event_details", async function () {
 
         $("#edit-design-temp").hide();
 
+        $(".step_1").hide();
         $(".new_login_page").show();
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
