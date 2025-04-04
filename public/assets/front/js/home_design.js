@@ -200,7 +200,7 @@ $(document).ready(function () {
 
 
                     let matches = tags.some((tag) => tag.includes(query)) ||
-                    subcategory.includes(query) ||
+                    subcategory.some((subcategorys) => subcategorys.includes(query)) ||
                     category.includes(query);
 
                     if (matches) {
