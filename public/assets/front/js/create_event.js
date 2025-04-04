@@ -9506,7 +9506,7 @@ async function savePhotoSlider() {
                     var newImages = response.images;
                     if ($("#isUserLoggedIn").val() === "0") {
                         console.log(savedImages);
-                        
+
                         // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
                         // localStorage.removeItem("save-slider-image");
                         // Append new images to the existing array
@@ -10820,6 +10820,11 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", async function (e) {
+    updateTotalCount();
+console.log( $(
+    ".image-item:visible, .image-item-new:visible"
+).length);
+
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
         await saveDesignData(true);
@@ -10835,6 +10840,13 @@ $(document).on("click", ".previousImeg", async function (e) {
     $(".subcategory-section").show();
     li_design_click();
 });
+
+function updateTotalCount() {
+    var visibleItems = $(
+        ".image-item:visible, .image-item-new:visible"
+    ).length;
+    $(".total_design_count").text(visibleItems + " Items");
+}
 $(document).on("click", "#event_copy_link_btn", function (e) {
     e.preventDefault(); // Prevents any default button action
     var copyText = $("#event_copy_link").val();
