@@ -234,7 +234,7 @@
 @endphp
 @foreach ($allImages as $image)
 @php
-      $imagesnew[] = $image;
+      $imagesnew[] = $image['subcategory_name'];
 @endphp
     @if($image['is_visible'] == '1')
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
