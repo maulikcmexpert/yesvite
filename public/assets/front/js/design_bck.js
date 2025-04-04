@@ -2222,6 +2222,7 @@ async function bindData(current_event_id) {
 
     canvas.on("mouse:down", function (options) {
         discardIfMultipleObjects(options);
+        const selectedObject = options.target;
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
