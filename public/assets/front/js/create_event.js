@@ -9092,7 +9092,6 @@ $(document).on("change", ".slider_photo", async function (event) {
             // $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
-        updateAllPhotoSliders();
 
         $(".photo-edit-delete-1").show();
         $(".design-sidebar").addClass("d-none");
@@ -9101,9 +9100,11 @@ $(document).on("change", ".slider_photo", async function (event) {
         $(".close-btn").attr("data-id", "design-sidebar_7");
 
         // var image1;
+        setTimeout(() => {
+            updateAllPhotoSliders();
+        }, 500);
 
     }
-    // updateAllPhotoSliders();
 
     // setTimeout(async() => {
     //     var imagePosition = 1;
