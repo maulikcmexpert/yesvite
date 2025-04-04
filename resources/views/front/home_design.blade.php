@@ -122,7 +122,7 @@
 
 
         <div class="row list_all_design_catgeory">
-            {{-- @php
+            @php
                 $allImages = collect([]);
                 $randomIds = [];
                 foreach ($categories as $category) {
@@ -177,97 +177,7 @@
 
                 </div>
             @endif
-            @endforeach --}}
-
-
-            @php
-    $allImages = collect([]);
-    $randomIds = [];
-    $imageMap = [];
-
-    foreach ($categories as $category) {
-        // dd($category->subcategory);
-        foreach ($category->subcategory as $subcategory) {
-            foreach ($subcategory->textdatas as $image) {
-                if (!isset($imageMap[$image->id])) {
-                    $imageMap[$image->id] = [
-                        'imageId' => $image->id,
-                        'subcategory_names' => [],
-                        'subcategory_ids' => [],
-                        'static_information' => json_encode($image->static_information),
-                        'shape_image' => $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-                        'image' => asset('storage/canvas/' . $image->image),
-                        'tags' => $image->tags,
-                        'is_visible' => $image->is_visible,
-                        'category_id' => $category->id,
-                        'category_name' => $category->category_name,
-                        'image_path' => asset('storage/canvas/' . $image->filled_image),
-                    ];
-                    $randomIds[] = $image->id;
-                }
-
-                // Avoid duplicate subcategory names or IDs
-                if (!in_array($subcategory->subcategory_name, $imageMap[$image->id]['subcategory_names'])) {
-                    $imageMap[$image->id]['subcategory_names'][] = $subcategory->subcategory_name;
-                }
-
-                if (!in_array($subcategory->id, $imageMap[$image->id]['subcategory_ids'])) {
-                    $imageMap[$image->id]['subcategory_ids'][] = $subcategory->id;
-                }
-            }
-        }
-    }
-
-    // Final push to $allImages with comma-separated subcategories (no space)
-    foreach ($imageMap as $img) {
-        $img['subcategory_name'] = implode(',', $img['subcategory_names']);
-        $img['subcategory_id'] = implode(',', $img['subcategory_ids']);
-        unset($img['subcategory_names'], $img['subcategory_ids']);
-        $allImages->push($img);
-    }
-
-    shuffle($randomIds);
-    $randomIds = array_slice($randomIds, 0, 30);
-@endphp
-
-@php
-    $imagesnew=[]
-@endphp
-@foreach ($allImages as $image)
-@php
-      $imagesnew[] = $image['subcategory_names'];
-@endphp
-    @if($image['is_visible'] == '1')
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
-            {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
-            data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-            data-category-id="{{ $image['category_id'] }}"
-            data-subcategory-id="{{ $image['subcategory_id'] }}"
-            data-subcategory_name="{{ $image['subcategory_name'] }}"
-            data-category_name="{{ $image['category_name'] }}" data-tags="{{ $image['tags'] }}">
-
-            <div class="card-img collection-card card-blue edit_design_tem design-card"
-                data-image="{{ $image['image'] }}"
-                data-shape_image="{{ $image['shape_image'] }}"
-                data-json="{{ $image['static_information'] }}"
-                data-id="{{ $image['imageId'] }}"
-                data-subcategory_name="{{ $image['subcategory_name'] }}">
-                
-                <img src="{{ $image['image_path'] }}" alt="shower-card">
-                
-                <!-- Optional: Display Subcategories -->
-                <div class="mt-2">
-                    @foreach(explode(',', $image['subcategory_name']) as $subcat)
-                        <span class="badge badge-secondary">{{ trim($subcat) }}</span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    @endif
-@endforeach
-@php
-    dd($imagesnew);
-@endphp
+            @endforeach
         </div>
 
 
