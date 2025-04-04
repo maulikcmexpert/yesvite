@@ -55,7 +55,7 @@
                                     
                                     <div class="inner-wrap" id="event_design_subcategory_id">
                                         @foreach($getSubCatDetail as $subcategory)
-                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->subcategories->subcategory_id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
+                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->subcategories->id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
                                         @endforeach
                                     </div>
                                   </div>
