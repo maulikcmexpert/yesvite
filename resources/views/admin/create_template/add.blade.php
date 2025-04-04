@@ -20,7 +20,7 @@
 
 
 
-        <div class="card card-primary categoryCard">
+        <div class="card card-primary categoryCard add-template-wrp">
 
             <div class="card-header">
 
@@ -66,10 +66,10 @@
 
                             {{-- </select> --}}
 
-                            <div class="wrapper">
+                            <div class="wrapper new-wrp">
                                 <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
-                                    subbcategory</button>
-                                <div class="checkboxes" id="Lorems">
+                                    subbcategory <i class="fa-solid fa-angle-down"></i></button>
+                                <div class="checkboxes select-subcat-inner" id="Lorems">
 
 
                                     <div class="inner-wrap" id="event_design_sub_category_id">
@@ -78,27 +78,27 @@
                                         {{-- <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor (34) </span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="lorem" class="ckkBox val" />
                                         <span>Lorem (234)</span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
                                         <span>Ipsum (12)</span>
-                                      </label><br>
+                                      </label>
                                       
                                       <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor 2 (34) </span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="lorem" class="ckkBox val" />
                                         <span>Lorem 2 (234)</span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
