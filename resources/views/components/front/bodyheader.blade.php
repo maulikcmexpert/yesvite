@@ -176,7 +176,7 @@ $notification_list=getNotificationList();
                   </button>
 
                   <ul class="dropdown-menu dropdownNotification-menu" aria-labelledby="dropdownNotification-menu">
-                    <li><a href="{{route('account_settings.notificationSetting')}}" target="_blank"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <li><a href="{{route('account_settings.notificationSetting')}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.8335 6.66699C17.2142 6.66699 18.3335 5.5477 18.3335 4.16699C18.3335 2.78628 17.2142 1.66699 15.8335 1.66699C14.4528 1.66699 13.3335 2.78628 13.3335 4.16699C13.3335 5.5477 14.4528 6.66699 15.8335 6.66699Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M5.8335 10.833H10.0002" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       <path d="M5.8335 14.167H13.3335" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
