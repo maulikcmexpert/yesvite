@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="selected-items"></div>
-                <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
+                <h5 class="total-items ms-auto total_design_count"> Items</h5>
                 <input type='hidden' value="{{ $imagecount }}">
             </div>
 
@@ -235,12 +235,7 @@
                 updateTotalCount();
             })
 
-            $(".side-bar-sub-list").click(function() {
-                updateTotalCount();
-            })
-            $(".imag_c").click(function() {
-                updateTotalCount();
-            })
+
             const urlParams = new URLSearchParams(window.location.search);
             const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
