@@ -9100,7 +9100,7 @@ $(document).on("change", ".slider_photo", async function (event) {
 
         // var image1;
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition = 1;
         var existingIndex = imageSources.findIndex(
             (img) => img.image_position === imagePosition
@@ -9118,14 +9118,17 @@ $(document).on("change", ".slider_photo", async function (event) {
                 image_name: $(".photo-slider-1").attr("data-image"),
             });
         }
-      
+
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
 
-    if(eventId==""){
-        await savePhotoSlider();
-    }
+    // if(eventId==""){
+    //     await savePhotoSlider();
+    // }
 });
 
 $(document).on("change", ".slider_photo_2", async function (event) {
@@ -9140,7 +9143,7 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition2 = 2;
         var existingIndex2 = imageSources.findIndex(
             (img) => img.image_position === imagePosition2
@@ -9158,15 +9161,13 @@ $(document).on("change", ".slider_photo_2", async function (event) {
 
             });
         }
-        // if(eventId==""){
-        //     savePhotoSlider();
-        // }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
-    if(eventId==""){
-        await savePhotoSlider();
-    }
+   
 });
 $(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
@@ -9180,7 +9181,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition3 = 3;
         var existingIndex3 = imageSources.findIndex(
             (img) => img.image_position === imagePosition3
@@ -9197,15 +9198,13 @@ $(document).on("change", ".slider_photo_3", async function (event) {
                 image_name: $(".photo-slider-3").data("image"),
             });
         }
-        // if(eventId==""){
-        //     savePhotoSlider();
-        // }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
-    if(eventId==""){
-        await savePhotoSlider();
-    }
+    
 });
 //old_slider_image
 
