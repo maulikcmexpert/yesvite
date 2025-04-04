@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="selected-items"></div>
-                <h5 class="total-items ms-auto total_design_count">{{ $imagecount }} Items</h5>
+                <h5 class="total-items ms-auto total_design_count"></h5>
             </div>
 
             <label for="" class="custome-designcategory">
