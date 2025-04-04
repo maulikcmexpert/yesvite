@@ -458,7 +458,7 @@ $(document).on("click", ".create-event-btn", function () {
 $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
     alert();
-    const frontHomeUrl = "{{ route('front.home') }}";
+    const frontHomeUrl = base_url + "/";
         window.location.href = frontHomeUrl;
 
 }
