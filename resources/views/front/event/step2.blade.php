@@ -238,7 +238,7 @@
             $(".side-bar-sub-list").click(function() {
                 updateTotalCount();
             })
-            $(".previousImeg").click(function() {
+            $(".imag_c").click(function() {
                 updateTotalCount();
             })
             const urlParams = new URLSearchParams(window.location.search);
