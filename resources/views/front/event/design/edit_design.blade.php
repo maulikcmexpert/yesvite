@@ -858,7 +858,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <img class="photo-slider-1 slider_img" data-delete="1" src="" alt="">
+                            <img class="photo-slider-1 slider_img" data-delete="1" data-image="" src="" alt="">
                             <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-1">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -915,7 +915,7 @@
                                     stroke-linejoin="round" />
                             </svg>
 
-                            <img class="photo-slider-2 slider_img" data-delete="2" src="" alt="" style="display: none">
+                            <img class="photo-slider-2 slider_img" data-delete="2" src="" alt="" data-image="" style="display: none">
                             <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -972,7 +972,7 @@
                                     stroke="#64748B" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            <img class="photo-slider-3 slider_img" data-delete="3" src="" alt="" style="display: none">
+                            <img class="photo-slider-3 slider_img" data-delete="3" src="" data-image="" alt="" style="display: none">
                             <button style="display: none" class="uploaded-img-card-edit photo-edit-delete-3">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

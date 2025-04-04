@@ -56,9 +56,9 @@ if ($("#isUserLoggedIn").val() === "1") {
     var final_initial =
         final_user_name != ""
             ? (
-                  $("#cohostFname").val().charAt(0) +
-                  $("#cohostLname").val().charAt(0)
-              ).toUpperCase()
+                $("#cohostFname").val().charAt(0) +
+                $("#cohostLname").val().charAt(0)
+            ).toUpperCase()
             : "";
     var create_event_phone_scroll = false;
     var create_event_yesvite_scroll = false;
@@ -1663,14 +1663,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    // startDate.isSame(moment(sortedDates[0]), "day")
-                    startDate
-                        .startOf("day")
-                        .isSame(
-                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                            "day"
-                        )
-                        ? `
+            // startDate.isSame(moment(sortedDates[0]), "day")
+            startDate
+                .startOf("day")
+                .isSame(
+                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                    "day"
+                )
+                ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1685,8 +1685,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                        : ""
-                }
+                : ""
+            }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1707,18 +1707,17 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-            "YYYY-MM-DD"
-        )}">
+                "YYYY-MM-DD"
+            )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${
-                    startDate.isSame(
-                        moment(sortedDates[sortedDates.length - 1]),
-                        "day"
-                    )
-                        ? `
+                ${startDate.isSame(
+                moment(sortedDates[sortedDates.length - 1]),
+                "day"
+            )
+                ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1733,8 +1732,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                        : ""
-                }
+                : ""
+            }
             </form>
         </div>
     </div>
@@ -2861,14 +2860,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                        quantity +
-                        '</p><li class="list-group-item" data-quantity="' +
-                        quantity +
-                        '" data-selfbring="' +
-                        selfbring +
-                        '">' +
-                        subItemName +
-                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                    quantity +
+                    '</p><li class="list-group-item" data-quantity="' +
+                    quantity +
+                    '" data-selfbring="' +
+                    selfbring +
+                    '">' +
+                    subItemName +
+                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3275,7 +3274,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
+            convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3490,7 +3489,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newstartTime)
+            convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3730,7 +3729,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     if (
                         previousEndTime &&
                         convertTo24Hour(previousEndTime) >
-                            convertTo24Hour(startTime) &&
+                        convertTo24Hour(startTime) &&
                         !showAlert
                     ) {
                         toastr.error("Please enter proper time");
@@ -3964,6 +3963,13 @@ $(document).on("click", "#close_createEvent", async function (e) {
     $(".dropdown-menu").removeClass("show");
 
     var temp_id = eventData.temp_id;
+
+    var event_name = $("#event-name").val();
+    var start_time = $("#start-time").val();
+    var start_event_date = $("#start-event-date").val();
+
+    console.log(event_name, start_time, start_event_date);
+
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
         $("#designModel").modal("show");
@@ -3973,9 +3979,24 @@ $(document).on("click", "#close_createEvent", async function (e) {
     let firstLetter1 = text1.split(" ")[0];
 
     console.log("firstLetter1", firstLetter1);
-    if (firstLetter1 == "1") {
+
+
+    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
+        apiCalled = false;
+        $("#draftModel").modal("show");
+        return;
+    } console.log("firstLetter1", firstLetter1);
+
+    if (firstLetter1 === "1") {
         apiCalled = false;
         $("#designModel").modal("show");
+        return;
+
+
+    }
+    else if (firstLetter1 === "1" && event_name && start_time && start_event_date) {
+        apiCalled = false;
+        $("#draftModel").modal("show");
         return;
     } else if (
         firstLetter1 == "2" ||
@@ -3989,9 +4010,8 @@ $(document).on("click", "#close_createEvent", async function (e) {
     console.log(11);
 
     var event_type = $("#event-type").val();
-    var event_name = $("#event-name").val();
-    var event_date = $("#event-date").val();
-    var start_event_date = $("#start-event-date").val();
+
+
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
     console.log(design);
@@ -6110,9 +6130,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -6132,10 +6152,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6144,10 +6164,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6166,10 +6186,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6177,10 +6197,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6879,6 +6899,8 @@ $(document).on("click", ".save_event_co_host", function () {
 // });
 
 $(document).on("click", ".final_checkout", function () {
+    console.log(eventData);
+
     var data = eventData;
     // console.log(data);
     // $('#loader').css('display','flex');
@@ -6903,8 +6925,8 @@ $(document).on("click", ".final_checkout", function () {
         $("#eventTempImage").attr(
             "src",
             base_url +
-                "public/storage/event_images/" +
-                eventData.desgin_selected
+            "public/storage/event_images/" +
+            eventData.desgin_selected
         );
     }
 
@@ -6925,11 +6947,10 @@ $(document).on("click", ".final_checkout", function () {
     const mainImage = `
             <div class="item">
                 <div class="setting-img">
-                    <img src="${
-                        base_url +
-                        "public/storage/event_images/" +
-                        eventData.desgin_selected
-                    }" />
+                    <img src="${base_url +
+        "public/storage/event_images/" +
+        eventData.desgin_selected
+        }" />
                 </div>
             </div>
         `;
@@ -7321,7 +7342,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -8864,7 +8885,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -9056,13 +9077,17 @@ function searchRecords(lim, off, type, search = null) {
 // $(document).on("click", ".photo-edit-delete-2", function () {
 //     $(".slider_photo_3").trigger("click");
 // });
-$(document).on("change", ".slider_photo", function (event) {
+
+//old_slider_image
+var imageSources = [];
+var imagenames = [];
+$(document).on("change", ".slider_photo", async function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-1").attr("src", e.target.result).show();
-            $(".photo-slider-1").attr("data-image", "");
+            // $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
         $(".photo-edit-delete-1").show();
@@ -9070,13 +9095,45 @@ $(document).on("change", ".slider_photo", function (event) {
         $(".design-sidebar_7").removeClass("d-none");
         $("#sidebar").addClass("design-sidebar_7");
         $(".close-btn").attr("data-id", "design-sidebar_7");
+
+        // var image1;
     }
-    setTimeout(() => {
+    setTimeout(async() => {
+        var imagePosition = 1;
+        var existingIndex = imageSources.findIndex(
+            (img) => img.image_position === imagePosition
+        );
+        if (existingIndex !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
+            imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-1").attr("src"),
+                deleteId: $(".photo-slider-1").data("delete"),
+                image_position: $(".photo-slider-1").data("delete"),
+                image_name: $(".photo-slider-1").attr("data-image"),
+            });
+        }
+
+        if(eventId==""){
+            await savePhotoSlider();
+        }
+        if ($("#isUserLoggedIn").val() === "0") {
+            await savePhotoSlider();
+        }
+
+        // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
+
+    // if(eventId==""){
+    //     await savePhotoSlider();
+    // }
 });
 
-$(document).on("change", ".slider_photo_2", function (event) {
+$(document).on("change", ".slider_photo_2", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-2").show();
@@ -9084,15 +9141,41 @@ $(document).on("change", ".slider_photo_2", function (event) {
         $(".photo-edit-delete-2").show();
         reader.onload = function (e) {
             $(".photo-slider-2").attr("src", e.target.result).show();
-            $(".photo-slider-2").attr("data-image", "");
+            // $(".photo-slider-2").attr("data-image", "");
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
+    setTimeout(async() => {
+        var imagePosition2 = 2;
+        var existingIndex2 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition2
+        );
+        if (existingIndex2 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex2].src = $(".photo-slider-2").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-2").attr("src"),
+                deleteId: $(".photo-slider-2").data("delete"),
+                image_position: $(".photo-slider-2").data("delete"),
+                image_name: $(".photo-slider-2").data("image"),
+
+            });
+        }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
+        if ($("#isUserLoggedIn").val() === "0") {
+            await savePhotoSlider();
+        }
+
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+
 });
-$(document).on("change", ".slider_photo_3", function (event) {
+$(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();
@@ -9100,14 +9183,80 @@ $(document).on("change", ".slider_photo_3", function (event) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".photo-slider-3").attr("src", e.target.result).show();
-            $(".photo-slider-3").attr("data-image", "");
+            // $(".photo-slider-3").attr("data-image", "");
         };
         reader.readAsDataURL(file);
     }
-    setTimeout(() => {
+    setTimeout(async() => {
+        var imagePosition3 = 3;
+        var existingIndex3 = imageSources.findIndex(
+            (img) => img.image_position === imagePosition3
+        );
+        if (existingIndex3 !== -1) {
+            // Update the existing entry
+            imageSources[existingIndex3].src = $(".photo-slider-3").attr("src");
+        } else {
+            // Add a new entry if it does not exist
+            imageSources.push({
+                src: $(".photo-slider-3").attr("src"),
+                deleteId: $(".photo-slider-3").data("delete"),
+                image_position: $(".photo-slider-3").data("delete"),
+                image_name: $(".photo-slider-3").data("image"),
+            });
+        }
+        if(eventId==""){
+            await savePhotoSlider();
+        }
+        if ($("#isUserLoggedIn").val() === "0") {
+            await savePhotoSlider();
+        }
+        // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+
 });
+//old_slider_image
+
+//new_slider_image
+
+// $(document).on("change", ".slider_photo, .slider_photo_2, .slider_photo_3", function (event) {
+//     var file = event.target.files[0];
+//     var inputClass = $(this).attr("class"); // Get the input class
+//     var imageClass = "";
+//     var deleteClass = "";
+
+//     if (inputClass.includes("slider_photo")) {
+//         imageClass = ".photo-slider-1";
+//         deleteClass = ".photo-edit-delete-1";
+//         sidebarClass = "design-sidebar_7";
+
+//     }
+//     if (inputClass.includes("slider_photo_2")) {
+//         imageClass = ".photo-slider-2";
+//         deleteClass = ".photo-edit-delete-2";
+//     }
+//     if (inputClass.includes("slider_photo_3")) {
+//         imageClass = ".photo-slider-3";
+//         deleteClass = ".photo-edit-delete-3";
+//     }
+
+//     if (file) {
+//         var reader = new FileReader();
+//         reader.onload = function (e) {
+//             $(imageClass).attr("src", e.target.result).show();
+//             $(imageClass).attr("data-image", file.name);
+//             $(deleteClass).show();
+//             uploadSliderImage(file, imageClass);
+//         };
+//         reader.readAsDataURL(file);
+//     }
+
+//     setTimeout(() => {
+//         getLengthofSliderImage();
+//     }, 500);
+// });
+
+//new_slider_image
 
 function getLengthofSliderImage() {
     var i = 0;
@@ -9120,75 +9269,225 @@ function getLengthofSliderImage() {
     });
     $(".slider_image_count").text(i + "/3 Photos");
 }
+// function savePhotoSlider(){
+//     if(eventId!=""){
+//         imageSources = [];
+//         $(".slider_img").each(function () {
+//             var src = $(this).attr("src");
+//             if (src !== "") {
+//                 imageSources.push({
+//                     src: $(this).attr("src"),
+//                     deleteId: $(this).data("delete"),
+//                     image_position: $(this).data("delete"),
+//                     image_name: $(this).data('image')
+//                 });
 
-$(document).on("click", ".save-slider-image", function () {
-    var imageSources = [];
-    var imagenames = [];
-    // $(".slider_img").each(function () {
-    //     imageSources.push($(this).attr("src"));
-    // });
+//             }
+//         });
+//     }
+//     if (imageSources.length > 0) {
+//         $("#loader").css("display", "flex");
+//         var event = $("#eventID").val();
 
-    $(".slider_img").each(function () {
-        var src = $(this).attr("src");
-        if (src !== "") {
-            imageSources.push({
-                src: $(this).attr("src"),
-                deleteId: $(this).data("delete"),
-            });
-            imagenames.push({
-                name: $(this).attr("data-image"),
-            });
-        }
-    });
-    //console.log(imageSources);
-    if (imageSources.length > 0) {
-        $("#loader").css("display", "flex");
-        $.ajax({
-            url: base_url + "event/save_slider_img",
-            method: "POST",
-            data: {
-                eventId: eventId,
-                imageSources: imageSources,
-                imagenames: imagenames,
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                if (response.status == 401 && response.info == "logout") {
-                    window.location.href = "/login"; // Redirect to home page
-                    return;
-                }
-                var savedImages = response.images;
-                var newImages = response.images;
-                if ($("#isUserLoggedIn").val() === "0") {
-                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                    // localStorage.removeItem("save-slider-image");
-                    // Append new images to the existing array
-                    // newImages.forEach(image => {
-                    //     savedImages.push(image);
-                    // });
+//         $.ajax({
+//             url: base_url + "event/save_slider_img",
+//             method: "POST",
+//             data: {
+//                 eventId: event,
+//                 imageSources: imageSources,
+//                 // imagenames: imagenames,
+//                 _token: $('meta[name="csrf-token"]').attr("content"),
+//             },
+//             success: function (response) {
+//                 if (response.status == 401 && response.info == "logout") {
+//                     window.location.href = "/login"; // Redirect to home page
+//                     return;
+//                 }
+//                 var savedImages = response.images;
+//                 var newImages = response.images;
+//                 if ($("#isUserLoggedIn").val() === "0") {
+//                     // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+//                     // localStorage.removeItem("save-slider-image");
+//                     // Append new images to the existing array
+//                     // newImages.forEach(image => {
+//                     //     savedImages.push(image);
+//                     // });
 
-                    // Update localStorage with the combined array
-                    localStorage.setItem(
-                        "save-slider-image",
-                        JSON.stringify(savedImages)
-                    );
-                }
-                eventData.slider_images = []; // Empty the array
-                eventData.slider_images = savedImages; // Assign new values
+//                     // Update localStorage with the combined array
+//                     localStorage.setItem(
+//                         "save-slider-image",
+//                         JSON.stringify(savedImages)
+//                     );
+//                 }
 
-                // eventData.slider_images = savedImages;
-                console.log(savedImages);
-                console.log(eventData.slider_images);
-                $("#loader").css("display", "none");
-                toastr.success("Slider Image saved Successfully");
-            },
-            error: function (xhr, status, error) {
-                $("#loader").css("display", "none");
-                toastr.error(error);
-            },
+//                 savedImages.forEach((image, index) => {
+//                     var selector = `.photo-slider-${index+1}`;
+//                     $(selector).attr("data-image", image.fileName);
+//                 });
+//                 eventData.slider_images = []; // Empty the array
+//                 eventData.slider_images = savedImages; // Assign new values
+
+//                 // eventData.slider_images = savedImages;
+//                 console.log(savedImages);
+//                 console.log(eventData.slider_images);
+//                 $("#loader").css("display", "none");
+//                 toastr.success("Slider Image saved Successfully");
+//                 return 1;
+//             },
+//             error: function (xhr, status, error) {
+//                 $("#loader").css("display", "none");
+//                 toastr.error(error);
+//             },
+//         });
+//     }
+// }
+// $(document).on("click",'.save-slider-image',function(){
+//     savePhotoSlider();
+// });
+// $(document).on("click", ".save-slider-image", function () {
+//     var imageSources = [];
+//     var imagenames = [];
+//     // $(".slider_img").each(function () {
+//     //     imageSources.push($(this).attr("src"));
+//     // });
+
+//     $(".slider_img").each(function () {
+//         var src = $(this).attr("src");
+//         if (src !== "") {
+//             imageSources.push({
+//                 src: $(this).attr("src"),
+//                 deleteId: $(this).data("delete"),
+//                 image_position: $(this).data("delete"),
+//             });
+//             imagenames.push({
+//                 name: $(this).attr("data-image"),
+//             });
+//         }
+//     });
+//     //console.log(imageSources);
+//     if (imageSources.length > 0) {
+//         $("#loader").css("display", "flex");
+//        $.ajax({
+//             url: base_url + "event/save_slider_img",
+//             method: "POST",
+//             data: {
+//                 eventId: eventId,
+//                 imageSources: imageSources,
+//                 imagenames: imagenames,
+//                 _token: $('meta[name="csrf-token"]').attr("content"),
+//             },
+//             success: function (response) {
+//                 if (response.status == 401 && response.info == "logout") {
+//                     window.location.href = "/login"; // Redirect to home page
+//                     return;
+//                 }
+//                 var savedImages = response.images;
+//                 var newImages = response.images;
+//                 if ($("#isUserLoggedIn").val() === "0") {
+//                     // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+//                     // localStorage.removeItem("save-slider-image");
+//                     // Append new images to the existing array
+//                     // newImages.forEach(image => {
+//                     //     savedImages.push(image);
+//                     // });
+
+//                     // Update localStorage with the combined array
+//                     localStorage.setItem(
+//                         "save-slider-image",
+//                         JSON.stringify(savedImages)
+//                     );
+//                 }
+//                 eventData.slider_images = []; // Empty the array
+//                 eventData.slider_images = savedImages; // Assign new values
+
+//                 // eventData.slider_images = savedImages;
+//                 console.log(savedImages);
+//                 console.log(eventData.slider_images);
+//                 $("#loader").css("display", "none");
+//                 toastr.success("Slider Image saved Successfully");
+//             },
+//             error: function (xhr, status, error) {
+//                 $("#loader").css("display", "none");
+//                 toastr.error(error);
+//             },
+//         });
+//     }
+// });
+
+
+async function savePhotoSlider() {
+    if (eventId != "") {
+        imageSources = [];
+        $(".slider_img").each(function () {
+            let src = $(this).attr("src");
+            let image_name = $(this).attr("data-image");
+            if (src !== "") {
+                imageSources.push({
+                    src: $(this).attr("src"),
+                    deleteId: $(this).data("delete"),
+                    image_position: $(this).data("delete"),
+                    image_name: $(this).data("image")
+                });
+            }
         });
     }
-});
+
+    if (imageSources.length > 0) {
+        $("#loader").css("display", "flex");
+        let event = $("#eventID").val();
+
+        // try {
+            let response = await $.ajax({
+                url: base_url + "event/save_slider_img",
+                method: "POST",
+                data: {
+                    eventId: event,
+                    imageSources: imageSources,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+                success: function (response) {
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/login"; // Redirect to home page
+                        return;
+                    }
+                    var savedImages = response.images;
+                    var newImages = response.images;
+                    if ($("#isUserLoggedIn").val() === "0") {
+                        console.log(savedImages);
+                        
+                        // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+                        // localStorage.removeItem("save-slider-image");
+                        // Append new images to the existing array
+                        // newImages.forEach(image => {
+                        //     savedImages.push(image);
+                        // });
+
+                        // Update localStorage with the combined array
+                        localStorage.setItem(
+                            "save-slider-image",
+                            JSON.stringify(savedImages)
+                        );
+                        $("#loader").css("display", "none");
+                        toastr.success("Slider Image saved Successfully");
+                        return;
+                    }
+                    eventData.slider_images = []; // Empty the array
+                    eventData.slider_images = savedImages; // Assign new values
+
+                    // eventData.slider_images = savedImages;
+                    console.log(savedImages);
+                    console.log(eventData.slider_images);
+                    $("#loader").css("display", "none");
+                    toastr.success("Slider Image saved Successfully");
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    toastr.error(error);
+                },
+
+            });
+    }
+}
 
 $(document).on("click", ".delete_silder", function (e) {
     e.preventDefault();
@@ -9271,11 +9570,14 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
+
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
     // return;
 
     e.preventDefault();
+
+    await savePhotoSlider();
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
@@ -9515,9 +9817,11 @@ $(document).on("click", "#close_editEvent", async function (e) {
     console.log("firstLetter1", firstLetter1);
     if (firstLetter1 == "1") {
         apiCalled = false;
-        $("#EditdesignModel").modal("show");
+        $("#EditdraftModel").modal("show");
         return;
-    } else if (
+    }
+
+    else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
@@ -10214,9 +10518,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                        parseInt(quantity) +
-                        "/" +
-                        categoryItemQuantity
+                    parseInt(quantity) +
+                    "/" +
+                    categoryItemQuantity
                 );
             }
 
@@ -10242,9 +10546,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -10265,10 +10569,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10277,10 +10581,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10299,10 +10603,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10310,10 +10614,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10609,9 +10913,8 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${
-        initials || "NA"
-    }</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
+        }</h5>`;
 }
 
 $(".create_event_login_btn").on("click", function (e) {
@@ -10795,12 +11098,12 @@ $("#create_event_register").on("click", function (e) {
     $("#registerEvent").removeClass("d-none"); // Hide registration form
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
-$(".new-create-account-close-btn").on("click", function (e) {
-    $(".new_login_page, .new_login").hide(); // Hide both elements
-    $("#edit-design-temp").show();
+// $(".new-create-account-close-btn").on("click", function (e) {
+//     $(".new_login_page, .new_login").hide(); // Hide both elements
+//     $("#edit-design-temp").show();
 
-    $(".new-event-sidebar-wrp").show();
-});
+//     $(".new-event-sidebar-wrp").show();
+// });
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
