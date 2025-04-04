@@ -1118,6 +1118,10 @@ table.table tbody tr {
     align-items: center !important;
 }
 
+.categoryCard button.select-subcat-btn i {
+    font-size: 13px;
+}
+
 .add-template-wrp .card-body .form-control {
     height: 42px !important;
 }
