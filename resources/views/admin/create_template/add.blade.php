@@ -78,27 +78,27 @@
                                         {{-- <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor (34) </span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="lorem" class="ckkBox val" />
                                         <span>Lorem (234)</span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
                                         <span>Ipsum (12)</span>
-                                      </label><br>
+                                      </label>
                                       
                                       <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor 2 (34) </span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="lorem" class="ckkBox val" />
                                         <span>Lorem 2 (234)</span>
-                                      </label><br>
+                                      </label>
                             
                                       <label>
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
