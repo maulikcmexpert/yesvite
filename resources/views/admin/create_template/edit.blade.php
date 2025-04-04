@@ -69,7 +69,7 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                                             <label><input type="checkbox" value="{{ $subcategory->id }}"
                                                     class="ckkBox val" name="subcategory[]"
                                                     {{ in_array($subcategory->id, $pivotSubcategoryIds) ? 'checked' : '' }} /><span>
-                                                    {{ $subcategory->subcategory_name }}</span> </label><br>
+                                                    {{ $subcategory->subcategory_name }}</span> </label>
                                             @endforeach
                                         </div>
                                     </div>
