@@ -9092,6 +9092,7 @@ $(document).on("change", ".slider_photo", async function (event) {
             // $(".photo-slider-1").attr("data-image", "");
         };
         reader.readAsDataURL(file);
+
         $(".photo-edit-delete-1").show();
         $(".design-sidebar").addClass("d-none");
         $(".design-sidebar_7").removeClass("d-none");
@@ -9099,8 +9100,11 @@ $(document).on("change", ".slider_photo", async function (event) {
         $(".close-btn").attr("data-id", "design-sidebar_7");
 
         // var image1;
+        setTimeout(() => {
+            updateAllPhotoSliders();
+        }, 500);
+
     }
-    updateAllPhotoSliders();
 
     // setTimeout(async() => {
     //     var imagePosition = 1;
@@ -9148,6 +9152,8 @@ $(document).on("change", ".slider_photo_2", async function (event) {
             // $(".photo-slider-2").attr("data-image", "");
         };
         reader.readAsDataURL(file);
+        updateAllPhotoSliders();
+
     }
     // setTimeout(async() => {
     //     var imagePosition2 = 2;
@@ -9177,7 +9183,6 @@ $(document).on("change", ".slider_photo_2", async function (event) {
     //     // savePhotoSlider();
     //     getLengthofSliderImage();
     // }, 500);
-    updateAllPhotoSliders();
 
 });
 $(document).on("change", ".slider_photo_3", async function (event) {
@@ -9191,6 +9196,8 @@ $(document).on("change", ".slider_photo_3", async function (event) {
             // $(".photo-slider-3").attr("data-image", "");
         };
         reader.readAsDataURL(file);
+        updateAllPhotoSliders();
+
     }
     // setTimeout(async() => {
     //     var imagePosition3 = 3;
@@ -9218,45 +9225,42 @@ $(document).on("change", ".slider_photo_3", async function (event) {
     //     // savePhotoSlider();
     //     getLengthofSliderImage();
     // }, 500);
-    updateAllPhotoSliders();
+    // updateAllPhotoSliders();
 });
 
-function updateAllPhotoSliders() {
-    setTimeout(async () => {
-        alert();
-        $(".slider-img").each(function () {
-            const $this = $(this);
-            const position = $this.data("delete"); // assumes `data-delete="1"` etc.
-            const imageSrc = $this.attr("src");
-            const imageName = $this.attr("data-image");
+async function updateAllPhotoSliders() {
+    $(".slider-img").each(function () {
+        const $this = $(this);
+        const position = $this.data("delete");
+        const imageSrc = $this.attr("src");
+        const imageName = $this.attr("data-image");
 
-            const existingIndex = imageSources.findIndex(
-                (img) => img.image_position === position
-            );
+        const existingIndex = imageSources.findIndex(
+            (img) => img.image_position === position
+        );
 
-            if (existingIndex !== -1) {
-                imageSources[existingIndex].src = imageSrc;
-                imageSources[existingIndex].image_name = imageName;
-            } else {
-                imageSources.push({
-                    src: imageSrc,
-                    deleteId: position,
-                    image_position: position,
-                    image_name: imageName,
-                });
-            }
-        });
-
-        if (eventId === "") {
-            await savePhotoSlider();
+        if (existingIndex !== -1) {
+            imageSources[existingIndex].src = imageSrc;
+            imageSources[existingIndex].image_name = imageName;
+        } else {
+            imageSources.push({
+                src: imageSrc,
+                deleteId: position,
+                image_position: position,
+                image_name: imageName,
+            });
         }
+    });
 
-        if ($("#isUserLoggedIn").val() === "0" || eventId==undefined) {
-            await savePhotoSlider();
-        }
+    if (eventId === "") {
+        await savePhotoSlider();
+    }
 
-        getLengthofSliderImage();
-    }, 500);
+    if ($("#isUserLoggedIn").val() === "0" || eventId == null || eventId=="") {
+        await savePhotoSlider();
+    }
+
+    getLengthofSliderImage();
 }
 
 //old_slider_image
