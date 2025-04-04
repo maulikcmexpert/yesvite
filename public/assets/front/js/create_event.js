@@ -9357,7 +9357,7 @@ function getLengthofSliderImage() {
 //     //console.log(imageSources);
 //     if (imageSources.length > 0) {
 //         $("#loader").css("display", "flex");
-//         $.ajax({
+//        $.ajax({
 //             url: base_url + "event/save_slider_img",
 //             method: "POST",
 //             data: {
@@ -9425,7 +9425,7 @@ async function savePhotoSlider() {
         $("#loader").css("display", "flex");
         let event = $("#eventID").val();
 
-        try {
+        // try {
             let response = await $.ajax({
                 url: base_url + "event/save_slider_img",
                 method: "POST",
@@ -9434,33 +9434,42 @@ async function savePhotoSlider() {
                     imageSources: imageSources,
                     _token: $('meta[name="csrf-token"]').attr("content"),
                 },
-            });
-
-            if (response.status == 401 && response.info == "logout") {
-                window.location.href = "/login";
-                return;
-            }
-
-            let savedImages = response.images;
-            if ($("#isUserLoggedIn").val() === "0") {
-                localStorage.setItem("save-slider-image", JSON.stringify(savedImages));
-            }
-
-            savedImages.forEach((image, index) => {
-                let selector = `.photo-slider-${index + 1}`;
-                $(selector).attr("data-image", image.fileName);
-            });
-
-            eventData.slider_images = savedImages;
-            $("#loader").css("display", "none");
-            toastr.success("Slider Image saved Successfully");
-
-            return savedImages; // ✅ Now returns data properly
-        } catch (error) {
-            $("#loader").css("display", "none");
-            toastr.error(error);
-            throw error; // ❌ Ensures errors are caught when using await
-        }
+                success: function (response) {
+                    if (response.status == 401 && response.info == "logout") {
+                        window.location.href = "/login"; // Redirect to home page
+                        return;
+                    }
+                    var savedImages = response.images;
+                    var newImages = response.images;
+                    if ($("#isUserLoggedIn").val() === "0") {
+                        // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+                        // localStorage.removeItem("save-slider-image");
+                        // Append new images to the existing array
+                        // newImages.forEach(image => {
+                        //     savedImages.push(image);
+                        // });
+    
+                        // Update localStorage with the combined array
+                        localStorage.setItem(
+                            "save-slider-image",
+                            JSON.stringify(savedImages)
+                        );
+                    }
+                    eventData.slider_images = []; // Empty the array
+                    eventData.slider_images = savedImages; // Assign new values
+    
+                    // eventData.slider_images = savedImages;
+                    console.log(savedImages);
+                    console.log(eventData.slider_images);
+                    $("#loader").css("display", "none");
+                    toastr.success("Slider Image saved Successfully");
+                },
+                error: function (xhr, status, error) {
+                    $("#loader").css("display", "none");
+                    toastr.error(error);
+                },
+            
+            });         
     }
 }
 
