@@ -186,7 +186,7 @@
     $imageMap = [];
 
     foreach ($categories as $category) {
-        dd($category->subcategory);
+        // dd($category->subcategory);
         foreach ($category->subcategory as $subcategory) {
             foreach ($subcategory->textdatas as $image) {
                 if (!isset($imageMap[$image->id])) {
@@ -235,7 +235,7 @@
 @endphp
 @foreach ($allImages as $image)
 @php
-      $imagesnew[] = $image['subcategory_name'];
+      $imagesnew[] = $image['subcategory_names'];
 @endphp
     @if($image['is_visible'] == '1')
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
