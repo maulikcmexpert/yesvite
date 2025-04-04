@@ -126,6 +126,7 @@
                 $allImages = collect([]);
                 $randomIds = [];
                 foreach ($categories as $category) {
+                    dd($category);
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
                             $randomIds[] = $image->id;
