@@ -128,12 +128,20 @@
                 foreach ($categories as $category) {
                     dd($category);
                     foreach ($category->subcategory as $subcategory) {
+
+                        foreach ($category->subcategory as $subcategory) {
+            $subcategoryNames[] = $subcategory->subcategory_name;
+        }
+        $subcategoryNameString = implode(',', $subcategoryNames);
+
                         foreach ($subcategory->textdatas as $image) {
+                           
+
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
 
-                                'subcategory_name' =>$subcategory->subcategory_name,
+                                'subcategory_name' =>$subcategoryNameString,
 
                                 'static_information' => json_encode($image->static_information),
                                 'shape_image' =>
