@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\TextData;
 use App\Models\EventDesignCategory;
 use App\Models\EventDesignSubCategory;
-use Illuminate\Support\Facades\DB;
 
 class HomeFrontController extends BaseController
 {
@@ -120,102 +119,23 @@ class HomeFrontController extends BaseController
         //     ->orderBy('id', 'ASC')
         //     ->get();
 
-        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-        //     $query->whereHas('textdatas', function ($q) {
-        //         $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
-        //     });
-        // })
-        // ->with([
-        //     'subcategory' => function ($query) {
-        //         $query->whereHas('textdatas', function ($q) {
-        //             $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-        //         })->with(['textdatas' => function ($q) {
-        //             $q->where('is_visible', '1'); // Load only visible textdatas
-        //         }]);
-        //     }
-        // ])
-        // ->orderBy('id', 'ASC')
-        // ->get();
-
-        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-        //     $query->whereExists(function ($subQuery) {
-        //         $subQuery->select(DB::raw(1))
-        //             ->from('textdata_subcategories as tds')
-        //             ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
-        //             ->whereColumn('tds.subcategory_id', 'event_design_sub_categories.id')
-        //             ->where('td.is_visible', 1);
-        //     });
-        // })
-        // ->with([
-        //     'subcategory' => function ($query) {
-        //         $query->whereExists(function ($subQuery) {
-        //             $subQuery->select(DB::raw(1))
-        //                 ->from('textdata_subcategories as tds')
-        //                 ->join('text_data as td', 'tds.textdata_id', '=', 'td.id')
-        //                 ->whereColumn('tds.subcategory_id', 'event_design_sub_categories.id')
-        //                 ->where('td.is_visible', 1);
-        //         })
-        //         ->with(['textdatas' => function ($q) {
-        //             $q->where('is_visible', 1);
-        //         }]);
-        //     }
-        // ])
-        // ->orderBy('id', 'ASC')
-        // ->get();
-        
-        $textdatas = TextData::whereHas('categories')
-    ->with([
-        'categories',
-        'subcategories' => function ($query) {
-            $query->whereIn('event_design_sub_categories.id', function ($subQuery) {
-                $subQuery->select('textdata_subcategories.subcategory_id')
-                    ->from('textdata_subcategories')
-                    ->groupBy('textdata_subcategories.textdata_id')
-                    ->havingRaw('COUNT(textdata_subcategories.subcategory_id) > 1');
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
             });
-        }
-    ])
-    ->whereHas('subcategories', function ($query) {
-        $query->whereIn('event_design_sub_categories.id', function ($subQuery) {
-            $subQuery->select('textdata_subcategories.subcategory_id')
-                ->from('textdata_subcategories')
-                ->groupBy('textdata_subcategories.textdata_id')
-                ->havingRaw('COUNT(textdata_subcategories.subcategory_id) > 1');
-        });
-    })
-    ->where('is_visible', 1)
-    ->orderBy('id', 'ASC')
-    ->get();
-
-
-    
-    
-
-        dd($textdatas);
-$categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-    $query->whereIn('id', function ($subQuery) {
-        $subQuery->select('subcategory_id')
-            ->from('textdata_subcategories')
-            ->join('text_data', 'textdata_subcategories.textdata_id', '=', 'text_data.id')
-            ->where('text_data.is_visible', 1);
-    });
-})
-->with([
-    'subcategory' => function ($query) {
-        $query->whereIn('id', function ($subQuery) {
-            $subQuery->select('subcategory_id')
-                ->from('textdata_subcategories')
-                ->join('text_data', 'textdata_subcategories.textdata_id', '=', 'text_data.id')
-                ->where('text_data.is_visible', 1);
         })
-        ->with(['textdatas' => function ($q) {
-            $q->where('is_visible', 1);
-        }]);
-    }
-])
-->orderBy('id', 'ASC')
-->get();
-
+        ->with([
+            'subcategory' => function ($query) {
+                $query->whereHas('textdatas', function ($q) {
+                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+                })->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', '1'); // Load only visible textdatas
+                }]);
+            }
+        ])
+        ->orderBy('id', 'ASC')
+        ->get();
+        
 
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
