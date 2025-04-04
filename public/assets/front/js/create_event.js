@@ -9152,7 +9152,11 @@ $(document).on("change", ".slider_photo_2", async function (event) {
             // $(".photo-slider-2").attr("data-image", "");
         };
         reader.readAsDataURL(file);
-        updateAllPhotoSliders();
+        // updateAllPhotoSliders();
+
+        setTimeout(() => {
+            updateAllPhotoSliders();
+        }, 500);
 
     }
     // setTimeout(async() => {
@@ -9196,7 +9200,10 @@ $(document).on("change", ".slider_photo_3", async function (event) {
             // $(".photo-slider-3").attr("data-image", "");
         };
         reader.readAsDataURL(file);
-        updateAllPhotoSliders();
+        // updateAllPhotoSliders();
+        setTimeout(() => {
+            updateAllPhotoSliders();
+        }, 500);
 
     }
     // setTimeout(async() => {
