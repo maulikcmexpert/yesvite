@@ -3600,6 +3600,8 @@ class EventController extends BaseController
 
     public function saveSliderImg(Request $request)
     {
+        $addedImage = false;
+
         $imageSources = $request->imageSources;
         $event_id = $request->eventId;
         $i = 0;
@@ -3631,25 +3633,29 @@ class EventController extends BaseController
                 // Save new image
                 $parts = explode(',', $imageSource['src']);
                 if (count($parts) < 2) continue;
-    
+        
                 $imageData = base64_decode($parts[1]);
                 $fileName = time() . $i . '-' . uniqid() . '.jpg';
                 $i++;
-    
+        
                 $path = public_path('storage/event_images/') . $fileName;
                 file_put_contents($path, $imageData);
-    
-                // Add new image to session array
+        
                 $existingImages[] = [
                     'fileName' => $fileName,
                     'deleteId' => $imageSource['deleteId'],
                     'image_position' => $imageSource['image_position']
                 ];
+        
+                $addedImage = true; // ✅ flag that we added
             }
         }
-    
-        // Update session with full image set (old + new)
-        session(['desgin_slider' => array_values($existingImages)]);
+        
+        // Only update session if something was added
+        if ($addedImage) {
+            session(['desgin_slider' => array_values($existingImages)]);
+        }
+        
     
         return response()->json([
             'success' => true,
