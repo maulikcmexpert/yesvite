@@ -457,8 +457,8 @@ $(document).on("click", ".create-event-btn", function () {
 });
 $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
-
-        window.location.href = "/";
+    const frontHomeUrl = "{{ route('front.home') }}";
+        window.location.href = frontHomeUrl;
 
 }
 });
