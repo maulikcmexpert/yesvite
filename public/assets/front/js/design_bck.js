@@ -1762,7 +1762,7 @@ async function bindData(current_event_id) {
             'input[name="colorType"]:checked'
         ).value;
         const activeObject = canvas.getActiveObject();
-        console.log( activeObject);
+        console.log( " colour activeObject", activeObject);
 
         //console.log(activeObject);
         if (!activeObject) {
@@ -2225,7 +2225,9 @@ async function bindData(current_event_id) {
         if (options.target && options.target.type === "textbox") {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
+
             canvas.setActiveObject(options.target);
+            $("#color-picker").spectrum("set", selectedObject.fill || "#000000");
             addIconsToTextbox(options.target);
         } else {
             // alert();
