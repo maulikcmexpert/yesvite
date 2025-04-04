@@ -1,5 +1,5 @@
 <script type="text/javascript">
-alert();
+// alert();
     var base_url = "{{ url('/') }}/";
     $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
         alert();
