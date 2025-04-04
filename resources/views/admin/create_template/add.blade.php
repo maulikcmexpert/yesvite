@@ -66,17 +66,16 @@
 
                             {{-- </select> --}}
 
-                            <div class="col-md-12">
-                                <div class="wrapper">
-                                    <button class="form-control toggle-next ellipsis" type="button">Select
-                                        subbcategory</button>
-                                    <div class="checkboxes" id="Lorems">
+                            <div class="wrapper">
+                                <button class="form-control toggle-next ellipsis" type="button">Select
+                                    subbcategory</button>
+                                <div class="checkboxes" id="Lorems">
 
 
-                                        <div class="inner-wrap" id="event_design_sub_category_id">
+                                    <div class="inner-wrap" id="event_design_sub_category_id">
 
 
-                                            {{-- <label>
+                                        {{-- <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor (34) </span>
                                       </label><br>
@@ -105,7 +104,6 @@
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
                                         <span>Ipsum 2 (12)</span>
                                       </label> --}}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
