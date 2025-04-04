@@ -344,6 +344,10 @@ class TemplateController extends Controller
             // Save the updated template data
             $template->save();
 
+            // Commit the transaction
+            DB::commit();
+
+
             TextdataSubcategory::where('textdata_id', $id)->delete();
 
             if (is_array($request->subcategory)) {
@@ -354,9 +358,6 @@ class TemplateController extends Controller
                     ]);
                 }
             }
-            // Commit the transaction
-            DB::commit();
-
             // Redirect with a success message
             return redirect()->route('create_template.index')->with('msg', 'Template updated successfully!');
         } catch (\Exception $e) {
