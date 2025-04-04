@@ -289,7 +289,7 @@
             $(document).on("click", ".previousImeg", async function (e) {
 
 console.log( $(
-    ".image-item:visible, .image-item-new:visible"
+    ".list_all_design_catgeory"
 ).length);
  updateTotalCount()
 
