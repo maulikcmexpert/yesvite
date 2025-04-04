@@ -6,7 +6,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right w-100">
                         <li class="breadcrumb-item"><a href="{{URL::to('/admin/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/create_template')}}">Template List</a></li>
+                        <li class="breadcrumb-item"><a href="{{URL::to('/admin/create_template')}}">Template List</a>
+                        </li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -31,7 +32,8 @@
 
 
 
-            <form method="post" action="{{ route('create_template.store')}}" id="templateForm" enctype="multipart/form-data">
+            <form method="post" action="{{ route('create_template.store')}}" id="templateForm"
+                enctype="multipart/form-data">
 
                 @csrf
 
@@ -40,7 +42,8 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Category</label>
 
-                            <select class="form-control design_id" id="event_design_category_id" name="event_design_category_id">
+                            <select class="form-control design_id" id="event_design_category_id"
+                                name="event_design_category_id">
 
                                 <option value="">Select Category</option>
 
@@ -53,11 +56,11 @@
                             <span class="text-danger">{{ $errors->first('event_design_category_id.*') }}</span>
                         </div>
                     </div>
-                    <div class="col-lg-3 mb-3">
+                    <div class="col-lg-12 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sub Category</label>
                             {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id"> --}}
-                                {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
+                            {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
 
                                 <option value="">Select subcategory</option> --}}
 
@@ -65,14 +68,15 @@
 
                             <div class="col-md-4">
                                 <div class="wrapper">
-                                  <button class="form-control toggle-next ellipsis" type="button">Select subbcategory</button>
-                                  <div class="checkboxes" id="Lorems">
-                               
-                                    
-                                    <div class="inner-wrap" id="event_design_sub_category_id">
-                                     
-                            
-                                      {{-- <label>
+                                    <button class="form-control toggle-next ellipsis" type="button">Select
+                                        subbcategory</button>
+                                    <div class="checkboxes" id="Lorems">
+
+
+                                        <div class="inner-wrap" id="event_design_sub_category_id">
+
+
+                                            {{-- <label>
                                         <input type="checkbox" value="dolor" class="ckkBox val" />
                                         <span>Dolor (34) </span>
                                       </label><br>
@@ -101,10 +105,10 @@
                                         <input type="checkbox" value="ipsum" class="ckkBox val" />
                                         <span>Ipsum 2 (12)</span>
                                       </label> --}}
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                            </div>
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
@@ -114,9 +118,11 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Image</label>
-                            <input type="file" class="form-control image" name="image" placeholder="choose image" id="image" value="">
+                            <input type="file" class="form-control image" name="image" placeholder="choose image"
+                                id="image" value="">
                             <span class="text-danger">{{ $errors->first('image.*') }}</span>
-                            <img id="add_preview_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
+                            <img id="add_preview_image" src="" alt="Template Image" width="100" class="mt-2"
+                                style="display: none;">
 
 
 
@@ -129,9 +135,11 @@
                         <div class="form-group">
 
                             <label for="exampleInputEmail1">Filled Image</label>
-                            <input type="file" class="form-control image" name="filled_image" placeholder="choose image" id="filled_image" value="">
+                            <input type="file" class="form-control image" name="filled_image" placeholder="choose image"
+                                id="filled_image" value="">
                             <span class="text-danger">{{ $errors->first('filled_image.*') }}</span>
-                            <img id="add_preview_filled_image" src="" alt="Template Image" width="100" class="mt-2" style="display: none;">
+                            <img id="add_preview_filled_image" src="" alt="Template Image" width="100" class="mt-2"
+                                style="display: none;">
 
 
 
@@ -144,7 +152,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput"  />
+                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 
@@ -187,4 +195,3 @@
         </div>
     </div>
 </div>
-
