@@ -288,7 +288,7 @@
             });
             $(document).on("click", ".previousImeg", async function (e) {
 
-                let count = $(".list_all_design_catgeory > div:visible").length;
+                let count = $(".default_show").length;
 
 console.log(count);
 $('.total_design_count').text(count + ' Items');
