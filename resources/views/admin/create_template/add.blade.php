@@ -65,7 +65,7 @@
 
                             <div class="col-md-4">
                                 <div class="wrapper">
-                                  <button class="form-control toggle-next ellipsis">All Lorems (422)</button>
+                                  <button class="form-control toggle-next ellipsis" type="button">All Lorems (422)</button>
                                   <div class="checkboxes" id="Lorems">
                                     <label class="apply-selection">
                                       <input type="checkbox" value="" class="ajax-link" />
