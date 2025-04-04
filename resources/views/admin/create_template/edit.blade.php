@@ -46,19 +46,29 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="event_design_subcategory_id">Subcategory</label>
-                            <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
-                                <!-- <option value="">Select Subcategory</option> -->
+
+                            <div class="col-md-4">
+                                <div class="wrapper">
+                                  <button class="form-control toggle-next ellipsis" type="button">Select subbcategory</button>
+                                  <div class="checkboxes" id="Lorems">
+                               
+                                    
+                                    <div class="inner-wrap" id="event_design_subcategory_id">
+                                     
+                                        <label><input type="checkbox" value="{{ $subcategory->id }}" class="ckkBox val" name="subcategory[]" {{ $subcategory->id == $getTemData->event_design_sub_category_id ? 'checked' : '' }} /><span> {{ $subcategory->subcategory_name }}</span> </label><br>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
                                 @foreach($getSubCatDetail as $subcategory)
-                                {{-- @if ($subcategory->id == $getTemData->event_design_sub_category_id) --}}
-                                {{-- <option value="{{ $subcategory->id }}" selected>
-                                    {{ $subcategory->subcategory_name }}
-                                </option> --}}
+                               
                                 <option value="{{ $subcategory->id }}" {{ $subcategory->id == $getTemData->event_design_sub_category_id ? 'selected' : '' }}>
                                     {{ $subcategory->subcategory_name }}
                                 </option>
-                                {{-- @endif --}}
                                 @endforeach
-                            </select>
+                            </select> --}}
                             <span class="text-danger">{{ $errors->first('event_design_sub_category_id') }}</span>
                         </div>
                     </div>
