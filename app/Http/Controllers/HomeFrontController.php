@@ -163,18 +163,33 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
         
-        $textdatas = TextData::where('is_visible', 1)
-        ->whereHas('textdataSubcategories') // Ensures only textdatas with subcategories
-        ->withCount('textdataSubcategories') // Get how many subcategories each textdata has
+        $textdatas = TextData::whereHas('categories', function ($query) {
+            // Ensure the TextData belongs to a valid category
+        })
         ->with([
-            'textdataSubcategories' => function ($q) {
-                $q->select('event_design_sub_categories.id', 'subcategory_name');
-            },
-            'textdataSubcategories.category' => function ($q) {
-                $q->select('id', 'category_name');
+            'categories',
+            'subcategories' => function ($query) {
+                // Only include subcategories that are linked via the relation table
+                $query->whereIn('id', function ($subQuery) {
+                    $subQuery->select('subcategory_id')
+                        ->from('textdata_subcategories')
+                        ->groupBy('textdata_id')
+                        ->havingRaw('COUNT(subcategory_id) > 1'); // Ensures multiple subcategories
+                });
             }
         ])
+        ->whereHas('subcategories', function ($query) {
+            $query->whereIn('id', function ($subQuery) {
+                $subQuery->select('subcategory_id')
+                    ->from('textdata_subcategories')
+                    ->groupBy('textdata_id')
+                    ->havingRaw('COUNT(subcategory_id) > 1'); // Ensures multiple subcategories
+            });
+        })
+        ->where('is_visible', 1) // Ensuring only visible records
+        ->orderBy('id', 'ASC')
         ->get();
+    
 
         dd($textdatas);
 $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
