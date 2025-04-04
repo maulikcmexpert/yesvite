@@ -9223,6 +9223,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
 
 function updateAllPhotoSliders() {
     setTimeout(async () => {
+        alert();
         $(".slider-img").each(function () {
             const $this = $(this);
             const position = $this.data("delete"); // assumes `data-delete="1"` etc.
@@ -9250,7 +9251,7 @@ function updateAllPhotoSliders() {
             await savePhotoSlider();
         }
 
-        if ($("#isUserLoggedIn").val() === "0") {
+        if ($("#isUserLoggedIn").val() === "0" || eventId==undefined) {
             await savePhotoSlider();
         }
 
