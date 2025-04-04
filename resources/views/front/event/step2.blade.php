@@ -789,5 +789,14 @@
             var visibleItems = $(".all_designs:visible").length;
             $(".total_design_count").text(visibleItems + " Items");
         });
+
+        $(document).on("click", ".previousImeg", async function (e) {
+
+console.log( $(
+    ".image-item:visible, .image-item-new:visible"
+).length);
+updateTotalCount();
+
+});
     </script>
 @endpush
