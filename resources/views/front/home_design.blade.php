@@ -122,10 +122,11 @@
 
 
         <div class="row list_all_design_catgeory">
-            @php
+            {{-- @php
                 $allImages = collect([]);
                 $randomIds = [];
-                dd($categories);
+                
+                // dd($categories);
                 foreach ($categories as $category) {
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
@@ -156,7 +157,56 @@
 
                 // $randomImages = $allImages->shuffle()->take(30);
 
-            @endphp
+            @endphp --}}
+
+            @php
+    $allImages = collect([]);
+    $randomIds = [];
+    $imageMap = [];
+
+    foreach ($categories as $category) {
+        foreach ($category->subcategory as $subcategory) {
+            foreach ($subcategory->textdatas as $image) {
+                if (!isset($imageMap[$image->id])) {
+                    $imageMap[$image->id] = [
+                        'imageId' => $image->id,
+                        'subcategory_names' => [],
+                        'subcategory_ids' => [],
+                        'static_information' => json_encode($image->static_information),
+                        'shape_image' => $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                        'image' => asset('storage/canvas/' . $image->image),
+                        'tags' => $image->tags,
+                        'is_visible' => $image->is_visible,
+                        'category_id' => $category->id,
+                        'category_name' => $category->category_name,
+                        'image_path' => asset('storage/canvas/' . $image->filled_image),
+                    ];
+                    $randomIds[] = $image->id;
+                }
+
+                // Avoid duplicate subcategory names or IDs
+                if (!in_array($subcategory->subcategory_name, $imageMap[$image->id]['subcategory_names'])) {
+                    $imageMap[$image->id]['subcategory_names'][] = $subcategory->subcategory_name;
+                }
+
+                if (!in_array($subcategory->id, $imageMap[$image->id]['subcategory_ids'])) {
+                    $imageMap[$image->id]['subcategory_ids'][] = $subcategory->id;
+                }
+            }
+        }
+    }
+
+    // Final push to $allImages with comma-separated subcategories
+    foreach ($imageMap as $img) {
+        $img['subcategory_name'] = implode(', ', $img['subcategory_names']);
+        $img['subcategory_id'] = implode(', ', $img['subcategory_ids']);
+        unset($img['subcategory_names'], $img['subcategory_ids']);
+        $allImages->push($img);
+    }
+
+    shuffle($randomIds);
+    $randomIds = array_slice($randomIds, 0, 30);
+@endphp
 
 
             @foreach ($allImages as $image)
