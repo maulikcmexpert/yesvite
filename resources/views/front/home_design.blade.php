@@ -186,6 +186,7 @@
     $imageMap = [];
 
     foreach ($categories as $category) {
+        dd($category->subcategory);
         foreach ($category->subcategory as $subcategory) {
             foreach ($subcategory->textdatas as $image) {
                 if (!isset($imageMap[$image->id])) {
