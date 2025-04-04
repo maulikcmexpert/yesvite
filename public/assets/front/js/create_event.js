@@ -459,8 +459,11 @@ $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
 
 
-    $(".step_1").css("display","none");
     $(".li_event_details").trigger('click');
+    $(".step_1").addClass("d-none");
+
+    // $(".step_1").css("display","none");
+
 
 
 }
