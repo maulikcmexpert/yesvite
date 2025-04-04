@@ -1132,8 +1132,15 @@ table.table tbody tr {
     border-radius: 0.25rem !important;
 }
 
+.select-subcat-inner label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
 .select-subcat-inner label input {
-    margin-right: 10px !important;
+    width: 15px;
+    height: 15px;
 }
 
 /* ========Responsive====== */
