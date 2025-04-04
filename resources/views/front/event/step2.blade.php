@@ -238,6 +238,9 @@
             $(".side-bar-sub-list").click(function() {
                 updateTotalCount();
             })
+            $(".previousImeg").click(function() {
+                updateTotalCount();
+            })
             const urlParams = new URLSearchParams(window.location.search);
             const designId = urlParams.get('design_id'); // Get 'design_id' from URL
 
