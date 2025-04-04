@@ -9443,6 +9443,8 @@ async function savePhotoSlider() {
                     var savedImages = response.images;
                     var newImages = response.images;
                     if ($("#isUserLoggedIn").val() === "0") {
+                        console.log(savedImages);
+                        
                         // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
                         // localStorage.removeItem("save-slider-image");
                         // Append new images to the existing array
