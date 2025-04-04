@@ -457,12 +457,12 @@ $(document).on("click", ".create-event-btn", function () {
 });
 $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
-    $("#loader").css("display", "flex");
-    const frontHomeUrl = base_url + "/";
 
-    setTimeout(function () {
-        window.location.href = frontHomeUrl;
-    }, 500); // 500ms delay
+    $("#edit-design-temp").hide();
+
+    $(".new_login_page").show();
+    $(".new_login").show();
+    $(".new-event-sidebar-wrp").hide();
 
 }
 });
