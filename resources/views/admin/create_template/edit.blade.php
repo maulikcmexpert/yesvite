@@ -1,6 +1,6 @@
-{{dd($getTemData->subcategories);}}
+{{-- {{dd($getTemData->subcategories);}} --}}
 @php
-    $pivotSubcategoryIds = $getTemData->subcategories->pluck('pivot_subcategory_id')->toArray();
+    $pivotSubcategoryIds = $getTemData->subcategories->id->toArray();
     dd($pivotSubcategoryIds);
 @endphp
 
