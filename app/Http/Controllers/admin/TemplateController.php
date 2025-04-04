@@ -350,6 +350,7 @@ class TemplateController extends Controller
 
             TextdataSubcategory::where('textdata_id', $id)->delete();
 
+            dd($id,$request->subcategory);
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
                     TextdataSubcategory::create([
