@@ -317,7 +317,7 @@ class TemplateController extends Controller
 
             // Update the template fields
             $template->event_design_category_id = $request->event_design_category_id;
-            $template->event_design_sub_category_id = $request->event_design_sub_category_id;
+            // $template->event_design_sub_category_id = $request->event_design_sub_category_id;
             $template->tags = $request->tags;
             $i = 0;
             // Handle image upload (if a new image is uploaded)
@@ -342,7 +342,17 @@ class TemplateController extends Controller
 
             // Save the updated template data
             $template->save();
+            
+            TextdataSubcategory::where('textdata_id', $template->id)->delete();
 
+            if (is_array($request->subcategory)) {
+                foreach ($request->subcategory as $subcatId) {
+                    TextdataSubcategory::create([
+                        'textdata_id' => $template->id,
+                        'subcategory_id' => $subcatId,
+                    ]);
+                }
+            }
             // Commit the transaction
             DB::commit();
 
