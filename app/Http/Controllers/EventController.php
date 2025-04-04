@@ -155,7 +155,7 @@ class EventController extends BaseController
             Session::forget('thankyou_card_data');
             $image = Session::get('desgin');
             // $slider_image = Session::get('desgin_slider');
-            // $slider_image = Session::forget('desgin_slider');
+            $slider_image = Session::forget('desgin_slider');
             // $custom_image = Session::get('custom_image');
 
             $custom_image = Session::forget('custom_image');
@@ -3518,151 +3518,67 @@ class EventController extends BaseController
     //     session(['desgin_slider' => $savedFiles]);
     //     return response()->json(['success' => true, 'images' => $savedFiles]);
     // }
-    // public function saveSliderImg(Request $request)
-    // {
-    //     // dd($request);
-    //     $imageSources = $request->imageSources;
-    //     $event_id = $request->eventId;
-    //     $i = 0;
-    //     // if($request->eventId==null){
-    //         foreach ($imageSources as $imageSource) {
-    //             if (!empty($imageSource['src'])) {
-    //                 if (strpos($imageSource['src'], 'data:image') === 0) {
-    //                     if($imageSource['image_name']!=""||$imageSource['image_name']=null){
-
-    //                         if (session()->has('desgin_slider')) {
-    //                                     $existingImages = session('desgin_slider');
-    //                                     foreach ($existingImages as $file) {
-    //                                         $filePath = public_path('storage/event_images/') . $file['fileName'];
-
-    //                                         if($file['image_position']==$imageSource['image_position']){
-    //                                             if (file_exists($filePath)) {
-    //                                                 unlink($filePath);
-    //                                             }
-    //                                         }
-    //                                     }
-    //                                 }
-
-
-    //                         $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
-    //                         if (file_exists($filePath)) {
-    //                             unlink($filePath);
-    //                         }
-
-    //                         if($event_id!=""){
-    //                             $getEventImages = EventImage::where(['event_id' => $event_id, 'image' => $imageSource['image_name']])->delete();
-    //                         }
-    //                     }
-    //                     // Base64 image
-    //                     $parts = explode(',', $imageSource['src']);
-    //                     if (count($parts) < 2) {
-    //                         continue;
-    //                     }
-    
-    //                     $imageData = base64_decode($parts[1]);
-    //                     $fileName = time() . $i . '-' . uniqid() . '.jpg';
-    //                     $i++;
-    
-    //                     $path = public_path('storage/event_images/') . $fileName;
-    //                     file_put_contents($path, $imageData);
-    //                 } else {
-    //                     // URL image (just copy the image)
-    //                     $src = $imageSource['src'];
-    //                     $imageName = basename($src);
-    //                     $fileName = $imageName;
-    //                     $i++;
-    
-    //                     // $path = public_path('storage/event_images/') . $fileName;
-    //                     // file_put_contents($path, file_get_contents($imageSource['src']));
-    //                 }
-    
-    //                 $savedFiles[] = [
-    //                     'fileName' => $fileName,
-    //                     'deleteId' => $imageSource['deleteId'],
-    //                     'image_position'=>$imageSource['deleteId']
-    //                 ];
-
-    //                         session(['desgin_slider' => $savedFiles]);
-
-    //             }
-    //         }
-    //     // }
-       
-    //     //new
-    //     if (empty($savedFiles)) {
-    //         // return response()->json(['status' => 'No valid images to save'], 400);
-    //     }
-    //     // dd($savedFiles);
-    //     $finalImages=session(['desgin_slider' => $savedFiles]);
-    //     return response()->json(['success' => true, 'images' => $finalImages]);
-    // }
-
-
     public function saveSliderImg(Request $request)
     {
-        $addedImage = false;
-
+        // dd($request);
         $imageSources = $request->imageSources;
         $event_id = $request->eventId;
         $i = 0;
-    
-        // Get current session data
-        $existingImages = session('desgin_slider', []);
-    
-        foreach ($imageSources as $imageSource) {
-            if (!empty($imageSource['src']) && strpos($imageSource['src'], 'data:image') === 0) {
-    
-                // Delete old image at same position if it exists
-                foreach ($existingImages as $key => $file) {
-                    if ($file['image_position'] == $imageSource['image_position']) {
-                        $filePath = public_path('storage/event_images/') . $file['fileName'];
-                        if (file_exists($filePath)) {
-                            unlink($filePath);
+        // if($request->eventId==null){
+            foreach ($imageSources as $imageSource) {
+                if (!empty($imageSource['src'])) {
+                    if (strpos($imageSource['src'], 'data:image') === 0) {
+                        if($imageSource['image_name']!=""||$imageSource['image_name']!=null){
+                            $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
+                            if (file_exists($filePath)) {
+                                unlink($filePath);
+                            }
+
+                            if($event_id!=""){
+                                $getEventImages = EventImage::where(['event_id' => $event_id, 'image' => $imageSource['image_name']])->delete();
+                            }
                         }
-                        unset($existingImages[$key]);
+                        // Base64 image
+                        $parts = explode(',', $imageSource['src']);
+                        if (count($parts) < 2) {
+                            continue;
+                        }
+    
+                        $imageData = base64_decode($parts[1]);
+                        $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                        $i++;
+    
+                        $path = public_path('storage/event_images/') . $fileName;
+                        file_put_contents($path, $imageData);
+                    } else {
+                        // URL image (just copy the image)
+                        $src = $imageSource['src'];
+                        $imageName = basename($src);
+                        $fileName = $imageName;
+                        $i++;
+    
+                        // $path = public_path('storage/event_images/') . $fileName;
+                        // file_put_contents($path, file_get_contents($imageSource['src']));
                     }
-                }
     
-                if (!empty($event_id)) {
-                    EventImage::where([
-                        'event_id' => $event_id,
-                        'image' => $imageSource['image_name']
-                    ])->delete();
+                    $savedFiles[] = [
+                        'fileName' => $fileName,
+                        'deleteId' => $imageSource['deleteId'],
+                        'image_position'=>$imageSource['deleteId']
+                    ];
                 }
-    
-                // Save new image
-                $parts = explode(',', $imageSource['src']);
-                if (count($parts) < 2) continue;
-        
-                $imageData = base64_decode($parts[1]);
-                $fileName = time() . $i . '-' . uniqid() . '.jpg';
-                $i++;
-        
-                $path = public_path('storage/event_images/') . $fileName;
-                file_put_contents($path, $imageData);
-        
-                $existingImages[] = [
-                    'fileName' => $fileName,
-                    'deleteId' => $imageSource['deleteId'],
-                    'image_position' => $imageSource['image_position']
-                ];
-        
-                $addedImage = true; // ✅ flag that we added
             }
+        // }
+       
+        //new
+        if (empty($savedFiles)) {
+            // return response()->json(['status' => 'No valid images to save'], 400);
         }
-        
-        // Only update session if something was added
-        if ($addedImage) {
-            session(['desgin_slider' => array_values($existingImages)]);
-        }
-        
-    
-        return response()->json([
-            'success' => true,
-            'images' => session('desgin_slider') // this will return ALL current images
-        ]);
+        // dd($savedFiles);
+        session(['desgin_slider' => $savedFiles]);
+        return response()->json(['success' => true, 'images' => $savedFiles]);
     }
-    
+
 
 
 
