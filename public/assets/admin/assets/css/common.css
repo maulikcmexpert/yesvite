@@ -1101,7 +1101,7 @@ table.table tbody tr {
     gap: 3px;
 }
 
-.select-subcat-btn {
+.categoryCard button.select-subcat-btn {
     height: 42px !important;
     font-size: 1rem !important;
     font-weight: 400 !important;
