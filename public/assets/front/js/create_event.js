@@ -6900,6 +6900,8 @@ $(document).on("click", ".save_event_co_host", function () {
 // });
 
 $(document).on("click", ".final_checkout", function () {
+    console.log(eventData);
+    
     var data = eventData;
     // console.log(data);
     // $('#loader').css('display','flex');
