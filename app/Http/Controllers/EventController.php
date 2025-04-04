@@ -3520,7 +3520,7 @@ class EventController extends BaseController
     // }
     public function saveSliderImg(Request $request)
     {
-        dd($request);
+        // dd($request);
         $imageSources = $request->imageSources;
         $event_id = $request->eventId;
         $i = 0;
