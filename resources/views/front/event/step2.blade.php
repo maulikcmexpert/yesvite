@@ -288,10 +288,10 @@
             });
             $(document).on("click", ".previousImeg", async function (e) {
 
-console.log( $(
-    ".list_all_design_catgeory"
-).length);
-// $('.total_design_count').text( + ' Items');
+                let count = $(".list_all_design_catgeory > div").length;
+
+console.log(count);
+$('.total_design_count').text(count + ' Items');
 
 });
 
