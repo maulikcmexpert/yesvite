@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EventDesignCategory;
 use App\Models\EventDesignStyle;
 use App\Models\EventDesignSubCategory;
+use App\Models\TextdataSubcategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Carbon\Carbon;
@@ -141,8 +142,47 @@ class TemplateController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         DB::beginTransaction();
+    //         $imageName = null;
+    //         $filledImage = null;
+    //         $i = 0;
+    //         if ($request->hasFile('image')) {
+    //             $image = $request->file('image');
+    //             $imageName = time() . $i . '.' . $image->getClientOriginalExtension();
+    //             $image->move(public_path('storage/canvas'), $imageName);
+    //             $i++;
+    //         }
+    //         if ($request->hasFile('filled_image')) {
+    //             $i++;
+    //             $filled_image = $request->file('filled_image');
+    //             $filledImage = time() . $i . '.' . $filled_image->getClientOriginalExtension();
+    //             $filled_image->move(public_path('storage/canvas'), $filledImage);
+    //         }
+    //         $textData = TextData::create([
+    //             'image' => $imageName,
+    //         ]);
+    //         $creator_id=session()->get('admin');
+    //         $textData->creator_id=$creator_id['id'];
+    //         $textData->filled_image = $filledImage;
+    //         $textData->event_design_category_id = $request->event_design_category_id;
+    //         $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
+    //         $textData->tags = $request->input('tags');
+    //         $textData->save();
+    //         DB::commit();
+
+    //         return redirect()->route('create_template.edit_template', encrypt($textData->id))->with('msg', 'Template added successfully!');
+    //     } catch (QueryException $e) {
+    //         DB::rollBack();
+    //         Log::error('Database query error: ' . $e->getMessage());
+    //         return redirect()->route('create_template.index')->with('msg_error', 'Something went wrong!');
+    //     }
+    // }
     public function store(Request $request)
     {
+        dd($request->event_design_sub_category_id);
         try {
             DB::beginTransaction();
             $imageName = null;
@@ -160,16 +200,32 @@ class TemplateController extends Controller
                 $filledImage = time() . $i . '.' . $filled_image->getClientOriginalExtension();
                 $filled_image->move(public_path('storage/canvas'), $filledImage);
             }
-            $textData = TextData::create([
-                'image' => $imageName,
-            ]);
-            $creator_id=session()->get('admin');
-            $textData->creator_id=$creator_id['id'];
-            $textData->filled_image = $filledImage;
-            $textData->event_design_category_id = $request->event_design_category_id;
-            $textData->event_design_sub_category_id = $request->event_design_sub_category_id;
-            $textData->tags = $request->input('tags');
-            $textData->save();
+
+                $textData = TextData::create([
+                    'image' => $imageName,
+                ]);
+                
+                $creator_id = session()->get('admin');
+                $textData->creator_id = $creator_id['id'];
+                $textData->filled_image = $filledImage;
+                $textData->event_design_category_id = $request->event_design_category_id;
+                $textData->tags = $request->input('tags');
+                $textData->save();
+                
+                // Save multiple subcategories into pivot/child table
+            
+                if (is_array($request->event_design_sub_category_id)) {
+                    foreach ($request->event_design_sub_category_id as $subcatId) {
+                        
+                        $subcate = TextdataSubcategory::create([
+                            'template_id' => $textData->id,
+                            'subcategory_id' => $subcatId,            
+                        ]);
+
+
+                    }
+                }
+                
             DB::commit();
 
             return redirect()->route('create_template.edit_template', encrypt($textData->id))->with('msg', 'Template added successfully!');
