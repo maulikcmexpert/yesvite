@@ -308,7 +308,7 @@ function toggleCheckedAll(checkbox) {
 
 
             //     if (!hasError) {
-            //         $("#templateForm").submit();
+                    $("#templateForm").submit();
             //     } else {
             //         e.preventDefault();
             //     }
