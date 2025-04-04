@@ -20,7 +20,7 @@
 
 
 
-        <div class="card card-primary categoryCard">
+        <div class="card card-primary categoryCard add-template-wrp">
 
             <div class="card-header">
 
