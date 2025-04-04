@@ -117,7 +117,7 @@
             </div>
 
             <div class="selected-items"></div>
-            <h5 class="total-items ms-auto total_design_count">{{ $count }} Items</h5>
+            <h5 class="total-items ms-auto total_design_count"></h5>
         </div>
 
 
@@ -131,13 +131,13 @@
                             $randomIds[] = $image->id;
                             $allImages->push([
                                 'imageId' => $image->id,
-                             
+
                                 'subcategory_name' =>$subcategory->subcategory_name,
-                                
+
                                 'static_information' => json_encode($image->static_information),
                                 'shape_image' =>
                                     $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-                             
+
                                 'image' => asset('storage/canvas/' . $image->image),
                                 'tags' => $image->tags,
                                 'is_visible' => $image->is_visible,
@@ -165,7 +165,7 @@
                     data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
                     data-category-id="{{ $image['category_id'] }}"
                     data-subcategory-id="{{ $image['subcategory_id'] }}"
-                
+
                     data-subcategory_name="{{ $image['subcategory_name'] }}"
                     data-category_name="{{ $image['category_name'] }}" data-tags="{{$image['tags']}}">
 
@@ -312,7 +312,7 @@
                     subcategoryData.images.push({
                         id: {{ $image->id }},
                         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
-                    
+
                     });
                 @endforeach
 
@@ -324,13 +324,13 @@
 
         console.log(designData); // Check output in browser console
     </script>
-   
+
 
     {{-- <script>
         var designData = [];
-    
+
         var is_random = {!! json_encode($randomIds) !!};
-    
+
         @foreach ($categories as $category)
             var categoryData = {
                 id: {{ $category->id }},
@@ -338,9 +338,9 @@
                 tags: [],        // Separate tags array
                 subcategories: []
             };
-    
+
             let tagSet = new Set();  // Use Set to collect unique tags
-    
+
             @foreach ($category->subcategory as $subcategory)
                 var subcategoryData = {
                     id: {{ $subcategory->id }},
@@ -354,34 +354,34 @@
                     // Inside the loop
                     i = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
 
-    
+
                     // Store image with its tags
                     subcategoryData.images.push({
                         id: {{ $image->id }},
                         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
                         tags: imageTags
                     });
-    
+
                     // Add tags to the Set
                     imageTags.forEach(tag => tagSet.add(tag));
                 @endforeach
-    
+
                 categoryData.subcategories.push(subcategoryData);
             @endforeach
-    
+
             // Convert Set to array of tag objects with IDs
             categoryData.tags = Array.from(tagSet).map((tag, index) => ({
                 id: index + 1,
                 name: tag
             }));
-    
+
             designData.push(categoryData);
         @endforeach
-    
+
         console.log(designData);  // Check the final structure
     </script>
      --}}
-    
+
 @endpush
 
 
