@@ -9252,23 +9252,7 @@ function getLengthofSliderImage() {
     $(".slider_image_count").text(i + "/3 Photos");
 }
 function savePhotoSlider(){
-    if(eventId!=""){
-        imageSources = [];
-        $(".slider_img").each(function () {
-            var src = $(this).attr("src");
-            if (src !== "") {
-                imageSources.push({
-                    src: $(this).attr("src"),
-                    deleteId: $(this).data("delete"),
-                    image_position: $(this).data("delete"),
-                    image_name: $(this).data('image');
-                });
-                imagenames.push({
-                    name: $(this).attr("data-image"),
-                });
-            }
-        });
-    }
+
     if (imageSources.length > 0) {
         $("#loader").css("display", "flex");
         var event = $("#eventID").val();
@@ -9316,7 +9300,7 @@ function savePhotoSlider(){
                 console.log(eventData.slider_images);
                 $("#loader").css("display", "none");
                 toastr.success("Slider Image saved Successfully");
-                return 1;
+                return true;
             },
             error: function (xhr, status, error) {
                 $("#loader").css("display", "none");
@@ -9485,17 +9469,16 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
     e.preventDefault();
 
-     var save_slider= savePhotoSlider(); // Ensure this completes first
+     savePhotoSlider(); // Ensure this completes first
 
-     alert(save_slider);
-    // eventData.is_update_event = "1";
-    // await saveDesignData(true);
-    // let save1 = savePage1Data(null, true);
-    // let save2 = savePage3Data(null, true);
-    // savePage4Data();
-    // if (save1 == 8 && save2 == 8) {
-    //     updateEventData();
-    // }
+    eventData.is_update_event = "1";
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 });
 
 $(document).on("click", ".saveDetailOnly", async function (e) {
