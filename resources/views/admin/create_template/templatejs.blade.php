@@ -240,10 +240,10 @@ function toggleCheckedAll(checkbox) {
                         console.log(output);
                         $('#event_design_sub_category_id').empty();
                         // $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
-                        $('#event_design_sub_category_id').append(
-                                '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
+                        // $('#event_design_sub_category_id').append(
+                        //         '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
 
-                            );
+                        //     );
                         output.forEach(function(subcategory) {
                             // $('#event_design_sub_category_id').append(
                             //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
