@@ -2484,6 +2484,7 @@ async function bindData(current_event_id) {
         canvasEl.dispatchEvent(mouseUpEvent);
     }
     canvas.on("mouse:down", function (options) {
+        const selectedObject = options.target;
         discardIfMultipleObjects(options);
         // if (isFirstClick) {
         //     isFirstClick = false; // Reset the flag
@@ -2506,6 +2507,7 @@ async function bindData(current_event_id) {
             console.log("clicked on text box");
             eventData.desgin_selected = "";
             canvas.setActiveObject(options.target);
+            $("#color-picker").spectrum("set", selectedObject.fill || "#000000");
             addIconsToTextbox(options.target);
         } else {
             // alert();
