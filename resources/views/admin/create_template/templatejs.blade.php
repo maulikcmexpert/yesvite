@@ -232,7 +232,7 @@ function toggleCheckedAll(checkbox) {
                             $('#event_design_sub_category_id').empty();
                             // $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
                             $('#event_design_sub_category_id').append(
-                                '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
+                                '<label><input type="checkbox" value="" name="subcategory[]" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
 
                             );
                             return;
@@ -250,7 +250,7 @@ function toggleCheckedAll(checkbox) {
                                 
                             // );
                             $('#event_design_sub_category_id').append(
-                                '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
+                                '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" name="subcategory[]" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
 
                             );
                         });
