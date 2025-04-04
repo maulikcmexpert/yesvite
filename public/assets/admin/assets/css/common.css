@@ -1124,10 +1124,12 @@ table.table tbody tr {
 
 .select-subcat-inner {
     position: absolute;
-    top: 0;
+    top: 41px;
     left: 0;
     border: 1px solid #000 !important;
     padding: 10px;
+    width: 100%;
+    border-radius: 0.25rem !important;
 }
 
 /* ========Responsive====== */
