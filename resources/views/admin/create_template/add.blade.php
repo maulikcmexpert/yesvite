@@ -68,7 +68,7 @@
 
                             <div class="wrapper">
                                 <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
-                                    subbcategory</button>
+                                    subbcategory <i class="fa-solid fa-angle-down"></i></button>
                                 <div class="checkboxes" id="Lorems">
 
 
