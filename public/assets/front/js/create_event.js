@@ -9482,10 +9482,12 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     // return;
 
     e.preventDefault();
-
-var sliderssss=     savePhotoSlider(); // Ensure this completes first
-alert(sliderssss);
-console.log(sliderssss);
+    
+    savePhotoSlider().then(function(sliderssss) {
+        alert(sliderssss);
+        console.log(sliderssss);
+    });
+    
 
     eventData.is_update_event = "1";
     // await saveDesignData(true);
