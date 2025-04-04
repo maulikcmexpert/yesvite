@@ -3597,71 +3597,78 @@ class EventController extends BaseController
     //     return response()->json(['success' => true, 'images' => $finalImages]);
     // }
 
+
     public function saveSliderImg(Request $request)
-{
-    $imageSources = $request->imageSources;
-    $event_id = $request->eventId;
-    $i = 0;
-
-    // Retrieve existing session data
-    $savedFiles = session('desgin_slider', []);
-
-    foreach ($imageSources as $imageSource) {
-        if (!empty($imageSource['src']) && !empty($imageSource['image_name'])) {
-            if (strpos($imageSource['src'], 'data:image') === 0) {
-
-                // Check if image position exists in session
-                foreach ($savedFiles as &$file) {
-                    if ($file['image_position'] == $imageSource['image_position']) {
-                        $oldFilePath = public_path('storage/event_images/') . $file['fileName'];
-                        if (file_exists($oldFilePath)) {
-                            unlink($oldFilePath); // Delete old image
+    {
+        $imageSources = $request->imageSources;
+        $event_id = $request->eventId;
+        $i = 0;
+        $savedFiles = session('desgin_slider', []);
+    
+        foreach ($imageSources as $imageSource) {
+            if (!empty($imageSource['src'])) {
+                if (strpos($imageSource['src'], 'data:image') === 0) {
+                    if (!empty($imageSource['image_name'])) {
+                        
+                        // Get existing images from session
+                        if (session()->has('desgin_slider')) {
+                            $existingImages = session('desgin_slider');
+                            foreach ($existingImages as $key => $file) {
+                                if ($file['image_position'] == $imageSource['image_position']) {
+                                    $filePath = public_path('storage/event_images/') . $file['fileName'];
+                                    if (file_exists($filePath)) {
+                                        unlink($filePath);
+                                    }
+                                    unset($existingImages[$key]); // Remove the old entry
+                                }
+                            }
+                            session(['desgin_slider' => array_values($existingImages)]); // Re-index session array
                         }
-                        $file['fileName'] = $imageSource['image_name']; // Update filename
-                        break;
+    
+                        // Also delete from event images table if event ID exists
+                        if (!empty($event_id)) {
+                            EventImage::where([
+                                'event_id' => $event_id,
+                                'image' => $imageSource['image_name']
+                            ])->delete();
+                        }
                     }
+    
+                    // Save new base64 image
+                    $parts = explode(',', $imageSource['src']);
+                    if (count($parts) < 2) {
+                        continue;
+                    }
+    
+                    $imageData = base64_decode($parts[1]);
+                    $fileName = time() . $i . '-' . uniqid() . '.jpg';
+                    $i++;
+    
+                    $path = public_path('storage/event_images/') . $fileName;
+                    file_put_contents($path, $imageData);
+                } else {
+                    // URL image (copy it instead)
+                    $src = $imageSource['src'];
+                    $imageName = basename($src);
+                    $fileName = $imageName;
+                    $i++;
                 }
-
-                // Remove old file if exists in storage
-                $filePath = public_path('storage/event_images/') . $imageSource['image_name'];
-                if (file_exists($filePath)) {
-                    unlink($filePath);
-                }
-
-                // Delete from DB if event ID exists
-                if (!empty($event_id)) {
-                    EventImage::where(['event_id' => $event_id, 'image' => $imageSource['image_name']])->delete();
-                }
-
-                // Decode Base64 image
-                $parts = explode(',', $imageSource['src']);
-                if (count($parts) < 2) {
-                    continue;
-                }
-                $imageData = base64_decode($parts[1]);
-                $fileName = time() . $i . '-' . uniqid() . '.jpg';
-                $i++;
-
-                $path = public_path('storage/event_images/') . $fileName;
-                file_put_contents($path, $imageData);
-
-                // Add new image only if image_position does not already exist
-                if (!array_filter($savedFiles, fn($file) => $file['image_position'] == $imageSource['image_position'])) {
-                    $savedFiles[] = [
-                        'fileName' => $fileName,
-                        'deleteId' => $imageSource['deleteId'],
-                        'image_position' => $imageSource['image_position']
-                    ];
-                }
+    
+                // Update session without creating duplicates
+                $savedFiles = session('desgin_slider', []);
+                $savedFiles[] = [
+                    'fileName' => $fileName,
+                    'deleteId' => $imageSource['deleteId'],
+                    'image_position' => $imageSource['image_position']
+                ];
+    
+                session(['desgin_slider' => $savedFiles]);
             }
         }
+    
+        return response()->json(['success' => true, 'images' => session('desgin_slider')]);
     }
-
-    session(['desgin_slider' => $savedFiles]); // Update session
-
-    return response()->json(['success' => true, 'images' => $savedFiles]);
-}
-
+    
 
 
 
