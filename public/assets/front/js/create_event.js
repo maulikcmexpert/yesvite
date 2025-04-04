@@ -9252,7 +9252,24 @@ function getLengthofSliderImage() {
     $(".slider_image_count").text(i + "/3 Photos");
 }
 function savePhotoSlider(){
-
+    if(eventId!=""){
+        imageSources = [];
+        $(".slider_img").each(function () {
+            var src = $(this).attr("src");
+            if (src !== "") {
+                imageSources.push({
+                    src: $(this).attr("src"),
+                    deleteId: $(this).data("delete"),
+                    image_position: $(this).data("delete"),
+                    image_name: $(this).data('image');
+                });
+                imagenames.push({
+                    name: $(this).attr("data-image"),
+                });
+            }
+        });
+    }
+    
     if (imageSources.length > 0) {
         $("#loader").css("display", "flex");
         var event = $("#eventID").val();
