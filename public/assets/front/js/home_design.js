@@ -27,6 +27,8 @@ $(document).ready(function () {
         updateTotalCount();
     })
     $(".imag_c").click(function() {
+        console.log( "updated cunt",updateTotalCount());
+
         updateTotalCount();
     })
     updateTotalCount();
