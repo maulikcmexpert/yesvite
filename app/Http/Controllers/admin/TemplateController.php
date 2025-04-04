@@ -208,7 +208,7 @@ class TemplateController extends Controller
                 $creator_id = session()->get('admin');
                 $textData->creator_id = $creator_id['id'];
                 $textData->filled_image = $filledImage;
-                // $textData->event_design_category_id = "";
+                $textData->event_design_category_id = $request->event_design_category_id;
                 $textData->tags = $request->input('tags');
                 $textData->save();
                 
