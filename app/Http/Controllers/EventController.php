@@ -155,7 +155,7 @@ class EventController extends BaseController
             Session::forget('thankyou_card_data');
             $image = Session::get('desgin');
             // $slider_image = Session::get('desgin_slider');
-            $slider_image = Session::forget('desgin_slider');
+            // $slider_image = Session::forget('desgin_slider');
             // $custom_image = Session::get('custom_image');
 
             $custom_image = Session::forget('custom_image');
