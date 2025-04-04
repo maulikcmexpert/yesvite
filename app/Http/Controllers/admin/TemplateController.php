@@ -311,7 +311,7 @@ class TemplateController extends Controller
             // Validate the request data
             $request->validate([
                 'event_design_category_id' => 'required',
-                'event_design_sub_category_id' => 'required',
+                // 'event_design_sub_category_id' => 'required',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // optional image validation
             ]);
 
@@ -342,7 +342,7 @@ class TemplateController extends Controller
 
             // Save the updated template data
             $template->save();
-            
+
             TextdataSubcategory::where('textdata_id', $template->id)->delete();
 
             if (is_array($request->subcategory)) {
