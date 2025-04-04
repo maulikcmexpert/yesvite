@@ -9081,7 +9081,7 @@ function searchRecords(lim, off, type, search = null) {
 //old_slider_image
 var imageSources = [];
 var imagenames = [];
-$(document).on("change", ".slider_photo", function (event) {
+$(document).on("change", ".slider_photo", async function (event) {
     var file = event.target.files[0]; // Get the first file (the selected image)
     if (file) {
         var reader = new FileReader();
@@ -9116,15 +9116,17 @@ $(document).on("change", ".slider_photo", function (event) {
                 image_name: $(".photo-slider-1").attr("data-image"),
             });
         }
-        if(eventId==""){
-            savePhotoSlider();
-        }
+      
         // console.log(imageSources);
         getLengthofSliderImage();
     }, 500);
+
+    if(eventId==""){
+        await savePhotoSlider();
+    }
 });
 
-$(document).on("change", ".slider_photo_2", function (event) {
+$(document).on("change", ".slider_photo_2", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-2").show();
@@ -9154,14 +9156,17 @@ $(document).on("change", ".slider_photo_2", function (event) {
 
             });
         }
-        if(eventId==""){
-            savePhotoSlider();
-        }
+        // if(eventId==""){
+        //     savePhotoSlider();
+        // }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+    if(eventId==""){
+        await savePhotoSlider();
+    }
 });
-$(document).on("change", ".slider_photo_3", function (event) {
+$(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
     if (file) {
         $(".photo-slider-3").show();
@@ -9190,12 +9195,15 @@ $(document).on("change", ".slider_photo_3", function (event) {
                 image_name: $(".photo-slider-3").data("image"),
             });
         }
-        if(eventId==""){
-            savePhotoSlider();
-        }
+        // if(eventId==""){
+        //     savePhotoSlider();
+        // }
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
+    if(eventId==""){
+        await savePhotoSlider();
+    }
 });
 //old_slider_image
 
@@ -9251,78 +9259,78 @@ function getLengthofSliderImage() {
     });
     $(".slider_image_count").text(i + "/3 Photos");
 }
-function savePhotoSlider(){
-    if(eventId!=""){
-        imageSources = [];
-        $(".slider_img").each(function () {
-            var src = $(this).attr("src");
-            if (src !== "") {
-                imageSources.push({
-                    src: $(this).attr("src"),
-                    deleteId: $(this).data("delete"),
-                    image_position: $(this).data("delete"),
-                    image_name: $(this).data('image')
-                });
+// function savePhotoSlider(){
+//     if(eventId!=""){
+//         imageSources = [];
+//         $(".slider_img").each(function () {
+//             var src = $(this).attr("src");
+//             if (src !== "") {
+//                 imageSources.push({
+//                     src: $(this).attr("src"),
+//                     deleteId: $(this).data("delete"),
+//                     image_position: $(this).data("delete"),
+//                     image_name: $(this).data('image')
+//                 });
               
-            }
-        });
-    }
-    if (imageSources.length > 0) {
-        $("#loader").css("display", "flex");
-        var event = $("#eventID").val();
+//             }
+//         });
+//     }
+//     if (imageSources.length > 0) {
+//         $("#loader").css("display", "flex");
+//         var event = $("#eventID").val();
 
-        $.ajax({
-            url: base_url + "event/save_slider_img",
-            method: "POST",
-            data: {
-                eventId: event,
-                imageSources: imageSources,
-                // imagenames: imagenames,
-                _token: $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                if (response.status == 401 && response.info == "logout") {
-                    window.location.href = "/login"; // Redirect to home page
-                    return;
-                }
-                var savedImages = response.images;
-                var newImages = response.images;
-                if ($("#isUserLoggedIn").val() === "0") {
-                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                    // localStorage.removeItem("save-slider-image");
-                    // Append new images to the existing array
-                    // newImages.forEach(image => {
-                    //     savedImages.push(image);
-                    // });
+//         $.ajax({
+//             url: base_url + "event/save_slider_img",
+//             method: "POST",
+//             data: {
+//                 eventId: event,
+//                 imageSources: imageSources,
+//                 // imagenames: imagenames,
+//                 _token: $('meta[name="csrf-token"]').attr("content"),
+//             },
+//             success: function (response) {
+//                 if (response.status == 401 && response.info == "logout") {
+//                     window.location.href = "/login"; // Redirect to home page
+//                     return;
+//                 }
+//                 var savedImages = response.images;
+//                 var newImages = response.images;
+//                 if ($("#isUserLoggedIn").val() === "0") {
+//                     // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+//                     // localStorage.removeItem("save-slider-image");
+//                     // Append new images to the existing array
+//                     // newImages.forEach(image => {
+//                     //     savedImages.push(image);
+//                     // });
 
-                    // Update localStorage with the combined array
-                    localStorage.setItem(
-                        "save-slider-image",
-                        JSON.stringify(savedImages)
-                    );
-                }
+//                     // Update localStorage with the combined array
+//                     localStorage.setItem(
+//                         "save-slider-image",
+//                         JSON.stringify(savedImages)
+//                     );
+//                 }
 
-                savedImages.forEach((image, index) => {
-                    var selector = `.photo-slider-${index+1}`;
-                    $(selector).attr("data-image", image.fileName);
-                });
-                eventData.slider_images = []; // Empty the array
-                eventData.slider_images = savedImages; // Assign new values
+//                 savedImages.forEach((image, index) => {
+//                     var selector = `.photo-slider-${index+1}`;
+//                     $(selector).attr("data-image", image.fileName);
+//                 });
+//                 eventData.slider_images = []; // Empty the array
+//                 eventData.slider_images = savedImages; // Assign new values
 
-                // eventData.slider_images = savedImages;
-                console.log(savedImages);
-                console.log(eventData.slider_images);
-                $("#loader").css("display", "none");
-                toastr.success("Slider Image saved Successfully");
-                if (callback) callback(savedImages); // 🔥 Call the callback here
-            },
-            error: function (xhr, status, error) {
-                $("#loader").css("display", "none");
-                toastr.error(error);
-            },
-        });
-    }
-}
+//                 // eventData.slider_images = savedImages;
+//                 console.log(savedImages);
+//                 console.log(eventData.slider_images);
+//                 $("#loader").css("display", "none");
+//                 toastr.success("Slider Image saved Successfully");
+//                 return 1;
+//             },
+//             error: function (xhr, status, error) {
+//                 $("#loader").css("display", "none");
+//                 toastr.error(error);
+//             },
+//         });
+//     }
+// }
 // $(document).on("click",'.save-slider-image',function(){
 //     savePhotoSlider();
 // });
@@ -9395,6 +9403,66 @@ function savePhotoSlider(){
 //         });
 //     }
 // });
+
+
+async function savePhotoSlider() {
+    if (eventId != "") {
+        let imageSources = [];
+        $(".slider_img").each(function () {
+            let src = $(this).attr("src");
+            if (src !== "") {
+                imageSources.push({
+                    src: $(this).attr("src"),
+                    deleteId: $(this).data("delete"),
+                    image_position: $(this).data("delete"),
+                    image_name: $(this).data("image")
+                });
+            }
+        });
+    }
+
+    if (imageSources.length > 0) {
+        $("#loader").css("display", "flex");
+        let event = $("#eventID").val();
+
+        try {
+            let response = await $.ajax({
+                url: base_url + "event/save_slider_img",
+                method: "POST",
+                data: {
+                    eventId: event,
+                    imageSources: imageSources,
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
+            if (response.status == 401 && response.info == "logout") {
+                window.location.href = "/login";
+                return;
+            }
+
+            let savedImages = response.images;
+            if ($("#isUserLoggedIn").val() === "0") {
+                localStorage.setItem("save-slider-image", JSON.stringify(savedImages));
+            }
+
+            savedImages.forEach((image, index) => {
+                let selector = `.photo-slider-${index + 1}`;
+                $(selector).attr("data-image", image.fileName);
+            });
+
+            eventData.slider_images = savedImages;
+            $("#loader").css("display", "none");
+            toastr.success("Slider Image saved Successfully");
+
+            return savedImages; // ✅ Now returns data properly
+        } catch (error) {
+            $("#loader").css("display", "none");
+            toastr.error(error);
+            throw error; // ❌ Ensures errors are caught when using await
+        }
+    }
+}
 
 $(document).on("click", ".delete_silder", function (e) {
     e.preventDefault();
@@ -9477,17 +9545,6 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
-function compaytest() {
-    savePhotoSlider(function (sliderssss, error) {
-        if (error) {
-            console.error("Error saving slider:", error);
-        } else {
-            alert("Slider saved successfully!");
-            console.log(sliderssss);
-        }
-    });
-}
-
 
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
@@ -9495,9 +9552,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
     e.preventDefault();
 
-    compaytest(); // Ensure this completes first
-
-
+    await savePhotoSlider();
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
