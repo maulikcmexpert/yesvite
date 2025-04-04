@@ -56,7 +56,8 @@
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Sub Category</label>
-                            <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id">
+                            {{-- <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id"> --}}
+                                <select class="form-control event_design_subcategory_id" id="event_design_sub_category_id" name="event_design_sub_category_id[]" multiple>
 
                                 <option value="">Select subcategory</option>
 
