@@ -9483,7 +9483,9 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
     e.preventDefault();
 
-     savePhotoSlider(); // Ensure this completes first
+var sliderssss=     savePhotoSlider(); // Ensure this completes first
+alert(sliderssss);
+console.log(sliderssss);
 
     eventData.is_update_event = "1";
     // await saveDesignData(true);
