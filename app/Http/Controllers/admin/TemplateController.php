@@ -348,6 +348,7 @@ class TemplateController extends Controller
             // dd($id,$request->subcategory);
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
+                    dd($template->id);
                     TextdataSubcategory::create([
                         'textdata_id' => $template->id,
                         'subcategory_id' => (int)$subcatId,
