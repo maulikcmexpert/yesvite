@@ -9261,7 +9261,7 @@ function savePhotoSlider(){
                     src: $(this).attr("src"),
                     deleteId: $(this).data("delete"),
                     image_position: $(this).data("delete"),
-                    image_name: $(this).data('image');
+                    image_name: $(this).data('image')
                 });
               
             }
