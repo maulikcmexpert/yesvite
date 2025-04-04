@@ -67,7 +67,7 @@
                             {{-- </select> --}}
 
                             <div class="wrapper">
-                                <button class="form-control toggle-next ellipsis" type="button">Select
+                                <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
                                     subbcategory</button>
                                 <div class="checkboxes" id="Lorems">
 
