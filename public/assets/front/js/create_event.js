@@ -56,9 +56,9 @@ if ($("#isUserLoggedIn").val() === "1") {
     var final_initial =
         final_user_name != ""
             ? (
-                  $("#cohostFname").val().charAt(0) +
-                  $("#cohostLname").val().charAt(0)
-              ).toUpperCase()
+                $("#cohostFname").val().charAt(0) +
+                $("#cohostLname").val().charAt(0)
+            ).toUpperCase()
             : "";
     var create_event_phone_scroll = false;
     var create_event_yesvite_scroll = false;
@@ -1663,14 +1663,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-                    // startDate.isSame(moment(sortedDates[0]), "day")
-                    startDate
-                        .startOf("day")
-                        .isSame(
-                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                            "day"
-                        )
-                        ? `
+            // startDate.isSame(moment(sortedDates[0]), "day")
+            startDate
+                .startOf("day")
+                .isSame(
+                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                    "day"
+                )
+                ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1685,8 +1685,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                        : ""
-                }
+                : ""
+            }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1707,18 +1707,17 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-            "YYYY-MM-DD"
-        )}">
+                "YYYY-MM-DD"
+            )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${
-                    startDate.isSame(
-                        moment(sortedDates[sortedDates.length - 1]),
-                        "day"
-                    )
-                        ? `
+                ${startDate.isSame(
+                moment(sortedDates[sortedDates.length - 1]),
+                "day"
+            )
+                ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1733,8 +1732,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                        : ""
-                }
+                : ""
+            }
             </form>
         </div>
     </div>
@@ -2861,14 +2860,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                        quantity +
-                        '</p><li class="list-group-item" data-quantity="' +
-                        quantity +
-                        '" data-selfbring="' +
-                        selfbring +
-                        '">' +
-                        subItemName +
-                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                    quantity +
+                    '</p><li class="list-group-item" data-quantity="' +
+                    quantity +
+                    '" data-selfbring="' +
+                    selfbring +
+                    '">' +
+                    subItemName +
+                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3275,7 +3274,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newStartTime)
+            convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3490,7 +3489,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-                convertTimeToMinutes(newstartTime)
+            convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3730,7 +3729,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     if (
                         previousEndTime &&
                         convertTo24Hour(previousEndTime) >
-                            convertTo24Hour(startTime) &&
+                        convertTo24Hour(startTime) &&
                         !showAlert
                     ) {
                         toastr.error("Please enter proper time");
@@ -3969,7 +3968,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
     var start_time = $("#start-time").val();
     var start_event_date = $("#start-event-date").val();
 
-    console.log(event_name,start_time,start_event_date);
+    console.log(event_name, start_time, start_event_date);
 
     if (dbJson == "" || dbJson == null || dbJson == undefined) {
         apiCalled = false;
@@ -3986,7 +3985,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
-    }  console.log("firstLetter1", firstLetter1);
+    } console.log("firstLetter1", firstLetter1);
 
     if (firstLetter1 === "1") {
         apiCalled = false;
@@ -3999,7 +3998,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
-    }else if (
+    } else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
@@ -6131,9 +6130,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -6153,10 +6152,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6165,10 +6164,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6187,10 +6186,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6198,10 +6197,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6901,7 +6900,7 @@ $(document).on("click", ".save_event_co_host", function () {
 
 $(document).on("click", ".final_checkout", function () {
     console.log(eventData);
-    
+
     var data = eventData;
     // console.log(data);
     // $('#loader').css('display','flex');
@@ -6926,8 +6925,8 @@ $(document).on("click", ".final_checkout", function () {
         $("#eventTempImage").attr(
             "src",
             base_url +
-                "public/storage/event_images/" +
-                eventData.desgin_selected
+            "public/storage/event_images/" +
+            eventData.desgin_selected
         );
     }
 
@@ -6948,11 +6947,10 @@ $(document).on("click", ".final_checkout", function () {
     const mainImage = `
             <div class="item">
                 <div class="setting-img">
-                    <img src="${
-                        base_url +
-                        "public/storage/event_images/" +
-                        eventData.desgin_selected
-                    }" />
+                    <img src="${base_url +
+        "public/storage/event_images/" +
+        eventData.desgin_selected
+        }" />
                 </div>
             </div>
         `;
@@ -7344,7 +7342,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -8887,7 +8885,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -9167,7 +9165,7 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
-   
+
 });
 $(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
@@ -9204,7 +9202,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         // savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
-    
+
 });
 //old_slider_image
 
@@ -9272,7 +9270,7 @@ function getLengthofSliderImage() {
 //                     image_position: $(this).data("delete"),
 //                     image_name: $(this).data('image')
 //                 });
-              
+
 //             }
 //         });
 //     }
@@ -9451,7 +9449,7 @@ async function savePhotoSlider() {
                         // newImages.forEach(image => {
                         //     savedImages.push(image);
                         // });
-    
+
                         // Update localStorage with the combined array
                         localStorage.setItem(
                             "save-slider-image",
@@ -9460,7 +9458,7 @@ async function savePhotoSlider() {
                     }
                     eventData.slider_images = []; // Empty the array
                     eventData.slider_images = savedImages; // Assign new values
-    
+
                     // eventData.slider_images = savedImages;
                     console.log(savedImages);
                     console.log(eventData.slider_images);
@@ -9471,8 +9469,8 @@ async function savePhotoSlider() {
                     $("#loader").css("display", "none");
                     toastr.error(error);
                 },
-            
-            });         
+
+            });
     }
 }
 
@@ -10505,9 +10503,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                        parseInt(quantity) +
-                        "/" +
-                        categoryItemQuantity
+                    parseInt(quantity) +
+                    "/" +
+                    categoryItemQuantity
                 );
             }
 
@@ -10533,9 +10531,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                categoryItemKey +
+                "-" +
+                categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -10556,10 +10554,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10568,10 +10566,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10590,10 +10588,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10601,10 +10599,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                        "-" +
-                        categoryItemKey +
-                        "-" +
-                        categoryIndexKey
+                    "-" +
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10900,9 +10898,8 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${
-        initials || "NA"
-    }</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
+        }</h5>`;
 }
 
 $(".create_event_login_btn").on("click", function (e) {
@@ -11086,12 +11083,12 @@ $("#create_event_register").on("click", function (e) {
     $("#registerEvent").removeClass("d-none"); // Hide registration form
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
-$(".new-create-account-close-btn").on("click", function (e) {
-    $(".new_login_page, .new_login").hide(); // Hide both elements
-    $("#edit-design-temp").show();
+// $(".new-create-account-close-btn").on("click", function (e) {
+//     $(".new_login_page, .new_login").hide(); // Hide both elements
+//     $("#edit-design-temp").show();
 
-    $(".new-event-sidebar-wrp").show();
-});
+//     $(".new-event-sidebar-wrp").show();
+// });
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
