@@ -286,6 +286,15 @@
 
                 updateTotalCount();
             });
+            $(document).on("click", ".previousImeg", async function (e) {
+
+console.log( $(
+    ".image-item:visible, .image-item-new:visible"
+).length);
+ updateTotalCount()
+
+});
+
 
             // Handle individual subcategory checkbox change
             $(document).on('change', 'input[name="design_subcategory"]:not(#Allcat)', function() {
@@ -648,7 +657,6 @@
             var visibleItems = $('.image-item-new:visible').length;
             $('.total_design_count').text(visibleItems + ' Items');
         });
-
 
 
         $(document).on('click', '#allchecked', function() {
