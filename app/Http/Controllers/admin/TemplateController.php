@@ -50,6 +50,7 @@ class TemplateController extends Controller
                 // ->addColumn('subcategory_name', function ($row) {
                 //     return $row->subcategories->subcategory_name;
                 // })
+
                 ->addColumn('subcategory_name', function ($row) {
                     return $row->subcategories->pluck('subcategory_name')->implode(', ');
                 })
