@@ -23,7 +23,7 @@ class TextData extends Model
     ];
     public function subcategories()
     {
-        return $this->belongsToMany(EventDesignSubCategory::class, 'textdata_subcategories', 'subcategory_id', 'id');
+        return $this->belongsTo(EventDesignSubCategory::class, 'textdata_subcategories', 'subcategory_id', 'id');
     }
     
     // public function subcategories()
