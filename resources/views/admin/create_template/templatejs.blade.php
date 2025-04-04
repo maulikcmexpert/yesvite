@@ -13,7 +13,7 @@
 
     //         return false;
     //     });
-    $(function() {
+$(function() {
   
   setCheckboxSelectLabels();
   
@@ -230,15 +230,28 @@ function toggleCheckedAll(checkbox) {
                     success: function(output) {
                         if (Array.isArray(output) && output.length === 0) {
                             $('#event_design_sub_category_id').empty();
-                            $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
+                            // $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
+                            $('#event_design_sub_category_id').append(
+                                '<label><input type="checkbox" value="" name="subcategory[]" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
+
+                            );
                             return;
                         }
                         console.log(output);
                         $('#event_design_sub_category_id').empty();
-                        $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
+                        // $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
+                        // $('#event_design_sub_category_id').append(
+                        //         '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
+
+                        //     );
                         output.forEach(function(subcategory) {
+                            // $('#event_design_sub_category_id').append(
+                            //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
+                                
+                            // );
                             $('#event_design_sub_category_id').append(
-                                '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
+                                '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" name="subcategory[]" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
+
                             );
                         });
                     },
