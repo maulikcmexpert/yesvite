@@ -1053,7 +1053,7 @@
 .collection-card.card-blue.edit_design_tem {
     aspect-ratio: 5/7;
     height: 100% !important;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 /* ====Responsive==== */
