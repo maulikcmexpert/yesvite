@@ -10824,6 +10824,9 @@ colorchange();
 
 $(document).on("click", ".previousImeg", async function (e) {
     updateTotalCount();
+console.log( $(
+    ".image-item:visible, .image-item-new:visible"
+).length);
 
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
