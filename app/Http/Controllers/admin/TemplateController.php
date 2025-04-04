@@ -348,14 +348,14 @@ class TemplateController extends Controller
             DB::commit();
 
 
-            TextdataSubcategory::where('textdata_id', $id)->delete();
+            TextdataSubcategory::where('textdata_id', (int)$id)->delete();
 
-            dd($id,$request->subcategory);
+            // dd($id,$request->subcategory);
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
                     TextdataSubcategory::create([
-                        'textdata_id' => $id,
-                        'subcategory_id' => $subcatId,
+                        'textdata_id' => (int)$id,
+                        'subcategory_id' => (int)$subcatId,
                     ]);
                 }
             }
