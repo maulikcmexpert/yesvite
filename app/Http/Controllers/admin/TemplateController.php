@@ -344,12 +344,12 @@ class TemplateController extends Controller
             // Save the updated template data
             $template->save();
 
-            TextdataSubcategory::where('textdata_id', $template->id)->delete();
+            TextdataSubcategory::where('textdata_id', $id)->delete();
 
             if (is_array($request->subcategory)) {
                 foreach ($request->subcategory as $subcatId) {
                     TextdataSubcategory::create([
-                        'textdata_id' => $template->id,
+                        'textdata_id' => $id,
                         'subcategory_id' => $subcatId,
                     ]);
                 }
