@@ -28,7 +28,7 @@ class TemplateController extends Controller
     {
         // dd($request->ajax());
         if ($request->ajax()) {
-            $data = TextData::with('categories')->orderBy('id', 'desc')->get();
+            $data = TextData::with('categories','subcategories')->orderBy('id', 'desc')->get();
             // $data = TextData::with('categories')->whereNotNull("event_design_sub_category_id")->orderBy('id', 'desc')->get();
             // dd($data);
             return Datatables::of($data)
@@ -46,9 +46,13 @@ class TemplateController extends Controller
                 ->addColumn('category_name', function ($row) {
                     return $row->categories->category_name;
                 })
+                // ->addColumn('subcategory_name', function ($row) {
+                //     return $row->subcategories->subcategory_name;
+                // })
                 ->addColumn('subcategory_name', function ($row) {
-                    return $row->subcategories->subcategory_name;
+                    return $row->subcategories->pluck('subcategory_name')->implode(', ');
                 })
+                
                 // ->addColumn('subcategory_name', function ($row) {
                 //     if ($row->subcategories->count()) {
                 //         return $row->subcategories->pluck('subcategory_name')->implode(', ');
