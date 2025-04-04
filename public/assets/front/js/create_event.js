@@ -458,11 +458,7 @@ $(document).on("click", ".create-event-btn", function () {
 $(document).on("click", ".eventDetails_menu", function () {
 if ($("#isUserLoggedIn").val() === "0") {
 
-    $("#edit-design-temp").hide();
 
-    $(".new_login_page").show();
-    $(".new_login").show();
-    $(".new-event-sidebar-wrp").hide();
 
     $(".li_event_details").trigger('click');
 
