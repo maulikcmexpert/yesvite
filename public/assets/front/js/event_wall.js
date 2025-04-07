@@ -1103,9 +1103,9 @@ $(document).ready(function () {
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
 
-            // Clear previous errors
-            $("#question_error").text('');
-            $("#duration_error").text('');
+            // // Clear previous errors
+            // $("#question_error").text('');
+            // $("#duration_error").text('');
 
             // Get field values
             var question = pollForm.find("input[name='question']").val().trim();
