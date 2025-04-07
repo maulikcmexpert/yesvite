@@ -90,6 +90,9 @@ $(document).ready(function () {
                 required: "Please confirm your password",
                 equalTo: "Passwords do not match",
             },
+            'g-recaptcha-response': {
+                required: "Please complete the reCAPTCHA to proceed",
+            }
         },
         errorPlacement: function (error, element) {
             error.insertAfter(element);

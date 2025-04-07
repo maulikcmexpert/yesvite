@@ -1755,7 +1755,7 @@
             );
 
             $("#registerEvent").validate({
-                // ignore: [], // include hidden fields like g-recaptcha-response
+                ignore: [], // include hidden fields like g-recaptcha-response
                 rules: {
                     firstname: {
                         required: true
@@ -1818,6 +1818,9 @@
                         required: "Confirm your password",
                         equalTo: "Passwords do not match",
                     },
+                    'g-recaptcha-response': {
+                        required: "Please complete the reCAPTCHA to proceed",
+                    }
                 },
                 errorPlacement: function(error, element) {
                     error.insertAfter(element).css("color", "red");
