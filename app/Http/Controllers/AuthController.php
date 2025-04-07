@@ -116,20 +116,27 @@ class AuthController extends Controller
     {
 
         $ip = $request->ip();
+        $isLogin = $request->has('is_login');
+
         // dd($ip);
         $key = 'register-attempts:' . $ip;
     
-        if (RateLimiter::tooManyAttempts($key, 2)) {
+        if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
-            return response()->json([
-                'success' => false,
-                'message' => "Too many attempts. Please try again in {$seconds} seconds."
-            ]);
+            if($isLogin){
+                return response()->json([
+                    'success' => false,
+                    'message' => "Too many attempts. Please try again in {$seconds} seconds."
+                ]);
+            }else{
+                toastr("Too many attempts. Please try again in {$seconds} seconds.", 'error');
+                return redirect()->back()->withErrors(['rate_limit' => "Too many attempts. Please try again in {$seconds} seconds."]);
+            }
         }
     
         RateLimiter::hit($key, 60);
 
-dd(1);
+// dd(1);
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
@@ -173,7 +180,6 @@ dd(1);
             ]);
         }
 
-        $isLogin = $request->has('is_login');
 
         if($isLogin){
             $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
@@ -191,12 +197,12 @@ dd(1);
         $responseBody = $response->json();
 
         if ($isLogin) {
-        if (!$responseBody['success']) {
-            return response()->json([
-                'success' => 0,
-                'message' => 'reCAPTCHA verification failed. Please try again.',
-            ]);
-        }
+            if (!$responseBody['success']) {
+                return response()->json([
+                    'success' => 0,
+                    'message' => 'reCAPTCHA verification failed. Please try again.',
+                ]);
+            }
         }
 
         if (!$responseBody['success']) {
