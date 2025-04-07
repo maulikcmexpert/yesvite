@@ -205,7 +205,7 @@ $notification_list=getNotificationList();
               @endphp
                 <div class="accordion-item notification_drp_down_div">
                   <h2 class="accordion-header">
-                    <a href=""
+                    <button
                       class="accordion-button collapsed main-notification-div-list {{ $unseenClass }}"
                       type="button"
                       data-bs-toggle="collapse"
