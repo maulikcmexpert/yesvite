@@ -1864,6 +1864,8 @@
                             $("#registerEvent").addClass("d-none");
                             $("#crateEventLogin").removeClass("d-none");
                         } else {
+                            $(".createEventUser").prop("disabled", false).text("Create Account");
+
                             console.log(response);
                             if(response.success==0){
                                 toastr.error(response.message);
