@@ -64,10 +64,10 @@
                                 <a href="#" class="reset-btn" id="resetCategories">Reset</a>
                             </div>
                             <div class="filter-categories">
-                                <div class="d-flex align-items-center justify-content-between">
+                                {{-- <div class="d-flex align-items-center justify-content-between">
                                     <label class="form-check-label" for="Allcat">All Categories</label>
                                     <input class="form-check-input" type="checkbox" name="Guest RSVP’s" id="Allcat">
-                                </div>
+                                </div> --}}
                                 <div class="accordion" id="accordionExample">
 
                                     @foreach ($categories as $category)
