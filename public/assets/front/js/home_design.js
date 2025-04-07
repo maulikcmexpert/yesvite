@@ -79,17 +79,38 @@ $(document).ready(function () {
                 $(".selected-items").find(`[data-value='${value}']`).remove();
             }
 
+            // $('input[name="design_subcategory"]:checked').each(function () {
+            //     default_s++;
+            //     $(".image-item").removeClass("d-none");
+            //     const categoryId = $(this).data("category-id");
+            //     const subcategoryId = $(this).data("subcategory-id");
+
+            //     // Show filtered images matching checked categories and subcategories
+            //     $(
+            //         `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+            //     ).show();
+            // });
+
             $('input[name="design_subcategory"]:checked').each(function () {
                 default_s++;
                 $(".image-item").removeClass("d-none");
+            
                 const categoryId = $(this).data("category-id");
                 const subcategoryId = $(this).data("subcategory-id");
-
-                // Show filtered images matching checked categories and subcategories
-                $(
-                    `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-                ).show();
+            
+                $(".image-item").each(function () {
+                    const imgCategoryId = $(this).data("category-id");
+                    const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+            
+                    if (
+                        imgCategoryId == categoryId &&
+                        imgSubcategoryIds.includes(subcategoryId.toString())
+                    ) {
+                        $(this).show();
+                    }
+                });
             });
+            
 
             if (default_s == 0) {
                 $(".image-item").removeClass("d-none");
