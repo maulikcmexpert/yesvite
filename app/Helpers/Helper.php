@@ -298,6 +298,7 @@ function sendNotification($notificationType, $postData)
                                 'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
                                 'time' => $value->event->rsvp_start_time,
                                 'host_email' => $senderData->email,
+                                'invited_user_email' => $value->user->email,
                                 'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                             ];
 
@@ -331,6 +332,7 @@ function sendNotification($notificationType, $postData)
                                     'event_image' => ($value->event->event_image->isNotEmpty()) ? $value->event->event_image[0]->image : "no_image.png",
                                     'date' =>   date('l - M jS, Y', strtotime($value->event->start_date)),
                                     'time' => $value->event->rsvp_start_time,
+                                    'invited_user_email' => $value->user->email,
                                     'address' => $value->event->event_location_name . ' ' . $value->event->address_1 . ' ' . $value->event->address_2 . ' ' . $value->event->state . ' ' . $value->event->city . ' - ' . $value->event->zip_code,
                                 ];
 

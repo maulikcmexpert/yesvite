@@ -1,76 +1,5 @@
 <script type="text/javascript">
-// alert();
     var base_url = "{{ url('/') }}/";
-
-    //   $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
-    //         e.preventDefault(); // Stop default Ctrl behavior
-
-    //         const $option = $(this);
-    //         const selected = $option.prop('selected');
-
-    //         // Toggle selection manually
-    //         $option.prop('selected', !selected);
-
-    //         return false;
-    //     });
-$(function() {
-  
-  setCheckboxSelectLabels();
-  
-  $('.toggle-next').click(function() {
-    $(this).next('.checkboxes').slideToggle(400);
-  });
-  
-  $('.ckkBox').change(function() {
-    toggleCheckedAll(this);
-    setCheckboxSelectLabels(); 
-  });
-  
-});
-  
-function setCheckboxSelectLabels(elem) {
-  var wrappers = $('.wrapper'); 
-  $.each( wrappers, function( key, wrapper ) {
-    var checkboxes = $(wrapper).find('.ckkBox');
-    var label = $(wrapper).find('.checkboxes').attr('id');
-    var prevText = '';
-    $.each( checkboxes, function( i, checkbox ) {
-      var button = $(wrapper).find('button');
-      if( $(checkbox).prop('checked') == true) {
-        var text = $(checkbox).next().html();
-        var btnText = prevText + text;
-        var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
-        if(numberOfChecked >= 4) {
-           btnText = numberOfChecked +' '+ label + ' selected';
-        }
-        $(button).text(btnText); 
-        prevText = btnText + ', ';
-      }
-    });
-  });
-}
-
-function toggleCheckedAll(checkbox) {
-  var apply = $(checkbox).closest('.wrapper').find('.apply-selection');
-  apply.fadeIn('slow'); 
-  
-  var val = $(checkbox).closest('.checkboxes').find('.val');
-  var all = $(checkbox).closest('.checkboxes').find('.all');
-  var ckkBox = $(checkbox).closest('.checkboxes').find('.ckkBox');
-
-  if(!$(ckkBox).is(':checked')) {
-    $(all).prop('checked', true);
-    return;
-  }
-
-  if( $(checkbox).hasClass('all') ) {
-    $(val).prop('checked', false);
-  } else {
-    $(all).prop('checked', false);
-  }
-}
-
-    // });
     $(function() {
 
         var table = $("#template_table").DataTable({
@@ -230,28 +159,15 @@ function toggleCheckedAll(checkbox) {
                     success: function(output) {
                         if (Array.isArray(output) && output.length === 0) {
                             $('#event_design_sub_category_id').empty();
-                            // $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
-                            $('#event_design_sub_category_id').append(
-                                '<label><input type="checkbox" value="" name="subcategory[]" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
-
-                            );
+                            $('#event_design_sub_category_id').append('<option value="">No SubCategory Found</option>');
                             return;
                         }
                         console.log(output);
                         $('#event_design_sub_category_id').empty();
-                        // $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
-                        // $('#event_design_sub_category_id').append(
-                        //         '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
-
-                        //     );
+                        $('#event_design_sub_category_id').append('<option value="">Select subcategory</option>');
                         output.forEach(function(subcategory) {
-                            // $('#event_design_sub_category_id').append(
-                            //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
-                                
-                            // );
                             $('#event_design_sub_category_id').append(
-                                '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" name="subcategory[]" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
-
+                                '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
                             );
                         });
                     },
@@ -277,41 +193,41 @@ function toggleCheckedAll(checkbox) {
             });
 
             $(document).on('click', '#templateAdd', function(e) {
-            //     var selectedValue = $("#event_design_category_id").val();
-            //     var selectedSubCategory = $("#event_design_sub_category_id").val();
-            //     var image = $("#image").val();
-            //     var filledimage = $("#filled_image").val();
+                var selectedValue = $("#event_design_category_id").val();
+                var selectedSubCategory = $("#event_design_sub_category_id").val();
+                var image = $("#image").val();
+                var filledimage = $("#filled_image").val();
 
-            //     var hasError = false;
-            //     if (selectedValue === '') {
-            //         $("#event_design_category_id").next('.text-danger').text('Please select design category');
-            //         hasError = true;
-            //     }
-            //     if (selectedSubCategory === '') {
-            //         $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
-            //         hasError = true;
-            //     }
-            //     if (image === '') {
-            //         $("#image").next('.text-danger').text('Please upload Template');
-            //         hasError = true;
-            //     } else {
-            //         $("#image").next('.text-danger').text("");
-            //     }
-
-
-            //     if (filledimage === '') {
-            //         $("#filled_image").next('.text-danger').text('Please upload Filled Template');
-            //         hasError = true;
-            //     } else {
-            //         $("#filled_image").next('.text-danger').text("");
-            //     }
+                var hasError = false;
+                if (selectedValue === '') {
+                    $("#event_design_category_id").next('.text-danger').text('Please select design category');
+                    hasError = true;
+                }
+                if (selectedSubCategory === '') {
+                    $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
+                    hasError = true;
+                }
+                if (image === '') {
+                    $("#image").next('.text-danger').text('Please upload Template');
+                    hasError = true;
+                } else {
+                    $("#image").next('.text-danger').text("");
+                }
 
 
-            //     if (!hasError) {
+                if (filledimage === '') {
+                    $("#filled_image").next('.text-danger').text('Please upload Filled Template');
+                    hasError = true;
+                } else {
+                    $("#filled_image").next('.text-danger').text("");
+                }
+
+
+                if (!hasError) {
                     $("#templateForm").submit();
-            //     } else {
-            //         e.preventDefault();
-            //     }
+                } else {
+                    e.preventDefault();
+                }
 
             });
 
