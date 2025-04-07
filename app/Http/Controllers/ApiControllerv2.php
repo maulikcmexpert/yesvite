@@ -3581,18 +3581,18 @@ class ApiControllerv2 extends Controller
                 //     ->withCount(['subcategory', 'textdatas'])
                 //     ->where('category_name', 'like', "%$catSearch%")
                 //     ->get();
-                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas' => function ($query) use ($search) {
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas' => function ($query) use ($catSearch) {
                     $query->whereNotNull('static_information');
             
-                    if ($search) {
-                        $query->where('tags', 'like', "%{$search}%")
-                            ->orWhereHas('subcategories', function ($subQ) use ($search) {
-                                $subQ->where('subcategory_name', 'like', "%{$search}%");
+                    if ($catSearch) {
+                        $query->where('tags', 'like', "%{$catSearch}%")
+                            ->orWhereHas('subcategories', function ($subQ) use ($catSearch) {
+                                $subQ->where('subcategory_name', 'like', "%{$catSearch}%");
                             });
                     }
                 }])
-                ->when($search, function ($query) use ($search) {
-                    $query->where('category_name', 'like', "%{$search}%");
+                ->when($catSearch, function ($query) use ($catSearch) {
+                    $query->where('category_name', 'like', "%{$catSearch}%");
                 })
                 ->withCount(['subcategory', 'textdatas'])
                 ->get();
