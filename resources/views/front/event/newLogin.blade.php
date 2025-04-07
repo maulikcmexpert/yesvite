@@ -1755,7 +1755,7 @@
             );
 
             $("#registerEvent").validate({
-                ignore: [], // include hidden fields like g-recaptcha-response
+                // ignore: [], // include hidden fields like g-recaptcha-response
                 rules: {
                     firstname: {
                         required: true
@@ -1864,6 +1864,8 @@
                             $("#registerEvent").addClass("d-none");
                             $("#crateEventLogin").removeClass("d-none");
                         } else {
+                            console.log(response);
+                            
                             toastr.error(response.message);
                         }
                     },
