@@ -417,8 +417,8 @@
             <button class="remove_privacy_cookie">Accept & Continue</button>
             {{-- <button>Reject All</button> --}}
         </div>
-        <div class="cookies-track-btn ">
-            <button class="remove_privacy_cookie">View Privacy Policy</button>
+        <div class="cookies-track-btn">
+            <button>View Privacy Policy</button>
             {{-- <button>Reject All</button> --}}
         </div>
     </div>
