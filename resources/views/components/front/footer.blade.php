@@ -415,9 +415,6 @@
         </div>
         <div class="cookies-track-btn ">
             <button class="remove_privacy_cookie">Accept & Continue</button>
-            {{-- <button>Reject All</button> --}}
-        </div>
-        <div class="cookies-track-btn">
             <a href="{{ route('privacy_policy') }}">View Privacy Policy</a>
             {{-- <button>Reject All</button> --}}
         </div>
