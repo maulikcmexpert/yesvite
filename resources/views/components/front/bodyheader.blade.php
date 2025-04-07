@@ -3,6 +3,7 @@
     // $count = getTotalUnreadMessageCount();
     // dd($count);
 $notification_list=getNotificationList();
+dd($notification_list);
 
 @endphp
 @if (Auth::guard('web')->check())
@@ -193,7 +194,7 @@ $notification_list=getNotificationList();
               @php
                   $notification_list=getNotificationList();
                   $i=0;
-                  dd($notification_list);
+
               @endphp
               @foreach ($notification_list as $key=>$value)
 
