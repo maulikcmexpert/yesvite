@@ -125,9 +125,16 @@
             @php
                 $allImages = collect([]);
                 $randomIds = [];
+                $processedImageIds = [];
+
                 foreach ($categories as $category) {
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
+                            if (in_array($image->id, $processedImageIds)) {
+                                continue;
+                            }
+
+                            $processedImageIds[] = $image->id;
                             $randomIds[] = $image->id;
                                         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
                                         $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
