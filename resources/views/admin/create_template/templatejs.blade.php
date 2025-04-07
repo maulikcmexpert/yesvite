@@ -22,18 +22,18 @@
         $(this).next('.checkboxes').slideToggle(400);
       });
       
+      $('.wrapper').click(function (e) {
+        e.stopPropagation();
+        });
+
+    $(document).on('click', function () {
+      $('.checkboxes:visible').slideUp(400);
+    });
       $('.ckkBox').change(function() {
         toggleCheckedAll(this);
         setCheckboxSelectLabels(); 
       });
-
-      $(document).on('click', function(e) {
-        alert(1);
-        if (!$(e.target).closest('.wrapper').length) {
-            alert(2);
-        $('.checkboxes:visible').slideUp(400);
-        }
-  });
+      
     });
       
     function setCheckboxSelectLabels(elem) {
