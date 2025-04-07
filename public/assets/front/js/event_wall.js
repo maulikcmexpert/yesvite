@@ -1032,7 +1032,7 @@ $(document).ready(function () {
     $(".option-add-btn").on("click", function () {
         const pollOptionsContainer = $(".poll-options");
         const optionCount = pollOptionsContainer.children().length + 1;
-console.log(optionCount);
+        console.log(optionCount);
         const newOption = $(`
             <div class="mb-3 option-poll">
                 <label class="form-label d-flex align-items-center justify-content-between">
@@ -1121,7 +1121,7 @@ console.log(optionCount);
 
             pollForm.submit();
         }
-         else if (photoForm.is(":visible") && photoForm.length > 0) {
+        else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
             let imagePreview = document.getElementById("imagePreview");
 
@@ -1176,39 +1176,39 @@ console.log(optionCount);
             toastr.error("Please fill all required fields before submitting.");
         }
     });
-   // Live validation for Question
-$(document).on("input", "input[name='question']", function () {
-    const val = $(this).val().trim();
-    if (val !== "") {
-        $("#question_error").text("");
-    } else {
-        $("#question_error").text("Question is required.");
-    }
-});
+    // Live validation for Question
+    $(document).on("input", "input[name='question']", function () {
+        const val = $(this).val().trim();
+        if (val !== "") {
+            $("#question_error").text("");
+        } else {
+            $("#question_error").text("Question is required.");
+        }
+    });
 
-// Live validation for Duration
-$(document).on("change", "select[name='duration']", function () {
-    const val = $(this).val();
-    if (val !== "") {
-        $("#duration_error").text("");
-    } else {
-        $("#duration_error").text("Please select a duration.");
-    }
-});
+    // Live validation for Duration
+    $(document).on("change", "select[name='duration']", function () {
+        const val = $(this).val();
+        if (val !== "") {
+            $("#duration_error").text("");
+        } else {
+            $("#duration_error").text("Please select a duration.");
+        }
+    });
 
-// Live validation for each Option
-$(document).on("input", "input[name='options[]']", function () {
-    const $input = $(this);
-    const val = $input.val().trim();
+    // Live validation for each Option
+    $(document).on("input", "input[name='options[]']", function () {
+        const $input = $(this);
+        const val = $input.val().trim();
 
-    // Remove error if exists
-    $input.next(".option-error").remove();
+        // Remove error if exists
+        $input.next(".option-error").remove();
 
-    // Add error if empty again
-    if (val === "") {
-        $input.after("<div class='option-error text-danger mt-1'>This option is required.</div>");
-    }
-});
+        // Add error if empty again
+        if (val === "") {
+            $input.after("<div class='option-error text-danger mt-1'>This option is required.</div>");
+        }
+    });
 
 
     $(document).on("click", "#send_post_msg", function (e) {
@@ -1792,7 +1792,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
-    $(".option-poll").empty();
+    $(".option-poll").remove();
     $("#pollForm").find(".option-number").text(index + 1);
     $("#question_error").text('');
     $("#duration_error").text('');
@@ -1804,7 +1804,7 @@ $(".modal").on("hidden.bs.modal", function () {
 
 $(".btn-close").on("click", function () {
     $(".char-count").text("0/140"); // Reset char count
-    $(".option-poll").empty();
+    $(".option-poll").remove();
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
