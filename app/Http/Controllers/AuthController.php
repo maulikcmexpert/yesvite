@@ -136,7 +136,6 @@ class AuthController extends Controller
     
         RateLimiter::hit($key, 60);
 
-// dd(1);
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
                 'firstname' => 'required|string|max:255',
