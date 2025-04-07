@@ -3,6 +3,7 @@
     // $count = getTotalUnreadMessageCount();
     // dd($count);
 $notification_list=getNotificationList();
+// dd($notification_list);
 
 @endphp
 @if (Auth::guard('web')->check())
@@ -193,7 +194,7 @@ $notification_list=getNotificationList();
               @php
                   $notification_list=getNotificationList();
                   $i=0;
-                  dd($notification_list);
+
               @endphp
               @foreach ($notification_list as $key=>$value)
 
@@ -204,7 +205,7 @@ $notification_list=getNotificationList();
               @endphp
                 <div class="accordion-item notification_drp_down_div">
                   <h2 class="accordion-header">
-                    <a href=""
+                    <button
                       class="accordion-button collapsed main-notification-div-list {{ $unseenClass }}"
                       type="button"
                       data-bs-toggle="collapse"
@@ -742,7 +743,8 @@ $notification_list=getNotificationList();
                                         @elseif($inner_data['media_type']=="video")
                                           <span> posted video on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @else
-                                        <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
+                                        {{-- <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span> --}}
+                                        <span> posted on wall for <a href="{{ route('event.event_wall', ['id' => encrypt($inner_data['post_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @endif
                                       </h3>
                                       <h6 class="notification-time-count">{{$inner_data['post_time']}}</h6>

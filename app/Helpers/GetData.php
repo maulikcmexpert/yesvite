@@ -610,7 +610,7 @@ function upcomingEventsCount($userId)
     // ->where('start_date', '>', date('Y-m-d')) // Past events
     // ->orWhere(function ($q) {
     //     $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-    //     ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+    //     ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
     //  })
     ->where(function ($query) {
         $query->where('start_date', '>', date('Y-m-d')) // Past events
@@ -638,7 +638,7 @@ function upcomingEventsCount($userId)
         // ->where('start_date', '>', date('Y-m-d'))
         // ->orWhere(function ($q) {
         //     $q->where('start_date', '=', date('Y-m-d')) // If event ends today
-        //     ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);       
+        //     ->whereRaw("STR_TO_DATE(rsvp_start_time, '%h:%i %p') >= STR_TO_DATE(?, '%h:%i %p')", [date('g:i A')]);
         //  })
         ->where(function ($query) {
             $query->where('start_date', '>', date('Y-m-d')) // Past events
