@@ -162,7 +162,7 @@
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
                             This email expires after 3 hours. But no worries, if your email expires you can request
-                            another one from our support team <a href="https://support.yesvite.com/hc/en-us">here</a>.</p>
+                            another one from our support team <a href="https://docs.google.com/forms/d/e/1FAIpQLSdj1Jt0MmugCJ5OCh8j6ITod6o_ERI5vm4kJup0PWtDeAemTA/viewform?usp=dialog">here</a>.</p>
                     </td>
                 </tr>
                 @endif
@@ -173,7 +173,7 @@
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            If you didn't make this request, please feel free to ignore this email. If you still need additional help please visit our <a href="https://support.yesvite.com/hc/en-us">Help Center</a>.</p>
+                            If you didn't make this request, please feel free to ignore this email. If you still need additional help please visit our <a href="https://docs.google.com/forms/d/e/1FAIpQLSdj1Jt0MmugCJ5OCh8j6ITod6o_ERI5vm4kJup0PWtDeAemTA/viewform?usp=dialog">Help Center</a>.</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
