@@ -182,10 +182,16 @@ class HomeFrontController extends BaseController
                         ->map(function ($grouped) {
                             $textdata = $grouped->first(); // Since grouped by ID
                             return [
-                                'id' => $textdata->id,
+                                'imageId' => $textdata->id,
+                                'tags' => $textdata->tags,
+                                'is_visible' => $textdata->is_visible,
+                                'image' => $textdata->image,
+                                'image_path' => $textdata->filled_image,
+                                'shape_image' => $textdata->image,
                                 'static_information' => $textdata->static_information,
                                 'category' => optional($textdata->categories)->category_name,
-                                'subcategories' => $textdata->subcategories
+                                'category_id' => optional($textdata->categories)->id,
+                                'subcategory_name' => $textdata->subcategories
                                     ->pluck('subcategory_name')
                                     ->unique()
                                     ->implode(', '),
@@ -193,7 +199,7 @@ class HomeFrontController extends BaseController
                         })
                         ->values();
 
-        dd($textdatas);
+        // dd($textdatas);
         
         
         // Calculate total count of textdatas across all subcategories
