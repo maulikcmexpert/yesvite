@@ -141,11 +141,11 @@
                                 'image' => asset('storage/canvas/' . $category['image']),
                                 'tags' => $category['tags'],
                                 'is_visible' => $category['is_visible'],
-                                'category_id' => $category['id'],
+                                'category_id' => $category['category_id'],
                                 // 'subcategory_id' => $subcategory->id,
                                 // 'subcategory_id' => $relatedSubcategoryIds,
                                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                                // 'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
+                                'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
                                 'category_name' => $category['category_name'],
                                 'image_path' => asset('storage/canvas/' . $category['filled_image']),
                             ]);
