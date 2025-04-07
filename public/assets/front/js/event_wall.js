@@ -1103,18 +1103,46 @@ $(document).ready(function () {
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
 
-            // ✅ Validate poll form here
+            // Clear previous errors
+            $("#question_error").text('');
+            $("#duration_error").text('');
 
+            // Get field values
+            var question = pollForm.find("input[name='question']").val().trim();
+            var duration = pollForm.find("select[name='duration']").val();
 
-            // ✅ Show loader only if form is valid
+            // Validate fields
+            var hasError = false;
+
+            if (question === "") {
+                $("#question_error").text("Question is required.");
+                hasError = true;
+            }
+
+            if (duration === "") {
+                $("#duration_error").text("Please select a duration.");
+                hasError = true;
+            }
+
+            // Validate options
+            pollForm.find("input[name='options[]']").each(function(index) {
+                const val = $(this).val().trim();
+                if (val === "") {
+                    $(this).after('<div class="text-danger option-error">Option ' + (index + 1) + ' is required.</div>');
+                    hasError = true;
+                }
+            });
+
+            if (hasError) return;
+
+            // Show loader inside the button and disable it
             $this
-                .html(
-                    '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
-                )
+                .html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
                 .prop("disabled", true);
 
             pollForm.submit();
-        } else if (photoForm.is(":visible") && photoForm.length > 0) {
+        }
+         else if (photoForm.is(":visible") && photoForm.length > 0) {
             var photoInput = document.getElementById("fileInput");
             let imagePreview = document.getElementById("imagePreview");
 
