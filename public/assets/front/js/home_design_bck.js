@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     $(document).on("click",".remove_privacy_cookie", function () {
         // $cookiesBox.removeClass("active");
-        // $('.cookies-track').css('display','none');
+        $('.cookies-track').css('display','none');
 
         localStorage.setItem("cookiesBoxDismissed", "true");
     });
