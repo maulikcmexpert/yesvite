@@ -156,23 +156,44 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
 
-        $categories = EventDesignCategory::with([
-            'subcategory' => function ($query) {
-                $query->with([
-                    'textdatas' => function ($q) {
-                        $q->where('is_visible', '1');
-                    },
-                    'textdatas.subcategories'
-                ]);
-            }
-        ])
-        ->whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1');
-            })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
-        })
-        ->orderBy('id', 'ASC')
-        ->get();
+        // $categories = EventDesignCategory::with([
+        //     'subcategory' => function ($query) {
+        //         $query->with([
+        //             'textdatas' => function ($q) {
+        //                 $q->where('is_visible', '1');
+        //             },
+        //             'textdatas.subcategories'
+        //         ]);
+        //     }
+        // ])
+        // ->whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas', function ($q) {
+        //         $q->where('is_visible', '1');
+        //     })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+        // })
+        // ->orderBy('id', 'ASC')
+        // ->get();
+
+        $textdatas = TextData::where('is_visible', 1)
+                        ->with('categories')
+                        ->with('subcategories')
+                        ->get()
+                        ->groupBy('id')
+                        ->map(function ($grouped) {
+                            $textdata = $grouped->first(); // Since grouped by ID
+                            return [
+                                'id' => $textdata->id,
+                                'static_information' => $textdata->static_information,
+                                'category' => optional($textdata->categories)->category_name,
+                                'subcategories' => $textdata->subcategories
+                                    ->pluck('subcategory_name')
+                                    ->unique()
+                                    ->implode(', '),
+                            ];
+                        })
+                        ->values();
+
+        dd($textdatas);
         
         
         // Calculate total count of textdatas across all subcategories
