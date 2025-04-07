@@ -68918,3 +68918,9 @@ a.text-muted:hover {
     border-radius: 0.25rem;
     box-shadow: inset 0 0 0 transparent;
 }
+
+.edit_subcategory_drp br{
+    display: none;
+    max-height: 150px;
+    overflow-y: scroll;
+}
