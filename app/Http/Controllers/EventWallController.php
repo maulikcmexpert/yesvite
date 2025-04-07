@@ -702,7 +702,7 @@ class EventWallController extends BaseController
         ///postlist
         $postList = [];
         $eventCreator = Event::where('id', $event)->first();
-        $title =  'wall';
+        $title = $eventCreator->event_name . 'wall';
         // DB::enableQueryLog();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
