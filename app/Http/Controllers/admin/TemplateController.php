@@ -233,10 +233,16 @@ class TemplateController extends Controller
             
                 if (is_array($request->subcategory)) {
                     foreach ($request->subcategory as $subcatId) {
-                        $subcate = TextdataSubcategory::create([
-                            'textdata_id' => $textData->id,
-                            'subcategory_id' => $subcatId,            
-                        ]);
+                        // $subcate = TextdataSubcategory::create([
+                        //     'textdata_id' => $textData->id,
+                        //     'subcategory_id' => $subcatId,        
+                            
+                                   
+                            $text =new TextdataSubcategory();
+                            $text->textdata_id= $textData->id;
+                            $text->subcategory_id= (int)$subcatId;
+                            $text->save();
+                        // ]);
 
 
                     }

@@ -148,7 +148,8 @@
                                 'category_id' => $category->id,
                                 // 'subcategory_id' => $subcategory->id,
                                 // 'subcategory_id' => $relatedSubcategoryIds,
-                                'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                                // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                                'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
 
                                 
                                 'category_name' => $category->category_name,
