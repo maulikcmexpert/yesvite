@@ -22,14 +22,7 @@
         $(this).next('.checkboxes').slideToggle(400);
       });
       
-      $('.wrapper').click(function (e) {
-        e.stopPropagation();
-        });
-
-    $(document).on('click', function () {
-        alert(!)
-        $('.checkboxes').slideToggle(400);
-    });
+      
       $('.ckkBox').change(function() {
         toggleCheckedAll(this);
         setCheckboxSelectLabels(); 
