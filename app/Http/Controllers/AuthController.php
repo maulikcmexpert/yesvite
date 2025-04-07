@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\RateLimiter;
 // use Cookie;
 use App\Models\User;
 use App\Models\LoginHistory;
@@ -114,6 +115,19 @@ class AuthController extends Controller
     public function userRegister(Request $request)
     {
 
+        $ip = $request->ip();
+        dd($ip);
+        $key = 'register-attempts:' . $ip;
+    
+        if (RateLimiter::tooManyAttempts($key, 5)) {
+            $seconds = RateLimiter::availableIn($key);
+            return response()->json([
+                'success' => false,
+                'message' => "Too many attempts. Please try again in {$seconds} seconds."
+            ], 429);
+        }
+    
+        RateLimiter::hit($key, 60);
 
 
         if ($request->account_type == '1') {
