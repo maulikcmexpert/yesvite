@@ -68919,11 +68919,11 @@ a.text-muted:hover {
     box-shadow: inset 0 0 0 transparent;
 }
 
-.edit_subcategory_drp br{
+.edit-subcategory-drp br{
     display: none;
 }
 
-.edit_subcategory_drp .inner-wrap{
+.edit-subcategory-drp .inner-wrap{
     max-height: 150px !important;
     overflow-y: scroll !important;
 }
