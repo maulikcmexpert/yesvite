@@ -129,12 +129,13 @@
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
                             $randomIds[] = $image->id;
-                            $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
+                                        $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
 
                             $allImages->push([
                                 'imageId' => $image->id,
 
-                                'subcategory_name' =>$subcategory->subcategory_name,
+                                'subcategory_name' =>$relatedSubcategoryNames,
+                                // 'subcategory_name' =>$subcategory->subcategory_name,
 
                                 'static_information' => json_encode($image->static_information),
                                 'shape_image' =>
@@ -145,7 +146,7 @@
                                 'is_visible' => $image->is_visible,
                                 'category_id' => $category->id,
                                 'subcategory_id' => $subcategory->id,
-                                'category_name' => $relatedSubcategoryNames,
+                                'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
                         }
