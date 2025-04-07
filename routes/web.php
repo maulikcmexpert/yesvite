@@ -402,7 +402,7 @@ Route::controller(AuthController::class)->group(function () {
 
     // Route::post('resend_email', 'ResendVerificationMail')->name('auth.ResendVerificationMail');
 
-    Route::get('register', 'register')->name('auth.register')->middleware('isAuthenticate');
+    Route::get('signup', 'signup')->name('auth.register')->middleware('isAuthenticate');
     Route::post('store_register', 'userRegister')->name('store.register');
     Route::post('check-email', 'checkEmailExistence');
     Route::post('check_mail', 'checkEmail');
