@@ -28,12 +28,9 @@
       });
       
     });
-    $(document).on('click', function(e) {
-  // If the clicked target is not inside any .wrapper or .checkboxes, hide all dropdowns
-  if (!$(e.target).closest('.wrapper').length) {
-    $('.checkboxes').slideUp(400);
-  }
-});
+    $(document).click(function() {
+        $(this).next('.checkboxes').slideToggle(400);
+      });
 
     function setCheckboxSelectLabels(elem) {
       var wrappers = $('.wrapper'); 
