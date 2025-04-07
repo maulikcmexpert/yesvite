@@ -106,7 +106,18 @@ $(document).ready(function () {
                         imgCategoryId == categoryId &&
                         imgSubcategoryIds.includes(subcategoryId.toString())
                     ) {
+                        // alert();
+                        // $(this).removeClass("d-none");      
+                        // $(this).show();
                         $(this).show();
+                        $(this).removeClass("d-none");
+                        $(this).removeClass("fadeInDown");
+                        $(this).css("visibility", "visible");
+                        $(this).removeClass("wow");
+                        $(this).removeClass("d-none").fadeIn();
+                    }else{
+                        $(this).hide();
+                        $(this).fadeOut().addClass("d-none");
                     }
                 });
             });
