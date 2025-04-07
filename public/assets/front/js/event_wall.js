@@ -974,16 +974,30 @@ $(document).ready(function () {
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
-        $("#pollForm input[required], #pollForm select[required]").each(
-            function () {
-                if ($.trim($(this).val()) === "") {
-                    isValid = false;
-                    return false; // Break loop
+        let firstInvalidField = null;
+
+        $("#pollForm input[required], #pollForm select[required]").each(function () {
+            if ($.trim($(this).val()) === "") {
+                isValid = false;
+                if (!firstInvalidField) {
+                    firstInvalidField = $(this);
                 }
+                return false; // Break loop
             }
-        );
+        });
+
         $(".create_post_btn").prop("disabled", !isValid);
+
+        if (!isValid) {
+            toastr.error("Please fill all required fields.");
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
+        }
+
+        return isValid;
     }
+
 
     // Apply the maxlength limit and validate form on input load
     $("input.form-control").each(function () {
