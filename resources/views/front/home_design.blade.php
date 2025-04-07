@@ -125,18 +125,19 @@
             @php
                 $allImages = collect([]);
                 $randomIds = [];
+                foreach ($categories as $category) {
                     foreach ($category->subcategory as $subcategory) {
                         foreach ($subcategory->textdatas as $image) {
                             $randomIds[] = $image->id;
-
-                            $subcategoryNames = $image->subcategories->pluck('subcategory_name')->toArray();
-                            $subcategoryList = implode(', ', $subcategoryNames);
-
                             $allImages->push([
                                 'imageId' => $image->id,
-                                // 'subcategory_name' => $subcategory->subcategory_name,
+
+                                'subcategory_name' =>$subcategory->subcategory_name,
+
                                 'static_information' => json_encode($image->static_information),
-                                'shape_image' => $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                                'shape_image' =>
+                                    $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+
                                 'image' => asset('storage/canvas/' . $image->image),
                                 'tags' => $image->tags,
                                 'is_visible' => $image->is_visible,
@@ -144,34 +145,10 @@
                                 'subcategory_id' => $subcategory->id,
                                 'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
-                                'subcategory_name' => $subcategoryList, // 👈 Added this
                             ]);
                         }
                     }
-                // foreach ($categories as $category) {
-                //     foreach ($category->subcategory as $subcategory) {
-                //         foreach ($subcategory->textdatas as $image) {
-                //             $randomIds[] = $image->id;
-                //             $allImages->push([
-                //                 'imageId' => $image->id,
-
-                //                 'subcategory_name' =>$subcategory->subcategory_name,
-
-                //                 'static_information' => json_encode($image->static_information),
-                //                 'shape_image' =>
-                //                     $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-
-                //                 'image' => asset('storage/canvas/' . $image->image),
-                //                 'tags' => $image->tags,
-                //                 'is_visible' => $image->is_visible,
-                //                 'category_id' => $category->id,
-                //                 'subcategory_id' => $subcategory->id,
-                //                 'category_name' => $category->category_name,
-                //                 'image_path' => asset('storage/canvas/' . $image->filled_image),
-                //             ]);
-                //         }
-                //     }
-                // }
+                }
 
                 shuffle($randomIds);
                 $randomIds = array_slice($randomIds, 0, 30);
