@@ -11195,7 +11195,13 @@ $(".cancel-login").on("click", function (e) {
 
        $(".new_login_page, .new_login").hide(); // Hide both elements
        $(".step_2").show();
-
+       handleActiveClass(".li_design");
+       $(".pick-card").addClass("active");
+       $(".design-span").addClass("active");
+       $(".li_event_detail")
+           .find(".side-bar-list")
+           .addClass("menu-success");
+       $(".li_event_detail").addClass("menu-success");
        $(".new-event-sidebar-wrp").show();
    });
 
