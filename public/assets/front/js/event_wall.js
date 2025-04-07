@@ -1104,10 +1104,7 @@ $(document).ready(function () {
             document.getElementById("pollContent").value = postContent;
 
             // ✅ Validate poll form here
-            if (!validateForm()) {
-                toastr.error("Please fill all required poll fields.");
-                return;
-            }
+
 
             // ✅ Show loader only if form is valid
             $this
