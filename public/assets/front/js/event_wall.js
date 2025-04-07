@@ -1070,7 +1070,7 @@ console.log(optionCount);
         $(".poll-options .option-poll").each(function (index) {
             $(this)
                 .find(".option-number")
-                .text(index + 1);
+                .text(index + 3);
             $(this).find(".char-count").text("0/140"); // Reset char count
         });
     }
@@ -1793,7 +1793,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
-
+    $(".poll-options").empty();
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
