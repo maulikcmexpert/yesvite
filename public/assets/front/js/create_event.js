@@ -11196,6 +11196,12 @@ $(".cancel-login").on("click", function (e) {
        $(".new_login_page, .new_login").hide(); // Hide both elements
        $(".step_2").show();
 
+       $(".pick-card").addClass("active");
+       $(".edit-design-sidebar").removeClass("active");
+
+
+
+
        $(".new-event-sidebar-wrp").show();
    });
 
