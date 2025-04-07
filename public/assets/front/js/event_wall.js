@@ -1197,6 +1197,17 @@ $(document).ready(function () {
             toastr.error("Please fill all required fields before submitting.");
         }
     });
+    $(document).on("input", "input[name='question']", function () {
+        $("#question_error").remove();
+    });
+
+    $(document).on("change", "select[name='duration']", function () {
+        $("#duration_error").empty();
+    });
+
+    $(document).on("input", "input[name='options[]']", function () {
+        $(this).next(".option-error").remove();
+    });
 
     $(document).on("click", "#send_post_msg", function (e) {
         e.preventDefault(); // Prevents new line in textarea
