@@ -160,23 +160,23 @@ class AuthController extends Controller
         }
 
         $isLogin = $request->has('is_login');
-        // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-        //     'secret' => env('RECAPTCHA_SECRET_KEY'),
-        //     'response' => $request->input('g-recaptcha-response')
-        // ]);
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response')
+        ]);
 
-        // $responseBody = $response->json();
+        $responseBody = $response->json();
 
-        // if (!$responseBody['success']) {
-        //     toastr('reCAPTCHA verification failed. Please try again.', 'error');
-        //     return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
-        // }
+        if (!$responseBody['success']) {
+            toastr('reCAPTCHA verification failed. Please try again.', 'error');
+            return redirect()->back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        }
 
-        // if ($validator->fails()) {
-        //     toastr($validator->errors()->first(), 'error');
-        //     return redirect()->back()->withErrors(['captcha' => $validator->errors()->first()]);
-        //     // Redirect::to('register')->with('error', $validator->errors()->first());
-        // }
+        if ($validator->fails()) {
+            toastr($validator->errors()->first(), 'error');
+            return redirect()->back()->withErrors(['captcha' => $validator->errors()->first()]);
+            // Redirect::to('register')->with('error', $validator->errors()->first());
+        }
 
         try {
             $randomString = Str::random(30);
