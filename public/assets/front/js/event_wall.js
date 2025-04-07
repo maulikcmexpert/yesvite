@@ -1125,10 +1125,14 @@ $(document).ready(function () {
             }
 
             // Validate options
-            pollForm.find("input[name='options[]']").each(function(index) {
+            pollForm.find("input[name='options[]']").each(function (index) {
                 const val = $(this).val().trim();
+
+                // Remove previous error
+                $(this).next(".option-error").remove();
+
                 if (val === "") {
-                    $(this).after('<div class="text-danger option-error">Option ' + (index + 1) + ' is required.</div>');
+                    $(this).after("<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>");
                     hasError = true;
                 }
             });
