@@ -978,7 +978,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
                                         <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                                         <script src="https://www.google.com/recaptcha/api.js"></script>
-                                        
+                                        <input name="is_design_register" id="is_design_register" value="1"/>
                                     </div>
                                     <div class="col-lg-12 mt-2">
                                         <button type="button" class="btn btn-primary createEventUser"
@@ -1865,8 +1865,11 @@
                             $("#crateEventLogin").removeClass("d-none");
                         } else {
                             console.log(response);
-                            
-                            toastr.error(response.message);
+                            if(response.success==0){
+                                toastr.error(response.message);
+                            }else{
+                                toastr.error(response.message);
+                            }
                         }
                     },
                     error: function(xhr) {
