@@ -109,26 +109,48 @@
                 @php
                     $allImages = collect([]);
                     $randomIds = [];
-                    foreach ($categories as $category) {
-                        foreach ($category->subcategory as $subcategory) {
-                            foreach ($subcategory->textdatas as $image) {
-                                $randomIds[] = $image->id;
-                                $allImages->push([
-                                    'imageId' => $image->id,
-                                    'tags' => $image->tags,
-                                    'is_visible' => $image->is_visible,
-                                    'category_id' => $category->id,
-                                    'subcategory_id' => $subcategory->id,
-                                    'subcategory_name' => $subcategory->subcategory_name,
-                                    'category_name' => $category->category_name,
-                                    'static_information' => json_encode($image->static_information),
-                                    'shape_image' =>
-                                        $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-                                    'image_path' => asset('storage/canvas/' . $image->filled_image),
-                                    'image' => asset('storage/canvas/' . $image->image),
-                                ]);
-                            }
-                        }
+                    foreach ($textdatatss as $category) {
+                        $randomIds[] = $category['imageId'];
+
+                        $allImages->push([
+                            'imageId' => $category['imageId'],
+                            'subcategory_name' => $category['subcategory_name'],
+                            // 'subcategory_name' =>$subcategory->subcategory_name,
+                            'static_information' => json_encode($category['static_information']),
+                            'shape_image' =>
+                                $category['shape_image'] != ''
+                                    ? asset('storage/canvas/' . $category['shape_image'])
+                                    : '',
+                            'image' => asset('storage/canvas/' . $category['image']),
+                            'tags' => $category['tags'],
+                            'is_visible' => $category['is_visible'],
+                            'category_id' => $category['category_id'],
+                            // 'subcategory_id' => $subcategory->id,
+                            // 'subcategory_id' => $relatedSubcategoryIds,
+                            // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                            'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
+                            'category_name' => $category['category_name'],
+                            'image_path' => asset('storage/canvas/' . $category['image_path']),
+                        ]);
+                        // foreach ($category->subcategory as $subcategory) {
+                        //     foreach ($subcategory->textdatas as $image) {
+                        //         $randomIds[] = $image->id;
+                        //         $allImages->push([
+                        //             'imageId' => $image->id,
+                        //             'tags' => $image->tags,
+                        //             'is_visible' => $image->is_visible,
+                        //             'category_id' => $category->id,
+                        //             'subcategory_id' => $subcategory->id,
+                        //             'subcategory_name' => $subcategory->subcategory_name,
+                        //             'category_name' => $category->category_name,
+                        //             'static_information' => json_encode($image->static_information),
+                        //             'shape_image' =>
+                        //                 $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                        //             'image_path' => asset('storage/canvas/' . $image->filled_image),
+                        //             'image' => asset('storage/canvas/' . $image->image),
+                        //         ]);
+                        //     }
+                        // }
                     }
 
                     shuffle($randomIds);
@@ -324,17 +346,40 @@
                 }
 
 
+                // $('input[name="design_subcategory"]:checked').each(function() {
+                //     default_s++;
+                //     $(".image-item").removeClass('d-none');
+                //     const categoryId = $(this).data('category-id');
+                //     const subcategoryId = $(this).data('subcategory-id');
+
+                //     // Show filtered images matching checked categories and subcategories
+                //     $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                //         .show();
+
+                // });
+
+
                 $('input[name="design_subcategory"]:checked').each(function() {
                     default_s++;
-                    $(".image-item").removeClass('d-none');
-                    const categoryId = $(this).data('category-id');
-                    const subcategoryId = $(this).data('subcategory-id');
+                    $(".image-item").removeClass("d-none");
 
-                    // Show filtered images matching checked categories and subcategories
-                    $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
-                        .show();
+                    const categoryId = $(this).data("category-id");
+                    const subcategoryId = $(this).data("subcategory-id");
 
+                    $(".image-item").each(function() {
+                        const imgCategoryId = $(this).data("category-id");
+                        const imgSubcategoryIds = $(this).data("subcategory-id").toString()
+                            .split(',');
+
+                        if (
+                            imgCategoryId == categoryId &&
+                            imgSubcategoryIds.includes(subcategoryId.toString())
+                        ) {
+                            $(this).show();
+                        }
+                    });
                 });
+
 
                 if (default_s == 0) {
                     $(".image-item").removeClass('d-none');

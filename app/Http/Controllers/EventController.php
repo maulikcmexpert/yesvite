@@ -83,16 +83,64 @@ class EventController extends BaseController
         $page = 'front.home_design';
         $js = ['home_design'];
         $images = TextData::all();
-        $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
+        // $categories = TextData::with('categories', 'subcategories')->orderBy('id', 'desc')->get();;
         $getDesignData =  EventDesignCategory::with('subcategory')->get();
         $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
+        $categories = EventDesignCategory::with([
+            'subcategory' => function ($query) {
+                $query->with([
+                    'textdatas' => function ($q) {
+                        $q->where('is_visible', '1');
+                    },
+                    'textdatas.subcategories'
+                ]);
+            }
+        ])
+        ->whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1');
+            })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $textdatatss = TextData::where('is_visible', 1)
+                        ->with('categories')
+                        ->with('subcategories')
+                        ->get()
+                        ->groupBy('id')
+                        ->map(function ($grouped) {
+                            $textdata = $grouped->first(); // Since grouped by ID
+                            return [
+                                'imageId' => $textdata->id,
+                                'tags' => $textdata->tags,
+                                'is_visible' => $textdata->is_visible,
+                                'image' => $textdata->image,
+                                'image_path' => $textdata->filled_image,
+                                'shape_image' => $textdata->image,
+                                'static_information' => $textdata->static_information,
+                                'category_name' => optional($textdata->categories)->category_name,
+                                'category_id' => optional($textdata->categories)->id,
+                                'subcategory_name' => $textdata->subcategories
+                                    ->pluck('subcategory_name')
+                                    ->unique()
+                                    ->implode(', '),
+
+                                'subcategory_id' => $textdata->subcategories
+                                    ->pluck('id')
+                                    ->unique()
+                                    ->implode(', '),
+                            ];
+                        })
+                        ->values();
         return view('layout', compact(
             'title',
             'page',
             'images',
             'getDesignData',
-            'categories',
+            // 'categories',
+            'textdatatss',
             'js'
         ));
     }
@@ -3543,11 +3591,11 @@ class EventController extends BaseController
     //                     if (count($parts) < 2) {
     //                         continue;
     //                     }
-    
+
     //                     $imageData = base64_decode($parts[1]);
     //                     $fileName = time() . $i . '-' . uniqid() . '.jpg';
     //                     $i++;
-    
+
     //                     $path = public_path('storage/event_images/') . $fileName;
     //                     file_put_contents($path, $imageData);
     //                 } else {
@@ -3556,11 +3604,11 @@ class EventController extends BaseController
     //                     $imageName = basename($src);
     //                     $fileName = $imageName;
     //                     $i++;
-    
+
     //                     // $path = public_path('storage/event_images/') . $fileName;
     //                     // file_put_contents($path, file_get_contents($imageSource['src']));
     //                 }
-    
+
     //                 $savedFiles[] = [
     //                     'fileName' => $fileName,
     //                     'deleteId' => $imageSource['deleteId'],
@@ -3569,7 +3617,7 @@ class EventController extends BaseController
     //             }
     //         }
     //     // }
-       
+
     //     //new
     //     if (empty($savedFiles)) {
     //         // return response()->json(['status' => 'No valid images to save'], 400);
