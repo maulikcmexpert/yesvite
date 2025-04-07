@@ -119,44 +119,23 @@ class HomeFrontController extends BaseController
         //     ->orderBy('id', 'ASC')
         //     ->get();
 
-        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-        //     $query->whereHas('textdatas', function ($q) {
-        //         $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
-        //     });
-        // })
-        // ->with([
-        //     'subcategory' => function ($query) {
-        //         $query->whereHas('textdatas', function ($q) {
-        //             $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-        //         })->with(['textdatas' => function ($q) {
-        //             $q->where('is_visible', '1'); // Load only visible textdatas
-        //         }]);
-        //     }
-        // ])
-        // ->orderBy('id', 'ASC')
-        // ->get();
-        
         $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
             $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1');
+                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
             });
         })
         ->with([
             'subcategory' => function ($query) {
                 $query->whereHas('textdatas', function ($q) {
-                    $q->where('is_visible', '1');
-                })->with([
-                    'textdatas' => function ($q) {
-                        $q->where('is_visible', '1');
-                    }
-                ]);
+                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+                })->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', '1'); // Load only visible textdatas
+                }]);
             }
         ])
         ->orderBy('id', 'ASC')
         ->get();
         
-
-        dd($categories);
 
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
