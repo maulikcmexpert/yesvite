@@ -25,6 +25,7 @@ $(document).ready(function () {
     
 
     $("#register").validate({
+        ignore: [], // include hidden fields like g-recaptcha-response
         rules: {
             firstname: {
                 required: true,
