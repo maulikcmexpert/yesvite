@@ -26,12 +26,14 @@
         toggleCheckedAll(this);
         setCheckboxSelectLabels(); 
       });
-      
-    });
-    $(document).click(function() {
-        $(this).next('.checkboxes').slideToggle(400);
-      });
 
+      $(document).on('click', function(e) {
+        if (!$(e.target).closest('.wrapper').length) {
+        $('.checkboxes:visible').slideUp(400);
+        }
+  });
+    });
+      
     function setCheckboxSelectLabels(elem) {
       var wrappers = $('.wrapper'); 
       
