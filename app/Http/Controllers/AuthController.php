@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\RateLimiter;
 // use Cookie;
 use App\Models\User;
 use App\Models\LoginHistory;
@@ -114,7 +115,26 @@ class AuthController extends Controller
     public function userRegister(Request $request)
     {
 
+        $ip = $request->ip();
+        $isLogin = $request->has('is_login');
 
+        // dd($ip);
+        $key = 'register-attempts:' . $ip;
+    
+        if (RateLimiter::tooManyAttempts($key, 3)) {
+            $seconds = RateLimiter::availableIn($key);
+            if($isLogin){
+                return response()->json([
+                    'success' => false,
+                    'message' => "Too many attempts. Please try again in {$seconds} seconds."
+                ]);
+            }else{
+                toastr("Too many attempts. Please try again in {$seconds} seconds.", 'error');
+                return redirect()->back()->withErrors(['rate_limit' => "Too many attempts. Please try again in {$seconds} seconds."]);
+            }
+        }
+    
+        RateLimiter::hit($key, 60);
 
         if ($request->account_type == '1') {
             $validator = Validator::make($request->all(), [
@@ -159,7 +179,6 @@ class AuthController extends Controller
             ]);
         }
 
-        $isLogin = $request->has('is_login');
 
         if($isLogin){
             $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
@@ -177,12 +196,12 @@ class AuthController extends Controller
         $responseBody = $response->json();
 
         if ($isLogin) {
-        if (!$responseBody['success']) {
-            return response()->json([
-                'success' => 0,
-                'message' => 'reCAPTCHA verification failed. Please try again.',
-            ]);
-        }
+            if (!$responseBody['success']) {
+                return response()->json([
+                    'success' => 0,
+                    'message' => 'reCAPTCHA verification failed. Please try again.',
+                ]);
+            }
         }
 
         if (!$responseBody['success']) {
