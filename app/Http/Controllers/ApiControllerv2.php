@@ -3430,24 +3430,10 @@ class ApiControllerv2 extends Controller
             if ($input['category_id'] != 0) {
 
                 // $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->where('static_information', '!=', '')->get();
-                    $event_design = TextData::whereHas('subcategories', function ($query) use ($input) {
-                        $query->where('id', $input['category_id']); // subcategory ID coming from input
-                    })
-                    ->where('static_information', '!=', '')
-                    ->when(!empty($input['search']), function ($query) use ($input) {
-                        $search = $input['search'];
-                        $query->where(function ($q) use ($search) {
-                            $q->where('tags', 'like', "%{$search}%")
-                            ->orWhereHas('categories', function ($catQ) use ($search) {
-                                $catQ->where('category_name', 'like', "%{$search}%");
-                            })
-                            ->orWhereHas('subcategories', function ($subQ) use ($search) {
-                                $subQ->where('subcategory_name', 'like', "%{$search}%");
-                            });
-                        });
-                    })
-                    ->with(['categories', 'subcategories'])
-                    ->get();
+                $event_design = TextData::whereHas('subcategories', function ($query) use ($input) {
+                    $query->where('id', $input['category_id']); // this is the subcategory ID
+                })
+                ->where('static_information', '!=', '')->get();
             
             }
 
