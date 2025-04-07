@@ -21,8 +21,15 @@ class EventDesignSubCategory extends Model
         return $this->belongsTo(EventDesignCategory::class, 'event_design_category_id', 'id');
     }
 
+    // public function textdatas()
+    // {
+    //     return $this->hasMany(TextData::class,'event_design_sub_category_id'); //, 'event_design_category_id', 'id'
+    // }
+
+    // EventDesignSubCategory.php
     public function textdatas()
     {
-        return $this->hasMany(TextData::class,'event_design_sub_category_id'); //, 'event_design_category_id', 'id'
+        return $this->belongsToMany(TextData::class, 'textdata_subcategories', 'subcategory_id', 'textdata_id');
     }
+
 }
