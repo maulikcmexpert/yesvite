@@ -55,7 +55,7 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                     <!-- Subcategory Selection -->
                     <div class="col-lg-3 mb-3">
                         <div class="form-group">
-                            <label for="event_design_subcategory_id">Subcategory</label>
+                            <label for="event_design_sub_category_id">Subcategory</label>
 
                             <div class="col-md-12">
                                 <div class="wrapper">
@@ -64,7 +64,7 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                                     <div class="checkboxes select-subcat-inner" id="Lorems">
 
 
-                                        <div class="inner-wrap" id="event_design_subcategory_id">
+                                        <div class="inner-wrap" id="event_design_sub_category_id">
                                             @foreach($getSubCatDetail as $subcategory)
                                             <label><input type="checkbox" value="{{ $subcategory->id }}"
                                                     class="ckkBox val" name="subcategory[]"
