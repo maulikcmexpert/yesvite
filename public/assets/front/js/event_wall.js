@@ -983,7 +983,7 @@ $(document).ready(function () {
                     firstInvalidField = $(this);
                 }
                 const label = $(this).closest(".mb-3").find("label").text().trim();
-                toastr.error(`${label} is required.`);
+              //  toastr.error(`${label} is required.`);
                 return false; // Stop loop
             }
         });
