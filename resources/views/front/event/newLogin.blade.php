@@ -1789,6 +1789,9 @@
                         required: true,
                         equalTo: "#password_c",
                     },
+                    'g-recaptcha-response':{
+                        required:true
+                    }
                 },
                 messages: {
                     firstname: {
