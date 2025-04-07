@@ -165,7 +165,7 @@ class AuthController extends Controller
             'response' => $request->input('g-recaptcha-response')
         ]);
 
-        dd($response);
+        dd($request);
         $responseBody = $response->json();
 
         if ($isLogin) {
