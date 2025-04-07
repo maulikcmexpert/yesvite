@@ -411,7 +411,7 @@
                     href="#">Privacy Policy</a> and Terms of use. we use your information only to provide and improve our service.
                 we do not sell your data.</div></p>
             </div>
-            <button class="remove_privacy_cookie close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
+            {{-- <button class="remove_privacy_cookie close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button> --}}
         </div>
         <div class="cookies-track-btn ">
             <button class="remove_privacy_cookie">Accept & Continue</button>
