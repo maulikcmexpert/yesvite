@@ -250,7 +250,7 @@
                                     
                                 // );
                                 $('#event_design_sub_category_id').append(
-                                    '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" name="subcategory[]" /><span>' + subcategory.sub_category_name + '</span> </label><br>'
+                                    '<label><input type="checkbox" value="' + subcategory.sub_category_id + '" class="ckkBox val" name="subcategory[]" /><span>' + subcategory.sub_category_name + '</span> </label>'
     
                                 );
                             });
