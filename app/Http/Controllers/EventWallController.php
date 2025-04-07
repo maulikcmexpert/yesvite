@@ -517,7 +517,7 @@ class EventWallController extends BaseController
             'guest_view' => $eventDetails,
             'host_view' => $eventAboutHost
         ];
-        
+
 
         Session::forget('filterSession');
         return view('layout', compact(
@@ -702,7 +702,7 @@ class EventWallController extends BaseController
         ///postlist
         $postList = [];
         $eventCreator = Event::where('id', $event)->first();
-        $title = $eventCreator->event_name . ' wall';
+        $title = $eventCreator->event_name . 'wall';
         // DB::enableQueryLog();
         $eventPostList = EventPost::query();
         $eventPostList->with(['user', 'post_image'])
@@ -1662,7 +1662,7 @@ class EventWallController extends BaseController
         $creatEventPost->post_type = $request->post_type;
         $creatEventPost->post_privacy = $request->post_privacys;
         $creatEventPost->commenting_on_off = $request->commenting_on_off;
-        $creatEventPost->is_in_photo_moudle = "0";  
+        $creatEventPost->is_in_photo_moudle = "0";
         $creatEventPost->save();
         $video = 0;
         $image = 0;
@@ -2580,7 +2580,7 @@ class EventWallController extends BaseController
             'posttime' => setpostTime($letestComment->created_at),
             'comment_replies' => []
         ];
-       
+
 
         return response()->json(['success' => true, 'total_comments' => count($postComment), 'data' => $postCommentList, 'message' => "Post commented by you"]);
     }
