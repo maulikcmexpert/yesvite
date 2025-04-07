@@ -106,6 +106,7 @@ $(document).ready(function () {
                         imgCategoryId == categoryId &&
                         imgSubcategoryIds.includes(subcategoryId.toString())
                     ) {
+                        $(this).removeClass("d-none");
                         $(this).show();
                     }
                 });
