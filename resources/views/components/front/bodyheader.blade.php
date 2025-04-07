@@ -744,7 +744,7 @@ $notification_list=getNotificationList();
                                           <span> posted video on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span>
                                         @else
                                         {{-- <span> posted on wall for <a href="{{ route('event.event_about', ['id' => encrypt($inner_data['event_id'])]) }}"   style="font-family: var(--SFProDisplay-Bold);font-size: 14px;line-height:normal;color: #F73C71;">{{$inner_data['event_name']}} </a><strong></strong></span> --}}
-                                        <span> posted on wall for <a href="{{ route('event.event_wall', ['id' => encrypt($inner_data['post_id'])]) }}#scroll_{{ $inner_data['post_id'] }}"
+                                        <span> posted on wall for <a href="{{ route('event.event_wall', ['id' => encrypt($inner_data['event_id'])]) }}#scroll_{{ $inner_data['post_id'] }}"
                                             style="font-family: var(--SFProDisplay-Bold); font-size: 14px; line-height: normal; color: #F73C71;">
                                             {{ $inner_data['event_name'] }}
                                          </a>
