@@ -127,6 +127,7 @@
                 $randomIds = [];
                 $processedImageIds = [];
 
+                dd($textdatatss);
                 foreach ($textdatatss as $category) {
                             $randomIds[] = $category->imageId;
 
