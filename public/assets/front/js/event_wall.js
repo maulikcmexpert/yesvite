@@ -1793,7 +1793,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
-
+    $(this).find(".option-number").text(index + 1); // start from 1
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
