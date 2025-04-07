@@ -173,6 +173,33 @@ class HomeFrontController extends BaseController
         })
         ->orderBy('id', 'ASC')
         ->get();
+
+        $textdatatss = TextData::where('is_visible', 1)
+                        ->with('categories')
+                        ->with('subcategories')
+                        ->get()
+                        ->groupBy('id')
+                        ->map(function ($grouped) {
+                            $textdata = $grouped->first(); // Since grouped by ID
+                            return [
+                                'imageId' => $textdata->id,
+                                'tags' => $textdata->tags,
+                                'is_visible' => $textdata->is_visible,
+                                'image' => $textdata->image,
+                                'image_path' => $textdata->filled_image,
+                                'shape_image' => $textdata->image,
+                                'static_information' => $textdata->static_information,
+                                'category_name' => optional($textdata->categories)->category_name,
+                                'category_id' => optional($textdata->categories)->id,
+                                'subcategory_name' => $textdata->subcategories
+                                    ->pluck('subcategory_name')
+                                    ->unique()
+                                    ->implode(', '),
+                            ];
+                        })
+                        ->values();
+
+        // dd($textdatas);
         
         
         // Calculate total count of textdatas across all subcategories
@@ -194,6 +221,7 @@ class HomeFrontController extends BaseController
             'count',
             // 'images',
             // 'getDesignData',
+            'textdatatss',
             'categories',
             'js'
         ));
