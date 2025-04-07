@@ -16,7 +16,8 @@
     $(function() {
       
       setCheckboxSelectLabels();
-      
+      $('.checkboxes').hide();
+
       $('.toggle-next').click(function() {
         $(this).next('.checkboxes').slideToggle(400);
       });
