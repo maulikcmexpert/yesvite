@@ -973,29 +973,39 @@ $(document).ready(function () {
 
     // Function to validate form fields
     function validateForm() {
-        let isValid = true;
-        let firstInvalidField = null;
+        let hasError = false;
 
-        $("#pollForm input[required], #pollForm select[required]").each(function () {
-            if ($.trim($(this).val()) === "") {
-                isValid = false;
-                if (!firstInvalidField) {
-                    firstInvalidField = $(this);
-                }
-                const label = $(this).closest(".mb-3").find("label").text().trim();
-              //  toastr.error(`${label} is required.`);
-                return false; // Stop loop
+        // Clear previous errors
+        $("#question_error").text('');
+        $("#duration_error").text('');
+
+        // Validate question and duration
+        const question = $("input[name='question']").val().trim();
+        const duration = $("select[name='duration']").val();
+
+        if (question === "") {
+            $("#question_error").text("Question is required.");
+            hasError = true;
+        }
+
+        if (duration === "") {
+            $("#duration_error").text("Please select a duration.");
+            hasError = true;
+        }
+
+        // Validate options
+        $("input[name='options[]']").each(function (index) {
+            const val = $(this).val().trim();
+            $(this).next(".option-error").remove();
+            if (val === "") {
+                $(this).after("<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>");
+                hasError = true;
             }
         });
 
-        $(".create_post_btn").prop("disabled", !isValid);
-
-        if (!isValid && firstInvalidField) {
-            firstInvalidField.focus();
-        }
-
-        return isValid;
+        return !hasError;
     }
+
 
 
     // Apply the maxlength limit and validate form on input load
@@ -1103,48 +1113,8 @@ $(document).ready(function () {
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
 
-            // // Clear previous errors
-            // $("#question_error").text('');
-            // $("#duration_error").text('');
+            if (!validateForm()) return;
 
-            // Get field values
-            var question = pollForm.find("input[name='question']").val().trim();
-            var duration = pollForm.find("select[name='duration']").val();
-
-            // Validate fields
-            var hasError = false;
-
-            if (question === "") {
-                $("#question_error").text("Question is required.");
-                hasError = true;
-            } else {
-                $("#question_error").text("");
-            }
-
-            if (duration === "") {
-                $("#duration_error").text("Please select a duration.");
-                hasError = true;
-            } else {
-                $("#duration_error").text("");
-            }
-
-
-            // Validate options
-            pollForm.find("input[name='options[]']").each(function (index) {
-                const val = $(this).val().trim();
-
-                // Remove previous error
-                $(this).next(".option-error").remove();
-
-                if (val === "") {
-                    $(this).after("<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>");
-                    hasError = true;
-                }
-            });
-
-            if (hasError) return;
-
-            // Show loader inside the button and disable it
             $this
                 .html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
                 .prop("disabled", true);
