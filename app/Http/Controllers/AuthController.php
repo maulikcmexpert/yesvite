@@ -102,7 +102,7 @@ class AuthController extends Controller
         return view('layout', compact('page', 'title', 'js'));
     }
 
-    public function register()
+    public function signup()
     {
         $page = 'auth/register';
         $title = "Register";
