@@ -983,18 +983,15 @@ $(document).ready(function () {
                     firstInvalidField = $(this);
                 }
                 const label = $(this).closest(".mb-3").find("label").text().trim();
-                toastr.error(label + " is required.");
-                return false; // Break loop
+                toastr.error(`${label} is required.`);
+                return false; // Stop loop
             }
         });
 
-        $(".create_post_btn").prop("disabled", !isValid);
+        // $(".create_post_btn").prop("disabled", !isValid);
 
-        if (!isValid) {
-            toastr.error("Please fill all required fields.");
-            if (firstInvalidField) {
-                firstInvalidField.focus();
-            }
+        if (!isValid && firstInvalidField) {
+            firstInvalidField.focus();
         }
 
         return isValid;
