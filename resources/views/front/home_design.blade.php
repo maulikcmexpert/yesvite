@@ -133,21 +133,21 @@
 
                     $allImages->push([
                                 'imageId' => $category['imageId'],
-                                'subcategory_name' =>$category->subcategory_name,
+                                'subcategory_name' =>$category['subcategory_name'],
                                 // 'subcategory_name' =>$subcategory->subcategory_name,
-                                'static_information' => json_encode($category->static_information),
+                                'static_information' => json_encode($category['static_information']),
                                 'shape_image' =>
-                                    $category->shape_image != '' ? asset('storage/canvas/' . $category->shape_image) : '',
+                                    $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
                                 'image' => asset('storage/canvas/' . $category->image),
-                                'tags' => $category->tags,
-                                'is_visible' => $category->is_visible,
-                                'category_id' => $category->id,
+                                'tags' => $category['tags'],
+                                'is_visible' => $category['is_visible'],
+                                'category_id' => $category['id'],
                                 // 'subcategory_id' => $subcategory->id,
                                 // 'subcategory_id' => $relatedSubcategoryIds,
                                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
                                 // 'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
-                                'category_name' => $category->category_name,
-                                'image_path' => asset('storage/canvas/' . $category->filled_image),
+                                'category_name' => $category['category_name'],
+                                'image_path' => asset('storage/canvas/' . $category['filled_image']),
                             ]);
                     // foreach ($category->subcategory as $subcategory) {
                     //     foreach ($subcategory->textdatas as $image) {
