@@ -27,7 +27,8 @@
         });
 
     $(document).on('click', function () {
-      $('.checkboxes:visible').slideUp(400);
+        alert(!)
+        $('.checkboxes').slideToggle(400);
     });
       $('.ckkBox').change(function() {
         toggleCheckedAll(this);
