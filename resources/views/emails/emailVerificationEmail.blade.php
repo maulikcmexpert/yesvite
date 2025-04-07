@@ -184,7 +184,7 @@
                                     another one from our support team <a href="https://support.yesvite.com/hc/en-us">here</a>.</p> --}}
                                 <p
                                     style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                                    Need a new one? Email us at support@yesvite.com
+                                    Need a new one? Email us at <a href="mailto:support@yesvite.com">support@yesvite.com</a>
                                 </p>
                             </td>
                         </tr>
