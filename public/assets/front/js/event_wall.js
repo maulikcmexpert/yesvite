@@ -988,7 +988,7 @@ $(document).ready(function () {
             }
         });
 
-        // $(".create_post_btn").prop("disabled", !isValid);
+        $(".create_post_btn").prop("disabled", !isValid);
 
         if (!isValid && firstInvalidField) {
             firstInvalidField.focus();
@@ -1105,6 +1105,8 @@ $(document).ready(function () {
             if (pollForm && pollForm.length < 0 && postContent === "") {
 
               if (!validateForm()) {
+                console.log("pollForm");
+
                 toastr.error("Please fill all required poll fields.");
                 return;
             }
