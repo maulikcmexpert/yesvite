@@ -1689,6 +1689,7 @@ $(document).ready(function () {
 
                             // Append only the missing options
                             let existingInputs = $(".poll-options input[name='options[]']").length;
+                            console.log(existingInputs);
                             if (options.length > existingInputs) {
                                 options.slice(existingInputs).forEach((option, index) => {
                                     let optionNumber = existingInputs + index + 1; // Ensure numbering is sequential
@@ -1785,6 +1786,8 @@ $(document).ready(function () {
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
     $("#pollForm")[0].reset(); // Reset poll form
+    $(this).find("form")[0].reset();
+
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
@@ -1792,6 +1795,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
+
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
