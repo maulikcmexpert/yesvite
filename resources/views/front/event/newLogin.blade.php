@@ -5,7 +5,7 @@
             <div class="new-create-account-head">
                 <h2>Kids Birthday</h2>
                 <button type="button" class="new-create-account-close-btn"
-                    onclick="window.location.href='{{ route('front.home') }}'">
+                  >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.00098 1L15 14.9991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"

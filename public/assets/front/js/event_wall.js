@@ -973,29 +973,39 @@ $(document).ready(function () {
 
     // Function to validate form fields
     function validateForm() {
-        let isValid = true;
-        let firstInvalidField = null;
+        let hasError = false;
 
-        $("#pollForm input[required], #pollForm select[required]").each(function () {
-            if ($.trim($(this).val()) === "") {
-                isValid = false;
-                if (!firstInvalidField) {
-                    firstInvalidField = $(this);
-                }
-                const label = $(this).closest(".mb-3").find("label").text().trim();
-                toastr.error(`${label} is required.`);
-                return false; // Stop loop
+        // Clear previous errors
+        $("#question_error").text('');
+        $("#duration_error").text('');
+
+        // Validate question and duration
+        const question = $("input[name='question']").val().trim();
+        const duration = $("select[name='duration']").val();
+
+        if (question === "") {
+            $("#question_error").text("Question is required.");
+            hasError = true;
+        }
+
+        if (duration === "") {
+            $("#duration_error").text("Please select a duration.");
+            hasError = true;
+        }
+
+        // Validate options
+        $("input[name='options[]']").each(function (index) {
+            const val = $(this).val().trim();
+            $(this).next(".option-error").remove();
+            if (val === "") {
+                $(this).after("<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>");
+                hasError = true;
             }
         });
 
-        $(".create_post_btn").prop("disabled", !isValid);
-
-        if (!isValid && firstInvalidField) {
-            firstInvalidField.focus();
-        }
-
-        return isValid;
+        return !hasError;
     }
+
 
 
     // Apply the maxlength limit and validate form on input load
@@ -1103,39 +1113,8 @@ $(document).ready(function () {
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
 
-            // Clear previous errors
-            $("#question_error").text('');
-            $("#duration_error").text('');
+            if (!validateForm()) return;
 
-            // Get field values
-            var question = pollForm.find("input[name='question']").val().trim();
-            var duration = pollForm.find("select[name='duration']").val();
-
-            // Validate fields
-            var hasError = false;
-
-            if (question === "") {
-                $("#question_error").text("Question is required.");
-                hasError = true;
-            }
-
-            if (duration === "") {
-                $("#duration_error").text("Please select a duration.");
-                hasError = true;
-            }
-
-            // Validate options
-            pollForm.find("input[name='options[]']").each(function(index) {
-                const val = $(this).val().trim();
-                if (val === "") {
-                    $(this).after('<div class="text-danger option-error">Option ' + (index + 1) + ' is required.</div>');
-                    hasError = true;
-                }
-            });
-
-            if (hasError) return;
-
-            // Show loader inside the button and disable it
             $this
                 .html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>')
                 .prop("disabled", true);
@@ -1197,17 +1176,40 @@ $(document).ready(function () {
             toastr.error("Please fill all required fields before submitting.");
         }
     });
-    $(document).on("input", "input[name='question']", function () {
-        $("#question_error").remove();
-    });
+   // Live validation for Question
+$(document).on("input", "input[name='question']", function () {
+    const val = $(this).val().trim();
+    if (val !== "") {
+        $("#question_error").text("");
+    } else {
+        $("#question_error").text("Question is required.");
+    }
+});
 
-    $(document).on("change", "select[name='duration']", function () {
-        $("#duration_error").empty();
-    });
+// Live validation for Duration
+$(document).on("change", "select[name='duration']", function () {
+    const val = $(this).val();
+    if (val !== "") {
+        $("#duration_error").text("");
+    } else {
+        $("#duration_error").text("Please select a duration.");
+    }
+});
 
-    $(document).on("input", "input[name='options[]']", function () {
-        $(this).next(".option-error").remove();
-    });
+// Live validation for each Option
+$(document).on("input", "input[name='options[]']", function () {
+    const $input = $(this);
+    const val = $input.val().trim();
+
+    // Remove error if exists
+    $input.next(".option-error").remove();
+
+    // Add error if empty again
+    if (val === "") {
+        $input.after("<div class='option-error text-danger mt-1'>This option is required.</div>");
+    }
+});
+
 
     $(document).on("click", "#send_post_msg", function (e) {
         e.preventDefault(); // Prevents new line in textarea
@@ -1787,6 +1789,9 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
+    $("#question_error").text('');
+    $("#duration_error").text('');
+    $(".option-error").remove();
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
 });
@@ -1794,6 +1799,9 @@ $(".modal").on("hidden.bs.modal", function () {
 $(".btn-close").on("click", function () {
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
+    $("#question_error").text('');
+    $("#duration_error").text('');
+    $(".option-error").remove();
     // Add `d-none` class back to hide the div
 });
 
