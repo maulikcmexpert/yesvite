@@ -138,7 +138,7 @@
                                 'static_information' => json_encode($category['static_information']),
                                 'shape_image' =>
                                     $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
-                                'image' => asset('storage/canvas/' . $category->image),
+                                'image' => asset('storage/canvas/' . $category['image']),
                                 'tags' => $category['tags'],
                                 'is_visible' => $category['is_visible'],
                                 'category_id' => $category['id'],
