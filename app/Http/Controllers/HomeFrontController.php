@@ -119,22 +119,22 @@ class HomeFrontController extends BaseController
         //     ->orderBy('id', 'ASC')
         //     ->get();
 
-        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
-            });
-        })
-        ->with([
-            'subcategory' => function ($query) {
-                $query->whereHas('textdatas', function ($q) {
-                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-                })->with(['textdatas' => function ($q) {
-                    $q->where('is_visible', '1'); // Load only visible textdatas
-                }]);
-            }
-        ])
-        ->orderBy('id', 'ASC')
-        ->get();
+        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas', function ($q) {
+        //         $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+        //     });
+        // })
+        // ->with([
+        //     'subcategory' => function ($query) {
+        //         $query->whereHas('textdatas', function ($q) {
+        //             $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+        //         })->with(['textdatas' => function ($q) {
+        //             $q->where('is_visible', '1'); // Load only visible textdatas
+        //         }]);
+        //     }
+        // ])
+        // ->orderBy('id', 'ASC')
+        // ->get();
         
         // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
         //     $query->whereHas('textdatas', function ($q) {
@@ -156,23 +156,23 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
 
-        // $categories = EventDesignCategory::with([
-        //     'subcategory' => function ($query) {
-        //         $query->with([
-        //             'textdatas' => function ($q) {
-        //                 $q->where('is_visible', '1');
-        //             },
-        //             'textdatas.subcategories'
-        //         ]);
-        //     }
-        // ])
-        // ->whereHas('subcategory', function ($query) {
-        //     $query->whereHas('textdatas', function ($q) {
-        //         $q->where('is_visible', '1');
-        //     })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
-        // })
-        // ->orderBy('id', 'ASC')
-        // ->get();
+        $categories = EventDesignCategory::with([
+            'subcategory' => function ($query) {
+                $query->with([
+                    'textdatas' => function ($q) {
+                        $q->where('is_visible', '1');
+                    },
+                    'textdatas.subcategories'
+                ]);
+            }
+        ])
+        ->whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1');
+            })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
 
         $textdatatss = TextData::where('is_visible', 1)
                         ->with('categories')
