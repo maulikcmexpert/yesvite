@@ -147,7 +147,9 @@
                                 'is_visible' => $image->is_visible,
                                 'category_id' => $category->id,
                                 // 'subcategory_id' => $subcategory->id,
-                                'subcategory_id' => $relatedSubcategoryIds,
+                                // 'subcategory_id' => $relatedSubcategoryIds,
+                                'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+
                                 
                                 'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
