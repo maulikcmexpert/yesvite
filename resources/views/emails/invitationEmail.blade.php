@@ -222,7 +222,7 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <p style="font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">Invite Email: <span style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">{{@$eventData['host_email']}}</span></p>
+                        <p style="font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">Host Email: <span style="font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">{{@$eventData['host_email']}}</span></p>
                     </td>
                 </tr>
                 <!-- -------------- -->
