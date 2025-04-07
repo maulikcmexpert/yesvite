@@ -139,7 +139,7 @@ class EventController extends BaseController
             'page',
             'images',
             'getDesignData',
-            // 'categories',
+            'categories',
             'textdatatss',
             'js'
         ));
