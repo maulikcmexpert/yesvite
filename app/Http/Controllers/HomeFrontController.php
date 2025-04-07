@@ -156,7 +156,7 @@ class HomeFrontController extends BaseController
         ->orderBy('id', 'ASC')
         ->get();
 
-        dd($categories);
+        
 
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
