@@ -1070,9 +1070,9 @@
     background-color: var(--primaryColor);
     color: #fff;
     border: 1px solid var(--primaryColor);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    padding: 12px 30px;
+    padding: 12px 18px;
     text-align: center;
     border-radius: 20px;
     min-width: 200px;
@@ -1082,9 +1082,9 @@
     background-color: var(--primaryColor);
     color: #fff;
     border: 1px solid var(--primaryColor);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    padding: 12px 30px;
+    padding: 12px 18px;
     text-align: center;
     border-radius: 20px;
     min-width: 200px;
