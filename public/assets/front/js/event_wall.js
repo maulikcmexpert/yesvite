@@ -1799,6 +1799,9 @@ $(".modal").on("hidden.bs.modal", function () {
 $(".btn-close").on("click", function () {
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").empty();
+    $("#question_error").text('');
+    $("#duration_error").text('');
+    $(".option-error").remove();
     // Add `d-none` class back to hide the div
 });
 
