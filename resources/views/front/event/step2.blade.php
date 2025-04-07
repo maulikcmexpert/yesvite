@@ -119,7 +119,7 @@
                                     'is_visible' => $image->is_visible,
                                     'category_id' => $category->id,
                                     'subcategory_id' => $subcategory->id,
-                                    'subcategory_name' =>$subcategory->subcategory_name,
+                                    'subcategory_name' => $subcategory->subcategory_name,
                                     'category_name' => $category->category_name,
                                     'static_information' => json_encode($image->static_information),
                                     'shape_image' =>
@@ -144,7 +144,8 @@
                          {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }} "
                             {{-- data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0" --}} data-category-id="{{ $image['category_id'] }}"
                             data-subcategory-id="{{ $image['subcategory_id'] }}"
-                            data-category_name="{{ $image['category_name'] }}" data-subcategory_name="{{ $image['subcategory_name'] }}" data-tags="{{ $image['tags'] }}">
+                            data-category_name="{{ $image['category_name'] }}"
+                            data-subcategory_name="{{ $image['subcategory_name'] }}" data-tags="{{ $image['tags'] }}">
 
                             <div class="card-img collection-card card-blue edit_design_tem design-card"
                                 data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
@@ -286,22 +287,22 @@
 
                 updateTotalCount();
             });
-            $(document).on("click", ".previousImeg", async function (e) {
+            $(document).on("click", ".previousImeg", async function(e) {
 
                 let count = $(".default_show").length;
 
-console.log(count);
-$('.total_design_count').text(count + ' Items');
+                console.log(count);
+                $('.total_design_count').text(count + ' Items');
 
-});
-$(document).on("click", ".side-bar-sub-list", async function (e) {
+            });
+            $(document).on("click", ".side-bar-sub-list", async function(e) {
 
-let count = $(".default_show").length;
+                let count = $(".default_show").length;
 
-console.log(count);
-$('.total_design_count').text(count + ' Items');
+                console.log(count);
+                $('.total_design_count').text(count + ' Items');
 
-});
+            });
 
 
             // Handle individual subcategory checkbox change
@@ -414,90 +415,89 @@ $('.total_design_count').text(count + ' Items');
             // });
 
 
-            $("#search_design_category").on("keyup", function () {
-        let query = $(this).val().toLowerCase().trim();
-        let results = "";
-        if (query.length > 0) {
-            let visibleCount = 0;
+            $("#search_design_category").on("keyup", function() {
+                let query = $(this).val().toLowerCase().trim();
+                let results = "";
+                if (query.length > 0) {
+                    let visibleCount = 0;
 
-            $(".image-item").each(function () {
-                // let tags = $(this).data("tags")
-                //     ? $(this).data("tags").toLowerCase().split(",")
-                //     : [];
+                    $(".image-item").each(function() {
+                        // let tags = $(this).data("tags")
+                        //     ? $(this).data("tags").toLowerCase().split(",")
+                        //     : [];
 
-                let tags = $(this).data("tags")
-                ? $(this).data("tags").toLowerCase().split(",")
-                : [];
-                let subcategory = $(this).data("subcategory_name")
-                    ? $(this).data("subcategory_name").toLowerCase()
-                    : "";
-                let category = $(this).data("category_name")
-                    ? $(this).data("category_name").toLowerCase()
-                    : "";
+                        let tags = $(this).data("tags") ?
+                            $(this).data("tags").toLowerCase().split(",") : [];
+                        let subcategory = $(this).data("subcategory_name") ?
+                            $(this).data("subcategory_name").toLowerCase() :
+                            "";
+                        let category = $(this).data("category_name") ?
+                            $(this).data("category_name").toLowerCase() :
+                            "";
 
 
-                    let matches = tags.some((tag) => tag.includes(query)) ||
-                    subcategory.includes(query) ||
-                    category.includes(query);
+                        let matches = tags.some((tag) => tag.includes(query)) ||
+                            subcategory.includes(query) ||
+                            category.includes(query);
 
-                    if (matches) {
-                        $(this).show();
+                        if (matches) {
+                            $(this).show();
                             $(this).removeClass("d-none");
                             $(this).removeClass("fadeInDown");
                             $(this).css("visibility", "visible");
                             $(this).removeClass("wow");
                             $(this).removeClass("d-none").fadeIn();
                             visibleCount++;
+                        } else {
+                            $(this).hide();
+                            $(this).fadeOut().addClass("d-none");
+                        }
+                        // if (tags.some((tag) => tag.includes(query))) {
+                        //     $(this).show();
+                        //     $(this).removeClass("d-none");
+                        //     $(this).removeClass("fadeInDown");
+                        //     $(this).css("visibility", "visible");
+                        //     $(this).removeClass("wow");
+                        //     $(this).removeClass("d-none").fadeIn();
+                        //     visibleCount++;
+                        // } else {
+                        //     $(this).hide();
+                        //     $(this).fadeOut().addClass("d-none");
+                        // }
+                    });
+
+                    console.log("Total Visible Items:", visibleCount);
+                    $(".total_design_count").text(visibleCount + " Items");
+
+                    if (visibleCount > 0) {
+                        $("#filtered_results").hide();
                     } else {
-                        $(this).hide();
-                        $(this).fadeOut().addClass("d-none");
+                        $("#filtered_results").show();
                     }
-                // if (tags.some((tag) => tag.includes(query))) {
-                //     $(this).show();
-                //     $(this).removeClass("d-none");
-                //     $(this).removeClass("fadeInDown");
-                //     $(this).css("visibility", "visible");
-                //     $(this).removeClass("wow");
-                //     $(this).removeClass("d-none").fadeIn();
-                //     visibleCount++;
-                // } else {
-                //     $(this).hide();
-                //     $(this).fadeOut().addClass("d-none");
-                // }
+
+                    if ($(".image-item:visible").length === 0) {
+                        $(".total_design_count").text(
+                            $(".image-item:visible").length + " Items"
+                        );
+
+                        results += `<div class="search-item no-data">No Data Found</div>`;
+                        $("#filtered_results").show();
+                        $("#filtered_results").html(results);
+                    }
+                } else {
+                    $(".image-item").removeClass("d-none fadeInDown wow").show();
+                    let allItems = $(".image-item");
+                    if (allItems.length > 30) {
+                        allItems.slice(30).addClass("d-none").hide();
+                    }
+                    $(".total_design_count").text(
+                        $(".image-item:visible").length + " Items"
+                    );
+                    $("#filtered_results").hide();
+                }
+
+                // $('#filtered_results').html(results);
             });
-
-            console.log("Total Visible Items:", visibleCount);
-            $(".total_design_count").text(visibleCount + " Items");
-
-            if (visibleCount > 0) {
-                $("#filtered_results").hide();
-            } else {
-                $("#filtered_results").show();
-            }
-
-            if ($(".image-item:visible").length === 0) {
-                $(".total_design_count").text(
-                    $(".image-item:visible").length + " Items"
-                );
-
-                results += `<div class="search-item no-data">No Data Found</div>`;
-                $("#filtered_results").show();
-                $("#filtered_results").html(results);
-            }
-        } else {
-            $(".image-item").removeClass("d-none fadeInDown wow").show();
-            let allItems = $(".image-item");
-            if (allItems.length > 30) {
-                allItems.slice(30).addClass("d-none").hide();
-            }
-            $(".total_design_count").text(
-                $(".image-item:visible").length + " Items"
-            );
-            $("#filtered_results").hide();
-        }
-
-        // $('#filtered_results').html(results);
-    });
 
 
             // $('#search_design_category').on('keyup', function() {
@@ -637,11 +637,11 @@ $('.total_design_count').text(count + ' Items');
 
             }, 500);
         }
-// }
-        $(document).on("click",".remove_privacy_cookie", function () {
+        // }
+        $(document).on("click", ".remove_privacy_cookie", function() {
             // $cookiesBox.removeClass('active');
-        //   $('.cookies-track').css('display','none');
-          $('.cookies-track').addClass('d-none');
+            //   $('.cookies-track').css('display','none');
+            $('.cookies-track').addClass('d-none');
 
             localStorage.setItem('cookiesBoxDismissed', 'true');
         });
@@ -805,7 +805,5 @@ $('.total_design_count').text(count + ' Items');
             var visibleItems = $(".all_designs:visible").length;
             $(".total_design_count").text(visibleItems + " Items");
         });
-
-
     </script>
 @endpush
