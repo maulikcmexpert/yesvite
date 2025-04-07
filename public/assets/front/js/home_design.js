@@ -191,16 +191,23 @@ $(document).ready(function () {
                 let tags = $(this).data("tags")
                 ? $(this).data("tags").toLowerCase().split(",")
                 : [];
-                let subcategory = $(this).data("subcategory_name")
-                    ? $(this).data("subcategory_name").toLowerCase()
-                    : "";
+                // let subcategory = $(this).data("subcategory_name")
+                //     ? $(this).data("subcategory_name").toLowerCase()
+                //     : "";
+                let subcategorys = $(this).data("subcategory_name")
+                ? $(this).data("subcategory_name").toLowerCase().split(",")
+                : [];
+
                 let category = $(this).data("category_name")
                     ? $(this).data("category_name").toLowerCase()
                     : "";
 
 
+                    // let matches = tags.some((tag) => tag.includes(query)) ||
+                    // subcategory.includes(query) ||
+                    // category.includes(query);
                     let matches = tags.some((tag) => tag.includes(query)) ||
-                    subcategory.includes(query) ||
+                    subcategorys.some((subcategory) => subcategory.includes(query)) ||
                     category.includes(query);
 
                     if (matches) {
