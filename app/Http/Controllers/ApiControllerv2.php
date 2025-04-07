@@ -14680,7 +14680,21 @@ class ApiControllerv2 extends Controller
         //         }
         //     }
         try {
-            $get_data = TextData::where('tags', 'LIKE', "%$search%")->where('static_information', '!=', '')->get();
+            // $get_data = TextData::where('tags', 'LIKE', "%$search%")->where('static_information', '!=', '')->get();
+            
+            $get_data = TextData::where('is_visible', 1)
+            ->where(function ($query) use ($search) {
+                $query->where('tags', 'LIKE', "%$search%")
+                    ->orWhereHas('categories', function ($q) use ($search) {
+                        $q->where('category_name', 'LIKE', "%$search%");
+                    })
+                    ->orWhereHas('subcategories', function ($q) use ($search) {
+                        $q->where('subcategory_name', 'LIKE', "%$search%");
+                    });
+            })
+            ->with(['categories', 'subcategories'])
+            ->get();
+
             $templates = [];
 
             if ($get_data->isNotEmpty()) {
