@@ -28,7 +28,9 @@
       });
 
       $(document).on('click', function(e) {
+        alert(1);
         if (!$(e.target).closest('.wrapper').length) {
+            alert(2);
         $('.checkboxes:visible').slideUp(400);
         }
   });
