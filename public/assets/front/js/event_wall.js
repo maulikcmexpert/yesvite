@@ -1071,6 +1071,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     // Submit form on button click
     $(document).on("click", ".create_post_btn", function () {
         var $this = $(this);
@@ -1118,17 +1120,17 @@ $(document).ready(function () {
             // }
 
 
-// ✅ Ensure imagePreview exists before accessing children
-let hasImages = imagePreview && imagePreview.children ? imagePreview.children.length > 0 : false;
+            // ✅ Ensure imagePreview exists before accessing children
+            let hasImages = imagePreview && imagePreview.children ? imagePreview.children.length > 0 : false;
 
-// ✅ Ensure photoInput exists and has files
-let hasUploadedPhotos = photoInput && photoInput.files ? photoInput.files.length > 0 : false;
+            // ✅ Ensure photoInput exists and has files
+            let hasUploadedPhotos = photoInput && photoInput.files ? photoInput.files.length > 0 : false;
 
-// ✅ Condition: If no image is uploaded AND no content is entered
-if (!hasUploadedPhotos && !hasImages && postContent === "") {
-    toastr.error("Please upload a photo or enter some content for the post.");
-    return; // Prevent form submission
-}
+            // ✅ Condition: If no image is uploaded AND no content is entered
+            if (!hasUploadedPhotos && !hasImages && postContent === "") {
+                toastr.error("Please upload a photo or enter some content for the post.");
+                return; // Prevent form submission
+            }
 
             // Set post type based on presence of an uploaded image or entered content
             if (photoPostType) {
