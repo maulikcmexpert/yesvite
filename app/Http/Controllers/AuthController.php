@@ -119,7 +119,7 @@ class AuthController extends Controller
         // dd($ip);
         $key = 'register-attempts:' . $ip;
     
-        if (RateLimiter::tooManyAttempts($key, 5)) {
+        if (RateLimiter::tooManyAttempts($key, 2)) {
             $seconds = RateLimiter::availableIn($key);
             return response()->json([
                 'success' => false,
