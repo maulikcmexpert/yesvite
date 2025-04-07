@@ -11197,10 +11197,10 @@ $(".cancel-login").on("click", function (e) {
        $(".step_2").show();
 
        $(".pick-card").addClass("active");
-       $(".design-span").addClass("active");
-       $(".li_event_detail")
-           .find(".side-bar-list")
-           .addClass("menu-success");
+       $(".edit-design-sidebar").removeClass("active");
+
+
+
 
        $(".new-event-sidebar-wrp").show();
    });
