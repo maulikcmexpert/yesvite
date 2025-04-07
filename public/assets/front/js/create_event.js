@@ -11182,7 +11182,8 @@ $("#create_event_register").on("click", function (e) {
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
 $(".new-create-account-close-btn").on("click", function (e) {
-    $("#loginModel").show(); // Hide r
+
+ $("#loginModel").modal("show"); // Hide r
     // $(".new_login_page, .new_login").hide(); // Hide both elements
     // $("#edit-design-temp").show();
 
