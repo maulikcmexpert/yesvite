@@ -407,14 +407,18 @@
         <div class="d-flex justify-content-center gap-3 align-items-start">
             <div>
                 <h3>We value your privacy</h3>
-                <p>We use third-party cookies and tracking technologies that collect information about your use of the
-                    site. These third parties may use your information for their own purpose, as described in our <a
-                        href="#">Privacy Policy</a></p>
+                <p><b>By using yesvite,you agree to our </b><a
+                    href="#">Privacy Policy</a> and Terms of use. we use your information only to provide and improve our service.
+                we do not sell your data.</div></p>
             </div>
             <button class="remove_privacy_cookie close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="cookies-track-btn ">
-            <button class="remove_privacy_cookie">Accept All</button>
+            <button class="remove_privacy_cookie">Accept & Continue</button>
+            {{-- <button>Reject All</button> --}}
+        </div>
+        <div class="cookies-track-btn ">
+            <button class="remove_privacy_cookie">View Privacy Policy</button>
             {{-- <button>Reject All</button> --}}
         </div>
     </div>
@@ -774,7 +778,7 @@
                     function updateUnreadCountG(snapshot) {
                         let totalUnreadCount = 0;
 
-                        
+
                         if (snapshot.exists()) {
                             const conversations = snapshot.val();
                             for (let conversationId in conversations) {
@@ -789,7 +793,7 @@
                                     } else {
                                         totalUnreadCount = parseInt($('#user_msg_unread_count').val(), 10) || 0;
 
-                                    }   
+                                    }
 
                             }
                         }
@@ -967,7 +971,7 @@
 
     // Define the function
     // function openAppIos() {
-    //     const appLink = "comappyesvite://"; 
+    //     const appLink = "comappyesvite://";
     //     window.location.href = appLink;
     // }
 
