@@ -28,16 +28,30 @@
       });
       
     });
-      
+    $(document).on('click', function(e) {
+  // If the clicked target is not inside any .wrapper or .checkboxes, hide all dropdowns
+  if (!$(e.target).closest('.wrapper').length) {
+    $('.checkboxes').slideUp(400);
+  }
+});
+
     function setCheckboxSelectLabels(elem) {
       var wrappers = $('.wrapper'); 
+      
       $.each( wrappers, function( key, wrapper ) {
         var checkboxes = $(wrapper).find('.ckkBox');
         var label = $(wrapper).find('.checkboxes').attr('id');
         var prevText = '';
+      
+        var anyChecked = false;
+
+
         $.each( checkboxes, function( i, checkbox ) {
           var button = $(wrapper).find('button');
+
           if( $(checkbox).prop('checked') == true) {
+            anyChecked = true;
+
             var text = $(checkbox).next().html();
             var btnText = prevText + text;
             var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
