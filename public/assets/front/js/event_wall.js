@@ -1102,16 +1102,14 @@ $(document).ready(function () {
 
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
-            if (pollForm && pollForm.length < 0 && postContent === "") {
 
-              if (!validateForm()) {
-                console.log("pollForm");
-
+            // ✅ Validate poll form here
+            if (!validateForm()) {
                 toastr.error("Please fill all required poll fields.");
                 return;
             }
-            }
-            // Show the loader inside the button
+
+            // ✅ Show loader only if form is valid
             $this
                 .html(
                     '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
