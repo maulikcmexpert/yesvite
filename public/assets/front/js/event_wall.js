@@ -1105,7 +1105,7 @@ $(document).ready(function () {
 
             // ✅ Validate poll form here
             if (!validateForm()) {
-                toastr.error("Please fill all required poll fields.");
+                // toastr.error("Please fill all required poll fields.");
                 return;
             }
 
