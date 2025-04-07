@@ -127,12 +127,12 @@
                 $randomIds = [];
                 $processedImageIds = [];
 
-                dd($textdatatss);
+                // dd($textdatatss);
                 foreach ($textdatatss as $category) {
-                            $randomIds[] = $category->imageId;
+                            $randomIds[] = $category['imageId'];
 
                     $allImages->push([
-                                'imageId' => $category->imageId,
+                                'imageId' => $category['imageId'],
                                 'subcategory_name' =>$category->subcategory_name,
                                 // 'subcategory_name' =>$subcategory->subcategory_name,
                                 'static_information' => json_encode($category->static_information),
