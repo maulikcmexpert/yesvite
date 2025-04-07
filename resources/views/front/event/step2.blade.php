@@ -763,17 +763,48 @@
                 $(".image-item").hide(); // Hide default images
                 $(".image-item-new").hide(); // Hide new items initially
 
+                // $('input[name="design_subcategory"]:checked').each(function() {
+                //     // alert();
+                //     const categoryId = $(this).data("category-id");
+                //     const subcategoryId = $(this).data("subcategory-id");
+
+                //     // Show filtered images
+                //     $(
+                //         `.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+                //     ).show();
+                // });
+                
                 $('input[name="design_subcategory"]:checked').each(function() {
-                    alert();
-                    const categoryId = $(this).data("category-id");
-                    const subcategoryId = $(this).data("subcategory-id");
+                        default_s++;
+                        $(".image-item").removeClass("d-none");
 
-                    // Show filtered images
-                    $(
-                        `.image-item-new[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-                    ).show();
-                });
+                        const categoryId = $(this).data("category-id");
+                        const subcategoryId = $(this).data("subcategory-id");
 
+                        $(".image-item").each(function() {
+                            const imgCategoryId = $(this).data("category-id");
+                            const imgSubcategoryIds = $(this).data("subcategory-id").toString()
+                                .split(',');
+
+                            if (
+                                imgCategoryId == categoryId &&
+                                imgSubcategoryIds.includes(subcategoryId.toString())
+                            ) {
+                                // alert();
+                                // $(this).removeClass("d-none");
+                                // $(this).show();
+                                $(this).show();
+                                $(this).removeClass("d-none");
+                                $(this).removeClass("fadeInDown");
+                                $(this).css("visibility", "visible");
+                                $(this).removeClass("wow");
+                                $(this).removeClass("d-none").fadeIn();
+                            } else {
+                                $(this).hide();
+                                $(this).fadeOut().addClass("d-none");
+                            }
+                        });
+                    });
                 var visibleItems = $(".image-item-new:visible").length;
                 $(".total_design_count").text(visibleItems + " Items");
             }
