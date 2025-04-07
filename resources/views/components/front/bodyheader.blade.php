@@ -3,7 +3,7 @@
     // $count = getTotalUnreadMessageCount();
     // dd($count);
 $notification_list=getNotificationList();
-dd($notification_list);
+// dd($notification_list);
 
 @endphp
 @if (Auth::guard('web')->check())
