@@ -116,7 +116,7 @@ class AuthController extends Controller
     {
 
         $ip = $request->ip();
-        dd($ip);
+        // dd($ip);
         $key = 'register-attempts:' . $ip;
     
         if (RateLimiter::tooManyAttempts($key, 5)) {
@@ -124,7 +124,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "Too many attempts. Please try again in {$seconds} seconds."
-            ], 429);
+            ]);
         }
     
         RateLimiter::hit($key, 60);
