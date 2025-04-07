@@ -1117,12 +1117,17 @@ $(document).ready(function () {
             if (question === "") {
                 $("#question_error").text("Question is required.");
                 hasError = true;
+            } else {
+                $("#question_error").text("");
             }
 
             if (duration === "") {
                 $("#duration_error").text("Please select a duration.");
                 hasError = true;
+            } else {
+                $("#duration_error").text("");
             }
+
 
             // Validate options
             pollForm.find("input[name='options[]']").each(function (index) {
@@ -1201,17 +1206,40 @@ $(document).ready(function () {
             toastr.error("Please fill all required fields before submitting.");
         }
     });
-    $(document).on("input", "input[name='question']", function () {
-        $("#question_error").remove();
-    });
+   // Live validation for Question
+$(document).on("input", "input[name='question']", function () {
+    const val = $(this).val().trim();
+    if (val !== "") {
+        $("#question_error").text("");
+    } else {
+        $("#question_error").text("Question is required.");
+    }
+});
 
-    $(document).on("change", "select[name='duration']", function () {
-        $("#duration_error").empty();
-    });
+// Live validation for Duration
+$(document).on("change", "select[name='duration']", function () {
+    const val = $(this).val();
+    if (val !== "") {
+        $("#duration_error").text("");
+    } else {
+        $("#duration_error").text("Please select a duration.");
+    }
+});
 
-    $(document).on("input", "input[name='options[]']", function () {
-        $(this).next(".option-error").remove();
-    });
+// Live validation for each Option
+$(document).on("input", "input[name='options[]']", function () {
+    const $input = $(this);
+    const val = $input.val().trim();
+
+    // Remove error if exists
+    $input.next(".option-error").remove();
+
+    // Add error if empty again
+    if (val === "") {
+        $input.after("<div class='option-error text-danger mt-1'>This option is required.</div>");
+    }
+});
+
 
     $(document).on("click", "#send_post_msg", function (e) {
         e.preventDefault(); // Prevents new line in textarea
