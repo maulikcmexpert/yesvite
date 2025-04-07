@@ -174,7 +174,7 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
 
-        $textdatas = TextData::where('is_visible', 1)
+        $categories = TextData::where('is_visible', 1)
                         ->with('categories')
                         ->with('subcategories')
                         ->get()
@@ -189,7 +189,7 @@ class HomeFrontController extends BaseController
                                 'image_path' => $textdata->filled_image,
                                 'shape_image' => $textdata->image,
                                 'static_information' => $textdata->static_information,
-                                'category' => optional($textdata->categories)->category_name,
+                                'category_name' => optional($textdata->categories)->category_name,
                                 'category_id' => optional($textdata->categories)->id,
                                 'subcategory_name' => $textdata->subcategories
                                     ->pluck('subcategory_name')
@@ -199,7 +199,7 @@ class HomeFrontController extends BaseController
                         })
                         ->values();
 
-        dd($textdatas);
+        // dd($textdatas);
         
         
         // Calculate total count of textdatas across all subcategories
