@@ -160,12 +160,20 @@ class AuthController extends Controller
         }
 
         $isLogin = $request->has('is_login');
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response')
-        ]);
 
-        dd($request);
+        if($isLogin){
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET_KEY'),
+                'response' => $request->input('g_recaptcha_response')
+            ]);
+        }else{
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET_KEY'),
+                'response' => $request->input('g-recaptcha-response')
+            ]);
+        }
+
+        // dd($request);
         $responseBody = $response->json();
 
         if ($isLogin) {

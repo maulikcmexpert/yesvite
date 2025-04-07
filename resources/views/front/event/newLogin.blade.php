@@ -1844,6 +1844,7 @@
                     password: $("#password_c").val(),
                     cpassword: $("#cpassword").val(),
                     account_type: $("#account_type").val(),
+                    g_recaptcha_response: $("#g-recaptcha-response").val(),
                     is_login: false,
                 };
 
