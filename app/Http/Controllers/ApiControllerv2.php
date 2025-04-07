@@ -3574,28 +3574,13 @@ class ApiControllerv2 extends Controller
         try {
             if (isset($input['search_category_name']) && $input['search_category_name'] != "") {
                 $catSearch = $input['search_category_name'];
-                // $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
-                //     ->whereHas('textdatas', function ($ques) {
-                //         $ques->whereNotNull('static_information');
-                //     })
-                //     ->withCount(['subcategory', 'textdatas'])
-                //     ->where('category_name', 'like', "%$catSearch%")
-                //     ->get();
-                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas' => function ($query) use ($catSearch) {
-                    $query->whereNotNull('static_information');
-            
-                    if ($catSearch) {
-                        $query->where('tags', 'like', "%{$catSearch}%")
-                            ->orWhereHas('subcategories', function ($subQ) use ($catSearch) {
-                                $subQ->where('subcategory_name', 'like', "%{$catSearch}%");
-                            });
-                    }
-                }])
-                ->when($catSearch, function ($query) use ($catSearch) {
-                    $query->where('category_name', 'like', "%{$catSearch}%");
-                })
-                ->withCount(['subcategory', 'textdatas'])
-                ->get();
+                $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
+                    ->whereHas('textdatas', function ($ques) {
+                        $ques->whereNotNull('static_information');
+                    })
+                    ->withCount(['subcategory', 'textdatas'])
+                    ->where('category_name', 'like', "%$catSearch%")
+                    ->get();
             } else {
                 $eventCategory = EventDesignCategory::with(['subcategory', 'textdatas'])
                     ->whereHas('textdatas', function ($ques) {
@@ -14696,7 +14681,7 @@ class ApiControllerv2 extends Controller
         //     }
         try {
             // $get_data = TextData::where('tags', 'LIKE', "%$search%")->where('static_information', '!=', '')->get();
-
+            
             $get_data = TextData::where('is_visible', 1)
             ->where(function ($query) use ($search) {
                 $query->where('tags', 'LIKE', "%$search%")
