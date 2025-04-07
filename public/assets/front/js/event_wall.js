@@ -1032,7 +1032,7 @@ $(document).ready(function () {
     $(".option-add-btn").on("click", function () {
         const pollOptionsContainer = $(".poll-options");
         const optionCount = pollOptionsContainer.children().length + 1;
-
+console.log(optionCount);
         const newOption = $(`
             <div class="mb-3 option-poll">
                 <label class="form-label d-flex align-items-center justify-content-between">
