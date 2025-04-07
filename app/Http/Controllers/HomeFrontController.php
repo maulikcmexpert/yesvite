@@ -199,7 +199,7 @@ class HomeFrontController extends BaseController
                         })
                         ->values();
 
-        // dd($textdatas);
+        dd($textdatas);
         
         
         // Calculate total count of textdatas across all subcategories
