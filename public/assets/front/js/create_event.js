@@ -11190,6 +11190,15 @@ $(".new-create-account-close-btn").on("click", function (e) {
     // $(".new-event-sidebar-wrp").show();
 });
 
+$(".cancel-login").on("click", function (e) {
+
+
+       $(".new_login_page, .new_login").hide(); // Hide both elements
+       $(".step_2").show();
+
+       $(".new-event-sidebar-wrp").show();
+   });
+
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
