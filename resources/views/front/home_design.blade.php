@@ -130,6 +130,7 @@
                         foreach ($subcategory->textdatas as $image) {
                             $randomIds[] = $image->id;
                                         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
+                                        $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
 
                             $allImages->push([
                                 'imageId' => $image->id,
@@ -145,7 +146,9 @@
                                 'tags' => $image->tags,
                                 'is_visible' => $image->is_visible,
                                 'category_id' => $category->id,
-                                'subcategory_id' => $subcategory->id,
+                                // 'subcategory_id' => $subcategory->id,
+                                'subcategory_id' => $relatedSubcategoryIds,
+                                
                                 'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
