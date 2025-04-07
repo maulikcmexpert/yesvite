@@ -61,7 +61,7 @@
                                         <div class="wall-post-content">
                                             @foreach ($postList as $post)
                                                 <div class="event-posts-main-wrp common-div-wrp hidden_post delete_post_container"
-                                                    data-post-id="{{ $post['id'] }}" >
+                                                    data-post-id="{{ $post['id'] }}"  id="scroll_{{$post['id']}}">
 
                                                     <div class="posts-card-wrp guest-user-list">
                                                         <div class="posts-card-head">
