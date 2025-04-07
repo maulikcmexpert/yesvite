@@ -1755,6 +1755,7 @@
             );
 
             $("#registerEvent").validate({
+                ignore: [], // include hidden fields like g-recaptcha-response
                 rules: {
                     firstname: {
                         required: true
