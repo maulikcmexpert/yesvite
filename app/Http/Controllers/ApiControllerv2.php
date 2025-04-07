@@ -3429,7 +3429,10 @@ class ApiControllerv2 extends Controller
 
             if ($input['category_id'] != 0) {
 
-                $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->where('static_information', '!=', '')->get();
+                // $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->where('static_information', '!=', '')->get();
+                $event_design = TextData::whereHas('subcategories', function($query) use ($categoryId) {
+                    $query->where('event_design_category_id', $categoryId);
+                })->where('static_information', '!=', '')->get();
             }
 
             $designList = [];
