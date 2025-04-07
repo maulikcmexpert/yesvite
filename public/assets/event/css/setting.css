@@ -1255,6 +1255,19 @@
     background-color: var(--primaryColor);
     color: #fff;
 }
+.designModel .cancel-login {
+    background-color: transparent;
+    border: 1px solid var(--borderColor);
+    border-radius: 10px;
+    color: var(--secondryColor);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.designModel .cancel-login:hover {
+    background-color: var(--primaryColor);
+    color: #fff;
+}
 
 .designModel .cancel-createEvent-draft:hover {
     background-color: var(--primaryColor);
