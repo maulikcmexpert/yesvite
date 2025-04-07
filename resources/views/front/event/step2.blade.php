@@ -764,6 +764,7 @@
                 $(".image-item-new").hide(); // Hide new items initially
 
                 $('input[name="design_subcategory"]:checked').each(function() {
+                    alert();
                     const categoryId = $(this).data("category-id");
                     const subcategoryId = $(this).data("subcategory-id");
 
