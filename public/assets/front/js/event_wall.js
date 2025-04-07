@@ -1787,7 +1787,7 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
     $("#pollForm")[0].reset(); // Reset poll form
     $(this).find("form")[0].reset();
-
+    renumberOptions();
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
