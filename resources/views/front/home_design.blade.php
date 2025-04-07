@@ -127,43 +127,67 @@
                 $randomIds = [];
                 $processedImageIds = [];
 
-                foreach ($categories as $category) {
-                    foreach ($category->subcategory as $subcategory) {
-                        foreach ($subcategory->textdatas as $image) {
-                            if (in_array($image->id, $processedImageIds)) {
-                                continue;
-                            }
+                // dd($textdatatss);
+                foreach ($textdatatss as $category) {
+                            $randomIds[] = $category['imageId'];
 
-                            $processedImageIds[] = $image->id;
-                            $randomIds[] = $image->id;
-                            $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
-                            $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
-
-                            $allImages->push([
-                                'imageId' => $image->id,
-
-                                'subcategory_name' =>$relatedSubcategoryNames,
+                    $allImages->push([
+                                'imageId' => $category['imageId'],
+                                'subcategory_name' =>$category['subcategory_name'],
                                 // 'subcategory_name' =>$subcategory->subcategory_name,
-
-                                'static_information' => json_encode($image->static_information),
+                                'static_information' => json_encode($category['static_information']),
                                 'shape_image' =>
-                                    $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-
-                                'image' => asset('storage/canvas/' . $image->image),
-                                'tags' => $image->tags,
-                                'is_visible' => $image->is_visible,
-                                'category_id' => $category->id,
+                                    $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
+                                'image' => asset('storage/canvas/' . $category['image']),
+                                'tags' => $category['tags'],
+                                'is_visible' => $category['is_visible'],
+                                'category_id' => $category['id'],
                                 // 'subcategory_id' => $subcategory->id,
                                 // 'subcategory_id' => $relatedSubcategoryIds,
                                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+<<<<<<< HEAD
                                 'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
 
 
                                 'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
+=======
+                                // 'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
+                                'category_name' => $category['category_name'],
+                                'image_path' => asset('storage/canvas/' . $category['filled_image']),
+>>>>>>> d5a811e79e05924836ea12d7e574a9c4df93b0b1
                             ]);
-                        }
-                    }
+                    // foreach ($category->subcategory as $subcategory) {
+                    //     foreach ($subcategory->textdatas as $image) {
+                    //         if (in_array($image->id, $processedImageIds)) {
+                    //             continue;
+                    //         }
+
+                    //         $processedImageIds[] = $image->id;
+                    //         $randomIds[] = $image->id;
+                    //         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
+                    //         $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
+
+                    //         $allImages->push([
+                    //             'imageId' => $image->id,
+                    //             'subcategory_name' =>$relatedSubcategoryNames,
+                    //             // 'subcategory_name' =>$subcategory->subcategory_name,
+                    //             'static_information' => json_encode($image->static_information),
+                    //             'shape_image' =>
+                    //                 $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                    //             'image' => asset('storage/canvas/' . $image->image),
+                    //             'tags' => $image->tags,
+                    //             'is_visible' => $image->is_visible,
+                    //             'category_id' => $category->id,
+                    //             // 'subcategory_id' => $subcategory->id,
+                    //             // 'subcategory_id' => $relatedSubcategoryIds,
+                    //             // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                    //             'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
+                    //             'category_name' => $category->category_name,
+                    //             'image_path' => asset('storage/canvas/' . $image->filled_image),
+                    //         ]);
+                    //     }
+                    // }
                 }
 
                 shuffle($randomIds);
