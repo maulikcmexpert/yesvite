@@ -157,24 +157,31 @@ class HomeFrontController extends BaseController
         // ->get();
 
         
-        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1');
-            }, '>=', 0); // Change to >= 0 to include subcategories with or without textdatas
-        })
-        ->with([
+        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas', function ($q) {
+        //         $q->where('is_visible', '1');
+        //     }, '>=', 0); // Change to >= 0 to include subcategories with or without textdatas
+        // })
+        // ->with([
+        //     'subcategory' => function ($query) {
+        //         $query->with([
+        //             'textdatas' => function ($q) {
+        //                 $q->where('is_visible', '1');
+        //             },
+        //             'textdatas.subcategories'
+        //         ]);
+        //     }
+        // ])
+        // ->orderBy('id', 'ASC')
+        // ->get();
+
+        $categories = EventDesignCategory::with([
             'subcategory' => function ($query) {
-                $query->with([
-                    'textdatas' => function ($q) {
-                        $q->where('is_visible', '1');
-                    },
-                    'textdatas.subcategories'
-                ]);
+                $query->with('textdatas','textdatas.subcategories'); // Remove the where clause here.
             }
         ])
         ->orderBy('id', 'ASC')
         ->get();
-        
         // Calculate total count of textdatas across all subcategories
         // $totalTextDataCount = $categories->sum(
         //     fn($category) =>
