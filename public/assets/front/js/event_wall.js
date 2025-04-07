@@ -1070,7 +1070,7 @@ console.log(optionCount);
         $(".poll-options .option-poll").each(function (index) {
             $(this)
                 .find(".option-number")
-                .text(index + 3);
+                .text(index + 1);
             $(this).find(".char-count").text("0/140"); // Reset char count
         });
     }
