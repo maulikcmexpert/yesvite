@@ -1757,14 +1757,14 @@ $(document).ready(function () {
         });
     });
 
-    function renumberOptions() {
-        $(".poll-options .option-poll").each(function (index) {
-            $(this)
-                .find(".option-number")
-                .text(index + 3);
-            $(this).find(".char-count").text("0/140"); // Reset char count
-        });
-    }
+    // function renumberOptions() {
+    //     $(".poll-options .option-poll").each(function (index) {
+    //         $(this)
+    //             .find(".option-number")
+    //             .text(index + 3);
+    //         $(this).find(".char-count").text("0/140"); // Reset char count
+    //     });
+    // }
     function updateCharCount(inputField) {
         const maxLength = 140;
         const charCount = $(inputField).val().length;
@@ -1783,6 +1783,14 @@ $(document).ready(function () {
 
     }
 });
+function renumberOptions() {
+    $(".poll-options .option-poll").each(function (index) {
+        $(this)
+            .find(".option-number")
+            .text(index + 3);
+        $(this).find(".char-count").text("0/140"); // Reset char count
+    });
+}
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
     $("#pollForm")[0].reset(); // Reset poll form
