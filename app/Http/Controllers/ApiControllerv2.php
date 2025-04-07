@@ -3430,24 +3430,41 @@ class ApiControllerv2 extends Controller
             if ($input['category_id'] != 0) {
 
                 // $event_design = TextData::where('event_design_sub_category_id', $input['category_id'])->where('static_information', '!=', '')->get();
-                $event_design = TextData::whereHas('subcategories', function ($query) use ($input) {
-                    $query->where('id', $input['category_id']); // this is the subcategory ID
-                })
-                ->where('static_information', '!=', '')->get();
-            
+                // $event_design = TextData::whereHas('subcategories', function ($query) use ($input) {
+                //     $query->where('id', $input['category_id']); // this is the subcategory ID
+                // })
+                // ->where('static_information', '!=', '')->get();
+
+                    if ($input['category_id'] != 0) {
+                        $event_design->whereHas('subcategories', function ($query) use ($input) {
+                            $query->where('id', $input['category_id']);
+                        });
+                    }
             }
 
             $designList = [];
             if (count($event_design) != 0) {
                 foreach ($event_design as $data) {
-                    $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
-                    $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
-                    $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
-                    $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
-                    $template_data['height'] = (isset($data->width) && $data->width != null) ? $data->width : '';
-                    $template_data['width'] = (isset($data->height) && $data->height != null) ? $data->height : '';
-                    $url = asset('storage/canvas/' . $data->filled_image);
-                    $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
+                                // Get subcategory IDs from the pivot table (textdata_subcategories)
+                    $subcategoryIds = $data->subcategories->pluck('id')->toArray();
+
+                    $template_data = [
+                        'id' => $data->id ?? '',
+                        'event_design_sub_category_ids' => $subcategoryIds, // Get subcategory IDs as an array
+                        'event_design_category_id' => $data->event_design_category_id ?? '',
+                        'image' => $data->image ?? '',
+                        'height' => $data->width ?? '',
+                        'width' => $data->height ?? '',
+                        'template_url' => asset('storage/canvas/' . $data->filled_image) ?? '',
+                    ];
+                    // $template_data['id'] = (isset($data->id) && $data->id != null) ? $data->id : '';
+                    // $template_data['event_design_sub_category_id'] = (isset($data->event_design_sub_category_id) && $data->event_design_sub_category_id  != null) ? $data->event_design_sub_category_id : '';
+                    // $template_data['event_design_category_id'] = (isset($data->event_design_category_id) && $data->event_design_category_id != null) ? $data->event_design_category_id : '';
+                    // $template_data['image'] = (isset($data->image) && $data->image != null) ? $data->image : '';
+                    // $template_data['height'] = (isset($data->width) && $data->width != null) ? $data->width : '';
+                    // $template_data['width'] = (isset($data->height) && $data->height != null) ? $data->height : '';
+                    // $url = asset('storage/canvas/' . $data->filled_image);
+                    // $template_data['template_url'] = (isset($url) && $url != null) ? $url : '';
                     // $template_data['textData'] = (isset($data->static_information) && $data->static_information != null) ? $data->static_information : '';
                     $designList[] = $template_data;
                 }
