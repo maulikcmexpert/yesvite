@@ -15,7 +15,8 @@ use App\Models\{
     EventDesignCategory,
     EventImage,
     UserNotificationType,
-    UserProfilePrivacy
+    UserProfilePrivacy,
+    TextData
 };
 use Illuminate\Support\Facades\Session;
 use App\Services\CSVImportService;
