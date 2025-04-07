@@ -11181,12 +11181,13 @@ $("#create_event_register").on("click", function (e) {
     $("#registerEvent").removeClass("d-none"); // Hide registration form
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
-// $(".new-create-account-close-btn").on("click", function (e) {
-//     $(".new_login_page, .new_login").hide(); // Hide both elements
-//     $("#edit-design-temp").show();
+$(".new-create-account-close-btn").on("click", function (e) {
+    $("#loginModel").show(); // Hide r
+    // $(".new_login_page, .new_login").hide(); // Hide both elements
+    // $("#edit-design-temp").show();
 
-//     $(".new-event-sidebar-wrp").show();
-// });
+    // $(".new-event-sidebar-wrp").show();
+});
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
