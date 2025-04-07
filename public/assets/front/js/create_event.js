@@ -11188,6 +11188,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
 
     // $(".new-event-sidebar-wrp").show();
 });
+
 async function handleLoginSuccess(response) {
     if (response.success) {
         setTimeout(() => {
