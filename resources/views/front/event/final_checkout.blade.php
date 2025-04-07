@@ -1106,7 +1106,7 @@
                 <a href="{{ route('home') }}" class="btn cancel-btn">Done</a>
                 {{-- <button type="button" class="btn cancel-btn" data-bs-dismiss="modal">Done</button> --}}
                 {{-- <button type="button" class="btn continue-btn">See Invite</button> --}}
-                <a href="#" id="final_see_invite_btn" class="btn continue-btn">Go to Event</a>
+                <a href="#" id="final_see_invite_btn" class="btn continue-btn">Go to event</a>
             </div>
         </div>
     </div>
