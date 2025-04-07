@@ -194,12 +194,12 @@ class HomeFrontController extends BaseController
                                 'subcategory_name' => $textdata->subcategories
                                     ->pluck('subcategory_name')
                                     ->unique()
-                                    ->implode(', '),
+                                    ->implode(','),
                                     
                                 'subcategory_id' => $textdata->subcategories
                                     ->pluck('id')
                                     ->unique()
-                                    ->implode(', '),
+                                    ->implode(','),
                             ];
                         })
                         ->values();
