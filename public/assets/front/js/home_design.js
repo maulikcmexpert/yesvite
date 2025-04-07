@@ -106,7 +106,7 @@ $(document).ready(function () {
                         imgCategoryId == categoryId &&
                         imgSubcategoryIds.includes(subcategoryId.toString())
                     ) {
-                        alert();
+                        // alert();
                         // $(this).removeClass("d-none");      
                         // $(this).show();
                         $(this).show();
