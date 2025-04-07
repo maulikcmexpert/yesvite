@@ -68921,6 +68921,10 @@ a.text-muted:hover {
 
 .edit_subcategory_drp br{
     display: none;
+ 
+}
+
+.edit_subcategory_drp .inner-wrap{
     max-height: 150px;
     overflow-y: scroll;
 }
