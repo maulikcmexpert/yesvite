@@ -1013,12 +1013,12 @@ $(document).ready(function () {
     // Update character count on input change
     $("#pollForm").on("input", "input.form-control", function () {
         updateCharCount(this); // Update char count
-        validateForm(); // Revalidate the form
+        //validateForm(); // Revalidate the form
     });
 
     // Update form validation on select change
     $("#pollForm").on("change", "select", function () {
-        validateForm();
+        //validateForm();
     });
 
     // Add new poll option dynamically
@@ -1106,8 +1106,11 @@ $(document).ready(function () {
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
             if (pollForm && pollForm.length < 0 && postContent === "") {
-                toastr.error("Please filled the poll form.");
+
+              if (!validateForm()) {
+                toastr.error("Please fill all required poll fields.");
                 return;
+            }
             }
             // Show the loader inside the button
             $this
