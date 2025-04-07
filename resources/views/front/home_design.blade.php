@@ -158,7 +158,7 @@
                                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
                                 'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
 
-                                
+
                                 'category_name' => $category->category_name,
                                 'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
