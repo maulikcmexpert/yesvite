@@ -974,16 +974,29 @@ $(document).ready(function () {
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
-        $("#pollForm input[required], #pollForm select[required]").each(
-            function () {
-                if ($.trim($(this).val()) === "") {
-                    isValid = false;
-                    return false; // Break loop
+        let firstInvalidField = null;
+
+        $("#pollForm input[required], #pollForm select[required]").each(function () {
+            if ($.trim($(this).val()) === "") {
+                isValid = false;
+                if (!firstInvalidField) {
+                    firstInvalidField = $(this);
                 }
+                const label = $(this).closest(".mb-3").find("label").text().trim();
+                toastr.error(`${label} is required.`);
+                return false; // Stop loop
             }
-        );
+        });
+
         $(".create_post_btn").prop("disabled", !isValid);
+
+        if (!isValid && firstInvalidField) {
+            firstInvalidField.focus();
+        }
+
+        return isValid;
     }
+
 
     // Apply the maxlength limit and validate form on input load
     $("input.form-control").each(function () {
@@ -997,12 +1010,12 @@ $(document).ready(function () {
     // Update character count on input change
     $("#pollForm").on("input", "input.form-control", function () {
         updateCharCount(this); // Update char count
-        validateForm(); // Revalidate the form
+        //validateForm(); // Revalidate the form
     });
 
     // Update form validation on select change
     $("#pollForm").on("change", "select", function () {
-        validateForm();
+        //validateForm();
     });
 
     // Add new poll option dynamically
@@ -1089,11 +1102,11 @@ $(document).ready(function () {
 
         if (pollForm.is(":visible") && pollForm.length > 0) {
             document.getElementById("pollContent").value = postContent;
-            if (pollForm && pollForm.length < 0 && postContent === "") {
-                toastr.error("Please filled the poll form.");
-                return;
-            }
-            // Show the loader inside the button
+
+            // ✅ Validate poll form here
+
+
+            // ✅ Show loader only if form is valid
             $this
                 .html(
                     '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
