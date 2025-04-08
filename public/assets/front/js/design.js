@@ -678,8 +678,22 @@ $(document).on("click", ".edit_design_tem", function (e) {
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-            await bindData(current_event_id);
-         setTimeout(() => $("#loader").css("display", "none"), 500);
+
+    try {
+        // Wait for bindData to finish rendering
+        await bindData(current_event_id);
+
+        // Wait until the main image finishes loading
+        await waitForImageLoad(".image-edit-inner-img");
+
+        // All done – hide loader
+        $("#loader").css("display", "none");
+
+    } catch (error) {
+        console.error("Error during binding or image load:", error);
+        $("#loader").css("display", "none"); // fallback to hide anyway
+    }
+
 
         },
         error: function (xhr, status, error) {
@@ -687,6 +701,22 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
+function waitForImageLoad(selector) {
+    return new Promise((resolve, reject) => {
+        const img = document.querySelector(selector);
+        if (!img) return reject("Image element not found");
+
+        if (img.complete && img.naturalHeight !== 0) {
+            // Already loaded
+            resolve();
+        } else {
+            // Wait until it loads
+            img.onload = () => resolve();
+            img.onerror = () => reject("Image failed to load");
+        }
+    });
+}
+
 fontloadedEnsure = false;
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
