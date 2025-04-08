@@ -213,7 +213,6 @@
                 var subcategoryData = {
                     id: {{ $subcategory->id }},
                     name: "{{ $subcategory->subcategory_name }}",
-                    images: []
                 };
 
                 // @foreach ($subcategory->textdatas as $image)
