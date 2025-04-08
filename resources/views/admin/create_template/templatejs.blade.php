@@ -462,7 +462,7 @@
 
     $(document).ready(function () {
         $('.bootstrap-tagsinput input').on('input', function () {
-        alert('This is bootstrap tags');
+        // alert('This is bootstrap tags');
     });
 }); 
 </script>
