@@ -11183,12 +11183,12 @@ $("#create_event_register").on("click", function (e) {
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
 $(".new-create-account-close-btn").on("click", function (e) {
-
+    $(".login_img img").attr("src", "");
+    $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
  $("#loginModel").modal("show"); // Hide r
     // $(".new_login_page, .new_login").hide(); // Hide both elements
     // $("#edit-design-temp").show();
-    $(".login_img img").attr("src", "");
-    $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
+
     // $(".new-event-sidebar-wrp").show();
 });
 
