@@ -461,7 +461,7 @@
     });
 
     $(document).ready(function () {
-    $('#tags').on('input', function () {
+        $('.bootstrap-tagsinput input').on('input', function () {
         alert('This is bootstrap tags');
     });
 }); 
