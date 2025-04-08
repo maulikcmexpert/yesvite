@@ -38,24 +38,28 @@ $(document).ready(function () {
                 );
                 return;
             }
-            // const input1 = document.getElementById("fileInput");
-            // const input2 = document.getElementById("fileInput2");
-            // if (!input1 || !input2) {
-            //     console.error("One or both file input elements are missing");
-            //     return;
-            // }
+            const input1 = document.getElementById("fileInput");
+            const input2 = document.getElementById("fileInput2");
+            if (!input1 || !input2) {
+                console.error("One or both file input elements are missing");
+                return;
+            }
+            const combinedInput = document.getElementById("combinedFilesInput");
+            const dataTransfer = new DataTransfer();
 
-            // const dataTransfer = new DataTransfer();
+            for (let i = 0; i < input1.files.length; i++) {
+                dataTransfer.items.add(input1.files[i]);
+            }
 
-            // for (let i = 0; i < input1.files.length; i++) {
-            //     dataTransfer.items.add(input1.files[i]);
-            // }
+            for (let i = 0; i < input2.files.length; i++) {
+                dataTransfer.items.add(input2.files[i]);
+            }
 
-            // for (let i = 0; i < input2.files.length; i++) {
-            //     dataTransfer.items.add(input2.files[i]);
-            // }
+            combinedInput.files = dataTransfer.files;
 
-            // input1.files = dataTransfer.files;
+            // Clear the originals to avoid duplication
+            input1.value = "";
+            input2.value = "";
             $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
             photoForm.submit();
         }
