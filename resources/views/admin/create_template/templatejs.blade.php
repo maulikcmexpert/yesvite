@@ -460,7 +460,7 @@
         });
     });
 
-    $(document).ready(function () {
+    // $(document).ready(function () {
         const rawData = $('#designData').val();
         const designData = JSON.parse(rawData);
 
