@@ -294,39 +294,117 @@ $(document).ready(function () {
     //     // $('#filtered_results').html(results);
     // });
 
+    // $("#search_design_category").on("keyup", function () {
+    //     let query = $(this).val().toLowerCase().trim();
+    //     let results = "";
+    //     if (query.length > 0) {
+    //         let visibleCount = 0;
+    
+    //         $(".image-item").each(function () {
+    //             let tags = $(this).data("tags")
+    //                 ? $(this).data("tags").toLowerCase().split(",")
+    //                 : [];
+    //             let subcategories = $(this).data("subcategory_name")
+    //                 ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+    //                 : [];
+    //             let category = $(this).data("category_name")
+    //                 ? $(this).data("category_name").toLowerCase()
+    //                 : "";
+    
+    //             // Check if any of the search criteria match
+    //             let matches = tags.some((tag) => tag.includes(query)) ||
+    //                 subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
+    //                 category.includes(query);
+    
+    //             if (matches) {
+    //                 $(this).show();
+    //                 $(this).removeClass("d-none");
+    //                 $(this).removeClass("fadeInDown");
+    //                 $(this).css("visibility", "visible");
+    //                 $(this).removeClass("wow");
+    //                 $(this).removeClass("d-none").fadeIn();
+    //                 visibleCount++;
+    //             } else {
+    //                 $(this).hide();
+    //                 $(this).fadeOut().addClass("d-none");
+    //             }
+    //         });
+    
+    //         console.log("Total Visible Items:", visibleCount);
+    //         $(".total_design_count").text(visibleCount + " Items");
+    
+    //         if (visibleCount > 0) {
+    //             $("#filtered_results").hide();
+    //         } else {
+    //             $("#filtered_results").show();
+    //         }
+    
+    //         if ($(".image-item:visible").length === 0) {
+    //             $(".total_design_count").text(
+    //                 $(".image-item:visible").length + " Items"
+    //             );
+    
+    //             results += `<div class="search-item no-data">No Data Found</div>`;
+    //             $("#filtered_results").show();
+    //             $("#filtered_results").html(results);
+    //         }
+    //     } else {
+    //         $(".image-item").removeClass("d-none fadeInDown wow").show();
+    //         let allItems = $(".image-item");
+    //         if (allItems.length > 30) {
+    //             allItems.slice(30).addClass("d-none").hide();
+    //         }
+    //         $(".total_design_count").text(
+    //             $(".image-item:visible").length + " Items"
+    //         );
+    //         $("#filtered_results").hide();
+    //     }
+    // });
     $("#search_design_category").on("keyup", function () {
         let query = $(this).val().toLowerCase().trim();
-        let results = "";
+        let resultsHtml = "";
+        let visibleCount = 0;
+        const suggestionLimit = 5; // Limit the number of suggestions
+    
         if (query.length > 0) {
-            let visibleCount = 0;
+            let suggestedKeywords = new Set(); // Use a Set to avoid duplicate suggestions
     
             $(".image-item").each(function () {
                 let tags = $(this).data("tags")
                     ? $(this).data("tags").toLowerCase().split(",")
                     : [];
                 let subcategories = $(this).data("subcategory_name")
-                    ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+                    ? $(this).data("subcategory_name").toLowerCase().split(",")
                     : [];
                 let category = $(this).data("category_name")
                     ? $(this).data("category_name").toLowerCase()
                     : "";
     
-                // Check if any of the search criteria match
                 let matches = tags.some((tag) => tag.includes(query)) ||
-                    subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
+                    subcategories.some((subcategory) => subcategory.includes(query)) ||
                     category.includes(query);
     
                 if (matches) {
                     $(this).show();
-                    $(this).removeClass("d-none");
-                    $(this).removeClass("fadeInDown");
-                    $(this).css("visibility", "visible");
-                    $(this).removeClass("wow");
-                    $(this).removeClass("d-none").fadeIn();
+                    $(this).removeClass("d-none fadeInDown wow").css("visibility", "visible").fadeIn();
                     visibleCount++;
+    
+                    // Add matching keywords to suggestions
+                    tags.forEach(tag => {
+                        if (tag.includes(query) && suggestedKeywords.size < suggestionLimit) {
+                            suggestedKeywords.add(tag.trim());
+                        }
+                    });
+                    subcategories.forEach(subcategory => {
+                        if (subcategory.includes(query) && suggestedKeywords.size < suggestionLimit) {
+                            suggestedKeywords.add(subcategory.trim());
+                        }
+                    });
+                    if (category.includes(query) && suggestedKeywords.size < suggestionLimit) {
+                        suggestedKeywords.add(category.trim());
+                    }
                 } else {
-                    $(this).hide();
-                    $(this).fadeOut().addClass("d-none");
+                    $(this).hide().fadeOut().addClass("d-none");
                 }
             });
     
@@ -334,19 +412,35 @@ $(document).ready(function () {
             $(".total_design_count").text(visibleCount + " Items");
     
             if (visibleCount > 0) {
-                $("#filtered_results").hide();
+                $("#filtered_results").empty().hide(); // Clear previous results and hide
             } else {
-                $("#filtered_results").show();
+                resultsHtml += '<div class="search-item no-data">No Data Found</div>';
+                $("#filtered_results").html(resultsHtml).show();
             }
     
-            if ($(".image-item:visible").length === 0) {
-                $(".total_design_count").text(
-                    $(".image-item:visible").length + " Items"
-                );
+            // Display suggestions if no direct matches are found
+            if (visibleCount === 0 && suggestedKeywords.size > 0) {
+                resultsHtml = '<div class="suggestions">Suggestions:</div><ul>';
+                suggestedKeywords.forEach(keyword => {
+                    resultsHtml += `<li class="suggestion-item">${keyword}</li>`;
+                });
+                resultsHtml += '</ul>';
+                $("#filtered_results").html(resultsHtml).show();
     
-                results += `<div class="search-item no-data">No Data Found</div>`;
-                $("#filtered_results").show();
-                $("#filtered_results").html(results);
+                // Add click event to suggestion items to populate the search box
+                $(".suggestion-item").on("click", function() {
+                    $("#search_design_category").val($(this).text());
+                    $("#search_design_category").trigger("keyup"); // Trigger keyup to perform search
+                    $("#filtered_results").hide(); // Hide suggestions after selection
+                });
+            } else if (visibleCount > 0) {
+                $("#filtered_results").hide();
+            }
+    
+            if ($(".image-item:visible").length === 0 && suggestedKeywords.size === 0) {
+                $(".total_design_count").text($(".image-item:visible").length + " Items");
+                resultsHtml = '<div class="search-item no-data">No Data Found</div>';
+                $("#filtered_results").html(resultsHtml).show();
             }
         } else {
             $(".image-item").removeClass("d-none fadeInDown wow").show();
@@ -354,9 +448,7 @@ $(document).ready(function () {
             if (allItems.length > 30) {
                 allItems.slice(30).addClass("d-none").hide();
             }
-            $(".total_design_count").text(
-                $(".image-item:visible").length + " Items"
-            );
+            $(".total_design_count").text($(".image-item:visible").length + " Items");
             $("#filtered_results").hide();
         }
     });
