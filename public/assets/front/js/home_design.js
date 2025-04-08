@@ -489,20 +489,20 @@ $(document).ready(function () {
     
                 // Match category
                 if (category.includes(query)) {
-                    suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">${category}</div>`);
+                    suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">Category: ${category}</div>`);
                 }
     
                 // Match subcategories
                 subcategories.forEach(subcat => {
                     if (subcat.includes(query)) {
-                        suggestionSet.add(`<div class="search-item subcategory" data-name="${subcat}" data-category-id="${categoryId}" data-id="${subcategoryId}">${subcat}</div>`);
+                        suggestionSet.add(`<div class="search-item subcategory" data-name="${subcat}" data-category-id="${categoryId}" data-id="${subcategoryId}">Sub Category: ${subcat}</div>`);
                     }
                 });
     
                 // Match tags
                 tags.forEach(tag => {
                     if (tag.includes(query)) {
-                        suggestionSet.add(`<div class="search-item tag" data-name="${tag}">${tag}</div>`);
+                        suggestionSet.add(`<div class="search-item tag" data-name="${tag}">Tags: ${tag}</div>`);
                     }
                 });
             });
