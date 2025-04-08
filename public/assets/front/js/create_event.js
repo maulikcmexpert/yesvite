@@ -5774,6 +5774,7 @@ enforceCheckboxLimit();
 
 function toggleSidebar(id = null) {
     console.log(id);
+    return;
     if (id == "sidebar_add_co_host") {
         document.body.classList.add("no-scroll"); // Disable background scrolling
     }
