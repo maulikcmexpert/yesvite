@@ -483,8 +483,10 @@ $(".back-btn").on("click", function () {
     $(".create-post-main-body").removeClass("d-none");
 });
 
+let storedFiles = [];
 $(document).on("change", ".fileInputtype", function (event) {
     handleFiles(event.target.files, event.target);
+
 });
 
 function handleFiles(files, currentFileInput) {
@@ -497,7 +499,10 @@ function handleFiles(files, currentFileInput) {
         uploadHeadButton.classList.remove("d-none");
     }
 
+
     Array.from(files).forEach((file) => {
+        storedFiles.push(file);
+
         const fileReader = new FileReader();
         fileReader.onload = function (e) {
             const previewDiv = document.createElement("div");

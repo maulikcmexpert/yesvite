@@ -637,7 +637,7 @@
                                 <div>
                                     <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
+                                        <input type="file" id="fileInput2" class="fileInputtype"
                                             accept="image/*,video/*" multiple></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -696,7 +696,7 @@
                                     <p>or drag and drop here</p>
                                     <button type="button" class="uploadButton">Upload
                                         <input type="file" id="fileInput" class="fileInputtype"
-                                            accept="image/*,video/*" name="files[]" multiple></button>
+                                            accept="image/*,video/*"  multiple></button>
                                 </div>
                                 <div class="create-post-uploaded-images">
                                     <div class="row" id="imagePreview">
