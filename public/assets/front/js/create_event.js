@@ -9150,7 +9150,7 @@ $(document).on("change", ".slider_photo", async function (event) {
 
     }
 
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition = 1;
         var existingIndex = imageSources.findIndex(
             (img) => img.image_position === imagePosition
@@ -9203,7 +9203,7 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         // }, 500);
 
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition2 = 2;
         var existingIndex2 = imageSources.findIndex(
             (img) => img.image_position === imagePosition2
@@ -9247,7 +9247,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         // updateAllPhotoSliders();
 
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition3 = 3;
         var existingIndex3 = imageSources.findIndex(
             (img) => img.image_position === imagePosition3
@@ -9365,7 +9365,7 @@ function getLengthofSliderImage() {
     });
     $(".slider_image_count").text(i + "/3 Photos");
 }
-function savePhotoSlider(){
+async function savePhotoSlider(){
     if(eventId!=""){
         imageSources = [];
         $(".slider_img").each(function () {
