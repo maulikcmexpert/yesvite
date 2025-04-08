@@ -678,8 +678,18 @@ $(document).on("click", ".edit_design_tem", function (e) {
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-            await bindData(current_event_id);
-        //  setTimeout(() => $("#loader").css("display", "none"), 500);
+               // 2. Run bindData
+    console.log("🧠 Running bindData...");
+    await bindData(current_event_id);
+    console.log("✅ bindData complete");
+
+    // 3. Wait for all images (tag images and background images) to load
+    console.log("🧠 Waiting for images to load...");
+    await waitForAllImagesToLoad("#edit-design-temp");
+    console.log("✅ All images loaded");
+
+    // 4. Finally, hide the loader
+    $("#loader").css("display", "none");
 
         },
         error: function (xhr, status, error) {
@@ -687,24 +697,43 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
-function waitForImagesToLoad(containerSelector) {
+async function waitForAllImagesToLoad(containerSelector) {
     const container = document.querySelector(containerSelector);
+    if (!container) return;
+
     const images = container.querySelectorAll("img");
-    const promises = Array.from(images).map((img) => {
-        $("#loader").css("display", "none");
-        return new Promise((resolve, reject) => {
+    const bgPromises = [];
+
+    container.querySelectorAll("*").forEach(el => {
+        const bgImage = window.getComputedStyle(el).backgroundImage;
+        if (bgImage && bgImage !== 'none') {
+            const url = bgImage.match(/url\(["']?(.*?)["']?\)/);
+            if (url && url[1]) {
+                const img = new Image();
+                const p = new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                    img.src = url[1];
+                });
+                bgPromises.push(p);
+            }
+        }
+    });
+
+    const imgPromises = Array.from(images).map(img => {
+        return new Promise(resolve => {
             if (img.complete && img.naturalHeight !== 0) {
                 resolve();
             } else {
-                img.onload = () => resolve();
-                img.onerror = () => reject("Image failed to load: " + img.src);
+                img.onload = resolve;
+                img.onerror = resolve;
             }
         });
-
     });
 
-    return Promise.all(promises);
+    return Promise.all([...imgPromises, ...bgPromises]);
 }
+
 
 fontloadedEnsure = false;
 async function bindData(current_event_id) {
