@@ -499,7 +499,8 @@ const query = $(this).val().toLowerCase();
                 results = `<div class="search-item">No Data Found</div>`;
             }
         }
-
+        console.log(results);
+        
         $('#filtered_results').html(results);
     });
 </script>
