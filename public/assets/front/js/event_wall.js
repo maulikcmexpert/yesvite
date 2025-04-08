@@ -1070,7 +1070,7 @@ console.log(optionIndex);
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
-            newOption.next(".option-error").remove();
+            $(".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
