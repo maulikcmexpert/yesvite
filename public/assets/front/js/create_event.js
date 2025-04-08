@@ -5532,7 +5532,7 @@ $(document).on("click", ".li_event_details", async function () {
             const imageResponse = await uploadImage(capturedBlob);
 
             localStorage.setItem("final_upload_image", imageResponse.image);
-
+            var zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
             if (capturedBlob) {
                 var slider = $(".create-account-slider.slider_login");
 
@@ -5559,7 +5559,7 @@ $(document).on("click", ".li_event_details", async function () {
                     </div>
                 `;
                 slider.append(newItem);
-                    let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+
 
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
