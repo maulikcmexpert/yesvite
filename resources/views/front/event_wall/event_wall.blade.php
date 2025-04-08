@@ -1327,7 +1327,7 @@
                                                 <input type="text" name="options[]" class="form-control"
                                                     id="yourquestion" placeholder="" required>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 option_new">
                                                 <label for="yourquestion"
                                                     class="form-label d-flex align-items-center justify-content-between">Option
                                                     2*

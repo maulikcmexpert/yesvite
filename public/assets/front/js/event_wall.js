@@ -1069,7 +1069,7 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
-            (".option-error").remove();
+            $(".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
