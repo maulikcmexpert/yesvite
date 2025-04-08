@@ -1005,7 +1005,7 @@ $(document).ready(function () {
 
             if (val === "") {
                 inputWrapper.append(
-                    `<div class='option-error text-danger mt-1'>Option ${optionIndex} is required.</div>`
+                    `<div class='option-error text-danger mt-1' style="font-size: 12px">Option ${optionIndex} is required.</div>`
                 );
                 hasError = true;
             }
