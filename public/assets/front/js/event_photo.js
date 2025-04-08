@@ -25,7 +25,10 @@ $(document).ready(function () {
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
         var photoInput = document.querySelector(".fileInputtype");
-        var imagePreview = $("#imagePreview").children().length; // Che
+
+        var imagePreview = $("#imagePreview").children().length;
+        // Che
+        console.log(photoInput);
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
@@ -57,7 +60,7 @@ $(document).ready(function () {
 
             // input1.files = dataTransfer.files;
             $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
-            photoForm.submit();
+            // photoForm.submit();
         }
         // If neither form exists, check for a plain text post
         else if (textForm.length > 0 && postContent !== "") {
