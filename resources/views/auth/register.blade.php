@@ -99,6 +99,10 @@
                                             <label class="error">{{ $message }}</label>
                                             @enderror
                                         </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="text-start mt-1" id="passValidation">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -114,10 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="text-start mt-1" id="passValidation">
-                                    </div>
-                                </div>
+                               
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center">
                                     <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                                     <script src="https://www.google.com/recaptcha/api.js"></script>
