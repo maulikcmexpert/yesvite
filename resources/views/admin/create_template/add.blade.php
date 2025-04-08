@@ -232,5 +232,38 @@
         @endforeach
         console.log(designData);
 
+
+        const tagsInput = document.getElementById("tags");
+const resultsContainer = document.getElementById("filtered_results");
+
+tagsInput.addEventListener("keyup", function () {
+    const searchTerm = tagsInput.value.toLowerCase();
+    resultsContainer.innerHTML = ""; // clear previous results
+
+    if (searchTerm.trim() === "") return;
+
+    const matchedItems = [];
+
+    designData.forEach(cat => {
+        // Fix: use cat.name
+        if (cat.name.toLowerCase().includes(searchTerm)) {
+            matchedItems.push(`<div><strong>Category:</strong> ${cat.name}</div>`);
+        }
+
+        // Fix: use cat.subcategories and sub.name
+        cat.subcategories?.forEach(sub => {
+            if (sub.name.toLowerCase().includes(searchTerm)) {
+                matchedItems.push(`<div><strong>Subcategory:</strong> ${sub.name}</div>`);
+            }
+        });
+    });
+
+    if (matchedItems.length > 0) {
+        resultsContainer.innerHTML = matchedItems.join("");
+    } else {
+        resultsContainer.innerHTML = `<div>No results found.</div>`;
+    }
+});
+
     </script>
 {{-- @endpush --}}
