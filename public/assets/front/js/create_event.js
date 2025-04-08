@@ -11183,13 +11183,23 @@ $("#create_event_register").on("click", function (e) {
     $("#crateEventLogin").addClass("d-none"); // Show login form
 });
 $(".new-create-account-close-btn").on("click", function (e) {
+    // Show login modal
+    $("#loginModel").modal("show");
 
- $("#loginModel").modal("show"); // Hide r
-    // $(".new_login_page, .new_login").hide(); // Hide both elements
-    // $("#edit-design-temp").show();
+    // Clear the image src
+    $(".login_img img").attr("src", "");
 
+    // Optional: also clear image from slider
+    $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
+
+    // Optional: remove from localStorage if needed
+    localStorage.removeItem("final_upload_image");
+
+    // Hide other related elements if needed
+    // $(".new_login_page, .new_login").hide();
     // $(".new-event-sidebar-wrp").show();
 });
+
 
 $(".cancel-login").on("click", function (e) {
 

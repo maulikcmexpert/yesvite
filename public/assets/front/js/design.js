@@ -680,7 +680,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
-            $("#loader").css("display", "none");
+         setTimeout(() => $("#loader").css("display", "none"), 500);
+
         },
         error: function (xhr, status, error) {
             $("#loader").css("display", "none");
