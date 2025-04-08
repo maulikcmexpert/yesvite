@@ -1003,7 +1003,7 @@ $(document).ready(function () {
 
             // Get the current index from the DOM (accurate after adding/removing)
             const optionIndex = $(this).closest(".option-poll").find(".option-number").text();
-
+console.log(optionIndex);
             if (val === "") {
                 inputWrapper.after(
                     "<div class='option-error text-danger mt-1'>Option " + optionIndex + " is required.</div>"
