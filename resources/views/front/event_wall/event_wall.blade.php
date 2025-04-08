@@ -1318,8 +1318,8 @@
                                             <h3>Options</h3>
                                             <span class="option-add-btn"><i class="fa-solid fa-plus"></i></span>
                                         </div>
-                                        <div class="poll-options">
-                                            <div class="mb-3">
+                                        <div class="poll-options ">
+                                            <div class="mb-3 option_new">
                                                 <label for="yourquestion"
                                                     class="form-label d-flex align-items-center justify-content-between">Option
                                                     1*

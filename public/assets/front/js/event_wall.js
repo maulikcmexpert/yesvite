@@ -996,17 +996,21 @@ $(document).ready(function () {
         // Validate options
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
-            const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
+            const inputWrapper = $(this).closest(".option_new");
+
+            // Remove any existing error
             inputWrapper.next(".option-error").remove();
-            // remove any existing errors
+
+            const optionIndex = index + 1;
 
             if (val === "") {
                 inputWrapper.after(
-                    "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
+                    `<div class='option-error text-danger mt-1'>Option ${optionIndex} is required.</div>`
                 );
                 hasError = true;
             }
         });
+
 
 
         return !hasError;
@@ -1040,7 +1044,7 @@ $(document).ready(function () {
         const optionCount = pollOptionsContainer.children().length + 1;
         console.log(optionCount);
         const newOption = $(`
-            <div class="mb-3 option-poll">
+            <div class="mb-3 option-poll option_new">
                 <label class="form-label d-flex align-items-center justify-content-between">
                     <p>Option <span class="option-number">${optionCount}</span>*</p>
                     <span class="char-count">0/140</span>
@@ -1065,6 +1069,7 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
+            (".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
