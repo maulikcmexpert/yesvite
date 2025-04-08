@@ -994,19 +994,24 @@ $(document).ready(function () {
         }
 
         // Validate options
-        $("input[name='options[]']").each(function (index) {
+        $("input[name='options[]']").each(function () {
             const val = $(this).val().trim();
-            const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
+            const inputWrapper = $(this).closest(".position-relative");
+
+            // Remove any existing error
             inputWrapper.next(".option-error").remove();
-            // remove any existing errors
+
+            // Get the current index from the DOM (accurate after adding/removing)
+            const optionIndex = $(this).closest(".option-poll").index() + 1;
 
             if (val === "") {
                 inputWrapper.after(
-                    "<div class='option-error text-danger mt-1'>Option " + (index + 3) + " is required.</div>"
+                    "<div class='option-error text-danger mt-1'>Option " + optionIndex + " is required.</div>"
                 );
                 hasError = true;
             }
         });
+
 
 
         return !hasError;
