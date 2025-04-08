@@ -691,6 +691,7 @@ function waitForImagesToLoad(containerSelector) {
     const container = document.querySelector(containerSelector);
     const images = container.querySelectorAll("img");
     const promises = Array.from(images).map((img) => {
+        $("#loader").css("display", "none");
         return new Promise((resolve, reject) => {
             if (img.complete && img.naturalHeight !== 0) {
                 resolve();
@@ -701,7 +702,7 @@ function waitForImagesToLoad(containerSelector) {
         });
 
     });
-   $("#loader").css("display", "none");
+
     return Promise.all(promises);
 }
 
