@@ -30,7 +30,7 @@
         $(document).on('click', function (e) {
             console.log(1);
             
-        if (!$(e.target).closest('.wrapper').length) {
+        if (!$(e.target).closest('.subcategory_drp_down_wrapper').length) {
             console.log(2);
 
             $('.checkboxes').slideUp(400);
