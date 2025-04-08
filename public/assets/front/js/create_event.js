@@ -5525,7 +5525,7 @@ $(document).on("click", ".li_event_details", async function () {
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
         $(".current_step").text("2 of 4");
-
+        $("#loader").css("display", "flex");
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
             let capturedBlob = await captureImage(element);
@@ -5583,7 +5583,7 @@ $(document).on("click", ".li_event_details", async function () {
                             ).hide();
                         }
                     });
-
+                    $("#loader").css("display", "none");
                     console.log("Captured & Stored Image:", base64Image);
                 };
             }
