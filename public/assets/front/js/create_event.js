@@ -5532,7 +5532,7 @@ $(document).on("click", ".li_event_details", async function () {
             const imageResponse = await uploadImage(capturedBlob);
 
             localStorage.setItem("final_upload_image", imageResponse.image);
-
+            var zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
             if (capturedBlob) {
                 var slider = $(".create-account-slider.slider_login");
 
@@ -5547,9 +5547,19 @@ $(document).on("click", ".li_event_details", async function () {
 
                 reader.onloadend = function () {
                     let base64Image = reader.result;
-                    $(".login_img img").attr("src", base64Image);
 
-                    let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+                    let newItem = `
+                    <div class="item">
+                        <div class="rsvp-img login_img">
+                            <img src="${base64Image}" alt="birth-card">
+                        </div>
+                        <button class="image-zoom-icon silder_zoom" data-image="${base64Image}">
+                            <img src="${zoomIconPath}" alt="">
+                        </button>
+                    </div>
+                `;
+                slider.append(newItem);
+
 
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
