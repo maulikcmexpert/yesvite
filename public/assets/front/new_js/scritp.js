@@ -483,9 +483,9 @@ $(".back-btn").on("click", function () {
     $(".create-post-main-body").removeClass("d-none");
 });
 
-// $(document).on("change", ".fileInputtype", function (event) {
-//     handleFiles(event.target.files, event.target);
-// });
+$(document).on("change", ".fileInputtype", function (event) {
+    handleFiles(event.target.files, event.target);
+});
 
 function handleFiles(files, currentFileInput) {
     const imagePreview = document.getElementById("imagePreview");
