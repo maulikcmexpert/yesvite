@@ -195,7 +195,7 @@
         </div>
     </div>
 </div>
-
+<input id="designData" hidden/>
 {{-- @push('scripts') --}}
     <script>
         // alert();
@@ -230,6 +230,7 @@
 
             designData.push(categoryData);
         @endforeach
+        $('#designData').val(designData);
         console.log(designData);
 
 
