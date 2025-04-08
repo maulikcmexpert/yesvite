@@ -11195,7 +11195,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
     $("#loginModel").modal("show");
 
     // // Clear the image src
-    $(".login_img img").src("");
+
 
 
 
@@ -11207,7 +11207,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
 
 $(".cancel-login").on("click", function (e) {
 
-
+    $(".login_img img").attr("src","");
        $(".new_login_page, .new_login").hide(); // Hide both elements
        $(".step_2").show();
 
