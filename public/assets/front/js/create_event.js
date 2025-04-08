@@ -5540,6 +5540,9 @@ $(document).on("click", ".li_event_details", async function () {
                     let base64Image = reader.result;
                     // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
+                    let slider = $(
+                        ".create-account-slider.slider_login"
+                    );
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);
@@ -5563,9 +5566,7 @@ $(document).on("click", ".li_event_details", async function () {
 
                             // Append the new item inside .create-account-slider.slider_login
                             // $(".create-account-slider.slider_login").append(newItem);
-                            let slider = $(
-                                ".create-account-slider.slider_login"
-                            );
+
                             slider
                                 .trigger("add.owl.carousel", [$(newItem)])
                                 .trigger("refresh.owl.carousel");
