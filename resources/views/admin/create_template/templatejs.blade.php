@@ -461,8 +461,42 @@
     });
 
     $(document).ready(function () {
+        const rawData = $('#designData').val();
+        const designData = JSON.parse(rawData);
+
         $('.bootstrap-tagsinput input').on('input', function () {
         // alert('This is bootstrap tags');
+        const searchText = $(this).val().toLowerCase();
+
+// Array to hold matched results
+const matched = [];
+
+designData.forEach(category => {
+    // Check category match
+    if (category.name.toLowerCase().includes(searchText)) {
+        matched.push({
+            type: 'category',
+            id: category.id,
+            name: category.name
+        });
+    }
+
+    // Check subcategory match
+    category.subcategories.forEach(sub => {
+        if (sub.name.toLowerCase().includes(searchText)) {
+            matched.push({
+                type: 'subcategory',
+                id: sub.id,
+                name: sub.name,
+                category: category.name
+            });
+        }
+    });
+});
+
+// Console log matched results
+console.clear();
+console.log('Matched Results:', matched);
     });
 }); 
 </script>
