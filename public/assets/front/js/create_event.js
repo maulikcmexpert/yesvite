@@ -9150,7 +9150,7 @@ $(document).on("change", ".slider_photo", async function (event) {
 
     }
 
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition = 1;
         var existingIndex = imageSources.findIndex(
             (img) => img.image_position === imagePosition
@@ -9170,10 +9170,10 @@ $(document).on("change", ".slider_photo", async function (event) {
         }
 
         if(eventId==""){
-           savePhotoSlider();
+           await savePhotoSlider();
         }
         if ($("#isUserLoggedIn").val() === "0") {
-           savePhotoSlider();
+           await savePhotoSlider();
         }
 
         console.log(imageSources);
@@ -9181,7 +9181,7 @@ $(document).on("change", ".slider_photo", async function (event) {
     }, 500);
 
     // if(eventId==""){
-    //     await savePhotoSlider();
+    //     await await savePhotoSlider();
     // }
 });
 
@@ -9203,7 +9203,7 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         // }, 500);
 
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition2 = 2;
         var existingIndex2 = imageSources.findIndex(
             (img) => img.image_position === imagePosition2
@@ -9222,13 +9222,13 @@ $(document).on("change", ".slider_photo_2", async function (event) {
             });
         }
         if(eventId==""){
-             savePhotoSlider();
+             await savePhotoSlider();
         }
         if ($("#isUserLoggedIn").val() === "0") {
-             savePhotoSlider();
+             await savePhotoSlider();
         }
 
-        // savePhotoSlider();
+        // await savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
 
@@ -9247,7 +9247,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         // updateAllPhotoSliders();
 
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         var imagePosition3 = 3;
         var existingIndex3 = imageSources.findIndex(
             (img) => img.image_position === imagePosition3
@@ -9265,12 +9265,12 @@ $(document).on("change", ".slider_photo_3", async function (event) {
             });
         }
         if(eventId==""){
-             savePhotoSlider();
+             await savePhotoSlider();
         }
         if ($("#isUserLoggedIn").val() === "0") {
-             savePhotoSlider();
+             await savePhotoSlider();
         }
-        // // savePhotoSlider();
+        // // await savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
     // updateAllPhotoSliders();
@@ -9511,7 +9511,7 @@ function getLengthofSliderImage() {
 // });
 
 
-function savePhotoSlider() {
+async function savePhotoSlider() {
     if (eventId != "") {
         imageSources = [];
         $(".slider_img").each(function () {
@@ -9673,7 +9673,8 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
 
     e.preventDefault();
 
-    // await savePhotoSlider();
+    await savePhotoSlider();
+    
     eventData.is_update_event = "1";
     await saveDesignData(true);
     let save1 = savePage1Data(null, true);
