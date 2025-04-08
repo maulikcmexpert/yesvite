@@ -997,9 +997,9 @@ $(document).ready(function () {
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
             const inputWrapper = $(this).closest(".option_new");
-            $(".option-error").remove();
+            // $(".option-error").remove();
             // Remove any existing error
-            inputWrapper.next(".option-error").remove();
+            inputWrapper.find(".option-error").remove();
 
             const optionIndex = index + 1;
 
