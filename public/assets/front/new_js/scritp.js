@@ -482,6 +482,10 @@ $(".back-btn").on("click", function () {
     $(".create-post-setting-main-body").addClass("d-none");
     $(".create-post-main-body").removeClass("d-none");
 });
+$(".btn-close").on("click", function () {
+    storedFiles = [];
+});
+
 
 let storedFiles = [];
 $(document).on("change", ".fileInputtype", function (event) {
@@ -732,6 +736,7 @@ $(".upload-img-delete").click(function () {
     $(".create-post-upload-img-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
+    storedFiles = [];
 });
 
 
