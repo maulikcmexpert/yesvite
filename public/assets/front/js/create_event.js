@@ -5543,7 +5543,7 @@ $(document).on("click", ".li_event_details", async function () {
                     let slider = $(
                         ".create-account-slider.slider_login"
                     );
-                            return;
+                            //return;
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);
