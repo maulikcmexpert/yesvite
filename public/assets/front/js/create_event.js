@@ -5534,15 +5534,23 @@ $(document).on("click", ".li_event_details", async function () {
             localStorage.setItem("final_upload_image", imageResponse.image);
 
             if (capturedBlob) {
+                var slider = $(
+                    ".create-account-slider.slider_login"
+                );
+                if (slider.hasClass("owl-loaded")) {
+                    slider.trigger("destroy.owl.carousel");
+                }
+
+                // Clear existing slides
+                slider.empty();
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
                     let base64Image = reader.result;
                     // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
-                    let slider = $(
-                        ".create-account-slider.slider_login"
-                    );
+
+                            //return;
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);
@@ -5566,11 +5574,30 @@ $(document).on("click", ".li_event_details", async function () {
 
                             // Append the new item inside .create-account-slider.slider_login
                             // $(".create-account-slider.slider_login").append(newItem);
-
-                            slider
-                                .trigger("add.owl.carousel", [$(newItem)])
-                                .trigger("refresh.owl.carousel");
+                            slider.append(newItem);
+                            // slider
+                            //     .trigger("add.owl.carousel", [$(newItem)])
+                            //     .trigger("refresh.owl.carousel");
                         }
+                        slider.owlCarousel({
+                            loop: false,
+                            margin: 10,
+                            nav: true,
+                            navText: [
+                                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        `,
+                                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>`,
+                            ],
+                            responsive: {
+                                0: { items: 1 },
+                                600: { items: 1 },
+                                1000: { items: 1 },
+                            },
+                        });
                         // alert();
                         var slider_length=$(".create-account-slider.slider_login .owl-item").length;
                         console.log('slider_length '+slider_length);
@@ -11195,7 +11222,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
     $("#loginModel").modal("show");
 
     // // Clear the image src
-    $(".login_img img").src("");
+
 
 
 
@@ -11207,7 +11234,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
 
 $(".cancel-login").on("click", function (e) {
 
-
+    $(".login_img img").attr("src","");
        $(".new_login_page, .new_login").hide(); // Hide both elements
        $(".step_2").show();
 
