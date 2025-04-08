@@ -548,15 +548,18 @@ $(document).ready(function () {
                 
                 matchCount++;
             });
-        } else if ($(this).hasClass("subcategory")) {
-            $(`.image-item[data-subcategory-name*="${selectedText}"]`).each(function () {
-                $(this).show();
-                $(this).removeClass("d-none");
-                $(this).removeClass("fadeInDown");
-                $(this).css("visibility", "visible");
-                $(this).removeClass("wow");
-                $(this).removeClass("d-none").fadeIn();
-                 matchCount++;
+        }else if ($(this).hasClass("subcategory")) {
+            $(".image-item").each(function () {
+                let subcategories = $(this).data("subcategory_name") ? $(this).data("subcategory_name").toLowerCase().split(",") : [];
+                if (subcategories.some(subcat => subcat.trim() === selectedText)) {
+                    $(this).show();
+                    $(this).removeClass("d-none");
+                    $(this).removeClass("fadeInDown");
+                    $(this).css("visibility", "visible");
+                    $(this).removeClass("wow");
+                    $(this).removeClass("d-none").fadeIn();
+                                        matchCount++;
+                }
             });
     
             // Also check the corresponding input
