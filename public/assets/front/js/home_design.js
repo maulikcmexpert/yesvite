@@ -298,6 +298,22 @@ $(document).ready(function () {
         let query = $(this).val().toLowerCase().trim();
         let results = "";
         if (query.length > 0) {
+            designData.forEach(category => {
+                            if (category.name.toLowerCase().includes(query)) {
+                                results +=
+                                    `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+                            }
+                            // Check if no subcategory matched and add "No Data Found"
+            
+                            category.subcategories.forEach(subcategory => {
+                                if (subcategory.name.toLowerCase().includes(query)) {
+                                    results +=
+                                        `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                                }
+                                // Check if no subcategory matched and add "No Data Found"
+            
+                            });
+                        });
             let visibleCount = 0;
     
             $(".image-item").each(function () {
@@ -345,6 +361,8 @@ $(document).ready(function () {
                 );
     
                 results += `<div class="search-item no-data">No Data Found</div>`;
+                    //         $('#filtered_results').html(results);
+
                 $("#filtered_results").show();
                 $("#filtered_results").html(results);
             }
