@@ -713,7 +713,7 @@ class EventPhotoController extends BaseController
     public function createEventPost(Request $request)
     {
 
-        // dd($request->hasFile('files'));
+        dd($request->all());
         $user = Auth::guard('web')->user()->id;
 
         // Create new event post
@@ -728,8 +728,8 @@ class EventPhotoController extends BaseController
         $createEventPost->save();
         // dd($request->hasFile('files'));
         // Check if files were uploaded
-        if ($createEventPost->id && $request->file('files')) {
-            $postFiles = $request->file('files'); // Get the uploaded files
+        if ($createEventPost->id && $request->hasFile('files')) {
+            $postFiles = $request->hasFile('files'); // Get the uploaded files
             $imageUrls = [];
             $videoCount = 0;
             $imageCount = 0;
