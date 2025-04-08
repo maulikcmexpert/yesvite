@@ -1,3 +1,4 @@
+{{dd($categories);}}
 <div class="container-fluid">
     <h1 class="m-0 ProductTitle">{{$title}}</h1>
     <div class="content-header p-0">
@@ -153,6 +154,8 @@
                             <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
+                        <div id="filtered_results" class="filtered-results-container"></div>
+
 
                     </div>
                 </div>
