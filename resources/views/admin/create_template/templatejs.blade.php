@@ -460,50 +460,7 @@
         });
     });
 
-    // $(document).ready(function () {
-        const rawData = $('#designData').val();
-        const designData = JSON.parse(rawData);
-
-        $('.bootstrap-tagsinput input').on('input', function () {
-        // alert('This is bootstrap tags');
-        console.log(1);
-        console.log(designData);
-        
-        // const searchText = $(this).val().toLowerCase();
-
-// Array to hold matched results
-const matched = [];
-
-const query = $(this).val().toLowerCase();
-        let results = '';
-
-        if (query.trim() !== '') {
-            designData.forEach(category => {
-                // Match category
-                if (category.name.toLowerCase().includes(query)) {
-                    results += `
-                        <div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">
-                            ${category.name}
-                        </div>`;
-                }
-
-                // Match subcategories
-                category.subcategories.forEach(subcategory => {
-                    if (subcategory.name.toLowerCase().includes(query)) {
-                        results += `
-                            <div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">
-                                ${subcategory.name}
-                            </div>`;
-                    }
-                });
-            });
-
-            if (results === '') {
-                results = `<div class="search-item">No Data Found</div>`;
-            }
-        }
-        console.log(results);
-
-        $('#filtered_results').html(results);
-    });
+    // $('#tags').on('focus', function() {
+    //   alert('The Bootstrap Tags Input field has been focused!');
+    // });
 </script>
