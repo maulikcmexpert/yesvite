@@ -195,3 +195,11 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        let categories = @json($categories);
+        console.log(categories);
+        
+    </script>
+@endpush
