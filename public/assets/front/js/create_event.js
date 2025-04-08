@@ -5541,7 +5541,7 @@ $(document).on("click", ".li_event_details", async function () {
                     // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
                     let slider = $(
-                        ".create-account-slider .slider_login"
+                        ".create-account-slider.slider_login"
                     );
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
@@ -5572,7 +5572,7 @@ $(document).on("click", ".li_event_details", async function () {
                                 .trigger("refresh.owl.carousel");
                         }
                         // alert();
-                        var slider_length=$(".create-account-slider .slider_login .owl-item").length;
+                        var slider_length=$(".create-account-slider.slider_login .owl-item").length;
                         console.log('slider_length '+slider_length);
 
                         if (
