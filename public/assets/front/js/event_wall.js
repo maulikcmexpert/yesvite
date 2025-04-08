@@ -1000,7 +1000,7 @@ $(document).ready(function () {
             inputWrapper.find(".option-error").remove(); // remove any existing errors
 
             if (val === "") {
-                inputWrapper.find(".input-option-delete").after(
+                inputWrapper.after(
                     "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
                 );
                 hasError = true;
