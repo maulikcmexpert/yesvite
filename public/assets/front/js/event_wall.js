@@ -1004,7 +1004,7 @@ $(document).ready(function () {
             const optionIndex = index + 1;
 
             if (val === "") {
-                inputWrapper.after(
+                inputWrapper.append(
                     `<div class='option-error text-danger mt-1'>Option ${optionIndex} is required.</div>`
                 );
                 hasError = true;
