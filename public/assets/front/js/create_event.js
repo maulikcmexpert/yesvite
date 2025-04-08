@@ -11167,13 +11167,13 @@ $(".new-create-account-close-btn").on("click", function (e) {
     $("#loginModel").modal("show");
 
     // Clear the image src
-    // $(".login_img img").attr("src", "");
+    $(".login_img img").attr("src", "");
 
     // Optional: also clear image from slider
     $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
 
-    // // Optional: remove from localStorage if needed
-    // localStorage.removeItem("final_upload_image");
+    // Optional: remove from localStorage if needed
+    localStorage.removeItem("final_upload_image");
 
     // Hide other related elements if needed
     // $(".new_login_page, .new_login").hide();
