@@ -5529,7 +5529,7 @@ $(document).on("click", ".li_event_details", async function () {
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
 
-            const imageResponse = await uploadImage(capturedBlob);
+
 
             localStorage.setItem("final_upload_image", imageResponse.image);
 
@@ -5544,6 +5544,7 @@ $(document).on("click", ".li_event_details", async function () {
                 // Clear existing slides
                 slider.empty();
                 let capturedBlob = await captureImage(element);
+                const imageResponse = await uploadImage(capturedBlob);
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
