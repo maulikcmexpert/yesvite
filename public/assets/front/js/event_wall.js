@@ -974,7 +974,7 @@ $(document).ready(function () {
     // Function to validate form fields
     function validateForm() {
         let hasError = false;
-        renumberOptions();
+
         // Clear previous errors
         $("#question_error").text('');
         $("#duration_error").text('');
@@ -994,6 +994,8 @@ $(document).ready(function () {
         }
 
         // Validate options
+        renumberOptions(); // Update option numbers before validation
+        $(".option-error").remove();
         $("input[name='options[]']").each(function () {
             const val = $(this).val().trim();
             const inputWrapper = $(this).closest(".position-relative");
@@ -1001,9 +1003,9 @@ $(document).ready(function () {
             // Remove any existing error
             inputWrapper.next(".option-error").remove();
 
-            // Get the current index from the DOM (accurate after adding/removing)
+            // Get updated index from the label
             const optionIndex = $(this).closest(".option-poll").find(".option-number").text();
-console.log(optionIndex);
+
             if (val === "") {
                 inputWrapper.after(
                     "<div class='option-error text-danger mt-1'>Option " + optionIndex + " is required.</div>"
