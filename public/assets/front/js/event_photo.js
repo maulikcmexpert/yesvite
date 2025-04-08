@@ -40,20 +40,21 @@ $(document).ready(function () {
             }
             const input1 = document.getElementById("fileInput1");
             const input2 = document.getElementById("fileInput2");
+            if (!input1 || !input2) {
+                console.error("One or both file input elements are missing");
+                return;
+            }
 
             const dataTransfer = new DataTransfer();
 
-            // Add files from input1
             for (let i = 0; i < input1.files.length; i++) {
                 dataTransfer.items.add(input1.files[i]);
             }
 
-            // Add files from input2
             for (let i = 0; i < input2.files.length; i++) {
                 dataTransfer.items.add(input2.files[i]);
             }
 
-            // Put all into input1 (or create a hidden input)
             input1.files = dataTransfer.files;
             $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
             photoForm.submit();
