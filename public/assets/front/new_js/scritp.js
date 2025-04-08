@@ -508,7 +508,7 @@ function handleFiles(files, currentFileInput) {
             const previewDiv = document.createElement("div");
             previewDiv.classList.add("col-6");
             previewDiv.style.position = "relative";
-
+            previewDiv.dataset.filename = file.name;
             const deleteIcon = document.createElement("span");
             deleteIcon.innerHTML = `
             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
