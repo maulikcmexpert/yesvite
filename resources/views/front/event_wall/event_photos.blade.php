@@ -634,10 +634,15 @@
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
                                 <div>
-                                    <button type="button" class="uploadButton create-post-head-upload-btn "><i
+                                    {{-- <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInputNew2" name="files[]" class="fileInputtypeNeW"
-                                        accept="image/*,video/*" multiple></button>
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
+                                        accept="image/*,video/*" multiple></button> --}}
+                                        <label for="fileInput2" class="uploadButton create-post-head-upload-btn">
+                                            <i class="fa-solid fa-plus"></i> Add Photos/video
+                                        </label>
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype" accept="image/*,video/*" multiple hidden>
+
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -693,9 +698,15 @@
                                     </span>
                                     <h3>Add Photos/Video</h3>
                                     <p>or drag and drop here</p>
-                                    <button type="button" class="uploadButton">Upload
-                                        <input type="file" id="fileInputNew" class="fileInputtypeNeW"
-                                            accept="image/*,video/*" name="files[]" multiple></button>
+                                    {{-- <button type="button" class="uploadButton">Upload
+                                        <input type="file" id="fileInput" class="fileInputtype"
+                                            accept="image/*,video/*" name="files[]" multiple></button> --}}
+
+                                            <label for="fileInput" class="uploadButton">
+                                                Upload
+                                            </label>
+                                            <input type="file" id="fileInput" class="fileInputtype" accept="image/*,video/*" name="files[]" multiple hidden>
+
                                 </div>
                                 <div class="create-post-uploaded-images">
                                     <div class="row" id="imagePreview">
