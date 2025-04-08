@@ -58,7 +58,7 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                             <label for="event_design_sub_category_id">Subcategory</label>
 
                             <div class="col-md-12">
-                                <div class="wrapper">
+                                <div class="wrapper subcategory_drp_down_wrapper">
                                     <button class="form-control toggle-next select-subcat-btn ellipsis"
                                         type="button">Select subbcategory</button>
                                     <div class="checkboxes select-subcat-inner edit-subcategory-drp" id="Sub Category">

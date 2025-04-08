@@ -1,18 +1,5 @@
 <script type="text/javascript">
-    // alert();
     var base_url = "{{ url('/') }}/";
-
-    //   $('#event_design_sub_category_id').on('mousedown', 'option', function (e) {
-    //         e.preventDefault(); // Stop default Ctrl behavior
-
-    //         const $option = $(this);
-    //         const selected = $option.prop('selected');
-
-    //         // Toggle selection manually
-    //         $option.prop('selected', !selected);
-
-    //         return false;
-    //     });
     $(function() {
 
         setCheckboxSelectLabels();
@@ -26,6 +13,11 @@
         $('.ckkBox').change(function() {
             toggleCheckedAll(this);
             setCheckboxSelectLabels();
+        });
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.subcategory_drp_down_wrapper').length) {
+                $('.checkboxes').slideUp(400);
+            }
         });
 
     });
@@ -87,35 +79,11 @@
             processing: true,
             serverSide: true,
 
-            pageLength: 50, // Set the initial number of records per page
+            pageLength: 50,
             lengthMenu: [
                 [50, 100, -1],
                 [50, 100, "All"]
             ],
-            // ajax: '{{ URL::to('/admin/create_template') }}',
-            // columns: [{
-            //         data: "number",
-            //         name: "number"
-            //     },
-            //     {
-            //         data: "category_name",
-            //         name: "category_name"
-            //     },
-
-            //     {
-
-            //         data: "image",
-            //         name: "image"
-
-            //     },
-            //     {
-            //         data: "action",
-            //         name: "action",
-            //         orderable: false,
-            //         searchable: true,
-
-            //     },
-            // ],
 
             ajax: '{{ URL::to('/admin/create_template') }}',
             columns: [{
