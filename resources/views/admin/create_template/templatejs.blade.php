@@ -284,7 +284,7 @@
                     $(".subcategory_error_bx").text('Please select design subcategory');
                     hasError = true;
                 } else {
-                    hasError = false;
+                    // hasError = false;
 
                 }
                 if (image === '') {
