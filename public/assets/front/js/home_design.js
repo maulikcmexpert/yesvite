@@ -477,32 +477,37 @@ $(document).ready(function () {
     
         if (query.length > 0) {
             let suggestionSet = new Set();
+            let addedSubcategories = new Set();
+            let addedTags = new Set();
+            let addedCategories = new Set();
     
             $(".image-item").each(function () {
                 let $item = $(this);
-                let tags = $item.data("tags") ? $item.data("tags").toLowerCase().split(",") : [];
+                let category = $item.data("category_name") ? $item.data("category_name").toLowerCase().trim() : "";
                 let subcategories = $item.data("subcategory_name") ? $item.data("subcategory_name").toLowerCase().split(",") : [];
-                let category = $item.data("category_name") ? $item.data("category_name").toLowerCase() : "";
+                let tags = $item.data("tags") ? $item.data("tags").toLowerCase().split(",") : [];
     
                 let categoryId = $item.data("category-id");
                 let subcategoryId = $item.data("subcategory-id");
     
-                // Match category
-                if (category.includes(query)) {
-                    suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">Category: ${category}</div>`);
+                if (category.includes(query) && !addedCategories.has(category)) {
+                    suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">Cat :${category}</div>`);
+                    addedCategories.add(category);
                 }
     
-                // Match subcategories
                 subcategories.forEach(subcat => {
-                    if (subcat.includes(query)) {
-                        suggestionSet.add(`<div class="search-item subcategory" data-name="${subcat}" data-category-id="${categoryId}" data-id="${subcategoryId}">Sub Category: ${subcat}</div>`);
+                    let subcatTrimmed = subcat.trim();
+                    if (subcatTrimmed.includes(query) && !addedSubcategories.has(subcatTrimmed)) {
+                        suggestionSet.add(`<div class="search-item subcategory" data-name="${subcatTrimmed}" data-category-id="${categoryId}" data-id="${subcategoryId}">SubCat :${subcatTrimmed}</div>`);
+                        addedSubcategories.add(subcatTrimmed);
                     }
                 });
     
-                // Match tags
                 tags.forEach(tag => {
-                    if (tag.includes(query)) {
-                        suggestionSet.add(`<div class="search-item tag" data-name="${tag}">Tags: ${tag}</div>`);
+                    let tagTrimmed = tag.trim();
+                    if (tagTrimmed.includes(query) && !addedTags.has(tagTrimmed)) {
+                        suggestionSet.add(`<div class="search-item tag" data-name="${tagTrimmed}">Tags :${tagTrimmed}</div>`);
+                        addedTags.add(tagTrimmed);
                     }
                 });
             });
@@ -523,9 +528,11 @@ $(document).ready(function () {
             if (allItems.length > 30) {
                 allItems.slice(30).addClass("d-none").hide();
             }
+    
             $(".total_design_count").text($(".image-item:visible").length + " Items");
         }
     });
+    
     $(document).on("click", ".search-item", function () {
         let selectedText = $(this).data("name")?.toLowerCase();
         let categoryId = $(this).data("category-id");
