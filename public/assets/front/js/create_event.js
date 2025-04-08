@@ -5579,9 +5579,9 @@ $(document).on("click", ".li_event_details", async function () {
                                 ".create-account-slider.slider_login"
                             );
                             slider.trigger("refresh.owl.carousel");
-                            $(
-                                ".create-account-slider.slider_login .owl-nav"
-                            ).hide();
+                            // $(
+                            //     ".create-account-slider.slider_login .owl-nav"
+                            // ).hide();
                         }
                     });
                     $("#loader").css("display", "none");
@@ -11186,8 +11186,8 @@ $(".new-create-account-close-btn").on("click", function (e) {
     // Show login modal
     $("#loginModel").modal("show");
 
-    // Clear the image src
-    $(".login_img img").attr("src", "");
+    // // Clear the image src
+    // $(".login_img img").attr("src", "");
 
 
 
