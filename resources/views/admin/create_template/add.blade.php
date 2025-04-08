@@ -196,7 +196,7 @@
     </div>
 </div>
 <input id="designData" hidden/>
-{{-- @push('scripts') --}}
+@push('scripts')
     <script>
         // alert();
         var designData = [];
@@ -269,4 +269,4 @@ tagsInput.addEventListener("keyup", function () {
 });
 
     </script>
-{{-- @endpush --}}
+@endpush
