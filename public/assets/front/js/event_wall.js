@@ -997,7 +997,8 @@ $(document).ready(function () {
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
             const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
-            inputWrapper.find(".option-error").remove(); // remove any existing errors
+            inputWrapper.next(".option-error").remove();
+            // remove any existing errors
 
             if (val === "") {
                 inputWrapper.after(
