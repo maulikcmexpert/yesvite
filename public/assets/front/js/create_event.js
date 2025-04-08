@@ -5538,20 +5538,23 @@ $(document).on("click", ".li_event_details", async function () {
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
                     let base64Image = reader.result;
+                    // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
-
-                    let slider = $(".create-account-slider.slider_login");
-
-                    // Clear existing items before appending new ones
-                    slider.trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
-
+                    let slider = $(
+                        ".create-account-slider.slider_login"
+                    );
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
+                        console.log(slide_image);
                         if (slide_image && slide_image.trim() !== "") {
-                            let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+                            console.log("Appending image:", slide_image);
+                            let zoomIconPath =
+                                base_url +
+                                "assets/front/img/image-zoom-icon.png";
+                            // Create new item HTML
                             let newItem = `
                                 <div class="item">
-                                    <div class="rsvp-img login_img">
+                                    <div class="rsvp-img login_img" >
                                         <img src="${slide_image}" alt="birth-card">
                                     </div>
                                     <button class="image-zoom-icon silder_zoom" data-image="${slide_image}">
@@ -5559,22 +5562,32 @@ $(document).on("click", ".li_event_details", async function () {
                                     </button>
                                 </div>
                             `;
+                            console.log("5");
 
-                            // Append new image item
-                            slider.trigger("add.owl.carousel", [$(newItem)]).trigger("refresh.owl.carousel");
+                            // Append the new item inside .create-account-slider.slider_login
+                            // $(".create-account-slider.slider_login").append(newItem);
+
+                            slider
+                                .trigger("add.owl.carousel", [$(newItem)])
+                                .trigger("refresh.owl.carousel");
+                        }
+                        if (
+                            $(".create-account-slider.slider_login .owl-item")
+                                .length <= 1
+                        ) {
+                            let slider = $(
+                                ".create-account-slider.slider_login"
+                            );
+                            slider.trigger("refresh.owl.carousel");
+                            $(
+                                ".create-account-slider.slider_login .owl-nav"
+                            ).hide();
                         }
                     });
-
-                    if ($(".create-account-slider.slider_login .owl-item").length <= 1) {
-                        slider.trigger("refresh.owl.carousel");
-                        $(".create-account-slider.slider_login .owl-nav").hide();
-                    }
-
-                    $("#loader").hide();
+                    $("#loader").css("display", "none");
                     console.log("Captured & Stored Image:", base64Image);
                 };
             }
-
         }
 
         var savedCategory = localStorage.getItem("category_name");
@@ -11174,13 +11187,9 @@ $(".new-create-account-close-btn").on("click", function (e) {
     $("#loginModel").modal("show");
 
     // Clear the image src
-    // $(".login_img img").attr("src", "");
+    $(".login_img img").attr("src", "");
 
-    // Optional: also clear image from slider
-    $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
 
-    // // Optional: remove from localStorage if needed
-    // localStorage.removeItem("final_upload_image");
 
     // Hide other related elements if needed
     // $(".new_login_page, .new_login").hide();
