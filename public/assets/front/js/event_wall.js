@@ -996,22 +996,17 @@ $(document).ready(function () {
         // Validate options
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
-            const inputWrapper = $(this).closest(".position-relative");
-
-            // Remove any existing error
+            const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
             inputWrapper.next(".option-error").remove();
-
-            const optionIndex = index + 1;
+            // remove any existing errors
 
             if (val === "") {
                 inputWrapper.after(
-                    `<div class='option-error text-danger mt-1'>Option ${optionIndex} is required.</div>`
+                    "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
                 );
                 hasError = true;
             }
         });
-
-
 
 
         return !hasError;
@@ -1070,7 +1065,6 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
-            // $(".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
@@ -1113,9 +1107,9 @@ $(document).ready(function () {
         var $this = $(this);
 
         // Prevent multiple clicks
-        // if ($this.prop("disabled")) {
-        //     return;
-        // }
+        if ($this.prop("disabled")) {
+            return;
+        }
 
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
