@@ -459,4 +459,37 @@
             }
         });
     });
+
+
+    const tagsInput = document.getElementById("tags");
+    const resultsContainer = document.getElementById("filtered_results");
+
+    tagsInput.addEventListener("keyup", function () {
+        alert();
+        const searchTerm = tagsInput.value.toLowerCase();
+        resultsContainer.innerHTML = ""; // clear previous results
+
+        if (searchTerm.trim() === "") return;
+
+        const matchedItems = [];
+
+        categories.forEach(cat => {
+            if (cat.category_name.toLowerCase().includes(searchTerm)) {
+                matchedItems.push(`<div><strong>Category:</strong> ${cat.category_name}</div>`);
+            }
+
+            cat.subcategory?.forEach(sub => {
+                if (sub.subcategory_name.toLowerCase().includes(searchTerm)) {
+                    matchedItems.push(`<div><strong>Subcategory:</strong> ${sub.subcategory_name}</div>`);
+                }
+            });
+        });
+
+        if (matchedItems.length > 0) {
+            resultsContainer.innerHTML = matchedItems.join("");
+        } else {
+            resultsContainer.innerHTML = `<div>No results found.</div>`;
+        }
+    });
+
 </script>
