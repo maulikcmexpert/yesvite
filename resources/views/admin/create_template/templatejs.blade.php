@@ -465,6 +465,7 @@
     const resultsContainer = document.getElementById("filtered_results");
 
     tagsInput.addEventListener("keyup", function () {
+        alert();
         const searchTerm = tagsInput.value.toLowerCase();
         resultsContainer.innerHTML = ""; // clear previous results
 
