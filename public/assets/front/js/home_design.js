@@ -130,7 +130,7 @@ $(document).ready(function () {
             updateTotalCount();
         }
     );
-    $(document).on("click", ".close-btn", function () {
+    $(document).on("click", ".selected-items.close-btn", function () {
         var parent = $(this).parent();
         var value = parent.attr("data-value");
 
