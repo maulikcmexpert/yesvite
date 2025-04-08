@@ -304,7 +304,7 @@
                     $("#filled_image").next('.text-danger').text("");
                 }
 
-alert(hasError);
+// alert(hasError);
                 if (!hasError) {
                     $("#templateForm").submit();
                 } else {
