@@ -45,10 +45,7 @@
                     </span>
                 </div>
                 <div id="filtered_results" class="filtered-results-container"></div>
-                <div class="search-item category">Category: [name]</div>
-                <div class="search-item subcategory">Subcategory: [name]</div>
-                <div class="search-item tag">Tag: [name]</div>
-
+                
 
             </div>
         </div>
