@@ -681,7 +681,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
             console.log("Running bindData...");
             await bindData(current_event_id);
-            $("#loader").css("display", "flex"); // Keep it visible just in case
+            // $("#loader").css("display", "flex");// Keep it visible just in case
             console.log("bindData complete");
 
 
