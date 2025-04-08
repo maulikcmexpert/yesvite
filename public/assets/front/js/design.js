@@ -546,9 +546,9 @@ $(document).on("click", ".design-cards", function () {
                                         console.log(event);
                                         if (
                                             event?.transform?.action ===
-                                                "drag" &&
+                                            "drag" &&
                                             event.transform.actionPerformed ===
-                                                undefined
+                                            undefined
                                         ) {
                                             currentShapeIndex =
                                                 (currentShapeIndex + 1) %
@@ -679,18 +679,18 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
 
-    console.log("Running bindData...");
-    await bindData(current_event_id);
-    $("#loader").css("display", "flex"); // Keep it visible just in case
-    console.log("bindData complete");
+            console.log("Running bindData...");
+            await bindData(current_event_id);
+            $("#loader").css("display", "flex"); // Keep it visible just in case
+            console.log("bindData complete");
 
 
-    console.log("Waiting for images to load...");
-    await waitForAllImagesToLoad(2000);
-    console.log(" All images loaded");
+            console.log("Waiting for images to load...");
+            await waitForAllImagesToLoad(2000);
+            console.log(" All images loaded");
 
-    // 4. Finally, hide the loader
-    $("#loader").css("display", "none");
+            // 4. Finally, hide the loader
+            $("#loader").css("display", "none");
 
         },
         error: function (xhr, status, error) {
@@ -861,8 +861,8 @@ async function bindData(current_event_id) {
                                 0,
                             linethrough:
                                 element.linethrough == true ||
-                                element.linethrough == "true" ||
-                                element.linethrough == "True"
+                                    element.linethrough == "true" ||
+                                    element.linethrough == "True"
                                     ? true
                                     : false,
                             backgroundColor: element.backgroundColor,
@@ -1012,7 +1012,7 @@ async function bindData(current_event_id) {
                                 if (
                                     event?.transform?.action === "drag" &&
                                     event.transform.actionPerformed ===
-                                        undefined
+                                    undefined
                                 ) {
                                     currentShapeIndex =
                                         (currentShapeIndex + 1) % shapes.length;
@@ -1183,12 +1183,12 @@ async function bindData(current_event_id) {
                                                     // Reset shape index for the new image based on the default shape
                                                     currentShapeIndex =
                                                         shapeIndexMap[
-                                                            defaultShape
+                                                        defaultShape
                                                         ] || 0; // Default to rectangle if not found
                                                     newImg.set({
                                                         clipPath:
                                                             shapes[
-                                                                currentShapeIndex
+                                                            currentShapeIndex
                                                             ],
                                                     });
                                                     newImg.crossOrigin =
@@ -1201,10 +1201,10 @@ async function bindData(current_event_id) {
                                                             if (
                                                                 event?.transform
                                                                     ?.action ===
-                                                                    "drag" &&
+                                                                "drag" &&
                                                                 event.transform
                                                                     .actionPerformed ===
-                                                                    undefined
+                                                                undefined
                                                             ) {
                                                                 currentShapeIndex =
                                                                     (currentShapeIndex +
@@ -1213,7 +1213,7 @@ async function bindData(current_event_id) {
                                                                 newImg.set({
                                                                     clipPath:
                                                                         shapes[
-                                                                            currentShapeIndex
+                                                                        currentShapeIndex
                                                                         ],
                                                                 });
                                                                 canvas.renderAll();
@@ -1225,7 +1225,7 @@ async function bindData(current_event_id) {
                                                         newImg.set({
                                                             clipPath:
                                                                 shapes[
-                                                                    currentShapeIndex
+                                                                currentShapeIndex
                                                                 ],
                                                         });
                                                         canvas.renderAll();
@@ -1683,7 +1683,7 @@ async function bindData(current_event_id) {
                 .every(
                     (word) =>
                         word.charAt(0).toUpperCase() +
-                            word.slice(1).toLowerCase() ===
+                        word.slice(1).toLowerCase() ===
                         word
                 );
 
@@ -2093,7 +2093,7 @@ async function bindData(current_event_id) {
             var file = event.target.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function (e) {};
+                reader.onload = function (e) { };
                 reader.readAsDataURL(file);
             }
         });
@@ -3399,7 +3399,7 @@ function loadAgain() {
             $("#edit-design-temp").html(response).show();
             bindData(current_event_id);
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) { },
     });
 }
 function isJSON(str) {
