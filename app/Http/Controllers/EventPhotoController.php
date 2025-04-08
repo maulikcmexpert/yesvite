@@ -734,14 +734,13 @@ class EventPhotoController extends BaseController
             $videoCount = 0;
             $imageCount = 0;
             // dd($postFiles);
-            foreach ($postFiles as $key => $postFile) {
-                $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
-
+            foreach ($request->file('files') as $file) {
+                $fileName =  time() . '_' . $file->getClientOriginalName();
                 // Save file to storage/app/public/post_image/
-                $filePath = $postFile->move(public_path('storage/post_image'), $fileName);
+                $filePath = $file->move(public_path('storage/post_image'), $fileName);
 
 
-                $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // Assuming this is a helper function
+                $checkIsImageOrVideo = checkIsImageOrVideo($file); // Assuming this is a helper function
                 $duration = "";
                 $thumbName = "";
 
@@ -1148,7 +1147,7 @@ class EventPhotoController extends BaseController
         $postReactions = getReaction($request['event_post_id']);
         $postReaction = [];
 
-        
+
 
         foreach ($postReactions as $reactionVal) {
             $reactionInfo = [
