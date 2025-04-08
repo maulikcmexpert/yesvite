@@ -460,7 +460,9 @@
         });
     });
 
-    $('#tags').on('focus', function() {
-      alert('The Bootstrap Tags Input field has been focused!');
+    $(document).ready(function () {
+    $('#tags').on('input', function () {
+        alert('This is bootstrap tags');
     });
+}); 
 </script>
