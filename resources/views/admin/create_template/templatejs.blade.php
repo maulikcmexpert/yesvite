@@ -304,7 +304,7 @@
                 if ($("input[name='subcategory[]']:checked").length === 0) {
                     alert();
                     // e.preventDefault(); // Prevent form submission or action
-                        $("#event_design_sub_category_id").next('.text-danger').text('Please select design subcategory');
+                        $(".subcategory_error_bx").text('Please select design subcategory');
             }
                     if (image === '') {
                         $("#image").next('.text-danger').text('Please upload Template');
