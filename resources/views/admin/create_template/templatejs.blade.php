@@ -27,6 +27,15 @@
             toggleCheckedAll(this);
             setCheckboxSelectLabels();
         });
+        $(document).on('click', function (e) {
+            console.log(1);
+            
+        if (!$(e.target).closest('.wrapper').length) {
+            console.log(2);
+
+            $('.checkboxes').slideUp(400);
+        }
+    });
 
     });
 
