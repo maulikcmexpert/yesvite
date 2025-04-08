@@ -38,6 +38,8 @@ $(document).ready(function () {
                 );
                 return;
             }
+            const input1 = document.getElementById("fileInput1");
+            const input2 = document.getElementById("fileInput2");
             if (!input1 || !input2) {
                 console.error("One or both file input elements are missing");
                 return;
