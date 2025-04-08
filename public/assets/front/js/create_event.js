@@ -5533,7 +5533,7 @@ $(document).on("click", ".li_event_details", async function () {
 
             localStorage.setItem("final_upload_image", imageResponse.image);
 
-            if (capturedBlob) {
+
                 var slider = $(
                     ".create-account-slider.slider_login"
                 );
@@ -5623,7 +5623,7 @@ $(document).on("click", ".li_event_details", async function () {
                     $("#loader").css("display", "none");
                     console.log("Captured & Stored Image:", base64Image);
                 };
-            }
+
         }
 
         var savedCategory = localStorage.getItem("category_name");
