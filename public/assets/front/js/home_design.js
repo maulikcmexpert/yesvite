@@ -366,6 +366,8 @@ $(document).ready(function () {
                 $("#filtered_results").show();
                 $("#filtered_results").html(results);
             }
+            $("#filtered_results").show();
+            $("#filtered_results").html(results);
         } else {
             $(".image-item").removeClass("d-none fadeInDown wow").show();
             let allItems = $(".image-item");
