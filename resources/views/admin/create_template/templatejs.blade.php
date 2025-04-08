@@ -460,4 +460,8 @@
         });
     });
 
+    $('.bootstrap-tagsinput').on('focus', '.bootstrap-tagsinput input', function() {
+      alert('A dynamically added Bootstrap Tags Input field has been focused!');
+    });
+
 </script>
