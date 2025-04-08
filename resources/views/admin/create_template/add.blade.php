@@ -196,10 +196,11 @@
     </div>
 </div>
 
-@push('scripts')
+{{-- @push('scripts') --}}
     <script>
+        alert();
         let categories = @json($categories);
         console.log(categories);
         
     </script>
-@endpush
+{{-- @endpush --}}
