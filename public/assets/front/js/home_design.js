@@ -296,72 +296,72 @@ $(document).ready(function () {
 
 
     //today old code...........
-    $("#search_design_category").on("keyup", function () {
-        let query = $(this).val().toLowerCase().trim();
-        let results = "";
-        if (query.length > 0) {
-            let visibleCount = 0;
-    
-            $(".image-item").each(function () {
-                let tags = $(this).data("tags")
-                    ? $(this).data("tags").toLowerCase().split(",")
-                    : [];
-                let subcategories = $(this).data("subcategory_name")
-                    ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
-                    : [];
-                let category = $(this).data("category_name")
-                    ? $(this).data("category_name").toLowerCase()
-                    : "";
-    
-                // Check if any of the search criteria match
-                let matches = tags.some((tag) => tag.includes(query)) ||
-                    subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
-                    category.includes(query);
-    
-                if (matches) {
-                    $(this).show();
-                    $(this).removeClass("d-none");
-                    $(this).removeClass("fadeInDown");
-                    $(this).css("visibility", "visible");
-                    $(this).removeClass("wow");
-                    $(this).removeClass("d-none").fadeIn();
-                    visibleCount++;
+        $("#search_design_category").on("keyup", function () {
+            let query = $(this).val().toLowerCase().trim();
+            let results = "";
+            if (query.length > 0) {
+                let visibleCount = 0;
+        
+                $(".image-item").each(function () {
+                    let tags = $(this).data("tags")
+                        ? $(this).data("tags").toLowerCase().split(",")
+                        : [];
+                    let subcategories = $(this).data("subcategory_name")
+                        ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+                        : [];
+                    let category = $(this).data("category_name")
+                        ? $(this).data("category_name").toLowerCase()
+                        : "";
+        
+                    // Check if any of the search criteria match
+                    let matches = tags.some((tag) => tag.includes(query)) ||
+                        subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
+                        category.includes(query);
+        
+                    if (matches) {
+                        $(this).show();
+                        $(this).removeClass("d-none");
+                        $(this).removeClass("fadeInDown");
+                        $(this).css("visibility", "visible");
+                        $(this).removeClass("wow");
+                        $(this).removeClass("d-none").fadeIn();
+                        visibleCount++;
+                    } else {
+                        $(this).hide();
+                        $(this).fadeOut().addClass("d-none");
+                    }
+                });
+        
+                console.log("Total Visible Items:", visibleCount);
+                $(".total_design_count").text(visibleCount + " Items");
+        
+                if (visibleCount > 0) {
+                    $("#filtered_results").hide();
                 } else {
-                    $(this).hide();
-                    $(this).fadeOut().addClass("d-none");
+                    $("#filtered_results").show();
                 }
-            });
-    
-            console.log("Total Visible Items:", visibleCount);
-            $(".total_design_count").text(visibleCount + " Items");
-    
-            if (visibleCount > 0) {
-                $("#filtered_results").hide();
+        
+                if ($(".image-item:visible").length === 0) {
+                    $(".total_design_count").text(
+                        $(".image-item:visible").length + " Items"
+                    );
+        
+                    results += `<div class="search-item no-data">No Data Found</div>`;
+                    $("#filtered_results").show();
+                    $("#filtered_results").html(results);
+                }
             } else {
-                $("#filtered_results").show();
-            }
-    
-            if ($(".image-item:visible").length === 0) {
+                $(".image-item").removeClass("d-none fadeInDown wow").show();
+                let allItems = $(".image-item");
+                if (allItems.length > 30) {
+                    allItems.slice(30).addClass("d-none").hide();
+                }
                 $(".total_design_count").text(
                     $(".image-item:visible").length + " Items"
                 );
-    
-                results += `<div class="search-item no-data">No Data Found</div>`;
-                $("#filtered_results").show();
-                $("#filtered_results").html(results);
+                $("#filtered_results").hide();
             }
-        } else {
-            $(".image-item").removeClass("d-none fadeInDown wow").show();
-            let allItems = $(".image-item");
-            if (allItems.length > 30) {
-                allItems.slice(30).addClass("d-none").hide();
-            }
-            $(".total_design_count").text(
-                $(".image-item:visible").length + " Items"
-            );
-            $("#filtered_results").hide();
-        }
-    });
+        });
  
         $(document).on("click", ".search-item", function () {
             let selectedText = $(this).data("name");
