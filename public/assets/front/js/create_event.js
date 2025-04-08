@@ -5531,7 +5531,7 @@ $(document).on("click", ".li_event_details", async function () {
 
 
 
-            localStorage.setItem("final_upload_image", imageResponse.image);
+
 
 
                 var slider = $(
@@ -5545,6 +5545,7 @@ $(document).on("click", ".li_event_details", async function () {
                 slider.empty();
                 let capturedBlob = await captureImage(element);
                 const imageResponse = await uploadImage(capturedBlob);
+                localStorage.setItem("final_upload_image", imageResponse.image);
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
                 reader.onloadend = function () {
