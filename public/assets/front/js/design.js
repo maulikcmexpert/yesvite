@@ -702,6 +702,7 @@ async function waitForAllImagesToLoad(containerSelector) {
     if (!container) return;
 
     const images = container.querySelectorAll("img");
+    console.log("🖼️ Images to load:", images.length);
     const bgPromises = [];
 
     container.querySelectorAll("*").forEach(el => {
@@ -719,6 +720,7 @@ async function waitForAllImagesToLoad(containerSelector) {
             }
         }
     });
+
 
     const imgPromises = Array.from(images).map(img => {
         return new Promise(resolve => {
