@@ -728,13 +728,14 @@ class EventPhotoController extends BaseController
         $createEventPost->save();
         // dd($request->hasFile('files'));
         // Check if files were uploaded
-        if ($createEventPost->id && $request->file('files')) {
+        if ($createEventPost->id && $request->hasFile('files')) {
             $postFiles = $request->file('files'); // Get the uploaded files
             $imageUrls = [];
             $videoCount = 0;
             $imageCount = 0;
             // dd($postFiles);
             foreach ($postFiles as $key => $postFile) {
+                if ($postFile && $postFile->isValid()) {
                 $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // ✅ Check before move
 
                 $fileName = uniqid() . '_' . $postFile->getClientOriginalName();
@@ -762,6 +763,7 @@ class EventPhotoController extends BaseController
                 $eventPostImage->type = $checkIsImageOrVideo;
                 $eventPostImage->thumbnail = $thumbName;
                 $eventPostImage->save();
+            }
             }
 
         }
