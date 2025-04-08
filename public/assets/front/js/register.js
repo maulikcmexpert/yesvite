@@ -20,7 +20,8 @@ $(document).ready(function () {
                 /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
             );
         },
-        "At least 6 characters with a combination of letters, numbers, and a special character"
+        "At least 6 characters, with letters, numbers & a special character"
+        // "At least 6 characters with a combination of letters, numbers, and a special character"
     );
     
 
@@ -84,7 +85,7 @@ $(document).ready(function () {
             password: {
                 required: "Please enter your password",
                 passwordCheck:
-                    "At least 6 characters with a combination of letters, numbers, and a special character",
+                    "At least 6 characters, with letters, numbers & a special character",
             },
             cpassword: {
                 required: "Please confirm your password",
@@ -101,7 +102,7 @@ $(document).ready(function () {
         success: function (label, element) {
             if ($(element).attr("name") == "password") {
                 $("#passValidation").html(
-                    '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters with a combination of letters,numbers and special character</span>'
+                    '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters, with letters, numbers & a special character</span>'
                 );
             }
         },
@@ -191,7 +192,7 @@ $(document).ready(function () {
         success: function (label, element) {
             if ($(element).attr("name") == "password") {
                 $("#passValidation").html(
-                    '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters with a combination of letters,numbers and special character</span>'
+                    '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > </span>'
                 );
             }
         },
@@ -217,7 +218,7 @@ $("#password").on("keyup", function () {
 
     if (isValid) {
         $("#passValidation").html(
-            '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters with a combination of letters,numbers and special character</span>'
+            '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters, with letters, numbers & a special character</span>'
         );
     } else {
         $("#passValidation").html("");
@@ -229,7 +230,7 @@ $("#businesspassword").on("keyup", function () {
 
     if (isValid) {
         $("#businesspassValidation").html(
-            '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters with a combination of letters,numbers and special character</span>'
+            '<span><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5001 18.3346C15.0834 18.3346 18.8334 14.5846 18.8334 10.0013C18.8334 5.41797 15.0834 1.66797 10.5001 1.66797C5.91675 1.66797 2.16675 5.41797 2.16675 10.0013C2.16675 14.5846 5.91675 18.3346 10.5001 18.3346Z" fill="#0DAC5F" /><path d="M6.95825 10.0014L9.31659 12.3597L14.0416 7.64307" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="character-con" > At least 6 characters, with letters, numbers & a special character</span>'
         );
     } else {
         $("#businesspassValidation").html("");
