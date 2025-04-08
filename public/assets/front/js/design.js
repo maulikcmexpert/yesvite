@@ -679,15 +679,18 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
 
-            setTimeout(async () => {
-                try {
-                    await waitForImageLoad(".image-edit-inner-img");
-                    $("#loader").css("display", "none");
-                } catch (e) {
-                    console.error("Image load error:", e);
-                    $("#loader").css("display", "none");
-                }
-            }, 100);
+    console.log("Running bindData...");
+    await bindData(current_event_id);
+    $("#loader").css("display", "flex"); // Keep it visible just in case
+    console.log("bindData complete");
+
+
+    console.log("Waiting for images to load...");
+    await waitForAllImagesToLoad(2000);
+    console.log(" All images loaded");
+
+    // 4. Finally, hide the loader
+    $("#loader").css("display", "none");
 
         },
         error: function (xhr, status, error) {
@@ -695,21 +698,36 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
-function waitForImageLoad(selector) {
-    return new Promise((resolve, reject) => {
-        const img = document.querySelector(selector);
-        if (!img) return reject("Image element not found");
+async function waitForAllImagesToLoad(maxWait = 2000) {
+    const images = document.querySelectorAll("img");
+    const backgrounds = document.querySelectorAll("[style*='background']");
 
-        if (img.complete && img.naturalHeight !== 0) {
-            // Already loaded
-            resolve();
-        } else {
-            // Wait until it loads
-            img.onload = () => resolve();
-            img.onerror = () => reject("Image failed to load");
-        }
+    const imgPromises = Array.from(images).map(img => {
+        if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
+        return new Promise(resolve => {
+            img.onload = img.onerror = resolve;
+        });
     });
+
+    const bgPromises = Array.from(backgrounds).map(el => {
+        const bgUrl = getComputedStyle(el).backgroundImage;
+        const match = /url\(["']?(.+?)["']?\)/.exec(bgUrl);
+        if (!match) return Promise.resolve();
+
+        return new Promise(resolve => {
+            const img = new Image();
+            img.src = match[1];
+            img.onload = img.onerror = resolve;
+        });
+    });
+
+    // Wait until all images loaded or timeout
+    return Promise.race([
+        Promise.all([...imgPromises, ...bgPromises]),
+        new Promise(resolve => setTimeout(resolve, maxWait)) // fallback (e.g., 10 sec)
+    ]);
 }
+
 
 fontloadedEnsure = false;
 async function bindData(current_event_id) {
