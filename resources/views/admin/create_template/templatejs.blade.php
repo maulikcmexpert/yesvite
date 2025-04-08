@@ -470,6 +470,7 @@ const tagsInput = document.getElementById("tags");
 const resultsContainer = document.getElementById("filtered_results");
 
 tagsInput.addEventListener("input", function () { // Changed to 'input' event
+alert();
     const searchTerm = tagsInput.value.toLowerCase();
     resultsContainer.innerHTML = ""; // clear previous results
 
