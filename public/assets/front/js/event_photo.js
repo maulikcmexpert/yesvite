@@ -24,7 +24,7 @@ $(document).ready(function () {
         var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-        var photoInput = document.getElementById("fileInput");
+        var photoInput = document.querySelector(".fileInputtype");
         var imagePreview = $("#imagePreview").children().length; // Che
         console.log(
             "Photo Form:",
