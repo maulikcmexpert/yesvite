@@ -1070,6 +1070,8 @@ $(document).ready(function () {
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
             $(".option-error").remove();
+            $("#question_error").text('');
+        $("#duration_error").text('');
             renumberOptions(); // Call function to renumber options after deletion
         });
 
