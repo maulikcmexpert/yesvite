@@ -11187,7 +11187,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
  $("#loginModel").modal("show"); // Hide r
     // $(".new_login_page, .new_login").hide(); // Hide both elements
     // $("#edit-design-temp").show();
-
+    $(".login_img img").attr("src", "");
     // $(".new-event-sidebar-wrp").show();
 });
 
