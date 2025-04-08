@@ -735,37 +735,25 @@ class EventPhotoController extends BaseController
             $imageCount = 0;
             // dd($postFiles);
             foreach ($postFiles as $key => $postFile) {
+                $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // ✅ Check before move
+
                 $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
+                $filePath = $postFile->move(public_path('storage/post_image'), $fileName); // ✅ Move after
 
-                // Save file to storage/app/public/post_image/
-                $filePath = $postFile->move(public_path('storage/post_image'), $fileName);
-
-
-                $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // Assuming this is a helper function
                 $duration = "";
                 $thumbName = "";
 
-                // Process video
                 if ($checkIsImageOrVideo == 'video') {
-
-
-                    $duration = getVideoDuration($filePath); // Assuming this is a helper function
+                    $duration = getVideoDuration($filePath);
                     $thumbName = generate_thumbnail($fileName);
-                    // $postFile->move(public_path('storage/post_image/'), $fileName);
                 }
 
-                //     // Process image
-
-
-
-                // Count images and videos
                 if ($checkIsImageOrVideo == 'video') {
                     $videoCount++;
                 } else {
                     $imageCount++;
                 }
 
-                // Save post image
                 $eventPostImage = new EventPostImage();
                 $eventPostImage->event_id = $request->event_id;
                 $eventPostImage->event_post_id = $createEventPost->id;
@@ -775,6 +763,7 @@ class EventPhotoController extends BaseController
                 $eventPostImage->thumbnail = $thumbName;
                 $eventPostImage->save();
             }
+
             // echo $videoCount;
             // echo "===================";
             // echo $imageCount;
