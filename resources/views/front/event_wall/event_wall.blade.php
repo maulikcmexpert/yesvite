@@ -1291,7 +1291,7 @@
                                             <span class="char-count">0/140</span></label>
                                         <input type="text" name="question" class="form-control poll_qus" id="yourquestion"
                                             placeholder="How is everyone doing this evening?" required>
-                                            <div class="text-danger" id="question_error"></div>
+                                            <div class="text-danger" id="question_error" style="font-size: 12px"></div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="pollduration"
@@ -1310,7 +1310,7 @@
                                             <option value="1 Week">1 Week</option>
                                             <option value="1 Month">1 Month</option>
                                         </select>
-                                        <div class="text-danger" id="duration_error"></div>
+                                        <div class="text-danger" id="duration_error" style="font-size: 12px"></div>
 
                                     </div>
                                     <div class="create-post-poll-option-wrp">
