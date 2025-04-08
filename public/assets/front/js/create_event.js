@@ -9280,7 +9280,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
 });
 
 async function updateAllPhotoSliders() {
-    alert();
+    // alert();
     $(".slider-img").each(function () {
         const $this = $(this);
         const position = $this.data("delete");
@@ -9304,13 +9304,13 @@ async function updateAllPhotoSliders() {
         }
     });
 
-    if (eventId === "") {
+    // if (eventId === "") {
         await savePhotoSlider();
-    }
+    // }
 
-    if ($("#isUserLoggedIn").val() === "0" || eventId == null || eventId=="") {
+    // if ($("#isUserLoggedIn").val() === "0" || eventId == null || eventId=="") {
         await savePhotoSlider();
-    }
+    // }
 
     getLengthofSliderImage();
 }
