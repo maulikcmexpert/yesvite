@@ -233,7 +233,7 @@ $(function(){
 $( window ).on( "load", function() {
     console.log( "window loaded" );
            // finally hide loader
-           $("#loader").css("display", "none");
+        //    $("#loader").css("display", "none");
     // $("#sidebar").css({"right": "-200%", "width": "0px"});
 });
 
