@@ -20,45 +20,54 @@ $(document).ready(function () {
 
     // Submit form on button click
     $(document).on("click", ".create_post", function () {
-        var $this = $(this);
+        // Check if the poll form exists and is valid
+        var $this = $(this); // Ca
         var photoForm = $("#photoForm");
-        var input1 = document.getElementById("fileInput");
-        var input2 = document.getElementById("fileInput2");
-        var combinedInput = document.getElementById("combinedFilesInput");
+        var textForm = $("#textform");
+        var photoInput = document.querySelector(".fileInputtype");
+        var imagePreview = $("#imagePreview").children().length; // Che
+        console.log(
+            "Photo Form:",
+            photoForm.length > 0 ? "Exists" : "Does not exist"
+        );
 
-        if (!input1 || !input2 || !combinedInput) {
-            console.error("One or more file input elements are missing");
-            return;
-        }
-
-        var dataTransfer = new DataTransfer();
-
-        // Add files from the first input
-        if (input1.files.length > 0) {
-            for (var i = 0; i < input1.files.length; i++) {
-                dataTransfer.items.add(input1.files[i]);
+        if (photoForm.is(":visible") && photoForm.length > 0) {
+            if (photoInput.files.length === 0 && imagePreview === 0) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
+                return;
             }
+            // const input1 = document.getElementById("fileInput");
+            // const input2 = document.getElementById("fileInput2");
+            // if (!input1 || !input2) {
+            //     console.error("One or both file input elements are missing");
+            //     return;
+            // }
+
+            // const dataTransfer = new DataTransfer();
+
+            // for (let i = 0; i < input1.files.length; i++) {
+            //     dataTransfer.items.add(input1.files[i]);
+            // }
+
+            // for (let i = 0; i < input2.files.length; i++) {
+            //     dataTransfer.items.add(input2.files[i]);
+            // }
+
+            // input1.files = dataTransfer.files;
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+            photoForm.submit();
         }
-
-        // Add files from the second input
-        if (input2.files.length > 0) {
-            for (var i = 0; i < input2.files.length; i++) {
-                dataTransfer.items.add(input2.files[i]);
-            }
+        // If neither form exists, check for a plain text post
+        else if (textForm.length > 0 && postContent !== "") {
+            textForm.submit();
         }
-
-        // Assign combined files to the hidden input
-        combinedInput.files = dataTransfer.files;
-
-        // Clear original inputs to prevent duplicate uploads
-        input1.value = "";
-        input2.value = "";
-
-        // Submit the form
-        $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
-        photoForm.submit();
+        // If no valid content is provided, show an alert
+        else {
+            alert("Please fill all required fields before submitting.");
+        }
     });
-
 
     // $(".posts-card-like-btn").on("click", function () {
     //     const icon = this.querySelector("i");
