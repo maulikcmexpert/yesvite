@@ -678,16 +678,16 @@ $(document).on("click", ".edit_design_tem", function (e) {
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-               // 2. Run bindData
-    console.log("🧠 Running bindData...");
+
+    console.log("Running bindData...");
     await bindData(current_event_id);
     $("#loader").css("display", "flex"); // Keep it visible just in case
-    console.log("✅ bindData complete");
+    console.log("bindData complete");
 
-    // 3. Wait for all images (tag images and background images) to load
-    console.log("🧠 Waiting for images to load...");
+
+    console.log("Waiting for images to load...");
     await waitForAllImagesToLoad(2000);
-    console.log("✅ All images loaded");
+    console.log(" All images loaded");
 
     // 4. Finally, hide the loader
     $("#loader").css("display", "none");
