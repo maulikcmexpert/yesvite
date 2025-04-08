@@ -5528,44 +5528,35 @@ $(document).on("click", ".li_event_details", async function () {
         $("#loader").css("display", "flex");
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
+            let capturedBlob = await captureImage(element);
+            const imageResponse = await uploadImage(capturedBlob);
 
+            localStorage.setItem("final_upload_image", imageResponse.image);
 
+            if (capturedBlob) {
+                var slider = $(".create-account-slider.slider_login");
 
-
-
-
-                var slider = $(
-                    ".create-account-slider.slider_login"
-                );
                 if (slider.hasClass("owl-loaded")) {
                     slider.trigger("destroy.owl.carousel");
                 }
 
-                // Clear existing slides
-                slider.empty();
-                let capturedBlob = await captureImage(element);
-                const imageResponse = await uploadImage(capturedBlob);
-                localStorage.setItem("final_upload_image", imageResponse.image);
+                slider.empty(); // Clear existing slides
+
                 let reader = new FileReader();
                 reader.readAsDataURL(capturedBlob);
+
                 reader.onloadend = function () {
                     let base64Image = reader.result;
-                    // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
 
-                            //return;
+                    let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
-                        console.log(slide_image);
                         if (slide_image && slide_image.trim() !== "") {
-                            console.log("Appending image:", slide_image);
-                            let zoomIconPath =
-                                base_url +
-                                "assets/front/img/image-zoom-icon.png";
-                            // Create new item HTML
                             let newItem = `
                                 <div class="item">
-                                    <div class="rsvp-img login_img" >
+                                    <div class="rsvp-img login_img">
                                         <img src="${slide_image}" alt="birth-card">
                                     </div>
                                     <button class="image-zoom-icon silder_zoom" data-image="${slide_image}">
@@ -5573,60 +5564,45 @@ $(document).on("click", ".li_event_details", async function () {
                                     </button>
                                 </div>
                             `;
-                            console.log("5");
-
-                            // Append the new item inside .create-account-slider.slider_login
-                            // $(".create-account-slider.slider_login").append(newItem);
                             slider.append(newItem);
-                            // slider
-                            //     .trigger("add.owl.carousel", [$(newItem)])
-                            //     .trigger("refresh.owl.carousel");
-                        }
-                        slider.owlCarousel({
-                            loop: false,
-                            margin: 10,
-                            nav: true,
-                            navText: [
-                                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        `,
-                                `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>`,
-                            ],
-                            responsive: {
-                                0: { items: 1 },
-                                600: { items: 1 },
-                                1000: { items: 1 },
-                            },
-                        });
-                        // alert();
-                        var slider_length=$(".create-account-slider.slider_login .owl-item").length;
-                        console.log('slider_length '+slider_length);
-
-                        if (
-                            $(".create-account-slider.slider_login .owl-item")
-                                .length <= 1
-                        ) {
-                            let slider = $(
-                                ".create-account-slider.slider_login"
-                            );
-                            slider.trigger("refresh.owl.carousel");
-                            $(
-                                ".create-account-slider.slider_login .owl-nav"
-                            ).hide();
-                        }else{
-                            $(
-                                ".create-account-slider.slider_login .owl-nav"
-                            ).show();
                         }
                     });
+
+                    // ✅ Initialize OwlCarousel after all items are appended
+                    slider.owlCarousel({
+                        loop: false,
+                        margin: 10,
+                        nav: true,
+                        navText: [
+                            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.49984 16.9201L1.97984 10.4001C1.20984 9.63008 1.20984 8.37008 1.97984 7.60008L8.49984 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>`,
+                            `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>`
+                        ],
+                        responsive: {
+                            0: { items: 1 },
+                            600: { items: 1 },
+                            1000: { items: 1 },
+                        },
+                    });
+
+                    // ✅ Handle nav display after initialization
+                    let totalSlides = $(".create-account-slider.slider_login .owl-item").length;
+
+                    if (totalSlides <= 1) {
+                        $(".create-account-slider.slider_login .owl-nav").hide();
+                    } else {
+                        $(".create-account-slider.slider_login .owl-nav").show();
+                    }
+
                     $("#loader").css("display", "none");
                     console.log("Captured & Stored Image:", base64Image);
                 };
-
+            }
         }
+
 
         var savedCategory = localStorage.getItem("category_name");
 
