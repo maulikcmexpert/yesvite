@@ -588,7 +588,6 @@ $(document).on("click", ".modal-design-card", function (e) {
 });
 
 $(document).on("click", ".close-btn", function () {
-    alert(1);
     toggleSidebar();
     var id = $(this).data("id");
     $("#sidebar").removeClass(id);
