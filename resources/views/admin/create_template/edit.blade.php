@@ -84,7 +84,7 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                             </option>
                             @endforeach
                             </select> --}}
-                            <span class="text-danger">{{ $errors->first('event_design_sub_category_id') }}</span>
+                            <span class="text-danger subcategory_error_bx">{{ $errors->first('event_design_sub_category_id') }}</span>
                         </div>
                     </div>
 
@@ -148,7 +148,9 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
                 </div>
 
                 <div class="card-footer">
-                    <input type="submit" class="btn btn-primary" value="Update">
+                    {{-- <input type="submit" class="btn btn-primary" value="Update"> --}}
+                    <input type="button" class="btn btn-primary" id="templateUpdate" value="Update">
+
                 </div>
             </form>
         </div>
