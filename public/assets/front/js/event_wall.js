@@ -994,25 +994,23 @@ $(document).ready(function () {
         }
 
         // Validate options
-        renumberOptions(); // Update option numbers before validation
-        // $(".option-error").remove();
-        $("input[name='options[]']").each(function () {
+        $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
             const inputWrapper = $(this).closest(".position-relative");
 
             // Remove any existing error
             inputWrapper.next(".option-error").remove();
 
-            // Get updated index from the label
-            const optionIndex =  $(this).closest(".option-poll").index() + 1;;
+            const optionIndex = index + 1;
 
             if (val === "") {
                 inputWrapper.after(
-                    "<div class='option-error text-danger mt-1'>Option " + optionIndex + " is required.</div>"
+                    `<div class='option-error text-danger mt-1'>Option ${optionIndex} is required.</div>`
                 );
                 hasError = true;
             }
         });
+
 
 
 
@@ -1072,7 +1070,7 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
-            // $(".option-error").remove();
+            $(".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
