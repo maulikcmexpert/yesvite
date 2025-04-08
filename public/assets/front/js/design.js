@@ -735,7 +735,7 @@ async function waitForAllImagesToLoad(containerSelector) {
 
     return Promise.race([
         Promise.all([...imgPromises, ...bgPromises]),
-        new Promise(resolve => setTimeout(resolve, 10000)) // 10 sec max wait
+        new Promise(resolve => setTimeout(resolve, 500)) // 10 sec max wait
     ]);
 }
 
