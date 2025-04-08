@@ -539,13 +539,24 @@ $(document).ready(function () {
     
         if ($(this).hasClass("category")) {
             $(`.image-item[data-category-name*="${selectedText}"]`).each(function () {
-                $(this).show();
+                                $(this).show();
+                                $(this).removeClass("d-none");
+                                $(this).removeClass("fadeInDown");
+                                $(this).css("visibility", "visible");
+                                $(this).removeClass("wow");
+                                $(this).removeClass("d-none").fadeIn();
+                
                 matchCount++;
             });
         } else if ($(this).hasClass("subcategory")) {
             $(`.image-item[data-subcategory-name*="${selectedText}"]`).each(function () {
                 $(this).show();
-                matchCount++;
+                $(this).removeClass("d-none");
+                $(this).removeClass("fadeInDown");
+                $(this).css("visibility", "visible");
+                $(this).removeClass("wow");
+                $(this).removeClass("d-none").fadeIn();
+                 matchCount++;
             });
     
             // Also check the corresponding input
@@ -555,6 +566,11 @@ $(document).ready(function () {
                 let tags = $(this).data("tags") ? $(this).data("tags").toLowerCase().split(",") : [];
                 if (tags.includes(selectedText)) {
                     $(this).show();
+                    $(this).removeClass("d-none");
+                    $(this).removeClass("fadeInDown");
+                    $(this).css("visibility", "visible");
+                    $(this).removeClass("wow");
+                    $(this).removeClass("d-none").fadeIn();
                     matchCount++;
                 }
             });
