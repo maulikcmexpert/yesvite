@@ -263,6 +263,7 @@
             });
 
             $(document).on('click', '#templateAdd', function(e) {
+                alert();
                 var selectedValue = $("#event_design_category_id").val();
                 //     var selectedSubCategory = $("#event_design_sub_category_id").val();
                 var image = $("#image").val();
