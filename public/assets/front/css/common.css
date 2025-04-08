@@ -406,6 +406,7 @@ ul.nav-tabs .nav-link:focus {
 
 .register-wrap .label-error{
     bottom: 0px !important;
+    position: static !important;
 }
 
 
