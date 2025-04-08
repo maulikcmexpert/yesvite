@@ -359,24 +359,23 @@
                     //     ).show();
                     // });
 
-                    $('input[name="design_subcategory"]:checked').each(function() {
+                    $('input[name="design_subcategory"]:checked').each(function () {
                         default_s++;
                         $(".image-item").removeClass("d-none");
-
+                    
                         const categoryId = $(this).data("category-id");
                         const subcategoryId = $(this).data("subcategory-id");
-
-                        $(".image-item").each(function() {
+                    
+                        $(".image-item").each(function () {
                             const imgCategoryId = $(this).data("category-id");
-                            const imgSubcategoryIds = $(this).data("subcategory-id").toString()
-                                .split(',');
-
+                            const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+                    
                             if (
                                 imgCategoryId == categoryId &&
                                 imgSubcategoryIds.includes(subcategoryId.toString())
                             ) {
                                 // alert();
-                                // $(this).removeClass("d-none");
+                                // $(this).removeClass("d-none");      
                                 // $(this).show();
                                 $(this).show();
                                 $(this).removeClass("d-none");
@@ -384,12 +383,12 @@
                                 $(this).css("visibility", "visible");
                                 $(this).removeClass("wow");
                                 $(this).removeClass("d-none").fadeIn();
-                            } else {
+                            }else{
                                 $(this).hide();
                                 $(this).fadeOut().addClass("d-none");
                             }
                         });
-                    });
+            });
 
 
                     if (default_s == 0) {
@@ -764,6 +763,7 @@
                 $(".image-item-new").hide(); // Hide new items initially
 
                 $('input[name="design_subcategory"]:checked').each(function() {
+                    // alert();
                     const categoryId = $(this).data("category-id");
                     const subcategoryId = $(this).data("subcategory-id");
 

@@ -15,7 +15,8 @@ use App\Models\{
     EventDesignCategory,
     EventImage,
     UserNotificationType,
-    UserProfilePrivacy
+    UserProfilePrivacy,
+    TextData
 };
 use Illuminate\Support\Facades\Session;
 use App\Services\CSVImportService;
@@ -399,17 +400,64 @@ class HomeController extends BaseController
 
             $events_calender_json = json_encode($events_calender, JSON_UNESCAPED_SLASHES);
 
-            $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-                $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
-            })->with([
-                    'subcategory' => function ($query) {
-                        $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
-                            ->with('textdatas'); // Load the textdatas relationship
-                    }
-                ])
-                ->orderBy('id', 'ASC')
-                ->get();
+            // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            //     $query->whereHas('textdatas'); // Ensures only subcategories that have related textdatas are included
+            // })->with([
+            //         'subcategory' => function ($query) {
+            //             $query->whereHas('textdatas') // Ensures only subcategories with textdatas are retrieved
+            //                 ->with('textdatas'); // Load the textdatas relationship
+            //         }
+            //     ])
+            //     ->orderBy('id', 'ASC')
+            //     ->get();
 
+            $categories = EventDesignCategory::with([
+                'subcategory' => function ($query) {
+                    $query->with([
+                        'textdatas' => function ($q) {
+                            $q->where('is_visible', '1');
+                        },
+                        'textdatas.subcategories'
+                    ]);
+                }
+            ])
+            ->whereHas('subcategory', function ($query) {
+                $query->whereHas('textdatas', function ($q) {
+                    $q->where('is_visible', '1');
+                })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+            })
+            ->orderBy('id', 'ASC')
+            ->get();
+    
+            $textdatatss = TextData::where('is_visible', 1)
+                            ->with('categories')
+                            ->with('subcategories')
+                            ->get()
+                            ->groupBy('id')
+                            ->map(function ($grouped) {
+                                $textdata = $grouped->first(); // Since grouped by ID
+                                return [
+                                    'imageId' => $textdata->id,
+                                    'tags' => $textdata->tags,
+                                    'is_visible' => $textdata->is_visible,
+                                    'image' => $textdata->image,
+                                    'image_path' => $textdata->filled_image,
+                                    'shape_image' => $textdata->image,
+                                    'static_information' => $textdata->static_information,
+                                    'category_name' => optional($textdata->categories)->category_name,
+                                    'category_id' => optional($textdata->categories)->id,
+                                    'subcategory_name' => $textdata->subcategories
+                                        ->pluck('subcategory_name')
+                                        ->unique()
+                                        ->implode(','),
+    
+                                    'subcategory_id' => $textdata->subcategories
+                                        ->pluck('id')
+                                        ->unique()
+                                        ->implode(','),
+                                ];
+                            })
+                            ->values();
 
             $totalTextDataCount = $categories->count();
             $imagecount = $totalTextDataCount;
@@ -428,6 +476,7 @@ class HomeController extends BaseController
                 'startMonth',
                 'numMonths',
                 'diffmonth',
+                'textdatatss',
                 'events_calender_json',
                 'startMonthCalender'
             ));

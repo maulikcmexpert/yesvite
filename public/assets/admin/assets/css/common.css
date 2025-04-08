@@ -1148,6 +1148,15 @@ table.table tbody tr {
     height: 15px;
 }
 
+.edit-subcategory-drp br{
+    display: none;
+}
+
+.edit-subcategory-drp .inner-wrap{
+    max-height: 150px !important;
+    overflow-y: scroll !important;
+}
+
 /* ========Responsive====== */
 
 @media only screen and (max-width: 768px) {

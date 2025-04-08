@@ -408,7 +408,7 @@
             <div>
                 <h3>We value your privacy</h3>
                 <p><b>By using yesvite,you agree to our </b><a
-                    href="#">Privacy Policy</a> and Terms of use. we use your information only to provide and improve our service.
+                    href="{{ route('privacy_policy') }}">Privacy Policy</a> and Terms of use. we use your information only to provide and improve our service.
                 we do not sell your data.</div></p>
             </div>
             {{-- <button class="remove_privacy_cookie close-btn-privacy-cookie"><i class="fa-solid fa-xmark"></i></button> --}}

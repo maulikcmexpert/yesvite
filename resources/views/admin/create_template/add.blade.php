@@ -32,7 +32,7 @@
 
 
 
-            <form method="post" action="{{ route('create_template.store')}}" id="templateForm"
+            <form method="post" action="{{ route('create_template.store')}}" id="templateEditForm"
                 enctype="multipart/form-data">
 
                 @csrf
@@ -69,7 +69,7 @@
                             <div class="wrapper new-wrp">
                                 <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
                                     subbcategory <i class="fa-solid fa-angle-down"></i></button>
-                                <div class="checkboxes select-subcat-inner" id="Sub Category">
+                                <div class="checkboxes select-subcat-inner edit-subcategory-drp" id="Sub Category">
 
 
                                     <div class="inner-wrap" id="event_design_sub_category_id">
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-danger">{{ $errors->first('event_design_sub_category_id.*') }}</span>
+                            <span class="text-danger subcategory_error_bx">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
                     <div class="col-lg-3 mb-3">

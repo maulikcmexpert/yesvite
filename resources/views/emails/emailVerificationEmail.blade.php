@@ -48,9 +48,13 @@
                 <!-- -------------- -->
                 <tr>
                     <td>
-                        <h4
+                        {{-- <h4
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #000000 ;margin: 0px 0px;font-family: 'SF Pro Display'">
                             Hello {{$userData['username']}},
+                        </h4> --}}
+                        <h4
+                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #000000 ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                            Hi,
                         </h4>
                     </td>
                 </tr>
@@ -72,99 +76,118 @@
                 <tr>
                     <td height="7" style="font-size:0px">&nbsp;</td>
                 </tr>
-                {{-- <tr>
+                <tr>
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Your email address: {{$userData['email']}} was added to your Yesvite account.</p>
+                            Click below to verify your email and secure your account:</p>
                         </p>
                     </td>
-                </tr> --}}
+                </tr>
                 <tr>
                     <td height="7" style="font-size:0px">&nbsp;</td>
                 </tr>
                 @if(isset($userData['password'])&& $userData['password']!="")
-                <tr>
-                    <td>
-                        <p
-                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Your Email have been verified, click the button below to login.</p>
-                    </td>
-                </tr>
-                <!-- -------------- -->
-                <tr>
-                    <td height="10" style="font-size:0px">&nbsp;</td>
-                </tr>
+                        <tr>
+                            <td>
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    Your Email have been verified, click the button below to login.</p>
+                            </td>
+                        </tr>
+                        <!-- -------------- -->
+                        <tr>
+                            <td height="10" style="font-size:0px">&nbsp;</td>
+                        </tr>
 
-                <tr>
-                    <td>
-                        <p
-                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            Your Temporary password for login is : {{$userData['password']}}. </br>After login Please make sure to Change this temporary password for your security</p>
-                    </td>
-                </tr>
-                <!-- -------------- -->
-                <tr>
-                    <td height="10" style="font-size:0px">&nbsp;</td>
-                </tr>
-
-
-                <!-- -------------- -->
-                <tr>
-                    <td>
-                        <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <a href="{{ route('auth.login') }}"><button
-                                    style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Login here</button></a>
-                         
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="15" style="font-size:0px">&nbsp;</td>
-                </tr>
-                {{-- <tr>
-                    <td>
-                        <p
-                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            This email expires after 3 hours. But no worries, if your email expires you can request
-                            another one from support.</p>
-                    </td>
-                </tr> --}}
-                @else
-                <tr>
-                    <td>
-                        <p
-                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            To verify your email address and secure your account, click the verify account button below.</p>
-                    </td>
-                </tr>
-                <!-- -------------- -->
-                <tr>
-                    <td height="10" style="font-size:0px">&nbsp;</td>
-                </tr>
+                        <tr>
+                            <td>
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    Your Temporary password for login is : {{$userData['password']}}. </br>After login Please make sure to Change this temporary password for your security</p>
+                            </td>
+                        </tr>
+                        <!-- -------------- -->
+                        <tr>
+                            <td height="10" style="font-size:0px">&nbsp;</td>
+                        </tr>
 
 
-                <!-- -------------- -->
-                <tr>
-                    <td>
-                        <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
-                            <a href="{{ route('user.verify',$userData['token']) }}"><button
-                                    style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
-                                    Account</button></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="15" style="font-size:0px">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p
-                            style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            This email expires after 3 hours. But no worries, if your email expires you can request
-                            another one from our support team <a href="https://docs.google.com/forms/d/e/1FAIpQLSdj1Jt0MmugCJ5OCh8j6ITod6o_ERI5vm4kJup0PWtDeAemTA/viewform?usp=dialog">here</a>.</p>
-                    </td>
-                </tr>
+                        <!-- -------------- -->
+                        <tr>
+                            <td>
+                                <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
+                                    <a href="{{ route('auth.login') }}"><button
+                                            style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Login here</button></a>
+                                
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="15" style="font-size:0px">&nbsp;</td>
+                        </tr>
+                        {{-- <tr>
+                            <td>
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    This email expires after 3 hours. But no worries, if your email expires you can request
+                                    another one from support.</p>
+                            </td>
+                        </tr> --}}
+                        @else
+                        {{-- <tr>
+                            <td>
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    To verify your email address and secure your account, click the verify account button below.</p>
+                            </td>
+                        </tr> --}}
+                        <!-- -------------- -->
+                        <tr>
+                            <td height="10" style="font-size:0px">&nbsp;</td>
+                        </tr>
+
+
+                        <!-- -------------- -->
+                        <tr>
+                            <td>
+                                <div class="view-btn" style="display: flex;align-items: center;gap: 15px;">
+                                    <a href="{{ route('user.verify',$userData['token']) }}"><button
+                                            style="font-family: 'SF Pro Display', sans-serif;font-size: 14px;line-height: 20px;font-weight: 500;color: #fff;background: #F73C71;border: 1px solid #F73C71;border-radius: 10px; padding: 10px 30px 10px 30px;width: 100%;max-width: 325px;text-transform: capitalize;">Verify
+                                            Account</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="15" style="font-size:0px">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{-- <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    This email expires after 3 hours. But no worries, if your email expires you can request
+                                    another one from our support team <a href="https://support.yesvite.com/hc/en-us">here</a>.</p> --}}
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    This link expires in 3 hours.
+                                    </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="15" style="font-size:0px">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{-- <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    This email expires after 3 hours. But no worries, if your email expires you can request
+                                    another one from our support team <a href="https://support.yesvite.com/hc/en-us">here</a>.</p> --}}
+                                <p
+                                    style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
+                                    Need a new one? Email us at <a href="mailto:support@yesvite.com">support@yesvite.com</a>
+                                </p>
+                            </td>
+                        </tr>
                 @endif
                 <tr>
                     <td height="7" style="font-size:0px">&nbsp;</td>
@@ -173,7 +196,8 @@
                     <td>
                         <p
                             style="font-size: 16px;line-height: 25px;font-weight: 400;color: #0F172A ;margin: 0px 0px;font-family: 'SF Pro Display'">
-                            If you didn't make this request, please feel free to ignore this email. If you still need additional help please visit our <a href="https://docs.google.com/forms/d/e/1FAIpQLSdj1Jt0MmugCJ5OCh8j6ITod6o_ERI5vm4kJup0PWtDeAemTA/viewform?usp=dialog">Help Center</a>.</p>
+                            Didn't request this? Just ignore it or if you need more help contact us at the email address above.
+                        </p>
                     </td>
                 </tr>
                 <!-- -------------- -->
