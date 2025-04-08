@@ -995,7 +995,7 @@ $(document).ready(function () {
 
         // Validate options
         renumberOptions(); // Update option numbers before validation
-        $(".option-error").remove();
+        // $(".option-error").remove();
         $("input[name='options[]']").each(function () {
             const val = $(this).val().trim();
             const inputWrapper = $(this).closest(".position-relative");
@@ -1004,7 +1004,7 @@ $(document).ready(function () {
             inputWrapper.next(".option-error").remove();
 
             // Get updated index from the label
-            const optionIndex = $(this).closest(".option-poll").find(".option-number").text();
+            const optionIndex =     $(this).closest(".option-poll").index() + 1;;
 
             if (val === "") {
                 inputWrapper.after(
