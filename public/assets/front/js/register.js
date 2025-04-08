@@ -20,7 +20,8 @@ $(document).ready(function () {
                 /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(value)
             );
         },
-        "At least 6 characters with a combination of letters, numbers, and a special character"
+        "At least 6 characters, with letters, numbers & a special character"
+        // "At least 6 characters with a combination of letters, numbers, and a special character"
     );
     
 
@@ -84,7 +85,7 @@ $(document).ready(function () {
             password: {
                 required: "Please enter your password",
                 passwordCheck:
-                    "At least 6 characters with a combination of letters, numbers, and a special character",
+                    "At least 6 characters, with letters, numbers & a special character",
             },
             cpassword: {
                 required: "Please confirm your password",
