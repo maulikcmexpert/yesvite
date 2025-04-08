@@ -337,13 +337,19 @@
                 var subcategoryData = {
                     id: {{ $subcategory->id }},
                     name: "{{ $subcategory->subcategory_name }}",
-                    images: []
+                    images: [],
+                    tags:[]
                 };
 
                 @foreach ($subcategory->textdatas as $image)
                     subcategoryData.images.push({
                         id: {{ $image->id }},
                         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+
+                    });
+                    subcategoryData.tags.push({
+                        id: {{ $image->id }},
+                        tags: {{ $image->tags }}
 
                     });
                 @endforeach
