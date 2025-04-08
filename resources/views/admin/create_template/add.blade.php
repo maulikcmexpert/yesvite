@@ -106,8 +106,8 @@
                                       </label> --}}
                                     </div>
                                 </div>
+                                <span class="text-danger subcategory_error_bx">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                             </div>
-                            <span class="text-danger subcategory_error_bx">{{ $errors->first('event_design_sub_category_id.*') }}</span>
                         </div>
                     </div>
                     <div class="col-lg-3 mb-3">
