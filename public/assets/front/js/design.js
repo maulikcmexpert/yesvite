@@ -678,16 +678,8 @@ $(document).on("click", ".edit_design_tem", function (e) {
             }
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
-
-            setTimeout(async () => {
-                try {
-                    await waitForImageLoad(".image-edit-inner-img");
-                    $("#loader").css("display", "none");
-                } catch (e) {
-                    console.error("Image load error:", e);
-                    $("#loader").css("display", "none");
-                }
-            }, 100);
+            await bindData(current_event_id);
+        //  setTimeout(() => $("#loader").css("display", "none"), 500);
 
         },
         error: function (xhr, status, error) {
@@ -695,22 +687,6 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
-function waitForImageLoad(selector) {
-    return new Promise((resolve, reject) => {
-        const img = document.querySelector(selector);
-        if (!img) return reject("Image element not found");
-
-        if (img.complete && img.naturalHeight !== 0) {
-            // Already loaded
-            resolve();
-        } else {
-            // Wait until it loads
-            img.onload = () => resolve();
-            img.onerror = () => reject("Image failed to load");
-        }
-    });
-}
-
 fontloadedEnsure = false;
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");

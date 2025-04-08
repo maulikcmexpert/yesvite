@@ -1,10 +1,10 @@
 
 // ======= increement/deecrement rsvp ======
 
- 
+
 $('#ChangeToggle').click(function() {
     $('#navbar-hamburger').toggleClass('hidden');
-    $('#navbar-close').toggleClass('hidden');  
+    $('#navbar-close').toggleClass('hidden');
 });
 
 var buttonPlus  = $(".qty-btn-plus-qty");
@@ -98,7 +98,7 @@ $(document).on('click', '.allow_limit_btn_minus', function() {
 // });
 
 //  ===== focusinput =====
-$(".form-control").on('focusin', 
+$(".form-control").on('focusin',
     function(){
     $(this).next().addClass('floatingfocus');
 })
@@ -161,9 +161,9 @@ $("#event-date").on("focus input blur", function () {
 //         fileReader.addEventListener("load", function () {
 //         imgPreview.style.display = "block";
 //         imgPreview.innerHTML = '<img src="' + this.result + '" />';
-//         });    
+//         });
 //     }
-    
+
 //     }
 
 //     function getBGImgData() {
@@ -174,9 +174,9 @@ $("#event-date").on("focus input blur", function () {
 //             fileReader.addEventListener("load", function () {
 //             bgcover.style.display = "block";
 //             bgcover.innerHTML = '<img src="' + this.result + '" />';
-//             });    
+//             });
 //         }
-        
+
 //     }
 
 
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-    
+
 
 // ====== loader-btn
 $(function(){
@@ -219,19 +219,21 @@ $(function(){
     loaderbtn.addEventListener("click", function() {
         loaderbtn.innerHTML = "Save Changes";
         loaderbtn.classList.add('spinning');
-      setTimeout( 
-            function  (){  
+      setTimeout(
+            function  (){
                 loaderbtn.classList.remove('spinning');
                 loaderbtn.innerHTML = "Save Changes";
-                
+
             }, 6000);
     }, false);
-    
+
 });
 
 
 $( window ).on( "load", function() {
     console.log( "window loaded" );
+           // finally hide loader
+           $("#loader").css("display", "none");
     // $("#sidebar").css({"right": "-200%", "width": "0px"});
 });
 
@@ -277,14 +279,14 @@ $( window ).on( "load", function() {
 //         }
 //     });
 // });
-   
+
 
 $(document).ready(function(){
     $('.toggleButton').on('click', function() {
-        
+
         const $details = $('.details');
         const $button = $('.toggleButton');
-        
+
         $details.stop(true, true).slideToggle(300, function() {
             const isVisible = $details.is(':visible');
             $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between"><span class="limited-hide">Limited Featres</span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between"> <span class="limited-show">Limited Featres (15 guests max)</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
@@ -298,7 +300,7 @@ $(document).ready(function(){
     $('.toggleButtonpro').on('click', function() {
         const $details = $('.detailspro');
         const $button = $('.toggleButtonpro');
-        
+
         $details.stop(true, true).slideToggle(300, function() {
             const isVisible = $details.is(':visible');
             $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Pay as you go <strong>per event</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">All the PRO features for this one event</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
@@ -312,7 +314,7 @@ $(document).ready(function(){
     $('.toggledeal').on('click', function() {
         const $details = $('.detailsdeal');
         const $button = $('.toggledeal');
-        
+
         $details.stop(true, true).slideToggle(300, function() {
             const isVisible = $details.is(':visible');
             $button.html(isVisible ? '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"><span class="limited-hide">Best Deal!</strong></span><span class="">Hide details <i class="fa-solid fa-chevron-up chevron"></i></span> </div>' : '<div class="w-100 d-flex justify-content-between" style="cursor:pointer"> <span class="limited-show" style="color:green">Best Deal!</span><span class="">Show details <i class="fa-solid fa-chevron-down chevron"></i></span></div>');
