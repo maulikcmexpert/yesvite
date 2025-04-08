@@ -996,12 +996,17 @@ $(document).ready(function () {
         // Validate options
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
-            $(this).next(".option-error").remove();
+            const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
+            inputWrapper.find(".option-error").remove(); // remove any existing errors
+
             if (val === "") {
-                $(this).after("<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>");
+                inputWrapper.find(".input-option-delete").after(
+                    "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
+                );
                 hasError = true;
             }
         });
+
 
         return !hasError;
     }
