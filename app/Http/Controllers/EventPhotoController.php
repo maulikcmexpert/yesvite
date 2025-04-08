@@ -712,7 +712,6 @@ class EventPhotoController extends BaseController
 
     public function createEventPost(Request $request)
     {
-        // dd($request->all());
 
         // dd($request->hasFile('files'));
         $user = Auth::guard('web')->user()->id;
@@ -735,13 +734,14 @@ class EventPhotoController extends BaseController
             $videoCount = 0;
             $imageCount = 0;
             // dd($postFiles);
-            foreach ($request->file('files') as $file) {
-                $fileName =  time() . '_' . $file->getClientOriginalName();
+            foreach ($postFiles as $key => $postFile) {
+                $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
+
                 // Save file to storage/app/public/post_image/
-                $filePath = $file->move(public_path('storage/post_image'), $fileName);
+                $filePath = $postFile->move(public_path('storage/post_image'), $fileName);
 
 
-                $checkIsImageOrVideo = checkIsImageOrVideo($file); // Assuming this is a helper function
+                $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // Assuming this is a helper function
                 $duration = "";
                 $thumbName = "";
 
