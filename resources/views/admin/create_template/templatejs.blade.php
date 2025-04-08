@@ -466,7 +466,10 @@
 
         $('.bootstrap-tagsinput input').on('input', function () {
         // alert('This is bootstrap tags');
-        const searchText = $(this).val().toLowerCase();
+        console.log(1);
+        console.log(designData);
+        
+        // const searchText = $(this).val().toLowerCase();
 
 // Array to hold matched results
 const matched = [];
@@ -499,6 +502,7 @@ const query = $(this).val().toLowerCase();
                 results = `<div class="search-item">No Data Found</div>`;
             }
         }
+        console.log(results);
 
         $('#filtered_results').html(results);
     });
