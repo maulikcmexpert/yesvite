@@ -404,11 +404,6 @@ ul.nav-tabs .nav-link:focus {
     left: 8px;
 }
 
-.register-wrap .label-error{
-    bottom: 0px !important;
-    position: static !important;
-}
-
 
 .label-error label {
     font-size: 11px;
