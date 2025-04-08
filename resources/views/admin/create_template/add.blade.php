@@ -198,6 +198,7 @@
 
 @push('scripts')
     <script>
+        alert();
         let categories = @json($categories);
         console.log(categories);
         
