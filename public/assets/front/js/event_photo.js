@@ -19,79 +19,51 @@ $(document).ready(function () {
     }
 
     // Submit form on button click
-    // $(document).on("click", ".create_post", function () {
-    //     // Check if the poll form exists and is valid
-    //     var $this = $(this); // Ca
-    //     var photoForm = $("#photoForm");
-    //     var textForm = $("#textform");
-    //     var photoInput = document.querySelector(".fileInputtype");
-    //     var imagePreview = $("#imagePreview").children().length; // Che
-    //     console.log(
-    //         "Photo Form:",
-    //         photoForm.length > 0 ? "Exists" : "Does not exist"
-    //     );
-
-    //     if (photoForm.is(":visible") && photoForm.length > 0) {
-    //         if (photoInput.files.length === 0 && imagePreview === 0) {
-    //             toastr.error(
-    //                 "Please upload a photo or enter some content for the photo post."
-    //             );
-    //             return;
-    //         }
-
-    //         $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
-    //         photoForm.submit();
-    //     }
-    //     // If neither form exists, check for a plain text post
-    //     else if (textForm.length > 0 && postContent !== "") {
-    //         textForm.submit();
-    //     }
-    //     // If no valid content is provided, show an alert
-    //     else {
-    //         alert("Please fill all required fields before submitting.");
-    //     }
-    // });
     $(document).on("click", ".create_post", function () {
-        var $this = $(this);
+        // Check if the poll form exists and is valid
+        var $this = $(this); // Ca
         var photoForm = $("#photoForm");
         var textForm = $("#textform");
-        var fileInputs = document.querySelectorAll(".fileInputtype");
-        var imagePreview = $("#imagePreview").children().length;
-
+        var photoInput = document.querySelector(".fileInputtype");
+        var imagePreview = $("#imagePreview").children().length; // Che
         console.log(
             "Photo Form:",
             photoForm.length > 0 ? "Exists" : "Does not exist"
         );
 
-        // Count total files across all inputs
-        let totalFiles = 0;
-        fileInputs.forEach((input) => {
-            totalFiles += input.files.length;
-        });
-
         if (photoForm.is(":visible") && photoForm.length > 0) {
-            if (totalFiles === 0 && imagePreview === 0) {
+            if (photoInput.files.length === 0 && imagePreview === 0) {
                 toastr.error(
                     "Please upload a photo or enter some content for the photo post."
                 );
                 return;
             }
+            const input1 = document.getElementById("fileInput1");
+            const input2 = document.getElementById("fileInput2");
 
-            $this
-                .html(
-                    '<div class="s-loader"><div></div><div></div><div></div><div></div></div>'
-                )
-                .prop("disabled", true);
+            const dataTransfer = new DataTransfer();
 
-            photoForm.submit();
-        } else if (textForm.length > 0) {
-            let postContent = $("#postContent").val(); // adjust this selector to your textarea/input
-            if (postContent !== "") {
-                textForm.submit();
-            } else {
-                alert("Please fill all required fields before submitting.");
+            // Add files from input1
+            for (let i = 0; i < input1.files.length; i++) {
+                dataTransfer.items.add(input1.files[i]);
             }
-        } else {
+
+            // Add files from input2
+            for (let i = 0; i < input2.files.length; i++) {
+                dataTransfer.items.add(input2.files[i]);
+            }
+
+            // Put all into input1 (or create a hidden input)
+            input1.files = dataTransfer.files;
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+            photoForm.submit();
+        }
+        // If neither form exists, check for a plain text post
+        else if (textForm.length > 0 && postContent !== "") {
+            textForm.submit();
+        }
+        // If no valid content is provided, show an alert
+        else {
             alert("Please fill all required fields before submitting.");
         }
     });
