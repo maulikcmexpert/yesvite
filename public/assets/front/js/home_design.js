@@ -298,22 +298,6 @@ $(document).ready(function () {
     //     let query = $(this).val().toLowerCase().trim();
     //     let results = "";
     //     if (query.length > 0) {
-    //         designData.forEach(category => {
-    //                         if (category.name.toLowerCase().includes(query)) {
-    //                             results +=
-    //                                 `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
-    //                         }
-    //                         // Check if no subcategory matched and add "No Data Found"
-            
-    //                         category.subcategories.forEach(subcategory => {
-    //                             if (subcategory.name.toLowerCase().includes(query)) {
-    //                                 results +=
-    //                                     `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-    //                             }
-    //                             // Check if no subcategory matched and add "No Data Found"
-            
-    //                         });
-    //                     });
     //         let visibleCount = 0;
     
     //         $(".image-item").each(function () {
@@ -361,13 +345,9 @@ $(document).ready(function () {
     //             );
     
     //             results += `<div class="search-item no-data">No Data Found</div>`;
-    //                 //         $('#filtered_results').html(results);
-
     //             $("#filtered_results").show();
     //             $("#filtered_results").html(results);
     //         }
-    //         $("#filtered_results").show();
-    //         $("#filtered_results").html(results);
     //     } else {
     //         $(".image-item").removeClass("d-none fadeInDown wow").show();
     //         let allItems = $(".image-item");
@@ -380,6 +360,7 @@ $(document).ready(function () {
     //         $("#filtered_results").hide();
     //     }
     // });
+
     $("#search_design_category").on("keyup", function () {
         let query = $(this).val().toLowerCase().trim();
         let results = "";
@@ -399,14 +380,14 @@ $(document).ready(function () {
                 // Match category
                 if (category.includes(query)) {
                     matches = true;
-                    suggestionSet.add(`<div class="search-item category" data-name="${category}">${category}</div>`);
+                    suggestionSet.add(`<div class="search-item category">Category: ${category}</div>`);
                 }
     
                 // Match subcategories
                 subcategories.forEach(subcat => {
                     if (subcat.includes(query)) {
                         matches = true;
-                        suggestionSet.add(`<div class="search-item subcategory" data-name="${subcat}">${subcat}</div>`);
+                        suggestionSet.add(`<div class="search-item subcategory">Subcategory: ${subcat}</div>`);
                     }
                 });
     
@@ -414,7 +395,7 @@ $(document).ready(function () {
                 tags.forEach(tag => {
                     if (tag.includes(query)) {
                         matches = true;
-                        suggestionSet.add(`<div class="search-item tag" data-name="${tag}">${tag}</div>`);
+                        suggestionSet.add(`<div class="search-item tag">Tag: ${tag}</div>`);
                     }
                 });
     
