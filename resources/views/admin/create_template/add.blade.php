@@ -66,7 +66,7 @@
 
                             {{-- </select> --}}
 
-                            <div class="wrapper new-wrp">
+                            <div class="wrapper new-wrp subcategory_drp_down_wrapper">
                                 <button class="form-control toggle-next select-subcat-btn ellipsis" type="button">Select
                                     subbcategory <i class="fa-solid fa-angle-down"></i></button>
                                 <div class="checkboxes select-subcat-inner edit-subcategory-drp" id="Sub Category">
