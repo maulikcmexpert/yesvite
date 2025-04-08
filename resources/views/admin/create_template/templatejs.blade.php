@@ -302,7 +302,7 @@
                 //         hasError = true;
                 //     }
                 if ($("input[name='subcategory[]']:checked").length === 0) {
-                    alert();
+                    // alert();
                     // e.preventDefault(); // Prevent form submission or action
                         $(".subcategory_error_bx").text('Please select design subcategory');
             }
