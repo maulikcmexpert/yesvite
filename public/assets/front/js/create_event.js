@@ -11188,6 +11188,7 @@ $(".new-create-account-close-btn").on("click", function (e) {
     // $(".new_login_page, .new_login").hide(); // Hide both elements
     // $("#edit-design-temp").show();
     $(".login_img img").attr("src", "");
+    $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
     // $(".new-event-sidebar-wrp").show();
 });
 
