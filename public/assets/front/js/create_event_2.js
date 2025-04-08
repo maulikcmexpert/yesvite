@@ -9533,6 +9533,8 @@ async function savePhotoSlider() {
         let event = $("#eventID").val();
 
         // try {
+            await new Promise(resolve => setTimeout(() => {
+
            $.ajax({
                 url: base_url + "event/save_slider_img",
                 method: "POST",
@@ -9582,6 +9584,8 @@ async function savePhotoSlider() {
                 },
 
             });
+            resolve();
+        }, 1500))
     }
 }
 
