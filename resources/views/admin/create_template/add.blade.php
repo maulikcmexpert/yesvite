@@ -153,6 +153,8 @@
                             <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput" />
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
+                        <div id="filtered_results" class="filtered-results-container"></div>
+
 
                     </div>
                 </div>

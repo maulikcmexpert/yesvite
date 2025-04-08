@@ -134,7 +134,7 @@ class TemplateController extends Controller
                 ->make(true);
         }
 
-
+  
         $title = 'Create Design Template';
 
         $page = 'admin.create_template.list';
@@ -148,12 +148,30 @@ class TemplateController extends Controller
      */
     public function create()
     {
+        $categories = EventDesignCategory::with([
+            'subcategory' => function ($query) {
+                $query->with([
+                    'textdatas' => function ($q) {
+                        $q->where('is_visible', '1');
+                    },
+                    'textdatas.subcategories'
+                ]);
+            }
+        ])
+        ->whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1');
+            })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+        })
+        ->orderBy('id', 'ASC')
+        ->get();
+        
         $title = 'Add Template';
         $page = 'admin.create_template.add';
         $js = 'admin.create_template.templatejs';
         $getDesignData = EventDesignCategory::all();
         $getsubcatData = EventDesignSubCategory::all();
-        return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData', 'getsubcatData'));
+        return view('admin.includes.layout', compact('title', 'page', 'js', 'getDesignData', 'getsubcatData','categories'));
     }
 
     /**
