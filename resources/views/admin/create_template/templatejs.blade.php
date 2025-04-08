@@ -462,7 +462,7 @@
 
     // $(document).ready(function () {
         const rawData = $('#designData').val();
-        const designData = JSON.parse(rawData);
+        var designData = JSON.parse(rawData);
 
         $('.bootstrap-tagsinput input').on('input', function () {
         // alert('This is bootstrap tags');
