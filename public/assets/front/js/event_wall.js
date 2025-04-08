@@ -1002,7 +1002,7 @@ $(document).ready(function () {
 
             if (val === "") {
                 inputWrapper.after(
-                    "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
+                    "<div class='option-error text-danger mt-1'>Option " + (index + 3) + " is required.</div>"
                 );
                 hasError = true;
             }
