@@ -713,7 +713,7 @@ class EventPhotoController extends BaseController
     public function createEventPost(Request $request)
     {
 
-        dd($request->file('files'));
+        dd(count($request->file('files')), $request->file('files'));
         $user = Auth::guard('web')->user()->id;
 
         // Create new event post
