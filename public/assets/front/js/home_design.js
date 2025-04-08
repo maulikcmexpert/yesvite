@@ -490,13 +490,11 @@ $(document).ready(function () {
                 let categoryId = $item.data("category-id");
                 let subcategoryId = $item.data("subcategory-id");
     
-                // Match and add unique category
                 if (category.includes(query) && !addedCategories.has(category)) {
                     suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">Cat :${category}</div>`);
                     addedCategories.add(category);
                 }
     
-                // Match and add unique subcategories
                 subcategories.forEach(subcat => {
                     let subcatTrimmed = subcat.trim();
                     if (subcatTrimmed.includes(query) && !addedSubcategories.has(subcatTrimmed)) {
@@ -505,7 +503,6 @@ $(document).ready(function () {
                     }
                 });
     
-                // Match and add unique tags
                 tags.forEach(tag => {
                     let tagTrimmed = tag.trim();
                     if (tagTrimmed.includes(query) && !addedTags.has(tagTrimmed)) {
@@ -524,7 +521,6 @@ $(document).ready(function () {
             }
     
         } else {
-            // Reset state when input is cleared
             $("#filtered_results").hide();
             $(".image-item").removeClass("d-none fadeInDown wow").show();
     
