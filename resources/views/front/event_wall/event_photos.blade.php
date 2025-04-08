@@ -629,17 +629,16 @@
                         </div>
                     </div>
                     <form action="{{ route('event_photo.eventPost') }}" id="photoForm" method="POST"
-                       enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="create-post-upload-img-wrp ">
                             <div class="create-post-upload-img-head">
                                 <h4>PHOTOS</h4>
                                 <div>
-                                    <input type="file" id="combinedFilesInput" name="files[]" multiple hidden>
                                     <button type="button" class="uploadButton create-post-head-upload-btn "><i
                                             class="fa-solid fa-plus"></i> Add Photos/video
-                                        <input type="file" id="fileInput2" class="fileInputtype"
-                                        accept="image/*,video/*" multiple></button>
+                                        <input type="file" id="fileInput2" name="files[]" class="fileInputtype"
+                                            accept="image/*,video/*" multiple></button>
                                     <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -697,7 +696,7 @@
                                     <p>or drag and drop here</p>
                                     <button type="button" class="uploadButton">Upload
                                         <input type="file" id="fileInput" class="fileInputtype"
-                                            accept="image/*,video/*"  multiple></button>
+                                            accept="image/*,video/*" name="files[]" multiple></button>
                                 </div>
                                 <div class="create-post-uploaded-images">
                                     <div class="row" id="imagePreview">
