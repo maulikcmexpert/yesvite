@@ -5547,8 +5547,18 @@ $(document).on("click", ".li_event_details", async function () {
 
                 reader.onloadend = function () {
                     let base64Image = reader.result;
-                    $(".login_img img").attr("src", base64Image);
 
+                    let newItem = `
+                    <div class="item">
+                        <div class="rsvp-img login_img">
+                            <img src="${base64Image}" alt="birth-card">
+                        </div>
+                        <button class="image-zoom-icon silder_zoom" data-image="${base64Image}">
+                            <img src="${zoomIconPath}" alt="">
+                        </button>
+                    </div>
+                `;
+                slider.append(newItem);
                     let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
 
                     $(".slider_img").each(function () {
