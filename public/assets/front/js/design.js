@@ -683,10 +683,10 @@ $(document).on("click", ".edit_design_tem", function (e) {
         // Wait for bindData to finish rendering
         await bindData(current_event_id);
 
-        // Wait until the main image finishes loading
+        // wait for all images in container (better approach if multiple images are there)
         await waitForImageLoad(".image-edit-inner-img");
 
-        // All done – hide loader
+        // finally hide loader
         $("#loader").css("display", "none");
 
     } catch (error) {
