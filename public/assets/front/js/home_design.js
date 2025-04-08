@@ -350,7 +350,7 @@ $(document).ready(function () {
             $(".total_design_count").text(visibleCount + " Items");
     
             if (visibleCount > 0) {
-                $("#filtered_results").hide();
+                // $("#filtered_results").hide();
             } else {
                 $("#filtered_results").show();
             }
