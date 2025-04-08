@@ -228,5 +228,6 @@
     }
 @endphp
 
-<input id="designData" value="{{$designData}}" hidden/>
+<input id="designData" type="hidden" value='@json($designData)' />
+
 
