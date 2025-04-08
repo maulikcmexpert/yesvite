@@ -460,48 +460,46 @@
         });
     });
 
+    $(document).ready(function () {
+        const rawData = $('#designData').val();
+        const designData = JSON.parse(rawData);
 
-    var designData = JSON.parse(document.getElementById('designData').value);
+        $('.bootstrap-tagsinput input').on('input', function () {
+        // alert('This is bootstrap tags');
+        const searchText = $(this).val().toLowerCase();
 
-// Ensure designData is correctly parsed
-console.log("Parsed designData:", designData);
+// Array to hold matched results
+const matched = [];
 
-// const tagsInput = document.getElementById("tags");
-const resultsContainer = document.getElementById("filtered_results");
+const query = $(this).val().toLowerCase();
+        let results = '';
 
-$(document).on("keyup", ".bootstrap-tagsinput input", function () {
-    const searchTerm = $(this).val().toLowerCase().trim();
-    resultsContainer.innerHTML = ""; // clear previous results
+        if (query.trim() !== '') {
+            designData.forEach(category => {
+                // Match category
+                if (category.name.toLowerCase().includes(query)) {
+                    results += `
+                        <div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">
+                            ${category.name}
+                        </div>`;
+                }
 
-    if (searchTerm === "") return;
-
-    let html = "";
-
-    designData.forEach(cat => {
-        let matchedSubcategories = [];
-
-        const categoryMatch = cat.name.toLowerCase().includes(searchTerm);
-
-        cat.subcategories?.forEach(sub => {
-            if (sub.name.toLowerCase().includes(searchTerm)) {
-                matchedSubcategories.push(sub.name);
-            }
-        });
-
-        if (categoryMatch || matchedSubcategories.length > 0) {
-            html += `<div class="mb-2"><strong>Category:</strong> ${cat.name}</div>`;
-
-            if (matchedSubcategories.length > 0) {
-                html += `<ul>`;
-                matchedSubcategories.forEach(sub => {
-                    html += `<li>${sub}</li>`;
+                // Match subcategories
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results += `
+                            <div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">
+                                ${subcategory.name}
+                            </div>`;
+                    }
                 });
-                html += `</ul>`;
+            });
+
+            if (results === '') {
+                results = `<div class="search-item">No Data Found</div>`;
             }
         }
+
+        $('#filtered_results').html(results);
     });
-
-    resultsContainer.innerHTML = html !== "" ? html : `<div>No results found.</div>`;
-});
-
 </script>

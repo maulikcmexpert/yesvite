@@ -195,5 +195,29 @@
         </div>
     </div>
 </div>
-<input id="designData" value="{{$categories}}" hidden/>
+
+@php
+    $designData = [];
+
+    foreach ($categories as $category) {
+        $categoryData = [
+            'id' => $category->id,
+            'name' => $category->category_name,
+            'subcategories' => [],
+        ];
+
+        foreach ($category->subcategory as $subcategory) {
+            $subcategoryData = [
+                'id' => $subcategory->id,
+                'name' => $subcategory->subcategory_name,
+            ];
+            $categoryData['subcategories'][] = $subcategoryData;
+        }
+
+        $designData[] = $categoryData;
+    }
+@endphp
+
+<input id="designData" type="hidden" value='@json($designData)' />
+
 
