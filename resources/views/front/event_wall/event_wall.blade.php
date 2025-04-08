@@ -1296,7 +1296,7 @@
                                     <div class="mb-3">
                                         <label for="pollduration"
                                             class="form-label d-flex align-items-center justify-content-between">Poll
-                                            Duration</label>
+                                            Duration *</label>
                                         <select name="duration" class="form-select"
                                             aria-label="Default select example" required>
                                             <option value="">Select Poll Duration</option>

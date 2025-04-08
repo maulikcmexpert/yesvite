@@ -1148,7 +1148,7 @@ class EventPhotoController extends BaseController
         $postReactions = getReaction($request['event_post_id']);
         $postReaction = [];
 
-        
+
 
         foreach ($postReactions as $reactionVal) {
             $reactionInfo = [
