@@ -303,8 +303,12 @@
                 //     }
                 if ($("input[name='subcategory[]']:checked").length === 0) {
                     // alert();
-                    // e.preventDefault(); // Prevent form submission or action
+                        // e.preventDefault(); // Prevent form submission or action
                         $(".subcategory_error_bx").text('Please select design subcategory');
+                        hasError = true;
+            }else{
+                hasError = false;
+
             }
                     if (image === '') {
                         $("#image").next('.text-danger').text('Please upload Template');
