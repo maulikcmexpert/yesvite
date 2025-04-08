@@ -466,43 +466,42 @@
 // Ensure designData is correctly parsed
 console.log("Parsed designData:", designData);
 
-const tagsInput = document.getElementById("tags");
+// const tagsInput = document.getElementById("tags");
 const resultsContainer = document.getElementById("filtered_results");
 
-tagsInput.addEventListener("input", function () { // Changed to 'input' event
-    const searchTerm = tagsInput.value.toLowerCase();
+$(document).on("keyup", ".bootstrap-tagsinput input", function () {
+    const searchTerm = $(this).val().toLowerCase().trim();
     resultsContainer.innerHTML = ""; // clear previous results
 
-    if (searchTerm.trim() === "") return;
+    if (searchTerm === "") return;
 
-    const matchedItems = [];
+    let html = "";
 
-    designData.forEach(category => {
-        if (category.name.toLowerCase().includes(searchTerm)) {
-            matchedItems.push(`<div><strong>Category:</strong> ${category.name}</div>`);
-        }
+    designData.forEach(cat => {
+        let matchedSubcategories = [];
 
-        category.subcategories?.forEach(subcategory => { // Added null check
-            if (subcategory.name.toLowerCase().includes(searchTerm)) {
-                matchedItems.push(`<div>&nbsp;&nbsp;&nbsp;<strong>Subcategory:</strong> ${subcategory.name}</div>`);
-                //loop through the images.
-               /* subcategory.images?.forEach(image => {
-                     if(image.tags.toLowerCase().includes(searchTerm)){
-                        matchedItems.push(`<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <img src="${image.image_path}" alt="Related Image" width="100">
-                        <div>Tags: ${image.tags}</div>
-                        </div>`);
-                     }
-                });*/
+        const categoryMatch = cat.name.toLowerCase().includes(searchTerm);
+
+        cat.subcategories?.forEach(sub => {
+            if (sub.name.toLowerCase().includes(searchTerm)) {
+                matchedSubcategories.push(sub.name);
             }
         });
+
+        if (categoryMatch || matchedSubcategories.length > 0) {
+            html += `<div class="mb-2"><strong>Category:</strong> ${cat.name}</div>`;
+
+            if (matchedSubcategories.length > 0) {
+                html += `<ul>`;
+                matchedSubcategories.forEach(sub => {
+                    html += `<li>${sub}</li>`;
+                });
+                html += `</ul>`;
+            }
+        }
     });
 
-    if (matchedItems.length > 0) {
-        resultsContainer.innerHTML = matchedItems.join("");
-    } else {
-        resultsContainer.innerHTML = `<div>No results found.</div>`;
-    }
+    resultsContainer.innerHTML = html !== "" ? html : `<div>No results found.</div>`;
 });
 
 </script>
