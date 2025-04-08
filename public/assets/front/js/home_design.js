@@ -350,7 +350,7 @@ $(document).ready(function () {
             $(".total_design_count").text(visibleCount + " Items");
     
             if (visibleCount > 0) {
-                // $("#filtered_results").hide();
+                $("#filtered_results").hide();
             } else {
                 $("#filtered_results").show();
             }
@@ -366,6 +366,8 @@ $(document).ready(function () {
                 $("#filtered_results").show();
                 $("#filtered_results").html(results);
             }
+            $("#filtered_results").show();
+            $("#filtered_results").html(results);
         } else {
             $(".image-item").removeClass("d-none fadeInDown wow").show();
             let allItems = $(".image-item");
