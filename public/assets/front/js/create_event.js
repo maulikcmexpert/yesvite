@@ -5528,47 +5528,54 @@ $(document).on("click", ".li_event_details", async function () {
         $("#loader").css("display", "flex");
         let element = document.getElementById("imageEditor1"); // Target element to capture
         if (element) {
-            let reader = new FileReader();
-            reader.readAsDataURL(capturedBlob);
-            reader.onloadend = function () {
-                let base64Image = reader.result;
-                $(".login_img img").attr("src", base64Image);
+            let capturedBlob = await captureImage(element);
+            const imageResponse = await uploadImage(capturedBlob);
 
-                let slider = $(".create-account-slider.slider_login");
+            localStorage.setItem("final_upload_image", imageResponse.image);
 
-                // Clear existing items before appending new ones
-                slider.trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
+            if (capturedBlob) {
+                let reader = new FileReader();
+                reader.readAsDataURL(capturedBlob);
+                reader.onloadend = function () {
+                    let base64Image = reader.result;
+                    $(".login_img img").attr("src", base64Image);
 
-                $(".slider_img").each(function () {
-                    var slide_image = $(this).attr("src");
-                    if (slide_image && slide_image.trim() !== "") {
-                        let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
-                        let newItem = `
-                            <div class="item">
-                                <div class="rsvp-img login_img">
-                                    <img src="${slide_image}" alt="birth-card">
+                    let slider = $(".create-account-slider.slider_login");
+
+                    // Clear existing items before appending new ones
+                    slider.trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
+
+                    $(".slider_img").each(function () {
+                        var slide_image = $(this).attr("src");
+                        if (slide_image && slide_image.trim() !== "") {
+                            let zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+                            let newItem = `
+                                <div class="item">
+                                    <div class="rsvp-img login_img">
+                                        <img src="${slide_image}" alt="birth-card">
+                                    </div>
+                                    <button class="image-zoom-icon silder_zoom" data-image="${slide_image}">
+                                        <img src="${zoomIconPath}" alt="">
+                                    </button>
                                 </div>
-                                <button class="image-zoom-icon silder_zoom" data-image="${slide_image}">
-                                    <img src="${zoomIconPath}" alt="">
-                                </button>
-                            </div>
-                        `;
+                            `;
 
-                        // Append new image item
-                        slider.trigger("add.owl.carousel", [$(newItem)]).trigger("refresh.owl.carousel");
+                            // Append new image item
+                            slider.trigger("add.owl.carousel", [$(newItem)]).trigger("refresh.owl.carousel");
+                        }
+                    });
+
+                    if ($(".create-account-slider.slider_login .owl-item").length <= 1) {
+                        slider.trigger("refresh.owl.carousel");
+                        $(".create-account-slider.slider_login .owl-nav").hide();
                     }
-                });
 
-                if ($(".create-account-slider.slider_login .owl-item").length <= 1) {
-                    slider.trigger("refresh.owl.carousel");
-                    $(".create-account-slider.slider_login .owl-nav").hide();
-                }
+                    $("#loader").hide();
+                    console.log("Captured & Stored Image:", base64Image);
+                };
+            }
 
-                $("#loader").hide();
-                console.log("Captured & Stored Image:", base64Image);
-            };
         }
-
 
         var savedCategory = localStorage.getItem("category_name");
 
@@ -11167,13 +11174,13 @@ $(".new-create-account-close-btn").on("click", function (e) {
     $("#loginModel").modal("show");
 
     // Clear the image src
-    $(".login_img img").attr("src", "");
+    // $(".login_img img").attr("src", "");
 
     // Optional: also clear image from slider
     $(".create-account-slider.slider_login").trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
 
-    // Optional: remove from localStorage if needed
-    localStorage.removeItem("final_upload_image");
+    // // Optional: remove from localStorage if needed
+    // localStorage.removeItem("final_upload_image");
 
     // Hide other related elements if needed
     // $(".new_login_page, .new_login").hide();
