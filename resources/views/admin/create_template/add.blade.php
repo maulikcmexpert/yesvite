@@ -195,5 +195,38 @@
         </div>
     </div>
 </div>
-<input id="designData" value="{{$categories}}" hidden/>
+
+@php
+    $designData = [];
+
+    foreach ($categories as $category) {
+        $categoryData = [
+            'id' => $category->id,
+            'name' => $category->category_name,
+            'subcategories' => [],
+        ];
+
+        foreach ($category->subcategory as $subcategory) {
+            $subcategoryData = [
+                'id' => $subcategory->id,
+                'name' => $subcategory->subcategory_name,
+                'images' => [],
+            ];
+
+            foreach ($subcategory->textdatas as $image) {
+                $subcategoryData['images'][] = [
+                    'id' => $image->id,
+                    'image_path' => asset('storage/canvas/' . $image->filled_image),
+                    'tags' => $image->tags ?? '',
+                ];
+            }
+
+            $categoryData['subcategories'][] = $subcategoryData;
+        }
+
+        $designData[] = $categoryData;
+    }
+@endphp
+
+<input id="designData" value="{{$designData}}" hidden/>
 
