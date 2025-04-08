@@ -679,7 +679,16 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
-         setTimeout(() => $("#loader").css("display", "none"), 500);
+
+            try {
+                await waitForImagesToLoad("#edit-design-temp");
+
+                // Now all images are loaded
+                console.log("All images loaded");
+            } catch (err) {
+                console.error("Some images failed to load", err);
+            }
+         $("#loader").css("display", "none");
 
         },
         error: function (xhr, status, error) {
@@ -687,6 +696,23 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
+function waitForImagesToLoad(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    const images = container.querySelectorAll("img");
+    const promises = Array.from(images).map((img) => {
+        return new Promise((resolve, reject) => {
+            if (img.complete && img.naturalHeight !== 0) {
+                resolve();
+            } else {
+                img.onload = () => resolve();
+                img.onerror = () => reject("Image failed to load: " + img.src);
+            }
+        });
+    });
+
+    return Promise.all(promises);
+}
+
 fontloadedEnsure = false;
 async function bindData(current_event_id) {
     let iw = document.getElementById("imageWrapper");
