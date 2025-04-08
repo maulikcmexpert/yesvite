@@ -1113,9 +1113,9 @@ console.log(optionIndex);
         var $this = $(this);
 
         // Prevent multiple clicks
-        if ($this.prop("disabled")) {
-            return;
-        }
+        // if ($this.prop("disabled")) {
+        //     return;
+        // }
 
         var pollForm = $("#pollForm");
         var photoForm = $("#photoForm");
