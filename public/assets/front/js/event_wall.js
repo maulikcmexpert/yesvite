@@ -1004,7 +1004,7 @@ $(document).ready(function () {
             inputWrapper.next(".option-error").remove();
 
             // Get updated index from the label
-            const optionIndex =     $(this).closest(".option-poll").index() + 1;;
+            const optionIndex =  $(this).closest(".option-poll").index() + 1;;
 
             if (val === "") {
                 inputWrapper.after(
@@ -1072,7 +1072,7 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
-            $(".option-error").remove();
+            // $(".option-error").remove();
             renumberOptions(); // Call function to renumber options after deletion
         });
 
