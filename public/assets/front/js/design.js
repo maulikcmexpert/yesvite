@@ -686,7 +686,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
     // 3. Wait for all images (tag images and background images) to load
     console.log("🧠 Waiting for images to load...");
-    await waitForAllImagesToLoad(10000);
+    await waitForAllImagesToLoad(2000);
     console.log("✅ All images loaded");
 
     // 4. Finally, hide the loader
