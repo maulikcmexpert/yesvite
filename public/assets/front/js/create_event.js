@@ -5540,6 +5540,12 @@ $(document).on("click", ".li_event_details", async function () {
                     let base64Image = reader.result;
                     // localStorage.setItem("capturedImage", base64Image);
                     $(".login_img img").attr("src", base64Image);
+                    let slider = $(
+                        ".create-account-slider.slider_login"
+                    );
+
+        // 🧹 Clear existing carousel items
+        slider.trigger("replace.owl.carousel", [""]).trigger("refresh.owl.carousel");
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
                         console.log(slide_image);
@@ -5563,25 +5569,14 @@ $(document).on("click", ".li_event_details", async function () {
 
                             // Append the new item inside .create-account-slider.slider_login
                             // $(".create-account-slider.slider_login").append(newItem);
-                            let slider = $(
-                                ".create-account-slider.slider_login"
-                            );
-                            slider
-                                .trigger("add.owl.carousel", [$(newItem)])
-                                .trigger("refresh.owl.carousel");
+
+                            slider.trigger("add.owl.carousel", [$(newItem)]).trigger("refresh.owl.carousel");
                         }
-                        if (
-                            $(".create-account-slider.slider_login .owl-item")
-                                .length <= 1
-                        ) {
-                            let slider = $(
-                                ".create-account-slider.slider_login"
-                            );
+                        if ($(".create-account-slider.slider_login .owl-item").length <= 1) {
                             slider.trigger("refresh.owl.carousel");
-                            $(
-                                ".create-account-slider.slider_login .owl-nav"
-                            ).hide();
+                            $(".create-account-slider.slider_login .owl-nav").hide();
                         }
+
                     });
                     $("#loader").css("display", "none");
                     console.log("Captured & Stored Image:", base64Image);
