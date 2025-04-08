@@ -1002,7 +1002,7 @@ $(document).ready(function () {
             inputWrapper.next(".option-error").remove();
 
             // Get the current index from the DOM (accurate after adding/removing)
-            const optionIndex = $(this).closest(".option-poll").index() + 1;
+            const optionIndex = $(this).closest(".option-poll").find(".option-number").text();
 
             if (val === "") {
                 inputWrapper.after(
