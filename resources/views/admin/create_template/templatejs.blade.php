@@ -461,6 +461,48 @@
     });
 
 
-   
+    var designData = JSON.parse(document.getElementById('designData').value);
+
+// Ensure designData is correctly parsed
+console.log("Parsed designData:", designData);
+
+const tagsInput = document.getElementById("tags");
+const resultsContainer = document.getElementById("filtered_results");
+
+tagsInput.addEventListener("input", function () { // Changed to 'input' event
+    const searchTerm = tagsInput.value.toLowerCase();
+    resultsContainer.innerHTML = ""; // clear previous results
+
+    if (searchTerm.trim() === "") return;
+
+    const matchedItems = [];
+
+    designData.forEach(category => {
+        if (category.name.toLowerCase().includes(searchTerm)) {
+            matchedItems.push(`<div><strong>Category:</strong> ${category.name}</div>`);
+        }
+
+        category.subcategories?.forEach(subcategory => { // Added null check
+            if (subcategory.name.toLowerCase().includes(searchTerm)) {
+                matchedItems.push(`<div>&nbsp;&nbsp;&nbsp;<strong>Subcategory:</strong> ${subcategory.name}</div>`);
+                //loop through the images.
+               /* subcategory.images?.forEach(image => {
+                     if(image.tags.toLowerCase().includes(searchTerm)){
+                        matchedItems.push(`<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="${image.image_path}" alt="Related Image" width="100">
+                        <div>Tags: ${image.tags}</div>
+                        </div>`);
+                     }
+                });*/
+            }
+        });
+    });
+
+    if (matchedItems.length > 0) {
+        resultsContainer.innerHTML = matchedItems.join("");
+    } else {
+        resultsContainer.innerHTML = `<div>No results found.</div>`;
+    }
+});
 
 </script>
