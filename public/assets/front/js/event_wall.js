@@ -974,7 +974,7 @@ $(document).ready(function () {
     // Function to validate form fields
     function validateForm() {
         let hasError = false;
-
+        renumberOptions();
         // Clear previous errors
         $("#question_error").text('');
         $("#duration_error").text('');
