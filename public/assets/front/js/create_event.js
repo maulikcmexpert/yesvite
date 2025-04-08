@@ -5586,6 +5586,10 @@ $(document).on("click", ".li_event_details", async function () {
                             $(
                                 ".create-account-slider.slider_login .owl-nav"
                             ).hide();
+                        }else{
+                            $(
+                                ".create-account-slider.slider_login .owl-nav"
+                            ).show();
                         }
                     });
                     $("#loader").css("display", "none");
