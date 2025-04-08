@@ -198,9 +198,39 @@
 
 {{-- @push('scripts') --}}
     <script>
-        alert();
+        // alert();
+        var designData = [];
+
         let categories = @json($categories);
-        console.log(categories);
-        
+        @foreach ($categories as $category)
+            var categoryData = {
+                id: {{ $category->id }},
+                name: "{{ $category->category_name }}",
+                subcategories: []
+            };
+
+            @foreach ($category->subcategory as $subcategory)
+                var subcategoryData = {
+                    id: {{ $subcategory->id }},
+                    name: "{{ $subcategory->subcategory_name }}",
+                };
+
+                // @foreach ($subcategory->textdatas as $image)
+                //     subcategoryData.images.push({
+                //         id: {{ $image->id }},
+                //         image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+                //         tags: "{{ $image->tags ?? '' }}"
+
+
+                //     });
+                // @endforeach
+
+                categoryData.subcategories.push(subcategoryData);
+            @endforeach
+
+            designData.push(categoryData);
+        @endforeach
+        console.log(designData);
+
     </script>
 {{-- @endpush --}}
