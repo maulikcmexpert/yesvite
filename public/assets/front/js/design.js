@@ -679,16 +679,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
             await bindData(current_event_id);
-
-            try {
-                await waitForImagesToLoad("#edit-design-temp");
-
-                // Now all images are loaded
-                console.log("All images loaded");
-            } catch (err) {
-                console.error("Some images failed to load", err);
-            }
-         $("#loader").css("display", "none");
+        //  setTimeout(() => $("#loader").css("display", "none"), 500);
 
         },
         error: function (xhr, status, error) {
@@ -708,8 +699,9 @@ function waitForImagesToLoad(containerSelector) {
                 img.onerror = () => reject("Image failed to load: " + img.src);
             }
         });
-    });
 
+    });
+   $("#loader").css("display", "none");
     return Promise.all(promises);
 }
 
