@@ -681,11 +681,12 @@ $(document).on("click", ".edit_design_tem", function (e) {
                // 2. Run bindData
     console.log("🧠 Running bindData...");
     await bindData(current_event_id);
+    $("#loader").css("display", "flex"); // Keep it visible just in case
     console.log("✅ bindData complete");
 
     // 3. Wait for all images (tag images and background images) to load
     console.log("🧠 Waiting for images to load...");
-    await waitForAllImagesToLoad("#edit-design-temp");
+    await waitForAllImagesToLoad(10000);
     console.log("✅ All images loaded");
 
     // 4. Finally, hide the loader
@@ -697,45 +698,33 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
-async function waitForAllImagesToLoad(containerSelector) {
-    const container = document.querySelector(containerSelector);
-    if (!container) return;
-
-    const images = container.querySelectorAll("img");
-    console.log("🖼️ Images to load:", images.length);
-    const bgPromises = [];
-
-    container.querySelectorAll("*").forEach(el => {
-        const bgImage = window.getComputedStyle(el).backgroundImage;
-        if (bgImage && bgImage !== 'none') {
-            const url = bgImage.match(/url\(["']?(.*?)["']?\)/);
-            if (url && url[1]) {
-                const img = new Image();
-                const p = new Promise(resolve => {
-                    img.onload = resolve;
-                    img.onerror = resolve;
-                    img.src = url[1];
-                });
-                bgPromises.push(p);
-            }
-        }
-    });
-
+async function waitForAllImagesToLoad(maxWait = 10000) {
+    const images = document.querySelectorAll("img");
+    const backgrounds = document.querySelectorAll("[style*='background']");
 
     const imgPromises = Array.from(images).map(img => {
+        if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
         return new Promise(resolve => {
-            if (img.complete && img.naturalHeight !== 0) {
-                resolve();
-            } else {
-                img.onload = resolve;
-                img.onerror = resolve;
-            }
+            img.onload = img.onerror = resolve;
         });
     });
 
+    const bgPromises = Array.from(backgrounds).map(el => {
+        const bgUrl = getComputedStyle(el).backgroundImage;
+        const match = /url\(["']?(.+?)["']?\)/.exec(bgUrl);
+        if (!match) return Promise.resolve();
+
+        return new Promise(resolve => {
+            const img = new Image();
+            img.src = match[1];
+            img.onload = img.onerror = resolve;
+        });
+    });
+
+    // Wait until all images loaded or timeout
     return Promise.race([
         Promise.all([...imgPromises, ...bgPromises]),
-        new Promise(resolve => setTimeout(resolve, 1000)) // 10 sec max wait
+        new Promise(resolve => setTimeout(resolve, maxWait)) // fallback (e.g., 10 sec)
     ]);
 }
 
