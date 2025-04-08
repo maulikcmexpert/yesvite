@@ -3536,7 +3536,7 @@ class EventController extends BaseController
     // }
 
 
-    public function saveSliderImg1(Request $request)
+    public function saveSliderImg(Request $request)
     {
         // dd($request->all());
         $event_id = $request->eventId;
@@ -3660,7 +3660,7 @@ class EventController extends BaseController
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
-    public function saveSliderImg(Request $request)
+    public function saveSliderImg1(Request $request)
     {
         // dd($request);
         $imageSources = $request->imageSources;
