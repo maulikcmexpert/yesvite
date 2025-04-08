@@ -39,7 +39,7 @@
                             @csrf
                             <input type="hidden" id="account_type" name="account_type" value="0">
                             <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 mb-1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 mb-2">
                                     <div class="input-form">
                                         <input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}">
                                         <label for="firstname" class="floating-label">First Name <span>*</span></label>
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 mb-1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6 mb-2">
                                     <div class="input-form">
                                         <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname')}}">
                                         <label for="lastname" class="floating-label">Last Name <span>*</span></label>
@@ -63,7 +63,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
                                     <div class="input-form">
                                         <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" autocomplete="off">
                                         <label for="email" class="floating-label">Email Address <span>*</span></label>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
                                     <div class="input-form">
                                         <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{ old('zip_code')}}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                         <label for="Zcode" class="floating-label">Zip Code <span>*</span></label>
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
                                     <div class="input-form">
                                         <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" autocomplete="new-password">
                                         <label for="password" class="floating-label">Password <span>*</span></label>
@@ -105,7 +105,7 @@
                                 </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
                                     <div class="input-form mb-0">
                                         <input type="password" class="form-control" id="cpassword" name="cpassword" value="{{ old('cpassword')}}">
                                         <label for="password" class="floating-label">Confirm Password <span>*</span></label>
@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                                
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center mb-1">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4 text-center mb-2">
                                     <div class="g-recaptcha" style="display: inline-block" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
                                     <script src="https://www.google.com/recaptcha/api.js"></script>
                                     
