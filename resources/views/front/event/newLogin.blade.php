@@ -1758,7 +1758,7 @@
             </div>
             <div class="modal-body">
                 <h5>Are you sure you want to leave?</h5>
-                <p>Your event is auto saved</p>
+                {{-- <p>Your event is auto saved</p> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-login" data-bs-dismiss="modal"
