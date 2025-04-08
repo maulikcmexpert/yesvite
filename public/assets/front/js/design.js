@@ -679,21 +679,15 @@ $(document).on("click", ".edit_design_tem", function (e) {
             console.log(dbJson);
             $("#edit-design-temp").html(response).show();
 
-    try {
-        // Wait for bindData to finish rendering
-        await bindData(current_event_id);
-
-        // wait for all images in container (better approach if multiple images are there)
-        await waitForImageLoad(".image-edit-inner-img");
-
-        // finally hide loader
-        $("#loader").css("display", "none");
-
-    } catch (error) {
-        console.error("Error during binding or image load:", error);
-        $("#loader").css("display", "none"); // fallback to hide anyway
-    }
-
+            setTimeout(async () => {
+                try {
+                    await waitForImageLoad(".image-edit-inner-img");
+                    $("#loader").css("display", "none");
+                } catch (e) {
+                    console.error("Image load error:", e);
+                    $("#loader").css("display", "none");
+                }
+            }, 100);
 
         },
         error: function (xhr, status, error) {
