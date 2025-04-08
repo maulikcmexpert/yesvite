@@ -32,7 +32,7 @@
 
 
 
-            <form method="post" action="{{ route('create_template.store')}}" id="templateEditForm"
+            <form method="post" action="{{ route('create_template.store')}}" id="templateForm"
                 enctype="multipart/form-data">
 
                 @csrf

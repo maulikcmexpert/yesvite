@@ -263,7 +263,7 @@
             });
 
             $(document).on('click', '#templateAdd', function(e) {
-                alert();
+                // alert();
                 var selectedValue = $("#event_design_category_id").val();
                 //     var selectedSubCategory = $("#event_design_sub_category_id").val();
                 var image = $("#image").val();
@@ -304,7 +304,7 @@
                     $("#filled_image").next('.text-danger').text("");
                 }
 
-
+// alert(hasError);
                 if (!hasError) {
                     $("#templateForm").submit();
                 } else {
@@ -355,7 +355,6 @@
                     $("#filled_image").next('.text-danger').text("");
                 }
 
-                alert(hasError);
 
                 if (!hasError) {
                     $("#templateEditForm").submit();
