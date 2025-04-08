@@ -9280,6 +9280,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
 });
 
 async function updateAllPhotoSliders() {
+    alert();
     $(".slider-img").each(function () {
         const $this = $(this);
         const position = $this.data("delete");
