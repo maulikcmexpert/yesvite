@@ -237,6 +237,7 @@ $( window ).on( "load", function() {
     // $("#sidebar").css({"right": "-200%", "width": "0px"});
 });
 
+
 // function toggleSidebar(id) {
 //     const sidebar = document.getElementById(id);
 //     const overlay = document.getElementById(id+'_overlay');
