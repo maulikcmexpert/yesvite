@@ -526,22 +526,31 @@ function handleFiles(files, currentFileInput) {
             deleteIcon.classList.add("uploded-delete-icon");
 
             deleteIcon.addEventListener("click", function () {
-                // Remove file from storedFiles
-                const indexToRemove = parseInt(previewDiv.dataset.fileIndex);
-                storedFiles.splice(indexToRemove, 1);
+                const fileNameToDelete = previewDiv.dataset.filename;
 
-                // Re-render imagePreview to reset indexes
+
+                storedFiles = storedFiles.filter(
+                    (storedFile) => storedFile.name !== fileNameToDelete
+                );
+
+
                 imagePreview.removeChild(previewDiv);
+
+
                 updateColumnClasses();
 
+                // ✅ Show upload placeholder if no images
                 if (imagePreview.children.length === 0) {
                     uploadImgInner.classList.remove("d-none");
                     uploadHeadButton.classList.add("d-none");
                     currentFileInput.value = "";
                 }
 
-                console.log("📦 storedFiles after deletion:", storedFiles);
+
+                console.log("Deleted:", fileNameToDelete);
+                console.log("Remaining files:", storedFiles.map(f => f.name));
             });
+
 
 
             previewDiv.appendChild(deleteIcon);
