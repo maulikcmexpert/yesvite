@@ -737,7 +737,7 @@ class EventPhotoController extends BaseController
             foreach ($postFiles as $key => $postFile) {
                 $checkIsImageOrVideo = checkIsImageOrVideo($postFile); // ✅ Check before move
 
-                $fileName = time() . $key . '_' . $postFile->getClientOriginalName();
+                $fileName = uniqid() . '_' . $postFile->getClientOriginalName();
                 $filePath = $postFile->move(public_path('storage/post_image'), $fileName); // ✅ Move after
 
                 $duration = "";
@@ -764,12 +764,8 @@ class EventPhotoController extends BaseController
                 $eventPostImage->save();
             }
 
-            // echo $videoCount;
-            // echo "===================";
-            // echo $imageCount;
-            // die;
-            return redirect()->back()->with('msg', 'Event post uploded successfully!');
         }
+
 
         return redirect()->back()->with('msg', 'Event Post created successfully!');
     }
