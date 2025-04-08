@@ -335,8 +335,8 @@
                     // e.preventDefault(); // Prevent form submission or action
                     $(".subcategory_error_bx").text('Please select design subcategory');
                     hasError = true;
-                } else {
-                    hasError = false;
+                }else{
+                    $(".subcategory_error_bx").text('');
 
                 }
                 if (image === '') {
@@ -355,6 +355,7 @@
                     $("#filled_image").next('.text-danger').text("");
                 }
 
+                alert(hasError);
 
                 if (!hasError) {
                     $("#templateEditForm").submit();
