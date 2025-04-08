@@ -236,7 +236,9 @@
         const tagsInput = document.getElementById("tags");
 const resultsContainer = document.getElementById("filtered_results");
 
+alert(1);
 tagsInput.addEventListener("keyup", function () {
+    alert()
     const searchTerm = tagsInput.value.toLowerCase();
     resultsContainer.innerHTML = ""; // clear previous results
 
