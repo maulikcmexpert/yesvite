@@ -460,48 +460,4 @@
         });
     });
 
-
-    var designData = JSON.parse(document.getElementById('designData').value);
-
-// Ensure designData is correctly parsed
-console.log("Parsed designData:", designData);
-
-// const tagsInput = document.getElementById("tags");
-const resultsContainer = document.getElementById("filtered_results");
-
-$(document).on("keyup", ".bootstrap-tagsinput input", function () {
-    const searchTerm = $(this).val().toLowerCase().trim();
-    resultsContainer.innerHTML = ""; // clear previous results
-
-    if (searchTerm === "") return;
-
-    let html = "";
-
-    designData.forEach(cat => {
-        let matchedSubcategories = [];
-
-        const categoryMatch = cat.name.toLowerCase().includes(searchTerm);
-
-        cat.subcategories?.forEach(sub => {
-            if (sub.name.toLowerCase().includes(searchTerm)) {
-                matchedSubcategories.push(sub.name);
-            }
-        });
-
-        if (categoryMatch || matchedSubcategories.length > 0) {
-            html += `<div class="mb-2"><strong>Category:</strong> ${cat.name}</div>`;
-
-            if (matchedSubcategories.length > 0) {
-                html += `<ul>`;
-                matchedSubcategories.forEach(sub => {
-                    html += `<li>${sub}</li>`;
-                });
-                html += `</ul>`;
-            }
-        }
-    });
-
-    resultsContainer.innerHTML = html !== "" ? html : `<div>No results found.</div>`;
-});
-
 </script>
