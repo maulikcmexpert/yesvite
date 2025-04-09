@@ -733,7 +733,7 @@ $("#create-poll-btn").click(function () {
 });
 
 $(".upload-img-delete").click(function () {
-    // $(".create-post-upload-img-wrp").addClass("d-none");
+    $(".create-post-upload-img-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
     storedFiles = [];
