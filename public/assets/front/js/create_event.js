@@ -5613,7 +5613,6 @@ $(document).on("click", ".li_event_details", async function () {
             }
         }
 
-
         var savedCategory = localStorage.getItem("category_name");
 
         if (savedCategory) {

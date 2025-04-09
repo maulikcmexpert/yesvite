@@ -538,9 +538,12 @@ function handleFiles(files, currentFileInput) {
                 );
 
 
+
+                const dataTransfer = new DataTransfer();
+                storedFiles.forEach((file) => dataTransfer.items.add(file));
+                currentFileInput.files = dataTransfer.files;
+
                 imagePreview.removeChild(previewDiv);
-
-
                 updateColumnClasses();
 
                 // ✅ Show upload placeholder if no images
