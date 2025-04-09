@@ -595,7 +595,7 @@ function updateColumnClasses() {
         previewItem.classList.add(children.length === 1 ? "col-12" : "col-6");
     });
 }
-const dropZone = document.querySelector(".create-post-uploaded-images");
+const dropZone = document.querySelector(".create-post-upload-img-main");
 
 // Drag & Drop Support
 dropZone.addEventListener("drop", (event) => {
