@@ -595,40 +595,43 @@ function updateColumnClasses() {
         previewItem.classList.add(children.length === 1 ? "col-12" : "col-6");
     });
 }
-const dropZone = document.querySelector(".create-post-upload-img-main");
 
 // Drag & Drop Support
-dropZone.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dropZone.classList.remove("dragging");
+const dropZone = document.querySelector(".create-post-uploaded-images");
+if (dropZone) {
+    dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("dragging");
+    });
 
-    const files = Array.from(event.dataTransfer.files);
-    const fileInput = document.querySelector(".fileInputtype");
+    dropZone.addEventListener("dragleave", (event) => {
+        dropZone.classList.remove("dragging");
+    });
 
-    if (files.length > 0) {
-        // Merge and deduplicate files
-        const dataTransfer = new DataTransfer();
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("dragging");
 
-        const currentFiles = Array.from(fileInput.files);
+        const files = Array.from(event.dataTransfer.files);
+        const fileInput = document.querySelector(".fileInputtype");
 
-        // Push only unique files
-        [...currentFiles, ...files].forEach(file => {
-            const isDuplicate = dataTransfer.items.length > 0 &&
-                Array.from(dataTransfer.files).some(existing =>
-                    existing.name === file.name && existing.size === file.size
-                );
+        if (files.length > 0) {
+            // Retain previous files and add new ones
+            const dataTransfer = new DataTransfer();
 
-            if (!isDuplicate) {
-                dataTransfer.items.add(file);
+            if (fileInput.files.length > 0) {
+                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
             }
-        });
 
-        fileInput.files = dataTransfer.files;
+            files.forEach((file) => dataTransfer.items.add(file));
 
-        // Trigger change to regenerate previews
-        $(fileInput).trigger("change");
-    }
-});
+            fileInput.files = dataTransfer.files;
+
+            // Trigger change event
+            $(fileInput).trigger("change");
+        }
+    });
+}
 
 
 // Add new option on click
