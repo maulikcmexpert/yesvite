@@ -505,6 +505,11 @@ function handleFiles(files, currentFileInput) {
 
 
     Array.from(files).forEach((file) => {
+
+        if (storedFiles.some(stored => stored.name === file.name && stored.size === file.size)) {
+            console.log(`Duplicate skipped: ${file.name}`);
+            return; // Skip duplicate
+        }
         storedFiles.push(file);
 
         const fileReader = new FileReader();
@@ -592,7 +597,7 @@ function updateColumnClasses() {
 }
 
 // Drag & Drop Support
-const dropZone = document.querySelector(".create-post-upload-img-wrp");
+const dropZone = document.querySelector(".create-post-upload-img-main");
 if (dropZone) {
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
