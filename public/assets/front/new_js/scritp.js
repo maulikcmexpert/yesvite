@@ -505,6 +505,11 @@ function handleFiles(files, currentFileInput) {
 
 
     Array.from(files).forEach((file) => {
+
+        if (storedFiles.some(stored => stored.name === file.name && stored.size === file.size)) {
+            console.log(`Duplicate skipped: ${file.name}`);
+            return; // Skip duplicate
+        }
         storedFiles.push(file);
 
         const fileReader = new FileReader();
@@ -590,43 +595,40 @@ function updateColumnClasses() {
         previewItem.classList.add(children.length === 1 ? "col-12" : "col-6");
     });
 }
+const dropZone = document.querySelector(".create-post-uploaded-images");
 
 // Drag & Drop Support
-const dropZone = document.querySelector(".create-post-uploaded-images");
-if (dropZone) {
-    dropZone.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dropZone.classList.add("dragging");
-    });
+dropZone.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dropZone.classList.remove("dragging");
 
-    dropZone.addEventListener("dragleave", (event) => {
-        dropZone.classList.remove("dragging");
-    });
+    const files = Array.from(event.dataTransfer.files);
+    const fileInput = document.querySelector(".fileInputtype");
 
-    dropZone.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone.classList.remove("dragging");
+    if (files.length > 0) {
+        // Merge and deduplicate files
+        const dataTransfer = new DataTransfer();
 
-        const files = Array.from(event.dataTransfer.files);
-        const fileInput = document.querySelector(".fileInputtype");
+        const currentFiles = Array.from(fileInput.files);
 
-        if (files.length > 0) {
-            // Retain previous files and add new ones
-            const dataTransfer = new DataTransfer();
+        // Push only unique files
+        [...currentFiles, ...files].forEach(file => {
+            const isDuplicate = dataTransfer.items.length > 0 &&
+                Array.from(dataTransfer.files).some(existing =>
+                    existing.name === file.name && existing.size === file.size
+                );
 
-            if (fileInput.files.length > 0) {
-                Array.from(fileInput.files).forEach((file) => dataTransfer.items.add(file));
+            if (!isDuplicate) {
+                dataTransfer.items.add(file);
             }
+        });
 
-            files.forEach((file) => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
 
-            fileInput.files = dataTransfer.files;
-
-            // Trigger change event
-            $(fileInput).trigger("change");
-        }
-    });
-}
+        // Trigger change to regenerate previews
+        $(fileInput).trigger("change");
+    }
+});
 
 
 // Add new option on click
