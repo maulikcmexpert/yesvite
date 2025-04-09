@@ -2072,7 +2072,7 @@ $(document).ready(function () {
     $(".modal").on("hidden.bs.modal", function () {
         $("#photoForm")[0].reset(); // Reset photo form
         $("#imagePreview").empty(); // Clear image preview
-
+        storedFiles = [];
         // Add `d-none` class back to hide the div
         $(".create-post-upload-img-inner").addClass("d-none");
     });

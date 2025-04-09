@@ -639,7 +639,7 @@
                                             class="fa-solid fa-plus"></i> Add Photos/video
                                         <input type="file" id="fileInput2" class="fileInputtype"
                                             accept="image/*,video/*" multiple></button>
-                                    <span class="upload-img-delete">
+                                    {{-- <span class="upload-img-delete">
                                         <svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M21.875 6.22915C18.4062 5.8854 14.9167 5.70831 11.4375 5.70831C9.375 5.70831 7.3125 5.81248 5.25 6.02081L3.125 6.22915"
@@ -658,7 +658,7 @@
                                             <path d="M9.896 13.0208H15.1043" stroke="#0F172A" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                    </span>
+                                    </span> --}}
                                 </div>
                             </div>
                             <div class="create-post-upload-img-main">

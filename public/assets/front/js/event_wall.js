@@ -996,16 +996,21 @@ $(document).ready(function () {
         // Validate options
         $("input[name='options[]']").each(function (index) {
             const val = $(this).val().trim();
-            const inputWrapper = $(this).closest(".position-relative"); // container of input and delete span
-            inputWrapper.find(".option-error").remove(); // remove any existing errors
+            const inputWrapper = $(this).closest(".option_new");
+            // $(".option-error").remove();
+            // Remove any existing error
+            inputWrapper.find(".option-error").remove();
+
+            const optionIndex = index + 1;
 
             if (val === "") {
-                inputWrapper.find(".input-option-delete").after(
-                    "<div class='option-error text-danger mt-1'>Option " + (index + 1) + " is required.</div>"
+                inputWrapper.append(
+                    `<div class='option-error text-danger mt-1' style="font-size: 12px">Option ${optionIndex} is required.</div>`
                 );
                 hasError = true;
             }
         });
+
 
 
         return !hasError;
@@ -1039,7 +1044,7 @@ $(document).ready(function () {
         const optionCount = pollOptionsContainer.children().length + 1;
         console.log(optionCount);
         const newOption = $(`
-            <div class="mb-3 option-poll">
+            <div class="mb-3 option-poll option_new">
                 <label class="form-label d-flex align-items-center justify-content-between">
                     <p>Option <span class="option-number">${optionCount}</span>*</p>
                     <span class="char-count">0/140</span>
@@ -1064,6 +1069,9 @@ $(document).ready(function () {
         // Bind delete functionality
         newOption.find(".input-option-delete").on("click", function () {
             newOption.remove();
+            $(".option-error").remove();
+            $("#question_error").text('');
+        $("#duration_error").text('');
             renumberOptions(); // Call function to renumber options after deletion
         });
 
