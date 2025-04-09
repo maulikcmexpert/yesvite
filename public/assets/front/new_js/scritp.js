@@ -592,7 +592,7 @@ function updateColumnClasses() {
 }
 
 // Drag & Drop Support
-const dropZone = document.querySelector(".create-post-upload-img-wrp");
+const dropZone = document.querySelector(".create-post-uploaded-images");
 if (dropZone) {
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
