@@ -3536,7 +3536,7 @@ class EventController extends BaseController
     // }
 
 
-    public function saveSliderImg(Request $request)
+    public function saveSliderImg1(Request $request)
     {
         // dd($request->all());
         $event_id = $request->eventId;
@@ -3660,7 +3660,7 @@ class EventController extends BaseController
         session(['desgin_slider' => $savedFiles]);
         return response()->json(['success' => true, 'images' => $savedFiles]);
     }
-    public function saveSliderImg1(Request $request)
+    public function saveSliderImg(Request $request)
     {
         // dd($request);
         $imageSources = $request->imageSources;
@@ -4120,6 +4120,7 @@ class EventController extends BaseController
         $event_creation->gift_registry_id = (isset($gift_registry_id) && $gift_registry_id != "") ? $gift_registry_id : "0";
         $event_creation->subscription_plan_name = (isset($request->plan_selected) && $request->plan_selected != "") ? $request->plan_selected : "Pro";
         $event_creation->subscription_invite_count = (isset($request->subscription_invite_count) && $request->subscription_invite_count != "") ? $request->subscription_invite_count : 15;
+        $event_creation->updated_at = now();
 
         $event_creation->save();
 
