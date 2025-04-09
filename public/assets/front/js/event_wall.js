@@ -1826,6 +1826,7 @@ $(".modal").on("hidden.bs.modal", function () {
 
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
+    storedFiles = [];
 });
 
 $(".btn-close").on("click", function () {
@@ -1834,6 +1835,7 @@ $(".btn-close").on("click", function () {
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
+    storedFiles = [];
     // Add `d-none` class back to hide the div
 });
 
