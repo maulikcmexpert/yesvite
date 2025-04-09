@@ -1151,21 +1151,34 @@ $(document).ready(function () {
             //     );
             //     return;
             // }
+            const dataTransfer = new DataTransfer();
+            console.log(storedFiles);
+            storedFiles.forEach(file => dataTransfer.items.add(file));
+
+            // Create a new file input element and append to form
+            const newInput = document.createElement("input");
+            newInput.type = "file";
+            newInput.name = "files[]";
+            newInput.multiple = true;
+            newInput.files = dataTransfer.files;
+            newInput.style.display = "none";
+
+            photoForm.append(newInput);
 
 
-            // ✅ Ensure imagePreview exists before accessing children
+
             let hasImages = imagePreview && imagePreview.children ? imagePreview.children.length > 0 : false;
 
-            // ✅ Ensure photoInput exists and has files
+
             let hasUploadedPhotos = photoInput && photoInput.files ? photoInput.files.length > 0 : false;
 
-            // ✅ Condition: If no image is uploaded AND no content is entered
+
             if (!hasUploadedPhotos && !hasImages && postContent === "") {
                 toastr.error("Please upload a photo or enter some content for the post.");
                 return; // Prevent form submission
             }
 
-            // Set post type based on presence of an uploaded image or entered content
+
             if (photoPostType) {
                 if ((photoInput && photoInput.files.length > 0) || (imagePreview && imagePreview.children.length > 0)) {
                     photoPostType.value = 1;
