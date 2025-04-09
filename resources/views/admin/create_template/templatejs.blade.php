@@ -461,8 +461,8 @@
     });
 
     const designData = JSON.parse($('#designData').val());
-
-$('#tags').on('input', function () {
+alert();
+$(document).on("keyup", ".bootstrap-tagsinput input", function () {
     alert();
     const query = $(this).val().toLowerCase();
     let results = '';
