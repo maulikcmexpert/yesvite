@@ -460,6 +460,42 @@
         });
     });
 
+    const designData = JSON.parse($('#designData').val());
+
+$('#tags').on('input', function () {
+    const query = $(this).val().toLowerCase();
+    let results = '';
+
+    if (query.trim() !== '') {
+        designData.forEach(category => {
+            // Match category
+            if (category.name.toLowerCase().includes(query)) {
+                results += `
+                    <div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">
+                        ${category.name}
+                    </div>`;
+            }
+
+            // Match subcategories
+            category.subcategories.forEach(subcategory => {
+                if (subcategory.name.toLowerCase().includes(query)) {
+                    results += `
+                        <div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">
+                            ${subcategory.name}
+                        </div>`;
+                }
+            });
+        });
+
+        if (results === '') {
+            results = `<div class="search-item">No Data Found</div>`;
+        }
+    }
+
+    $('#suggestionBox').html(results);
+    console.log(results);
+});
+
     // $('#tags').on('focus', function() {
     //   alert('The Bootstrap Tags Input field has been focused!');
     // });
