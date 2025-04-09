@@ -538,9 +538,12 @@ function handleFiles(files, currentFileInput) {
                 );
 
 
+
+                const dataTransfer = new DataTransfer();
+                storedFiles.forEach((file) => dataTransfer.items.add(file));
+                currentFileInput.files = dataTransfer.files;
+
                 imagePreview.removeChild(previewDiv);
-
-
                 updateColumnClasses();
 
                 // ✅ Show upload placeholder if no images
@@ -589,7 +592,7 @@ function updateColumnClasses() {
 }
 
 // Drag & Drop Support
-const dropZone = document.querySelector(".create-post-upload-img-inner");
+const dropZone = document.querySelector(".create-post-upload-img-wrp");
 if (dropZone) {
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
@@ -733,7 +736,7 @@ $("#create-poll-btn").click(function () {
 });
 
 $(".upload-img-delete").click(function () {
-    // $(".create-post-upload-img-wrp").addClass("d-none");
+    $(".create-post-upload-img-wrp").addClass("d-none");
     $("#pollForm")[0].reset(); // Correct way to reset a form
     $("#photoForm")[0].reset();
     storedFiles = [];
