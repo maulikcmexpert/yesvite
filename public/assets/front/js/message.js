@@ -2922,7 +2922,7 @@ $("#new_message").on("keypress", async function (e) {
             if (isBlockedByMe || isBlockedByUser) {
                 $("#msgBox").modal("hide");
                 isSending = false;
-
+                loader.css("display", "none");
                 return;
             }
 
