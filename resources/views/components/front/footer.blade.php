@@ -992,33 +992,33 @@
     // });
 
     //newwwww
-    function openAppAndroid() {
-        // const appPackage = "com.yesvite.test";
-        const appPackage = "com.yesvite.android";
-        const appLink =
-            // `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
-            `intent://yesvite.com/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    // function openAppAndroid() {
+    //     // const appPackage = "com.yesvite.test";
+    //     const appPackage = "com.yesvite.android";
+    //     const appLink =
+    //         // `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    //         `intent://yesvite.com/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
-        if (!sessionStorage.getItem('androidAppRedirectionDone')) {
-            window.location.replace(appLink);
-            sessionStorage.setItem('androidAppRedirectionDone', 'true');
-        }
-        // Optional: Play Store fallback
-        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-        // window.location.href = playStoreLink;
-    }
+    //     if (!sessionStorage.getItem('androidAppRedirectionDone')) {
+    //         window.location.replace(appLink);
+    //         sessionStorage.setItem('androidAppRedirectionDone', 'true');
+    //     }
+    //     // Optional: Play Store fallback
+    //     // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+    //     // window.location.href = playStoreLink;
+    // }
 
-    function openAppIos() {
-        const appLink = "comappyesvite://";
+    // function openAppIos() {
+    //     const appLink = "comappyesvite://";
 
-        if (!sessionStorage.getItem('iosAppRedirectionDone')) {
-            window.location.href = appLink;
-            sessionStorage.setItem('iosAppRedirectionDone', 'true');
-        }
-        // Optional: App Store fallback (you'll need the app store URL)
-        // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
-        // window.location.href = appStoreLink;
-    }
+    //     if (!sessionStorage.getItem('iosAppRedirectionDone')) {
+    //         window.location.href = appLink;
+    //         sessionStorage.setItem('iosAppRedirectionDone', 'true');
+    //     }
+    //     // Optional: App Store fallback (you'll need the app store URL)
+    //     // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
+    //     // window.location.href = appStoreLink;
+    // }
 
     // document.addEventListener('DOMContentLoaded', () => {
     //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -1030,21 +1030,21 @@
     //         }
     //     }
     // });
-    document.addEventListener('DOMContentLoaded', () => {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream;
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    //     const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream;
 
-        // Additional check for desktop OS
-        const isDesktop = /windows|macintosh|linux|ubuntu/i.test(userAgent);
+    //     // Additional check for desktop OS
+    //     const isDesktop = /windows|macintosh|linux|ubuntu/i.test(userAgent);
 
-        if (isMobile && !isDesktop) {
-            if (/android/i.test(userAgent)) {
-                openAppAndroid();
-            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-                // openAppIos();
-            }
-        }
-    });
+    //     if (isMobile && !isDesktop) {
+    //         if (/android/i.test(userAgent)) {
+    //             openAppAndroid();
+    //         } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+    //             // openAppIos();
+    //         }
+    //     }
+    // });
 
     // window.addEventListener('beforeunload', () => {
     //     sessionStorage.removeItem('androidAppRedirectionDone');
