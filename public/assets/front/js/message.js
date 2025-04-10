@@ -944,7 +944,7 @@ $(document).on("click", ".msg-list", async function () {
             unReadCount: 0,
         });
         console.log("updateoverview");
-        // await updateChat(userId);
+        await updateChat(userId);
         console.log({ conversationId });
     }
     isToMove = false;
@@ -2623,7 +2623,9 @@ function handleRemoveConversation(snapshot) {
 
 $(document).on("click", ".usr-list-more", function (e) {
     e.stopPropagation();
-    checkBlockStatus();
+    let user_id=$(this).attr('data-userid');
+    let convo=$(this).attr('data-conversationId');
+    handleBlockUnblock(user_id,convo);
     console.log("clicked");
     return;
 });
@@ -4979,3 +4981,59 @@ $(document).ready(function () {
 });
 
 //vrushali message box
+
+
+
+
+async function handleBlockUnblock(userid, conversationId) {
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
+
+    const checkBlockStatus = async () => {
+        const blockByMeSnapshot = await get(blockByMeRef);
+        const blockByUserSnapshot = await get(blockByUserRef);
+
+        let isBlockedByMe = false;
+        let isBlockedByUser = false;
+
+        if (blockByMeSnapshot.exists()) {
+            const blockByMeList = blockByMeSnapshot.val();
+            isBlockedByMe = blockByMeList.includes(user_id);
+            console.log("blockByMeList: ", blockByMeList);
+        }
+
+        if (blockByUserSnapshot.exists()) {
+            const blockByUserList = blockByUserSnapshot.val();
+            isBlockedByUser = blockByUserList.includes(user_id);
+            console.log("blockByUserList: ", blockByUserList);
+        }
+
+        if (isBlockedByMe || isBlockedByUser) {
+            $(".msg-footer").hide();
+            $("#selected-user-lastseen").hide();
+        } else {
+            $("#selected-user-lastseen").show();
+            $(".msg-footer").show();
+        }
+
+        if (isBlockedByUser) {
+            $(".block-conversation").find("span").text("Unblock");
+        } else {
+            $(".block-conversation").find("span").text("Block User");
+        }
+
+        $(".block-conversation").attr("blocked", isBlockedByUser);
+    };
+
+    // Initial block check
+    await checkBlockStatus();
+
+    // Realtime listeners
+    onValue(blockByMeRef, async () => {
+        await checkBlockStatus();
+    });
+
+    onValue(blockByUserRef, async () => {
+        await checkBlockStatus();
+    });
+}
