@@ -2626,9 +2626,6 @@ $(document).on("click", ".usr-list-more", function (e) {
     let user_id=$(this).attr('data-userid');
     let convo=$(this).attr('data-conversationId');
     handleBlockUnblock(user_id,convo);
-
-    
-
     console.log("clicked");
     return;
 });
