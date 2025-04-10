@@ -122,152 +122,152 @@ $(document).ready(function () {
 // });
 
 // ===month-scroll-event===
-function sticky_relocate() {
-    var window_top = $(window).scrollTop();
-    var div_top = $("#scrollStatus")?.offset()?.top;
-    var activeTab = $(".tab-pane.active");
+// function sticky_relocate() {
+//     var window_top = $(window).scrollTop();
+//     var div_top = $("#scrollStatus")?.offset()?.top;
+//     var activeTab = $(".tab-pane.active");
 
-    if (activeTab.length > 0) {
-        if (window_top > div_top) {
-            const myElement = document.querySelector("#tabbtn1");
-            if (myElement.classList.contains("sticknew")) {
-                $("#tabbtn1")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else {
-                $("#tabbtn1").addClass("stick").removeClass("sticknew");
-            }
-        } else {
-            $("#tabbtn1").removeClass("stick");
-        }
-    }
+//     if (activeTab.length > 0) {
+//         if (window_top > div_top) {
+//             const myElement = document.querySelector("#tabbtn1");
+//             if (myElement.classList.contains("sticknew")) {
+//                 $("#tabbtn1")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else {
+//                 $("#tabbtn1").addClass("stick").removeClass("sticknew");
+//             }
+//         } else {
+//             $("#tabbtn1").removeClass("stick");
+//         }
+//     }
 
-    var div_top2 = $("#scrollStatus2").offset()?.top;
-    if (activeTab.length > 0) {
-        if (window_top > div_top2) {
-            const myElement = document.querySelector("#tabbtn2");
-            if (myElement.classList.contains("sticknew")) {
-                $("#tabbtn2")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else {
-                $("#tabbtn2").addClass("stick").removeClass("sticknew");
-            }
-        } else {
-            $("#tabbtn2").removeClass("stick");
-        }
-    }
+//     var div_top2 = $("#scrollStatus2").offset()?.top;
+//     if (activeTab.length > 0) {
+//         if (window_top > div_top2) {
+//             const myElement = document.querySelector("#tabbtn2");
+//             if (myElement.classList.contains("sticknew")) {
+//                 $("#tabbtn2")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else {
+//                 $("#tabbtn2").addClass("stick").removeClass("sticknew");
+//             }
+//         } else {
+//             $("#tabbtn2").removeClass("stick");
+//         }
+//     }
 
-    var div_top3 = $("#scrollStatus3").offset()?.top;
-    if (activeTab.length > 0) {
-        if (window_top > div_top3) {
-            const myElement = document.querySelector("#tabbtn3");
-            if (myElement.classList.contains("sticknew")) {
-                $("#tabbtn3")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else {
-                $("#tabbtn3").addClass("stick").removeClass("sticknew");
-            }
-        } else {
-            $("#tabbtn3").removeClass("stick");
-        }
-    }
-}
+//     var div_top3 = $("#scrollStatus3").offset()?.top;
+//     if (activeTab.length > 0) {
+//         if (window_top > div_top3) {
+//             const myElement = document.querySelector("#tabbtn3");
+//             if (myElement.classList.contains("sticknew")) {
+//                 $("#tabbtn3")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else {
+//                 $("#tabbtn3").addClass("stick").removeClass("sticknew");
+//             }
+//         } else {
+//             $("#tabbtn3").removeClass("stick");
+//         }
+//     }
+// }
 
-$(function () {
-    $(window).scroll(sticky_relocate);
-    sticky_relocate();
-});
+// $(function () {
+//     $(window).scroll(sticky_relocate);
+//     sticky_relocate();
+// });
 
-function sticky_relocate1() {
-    var window_top = $(window).scrollTop();
-    var div_top = $("#scrollStatus2")?.offset()?.top;
-    var activeTab = $(".tab-pane.active");
+// function sticky_relocate1() {
+//     var window_top = $(window).scrollTop();
+//     var div_top = $("#scrollStatus2")?.offset()?.top;
+//     var activeTab = $(".tab-pane.active");
 
-    console.log("Window Top:", window_top);
-    console.log("Div Top:", div_top);
-    console.log("Active Tab:", activeTab);
-}
+//     console.log("Window Top:", window_top);
+//     console.log("Div Top:", div_top);
+//     console.log("Active Tab:", activeTab);
+// }
 
-document.addEventListener("DOMContentLoaded", function () {
-    let lastScrollTop = 0;
+// document.addEventListener("DOMContentLoaded", function () {
+//     let lastScrollTop = 0;
 
-    document
-        .getElementById("scrollStatus")
-        .addEventListener("scroll", function () {
-            const currentScrollTop = this.scrollTop;
-            const windowTop = $(window).scrollTop();
-            const divTop = $("#scrollStatus")?.offset()?.top;
+//     document
+//         .getElementById("scrollStatus")
+//         .addEventListener("scroll", function () {
+//             const currentScrollTop = this.scrollTop;
+//             const windowTop = $(window).scrollTop();
+//             const divTop = $("#scrollStatus")?.offset()?.top;
 
-            if (currentScrollTop > lastScrollTop && windowTop > divTop) {
-                // Scrolling down and past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else if (currentScrollTop > lastScrollTop) {
-                // Scrolling down, but not past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("sticknew")
-                    .removeClass("stick");
-            } else if (currentScrollTop <= 0) {
-                // Scrolling back up to the top
-                $(".all-events-month-show").removeClass("sticknew extra-stick");
-            }
+//             if (currentScrollTop > lastScrollTop && windowTop > divTop) {
+//                 // Scrolling down and past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else if (currentScrollTop > lastScrollTop) {
+//                 // Scrolling down, but not past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("sticknew")
+//                     .removeClass("stick");
+//             } else if (currentScrollTop <= 0) {
+//                 // Scrolling back up to the top
+//                 $(".all-events-month-show").removeClass("sticknew extra-stick");
+//             }
 
-            lastScrollTop = currentScrollTop;
-        });
+//             lastScrollTop = currentScrollTop;
+//         });
 
-    document
-        .getElementById("scrollStatus2")
-        .addEventListener("scroll", function () {
-            const currentScrollTop = this.scrollTop;
-            const windowTop = $(window).scrollTop();
-            const divTop = $("#scrollStatus2")?.offset()?.top;
+//     document
+//         .getElementById("scrollStatus2")
+//         .addEventListener("scroll", function () {
+//             const currentScrollTop = this.scrollTop;
+//             const windowTop = $(window).scrollTop();
+//             const divTop = $("#scrollStatus2")?.offset()?.top;
 
-            if (currentScrollTop > lastScrollTop && windowTop > divTop) {
-                // Scrolling down and past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else if (currentScrollTop > lastScrollTop) {
-                // Scrolling down, but not past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("sticknew")
-                    .removeClass("stick");
-            } else if (currentScrollTop <= 0) {
-                // Scrolling back up to the top
-                $(".all-events-month-show").removeClass("sticknew extra-stick");
-            }
+//             if (currentScrollTop > lastScrollTop && windowTop > divTop) {
+//                 // Scrolling down and past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else if (currentScrollTop > lastScrollTop) {
+//                 // Scrolling down, but not past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("sticknew")
+//                     .removeClass("stick");
+//             } else if (currentScrollTop <= 0) {
+//                 // Scrolling back up to the top
+//                 $(".all-events-month-show").removeClass("sticknew extra-stick");
+//             }
 
-            lastScrollTop = currentScrollTop;
-        });
+//             lastScrollTop = currentScrollTop;
+//         });
 
-    document
-        .getElementById("scrollStatus3")
-        .addEventListener("scroll", function () {
-            const currentScrollTop = this.scrollTop;
-            const windowTop = $(window).scrollTop();
-            const divTop = $("#scrollStatus3")?.offset()?.top;
+//     document
+//         .getElementById("scrollStatus3")
+//         .addEventListener("scroll", function () {
+//             const currentScrollTop = this.scrollTop;
+//             const windowTop = $(window).scrollTop();
+//             const divTop = $("#scrollStatus3")?.offset()?.top;
 
-            if (currentScrollTop > lastScrollTop && windowTop > divTop) {
-                // Scrolling down and past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("stick extra-stick")
-                    .removeClass("sticknew");
-            } else if (currentScrollTop > lastScrollTop) {
-                // Scrolling down, but not past the top of #scrollStatus
-                $(".all-events-month-show")
-                    .addClass("sticknew")
-                    .removeClass("stick");
-            } else if (currentScrollTop <= 0) {
-                // Scrolling back up to the top
-                $(".all-events-month-show").removeClass("sticknew extra-stick");
-            }
+//             if (currentScrollTop > lastScrollTop && windowTop > divTop) {
+//                 // Scrolling down and past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("stick extra-stick")
+//                     .removeClass("sticknew");
+//             } else if (currentScrollTop > lastScrollTop) {
+//                 // Scrolling down, but not past the top of #scrollStatus
+//                 $(".all-events-month-show")
+//                     .addClass("sticknew")
+//                     .removeClass("stick");
+//             } else if (currentScrollTop <= 0) {
+//                 // Scrolling back up to the top
+//                 $(".all-events-month-show").removeClass("sticknew extra-stick");
+//             }
 
-            lastScrollTop = currentScrollTop;
-        });
-});
+//             lastScrollTop = currentScrollTop;
+//         });
+// });
 
 // ===mute-post===
 $(document).ready(function () {
