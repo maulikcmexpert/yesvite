@@ -1041,7 +1041,7 @@
             if (/android/i.test(userAgent)) {
                 openAppAndroid();
             } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-                openAppIos();
+                // openAppIos();
             }
         }
     });
