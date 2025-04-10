@@ -1834,10 +1834,10 @@ $(".pending_rsvp_slider").owlCarousel({
 $(document).ready(function () {
 
     var userId = $('#login_user_id').val();  // Get the user ID from hidden input
-    var modalElement = document.getElementById('pending-rsvp-modal');
+    // var modalElement = document.getElementById('pending-rsvp-modal');
     // var modal = new bootstrap.Modal(modalElement);
     document.addEventListener("DOMContentLoaded", function () {
-        var modalElement = document.getElementById("myModal"); // or use querySelector
+        var modalElement = document.getElementById('pending-rsvp-modal');
         if (modalElement) {
           var modal = new bootstrap.Modal(modalElement);
         //   modal.show(); // if you want to show it immediately
