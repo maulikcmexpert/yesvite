@@ -733,6 +733,8 @@ async function updateChat(user_id) {
             $(".msg-footer").show();
         }
 
+        console.log('conversationId '+conversationId);
+        
         if (isBlockedByUser) {
             $(".block-conversation").find("span").text("Unblock");
         } else {
