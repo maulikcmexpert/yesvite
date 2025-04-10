@@ -731,8 +731,8 @@ $(document).on('click',".day",function () {
     //         $(this).removeClass('active-now-day');
     //     }
     // });
-    $('.day').removeClass('active-now-day');
-    $(this).addClass('active-now-day');
+    // $('.day').removeClass('active-now-day');
+    // $(this).addClass('active-now-day');
      
 
     var current_page=$('#current_page').val();
