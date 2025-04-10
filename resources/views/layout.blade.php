@@ -59,7 +59,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
               bannerColor: '#fff', // (string) Banner BG color
               linkIos: 'https://apps.apple.com/app/6736650042', // (string) Link for iOS 
               linkAndroid: 'https://play.google.com', // (string) Link for Android 
-              position: 'bottom', // (string) Position of the banner, default 'top'. 'top' | 'bottom'
+              position: 'top',
               animation: 'fadeIn', // (string) Banner animation, default 'fadeIn'. 'fadeIn' | 'scaleUp' | 'slideBottom' | 'slideTop' | 'slideLeft' | 'slideRight' | null,
               display: 'onLoad', // (string) Display options, default 'onLoad'. 'onLoad' | 'onScrollDown' | 'onScrollUp'
               radius: '0', // (string) Banner radius with units
