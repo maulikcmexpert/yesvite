@@ -43,9 +43,9 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
 <x-front.bodyfooter page="{{ $page }}" />
 @endif
     <x-front.footer :js="$js ?? []" page="{{ $page }}" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@mobiloud/ml-smart-banner@latest/dist/ml-smart-banner.min.js"></script> --}}
+    {{-- <script type="module" src="https://cdn.jsdelivr.net/npm/@mobiloud/ml-smart-banner@latest/dist/ml-smart-banner.min.js"></script> --}}
 
-  <script>
+    {{-- <script>
         const SBoptions = {
               fontFamily: `"Source Sans Pro", "Arial", sans-serif`, // (string) Font family for banner texts, defaults to system safe fonts
               fallbackFontFamily: 'sans-serif', // (string) Font family for fallback icon, safe options are serif and sans-serif
@@ -79,7 +79,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
             new SmartBanner(SBoptions).init();
         }
           window.addEventListener('load', addSmartBanner);
-    </script>
+    </script> --}}
 
 </body>
 
