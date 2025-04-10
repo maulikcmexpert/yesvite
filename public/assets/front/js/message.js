@@ -729,7 +729,7 @@ async function updateChat(user_id) {
             $(".msg-footer").show();
         }
         if (isBlockedByUser) {
-            alert();
+            // alert();
             $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Unblock");
         } else {
             $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Block User");
