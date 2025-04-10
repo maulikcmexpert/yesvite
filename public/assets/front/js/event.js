@@ -1840,7 +1840,7 @@ $(document).ready(function () {
         var modalElement = document.getElementById("myModal"); // or use querySelector
         if (modalElement) {
           var modal = new bootstrap.Modal(modalElement);
-          modal.show(); // if you want to show it immediately
+        //   modal.show(); // if you want to show it immediately
         } else {
           console.warn('Modal element not found');
         }
