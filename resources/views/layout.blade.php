@@ -58,7 +58,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
               textDescription: 'Get it now, download today', // (string) Description text
               bannerColor: '#fff', // (string) Banner BG color
               linkIos: 'https://apps.apple.com/app/6736650042', // (string) Link for iOS 
-              linkAndroid: 'https://play.google.com', // (string) Link for Android 
+              linkAndroid: 'https://play.google.com/store/apps/details?id=com.yesvite.android', // (string) Link for Android 
               position: 'top',
               animation: 'fadeIn', // (string) Banner animation, default 'fadeIn'. 'fadeIn' | 'scaleUp' | 'slideBottom' | 'slideTop' | 'slideLeft' | 'slideRight' | null,
               display: 'onLoad', // (string) Display options, default 'onLoad'. 'onLoad' | 'onScrollDown' | 'onScrollUp'
