@@ -728,12 +728,16 @@ async function updateChat(user_id) {
             $("#selected-user-lastseen").show();
             $(".msg-footer").show();
         }
-
         if (isBlockedByUser) {
-            $(".block-conversation").find("span").text("Unblock");
+            $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Unblock");
         } else {
-            $(".block-conversation").find("span").text("Block User");
+            $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Block User");
         }
+        // if (isBlockedByUser) {
+        //     $(".block-conversation").find("span").text("Unblock");
+        // } else {
+        //     $(".block-conversation").find("span").text("Block User");
+        // }
         $(".block-conversation").attr("blocked", isBlockedByUser);
     };
 
