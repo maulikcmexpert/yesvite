@@ -108,8 +108,10 @@ class ChatController extends BaseController
         $updateFirebase = false;
 
         if ($userSnapshot) {
-            if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
-                $updateFirebase = true;
+            if(isset($userSnapshot['userName'])){
+                if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
+                    $updateFirebase = true;
+                }
             }
             // User exists, update the existing data
             $userRef->update($updateData);
