@@ -2621,14 +2621,14 @@ function handleRemoveConversation(snapshot) {
     }
 }
 
-$(document).on("click", ".usr-list-more",async function (e) {
+$(document).on("click", ".usr-list-more",function (e) {
     e.stopPropagation();
     let user_id=$(this).attr('data-userid');
     let convo=$(this).attr('data-conversationId');
 
     // console.log("user_id: ",user_id);
     // console.log("convo: ",convo);
-    await handleBlockUnblock(user_id,convo);
+     handleBlockUnblock(user_id,convo);
     console.log("clicked");
     return;
 });
@@ -4988,13 +4988,15 @@ $(document).ready(function () {
 
 
 
-async function handleBlockUnblock(user_id, conversationId) {
+ function handleBlockUnblock(user_id, conversationId) {
+     console.log("user_id: ",user_id);
+    // console.log("convo: ",convo);
     const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
     const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
 
-    const checkBlockStatus = async () => {
-        const blockByMeSnapshot = await get(blockByMeRef);
-        const blockByUserSnapshot = await get(blockByUserRef);
+    // const checkBlockStatus = async () => {
+        const blockByMeSnapshot =  get(blockByMeRef);
+        const blockByUserSnapshot =  get(blockByUserRef);
 
         let isBlockedByMe = false;
         let isBlockedByUser = false;
@@ -5026,17 +5028,7 @@ async function handleBlockUnblock(user_id, conversationId) {
         }
 
         $(".block-conversation").attr("blocked", isBlockedByUser);
-    };
+    // };
 
-    // Initial block check
-    await checkBlockStatus();
-
-    // Realtime listeners
-    onValue(blockByMeRef, async () => {
-        await checkBlockStatus();
-    });
-
-    onValue(blockByUserRef, async () => {
-        await checkBlockStatus();
-    });
+   
 }
