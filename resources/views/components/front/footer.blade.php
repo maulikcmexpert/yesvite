@@ -516,7 +516,7 @@
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
 <script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
-<script src="{{ asset('assets/front/walljs/scritp.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/walljs/scritp.js') }}"></script> --}}
 <script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 
 <script src="{{ asset('assets/front/new_js/calender.js') }}"></script>
