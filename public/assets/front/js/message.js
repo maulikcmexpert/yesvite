@@ -708,8 +708,8 @@ async function updateChat(user_id) {
         const blockByMeSnapshot = await get(blockByMeRef);
         const blockByUserSnapshot = await get(blockByUserRef);
 
-        console.log('blockByMeSnapshot'+blockByMeSnapshot);
-        console.log('blockByUserSnapshot '+blockByUserSnapshot);
+        console.log(blockByMeRef);
+        console.log(blockByUserRef);
         
 
         let isBlockedByMe = false;
@@ -732,17 +732,12 @@ async function updateChat(user_id) {
             $("#selected-user-lastseen").show();
             $(".msg-footer").show();
         }
+
         if (isBlockedByUser) {
-            // alert();
-            $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Unblock");
+            $(".block-conversation").find("span").text("Unblock");
         } else {
-            $(`.block-conversation[data-conversation="${conversationId}"]`).find("span").text("Block User");
+            $(".block-conversation").find("span").text("Block User");
         }
-        // if (isBlockedByUser) {
-        //     $(".block-conversation").find("span").text("Unblock");
-        // } else {
-        //     $(".block-conversation").find("span").text("Block User");
-        // }
         $(".block-conversation").attr("blocked", isBlockedByUser);
     };
 
