@@ -944,7 +944,7 @@ $(document).on("click", ".msg-list", async function () {
             unReadCount: 0,
         });
         console.log("updateoverview");
-        await updateChat(userId);
+        // await updateChat(userId);
         console.log({ conversationId });
     }
     isToMove = false;
