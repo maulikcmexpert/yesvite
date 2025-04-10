@@ -1253,6 +1253,8 @@ $(document).ready(function () {
                     prevEl: ".swiper-button-prev",
                 },
             });
+            $(".swiper-button-next").show();
+            $(".swiper-button-prev").show(); 
         } else {
             swiperWrapper.addClass("hideswipe");
             // swiper.destroy(true, true);
