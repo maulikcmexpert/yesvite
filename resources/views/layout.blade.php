@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> --}}
+    <head>
     <meta name="apple-itunes-app" content="app-id=6736650042">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
