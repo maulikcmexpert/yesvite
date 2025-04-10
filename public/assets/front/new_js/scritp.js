@@ -1215,10 +1215,10 @@ function sticky_relocate() {
     }
 }
 
-$(function () {
-    $(window).scroll(sticky_relocate);
-    sticky_relocate();
-});
+// $(function () {
+//     $(window).scroll(sticky_relocate);
+//     sticky_relocate();
+// });
 
 
 

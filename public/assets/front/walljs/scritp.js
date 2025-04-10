@@ -175,10 +175,10 @@ function sticky_relocate() {
     }
 }
 
-$(function () {
-    $(window).scroll(sticky_relocate);
-    sticky_relocate();
-});
+// $(function () {
+//     $(window).scroll(sticky_relocate);
+//     sticky_relocate();
+// });
 
 function sticky_relocate1() {
     var window_top = $(window).scrollTop();

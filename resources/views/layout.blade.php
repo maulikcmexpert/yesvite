@@ -7,7 +7,7 @@
         <meta name="apple-itunes-app" content="app-id=6736650042, app-argument=comappyesvite://">
         {{-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="apple-itunes-app" content="app-id=6736650042"> --}}
-
+        {{-- sticky_relocate --}}
     @isset($css)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css}}" />
     @endisset
