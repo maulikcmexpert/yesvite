@@ -513,6 +513,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/smartbanner.js@1.2.0/dist/smartbanner.min.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
 <script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
@@ -532,7 +533,25 @@
 <script src="{{ asset('assets/front/walljs/potluck.js') }}"></script>
 
 <script src="{{ asset('assets/front/js/event.js') }}"></script>
-
+<script>
+    new SmartBanner({
+      title: 'AwesomeApp',
+      author: 'Awesome Devs',
+      icon: 'icon.png',
+      price: {
+        android: 'FREE',
+        ios: 'FREE'
+      },
+      store: {
+        android: 'On Google Play',
+        ios: 'On the App Store'
+      },
+      url: {
+        android: 'https://play.google.com/store/apps/details?id=com.yesvite.android',
+        ios: 'https://apps.apple.com/app/id6736650042'
+      }
+    });
+  </script>
 <script>
     new WOW().init()
 </script>
@@ -992,33 +1011,33 @@
     // });
 
     //newwwww
-    // function openAppAndroid() {
-    //     // const appPackage = "com.yesvite.test";
-    //     const appPackage = "com.yesvite.android";
-    //     const appLink =
-    //         // `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
-    //         `intent://yesvite.com/somepage#Intent;scheme=https;package=${appPackage};end;`;
+    function openAppAndroid() {
+        // const appPackage = "com.yesvite.test";
+        const appPackage = "com.yesvite.android";
+        const appLink =
+            // `intent://yesvite.cmexpertiseinfotech.in/somepage#Intent;scheme=https;package=${appPackage};end;`;
+            `intent://yesvite.com/somepage#Intent;scheme=https;package=${appPackage};end;`;
 
-    //     if (!sessionStorage.getItem('androidAppRedirectionDone')) {
-    //         window.location.replace(appLink);
-    //         sessionStorage.setItem('androidAppRedirectionDone', 'true');
-    //     }
-    //     // Optional: Play Store fallback
-    //     // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
-    //     // window.location.href = playStoreLink;
-    // }
+        if (!sessionStorage.getItem('androidAppRedirectionDone')) {
+            window.location.replace(appLink);
+            sessionStorage.setItem('androidAppRedirectionDone', 'true');
+        }
+        // Optional: Play Store fallback
+        // const playStoreLink = "https://play.google.com/store/apps/details?id=" + appPackage;
+        // window.location.href = playStoreLink;
+    }
 
-    // function openAppIos() {
-    //     const appLink = "comappyesvite://";
+    function openAppIos() {
+        const appLink = "comappyesvite://";
 
-    //     if (!sessionStorage.getItem('iosAppRedirectionDone')) {
-    //         window.location.href = appLink;
-    //         sessionStorage.setItem('iosAppRedirectionDone', 'true');
-    //     }
-    //     // Optional: App Store fallback (you'll need the app store URL)
-    //     // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
-    //     // window.location.href = appStoreLink;
-    // }
+        if (!sessionStorage.getItem('iosAppRedirectionDone')) {
+            window.location.href = appLink;
+            sessionStorage.setItem('iosAppRedirectionDone', 'true');
+        }
+        // Optional: App Store fallback (you'll need the app store URL)
+        // const appStoreLink = "YOUR_IOS_APP_STORE_LINK_HERE";
+        // window.location.href = appStoreLink;
+    }
 
     // document.addEventListener('DOMContentLoaded', () => {
     //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -1030,21 +1049,21 @@
     //         }
     //     }
     // });
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    //     const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream;
+    document.addEventListener('DOMContentLoaded', () => {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isMobile = /android|iphone|ipad|ipod/i.test(userAgent) && !window.MSStream;
 
-    //     // Additional check for desktop OS
-    //     const isDesktop = /windows|macintosh|linux|ubuntu/i.test(userAgent);
+        // Additional check for desktop OS
+        const isDesktop = /windows|macintosh|linux|ubuntu/i.test(userAgent);
 
-    //     if (isMobile && !isDesktop) {
-    //         if (/android/i.test(userAgent)) {
-    //             openAppAndroid();
-    //         } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-    //             // openAppIos();
-    //         }
-    //     }
-    // });
+        if (isMobile && !isDesktop) {
+            if (/android/i.test(userAgent)) {
+                // openAppAndroid();
+            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+                // openAppIos();
+            }
+        }
+    });
 
     // window.addEventListener('beforeunload', () => {
     //     sessionStorage.removeItem('androidAppRedirectionDone');
