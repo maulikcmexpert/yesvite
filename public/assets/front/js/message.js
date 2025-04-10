@@ -2626,6 +2626,9 @@ $(document).on("click", ".usr-list-more", function (e) {
     let user_id=$(this).attr('data-userid');
     let convo=$(this).attr('data-conversationId');
     handleBlockUnblock(user_id,convo);
+
+    
+
     console.log("clicked");
     return;
 });
@@ -4985,7 +4988,7 @@ $(document).ready(function () {
 
 
 
-async function handleBlockUnblock(userid, conversationId) {
+async function handleBlockUnblock(user_id, conversationId) {
     const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
     const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
 
