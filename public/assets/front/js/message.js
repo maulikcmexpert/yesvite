@@ -2623,6 +2623,7 @@ function handleRemoveConversation(snapshot) {
 
 $(document).on("click", ".usr-list-more", function (e) {
     e.stopPropagation();
+    checkBlockStatus();
     console.log("clicked");
     return;
 });
