@@ -2621,14 +2621,14 @@ function handleRemoveConversation(snapshot) {
     }
 }
 
-$(document).on("click", ".usr-list-more", function (e) {
+$(document).on("click", ".usr-list-more",async function (e) {
     e.stopPropagation();
     let user_id=$(this).attr('data-userid');
     let convo=$(this).attr('data-conversationId');
 
-    console.log("user_id: ",user_id);
-    console.log("convo: ",convo);
-    handleBlockUnblock(user_id,convo);
+    // console.log("user_id: ",user_id);
+    // console.log("convo: ",convo);
+    await handleBlockUnblock(user_id,convo);
     console.log("clicked");
     return;
 });
