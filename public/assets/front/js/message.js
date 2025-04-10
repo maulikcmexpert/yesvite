@@ -718,11 +718,14 @@ async function updateChat(user_id) {
         if (blockByMeSnapshot.exists()) {
             const blockByMeList = blockByMeSnapshot.val();
             isBlockedByMe = blockByMeList.includes(user_id);
+            console.log('blockByMeList '+blockByMeList);
+
         }
 
         if (blockByUserSnapshot.exists()) {
             const blockByUserList = blockByUserSnapshot.val();
             isBlockedByUser = blockByUserList.includes(user_id);
+            console.log('blockByUserList '+blockByUserList);
         }
 
         if (isBlockedByMe || isBlockedByUser) {
@@ -733,8 +736,6 @@ async function updateChat(user_id) {
             $(".msg-footer").show();
         }
 
-        console.log('blockByMeList '+blockByMeList);
-        console.log('blockByUserList '+blockByUserList);
         
         if (isBlockedByUser) {
             $(".block-conversation").find("span").text("Unblock");
