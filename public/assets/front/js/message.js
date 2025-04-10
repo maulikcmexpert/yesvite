@@ -737,15 +737,12 @@ async function updateChat(user_id) {
         }
 
         
-        // if (isBlockedByUser) {
-        //     $(".block-conversation").find("span").text("Unblock");
-        // } else {
-        //     $(".block-conversation").find("span").text("Block User");
-        // }
         if (isBlockedByUser) {
-            $(`.block-conversation[user="${isBlockedByUser}"]`).find("span").text("Unblock");
+            console.log('isBlockedByUser '+isBlockedByUser);
+            
+            $(".block-conversation").find("span").text("Unblock");
         } else {
-            $(`.block-conversation`).find("span").text("Block User");
+            $(".block-conversation").find("span").text("Block User");
         }
         $(".block-conversation").attr("blocked", isBlockedByUser);
     };
