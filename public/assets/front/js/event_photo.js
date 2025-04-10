@@ -1268,6 +1268,8 @@ $(document).ready(function () {
 
                 loop: false, // 🔹 Ensure looping is disabled
             });
+            $(".swiper-button-next").hide();
+            $(".swiper-button-prev").hide(); 
         }
         //let parentId = null;  // Default to null, assuming no parent
 
