@@ -1176,49 +1176,49 @@ $("#scrollStatus3").on("scroll", function () {
     }
 });
 
-// function sticky_relocate() {
-//     var window_top = $(window).scrollTop();
-//     var div_top = $("#scrollStatus").offset()?.top;
-//     if (div_top == undefined) {
-//         return;
-//     }
-//     var activeTab = $(".tab-pane.active");
+function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var div_top = $("#scrollStatus").offset()?.top;
+    if (div_top == undefined) {
+        return;
+    }
+    var activeTab = $(".tab-pane.active");
 
-//     console.log("Window Top:", window_top);
-//     console.log("Div Top:", div_top);
-//     console.log("Active Tab:", activeTab);
+    console.log("Window Top:", window_top);
+    console.log("Div Top:", div_top);
+    console.log("Active Tab:", activeTab);
 
-//     if (activeTab.length > 0) {
-//         if (window_top > div_top && div_top !== 0) {
-//             $("#tabbtn1").addClass("stick");
-//         } else {
-//             $("#tabbtn1").removeClass("stick");
-//         }
-//     }
+    if (activeTab.length > 0) {
+        if (window_top > div_top && div_top !== 0) {
+            $("#tabbtn1").addClass("stick");
+        } else {
+            $("#tabbtn1").removeClass("stick");
+        }
+    }
 
-//     var div_top2 = $("#scrollStatus2").offset().top;
-//     if (activeTab.length > 0) {
-//         if (window_top > div_top2 && div_top2 !== 0) {
-//             $("#tabbtn2").addClass("stick");
-//         } else {
-//             $("#tabbtn2").removeClass("stick");
-//         }
-//     }
+    var div_top2 = $("#scrollStatus2").offset().top;
+    if (activeTab.length > 0) {
+        if (window_top > div_top2 && div_top2 !== 0) {
+            $("#tabbtn2").addClass("stick");
+        } else {
+            $("#tabbtn2").removeClass("stick");
+        }
+    }
 
-//     var div_top3 = $("#scrollStatus3").offset().top;
-//     if (activeTab.length > 0 && div_top3 !== 0) {
-//         if (window_top > div_top3) {
-//             $("#tabbtn3").addClass("stick");
-//         } else {
-//             $("#tabbtn3").removeClass("stick");
-//         }
-//     }
-// }
+    var div_top3 = $("#scrollStatus3").offset().top;
+    if (activeTab.length > 0 && div_top3 !== 0) {
+        if (window_top > div_top3) {
+            $("#tabbtn3").addClass("stick");
+        } else {
+            $("#tabbtn3").removeClass("stick");
+        }
+    }
+}
 
-// $(function () {
-//     $(window).scroll(sticky_relocate);
-//     sticky_relocate();
-// });
+$(function () {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+});
 
 
 
