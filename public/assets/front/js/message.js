@@ -708,17 +708,24 @@ async function updateChat(user_id) {
         const blockByMeSnapshot = await get(blockByMeRef);
         const blockByUserSnapshot = await get(blockByUserRef);
 
+        // console.log(blockByMeRef);
+        // console.log(blockByUserRef);
+        
+
         let isBlockedByMe = false;
         let isBlockedByUser = false;
 
         if (blockByMeSnapshot.exists()) {
             const blockByMeList = blockByMeSnapshot.val();
             isBlockedByMe = blockByMeList.includes(user_id);
+            console.log('blockByMeList '+blockByMeList);
+
         }
 
         if (blockByUserSnapshot.exists()) {
             const blockByUserList = blockByUserSnapshot.val();
             isBlockedByUser = blockByUserList.includes(user_id);
+            console.log('blockByUserList '+blockByUserList);
         }
 
         if (isBlockedByMe || isBlockedByUser) {
@@ -729,6 +736,7 @@ async function updateChat(user_id) {
             $(".msg-footer").show();
         }
 
+        
         if (isBlockedByUser) {
             $(".block-conversation").find("span").text("Unblock");
         } else {
@@ -2615,6 +2623,12 @@ function handleRemoveConversation(snapshot) {
 
 $(document).on("click", ".usr-list-more", function (e) {
     e.stopPropagation();
+    let user_id=$(this).attr('data-userid');
+    let convo=$(this).attr('data-conversationId');
+
+    console.log("user_id: ",user_id);
+    console.log("convo: ",convo);
+    handleBlockUnblock(user_id,convo);
     console.log("clicked");
     return;
 });
@@ -2931,7 +2945,7 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_id").val(conversationId);
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
-            alert(contactId);
+            // alert(contactId);
             sendAppLink(contactId);
             const messageData = {
                 data: message,
@@ -4970,3 +4984,59 @@ $(document).ready(function () {
 });
 
 //vrushali message box
+
+
+
+
+async function handleBlockUnblock(user_id, conversationId) {
+    const blockByMeRef = ref(database, `users/${senderUser}/blockByUser`);
+    const blockByUserRef = ref(database, `users/${senderUser}/blockByMe`);
+
+    const checkBlockStatus = async () => {
+        const blockByMeSnapshot = await get(blockByMeRef);
+        const blockByUserSnapshot = await get(blockByUserRef);
+
+        let isBlockedByMe = false;
+        let isBlockedByUser = false;
+
+        if (blockByMeSnapshot.exists()) {
+            const blockByMeList = blockByMeSnapshot.val();
+            isBlockedByMe = blockByMeList.includes(user_id);
+            console.log("blockByMeList: ", blockByMeList);
+        }
+
+        if (blockByUserSnapshot.exists()) {
+            const blockByUserList = blockByUserSnapshot.val();
+            isBlockedByUser = blockByUserList.includes(user_id);
+            console.log("blockByUserList: ", blockByUserList);
+        }
+
+        if (isBlockedByMe || isBlockedByUser) {
+            $(".msg-footer").hide();
+            $("#selected-user-lastseen").hide();
+        } else {
+            $("#selected-user-lastseen").show();
+            $(".msg-footer").show();
+        }
+
+        if (isBlockedByUser) {
+            $(".block-conversation").find("span").text("Unblock");
+        } else {
+            $(".block-conversation").find("span").text("Block User");
+        }
+
+        $(".block-conversation").attr("blocked", isBlockedByUser);
+    };
+
+    // Initial block check
+    await checkBlockStatus();
+
+    // Realtime listeners
+    onValue(blockByMeRef, async () => {
+        await checkBlockStatus();
+    });
+
+    onValue(blockByUserRef, async () => {
+        await checkBlockStatus();
+    });
+}
