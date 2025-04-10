@@ -515,23 +515,23 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
-{{-- <script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
-<script src="{{ asset('assets/front/walljs/scritp.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/front/new_js/slider.js') }}"></script> --}}
+<script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
+<script src="{{ asset('assets/front/walljs/scritp.js') }}"></script>
+<script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 
-{{-- <script src="{{ asset('assets/front/new_js/calender.js') }}"></script> --}}
+<script src="{{ asset('assets/front/new_js/calender.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
 {{-- <script src="{{ asset('assets/front/js/event_wall.js')}}"></script > --}}
-{{-- <script src="{{ asset('assets/front/walljs/slider.js') }}"></script> --}}
+<script src="{{ asset('assets/front/walljs/slider.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/4.0.0/apexcharts.min.js" crossorigin="anonymous">
 </script>
-{{-- <script src="{{ asset('assets/front/walljs/guest.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/front/walljs/potluck.js') }}"></script> --}}
+<script src="{{ asset('assets/front/walljs/guest.js') }}"></script>
+<script src="{{ asset('assets/front/walljs/potluck.js') }}"></script>
 
-{{-- <script src="{{ asset('assets/front/js/event.js') }}"></script> --}}
+<script src="{{ asset('assets/front/js/event.js') }}"></script>
 
 <script>
     new WOW().init()
@@ -540,7 +540,7 @@
 @if (isset($js))
 
     @foreach ($js as $value)
-        {{-- <script src="{{ asset('assets/front') }}/js/{{ $value }}.js"></script> --}}
+        <script src="{{ asset('assets/front') }}/js/{{ $value }}.js"></script>
     @endforeach
 
 @endif
