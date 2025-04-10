@@ -29,7 +29,7 @@ $(document).on("click", ".popup-videos", function () {
     return false; // Prevent default behavior
 });
 
-$(document).on("click",'.notification-btn', function () {
+$(document).on("click", '.notification-btn', function () {
     const Onnotification = `<svg viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.5194 2.58331C8.68605 2.58331 5.58188 5.68748 5.58188 9.52081V11.7083C5.58188 12.4166 5.29022 13.4791 4.92563 14.0833L3.60272 16.2916C2.79022 17.6562 3.35272 19.1771 4.85272 19.6771C9.83188 21.3333 15.2173 21.3333 20.1965 19.6771C21.6027 19.2083 22.2069 17.5625 21.4465 16.2916L20.1235 14.0833C19.759 13.4791 19.4673 12.4062 19.4673 11.7083V9.52081C19.4569 5.70831 16.3319 2.58331 12.5194 2.58331Z" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
                       <path d="M15.9688 20.1042C15.9688 22.0104 14.4063 23.5729 12.5 23.5729C11.5521 23.5729 10.6771 23.1771 10.0521 22.5521C9.42708 21.9271 9.03125 21.0521 9.03125 20.1042" stroke="#0F172A" stroke-width="1.5" stroke-miterlimit="10"></path>
@@ -135,7 +135,7 @@ $(document).on("click", ".mobile-calender-btn", function () {
                           <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                           <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
                           <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>`;
+                    </svg>`;
 
     var $textSpan = $(this).find(".responsive-text");
     var $iconSpan = $(this).find(".responsive-icon");
@@ -153,8 +153,8 @@ $(document).on("click", ".mobile-calender-btn", function () {
         $iconSpan.html(calendarSvg);
         $(".responsive-calendar").css("display", "none");
         $(".responsive-calender-month-text").css("display", "none");
-        $("#add_new_event_respo").css('display','inline-flex');
-        $(".mobile-calender-btn").css('display','none');
+        $("#add_new_event_respo").css('display', 'inline-flex');
+        $(".mobile-calender-btn").css('display', 'none');
     }
 });
 
@@ -208,15 +208,15 @@ $(document).on("click", ".profile-calender-view", function () {
   <path d="M3 5.83398H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
   <path d="M3 10H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
   <path d="M3 14.166H18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-</svg>`;
+  </svg>`;
 
     $textSpan.text("List View");
     $iconSpan.html(listSvg);
 
     $(".responsive-calendar").css("display", "flex");
     $(".responsive-calender-month-text").css("display", "inline-block");
-    $("#add_new_event_respo").css('display','none');
-    $(".mobile-calender-btn").css('display','block');
+    $("#add_new_event_respo").css('display', 'none');
+    $(".mobile-calender-btn").css('display', 'block');
 });
 
 $(document).on("click", "#detail_calender_view", function () {
@@ -249,10 +249,10 @@ $(document).on("click", "#detail_calender_view", function () {
     var $iconSpan = $(this).find(".responsive-icon");
     console.log($(this).html());
     // if (text == "Calendar") {
-        $textSpan.text("List View");
-        $iconSpan.html(listSvg);
-        $(".responsive-calendar").css("display", "flex");
-        $(".responsive-calender-month-text").css("display", "inline-block");
+    $textSpan.text("List View");
+    $iconSpan.html(listSvg);
+    $(".responsive-calendar").css("display", "flex");
+    $(".responsive-calender-month-text").css("display", "inline-block");
     // }
 
     // if (text == "List View") {
@@ -263,12 +263,12 @@ $(document).on("click", "#detail_calender_view", function () {
     // }
 });
 
-$(document).on("click",'.get-back-home-calender',function(){
+$(document).on("click", '.get-back-home-calender', function () {
     $('.view-calender-heading').addClass("d-none");
     $('.right-bar-menu-home').removeClass("d-none");
     $('.user-name-title').removeClass("d-none");
-        $(".responsive-calendar").css("display", "none");
-        $(".responsive-calender-month-text").css("display", "none");
+    $(".responsive-calendar").css("display", "none");
+    $(".responsive-calender-month-text").css("display", "none");
 })
 // ===header-drodpdown===
 const dropdownButton = document.getElementById("dropdownButton");
@@ -303,10 +303,10 @@ $(".notification-toggle-menu").on("click", function (event) {
         $(".mobile-menu-wrp").removeClass("active");
         $(".line").removeClass("active");
     }
-    $('.notification-showall-btn').attr('data-show','0');
-    $('.notification_drp_down_div').each(function(index) {
+    $('.notification-showall-btn').attr('data-show', '0');
+    $('.notification_drp_down_div').each(function (index) {
         let count = index + 1;
-        $('#collapseOne'+count).removeClass('show');
+        $('#collapseOne' + count).removeClass('show');
         $('.main-notification-div-list').addClass('collapsed');
     });
 });
@@ -681,40 +681,40 @@ $(document).ready(function () {
         "\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
     };
     $(".photo-card-head-right").each(function () {
-      const $container = $(this); // Get the current container
-      const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
-      const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
-      let pressTimer;
+        const $container = $(this); // Get the current container
+        const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+        const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+        let pressTimer;
 
-      // Handle long press to show emoji dropdown (for both desktop and mobile)
-      $likeButton.on("mousedown touchstart", function () {
-        pressTimer = setTimeout(function () {
-          $emojiDropdown.show(); // Show emoji dropdown after long press
-        }, 500); // Trigger long press after 0.5 seconds
-      });
+        // Handle long press to show emoji dropdown (for both desktop and mobile)
+        $likeButton.on("mousedown touchstart", function () {
+            pressTimer = setTimeout(function () {
+                $emojiDropdown.show(); // Show emoji dropdown after long press
+            }, 500); // Trigger long press after 0.5 seconds
+        });
 
-      $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
-        clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
-      });
+        $likeButton.on("mouseup touchend mouseleave touchcancel", function () {
+            clearTimeout(pressTimer); // Clear the timer if button is released or mouse/touch leaves
+        });
 
-      // Handle emoji click
-      $emojiDropdown.on("click", ".emoji", function () {
-        const emoji = $(this).data("emoji");
+        // Handle emoji click
+        $emojiDropdown.on("click", ".emoji", function () {
+            const emoji = $(this).data("emoji");
 
-        // Remove the heart icon and set emoji inside the button
-        $likeButton.html(`<i class="show_Emoji" style="display:flex"><img src='${reactionIcons[emoji]}' class="emoji"/></i>`); // Show selected emoji inside button
+            // Remove the heart icon and set emoji inside the button
+            $likeButton.html(`<i class="show_Emoji" style="display:flex"><img src='${reactionIcons[emoji]}' class="emoji"/></i>`); // Show selected emoji inside button
 
-        $emojiDropdown.hide(); // Hide emoji dropdown after selection
-      });
+            $emojiDropdown.hide(); // Hide emoji dropdown after selection
+        });
 
-      // Optional: Hide the emoji dropdown if you click outside of it
-      $(document).on("click touchstart", function (e) {
-        if (!$container.is(e.target) && $container.has(e.target).length === 0) {
-          $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
-        }
-      });
+        // Optional: Hide the emoji dropdown if you click outside of it
+        $(document).on("click touchstart", function (e) {
+            if (!$container.is(e.target) && $container.has(e.target).length === 0) {
+                $emojiDropdown.hide(); // Hide emoji dropdown if click is outside
+            }
+        });
     });
-  });
+});
 // ===add-photo-vidoe-div-onclick===
 const createphotobtn = document.getElementById("create-photo-btn");
 const createpollbtn = document.getElementById("create-poll-btn");
@@ -1268,7 +1268,7 @@ $(document).on("click", ".notification_read", function () {
             console.error("Error fetching events:", error);
             // $('.loader').css('display','none');
         },
-        complete: function () {},
+        complete: function () { },
     });
 });
 
@@ -1391,24 +1391,24 @@ if (hiddenData != undefined) {
     });
 }
 
-$(document).on('click', '.notification-showall-btn', function() {
-    var show=$(this).attr('data-show');
+$(document).on('click', '.notification-showall-btn', function () {
+    var show = $(this).attr('data-show');
     $('.main-notification-div-list').removeClass('unseen-notification');
 
-    if(show=="0"){
+    if (show == "0") {
         $(this).text('Minimize All');
-        $(this).attr('data-show','1');
-        $('.notification_drp_down_div').each(function(index) {
+        $(this).attr('data-show', '1');
+        $('.notification_drp_down_div').each(function (index) {
             let count = index + 1;
-            $('#collapseOne'+count).addClass('show');
+            $('#collapseOne' + count).addClass('show');
             $('.main-notification-div-list').removeClass('collapsed');
         });
-    }else{
+    } else {
         $(this).text('Show All');
-        $(this).attr('data-show','0');
-        $('.notification_drp_down_div').each(function(index) {
+        $(this).attr('data-show', '0');
+        $('.notification_drp_down_div').each(function (index) {
             let count = index + 1;
-            $('#collapseOne'+count).removeClass('show');
+            $('#collapseOne' + count).removeClass('show');
             $('.main-notification-div-list').addClass('collapsed');
         });
     }
