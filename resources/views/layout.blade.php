@@ -54,7 +54,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
               buttonText: 'Get', // (string) Button text
               buttonTextColor: '#fff', // (string) Button Text Color (any color property value)
               iconUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/c4/a1/70/c4a1704e-ed21-abde-cc5b-20c33be2c6a7/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp', // (string) Icon url, defaults to avatar with appName. You can use the app logo in the appstore/playstore
-              textHeading: 'Download our App!', // (string) Heading Text
+              textHeading: 'Download our Yesvite App!', // (string) Heading Text
               textDescription: 'Get it now, download today', // (string) Description text
               bannerColor: '#fff', // (string) Banner BG color
               linkIos: 'https://apps.apple.com/app/6736650042', // (string) Link for iOS 
