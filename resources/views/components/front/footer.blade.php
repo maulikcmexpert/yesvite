@@ -515,8 +515,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
-<script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
-<script src="{{ asset('assets/front/walljs/scritp.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
+<script src="{{ asset('assets/front/walljs/scritp.js') }}"></script> --}}
 <script src="{{ asset('assets/front/new_js/slider.js') }}"></script>
 
 <script src="{{ asset('assets/front/new_js/calender.js') }}"></script>
@@ -531,7 +531,7 @@
 <script src="{{ asset('assets/front/walljs/guest.js') }}"></script>
 <script src="{{ asset('assets/front/walljs/potluck.js') }}"></script>
 
-<script src="{{ asset('assets/front/js/event.js') }}"></script>
+{{-- <script src="{{ asset('assets/front/js/event.js') }}"></script> --}}
 
 <script>
     new WOW().init()
