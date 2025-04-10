@@ -2909,9 +2909,6 @@ $("#new_message").on("keypress", async function (e) {
             let isBlockedByMe = false;
             let isBlockedByUser = false;
 
-            console.log('sendAppLink'+blockByMeSnapshot);
-            console.log('blockByUserSnapshot'+blockByUserSnapshot);
-            
             if (blockByMeSnapshot.exists()) {
                 const blockByMeList = blockByMeSnapshot.val();
                 isBlockedByMe = blockByMeList.includes(contactId);
@@ -2934,7 +2931,6 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_id").val(conversationId);
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
-            alert(contactId);
             sendAppLink(contactId);
             const messageData = {
                 data: message,
