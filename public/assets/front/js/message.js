@@ -708,6 +708,10 @@ async function updateChat(user_id) {
         const blockByMeSnapshot = await get(blockByMeRef);
         const blockByUserSnapshot = await get(blockByUserRef);
 
+        console.log('blockByMeSnapshot'+blockByMeSnapshot);
+        console.log('blockByUserSnapshot '+blockByUserSnapshot);
+        
+
         let isBlockedByMe = false;
         let isBlockedByUser = false;
 
