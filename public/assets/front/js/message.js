@@ -2931,7 +2931,7 @@ $("#new_message").on("keypress", async function (e) {
             $(".selected_id").val(conversationId);
             $(".selected_message").val(contactId);
             $(".selected_name").val(contactName);
-            alert(contactId);
+            // alert(contactId);
             sendAppLink(contactId);
             const messageData = {
                 data: message,
