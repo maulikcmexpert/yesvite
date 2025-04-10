@@ -14,7 +14,7 @@
     @isset($css1)
     <link rel="stylesheet" href="{{asset('assets')}}/front/css/{{$css1}}" />
     @endisset
-    <x-front.header title={{$title}} page={{$page}} />
+    {{-- <x-front.header title={{$title}} page={{$page}} /> --}}
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_photos')
 <x-front.bodyfooter page="{{ $page }}" />
 @endif
-    <x-front.footer :js="$js ?? []" page="{{ $page }}" />
+    {{-- <x-front.footer :js="$js ?? []" page="{{ $page }}" /> --}}
 
 
 </body>
