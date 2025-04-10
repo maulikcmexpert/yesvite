@@ -533,28 +533,7 @@
 <script src="{{ asset('assets/front/walljs/potluck.js') }}"></script>
 
 <script src="{{ asset('assets/front/js/event.js') }}"></script>
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
 
-    new SmartBanner({
-      title: 'AwesomeApp',
-      author: 'Awesome Devs',
-      icon: 'icon.png',
-      price: {
-        android: 'FREE',
-        ios: 'FREE'
-      },
-      store: {
-        android: 'On Google Play',
-        ios: 'On the App Store'
-      },
-      url: {
-        android: 'https://play.google.com/store/apps/details?id=com.yesvite.android',
-        ios: 'https://apps.apple.com/app/id6736650042'
-      }
-    });
-});
-  </script>
 <script>
     new WOW().init()
 </script>
@@ -1073,4 +1052,26 @@
     //     sessionStorage.removeItem('iosAppRedirectionDone');
     // });
     //newwww
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+new SmartBanner({
+  title: 'AwesomeApp',
+  author: 'Awesome Devs',
+  icon: 'icon.png',
+  price: {
+    android: 'FREE',
+    ios: 'FREE'
+  },
+  store: {
+    android: 'On Google Play',
+    ios: 'On the App Store'
+  },
+  url: {
+    android: 'https://play.google.com/store/apps/details?id=com.yesvite.android',
+    ios: 'https://apps.apple.com/app/id6736650042'
+  }
+});
+});
 </script>
