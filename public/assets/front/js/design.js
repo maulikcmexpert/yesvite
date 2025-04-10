@@ -698,6 +698,11 @@ $(document).on("click", ".edit_design_tem", function (e) {
         },
     });
 });
+
+$(window).on("load", function () {
+    console.log("loader");
+    $("#loader").css("display", "none");
+});
 async function waitForAllImagesToLoad(maxWait = 2000) {
     const images = document.querySelectorAll("img");
     const backgrounds = document.querySelectorAll("[style*='background']");
