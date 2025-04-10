@@ -463,27 +463,27 @@
     const designData = JSON.parse($('#designData').val());
 
 //     // Convert your designData into flat suggestion list
-let suggestionList = [];
+// let suggestionList = [];
 
-designData.forEach(category => {
-    suggestionList.push({ value: category.name });
-    category.subcategories.forEach(sub => {
-        suggestionList.push({ value: sub.name });
-    });
-});
+// designData.forEach(category => {
+//     suggestionList.push({ value: category.name });
+//     category.subcategories.forEach(sub => {
+//         suggestionList.push({ value: sub.name });
+//     });
+// });
 
-// Initialize Tagify
-const input = document.querySelector('#tags');
-const tagify = new Tagify(input, {
-    whitelist: suggestionList.map(item => item.value),
-    dropdown: {
-        enabled: 1,
-        maxItems: 20,
-        position: "all",
-        closeOnSelect: true,
-        highlightFirst: true
-    }
-});
+// // Initialize Tagify
+// const input = document.querySelector('#tags');
+// const tagify = new Tagify(input, {
+//     whitelist: suggestionList.map(item => item.value),
+//     dropdown: {
+//         enabled: 1,
+//         maxItems: 20,
+//         position: "all",
+//         closeOnSelect: true,
+//         highlightFirst: true
+//     }
+// });
 
 //     $(document).on("keyup", ".bootstrap-tagsinput input", function() {
 //         const query = $(this).val().toLowerCase();
