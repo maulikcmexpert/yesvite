@@ -513,7 +513,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/smartbanner.js@1.2.0/dist/smartbanner.min.js"></script>
 
 <!-- {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}} -->
 <script src="{{ asset('assets/front/new_js/scritp.js') }}"></script>
@@ -1052,26 +1051,4 @@
     //     sessionStorage.removeItem('iosAppRedirectionDone');
     // });
     //newwww
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-new SmartBanner({
-  title: 'AwesomeApp',
-  author: 'Awesome Devs',
-  icon: 'icon.png',
-  price: {
-    android: 'FREE',
-    ios: 'FREE'
-  },
-  store: {
-    android: 'On Google Play',
-    ios: 'On the App Store'
-  },
-  url: {
-    android: 'https://play.google.com/store/apps/details?id=com.yesvite.android',
-    ios: 'https://apps.apple.com/app/id6736650042'
-  }
-});
-});
 </script>

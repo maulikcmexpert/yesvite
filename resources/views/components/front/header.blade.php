@@ -79,4 +79,3 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/4.0.0/apexcharts.min.css" />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/smartbanner.js@1.2.0/dist/smartbanner.min.css" />
