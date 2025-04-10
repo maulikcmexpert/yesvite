@@ -554,6 +554,9 @@
     position: relative;
     gap: 0px;
   }
+  #calendar .day.active-now-day {
+   background:gray !important;
+  }
 
   #calendar .day.today::before{
     position: absolute;

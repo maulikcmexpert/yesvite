@@ -725,7 +725,15 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
-    $('#home_loader').css('display','flex');    
+    $('#home_loader').css('display','flex'); 
+    // $('.day').each(function() {
+    //     if ($(this).hasClass('active-now-day')) {
+    //         $(this).removeClass('active-now-day');
+    //     }
+    // });
+    $('.day').removeClass('active-now-day');
+    $(this).addClass('active-now-day');
+     
 
     var current_page=$('#current_page').val();
     var fromhome="";
