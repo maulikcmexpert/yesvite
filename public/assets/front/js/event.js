@@ -1835,7 +1835,16 @@ $(document).ready(function () {
 
     var userId = $('#login_user_id').val();  // Get the user ID from hidden input
     var modalElement = document.getElementById('pending-rsvp-modal');
-    var modal = new bootstrap.Modal(modalElement);
+    // var modal = new bootstrap.Modal(modalElement);
+    document.addEventListener("DOMContentLoaded", function () {
+        var modalElement = document.getElementById("myModal"); // or use querySelector
+        if (modalElement) {
+          var modal = new bootstrap.Modal(modalElement);
+          modal.show(); // if you want to show it immediately
+        } else {
+          console.warn('Modal element not found');
+        }
+      });
 
     var lastClosedTime = localStorage.getItem(`pending_modal_ClosedAt_${userId}`); // User-specific key
     var currentTime = new Date().getTime();
