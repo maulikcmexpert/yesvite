@@ -534,6 +534,8 @@
 
 <script src="{{ asset('assets/front/js/event.js') }}"></script>
 <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
     new SmartBanner({
       title: 'AwesomeApp',
       author: 'Awesome Devs',
@@ -551,6 +553,7 @@
         ios: 'https://apps.apple.com/app/id6736650042'
       }
     });
+});
   </script>
 <script>
     new WOW().init()
