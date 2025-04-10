@@ -738,9 +738,8 @@ async function updateChat(user_id) {
 
         
         if (isBlockedByUser) {
-            console.log('isBlockedByUser '+isBlockedByUser);
-            
-            $(".block-conversation").find("span").text("Unblock");
+            const blockByMeList = blockByMeSnapshot.val();
+            $(`.block-conversation[user="${blockByMeList}"]`).find("span").text("Unblock");
         } else {
             $(".block-conversation").find("span").text("Block User");
         }
