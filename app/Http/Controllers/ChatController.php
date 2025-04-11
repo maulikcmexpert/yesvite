@@ -122,6 +122,7 @@ class ChatController extends BaseController
 
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
+        dd($messages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
