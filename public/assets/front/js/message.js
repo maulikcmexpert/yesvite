@@ -730,7 +730,8 @@ async function updateChat(user_id) {
         }
 
         if (isBlockedByUser) {
-            $(".block-conversation").find("span").text("Unblock");
+            $(".block-conversation").find("span").text("Un-block User");
+            // $(".block-conversation").find("span").text("Unblock");
             $(".block-conversation").addClass('block-account');
         } else {
             $(".block-conversation").find("span").text("Block User");
