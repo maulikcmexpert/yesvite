@@ -1,5 +1,6 @@
 @php
 use Carbon\Carbon;
+dd($message);
 @endphp
 <!-- <div class="loader">
     <img src="{{asset('assets/front/loader.gif')}}" />
