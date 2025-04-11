@@ -2613,8 +2613,11 @@ function handleRemoveConversation(snapshot) {
     }
 }
 
-$(document).on("click", ".usr-list-more", function (e) {
+$(document).on("click", ".usr-list-more", async function (e) {
+
     e.stopPropagation();
+    let user_id=$(this).attr('data-userid');
+    await updateChat(user_id);
     console.log("clicked");
     return;
 });
