@@ -677,10 +677,19 @@ $(document).on("click", ".self_bring_quantity", function () {
     var main_quantity = parseInt($("#sub_quantity").val());
 
     if (type == "plus") {
-        if (main_quantity > self_quantity) {
+        // if (main_quantity > self_quantity) {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
-        }
+            if (main_quantity > self_quantity) {
+                // var item_qty=$('#item_quantity').val();
+                var final_qty=main_quantity;
+               $('#sub_quantity').val(final_qty);
+                return;
+           }
+           $('#sub_quantity').val(self_quantity);
+
+
+        // }
     } else {
         if (self_quantity > 0) {
             self_quantity--;
@@ -694,9 +703,12 @@ $(document).on('click','#selfBringItem',function(){
     var checkbox = $('input[name="self_bring_item"]:checked').val();
     if(checkbox){
       $("#self_bring_quantity_toggle").show();
+    $('#self_bring_qty').val(1);
     }else{
         
         $("#self_bring_quantity_toggle").hide();
+        $('#self_bring_qty').val(0);
+
 
     }
 
