@@ -6031,7 +6031,7 @@ $(document).on("click", ".self_bring_quantity", function () {
             // var item_qty=$('#item_quantity').val();
             if (main_quantity > self_quantity) {
                 // var item_qty=$('#item_quantity').val();
-                var final_qty=main_quantity+item_qty;
+                var final_qty=main_quantity+self_quantity;
                $('#item_quantity').val(final_qty);
                 return;
            }
