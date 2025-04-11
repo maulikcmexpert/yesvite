@@ -5983,8 +5983,13 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
 $(document).on("change", "#self_bring", function () {
     if ($(this).is(":checked")) {
         $("#self_bring_quantity_toggle").show();
+        $('#self_bring_qty').val(1);
+
+        
     } else {
         $("#self_bring_quantity_toggle").hide();
+        $('#self_bring_qty').val(0);
+
     }
 });
 
@@ -6020,10 +6025,12 @@ $(document).on("click", ".self_bring_quantity", function () {
     var main_quantity = parseInt($("#item_quantity").val());
 
     if (type == "plus") {
-        if (main_quantity > self_quantity) {
+        // if (main_quantity > self_quantity) {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
-        }
+            $('#item_quantity').val(self_quantity);
+
+        // }
     } else {
         if (self_quantity > 0) {
             self_quantity--;
