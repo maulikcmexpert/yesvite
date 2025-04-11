@@ -2655,6 +2655,12 @@ $(document).on("click", ".usr-list-more", async function (e) {
         console.log({ conversationId });
     }
     isToMove = false;
+
+    
+    let $convElement = $('.conversation-' + conversationId);
+    if (!$convElement.hasClass('active')) {
+        $convElement.addClass('active');
+    }
     
     console.log("clicked");
     return;
