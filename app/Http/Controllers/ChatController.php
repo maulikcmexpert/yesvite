@@ -122,8 +122,24 @@ class ChatController extends BaseController
         }
 
         $reference = $this->firebase->getReference('overview/' . $userId);
+        $blockByMe = $userSnapshot['blockByMe'] ?? [];
+
         $messages = $reference->getValue();
-        // dd($messages);
+        
+        $updatedMessages = [];
+
+        foreach ($messages as $conversationId => $messageData) {
+            $contactId = $messageData['contactId'];
+
+            // Check if contactId is in blockByMe list
+            $isBlocked = in_array($contactId, $blockByMe);
+
+            // Add 'isBlock' parameter
+            $messageData['isBlock'] = $isBlocked;
+
+            $updatedMessages[$conversationId] = $messageData;
+        }
+        dd($updatedMessages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
@@ -132,9 +148,8 @@ class ChatController extends BaseController
             'name' => $userName,
             'image' => url('/public/storage/profile/' . $userData->profile)
         ];
-        $blockByMe = $userSnapshot['blockByMe'] ?? [];
      
-        dd($blockByMe);
+        // dd($blockByMe);
         if ($updateFirebase == true) {
             if (!empty($messages)) {
 
