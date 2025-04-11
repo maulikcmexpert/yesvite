@@ -6035,12 +6035,12 @@ $(document).on("click", ".self_bring_quantity", function () {
                $('#item_quantity').val(final_qty);
                 return;
            }
-           
+
             $('#item_quantity').val(self_quantity);
 
         // }
     } else {
-        if (self_quantity > 0) {
+        if (self_quantity > 1) {
             self_quantity--;
             $("#self_bring_qty").val(self_quantity);
         }
