@@ -140,7 +140,7 @@ class ChatController extends BaseController
 
             $messages[$conversationId] = $messageData;
         }
-        dd($messages);
+        // dd($messages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
