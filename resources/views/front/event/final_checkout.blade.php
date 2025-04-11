@@ -189,17 +189,10 @@
                             <!-- <h5>$15.99</h5> -->
                         </div>
                         <div class="invite-pro">
-                            {{-- <div class="invite-left">
+                            <div class="invite-left">
                                 <h6 class="invite-count"></h6>
                                 <p class="invite-left_d"><strong>Invites | <span
                                             class="available-coins">{{ $coins }}</span></strong> Left</p>
-                            </div> --}}
-                            <div class="invite-left">
-                                <h6 class="invite-count">0</h6>
-                                {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
-                                <input type="hidden" id="event_guest_left_count" />
-                                <p><strong>Invites |<div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div> <span class="invite-left_d"></span></strong></p>
-                                <input type="hidden" id="currentInviteCount" value="0">
                             </div>
                         </div>
                     </div>
