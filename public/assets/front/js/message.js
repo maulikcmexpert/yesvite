@@ -2617,7 +2617,46 @@ $(document).on("click", ".usr-list-more", async function (e) {
 
     e.stopPropagation();
     let user_id=$(this).attr('data-userid');
-    await updateChat(user_id);
+    // await updateChat(user_id);
+    loader.css("display", "flex");
+    $(".empty-massage").css("display", "none");
+    removeSelectedMsg();
+    closeMedia();
+    $(this).addClass("active");
+    formattedDate = {};
+    const isGroup = $(this).attr("data-group");
+    const conversationId = $(this).attr("data-msgKey");
+    console.log({ conversationId });
+    $(".selected_id").val(conversationId);
+
+    $("#isGroup").val(isGroup);
+    $(".member-lists").html("");
+    $(".send-message").val("");
+    $("#startRecording").attr("style", "display:inline-block;");
+    console.log({ conversationId });
+
+    if (isGroup == true || isGroup == "true") {
+        await updateChatfromGroup(conversationId);
+        console.log({ conversationId });
+
+        $(".new-member").removeClass("d-none");
+    } else {
+        $(".new-member").addClass("d-none");
+        $(".new-members-add").addClass("d-none");
+
+        const userId = $(this).attr("data-userid");
+        $(".selected_message").val(userId);
+        console.log({ conversationId });
+
+        await updateOverview(senderUser, conversationId, {
+            unRead: false,
+            unReadCount: 0,
+        });
+        console.log("updateoverview");
+        await updateChat(userId);
+        console.log({ conversationId });
+    }
+    isToMove = false;
     console.log("clicked");
     return;
 });
