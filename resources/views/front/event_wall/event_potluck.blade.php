@@ -1093,7 +1093,7 @@
 
                     <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
 
-                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty" />
+                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty" readonly />
                     <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
