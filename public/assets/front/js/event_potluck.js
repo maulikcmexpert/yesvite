@@ -703,7 +703,8 @@ $(document).on('click','#selfBringItem',function(){
     var checkbox = $('input[name="self_bring_item"]:checked').val();
     if(checkbox){
       $("#self_bring_quantity_toggle").show();
-    $('#self_bring_qty').val(1);
+        $('#self_bring_qty').val(1);
+        $('#sub_quantity').val(1);
     }else{
         
         $("#self_bring_quantity_toggle").hide();
