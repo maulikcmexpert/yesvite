@@ -2664,10 +2664,17 @@ $(document).on("click", ".usr-list-more", async function (e) {
     if (!$convElement.hasClass('active')) {
         $convElement.addClass('active');
     }
-    
+    $('.msg-list-drp-menu').addClass('show');
+    $(this).attr('aria-expanded', 'true');
     console.log("clicked");
+
+    $(document).one('click', function () {
+        $(('.msg-list-drp-menu')).removeClass('show');
+        $('.usr-list-more').attr('aria-expanded', 'false');
+    });
     return;
 });
+
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
