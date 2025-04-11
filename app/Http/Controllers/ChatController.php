@@ -105,6 +105,7 @@ class ChatController extends BaseController
         // Create a new user node with the userId
         $userRef = $this->usersReference->getChild((string)$userId);
         $userSnapshot = $userRef->getValue();
+        dd($userSnapshot);
         $updateFirebase = false;
 
         if ($userSnapshot) {
