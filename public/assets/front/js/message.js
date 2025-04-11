@@ -2664,15 +2664,15 @@ $(document).on("click", ".usr-list-more", async function (e) {
     if (!$convElement.hasClass('active')) {
         $convElement.addClass('active');
     }
-    const $dropdownMenu = $(this).closest('.dropdown').find('.msg-list-drp-menu');
-    $dropdownMenu.addClass('show');
-    $(this).attr('aria-expanded', 'true');
+    // const $dropdownMenu = $(this).closest('.dropdown').find('.msg-list-drp-menu');
+    // $dropdownMenu.addClass('show');
+    // $(this).attr('aria-expanded', 'true');
 
-    // ✅ Only remove 'show' on this dropdown
-    $(document).one('click', function () {
-        $dropdownMenu.removeClass('show');
-        $('.usr-list-more').attr('aria-expanded', 'false');
-    });
+    // // ✅ Only remove 'show' on this dropdown
+    // $(document).one('click', function () {
+    //     $dropdownMenu.removeClass('show');
+    //     $('.usr-list-more').attr('aria-expanded', 'false');
+    // });
     return;
 });
 

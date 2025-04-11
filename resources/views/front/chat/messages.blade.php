@@ -310,8 +310,8 @@ use Carbon\Carbon;
                                             data-userid="{{ @$message['contactId'] }}" 
                                             data-conversationId="{{ $message['conversationId'] }}" 
                                             data-msgKey={{ $message['conversationId'] }} 
-                                            data-group="{{ @$message['group']}}" >
-                                            {{-- data-bs-toggle="dropdown"> --}}
+                                            data-group="{{ @$message['group']}}" 
+                                            data-bs-toggle="dropdown">
                                                                                     <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
