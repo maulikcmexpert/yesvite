@@ -2742,7 +2742,10 @@ $(document).on("click", ".add_category_item_btn", function () {
             .css("color", "red")
             .text("Please select quantity.");
         return;
+    }else{
+        $('#item_quantity_error').text('');
     }
+
 
     if ($("#self_bring").is(":checked")) {
         var self_bring = 1;
