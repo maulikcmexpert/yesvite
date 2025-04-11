@@ -363,7 +363,7 @@ function sendNotification($notificationType, $postData)
                         ];
 
                         // Log the parameters
-                        Log::info('Sending SMS Invite', $logData);
+                        // Log::info('Sending SMS Invite', $logData);
                         $sent = handleSMSInvite($value->user->phone_number,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
                         // $sent = sendSMSForApplication($value->user->phone_number, $notification_message);
                         if ($sent == true) {
@@ -1391,7 +1391,8 @@ function sendNotificationGuest($notificationType, $postData)
                     ];
 
                     // Log the parameters
-                    Log::info('Sending SMS Invite', $logData);
+                    // Log::info('Sending SMS Invite', $logData);
+
                     $sent = handleSMSInvite($value->contact_sync->phoneWithCode,  $value->event->user->firstname . ' ' . $value->event->user->lastname, $value->event->event_name, $postData['event_id'], $value->id);
                     // $sent = sendSMSForApplication($value->contact_sync->phoneWithCode, $notification_message);
                     if ($sent == true) {
@@ -1845,7 +1846,7 @@ function cleanPhoneNumber(string $phoneNumber): string
         return urlencode($cleanedNumber);
     } catch (Exception $e) {
         // Handle encoding exception
-        error_log($e->getMessage());
+        // error_log($e->getMessage());
         return $cleanedNumber;
     }
 }
@@ -1945,13 +1946,13 @@ function handleSMSInvite($receiverNumber, $hostName, $eventName, $event_id, $eve
         return sendSMSForApplication($receiverNumber, $message);
     } catch (\Exception $e) {
         // Log the error for debugging
-        Log::error('Error sending SMS invite: ' . $e->getMessage(), [
-            'receiverNumber' => $receiverNumber,
-            'hostName' => $hostName,
-            'eventName' => $eventName,
-            'event_id' => $event_id,
-            'event_invited_user_id' => $event_invited_user_id
-        ]);
+        // Log::error('Error sending SMS invite: ' . $e->getMessage(), [
+        //     'receiverNumber' => $receiverNumber,
+        //     'hostName' => $hostName,
+        //     'eventName' => $eventName,
+        //     'event_id' => $event_id,
+        //     'event_invited_user_id' => $event_invited_user_id
+        // ]);
     }
 }
 
