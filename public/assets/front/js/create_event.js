@@ -6035,6 +6035,7 @@ $(document).on("click", ".self_bring_quantity", function () {
                $('#item_quantity').val(final_qty);
                 return;
            }
+           
             $('#item_quantity').val(self_quantity);
 
         // }
