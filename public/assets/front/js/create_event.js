@@ -6028,8 +6028,14 @@ $(document).on("click", ".self_bring_quantity", function () {
         // if (main_quantity > self_quantity) {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
-            var item_qty=$('#item_quantity').val();
-            // $('#item_quantity').val(self_quantity+item_qty);
+            // var item_qty=$('#item_quantity').val();
+            if (main_quantity > self_quantity) {
+                // var item_qty=$('#item_quantity').val();
+                var final_qty=main_quantity+item_qty;
+               $('#item_quantity').val(final_qty);
+                return;
+           }
+            $('#item_quantity').val(self_quantity);
 
         // }
     } else {
