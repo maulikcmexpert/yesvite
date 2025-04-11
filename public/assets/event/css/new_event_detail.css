@@ -1667,6 +1667,8 @@
     -o-transform: unset;
 }
 
+
+
 /* ======Responsiveness===== */
 
 @media screen and (min-width: 1400px) {
@@ -1728,6 +1730,10 @@
         position: sticky;
         top: 20px; */
         display: none;
+    }
+
+    .final-checkout-wrp .invite-left_d{
+        font-size: 12px !important;
     }
 }
 
