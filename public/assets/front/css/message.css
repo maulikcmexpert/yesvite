@@ -178,8 +178,8 @@
     line-height: 22px;
     color: var(--secondryColor);
 }
-.chat-area .dropdown .dropdown-item .block-account{
-color: red;
+.chat-area .dropdown .dropdown-item.block-account{
+color: red !important;
 }
 
 ul.chat-list {
