@@ -305,9 +305,14 @@ use Carbon\Carbon;
                                             </ul>
                                         </div> -->
                                         <div class="dropdown ms-auto text-end">
-                                            <button type="button" class="btn btn-primary dropdown-toggle usr-list-more"  data-userid="{{@$message['contactId']}}" data-conversationId="{{$message['conversationId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}
-                                                data-bs-toggle="dropdown">
-                                                <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
+                                            <button type="button" 
+                                            class="btn btn-primary dropdown-toggle usr-list-more"  
+                                            data-userid="{{ @$message['contactId'] }}" 
+                                            data-conversationId="{{ $message['conversationId'] }}" 
+                                            data-msgKey={{ $message['conversationId'] }} 
+                                            data-group={{ @$message['group'] }} 
+                                            data-bs-toggle="dropdown">
+                                                                                    <svg width="5" height="18" viewBox="0 0 5 18" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M1.5 9C1.5 9.26522 1.60536 9.51957 1.79289 9.70711C1.98043 9.89464 2.23478 10 2.5 10C2.76522 10 3.01957 9.89464 3.20711 9.70711C3.39464 9.51957 3.5 9.26522 3.5 9C3.5 8.73478 3.39464 8.48043 3.20711 8.29289C3.01957 8.10536 2.76522 8 2.5 8C2.23478 8 1.98043 8.10536 1.79289 8.29289C1.60536 8.48043 1.5 8.73478 1.5 9Z"
