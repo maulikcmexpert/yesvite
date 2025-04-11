@@ -6029,7 +6029,7 @@ $(document).on("click", ".self_bring_quantity", function () {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
             var item_qty=$('#item_quantity').val();
-            $('#item_quantity').val(self_quantity+item_qty);
+            // $('#item_quantity').val(self_quantity+item_qty);
 
         // }
     } else {
