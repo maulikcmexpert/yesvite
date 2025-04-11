@@ -1064,7 +1064,7 @@
                 <div class="qty-container ms-auto">
                     <button class=" self_bring_quantity" data-type="minus" type="button"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty"
+                    <input type="number" name="qty" id="self_bring_qty" value="1" class="input-qty"
                         readonly />
                     <button class=" self_bring_quantity" data-type="plus" type="button"><i
                             class="fa fa-plus"></i></button>
@@ -1093,7 +1093,7 @@
 
                     <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
 
-                    <input type="number" id="sub_quantity" name="sub_quantity" value="0" class="input-qty" />
+                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty" />
                     <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
