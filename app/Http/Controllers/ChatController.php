@@ -123,7 +123,7 @@ class ChatController extends BaseController
 
         $reference = $this->firebase->getReference('overview/' . $userId);
         $messages = $reference->getValue();
-        dd($messages);
+        // dd($messages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
@@ -132,6 +132,9 @@ class ChatController extends BaseController
             'name' => $userName,
             'image' => url('/public/storage/profile/' . $userData->profile)
         ];
+        $blockByMe = $userSnapshot['blockByMe'] ?? [];
+     
+        dd($blockByMe);
         if ($updateFirebase == true) {
             if (!empty($messages)) {
 
