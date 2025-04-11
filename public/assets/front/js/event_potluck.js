@@ -691,7 +691,7 @@ $(document).on("click", ".self_bring_quantity", function () {
 
         // }
     } else {
-        if (self_quantity > 0) {
+        if (self_quantity > 1) {
             self_quantity--;
             $("#self_bring_qty").val(self_quantity);
         }
