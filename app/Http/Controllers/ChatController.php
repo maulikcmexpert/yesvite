@@ -125,7 +125,7 @@ class ChatController extends BaseController
         $blockByMe = $userSnapshot['blockByMe'] ?? [];
 
         $messages = $reference->getValue();
-        dd($messages);
+        // dd($messages);
         $updatedMessages = [];
 
         foreach ($messages as $conversationId => $messageData) {
