@@ -9629,7 +9629,7 @@ $(document).on("click", ".delete_silder", function (e) {
         });
         var eventDatacount = eventData.slider_images;
 
-        $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
+        // $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
         // var check_slider_img = eventData.slider_images;
         // var matchFound = false;
         // $.each(check_slider_img, function (index, slider) {
@@ -9663,6 +9663,9 @@ $(document).on("click", ".delete_silder", function (e) {
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
+                    var eventDatacount = eventData.slider_images;
+                    $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
+
                     $("#loader").css("display", "none");
                 },
                 error: function (xhr, status, error) {
