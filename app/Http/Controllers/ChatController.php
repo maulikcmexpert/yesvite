@@ -129,8 +129,8 @@ class ChatController extends BaseController
         $updatedMessages = [];
 
         foreach ($messages as $conversationId => $messageData) {
-            dd($messageData);
-            $contactId = $messageData['contactId'];
+            // dd($messageData);
+            $contactId = $messageData['contactId'] ?? null;
 
             // Check if contactId is in blockByMe list
             $isBlocked = in_array($contactId, $blockByMe);
