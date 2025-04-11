@@ -124,11 +124,11 @@ class ChatController extends BaseController
         $reference = $this->firebase->getReference('overview/' . $userId);
         $blockByMe = $userSnapshot['blockByMe'] ?? [];
 
-        $messages = $reference->getValue();
+        $updatedMessages = $reference->getValue();
         // dd($messages);
-        $updatedMessages = [];
+        $messages = [];
 
-        foreach ($messages as $conversationId => $messageData) {
+        foreach ($updatedMessages as $conversationId => $messageData) {
             // dd($messageData);
             $contactId = $messageData['contactId'] ?? null;
 
@@ -138,9 +138,9 @@ class ChatController extends BaseController
             // Add 'isBlock' parameter
             $messageData['isBlock'] = $isBlocked;
 
-            $updatedMessages[$conversationId] = $messageData;
+            $messages[$conversationId] = $messageData;
         }
-        dd($updatedMessages);
+        dd($messages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
