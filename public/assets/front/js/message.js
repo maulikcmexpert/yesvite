@@ -2621,7 +2621,7 @@ $(document).on("click", ".usr-list-more", async function (e) {
     // loader.css("display", "flex");
     $(".empty-massage").css("display", "none");
     removeSelectedMsg();
-    closeMedia();
+    // closeMedia();
     $(this).addClass("active");
     formattedDate = {};
     const isGroup = $(this).attr("data-group");
