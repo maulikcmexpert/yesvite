@@ -72,7 +72,6 @@
     font-size: 18px;
     margin-left: -10px;
     /* display: none; */
-
 }
 
 .navbar h5 {
@@ -84,6 +83,12 @@
 }
 
 .new_event_detail_header-right > span {
+    color: var(--lightColor);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.new_event_detail_header_dropdown > span {
     color: var(--lightColor);
     font-size: 24px;
     cursor: pointer;
@@ -123,10 +128,9 @@
     background: var(--white);
     height: 100%;
     position: relative;
-    
 }
 
-.main-content-sidebar .new-event-sidebar-wrp{
+.main-content-sidebar .new-event-sidebar-wrp {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -135,8 +139,7 @@
     padding-bottom: 10px;
 }
 
-
-.new-event-sidebar-menu{
+.new-event-sidebar-menu {
     padding: 16px 24px 24px 24px;
     width: 100%;
 }
@@ -1339,25 +1342,25 @@
     margin-top: 5px;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro .heading{
+.guest-wrp.side-guest-wrp .invite-pro .heading {
     display: flex;
     align-items: center;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro .heading{
+.guest-wrp.side-guest-wrp .invite-pro .heading {
     margin-bottom: 5px;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro .heading svg{
+.guest-wrp.side-guest-wrp .invite-pro .heading svg {
     width: 23px;
     height: 23px;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro .heading p{
-   font-size: 16px;
-   color: var(--secondryColor);
-   font-weight: 600;
-   margin-left: 7px;
+.guest-wrp.side-guest-wrp .invite-pro .heading p {
+    font-size: 16px;
+    color: var(--secondryColor);
+    font-weight: 600;
+    margin-left: 7px;
 }
 
 .input-calender-icon {
@@ -1435,43 +1438,38 @@
     color: #b5b8bf !important;
 } */
 
-
 /* Modal invent left Start */
-
 
 #eventModal .invite-left {
     padding: 2px;
     margin-top: 20px;
 }
 
-
 /* Modal invent left End */
 
-
-.guest-wrp.side-guest-wrp .invite-pro img{
+.guest-wrp.side-guest-wrp .invite-pro img {
     max-width: 60px;
     margin-left: 0;
     /* margin-right: 22px; */
     cursor: pointer;
 }
 
-.guest-wrp.side-guest-wrp .invite-pro strong{
+.guest-wrp.side-guest-wrp .invite-pro strong {
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
 }
 
-.guest-wrp.side-guest-wrp .invite-left .left-minus{
-    color: #FF5A5F;
+.guest-wrp.side-guest-wrp .invite-left .left-minus {
+    color: #ff5a5f;
 }
 
-.coin-invite-main{
+.coin-invite-main {
     margin-left: 5px;
 }
 
-.coin-invite-wrp{
-    display: flex
-;
+.coin-invite-wrp {
+    display: flex;
     align-items: center;
     border: 1px solid #ccc;
     height: 42px;
@@ -1482,12 +1480,11 @@
     padding-left: 2px;
 }
 
-
-.coin-invite-wrp .green-price{
+.coin-invite-wrp .green-price {
     color: #23aa26;
 }
 
-.coin-invite-wrp .coin-invite{
+.coin-invite-wrp .coin-invite {
     max-width: 20px;
     min-width: 20px;
     margin-left: 0;
@@ -1495,17 +1492,16 @@
     cursor: pointer;
 }
 
-.invite-left .coin-invite{
+.invite-left .coin-invite {
     max-width: 20px;
     margin-left: 5px;
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
-.coin-invite-wrp span{
+.coin-invite-wrp span {
     font-size: 11px;
     width: 100%;
 }
-
 
 .new_event_detail_header .dropdown-menu.show {
     padding: 20px 20px 5px 20px;
@@ -1559,33 +1555,33 @@
     margin-bottom: 20px;
 }
 
-.new_event_detail_form .button-cover{
+.new_event_detail_form .button-cover {
     margin-top: 0px !important;
 }
-.new_event_detail_form form h6{
+.new_event_detail_form form h6 {
     margin-bottom: 0px !important;
 }
 
-.step_1 .col-lg-12:has(.design-seting){
+.step_1 .col-lg-12:has(.design-seting) {
     position: sticky;
     bottom: 10px;
     z-index: 10;
 }
 
-.step_1{
+.step_1 {
     min-height: 100vh;
 }
 
-.step_1 .main-content-right{
+.step_1 .main-content-right {
     min-height: 100vh !important;
 }
 
-.design-seting{
+.design-seting {
     background-color: #fff !important;
     z-index: 1;
 }
 
-.new_event_detail_header{
+.new_event_detail_header {
     position: sticky !important;
     top: 0 !important;
     z-index: 999 !important;
@@ -1593,16 +1589,16 @@
     background-color: #fff !important;
 }
 
-.coin-invite-wrp i{
+.coin-invite-wrp i {
     color: lightgray !important;
 }
 
-.coin-invite-wrp .coin-invite-wrp-inner{
+.coin-invite-wrp .coin-invite-wrp-inner {
     display: flex;
     align-items: center;
 }
 
-.new-event-sidebar-wrp .guest-wrp.side-guest-wrp .invite-pro img{
+.new-event-sidebar-wrp .guest-wrp.side-guest-wrp .invite-pro img {
     min-width: 24px;
 }
 .new-event-sidebar-wrp .coin-invite-wrp span {
@@ -1610,111 +1606,116 @@
     font-weight: 700;
 }
 
-.new-event-sidebar-wrp .credit-invite-pro-left{
+.new-event-sidebar-wrp .credit-invite-pro-left {
     width: 65%;
     max-width: 65%;
 }
-.new-event-sidebar-wrp .coin-invite-main{
+.new-event-sidebar-wrp .coin-invite-main {
     width: 35%;
     max-width: 35%;
 }
 
-#sidebar_thankyou_card, #sidebar_add_thankyou_card, #sidebar_add_co_host, #sidebar_gift_registry, #sidebar_gift_registry_item,#sidebar_addcategory,#sidebar_editcategory,#sidebar_potluck,#sidebar_groups, #sidebar_invite_group_member, #sidebar_add_groups, #sidebar_add_group_member, #sidebar_list_group_member,#sidebar_see_all_invite{
+#sidebar_thankyou_card,
+#sidebar_add_thankyou_card,
+#sidebar_add_co_host,
+#sidebar_gift_registry,
+#sidebar_gift_registry_item,
+#sidebar_addcategory,
+#sidebar_editcategory,
+#sidebar_potluck,
+#sidebar_groups,
+#sidebar_invite_group_member,
+#sidebar_add_groups,
+#sidebar_add_group_member,
+#sidebar_list_group_member,
+#sidebar_see_all_invite {
     z-index: 10001 !important;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1) !important;
 }
 
-.daterangepicker.single .drp-calendar.left{
+.daterangepicker.single .drp-calendar.left {
     width: 500px !important;
     height: 300px !important;
 }
 
-.daterangepicker .drp-calendar.left .calendar-table{
+.daterangepicker .drp-calendar.left .calendar-table {
     width: 490px !important;
 }
 
-.daterangepicker{
+.daterangepicker {
     width: 500px !important;
 }
 
-
-.daterangepicker .calendar-table th, .daterangepicker .calendar-table td{
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
     height: 35px !important;
     font-size: 14px !important;
 }
 
-
-.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"]{
+.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"] {
     background: #f1f5f9 !important;
     color: var(--secondryColor) !important;
     border-color: var(--border) !important;
     cursor: not-allowed;
 }
 
-.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"]:hover{
-
-transform: unset;
+.cmn-btn.saveGuestOnly.isdisabled[aria-disabled="true"]:hover {
+    transform: unset;
     -webkit-transform: unset;
     -moz-transform: unset;
     -ms-transform: unset;
     -o-transform: unset;
 }
 
-
-
-
 /* ======Responsiveness===== */
 
-@media screen and (min-width:1400px) {
+@media screen and (min-width: 1400px) {
     .bootstrap-datetimepicker-widget.dropdown-menu {
         min-width: 300px !important;
         max-width: 100%;
         width: 100%;
         height: 120px !important;
     }
-    
+
     .bootstrap-datetimepicker-widget.dropdown-menu table td,
     .bootstrap-datetimepicker-widget.dropdown-menu table th {
-
         height: 35px !important;
     }
 
-
-.bootstrap-datetimepicker-widget.dropdown-menu
-    .timepicker-picker
-    table
-    td
-    button {
+    .bootstrap-datetimepicker-widget.dropdown-menu
+        .timepicker-picker
+        table
+        td
+        button {
         height: 100% !important;
     }
-    
 }
 
 @media only screen and (max-width: 1399px) {
-    .new-event-sidebar-wrp .credit-invite-pro-left{
+    .new-event-sidebar-wrp .credit-invite-pro-left {
         width: 59%;
         max-width: 59%;
     }
-    .new-event-sidebar-wrp .coin-invite-main{
+    .new-event-sidebar-wrp .coin-invite-main {
         width: 50%;
         max-width: 50%;
     }
 
-    .daterangepicker.single .drp-calendar.left{
+    .daterangepicker.single .drp-calendar.left {
         width: auto !important;
         height: auto !important;
     }
-    
-    .daterangepicker .drp-calendar.left .calendar-table{
+
+    .daterangepicker .drp-calendar.left .calendar-table {
         width: auto !important;
     }
-    
-    .daterangepicker{
+
+    .daterangepicker {
         width: auto !important;
     }
-    
-    
-    .daterangepicker .calendar-table th, .daterangepicker .calendar-table td{
+
+    .daterangepicker .calendar-table th,
+    .daterangepicker .calendar-table td {
         height: 24px !important;
         font-size: 12px !important;
     }
@@ -1877,14 +1878,13 @@ transform: unset;
         font-size: 12px !important;
     }
 
-    .coin-invite-wrp i{
+    .coin-invite-wrp i {
         margin-left: 15px;
     }
 
-    .step_3 .coin-invite-wrp .coin-invite-wrp-inner{
+    .step_3 .coin-invite-wrp .coin-invite-wrp-inner {
         white-space: nowrap;
     }
-
 }
 
 @media only screen and (max-width: 360px) {
@@ -1910,8 +1910,7 @@ transform: unset;
         padding-left: 10px !important;
     }
 
-    .coin-invite-wrp i{
+    .coin-invite-wrp i {
         margin-left: 4px;
     }
-
 }
