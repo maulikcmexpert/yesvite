@@ -3,6 +3,7 @@ use Carbon\Carbon;
 @endphp
 @php
 $i = 0;
+dd($messages);
 @endphp
 @foreach ($messages as $k => $message)
 @php
