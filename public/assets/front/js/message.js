@@ -731,10 +731,10 @@ async function updateChat(user_id) {
 
         if (isBlockedByUser) {
             $(".block-conversation").find("span").text("Unblock");
-            $(".block-conversation").addClass('block-account');
+            // $(".block-conversation").addClass('block-account');
         } else {
             $(".block-conversation").find("span").text("Block User");
-            $(".block-conversation").removeClass('block-account');
+            // $(".block-conversation").removeClass('block-account');
 
         }
         $(".block-conversation").attr("blocked", isBlockedByUser);
