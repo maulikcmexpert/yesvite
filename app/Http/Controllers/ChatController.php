@@ -453,6 +453,7 @@ class ChatController extends BaseController
     public function getConversation(Request $request)
     {
         $message = $request->messages;
+        dd($message);
         return view('front.chat.conversationList', compact('message'));
     }
 
