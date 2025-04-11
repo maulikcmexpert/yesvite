@@ -2616,7 +2616,7 @@ function handleRemoveConversation(snapshot) {
 $(document).on("click", ".usr-list-more", async function (e) {
 
     e.stopPropagation();
-    // let user_id=$(this).attr('data-userid');
+    let user_id=$(this).attr('data-userid');
     // await updateChat(user_id);
     // loader.css("display", "flex");
     $(".empty-massage").css("display", "none");
