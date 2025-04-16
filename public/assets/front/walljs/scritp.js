@@ -23,8 +23,8 @@ $(document).on("click",'.notification-btn', function () {
 });
 
 // ===header-drodpdown===
-const dropdownButton1 = document.getElementById("dropdownButton");
-const dropdownMenu1 = document.querySelector(".notification-dropdown-menu");
+const dropdownButton = document.getElementById("dropdownButton");
+const dropdownMenu = document.querySelector(".notification-dropdown-menu");
 
 // Toggle dropdown when clicking the button
 $("#dropdownButton").on("click", function (event) {
@@ -35,10 +35,10 @@ $("#dropdownButton").on("click", function (event) {
 // Close the dropdown when clicking outside
 document.addEventListener("click", (event) => {
     if (
-        !dropdownMenu1.contains(event.target) &&
-        !dropdownButton1.contains(event.target)
+        !dropdownMenu.contains(event.target) &&
+        !dropdownButton.contains(event.target)
     ) {
-        dropdownMenu1.classList.remove("show");
+        dropdownMenu.classList.remove("show");
     }
 });
 
