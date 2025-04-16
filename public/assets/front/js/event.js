@@ -1906,7 +1906,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.close_notification_rsvp', function () {
-        $('#rsvp_by_notification').hide();
+        $('#rsvp_by_notification').modal('hide');
         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
     });
 
