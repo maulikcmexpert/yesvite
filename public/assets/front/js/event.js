@@ -1892,7 +1892,7 @@ $(document).ready(function () {
 
         $(document).on('click', '.close_rsvp_pending', function () {
             modal.hide();
-            $('.modal-backdrop').removeClass('show');
+            $('.modal-backdrop').remove();
             localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
             document.body.classList.remove("no-scroll"); // Re-enable background scrolling
             // if($('.modal-backdrop').hasClass('.show')){
@@ -1900,7 +1900,7 @@ $(document).ready(function () {
         });
 
         $(modalElement).on('hidden.bs.modal', function () {
-            $('.modal-backdrop').removeClass('show');
+            $('.modal-backdrop').remove();
             localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
             document.body.classList.remove("no-scroll"); // Re-enable background scrolling
         });
