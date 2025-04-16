@@ -1906,10 +1906,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.close_notification_rsvp', function () {
-        var modalElementRsvp = document.getElementById('pending-rsvp-modal');
-        var modalRsvp = new bootstrap.Modal(modalElementRsvp);
-
-        modalRsvp.hide();
+        $('#rsvp_by_notification').hide();
         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
     });
 
