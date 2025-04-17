@@ -581,7 +581,7 @@ $(document).ready(function () {
 
         const eventId = $(".likeModel").data("event-id"); // Or get this dynamically as needed
         const eventPostId = $(".likeModel").data("event-post-id");
-
+        var login_user_id = $("#login_user_id").val();
         let url;
         let data = {
             comment: commentText,
@@ -646,7 +646,7 @@ $(document).ready(function () {
                                 <div class="posts-card-like-comment-right">
                                     <p>${data.posttime}</p>
                                     <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="1">
+                        }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
                                 </div>
@@ -657,7 +657,7 @@ $(document).ready(function () {
                                 <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
                                     <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="1">
+                        }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                     </button>
                                     <p id="commentTotalLike_${data.id}">
@@ -786,7 +786,11 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="${login_user_id}">${reply.is_like == 1
+                                        ? '<i class="fa-solid fa-heart"></i>'
+                                        : '<i class="fa-regular fa-heart"></i>'
+                                    }</button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
@@ -1563,11 +1567,12 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn">
-                                    ${reply.is_like == 1
-                                ? '<i class="fa-solid fa-heart"></i>'
-                                : '<i class="fa-regular fa-heart"></i>'
-                            }</button>
+                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
+                        }" data-user-id="${login_user_id}">
+                        ${reply.is_like == 1
+                                        ? '<i class="fa-solid fa-heart"></i>'
+                                        : '<i class="fa-regular fa-heart"></i>'
+                                    }</button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
