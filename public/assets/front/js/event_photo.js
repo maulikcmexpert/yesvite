@@ -786,8 +786,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="${login_user_id}">${reply.is_like == 1
+                                    <button class="posts-card-like-btn">${reply.is_like == 1
                                         ? '<i class="fa-solid fa-heart"></i>'
                                         : '<i class="fa-regular fa-heart"></i>'
                                     }</button>
@@ -1567,12 +1566,11 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="${login_user_id}">
-                        ${reply.is_like == 1
-                                        ? '<i class="fa-solid fa-heart"></i>'
-                                        : '<i class="fa-regular fa-heart"></i>'
-                                    }</button>
+                                    <button class="posts-card-like-btn">
+                                    ${reply.is_like == 1
+                                ? '<i class="fa-solid fa-heart"></i>'
+                                : '<i class="fa-regular fa-heart"></i>'
+                            }</button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
