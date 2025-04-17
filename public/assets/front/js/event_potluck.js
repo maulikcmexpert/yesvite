@@ -150,6 +150,7 @@ $(document).ready(function () {
                     console.log(response.data);
                     // Close the modal
                     $("#categoryModal").modal("hide");
+                    $("#maindishes").modal("hide");
 
                     console.log(response.data);
                     window.location.href = "";
