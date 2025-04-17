@@ -786,9 +786,13 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn">
+                                          <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.main_comment_id
+                        }" data-user-id="${login_user_id}">
 
-                                         '<i class="fa-regular fa-heart"></i>
+                        ${reply.is_like == 1
+                            ? '<i class="fa-solid fa-heart"></i>'
+                            : '<i class="fa-regular fa-heart"></i>'
+                        }
                                     </button>
                                 </div>
                             </div>
@@ -1566,10 +1570,13 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn">
+                                    <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.main_comment_id
+                        }" data-user-id="${login_user_id}">
 
-
-                                <i class="fa-regular fa-heart"></i>
+                                ${reply.is_like == 1
+                            ? '<i class="fa-solid fa-heart"></i>'
+                            : '<i class="fa-regular fa-heart"></i>'
+                        }
                             </button>
                                 </div>
                             </div>
