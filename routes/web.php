@@ -486,10 +486,10 @@ Route::controller(AuthController::class)->group(function () {
     })->name('logout');
 });
 
-Route::middleware(['web'])->group(function () {
-    Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
-    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
-});
+// Route::middleware(['web'])->group(function () {
+//     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
+//     Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+// });
 
 
 Route::fallback(function () {
