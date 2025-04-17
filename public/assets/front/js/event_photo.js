@@ -1254,7 +1254,7 @@ $(document).ready(function () {
                 },
             });
             $(".swiper-button-next").show();
-            $(".swiper-button-prev").show(); 
+            $(".swiper-button-prev").show();
         } else {
             swiperWrapper.addClass("hideswipe");
             // swiper.destroy(true, true);
@@ -1271,7 +1271,7 @@ $(document).ready(function () {
                 loop: false, // 🔹 Ensure looping is disabled
             });
             $(".swiper-button-next").hide();
-            $(".swiper-button-prev").hide(); 
+            $(".swiper-button-prev").hide();
         }
         //let parentId = null;  // Default to null, assuming no parent
 
@@ -1505,7 +1505,10 @@ $(document).ready(function () {
                                     <div class="posts-card-like-comment-right">
                                         <p>${comment.posttime || ""}</p>
                                         <button class="posts-card-like-btn">
-                                            <i class="fa-regular fa-heart"></i>
+                                            ${comment.is_like == 1
+                                ? '<i class="fa-solid fa-heart"></i>'
+                                : '<i class="fa-regular fa-heart"></i>'
+                            }
                                         </button>
                                     </div>
                                 </div>
@@ -1516,7 +1519,10 @@ $(document).ready(function () {
                                     <div class="position-relative d-flex align-items-center gap-2">
                                          <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
                                 }" data-user-id="${login_user_id}">
-                                    <i class="fa-regular fa-heart"></i>
+                                    ${comment.is_like == 1
+                                ? '<i class="fa-solid fa-heart"></i>'
+                                : '<i class="fa-regular fa-heart"></i>'
+                            }
                                     </button>
                                         <p id="commentTotalLike_${comment.id
                                 }">${comment.comment_total_likes || 0
@@ -1556,7 +1562,11 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <button class="posts-card-like-btn">
+                                    ${reply.is_like == 1
+                                ? '<i class="fa-solid fa-heart"></i>'
+                                : '<i class="fa-regular fa-heart"></i>'
+                            }</button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
