@@ -1028,6 +1028,7 @@
                         <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"
                             id="text1" name="description" placeholder="ie, brand or name of item under this category…">
                         <span id="text-sub-con" class="sub-con">0/30</span>
+                        <div id="description-error" class="text-danger mt-1" style="font-size: 14px;"></div>
                     </div>
             </form>
             <div class="bring-item">
