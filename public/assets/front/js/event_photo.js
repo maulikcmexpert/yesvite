@@ -1504,7 +1504,8 @@ $(document).ready(function () {
                                     </div>
                                     <div class="posts-card-like-comment-right">
                                         <p>${comment.posttime || ""}</p>
-                                        <button class="posts-card-like-btn">
+                                        <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+                                }" data-user-id="${login_user_id}">
                                             ${comment.is_like == 1
                                 ? '<i class="fa-solid fa-heart"></i>'
                                 : '<i class="fa-regular fa-heart"></i>'
