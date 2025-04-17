@@ -786,7 +786,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                          <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.main_comment_id
+                                          <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.id
                         }" data-user-id="${login_user_id}">
 
                         ${reply.is_like == 1
@@ -1570,7 +1570,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.main_comment_id
+                                    <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.id
                         }" data-user-id="${login_user_id}">
 
                                 ${reply.is_like == 1
