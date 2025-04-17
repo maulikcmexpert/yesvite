@@ -2269,14 +2269,14 @@ $(document).ready(function () {
     $(".btn-close").on("click", function () {
 
         $(".post_comment").val('');
-        $(".model_comment").toggleClass("d-none");
+        $(".model_comment").addClass("d-none");
 
         // Add `d-none` class back to hide the div
     });
 
     $(".modal").on("hidden.bs.modal", function () {
 
-        $(".model_comment").toggleClass("d-none");
+        $(".model_comment").addClass("d-none");
         $(".post_comment").val('');
 
     });
