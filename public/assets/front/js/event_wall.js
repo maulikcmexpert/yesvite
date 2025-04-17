@@ -2943,282 +2943,282 @@ function renderReactions(post) {
 // $(".show-comment-reply-btn").click(function () {
 //     $(".reply-on-comment").toggleClass("d-none");
 // });
-$(document).on("click", "#likeButtonModel", function () {
-    console.log("asd");
-    setTimeout(function () {
-        $("#emojiDropdown1").show();
-        console.log("asd");
-    }, 1000);
+// $(document).on("click", "#likeButtonModel", function () {
+//     console.log("asd");
+//     setTimeout(function () {
+//         $("#emojiDropdown1").show();
+//         console.log("asd");
+//     }, 1000);
 
-    $("#emojiDropdown1").css("display", "block");
-    console.log($("#emojiDropdown1"));
-});
-$(".posts-card-like-comment-right").each(function () {
-    const $container = $(this); // Get the current container
-    const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
-    const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
-
-
-    $emojiDropdown.on("click", ".emoji", function () {
-        const emoji = $(this).data("emoji");
-
-        // Remove the heart icon and set emoji inside the button
-        $likeButton.html(`<img src='${reactionIcons[emoji]}'/>`); // Show selected emoji inside button
-
-        $emojiDropdown.hide(); // Hide emoji dropdown after selection
-    });
+//     $("#emojiDropdown1").css("display", "block");
+//     console.log($("#emojiDropdown1"));
+// });
+// $(".posts-card-like-comment-right").each(function () {
+//     const $container = $(this); // Get the current container
+//     const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+//     const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
 
 
-});
-$(document).on("click", "#emojiDropdown1 .model_emoji", function () {
-    const selectedEmoji = $(this).data("emoji");
-    const button = $(this).closest(".emoji_set").find("#likeButtonModel");
-    const emojiDisplay = button.find("#show_comment_emoji");
-    const eventId = button.data("event-id");
-    const eventPostId = button.data("event-post-id");
-    const button_main = $("#likeButton_" + eventPostId);
-    console.log(selectedEmoji);
+//     $emojiDropdown.on("click", ".emoji", function () {
+//         const emoji = $(this).data("emoji");
 
-    // Replace heart icon with selected emoji
-    emojiDisplay.removeClass();
-    emojiDisplay.text(selectedEmoji);
+//         // Remove the heart icon and set emoji inside the button
+//         $likeButton.html(`<img src='${reactionIcons[emoji]}'/>`); // Show selected emoji inside button
 
-    // AJAX call to update emoji reaction
-
-    console.log(eventId, eventPostId);
-    console.log(eventPostId);
-    $.ajax({
-        url: base_url + "event_photo/userPostLikeDislike",
-        method: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        contentType: "application/json",
-        data: JSON.stringify({
-            event_id: eventId,
-            event_post_id: eventPostId,
-            reaction: selectedEmoji,
-        }),
-        success: function (response) {
-            if (response.status === 1) {
-                console.log(response.reactionList);
-
-                // const post = {
-                //     id: eventPostId,
-                //     reactionList: response.reactionList,
-                //     // self_reaction: response.self_reaction,
-                //     total_likes: response.count
-                // };
-                // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
-                let reactionImageHtml = "";
-                if (response.is_reaction == "1") {
-                    // ✅ User has liked the post, update the reaction image
-                    console.log("Like given, updating reaction image...");
-                    if (reactionIcons[selectedEmoji]) {
-                        console.log(reactionIcons[selectedEmoji]);
-                        reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
-                    }
-                    button.addClass("liked"); // Add liked class
-                } else {
-                    // ✅ User has removed like, set the first reaction from response
-                    console.log(
-                        "Like removed , updating first available reaction..."
-                    );
-                    if (response.reactionList.length > 0) {
-                        let firstReaction =
-                            response.reactionList[0].reaction; // ✅
-                        if (firstReaction.startsWith("\\u{")) {
-                            firstReaction = String.fromCodePoint(
-                                parseInt(
-                                    firstReaction.replace(/\\u{|}/g, ""),
-                                    16
-                                )
-                            );
-                        }
-                        if (reactionIcons[selectedEmoji]) {
-                            reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
-                        } else {
-                            console.log({ firstReaction });
-                            console.log(reactionIcons[firstReaction]);
-                            //let reaction = "\u{2764}";
-                            reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
-                        }
-                    }
-                    button.removeClass("liked"); // Remove liked class
-                    button.html(
-                        '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
-                    );
-                }
-
-                button_main.html(reactionImageHtml);
-                $(`#reactionImage_model_${eventPostId}`).html(
-                    reactionImageHtml
-                );
-                $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
-
-                $(`#like_${eventPostId}`).text(`${response.count} Likes`);
-                $(`#likeCount_${eventPostId}`).text(
-                    `${response.count} Likes`
-                );
-                updateReactions(response.reactionList);
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function (xhr) {
-            console.error(xhr.responseText);
-            alert("An error occurred. Please try again.");
-        },
-    });
-    function updateReactions(reactions) {
-        const emojiPaths = {
-            heart: "/assets/front/img/heart-emoji.png",
-            thumb: "/assets/front/img/thumb-icon.png",
-            smily: "/assets/front/img/smily-emoji.png",
-            "eye-heart": "/assets/front/img/eye-heart-emoji.png",
-            clap: "/assets/front/img/clap-icon.png",
-        };
-
-        const allReactionsList = $("#nav-all-reaction ul");
-        const heartReactionsList = $("#nav-heart-reaction ul");
-        const thumbReactionsList = $("#nav-thumb-reaction ul");
-        const smilyReactionsList = $("#nav-smily-reaction ul");
-        const eyeHeartReactionsList = $("#nav-eye-heart-reaction ul");
-        const clapReactionsList = $("#nav-clap-reaction ul");
-
-        const reactionCounts = {
-            heart: 0,
-            thumb: 0,
-            smily: 0,
-            "eye-heart": 0,
-            clap: 0,
-        };
-
-        // Clear all reaction lists
-        allReactionsList.empty();
-        heartReactionsList.empty();
-        thumbReactionsList.empty();
-        smilyReactionsList.empty();
-        eyeHeartReactionsList.empty();
-        clapReactionsList.empty();
-
-        reactions.forEach((reactionData) => {
-            let reactionType = "";
-            let emojiSrc = "";
-
-            // Extract user details from the reaction object
-            const { reaction, firstname, lastname, profile, location } =
-                reactionData;
-            // Map each reaction to a type
-            switch (reaction) {
-                case "\\u{2764}": // Heart
-                    reactionType = "heart";
-                    break;
-                case "\\u{1F44D}": // Thumbs Up
-                    reactionType = "thumb";
-                    break;
-                case "\\u{1F60A}": // Smiley
-                    reactionType = "smily";
-                    break;
-                case "\\u{1F60D}": // Eye-Heart
-                    reactionType = "eye-heart";
-                    break;
-                case "\\u{1F44F}": // Clap
-                    reactionType = "clap";
-                    break;
-                default:
-                    console.warn(`Unknown reaction: ${reaction}`);
-                    return; // Skip unknown reactions
-            }
-
-            // Increment the reaction count
-            reactionCounts[reactionType]++;
-
-            // Get the emoji image source
-            emojiSrc = emojiPaths[reactionType];
-            const profileContent =
-                profile && profile !== ""
-                    ? `<img src="${profile}" alt="">`
-                    : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
-                    }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
-                    }</h5>`;
-            // Create reaction list item
-            const reactionItem = `<li class="reaction-info-wrp">
-                                    <div class="commented-user-head">
-                                        <div class="commented-user-profile">
-                                            <div class="commented-user-profile-img">
-                                            ${profileContent}
-                                            </div>
-                                            <div class="commented-user-profile-content">
-                                                  <h3>${firstname} ${lastname}</h3>
+//         $emojiDropdown.hide(); // Hide emoji dropdown after selection
+//     });
 
 
-                                            </div>
-                                        </div>
-                                        <div class="posts-card-like-comment-right reaction-profile-reaction-img">
-                                            <img src="${emojiSrc}" alt="">
-                                        </div>
-                                    </div>
-                                  </li>`;
+// });
+// $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
+//     const selectedEmoji = $(this).data("emoji");
+//     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
+//     const emojiDisplay = button.find("#show_comment_emoji");
+//     const eventId = button.data("event-id");
+//     const eventPostId = button.data("event-post-id");
+//     const button_main = $("#likeButton_" + eventPostId);
+//     console.log(selectedEmoji);
 
-            // Append to specific reaction list
-            if (reactionType === "heart") {
-                heartReactionsList.append(reactionItem);
-            } else if (reactionType === "thumb") {
-                thumbReactionsList.append(reactionItem);
-            } else if (reactionType === "smily") {
-                smilyReactionsList.append(reactionItem);
-            } else if (reactionType === "eye-heart") {
-                eyeHeartReactionsList.append(reactionItem);
-            } else if (reactionType === "clap") {
-                clapReactionsList.append(reactionItem);
-            }
+//     // Replace heart icon with selected emoji
+//     emojiDisplay.removeClass();
+//     emojiDisplay.text(selectedEmoji);
 
-            // Append the same item to "All Reactions" list
-            console.log("Appending to All Reactions:", reactionItem);
-            allReactionsList.append(reactionItem);
-        });
+//     // AJAX call to update emoji reaction
 
-        // Update the counts in the navigation tabs
-        const totalReactions = Object.values(reactionCounts).reduce(
-            (sum, count) => sum + count,
-            0
-        );
-        $("#nav-all-reaction-tab").html(`All ${totalReactions}`);
-        $("#nav-heart-reaction-tab").html(
-            `<img src="${emojiPaths["heart"]}" alt=""> ${reactionCounts.heart}`
-        );
-        $("#nav-thumb-reaction-tab").html(
-            `<img src="${emojiPaths["thumb"]}" alt=""> ${reactionCounts.thumb}`
-        );
-        $("#nav-smily-reaction-tab").html(
-            `<img src="${emojiPaths["smily"]}" alt=""> ${reactionCounts.smily}`
-        );
-        $("#nav-eye-heart-reaction-tab").html(
-            `<img src="${emojiPaths["eye-heart"]}" alt=""> ${reactionCounts["eye-heart"]}`
-        );
-        $("#nav-clap-reaction-tab").html(
-            `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
-        );
-    }
-    // Hide emoji picker
-    $(this).closest("#emojiDropdown1").hide();
+//     console.log(eventId, eventPostId);
+//     console.log(eventPostId);
+//     $.ajax({
+//         url: base_url + "event_photo/userPostLikeDislike",
+//         method: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         contentType: "application/json",
+//         data: JSON.stringify({
+//             event_id: eventId,
+//             event_post_id: eventPostId,
+//             reaction: selectedEmoji,
+//         }),
+//         success: function (response) {
+//             if (response.status === 1) {
+//                 console.log(response.reactionList);
 
-    // Define visibility options
+//                 // const post = {
+//                 //     id: eventPostId,
+//                 //     reactionList: response.reactionList,
+//                 //     // self_reaction: response.self_reaction,
+//                 //     total_likes: response.count
+//                 // };
+//                 // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
+//                 let reactionImageHtml = "";
+//                 if (response.is_reaction == "1") {
+//                     // ✅ User has liked the post, update the reaction image
+//                     console.log("Like given, updating reaction image...");
+//                     if (reactionIcons[selectedEmoji]) {
+//                         console.log(reactionIcons[selectedEmoji]);
+//                         reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                     }
+//                     button.addClass("liked"); // Add liked class
+//                 } else {
+//                     // ✅ User has removed like, set the first reaction from response
+//                     console.log(
+//                         "Like removed , updating first available reaction..."
+//                     );
+//                     if (response.reactionList.length > 0) {
+//                         let firstReaction =
+//                             response.reactionList[0].reaction; // ✅
+//                         if (firstReaction.startsWith("\\u{")) {
+//                             firstReaction = String.fromCodePoint(
+//                                 parseInt(
+//                                     firstReaction.replace(/\\u{|}/g, ""),
+//                                     16
+//                                 )
+//                             );
+//                         }
+//                         if (reactionIcons[selectedEmoji]) {
+//                             reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                         } else {
+//                             console.log({ firstReaction });
+//                             console.log(reactionIcons[firstReaction]);
+//                             //let reaction = "\u{2764}";
+//                             reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                         }
+//                     }
+//                     button.removeClass("liked"); // Remove liked class
+//                     button.html(
+//                         '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+//                     );
+//                 }
 
-    // Dynamically set the hidden values in the forms
-    $("form").on("submit", function () {
-        // Fetch the visibility and commenting status to update the form's hidden inputs before submission
-        const visibility =
-            $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
-        const allowComments = $("#allowComments").is(":checked")
-            ? "1"
-            : "0";
+//                 button_main.html(reactionImageHtml);
+//                 $(`#reactionImage_model_${eventPostId}`).html(
+//                     reactionImageHtml
+//                 );
+//                 $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
 
-        // Dynamically update hidden inputs in the respective forms
-        $("#hiddenVisibility").val(visibility);
-        $("#hiddenAllowComments").val(allowComments);
-    });
-});
+//                 $(`#like_${eventPostId}`).text(`${response.count} Likes`);
+//                 $(`#likeCount_${eventPostId}`).text(
+//                     `${response.count} Likes`
+//                 );
+//                 updateReactions(response.reactionList);
+//             } else {
+//                 alert(response.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             console.error(xhr.responseText);
+//             alert("An error occurred. Please try again.");
+//         },
+//     });
+//     function updateReactions(reactions) {
+//         const emojiPaths = {
+//             heart: "/assets/front/img/heart-emoji.png",
+//             thumb: "/assets/front/img/thumb-icon.png",
+//             smily: "/assets/front/img/smily-emoji.png",
+//             "eye-heart": "/assets/front/img/eye-heart-emoji.png",
+//             clap: "/assets/front/img/clap-icon.png",
+//         };
+
+//         const allReactionsList = $("#nav-all-reaction ul");
+//         const heartReactionsList = $("#nav-heart-reaction ul");
+//         const thumbReactionsList = $("#nav-thumb-reaction ul");
+//         const smilyReactionsList = $("#nav-smily-reaction ul");
+//         const eyeHeartReactionsList = $("#nav-eye-heart-reaction ul");
+//         const clapReactionsList = $("#nav-clap-reaction ul");
+
+//         const reactionCounts = {
+//             heart: 0,
+//             thumb: 0,
+//             smily: 0,
+//             "eye-heart": 0,
+//             clap: 0,
+//         };
+
+//         // Clear all reaction lists
+//         allReactionsList.empty();
+//         heartReactionsList.empty();
+//         thumbReactionsList.empty();
+//         smilyReactionsList.empty();
+//         eyeHeartReactionsList.empty();
+//         clapReactionsList.empty();
+
+//         reactions.forEach((reactionData) => {
+//             let reactionType = "";
+//             let emojiSrc = "";
+
+//             // Extract user details from the reaction object
+//             const { reaction, firstname, lastname, profile, location } =
+//                 reactionData;
+//             // Map each reaction to a type
+//             switch (reaction) {
+//                 case "\\u{2764}": // Heart
+//                     reactionType = "heart";
+//                     break;
+//                 case "\\u{1F44D}": // Thumbs Up
+//                     reactionType = "thumb";
+//                     break;
+//                 case "\\u{1F60A}": // Smiley
+//                     reactionType = "smily";
+//                     break;
+//                 case "\\u{1F60D}": // Eye-Heart
+//                     reactionType = "eye-heart";
+//                     break;
+//                 case "\\u{1F44F}": // Clap
+//                     reactionType = "clap";
+//                     break;
+//                 default:
+//                     console.warn(`Unknown reaction: ${reaction}`);
+//                     return; // Skip unknown reactions
+//             }
+
+//             // Increment the reaction count
+//             reactionCounts[reactionType]++;
+
+//             // Get the emoji image source
+//             emojiSrc = emojiPaths[reactionType];
+//             const profileContent =
+//                 profile && profile !== ""
+//                     ? `<img src="${profile}" alt="">`
+//                     : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
+//                     }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
+//                     }</h5>`;
+//             // Create reaction list item
+//             const reactionItem = `<li class="reaction-info-wrp">
+//                                     <div class="commented-user-head">
+//                                         <div class="commented-user-profile">
+//                                             <div class="commented-user-profile-img">
+//                                             ${profileContent}
+//                                             </div>
+//                                             <div class="commented-user-profile-content">
+//                                                   <h3>${firstname} ${lastname}</h3>
+
+
+//                                             </div>
+//                                         </div>
+//                                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+//                                             <img src="${emojiSrc}" alt="">
+//                                         </div>
+//                                     </div>
+//                                   </li>`;
+
+//             // Append to specific reaction list
+//             if (reactionType === "heart") {
+//                 heartReactionsList.append(reactionItem);
+//             } else if (reactionType === "thumb") {
+//                 thumbReactionsList.append(reactionItem);
+//             } else if (reactionType === "smily") {
+//                 smilyReactionsList.append(reactionItem);
+//             } else if (reactionType === "eye-heart") {
+//                 eyeHeartReactionsList.append(reactionItem);
+//             } else if (reactionType === "clap") {
+//                 clapReactionsList.append(reactionItem);
+//             }
+
+//             // Append the same item to "All Reactions" list
+//             console.log("Appending to All Reactions:", reactionItem);
+//             allReactionsList.append(reactionItem);
+//         });
+
+//         // Update the counts in the navigation tabs
+//         const totalReactions = Object.values(reactionCounts).reduce(
+//             (sum, count) => sum + count,
+//             0
+//         );
+//         $("#nav-all-reaction-tab").html(`All ${totalReactions}`);
+//         $("#nav-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["heart"]}" alt=""> ${reactionCounts.heart}`
+//         );
+//         $("#nav-thumb-reaction-tab").html(
+//             `<img src="${emojiPaths["thumb"]}" alt=""> ${reactionCounts.thumb}`
+//         );
+//         $("#nav-smily-reaction-tab").html(
+//             `<img src="${emojiPaths["smily"]}" alt=""> ${reactionCounts.smily}`
+//         );
+//         $("#nav-eye-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["eye-heart"]}" alt=""> ${reactionCounts["eye-heart"]}`
+//         );
+//         $("#nav-clap-reaction-tab").html(
+//             `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
+//         );
+//     }
+//     // Hide emoji picker
+//     $(this).closest("#emojiDropdown1").hide();
+
+//     // Define visibility options
+
+//     // Dynamically set the hidden values in the forms
+//     $("form").on("submit", function () {
+//         // Fetch the visibility and commenting status to update the form's hidden inputs before submission
+//         const visibility =
+//             $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
+//         const allowComments = $("#allowComments").is(":checked")
+//             ? "1"
+//             : "0";
+
+//         // Dynamically update hidden inputs in the respective forms
+//         $("#hiddenVisibility").val(visibility);
+//         $("#hiddenAllowComments").val(allowComments);
+//     });
+// });
 
 
