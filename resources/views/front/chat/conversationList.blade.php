@@ -122,7 +122,7 @@ data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}>
             </ul>
         </div> --}}
         <div class="dropdown ms-auto text-end">
-            <button type="button" class="btn btn-primary dropdown-toggle usr-list-more" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-primary dropdown-toggle usr-list-more" data-userid="{{@$message['contactId']}}" data-conversationId="{{$message['conversationId']}}" data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}  data-bs-toggle="dropdown" aria-expanded="false">
                 <svg width="5" height="18" viewBox="0 0 5 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.5 9C1.5 9.26522 1.60536 9.51957 1.79289 9.70711C1.98043 9.89464 2.23478 10 2.5 10C2.76522 10 3.01957 9.89464 3.20711 9.70711C3.39464 9.51957 3.5 9.26522 3.5 9C3.5 8.73478 3.39464 8.48043 3.20711 8.29289C3.01957 8.10536 2.76522 8 2.5 8C2.23478 8 1.98043 8.10536 1.79289 8.29289C1.60536 8.48043 1.5 8.73478 1.5 9Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M1.5 16C1.5 16.2652 1.60536 16.5196 1.79289 16.7071C1.98043 16.8946 2.23478 17 2.5 17C2.76522 17 3.01957 16.8946 3.20711 16.7071C3.39464 16.5196 3.5 16.2652 3.5 16C3.5 15.7348 3.39464 15.4804 3.20711 15.2929C3.01957 15.1054 2.76522 15 2.5 15C2.23478 15 1.98043 15.1054 1.79289 15.2929C1.60536 15.4804 1.5 15.7348 1.5 16Z" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -182,7 +182,8 @@ data-msgKey={{$message['conversationId']}} data-group={{@$message['group']}}>
                         </svg>
                         Delete</a>
                 </li>
-                @if (!isset($message['group']) || $message['group'] == '0')
+                {{-- @if (!isset($message['group']) || $message['group'] == '0') --}}
+                @if (isset($message['group']) && ($message['group'] == '0'||$message['group'] == "false"))
                 <li><a class="dropdown-item block-conversation single" href="#" data-conversation="{{$message['conversationId']}}" user="{{@$message['contactId']}}" blocked="false">
                         <svg class="me-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.9141 18.9577H8.08073C7.33907 18.9577 6.38906 18.566 5.87239 18.041L2.45573 14.6243C1.93073 14.0993 1.53906 13.1493 1.53906 12.416V7.58269C1.53906 6.84102 1.93073 5.89103 2.45573 5.37436L5.87239 1.95769C6.39739 1.43269 7.3474 1.04102 8.08073 1.04102H12.9141C13.6557 1.04102 14.6057 1.43269 15.1224 1.95769L18.5391 5.37436C19.0641 5.89936 19.4557 6.84935 19.4557 7.58269V12.416C19.4557 13.1577 19.0641 14.1077 18.5391 14.6243L15.1224 18.041C14.5974 18.566 13.6557 18.9577 12.9141 18.9577ZM8.08073 2.29102C7.6724 2.29102 7.03906 2.54935 6.75572 2.84102L3.33907 6.25769C3.05573 6.54936 2.78906 7.17435 2.78906 7.58269V12.416C2.78906 12.8243 3.0474 13.4577 3.33907 13.741L6.75572 17.1577C7.04739 17.441 7.6724 17.7077 8.08073 17.7077H12.9141C13.3224 17.7077 13.9557 17.4493 14.2391 17.1577L17.6557 13.741C17.9391 13.4493 18.2057 12.8243 18.2057 12.416V7.58269C18.2057 7.17435 17.9474 6.54102 17.6557 6.25769L14.2391 2.84102C13.9474 2.55769 13.3224 2.29102 12.9141 2.29102H8.08073Z" fill="#94A3B8" />

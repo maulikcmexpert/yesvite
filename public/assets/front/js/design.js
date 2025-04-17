@@ -60,6 +60,7 @@ async function preloadAllFonts() {
 }
 
 $(document).ready(function () {
+    $("#loader").css("display", "none");
     console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
@@ -686,7 +687,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
 
             console.log("Waiting for images to load...");
-            await waitForAllImagesToLoad(2000);
+           // await waitForAllImagesToLoad(2000);
             console.log(" All images loaded");
 
             // 4. Finally, hide the loader
@@ -697,6 +698,11 @@ $(document).on("click", ".edit_design_tem", function (e) {
             $("#loader").css("display", "none");
         },
     });
+});
+
+$(window).on("load", function () {
+    console.log("loader");
+    $("#loader").css("display", "none");
 });
 async function waitForAllImagesToLoad(maxWait = 2000) {
     const images = document.querySelectorAll("img");
@@ -737,7 +743,7 @@ async function bindData(current_event_id) {
         await ensureFontsLoaded();
     }
 
-    let element = document.querySelector(".image-edit-inner-img");
+    let element =image-edit-inner-img;
     if (element) {
         ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
         console.log("Width:", width, "Height:", height);

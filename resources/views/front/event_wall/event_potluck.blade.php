@@ -123,9 +123,9 @@
                                         <div class="host-users-detail cmn-card">
                                             @if (!empty($eventDetails['co_hosts']))
                                             <h4 class="title">Your hosts</h4>
-                                            @else   
+                                            @else
                                             <h4 class="title">Your host</h4>
-                                            @endif   
+                                            @endif
                                             <div class="host-user-con-box">
                                                 @if ($eventDetails['hosted_by'])
                                                     <div class="host-user-con">
@@ -224,7 +224,7 @@
                                                 </svg>
                                             </button> --}}
                                             <button type="button" class="add_potluck_cat_btn ms-auto border-0" data-bs-toggle="modal"
-                                                data-bs-target="#editmodal" 
+                                                data-bs-target="#editmodal"
                                             ><i class="fa-solid fa-plus"></i> Category</button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
@@ -1028,6 +1028,7 @@
                         <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"
                             id="text1" name="description" placeholder="ie, brand or name of item under this category…">
                         <span id="text-sub-con" class="sub-con">0/30</span>
+                        <div id="description-error" class="text-danger mt-1" style="font-size: 14px;"></div>
                     </div>
             </form>
             <div class="bring-item">
@@ -1064,7 +1065,7 @@
                 <div class="qty-container ms-auto">
                     <button class=" self_bring_quantity" data-type="minus" type="button"><i
                             class="fa fa-minus"></i></button>
-                    <input type="number" name="qty" id="self_bring_qty" value="0" class="input-qty"
+                    <input type="number" name="qty" id="self_bring_qty" value="1" class="input-qty"
                         readonly />
                     <button class=" self_bring_quantity" data-type="plus" type="button"><i
                             class="fa fa-plus"></i></button>
@@ -1093,13 +1094,13 @@
 
                     <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
 
-                    <input type="number" id="sub_quantity" name="sub_quantity" value="0" class="input-qty" />
+                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty" readonly />
                     <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal"
+            <button type="submit" class="btn btn-secondary" 
                 id="saveCategoryBtn">Save</button>
         </div>
         </form>

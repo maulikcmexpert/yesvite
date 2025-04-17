@@ -725,7 +725,15 @@ $(document).on("click",".event_nav",function () {
   })
 
 $(document).on('click',".day",function () {
-    $('#home_loader').css('display','flex');    
+    $('#home_loader').css('display','flex'); 
+    // $('.day').each(function() {
+    //     if ($(this).hasClass('active-now-day')) {
+    //         $(this).removeClass('active-now-day');
+    //     }
+    // });
+    // $('.day').removeClass('active-now-day');
+    // $(this).addClass('active-now-day');
+     
 
     var current_page=$('#current_page').val();
     var fromhome="";
@@ -1823,34 +1831,86 @@ $(".pending_rsvp_slider").owlCarousel({
 //     });
 // });
 
+// $(document).ready(function () {
+
+//     var userId = $('#login_user_id').val();  // Get the user ID from hidden input
+//     // var modalElement = document.getElementById('pending-rsvp-modal');
+//     // var modal = new bootstrap.Modal(modalElement);
+//     document.addEventListener("DOMContentLoaded", function () {
+//         var modalElement = document.getElementById('pending-rsvp-modal');
+//         if (modalElement) {
+//           var modal = new bootstrap.Modal(modalElement);
+//         //   modal.show(); // if you want to show it immediately
+//         } else {
+//           console.warn('Modal element not found');
+//         }
+//       });
+
+//     var lastClosedTime = localStorage.getItem(`pending_modal_ClosedAt_${userId}`); // User-specific key
+//     var currentTime = new Date().getTime();
+//     var oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+//     if (!lastClosedTime || (currentTime - lastClosedTime) > oneDay) {
+//         modal.show();
+//         document.body.classList.add("no-scroll"); // Disable background scrolling
+//     }
+
+//     $(document).on('click', '.close_rsvp_pending', function () {
+//         modal.hide();
+//         localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     });
+
+//     $(document).on('click', '.close_notification_rsvp', function () {
+//         $('#rsvp_by_notification').hide();
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     });
+
+//     $(modalElement).on('hidden.bs.modal', function () {
+//         localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
+//         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+//     });
+
+// });
 $(document).ready(function () {
 
     var userId = $('#login_user_id').val();  // Get the user ID from hidden input
     var modalElement = document.getElementById('pending-rsvp-modal');
-    var modal = new bootstrap.Modal(modalElement);
+    var modal;
 
-    var lastClosedTime = localStorage.getItem(`pending_modal_ClosedAt_${userId}`); // User-specific key
-    var currentTime = new Date().getTime();
-    var oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    if (modalElement) {
+        modal = new bootstrap.Modal(modalElement);
 
-    if (!lastClosedTime || (currentTime - lastClosedTime) > oneDay) {
-        modal.show();
-        document.body.classList.add("no-scroll"); // Disable background scrolling
+        var lastClosedTime = localStorage.getItem(`pending_modal_ClosedAt_${userId}`); // User-specific key
+        var currentTime = new Date().getTime();
+        var oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+        if (!lastClosedTime || (currentTime - lastClosedTime) > oneDay) {
+            modal.show();
+            document.body.classList.add("no-scroll"); // Disable background scrolling
+        }
+
+        $(document).on('click', '.close_rsvp_pending', function () {
+            modal.hide();
+            $('.modal-backdrop').remove();
+            localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
+            document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+            // if($('.modal-backdrop').hasClass('.show')){
+            // }
+        });
+
+        $(modalElement).on('hidden.bs.modal', function () {
+            $('.modal-backdrop').remove();
+            localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
+            document.body.classList.remove("no-scroll"); // Re-enable background scrolling
+        });
+
+    } else {
+        console.warn('Modal element not found');
     }
-
-    $(document).on('click', '.close_rsvp_pending', function () {
-        modal.hide();
-        localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
-        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
-    });
 
     $(document).on('click', '.close_notification_rsvp', function () {
         $('#rsvp_by_notification').hide();
-        document.body.classList.remove("no-scroll"); // Re-enable background scrolling
-    });
-
-    $(modalElement).on('hidden.bs.modal', function () {
-        localStorage.setItem(`pending_modal_ClosedAt_${userId}`, new Date().getTime());  // Store for specific user
         document.body.classList.remove("no-scroll"); // Re-enable background scrolling
     });
 

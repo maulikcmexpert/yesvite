@@ -2742,7 +2742,10 @@ $(document).on("click", ".add_category_item_btn", function () {
             .css("color", "red")
             .text("Please select quantity.");
         return;
+    }else{
+        $('#item_quantity_error').text('');
     }
+
 
     if ($("#self_bring").is(":checked")) {
         var self_bring = 1;
@@ -5983,8 +5986,13 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
 $(document).on("change", "#self_bring", function () {
     if ($(this).is(":checked")) {
         $("#self_bring_quantity_toggle").show();
+        $('#self_bring_qty').val(1);
+
+        
     } else {
         $("#self_bring_quantity_toggle").hide();
+        $('#self_bring_qty').val(0);
+
     }
 });
 
@@ -6020,12 +6028,22 @@ $(document).on("click", ".self_bring_quantity", function () {
     var main_quantity = parseInt($("#item_quantity").val());
 
     if (type == "plus") {
-        if (main_quantity > self_quantity) {
+        // if (main_quantity > self_quantity) {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
-        }
+            // var item_qty=$('#item_quantity').val();
+            if (main_quantity > self_quantity) {
+                // var item_qty=$('#item_quantity').val();
+                var final_qty=main_quantity;
+               $('#item_quantity').val(final_qty);
+                return;
+           }
+
+            $('#item_quantity').val(self_quantity);
+
+        // }
     } else {
-        if (self_quantity > 0) {
+        if (self_quantity > 1) {
             self_quantity--;
             $("#self_bring_qty").val(self_quantity);
         }
@@ -9611,7 +9629,7 @@ $(document).on("click", ".delete_silder", function (e) {
         });
         var eventDatacount = eventData.slider_images;
 
-        $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
+        // $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
         // var check_slider_img = eventData.slider_images;
         // var matchFound = false;
         // $.each(check_slider_img, function (index, slider) {
@@ -9645,6 +9663,9 @@ $(document).on("click", ".delete_silder", function (e) {
                     $(".photo-slider-" + delete_id).hide();
                     $(".photo-edit-delete-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
+                    var eventDatacount = eventData.slider_images;
+                    $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
+
                     $("#loader").css("display", "none");
                 },
                 error: function (xhr, status, error) {
@@ -9677,7 +9698,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
 
     // await savePhotoSlider();
-    
+
     eventData.is_update_event = "1";
 
     // setTimeout(async() => {
@@ -9688,7 +9709,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
         if (save1 == 8 && save2 == 8) {
             updateEventData();
         }
-        
+
     // }, 1000);
 });
 
@@ -9696,7 +9717,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
-    
+
     setTimeout(() => {
         let save1 = savePage1Data(null, true);
         let save2 = savePage3Data(null, true);
@@ -9705,7 +9726,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
             updateEventData();
         }
     }, 2000);
-    
+
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     var send_invites = $(this).attr("data-sendIvites");

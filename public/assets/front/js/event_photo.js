@@ -326,7 +326,7 @@ $(document).ready(function () {
             .closest(".reply-on-comment")
             .data("comment-id");
 
-        alert(commentId);
+       // alert(commentId);
         if (commentText === "") {
             alert("Please enter a comment");
             return;
@@ -747,7 +747,7 @@ $(document).ready(function () {
                         const li = `<li class="commented-user-wrp" data-comment-id="${data.id}">
                         ${newCommentHTML}
                         <ul class="primary-comment-replies"></ul>
-                </li>`;
+                         </li>`;
                         // Append as a new top-level comment
                         const commentList = $(
                             `.posts-card-show-all-comments-wrp`
@@ -1185,7 +1185,7 @@ $(document).ready(function () {
             $("#detail-photo-modal").modal("hide");
             return;
         }
-
+        $(".model_comment").addClass("d-none");
         $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
@@ -1253,6 +1253,8 @@ $(document).ready(function () {
                     prevEl: ".swiper-button-prev",
                 },
             });
+            $(".swiper-button-next").show();
+            $(".swiper-button-prev").show(); 
         } else {
             swiperWrapper.addClass("hideswipe");
             // swiper.destroy(true, true);
@@ -1268,6 +1270,8 @@ $(document).ready(function () {
 
                 loop: false, // 🔹 Ensure looping is disabled
             });
+            $(".swiper-button-next").hide();
+            $(".swiper-button-prev").hide(); 
         }
         //let parentId = null;  // Default to null, assuming no parent
 
@@ -2251,7 +2255,23 @@ $(document).ready(function () {
         //   })
         //   });
     });
+
+    $(".btn-close").on("click", function () {
+
+        $(".post_comment").val('');
+        $(".model_comment").toggleClass("d-none");
+
+        // Add `d-none` class back to hide the div
+    });
+
+    $(".modal").on("hidden.bs.modal", function () {
+
+        $(".model_comment").toggleClass("d-none");
+        $(".post_comment").val('');
+
+    });
 });
+
 $(document).ready(function () {
     const visibilityOptions = {
         1: "Everyone",

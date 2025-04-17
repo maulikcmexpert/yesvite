@@ -1039,9 +1039,9 @@
 
         if (isMobile && !isDesktop) {
             if (/android/i.test(userAgent)) {
-                openAppAndroid();
+                // openAppAndroid();
             } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-                openAppIos();
+                // openAppIos();
             }
         }
     });

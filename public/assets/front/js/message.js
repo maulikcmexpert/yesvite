@@ -730,9 +730,13 @@ async function updateChat(user_id) {
         }
 
         if (isBlockedByUser) {
-            $(".block-conversation").find("span").text("Unblock");
+            $(".block-conversation").find("span").text("Un-block User");
+            // $(".block-conversation").find("span").text("Unblock");
+            $(".block-conversation").addClass('block-account');
         } else {
             $(".block-conversation").find("span").text("Block User");
+            $(".block-conversation").removeClass('block-account');
+
         }
         $(".block-conversation").attr("blocked", isBlockedByUser);
     };
@@ -2613,11 +2617,66 @@ function handleRemoveConversation(snapshot) {
     }
 }
 
-$(document).on("click", ".usr-list-more", function (e) {
+$(document).on("click", ".usr-list-more", async function (e) {
+
     e.stopPropagation();
-    console.log("clicked");
+    // loader.css("display", "flex");
+    $(".empty-massage").css("display", "none");
+    removeSelectedMsg();
+    closeMedia();
+    $(this).addClass("active");
+    formattedDate = {};
+    const isGroup = $(this).attr("data-group");
+    const conversationId = $(this).attr("data-msgKey");
+    console.log({ conversationId });
+    $(".selected_id").val(conversationId);
+
+    $("#isGroup").val(isGroup);
+    $(".member-lists").html("");
+    $(".send-message").val("");
+    $("#startRecording").attr("style", "display:inline-block;");
+    console.log({ conversationId });
+
+    if (isGroup == true || isGroup == "true") {
+        await updateChatfromGroup(conversationId);
+        console.log({ conversationId });
+
+        $(".new-member").removeClass("d-none");
+    } else {
+        $(".new-member").addClass("d-none");
+        $(".new-members-add").addClass("d-none");
+
+        const userId = $(this).attr("data-userid");
+        $(".selected_message").val(userId);
+        console.log({ conversationId });
+
+        await updateOverview(senderUser, conversationId, {
+            unRead: false,
+            unReadCount: 0,
+        });
+        console.log("updateoverview");
+        await updateChat(userId);
+        console.log({ conversationId });
+    }
+    isToMove = false;
+
+    
+    let $convElement = $('.conversation-' + conversationId);
+    if (!$convElement.hasClass('active')) {
+        $convElement.addClass('active');
+    }
+    // const $dropdownMenu = $(this).closest('.dropdown').find('.msg-list-drp-menu');
+    // $dropdownMenu.addClass('show');
+    // $(this).attr('aria-expanded', 'true');
+
+    // // ✅ Only remove 'show' on this dropdown
+    // $(document).one('click', function () {
+    //     $dropdownMenu.removeClass('show');
+    //     $('.usr-list-more').attr('aria-expanded', 'false');
+    // });
     return;
 });
+
 // Initialize overview listeners
 const overviewRef = ref(database, `overview/${senderUser}`);
 onChildAdded(overviewRef, handleNewConversation);
@@ -2922,7 +2981,7 @@ $("#new_message").on("keypress", async function (e) {
             if (isBlockedByMe || isBlockedByUser) {
                 $("#msgBox").modal("hide");
                 isSending = false;
-
+                loader.css("display", "none");
                 return;
             }
 

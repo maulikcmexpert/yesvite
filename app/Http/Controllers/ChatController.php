@@ -105,12 +105,15 @@ class ChatController extends BaseController
         // Create a new user node with the userId
         $userRef = $this->usersReference->getChild((string)$userId);
         $userSnapshot = $userRef->getValue();
+        // dd($userSnapshot);
         $updateFirebase = false;
 
         if ($userSnapshot) {
-            if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
-                $updateFirebase = true;
-            }
+            // if(isset($userSnapshot['userName'])){
+                if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
+                    $updateFirebase = true;
+                }
+            // }
             // User exists, update the existing data
             $userRef->update($updateData);
         } else {
@@ -119,7 +122,25 @@ class ChatController extends BaseController
         }
 
         $reference = $this->firebase->getReference('overview/' . $userId);
-        $messages = $reference->getValue();
+        $blockByMe = $userSnapshot['blockByMe'] ?? [];
+
+        $updatedMessages = $reference->getValue();
+        // dd($messages);
+        $messages = [];
+
+        foreach ($updatedMessages as $conversationId => $messageData) {
+            // dd($messageData);
+            $contactId = $messageData['contactId'] ?? null;
+
+            // Check if contactId is in blockByMe list
+            $isBlocked = in_array($contactId, $blockByMe);
+
+            // Add 'isBlock' parameter
+            $messageData['isBlock'] = $isBlocked;
+
+            $messages[$conversationId] = $messageData;
+        }
+        // dd($messages);
         $updateData = [
             'contactName' => $userName,
             'receiverProfile' => url('/public/storage/profile/' . $userData->profile)
@@ -128,6 +149,8 @@ class ChatController extends BaseController
             'name' => $userName,
             'image' => url('/public/storage/profile/' . $userData->profile)
         ];
+     
+        // dd($blockByMe);
         if ($updateFirebase == true) {
             if (!empty($messages)) {
 

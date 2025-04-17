@@ -284,138 +284,134 @@
 </section>
 
 @push('scripts')
-    {{-- <script>
-    var designData = [];
-    var is_random = @php
-    echo json_encode($randomIds);
-    @endphp
-    alert(is_random)
-        @foreach ($categories as $category)
-        var categoryData = {
-            id: {{ $category->id }},
-            name: "{{ $category->category_name }}",
-            subcategories: []
-        };
+{{-- <script>
+var designData = [];
+var is_random = @php
+echo json_encode($randomIds);
+@endphp
+alert(is_random)
+@foreach ($categories as $category)
+var categoryData = {
+id: {{ $category->id }},
+name: "{{ $category->category_name }}",
+subcategories: []
+};
 
-        @foreach ($category->subcategory as $subcategory)
-            var subcategoryDatasubcategory = {
-                id: {{ $subcategory->id }},
-                name: "{{ $subcategory->subcategory_name }}",
-                images: []
-            };
+@foreach ($category->subcategory as $subcategory)
+var subcategoryDatasubcategory = {
+id: {{ $subcategory->id }},
+name: "{{ $subcategory->subcategory_name }}",
+images: []
+};
 
-            @foreach ($subcategory->textdatas as $image)
-                subcategoryData.images.push({
-                    id: {{ $image->id }},
-                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
-                });
-            @endforeach
+@foreach ($subcategory->textdatas as $image)
+subcategoryData.images.push({
+id: {{ $image->id }},
+image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
+});
+@endforeach
 
-            categoryData.subcategories.push(subcategoryData);
-        @endforeach
+categoryData.subcategories.push(subcategoryData);
+@endforeach
 
-        designData.push(categoryData);
-    @endforeach
+designData.push(categoryData);
+@endforeach
 
-    console.log(designData); // Check output in browser console
+console.log(designData); // Check output in browser console
 </script> --}}
 
-    <script>
-        var designData = [];
+<script>
+var designData = [];
 
-        // Correcting the PHP to JavaScript variable conversion
-        var is_random = {!! json_encode($randomIds) !!};
+// Correcting the PHP to JavaScript variable conversion
+var is_random = {!! json_encode($randomIds) !!};
 
+@foreach ($categories as $category)
+var categoryData = {
+id: {{ $category->id }},
+name: "{{ $category->category_name }}",
+subcategories: []
+};
 
-        @foreach ($categories as $category)
-            var categoryData = {
-                id: {{ $category->id }},
-                name: "{{ $category->category_name }}",
-                subcategories: []
-            };
+@foreach ($category->subcategory as $subcategory)
+var subcategoryData = {
+id: {{ $subcategory->id }},
+name: "{{ $subcategory->subcategory_name }}",
+images: []
+};
 
-            @foreach ($category->subcategory as $subcategory)
-                var subcategoryData = {
-                    id: {{ $subcategory->id }},
-                    name: "{{ $subcategory->subcategory_name }}",
-                    images: []
-                };
+@foreach ($subcategory->textdatas as $image)
+subcategoryData.images.push({
+id: {{ $image->id }},
+image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+tags: "{{ $image->tags ?? '' }}"
 
-                @foreach ($subcategory->textdatas as $image)
-                    subcategoryData.images.push({
-                        id: {{ $image->id }},
-                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-                        tags: "{{ $image->tags ?? '' }}"
+});
+@endforeach
 
+categoryData.subcategories.push(subcategoryData);
+@endforeach
 
-                    });
-                @endforeach
+designData.push(categoryData);
+@endforeach
 
-                categoryData.subcategories.push(subcategoryData);
-            @endforeach
+console.log(designData); // Check output in browser console
+</script>
 
-            designData.push(categoryData);
-        @endforeach
+{{-- <script>
+var designData = [];
 
-        console.log(designData); // Check output in browser console
-    </script>
+var is_random = {!! json_encode($randomIds) !!};
 
+@foreach ($categories as $category)
+var categoryData = {
+id: {{ $category->id }},
+name: "{{ $category->category_name }}",
+tags: [], // Separate tags array
+subcategories: []
+};
 
-    {{-- <script>
-        var designData = [];
+let tagSet = new Set(); // Use Set to collect unique tags
 
-        var is_random = {!! json_encode($randomIds) !!};
+@foreach ($category->subcategory as $subcategory)
+var subcategoryData = {
+id: {{ $subcategory->id }},
+name: "{{ $subcategory->subcategory_name }}",
+images: []
+};
+i=0;
+@foreach ($subcategory->textdatas as $image)
+i++;
+// let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+// Inside the loop
+i = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
 
-        @foreach ($categories as $category)
-            var categoryData = {
-                id: {{ $category->id }},
-                name: "{{ $category->category_name }}",
-                tags: [],        // Separate tags array
-                subcategories: []
-            };
+// Store image with its tags
+subcategoryData.images.push({
+id: {{ $image->id }},
+image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+tags: imageTags
+});
 
-            let tagSet = new Set();  // Use Set to collect unique tags
+// Add tags to the Set
+imageTags.forEach(tag => tagSet.add(tag));
+@endforeach
 
-            @foreach ($category->subcategory as $subcategory)
-                var subcategoryData = {
-                    id: {{ $subcategory->id }},
-                    name: "{{ $subcategory->subcategory_name }}",
-                    images: []
-                };
-                i=0;
-                @foreach ($subcategory->textdatas as $image)
-                i++;
-                    // let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
-                    // Inside the loop
-                    i = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+categoryData.subcategories.push(subcategoryData);
+@endforeach
 
+// Convert Set to array of tag objects with IDs
+categoryData.tags = Array.from(tagSet).map((tag, index) => ({
+id: index + 1,
+name: tag
+}));
 
-                    // Store image with its tags
-                    subcategoryData.images.push({
-                        id: {{ $image->id }},
-                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-                        tags: imageTags
-                    });
+designData.push(categoryData);
+@endforeach
 
-                    // Add tags to the Set
-                    imageTags.forEach(tag => tagSet.add(tag));
-                @endforeach
-
-                categoryData.subcategories.push(subcategoryData);
-            @endforeach
-
-            // Convert Set to array of tag objects with IDs
-            categoryData.tags = Array.from(tagSet).map((tag, index) => ({
-                id: index + 1,
-                name: tag
-            }));
-
-            designData.push(categoryData);
-        @endforeach
-
-        console.log(designData);  // Check the final structure
-    </script>
-     --}}
+console.log(designData); // Check the final structure
+</script>
+--}}
 
 @endpush
 

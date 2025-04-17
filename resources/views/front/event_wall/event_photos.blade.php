@@ -985,7 +985,7 @@
                                     </buttton>
                             </div>
                             <div class="posts-card-like-comment-right emoji_set">
-                                <button class="posts-card-like-btn likeModel " id="likeButtonModel"
+                                <button class="posts-card-like-btn likeModel" id="likeButtonModel"
                                     data-event-id="{{ $event }}" data-parent-id="" data-event-post-id=""
                                     data-user-id="{{ $login_user_id }}">
                                     <i id="show_emoji"> <img src="{{ asset('assets/front/img/heart-emoji.png') }}"
@@ -1024,7 +1024,7 @@
                             </div>
                         </div>
 
-                        <div class="posts-card-show-all-comments-wrp d-none">
+                        <div class="posts-card-show-all-comments-wrp model_comment d-none">
 
                             <div class="posts-card-show-all-comments-inner">
                                 <ul class="top-level-comments">
@@ -1036,7 +1036,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="posts-card-main-comment all-comments-textbox">
+                <div class="posts-card-main-comment  all-comments-textbox">
                     <input type="text" class="form-control" id="post_comment" placeholder="Add Comment">
                     <span class="comment-send-icon send_comment">
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -107,15 +107,29 @@ $(document).ready(function () {
         const categoryname = $(this).data("category-name");
         $("#maindishesLabel").text(categoryname);
     });
+
+    $("#text1").on("input", function () {
+        const errorDiv = document.getElementById('description-error');
+        if ($(this).val().trim() !== "") {
+            errorDiv.innerText = "";
+        }
+    });
+
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
         const eventid = $("#event_id").val();
         const description = $("#text1").val();
-        if(description==""){
-            toastr.error('please enter category item name')
-            return 
+        // if(description==""){
+        //     toastr.error('please enter category item name')
+        //     return
+        // }
+        if (description === "") {
+            const errorDiv = document.getElementById('description-error');
+            errorDiv.innerText = "Please enter category item name";
+            return;
         }
+
         const self_bring_item =
             $('input[name="self_bring_item"]:checked').length > 0 ? 1 : 0;
         let quantity = $('input[name="sub_quantity"]').val();
@@ -145,6 +159,7 @@ $(document).ready(function () {
                     console.log(response.data);
                     // Close the modal
                     $("#categoryModal").modal("hide");
+                    $("#maindishes").modal("hide");
 
                     console.log(response.data);
                     window.location.href = "";
@@ -329,7 +344,7 @@ $(document).on("click", ".minus", function () {
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
 
-    
+
 //     let categoryCount= $(".category-count-"+categoryKey).text();
 //    const totalcategoryQnt = parseInt(categoryCount) - 1
 //     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
@@ -629,11 +644,11 @@ function updateTOP(categoryIndex) {
         console.log({ inputQty });
         let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
         console.log({ innerUserQnt });
-        
+
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
-        totalcount += inputQty 
+        totalcount += inputQty
         console.log({ inputQty });
 
         if (inputQty < requiredQty) {
@@ -677,12 +692,21 @@ $(document).on("click", ".self_bring_quantity", function () {
     var main_quantity = parseInt($("#sub_quantity").val());
 
     if (type == "plus") {
-        if (main_quantity > self_quantity) {
+        // if (main_quantity > self_quantity) {
             self_quantity++;
             $("#self_bring_qty").val(self_quantity);
-        }
+            if (main_quantity > self_quantity) {
+                // var item_qty=$('#item_quantity').val();
+                var final_qty=main_quantity;
+               $('#sub_quantity').val(final_qty);
+                return;
+           }
+           $('#sub_quantity').val(self_quantity);
+
+
+        // }
     } else {
-        if (self_quantity > 0) {
+        if (self_quantity > 1) {
             self_quantity--;
             $("#self_bring_qty").val(self_quantity);
         }
@@ -694,9 +718,13 @@ $(document).on('click','#selfBringItem',function(){
     var checkbox = $('input[name="self_bring_item"]:checked').val();
     if(checkbox){
       $("#self_bring_quantity_toggle").show();
+        $('#self_bring_qty').val(1);
+        $('#sub_quantity').val(1);
     }else{
-        
+
         $("#self_bring_quantity_toggle").hide();
+        $('#self_bring_qty').val(0);
+
 
     }
 
@@ -728,7 +756,7 @@ var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
 var amount = Number($n.val());
-if (amount > 0) {
+if (amount > 1) {
   $n.val(amount-1);
 }
 });
@@ -738,7 +766,7 @@ function clearError(input = null) {
         return;
     }
 
-   
+
 
     const id = input.id;
 
@@ -779,5 +807,5 @@ function clearError(input = null) {
         // Add cases for other fields as needed
     }
 
-    
+
 }

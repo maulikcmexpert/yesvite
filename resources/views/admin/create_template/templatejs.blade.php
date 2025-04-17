@@ -304,7 +304,7 @@
                     $("#filled_image").next('.text-danger').text("");
                 }
 
-// alert(hasError);
+                // alert(hasError);
                 if (!hasError) {
                     $("#templateForm").submit();
                 } else {
@@ -335,7 +335,7 @@
                     // e.preventDefault(); // Prevent form submission or action
                     $(".subcategory_error_bx").text('Please select design subcategory');
                     hasError = true;
-                }else{
+                } else {
                     $(".subcategory_error_bx").text('');
 
                 }
@@ -460,7 +460,67 @@
         });
     });
 
-    // $('#tags').on('focus', function() {
-    //   alert('The Bootstrap Tags Input field has been focused!');
-    // });
+    const designData = JSON.parse($('#designData').val());
+
+//     // Convert your designData into flat suggestion list
+// let suggestionList = [];
+
+// designData.forEach(category => {
+//     suggestionList.push({ value: category.name });
+//     category.subcategories.forEach(sub => {
+//         suggestionList.push({ value: sub.name });
+//     });
+// });
+
+// // Initialize Tagify
+// const input = document.querySelector('#tags');
+// const tagify = new Tagify(input, {
+//     whitelist: suggestionList.map(item => item.value),
+//     dropdown: {
+//         enabled: 1,
+//         maxItems: 20,
+//         position: "all",
+//         closeOnSelect: true,
+//         highlightFirst: true
+//     }
+// });
+
+//     $(document).on("keyup", ".bootstrap-tagsinput input", function() {
+//         const query = $(this).val().toLowerCase();
+//         let results = '';
+
+//         if (query.trim() !== '') {
+//             designData.forEach(category => {
+//                 if (category.name.toLowerCase().includes(query)) {
+//                     results += `
+//                     <div class="search-item category" data-category-id="${category.id}" data-name="${category.name}">
+//                         ${category.name}
+//                     </div>`;
+//                 }
+//                 category.subcategories.forEach(subcategory => {
+//                     if (subcategory.name.toLowerCase().includes(query)) {
+//                         results += `
+//                         <div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">
+//                             ${subcategory.name}
+//                         </div>`;
+//                     }
+//                 });
+//             });
+//             if (results === '') {
+//                 results = `<div class="search-item">No Data Found</div>`;
+//             }
+//         }
+//         $('#filtered_results').html(results);
+//     });
+    
+//     $(document).on('click', '#filtered_results .search-item', function() {
+//             console.log('Suggestion clicked');
+//             const $tagInputContainer = $('.bootstrap-tagsinput');
+//             const $inputField = $tagInputContainer.find('input');
+//             const selectedText = $(this).data('name');
+//             $inputField.val(selectedText);
+//             $inputField.trigger('blur');
+//             $('#filtered_results').empty();
+// });
+
 </script>
