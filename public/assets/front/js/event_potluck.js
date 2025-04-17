@@ -107,6 +107,14 @@ $(document).ready(function () {
         const categoryname = $(this).data("category-name");
         $("#maindishesLabel").text(categoryname);
     });
+
+    $("#text1").on("input", function () {
+        const errorDiv = document.getElementById('description-error');
+        if ($(this).val().trim() !== "") {
+            errorDiv.innerText = "";
+        }
+    }); 
+    
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
