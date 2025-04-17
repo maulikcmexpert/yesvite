@@ -786,10 +786,10 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn">${reply.is_like == 1
-                                        ? '<i class="fa-solid fa-heart"></i>'
-                                        : '<i class="fa-regular fa-heart"></i>'
-                                    }</button>
+                                    <button class="posts-card-like-btn">
+
+                                         '<i class="fa-regular fa-heart"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
@@ -1567,10 +1567,10 @@ $(document).ready(function () {
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
                                     <button class="posts-card-like-btn">
-                                    ${reply.is_like == 1
-                                ? '<i class="fa-solid fa-heart"></i>'
-                                : '<i class="fa-regular fa-heart"></i>'
-                            }</button>
+
+
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
