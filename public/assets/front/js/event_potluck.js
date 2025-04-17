@@ -117,6 +117,7 @@ $(document).ready(function () {
         //     return 
         // }
         if (description === "") {
+            const errorDiv = document.getElementById('description-error'); 
             errorDiv.innerText = "Please enter category item name";
             return;
         }
