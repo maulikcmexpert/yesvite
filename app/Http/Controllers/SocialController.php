@@ -108,6 +108,7 @@ class SocialController extends Controller
             } elseif ($provider == 'instagram') {
                 $user->instagram_token_id = $socialUser->getId();
             } elseif ($provider == 'apple') {
+                dd($socialUser);
                 $user->apple_token_id = $socialUser->getId();
             }
 
