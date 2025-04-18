@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Carbon\CarbonImmutable;
@@ -9,42 +10,29 @@ use Lcobucci\JWT\Signer\Key\InMemory;
 
 class AppleTokenService
 {
-    protected Configuration $config;
-    public function __construct()
+    public function generate(): string
     {
-        $privateKey =env('APPLE_PRIVATE_KEY');
-
-        if (empty($privateKey)) {
-            throw new \RuntimeException('Apple private key is not set.');
-        }
-
-        // Replace literal '\n' with actual newline characters
-        $privateKey = str_replace('\n', "\n", $privateKey);
+        $privateKey = str_replace('\\n', "\n", env('APPLE_PRIVATE_KEY'));
 
         $signer = new Sha256(new MultibyteStringConverter());
 
-        $this->config = Configuration::forAsymmetricSigner(
+        $config = Configuration::forAsymmetricSigner(
             $signer,
             InMemory::plainText($privateKey),
-            InMemory::plainText('') // Provide an empty public key if not required
+            InMemory::empty()
         );
-    }
 
-
-    public function generate(): string
-    {
         $now = CarbonImmutable::now();
 
-        $token = $this->config->builder()
-            ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
+        $token = $config->builder()
+            ->issuedBy(env('APPLE_TEAM_ID'))
             ->issuedAt($now)
             ->expiresAt($now->addMonths(6))
-            ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
+            ->withHeader('kid', env('APPLE_KEY_ID'))
             ->withClaim('aud', 'https://appleid.apple.com')
-            ->withClaim('sub', env('APPLE_CLIENT_ID')) // Service ID
-            ->getToken($this->config->signer(), $this->config->signingKey());
+            ->withClaim('sub', env('APPLE_CLIENT_ID'))
+            ->getToken($config->signer(), $config->signingKey());
 
         return $token->toString();
     }
 }
-?>
