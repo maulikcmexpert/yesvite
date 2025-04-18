@@ -488,7 +488,8 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware(['web'])->group(function () {
     Route::get('login/{provider}', [SocialController::class, 'redirectToProvider']);
-    Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+    // Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+    Route::match(['GET', 'POST'],'login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 });
 
 
