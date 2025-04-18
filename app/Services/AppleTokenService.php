@@ -15,6 +15,7 @@ class AppleTokenService
     public function __construct()
     {
         $privateKey = env('APPLE_PRIVATE_KEY');
+        $dummyPublicKey = '-----BEGIN PUBLIC KEY-----' . PHP_EOL . 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7z4lZ9n6A1X5zD6g6iX2' . PHP_EOL . '-----END PUBLIC KEY-----';
 
         if (empty($privateKey)) {
             throw new \RuntimeException('Apple private key is not set.');
@@ -25,7 +26,7 @@ class AppleTokenService
         $this->config = Configuration::forAsymmetricSigner(
             $signer,
             InMemory::plainText($privateKey),
-            InMemory::plainText('')  // No public key required for signing
+            InMemory::plainText($dummyPublicKey)
         );
     }
 
