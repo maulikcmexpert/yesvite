@@ -55,7 +55,7 @@ class SocialController extends Controller
 
                 // $clientSecret = app(AppleTokenService::class)->generate();
                 // config(['services.apple.client_secret' => $clientSecret]);
-                $user_apple = Socialite::driver('apple')->user();
+                $user_apple = Socialite::driver('apple')->stateless()->user();
 dd($user_apple);
 
                 $provider_id = $user_apple->getId();
