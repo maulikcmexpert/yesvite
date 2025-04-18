@@ -34,7 +34,7 @@ class SocialController extends Controller
             $clientSecret = app(AppleTokenService::class)->generate();
             config(['services.apple.client_secret' => $clientSecret]);
 
-            return Socialite::driver($provider)->redirect();
+            // return Socialite::driver($provider)->redirect();
         }
         return Socialite::driver($provider)->redirect();
     }
