@@ -50,7 +50,35 @@ class SocialController extends Controller
 
         try {
 
+            if ($provider == 'apple') {
 
+
+                // $clientSecret = app(AppleTokenService::class)->generate();
+                // config(['services.apple.client_secret' => $clientSecret]);
+                $user_apple = Socialite::driver('apple')->user();
+dd($user_apple);
+                $provider_id = $user_apple->getId();
+                $email =$user_apple->getEmail() ?? 'no-email-provided';
+
+                $existingUser = User::where('provider_id', $provider_id)->orWhere('email', $email)->first();
+
+                if ($existingUser) {
+                    auth()->login($existingUser);
+                } else {
+                    $newUser = User::create([
+                        'name' => $user_apple->getName() ?? 'Apple User',
+                        'email' => $email,
+                        'provider_id' => $provider_id,
+                        'provider_name' => 'apple'
+                    ]);
+
+                    auth()->login($newUser);
+                }
+
+
+
+
+            }
             $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
             return redirect('/login');
