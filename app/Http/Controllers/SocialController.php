@@ -25,7 +25,7 @@ class SocialController extends Controller
      */
     public function redirectToProvider($provider,Request $request)
     {
-dd($provider);
+// dd($provider);
         if ($request->has('event_login')) {
             session(['event_login' => $request->query('event_login')]);
         }
@@ -49,6 +49,7 @@ dd($provider);
      */
     public function handleProviderCallback($provider)
     {
+        dd($provider);
         try {
             if ($provider == 'apple') {
                 $clientSecret = app(AppleTokenService::class)->generate();
