@@ -25,7 +25,7 @@ class SocialController extends Controller
      */
     public function redirectToProvider($provider,Request $request)
     {
-
+dd($provider);
         if ($request->has('event_login')) {
             session(['event_login' => $request->query('event_login')]);
         }
