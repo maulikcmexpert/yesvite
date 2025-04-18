@@ -57,7 +57,7 @@ return [
         'team_id' => env('APPLE_TEAM_ID'),
         'key_id' => env('APPLE_KEY_ID'),
         'private_key' => str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY')),
-        'redirect' => env('APPLE_REDIRECT_URIL'),
+        'redirect' => env('APPLE_REDIRECT_URI'),
 
     ],
 

@@ -30,6 +30,14 @@ class SocialController extends Controller
             session(['event_login' => $request->query('event_login')]);
         }
 
+        if ($provider === 'apple') {
+            $clientSecret = app(AppleTokenService::class)->generate();
+            config(['services.apple.client_secret' => $clientSecret]);
+
+            return Socialite::driver('apple')
+                ->scopes(['name', 'email'])
+                ->redirect();
+        }
         return Socialite::driver($provider)->redirect();
     }
 
