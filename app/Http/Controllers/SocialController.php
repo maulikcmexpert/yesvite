@@ -49,7 +49,7 @@ class SocialController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        dd($provider);
+        // dd($provider);
         try {
             if ($provider == 'apple') {
                 $clientSecret = app(AppleTokenService::class)->generate();
