@@ -52,11 +52,11 @@ class SocialController extends Controller
 
             if ($provider == 'apple') {
 
-
+dd(1);
                 // $clientSecret = app(AppleTokenService::class)->generate();
                 // config(['services.apple.client_secret' => $clientSecret]);
                 $user = Socialite::driver($provider)->user();
-                dd($user);
+
                 $authUser = $this->findOrCreateUser($user, $provider);
                 // dd($user);
                 if ($authUser) {
