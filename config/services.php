@@ -53,10 +53,10 @@ return [
 
     'apple' => [
         'client_id' => env('APPLE_CLIENT_ID'),
-      'client_secret' => app(App\Services\AppleTokenService::class)->generate(), // Your Service ID (like com.example.app)
+        'client_secret' => env('APPLE_CLIENT_SECRET'), // Your Service ID (like com.example.app)
         'team_id' => env('APPLE_TEAM_ID'),
         'key_id' => env('APPLE_KEY_ID'),
-'private_key' => env('APPLE_PRIVATE_KEY'),
+        'private_key' => str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY')),
         'redirect' => env('APPLE_REDIRECT_URI'),
 
     ],
