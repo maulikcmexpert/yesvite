@@ -12,7 +12,7 @@ class AppleTokenService
 {
     public function generate(): string
     {
-        $privateKey = str_replace('\\n', "\n", env('APPLE_PRIVATE_KEY'));
+        $privateKey = "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgGooFxSUMUT+tW2lWwols0QisOsAvc3IYgPzHtmGC0fOgCgYIKoZIzj0DAQehRANCAARVPwZyulCjrOGW4bk55Ghv9RQMl2NaeFthrncNDr8oFN1uhfuqWuyF3AB1trpgDVwIP0TyBfj49SL4hM67MslS\n-----END PRIVATE KEY-----";
 
         $signer = new Sha256(new MultibyteStringConverter());
 
