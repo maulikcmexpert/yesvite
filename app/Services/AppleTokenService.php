@@ -10,7 +10,6 @@ use Lcobucci\JWT\Signer\Key\InMemory;
 class AppleTokenService
 {
     protected Configuration $config;
-
     public function __construct()
     {
         $privateKey = env('APPLE_PRIVATE_KEY');
@@ -19,22 +18,25 @@ class AppleTokenService
             throw new \RuntimeException('Apple private key is not set.');
         }
 
-        $privateKey = InMemory::plainText(str_replace("\\n", "\n", $privateKey));
-    $signer = new Sha256(new MultibyteStringConverter());
+        // Replace literal '\n' with actual newline characters
+        $privateKey = str_replace('\n', "\n", $privateKey);
 
-    $this->config = Configuration::forAsymmetricSigner(
-        $signer,
-        $privateKey,
-        InMemory::empty() // Public key not required for signing
-    );
+        $signer = new Sha256(new MultibyteStringConverter());
+
+        $this->config = Configuration::forAsymmetricSigner(
+            $signer,
+            InMemory::plainText($privateKey),
+            InMemory::plainText('') // Provide an empty public key if not required
+        );
     }
+
 
     public function generate(): string
     {
         $now = CarbonImmutable::now();
 
         $token = $this->config->builder()
-            ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
+            ->issuedBy($teamId = config('services.apple.team_id')) // Team ID
             ->issuedAt($now)
             ->expiresAt($now->addMonths(6))
             ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
