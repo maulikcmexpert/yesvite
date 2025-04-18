@@ -14,7 +14,7 @@ class AppleTokenService
 
     public function __construct()
     {
-        $privateKey = config('services.apple.private_key');
+        $privateKey = env('APPLE_PRIVATE_KEY');
 
         if (empty($privateKey)) {
             throw new \RuntimeException('Apple private key is not set.');
