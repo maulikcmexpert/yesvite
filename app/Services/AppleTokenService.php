@@ -36,7 +36,7 @@ class AppleTokenService
         $now = CarbonImmutable::now();
 
         $token = $this->config->builder()
-            ->issuedBy($teamId = config('services.apple.team_id')) // Team ID
+            ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
             ->issuedAt($now)
             ->expiresAt($now->addMonths(6))
             ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
