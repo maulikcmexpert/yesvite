@@ -17,7 +17,7 @@ class AppleTokenService
     {
         try {
             // Load private key from .p8 file
-            $privateKeyPath = storage_path('app/AuthKey_' . config('services.apple.key_id') . '.p8');
+            $privateKeyPath = env('APPLE_KEY_ID');
 
             if (!file_exists($privateKeyPath)) {
                 throw new \Exception("Apple private key file not found at: " . $privateKeyPath);
