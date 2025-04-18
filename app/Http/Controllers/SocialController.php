@@ -50,32 +50,7 @@ class SocialController extends Controller
 
         try {
 
-            if ($provider == 'apple') {
 
-dd(1);
-                // $clientSecret = app(AppleTokenService::class)->generate();
-                // config(['services.apple.client_secret' => $clientSecret]);
-                $user = Socialite::driver($provider)->user();
-
-                $authUser = $this->findOrCreateUser($user, $provider);
-                // dd($user);
-                if ($authUser) {
-                    Auth::login($authUser, true);
-
-
-                    $eventLogin = session('event_login', null);
-
-
-                    session()->forget('event_login');
-
-
-                    if ($eventLogin) {
-                        return redirect('/events')->with('msg', 'Logged in successfully!');
-                    } else {
-                        return redirect('/home')->with('msg', 'Logged in successfully!');
-                    }
-                }
-            }
             $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
             return redirect('/login');
