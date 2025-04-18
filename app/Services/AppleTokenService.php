@@ -19,7 +19,7 @@ class AppleTokenService
         $config = Configuration::forAsymmetricSigner(
             $signer,
             InMemory::plainText($privateKey),
-            InMemory::empty()
+            InMemory::plainText('')
         );
 
         $now = CarbonImmutable::now();
