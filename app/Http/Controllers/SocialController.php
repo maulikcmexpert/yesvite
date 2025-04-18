@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Coin_transactions;
 use Laravel\Socialite\Facades\Socialite;
+use App\Services\AppleTokenService;
 use Illuminate\Support\Facades\Session;
 use Cookie;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,10 @@ class SocialController extends Controller
     public function handleProviderCallback($provider)
     {
         try {
-
+            if ($provider == 'apple') {
+                $clientSecret = app(AppleTokenService::class)->generate();
+                config(['services.apple.client_secret' => $clientSecret]);
+            }
             $user = Socialite::driver($provider)->user();
 
         } catch (Exception $e) {
