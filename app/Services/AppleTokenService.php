@@ -1,5 +1,6 @@
 
 <?php
+namespace App\Services;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Ecdsa\Sha256;
 use Lcobucci\JWT\Signer\Ecdsa\MultibyteStringConverter;
@@ -42,4 +43,3 @@ class AppleTokenService
         return $token->toString();
     }
 }
-?>
