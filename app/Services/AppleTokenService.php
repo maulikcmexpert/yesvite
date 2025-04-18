@@ -35,13 +35,13 @@ class AppleTokenService
         $now = CarbonImmutable::now();
 
         $token = $this->config->builder()
-            ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
-            ->issuedAt($now)
-            ->expiresAt($now->addMonths(6))
-            ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
-            ->withClaim('aud', 'https://appleid.apple.com')
-            ->withClaim('sub', env('APPLE_CLIENT_ID')) // Service ID
-            ->getToken($this->config->signer(), $this->config->signingKey());
+        ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
+        ->issuedAt($now)
+        ->expiresAt($now->addMonths(6))
+        ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
+        ->permittedFor('https://appleid.apple.com') // Audience
+        ->relatedTo(env('APPLE_CLIENT_ID')) // Subject
+        ->getToken($this->config->signer(), $this->config->signingKey());
 
         return $token->toString();
     }
