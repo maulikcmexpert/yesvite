@@ -2,50 +2,46 @@
 
 namespace App\Services;
 
-use Carbon\CarbonImmutable;
-use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\Signer\Ecdsa\Sha256;
-use Lcobucci\JWT\Signer\Ecdsa\MultibyteStringConverter;
-use Lcobucci\JWT\Signer\Key\InMemory;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Illuminate\Support\Facades\Log;
 
 class AppleTokenService
 {
-    protected Configuration $config;
-
-    public function __construct()
+    /**
+     * Generate Apple client_secret for token exchange.
+     *
+     * @return string
+     */
+    public function generate()
     {
+        try {
+            // Load private key from .p8 file
+            $privateKeyPath = env('APPLE_PRIVATE_KEY');
 
-        $privateKey = env('APPLE_PRIVATE_KEY');
+            if (!file_exists($privateKeyPath)) {
+                throw new \Exception("Apple private key file not found at: " . $privateKeyPath);
+            }
 
-        $dummyPublicKey = openssl_pkey_get_private($privateKey);
+            $privateKey = file_get_contents($privateKeyPath);
 
-        if (empty($privateKey)) {
-            throw new \RuntimeException('Apple private key is not set.');
+            // Build JWT payload
+            $payload = [
+                'iss' => config('services.apple.team_id'),       // Your Apple Team ID
+                'iat' => time(),                                  // Issued at
+                'exp' => time() + (86400 * 180),                  // Expiration (max 180 days)
+                'aud' => 'https://appleid.apple.com',             // Audience
+                'sub' => config('services.apple.client_id'),      // Your Service ID (client_id)
+            ];
+
+            // Generate JWT
+            $jwt = JWT::encode($payload, $privateKey, 'ES256', config('services.apple.key_id'));
+
+            return $jwt;
+
+        } catch (\Exception $e) {
+            Log::error('AppleTokenService Error: ' . $e->getMessage());
+            return null;
         }
-        $keyDetails = openssl_pkey_get_details($dummyPublicKey);
-        $publicKeyPem = $keyDetails['key'];
-        $signer = new Sha256(new MultibyteStringConverter());
-
-        $this->config = Configuration::forAsymmetricSigner(
-            $signer,
-            InMemory::plainText($privateKey),
-            InMemory::plainText($publicKeyPem)
-        );
-    }
-
-    public function generate(): string
-    {
-        $now = CarbonImmutable::now();
-
-        $token = $this->config->builder()
-        ->issuedBy(env('APPLE_TEAM_ID')) // Team ID
-        ->issuedAt($now)
-        ->expiresAt($now->addMonths(6))
-        ->withHeader('kid', env('APPLE_KEY_ID')) // Key ID
-        ->permittedFor('https://appleid.apple.com') // Audience
-        ->relatedTo(env('APPLE_CLIENT_ID')) // Subject
-        ->getToken($this->config->signer(), $this->config->signingKey());
-
-        return $token->toString();
     }
 }
