@@ -20,11 +20,11 @@ class AppleTokenService
 
         $signer = new Sha256(new MultibyteStringConverter());
 
-        $this->config = Configuration::forAsymmetricSigner(
-            $signer,
-            InMemory::plainText($privateKey),
-            InMemory::empty() // No public key required for signing
-        );
+        // $this->config = Configuration::forAsymmetricSigner(
+        //     $signer,
+        //     InMemory::plainText($privateKey),
+        //     InMemory::empty() // No public key required for signing
+        // );
     }
 
     public function generate(): string
