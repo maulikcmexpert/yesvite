@@ -12,7 +12,7 @@ class AppleTokenService
     protected Configuration $config;
     public function __construct()
     {
-        $privateKey =" -----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgGooFxSUMUT+tW2lWwols0QisOsAvc3IYgPzHtmGC0fOgCgYIKoZIzj0DAQehRANCAARVPwZyulCjrOGW4bk55Ghv9RQMl2NaeFthrncNDr8oFN1uhfuqWuyF3AB1trpgDVwIP0TyBfj49SL4hM67MslS\n-----END PRIVATE KEY-----";
+        $privateKey =env('APPLE_PRIVATE_KEY');
 
         if (empty($privateKey)) {
             throw new \RuntimeException('Apple private key is not set.');
@@ -25,8 +25,8 @@ class AppleTokenService
 
         $this->config = Configuration::forAsymmetricSigner(
             $signer,
-            InMemory::plainText($privateKey),   // Signing key
-            InMemory::empty()                   // Verification key is optional for now
+            InMemory::plainText($privateKey),
+            InMemory::plainText('') // Provide an empty public key if not required
         );
     }
 
