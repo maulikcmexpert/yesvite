@@ -57,6 +57,7 @@ class SocialController extends Controller
                 // config(['services.apple.client_secret' => $clientSecret]);
                 $user_apple = Socialite::driver('apple')->user();
 dd($user_apple);
+
                 $provider_id = $user_apple->getId();
                 $email =$user_apple->getEmail() ?? 'no-email-provided';
 
