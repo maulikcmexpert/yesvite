@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use Carbon\CarbonImmutable;
@@ -40,3 +39,4 @@ class AppleTokenService
         return $token->toString();
     }
 }
+?>
