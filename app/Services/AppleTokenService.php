@@ -26,7 +26,7 @@ class AppleTokenService
         $this->config = Configuration::forAsymmetricSigner(
             $signer,
             InMemory::plainText($privateKey),
-            InMemory::plainText('') // Provide an empty public key if not required
+            InMemory::empty()
         );
     }
 
