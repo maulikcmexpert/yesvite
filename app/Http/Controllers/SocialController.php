@@ -47,13 +47,14 @@ class SocialController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        // dd($provider);
+
         try {
+   dd($provider);
             if ($provider == 'apple') {
                 $clientSecret = app(AppleTokenService::class)->generate();
                 config(['services.apple.client_secret' => $clientSecret]);
                 $user = Socialite::driver($provider)->user();
-                dd($user);
+
             }
             $user = Socialite::driver($provider)->user();
 
