@@ -23,9 +23,9 @@ class SocialController extends Controller
      * @param string $provider
      * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider($provider,Request $request)
+    public function redirectToProvider($provider, Request $request)
     {
-// dd($provider);
+        // dd($provider);
         if ($request->has('event_login')) {
             session(['event_login' => $request->query('event_login')]);
         }
@@ -49,15 +49,33 @@ class SocialController extends Controller
     {
 
         try {
-   dd($provider);
-            if ($provider == 'apple') {
-                $clientSecret = app(AppleTokenService::class)->generate();
-                config(['services.apple.client_secret' => $clientSecret]);
-                $user = Socialite::driver($provider)->user();
 
+            if ($provider == 'apple') {
+
+
+                // $clientSecret = app(AppleTokenService::class)->generate();
+                // config(['services.apple.client_secret' => $clientSecret]);
+                $user = Socialite::driver($provider)->user();
+                $authUser = $this->findOrCreateUser($user, $provider);
+                // dd($user);
+                if ($authUser) {
+                    Auth::login($authUser, true);
+
+
+                    $eventLogin = session('event_login', null);
+
+
+                    session()->forget('event_login');
+
+
+                    if ($eventLogin) {
+                        return redirect('/events')->with('msg', 'Logged in successfully!');
+                    } else {
+                        return redirect('/home')->with('msg', 'Logged in successfully!');
+                    }
+                }
             }
             $user = Socialite::driver($provider)->user();
-
         } catch (Exception $e) {
             return redirect('/login');
         }
@@ -81,8 +99,6 @@ class SocialController extends Controller
                 return redirect('/home')->with('msg', 'Logged in successfully!');
             }
         }
-
-
     }
 
     /**
@@ -99,7 +115,7 @@ class SocialController extends Controller
         Session::regenerate();
         $session_id = Session::getId();
         if ($user) {
-            if(isset($user->account_status) && $user->account_status != 'Unblock'){
+            if (isset($user->account_status) && $user->account_status != 'Unblock') {
                 return redirect('/login')->withErrors([
                     'email' => 'Ban User: Temporarily or permanently suspend user.',
                 ]);
@@ -115,8 +131,8 @@ class SocialController extends Controller
                 $user->apple_token_id = $socialUser->getId();
             }
 
-            if($user->account_status == 'Unblock'){
-                $user->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'0';
+            if ($user->account_status == 'Unblock') {
+                $user->current_session_id = (isset($session_id) && $session_id != null) ? $session_id : '0';
                 $sessionArray = [
                     'id' => encrypt($user->id),
                     'first_name' => $user->firstname,
@@ -133,8 +149,8 @@ class SocialController extends Controller
         $users =  new User();
         $randomString = Str::random(30);
 
-        $users->firstname = (isset($nameParts[0]) && $nameParts[0] != null)?$nameParts[0]:$socialUser->getName();
-        $users->lastname = (isset($nameParts[1]) && $nameParts[1] != null)?$nameParts[1]:$socialUser->getName();
+        $users->firstname = (isset($nameParts[0]) && $nameParts[0] != null) ? $nameParts[0] : $socialUser->getName();
+        $users->lastname = (isset($nameParts[1]) && $nameParts[1] != null) ? $nameParts[1] : $socialUser->getName();
         $users->email = $socialUser->getEmail();
         $users->gmail_token_id = $socialUser->getId();
         $users->facebook_token_id = $socialUser->getId();
@@ -146,8 +162,8 @@ class SocialController extends Controller
         // $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));;
         $users->email_verified_at = strtotime(date('Y-m-d  h:i:s'));
         $users->account_status = 'Unblock';
-        if(isset($session_id) && $session_id != null){
-            $users->current_session_id = (isset($session_id) && $session_id != null)?$session_id:'';
+        if (isset($session_id) && $session_id != null) {
+            $users->current_session_id = (isset($session_id) && $session_id != null) ? $session_id : '';
         }
         $users->register_type = 'web social signup';
         $users->save();
