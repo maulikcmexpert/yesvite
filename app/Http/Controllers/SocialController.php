@@ -49,7 +49,7 @@ class SocialController extends Controller
     {
 
         try {
-dd(1);
+dd($provider);
             if ($provider == 'apple') {
 
 
