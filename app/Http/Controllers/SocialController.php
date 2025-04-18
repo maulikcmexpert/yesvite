@@ -52,6 +52,8 @@ class SocialController extends Controller
             if ($provider == 'apple') {
                 $clientSecret = app(AppleTokenService::class)->generate();
                 config(['services.apple.client_secret' => $clientSecret]);
+                $user = Socialite::driver($provider)->user();
+                dd($user);
             }
             $user = Socialite::driver($provider)->user();
 
@@ -108,7 +110,7 @@ class SocialController extends Controller
             } elseif ($provider == 'instagram') {
                 $user->instagram_token_id = $socialUser->getId();
             } elseif ($provider == 'apple') {
-                dd($socialUser);
+
                 $user->apple_token_id = $socialUser->getId();
             }
 
