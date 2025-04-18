@@ -13,6 +13,12 @@ class AppleTokenService
 
     public function __construct()
     {
+        $privateKey = env('APPLE_PRIVATE_KEY');
+
+        if (empty($privateKey)) {
+            throw new \RuntimeException('Apple private key is not set.');
+        }
+
         $privateKey = InMemory::plainText(str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY')));
         $signer = new Sha256(new MultibyteStringConverter());
 
