@@ -13,9 +13,9 @@ class AppleTokenService
     {
         $privateKey = config('services.apple.private_key');
 
-        if (empty($privateKey)) {
-            throw new \RuntimeException('Apple private key is not set.');
-        }
+        // if (empty($privateKey)) {
+        //     throw new \RuntimeException('Apple private key is not set.');
+        // }
 
         $signer = new Sha256(new MultibyteStringConverter());
 
