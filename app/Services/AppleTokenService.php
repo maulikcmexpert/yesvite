@@ -19,14 +19,14 @@ class AppleTokenService
             throw new \RuntimeException('Apple private key is not set.');
         }
 
-        $privateKey = InMemory::plainText(str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY')));
-        $signer = new Sha256(new MultibyteStringConverter());
+        $privateKey = InMemory::plainText(str_replace("\\n", "\n", $privateKey));
+    $signer = new Sha256(new MultibyteStringConverter());
 
-        $this->config = Configuration::forAsymmetricSigner(
-            $signer,
-            $privateKey,
-            InMemory::empty() // Public key not required for signing
-        );
+    $this->config = Configuration::forAsymmetricSigner(
+        $signer,
+        $privateKey,
+        InMemory::empty() // Public key not required for signing
+    );
     }
 
     public function generate(): string
