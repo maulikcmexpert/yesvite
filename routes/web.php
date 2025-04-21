@@ -491,8 +491,6 @@ Route::middleware(['web'])->group(function () {
     // Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
     Route::match(['GET', 'POST'],'login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 });
-Route::get('/login/apple', [AuthController::class, 'redirectToApple'])->name('login.apple');
-Route::post('/login/apple/callback', [AuthController::class, 'handleAppleCallback'])->name('login.apple.callback');
 
 
 Route::fallback(function () {

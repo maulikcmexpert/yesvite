@@ -39,7 +39,6 @@ use Laravel\Socialite\Facades\Socialite;
 use Biscolab\ReCaptcha\Facades\ReCaptcha;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-use App\Services\AppleTokenService;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -50,79 +49,15 @@ class AuthController extends Controller
      */
     protected $firebase;
     protected $usersReference;
-    protected $appleTokenService;
-    public function __construct(AppleTokenService $appleTokenService)
+
+    public function __construct()
     {
         $this->firebase = Firebase::database();
         $this->usersReference = $this->firebase->getReference('users');
-        $this->appleTokenService = $appleTokenService;
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
     public function index() {}
-
-
-
-    public function redirectToApple()
-{
-    $clientId = config('services.apple.client_id');
-    $redirectUri = route('login.apple.callback');
-    $state = Str::random(40);
-    $nonce = Str::random(40);
-
-    $query = http_build_query([
-        'response_type' => 'code',
-        'client_id' => $clientId,
-        'redirect_uri' => $redirectUri,
-        'state' => $state,
-        'nonce' => $nonce,
-        'scope' => 'name email',
-        'response_mode' => 'form_post',
-    ]);
-
-    return redirect('https://appleid.apple.com/auth/authorize?' . $query);
-}
-
-public function handleAppleCallback(Request $request)
-{
-    $authorizationCode = $request->input('code');
-
-    if (!$authorizationCode) {
-        return redirect('/login')->with('error', 'Authorization code not provided');
-    }
-
-    $clientSecret = app(AppleTokenService::class)->generate();
-
-    $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
-        'grant_type' => 'authorization_code',
-        'code' => $authorizationCode,
-        'redirect_uri' => route('login.apple.callback'),
-        'client_id' => config('services.apple.client_id'),
-        'client_secret' => $clientSecret,
-    ]);
-
-    if ($response->failed()) {
-        return redirect('/login')->with('error', 'Apple login failed: ' . json_encode($response->json()));
-    }
-
-    $tokenData = $response->json();
-
-    // Decode the ID token to get user info
-    $idToken = $tokenData['id_token'];
-    $payload = explode('.', $idToken)[1];
-    $decoded = json_decode(base64_decode($payload), true);
-
-    // Find or create the user
-    $user = User::updateOrCreate(
-        ['apple_id' => $decoded['sub']],
-        ['email' => $decoded['email'] ?? null]
-    );
-
-    Auth::login($user);
-
-    return redirect('/home');
-}
-
 
     public function redirectToGoogle()
     {
