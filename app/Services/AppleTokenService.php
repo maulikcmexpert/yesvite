@@ -16,7 +16,7 @@ class AppleTokenService
     public function generate()
     {
         // Path to your .p8 private key file
-        $keyFilePath = env('APPLE_PRIVATE_KEY'); // Get from .env
+        $keyFilePath ="-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgGooFxSUMUT+tW2lWwols0QisOsAvc3IYgPzHtmGC0fOgCgYIKoZIzj0DAQehRANCAARVPwZyulCjrOGW4bk55Ghv9RQMl2NaeFthrncNDr8oFN1uhfuqWuyF3AB1trpgDVwIP0TyBfj49SL4hM67MslS\n-----END PRIVATE KEY-----"; // Get from .env
 
         // Check if the private key file exists
         if (!file_exists($keyFilePath)) {
