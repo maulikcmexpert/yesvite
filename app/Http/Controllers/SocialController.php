@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+
 class SocialController extends Controller
 {
     /**
@@ -48,9 +49,9 @@ class SocialController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function handleProviderCallback($provider)
-     {
-         try {
+    public function handleProviderCallback($provider)
+    {
+        try {
             if ($provider === 'apple') {
                 Log::info('Starting Apple authentication...');
 
@@ -83,27 +84,26 @@ class SocialController extends Controller
 
                 // Continue with your user login/registration logic...
 
-            }  else {
-                 $user = Socialite::driver($provider)->user();
-             }
-
-         } catch (Exception $e) {
+            } else {
+                $user = Socialite::driver($provider)->user();
+            }
+        } catch (Exception $e) {
             Log::error('Authentication error: ' . $e->getMessage());
 
-             return redirect('/login')->with('error', 'Authentication failed.');
-         }
+            return redirect('/login')->with('error', 'Authentication failed.');
+        }
 
-         $authUser = $this->findOrCreateUser($user, $provider);
+        $authUser = $this->findOrCreateUser($user, $provider);
 
-         if ($authUser) {
-             Auth::login($authUser, true);
+        if ($authUser) {
+            Auth::login($authUser, true);
 
-             $eventLogin = session('event_login', null);
-             session()->forget('event_login');
+            $eventLogin = session('event_login', null);
+            session()->forget('event_login');
 
-             return redirect($eventLogin ? '/events' : '/home')->with('msg', 'Logged in successfully!');
-         }
-     }
+            return redirect($eventLogin ? '/events' : '/home')->with('msg', 'Logged in successfully!');
+        }
+    }
 
 
     /**
