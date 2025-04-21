@@ -52,6 +52,7 @@ class SocialController extends Controller
          try {
              if ($provider == 'apple') {
                  $user = Socialite::driver('apple')->user();
+                 dd($user);
              } else {
                  $user = Socialite::driver($provider)->user();
              }
