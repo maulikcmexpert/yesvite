@@ -89,7 +89,7 @@ class SocialController extends Controller
             }
         } catch (Exception $e) {
             Log::error('Authentication error: ' . $e->getMessage());
-
+dd($e);
             return redirect('/login')->with('error', 'Authentication failed.');
         }
 
