@@ -46,52 +46,32 @@ class SocialController extends Controller
      * @param string $provider
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($provider)
-    {
 
-        try {
+     public function handleProviderCallback($provider)
+     {
+         try {
+             if ($provider == 'apple') {
+                 $user = Socialite::driver('apple')->user();
+             } else {
+                 $user = Socialite::driver($provider)->user();
+             }
 
-            if ($provider == 'apple') {
+         } catch (Exception $e) {
+             return redirect('/login')->with('error', 'Authentication failed.');
+         }
 
+         $authUser = $this->findOrCreateUser($user, $provider);
 
-                // $clientSecret = app(AppleTokenService::class)->generate();
-                // config(['services.apple.client_secret' => $clientSecret]);
-                $user_apple = Socialite::driver('apple')->stateless()->user();
-dd($user_apple);
+         if ($authUser) {
+             Auth::login($authUser, true);
 
-                $provider_id = $user_apple->getId();
+             $eventLogin = session('event_login', null);
+             session()->forget('event_login');
 
+             return redirect($eventLogin ? '/events' : '/home')->with('msg', 'Logged in successfully!');
+         }
+     }
 
-
-
-
-            }
-            $user = Socialite::driver($provider)->user();
-        } catch (Exception $e) {
-            // dd($e);
-            return redirect('/login');
-        }
-
-        // Check if the user already exists
-        $authUser = $this->findOrCreateUser($user, $provider);
-        // dd($user);
-        if ($authUser) {
-            Auth::login($authUser, true);
-
-
-            $eventLogin = session('event_login', null);
-
-
-            session()->forget('event_login');
-
-
-            if ($eventLogin) {
-                return redirect('/events')->with('msg', 'Logged in successfully!');
-            } else {
-                return redirect('/home')->with('msg', 'Logged in successfully!');
-            }
-        }
-    }
 
     /**
      * Find or create a user.
