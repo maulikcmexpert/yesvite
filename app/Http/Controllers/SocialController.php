@@ -68,7 +68,7 @@ dd($user_apple);
             }
             $user = Socialite::driver($provider)->user();
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             return redirect('/login');
         }
 
