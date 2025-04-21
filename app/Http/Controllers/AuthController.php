@@ -64,35 +64,48 @@ class AuthController extends Controller
 
 
     public function handleAppleCallback(Request $request)
-{
-    $authorizationCode = $request->input('code');
+    {
+        $authorizationCode = $request->input('code');
 
-    if (!$authorizationCode) {
-        return response()->json(['error' => 'Authorization code missing'], 400);
+        if (!$authorizationCode) {
+            return redirect('/login')->with('error', 'Authorization code not provided');
+        }
+
+        // Use your AppleTokenService to generate client_secret
+        $clientSecret = app(AppleTokenService::class)->generate();
+
+        $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
+            'grant_type' => 'authorization_code',
+            'code' => $authorizationCode,
+            'redirect_uri' => 'https://yesvite.cmexpertiseinfotech.in/login/apple/callback',
+            'client_id' => config('services.apple.client_id'),
+            'client_secret' => $clientSecret,
+        ]);
+
+        if ($response->failed()) {
+            return redirect('/login')->with('error', 'Apple login failed: ' . json_encode($response->json()));
+        }
+
+        $tokenData = $response->json();
+
+        // Optional: decode id_token to get user data
+        $idToken = $tokenData['id_token'];
+        $parts = explode('.', $idToken);
+        $userPayload = json_decode(base64_decode($parts[1]), true);
+
+        // Here you can find the user in DB or create them if not exists
+        $appleUserId = $userPayload['sub'];
+
+        // Example: find user by apple_user_id or create one
+        $user = User::firstOrCreate(
+            ['apple_user_id' => $appleUserId],
+            ['email' => $userPayload['email'] ?? null]
+        );
+
+        Auth::login($user);
+
+        return redirect('/home'); // Redirect to home page after login
     }
-
-    $clientSecret = $this->appleTokenService->generate();
-
-    $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
-        'grant_type' => 'authorization_code',
-        'code' => $authorizationCode,
-        'redirect_uri' => 'https://your.app/apple/callback', // Replace with actual registered URL
-        'client_id' => config('services.apple.client_id'),
-        'client_secret' => $clientSecret,
-    ]);
-
-    if ($response->failed()) {
-        return response()->json([
-            'error' => 'Apple token exchange failed',
-            'details' => $response->json(),
-        ], 400);
-    }
-
-    $tokenData = $response->json();
-
-    // You can now access id_token, access_token, refresh_token, etc.
-    return response()->json($tokenData);
-}
 
     public function redirectToGoogle()
     {
