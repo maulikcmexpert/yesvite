@@ -54,8 +54,8 @@ class SocialController extends Controller
                 Log::info('Starting authentication with Apple.');
 
                 // Generating client secret if needed
-                // $clientSecret = app(AppleTokenService::class)->generate();
-                // config(['services.apple.client_secret' => $clientSecret]);
+                $clientSecret = app(AppleTokenService::class)->generate();
+                config(['services.apple.client_secret' => $clientSecret]);
 
                 // Send request to Apple
                 $user_apple = Socialite::driver('apple')->stateless()->user();
