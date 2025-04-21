@@ -16,25 +16,17 @@ class AppleTokenService
     public function generate()
     {
         try {
+            // Convert \n in env string to actual new lines
+            $privateKey = str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY'));
 
-            $privateKeyPath = env('APPLE_PRIVATE_KEY');
-
-            if (!file_exists($privateKeyPath)) {
-                throw new \Exception("Apple private key file not found at: " . $privateKeyPath);
-            }
-
-            $privateKey = file_get_contents($privateKeyPath);
-
-            // Build JWT payload
             $payload = [
-                'iss' => config('services.apple.team_id'),       // Your Apple Team ID
-                'iat' => time(),                                  // Issued at
-                'exp' => time() + (86400 * 180),                  // Expiration (max 180 days)
-                'aud' => 'https://appleid.apple.com',             // Audience
-                'sub' => config('services.apple.client_id'),      // Your Service ID (client_id)
+                'iss' => config('services.apple.team_id'),
+                'iat' => time(),
+                'exp' => time() + (86400 * 180),
+                'aud' => 'https://appleid.apple.com',
+                'sub' => config('services.apple.client_id'),
             ];
 
-            // Generate JWT
             $jwt = JWT::encode($payload, $privateKey, 'ES256', config('services.apple.key_id'));
 
             return $jwt;
