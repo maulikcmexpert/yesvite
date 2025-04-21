@@ -17,26 +17,20 @@ class AppleTokenService
         public function generate()
         {
             try {
-                $privateKey = str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY'));
+                $teamId = '7RU5Y6V7KP';
+                $clientId = 'yesvite.web';
+                $keyId = 'K78KWT7UX6';
+                $privateKey = file_get_contents(storage_path('AuthKey_K78KWT7UX6.p8'));
 
-                $teamId = config('services.apple.team_id');
-                $clientId = config('services.apple.client_id');
-                $keyId = config('services.apple.key_id');
-
-                $payload = [
+                $token = [
                     'iss' => $teamId,
                     'iat' => time(),
-                    'exp' => time() + (86400 * 180),
+                    'exp' => time() + 86400 * 180,
                     'aud' => 'https://appleid.apple.com',
                     'sub' => $clientId,
                 ];
 
-                $headers = [
-                    'kid' => $keyId,
-                    'alg' => 'ES256',
-                ];
-
-                return JWT::encode($payload, $privateKey, 'ES256', null, $headers);
+                $jwt = JWT::encode($token, $privateKey, 'ES256', $keyId);
             } catch (\Exception $e) {
                 Log::error('AppleTokenService Error: ' . $e->getMessage());
                 return null;
