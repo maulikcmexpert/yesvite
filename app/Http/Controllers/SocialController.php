@@ -60,7 +60,6 @@ class SocialController extends Controller
                 // Generate client secret
                 $clientSecret = app(AppleTokenService::class)->generate();
 
-                // Exchange code for access token
                 $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
                     'grant_type' => 'authorization_code',
                     'code' => $code,
@@ -71,6 +70,7 @@ class SocialController extends Controller
 
                 if ($response->failed()) {
                     Log::error('Apple Token Exchange Failed: ' . $response->body());
+                    Log::error('Response Status Code: ' . $response->status());
                     return redirect('/login')->with('error', 'Apple sign in failed.');
                 }
 
@@ -86,7 +86,7 @@ class SocialController extends Controller
 
          } catch (Exception $e) {
             Log::error('Authentication error: ' . $e->getMessage());
-            dd($e);
+
              return redirect('/login')->with('error', 'Authentication failed.');
          }
 
