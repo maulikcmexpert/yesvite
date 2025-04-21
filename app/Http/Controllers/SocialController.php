@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 class SocialController extends Controller
 {
     /**
@@ -50,17 +51,36 @@ class SocialController extends Controller
      public function handleProviderCallback($provider)
      {
          try {
-             if ($provider == 'apple') {
-                Log::info('Starting authentication with Apple.');
+            if ($provider === 'apple') {
+                Log::info('Starting Apple authentication...');
 
-                // Generating client secret if needed
+                // Get the code returned by Apple
+                $code = request()->get('code');
+
+                // Generate client secret
                 $clientSecret = app(AppleTokenService::class)->generate();
-                config(['services.apple.client_secret' => $clientSecret]);
 
-                // Send request to Apple
-                $user_apple = Socialite::driver('apple')->stateless()->user();
-                Log::info('Apple user data retrieved:', ['user' => $user_apple]);
-             } else {
+                // Exchange code for access token
+                $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
+                    'grant_type' => 'authorization_code',
+                    'code' => $code,
+                    'redirect_uri' => config('services.apple.redirect'),
+                    'client_id' => config('services.apple.client_id'),
+                    'client_secret' => $clientSecret,
+                ]);
+
+                if ($response->failed()) {
+                    Log::error('Apple Token Exchange Failed: ' . $response->body());
+                    return redirect('/login')->with('error', 'Apple sign in failed.');
+                }
+
+                $tokenData = $response->json();
+                // You now have access_token, id_token etc.
+                // Parse id_token to get user info if needed
+
+                // Continue with your user login/registration logic...
+
+            }  else {
                  $user = Socialite::driver($provider)->user();
              }
 

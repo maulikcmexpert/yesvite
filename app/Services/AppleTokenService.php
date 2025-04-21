@@ -13,27 +13,34 @@ class AppleTokenService
      *
      * @return string
      */
-    public function generate()
-    {
-        try {
-            // Convert \n in env string to actual new lines
-            $privateKey = str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY'));
 
-            $payload = [
-                'iss' => config('services.apple.team_id'),
-                'iat' => time(),
-                'exp' => time() + (86400 * 180),
-                'aud' => 'https://appleid.apple.com',
-                'sub' => config('services.apple.client_id'),
-            ];
+        public function generate()
+        {
+            try {
+                $privateKey = str_replace("\\n", "\n", env('APPLE_PRIVATE_KEY'));
 
-            $jwt = JWT::encode($payload, $privateKey, 'ES256', config('services.apple.key_id'));
+                $teamId = config('services.apple.team_id');
+                $clientId = config('services.apple.client_id');
+                $keyId = config('services.apple.key_id');
 
-            return $jwt;
+                $payload = [
+                    'iss' => $teamId,
+                    'iat' => time(),
+                    'exp' => time() + (86400 * 180),
+                    'aud' => 'https://appleid.apple.com',
+                    'sub' => $clientId,
+                ];
 
-        } catch (\Exception $e) {
-            Log::error('AppleTokenService Error: ' . $e->getMessage());
-            return null;
+                $headers = [
+                    'kid' => $keyId,
+                    'alg' => 'ES256',
+                ];
+
+                return JWT::encode($payload, $privateKey, 'ES256', null, $headers);
+            } catch (\Exception $e) {
+                Log::error('AppleTokenService Error: ' . $e->getMessage());
+                return null;
+            }
         }
-    }
+
 }
