@@ -63,49 +63,66 @@ class AuthController extends Controller
 
 
 
-    public function handleAppleCallback(Request $request)
-    {
-        $authorizationCode = $request->input('code');
+    public function redirectToApple()
+{
+    $clientId = config('services.apple.client_id');
+    $redirectUri = route('login.apple.callback');
+    $state = Str::random(40);
+    $nonce = Str::random(40);
 
-        if (!$authorizationCode) {
-            return redirect('/login')->with('error', 'Authorization code not provided');
-        }
+    $query = http_build_query([
+        'response_type' => 'code',
+        'client_id' => $clientId,
+        'redirect_uri' => $redirectUri,
+        'state' => $state,
+        'nonce' => $nonce,
+        'scope' => 'name email',
+        'response_mode' => 'form_post',
+    ]);
 
-        // Use your AppleTokenService to generate client_secret
-        $clientSecret = app(AppleTokenService::class)->generate();
+    return redirect('https://appleid.apple.com/auth/authorize?' . $query);
+}
 
-        $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
-            'grant_type' => 'authorization_code',
-            'code' => $authorizationCode,
-            'redirect_uri' => 'https://yesvite.cmexpertiseinfotech.in/login/apple/callback',
-            'client_id' => config('services.apple.client_id'),
-            'client_secret' => $clientSecret,
-        ]);
+public function handleAppleCallback(Request $request)
+{
+    $authorizationCode = $request->input('code');
 
-        if ($response->failed()) {
-            return redirect('/login')->with('error', 'Apple login failed: ' . json_encode($response->json()));
-        }
-
-        $tokenData = $response->json();
-
-        // Optional: decode id_token to get user data
-        $idToken = $tokenData['id_token'];
-        $parts = explode('.', $idToken);
-        $userPayload = json_decode(base64_decode($parts[1]), true);
-
-        // Here you can find the user in DB or create them if not exists
-        $appleUserId = $userPayload['sub'];
-
-        // Example: find user by apple_user_id or create one
-        $user = User::firstOrCreate(
-            ['apple_user_id' => $appleUserId],
-            ['email' => $userPayload['email'] ?? null]
-        );
-
-        Auth::login($user);
-
-        return redirect('/home'); // Redirect to home page after login
+    if (!$authorizationCode) {
+        return redirect('/login')->with('error', 'Authorization code not provided');
     }
+
+    $clientSecret = app(AppleTokenService::class)->generate();
+
+    $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
+        'grant_type' => 'authorization_code',
+        'code' => $authorizationCode,
+        'redirect_uri' => route('login.apple.callback'),
+        'client_id' => config('services.apple.client_id'),
+        'client_secret' => $clientSecret,
+    ]);
+
+    if ($response->failed()) {
+        return redirect('/login')->with('error', 'Apple login failed: ' . json_encode($response->json()));
+    }
+
+    $tokenData = $response->json();
+
+    // Decode the ID token to get user info
+    $idToken = $tokenData['id_token'];
+    $payload = explode('.', $idToken)[1];
+    $decoded = json_decode(base64_decode($payload), true);
+
+    // Find or create the user
+    $user = User::updateOrCreate(
+        ['apple_id' => $decoded['sub']],
+        ['email' => $decoded['email'] ?? null]
+    );
+
+    Auth::login($user);
+
+    return redirect('/home');
+}
+
 
     public function redirectToGoogle()
     {
