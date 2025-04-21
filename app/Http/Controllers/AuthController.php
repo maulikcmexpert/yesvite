@@ -39,6 +39,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Biscolab\ReCaptcha\Facades\ReCaptcha;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use App\Services\AppleTokenService;
 
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
@@ -49,15 +50,49 @@ class AuthController extends Controller
      */
     protected $firebase;
     protected $usersReference;
-
-    public function __construct()
+    protected $appleTokenService;
+    public function __construct(AppleTokenService $appleTokenService)
     {
         $this->firebase = Firebase::database();
         $this->usersReference = $this->firebase->getReference('users');
+        $this->appleTokenService = $appleTokenService;
         // $this->database = $database;
         // $this->chatRoom = $this->database->getReference();
     }
     public function index() {}
+
+
+
+    public function handleAppleCallback(Request $request)
+{
+    $authorizationCode = $request->input('code');
+
+    if (!$authorizationCode) {
+        return response()->json(['error' => 'Authorization code missing'], 400);
+    }
+
+    $clientSecret = $this->appleTokenService->generate();
+
+    $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
+        'grant_type' => 'authorization_code',
+        'code' => $authorizationCode,
+        'redirect_uri' => 'https://your.app/apple/callback', // Replace with actual registered URL
+        'client_id' => config('services.apple.client_id'),
+        'client_secret' => $clientSecret,
+    ]);
+
+    if ($response->failed()) {
+        return response()->json([
+            'error' => 'Apple token exchange failed',
+            'details' => $response->json(),
+        ], 400);
+    }
+
+    $tokenData = $response->json();
+
+    // You can now access id_token, access_token, refresh_token, etc.
+    return response()->json($tokenData);
+}
 
     public function redirectToGoogle()
     {
@@ -120,7 +155,7 @@ class AuthController extends Controller
 
         // dd($ip);
         $key = 'register-attempts:' . $ip;
-    
+
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
             if($isLogin){
@@ -133,7 +168,7 @@ class AuthController extends Controller
                 return redirect()->back()->withErrors(['rate_limit' => "Too many attempts. Please try again in {$seconds} seconds."]);
             }
         }
-    
+
         RateLimiter::hit($key, 60);
 
         if ($request->account_type == '1') {
