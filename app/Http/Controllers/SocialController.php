@@ -59,6 +59,9 @@ class SocialController extends Controller
 
                 // Generate client secret
                 $clientSecret = app(AppleTokenService::class)->generate();
+                Log::info('Client Secret:', ['client_secret' => $clientSecret]);
+                Log::info('Client ID:', ['client_id' => config('services.apple.client_id')]);
+                Log::info('Redirect URI:', ['redirect_uri' => config('services.apple.redirect')]);
 
                 $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
                     'grant_type' => 'authorization_code',
