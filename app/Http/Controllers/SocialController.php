@@ -51,8 +51,15 @@ class SocialController extends Controller
      {
          try {
              if ($provider == 'apple') {
-                 $user = Socialite::driver('apple')->user();
-                 Log::info('Apple user data:', ['user' => $user]);
+                Log::info('Starting authentication with Apple.');
+
+                // Generating client secret if needed
+                $clientSecret = app(AppleTokenService::class)->generate();
+                config(['services.apple.client_secret' => $clientSecret]);
+
+                // Send request to Apple
+                $user_apple = Socialite::driver('apple')->stateless()->user();
+                Log::info('Apple user data retrieved:', ['user' => $user_apple]);
              } else {
                  $user = Socialite::driver($provider)->user();
              }
