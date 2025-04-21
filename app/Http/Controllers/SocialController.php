@@ -14,7 +14,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 class SocialController extends Controller
 {
     /**
@@ -52,12 +52,13 @@ class SocialController extends Controller
          try {
              if ($provider == 'apple') {
                  $user = Socialite::driver('apple')->user();
-                 dd($user);
+                 Log::info('Apple user data:', ['user' => $user]);
              } else {
                  $user = Socialite::driver($provider)->user();
              }
 
          } catch (Exception $e) {
+            Log::error('Authentication error: ' . $e->getMessage());
              return redirect('/login')->with('error', 'Authentication failed.');
          }
 
