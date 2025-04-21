@@ -743,7 +743,7 @@ async function bindData(current_event_id) {
         await ensureFontsLoaded();
     }
 
-    let element =image-edit-inner-img;
+    let element = document.querySelector(".image-edit-inner-img");
     if (element) {
         ({ width, height } = element.getBoundingClientRect()); // Update width & height if element exists
         console.log("Width:", width, "Height:", height);
