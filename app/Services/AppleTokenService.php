@@ -19,10 +19,10 @@ class AppleTokenService
         $keyFilePath ="-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgGooFxSUMUT+tW2lWwols0QisOsAvc3IYgPzHtmGC0fOgCgYIKoZIzj0DAQehRANCAARVPwZyulCjrOGW4bk55Ghv9RQMl2NaeFthrncNDr8oFN1uhfuqWuyF3AB1trpgDVwIP0TyBfj49SL4hM67MslS\n-----END PRIVATE KEY-----"; // Get from .env
 
         // Check if the private key file exists
-        if (!file_exists($keyFilePath)) {
-            Log::error('Apple private key file not found at: ' . $keyFilePath);
-            throw new Exception('Apple private key file not found');
-        }
+        // if (!file_exists($keyFilePath)) {
+        //     Log::error('Apple private key file not found at: ' . $keyFilePath);
+        //     throw new Exception('Apple private key file not found');
+        // }
 
         // Load the private key from the file
         $privateKey = file_get_contents($keyFilePath);
