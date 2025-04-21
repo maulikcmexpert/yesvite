@@ -70,7 +70,7 @@ class SocialController extends Controller
                     'client_id' => config('services.apple.client_id'),
                     'client_secret' => $clientSecret,
                 ]);
-
+                Log::info($response);
                 if ($response->failed()) {
                     Log::error('Apple Token Exchange Failed: ' . $response->body());
                     Log::error('Response Status Code: ' . $response->status());
