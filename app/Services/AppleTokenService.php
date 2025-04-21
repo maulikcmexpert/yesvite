@@ -5,7 +5,7 @@ namespace App\Services;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Log;
-
+use Exception;
 class AppleTokenService
 {
     /**
