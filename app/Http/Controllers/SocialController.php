@@ -74,7 +74,7 @@ class SocialController extends Controller
                 Log::info($response);
                 if ($response->failed()) {
                     Log::error('Apple Token Exchange Failed: ' . $response->body());
-                    Log::error('Response Status Code: ' . $response->status());
+
                     return redirect('/login')->with('error', 'Apple sign in failed.');
                 }
 
