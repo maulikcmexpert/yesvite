@@ -36,7 +36,7 @@ class AppleTokenService
                     'alg' => 'ES256',
                 ];
 
-                return JWT::encode($payload, $privateKey, 'ES256', null, $headers);
+                return JWT::encode($payload, $privateKey, 'ES256', $keyId, $headers);
             } catch (\Exception $e) {
                 Log::error('AppleTokenService Error: ' . $e->getMessage());
                 return null;
