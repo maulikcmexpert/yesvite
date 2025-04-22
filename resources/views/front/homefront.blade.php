@@ -1,6 +1,8 @@
-    <!-- ============= banner-wrapper ======== -->
+
+<!-- ============= banner-wrapper ======== -->
     @php
         $getSocialLink = getSocialLink();
+       
     @endphp
     <section class="banner-wrapper">
         <img src="{{ asset('assets/front/image/left-banner.png') }}" alt="left-banner" class="left-img wow fadeInLeft"
