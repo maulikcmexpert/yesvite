@@ -301,6 +301,8 @@ $(document).ready(function () {
 
             let results = "";
             if (query.length > 0) {
+                $('.selected-items').html('');
+
                 designData.forEach(category => {
                     if (category.name.toLowerCase().includes(query)) {
                         results +=
@@ -547,6 +549,8 @@ $(document).ready(function () {
 
 
     $(document).on("click", ".search-item", function () {
+        $('input[name="design_subcategory"]').prop("checked", false);
+
         let selectedText = $(this).data("name");
         let categoryId = $(this).data("category-id");
         let subcategoryId = $(this).data("id");
