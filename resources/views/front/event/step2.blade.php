@@ -566,7 +566,7 @@
                 let query = $(this).val().toLowerCase().trim();
                 let results = "";
                 if (query.length > 0) {
-
+                    $('.selected-items').html('');
                     designData.forEach(category => {
                     if (category.name.toLowerCase().includes(query)) {
                         results +=
