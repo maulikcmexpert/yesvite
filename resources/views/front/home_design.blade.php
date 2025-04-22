@@ -1,8 +1,4 @@
-@php
-    use Carbon\Carbon;
-    $now = Carbon::now();
-    dd($now);
-@endphp
+
 {{--
 <section class="home-web-tabs-wrp">
     <div class="container">
