@@ -1,6 +1,6 @@
 @php
     use Carbon\Carbon;
-     $now = Carbon::now();
+     $now = Carbon::now()->toDateString();
      dd($now);
 @endphp
 {{--
