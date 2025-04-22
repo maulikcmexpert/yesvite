@@ -35,7 +35,7 @@ class SendUnFinishDraftsReminder extends Command
 
             foreach ($eventData as $value) {
 
-                // $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7)->toDateString();
+                // $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(4)->toDateString();
                 $dateAfterSevenDays = Carbon::parse($value->created_at)->toDateString();
 
                 if ($dateAfterSevenDays == $currentDate) {
