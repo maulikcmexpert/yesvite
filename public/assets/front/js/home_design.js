@@ -150,15 +150,17 @@ $(document).ready(function () {
                 });
             
                 if (isMatch) {
-                    $(this)
-                        .show()
-                        .removeClass("d-none fadeInDown wow")
-                        .css("visibility", "visible")
-                        .fadeIn();
+                    $(this).show();
+                        $(this).removeClass("d-none");
+                        $(this).removeClass("fadeInDown");
+                        $(this).css("visibility", "visible");
+                        $(this).removeClass("wow");
+                        $(this).removeClass("d-none").fadeIn();
                     visibleCount++;
                 } else {
-                    $(this).fadeOut().addClass("d-none");
-                }
+                    $(this).hide();
+                                $(this).fadeOut().addClass("d-none");              
+                              }
             });
             
             if (default_s == 0) {
