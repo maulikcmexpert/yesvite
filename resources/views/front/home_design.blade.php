@@ -328,7 +328,7 @@
 </section>
 
 @push('scripts')
- <script>
+ {{-- <script>
     var designData = [];
     var is_random = @php
     echo json_encode($randomIds);
@@ -362,9 +362,9 @@
     @endforeach
 
     console.log(designData); // Check output in browser console
-</script>
+</script> --}}
 
-{{-- <script>
+<script>
 var designData = [];
 
 // Correcting the PHP to JavaScript variable conversion
@@ -388,7 +388,7 @@ images: []
 subcategoryData.images.push({
 id: {{ $image->id }},
 image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-tags: "{{ $image->tags ?? '' }}"
+// tags: "{{ $image->tags ?? '' }}"
 
 });
 @endforeach
@@ -400,7 +400,7 @@ designData.push(categoryData);
 @endforeach
 
 console.log(designData); // Check output in browser console
-</script> --}}
+</script>
 
 {{-- <script>
 var designData = [];
