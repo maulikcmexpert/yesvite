@@ -587,7 +587,7 @@
                 } else {
                     $('#filtered_results').html(results).show();
                 }
-                
+
                     let visibleCount = 0;
 
                     $(".image-item").each(function() {
@@ -627,7 +627,7 @@
                     $(".total_design_count").text(visibleCount + " Items");
 
                     if (visibleCount > 0) {
-                        $("#filtered_results").hide();
+                        // $("#filtered_results").hide();
                     } else {
                         $("#filtered_results").show();
                     }
