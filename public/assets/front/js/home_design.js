@@ -169,7 +169,7 @@ $(document).ready(function () {
             $(".default_show:visible").length + " Items"
         );
     });
-    $("#filtered_results").hide();
+    // $("#filtered_results").hide();
     // $('#search_design_category').on('keyup', function () {
     //     let query = $(this).val().toLowerCase();
     //     $('#filtered_results').show();
