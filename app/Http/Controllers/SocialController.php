@@ -68,7 +68,7 @@ class SocialController extends Controller
                     'grant_type' => 'authorization_code',
                     'code' => $code,
                     'redirect_uri' => config('services.apple.redirect'),
-                    'client_id' => config('services.apple.client_id'),
+                    'client_id' => "yesvite.web",
                     'client_secret' => $clientSecret,
                 ]);
                 Log::info($response);
