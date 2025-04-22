@@ -123,34 +123,38 @@ $(document).ready(function () {
             //     });
             // });
             
-            let selectedSubcategories = [];
+           // Step 1: Collect selected subcategory IDs
+let selectedSubcategories = [];
 
-            // Step 1: Gather all selected subcategory IDs
-            $('input[name="design_subcategory"]:checked').each(function () {
-                const subcategoryId = $(this).data("subcategory-id").toString();
-                selectedSubcategories.push(subcategoryId);
-            });
-            
-            // Step 2: Loop through all images and only show those that match a selected subcategory
-            let visibleCount = 0;
-            
-            $(".image-item").each(function () {
-                const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-            
-                // Check if any selected subcategory matches the image's subcategory list
-                const isMatch = selectedSubcategories.some(sub => imgSubcategoryIds.includes(sub));
-            
-                if (isMatch) {
-                    $(this)
-                        .show()
-                        .removeClass("d-none fadeInDown wow")
-                        .css("visibility", "visible")
-                        .fadeIn();
-                    visibleCount++;
-                } else {
-                    $(this).fadeOut().addClass("d-none");
-                }
-            });
+$('input[name="design_subcategory"]:checked').each(function () {
+    const subcategoryId = $(this).data("subcategory-id").toString();
+    selectedSubcategories.push(subcategoryId);
+});
+
+// Step 2: Show only matching images
+let visibleCount = 0;
+
+$(".image-item").each(function () {
+    const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+
+    // Check if any selected subcategory matches
+    const isMatch = selectedSubcategories.some(id => imgSubcategoryIds.includes(id));
+
+    if (isMatch) {
+        $(this)
+            .show()
+            .removeClass("d-none fadeInDown wow")
+            .css("visibility", "visible")
+            .fadeIn();
+        visibleCount++;
+    } else {
+        $(this).fadeOut().addClass("d-none");
+    }
+});
+
+// Step 3: Update visible count
+// $(".total_design_count").text(`${visibleCount} Items`);
+
             
             if (default_s == 0) {
                 $(".image-item").removeClass("d-none");
