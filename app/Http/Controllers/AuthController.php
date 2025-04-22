@@ -120,7 +120,7 @@ class AuthController extends Controller
 
         // dd($ip);
         $key = 'register-attempts:' . $ip;
-    
+
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
             if($isLogin){
@@ -133,7 +133,7 @@ class AuthController extends Controller
                 return redirect()->back()->withErrors(['rate_limit' => "Too many attempts. Please try again in {$seconds} seconds."]);
             }
         }
-    
+
         RateLimiter::hit($key, 60);
 
         if ($request->account_type == '1') {

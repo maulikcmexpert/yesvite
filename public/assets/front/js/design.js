@@ -60,6 +60,7 @@ async function preloadAllFonts() {
 }
 
 $(document).ready(function () {
+    $("#loader").css("display", "none");
     console.log("document.ready fired");
     $("#custom_template").change(function () {
         var file = this.files[0];
@@ -686,7 +687,7 @@ $(document).on("click", ".edit_design_tem", function (e) {
 
 
             console.log("Waiting for images to load...");
-            await waitForAllImagesToLoad(2000);
+           // await waitForAllImagesToLoad(2000);
             console.log(" All images loaded");
 
             // 4. Finally, hide the loader

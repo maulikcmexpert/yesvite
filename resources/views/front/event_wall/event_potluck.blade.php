@@ -123,9 +123,9 @@
                                         <div class="host-users-detail cmn-card">
                                             @if (!empty($eventDetails['co_hosts']))
                                             <h4 class="title">Your hosts</h4>
-                                            @else   
+                                            @else
                                             <h4 class="title">Your host</h4>
-                                            @endif   
+                                            @endif
                                             <div class="host-user-con-box">
                                                 @if ($eventDetails['hosted_by'])
                                                     <div class="host-user-con">
@@ -224,7 +224,7 @@
                                                 </svg>
                                             </button> --}}
                                             <button type="button" class="add_potluck_cat_btn ms-auto border-0" data-bs-toggle="modal"
-                                                data-bs-target="#editmodal" 
+                                                data-bs-target="#editmodal"
                                             ><i class="fa-solid fa-plus"></i> Category</button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}

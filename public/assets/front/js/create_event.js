@@ -9698,7 +9698,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     e.preventDefault();
 
     // await savePhotoSlider();
-    
+
     eventData.is_update_event = "1";
 
     // setTimeout(async() => {
@@ -9709,7 +9709,7 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
         if (save1 == 8 && save2 == 8) {
             updateEventData();
         }
-        
+
     // }, 1000);
 });
 
@@ -9717,7 +9717,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
     e.preventDefault();
     eventData.is_update_event = "1";
     await saveDesignData(true);
-    
+
     setTimeout(() => {
         let save1 = savePage1Data(null, true);
         let save2 = savePage3Data(null, true);
@@ -9726,7 +9726,7 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
             updateEventData();
         }
     }, 2000);
-    
+
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     var send_invites = $(this).attr("data-sendIvites");

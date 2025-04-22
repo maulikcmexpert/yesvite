@@ -1,7 +1,19 @@
 // const { error } = require("toastr");
 
 var selectedFiles = null; // To store selected files
+var reactionIcons = {
+    "❤️": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "\\u{2764}": base_url + "assets/front/img/heart-emoji.png", // ❤️
+    "👍": base_url + "assets/front/img/thumb-icon.png", // 👍
+    "\\u{1F44D}": base_url + "assets/front/img/thumb-icon.png", // 👍
 
+    "\\u{1F60A}": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "😊": base_url + "assets/front/img/smily-emoji.png", // 😄
+    "\\u{1F60D}": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "😍": base_url + "assets/front/img/eye-heart-emoji.png", // 😍
+    "\\u{1F44F}": base_url + "assets/front/img/clap-icon.png", // 👏
+    "👏": base_url + "assets/front/img/clap-icon.png", // 👏
+};
 // // Step 1: Preview the selected media
 // function previewStoryImage(event, userId) {
 //     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'video/mp4', 'video/webm'];
@@ -1071,7 +1083,7 @@ $(document).ready(function () {
             newOption.remove();
             $(".option-error").remove();
             $("#question_error").text('');
-        $("#duration_error").text('');
+            $("#duration_error").text('');
             renumberOptions(); // Call function to renumber options after deletion
         });
 
@@ -1813,17 +1825,18 @@ $(document).ready(function () {
 $(".modal").on("hidden.bs.modal", function () {
     $("#postContent").val("");
     $("#pollForm")[0].reset(); // Reset poll form
-    $(this).find("#pollForm")[0].reset();
+    $("#pollForm")[0].reset();
 
     $("#photoForm")[0].reset(); // Reset photo form
     $("#imagePreview").empty(); // Clear image preview
     $(".char-count").text("0/140"); // Reset char count
     $(".option-poll").remove();
-    $("#pollForm").find(".option-number").text(index + 1);
+    // $("#pollForm").find(".option-number").text(index + 1);
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
-
+    $(".model_comment").toggleClass("d-none");
+    $(".post_comment").val('');
     // Add `d-none` class back to hide the div
     $(".create-post-upload-img-inner").addClass("d-none");
     storedFiles = [];
@@ -1835,6 +1848,9 @@ $(".btn-close").on("click", function () {
     $("#question_error").text('');
     $("#duration_error").text('');
     $(".option-error").remove();
+    $(".post_comment").text('');
+    $(".post_comment").val('');
+    $(".model_comment").toggleClass("d-none");
     storedFiles = [];
     // Add `d-none` class back to hide the div
 });
@@ -2228,3 +2244,981 @@ $(document).ready(function () {
 //         location.reload();
 //     }, 300000);
 // });
+
+
+function renderReactions(post) {
+    let reactionList = post.reactionList || [];
+    let selfReaction = post.self_reaction;
+    let reactionHtml = "";
+    let i = 0; // Count displayed reactions
+    let j = 0;
+
+    for (let reactionData of reactionList) {
+        if (i >= 3) break; // Limit to 3 reactions
+
+        let { reaction, firstname, lastname, profile } = reactionData;
+
+        let emojiSrc = reactionIcons[reaction] || null; // Get emoji image
+        if (emojiSrc) {
+            let listItemId =
+                j === 0 && selfReaction === reaction
+                    ? `id="reactionImage_model_${post.id}"`
+                    : "";
+            reactionHtml += `<li ${listItemId}><img src="${emojiSrc}" alt="Emoji"></li>`;
+            if (j === 0 && selfReaction === reaction) j++;
+            i++;
+        }
+    }
+
+    // If no reactions found, show an empty reaction placeholder
+    if (j === 0 && i < 3) {
+        reactionHtml += `<li id="reactionImage_model_${post.id}"></li>`;
+    }
+
+    let likeCountHtml = `<p id="like_${post.id}">${post.total_likes} Likes</p>`;
+
+    return reactionHtml + likeCountHtml;
+}
+// $(document).on("click", ".open_photo_model", function (e) {
+//     console.log("Mouse up or leave detected");
+
+//     $("#detail-photo-modal").modal("show");
+//     $(".model_comment").addClass("d-none");
+//     const commentInput = $("#post_comment");
+//     commentInput.val("");
+
+//     // Fetch the post ID from the data attribute
+//     var login_user_id = $("#login_user_id").val();
+//     // alert(login_user_id);
+//     const postId = $(this).data("post-id");
+//     const eventId = $(this).data("event-id");
+//     console.log(postId, postId);
+
+//     const rawData = $(this).data("image-src"); // Get raw data
+//     console.log("Raw Data:", rawData); // Debug the raw data
+//     const swiperWrapper = $("#media_post");
+//     swiperWrapper.empty();
+//     if (rawData && rawData.length > 0) {
+//         rawData.forEach((media) => {
+//             let mediaElement = "";
+
+//             if (media.match(/\.(mp4|webm|ogg)$/i)) {
+//                 // If it's a video, use <video> tag
+//                 mediaElement = `
+//                 <div class="swiper-slide">
+//                     <div class="posts-card-show-post-img">
+//                         <video controls>
+//                             <source src="${media}" type="video/mp4" muted>
+//                             Your browser does not support the video tag.
+//                         </video>
+//                     </div>
+//                 </div>
+//             `;
+//             } else {
+//                 // Otherwise, treat it as an image
+//                 mediaElement = `
+//                 <div class="swiper-slide">
+//                     <div class="posts-card-show-post-img">
+//                         <img src="${media}" alt="Media"  />
+//                     </div>
+//                 </div>
+//             `;
+//             }
+
+//             swiperWrapper.append(mediaElement);
+//         });
+//     }
+//     // swiper.destroy(true, true);
+//     // console.log(rawData.length);
+
+//     if (rawData.length > 1) {
+//         swiperWrapper.removeClass("hideswipe");
+
+//         // swiper.destroy(true, true);
+//         document.getElementsByClassName(
+//             "swiper-button-next"
+//         )[0].style.display = "flex";
+//         document.getElementsByClassName(
+//             "swiper-button-prev"
+//         )[0].style.display = "flex";
+//         swiper = new Swiper(".photo-detail-slider", {
+//             slidesPerView: 1,
+//             spaceBetween: 30,
+//             navigation: {
+//                 nextEl: ".swiper-button-next",
+//                 prevEl: ".swiper-button-prev",
+//             },
+//         });
+//         $(".swiper-button-next").show();
+//         $(".swiper-button-prev").show();
+//     } else {
+//         swiperWrapper.addClass("hideswipe");
+//         // swiper.destroy(true, true);
+//         document.getElementsByClassName(
+//             "swiper-button-next"
+//         )[0].style.display = "none";
+//         document.getElementsByClassName(
+//             "swiper-button-prev"
+//         )[0].style.display = "none";
+//         swiper = new Swiper(".photo-detail-slider", {
+//             slidesPerView: 1,
+//             spaceBetween: 30,
+
+//             loop: false, // 🔹 Ensure looping is disabled
+//         });
+//         $(".swiper-button-next").hide();
+//         $(".swiper-button-prev").hide();
+
+//     }
+//     //let parentId = null;  // Default to null, assuming no parent
+
+//     // if ($('.commented-user-wrp').length > 0) {
+//     //     // If this is a reply button, get the parent ID from the closest .commented-user-wrp element
+//     //     parentId = $('.commented-user-wrp').data('parent-id');  // Assuming `data-parent-id` holds the parent_id
+//     // }
+//     // console.log(parentId);
+//     var url;
+
+//     url = base_url + "event_photo/fetch-photo-details";
+//     $("#host_display").text("");
+
+//     $("#host_display").hide();
+//     $.ajax({
+//         url: url, // Update with your server-side endpoint
+//         type: "POST", // Use GET or POST depending on your API
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: { id: postId, event_id: eventId },
+//         success: function (response) {
+//             const dataArray = response.data; // This is an array
+//             console.log(response);
+
+//             if (Array.isArray(dataArray) && dataArray.length > 0) {
+//                 const data = dataArray[0]; // Access the first object in the array
+
+//                 // Profile Image
+
+//                 const profileImage =
+//                     data.profile ||
+//                     generateProfileImage(data.firstname, data.lastname);
+//                 console.log("Profile Image URL:", profileImage);
+//                 // Check if profileImage is an image URL or HTML content
+//                 if (
+//                     profileImage.startsWith("http") ||
+//                     profileImage.startsWith("data:image")
+//                 ) {
+//                     // If it's a valid image URL, set it as the src of the image tag
+//                     $(".posts-card-head-left-img").html(
+//                         `<img src="${profileImage}" alt="Profile Image">`
+//                     );
+//                 } else {
+//                     // If it's a placeholder (HTML content), insert it directly inside the div
+//                     $(".posts-card-head-left-img").html(profileImage);
+//                 }
+
+//                 const post = {
+//                     id: postId,
+//                     reactionList: data.reactionList,
+//                     self_reaction: data.self_reaction,
+//                     total_likes: data.total_likes,
+//                 };
+
+//                 function generateProfileImage(firstname, lastname) {
+//                     const firstInitial = firstname
+//                         ? firstname[0].toUpperCase()
+//                         : "";
+//                     const secondInitial = lastname
+//                         ? lastname[0].toUpperCase()
+//                         : "";
+//                     const initials = `${firstInitial}${secondInitial}`;
+//                     const fontColor = `fontcolor${firstInitial}`;
+
+//                     // Return initials inside an h5 tag with dynamic styling
+//                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
+//                 }
+//                 // Host Label Condition
+//                 if (data.is_host == "1") {
+//                     const host = `${data.is_host}`;
+//                     $("#host_display").show();
+//                     $("#host_display").text("Host");
+//                     $("#host_display").addClass("host");
+//                 }
+//                 if (data.is_co_host == "1") {
+//                     $("#host_display").show();
+//                     const co_host = `${data.is_co_host}`;
+//                     $("#host_display").text("co_host");
+//                     $("#host_display").addClass("host");
+//                 }
+//                 // const login_user_id = $("#login_user_id").val();
+//                 // $("#report_btn").show();
+
+//                 // if (data.user_id == login_user_id) {
+//                 //     $("#report_btn").hide();
+//                 // }
+//                 let messageLink = $(".message-link");
+//                 let encrypted_id = data.encrypted_id;
+//                 if (encrypted_id) {
+//                     let messageRoute = `/messages/${encrypted_id}`;
+//                     messageLink.attr("href", messageRoute);
+//                 }
+
+//                 if (data.user_id == login_user_id) {
+//                     $(".message-link").addClass('d-none');
+
+
+//                 }
+//                 if (data.user_id != login_user_id) {
+//                     $(".message-link").removeClass('d-none');
+
+
+//                 }
+
+//                 $(".likeModel")
+//                     .data("event-id", data.event_id)
+//                     .data("event-post-id", data.id);
+//                 // Name
+//                 const fullName = `${data.firstname} ${data.lastname}`;
+//                 $("#post_name").text(fullName);
+
+//                 // Location
+//                 const location =
+//                     data.location.trim() !== "" ? data.location : "";
+//                 $("#location").text(location);
+
+//                 // Post Message
+//                 $("#post_message").text(data.post_message);
+//                 $("#post_time_details").text(data.post_time);
+
+//                 const reactionVal = data.reactionList.forEach((that) => { });
+
+//                 // $("#likeCount").text(data.total_likes + " Likes");
+//                 // Add 'Likes' after the number
+//                 $("#comments").text(data.total_comments + " Comments");
+
+//                 console.log("Self Reaction:", data.self_reaction); // Debugging
+//                 console.log(typeof data.self_reaction); // Output: string
+
+//                 var reaction_store = data.self_reaction.trim();
+
+//                 console.log(reaction_store);
+
+//                 let reactionImageHtml = $("#likeButtonModel");
+//                 console.log(reactionImageHtml);
+
+//                 if (reactionIcons[reaction_store]) {
+//                     console.log(reactionIcons[reaction_store]);
+
+//                     reactionImageHtml = `<img src="${reactionIcons[reaction_store]}" alt="">`;
+//                 } else {
+//                     // If reaction_store is not found, show a default icon
+//                     reactionImageHtml = `<i class="fa-regular fa-heart"></i>`;
+//                 }
+//                 $(`#likeButtonModel`).html(reactionImageHtml);
+//                 let reaction_list = response.reactionList;
+//                 //    reaction_list.each(function () {
+
+//                 //     $(`#reactionImage`).html(reactionIcons[reaction_store]);
+//                 //    });
+
+//                 document.getElementById("postCardEmoji").innerHTML =
+//                     renderReactions(post);
+//                 // Update the emoji list based on the reaction
+//                 const reactionList = $(".post_model ul");
+
+//                 reactionList.find("li").each(function () {
+//                     const img = $(this).find("img");
+//                     if (img.length) {
+//                         const emojiSrc = img.attr("src");
+//                         console.log("Reaction Store:", reaction_store);
+//                         console.log("Emoji Src:", emojiSrc);
+
+//                         // Define emojis with exact matching Unicode and image source
+//                         const heartUnicode = "\u{2764}"; //
+//                         const smileUnicode = "\u{1F60D}"; //
+//                         const clapUnicode = "\u{1F44F}"; //
+
+//                         $(this).removeClass("photo_emoji").show();
+
+//                         // Hide and select the correct emoji based on the reaction_store
+//                         if (
+//                             reaction_store === heartUnicode &&
+//                             emojiSrc.includes("heart-emoji.png")
+//                         ) {
+//                             console.log("Heart emoji photo_emoji");
+//                             $(this).addClass("photo_emoji");
+//                         } else if (
+//                             reaction_store === smileUnicode &&
+//                             emojiSrc.includes("smily-emoji.png")
+//                         ) {
+//                             console.log("Smile emoji photo_emoji");
+//                             $(this).addClass("photo_emoji");
+//                         } else if (
+//                             reaction_store === clapUnicode &&
+//                             emojiSrc.includes("clap-icon.png")
+//                         ) {
+//                             console.log("Clap emoji photo_emoji");
+//                             $(this).addClass("photo_emoji");
+//                         } else {
+//                             $(this).hide(); // Hide non-matching emojis
+//                             console.log("No matching emoji found");
+//                         }
+//                     } else {
+//                         console.log("No img tag found in this li element.");
+//                     }
+//                 });
+
+//                 // Make sure you update the reactions after filtering them
+//                 updateReactions(data.reactionList);
+
+//                 const commentsWrapper = $(
+//                     ".posts-card-show-all-comments-inner ul"
+//                 );
+//                 commentsWrapper.empty(); // Clear existing comments
+
+//                 if (
+//                     data.latest_comment &&
+//                     Array.isArray(data.latest_comment)
+//                 ) {
+//                     data.latest_comment.forEach((comment) => {
+//                         let parentCommentId = comment.id;
+//                         let displayName = comment.profile
+//                             ? `<img src="${comment.profile}" alt="User Profile" class="profile-image">`
+//                             : generatePlaceholderName(comment.username);
+
+//                         commentsWrapper.append(`
+//                         <li class="commented-user-wrp wall_replay_wrp" data-comment-id="${comment.id
+//                             }">
+
+//                             <div class="commented-user-head">
+//                                 <div class="commented-user-profile">
+//                                     <div class="commented-user-profile-img">
+//                                     ${displayName}
+//                                     </div>
+//                                     <div class="commented-user-profile-content">
+//                                         <h3>${comment.username || ""}</h3>
+//                                         <p>${comment.location || ""}</p>
+//                                     </div>
+//                                 </div>
+//                                 <div class="posts-card-like-comment-right">
+//                                     <p>${comment.posttime || ""}</p>
+//                                     <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+//                             }" data-user-id="${login_user_id}">
+//                             ${comment.is_like == 1
+//                                 ? '<i class="fa-solid fa-heart"></i>'
+//                                 : '<i class="fa-regular fa-heart"></i>'
+//                             }
+//                                     </button>
+//                                 </div>
+//                             </div>
+//                             <div class="commented-user-content">
+//                                 <p>${comment.comment || ""}</p>
+//                             </div>
+//                             <div class="commented-user-reply-wrp">
+//                                 <div class="position-relative d-flex align-items-center gap-2">
+//                                      <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+//                             }" data-user-id="${login_user_id}">
+//                                ${comment.is_like == 1
+//                                 ? '<i class="fa-solid fa-heart"></i>'
+//                                 : '<i class="fa-regular fa-heart"></i>'
+//                             }
+//                                 </button>
+//                                     <p id="commentTotalLike_${comment.id
+//                             }">${comment.comment_total_likes || 0
+//                             }</p>
+//                                 </div>
+//                                 <button class="wall_model_replay" data-comment-id="${comment.id
+//                             }">Reply</button>
+//                             </div>
+//                          <ul class="wall_comment_replay_append"></ul>
+//                         </li>
+
+//                     `);
+
+//                         if (
+//                             comment.comment_replies &&
+//                             comment.comment_replies.length > 0
+//                         ) {
+//                             comment.comment_replies.forEach(function (
+//                                 reply
+//                             ) {
+//                                 let displayName = reply.profile
+//                                     ? `<img src="${reply.profile}" alt="User Profile" class="profile-image">`
+//                                     : generatePlaceholderName(
+//                                         reply.username
+//                                     );
+//                                 const replyHTML = `
+
+//                                     <div class="commented-user-head">
+//                                         <div class="commented-user-profile">
+//                                             <div class="commented-user-profile-img">
+//                                             ${displayName}
+//                                             </div>
+//                                             <div class="commented-user-profile-content">
+//                                                 <h3>${reply.username}</h3>
+//                                                 <p>${reply.location || ""}</p>
+//                                             </div>
+//                                         </div>
+//                                         <div class="posts-card-like-comment-right">
+//                                             <p>${reply.posttime || "Just now"}</p>
+//                                             <button class="posts-card-like-btn">
+
+//                                              ${reply.is_like == 1
+//                                         ? '<i class="fa-solid fa-heart"></i>'
+//                                         : '<i class="fa-regular fa-heart"></i>'
+//                                     }</button>
+//                                         </div>
+//                                     </div>
+//                                     <div class="commented-user-content">
+//                                         <p>${reply.comment || "No content"}</p>
+//                                     </div>
+//                                     <div class="commented-user-reply-wrp">
+//                                         <div class="position-relative d-flex align-items-center gap-2">
+//                                             <button class="posts-card-like-btn">
+//                                              ${reply.is_like == 1
+//                                         ? '<i class="fa-solid fa-heart"></i>'
+//                                         : '<i class="fa-regular fa-heart"></i>'
+//                                     }</button>
+//                                             <p>${reply.comment_total_likes || 0}</p>
+//                                         </div>
+//                                         <button class="wall_model_replay" data-comment-id="${reply.id
+//                                     }">Reply</button>
+//                                     </div>
+//                                 `;
+//                                 const li = document.createElement("li");
+//                                 li.className = "wall_replay";
+//                                 li.setAttribute(
+//                                     "data-comment-id",
+//                                     reply.id
+//                                 );
+//                                 li.innerHTML = replyHTML; // Convert HTML string to actual HTML
+
+//                                 // Find all existing comments
+//                                 let comments =
+//                                     document.getElementsByClassName(
+//                                         "wall_replay"
+//                                     );
+//                                 console.log(comments);
+//                                 // Convert HTMLCollection to an array and find the target comment
+
+//                                 const comment = Array.from(comments).find(
+//                                     (el) =>
+//                                         el.dataset.commentId ===
+//                                         parentCommentId
+//                                 );
+
+//                                 if (comment) {
+//                                     console.log("Found comment:", comment);
+
+//                                     // Find the previous sibling (the comment before this one)
+//                                     let previousComment =
+//                                         comment.previousElementSibling;
+//                                     if (!previousComment) {
+//                                         $(comment).parent().prepend(li);
+//                                     }
+
+//                                     // Loop until we find the nearest previous <ul> with class "primary-comment-replies"
+//                                     while (previousComment) {
+//                                         let parentUl =
+//                                             previousComment.closest(
+//                                                 ".wall_comment_replay_append"
+//                                             );
+//                                         if (parentUl) {
+//                                             console.log(
+//                                                 "Found the ul:",
+//                                                 parentUl
+//                                             );
+//                                             parentUl.prepend(li); // Append the new comment properly
+
+//                                             // 🔥 Update the comments list to include the newly added <li>
+//                                             comments =
+//                                                 document.getElementsByClassName(
+//                                                     "wall_replay"
+//                                                 );
+
+//                                             console.log(
+//                                                 "Updated comments list:",
+//                                                 comments
+//                                             );
+//                                             break;
+//                                         }
+//                                         previousComment =
+//                                             previousComment.previousElementSibling;
+//                                     }
+//                                 } else {
+//                                     let comments =
+//                                         document.getElementsByClassName(
+//                                             "wall_replay_wrp"
+//                                         );
+//                                     let comment = Array.from(comments).find(
+//                                         (el) => {
+//                                             console.log(
+//                                                 el.dataset.commentId
+//                                             );
+//                                             console.log(parentCommentId);
+//                                             //  el.dataset.commentId ===
+//                                             // parentCommentId
+//                                             if (
+//                                                 el.dataset.commentId ==
+//                                                 parentCommentId
+//                                             ) {
+//                                                 return el;
+//                                             }
+//                                         }
+//                                     );
+//                                     if (comment) {
+//                                         console.log(comment);
+//                                         const parentUl = $(".wall_comment_replay_append");
+//                                         console.log(parentUl);
+//                                         if (parentUl.length) {
+//                                             console.log(
+//                                                 "Found primary-comment-replies under commented-user-wrp, prepending the new comment."
+//                                             );
+
+//                                             parentUl.prepend($(li));
+
+
+//                                             // Insert new comment as the first <li> under the current comment's <ul>
+//                                             return;
+//                                         }
+//                                     }
+//                                 }
+//                             });
+//                         }
+//                     });
+//                 }
+//                 function generatePlaceholderName(username) {
+//                     const nameParts = username.split(" ");
+//                     const firstInitial =
+//                         nameParts[0]?.[0]?.toUpperCase() || "";
+//                     const secondInitial =
+//                         nameParts[1]?.[0]?.toUpperCase() || "";
+//                     const initials = `${firstInitial}${secondInitial}`;
+//                     const fontColor = `fontcolor${firstInitial}`;
+//                     // Return initials inside an h5 tag with dynamic styling
+//                     return `<h5 class="${fontColor} font_name">${initials}</h5>`;
+//                 }
+//             } else {
+//                 console.log("No data found in the array.");
+//             }
+//         },
+//     });
+
+//     function updateReactions(reactions) {
+//         const emojiPaths = {
+//             heart: "/assets/front/img/heart-emoji.png",
+//             thumb: "/assets/front/img/thumb-icon.png",
+//             smily: "/assets/front/img/smily-emoji.png",
+//             "eye-heart": "/assets/front/img/eye-heart-emoji.png",
+//             clap: "/assets/front/img/clap-icon.png",
+//         };
+
+//         const allReactionsList = $("#nav-all-reaction ul");
+//         const heartReactionsList = $("#nav-heart-reaction ul");
+//         const thumbReactionsList = $("#nav-thumb-reaction ul");
+//         const smilyReactionsList = $("#nav-smily-reaction ul");
+//         const eyeHeartReactionsList = $("#nav-eye-heart-reaction ul");
+//         const clapReactionsList = $("#nav-clap-reaction ul");
+
+//         const reactionCounts = {
+//             heart: 0,
+//             thumb: 0,
+//             smily: 0,
+//             "eye-heart": 0,
+//             clap: 0,
+//         };
+
+//         // Clear all reaction lists
+//         allReactionsList.empty();
+//         heartReactionsList.empty();
+//         thumbReactionsList.empty();
+//         smilyReactionsList.empty();
+//         eyeHeartReactionsList.empty();
+//         clapReactionsList.empty();
+
+//         reactions.forEach((reactionData) => {
+//             let reactionType = "";
+//             let emojiSrc = "";
+
+//             // Extract user details from the reaction object
+//             const { reaction, firstname, lastname, profile, location } =
+//                 reactionData;
+//             // Map each reaction to a type
+//             switch (reaction) {
+//                 case "\\u{2764}": // Heart
+//                     reactionType = "heart";
+//                     break;
+//                 case "\\u{1F44D}": // Thumbs Up
+//                     reactionType = "thumb";
+//                     break;
+//                 case "\\u{1F60A}": // Smiley
+//                     reactionType = "smily";
+//                     break;
+//                 case "\\u{1F60D}": // Eye-Heart
+//                     reactionType = "eye-heart";
+//                     break;
+//                 case "\\u{1F44F}": // Clap
+//                     reactionType = "clap";
+//                     break;
+//                 default:
+//                     console.warn(`Unknown reaction: ${reaction}`);
+//                     return; // Skip unknown reactions
+//             }
+
+//             // Increment the reaction count
+//             reactionCounts[reactionType]++;
+
+//             // Get the emoji image source
+//             emojiSrc = emojiPaths[reactionType];
+//             const profileContent =
+//                 profile && profile !== ""
+//                     ? `<img src="${profile}" alt="">`
+//                     : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
+//                     }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
+//                     }</h5>`;
+//             // Create reaction list item
+//             const reactionItem = `<li class="reaction-info-wrp">
+//                                 <div class="commented-user-head">
+//                                     <div class="commented-user-profile">
+//                                         <div class="commented-user-profile-img">
+//                                         ${profileContent}
+//                                         </div>
+//                                         <div class="commented-user-profile-content">
+//                                               <h3>${firstname} ${lastname}</h3>
+
+
+//                                         </div>
+//                                     </div>
+//                                     <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+//                                         <img src="${emojiSrc}" alt="">
+//                                     </div>
+//                                 </div>
+//                               </li>`;
+
+//             // Append to specific reaction list
+//             if (reactionType === "heart") {
+//                 heartReactionsList.append(reactionItem);
+//             } else if (reactionType === "thumb") {
+//                 thumbReactionsList.append(reactionItem);
+//             } else if (reactionType === "smily") {
+//                 smilyReactionsList.append(reactionItem);
+//             } else if (reactionType === "eye-heart") {
+//                 eyeHeartReactionsList.append(reactionItem);
+//             } else if (reactionType === "clap") {
+//                 clapReactionsList.append(reactionItem);
+//             }
+
+//             // Append the same item to "All Reactions" list
+//             console.log("Appending to All Reactions:", reactionItem);
+//             allReactionsList.append(reactionItem);
+//         });
+
+//         // Update the counts in the navigation tabs
+//         const totalReactions = Object.values(reactionCounts).reduce(
+//             (sum, count) => sum + count,
+//             0
+//         );
+//         $("#nav-all-reaction-tab").html(`All ${totalReactions}`);
+//         $("#nav-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["heart"]}" alt=""> ${reactionCounts.heart}`
+//         );
+//         $("#nav-thumb-reaction-tab").html(
+//             `<img src="${emojiPaths["thumb"]}" alt=""> ${reactionCounts.thumb}`
+//         );
+//         $("#nav-smily-reaction-tab").html(
+//             `<img src="${emojiPaths["smily"]}" alt=""> ${reactionCounts.smily}`
+//         );
+//         $("#nav-eye-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["eye-heart"]}" alt=""> ${reactionCounts["eye-heart"]}`
+//         );
+//         $("#nav-clap-reaction-tab").html(
+//             `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
+//         );
+//     }
+// });
+// $(".show-comments-btn").click(function () {
+//     $(".model_comment").toggleClass("d-none");
+//     $("#detail-photo-modal .modal-content").toggleClass("active")
+// });
+// $(".show-comment-reply-btn").click(function () {
+//     $(".reply-on-comment").toggleClass("d-none");
+// });
+// $(document).on("click", "#likeButtonModel", function () {
+//     console.log("asd");
+//     setTimeout(function () {
+//         $("#emojiDropdown1").show();
+//         console.log("asd");
+//     }, 1000);
+
+//     $("#emojiDropdown1").css("display", "block");
+//     console.log($("#emojiDropdown1"));
+// });
+// $(".posts-card-like-comment-right").each(function () {
+//     const $container = $(this); // Get the current container
+//     const $likeButton = $container.find(".posts-card-like-btn"); // Find the like button within the container
+//     const $emojiDropdown = $container.find(".photos-likes-options-wrp"); // Find the emoji dropdown within the container
+
+
+//     $emojiDropdown.on("click", ".emoji", function () {
+//         const emoji = $(this).data("emoji");
+
+//         // Remove the heart icon and set emoji inside the button
+//         $likeButton.html(`<img src='${reactionIcons[emoji]}'/>`); // Show selected emoji inside button
+
+//         $emojiDropdown.hide(); // Hide emoji dropdown after selection
+//     });
+
+
+// });
+// $(document).on("click", "#emojiDropdown1 .model_emoji", function () {
+//     const selectedEmoji = $(this).data("emoji");
+//     const button = $(this).closest(".emoji_set").find("#likeButtonModel");
+//     const emojiDisplay = button.find("#show_comment_emoji");
+//     const eventId = button.data("event-id");
+//     const eventPostId = button.data("event-post-id");
+//     const button_main = $("#likeButton_" + eventPostId);
+//     console.log(selectedEmoji);
+
+//     // Replace heart icon with selected emoji
+//     emojiDisplay.removeClass();
+//     emojiDisplay.text(selectedEmoji);
+
+//     // AJAX call to update emoji reaction
+
+//     console.log(eventId, eventPostId);
+//     console.log(eventPostId);
+//     $.ajax({
+//         url: base_url + "event_photo/userPostLikeDislike",
+//         method: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         contentType: "application/json",
+//         data: JSON.stringify({
+//             event_id: eventId,
+//             event_post_id: eventPostId,
+//             reaction: selectedEmoji,
+//         }),
+//         success: function (response) {
+//             if (response.status === 1) {
+//                 console.log(response.reactionList);
+
+//                 // const post = {
+//                 //     id: eventPostId,
+//                 //     reactionList: response.reactionList,
+//                 //     // self_reaction: response.self_reaction,
+//                 //     total_likes: response.count
+//                 // };
+//                 // document.getElementById("postCardEmoji").innerHTML = renderReactions(post);
+//                 let reactionImageHtml = "";
+//                 if (response.is_reaction == "1") {
+//                     // ✅ User has liked the post, update the reaction image
+//                     console.log("Like given, updating reaction image...");
+//                     if (reactionIcons[selectedEmoji]) {
+//                         console.log(reactionIcons[selectedEmoji]);
+//                         reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                     }
+//                     button.addClass("liked"); // Add liked class
+//                 } else {
+//                     // ✅ User has removed like, set the first reaction from response
+//                     console.log(
+//                         "Like removed , updating first available reaction..."
+//                     );
+//                     if (response.reactionList.length > 0) {
+//                         let firstReaction =
+//                             response.reactionList[0].reaction; // ✅
+//                         if (firstReaction.startsWith("\\u{")) {
+//                             firstReaction = String.fromCodePoint(
+//                                 parseInt(
+//                                     firstReaction.replace(/\\u{|}/g, ""),
+//                                     16
+//                                 )
+//                             );
+//                         }
+//                         if (reactionIcons[selectedEmoji]) {
+//                             reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                         } else {
+//                             console.log({ firstReaction });
+//                             console.log(reactionIcons[firstReaction]);
+//                             //let reaction = "\u{2764}";
+//                             reactionImageHtml = `<img src="${reactionIcons[selectedEmoji]}" alt="Reaction Emoji">`;
+//                         }
+//                     }
+//                     button.removeClass("liked"); // Remove liked class
+//                     button.html(
+//                         '<i class="fa-regular fa-heart" id="show_Emoji"></i>'
+//                     );
+//                 }
+
+//                 button_main.html(reactionImageHtml);
+//                 $(`#reactionImage_model_${eventPostId}`).html(
+//                     reactionImageHtml
+//                 );
+//                 $(`#reactionImage_${eventPostId}`).html(reactionImageHtml);
+
+//                 $(`#like_${eventPostId}`).text(`${response.count} Likes`);
+//                 $(`#likeCount_${eventPostId}`).text(
+//                     `${response.count} Likes`
+//                 );
+//                 updateReactions(response.reactionList);
+//             } else {
+//                 alert(response.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             console.error(xhr.responseText);
+//             alert("An error occurred. Please try again.");
+//         },
+//     });
+//     function updateReactions(reactions) {
+//         const emojiPaths = {
+//             heart: "/assets/front/img/heart-emoji.png",
+//             thumb: "/assets/front/img/thumb-icon.png",
+//             smily: "/assets/front/img/smily-emoji.png",
+//             "eye-heart": "/assets/front/img/eye-heart-emoji.png",
+//             clap: "/assets/front/img/clap-icon.png",
+//         };
+
+//         const allReactionsList = $("#nav-all-reaction ul");
+//         const heartReactionsList = $("#nav-heart-reaction ul");
+//         const thumbReactionsList = $("#nav-thumb-reaction ul");
+//         const smilyReactionsList = $("#nav-smily-reaction ul");
+//         const eyeHeartReactionsList = $("#nav-eye-heart-reaction ul");
+//         const clapReactionsList = $("#nav-clap-reaction ul");
+
+//         const reactionCounts = {
+//             heart: 0,
+//             thumb: 0,
+//             smily: 0,
+//             "eye-heart": 0,
+//             clap: 0,
+//         };
+
+//         // Clear all reaction lists
+//         allReactionsList.empty();
+//         heartReactionsList.empty();
+//         thumbReactionsList.empty();
+//         smilyReactionsList.empty();
+//         eyeHeartReactionsList.empty();
+//         clapReactionsList.empty();
+
+//         reactions.forEach((reactionData) => {
+//             let reactionType = "";
+//             let emojiSrc = "";
+
+//             // Extract user details from the reaction object
+//             const { reaction, firstname, lastname, profile, location } =
+//                 reactionData;
+//             // Map each reaction to a type
+//             switch (reaction) {
+//                 case "\\u{2764}": // Heart
+//                     reactionType = "heart";
+//                     break;
+//                 case "\\u{1F44D}": // Thumbs Up
+//                     reactionType = "thumb";
+//                     break;
+//                 case "\\u{1F60A}": // Smiley
+//                     reactionType = "smily";
+//                     break;
+//                 case "\\u{1F60D}": // Eye-Heart
+//                     reactionType = "eye-heart";
+//                     break;
+//                 case "\\u{1F44F}": // Clap
+//                     reactionType = "clap";
+//                     break;
+//                 default:
+//                     console.warn(`Unknown reaction: ${reaction}`);
+//                     return; // Skip unknown reactions
+//             }
+
+//             // Increment the reaction count
+//             reactionCounts[reactionType]++;
+
+//             // Get the emoji image source
+//             emojiSrc = emojiPaths[reactionType];
+//             const profileContent =
+//                 profile && profile !== ""
+//                     ? `<img src="${profile}" alt="">`
+//                     : `<h5 class="fontcolor${firstname ? firstname[0].toUpperCase() : ""
+//                     }">${firstname ? firstname[0].toUpperCase() : ""}${lastname ? lastname[0].toUpperCase() : ""
+//                     }</h5>`;
+//             // Create reaction list item
+//             const reactionItem = `<li class="reaction-info-wrp">
+//                                     <div class="commented-user-head">
+//                                         <div class="commented-user-profile">
+//                                             <div class="commented-user-profile-img">
+//                                             ${profileContent}
+//                                             </div>
+//                                             <div class="commented-user-profile-content">
+//                                                   <h3>${firstname} ${lastname}</h3>
+
+
+//                                             </div>
+//                                         </div>
+//                                         <div class="posts-card-like-comment-right reaction-profile-reaction-img">
+//                                             <img src="${emojiSrc}" alt="">
+//                                         </div>
+//                                     </div>
+//                                   </li>`;
+
+//             // Append to specific reaction list
+//             if (reactionType === "heart") {
+//                 heartReactionsList.append(reactionItem);
+//             } else if (reactionType === "thumb") {
+//                 thumbReactionsList.append(reactionItem);
+//             } else if (reactionType === "smily") {
+//                 smilyReactionsList.append(reactionItem);
+//             } else if (reactionType === "eye-heart") {
+//                 eyeHeartReactionsList.append(reactionItem);
+//             } else if (reactionType === "clap") {
+//                 clapReactionsList.append(reactionItem);
+//             }
+
+//             // Append the same item to "All Reactions" list
+//             console.log("Appending to All Reactions:", reactionItem);
+//             allReactionsList.append(reactionItem);
+//         });
+
+//         // Update the counts in the navigation tabs
+//         const totalReactions = Object.values(reactionCounts).reduce(
+//             (sum, count) => sum + count,
+//             0
+//         );
+//         $("#nav-all-reaction-tab").html(`All ${totalReactions}`);
+//         $("#nav-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["heart"]}" alt=""> ${reactionCounts.heart}`
+//         );
+//         $("#nav-thumb-reaction-tab").html(
+//             `<img src="${emojiPaths["thumb"]}" alt=""> ${reactionCounts.thumb}`
+//         );
+//         $("#nav-smily-reaction-tab").html(
+//             `<img src="${emojiPaths["smily"]}" alt=""> ${reactionCounts.smily}`
+//         );
+//         $("#nav-eye-heart-reaction-tab").html(
+//             `<img src="${emojiPaths["eye-heart"]}" alt=""> ${reactionCounts["eye-heart"]}`
+//         );
+//         $("#nav-clap-reaction-tab").html(
+//             `<img src="${emojiPaths["clap"]}" alt=""> ${reactionCounts.clap}`
+//         );
+//     }
+//     // Hide emoji picker
+//     $(this).closest("#emojiDropdown1").hide();
+
+//     // Define visibility options
+
+//     // Dynamically set the hidden values in the forms
+//     $("form").on("submit", function () {
+//         // Fetch the visibility and commenting status to update the form's hidden inputs before submission
+//         const visibility =
+//             $('input[name="post_privacy"]:checked').val() || "1"; // Default to Everyone if null
+//         const allowComments = $("#allowComments").is(":checked")
+//             ? "1"
+//             : "0";
+
+//         // Dynamically update hidden inputs in the respective forms
+//         $("#hiddenVisibility").val(visibility);
+//         $("#hiddenAllowComments").val(allowComments);
+//     });
+// });
+
+

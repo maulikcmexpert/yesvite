@@ -799,7 +799,7 @@ class EventController extends BaseController
                 })
                 ->orderBy('id', 'ASC')
                 ->get();
-        
+
                 $textdatatss = TextData::where('is_visible', 1)
                                 ->with('categories')
                                 ->with('subcategories')
@@ -821,7 +821,7 @@ class EventController extends BaseController
                                             ->pluck('subcategory_name')
                                             ->unique()
                                             ->implode(','),
-        
+
                                         'subcategory_id' => $textdata->subcategories
                                             ->pluck('id')
                                             ->unique()

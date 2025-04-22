@@ -19,72 +19,72 @@ $(document).ready(function () {
     }
     // let storedFiles = [];
     // Submit form on button click
-        $(document).on("click", ".create_post", function () {
-            // Check if the poll form exists and is valid
-            var $this = $(this); // Ca
-            var photoForm = $("#photoForm");
-            var textForm = $("#textform");
-            var photoInput = document.querySelector(".fileInputtype");
+    $(document).on("click", ".create_post", function () {
+        // Check if the poll form exists and is valid
+        var $this = $(this); // Ca
+        var photoForm = $("#photoForm");
+        var textForm = $("#textform");
+        var photoInput = document.querySelector(".fileInputtype");
 
-            var imagePreview = $("#imagePreview").children().length;
-            // Che
-            console.log(photoInput);
-            console.log(
-                "Photo Form:",
-                photoForm.length > 0 ? "Exists" : "Does not exist"
-            );
+        var imagePreview = $("#imagePreview").children().length;
+        // Che
+        console.log(photoInput);
+        console.log(
+            "Photo Form:",
+            photoForm.length > 0 ? "Exists" : "Does not exist"
+        );
 
-            if (photoForm.is(":visible") && photoForm.length > 0) {
-                if (photoInput.files.length === 0 && imagePreview === 0) {
-                    toastr.error(
-                        "Please upload a photo or enter some content for the photo post."
-                    );
-                    return;
-                }
-                const dataTransfer = new DataTransfer();
-                console.log(storedFiles);
-                storedFiles.forEach(file => dataTransfer.items.add(file));
-
-                // Create a new file input element and append to form
-                const newInput = document.createElement("input");
-                newInput.type = "file";
-                newInput.name = "files[]";
-                newInput.multiple = true;
-                newInput.files = dataTransfer.files;
-                newInput.style.display = "none";
-
-                photoForm.append(newInput);
-
-                // const input1 = document.getElementById("fileInput");
-                // const input2 = document.getElementById("fileInput2");
-                // if (!input1 || !input2) {
-                //     console.error("One or both file input elements are missing");
-                //     return;
-                // }
-
-                // const dataTransfer = new DataTransfer();
-
-                // for (let i = 0; i < input1.files.length; i++) {
-                //     dataTransfer.items.add(input1.files[i]);
-                // }
-
-                // for (let i = 0; i < input2.files.length; i++) {
-                //     dataTransfer.items.add(input2.files[i]);
-                // }
-
-                // input1.files = dataTransfer.files;
-                $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
-                photoForm.submit();
+        if (photoForm.is(":visible") && photoForm.length > 0) {
+            if (photoInput.files.length === 0 && imagePreview === 0) {
+                toastr.error(
+                    "Please upload a photo or enter some content for the photo post."
+                );
+                return;
             }
-            // If neither form exists, check for a plain text post
-            else if (textForm.length > 0 && postContent !== "") {
-                textForm.submit();
-            }
-            // If no valid content is provided, show an alert
-            else {
-                alert("Please fill all required fields before submitting.");
-            }
-        });
+            const dataTransfer = new DataTransfer();
+            console.log(storedFiles);
+            storedFiles.forEach(file => dataTransfer.items.add(file));
+
+            // Create a new file input element and append to form
+            const newInput = document.createElement("input");
+            newInput.type = "file";
+            newInput.name = "files[]";
+            newInput.multiple = true;
+            newInput.files = dataTransfer.files;
+            newInput.style.display = "none";
+
+            photoForm.append(newInput);
+
+            // const input1 = document.getElementById("fileInput");
+            // const input2 = document.getElementById("fileInput2");
+            // if (!input1 || !input2) {
+            //     console.error("One or both file input elements are missing");
+            //     return;
+            // }
+
+            // const dataTransfer = new DataTransfer();
+
+            // for (let i = 0; i < input1.files.length; i++) {
+            //     dataTransfer.items.add(input1.files[i]);
+            // }
+
+            // for (let i = 0; i < input2.files.length; i++) {
+            //     dataTransfer.items.add(input2.files[i]);
+            // }
+
+            // input1.files = dataTransfer.files;
+            $this.html('<div class="s-loader"><div></div><div></div><div></div><div></div></div>').prop("disabled", true);
+            photoForm.submit();
+        }
+        // If neither form exists, check for a plain text post
+        else if (textForm.length > 0 && postContent !== "") {
+            textForm.submit();
+        }
+        // If no valid content is provided, show an alert
+        else {
+            alert("Please fill all required fields before submitting.");
+        }
+    });
 
     // $(".posts-card-like-btn").on("click", function () {
     //     const icon = this.querySelector("i");
@@ -326,7 +326,7 @@ $(document).ready(function () {
             .closest(".reply-on-comment")
             .data("comment-id");
 
-        alert(commentId);
+        // alert(commentId);
         if (commentText === "") {
             alert("Please enter a comment");
             return;
@@ -581,7 +581,7 @@ $(document).ready(function () {
 
         const eventId = $(".likeModel").data("event-id"); // Or get this dynamically as needed
         const eventPostId = $(".likeModel").data("event-post-id");
-
+        var login_user_id = $("#login_user_id").val();
         let url;
         let data = {
             comment: commentText,
@@ -646,7 +646,7 @@ $(document).ready(function () {
                                 <div class="posts-card-like-comment-right">
                                     <p>${data.posttime}</p>
                                     <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="1">
+                        }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart"></i>
                                     </button>
                                 </div>
@@ -657,11 +657,11 @@ $(document).ready(function () {
                                 <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
                                     <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${data.id
-                        }" data-user-id="1">
+                        }" data-user-id="${login_user_id}">
                                     <i class="fa-regular fa-heart" id="show_Emoji"></i>
                                     </button>
                                     <p id="commentTotalLike_${data.id}">
-                                  1
+                                  0
                                     </p>
                                 </div>
                                 <button data-comment-id="${data.id
@@ -747,7 +747,7 @@ $(document).ready(function () {
                         const li = `<li class="commented-user-wrp" data-comment-id="${data.id}">
                         ${newCommentHTML}
                         <ul class="primary-comment-replies"></ul>
-                </li>`;
+                         </li>`;
                         // Append as a new top-level comment
                         const commentList = $(
                             `.posts-card-show-all-comments-wrp`
@@ -786,7 +786,14 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                          <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.id
+                                }" data-user-id="${login_user_id}">
+
+                        ${reply.is_like == 1
+                                    ? '<i class="fa-solid fa-heart"></i>'
+                                    : '<i class="fa-regular fa-heart"></i>'
+                                }
+                                    </button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
@@ -794,8 +801,12 @@ $(document).ready(function () {
                             </div>
                             <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                    <p>${reply.comment_total_likes || 0}</p>
+                                    <button class="posts-card-like-btn">
+                                    ${reply.is_like == 1
+                                    ? '<i class="fa-solid fa-heart"></i>'
+                                    : '<i class="fa-regular fa-heart"></i>'
+                                }</button>
+                                    <p>${reply.is_like || 0}</p>
                                 </div>
                                 <button class="commented-user-reply-btn">Reply</button>
                             </div>
@@ -962,8 +973,8 @@ $(document).ready(function () {
         }
 
         if ($(".selected_bulk_image:checked").length === 0) {
-              $('.selected-bulk-btn').css('display','none');
-            $('.set_emoji_like').css('display','flex');
+            $('.selected-bulk-btn').css('display', 'none');
+            $('.set_emoji_like').css('display', 'flex');
         }
         toggleBulkSelectWrapper(); // Update bulk selection UI
     });
@@ -1016,8 +1027,8 @@ $(document).ready(function () {
 
         bulkSelectActive = true;
 
-        $('.selected-bulk-btn').css('display','flex');
-        $('.set_emoji_like').css('display','none');
+        $('.selected-bulk-btn').css('display', 'flex');
+        $('.set_emoji_like').css('display', 'none');
 
         console.log("Bulk Select Mode Active:", bulkSelectActive);
 
@@ -1067,7 +1078,7 @@ $(document).ready(function () {
         $(".selected_bulk_image").prop("checked", false);
         $(".selected-bulk-btn").hide();
         bulkSelectActive = false;
-        $('.set_emoji_like').css('display','flex');
+        $('.set_emoji_like').css('display', 'flex');
 
         toggleBulkSelectWrapper();
     });
@@ -1116,7 +1127,7 @@ $(document).ready(function () {
         } else {
             alert("Image source not found.");
         }
-        $('.set_emoji_like').css('display','flex');
+        $('.set_emoji_like').css('display', 'flex');
 
     });
     $(document).on("click", ".bulk_delete", function () {
@@ -1160,7 +1171,7 @@ $(document).ready(function () {
                     bulkSelectActive = false;
                     $(".selected_bulk_image").prop("checked", false);
                     $(".selected-bulk-btn").hide();
-                    $('.set_emoji_like').css('display','flex');
+                    $('.set_emoji_like').css('display', 'flex');
                     toggleBulkSelectWrapper(); // Update UI
 
                     toastr.success("Selected posts deleted successfully.");
@@ -1185,7 +1196,7 @@ $(document).ready(function () {
             $("#detail-photo-modal").modal("hide");
             return;
         }
-
+        $(".model_comment").addClass("d-none");
         $("#detail-photo-modal").modal("show");
         const commentInput = $("#post_comment");
         commentInput.val("");
@@ -1254,7 +1265,7 @@ $(document).ready(function () {
                 },
             });
             $(".swiper-button-next").show();
-            $(".swiper-button-prev").show(); 
+            $(".swiper-button-prev").show();
         } else {
             swiperWrapper.addClass("hideswipe");
             // swiper.destroy(true, true);
@@ -1271,7 +1282,7 @@ $(document).ready(function () {
                 loop: false, // 🔹 Ensure looping is disabled
             });
             $(".swiper-button-next").hide();
-            $(".swiper-button-prev").hide(); 
+            $(".swiper-button-prev").hide();
         }
         //let parentId = null;  // Default to null, assuming no parent
 
@@ -1504,8 +1515,12 @@ $(document).ready(function () {
                                     </div>
                                     <div class="posts-card-like-comment-right">
                                         <p>${comment.posttime || ""}</p>
-                                        <button class="posts-card-like-btn">
-                                            <i class="fa-regular fa-heart"></i>
+                                        <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
+                                }" data-user-id="${login_user_id}">
+                                            ${comment.is_like == 1
+                                    ? '<i class="fa-solid fa-heart"></i>'
+                                    : '<i class="fa-regular fa-heart"></i>'
+                                }
                                         </button>
                                     </div>
                                 </div>
@@ -1516,10 +1531,13 @@ $(document).ready(function () {
                                     <div class="position-relative d-flex align-items-center gap-2">
                                          <button class="posts-card-like-btn" id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${comment.id
                                 }" data-user-id="${login_user_id}">
-                                    <i class="fa-regular fa-heart"></i>
+                                    ${comment.is_like == 1
+                                    ? '<i class="fa-solid fa-heart"></i>'
+                                    : '<i class="fa-regular fa-heart"></i>'
+                                }
                                     </button>
                                         <p id="commentTotalLike_${comment.id
-                                }">${comment.comment_total_likes || 0
+                                }">${comment.is_like || 0
                                 }</p>
                                     </div>
                                     <button class="commented-user-reply-btn" data-comment-id="${comment.id
@@ -1556,7 +1574,14 @@ $(document).ready(function () {
                                 </div>
                                 <div class="posts-card-like-comment-right">
                                     <p>${reply.posttime || "Just now"}</p>
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
+                                    <button class="posts-card-like-btn"id="CommentlikeButton" data-event-id="${eventId}" data-event-post-comment-id="${reply.id
+                                        }" data-user-id="${login_user_id}">
+
+                                ${reply.is_like == 1
+                                            ? '<i class="fa-solid fa-heart"></i>'
+                                            : '<i class="fa-regular fa-heart"></i>'
+                                        }
+                            </button>
                                 </div>
                             </div>
                             <div class="commented-user-content">
@@ -1564,8 +1589,12 @@ $(document).ready(function () {
                             </div>
                             <div class="commented-user-reply-wrp">
                                 <div class="position-relative d-flex align-items-center gap-2">
-                                    <button class="posts-card-like-btn"><i class="fa-regular fa-heart"></i></button>
-                                    <p>${reply.comment_total_likes || 0}</p>
+                                    <button class="posts-card-like-btn">
+                                    ${reply.is_like == 1
+                                    ? '<i class="fa-solid fa-heart"></i>'
+                                    : '<i class="fa-regular fa-heart"></i>'
+                                }</button>
+                                    <p>${reply.is_like || 0}</p>
                                 </div>
                                 <button class="commented-user-reply-btn" data-comment-id="${reply.id
                                         }">Reply</button>
@@ -2255,7 +2284,23 @@ $(document).ready(function () {
         //   })
         //   });
     });
+
+    $(".btn-close").on("click", function () {
+
+        $(".post_comment").val('');
+        $(".model_comment").addClass("d-none");
+
+        // Add `d-none` class back to hide the div
+    });
+
+    $(".modal").on("hidden.bs.modal", function () {
+
+        $(".model_comment").addClass("d-none");
+        $(".post_comment").val('');
+
+    });
 });
+
 $(document).ready(function () {
     const visibilityOptions = {
         1: "Everyone",

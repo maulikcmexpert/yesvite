@@ -2536,14 +2536,14 @@ class EventWallController extends BaseController
 
         $event_post_comment->save();
 
-        // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
-        //     'comment_id' => $event_post_comment->id
-        // ];
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request['event_id'],
+            'post_id' => $request['event_post_id'],
+            'comment_id' => $event_post_comment->id
+        ];
 
-        // sendNotification('comment_post', $notificationParam);
+        sendNotification('comment_post', $notificationParam);
 
 
 
@@ -2612,13 +2612,13 @@ class EventWallController extends BaseController
         $event_post_comment->save();
 
 
-        // $notificationParam = [
-        //     'sender_id' => $user->id,
-        //     'event_id' => $request['event_id'],
-        //     'post_id' => $request['event_post_id'],
-        //     'comment_id' => $event_post_comment->id
-        // ];
-        // sendNotification('reply_on_comment_post', $notificationParam);
+        $notificationParam = [
+            'sender_id' => $user->id,
+            'event_id' => $request['event_id'],
+            'post_id' => $request['event_post_id'],
+            'comment_id' => $event_post_comment->id
+        ];
+        sendNotification('reply_on_comment_post', $notificationParam);
 
         $replyList =   EventPostComment::with(['user', 'replies' => function ($query) {
             $query->withcount('post_comment_reaction', 'replies')->orderBy('id', 'DESC');

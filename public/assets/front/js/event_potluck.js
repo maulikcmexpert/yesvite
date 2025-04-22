@@ -113,8 +113,8 @@ $(document).ready(function () {
         if ($(this).val().trim() !== "") {
             errorDiv.innerText = "";
         }
-    }); 
-    
+    });
+
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
@@ -122,13 +122,14 @@ $(document).ready(function () {
         const description = $("#text1").val();
         // if(description==""){
         //     toastr.error('please enter category item name')
-        //     return 
+        //     return
         // }
         if (description === "") {
-            const errorDiv = document.getElementById('description-error'); 
+            const errorDiv = document.getElementById('description-error');
             errorDiv.innerText = "Please enter category item name";
             return;
         }
+
         const self_bring_item =
             $('input[name="self_bring_item"]:checked').length > 0 ? 1 : 0;
         let quantity = $('input[name="sub_quantity"]').val();
@@ -343,7 +344,7 @@ $(document).on("click", ".minus", function () {
     input.val(newValue).trigger("change");
     $("#newQuantity_" + item_id).val(newValue);
 
-    
+
 //     let categoryCount= $(".category-count-"+categoryKey).text();
 //    const totalcategoryQnt = parseInt(categoryCount) - 1
 //     $(".category-count-"+categoryKey).text(totalcategoryQnt).trigger("change");
@@ -643,11 +644,11 @@ function updateTOP(categoryIndex) {
         console.log({ inputQty });
         let innerUserQnt = $(`.innerUserQnt-${i}-${categoryIndex}`).val() || 0;
         console.log({ innerUserQnt });
-        
+
         if (innerUserQnt && parseInt(innerUserQnt) >= 0) {
             inputQty = inputQty + parseInt(innerUserQnt);
         }
-        totalcount += inputQty 
+        totalcount += inputQty
         console.log({ inputQty });
 
         if (inputQty < requiredQty) {
@@ -720,7 +721,7 @@ $(document).on('click','#selfBringItem',function(){
         $('#self_bring_qty').val(1);
         $('#sub_quantity').val(1);
     }else{
-        
+
         $("#self_bring_quantity_toggle").hide();
         $('#self_bring_qty').val(0);
 
@@ -765,7 +766,7 @@ function clearError(input = null) {
         return;
     }
 
-   
+
 
     const id = input.id;
 
@@ -806,5 +807,5 @@ function clearError(input = null) {
         // Add cases for other fields as needed
     }
 
-    
+
 }

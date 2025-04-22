@@ -31,7 +31,7 @@
                             <span class="wall-add-story-btn">
                                 <input type="file" id="story-upload-{{ $users->id }}" class="file-input"
                                     accept="image/*,video/*" onchange="previewStoryImage(event, {{ $users->id }})"
-                                    multiple>
+                                    >
                                 <i class="fa-solid fa-circle-plus"
                                     onclick="document.getElementById('story-upload-{{ $users->id }}').click()"></i>
                             </span>
