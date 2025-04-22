@@ -144,7 +144,7 @@ $(document).ready(function () {
                 // Check if this image matches ANY selected filter
                 const isMatch = selectedFilters.some(filter => {
                     return (
-                        imgCategoryId === filter.categoryId &&
+                        // imgCategoryId === filter.categoryId &&
                         imgSubcategoryIds.includes(filter.subcategoryId)
                     );
                 });
