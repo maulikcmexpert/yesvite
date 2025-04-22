@@ -92,38 +92,73 @@ $(document).ready(function () {
             //     ).show();
             // });
 
+            // $('input[name="design_subcategory"]:checked').each(function () {
+            //     default_s++;
+            //     $(".image-item").removeClass("d-none");
+            
+            //     const categoryId = $(this).data("category-id");
+            //     const subcategoryId = $(this).data("subcategory-id");
+            
+            //     $(".image-item").each(function () {
+            //         const imgCategoryId = $(this).data("category-id");
+            //         const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+            
+            //         if (
+            //             imgCategoryId == categoryId &&
+            //             imgSubcategoryIds.includes(subcategoryId.toString())
+            //         ) {
+            //             // alert();
+            //             // $(this).removeClass("d-none");      
+            //             // $(this).show();
+            //             $(this).show();
+            //             $(this).removeClass("d-none");
+            //             $(this).removeClass("fadeInDown");
+            //             $(this).css("visibility", "visible");
+            //             $(this).removeClass("wow");
+            //             $(this).removeClass("d-none").fadeIn();
+            //         }else{
+            //             $(this).hide();
+            //             $(this).fadeOut().addClass("d-none");
+            //         }
+            //     });
+            // });
+            
+            let selectedFilters = [];
+
+            // Step 1: Gather all checked subcategory filters
             $('input[name="design_subcategory"]:checked').each(function () {
-                default_s++;
-                $(".image-item").removeClass("d-none");
-            
-                const categoryId = $(this).data("category-id");
-                const subcategoryId = $(this).data("subcategory-id");
-            
-                $(".image-item").each(function () {
-                    const imgCategoryId = $(this).data("category-id");
-                    const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-            
-                    if (
-                        imgCategoryId == categoryId &&
-                        imgSubcategoryIds.includes(subcategoryId.toString())
-                    ) {
-                        // alert();
-                        // $(this).removeClass("d-none");      
-                        // $(this).show();
-                        $(this).show();
-                        $(this).removeClass("d-none");
-                        $(this).removeClass("fadeInDown");
-                        $(this).css("visibility", "visible");
-                        $(this).removeClass("wow");
-                        $(this).removeClass("d-none").fadeIn();
-                    }else{
-                        $(this).hide();
-                        $(this).fadeOut().addClass("d-none");
-                    }
-                });
+                const categoryId = $(this).data("category-id").toString();
+                const subcategoryId = $(this).data("subcategory-id").toString();
+                selectedFilters.push({ categoryId, subcategoryId });
             });
             
-
+            // Step 2: Filter images based on those selected filters
+            let visibleCount = 0;
+            
+            $(".image-item").each(function () {
+                const imgCategoryId = $(this).data("category-id").toString();
+                const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+            
+                // Check if this image matches ANY selected filter
+                const isMatch = selectedFilters.some(filter => {
+                    return (
+                        imgCategoryId === filter.categoryId &&
+                        imgSubcategoryIds.includes(filter.subcategoryId)
+                    );
+                });
+            
+                if (isMatch) {
+                    $(this)
+                        .show()
+                        .removeClass("d-none fadeInDown wow")
+                        .css("visibility", "visible")
+                        .fadeIn();
+                    visibleCount++;
+                } else {
+                    $(this).fadeOut().addClass("d-none");
+                }
+            });
+            
             if (default_s == 0) {
                 $(".image-item").removeClass("d-none");
                 $(".default_show").show();
