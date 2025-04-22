@@ -23,9 +23,9 @@ $(document).ready(function () {
 
     $('input[name="design_subcategory"]').prop("checked", false);
     $("#Allcat").prop("checked", false);
-    $(".side-bar-sub-list").click(function() {
+    $(".side-bar-sub-list").click(function () {
         updateTotalCount();
-    })
+    });
 
     updateTotalCount();
 
@@ -94,20 +94,20 @@ $(document).ready(function () {
     //         $('input[name="design_subcategory"]:checked').each(function () {
     //             default_s++;
     //             $(".image-item").removeClass("d-none");
-            
+
     //             const categoryId = $(this).data("category-id");
     //             const subcategoryId = $(this).data("subcategory-id");
-            
+
     //             $(".image-item").each(function () {
     //                 const imgCategoryId = $(this).data("category-id");
     //                 const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-            
+
     //                 if (
     //                     imgCategoryId == categoryId &&
     //                     imgSubcategoryIds.includes(subcategoryId.toString())
     //                 ) {
     //                     // alert();
-    //                     // $(this).removeClass("d-none");      
+    //                     // $(this).removeClass("d-none");
     //                     // $(this).show();
     //                     $(this).show();
     //                     $(this).removeClass("d-none");
@@ -121,7 +121,6 @@ $(document).ready(function () {
     //                 }
     //             });
     //         });
-            
 
     //         if (default_s == 0) {
     //             $(".image-item").removeClass("d-none");
@@ -137,7 +136,7 @@ $(document).ready(function () {
         function () {
             let default_s = 0;
             var value = $(this).val();
-    
+
             // Update selected tags UI
             if ($(this).is(":checked")) {
                 $(".selected-items").append(
@@ -148,23 +147,28 @@ $(document).ready(function () {
             } else {
                 $(".selected-items").find(`[data-value='${value}']`).remove();
             }
-    
+
             // Step 1: Get all selected subcategory IDs
             let selectedSubcategories = [];
             $('input[name="design_subcategory"]:checked').each(function () {
-                selectedSubcategories.push($(this).data("subcategory-id").toString());
+                selectedSubcategories.push(
+                    $(this).data("subcategory-id").toString()
+                );
                 default_s++;
             });
-    
+
             // Step 2: Filter images based on selected subcategories
             let visibleCount = 0;
             $(".image-item").each(function () {
-                const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-    
-                const isMatch = selectedSubcategories.some(id =>
+                const imgSubcategoryIds = $(this)
+                    .data("subcategory-id")
+                    .toString()
+                    .split(",");
+
+                const isMatch = selectedSubcategories.some((id) =>
                     imgSubcategoryIds.includes(id)
                 );
-    
+
                 if (isMatch) {
                     $(this)
                         .show()
@@ -176,20 +180,19 @@ $(document).ready(function () {
                     $(this).hide().fadeOut().addClass("d-none");
                 }
             });
-    
+
             // Step 3: Handle case when no checkbox is selected
             if (default_s == 0) {
                 $(".image-item").removeClass("d-none");
                 $(".default_show").show();
             }
-    
+
             // Step 4: Update count
             // $(".total_design_count").text(`${visibleCount} Items`);
-                        updateTotalCount();
-
+            updateTotalCount();
         }
     );
-    
+
     $(document).on("click", ".selected-items .close-btn", function () {
         var parent = $(this).parent();
         var value = parent.attr("data-value");
@@ -301,7 +304,6 @@ $(document).ready(function () {
     //                 ? $(this).data("category_name").toLowerCase()
     //                 : "";
 
-
     //                 let matches = tags.some((tag) => tag.includes(query)) ||
     //                 subcategory.includes(query) ||
     //                 category.includes(query);
@@ -365,165 +367,162 @@ $(document).ready(function () {
     //     // $('#filtered_results').html(results);
     // });
 
-
     //today old code...........
-        $("#search_design_category").on("keyup", function () {
-            let query = $(this).val().toLowerCase().trim();
-            $('.selected-items').html('');
+    $("#search_design_category").on("keyup", function () {
+        let query = $(this).val().toLowerCase().trim();
+        $(".selected-items").html("");
 
-            let results = "";
-            if (query.length > 0) {
-                $('.selected-items').html('');
+        let results = "";
+        if (query.length > 0) {
+            $(".selected-items").html("");
 
-                designData.forEach(category => {
-                    if (category.name.toLowerCase().includes(query)) {
-                        results +=
-                            `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+            designData.forEach((category) => {
+                if (category.name.toLowerCase().includes(query)) {
+                    results += `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+                }
+                // Check if no subcategory matched and add "No Data Found"
+
+                category.subcategories.forEach((subcategory) => {
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results += `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                     }
                     // Check if no subcategory matched and add "No Data Found"
-    
-                    category.subcategories.forEach(subcategory => {
-                        if (subcategory.name.toLowerCase().includes(query)) {
-                            results +=
-                                `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-                        }
-                        // Check if no subcategory matched and add "No Data Found"
-                    });
                 });
-                if (results == '') {
-                    $('#filtered_results').hide();
-                } else {
-                    $('#filtered_results').html(results).show();
-                }
-
-                let visibleCount = 0;
-        
-                $(".image-item").each(function () {
-                    let tags = $(this).data("tags")
-                        ? $(this).data("tags").toLowerCase().split(",")
-                        : [];
-                    let subcategories = $(this).data("subcategory_name")
-                        ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
-                        : [];
-                    let category = $(this).data("category_name")
-                        ? $(this).data("category_name").toLowerCase()
-                        : "";
-        
-                    // Check if any of the search criteria match
-                    let matches = tags.some((tag) => tag.includes(query)) ||
-                        subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
-                        category.includes(query);
-        
-                    if (matches) {
-                        $(this).show();
-                        $(this).removeClass("d-none");
-                        $(this).removeClass("fadeInDown");
-                        $(this).css("visibility", "visible");
-                        $(this).removeClass("wow");
-                        $(this).removeClass("d-none").fadeIn();
-                        visibleCount++;
-                    } else {
-                        $(this).hide();
-                        $(this).fadeOut().addClass("d-none");
-                    }
-                });
-        
-                console.log("Total Visible Items:", visibleCount);
-                $(".total_design_count").text(visibleCount + " Items");
-        
-                if (visibleCount > 0) {
-                    // $("#filtered_results").hide();
-                } else {
-                    $("#filtered_results").show();
-                }
-        
-                if ($(".image-item:visible").length === 0) {
-                    $(".total_design_count").text(
-                        $(".image-item:visible").length + " Items"
-                    );
-        
-                    results += `<div class="search-item no-data">No Data Found</div>`;
-                    $("#filtered_results").show();
-                    $("#filtered_results").html(results);
-                }
+            });
+            if (results == "") {
+                $("#filtered_results").hide();
             } else {
-                
-                $(".image-item").removeClass("d-none fadeInDown wow").show();
-                let allItems = $(".image-item");
-                if (allItems.length > 30) {
-                    allItems.slice(30).addClass("d-none").hide();
+                $("#filtered_results").html(results).show();
+            }
+
+            let visibleCount = 0;
+
+            $(".image-item").each(function () {
+                let tags = $(this).data("tags")
+                    ? $(this).data("tags").toLowerCase().split(",")
+                    : [];
+                let subcategories = $(this).data("subcategory_name")
+                    ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+                    : [];
+                let category = $(this).data("category_name")
+                    ? $(this).data("category_name").toLowerCase()
+                    : "";
+
+                // Check if any of the search criteria match
+                let matches =
+                    tags.some((tag) => tag.includes(query)) ||
+                    subcategories.some((subcategory) =>
+                        subcategory.includes(query)
+                    ) || // Check each subcategory
+                    category.includes(query);
+
+                if (matches) {
+                    $(this).show();
+                    $(this).removeClass("d-none");
+                    $(this).removeClass("fadeInDown");
+                    $(this).css("visibility", "visible");
+                    $(this).removeClass("wow");
+                    $(this).removeClass("d-none").fadeIn();
+                    visibleCount++;
+                } else {
+                    $(this).hide();
+                    $(this).fadeOut().addClass("d-none");
                 }
+            });
+
+            console.log("Total Visible Items:", visibleCount);
+            $(".total_design_count").text(visibleCount + " Items");
+
+            if (visibleCount > 0) {
+                // $("#filtered_results").hide();
+            } else {
+                $("#filtered_results").show();
+            }
+
+            if ($(".image-item:visible").length === 0) {
                 $(".total_design_count").text(
                     $(".image-item:visible").length + " Items"
                 );
 
-                $("#filtered_results").hide();
+                results += `<div class="search-item no-data">No Data Found</div>`;
+                $("#filtered_results").show();
+                $("#filtered_results").html(results);
             }
-        });
- 
-        // $(document).on("click", ".search-item", function () {
-        //     let selectedText = $(this).data("name");
-        //     let categoryId = $(this).data("category-id");
-        //     let subcategoryId = $(this).data("id");
+        } else {
+            $(".image-item").removeClass("d-none fadeInDown wow").show();
+            let allItems = $(".image-item");
+            if (allItems.length > 30) {
+                allItems.slice(30).addClass("d-none").hide();
+            }
+            $(".total_design_count").text(
+                $(".image-item:visible").length + " Items"
+            );
 
-        //     $("#search_design_category").val(selectedText);
-        //     $("#filtered_results").html(""); // Clear search results
-        //     $("#filtered_results").hide();
-        //     $(".image-item").hide();
+            $("#filtered_results").hide();
+        }
+    });
 
-        //     if (categoryId && subcategoryId) {
-        //         // Show only images that match category and subcategory
-        //         $(
-        //             `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-        //         ).show();
-        //     } else if (categoryId) {
-        //         $(`.image-item[data-category-id="${categoryId}"]`).show();
-        //     }
+    // $(document).on("click", ".search-item", function () {
+    //     let selectedText = $(this).data("name");
+    //     let categoryId = $(this).data("category-id");
+    //     let subcategoryId = $(this).data("id");
 
-        //     $(
-        //         `input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-        //     ).prop("checked", true);
-        //     // if ($(this).hasClass('subcategory')) {
+    //     $("#search_design_category").val(selectedText);
+    //     $("#filtered_results").html(""); // Clear search results
+    //     $("#filtered_results").hide();
+    //     $(".image-item").hide();
 
-        //     //     let images = designData.find(c => c.id == categoryId)
-        //     //         .subcategories.find(s => s.id == subcategoryId).images;
+    //     if (categoryId && subcategoryId) {
+    //         // Show only images that match category and subcategory
+    //         $(
+    //             `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+    //         ).show();
+    //     } else if (categoryId) {
+    //         $(`.image-item[data-category-id="${categoryId}"]`).show();
+    //     }
 
-        //     //     // Auto-check the corresponding subcategory checkbox
-        //     //
-        //     // }
+    //     $(
+    //         `input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+    //     ).prop("checked", true);
+    //     // if ($(this).hasClass('subcategory')) {
 
-        //     $(".total_design_count").text(
-        //         $(".image-item:visible").length + " Items"
-        //     );
-        // });
+    //     //     let images = designData.find(c => c.id == categoryId)
+    //     //         .subcategories.find(s => s.id == subcategoryId).images;
+
+    //     //     // Auto-check the corresponding subcategory checkbox
+    //     //
+    //     // }
+
+    //     $(".total_design_count").text(
+    //         $(".image-item:visible").length + " Items"
+    //     );
+    // });
     //tody old code...........
-
-
 
     // $("#search_design_category").on("keyup", function () {
     //     let query = $(this).val().toLowerCase().trim();
     //     let results = "";
-    
+
     //     if (query.length > 0) {
     //         let suggestionSet = new Set();
     //         let addedSubcategories = new Set();
     //         let addedTags = new Set();
     //         let addedCategories = new Set();
-    
+
     //         $(".image-item").each(function () {
     //             let $item = $(this);
     //             let category = $item.data("category_name") ? $item.data("category_name").toLowerCase().trim() : "";
     //             let subcategories = $item.data("subcategory_name") ? $item.data("subcategory_name").toLowerCase().split(",") : [];
     //             let tags = $item.data("tags") ? $item.data("tags").toLowerCase().split(",") : [];
-    
+
     //             let categoryId = $item.data("category-id");
     //             let subcategoryId = $item.data("subcategory-id");
-    
+
     //             if (category.includes(query) && !addedCategories.has(category)) {
     //                 suggestionSet.add(`<div class="search-item category" data-name="${category}" data-category-id="${categoryId}">Cat :${category}</div>`);
     //                 addedCategories.add(category);
     //             }
-    
+
     //             subcategories.forEach(subcat => {
     //                 let subcatTrimmed = subcat.trim();
     //                 if (subcatTrimmed.includes(query) && !addedSubcategories.has(subcatTrimmed)) {
@@ -531,7 +530,7 @@ $(document).ready(function () {
     //                     addedSubcategories.add(subcatTrimmed);
     //                 }
     //             });
-    
+
     //             tags.forEach(tag => {
     //                 let tagTrimmed = tag.trim();
     //                 if (tagTrimmed.includes(query) && !addedTags.has(tagTrimmed)) {
@@ -540,39 +539,39 @@ $(document).ready(function () {
     //                 }
     //             });
     //         });
-    
+
     //         results = Array.from(suggestionSet).join("");
-    
+
     //         if (results.length > 0) {
     //             $("#filtered_results").show().html(results);
     //         } else {
     //             $("#filtered_results").show().html(`<div class="search-item no-data">No Data Found</div>`);
     //         }
-    
+
     //     } else {
     //         $("#filtered_results").hide();
     //         $(".image-item").removeClass("d-none fadeInDown wow").show();
-    
+
     //         let allItems = $(".image-item");
     //         if (allItems.length > 30) {
     //             allItems.slice(30).addClass("d-none").hide();
     //         }
-    
+
     //         $(".total_design_count").text($(".image-item:visible").length + " Items");
     //     }
     // });
-    
+
     // $(document).on("click", ".search-item", function () {
     //     let selectedText = $(this).data("name")?.toLowerCase();
     //     let categoryId = $(this).data("category-id");
     //     let subcategoryId = $(this).data("id");
-    
+
     //     $("#search_design_category").val(selectedText);
     //     $("#filtered_results").html("").hide();
-    
+
     //     $(".image-item").hide();
     //     let matchCount = 0;
-    
+
     //     if ($(this).hasClass("category")) {
     //         $(`.image-item[data-category-name*="${selectedText}"]`).each(function () {
     //                             $(this).show();
@@ -581,7 +580,7 @@ $(document).ready(function () {
     //                             $(this).css("visibility", "visible");
     //                             $(this).removeClass("wow");
     //                             $(this).removeClass("d-none").fadeIn();
-                
+
     //             matchCount++;
     //         });
     //     }else if ($(this).hasClass("subcategory")) {
@@ -597,7 +596,7 @@ $(document).ready(function () {
     //                                     matchCount++;
     //             }
     //         });
-    
+
     //         // Also check the corresponding input
     //         $(`input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).prop("checked", true);
     //     } else if ($(this).hasClass("tag")) {
@@ -614,11 +613,9 @@ $(document).ready(function () {
     //             }
     //         });
     //     }
-    
+
     //     $(".total_design_count").text(matchCount + " Items");
     // });
-        
-
 
     $(document).on("click", ".search-item", function () {
         $('input[name="design_subcategory"]').prop("checked", false);
@@ -626,14 +623,15 @@ $(document).ready(function () {
         let selectedText = $(this).data("name");
         let categoryId = $(this).data("category-id");
         let subcategoryId = $(this).data("id");
-    
+
         $("#search_design_category").val(selectedText);
         $("#filtered_results").html("").hide();
         $(".image-item").hide();
-    
-     
+
         if (categoryId && subcategoryId) {
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+            $(
+                `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+            ).show();
         } else if (categoryId) {
             $(`.image-item[data-category-id="${categoryId}"]`).show();
         }
@@ -648,23 +646,30 @@ $(document).ready(function () {
             let category = $(this).data("category_name")
                 ? $(this).data("category_name").toLowerCase()
                 : "";
-    
-            let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
-                subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
+
+            let matches =
+                tags.some((tag) => tag.includes(selectedText.toLowerCase())) ||
+                subcategories.some((sub) =>
+                    sub.includes(selectedText.toLowerCase())
+                ) ||
                 category.includes(selectedText.toLowerCase());
-    
+
             if (matches) {
-                $(this).show().removeClass("d-none").css("visibility", "visible").fadeIn();
+                $(this)
+                    .show()
+                    .removeClass("d-none")
+                    .css("visibility", "visible")
+                    .fadeIn();
             } else {
                 $(this).fadeOut().addClass("d-none");
             }
         });
-    
+
         $(".total_design_count").text(
             $(".image-item:visible").length + " Items"
         );
     });
-    
+
     let previousSearch = "";
 
     $("#search_design_category").on("input", function () {
