@@ -169,7 +169,7 @@ $(document).ready(function () {
             $(".default_show:visible").length + " Items"
         );
     });
-    // $("#filtered_results").hide();
+    $("#filtered_results").hide();
     // $('#search_design_category').on('keyup', function () {
     //     let query = $(this).val().toLowerCase();
     //     $('#filtered_results').show();
@@ -356,7 +356,7 @@ $(document).ready(function () {
                 $(".total_design_count").text(visibleCount + " Items");
         
                 if (visibleCount > 0) {
-                    $("#filtered_results").hide();
+                    // $("#filtered_results").hide();
                 } else {
                     $("#filtered_results").show();
                 }
