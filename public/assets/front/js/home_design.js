@@ -555,15 +555,13 @@ $(document).ready(function () {
         $("#filtered_results").html("").hide();
         $(".image-item").hide();
     
-        // Filter and show matching images
+     
         if (categoryId && subcategoryId) {
             $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
         } else if (categoryId) {
             $(`.image-item[data-category-id="${categoryId}"]`).show();
         }
-    
-        // Optionally enhance with tag/subcategory/category match logic
-        // This part assumes you are looping over image items — not `.search-item`
+
         $(".image-item").each(function () {
             let tags = $(this).data("tags")
                 ? $(this).data("tags").toLowerCase().split(",")
@@ -575,7 +573,6 @@ $(document).ready(function () {
                 ? $(this).data("category_name").toLowerCase()
                 : "";
     
-            // Compare against the selected query (from clicked item)
             let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
                 subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
                 category.includes(selectedText.toLowerCase());
@@ -587,7 +584,6 @@ $(document).ready(function () {
             }
         });
     
-        // Update visible count
         $(".total_design_count").text(
             $(".image-item:visible").length + " Items"
         );
