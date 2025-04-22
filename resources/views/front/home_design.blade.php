@@ -329,39 +329,58 @@
 
 @push('scripts')
 <script>
-var designData = [];
-var is_random = @php
-echo json_encode($randomIds);
-@endphp
-alert(is_random)
-@foreach ($categories as $category)
-var categoryData = {
-id: {{ $category->id }},
-name: "{{ $category->category_name }}",
-subcategories: []
-};
+    var designData = [];
 
-@foreach ($category->subcategory as $subcategory)
-var subcategoryDatasubcategory = {
-id: {{ $subcategory->id }},
-name: "{{ $subcategory->subcategory_name }}",
-images: []
-};
+    var is_random = {!! json_encode($randomIds) !!};
 
-@foreach ($subcategory->textdatas as $image)
-subcategoryData.images.push({
-id: {{ $image->id }},
-image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}"
-});
-@endforeach
+    @foreach ($categories as $category)
+        var categoryData = {
+            id: {{ $category->id }},
+            name: "{{ $category->category_name }}",
+            tags: [],        // Separate tags array
+            subcategories: []
+        };
 
-categoryData.subcategories.push(subcategoryData);
-@endforeach
+        let tagSet = new Set();  // Use Set to collect unique tags
 
-designData.push(categoryData);
-@endforeach
+        @foreach ($category->subcategory as $subcategory)
+            var subcategoryData = {
+                id: {{ $subcategory->id }},
+                name: "{{ $subcategory->subcategory_name }}",
+                images: []
+            };
+            i=0;
+            @foreach ($subcategory->textdatas as $image)
+            i++;
+                // let imageTags = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
+                // Inside the loop
+                i = "{{ $image->tags ?? '' }}".split(',').map(tag => tag.trim());
 
-console.log(designData); // Check output in browser console
+
+                // Store image with its tags
+                subcategoryData.images.push({
+                    id: {{ $image->id }},
+                    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+                    tags: imageTags
+                });
+
+                // Add tags to the Set
+                imageTags.forEach(tag => tagSet.add(tag));
+            @endforeach
+
+            categoryData.subcategories.push(subcategoryData);
+        @endforeach
+
+        // Convert Set to array of tag objects with IDs
+        categoryData.tags = Array.from(tagSet).map((tag, index) => ({
+            id: index + 1,
+            name: tag
+        }));
+
+        designData.push(categoryData);
+    @endforeach
+
+    console.log(designData);  // Check the final structure
 </script>
 
 {{-- <script>
