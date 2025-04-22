@@ -41,11 +41,11 @@ class SendUnFinishDraftsReminder extends Command
                     $sendAfter = Carbon::parse($value->created_at)->addMinutes(5);
                     $now = Carbon::now();
             
-                    if ($now->greaterThanOrEqualTo($sendAfter)) {
-                    $event_time = "";
-                    if ($value->event_schedule->isNotEmpty()) {
+                    // if ($now->greaterThanOrEqualTo($sendAfter)) {
+                    // $event_time = "";
+                    // if ($value->event_schedule->isNotEmpty()) {
                         $event_time =  $value->event_schedule->first()->start_time;
-                    }
+                    // }
 
                     $eventData = [
                         'id'=>$value->id,
@@ -58,7 +58,7 @@ class SendUnFinishDraftsReminder extends Command
 
                     $invitation_email = new NotifyPendingInvitation($eventData);
                     Mail::to($value->user->email)->send($invitation_email);
-                }
+                // }
             }
         }
     }
