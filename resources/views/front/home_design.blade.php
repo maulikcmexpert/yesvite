@@ -284,7 +284,7 @@
 </section>
 
 @push('scripts')
-{{-- <script>
+<script>
 var designData = [];
 var is_random = @php
 echo json_encode($randomIds);
@@ -318,9 +318,9 @@ designData.push(categoryData);
 @endforeach
 
 console.log(designData); // Check output in browser console
-</script> --}}
+</script>
 
-<script>
+{{-- <script>
 var designData = [];
 
 // Correcting the PHP to JavaScript variable conversion
@@ -356,7 +356,7 @@ designData.push(categoryData);
 @endforeach
 
 console.log(designData); // Check output in browser console
-</script>
+</script> --}}
 
 {{-- <script>
 var designData = [];
