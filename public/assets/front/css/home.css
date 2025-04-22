@@ -761,6 +761,8 @@
 
 .collection-wrapper .dropdown-menu .filter-categories {
     padding: 16px;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .collection-wrapper .dropdown-menu .filter-categories h5 {
