@@ -387,53 +387,41 @@ $(document).ready(function () {
             }
         });
  
-        $(document).on("click", ".search-item", function () {
-            let selectedText = $(this).data("name");
-            let categoryId = $(this).data("category-id");
-            let subcategoryId = $(this).data("id");
-        
-            $("#search_design_category").val(selectedText);
-            $("#filtered_results").html("").hide();
-            $(".image-item").hide();
-        
-            // Filter and show matching images
-            if (categoryId && subcategoryId) {
-                $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-            } else if (categoryId) {
-                $(`.image-item[data-category-id="${categoryId}"]`).show();
-            }
-        
-            // Optionally enhance with tag/subcategory/category match logic
-            // This part assumes you are looping over image items — not `.search-item`
-            $(".image-item").each(function () {
-                let tags = $(this).data("tags")
-                    ? $(this).data("tags").toLowerCase().split(",")
-                    : [];
-                let subcategories = $(this).data("subcategory_name")
-                    ? $(this).data("subcategory_name").toLowerCase().split(",")
-                    : [];
-                let category = $(this).data("category_name")
-                    ? $(this).data("category_name").toLowerCase()
-                    : "";
-        
-                // Compare against the selected query (from clicked item)
-                let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
-                    subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
-                    category.includes(selectedText.toLowerCase());
-        
-                if (matches) {
-                    $(this).show().removeClass("d-none").css("visibility", "visible").fadeIn();
-                } else {
-                    $(this).fadeOut().addClass("d-none");
-                }
-            });
-        
-            // Update visible count
-            $(".total_design_count").text(
-                $(".image-item:visible").length + " Items"
-            );
-        });
-        
+        // $(document).on("click", ".search-item", function () {
+        //     let selectedText = $(this).data("name");
+        //     let categoryId = $(this).data("category-id");
+        //     let subcategoryId = $(this).data("id");
+
+        //     $("#search_design_category").val(selectedText);
+        //     $("#filtered_results").html(""); // Clear search results
+        //     $("#filtered_results").hide();
+        //     $(".image-item").hide();
+
+        //     if (categoryId && subcategoryId) {
+        //         // Show only images that match category and subcategory
+        //         $(
+        //             `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+        //         ).show();
+        //     } else if (categoryId) {
+        //         $(`.image-item[data-category-id="${categoryId}"]`).show();
+        //     }
+
+        //     $(
+        //         `input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+        //     ).prop("checked", true);
+        //     // if ($(this).hasClass('subcategory')) {
+
+        //     //     let images = designData.find(c => c.id == categoryId)
+        //     //         .subcategories.find(s => s.id == subcategoryId).images;
+
+        //     //     // Auto-check the corresponding subcategory checkbox
+        //     //
+        //     // }
+
+        //     $(".total_design_count").text(
+        //         $(".image-item:visible").length + " Items"
+        //     );
+        // });
     //tody old code...........
 
 
@@ -557,6 +545,54 @@ $(document).ready(function () {
     // });
         
 
+
+    $(document).on("click", ".search-item", function () {
+        let selectedText = $(this).data("name");
+        let categoryId = $(this).data("category-id");
+        let subcategoryId = $(this).data("id");
+    
+        $("#search_design_category").val(selectedText);
+        $("#filtered_results").html("").hide();
+        $(".image-item").hide();
+    
+        // Filter and show matching images
+        if (categoryId && subcategoryId) {
+            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
+        } else if (categoryId) {
+            $(`.image-item[data-category-id="${categoryId}"]`).show();
+        }
+    
+        // Optionally enhance with tag/subcategory/category match logic
+        // This part assumes you are looping over image items — not `.search-item`
+        $(".image-item").each(function () {
+            let tags = $(this).data("tags")
+                ? $(this).data("tags").toLowerCase().split(",")
+                : [];
+            let subcategories = $(this).data("subcategory_name")
+                ? $(this).data("subcategory_name").toLowerCase().split(",")
+                : [];
+            let category = $(this).data("category_name")
+                ? $(this).data("category_name").toLowerCase()
+                : "";
+    
+            // Compare against the selected query (from clicked item)
+            let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
+                subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
+                category.includes(selectedText.toLowerCase());
+    
+            if (matches) {
+                $(this).show().removeClass("d-none").css("visibility", "visible").fadeIn();
+            } else {
+                $(this).fadeOut().addClass("d-none");
+            }
+        });
+    
+        // Update visible count
+        $(".total_design_count").text(
+            $(".image-item:visible").length + " Items"
+        );
+    });
+    
     let previousSearch = "";
 
     $("#search_design_category").on("input", function () {
