@@ -214,8 +214,8 @@ $(document).ready(function () {
         e.preventDefault();
         $(".categoryNew").show();
         $(".subcategoryNew").hide();
-        $(".image-item-new").hide(); // Hide filtered items
-        $(".image-item").show(); // Show default images
+        // $(".image-item-new").hide(); // Hide filtered items
+        // $(".image-item").show(); // Show default images
         $("#category_name").hide();
         $("#allchecked").hide();
         $("#Allcat").prop("checked", false);
@@ -224,10 +224,21 @@ $(document).ready(function () {
             false
         );
         $(".selected-items").empty();
-        var visibleItems = $(".image-item:visible").length;
+        // var visibleItems = $(".image-item:visible").length;
+        // $(".total_design_count").text(
+        //     $(".default_show:visible").length + " Items"
+        // );
+
+        $(".image-item").removeClass("d-none fadeInDown wow").show();
+        let allItems = $(".image-item");
+        if (allItems.length > 30) {
+            allItems.slice(30).addClass("d-none").hide();
+        }
         $(".total_design_count").text(
-            $(".default_show:visible").length + " Items"
+            $(".image-item:visible").length + " Items"
         );
+
+        $("#filtered_results").hide();
     });
     $("#filtered_results").hide();
     // $('#search_design_category').on('keyup', function () {
