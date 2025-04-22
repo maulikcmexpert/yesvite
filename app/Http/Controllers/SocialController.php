@@ -63,6 +63,13 @@ class SocialController extends Controller
                 Log::info('Client Secret:', ['client_secret' => $clientSecret]);
                 Log::info('Client ID:', ['client_id' => config('services.apple.client_id')]);
                 Log::info('Redirect URI:', ['redirect_uri' => config('services.apple.redirect')]);
+                Log::info('Apple Token Request Payload:', [
+                    'grant_type' => 'authorization_code',
+                    'code' => $code,
+                    'redirect_uri' => config('services.apple.redirect'),
+                    'client_id' => config('services.apple.client_id'),
+                    'client_secret' => $clientSecret,
+                ]);
 
                 $response = Http::asForm()->post('https://appleid.apple.com/auth/token', [
                     'grant_type' => 'authorization_code',
